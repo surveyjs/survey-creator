@@ -8,8 +8,11 @@
     "knockout/knockout.d.ts": {
       "commit": "e6a11b3cf228eacc13006558e6c9903ac7b4975b"
     },
+    "json5/json5.d.ts": {
+      "commit": "3562ae9162647516cce38d2797cf49567c3d6e74"
+    },
     "ace/ace.d.ts": {
-      "commit": "e6a11b3cf228eacc13006558e6c9903ac7b4975b"
+      "commit": "e6a11b3cf228eacc13006558e6c9903ac7b4975b"  
     },
     "qunit/qunit.d.ts": {
       "commit": "e6a11b3cf228eacc13006558e6c9903ac7b4975b"

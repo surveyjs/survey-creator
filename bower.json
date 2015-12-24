@@ -7,7 +7,8 @@
   ],
   "dependencies": {
     "knockout": "^3.3.0",
-    "ace-builds": "^1.2.2"
+    "ace-builds": "^1.2.2",
+    "json5": "^0.4.0"
   },
   "devDependencies": {
     "qunit": "^1.18.0"
