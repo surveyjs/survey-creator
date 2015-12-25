@@ -1,10 +1,13 @@
 ﻿module SurveyEditor {
     export class SurveyEditor {
         public static updateErrorsTimeout: number = 1000;
-        private surveyValue: Survey.Survey;
-        private jsonEditor: AceAjax.Editor;
         private renderedElement: HTMLElement;
+        private surveyjsSelectedObj: HTMLElement;
+        private surveyjsExample: HTMLElement;
+        private jsonEditor: AceAjax.Editor;
+        private surveyValue: Survey.Survey;
         private jsonValue: any;
+        private surveyObjects: Array<any>;
 
         constructor(renderedElement: any = null) {
             if (renderedElement) {
@@ -27,13 +30,17 @@
             element.innerHTML = templateEditor.ko.html;
             self.applyBinding();
         }
+        public addPage() {
+
+        }
         private applyBinding() {
             if (this.renderedElement == null) return;
             ko.cleanNode(this.renderedElement);
             ko.applyBindings(this, this.renderedElement);
             this.jsonEditor = ace.edit("surveyjsEditor");
+            this.surveyjsSelectedObj = document.getElementById("surveyjsSelectedObj");
+            this.surveyjsExample = document.getElementById("surveyjsExample");
             this.initJsonEditor();
-            this.surveyValue = new Survey.Survey({ questions: [{ type: 'text', name: 'temp' }] }, "surveyjsExample");
         }
         private initJsonEditor() {
             var self = this;
@@ -42,6 +49,9 @@
             this.jsonEditor.setShowPrintMargin(false);
             this.jsonEditor.getSession().on("change", function () {
                 self.onJsonEditorChanged();
+            });
+            this.jsonEditor.selection.on("changeCursor", function () {
+                self.onJsonEditorCursorChanged();
             });
             this.jsonEditor.getSession().setUseWorker(true);
             this.jsonEditor.setValue("{ questions: [{ type: 'text', name: 'temp' }] }");
@@ -57,6 +67,13 @@
                 self.processJson(self.jsonEditor.getValue());
             }, SurveyEditor.updateErrorsTimeout);
         }
+        private onJsonEditorCursorChanged(): any {
+            var position = this.jsonEditor.getCursorPosition();
+            var obj = this.getCurrentSurveyObject(position);
+            if (this.surveyjsSelectedObj != null) {
+                this.surveyjsSelectedObj.innerText = (obj) ? obj.getType() + "." + obj.title : "not selected";
+            }
+        }
         private processJson(text: string): any {
             this.jsonValue = null;
             var errors = [];
@@ -67,44 +84,85 @@
             }
             catch (Error) {
                 errors.push({ at: Error.at, text: Error.message });
-                //annotations.push({ row: 0, column: 0, type: "error" });
             }
-            if (jsonObj == null) {
-                this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, errors));
-            }
-            var srv = new Survey.Survey(jsonObj);
-            if (srv.jsonErrors != null) {
-                for (var i = 0; i < srv.jsonErrors.length; i++) {
-                    var error = srv.jsonErrors[i];
-                    errors.push({ at: error.at, text: error.getFullDescription() });
+            this.surveyValue = null;
+            if (jsonObj != null) {
+                this.surveyValue = new Survey.Survey(jsonObj);
+                if (this.surveyValue.jsonErrors != null) {
+                    for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
+                        var error = this.surveyValue.jsonErrors[i];
+                        errors.push({ at: error.at, text: error.getFullDescription() });
+                    }
+                }
+                if (this.surveyjsExample) {
+                    this.surveyValue.render(this.surveyjsExample);
                 }
             }
+            if (!this.surveyValue || this.surveyValue.isEmpty) {
+                this.surveyjsExample.innerText = "Please correct the survey JSON.";
+            }
+            this.surveyObjects = this.createSurveyObjects();
+            this.setEditorPositionByChartAt(text, this.surveyObjects);
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, errors));
+        }
+        private createSurveyObjects(): Array<any> {
+            var result = [];
+            if (this.surveyValue == null) return result;
+            for (var i = 0; i < this.surveyValue.pages.length; i++) {
+                var page = this.surveyValue.pages[0];
+                result.push(page);
+                for (var j = 0; j < page.questions.length; j++) {
+                    result.push(page.questions[j]);
+                }
+            }
+            return result;
+        }
+        private getCurrentSurveyObject(position: AceAjax.Position): any {
+            if (!this.surveyObjects) return null
+            for (var i = 0; i < this.surveyObjects.length; i++) {
+                var objPosition = this.surveyObjects[i]["position"];
+                if (!objPosition) continue;
+                if (objPosition.row > position.row ||
+                    (objPosition.row == position.row && objPosition.column > position.column)) {
+                    return this.surveyObjects[i > 0 ? i - 1: 0];
+                }
+            }
+
+            return this.surveyObjects.length > 0 ? this.surveyObjects[this.surveyObjects.length - 1] : this.surveyValue;
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
             var annotations = new Array<AceAjax.Annotation>();
-            var maxLine: number = this.jsonEditor.getSession().getLength() - 1;
-            var startIndex: number = 0;
-            var startLine: number = 0;
+            this.setEditorPositionByChartAt(text, errors);
             for (var i = 0; i < errors.length; i++) {
-                var lineIndex: number = this.getRowByCharAt(text, startIndex, errors[i].at, startLine, maxLine);
-                var annotation: AceAjax.Annotation = { row: lineIndex, column: 0, text: errors[i].text, type: "error" };
+                var error = errors[i];
+                var annotation: AceAjax.Annotation = { row: error["position"].row, column: error["position"].column, text: error.text, type: "error" };
                 annotations.push(annotation);
-                startIndex = errors[i].at;
-                startLine = lineIndex;
             }
             return annotations;
         }
-        private getRowByCharAt(text: string, startIndex: number, index: number, startLine: number, maxLine: number): number {
-            if (maxLine < 1) return 0;
-            var result = startLine;
-            if (index > text.length) index = text.length;
-            var curChar = startIndex + 1;
-            while (curChar < index) {
-                if (text.charAt(curChar) == '\n') result++;
+        private setEditorPositionByChartAt(text: string, objects: any[]) {
+            var position: AceAjax.Position = { row: 0, column: 0 };
+            var startAt: number = 0;
+            for (var i = 0; i < objects.length; i++) {
+                var at = objects[i].at;
+                if (!at) at = 0;
+                position = this.getPostionByChartAt(text, position, startAt, at);
+                objects[i]["position"] = position;
+                startAt = at;
+            }
+        }
+        private getPostionByChartAt(text: string, startPosition: AceAjax.Position, startAt: number, at: number): AceAjax.Position {
+            var result: AceAjax.Position = { row: startPosition.row, column: startPosition.column };
+            var curChar = startAt + 1;
+            while (curChar < at) {
+                if (text.charAt(curChar) == '\n') {
+                    result.row++;
+                    result.column = 0;
+                } else {
+                    result.column ++;
+                }
                 curChar++;
             }
-            if (result > maxLine) result = maxLine;
             return result;
         }
     }
