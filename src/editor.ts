@@ -82,8 +82,8 @@
             try {
                 jsonObj = JSON5.parse(text);
             }
-            catch (Error) {
-                errors.push({ at: Error.at, text: Error.message });
+            catch (error) {
+                errors.push({ pos: { start: error.at, end: -1 }, text: error.message });
             }
             this.surveyValue = null;
             if (jsonObj != null) {
@@ -91,9 +91,10 @@
                 if (this.surveyValue.jsonErrors != null) {
                     for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
                         var error = this.surveyValue.jsonErrors[i];
-                        errors.push({ at: error.at, text: error.getFullDescription() });
+                        errors.push({ pos: { start: error.at, end: -1 }, text: error.getFullDescription() });
                     }
                 }
+                this.onJsonEditorCursorChanged();
                 if (this.surveyjsExample) {
                     this.surveyValue.render(this.surveyjsExample);
                 }
@@ -109,7 +110,10 @@
             var result = [];
             if (this.surveyValue == null) return result;
             for (var i = 0; i < this.surveyValue.pages.length; i++) {
-                var page = this.surveyValue.pages[0];
+                var page = this.surveyValue.pages[i];
+                if (i == 0 && !page["pos"]) {
+                    page["pos"] = this.surveyValue["pos"];
+                }
                 result.push(page);
                 for (var j = 0; j < page.questions.length; j++) {
                     result.push(page.questions[j]);
@@ -118,38 +122,65 @@
             return result;
         }
         private getCurrentSurveyObject(position: AceAjax.Position): any {
-            if (!this.surveyObjects) return null
+            if (!this.surveyObjects) return this.surveyValue;
+            var result = null;
             for (var i = 0; i < this.surveyObjects.length; i++) {
-                var objPosition = this.surveyObjects[i]["position"];
+                var objPosition = this.surveyObjects[i].position;
                 if (!objPosition) continue;
-                if (objPosition.row > position.row ||
-                    (objPosition.row == position.row && objPosition.column > position.column)) {
-                    return this.surveyObjects[i > 0 ? i - 1: 0];
+                var start = objPosition.start;
+                var end = objPosition.end;
+                if ((start.row < position.row ||(start.row == position.row && start.column <= position.column))
+                    && (end.row > position.row || (end.row == position.row && end.column >= position.column))) {
+                    result = this.surveyObjects[i];
                 }
             }
-
-            return this.surveyObjects.length > 0 ? this.surveyObjects[this.surveyObjects.length - 1] : this.surveyValue;
+            return result ? result : this.surveyValue;
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
             var annotations = new Array<AceAjax.Annotation>();
             this.setEditorPositionByChartAt(text, errors);
             for (var i = 0; i < errors.length; i++) {
                 var error = errors[i];
-                var annotation: AceAjax.Annotation = { row: error["position"].row, column: error["position"].column, text: error.text, type: "error" };
+                var annotation: AceAjax.Annotation = { row: error.position.start.row, column: error.position.start.column, text: error.text, type: "error" };
                 annotations.push(annotation);
             }
             return annotations;
         }
         private setEditorPositionByChartAt(text: string, objects: any[]) {
             var position: AceAjax.Position = { row: 0, column: 0 };
+            var atObjectsArray = this.getAtArray(objects);
             var startAt: number = 0;
-            for (var i = 0; i < objects.length; i++) {
-                var at = objects[i].at;
-                if (!at) at = 0;
+            for (var i = 0; i < atObjectsArray.length; i++) {
+                var at = atObjectsArray[i].at;
                 position = this.getPostionByChartAt(text, position, startAt, at);
-                objects[i]["position"] = position;
+                var obj = atObjectsArray[i].obj;
+                if (!obj.position) obj.position = {};
+                if (at == obj.pos.start) {
+                    obj.position.start = position;
+                } else {
+                    if (at == obj.pos.end) {
+                        obj.position.end = position;
+                    }
+                }
                 startAt = at;
             }
+        }
+        private getAtArray(objects: any[]): any[] {
+            var result = [];
+            for (var i = 0; i < objects.length; i++) {
+                var obj = objects[i];
+                var pos = obj.pos;
+                if (!pos) continue;
+                result.push({ at: pos.start, obj: obj });
+                if (pos.end > 0) {
+                    result.push({ at: pos.end, obj: obj });
+                }
+            }
+            return result.sort((el1, el2) => {
+                if (el1.at > el2.at) return 1;
+                if (el1.at < el2.at) return -1;
+                return 0;
+            });
         }
         private getPostionByChartAt(text: string, startPosition: AceAjax.Position, startAt: number, at: number): AceAjax.Position {
             var result: AceAjax.Position = { row: startPosition.row, column: startPosition.column };

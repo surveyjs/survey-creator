@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     serve = require("gulp-serve"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
+    replace = require("gulp-replace"),
     html2ts = require("gulp-html-to-ts"),
     project = require("./project.json"),
     plugins = require("gulp-load-plugins")({
@@ -47,6 +48,13 @@ gulp.task('copylibs', function () {
     var jsFiles = ['src/js/*'];
     gulp.src(plugins.mainBowerFiles({includeDev: "true"}).concat(jsFiles))
         .pipe(gulp.dest(paths.jsFolder));
+});
+
+gulp.task('correctJSON5', function () {
+    "use strict";
+    gulp.src([paths.jsFolder + "json5.js"])
+    .pipe(replace('return object();', 'var pos = {start: at}; var obj = object();if (obj){pos.end = at; obj.pos = pos;} return obj;'))
+    .pipe(gulp.dest(paths.jsFolder));
 });
 
 gulp.task('tsd', function (callback) {
