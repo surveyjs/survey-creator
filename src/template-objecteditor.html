@@ -1,0 +1,13 @@
+﻿<script type="text/html" id="objecteditor">
+    <table>
+        <tbody data-bind="foreach: koProperties">
+            <tr data-bind="click: $parent.changeActiveProperty($data)">
+                <td data-bind="text: name"></td>
+                <td>
+                    <span data-bind="text: koValue(), visible: !koIsDefault() && $parent.koActiveProperty() != $data"></span>
+                    <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</script>

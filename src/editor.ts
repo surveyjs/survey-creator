@@ -1,4 +1,6 @@
-﻿module SurveyEditor {
+﻿/// <reference path="objectEditor.ts" />
+
+module SurveyEditor {
     export class SurveyEditor {
         public static updateTextTimeout: number = 1000;
         private renderedElement: HTMLElement;
@@ -10,6 +12,9 @@
         private surveyObjects: Array<any>;
         private isSurveyAsPage: boolean;
         private isProcessingImmediately: boolean;
+        private pageEditor: SurveyObjectEditor;
+        private questionEditor: SurveyObjectEditor;
+
         public questionTypes: string[];
         koSelectedPage: any;
         koSelectedQuestion: any;
@@ -20,6 +25,9 @@
             this.koSelectedQuestion = ko.observable(null);
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
+            this.pageEditor = new SurveyObjectEditor();
+            this.questionEditor = new SurveyObjectEditor();
+
             if (renderedElement) {
                 this.render(renderedElement);
             }
@@ -163,6 +171,8 @@
             }
             this.koSelectedPage(page);
             this.koSelectedQuestion(question);
+            this.pageEditor.selectedObject = page;
+            this.questionEditor.selectedObject = question;
         }
         private processJson(text: string): any {
             this.jsonValue = null;

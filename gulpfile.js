@@ -106,31 +106,13 @@ gulp.task('tsd', function (callback) {
                 .pipe(gulp.dest(paths.testsFolder));
         });
 
-        gulp.task("typescript:tests_ko", function () {
-            var tsResult = gulp.src([
-                  paths.webroot + "/lib/survey/**/*.d.ts",
-                  paths.typings,
-                  //"./src/model/*.ts",
-                  paths.tsTests_ko])
-               .pipe(sourcemaps.init())
-               .pipe(ts({
-                   target: "ES5",
-                   noImplicitAny: false
-               }));
-
-            return tsResult.js
-                .pipe(concat('surveyeditor.tests_ko.js'))
-                .pipe(sourcemaps.write({ sourceRoot: "src" }))
-                //Source map is a part of generated file
-                .pipe(gulp.dest(paths.testsFolder));
-        });
         gulp.task('test:copy-index-html', function () {
             gulp.src('./tests/index.html')
             // Perform minification tasks, etc here
             .pipe(gulp.dest(paths.testsFolder));
         });
 
-        gulp.task("typescript", ["typescript:sources", "typescript:tests", "typescript:tests_ko", "test:copy-index-html"]);
+        gulp.task("typescript", ["typescript:sources", "typescript:tests", "test:copy-index-html"]);
     })("TypeScript compilation");
 
     gulp.task('compress', function () {

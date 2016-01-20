@@ -1,10 +1,12 @@
 ﻿<div style="overflow:hidden;position:relative;display:table">
-    <div id="surveyjsPanel" style="display:table-cell;vertical-align:top; width:120px">
+    <div id="surveyjsPanel" style="display:table-cell;vertical-align:top; width:250px">
         <div data-bind="visible: koSelectedPage() != null">
             <span data-bind="text: (koSelectedPage() != null) ?  'Selected page:' + koSelectedPage().title : ''"></span>
+            <div data-bind="template: { name: 'objecteditor', data: pageEditor }"></div>
             <div data-bind="visible: koSelectedQuestion() != null">
                 <span data-bind="text: (koSelectedQuestion() != null) ? 'Selected question: ' + koSelectedQuestion().title : ''"></span>
             </div>
+            <div data-bind="template: { name: 'objecteditor', data: questionEditor }"></div>
             <div>
                 <span>Question: </span>
                 <select data-bind="options: questionTypes, value: koSelectedQuestionType"></select>
