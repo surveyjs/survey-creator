@@ -1,7 +1,17 @@
 ﻿<div style="overflow:hidden;position:relative;display:table">
     <div id="surveyjsPanel" style="display:table-cell;vertical-align:top; width:120px">
-        Selected object: <span id="surveyjsSelectedObj"></span>
-        <input type="button" value="Add New Page" />
+        <div data-bind="visible: koSelectedPage() != null">
+            <span data-bind="text: (koSelectedPage() != null) ?  'Selected page:' + koSelectedPage().title : ''"></span>
+            <div data-bind="visible: koSelectedQuestion() != null">
+                <span data-bind="text: (koSelectedQuestion() != null) ? 'Selected question: ' + koSelectedQuestion().title : ''"></span>
+            </div>
+            <div>
+                <span>Question: </span>
+                <select data-bind="options: questionTypes, value: koSelectedQuestionType"></select>
+                <input type="button" value="Add" data-bind="click: addQuestion" />
+            </div>
+        </div>
+        <input type="button" value="Add New Page" data-bind="click: addPage" />
     </div>
     <div style="display:table-cell">
         <div id="surveyjsEditor" style="height:400px;width:500px">

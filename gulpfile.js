@@ -53,7 +53,8 @@ gulp.task('copylibs', function () {
 gulp.task('correctJSON5', function () {
     "use strict";
     gulp.src([paths.jsFolder + "json5.js"])
-    .pipe(replace('return object();', 'var pos = {start: at}; var obj = object();if (obj){pos.end = at; obj.pos = pos;} return obj;'))
+    .pipe(replace('return object();', 'var pos = {start: at}; var obj = object();if (obj){pos.end = at-1; obj.pos = pos;} return obj;'))
+    .pipe(replace('return array();', 'var pos = {start: at}; var obj = array();if (obj){pos.end = at-1; obj.pos = pos;} return obj;'))
     .pipe(gulp.dest(paths.jsFolder));
 });
 
