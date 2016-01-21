@@ -5,6 +5,8 @@ module SurveyEditor {
         private selectedObjectValue: any;
         public koProperties: any;
         public koActiveProperty: any;
+        public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
+
         constructor() {
             this.koProperties = ko.observableArray();
             this.koActiveProperty = ko.observable();
@@ -42,8 +44,11 @@ module SurveyEditor {
                 return -1;
             });
             var objectProperties = [];
+            var self = this;
             for (var i = 0; i < properties.length; i++) {
-                objectProperties.push(new SurveyObjectProperty(properties[i]));
+                objectProperties.push(new SurveyObjectProperty(properties[i], (property: SurveyObjectProperty, newValue: any) => {
+                    self.onPropertyValueChanged.fire(this, { property: property.property, object: property.object, newValue: newValue });
+                }));
             }
             this.koProperties(objectProperties);
             this.koActiveProperty(this.getPropertyEditor("name"));

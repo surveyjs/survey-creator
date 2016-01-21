@@ -1,4 +1,5 @@
 ﻿/// <reference path="objectEditor.ts" />
+/// <reference path="textWorker.ts" />
 
 module SurveyEditor {
     export class SurveyEditor {
@@ -14,6 +15,7 @@ module SurveyEditor {
         private isProcessingImmediately: boolean;
         private pageEditor: SurveyObjectEditor;
         private questionEditor: SurveyObjectEditor;
+        private textWorker: SurveyTextWorker;
 
         public questionTypes: string[];
         koSelectedPage: any;
@@ -25,8 +27,15 @@ module SurveyEditor {
             this.koSelectedQuestion = ko.observable(null);
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
+            var self = this;
             this.pageEditor = new SurveyObjectEditor();
+            this.pageEditor.onPropertyValueChanged.add((sender, options) => {
+                self.onPropertyValueChanged(options.property, options.object, options.newValue);
+            });
             this.questionEditor = new SurveyObjectEditor();
+            this.questionEditor.onPropertyValueChanged.add((sender, options) => {
+                self.onPropertyValueChanged(options.property, options.object, options.newValue);
+            });
 
             if (renderedElement) {
                 this.render(renderedElement);
@@ -109,6 +118,13 @@ module SurveyEditor {
             }
             this.setText(text, name);
         }
+        private onPropertyValueChanged(property: Survey.JsonObjectProperty, object: any, newValue: any) {
+            if (!object || !object["pos"]) return;
+            object[property.name] = newValue; //todo move to objectEditor
+            newValue = object[property.name];
+            var isRemove = property.isDefaultValue(newValue);
+            //var propPosition = this.getPropertyPosition(object["pos"], property.name);
+        }
         private createNewQuestion(type: string, name: string): string {
             var newQuestion = Survey.QuestionFactory.Instance.createQuestion(type, name);
             var jsonObj = new Survey.JsonObject().toJsonObject(newQuestion);
@@ -130,6 +146,7 @@ module SurveyEditor {
             this.surveyjsSelectedObj = document.getElementById("surveyjsSelectedObj");
             this.surveyjsExample = document.getElementById("surveyjsExample");
             this.initJsonEditor();
+            SurveyTextWorker.newLineChar = this.jsonEditor.session.doc.getNewLineCharacter();
         }
         private initJsonEditor() {
             var self = this;
@@ -177,7 +194,6 @@ module SurveyEditor {
         private processJson(text: string): any {
             this.jsonValue = null;
             var errors = [];
-            var annotations = [];
             var jsonObj = null;
             try {
                 jsonObj = JSON5.parse(text);

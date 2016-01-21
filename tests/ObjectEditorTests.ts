@@ -42,4 +42,15 @@ module SurveyObjectEditorTests.Tests {
         editor.selectedObject = new TruckDefaultValue();
         assert.equal(editor.koActiveProperty().name, "name", "name property is active by default");
     });
+    QUnit.test("On property changed", function (assert) {
+        var editor = new SurveyEditor.SurveyObjectEditor();
+        var car = new TruckDefaultValue();
+        car.name = "myName";
+        var callCounter = 0;
+        editor.onPropertyValueChanged.add((sender, options) => { car.name = options.newValue; callCounter++; });
+        editor.selectedObject = car;
+        editor.koActiveProperty().koValue("newName");
+        assert.equal(car.name, "newName", "on property changed event is working");
+        assert.equal(callCounter, 1, "It should be called only one time");
+    });
 }
