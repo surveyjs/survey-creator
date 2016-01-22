@@ -2,7 +2,7 @@
 /// <reference path="ObjectEditorTestedClasses.ts" />
 
 module SurveyObjectEditorTests.Tests {
-    QUnit.module("koTests");
+    QUnit.module("objectEditorTests");
 
     QUnit.test("Created properties on set selected Object", function (assert) {
         var editor = new SurveyEditor.SurveyObjectEditor();
