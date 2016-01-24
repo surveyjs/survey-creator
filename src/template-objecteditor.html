@@ -1,13 +1,28 @@
 ﻿<script type="text/html" id="objecteditor">
-    <table>
-        <tbody data-bind="foreach: koProperties">
-            <tr data-bind="click: $parent.changeActiveProperty($data)">
-                <td data-bind="text: name"></td>
-                <td>
-                    <span data-bind="text: koValue(), visible: !koIsDefault() && $parent.koActiveProperty() != $data"></span>
-                    <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div  data-bind="visible:koHasObject" style="margin:10px;width:100%">
+        <div style="background-color:lightgray">
+            <a href="#" data-bind="click: showProperties">
+                <span data-bind="text: koShowProperties() ? 'Hide': 'Show'"></span>
+            </a>
+            <span data-bind="text: koTitle"></span>
+        </div>
+        <div>
+            <table data-bind="visible:koShowProperties">
+                <tbody data-bind="foreach: koProperties">
+                    <tr data-bind="click: $parent.changeActiveProperty($data)">
+                        <td data-bind="text: name"></td>
+                        <td>
+                            <span data-bind="text: koValue(), visible: $parent.koActiveProperty() != $data, style: {color: koIsDefault() ? 'gray' : ''}"></span>
+                            <!-- ko if: editorType == 'text' -->
+                            <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" />
+                            <!-- /ko -->
+                            <!-- ko if: editorType == 'boolean' -->
+                            <input type="checkbox" data-bind="checked: koValue, visible: $parent.koActiveProperty() == $data" />
+                            <!-- /ko -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </script>

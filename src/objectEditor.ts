@@ -5,15 +5,25 @@ module SurveyEditor {
         private selectedObjectValue: any;
         public koProperties: any;
         public koActiveProperty: any;
+        public koTitle: any;
+        public koHasObject: any;
+        public koShowProperties: any;
         public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
 
         constructor() {
             this.koProperties = ko.observableArray();
             this.koActiveProperty = ko.observable();
+            this.koTitle = ko.observable("");
+            this.koHasObject = ko.observable();
+            this.koShowProperties = ko.observable();
+            this.koShowProperties(true);
         }
+        public get title(): string { return this.koTitle(); }
+        public set title(value: string) { this.koTitle(value); }
         public get selectedObject(): any { return this.selectedObjectValue; }
         public set selectedObject(value: any) {
             if (this.selectedObjectValue == value) return;
+            this.koHasObject(value != null);
             this.selectedObjectValue = value;
             this.updateProperties();
             this.updatePropertiesObject();
@@ -31,6 +41,9 @@ module SurveyEditor {
         public ObjectChanged() {
             this.updatePropertiesObject();
         }
+        public showProperties() {
+            this.koShowProperties(!this.koShowProperties()); 
+        }
         protected updateProperties() {
             if (!this.selectedObject || !this.selectedObject.getType) {
                 this.koProperties([]);
@@ -46,12 +59,24 @@ module SurveyEditor {
             var objectProperties = [];
             var self = this;
             for (var i = 0; i < properties.length; i++) {
-                objectProperties.push(new SurveyObjectProperty(properties[i], (property: SurveyObjectProperty, newValue: any) => {
-                    self.onPropertyValueChanged.fire(this, { property: property.property, object: property.object, newValue: newValue });
+                if (!this.canShowProperty(properties[i])) continue;
+                objectProperties.push(new SurveyObjectProperty(properties[i], this.getPropertyEditorType(properties[i]),
+                    (property: SurveyObjectProperty, newValue: any) => {
+                        self.onPropertyValueChanged.fire(this, { property: property.property, object: property.object, newValue: newValue });
                 }));
             }
             this.koProperties(objectProperties);
             this.koActiveProperty(this.getPropertyEditor("name"));
+        }
+        protected getPropertyEditorType(property: Survey.JsonObjectProperty): string {
+            var name = property.name;
+            if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0) return "boolean";
+            return "text"
+        }
+        protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
+            var name = property.name;
+            if (name == 'questions' || name == 'pages') return false;
+            return true;
         }
         protected updatePropertiesObject() {
             var properties = this.koProperties();

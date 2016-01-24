@@ -11,6 +11,7 @@ module SurveyObjectEditorTests.Tests {
         editor.selectedObject = new BigCar();
         assert.equal(editor.koProperties().length, 1, "One property object");
         assert.equal(editor.koProperties()[0].name, "name", "name property");
+        assert.equal(editor.koProperties()[0].editorType, "text", "It is a text editor");
 
         editor.selectedObject = new Truck();
         assert.equal(editor.koProperties().length, 2, "Two property object");
@@ -32,6 +33,7 @@ module SurveyObjectEditorTests.Tests {
         editor.selectedObject = car;
         var property = editor.getPropertyEditor("isNew");
         assert.equal(property.koIsDefault(), true, "the value is default");
+        assert.equal(property.editorType, "boolean", "It is a boolean editor");
         car.isNew = true;
         editor.ObjectChanged();
         assert.equal(property.koIsDefault(), false, "the value is not default");

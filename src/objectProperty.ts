@@ -9,7 +9,7 @@
         public koValue: any;
         public koIsDefault: any;
 
-        constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
+        constructor(public property: Survey.JsonObjectProperty, public editorType: string, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
             this.name = this.property.name;
             this.koValue = ko.observable();
             var self = this;

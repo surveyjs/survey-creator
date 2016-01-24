@@ -1,19 +1,21 @@
 ﻿<div style="overflow:hidden;position:relative;display:table">
-    <div id="surveyjsPanel" style="display:table-cell;vertical-align:top; width:250px">
-        <div data-bind="visible: koSelectedPage() != null">
-            <div data-bind="template: { name: 'objecteditor', data: pageEditor }"></div>
-            <div data-bind="template: { name: 'objecteditor', data: questionEditor }"></div>
-            <div>
-                <span>Question: </span>
-                <select data-bind="options: questionTypes, value: koSelectedQuestionType"></select>
-                <input type="button" value="Add" data-bind="click: addQuestion" />
+    <div id="surveyjsPanel" style="display:table-cell;vertical-align:top">
+        <div style="width:300px;height:400px;overflow-y:auto;overflow-x:hidden">
+            <div data-bind="template: { name: 'objecteditor', data: surveyEditor }"></div>
+            <div data-bind="visible: koSelectedPage() != null">
+                <div data-bind="template: { name: 'objecteditor', data: pageEditor }"></div>
+                <div data-bind="template: { name: 'objecteditor', data: questionEditor }"></div>
             </div>
         </div>
-        <input type="button" value="Add New Page" data-bind="click: addPage" />
+        <div  data-bind="visible: koSelectedPage() != null">
+            <select data-bind="options: questionTypes, value: koSelectedQuestionType"></select>
+            <input type="button" value="Add Question" data-bind="click: addQuestion" />
+        </div>
     </div>
-    <div style="display:table-cell;width:100%"">
+    <div style="display:table-cell;width:100%">
         <div id="surveyjsEditor" style="height:400px;width:100%">
         </div>
+        <div data-bind="template: { name: 'pageeditor', data: pagesEditor }" style="width:20px"></div>
     </div>
 </div>
 <div id="surveyjsExample" style="height:400px;width:100%"></div>
