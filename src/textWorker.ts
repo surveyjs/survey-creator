@@ -15,7 +15,7 @@
         public get isJsonCorrect(): boolean { return this.surveyValue && !this.surveyValue.isEmpty; }
         protected process() {
             try {
-                this.jsonValue = JSON5.parse(this.text);
+                this.jsonValue = new SurveyJSON5(1).parse(this.text);
             }
             catch (error) {
                 this.errors.push({ pos: { start: error.at, end: -1 }, text: error.message });
@@ -76,7 +76,7 @@
         public changeProperty(obj: Object, name: string, newValue: any, isDefault: boolean) {
             var pos = obj["pos"];
             if (!pos) return;
-            var propertyPosInfo = new SurveyTextParser(this.text).getPropertyInfo(pos.start, pos.end, name);
+            var propertyPosInfo = this.getPropertyInfo(pos.start, pos.end, name);
             var newText = this.text;
             if (isDefault) {
                 if (propertyPosInfo.isFound) {
@@ -107,6 +107,19 @@
             }
             return result;
         }
+        private getPropertyInfo(start: number, end: number, name: string): TextParserPropery {
+            var result = new TextParserPropery();
+            result.isFound = false;
+            var obj = new SurveyJSON5(2).parse(this.text, null, start, end);
+            if (!obj || !obj[SurveyJSON5.positionName] || !obj[SurveyJSON5.positionName][name]) return result;
+            var pos = obj[SurveyJSON5.positionName][name];
+            result.isFound = true;
+            result.start = pos.start;
+            result.end = pos.end;
+            result.valueStart = pos.valueStart;
+            return result;
+        }
+
         private getQuestionText(question: Survey.Question): string {
             var jsonObj = new Survey.JsonObject().toJsonObject(question);
             jsonObj["type"] = question.getType();
@@ -191,9 +204,13 @@
             });
         }
         private getValueText(newValue: any): string {
+            return JSON5.stringify(newValue);
+            /*
             if (newValue == null) return "null";
+
             if (typeof newValue == "string") return "'" + newValue + "'";
             return newValue.toString();
+            */
         }
     }
 }

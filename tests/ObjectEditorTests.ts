@@ -55,4 +55,33 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(car.name, "newName", "on property changed event is working");
         assert.equal(callCounter, 1, "It should be called only one time");
     });
+    QUnit.test("SurveyPropertyItemValue", function (assert) {
+        var choices = [{ value: 1, text: "item1" }, { value: 2, text: "item2" }, { value: 3, text: "item3" }];
+        var itemValueProperty = new SurveyEditor.SurveyPropertyItemValue((newValue: Array<Survey.ItemValue>) => {
+            choices = newValue;
+        });
+        itemValueProperty.value = choices;
+        assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
+        assert.equal(itemValueProperty.koItems()[1].koValue(), 2, "check value of the second element");
+        assert.equal(itemValueProperty.koItems()[1].koText(), "item2", "check text of the second element");
+
+        itemValueProperty.onDeleteClick(itemValueProperty.koItems()[1]);
+        assert.equal(itemValueProperty.koItems().length, 2, "there are two elements after deleting");
+        assert.equal(itemValueProperty.koItems()[1].koValue(), 3, "check value of the second element");
+        assert.equal(itemValueProperty.koItems()[1].koText(), "item3", "check text of the second element");
+
+        itemValueProperty.koNewValue(4);
+        itemValueProperty.koNewText("item4");
+        itemValueProperty.onAddClick();
+        assert.equal(itemValueProperty.koItems().length, 3, "there are three elements after adding");
+        assert.equal(itemValueProperty.koItems()[2].koValue(), 4, "check value of the last element");
+        assert.equal(itemValueProperty.koItems()[2].koText(), "item4", "check text of the last element");
+        assert.equal(itemValueProperty.koNewValue(), null, "new value should be null after adding");
+        assert.equal(itemValueProperty.koNewText(), null, "new text should be null after adding");
+
+        itemValueProperty.onApplyClick();
+        assert.equal(choices.length, 3, "there are three elements after adding");
+        assert.equal(choices[2].value, 4, "check value of the last element");
+        assert.equal(choices[2].text, "item4", "check text of the last element");
+    });
 }

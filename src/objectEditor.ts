@@ -58,20 +58,32 @@ module SurveyEditor {
             });
             var objectProperties = [];
             var self = this;
+            var propEvent = (property: SurveyObjectProperty, newValue: any) => {
+                self.onPropertyValueChanged.fire(this, { property: property.property, object: property.object, newValue: newValue });
+            };
             for (var i = 0; i < properties.length; i++) {
                 if (!this.canShowProperty(properties[i])) continue;
-                objectProperties.push(new SurveyObjectProperty(properties[i], this.getPropertyEditorType(properties[i]),
-                    (property: SurveyObjectProperty, newValue: any) => {
-                        self.onPropertyValueChanged.fire(this, { property: property.property, object: property.object, newValue: newValue });
-                }));
+                var editorType = this.getPropertyEditorType(properties[i]);
+                var objectProperty = new SurveyObjectProperty(properties[i], editorType, propEvent);
+                if (editorType == "dropdown") {
+                    objectProperty.choices = this.getPropertyEditorChoices(properties[i]);
+                }
+                objectProperties.push(objectProperty);
             }
             this.koProperties(objectProperties);
             this.koActiveProperty(this.getPropertyEditor("name"));
         }
         protected getPropertyEditorType(property: Survey.JsonObjectProperty): string {
             var name = property.name;
+            if (name == "showQuestionNumbers") return "dropdown";
+            if (name == "choices") return "itemvalues";
             if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0) return "boolean";
             return "text"
+        }
+        protected getPropertyEditorChoices(property: Survey.JsonObjectProperty): Array<string> {
+            var name = property.name;
+            if (name == "showQuestionNumbers") return ["on", "onPage", "off"];
+            return [];
         }
         protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
             var name = property.name;
