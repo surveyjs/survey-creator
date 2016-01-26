@@ -76,7 +76,7 @@ module SurveyEditor {
         protected getPropertyEditorType(property: Survey.JsonObjectProperty): string {
             var name = property.name;
             if (name == "showQuestionNumbers") return "dropdown";
-            if (name == "choices") return "itemvalues";
+            if (name == "choices" || name == "columns" || name == "rows" || name == "rateValues") return "itemvalues";
             if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0) return "boolean";
             return "text"
         }
