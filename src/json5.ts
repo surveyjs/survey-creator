@@ -4,10 +4,7 @@
 module SurveyEditor {
     export class SurveyJSON5 {
         public static positionName = "pos";
-        private endAt: number;
-        private at: number;     // The index of the current character
-        private ch: any;     // The current character
-        private escapee = {
+        private static escapee = {
             "'": "'",
             '"': '"',
             '\\': '\\',
@@ -19,7 +16,7 @@ module SurveyEditor {
             r: '\r',
             t: '\t'
         };
-        private ws = [
+        private static ws = [
             ' ',
             '\t',
             '\r',
@@ -29,6 +26,9 @@ module SurveyEditor {
             '\xA0',
             '\uFEFF'
         ];
+        private endAt: number;
+        private at: number;     // The index of the current character
+        private ch: any;     // The current character
         private text: string;
         private parseType: number; // 0 - stadard, 1 - get information about objects, 2 - get information about all properties
         constructor(parseType: number = 0) {
@@ -249,8 +249,8 @@ module SurveyEditor {
                             if (this.peek() === '\n') {
                                 this.next();
                             }
-                        } else if (typeof this.escapee[this.ch] === 'string') {
-                            string += this.escapee[this.ch];
+                        } else if (typeof SurveyJSON5.escapee[this.ch] === 'string') {
+                            string += SurveyJSON5.escapee[this.ch];
                         } else {
                             break;
                         }
@@ -338,7 +338,7 @@ module SurveyEditor {
             while (this.ch) {
                 if (this.ch === '/') {
                     this.comment();
-                } else if (this.ws.indexOf(this.ch) >= 0) {
+                } else if (SurveyJSON5.ws.indexOf(this.ch) >= 0) {
                     this.next();
                 } else {
                     return;
@@ -474,7 +474,7 @@ module SurveyEditor {
                         return object;
                     }
                     if (this.parseType > 1 && !isFirstProperty) {
-                        object[SurveyJSON5.positionName][key].end --;
+                        object[SurveyJSON5.positionName][key].end--;
                     }
                     this.next(',');
                     this.white();
@@ -503,6 +503,238 @@ module SurveyEditor {
                     return this.number();
                 default:
                     return this.ch >= '0' && this.ch <= '9' ? this.number() : this.word();
+            }
+        }
+
+        private replacer: any;
+        private indentStr: string;
+        private objStack;
+
+        public stringify(obj: any, replacer: any = null, space: any = null) {
+            if (replacer && (typeof (replacer) !== "function" && !this.isArray(replacer))) {
+                throw new Error('Replacer must be a function or an array');
+            }
+            this.replacer = replacer;
+            this.indentStr = this.getIndent(space);
+            this.objStack = [];
+            // special case...when undefined is used inside of
+            // a compound object/array, return null.
+            // but when top-level, return undefined
+            var topLevelHolder = { "": obj };
+            if (obj === undefined) {
+                return this.getReplacedValueOrUndefined(topLevelHolder, '', true);
+            }
+            return this.internalStringify(topLevelHolder, '', true);
+        }
+        private getIndent(space: any): string {
+            if (space) {
+                if (typeof space === "string") {
+                    return space;
+                } else if (typeof space === "number" && space >= 0) {
+                    return this.makeIndent(" ", space, true);
+                }
+            }
+            return "";
+        }
+        private getReplacedValueOrUndefined(holder: any, key: any, isTopLevel: boolean) {
+            var value = holder[key];
+
+            // Replace the value with its toJSON value first, if possible
+            if (value && value.toJSON && typeof value.toJSON === "function") {
+                value = value.toJSON();
+            }
+
+            // If the user-supplied replacer if a function, call it. If it's an array, check objects' string keys for
+            // presence in the array (removing the key/value pair from the resulting JSON if the key is missing).
+            if (typeof (this.replacer) === "function") {
+                return this.replacer.call(holder, key, value);
+            } else if (this.replacer) {
+                if (isTopLevel || this.isArray(holder) || this.replacer.indexOf(key) >= 0) {
+                    return value;
+                } else {
+                    return undefined;
+                }
+            } else {
+                return value;
+            }
+        }
+
+        private isWordChar(char: any): boolean {
+            return (char >= 'a' && char <= 'z') ||
+                (char >= 'A' && char <= 'Z') ||
+                (char >= '0' && char <= '9') ||
+                char === '_' || char === '$';
+        }
+
+        private isWordStart(char: any): boolean {
+            return (char >= 'a' && char <= 'z') ||
+                (char >= 'A' && char <= 'Z') ||
+                char === '_' || char === '$';
+        }
+
+        private isWord(key: any): boolean {
+            if (typeof key !== 'string') {
+                return false;
+            }
+            if (!this.isWordStart(key[0])) {
+                return false;
+            }
+            var i = 1, length = key.length;
+            while (i < length) {
+                if (!this.isWordChar(key[i])) {
+                    return false;
+                }
+                i++;
+            }
+            return true;
+        }
+        // polyfills
+        private isArray(obj: any): boolean {
+            if (Array.isArray) {
+                return Array.isArray(obj);
+            } else {
+                return Object.prototype.toString.call(obj) === '[object Array]';
+            }
+        }
+
+        private isDate(obj: any): boolean {
+            return Object.prototype.toString.call(obj) === '[object Date]';
+        }
+
+        private isNaN(val: any): boolean {
+            return typeof val === 'number' && val !== val;
+        }
+        
+        private checkForCircular(obj: any) {
+            for (var i = 0; i < this.objStack.length; i++) {
+                if (this.objStack[i] === obj) {
+                    throw new TypeError("Converting circular structure to JSON");
+                }
+            }
+        }
+        private makeIndent(str: string, num: number, noNewLine: boolean = false) {
+            if (!str) {
+                return "";
+            }
+            // indentation no more than 10 chars
+            if (str.length > 10) {
+                str = str.substring(0, 10);
+            }
+
+            var indent = noNewLine ? "" : "\n";
+            for (var i = 0; i < num; i++) {
+                indent += str;
+            }
+
+            return indent;
+        }
+
+        // Copied from Crokford's implementation of JSON
+        // See https://github.com/douglascrockford/JSON-js/blob/e39db4b7e6249f04a195e7dd0840e610cc9e941e/json2.js#L195
+        // Begin
+        private static cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+        private static escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+        private static meta = { // table of character substitutions
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"': '\\"',
+            '\\': '\\\\'
+        };
+        private escapeString(str: string) {
+
+            // If the string contains no control characters, no quote characters, and no
+            // backslash characters, then we can safely slap some quotes around it.
+            // Otherwise we must also replace the offending characters with safe escape
+            // sequences.
+            SurveyJSON5.escapable.lastIndex = 0;
+            return SurveyJSON5.escapable.test(str) ? '"' + str.replace(SurveyJSON5.escapable, function (a) {
+                var c = SurveyJSON5.meta[a];
+                return typeof c === 'string' ?
+                    c :
+                    '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+            }) + '"' : '"' + str + '"';
+        }
+        // End
+
+        private internalStringify(holder: any, key: any, isTopLevel: boolean) {
+            var buffer, res;
+
+            // Replace the value, if necessary
+            var obj_part = this.getReplacedValueOrUndefined(holder, key, isTopLevel);
+
+            if (obj_part && !this.isDate(obj_part)) {
+                // unbox objects
+                // don't unbox dates, since will turn it into number
+                obj_part = obj_part.valueOf();
+            }
+            switch (typeof obj_part) {
+                case "boolean":
+                    return obj_part.toString();
+
+                case "number":
+                    if (isNaN(obj_part) || !isFinite(obj_part)) {
+                        return "null";
+                    }
+                    return obj_part.toString();
+
+                case "string":
+                    return this.escapeString(obj_part.toString());
+
+                case "object":
+                    if (obj_part === null) {
+                        return "null";
+                    } else if (this.isArray(obj_part)) {
+                        this.checkForCircular(obj_part);
+                        buffer = "[";
+                        this.objStack.push(obj_part);
+
+                        for (var i = 0; i < obj_part.length; i++) {
+                            res = this.internalStringify(obj_part, i, false);
+                            buffer += this.makeIndent(this.indentStr, this.objStack.length);
+                            if (res === null || typeof res === "undefined") {
+                                buffer += "null";
+                            } else {
+                                buffer += res;
+                            }
+                            if (i < obj_part.length - 1) {
+                                buffer += ",";
+                            } else if (this.indentStr) {
+                                buffer += "\n";
+                            }
+                        }
+                        this.objStack.pop();
+                        buffer += this.makeIndent(this.indentStr, this.objStack.length, true) + "]";
+                    } else {
+                        this.checkForCircular(obj_part);
+                        buffer = "{";
+                        var nonEmpty = false;
+                        this.objStack.push(obj_part);
+                        for (var prop in obj_part) {
+                            if (obj_part.hasOwnProperty(prop)) {
+                                var value = this.internalStringify(obj_part, prop, false);
+                                isTopLevel = false;
+                                if (typeof value !== "undefined" && value !== null) {
+                                    buffer += this.makeIndent(this.indentStr, this.objStack.length);
+                                    nonEmpty = true;
+                                    var key = this.isWord(prop) ? prop : this.escapeString(prop);
+                                    buffer += key + ":" + (this.indentStr ? ' ' : '') + value + ",";
+                                }
+                            }
+                        }
+                        this.objStack.pop();
+                        if (nonEmpty) {
+                            buffer = buffer.substring(0, buffer.length - 1) + this.makeIndent(this.indentStr, this.objStack.length) + "}";
+                        } else {
+                            buffer = '{}';
+                        }
+                    }
+                    return buffer;
+                default:
+                    // functions and undefined should be ignored
+                    return undefined;
             }
         }
     }

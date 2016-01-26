@@ -1,4 +1,11 @@
 ﻿module SurveyEditor {
+    class TextParserPropery {
+        isFound: boolean;
+        start: number;
+        end: number;
+        valueStart: number;
+    }
+
     export class SurveyTextWorker {
         public static newLineChar: string;
         public errors: Array<any>;
@@ -123,7 +130,7 @@
         private getQuestionText(question: Survey.Question): string {
             var jsonObj = new Survey.JsonObject().toJsonObject(question);
             jsonObj["type"] = question.getType();
-            return JSON5.stringify(jsonObj);
+            return this.stringify(jsonObj);
         }
         private updateJsonPositions(jsonObj: any) {
             jsonObj["pos"]["self"] = jsonObj;
@@ -204,13 +211,10 @@
             });
         }
         private getValueText(newValue: any): string {
-            return JSON5.stringify(newValue);
-            /*
-            if (newValue == null) return "null";
-
-            if (typeof newValue == "string") return "'" + newValue + "'";
-            return newValue.toString();
-            */
+            return this.stringify(newValue);
+        }
+        private stringify(obj: any): string {
+            return new SurveyJSON5().stringify(obj);
         }
     }
 }
