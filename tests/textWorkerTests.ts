@@ -48,4 +48,67 @@ module SurveyObjectEditorTests.Tests {
         question = worker.survey.getQuestionByName("temp");
         assert.equal(question["size"], 25, "default value");
     });
+    QUnit.test("Add page - empty survey", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ }");
+        worker.addPage("page1");
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.pages.length, 1, "we should have one page");
+        assert.equal(worker.survey.pages[0].name, "page1", "name page is page1");
+    });
+    QUnit.test("Add page - survey with survey properties", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ title: \"My Survey\" }");
+        worker.addPage("page1");
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.pages.length, 1, "we should have one page");
+        assert.equal(worker.survey.pages[0].name, "page1", "name page is page1");
+        assert.equal(worker.survey.title, "My Survey", "title should be saved");
+    });
+    QUnit.test("Add page - survey with survey properties and questions", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ title: \"My Survey\", questions: [{ type: 'text', name: 'temp', size: 20, title: 'my title' }] }");
+        worker.addPage("page1");
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.pages.length, 2, "we should have two pages");
+        assert.equal(worker.survey.pages[0].questions.length, 1, "the first page has one question");
+        assert.equal(worker.survey.pages[1].name, "page1", "name page is page1");
+        assert.equal(worker.survey.title, "My Survey", "title should be saved");
+    });
+    QUnit.test("Add page - survey with survey properties and empty pages", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ title: \"My Survey\", pages: [] }");
+        worker.addPage("page1");
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.pages.length, 1, "we should have one page");
+        assert.equal(worker.survey.pages[0].name, "page1", "name page is page1");
+        assert.equal(worker.survey.title, "My Survey", "title should be saved");
+    });
+    QUnit.test("Add page - survey with survey properties and one page", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ title: \"My Survey\", pages: [{questions: [{ type: 'text', name: 'temp', size: 20, title: 'my title' }]}] }");
+        worker.addPage("page1");
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.pages.length, 2, "we should have two pages");
+        assert.equal(worker.survey.pages[0].questions.length, 1, "the first page has one question");
+        assert.equal(worker.survey.pages[1].name, "page1", "name page is page1");
+        assert.equal(worker.survey.title, "My Survey", "title should be saved");
+    });
+    QUnit.test("Add question - to empty page with no questions array", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ pages: [{}] }");
+        worker.addQuestion(worker.survey.pages[0], new Survey.QuestionText("q1"));
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.getAllQuestions().length, 1, "we have one question");
+        assert.equal(worker.survey.getAllQuestions()[0].name, "q1", "check the name of new question");
+    });
+    QUnit.test("Add question - to empty page with emty questions array", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ pages: [{questions:[]}] }");
+        worker.addQuestion(worker.survey.pages[0], new Survey.QuestionText("q1"));
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.getAllQuestions().length, 1, "we have one question");
+        assert.equal(worker.survey.getAllQuestions()[0].name, "q1", "check the name of new question");
+    });
+    QUnit.test("Add question - add second question to the page", function (assert) {
+        var worker = new SurveyEditor.SurveyTextWorker("{ pages: [{questions: [{ type: 'text', name: 'temp', size: 20, title: 'my title' }]}] }");
+        worker.addQuestion(worker.survey.pages[0], new Survey.QuestionText("q1"));
+        worker = new SurveyEditor.SurveyTextWorker(worker.text);
+        assert.equal(worker.survey.getAllQuestions().length, 2, "we have two question");
+        assert.equal(worker.survey.getAllQuestions()[1].name, "q1", "check the name of new question");
+    });
+
 }

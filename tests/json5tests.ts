@@ -29,16 +29,19 @@ module SurveyObjectEditorTests.Tests {
         var pos = obj["pos"]["type"];
         assert.equal(pos.start, 2, "start question property for 'type'");
         assert.equal(pos.valueStart, 7, "start question property value for 'type'");
+        assert.equal(pos.valueEnd, 13, "end question property value for 'type'");
         assert.equal(pos.end, 14, "end question property for 'type'");
 
         pos = obj["pos"]["name"];
         assert.equal(pos.start, 14, "start question property for 'name'");
         assert.equal(pos.valueStart, 21, "start question property value for 'name'");
+        assert.equal(pos.valueEnd, 27, "end question property value for 'name'");
         assert.equal(pos.end, 27, "end question property for 'name'");
 
         pos = obj["pos"]["size"];
         assert.equal(pos.start, 28, "start question property for 'size'");
         assert.equal(pos.valueStart, 35, "start question property value for 'size'");
+        assert.equal(pos.valueEnd, 37, "end question property value for 'size'");
         assert.equal(pos.end, 37, "end question property for 'size'");
 
     });
@@ -49,5 +52,17 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(pos.start, 2, "start question property");
         assert.equal(pos.valueStart, 10, "start question property value");
         assert.equal(pos.end, 15, "end question property for");
+    });
+    QUnit.test("Empty Json test", function (assert) {
+        var json5 = new SurveyEditor.SurveyJSON5(1);
+        var obj = json5.parse("{ }  ");
+        assert.equal(obj["pos"].start, 0, "start 'pos' position");
+        assert.equal(obj["pos"].end, 2, "end 'pos' position");
+    });
+    QUnit.test("One property Json test", function (assert) {
+        var json5 = new SurveyEditor.SurveyJSON5(1);
+        var obj = json5.parse("{ v:1 }  ");
+        assert.equal(obj["pos"].start, 0, "start 'pos' position");
+        assert.equal(obj["pos"].end, 6, "end 'pos' position");
     });
 }

@@ -1,9 +1,11 @@
 ﻿module SurveyEditor {
     class TextParserPropery {
         isFound: boolean;
+        propertiesCount: number;
         start: number;
         end: number;
         valueStart: number;
+        valueEnd: number;
     }
 
     export class SurveyTextWorker {
@@ -43,16 +45,24 @@
         }
         public addPage(newName: string) {
             if (this.surveyValue == null) return;
+            var objPos = this.surveyValue["pos"];
+            if(!objPos) return;
             var newText = "";
             var pageText = "{name: '" + newName + "', questions: []}";
-            if (this.surveyValue.pages.length == 0) {
-                newText = "{ pages: \n [" + pageText + "\n]}"; //todo
+            var pPos = this.getPropertyInfo(0, this.text.length, "pages");
+            if (pPos.isFound) {
+                var comma = this.surveyValue.pages.length > 0 ? ",\n" : "";
+                newText = this.text.substr(0, pPos.end) + comma + pageText + this.text.substr(pPos.end);
             } else {
-                if (this.isSurveyAsPage) {
-                    newText = "{ pages: \n [" + this.text + ",\n" + pageText + "]}";
+                var qPos = this.getPropertyInfo(0, this.text.length, "questions");
+                var comma = qPos.propertiesCount > (qPos.isFound ? 1 : 0)  ? ", " : "";
+                if (qPos.isFound) {
+                    newText = this.text.substr(0, qPos.start) + this.text.substr(qPos.end + 1, objPos.end - qPos.end - 1)
+                        + comma + "pages: [{ questions:" + this.text.substr(qPos.valueStart, qPos.valueEnd - qPos.valueStart + 1) + "}, \n"
+                        + pageText + "]" 
+                        + this.text.substr(objPos.end);
                 } else {
-                    var pos = this.surveyValue.pages[this.surveyValue.pages.length - 1]["pos"].end;
-                    newText = this.text.substr(0, pos) + ", \n" + pageText + this.text.substr(pos);
+                    newText = this.text.substr(0, objPos.end) + comma + "pages: [" + pageText + "]" + this.text.substr(objPos.end);
                 }
             }
             this.text = newText;
@@ -63,18 +73,18 @@
             var newText = "";
             var pos = 0;
             if (page.questions.length > 0) {
-                pos = page.questions[page.questions.length - 1]["pos"].end;
+                pos = page.questions[page.questions.length - 1]["pos"].end + 1;
                 newText = this.text.substr(0, pos) + ", \n" + questionText + this.text.substr(pos);
             } else {
-                var questions = page["pos"]["questions"];
-                if (questions) {
-                    pos = questions.end - 1;
-                    newText = this.text.substr(0, pos) + questionText + this.text.substr(pos);
+                var qPos = this.getPropertyInfo(page["pos"].start, page["pos"].end + 1, "questions");
+                if (qPos.isFound) {
+                    pos = qPos.end;
+                    newText = this.text.substr(0, qPos.end) + questionText + this.text.substr(qPos.end);
                 } else {
                     var pagePos = page["pos"];
                     var textPage = this.text.substr(pagePos.start, pagePos.end - pagePos.start - 1);
                     var commaText = textPage.trim() != "" ? ", " : "";
-                    pos = pagePos.end - 1;
+                    pos = pagePos.end;
                     newText = this.text.substr(0, pos) + commaText + "questions: [" + questionText + "]" + this.text.substr(pos);
                 }
             }
@@ -83,7 +93,7 @@
         public changeProperty(obj: Object, name: string, newValue: any, isDefault: boolean) {
             var pos = obj["pos"];
             if (!pos) return;
-            var propertyPosInfo = this.getPropertyInfo(pos.start, pos.end, name);
+            var propertyPosInfo = this.getPropertyInfo(pos.start, pos.end + 1, name);
             var newText = this.text;
             if (isDefault) {
                 if (propertyPosInfo.isFound) {
@@ -92,9 +102,10 @@
             } else {
                 newValue = this.getValueText(newValue);
                 if (!propertyPosInfo.isFound) {
-                    newText = this.text.substr(0, pos.end - 1) + ", " + name + ": " + newValue + this.text.substr(pos.end - 1);
+                    var comma = propertyPosInfo.propertiesCount > 0 ? ", " : "";
+                    newText = this.text.substr(0, pos.end) + comma + name + ": " + newValue + this.text.substr(pos.end);
                 } else {
-                    newText = this.text.substr(0, propertyPosInfo.valueStart) + " " + newValue + this.text.substr(propertyPosInfo.end + 1);
+                    newText = this.text.substr(0, propertyPosInfo.valueStart) + " " + newValue + this.text.substr(propertyPosInfo.valueEnd + 1);
                 }
             }
             this.text = newText;
@@ -117,13 +128,17 @@
         private getPropertyInfo(start: number, end: number, name: string): TextParserPropery {
             var result = new TextParserPropery();
             result.isFound = false;
+            result.propertiesCount = 0;
             var obj = new SurveyJSON5(2).parse(this.text, null, start, end);
-            if (!obj || !obj[SurveyJSON5.positionName] || !obj[SurveyJSON5.positionName][name]) return result;
+            if (!obj || !obj[SurveyJSON5.positionName]) return result;
+            result.propertiesCount = Object.keys(obj).length - 1;
+            if (!obj[SurveyJSON5.positionName][name]) return result;
             var pos = obj[SurveyJSON5.positionName][name];
             result.isFound = true;
             result.start = pos.start;
             result.end = pos.end;
             result.valueStart = pos.valueStart;
+            result.valueEnd = pos.valueEnd;
             return result;
         }
 

@@ -438,6 +438,9 @@ module SurveyEditor {
                 start = this.at - 1;
                 while (this.ch) {
                     if (this.ch === '}') {
+                        if (this.parseType > 0) {
+                            object[SurveyJSON5.positionName].end = start;
+                        }
                         this.next('}');
                         return object;   // Potentially empty object
                     }
@@ -458,6 +461,7 @@ module SurveyEditor {
                     object[key] = this.value();
                     if (this.parseType > 1) {
                         start = this.at - 1;
+                        object[SurveyJSON5.positionName][key].valueEnd = start;
                         object[SurveyJSON5.positionName][key].end = start;
                     }
                     this.white();
@@ -465,16 +469,20 @@ module SurveyEditor {
                     // the end of the object.
                     if (this.ch !== ',') {
                         if (this.parseType > 1) {
+                            object[SurveyJSON5.positionName][key].valueEnd--;
                             object[SurveyJSON5.positionName][key].end--;
                         }
-                        this.next('}');
                         if (this.parseType > 0) {
                             object[SurveyJSON5.positionName].end = this.at - 1;
                         }
+                        this.next('}');
                         return object;
                     }
-                    if (this.parseType > 1 && !isFirstProperty) {
-                        object[SurveyJSON5.positionName][key].end--;
+                    if (this.parseType > 1) {
+                        object[SurveyJSON5.positionName][key].valueEnd--;
+                        if (!isFirstProperty) {
+                            object[SurveyJSON5.positionName][key].end--;
+                        }
                     }
                     this.next(',');
                     this.white();

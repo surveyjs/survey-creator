@@ -18,4 +18,11 @@
         <div data-bind="template: { name: 'pageeditor', data: pagesEditor }" style="width:20px"></div>
     </div>
 </div>
-<div id="surveyjsExample" style="height:400px;width:100%"></div>
+<p>
+<a href="#" data-bind="click: showLiveSurveyClick">
+    <span data-bind="text: koShowLiveSurvey() ? 'Hide Live Survey': 'Show Live Survey'"></span>
+</a>
+</p>
+<div data-bind="visible: koShowLiveSurvey()">
+    <div id="surveyjsExample" style="height:400px;width:100%"></div>
+</div>

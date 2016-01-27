@@ -21,13 +21,18 @@ module SurveyEditor {
         koSelectedPage: any;
         koSelectedQuestion: any;
         koSelectedQuestionType: any;
+        koShowLiveSurvey: any;
+        showLiveSurveyClick: any;
 
         constructor(renderedElement: any = null) {
             this.koSelectedPage = ko.observable(null);
             this.koSelectedQuestion = ko.observable(null);
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
+            this.koShowLiveSurvey = ko.observable(false);
             var self = this;
+            this.showLiveSurveyClick = function () { self.koShowLiveSurvey(!self.koShowLiveSurvey()); };
+            this.koShowLiveSurvey.subscribe((newValue: any) => { self.showLiveSurvey(newValue); });
             this.surveyEditor = new SurveyObjectEditor();
             this.surveyEditor.title = "Survey Properties";
             this.surveyEditor.koShowProperties(false);
@@ -136,7 +141,7 @@ module SurveyEditor {
                 self.onJsonEditorCursorChanged();
             });
             this.jsonEditor.getSession().setUseWorker(true);
-            this.text = SurveyEditor.defaultNewSurveyText;
+            this.setText(SurveyEditor.defaultNewSurveyText, "name: 'question1'");
         }
         private timeoutId: number = -1;
         private onJsonEditorChanged(): any {
@@ -183,17 +188,20 @@ module SurveyEditor {
         }
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
-            if (this.surveyjsExample) {
+            this.showLiveSurvey(this.koShowLiveSurvey());
+            this.surveyEditor.selectedObject = this.textWorker.survey;
+            this.pagesEditor.survey = this.textWorker.survey;
+            this.onJsonEditorCursorChanged();
+            this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
+        }
+        private showLiveSurvey(showSurvey: boolean) {
+            if (showSurvey && this.surveyjsExample) {
                 if (this.textWorker.isJsonCorrect) {
                     this.textWorker.survey.render(this.surveyjsExample);
                 } else {
                     this.surveyjsExample.innerText = "Please correct the survey JSON.";
                 }
             }
-            this.surveyEditor.selectedObject = this.textWorker.survey;
-            this.pagesEditor.survey = this.textWorker.survey;
-            this.onJsonEditorCursorChanged();
-            this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
             var annotations = new Array<AceAjax.Annotation>();
