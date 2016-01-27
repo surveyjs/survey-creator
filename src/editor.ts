@@ -29,7 +29,7 @@ module SurveyEditor {
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
             var self = this;
             this.surveyEditor = new SurveyObjectEditor();
-            this.surveyEditor.title = "Survey";
+            this.surveyEditor.title = "Survey Properties";
             this.surveyEditor.koShowProperties(false);
             this.surveyEditor.onPropertyValueChanged.add((sender, options) => {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
@@ -168,11 +168,11 @@ module SurveyEditor {
             this.pageEditor.selectedObject = page;
             this.pagesEditor.setSelectedPage(page);
             if (page) {
-                this.pageEditor.title = "Page " + (this.textWorker.survey.pages.indexOf(page) + 1);
+                this.pageEditor.title = "Page properties: page" + (this.textWorker.survey.pages.indexOf(page) + 1);
             }
             this.questionEditor.selectedObject = question;
             if (question) {
-                this.questionEditor.title = "Question: " + question.name;
+                this.questionEditor.title = "Question properties: " + question.name;
             }
         }
         private moveToObject(obj: any) {

@@ -9,10 +9,10 @@
         <div>
             <table data-bind="visible:koShowProperties">
                 <tbody data-bind="foreach: koProperties">
-                    <tr data-bind="click: $parent.changeActiveProperty($data)">
+                    <tr data-bind="click: $parent.changeActiveProperty($data), style: {background: $parent.koActiveProperty() == $data ? 'lightgray': ''}">
                         <td data-bind="text: name"></td>
                         <td>
-                            <span data-bind="text: koText(), visible: $parent.koActiveProperty() != $data, style: {color: koIsDefault() ? 'gray' : ''}"></span>
+                            <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data, attr: {title: koText}, style: {color: koIsDefault() ? 'gray' : ''}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
                             <!-- ko if: editorType == 'text' -->
                             <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" />
                             <!-- /ko -->
