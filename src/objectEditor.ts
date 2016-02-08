@@ -16,7 +16,6 @@ module SurveyEditor {
             this.koTitle = ko.observable("");
             this.koHasObject = ko.observable();
             this.koShowProperties = ko.observable();
-            this.koShowProperties(true);
         }
         public get title(): string { return this.koTitle(); }
         public set title(value: string) { this.koTitle(value); }

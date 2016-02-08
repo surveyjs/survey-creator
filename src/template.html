@@ -13,8 +13,16 @@
         </div>
     </div>
     <div style="display:table-cell;width:100%">
-        <div id="surveyjsEditor" style="height:400px;width:100%">
+        <div>
+            <div data-bind="style: {background: koIsShowDesigner() ? 'darkgray' : 'lightgray'},click:selectDesignerClick" style="padding:2px;display:table-cell;white-space:nowrap;cursor:pointer">Designer</div>
+            <div data-bind="style: {background: !koIsShowDesigner() ? 'darkgray' : 'lightgray'},click:selectEditorClick" style="padding:2px;display:table-cell;white-space:nowrap;cursor:pointer">Json Editor</div>
         </div>
+        <div data-bind="visible: koIsShowDesigner()">
+            <div style="overflow-y: scroll;height:400px;">
+                <div id="surveyjs" style="width:95%"></div>
+            </div>
+        </div>
+        <div id="surveyjsEditor" data-bind="visible: !koIsShowDesigner()" style="height:400px;width:100%"></div>
         <div data-bind="template: { name: 'pageeditor', data: pagesEditor }" style="width:20px"></div>
     </div>
 </div>

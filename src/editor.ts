@@ -8,21 +8,26 @@ module SurveyEditor {
         public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1', questions: [{ type: 'text', name: 'question1' }] }] }";
         private renderedElement: HTMLElement;
         private surveyjsSelectedObj: HTMLElement;
+        private surveyjs: HTMLElement;
         private surveyjsExample: HTMLElement;
         private jsonEditor: AceAjax.Editor;
         private isProcessingImmediately: boolean;
+        private isTextChangedFromDesigner: boolean;
         private surveyEditor: SurveyObjectEditor;
         private pageEditor: SurveyObjectEditor;
         private questionEditor: SurveyObjectEditor;
         private pagesEditor: SurveyPagesEditor;
         private textWorker: SurveyTextWorker;
+        private surveyValue: Survey.Survey;
 
         public questionTypes: string[];
         koSelectedPage: any;
         koSelectedQuestion: any;
         koSelectedQuestionType: any;
         koShowLiveSurvey: any;
+        koIsShowDesigner: any;
         showLiveSurveyClick: any;
+        selectDesignerClick: any; selectEditorClick: any;
 
         constructor(renderedElement: any = null) {
             this.koSelectedPage = ko.observable(null);
@@ -49,12 +54,16 @@ module SurveyEditor {
             });
             this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.moveToObject(page);});
 
+            this.koIsShowDesigner = ko.observable(true);
+            this.selectDesignerClick = function () { self.koIsShowDesigner(true); };
+            this.selectEditorClick = function () { self.koIsShowDesigner(false); };
+
             if (renderedElement) {
                 this.render(renderedElement);
             }
         }
         public get survey(): Survey.Survey {
-            return this.textWorker != null ? this.textWorker.survey : null;
+            return this.surveyValue;
         }
         public render(element: any = null) {
             var self = this;
@@ -85,32 +94,43 @@ module SurveyEditor {
             this.setTextValue(value, 1);
         }
         public setText(value: string, findText: string) {
+            this.isTextChangedFromDesigner = true;
             this.text = value;
+            this.isTextChangedFromDesigner = false;
             this.jsonEditor.find(findText);
         }
         public addPage() {
-            if (this.textWorker == null || !this.textWorker.isJsonCorrect) return;
-            var name = this.getNewName(this.textWorker.survey.pages, "page");
+            var name = this.getNewName(this.survey.pages, "page");
+            var page = this.surveyValue.addNewPage(name);
+            this.surveyValue.currentPage = page;
+            this.pagesEditor.survey = this.surveyValue;
+            this.selectSurveyObjects(page, null);
             this.textWorker.addPage(name);
             this.setText(this.textWorker.text, name);
         }
         public addQuestion() {
-            var page = this.koSelectedPage();
+            var page: Survey.Page = this.koSelectedPage();
             if (page == null) return;
-            var name = this.getNewName(this.textWorker.survey.getAllQuestions(), "question");
-            this.textWorker.addQuestion(page, Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name));
+            var name = this.getNewName(this.survey.getAllQuestions(), "question");
+            var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
+
+            this.textWorker.addQuestion(this.fromWYSIWYGtoText(page), question);
             this.setText(this.textWorker.text, name);
+
+            page.addQuestion(question);
+            this.surveyValue.render();
+            this.surveyValue.selectedQuestion = question;
         }
         private onPropertyValueChanged(property: Survey.JsonObjectProperty, object: any, newValue: any) {
-            if (!object || !object["pos"]) return;
             var isDefault = property.isDefaultValue(newValue);
             if (isDefault) {
                 delete object[property.name];
             } else {
                 object[property.name] = newValue;
             }
-            this.textWorker.changeProperty(object, property.name, newValue, isDefault);
-            this.setText(this.textWorker.text, object.name); //TODO
+            this.surveyValue.render();
+            this.textWorker.changeProperty(this.fromWYSIWYGtoText(object), property.name, newValue, isDefault);
+            this.setText(this.textWorker.text, object.name); 
         }
         private setTextValue(value: string, position: number) {
             if (this.jsonEditor == null) return;
@@ -123,9 +143,15 @@ module SurveyEditor {
             if (this.renderedElement == null) return;
             ko.cleanNode(this.renderedElement);
             ko.applyBindings(this, this.renderedElement);
-            this.jsonEditor = ace.edit("surveyjsEditor");
+            this.surveyjs = document.getElementById("surveyjs");
+            this.jsonEditor = ace.edit("surveyjsEditor");   
             this.surveyjsSelectedObj = document.getElementById("surveyjsSelectedObj");
             this.surveyjsExample = document.getElementById("surveyjsExample");
+
+            this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
+            this.surveyValue.mode = "designer";
+            this.surveyValue.render(this.surveyjs);
+            
             this.initJsonEditor();
             SurveyTextWorker.newLineChar = this.jsonEditor.session.doc.getNewLineCharacter();
         }
@@ -143,6 +169,15 @@ module SurveyEditor {
             this.jsonEditor.getSession().setUseWorker(true);
             this.setText(SurveyEditor.defaultNewSurveyText, "name: 'question1'");
         }
+        private initSurvey(json: any) {
+            this.surveyValue = new Survey.Survey(json);
+            this.surveyValue.mode = "designer";
+            this.surveyValue.render(this.surveyjs);
+            this.surveyEditor.selectedObject = this.surveyValue;
+            this.pagesEditor.survey = this.surveyValue;
+            var self = this;
+            this.surveyValue.onSelectedQuestionChanged.add((sender: Survey.Survey, options) => { self.selectSurveyObjects(sender.currentPage, sender.selectedQuestion); });
+        }
         private timeoutId: number = -1;
         private onJsonEditorChanged(): any {
             if (this.timeoutId > -1) {
@@ -159,7 +194,7 @@ module SurveyEditor {
             }
         }
         private onJsonEditorCursorChanged(): any {
-            if (this.textWorker == null || !this.textWorker.isJsonCorrect) return;
+            if (this.koIsShowDesigner() || this.textWorker == null || !this.textWorker.isJsonCorrect) return;
             var position = this.jsonEditor.getCursorPosition();
             var objs = this.textWorker.getCurrentSurveyObjects(position.row, position.column);
             var page = null;
@@ -168,12 +203,16 @@ module SurveyEditor {
                 if (objs[i].getType() == "page") page = objs[i]
                 else question = objs[i];
             }
+            this.survey.currentPage = this.fromTexttoWYSIWYG(page);
+            this.survey.selectedQuestion = this.fromTexttoWYSIWYG(question);
+        }
+        private selectSurveyObjects(page, question) {
             this.koSelectedPage(page);
             this.koSelectedQuestion(question);
             this.pageEditor.selectedObject = page;
             this.pagesEditor.setSelectedPage(page);
             if (page) {
-                this.pageEditor.title = "Page properties: page" + (this.textWorker.survey.pages.indexOf(page) + 1);
+                this.pageEditor.title = "Page properties: page" + (this.survey.pages.indexOf(page) + 1);
             }
             this.questionEditor.selectedObject = question;
             if (question) {
@@ -181,6 +220,8 @@ module SurveyEditor {
             }
         }
         private moveToObject(obj: any) {
+            this.surveyValue.currentPage = obj;
+            this.selectSurveyObjects(obj, null);
             var pos = obj["position"];
             if (!pos) return;
             this.jsonEditor.moveCursorTo(pos.start.row, pos.start.column);
@@ -189,9 +230,12 @@ module SurveyEditor {
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
             this.showLiveSurvey(this.koShowLiveSurvey());
-            this.surveyEditor.selectedObject = this.textWorker.survey;
-            this.pagesEditor.survey = this.textWorker.survey;
-            this.onJsonEditorCursorChanged();
+            if (!this.isTextChangedFromDesigner) {
+                if (this.textWorker.isJsonCorrect) {
+                    this.initSurvey(new SurveyJSON5().parse(this.textWorker.text));
+                }
+                this.onJsonEditorCursorChanged();
+            }
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         }
         private showLiveSurvey(showSurvey: boolean) {
@@ -223,6 +267,14 @@ module SurveyEditor {
                 num++;
             }
             return baseName + num.toString();
+        }
+        private fromWYSIWYGtoText(obj: any): any {
+            var finder = new SurveyObjectFinder(this.survey, this.textWorker.survey);
+            return finder.findObject(obj);
+        }
+        private fromTexttoWYSIWYG(obj: any): any {
+            var finder = new SurveyObjectFinder(this.textWorker.survey, this.survey);
+            return finder.findObject(obj);
         }
     }
 }
