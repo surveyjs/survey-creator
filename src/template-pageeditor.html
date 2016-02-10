@@ -1,10 +1,8 @@
 ﻿<script type="text/html" id="pageeditor">
-    <div data-bind="visible:koIsValid">
+    <ul class="pagination" data-bind="visible:koIsValid">
         <!-- ko foreach: koPages -->
-            <div data-bind="text: title, style: {background: koSelected() ? 'darkgray' : 'lightgray'},click:$parent.selectPageClick" style="padding:2px;display:table-cell;white-space:nowrap;cursor:pointer"></div>
+        <li data-bind="css: {active: koSelected()}"> <a href="#" data-bind="click:$parent.selectPageClick"><span data-bind="text: title"></span></a></li>
         <!-- /ko  -->
-        <div style="display:table-cell;padding:2px">
-            <input type="button" data-bind="click:addNewPageClick" value="Add New Page" />
-        </div>
-    </div>
+        <li><button type="button" class="btn btn-default" data-bind="click:addNewPageClick">Add New Page</button></li>
+    </ul>
 </script>

@@ -23,6 +23,8 @@
                 });
             }
             this.koValue.subscribe(function (newValue) {
+                if (self.object == null) return;
+                if (self.object[self.name] == newValue) return;
                 if (onPropertyChanged != null && !self.isValueUpdating) onPropertyChanged(self, newValue);
             });
             this.koText = ko.computed(() => { return self.getValueText(self.koValue()); });

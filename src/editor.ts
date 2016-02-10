@@ -26,8 +26,8 @@ module SurveyEditor {
         koSelectedQuestionType: any;
         koShowLiveSurvey: any;
         koIsShowDesigner: any;
-        showLiveSurveyClick: any;
         selectDesignerClick: any; selectEditorClick: any;
+        selectQuestionTypeClick: any; runSurveyClick: any;
 
         constructor(renderedElement: any = null) {
             this.koSelectedPage = ko.observable(null);
@@ -36,10 +36,8 @@ module SurveyEditor {
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
             this.koShowLiveSurvey = ko.observable(false);
             var self = this;
-            this.showLiveSurveyClick = function () { self.koShowLiveSurvey(!self.koShowLiveSurvey()); };
-            this.koShowLiveSurvey.subscribe((newValue: any) => { self.showLiveSurvey(newValue); });
             this.surveyEditor = new SurveyObjectEditor();
-            this.surveyEditor.title = "Survey Properties";
+            this.surveyEditor.title = "Survey";
             this.surveyEditor.koShowProperties(false);
             this.surveyEditor.onPropertyValueChanged.add((sender, options) => {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
@@ -56,7 +54,9 @@ module SurveyEditor {
 
             this.koIsShowDesigner = ko.observable(true);
             this.selectDesignerClick = function () { self.koIsShowDesigner(true); };
-            this.selectEditorClick = function () { self.koIsShowDesigner(false); };
+            this.selectEditorClick = function () { self.koIsShowDesigner(false); self.jsonEditor.focus(); };
+            this.selectQuestionTypeClick = function (value: string) { self.koSelectedQuestionType(value); };
+            this.runSurveyClick = function () { self.showLiveSurvey(); };
 
             if (renderedElement) {
                 this.render(renderedElement);
@@ -136,6 +136,7 @@ module SurveyEditor {
             if (this.jsonEditor == null) return;
             this.isProcessingImmediately = true;
             this.jsonEditor.setValue(value, position);
+            this.jsonEditor.renderer.updateFull(true);
             this.processJson(value);
             this.isProcessingImmediately = false;
         }
@@ -212,11 +213,11 @@ module SurveyEditor {
             this.pageEditor.selectedObject = page;
             this.pagesEditor.setSelectedPage(page);
             if (page) {
-                this.pageEditor.title = "Page properties: page" + (this.survey.pages.indexOf(page) + 1);
+                this.pageEditor.title = "page" + (this.survey.pages.indexOf(page) + 1);
             }
             this.questionEditor.selectedObject = question;
             if (question) {
-                this.questionEditor.title = "Question properties: " + question.name;
+                this.questionEditor.title = question.name;
             }
         }
         private moveToObject(obj: any) {
@@ -229,7 +230,6 @@ module SurveyEditor {
         }
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
-            this.showLiveSurvey(this.koShowLiveSurvey());
             if (!this.isTextChangedFromDesigner) {
                 if (this.textWorker.isJsonCorrect) {
                     this.initSurvey(new SurveyJSON5().parse(this.textWorker.text));
@@ -238,13 +238,12 @@ module SurveyEditor {
             }
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         }
-        private showLiveSurvey(showSurvey: boolean) {
-            if (showSurvey && this.surveyjsExample) {
-                if (this.textWorker.isJsonCorrect) {
-                    this.textWorker.survey.render(this.surveyjsExample);
-                } else {
-                    this.surveyjsExample.innerText = "Please correct the survey JSON.";
-                }
+        private showLiveSurvey() {
+            if (this.surveyjsExample && this.textWorker.isJsonCorrect) {
+                var survey = new Survey.Survey(new SurveyJSON5().parse(this.textWorker.text));
+                var self = this;
+                survey.onComplete.add((sender: Survey.Survey) => { self.surveyjsExample.innerHTML = "Survey Result: " + new SurveyJSON5().stringify(survey.data); });
+                survey.render(this.surveyjsExample);
             }
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {

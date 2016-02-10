@@ -1,20 +1,21 @@
 ﻿<script type="text/html" id="objecteditor">
-    <div  data-bind="visible:koHasObject" style="margin:10px;width:100%">
-        <div style="background-color:lightgray">
+    <div class="panel panel-default" data-bind="visible:koHasObject" style="width:100%">
+        <div class="panel-heading">
             <a href="#" data-bind="click: showProperties">
-                <span data-bind="text: koShowProperties() ? 'Hide': 'Show'"></span>
+                <span class="glyphicon" data-bind="css: {'glyphicon-chevron-up' : koShowProperties(), 'glyphicon-chevron-down' : !koShowProperties()}"></span>
+                <span data-bind="text: koTitle"></span>
             </a>
-            <span data-bind="text: koTitle"></span>
         </div>
         <div>
-            <table data-bind="visible:koShowProperties">
+            <table class="table" data-bind="visible:koShowProperties">
+
                 <tbody data-bind="foreach: koProperties">
                     <tr data-bind="click: $parent.changeActiveProperty($data), style: {background: $parent.koActiveProperty() == $data ? 'lightgray': ''}">
-                        <td data-bind="text: name"></td>
-                        <td>
+                        <td data-bind="text: name" width="50%"></td>
+                        <td width="50%">
                             <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data, attr: {title: koText}, style: {color: koIsDefault() ? 'gray' : ''}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
                             <!-- ko if: editorType == 'text' -->
-                            <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" />
+                            <input type="text" data-bind="value: koValue, visible: $parent.koActiveProperty() == $data" style="padding-right:5px;width:100%" />
                             <!-- /ko -->
                             <!-- ko if: editorType == 'boolean' -->
                             <input type="checkbox" data-bind="checked: koValue, visible: $parent.koActiveProperty() == $data" />
