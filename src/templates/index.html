@@ -1,11 +1,11 @@
 ﻿<div style="overflow:hidden;position:relative;display:table">
     <div id="surveyjsPanel" style="display:table-cell;vertical-align:top">
-        <div class="panel panel-default" style="width:300px;height:640px;overflow-y:auto;overflow-x:hidden">
-            <nav class="navbar navbar-default">
-                <form class="navbar-form navbar-left">
-                    <button type="button" data-bind="click: runSurveyClick" class="btn" data-toggle="modal" data-target="#myModal">Run Survey</button>
-                </form>
-            </nav>
+        <nav class="navbar navbar-default">
+            <form class="navbar-form navbar-left">
+                <button type="button" data-bind="click: runSurveyClick" class="btn" data-toggle="modal" data-target="#myModal">Run Survey</button>
+            </form>
+        </nav>
+        <div class="panel panel-default" style="width:300px;height:570px;overflow-y:auto;overflow-x:hidden">
             <div data-bind="template: { name: 'objecteditor', data: surveyEditor }"></div>
             <div data-bind="visible: koSelectedPage() != null">
                 <div data-bind="template: { name: 'objecteditor', data: pageEditor }"></div>

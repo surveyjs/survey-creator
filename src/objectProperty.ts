@@ -45,7 +45,7 @@
         }
         protected getValueText(value: any): string {
             if (value != null && Array.isArray(value)) {
-                return JSON.stringify(value);
+                return "[ Items: "+ value.length + " ]";
             }
             return value;
         }
