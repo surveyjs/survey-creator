@@ -76,7 +76,7 @@ module SurveyEditor {
             var name = property.name;
             if (name == "showQuestionNumbers" || name == "choicesOrder") return "dropdown";
             if (name == "choices" || name == "columns" || name == "rows" || name == "rateValues") return "itemvalues";
-            if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0) return "boolean";
+            if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0 || name == "sendResultOnPageNext") return "boolean";
             return "text"
         }
         protected getPropertyEditorChoices(property: Survey.JsonObjectProperty): Array<string> {

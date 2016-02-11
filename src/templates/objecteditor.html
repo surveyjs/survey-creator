@@ -1,0 +1,26 @@
+﻿<script type="text/html" id="objecteditor">
+    <div class="panel panel-default" data-bind="visible:koHasObject" style="width:100%">
+        <div class="panel-heading">
+            <a href="#" data-bind="click: showProperties">
+                <span class="glyphicon" data-bind="css: {'glyphicon-chevron-up' : koShowProperties(), 'glyphicon-chevron-down' : !koShowProperties()}"></span>
+                <span data-bind="text: koTitle"></span>
+            </a>
+        </div>
+        <div>
+            <table class="table" data-bind="visible:koShowProperties">
+                <tbody data-bind="foreach: koProperties">
+                    <tr data-bind="click: $parent.changeActiveProperty($data), style: {background: $parent.koActiveProperty() == $data ? 'lightgray': ''}">
+                        <td data-bind="text: name" width="50%"></td>
+                        <td width="50%">
+                            <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data, attr: {title: koText}, style: {color: koIsDefault() ? 'gray' : ''}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
+                            <div data-bind="visible: $parent.koActiveProperty() == $data">
+                                <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data } -->
+                                <!-- /ko -->
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>

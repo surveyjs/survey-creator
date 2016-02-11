@@ -1,6 +1,6 @@
 ﻿<div style="overflow:hidden;position:relative;display:table">
     <div id="surveyjsPanel" style="display:table-cell;vertical-align:top">
-        <div class="panel panel-default" style="width:300px;height:600px;overflow-y:auto;overflow-x:hidden">
+        <div class="panel panel-default" style="width:300px;height:640px;overflow-y:auto;overflow-x:hidden">
             <nav class="navbar navbar-default">
                 <form class="navbar-form navbar-left">
                     <button type="button" data-bind="click: runSurveyClick" class="btn" data-toggle="modal" data-target="#myModal">Run Survey</button>
@@ -37,7 +37,6 @@
         </div>
         <div id="surveyjsEditor" data-bind="visible: !koIsShowDesigner()" style="height:450px;width:100%"></div>
         <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
-    </div>
 </div>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

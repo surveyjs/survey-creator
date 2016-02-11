@@ -1,0 +1,28 @@
+﻿<script type="text/html" id="propertyeditor-itemvalues">
+    <div data-bind="with: itemValues" style="position:absolute; z-index:100; top:parentOffset.top;left:parentOffset.left - 100;background-color:lightgray">
+        <table>
+            <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>Text</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: koItems -->
+                <tr>
+                    <td><input type="text" data-bind="value:koValue" style="width:100px" /></td>
+                    <td><input type="text" data-bind="value:koText" style="width:100px" /></td>
+                    <td><input type="button" data-bind="click: $parent.onDeleteClick" value="Delete" /></td>
+                </tr>
+                <!-- /ko -->
+                <tr>
+                    <td><input type="text" data-bind="value:koNewValue" style="width:100px" /></td>
+                    <td><input type="text" data-bind="value:koNewText" style="width:100px" /></td>
+                    <td><input type="button" data-bind="click: onAddClick" value="Add" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="button" value="Apply" data-bind="click: onApplyClick" />
+    </div>
+</script>

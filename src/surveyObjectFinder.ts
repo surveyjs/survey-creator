@@ -7,6 +7,7 @@
             if (!srcObj) return null;
             var type = srcObj.getType();
             if (!type) return null;
+            if (type == 'survey') return this.destination;
             if (type == 'page') {
                 return this.findPage(<Survey.Page>srcObj);
             }

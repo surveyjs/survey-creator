@@ -123,11 +123,7 @@ module SurveyEditor {
         }
         private onPropertyValueChanged(property: Survey.JsonObjectProperty, object: any, newValue: any) {
             var isDefault = property.isDefaultValue(newValue);
-            if (isDefault) {
-                delete object[property.name];
-            } else {
-                object[property.name] = newValue;
-            }
+            object[property.name] = newValue;
             this.surveyValue.render();
             this.textWorker.changeProperty(this.fromWYSIWYGtoText(object), property.name, newValue, isDefault);
             this.setText(this.textWorker.text, object.name); 

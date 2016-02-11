@@ -27,7 +27,7 @@ var paths = {
     tsTests: "./tests/*.ts",
     tsTests_ko: "./tests/ko/*.ts",
     styles: "./src/*.scss",
-    templates_ko: "./src/*.html"
+    templates_ko: "./src/templates/*.html"
 };
 
 paths.jsFolder = paths.webroot + "js/";
