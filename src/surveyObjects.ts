@@ -36,6 +36,16 @@
                 }
             }
         }
+        public removeObject(obj: Survey.Base) {
+            var index = this.getItemIndex(obj);
+            if (index < 0) return;
+            var countToRemove = 1;
+            if (obj.getType() == 'page') {
+                var page: Survey.Page = <Survey.Page>obj;
+                countToRemove += page.questions.length;
+            }
+            this.koObjects.splice(index, countToRemove);
+        }
         private rebuild() {
             var objs = [];
             if (this.survey == null) {
@@ -65,6 +75,13 @@
             item.value = value;
             item.text = ko.observable(text);
             return item;
+        }
+        private getItemIndex(value: Survey.Base): number {
+            var objs = this.koObjects();
+            for (var i = 0; i < objs.length; i++) {
+                if (objs[i].value == value) return i;
+            }
+            return -1;
         }
     }
 }

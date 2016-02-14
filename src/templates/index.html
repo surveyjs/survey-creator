@@ -23,7 +23,10 @@
         <div class="col-xs-4 col-md-3">
             <div class="panel panel-default" style="width:100%">
                 <div class="panel-heading">
-                    <select style="width:100%" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
+                    <div class="row">
+                        <select style="width:80%"  data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
+                        <button type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
                 </div>
                 <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
             </div>

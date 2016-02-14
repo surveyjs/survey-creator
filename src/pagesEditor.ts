@@ -39,6 +39,15 @@ module SurveyEditor {
                 this.onAddNewPageCallback();
             }
         }
+        public removePage(page: Survey.Page) {
+            var pages = this.koPages();
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i].page == page) {
+                    this.koPages.splice(i, 1);
+                    return;
+                }
+            }
+        }
         protected updatePages() {
             if (this.surveyValue == null) {
                 this.koPages([]);

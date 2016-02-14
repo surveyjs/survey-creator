@@ -20,19 +20,18 @@ module SurveyEditor {
         private surveyValue: Survey.Survey;
 
         public questionTypes: string[];
-        koSelectedPage: any;
-        koSelectedQuestion: any;
         koSelectedQuestionType: any;
         koIsShowDesigner: any;
+        koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         selectDesignerClick: any; selectEditorClick: any;
         selectQuestionTypeClick: any; runSurveyClick: any;
+        deleteObjectClick: any;
 
         constructor(renderedElement: any = null) {
-            this.koSelectedPage = ko.observable(null);
-            this.koSelectedQuestion = ko.observable(null);
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
+            this.koCanDeleteObject = ko.observable(false);
 
             var self = this;
 
@@ -50,10 +49,11 @@ module SurveyEditor {
             this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); });
 
             this.koIsShowDesigner = ko.observable(true);
-            this.selectDesignerClick = function () { self.koIsShowDesigner(true); };
-            this.selectEditorClick = function () { self.koIsShowDesigner(false); self.showJsonEditor(); };
+            this.selectDesignerClick = function () { self.showDesigner(); };
+            this.selectEditorClick = function () { self.showJsonEditor(); };
             this.selectQuestionTypeClick = function (value: string) { self.koSelectedQuestionType(value); };
             this.runSurveyClick = function () { self.showLiveSurvey(); };
+            this.deleteObjectClick = function () { self.deleteCurrentObject(); };
 
             if (renderedElement) {
                 this.render(renderedElement);
@@ -101,6 +101,9 @@ module SurveyEditor {
             var page = this.surveyValue.addNewPage(name);
             this.pagesEditor.survey = this.surveyValue;
             this.surveyObjects.addPage(page);
+            if (this.surveyjs != null) {
+                this.surveyjs.focus();
+            }
 
             //this.textWorker.addPage(name);
             //this.setText(this.textWorker.text, name);
@@ -125,20 +128,33 @@ module SurveyEditor {
             //this.textWorker.changeProperty(this.fromWYSIWYGtoText(object), property.name, newValue, isDefault);
             //this.setText(this.textWorker.text, object.name); 
         }
+        private showDesigner() {
+            if (!this.textWorker.isJsonCorrect) {
+                alert("Please correct JSON!");
+                return;
+            }
+            this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
+            this.koIsShowDesigner(true); 
+        }
         private showJsonEditor() {
             var json = new Survey.JsonObject().toJsonObject(this.survey);
             this.jsonEditor.setValue(new SurveyJSON5().stringify(json));
             this.jsonEditor.focus();
+            this.koIsShowDesigner(false); 
         }
         private selectedObjectChanged(obj: Survey.Base) {
+            var canDeleteObject = false;
             this.selectedObjectEditor.selectedObject = obj;
             if (obj != null && obj.getType() == "page") {
                 this.survey.currentPage = <Survey.Page>obj;
+                canDeleteObject = this.survey.pages.length > 1;
             }
             this.survey.selectedQuestion = obj != null && obj["koValue"] ? <Survey.Question>obj : null;
+            canDeleteObject = canDeleteObject || this.survey.selectedQuestion != null;
             if (this.survey.selectedQuestion != null) {
                 this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedQuestion);
             }
+            this.koCanDeleteObject(canDeleteObject);
         }
         private setTextValue(value: string, position: number) {
             if (this.jsonEditor == null) return;
@@ -171,11 +187,12 @@ module SurveyEditor {
             this.jsonEditor.getSession().on("change", function () {
                 self.onJsonEditorChanged();
             });
+            /*
             this.jsonEditor.selection.on("changeCursor", function () {
                 self.onJsonEditorCursorChanged();
             });
+            */
             this.jsonEditor.getSession().setUseWorker(true);
-            this.setText(SurveyEditor.defaultNewSurveyText, "name: 'question1'");
         }
         private initSurvey(json: any) {
             this.surveyValue = new Survey.Survey(json);
@@ -219,25 +236,38 @@ module SurveyEditor {
         }
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
-            if (!this.isTextChangedFromDesigner) {
-                if (this.textWorker.isJsonCorrect) {
-                    this.initSurvey(new SurveyJSON5().parse(this.textWorker.text));
-                }
-                this.onJsonEditorCursorChanged();
-            }
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
+        }
+        private deleteCurrentObject() {
+            var obj = this.koSelectedObject().value;
+            this.surveyObjects.removeObject(obj);
+            if (obj.getType() == "page") {
+                this.survey.removePage(obj);
+                this.pagesEditor.removePage(obj);
+            } else {
+                this.survey.currentPage.removeQuestion(obj);
+                this.survey.selectedQuestion = null;
+                this.surveyObjects.selectObject(this.survey.currentPage);
+            }
+            this.survey.render();
         }
         private showLiveSurvey() {
             if (!this.surveyjsExample) return;
             var json = null;
             if (this.koIsShowDesigner()) {
                 json = new Survey.JsonObject().toJsonObject(this.survey);
+            } else {
+                if (this.textWorker.isJsonCorrect) {
+                    json = new Survey.JsonObject().toJsonObject(this.textWorker.survey);
+                }
             }
             if (json != null) {
                 var survey = new Survey.Survey(json);
                 var self = this;
                 survey.onComplete.add((sender: Survey.Survey) => { self.surveyjsExample.innerHTML = "Survey Result: " + new SurveyJSON5().stringify(survey.data); });
                 survey.render(this.surveyjsExample);
+            } else {
+                this.surveyjsExample.innerHTML = "Please correct JSON!";
             }
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
