@@ -104,18 +104,12 @@ module SurveyEditor {
             if (this.surveyjs != null) {
                 this.surveyjs.focus();
             }
-
-            //this.textWorker.addPage(name);
-            //this.setText(this.textWorker.text, name);
         }
         public addQuestion() {
             var page = this.survey.currentPage;
             if (page == null) return;
             var name = this.getNewName(this.survey.getAllQuestions(), "question");
             var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
-
-            //this.textWorker.addQuestion(this.fromWYSIWYGtoText(page), question);
-            //this.setText(this.textWorker.text, name);
 
             page.addQuestion(question);
             this.surveyObjects.addQuestion(question);
@@ -125,8 +119,6 @@ module SurveyEditor {
             var isDefault = property.isDefaultValue(newValue);
             object[property.name] = newValue;
             this.surveyValue.render();
-            //this.textWorker.changeProperty(this.fromWYSIWYGtoText(object), property.name, newValue, isDefault);
-            //this.setText(this.textWorker.text, object.name); 
         }
         private showDesigner() {
             if (!this.textWorker.isJsonCorrect) {
@@ -138,7 +130,7 @@ module SurveyEditor {
         }
         private showJsonEditor() {
             var json = new Survey.JsonObject().toJsonObject(this.survey);
-            this.jsonEditor.setValue(new SurveyJSON5().stringify(json));
+            this.jsonEditor.setValue(new SurveyJSON5().stringify(json, null, 1));
             this.jsonEditor.focus();
             this.koIsShowDesigner(false); 
         }
@@ -187,11 +179,6 @@ module SurveyEditor {
             this.jsonEditor.getSession().on("change", function () {
                 self.onJsonEditorChanged();
             });
-            /*
-            this.jsonEditor.selection.on("changeCursor", function () {
-                self.onJsonEditorCursorChanged();
-            });
-            */
             this.jsonEditor.getSession().setUseWorker(true);
         }
         private initSurvey(json: any) {
@@ -219,20 +206,6 @@ module SurveyEditor {
                     self.processJson(self.text);
                 }, SurveyEditor.updateTextTimeout);
             }
-        }
-        private onJsonEditorCursorChanged(): any {
-            return;
-            if (this.koIsShowDesigner() || this.textWorker == null || !this.textWorker.isJsonCorrect) return;
-            var position = this.jsonEditor.getCursorPosition();
-            var objs = this.textWorker.getCurrentSurveyObjects(position.row, position.column);
-            var page = null;
-            var question = null;
-            for (var i = 0; i < objs.length; i++) {
-                if (objs[i].getType() == "page") page = objs[i]
-                else question = objs[i];
-            }
-            this.survey.currentPage = this.fromTexttoWYSIWYG(page);
-            this.survey.selectedQuestion = this.fromTexttoWYSIWYG(question);
         }
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
@@ -290,14 +263,6 @@ module SurveyEditor {
                 num++;
             }
             return baseName + num.toString();
-        }
-        private fromWYSIWYGtoText(obj: any): any {
-            var finder = new SurveyObjectFinder(this.survey, this.textWorker.survey);
-            return finder.findObject(obj);
-        }
-        private fromTexttoWYSIWYG(obj: any): any {
-            var finder = new SurveyObjectFinder(this.textWorker.survey, this.survey);
-            return finder.findObject(obj);
         }
     }
 }
