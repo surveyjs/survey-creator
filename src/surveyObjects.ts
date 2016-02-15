@@ -46,6 +46,11 @@
             }
             this.koObjects.splice(index, countToRemove);
         }
+        public nameChanged(obj: Survey.Base) {
+            var index = this.getItemIndex(obj);
+            if (index < 0) return;
+            this.koObjects()[index].text(this.getText(obj));
+        }
         private rebuild() {
             var objs = [];
             if (this.survey == null) {
@@ -65,10 +70,10 @@
             this.koSelected(this.survey);
         }
         private createPage(page: Survey.Page, pageIndex: number) {
-            return this.createItem(page, SurveyObjects.intend + "Page " + (pageIndex + 1));
+            return this.createItem(page, this.getText(page));
         }
         private createQuestion(question: Survey.Question) {
-            return this.createItem(question, SurveyObjects.intend + SurveyObjects.intend + question.name);
+            return this.createItem(question, this.getText(question));
         }
         private createItem(value: Survey.Base, text: string) {
             var item = new SurveyObjectItem();
@@ -82,6 +87,13 @@
                 if (objs[i].value == value) return i;
             }
             return -1;
+        }
+        private getText(obj: Survey.Base): string {
+            var intend = SurveyObjects.intend;
+            if (obj.getType() != "page") {
+                intend += SurveyObjects.intend;
+            }
+            return intend + obj["name"];
         }
     }
 }

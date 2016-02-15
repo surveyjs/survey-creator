@@ -40,13 +40,23 @@ module SurveyEditor {
             }
         }
         public removePage(page: Survey.Page) {
+            var index = this.getIndexByPage(page);
+            if (index > -1) {
+                this.koPages.splice(index, 1);
+            }
+        }
+        public changeName(page: Survey.Page) {
+            var index = this.getIndexByPage(page);
+            if (index > -1) {
+                this.koPages()[index].title(page.name);
+            }
+        }
+        protected getIndexByPage(page: Survey.Page): number {
             var pages = this.koPages();
             for (var i = 0; i < pages.length; i++) {
-                if (pages[i].page == page) {
-                    this.koPages.splice(i, 1);
-                    return;
-                }
+                if (pages[i].page == page) return i;
             }
+            return -1;
         }
         protected updatePages() {
             if (this.surveyValue == null) {
@@ -55,8 +65,9 @@ module SurveyEditor {
             }
             var pages = [];
             for (var i = 0; i < this.surveyValue.pages.length; i++) {
+                var page = this.surveyValue.pages[i];
                 pages.push({
-                    title: 'Page ' + (i + 1), page: this.surveyValue.pages[i], koSelected: ko.observable(false)
+                    title: ko.observable(page.name), page: page, koSelected: ko.observable(false)
                 });
             }
             this.koPages(pages);

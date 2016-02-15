@@ -5,7 +5,7 @@
 module SurveyEditor {
     export class SurveyEditor {
         public static updateTextTimeout: number = 1000;
-        public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1', questions: [{ type: 'text', name: 'question1' }] }] }";
+        public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
         private renderedElement: HTMLElement;
         private surveyjs: HTMLElement;
         private surveyjsExample: HTMLElement;
@@ -115,9 +115,15 @@ module SurveyEditor {
             this.surveyObjects.addQuestion(question);
             this.surveyValue.render();
         }
-        private onPropertyValueChanged(property: Survey.JsonObjectProperty, object: any, newValue: any) {
+        private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
             var isDefault = property.isDefaultValue(newValue);
-            object[property.name] = newValue;
+            obj[property.name] = newValue;
+            if (property.name == "name") {
+                this.surveyObjects.nameChanged(obj);
+                if (obj.getType() == "page") {
+                    this.pagesEditor.changeName(<Survey.Page>obj);
+                }
+            }
             this.surveyValue.render();
         }
         private showDesigner() {
