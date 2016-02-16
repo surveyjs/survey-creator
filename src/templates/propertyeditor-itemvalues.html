@@ -1,6 +1,6 @@
 ﻿<script type="text/html" id="propertyeditor-itemvalues">
-    <div data-bind="with: itemValues" style="position:absolute; z-index:100; top:parentOffset.top;left:parentOffset.left - 100;background-color:lightgray">
-        <table>
+    <div class="panel" data-bind="with: itemValues" style="position:absolute; z-index:100; top:parentOffset.top;left:parentOffset.left - 100">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Value</th>
@@ -23,6 +23,8 @@
                 </tr>
             </tbody>
         </table>
-        <input type="button" value="Apply" data-bind="click: onApplyClick" />
+        <div class="panel-footer">
+            <input type="button" value="Apply" data-bind="click: onApplyClick" />
+        </div>
     </div>
 </script>

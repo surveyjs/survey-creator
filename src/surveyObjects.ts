@@ -22,9 +22,16 @@
             this.koObjects.push(item);
             this.koSelected(item);
         }
-        public addQuestion(question: Survey.Question) {
+        public addQuestion(page: Survey.Page, question: Survey.Question) {
+            var index = this.getItemIndex(page);
+            if (index < 0) return;
+            index += page.questions.length;
             var item = this.createQuestion(question);
-            this.koObjects.push(item);
+            if (index > this.koObjects().length) {
+                this.koObjects.push(item);
+            } else {
+                this.koObjects.splice(index, 0, item);
+            }
             this.koSelected(item);
         }
         public selectObject(obj: Survey.Base) {

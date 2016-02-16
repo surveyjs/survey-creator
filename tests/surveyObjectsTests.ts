@@ -39,9 +39,20 @@ module SurveyObjectEditorTests.Tests {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
         objects.survey = survey;
-        var question = survey.pages[survey.pages.length - 1].addNewQuestion("text", "newQuestion");
-        objects.addQuestion(question);
+        var page = survey.pages[survey.pages.length - 1];
+        var question = page.addNewQuestion("text", "newQuestion");
+        objects.addQuestion(page, question);
         assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, question, "new object is added");
+        assert.equal(objects.koSelected().value, question, "new question is selected");
+    });
+    QUnit.test("addQuestion to the first page", function (assert) {
+        var survey = createSurvey();
+        var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
+        objects.survey = survey;
+        var page = survey.pages[0];
+        var question = page.addNewQuestion("text", "newQuestion");
+        objects.addQuestion(page, question);
+        assert.equal(objects.koObjects()[1 + page.questions.length].value, question, "new object is added");
         assert.equal(objects.koSelected().value, question, "new question is selected");
     });
     QUnit.test("removeObject method - remove Question", function (assert) {

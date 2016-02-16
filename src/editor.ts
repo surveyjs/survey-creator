@@ -15,6 +15,7 @@ module SurveyEditor {
         private isTextChangedFromDesigner: boolean;
         private selectedObjectEditor: SurveyObjectEditor;
         private pagesEditor: SurveyPagesEditor;
+        private surveyEmbeding: SurveyEmbedingWindow
         private surveyObjects: SurveyObjects;
         private textWorker: SurveyTextWorker;
         private surveyValue: Survey.Survey;
@@ -25,8 +26,8 @@ module SurveyEditor {
         koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         selectDesignerClick: any; selectEditorClick: any;
-        selectQuestionTypeClick: any; runSurveyClick: any;
-        deleteObjectClick: any;
+        selectQuestionTypeClick: any; deleteObjectClick: any;
+        runSurveyClick: any; embedingSurveyClick: any;
 
         constructor(renderedElement: any = null) {
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
@@ -47,12 +48,14 @@ module SurveyEditor {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });
             this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); });
+            this.surveyEmbeding = new SurveyEmbedingWindow();
 
             this.koIsShowDesigner = ko.observable(true);
             this.selectDesignerClick = function () { self.showDesigner(); };
             this.selectEditorClick = function () { self.showJsonEditor(); };
             this.selectQuestionTypeClick = function (value: string) { self.koSelectedQuestionType(value); };
             this.runSurveyClick = function () { self.showLiveSurvey(); };
+            this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
 
             if (renderedElement) {
@@ -112,7 +115,7 @@ module SurveyEditor {
             var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
 
             page.addQuestion(question);
-            this.surveyObjects.addQuestion(question);
+            this.surveyObjects.addQuestion(page, question);
             this.surveyValue.render();
         }
         private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -167,13 +170,13 @@ module SurveyEditor {
             ko.cleanNode(this.renderedElement);
             ko.applyBindings(this, this.renderedElement);
             this.surveyjs = document.getElementById("surveyjs");
-            this.jsonEditor = ace.edit("surveyjsEditor");   
+            this.jsonEditor = ace.edit("surveyjsEditor");
             this.surveyjsExample = document.getElementById("surveyjsExample");
 
             this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
             this.surveyValue.mode = "designer";
             this.surveyValue.render(this.surveyjs);
-            
+
             this.initJsonEditor();
             SurveyTextWorker.newLineChar = this.jsonEditor.session.doc.getNewLineCharacter();
         }
@@ -232,14 +235,7 @@ module SurveyEditor {
         }
         private showLiveSurvey() {
             if (!this.surveyjsExample) return;
-            var json = null;
-            if (this.koIsShowDesigner()) {
-                json = new Survey.JsonObject().toJsonObject(this.survey);
-            } else {
-                if (this.textWorker.isJsonCorrect) {
-                    json = new Survey.JsonObject().toJsonObject(this.textWorker.survey);
-                }
-            }
+            var json = this.getSurveyJSON();
             if (json != null) {
                 var survey = new Survey.Survey(json);
                 var self = this;
@@ -248,6 +244,16 @@ module SurveyEditor {
             } else {
                 this.surveyjsExample.innerHTML = "Please correct JSON!";
             }
+        }
+        private showSurveyEmbeding() {
+            var json = this.getSurveyJSON();
+            this.surveyEmbeding.json = json;
+            this.surveyEmbeding.show();
+        }
+        private getSurveyJSON(): any {
+            if (this.koIsShowDesigner())  return new Survey.JsonObject().toJsonObject(this.survey);
+            if (this.textWorker.isJsonCorrect) return new Survey.JsonObject().toJsonObject(this.textWorker.survey);
+            return null;
         }
         private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
             var annotations = new Array<AceAjax.Annotation>();

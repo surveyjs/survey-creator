@@ -11,7 +11,8 @@
                 </li>
             </ul>
             <form class="navbar-form navbar-left">
-                <button type="button" class="btn btn-default" data-bind="click: runSurveyClick" data-toggle="modal" data-target="#myModal">Run Survey</button>
+                <button type="button" class="btn btn-default" data-bind="click: runSurveyClick" data-toggle="modal" data-target="#surveyExampleModal">Run Survey</button>
+                <button type="button" class="btn btn-default" data-bind="click: embedingSurveyClick" data-toggle="modal" data-target="#surveyEmbedingModal">Embeding Survey to Your Page</button>
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -52,11 +53,8 @@
     </div>
 </div>
 
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="surveyExampleModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -64,6 +62,20 @@
             </div>
             <div class="modal-body">
                 <div id="surveyjsExample"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="surveyEmbedingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Embeding survey</h4>
+            </div>
+            <div class="modal-body">
+                <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
             </div>
         </div>
     </div>
