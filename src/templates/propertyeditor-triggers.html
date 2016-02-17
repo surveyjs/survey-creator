@@ -1,3 +1,51 @@
 ﻿<script type="text/html" id="propertyeditor-triggers">
-    <input type="text" data-bind="value: koValue" style="width:100%" />
+    <div class="panel" data-bind="with: arrayEditor" style="position:absolute; width:500px; z-index:100; top:parentOffset.top;left:parentOffset.left - 100">
+        <div class="panel-heading">
+            <div class="row">
+                <select style="width:65%" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+                <button type="button" data-bind="enable: koQuestions().length > 0, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+        <div data-bind="visible: koSelected() == null">
+            <div data-bind="visible: koQuestions().length == 0">
+                There is no any question in the survey.
+            </div>
+            <div data-bind="visible: koQuestions().length > 0">
+                Please create a trigger
+            </div>
+        </div>
+        <div data-bind="visible: koSelected() != null">
+            <div data-bind="with: koSelected">
+                <span>On </span><select data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span> 
+                <select data-bind="value:koOperator">
+                    <option value="empty">Is Empty</option>
+                    <option value="notempty">Is Not Empty</option>
+                    <option value="equal">Equals</option>
+                    <option value="notequal">Not Equals</option>
+                    <option value="greater">Greater</option>
+                    <option value="less">Less</option>
+                    <option value="greaterorequal">Greater or Equals</option>
+                    <option value="lessorequal">Less or Equals</option>
+                </select>
+                <input type="text" data-bind="value:koValue" />
+                <div class="panel">
+                    <div class="panel-heading">Make visible</div>
+                    <div class="row">
+                        <div class="panel col-xs-2 col-md-2">
+                            <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
+                            <!-- /ko -->
+                        </div>
+                        <div class="panel col-xs-2 col-md-2">
+                            <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="button" value="Apply" data-bind="click: onApplyClick" style="width:100px" />
+        </div>
+    </div>
 </script>

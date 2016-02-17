@@ -25,8 +25,8 @@
     Survey.JsonObject.metaData.addClass("fast", [], function () { return new FastCar(); }, "car");
     Survey.JsonObject.metaData.addClass("big", [], null, "car");
     Survey.JsonObject.metaData.addClass("car", ["name"]);
-    Survey.JsonObject.metaData.addClass("truck", ["maxWeight"], function () { return new Truck(); }, "big");
-    Survey.JsonObject.metaData.addClass("sport", ["!maxSpeed"], function () { return new SportCar(); }, "fast");
-    Survey.JsonObject.metaData.addClass("truckDefault", ["isNew"], function () { return new TruckDefaultValue(); }, "truck");
+    Survey.JsonObject.metaData.addClass("truck", ["maxWeight:number"], function () { return new Truck(); }, "big");
+    Survey.JsonObject.metaData.addClass("sport", ["!maxSpeed:number"], function () { return new SportCar(); }, "fast");
+    Survey.JsonObject.metaData.addClass("truckDefault", ["isNew:boolean"], function () { return new TruckDefaultValue(); }, "truck");
 
 }

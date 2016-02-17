@@ -1,0 +1,11 @@
+﻿<script type="text/html" id="propertyeditor-triggersitems">
+    <div class="panel">
+        <div class="panel-heading">
+            <span data-bind="text:title"></span>
+            <select data-bind="options:objects, value: selected"></select>
+            <button type="button" data-bind="enable: selected() != null, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+        <select multiple="multiple" data-bind="options:choosen, value: choosenSelected"></select>
+        <button type="button" data-bind="enable: choosenSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+</script>

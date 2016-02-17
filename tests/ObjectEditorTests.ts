@@ -11,7 +11,7 @@ module SurveyObjectEditorTests.Tests {
         editor.selectedObject = new BigCar();
         assert.equal(editor.koProperties().length, 1, "One property object");
         assert.equal(editor.koProperties()[0].name, "name", "name property");
-        assert.equal(editor.koProperties()[0].editorType, "text", "It is a text editor");
+        assert.equal(editor.koProperties()[0].editorType, "string", "It is a text editor");
 
         editor.selectedObject = new Truck();
         assert.equal(editor.koProperties().length, 2, "Two property object");
@@ -57,7 +57,7 @@ module SurveyObjectEditorTests.Tests {
     });
     QUnit.test("SurveyPropertyItemValue", function (assert) {
         var choices = [{ value: 1, text: "item1" }, { value: 2, text: "item2" }, { value: 3, text: "item3" }];
-        var itemValueProperty = new SurveyEditor.SurveyPropertyItemValue((newValue: Array<Survey.ItemValue>) => {
+        var itemValueProperty = new SurveyEditor.SurveyPropertyItemValues((newValue: Array<Survey.ItemValue>) => {
             choices = newValue;
         });
         itemValueProperty.value = choices;
