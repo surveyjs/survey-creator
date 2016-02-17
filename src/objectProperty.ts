@@ -10,14 +10,20 @@
         public koText: any;
         public itemValues: SurveyPropertyItemValue;
         public koIsDefault: any;
-        public choices: Array<string>;
+        public editorType: string;
+        public choices: Array<any>;
 
-        constructor(public property: Survey.JsonObjectProperty, public editorType: string, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
+        constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
             this.name = this.property.name;
             this.koValue = ko.observable();
+            this.editorType = property.type;
+            this.choices = property.choices;
+            if (this.choices != null) {
+                this.editorType = "dropdown";
+            }
             var self = this;
             this.itemValues = null;
-            if (editorType == "itemvalues") {
+            if (this.editorType == "itemvalues") {
                 this.itemValues = new SurveyPropertyItemValue((newValue: Array<any>) => {
                     self.koValue(newValue);
                 });

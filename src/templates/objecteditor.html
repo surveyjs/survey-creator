@@ -1,7 +1,7 @@
 ﻿<script type="text/html" id="objecteditor">
     <table class="table" data-bind="visible:koShowProperties">
         <tbody data-bind="foreach: koProperties">
-            <tr data-bind="click: $parent.changeActiveProperty($data), style: {background: $parent.koActiveProperty() == $data ? 'lightgray': ''}">
+            <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
                 <td data-bind="text: name" width="50%"></td>
                 <td width="50%">
                     <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data, attr: {title: koText}, style: {color: koIsDefault() ? 'gray' : ''}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>

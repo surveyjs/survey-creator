@@ -7,32 +7,29 @@ var SurveyEditor;
         function SurveyEditor(renderedElement) {
             if (renderedElement === void 0) { renderedElement = null; }
             this.timeoutId = -1;
-            this.koSelectedPage = ko.observable(null);
-            this.koSelectedQuestion = ko.observable(null);
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
-            this.koShowLiveSurvey = ko.observable(false);
+            this.koCanDeleteObject = ko.observable(false);
             var self = this;
-            this.surveyEditor = new SurveyEditor_1.SurveyObjectEditor();
-            this.surveyEditor.title = "Survey";
-            this.surveyEditor.koShowProperties(false);
-            this.surveyEditor.onPropertyValueChanged.add(function (sender, options) {
+            this.koObjects = ko.observableArray();
+            this.koSelectedObject = ko.observable();
+            this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
+            this.surveyObjects = new SurveyEditor_1.SurveyObjects(this.koObjects, this.koSelectedObject);
+            this.selectedObjectEditor = new SurveyEditor_1.SurveyObjectEditor();
+            this.selectedObjectEditor.title = "Survey";
+            this.selectedObjectEditor.koShowProperties(true);
+            this.selectedObjectEditor.onPropertyValueChanged.add(function (sender, options) {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });
-            this.pageEditor = new SurveyEditor_1.SurveyObjectEditor();
-            this.pageEditor.onPropertyValueChanged.add(function (sender, options) {
-                self.onPropertyValueChanged(options.property, options.object, options.newValue);
-            });
-            this.questionEditor = new SurveyEditor_1.SurveyObjectEditor();
-            this.questionEditor.onPropertyValueChanged.add(function (sender, options) {
-                self.onPropertyValueChanged(options.property, options.object, options.newValue);
-            });
-            this.pagesEditor = new SurveyEditor_1.SurveyPagesEditor(function () { self.addPage(); }, function (page) { self.moveToObject(page); });
+            this.pagesEditor = new SurveyEditor_1.SurveyPagesEditor(function () { self.addPage(); }, function (page) { self.surveyObjects.selectObject(page); });
+            this.surveyEmbeding = new SurveyEditor_1.SurveyEmbedingWindow();
             this.koIsShowDesigner = ko.observable(true);
-            this.selectDesignerClick = function () { self.koIsShowDesigner(true); };
-            this.selectEditorClick = function () { self.koIsShowDesigner(false); self.jsonEditor.focus(); };
+            this.selectDesignerClick = function () { self.showDesigner(); };
+            this.selectEditorClick = function () { self.showJsonEditor(); };
             this.selectQuestionTypeClick = function (value) { self.koSelectedQuestionType(value); };
             this.runSurveyClick = function () { self.showLiveSurvey(); };
+            this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
+            this.deleteObjectClick = function () { self.deleteCurrentObject(); };
             if (renderedElement) {
                 this.render(renderedElement);
             }
@@ -87,30 +84,60 @@ var SurveyEditor;
         SurveyEditor.prototype.addPage = function () {
             var name = this.getNewName(this.survey.pages, "page");
             var page = this.surveyValue.addNewPage(name);
-            this.surveyValue.currentPage = page;
             this.pagesEditor.survey = this.surveyValue;
-            this.selectSurveyObjects(page, null);
-            this.textWorker.addPage(name);
-            this.setText(this.textWorker.text, name);
+            this.surveyObjects.addPage(page);
+            if (this.surveyjs != null) {
+                this.surveyjs.focus();
+            }
         };
         SurveyEditor.prototype.addQuestion = function () {
-            var page = this.koSelectedPage();
+            var page = this.survey.currentPage;
             if (page == null)
                 return;
             var name = this.getNewName(this.survey.getAllQuestions(), "question");
             var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
-            this.textWorker.addQuestion(this.fromWYSIWYGtoText(page), question);
-            this.setText(this.textWorker.text, name);
             page.addQuestion(question);
+            this.surveyObjects.addQuestion(page, question);
             this.surveyValue.render();
-            this.surveyValue.selectedQuestion = question;
         };
-        SurveyEditor.prototype.onPropertyValueChanged = function (property, object, newValue) {
+        SurveyEditor.prototype.onPropertyValueChanged = function (property, obj, newValue) {
             var isDefault = property.isDefaultValue(newValue);
-            object[property.name] = newValue;
+            obj[property.name] = newValue;
+            if (property.name == "name") {
+                this.surveyObjects.nameChanged(obj);
+                if (obj.getType() == "page") {
+                    this.pagesEditor.changeName(obj);
+                }
+            }
             this.surveyValue.render();
-            this.textWorker.changeProperty(this.fromWYSIWYGtoText(object), property.name, newValue, isDefault);
-            this.setText(this.textWorker.text, object.name);
+        };
+        SurveyEditor.prototype.showDesigner = function () {
+            if (!this.textWorker.isJsonCorrect) {
+                alert("Please correct JSON!");
+                return;
+            }
+            this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
+            this.koIsShowDesigner(true);
+        };
+        SurveyEditor.prototype.showJsonEditor = function () {
+            var json = new Survey.JsonObject().toJsonObject(this.survey);
+            this.jsonEditor.setValue(new SurveyEditor_1.SurveyJSON5().stringify(json, null, 1));
+            this.jsonEditor.focus();
+            this.koIsShowDesigner(false);
+        };
+        SurveyEditor.prototype.selectedObjectChanged = function (obj) {
+            var canDeleteObject = false;
+            this.selectedObjectEditor.selectedObject = obj;
+            if (obj != null && obj.getType() == "page") {
+                this.survey.currentPage = obj;
+                canDeleteObject = this.survey.pages.length > 1;
+            }
+            this.survey.selectedQuestion = obj != null && obj["koValue"] ? obj : null;
+            canDeleteObject = canDeleteObject || this.survey.selectedQuestion != null;
+            if (this.survey.selectedQuestion != null) {
+                this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedQuestion);
+            }
+            this.koCanDeleteObject(canDeleteObject);
         };
         SurveyEditor.prototype.setTextValue = function (value, position) {
             if (this.jsonEditor == null)
@@ -128,7 +155,6 @@ var SurveyEditor;
             ko.applyBindings(this, this.renderedElement);
             this.surveyjs = document.getElementById("surveyjs");
             this.jsonEditor = ace.edit("surveyjsEditor");
-            this.surveyjsSelectedObj = document.getElementById("surveyjsSelectedObj");
             this.surveyjsExample = document.getElementById("surveyjsExample");
             this.initSurvey(new SurveyEditor_1.SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
             this.surveyValue.mode = "designer";
@@ -144,20 +170,18 @@ var SurveyEditor;
             this.jsonEditor.getSession().on("change", function () {
                 self.onJsonEditorChanged();
             });
-            this.jsonEditor.selection.on("changeCursor", function () {
-                self.onJsonEditorCursorChanged();
-            });
             this.jsonEditor.getSession().setUseWorker(true);
-            this.setText(SurveyEditor.defaultNewSurveyText, "name: 'question1'");
         };
         SurveyEditor.prototype.initSurvey = function (json) {
             this.surveyValue = new Survey.Survey(json);
-            this.surveyValue.mode = "designer";
-            this.surveyValue.render(this.surveyjs);
-            this.surveyEditor.selectedObject = this.surveyValue;
-            this.pagesEditor.survey = this.surveyValue;
+            this.survey.mode = "designer";
+            this.survey.render(this.surveyjs);
+            this.surveyObjects.survey = this.survey;
+            this.pagesEditor.survey = this.survey;
+            this.pagesEditor.setSelectedPage(this.survey.currentPage);
             var self = this;
-            this.surveyValue.onSelectedQuestionChanged.add(function (sender, options) { self.selectSurveyObjects(sender.currentPage, sender.selectedQuestion); });
+            this.surveyValue.onSelectedQuestionChanged.add(function (sender, options) { self.surveyObjects.selectObject(sender.selectedQuestion); });
+            this.surveyValue.onCurrentPageChanged.add(function (sender, options) { self.pagesEditor.setSelectedPage(sender.currentPage); });
         };
         SurveyEditor.prototype.onJsonEditorChanged = function () {
             if (this.timeoutId > -1) {
@@ -174,61 +198,49 @@ var SurveyEditor;
                 }, SurveyEditor.updateTextTimeout);
             }
         };
-        SurveyEditor.prototype.onJsonEditorCursorChanged = function () {
-            if (this.koIsShowDesigner() || this.textWorker == null || !this.textWorker.isJsonCorrect)
-                return;
-            var position = this.jsonEditor.getCursorPosition();
-            var objs = this.textWorker.getCurrentSurveyObjects(position.row, position.column);
-            var page = null;
-            var question = null;
-            for (var i = 0; i < objs.length; i++) {
-                if (objs[i].getType() == "page")
-                    page = objs[i];
-                else
-                    question = objs[i];
-            }
-            this.survey.currentPage = this.fromTexttoWYSIWYG(page);
-            this.survey.selectedQuestion = this.fromTexttoWYSIWYG(question);
-        };
-        SurveyEditor.prototype.selectSurveyObjects = function (page, question) {
-            this.koSelectedPage(page);
-            this.koSelectedQuestion(question);
-            this.pageEditor.selectedObject = page;
-            this.pagesEditor.setSelectedPage(page);
-            if (page) {
-                this.pageEditor.title = "page" + (this.survey.pages.indexOf(page) + 1);
-            }
-            this.questionEditor.selectedObject = question;
-            if (question) {
-                this.questionEditor.title = question.name;
-            }
-        };
-        SurveyEditor.prototype.moveToObject = function (obj) {
-            this.surveyValue.currentPage = obj;
-            this.selectSurveyObjects(obj, null);
-            var pos = obj["position"];
-            if (!pos)
-                return;
-            this.jsonEditor.moveCursorTo(pos.start.row, pos.start.column);
-            this.jsonEditor.selection.clearSelection();
-        };
         SurveyEditor.prototype.processJson = function (text) {
             this.textWorker = new SurveyEditor_1.SurveyTextWorker(text);
-            if (!this.isTextChangedFromDesigner) {
-                if (this.textWorker.isJsonCorrect) {
-                    this.initSurvey(new SurveyEditor_1.SurveyJSON5().parse(this.textWorker.text));
-                }
-                this.onJsonEditorCursorChanged();
-            }
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         };
+        SurveyEditor.prototype.deleteCurrentObject = function () {
+            var obj = this.koSelectedObject().value;
+            this.surveyObjects.removeObject(obj);
+            if (obj.getType() == "page") {
+                this.survey.removePage(obj);
+                this.pagesEditor.removePage(obj);
+            }
+            else {
+                this.survey.currentPage.removeQuestion(obj);
+                this.survey.selectedQuestion = null;
+                this.surveyObjects.selectObject(this.survey.currentPage);
+            }
+            this.survey.render();
+        };
         SurveyEditor.prototype.showLiveSurvey = function () {
-            if (this.surveyjsExample && this.textWorker.isJsonCorrect) {
-                var survey = new Survey.Survey(new SurveyEditor_1.SurveyJSON5().parse(this.textWorker.text));
+            if (!this.surveyjsExample)
+                return;
+            var json = this.getSurveyJSON();
+            if (json != null) {
+                var survey = new Survey.Survey(json);
                 var self = this;
                 survey.onComplete.add(function (sender) { self.surveyjsExample.innerHTML = "Survey Result: " + new SurveyEditor_1.SurveyJSON5().stringify(survey.data); });
                 survey.render(this.surveyjsExample);
             }
+            else {
+                this.surveyjsExample.innerHTML = "Please correct JSON!";
+            }
+        };
+        SurveyEditor.prototype.showSurveyEmbeding = function () {
+            var json = this.getSurveyJSON();
+            this.surveyEmbeding.json = json;
+            this.surveyEmbeding.show();
+        };
+        SurveyEditor.prototype.getSurveyJSON = function () {
+            if (this.koIsShowDesigner())
+                return new Survey.JsonObject().toJsonObject(this.survey);
+            if (this.textWorker.isJsonCorrect)
+                return new Survey.JsonObject().toJsonObject(this.textWorker.survey);
+            return null;
         };
         SurveyEditor.prototype.createAnnotations = function (text, errors) {
             var annotations = new Array();
@@ -252,16 +264,8 @@ var SurveyEditor;
             }
             return baseName + num.toString();
         };
-        SurveyEditor.prototype.fromWYSIWYGtoText = function (obj) {
-            var finder = new SurveyEditor_1.SurveyObjectFinder(this.survey, this.textWorker.survey);
-            return finder.findObject(obj);
-        };
-        SurveyEditor.prototype.fromTexttoWYSIWYG = function (obj) {
-            var finder = new SurveyEditor_1.SurveyObjectFinder(this.textWorker.survey, this.survey);
-            return finder.findObject(obj);
-        };
         SurveyEditor.updateTextTimeout = 1000;
-        SurveyEditor.defaultNewSurveyText = "{ pages: [ { name: 'page1', questions: [{ type: 'text', name: 'question1' }] }] }";
+        SurveyEditor.defaultNewSurveyText = "{ pages: [ { name: 'page1'}] }";
         return SurveyEditor;
     })();
     SurveyEditor_1.SurveyEditor = SurveyEditor;

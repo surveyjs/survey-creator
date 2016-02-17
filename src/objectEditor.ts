@@ -62,29 +62,11 @@ module SurveyEditor {
             };
             for (var i = 0; i < properties.length; i++) {
                 if (!this.canShowProperty(properties[i])) continue;
-                var editorType = this.getPropertyEditorType(properties[i]);
-                var objectProperty = new SurveyObjectProperty(properties[i], editorType, propEvent);
-                if (editorType == "dropdown") {
-                    objectProperty.choices = this.getPropertyEditorChoices(properties[i]);
-                }
+                var objectProperty = new SurveyObjectProperty(properties[i], propEvent);
                 objectProperties.push(objectProperty);
             }
             this.koProperties(objectProperties);
             this.koActiveProperty(this.getPropertyEditor("name"));
-        }
-        protected getPropertyEditorType(property: Survey.JsonObjectProperty): string {
-            var name = property.name;
-            if (name == "showQuestionNumbers" || name == "choicesOrder" || name == "colCount") return "dropdown";
-            if (name == "choices" || name == "columns" || name == "rows" || name == "rateValues") return "itemvalues";
-            if (name == "visible" || name.indexOf("is") == 0 || name.indexOf("has") == 0 || name.indexOf("show") == 0 || name == "sendResultOnPageNext") return "boolean";
-            return "text"
-        }
-        protected getPropertyEditorChoices(property: Survey.JsonObjectProperty): Array<any> {
-            var name = property.name;
-            if (name == "showQuestionNumbers") return ["on", "onPage", "off"];
-            if (name == "choicesOrder") return ["none", "asc", "desc", "random"];
-            if (name == "colCount") return [1, 2, 3, 4];
-            return [];
         }
         protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
             var name = property.name;
