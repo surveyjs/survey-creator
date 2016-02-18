@@ -42,8 +42,6 @@ module SurveyEditor {
             this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
 
             this.selectedObjectEditor = new SurveyObjectEditor();
-            this.selectedObjectEditor.title = "Survey";
-            this.selectedObjectEditor.koShowProperties(true);
             this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });

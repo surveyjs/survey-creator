@@ -1,5 +1,6 @@
 ﻿/// <reference path="objectPropertyItemValues.ts" />
 /// <reference path="objectPropertyTriggers.ts" />
+/// <reference path="objectPropertyValidators.ts" />
 
 module SurveyEditor {
 
@@ -32,6 +33,9 @@ module SurveyEditor {
             }
             if (this.editorType == "triggers") {
                 this.arrayEditor = new SurveyPropertyTriggers((newValue: any) => { onItemChanged(newValue); });
+            }
+            if (this.editorType == "validators") {
+                this.arrayEditor = new SurveyPropertyValidators((newValue: any) => { onItemChanged(newValue); });
             }
             this.koValue.subscribe(function (newValue) {
                 if (self.object == null) return;

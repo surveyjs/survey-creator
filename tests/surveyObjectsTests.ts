@@ -130,6 +130,38 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(result.length, 2, "Two triggers are saved");
 
     });
+    QUnit.test("Validators property editor", function (assert) {
+        var survey = createSurvey();
+        var validator = new Survey.NumericValidator(10, 100);
+        validator.text = "validatortext";
+        var question = <Survey.Question>survey.getQuestionByName("question1");
+        question.validators.push(validator);
+        var result = [];
+        var propEditor = new SurveyEditor.SurveyPropertyValidators((newValue: any) => { result = newValue });
+        propEditor.object = question;
+        propEditor.value = question.validators;
+        assert.equal(propEditor.koItems().length, 1, "There are one validator initially");
+        var koValidator = <SurveyEditor.SurveyPropertyValidatorItem>propEditor.koSelected();
+        assert.equal(koValidator.validator.text, "validatortext", "Validator Text is set correctly");
+        assert.equal((<Survey.NumericValidator>koValidator.validator).minValue, 10, "Validator 'minValue' is set correctly");
+        assert.equal((<Survey.NumericValidator>koValidator.validator).maxValue, 100, "Validator 'maxValue' is set correctly");
+
+        propEditor.onAddClick("textvalidator");
+        assert.equal(propEditor.koItems().length, 2, "There are two validators now");
+        var koValidator = <SurveyEditor.SurveyPropertyValidatorItem>propEditor.koSelected();
+        assert.equal(koValidator.text, "textvalidator", "Created with corrected value");
+        (<Survey.TextValidator>koValidator.validator).minLength = 20;
+        koValidator.validator.text = "text is short.";
+
+        propEditor.onAddClick("textvalidator");
+        assert.equal(propEditor.koItems().length, 3, "There are three validators now");
+        propEditor.onDeleteClick();
+        assert.equal(propEditor.koItems().length, 2, "There are two validators again");
+
+        propEditor.onApplyClick();
+        assert.equal(result.length, 2, "Two validators are saved");
+        assert.equal(result[1].minLength, 20, "The properties are saved too");
+    });
     function createSurvey(): Survey.Survey {
         return new Survey.Survey({
             pages: [{

@@ -78,8 +78,8 @@
             this.koName = ko.observable(trigger.name);
             this.koOperator = ko.observable(trigger.operator);
             this.koValue = ko.observable(trigger.value);
-            this.pages = new SurveyPropertyTriggerObjects("Make visible pages:", koPages(), trigger.pages);
-            this.questions = new SurveyPropertyTriggerObjects("Make visible questions:", koQuestions(), trigger.questions);
+            this.pages = new SurveyPropertyTriggerObjects("Make pages visible:", koPages(), trigger.pages);
+            this.questions = new SurveyPropertyTriggerObjects("Make questions visible:", koQuestions(), trigger.questions);
             var self = this;
             this.koRequireValue = ko.computed(() => { return self.koOperator() != "empty" && self.koOperator() != "notempty"; });
             this.koIsValid = ko.computed(() => { if (self.koName() && (!self.koRequireValue() || self.koValue())) return true; return false; });
