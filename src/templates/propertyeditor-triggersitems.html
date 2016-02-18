@@ -1,11 +1,13 @@
 ﻿<script type="text/html" id="propertyeditor-triggersitems">
     <div class="panel">
         <div class="panel-heading">
-            <span data-bind="text:title"></span>
-            <select data-bind="options:objects, value: selected"></select>
-            <button type="button" data-bind="enable: selected() != null, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            <span data-bind="text: title"></span>
         </div>
-        <select multiple="multiple" data-bind="options:choosen, value: choosenSelected"></select>
-        <button type="button" data-bind="enable: choosenSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        <select multiple="multiple" data-bind="options:koChoosen, value: koChoosenSelected" style="width:200px;"></select>
+        <button type="button" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick" style="width:40px; vertical-align:top" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        <div>
+            <select data-bind="options:koObjects, value: koSelected" style="width:200px;"></select>
+            <button type="button" data-bind="enable: koSelected() != null, click: onAddClick" style="width:40px" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
     </div>
 </script>

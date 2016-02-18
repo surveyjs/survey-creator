@@ -19,7 +19,7 @@
             this.value_ = [];
             this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
             this.onAddClick = function () { self.addItem(); }
-            this.onApplyClick = function () { };
+            this.onApplyClick = function () { self.apply(); };
         }
         public get value(): any { return this.value_; }
         public set value(value: any) {
@@ -30,8 +30,21 @@
                 this.koPages(this.getNames((<Survey.Survey>this.object).pages));
                 this.koQuestions(this.getNames((<Survey.Survey>this.object).getAllQuestions()));
             }
+            for (var i = 0; i < value.length; i++) {
+                array.push(new SurveyPropertyTrigger(<Survey.SurveyTriggerVisible>value[i], this.koPages, this.koQuestions));
+            }
             this.koItems(array);
             this.koSelected(array.length > 0 ? array[0] : null);
+        }
+        private apply() {
+            this.value_ = [];
+            var array = this.koItems();
+            for (var i = 0; i < array.length; i++) {
+                this.value_.push(array[i].createTrigger());
+            }
+            if (this.onValueChanged) {
+                this.onValueChanged(this.value_);
+            }
         }
         private getNames(items: Array<any>): Array<string> {
             var names = [];
@@ -46,12 +59,18 @@
         private addItem() {
             var trigger = new SurveyPropertyTrigger(new Survey.SurveyTriggerVisible(), this.koPages, this.koQuestions);
             this.koItems.push(trigger);
+            this.koSelected(trigger);
         }
     }
 
     export class SurveyPropertyTrigger {
+        availableOperators = [
+            { name: "empty", text: "is empty" }, { name: "notempty", text: "is not empty" },
+            { name: "equal", text: "equals" }, { name: "notequal", text: "not equals" },
+            { name: "greater", text: "greater" }, { name: "less", text: "less" },
+            { name: "greaterorequal", text: "greater or equals" }, { name: "lessorequal", text: "Less or Equals" }]
         koName: any; koOperator: any; koValue: any;
-        koText: any; koIsValid: any;
+        koText: any; koIsValid: any; koRequireValue: any;
         public pages: SurveyPropertyTriggerObjects;
         public questions: SurveyPropertyTriggerObjects;
 
@@ -59,22 +78,47 @@
             this.koName = ko.observable(trigger.name);
             this.koOperator = ko.observable(trigger.operator);
             this.koValue = ko.observable(trigger.value);
-            this.pages = new SurveyPropertyTriggerObjects("Pages:", koPages(), trigger.pages);
-            this.questions = new SurveyPropertyTriggerObjects("Questions:", koQuestions(), trigger.questions);
+            this.pages = new SurveyPropertyTriggerObjects("Make visible pages:", koPages(), trigger.pages);
+            this.questions = new SurveyPropertyTriggerObjects("Make visible questions:", koQuestions(), trigger.questions);
             var self = this;
-            this.koIsValid = ko.computed(() => { return self.koName() && self.koValue(); });
-            this.koText = ko.computed(() => { return self.koIsValid() ? "Run if '" + self.koName() + "' " + self.koOperator() + " " + self.koValue() : "The trigger is not set"; });
+            this.koRequireValue = ko.computed(() => { return self.koOperator() != "empty" && self.koOperator() != "notempty"; });
+            this.koIsValid = ko.computed(() => { if (self.koName() && (!self.koRequireValue() || self.koValue())) return true; return false; });
+            this.koText = ko.computed(() => { self.koName(); self.koOperator(); self.koValue(); return self.getText(); });
+        }
+        public createTrigger(): Survey.SurveyTriggerVisible {
+            var trigger = new Survey.SurveyTriggerVisible();
+            trigger.name = this.koName();
+            trigger.operator = this.koOperator();
+            trigger.value = this.koValue();
+            trigger.pages = this.pages.koChoosen();
+            trigger.questions = this.questions.koChoosen();
+            return trigger;
+        }
+        private getText(): string {
+            if (!this.koIsValid()) return "The trigger is not set";
+            return "Run if '" + this.koName() + "' " + this.getOperatorText() + this.getValueText();
+        }
+        private getOperatorText(): string {
+            var op = this.koOperator();
+            for (var i = 0; i < this.availableOperators.length; i++) {
+                if (this.availableOperators[i].name == op) return this.availableOperators[i].text;
+            }
+            return op;
+        }
+        private getValueText(): string {
+            if (!this.koRequireValue()) return "";
+            return " " + this.koValue();
         }
     }
     export class SurveyPropertyTriggerObjects {
-        objects: any;
-        choosen: any;
-        selected: any;
-        choosenSelected: any;
+        koObjects: any;
+        koChoosen: any;
+        koSelected: any;
+        koChoosenSelected: any;
         public onDeleteClick: any;
         public onAddClick: any;
         constructor(public title: string, allObjects: Array<string>, choosenObjects: Array<string>) {
-            this.choosen = ko.observableArray(choosenObjects);
+            this.koChoosen = ko.observableArray(choosenObjects);
             var array = [];
             for (var i = 0; i < allObjects.length; i++) {
                 var item = allObjects[i];
@@ -82,18 +126,18 @@
                     array.push(item);
                 }
             }
-            this.objects = ko.observableArray(array);
-            this.selected = ko.observable();
-            this.choosenSelected = ko.observable();
+            this.koObjects = ko.observableArray(array);
+            this.koSelected = ko.observable();
+            this.koChoosenSelected = ko.observable();
             var self = this;
             this.onDeleteClick = function () { self.deleteItem(); }
             this.onAddClick = function () { self.addItem(); }
         }
         private deleteItem() {
-            this.changeItems(this.choosenSelected(), this.choosen, this.objects);
+            this.changeItems(this.koChoosenSelected(), this.koChoosen, this.koObjects);
         }
         private addItem() {
-            this.changeItems(this.selected(), this.objects, this.choosen);
+            this.changeItems(this.koSelected(), this.koObjects, this.koChoosen);
         }
         private changeItems(item: string, removedFrom: any, addTo: any) {
             removedFrom.remove(item);

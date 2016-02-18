@@ -79,6 +79,57 @@ module SurveyObjectEditorTests.Tests {
         objects.nameChanged(survey.pages[0]);
         assert.equal(objects.koObjects()[1].text(), SurveyEditor.SurveyObjects.intend + "newname", "new name should be 'newname'");
     });
+    QUnit.test("Triggers property editor", function (assert) {
+        var survey = createSurvey();
+        var trigger = new Survey.SurveyTriggerVisible();
+        trigger.name = "question1";
+        trigger.value = "val1";
+        trigger.operator = "notequal";
+        trigger.questions.push("question2");
+        survey.triggers.push(trigger);
+        var result = [];
+        var propEditor = new SurveyEditor.SurveyPropertyTriggers((newValue: any) => { result = newValue });
+        propEditor.object = survey;
+        propEditor.value = survey.triggers;
+        assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
+        var koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        assert.equal(koTrigger.koName(), "question1", "Name set correctly");
+        assert.equal(koTrigger.koOperator(), "notequal", "operator set correctly");
+        assert.equal(koTrigger.koValue(), "val1", "value set correctly");
+        assert.deepEqual(koTrigger.questions.koChoosen(), ["question2"], "questions set correctly");
+
+        propEditor.onAddClick();
+        assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
+        koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
+        assert.equal(koTrigger.koIsValid(), false, "the trigger is not valid");
+        koTrigger.koName("question2");
+        assert.equal(koTrigger.koIsValid(), false, "the trigger is still not valid");
+        assert.equal(koTrigger.koRequireValue(), true, "value should be set");
+        koTrigger.koOperator("notempty");
+        assert.equal(koTrigger.koIsValid(), true, "the trigger is valid");
+        assert.equal(koTrigger.koRequireValue(), false, "value should not be set");
+        assert.equal(koTrigger.koText(), "Run if 'question2' is not empty", "text for valid trigger");
+
+        koTrigger.pages.koChoosen.push("page2");
+        koTrigger.questions.koChoosen.push("question3");
+        koTrigger.koValue(1);
+        trigger = koTrigger.createTrigger();
+        assert.equal(trigger.name, "question2", "create trigger correctly: name");
+        assert.equal(trigger.operator, "notempty", "create trigger correctly: operator");
+        assert.equal(trigger.value, 1, "create trigger correctly: value");
+        assert.deepEqual(trigger.pages, ["page2"], "create trigger correctly: pages");
+        assert.deepEqual(trigger.questions, ["question3"], "create trigger correctly: questions");
+
+        propEditor.onAddClick();
+        assert.equal(propEditor.koItems().length, 3, "There are three triggers now");
+        propEditor.onDeleteClick();
+        assert.equal(propEditor.koItems().length, 2, "There are again two triggers");
+
+        propEditor.onApplyClick();
+        assert.equal(result.length, 2, "Two triggers are saved");
+
+    });
     function createSurvey(): Survey.Survey {
         return new Survey.Survey({
             pages: [{

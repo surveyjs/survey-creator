@@ -51,6 +51,7 @@ module SurveyEditor {
             this.koValue(this.object[this.name]);
             if (this.arrayEditor) {
                 this.arrayEditor.object = this.object;
+                this.arrayEditor.title("Edit property '" + this.property.name + "'");
                 this.arrayEditor.value = this.koValue();
             }
             this.isValueUpdating = false;
