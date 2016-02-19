@@ -1,6 +1,7 @@
 ﻿/// <reference path="objectEditor.ts" />
 /// <reference path="pagesEditor.ts" />
 /// <reference path="textWorker.ts" />
+/// <reference path="surveyHelper.ts" />
 
 module SurveyEditor {
     export class SurveyEditor {
@@ -98,7 +99,7 @@ module SurveyEditor {
             this.jsonEditor.find(findText);
         }
         public addPage() {
-            var name = this.getNewName(this.survey.pages, "page");
+            var name = SurveyHelper.getNewName(this.survey.pages, "page");
             var page = this.surveyValue.addNewPage(name);
             this.pagesEditor.survey = this.surveyValue;
             this.surveyObjects.addPage(page);
@@ -109,7 +110,7 @@ module SurveyEditor {
         public addQuestion() {
             var page = this.survey.currentPage;
             if (page == null) return;
-            var name = this.getNewName(this.survey.getAllQuestions(), "question");
+            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
             var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
 
             page.addQuestion(question);
@@ -261,18 +262,6 @@ module SurveyEditor {
                 annotations.push(annotation);
             }
             return annotations;
-        }
-        private getNewName(objs: Array<any>, baseName: string): string {
-            var hash = {};
-            for (var i = 0; i < objs.length; i++) {
-                hash[objs[i].name] = true;
-            }
-            var num = 1;
-            while (true) {
-                if (!hash[baseName + num.toString()]) break;
-                num++;
-            }
-            return baseName + num.toString();
         }
     }
 }
