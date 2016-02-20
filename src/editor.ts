@@ -22,17 +22,16 @@ module SurveyEditor {
         private surveyValue: Survey.Survey;
 
         public questionTypes: string[];
-        koSelectedQuestionType: any;
         koIsShowDesigner: any;
         koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         selectDesignerClick: any; selectEditorClick: any;
-        selectQuestionTypeClick: any; deleteObjectClick: any;
+        deleteObjectClick: any;
         runSurveyClick: any; embedingSurveyClick: any;
+        draggingQuestion: any;
 
         constructor(renderedElement: any = null) {
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
-            this.koSelectedQuestionType = ko.observable(this.questionTypes[0]);
             this.koCanDeleteObject = ko.observable(false);
 
             var self = this;
@@ -52,10 +51,10 @@ module SurveyEditor {
             this.koIsShowDesigner = ko.observable(true);
             this.selectDesignerClick = function () { self.showDesigner(); };
             this.selectEditorClick = function () { self.showJsonEditor(); };
-            this.selectQuestionTypeClick = function (value: string) { self.koSelectedQuestionType(value); };
             this.runSurveyClick = function () { self.showLiveSurvey(); };
             this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
+            this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e);  }
 
             if (renderedElement) {
                 this.render(renderedElement);
@@ -107,15 +106,12 @@ module SurveyEditor {
                 this.surveyjs.focus();
             }
         }
-        public addQuestion() {
-            var page = this.survey.currentPage;
-            if (page == null) return;
-            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            var question = Survey.QuestionFactory.Instance.createQuestion(this.koSelectedQuestionType(), name);
-
-            page.addQuestion(question);
+        private onQuestionAdded(question: Survey.Question) {
+            var page = this.survey.getPageByQuestion(question);
             this.surveyObjects.addQuestion(page, question);
-            this.surveyValue.render();
+        }
+        private onQuestionRemoved(question: Survey.Question) {
+            this.surveyObjects.removeObject(question);
         }
         private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
             var isDefault = property.isDefaultValue(newValue);
@@ -199,6 +195,8 @@ module SurveyEditor {
             var self = this;
             this.surveyValue.onSelectedQuestionChanged.add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender.selectedQuestion); });
             this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(sender.currentPage); });
+            this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
+            this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.onQuestionRemoved(options.question); });
         }
         private timeoutId: number = -1;
         private onJsonEditorChanged(): any {
@@ -218,6 +216,10 @@ module SurveyEditor {
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
+        }
+        private doDraggingQuestion(questionType: string, e) {
+            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            new Survey.DragDropHelper().startDragNewQuestion(e, questionType, name);
         }
         private deleteCurrentObject() {
             var obj = this.koSelectedObject().value;

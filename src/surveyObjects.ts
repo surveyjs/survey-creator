@@ -25,7 +25,8 @@
         public addQuestion(page: Survey.Page, question: Survey.Question) {
             var index = this.getItemIndex(page);
             if (index < 0) return;
-            index += page.questions.length;
+            var questionIndex = page.questions.indexOf(question) + 1;
+            index += questionIndex;
             var item = this.createQuestion(question);
             if (index > this.koObjects().length) {
                 this.koObjects.push(item);
