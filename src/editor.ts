@@ -45,7 +45,8 @@ module SurveyEditor {
             this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });
-            this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); });
+            this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
+                (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); });
             this.surveyEmbeding = new SurveyEmbedingWindow();
 
             this.koIsShowDesigner = ko.observable(true);
@@ -100,11 +101,17 @@ module SurveyEditor {
         public addPage() {
             var name = SurveyHelper.getNewName(this.survey.pages, "page");
             var page = this.surveyValue.addNewPage(name);
+            this.addPageToUI(page);
+        }
+        private movePage(indexFrom: number, indexTo: number) {
+            var page = this.survey.pages[indexFrom];
+            this.deleteObject(page);
+            this.survey.pages.splice(indexTo, 0, page);
+            this.addPageToUI(page);
+        }
+        private addPageToUI(page: Survey.Page) {
             this.pagesEditor.survey = this.surveyValue;
             this.surveyObjects.addPage(page);
-            if (this.surveyjs != null) {
-                this.surveyjs.focus();
-            }
         }
         private onQuestionAdded(question: Survey.Question) {
             var page = this.survey.getPageByQuestion(question);
@@ -219,10 +226,12 @@ module SurveyEditor {
         }
         private doDraggingQuestion(questionType: string, e) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            new Survey.DragDropHelper().startDragNewQuestion(e, questionType, name);
+            new Survey.DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType, name);
         }
         private deleteCurrentObject() {
-            var obj = this.koSelectedObject().value;
+            this.deleteObject(this.koSelectedObject().value);
+        }
+        private deleteObject(obj: any) {
             this.surveyObjects.removeObject(obj);
             if (obj.getType() == "page") {
                 this.survey.removePage(obj);

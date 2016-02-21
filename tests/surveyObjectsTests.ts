@@ -35,6 +35,22 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, page, "new object is added");
         assert.equal(objects.koSelected().value, page, "new page is selected");
     });
+    QUnit.test("addPage method - insert", function (assert) {
+        var survey = createSurvey();
+        var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
+        objects.survey = survey;
+        var page = survey.pages[2];
+        survey.pages.splice(2, 1);
+        objects.removeObject(page);
+        survey.pages.splice(1, 0, page);
+        objects.addPage(page);
+        var pageIndex = survey.pages[0].questions.length + 1 + 1;
+        assert.equal(objects.koObjects()[pageIndex].value, page, "the page is inserted correctly");
+        assert.equal(objects.koObjects()[pageIndex + 1].value, page.questions[0], "the first question is inserted correctly");
+        assert.equal(objects.koObjects()[pageIndex + 2].value, page.questions[1], "the second question is inserted correctly");
+        assert.equal(objects.koObjects()[pageIndex + 3].value, survey.pages[2], "the last page has the correct index");
+    });
+
     QUnit.test("addQuestion method", function (assert) {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());

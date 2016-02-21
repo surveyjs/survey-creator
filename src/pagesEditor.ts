@@ -2,6 +2,7 @@
 module SurveyEditor {
     declare type SurveyAddNewPageCallback = () => void;
     declare type SurveySelectPageCallback = (page: Survey.Page) => void;
+    declare type SurveyMovePageCallback = (indexFrom: number, indexTo: number) => void;
     export class SurveyPagesEditor {
         surveyValue: Survey.Survey;
         koPages: any;
@@ -9,18 +10,27 @@ module SurveyEditor {
         selectPageClick: any;
         onAddNewPageCallback: SurveyAddNewPageCallback;
         onSelectPageCallback: SurveySelectPageCallback;
+        onMovePageCallback: SurveyMovePageCallback;
+        draggingPage: Survey.Page = null;
+        dragStart: any; dragOver: any; dragEnd: any; dragDrop: any; 
 
-        constructor(onAddNewPageCallback: SurveyAddNewPageCallback = null, onSelectPageCallback: SurveySelectPageCallback = null) {
+        constructor(onAddNewPageCallback: SurveyAddNewPageCallback = null, onSelectPageCallback: SurveySelectPageCallback = null,
+            onMovePageCallback: SurveyMovePageCallback = null) {
             this.koPages = ko.observableArray();
             this.koIsValid = ko.observable(false);
             this.onAddNewPageCallback = onAddNewPageCallback;
             this.onSelectPageCallback = onSelectPageCallback;
+            this.onMovePageCallback = onMovePageCallback;
             var self = this;
-            self.selectPageClick = function(pageItem) {
+            this.selectPageClick = function(pageItem) {
                 if (self.onSelectPageCallback) {
                     self.onSelectPageCallback(pageItem.page);
                 }
-            } 
+            }
+            this.dragStart = function (el: Survey.Page) { self.draggingPage = el; };
+            this.dragOver = function (el: Survey.Page) {  };
+            this.dragEnd = function () { self.draggingPage = null; };
+            this.dragDrop = function (el: Survey.Page) { self.moveDraggingPageTo(el); };
         }
         public get survey(): Survey.Survey { return this.surveyValue; }
         public set survey(value: Survey.Survey) {
@@ -71,6 +81,18 @@ module SurveyEditor {
                 });
             }
             this.koPages(pages);
+        }
+        private moveDraggingPageTo(toPage: Survey.Page) {
+            if (toPage == null || toPage == this.draggingPage) {
+                this.draggingPage = null;
+                return;
+            }
+            if (this.draggingPage == null) return;
+            var index = this.koPages().indexOf(this.draggingPage);
+            var indexTo = this.koPages().indexOf(toPage);
+            if (this.onMovePageCallback) {
+                this.onMovePageCallback(index, indexTo);
+            }
         }
     }
 }
