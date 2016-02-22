@@ -57,7 +57,7 @@
             var index = this.getItemIndex(obj);
             if (index < 0) return;
             var countToRemove = 1;
-            if (obj.getType() == 'page') {
+            if (SurveyHelper.getObjectType(obj) == ObjType.Page) {
                 var page: Survey.Page = <Survey.Page>obj;
                 countToRemove += page.questions.length;
             }
@@ -114,7 +114,7 @@
         }
         private getText(obj: Survey.Base): string {
             var intend = SurveyObjects.intend;
-            if (obj.getType() != "page") {
+            if (SurveyHelper.getObjectType(obj) != ObjType.Page) {
                 intend += SurveyObjects.intend;
             }
             return intend + obj["name"];

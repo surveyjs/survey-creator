@@ -1,4 +1,5 @@
 ﻿/// <reference path="../src/surveyObjects.ts" />
+/// <reference path="../src/objectVerbs.ts" />
 
 module SurveyObjectEditorTests.Tests {
     QUnit.module("surveyObjects");
@@ -177,6 +178,24 @@ module SurveyObjectEditorTests.Tests {
         propEditor.onApplyClick();
         assert.equal(result.length, 2, "Two validators are saved");
         assert.equal(result[1].minLength, 20, "The properties are saved too");
+    });
+    QUnit.test("SurveyVerbChangeTypeItem test", function (assert) {
+        var survey = createSurvey();
+        var verb = new SurveyEditor.SurveyVerbChangeTypeItem(survey, survey.pages[0].questions[1]);
+        assert.equal(verb.koSelectedItem(), "checkbox", "The default value is checkbox");
+        verb.koSelectedItem("dropdown");
+        var newQuestion = survey.pages[0].questions[1];
+        assert.equal(newQuestion.getType(), "dropdown", "the question becomes 'dropdown'");
+        assert.equal(newQuestion["choices"].length, 3, "properties are copied.");
+        assert.equal(survey.pages[0].questions.length, 2, "we will still have two questions.");
+    });
+    QUnit.test("SurveyVerbChangePageItem test", function (assert) {
+        var survey = createSurvey();
+        var verb = new SurveyEditor.SurveyVerbChangePageItem(survey, survey.pages[0].questions[1]);
+        assert.equal(verb.koSelectedItem(), survey.pages[0], "The default value is first page");
+        verb.koSelectedItem(survey.pages[2]);
+        assert.equal(survey.pages[0].questions.length, 1, "one question left on the first page");
+        assert.equal(survey.pages[2].questions.length, 3, "three question now on the third page");
     });
     function createSurvey(): Survey.Survey {
         return new Survey.Survey({

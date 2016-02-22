@@ -30,6 +30,9 @@
                     </div>
                 </div>
                 <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
+                <div class="panel-footer" data-bind="visible:surveyVerbs.koHasVerbs">
+                    <div data-bind="template: { name: 'objectverbs', data: surveyVerbs }"></div>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-8">

@@ -2,7 +2,7 @@
 /// <reference path="pagesEditor.ts" />
 /// <reference path="textWorker.ts" />
 /// <reference path="surveyHelper.ts" />
-
+/// <reference path="objectVerbs.ts" />
 module SurveyEditor {
     export class SurveyEditor {
         public static updateTextTimeout: number = 1000;
@@ -18,6 +18,7 @@ module SurveyEditor {
         private pagesEditor: SurveyPagesEditor;
         private surveyEmbeding: SurveyEmbedingWindow
         private surveyObjects: SurveyObjects;
+        private surveyVerbs: SurveyVerbs;
         private textWorker: SurveyTextWorker;
         private surveyValue: Survey.Survey;
 
@@ -40,6 +41,8 @@ module SurveyEditor {
             this.koSelectedObject = ko.observable();
             this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
             this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
+
+            this.surveyVerbs = new SurveyVerbs();
 
             this.selectedObjectEditor = new SurveyObjectEditor();
             this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
@@ -116,16 +119,18 @@ module SurveyEditor {
         private onQuestionAdded(question: Survey.Question) {
             var page = this.survey.getPageByQuestion(question);
             this.surveyObjects.addQuestion(page, question);
+            this.survey.render();
         }
         private onQuestionRemoved(question: Survey.Question) {
             this.surveyObjects.removeObject(question);
+            this.survey.render();
         }
         private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
             var isDefault = property.isDefaultValue(newValue);
             obj[property.name] = newValue;
             if (property.name == "name") {
                 this.surveyObjects.nameChanged(obj);
-                if (obj.getType() == "page") {
+                if (SurveyHelper.getObjectType(obj) == ObjType.Page) {
                     this.pagesEditor.changeName(<Survey.Page>obj);
                 }
             }
@@ -148,14 +153,18 @@ module SurveyEditor {
         private selectedObjectChanged(obj: Survey.Base) {
             var canDeleteObject = false;
             this.selectedObjectEditor.selectedObject = obj;
-            if (obj != null && obj.getType() == "page") {
+            this.surveyVerbs.obj = obj;
+            var objType = SurveyHelper.getObjectType(obj);
+            if (objType == ObjType.Page) {
                 this.survey.currentPage = <Survey.Page>obj;
                 canDeleteObject = this.survey.pages.length > 1;
             }
-            this.survey.selectedQuestion = obj != null && obj["koValue"] ? <Survey.Question>obj : null;
-            canDeleteObject = canDeleteObject || this.survey.selectedQuestion != null;
-            if (this.survey.selectedQuestion != null) {
+            if (objType == ObjType.Question) {
+                this.survey.selectedQuestion = <Survey.Question>obj;
+                canDeleteObject = true;
                 this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedQuestion);
+            } else {
+                this.survey.selectedQuestion = null;
             }
             this.koCanDeleteObject(canDeleteObject);
         }
@@ -199,6 +208,7 @@ module SurveyEditor {
             this.surveyObjects.survey = this.survey;
             this.pagesEditor.survey = this.survey;
             this.pagesEditor.setSelectedPage(this.survey.currentPage);
+            this.surveyVerbs.survey = this.survey;
             var self = this;
             this.surveyValue.onSelectedQuestionChanged.add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender.selectedQuestion); });
             this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(sender.currentPage); });
@@ -233,10 +243,12 @@ module SurveyEditor {
         }
         private deleteObject(obj: any) {
             this.surveyObjects.removeObject(obj);
-            if (obj.getType() == "page") {
+            var objType = SurveyHelper.getObjectType(obj);
+            if (objType == ObjType.Page) {
                 this.survey.removePage(obj);
                 this.pagesEditor.removePage(obj);
-            } else {
+            }
+            if (objType == ObjType.Question) {
                 this.survey.currentPage.removeQuestion(obj);
                 this.survey.selectedQuestion = null;
                 this.surveyObjects.selectObject(this.survey.currentPage);

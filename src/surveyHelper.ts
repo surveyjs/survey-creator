@@ -1,4 +1,5 @@
 ﻿module SurveyEditor {
+    export enum ObjType { Unknown, Survey, Page, Question }
     export class SurveyHelper {
         public static getNewName(objs: Array<any>, baseName: string): string {
             var hash = {};
@@ -11,6 +12,13 @@
                 num++;
             }
             return baseName + num.toString();
+        }
+        public static getObjectType(obj: any): ObjType {
+            if (!obj || !obj["getType"]) return ObjType.Unknown;
+            if (obj.getType() == "page") return ObjType.Page;
+            if (obj.getType() == "survey") return ObjType.Survey;
+            if (obj["koValue"]) return ObjType.Question;
+            return ObjType.Unknown;
         }
     }
 }
