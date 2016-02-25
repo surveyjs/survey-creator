@@ -37,19 +37,19 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-8">
             <nav class="navbar navbar-default">
-                <ul class="nav navbar-nav">
+                <form class="navbar-form">
                     <!-- ko foreach: questionTypes -->
-                    <li draggable="true" data-bind="event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
-                        <a><span data-bind="text:$data" style="cursor: pointer"></span></a>
-                    </li>
+                    <button class="btn" type="button" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
+                        <span data-bind="text:$data"></span>
+                    </button>
                     <!-- /ko  -->
-                </ul>
+                </form>
             </nav>
             <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
             <div style="overflow-y: scroll;height:450px;">
                 <div id="surveyjs" style="width:100%"></div>
             </div>
-        </div>
+</div>
     </div>
 </div>
 

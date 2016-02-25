@@ -29,7 +29,7 @@ module SurveyEditor {
         selectDesignerClick: any; selectEditorClick: any;
         deleteObjectClick: any;
         runSurveyClick: any; embedingSurveyClick: any;
-        draggingQuestion: any;
+        draggingQuestion: any; clickQuestion: any;
 
         constructor(renderedElement: any = null) {
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
@@ -58,7 +58,8 @@ module SurveyEditor {
             this.runSurveyClick = function () { self.showLiveSurvey(); };
             this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
-            this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e);  }
+            this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e); }
+            this.clickQuestion = function (questionType) { self.doClickQuestion(questionType); }
 
             if (renderedElement) {
                 this.render(renderedElement);
@@ -237,6 +238,16 @@ module SurveyEditor {
         private doDraggingQuestion(questionType: string, e) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
             new Survey.DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType, name);
+        }
+        private doClickQuestion(questionType: string) {
+            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            var page = this.survey.currentPage;
+            var index = -1;
+            if (this.survey.selectedQuestion != null) {
+                index = page.questions.indexOf(this.survey.selectedQuestion) + 1;
+            }
+            var question = Survey.QuestionFactory.Instance.createQuestion(questionType, name);
+            page.addQuestion(question, index);
         }
         private deleteCurrentObject() {
             this.deleteObject(this.koSelectedObject().value);
