@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
     replace = require("gulp-replace"),
+    sequence = require("gulp-sequence"),
     html2ts = require("gulp-html-to-ts"),
     project = require("./project.json"),
     plugins = require("gulp-load-plugins")({
@@ -27,7 +28,9 @@ var paths = {
     tsTests: "./tests/*.ts",
     tsTests_ko: "./tests/ko/*.ts",
     styles: "./src/*.scss",
-    templates_ko: "./src/templates/*.html"
+    templates_ko: "./src/templates/*.html",
+    template_page: "./src/templates.survey/template_page.html",
+    template_question: "./src/templates.survey/template_question.html"
 };
 
 paths.jsFolder = paths.webroot + "js/";
@@ -132,9 +135,15 @@ gulp.task('tsd', function (callback) {
           .pipe(concat("templateEditor.ko.html"))
           .pipe(html2ts())
           .pipe(gulp.dest("./src/"));
+        gulp.src(paths.template_page)
+          .pipe(html2ts())
+          .pipe(gulp.dest("./src/"));
+        gulp.src(paths.template_question)
+          .pipe(html2ts())
+          .pipe(gulp.dest("./src/"));
     });
 
-    gulp.task("makedist", ["templates", "typescript", "sass", "compress"]);
+    gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress"));
 })("TypeScript compilation");
 
     gulp.task("test_ci", function (done) { 

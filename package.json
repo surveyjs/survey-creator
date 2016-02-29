@@ -17,6 +17,7 @@
     "gulp-typescript": "2.8.0",
     "gulp-sourcemaps": "1.5.2",
     "gulp-sass": "2.0.4",
+    "gulp-sequence": "^0.4.5",
     "gulp-qunit": "^1.2.1",
     "gulp-load-plugins": "^1.0.0-rc.1",
     "gulp-html-to-ts": "^0.1.3",
