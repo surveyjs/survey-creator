@@ -336,7 +336,7 @@ module SurveyEditor {
         new DragDropHelper(this.data).doDrop(e);
     }
     Survey.Page.prototype["doDragEnter"] = function(e) {
-        if (this.koDragging() > 0) return;
+        if (this.questions.length > 0 || this.koDragging() > 0) return;
         if (new DragDropHelper(this.data).isSurveyDragging(e)) {
             this.koDragging(this.questions.length);
         }

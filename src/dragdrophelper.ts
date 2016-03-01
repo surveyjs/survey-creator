@@ -19,6 +19,7 @@
             return data && data.indexOf(DragDropHelper.dataStart) == 0;
         }
         public doDragDropOver(event: DragEvent, question: Survey.Question) {
+            event = this.getEvent(event);
             if (!question || !this.isSurveyDragging(event) || this.isSamePlace(event, question)) return;
             var index = this.getQuestionIndex(event, question);
             this.survey.currentPage["koDragging"](index);
@@ -44,7 +45,8 @@
             var page = this.survey.currentPage;
             if (!question) return page.questions.length;
             var index = page.questions.indexOf(question);
-            var height = <number>event.currentTarget["offsetHeight"];
+            event = this.getEvent(event);
+            var height = <number>event.currentTarget["clientHeight"];
             var y = event.offsetY;
             if (event.hasOwnProperty('layerX')) {
                 y = event.layerY - <number>event.currentTarget["offsetTop"];
@@ -61,6 +63,9 @@
                 return false;
             }
             return true;
+        }
+        private getEvent(event: DragEvent): DragEvent {
+            return event["originalEvent"] ? event["originalEvent"] : event;
         }
         private moveQuestionTo(targetQuestion: Survey.Question, index: number) {
             if (targetQuestion == null) return;
