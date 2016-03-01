@@ -325,6 +325,7 @@ module SurveyEditor {
     }
     Survey.Page.prototype["onCreating"] = function () {
         var self = this;
+        this.dragEnterCounter = 0;
         this.koDragging = ko.observable(-1);
         this.koDragging.subscribe(function (newValue) { if (newValue < 0) self.dragEnterCounter = 0; });
         this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };

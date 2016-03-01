@@ -44,7 +44,7 @@
             var page = this.survey.currentPage;
             if (!question) return page.questions.length;
             var index = page.questions.indexOf(question);
-            var height = <number>event.currentTarget["clientHeight"];
+            var height = <number>event.currentTarget["offsetHeight"];
             var y = event.offsetY;
             if (event.hasOwnProperty('layerX')) {
                 y = event.layerY - <number>event.currentTarget["offsetTop"];

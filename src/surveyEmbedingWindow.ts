@@ -4,10 +4,13 @@
         private surveyEmbedingHead: AceAjax.Editor;
         private surveyEmbedingJava: AceAjax.Editor;
         koShowAsWindow: any;
+        koScriptUsing: any;
         constructor() {
             var self = this;
             this.koShowAsWindow = ko.observable("page");
+            this.koScriptUsing = ko.observable("bootstrap");
             this.koShowAsWindow.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
+            this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); });
             this.surveyEmbedingHead = null;
         }
         public get json(): any { return this.jsonValue; }
@@ -15,12 +18,20 @@
         public show() {
             if (this.surveyEmbedingHead == null) {
                 this.surveyEmbedingHead = this.createEditor("surveyEmbedingHead");
-                this.surveyEmbedingHead.setValue("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\" ></script>\n<script src=\"js/survey.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
+                this.setHeadText();
                 var bodyEditor = this.createEditor("surveyEmbedingBody");
                 bodyEditor.setValue("<div id= \"mySurveyJSName\" ></div>");
                 this.surveyEmbedingJava = this.createEditor("surveyEmbedingJava");
             }
             this.surveyEmbedingJava.setValue(this.getJavaText());
+        }
+        private setHeadText() {
+            var knockoutStr = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\" ></script>\n";
+            if (this.koScriptUsing() == "bootstrap") {
+                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.bootstrap.min.js\"></script>");
+            } else {
+                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
+            }
         }
         private createEditor(elementName: string): AceAjax.Editor {
             var editor = ace.edit(elementName);
@@ -43,7 +54,7 @@
             if (isOnPage) {
                 text += "survey.render(\"mySurveyJSName\");";
             } else {
-                text += "surveyWindow.title = \"My Survey Window Title.\";\n";
+                text += "//surveyWindow.title = \"My Survey Window Title.\"; //By default Survey.title is used.\n";
                 text += "surveyWindow.show();";
 
             }

@@ -3,6 +3,9 @@
 /// <reference path="textWorker.ts" />
 /// <reference path="surveyHelper.ts" />
 /// <reference path="objectVerbs.ts" />
+/// <reference path="dragdrophelper.ts" />
+/// <reference path="template_page.html.ts" />
+/// <reference path="template_question.html.ts" />
 var SurveyEditor;
 (function (SurveyEditor_1) {
     var SurveyEditor = (function () {
@@ -30,6 +33,7 @@ var SurveyEditor;
             this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
             this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e); };
+            this.clickQuestion = function (questionType) { self.doClickQuestion(questionType); };
             if (renderedElement) {
                 this.render(renderedElement);
             }
@@ -140,12 +144,12 @@ var SurveyEditor;
                 canDeleteObject = this.survey.pages.length > 1;
             }
             if (objType == SurveyEditor_1.ObjType.Question) {
-                this.survey.selectedQuestion = obj;
+                this.survey["setselectedQuestion"](obj);
                 canDeleteObject = true;
-                this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedQuestion);
+                this.survey.currentPage = this.survey.getPageByQuestion(this.survey["selectedQuestionValue"]);
             }
             else {
-                this.survey.selectedQuestion = null;
+                this.survey["setselectedQuestion"](null);
             }
             this.koCanDeleteObject(canDeleteObject);
         };
@@ -191,7 +195,7 @@ var SurveyEditor;
             this.pagesEditor.setSelectedPage(this.survey.currentPage);
             this.surveyVerbs.survey = this.survey;
             var self = this;
-            this.surveyValue.onSelectedQuestionChanged.add(function (sender, options) { self.surveyObjects.selectObject(sender.selectedQuestion); });
+            this.surveyValue["onSelectedQuestionChanged"].add(function (sender, options) { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
             this.surveyValue.onCurrentPageChanged.add(function (sender, options) { self.pagesEditor.setSelectedPage(sender.currentPage); });
             this.surveyValue.onQuestionAdded.add(function (sender, options) { self.onQuestionAdded(options.question); });
             this.surveyValue.onQuestionRemoved.add(function (sender, options) { self.onQuestionRemoved(options.question); });
@@ -217,7 +221,17 @@ var SurveyEditor;
         };
         SurveyEditor.prototype.doDraggingQuestion = function (questionType, e) {
             var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            new Survey.DragDropHelper(this.survey).startDragNewQuestion(e, questionType, name);
+            new SurveyEditor_1.DragDropHelper(this.survey).startDragNewQuestion(e, questionType, name);
+        };
+        SurveyEditor.prototype.doClickQuestion = function (questionType) {
+            var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            var page = this.survey.currentPage;
+            var index = -1;
+            if (this.survey["selectedQuestionValue"] != null) {
+                index = page.questions.indexOf(this.survey["selectedQuestionValue"]) + 1;
+            }
+            var question = Survey.QuestionFactory.Instance.createQuestion(questionType, name);
+            page.addQuestion(question, index);
         };
         SurveyEditor.prototype.deleteCurrentObject = function () {
             this.deleteObject(this.koSelectedObject().value);
@@ -231,7 +245,7 @@ var SurveyEditor;
             }
             if (objType == SurveyEditor_1.ObjType.Question) {
                 this.survey.currentPage.removeQuestion(obj);
-                this.survey.selectedQuestion = null;
+                this.survey["setselectedQuestion"](null);
                 this.surveyObjects.selectObject(this.survey.currentPage);
             }
             this.survey.render();
@@ -276,4 +290,67 @@ var SurveyEditor;
         return SurveyEditor;
     })();
     SurveyEditor_1.SurveyEditor = SurveyEditor;
+    new Survey.SurveyTemplateText().replaceText(template_page.html, "page");
+    new Survey.SurveyTemplateText().replaceText(template_question.html, "question");
+    Survey.Survey.prototype["onCreating"] = function () {
+        this.selectedQuestionValue = null;
+        this.onSelectedQuestionChanged = new Survey.Event();
+    };
+    Survey.Survey.prototype["setselectedQuestion"] = function (value) {
+        if (value == this.selectedQuestionValue)
+            return;
+        var oldValue = this.selectedQuestionValue;
+        this.selectedQuestionValue = value;
+        if (oldValue != null) {
+            oldValue["onSelectedQuestionChanged"]();
+        }
+        if (this.selectedQuestionValue != null) {
+            this.selectedQuestionValue["onSelectedQuestionChanged"]();
+        }
+        this.onSelectedQuestionChanged.fire(this, { 'oldSelectedQuestion': oldValue, 'newSelectedQuestion': value });
+    };
+    Survey.Page.prototype["onCreating"] = function () {
+        var self = this;
+        this.dragEnterCounter = 0;
+        this.koDragging = ko.observable(-1);
+        this.koDragging.subscribe(function (newValue) { if (newValue < 0)
+            self.dragEnterCounter = 0; });
+        this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };
+        this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0)
+            self.koDragging(-1); };
+        this.dragDrop = function (e) { self.doDrop(e); };
+    };
+    Survey.Page.prototype["doDrop"] = function (e) {
+        new SurveyEditor_1.DragDropHelper(this.data).doDrop(e);
+    };
+    Survey.Page.prototype["doDragEnter"] = function (e) {
+        if (this.koDragging() > 0)
+            return;
+        if (new SurveyEditor_1.DragDropHelper(this.data).isSurveyDragging(e)) {
+            this.koDragging(this.questions.length);
+        }
+    };
+    Survey.Question.prototype["onCreating"] = function () {
+        var self = this;
+        this.dragDropHelperValue = null;
+        this.dragDropHelper = function () {
+            if (this.dragDropHelperValue == null)
+                this.dragDropHelperValue = new SurveyEditor_1.DragDropHelper(this.data);
+            return this.dragDropHelperValue;
+        };
+        this.dragOver = function (e) { self.dragDropHelper().doDragDropOver(e, self); };
+        this.dragDrop = function (e) { self.dragDropHelper().doDrop(e, self); };
+        this.dragStart = function (e) { self.dragDropHelper().startDragQuestion(e, self.name); };
+        this.koIsSelected = ko.observable(false);
+        this.koOnClick = function () {
+            if (self.data == null)
+                return;
+            self.data["setselectedQuestion"](this);
+        };
+    };
+    Survey.Question.prototype["onSelectedQuestionChanged"] = function () {
+        if (this.data == null)
+            return;
+        this.koIsSelected(this.data["selectedQuestionValue"] == this);
+    };
 })(SurveyEditor || (SurveyEditor = {}));

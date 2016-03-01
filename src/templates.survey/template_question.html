@@ -1,10 +1,10 @@
-﻿<div class="well well-sm" draggable="true" data-bind="click: koOnClick, css: {svd_q_selected : koIsSelected},
-        event:{
-        dragstart:function(el, e){ dragStart(e); return true; },
-        dragover:function(el, e){ dragOver(e);},
-        drop:function(el, e){ dragDrop(e);}
-        }">
-    <div style="pointer-events: none">
+﻿<div class="well well-sm" data-bind="attr : {draggable: $root.isDesignMode}, visible: question.koVisible() || $root.isDesignMode, click: $root.isDesignMode ? koOnClick: null, css: {svd_q_selected : koIsSelected},
+         event:{
+           dragstart:function(el, e){ dragStart(e); return true; },
+           dragover:function(el, e){ dragOver(e);},
+           drop:function(el, e){ dragDrop(e);}
+         }">
+    <div data-bind="css:{svd_q_design: $root.isDesignMode}">
         <div class="alert alert-danger" role="alert" data-bind="visible: koErrors().length > 0, foreach: koErrors">
             <div>
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

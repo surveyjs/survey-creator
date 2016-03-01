@@ -12,7 +12,9 @@
     //border: 2px solid darkblue;
     border-width: 3px;
 }
-
+.svd_q_design {
+    pointer-events: none;
+}
 .svd_dragover {
     pointer-events: none;
     width:100%;

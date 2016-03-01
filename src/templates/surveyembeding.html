@@ -1,12 +1,16 @@
 ﻿<script type="text/html" id="surveyembeding">
-    <div class="panel">
-        <div class="panel-heading">Scripts and styles</div>
-        <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
-    </div>
+    <select data-bind="value:koScriptUsing">
+        <option value="bootstrap">For bootstrap framework</option>
+        <option value="standard">No bootstrap</option>
+    </select>
     <select data-bind="value:koShowAsWindow">
         <option value="page">Use Survey Inside a Page</option>
         <option value="window">Use Survey as a Window</option>
     </select>
+    <div class="panel">
+        <div class="panel-heading">Scripts and styles</div>
+        <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
+    </div>
     <div class="panel" data-bind="visible: koShowAsWindow()=='page'">
         <div class="panel-heading">HTML part</div>
         <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
