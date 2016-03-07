@@ -11,6 +11,8 @@ var SurveyEditor;
     var SurveyEditor = (function () {
         function SurveyEditor(renderedElement) {
             if (renderedElement === void 0) { renderedElement = null; }
+            this.surveyId = null;
+            this.surveyPostId = null;
             this.timeoutId = -1;
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koCanDeleteObject = ko.observable(false);
@@ -267,6 +269,8 @@ var SurveyEditor;
         SurveyEditor.prototype.showSurveyEmbeding = function () {
             var json = this.getSurveyJSON();
             this.surveyEmbeding.json = json;
+            this.surveyEmbeding.surveyId = this.surveyId;
+            this.surveyEmbeding.surveyPostId = this.surveyPostId;
             this.surveyEmbeding.show();
         };
         SurveyEditor.prototype.getSurveyJSON = function () {
@@ -324,7 +328,7 @@ var SurveyEditor;
         new SurveyEditor_1.DragDropHelper(this.data).doDrop(e);
     };
     Survey.Page.prototype["doDragEnter"] = function (e) {
-        if (this.koDragging() > 0)
+        if (this.questions.length > 0 || this.koDragging() > 0)
             return;
         if (new SurveyEditor_1.DragDropHelper(this.data).isSurveyDragging(e)) {
             this.koDragging(this.questions.length);

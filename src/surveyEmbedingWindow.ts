@@ -3,14 +3,21 @@
         private jsonValue: any;
         private surveyEmbedingHead: AceAjax.Editor;
         private surveyEmbedingJava: AceAjax.Editor;
+        public surveyId: string = null;
+        public surveyPostId: string = null;
         koShowAsWindow: any;
         koScriptUsing: any;
+        koHasIds: any;
+        koLoadSurvey: any;
         constructor() {
             var self = this;
             this.koShowAsWindow = ko.observable("page");
             this.koScriptUsing = ko.observable("bootstrap");
+            this.koHasIds = ko.observable(false);
+            this.koLoadSurvey = ko.observable(false);
             this.koShowAsWindow.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
             this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); });
+            this.koLoadSurvey.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
             this.surveyEmbedingHead = null;
         }
         public get json(): any { return this.jsonValue; }
@@ -23,6 +30,7 @@
                 bodyEditor.setValue("<div id= \"mySurveyJSName\" ></div>");
                 this.surveyEmbedingJava = this.createEditor("surveyEmbedingJava");
             }
+            this.koHasIds(this.surveyId && this.surveyPostId);
             this.surveyEmbedingJava.setValue(this.getJavaText());
         }
         private setHeadText() {
@@ -50,17 +58,25 @@
             if (!isOnPage) {
                 text += "surveyWindow.";
             }
-            text += "survey.onComplete.add(function (s) {\n alert(\"The results are:\" + JSON.stringify(s.data)); \n });\n";
+            var saveFunc = "alert(\"The results are:\" + JSON.stringify(s.data));";
+            if (this.koHasIds()) {
+                saveFunc = "survey.sendResult('" + this.surveyPostId + "');";
+            }
+            text += "survey.onComplete.add(function (s) {\n" + saveFunc + "\n });\n";
             if (isOnPage) {
                 text += "survey.render(\"mySurveyJSName\");";
             } else {
-                text += "//surveyWindow.title = \"My Survey Window Title.\"; //By default Survey.title is used.\n";
+                text += "//By default Survey.title is used.\n"
+                text += "//surveyWindow.title = \"My Survey Window Title.\";\n";
                 text += "surveyWindow.show();";
 
             }
             return text;
         }
         private getJsonText(): string {
+            if (this.koHasIds() && this.koLoadSurvey()) {
+                return "{ surveyId: '" + this.surveyId + "'}";
+            }
             return new SurveyJSON5().stringify(this.json);
         }
     }

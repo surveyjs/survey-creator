@@ -26,6 +26,8 @@ module SurveyEditor {
         private textWorker: SurveyTextWorker;
         private surveyValue: Survey.Survey;
 
+        public surveyId: string = null;
+        public surveyPostId: string = null;
         public questionTypes: string[];
         koIsShowDesigner: any;
         koCanDeleteObject: any;
@@ -285,6 +287,8 @@ module SurveyEditor {
         private showSurveyEmbeding() {
             var json = this.getSurveyJSON();
             this.surveyEmbeding.json = json;
+            this.surveyEmbeding.surveyId = this.surveyId;
+            this.surveyEmbeding.surveyPostId = this.surveyPostId;
             this.surveyEmbeding.show();
         }
         private getSurveyJSON(): any {
