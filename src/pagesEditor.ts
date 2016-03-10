@@ -58,7 +58,7 @@ module SurveyEditor {
         public changeName(page: Survey.Page) {
             var index = this.getIndexByPage(page);
             if (index > -1) {
-                this.koPages()[index].title(page.name);
+                this.koPages()[index].title(SurveyHelper.getObjectName(page));
             }
         }
         protected getIndexByPage(page: Survey.Page): number {
@@ -77,7 +77,7 @@ module SurveyEditor {
             for (var i = 0; i < this.surveyValue.pages.length; i++) {
                 var page = this.surveyValue.pages[i];
                 pages.push({
-                    title: ko.observable(page.name), page: page, koSelected: ko.observable(false)
+                    title: ko.observable(SurveyHelper.getObjectName(page)), page: page, koSelected: ko.observable(false)
                 });
             }
             this.koPages(pages);

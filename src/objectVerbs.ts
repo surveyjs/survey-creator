@@ -83,7 +83,7 @@
             var array = [];
             for (var i = 0; i < this.survey.pages.length; i++) {
                 var page = this.survey.pages[i];
-                array.push({ value: page, text: page.name });
+                array.push({ value: page, text: SurveyHelper.getObjectName(page) });
             }
             this.koItems(array);
             this.prevPage = this.survey.getPageByQuestion(question);

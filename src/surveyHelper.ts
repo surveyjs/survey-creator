@@ -20,5 +20,13 @@
             if (obj["koValue"]) return ObjType.Question;
             return ObjType.Unknown;
         }
+        public static getObjectName(obj: any): string {
+            if (obj["name"]) return obj["name"];
+            var objType = SurveyHelper.getObjectType(obj);
+            if (objType != ObjType.Page) return "";
+            var data = <Survey.Survey>(<Survey.Page>obj).data;
+            var index = data.pages.indexOf(<Survey.Page>obj);
+            return "[Page " + (index + 1) + "]";
+        }
     }
 }

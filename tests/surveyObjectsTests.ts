@@ -16,6 +16,16 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(objects.koObjects()[4].text(), intend + "page2", "The second page");
         assert.equal(objects.koObjects()[5].text(), intend + intend + "question3", "The third question");
     });
+    QUnit.test("No name pages", function (assert) {
+        var intend = SurveyEditor.SurveyObjects.intend;
+        var survey = createSurvey();
+        survey.pages[0].name = "";
+        survey.pages[1].name = "";
+        var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
+        objects.survey = survey;
+        assert.equal(objects.koObjects()[1].text(), intend + "[Page 1]", "The first item is Survey");
+        assert.equal(objects.koObjects()[4].text(), intend + "[Page 2]", "The second page");
+    });
     QUnit.test("selectObject method", function (assert) {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());

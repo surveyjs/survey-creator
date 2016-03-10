@@ -117,7 +117,7 @@
             if (SurveyHelper.getObjectType(obj) != ObjType.Page) {
                 intend += SurveyObjects.intend;
             }
-            return intend + obj["name"];
+            return intend + SurveyHelper.getObjectName(obj);
         }
     }
 }

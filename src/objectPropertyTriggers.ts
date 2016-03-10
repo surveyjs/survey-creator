@@ -67,6 +67,7 @@
         availableOperators = [
             { name: "empty", text: "is empty" }, { name: "notempty", text: "is not empty" },
             { name: "equal", text: "equals" }, { name: "notequal", text: "not equals" },
+            { name: "contains", text: "contains" }, { name: "notcontains", text: "not contains" },
             { name: "greater", text: "greater" }, { name: "less", text: "less" },
             { name: "greaterorequal", text: "greater or equals" }, { name: "lessorequal", text: "Less or Equals" }]
         koName: any; koOperator: any; koValue: any;
