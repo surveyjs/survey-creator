@@ -1,10 +1,10 @@
 ﻿<script type="text/html" id="propertyeditor-itemvalues">
     <div>
         <span data-bind="text: koText"></span>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#propertyEditorItemValuesModal">Edit</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">Edit</button>
     </div>
 
-    <div id="propertyEditorItemValuesModal" class="modal fade" role="dialog">
+    <div data-bind="attr: {id : modalName}" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

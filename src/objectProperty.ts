@@ -14,6 +14,8 @@ module SurveyEditor {
         public koValue: any;
         public koText: any;
         public arrayEditor: SurveyPropertyArray;
+        public modalName: string; 
+        public modalNameTarget: string;
         public koIsDefault: any;
         public editorType: string;
         public choices: Array<any>;
@@ -29,6 +31,8 @@ module SurveyEditor {
             var self = this;
             this.arrayEditor = null;
             var onItemChanged = function (newValue: any) { self.koValue(newValue); };
+            this.modalName = "modelEditor" + this.editorType + this.name;
+            this.modalNameTarget = "#" + this.modalName;
             if (this.editorType == "itemvalues") {
                 this.arrayEditor = new SurveyPropertyItemValues((newValue: any) => { onItemChanged(newValue); });
             }

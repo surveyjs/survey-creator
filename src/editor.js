@@ -2,8 +2,10 @@
 /// <reference path="pagesEditor.ts" />
 /// <reference path="textWorker.ts" />
 /// <reference path="surveyHelper.ts" />
+/// <reference path="surveyEmbedingWindow.ts" />
 /// <reference path="objectVerbs.ts" />
 /// <reference path="dragdrophelper.ts" />
+/// <reference path="templateEditor.ko.html.ts" />
 /// <reference path="template_page.html.ts" />
 /// <reference path="template_question.html.ts" />
 var SurveyEditor;
@@ -17,6 +19,9 @@ var SurveyEditor;
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
             this.koCanDeleteObject = ko.observable(false);
             var self = this;
+            this.koShowSaveButton = ko.observable(false);
+            this.saveButtonClick = function () { if (self.saveSurveyFunc)
+                self.saveSurveyFunc(); };
             this.koObjects = ko.observableArray();
             this.koSelectedObject = ko.observable();
             this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
@@ -62,30 +67,50 @@ var SurveyEditor;
             element.innerHTML = templateEditor.ko.html;
             self.applyBinding();
         };
+        SurveyEditor.prototype.loadSurvey = function (surveyId) {
+            var self = this;
+            new Survey.dxSurveyService().loadSurvey(surveyId, function (success, result, response) {
+                if (success && result) {
+                    self.text = JSON.stringify(result);
+                }
+            });
+        };
         Object.defineProperty(SurveyEditor.prototype, "text", {
             get: function () {
+                if (this.koIsShowDesigner())
+                    return this.getSurveyTextFromDesigner();
                 return this.jsonEditor != null ? this.jsonEditor.getValue() : "";
             },
             set: function (value) {
-                this.setTextValue(value, 1);
+                this.textWorker = new SurveyEditor_1.SurveyTextWorker(value);
+                if (this.textWorker.isJsonCorrect) {
+                    this.showDesigner();
+                }
+                else {
+                    this.setTextValue(value);
+                    this.koIsShowDesigner(false);
+                }
             },
             enumerable: true,
             configurable: true
         });
-        SurveyEditor.prototype.getTextAndProcess = function () {
-            var text = this.text;
-            if (this.timeoutId > 0) {
-                clearTimeout(this.timeoutId);
-                this.timeoutId = -1;
-                this.processJson(text);
-            }
-            return text;
-        };
-        SurveyEditor.prototype.setText = function (value, findText) {
-            this.isTextChangedFromDesigner = true;
-            this.text = value;
-            this.isTextChangedFromDesigner = false;
-            this.jsonEditor.find(findText);
+        Object.defineProperty(SurveyEditor.prototype, "saveSurveyFunc", {
+            get: function () { return this.saveSurveyFuncValue; },
+            set: function (value) {
+                this.saveSurveyFuncValue = value;
+                this.koShowSaveButton(value != null);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SurveyEditor.prototype.setTextValue = function (value) {
+            if (this.jsonEditor == null)
+                return;
+            this.isProcessingImmediately = true;
+            this.jsonEditor.setValue(value);
+            this.jsonEditor.renderer.updateFull(true);
+            this.processJson(value);
+            this.isProcessingImmediately = false;
         };
         SurveyEditor.prototype.addPage = function () {
             var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.pages, "page");
@@ -131,10 +156,13 @@ var SurveyEditor;
             this.koIsShowDesigner(true);
         };
         SurveyEditor.prototype.showJsonEditor = function () {
-            var json = new Survey.JsonObject().toJsonObject(this.survey);
-            this.jsonEditor.setValue(new SurveyEditor_1.SurveyJSON5().stringify(json, null, 1));
+            this.jsonEditor.setValue(this.getSurveyTextFromDesigner());
             this.jsonEditor.focus();
             this.koIsShowDesigner(false);
+        };
+        SurveyEditor.prototype.getSurveyTextFromDesigner = function () {
+            var json = new Survey.JsonObject().toJsonObject(this.survey);
+            return new SurveyEditor_1.SurveyJSON5().stringify(json, null, 1);
         };
         SurveyEditor.prototype.selectedObjectChanged = function (obj) {
             var canDeleteObject = false;
@@ -154,15 +182,6 @@ var SurveyEditor;
                 this.survey["setselectedQuestion"](null);
             }
             this.koCanDeleteObject(canDeleteObject);
-        };
-        SurveyEditor.prototype.setTextValue = function (value, position) {
-            if (this.jsonEditor == null)
-                return;
-            this.isProcessingImmediately = true;
-            this.jsonEditor.setValue(value, position);
-            this.jsonEditor.renderer.updateFull(true);
-            this.processJson(value);
-            this.isProcessingImmediately = false;
         };
         SurveyEditor.prototype.applyBinding = function () {
             if (this.renderedElement == null)
