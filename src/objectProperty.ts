@@ -18,6 +18,7 @@ module SurveyEditor {
         public modalNameTarget: string;
         public koIsDefault: any;
         public editorType: string;
+        public baseEditorType: string;
         public choices: Array<any>;
 
         constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
@@ -45,6 +46,7 @@ module SurveyEditor {
             if (this.editorType == "textitems") {
                 this.arrayEditor = new SurveyPropertyTextItems((newValue: any) => { onItemChanged(newValue); });
             }
+            this.baseEditorType = this.arrayEditor != null ? "array" : this.editorType;
             this.koValue.subscribe(function (newValue) {
                 if (self.object == null) return;
                 if (self.object[self.name] == newValue) return;

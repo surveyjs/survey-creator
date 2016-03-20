@@ -1,46 +1,25 @@
 ﻿<script type="text/html" id="propertyeditor-textitems">
-    <div>
-        <span data-bind="text: koText"></span>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#propertyEditorTextItemsModal">Edit</button>
-    </div>
-
-    <div id="propertyEditorTextItemsModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" data-bind="text:arrayEditor.title"></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="panel" data-bind="with: arrayEditor">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Title</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- ko foreach: koItems -->
-                                <tr>
-                                    <td><input type="text" data-bind="value:koName" style="width:200px" /></td>
-                                    <td><input type="text" data-bind="value:koTitle" style="width:200px" /></td>
-                                    <td><input type="button" data-bind="click: $parent.onDeleteClick" value="Delete" /></td>
-                                </tr>
-                                <!-- /ko -->
-                                <tr>
-                                    <td colspan="4"><input type="button" data-bind="click: onAddClick" value="Add" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="panel-footer">
-                            <input type="button" value="Apply" data-bind="click: onApplyClick" style="width:100px" />
-                            <input type="button" class="pull-right" data-dismiss="modal" value="close" style="width:100px" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="panel">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: koItems -->
+            <tr>
+                <td><input type="text" data-bind="value:koName" style="width:200px" /></td>
+                <td><input type="text" data-bind="value:koTitle" style="width:200px" /></td>
+                <td><input type="button" data-bind="click: $parent.onDeleteClick" value="Delete" /></td>
+            </tr>
+            <!-- /ko -->
+            <tr>
+                <td colspan="4"><input type="button" data-bind="click: onAddClick" value="Add" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </script>

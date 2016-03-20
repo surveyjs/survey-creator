@@ -1,8 +1,8 @@
 ﻿<script type="text/html" id="objectverbs">
     <!-- ko foreach: koVerbs -->
-        <div>
-            <span data-bind="text:text"></span>
-            <select style="width:50%" data-bind="options: koItems, optionsText: 'text', optionsValue:'value', value: koSelectedItem"></select>
+        <div class="row">
+            <span style="width:30%" data-bind="text:text"></span>
+            <select style="width:65%" data-bind="options: koItems, optionsText: 'text', optionsValue:'value', value: koSelectedItem"></select>
             <!-- ko if: ($index() != ($parent.koVerbs().length - 1)) -->
             <p></p>
             <!-- /ko -->  

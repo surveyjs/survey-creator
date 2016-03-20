@@ -1,42 +1,21 @@
 ﻿<script type="text/html" id="propertyeditor-validators">
-    <div>
-        <span data-bind="text: koText"></span>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#propertyEditorValidatorsModal">Edit</button>
-    </div>
-
-    <div id="propertyEditorValidatorsModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" data-bind="text:arrayEditor.title"></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="panel" data-bind="with: arrayEditor">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <select style="width:65%" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
-                                <div class="btn-group">
-                                    <button type="button" class="glyphicon glyphicon-plus dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" >
-                                        <!-- ko foreach: availableValidators -->
-                                        <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
-                                        <!-- /ko  -->
-                                    </ul>
-                                </div>
-                                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                            </div>
-                        </div>
-                        <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
-                        <div class="panel-footer">
-                            <input type="button" value="Apply" data-bind="click: onApplyClick" style="width:100px" />
-                            <input type="button" class="pull-right" data-dismiss="modal" value="close" style="width:100px" />
-                        </div>
-                    </div>
-                </div>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="row">
+            <select style="width:65%" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
+            <div class="btn-group">
+                <button type="button" class="glyphicon glyphicon-plus dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" >
+                    <!-- ko foreach: availableValidators -->
+                    <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
+                    <!-- /ko  -->
+                </ul>
             </div>
+            <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
         </div>
     </div>
+    <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
+</div>
 </script>

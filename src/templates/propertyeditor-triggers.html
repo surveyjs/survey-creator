@@ -1,57 +1,36 @@
 ﻿<script type="text/html" id="propertyeditor-triggers">
-    <div>
-        <span data-bind="text: koText"></span>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#propertyEditorTriggersModal">Edit</button>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="row">
+            <select style="width:65%" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+            <button type="button" data-bind="enable: koQuestions().length > 0, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
     </div>
-
-    <div id="propertyEditorTriggersModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" data-bind="text:arrayEditor.title"></h4>
+    <div data-bind="visible: koSelected() == null">
+        <div data-bind="visible: koQuestions().length == 0">
+            There is no any question in the survey.
+        </div>
+        <div data-bind="visible: koQuestions().length > 0">
+            Please create a trigger
+        </div>
+    </div>
+    <div data-bind="visible: koSelected() != null">
+        <div data-bind="with: koSelected">
+            <span>On </span><select data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
+            <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+            <input type="text" data-bind="visible: koRequireValue, value:koValue" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
+                    <!-- /ko -->
                 </div>
-                <div class="modal-body">
-                    <div class="panel" data-bind="with: arrayEditor">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <select style="width:65%" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-                                <button type="button" data-bind="enable: koQuestions().length > 0, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-                                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                            </div>
-                        </div>
-                        <div data-bind="visible: koSelected() == null">
-                            <div data-bind="visible: koQuestions().length == 0">
-                                There is no any question in the survey.
-                            </div>
-                            <div data-bind="visible: koQuestions().length > 0">
-                                Please create a trigger
-                            </div>
-                        </div>
-                        <div data-bind="visible: koSelected() != null">
-                            <div data-bind="with: koSelected">
-                                <span>On </span><select data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
-                                <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
-                                <input type="text" data-bind="visible: koRequireValue, value:koValue" />
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
-                                        <!-- /ko -->
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
-                                        <!-- /ko -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <input type="button" value="Apply" data-bind="click: onApplyClick" style="width:100px" />
-                            <input type="button" class="pull-right" data-dismiss="modal" value="close" style="width:100px" />
-                        </div>
-                    </div>
+                <div class="col-sm-6">
+                    <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
+                    <!-- /ko -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 </script>

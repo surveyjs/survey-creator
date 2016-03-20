@@ -1,0 +1,25 @@
+﻿<script type="text/html" id="propertyeditor-array">
+    <div>
+        <span data-bind="text: koText"></span>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">Edit</button>
+    </div>
+
+    <div data-bind="attr: {id : modalName}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" data-bind="text:arrayEditor.title"></h4>
+                </div>
+                <div class="modal-body">
+                    <!-- ko template: { name: 'propertyeditor-' + editorType, data: arrayEditor } -->
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="Apply" data-bind="click: arrayEditor.onApplyClick" style="width:100px" />
+                    <input type="button" data-dismiss="modal" value="Close" style="width:100px" />
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
