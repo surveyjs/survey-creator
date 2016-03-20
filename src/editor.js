@@ -17,6 +17,7 @@ var SurveyEditor;
             this.surveyPostId = null;
             this.timeoutId = -1;
             this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
+            this.koCopiedQuestions = ko.observableArray();
             this.koCanDeleteObject = ko.observable(false);
             var self = this;
             this.koShowSaveButton = ko.observable(false);
@@ -41,6 +42,8 @@ var SurveyEditor;
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
             this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e); };
             this.clickQuestion = function (questionType) { self.doClickQuestion(questionType); };
+            this.draggingCopiedQuestion = function (item, e) { self.doDraggingCopiedQuestion(item.json, e); };
+            this.clickCopiedQuestion = function (item) { self.doClickCopiedQuestion(item.json); };
             if (renderedElement) {
                 this.render(renderedElement);
             }
@@ -217,6 +220,7 @@ var SurveyEditor;
             this.surveyVerbs.survey = this.survey;
             var self = this;
             this.surveyValue["onSelectedQuestionChanged"].add(function (sender, options) { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
+            this.surveyValue["onCopyQuestion"].add(function (sender, options) { self.copyQuestion(self.koSelectedObject().value); });
             this.surveyValue.onCurrentPageChanged.add(function (sender, options) { self.pagesEditor.setSelectedPage(sender.currentPage); });
             this.surveyValue.onQuestionAdded.add(function (sender, options) { self.onQuestionAdded(options.question); });
             this.surveyValue.onQuestionRemoved.add(function (sender, options) { self.onQuestionRemoved(options.question); });
@@ -244,18 +248,42 @@ var SurveyEditor;
             var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
             new SurveyEditor_1.DragDropHelper(this.survey).startDragNewQuestion(e, questionType, name);
         };
+        SurveyEditor.prototype.doDraggingCopiedQuestion = function (json, e) {
+            var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            new SurveyEditor_1.DragDropHelper(this.survey).startDragCopiedQuestion(e, name, json);
+        };
         SurveyEditor.prototype.doClickQuestion = function (questionType) {
             var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, name));
+        };
+        SurveyEditor.prototype.doClickCopiedQuestion = function (json) {
+            var name = SurveyEditor_1.SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            var question = Survey.QuestionFactory.Instance.createQuestion(json["type"], name);
+            new Survey.JsonObject().toObject(json, question);
+            question.name = name;
+            this.doClickQuestionCore(question);
+        };
+        SurveyEditor.prototype.doClickQuestionCore = function (question) {
             var page = this.survey.currentPage;
             var index = -1;
             if (this.survey["selectedQuestionValue"] != null) {
                 index = page.questions.indexOf(this.survey["selectedQuestionValue"]) + 1;
             }
-            var question = Survey.QuestionFactory.Instance.createQuestion(questionType, name);
             page.addQuestion(question, index);
         };
         SurveyEditor.prototype.deleteCurrentObject = function () {
             this.deleteObject(this.koSelectedObject().value);
+        };
+        SurveyEditor.prototype.copyQuestion = function (question) {
+            var objType = SurveyEditor_1.SurveyHelper.getObjectType(question);
+            if (objType != SurveyEditor_1.ObjType.Question)
+                return;
+            var json = new Survey.JsonObject().toJsonObject(question);
+            json.type = question.getType();
+            this.koCopiedQuestions.splice(0, 0, { name: question.name, json: json });
+            if (this.koCopiedQuestions().length > 3) {
+                this.koCopiedQuestions.splice(3, 1);
+            }
         };
         SurveyEditor.prototype.deleteObject = function (obj) {
             this.surveyObjects.removeObject(obj);
@@ -318,6 +346,9 @@ var SurveyEditor;
     Survey.Survey.prototype["onCreating"] = function () {
         this.selectedQuestionValue = null;
         this.onSelectedQuestionChanged = new Survey.Event();
+        this.onCopyQuestion = new Survey.Event();
+        var self = this;
+        this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
     };
     Survey.Survey.prototype["setselectedQuestion"] = function (value) {
         if (value == this.selectedQuestionValue)

@@ -70,14 +70,12 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(itemValueProperty.koItems()[1].koValue(), 3, "check value of the second element");
         assert.equal(itemValueProperty.koItems()[1].koText(), "item3", "check text of the second element");
 
-        itemValueProperty.koNewValue(4);
-        itemValueProperty.koNewText("item4");
         itemValueProperty.onAddClick();
         assert.equal(itemValueProperty.koItems().length, 3, "there are three elements after adding");
+        itemValueProperty.koItems()[2].koValue(4);
+        itemValueProperty.koItems()[2].koText("item4")
         assert.equal(itemValueProperty.koItems()[2].koValue(), 4, "check value of the last element");
         assert.equal(itemValueProperty.koItems()[2].koText(), "item4", "check text of the last element");
-        assert.equal(itemValueProperty.koNewValue(), null, "new value should be null after adding");
-        assert.equal(itemValueProperty.koNewText(), null, "new text should be null after adding");
 
         itemValueProperty.onApplyClick();
         assert.equal(choices.length, 3, "there are three elements after adding");

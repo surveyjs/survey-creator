@@ -35,6 +35,11 @@
                         <span data-bind="text:$data"></span>
                     </button>
                     <!-- /ko  -->
+                    <!-- ko foreach: koCopiedQuestions -->
+                    <button class="btn btn-primary" type="button" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}}">
+                        <span data-bind="text:name"></span>
+                    </button>
+                    <!-- /ko  -->
                 </form>
             </nav>
             <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>

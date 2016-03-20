@@ -1,9 +1,12 @@
-﻿<div class="well well-sm" data-bind="attr : {draggable: $root.isDesignMode}, visible: question.koVisible() || $root.isDesignMode, click: $root.isDesignMode ? koOnClick: null, css: {svd_q_selected : koIsSelected},
+﻿<div class="well well-sm" data-bind="attr : {draggable: $root.isDesignMode}, visible: question.koVisible() || $root.isDesignMode, click: $root.isDesignMode ? koOnClick: null, 
          event:{
            dragstart:function(el, e){ dragStart(e); return true; },
            dragover:function(el, e){ dragOver(e);},
            drop:function(el, e){ dragDrop(e);}
-         }">
+         }, css:{svd_q_design_border: $root.isDesignMode, svd_q_selected : koIsSelected}">
+    <div class="svd_q_copybutton" data-bind="visible: koIsSelected">
+        <button class="btn btn-primary" data-bind="click: $root.copyQuestionClick">Copy</button>
+    </div>
     <div data-bind="css:{svd_q_design: $root.isDesignMode}">
         <div class="alert alert-danger" role="alert" data-bind="visible: koErrors().length > 0, foreach: koErrors">
             <div>

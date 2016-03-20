@@ -1,7 +1,7 @@
 ﻿module SurveyEditor {
     export class DragDropHelper {
         static dataStart: string = "surveyjs,";
-        static dragData: string = "";
+        static dragData: any = {text: "", json: null };
         static prevEvent = { question: null, x: -1, y: -1 };
 
         constructor(public data: Survey.ISurvey) {
@@ -13,9 +13,12 @@
         public startDragQuestion(event: DragEvent, questionName: string) {
             this.setData(event, DragDropHelper.dataStart + "questionname:" + questionName);
         }
+        public startDragCopiedQuestion(event: DragEvent, questionName: string, questionJson: any) {
+            this.setData(event, DragDropHelper.dataStart + "questionname:" + questionName, questionJson);
+        }
         public isSurveyDragging(event: DragEvent): boolean {
             if (!event) return false;
-            var data = this.getData(event);
+            var data = this.getData(event).text;
             return data && data.indexOf(DragDropHelper.dataStart) == 0;
         }
         public doDragDropOver(event: DragEvent, question: Survey.Question) {
@@ -34,7 +37,16 @@
             var dataInfo = this.getDataInfo(event);
             this.clearData();
             if (!dataInfo) return;
-            var targetQuestion = <Survey.Question>this.survey.getQuestionByName(dataInfo["questionname"]);
+            var targetQuestion = null;
+            var json = dataInfo["json"];
+            if (json) {
+                targetQuestion = Survey.QuestionFactory.Instance.createQuestion(json["type"], name);
+                new Survey.JsonObject().toObject(json, targetQuestion);
+                targetQuestion.name = dataInfo["questionname"];
+            }
+            if (!targetQuestion) {
+                targetQuestion = <Survey.Question>this.survey.getQuestionByName(dataInfo["questionname"]);
+            }
             if (!targetQuestion && dataInfo["questiontype"]) {
                 targetQuestion = Survey.QuestionFactory.Instance.createQuestion(dataInfo["questiontype"], dataInfo["questionname"]);
             }
@@ -78,13 +90,14 @@
         private getDataInfo(event: DragEvent): any {
             var data = this.getData(event);
             if (!data) return null;
-            data = data.substr(DragDropHelper.dataStart.length);
-            var array = data.split(',');
-            var result = {};
+            var text = data.text.substr(DragDropHelper.dataStart.length);
+            var array = text.split(',');
+            var result = {json: null};
             for (var i = 0; i < array.length; i++) {
                 var item = array[i].split(':');
                 result[item[0]] = item[1];
             }
+            result.json = data.json;
             return result;
         }
         private getY(element: HTMLElement): number {
@@ -96,20 +109,23 @@
             }
             return result;
         }
-        private setData(event: DragEvent, data: string) {
+        private setData(event: DragEvent, text: string, json: any = null) {
             if (event.dataTransfer) {
-                event.dataTransfer.setData("Text", data);
+                event.dataTransfer.setData("Text", text);
             }
-            DragDropHelper.dragData = data;
+            DragDropHelper.dragData = { text: text, json: json };
         }
-        private getData(event: DragEvent): string {
+        private getData(event: DragEvent): any {
             if (event.dataTransfer) {
-                var data = event.dataTransfer.getData("Text");
+                var text = event.dataTransfer.getData("Text");
+                if (text) {
+                    DragDropHelper.dragData.text = text;
+                }
             }
-            return data ? data : DragDropHelper.dragData;
+            return DragDropHelper.dragData;
         }
         private clearData() {
-            DragDropHelper.dragData = "";
+            DragDropHelper.dragData = {text: "", json: null};
             var prev = DragDropHelper.prevEvent;
             prev.question = null;
             prev.x = -1;

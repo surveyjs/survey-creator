@@ -22,6 +22,14 @@
 .svd_q_design {
     pointer-events: none;
 }
+.svd_q_design_border {
+    position:relative;
+}
+.svd_q_copybutton {
+    position: absolute;
+    right:5px;
+    top:5px;
+}
 .svd_dragover {
     pointer-events: none;
     width:100%;
@@ -33,4 +41,8 @@
 }
 .svd_navbarbuttonsfirst {
     padding-left: 30px;
+}
+.svd_notopbottompaddings {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
 }
