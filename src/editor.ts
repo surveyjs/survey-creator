@@ -230,6 +230,9 @@ module SurveyEditor {
         }
         private initSurvey(json: any) {
             this.surveyValue = new Survey.Survey(json);
+            if (this.surveyValue.isEmpty) {
+                this.surveyValue = new Survey.Survey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
+            }
             this.survey.mode = "designer";
             this.survey.render(this.surveyjs);
             this.surveyObjects.survey = this.survey;

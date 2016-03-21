@@ -17,11 +17,14 @@
         private isSurveyAsPage: boolean;
 
         constructor(public text: string) {
+            if (!this.text || this.text.trim() == "") {
+                this.text = "{}";
+            }
             this.errors = [];
             this.process();
         }
         public get survey(): Survey.Survey { return this.surveyValue; }
-        public get isJsonCorrect(): boolean { return this.surveyValue && !this.surveyValue.isEmpty; }
+        public get isJsonCorrect(): boolean { return this.surveyValue != null; }
         protected process() {
             try {
                 this.jsonValue = new SurveyJSON5(1).parse(this.text);

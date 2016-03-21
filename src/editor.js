@@ -212,6 +212,9 @@ var SurveyEditor;
         };
         SurveyEditor.prototype.initSurvey = function (json) {
             this.surveyValue = new Survey.Survey(json);
+            if (this.surveyValue.isEmpty) {
+                this.surveyValue = new Survey.Survey(new SurveyEditor_1.SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
+            }
             this.survey.mode = "designer";
             this.survey.render(this.surveyjs);
             this.surveyObjects.survey = this.survey;
