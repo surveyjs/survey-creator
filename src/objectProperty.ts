@@ -62,13 +62,17 @@ module SurveyEditor {
         }
         protected updateValue() {
             this.isValueUpdating = true;
-            this.koValue(this.object[this.name]);
+            this.koValue(this.getValue());
             if (this.arrayEditor) {
                 this.arrayEditor.object = this.object;
                 this.arrayEditor.title("Edit property '" + this.property.name + "'");
                 this.arrayEditor.value = this.koValue();
             }
             this.isValueUpdating = false;
+        }
+        protected getValue(): any {
+            if (this.property.hasToUseGetValue) return this.property.getValue(this.object);
+            return this.object[this.name];
         }
         protected getValueText(value: any): string {
             if (value != null && Array.isArray(value)) {

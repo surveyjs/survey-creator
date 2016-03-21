@@ -297,10 +297,22 @@ module SurveyEditor {
             if (objType != ObjType.Question) return;
             var json = new Survey.JsonObject().toJsonObject(question);
             json.type = question.getType();
-            this.koCopiedQuestions.splice(0, 0, { name: question.name, json: json });
-            if (this.koCopiedQuestions().length > 3) {
-                this.koCopiedQuestions.splice(3, 1);
+            var item = this.getCopiedQuestionByName(question.name);
+            if (item) {
+                item.json = json;
+            } else {
+                this.koCopiedQuestions.push({ name: question.name, json: json });
             }
+            if (this.koCopiedQuestions().length > 3) {
+                this.koCopiedQuestions.splice(0, 1);
+            }
+        }
+        private getCopiedQuestionByName(name: string) {
+            var items = this.koCopiedQuestions();
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].name == name) return items[i];
+            }
+            return null;
         }
         private deleteObject(obj: any) {
             this.surveyObjects.removeObject(obj);

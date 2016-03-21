@@ -82,4 +82,14 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(choices[2].value, 4, "check value of the last element");
         assert.equal(choices[2].text, "item4", "check text of the last element");
     });
+    QUnit.test("Use metadata getPropertyValue function", function (assert) {
+        var editor = new SurveyEditor.SurveyObjectEditor();
+        var car = new TruckDefaultValue();
+        car.title = "test";
+        editor.selectedObject = car;
+        var property = editor.getPropertyEditor("title");
+        
+        editor.koActiveProperty().koValue("newName");
+        assert.equal(property.koText(), "test", "use the real value to get value");
+    });
 }
