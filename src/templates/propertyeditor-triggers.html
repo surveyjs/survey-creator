@@ -1,10 +1,14 @@
 ﻿<script type="text/html" id="propertyeditor-triggers">
 <div class="panel">
     <div class="panel-heading">
-        <div class="row">
-            <select style="width:65%" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-            <button type="button" data-bind="enable: koQuestions().length > 0, click: onAddClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
-            <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        <div class="row input-group">
+            <span class="input-group-btn">
+                <button type="button" data-bind="enable: koQuestions().length > 0, click: onAddClick" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            </span>
+            <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+            <span class="input-group-btn">
+                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
         </div>
     </div>
     <div data-bind="visible: koSelected() == null">
@@ -16,10 +20,12 @@
         </div>
     </div>
     <div data-bind="visible: koSelected() != null">
-        <div data-bind="with: koSelected">
-            <span>On </span><select data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
-            <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
-            <input type="text" data-bind="visible: koRequireValue, value:koValue" />
+        <div class="row" data-bind="with: koSelected">
+            <div class="form-inline col-sm-12">
+                <span>On </span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
+                <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
+            </div>
             <div class="row">
                 <div class="col-sm-6">
                     <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->

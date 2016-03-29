@@ -1,19 +1,19 @@
 ﻿<script type="text/html" id="propertyeditor-validators">
 <div class="panel">
     <div class="panel-heading">
-        <div class="row">
-            <select style="width:65%" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
-            <div class="btn-group">
-                <button type="button" class="glyphicon glyphicon-plus dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" >
-                    <!-- ko foreach: availableValidators -->
-                    <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
-                    <!-- /ko  -->
-                </ul>
-            </div>
-            <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" style="width:15%" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        <div class="row input-group">
+            <button type="button" class="dropdown-toggle input-group-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <ul class="dropdown-menu input-group">
+                <!-- ko foreach: availableValidators -->
+                <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
+                <!-- /ko  -->
+            </ul>
+            <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
+            <span class="input-group-btn">
+                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
         </div>
     </div>
     <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
