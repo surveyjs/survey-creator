@@ -27,7 +27,13 @@ module SurveyEditor {
             var array = [];
             for (var i = 0; i < value.length; i++) {
                 var item = value[i];
-                array.push({ koValue: ko.observable(item.value), koText: ko.observable(item.text), koHasError: ko.observable(false) });
+                var itemValue = item;
+                var itemText = null;
+                if (item.value) {
+                    itemValue = item.value;
+                    itemText = item.text;
+                }
+                array.push({ koValue: ko.observable(itemValue), koText: ko.observable(itemText), koHasError: ko.observable(false) });
             }
             this.koItems(array);
         }
@@ -39,7 +45,11 @@ module SurveyEditor {
             this.value_ = [];
             for (var i = 0; i < this.koItems().length; i++) {
                 var item = this.koItems()[i];
-                this.value_.push({ value: item.koValue(), text: item.koText() });
+                if (item.koText()) {
+                    this.value_.push({ value: item.koValue(), text: item.koText() });
+                } else {
+                    this.value_.push(item.koValue());
+                }
             }
             if (this.onValueChanged) {
                 this.onValueChanged(this.value_);

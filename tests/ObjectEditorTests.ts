@@ -82,6 +82,18 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(choices[2].value, 4, "check value of the last element");
         assert.equal(choices[2].text, "item4", "check text of the last element");
     });
+    QUnit.test("SurveyPropertyItemValue_PureValue", function (assert) {
+        var choices = [1, "item2", { value: 3, text: "item3" }];
+        var itemValueProperty = new SurveyEditor.SurveyPropertyItemValues((newValue: Array<Survey.ItemValue>) => {
+            choices = newValue;
+        });
+        itemValueProperty.value = choices;
+        assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
+        assert.equal(itemValueProperty.koItems()[0].koValue(), 1, "check value of the first element");
+        assert.equal(itemValueProperty.koItems()[1].koValue(), "item2", "check value of the second element");
+        assert.equal(itemValueProperty.koItems()[2].koValue(), 3, "check value of the third element");
+        assert.equal(itemValueProperty.koItems()[2].koText(), "item3", "check text of the third element");
+    });
     QUnit.test("Use metadata getPropertyValue function", function (assert) {
         var editor = new SurveyEditor.SurveyObjectEditor();
         var car = new TruckDefaultValue();
