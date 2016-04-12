@@ -6,17 +6,14 @@ var gulp = require('gulp'),
     tsd = require('gulp-tsd'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
-    qunit = require("gulp-qunit"), 
+    qunit = require("gulp-qunit"),
     serve = require("gulp-serve"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
     replace = require("gulp-replace"),
     sequence = require("gulp-sequence"),
     html2ts = require("gulp-html-to-ts"),
-    project = require("./project.json"),
-    plugins = require("gulp-load-plugins")({
-        pattern: ['gulp-*', 'gulp.*', 'main-bower-files'],
-        replaceString: /\bgulp[\-.]/});
+    project = require("./project.json");
 
 var Server = require("karma").Server;
 
@@ -47,17 +44,21 @@ gulp.task('default', function () {
     // place code for your default task here
 });
 
-gulp.task('copylibs', function () {
-    var jsFiles = ['src/js/*'];
-    gulp.src(plugins.mainBowerFiles({includeDev: "true"}).concat(jsFiles))
-        .pipe(gulp.dest(paths.jsFolder));
-});
-
 gulp.task('tsd', function (callback) {
     tsd({
         command: 'reinstall',
+        latest: true,
         config: 'tsd.json'
     }, callback);
+});
+
+gulp.task('copyfiles', function (callback) {
+    gulp.src(gnf(null, 'package.json'), { base: './' })
+        .pipe(rename(function (path) {
+            path.dirname = "";
+            path.basename = path.basename.replace("-latest", "");
+        }))
+        .pipe(gulp.dest(paths.jsFolder));
 });
 
 (function () {

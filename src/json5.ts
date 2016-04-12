@@ -727,8 +727,8 @@ module SurveyEditor {
                                 if (typeof value !== "undefined" && value !== null) {
                                     buffer += this.makeIndent(this.indentStr, this.objStack.length);
                                     nonEmpty = true;
-                                    var key = this.isWord(prop) ? prop : this.escapeString(prop);
-                                    buffer += key + ":" + (this.indentStr ? ' ' : '') + value + ",";
+                                    var propKey = this.isWord(prop) ? prop : this.escapeString(prop);
+                                    buffer += propKey + ":" + (this.indentStr ? ' ' : '') + value + ",";
                                 }
                             }
                         }
