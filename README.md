@@ -18,5 +18,6 @@ See the visual editor in [action](http://surveyjs.org/builder/).
  The visual library is depends from: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com) and [bootstrap](http://getbootstrap.com).
 
 #License
- - For Non-commercial use - [![Noncommercial](https://licensebuttons.net/l/by-nc/3.0/88x31.png)](http://creativecommons.org/licenses/by-nc/3.0/legalcode).
- - For commercial use, please contact me: andrew.telnov at gmail.com.  
+ |Non-commercial use   | Commercial use   |
+|---|---|
+|[![Noncommercial](https://licensebuttons.net/l/by-nc/3.0/88x31.png)](http://creativecommons.org/licenses/by-nc/3.0/legalcode) | Please contact me: andrew.telnov at gmail.com  |
