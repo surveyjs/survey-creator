@@ -21,13 +21,13 @@
             var data = this.getData(event).text;
             return data && data.indexOf(DragDropHelper.dataStart) == 0;
         }
-        public doDragDropOver(event: DragEvent, question: Survey.Question) {
+        public doDragDropOver(event: DragEvent, question: Survey.QuestionBase) {
             event = this.getEvent(event);
             if (!question || !this.isSurveyDragging(event) || this.isSamePlace(event, question)) return;
             var index = this.getQuestionIndex(event, question);
             this.survey.currentPage["koDragging"](index);
         }
-        public doDrop(event: DragEvent, question: Survey.Question = null) {
+        public doDrop(event: DragEvent, question: Survey.QuestionBase = null) {
             if (event.stopPropagation) {
                 event.stopPropagation(); 
             }
@@ -45,7 +45,7 @@
                 targetQuestion.name = dataInfo["questionname"];
             }
             if (!targetQuestion) {
-                targetQuestion = <Survey.Question>this.survey.getQuestionByName(dataInfo["questionname"]);
+                targetQuestion = <Survey.QuestionBase>this.survey.getQuestionByName(dataInfo["questionname"]);
             }
             if (!targetQuestion && dataInfo["questiontype"]) {
                 targetQuestion = Survey.QuestionFactory.Instance.createQuestion(dataInfo["questiontype"], dataInfo["questionname"]);
@@ -53,7 +53,7 @@
             if (!targetQuestion) return;
             this.moveQuestionTo(targetQuestion, index);
         }
-        private getQuestionIndex(event: DragEvent, question: Survey.Question) {
+        private getQuestionIndex(event: DragEvent, question: Survey.QuestionBase) {
             var page = this.survey.currentPage;
             if (!question) return page.questions.length;
             var index = page.questions.indexOf(question);
@@ -66,7 +66,7 @@
             if (y > height / 2) index++
             return index;
         }
-        private isSamePlace(event: DragEvent, question: Survey.Question): boolean {
+        private isSamePlace(event: DragEvent, question: Survey.QuestionBase): boolean {
             var prev = DragDropHelper.prevEvent;
             if (prev.question != question || Math.abs(event.clientX - prev.x) > 5 || Math.abs(event.clientY - prev.y) > 5) {
                 prev.question = question;
@@ -79,7 +79,7 @@
         private getEvent(event: DragEvent): DragEvent {
             return event["originalEvent"] ? event["originalEvent"] : event;
         }
-        private moveQuestionTo(targetQuestion: Survey.Question, index: number) {
+        private moveQuestionTo(targetQuestion: Survey.QuestionBase, index: number) {
             if (targetQuestion == null) return;
             var page = this.survey.getPageByQuestion(targetQuestion);
             if (page) {

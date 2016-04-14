@@ -401,7 +401,7 @@ var SurveyEditor;
             this.koDragging(this.questions.length);
         }
     };
-    Survey.Question.prototype["onCreating"] = function () {
+    Survey.QuestionBase.prototype["onCreating"] = function () {
         var self = this;
         this.dragDropHelperValue = null;
         this.dragDropHelper = function () {
@@ -419,7 +419,7 @@ var SurveyEditor;
             self.data["setselectedQuestion"](this);
         };
     };
-    Survey.Question.prototype["onSelectedQuestionChanged"] = function () {
+    Survey.QuestionBase.prototype["onSelectedQuestionChanged"] = function () {
         if (this.data == null)
             return;
         this.koIsSelected(this.data["selectedQuestionValue"] == this);

@@ -41,7 +41,7 @@ module SurveyObjectEditorTests.Tests {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
         objects.survey = survey;
-        var page = survey.addNewPage("newPage");
+        var page = <Survey.Page>survey.addNewPage("newPage");
         objects.addPage(page);
         assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, page, "new object is added");
         assert.equal(objects.koSelected().value, page, "new page is selected");
@@ -50,7 +50,7 @@ module SurveyObjectEditorTests.Tests {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
         objects.survey = survey;
-        var page = survey.pages[2];
+        var page = <Survey.Page>survey.pages[2];
         survey.pages.splice(2, 1);
         objects.removeObject(page);
         survey.pages.splice(1, 0, page);
@@ -66,7 +66,7 @@ module SurveyObjectEditorTests.Tests {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
         objects.survey = survey;
-        var page = survey.pages[survey.pages.length - 1];
+        var page = <Survey.Page>survey.pages[survey.pages.length - 1];
         var question = page.addNewQuestion("text", "newQuestion");
         objects.addQuestion(page, question);
         assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, question, "new object is added");
@@ -76,7 +76,7 @@ module SurveyObjectEditorTests.Tests {
         var survey = createSurvey();
         var objects = new SurveyEditor.SurveyObjects(ko.observableArray(), ko.observable());
         objects.survey = survey;
-        var page = survey.pages[0];
+        var page = <Survey.Page>survey.pages[0];
         var question = page.addNewQuestion("text", "newQuestion");
         objects.addQuestion(page, question);
         assert.equal(objects.koObjects()[1 + page.questions.length].value, question, "new object is added");

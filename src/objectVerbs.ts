@@ -29,7 +29,7 @@
             var array = [];
             var objType = SurveyHelper.getObjectType(this.obj);
             if (objType == ObjType.Question) {
-                var question = <Survey.Question>this.obj;
+                var question = <Survey.QuestionBase>this.obj;
                 if (this.survey.pages.length > 1) {
                     array.push(new SurveyVerbChangePageItem(this.survey, question));
                 }
@@ -44,14 +44,14 @@
     export class SurveyVerbItem {
         koItems: any;
         koSelectedItem: any;
-        constructor(public survey: Survey.Survey, public question: Survey.Question) {
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
             this.koItems = ko.observableArray();
             this.koSelectedItem = ko.observable();
         }
         public get text(): string { return ""; }
     }
     export class SurveyVerbChangeTypeItem extends SurveyVerbItem {
-        constructor(public survey: Survey.Survey, public question: Survey.Question) {
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
             super(survey, question);
             var classes = Survey.JsonObject.metaData.getChildrenClasses("selectbase", true);
             var array = [];
@@ -78,7 +78,7 @@
     }
     export class SurveyVerbChangePageItem extends SurveyVerbItem {
         private prevPage: Survey.Page;
-        constructor(public survey: Survey.Survey, public question: Survey.Question) {
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
             super(survey, question);
             var array = [];
             for (var i = 0; i < this.survey.pages.length; i++) {
@@ -86,7 +86,7 @@
                 array.push({ value: page, text: SurveyHelper.getObjectName(page) });
             }
             this.koItems(array);
-            this.prevPage = this.survey.getPageByQuestion(question);
+            this.prevPage = <Survey.Page>this.survey.getPageByQuestion(question);
             this.koSelectedItem(this.prevPage);
             var self = this;
             this.koSelectedItem.subscribe(function (newValue) { self.changePage(newValue); });

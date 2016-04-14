@@ -35,7 +35,7 @@
             }
             this.koSelected(pageItem);
         }
-        public addQuestion(page: Survey.Page, question: Survey.Question) {
+        public addQuestion(page: Survey.Page, question: Survey.QuestionBase) {
             var index = this.getItemIndex(page);
             if (index < 0) return;
             var questionIndex = page.questions.indexOf(question) + 1;
@@ -84,7 +84,7 @@
             }
             objs.push(this.createItem(this.survey, "Survey"));
             for (var i = 0; i < this.survey.pages.length; i++) {
-                var page = this.survey.pages[i];
+                var page = <Survey.Page>this.survey.pages[i];
                 objs.push(this.createPage(page));
                 for (var j = 0; j < page.questions.length; j++) {
                     objs.push(this.createQuestion(page.questions[j]));
@@ -96,7 +96,7 @@
         private createPage(page: Survey.Page) {
             return this.createItem(page, this.getText(page));
         }
-        private createQuestion(question: Survey.Question) {
+        private createQuestion(question: Survey.QuestionBase) {
             return this.createItem(question, this.getText(question));
         }
         private createItem(value: Survey.Base, text: string) {

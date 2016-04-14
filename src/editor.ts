@@ -135,11 +135,11 @@ module SurveyEditor {
         }
         public addPage() {
             var name = SurveyHelper.getNewName(this.survey.pages, "page");
-            var page = this.surveyValue.addNewPage(name);
+            var page = <Survey.Page>this.surveyValue.addNewPage(name);
             this.addPageToUI(page);
         }
         private movePage(indexFrom: number, indexTo: number) {
-            var page = this.survey.pages[indexFrom];
+            var page = <Survey.Page>this.survey.pages[indexFrom];
             this.deleteObject(page);
             this.survey.pages.splice(indexTo, 0, page);
             this.addPageToUI(page);
@@ -148,12 +148,12 @@ module SurveyEditor {
             this.pagesEditor.survey = this.surveyValue;
             this.surveyObjects.addPage(page);
         }
-        private onQuestionAdded(question: Survey.Question) {
-            var page = this.survey.getPageByQuestion(question);
+        private onQuestionAdded(question: Survey.QuestionBase) {
+            var page = <Survey.Page>this.survey.getPageByQuestion(question);
             this.surveyObjects.addQuestion(page, question);
             this.survey.render();
         }
-        private onQuestionRemoved(question: Survey.Question) {
+        private onQuestionRemoved(question: Survey.QuestionBase) {
             this.surveyObjects.removeObject(question);
             this.survey.render();
         }
@@ -237,12 +237,12 @@ module SurveyEditor {
             this.survey.render(this.surveyjs);
             this.surveyObjects.survey = this.survey;
             this.pagesEditor.survey = this.survey;
-            this.pagesEditor.setSelectedPage(this.survey.currentPage);
+            this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
             this.surveyVerbs.survey = this.survey;
             var self = this;
             this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
             this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.copyQuestion(self.koSelectedObject().value); });
-            this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(sender.currentPage); });
+            this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
             this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
             this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.onQuestionRemoved(options.question); });
         }
@@ -284,7 +284,7 @@ module SurveyEditor {
             question.name = name;
             this.doClickQuestionCore(question);
         }
-        private doClickQuestionCore(question: Survey.Question) {
+        private doClickQuestionCore(question: Survey.QuestionBase) {
             var page = this.survey.currentPage;
             var index = -1;
             if (this.survey["selectedQuestionValue"] != null) {
@@ -295,7 +295,7 @@ module SurveyEditor {
         private deleteCurrentObject() {
             this.deleteObject(this.koSelectedObject().value);
         }
-        public copyQuestion(question: Survey.Question) {
+        public copyQuestion(question: Survey.QuestionBase) {
             var objType = SurveyHelper.getObjectType(question);
             if (objType != ObjType.Question) return;
             var json = new Survey.JsonObject().toJsonObject(question);
@@ -376,7 +376,7 @@ module SurveyEditor {
         var self = this;
         this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
     }
-    Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.Question) {
+    Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.QuestionBase) {
         if (value == this.selectedQuestionValue) return;
         var oldValue = this.selectedQuestionValue;
         this.selectedQuestionValue = value;
@@ -407,7 +407,7 @@ module SurveyEditor {
         }
     }
 
-    Survey.Question.prototype["onCreating"] = function () {
+    Survey.QuestionBase.prototype["onCreating"] = function () {
         var self = this;
         this.dragDropHelperValue = null;
         this.dragDropHelper = function () {
@@ -423,7 +423,7 @@ module SurveyEditor {
             self.data["setselectedQuestion"](this);
         }
     }
-    Survey.Question.prototype["onSelectedQuestionChanged"] = function() {
+    Survey.QuestionBase.prototype["onSelectedQuestionChanged"] = function() {
         if (this.data == null) return;
         this.koIsSelected(this.data["selectedQuestionValue"] == this);
     }
