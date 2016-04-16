@@ -110,12 +110,19 @@
             return result;
         }
         private setData(event: DragEvent, text: string, json: any = null) {
+            if (event["originalEvent"]) {
+                event = event["originalEvent"];
+            }
             if (event.dataTransfer) {
                 event.dataTransfer.setData("Text", text);
+                event.dataTransfer.effectAllowed = "copy";
             }
             DragDropHelper.dragData = { text: text, json: json };
         }
         private getData(event: DragEvent): any {
+            if (event["originalEvent"]) {
+                event = event["originalEvent"];
+            }
             if (event.dataTransfer) {
                 var text = event.dataTransfer.getData("Text");
                 if (text) {

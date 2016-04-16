@@ -122,12 +122,19 @@ var SurveyEditor;
         };
         DragDropHelper.prototype.setData = function (event, text, json) {
             if (json === void 0) { json = null; }
+            if (event["originalEvent"]) {
+                event = event["originalEvent"];
+            }
             if (event.dataTransfer) {
                 event.dataTransfer.setData("Text", text);
+                event.dataTransfer.effectAllowed = "copy";
             }
             DragDropHelper.dragData = { text: text, json: json };
         };
         DragDropHelper.prototype.getData = function (event) {
+            if (event["originalEvent"]) {
+                event = event["originalEvent"];
+            }
             if (event.dataTransfer) {
                 var text = event.dataTransfer.getData("Text");
                 if (text) {
