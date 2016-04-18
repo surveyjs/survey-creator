@@ -104,8 +104,7 @@ module SurveyObjectEditorTests.Tests {
         });
         itemValueProperty.value = columns;
         assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
-        assert.equal(itemValueProperty.koItems()[0].koHasChoices(), true, "first column has not custom choices");
-        assert.equal(itemValueProperty.koItems()[1].koHasChoices(), false, "the second column has custom choices");
+        assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
         assert.equal(itemValueProperty.koItems()[0].koChoices().length, 3, "there are two elements");
     });
 

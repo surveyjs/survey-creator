@@ -27,6 +27,7 @@ module SurveyEditor {
         private textWorker: SurveyTextWorker;
         private surveyValue: Survey.Survey;
         private saveSurveyFuncValue: any;
+        private options: any;
 
         public surveyId: string = null;
         public surveyPostId: string = null;
@@ -44,8 +45,9 @@ module SurveyEditor {
         draggingQuestion: any; clickQuestion: any;
         draggingCopiedQuestion: any; clickCopiedQuestion: any;
 
-        constructor(renderedElement: any = null) {
-            this.questionTypes = Survey.QuestionFactory.Instance.getAllTypes();
+        constructor(renderedElement: any = null, options: any = null) {
+            this.options = options;
+            this.questionTypes = this.getQuestionTypes();
             this.koCopiedQuestions = ko.observableArray();
             this.koCanDeleteObject = ko.observable(false);
 
@@ -137,6 +139,18 @@ module SurveyEditor {
             var name = SurveyHelper.getNewName(this.survey.pages, "page");
             var page = <Survey.Page>this.surveyValue.addNewPage(name);
             this.addPageToUI(page);
+        }
+        protected getQuestionTypes() {
+            var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+            if (!this.options || !this.options.questionTypes || !this.options.questionTypes.length) return allTypes;
+            var result = [];
+            for (var i = 0; i < this.options.questionTypes.length; i++) {
+                var questionType = this.options.questionTypes[i];
+                if (allTypes.indexOf(questionType) > -1) {
+                    result.push(questionType);
+                }
+            }
+            return result;
         }
         private movePage(indexFrom: number, indexTo: number) {
             var page = <Survey.Page>this.survey.pages[indexFrom];
