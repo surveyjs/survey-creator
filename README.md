@@ -15,7 +15,7 @@ Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/
 See the visual editor in [action](http://surveyjs.org/builder/).
 
 #Dependencies
- The visual library is depends from: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
+ The library depends from: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
 #License
 
