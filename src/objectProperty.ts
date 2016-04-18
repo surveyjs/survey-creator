@@ -2,6 +2,7 @@
 /// <reference path="objectPropertyTriggers.ts" />
 /// <reference path="objectPropertyValidators.ts" />
 /// <reference path="objectPropertyTextItems.ts" />
+/// <reference path="objectPropertyMatrixDropdownColumns.ts" />
 
 module SurveyEditor {
 
@@ -45,6 +46,9 @@ module SurveyEditor {
             }
             if (this.editorType == "textitems") {
                 this.arrayEditor = new SurveyPropertyTextItems((newValue: any) => { onItemChanged(newValue); });
+            }
+            if (this.editorType == "matrixdropdowncolumns") {
+                this.arrayEditor = new SurveyPropertyMatrixDropdownColumns((newValue: any) => { onItemChanged(newValue); });
             }
             this.baseEditorType = this.arrayEditor != null ? "array" : this.editorType;
             this.koValue.subscribe(function (newValue) {

@@ -11,7 +11,7 @@
         <nav class="navbar-default pull-right">
             <div class="btn-toolbar" role="toolbar">
                 <button type="button" class="btn btn-default" data-bind="click: runSurveyClick" data-toggle="modal" data-target="#surveyExampleModal"><span class="glyphicon glyphicon-play" aria-hidden="true"></span>  Run Survey</button>
-                <button type="button" class="btn btn-default" data-bind="click: embedingSurveyClick" data-toggle="modal" data-target="#surveyEmbedingModal">Embeding Survey to Your Page</button>
+                <button type="button" class="btn btn-default" data-bind="click: embedingSurveyClick" data-toggle="modal" data-target="#surveyEmbedingModal">Embed Survey</button>
                 <button type="button" class="btn btn-default" data-bind="visible: koShowSaveButton, click: saveButtonClick">Save Survey</button>
             </div>
         </nav>
@@ -85,7 +85,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Embeding survey</h4>
+                <h4 class="modal-title">Embed Survey</h4>
             </div>
             <div class="modal-body">
                 <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>

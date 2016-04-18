@@ -5,12 +5,12 @@
             <option value="standard">No bootstrap</option>
         </select>
         <select data-bind="value:koShowAsWindow">
-            <option value="page">Use Survey Inside a Page</option>
-            <option value="window">Use Survey as a Window</option>
+            <option value="page">Show survey on a page</option>
+            <option value="window">Show survey in a window</option>
         </select>
         <label class="checkbox-inline" data-bind="visible:koHasIds">
             <input type="checkbox" data-bind="checked:koLoadSurvey" />
-            <span>Load Survey from server</span>
+            <span>Load Survey JSON from server</span>
         </label>
     </div>
     <div class="panel">
@@ -18,11 +18,11 @@
         <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
     </div>
     <div class="panel" data-bind="visible: koShowAsWindow()=='page'">
-        <div class="panel-heading">HTML part</div>
+        <div class="panel-heading">HTML</div>
         <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
     </div>
     <div class="panel">
-        <div class="panel-heading">Java Script</div>
+        <div class="panel-heading">JavaScript</div>
         <div id="surveyEmbedingJava" style="height:300px;width:100%"></div>
     </div>
 </script>

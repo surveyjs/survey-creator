@@ -55,7 +55,7 @@ module SurveyEditor {
                 this.onValueChanged(this.value_);
             }
         }
-        protected hasError(): boolean {
+        public hasError(): boolean {
             var result = false;
             for (var i = 0; i < this.koItems().length; i++) {
                 var item = this.koItems()[i];
