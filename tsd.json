@@ -6,16 +6,13 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "knockout/knockout.d.ts": {
-      "commit": "2712dd1e88d5a3f940592bc5d7102c2ab4eb39a7"
+      "commit": "8d44da84eb10cdcd2f7ea133f289caef817cb2b9"
     },
     "ace/ace.d.ts": {
-      "commit": "2712dd1e88d5a3f940592bc5d7102c2ab4eb39a7"
+      "commit": "8d44da84eb10cdcd2f7ea133f289caef817cb2b9"
     },
     "qunit/qunit.d.ts": {
-      "commit": "2712dd1e88d5a3f940592bc5d7102c2ab4eb39a7"
-    },
-    "json5/json5.d.ts": {
-      "commit": "2712dd1e88d5a3f940592bc5d7102c2ab4eb39a7"
+      "commit": "8d44da84eb10cdcd2f7ea133f289caef817cb2b9"
     }
   }
 }

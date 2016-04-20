@@ -4,24 +4,29 @@ var gulp = require('gulp'),
     concat = require("gulp-concat"),
     ts = require('gulp-typescript'),
     tsd = require('gulp-tsd'),
+    gnf = require('gulp-npm-files'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
     qunit = require("gulp-qunit"),
     serve = require("gulp-serve"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
-    replace = require("gulp-replace"),
     sequence = require("gulp-sequence"),
     html2ts = require("gulp-html-to-ts"),
+    jsonTransform = require('gulp-json-transform'),
     project = require("./project.json");
 
 var Server = require("karma").Server;
+var editorVersion = "0.9.3";
 
 var paths = {
+    mainJSfile: "surveyeditor.js",
     webroot: "./wwwroot/",
     dist: "./dist/",
     ts: ["./src/*.ts"],
     typings: "./typings/**/*.d.ts",
+    package: "./package",
+    packageDist: "./package/dist",
     tsTests: "./tests/*.ts",
     tsTests_ko: "./tests/ko/*.ts",
     styles: "./src/*.scss",
@@ -39,10 +44,6 @@ paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
 
-gulp.task('default', function () {
-    "use strict";
-    // place code for your default task here
-});
 
 gulp.task('tsd', function (callback) {
     tsd({
@@ -61,6 +62,18 @@ gulp.task('copyfiles', function (callback) {
         .pipe(gulp.dest(paths.jsFolder));
 });
 
+gulp.task('createPackage', function (callback) {
+    return gulp.src("packagetemplate.json")
+        .pipe(jsonTransform(function (data) {
+            data.version = editorVersion;
+            data.main = paths.mainJSfile.replace(".js", ".min.js");
+            data.dependencies["survey-knockout-bootstrap"] = editorVersion;
+            return data;
+        }, "  "))
+        .pipe(rename("package.json"))
+        .pipe(gulp.dest(paths.package));
+});
+
 (function () {
     (function () {
         "use strict";
@@ -76,11 +89,12 @@ gulp.task('copyfiles', function (callback) {
                 }));
 
             return tsResult.js
-                .pipe(concat('surveyeditor.js'))
+                .pipe(concat(paths.mainJSfile))
                 .pipe(sourcemaps.write({ sourceRoot: "src" }))
                 //Source map is a part of generated file
                 .pipe(gulp.dest(paths.dist))
-                .pipe(gulp.dest(paths.jsFolder));
+                .pipe(gulp.dest(paths.jsFolder))
+                .pipe(gulp.dest(paths.packageDist));
         });
 
         gulp.task("typescript:tests", function () {
@@ -113,12 +127,13 @@ gulp.task('copyfiles', function (callback) {
 
     gulp.task('compress', function () {
         "use strict";
-        return gulp.src(paths.dist + 'surveyeditor.js')
+        return gulp.src(paths.dist + paths.mainJSfile)
             .pipe(uglify())
              .pipe(rename({
                  extname: '.min.js'
              }))
-            .pipe(gulp.dest(paths.dist));
+            .pipe(gulp.dest(paths.dist))
+            .pipe(gulp.dest(paths.packageDist));
     });
 
     gulp.task('sass', function () {
@@ -127,7 +142,8 @@ gulp.task('copyfiles', function (callback) {
           .pipe(sass.sync().on('error', sass.logError))
           .pipe(concat("surveyeditor.css"))
           .pipe(gulp.dest(paths.webroot + 'css'))
-          .pipe(gulp.dest(paths.dist + 'css'));
+          .pipe(gulp.dest(paths.dist + 'css'))
+          .pipe(gulp.dest(paths.packageDist));
     });
 
     gulp.task('templates', function () {
