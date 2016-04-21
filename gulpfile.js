@@ -13,11 +13,12 @@ var gulp = require('gulp'),
     rename = require("gulp-rename"),
     sequence = require("gulp-sequence"),
     html2ts = require("gulp-html-to-ts"),
+    header = require("gulp-header"),
     jsonTransform = require('gulp-json-transform'),
     project = require("./project.json");
 
 var Server = require("karma").Server;
-var editorVersion = "0.9.3";
+var editorVersion = "0.9.4";
 
 var paths = {
     mainJSfile: "surveyeditor.js",
@@ -43,6 +44,12 @@ paths.css = paths.webroot + "css/**/*.css";
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
+
+var copyright = ["/*!",
+ "* surveyjs Editor v<%= version %>",
+ "* (c) Andrew Telnov - http://surveyjs.org/builder/",
+ "* Github - https://github.com/andrewtelnov/survey.js.editor",
+ "*/", "", ""].join("\n");
 
 
 gulp.task('tsd', function (callback) {
@@ -90,6 +97,7 @@ gulp.task('createPackage', function (callback) {
 
             return tsResult.js
                 .pipe(concat(paths.mainJSfile))
+                .pipe(header(copyright, { version: editorVersion }))
                 .pipe(sourcemaps.write({ sourceRoot: "src" }))
                 //Source map is a part of generated file
                 .pipe(gulp.dest(paths.dist))
@@ -132,6 +140,7 @@ gulp.task('createPackage', function (callback) {
              .pipe(rename({
                  extname: '.min.js'
              }))
+            .pipe(header(copyright, { version: editorVersion }))
             .pipe(gulp.dest(paths.dist))
             .pipe(gulp.dest(paths.packageDist));
     });
@@ -163,12 +172,12 @@ gulp.task('createPackage', function (callback) {
     gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress"));
 })("TypeScript compilation");
 
-    gulp.task("test_ci", function (done) { 
-         new Server({ 
-             configFile: __dirname + "/karma.conf.js", 
-             singleRun: true 
+gulp.task("test_ci", function (done) { 
+    new Server({ 
+        configFile: __dirname + "/karma.conf.js", 
+        singleRun: true 
     }, done).start(); 
-    }); 
+}); 
  
 gulp.task("server", serve({ 
      root: ["wwwroot"], 
