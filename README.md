@@ -17,6 +17,10 @@ See the visual editor in [action](http://surveyjs.org/builder/).
 #Dependencies
  The library depends from: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
+##Coming features
+
+Find the features under development and Todo list in the [Trello board](https://trello.com/b/lAwhTw3H/surveyjs-project).
+
 #License
 
 |Non-commercial use   | Commercial use   |

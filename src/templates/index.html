@@ -29,7 +29,7 @@
                     <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                         <!-- ko foreach: questionTypes -->
                         <div class="btn btn-default" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
-                            <span data-bind="text:$data"></span>
+                            <span data-bind="text:$data.text"></span>
                         </div>
                         <!-- /ko  -->
                         <!-- ko foreach: koCopiedQuestions -->

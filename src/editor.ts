@@ -31,7 +31,7 @@ module SurveyEditor {
 
         public surveyId: string = null;
         public surveyPostId: string = null;
-        public questionTypes: string[];
+        public questionTypes = [];
         public koCopiedQuestions: any;
         
         koIsShowDesigner: any;
@@ -47,7 +47,7 @@ module SurveyEditor {
 
         constructor(renderedElement: any = null, options: any = null) {
             this.options = options;
-            this.questionTypes = this.getQuestionTypes();
+            this.createQuestionTypes(this.getQuestionTypes());
             this.koCopiedQuestions = ko.observableArray();
             this.koCanDeleteObject = ko.observable(false);
 
@@ -139,6 +139,12 @@ module SurveyEditor {
             var name = SurveyHelper.getNewName(this.survey.pages, "page");
             var page = <Survey.Page>this.surveyValue.addNewPage(name);
             this.addPageToUI(page);
+        }
+        public getLocString(str: string) { return editorLocalization.getString(str); }
+        private createQuestionTypes(types: string[]) {
+            for (var i = 0; i < types.length; i++) {
+                this.questionTypes.push({ name: types[i], text: this.getLocString("qt." + types[i]) });
+            }
         }
         protected getQuestionTypes() {
             var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
@@ -279,17 +285,17 @@ module SurveyEditor {
             this.textWorker = new SurveyTextWorker(text);
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         }
-        private doDraggingQuestion(questionType: string, e) {
+        private doDraggingQuestion(questionType: any, e) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            new DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType, name);
+            new DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType.name, name);
         }
         private doDraggingCopiedQuestion(json: any, e) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
             new DragDropHelper(<Survey.ISurvey>this.survey).startDragCopiedQuestion(e, name, json);
         }
-        private doClickQuestion(questionType: string) {
+        private doClickQuestion(questionType: any) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, name));
+            this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType.name, name));
         }
         private doClickCopiedQuestion(json: any) {
             var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
