@@ -190,7 +190,7 @@ module SurveyEditor {
         }
         private showDesigner() {
             if (!this.textWorker.isJsonCorrect) {
-                alert("Please correct JSON!");
+                alert(this.getLocString("ed.correctJSON"));
                 return;
             }
             this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
@@ -357,10 +357,10 @@ module SurveyEditor {
             if (json != null) {
                 var survey = new Survey.Survey(json);
                 var self = this;
-                survey.onComplete.add((sender: Survey.Survey) => { self.surveyjsExample.innerHTML = "Survey Result: " + new SurveyJSON5().stringify(survey.data); });
+                survey.onComplete.add((sender: Survey.Survey) => { self.surveyjsExample.innerHTML = this.getLocString("ed.surveyResults") + new SurveyJSON5().stringify(survey.data); });
                 survey.render(this.surveyjsExample);
             } else {
-                this.surveyjsExample.innerHTML = "Please correct JSON!";
+                this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");
             }
         }
         private showSurveyEmbeding() {
@@ -407,6 +407,9 @@ module SurveyEditor {
             this.selectedQuestionValue["onSelectedQuestionChanged"]();
         }
         this.onSelectedQuestionChanged.fire(this, { 'oldSelectedQuestion': oldValue, 'newSelectedQuestion': value });
+    }
+    Survey.Survey.prototype["getEditorLocString"] = function (value: string): string {
+        return editorLocalization.getString(value);
     }
     Survey.Page.prototype["onCreating"] = function () {
         var self = this;

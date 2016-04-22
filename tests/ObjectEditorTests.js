@@ -90,6 +90,19 @@ var SurveyObjectEditorTests;
             assert.equal(itemValueProperty.koItems()[2].koValue(), 3, "check value of the third element");
             assert.equal(itemValueProperty.koItems()[2].koText(), "item3", "check text of the third element");
         });
+        QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (assert) {
+            var columns = [];
+            columns.push(new Survey.MatrixDropdownColumn("column 1"));
+            columns.push(new Survey.MatrixDropdownColumn("column 2"));
+            columns[0].choices = [1, 2, "three"];
+            var itemValueProperty = new SurveyEditor.SurveyPropertyMatrixDropdownColumns(function (newValue) {
+                columns = newValue;
+            });
+            itemValueProperty.value = columns;
+            assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
+            assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
+            assert.equal(itemValueProperty.koItems()[0].koChoices().length, 3, "there are two elements");
+        });
         QUnit.test("Use metadata getPropertyValue function", function (assert) {
             var editor = new SurveyEditor.SurveyObjectEditor();
             var car = new Tests.TruckDefaultValue();

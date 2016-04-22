@@ -1,7 +1,7 @@
 ﻿<script type="text/html" id="propertyeditor-array">
     <div>
         <span data-bind="text: koText"></span>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">Edit</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></button>
     </div>
 
     <div data-bind="attr: {id : modalName}" class="modal fade" role="dialog">
@@ -16,8 +16,8 @@
                     <!-- /ko -->
                 </div>
                 <div class="modal-footer">
-                    <input type="button" value="Apply" data-bind="click: arrayEditor.onApplyClick" style="width:100px" />
-                    <input type="button" data-dismiss="modal" value="Close" style="width:100px" />
+                    <input type="button" data-bind="click: arrayEditor.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
+                    <input type="button" data-dismiss="modal" data-bind="value: $root.getLocString('pe.close')" style="width:100px" />
                 </div>
             </div>
         </div>

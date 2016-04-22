@@ -2,9 +2,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Choices</th>
-                <th>Name</th>
-                <th>Title</th>
+                <th data-bind="text: $root.getLocString('pe.choices')"></th>
+                <th data-bind="text: $root.getLocString('pe.name')"></th>
+                <th data-bind="text: $root.getLocString('pe.title')"></th>
                 <th></th>
             </tr>
         </thead>
@@ -19,10 +19,10 @@
                 </td>
                 <td>
                     <input type="text" data-bind="value:koName" style="width:120px" />
-                    <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError">Please, enter the value.</div>
+                    <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
                 </td>
                 <td><input type="text" data-bind="value:koTitle" style="width:200px" /></td>
-                <td><input type="button" data-bind="click: $parent.onDeleteClick" value="Delete" /></td>
+                <td><input type="button" data-bind="click: $parent.onDeleteClick, value: $root.getLocString('pe.delete')"/></td>
             </tr>
             <tr data-bind="visible: koShowChoices">
                 <td colspan="4" style="border-top-style:none">
@@ -35,8 +35,8 @@
             <tr>
                 <td colspan="3">
                     <div class="row btn-toolbar">
-                        <input type="button" data-bind="click: onAddClick" value="Add New" />
-                        <input type="button" data-bind="click: onClearClick" value="Remove All" />
+                        <input type="button" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/>
+                        <input type="button" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')"" />
                     </div>
                 </td>
             </tr>

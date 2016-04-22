@@ -11,7 +11,7 @@
     <!-- /ko -->
     <!-- /ko -->
     <div class="well" data-bind="visible:$root.isDesignMode && questions.length == 0">
-        <span>Please drop a question here.</span>
+        <span data-bind="text:$root.getEditorLocString('survey.dropQuestion')"></span>
     </div>
     <div class="svd_dragover" data-bind="visible:koDragging() == questions.length"></div>
 </div>

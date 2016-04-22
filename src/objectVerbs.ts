@@ -1,4 +1,4 @@
-﻿module SurveyEditor {
+﻿    module SurveyEditor {
     export class SurveyVerbs {
         private surveyValue: Survey.Survey;
         private objValue: any;
@@ -56,14 +56,14 @@
             var classes = Survey.JsonObject.metaData.getChildrenClasses("selectbase", true);
             var array = [];
             for (var i = 0; i < classes.length; i++) {
-                array.push({ value: classes[i].name, text: classes[i].name });
+                array.push({ value: classes[i].name, text: editorLocalization.getString("qt." + classes[i].name) });
             }
             this.koItems(array);
             this.koSelectedItem(question.getType());
             var self = this;
             this.koSelectedItem.subscribe(function (newValue) { self.changeType(newValue); });
         }
-        public get text(): string { return "Change type "; }
+        public get text(): string { return editorLocalization.getString("pe.verbChangeType"); }
         private changeType(questionType: string) {
             if (questionType == this.question.getType()) return;
             var page = this.survey.getPageByQuestion(this.question);
@@ -91,7 +91,7 @@
             var self = this;
             this.koSelectedItem.subscribe(function (newValue) { self.changePage(newValue); });
         }
-        public get text(): string { return "Change page "; }
+        public get text(): string { return editorLocalization.getString("pe.verbChangePage"); }
         private changePage(newPage: Survey.Page) {
             if (newPage == null || newPage == this.prevPage) return;
             this.prevPage.removeQuestion(this.question);

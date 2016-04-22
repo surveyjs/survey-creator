@@ -33,13 +33,13 @@ var SurveyObjectEditorTests;
             editor.copyQuestion(editor.survey.getAllQuestions()[0]);
             assert.equal(editor.koCopiedQuestions().length, 1, "There is still one copied question now.");
             assert.equal(editor.koCopiedQuestions()[0].name, "question1", "The copied question is 'question1'");
-            /*
-            editor.copyQuestion(<Survey.Question>editor.survey.getAllQuestions()[1]);
-            var question = editor.createCopiedQuestion(editor.koCopiedQuestions()[1]);
-            assert.equal(question.name, "question2", "The new question name is 'question2'");
-            assert.equal(question.getType(), "checkbox", "The new question name is 'checkbox'");
-            assert.equal(<Survey.QuestionCheckbox>question.choices.length, 3, "There are 3 choices");
-            */
+        });
+        QUnit.test("options.questionTypes", function (assert) {
+            var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+            var editor = new SurveyEditor.SurveyEditor(null, null);
+            assert.equal(editor.questionTypes.length, allTypes.length, "All types are accepted");
+            editor = new SurveyEditor.SurveyEditor(null, { questionTypes: ["text", "dropdown", "unknown"] });
+            assert.equal(editor.questionTypes.length, 2, "Only two types from three are accepted");
         });
         function getSurveyJson() {
             return {

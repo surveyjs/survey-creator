@@ -12,17 +12,13 @@
         </div>
     </div>
     <div data-bind="visible: koSelected() == null">
-        <div data-bind="visible: koQuestions().length == 0">
-            There is no any question in the survey.
-        </div>
-        <div data-bind="visible: koQuestions().length > 0">
-            Please create a trigger
-        </div>
+        <div data-bind="visible: koQuestions().length == 0, text: $root.getLocString('pe.noquestions')"></div>
+        <div data-bind="visible: koQuestions().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
     </div>
     <div data-bind="visible: koSelected() != null">
         <div class="row" data-bind="with: koSelected">
             <div class="form-inline col-sm-12">
-                <span>On </span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
+                <span data-bind="text: $root.getLocString('pe.triggerOn')"></span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
                 <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
                 <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
             </div>

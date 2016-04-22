@@ -64,23 +64,20 @@
     }
 
     export class SurveyPropertyTrigger {
-        availableOperators = [
-            { name: "empty", text: "is empty" }, { name: "notempty", text: "is not empty" },
-            { name: "equal", text: "equals" }, { name: "notequal", text: "not equals" },
-            { name: "contains", text: "contains" }, { name: "notcontains", text: "not contains" },
-            { name: "greater", text: "greater" }, { name: "less", text: "less" },
-            { name: "greaterorequal", text: "greater or equals" }, { name: "lessorequal", text: "Less or Equals" }]
+        private operators = ["empty", "notempty", "equal", "noteqaul", "contains", "noncontains", "greater", "less", "greaterorequal", "lessorequal"];
+        availableOperators = [];
         koName: any; koOperator: any; koValue: any;
         koText: any; koIsValid: any; koRequireValue: any;
         public pages: SurveyPropertyTriggerObjects;
         public questions: SurveyPropertyTriggerObjects;
 
         constructor(trigger: Survey.SurveyTriggerVisible, koPages: any, koQuestions: any) {
+            this.createOperators();
             this.koName = ko.observable(trigger.name);
             this.koOperator = ko.observable(trigger.operator);
             this.koValue = ko.observable(trigger.value);
-            this.pages = new SurveyPropertyTriggerObjects("Make pages visible:", koPages(), trigger.pages);
-            this.questions = new SurveyPropertyTriggerObjects("Make questions visible:", koQuestions(), trigger.questions);
+            this.pages = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakePagesVisible"), koPages(), trigger.pages);
+            this.questions = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakeQuestionsVisible"), koQuestions(), trigger.questions);
             var self = this;
             this.koRequireValue = ko.computed(() => { return self.koOperator() != "empty" && self.koOperator() != "notempty"; });
             this.koIsValid = ko.computed(() => { if (self.koName() && (!self.koRequireValue() || self.koValue())) return true; return false; });
@@ -95,9 +92,15 @@
             trigger.questions = this.questions.koChoosen();
             return trigger;
         }
+        private createOperators() {
+            for (var i = 0; i < this.operators.length; i++) {
+                var name = this.operators[i];
+                this.availableOperators.push({ name: name, text: editorLocalization.getString("op." + name) });
+            }
+        }
         private getText(): string {
-            if (!this.koIsValid()) return "The trigger is not set";
-            return "Run if '" + this.koName() + "' " + this.getOperatorText() + this.getValueText();
+            if (!this.koIsValid()) return editorLocalization.getString("pe.triggerNotSet");
+            return editorLocalization.getString("pe.triggerRunIf") + " '" + this.koName() + "' " + this.getOperatorText() + this.getValueText();
         }
         private getOperatorText(): string {
             var op = this.koOperator();

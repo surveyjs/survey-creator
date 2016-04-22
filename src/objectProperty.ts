@@ -69,7 +69,7 @@ module SurveyEditor {
             this.koValue(this.getValue());
             if (this.arrayEditor) {
                 this.arrayEditor.object = this.object;
-                this.arrayEditor.title("Edit property '" + this.property.name + "'");
+                this.arrayEditor.title(editorLocalization.getString("pe.editProperty")["format"](this.property.name));
                 this.arrayEditor.value = this.koValue();
             }
             this.isValueUpdating = false;
@@ -80,7 +80,7 @@ module SurveyEditor {
         }
         protected getValueText(value: any): string {
             if (value != null && Array.isArray(value)) {
-                return "[ Items: "+ value.length + " ]";
+                return editorLocalization.getString("pe.items")["format"](value.length);
             }
             return value;
         }

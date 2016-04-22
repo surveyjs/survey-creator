@@ -57,12 +57,16 @@ module SurveyEditor {
         }
         private createValidatorsEditor(item: any, validators: Array<any>) {
             item.validators = validators.slice();
-            var onItemChanged = function (newValue: any) { item.validators = newValue; item.koText("[ Items: " + newValue.length + " ]"); };
+            var self = this;
+            var onItemChanged = function (newValue: any) { item.validators = newValue; item.koText(self.getText(newValue.length)); };
             item.arrayEditor = new SurveyPropertyValidators((newValue: any) => { onItemChanged(newValue); });
             item.arrayEditor.object = item;
-            item.arrayEditor.title("Edit property 'Validators'");
+            item.arrayEditor.title(editorLocalization.getString("pe.editProperty")["format"]("Validators"));
             item.arrayEditor.value = item.validators;
-            item.koText = ko.observable("[ Items: " + validators.length + " ]");
+            item.koText = ko.observable(this.getText(validators.length));
+        }
+        private getText(length: number): string {
+            return editorLocalization.getString("pe.items")["format"](length);
         }
     }
 }

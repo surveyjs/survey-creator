@@ -27,6 +27,11 @@
         }
     };
     export var defaultStrings = {
+        //survey templates
+        survey: {
+            dropQuestion: "Please drop a question here.",
+            copy: "Copy"
+        },
         //questionTypes
         qt: {
             checkbox: "Checkbox",
@@ -39,6 +44,71 @@
             radiogroup: "Radiogroup",
             rating: "Rating",
             text: "Text"
+        },
+        //Strings in Editor
+        ed: {
+            runSurvey: " Run Survey",
+            embedSurvey: "Embed Survey",
+            saveSurvey: "Save Survey",
+            designer: "Designer",
+            jsonEditor: "JSON Editor",
+            toolbox: "Toolbox",
+            delSelObject: "Delete selected object",
+            correctJSON: "Please correct JSON.",
+            surveyResults: "Survey Result: "
+        },
+        //Property Editors
+        pe: {
+            apply: "Apply",
+            close: "Close",
+            delete: "Delete",
+            addNew: "Add New",
+            removeAll: "Remove All",
+            edit: "Edit",
+
+            value: "Value",
+            text: "Text",
+            choices: "Choices",
+            name: "Name",
+            title: "Title",
+
+            editProperty: "Edit property '{0}'",
+            items: "[ Items: {0} ]",
+
+            enterNewValue: "Please, enter the value.",
+            noquestions: "There is no any question in the survey.",
+            createtrigger: "Please create a trigger",
+            triggerOn: "On ",
+            triggerMakePagesVisible: "Make pages visible:",
+            triggerMakeQuestionsVisible: "Make questions visible:",
+            triggerNotSet: "The trigger is not set",
+            triggerRunIf: "Run if",
+            verbChangeType: "Change type ",
+            verbChangePage: "Change page "
+        },
+        //Operators
+        op: {
+            empty: "is empty",
+            notempty: "is not empty",
+            equal: "equals",
+            notequal: "not equals",
+            contains: "contains", 
+            notcontains: "not contains",
+            greater: "greater", 
+            less: "less",
+            greaterorequal: "greater or equals", 
+            lessorequal: "Less or Equals"
+        },
+        //Embed window
+        ew: {
+            bootstrap: "For bootstrap framework",
+            standard: "No bootstrap",
+            showOnPage: "Show survey on a page",
+            showInWindow: "Show survey in a window",
+            loadFromServer: "Load Survey JSON from server",
+            titleScript: "Scripts and styles",
+            titleHtml: "HTML",
+            titleJavaScript: "JavaScript"
         }
     }
     editorLocalization.locales["en"] = defaultStrings;

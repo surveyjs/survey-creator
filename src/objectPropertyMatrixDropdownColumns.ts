@@ -83,7 +83,7 @@ module SurveyEditor {
             this.koChoicesText(this.getChoicesText());
         }
         private getChoicesText(): string {
-            return "Items: " + this.koChoices().length;
+            return editorLocalization.getString("pe.items")["format"](this.koChoices().length);
         }
     }
 }
