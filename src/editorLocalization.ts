@@ -17,6 +17,24 @@
             }
             return obj;
         },
+        getPropertyName: function (strName: string, local: string = null) {
+            var obj = this.getProperty(strName, local);
+            if (obj["name"]) return obj["name"];
+            return obj;
+        },
+        getPropertyTitle: function (strName: string, local: string = null) {
+            var obj = this.getProperty(strName, local);
+            if (obj["title"]) return obj["title"];
+            return "";
+        },
+        getProperty: function (strName: string, local: string = null) {
+            var obj = this.getString("p." + strName, local);
+            if (obj !== strName) return obj;
+            var pos = strName.indexOf('_');
+            if (pos < -1) return obj;
+            strName = strName.substr(pos + 1);
+            return this.getString("p." + strName, local);
+        },
         getLocales: function (): Array<string> {
             var res = [];
             res.push("");
@@ -109,6 +127,13 @@
             titleScript: "Scripts and styles",
             titleHtml: "HTML",
             titleJavaScript: "JavaScript"
+        },
+        //Properties
+        p: {
+            name: "name",
+            title: { name: "title", title: "Leave it empty, if it is the same as 'Name'" },
+            survey_title: { name: "title", title: "It will be shown on every page." },
+            page_title: { name: "title", title: "Page title" }
         }
     }
     editorLocalization.locales["en"] = defaultStrings;
