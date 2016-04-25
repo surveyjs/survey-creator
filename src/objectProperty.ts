@@ -12,6 +12,8 @@ module SurveyEditor {
         private objectValue: any;
         private isValueUpdating: boolean;
         public name: string;
+        public displayName: string;
+        public title: string;
         public koValue: any;
         public koText: any;
         public arrayEditor: SurveyPropertyArray;

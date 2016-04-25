@@ -5,17 +5,17 @@
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
   "installed": {
-    "survey/survey.d.ts": {
-      "commit": "8d44da84eb10cdcd2f7ea133f289caef817cb2b9"
+    "survey-knockout/survey-knockout.d.ts": {
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
     },
     "knockout/knockout.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
     },
     "ace/ace.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
     },
     "qunit/qunit.d.ts": {
-      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
     }
   }
 }
