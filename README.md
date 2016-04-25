@@ -17,6 +17,43 @@ See the visual editor in [action](http://surveyjs.org/builder/).
 #Dependencies
  The library depends from: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
+##Building survey.js from sources
+
+To build library yourself:
+
+ 1. **Clone the repo from GitHub**  
+	```
+	git clone https://github.com/andrewtelnov/surveyjs.editor.git
+	cd surveyjs.editor
+	```
+
+ 2. **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. 
+	```
+	npm install -g gulp
+	npm install
+	```
+	The first `npm` command sets up the popular [Gulp](http://gulpjs.com/) build tool. 
+
+ 3. **Create TypeScript definition files**
+	```
+	gulp tsd
+	```
+	Typescript definition files should be located at 'typings' directory.
+
+ 4. **Build the library**
+	```
+	gulp makedist
+	```
+	After that you should have the library at 'dist' directory.
+
+ 5. **Run unit tests**
+	```
+	gulp copyfiles
+	gulp test_ci
+	```
+	The first command will copy all required files to 'wwwroot' directory and the last command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
+
+
 ##Coming features
 
 Find the features under development and Todo list in the [Trello board](https://trello.com/b/lAwhTw3H/surveyjs-project).
