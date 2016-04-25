@@ -3,6 +3,11 @@
 #Download
 Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/surveyjs.editor.zip)
 
+Install the library using npm.
+```
+npm install surveyjs-editor
+```
+
 #Example of using
 ```
 <div id="surveyjseditor"></div>
