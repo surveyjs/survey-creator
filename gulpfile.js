@@ -169,7 +169,7 @@ gulp.task('createPackage', function (callback) {
           .pipe(gulp.dest("./src/"));
     });
 
-    gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress"));
+    gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress", "createPackage"));
 })("TypeScript compilation");
 
 gulp.task("test_ci", function (done) { 
