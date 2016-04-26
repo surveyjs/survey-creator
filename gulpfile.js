@@ -18,7 +18,7 @@ var gulp = require('gulp'),
     project = require("./project.json");
 
 var Server = require("karma").Server;
-var editorVersion = "0.9.4";
+var editorVersion = "0.9.5";
 
 var paths = {
     mainJSfile: "surveyeditor.js",
