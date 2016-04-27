@@ -11,18 +11,18 @@
         <!-- ko foreach: koItems -->
         <tr>
             <td>
-                <input type="text" data-bind="value:koValue" style="width:200px" />
+                <input type="text" class="form-control" data-bind="value:koValue" style="width:200px" />
                 <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
             </td>
-            <td><input type="text" data-bind="value:koText" style="width:200px" /></td>
-            <td><input type="button" data-bind="click: $parent.onDeleteClick, value: $root.getLocString('pe.delete')"/></td>
+            <td><input type="text" class="form-control" data-bind="value:koText" style="width:200px" /></td>
+            <td><input type="button" class="btn" data-bind="click: $parent.onDeleteClick, value: $root.getLocString('pe.delete')"/></td>
         </tr>
         <!-- /ko -->
         <tr>
             <td colspan="3">
                 <div class="row btn-toolbar">
-                    <input type="button" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
-                    <input type="button" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')"/>
+                    <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
+                    <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')"/>
                 </div>
             </td>
         </tr>

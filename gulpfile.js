@@ -81,6 +81,15 @@ gulp.task('createPackage', function (callback) {
         .pipe(gulp.dest(paths.package));
 });
 
+gulp.task('updatesurveyjsversion', function (callback) {
+    return gulp.src("package.json")
+        .pipe(jsonTransform(function (data) {
+            data.dependencies["survey-knockout-bootstrap"] = "^" + editorVersion;
+            return data;
+        }, "  "))
+        .pipe(gulp.dest(""));
+});
+
 (function () {
     (function () {
         "use strict";
@@ -169,7 +178,7 @@ gulp.task('createPackage', function (callback) {
           .pipe(gulp.dest("./src/"));
     });
 
-    gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress", "createPackage"));
+    gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress", "createPackage", "updatesurveyjsversion"));
 })("TypeScript compilation");
 
 gulp.task("test_ci", function (done) { 

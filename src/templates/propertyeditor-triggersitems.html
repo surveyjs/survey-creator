@@ -6,13 +6,13 @@
         <div class="input-group">
             <select class="form-control" multiple="multiple" data-bind="options:koChoosen, value: koChoosenSelected"></select>
             <span class="input-group-btn" style="vertical-align:top">
-                <button type="button" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
         </div>
         <div class="input-group" style="margin-top:5px">
             <select class="form-control" data-bind="options:koObjects, value: koSelected"></select>
             <span class="input-group-btn">
-                <button type="button" data-bind="enable: koSelected() != null, click: onAddClick" style="width:40px" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" data-bind="enable: koSelected() != null, click: onAddClick" style="width:40px" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
             </span>
         </div>
     </div>
