@@ -1,6 +1,12 @@
 ﻿module SurveyEditor {
     export enum ObjType { Unknown, Survey, Page, Question }
     export class SurveyHelper {
+        public static getNewPageName(objs: Array<any>) {
+            return SurveyHelper.getNewName(objs, editorLocalization.getString("ed.newPageName"));
+        }
+        public static getNewQuestionName(objs: Array<any>) {
+            return SurveyHelper.getNewName(objs, editorLocalization.getString("ed.newQuestionName"));
+        }
         public static getNewName(objs: Array<any>, baseName: string): string {
             var hash = {};
             for (var i = 0; i < objs.length; i++) {

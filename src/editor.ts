@@ -136,7 +136,7 @@ module SurveyEditor {
             this.isProcessingImmediately = false;
         }
         public addPage() {
-            var name = SurveyHelper.getNewName(this.survey.pages, "page");
+            var name = SurveyHelper.getNewPageName(this.survey.pages);
             var page = <Survey.Page>this.surveyValue.addNewPage(name);
             this.addPageToUI(page);
         }
@@ -281,23 +281,23 @@ module SurveyEditor {
             this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
         }
         private doDraggingQuestion(questionType: any, e) {
-            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            new DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType, name);
+            new DragDropHelper(<Survey.ISurvey>this.survey).startDragNewQuestion(e, questionType, this.getNewQuestionName());
         }
         private doDraggingCopiedQuestion(json: any, e) {
-            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            new DragDropHelper(<Survey.ISurvey>this.survey).startDragCopiedQuestion(e, name, json);
+            new DragDropHelper(<Survey.ISurvey>this.survey).startDragCopiedQuestion(e, this.getNewQuestionName(), json);
         }
         private doClickQuestion(questionType: any) {
-            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
-            this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, name));
+            this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, this.getNewQuestionName()));
         }
         private doClickCopiedQuestion(json: any) {
-            var name = SurveyHelper.getNewName(this.survey.getAllQuestions(), "question");
+            var name = this.getNewQuestionName();
             var question = Survey.QuestionFactory.Instance.createQuestion(json["type"], name);
             new Survey.JsonObject().toObject(json, question);
             question.name = name;
             this.doClickQuestionCore(question);
+        }
+        private getNewQuestionName(): string {
+            return SurveyHelper.getNewQuestionName(this.survey.getAllQuestions());
         }
         private doClickQuestionCore(question: Survey.QuestionBase) {
             var page = this.survey.currentPage;

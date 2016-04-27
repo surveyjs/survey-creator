@@ -65,6 +65,8 @@
         },
         //Strings in Editor
         ed: {
+            newPageName: "page",
+            newQuestionName: "question",
             runSurvey: " Run Survey",
             embedSurvey: "Embed Survey",
             saveSurvey: "Save Survey",
