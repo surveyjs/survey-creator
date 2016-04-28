@@ -16,11 +16,17 @@
         <div data-bind="visible: koQuestions().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
     </div>
     <div data-bind="visible: koSelected() != null">
-        <div class="row" data-bind="with: koSelected">
-            <div class="form-inline col-sm-12">
-                <span data-bind="text: $root.getLocString('pe.triggerOn')"></span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
-                <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
-                <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
+        <div data-bind="with: koSelected">
+            <div class="row form-inline">
+                <div class="col-sm-4">
+                    <span data-bind="text: $root.getLocString('pe.triggerOn')"></span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
+                </div>
+                <div class="col-sm-4">
+                    <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                </div>
+                <div class="col-sm-4">
+                    <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
