@@ -64,7 +64,7 @@
     }
 
     export class SurveyPropertyTrigger {
-        private operators = ["empty", "notempty", "equal", "noteqaul", "contains", "noncontains", "greater", "less", "greaterorequal", "lessorequal"];
+        private operators = ["empty", "notempty", "equal", "notequal", "contains", "noncontains", "greater", "less", "greaterorequal", "lessorequal"];
         availableOperators = [];
         koName: any; koOperator: any; koValue: any;
         koText: any; koIsValid: any; koRequireValue: any;
