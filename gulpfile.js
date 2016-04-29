@@ -101,7 +101,8 @@ gulp.task('updatesurveyjsversion', function (callback) {
                .pipe(sourcemaps.init())
                .pipe(ts({
                    target: "ES5",
-                   noImplicitAny: false
+                   noImplicitAny: false,
+                   declarationFiles: true
                 }));
 
             return tsResult.js
@@ -128,7 +129,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
 
             return tsResult.js
                 .pipe(concat('surveyeditor.tests.js'))
-                .pipe(sourcemaps.write({ sourceRoot: "src" }))
+                .pipe(sourcemaps.write({ sourceRoot: "tests" }))
                 //Source map is a part of generated file
                 .pipe(gulp.dest(paths.testsFolder));
         });

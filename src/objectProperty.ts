@@ -3,10 +3,11 @@
 /// <reference path="objectPropertyValidators.ts" />
 /// <reference path="objectPropertyTextItems.ts" />
 /// <reference path="objectPropertyMatrixDropdownColumns.ts" />
+/// <reference path="objectPropertyHtml.ts" />
 
 module SurveyEditor {
 
-    declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
+    export declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
 
     export class SurveyObjectProperty {
         private objectValue: any;
@@ -52,6 +53,9 @@ module SurveyEditor {
             if (this.editorType == "matrixdropdowncolumns") {
                 this.arrayEditor = new SurveyPropertyMatrixDropdownColumns((newValue: any) => { onItemChanged(newValue); });
             }
+            if (this.editorType == "html") {
+                this.arrayEditor = new SurveyPropertyHtml((newValue: any) => { onItemChanged(newValue); });
+            }
             this.baseEditorType = this.arrayEditor != null ? "array" : this.editorType;
             this.koValue.subscribe(function (newValue) {
                 if (self.object == null) return;
@@ -83,6 +87,13 @@ module SurveyEditor {
         protected getValueText(value: any): string {
             if (value != null && Array.isArray(value)) {
                 return editorLocalization.getString("pe.items")["format"](value.length);
+            }
+            if (value != null && this.editorType == "html") {
+                var str = value;
+                if (str.length > 10) {
+                    str = str.substr(0, 10) + "...";
+                }
+                return str;
             }
             return value;
         }

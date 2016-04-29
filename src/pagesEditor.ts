@@ -1,8 +1,8 @@
 ﻿
 module SurveyEditor {
-    declare type SurveyAddNewPageCallback = () => void;
-    declare type SurveySelectPageCallback = (page: Survey.Page) => void;
-    declare type SurveyMovePageCallback = (indexFrom: number, indexTo: number) => void;
+    export declare type SurveyAddNewPageCallback = () => void;
+    export declare type SurveySelectPageCallback = (page: Survey.Page) => void;
+    export declare type SurveyMovePageCallback = (indexFrom: number, indexTo: number) => void;
     export class SurveyPagesEditor {
         surveyValue: Survey.Survey;
         koPages: any;
