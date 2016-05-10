@@ -362,9 +362,14 @@ module SurveyEditor {
             if (!this.surveyjsExample) return;
             var json = this.getSurveyJSON();
             if (json != null) {
+                if (json.cookieName) {
+                    delete json.cookieName;
+                }
                 var survey = new Survey.Survey(json);
                 var self = this;
-                survey.onComplete.add((sender: Survey.Survey) => { self.surveyjsExample.innerHTML = this.getLocString("ed.surveyResults") + new SurveyJSON5().stringify(survey.data); });
+                var surveyjsExampleResults = document.getElementById("surveyjsExampleResults");
+                if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
+                survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + new SurveyJSON5().stringify(survey.data); });
                 survey.render(this.surveyjsExample);
             } else {
                 this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");

@@ -125,7 +125,7 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(koTrigger.koValue(), "val1", "value set correctly");
         assert.deepEqual(koTrigger.questions.koChoosen(), ["question2"], "questions set correctly");
 
-        propEditor.onAddClick();
+        propEditor.onAddClick("visibletrigger");
         assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
         koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
         assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
@@ -141,14 +141,14 @@ module SurveyObjectEditorTests.Tests {
         koTrigger.pages.koChoosen.push("page2");
         koTrigger.questions.koChoosen.push("question3");
         koTrigger.koValue(1);
-        trigger = koTrigger.createTrigger();
+        trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
         assert.equal(trigger.name, "question2", "create trigger correctly: name");
         assert.equal(trigger.operator, "notempty", "create trigger correctly: operator");
         assert.equal(trigger.value, 1, "create trigger correctly: value");
         assert.deepEqual(trigger.pages, ["page2"], "create trigger correctly: pages");
         assert.deepEqual(trigger.questions, ["question3"], "create trigger correctly: questions");
 
-        propEditor.onAddClick();
+        propEditor.onAddClick("visibletrigger");
         assert.equal(propEditor.koItems().length, 3, "There are three triggers now");
         propEditor.onDeleteClick();
         assert.equal(propEditor.koItems().length, 2, "There are again two triggers");
@@ -156,6 +156,13 @@ module SurveyObjectEditorTests.Tests {
         propEditor.onApplyClick();
         assert.equal(result.length, 2, "Two triggers are saved");
 
+        propEditor.onAddClick("completetrigger");
+        koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        koTrigger.koName("question2");
+        koTrigger.koOperator("notempty");
+        propEditor.onApplyClick();
+        assert.equal(result.length, 3, "There are 3 triggers");
+        assert.equal(result[2].getType(), "completetrigger", "Complete trigger is created");
     });
     QUnit.test("Validators property editor", function (assert) {
         var survey = createSurvey();

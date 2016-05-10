@@ -101,6 +101,7 @@
             triggerOn: "On ",
             triggerMakePagesVisible: "Make pages visible:",
             triggerMakeQuestionsVisible: "Make questions visible:",
+            triggerCompleteText: "Complete the survey if succeed.",
             triggerNotSet: "The trigger is not set",
             triggerRunIf: "Run if",
             verbChangeType: "Change type ",

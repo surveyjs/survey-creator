@@ -9,7 +9,7 @@
         public onDeleteClick: any;
         public onAddClick: any;
         public onApplyClick: any;
-        private validatorsClasses: Array<Survey.JsonMetadataClass> = [];
+        private validatorClasses: Array<Survey.JsonMetadataClass> = [];
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
             super(onValueChanged);
@@ -21,7 +21,7 @@
             this.koItems = ko.observableArray();
             this.koSelected = ko.observable(null);
             this.koSelected.subscribe(function (newValue) { self.selectedObjectEditor.selectedObject = newValue != null ? newValue.validator : null; });
-            this.validatorsClasses = Survey.JsonObject.metaData.getChildrenClasses("surveyvalidator", true);
+            this.validatorClasses = Survey.JsonObject.metaData.getChildrenClasses("surveyvalidator", true);
             this.availableValidators = this.getAvailableValidators();
             this.value_ = [];
             this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
@@ -59,8 +59,8 @@
         }
         private getAvailableValidators(): Array<string> {
             var result = [];
-            for (var i = 0; i < this.validatorsClasses.length; i++) {
-                result.push(this.validatorsClasses[i].name);
+            for (var i = 0; i < this.validatorClasses.length; i++) {
+                result.push(this.validatorClasses[i].name);
             }
             return result;
         }
