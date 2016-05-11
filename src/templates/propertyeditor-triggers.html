@@ -33,7 +33,8 @@
                     <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
                 </div>
             </div>
-            <div class="row" data-bind="visible: koType() == 'visibletrigger'">
+            <!-- ko if: koType() == 'visibletrigger' -->
+            <div class="row">
                 <div class="col-sm-6">
                     <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
                     <!-- /ko -->
@@ -43,9 +44,29 @@
                     <!-- /ko -->
                 </div>
             </div>
-            <div class="row" data-bind="visible: koType() == 'completetrigger'">
+            <!-- /ko -->
+            <!-- ko if: koType() == 'completetrigger' -->
+            <div class="row">
                <div style="margin: 10px" data-bind="text: $root.getLocString('pe.triggerCompleteText')"></div>
             </div>
+            <!-- /ko -->
+            <!-- ko if: koType() == 'setvaluetrigger' -->
+            <div class="row form-inline" style="margin-top:10px">
+                <div class="col-sm-6">
+                    <span data-bind="text: $root.getLocString('pe.triggerSetToName')"></span><input class="form-control" type="text" data-bind="value:kosetToName" />
+                </div>
+                <div class="col-sm-1">
+                </div>
+                <div class="col-sm-5">
+                    <span data-bind="text: $root.getLocString('pe.triggerSetValue')"></span><input class="form-control" type="text" data-bind="value:kosetValue" />
+                </div>
+            </div>
+            <div class="row form-inline">
+                <div class="col-sm-12">
+                    <input type="checkbox" data-bind="checked: koisVariable" /> <span data-bind="text: $root.getLocString('pe.triggerIsVariable')"></span>
+                </div>
+            </div>
+            <!-- /ko -->
         </div>
     </div>
 </div>

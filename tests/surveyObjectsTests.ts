@@ -119,7 +119,7 @@ module SurveyObjectEditorTests.Tests {
         propEditor.object = survey;
         propEditor.value = survey.triggers;
         assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
-        var koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        var koTrigger = <SurveyEditor.SurveyPropertyVisibleTrigger>propEditor.koSelected();
         assert.equal(koTrigger.koName(), "question1", "Name set correctly");
         assert.equal(koTrigger.koOperator(), "notequal", "operator set correctly");
         assert.equal(koTrigger.koValue(), "val1", "value set correctly");
@@ -127,7 +127,7 @@ module SurveyObjectEditorTests.Tests {
 
         propEditor.onAddClick("visibletrigger");
         assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
-        koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        koTrigger = <SurveyEditor.SurveyPropertyVisibleTrigger>propEditor.koSelected();
         assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
         assert.equal(koTrigger.koIsValid(), false, "the trigger is not valid");
         koTrigger.koName("question2");
@@ -157,7 +157,7 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(result.length, 2, "Two triggers are saved");
 
         propEditor.onAddClick("completetrigger");
-        koTrigger = <SurveyEditor.SurveyPropertyTrigger>propEditor.koSelected();
+        koTrigger = <SurveyEditor.SurveyPropertyVisibleTrigger>propEditor.koSelected();
         koTrigger.koName("question2");
         koTrigger.koOperator("notempty");
         propEditor.onApplyClick();
