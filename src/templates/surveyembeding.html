@@ -1,5 +1,9 @@
 ﻿<script type="text/html" id="surveyembeding">
     <div class="row">
+        <select data-bind="value:koLibraryVersion">
+            <option value="knockout" data-bind="text: $root.getLocString('ew.knockout')"></option>
+            <option value="react" data-bind="text: $root.getLocString('ew.react')"></option>
+        </select>
         <select data-bind="value:koScriptUsing">
             <option value="bootstrap" data-bind="text: $root.getLocString('ew.bootstrap')"></option>
             <option value="standard" data-bind="text: $root.getLocString('ew.standard')"></option>
@@ -17,7 +21,7 @@
         <div class="panel-heading" data-bind="text: $root.getLocString('ew.titleScript')"></div>
         <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
     </div>
-    <div class="panel" data-bind="visible: koShowAsWindow()=='page'">
+    <div class="panel" data-bind="visible: koVisibleHtml">
         <div class="panel-heading"  data-bind="text: $root.getLocString('ew.titleHtml')"></div>
         <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
     </div>

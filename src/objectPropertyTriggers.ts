@@ -38,7 +38,7 @@
             for (var i = 0; i < value.length; i++) {
                 var trigger = Survey.JsonObject.metaData.createClass(value[i].getType());
                 jsonObj.toObject(value[i], trigger);
-                array.push(new SurveyPropertyTrigger(<Survey.SurveyTrigger>trigger, this.koPages, this.koQuestions));
+                array.push(this.createPropertyTrigger(<Survey.SurveyTrigger>trigger));
             }
             this.koItems(array);
             this.koSelected(array.length > 0 ? array[0] : null);
@@ -60,7 +60,7 @@
             }
             return result;
         }
-       private getNames(items: Array<any>): Array<string> {
+        private getNames(items: Array<any>): Array<string> {
             var names = [];
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
@@ -71,9 +71,23 @@
             return names;
         }
         private addItem(triggerType: string) {
-            var trigger = new SurveyPropertyTrigger(Survey.JsonObject.metaData.createClass(triggerType), this.koPages, this.koQuestions);
-            this.koItems.push(trigger);
-            this.koSelected(trigger);
+            var trigger = Survey.JsonObject.metaData.createClass(triggerType);
+            var triggerItem = this.createPropertyTrigger(trigger);
+            this.koItems.push(triggerItem);
+            this.koSelected(triggerItem);
+        }
+        private createPropertyTrigger(trigger: Survey.SurveyTrigger): SurveyPropertyTrigger {
+            var triggerItem = null;
+            if (trigger.getType() == "visibletrigger") {
+                triggerItem = new SurveyPropertyVisibleTrigger(trigger, this.koPages, this.koQuestions);
+            }
+            if (trigger.getType() == "setvaluetrigger") {
+                triggerItem = new SurveyPropertySetValueTrigger(trigger, this.koQuestions);
+            }
+            if (!triggerItem) {
+                triggerItem = new SurveyPropertyTrigger(trigger);
+            }
+            return triggerItem;
         }
     }
 
@@ -83,20 +97,14 @@
         availableOperators = [];
         koName: any; koOperator: any; koValue: any; koType: any;
         koText: any; koIsValid: any; koRequireValue: any;
-        public hasQuestions: boolean;
-        public pages: SurveyPropertyTriggerObjects;
-        public questions: SurveyPropertyTriggerObjects;
 
-        constructor(trigger: Survey.SurveyTrigger, koPages: any, koQuestions: any) {
+        constructor(trigger: Survey.SurveyTrigger) {
             this.createOperators();
             this.triggerType = trigger.getType();
             this.koType = ko.observable(this.triggerType);
-            this.hasQuestions = this.triggerType == "visibletrigger";
             this.koName = ko.observable(trigger.name);
             this.koOperator = ko.observable(trigger.operator);
             this.koValue = ko.observable(trigger.value);
-            this.pages = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakePagesVisible"), koPages(), this.hasQuestions ? trigger.pages : []);
-            this.questions = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakeQuestionsVisible"), koQuestions(), this.hasQuestions ? trigger.questions : []);
             var self = this;
             this.koRequireValue = ko.computed(() => { return self.koOperator() != "empty" && self.koOperator() != "notempty"; });
             this.koIsValid = ko.computed(() => { if (self.koName() && (!self.koRequireValue() || self.koValue())) return true; return false; });
@@ -107,10 +115,6 @@
             trigger.name = this.koName();
             trigger.operator = this.koOperator();
             trigger.value = this.koValue();
-            if (this.hasQuestions) {
-                trigger.pages = this.pages.koChoosen();
-                trigger.questions = this.questions.koChoosen();
-            }
             return trigger;
         }
         private createOperators() {
@@ -133,6 +137,39 @@
         private getValueText(): string {
             if (!this.koRequireValue()) return "";
             return " " + this.koValue();
+        }
+    }
+    export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
+        public pages: SurveyPropertyTriggerObjects;
+        public questions: SurveyPropertyTriggerObjects;
+        constructor(trigger: Survey.SurveyTrigger, koPages: any, koQuestions: any) {
+            super(trigger);
+            this.pages = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakePagesVisible"), koPages(), trigger.pages );
+            this.questions = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakeQuestionsVisible"), koQuestions(), trigger.questions );
+        }
+        public createTrigger(): Survey.SurveyTrigger {
+            var trigger = super.createTrigger();
+            trigger.pages = this.pages.koChoosen();
+            trigger.questions = this.questions.koChoosen();
+            return trigger;
+        }
+    }
+    //TODO update after updating survey.tds
+    export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
+        koQuestions: any; kosetToName: any; kosetValue: any; koisVariable: any;
+        constructor(trigger: Survey.SurveyTrigger, koQuestions: any) {
+            super(trigger);
+            this.koQuestions = koQuestions;
+            this.kosetToName = ko.observable(trigger["setToName"]);
+            this.kosetValue = ko.observable(trigger["setValue"]);
+            this.koisVariable = ko.observable(trigger["isVariable"]);
+        }
+        public createTrigger(): Survey.SurveyTrigger {
+            var trigger = super.createTrigger();
+            trigger["setToName"] = this.kosetToName();
+            trigger["setValue"] = this.kosetValue();
+            trigger["isVariable"] = this.koisVariable();
+            return trigger;
         }
     }
     export class SurveyPropertyTriggerObjects {

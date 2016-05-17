@@ -125,6 +125,8 @@
         },
         //Embed window
         ew: {
+            knockout: "Use Knockout version",
+            react: "Use React version",
             bootstrap: "For bootstrap framework",
             standard: "No bootstrap",
             showOnPage: "Show survey on a page",

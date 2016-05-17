@@ -9,12 +9,17 @@
         koScriptUsing: any;
         koHasIds: any;
         koLoadSurvey: any;
+        koLibraryVersion: any;
+        koVisibleHtml: any;
         constructor() {
             var self = this;
+            this.koLibraryVersion = ko.observable("knockout");
             this.koShowAsWindow = ko.observable("page");
             this.koScriptUsing = ko.observable("bootstrap");
             this.koHasIds = ko.observable(false);
             this.koLoadSurvey = ko.observable(false);
+            this.koVisibleHtml = ko.computed(function() { return self.koLibraryVersion() == "react" || self.koShowAsWindow() =="page"; });
+            this.koLibraryVersion.subscribe(function (newValue) { self.setHeadText(); self.surveyEmbedingJava.setValue(self.getJavaText()); });
             this.koShowAsWindow.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
             this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); });
             this.koLoadSurvey.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
@@ -34,11 +39,20 @@
             this.surveyEmbedingJava.setValue(this.getJavaText());
         }
         private setHeadText() {
-            var knockoutStr = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\" ></script>\n";
-            if (this.koScriptUsing() == "bootstrap") {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.bootstrap.min.js\"></script>");
+            if (this.koLibraryVersion() == "knockout") {
+                var knockoutStr = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\" ></script>\n";
+                if (this.koScriptUsing() == "bootstrap") {
+                    this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.bootstrap.min.js\"></script>");
+                } else {
+                    this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
+                }
             } else {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
+                var knockoutStr = "<script src=\"https://fb.me/react-0.14.8.js\"></script>\n<script src= \"https://fb.me/react-dom-0.14.8.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js\"></script>\n";
+                if (this.koScriptUsing() == "bootstrap") {
+                    this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.react.bootstrap.min.js\"></script>");
+                } else {
+                    this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.react.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
+                }
             }
         }
         private createEditor(elementName: string): AceAjax.Editor {
@@ -52,6 +66,10 @@
         }
         private getJavaText(): string {
             var isOnPage = this.koShowAsWindow() == "page";
+            if (this.koLibraryVersion() == "knockout") return this.getKnockoutJavaText(isOnPage);
+            return this.getReactJavaText(isOnPage);
+        }
+        private getKnockoutJavaText(isOnPage: boolean): string {
             var text = isOnPage ? "var survey = new Survey.Survey(\n" : "var surveyWindow = new Survey.SurveyWindow(\n";
             text += this.getJsonText();
             text += ");\n";
@@ -71,6 +89,14 @@
                 text += "surveyWindow.show();";
 
             }
+            return text;
+        }
+        private getReactJavaText(isOnPage: boolean): string {
+            var saveFunc = "alert(\"The results are:\" + JSON.stringify(s.data));";
+            var sendResultText = "var surveySendResult = function (s) {\n" + saveFunc + "\n });\n";
+            var name = isOnPage ? "ReactSurvey" : "ReactSurveyWindow";
+            var jsonText = "var surveyJson = " + this.getJsonText() + "\n\n";
+            var text = jsonText + sendResultText + "ReactDOM.render(\n<" + name + " json={surveyJson} onComplete={surveySendResult} />, \n document.getElementById(\"mySurveyJSName\"));";
             return text;
         }
         private getJsonText(): string {
