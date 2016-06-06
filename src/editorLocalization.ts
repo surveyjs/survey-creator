@@ -91,6 +91,8 @@
             choices: "Choices",
             name: "Name",
             title: "Title",
+            cellType: "Cell Type",
+            colCount: "Column Count",
 
             editProperty: "Edit property '{0}'",
             items: "[ Items: {0} ]",

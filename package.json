@@ -29,7 +29,7 @@
     "gulp-serve": "^1.2.0"
   },
   "dependencies": {
-    "survey-knockout-bootstrap": "^0.9.6",
+    "survey-knockout-bootstrap": "^0.9.8",
     "knockout": "^3.4.0",
     "ace-builds": "^1.2.2"
   }
