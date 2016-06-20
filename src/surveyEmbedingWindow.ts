@@ -76,10 +76,7 @@
             if (!isOnPage) {
                 text += "surveyWindow.";
             }
-            var saveFunc = "alert(\"The results are:\" + JSON.stringify(s.data));";
-            if (this.koHasIds()) {
-                saveFunc = "survey.sendResult('" + this.surveyPostId + "');";
-            }
+            var saveFunc = this.getSaveFuncCode();
             text += "survey.onComplete.add(function (s) {\n" + saveFunc + "\n });\n";
             if (isOnPage) {
                 text += "survey.render(\"mySurveyJSName\");";
@@ -92,12 +89,16 @@
             return text;
         }
         private getReactJavaText(isOnPage: boolean): string {
-            var saveFunc = "alert(\"The results are:\" + JSON.stringify(s.data));";
+            var saveFunc = this.getSaveFuncCode();
             var sendResultText = "var surveySendResult = function (s) {\n" + saveFunc + "\n });\n";
             var name = isOnPage ? "ReactSurvey" : "ReactSurveyWindow";
             var jsonText = "var surveyJson = " + this.getJsonText() + "\n\n";
             var text = jsonText + sendResultText + "ReactDOM.render(\n<" + name + " json={surveyJson} onComplete={surveySendResult} />, \n document.getElementById(\"mySurveyJSName\"));";
             return text;
+        }
+        private getSaveFuncCode() {
+            if (this.koHasIds()) return "survey.sendResult('" + this.surveyPostId + "');";
+            return "alert(\"The results are:\" + JSON.stringify(s.data));";
         }
         private getJsonText(): string {
             if (this.koHasIds() && this.koLoadSurvey()) {

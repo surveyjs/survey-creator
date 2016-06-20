@@ -15,7 +15,7 @@
             </div>
         </div>
         <!-- ko if: question.hasTitle -->
-        <h5 data-bind="text: question.koNo() +  (question.isRequired ? question.data.requiredText : '') + question.title"></h5>
+        <h5 data-bind="text: question.koTitle, css: $root.css.question.title"></h5>
         <!-- /ko -->
         <!-- ko template: { name: 'survey-question-' + question.getType(), data: question } -->
         <!-- /ko -->
