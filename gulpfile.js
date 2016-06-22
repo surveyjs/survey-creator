@@ -1,7 +1,7 @@
 /// <binding ProjectOpened='copylibs' />
 /*global require*/
 var gulp = require('gulp'),
-    concat = require("gulp-concat"),
+    concat = require("gulp-concat-util"),
     ts = require('gulp-typescript'),
     tsd = require('gulp-tsd'),
     gnf = require('gulp-npm-files'),
@@ -13,7 +13,6 @@ var gulp = require('gulp'),
     rename = require("gulp-rename"),
     sequence = require("gulp-sequence"),
     html2ts = require("gulp-html-to-ts"),
-    header = require("gulp-header"),
     jsonTransform = require('gulp-json-transform'),
     project = require("./project.json");
 
@@ -46,7 +45,7 @@ paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
 
 var copyright = ["/*!",
- "* surveyjs Editor v<%= version %>",
+ "* surveyjs Editor v" + editorVersion,
  "* (c) Andrew Telnov - http://surveyjs.org/builder/",
  "* Github - https://github.com/andrewtelnov/survey.js.editor",
  "*/", "", ""].join("\n");
@@ -107,7 +106,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
 
             return tsResult.js
                 .pipe(concat(paths.mainJSfile))
-                .pipe(header(copyright, { version: editorVersion }))
+                .pipe(concat.header(copyright))
                 .pipe(sourcemaps.write({ sourceRoot: "src" }))
                 //Source map is a part of generated file
                 .pipe(gulp.dest(paths.dist))
@@ -150,7 +149,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
              .pipe(rename({
                  extname: '.min.js'
              }))
-            .pipe(header(copyright, { version: editorVersion }))
+            .pipe(concat.header(copyright))
             .pipe(gulp.dest(paths.dist))
             .pipe(gulp.dest(paths.packageDist));
     });

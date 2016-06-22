@@ -55,6 +55,7 @@
             checkbox: "Checkbox",
             comment: "Comment",
             dropdown: "Dropdown",
+            file: "File",
             html: "Html",
             matrix: "Matrix (single choice)",
             matrixdropdown: "Matrix (multiple choice)",
