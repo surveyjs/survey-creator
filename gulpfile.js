@@ -134,7 +134,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
         });
 
         gulp.task('test:copy-index-html', function () {
-            gulp.src('./tests/index.html')
+            return gulp.src('./tests/index.html')
             // Perform minification tasks, etc here
             .pipe(gulp.dest(paths.testsFolder));
         });
@@ -156,7 +156,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
 
     gulp.task('sass', function () {
         "use strict";    
-        gulp.src(paths.styles)
+        return gulp.src(paths.styles)
           .pipe(sass.sync().on('error', sass.logError))
           .pipe(concat("surveyeditor.css"))
           .pipe(gulp.dest(paths.webroot + 'css'))
@@ -166,14 +166,14 @@ gulp.task('updatesurveyjsversion', function (callback) {
 
     gulp.task('templates', function () {
         "use strict";    
-        gulp.src(paths.templates_ko)
-          .pipe(concat("templateEditor.ko.html"))
-          .pipe(html2ts())
-          .pipe(gulp.dest("./src/"));
         gulp.src(paths.template_page)
           .pipe(html2ts())
           .pipe(gulp.dest("./src/"));
         gulp.src(paths.template_question)
+          .pipe(html2ts())
+          .pipe(gulp.dest("./src/"));
+        return gulp.src(paths.templates_ko)
+          .pipe(concat("templateEditor.ko.html"))
           .pipe(html2ts())
           .pipe(gulp.dest("./src/"));
     });
