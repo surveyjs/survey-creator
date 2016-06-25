@@ -6,16 +6,16 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "survey-knockout/survey-knockout.d.ts": {
-      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     },
     "knockout/knockout.d.ts": {
-      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     },
     "ace/ace.d.ts": {
-      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     },
     "qunit/qunit.d.ts": {
-      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     }
   }
 }

@@ -65,8 +65,8 @@ module SurveyEditor {
             this.cellTypeChoices = this.getPropertyChoices("cellType");
             this.colCountChoices = this.getPropertyChoices("colCount");
             this.koName = ko.observable(column.name);
-            this.koCellType = ko.observable(column["cellType"]); //TODO
-            this.koColCount = ko.observable(column["colCount"]); //TODO
+            this.koCellType = ko.observable(column.cellType); //TODO
+            this.koColCount = ko.observable(column.colCount); //TODO
             this.koTitle = ko.observable(column.name === column.title ? "" : column.title);
             this.koShowChoices = ko.observable(false);
             this.koChoices = ko.observableArray(column.choices);
@@ -87,8 +87,8 @@ module SurveyEditor {
         public apply() {
             this.column.name = this.koName();
             this.column.title = this.koTitle();
-            this.column["cellType"] = this.koCellType();
-            this.column["colCount"] = this.koColCount();
+            this.column.cellType = this.koCellType();
+            this.column.colCount = this.koColCount();
             this.choicesEditor.onApplyClick();
             this.column.choices = this.choicesEditor.value;
             this.koChoicesText(this.getChoicesText());
