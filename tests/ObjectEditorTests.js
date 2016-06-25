@@ -102,6 +102,13 @@ var SurveyObjectEditorTests;
             assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
             assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
             assert.equal(itemValueProperty.koItems()[0].koChoices().length, 3, "there are two elements");
+            itemValueProperty.onAddClick();
+            itemValueProperty.koItems()[2].koCellType("checkbox");
+            itemValueProperty.koItems()[2].koName("column 3");
+            assert.equal(itemValueProperty.koItems().length, 3, "There are 3 columns un editor");
+            itemValueProperty.onApplyClick();
+            assert.equal(columns.length, 3, "There are 3 columns");
+            assert.equal(columns[2]["cellType"], "checkbox", "the last column has checkbox cells");
         });
         QUnit.test("Use metadata getPropertyValue function", function (assert) {
             var editor = new SurveyEditor.SurveyObjectEditor();

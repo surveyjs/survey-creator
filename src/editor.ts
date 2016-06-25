@@ -223,6 +223,16 @@ module SurveyEditor {
             ko.cleanNode(this.renderedElement);
             ko.applyBindings(this, this.renderedElement);
             this.surveyjs = document.getElementById("surveyjs");
+            if (this.surveyjs) {
+                var self = this;
+                this.surveyjs.onkeydown = function (e) {
+                    if (!e) return;
+                    if (e.keyCode == 46) self.deleteQuestion();
+                    if (e.keyCode == 38 || e.keyCode == 40) {
+                        self.selectQuestion(e.keyCode == 38);
+                    }
+                };
+            }
             this.jsonEditor = ace.edit("surveyjsEditor");
             this.surveyjsExample = document.getElementById("surveyjsExample");
 
@@ -318,6 +328,23 @@ module SurveyEditor {
                 index = page.questions.indexOf(this.survey["selectedQuestionValue"]) + 1;
             }
             page.addQuestion(question, index);
+        }
+        private deleteQuestion() {
+            var question = this.getSelectedObjAsQuestion();
+            if (question) {
+                this.deleteCurrentObject();
+            }
+        }
+        private selectQuestion(isUp: boolean) {
+            var question = this.getSelectedObjAsQuestion();
+            if (question) {
+                this.surveyObjects.selectNextQuestion(isUp)
+            }
+        }
+        private getSelectedObjAsQuestion(): Survey.QuestionBase {
+            var obj = this.koSelectedObject().value;
+            if (!obj) return null;
+            return SurveyHelper.getObjectType(obj) == ObjType.Question ? <Survey.QuestionBase>(obj): null;
         }
         private deleteCurrentObject() {
             this.deleteObject(this.koSelectedObject().value);

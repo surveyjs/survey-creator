@@ -68,6 +68,30 @@
             if (index < 0) return;
             this.koObjects()[index].text(this.getText(obj));
         }
+        public selectNextQuestion(isUp: boolean) {
+            var question = this.getSelectedQuestion();
+            var itemIndex = this.getItemIndex(question);
+            if (itemIndex < 0) return question;
+            var objs = this.koObjects();
+            var newItemIndex = itemIndex + (isUp ? -1 : 1);
+            if (newItemIndex < objs.length && SurveyHelper.getObjectType(objs[newItemIndex].value) == ObjType.Question) {
+                itemIndex = newItemIndex;
+            } else {
+                newItemIndex = itemIndex;
+                while (newItemIndex < objs.length && SurveyHelper.getObjectType(objs[newItemIndex].value) == ObjType.Question) {
+                    itemIndex = newItemIndex;
+                    newItemIndex += (isUp ? 1 : -1);
+                }
+            }            
+            this.koSelected(objs[itemIndex]);
+        }
+        private getSelectedQuestion(): Survey.QuestionBase {
+            if (!this.koSelected()) return null;
+            var obj = this.koSelected().value;
+            if (!obj) return null;
+            return SurveyHelper.getObjectType(obj) == ObjType.Question ? <Survey.QuestionBase>(obj) : null;
+
+        }
         private addItem(item: SurveyObjectItem, index: number) {
             if (index > this.koObjects().length) {
                 this.koObjects.push(item);
