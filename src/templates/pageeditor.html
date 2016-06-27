@@ -1,7 +1,8 @@
 ﻿<script type="text/html" id="pageeditor">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" data-bind="tabs:true">
         <!-- ko foreach: koPages -->
         <li data-bind="css: {active: koSelected()},event:{
+           keydown:function(el, e){ $parent.keyDown(el, e); },
            dragstart:function(el, e){ $parent.dragStart(el); return true; },
            dragover:function(el, e){ $parent.dragOver(el);},
            dragend:function(el, e){ $parent.dragEnd();},

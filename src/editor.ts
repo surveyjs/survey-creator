@@ -67,7 +67,7 @@ module SurveyEditor {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });
             this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
-                (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); });
+                (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
             this.surveyEmbeding = new SurveyEmbedingWindow();
 
             this.koIsShowDesigner = ko.observable(true);

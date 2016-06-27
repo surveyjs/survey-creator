@@ -10,27 +10,30 @@ module SurveyEditor {
         selectPageClick: any;
         onAddNewPageCallback: SurveyAddNewPageCallback;
         onSelectPageCallback: SurveySelectPageCallback;
+        onDeletePageCallback: SurveySelectPageCallback;
         onMovePageCallback: SurveyMovePageCallback;
-        draggingPage: Survey.Page = null;
-        dragStart: any; dragOver: any; dragEnd: any; dragDrop: any; 
+        draggingPage: any = null;
+        dragStart: any; dragOver: any; dragEnd: any; dragDrop: any; keyDown: any;
 
         constructor(onAddNewPageCallback: SurveyAddNewPageCallback = null, onSelectPageCallback: SurveySelectPageCallback = null,
-            onMovePageCallback: SurveyMovePageCallback = null) {
+            onMovePageCallback: SurveyMovePageCallback = null, onDeletePageCallback: SurveySelectPageCallback = null) {
             this.koPages = ko.observableArray();
             this.koIsValid = ko.observable(false);
             this.onAddNewPageCallback = onAddNewPageCallback;
             this.onSelectPageCallback = onSelectPageCallback;
             this.onMovePageCallback = onMovePageCallback;
+            this.onDeletePageCallback = onDeletePageCallback;
             var self = this;
             this.selectPageClick = function(pageItem) {
                 if (self.onSelectPageCallback) {
                     self.onSelectPageCallback(pageItem.page);
                 }
             }
-            this.dragStart = function (el: Survey.Page) { self.draggingPage = el; };
-            this.dragOver = function (el: Survey.Page) {  };
+            this.keyDown = function (el: any, e: KeyboardEvent) { self.onKeyDown(el, e); }
+            this.dragStart = function (el: any) { self.draggingPage = el; };
+            this.dragOver = function (el: any) {  };
             this.dragEnd = function () { self.draggingPage = null; };
-            this.dragDrop = function (el: Survey.Page) { self.moveDraggingPageTo(el); };
+            this.dragDrop = function (el: any) { self.moveDraggingPageTo(el); };
         }
         public get survey(): Survey.Survey { return this.surveyValue; }
         public set survey(value: Survey.Survey) {
@@ -68,6 +71,26 @@ module SurveyEditor {
             }
             return -1;
         }
+        protected onKeyDown(el: any, e: KeyboardEvent) {
+            if (this.koPages().length <= 1) return;
+            var pages = this.koPages();
+            var pageIndex = -1;
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i].page && pages[i].koSelected()) {
+                    pageIndex = i;
+                }
+            }
+            if (pageIndex < 0) return;
+            if (e.keyCode == 46 && this.onDeletePageCallback) this.onDeletePageCallback(el.page);
+            if ((e.keyCode == 37 || e.keyCode == 39) && this.onSelectPageCallback) {
+                pageIndex += (e.keyCode == 37 ? -1 : 1);
+                if (pageIndex < 0) pageIndex = pages.length - 1;
+                if (pageIndex >= pages.length) pageIndex = 0;
+                var page = pages[pageIndex].page;
+                this.onSelectPageCallback(page);
+                this.setSelectedPage(page);
+            }
+        }
         protected updatePages() {
             if (this.surveyValue == null) {
                 this.koPages([]);
@@ -82,7 +105,7 @@ module SurveyEditor {
             }
             this.koPages(pages);
         }
-        private moveDraggingPageTo(toPage: Survey.Page) {
+        private moveDraggingPageTo(toPage: any) {
             if (toPage == null || toPage == this.draggingPage) {
                 this.draggingPage = null;
                 return;
