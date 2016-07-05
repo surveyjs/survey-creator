@@ -198,7 +198,7 @@ module SurveyEditor {
         }
         private getSurveyTextFromDesigner() {
             var json = new Survey.JsonObject().toJsonObject(this.survey);
-            return new SurveyJSON5().stringify(json, null, 1);
+            return JSON.stringify(json, null, 1);
         }
         private selectedObjectChanged(obj: Survey.Base) {
             var canDeleteObject = false;
