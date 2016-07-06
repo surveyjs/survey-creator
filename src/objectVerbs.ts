@@ -5,7 +5,7 @@
         private choicesClasses: Array<string>;
         koVerbs: any;
         koHasVerbs: any;
-        constructor() {
+        constructor(public onModifiedCallback: () => any) {
             this.koVerbs = ko.observableArray();
             this.koHasVerbs = ko.observable();
             var classes = Survey.JsonObject.metaData.getChildrenClasses("selectbase", true);
@@ -31,10 +31,10 @@
             if (objType == ObjType.Question) {
                 var question = <Survey.QuestionBase>this.obj;
                 if (this.survey.pages.length > 1) {
-                    array.push(new SurveyVerbChangePageItem(this.survey, question));
+                    array.push(new SurveyVerbChangePageItem(this.survey, question, this.onModifiedCallback));
                 }
                 if (this.choicesClasses.indexOf(question.getType()) > -1) {
-                    array.push(new SurveyVerbChangeTypeItem(this.survey, question));
+                    array.push(new SurveyVerbChangeTypeItem(this.survey, question, this.onModifiedCallback));
                 }
             }
             this.koVerbs(array);
@@ -44,15 +44,15 @@
     export class SurveyVerbItem {
         koItems: any;
         koSelectedItem: any;
-        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase, public onModifiedCallback: () => any) {
             this.koItems = ko.observableArray();
             this.koSelectedItem = ko.observable();
         }
         public get text(): string { return ""; }
     }
     export class SurveyVerbChangeTypeItem extends SurveyVerbItem {
-        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
-            super(survey, question);
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase, public onModifiedCallback: () => any) {
+            super(survey, question, onModifiedCallback);
             var classes = Survey.JsonObject.metaData.getChildrenClasses("selectbase", true);
             var array = [];
             for (var i = 0; i < classes.length; i++) {
@@ -74,12 +74,13 @@
             jsonObj.toObject(json, newQuestion);
             page.removeQuestion(this.question);
             page.addQuestion(newQuestion, index);
+            if (this.onModifiedCallback) this.onModifiedCallback();
         }
     }
     export class SurveyVerbChangePageItem extends SurveyVerbItem {
         private prevPage: Survey.Page;
-        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase) {
-            super(survey, question);
+        constructor(public survey: Survey.Survey, public question: Survey.QuestionBase, public onModifiedCallback: () => any) {
+            super(survey, question, onModifiedCallback);
             var array = [];
             for (var i = 0; i < this.survey.pages.length; i++) {
                 var page = this.survey.pages[i];
@@ -96,6 +97,7 @@
             if (newPage == null || newPage == this.prevPage) return;
             this.prevPage.removeQuestion(this.question);
             newPage.addQuestion(this.question);
+            if (this.onModifiedCallback) this.onModifiedCallback();
         }
     }
 }

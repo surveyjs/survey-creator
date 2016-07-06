@@ -1,4 +1,5 @@
-﻿<div class="well well-sm" data-bind="attr : {draggable: $root.isDesignMode}, visible: question.koVisible() || $root.isDesignMode, click: $root.isDesignMode ? koOnClick: null, 
+﻿<div class="well well-sm" data-bind="style: {marginLeft: question.koMarginLeft }, 
+     attr : {id: id, draggable: $root.isDesignMode}, visible: question.koVisible() || $root.isDesignMode, click: $root.isDesignMode ? koOnClick: null, 
          event:{
            dragstart:function(el, e){ dragStart(e); return true; },
            dragover:function(el, e){ dragOver(e);},

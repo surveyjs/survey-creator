@@ -73,6 +73,8 @@
             saveSurvey: "Save Survey",
             designer: "Designer",
             jsonEditor: "JSON Editor",
+            undo: "Undo",
+            redo: "Redo",
             toolbox: "Toolbox",
             delSelObject: "Delete selected object",
             correctJSON: "Please correct JSON.",

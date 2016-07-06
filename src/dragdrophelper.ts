@@ -3,8 +3,9 @@
         static dataStart: string = "surveyjs,";
         static dragData: any = {text: "", json: null };
         static prevEvent = { question: null, x: -1, y: -1 };
-
-        constructor(public data: Survey.ISurvey) {
+        private onModifiedCallback: () => any;
+        constructor(public data: Survey.ISurvey, onModifiedCallback: () => any) {
+            this.onModifiedCallback = onModifiedCallback;
         }
         public get survey(): Survey.Survey { return <Survey.Survey>this.data; }
         public startDragNewQuestion(event: DragEvent, questionType: string, questionName: string) {
@@ -86,6 +87,7 @@
                 page.removeQuestion(targetQuestion);
             }
             this.survey.currentPage.addQuestion(targetQuestion, index);
+            if (this.onModifiedCallback) this.onModifiedCallback();
         }
         private getDataInfo(event: DragEvent): any {
             var data = this.getData(event);

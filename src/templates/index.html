@@ -1,13 +1,19 @@
 ﻿<div class="row nav-tabs">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <nav class="navbar-default">
-            <ul class="nav nav-tabs no-borders">
-                <li data-bind="css: {active: koIsShowDesigner()}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
-                <li data-bind="css: {active: !koIsShowDesigner()}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
-            </ul>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav nav-tabs no-borders">
+                        <li data-bind="css: {active: koIsShowDesigner()}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
+                        <li data-bind="css: {active: !koIsShowDesigner()}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
+                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind=", text: $root.getLocString('ed.undo')"></span></button></li>
+                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind=", text: $root.getLocString('ed.redo')"></span></button></li>
+                    </ul>
+                 </div>
+            </div>
         </nav>
     </div>
-    <div class="col-md-9 svd_navbarbuttons">
+    <div class="col-md-6 svd_navbarbuttons">
         <nav class="navbar-default pull-right">
             <div class="btn-toolbar" role="toolbar">
                 <button type="button" class="btn btn-default" data-bind="click: runSurveyClick" data-toggle="modal" data-target="#surveyExampleModal"><span class="glyphicon glyphicon-play" aria-hidden="true"></span><span data-bind="text: $root.getLocString('ed.runSurvey')"></span></button>
@@ -16,81 +22,81 @@
             </div>
         </nav>
     </div>
-</div>
-<div class="panel" style="width:100%">
-    <div id="surveyjsEditor" data-bind="visible: !koIsShowDesigner()" style="height:450px;width:100%"></div>
-    <div class="row" data-bind="visible: koIsShowDesigner()">
-        <div class="row col-md-9">
-            <div class="col-md-3">
-                <div class="panel panel-default" style="width:100%">
-                    <div class="panel-heading">
-                        <b data-bind="text: $root.getLocString('ed.toolbox')"></b>
-                    </div>
-                    <div class="btn-group-vertical" style="width:100%;padding-right:2px">
-                        <!-- ko foreach: questionTypes -->
-                        <div class="btn btn-default" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
-                            <span data-bind="text: $root.getLocString('qt.' + $data)"></span>
+    </div>
+        <div class="panel" style="width:100%">
+            <div id="surveyjsEditor" data-bind="visible: !koIsShowDesigner()" style="height:450px;width:100%"></div>
+            <div class="row" data-bind="visible: koIsShowDesigner()">
+                <div class="row col-md-9">
+                    <div class="col-md-3">
+                        <div class="panel panel-default" style="width:100%">
+                            <div class="panel-heading">
+                                <b data-bind="text: $root.getLocString('ed.toolbox')"></b>
+                            </div>
+                            <div class="btn-group-vertical" style="width:100%;padding-right:2px">
+                                <!-- ko foreach: questionTypes -->
+                                <div class="btn btn-default" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
+                                    <span data-bind="text: $root.getLocString('qt.' + $data)"></span>
+                                </div>
+                                <!-- /ko  -->
+                                <!-- ko foreach: koCopiedQuestions -->
+                                <div class="btn btn-primary" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}}">
+                                    <span data-bind="text:name"></span>
+                                </div>
+                                <!-- /ko  -->
+                            </div>
                         </div>
-                        <!-- /ko  -->
-                        <!-- ko foreach: koCopiedQuestions -->
-                        <div class="btn btn-primary" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}}">
-                            <span data-bind="text:name"></span>
+                    </div>
+                    <div class="col-md-9">
+                        <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
+                        <div style="overflow-y: scroll;height:450px;">
+                            <div id="surveyjs" style="width:100%"></div>
                         </div>
-                        <!-- /ko  -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default" style="width:100%">
+                        <div class="panel-heading">
+                            <div class="input-group">
+                                <select class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
+                        <div class="panel-footer" data-bind="visible:surveyVerbs.koHasVerbs">
+                            <div data-bind="template: { name: 'objectverbs', data: surveyVerbs }"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
-                <div style="overflow-y: scroll;height:450px;">
-                    <div id="surveyjs" style="width:100%"></div>
-                </div>
-            </div>
         </div>
-        <div class="col-md-3">
-            <div class="panel panel-default" style="width:100%">
-                <div class="panel-heading">
-                    <div class="input-group">
-                        <select class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
-                        </span>
+
+        <div id="surveyExampleModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" data-bind="text: $root.getLocString('ed.runSurvey')"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="surveyjsExample"></div>
+                        <div id="surveyjsExampleResults"></div>
                     </div>
                 </div>
-                <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
-                <div class="panel-footer" data-bind="visible:surveyVerbs.koHasVerbs">
-                    <div data-bind="template: { name: 'objectverbs', data: surveyVerbs }"></div>
+            </div>
+        </div>
+
+        <div id="surveyEmbedingModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" data-bind="text: $root.getLocString('ed.embedSurvey')"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div id="surveyExampleModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" data-bind="text: $root.getLocString('ed.runSurvey')"></h4>
-            </div>
-            <div class="modal-body">
-                <div id="surveyjsExample"></div>
-                <div id="surveyjsExampleResults"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="surveyEmbedingModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" data-bind="text: $root.getLocString('ed.embedSurvey')"></h4>
-            </div>
-            <div class="modal-body">
-                <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
-            </div>
-        </div>
-    </div>
-</div>

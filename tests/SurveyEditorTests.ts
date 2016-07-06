@@ -40,6 +40,18 @@ module SurveyObjectEditorTests.Tests {
         editor = new SurveyEditor.SurveyEditor(null, { questionTypes: ["text", "dropdown", "unknown"]});
         assert.equal(editor.questionTypes.length, 2, "Only two types from three are accepted");
     });
+    QUnit.test("Editor state property", function (assert) {
+        var editor = new SurveyEditor.SurveyEditor();
+        editor.saveSurveyFunc = function (no: number, doSaveCallback: (no: number, isSuccess: boolean) => void) {
+            doSaveCallback(no, true);
+            };
+        editor.text = JSON.stringify(getSurveyJson());
+        assert.equal(editor.state, "");
+        editor.addPage();
+        assert.equal(editor.state, "modified");
+        editor.saveButtonClick();
+        assert.equal(editor.state, "saved");
+    });
     function getSurveyJson(): any {
         return {
             pages: [{
