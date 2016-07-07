@@ -8,6 +8,16 @@
                         <li data-bind="css: {active: !koIsShowDesigner()}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
                         <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind=", text: $root.getLocString('ed.undo')"></span></button></li>
                         <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind=", text: $root.getLocString('ed.redo')"></span></button></li>
+                        <li data-bind="visible: koIsShowDesigner() && koShowOptions()" style="margin-left:5px">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick">Generate Valid JSON</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                  </div>
             </div>

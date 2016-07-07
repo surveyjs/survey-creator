@@ -41,7 +41,8 @@ module SurveyEditor {
         koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         koShowSaveButton: any;
-        selectDesignerClick: any; selectEditorClick: any;
+        koGenerateValidJSON: any; koShowOptions: any;
+        selectDesignerClick: any; selectEditorClick: any; generateValidJSONClick: any;
         doUndoClick: any; doRedoClick: any;
         deleteObjectClick: any;
         koState: any;
@@ -60,10 +61,13 @@ module SurveyEditor {
 
             this.koState = ko.observable();
             this.koShowSaveButton = ko.observable(false);
+            this.koShowOptions = ko.observable(false);
             this.saveButtonClick = function () { self.doSave(); };
             this.koObjects = ko.observableArray();
             this.koSelectedObject = ko.observable();
             this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
+            this.koGenerateValidJSON = ko.observable(this.options && this.options.generateValidJSON);
+            this.koGenerateValidJSON.subscribe(function (newValue) { if (!self.options) self.options = {}; self.options.generateValidJSON = newValue; });
             this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
             this.undoRedo = new SurveyUndoRedo();
 
@@ -80,6 +84,7 @@ module SurveyEditor {
             this.koIsShowDesigner = ko.observable(true);
             this.selectDesignerClick = function () { self.showDesigner(); };
             this.selectEditorClick = function () { self.showJsonEditor(); };
+            this.generateValidJSONClick = function () { self.koGenerateValidJSON(!self.koGenerateValidJSON()); }
             this.runSurveyClick = function () { self.showLiveSurvey(); };
             this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
@@ -169,6 +174,8 @@ module SurveyEditor {
             this.saveSurveyFuncValue = value;
             this.koShowSaveButton(value != null);
         }
+        public get showOptions() { return this.koShowOptions(); }
+        public set showOptions(value: boolean) { this.koShowOptions(value); }
         private setTextValue(value: string) {
             if (this.jsonEditor == null) return;
             this.isProcessingImmediately = true;
@@ -261,6 +268,7 @@ module SurveyEditor {
         }
         private getSurveyTextFromDesigner() {
             var json = new Survey.JsonObject().toJsonObject(this.survey);
+            if (this.options && this.options.generateValidJSON) return JSON.stringify(json, null, 1);
             return new SurveyJSON5().stringify(json, null, 1);
         }
         private selectedObjectChanged(obj: Survey.Base) {
@@ -465,7 +473,7 @@ module SurveyEditor {
                 var self = this;
                 var surveyjsExampleResults = document.getElementById("surveyjsExampleResults");
                 if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
-                survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + new SurveyJSON5().stringify(survey.data); });
+                survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); });
                 survey.render(this.surveyjsExample);
             } else {
                 this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");
@@ -476,6 +484,7 @@ module SurveyEditor {
             this.surveyEmbeding.json = json;
             this.surveyEmbeding.surveyId = this.surveyId;
             this.surveyEmbeding.surveyPostId = this.surveyPostId;
+            this.surveyEmbeding.generateValidJSON = this.options && this.options.generateValidJSON;
             this.surveyEmbeding.show();
         }
         private getSurveyJSON(): any {

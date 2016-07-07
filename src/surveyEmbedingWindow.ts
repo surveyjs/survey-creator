@@ -5,6 +5,7 @@
         private surveyEmbedingJava: AceAjax.Editor;
         public surveyId: string = null;
         public surveyPostId: string = null;
+        public generateValidJSON: boolean = false;
         koShowAsWindow: any;
         koScriptUsing: any;
         koHasIds: any;
@@ -104,6 +105,7 @@
             if (this.koHasIds() && this.koLoadSurvey()) {
                 return "{ surveyId: '" + this.surveyId + "'}";
             }
+            if (this.generateValidJSON) return JSON.stringify(this.json);
             return new SurveyJSON5().stringify(this.json);
         }
     }
