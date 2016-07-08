@@ -6,15 +6,16 @@
                     <ul class="nav nav-tabs no-borders">
                         <li data-bind="css: {active: koIsShowDesigner()}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
                         <li data-bind="css: {active: !koIsShowDesigner()}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
-                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind=", text: $root.getLocString('ed.undo')"></span></button></li>
-                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind=", text: $root.getLocString('ed.redo')"></span></button></li>
+                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button></li>
+                        <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button></li>
                         <li data-bind="visible: koIsShowDesigner() && koShowOptions()" style="margin-left:5px">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
                                     Options <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick">Generate Valid JSON</a></li>
+                                    <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick, text: $root.getLocString('ed.generateValidJSON')"></a></li>
+                                    <li data-bind="css: {active: !koGenerateValidJSON()}"><a href="#" data-bind="click:generateReadableJSONClick, text: $root.getLocString('ed.generateReadableJSON')"></a></li>
                                 </ul>
                             </div>
                         </li>

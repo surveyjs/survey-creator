@@ -36,13 +36,15 @@ module SurveyEditor {
         public surveyPostId: string = null;
         public questionTypes: string[];
         public koCopiedQuestions: any;
+        public generateValidJSONChangedCallback: () => void;
         
         koIsShowDesigner: any;
         koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         koShowSaveButton: any;
         koGenerateValidJSON: any; koShowOptions: any;
-        selectDesignerClick: any; selectEditorClick: any; generateValidJSONClick: any;
+        selectDesignerClick: any; selectEditorClick: any;
+        generateValidJSONClick: any; generateReadableJSONClick: any;
         doUndoClick: any; doRedoClick: any;
         deleteObjectClick: any;
         koState: any;
@@ -67,7 +69,11 @@ module SurveyEditor {
             this.koSelectedObject = ko.observable();
             this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
             this.koGenerateValidJSON = ko.observable(this.options && this.options.generateValidJSON);
-            this.koGenerateValidJSON.subscribe(function (newValue) { if (!self.options) self.options = {}; self.options.generateValidJSON = newValue; });
+            this.koGenerateValidJSON.subscribe(function (newValue) {
+                if (!self.options) self.options = {};
+                self.options.generateValidJSON = newValue;
+                if (self.generateValidJSONChangedCallback) self.generateValidJSONChangedCallback();
+            });
             this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
             this.undoRedo = new SurveyUndoRedo();
 
@@ -84,7 +90,8 @@ module SurveyEditor {
             this.koIsShowDesigner = ko.observable(true);
             this.selectDesignerClick = function () { self.showDesigner(); };
             this.selectEditorClick = function () { self.showJsonEditor(); };
-            this.generateValidJSONClick = function () { self.koGenerateValidJSON(!self.koGenerateValidJSON()); }
+            this.generateValidJSONClick = function () { self.koGenerateValidJSON(true); }
+            this.generateReadableJSONClick = function () { self.koGenerateValidJSON(false); }
             this.runSurveyClick = function () { self.showLiveSurvey(); };
             this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
             this.deleteObjectClick = function () { self.deleteCurrentObject(); };
