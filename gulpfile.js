@@ -2,6 +2,7 @@
 /*global require*/
 var gulp = require('gulp'),
     concat = require("gulp-concat-util"),
+    insert = require('gulp-insert'),
     ts = require('gulp-typescript'),
     tsd = require('gulp-tsd'),
     gnf = require('gulp-npm-files'),
@@ -97,6 +98,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
                   paths.webroot + "/lib/survey/**/*.d.ts",
                   paths.typings
             ].concat(paths.ts))
+               .pipe(insert.prepend(copyright))
                .pipe(sourcemaps.init())
                .pipe(ts({
                    target: "ES5",
@@ -106,7 +108,6 @@ gulp.task('updatesurveyjsversion', function (callback) {
 
             return tsResult.js
                 .pipe(concat(paths.mainJSfile))
-                .pipe(concat.header(copyright))
                 .pipe(sourcemaps.write({ sourceRoot: "src" }))
                 //Source map is a part of generated file
                 .pipe(gulp.dest(paths.dist))

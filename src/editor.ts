@@ -36,7 +36,7 @@ module SurveyEditor {
         public surveyPostId: string = null;
         public questionTypes: string[];
         public koCopiedQuestions: any;
-        public generateValidJSONChangedCallback: () => void;
+        public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
         
         koIsShowDesigner: any;
         koCanDeleteObject: any;
@@ -72,7 +72,7 @@ module SurveyEditor {
             this.koGenerateValidJSON.subscribe(function (newValue) {
                 if (!self.options) self.options = {};
                 self.options.generateValidJSON = newValue;
-                if (self.generateValidJSONChangedCallback) self.generateValidJSONChangedCallback();
+                if (self.generateValidJSONChangedCallback) self.generateValidJSONChangedCallback(newValue);
             });
             this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
             this.undoRedo = new SurveyUndoRedo();
