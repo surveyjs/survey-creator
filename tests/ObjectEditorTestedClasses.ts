@@ -34,7 +34,15 @@
     Survey.JsonObject.metaData.addClass("car", ["name"]);
     Survey.JsonObject.metaData.addClass("truck", ["maxWeight:number"], function () { return new Truck(); }, "big");
     Survey.JsonObject.metaData.addClass("sport", ["!maxSpeed:number"], function () { return new SportCar(); }, "fast");
-    Survey.JsonObject.metaData.addClass("truckDefault", ["isNew:boolean","title:string"], function () { return new TruckDefaultValue(); }, "truck");
-    Survey.JsonObject.metaData.setPropertyValues("truckDefault", "title", null, null, function (obj: any) { return obj.titleValue; });
+    Survey.JsonObject.metaData.addClass("truckDefault", ["isNew:boolean", "title:string"], function () { return new TruckDefaultValue(); }, "truck");
+    //TODO add onGetValue into the line above.
+    var properties = Survey.JsonObject.metaData.getProperties("truckDefault");
+    for (var i = 0; i < properties.length; i++) {
+        if (properties[i].name == "title") {
+            properties[i].onGetValue = function (obj: any) { return obj.titleValue; }
+            break;
+        }
+    }
+    //Survey.JsonObject.metaData.setPropertyValues("truckDefault", "title", null, null, function (obj: any) { return obj.titleValue; });
 
 }

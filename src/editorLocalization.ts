@@ -59,6 +59,7 @@
             html: "Html",
             matrix: "Matrix (single choice)",
             matrixdropdown: "Matrix (multiple choice)",
+            matrixdynamic: "Matrix (dynamic rows)",
             multipletext: "Multiple Text",
             radiogroup: "Radiogroup",
             rating: "Rating",
