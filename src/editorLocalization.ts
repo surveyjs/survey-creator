@@ -95,7 +95,8 @@
 
             value: "Value",
             text: "Text",
-            choices: "Choices",
+            required: "Required?",
+            hasOther: "Has Other Item",
             name: "Name",
             title: "Title",
             cellType: "Cell Type",

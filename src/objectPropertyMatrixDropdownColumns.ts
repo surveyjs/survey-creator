@@ -56,7 +56,8 @@ module SurveyEditor {
     class SurveyPropertyMatrixDropdownColumnsItem {
         private koChoices: any;
         public choicesEditor: SurveyPropertyItemValues;
-        koName: any; koTitle: any; koCellType: any; koShowChoices: any; koHasError: any; koChoicesText: any; koColCount: any;
+        koName: any; koTitle: any; koCellType: any; koShowChoices: any;
+        koHasError: any; koColCount: any; koIsRequired: any; koHasOther: any;
         koHasChoices: any; koHasColCount: any;
         public onShowChoicesClick: any;
         public cellTypeChoices: Array<any>;
@@ -65,13 +66,14 @@ module SurveyEditor {
             this.cellTypeChoices = this.getPropertyChoices("cellType");
             this.colCountChoices = this.getPropertyChoices("colCount");
             this.koName = ko.observable(column.name);
-            this.koCellType = ko.observable(column.cellType); //TODO
-            this.koColCount = ko.observable(column.colCount); //TODO
+            this.koCellType = ko.observable(column.cellType); 
+            this.koColCount = ko.observable(column.colCount);
+            this.koIsRequired = ko.observable(column["isRequired"] ? true : false);
+            this.koHasOther = ko.observable(column["koHasOther"] ? true : false);
             this.koTitle = ko.observable(column.name === column.title ? "" : column.title);
             this.koShowChoices = ko.observable(false);
             this.koChoices = ko.observableArray(column.choices);
             this.koHasError = ko.observable(false);
-            this.koChoicesText = ko.observable(this.getChoicesText());
             this.choicesEditor = new SurveyPropertyItemValues(null);
             this.choicesEditor.object = this.column;
             this.choicesEditor.value = this.koChoices();
@@ -89,12 +91,12 @@ module SurveyEditor {
             this.column.title = this.koTitle();
             this.column.cellType = this.koCellType();
             this.column.colCount = this.koColCount();
+            //TODO
+            this.column["isRequired"] = this.koIsRequired();
+            this.column["hasOther"] = this.koHasOther();
+
             this.choicesEditor.onApplyClick();
             this.column.choices = this.choicesEditor.value;
-            this.koChoicesText(this.getChoicesText());
-        }
-        private getChoicesText(): string {
-            return editorLocalization.getString("pe.items")["format"](this.koChoices().length);
         }
         private getPropertyChoices(propetyName: string): Array<any> {
             var properties = Survey.JsonObject.metaData.getProperties("matrixdropdowncolumn");

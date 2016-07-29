@@ -2,7 +2,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th data-bind="text: $root.getLocString('pe.choices')"></th>
+                <th data-bind="text: $root.getLocString('pe.required')"></th>
                 <th data-bind="text: $root.getLocString('pe.cellType')"></th>
                 <th data-bind="text: $root.getLocString('pe.name')"></th>
                 <th data-bind="text: $root.getLocString('pe.title')"></th>
@@ -16,7 +16,7 @@
                     <a href="#" data-bind="visible:koHasChoices, click: onShowChoicesClick">
                         <span class="glyphicon" data-bind="css: {'glyphicon-chevron-down': !koShowChoices(), 'glyphicon-chevron-up': koShowChoices()}"></span>
                     </a>
-                    <span data-bind="text:koChoicesText"></span>
+                    <input type="checkbox" data-bind="checked: koIsRequired" />
                 </td>
                 <td>
                     <select class="form-control" data-bind="options: cellTypeChoices, value: koCellType"  style="width:110px"></select>
@@ -30,9 +30,14 @@
             </tr>
             <tr data-bind="visible: koShowChoices() && koHasChoices()">
                 <td colspan="4" style="border-top-style:none">
-                    <div data-bind="visible:koHasColCount">
-                        <span data-bind="text:$root.getLocString('pe.colCount')"></span>
-                        <select class="form-control" data-bind="options: colCountChoices, value: koColCount" style="width:110px"></select>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" data-bind="text:$root.getLocString('pe.hasOther')"></label>
+                        <div class="col-sm-2">
+                            <input type="checkbox" data-bind="checked: koHasOther" />
+                        </div>
+                        <div class="col-sm-7" data-bind="visible: !koHasColCount()"></div>
+                        <label class="control-label col-sm-3" data-bind="visible:koHasColCount, text:$root.getLocString('pe.colCount')"></label>
+                        <select class="form-control col-sm-4" data-bind="visible:koHasColCount, options: colCountChoices, value: koColCount" style="width:110px"></select>
                     </div>
                     <!-- ko template: { name: 'propertyeditor-itemvalues', data: choicesEditor } -->
                     <!-- /ko -->
