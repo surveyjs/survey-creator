@@ -9,6 +9,7 @@
         <button class="btn btn-primary btn-xs" data-bind="click: $root.copyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
     </div>
     <div data-bind="css:{svd_q_design: $root.isDesignMode}">
+        <span data-bind="text:koIsSelected"></span>
         <div class="alert alert-danger" role="alert" data-bind="visible: koErrors().length > 0, foreach: koErrors">
             <div>
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -21,7 +22,7 @@
         <!-- ko template: { name: 'survey-question-' + question.getType(), data: question } -->
         <!-- /ko -->
         <div data-bind="visible: question.hasComment">
-            <div data-bind="text:$root.getLocString('otherItemText')"></div>
+            <div data-bind="text:question.commentText"></div>
             <div data-bind="template: { name: 'survey-comment', data: {'question': question, 'visible': true } }"></div>
         </div>
     </div>
