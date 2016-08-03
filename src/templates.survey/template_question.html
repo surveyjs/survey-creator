@@ -9,7 +9,6 @@
         <button class="btn btn-primary btn-xs" data-bind="click: $root.copyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
     </div>
     <div data-bind="css:{svd_q_design: $root.isDesignMode}">
-        <span data-bind="text:koIsSelected"></span>
         <div class="alert alert-danger" role="alert" data-bind="visible: koErrors().length > 0, foreach: koErrors">
             <div>
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
