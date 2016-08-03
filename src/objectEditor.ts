@@ -56,7 +56,9 @@ module SurveyEditor {
                 var objectProperty = new SurveyObjectProperty(properties[i], propEvent);
                 var locName = this.selectedObject.getType() + '_' + properties[i].name;
                 objectProperty.displayName = editorLocalization.getPropertyName(locName);
-                objectProperty.title = editorLocalization.getPropertyTitle(locName);
+                var title = editorLocalization.getPropertyTitle(locName);
+                if (!title) title = objectProperty.displayName;
+                objectProperty.title = title;
                 objectProperties.push(objectProperty);
             }
             this.koProperties(objectProperties);
