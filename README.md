@@ -1,5 +1,7 @@
 **survey.js.editor** is the visual editor for [surveyjs](https://github.com/andrewtelnov/surveyjs). It uses JSON to store the survey metadata.
 
+https://travis-ci.org/andrewtelnov/surveyjs.editor.svg?branch=master
+
 #Download
 Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/surveyjs.editor.zip)
 
