@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     concat = require("gulp-concat-util"),
     insert = require('gulp-insert'),
     ts = require('gulp-typescript'),
-    tsd = require('gulp-tsd'),
+    typings = require('gulp-typings'),
     gnf = require('gulp-npm-files'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
@@ -51,14 +51,6 @@ var copyright = ["/*!",
  "* Github - https://github.com/andrewtelnov/survey.js.editor",
  "*/", "", ""].join("\n");
 
-
-gulp.task('tsd', function (callback) {
-    tsd({
-        command: 'reinstall',
-        latest: true,
-        config: 'tsd.json'
-    }, callback);
-});
 
 gulp.task('copyfiles', function (callback) {
     gulp.src(gnf(null, 'package.json'), { base: './' })
