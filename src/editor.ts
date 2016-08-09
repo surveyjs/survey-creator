@@ -39,11 +39,12 @@ module SurveyEditor {
         public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
         
         koIsShowDesigner: any;
+        koViewType: any;
         koCanDeleteObject: any;
         koObjects: any; koSelectedObject: any;
         koShowSaveButton: any;
-        koGenerateValidJSON: any; koShowOptions: any;
-        selectDesignerClick: any; selectEditorClick: any;
+        koGenerateValidJSON: any; koShowOptions: any; koTestSurveyWidth: any;
+        selectDesignerClick: any; selectEditorClick: any; selectTestClick: any; selectEmbedClick: any;
         generateValidJSONClick: any; generateReadableJSONClick: any;
         doUndoClick: any; doRedoClick: any;
         deleteObjectClick: any;
@@ -64,6 +65,7 @@ module SurveyEditor {
             this.koState = ko.observable();
             this.koShowSaveButton = ko.observable(false);
             this.koShowOptions = ko.observable(false);
+            this.koTestSurveyWidth = ko.observable("100%");
             this.saveButtonClick = function () { self.doSave(); };
             this.koObjects = ko.observableArray();
             this.koSelectedObject = ko.observable();
@@ -87,9 +89,12 @@ module SurveyEditor {
                 (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
             this.surveyEmbeding = new SurveyEmbedingWindow();
 
-            this.koIsShowDesigner = ko.observable(true);
+            this.koViewType = ko.observable("designer");
+            this.koIsShowDesigner = ko.computed(function () { return self.koViewType() == "designer"; });
             this.selectDesignerClick = function () { self.showDesigner(); };
             this.selectEditorClick = function () { self.showJsonEditor(); };
+            this.selectTestClick = function () { self.showTestSurvey(); };
+            this.selectEmbedClick = function () { self.showEmbedEditor(); };
             this.generateValidJSONClick = function () { self.koGenerateValidJSON(true); }
             this.generateReadableJSONClick = function () { self.koGenerateValidJSON(false); }
             this.runSurveyClick = function () { self.showLiveSurvey(); };
@@ -138,10 +143,12 @@ module SurveyEditor {
         public set text(value: string) {
             this.textWorker = new SurveyTextWorker(value);
             if (this.textWorker.isJsonCorrect) {
+                this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
                 this.showDesigner();
+                this.setUndoRedoCurrentState(true);
             } else {
                 this.setTextValue(value);
-                this.koIsShowDesigner(false); 
+                this.koViewType("editor");
             }
         }
         public get state(): string { return this.stateValue; }
@@ -259,19 +266,35 @@ module SurveyEditor {
             if (question) return question;
             return null;
         }
-        private showDesigner() {
+        private canSwitchViewType(newType: string): boolean {
+            if (newType && this.koViewType() == newType) return false;
+            if (this.koViewType() != "editor") return true;
             if (!this.textWorker.isJsonCorrect) {
                 alert(this.getLocString("ed.correctJSON"));
-                return;
+                return false;
             }
             this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
-            this.setUndoRedoCurrentState(true);
-            this.koIsShowDesigner(true); 
+            return true;
+        }
+        private showDesigner() {
+            if (!this.canSwitchViewType("designer")) return;
+            this.koViewType("designer");
         }
         private showJsonEditor() {
+            if (this.koViewType() == "editor") return;
             this.jsonEditor.setValue(this.getSurveyTextFromDesigner());
             this.jsonEditor.focus();
-            this.koIsShowDesigner(false); 
+            this.koViewType("editor");
+        }
+        private showTestSurvey() {
+            if (!this.canSwitchViewType(null)) return;
+            this.showLiveSurvey();
+            this.koViewType("test");
+        }
+        private showEmbedEditor() {
+            if (!this.canSwitchViewType("embed")) return;
+            this.showSurveyEmbeding();
+            this.koViewType("embed");
         }
         private getSurveyTextFromDesigner() {
             var json = new Survey.JsonObject().toJsonObject(this.survey);
@@ -479,8 +502,10 @@ module SurveyEditor {
                 var survey = new Survey.Survey(json);
                 var self = this;
                 var surveyjsExampleResults = document.getElementById("surveyjsExampleResults");
+                var surveyjsExamplereRun = document.getElementById("surveyjsExamplereRun");
                 if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
-                survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); });
+                if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = "none";
+                survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = ""; });
                 survey.render(this.surveyjsExample);
             } else {
                 this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");

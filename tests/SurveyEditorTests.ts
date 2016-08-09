@@ -52,6 +52,17 @@ module SurveyObjectEditorTests.Tests {
         editor.saveButtonClick();
         assert.equal(editor.state, "saved");
     });
+    QUnit.test("Do not reload surey on 'Designer' tab click", function (assert) {
+        var editor = new SurveyEditor.SurveyEditor();
+        editor.text = JSON.stringify(getSurveyJson());
+        var pageCount = editor.survey.PageCount;
+        editor.addPage();
+        assert.equal(editor.survey.PageCount, pageCount + 1, "new Page is added");
+        editor.selectDesignerClick();
+        assert.equal(editor.survey.PageCount, pageCount + 1, "new Page is stil there");
+        editor.selectTestClick();
+        assert.equal(editor.survey.PageCount, pageCount + 1, "new Page is stil there");
+    });
     function getSurveyJson(): any {
         return {
             pages: [{

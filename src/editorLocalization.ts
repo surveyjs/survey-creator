@@ -69,7 +69,9 @@
         ed: {
             newPageName: "page",
             newQuestionName: "question",
-            runSurvey: " Run Survey",
+            testSurvey: "Test Survey",
+            testSurveyAgain: "Test Survey Again",
+            testSurveyWidth: "Survey width: ",
             embedSurvey: "Embed Survey",
             saveSurvey: "Save Survey",
             designer: "Designer",
