@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "knockout": "^3.4.0",
-    "ace-builds": "^1.2.2"
+    "ace-builds": "^1.2.2",
+    "survey-knockout-bootstrap": "^0.9.10"
   }
 }
