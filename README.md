@@ -34,13 +34,15 @@ To build library yourself:
  2. **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. 
 	```
 	npm install -g gulp
+	npm install -g typings
 	npm install
 	```
 	The first `npm` command sets up the popular [Gulp](http://gulpjs.com/) build tool. 
+	The second `npm` command sets up the Typescript Definition Manager [Typings](https://github.com/typings/typings). 
 
  3. **Create TypeScript definition files**
 	```
-	gulp tsd
+	typings install
 	```
 	Typescript definition files should be located at 'typings' directory.
 
