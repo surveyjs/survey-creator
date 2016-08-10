@@ -45,10 +45,10 @@ module SurveyEditor {
             this.value_ = [];
             for (var i = 0; i < this.koItems().length; i++) {
                 var item = this.koItems()[i];
-                if (item.koText()) {
+                if (item.koText() && item.koText() != item.koValue()) {
                     this.value_.push({ value: item.koValue(), text: item.koText() });
                 } else {
-                    this.value_.push(item.koValue());
+                    this.value_.push({ value: item.koValue(), text: null });
                 }
             }
             if (this.onValueChanged) {

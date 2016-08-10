@@ -1,31 +1,29 @@
 ﻿<script type="text/html" id="propertyeditor-itemvalues">
-<table class="table">
-    <thead>
-        <tr>
-            <th data-bind="text: $root.getLocString('pe.value')"></th>
-            <th data-bind="text: $root.getLocString('pe.text')"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- ko foreach: koItems -->
-        <tr>
-            <td>
-                <input type="text" class="form-control" data-bind="value:koValue" style="width:200px" />
-                <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
-            </td>
-            <td><input type="text" class="form-control" data-bind="value:koText" style="width:200px" /></td>
-            <td><input type="button" class="btn" data-bind="click: $parent.onDeleteClick, value: $root.getLocString('pe.delete')"/></td>
-        </tr>
-        <!-- /ko -->
-        <tr>
-            <td colspan="3">
-                <div class="row btn-toolbar">
-                    <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
-                    <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')"/>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <div style="overflow-y: auto; overflow-x:hidden; max-height:400px">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th data-bind="text: $root.getLocString('pe.value')"></th>
+                    <th data-bind="text: $root.getLocString('pe.text')"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: koItems -->
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" data-bind="value:koValue" style="width:200px" />
+                        <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
+                    </td>
+                    <td><input type="text" class="form-control" data-bind="value:koText" style="width:200px" /></td>
+                    <td><input type="button" class="btn" data-bind="click: $parent.onDeleteClick, value: $root.getLocString('pe.delete')" /></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+    <div class="row btn-toolbar">
+        <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
+        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+    </div>
 </script>
