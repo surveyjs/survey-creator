@@ -89,6 +89,7 @@
         //Property Editors
         pe: {
             apply: "Apply",
+            reset: "Reset",
             close: "Close",
             delete: "Delete",
             addNew: "Add New",

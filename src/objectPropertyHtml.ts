@@ -3,22 +3,19 @@
 module SurveyEditor {
     export class SurveyPropertyHtml extends SurveyPropertyArray {
         private koValue: any;
-        public onApplyClick: any;
+        private _value: string;
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
             super(onValueChanged);
             this.koValue = ko.observable();
-            var self = this;
-            self.onApplyClick = function () { self.Apply(); };
         }
-        public get value(): any { return this.koValue(); }
+        public get value(): any { return this._value; }
         public set value(value: any) {
+            this._value = value;
             this.koValue(value);
         }
-        protected Apply() {
-            if (this.onValueChanged) {
-                this.onValueChanged(this.value);
-            }
+        protected onBeforeApply() {
+            this._value = this.koValue();
         }
     }
 }

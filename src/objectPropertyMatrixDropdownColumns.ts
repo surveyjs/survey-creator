@@ -8,14 +8,12 @@ module SurveyEditor {
         public onDeleteClick: any;
         public onAddClick: any;
         public onClearClick: any;
-        public onApplyClick: any;
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
             super(onValueChanged);
             this.koItems = ko.observableArray();
             this.value_ = [];
             var self = this;
-            self.onApplyClick = function () { self.Apply(); };
             self.onDeleteClick = function (item) { self.koItems.remove(item); };
             self.onClearClick = function (item) { self.koItems.removeAll(); };
             self.onAddClick = function () { self.AddItem(); };
@@ -33,19 +31,15 @@ module SurveyEditor {
         protected AddItem() {
             this.koItems.push(new SurveyPropertyMatrixDropdownColumnsItem(new Survey.MatrixDropdownColumn("")));
         }
-        protected Apply() {
-            if (this.hasError()) return;
+        protected onBeforeApply() {
             this.value_ = [];
             for (var i = 0; i < this.koItems().length; i++) {
                 var item = this.koItems()[i];
                 item.apply();
                 this.value_.push(item.column);
             }
-            if (this.onValueChanged) {
-                this.onValueChanged(this.value_);
-            }
         }
-        protected hasError(): boolean {
+        public hasError(): boolean {
             var result = false;
             for (var i = 0; i < this.koItems().length; i++) {
                 result = result || this.koItems()[i].hasError();

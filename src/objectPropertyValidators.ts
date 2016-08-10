@@ -8,7 +8,6 @@
         public availableValidators: Array<string> = [];
         public onDeleteClick: any;
         public onAddClick: any;
-        public onApplyClick: any;
         private validatorClasses: Array<Survey.JsonMetadataClass> = [];
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
@@ -26,7 +25,6 @@
             this.value_ = [];
             this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
             this.onAddClick = function (validatorType) { self.addItem(validatorType); }
-            this.onApplyClick = function () { self.apply(); };
         }
         public get value(): any { return this.value_; }
         public set value(value: any) {
@@ -42,14 +40,11 @@
             this.koItems(array);
             this.koSelected(array.length > 0 ? array[0] : null);
         }
-        private apply() {
+        protected onBeforeApply() {
             this.value_ = [];
             var array = this.koItems();
             for (var i = 0; i < array.length; i++) {
                 this.value_.push(array[i].validator);
-            }
-            if (this.onValueChanged) {
-                this.onValueChanged(this.value_);
             }
         }
         private addItem(validatorType: string) {

@@ -9,14 +9,12 @@ module SurveyEditor {
         public koItems: any;
         public onDeleteClick: any;
         public onAddClick: any;
-        public onApplyClick: any;
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
             super(onValueChanged);
             this.koItems = ko.observableArray();
             this.value_ = [];
             var self = this;
-            self.onApplyClick = function () { self.Apply(); };
             self.onDeleteClick = function (item) { self.koItems.remove(item); };
             self.onAddClick = function () { self.AddItem(); };
         }
@@ -43,16 +41,13 @@ module SurveyEditor {
             this.createValidatorsEditor(editItem, []);
             this.koItems.push(editItem);
         }
-        protected Apply() {
+        protected onBeforeApply() {
             this.value_ = [];
             for (var i = 0; i < this.koItems().length; i++) {
                 var item = this.koItems()[i];
                 var itemText = new Survey.MultipleTextItem(item.koName(), item.koTitle());
                 itemText.validators = item.validators;
                 this.value_.push(itemText);
-            }
-            if (this.onValueChanged) {
-                this.onValueChanged(this.value_);
             }
         }
         private createValidatorsEditor(item: any, validators: Array<any>) {

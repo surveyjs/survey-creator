@@ -8,7 +8,6 @@
         public availableTriggers: Array<string> = [];
         public onDeleteClick: any;
         public onAddClick: any;
-        public onApplyClick: any;
         private triggerClasses: Array<Survey.JsonMetadataClass> = [];
 
         constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
@@ -23,7 +22,6 @@
             this.value_ = [];
             this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
             this.onAddClick = function (triggerType) { self.addItem(triggerType); }
-            this.onApplyClick = function () { self.apply(); };
         }
         public get value(): any { return this.value_; }
         public set value(value: any) {
@@ -43,14 +41,11 @@
             this.koItems(array);
             this.koSelected(array.length > 0 ? array[0] : null);
         }
-        private apply() {
+        protected onBeforeApply() {
             this.value_ = [];
             var array = this.koItems();
             for (var i = 0; i < array.length; i++) {
                 this.value_.push(array[i].createTrigger());
-            }
-            if (this.onValueChanged) {
-                this.onValueChanged(this.value_);
             }
         }
         private getAvailableTriggers(): Array<string> {

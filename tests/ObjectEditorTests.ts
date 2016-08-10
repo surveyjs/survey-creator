@@ -81,6 +81,11 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(choices.length, 3, "there are three elements after adding");
         assert.equal(choices[2].value, 4, "check value of the last element");
         assert.equal(choices[2].text, "item4", "check text of the last element");
+
+        itemValueProperty.onAddClick();
+        itemValueProperty.onAddClick();
+        itemValueProperty.onResetClick();
+        assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
     });
     QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (assert) {
         var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
