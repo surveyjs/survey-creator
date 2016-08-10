@@ -258,6 +258,7 @@ module SurveyEditor {
                     this.surveyObjects.selectObject(selObj);
                 }
             }
+            this.setState(this.undoRedo.koCanUndo() ? "modified" : "saved");
         }
         private findObjByName(name: string): Survey.Base {
             var page = this.survey.getPageByName(name);

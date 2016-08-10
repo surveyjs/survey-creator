@@ -7,11 +7,11 @@
                     <li data-bind="css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
                     <li data-bind="css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
                     <li data-bind="css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
+                    <li data-bind="visible: koShowSaveButton"><button type="button" class="btn btn-default" data-bind="click: saveButtonClick"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button></li>
                     <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button></li>
                     <li data-bind="visible: koIsShowDesigner" style="margin-left:5px"><button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button></li>
                     <li data-bind="visible: koIsShowDesigner() && koShowOptions()" style="margin-left:5px">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" data-bind="visible: koShowSaveButton, click: saveButtonClick"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
                                 Options <span class="caret"></span>
                             </button>

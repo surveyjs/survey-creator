@@ -51,6 +51,14 @@ module SurveyObjectEditorTests.Tests {
         assert.equal(editor.state, "modified");
         editor.saveButtonClick();
         assert.equal(editor.state, "saved");
+        /*
+        editor.addPage();
+        assert.equal(editor.state, "modified");
+        editor.doUndoClick();
+        assert.equal(editor.state, "saved");
+        editor.doRedoClick();
+        assert.equal(editor.state, "modified");
+        */
     });
     QUnit.test("Do not reload surey on 'Designer' tab click", function (assert) {
         var editor = new SurveyEditor.SurveyEditor();
