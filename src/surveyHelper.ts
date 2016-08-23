@@ -23,7 +23,7 @@
             if (!obj || !obj["getType"]) return ObjType.Unknown;
             if (obj.getType() == "page") return ObjType.Page;
             if (obj.getType() == "survey") return ObjType.Survey;
-            if (obj["fullTitle"]) return ObjType.Question;
+            if (obj["name"]) return ObjType.Question;
             return ObjType.Unknown;
         }
         public static getObjectName(obj: any): string {
