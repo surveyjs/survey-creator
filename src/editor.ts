@@ -191,10 +191,11 @@ module SurveyEditor {
         public get showOptions() { return this.koShowOptions(); }
         public set showOptions(value: boolean) { this.koShowOptions(value); }
         private setTextValue(value: string) {
-            if (this.jsonEditor == null) return;
             this.isProcessingImmediately = true;
-            this.jsonEditor.setValue(value);
-            this.jsonEditor.renderer.updateFull(true);
+            if (this.jsonEditor) {
+                this.jsonEditor.setValue(value);
+                this.jsonEditor.renderer.updateFull(true);
+            }
             this.processJson(value);
             this.isProcessingImmediately = false;
         }
@@ -269,7 +270,7 @@ module SurveyEditor {
         }
         private canSwitchViewType(newType: string): boolean {
             if (newType && this.koViewType() == newType) return false;
-            if (this.koViewType() != "editor") return true;
+            if (this.koViewType() != "editor" || !this.textWorker) return true;
             if (!this.textWorker.isJsonCorrect) {
                 alert(this.getLocString("ed.correctJSON"));
                 return false;
@@ -401,7 +402,9 @@ module SurveyEditor {
         }
         private processJson(text: string): any {
             this.textWorker = new SurveyTextWorker(text);
-            this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
+            if (this.jsonEditor) {
+                this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
+            }
         }
         private doDraggingQuestion(questionType: any, e) {
             this.createDragDropHelper().startDragNewQuestion(e, questionType, this.getNewQuestionName());
@@ -566,7 +569,22 @@ module SurveyEditor {
         var self = this;
         this.dragEnterCounter = 0;
         this.koDragging = ko.observable(-1);
-        this.koDragging.subscribe(function (newValue) { if (newValue < 0) self.dragEnterCounter = 0; });
+        this.koDraggingQuestion = ko.observable(null);
+        this.koDraggingBottom = ko.observable(false);
+        this.koDragging.subscribe(function (newValue) {
+            if (newValue < 0) {
+                self.dragEnterCounter = 0;
+                self.koDraggingQuestion(null);
+                self.koDraggingBottom(false);
+            }
+            else {
+                var question = newValue >= 0 && newValue < self.questions.length ? self.questions[newValue] : null;
+                self.koDraggingQuestion(question);
+                self.koDraggingBottom(question == null);
+             }
+        });
+        this.koDraggingQuestion.subscribe(function (newValue) { if (newValue) newValue.koIsDragging(true); });
+        this.koDraggingQuestion.subscribe(function (oldValue) { if (oldValue) oldValue.koIsDragging(false); }, this, "beforeChange");
         this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };
         this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0) self.koDragging(-1); };
         this.dragDrop = function (e) { self.doDrop(e); };
@@ -585,6 +603,7 @@ module SurveyEditor {
     Survey.QuestionBase.prototype["onCreating"] = function () {
         var self = this;
         this.dragDropHelperValue = null;
+        this.koIsDragging = ko.observable(false);
         this.dragDropHelper = function () {
             if (self.dragDropHelperValue == null) {
                 self.dragDropHelperValue = self.data["onCreateDragDropHelper"] ? self.data["onCreateDragDropHelper"]() : new DragDropHelper(self.data, null);;
