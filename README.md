@@ -15,8 +15,11 @@ npm install surveyjs-editor
 <div id="surveyjseditor"></div>
 <script type="text/javascript">
 	var editor = new SurveyEditor.SurveyEditor("surveyjseditor");
-	//set/get the result
+	//set the survey json
 	editor.text = JSON.stringify({pages:[questions:[{ name: "rateme", type: "rating" }]]});
+	// setting saveSurveyFunc will make visible the save button
+	// use it to save the survey json as text in your database
+	editor.saveSurveyFunc = function() { var myJSONText = editor.text; };
 </script>
 ```
 See the visual editor in [action](http://surveyjs.org/builder/).
