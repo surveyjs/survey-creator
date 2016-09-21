@@ -1,4 +1,4 @@
-﻿<script type="text/html" id="propertyeditor-array">
+﻿<script type="text/html" id="propertyeditor-modal">
     <div>
         <span data-bind="text: koText"></span>
         <button type="button" class="btn btn-default" data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></button>
@@ -9,15 +9,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" data-bind="text:arrayEditor.title"></h4>
+                    <h4 class="modal-title" data-bind="text:editor.title"></h4>
                 </div>  
                 <div class="modal-body svd_notopbottompaddings">
-                    <!-- ko template: { name: 'propertyeditor-' + editorType, data: arrayEditor } -->
+                    <!-- ko template: { name: 'propertyeditorcontent-' + editorType, data: editor } -->
                     <!-- /ko -->
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-primary" data-bind="click: arrayEditor.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
-                    <input type="button" class="btn btn-default" data-bind="click: arrayEditor.onResetClick, value: $root.getLocString('pe.reset')" style="width:100px" />
+                    <input type="button" class="btn btn-primary" data-bind="click: editor.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
+                    <input type="button" class="btn btn-default" data-bind="click: editor.onResetClick, value: $root.getLocString('pe.reset')" style="width:100px" />
                     <input type="button" class="btn btn-default" data-dismiss="modal" data-bind="value: $root.getLocString('pe.close')" style="width:100px" />
                 </div>
             </div>

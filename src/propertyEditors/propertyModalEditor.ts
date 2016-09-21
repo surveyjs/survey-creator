@@ -1,0 +1,59 @@
+﻿/// <reference path="propertyEditorBase.ts" />
+module SurveyEditor {
+    export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
+        public object: any;
+        public title: any;
+        public onApplyClick: any;
+        public onResetClick: any;
+        constructor() {
+            super()
+            this.title = ko.observable();
+            var self = this;
+            self.onApplyClick = function () { self.apply(); };
+            self.onResetClick = function () { self.reset(); };
+        }
+        public setTitle(value: string) { this.title(value); }
+        public hasError(): boolean { return false; }
+        protected onBeforeApply() { }
+        private reset() {
+            this.value = this.value;
+        }
+        public setObject(value: any) { this.object = value; }
+        private apply() {
+            if (this.hasError()) return
+            this.onBeforeApply();
+            if (this.onChanged) {
+                this.onChanged(this.value);
+            }
+        }
+    }
+    export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
+        public koValue: any;
+
+        constructor() {
+            super();
+            this.koValue = ko.observable();
+        }
+        public get editorType(): string { return "text"; }
+        public getValueText(value: any): string {
+            if (!value) return null;
+            var str = value;
+            if (str.length > 10) {
+                str = str.substr(0, 10) + "...";
+            }
+            return str;
+        }
+        protected onValueChanged() {
+            this.koValue(this.value);
+        }
+    }
+    export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
+        constructor() {
+            super();
+        }
+        public get editorType(): string { return "html"; }
+    }
+    SurveyPropertyEditorBase.registerEditor("text", function (): SurveyPropertyEditorBase { return new SurveyPropertyTextEditor(); });
+    SurveyPropertyEditorBase.registerEditor("html", function (): SurveyPropertyEditorBase { return new SurveyPropertyHtmlEditor(); });
+ 
+}

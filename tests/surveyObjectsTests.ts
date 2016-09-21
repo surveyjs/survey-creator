@@ -1,6 +1,7 @@
 ﻿/// <reference path="../src/surveyObjects.ts" />
 /// <reference path="../src/objectVerbs.ts" />
-
+/// <reference path="../src/propertyEditors/propertyTriggersEditor.ts" />
+/// <reference path="../src/propertyEditors/propertyValidatorsEditor.ts" />
 module SurveyObjectEditorTests.Tests {
     QUnit.module("surveyObjects");
 
@@ -132,7 +133,8 @@ module SurveyObjectEditorTests.Tests {
         trigger.questions.push("question2");
         survey.triggers.push(trigger);
         var result = [];
-        var propEditor = new SurveyEditor.SurveyPropertyTriggers((newValue: any) => { result = newValue });
+        var propEditor = new SurveyEditor.SurveyPropertyTriggersEditor();
+        propEditor.onChanged = (newValue: any) => { result = newValue };
         propEditor.object = survey;
         propEditor.value = survey.triggers;
         assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
@@ -188,7 +190,8 @@ module SurveyObjectEditorTests.Tests {
         var question = <Survey.Question>survey.getQuestionByName("question1");
         question.validators.push(validator);
         var result = [];
-        var propEditor = new SurveyEditor.SurveyPropertyValidators((newValue: any) => { result = newValue });
+        var propEditor = new SurveyEditor.SurveyPropertyValidatorsEditor();
+        propEditor.onChanged = (newValue: any) => { result = newValue };
         propEditor.object = question;
         propEditor.value = question.validators;
         assert.equal(propEditor.koItems().length, 1, "There are one validator initially");

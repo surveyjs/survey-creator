@@ -23,14 +23,14 @@ var paths = {
     mainJSfile: "surveyeditor.js",
     webroot: "./wwwroot/",
     dist: "./dist/",
-    ts: ["./src/*.ts"],
+    ts: ["./src/*.ts", "./src/propertyEditors/*.ts"],
     typings: "./typings/**/*.d.ts",
     package: "./package",
     packageDist: "./package/dist",
     tsTests: "./tests/*.ts",
     tsTests_ko: "./tests/ko/*.ts",
     styles: "./src/*.scss",
-    templates_ko: "./src/templates/*.html",
+    templates_ko: "./src/templates/**/*.html",
     template_page: "./src/templates.survey/template_page.html",
     template_question: "./src/templates.survey/template_question.html"
 };
@@ -89,7 +89,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
                   paths.webroot + "/lib/survey/**/*.d.ts",
                   paths.typings
             ].concat(paths.ts))
-               .pipe(insert.prepend(copyright))
+               //.pipe(insert.prepend(copyright))
                .pipe(sourcemaps.init())
                .pipe(ts({
                    target: "ES5",

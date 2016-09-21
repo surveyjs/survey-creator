@@ -1,52 +1,50 @@
-﻿module SurveyEditor {
-
-    export class SurveyPropertyTriggers extends SurveyPropertyArray {
-        private value_: Array<any>;
-        public koItems: any;
+﻿/// <reference path="propertyEditorBase.ts" />
+/// <reference path="propertyModalEditor.ts" />
+/// <reference path="propertyItemsEditor.ts" />
+module SurveyEditor {
+    export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
         koQuestions: any; koPages: any;
         public koSelected: any;
         public availableTriggers: Array<string> = [];
-        public onDeleteClick: any;
-        public onAddClick: any;
         private triggerClasses: Array<Survey.JsonMetadataClass> = [];
-
-        constructor(public onValueChanged: SurveyPropertyValueChangedCallback) {
-            super(onValueChanged);
+        constructor() {
+            super();
             var self = this;
-            this.koItems = ko.observableArray();
+            this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
+            this.onAddClick = function (triggerType) { self.addItem(triggerType); }
             this.koSelected = ko.observable(null);
             this.koPages = ko.observableArray();
             this.koQuestions = ko.observableArray();
             this.triggerClasses = Survey.JsonObject.metaData.getChildrenClasses("surveytrigger", true);
             this.availableTriggers = this.getAvailableTriggers();
-            this.value_ = [];
-            this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); }
-            this.onAddClick = function (triggerType) { self.addItem(triggerType); }
         }
-        public get value(): any { return this.value_; }
-        public set value(value: any) {
-            if (value == null || !Array.isArray(value)) value = [];
-            this.value_ = value;
-            var array = [];
+        public get editorType(): string { return "triggers"; }
+        protected onValueChanged() {
+            super.onValueChanged();
             if (this.object) {
                 this.koPages(this.getNames((<Survey.Survey>this.object).pages));
                 this.koQuestions(this.getNames((<Survey.Survey>this.object).getAllQuestions()));
             }
-            var jsonObj = new Survey.JsonObject();
-            for (var i = 0; i < value.length; i++) {
-                var trigger = Survey.JsonObject.metaData.createClass(value[i].getType());
-                jsonObj.toObject(value[i], trigger);
-                array.push(this.createPropertyTrigger(<Survey.SurveyTrigger>trigger));
+            if (this.koSelected) {
+                this.koSelected(this.koItems().length > 0 ? this.koItems()[0] : null);
             }
-            this.koItems(array);
-            this.koSelected(array.length > 0 ? array[0] : null);
         }
-        protected onBeforeApply() {
-            this.value_ = [];
-            var array = this.koItems();
-            for (var i = 0; i < array.length; i++) {
-                this.value_.push(array[i].createTrigger());
-            }
+
+        private addItem(triggerType: string) {
+            var trigger = Survey.JsonObject.metaData.createClass(triggerType);
+            var triggerItem = this.createPropertyTrigger(trigger);
+            this.koItems.push(triggerItem);
+            this.koSelected(triggerItem);
+        }
+        protected createEditorItem(item: any) {
+            var jsonObj = new Survey.JsonObject();
+            var trigger = Survey.JsonObject.metaData.createClass(item.getType());
+            jsonObj.toObject(item, trigger);
+            return this.createPropertyTrigger(<Survey.SurveyTrigger>trigger);
+        }
+        protected createItemFromEditorItem(editorItem: any) {
+            var editorTrigger = <SurveyPropertyTrigger>editorItem;
+            return editorTrigger.createTrigger();
         }
         private getAvailableTriggers(): Array<string> {
             var result = [];
@@ -65,12 +63,6 @@
             }
             return names;
         }
-        private addItem(triggerType: string) {
-            var trigger = Survey.JsonObject.metaData.createClass(triggerType);
-            var triggerItem = this.createPropertyTrigger(trigger);
-            this.koItems.push(triggerItem);
-            this.koSelected(triggerItem);
-        }
         private createPropertyTrigger(trigger: Survey.SurveyTrigger): SurveyPropertyTrigger {
             var triggerItem = null;
             if (trigger.getType() == "visibletrigger") {
@@ -85,7 +77,6 @@
             return triggerItem;
         }
     }
-
     export class SurveyPropertyTrigger {
         private operators = ["empty", "notempty", "equal", "notequal", "contains", "notcontains", "greater", "less", "greaterorequal", "lessorequal"];
         private triggerType: string;
@@ -140,8 +131,8 @@
         public questions: SurveyPropertyTriggerObjects;
         constructor(public trigger: Survey.SurveyTriggerVisible, koPages: any, koQuestions: any) {
             super(trigger);
-            this.pages = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakePagesVisible"), koPages(), trigger.pages );
-            this.questions = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakeQuestionsVisible"), koQuestions(), trigger.questions );
+            this.pages = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakePagesVisible"), koPages(), trigger.pages);
+            this.questions = new SurveyPropertyTriggerObjects(editorLocalization.getString("pe.triggerMakeQuestionsVisible"), koQuestions(), trigger.questions);
         }
         public createTrigger(): Survey.SurveyTrigger {
             var trigger = <Survey.SurveyTriggerVisible>super.createTrigger();
@@ -204,4 +195,6 @@
             addTo.sort();
         }
     }
+
+    SurveyPropertyEditorBase.registerEditor("triggers", function (): SurveyPropertyEditorBase { return new SurveyPropertyTriggersEditor(); });
 }
