@@ -89,7 +89,7 @@ gulp.task('updatesurveyjsversion', function (callback) {
                   paths.webroot + "/lib/survey/**/*.d.ts",
                   paths.typings
             ].concat(paths.ts))
-               //.pipe(insert.prepend(copyright))
+               .pipe(insert.prepend(copyright))
                .pipe(sourcemaps.init())
                .pipe(ts({
                    target: "ES5",

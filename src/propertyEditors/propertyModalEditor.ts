@@ -19,6 +19,7 @@ module SurveyEditor {
             this.value = this.value;
         }
         public setObject(value: any) { this.object = value; }
+        public get isEditable(): boolean { return false; }
         private apply() {
             if (this.hasError()) return
             this.onBeforeApply();
@@ -35,6 +36,7 @@ module SurveyEditor {
             this.koValue = ko.observable();
         }
         public get editorType(): string { return "text"; }
+        public get isEditable(): boolean { return true; }
         public getValueText(value: any): string {
             if (!value) return null;
             var str = value;
@@ -45,6 +47,9 @@ module SurveyEditor {
         }
         protected onValueChanged() {
             this.koValue(this.value);
+        }
+        protected onBeforeApply() {
+            this.setValueCore(this.koValue());
         }
     }
     export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {

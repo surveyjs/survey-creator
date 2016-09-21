@@ -45,7 +45,7 @@ module SurveyEditor {
             for (var i = 0; i < internalItems.length; i++) {
                 items.push(this.createItemFromEditorItem(internalItems[i]));
             }
-            this.setValueCore(items)
+            this.setValueCore(items);
         }
         protected createNewEditorItem(): any { throw "Override 'createNewEditorItem' method"; }
         protected createEditorItem(item: any) { return item; }
