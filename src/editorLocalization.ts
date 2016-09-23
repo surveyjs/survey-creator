@@ -95,6 +95,8 @@
             addNew: "Add New",
             removeAll: "Remove All",
             edit: "Edit",
+            empty: "<empty>",
+            testService: "Test the service",
 
             value: "Value",
             text: "Text",

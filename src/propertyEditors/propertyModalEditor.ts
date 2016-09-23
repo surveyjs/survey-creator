@@ -40,8 +40,8 @@ module SurveyEditor {
         public getValueText(value: any): string {
             if (!value) return null;
             var str = value;
-            if (str.length > 10) {
-                str = str.substr(0, 10) + "...";
+            if (str.length > 20) {
+                str = str.substr(0, 20) + "...";
             }
             return str;
         }
