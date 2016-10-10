@@ -14,6 +14,7 @@
         }
 
         private value_: any = null;
+        public options: any = null;
         public onChanged: (newValue: any) => any;
         constructor() {
         }

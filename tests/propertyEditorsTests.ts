@@ -61,6 +61,21 @@ module SurveyEditorTests.Tests {
         assert.equal(choices[1].value, "item 2", "the second value is 'item 2'");
         assert.equal(choices[1].text, null, "the second text is null");
     });
+    QUnit.test("SurveyPropertyItemValue: Value and Text are same and editor.alwaySaveTextInPropertyEditors = true", function (assert) {
+        var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
+        var itemValueProperty = new SurveyEditor.SurveyPropertyItemValuesEditor();
+        itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
+        itemValueProperty.value = choices;
+        itemValueProperty.options = { alwaySaveTextInPropertyEditors: true };
+        assert.equal(itemValueProperty.koItems().length, 2, "there are three elements");
+        itemValueProperty.onApplyClick();
+        assert.equal(choices.length, 2, "there are two items");
+        assert.equal(choices[0].value, 1, "the first value is 1");
+        assert.equal(choices[0].text, "1", "the first text is '1'");
+        assert.equal(choices[1].value, "item 2", "the second value is 'item 2'");
+        assert.equal(choices[1].text, "item 2", "the second text is 'item 2'");
+    });
+
     QUnit.test("SurveyPropertyItemValue_PureValue", function (assert) {
         var choices = [1, "item2", { value: 3, text: "item3" }];
         var itemValueProperty = new SurveyEditor.SurveyPropertyItemValuesEditor();

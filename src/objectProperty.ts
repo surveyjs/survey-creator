@@ -21,7 +21,7 @@ module SurveyEditor {
         public baseEditorType: string;
         public choices: Array<any>;
 
-        constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null) {
+        constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: any = null) {
             this.onPropertyChanged = onPropertyChanged;
             this.name = this.property.name;
             this.koValue = ko.observable();
@@ -34,6 +34,7 @@ module SurveyEditor {
             }
             var onItemChanged = function (newValue: any) { self.onApplyEditorValue(newValue); };
             this.editor = SurveyPropertyEditorBase.createEditor(this.editorType, onItemChanged);
+            this.editor.options = propertyEditorOptions;
             this.editorType = this.editor.editorType;
             this.modalName = "modelEditor" + this.editorType + this.name;
             this.modalNameTarget = "#" + this.modalName;

@@ -27,7 +27,11 @@ module SurveyEditor {
             return { koValue: ko.observable(itemValue), koText: ko.observable(itemText), koHasError: ko.observable(false) };
         }
         protected createItemFromEditorItem(editorItem: any) {
-            var text = editorItem.koText() && editorItem.koText() != editorItem.koValue() ? editorItem.koText() : null;
+            var alwaySaveTextInPropertyEditors = this.options && this.options.alwaySaveTextInPropertyEditors;
+            var text = editorItem.koText();
+            if (!alwaySaveTextInPropertyEditors && editorItem.koText() == editorItem.koValue()) {
+                text = null;
+            }
             return { value: editorItem.koValue(), text: text };
         }
     }

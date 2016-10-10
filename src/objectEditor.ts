@@ -3,12 +3,14 @@
 module SurveyEditor {
     export class SurveyObjectEditor {
         private selectedObjectValue: any;
+        public propertyEditorOptions: any = null;
         public koProperties: any;
         public koActiveProperty: any;
         public koHasObject: any;
         public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
 
-        constructor() {
+        constructor(propertyEditorOptions: any = null) {
+            this.propertyEditorOptions = propertyEditorOptions;
             this.koProperties = ko.observableArray();
             this.koActiveProperty = ko.observable();
             this.koHasObject = ko.observable();
@@ -53,7 +55,7 @@ module SurveyEditor {
             };
             for (var i = 0; i < properties.length; i++) {
                 if (!this.canShowProperty(properties[i])) continue;
-                var objectProperty = new SurveyObjectProperty(properties[i], propEvent);
+                var objectProperty = new SurveyObjectProperty(properties[i], propEvent, this.propertyEditorOptions);
                 var locName = this.selectedObject.getType() + '_' + properties[i].name;
                 objectProperty.displayName = editorLocalization.getPropertyName(locName);
                 var title = editorLocalization.getPropertyTitle(locName);

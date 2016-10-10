@@ -37,6 +37,7 @@ module SurveyEditor {
         public questionTypes: string[];
         public koCopiedQuestions: any;
         public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
+        public alwaySaveTextInPropertyEditors: boolean = false;
         
         koIsShowDesigner: any;
         koViewType: any;
@@ -81,7 +82,7 @@ module SurveyEditor {
 
             this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
 
-            this.selectedObjectEditor = new SurveyObjectEditor();
+            this.selectedObjectEditor = new SurveyObjectEditor(this.options);
             this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
                 self.onPropertyValueChanged(options.property, options.object, options.newValue);
             });
