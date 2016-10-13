@@ -42,8 +42,10 @@
                         <label class="control-label col-sm-3" data-bind="visible:koHasColCount, text:$root.getLocString('pe.colCount')"></label>
                         <select class="form-control col-sm-4" data-bind="visible:koHasColCount, options: colCountChoices, value: koColCount" style="width:110px"></select>
                     </div>
-                    <!-- ko template: { name: 'propertyeditor-itemvalues', data: choicesEditor } -->
-                    <!-- /ko -->
+                    <div class="modal-body svd_notopbottompaddings">
+                        <!-- ko template: { name: 'propertyeditorcontent-itemvalues', data: choicesEditor } -->
+                        <!-- /ko -->
+                    </div>
                 </td>
             </tr>
 

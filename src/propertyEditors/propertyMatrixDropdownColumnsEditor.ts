@@ -15,8 +15,8 @@ module SurveyEditor {
             }
             return result;
         }
-        protected createNewEditorItem(): any { return new SurveyPropertyMatrixDropdownColumnsItem(new Survey.MatrixDropdownColumn("")); }
-        protected createEditorItem(item: any) { return new SurveyPropertyMatrixDropdownColumnsItem(item); }
+        protected createNewEditorItem(): any { return new SurveyPropertyMatrixDropdownColumnsItem(new Survey.MatrixDropdownColumn("", this.options)); }
+        protected createEditorItem(item: any) { return new SurveyPropertyMatrixDropdownColumnsItem(item, this.options); }
         protected createItemFromEditorItem(editorItem: any) {
             var columItem = <SurveyPropertyMatrixDropdownColumnsItem>editorItem;
             columItem.apply();
@@ -32,7 +32,7 @@ module SurveyEditor {
         public onShowChoicesClick: any;
         public cellTypeChoices: Array<any>;
         public colCountChoices: Array<any>;
-        constructor(public column: Survey.MatrixDropdownColumn) {
+        constructor(public column: Survey.MatrixDropdownColumn, public options = null) {
             this.cellTypeChoices = this.getPropertyChoices("cellType");
             this.colCountChoices = this.getPropertyChoices("colCount");
             this.koName = ko.observable(column.name);
@@ -44,9 +44,12 @@ module SurveyEditor {
             this.koShowChoices = ko.observable(false);
             this.koChoices = ko.observableArray(column.choices);
             this.koHasError = ko.observable(false);
+
             this.choicesEditor = new SurveyPropertyItemValuesEditor();
             this.choicesEditor.object = this.column;
             this.choicesEditor.value = this.koChoices();
+            this.choicesEditor.options = this.options;
+
             var self = this;
             this.onShowChoicesClick = function () { self.koShowChoices(!self.koShowChoices()); }
             this.koHasChoices = ko.computed(function () { return self.koCellType() == "dropdown" || self.koCellType() == "checkbox" || self.koCellType() == "radiogroup"; });
