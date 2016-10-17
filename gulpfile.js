@@ -151,13 +151,26 @@ gulp.task('templates', function () {
     "use strict";
     gulp.src(paths.template_page)
         .pipe(html2ts())
+        .pipe(insert.transform(function(contents, file) {
+            contents = contents.slice(0, -1); //remove last symbol '}'
+            return contents.replace('module template_page { ', '');
+        }))
         .pipe(gulp.dest("./src/"));
     gulp.src(paths.template_question)
         .pipe(html2ts())
+        .pipe(insert.transform(function(contents, file) {
+            contents = contents.slice(0, -1); //remove last symbol '}'
+            return contents.replace('module template_question { ', '');
+        }))
         .pipe(gulp.dest("./src/"));
+
     return gulp.src(paths.templates_ko)
         .pipe(concat("templateEditor.ko.html"))
         .pipe(html2ts())
+        .pipe(insert.transform(function(contents, file) {
+            contents = contents.slice(0, -1); //remove last symbol '}'
+            return contents.replace('module templateEditor.ko { ', '');
+        }))
         .pipe(gulp.dest("./src/"));
 });
 
