@@ -1,4 +1,5 @@
 ﻿import {SurveyJSON5} from "./json5";
+import * as Survey from "surveyjs";
 
 class TextParserPropery {
     isFound: boolean;

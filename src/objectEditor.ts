@@ -1,5 +1,6 @@
 ﻿import {SurveyObjectProperty} from "./objectProperty";
 import {editorLocalization} from "./editorLocalization";
+import * as Survey from "surveyjs";
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;

@@ -1,4 +1,5 @@
 ﻿import {SurveyHelper} from "./surveyHelper";
+import * as Survey from "surveyjs";
 
 export declare type SurveyAddNewPageCallback = () => void;
 export declare type SurveySelectPageCallback = (page: Survey.Page) => void;

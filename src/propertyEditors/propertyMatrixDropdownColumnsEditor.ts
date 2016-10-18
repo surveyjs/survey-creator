@@ -1,6 +1,7 @@
 ﻿import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyItemValuesEditor} from "./propertyItemValuesEditor";
+import * as Survey from "../surveyjs";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyPropertyItemsEditor {
     constructor() {

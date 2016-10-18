@@ -1,6 +1,7 @@
 ﻿import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyObjectEditor} from "../objectEditor";
+import * as Survey from "../surveyjs";
 
 export class SurveyPropertyValidatorsEditor extends SurveyPropertyItemsEditor {
     private selectedObjectEditor: SurveyObjectEditor;

@@ -1,5 +1,6 @@
 ﻿import {SurveyPropertyEditorBase} from "./propertyEditors/propertyEditorBase";
 import {editorLocalization} from "./editorLocalization";
+import * as Survey from "surveyjs";
 
 export declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
 

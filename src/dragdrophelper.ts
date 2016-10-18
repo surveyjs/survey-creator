@@ -1,4 +1,6 @@
-﻿export class DragDropHelper {
+﻿import * as Survey from "surveyjs";
+
+export class DragDropHelper {
     static dataStart: string = "surveyjs,";
     static dragData: any = {text: "", json: null };
     static prevEvent = { question: null, x: -1, y: -1 };

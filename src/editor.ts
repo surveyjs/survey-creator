@@ -12,6 +12,7 @@ import {SurveyJSON5} from "./json5";
 import {html as templateEditorHtml} from "./templateEditor.ko.html";
 import {html as templatePageHtml} from "./template_page.html";
 import {html as templateQuestionHtml} from "./template_question.html";
+import * as Survey from "surveyjs";
 
 export class SurveyEditor {
     public static updateTextTimeout: number = 1000;

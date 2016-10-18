@@ -1,4 +1,5 @@
 ﻿import {SurveyHelper, ObjType} from "./surveyHelper";
+import * as Survey from "surveyjs";
 
 export class SurveyObjectItem {
     public value: Survey.Base;

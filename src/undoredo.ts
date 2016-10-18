@@ -1,4 +1,6 @@
-﻿export class SurveyUndoRedo {
+﻿import * as Survey from "surveyjs";
+
+export class SurveyUndoRedo {
     private items: Array<UndoRedoItem>;
     private index: number = -1;
     public koCanUndo: any; koCanRedo: any;

@@ -1,5 +1,6 @@
 ﻿import {editorLocalization} from "./editorLocalization";
 import {SurveyHelper, ObjType} from "./surveyHelper";
+import * as Survey from "surveyjs";
 
 export class SurveyVerbs {
     private surveyValue: Survey.Survey;
