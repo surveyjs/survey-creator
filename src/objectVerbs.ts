@@ -1,6 +1,6 @@
 ﻿import {editorLocalization} from "./editorLocalization";
 import {SurveyHelper, ObjType} from "./surveyHelper";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 export class SurveyVerbs {
     private surveyValue: Survey.Survey;

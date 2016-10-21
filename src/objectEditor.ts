@@ -1,6 +1,6 @@
 ﻿import {SurveyObjectProperty} from "./objectProperty";
 import {editorLocalization} from "./editorLocalization";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;

@@ -2,7 +2,6 @@
   "version": "0.9.0",
   "name": "surveyjs.editor",
   "devDependencies": {
-    "awesome-typescript-loader": "^2.2.4",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",

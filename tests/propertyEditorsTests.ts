@@ -4,7 +4,7 @@ import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/proper
 import {SurveyObjectProperty} from "../src/objectProperty";
 import {SurveyPropertyTextEditor} from "../src/propertyEditors/propertyModalEditor";
 import {SurveyPropertyResultfullEditor} from "../src/propertyEditors/propertyRestfullEditor";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 QUnit.module("PropertyEditorsTests");
 

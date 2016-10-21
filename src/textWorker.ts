@@ -1,5 +1,5 @@
 ﻿import {SurveyJSON5} from "./json5";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 class TextParserPropery {
     isFound: boolean;

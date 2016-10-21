@@ -1,6 +1,6 @@
 ﻿import {SurveyPropertyEditorBase} from "./propertyEditors/propertyEditorBase";
 import {editorLocalization} from "./editorLocalization";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 export declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
 

@@ -29,15 +29,24 @@ module.exports = function(options) {
                 commonjs2: 'knockout',
                 commonjs: 'knockout',
                 amd: 'knockout'
+            },
+            'survey-knockout-bootstrap': {
+                root: 'Survey',
+                commonjs2: 'survey-knockout-bootstrap',
+                commonjs: 'survey-knockout-bootstrap',
+                amd: 'survey-knockout-bootstrap'
             }
         },
         module: {
+            preLoaders: [
+                { test: /\.(js|jsx)$/, loader: "source-map-loader" }
+            ],
             loaders: [
                 {
                     test: /\.(ts|tsx)$/,
                     loaders:[
                         require.resolve('babel-loader') + '?' + JSON.stringify(babelConfig), // TODO why do we need it
-                        require.resolve('awesome-typescript-loader')
+                        require.resolve('ts-loader')
                     ]
                 },
                 {
@@ -51,7 +60,7 @@ module.exports = function(options) {
         plugins: [
             new webpack.NoErrorsPlugin()
         ],
-        devtool: 'cheap-inline-module-source-map'
+        devtool: 'inline-source-map'
     };
 
     config.entry[options.bundleName] = path.resolve(__dirname, options.entryPoint);

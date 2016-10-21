@@ -8,7 +8,7 @@ import {
     SurveyPropertyValidatorItem
 } from "../src/propertyEditors/propertyValidatorsEditor";
 import {SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../src/objectVerbs";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 QUnit.module("surveyObjects");
 

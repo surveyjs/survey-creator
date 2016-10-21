@@ -1,4 +1,4 @@
-﻿import * as Survey from "surveyjs";
+﻿import * as Survey from "survey-knockout-bootstrap";
 
 export class Car {
     public name: string;

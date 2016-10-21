@@ -1,7 +1,7 @@
 ﻿import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyItemValuesEditor} from "./propertyItemValuesEditor";
-import * as Survey from "../surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyPropertyItemsEditor {
     constructor() {

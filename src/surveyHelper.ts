@@ -1,5 +1,5 @@
 ﻿import {editorLocalization} from "./editorLocalization";
-import * as Survey from "surveyjs";
+import * as Survey from "survey-knockout-bootstrap";
 
 export enum ObjType { Unknown, Survey, Page, Question }
 export class SurveyHelper {
