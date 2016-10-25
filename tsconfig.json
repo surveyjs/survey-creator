@@ -4,8 +4,7 @@
     "module": "es2015",
     "sourceMap": true,
     "noImplicitAny": false,
-    "jsx": "react",
-    "moduleResolution": "node"
+    "jsx": "react"
   },
   "include": [
     "typings/index.d.ts",
