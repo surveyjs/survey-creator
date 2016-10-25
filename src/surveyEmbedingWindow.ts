@@ -23,7 +23,7 @@ export class SurveyEmbedingWindow {
         this.koVisibleHtml = ko.computed(function() { return self.koLibraryVersion() == "react" || self.koShowAsWindow() =="page"; });
         this.koLibraryVersion.subscribe(function (newValue) { self.setHeadText(); self.surveyEmbedingJava.setValue(self.getJavaText()); });
         this.koShowAsWindow.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
-        this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); });
+        this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); self.surveyEmbedingJava.setValue(self.getJavaText()); });
         this.koLoadSurvey.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
         this.surveyEmbedingHead = null;
     }
@@ -41,21 +41,17 @@ export class SurveyEmbedingWindow {
         this.surveyEmbedingJava.setValue(this.getJavaText());
     }
     private setHeadText() {
+        var str = "";
         if (this.koLibraryVersion() == "knockout") {
-            var knockoutStr = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\" ></script>\n";
-            if (this.koScriptUsing() == "bootstrap") {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.bootstrap.min.js\"></script>");
-            } else {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
-            }
+            str = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\"></script>\n<script src=\"js/survey.ko.min.js\"></script>";
         } else {
-            var knockoutStr = "<script src=\"https://fb.me/react-0.14.8.js\"></script>\n<script src= \"https://fb.me/react-dom-0.14.8.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js\"></script>\n";
-            if (this.koScriptUsing() == "bootstrap") {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.react.bootstrap.min.js\"></script>");
-            } else {
-                this.surveyEmbedingHead.setValue(knockoutStr + "<script src=\"js/survey.react.min.js\"></script>\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />");
-            }
+            str = "<script src=\"https://fb.me/react-0.14.8.js\"></script>\n<script src= \"https://fb.me/react-dom-0.14.8.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js\"></script>\n";
+            str += "<script src=\"js/survey.react.bootstrap.min.js\"></script>";
         }
+        if (this.koScriptUsing() != "bootstrap") {
+            str += "\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
+        }
+        this.surveyEmbedingHead.setValue(str);
     }
     private createEditor(elementName: string): AceAjax.Editor {
         var editor = ace.edit(elementName);
@@ -68,8 +64,12 @@ export class SurveyEmbedingWindow {
     }
     private getJavaText(): string {
         var isOnPage = this.koShowAsWindow() == "page";
-        if (this.koLibraryVersion() == "knockout") return this.getKnockoutJavaText(isOnPage);
-        return this.getReactJavaText(isOnPage);
+        var str = this.koLibraryVersion() == "knockout" ? this.getKnockoutJavaText(isOnPage) : this.getReactJavaText(isOnPage);
+        return this.getSetCss() + str;
+    }
+    private getSetCss(): string {
+        if (this.koScriptUsing() != "bootstrap") return "";
+        return "Survey.Survey.cssType = \"bootstrap\";\n";
     }
     private getKnockoutJavaText(isOnPage: boolean): string {
         var text = isOnPage ? "var survey = new Survey.Survey(\n" : "var surveyWindow = new Survey.SurveyWindow(\n";
@@ -83,7 +83,7 @@ export class SurveyEmbedingWindow {
         if (isOnPage) {
             text += "survey.render(\"mySurveyJSName\");";
         } else {
-            text += "//By default Survey.title is used.\n";
+            text += "//By default Survey.title is used.\n"
             text += "//surveyWindow.title = \"My Survey Window Title.\";\n";
             text += "surveyWindow.show();";
 
