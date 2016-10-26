@@ -1,5 +1,5 @@
 ﻿import {SurveyHelper} from "./surveyHelper";
-import * as Survey from "survey-knockout-bootstrap";
+import * as Survey from "survey-knockout";
 
 export declare type SurveyAddNewPageCallback = () => void;
 export declare type SurveySelectPageCallback = (page: Survey.Page) => void;

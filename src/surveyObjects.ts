@@ -1,5 +1,5 @@
 ﻿import {SurveyHelper, ObjType} from "./surveyHelper";
-import * as Survey from "survey-knockout-bootstrap";
+import * as Survey from "survey-knockout";
 
 export class SurveyObjectItem {
     public value: Survey.Base;

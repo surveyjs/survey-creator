@@ -30,11 +30,11 @@ module.exports = function(options) {
                 commonjs: 'knockout',
                 amd: 'knockout'
             },
-            'survey-knockout-bootstrap': {
+            'survey-knockout': {
                 root: 'Survey',
-                commonjs2: 'survey-knockout-bootstrap',
-                commonjs: 'survey-knockout-bootstrap',
-                amd: 'survey-knockout-bootstrap'
+                commonjs2: 'survey-knockout',
+                commonjs: 'survey-knockout',
+                amd: 'survey-knockout'
             }
         },
         module: {

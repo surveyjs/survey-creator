@@ -1,7 +1,7 @@
 ﻿import {SurveyPropertyModalEditor} from "./propertyModalEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
-import * as Survey from "survey-knockout-bootstrap";
+import * as Survey from "survey-knockout";
 
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     koUrl: any; koPath: any; koValueName: any; koTitleName: any;
