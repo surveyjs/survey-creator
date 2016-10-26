@@ -6,6 +6,6 @@
     "qunit": "github:DefinitelyTyped/DefinitelyTyped/qunit/qunit.d.ts#73110d92bdab2367e326f297bef3574285cba329"
   },
   "dependencies": {
-    "survey-knockout-bootstrap": "github:andrewtelnov/surveyjs/lib_typings/entries/ko.d.ts"
+    "survey-knockout": "github:andrewtelnov/surveyjs/lib_typings/entries/ko.d.ts"
   }
 }

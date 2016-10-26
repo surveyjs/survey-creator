@@ -1,5 +1,5 @@
 ﻿import {SurveyEditor} from "../src/editor";
-import * as Survey from "survey-knockout-bootstrap";
+import * as Survey from "survey-knockout";
 
 QUnit.module("surveyEditorTests");
 

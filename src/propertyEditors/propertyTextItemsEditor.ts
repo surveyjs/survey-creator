@@ -3,7 +3,7 @@ import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyHelper} from "../surveyHelper";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyPropertyValidatorsEditor} from "./propertyValidatorsEditor";
-import * as Survey from "survey-knockout-bootstrap";
+import * as Survey from "survey-knockout";
 
 export class SurveyPropertyTextItemsEditor extends SurveyPropertyItemsEditor {
     constructor() {

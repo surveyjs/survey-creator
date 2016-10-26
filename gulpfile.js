@@ -76,7 +76,7 @@ gulp.task('createPackage', function (callback) {
         .pipe(jsonTransform(function (data) {
             data.version = editorVersion;
             data.main = paths.mainJSfile.replace(".js", ".min.js");
-            data.dependencies["survey-knockout-bootstrap"] = editorVersion;
+            data.dependencies["survey-knockout"] = editorVersion;
             return data;
         }, "  "))
         .pipe(rename("package.json"))
@@ -86,7 +86,7 @@ gulp.task('createPackage', function (callback) {
 gulp.task('updatesurveyjsversion', function (callback) {
     return gulp.src("package.json")
         .pipe(jsonTransform(function (data) {
-            data.dependencies["survey-knockout-bootstrap"] = "^" + editorVersion;
+            data.dependencies["survey-knockout"] = "^" + editorVersion;
             return data;
         }, "  "))
         .pipe(gulp.dest(""));
