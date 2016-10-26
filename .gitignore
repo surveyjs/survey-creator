@@ -14,3 +14,8 @@ wwwroot/*
 *.cs
 project.lock.json
 *.cmd
+/package
+*.js
+/src/template_question.html.ts
+/src/template_page.html.ts
+/src/templateEditor.ko.html.ts
