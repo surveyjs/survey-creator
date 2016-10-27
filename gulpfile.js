@@ -75,7 +75,6 @@ gulp.task('createPackage', function (callback) {
     return gulp.src("packagetemplate.json")
         .pipe(jsonTransform(function (data) {
             data.version = editorVersion;
-            data.main = paths.mainJSfile.replace(".js", ".min.js");
             data.dependencies["survey-knockout"] = editorVersion;
             return data;
         }, "  "))
@@ -134,7 +133,8 @@ gulp.task('compress', function () {
         }))
         .pipe(concat.header(copyright))
         .pipe(gulp.dest(paths.dist))
-        .pipe(gulp.dest(paths.packageDist));
+        .pipe(gulp.dest(paths.packageDist))
+        .pipe(gulp.dest(paths.package + "/js"));
 });
 
 gulp.task('sass', function () {
