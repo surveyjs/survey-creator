@@ -543,6 +543,7 @@ export class SurveyEditor {
     }
 }
 
+Survey.Survey.cssType = "bootstrap";
 new Survey.SurveyTemplateText().replaceText(templatePageHtml, "page");
 new Survey.SurveyTemplateText().replaceText(templateQuestionHtml, "question");
 
