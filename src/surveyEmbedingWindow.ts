@@ -46,7 +46,7 @@ export class SurveyEmbedingWindow {
             str = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\"></script>\n<script src=\"js/survey.ko.min.js\"></script>";
         } else {
             str = "<script src=\"https://fb.me/react-0.14.8.js\"></script>\n<script src= \"https://fb.me/react-dom-0.14.8.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js\"></script>\n";
-            str += "<script src=\"js/survey.react.bootstrap.min.js\"></script>";
+            str += "<script src=\"js/survey.react.min.js\"></script>";
         }
         if (this.koScriptUsing() != "bootstrap") {
             str += "\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
