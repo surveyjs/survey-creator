@@ -4,6 +4,8 @@ import {editorLocalization} from "../editorLocalization";
 export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     public koItems: any;
     public onDeleteClick: any;
+    public onMoveUpClick: any;
+    public onMoveDownClick: any;
     public onAddClick: any;
     public onClearClick: any;
 
@@ -15,7 +17,8 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         self.onDeleteClick = function (item) { self.koItems.remove(item); };
         self.onClearClick = function (item) { self.koItems.removeAll(); };
         self.onAddClick = function () { self.AddItem(); };
-
+        self.onMoveUpClick = function (item) { self.moveUp(item); };
+        self.onMoveDownClick = function (item) { self.moveDown(item); };
     }
     public getValueText(value: any): string {
         var len = value ? value.length : 0;
@@ -28,9 +31,26 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     protected AddItem() {
         this.koItems.push(this.createNewEditorItem());
     }
+    protected moveUp(item: any) {
+        var arr = this.koItems();
+        var index = arr.indexOf(item);
+        if (index < 1) return;
+        arr[index] = arr[index - 1];
+        arr[index - 1] = item;
+        this.koItems(arr);
+    }
+    protected moveDown(item: any) {
+        var arr = this.koItems();
+        var index = arr.indexOf(item);
+        if (index < 0 || index >= arr.length - 1) return;
+        arr[index] = arr[index + 1];
+        arr[index + 1] = item;
+        this.koItems(arr);
+    }
     protected onValueChanged() {
         this.koItems(this.getItemsFromValue());
     }
+    
     protected getItemsFromValue(): Array<any> {
         var items = [];
         var value = this.value;
