@@ -55,12 +55,12 @@
                     </div>
                     <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                         <!-- ko foreach: questionTypes -->
-                        <div class="btn btn-default" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}}">
+                        <div class="btn btn-default" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
                             <span data-bind="text: $root.getLocString('qt.' + $data)"></span>
                         </div>
                         <!-- /ko  -->
                         <!-- ko foreach: koCopiedQuestions -->
-                        <div class="btn btn-primary" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}}">
+                        <div class="btn btn-primary" style="text-align:left; padding-left:10px; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
                             <span data-bind="text:name"></span>
                         </div>
                         <!-- /ko  -->
@@ -69,7 +69,7 @@
             </div>
             <div class="col-md-9">
                 <div data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
-                <div style="overflow-y: scroll;height:450px;">
+                <div id="scrollableDiv" style="overflow-y: scroll;height:450px;">
                     <div id="surveyjs" style="width:100%"></div>
                 </div>
             </div>

@@ -34,6 +34,7 @@ export class SurveyEditor {
     private saveSurveyFuncValue: (no: number, onSaveCallback: (no: number, isSuccess: boolean) => void) => void;
     private options: any;
     private stateValue: string = "";
+    private dragDropHelper: DragDropHelper = null;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
@@ -57,6 +58,7 @@ export class SurveyEditor {
     saveButtonClick: any;
     draggingQuestion: any; clickQuestion: any;
     draggingCopiedQuestion: any; clickCopiedQuestion: any;
+    dragEnd: any;
 
     constructor(renderedElement: any = null, options: any = null) {
         this.options = options;
@@ -108,6 +110,7 @@ export class SurveyEditor {
         this.clickQuestion = function (questionType) { self.doClickQuestion(questionType); };
         this.draggingCopiedQuestion = function (item, e) { self.doDraggingCopiedQuestion(item.json, e); };
         this.clickCopiedQuestion = function (item) { self.doClickCopiedQuestion(item.json); };
+        this.dragEnd = function (item, e) { self.dragDropHelper.end(); };
 
         this.doUndoClick = function () { self.doUndoRedo(self.undoRedo.undo()); };
         this.doRedoClick = function () { self.doUndoRedo(self.undoRedo.redo()); };
@@ -362,7 +365,11 @@ export class SurveyEditor {
         this.jsonEditor.getSession().setUseWorker(true);
     }
     private initSurvey(json: any) {
+        var self = this;
         this.surveyValue = new Survey.Survey(json);
+        this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
+        this.surveyValue["dragDropHelper"] = this.dragDropHelper;
+        this.surveyValue["setJsonObject"](json); //TODO
         if (this.surveyValue.isEmpty) {
             this.surveyValue = new Survey.Survey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
         }
@@ -372,10 +379,8 @@ export class SurveyEditor {
         this.pagesEditor.survey = this.survey;
         this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
         this.surveyVerbs.survey = this.survey;
-        var self = this;
         this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
         this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.copyQuestion(self.koSelectedObject().value); });
-        this.surveyValue["onCreateDragDropHelper"] = function () { return self.createDragDropHelper() };
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
         this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
@@ -411,14 +416,10 @@ export class SurveyEditor {
         }
     }
     private doDraggingQuestion(questionType: any, e) {
-        this.createDragDropHelper().startDragNewQuestion(e, questionType, this.getNewQuestionName());
+        this.dragDropHelper.startDragNewQuestion(e, questionType, this.getNewQuestionName());
     }
     private doDraggingCopiedQuestion(json: any, e) {
-        this.createDragDropHelper().startDragCopiedQuestion(e, this.getNewQuestionName(), json);
-    }
-    private createDragDropHelper(): DragDropHelper {
-        var self = this;
-        return new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
+        this.dragDropHelper.startDragCopiedQuestion(e, this.getNewQuestionName(), json);
     }
     private doClickQuestion(questionType: any) {
         this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, this.getNewQuestionName()));
@@ -551,9 +552,9 @@ Survey.Survey.prototype["onCreating"] = function () {
     this.selectedQuestionValue = null;
     this.onSelectedQuestionChanged = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    this.onCreateDragDropHelper = null;
     var self = this;
     this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
+    this.koDraggingSource = ko.observable(null);
 };
 Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.QuestionBase) {
     if (value == this.selectedQuestionValue) return;
@@ -586,23 +587,32 @@ Survey.Page.prototype["onCreating"] = function () {
         else {
             var question = newValue >= 0 && newValue < self.questions.length ? self.questions[newValue] : null;
             self.koDraggingQuestion(question);
-            self.koDraggingBottom(question == null);
+            self.koDraggingBottom(newValue == self.questions.length);
         }
     });
     this.koDraggingQuestion.subscribe(function (newValue) { if (newValue) newValue.koIsDragging(true); });
     this.koDraggingQuestion.subscribe(function (oldValue) { if (oldValue) oldValue.koIsDragging(false); }, this, "beforeChange");
     this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };
-    this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0) self.koDragging(-1); };
+    this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0) self.doDragLeave(e); };
     this.dragDrop = function (e) { self.doDrop(e); };
 };
 Survey.Page.prototype["doDrop"] = function (e) {
-    var dragDropHelper = this.data["onCreateDragDropHelper"] ? this.data["onCreateDragDropHelper"]() : new DragDropHelper(this.data, null);
-    dragDropHelper.doDrop(e);
+    var dragDropHelper = this.data["dragDropHelper"];
+    if (dragDropHelper) {
+        dragDropHelper.doDrop(e);
+    }
 };
 Survey.Page.prototype["doDragEnter"] = function(e) {
     if (this.questions.length > 0 || this.koDragging() > 0) return;
-    if (new DragDropHelper(this.data, null).isSurveyDragging(e)) {
-        this.koDragging(this.questions.length);
+    var dragDropHelper = this.data["dragDropHelper"];
+    if (dragDropHelper && dragDropHelper.isSurveyDragging(e)) {
+        this.koDragging(0);
+    }
+};
+Survey.Page.prototype["doDragLeave"] = function (e) {
+    var dragDropHelper = this.data["dragDropHelper"];
+    if (dragDropHelper) {
+        dragDropHelper.doLeavePage(e);
     }
 };
 
@@ -610,15 +620,17 @@ Survey.QuestionBase.prototype["onCreating"] = function () {
     var self = this;
     this.dragDropHelperValue = null;
     this.koIsDragging = ko.observable(false);
+    this.koIsDraggingSource = ko.observable(false);
     this.dragDropHelper = function () {
         if (self.dragDropHelperValue == null) {
-            self.dragDropHelperValue = self.data["onCreateDragDropHelper"] ? self.data["onCreateDragDropHelper"]() : new DragDropHelper(self.data, null);;
+            self.dragDropHelperValue = self.data["dragDropHelper"];
         }
         return self.dragDropHelperValue;
     };
     this.dragOver = function (e) { self.dragDropHelper().doDragDropOver(e, self); };
     this.dragDrop = function (e) { self.dragDropHelper().doDrop(e, self); };
     this.dragStart = function (e) { self.dragDropHelper().startDragQuestion(e, self.name); };
+    this.dragEnd = function (e) { self.dragDropHelper().end(); };
     this.koIsSelected = ko.observable(false);
     this.koOnClick = function () {
         if (self.data == null) return;

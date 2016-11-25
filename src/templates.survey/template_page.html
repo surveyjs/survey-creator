@@ -8,13 +8,24 @@
     <!-- ko foreach: { data: rows, as: 'row'} -->
     <div data-bind="visible: row.koVisible, css: $root.css.row">
         <!-- ko foreach: { data: row.questions, as: 'question' , afterRender: row.koAfterRender } -->
-        <!-- ko template: { name: 'survey-question', data: question } -->
-        <!-- /ko -->
+            <div data-bind="visible: question.koIsDragging">
+                <!-- ko template: { if: $root.koDraggingSource(), name: 'survey-question', data: $root.koDraggingSource(), as: 'question', templateOptions: { isDragging: true } } -->
+                <!-- /ko -->
+            </div>
+            <!-- ko template: { name: 'survey-question', data: question, templateOptions: { isDragging: false } } -->
+            <!-- /ko -->
         <!-- /ko -->
     </div>
     <!-- /ko -->
     <div class="well" data-bind="visible:$root.isDesignMode && questions.length == 0">
-        <span data-bind="text:$root.getEditorLocString('survey.dropQuestion')"></span>
+        <span data-bind="visible: !koDraggingBottom(), text:$root.getEditorLocString('survey.dropQuestion')"></span>
+        <div data-bind="visible: koDraggingBottom">
+            <!-- ko template: { if: $root.koDraggingSource(), name: 'survey-question', data: $root.koDraggingSource(), as: 'question', templateOptions: { isDragging: true } } -->
+            <!-- /ko -->
+        </div>
     </div>
-    <div class="svd_dragover" data-bind="visible: koDraggingBottom"></div>
+    <div data-bind="visible: questions.length > 0 && koDraggingBottom()">
+        <!-- ko template: { if: $root.koDraggingSource(), name: 'survey-question', data: $root.koDraggingSource(), as: 'question', templateOptions: { isDragging: true } } -->
+        <!-- /ko -->
+    </div>
 </div>
