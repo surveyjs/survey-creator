@@ -366,7 +366,7 @@ export class SurveyEditor {
     }
     private initSurvey(json: any) {
         var self = this;
-        this.surveyValue = new Survey.Survey(json);
+        this.surveyValue = new Survey.Survey();
         this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
         this.surveyValue["setJsonObject"](json); //TODO
