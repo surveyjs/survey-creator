@@ -1,5 +1,5 @@
 ﻿<div class="svd_container">
-    <ul class="navbar-default container-fluid collapse navbar-collapse nav nav-tabs no-borders svd_menu">
+    <ul class="navbar-default container-fluid collapse navbar-collapse nav nav-tabs svd_menu">
         <li data-bind="css: {active: koViewType() == 'designer'}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
         <li data-bind="css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
         <li data-bind="css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
@@ -29,7 +29,7 @@
             </select>
         </li>
     </ul>
-    <div class="panel" style="width:100%">
+    <div class="panel svd_content" style="width:100%">
         <div id="surveyjsEditor" data-bind="visible: koViewType() == 'editor'" style="height:450px;width:100%"></div>
         <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}" style="margin: 10px">
             <div id="surveyjsExample"></div>

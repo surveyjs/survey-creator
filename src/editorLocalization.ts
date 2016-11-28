@@ -74,7 +74,7 @@ export var defaultStrings = {
         testSurveyWidth: "Survey width: ",
         embedSurvey: "Embed Survey",
         saveSurvey: "Save Survey",
-        designer: "Designer",
+        designer: "Survey Designer",
         jsonEditor: "JSON Editor",
         undo: "Undo",
         redo: "Redo",

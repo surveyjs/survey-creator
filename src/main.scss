@@ -1,15 +1,53 @@
 ﻿$main-color: #1ab394;
 $text-color: #676a6c;
+$light-border-color: #e7eaec;
+$dark-border-color: #d2d2d2;
+$light-bg-color: #fff;
+$dark-bg-color: #f3f3f4;
 
 .svd_container {
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
     .svd_menu {
+        background-color: $light-bg-color;
+        border-top: 1px solid $light-border-color;
+        border-bottom: 1px solid $light-border-color;
+        padding-top: 19px;
+
         > li a {
             color: $text-color;
+            border: none;
+            border-radius: 0;
+            padding: 9px 10px 6px 10px;
+            width: 125px;
+            text-align: center;
+
+            &:hover, &:focus {
+                background-color: $dark-bg-color;
+                border-bottom: 1px solid $dark-bg-color;
+            }
         }
 
         > li.active a {
             color: $main-color;
+            background-color: $dark-bg-color;
+            border: 1px solid $light-border-color;
+            border-bottom-color: $dark-bg-color;
+
+            &:hover, &:focus {
+                color: $main-color;
+                background-color: $dark-bg-color;
+            }
         }
+    }
+
+    .svd_content {
+        background-color: $dark-bg-color;
+        padding: 45px 30px 0 30px;
     }
 }
 
