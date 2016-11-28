@@ -5,6 +5,10 @@ $dark-border-color: #d2d2d2;
 $light-bg-color: #fff;
 $dark-bg-color: #f3f3f4;
 
+html body {
+    background-color: $light-bg-color;
+}
+
 .svd_container {
     * {
         box-sizing: border-box;
