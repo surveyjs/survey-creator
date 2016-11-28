@@ -6,13 +6,13 @@
         <li data-bind="css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
     </ul>
 
-    <button type="button" class="btn btn-default svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
+    <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
 
     <div class="panel svd_content">
         <div id="surveyjsJSONEditor" class="svd_json_editor" data-bind="visible: koViewType() == 'editor'"></div>
 
         <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
-            <select data-bind="value: koTestSurveyWidth">
+            <select class="form-control" data-bind="value: koTestSurveyWidth">
                 <option value="100%" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '100%'"></option>
                 <option value="1200px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1200px'"></option>
                 <option value="1000px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1000px'"></option>
@@ -49,10 +49,10 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="svd_actions">
-                    <button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
-                    <button type="button" class="btn btn-default" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
+                    <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
+                    <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
                     <div data-bind="visible: koShowOptions()" class="btn-group inline">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
                             Options <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">

@@ -1,9 +1,11 @@
-﻿$main-color: #1ab394;
+﻿// vars
+$main-color: #1ab394;
 $text-color: #676a6c;
 $light-border-color: #e7eaec;
 $dark-border-color: #d2d2d2;
 $light-bg-color: #fff;
 $dark-bg-color: #f3f3f4;
+// EO vars
 
 html body {
     background-color: $light-bg-color;
@@ -85,7 +87,20 @@ html body {
             }
 
             .svd_actions {
+                padding: 14px 0;
 
+                .btn.btn-primary {
+                    margin-right: 10px;
+                }
+
+                .btn-group.open .dropdown-toggle{
+                    background-color: $main-color;
+                    border-color: $main-color;
+                }
+
+                .dropdown-menu > .active > a {
+                    background-color: $main-color;
+                }
             }
 
             .svd_pages_editor {
