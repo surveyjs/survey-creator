@@ -10,6 +10,8 @@ html body {
 }
 
 .svd_container {
+    position: relative;
+
     * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -49,9 +51,56 @@ html body {
         }
     }
 
+    .svd_save_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
     .svd_content {
         background-color: $dark-bg-color;
         padding: 45px 30px 0 30px;
+
+        .svd_survey_designer {
+            .svd_toolbox {
+                background-color: $dark-bg-color;
+                border: none;
+                border: 1px solid green; //TODO need for test, remove after it
+
+                .panel-heading {
+                    background-color: $dark-bg-color;
+                    color: $text-color;
+                    border: none;
+                    padding: 0 0 35px 0;
+                    font-size: 15px;
+                }
+
+                .btn-group-vertical {
+                    .btn {
+                        background-color: $dark-bg-color;
+                        border: none;
+                        padding: 6px 0;
+                    }
+                }
+            }
+
+            .svd_actions {
+
+            }
+
+            .svd_pages_editor {
+
+            }
+
+            .svd_questions_editor {
+                overflow-y: scroll;
+                height:450px;
+            }
+        }
+
+        .svd_json_editor {
+            height:450px;
+        }
     }
 }
 
