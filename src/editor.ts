@@ -343,7 +343,7 @@ export class SurveyEditor {
                 }
             };
         }
-        this.jsonEditor = ace.edit("surveyjsEditor");
+        this.jsonEditor = ace.edit("surveyjsJSONEditor");
         this.surveyjsExample = document.getElementById("surveyjsExample");
 
         this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
