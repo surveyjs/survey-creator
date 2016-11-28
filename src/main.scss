@@ -1,11 +1,9 @@
-﻿// vars
-$main-color: #1ab394;
+﻿$main-color: #1ab394;
 $text-color: #676a6c;
 $light-border-color: #e7eaec;
-$dark-border-color: #d2d2d2;
 $light-bg-color: #fff;
 $dark-bg-color: #f3f3f4;
-// EO vars
+
 
 html body {
     background-color: $light-bg-color;
@@ -18,6 +16,21 @@ html body {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
+    }
+
+    .custom-select {
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTJDBGvsAAAAwElEQVRYR+2SMQ6CQBBFPYdn0CN4A49j4UEosbPS0ooGCy+gFPSUFiZq4Uab0U8C0Y8JumuByS9eJvPZzTwGev1VZF1AIoxEGIkwEmEkwkiE+X+RyTa1QRK/ZOiRP2ef4iUy3a3NXW+WHfa1zCidlz1yPOc7bXiJDJNZPRR1vFnaybmG3Dd4fxpsoBp+eYCKHvm7820E/ax48+J8LCVQfTZRESQCMHxR5EESIFjkV0iEkQgjEUYijEQYiTAdEYnsDoE02cQEalyhAAAAAElFTkSuQmCC');
+        background-position: right;
+        background-repeat: no-repeat;
+
+        > select {
+            -webkit-appearance:none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            background: transparent;
+        }
     }
 
     .svd_menu {
@@ -110,6 +123,39 @@ html body {
             .svd_questions_editor {
                 overflow-y: scroll;
                 height:450px;
+            }
+
+            .svd_properties {
+                border: none;
+                border-top: 2px solid $light-border-color;
+                border-radius: 0;
+                padding: 0;
+
+                .panel-heading {
+                    background-color: #fff;
+                    border: none;
+                    border-bottom: 1px solid $light-border-color;
+
+                    .custom-select {
+                        display: inline-block;
+                        width: 90%;
+                    }
+
+                    .btn {
+                        display: inline-block;
+                        padding: 0;
+                        margin: 0 0 0 10px;
+                        border: none;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+
+                .table td {
+                    border: none;
+                }
             }
         }
 

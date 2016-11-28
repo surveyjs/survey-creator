@@ -9,26 +9,6 @@
     <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
 
     <div class="panel svd_content">
-        <div id="surveyjsJSONEditor" class="svd_json_editor" data-bind="visible: koViewType() == 'editor'"></div>
-
-        <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
-            <select class="form-control" data-bind="value: koTestSurveyWidth">
-                <option value="100%" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '100%'"></option>
-                <option value="1200px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1200px'"></option>
-                <option value="1000px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1000px'"></option>
-                <option value="800px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '800px'"></option>
-                <option value="600px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '600px'"></option>
-                <option value="400px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '400px'"></option>
-            </select>
-            <div id="surveyjsExample"></div>
-            <div id="surveyjsExampleResults"></div>
-            <button id="surveyjsExamplereRun" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurveyAgain')" style="display:none">Test Again</button>
-        </div>
-
-        <div id="surveyjsEmbed" data-bind="visible: koViewType() == 'embed'">
-            <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
-        </div>
-
         <div class="row svd_survey_designer"  data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 panel panel-default svd_toolbox">
                 <div class="panel-heading">
@@ -68,18 +48,36 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel panel-default svd_properties">
                 <div class="panel-heading">
-                    <div class="input-group">
+                    <div class="custom-select">
                         <select class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
-                        </span>
                     </div>
+                    <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
                 </div>
                 <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
                 <div class="panel-footer" data-bind="visible:surveyVerbs.koHasVerbs">
                     <div data-bind="template: { name: 'objectverbs', data: surveyVerbs }"></div>
                 </div>
             </div>
+        </div>
+
+        <div id="surveyjsJSONEditor" class="svd_json_editor" data-bind="visible: koViewType() == 'editor'"></div>
+
+        <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
+            <select class="form-control" data-bind="value: koTestSurveyWidth">
+                <option value="100%" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '100%'"></option>
+                <option value="1200px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1200px'"></option>
+                <option value="1000px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1000px'"></option>
+                <option value="800px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '800px'"></option>
+                <option value="600px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '600px'"></option>
+                <option value="400px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '400px'"></option>
+            </select>
+            <div id="surveyjsExample"></div>
+            <div id="surveyjsExampleResults"></div>
+            <button id="surveyjsExamplereRun" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurveyAgain')" style="display:none">Test Again</button>
+        </div>
+
+        <div id="surveyjsEmbed" data-bind="visible: koViewType() == 'embed'">
+            <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
         </div>
     </div>
 </div>
