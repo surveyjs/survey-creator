@@ -2,7 +2,9 @@
 $text-color: #676a6c;
 $light-text-color: #a7a7a7;
 $light-border-color: #e7eaec;
+$dark-border-color: #ddd;
 $light-bg-color: #fff;
+$bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
 
 
@@ -128,8 +130,34 @@ html body {
             }
 
             .svd_questions_editor {
+                background-color: $light-bg-color;
                 overflow-y: scroll;
                 height:450px;
+
+                .panel-body {
+                    .svd_question {
+                        box-shadow: none;
+                        border: none;
+                        border-radius: 0;
+                        padding: 20px 9px;
+
+                        .svd_q_copybutton {
+                            position: absolute;
+                            right: 5px;
+                            top: 5px;
+                        }
+                    }
+
+                    .svd_question_container:nth-child(even) > .svd_question {
+                        background-color: $bg-color;
+                        border-top: 1px solid $dark-border-color;
+                        border-bottom: 1px solid $dark-border-color;
+                    }
+
+                    .svd_question_container:nth-child(odd) > .svd_question {
+                        background-color: $light-bg-color;
+                    }
+                }
             }
 
             .svd_properties {
@@ -163,6 +191,10 @@ html body {
                 .table {
                     color: $text-color;
                     font-weight: 600;
+
+                    .active > td:nth-child(1) {
+                        border-left: 1px solid $light-bg-color;
+                    }
 
                     td {
                         border: none;
@@ -216,11 +248,6 @@ html body {
     }
     .svd_q_design_border {
         position: relative;
-    }
-    .svd_q_copybutton {
-        position: absolute;
-        right: 5px;
-        top: 5px;
     }
     .svd_dragover {
         pointer-events: none;

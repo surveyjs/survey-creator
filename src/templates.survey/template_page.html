@@ -6,7 +6,7 @@
      ">
     <h4 data-bind="visible: (title.length > 0) && data.showPageTitles, text: koNo() + processedTitle, css: $root.css.pageTitle"></h4>
     <!-- ko foreach: { data: rows, as: 'row'} -->
-    <div data-bind="visible: row.koVisible, css: $root.css.row">
+    <div class="svd_question_container" data-bind="visible: row.koVisible, css: $root.css.row">
         <!-- ko foreach: { data: row.questions, as: 'question' , afterRender: row.koAfterRender } -->
             <div data-bind="visible: question.koIsDragging">
                 <!-- ko template: { if: $root.koDraggingSource(), name: 'survey-question', data: $root.koDraggingSource(), as: 'question', templateOptions: { isDragging: true } } -->

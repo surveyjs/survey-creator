@@ -1,4 +1,4 @@
-﻿<div style="vertical-align:top" data-bind="style: {display: question.koVisible()|| $root.isDesignMode ? 'inline-block': 'none', marginLeft: question.koMarginLeft, paddingRight: question.koPaddingRight, width: question.koRenderWidth }, 
+﻿<div class="svd_question" style="vertical-align:top" data-bind="style: {display: question.koVisible()|| $root.isDesignMode ? 'inline-block': 'none', marginLeft: question.koMarginLeft, paddingRight: question.koPaddingRight, width: question.koRenderWidth },
      attr : {id: id, draggable: $root.isDesignMode}, click: $root.isDesignMode ? koOnClick: null, 
          event:{
            dragstart:function(el, e){ dragStart(e); return true; },
@@ -6,9 +6,6 @@
            dragend:function(el, e){ dragEnd(e);},
            drop:function(el, e){ dragDrop(e);}
          }, css:{svd_q_design_border: $root.isDesignMode, svd_q_selected : koIsSelected, 'well well-sm': $root.isDesignMode}">
-    <div class="svd_q_copybutton" data-bind="visible: koIsSelected">
-        <button class="btn btn-primary btn-xs" data-bind="click: $root.copyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
-    </div>
     <div data-bind="css:{svd_q_design: $root.isDesignMode}, style:{opacity: question.koIsDraggingSource() ? 0.4 : 1}">
         <div class="alert alert-danger" role="alert" data-bind="visible: koErrors().length > 0, foreach: koErrors">
             <div>
@@ -29,4 +26,8 @@
         <h5 data-bind="visible: $root.questionTitleLocation == 'bottom', text: question.koTitle(), css: $root.css.question.title"></h5>
         <!-- /ko -->
     </div>
+    <div class="svd_q_copybutton">
+        <button class="btn btn-primary btn-xs" data-bind="click: $root.copyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
+    </div>
+
 </div>
