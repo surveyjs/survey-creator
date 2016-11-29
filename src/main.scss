@@ -126,6 +126,36 @@ html body {
 
                 .nav-tabs {
                     border: none;
+
+                    li {
+                        &.active .svd_page_nav  {
+                            border: 1px solid $dark-border-color;
+                            color: $main-color;
+                        }
+
+                        .svd_page_nav {
+                            border: 1px solid $light-border-color;
+                            border-radius: 3px;
+                            margin: 5px;
+                        }
+                    }
+                }
+
+                .svd_add_new_page_btn {
+                    border: none;
+                    padding: 0;
+                    margin: 5px;
+                    box-shadow: none;
+                    background-color: transparent;
+
+                    &:hover {
+                        background-color: transparent;
+                    }
+
+                    .glyphicon-plus {
+                        color: $text-color;
+                        margin-top: 10px;
+                    }
                 }
             }
 
