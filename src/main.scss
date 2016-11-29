@@ -1,5 +1,6 @@
 ﻿$main-color: #1ab394;
 $text-color: #676a6c;
+$light-text-color: #a7a7a7;
 $light-border-color: #e7eaec;
 $light-bg-color: #fff;
 $dark-bg-color: #f3f3f4;
@@ -117,7 +118,13 @@ html body {
             }
 
             .svd_pages_editor {
+                background-color: $light-bg-color;
+                border-top: 2px solid $light-border-color;
+                padding: 20px;
 
+                .nav-tabs {
+                    border: none;
+                }
             }
 
             .svd_questions_editor {
@@ -153,8 +160,20 @@ html body {
                     }
                 }
 
-                .table td {
-                    border: none;
+                .table {
+                    color: $text-color;
+                    font-weight: 600;
+
+                    td {
+                        border: none;
+                        height: 40px;
+                        padding: 0 10px 0 10px;
+                        vertical-align: middle;
+
+                        &:nth-child(2) {
+                            color: $light-text-color;
+                        }
+                    }
                 }
             }
         }
