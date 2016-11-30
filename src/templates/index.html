@@ -22,9 +22,9 @@
                     </div>
                     <!-- /ko  -->
                     <!-- ko foreach: koCopiedQuestions -->
-                    <div class="btn btn-primary" style="text-align:left; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
+                    <div class="btn btn-default" style="text-align:left; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickCopiedQuestion, event:{dragstart: function(el, e) { $parent.draggingCopiedQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
                         <span class="icon-default"></span>
-                        <span data-bind="text:name"></span>
+                        <span class="svd_toolbox_item_text" data-bind="text:name"></span>
                     </div>
                     <!-- /ko  -->
                 </div>

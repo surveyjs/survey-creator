@@ -116,6 +116,11 @@ html body {
                         [class^="icon-"], [class*=" icon-"] {
                             font-size: 20px;
                             position: absolute;
+                            color: $text-color;
+                        }
+
+                        .icon-default {
+                            color: $main-color;
                         }
 
                         .svd_toolbox_item_text {
