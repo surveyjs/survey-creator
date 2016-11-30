@@ -18,7 +18,7 @@
                     <!-- ko foreach: questionTypes -->
                     <div class="btn btn-default" style="text-align:left; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
                         <span class="icon-Checkbox1"></span>
-                        <span data-bind="text: $root.getLocString('qt.' + $data)"></span>
+                        <span class="svd_toolbox_item_text" data-bind="text: $root.getLocString('qt.' + $data)"></span>
                     </div>
                     <!-- /ko  -->
                     <!-- ko foreach: koCopiedQuestions -->
