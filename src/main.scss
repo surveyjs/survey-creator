@@ -237,6 +237,10 @@ html body {
                         margin-left: 5px;
                         border: none;
                         background: transparent;
+
+                        &:active {
+                            box-shadow: none;
+                        }
                     }
                 }
 
