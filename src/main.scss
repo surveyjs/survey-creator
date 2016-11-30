@@ -12,6 +12,18 @@ html body {
     background-color: $light-bg-color;
 }
 
+@media (max-width: 991px) {
+    .svd_container .svd_content .svd_editors {
+        padding: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .svd_container .svd_content .svd_properties {
+        margin-top: 20px;
+    }
+}
+
 .svd_container {
     position: relative;
 
@@ -77,7 +89,8 @@ html body {
 
     .svd_content {
         background-color: $dark-bg-color;
-        padding: 45px 30px 0 30px;
+        padding: 45px 30px 30px 30px;
+        margin: 0;
 
         .svd_survey_designer {
             .svd_toolbox {
@@ -102,90 +115,91 @@ html body {
                 }
             }
 
-            .svd_actions {
-                padding: 14px 0;
 
-                .btn.btn-primary {
-                    margin-right: 10px;
-                }
+            .svd_editors {
+                .svd_actions {
+                    padding: 14px 0;
 
-                .btn-group.open .dropdown-toggle{
-                    background-color: $main-color;
-                    border-color: $main-color;
-                }
+                    .btn.btn-primary {
+                        margin-right: 10px;
+                    }
 
-                .dropdown-menu > .active > a {
-                    background-color: $main-color;
-                }
-            }
+                    .btn-group.open .dropdown-toggle{
+                        background-color: $main-color;
+                        border-color: $main-color;
+                    }
 
-            .svd_pages_editor {
-                background-color: $light-bg-color;
-                border-top: 2px solid $light-border-color;
-                padding: 20px;
-
-                .nav-tabs {
-                    border: none;
-
-                    li {
-                        &.active .svd_page_nav  {
-                            border: 1px solid $dark-border-color;
-                            color: $main-color;
-                        }
-
-                        .svd_page_nav {
-                            border: 1px solid $light-border-color;
-                            border-radius: 3px;
-                            margin: 5px;
-                        }
+                    .dropdown-menu > .active > a {
+                        background-color: $main-color;
                     }
                 }
 
-                .svd_add_new_page_btn {
-                    border: none;
-                    padding: 0;
-                    margin: 5px;
-                    box-shadow: none;
-                    background-color: transparent;
+                .svd_pages_editor {
+                    background-color: $light-bg-color;
+                    border-top: 2px solid $light-border-color;
+                    padding: 20px;
 
-                    &:hover {
-                        background-color: transparent;
-                    }
-
-                    .glyphicon-plus {
-                        color: $text-color;
-                        margin-top: 10px;
-                    }
-                }
-            }
-
-            .svd_questions_editor {
-                background-color: $light-bg-color;
-                overflow-y: scroll;
-                height:450px;
-
-                .panel-body {
-                    .svd_question {
-                        box-shadow: none;
+                    .nav-tabs {
                         border: none;
-                        border-radius: 0;
-                        padding: 20px 9px;
 
-                        .svd_q_copybutton {
-                            position: absolute;
-                            right: 5px;
-                            top: 5px;
+                        li {
+                            &.active .svd_page_nav  {
+                                border: 1px solid $dark-border-color;
+                                color: $main-color;
+                            }
+
+                            .svd_page_nav {
+                                border: 1px solid $light-border-color;
+                                border-radius: 3px;
+                                margin: 5px;
+                            }
                         }
                     }
 
-                    .svd_question_container:nth-child(even) > .svd_question {
-                        background-color: $bg-color;
-                        border-top: 1px solid $dark-border-color;
-                        border-bottom: 1px solid $dark-border-color;
-                    }
+                    .svd_add_new_page_btn {
+                        border: none;
+                        padding: 0;
+                        margin: 5px;
+                        box-shadow: none;
+                        background-color: transparent;
 
-                    .svd_question_container:nth-child(odd) > .svd_question {
-                        background-color: $light-bg-color;
+                        &:hover {
+                            background-color: transparent;
+                        }
+
+                        .glyphicon-plus {
+                            color: $text-color;
+                            margin-top: 10px;
+                        }
+                    }
+                }
+
+                .svd_questions_editor {
+                    background-color: $light-bg-color;
+
+                    .panel-body {
+                        .svd_question {
+                            box-shadow: none;
+                            border: none;
+                            border-radius: 0;
+                            padding: 20px 9px;
+
+                            .svd_q_copybutton {
+                                position: absolute;
+                                right: 5px;
+                                top: 5px;
+                            }
+                        }
+
+                        .svd_question_container:nth-child(even) > .svd_question {
+                            background-color: $bg-color;
+                            border-top: 1px solid $dark-border-color;
+                            border-bottom: 1px solid $dark-border-color;
+                        }
+
+                        .svd_question_container:nth-child(odd) > .svd_question {
+                            background-color: $light-bg-color;
+                        }
                     }
                 }
             }
@@ -203,7 +217,7 @@ html body {
 
                     .custom-select {
                         display: inline-block;
-                        width: 90%;
+                        width: 100%;
                     }
 
                     .btn {
@@ -216,6 +230,18 @@ html body {
                             background-color: transparent;
                         }
                     }
+                }
+
+                .input-group-btn {
+                    .btn {
+                        margin-left: 5px;
+                        border: none;
+                        background: transparent;
+                    }
+                }
+
+                input[type="checkbox"].form-control {
+                    width: 25px;
                 }
 
                 .table {
@@ -288,4 +314,38 @@ html body {
     .svd_navbarbuttons {
         margin-top: 3px
     }
+}
+
+// font
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?honi4m');
+    src:  url('fonts/icomoon.eot?honi4m#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?honi4m') format('truetype'),
+    url('fonts/icomoon.woff?honi4m') format('woff'),
+    url('fonts/icomoon.svg?honi4m#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Checkbox:before {
+    content: "\e900";
+}
+.icon-Checkbox1:before {
+    content: "\e901";
 }

@@ -17,6 +17,7 @@
                 <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                     <!-- ko foreach: questionTypes -->
                     <div class="btn btn-default" style="text-align:left; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
+                        <span class="icon-Checkbox1"></span>
                         <span data-bind="text: $root.getLocString('qt.' + $data)"></span>
                     </div>
                     <!-- /ko  -->
@@ -27,7 +28,7 @@
                     <!-- /ko  -->
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 svd_editors">
                 <div class="svd_actions">
                     <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
                     <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
@@ -46,12 +47,14 @@
                     <div id="surveyjs"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel panel-default svd_properties">
-                <div class="panel-heading">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 panel panel-default svd_properties">
+                <div class="panel-heading input-group">
                     <div class="custom-select">
                         <select class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
-                    <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
                 </div>
                 <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
                 <div class="panel-footer" data-bind="visible:surveyVerbs.koHasVerbs">

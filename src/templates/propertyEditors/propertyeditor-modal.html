@@ -1,15 +1,19 @@
 ﻿<script type="text/html" id="propertyeditor-modal">
-    <div data-bind="visible:!editor.isEditable">
+    <div class="input-group" data-bind="visible:!editor.isEditable">
         <span data-bind="text: koText"></span>
-        <button type="button"  class="btn btn-default"data-toggle="modal" style="padding: 2px;" data-bind="attr: {'data-target' : modalNameTarget}">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </button>
+        <div class="input-group-btn">
+            <button type="button"  class="btn btn-default"data-toggle="modal" style="padding: 2px;" data-bind="attr: {'data-target' : modalNameTarget}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
-    <div data-bind="visible:editor.isEditable" style="display:table">
+    <div class="input-group" data-bind="visible:editor.isEditable" style="display:table">
         <input class="form-control" type="text" data-bind="value: koValue" style="display:table-cell; width:100%" />
-        <button type="button" class="btn btn-default" style="display:table-cell; padding: 2px;"  data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </button>
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default" style="display:table-cell; padding: 2px;"  data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
 
     <div data-bind="attr: {id : modalName}" class="modal fade" role="dialog">

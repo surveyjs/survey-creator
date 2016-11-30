@@ -26,7 +26,7 @@
         <h5 data-bind="visible: $root.questionTitleLocation == 'bottom', text: question.koTitle(), css: $root.css.question.title"></h5>
         <!-- /ko -->
     </div>
-    <div class="svd_q_copybutton">
+    <div class="svd_q_copybutton" data-bind="visible: koIsSelected">
         <button class="btn btn-primary btn-xs" data-bind="click: $root.copyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
     </div>
 
