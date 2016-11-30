@@ -133,6 +133,10 @@ html body {
 
                     .btn.btn-primary {
                         margin-right: 10px;
+
+                        &.svd_save_btn {
+                            position: initial;
+                        }
                     }
 
                     .btn-group.open .dropdown-toggle{
