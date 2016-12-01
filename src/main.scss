@@ -241,10 +241,18 @@ html body {
                             background-color: $bg-color;
                             border-top: 1px solid $dark-border-color;
                             border-bottom: 1px solid $dark-border-color;
+
+                            &.svd_q_selected {
+                                border: 1px solid $main-color;
+                            }
                         }
 
                         .svd_question_container:nth-child(odd) > .svd_question {
                             background-color: $light-bg-color;
+
+                            &.svd_q_selected {
+                                border: 1px solid $main-color;
+                            }
                         }
                     }
                 }
