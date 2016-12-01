@@ -32,6 +32,7 @@ var paths = {
     tsTests: "./tests/*.ts",
     tsTests_ko: "./tests/ko/*.ts",
     styles: "./src/*.scss",
+    fonts: "./src/fonts/*",
     templates_ko: "./src/templates/**/*.html",
     template_page: "./src/templates.survey/template_page.html",
     template_question: "./src/templates.survey/template_question.html"
@@ -147,6 +148,14 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(paths.packageDist));
 });
 
+gulp.task('fonts', function () {
+    "use strict";
+    return gulp.src(paths.fonts)
+        .pipe(gulp.dest(paths.webroot + 'fonts'))
+        .pipe(gulp.dest(paths.dist + 'fonts'))
+        .pipe(gulp.dest(paths.packageDist + '/fonts'));
+});
+
 gulp.task('templates', function () {
     "use strict";
     gulp.src(paths.template_page)
@@ -174,7 +183,7 @@ gulp.task('templates', function () {
         .pipe(gulp.dest("./src/"));
 });
 
-gulp.task("makedist", sequence("templates", ["typescript", "sass"], "compress", "createPackage", "updatesurveyjsversion"));
+gulp.task("makedist", sequence("templates", ["typescript", "sass", "fonts"], "compress", "createPackage", "updatesurveyjsversion"));
 
 gulp.task("test_ci", function (done) { 
     new Server({ 

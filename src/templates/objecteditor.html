@@ -4,8 +4,8 @@
             <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
                 <td data-bind="text: displayName, attr: {title: title}" width="50%"></td>
                 <td width="50%">
-                    <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data, attr: {title: koText}, style: {color: koIsDefault() ? 'gray' : ''}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
-                    <div data-bind="visible: $parent.koActiveProperty() == $data">
+                    <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data && (koText() || $data.editorType == 'boolean'), attr: {title: koText}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
+                    <div data-bind="visible: $parent.koActiveProperty() == $data || (!koText() && $data.editorType != 'boolean')">
                         <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data } -->
                         <!-- /ko -->
                     </div>

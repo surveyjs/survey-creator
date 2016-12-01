@@ -343,7 +343,7 @@ export class SurveyEditor {
                 }
             };
         }
-        this.jsonEditor = ace.edit("surveyjsEditor");
+        this.jsonEditor = ace.edit("surveyjsJSONEditor");
         this.surveyjsExample = document.getElementById("surveyjsExample");
 
         this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
@@ -381,6 +381,7 @@ export class SurveyEditor {
         this.surveyVerbs.survey = this.survey;
         this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
         this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.copyQuestion(self.koSelectedObject().value); });
+        this.surveyValue["onFastCopyQuestion"].add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
         this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
@@ -478,6 +479,13 @@ export class SurveyEditor {
             this.koCopiedQuestions.splice(0, 1);
         }
     }
+
+    public fastCopyQuestion(question: Survey.QuestionBase) {
+        var json = new Survey.JsonObject().toJsonObject(question);
+        json.type = question.getType();
+        this.doClickCopiedQuestion( json );
+    }
+
     private getCopiedQuestionByName(name: string) {
         var items = this.koCopiedQuestions();
         for (var i = 0; i < items.length; i++) {
@@ -552,8 +560,10 @@ Survey.Survey.prototype["onCreating"] = function () {
     this.selectedQuestionValue = null;
     this.onSelectedQuestionChanged = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+    this.onFastCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     var self = this;
     this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
+    this.fastCopyQuestionClick = function (question) { self.onFastCopyQuestion.fire(self/*, question*/); };
     this.koDraggingSource = ko.observable(null);
 };
 Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.QuestionBase) {

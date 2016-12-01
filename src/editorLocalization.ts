@@ -48,7 +48,8 @@ export var defaultStrings = {
     //survey templates
     survey: {
         dropQuestion: "Please drop a question here.",
-        copy: "Copy"
+        copy: "Copy",
+        addToToolbox: "Add to toolbox"
     },
     //questionTypes
     qt: {
@@ -74,7 +75,7 @@ export var defaultStrings = {
         testSurveyWidth: "Survey width: ",
         embedSurvey: "Embed Survey",
         saveSurvey: "Save Survey",
-        designer: "Designer",
+        designer: "Survey Designer",
         jsonEditor: "JSON Editor",
         undo: "Undo",
         redo: "Redo",

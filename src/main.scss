@@ -1,41 +1,434 @@
-﻿[draggable] {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  /* Required to make elements draggable in old WebKit */
-  -khtml-user-drag: element;
-  -webkit-user-drag: element;
+﻿$main-color: #1ab394;
+$text-color: #676a6c;
+$light-text-color: #a7a7a7;
+$light-border-color: #e7eaec;
+$dark-border-color: #ddd;
+$light-bg-color: #fff;
+$bg-color: #f9f9f9;
+$dark-bg-color: #f3f3f4;
+
+
+html body {
+    background-color: $light-bg-color;
 }
-.svd_table-nowrap {
-    table-layout: fixed;
+
+@media (max-width: 991px) {
+    .svd_container .svd_content .svd_editors {
+        padding: 0;
+    }
 }
-.svd_table-nowrap td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+@media (max-width: 991px) {
+    .svd_container .svd_content .svd_properties {
+        margin-top: 20px;
+    }
 }
-.svd_q_selected {
-    //border: 2px solid darkblue;
-    border-width: 3px;
+
+.svd_container {
+    position: relative;
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .custom-select {
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTJDBGvsAAAAwElEQVRYR+2SMQ6CQBBFPYdn0CN4A49j4UEosbPS0ooGCy+gFPSUFiZq4Uab0U8C0Y8JumuByS9eJvPZzTwGev1VZF1AIoxEGIkwEmEkwkiE+X+RyTa1QRK/ZOiRP2ef4iUy3a3NXW+WHfa1zCidlz1yPOc7bXiJDJNZPRR1vFnaybmG3Dd4fxpsoBp+eYCKHvm7820E/ax48+J8LCVQfTZRESQCMHxR5EESIFjkV0iEkQgjEUYijEQYiTAdEYnsDoE02cQEalyhAAAAAElFTkSuQmCC');
+        background-position: right;
+        background-repeat: no-repeat;
+
+        > select {
+            -webkit-appearance:none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            background: transparent;
+        }
+    }
+
+    .svd_menu {
+        background-color: $light-bg-color;
+        border-top: 1px solid $light-border-color;
+        border-bottom: 1px solid $light-border-color;
+        padding-top: 19px;
+
+        > li a {
+            color: $text-color;
+            border: none;
+            border-radius: 0;
+            padding: 9px 10px 6px 10px;
+            width: 125px;
+            text-align: center;
+
+            &:hover, &:focus {
+                background-color: $dark-bg-color;
+                border-bottom: 1px solid $dark-bg-color;
+            }
+        }
+
+        > li.active a {
+            color: $main-color;
+            background-color: $dark-bg-color;
+            border: 1px solid $light-border-color;
+            border-bottom-color: $dark-bg-color;
+
+            &:hover, &:focus {
+                color: $main-color;
+                background-color: $dark-bg-color;
+            }
+        }
+    }
+
+    .svd_save_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .svd_content {
+        background-color: $dark-bg-color;
+        padding: 45px 30px 30px 30px;
+        margin: 0;
+
+        .svd_survey_designer {
+            .svd_toolbox {
+                background-color: $dark-bg-color;
+                border: none;
+
+                .panel-heading {
+                    background-color: $dark-bg-color;
+                    color: $text-color;
+                    border: none;
+                    padding: 0 0 30px 0;
+                    font-size: 15px;
+                }
+
+                .btn-group-vertical {
+                    .btn {
+                        background-color: $dark-bg-color;
+                        border: none;
+                        padding: 10px 0;
+                        border-bottom: 1px solid $light-border-color;
+                        box-shadow: none;
+
+                        [class^="icon-"], [class*=" icon-"] {
+                            font-size: 20px;
+                            position: absolute;
+                            color: $text-color;
+                        }
+
+                        .icon-default {
+                            color: $main-color;
+                        }
+
+                        .svd_toolbox_item_text {
+                            margin-left: 35px;
+                            color: $text-color;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
+
+            .svd_editors {
+                .svd_actions {
+                    padding: 14px 0;
+
+                    .btn.btn-primary {
+                        margin-right: 10px;
+
+                        &.svd_save_btn {
+                            position: initial;
+                        }
+                    }
+
+                    .btn-group.open .dropdown-toggle{
+                        background-color: $main-color;
+                        border-color: $main-color;
+                    }
+
+                    .dropdown-menu > .active > a {
+                        background-color: $main-color;
+                    }
+                }
+
+                .svd_pages_editor {
+                    background-color: $light-bg-color;
+                    border-top: 2px solid $light-border-color;
+                    padding: 20px;
+
+                    .nav-tabs {
+                        border: none;
+
+                        li {
+                            &.active .svd_page_nav  {
+                                border: 1px solid $dark-border-color;
+                                color: $main-color;
+                            }
+
+                            .svd_page_nav {
+                                border: 1px solid $light-border-color;
+                                border-radius: 3px;
+                                margin: 5px;
+                            }
+                        }
+                    }
+
+                    .svd_add_new_page_btn {
+                        border: none;
+                        padding: 0;
+                        margin: 5px;
+                        box-shadow: none;
+                        background-color: transparent;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+
+                        .glyphicon-plus {
+                            color: $text-color;
+                            margin-top: 10px;
+                        }
+                    }
+                }
+
+                .svd_questions_editor {
+                    background-color: $light-bg-color;
+
+                    .panel-body {
+                        .svd_question {
+                            box-shadow: none;
+                            border: none;
+                            border-radius: 0;
+                            padding: 20px 9px;
+
+                            .svd_question_menu {
+                                position: absolute;
+                                right: 5px;
+                                top: 5px;
+
+                                .dropdown-toggle {
+                                    background-color: transparent;
+                                    border: none;
+                                    box-shadow: none;
+
+                                    .glyphicon-option-horizontal {
+                                        color: $main-color;
+                                        font-size: 20px
+                                    }
+                                }
+
+                                .dropdown-menu {
+                                    top: 25px;
+                                    right: 0;
+                                    left: initial;
+
+                                    li {
+                                        margin: 5px;
+
+                                        .btn {
+                                            width: 100%;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .svd_question_container:nth-child(even) > .svd_question {
+                            background-color: $bg-color;
+                            border-top: 1px solid $dark-border-color;
+                            border-bottom: 1px solid $dark-border-color;
+                        }
+
+                        .svd_question_container:nth-child(odd) > .svd_question {
+                            background-color: $light-bg-color;
+                        }
+                    }
+                }
+            }
+
+            .svd_properties {
+                border: none;
+                border-top: 2px solid $light-border-color;
+                border-radius: 0;
+                padding: 0;
+
+                .panel-heading {
+                    background-color: #fff;
+                    border: none;
+                    border-bottom: 1px solid $light-border-color;
+
+                    .custom-select {
+                        display: inline-block;
+                        width: 100%;
+                    }
+
+                    .btn {
+                        display: inline-block;
+                        padding: 0;
+                        margin: 0 0 0 10px;
+                        border: none;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+
+                .input-group-btn {
+                    .btn {
+                        margin-left: 5px;
+                        border: none;
+                        background: transparent;
+
+                        &:active {
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                input[type="checkbox"].form-control {
+                    width: 25px;
+                }
+
+                .table {
+                    color: $text-color;
+                    font-weight: 600;
+
+                    .active > td:nth-child(1) {
+                        border-left: 1px solid $light-bg-color;
+                    }
+
+                    td {
+                        border: none;
+                        height: 40px;
+                        padding: 0 10px 0 10px;
+                        vertical-align: middle;
+
+                        &:nth-child(2) {
+                            color: $light-text-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .svd_json_editor {
+            height:450px;
+        }
+    }
 }
-.svd_q_design {
-    pointer-events: none;
+
+
+
+
+
+
+.svd_container {
+    [draggable] {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* Required to make elements draggable in old WebKit */
+        -khtml-user-drag: element;
+        -webkit-user-drag: element;
+    }
+    .svd_table-nowrap {
+        table-layout: fixed;
+    }
+    .svd_table-nowrap td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .svd_q_selected {
+        //border: 2px solid darkblue;
+        border-width: 3px;
+    }
+    .svd_q_design {
+        pointer-events: none;
+    }
+    .svd_q_design_border {
+        position: relative;
+    }
+    .svd_dragover {
+        pointer-events: none;
+        width: 100%;
+        height: 5px;
+        border: 2px dashed #000;
+    }
+    .svd_navbarbuttons {
+        margin-top: 3px
+    }
 }
-.svd_q_design_border {
-    position:relative;
+
+// font icomoon
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?sbpmys');
+    src:  url('fonts/icomoon.eot?sbpmys#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?sbpmys') format('truetype'),
+    url('fonts/icomoon.woff?sbpmys') format('woff'),
+    url('fonts/icomoon.svg?sbpmys#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
-.svd_q_copybutton {
-    position: absolute;
-    right:5px;
-    top:5px;
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-.svd_dragover {
-    pointer-events: none;
-    width:100%;
-    height:5px;
-    border: 2px dashed #000;
+
+.icon-checkbox:before {
+    content: "\e900";
 }
-.svd_navbarbuttons {
-    margin-top:3px
+.icon-comment:before {
+    content: "\e901";
+}
+.icon-dropdown:before {
+    content: "\e902";
+}
+.icon-file:before {
+    content: "\e903";
+}
+.icon-html:before {
+    content: "\e904";
+}
+.icon-default:before {
+    content: "\e905";
+}
+.icon-matrixdynamic:before {
+    content: "\e906";
+}
+.icon-matrixdropdown:before {
+    content: "\e907";
+}
+.icon-matrix:before {
+    content: "\e908";
+}
+.icon-multipletext:before {
+    content: "\e909";
+}
+.icon-radiogroup:before {
+    content: "\e90a";
+}
+.icon-rating:before {
+    content: "\e90b";
+}
+.icon-text:before {
+    content: "\e90c";
 }

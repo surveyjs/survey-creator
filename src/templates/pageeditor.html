@@ -8,11 +8,11 @@
            dragend:function(el, e){ $parent.dragEnd();},
            drop:function(el, e){ $parent.dragDrop(el);}
          }"> 
-            <a href="#" data-bind="click:$parent.selectPageClick">
+            <a class="svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
                 <span data-bind="text: title"></span>
             </a>
         </li>
         <!-- /ko  -->
-        <li><button type="button" class="btn btn-default" data-bind="click:addNewPageClick"><span class="glyphicon glyphicon-plus"></span></button></li>
+        <li><button class="btn btn-default svd_add_new_page_btn" data-bind="click:addNewPageClick"><span class="glyphicon glyphicon-plus"></span></button></li>
     </ul>
 </script>
