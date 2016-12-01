@@ -205,10 +205,35 @@ html body {
                             border-radius: 0;
                             padding: 20px 9px;
 
-                            .svd_q_copybutton {
+                            .svd_question_menu {
                                 position: absolute;
                                 right: 5px;
                                 top: 5px;
+
+                                .dropdown-toggle {
+                                    background-color: transparent;
+                                    border: none;
+                                    box-shadow: none;
+
+                                    .glyphicon-option-horizontal {
+                                        color: $main-color;
+                                        font-size: 20px
+                                    }
+                                }
+
+                                .dropdown-menu {
+                                    top: 25px;
+                                    right: 0;
+                                    left: initial;
+
+                                    li {
+                                        margin: 5px;
+
+                                        .btn {
+                                            width: 100%;
+                                        }
+                                    }
+                                }
                             }
                         }
 
