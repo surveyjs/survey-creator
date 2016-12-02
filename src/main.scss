@@ -46,25 +46,6 @@ html body {
         -webkit-box-sizing: border-box;
     }
 
-    .custom-select {
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTJDBGvsAAAAwElEQVRYR+2SMQ6CQBBFPYdn0CN4A49j4UEosbPS0ooGCy+gFPSUFiZq4Uab0U8C0Y8JumuByS9eJvPZzTwGev1VZF1AIoxEGIkwEmEkwkiE+X+RyTa1QRK/ZOiRP2ef4iUy3a3NXW+WHfa1zCidlz1yPOc7bXiJDJNZPRR1vFnaybmG3Dd4fxpsoBp+eYCKHvm7820E/ax48+J8LCVQfTZRESQCMHxR5EESIFjkV0iEkQgjEUYijEQYiTAdEYnsDoE02cQEalyhAAAAAElFTkSuQmCC');
-        background-position: right;
-        background-repeat: no-repeat;
-
-        > select {
-            -webkit-appearance:none;
-            -moz-appearance: none;
-            -ms-appearance: none;
-            -o-appearance: none;
-            appearance: none;
-            background: transparent;
-
-            &::-ms-expand {
-                display: none;
-            }
-        }
-    }
-
     .svd_menu {
         background-color: $light-bg-color;
         border-top: 1px solid $light-border-color;
@@ -250,18 +231,10 @@ html body {
                             }
                         }
 
-                        .svd_question_container:nth-child(even) > .svd_question {
+                        .svd_question_container .svd_question {
                             background-color: $bg-color;
                             border-top: 1px solid $dark-border-color;
                             border-bottom: 1px solid $dark-border-color;
-
-                            &.svd_q_selected {
-                                border: 1px solid $main-color;
-                            }
-                        }
-
-                        .svd_question_container:nth-child(odd) > .svd_question {
-                            background-color: $light-bg-color;
 
                             &.svd_q_selected {
                                 border: 1px solid $main-color;
