@@ -24,6 +24,19 @@ html body {
     }
 }
 
+@media (max-width: 816px) {
+    .svd_container .nav-tabs.svd_menu > li.active > a {
+        color: $main-color;
+        background-color: transparent;
+        border: none;
+
+        &:hover, &:focus {
+            color: $main-color;
+            background-color: transparent;
+        }
+    }
+}
+
 .svd_container {
     position: relative;
 
@@ -33,34 +46,20 @@ html body {
         -webkit-box-sizing: border-box;
     }
 
-    .custom-select {
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTJDBGvsAAAAwElEQVRYR+2SMQ6CQBBFPYdn0CN4A49j4UEosbPS0ooGCy+gFPSUFiZq4Uab0U8C0Y8JumuByS9eJvPZzTwGev1VZF1AIoxEGIkwEmEkwkiE+X+RyTa1QRK/ZOiRP2ef4iUy3a3NXW+WHfa1zCidlz1yPOc7bXiJDJNZPRR1vFnaybmG3Dd4fxpsoBp+eYCKHvm7820E/ax48+J8LCVQfTZRESQCMHxR5EESIFjkV0iEkQgjEUYijEQYiTAdEYnsDoE02cQEalyhAAAAAElFTkSuQmCC');
-        background-position: right;
-        background-repeat: no-repeat;
-
-        > select {
-            -webkit-appearance:none;
-            -moz-appearance: none;
-            -ms-appearance: none;
-            -o-appearance: none;
-            appearance: none;
-            background: transparent;
-        }
-    }
-
     .svd_menu {
         background-color: $light-bg-color;
         border-top: 1px solid $light-border-color;
         border-bottom: 1px solid $light-border-color;
-        padding-top: 19px;
+        padding: 19px 15px 0 15px;
 
-        > li a {
+        > li > a {
             color: $text-color;
             border: none;
             border-radius: 0;
-            padding: 9px 10px 6px 10px;
-            width: 125px;
+            padding: 8px 9px 9px 11px;
+            width: 115px;
             text-align: center;
+            font-size: 11px;
 
             &:hover, &:focus {
                 background-color: $dark-bg-color;
@@ -68,7 +67,7 @@ html body {
             }
         }
 
-        > li.active a {
+        > li.active > a {
             color: $main-color;
             background-color: $dark-bg-color;
             border: 1px solid $light-border-color;
@@ -81,15 +80,27 @@ html body {
         }
     }
 
-    .svd_save_btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+    .svd_actions {
+        padding: 0 0 5px 0;
+
+        .btn.btn-primary {
+            margin-right: 10px;
+            font-size: 11px;
+        }
+
+        .btn-group.open .dropdown-toggle{
+            background-color: $main-color;
+            border-color: $main-color;
+        }
+
+        .dropdown-menu > .active > a {
+            background-color: $main-color;
+        }
     }
 
     .svd_content {
         background-color: $dark-bg-color;
-        padding: 45px 30px 30px 30px;
+        padding: 10px 30px 30px 30px;
         margin: 0;
 
         .svd_survey_designer {
@@ -109,12 +120,12 @@ html body {
                     .btn {
                         background-color: $dark-bg-color;
                         border: none;
-                        padding: 10px 0;
+                        padding: 8px 0;
                         border-bottom: 1px solid $light-border-color;
                         box-shadow: none;
 
                         [class^="icon-"], [class*=" icon-"] {
-                            font-size: 20px;
+                            font-size: 16px;
                             position: absolute;
                             color: $text-color;
                         }
@@ -126,7 +137,8 @@ html body {
                         .svd_toolbox_item_text {
                             margin-left: 35px;
                             color: $text-color;
-                            font-weight: 600;
+                            top: -2px;
+                            position: relative;
                         }
                     }
                 }
@@ -134,31 +146,10 @@ html body {
 
 
             .svd_editors {
-                .svd_actions {
-                    padding: 14px 0;
-
-                    .btn.btn-primary {
-                        margin-right: 10px;
-
-                        &.svd_save_btn {
-                            position: initial;
-                        }
-                    }
-
-                    .btn-group.open .dropdown-toggle{
-                        background-color: $main-color;
-                        border-color: $main-color;
-                    }
-
-                    .dropdown-menu > .active > a {
-                        background-color: $main-color;
-                    }
-                }
-
                 .svd_pages_editor {
                     background-color: $light-bg-color;
                     border-top: 2px solid $light-border-color;
-                    padding: 20px;
+                    padding: 10px 15px 0 15px;
 
                     .nav-tabs {
                         border: none;
@@ -172,7 +163,8 @@ html body {
                             .svd_page_nav {
                                 border: 1px solid $light-border-color;
                                 border-radius: 3px;
-                                margin: 5px;
+                                padding: 7px 10px 7px 12px;
+
                             }
                         }
                     }
@@ -190,13 +182,15 @@ html body {
 
                         .glyphicon-plus {
                             color: $text-color;
-                            margin-top: 10px;
+                            margin-top: 3px;
                         }
                     }
                 }
 
                 .svd_questions_editor {
                     background-color: $light-bg-color;
+                    height: 70vh;
+                    overflow-y: scroll;
 
                     .panel-body {
                         .svd_question {
@@ -224,7 +218,7 @@ html body {
                                 .dropdown-menu {
                                     top: 25px;
                                     right: 0;
-                                    left: initial;
+                                    left: auto;
 
                                     li {
                                         margin: 5px;
@@ -237,14 +231,14 @@ html body {
                             }
                         }
 
-                        .svd_question_container:nth-child(even) > .svd_question {
+                        .svd_question_container .svd_question {
                             background-color: $bg-color;
                             border-top: 1px solid $dark-border-color;
                             border-bottom: 1px solid $dark-border-color;
-                        }
 
-                        .svd_question_container:nth-child(odd) > .svd_question {
-                            background-color: $light-bg-color;
+                            &.svd_q_selected {
+                                border: 1px solid $main-color;
+                            }
                         }
                     }
                 }
