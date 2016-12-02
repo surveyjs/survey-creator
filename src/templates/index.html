@@ -1,19 +1,37 @@
-﻿<div class="svd_container">
-    <ul class="navbar-default container-fluid collapse navbar-collapse nav nav-tabs svd_menu">
+﻿<div style="height: 85px; background: orange"></div>
+
+<div class="svd_container">
+    <ul class="navbar-default container-fluid nav nav-tabs svd_menu">
         <li data-bind="css: {active: koViewType() == 'designer'}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
         <li data-bind="css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
         <li data-bind="css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
         <li data-bind="css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
-    </ul>
 
-    <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton && koViewType() != 'designer'"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
+        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
+            <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
+        </li>
+        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
+            <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
+        </li>
+        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
+            <div data-bind="visible: koShowOptions()" class="btn-group inline">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
+                    Options <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick, text: $root.getLocString('ed.generateValidJSON')"></a></li>
+                    <li data-bind="css: {active: !koGenerateValidJSON()}"><a href="#" data-bind="click:generateReadableJSONClick, text: $root.getLocString('ed.generateReadableJSON')"></a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="svd_actions">
+            <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
+        </li>
+    </ul>
 
     <div class="panel svd_content">
         <div class="row svd_survey_designer"  data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 panel panel-default svd_toolbox">
-                <div class="panel-heading">
-                    <b data-bind="text: $root.getLocString('ed.toolbox').toUpperCase()"></b>
-                </div>
                 <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                     <!-- ko foreach: questionTypes -->
                     <div class="btn btn-default" style="text-align:left; margin:1px;width:100%" draggable="true" data-bind="click: $parent.clickQuestion, event:{dragstart: function(el, e) { $parent.draggingQuestion($data, e); return true;}, dragend: function(el, e) { $parent.dragEnd(); }}">
@@ -30,20 +48,6 @@
                 </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 svd_editors">
-                <div class="svd_actions">
-                    <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
-                    <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
-                    <div data-bind="visible: koShowOptions()" class="btn-group inline">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
-                            Options <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick, text: $root.getLocString('ed.generateValidJSON')"></a></li>
-                            <li data-bind="css: {active: !koGenerateValidJSON()}"><a href="#" data-bind="click:generateReadableJSONClick, text: $root.getLocString('ed.generateReadableJSON')"></a></li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
-                </div>
                 <div class="svd_pages_editor" data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
                 <div class="svd_questions_editor" id="scrollableDiv">
                     <div id="surveyjs"></div>
