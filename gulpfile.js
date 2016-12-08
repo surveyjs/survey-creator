@@ -42,7 +42,8 @@ paths.jsFolder = paths.webroot + "js/";
 paths.testsFolder = paths.webroot + "tests/";
 paths.js = paths.jsFolder + "**/*.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
-paths.css = paths.webroot + "css/**/*.css";
+paths.webrootcss = paths.webroot + "css/";
+paths.webrootfonts = paths.webrootcss + "fonts/";
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
@@ -143,7 +144,7 @@ gulp.task('sass', function () {
     return gulp.src(paths.styles)
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(concat("surveyeditor.css"))
-        .pipe(gulp.dest(paths.webroot + 'css'))
+        .pipe(gulp.dest(paths.webrootcss))
         .pipe(gulp.dest(paths.dist + 'css'))
         .pipe(gulp.dest(paths.packageDist));
 });
@@ -151,8 +152,8 @@ gulp.task('sass', function () {
 gulp.task('fonts', function () {
     "use strict";
     return gulp.src(paths.fonts)
-        .pipe(gulp.dest(paths.webroot + 'fonts'))
-        .pipe(gulp.dest(paths.dist + 'fonts'))
+        .pipe(gulp.dest(paths.webrootfonts))
+        .pipe(gulp.dest(paths.dist + 'css/fonts'))
         .pipe(gulp.dest(paths.packageDist + '/fonts'));
 });
 
