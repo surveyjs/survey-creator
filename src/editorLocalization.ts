@@ -64,7 +64,7 @@ export var defaultStrings = {
         multipletext: "Multiple Text",
         radiogroup: "Radiogroup",
         rating: "Rating",
-        text: "Text"
+        text: "Single Input"
     },
     //Strings in Editor
     ed: {

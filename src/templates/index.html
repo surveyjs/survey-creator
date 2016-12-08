@@ -14,11 +14,28 @@
         <li class="svd_actions" data-bind="visible: koIsShowDesigner">
             <div data-bind="visible: koShowOptions()" class="btn-group inline">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
-                    Options <span class="caret"></span>
+                    Options 
+                    <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick, text: $root.getLocString('ed.generateValidJSON')"></a></li>
                     <li data-bind="css: {active: !koGenerateValidJSON()}"><a href="#" data-bind="click:generateReadableJSONClick, text: $root.getLocString('ed.generateReadableJSON')"></a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="svd_actions" data-bind="visible: koViewType() == 'test'">
+            <div class="btn-group inline">
+                <button type="button" id="surveyTestWidth" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span data-bind="text: $root.getLocString('ed.testSurveyWidth') + ' ' + $root.koTestSurveyWidth()"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="surveyTestWidth">
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '100%')">100%</a></li>
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '1200px')">1200px</a></li>
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '1000px')">1000px</a></li>
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '800px')">800px</a></li>
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '600px')">600px</a></li>
+                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '400px')">400px</a></li>
                 </ul>
             </div>
         </li>
@@ -70,14 +87,6 @@
         <div id="surveyjsJSONEditor" class="svd_json_editor" data-bind="visible: koViewType() == 'editor'"></div>
 
         <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
-            <select class="form-control" data-bind="value: koTestSurveyWidth">
-                <option value="100%" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '100%'"></option>
-                <option value="1200px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1200px'"></option>
-                <option value="1000px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '1000px'"></option>
-                <option value="800px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '800px'"></option>
-                <option value="600px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '600px'"></option>
-                <option value="400px" data-bind="text: $root.getLocString('ed.testSurveyWidth') + '400px'"></option>
-            </select>
             <div id="surveyjsExample"></div>
             <div id="surveyjsExampleResults"></div>
             <button id="surveyjsExamplereRun" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurveyAgain')" style="display:none">Test Again</button>
