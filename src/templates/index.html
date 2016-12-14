@@ -84,7 +84,9 @@
             </div>
         </div>
 
-        <div id="surveyjsJSONEditor" class="svd_json_editor" data-bind="visible: koViewType() == 'editor'"></div>
+        <div data-bind="visible: koViewType() == 'editor'">
+            <div data-bind="template: { name: 'jsoneditor', data: jsonEditor }"></div>
+        </div>
 
         <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
             <div id="surveyjsExample"></div>

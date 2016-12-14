@@ -95,7 +95,7 @@ export class SurveyTextWorker {
             startAt = at;
         }
     }
-    private getPostionByChartAt(startPosition: AceAjax.Position, startAt: number, at: number): any {
+    private getPostionByChartAt(startPosition: any, startAt: number, at: number): any {
         var result = { row: startPosition.row, column: startPosition.column };
         var curChar = startAt;
         while (curChar < at) {

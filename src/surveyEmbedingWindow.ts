@@ -4,6 +4,9 @@ export class SurveyEmbedingWindow {
     private jsonValue: any;
     private surveyEmbedingHead: AceAjax.Editor;
     private surveyEmbedingJava: AceAjax.Editor;
+    koHeadText: any;
+    koBodyText: any;
+    koJavaText: any;
     public surveyId: string = null;
     public surveyPostId: string = null;
     public generateValidJSON: boolean = false;
@@ -20,25 +23,32 @@ export class SurveyEmbedingWindow {
         this.koScriptUsing = ko.observable("bootstrap");
         this.koHasIds = ko.observable(false);
         this.koLoadSurvey = ko.observable(false);
+
+        this.koHeadText = ko.observable("");
+        this.koJavaText = ko.observable("");
+        this.koBodyText = ko.observable("");
+
         this.koVisibleHtml = ko.computed(function() { return self.koLibraryVersion() == "react" || self.koShowAsWindow() =="page"; });
-        this.koLibraryVersion.subscribe(function (newValue) { self.setHeadText(); self.surveyEmbedingJava.setValue(self.getJavaText()); });
-        this.koShowAsWindow.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
-        this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); self.surveyEmbedingJava.setValue(self.getJavaText()); });
-        this.koLoadSurvey.subscribe(function (newValue) { self.surveyEmbedingJava.setValue(self.getJavaText()); });
+        this.koLibraryVersion.subscribe(function (newValue) { self.setHeadText(); self.setJavaTest(); });
+        this.koShowAsWindow.subscribe(function (newValue) { self.setJavaTest(); });
+        this.koScriptUsing.subscribe(function (newValue) { self.setHeadText(); self.setJavaTest(); });
+        this.koLoadSurvey.subscribe(function (newValue) { self.setJavaTest(); });
         this.surveyEmbedingHead = null;
     }
     public get json(): any { return this.jsonValue; }
     public set json(value: any) { this.jsonValue = value; }
+    public get hasAceEditor(): boolean { return typeof ace !== "undefined"; }
     public show() {
-        if (this.surveyEmbedingHead == null) {
+        var bodyEditor = null;
+        if (this.hasAceEditor && this.surveyEmbedingHead == null) {
             this.surveyEmbedingHead = this.createEditor("surveyEmbedingHead");
-            this.setHeadText();
-            var bodyEditor = this.createEditor("surveyEmbedingBody");
-            bodyEditor.setValue("<div id= \"mySurveyJSName\" ></div>");
+            bodyEditor = this.createEditor("surveyEmbedingBody");
             this.surveyEmbedingJava = this.createEditor("surveyEmbedingJava");
         }
         this.koHasIds(this.surveyId && this.surveyPostId);
-        this.surveyEmbedingJava.setValue(this.getJavaText());
+        this.setTextToEditor(bodyEditor, this.koBodyText, "<div id= \"mySurveyJSName\" ></div>");
+        this.setHeadText();
+        this.setJavaTest();
     }
     private setHeadText() {
         var str = "";
@@ -51,7 +61,10 @@ export class SurveyEmbedingWindow {
         if (this.koScriptUsing() != "bootstrap") {
             str += "\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
         }
-        this.surveyEmbedingHead.setValue(str);
+        this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, str);
+    }
+    private setJavaTest() {
+        this.setTextToEditor(this.surveyEmbedingJava, this.koJavaText, this.getJavaText());
     }
     private createEditor(elementName: string): AceAjax.Editor {
         var editor = ace.edit(elementName);
@@ -108,5 +121,9 @@ export class SurveyEmbedingWindow {
         }
         if (this.generateValidJSON) return JSON.stringify(this.json);
         return new SurveyJSON5().stringify(this.json);
+    }
+    private setTextToEditor(editor: AceAjax.Editor, koText: any, text: string) {
+        if (editor) editor.setValue(text);
+        if (koText) koText(text);
     }
 }

@@ -4,7 +4,8 @@ import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
 import {SurveyVerbs} from "./objectVerbs";
-import {SurveyTextWorker} from "./textWorker";
+import {SurveyJSONEditor} from "./surveyJSONEditor";
+import {SurveyTextWorker} from "./textWorker"
 import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";
 import {SurveyHelper, ObjType} from "./surveyHelper";
 import {DragDropHelper} from "./dragdrophelper";
@@ -15,20 +16,17 @@ import {html as templateQuestionHtml} from "./template_question.html";
 import * as Survey from "survey-knockout";
 
 export class SurveyEditor {
-    public static updateTextTimeout: number = 1000;
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
     private renderedElement: HTMLElement;
     private surveyjs: HTMLElement;
     private surveyjsExample: HTMLElement;
 
-    private jsonEditor: AceAjax.Editor;
-    private isProcessingImmediately: boolean;
+    private jsonEditor: SurveyJSONEditor;
     private selectedObjectEditor: SurveyObjectEditor;
     private pagesEditor: SurveyPagesEditor;
     private surveyEmbeding: SurveyEmbedingWindow;
     private surveyObjects: SurveyObjects;
     private surveyVerbs: SurveyVerbs;
-    private textWorker: SurveyTextWorker;
     private undoRedo: SurveyUndoRedo;
     private surveyValue: Survey.Survey;
     private saveSurveyFuncValue: (no: number, onSaveCallback: (no: number, isSuccess: boolean) => void) => void;
@@ -115,6 +113,8 @@ export class SurveyEditor {
         this.doUndoClick = function () { self.doUndoRedo(self.undoRedo.undo()); };
         this.doRedoClick = function () { self.doUndoRedo(self.undoRedo.redo()); };
 
+        this.jsonEditor = new SurveyJSONEditor();
+
         if (renderedElement) {
             this.render(renderedElement);
         }
@@ -145,12 +145,12 @@ export class SurveyEditor {
     }
     public get text() {
         if (this.koIsShowDesigner()) return this.getSurveyTextFromDesigner();
-        return this.jsonEditor != null ? this.jsonEditor.getValue() : "";
+        return this.jsonEditor.text;
     }
     public set text(value: string) {
-        this.textWorker = new SurveyTextWorker(value);
-        if (this.textWorker.isJsonCorrect) {
-            this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
+        var textWorker = new SurveyTextWorker(value);
+        if (textWorker.isJsonCorrect) {
+            this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
             this.showDesigner();
             this.setUndoRedoCurrentState(true);
         } else {
@@ -198,13 +198,7 @@ export class SurveyEditor {
     public get showOptions() { return this.koShowOptions(); }
     public set showOptions(value: boolean) { this.koShowOptions(value); }
     private setTextValue(value: string) {
-        this.isProcessingImmediately = true;
-        if (this.jsonEditor) {
-            this.jsonEditor.setValue(value);
-            this.jsonEditor.renderer.updateFull(true);
-        }
-        this.processJson(value);
-        this.isProcessingImmediately = false;
+        this.jsonEditor.text = value;
     }
     public addPage() {
         var name = SurveyHelper.getNewPageName(this.survey.pages);
@@ -277,12 +271,12 @@ export class SurveyEditor {
     }
     private canSwitchViewType(newType: string): boolean {
         if (newType && this.koViewType() == newType) return false;
-        if (this.koViewType() != "editor" || !this.textWorker) return true;
-        if (!this.textWorker.isJsonCorrect) {
+        if (this.koViewType() != "editor") return true;
+        if (!this.jsonEditor.isJsonCorrect) {
             alert(this.getLocString("ed.correctJSON"));
             return false;
         }
-        this.initSurvey(new Survey.JsonObject().toJsonObject(this.textWorker.survey));
+        this.initSurvey(new Survey.JsonObject().toJsonObject(this.jsonEditor.survey));
         return true;
     }
     private showDesigner() {
@@ -291,8 +285,7 @@ export class SurveyEditor {
     }
     private showJsonEditor() {
         if (this.koViewType() == "editor") return;
-        this.jsonEditor.setValue(this.getSurveyTextFromDesigner());
-        this.jsonEditor.focus();
+        this.jsonEditor.show(this.getSurveyTextFromDesigner());
         this.koViewType("editor");
     }
     private showTestSurvey() {
@@ -343,7 +336,6 @@ export class SurveyEditor {
                 }
             };
         }
-        this.jsonEditor = ace.edit("surveyjsJSONEditor");
         this.surveyjsExample = document.getElementById("surveyjsExample");
 
         this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
@@ -351,18 +343,7 @@ export class SurveyEditor {
         this.surveyValue.mode = "designer";
         this.surveyValue.render(this.surveyjs);
 
-        this.initJsonEditor();
-        SurveyTextWorker.newLineChar = this.jsonEditor.session.doc.getNewLineCharacter();
-    }
-    private initJsonEditor() {
-        var self = this;
-        this.jsonEditor.setTheme("ace/theme/monokai");
-        this.jsonEditor.session.setMode("ace/mode/json");
-        this.jsonEditor.setShowPrintMargin(false);
-        this.jsonEditor.getSession().on("change", function () {
-            self.onJsonEditorChanged();
-        });
-        this.jsonEditor.getSession().setUseWorker(true);
+        this.jsonEditor.init();
     }
     private initSurvey(json: any) {
         var self = this;
@@ -394,27 +375,6 @@ export class SurveyEditor {
             html = html.replace(scriptRegEx, "");
         }
         return html;
-    }
-    private timeoutId: number = -1;
-    private onJsonEditorChanged(): any {
-        if (this.timeoutId > -1) {
-            clearTimeout(this.timeoutId);
-        }
-        if (this.isProcessingImmediately) {
-            this.timeoutId = -1;
-        } else {
-            var self = this;
-            this.timeoutId = setTimeout(function () {
-                self.timeoutId = -1;
-                self.processJson(self.text);
-            }, SurveyEditor.updateTextTimeout);
-        }
-    }
-    private processJson(text: string): any {
-        this.textWorker = new SurveyTextWorker(text);
-        if (this.jsonEditor) {
-            this.jsonEditor.getSession().setAnnotations(this.createAnnotations(text, this.textWorker.errors));
-        }
     }
     private doDraggingQuestion(questionType: any, e) {
         this.dragDropHelper.startDragNewQuestion(e, questionType, this.getNewQuestionName());
@@ -537,8 +497,8 @@ export class SurveyEditor {
         this.surveyEmbeding.show();
     }
     private getSurveyJSON(): any {
-        if (this.koIsShowDesigner())  return new Survey.JsonObject().toJsonObject(this.survey);
-        if (this.textWorker.isJsonCorrect) return new Survey.JsonObject().toJsonObject(this.textWorker.survey);
+        if (this.koIsShowDesigner()) return new Survey.JsonObject().toJsonObject(this.survey);
+        if (this.jsonEditor.isJsonCorrect) return new Survey.JsonObject().toJsonObject(this.jsonEditor.survey);
         return null;
     }
     private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {

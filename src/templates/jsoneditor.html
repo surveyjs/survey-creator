@@ -1,0 +1,11 @@
+﻿<script type="text/html" id="jsoneditor">
+    <div data-bind="visible: !hasAceEditor">
+        <textarea class="svd_json_editor_area" data-bind="textInput:koText"></textarea>
+        <!-- ko foreach: koErrors -->
+        <div>
+            <span>Error: </span><span data-bind="text: text"></span>
+        </div>
+        <!-- /ko  -->
+    </div>
+    <div id="surveyjsJSONEditor" class="svd_json_editor"></div>
+</script>

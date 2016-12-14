@@ -19,14 +19,23 @@
     </div>
     <div class="panel">
         <div class="panel-heading" data-bind="text: $root.getLocString('ew.titleScript')"></div>
-        <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
+        <div data-bind="visible:hasAceEditor">
+            <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
+        </div>
+        <textarea data-bind="visible:!hasAceEditor, text: koHeadText" style="height:70px;width:100%"></textarea>
     </div>
     <div class="panel" data-bind="visible: koVisibleHtml">
         <div class="panel-heading"  data-bind="text: $root.getLocString('ew.titleHtml')"></div>
-        <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
+        <div data-bind="visible:hasAceEditor">
+            <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
+        </div>
+        <textarea data-bind="visible:!hasAceEditor, text: koBodyText" style="height:30px;width:100%"></textarea>
     </div>
     <div class="panel">
         <div class="panel-heading"  data-bind="text: $root.getLocString('ew.titleJavaScript')"></div>
-        <div id="surveyEmbedingJava" style="height:300px;width:100%"></div>
+        <div data-bind="visible:hasAceEditor">
+            <div id="surveyEmbedingJava" style="height:300px;width:100%"></div>
+        </div>
+        <textarea data-bind="visible:!hasAceEditor, text: koJavaText" style="height:300px;width:100%"></textarea>
     </div>
 </script>
