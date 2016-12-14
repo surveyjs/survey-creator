@@ -1,0 +1,4 @@
+.git/*
+_site/*
+.idea
+node_modules/*

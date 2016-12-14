@@ -1,0 +1,21 @@
+{% assign current = page.url | downcase | split: '/' %}
+<nav class="navbar navbar-default survey-gray survey-navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="btn btn-lg btn-primary main-btn" href="{{ site.baseurl }}/index.html"></a>
+            <a class="version-link" role="button" href="https://github.com/andrewtelnov/surveyjs.editor/releases" target="_blank">
+                the latest version 0.10.2
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li {% if current[1] == 'examples' or current[1] =='builder'%}class=''{% else %}class='active'{% endif %}><a rel="home" href="{{ site.baseurl }}/index.html" >Home</a></li>
+            <li {% if current[1] == 'examples' %}class='active'{% endif %}><a rel="examples" href="{{ site.baseurl }}/examples/">Examples</a></li>
+            <li {% if current[1] == 'builder' %}class='active'{% endif %}><a rel="builder" href="{{ site.baseurl }}/license.html">Licenses</a></li>
+            <li><a href="http://github.com/andrewtelnov/surveyjs.editor" target="_blank">Source</a></li>
+            <li><a href="https://github.com/andrewtelnov/surveyjs.editor/issues" target="_blank">Issues</a></li>
+        </ul>
+    </div>
+</nav>
