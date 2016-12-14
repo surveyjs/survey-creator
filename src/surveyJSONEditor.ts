@@ -19,10 +19,8 @@ export class SurveyJSONEditor {
         });
     }
     public init() {
-        if (!this.hasAceEditor) {
-            this.aceEditor = typeof ace !== "undefined" ? ace.edit("surveyjsJSONEditor") : null;
-        }
         if (!this.hasAceEditor) return;
+        this.aceEditor = ace.edit("surveyjsJSONEditor");
         var self = this;
         this.aceEditor.setTheme("ace/theme/monokai");
         this.aceEditor.session.setMode("ace/mode/json");
@@ -33,7 +31,7 @@ export class SurveyJSONEditor {
         this.aceEditor.getSession().setUseWorker(true);
         SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
     }
-    public get hasAceEditor(): boolean { return this.aceEditor != null; }
+    public get hasAceEditor(): boolean { return typeof ace !== "undefined"; }
     public get text(): string {
         if (!this.hasAceEditor) return this.koText();
         return this.aceEditor.getValue();

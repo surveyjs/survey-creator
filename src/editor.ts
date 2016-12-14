@@ -33,6 +33,9 @@ export class SurveyEditor {
     private options: any;
     private stateValue: string = "";
     private dragDropHelper: DragDropHelper = null;
+    private showJSONEditorTabValue: boolean;
+    private showTestSurveyTabValue: boolean;
+    private showEmbededSurveyTabValue: boolean;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
@@ -64,11 +67,15 @@ export class SurveyEditor {
         this.koCopiedQuestions = ko.observableArray();
         this.koCanDeleteObject = ko.observable(false);
 
+        this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
+        this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
+        this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
+        this.koShowOptions = ko.observable(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
+        
         var self = this;
 
         this.koState = ko.observable();
         this.koShowSaveButton = ko.observable(false);
-        this.koShowOptions = ko.observable(false);
         this.koTestSurveyWidth = ko.observable("100%");
         this.saveButtonClick = function () { self.doSave(); };
         this.koObjects = ko.observableArray();
@@ -197,6 +204,13 @@ export class SurveyEditor {
     }
     public get showOptions() { return this.koShowOptions(); }
     public set showOptions(value: boolean) { this.koShowOptions(value); }
+    public get showJSONEditorTab() { return this.showJSONEditorTabValue; }
+    public set showJSONEditorTab(value: boolean) { this.showJSONEditorTabValue = value; }
+    public get showTestSurveyTab() { return this.showTestSurveyTabValue; }
+    public set showTestSurveyTab(value: boolean) { this.showTestSurveyTabValue = value; }
+    public get showEmbededSurveyTab() { return this.showEmbededSurveyTabValue; }
+    public set showEmbededSurveyTab(value: boolean) { this.showEmbededSurveyTabValue = value; }
+
     private setTextValue(value: string) {
         this.jsonEditor.text = value;
     }

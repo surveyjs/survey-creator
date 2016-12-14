@@ -1,9 +1,9 @@
 ﻿<div class="svd_container">
     <ul class="navbar-default container-fluid nav nav-tabs svd_menu">
         <li data-bind="css: {active: koViewType() == 'designer'}"><a href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
-        <li data-bind="css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
-        <li data-bind="css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
-        <li data-bind="css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
+        <li data-bind="visible: showJSONEditorTab, css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
+        <li data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
+        <li data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
 
         <li class="svd_actions" data-bind="visible: koIsShowDesigner">
             <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
