@@ -62,16 +62,13 @@ export class SurveyEditor {
     dragEnd: any;
 
     constructor(renderedElement: any = null, options: any = null) {
-        this.options = options;
-        this.questionTypes = this.getQuestionTypes();
+
+        this.koShowOptions = ko.observable();
+        this.koGenerateValidJSON = ko.observable();
+        this.setOptions(options);
         this.koCopiedQuestions = ko.observableArray();
         this.koCanDeleteObject = ko.observable(false);
 
-        this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
-        this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
-        this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
-        this.koShowOptions = ko.observable(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
-        
         var self = this;
 
         this.koState = ko.observable();
@@ -81,7 +78,6 @@ export class SurveyEditor {
         this.koObjects = ko.observableArray();
         this.koSelectedObject = ko.observable();
         this.koSelectedObject.subscribe(function (newValue) { self.selectedObjectChanged(newValue != null ? newValue.value : null); });
-        this.koGenerateValidJSON = ko.observable(this.options && this.options.generateValidJSON);
         this.koGenerateValidJSON.subscribe(function (newValue) {
             if (!self.options) self.options = {};
             self.options.generateValidJSON = newValue;
@@ -126,10 +122,21 @@ export class SurveyEditor {
             this.render(renderedElement);
         }
     }
+    protected setOptions(options: any) {
+        this.options = options;
+        this.questionTypes = this.getQuestionTypes();
+        this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
+        this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
+        this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
+        this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
+        this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
+        if (this.selectedObjectEditor) this.selectedObjectEditor.setOptions(options);
+    }
     public get survey(): Survey.Survey {
         return this.surveyValue;
     }
-    public render(element: any = null) {
+    public render(element: any = null, options: any = null) {
+        if (options) this.setOptions(options);
         var self = this;
         if (element && typeof element == "string") {
             element = document.getElementById(element);

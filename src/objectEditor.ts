@@ -11,7 +11,7 @@ export class SurveyObjectEditor {
     public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
 
     constructor(propertyEditorOptions: any = null) {
-        this.propertyEditorOptions = propertyEditorOptions;
+        this.setOptions(propertyEditorOptions);
         this.koProperties = ko.observableArray();
         this.koActiveProperty = ko.observable();
         this.koHasObject = ko.observable();
@@ -23,6 +23,9 @@ export class SurveyObjectEditor {
         this.selectedObjectValue = value;
         this.updateProperties();
         this.updatePropertiesObject();
+    }
+    public setOptions(propertyEditorOptions: any) {
+        this.propertyEditorOptions = propertyEditorOptions;
     }
     public getPropertyEditor(name: string) {
         var properties = this.koProperties();

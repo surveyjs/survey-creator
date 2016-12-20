@@ -11,8 +11,8 @@
         <li class="svd_actions" data-bind="visible: koIsShowDesigner">
             <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
         </li>
-        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
-            <div data-bind="visible: koShowOptions()" class="btn-group inline">
+        <li class="svd_actions" data-bind="visible: (koIsShowDesigner() && koShowOptions())">
+            <div class="btn-group inline">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
                     Options 
                     <span class="caret"></span>
