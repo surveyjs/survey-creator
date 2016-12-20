@@ -1,0 +1,36 @@
+<div class="propertyitem">
+    <p>
+    The list of used questions:</p>
+    <textarea id="usedQuestionList" cols="15" rows="5">text
+checkbox
+radiogroup
+dropdown</textarea>
+</p>
+<button class="btn btn-primary" onclick="applyQuestionList()">Apply</button>        
+       <pre><code class="language-javascript">editorOptions.questionTypes  = [yourArrayOfQuestionNames];
+editor.render(null, editorOptions);</code></pre>
+    
+    The list of available questions: </p>
+    <textarea id="fullQuestionList" cols="15" rows="10"></textarea>
+    </p>
+</div>
+
+<script>
+function applyQuestionList() {
+    var qList = document.getElementById('usedQuestionList');
+    var questions = qList.value.split(/\n/);
+    editorOptions.questionTypes  = questions;
+    editor.render(null, editorOptions);
+}
+function fillQuestionList() {
+    var qList = document.getElementById('fullQuestionList');
+    var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+    var str = "";
+    var newline = String.fromCharCode(13, 10);
+    for(var i = 0; i < allTypes.length; i ++) {
+        str += allTypes[i] + newline;
+    }
+    qList.value = str;
+}
+fillQuestionList();
+</script>

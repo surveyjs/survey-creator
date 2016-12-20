@@ -1,0 +1,18 @@
+<div class="propertyitem">
+    <p>
+        <h5>Change tabs visibility using editorOptions</h5>
+        <p>
+        JSON tab, options.showJSONEditorTab: <input type="checkbox" checked="true" onChange="editorOptions.showJSONEditorTab = this.checked; editor.render(null, editorOptions);"/>
+        </p
+        <p>
+        Test Survey tab, options.showJSONEditorTab: <input type="checkbox" checked="true" onChange="editorOptions.showTestSurveyTab = this.checked; editor.render(null, editorOptions);"/>
+        </p>
+        <p>
+        Embeded Survey tab, options.showEmbededSurveyTabValue: <input type="checkbox" onChange="editorOptions.showEmbededSurveyTab = this.checked; editor.render(null, editorOptions);"/>
+        </p>
+        <pre><code class="language-javascript">editorOptions.showJSONEditorTab = yourJSONTabValue;
+editorOptions.showTestSurveyTab = yourTestSurveyValue;
+editorOptions.showEmbededSurveyTab = yourEmbededSurveyValue;
+editor.render(null, editorOptions);</code></pre>
+    </p>
+</div>

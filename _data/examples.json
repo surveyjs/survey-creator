@@ -1,0 +1,16 @@
+{
+    "categories" : [
+         { "name" : "Customization", "id": "customization",
+           "items": [
+                { "name": "Show/Hide Tabs", "text" : "Use options to customize the editor", "url": "options.html"},
+                { "name": "Remove Questions", "text" : "Use options to limit supported questions", "url": "removequestions.html"},
+                { "name": "Add properties", "text" : "Add a new property", "url": "removeproperties.html"},
+                { "name": "Remove properties", "text" : "Use an event to remove properties", "url": "removeproperties.html"}
+            ]},
+            { "name": "Load/Save Surveys", "id": "load-save",
+              "items": [
+                {"name": "Load Survey from Service", "text": "Run survey one time in a browser", "url": "loadfromservice.html"},
+                {"name": "Set survey directly","text":  "Set the survey into Editor directly", "url": "setsurvey.html"}
+            ]}
+        ]
+}        
