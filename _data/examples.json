@@ -4,13 +4,13 @@
            "items": [
                 { "name": "Show/Hide Tabs", "text" : "Use options to customize the editor", "url": "options.html"},
                 { "name": "Remove Questions", "text" : "Use options to limit supported questions", "url": "removequestions.html"},
-                { "name": "Add properties", "text" : "Add a new property", "url": "removeproperties.html"},
-                { "name": "Remove properties", "text" : "Use an event to remove properties", "url": "removeproperties.html"}
+                { "name": "Add properties", "text" : "Add a new property to any object", "url": "addproperties.html"},
+                { "name": "Remove properties", "text" : "Remove a property explicity or use an event", "url": "removeproperties.html"}
             ]},
             { "name": "Load/Save Surveys", "id": "load-save",
               "items": [
-                {"name": "Load Survey from Service", "text": "Run survey one time in a browser", "url": "loadfromservice.html"},
-                {"name": "Set survey directly","text":  "Set the survey into Editor directly", "url": "setsurvey.html"}
+                {"name": "Set and save survey","text":  "Show how to set and save a survey", "url": "setsurvey.html"},
+                {"name": "Load Survey from Service", "text": "Load a survey from the service", "url": "loadfromservice.html"}
             ]}
         ]
 }        
