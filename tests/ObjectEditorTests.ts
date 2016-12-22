@@ -1,5 +1,6 @@
 ﻿import {SurveyObjectEditor} from "../src/objectEditor";
 import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
+import * as Survey from "survey-knockout";
 
 QUnit.module("objectEditorTests");
 
@@ -63,4 +64,12 @@ QUnit.test("Use metadata getPropertyValue function", function (assert) {
 
     editor.koActiveProperty().koValue("newName");
     assert.equal(property.koText(), "test", "use the real value to get value");
+});
+QUnit.test("Use onCanShowPropertyCallback", function (assert) {
+    var editor = new SurveyObjectEditor();
+    editor.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
+        return property.name == "title"; }
+    var car = new TruckDefaultValue();
+    editor.selectedObject = car;
+    assert.equal(editor.koProperties().length, 1, "Only one property is accepted");
 });

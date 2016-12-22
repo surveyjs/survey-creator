@@ -43,6 +43,7 @@ export class SurveyEditor {
     public koCopiedQuestions: any;
     public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
     public alwaySaveTextInPropertyEditors: boolean = false;
+    public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
 
     koIsShowDesigner: any;
     koViewType: any;
@@ -89,6 +90,9 @@ export class SurveyEditor {
         this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
 
         this.selectedObjectEditor = new SurveyObjectEditor(this.options);
+        this.selectedObjectEditor.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
+            return self.onCanShowObjectProperty(object, property);
+        }
         this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
             self.onPropertyValueChanged(options.property, options.object, options.newValue);
         });
@@ -217,6 +221,12 @@ export class SurveyEditor {
     public set showTestSurveyTab(value: boolean) { this.showTestSurveyTabValue = value; }
     public get showEmbededSurveyTab() { return this.showEmbededSurveyTabValue; }
     public set showEmbededSurveyTab(value: boolean) { this.showEmbededSurveyTabValue = value; }
+
+    protected onCanShowObjectProperty(object: any, property: Survey.JsonObjectProperty): boolean {
+        var options = { obj: object, property: property, canShow: true };
+        this.onCanShowProperty.fire(this, options);
+        return options.canShow;
+    }
 
     private setTextValue(value: string) {
         this.jsonEditor.text = value;

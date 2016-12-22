@@ -9,6 +9,7 @@ export class SurveyObjectEditor {
     public koActiveProperty: any;
     public koHasObject: any;
     public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
+    public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean;
 
     constructor(propertyEditorOptions: any = null) {
         this.setOptions(propertyEditorOptions);
@@ -73,6 +74,7 @@ export class SurveyObjectEditor {
     protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
         var name = property.name;
         if (name == 'questions' || name == 'pages') return false;
+        if (this.onCanShowPropertyCallback) return this.onCanShowPropertyCallback(this.selectedObject, property);
         return true;
     }
     protected updatePropertiesObject() {

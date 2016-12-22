@@ -10,7 +10,8 @@
   ],
   "homepage": "https://surveyjs.org/builder/",
   "files": [
-    "dist/"
+    "dist/",
+    "js/"
   ],
   "main": "./js/surveyeditor.min.js",
   "repository": {
