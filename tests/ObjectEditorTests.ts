@@ -9,12 +9,12 @@ QUnit.test("Created properties on set selected Object", function (assert) {
     assert.equal(editor.koProperties().length, 0, "No properties for null object");
 
     editor.selectedObject = new BigCar();
-    assert.equal(editor.koProperties().length, 1, "One property object");
+    assert.equal(editor.koProperties().length, 2, "One property object");
     assert.equal(editor.koProperties()[0].name, "name", "name property");
     assert.equal(editor.koProperties()[0].editorType, "string", "It is a text editor");
 
     editor.selectedObject = new Truck();
-    assert.equal(editor.koProperties().length, 2, "Two property object");
+    assert.equal(editor.koProperties().length, 3, "Two property object");
     assert.equal(editor.koProperties()[0].name, "maxWeight", "maxWeight property");
     assert.equal(editor.koProperties()[1].name, "name", "name property");
 });
@@ -58,12 +58,23 @@ QUnit.test("On property changed", function (assert) {
 QUnit.test("Use metadata getPropertyValue function", function (assert) {
     var editor = new SurveyObjectEditor();
     var car = new TruckDefaultValue();
-    car.title = "test";
+    car.truckTitle = "test";
     editor.selectedObject = car;
-    var property = editor.getPropertyEditor("title");
+    var property = editor.getPropertyEditor("truckTitle");
 
     editor.koActiveProperty().koValue("newName");
     assert.equal(property.koText(), "test", "use the real value to get value");
+});
+QUnit.test("Fix the bug with title property, https://github.com/andrewtelnov/surveyjs.editor/issues/33", function (assert) {
+    var editor = new SurveyObjectEditor();
+    var car = new BigCar();
+    car.name = "name1";
+    editor.onPropertyValueChanged.add((sender, options) => { car[options.property.name] = options.newValue; });
+    editor.selectedObject = car;
+    var property = editor.getPropertyEditor("title");
+    property.koValue("name1");
+    assert.equal(property.koText(), "name1", "the property has been set in the editor");
+    assert.equal(car["titleValue"], "name1", "the property has been actually set into the object");
 });
 QUnit.test("Use onCanShowPropertyCallback", function (assert) {
     var editor = new SurveyObjectEditor();

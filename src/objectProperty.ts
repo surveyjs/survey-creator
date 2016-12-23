@@ -66,7 +66,7 @@ export class SurveyObjectProperty {
             this.updateEditorData(newValue);
         }
         if (this.object == null) return;
-        if (this.object[this.name] == newValue) return;
+        if (this.getValue() == newValue) return;
         if (this.onPropertyChanged != null && !this.isValueUpdating) this.onPropertyChanged(this, newValue);
     }
     private updateEditorData(newValue: any) {
