@@ -1,6 +1,7 @@
 ﻿<div class="svd_question" style="vertical-align:top" data-bind="style: {display: question.koVisible()|| $root.isDesignMode ? 'inline-block': 'none', marginLeft: question.koMarginLeft, paddingRight: question.koPaddingRight, width: question.koRenderWidth },
      attr : {id: id, draggable: $root.isDesignMode}, click: $root.isDesignMode ? koOnClick: null, 
          event:{
+           keydown: function(el, e) { if(e.witch == 46) $root.deleteCurrentObjectClick(); },
            dragstart:function(el, e){ dragStart(e); return true; },
            dragover:function(el, e){ if(!question.isDragging) dragOver(e);},
            dragend:function(el, e){ dragEnd(e);},
@@ -37,6 +38,9 @@
             </li>
             <li>
                 <button class="btn btn-primary btn-xs" data-bind="click: $root.fastCopyQuestionClick, text:$root.getEditorLocString('survey.copy')"></button>
+            </li>
+            <li>
+                <button class="btn btn-primary btn-xs" data-bind="click: $root.deleteCurrentObjectClick, text:$root.getEditorLocString('survey.deleteQuestion')"></button>
             </li>
         </ul>
     </div>

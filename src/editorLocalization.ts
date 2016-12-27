@@ -49,7 +49,8 @@ export var defaultStrings = {
     survey: {
         dropQuestion: "Please drop a question here.",
         copy: "Copy",
-        addToToolbox: "Add to toolbox"
+        addToToolbox: "Add to toolbox",
+        deleteQuestion: "Delete Question"
     },
     //questionTypes
     qt: {

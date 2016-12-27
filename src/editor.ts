@@ -394,6 +394,7 @@ export class SurveyEditor {
         this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
         this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.copyQuestion(self.koSelectedObject().value); });
         this.surveyValue["onFastCopyQuestion"].add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
+        this.surveyValue["onDeleteCurrentObject"].add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
         this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
@@ -552,9 +553,11 @@ Survey.Survey.prototype["onCreating"] = function () {
     this.onSelectedQuestionChanged = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onFastCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+    this.onDeleteCurrentObject = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     var self = this;
     this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
-    this.fastCopyQuestionClick = function (question) { self.onFastCopyQuestion.fire(self/*, question*/); };
+    this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self); };
+    this.deleteCurrentObjectClick = function () { self.onDeleteCurrentObject.fire(self); }
     this.koDraggingSource = ko.observable(null);
 };
 Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.QuestionBase) {
