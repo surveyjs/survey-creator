@@ -10,23 +10,8 @@ Install the library using npm.
 npm install surveyjs-editor
 ```
 
-#Example of using
-```
-<div id="surveyjseditor"></div>
-<script type="text/javascript">
-	var options = {};
-	//surveyjseditor - element id or html element where editor will be rendered
-	//options is an optional parameter.
-	//options.generateValidJSON = true; //generate the valid JSON. By It is false by default and JSON5 is used.
-	//options.questionTypes = ["text", "checkbox"]; Use it to limit the question types supported by the editor. By default it is empty and all available question types are used.
-	var editor = new SurveyEditor.SurveyEditor("surveyjseditor", options);
-	//set the survey json
-	editor.text = JSON.stringify({pages:[questions:[{ name: "rateme", type: "rating" }]]});
-	// setting saveSurveyFunc will make visible the save button
-	// use it to save the survey json as text in your database
-	editor.saveSurveyFunc = function() { var myJSONText = editor.text; };
-</script>
-```
+To learn how to include the visual editor on your page and explore examples of using, please go to [editor.surveyjs.io](editor.surveyjs.io) web site
+
 See the visual editor in [action](http://surveyjs.org/builder/).
 
 ##Building surveyjs Editor from sources
