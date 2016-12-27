@@ -10,7 +10,7 @@ Install the library using npm.
 npm install surveyjs-editor
 ```
 
-To learn how to include the visual editor on your page and explore examples of using, please go to [editor.surveyjs.io](editor.surveyjs.io) web site
+To learn how to include the visual editor on your page and explore examples of using, please go to [editor.surveyjs.io](http://editor.surveyjs.io) web site
 
 See the visual editor in [action](http://surveyjs.org/builder/).
 
