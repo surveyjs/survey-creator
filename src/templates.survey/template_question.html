@@ -1,7 +1,7 @@
 ﻿<div class="svd_question" style="vertical-align:top" data-bind="style: {display: question.koVisible()|| $root.isDesignMode ? 'inline-block': 'none', marginLeft: question.koMarginLeft, paddingRight: question.koPaddingRight, width: question.koRenderWidth },
      attr : {id: id, draggable: $root.isDesignMode}, click: $root.isDesignMode ? koOnClick: null, 
          event:{
-           keydown: function(el, e) { if(e.witch == 46) $root.deleteCurrentObjectClick(); },
+           keydown: function(el, e) { if(e.witch == 46) $root.deleteCurrentObjectClick(); return true; },
            dragstart:function(el, e){ dragStart(e); return true; },
            dragover:function(el, e){ if(!question.isDragging) dragOver(e);},
            dragend:function(el, e){ dragEnd(e);},
