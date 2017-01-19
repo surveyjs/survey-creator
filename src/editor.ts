@@ -373,7 +373,7 @@ export class SurveyEditor {
         this.setUndoRedoCurrentState(true);
         this.surveyValue.mode = "designer";
         //TODO remove the line above and call the method directly.
-        this.surveyValue["setDesignMode"](true);
+        if (this.surveyValue["setDesignMode"]) this.surveyValue["setDesignMode"](true);
         this.surveyValue.render(this.surveyjs);
 
         this.jsonEditor.init();
@@ -389,7 +389,7 @@ export class SurveyEditor {
         }
         this.survey.mode = "designer";
         //TODO remove the line above and call the method directly.
-        this.survey["setDesignMode"](true);
+        if (this.survey["setDesignMode"]) this.survey["setDesignMode"](true);
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
