@@ -11,9 +11,10 @@
             <li></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li {% if current[1] == 'examples' or current[1] =='license.html'%}class=''{% else %}class='active'{% endif %}><a rel="home" href="{{ site.baseurl }}/index.html" >Home</a></li>
+            <li {% if current[1] == 'examples' or current[1] =='license.html' or current[1] =='contact.html'%}class=''{% else %}class='active'{% endif %}><a rel="home" href="{{ site.baseurl }}/index.html" >Home</a></li>
             <li {% if current[1] == 'examples' %}class='active'{% endif %}><a rel="examples" href="{{ site.baseurl }}/examples/">Examples</a></li>
             <li {% if current[1] == 'license.html' %}class='active'{% endif %}><a rel="license" href="{{ site.baseurl }}/license.html">Licenses</a></li>
+            <li {% if current[1] == 'contact.html' %}class='active'{% endif %}><a rel="license" href="{{ site.baseurl }}/contact.html">Contact</a></li>
             <li><a href="http://github.com/andrewtelnov/surveyjs.editor" target="_blank">Source</a></li>
             <li><a href="https://github.com/andrewtelnov/surveyjs.editor/issues" target="_blank">Issues</a></li>
         </ul>
