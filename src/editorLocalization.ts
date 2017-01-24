@@ -142,6 +142,8 @@ export var defaultStrings = {
     },
     //Embed window
     ew: {
+        angular: "Use Angular version",
+        jquery: "Use jQuery version",
         knockout: "Use Knockout version",
         react: "Use React version",
         bootstrap: "For bootstrap framework",
