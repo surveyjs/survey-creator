@@ -20,16 +20,15 @@ var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 
 <h2>Specification for property definition</h2>
 <h4>Short definition</h4>
-<div>
-“propertyName[:propertyType]”
-</div>
+<pre><code class="language-javascript">"propertyName[:propertyType]"</code></pre>
 <h4>Full definition</h4>
-<div>
-{<b>name</b>: “propertyName[:propertyType]” [, <b>default</b>: defaultValue][, <b>choices</b>: Array of values][, <b>onGetValue</b>: function (obj) { return yourValueFromObject; }][,<b>onSetValue</b>: function (obj: any, value: any) {/*perform an action on setting value */ }]}
-</div>
+<pre><code class="language-javascript">{name: "propertyName[:propertyType]" [, default: defaultValue][, choices: Array of values]
+[, onGetValue: function (obj) { return yourValueFromObject; }]
+[, onSetValue: function (obj: any, value: any) {/*perform an action on setting value */ }]}</code></pre>
 <p>
 <h4>propertyName</h4>
-<div>A property name. If a property name begins with ‘!’, it means the property is required. If the property is not set, the json parser will raise an error. For example, “name” and “type” properties of the questions is required: {name: “!type”} – it means that string property “type" is required.</div>
+<div>A property name. If a property name begins with ‘!’, it means the property is required. If the property is not set, the json parser will raise an error.
+For example, "name" and "type" properties of the question object are required: "!type" – it means that string property "type" is required.</div>
 </p>
 <p>
 <h4>propertyType</h4>
@@ -46,6 +45,7 @@ It is an optional attribute. If the value is not set than the library treats it 
 <li><i>triggers</i> – survey triggers property has this type.</li>
 <li><i>validators</i> – question validators property has this type.</li>
 </ul>
+You are able to introduce your own type and register a new property editor for this new type.
 </p>
 <p>
 <h4>default</h4>
