@@ -18,7 +18,7 @@ var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 
 {% include live-example-code.html %}
 
-<h2>Specification for property definition</h2>
+<h2>Property definition specification</h2>
 <h4>Short definition</h4>
 <pre><code class="language-javascript">"propertyName[:propertyType]"</code></pre>
 <h4>Full definition</h4>
