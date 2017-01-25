@@ -32,7 +32,7 @@ For example, "name" and "type" properties of the question object are required: "
 </p>
 <p>
 <h4>propertyType</h4>
-It is an optional attribute. If the value is not set than the library treats it as a string property.
+It is an optional attribute. If the value is not set then the library treats it as a string property.
 <ul>
 <li><i>string</i> – it is the default value type. Property editor is a text input. "myProperty" and "myProperty:string" - give the same result.</li>
 <li><i>boolean</i> – a Boolean type. Property editor is a checkbox.</li>
