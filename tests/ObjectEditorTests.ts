@@ -65,7 +65,7 @@ QUnit.test("Use metadata getPropertyValue function", function (assert) {
     editor.koActiveProperty().koValue("newName");
     assert.equal(property.koText(), "test", "use the real value to get value");
 });
-QUnit.test("Fix the bug with title property, https://github.com/andrewtelnov/surveyjs.editor/issues/33", function (assert) {
+QUnit.test("Fix the bug with title property, https://github.com/surveyjs/editor/issues/33", function (assert) {
     var editor = new SurveyObjectEditor();
     var car = new BigCar();
     car.name = "name1";

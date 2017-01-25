@@ -50,8 +50,9 @@ paths.concatCssDest = paths.webroot + "css/site.min.css";
 
 var copyright = ["/*!",
  "* surveyjs Editor v" + editorVersion,
- "* (c) Andrew Telnov - http://surveyjs.org/builder/",
- "* Github - https://github.com/andrewtelnov/survey.js.editor",
+ "* (c) Devsoft Baltic OÜ - http://surveyjs.io/",
+ "* Github - https://github.com/surveyjs/editor",
+ "* License: (http://editor.surveyjs.io/license.html)",
  "*/", "", ""].join("\n");
 
 var webpack_params = {

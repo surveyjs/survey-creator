@@ -1,6 +1,6 @@
-**survey.js.editor** is the visual editor for [surveyjs](https://github.com/andrewtelnov/surveyjs). It uses JSON to store the survey metadata.
+**survey.js.editor** is the visual editor for [surveyjs](https://github.com/surveyjs/surveyjs). It uses JSON to store the survey metadata.
 
-[![Build Status](https://travis-ci.org/andrewtelnov/surveyjs.editor.svg?branch=master)](https://travis-ci.org/andrewtelnov/surveyjs.editor)
+[![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
 
 #Download
 Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/surveyjs.editor.zip)
@@ -20,7 +20,7 @@ To build library yourself:
 
  1. **Clone the repo from GitHub**  
 	```
-	git clone https://github.com/andrewtelnov/surveyjs.editor.git
+	git clone https://github.com/surveyjs/editor.git
 	cd surveyjs.editor
 	```
 
@@ -53,15 +53,9 @@ To build library yourself:
 	The first command will copy all required files to 'wwwroot' directory and the last command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
 
 
-##Coming features
-
-Find the features under development and Todo list in the [Trello board](https://trello.com/b/lAwhTw3H/surveyjs-project).
-
 #Dependencies
  The library depends on: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
 #License
 
-|Non-commercial use   | Commercial use   |
-|------|------|
-|[![Noncommercial](https://licensebuttons.net/l/by-nc/3.0/88x31.png)](http://creativecommons.org/licenses/by-nc/3.0/legalcode) | Please contact me: andrew.telnov at gmail.com  |
+The SurveyJS Editor is NOT FREE for commercial using. Please find more about licensing the product [here](http://editor.surveyjs.io/license.html).

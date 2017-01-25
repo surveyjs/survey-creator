@@ -8,7 +8,7 @@
     "Editor",
     "surveyjs"
   ],
-  "homepage": "https://surveyjs.org/builder/",
+  "homepage": "http://editor.surveyjs.io",
   "files": [
     "dist/",
     "js/"
@@ -16,7 +16,7 @@
   "main": "./js/surveyeditor.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/andrewtelnov/surveyjs.editor.git"
+    "url": "https://github.com/surveyjs/surveyjs.git"
   },
   "engines": {
     "node": ">=0.10.0"
