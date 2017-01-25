@@ -22,17 +22,35 @@ QUnit.test("Set Text property", function (assert) {
     editor.text = jsonText;
     assert.equal(editor.koIsShowDesigner(), false);
 });
-QUnit.test("Copy Question", function (assert) {
+QUnit.test("Add questions to toolbox", function (assert) {
     var editor = new SurveyEditor();
     editor.text = JSON.stringify(getSurveyJson());
 
-    assert.equal(editor.koCopiedQuestions().length, 0, "There is no copied question yet.");
-    editor.copyQuestion(<Survey.Question>editor.survey.getAllQuestions()[0]);
-    assert.equal(editor.koCopiedQuestions().length, 1, "There is one copied question now.");
-    assert.equal(editor.koCopiedQuestions()[0].name, "question1", "The copied question is 'question1'");
-    editor.copyQuestion(<Survey.Question>editor.survey.getAllQuestions()[0]);
-    assert.equal(editor.koCopiedQuestions().length, 1, "There is still one copied question now.");
-    assert.equal(editor.koCopiedQuestions()[0].name, "question1", "The copied question is 'question1'");
+    assert.equal(editor.koCustomToolboxQuestions().length, 0, "There is no copied question yet.");
+    editor.addCustomToolboxQuestion(<Survey.Question>editor.survey.getAllQuestions()[0]);
+    assert.equal(editor.koCustomToolboxQuestions().length, 1, "There is one copied question now.");
+    assert.equal(editor.koCustomToolboxQuestions()[0].name, "question1", "The copied question is 'question1'");
+    editor.addCustomToolboxQuestion(<Survey.Question>editor.survey.getAllQuestions()[0]);
+    assert.equal(editor.koCustomToolboxQuestions().length, 1, "There is still one copied question now.");
+    assert.equal(editor.koCustomToolboxQuestions()[0].name, "question1", "The copied question is 'question1'");
+});
+QUnit.test("Save/Load custom questions", function (assert) {
+    var editor = new SurveyEditor();
+    editor.text = JSON.stringify(getSurveyJson());
+    editor.addCustomToolboxQuestion(<Survey.Question>editor.survey.getAllQuestions()[0]);
+    editor.addCustomToolboxQuestion(<Survey.Question>editor.survey.getAllQuestions()[1]);
+
+    var customToolboxQuestionsText = editor.customToolboxQuestionsText;
+
+    var editor2 = new SurveyEditor();
+    editor2.text = JSON.stringify(getSurveyJson());
+    editor2.customToolboxQuestionsText = customToolboxQuestionsText;
+    assert.equal(editor2.koCustomToolboxQuestions().length, 2, "There are two custom toolbox questions");
+    assert.equal(editor.koCustomToolboxQuestions()[0].name, "question1", "The copied first question is 'question1'");
+    assert.equal(editor.koCustomToolboxQuestions()[1].name, "question2", "The copied second question is 'question2'");
+
+    editor2.customToolboxQuestionsText = "";
+    assert.equal(editor2.koCustomToolboxQuestions().length, 0, "Empty the customToolbox questions");
 });
 QUnit.test("options.questionTypes", function (assert) {
     var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
