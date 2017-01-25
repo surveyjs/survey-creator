@@ -3,20 +3,24 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-triggers">
 <div class="panel">
-    <div class="panel-heading">
-        <div class="row input-group">
-            <button type="button" class="dropdown-toggle input-group-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-            <ul class="dropdown-menu input-group">
-                <!-- ko foreach: availableTriggers -->
-                <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
-                <!-- /ko  -->
-            </ul>
-            <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-            <span class="input-group-btn">
-                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-            </span>
+    <div class="row" style="margin-bottom:10px">
+        <div class="col-lg-12">
+            <div class="input-group form-inline">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- ko foreach: availableTriggers -->
+                        <li><a data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
+                        <!-- /ko  -->
+                    </ul>
+                </div>
+                <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+                <span class="input-group-btn">
+                    <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                </span>
+            </div>
         </div>
     </div>
     <div data-bind="visible: koSelected() == null">
@@ -25,24 +29,35 @@
     </div>
     <div data-bind="visible: koSelected() != null">
         <div data-bind="with: koSelected">
-            <div class="row form-inline">
-                <div class="col-sm-4">
-                    <span data-bind="text: $root.getLocString('pe.triggerOn')"></span><select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select> <span> </span>
+            <div class="row"  style="margin-bottom:10px">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group  form-inline">
+                        <div class="form-group">
+                            <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group">
+                        <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <input class="form-control" style="padding: 0" type="text" data-bind="visible: koRequireValue, value:koValue" />
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group">
+                        <input class="form-control" type="text" data-bind="visible: koRequireValue, value:koValue" />
+                    </div>
                 </div>
             </div>
             <!-- ko if: koType() == 'visibletrigger' -->
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
                     <!-- /ko -->
                 </div>
-                <div class="col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
                     <!-- /ko -->
                 </div>
@@ -54,19 +69,31 @@
             </div>
             <!-- /ko -->
             <!-- ko if: koType() == 'setvaluetrigger' -->
-            <div class="row form-inline" style="margin-top:10px">
-                <div class="col-sm-6">
-                    <span data-bind="text: $root.getLocString('pe.triggerSetToName')"></span><input class="form-control" type="text" data-bind="value:kosetToName" />
+            <div class="row">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group form-inline">
+                        <div>
+                            <span data-bind="text: $root.getLocString('pe.triggerSetToName')"></span>
+                        </div>
+                        <input class="form-control" type="text" data-bind="value:kosetToName" />
+                    </div>
                 </div>
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-5">
-                    <span data-bind="text: $root.getLocString('pe.triggerSetValue')"></span><input class="form-control" type="text" data-bind="value:kosetValue" />
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group form-inline">
+                        <div>
+                            <span data-bind="text: $root.getLocString('pe.triggerSetValue')"></span>
+                        </div>
+                        <input class="form-control" type="text" data-bind="value:kosetValue" />
+                    </div>
                 </div>
             </div>
-            <div class="row form-inline">
-                <div class="col-sm-12">
-                    <input type="checkbox" data-bind="checked: koisVariable" /> <span data-bind="text: $root.getLocString('pe.triggerIsVariable')"></span>
+            <div class="row">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="input-group">
+                        <input type="checkbox" data-bind="checked: koisVariable" /> <span data-bind="text: $root.getLocString('pe.triggerIsVariable')"></span>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-sm-8">
                 </div>
             </div>
             <!-- /ko -->

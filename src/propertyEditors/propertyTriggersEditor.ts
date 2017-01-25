@@ -21,11 +21,11 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     }
     public get editorType(): string { return "triggers"; }
     protected onValueChanged() {
-        super.onValueChanged();
         if (this.object) {
             this.koPages(this.getNames((<Survey.Survey>this.object).pages));
             this.koQuestions(this.getNames((<Survey.Survey>this.object).getAllQuestions()));
         }
+        super.onValueChanged();
         if (this.koSelected) {
             this.koSelected(this.koItems().length > 0 ? this.koItems()[0] : null);
         }
