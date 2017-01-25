@@ -37,6 +37,6 @@
   "dependencies": {
     "knockout": "^3.4.0",
     "ace-builds": "^1.2.2",
-    "survey-knockout": "^0.10.3"
+    "survey-knockout": "^0.10.4"
   }
 }

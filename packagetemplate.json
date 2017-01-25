@@ -9,6 +9,7 @@
     "surveyjs"
   ],
   "homepage": "http://editor.surveyjs.io",
+  "license": "http://editor.surveyjs.io/license.html",
   "files": [
     "dist/",
     "js/"
@@ -16,7 +17,7 @@
   "main": "./js/surveyeditor.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/surveyjs.git"
+    "url": "https://github.com/surveyjs/editor.git"
   },
   "engines": {
     "node": ">=0.10.0"
