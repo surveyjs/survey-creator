@@ -91,6 +91,8 @@ export var defaultStrings = {
     //Property Editors
     pe: {
         apply: "Apply",
+        ok: "OK",
+        cancel: "Cancel",
         reset: "Reset",
         close: "Close",
         delete: "Delete",
