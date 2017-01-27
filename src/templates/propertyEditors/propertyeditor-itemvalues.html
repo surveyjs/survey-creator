@@ -2,8 +2,12 @@
     <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-itemvalues">
-    <div style="overflow-y: auto; overflow-x:hidden; max-height:400px">
-        <table class="table">
+    <ul class="nav nav-tabs">
+        <li role="presentation" data-bind="css: {active:koActiveView() == 'form'}"><a data-bind="click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></a></li>
+        <li role="presentation" data-bind="css: {active:koActiveView() != 'form'}"><a data-bind="click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></a></li>
+    </ul>
+    <div data-bind="visible:koActiveView() == 'form'" style="overflow-y: auto; overflow-x:hidden; max-height:400px;min-height:200px">
+        <table class="table" >
             <thead>
                 <tr>
                     <th></th>
@@ -32,8 +36,11 @@
             </tbody>
         </table>
     </div>
-    <div class="row btn-toolbar">
+    <div class="row btn-toolbar" data-bind="visible:koActiveView() == 'form'">
         <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
         <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+    </div>
+    <div data-bind="visible:koActiveView() != 'form'">
+        <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
     </div>
 </script>

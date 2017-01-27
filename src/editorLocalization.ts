@@ -100,6 +100,8 @@ export var defaultStrings = {
         removeAll: "Remove All",
         edit: "Edit",
         empty: "<empty>",
+        fastEntry: "Fast Entry",
+        formEntry: "Form Entry",
         testService: "Test the service",
 
         value: "Value",

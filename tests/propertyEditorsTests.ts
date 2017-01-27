@@ -59,6 +59,28 @@ QUnit.test("SurveyPropertyItemValue", function (assert) {
     itemValueProperty.onResetClick();
     assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
 });
+QUnit.test("SurveyPropertyItemValue different view type", function (assert) {
+    var choices = [{ value: 1, text: "item1" }, { value: 2 } ];
+    var editor = new SurveyPropertyItemValuesEditor();
+    editor.value = choices;
+    editor.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
+    assert.equal(editor.koItemsText(), "", "It is empty by default");
+    editor.koActiveView("text");
+    assert.equal(editor.koItemsText(), "1|item1\n2", "It is empty by default");
+    editor.koItemsText("1|item1\n\n2|item2\n3\ni4");
+    editor.koActiveView("form");
+    assert.equal(editor.koItems().length, 4, "There are 4 items");
+    assert.equal(editor.koItems()[1].koValue(), 2, "Value of second item is 2");
+    assert.equal(editor.koItems()[1].koText(), "item2", "Text of second item is item2");
+    assert.equal(editor.koItems()[2].koValue(), 3, "Value of 3-th item is 3");
+    assert.equal(editor.koItems()[2].koText(), "", "Text of 3-th item is empty");
+    assert.equal(editor.koItems()[3].koValue(), "i4", "Value of 4-th item is i4");
+    assert.equal(editor.koItems()[3].koText(), "", "Text of 4-th item is empty");
+    editor.koActiveView("text");
+    editor.koItemsText("1|item1");
+    editor.onApplyClick();
+    assert.equal(choices.length, 1, "The value is still applied");
+});
 QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (assert) {
     var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor();

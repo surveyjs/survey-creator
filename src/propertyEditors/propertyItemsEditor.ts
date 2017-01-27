@@ -50,10 +50,10 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     protected onValueChanged() {
         this.koItems(this.getItemsFromValue());
     }
-    
-    protected getItemsFromValue(): Array<any> {
+
+    protected getItemsFromValue(value: any = null): Array<any> {
         var items = [];
-        var value = this.value;
+        if(!value) value = this.value;
         for (var i = 0; i < value.length; i++) {
             items.push(this.createEditorItem(value[i]));
         }
