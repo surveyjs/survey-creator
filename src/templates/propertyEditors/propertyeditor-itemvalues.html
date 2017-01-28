@@ -1,11 +1,11 @@
 ﻿<script type="text/html" id="propertyeditor-itemvalues">
     <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
 </script>
-<script type="text/html" id="propertyeditorcontent-itemvalues">
-    <ul class="nav nav-tabs">
-        <li role="presentation" data-bind="css: {active:koActiveView() == 'form'}"><a data-bind="click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></a></li>
-        <li role="presentation" data-bind="css: {active:koActiveView() != 'form'}"><a data-bind="click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></a></li>
-    </ul>
+<script type="text/html" class="btn-xs" id="propertyeditorcontent-itemvalues">
+    <div style="margin-bottom:3px">
+        <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() == 'form', 'btn-link':koActiveView() != 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
+        <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() != 'form', 'btn-link':koActiveView() == 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
+    </div>
     <div data-bind="visible:koActiveView() == 'form'" style="overflow-y: auto; overflow-x:hidden; max-height:400px;min-height:200px">
         <table class="table" >
             <thead>
