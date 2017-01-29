@@ -1,0 +1,28 @@
+﻿<script type="text/html" id="questioneditor">
+    <div id="surveyquestioneditorwindow" class="modal fade" role="dialog" data-bind="with:koEditor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" data-bind="text:koTitle"></h4>
+                </div>  
+                <div class="modal-body svd_notopbottompaddings">
+                    <ul class="nav nav-tabs" data-bind="foreach: koTabs">
+                        <li role="presentation" data-bind="css: {active: $parent.koActiveTab() == $data.name}, click: $parent.onTabClick"><a><span data-bind="text:$data.title"></span></a></li>
+                    </ul>               
+                    <!-- ko foreach: koTabs -->
+                    <div data-bind="visible:$parent.koActiveTab() == $data.name">
+                        <!-- ko template: { name: $data.htmlTemplate, data: $data.templateObject } -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko  -->
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" data-bind="click: onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
+                    <input type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: onApplyClick, value: $root.getLocString('pe.ok')" style="width:100px" />
+                    <input type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px" />
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

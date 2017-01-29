@@ -4,6 +4,7 @@ import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
 import {SurveyVerbs} from "./objectVerbs";
+import {SurveyPropertyEditorShowWindow} from "./questionEditors/questionEditorBase";
 import {SurveyJSONEditor} from "./surveyJSONEditor";
 import {SurveyTextWorker} from "./textWorker"
 import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";
@@ -23,6 +24,7 @@ export class SurveyEditor {
 
     private jsonEditor: SurveyJSONEditor;
     private selectedObjectEditor: SurveyObjectEditor;
+    private questionEditorWindow: SurveyPropertyEditorShowWindow;
     private pagesEditor: SurveyPagesEditor;
     private surveyEmbeding: SurveyEmbedingWindow;
     private surveyObjects: SurveyObjects;
@@ -86,6 +88,7 @@ export class SurveyEditor {
             if (self.generateValidJSONChangedCallback) self.generateValidJSONChangedCallback(newValue);
         });
         this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
+        this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
         this.undoRedo = new SurveyUndoRedo();
 
         this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
@@ -397,6 +400,7 @@ export class SurveyEditor {
         this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
         this.surveyVerbs.survey = this.survey;
         this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
+        this.surveyValue["onEditQuestion"].add((sender: Survey.Survey, options) => { self.showQuestionEditor(self.koSelectedObject().value); });
         this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.addCustomToolboxQuestion(self.koSelectedObject().value); });
         this.surveyValue["onFastCopyQuestion"].add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
         this.surveyValue["onDeleteCurrentObject"].add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
@@ -474,6 +478,16 @@ export class SurveyEditor {
                 this.koCustomToolboxQuestions(json);
             }
         }
+    }
+    public showQuestionEditor(question: Survey.QuestionBase) {
+        var self = this;
+        this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); });
+    }
+    private onQuestionEditorChanged(question: Survey.QuestionBase) {
+        this.surveyObjects.nameChanged(question);
+        this.selectedObjectEditor.ObjectChanged();
+        this.setModified();
+        this.survey.render();
     }
     public addCustomToolboxQuestion(question: Survey.QuestionBase) {
         var objType = SurveyHelper.getObjectType(question);
@@ -570,10 +584,12 @@ new Survey.SurveyTemplateText().replaceText(templateQuestionHtml, "question");
 Survey.Survey.prototype["onCreating"] = function () {
     this.selectedQuestionValue = null;
     this.onSelectedQuestionChanged = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+    this.onEditQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onFastCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onDeleteCurrentObject = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     var self = this;
+    this.editQuestionClick = function () { self.onEditQuestion.fire(self); };
     this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
     this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self); };
     this.deleteCurrentObjectClick = function () { self.onDeleteCurrentObject.fire(self); }

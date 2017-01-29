@@ -113,6 +113,11 @@ export var defaultStrings = {
         cellType: "Cell Type",
         colCount: "Column Count",
 
+        qEditorTitle: "Edit question: {0}",
+        general: "General",
+        choices: "Choices",
+        visibleIf: "Show on condition",
+
         editProperty: "Edit property '{0}'",
         items: "[ Items: {0} ]",
 
