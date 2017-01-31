@@ -2,8 +2,8 @@
 import * as Survey from "survey-knockout";
 
 export class SurveyQuestionSelectBaseEditor extends SurveyQuestionEditorBase {
-    constructor(public questionBase: Survey.QuestionBase) {
-        super(questionBase);
+    constructor(public questionBase: Survey.QuestionBase, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean) {
+        super(questionBase, onCanShowPropertyCallback);
     }
     protected getPropertiesTabs(propTabs: Array<any>) {
         super.getPropertiesTabs(propTabs);
@@ -12,4 +12,4 @@ export class SurveyQuestionSelectBaseEditor extends SurveyQuestionEditorBase {
 
 }
 
-SurveyQuestionEditorBase.registerEditor("selectbase", function (question: Survey.QuestionBase): SurveyQuestionEditorBase { return new SurveyQuestionSelectBaseEditor(question); });
+SurveyQuestionEditorBase.registerEditor("selectbase", function (question: Survey.QuestionBase, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean): SurveyQuestionEditorBase { return new SurveyQuestionSelectBaseEditor(question, onCanShowPropertyCallback); });

@@ -88,7 +88,6 @@ export class SurveyEditor {
             if (self.generateValidJSONChangedCallback) self.generateValidJSONChangedCallback(newValue);
         });
         this.surveyObjects = new SurveyObjects(this.koObjects, this.koSelectedObject);
-        this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
         this.undoRedo = new SurveyUndoRedo();
 
         this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
@@ -100,6 +99,10 @@ export class SurveyEditor {
         this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
             self.onPropertyValueChanged(options.property, options.object, options.newValue);
         });
+        this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
+        this.questionEditorWindow.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
+            return self.onCanShowObjectProperty(object, property);
+        }
         this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
             (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
         this.surveyEmbeding = new SurveyEmbedingWindow();

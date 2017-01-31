@@ -1,0 +1,10 @@
+﻿<script type="text/html" id="questioneditortab-text">
+    <div data-bind="visible:hasInputType">
+        <span>Input type:</span>
+        <select class="form-control"  data-bind="value: koInputType, options: koInputTypeChoices"></select>
+    </div>
+    <div data-bind="visible:hasPlaceHolder">
+        <span>Placeholder:</span>
+        <input type="text" class="form-control" data-bind="value: koPlaceHolder" />
+    </div>
+</script>

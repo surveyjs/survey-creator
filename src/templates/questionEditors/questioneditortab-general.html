@@ -1,10 +1,21 @@
 ﻿<script type="text/html" id="questioneditortab-general">
     <div>
-        <span>Name:</span>
-        <input type="text" class="form-control" data-bind="value: koName"/>
-    </div>
-    <div data-bind="visible:koHasTitle">
-        <span>Title:</span>
-        <textarea type="text" rows="2" class="form-control" data-bind="value: koTitle"></textarea>
+        <div>
+            <span>Name:</span>
+            <input type="text" class="form-control" data-bind="value: koName" />
+        </div>
+        <div data-bind="visible:hasTitle">
+            <span>Title:</span>
+            <textarea type="text" rows="2" class="form-control" data-bind="value: koTitle"></textarea>
+        </div>
+        <div>
+            <label class="checkbox-inline" data-bind="visible:hasVisible"><input type="checkbox" data-bind="checked: koVisible">Visible</label>
+            <label class="checkbox-inline" data-bind="visible:hasIsRequired"><input type="checkbox" data-bind="checked: koIsRequired">Required</label>
+            <label class="checkbox-inline" data-bind="visible:hasStartWithNewLine"><input type="checkbox" data-bind="checked: koStartWithNewLine">Start with new line</label>
+        </div>
+        <div data-bind="visible:hasAdditionalTemplate">
+            <!-- ko template: { name: $data.additionalTemplateHtml, data: $data } -->
+            <!-- /ko -->
+        </div>
     </div>
 </script>
