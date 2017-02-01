@@ -160,16 +160,20 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
     koName: any; koTitle: any; koVisible: any; koIsRequired: any; koStartWithNewLine: any;
     constructor(public questionBase: Survey.QuestionBase, public visibleIndex: number, properties: SurveyQuestionProperties) {
         super(questionBase, visibleIndex, properties);
+        this.setUpProperties();
+        this.reset();
+    }
+    protected setUpProperties() {
         this.titleProperty = this.properties.getProperty("title");
         this.hasTitle = this.titleProperty != null;
         this.hasVisible = this.properties.getProperty("visible") != null;
         this.hasIsRequired = this.properties.getProperty("isRequired") != null;
         this.hasStartWithNewLine = this.properties.getProperty("startWithNewLine") != null;
-        this.koName = ko.observable(questionBase.name);
-        if (this.hasTitle) this.koTitle = ko.observable(this.getValue(this.titleProperty));
-        if (this.hasVisible) this.koVisible = ko.observable(this.questionBase.visible);
-        if (this.hasIsRequired) this.koIsRequired = ko.observable((<Survey.Question>this.questionBase).isRequired);
-        if (this.hasStartWithNewLine) this.koStartWithNewLine = ko.observable(this.questionBase.startWithNewLine);
+        this.koName = ko.observable();
+        this.koTitle = ko.observable();
+        this.koVisible = ko.observable();
+        this.koIsRequired = ko.observable();
+        this.koStartWithNewLine = ko.observable();
     }
     public get name(): string { return "general"; }
     public get hasAdditionalTemplate(): boolean { return false; }

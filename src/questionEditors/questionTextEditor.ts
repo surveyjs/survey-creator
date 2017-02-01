@@ -16,15 +16,18 @@ export class SurveyQuestionEditorTextTabGeneral extends SurveyQuestionEditorTabG
     koPlaceHolder: any; koInputType: any; koInputTypeChoices: any;
     constructor(public questionBase: Survey.QuestionBase, public visibleIndex: number, properties: SurveyQuestionProperties) {
         super(questionBase, visibleIndex, properties);
+    }
+    protected setUpProperties() {
+        super.setUpProperties();
         this.inputTypeProperty = this.properties.getProperty("inputType");
         this.hasInputType = this.inputTypeProperty != null;
         this.hasPlaceHolder = this.properties.getProperty("placeHolder") != null;
+        this.koInputTypeChoices = ko.observableArray();
         if (this.inputTypeProperty) {
-            this.koInputTypeChoices = ko.observableArray(this.inputTypeProperty.choices);
+            this.koInputTypeChoices(this.inputTypeProperty.choices);
         }
-        //TODO
-        if (this.hasInputType) this.koInputType = ko.observable(this.questionBase["inputType"]);
-        if (this.hasPlaceHolder) this.koPlaceHolder = ko.observable(this.questionBase["placeHolder"]);
+        this.koInputType = ko.observable();
+        this.koPlaceHolder = ko.observable();
     }
     public get hasAdditionalTemplate(): boolean { return true; }
     public get additionalTemplateHtml(): string { return "questioneditortab-text"; }

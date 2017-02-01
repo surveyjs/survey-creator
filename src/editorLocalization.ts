@@ -115,6 +115,7 @@ export var defaultStrings = {
 
         qEditorTitle: "Edit question: {0}",
         general: "General",
+        html: "Html Editor",
         choices: "Choices",
         visibleIf: "Show on condition",
 

@@ -15,11 +15,14 @@ export class SurveyQuestionCommentTextTabGeneral extends SurveyQuestionEditorTab
     koPlaceHolder: any; koRows: any; 
     constructor(public questionBase: Survey.QuestionBase, public visibleIndex: number, properties: SurveyQuestionProperties) {
         super(questionBase, visibleIndex, properties);
+    }
+    protected setUpProperties() {
+        super.setUpProperties();
         this.hasRows = this.properties.getProperty("rows") != null;
         this.hasPlaceHolder = this.properties.getProperty("placeHolder") != null;
         //TODO
-        if (this.hasRows) this.koRows = ko.observable(this.questionBase["rows"]);
-        if (this.hasPlaceHolder) this.koPlaceHolder = ko.observable(this.questionBase["placeHolder"]);
+        this.koRows = ko.observable();
+        this.koPlaceHolder = ko.observable();
     }
     public get hasAdditionalTemplate(): boolean { return true; }
     public get additionalTemplateHtml(): string { return "questioneditortab-comment"; }
