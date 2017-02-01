@@ -9,16 +9,18 @@
   "devDependencies": {
     "@types/ace": "0.0.32",
     "@types/knockout": "^3.4.39",
+    "@types/node": "^7.0.4",
     "@types/qunit": "^2.0.31",
     "@types/survey-knockout": "^0.9.18",
-    "ajv": "^4.11.2",
     "ace-builds": "^1.2.2",
+    "ajv": "^4.11.2",
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.22.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "file-loader": "^0.10.0",
     "generate-json-webpack-plugin": "^0.2.1",
+    "html-loader": "^0.4.4",
     "karma": "^1.4.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-junit-reporter": "^1.0.0",
@@ -34,8 +36,9 @@
     "style-loader": "^0.13.1",
     "survey-knockout": "^0.10.4",
     "ts-loader": "^2.0.0",
-    "typescript": "^2.1.5",
     "tslib": "^1.5.0",
+    "typescript": "^2.1.5",
+    "val-loader": "^0.5.0",
     "webpack": "^2.2.1"
   }
 }
