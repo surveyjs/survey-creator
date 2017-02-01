@@ -28,7 +28,6 @@ export class SurveyQuestionEditorTextTabGeneral extends SurveyQuestionEditorTabG
     }
     public get hasAdditionalTemplate(): boolean { return true; }
     public get additionalTemplateHtml(): string { return "questioneditortab-text"; }
-    public hasError(): boolean { return !this.koName(); }
     public reset() {
         super.reset();
         if (this.hasInputType) this.koInputType(this.questionBase["inputType"]);
@@ -36,7 +35,6 @@ export class SurveyQuestionEditorTextTabGeneral extends SurveyQuestionEditorTabG
     }
     public apply() {
         super.apply();
-        this.questionBase.name = this.koName();
         if (this.hasInputType) this.questionBase["inputType"] = this.koInputType();
         if (this.hasPlaceHolder) this.questionBase["placeHolder"] = this.koPlaceHolder();
     }
