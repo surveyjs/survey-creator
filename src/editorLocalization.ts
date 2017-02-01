@@ -122,6 +122,7 @@ export var defaultStrings = {
         choices: "Choices",
         visibleIf: "Show on condition",
         rateValues: "Rate Values",
+        choicesByUrl: "Choices from Web",
         matrixChoices: "Default Choices",
         multipleTextItems: "Text Inputs",
 

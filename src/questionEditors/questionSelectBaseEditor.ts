@@ -8,8 +8,9 @@ export class SurveyQuestionSelectBaseEditor extends SurveyQuestionEditorBase {
     protected getPropertiesTabs(propTabs: Array<any>) {
         super.getPropertiesTabs(propTabs);
         propTabs.push({ propertyName: "choices", visibleIndex: 10 });
+        propTabs.push({ propertyName: "choicesByUrl", visibleIndex: 11 });
+        
     }
-
 }
 
 SurveyQuestionEditorBase.registerEditor("selectbase", function (question: Survey.QuestionBase, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean): SurveyQuestionEditorBase { return new SurveyQuestionSelectBaseEditor(question, onCanShowPropertyCallback); });
