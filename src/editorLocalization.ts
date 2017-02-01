@@ -121,6 +121,7 @@ export var defaultStrings = {
         choices: "Choices",
         matrixChoices: "Default Choices",
         visibleIf: "Show on condition",
+        rateValues: "Rate Values",
 
         editProperty: "Edit property '{0}'",
         items: "[ Items: {0} ]",

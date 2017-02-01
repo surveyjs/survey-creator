@@ -20,6 +20,7 @@ export {SurveyQuestionHtmlEditor} from "../questionEditors/questionHtmlEditor";
 export {SurveyQuestionMatrixEditor} from "../questionEditors/questionMatrixEditor";
 export {SurveyQuestionMatrixDropdownEditor} from "../questionEditors/questionMatrixDropdownEditor";
 export {SurveyQuestionMatrixDynamicEditor} from "../questionEditors/questionMatrixDynamicEditor";
+export {SurveyQuestionRatingEditor} from "../questionEditors/questionRatingEditor";
 
 export {SurveyObjectProperty} from "../objectProperty";
 export {SurveyObjectEditor} from "../objectEditor";
