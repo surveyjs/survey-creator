@@ -39,21 +39,21 @@ QUnit.test("Question Editor apply/reset/onChanged", function (assert) {
 });
 
 QUnit.test("Create correct Question Editor by question type", function (assert) {
-    var dropdownQuestion = new Survey.QuestionDropdown("q1");
+    var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
     //fix- required to register the editor in the tests.
-    var selEditor = new SurveyQuestionSelectBaseEditor(dropdownQuestion, null);
-    var editor = SurveyQuestionEditorBase.createEditor(dropdownQuestion, null, null);
-    assert.equal(editor.koTabs().length, 3, "There are 3 tabs");
+    var selEditor = new SurveyQuestionSelectBaseEditor(radioGroupQuestion, null);
+    var editor = SurveyQuestionEditorBase.createEditor(radioGroupQuestion, null, null);
+    assert.equal(editor.koTabs().length, 4, "There are 3 tabs");
     assert.equal(editor.koTabs()[1].name, "choices", "The name of the second tab is 'choices'");
 });
 
 QUnit.test("Hide visibleIf tab and startWithNewLine", function (assert) {
-    var dropdownQuestion = new Survey.QuestionDropdown("q1");
+    var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
     var onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
         return property.name != "visibleIf" && property.name != "startWithNewLine";
     };
-    var editor = SurveyQuestionEditorBase.createEditor(dropdownQuestion, null, onCanShowPropertyCallback);
-    assert.equal(editor.koTabs().length, 2, "There are 2 tabs");
+    var editor = SurveyQuestionEditorBase.createEditor(radioGroupQuestion, null, onCanShowPropertyCallback);
+    assert.equal(editor.koTabs().length, 3, "There are 2 tabs");
     assert.equal(editor.koTabs()[1].name, "choices", "The name of the second tab is 'choices'");
     var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
     assert.equal(generalTab.hasStartWithNewLine, false, "We have made it invisible");
