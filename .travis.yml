@@ -3,10 +3,7 @@ node_js:
   - "4"
 
 before_script:
-  - npm install -g gulp
-  - npm install -g typings 
+  - npm install -g concurrently
 script:
-  - typings install
-  - gulp copyfiles
-  - gulp makedist
-  - gulp test_ci
+  - npm run build_prod
+  - karma start --single-run
