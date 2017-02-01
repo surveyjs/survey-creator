@@ -2,7 +2,7 @@
 import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
 import * as Survey from "survey-knockout";
 
-QUnit.module("objectEditorTests");
+export default QUnit.module("objectEditorTests");
 
 QUnit.test("Created properties on set selected Object", function (assert) {
     var editor = new SurveyObjectEditor();

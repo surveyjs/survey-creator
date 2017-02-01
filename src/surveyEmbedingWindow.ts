@@ -1,4 +1,5 @@
-﻿import {SurveyJSON5} from "./json5";
+﻿import * as ko from "knockout";
+import {SurveyJSON5} from "./json5";
 
 export class SurveyEmbedingWindow {
     private jsonValue: any;

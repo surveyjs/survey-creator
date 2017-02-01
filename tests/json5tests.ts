@@ -1,7 +1,6 @@
-﻿
-import {SurveyJSON5} from "../src/json5";
+﻿import {SurveyJSON5} from "../src/json5";
 
-QUnit.module("JSON5Tests");
+export default QUnit.module("JSON5Tests");
 
 QUnit.test("Simple test", function (assert) {
     var json5 = new SurveyJSON5(1);

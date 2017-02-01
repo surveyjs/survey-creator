@@ -1,4 +1,5 @@
-﻿import {editorLocalization} from "./editorLocalization";
+﻿import * as ko from "knockout";
+import {editorLocalization} from "./editorLocalization";
 import {SurveyObjectEditor} from "./objectEditor";
 import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
@@ -11,9 +12,9 @@ import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";
 import {SurveyHelper, ObjType} from "./surveyHelper";
 import {DragDropHelper} from "./dragdrophelper";
 import {SurveyJSON5} from "./json5";
-import {html as templateEditorHtml} from "./templateEditor.ko.html";
-import {html as templatePageHtml} from "./template_page.html";
-import {html as templateQuestionHtml} from "./template_question.html";
+var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
+var templatePageHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_page.html");
+var templateQuestionHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_question.html");
 import * as Survey from "survey-knockout";
 
 export class SurveyEditor {

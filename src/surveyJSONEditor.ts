@@ -1,4 +1,5 @@
-﻿import {SurveyTextWorker} from "./textWorker";
+﻿import * as ko from "knockout";
+import {SurveyTextWorker} from "./textWorker";
 import * as Survey from "survey-knockout";
 
 export class SurveyJSONEditor {

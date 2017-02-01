@@ -1,4 +1,5 @@
-﻿import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
+﻿import * as ko from "knockout";
+import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyObjectEditor} from "../objectEditor";
 import * as Survey from "survey-knockout";

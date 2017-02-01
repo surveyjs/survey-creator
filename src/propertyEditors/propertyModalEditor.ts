@@ -1,4 +1,5 @@
-﻿import {SurveyPropertyEditorBase} from "./propertyEditorBase";
+﻿import * as ko from "knockout";
+import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public object: any;

@@ -1,69 +1,43 @@
-﻿// Karma configuration
+﻿var webpack = require('webpack');
+var webpackConfigCreator = require('./webpack.config');
+var webpackConfig = webpackConfigCreator({ buildType: "dev" });
 
-module.exports = function (config) {
+module.exports = function(config) {
     config.set({
-
-        // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
-
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['qunit'],
-
-        // list of files / patterns to load in the browser
         files: [
-          "wwwroot/js/qunit.css",
-          "wwwroot/js/knockout.js",
-          "wwwroot/js/survey.ko.js",
-          "wwwroot/js/surveyeditor.js",
-
-          "wwwroot/tests/surveyeditor.tests.js",
-    ],
-
-        // list of files to exclude
+            'tests/entries/*.ts'
+        ],
         exclude: [
         ],
-
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
-            'wwwroot/js/surveyeditor.js': ['coverage']
+        mime: {
+            'text/x-typescript': ['ts','tsx']
         },
-
-        // test results reporter to use
-        // possible values: 'dots', 'progress'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'dots', 'junit', 'coverage'],
-
         junitReporter: {
-            outputDir: 'shippable/testresults/',
+            outputDir: 'tmp/testresults/',
             outputFile: 'test-results.xml'
         },
-
-        coverageReporter: {
-            type: 'cobertura',
-            dir: 'shippable/codecoverage/'
+        preprocessors: {
+            '**/*.ts': ['webpack', 'sourcemap']
         },
-
-        // web server port
-        port: 9876,
-
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
-
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
-
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
-
-        // start these browsers
-        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        webpack: {
+            module: webpackConfig.module,
+            resolve: webpackConfig.resolve,
+            plugins: [
+                new webpack.SourceMapDevToolPlugin({
+                    filename: null, // if no value is provided the sourcemap is inlined
+                    test: /\.(ts|js)($|\?)/i // process .js and .ts files only
+                })
+            ]
+        },
+        reporters: ['progress', 'dots', 'junit'],
         browsers: ['PhantomJS'],
-
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
-        singleRun: true
+        colors: true,
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_WARN,
+        autoWatch: true,
+        singleRun: false,
+        concurrency: Infinity
     })
-}
+};

@@ -1,4 +1,5 @@
-﻿import {SurveyObjects} from "../src/surveyObjects";
+﻿import * as ko from "knockout";
+import {SurveyObjects} from "../src/surveyObjects";
 import {
     SurveyPropertyTriggersEditor,
     SurveyPropertyVisibleTrigger
@@ -10,7 +11,7 @@ import {
 import {SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../src/objectVerbs";
 import * as Survey from "survey-knockout";
 
-QUnit.module("surveyObjects");
+export default QUnit.module("surveyObjects");
 
 QUnit.test("Initial objects building", function (assert) {
     var intend = SurveyObjects.intend;

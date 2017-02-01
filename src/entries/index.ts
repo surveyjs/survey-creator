@@ -1,3 +1,6 @@
+// styles
+import "../main.scss";
+
 export {DragDropHelper} from "../dragdrophelper";
 export {
     SurveyPropertyEditorBase, SurveyStringPropertyEditor,

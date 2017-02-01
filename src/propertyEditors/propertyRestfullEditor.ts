@@ -1,4 +1,5 @@
-﻿import {SurveyPropertyModalEditor} from "./propertyModalEditor";
+﻿import * as ko from "knockout";
+import {SurveyPropertyModalEditor} from "./propertyModalEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
 import * as Survey from "survey-knockout";

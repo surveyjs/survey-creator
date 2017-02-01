@@ -3,7 +3,7 @@ import {SurveyQuestionEditorBase, SurveyQuestionEditorTabGeneral, SurveyQuestion
 import {SurveyQuestionSelectBaseEditor} from "../src/questionEditors/questionSelectBaseEditor";
 import * as Survey from "survey-knockout";
 
-QUnit.module("QuestionEditorsTests");
+export default QUnit.module("QuestionEditorsTests");
 
 QUnit.test("Create correct question editor property tab ", function (assert) {
     var dropdownQuestion = new Survey.QuestionDropdown("q1");
