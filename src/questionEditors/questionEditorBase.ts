@@ -120,7 +120,9 @@ export class SurveyQuestionEditorBase {
         for (var i = 0; i < propTabs.length; i++) {
             var tabItem = propTabs[i];
             if (!this.properties.getProperty(tabItem.propertyName)) continue;
-            tabs.push(new SurveyQuestionEditorTabProperty(this.questionBase, tabItem.propertyName, tabItem.visibleIndex, this.properties));
+            var editorTab = new SurveyQuestionEditorTabProperty(this.questionBase, tabItem.propertyName, tabItem.visibleIndex, this.properties);
+            if (tabItem.title) editorTab.title = tabItem.title;
+            tabs.push(editorTab);
         }
     }
     protected getPropertiesTabs(propTabs: Array<any>) {
@@ -129,6 +131,7 @@ export class SurveyQuestionEditorBase {
 }
 
 export class SurveyQuestionEditorTabBase {
+    private titleValue: string;
     protected properties: SurveyQuestionProperties;
     constructor(public questionBase: Survey.QuestionBase, public visibleIndex: number, properties: SurveyQuestionProperties) {
         if (!properties) properties = new SurveyQuestionProperties(questionBase, null);
@@ -136,9 +139,11 @@ export class SurveyQuestionEditorTabBase {
     }
     public get name(): string { return "name"; }
     public get title() {
+        if (this.titleValue) return this.titleValue;
         var str = editorLocalization.getString("pe." + this.name);
         return str ? str : this.name;
     }
+    public set title(value: string) { this.titleValue = value; }
     public get htmlTemplate(): string { return "questioneditortab-" + this.name; }
     public get templateObject(): any { return this; }
     public hasError(): boolean { return false; }

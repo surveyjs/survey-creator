@@ -117,7 +117,9 @@ export var defaultStrings = {
         general: "General",
         html: "Html Editor",
         columns: "Columns",
+        rows: "Rows",
         choices: "Choices",
+        matrixChoices: "Default Choices",
         visibleIf: "Show on condition",
 
         editProperty: "Edit property '{0}'",

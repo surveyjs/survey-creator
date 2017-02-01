@@ -18,6 +18,7 @@ export {SurveyQuestionTextEditor} from "../questionEditors/questionTextEditor";
 export {SurveyQuestionCommentEditor} from "../questionEditors/questionCommentEditor";
 export {SurveyQuestionHtmlEditor} from "../questionEditors/questionHtmlEditor";
 export {SurveyQuestionMatrixEditor} from "../questionEditors/questionMatrixEditor";
+export {SurveyQuestionMatrixDropdownEditor} from "../questionEditors/questionMatrixDropdownEditor";
 
 export {SurveyObjectProperty} from "../objectProperty";
 export {SurveyObjectEditor} from "../objectEditor";
