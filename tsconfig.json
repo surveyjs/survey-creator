@@ -4,14 +4,11 @@
     "module": "es2015",
     "sourceMap": true,
     "noImplicitAny": false,
+    "importHelpers": true,
+    "moduleResolution": "node",
     "jsx": "react"
   },
   "include": [
-    "typings/index.d.ts",
     "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
   ]
 }

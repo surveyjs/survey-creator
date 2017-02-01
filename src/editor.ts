@@ -1,4 +1,5 @@
-﻿import {editorLocalization} from "./editorLocalization";
+﻿import * as ko from "knockout";
+import {editorLocalization} from "./editorLocalization";
 import {SurveyObjectEditor} from "./objectEditor";
 import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";

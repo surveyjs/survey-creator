@@ -7,6 +7,10 @@
     "build_prod": "npm run build_dev && webpack --env.buildType prod"
   },
   "devDependencies": {
+    "@types/ace": "0.0.32",
+    "@types/knockout": "^3.4.39",
+    "@types/qunit": "^2.0.31",
+    "@types/survey-knockout": "^0.9.18",
     "ace-builds": "^1.2.2",
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.22.0",
@@ -28,8 +32,9 @@
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "survey-knockout": "^0.10.4",
-    "ts-loader": "^0.9.4",
-    "typescript": "~2.0.6",
+    "ts-loader": "^2.0.0",
+    "typescript": "^2.1.5",
+    "tslib": "^1.5.0",
     "webpack": "^2.2.1"
   }
 }

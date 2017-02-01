@@ -1,4 +1,5 @@
-﻿import {SurveyPropertyModalEditor} from "./propertyModalEditor";
+﻿import * as ko from "knockout";
+import {SurveyPropertyModalEditor} from "./propertyModalEditor";
 import {editorLocalization} from "../editorLocalization";
 
 export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {

@@ -1,4 +1,5 @@
-﻿import {SurveyHelper, ObjType} from "./surveyHelper";
+﻿import * as ko from "knockout";
+import {SurveyHelper, ObjType} from "./surveyHelper";
 import * as Survey from "survey-knockout";
 
 export class SurveyObjectItem {

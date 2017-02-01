@@ -1,6 +1,6 @@
 ﻿import {editorLocalization, defaultStrings} from "../src/editorLocalization";
 
-QUnit.module("LocalizationTests");
+export default QUnit.module("LocalizationTests");
 
 QUnit.test("Get nested property", function (assert) {
     assert.equal(editorLocalization.getString("qt.text"), "Single Input", "find the nested property");

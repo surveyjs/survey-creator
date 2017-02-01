@@ -1,7 +1,7 @@
 ﻿import {SurveyEditor} from "../src/editor";
 import * as Survey from "survey-knockout";
 
-QUnit.module("surveyEditorTests");
+export default QUnit.module("surveyEditorTests");
 
 QUnit.test("Set Text property", function (assert) {
     var editor = new SurveyEditor();

@@ -2,7 +2,7 @@
 import {SurveyEditor} from "../src/editor";
 import * as Survey from "survey-knockout";
 
-QUnit.module("UndoRedoTests");
+export default QUnit.module("UndoRedoTests");
 
 QUnit.test("Enabeling undo redo", function (assert) {
     var survey = new Survey.Survey(getSurveyJson());

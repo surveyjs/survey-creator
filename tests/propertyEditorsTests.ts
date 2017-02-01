@@ -7,7 +7,7 @@ import {SurveyPropertyResultfullEditor} from "../src/propertyEditors/propertyRes
 import * as Survey from "survey-knockout";
 import "../src/propertyEditors/propertyTextItemsEditor";
 
-QUnit.module("PropertyEditorsTests");
+export default QUnit.module("PropertyEditorsTests");
 
 QUnit.test("Create correct property editor", function (assert) {
     var propertyEditor = SurveyPropertyEditorBase.createEditor("unknown", null);

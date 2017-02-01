@@ -1,4 +1,5 @@
-﻿import {editorLocalization} from "./editorLocalization";
+﻿import * as ko from "knockout";
+import {editorLocalization} from "./editorLocalization";
 import {SurveyHelper, ObjType} from "./surveyHelper";
 import * as Survey from "survey-knockout";
 
