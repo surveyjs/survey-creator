@@ -1,0 +1,18 @@
+﻿<script type="text/html" id="questioneditortab-matrixdynamic">
+    <div  class="form-group" data-bind="visible:hasCellType">
+        <label>Default cell editor type:</label>
+        <select class="form-control"  data-bind="value: koCellType, options: koCellTypeChoices"></select>
+    </div>
+    <div class="form-group" data-bind="visible:hasRowCount">
+        <label>Default row count:</label>
+        <input type="number" class="form-control" data-bind="value: koRowCount" />
+    </div>
+    <div class="form-group" data-bind="visible:hasAddRowText">
+        <label>Add row button text:</label>
+        <input type="text" class="form-control" data-bind="value: koAddRowText" />
+    </div>
+    <div class="form-group" data-bind="visible:hasRemoveRowText">
+        <label>Remove row button text:</label>
+        <input type="text" class="form-control" data-bind="value: koRemoveRowText" />
+    </div>
+</script>
