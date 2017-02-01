@@ -15,6 +15,7 @@ export {SurveyPropertyValidatorsEditor} from "../propertyEditors/propertyValidat
 
 export {SurveyQuestionSelectBaseEditor} from "../questionEditors/questionSelectBaseEditor";
 export {SurveyQuestionTextEditor} from "../questionEditors/questionTextEditor";
+export {SurveyQuestionMultipleTextEditor} from "../questionEditors/questionMultipleTextEditor";
 export {SurveyQuestionCommentEditor} from "../questionEditors/questionCommentEditor";
 export {SurveyQuestionHtmlEditor} from "../questionEditors/questionHtmlEditor";
 export {SurveyQuestionMatrixEditor} from "../questionEditors/questionMatrixEditor";

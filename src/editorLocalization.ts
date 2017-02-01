@@ -119,9 +119,10 @@ export var defaultStrings = {
         columns: "Columns",
         rows: "Rows",
         choices: "Choices",
-        matrixChoices: "Default Choices",
         visibleIf: "Show on condition",
         rateValues: "Rate Values",
+        matrixChoices: "Default Choices",
+        multipleTextItems: "Text Inputs",
 
         editProperty: "Edit property '{0}'",
         items: "[ Items: {0} ]",
