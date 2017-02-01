@@ -12,7 +12,7 @@ import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";
 import {SurveyHelper, ObjType} from "./surveyHelper";
 import {DragDropHelper} from "./dragdrophelper";
 import {SurveyJSON5} from "./json5";
-var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/index.html");
+var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 var templatePageHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_page.html");
 var templateQuestionHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_question.html");
 import * as Survey from "survey-knockout";
