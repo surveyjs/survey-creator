@@ -1,0 +1,18 @@
+﻿<script type="text/html" id="questioneditortab-fileOptions">
+    <div class="form-group">
+        <span class="checkbox-inline" data-bind="visible:hasShowPreview"><input type="checkbox" data-bind="checked: koShowPreview"><label>Show preview for image files</label></span>
+        <span class="checkbox-inline" data-bind="visible:hasStoreDataAsText"><input type="checkbox" data-bind="checked: koStoreDataAsText"><label>Store file content directly in JSON</label></span>
+    </div>
+    <div  class="form-group" data-bind="visible:hasMaxSize">
+        <label>Maximum file size for uploading:</label>
+        <input type="number" class="form-control" data-bind="value: koMaxSize" />
+    </div>
+    <div class="form-group" data-bind="visible:hasImageHeight">
+        <label>Preview image height:</label>
+        <input type="text" class="form-control" data-bind="value: koImageHeight" />
+    </div>
+    <div class="form-group" data-bind="visible:hasImageWidth">
+        <label>Preview image width:</label>
+        <input type="text" class="form-control" data-bind="value: koImageWidth" />
+    </div>
+</script>

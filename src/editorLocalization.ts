@@ -115,6 +115,7 @@ export var defaultStrings = {
 
         qEditorTitle: "Edit question: {0}",
         general: "General",
+        fileOptions: "Options",
         html: "Html Editor",
         columns: "Columns",
         rows: "Rows",

@@ -22,6 +22,7 @@ export {SurveyQuestionMatrixEditor} from "../questionEditors/questionMatrixEdito
 export {SurveyQuestionMatrixDropdownEditor} from "../questionEditors/questionMatrixDropdownEditor";
 export {SurveyQuestionMatrixDynamicEditor} from "../questionEditors/questionMatrixDynamicEditor";
 export {SurveyQuestionRatingEditor} from "../questionEditors/questionRatingEditor";
+export {SurveyQuestionFileEditor} from "../questionEditors/questionFileEditor";
 
 export {SurveyObjectProperty} from "../objectProperty";
 export {SurveyObjectEditor} from "../objectEditor";
