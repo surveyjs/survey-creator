@@ -48,7 +48,7 @@ var packagePlatformJson = {
 
 module.exports = function(options) {
     var packagePath = './package/';
-    var extractCSS = new ExtractTextPlugin({ filename: packagePath + 'survey.css' });
+    var extractCSS = new ExtractTextPlugin({ filename: packagePath + 'surveyeditor.css' });
 
     var percentage_handler = function handler(percentage, msg) {
         if ( 0 == percentage ) {
@@ -63,7 +63,10 @@ module.exports = function(options) {
             'surveyeditor': path.resolve(__dirname, './src/entries/index.ts')
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.scss']
+            extensions: ['.ts', '.tsx', '.scss'],
+            alias: {
+                tslib:  path.join(__dirname, './src/entries/helpers.ts')
+            }
         },
         module: {
             rules: [
