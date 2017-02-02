@@ -26,31 +26,20 @@ To build library yourself:
 
  2. **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. 
 	```
-	npm install -g gulp
-	npm install -g typings
 	npm install
 	```
-	The first `npm` command sets up the popular [Gulp](http://gulpjs.com/) build tool. 
-	The second `npm` command sets up the Typescript Definition Manager [Typings](https://github.com/typings/typings). 
 
- 3. **Create TypeScript definition files**
+ 3. **Build the library**
 	```
-	typings install
-	```
-	Typescript definition files should be located at 'typings' directory.
-
- 4. **Build the library**
-	```
-	gulp makedist
+	npm run build_prod
 	```
 	After that you should have the library at 'dist' directory.
 
- 5. **Run unit tests**
+ 4. **Run unit tests**
 	```
-	gulp copyfiles
-	gulp test_ci
+	karma start
 	```
-	The first command will copy all required files to 'wwwroot' directory and the last command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
+	This command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
 
 
 #Dependencies

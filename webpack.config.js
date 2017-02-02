@@ -48,7 +48,7 @@ var packagePlatformJson = {
 
 module.exports = function(options) {
     var packagePath = './package/';
-    var extractCSS = new ExtractTextPlugin({ filename: packagePath + 'survey.css' });
+    var extractCSS = new ExtractTextPlugin({ filename: packagePath + 'surveyeditor.css' });
 
     var percentage_handler = function handler(percentage, msg) {
         if ( 0 == percentage ) {
