@@ -21,3 +21,4 @@ project.lock.json
 /src/template_question.html.ts
 /src/template_page.html.ts
 /src/templateEditor.ko.html.ts
+/project.json

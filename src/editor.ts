@@ -379,10 +379,6 @@ export class SurveyEditor {
 
         this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
         this.setUndoRedoCurrentState(true);
-        this.surveyValue.mode = "designer";
-        //TODO remove the line above and call the method directly.
-        if (this.surveyValue["setDesignMode"]) this.surveyValue["setDesignMode"](true);
-        this.surveyValue.render(this.surveyjs);
 
         this.jsonEditor.init();
     }
@@ -395,9 +391,9 @@ export class SurveyEditor {
         if (this.surveyValue.isEmpty) {
             this.surveyValue = new Survey.Survey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
         }
-        this.survey.mode = "designer";
         //TODO remove the line above and call the method directly.
         if (this.survey["setDesignMode"]) this.survey["setDesignMode"](true);
+        else this.survey.mode = "designer";
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
