@@ -63,7 +63,10 @@ module.exports = function(options) {
             'surveyeditor': path.resolve(__dirname, './src/entries/index.ts')
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.scss']
+            extensions: ['.ts', '.tsx', '.scss'],
+            alias: {
+                tslib:  path.join(__dirname, './src/entries/helpers.ts')
+            }
         },
         module: {
             rules: [
