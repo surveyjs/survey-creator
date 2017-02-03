@@ -197,7 +197,7 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
         if (this.hasTitle) (<Survey.Question>this.questionBase).title = this.koTitle();
         if (this.hasVisible) this.questionBase.visible = this.koVisible();
         if (this.hasIsRequired) (<Survey.Question>this.questionBase).isRequired = this.koIsRequired();
-        if (this.hasStartWithNewLine) this.questionBase.startWithNewLine = this.koVisible();
+        if (this.hasStartWithNewLine) this.questionBase.startWithNewLine = this.koStartWithNewLine();
     }
 }
 
