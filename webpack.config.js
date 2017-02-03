@@ -27,10 +27,12 @@ var packagePlatformJson = {
     "homepage": "http://editor.surveyjs.io",
     "license": "http://editor.surveyjs.io/license.html",
     "files": [
-        "dist/",
-        "js/"
+        "fonts/",
+        "surveyeditor.css",
+        "surveyeditor.js",
+        "surveyeditor.min.js"
     ],
-    "main": "./js/surveyeditor.min.js",
+    "main": "surveyeditor.min.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/surveyjs/editor.git"
