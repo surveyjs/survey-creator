@@ -78,7 +78,7 @@ module.exports = function(options) {
                     test: /\.scss$/,
                     loader: extractCSS.extract({
                         fallbackLoader: 'style-loader',
-                        loader: 'css-loader!sass-loader'
+                        loader: 'css-loader?url=false!sass-loader'
                     })
                 },
                 {
