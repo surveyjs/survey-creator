@@ -103,6 +103,7 @@ export var defaultStrings = {
         fastEntry: "Fast Entry",
         formEntry: "Form Entry",
         testService: "Test the service",
+        expressionHelp: "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
 
         value: "Value",
         text: "Text",
@@ -120,7 +121,7 @@ export var defaultStrings = {
         columns: "Columns",
         rows: "Rows",
         choices: "Choices",
-        visibleIf: "Show on condition",
+        visibleIf: "Visible If",
         rateValues: "Rate Values",
         choicesByUrl: "Choices from Web",
         matrixChoices: "Default Choices",

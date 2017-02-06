@@ -12,18 +12,6 @@ html body {
     background-color: $light-bg-color;
 }
 
-@media (max-width: 991px) {
-    .svd_container .svd_content .svd_editors {
-        padding: 0;
-    }
-}
-
-@media (max-width: 991px) {
-    .svd_container .svd_content .svd_properties {
-        margin-top: 20px;
-    }
-}
-
 @media (max-width: 816px) {
     .svd_container .nav-tabs.svd_menu > li.active > a {
         color: $main-color;

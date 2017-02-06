@@ -9,3 +9,17 @@ tmp/*
 *.js
 
 
+/dist/css
+/shippable
+/Properties
+/src/templateEditor.ko.html.ts
+/typings
+/wwwroot
+/surveyjs.editor.xproj
+/survey.js.editor.sln
+/Startup.cs
+/project.lock.json
+/project.json
+/hosting.ini
+/src/template_question.html.ts
+/src/template_page.html.ts

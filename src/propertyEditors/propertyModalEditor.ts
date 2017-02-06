@@ -62,5 +62,13 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
     public get editorType(): string { return "html"; }
 }
 
+export class SurveyPropertyExpressionEditor extends SurveyPropertyTextEditor {
+    constructor() {
+        super();
+    }
+    public get editorType(): string { return "expression"; }
+}
+
 SurveyPropertyEditorBase.registerEditor("text", function (): SurveyPropertyEditorBase { return new SurveyPropertyTextEditor(); });
 SurveyPropertyEditorBase.registerEditor("html", function (): SurveyPropertyEditorBase { return new SurveyPropertyHtmlEditor(); });
+SurveyPropertyEditorBase.registerEditor("expression", function (): SurveyPropertyEditorBase { return new SurveyPropertyExpressionEditor(); });
