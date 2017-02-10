@@ -20,6 +20,9 @@
             <label for="titleName">titleName:</label>
             <input id="titleName" type="text" data-bind="value:koTitleName" class="form-control" />
         </div>
+        <div class="form-group">
+            <label for="titleName"><span data-bind="text:$root.getLocString('pe.testService')"></span></label>
+            <select class="form-control" data-bind="options: question.koVisibleChoices, optionsText: 'text', optionsValue: 'value', optionsCaption: question.optionsCaption"></select>
+        </div>
     </form>
-    <div id="restfullSurvey" style="width:100%;height:150px"></div>
 </script>

@@ -5,7 +5,7 @@ import {editorLocalization} from "../editorLocalization";
 import * as Survey from "survey-knockout";
 
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
-    koUrl: any; koPath: any; koValueName: any; koTitleName: any;
+    koUrl: any; koPath: any; koValueName: any; koTitleName: any; 
     public survey: Survey.Survey;
     public question: Survey.QuestionDropdown;
 
@@ -38,7 +38,6 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
         this.koPath(val ? val.path : "");
         this.koValueName(val ? val.valueName : "");
         this.koTitleName(val ? val.titleName : "");
-        this.survey.render("restfullSurvey");
     }
     protected onBeforeApply() {
         var val = new Survey.ChoicesRestfull();
@@ -59,7 +58,6 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
         this.question = <Survey.QuestionDropdown>page.addNewQuestion("dropdown", "q1");
         this.question.title = editorLocalization.getString("pe.testService")
         this.question.choices = [];
-        this.survey.render("restfullSurvey");
     }
 }
 
