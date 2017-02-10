@@ -70,6 +70,10 @@ export class DragDropHelper {
             this.survey.currentPage["koDragging"](-1);
         }
     }
+    public scrollToElement(el: HTMLElement) {
+        if (!this.scrollableElement || !el) return;
+        el.scrollIntoView(false);
+    }
     private createTargetQuestion(questionType: string, questionName: string, json: any): Survey.QuestionBase {
         if (!questionName) return null;
         var targetQuestion = <Survey.QuestionBase>this.survey.getQuestionByName(questionName);

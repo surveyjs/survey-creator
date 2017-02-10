@@ -443,6 +443,7 @@ export class SurveyEditor {
             index = page.questions.indexOf(this.survey["selectedQuestionValue"]) + 1;
         }
         page.addQuestion(question, index);
+        this.dragDropHelper.scrollToElement(document.getElementById(question.id));
         this.setModified();
     }
     private deleteQuestion() {
