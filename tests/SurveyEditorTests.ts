@@ -52,6 +52,14 @@ QUnit.test("Save/Load custom questions", function (assert) {
     editor2.customToolboxQuestionsText = "";
     assert.equal(editor2.koCustomToolboxQuestions().length, 0, "Empty the customToolbox questions");
 });
+QUnit.test("At least one page should be available", function (assert) {
+    var editor = new SurveyEditor();
+    editor.text = JSON.stringify(getSurveyJson());
+    editor.text = null;
+    assert.equal(editor.survey.pages.length, 1, "There should be at least one page");
+    assert.equal(editor.survey.pages[0]["koDragging"](), -1, "the page object should be extended correctly");
+    assert.ok(editor.survey["dragDropHelper"], "dragDropHelper was created");
+});
 QUnit.test("options.questionTypes", function (assert) {
     var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
     var editor = new SurveyEditor(null, null);

@@ -386,11 +386,11 @@ export class SurveyEditor {
         var self = this;
         this.surveyValue = new Survey.Survey();
         this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
-        this.surveyValue["dragDropHelper"] = this.dragDropHelper;
         this.surveyValue["setJsonObject"](json); //TODO
         if (this.surveyValue.isEmpty) {
-            this.surveyValue = new Survey.Survey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
+            this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
         }
+        this.surveyValue["dragDropHelper"] = this.dragDropHelper;
         //TODO remove the line above and call the method directly.
         if (this.survey["setDesignMode"]) this.survey["setDesignMode"](true);
         else this.survey.mode = "designer";

@@ -23,3 +23,6 @@ tmp/*
 /hosting.ini
 /src/template_question.html.ts
 /src/template_page.html.ts
+/bin/Debug/dnxcore50
+/obj/Debug
+/web.config
