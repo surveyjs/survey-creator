@@ -18,7 +18,7 @@ export class DragDropHelper {
     public startDragQuestion(event: DragEvent, questionName: string) {
         this.prepareData(event, null, questionName);
     }
-    public startDragCopiedQuestion(event: DragEvent, questionName: string, questionJson: any) {
+    public startDragToolboxItem(event: DragEvent, questionName: string, questionJson: any) {
         this.prepareData(event, null, questionName, questionJson);
     }
     public isSurveyDragging(event: DragEvent): boolean {

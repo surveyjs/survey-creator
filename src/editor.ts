@@ -11,6 +11,7 @@ import {SurveyTextWorker} from "./textWorker"
 import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";
 import {SurveyHelper, ObjType} from "./surveyHelper";
 import {DragDropHelper} from "./dragdrophelper";
+import {QuestionToolbox} from "./questionToolbox";
 import {SurveyJSON5} from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 var templatePageHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_page.html");
@@ -29,6 +30,7 @@ export class SurveyEditor {
     private pagesEditor: SurveyPagesEditor;
     private surveyEmbeding: SurveyEmbedingWindow;
     private surveyObjects: SurveyObjects;
+    private toolboxValue: QuestionToolbox;
     private surveyVerbs: SurveyVerbs;
     private undoRedo: SurveyUndoRedo;
     private surveyValue: Survey.Survey;
@@ -42,9 +44,6 @@ export class SurveyEditor {
 
     public surveyId: string = null;
     public surveyPostId: string = null;
-    public questionTypes: string[];
-    public koCustomToolboxQuestions: any;
-    public customToolboxQuestionMaxCount: number = 3;
     public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
     public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
@@ -62,8 +61,7 @@ export class SurveyEditor {
     koState: any;
     runSurveyClick: any; embedingSurveyClick: any;
     saveButtonClick: any;
-    draggingQuestion: any; clickQuestion: any;
-    draggingCopiedQuestion: any; clickCustomToolboxQuestion: any;
+    draggingToolboxItem: any; clickToolboxItem: any;
     dragEnd: any;
 
     constructor(renderedElement: any = null, options: any = null) {
@@ -71,7 +69,6 @@ export class SurveyEditor {
         this.koShowOptions = ko.observable();
         this.koGenerateValidJSON = ko.observable();
         this.setOptions(options);
-        this.koCustomToolboxQuestions = ko.observableArray();
         this.koCanDeleteObject = ko.observable(false);
 
         var self = this;
@@ -107,6 +104,7 @@ export class SurveyEditor {
         this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
             (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
         this.surveyEmbeding = new SurveyEmbedingWindow();
+        this.toolboxValue = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null);
 
         this.koViewType = ko.observable("designer");
         this.koIsShowDesigner = ko.computed(function () { return self.koViewType() == "designer"; });
@@ -119,10 +117,8 @@ export class SurveyEditor {
         this.runSurveyClick = function () { self.showLiveSurvey(); };
         this.embedingSurveyClick = function () { self.showSurveyEmbeding(); };
         this.deleteObjectClick = function () { self.deleteCurrentObject(); };
-        this.draggingQuestion = function (questionType, e) { self.doDraggingQuestion(questionType, e); };
-        this.clickQuestion = function (questionType) { self.doClickQuestion(questionType); };
-        this.draggingCopiedQuestion = function (item, e) { self.doDraggingCopiedQuestion(item.json, e); };
-        this.clickCustomToolboxQuestion = function (item) { self.doClickCustomToolboxQuestion(item.json); };
+        this.draggingToolboxItem = function (item, e) { self.doDraggingToolboxItem(item.json, e); };
+        this.clickToolboxItem = function (item) { self.doClickToolboxItem(item.json); };
         this.dragEnd = function (item, e) { self.dragDropHelper.end(); };
 
         this.doUndoClick = function () { self.doUndoRedo(self.undoRedo.undo()); };
@@ -136,7 +132,6 @@ export class SurveyEditor {
     }
     protected setOptions(options: any) {
         this.options = options;
-        this.questionTypes = this.getQuestionTypes();
         this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
         this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
         this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
@@ -184,6 +179,9 @@ export class SurveyEditor {
             this.koViewType("editor");
         }
     }
+    public get toolbox(): QuestionToolbox { return this.toolboxValue; }
+    public get customToolboxQuestionMaxCount(): number { return this.toolbox.copiedItemMaxCount; }
+    public set customToolboxQuestionMaxCount(value: number) { this.toolbox.copiedItemMaxCount = value; }
     public get state(): string { return this.stateValue; }
     protected setState(value: string) {
         this.stateValue = value;
@@ -246,18 +244,6 @@ export class SurveyEditor {
         this.setModified();
     }
     public getLocString(str: string) { return editorLocalization.getString(str); }
-    protected getQuestionTypes(): string[] {
-        var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
-        if (!this.options || !this.options.questionTypes || !this.options.questionTypes.length) return allTypes;
-        var result = [];
-        for (var i = 0; i < this.options.questionTypes.length; i++) {
-            var questionType = this.options.questionTypes[i];
-            if (allTypes.indexOf(questionType) > -1) {
-                result.push(questionType);
-            }
-        }
-        return result;
-    }
     private movePage(indexFrom: number, indexTo: number) {
         var page = <Survey.Page>this.survey.pages[indexFrom];
         this.survey.pages.splice(indexFrom, 1);
@@ -417,16 +403,10 @@ export class SurveyEditor {
         }
         return html;
     }
-    private doDraggingQuestion(questionType: any, e) {
-        this.dragDropHelper.startDragNewQuestion(e, questionType, this.getNewQuestionName());
+    private doDraggingToolboxItem(json: any, e) {
+        this.dragDropHelper.startDragToolboxItem(e, this.getNewQuestionName(), json);
     }
-    private doDraggingCopiedQuestion(json: any, e) {
-        this.dragDropHelper.startDragCopiedQuestion(e, this.getNewQuestionName(), json);
-    }
-    private doClickQuestion(questionType: any) {
-        this.doClickQuestionCore(Survey.QuestionFactory.Instance.createQuestion(questionType, this.getNewQuestionName()));
-    }
-    private doClickCustomToolboxQuestion(json: any) {
+    private doClickToolboxItem(json: any) {
         var name = this.getNewQuestionName();
         var question = Survey.QuestionFactory.Instance.createQuestion(json["type"], name);
         new Survey.JsonObject().toObject(json, question);
@@ -466,20 +446,6 @@ export class SurveyEditor {
     private deleteCurrentObject() {
         this.deleteObject(this.koSelectedObject().value);
     }
-    public get customToolboxQuestionsText(): string {
-        if (this.koCustomToolboxQuestions().length == 0) return "";
-        return JSON.stringify(this.koCustomToolboxQuestions());
-    }
-    public set customToolboxQuestionsText(val: string) {
-        if (!val) {
-            this.koCustomToolboxQuestions([]);
-        } else {
-            var json = JSON.parse(val);
-            if (json && Array.isArray(json)) {
-                this.koCustomToolboxQuestions(json);
-            }
-        }
-    }
     public showQuestionEditor(question: Survey.QuestionBase) {
         var self = this;
         this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); });
@@ -491,34 +457,15 @@ export class SurveyEditor {
         this.survey.render();
     }
     public addCustomToolboxQuestion(question: Survey.QuestionBase) {
-        var objType = SurveyHelper.getObjectType(question);
-        if (objType != ObjType.Question) return;
-        var json = new Survey.JsonObject().toJsonObject(question);
-        json.type = question.getType();
-        var item = this.getCustomToolboxQuestionByName(question.name);
-        if (item) {
-            item.json = json;
-        } else {
-            this.koCustomToolboxQuestions.push({ name: question.name, json: json });
-        }
-        if (this.koCustomToolboxQuestions().length > this.customToolboxQuestionMaxCount) {
-            this.koCustomToolboxQuestions.splice(0, 1);
-        }
+        this.toolbox.addCopiedItem(question);
     }
 
     public fastCopyQuestion(question: Survey.QuestionBase) {
         var json = new Survey.JsonObject().toJsonObject(question);
         json.type = question.getType();
-        this.doClickCustomToolboxQuestion( json );
+        this.doClickToolboxItem( json );
     }
 
-    private getCustomToolboxQuestionByName(name: string) {
-        var items = this.koCustomToolboxQuestions();
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].name == name) return items[i];
-        }
-        return null;
-    }
     private deleteObject(obj: any) {
         this.surveyObjects.removeObject(obj);
         var objType = SurveyHelper.getObjectType(obj);
