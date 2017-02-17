@@ -3,7 +3,7 @@
          { "name" : "Customization", "id": "customization",
            "items": [
                 { "name": "Show/Hide Tabs", "text" : "Use options to customize the editor", "url": "options.html"},
-                { "name": "Remove Questions", "text" : "Use options to limit supported questions", "url": "removequestions.html"},
+                { "name": "Toolbox customization", "text" : "Fully control your Question Toolbox", "url": "toolboxcustomization.html"},
                 { "name": "Add properties", "text" : "Add a new property to any object", "url": "addproperties.html"},
                 { "name": "Remove properties", "text" : "Remove a property explicity or use an event", "url": "removeproperties.html"}
             ]},

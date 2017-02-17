@@ -1,0 +1,22 @@
+<div class="propertyitem">
+    <p>
+    Add/replace an item into toolbox:</p>
+    <textarea id="itemJSON" rows="10" style="width:100%">{
+        "name": "countries",
+        "isCopied": true,
+        "iconName": "icon-default",
+        "title": "All countries",
+        "json": { "type": "dropdown",  "choicesByUrl": { "url": "https://restcountries.eu/rest/v1/all"   } }
+}</textarea>
+</p>
+<button class="btn btn-primary" onclick="addToolboxItem()">Add/replace item</button>        
+       <pre><code class="language-javascript">editor.toolbox.addItem(itemAsJson)</code></pre>
+</p>
+</div>
+
+<script>
+function addToolboxItem() {
+    var jsonText = document.getElementById('itemJSON').value;
+    editor.toolbox.addItem(JSON.parse(jsonText));
+}
+</script>
