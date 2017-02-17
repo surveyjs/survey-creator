@@ -41,7 +41,7 @@ var packagePlatformJson = {
         "node": ">=0.10.0"
     },
     "dependencies": {
-        "survey-knockout": "^0.10.0",
+        "survey-knockout": "^" + packageJson.version,
         "knockout": "^3.4.0",
         "bootstrap": "^3.3.6",
         "ace-builds": "^1.2.2"
