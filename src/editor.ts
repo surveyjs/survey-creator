@@ -125,6 +125,8 @@ export class SurveyEditor {
         this.doRedoClick = function () { self.doUndoRedo(self.undoRedo.redo()); };
 
         this.jsonEditor = new SurveyJSONEditor();
+        
+        this.text = "";
 
         if (renderedElement) {
             this.render(renderedElement);
@@ -296,6 +298,9 @@ export class SurveyEditor {
     }
     private canSwitchViewType(newType: string): boolean {
         if (newType && this.koViewType() == newType) return false;
+        if (this.koViewType() == "designer") {
+            this.jsonEditor.text = this.getSurveyTextFromDesigner();
+        }
         if (this.koViewType() != "editor") return true;
         if (!this.jsonEditor.isJsonCorrect) {
             alert(this.getLocString("ed.correctJSON"));
@@ -304,21 +309,21 @@ export class SurveyEditor {
         this.initSurvey(new Survey.JsonObject().toJsonObject(this.jsonEditor.survey));
         return true;
     }
-    private showDesigner() {
+    public showDesigner() {
         if (!this.canSwitchViewType("designer")) return;
         this.koViewType("designer");
     }
-    private showJsonEditor() {
+    public showJsonEditor() {
         if (this.koViewType() == "editor") return;
         this.jsonEditor.show(this.getSurveyTextFromDesigner());
         this.koViewType("editor");
     }
-    private showTestSurvey() {
+    public showTestSurvey() {
         if (!this.canSwitchViewType(null)) return;
         this.showLiveSurvey();
         this.koViewType("test");
     }
-    private showEmbedEditor() {
+    public showEmbedEditor() {
         if (!this.canSwitchViewType("embed")) return;
         this.showSurveyEmbeding();
         this.koViewType("embed");

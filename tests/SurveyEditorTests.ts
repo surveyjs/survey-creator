@@ -69,6 +69,13 @@ QUnit.test("Do not reload surey on 'Designer' tab click", function (assert) {
     assert.equal(editor.survey.PageCount, pageCount + 1, "new Page is stil there");
 });
 
+QUnit.test("SurveyJSON always return correct data, bug #53", function (assert) {
+    var editor = new SurveyEditor();
+    editor.survey.pages[0].addNewQuestion("text", "q1");
+    editor.showTestSurvey();
+    assert.equal(JSON.stringify(editor["getSurveyJSON"]()).indexOf("q1")> - 1, true, "The new question is here");
+});
+
 function getSurveyJson(): any {
     return {
         pages: [{
