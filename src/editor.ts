@@ -47,6 +47,7 @@ export class SurveyEditor {
     public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
     public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
 
     koIsShowDesigner: any;
     koViewType: any;
@@ -258,12 +259,14 @@ export class SurveyEditor {
         this.pagesEditor.survey = this.surveyValue;
         this.surveyObjects.addPage(page);
     }
-    private onQuestionAdded(question: Survey.QuestionBase) {
+    private doOnQuestionAdded(question: Survey.QuestionBase) {
         var page = <Survey.Page>this.survey.getPageByQuestion(question);
         this.surveyObjects.addQuestion(page, question);
+        var options = { question: question, page: page };
+        this.onQuestionAdded.fire(this, options);
         this.survey.render();
     }
-    private onQuestionRemoved(question: Survey.QuestionBase) {
+    private doOnQuestionRemoved(question: Survey.QuestionBase) {
         this.surveyObjects.removeObject(question);
         this.survey.render();
     }
@@ -397,8 +400,8 @@ export class SurveyEditor {
         this.surveyValue["onDeleteCurrentObject"].add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
-        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.onQuestionAdded(options.question); });
-        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.onQuestionRemoved(options.question); });
+        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question); });
+        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnQuestionRemoved(options.question); });
     }
     private processHtml(html: string): string {
         if (!html) return html;

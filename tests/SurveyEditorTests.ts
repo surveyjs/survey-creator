@@ -76,6 +76,17 @@ QUnit.test("SurveyJSON always return correct data, bug #53", function (assert) {
     assert.equal(JSON.stringify(editor["getSurveyJSON"]()).indexOf("q1")> - 1, true, "The new question is here");
 });
 
+QUnit.test("onQuestionAdded event", function (assert) {
+    var editor = new SurveyEditor();
+    var counter = 0;
+    editor.onQuestionAdded.add(function() {counter ++});
+    assert.equal(counter, 0, "No question was added");
+    editor.text = JSON.stringify(getSurveyJson());
+    assert.equal(counter, 0, "No question was added");
+    editor.survey.pages[0].addNewQuestion("text", "q1");
+    assert.equal(counter, 1, "One question was added");
+});
+
 function getSurveyJson(): any {
     return {
         pages: [{
