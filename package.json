@@ -11,7 +11,6 @@
     "@types/knockout": "^3.4.39",
     "@types/node": "^7.0.4",
     "@types/qunit": "^2.0.31",
-    "@types/survey-knockout": "^0.9.18",
     "ace-builds": "^1.2.2",
     "ajv": "^4.11.2",
     "babel-loader": "^6.2.10",
