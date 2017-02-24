@@ -48,6 +48,7 @@ export class SurveyEditor {
     public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
 
     koIsShowDesigner: any;
     koViewType: any;
@@ -209,6 +210,7 @@ export class SurveyEditor {
     protected setModified() {
         this.setState("modified");
         this.setUndoRedoCurrentState();
+        this.onModified.fire(this, null);
     }
     private setUndoRedoCurrentState(clearState: boolean = false) {
         if (clearState) {
