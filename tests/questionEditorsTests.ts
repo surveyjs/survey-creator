@@ -125,7 +125,7 @@ QUnit.test("Question editor definition: getProperties", function (assert) {
     var properties = SurveyQuestionEditorDefinition.getProperties("rating");
     assert.equal(properties.length, baseProperties.length + 2, "Rating adds two properties");
     assert.equal(properties[0], "name", "The first rating property");
-    assert.equal(properties[properties.length - 1], "maximumRateDescription", "The last rating property");
+    assert.equal(properties[properties.length - 1], "maxRateDescription", "The last rating property");
 });
 
 QUnit.test("Question editor definition: getTabs", function (assert) {
