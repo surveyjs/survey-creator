@@ -13,7 +13,7 @@ export class SurveyQuestionEditorGeneralProperty {
     koValue: any; koErrorText: any; koHasError: any;
     constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, public isRequired: boolean = false) {
         this.name = property.name;
-        this.disabled = property.readOnly;
+        this.disabled = property["readOnly"];
         this.editType = "text";
         if(property.type == "text") this.editType = "textarea";
         if(property.type == "boolean") this.editType = "check";
