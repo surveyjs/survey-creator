@@ -12,6 +12,7 @@ export class SurveyObjectProperty {
     public name: string;
     public displayName: string;
     public title: string;
+    public disabled: boolean;
     public koValue: any;
     public koText: any;
     public modalName: string;
@@ -25,6 +26,7 @@ export class SurveyObjectProperty {
     constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: any = null) {
         this.onPropertyChanged = onPropertyChanged;
         this.name = this.property.name;
+        this.disabled = property["readOnly"];
         this.koValue = ko.observable();
         this.choices = property.choices;
         var self = this;
