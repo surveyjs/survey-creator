@@ -128,8 +128,8 @@ export var defaultStrings = {
         rowCount: "Row count", 
         addRowText: "Add row button text", 
         removeRowText: "Remove row button text",
-        mininumRateDescription: "Minimum rate description", 
-        maximumRateDescription: "Maximum rate description",
+        minRateDescription: "Minimum rate description", 
+        maxRateDescription: "Maximum rate description",
         inputType: "Input type",
 
         qEditorTitle: "Edit question: {0}",

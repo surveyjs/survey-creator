@@ -30,7 +30,7 @@ export class SurveyQuestionEditorDefinition {
             tabs: [{name: "items", index: 10}]
         },
         "rating" : {
-            properties: ["mininumRateDescription", "maximumRateDescription"],
+            properties: ["minRateDescription", "maxRateDescription"],
             tabs: [{name: "rateValues", index: 10}]
         },
         "selectbase" : {
