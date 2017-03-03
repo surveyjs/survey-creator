@@ -1,21 +1,30 @@
 ﻿<script type="text/html" id="questioneditortab-general">
     <div>
+        <!-- ko foreach: properties.rows -->
         <div class="form-group">
-            <label>Name:</label>
-            <input type="text" class="form-control" data-bind="value: koName" />
+            <!-- ko foreach: properties -->
+                    <div class="alert alert-danger" role="alert" data-bind="visible:koHasError">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span  data-bind="text:koErrorText"></span>
+                    </div>            
+                    <!-- ko if: editType != 'check' -->
+                        <label data-bind="text:title"></label>
+                    <!-- /ko -->
+                    <!-- ko if: editType == 'text' -->
+                        <input type="text" class="form-control" data-bind="value: koValue, disable: disabled" />
+                    <!-- /ko -->
+                    <!-- ko if: editType == 'textarea' -->
+                        <textarea type="text" rows="2" class="form-control" data-bind="value: koValue, disable: disabled"></textarea>
+                    <!-- /ko -->
+                    <!-- ko if: editType == 'check' -->
+                        <span class="checkbox-inline"><input type="checkbox" data-bind="checked: koValue, disable: disabled"><label data-bind="text:title"></label></span>
+                    <!-- /ko -->
+                    <!-- ko if: editType == 'dropdown' -->
+                        <select class="form-control"  data-bind="value: koValue, options: choices, disable: disabled"></select>
+                    <!-- /ko -->
+            <!-- /ko  -->
         </div>
-        <div  class="form-group" data-bind="visible:hasTitle">
-            <label>Title:</label>
-            <textarea type="text" rows="2" class="form-control" data-bind="value: koTitle"></textarea>
-        </div>
-        <div class="form-group">
-            <span class="checkbox-inline" data-bind="visible:hasVisible"><input type="checkbox" data-bind="checked: koVisible"><label>Visible</label></span>
-            <span class="checkbox-inline" data-bind="visible:hasIsRequired"><input type="checkbox" data-bind="checked: koIsRequired"><label>Required</label></span>
-            <span class="checkbox-inline" data-bind="visible:hasStartWithNewLine"><input type="checkbox" data-bind="checked: koStartWithNewLine"><label>Start with new line</label></span>
-        </div>
-        <div data-bind="visible:hasAdditionalTemplate">
-            <!-- ko template: { name: $data.additionalTemplateHtml, data: $data } -->
-            <!-- /ko -->
-        </div>
+        <!-- /ko  -->
     </div>
 </script>

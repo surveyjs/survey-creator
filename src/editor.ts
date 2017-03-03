@@ -5,7 +5,7 @@ import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
 import {SurveyVerbs} from "./objectVerbs";
-import {SurveyPropertyEditorShowWindow} from "./questionEditors/questionEditorBase";
+import {SurveyPropertyEditorShowWindow} from "./questionEditors/questionEditor";
 import {SurveyJSONEditor} from "./surveyJSONEditor";
 import {SurveyTextWorker} from "./textWorker"
 import {SurveyUndoRedo, UndoRedoItem} from "./undoredo";

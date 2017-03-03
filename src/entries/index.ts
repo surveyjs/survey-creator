@@ -16,16 +16,10 @@ export {SurveyPropertyResultfullEditor} from "../propertyEditors/propertyRestful
 export {SurveyPropertyTriggersEditor} from "../propertyEditors/propertyTriggersEditor";
 export {SurveyPropertyValidatorsEditor} from "../propertyEditors/propertyValidatorsEditor";
 
-export {SurveyQuestionSelectBaseEditor} from "../questionEditors/questionSelectBaseEditor";
-export {SurveyQuestionTextEditor} from "../questionEditors/questionTextEditor";
-export {SurveyQuestionMultipleTextEditor} from "../questionEditors/questionMultipleTextEditor";
-export {SurveyQuestionCommentEditor} from "../questionEditors/questionCommentEditor";
-export {SurveyQuestionHtmlEditor} from "../questionEditors/questionHtmlEditor";
-export {SurveyQuestionMatrixEditor} from "../questionEditors/questionMatrixEditor";
-export {SurveyQuestionMatrixDropdownEditor} from "../questionEditors/questionMatrixDropdownEditor";
-export {SurveyQuestionMatrixDynamicEditor} from "../questionEditors/questionMatrixDynamicEditor";
-export {SurveyQuestionRatingEditor} from "../questionEditors/questionRatingEditor";
-export {SurveyQuestionFileEditor} from "../questionEditors/questionFileEditor";
+
+export {SurveyQuestionEditorGeneralProperties, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperty} from "../questionEditors/questionEditorGeneralProperties";
+export {SurveyQuestionEditorDefinition} from "../questionEditors/questionEditorDefinition";
+export {SurveyPropertyEditorShowWindow, SurveyQuestionEditor, SurveyQuestionEditorTabGeneral, SurveyQuestionEditorTabProperty} from "../questionEditors/questionEditor";
 
 export {QuestionToolbox} from "../questionToolbox";
 export {SurveyObjectProperty} from "../objectProperty";
