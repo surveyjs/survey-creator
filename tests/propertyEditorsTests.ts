@@ -139,6 +139,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (asser
     assert.equal(columns.length, 3, "There are 3 columns");
     assert.equal(columns[2]["cellType"], "checkbox", "the last column has checkbox cells");
 });
+/* TODO uncomment it after release. The test requires non-released surveyjs version.
 QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (assert) {
     var columns: Array<Survey.MatrixDropdownColumn> = [];
     columns.push(new Survey.MatrixDropdownColumn("column 1"));
@@ -153,6 +154,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (
     assert.equal(itemValueProperty.columnEditor.obj.getType(), "matrixdropdowncolumn", "columnEditor edit the second item");
     assert.ok(itemValueProperty.columnEditor.koTabs().length > 1, "There are more than one tab");
 });
+*/
 QUnit.test("Text property test - two way binding", function (assert) {
     var property = new Survey.JsonObjectProperty("text");
     property.type = "text";

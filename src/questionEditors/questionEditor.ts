@@ -66,8 +66,8 @@ export class SurveyQuestionEditor {
         this.koActiveTab = ko.observable(tabs[0].name);
         this.koTabs = ko.observableArray(tabs);
         this.koTitle = ko.observable();
-        if(this.obj.name) {
-            this.koTitle(editorLocalization.getString("pe.qEditorTitle")["format"](this.obj.name));
+        if(this.obj["name"]) {
+            this.koTitle(editorLocalization.getString("pe.qEditorTitle")["format"](this.obj["name"]));
         }
     }
     public hasError(): boolean {
@@ -159,7 +159,7 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
 
 export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase {
     private propertyEditorValue: SurveyPropertyModalEditor;
-    constructor(public obj: Survey.QuestionBase, public property: Survey.JsonObjectProperty) {
+    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty) {
         super(obj);
         this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorBase.createEditor(this.property.type, null);
         this.propertyEditorValue.value = this.getValue(this.property);
