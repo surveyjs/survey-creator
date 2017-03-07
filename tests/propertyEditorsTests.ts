@@ -130,7 +130,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (asser
     itemValueProperty.value = columns;
     assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
     assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
-    assert.equal(itemValueProperty.koItems()[0].koChoices().length, 3, "there are two elements");
+    assert.equal(itemValueProperty.koItems()[0].editColumn.choices.length, 3, "there are two elements");
     itemValueProperty.onAddClick();
     itemValueProperty.koItems()[2].koCellType("checkbox");
     itemValueProperty.koItems()[2].koName("column 3");
@@ -138,6 +138,20 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (asser
     itemValueProperty.onApplyClick();
     assert.equal(columns.length, 3, "There are 3 columns");
     assert.equal(columns[2]["cellType"], "checkbox", "the last column has checkbox cells");
+});
+QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (assert) {
+    var columns: Array<Survey.MatrixDropdownColumn> = [];
+    columns.push(new Survey.MatrixDropdownColumn("column 1"));
+    columns.push(new Survey.MatrixDropdownColumn("column 2"));
+    var itemValueProperty = new SurveyPropertyDropdownColumnsEditor();
+    itemValueProperty.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => { columns = newValue; };
+    itemValueProperty.value = columns;
+
+    assert.equal(itemValueProperty.columnEditor, null, "It is null by default");
+    itemValueProperty.koEditItem(itemValueProperty.koItems()[1]);
+    assert.notEqual(itemValueProperty.columnEditor.obj, null, "The question editor obj is not null");
+    assert.equal(itemValueProperty.columnEditor.obj.getType(), "matrixdropdowncolumn", "columnEditor edit the second item");
+    assert.ok(itemValueProperty.columnEditor.koTabs().length > 1, "There are more than one tab");
 });
 QUnit.test("Text property test - two way binding", function (assert) {
     var property = new Survey.JsonObjectProperty("text");

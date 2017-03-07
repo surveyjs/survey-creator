@@ -34,10 +34,29 @@ export class SurveyQuestionEditorDefinition {
             tabs: [{name: "rateValues", index: 10}]
         },
         "selectbase" : {
+            properties: ["hasOther", "choicesOrder", "colCount"],
             tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
         },
         "text" : {
             properties: ["inputType", "placeHolder"]
+        },
+        "matrixdropdowncolumn@checkbox" : {
+            properties: ["hasOther", "choicesOrder", "colCount"],
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+        },
+        "matrixdropdowncolumn@radiogroup" : {
+            properties: ["hasOther", "choicesOrder", "colCount"],
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+        },
+        "matrixdropdowncolumn@dropdown" : {
+            properties: ["hasOther", "choicesOrder", "optionsCaption"],
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+        },
+        "matrixdropdowncolumn@text" : {
+            properties: ["inputType", "placeHolder"]
+        },
+        "matrixdropdowncolumn@comment" : {
+            properties: ["placeHolder"]
         }
     }
     public static getProperties(className: string): Array<any> {
@@ -69,6 +88,10 @@ export class SurveyQuestionEditorDefinition {
     }
     static getAllDefinitionsByClass(className: string) : Array<any> {
         var result = [];
+        if(className.indexOf('@') > -1 && SurveyQuestionEditorDefinition.definition[className]) {
+            result.push(SurveyQuestionEditorDefinition.definition[className]);
+            return result;
+        }
         while (className) {
             var metaClass = <Survey.JsonMetadataClass>Survey.JsonObject.metaData["findClass"](className);
             if (!metaClass) break;

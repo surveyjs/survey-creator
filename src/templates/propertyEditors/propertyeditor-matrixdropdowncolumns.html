@@ -2,7 +2,7 @@
     <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-matrixdropdowncolumns">
-    <table class="table">
+    <table class="table" data-bind="visible: koIsList">
         <thead>
             <tr>
                 <th data-bind="text: $root.getLocString('pe.required')"></th>
@@ -16,10 +16,10 @@
             <!-- ko foreach: koItems -->
             <tr>
                 <td>
-                    <a href="#" data-bind="visible:koHasChoices, click: onShowChoicesClick">
-                        <span class="glyphicon" data-bind="css: {'glyphicon-chevron-down': !koShowChoices(), 'glyphicon-chevron-up': koShowChoices()}"></span>
-                    </a>
                     <input type="checkbox" data-bind="checked: koIsRequired" />
+                    <button type="button" class="btn" data-bind="visible: koCanEdit, click: $parent.onEditItemClick">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
                 </td>
                 <td>
                     <select class="form-control" data-bind="options: cellTypeChoices, value: koCellType"  style="width:110px"></select>
@@ -31,24 +31,6 @@
                 <td><input type="text" class="form-control" data-bind="value:koTitle" style="width:120px" /></td>
                 <td><button type="button" class="btn" data-bind="click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
             </tr>
-            <tr data-bind="visible: koShowChoices() && koHasChoices()">
-                <td colspan="4" style="border-top-style:none">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" data-bind="text:$root.getLocString('pe.hasOther')"></label>
-                        <div class="col-sm-2">
-                            <input type="checkbox" data-bind="checked: koHasOther" />
-                        </div>
-                        <div class="col-sm-7" data-bind="visible: !koHasColCount()"></div>
-                        <label class="control-label col-sm-3" data-bind="visible:koHasColCount, text:$root.getLocString('pe.colCount')"></label>
-                        <select class="form-control col-sm-4" data-bind="visible:koHasColCount, options: colCountChoices, value: koColCount" style="width:110px"></select>
-                    </div>
-                    <div class="modal-body svd_notopbottompaddings">
-                        <!-- ko template: { name: 'propertyeditorcontent-itemvalues', data: choicesEditor } -->
-                        <!-- /ko -->
-                    </div>
-                </td>
-            </tr>
-
             <!-- /ko -->
             <tr>
                 <td colspan="3">
@@ -60,4 +42,14 @@
             </tr>
         </tbody>
     </table>
+     <!-- ko if: !koIsList() -->
+        <div style="padding: 5px">
+            <button type="button" class="btn" data-bind="click: onCancelEditItemClick">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </button>
+            <span data-bind="text: koEditItem().koEditorName"></span>
+        </div>
+        <!-- ko template: { name: "questioneditor-content", data: columnEditor } -->
+        <!-- /ko -->
+    <!-- /ko -->
 </script>

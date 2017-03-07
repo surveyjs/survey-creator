@@ -27,8 +27,8 @@ export class SurveyPropertyEditorShowWindow {
 
 export class SurveyQuestionProperties {
     private properties: Array<Survey.JsonObjectProperty>;
-    constructor(public questionBase: Survey.QuestionBase, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean) {
-        this.properties = Survey.JsonObject.metaData.getProperties(this.questionBase.getType()); 
+    constructor(public obj: Survey.Base, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean) {
+        this.properties = Survey.JsonObject.metaData.getProperties(this.obj.getType()); 
     }
     public getProperty(propertyName: string): Survey.JsonObjectProperty {
         var property = null;
@@ -39,7 +39,7 @@ export class SurveyQuestionProperties {
             }
         }
         if (property && this.onCanShowPropertyCallback) {
-            if (!this.onCanShowPropertyCallback(this.questionBase, property)) property = null;
+            if (!this.onCanShowPropertyCallback(this.obj, property)) property = null;
         }
         return property;
     } 
@@ -47,16 +47,17 @@ export class SurveyQuestionProperties {
 
 export class SurveyQuestionEditor {
     protected properties: SurveyQuestionProperties;
-    public onChanged: (question: Survey.QuestionBase) => any;
+    public onChanged: (obj: Survey.Base) => any;
     public onHideWindow: ()=> any;
     public onOkClick: any;
     public onApplyClick: any;
     public onResetClick: any;
     koTabs: any; koActiveTab: any; koTitle: any;
     onTabClick: any;
-    constructor(public questionBase: Survey.QuestionBase, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean) {
+    constructor(public obj: Survey.Base, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean, public className: string = null) {
         var self = this;
-        this.properties = new SurveyQuestionProperties(questionBase, onCanShowPropertyCallback);
+        if(!this.className) this.className = this.obj.getType();
+        this.properties = new SurveyQuestionProperties(obj, onCanShowPropertyCallback);
         self.onApplyClick = function () { self.apply(); };
         self.onOkClick = function() {self.apply(); if(!self.hasError() && self.onHideWindow) self.onHideWindow(); };
         self.onResetClick = function () { self.reset(); };
@@ -64,7 +65,10 @@ export class SurveyQuestionEditor {
         var tabs = this.buildTabs();
         this.koActiveTab = ko.observable(tabs[0].name);
         this.koTabs = ko.observableArray(tabs);
-        this.koTitle = ko.observable(editorLocalization.getString("pe.qEditorTitle")["format"](this.questionBase.name));
+        this.koTitle = ko.observable();
+        if(this.obj.name) {
+            this.koTitle(editorLocalization.getString("pe.qEditorTitle")["format"](this.obj.name));
+        }
     }
     public hasError(): boolean {
         var tabs = this.koTabs();
@@ -77,7 +81,10 @@ export class SurveyQuestionEditor {
         return false;
     }
     public reset() {
-        //TODO do nothing for now.
+        var tabs = this.koTabs();
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].reset();
+        }
     }
     public apply() {
         if (this.hasError()) return;
@@ -86,12 +93,13 @@ export class SurveyQuestionEditor {
             tabs[i].apply();
         }
         if (this.onChanged) {
-            this.onChanged(this.questionBase);
+            this.onChanged(this.obj);
         }
     }
     private buildTabs(): Array<SurveyQuestionEditorTabBase> {
         var tabs = [];
-        tabs.push(new SurveyQuestionEditorTabGeneral(this.questionBase, this.onCanShowPropertyCallback));
+        var properties = new SurveyQuestionEditorGeneralProperties(this.obj, SurveyQuestionEditorDefinition.getProperties(this.className), this.onCanShowPropertyCallback);
+        tabs.push(new SurveyQuestionEditorTabGeneral(this.obj, properties));
         this.addPropertiesTabs(tabs);
         for (var i = 0; i < tabs.length; i++) {
             tabs[i].onCanShowPropertyCallback = this.onCanShowPropertyCallback;
@@ -99,12 +107,12 @@ export class SurveyQuestionEditor {
         return tabs;
     }
     private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTabBase>) {
-        var tabNames = SurveyQuestionEditorDefinition.getTabs(this.questionBase.getType());
+        var tabNames = SurveyQuestionEditorDefinition.getTabs(this.className);
         for (var i = 0; i < tabNames.length; i++) {
             var tabItem = tabNames[i];
             var property = this.properties.getProperty(tabItem.name);
             if (!property) continue;
-            var editorTab = new SurveyQuestionEditorTabProperty(this.questionBase, property);
+            var editorTab = new SurveyQuestionEditorTabProperty(this.obj, property);
             if (tabItem.title) editorTab.title = tabItem.title;
             tabs.push(editorTab);
         }
@@ -113,7 +121,7 @@ export class SurveyQuestionEditor {
 
 export class SurveyQuestionEditorTabBase {
     private titleValue: string;
-    constructor(public questionBase: Survey.QuestionBase) {
+    constructor(public obj: Survey.Base) {
     }
     public get name(): string { return "name"; }
     public get title() {
@@ -128,18 +136,17 @@ export class SurveyQuestionEditorTabBase {
     public reset() { }
     public apply() { }
     protected getValue(property: Survey.JsonObjectProperty): any {
-        if (property.hasToUseGetValue) return property.getValue(this.questionBase);
-        return this.questionBase[property.name];
+        if (property.hasToUseGetValue) return property.getValue(this.obj);
+        return this.obj[property.name];
     }
 }
 
 export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase {
-    public properties: SurveyQuestionEditorGeneralProperties;
-    constructor(public questionBase: Survey.QuestionBase, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean) {
-        super(questionBase);
-        var className = questionBase.getType();
-        this.properties = new SurveyQuestionEditorGeneralProperties(questionBase, SurveyQuestionEditorDefinition.getProperties(className), onCanShowPropertyCallback);
+    constructor(public obj: Survey.Base, public properties: SurveyQuestionEditorGeneralProperties = null) {
+        super(obj);
+        this.properties = properties ? properties : new SurveyQuestionEditorGeneralProperties(obj, SurveyQuestionEditorDefinition.getProperties(obj.getType()), null);
     }
+    public get name(): string { return "general"; }
     public get htmlTemplate(): string { return "questioneditortab-general"; }
     public hasError(): boolean { return this.properties.hasError(); } 
     public reset() {
@@ -152,8 +159,8 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
 
 export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase {
     private propertyEditorValue: SurveyPropertyModalEditor;
-    constructor(public questionBase: Survey.QuestionBase, public property: Survey.JsonObjectProperty) {
-        super(questionBase);
+    constructor(public obj: Survey.QuestionBase, public property: Survey.JsonObjectProperty) {
+        super(obj);
         this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorBase.createEditor(this.property.type, null);
         this.propertyEditorValue.value = this.getValue(this.property);
     }
@@ -167,6 +174,6 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     }
     public apply() {
         this.propertyEditor.apply();
-        this.questionBase[this.property.name] = this.propertyEditorValue.value;
+        this.obj[this.property.name] = this.propertyEditorValue.value;
     }
 }
