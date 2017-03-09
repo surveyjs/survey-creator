@@ -37,6 +37,9 @@ export class SurveyQuestionEditorDefinition {
             properties: ["hasOther", "choicesOrder", "colCount"],
             tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
         },
+        "dropdown": {
+            properties: ["optionsCaption"]
+        },
         "text" : {
             properties: ["inputType", "placeHolder"]
         },
