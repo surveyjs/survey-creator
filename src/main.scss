@@ -6,6 +6,7 @@ $dark-border-color: #ddd;
 $light-bg-color: #fff;
 $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
+$editor-height:75vh;
 
 
 html body {
@@ -23,6 +24,12 @@ html body {
             background-color: transparent;
         }
     }
+}
+
+.svd_object_editor {
+    background-color: $light-bg-color;
+    height: $editor-height;
+    overflow-y: scroll;
 }
 
 .svd_container {
@@ -177,7 +184,7 @@ html body {
 
                 .svd_questions_editor {
                     background-color: $light-bg-color;
-                    height: 100%;
+                    height: $editor-height;
                     overflow-y: scroll;
 
                     .panel-body {
