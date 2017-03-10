@@ -1,5 +1,5 @@
 /*!
- * surveyjs Editor v0.11.1
+ * surveyjs Editor v0.12.3
  * (c) Devsoft Baltic O� - http://surveyjs.io/
  * Github - https://github.com/surveyjs/editor
  * License: (http://editor.surveyjs.io/license.html)
@@ -15,6 +15,11 @@ html body {
     .svd_container .nav-tabs.svd_menu > li.active > a:hover, .svd_container .nav-tabs.svd_menu > li.active > a:focus {
       color: #1ab394;
       background-color: transparent; } }
+
+.svd_object_editor {
+  background-color: #fff;
+  height: 75vh;
+  overflow-y: scroll; }
 
 .svd_container {
   position: relative; }
@@ -112,7 +117,7 @@ html body {
           margin-top: 3px; }
     .svd_container .svd_content .svd_survey_designer .svd_editors .svd_questions_editor {
       background-color: #fff;
-      height: 70vh;
+      height: 75vh;
       overflow-y: scroll; }
       .svd_container .svd_content .svd_survey_designer .svd_editors .svd_questions_editor .panel-body .svd_question {
         box-shadow: none;
