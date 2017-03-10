@@ -268,9 +268,9 @@ export class SurveyEditor {
     }
     private doOnQuestionAdded(question: Survey.QuestionBase) {
         var page = <Survey.Page>this.survey.getPageByQuestion(question);
-        this.surveyObjects.addQuestion(page, question);
         var options = { question: question, page: page };
         this.onQuestionAdded.fire(this, options);
+        this.surveyObjects.addQuestion(page, question);
         this.survey.render();
     }
     private doOnQuestionRemoved(question: Survey.QuestionBase) {
