@@ -82,11 +82,12 @@ QUnit.test("Create  general properties", function (assert) {
 
 QUnit.test("General properties different categories", function (assert) {
     var question = new Survey.QuestionText("q1");
-    var properties = new SurveyQuestionEditorGeneralProperties(question, [{name: "name", category: "1"}, { name: "visible"}, {name: "title", category: "1"}]);
+    var properties = new SurveyQuestionEditorGeneralProperties(question, [{name: "name", category: "1", title: "MyName"}, { name: "visible"}, {name: "title", category: "1"}]);
     assert.equal(properties.rows.length, 2, "There are two rows");
     assert.equal(properties.rows[0].properties.length, 2, "There are two rows");
     assert.equal(properties.rows[0].properties[0].name, "name", "The first property in row is name");
     assert.equal(properties.rows[0].properties[1].name, "title", "The second property in row is title");
+    assert.equal(properties.rows[0].properties[0].title, "MyName", "Title property was set correctly");
 });
 
 QUnit.test("General properties, editor type", function (assert) {

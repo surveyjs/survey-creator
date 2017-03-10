@@ -110,6 +110,9 @@ export class SurveyQuestionEditorGeneralProperties {
                 if(properties[i].category) row.category = properties[i].category;
                 this.rows.push(row);
             }
+            if(properties[i].title) {
+                row.properties[row.properties.length - 1].title = properties[i].title;
+            }
         }
    }
    private getName(prop: any): string {
