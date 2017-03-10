@@ -5,11 +5,33 @@ platform: knockout
 ---
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" /> 
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <script src="https://unpkg.com/icheck@1.0.2"></script>
 <link rel="stylesheet" href="https://unpkg.com/icheck@1.0.2/skins/square/blue.css">
+
+<script src="https://unpkg.com/jquery-bar-rating"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- Themes -->
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-1to10.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-movie.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-square.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-pill.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-reversed.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-horizontal.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/fontawesome-stars.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/css-stars.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bootstrap-stars.css">
+<link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/fontawesome-stars-o.css">
 {% capture survey_setup %}
+
+Survey.JsonObject.metaData.addProperty("dropdown", {name: "renderAs", default: "standard", choices: ["standard", "barrating"]});
+Survey.JsonObject.metaData.addProperty("dropdown", {name: "ratingTheme", default: "fontawesome-stars", choices: ["fontawesome-stars", "css-stars", "bars-pill", "bars-1to10", "bars-movie", "bars-square", "bars-reversed", "bars-horizontal", "bootstrap-stars", "fontawesome-stars-o"]});
+Survey.JsonObject.metaData.addProperty("dropdown", {name: "showValues:boolean", default: false});
+
+
 
 var dateWidget = {
     name: "datepicker",
@@ -28,6 +50,32 @@ var dateWidget = {
     }
 }
 Survey.CustomWidgetCollection.Instance.addCustomWidget(dateWidget);
+
+var barRatingWidget = {
+    name: "antennaio-jquery-bar-rating",
+    isFit : function(question) { return question["renderAs"] === 'barrating'; },
+    isDefaultRender: true,
+    afterRender: function(question, el) {
+
+        var $el = $(el);
+        var ratingTheme = question.ratingTheme ? question.ratingTheme : "fontawesome-stars";
+        var showValues = question.showValues ? question.showValues : false; 
+        $el.barrating('show', {
+            theme: ratingTheme,
+            initialRating: question.value,
+            showValues: showValues,
+            showSelectedRating: false,
+            onSelect: function(value, text) {
+                question.value = value;
+            }
+        });
+
+        question.valueChangedCallback = function() {
+            $(el).find('select').barrating('set', question.value);
+        }
+    }
+}
+Survey.CustomWidgetCollection.Instance.addCustomWidget(barRatingWidget);
 
 var select2Widget = {
     name: "select2",
@@ -107,8 +155,39 @@ var iCheckWidget = {
 }
 Survey.CustomWidgetCollection.Instance.addCustomWidget(iCheckWidget);
 
-var editorOptions = {questionTypes : ["text", "checkbox", "radiogroup", "dropdown"]};
+var editorOptions = {questionTypes : ["text", "radiogroup", "dropdown"], showJSONEditorTab : false};
 var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+
+editor.onCanShowProperty.add(function(sender, options){
+    if(options.obj.getType() == "dropdown") {
+        var forbiddenBarRatingProperties = ["choicesOrder", "choicesByUrl", "optionsCaption", "hasOther"];
+        var forbiddenDropDownProperties = ["ratingTheme", "showValues"];
+        var isBarRating = options.obj["renderAs"] == "barrating";
+        var propName = options.property.name;
+        //hide renderAs property
+        canShow = propName != "renderAs";
+        //hide properties for standard dropdown
+        if(canShow && !isBarRating) canShow =  forbiddenDropDownProperties.indexOf(propName) < 0;
+        //hide properties for Bar Rating
+        if(canShow && isBarRating) canShow =  forbiddenBarRatingProperties.indexOf(propName) < 0;
+        options.canShow = canShow;
+    }
+});
+
+editor.toolbox.addItem({
+        name: "barrating",
+        iconName: "icon-rating",
+        title: "Bar Rating",
+        json: { "type": "dropdown",  "renderAs": "barrating", "choices": [1, 2, 3, 4, 5] } 
+});
+
+editor.toolbox.addItem({
+        name: "multiple",
+        iconName: "icon-checkbox",
+        title: "Multiple Selector",
+        json: { "type": "checkbox",  "choices": [1, 2, 3] } 
+});
+
 {% endcapture %}
 
 {% include live-example-code.html %}
