@@ -26,11 +26,13 @@ platform: knockout
 <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bootstrap-stars.css">
 <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/fontawesome-stars-o.css">
 {% capture survey_setup %}
+//Add date format property into text question
+Survey.JsonObject.metaData.addProperty("text", {name: "dateFormat", default: "dd/mm/yy"});
 
+//Add properties for Bar Rating
 Survey.JsonObject.metaData.addProperty("dropdown", {name: "renderAs", default: "standard", choices: ["standard", "barrating"]});
 Survey.JsonObject.metaData.addProperty("dropdown", {name: "ratingTheme", default: "fontawesome-stars", choices: ["fontawesome-stars", "css-stars", "bars-pill", "bars-1to10", "bars-movie", "bars-square", "bars-reversed", "bars-horizontal", "bootstrap-stars", "fontawesome-stars-o"]});
 Survey.JsonObject.metaData.addProperty("dropdown", {name: "showValues:boolean", default: false});
-
 
 
 var dateWidget = {
@@ -39,8 +41,10 @@ var dateWidget = {
     isFit : function(question) { return question.inputType === 'date'; },
     afterRender: function(question, el) {
 
-        var widget = $(el).datepicker();
-
+        var dateFormat = question.dateFormat ? question.dateFormat : "dd/mm/yy";
+        var widget = $(el).datepicker({
+            dateFormat: dateFormat
+        });
         widget.on("change", function (e) {
             question.value = $(this).val();
         });
