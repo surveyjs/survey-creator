@@ -55,6 +55,9 @@ hasFooter: true
                         Download surveyjs library
                     </a>
                 </div>
+                <div>
+                    <h2>Or use <a href="https://github.com/surveyjs/builds" target="_blank">Azure CDN</a></h2>
+                </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 step-right">
                 <div class="step-panel">
@@ -101,14 +104,14 @@ hasFooter: true
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 step-right">
                 <div class="step-panel">
                     <h5>Add link to editor classes.</h5>
-                    <pre><code class="language-markup">&lt;link href="{{ page.pathprefix }}css/surveyeditor.css" type="text/css" rel="stylesheet" /&gt;</code></pre>
+                    <pre><code class="language-markup">&lt;link href="https://surveyjs.azureedge.net/{{ site.surveyjs_version }}/surveyeditor.css" type="text/css" rel="stylesheet" /&gt;</code></pre>
                     <ul class="nav nav-tabs">
                         <li role="presentation" data-bind="css:{active: isKnockout}"><a data-bind="click:setKnockout">Knockout</a></li>
                     </ul>
                     <div class="tab-content" data-bind="visible:isKnockout">
                         <h5>Link to the knockout version of the library.</h5>
-                        <pre><code class="language-markup">&lt;script src="{{ page.pathprefix }}js/survey.ko.min.js"&gt;&lt;/script&gt;
-&lt;script src="{{ page.pathprefix }}js/surveyeditor.min.js"&gt;&lt;/script&gt;</code></pre>
+                        <pre><code class="language-markup">&lt;script src="https://surveyjs.azureedge.net/{{ site.surveyjs_version }}/survey.ko.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://surveyjs.azureedge.net/{{ site.surveyjs_version }}/surveyeditor.min.js"&gt;&lt;/script&gt;</code></pre>
                     </div>
                 </div>
             </div>
