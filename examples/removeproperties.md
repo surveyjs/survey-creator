@@ -20,3 +20,9 @@ editor.render("editorElement");
 {% endcapture %}
 
 {% include live-example-code.html %}
+<h2>Removing/hiding properties</h2>
+Removing a property, will remove the value of this property from objects. This value could not be stored/load into/from JSON.
+<p />
+If you want only to hide the property from UI, then use onCanShowProperty event.
+<p />
+Please note, that the property will be removed/hidden from property editor and from question editor as well.

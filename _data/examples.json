@@ -5,7 +5,9 @@
                 { "name": "Editor Options", "text" : "Use options to customize the editor", "url": "options.html"},
                 { "name": "Toolbox customization", "text" : "Fully control your Question Toolbox", "url": "toolboxcustomization.html"},
                 { "name": "Add properties", "text" : "Add a new property to any object", "url": "addproperties.html"},
-                { "name": "Remove properties", "text" : "Remove a property explicity or use an event", "url": "removeproperties.html"}
+                { "name": "Remove properties", "text" : "Remove a property explicity or use an event", "url": "removeproperties.html"},
+                { "name": "Question Editor", "text" : "Customize question editor", "url": "questioneditor.html"},
+                { "name": "Modify new Question", "text" : "Modify new created question", "url": "oncreatequestion.html"}
             ]},
             { "name": "Load/Save Surveys", "id": "load-save",
               "items": [

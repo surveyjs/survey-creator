@@ -18,6 +18,7 @@ You may:
 <li>Show/hide survey tabs.</li>
 <li>Show/hide options menu button and turn-on valid JSON generation</li>
 <li>Limit question types you want to have in the toolbox</li>
+<li>Set the designer height</li>
 </ul>
 <h4>Show/hide survey tabs.</h4>
 By default, "Survey Designer", "JSON Editor" and "Test Survey" are visible. "Embed Survey" tab is invisible.
@@ -45,4 +46,9 @@ The following example show how to show in the toolbox only four question types.
 var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 </code></pre>
 
-There are more possibilities to toolbox customization. Please go <a href="{{ site.baseurl }}/examples/toolboxcustomization.html">to this demo</a> to find out complete API about toolbox customization.
+There are more possibilities for toolbox customization. Please go <a href="{{ site.baseurl }}/examples/toolboxcustomization.html">to this demo</a> to learn more about toolbox customization API.
+<h4>Set the designer height</h4>
+By default the designer height is "75vh". You may find it in the surveyeditor.css. You may set the designer height via options. The following examples set the designer height to 700px:
+<pre><code class="language-javascript">var editorOptions = {designerHeight: "700px"};
+var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+</code></pre>
