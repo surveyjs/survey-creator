@@ -55,7 +55,7 @@ export class SurveyEditor {
     koCanDeleteObject: any;
     koObjects: any; koSelectedObject: any;
     koShowSaveButton: any;
-    koGenerateValidJSON: any; koShowOptions: any; koTestSurveyWidth: any;
+    koGenerateValidJSON: any; koShowOptions: any; koTestSurveyWidth: any; koDesignerHeight: any;
     selectDesignerClick: any; selectEditorClick: any; selectTestClick: any; selectEmbedClick: any;
     generateValidJSONClick: any; generateReadableJSONClick: any;
     doUndoClick: any; doRedoClick: any;
@@ -70,6 +70,7 @@ export class SurveyEditor {
 
         this.koShowOptions = ko.observable();
         this.koGenerateValidJSON = ko.observable();
+        this.koDesignerHeight = ko.observable();
         this.setOptions(options);
         this.koCanDeleteObject = ko.observable(false);
 
@@ -141,6 +142,10 @@ export class SurveyEditor {
         this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
         this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
         this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
+        if(options && options.designerHeight) {
+            this.koDesignerHeight(options.designerHeight);
+        }
+        this.koDesignerHeight()
         if (this.selectedObjectEditor) this.selectedObjectEditor.setOptions(options);
     }
     public get survey(): Survey.Survey {
