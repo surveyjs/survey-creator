@@ -12,41 +12,56 @@ export class SurveyEmbedingWindow {
     public surveyId: string = null;
     public surveyPostId: string = null;
     public generateValidJSON: boolean = false;
+    public surveyJSVersion: string = "0.12.3"; //TODO
+    public surveyCDNPath: string = "https://surveyjs.azureedge.net/";
     koShowAsWindow: any;
     koScriptUsing: any;
     koHasIds: any;
     koLoadSurvey: any;
     koLibraryVersion: any;
     koVisibleHtml: any;
+    private platformSurveyJSPrefix = {
+        "angular": "angular",
+        "jquery": "jquery",
+        "knockout": "ko",
+        "react": "react",
+        "vue": "vue"
+    }
+    /*
     private platformHeaders = {
-        "angular": "import { Component } from '@angular/core';\nimport * as Survey from 'survey-angular';",
-        "jquery": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>\n<script src=\"js/survey.jquery.min.js\"></script>",
-        "knockout": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\"></script>\n<script src=\"js/survey.ko.min.js\"></script>",
-        "react": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport * as Survey from 'survey-react';"
-    };
+        "angular": "",
+        "jquery": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>",
+        "knockout": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\"></script>",
+        "react": "",
+        "vue": "<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>"
+    };*/
     private platformJSonPage = {
         "angular": "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n       Survey.SurveyNG.render(\"surveyElement\", { model: survey });\n    }\n}",
         "jquery": "var survey = new Survey.Model(surveyJSON);\n$(\"#surveyContainer\").Survey({\n    model: survey,\n    onComplete: sendDataToServer\n});",
         "knockout": "var survey = new Survey.Model(surveyJSON, \"surveyContainer\");\nsurvey.onComplete.add(sendDataToServer);",
-        "react": "ReactDOM.render(\n    <Survey.Survey json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById(\"surveyContainer\"));"
+        "react": "ReactDOM.render(\n    <Survey.Survey json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById(\"surveyContainer\"));",
+        "vue": "var survey = new Survey.Model(surveyJSON);\nnew Vue({ el: '#surveyContainer', data: { survey: survey } });"
     };
     private platformJSonWindow = {
         "angular": "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n       Survey.SurveyWindowNG.render(\"surveyElement\", { model: survey });\n    }\n}",
         "jquery": "var survey = new Survey.Model(surveyJSON);\n$(\"#surveyContainer\").SurveyWindow({\n    model: survey,\n    onComplete: sendDataToServer\n});",
         "knockout": "var survey = new Survey.Model(surveyJSON);\nsurveyWindow.show();\nsurvey.onComplete.add(sendDataToServer);",
-        "react": "ReactDOM.render(\n    <Survey.SurveyWindow json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById(\"surveyContainer\"));"
+        "react": "ReactDOM.render(\n    <Survey.SurveyWindow json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById(\"surveyContainer\"));",
+        "vue": ""
     };
     private platformHtmlonPage = {
         "angular": "<ng-app></ng-app>",
         "jquery": "<div id=\"surveyContainer\"></div>",
         "knockout": "<div id=\"surveyContainer\"></div>",
-        "react": "<div id=\"surveyContainer\"></div>"
+        "react": "<div id=\"surveyContainer\"></div>",
+        "vue": "<div id=\"surveyContainer\"><survey :survey=\"survey\"></survey></div>"
     };
     private platformHtmlonWindow = {
         "angular": "<ng-app></ng-app>",
         "jquery": "<div id=\"surveyContainer\"></div>",
         "knockout": "",
-        "react": "<div id=\"surveyContainer\"></div>"
+        "react": "<div id=\"surveyContainer\"></div>",
+        "vue": "<div id='surveyContainer'><survey-window :survey='survey'></survey-window></div>"
     };
     constructor() {
         var self = this;
@@ -84,11 +99,14 @@ export class SurveyEmbedingWindow {
     private setBodyText() {
         this.setTextToEditor(this.surveyEmbedingBody, this.koBodyText, this.platformHtmlonPage[this.koLibraryVersion()]);
     }
+    private get getCDNPath(): string { return this.surveyCDNPath + this.surveyJSVersion + "/"; }
     private setHeadText() {
-        var str = this.platformHeaders[this.koLibraryVersion()];
+        var str = "<!-- Your platform (" + this.koLibraryVersion() + ") scripts. -->\n";
         if (this.koScriptUsing() != "bootstrap") {
-            str += "\n<link href=\"css/survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
+            str += "\n<link href=\"" + this.getCDNPath +  "survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
         }
+        str += "\n<script src=\"" + this.getCDNPath +   "survey." + this.platformSurveyJSPrefix[this.koLibraryVersion()] +  " .min.js\"></script>";
+
         this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, str);
     }
     private setJavaTest() {

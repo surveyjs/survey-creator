@@ -187,6 +187,7 @@ export var defaultStrings = {
         jquery: "Use jQuery version",
         knockout: "Use Knockout version",
         react: "Use React version",
+        vue: "Use Vue version",
         bootstrap: "For bootstrap framework",
         standard: "No bootstrap",
         showOnPage: "Show survey on a page",
