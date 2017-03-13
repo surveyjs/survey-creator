@@ -1,18 +1,25 @@
 language: node_js
 node_js:
 - '4'
+env:
+  global:
+    secure: AXsZaIfPL0T4XqIrTiDk8vDhEWoSCNEeRJOdkAVqlJ6flmjT/jC6HW0ZBJYJHpx0g9/iRu7bY7XY/jz+AAHl6Ev4N9bXFAMi+oOi33r/sbwA9QUBTIGg9LVQs61E9+FXCrFnN4/PyuB7aueTeZZvMLRlqgzfC7ivVYKF0Ptj6gNCqswM9EwVh5G+/VKYYA4xHMgcrMyiJmaqtNbI/eiL3qKBuVgI/Xen7weY3MI31Y+F89nThUvOT2DBSeKBse3uYIPmWw9fUnJ7bPkK3bBpfqwRDrkqGgpDkJXH5b0qTcpp/ljtJ+FMucuk5vzabRr6lPOhnonVRXg1ScLnBCrZo5G4ClGg9HHdDb34zjDy8eMUr9YmAgGWM0id3y7r8a/R6dOPykApuveFAunSi+eFi4CcDuad2ae42pwLxrCjR2z3p94XLBOcuz2Ccj+PZ79dgqgqDEV/2XQCAJP/VOpC5B8/ymSW/SpMLkVgBn26u52upxWGvuSBc+cQ0+1kXpeP7HKp5zrtXWwTHZrZ+Ib28DZzHAfjZcs3WT57xYRd2DEpb3bQ+XH8i1MvtWqXJtCWRtRjZz35VrOaHxMckrjppL/IxcjktoQyLINaJHRz9OZEtPozEMbfBI9MAuVCzOu39mM3C75mbISzuC3G+OYUnSmZ/0PiHHqgGO43+lnaKkc=
 before_script:
 - npm install -g concurrently
 script:
 - npm run build_prod
 - karma start --single-run
-
-before_deploy: "tar -zcvf surveyeditor.tar.gz package"
+before_deploy: tar -zcvf surveyeditor.tar.gz package
 deploy:
-  provider: releases
+- provider: releases
   api_key:
     secure: Fe+bRA8WO1T345iLvXkrOusCkr9RTblojIGfTNV80sY9+Q5Zt7gPeDa2snvlvTWmdkN+y2vZzP73JN7HZv1kxg1egt9lFHvllGw6YTeka+CE74sPnHGMFx4OqJHtd4D0hLVXg5wM8BbgFJ4R+jqbLwWY2+brDY1hsM7bXSf17kjcUFhKCoyYMvHCr5cngf99igTaFDYFc3IcNMyfXgqsMiFR415v0CklfZiEQU4Tt2Eu8foC27hApzpSQVgLtIAsYPVVTFYD9yghRcpth5ouL5KTq83Qa/E7senwTJKHU1wBeOT/6BNwKxlXQrBzjAKTmNrB1KG0ES3UR5TuXocIid1+cEK1jUpwl7gldKYSdckTMTM1FDTZ7Wj2hrIof2NyPKIaiCk7c4Qlc61XR5zQCZF4n3Yyxtj9FLRkv+9DQpfKOS5yEqlAXqdU4s5kv3SN3FXMMDBNGv4szI1xMGKT+ld8rT2FnHJcrhn9QYlyCv/gahb3igOOC+1LRmo6oGHg3/ks8EeTOwMR/pOY0BuK6RxVoD2Da4ZD7pY9+/CthF9+1bcHaHeeQYWTs47NZijX/zawl/Xc65ktGCzav2hX9M0jWBckDiGRsB/34MuFvPGtuIFhJAxsb0PGO3bEEcMzMpdte9TxO0zlufoHRHpfifehbNKkmL2582fUiYS1ouI=
   file: surveyeditor.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
+- provider: script
+  script: chmod +x ./deploy_npm.sh && ./deploy_npm.sh
   skip_cleanup: true
   on:
     tags: true
