@@ -3,6 +3,7 @@
          { "name" : "Customization", "id": "customization",
            "items": [
                 { "name": "Editor Options", "text" : "Use options to customize the editor", "url": "options.html"},
+                { "name": "Localization", "text" : "Localize editor strings and properties", "url": "localization.html"},
                 { "name": "Toolbox customization", "text" : "Fully control your Question Toolbox", "url": "toolboxcustomization.html"},
                 { "name": "Custom widgets", "text" : "Use third-party widgets", "url": "customwidgets.html"},
                 { "name": "Add properties", "text" : "Add a new property to any object", "url": "addproperties.html"},
