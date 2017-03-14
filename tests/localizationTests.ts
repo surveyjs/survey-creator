@@ -13,3 +13,16 @@ QUnit.test("Get property name and title", function (assert) {
     assert.equal(editorLocalization.getPropertyName("text_title"), defaultStrings.p.title.name, "find the Title property");
     assert.equal(editorLocalization.getPropertyTitle("text_title"), defaultStrings.p.title.title, "find the title for Title property");
 });
+QUnit.test("add de localization", function (assert) {
+    var deutschStrings = {
+        p: {
+            isRequired : "Wird benötigt"
+        }
+    };
+
+    editorLocalization.locales["de"] = deutschStrings;
+    editorLocalization.currentLocale = "de";
+
+    assert.equal(editorLocalization.getString("p.isRequired"), deutschStrings.p.isRequired, "deutch locazation");
+    assert.equal(editorLocalization.getString("op.empty"), defaultStrings.op.empty, "default localization");
+});

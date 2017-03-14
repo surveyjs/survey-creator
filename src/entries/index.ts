@@ -16,6 +16,7 @@ export {SurveyPropertyResultfullEditor} from "../propertyEditors/propertyRestful
 export {SurveyPropertyTriggersEditor} from "../propertyEditors/propertyTriggersEditor";
 export {SurveyPropertyValidatorsEditor} from "../propertyEditors/propertyValidatorsEditor";
 
+export {editorLocalization} from "../editorLocalization";
 
 export {SurveyQuestionEditorGeneralProperties, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperty} from "../questionEditors/questionEditorGeneralProperties";
 export {SurveyQuestionEditorDefinition} from "../questionEditors/questionEditorDefinition";

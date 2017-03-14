@@ -3,7 +3,7 @@
     locales: {},
     getString: function (strName: string, locale: string = null) {
         if (!locale) locale = this.currentLocale;
-        var loc = locale ? this.locales[this.currentLocale] : defaultStrings;
+        var loc = locale ? this.locales[locale] : defaultStrings;
         if (!loc) loc = defaultStrings;
         var path = strName.split('.');
         var obj = loc;
