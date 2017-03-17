@@ -3,6 +3,8 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var dts = require('dts-bundle');
+var rimraf = require('rimraf');
 var GenerateJsonPlugin = require('generate-json-webpack-plugin');
 var packageJson = require('./package.json');
 var fs = require('fs');
@@ -13,6 +15,12 @@ var banner = [
     "Github - https://github.com/surveyjs/editor",
     "License: (http://editor.surveyjs.io/license.html)"
 ].join("\n");
+
+var dts_banner = ["Type definitions for Surveyjs Editor JavaScript library v" + packageJson.version,
+    "(c) Devsoft Baltic O� - http://surveyjs.io/",
+    "Github - https://github.com/surveyjs/editor",
+    "License: (http://editor.surveyjs.io/license.html)",
+    ""].join("\n");
 
 var packagePlatformJson = {
     "name": "surveyjs-editor",
@@ -30,6 +38,7 @@ var packagePlatformJson = {
         "fonts/",
         "surveyeditor.css",
         "surveyeditor.js",
+        "surveyeditor.d.ts",
         "surveyeditor.min.js"
     ],
     "main": "surveyeditor.min.js",
@@ -40,11 +49,15 @@ var packagePlatformJson = {
     "engines": {
         "node": ">=0.10.0"
     },
+    'typings': 'surveyeditor.d.ts',
     "dependencies": {
         "survey-knockout": "^" + packageJson.version,
         "knockout": "^3.4.0",
         "bootstrap": "^3.3.6",
         "ace-builds": "^1.2.2"
+    },
+    "devDependencies": {
+        "@types/knockout": "^3.4.0"
     }
 };
 
@@ -56,7 +69,16 @@ module.exports = function(options) {
         if ( 0 == percentage ) {
             console.log('Build started... good luck!');
         } else if ( 1 == percentage ) {
-            fs.createReadStream('./npmREADME.md').pipe(fs.createWriteStream(packagePath + 'README.md'));
+            if (options.buildType === "prod") {
+                dts.bundle({
+                    name: '../../surveyeditor',
+                    main: packagePath + 'typings/entries/index.d.ts',
+                    outputAsModuleFolder: true,
+                    headerText: dts_banner
+                });
+                rimraf.sync(packagePath + 'typings');
+                fs.createReadStream('./npmREADME.md').pipe(fs.createWriteStream(packagePath + 'README.md'));
+            }
         }
     };
 
@@ -74,7 +96,13 @@ module.exports = function(options) {
             rules: [
                 {
                     test: /\.(ts|tsx)$/,
-                    loader: 'ts-loader'
+                    loader: 'ts-loader',
+                    options: {
+                        compilerOptions: {
+                            'declaration': options.buildType === 'prod',
+                            'outDir': packagePath + 'typings/'
+                        }
+                    }
                 },
                 {
                     test: /\.scss$/,
