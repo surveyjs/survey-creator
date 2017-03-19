@@ -69,6 +69,7 @@ export var defaultStrings = {
     },
     //Strings in Editor
     ed: {
+        addNewPage: "Add New Page",
         newPageName: "page",
         newQuestionName: "question",
         testSurvey: "Test Survey",
