@@ -145,6 +145,9 @@ export class SurveyEditor {
         if(options && options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
+        if(options && options.objectsIntend) {
+            SurveyObjects.intend = options.objectsIntend;
+        }
         this.koDesignerHeight()
         if (this.selectedObjectEditor) this.selectedObjectEditor.setOptions(options);
     }
