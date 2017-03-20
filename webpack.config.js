@@ -8,6 +8,7 @@ var rimraf = require('rimraf');
 var GenerateJsonPlugin = require('generate-json-webpack-plugin');
 var packageJson = require('./package.json');
 var fs = require('fs');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var banner = [
     "surveyjs Editor v" + packageJson.version,
@@ -161,7 +162,8 @@ module.exports = function(options) {
                 packagePlatformJson,
                 undefined,
                 2
-            )
+            ),
+            new CopyWebpackPlugin([{context: 'src/fonts', from: '**/*', to: packagePath + 'fonts'}])
         ]);
     }
 

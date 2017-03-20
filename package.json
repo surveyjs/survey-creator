@@ -16,6 +16,7 @@
     "ajv": "^4.11.2",
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.22.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "dts-bundle": "0.7.2",
     "extract-text-webpack-plugin": "^2.0.0-beta",
