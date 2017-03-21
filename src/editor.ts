@@ -555,6 +555,7 @@ Survey.Survey.prototype["onCreating"] = function () {
     this.onFastCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     this.onDeleteCurrentObject = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     var self = this;
+    this.onAfterRenderPage.add((sender: Survey.Survey, options) => { options.page["onAfterRenderPage"](options.htmlElement); });
     this.editQuestionClick = function () { self.onEditQuestion.fire(self); };
     this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
     this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self); };
@@ -597,10 +598,13 @@ Survey.Page.prototype["onCreating"] = function () {
     });
     this.koDraggingQuestion.subscribe(function (newValue) { if (newValue) newValue.koIsDragging(true); });
     this.koDraggingQuestion.subscribe(function (oldValue) { if (oldValue) oldValue.koIsDragging(false); }, this, "beforeChange");
-    this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };
-    this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0) self.doDragLeave(e); };
-    this.dragDrop = function (e) { self.doDrop(e); };
 };
+Survey.Page.prototype["onAfterRenderPage"] = function(el) {
+    el.ondragenter = function (e) { e.preventDefault(); this.dragEnterCounter++; this.doDragEnter(e); };
+    el.dragLeave = function (e) { this.dragEnterCounter--; if (this.dragEnterCounter === 0) this.doDragLeave(e); };
+    el.dragover = function(el, e){ return false; };
+    el.dragDrop = function (e) { this.doDrop(e); };
+}
 Survey.Page.prototype["doDrop"] = function (e) {
     var dragDropHelper = this.data["dragDropHelper"];
     if (dragDropHelper) {

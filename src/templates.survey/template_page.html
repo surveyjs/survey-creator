@@ -1,9 +1,4 @@
-﻿<div data-bind="event:{
-           dragenter:function(el, e){ dragEnter(e);},
-           dragleave:function(el, e){ dragLeave(e);},
-           dragover:function(el, e){ return false;},
-           drop:function(el, e){ dragDrop(e);}}
-     ">
+﻿<div>
     <h4 data-bind="visible: (title.length > 0) && data.showPageTitles, text: koNo() + processedTitle, css: $root.css.pageTitle"></h4>
     <!-- ko foreach: { data: rows, as: 'row'} -->
     <div class="svd_question_container" data-bind="visible: row.koVisible, css: $root.css.row">
