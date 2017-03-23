@@ -73,8 +73,7 @@ export class SurveyObjectEditor {
         this.koActiveProperty(this.getPropertyEditor("name"));
     }
     protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
-        var name = property.name;
-        if (name == 'questions' || name == 'pages') return false;
+        if(property["visible"] === false) return false;
         if (this.onCanShowPropertyCallback) return this.onCanShowPropertyCallback(this.selectedObject, property);
         return true;
     }

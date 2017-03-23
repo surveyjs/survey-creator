@@ -38,6 +38,7 @@ export class SurveyQuestionProperties {
                 break;
             }
         }
+        if(property && property["visible"] === false) property = null;
         if (property && this.onCanShowPropertyCallback) {
             if (!this.onCanShowPropertyCallback(this.obj, property)) property = null;
         }

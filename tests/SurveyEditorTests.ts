@@ -27,7 +27,6 @@ QUnit.test("At least one page should be available", function (assert) {
     editor.text = JSON.stringify(getSurveyJson());
     editor.text = null;
     assert.equal(editor.survey.pages.length, 1, "There should be at least one page");
-    assert.equal(editor.survey.pages[0]["koDragging"](), -1, "the page object should be extended correctly");
     assert.ok(editor.survey["dragDropHelper"], "dragDropHelper was created");
 });
 QUnit.test("options.questionTypes", function (assert) {
