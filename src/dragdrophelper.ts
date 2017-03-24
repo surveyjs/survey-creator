@@ -156,11 +156,8 @@ export class DragDropHelper {
         }
         targetQuestion.setData(this.survey);
         targetQuestion.renderWidth = "100%";
-        this.setIsDraggingSource(targetQuestion, true);
+        targetQuestion["koIsDragging"](true);
         return targetQuestion;
-    }
-    private setIsDraggingSource(question: any, val: any) {
-        if (question && question["koIsDraggingSource"]) question["koIsDraggingSource"](val);
     }
     private isBottom(event: DragEvent, surveyEl: any): boolean {
         event = this.getEvent(event);

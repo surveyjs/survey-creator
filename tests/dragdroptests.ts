@@ -6,7 +6,7 @@ export default QUnit.module("Drag and Drop Tests");
 QUnit.test("dummy test", function (assert) {
     assert.equal(1, 1);
 });
-/*
+
 QUnit.test("Show/hide new created item, simple test", function (assert) {
     var survey = new Survey.Survey();
     var page = <Survey.Page>survey.addNewPage("p1");
@@ -49,6 +49,8 @@ QUnit.test("Show/hide move item, simple test", function (assert) {
     assert.equal(dragTarget.moveTo(q1, false), true, "It can be done: 1");
     assert.equal(page["koRows"]().length, 3, "Move 1");
     assert.equal(page["koRows"]()[0]["koElements"]()[0].name, "q2", "Move 1");
+    dragTarget.clear();
+    assert.equal(page["koRows"]().length, 2, "out of page");
     assert.equal(dragTarget.moveTo(q1, true), false, "It can't be done: 2");
     assert.equal(page["koRows"]().length, 2, "Move 2");
     assert.equal(dragTarget.moveTo(q2, false), false, "It can't be done: 3");
@@ -92,4 +94,3 @@ QUnit.test("Show/hide/create for empty page", function (assert) {
     assert.equal(page.questions.length, 1, "one question now");
     assert.equal(page.questions[0].name, "qt", "A new question");
 });
-*/
