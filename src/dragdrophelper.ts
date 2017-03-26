@@ -18,13 +18,7 @@ export class DragDropTargetElement {
         this.clearByInfo(targetInfo);
         destInfo = this.findInfo(destination);
         this.updateInfo(destInfo, isBottom);
-        if(this.source) {
-            var srcInfo = this.findInfo(this.source);
-            if(srcInfo && srcInfo.panel == destInfo.panel) {
-                var diff = destInfo.rIndex - srcInfo.rIndex;
-                if(diff == 0 || diff == 1) return false;
-            } 
-        }
+        if(!this.canMove(destInfo)) return false;
         this.addInfo(destInfo);
 
         return true;
@@ -32,19 +26,74 @@ export class DragDropTargetElement {
     public doDrop() {
         var destInfo = this.findInfo(this.target);
         if(!destInfo) return;
-        destInfo.panel.addElement(this.getNewTargetElement(), destInfo.rIndex); 
+        var index = this.getIndexByInfo(destInfo);
+        destInfo.panel.addElement(this.getNewTargetElement(), index); 
         if(this.source) {
-            //TODO
-            this.page.removeQuestion(this.source); 
+            var srcInfo = this.findInfo(this.source);
+            if(srcInfo) {
+                srcInfo.panel.removeQuestion(this.source); 
+            } else {
+                this.page.removeQuestion(this.source); 
+            }
         }
     }
     public clear() {
         this.clearByInfo(this.findInfo(this.target));
     }
+    private getIndexByInfo(info: any) {
+        if(!info) return 0;
+        var rows = info.panel.koRows();
+        var index = 0;
+        for(var i = 0; i < info.rIndex; i ++) {
+            index += rows[i]["koElements"]().length;
+        }
+        return index + info.elIndex;
+    }
+    private canMove(destInfo: any) : boolean {
+        if(!this.source) return true;
+        var srcInfo = this.findInfo(this.source);
+        if(srcInfo == null || srcInfo.panel != destInfo.panel) return true;
+        var diff = destInfo.rIndex - srcInfo.rIndex;
+        if(this.target.startWithNewLine) return diff < 0 || diff > 1;
+        if(diff == 0) return Math.abs(this.source.elIndex - this.source.elIndex) > 1;
+        if(Math.abs(diff) == 1) return !(this.isLastElementInRow(srcInfo) && destInfo.elIndex == 0 || this.isLastElementInRow(destInfo) && srcInfo.elIndex == 0);
+        return true;
+    }
+    private isLastElementInRow(info: any) {
+        return info.elIndex == info.panel["koRows"]()[info.rIndex]["koElements"]().length - 1;
+    }
     private updateInfo(info: any, isBottom: boolean) {
-        if(info.rIndex > -1 && isBottom) info.rIndex ++;
+        if(info.rIndex < 0) return; 
+        if(this.target.startWithNewLine) {
+            if(isBottom) info.rIndex ++;
+        } else {
+            if(isBottom) {
+                info.elIndex ++;
+            } else {
+                if(info.elIndex == 0 && info.rIndex > 0) {
+                    info.rIndex --;
+                    info.elIndex = info.panel["koRows"]()[info.rIndex]["koElements"]().length;
+                }
+            }
+        }
     }
     private addInfo(info: any) {
+        if(this.target.startWithNewLine || info.elIndex < 1 
+            || info.rIndex < 0 || info.rIndex >= info.panel.koRows().length) {
+            this.AddInfoAsRow(info);
+        } else {
+            var row = info.panel.koRows()[info.rIndex];
+            var elements = row["koElements"]();
+            if(info.elIndex < elements.length) {
+                elements.splice(info.elIndex, 0, this.target);
+            } else {
+                elements.push(this.target);
+            }
+            row["koElements"](elements);
+            row.updateVisible();
+        }
+    }
+    private AddInfoAsRow(info: any) {
         var row = new Survey.QuestionRow(info.panel);
         row.addQuestion(this.target);
         var rows = info.panel.koRows();
@@ -58,12 +107,20 @@ export class DragDropTargetElement {
     private clearByInfo(info: any) {
         if(info == null) return;
         var rows = info.panel.koRows();
-        rows.splice(info.rIndex, 1);
-        info.panel.koRows(rows);
+        var row = rows[info.rIndex];
+        var elements = row["koElements"](); 
+        if(row["koElements"]().length > 1) {
+            elements.splice(info.elIndex, 1);
+            row["koElements"](elements);
+            row.updateVisible();
+        } else {
+            rows.splice(info.rIndex, 1);
+            info.panel.koRows(rows);
+        }
     }
     private isInfoEquals(a: any, b: any) : boolean {
         if(a == null || b == null) return false;
-        return a.panel === b.panel && a.rIndex === b.rIndex;
+        return a.panel === b.panel && a.rIndex === b.rIndex && a.elIndex === b.elIndex;
     }
     private findInfo(el: any): any {
         if(el == this.page) return { panel: this.page, row: null, rIndex: 0, elIndex: 0 };

@@ -94,3 +94,45 @@ QUnit.test("Show/hide/create for empty page", function (assert) {
     assert.equal(page.questions.length, 1, "one question now");
     assert.equal(page.questions[0].name, "qt", "A new question");
 });
+
+QUnit.test("Move item startWithNewLine=false", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("p1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var q2 = page.addNewQuestion("text", "q2");
+    var q3 = page.addNewQuestion("text", "q3");
+    q1.startWithNewLine = false;
+    var target = new Survey.QuestionText("q1");
+    target.startWithNewLine = false;
+
+    var dragTarget = new DragDropTargetElement(page, target, q1);
+    dragTarget.moveTo(q3, true);
+    assert.equal(page["koRows"]().length, 3, "Move 1. No rows should be added");
+    assert.equal(page["koRows"]()[2]["koElements"]().length, 2, "Move 1. There are two elements in the last row");
+    assert.equal(page["koRows"]()[2]["koElements"]()[1].name, "q1", "Move 1. The first question is the last element");
+    dragTarget.moveTo(q3, false);
+    assert.equal(page["koRows"]().length, 3, "Move 2. No rows should be added");
+    assert.equal(page["koRows"]()[1]["koElements"]().length, 2, "Move 2. There are two elements in the second row");
+    assert.equal(page["koRows"]()[2]["koElements"]().length, 1, "Move 2. There is one elements in the last row");
+    assert.equal(page["koRows"]()[1]["koElements"]()[1].name, "q1", "Move 2. The first question is the last element in the first row");
+    dragTarget.doDrop();
+    assert.equal(page.questions.length, 3, "we have only two questions");
+    assert.equal(page.questions[1].name, "q1", "The second question is q1 now");    
+});
+
+QUnit.test("Move item startWithNewLine=false, 2", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("p1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var q2 = page.addNewQuestion("text", "q2");
+    var q3 = page.addNewQuestion("text", "q3");
+    q2.startWithNewLine = false;
+    var target = new Survey.QuestionText("q2");
+    target.startWithNewLine = false;
+
+    var dragTarget = new DragDropTargetElement(page, target, q2);
+    dragTarget.moveTo(q3, true);
+    dragTarget.doDrop();
+    assert.equal(page.questions.length, 3, "we have only two questions");
+    assert.equal(page.questions[2].name, "q2", "The last question is q2 now");    
+});
