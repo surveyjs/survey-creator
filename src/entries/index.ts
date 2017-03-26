@@ -32,4 +32,5 @@ export {ObjType, SurveyHelper} from "../surveyHelper";
 export {SurveyEmbedingWindow} from "../surveyEmbedingWindow";
 export {SurveyVerbs, SurveyVerbItem, SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../objectVerbs";
 export {SurveyUndoRedo, UndoRedoItem} from "../undoredo";
+export {SurveyForDesigner} from "../surveyjsObjects"
 export {SurveyEditor} from "../editor";
