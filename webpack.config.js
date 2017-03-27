@@ -53,6 +53,7 @@ var packagePlatformJson = {
     'typings': 'surveyeditor.d.ts',
     "dependencies": {
         "survey-knockout": "^" + packageJson.version,
+        "jquery": "^2.1.0",
         "knockout": "^3.4.0",
         "bootstrap": "^3.3.6",
         "ace-builds": "^1.2.2"
@@ -132,11 +133,23 @@ module.exports = function(options) {
             umdNamedDefine: true
         },
         externals: {
+            'jquery': {
+                root: 'jQuery',
+                commonjs2: 'jquery',
+                commonjs: 'jquery',
+                amd: 'jquery'
+            },
             'knockout': {
                 root: 'ko',
                 commonjs2: 'knockout',
                 commonjs: 'knockout',
                 amd: 'knockout'
+            },
+            'bootstrap': {
+                root: 'bootstrap',
+                commonjs2: 'bootstrap',
+                commonjs: 'bootstrap',
+                amd: 'bootstrap'
             },
             'survey-knockout': {
                 root: 'Survey',

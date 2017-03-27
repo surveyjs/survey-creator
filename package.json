@@ -7,8 +7,16 @@
     "build_dev": "webpack --env.buildType dev",
     "build_prod": "npm run build_dev && webpack --env.buildType prod"
   },
+  "dependencies": {
+    "jquery": "^2.1.0",
+    "knockout": "^3.4.0",
+    "bootstrap": "^3.3.6",
+    "survey-knockout": "^0.12.4"
+  },
   "devDependencies": {
     "@types/ace": "0.0.32",
+    "@types/bootstrap": "^3.3.32",
+    "@types/jquery": "^2.0.41",
     "@types/knockout": "^3.4.39",
     "@types/node": "7.0.4",
     "@types/qunit": "^2.0.31",
@@ -30,14 +38,12 @@
     "karma-qunit": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.2",
-    "knockout": "^3.4.0",
     "node-sass": "^4.4.0",
     "qunitjs": "^2.0.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "standard-version": "4.0.0",
     "style-loader": "^0.13.1",
-    "survey-knockout": "^0.12.4",
     "ts-loader": "^2.0.0",
     "typescript": "^2.1.5",
     "val-loader": "^0.5.0",

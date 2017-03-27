@@ -1,4 +1,7 @@
 ﻿import * as ko from "knockout";
+import * as jQuery from "jquery";
+global["jQuery"] = jQuery;
+import "bootstrap";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 import {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
@@ -19,7 +22,6 @@ export class SurveyPropertyEditorShowWindow {
         editor.onChanged = onChanged
         this.koEditor(editor);
         this.koVisible(true);
-        var jQuery = window["jQuery"];
         jQuery("#surveyquestioneditorwindow").modal("show");
         editor.onHideWindow = function() {jQuery("#surveyquestioneditorwindow").modal("hide");};
     }
