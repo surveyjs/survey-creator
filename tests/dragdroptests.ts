@@ -133,6 +133,20 @@ QUnit.test("Move item startWithNewLine=false, 2", function (assert) {
     var dragTarget = new DragDropTargetElement(page, target, q2);
     dragTarget.moveTo(q3, true);
     dragTarget.doDrop();
-    assert.equal(page.questions.length, 3, "we have only two questions");
+    assert.equal(page.questions.length, 3, "we have 3 questions");
     assert.equal(page.questions[2].name, "q2", "The last question is q2 now");    
+});
+QUnit.test("Move item startWithNewLine=false, 3", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("p1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var q2 = page.addNewQuestion("text", "q2");
+    q2.startWithNewLine = false;
+    var target = new Survey.QuestionText("q2");
+    target.startWithNewLine = false;
+
+    var dragTarget = new DragDropTargetElement(page, target, q2);
+    assert.equal(dragTarget.moveTo(q1, false), true, "You can move a question here");
+    dragTarget.doDrop();
+    assert.equal(page.questions[0].name, "q2", "The first question is q2 now");    
 });

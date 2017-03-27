@@ -53,11 +53,10 @@ export class DragDropTargetElement {
         if(!this.source) return true;
         var srcInfo = this.findInfo(this.source);
         if(srcInfo == null || srcInfo.panel != destInfo.panel) return true;
-        var diff = destInfo.rIndex - srcInfo.rIndex;
-        if(this.target.startWithNewLine) return diff < 0 || diff > 1;
-        if(diff == 0) return Math.abs(this.source.elIndex - this.source.elIndex) > 1;
-        if(Math.abs(diff) == 1) return !(this.isLastElementInRow(srcInfo) && destInfo.elIndex == 0 || this.isLastElementInRow(destInfo) && srcInfo.elIndex == 0);
-        return true;
+        var srcIndex = this.getIndexByInfo(srcInfo);
+        var destIndex = this.getIndexByInfo(destInfo);
+        var diff = destIndex - srcIndex;
+        return diff < 0 || diff > 1;
     }
     private isLastElementInRow(info: any) {
         return info.elIndex == info.panel["koRows"]()[info.rIndex]["koElements"]().length - 1;
