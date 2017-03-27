@@ -23,8 +23,9 @@ export class SurveyJSONEditor {
         if (!this.hasAceEditor) return;
         this.aceEditor = ace.edit("surveyjsJSONEditor");
         var self = this;
-        this.aceEditor.setTheme("ace/theme/monokai");
-        this.aceEditor.session.setMode("ace/mode/json");
+        //TODO add event to change ace theme and mode
+        //this.aceEditor.setTheme("ace/theme/monokai");
+        //this.aceEditor.session.setMode("ace/mode/json");
         this.aceEditor.setShowPrintMargin(false);
         this.aceEditor.getSession().on("change", function () {
             self.onJsonEditorChanged();
