@@ -1,7 +1,5 @@
 ﻿import * as ko from "knockout";
 import * as jQuery from "jquery";
-global["jQuery"] = jQuery;
-import "bootstrap";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 import {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
