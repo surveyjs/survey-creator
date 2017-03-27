@@ -8,6 +8,7 @@ var rimraf = require('rimraf');
 var GenerateJsonPlugin = require('generate-json-webpack-plugin');
 var packageJson = require('./package.json');
 var fs = require('fs');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var banner = [
     "surveyjs Editor v" + packageJson.version,
@@ -52,6 +53,7 @@ var packagePlatformJson = {
     'typings': 'surveyeditor.d.ts',
     "dependencies": {
         "survey-knockout": "^" + packageJson.version,
+        "jquery": "^2.1.0",
         "knockout": "^3.4.0",
         "bootstrap": "^3.3.6",
         "ace-builds": "^1.2.2"
@@ -131,11 +133,23 @@ module.exports = function(options) {
             umdNamedDefine: true
         },
         externals: {
+            'jquery': {
+                root: 'jQuery',
+                commonjs2: 'jquery',
+                commonjs: 'jquery',
+                amd: 'jquery'
+            },
             'knockout': {
                 root: 'ko',
                 commonjs2: 'knockout',
                 commonjs: 'knockout',
                 amd: 'knockout'
+            },
+            'bootstrap': {
+                root: 'bootstrap',
+                commonjs2: 'bootstrap',
+                commonjs: 'bootstrap',
+                amd: 'bootstrap'
             },
             'survey-knockout': {
                 root: 'Survey',
@@ -161,7 +175,8 @@ module.exports = function(options) {
                 packagePlatformJson,
                 undefined,
                 2
-            )
+            ),
+            new CopyWebpackPlugin([{context: 'src/fonts', from: '**/*', to: packagePath + 'fonts'}])
         ]);
     }
 

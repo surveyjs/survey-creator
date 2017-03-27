@@ -1,6 +1,10 @@
 // styles
 import "../main.scss";
 
+import * as jQuery from "jquery";
+global["jQuery"] = jQuery;
+import "bootstrap";
+
 export {DragDropHelper} from "../dragdrophelper";
 export {
     SurveyPropertyEditorBase, SurveyStringPropertyEditor,
