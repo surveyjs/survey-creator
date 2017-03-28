@@ -30,7 +30,7 @@ QUnit.test("At least one page should be available", function (assert) {
     assert.ok(editor.survey["dragDropHelper"], "dragDropHelper was created");
 });
 QUnit.test("options.questionTypes", function (assert) {
-    var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+    var allTypes = Survey.ElementFactory.Instance.getAllTypes();
     var editor = new SurveyEditor(null, null);
     assert.equal(editor.toolbox.items.length, allTypes.length, "All types are accepted");
     editor = new SurveyEditor(null, { questionTypes: ["text", "dropdown", "unknown"]});

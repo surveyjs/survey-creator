@@ -15,6 +15,7 @@ export class SurveyForDesigner extends Survey.Survey {
         var self = this;
         this.onAfterRenderPage.add((sender: Survey.Survey, options) => { options.page["onAfterRenderPage"](options.htmlElement); });
         this.onAfterRenderQuestion.add((sender: Survey.Survey, options) => { options.question["onAfterRenderQuestion"](options.htmlElement); });
+        this.onAfterRenderPanel.add((sender: Survey.Survey, options) => { options.panel["onAfterRenderPanel"](options.htmlElement); });
         this.editQuestionClick = function () { self.onEditQuestion.fire(self, null); };
         this.copyQuestionClick = function () { self.onCopyQuestion.fire(self, null); };
         this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self, null); };
@@ -37,16 +38,36 @@ export class SurveyForDesigner extends Survey.Survey {
     }
 }
 
-Survey.Page.prototype["onCreating"] = function () {
-    var self = this;
-    this.dragEnterCounter = 0;
-    this.emptyElement = null;
-    this.koRows.subscribe(function(changes) {
+function panelBaseOnCreating(self: any) {
+    self.dragEnterCounter = 0;
+    self.emptyElement = null;
+    self.koRows.subscribe(function(changes) {
         if(self.emptyElement) {
             self.emptyElement.style.display = self.koRows().length > 0 ? "none" : "";
         }
     });
+}
+
+Survey.Page.prototype["onCreating"] = function () {
+    panelBaseOnCreating(this);
 };
+
+Survey.Panel.prototype["onCreating"] = function () {
+    panelBaseOnCreating(this);
+};
+
+function addElement(root: HTMLElement, dragDropHelper: any, self: any): HTMLElement {
+    var eDiv: HTMLDivElement = document.createElement("div");
+    eDiv.className = "well";
+    eDiv.ondragover = function(e) { 
+        dragDropHelper.doDragDropOver(e, self); 
+    };
+    var eSpan: HTMLSpanElement = document.createElement("span");
+    eSpan.textContent = self.data.getEditorLocString('survey.dropQuestion');
+    eDiv.appendChild(eSpan);
+    root.appendChild(eDiv);
+    return eDiv;
+}
 
 Survey.Page.prototype["onAfterRenderPage"] = function(el) {
     if(!this.data.isDesignMode) return;
@@ -65,16 +86,18 @@ Survey.Page.prototype["onAfterRenderPage"] = function(el) {
     el.ondragover = function(e){ return false; };
     el.ondrop = function(e){ dragDropHelper.doDrop(e); };
     if(this.elements.length == 0) {
-        var eDiv: HTMLDivElement = document.createElement("div");
-        eDiv.className = "well";
-        eDiv.ondragover = function(e) { 
-            dragDropHelper.doDragDropOver(e, self); 
-        };
-        var eSpan: HTMLSpanElement = document.createElement("span");
-        eSpan.textContent = this.data.getEditorLocString('survey.dropQuestion');
-        eDiv.appendChild(eSpan);
-        el.appendChild(eDiv);
-        this.emptyElement = eDiv;
+        this.emptyElement = addElement(el, dragDropHelper, self);
+    }
+}
+
+Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
+    if(!this.data.isDesignMode) return;
+    var self = this;
+    var dragDropHelper = this.data["dragDropHelper"];
+    el.ondragover = function(e){ return false; };
+    el.ondrop = function(e){ dragDropHelper.doDrop(e); };
+    if(this.elements.length == 0) {
+        this.emptyElement = addElement(el, dragDropHelper, self);
     }
 }
 

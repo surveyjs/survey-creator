@@ -122,13 +122,21 @@ export class DragDropTargetElement {
         return a.panel === b.panel && a.rIndex === b.rIndex && a.elIndex === b.elIndex;
     }
     private findInfo(el: any): any {
-        if(el == this.page) return { panel: this.page, row: null, rIndex: 0, elIndex: 0 };
-        var rows = this.page["koRows"]();
+        return this.findInfoInPanel(this.page, el);
+    }
+    private findInfoInPanel(panel: Survey.PanelModelBase, el: any): any {
+        if(el == panel) return { panel: panel, row: null, rIndex: 0, elIndex: 0 };
+        var rows = panel["koRows"]();
         for(var i = 0; i < rows.length; i ++) {
             var row = rows[i];
             var elements = row["koElements"]();
             for(var j = 0; j < elements.length; j ++) {
-                if(elements[j] == el) return { panel: this.page, row: row, rIndex: i, elIndex: j };
+                if(elements[j].isPanel) {
+                    var res = this.findInfoInPanel(elements[j], el);
+                    if(res) return res;
+                } else {
+                    if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j };
+                }
             }
         }
         return null;
