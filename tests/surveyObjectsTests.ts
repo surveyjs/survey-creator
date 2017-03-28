@@ -1,13 +1,5 @@
 ﻿import * as ko from "knockout";
 import {SurveyObjects} from "../src/surveyObjects";
-import {
-    SurveyPropertyTriggersEditor,
-    SurveyPropertyVisibleTrigger
-} from "../src/propertyEditors/propertyTriggersEditor";
-import {
-    SurveyPropertyValidatorsEditor,
-    SurveyPropertyValidatorItem
-} from "../src/propertyEditors/propertyValidatorsEditor";
 import {SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../src/objectVerbs";
 import * as Survey from "survey-knockout";
 
@@ -131,98 +123,6 @@ QUnit.test("object changed name", function (assert) {
     survey.pages[0].name = "newname";
     objects.nameChanged(survey.pages[0]);
     assert.equal(objects.koObjects()[1].text(), SurveyObjects.intend + "newname", "new name should be 'newname'");
-});
-QUnit.test("Triggers property editor", function (assert) {
-    var survey = createSurvey();
-    var trigger = new Survey.SurveyTriggerVisible();
-    trigger.name = "question1";
-    trigger.value = "val1";
-    trigger.operator = "notequal";
-    trigger.questions.push("question2");
-    survey.triggers.push(trigger);
-    var result = [];
-    var propEditor = new SurveyPropertyTriggersEditor();
-    propEditor.onChanged = (newValue: any) => { result = newValue };
-    propEditor.object = survey;
-    propEditor.value = survey.triggers;
-    assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
-    var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-    assert.equal(koTrigger.koName(), "question1", "Name set correctly");
-    assert.equal(koTrigger.koOperator(), "notequal", "operator set correctly");
-    assert.equal(koTrigger.koValue(), "val1", "value set correctly");
-    assert.deepEqual(koTrigger.questions.koChoosen(), ["question2"], "questions set correctly");
-
-    propEditor.onAddClick("visibletrigger");
-    assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
-    koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-    assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
-    assert.equal(koTrigger.koIsValid(), false, "the trigger is not valid");
-    koTrigger.koName("question2");
-    assert.equal(koTrigger.koIsValid(), false, "the trigger is still not valid");
-    assert.equal(koTrigger.koRequireValue(), true, "value should be set");
-    koTrigger.koOperator("notempty");
-    assert.equal(koTrigger.koIsValid(), true, "the trigger is valid");
-    assert.equal(koTrigger.koRequireValue(), false, "value should not be set");
-    assert.equal(koTrigger.koText(), "Run if 'question2' is not empty", "text for valid trigger");
-
-    koTrigger.pages.koChoosen.push("page2");
-    koTrigger.questions.koChoosen.push("question3");
-    koTrigger.koValue(1);
-    trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
-    assert.equal(trigger.name, "question2", "create trigger correctly: name");
-    assert.equal(trigger.operator, "notempty", "create trigger correctly: operator");
-    assert.equal(trigger.value, 1, "create trigger correctly: value");
-    assert.deepEqual(trigger.pages, ["page2"], "create trigger correctly: pages");
-    assert.deepEqual(trigger.questions, ["question3"], "create trigger correctly: questions");
-
-    propEditor.onAddClick("visibletrigger");
-    assert.equal(propEditor.koItems().length, 3, "There are three triggers now");
-    propEditor.onDeleteClick();
-    assert.equal(propEditor.koItems().length, 2, "There are again two triggers");
-
-    propEditor.onApplyClick();
-    assert.equal(result.length, 2, "Two triggers are saved");
-
-    propEditor.onAddClick("completetrigger");
-    koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-    koTrigger.koName("question2");
-    koTrigger.koOperator("notempty");
-    propEditor.onApplyClick();
-    assert.equal(result.length, 3, "There are 3 triggers");
-    assert.equal(result[2].getType(), "completetrigger", "Complete trigger is created");
-});
-QUnit.test("Validators property editor", function (assert) {
-    var survey = createSurvey();
-    var validator = new Survey.NumericValidator(10, 100);
-    validator.text = "validatortext";
-    var question = <Survey.Question>survey.getQuestionByName("question1");
-    question.validators.push(validator);
-    var result = [];
-    var propEditor = new SurveyPropertyValidatorsEditor();
-    propEditor.onChanged = (newValue: any) => { result = newValue };
-    propEditor.object = question;
-    propEditor.value = question.validators;
-    assert.equal(propEditor.koItems().length, 1, "There are one validator initially");
-    var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
-    assert.equal(koValidator.validator.text, "validatortext", "Validator Text is set correctly");
-    assert.equal((<Survey.NumericValidator>koValidator.validator).minValue, 10, "Validator 'minValue' is set correctly");
-    assert.equal((<Survey.NumericValidator>koValidator.validator).maxValue, 100, "Validator 'maxValue' is set correctly");
-
-    propEditor.onAddClick("textvalidator");
-    assert.equal(propEditor.koItems().length, 2, "There are two validators now");
-    var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
-    assert.equal(koValidator.text, "textvalidator", "Created with corrected value");
-    (<Survey.TextValidator>koValidator.validator).minLength = 20;
-    koValidator.validator.text = "text is short.";
-
-    propEditor.onAddClick("textvalidator");
-    assert.equal(propEditor.koItems().length, 3, "There are three validators now");
-    propEditor.onDeleteClick();
-    assert.equal(propEditor.koItems().length, 2, "There are two validators again");
-
-    propEditor.onApplyClick();
-    assert.equal(result.length, 2, "Two validators are saved");
-    assert.equal(result[1].minLength, 20, "The properties are saved too");
 });
 QUnit.test("SurveyVerbChangeTypeItem test", function (assert) {
     var survey = createSurvey();

@@ -5,7 +5,7 @@ export class DragDropTargetElement {
 
     }
 
-    public moveTo(destination: any, isBottom: boolean): boolean {
+    public moveTo(destination: any, isBottom: boolean, isEdge: boolean = false): boolean {
         if(destination === this.target) return true;
         var destInfo = this.findInfo(destination);
         if(destInfo == null) {
