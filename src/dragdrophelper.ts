@@ -31,7 +31,7 @@ export class DragDropTargetElement {
         if(this.source) {
             var srcInfo = this.findInfo(this.source);
             var panel = srcInfo ? srcInfo.panel : this.page;
-            panel.removeQuestion(this.source); 
+            panel.removeElement(this.source); 
         }
     }
     public clear() {
@@ -47,6 +47,10 @@ export class DragDropTargetElement {
         return index + info.elIndex;
     }
     private canMove(destInfo: any) : boolean {
+        /* TODO check nested 
+        if(this.target.isPanel) {
+            if(this.target.)
+        }*/
         if(!this.source) return true;
         var srcInfo = this.findInfo(this.source);
         if(srcInfo == null || srcInfo.panel != destInfo.panel) return true;
@@ -91,6 +95,9 @@ export class DragDropTargetElement {
     }
     private AddInfoAsRow(info: any) {
         var row = new Survey.QuestionRow(info.panel);
+        if(this.target.isPanel) {
+            this.target.parent = info.panel;
+        }
         row.addQuestion(this.target);
         var rows = info.panel.koRows();
         if(info.rIndex >= 0 && info.rIndex < info.panel.koRows().length) {
@@ -103,6 +110,7 @@ export class DragDropTargetElement {
     private clearByInfo(info: any) {
         if(info == null) return;
         var rows = info.panel.koRows();
+        if(info.rIndex < 0 || info.rIndex >= rows.length) return;
         var row = rows[info.rIndex];
         var elements = row["koElements"](); 
         if(row["koElements"]().length > 1) {
@@ -122,7 +130,13 @@ export class DragDropTargetElement {
         return this.findInfoInPanel(this.page, el, isEdge);
     }
     private findInfoInPanel(panel: Survey.PanelModelBase, el: any, isEdge: boolean): any {
-        if(el == panel) return { panel: panel, row: null, rIndex: 0, elIndex: 0 };
+        if(el == panel) {
+            var parent = panel;
+            if(this.target.isPanel && panel == this.target && panel.parent) {
+                parent = panel.parent;
+            }
+            return { panel: parent, row: null, rIndex: 0, elIndex: 0, element: panel };
+        }
         var rows = panel["koRows"]();
         for(var i = 0; i < rows.length; i ++) {
             var row = rows[i];
@@ -132,7 +146,7 @@ export class DragDropTargetElement {
                     var res = this.findInfoInPanel(elements[j], el, isEdge);
                     if(res) return res;
                 } else {
-                    if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j };
+                    if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j, element: elements[j] };
                 }
             }
         }

@@ -5,10 +5,11 @@ import * as Survey from "survey-knockout";
 export class SurveyObjectItem {
     public value: Survey.Base;
     public text: any;
+    public level: number = 0;
 }
 
 export class SurveyObjects {
-    public static intend: string = "...";
+    public static intend: string = ".";
     surveyValue: Survey.Survey;
 
     constructor(public koObjects: any, public koSelected: any) {
@@ -20,7 +21,7 @@ export class SurveyObjects {
         this.rebuild();
     }
     public addPage(page: Survey.Page) {
-        var pageItem = this.createPage(page);
+        var pageItem = this.createItem(page, this.koObjects()[0]);
         var index = this.survey.pages.indexOf(page);
         if (index > 0) {
             var prevPage = this.survey.pages[index - 1];
@@ -32,17 +33,26 @@ export class SurveyObjects {
         this.addItem(pageItem, index);
         index++;
         for (var i = 0; i < page.questions.length; i++) {
-            var item = this.createQuestion(page.questions[i]);
+            var item = this.createItem(page.questions[i], pageItem);
             this.addItem(item, index + i);
         }
         this.koSelected(pageItem);
+    }
+    public addElement(element: any, parent: any) {
+        var parentIndex = this.getItemIndex(parent);
+        if (parentIndex < 0) return;
+        if(parent.elements)
+        var elementIndex = parent.elements.indexOf(element) + 1 + parentIndex;
+        var item = this.createItem(element, this.koObjects()[parentIndex]);
+        this.addItem(item, elementIndex);
+        this.koSelected(item);
     }
     public addQuestion(page: Survey.Page, question: Survey.QuestionBase) {
         var index = this.getItemIndex(page);
         if (index < 0) return;
         var questionIndex = page.questions.indexOf(question) + 1;
         index += questionIndex;
-        var item = this.createQuestion(question);
+        var item = this.createItem(question, this.koObjects()[index]);
         this.addItem(item, index);
         this.koSelected(item);
     }
@@ -68,7 +78,7 @@ export class SurveyObjects {
     public nameChanged(obj: Survey.Base) {
         var index = this.getItemIndex(obj);
         if (index < 0) return;
-        this.koObjects()[index].text(this.getText(obj));
+        this.koObjects()[index].text(this.getText(this.koObjects()[index]));
     }
     public selectNextQuestion(isUp: boolean) {
         var question = this.getSelectedQuestion();
@@ -108,27 +118,35 @@ export class SurveyObjects {
             this.koSelected(null);
             return;
         }
-        objs.push(this.createItem(this.survey, "Survey"));
+        var root = this.createItem(this.survey, null);
+        objs.push(root);
         for (var i = 0; i < this.survey.pages.length; i++) {
             var page = <Survey.Page>this.survey.pages[i];
-            objs.push(this.createPage(page));
-            for (var j = 0; j < page.questions.length; j++) {
-                objs.push(this.createQuestion(page.questions[j]));
-            }
+            var pageItem = this.createItem(page, root);
+            objs.push(pageItem);
+            this.buildElements(objs, page.elements, pageItem);
         }
         this.koObjects(objs);
         this.koSelected(this.survey);
     }
-    private createPage(page: Survey.Page) {
-        return this.createItem(page, this.getText(page));
+    private buildElements(objs: Array<any>, elements: Array<Survey.IElement>, parentItem: SurveyObjectItem) {
+        for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            if(el.isPanel) {
+                var panelItem = this.createItem(<Survey.Panel>el, parentItem);
+                objs.push(panelItem);
+                this.buildElements(objs, (<Survey.Panel>el).elements, panelItem);
+            }
+            else {
+                objs.push(this.createItem(<Survey.QuestionBase>el, parentItem));
+            }
+        }
     }
-    private createQuestion(question: Survey.QuestionBase) {
-        return this.createItem(question, this.getText(question));
-    }
-    private createItem(value: Survey.Base, text: string) {
+    private createItem(value: Survey.Base, parent: SurveyObjectItem) {
         var item = new SurveyObjectItem();
         item.value = value;
-        item.text = ko.observable(text);
+        item.level = parent != null ? parent.level + 1 : 0;
+        item.text = ko.observable(this.getText(item));
         return item;
     }
     private getItemIndex(value: Survey.Base): number {
@@ -138,11 +156,12 @@ export class SurveyObjects {
         }
         return -1;
     }
-    private getText(obj: Survey.Base): string {
+    private getText(item: SurveyObjectItem): string {
+        if(item.level == 0) return "Survey";
         var intend = SurveyObjects.intend;
-        if (SurveyHelper.getObjectType(obj) != ObjType.Page) {
+        for(var i = 1; i < item.level; i ++) {
             intend += SurveyObjects.intend;
         }
-        return intend + SurveyHelper.getObjectName(obj);
+        return intend + SurveyHelper.getObjectName(item.value);
     }
 }

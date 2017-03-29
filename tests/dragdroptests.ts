@@ -199,3 +199,17 @@ QUnit.test("Move item after panel", function (assert) {
     assert.equal(page.elements.length, 2, "There are two elements on the page");    
     assert.equal(page.elements[1].name, "q1", "The first element is 'q1'");    
 });
+
+QUnit.test("Add item into page", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var target = new Survey.Panel("panel1");
+
+    var dragTarget = new DragDropTargetElement(page, target, null);
+
+    assert.equal(dragTarget.moveTo(page, false), true, "You can move a panel here");
+    assert.equal(page["koRows"]().length, 1, "There are one in the page");
+    dragTarget.doDrop();
+    assert.equal(page.elements.length, 1, "There is one element on the page");    
+    assert.equal(page.elements[0].name, "panel1", "The first element is 'panel1'");    
+});

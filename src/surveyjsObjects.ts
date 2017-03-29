@@ -147,7 +147,7 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
     el.ondrop = function(e){ self.dragDropHelper().doDrop(e); };
     el.ondragstart = function (e) { self.dragDropHelper().startDragQuestion(e, self); };
     el.ondragend = function (e) { self.dragDropHelper().end(); };
-    el.onclick = function(e) { self.data["selectedElement"] = self; };
+    el.onclick = function(e) { self.data["selectedElement"] = self; e.stopPropagation(); };
     el.onkeydown = function(e) {
         if(e.witch == 46) self.data.deleteCurrentObjectClick(); 
         return true;
@@ -199,7 +199,7 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
     if(this.elements.length == 0) {
         this.emptyElement = addEmptyPanelElement(el, self.dragDropHelper(), self);
     }
-    elementOnAfterRendering(el, this, panel_design_class, true);
+    elementOnAfterRendering(el, this, panel_design_class, false);
 }
 
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {

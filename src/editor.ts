@@ -47,6 +47,7 @@ export class SurveyEditor {
     public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
 
     koIsShowDesigner: any;
@@ -269,14 +270,21 @@ export class SurveyEditor {
         this.surveyObjects.addPage(page);
     }
     private doOnQuestionAdded(question: Survey.QuestionBase) {
-        var page = <Survey.Page>this.survey.getPageByQuestion(question);
+        var page = <Survey.Page>this.survey.getPageByElement(question);
         var options = { question: question, page: page };
         this.onQuestionAdded.fire(this, options);
-        this.surveyObjects.addQuestion(page, question);
+        this.surveyObjects.addElement(question, page);
         this.survey.render();
     }
-    private doOnQuestionRemoved(question: Survey.QuestionBase) {
+    private doOnElementRemoved(question: Survey.QuestionBase) {
         this.surveyObjects.removeObject(question);
+        this.survey.render();
+    }
+    private doOnPanelAdded(panel: Survey.Panel) {
+        var page = <Survey.Page>this.survey.getPageByElement(panel);
+        var options = { panel: panel, page: page };
+        this.onPanelAdded.fire(this, options);
+        this.surveyObjects.addElement(panel, page);
         this.survey.render();
     }
     private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -354,7 +362,7 @@ export class SurveyEditor {
             this.survey.currentPage = <Survey.Page>obj;
             canDeleteObject = this.survey.pages.length > 1;
         }
-        if (objType == ObjType.Question) {
+        if (objType == ObjType.Question || objType == ObjType.Panel) {
             this.survey.selectedElement = obj;
             canDeleteObject = true;
             this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedElement);
@@ -394,9 +402,7 @@ export class SurveyEditor {
             this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
         }
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
-        //TODO remove the line above and call the method directly.
-        if (this.survey["setDesignMode"]) this.survey["setDesignMode"](true);
-        else this.survey.mode = "designer";
+        this.surveyValue.setDesignMode(true);
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
@@ -410,7 +416,9 @@ export class SurveyEditor {
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
         this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question); });
-        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnQuestionRemoved(options.question); });
+        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
+        this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel); });
+        this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
     }
     private processHtml(html: string): string {
         if (!html) return html;
@@ -421,17 +429,37 @@ export class SurveyEditor {
         return html;
     }
     private doDraggingToolboxItem(json: any, e) {
-        this.dragDropHelper.startDragToolboxItem(e, this.getNewQuestionName(), json);
+        this.dragDropHelper.startDragToolboxItem(e, this.getNewName(json["type"]), json);
     }
     private doClickToolboxItem(json: any) {
-        var name = this.getNewQuestionName();
+        var name = this.getNewName(json["type"]);
         var question = Survey.JsonObject.metaData.createClass(json["type"]);
         new Survey.JsonObject().toObject(json, question);
         question.name = name;
         this.doClickQuestionCore(question);
     }
+    private getNewName(type: string) : string {
+        return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
+    }
     private getNewQuestionName(): string {
         return SurveyHelper.getNewQuestionName(this.survey.getAllQuestions());
+    }
+    private getNewPanelName(): string {
+        return SurveyHelper.getNewPanelName(this.getAllPanels());
+    }
+    private getAllPanels(): Array<any> {
+        var result = [];
+        for(var i = 0; i < this.survey.pages.length; i ++) {
+            this.addPanels(this.survey.pages[i], result);
+        }
+        return result;
+    }
+    private addPanels(panel: any, result: Array<any>) {
+        for(var i = 0; i < panel.elements.length; i ++) {
+            if(!panel.elements[i].isPanel) continue;
+            result.push(panel.elements[i]);
+            this.addPanels(panel.elements[i], result);
+        }
     }
     private doClickQuestionCore(question: Survey.QuestionBase) {
         var page = this.survey.currentPage;

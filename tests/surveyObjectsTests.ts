@@ -17,6 +17,29 @@ QUnit.test("Initial objects building", function (assert) {
     assert.equal(objects.koObjects()[4].text(), intend + "page2", "The second page");
     assert.equal(objects.koObjects()[5].text(), intend + intend + "question3", "The third question");
 });
+QUnit.test("Initial objects building, panel support", function (assert) {
+    var intend = SurveyObjects.intend;
+    var survey = new Survey.Survey();
+    var page1 = survey.addNewPage("page1");
+    var page2 = survey.addNewPage("page2");
+    page1.addNewQuestion("text", "q1");
+    var panel1 = page1.addNewPanel("panel1");
+    panel1.addNewQuestion("text", "q2");
+    var panel2 = panel1.addNewPanel("panel2");
+    panel2.addNewQuestion("text", "q3");
+    panel2.addNewQuestion("text", "q4");
+    page1.addNewQuestion("text", "q5");
+    page2.addNewQuestion("text", "q6");
+
+    var objects = new SurveyObjects(ko.observableArray(), ko.observable());
+    objects.survey = survey;
+    assert.equal(objects.koObjects().length, 1 + 2 + 2 + 6, "survey + 2 pages + 2 panels +  5 questions.");
+    assert.equal(objects.koSelected(), survey, "The selected object is survey.");
+    assert.equal(objects.koObjects()[0].text(), "Survey", "The first item is Survey");
+    assert.equal(objects.koObjects()[3].text(), intend + intend + "panel1", "The first panel");
+    assert.equal(objects.koObjects()[4].text(), intend + intend + intend + "q2", "q2");
+
+});
 QUnit.test("No name pages", function (assert) {
     var intend = SurveyObjects.intend;
     var survey = createSurvey();

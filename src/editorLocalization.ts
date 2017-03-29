@@ -72,6 +72,7 @@ export var defaultStrings = {
         addNewPage: "Add New Page",
         newPageName: "page",
         newQuestionName: "question",
+        newPanelName: "panel",
         testSurvey: "Test Survey",
         testSurveyAgain: "Test Survey Again",
         testSurveyWidth: "Survey width: ",
