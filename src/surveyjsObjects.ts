@@ -82,7 +82,7 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
     var eDiv: HTMLDivElement = document.createElement("div");
     eDiv.className = "well";
     eDiv.ondragover = function(e) { 
-        dragDropHelper.doDragDropOver(e, self); 
+        dragDropHelper.doDragDropOver(e, self);
     };
     var eSpan: HTMLSpanElement = document.createElement("span");
     eSpan.textContent = self.data.getEditorLocString('survey.dropQuestion');
@@ -143,7 +143,7 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
     el.className = newClass;
     el.style.opacity = self.koIsDragging() ? 0.4 : 1;
     el.draggable = true;
-    el.ondragover = function(e){ self.dragDropHelper().doDragDropOver(e, self); };
+    el.ondragover = function(e){ self.dragDropHelper().doDragDropOver(e, self, true); };
     el.ondrop = function(e){ self.dragDropHelper().doDrop(e); };
     el.ondragstart = function (e) { self.dragDropHelper().startDragQuestion(e, self); };
     el.ondragend = function (e) { self.dragDropHelper().end(); };

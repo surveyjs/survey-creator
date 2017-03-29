@@ -7,7 +7,7 @@ export class DragDropTargetElement {
 
     public moveTo(destination: any, isBottom: boolean, isEdge: boolean = false): boolean {
         if(destination === this.target) return true;
-        var destInfo = this.findInfo(destination);
+        var destInfo = this.findInfo(destination, isEdge);
         if(destInfo == null) {
             this.clear();
             return false;
@@ -16,7 +16,7 @@ export class DragDropTargetElement {
         this.updateInfo(destInfo, isBottom);
         if(this.isInfoEquals(targetInfo, destInfo)) return true;
         this.clearByInfo(targetInfo);
-        destInfo = this.findInfo(destination);
+        destInfo = this.findInfo(destination, isEdge);
         this.updateInfo(destInfo, isBottom);
         if(!this.canMove(destInfo)) return false;
         this.addInfo(destInfo);
@@ -30,11 +30,8 @@ export class DragDropTargetElement {
         destInfo.panel.addElement(this.getNewTargetElement(), index); 
         if(this.source) {
             var srcInfo = this.findInfo(this.source);
-            if(srcInfo) {
-                srcInfo.panel.removeQuestion(this.source); 
-            } else {
-                this.page.removeQuestion(this.source); 
-            }
+            var panel = srcInfo ? srcInfo.panel : this.page;
+            panel.removeQuestion(this.source); 
         }
     }
     public clear() {
@@ -121,18 +118,18 @@ export class DragDropTargetElement {
         if(a == null || b == null) return false;
         return a.panel === b.panel && a.rIndex === b.rIndex && a.elIndex === b.elIndex;
     }
-    private findInfo(el: any): any {
-        return this.findInfoInPanel(this.page, el);
+    private findInfo(el: any, isEdge: boolean = false): any {
+        return this.findInfoInPanel(this.page, el, isEdge);
     }
-    private findInfoInPanel(panel: Survey.PanelModelBase, el: any): any {
+    private findInfoInPanel(panel: Survey.PanelModelBase, el: any, isEdge: boolean): any {
         if(el == panel) return { panel: panel, row: null, rIndex: 0, elIndex: 0 };
         var rows = panel["koRows"]();
         for(var i = 0; i < rows.length; i ++) {
             var row = rows[i];
             var elements = row["koElements"]();
             for(var j = 0; j < elements.length; j ++) {
-                if(elements[j].isPanel) {
-                    var res = this.findInfoInPanel(elements[j], el);
+                if(!isEdge && elements[j].isPanel) {
+                    var res = this.findInfoInPanel(elements[j], el, isEdge);
                     if(res) return res;
                 } else {
                     if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j };
@@ -150,6 +147,7 @@ export class DragDropTargetElement {
 }
 
 export class DragDropHelper {
+    public static edgeHeight: number = 20;
     static dataStart: string = "surveyjs,";
     static dragData: any = {text: "", json: null };
     static prevEvent = { element: null, x: -1, y: -1 };
@@ -178,11 +176,13 @@ export class DragDropHelper {
         var data = this.getData(event).text;
         return data && data.indexOf(DragDropHelper.dataStart) == 0;
     }
-    public doDragDropOver(event: DragEvent, element: any) {
+    public doDragDropOver(event: DragEvent, element: any, isEdge: boolean = false) {
         event = this.getEvent(event);
         this.checkScrollY(event);
         if (!element || !this.isSurveyDragging(event) || this.isSamePlace(event, element)) return;
-        this.ddTarget.moveTo(element, this.isBottom(event, element));
+        var bottomInfo = this.isBottom(event, element);
+        isEdge = isEdge && bottomInfo.isEdge;
+        this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
     }
     public end() {
         if(this.ddTarget) {
@@ -223,14 +223,15 @@ export class DragDropHelper {
         targetQuestion["koIsDragging"](true);
         return targetQuestion;
     }
-    private isBottom(event: DragEvent, surveyEl: any): boolean {
+    private isBottom(event: DragEvent, surveyEl: any): any {
         event = this.getEvent(event);
         var height = <number>event.currentTarget["clientHeight"];
         var y = event.offsetY;
         if (event.hasOwnProperty('layerX')) {
             y = event.layerY - <number>event.currentTarget["offsetTop"];
         }
-        return y > height / 2;
+
+        return { isBottom: y > height / 2, isEdge: y <= DragDropHelper.edgeHeight || height - y <= DragDropHelper.edgeHeight};
     }
     private isSamePlace(event: DragEvent, element: any): boolean {
         var prev = DragDropHelper.prevEvent;

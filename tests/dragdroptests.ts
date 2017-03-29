@@ -165,8 +165,8 @@ QUnit.test("Move item into empty panel", function (assert) {
     assert.equal(panel.questions.length, 1, "There is one question in the panel");    
     assert.equal(panel.questions[0].name, "q1", "It is the 'q1' question");    
 });
-/*
-QUnit.test("Move item before and after panel", function (assert) {
+
+QUnit.test("Move item before panel", function (assert) {
     var survey = new Survey.Survey();
     var page = <Survey.Page>survey.addNewPage("page1");
     var panel = page.addNewPanel("panel1")
@@ -175,10 +175,27 @@ QUnit.test("Move item before and after panel", function (assert) {
     var dragTarget = new DragDropTargetElement(page, target, null);
 
     assert.equal(panel["koRows"]().length, 0, "There is no rows");
-    assert.equal(dragTarget.moveTo(panel, false), true, "You can move a question here");
-    assert.equal(panel["koRows"]().length, 1, "There is one row");
+    assert.equal(dragTarget.moveTo(panel, false, true), true, "You can move a question here");
+    assert.equal(panel["koRows"]().length, 0, "There is no rows in panel");
+    assert.equal(page["koRows"]().length, 2, "There are two rows in the page");
     dragTarget.doDrop();
-    assert.equal(panel.questions.length, 1, "There is one question in the panel");    
-    assert.equal(panel.questions[0].name, "q1", "It is the 'q1' question");    
+    assert.equal(page.elements.length, 2, "There are two elements on the page");    
+    assert.equal(page.elements[0].name, "q1", "The first element is 'q1'");    
 });
-*/
+
+QUnit.test("Move item after panel", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var panel = page.addNewPanel("panel1")
+    var target = new Survey.QuestionText("q1");
+
+    var dragTarget = new DragDropTargetElement(page, target, null);
+
+    assert.equal(panel["koRows"]().length, 0, "There is no rows");
+    assert.equal(dragTarget.moveTo(panel, true, true), true, "You can move a question here");
+    assert.equal(panel["koRows"]().length, 0, "There is no rows in panel");
+    assert.equal(page["koRows"]().length, 2, "There are two rows in the page");
+    dragTarget.doDrop();
+    assert.equal(page.elements.length, 2, "There are two elements on the page");    
+    assert.equal(page.elements[1].name, "q1", "The first element is 'q1'");    
+});
