@@ -135,6 +135,8 @@ function createElementAddons(data: any): HTMLElement {
     return main;
 }
 
+//var lastElementOnClick: HTMLElement = null;
+
 function elementOnAfterRendering(el: any, self: any, className: string, disable: boolean) {
     self.renderedElement = el;
     var newClass = className;
@@ -143,11 +145,26 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
     el.className = newClass;
     el.style.opacity = self.koIsDragging() ? 0.4 : 1;
     el.draggable = true;
-    el.ondragover = function(e){ self.dragDropHelper().doDragDropOver(e, self, true); };
-    el.ondrop = function(e){ self.dragDropHelper().doDrop(e); };
+    el.ondragover = function(e){ 
+        if(!e["markEvent"]) {
+            e["markEvent"] = true;
+            self.dragDropHelper().doDragDropOver(e, self, true); 
+        }
+    };
+    el.ondrop = function(e){ 
+        if(!e["markEvent"]) {
+            e["markEvent"] = true;
+            self.dragDropHelper().doDrop(e); 
+        }
+    };
     el.ondragstart = function (e) { self.dragDropHelper().startDragQuestion(e, self); };
     el.ondragend = function (e) { self.dragDropHelper().end(); };
-    el.onclick = function(e) { self.data["selectedElement"] = self; e.stopPropagation(); };
+    el.onclick = function(e) { 
+        if(!e["markEvent"]) {
+            e["markEvent"] = true;
+            self.data["selectedElement"] = self; 
+        }
+    };
     el.onkeydown = function(e) {
         if(e.witch == 46) self.data.deleteCurrentObjectClick(); 
         return true;
