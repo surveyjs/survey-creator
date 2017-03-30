@@ -269,22 +269,22 @@ export class SurveyEditor {
         this.pagesEditor.survey = this.surveyValue;
         this.surveyObjects.addPage(page);
     }
-    private doOnQuestionAdded(question: Survey.QuestionBase) {
+    private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
         var page = <Survey.Page>this.survey.getPageByElement(question);
         var options = { question: question, page: page };
         this.onQuestionAdded.fire(this, options);
-        this.surveyObjects.addElement(question, page);
+        this.surveyObjects.addElement(question, parentPanel);
         this.survey.render();
     }
     private doOnElementRemoved(question: Survey.QuestionBase) {
         this.surveyObjects.removeObject(question);
         this.survey.render();
     }
-    private doOnPanelAdded(panel: Survey.Panel) {
+    private doOnPanelAdded(panel: Survey.Panel, parentPanel: any) {
         var page = <Survey.Page>this.survey.getPageByElement(panel);
         var options = { panel: panel, page: page };
         this.onPanelAdded.fire(this, options);
-        this.surveyObjects.addElement(panel, page);
+        this.surveyObjects.addElement(panel, parentPanel);
         this.survey.render();
     }
     private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -415,9 +415,9 @@ export class SurveyEditor {
         this.surveyValue.onDeleteCurrentObject.add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
-        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question); });
+        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question, options.parentPanel); });
         this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
-        this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel); });
+        this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel, options.parentPanel); });
         this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
     }
     private processHtml(html: string): string {

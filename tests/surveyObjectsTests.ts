@@ -147,6 +147,31 @@ QUnit.test("object changed name", function (assert) {
     objects.nameChanged(survey.pages[0]);
     assert.equal(objects.koObjects()[1].text(), SurveyObjects.intend + "newname", "new name should be 'newname'");
 });
+QUnit.test("Large test on adding/remove objects with Panel", function (assert) {
+    var survey = new Survey.Survey();
+    var page1 = survey.addNewPage("page1");
+    var objects = new SurveyObjects(ko.observableArray(), ko.observable());
+    objects.survey = survey;
+    var onAddElement =  function(element, parent){
+        var page = survey.getPageByElement(element);
+        objects.addElement(element, parent);
+    }
+    var onRemoveElement = function(element) {
+       objects.removeObject(element);
+    }
+    survey.onQuestionAdded.add(function(sender, options) { onAddElement(options.question, options.parentPanel); });
+    survey.onPanelAdded.add(function(sender, options) { onAddElement(options.panel, options.parentPanel); });
+    survey.onQuestionRemoved.add(function(sender, options) { onRemoveElement(options.question); });
+    survey.onPanelRemoved.add(function(sender, options) { onRemoveElement(options.panel); });
+
+    var q1 = page1.addNewQuestion("text", "q1");
+    assert.equal(objects.koObjects()[2].value.name, "q1", "'q1' added correctly");
+    var panel1 = page1.addNewPanel("panel1");
+    assert.equal(objects.koObjects()[3].value.name, "panel1", "'panel1' added correctly");
+    var q2 = panel1.addNewQuestion("text", "q2");
+    assert.equal(objects.koObjects()[4].value.name, "q2", "'q2' added correctly");
+});
+
 QUnit.test("SurveyVerbChangeTypeItem test", function (assert) {
     var survey = createSurvey();
     var verb = new SurveyVerbChangeTypeItem(survey, survey.pages[0].questions[1], null);
