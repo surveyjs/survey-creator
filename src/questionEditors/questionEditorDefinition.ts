@@ -60,6 +60,10 @@ export class SurveyQuestionEditorDefinition {
         },
         "matrixdropdowncolumn@comment" : {
             properties: ["placeHolder"]
+        },
+        "panel": {
+            properties: ["name", "title", {name: "visible", category: "checks"} ],
+            tabs: [{name: "visibleIf", index: 100}]
         }
     }
     public static getProperties(className: string): Array<any> {
