@@ -4,6 +4,7 @@ import {SurveyHelper} from "../surveyHelper";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyPropertyValidatorsEditor} from "./propertyValidatorsEditor";
 import * as Survey from "survey-knockout";
+import * as ko from "knockout";
 
 export class SurveyPropertyTextItemsEditor extends SurveyPropertyItemsEditor {
     constructor() {
