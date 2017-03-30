@@ -1,6 +1,6 @@
 import {editorLocalization} from "../editorLocalization"
 
-var FrenchTranslation = {
+var frenchTranslation = {
   //Strings in Editor
   ed: {
     addNewPage: 'Ajouter une page',
