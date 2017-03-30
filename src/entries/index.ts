@@ -41,3 +41,7 @@ export {SurveyVerbs, SurveyVerbItem, SurveyVerbChangeTypeItem, SurveyVerbChangeP
 export {SurveyUndoRedo, UndoRedoItem} from "../undoredo";
 export {SurveyForDesigner} from "../surveyjsObjects"
 export {SurveyEditor} from "../editor";
+
+//editorLocalization
+import '../localization/french';
+
