@@ -20,40 +20,28 @@ export class SurveyObjects {
         this.surveyValue = value;
         this.rebuild();
     }
-    public addPage(page: Survey.Page) {
-        var pageItem = this.createItem(page, this.koObjects()[0]);
-        var index = this.survey.pages.indexOf(page);
-        if (index > 0) {
-            var prevPage = this.survey.pages[index - 1];
-            index = this.getItemIndex(prevPage) + 1;
-            index += prevPage.questions.length;
-        } else {
-            index = 1; //0 - Survey
-        }
-        this.addItem(pageItem, index);
-        index++;
-        for (var i = 0; i < page.questions.length; i++) {
-            var item = this.createItem(page.questions[i], pageItem);
-            this.addItem(item, index + i);
-        }
-        this.koSelected(pageItem);
+    public addPage(page: Survey.PageModel) {
+        this.addElement(page, null);
     }
     public addElement(element: any, parent: any) {
-        var parentIndex = this.getItemIndex(parent);
+        var parentIndex = parent != null ? this.getItemIndex(parent) : 0;
         if (parentIndex < 0) return;
-        if(parent.elements)
-        var elementIndex = parent.elements.indexOf(element) + 1 + parentIndex;
+        var elements = parent != null ? parent.elements : this.survey.pages;
+        var elementIndex = elements.indexOf(element);
+        var newIndex = elementIndex + 1 + parentIndex;
+        if(elementIndex > 0) {
+            var prevElement = elements[elementIndex - 1];
+            newIndex = this.getItemIndex(prevElement) + this.getAllElementCount(prevElement) + 1;
+        }
         var item = this.createItem(element, this.koObjects()[parentIndex]);
-        this.addItem(item, elementIndex);
-        this.koSelected(item);
-    }
-    public addQuestion(page: Survey.Page, question: Survey.QuestionBase) {
-        var index = this.getItemIndex(page);
-        if (index < 0) return;
-        var questionIndex = page.questions.indexOf(question) + 1;
-        index += questionIndex;
-        var item = this.createItem(question, this.koObjects()[index]);
-        this.addItem(item, index);
+        this.addItem(item, newIndex);
+        if(element.elements) {
+            var objs = [];
+            this.buildElements(objs, element.elements, item);
+            for(var i = 0; i < objs.length; i ++){
+                this.koObjects.splice(newIndex + 1 + i, 0, objs[i]);   
+            }
+        }
         this.koSelected(item);
     }
     public selectObject(obj: Survey.Base) {
@@ -68,11 +56,7 @@ export class SurveyObjects {
     public removeObject(obj: Survey.Base) {
         var index = this.getItemIndex(obj);
         if (index < 0) return;
-        var countToRemove = 1;
-        if (SurveyHelper.getObjectType(obj) == ObjType.Page) {
-            var page: Survey.Page = <Survey.Page>obj;
-            countToRemove += page.questions.length;
-        }
+        var countToRemove = 1 + this.getAllElementCount(obj);
         this.koObjects.splice(index, countToRemove);
     }
     public nameChanged(obj: Survey.Base) {
@@ -96,6 +80,14 @@ export class SurveyObjects {
             }
         }
         this.koSelected(objs[itemIndex]);
+    }
+    private getAllElementCount(element: any) {
+        if(!element.elements) return 0;
+        var res = 0;
+        for(var i = 0; i < element.elements.length; i ++) {
+            res += 1 + this.getAllElementCount(element.elements[i]);
+        }
+        return res;
     }
     private getSelectedQuestion(): Survey.QuestionBase {
         if (!this.koSelected()) return null;

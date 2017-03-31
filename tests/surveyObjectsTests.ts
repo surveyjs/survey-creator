@@ -67,8 +67,8 @@ QUnit.test("addPage method", function (assert) {
     objects.survey = survey;
     var page = <Survey.Page>survey.addNewPage("newPage");
     objects.addPage(page);
-    assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, page, "new object is added");
-    assert.equal(objects.koSelected().value, page, "new page is selected");
+    assert.equal(objects.koObjects()[objects.koObjects().length - 1].value.name, page.name, "new object is added");
+    assert.equal(objects.koSelected().value.name, page.name, "new page is selected");
 });
 QUnit.test("addPage method - insert", function (assert) {
     var survey = createSurvey();
@@ -80,10 +80,10 @@ QUnit.test("addPage method - insert", function (assert) {
     survey.pages.splice(1, 0, page);
     objects.addPage(page);
     var pageIndex = survey.pages[0].questions.length + 1 + 1;
-    assert.equal(objects.koObjects()[pageIndex].value, page, "the page is inserted correctly");
-    assert.equal(objects.koObjects()[pageIndex + 1].value, page.questions[0], "the first question is inserted correctly");
-    assert.equal(objects.koObjects()[pageIndex + 2].value, page.questions[1], "the second question is inserted correctly");
-    assert.equal(objects.koObjects()[pageIndex + 3].value, survey.pages[2], "the last page has the correct index");
+    assert.equal(objects.koObjects()[pageIndex].value.name, page.name, "the page is inserted correctly");
+    assert.equal(objects.koObjects()[pageIndex + 1].value.name, page.questions[0].name, "the first question is inserted correctly");
+    assert.equal(objects.koObjects()[pageIndex + 2].value.name, page.questions[1].name, "the second question is inserted correctly");
+    assert.equal(objects.koObjects()[pageIndex + 3].value.name, survey.pages[2].name, "the last page has the correct index");
 });
 
 QUnit.test("addQuestion method", function (assert) {
@@ -92,7 +92,7 @@ QUnit.test("addQuestion method", function (assert) {
     objects.survey = survey;
     var page = <Survey.Page>survey.pages[survey.pages.length - 1];
     var question = page.addNewQuestion("text", "newQuestion");
-    objects.addQuestion(page, question);
+    objects.addElement(question, page);
     assert.equal(objects.koObjects()[objects.koObjects().length - 1].value, question, "new object is added");
     assert.equal(objects.koSelected().value, question, "new question is selected");
 });
@@ -102,7 +102,7 @@ QUnit.test("addQuestion to the first page", function (assert) {
     objects.survey = survey;
     var page = <Survey.Page>survey.pages[0];
     var question = page.addNewQuestion("text", "newQuestion");
-    objects.addQuestion(page, question);
+    objects.addElement(question, page);
     assert.equal(objects.koObjects()[1 + page.questions.length].value, question, "new object is added");
     assert.equal(objects.koSelected().value, question, "new question is selected");
 });
@@ -170,6 +170,19 @@ QUnit.test("Large test on adding/remove objects with Panel", function (assert) {
     assert.equal(objects.koObjects()[3].value.name, "panel1", "'panel1' added correctly");
     var q2 = panel1.addNewQuestion("text", "q2");
     assert.equal(objects.koObjects()[4].value.name, "q2", "'q2' added correctly");
+    var panel2 = panel1.addNewPanel("panel2");
+    assert.equal(objects.koObjects()[5].value.name, "panel2", "'panel2' added correctly");
+    var q3 = panel2.addNewQuestion("text", "q3");
+    assert.equal(objects.koObjects()[6].value.name, "q3", "'q3' added correctly");
+    var q4 = panel1.addNewQuestion("text", "q4");
+    assert.equal(objects.koObjects()[7].value.name, "q4", "'q4' added correctly");
+    var page2 = survey.addNewPage("page2");
+    objects.addPage(page2);
+    assert.equal(objects.koObjects()[8].value.name, "page2", "'page2' added correctly");
+    
+    survey.removePage(page1);
+    objects.removeObject(page1);
+    assert.equal(objects.koObjects().length, 2, "There are two objects now");
 });
 
 QUnit.test("SurveyVerbChangeTypeItem test", function (assert) {
