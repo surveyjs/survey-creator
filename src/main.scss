@@ -386,6 +386,9 @@ html body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-panel:before {
+    content: "\e90d";
+}
 .icon-checkbox:before {
     content: "\e900";
 }
