@@ -6,18 +6,18 @@ export class DragDropTargetElement {
     }
 
     public moveTo(destination: any, isBottom: boolean, isEdge: boolean = false): boolean {
-        if(destination === this.target) return true;
+        if(destination === this.target) return !this.target.isPanel;
         var destInfo = this.findInfo(destination, isEdge);
         if(destInfo == null) {
             this.clear();
             return false;
         }
         var targetInfo = this.findInfo(this.target);
-        this.updateInfo(destInfo, isBottom);
+        this.updateInfo(destInfo, isBottom, isEdge);
         if(this.isInfoEquals(targetInfo, destInfo)) return true;
         this.clearByInfo(targetInfo);
         destInfo = this.findInfo(destination, isEdge);
-        this.updateInfo(destInfo, isBottom);
+        this.updateInfo(destInfo, isBottom, isEdge);
         if(!this.canMove(destInfo)) return false;
         this.addInfo(destInfo);
 
@@ -47,10 +47,10 @@ export class DragDropTargetElement {
         return index + info.elIndex;
     }
     private canMove(destInfo: any) : boolean {
-        /* TODO check nested 
-        if(this.target.isPanel) {
-            if(this.target.)
-        }*/
+        if(this.target.isPanel && destInfo.element) {
+            if(this.target == destInfo.element || this.target.containsElement(destInfo.element)) return false;
+            if(this.source && (this.source == destInfo.element || this.source.containsElement(destInfo.element))) return false;
+        }
         if(!this.source) return true;
         var srcInfo = this.findInfo(this.source);
         if(srcInfo == null || srcInfo.panel != destInfo.panel) return true;
@@ -62,7 +62,7 @@ export class DragDropTargetElement {
     private isLastElementInRow(info: any) {
         return info.elIndex == info.panel["koRows"]()[info.rIndex]["koElements"]().length - 1;
     }
-    private updateInfo(info: any, isBottom: boolean) {
+    private updateInfo(info: any, isBottom: boolean, isEdge: boolean) {
         if(info.rIndex < 0) return; 
         if(this.target.startWithNewLine) {
             if(isBottom) info.rIndex ++;
@@ -144,7 +144,13 @@ export class DragDropTargetElement {
             for(var j = 0; j < elements.length; j ++) {
                 if(!isEdge && elements[j].isPanel) {
                     var res = this.findInfoInPanel(elements[j], el, isEdge);
-                    if(res) return res;
+                    if(res) {
+                        if(res.element == elements[j]) {
+                            res.rIndex = i;
+                            res.elIndex = j;
+                        }
+                        return res;
+                    }
                 } else {
                     if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j, element: elements[j] };
                 }
@@ -175,15 +181,14 @@ export class DragDropHelper {
         this.scrollableElement = document.getElementById((scrollableElName ? scrollableElName : "scrollableDiv"));
     }
     public get survey(): Survey.Survey { return <Survey.Survey>this.data; }
-    public startDragNewQuestion(event: DragEvent, questionType: string, questionName: string) {
-        this.prepareData(event, questionType, questionName);
+    public startDragQuestion(event: DragEvent, element: any) {
+        var json = new Survey.JsonObject().toJsonObject(element);
+        json["type"] = element.getType();
+        this.prepareData(event, element.name, json);
+        this.ddTarget.source = element;
     }
-    public startDragQuestion(event: DragEvent, question: any) {
-        this.prepareData(event, null, question.name);
-        this.ddTarget.source = question;
-    }
-    public startDragToolboxItem(event: DragEvent, questionName: string, questionJson: any) {
-        this.prepareData(event, null, questionName, questionJson);
+    public startDragToolboxItem(event: DragEvent, elementName: string, elementJson: any) {
+        this.prepareData(event,  elementName, elementJson);
     }
     public isSurveyDragging(event: DragEvent): boolean {
         if (!event) return false;
@@ -221,21 +226,16 @@ export class DragDropHelper {
         if (!this.scrollableElement || !el) return;
         el.scrollIntoView(false);
     }
-    private createTargetQuestion(questionType: string, questionName: string, json: any): Survey.QuestionBase {
-        if (!questionName) return null;
-        var targetQuestion = null;
-        if (json) {
-            targetQuestion = Survey.JsonObject.metaData.createClass(json["type"]);
-            new Survey.JsonObject().toObject(json, targetQuestion);
-            targetQuestion.name = questionName;
-        }
-        if (!targetQuestion && questionType) {
-            targetQuestion = Survey.QuestionFactory.Instance.createQuestion(questionType, questionName);
-        }
-        targetQuestion.setData(this.survey);
-        targetQuestion.renderWidth = "100%";
-        targetQuestion["koIsDragging"](true);
-        return targetQuestion;
+    private createTargetElement(elementName: string, json: any): any {
+        if (!elementName || !json) return null;
+        var targetElement = null;
+        targetElement = Survey.JsonObject.metaData.createClass(json["type"]);
+        new Survey.JsonObject().toObject(json, targetElement);
+        targetElement.name = elementName;
+        targetElement.setData(this.survey);
+        targetElement.renderWidth = "100%";
+        targetElement["koIsDragging"](true);
+        return targetElement;
     }
     private isBottom(event: DragEvent, surveyEl: any): any {
         event = this.getEvent(event);
@@ -304,20 +304,11 @@ export class DragDropHelper {
         }
         return result;
     }
-    private prepareData(event: DragEvent, questionType: string, questionName: string, json: any = null) {
-        var str = DragDropHelper.dataStart;
-        if (questionType) str += "questiontype:" + questionType + ',';
-        str += "questionname:" + questionName;
-        if(!json) {
-            var question = <Survey.QuestionBase>this.survey.getQuestionByName(questionName);
-            if(question) {
-                json = new Survey.JsonObject().toJsonObject(question);
-                json["type"] = question.getType();
-            }
-        }
+    private prepareData(event: DragEvent, elementName: string, json) {
+        var str = DragDropHelper.dataStart + "questionname:" + elementName;
         this.setData(event, str);
-        var targetQuestion = this.createTargetQuestion(questionType, questionName, json);
-        this.ddTarget = new DragDropTargetElement(<Survey.Page>this.survey.currentPage, targetQuestion, null);
+        var targetElement = this.createTargetElement(elementName, json);
+        this.ddTarget = new DragDropTargetElement(<Survey.Page>this.survey.currentPage, targetElement, null);
     }
     private setData(event: DragEvent, text: string) {
         if (event["originalEvent"]) {

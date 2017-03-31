@@ -200,6 +200,79 @@ QUnit.test("Move item after panel", function (assert) {
     assert.equal(page.elements[1].name, "q1", "The first element is 'q1'");    
 });
 
+QUnit.test("Move panel", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var q2 = page.addNewQuestion("text", "q1");
+    var target = new Survey.Panel("panel1");
+
+    var dragTarget = new DragDropTargetElement(page, target, null);
+
+    assert.equal(page["koRows"]().length, 2, "There is no rows");
+    
+    assert.equal(dragTarget.moveTo(q1, false), true, "You can move a panel here");
+    assert.equal(page["koRows"]().length, 3, "Move 1. There are 3 rows");
+    assert.equal(page["koRows"]()[0]["koElements"]()[0].name, "panel1", "Move 1. The panel is in the first row");
+
+    assert.equal(dragTarget.moveTo(q1, true), true, "You can move a panel here");
+    assert.equal(page["koRows"]().length, 3, "Move 2. There are 3 rows");
+    assert.equal(page["koRows"]()[1]["koElements"]()[0].name, "panel1", "Move 2. The panel is in the first row");
+
+    assert.equal(dragTarget.moveTo(q2, true), true, "You can move a panel here");
+    assert.equal(page["koRows"]().length, 3, "Move 3. There are 3 rows");
+    assert.equal(page["koRows"]()[2]["koElements"]()[0].name, "panel1", "Move 3. The panel is in the first row");
+
+    assert.equal(dragTarget.moveTo(target, true), false, "You can't move to itself");
+    
+    dragTarget.moveTo(q1, false);
+    dragTarget.doDrop();
+    assert.equal(page.elements.length, 3, "There are 3 elements on the page");    
+    assert.equal(page.elements[0].name, "panel1", "The first element is 'panel1'");    
+});
+
+QUnit.test("Move panel, 2", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var target = new Survey.Panel("panel1");
+
+    var dragTarget = new DragDropTargetElement(page, target, null);
+
+    assert.equal(page["koRows"]().length, 1, "There is no rows");
+    
+    assert.equal(dragTarget.moveTo(q1, true), true, "You can move a panel here");
+    assert.equal(page["koRows"]().length, 2, "Move 1. There are 2 rows");
+    assert.equal(page["koRows"]()[0]["koElements"]()[0].name, "q1", "Move 1. The q1 is in the first row");
+    assert.equal(page["koRows"]()[1]["koElements"]()[0].name, "panel1", "Move 1. The panel1 is in the last row");
+
+    assert.equal(dragTarget.moveTo(q1, true), true, "Move 2. You can move a panel here");
+    assert.equal(page["koRows"]().length, 2, "Move 2. There are 2 rows");
+    assert.equal(page["koRows"]()[0]["koElements"]()[0].name, "q1", "Move 2. The q1 is in the first row");
+    assert.equal(page["koRows"]()[1]["koElements"]()[0].name, "panel1", "Move 2. The panel1 is in the last row");
+});
+
+QUnit.test("Move question out of the panel", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var panel = page.addNewPanel("panel1");
+    var q1 = panel.addNewQuestion("text", "q1");
+
+    var target = new Survey.QuestionText("q1");
+
+    var dragTarget = new DragDropTargetElement(page, target, q1);
+
+    assert.equal(dragTarget.moveTo(panel, false, true), true, "Move 1. You can move a question here");
+    assert.equal(page["koRows"]().length, 2, "Move 1. There are 2 rows");
+    assert.equal(page["koRows"]()[0]["koElements"]()[0].name, "q1", "Move 1. The q1 is in the first row");
+    assert.equal(page["koRows"]()[1]["koElements"]()[0].name, "panel1", "Move 1. The panel1 is in the last row");
+    assert.equal(panel["koRows"]().length, 1, "Move 1. The panel has one rows");
+
+    dragTarget.doDrop();
+    assert.equal(page.elements.length, 2, "There are 2 elements on the page");    
+    assert.equal(page.elements[0].name, "q1", "The first element is 'q1'");    
+});
+
 QUnit.test("Add item into page", function (assert) {
     var survey = new Survey.Survey();
     var page = <Survey.Page>survey.addNewPage("page1");
