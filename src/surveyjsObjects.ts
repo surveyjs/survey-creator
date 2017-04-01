@@ -157,7 +157,12 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
             self.dragDropHelper().doDrop(e); 
         }
     };
-    el.ondragstart = function (e) { self.dragDropHelper().startDragQuestion(e, self); };
+    el.ondragstart = function (e) { 
+        if(!e["markEvent"]) {
+            e["markEvent"] = true;
+            self.dragDropHelper().startDragQuestion(e, self); 
+        }
+    };
     el.ondragend = function (e) { self.dragDropHelper().end(); };
     el.onclick = function(e) { 
         if(!e["markEvent"]) {

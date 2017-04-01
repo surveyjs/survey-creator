@@ -20,7 +20,6 @@ export class DragDropTargetElement {
         this.updateInfo(destInfo, isBottom, isEdge);
         if(!this.canMove(destInfo)) return false;
         this.addInfo(destInfo);
-
         return true;
     }
     public doDrop() {
