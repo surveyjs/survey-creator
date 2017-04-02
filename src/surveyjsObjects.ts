@@ -163,7 +163,9 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
             self.dragDropHelper().startDragQuestion(e, self); 
         }
     };
-    el.ondragend = function (e) { self.dragDropHelper().end(); };
+    el.ondragend = function (e) { 
+        self.dragDropHelper().end(); 
+    };
     el.onclick = function(e) { 
         if(!e["markEvent"]) {
             e["markEvent"] = true;
@@ -221,7 +223,7 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
     if(this.elements.length == 0) {
         this.emptyElement = addEmptyPanelElement(el, self.dragDropHelper(), self);
     }
-    elementOnAfterRendering(el, this, panel_design_class, false);
+    elementOnAfterRendering(el, this, panel_design_class, this.koIsDragging());
 }
 
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {

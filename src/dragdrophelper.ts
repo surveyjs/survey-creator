@@ -4,11 +4,10 @@ export class DragDropTargetElement {
     constructor(public page: Survey.Page, public target: any, public source: any) {
 
     }
-
     public moveTo(destination: any, isBottom: boolean, isEdge: boolean = false): boolean {
         if(destination === this.target) return !this.target.isPanel;
         var destInfo = this.findInfo(destination, isEdge);
-        if(destInfo == null) {
+        if(!destInfo) {
             this.clear();
             return false;
         }
@@ -17,6 +16,7 @@ export class DragDropTargetElement {
         if(this.isInfoEquals(targetInfo, destInfo)) return true;
         this.clearByInfo(targetInfo);
         destInfo = this.findInfo(destination, isEdge);
+        if(!destInfo) return false;
         this.updateInfo(destInfo, isBottom, isEdge);
         if(!this.canMove(destInfo)) return false;
         this.addInfo(destInfo);
@@ -131,7 +131,7 @@ export class DragDropTargetElement {
     private findInfoInPanel(panel: Survey.PanelModelBase, el: any, isEdge: boolean): any {
         if(el == panel) {
             var parent = panel;
-            if(this.target.isPanel && panel == this.target && panel.parent) {
+            if(this.target.isPanel && panel.parent) {
                 parent = panel.parent;
             }
             return { panel: parent, row: null, rIndex: 0, elIndex: 0, element: panel };
