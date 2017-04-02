@@ -402,7 +402,6 @@ export class SurveyEditor {
             this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
         }
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
-        this.surveyValue.setDesignMode(true);
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;

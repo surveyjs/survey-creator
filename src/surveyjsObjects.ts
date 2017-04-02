@@ -13,6 +13,7 @@ export class SurveyForDesigner extends Survey.Survey {
     constructor(jsonObj: any = null, renderedElement: any = null, css: any = null) {
         super(jsonObj, renderedElement, css);
         var self = this;
+        this.setDesignMode(true);
         this.onAfterRenderPage.add((sender: Survey.Survey, options) => { options.page["onAfterRenderPage"](options.htmlElement); });
         this.onAfterRenderQuestion.add((sender: Survey.Survey, options) => { options.question["onAfterRenderQuestion"](options.htmlElement); });
         this.onAfterRenderPanel.add((sender: Survey.Survey, options) => { options.panel["onAfterRenderPanel"](options.htmlElement); });
@@ -219,6 +220,7 @@ Survey.Panel.prototype["onCreating"] = function () {
 
 Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
     if(!this.data.isDesignMode) return;
+    var rows = this.koRows();
     var self = this;
     if(this.elements.length == 0) {
         this.emptyElement = addEmptyPanelElement(el, self.dragDropHelper(), self);
