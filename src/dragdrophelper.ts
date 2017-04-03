@@ -97,7 +97,7 @@ export class DragDropTargetElement {
         if(this.target.isPanel) {
             this.target.parent = info.panel;
         }
-        row.addQuestion(this.target);
+        row.addElement(this.target);
         var rows = info.panel.koRows();
         if(info.rIndex >= 0 && info.rIndex < info.panel.koRows().length) {
             rows.splice(info.rIndex, 0, row);
