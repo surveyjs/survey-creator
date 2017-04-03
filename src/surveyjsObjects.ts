@@ -105,7 +105,7 @@ function createQuestionDesignItem(onClick: any, text: string): HTMLLIElement {
     return res;
 }
 
-function createElementAddons(data: any): HTMLElement {
+function createElementAddons(data: any, isPanel: boolean): HTMLElement {
     var main: HTMLDivElement = document.createElement("div");
     main.className = "svd_question_menu btn-group";
     main["role"] = "group";
@@ -131,14 +131,15 @@ function createElementAddons(data: any): HTMLElement {
     ul.className = "dropdown-menu";
     ul.appendChild(createQuestionDesignItem(data.copyQuestionClick, data.getEditorLocString('survey.addToToolbox')));
     ul.appendChild(createQuestionDesignItem(data.fastCopyQuestionClick, data.getEditorLocString('survey.copy')));
-    ul.appendChild(createQuestionDesignItem(data.deleteCurrentObjectClick, data.getEditorLocString('survey.deleteQuestion')));
+    var deleteLocaleName = isPanel ? 'survey.deletePanel' : 'survey.deleteQuestion';
+    ul.appendChild(createQuestionDesignItem(data.deleteCurrentObjectClick, data.getEditorLocString(deleteLocaleName)));
     main.appendChild(ul);
     return main;
 }
 
 //var lastElementOnClick: HTMLElement = null;
 
-function elementOnAfterRendering(el: any, self: any, className: string, disable: boolean) {
+function elementOnAfterRendering(el: any, self: any, className: string, isPanel: boolean, disable: boolean) {
     self.renderedElement = el;
     var newClass = className;
     if(self.koIsSelected()) newClass += " svd_q_selected";
@@ -183,7 +184,7 @@ function elementOnAfterRendering(el: any, self: any, className: string, disable:
             if(childs[i].style) childs[i].style.pointerEvents = "none";
         }
     }
-    self.addonsElement = createElementAddons(self.data);
+    self.addonsElement = createElementAddons(self.data, isPanel);
     self.addonsElement.style.display = self.koIsSelected() ? "": "none";    
     el.appendChild(self.addonsElement);
 }
@@ -225,7 +226,7 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
     if(this.elements.length == 0) {
         this.emptyElement = addEmptyPanelElement(el, self.dragDropHelper(), self);
     }
-    elementOnAfterRendering(el, this, panel_design_class, this.koIsDragging());
+    elementOnAfterRendering(el, this, panel_design_class, true, this.koIsDragging());
 }
 
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {
@@ -239,7 +240,7 @@ Survey.QuestionBase.prototype["onCreating"] = function () {
 
 Survey.QuestionBase.prototype["onAfterRenderQuestion"] = function(el) {
     if(!this.data.isDesignMode) return;
-    elementOnAfterRendering(el, this, question_design_class, true);
+    elementOnAfterRendering(el, this, question_design_class, false, true);
 };
 
 Survey.QuestionBase.prototype["onSelectedElementChanged"] = function() {
