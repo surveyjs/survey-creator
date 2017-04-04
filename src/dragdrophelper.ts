@@ -289,6 +289,12 @@ export class DragDropHelper {
     }
     private getScrollableElementPosY(e: DragEvent): number {
         if (!this.scrollableElement || !e.currentTarget) return -1;
+        var el = e.currentTarget;
+        var offsetTop = 0;
+        while(el && el != this.scrollableElement) {
+            offsetTop += <number>el["offsetTop"];
+            el = el["offsetParent"];
+        }
         return e.offsetY + <number>e.currentTarget["offsetTop"] - this.scrollableElement.offsetTop - this.scrollableElement.scrollTop;
     }
     private getEvent(event: DragEvent): DragEvent {
