@@ -17,17 +17,18 @@ export class SurveyPropertyTextItemsEditor extends SurveyPropertyItemsEditor {
         for (var i = 0; i < items.length; i++) {
             objs.push({ name: items[i].koName() });
         }
-        var editItem = { koName: ko.observable(SurveyHelper.getNewName(objs, "text")), koTitle: ko.observable() };
+        var editItem = { koName: ko.observable(SurveyHelper.getNewName(objs, "text")), koTitle: ko.observable(), koIsRequired: ko.observable(false) };
         this.createValidatorsEditor(editItem, []);
         return editItem;
     }
     protected createEditorItem(item: any) {
-        var editItem = { koName: ko.observable(item.name), koTitle: ko.observable(item.title) };
+        var editItem = { koName: ko.observable(item.name), koTitle: ko.observable(item.title), koIsRequired: ko.observable(item.isRequired) };
         this.createValidatorsEditor(editItem, item.validators);
         return editItem;
     }
     protected createItemFromEditorItem(editorItem: any) {
         var itemText = new Survey.MultipleTextItem(editorItem.koName(), editorItem.koTitle());
+        itemText.isRequired = editorItem.koIsRequired();
         itemText.validators = editorItem.validators;
         return itemText;
     }

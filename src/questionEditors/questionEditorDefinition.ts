@@ -25,7 +25,7 @@ export class SurveyQuestionEditorDefinition {
         "matrix": {
             tabs: [{name: "columns", index: 10}, {name: "rows", index: 11}]
         },
-        "multipleitems": {
+        "multipletext": {
             properties: ["colCount"],
             tabs: [{name: "items", index: 10}]
         },
