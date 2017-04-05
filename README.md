@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
 
-#Download
+*Download*
 Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/surveyjs.editor.zip)
 
 Install the library using npm.
@@ -14,11 +14,14 @@ To learn how to include the visual editor on your page and explore examples of u
 
 See the visual editor in [action](http://surveyjs.org/builder/).
 
-#Use quickstart repos
+*Use quickstart repos*
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart)
+
 [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli)
+
 [React](https://github.com/surveyjs/surveyjs_react_quickstart)
-(Vue)(https://github.com/surveyjs/surveyjs_vue_quickstart)
+
+[Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
 
 *Building surveyjs Editor from sources*
 
