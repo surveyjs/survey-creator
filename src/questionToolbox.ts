@@ -101,20 +101,23 @@ export class QuestionToolbox {
         var questions = this.getQuestionTypes(supportedQuestions);
         for (var i = 0; i < questions.length; i++) {
             var name = questions[i];
-            var question = Survey.QuestionFactory.Instance.createQuestion(name, "q1");
+            var question = Survey.ElementFactory.Instance.createElement(name, "q1");
+            if(!question) {
+                question = Survey.JsonObject.metaData.createClass(name);
+            }
             var json = this.getQuestionJSON(question);
             var item = { name: name, iconName: 'icon-' + name, title: editorLocalization.getString('qt.' + name), json: json, isCopied: false };
             this.itemsValue.push(item);
         }
         this.onItemsChanged();
     }
-    private getQuestionJSON(question: Survey.QuestionBase): any {
+    private getQuestionJSON(question: any): any {
         var json = new Survey.JsonObject().toJsonObject(question);
         json.type = question.getType();
         return json;
     }
     private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-        var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+        var allTypes = Survey.ElementFactory.Instance.getAllTypes();
         if (!supportedQuestions || supportedQuestions.length == 0) supportedQuestions = allTypes;
         var questions = [];
         for (var i = 0; i < this.orderedQuestions.length; i++) {

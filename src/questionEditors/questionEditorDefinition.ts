@@ -25,7 +25,7 @@ export class SurveyQuestionEditorDefinition {
         "matrix": {
             tabs: [{name: "columns", index: 10}, {name: "rows", index: 11}]
         },
-        "multipleitems": {
+        "multipletext": {
             properties: ["colCount"],
             tabs: [{name: "items", index: 10}]
         },
@@ -60,6 +60,10 @@ export class SurveyQuestionEditorDefinition {
         },
         "matrixdropdowncolumn@comment" : {
             properties: ["placeHolder"]
+        },
+        "panel": {
+            properties: ["name", "title", {name: "visible", category: "checks"} ],
+            tabs: [{name: "visibleIf", index: 100}]
         }
     }
     public static getProperties(className: string): Array<any> {

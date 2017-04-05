@@ -1,13 +1,16 @@
 ﻿import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
-export enum ObjType { Unknown, Survey, Page, Question }
+export enum ObjType { Unknown, Survey, Page, Panel, Question }
 export class SurveyHelper {
     public static getNewPageName(objs: Array<any>) {
         return SurveyHelper.getNewName(objs, editorLocalization.getString("ed.newPageName"));
     }
     public static getNewQuestionName(objs: Array<any>) {
         return SurveyHelper.getNewName(objs, editorLocalization.getString("ed.newQuestionName"));
+    }
+    public static getNewPanelName(objs: Array<any>) {
+        return SurveyHelper.getNewName(objs, editorLocalization.getString("ed.newPanelName"));
     }
     public static getNewName(objs: Array<any>, baseName: string): string {
         var hash = {};
@@ -24,6 +27,7 @@ export class SurveyHelper {
     public static getObjectType(obj: any): ObjType {
         if (!obj || !obj["getType"]) return ObjType.Unknown;
         if (obj.getType() == "page") return ObjType.Page;
+        if (obj.getType() == "panel") return ObjType.Panel;
         if (obj.getType() == "survey") return ObjType.Survey;
         if (obj["name"]) return ObjType.Question;
         return ObjType.Unknown;

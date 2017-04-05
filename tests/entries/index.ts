@@ -7,3 +7,4 @@ export * from "../questionToolboxTests";
 export * from "../SurveyEditorTests";
 export * from "../surveyObjectsTests";
 export * from "../undoredoTests";
+export * from "../dragdroptests";

@@ -190,7 +190,6 @@ html body {
                     .panel-body {
                         .svd_question {
                             box-shadow: none;
-                            border: none;
                             border-radius: 0;
                             padding: 20px 9px;
 
@@ -232,7 +231,7 @@ html body {
                             border-bottom: 1px solid $dark-border-color;
 
                             &.svd_q_selected {
-                                border: 1px solid $main-color;
+                                border: 1px solid $main-color !important;
                             }
                         }
                     }
@@ -339,8 +338,7 @@ html body {
         text-overflow: ellipsis;
     }
     .svd_q_selected {
-        //border: 2px solid darkblue;
-        border-width: 3px;
+        border: 1px solid $main-color !important;
     }
     .svd_q_design {
         pointer-events: none;
@@ -386,6 +384,9 @@ html body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-panel:before {
+    content: "\e90d";
+}
 .icon-checkbox:before {
     content: "\e900";
 }

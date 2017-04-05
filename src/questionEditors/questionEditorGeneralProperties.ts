@@ -137,6 +137,8 @@ export class SurveyQuestionEditorGeneralProperties {
                 break;
             }
         }
+        //TODO code duplication. This code is in 3 places already, do refactoring.
+        if(property && property["visible"] === false) property = null;
         if (property && this.onCanShowPropertyCallback) {
             if (!this.onCanShowPropertyCallback(this.obj, property)) property = null;
         }

@@ -50,6 +50,7 @@ export var defaultStrings = {
         dropQuestion: "Please drop a question here.",
         copy: "Copy",
         addToToolbox: "Add to toolbox",
+        deletePanel: "Delete Panel",
         deleteQuestion: "Delete Question"
     },
     //questionTypes
@@ -63,6 +64,7 @@ export var defaultStrings = {
         matrixdropdown: "Matrix (multiple choice)",
         matrixdynamic: "Matrix (dynamic rows)",
         multipletext: "Multiple Text",
+        panel: "Panel",
         radiogroup: "Radiogroup",
         rating: "Rating",
         text: "Single Input"
@@ -72,6 +74,7 @@ export var defaultStrings = {
         addNewPage: "Add New Page",
         newPageName: "page",
         newQuestionName: "question",
+        newPanelName: "panel",
         testSurvey: "Test Survey",
         testSurveyAgain: "Test Survey Again",
         testSurveyWidth: "Survey width: ",

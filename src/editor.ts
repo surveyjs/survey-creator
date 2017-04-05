@@ -14,9 +14,8 @@ import {DragDropHelper} from "./dragdrophelper";
 import {QuestionToolbox} from "./questionToolbox";
 import {SurveyJSON5} from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
-var templatePageHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_page.html");
-var templateQuestionHtml = require("html-loader?interpolate!val-loader!./templates.survey/template_question.html");
 import * as Survey from "survey-knockout";
+import {SurveyForDesigner} from "./surveyjsObjects"
 
 export class SurveyEditor {
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
@@ -33,7 +32,7 @@ export class SurveyEditor {
     private toolboxValue: QuestionToolbox;
     private surveyVerbs: SurveyVerbs;
     private undoRedo: SurveyUndoRedo;
-    private surveyValue: Survey.Survey;
+    private surveyValue: SurveyForDesigner;
     private saveSurveyFuncValue: (no: number, onSaveCallback: (no: number, isSuccess: boolean) => void) => void;
     private options: any;
     private stateValue: string = "";
@@ -48,6 +47,7 @@ export class SurveyEditor {
     public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
 
     koIsShowDesigner: any;
@@ -151,7 +151,7 @@ export class SurveyEditor {
         this.koDesignerHeight()
         if (this.selectedObjectEditor) this.selectedObjectEditor.setOptions(options);
     }
-    public get survey(): Survey.Survey {
+    public get survey(): SurveyForDesigner {
         return this.surveyValue;
     }
     public render(element: any = null, options: any = null) {
@@ -269,15 +269,22 @@ export class SurveyEditor {
         this.pagesEditor.survey = this.surveyValue;
         this.surveyObjects.addPage(page);
     }
-    private doOnQuestionAdded(question: Survey.QuestionBase) {
-        var page = <Survey.Page>this.survey.getPageByQuestion(question);
+    private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
+        var page = <Survey.Page>this.survey.getPageByElement(question);
         var options = { question: question, page: page };
         this.onQuestionAdded.fire(this, options);
-        this.surveyObjects.addQuestion(page, question);
+        this.surveyObjects.addElement(question, parentPanel);
         this.survey.render();
     }
-    private doOnQuestionRemoved(question: Survey.QuestionBase) {
+    private doOnElementRemoved(question: Survey.QuestionBase) {
         this.surveyObjects.removeObject(question);
+        this.survey.render();
+    }
+    private doOnPanelAdded(panel: Survey.Panel, parentPanel: any) {
+        var page = <Survey.Page>this.survey.getPageByElement(panel);
+        var options = { panel: panel, page: page };
+        this.onPanelAdded.fire(this, options);
+        this.surveyObjects.addElement(panel, parentPanel);
         this.survey.render();
     }
     private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -355,12 +362,12 @@ export class SurveyEditor {
             this.survey.currentPage = <Survey.Page>obj;
             canDeleteObject = this.survey.pages.length > 1;
         }
-        if (objType == ObjType.Question) {
-            this.survey["setselectedQuestion"](obj);
+        if (objType == ObjType.Question || objType == ObjType.Panel) {
+            this.survey.selectedElement = obj;
             canDeleteObject = true;
-            this.survey.currentPage = this.survey.getPageByQuestion(this.survey["selectedQuestionValue"]);
+            this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedElement);
         } else {
-            this.survey["setselectedQuestion"](null);
+            this.survey.selectedElement = null;
         }
         this.koCanDeleteObject(canDeleteObject);
     }
@@ -388,30 +395,29 @@ export class SurveyEditor {
     }
     private initSurvey(json: any) {
         var self = this;
-        this.surveyValue = new Survey.Survey();
+        this.surveyValue = new SurveyForDesigner();
         this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
         this.surveyValue["setJsonObject"](json); //TODO
         if (this.surveyValue.isEmpty) {
             this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
         }
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
-        //TODO remove the line above and call the method directly.
-        if (this.survey["setDesignMode"]) this.survey["setDesignMode"](true);
-        else this.survey.mode = "designer";
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
         this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
         this.surveyVerbs.survey = this.survey;
-        this.surveyValue["onSelectedQuestionChanged"].add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedQuestionValue"]); });
-        this.surveyValue["onEditQuestion"].add((sender: Survey.Survey, options) => { self.showQuestionEditor(self.koSelectedObject().value); });
-        this.surveyValue["onCopyQuestion"].add((sender: Survey.Survey, options) => { self.addCustomToolboxQuestion(self.koSelectedObject().value); });
-        this.surveyValue["onFastCopyQuestion"].add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
-        this.surveyValue["onDeleteCurrentObject"].add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
+        this.surveyValue.onSelectedElementChanged.add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedElement"]); });
+        this.surveyValue.onEditQuestion.add((sender: Survey.Survey, options) => { self.showQuestionEditor(self.koSelectedObject().value); });
+        this.surveyValue.onCopyQuestion.add((sender: Survey.Survey, options) => { self.addCustomToolboxQuestion(self.koSelectedObject().value); });
+        this.surveyValue.onFastCopyQuestion.add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
+        this.surveyValue.onDeleteCurrentObject.add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
-        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question); });
-        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnQuestionRemoved(options.question); });
+        this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question, options.parentPanel); });
+        this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
+        this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel, options.parentPanel); });
+        this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
     }
     private processHtml(html: string): string {
         if (!html) return html;
@@ -422,23 +428,43 @@ export class SurveyEditor {
         return html;
     }
     private doDraggingToolboxItem(json: any, e) {
-        this.dragDropHelper.startDragToolboxItem(e, this.getNewQuestionName(), json);
+        this.dragDropHelper.startDragToolboxItem(e, this.getNewName(json["type"]), json);
     }
     private doClickToolboxItem(json: any) {
-        var name = this.getNewQuestionName();
-        var question = Survey.QuestionFactory.Instance.createQuestion(json["type"], name);
+        var name = this.getNewName(json["type"]);
+        var question = Survey.JsonObject.metaData.createClass(json["type"]);
         new Survey.JsonObject().toObject(json, question);
         question.name = name;
         this.doClickQuestionCore(question);
     }
+    private getNewName(type: string) : string {
+        return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
+    }
     private getNewQuestionName(): string {
         return SurveyHelper.getNewQuestionName(this.survey.getAllQuestions());
+    }
+    private getNewPanelName(): string {
+        return SurveyHelper.getNewPanelName(this.getAllPanels());
+    }
+    private getAllPanels(): Array<any> {
+        var result = [];
+        for(var i = 0; i < this.survey.pages.length; i ++) {
+            this.addPanels(this.survey.pages[i], result);
+        }
+        return result;
+    }
+    private addPanels(panel: any, result: Array<any>) {
+        for(var i = 0; i < panel.elements.length; i ++) {
+            if(!panel.elements[i].isPanel) continue;
+            result.push(panel.elements[i]);
+            this.addPanels(panel.elements[i], result);
+        }
     }
     private doClickQuestionCore(question: Survey.QuestionBase) {
         var page = this.survey.currentPage;
         var index = -1;
-        if (this.survey["selectedQuestionValue"] != null) {
-            index = page.questions.indexOf(this.survey["selectedQuestionValue"]) + 1;
+        if (this.survey.selectedElement != null) {
+            index = page.questions.indexOf(this.survey.selectedElement) + 1;
         }
         page.addQuestion(question, index);
         this.dragDropHelper.scrollToElement(document.getElementById(question.id));
@@ -490,14 +516,12 @@ export class SurveyEditor {
         if (objType == ObjType.Page) {
             this.survey.removePage(obj);
             this.pagesEditor.removePage(obj);
-            this.setModified();
-        }
-        if (objType == ObjType.Question) {
-            this.survey.currentPage.removeQuestion(obj);
-            this.survey["setselectedQuestion"](null);
+        } else {
+            this.survey.currentPage.removeElement(obj);
+            this.survey.selectedElement = null;
             this.surveyObjects.selectObject(this.survey.currentPage);
-            this.setModified();
         }
+        this.setModified();
         this.survey.render();
     }
     private showLiveSurvey() {
@@ -544,106 +568,3 @@ export class SurveyEditor {
 }
 
 Survey.Survey.cssType = "bootstrap";
-new Survey.SurveyTemplateText().replaceText(templatePageHtml, "page");
-new Survey.SurveyTemplateText().replaceText(templateQuestionHtml, "question");
-
-Survey.Survey.prototype["onCreating"] = function () {
-    this.selectedQuestionValue = null;
-    this.onSelectedQuestionChanged = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    this.onEditQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    this.onCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    this.onFastCopyQuestion = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    this.onDeleteCurrentObject = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    var self = this;
-    this.editQuestionClick = function () { self.onEditQuestion.fire(self); };
-    this.copyQuestionClick = function () { self.onCopyQuestion.fire(self); };
-    this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self); };
-    this.deleteCurrentObjectClick = function () { self.onDeleteCurrentObject.fire(self); }
-    this.koDraggingSource = ko.observable(null);
-};
-Survey.Survey.prototype["setselectedQuestion"] = function(value: Survey.QuestionBase) {
-    if (value == this.selectedQuestionValue) return;
-    var oldValue = this.selectedQuestionValue;
-    this.selectedQuestionValue = value;
-    if (oldValue != null) {
-        oldValue["onSelectedQuestionChanged"]();
-    }
-    if (this.selectedQuestionValue != null) {
-        this.selectedQuestionValue["onSelectedQuestionChanged"]();
-    }
-    this.onSelectedQuestionChanged.fire(this, { 'oldSelectedQuestion': oldValue, 'newSelectedQuestion': value });
-};
-Survey.Survey.prototype["getEditorLocString"] = function (value: string): string {
-    return editorLocalization.getString(value);
-};
-
-Survey.Page.prototype["onCreating"] = function () {
-    var self = this;
-    this.dragEnterCounter = 0;
-    this.koDragging = ko.observable(-1);
-    this.koDraggingQuestion = ko.observable(null);
-    this.koDraggingBottom = ko.observable(false);
-    this.koDragging.subscribe(function (newValue) {
-        if (newValue < 0) {
-            self.dragEnterCounter = 0;
-            self.koDraggingQuestion(null);
-            self.koDraggingBottom(false);
-        }
-        else {
-            var question = newValue >= 0 && newValue < self.questions.length ? self.questions[newValue] : null;
-            self.koDraggingQuestion(question);
-            self.koDraggingBottom(newValue == self.questions.length);
-        }
-    });
-    this.koDraggingQuestion.subscribe(function (newValue) { if (newValue) newValue.koIsDragging(true); });
-    this.koDraggingQuestion.subscribe(function (oldValue) { if (oldValue) oldValue.koIsDragging(false); }, this, "beforeChange");
-    this.dragEnter = function (e) { e.preventDefault(); self.dragEnterCounter++; self.doDragEnter(e); };
-    this.dragLeave = function (e) { self.dragEnterCounter--; if (self.dragEnterCounter === 0) self.doDragLeave(e); };
-    this.dragDrop = function (e) { self.doDrop(e); };
-};
-Survey.Page.prototype["doDrop"] = function (e) {
-    var dragDropHelper = this.data["dragDropHelper"];
-    if (dragDropHelper) {
-        dragDropHelper.doDrop(e);
-    }
-};
-Survey.Page.prototype["doDragEnter"] = function(e) {
-    if (this.questions.length > 0 || this.koDragging() > 0) return;
-    var dragDropHelper = this.data["dragDropHelper"];
-    if (dragDropHelper && dragDropHelper.isSurveyDragging(e)) {
-        this.koDragging(0);
-    }
-};
-Survey.Page.prototype["doDragLeave"] = function (e) {
-    var dragDropHelper = this.data["dragDropHelper"];
-    if (dragDropHelper) {
-        dragDropHelper.doLeavePage(e);
-    }
-};
-
-Survey.QuestionBase.prototype["onCreating"] = function () {
-    var self = this;
-    this.dragDropHelperValue = null;
-    this.koIsDragging = ko.observable(false);
-    this.koIsDraggingSource = ko.observable(false);
-    this.dragDropHelper = function () {
-        if (self.dragDropHelperValue == null) {
-            self.dragDropHelperValue = self.data["dragDropHelper"];
-        }
-        return self.dragDropHelperValue;
-    };
-    this.dragOver = function (e) { self.dragDropHelper().doDragDropOver(e, self); };
-    this.dragDrop = function (e) { self.dragDropHelper().doDrop(e, self); };
-    this.dragStart = function (e) { self.dragDropHelper().startDragQuestion(e, self.name); };
-    this.dragEnd = function (e) { self.dragDropHelper().end(); };
-    this.koIsSelected = ko.observable(false);
-    this.koOnClick = function () {
-        if (self.data == null) return;
-        self.data["setselectedQuestion"](this);
-    }
-};
-
-Survey.QuestionBase.prototype["onSelectedQuestionChanged"] = function() {
-    if (this.data == null) return;
-    this.koIsSelected(this.data["selectedQuestionValue"] == this);
-};

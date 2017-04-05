@@ -4,7 +4,7 @@ import * as Survey from "survey-knockout";
 export default QUnit.module("questionToolboxTests");
 
 QUnit.test("toolbox support options", function (assert) {
-    var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+    var allTypes = Survey.ElementFactory.Instance.getAllTypes();
     var toolbox = new QuestionToolbox();
     assert.equal(toolbox.items.length, allTypes.length, "All types are accepted");
     assert.equal(toolbox.items[0].name, toolbox.orderedQuestions[0], "The text type should be first");
@@ -36,7 +36,7 @@ QUnit.test("toolbox copied questions", function (assert) {
     assert.equal(toolbox.items.length, 2, "There are 2 items total");
 });
 QUnit.test("Save/Load all toolbox items", function (assert) {
-    var allTypes = Survey.QuestionFactory.Instance.getAllTypes();
+    var allTypes = Survey.ElementFactory.Instance.getAllTypes();
     var toolbox1 = new QuestionToolbox();
     assert.equal(toolbox1.items.length, allTypes.length, "All types are here");
     var toolbox2 = new QuestionToolbox(["text", "dropdown"]);
