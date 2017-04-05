@@ -15,7 +15,9 @@ var deutschStrings = {
 //Set the your translation to the locale
 SurveyEditor.editorLocalization.locales["de"] = deutschStrings;
 //Make this locale the current
-SurveyEditor.editorLocalization.currentLocale = "de";
+//SurveyEditor.editorLocalization.currentLocale = "de";
+//Make french locale active
+SurveyEditor.editorLocalization.currentLocale = "fr";
 
 var editor = new SurveyEditor.SurveyEditor("editorElement");
 {% endcapture %}
