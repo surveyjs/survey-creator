@@ -11,7 +11,7 @@
     "jquery": "^2.1.0",
     "knockout": "^3.4.0",
     "bootstrap": "^3.3.6",
-    "survey-knockout": "^0.12.4"
+    "survey-knockout": "^0.12.6"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
@@ -40,6 +40,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.2",
     "node-sass": "4.4.0",
+    "phantomjs-prebuilt": "^2.1.14",
     "qunitjs": "2.2.0",
     "rimraf": "2.5.4",
     "sass-loader": "4.1.1",
