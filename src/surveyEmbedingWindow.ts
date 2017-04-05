@@ -1,4 +1,5 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyJSON5} from "./json5";
 
 export class SurveyEmbedingWindow {
@@ -12,7 +13,7 @@ export class SurveyEmbedingWindow {
     public surveyId: string = null;
     public surveyPostId: string = null;
     public generateValidJSON: boolean = false;
-    public surveyJSVersion: string = "0.12.3"; //TODO
+    public surveyJSVersion: string = Survey.Version;
     public surveyCDNPath: string = "https://surveyjs.azureedge.net/";
     koShowAsWindow: any;
     koScriptUsing: any;
@@ -27,14 +28,6 @@ export class SurveyEmbedingWindow {
         "react": "react",
         "vue": "vue"
     }
-    /*
-    private platformHeaders = {
-        "angular": "",
-        "jquery": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>",
-        "knockout": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js\"></script>",
-        "react": "",
-        "vue": "<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>"
-    };*/
     private platformJSonPage = {
         "angular": "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n       Survey.SurveyNG.render(\"surveyElement\", { model: survey });\n    }\n}",
         "jquery": "var survey = new Survey.Model(surveyJSON);\n$(\"#surveyContainer\").Survey({\n    model: survey,\n    onComplete: sendDataToServer\n});",
