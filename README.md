@@ -9,13 +9,14 @@ Install the library using npm.
 ```
 npm install surveyjs-editor
 ```
-
+## Include into your project
+### Explore examples
 To learn how to include the visual editor on your page and explore examples of using, please go to [editor.surveyjs.io](http://editor.surveyjs.io) web site
-
-See the visual editor in [action](http://surveyjs.org/builder/).
-
-## Use quickstart repos
+### Use quickstart repos
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart), [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
+
+## See editor in action
+See the visual editor in [action](http://surveyjs.org/builder/).
 
 ## Building surveyjs Editor from sources
 
