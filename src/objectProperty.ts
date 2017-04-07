@@ -37,6 +37,7 @@ export class SurveyObjectProperty {
         }
         var onItemChanged = function (newValue: any) { self.onApplyEditorValue(newValue); };
         this.editor = SurveyPropertyEditorBase.createEditor(this.editorType, onItemChanged);
+        this.editor.onGetLocale = this.doOnGetLocale;
         this.editor.options = propertyEditorOptions;
         this.editorType = this.editor.editorType;
         this.modalName = "modelEditor" + this.editorType + this.name;
@@ -44,6 +45,10 @@ export class SurveyObjectProperty {
         this.koValue.subscribe(function (newValue) { self.onkoValueChanged(newValue); });
         this.koText = ko.computed(() => { return self.getValueText(self.koValue()); });
         this.koIsDefault = ko.computed(function () { return self.property.isDefaultValue(self.koValue()); });
+    }
+    private doOnGetLocale(): string {
+        if(this.object && this.object["getLocale"]) return this.object.getLocale();
+        return "";
     }
     public get object(): any { return this.objectValue; }
     public set object(value: any) {

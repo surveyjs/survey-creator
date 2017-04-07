@@ -15,6 +15,7 @@
     private value_: any = null;
     public options: any = null;
     public onChanged: (newValue: any) => any;
+    public onGetLocale: () => string;
     constructor() {
     }
     public get editorType(): string { throw "editorType is not defined"; }
@@ -24,6 +25,10 @@
         value = this.getCorrectedValue(value);
         this.setValueCore(value);
         this.onValueChanged();
+    }
+    public get locale() : string { 
+        if(this.onGetLocale) return this.onGetLocale();
+        return "";
     }
     protected setValueCore(value: any) {
         this.value_ = value;

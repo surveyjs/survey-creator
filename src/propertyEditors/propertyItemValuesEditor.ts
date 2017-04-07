@@ -32,13 +32,25 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     }
     protected createNewEditorItem(): any { return { koValue: ko.observable(), koText: ko.observable(), koHasError: ko.observable(false) }; }
     protected createEditorItem(item: any) {
-        var itemValue = item;
-        var itemText = null;
-        if (item.value) {
-            itemValue = item.value;
-            itemText = item.text;
+        var itemValue = new Survey.ItemValue(null);
+        if( itemValue["setData"]) {
+            itemValue["setData"](item);
+        } else {
+            if (item.value) {
+                itemValue.value = item.value;
+                if(item.text) itemValue.text = item.text;
+            } else {
+                itemValue.value = item;
+            }
         }
-        return { koValue: ko.observable(itemValue), koText: ko.observable(itemText), koHasError: ko.observable(false) };
+        var itemText = "";
+        if(itemValue["locText"]) { 
+            itemText = itemValue["locText"]["getLocaleText"](this.locale); 
+        }
+        if(!itemText && itemValue.hasText) {
+            itemText = itemValue.text;
+        }
+        return { item: item, koValue: ko.observable(itemValue.value), koText: ko.observable(itemText), koHasError: ko.observable(false) };
     }
     protected createItemFromEditorItem(editorItem: any) {
         var alwaySaveTextInPropertyEditors = this.options && this.options.alwaySaveTextInPropertyEditors;
@@ -46,7 +58,18 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         if (!alwaySaveTextInPropertyEditors && editorItem.koText() == editorItem.koValue()) {
             text = null;
         }
-        return { value: editorItem.koValue(), text: text };
+        var itemValue = new Survey.ItemValue(null);
+        //TODO use values directly
+        if(editorItem.item && itemValue["setData"]) {
+            itemValue["setData"](editorItem.item);
+        }
+        itemValue.value = editorItem.koValue();
+        if(itemValue["locText"]) {
+            itemValue["locText"]["setLocaleText"](this.locale, text);
+        } else {
+            if(text) itemValue.text = text;
+        }
+        return itemValue;
     }
     protected onBeforeApply() {
         if (this.koActiveView() != "form") {

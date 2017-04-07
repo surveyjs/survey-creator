@@ -17,7 +17,8 @@ export class SurveyPropertyEditorShowWindow {
     }
     public show(questionBase: Survey.QuestionBase, onChanged: (question: Survey.QuestionBase) => any) {
         var editor = new SurveyQuestionEditor(questionBase, this.onCanShowPropertyCallback);
-        editor.onChanged = onChanged
+        editor.onChanged = onChanged;
+
         this.koEditor(editor);
         this.koVisible(true);
         jQuery("#surveyquestioneditorwindow").modal("show");
@@ -163,7 +164,13 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty) {
         super(obj);
         this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorBase.createEditor(this.property.type, null);
+        var self = this;
+        this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
         this.propertyEditorValue.value = this.getValue(this.property);
+    }
+    private doOnGetLocale(): string {
+        if(this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();
+        return "";
     }
     public get name(): string { return this.property.name; }
     public hasError(): boolean { return this.propertyEditor.hasError(); }

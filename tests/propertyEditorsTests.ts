@@ -90,17 +90,21 @@ QUnit.test("SurveyPropertyItemValue different view type", function (assert) {
     assert.equal(choices.length, 1, "The value is still applied");
 });
 QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (assert) {
-    var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
+    var choices : Array<Survey.ItemValue> = [];
+    choices.push(new Survey.ItemValue(1, "1"));
+    choices.push(new Survey.ItemValue("item 2", "item 2"));
     var itemValueProperty = new SurveyPropertyItemValuesEditor();
-    itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
+    assert.equal(choices[0].hasText, true, "the first item has text");
+    assert.equal(choices[1].hasText, true, "the second item has text");
+    itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { Survey.ItemValue.setData(choices, newValue); };
     itemValueProperty.value = choices;
     assert.equal(itemValueProperty.koItems().length, 2, "there are three elements");
     itemValueProperty.onApplyClick();
     assert.equal(choices.length, 2, "there are two items");
     assert.equal(choices[0].value, 1, "the first value is 1");
-    assert.equal(choices[0].text, null, "the first text is null");
+    assert.equal(choices[0].hasText, false, "the first text is null");
     assert.equal(choices[1].value, "item 2", "the second value is 'item 2'");
-    assert.equal(choices[1].text, null, "the second text is null");
+    assert.equal(choices[1].hasText, false, "the second text is null");
 });
 QUnit.test("SurveyPropertyItemValue: Value and Text are same and editor.alwaySaveTextInPropertyEditors = true", function (assert) {
     var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
