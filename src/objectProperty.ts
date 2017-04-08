@@ -81,6 +81,7 @@ export class SurveyObjectProperty {
         this.editor.value = newValue;
     }
     protected getValue(): any {
+	if(this.property["getPropertyValue"]) return this.property["getPropertyValue"](this.object); //TODO make the only call
         if (this.property.hasToUseGetValue) return this.property.getValue(this.object);
         return this.object[this.name];
     }

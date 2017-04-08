@@ -297,6 +297,10 @@ export class SurveyEditor {
             }
         }
         this.setModified();
+        if(obj === this.survey && property.name == "locale") {
+            this.selectedObjectEditor.selectedObject = null;
+            this.selectedObjectEditor.selectedObject = this.survey;
+        }
         this.survey.render();
     }
     private doUndoRedo(item: UndoRedoItem) {

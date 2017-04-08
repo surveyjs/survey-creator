@@ -41,6 +41,7 @@ export class SurveyQuestionEditorGeneralProperty {
         this.koValue(this.getValue());
     }
     private getValue(): any {
+	if(this.property["getPropertyValue"]) return this.property["getPropertyValue"](this.obj); //TODO make the only call
         if (this.property.hasToUseGetValue) return this.property.getValue(this.obj);
         return this.obj[this.name];
     }

@@ -138,6 +138,7 @@ export class SurveyQuestionEditorTabBase {
     public reset() { }
     public apply() { }
     protected getValue(property: Survey.JsonObjectProperty): any {
+	if(property["getPropertyValue"]) return property["getPropertyValue"](this.obj); //TODO make the only call
         if (property.hasToUseGetValue) return property.getValue(this.obj);
         return this.obj[property.name];
     }
