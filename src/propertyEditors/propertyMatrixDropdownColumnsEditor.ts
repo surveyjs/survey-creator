@@ -59,6 +59,8 @@ export class SurveyPropertyMatrixDropdownColumnsItem {
     public cellTypeChoices: Array<any>;
     constructor(public column: Survey.MatrixDropdownColumn, public options = null) {
         this.editColumn = new Survey.MatrixDropdownColumn(column.name, column.title);
+        //TODO set directly
+        if(column["locOwner"]) this.editColumn["locOwner"] = column["locOwner"];
         this.copyColumn(this.column, this.editColumn);
         
         this.cellTypeChoices = this.getPropertyChoices("cellType");
@@ -88,11 +90,10 @@ export class SurveyPropertyMatrixDropdownColumnsItem {
         dest.choices = src.choices;
         dest.colCount = src.colCount;
         dest.optionsCaption = src.optionsCaption;
-        //TODO change to properties
-        if(src["choicesOrder"]) dest["choicesOrder"] = src["choicesOrder"];
-        if(src["inputType"]) dest["inputType"] = src["inputType"];
-        if(src["placeHolder"]) dest["placeHolder"] = src["placeHolder"];
-        if(src["choicesByUrl"]) dest["choicesByUrl"].setData(src["choicesByUrl"]);
+        dest.choicesOrder = src.choicesOrder;
+        dest.inputType = src.inputType;
+        dest.placeHolder = src.placeHolder;
+        dest.choicesByUrl = src.choicesByUrl;
     }
     private getPropertyChoices(propetyName: string): Array<any> {
         var properties = Survey.JsonObject.metaData.getProperties("matrixdropdowncolumn");

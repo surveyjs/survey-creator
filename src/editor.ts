@@ -298,8 +298,7 @@ export class SurveyEditor {
         }
         this.setModified();
         if(obj === this.survey && property.name == "locale") {
-            this.selectedObjectEditor.selectedObject = null;
-            this.selectedObjectEditor.selectedObject = this.survey;
+            this.selectedObjectEditor.ObjectChanged();
         }
         this.survey.render();
     }
