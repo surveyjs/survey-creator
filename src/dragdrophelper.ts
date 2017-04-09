@@ -5,6 +5,8 @@ export class DragDropTargetElement {
 
     }
     public moveTo(destination: any, isBottom: boolean, isEdge: boolean = false): boolean {
+        //console.log("dest: " + destination.name + ", isBottom:" + isBottom + ", isEdge:" + isEdge);
+        isEdge = isEdge || !destination.isPanel;
         if(destination === this.target) return !this.target.isPanel;
         var destInfo = this.findInfo(destination, isEdge);
         if(!destInfo) {
@@ -131,7 +133,7 @@ export class DragDropTargetElement {
     private findInfoInPanel(panel: Survey.PanelModelBase, el: any, isEdge: boolean): any {
         if(el == panel) {
             var parent = panel;
-            if(this.target.isPanel && panel.parent) {
+            if(panel.parent && (isEdge || this.target.isPanel)) {
                 parent = panel.parent;
             }
             return { panel: parent, row: null, rIndex: 0, elIndex: 0, element: panel };
@@ -141,7 +143,7 @@ export class DragDropTargetElement {
             var row = rows[i];
             var elements = row["koElements"]();
             for(var j = 0; j < elements.length; j ++) {
-                if(!isEdge && elements[j].isPanel) {
+                if(elements[j].isPanel) {
                     var res = this.findInfoInPanel(elements[j], el, isEdge);
                     if(res) {
                         if(res.element == elements[j]) {
@@ -173,11 +175,13 @@ export class DragDropHelper {
     private onModifiedCallback: () => any;
     private scrollableElement: HTMLElement = null;
     private ddTarget: DragDropTargetElement = null;
+    private prevCoordinates: {x: number, y: number};
     static counter: number  = 1;
     private id: number = DragDropHelper.counter ++;
     constructor(public data: Survey.ISurvey, onModifiedCallback: () => any, scrollableElName: string = null) {
         this.onModifiedCallback = onModifiedCallback;
         this.scrollableElement = document.getElementById((scrollableElName ? scrollableElName : "scrollableDiv"));
+        this.prevCoordinates = {x: -1, y: -1}
     }
     public get survey(): Survey.Survey { return <Survey.Survey>this.data; }
     public startDragQuestion(event: DragEvent, element: any) {
@@ -196,10 +200,12 @@ export class DragDropHelper {
     }
     public doDragDropOver(event: DragEvent, element: any, isEdge: boolean = false) {
         event = this.getEvent(event);
+        if(this.isSameCoordinates(event)) return;
         this.checkScrollY(event);
         if (!element || !this.isSurveyDragging(event) || this.isSamePlace(event, element)) return;
         var bottomInfo = this.isBottom(event, element);
-        isEdge = isEdge && bottomInfo.isEdge;
+        isEdge = element.isPanel ? isEdge && bottomInfo.isEdge : true;
+        if(element.isPanel && !isEdge && element.elements.length > 0) return;
         this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
     }
     public end() {
@@ -245,6 +251,14 @@ export class DragDropHelper {
         }
 
         return { isBottom: y > height / 2, isEdge: y <= DragDropHelper.edgeHeight || height - y <= DragDropHelper.edgeHeight};
+    }
+    private isSameCoordinates(event: DragEvent): boolean {
+        var res = Math.abs(event.pageX - this.prevCoordinates.x) > 5 || Math.abs(event.pageY - this.prevCoordinates.y) > 5;
+        if(res) {
+            this.prevCoordinates.x = event.pageX;
+            this.prevCoordinates.y = event.pageY;
+        }
+        return !res;
     }
     private isSamePlace(event: DragEvent, element: any): boolean {
         var prev = DragDropHelper.prevEvent;
@@ -344,5 +358,7 @@ export class DragDropHelper {
         prev.element = null;
         prev.x = -1;
         prev.y = -1;
+        this.prevCoordinates.x = -1;
+        this.prevCoordinates.y = -1;
     }
 }
