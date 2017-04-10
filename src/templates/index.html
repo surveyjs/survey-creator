@@ -65,7 +65,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs panel panel-default svd_properties">
                 <div class="panel-heading input-group">
                     <div class="custom-select">
-                        <select class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
+                        <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>

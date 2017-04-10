@@ -395,6 +395,10 @@ export class SurveyEditor {
         this.setUndoRedoCurrentState(true);
 
         this.jsonEditor.init();
+        if(jQuery && jQuery()["select2"]) {
+            jQuery("#objectSelector")["select2"]();
+            jQuery("#objectSelector").width("100%");
+        }
     }
     private initSurvey(json: any) {
         var self = this;
