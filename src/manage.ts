@@ -11,7 +11,7 @@ class ServiceAPI extends Survey.dxSurveyService {
         xhr.open('GET', this.baseUrl + '/getActive?accessKey=' + this.accessKey);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
-            var result = JSON.parse(xhr.response);
+            var result = xhr.response ? JSON.parse(xhr.response) : null;
             onLoad(xhr.status == 200, result, xhr.response);
         };
         xhr.send();
@@ -21,7 +21,7 @@ class ServiceAPI extends Survey.dxSurveyService {
         xhr.open('GET', this.baseUrl + '/create?accessKey=' + this.accessKey + "&name=" + name);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
-            var result = JSON.parse(xhr.response);
+            var result = xhr.response ? JSON.parse(xhr.response) : null
             onCreate(xhr.status == 200, result, xhr.response);
         };
         xhr.send();
@@ -31,8 +31,7 @@ class ServiceAPI extends Survey.dxSurveyService {
         xhr.open('POST', this.baseUrl + '/changeJson?accessKey=' + this.accessKey);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onload = function () {
-            debugger;
-            var result = JSON.parse(xhr.response);
+            var result = xhr.response ? JSON.parse(xhr.response) : null;
             !!onSave && onSave(xhr.status == 200, result, xhr.response);
         };
         xhr.send(JSON.stringify({ Id: id, Json: json, Text: json }));
@@ -56,34 +55,34 @@ export class SurveysManager {
     private api: ServiceAPI;
 
     getSurveys(): Array<SurveyDescription> {
-        debugger;
         return JSON.parse(window.localStorage.getItem(SurveysManager.StorageKey) || "[]").map(item => {
             return new SurveyDescription(ko.observable<string>(item.name), item.createdAt, item.id, item.resultId, item.postId);
         });
     }
 
     setSurveys(surveys: Array<ISurveyInfo>) {
-        debugger;
         window.localStorage.setItem(SurveysManager.StorageKey, ko.toJSON(surveys));
     }
 
     constructor(private baseUrl: string, private accessKey: string, private editor: SurveyEditor) {
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
         editor.onModified.add((s, o) => {
-            debugger;
             if(!editor.surveyId) {
                 this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
-                    debugger;
-                    this.surveys.push(new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId));
+                    var newSurveyDescription = new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId)
+                    this.surveys.push(newSurveyDescription);
                     this.setSurveys(this.surveys());
                     editor.surveyId = result.Id;
                     editor.surveyPostId = result.PostId;
                     this.api.saveSurvey(result.Id, editor.text);
+                    this.currentSurvey(newSurveyDescription);
                 });
+            }
+            else {
+                this.api.saveSurvey(editor.surveyId, editor.text);
             }
         });
         editor.saveSurveyFunc = () => {
-            debugger;
             if(!!editor.surveyId) {
                 this.api.saveSurvey(editor.surveyId, editor.text);
             }
@@ -91,8 +90,8 @@ export class SurveysManager {
         this.surveys(this.getSurveys());
         this.currentSurvey(this.surveys()[0]);
         ko.computed(() => {
-            debugger;
             var survey = this.currentSurvey();
+            if (!survey || editor.surveyId === survey.id) return;
             editor.loadSurvey(survey.id);
             editor.surveyId = survey.id;
             editor.surveyPostId = survey.postId;
