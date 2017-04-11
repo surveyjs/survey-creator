@@ -42,6 +42,8 @@ export {SurveyUndoRedo, UndoRedoItem} from "../undoredo";
 export {SurveyForDesigner} from "../surveyjsObjects"
 export {SurveyEditor} from "../editor";
 
+export {SurveysManager} from "../manage";
+
 //editorLocalization
 import '../localization/french';
 
