@@ -36,6 +36,17 @@ class ServiceAPI extends Survey.dxSurveyService {
         };
         xhr.send(JSON.stringify({ Id: id, Json: json, Text: json }));
     }
+    public updateSurveyName(id: string, name: string, onUpdate?: (success: boolean, result: string, response: any) => void) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', this.baseUrl + '/changeName/' + id + '?accessKey=' + this.accessKey + "&name=" + name);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            var result = xhr.response ? JSON.parse(xhr.response) : null;
+            !!onUpdate && onUpdate(xhr.status == 200, result, xhr.response);
+        };
+        xhr.send();
+    }
+
 }
 
 export interface ISurveyInfo {
@@ -68,15 +79,7 @@ export class SurveysManager {
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
         editor.onModified.add((s, o) => {
             if(!editor.surveyId) {
-                this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
-                    var newSurveyDescription = new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId)
-                    this.surveys.push(newSurveyDescription);
-                    this.setSurveys(this.surveys());
-                    editor.surveyId = result.Id;
-                    editor.surveyPostId = result.PostId;
-                    this.api.saveSurvey(result.Id, editor.text);
-                    this.currentSurvey(newSurveyDescription);
-                });
+                this.add();
             }
             else {
                 this.api.saveSurvey(editor.surveyId, editor.text);
@@ -91,14 +94,54 @@ export class SurveysManager {
         this.currentSurvey(this.surveys()[0]);
         ko.computed(() => {
             var survey = this.currentSurvey();
-            if (!survey || editor.surveyId === survey.id) return;
-            editor.loadSurvey(survey.id);
-            editor.surveyId = survey.id;
-            editor.surveyPostId = survey.postId;
-            window.location.hash = "#" + survey.id;
+            if(!!survey) {
+                if(editor.surveyId === survey.id) return;
+                editor.loadSurvey(survey.id);
+                editor.surveyId = survey.id;
+                editor.surveyPostId = survey.postId;
+                window.location.hash = "#" + survey.id;
+            }
+            else {
+                editor.surveyId = "";
+                editor.surveyPostId = "";
+                window.location.hash = "";
+                editor.text = "";
+            }
         });
+    }
+
+    isEditMode = ko.observable(false);
+    edit() {
+        this.isEditMode(!this.isEditMode());
+        var survey = this.currentSurvey();
+        if(!this.isEditMode() && !!survey) {
+            this.setSurveys(this.surveys());
+            this.api.updateSurveyName(survey.id, survey.name());
+        }
+    }
+
+    add() {
+        this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
+            var newSurveyDescription = new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId)
+            this.surveys.push(newSurveyDescription);
+            this.setSurveys(this.surveys());
+            this.editor.surveyId = result.Id;
+            this.editor.surveyPostId = result.PostId;
+            this.api.saveSurvey(result.Id, this.editor.text);
+            this.currentSurvey(newSurveyDescription);
+        });
+    }
+
+    remove() {
+        this.surveys.remove(this.currentSurvey());
+        this.setSurveys(this.surveys());
+        this.currentSurvey(this.surveys()[0]);
     }
 
     surveys = ko.observableArray<ISurveyInfo>();
     currentSurvey = ko.observable<ISurveyInfo>();
+    currentSurveyName = ko.computed({
+       read: () => this.currentSurvey() && this.currentSurvey().name() || "",
+       write: val => this.currentSurvey() && this.currentSurvey().name(val)
+    });
 }

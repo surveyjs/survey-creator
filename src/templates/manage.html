@@ -1,11 +1,12 @@
 ﻿<script type="text/html" id="surveys-manage">
     <div class="input-group">
-        <select class="form-control" aria-label="Available surveys" data-bind="options: surveys,
+        <select class="form-control" aria-label="Available surveys" data-bind="visible: !isEditMode(), options: surveys,
                        optionsText: 'name',
                        value: currentSurvey,
                        optionsCaption: 'Choose survey to edit...'"></select>
-        <span class="input-group-addon" title="Edit survey name">e</span>
-        <span class="input-group-addon" title="Add new survey">+</span>
-        <span class="input-group-addon" title="Delete current survey">х</span>
+        <input type="text" class="form-control" aria-label="Edit survey name" data-bind="visible: isEditMode, value: currentSurveyName"/>
+        <span class="input-group-addon" title="Edit survey name" data-bind="visible: currentSurvey, click:edit, text: isEditMode() ? 'ok' : 'edit'"></span>
+        <span class="input-group-addon" title="Add new survey" data-bind="visible: !isEditMode(), click:add">+</span>
+        <span class="input-group-addon" title="Delete current survey" data-bind="visible: !isEditMode(), click:remove">х</span>
     </div>
 </script>
