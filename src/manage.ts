@@ -76,6 +76,10 @@ export class SurveysManager {
     }
 
     constructor(private baseUrl: string, private accessKey: string, private editor: SurveyEditor) {
+        var hash = window.location.hash;
+        if(hash.indexOf("#") === 0) {
+            this.surveyId(hash.slice(1));
+        }
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
         editor.onModified.add((s, o) => {
             if(!editor.surveyId) {
@@ -91,21 +95,36 @@ export class SurveysManager {
             }
         };
         this.surveys(this.getSurveys());
-        this.currentSurvey(this.surveys()[0]);
+        if(!this.surveyId()) {
+            this.currentSurvey(this.surveys()[0]);
+        }
+        else {
+            var survey = this.surveys().filter(s => s.id === this.surveyId())[0];
+            if(!!survey) {
+                this.currentSurvey(survey);
+                this.surveyId(undefined);
+            }
+            else {
+                editor.loadSurvey(this.surveyId());
+            }
+        }
         ko.computed(() => {
             var survey = this.currentSurvey();
             if(!!survey) {
+                this.surveyId(undefined);
+                window.location.hash = "#" + survey.id;
                 if(editor.surveyId === survey.id) return;
                 editor.loadSurvey(survey.id);
                 editor.surveyId = survey.id;
                 editor.surveyPostId = survey.postId;
-                window.location.hash = "#" + survey.id;
             }
             else {
-                editor.surveyId = "";
-                editor.surveyPostId = "";
-                window.location.hash = "";
-                editor.text = "";
+                if(!this.surveyId()) {
+                    editor.surveyId = "";
+                    editor.surveyPostId = "";
+                    window.location.hash = "";
+                    editor.text = "";
+                }
             }
         });
     }
@@ -138,6 +157,7 @@ export class SurveysManager {
         this.currentSurvey(this.surveys()[0]);
     }
 
+    surveyId = ko.observable<string>();
     surveys = ko.observableArray<ISurveyInfo>();
     currentSurvey = ko.observable<ISurveyInfo>();
     currentSurveyName = ko.computed({
