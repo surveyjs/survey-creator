@@ -81,19 +81,32 @@ export class SurveysManager {
             this.surveyId(hash.slice(1));
         }
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
-        editor.onModified.add((s, o) => {
-            if(!editor.surveyId && !this.surveyId()) {
-                this.add();
-            }
-            else {
-                this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
-            }
-        });
-        editor.saveSurveyFunc = () => {
-            if(!!editor.surveyId) {
-                this.api.saveSurvey(editor.surveyId, editor.text);
-            }
-        };
+
+        if (editor.isAutoSave) {
+            editor.onModified.add((s, o) => {
+                if(!editor.surveyId && !this.surveyId()) {
+                    this.add();
+                }
+                else {
+                    this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
+                }
+            });
+            editor.saveSurveyFunc = () => {
+                if(!!editor.surveyId) {
+                    this.api.saveSurvey(editor.surveyId, editor.text);
+                }
+            };
+        } else {
+            editor.saveSurveyFunc = () => {
+                if(!editor.surveyId && !this.surveyId()) {
+                    this.add();
+                }
+                else {
+                    this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
+                }
+            };
+        }
+
         this.surveys(this.getSurveys());
         if(!this.surveyId()) {
             this.currentSurvey(this.surveys()[0]);

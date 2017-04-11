@@ -22,7 +22,7 @@
     <div id="manage" data-bind="template: 'surveys-manage'"></div>
     <div id="editor"></div>
     <script type="text/javascript">
-        var editor = new SurveyEditor.SurveyEditor("editor");
+        var editor = new SurveyEditor.SurveyEditor("editor", {isAutoSave:true});
         //editor.surveyId = '5af48e08-a0a5-44a5-83f4-1c90e8e98de1';
         //editor.surveyPostId = '3ce10f8b-2d8a-4ca2-a110-2994b9e697a1';
         editor.saveSurveyFunc = function () { alert('ok'); };

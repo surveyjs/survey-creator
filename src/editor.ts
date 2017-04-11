@@ -49,6 +49,7 @@ export class SurveyEditor {
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public isAutoSave: boolean = true;
 
     koIsShowDesigner: any;
     koViewType: any;
@@ -142,6 +143,7 @@ export class SurveyEditor {
         this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
         this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
         this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
+        this.isAutoSave = options && typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : true;
         if(options && options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
@@ -230,7 +232,7 @@ export class SurveyEditor {
     public get saveSurveyFunc() { return this.saveSurveyFuncValue; }
     public set saveSurveyFunc(value: any) {
         this.saveSurveyFuncValue = value;
-        this.koShowSaveButton(value != null);
+        this.koShowSaveButton(value != null && !this.isAutoSave);
     }
     public get showOptions() { return this.koShowOptions(); }
     public set showOptions(value: boolean) { this.koShowOptions(value); }
