@@ -221,6 +221,7 @@ export class DragDropHelper {
         }
         if (this.isSurveyDragging(event)) {
             this.ddTarget.doDrop();
+            if(this.onModifiedCallback) this.onModifiedCallback();
         }
         this.end();
     }
