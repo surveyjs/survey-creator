@@ -108,8 +108,7 @@ export class SurveysManager {
                 editor.loadSurvey(this.surveyId());
             }
         }
-        ko.computed(() => {
-            var survey = this.currentSurvey();
+        var onCurrentSurveyChanged = (survey: ISurveyInfo) => {
             if(!!survey) {
                 this.surveyId(undefined);
                 window.location.hash = "#" + survey.id;
@@ -126,7 +125,9 @@ export class SurveysManager {
                     editor.text = "";
                 }
             }
-        });
+        }
+        this.currentSurvey.subscribe(onCurrentSurveyChanged);
+        onCurrentSurveyChanged(this.currentSurvey());
     }
 
     isEditMode = ko.observable(false);
