@@ -7,6 +7,6 @@
         <input type="text" class="form-control" aria-label="Edit survey name" data-bind="visible: isEditMode, value: currentSurveyName"/>
         <span class="input-group-addon" title="Edit survey name" data-bind="visible: currentSurvey, click:edit, text: isEditMode() ? 'ok' : 'edit'"></span>
         <span class="input-group-addon" title="Add new survey" data-bind="visible: !isEditMode(), click:add, text: !surveyId() ? '+' : 'fork'"></span>
-        <span class="input-group-addon" title="Delete current survey" data-bind="visible: !isEditMode(), click:remove">х</span>
+        <span class="input-group-addon" title="Delete current survey" data-bind="visible: !isEditMode() && !surveyId(), click:remove">х</span>
     </div>
 </script>

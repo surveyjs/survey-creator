@@ -82,11 +82,11 @@ export class SurveysManager {
         }
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
         editor.onModified.add((s, o) => {
-            if(!editor.surveyId) {
+            if(!editor.surveyId && !this.surveyId()) {
                 this.add();
             }
             else {
-                this.api.saveSurvey(editor.surveyId, editor.text);
+                this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
             }
         });
         editor.saveSurveyFunc = () => {
