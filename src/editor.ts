@@ -49,7 +49,12 @@ export class SurveyEditor {
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
-    public isAutoSave: boolean = true;
+    koAutoSave = ko.observable(false);
+    public get isAutoSave() { return this.koAutoSave();}
+    public set isAutoSave(newVal) { this.koAutoSave(newVal); }
+    koShowState = ko.observable(false);
+    public get showState() { return this.koShowState();}
+    public set showState(newVal) { this.koShowState(newVal); }
 
     koIsShowDesigner: any;
     koViewType: any;
@@ -77,7 +82,7 @@ export class SurveyEditor {
 
         var self = this;
 
-        this.koState = ko.observable();
+        this.koState = ko.observable("");
         this.koShowSaveButton = ko.observable(false);
         this.koTestSurveyWidth = ko.observable("100%");
         this.saveButtonClick = function () { self.doSave(); };
@@ -143,7 +148,7 @@ export class SurveyEditor {
         this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
         this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
         this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
-        this.isAutoSave = options && typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : true;
+        this.isAutoSave = options && typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
         if(options && options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
@@ -221,6 +226,7 @@ export class SurveyEditor {
         this.setState("modified");
         this.setUndoRedoCurrentState();
         this.onModified.fire(this, null);
+        this.isAutoSave && this.doSave();
     }
     private setUndoRedoCurrentState(clearState: boolean = false) {
         if (clearState) {

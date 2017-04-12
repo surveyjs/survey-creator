@@ -39,8 +39,11 @@
                 </ul>
             </div>
         </li>
-        <li class="svd_actions">
-            <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick, visible: koShowSaveButton"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
+        <li class="svd_actions" data-bind="visible: koShowSaveButton">
+            <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
+        </li>
+        <li class="svd_actions" data-bind="visible: koShowState">
+            <span data-bind="text: koState"></span>
         </li>
     </ul>
 

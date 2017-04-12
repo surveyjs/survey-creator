@@ -82,30 +82,16 @@ export class SurveysManager {
         }
         this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
 
-        if (editor.isAutoSave) {
-            editor.onModified.add((s, o) => {
-                if(!editor.surveyId && !this.surveyId()) {
-                    this.add();
-                }
-                else {
-                    this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
-                }
-            });
-            editor.saveSurveyFunc = () => {
-                if(!!editor.surveyId) {
-                    this.api.saveSurvey(editor.surveyId, editor.text);
-                }
-            };
-        } else {
-            editor.saveSurveyFunc = () => {
-                if(!editor.surveyId && !this.surveyId()) {
-                    this.add();
-                }
-                else {
-                    this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text);
-                }
-            };
-        }
+        editor.isAutoSave = true;
+        editor.showState = true;
+        editor.saveSurveyFunc = (saveNo, callback) => {
+            if(!editor.surveyId && !this.surveyId()) {
+                this.add(success => callback(saveNo, success));
+            }
+            if(!!editor.surveyId || !!this.surveyId()) {
+                this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text, success => callback(saveNo, success));
+            }
+        };
 
         this.surveys(this.getSurveys());
         if(!this.surveyId()) {
@@ -153,7 +139,7 @@ export class SurveysManager {
         }
     }
 
-    add() {
+    add(onAdd?: (success: boolean, result: string, response: any) => void) {
         this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
             var newSurveyDescription = new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId)
             this.surveys.push(newSurveyDescription);
@@ -162,6 +148,7 @@ export class SurveysManager {
             this.editor.surveyPostId = result.PostId;
             this.api.saveSurvey(result.Id, this.editor.text);
             this.currentSurvey(newSurveyDescription);
+            onAdd && onAdd(success, result, response);
         });
     }
 
