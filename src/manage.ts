@@ -130,12 +130,20 @@ export class SurveysManager {
     }
 
     isEditMode = ko.observable(false);
-    edit() {
-        this.isEditMode(!this.isEditMode());
+    edit(model, event) {
         var survey = this.currentSurvey();
-        if(!this.isEditMode() && !!survey) {
-            this.setSurveys(this.surveys());
-            this.api.updateSurveyName(survey.id, survey.name());
+        if(!!survey) {
+            if(this.isEditMode()) {
+                survey.name(this.currentSurveyName());
+                this.setSurveys(this.surveys());
+                this.api.updateSurveyName(survey.id, survey.name());
+                this.isEditMode(false);
+            }
+            else {
+                this.currentSurveyName(survey.name());
+                this.isEditMode(true);
+                $(event.target).parents(".svd-manage").find("input").focus()
+            }
         }
     }
 
@@ -161,8 +169,26 @@ export class SurveysManager {
     surveyId = ko.observable<string>();
     surveys = ko.observableArray<ISurveyInfo>();
     currentSurvey = ko.observable<ISurveyInfo>();
-    currentSurveyName = ko.computed({
-       read: () => this.currentSurvey() && this.currentSurvey().name() || "",
-       write: val => this.currentSurvey() && this.currentSurvey().name(val)
-    });
+    currentSurveyName = ko.observable<string>("")
+
+    get cssEdit () {
+        return this.isEditMode() ? 'icon-saved' : 'icon-edit';
+    }
+    get cssAdd () {
+        return !this.surveyId() ? 'icon-new' : 'icon-fork';
+    }
+    get titleEdit () {
+        return this.isEditMode() ? 'Save survey name' : 'Edit survey name';
+    }
+    get titleAdd () {
+        return !this.surveyId() ? 'Add new survey' : 'Fork this survey';
+    }
+    nameEditorKeypress = (model, event) => {
+        if(event.keyCode === 13) {
+            this.edit(model, event);
+        }
+        else if(event.keyCode === 27) {
+            this.isEditMode(false);
+        }
+    }
 }

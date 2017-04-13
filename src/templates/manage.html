@@ -1,12 +1,16 @@
 ﻿<script type="text/html" id="surveys-manage">
-    <div class="input-group">
-        <select class="form-control" aria-label="Available surveys" data-bind="visible: !isEditMode(), options: surveys,
-                       optionsText: 'name',
-                       value: currentSurvey,
-                       optionsCaption: 'Choose survey to edit...'"></select>
-        <input type="text" class="form-control" aria-label="Edit survey name" data-bind="visible: isEditMode, value: currentSurveyName"/>
-        <span class="input-group-addon" title="Edit survey name" data-bind="visible: currentSurvey, click:edit, text: isEditMode() ? 'ok' : 'edit'"></span>
-        <span class="input-group-addon" title="Add new survey" data-bind="visible: !isEditMode(), click:add, text: !surveyId() ? '+' : 'fork'"></span>
-        <span class="input-group-addon" title="Delete current survey" data-bind="visible: !isEditMode() && !surveyId(), click:remove">х</span>
+    <div class="svd-manage">
+        <div class="svd-manage-control">
+            <select class="svd-manage-select" data-bind="visible: !isEditMode(), options: surveys,
+                        optionsText: 'name',
+                        value: currentSurvey,
+                        optionsCaption: 'Choose survey to edit or start editing and survey will be saved automatically...'"></select>
+            <input type="text" class="svd-manage-name" data-bind="visible: isEditMode, value: currentSurveyName, event: { keyup: nameEditorKeypress }"/>
+        </div>
+        <div class="svd-manage-buttons">
+            <span class="icon" data-bind="visible: currentSurvey, click: edit, css: cssEdit, attr: { title: titleEdit }"></span>
+            <span class="icon" data-bind="visible: !isEditMode(), click: add, css: cssAdd, attr: { title: titleAdd }"></span>
+            <span class="icon icon-delete" title="Delete current survey" data-bind="visible: !isEditMode() && !surveyId() && currentSurvey(), click:remove"></span>
+        </div>
     </div>
 </script>
