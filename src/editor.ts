@@ -66,7 +66,8 @@ export class SurveyEditor {
     generateValidJSONClick: any; generateReadableJSONClick: any;
     doUndoClick: any; doRedoClick: any;
     deleteObjectClick: any;
-    koState: any;
+    koState = ko.observable("");
+    koStateText = ko.computed(() => this.koState() && (this.koState().charAt(0).toUpperCase() + this.koState().slice(1)));
     runSurveyClick: any; embedingSurveyClick: any;
     saveButtonClick: any;
     draggingToolboxItem: any; clickToolboxItem: any;
@@ -82,7 +83,6 @@ export class SurveyEditor {
 
         var self = this;
 
-        this.koState = ko.observable("");
         this.koShowSaveButton = ko.observable(false);
         this.koTestSurveyWidth = ko.observable("100%");
         this.saveButtonClick = function () { self.doSave(); };
