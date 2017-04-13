@@ -30,7 +30,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function (assert) {
     editor.onChanged = function () { changeCounter++; };
     var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
     assert.equal(generalTab.properties.rows[0].properties[0].koValue(), "q1", "name set correct");
-    assert.equal(generalTab.properties.rows[1].properties[0].koValue(), null, "title set correct");
+    assert.equal(generalTab.properties.rows[1].properties[0].koValue(), "", "title set correct");
     generalTab.properties.rows[0].properties[0].koValue("newName");
     generalTab.properties.rows[1].properties[0].koValue("new title");
     var visibleIfTab = <SurveyQuestionEditorTabProperty>editor.koTabs()[editor.koTabs().length - 1];
