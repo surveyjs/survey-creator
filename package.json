@@ -48,6 +48,7 @@
     "style-loader": "0.13.1",
     "ts-loader": "2.0.0",
     "typescript": "2.1.5",
+    "url-loader": "0.5.8",
     "val-loader": "0.5.0",
     "webpack": "2.2.1"
   }

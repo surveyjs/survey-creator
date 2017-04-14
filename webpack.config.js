@@ -8,7 +8,6 @@ var rimraf = require('rimraf');
 var GenerateJsonPlugin = require('generate-json-webpack-plugin');
 var packageJson = require('./package.json');
 var fs = require('fs');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var banner = [
     "surveyjs Editor v" + packageJson.version,
@@ -36,7 +35,6 @@ var packagePlatformJson = {
     "homepage": "http://editor.surveyjs.io",
     "license": "http://editor.surveyjs.io/license.html",
     "files": [
-        "fonts/",
         "surveyeditor.css",
         "surveyeditor.js",
         "surveyeditor.d.ts",
@@ -110,19 +108,19 @@ module.exports = function(options) {
                     test: /\.scss$/,
                     loader: extractCSS.extract({
                         fallbackLoader: 'style-loader',
-                        loader: 'css-loader?url=false!sass-loader'
+                        loader: 'css-loader!sass-loader'
                     })
-                },
-                {
-                    test: /\.(eot|svg|ttf|woff|woff2)$/,
-                    loader: 'file-loader',
-                    options: {
-                        name: packagePath + 'fonts/[name].[ext]'
-                    }
                 },
                 {
                     test: /\.html$/,
                     loader: 'html-loader'
+                },
+                {
+                    test: /\.svg/,
+                    use: {
+                        loader: 'url-loader',
+                        options: {}
+                    }
                 }
             ]
         },
@@ -179,8 +177,7 @@ module.exports = function(options) {
                 packagePlatformJson,
                 undefined,
                 2
-            ),
-            new CopyWebpackPlugin([{context: 'src/fonts', from: '**/*', to: packagePath + 'fonts'}])
+            )
         ]);
     }
 

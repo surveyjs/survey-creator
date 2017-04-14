@@ -10,10 +10,6 @@ $dark-bg-color: #f3f3f4;
 $editor-height:75vh;
 
 
-html body {
-    background-color: $light-bg-color;
-}
-
 @media (max-width: 816px) {
     .svd_container .nav-tabs.svd_menu > li.active > a {
         color: $main-color;
@@ -27,6 +23,7 @@ html body {
     }
 }
 
+
 .svd_object_editor {
     background-color: $light-bg-color;
     height: $editor-height;
@@ -34,6 +31,7 @@ html body {
 }
 
 .svd_container {
+    background-color: $light-bg-color;
     position: relative;
 
     * {
@@ -95,6 +93,9 @@ html body {
     }
     .svd_state {
         float: right;
+        .icon {
+            display: inline-block;
+        }
     }
 
     .svd_content {
@@ -136,8 +137,9 @@ html body {
                         .svd_toolbox_item_text {
                             margin-left: 35px;
                             color: $text-color;
-                            top: -2px;
                             position: relative;
+                            line-height: 16px;
+                            vertical-align: middle;
                         }
                     }
                 }
@@ -357,33 +359,6 @@ html body {
     }
 }
 
-// font icomoon
-@font-face {
-    font-family: 'icomoon';
-    src:  url('fonts/icomoon.eot?sbpmys');
-    src:  url('fonts/icomoon.eot?sbpmys#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?sbpmys') format('truetype'),
-    url('fonts/icomoon.woff?sbpmys') format('woff'),
-    url('fonts/icomoon.svg?sbpmys#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 .svd-manage {
     margin: 10px 15px;
 
@@ -405,148 +380,119 @@ html body {
         }
     }
     .svd-manage-buttons {
-        display: inline-block;
+        position: absolute;
+        top: 10px;
+        right: 0;
         width: 120px;
         text-align: right;
-        vertical-align: top;
-        float: right;
+        margin-right: 15px;
 
         .icon {
             color: $main-color;
-            font-size: 32px;
             cursor: pointer;
+            vertical-align: middle;
+            line-height: 32px;
+            display: inline-block;
 
             &:hover {
                 color: $dark-main-color;
             }
         }
-        .icon-fork {
-            font-size: 24px;
-            margin-top: 6px;
-            display: inline-block;            
-        }
         .icon-edit {
-            font-size: 28px;
-            margin-top: 3px;
-            margin-right: 10px;
-            display: inline-block;            
+            margin-right: 20px;
         }
     }
 }
 
+@mixin svg-icon($icon-size) {
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: $icon-size / 2;
+}
+
 .icon-panel:before {
-    content: "\e90d";
+    background-image: url('./images/Panel.svg');
+    @include svg-icon(16px);
 }
 .icon-checkbox:before {
-    content: "\e900";
+    background-image: url('./images/Checkbox.svg');
+    @include svg-icon(16px);
 }
 .icon-comment:before {
-    content: "\e901";
+    background-image: url('./images/Comment.svg');
+    @include svg-icon(16px);
 }
 .icon-dropdown:before {
-    content: "\e902";
+    background-image: url('./images/Dropdown.svg');
+    @include svg-icon(16px);
 }
 .icon-file:before {
-    content: "\e903";
+    background-image: url('./images/File.svg');
+    @include svg-icon(16px);
 }
 .icon-html:before {
-    content: "\e904";
+    background-image: url('./images/HTML.svg');
+    @include svg-icon(16px);
 }
 .icon-default:before {
-    content: "\e905";
+    background-image: url('./images/Matrix.svg');
+    @include svg-icon(16px);
 }
 .icon-matrixdynamic:before {
-    content: "\e906";
+    background-image: url('./images/Matrix_dynamic.svg');
+    @include svg-icon(16px);
 }
 .icon-matrixdropdown:before {
-    content: "\e907";
+    background-image: url('./images/Matrix_multiple.svg');
+    @include svg-icon(16px);
 }
 .icon-matrix:before {
-    content: "\e908";
+    background-image: url('./images/Matrix_single.svg');
+    @include svg-icon(16px);
 }
 .icon-multipletext:before {
-    content: "\e909";
+    background-image: url('./images/Multipletext.svg');
+    @include svg-icon(16px);
 }
 .icon-radiogroup:before {
-    content: "\e90a";
+    background-image: url('./images/Radiogroup.svg');
+    @include svg-icon(16px);
 }
 .icon-rating:before {
-    content: "\e90b";
+    background-image: url('./images/Rating.svg');
+    @include svg-icon(16px);
 }
 .icon-text:before {
-    content: "\e90c";
+    background-image: url('./images/Text.svg');
+    @include svg-icon(16px);
 }
 
 .icon-delete:before {
-  content: "\e90e";
+    background-image: url('./images/Delete_24x24.svg');
+    @include svg-icon(24px);
 }
 .icon-edit:before {
-  content: "\e90f";
+    background-image: url('./images/Edit_24x24.svg');
+    @include svg-icon(24px);
 }
 .icon-fork:before {
-  content: "\e910";
+    background-image: url('./images/Fork_24x24.svg');
+    @include svg-icon(24px);
 }
-.icon-modified .path1:before {
-  content: "\e911";
-  color: rgb(157, 159, 161);
-  opacity: 0.9;
-}
-.icon-modified .path2:before {
-  content: "\e912";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.6;
+.icon-modified:before {
+    background-image: url('./images/Modified_24x24.svg');
+    @include svg-icon(24px);
 }
 .icon-new:before {
-  content: "\e913";
+    background-image: url('./images/New_24x24.svg');
+    @include svg-icon(24px);
 }
 .icon-saved:before {
-  content: "\e914";
+    background-image: url('./images/Saved_24x24.svg');
+    @include svg-icon(24px);
 }
-.icon-saving .path1:before {
-  content: "\e915";
-  color: rgb(157, 159, 161);
-  opacity: 0.5;
-}
-.icon-saving .path2:before {
-  content: "\e916";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.9;
-}
-.icon-saving .path3:before {
-  content: "\e917";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.2;
-}
-.icon-saving .path4:before {
-  content: "\e918";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.7;
-}
-.icon-saving .path5:before {
-  content: "\e919";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.6;
-}
-.icon-saving .path6:before {
-  content: "\e91a";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.1;
-}
-.icon-saving .path7:before {
-  content: "\e91b";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.3;
-}
-.icon-saving .path8:before {
-  content: "\e91c";
-  margin-left: -1em;
-  color: rgb(157, 159, 161);
-  opacity: 0.8;
+.icon-saving:before {
+    background-image: url('./images/Saving_24x24.svg');
+    @include svg-icon(24px);
 }
