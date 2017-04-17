@@ -361,6 +361,7 @@ $editor-height:75vh;
 
 .svd-manage {
     margin: 10px 15px;
+    position: relative;
 
     .svd-manage-control {
         width: calc(100% - 150px);
@@ -381,7 +382,7 @@ $editor-height:75vh;
     }
     .svd-manage-buttons {
         position: absolute;
-        top: 10px;
+        top: 0;
         right: 0;
         width: 120px;
         text-align: right;
