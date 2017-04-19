@@ -497,3 +497,7 @@ $editor-height:75vh;
     background-image: url('./images/Saving_24x24.svg');
     @include svg-icon(24px);
 }
+.icon-cloud:before {
+    background-image: url('./images/Cloud_24x24.svg');
+    @include svg-icon(24px);
+}
