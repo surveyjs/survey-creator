@@ -161,9 +161,11 @@ export class SurveysManager {
     }
 
     remove() {
-        this.surveys.remove(this.currentSurvey());
-        this.setSurveys(this.surveys());
-        this.currentSurvey(this.surveys()[0]);
+        if(confirm("Do you really want to remove current survey?")) {
+            this.surveys.remove(this.currentSurvey());
+            this.setSurveys(this.surveys());
+            this.currentSurvey(this.surveys()[0]);
+        }
     }
 
     surveyId = ko.observable<string>();
