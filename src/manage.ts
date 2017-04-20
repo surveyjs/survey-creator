@@ -127,7 +127,28 @@ export class SurveysManager {
         }
         this.currentSurvey.subscribe(onCurrentSurveyChanged);
         onCurrentSurveyChanged(this.currentSurvey());
+        
+        var currentSurveyCanBeAttached = ko.observable(false);
+        ko.computed(() => {
+            var survey = this.currentSurvey();
+            currentSurveyCanBeAttached(false);
+            if(!!survey) {
+                this.api.updateSurveyName(survey.id, survey.name.peek(), success => {
+                    currentSurveyCanBeAttached(success);
+                });
+            }
+        });
+        this.toolbarItem = {
+            id: 'svd-attach-survey',
+            template: 'attach-survey',
+            visible: currentSurveyCanBeAttached,
+            action: ko.computed(() => 'https://dxsurvey.com/Home/AttachSurvey/' + (this.currentSurvey() && this.currentSurvey().id)),
+            css: 'link-to-attach',
+            innerCss: 'icon-cloud',
+            title: 'Attach survey to your SurveyJS service account...'
+        };
     }
+    toolbarItem;
 
     isEditMode = ko.observable(false);
     edit(model, event) {
