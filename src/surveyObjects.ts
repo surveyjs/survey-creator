@@ -107,7 +107,7 @@ export class SurveyObjects {
         var objs = [];
         if (this.survey == null) {
             this.koObjects(objs);
-            this.koSelected(null);
+            this.selectObject(null);
             return;
         }
         var root = this.createItem(this.survey, null);
@@ -119,7 +119,7 @@ export class SurveyObjects {
             this.buildElements(objs, page.elements, pageItem);
         }
         this.koObjects(objs);
-        this.koSelected(this.survey);
+        this.selectObject(this.survey)
     }
     private buildElements(objs: Array<any>, elements: Array<Survey.IElement>, parentItem: SurveyObjectItem) {
         for (var i = 0; i < elements.length; i++) {

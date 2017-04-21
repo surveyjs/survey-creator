@@ -454,7 +454,7 @@ export class SurveyEditor {
             var el = document.getElementById("select2-objectSelector-container"); //TODO
             if(el) {
                 var item = this.surveyObjects.koSelected();
-                if(item) {
+                if(item && item.text) {
                     el.innerText = item.text();
                 }
             }

@@ -11,7 +11,7 @@ QUnit.test("Initial objects building", function (assert) {
     var objects = new SurveyObjects(ko.observableArray(), ko.observable());
     objects.survey = survey;
     assert.equal(objects.koObjects().length, 1 + 3 + 2 + 1 + 2, "survey + 3 pages + 5 questions.");
-    assert.equal(objects.koSelected(), survey, "The selected object is survey.");
+    assert.equal(objects.koSelected().value, survey, "The selected object is survey.");
 
     assert.equal(objects.koObjects()[0].text(), "Survey", "The first item is Survey");
     assert.equal(objects.koObjects()[4].text(), intend + "page2", "The second page");
@@ -34,7 +34,7 @@ QUnit.test("Initial objects building, panel support", function (assert) {
     var objects = new SurveyObjects(ko.observableArray(), ko.observable());
     objects.survey = survey;
     assert.equal(objects.koObjects().length, 1 + 2 + 2 + 6, "survey + 2 pages + 2 panels +  5 questions.");
-    assert.equal(objects.koSelected(), survey, "The selected object is survey.");
+    assert.equal(objects.koSelected().value, survey, "The selected object is survey.");
     assert.equal(objects.koObjects()[0].text(), "Survey", "The first item is Survey");
     assert.equal(objects.koObjects()[3].text(), intend + intend + "panel1", "The first panel");
     assert.equal(objects.koObjects()[4].text(), intend + intend + intend + "q2", "q2");
