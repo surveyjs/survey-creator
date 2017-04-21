@@ -53,6 +53,7 @@ export class SurveyEditor {
     private showJSONEditorTabValue: boolean;
     private showTestSurveyTabValue: boolean;
     private showEmbededSurveyTabValue: boolean;
+    private select2: any = null;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
@@ -448,6 +449,16 @@ export class SurveyEditor {
             this.survey.selectedElement = null;
         }
         this.koCanDeleteObject(canDeleteObject);
+        //Select2 work-around
+        if(this.select2) {
+            var el = document.getElementById("select2-objectSelector-container"); //TODO
+            if(el) {
+                var item = this.surveyObjects.koSelected();
+                if(item) {
+                    el.innerText = item.text();
+                }
+            }
+        }
     }
     private applyBinding() {
         if (this.renderedElement == null) return;
@@ -471,7 +482,7 @@ export class SurveyEditor {
 
         this.jsonEditor.init();
         if(jQuery && jQuery()["select2"]) {
-            jQuery("#objectSelector")["select2"]();
+            this.select2 = jQuery("#objectSelector")["select2"]();
             jQuery("#objectSelector").width("100%");
         }
     }
