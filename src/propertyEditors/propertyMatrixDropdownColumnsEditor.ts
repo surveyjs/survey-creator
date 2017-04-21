@@ -59,8 +59,7 @@ export class SurveyPropertyMatrixDropdownColumnsItem {
     public cellTypeChoices: Array<any>;
     constructor(public column: Survey.MatrixDropdownColumn, public options = null) {
         this.editColumn = new Survey.MatrixDropdownColumn(column.name, column.title);
-        //TODO set directly
-        if(column["locOwner"]) this.editColumn["locOwner"] = column["locOwner"];
+        this.editColumn.colOwner = column.colOwner;
         this.copyColumn(this.column, this.editColumn);
         
         this.cellTypeChoices = this.getPropertyChoices("cellType");
