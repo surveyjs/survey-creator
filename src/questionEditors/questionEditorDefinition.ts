@@ -56,10 +56,12 @@ export class SurveyQuestionEditorDefinition {
             tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
         },
         "matrixdropdowncolumn@text" : {
-            properties: ["inputType", "placeHolder"]
+            properties: ["inputType", "placeHolder"],
+            tabs: [{name: "validators", index: 10}]
         },
         "matrixdropdowncolumn@comment" : {
-            properties: ["placeHolder"]
+            properties: ["placeHolder"],
+            tabs: [{name: "validators", index: 10}]
         },
         "multipletextitem": {
             properties: ["inputType", "placeHolder"],
