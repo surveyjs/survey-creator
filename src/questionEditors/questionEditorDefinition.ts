@@ -61,6 +61,10 @@ export class SurveyQuestionEditorDefinition {
         "matrixdropdowncolumn@comment" : {
             properties: ["placeHolder"]
         },
+        "multipletextitem": {
+            properties: ["inputType", "placeHolder"],
+            tabs: [{name: "validators", index: 10}]
+        },
         "panel": {
             properties: ["name", "title", {name: "visible", category: "checks"} ],
             tabs: [{name: "visibleIf", index: 100}]

@@ -39,7 +39,7 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
         this.koCanEdit = ko.computed(function () { return self.koCellType() != "default"; });
         this.koEditorName = ko.computed(function() { return editorLocalization.getString("pe.columnEdit")["format"](self.koName());});
     }
-    protected createSurveyQuestionEditor() { return new SurveyQuestionEditor(this.column, null, "matrixdropdowncolumn@" + this.koCellType());; }
+    protected createSurveyQuestionEditor() { return new SurveyQuestionEditor(this.column, null, "matrixdropdowncolumn@" + this.koCellType()); }
     public hasError(): boolean {
         if(super.hasError()) return true;
         this.koHasError(!this.koName());

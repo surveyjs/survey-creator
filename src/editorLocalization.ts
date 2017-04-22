@@ -114,6 +114,7 @@ export var defaultStrings = {
         text: "Text",
         required: "Required?",
         columnEdit: "Edit column: {0}",
+        itemEdit: "Edit item: {0}",
         
         hasOther: "Has other item",
         name: "Name",
@@ -151,7 +152,8 @@ export var defaultStrings = {
             rateValues: "Rate Values",
             choicesByUrl: "Choices from Web",
             matrixChoices: "Default Choices",
-            multipleTextItems: "Text Inputs"
+            multipleTextItems: "Text Inputs",
+            validators: "Validators"
         },
 
         editProperty: "Edit property '{0}'",

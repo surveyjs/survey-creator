@@ -2,51 +2,60 @@
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyHelper} from "../surveyHelper";
 import {editorLocalization} from "../editorLocalization";
-import {SurveyPropertyValidatorsEditor} from "./propertyValidatorsEditor";
+import {SurveyQuestionEditor} from "../questionEditors/questionEditor";
+import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./propertyNestedPropertyEditor"
 import * as Survey from "survey-knockout";
 import * as ko from "knockout";
 
-export class SurveyPropertyTextItemsEditor extends SurveyPropertyItemsEditor {
+export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     constructor() {
         super();
     }
     public get editorType(): string { return "textitems"; }
-    protected createNewEditorItem(): any {
+    protected createNewEditorItem(): any { 
+        var newItem = new Survey.MultipleTextItem(this.getNewName());
+        //newColumn.colOwner = TODO set colOwner.
+        return new SurveyPropertyTextItemsItem(newItem); 
+    }
+    protected createEditorItem(item: any) { return new SurveyPropertyTextItemsItem(item); }
+    protected createItemFromEditorItem(editorItem: any) {  return editorItem.item; }
+
+    private getNewName(): string {
         var objs = [];
         var items = this.koItems();
         for (var i = 0; i < items.length; i++) {
             objs.push({ name: items[i].koName() });
         }
-        var editItem = { koName: ko.observable(SurveyHelper.getNewName(objs, "text")), koTitle: ko.observable(), koIsRequired: ko.observable(false) };
-        this.createValidatorsEditor(editItem, []);
-        return editItem;
-    }
-    protected createEditorItem(item: any) {
-        var editItem = { koName: ko.observable(item.name), koTitle: ko.observable(item.title), koIsRequired: ko.observable(item.isRequired) };
-        this.createValidatorsEditor(editItem, item.validators);
-        return editItem;
-    }
-    protected createItemFromEditorItem(editorItem: any) {
-        var itemText = new Survey.MultipleTextItem(editorItem.koName(), editorItem.koTitle());
-        itemText.isRequired = editorItem.koIsRequired();
-        itemText.validators = editorItem.validators;
-        return itemText;
-    }
-    private createValidatorsEditor(item: any, validators: Array<any>) {
-        item.validators = validators.slice();
-        var self = this;
-        var onItemChanged = function (newValue: any) { item.validators = newValue; item.koText(self.getText(newValue.length)); };
-        var propertyEditor = new SurveyPropertyValidatorsEditor();
-        item.editor = propertyEditor;
-        propertyEditor.onChanged = (newValue: any) => { onItemChanged(newValue); };
-        propertyEditor.object = item;
-        propertyEditor.title(editorLocalization.getString("pe.editProperty")["format"]("Validators"));
-        propertyEditor.value = item.validators;
-        item.koText = ko.observable(this.getText(validators.length));
-    }
-    private getText(length: number): string {
-        return editorLocalization.getString("pe.items")["format"](length);
+        return SurveyHelper.getNewName(objs, "text");
     }
 }
+
+export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem {
+    koName: any; koTitle: any;  koIsRequired: any;
+    koEditorName: any; koHasError: any;
+    constructor(public item: Survey.MultipleTextItem) {
+        super();
+        this.koName = ko.observable(item.name);
+        this.koTitle = ko.observable(item.name === item.title ? "" : item.title);
+        this.koIsRequired = ko.observable(this.item.isRequired);
+        this.koHasError = ko.observable(false);
+
+        var self = this;
+        this.koEditorName = ko.computed(function() { return editorLocalization.getString("pe.itemEdit")["format"](self.koName());});
+    }
+    protected createSurveyQuestionEditor() { return new SurveyQuestionEditor(this.item, null, "multipletextitem"); }
+    public hasError(): boolean {
+        if(super.hasError()) return true;
+        this.koHasError(!this.koName());
+        return this.koHasError();
+    }
+    public apply() {
+        super.apply();
+        this.item.name = this.koName();
+        this.item.title = this.koTitle();
+        this.item.isRequired = this.koIsRequired();
+    }
+}
+
 
 SurveyPropertyEditorBase.registerEditor("textitems", function (): SurveyPropertyEditorBase { return new SurveyPropertyTextItemsEditor(); });
