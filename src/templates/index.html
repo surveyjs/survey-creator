@@ -5,47 +5,12 @@
         <li data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
         <li data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
 
-        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
-            <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanUndo, click: doUndoClick"><span data-bind="text: $root.getLocString('ed.undo')"></span></button>
+        <!-- ko foreach: toolbarItems -->
+        <li class="svd_actions" data-bind="css: $data.css, visible: visible, attr: { id: id }">
+            <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+            <!-- /ko -->
         </li>
-        <li class="svd_actions" data-bind="visible: koIsShowDesigner">
-            <button type="button" class="btn btn-primary" data-bind="enable:undoRedo.koCanRedo, click: doRedoClick"><span data-bind="text: $root.getLocString('ed.redo')"></span></button>
-        </li>
-        <li class="svd_actions" data-bind="visible: (koIsShowDesigner() && koShowOptions())">
-            <div class="btn-group inline">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: $root.getLocString('ed.options')">
-                    Options 
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li data-bind="css: {active: koGenerateValidJSON}"><a href="#" data-bind="click:generateValidJSONClick, text: $root.getLocString('ed.generateValidJSON')"></a></li>
-                    <li data-bind="css: {active: !koGenerateValidJSON()}"><a href="#" data-bind="click:generateReadableJSONClick, text: $root.getLocString('ed.generateReadableJSON')"></a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="svd_actions" data-bind="visible: koViewType() == 'test'">
-            <div class="btn-group inline">
-                <button type="button" id="surveyTestWidth" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span data-bind="text: $root.getLocString('ed.testSurveyWidth') + ' ' + $root.koTestSurveyWidth()"></span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="surveyTestWidth">
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '100%')">100%</a></li>
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '1200px')">1200px</a></li>
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '1000px')">1000px</a></li>
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '800px')">800px</a></li>
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '600px')">600px</a></li>
-                    <li><a href="#" data-bind="click: koTestSurveyWidth.bind($data, '400px')">400px</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="svd_actions" data-bind="visible: koShowSaveButton">
-            <button type="button" class="btn btn-primary svd_save_btn" data-bind="click: saveButtonClick"><span data-bind="text: $root.getLocString('ed.saveSurvey')"></span></button>
-        </li>
-        <li class="svd_actions svd_state" data-bind="visible: koShowState">
-            <span class="icon" data-bind="css: 'icon-' + koState()"></span>
-            <span data-bind="text: koStateText"></span>
-        </li>
+        <!-- /ko -->
     </ul>
 
     <div class="panel svd_content">

@@ -16,6 +16,7 @@ export {
 export {SurveyPropertyTextItemsEditor} from "../propertyEditors/propertyTextItemsEditor";
 export {SurveyPropertyItemsEditor} from "../propertyEditors/propertyItemsEditor";
 export {SurveyPropertyItemValuesEditor} from "../propertyEditors/propertyItemValuesEditor";
+export {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "../propertyEditors/propertyNestedPropertyEditor"
 export {SurveyPropertyDropdownColumnsEditor, SurveyPropertyMatrixDropdownColumnsItem}
     from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";

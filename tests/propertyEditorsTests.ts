@@ -142,7 +142,6 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (asser
     itemValueProperty.value = columns;
     assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
     assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
-    assert.equal(itemValueProperty.koItems()[0].editColumn.choices.length, 3, "there are two elements");
     itemValueProperty.onAddClick();
     itemValueProperty.koItems()[2].koCellType("checkbox");
     itemValueProperty.koItems()[2].koName("column 3");
@@ -159,10 +158,10 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (
     itemValueProperty.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => { columns = newValue; };
     itemValueProperty.value = columns;
 
-    assert.equal(itemValueProperty.columnEditor, null, "It is null by default");
+    assert.equal(itemValueProperty.koEditItem(), null, "It is null by default");
     itemValueProperty.koEditItem(itemValueProperty.koItems()[1]);
-    assert.notEqual(itemValueProperty.columnEditor.obj, null, "The question editor obj is not null");
-    assert.equal(itemValueProperty.columnEditor.obj.getType(), "matrixdropdowncolumn", "columnEditor edit the second item");
+    assert.notEqual(itemValueProperty.koEditItem().itemEditor.obj, null, "The question editor obj is not null");
+    assert.equal(itemValueProperty.koEditItem().itemEditor.obj.getType(), "matrixdropdowncolumn", "itemEditor edit the second item");
 });
 
 QUnit.test("Text property test - two way binding", function (assert) {

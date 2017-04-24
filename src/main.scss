@@ -361,6 +361,7 @@ $editor-height:75vh;
 
 .svd-manage {
     margin: 10px 15px;
+    position: relative;
 
     .svd-manage-control {
         width: calc(100% - 150px);
@@ -381,7 +382,7 @@ $editor-height:75vh;
     }
     .svd-manage-buttons {
         position: absolute;
-        top: 10px;
+        top: 0;
         right: 0;
         width: 120px;
         text-align: right;
@@ -401,6 +402,26 @@ $editor-height:75vh;
         .icon-edit {
             margin-right: 20px;
         }
+    }
+}
+.svd_container {
+    .svd_menu > li.link-to-attach > a {
+        width: auto;
+        color: #18a689;
+    }
+    .svd_menu > li.link-to-attach > a:hover {
+        background-color: transparent;
+        color: #1ab394;
+        border: none;
+    }
+    .svd_actions.link-to-attach {
+        margin-left: 5px;
+        font-weight: 500;
+        background-color: transparent;
+        border: none;
+    }
+    .link-to-attach span:last-child {
+        margin-left: 5px;
     }
 }
 
@@ -494,5 +515,9 @@ $editor-height:75vh;
 }
 .icon-saving:before {
     background-image: url('./images/Saving_24x24.svg');
+    @include svg-icon(24px);
+}
+.icon-cloud:before {
+    background-image: url('./images/Cloud_24x24.svg');
     @include svg-icon(24px);
 }

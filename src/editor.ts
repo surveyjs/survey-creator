@@ -17,6 +17,19 @@ var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates
 import * as Survey from "survey-knockout";
 import {SurveyForDesigner} from "./surveyjsObjects"
 
+export interface IToolbarItem {
+    id: string;
+    visible: KnockoutObservable<boolean> | boolean;
+    title: KnockoutObservable<string> | string;
+    enabled?: KnockoutObservable<boolean> | boolean;
+    action?: () => void;
+    css?: KnockoutObservable<string> | string;
+    innerCss?: KnockoutObservable<string> | string;
+    data?: any;
+    template?: string;
+    items?: KnockoutObservableArray<IToolbarItem>;
+}
+
 export class SurveyEditor {
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
     private renderedElement: HTMLElement;
@@ -40,6 +53,7 @@ export class SurveyEditor {
     private showJSONEditorTabValue: boolean;
     private showTestSurveyTabValue: boolean;
     private showEmbededSurveyTabValue: boolean;
+    private select2: any = null;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
@@ -67,7 +81,6 @@ export class SurveyEditor {
     doUndoClick: any; doRedoClick: any;
     deleteObjectClick: any;
     koState = ko.observable("");
-    koStateText = ko.computed(() => this.koState() && (this.koState().charAt(0).toUpperCase() + this.koState().slice(1)));
     runSurveyClick: any; embedingSurveyClick: any;
     saveButtonClick: any;
     draggingToolboxItem: any; clickToolboxItem: any;
@@ -76,7 +89,7 @@ export class SurveyEditor {
     constructor(renderedElement: any = null, options: any = null) {
 
         this.koShowOptions = ko.observable();
-        this.koGenerateValidJSON = ko.observable();
+        this.koGenerateValidJSON = ko.observable(true);
         this.koDesignerHeight = ko.observable();
         this.setOptions(options);
         this.koCanDeleteObject = ko.observable(false);
@@ -140,19 +153,74 @@ export class SurveyEditor {
         if (renderedElement) {
             this.render(renderedElement);
         }
+
+        this.toolbarItems.push({
+            id: 'svd-undo',
+            visible: this.koIsShowDesigner,
+            enabled: this.undoRedo.koCanUndo,
+            action: this.doUndoClick,
+            title: this.getLocString('ed.undo')
+        });
+        this.toolbarItems.push({
+            id: 'svd-redo',
+            visible: this.koIsShowDesigner,
+            enabled: this.undoRedo.koCanRedo,
+            action: this.doRedoClick,
+            title: this.getLocString('ed.redo')
+        });
+        this.toolbarItems.push({
+            id: 'svd-options',
+            visible: ko.computed(() => this.koIsShowDesigner() && this.koShowOptions()),
+            title: this.getLocString('ed.options'),
+            template: 'svd-toolbar-options',
+            items: ko.observableArray([
+                { id: 'svd-valid-json', visible: true, css: ko.computed(() => (this.koGenerateValidJSON() ? 'active' : '')), action: this.generateValidJSONClick, title: this.getLocString('ed.generateValidJSON') },
+                { id: 'svd-readable-json', visible: true, css: ko.computed(() => (!this.koGenerateValidJSON() ? 'active' : '')), action: this.generateReadableJSONClick, title: this.getLocString('ed.generateReadableJSON') }
+            ])
+        });
+        this.toolbarItems.push({
+            id: 'svd-test',
+            visible: ko.computed(() => this.koViewType() === 'test'),
+            title: ko.computed(() => this.getLocString('ed.testSurveyWidth') + ' ' + this.koTestSurveyWidth()),
+            template: 'svd-toolbar-options',
+            items: ko.observableArray([
+                { id: 'svd-100-json', visible: true, action: () => this.koTestSurveyWidth('100%'), title: '100%' },
+                { id: 'svd-1200px-json', visible: true, action: () => this.koTestSurveyWidth('1200px'), title: '1200px' },
+                { id: 'svd-1000px-json', visible: true, action: () => this.koTestSurveyWidth('1000px'), title: '1000px' },
+                { id: 'svd-800px-json', visible: true, action: () => this.koTestSurveyWidth('800px'), title: '800px' },
+                { id: 'svd-600px-json', visible: true, action: () => this.koTestSurveyWidth('600px'), title: '600px' },
+                { id: 'svd-400px-json', visible: true, action: () => this.koTestSurveyWidth('400px'), title: '400px' },
+            ])
+        });
+        this.toolbarItems.push({
+            id: 'svd-save',
+            visible: this.koShowSaveButton,
+            action: this.saveButtonClick,
+            innerCss: 'svd_save_btn',
+            title: this.getLocString('ed.saveSurvey')
+        });
+        this.toolbarItems.push({
+            id: 'svd-state',
+            visible: this.koShowState,
+            css: 'svd_state',
+            innerCss: ko.computed(() => 'icon-' + this.koState()),
+            title: ko.computed(() => this.koState() && (this.koState().charAt(0).toUpperCase() + this.koState().slice(1))),
+            template: 'svd-toolbar-state'
+        });
     }
     protected setOptions(options: any) {
+        if(!options) options = { generateValidJSON: true };
         this.options = options;
-        this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
-        this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
-        this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
-        this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
-        this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
-        this.isAutoSave = options && typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
-        if(options && options.designerHeight) {
+        this.showJSONEditorTabValue = typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
+        this.showTestSurveyTabValue = typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
+        this.showEmbededSurveyTabValue = typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
+        this.koShowOptions(typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
+        this.koGenerateValidJSON(this.options.generateValidJSON);
+        this.isAutoSave = typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
+        if(options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
-        if(options && options.objectsIntend) {
+        if(options.objectsIntend) {
             SurveyObjects.intend = options.objectsIntend;
         }
         this.koDesignerHeight()
@@ -199,6 +267,7 @@ export class SurveyEditor {
         }
     }
     public get toolbox(): QuestionToolbox { return this.toolboxValue; }
+    public toolbarItems = ko.observableArray<IToolbarItem>();
     public get customToolboxQuestionMaxCount(): number { return this.toolbox.copiedItemMaxCount; }
     public set customToolboxQuestionMaxCount(value: number) { this.toolbox.copiedItemMaxCount = value; }
     public get state(): string { return this.stateValue; }
@@ -381,6 +450,16 @@ export class SurveyEditor {
             this.survey.selectedElement = null;
         }
         this.koCanDeleteObject(canDeleteObject);
+        //Select2 work-around
+        if(this.select2) {
+            var el = document.getElementById("select2-objectSelector-container"); //TODO
+            if(el) {
+                var item = this.surveyObjects.koSelected();
+                if(item && item.text) {
+                    el.innerText = item.text();
+                }
+            }
+        }
     }
     private applyBinding() {
         if (this.renderedElement == null) return;
@@ -404,7 +483,7 @@ export class SurveyEditor {
 
         this.jsonEditor.init();
         if(jQuery && jQuery()["select2"]) {
-            jQuery("#objectSelector")["select2"]();
+            this.select2 = jQuery("#objectSelector")["select2"]();
             jQuery("#objectSelector").width("100%");
         }
     }

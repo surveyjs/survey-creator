@@ -3,7 +3,7 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-textitems">
 <div class="panel">
-    <table class="table">
+    <table class="table" data-bind="visible: koIsList">
         <thead>
             <tr>
                 <th data-bind="text: $root.getLocString('pe.isRequired')"></th>
@@ -15,16 +15,28 @@
         <tbody>
             <!-- ko foreach: koItems -->
             <tr>
-                <td><input type="checkbox" data-bind="checked: koIsRequired" /></td>
+                <td>
+                    <input type="checkbox" data-bind="checked: koIsRequired" />
+                    <button type="button" class="btn" data-bind="click: $parent.onEditItemClick">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                </td>
                 <td><input type="text" class="form-control" data-bind="value:koName" style="width:180px" /></td>
                 <td><input type="text" class="form-control" data-bind="value:koTitle" style="width:180px" /></td>
                 <td><button type="button" class="btn" data-bind="click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
             </tr>
             <!-- /ko -->
             <tr>
-                <td colspan="4"><input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/></td>
+                <td colspan="4">
+                    <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/>
+                    <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+                </td>
             </tr>
         </tbody>
     </table>
+     <!-- ko if: !koIsList() -->
+        <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
+        <!-- /ko -->
+    <!-- /ko -->
 </div>
 </script>

@@ -1,0 +1,20 @@
+﻿<script type="text/html" id="svd-toolbar-button">
+    <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss"><span data-bind="text: title"></span></button>
+</script>
+<script type="text/html" id="svd-toolbar-options">
+    <div class="btn-group inline">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span data-bind="text: title"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <!-- ko foreach: items -->
+            <li data-bind="css: $data.css"><a href="#" data-bind="click: action, text: title"></a></li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</script>
+<script type="text/html" id="svd-toolbar-state">
+    <span class="icon" data-bind="css: innerCss"></span>
+    <span data-bind="text: title"></span>
+</script>

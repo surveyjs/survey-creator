@@ -3,20 +3,24 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-validators">
 <div class="panel">
-    <div class="panel-heading">
-        <div class="row input-group">
-            <button type="button" class="dropdown-toggle input-group-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-            <ul class="dropdown-menu input-group">
-                <!-- ko foreach: availableValidators -->
-                <li><a href="#" data-bind="click: $parent.onAddClick($data)"><span data-bind="text:$data"></span></a></li>
-                <!-- /ko  -->
-            </ul>
-            <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
-            <span class="input-group-btn">
-                <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
-            </span>
+    <div class="row" style="margin-bottom:10px">
+        <div class="col-lg-12">
+            <div class="input-group form-inline">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- ko foreach: availableValidators -->
+                        <li><a href="#" data-bind="click: $parent.onAddClick"><span data-bind="text:$data"></span></a></li>
+                        <!-- /ko  -->
+                    </ul>
+                </div>
+                <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
+                <span class="input-group-btn">
+                    <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                </span>
+            </div>
         </div>
     </div>
     <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>

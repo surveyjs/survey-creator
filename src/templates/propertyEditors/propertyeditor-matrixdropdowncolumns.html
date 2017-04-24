@@ -33,23 +33,17 @@
             </tr>
             <!-- /ko -->
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <div class="row btn-toolbar">
                         <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/>
-                        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')"" />
+                        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
      <!-- ko if: !koIsList() -->
-        <div style="padding: 5px">
-            <button type="button" class="btn" data-bind="click: onCancelEditItemClick">
-                <span class="glyphicon glyphicon-list-alt"></span>
-            </button>
-            <span data-bind="text: koEditItem().koEditorName"></span>
-        </div>
-        <!-- ko template: { name: "questioneditor-content", data: columnEditor } -->
+        <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
         <!-- /ko -->
     <!-- /ko -->
 </script>
