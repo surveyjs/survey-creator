@@ -169,7 +169,9 @@ export class SurveysManager {
     }
 
     add(onAdd?: (success: boolean, result: string, response: any) => void) {
+        this.isLoading(true);
         this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
+
             var newSurveyDescription = new SurveyDescription(ko.observable(result.Name), result.CreatedAt, result.Id, result.ResultId, result.PostId)
             this.surveys.push(newSurveyDescription);
             this.setSurveys(this.surveys());
@@ -177,7 +179,8 @@ export class SurveysManager {
             this.editor.surveyPostId = result.PostId;
             this.api.saveSurvey(result.Id, this.editor.text);
             this.currentSurvey(newSurveyDescription);
-            onAdd && onAdd(success, result, response);
+            this.isLoading(false);
+            onAdd && typeof onAdd === "function" && onAdd(success, result, response);
         });
     }
 
@@ -192,7 +195,8 @@ export class SurveysManager {
     surveyId = ko.observable<string>();
     surveys = ko.observableArray<ISurveyInfo>();
     currentSurvey = ko.observable<ISurveyInfo>();
-    currentSurveyName = ko.observable<string>("")
+    currentSurveyName = ko.observable<string>("");
+    isLoading = ko.observable<boolean>(false);
 
     get cssEdit () {
         return this.isEditMode() ? 'icon-saved' : 'icon-edit';
