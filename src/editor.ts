@@ -89,7 +89,7 @@ export class SurveyEditor {
     constructor(renderedElement: any = null, options: any = null) {
 
         this.koShowOptions = ko.observable();
-        this.koGenerateValidJSON = ko.observable();
+        this.koGenerateValidJSON = ko.observable(true);
         this.koDesignerHeight = ko.observable();
         this.setOptions(options);
         this.koCanDeleteObject = ko.observable(false);
@@ -209,17 +209,18 @@ export class SurveyEditor {
         });
     }
     protected setOptions(options: any) {
+        if(!options) options = { generateValidJSON: true };
         this.options = options;
-        this.showJSONEditorTabValue = options && typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
-        this.showTestSurveyTabValue = options && typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
-        this.showEmbededSurveyTabValue = options && typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
-        this.koShowOptions(options && typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
-        this.koGenerateValidJSON(this.options && this.options.generateValidJSON);
-        this.isAutoSave = options && typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
-        if(options && options.designerHeight) {
+        this.showJSONEditorTabValue = typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
+        this.showTestSurveyTabValue = typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
+        this.showEmbededSurveyTabValue = typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
+        this.koShowOptions(typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
+        this.koGenerateValidJSON(this.options.generateValidJSON);
+        this.isAutoSave = typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
+        if(options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
-        if(options && options.objectsIntend) {
+        if(options.objectsIntend) {
             SurveyObjects.intend = options.objectsIntend;
         }
         this.koDesignerHeight()
