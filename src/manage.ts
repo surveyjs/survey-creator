@@ -86,7 +86,7 @@ export class SurveysManager {
         editor.showState = true;
         editor.saveSurveyFunc = (saveNo, callback) => {
             if(!editor.surveyId && !this.surveyId()) {
-                this.add(success => callback(saveNo, success));
+                this.addHandler(success => callback(saveNo, success));
             }
             if(!!editor.surveyId || !!this.surveyId()) {
                 this.api.saveSurvey(editor.surveyId || this.surveyId(), editor.text, success => callback(saveNo, success));
@@ -168,7 +168,7 @@ export class SurveysManager {
         }
     }
 
-    add(onAdd?: (success: boolean, result: string, response: any) => void) {
+    addHandler(onAdd?: (success: boolean, result: string, response: any) => void) {
         this.isLoading(true);
         this.api.createSurvey("NewSurvey", (success: boolean, result: any, response: any) => {
 
@@ -180,8 +180,12 @@ export class SurveysManager {
             this.api.saveSurvey(result.Id, this.editor.text);
             this.currentSurvey(newSurveyDescription);
             this.isLoading(false);
-            onAdd && typeof onAdd === "function" && onAdd(success, result, response);
+            onAdd && onAdd(success, result, response);
         });
+    }
+
+    add() {
+        this.addHandler();
     }
 
     remove() {
