@@ -1,5 +1,6 @@
 ﻿<script type="text/html" id="surveys-manage">
     <div class="svd-manage">
+        <div class="svd-manage-mask" data-bind="visible: isLoading"></div>
         <div class="svd-manage-control">
             <select class="svd-manage-select" data-bind="visible: !isEditMode(), options: surveys,
                         optionsText: 'name',
