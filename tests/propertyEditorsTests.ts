@@ -106,6 +106,18 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (assert)
     assert.equal(choices[1].value, "item 2", "the second value is 'item 2'");
     assert.equal(choices[1].hasText, false, "the second text is null");
 });
+QUnit.test("SurveyPropertyItemValue: Value and Text are same for text with several locales: #366", function (assert) {
+    var choices : Array<Survey.ItemValue> = [];
+    choices.push(new Survey.ItemValue("item 1"));
+    choices[0].locText.setLocaleText("default", "item 1");
+    choices[0].locText.setLocaleText("de", "item 1 - de");
+    var itemValueProperty = new SurveyPropertyItemValuesEditor();
+    itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { Survey.ItemValue.setData(choices, newValue); };
+    itemValueProperty.value = choices;
+    itemValueProperty.onApplyClick();
+    assert.equal(choices.length, 1, "there are two items");
+    assert.equal(choices[0].text, "item 1", "the text is 'item 1'");
+});
 QUnit.test("SurveyPropertyItemValue: Value and Text are same and editor.alwaySaveTextInPropertyEditors = true", function (assert) {
     var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor();

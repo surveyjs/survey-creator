@@ -55,21 +55,24 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     protected createItemFromEditorItem(editorItem: any) {
         var alwaySaveTextInPropertyEditors = this.options && this.options.alwaySaveTextInPropertyEditors;
         var text = editorItem.koText();
-        if (!alwaySaveTextInPropertyEditors && editorItem.koText() == editorItem.koValue()) {
+        if (!alwaySaveTextInPropertyEditors && !this.isMultipleLocaleInText(editorItem.item) && editorItem.koText() == editorItem.koValue()) {
             text = null;
         }
         var itemValue = new Survey.ItemValue(null);
-        //TODO use values directly
-        if(editorItem.item && itemValue["setData"]) {
-            itemValue["setData"](editorItem.item);
+        if(editorItem.item) {
+            itemValue.setData(editorItem.item);
         }
         itemValue.value = editorItem.koValue();
-        if(itemValue["locText"]) {
-            itemValue["locText"]["setLocaleText"](this.locale, text);
-        } else {
-            if(text) itemValue.text = text;
-        }
+        itemValue.locText.setLocaleText(this.locale, text);
         return itemValue;
+    }
+    private isMultipleLocaleInText(item: any) {
+        if(!item || !item.locText) return false;
+        //TODO use hasNonDefaultLocale directly.
+        var keys = Object.keys(item.locText.values);
+        if(keys.length == 0) return false;
+        if(keys.length > 1) return true;
+        return keys[0] != "default";
     }
     protected onBeforeApply() {
         if (this.koActiveView() != "form") {
