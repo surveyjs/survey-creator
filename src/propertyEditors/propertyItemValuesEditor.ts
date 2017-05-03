@@ -55,7 +55,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     protected createItemFromEditorItem(editorItem: any) {
         var alwaySaveTextInPropertyEditors = this.options && this.options.alwaySaveTextInPropertyEditors;
         var text = editorItem.koText();
-        if (!alwaySaveTextInPropertyEditors && !this.isMultipleLocaleInText(editorItem.item) && editorItem.koText() == editorItem.koValue()) {
+        if (!alwaySaveTextInPropertyEditors && editorItem.koText() == editorItem.koValue()) {
             text = null;
         }
         var itemValue = new Survey.ItemValue(null);
@@ -65,14 +65,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         itemValue.value = editorItem.koValue();
         itemValue.locText.setLocaleText(this.locale, text);
         return itemValue;
-    }
-    private isMultipleLocaleInText(item: any) {
-        if(!item || !item.locText) return false;
-        //TODO use hasNonDefaultLocale directly.
-        var keys = Object.keys(item.locText.values);
-        if(keys.length == 0) return false;
-        if(keys.length > 1) return true;
-        return keys[0] != "default";
     }
     protected onBeforeApply() {
         if (this.koActiveView() != "form") {
