@@ -1,7 +1,7 @@
 ﻿import * as ko from "knockout";
 import * as jQuery from "jquery";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
-import {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions}  from "../propertyEditors/propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyQuestionEditorGeneralProperty, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperties} from "./questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "./questionEditorDefinition";
@@ -15,8 +15,8 @@ export class SurveyPropertyEditorShowWindow {
         this.koVisible = ko.observable(false);
         this.koEditor = ko.observable(null);
     }
-    public show(questionBase: Survey.QuestionBase, onChanged: (question: Survey.QuestionBase) => any) {
-        var editor = new SurveyQuestionEditor(questionBase, this.onCanShowPropertyCallback);
+    public show(questionBase: Survey.QuestionBase, onChanged: (question: Survey.QuestionBase) => any, options: ISurveyObjectEditorOptions = null) {
+        var editor = new SurveyQuestionEditor(questionBase, this.onCanShowPropertyCallback, null, options);
         editor.onChanged = onChanged;
 
         this.koEditor(editor);
@@ -56,7 +56,8 @@ export class SurveyQuestionEditor {
     public onResetClick: any;
     koTabs: any; koActiveTab: any; koTitle: any;
     onTabClick: any;
-    constructor(public obj: Survey.Base, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean, public className: string = null) {
+    constructor(public obj: Survey.Base, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean, 
+        public className: string = null, public options: ISurveyObjectEditorOptions = null) {
         var self = this;
         if(!this.className) this.className = this.obj.getType();
         this.properties = new SurveyQuestionProperties(obj, onCanShowPropertyCallback);
@@ -114,7 +115,7 @@ export class SurveyQuestionEditor {
             var tabItem = tabNames[i];
             var property = this.properties.getProperty(tabItem.name);
             if (!property) continue;
-            var editorTab = new SurveyQuestionEditorTabProperty(this.obj, property);
+            var editorTab = new SurveyQuestionEditorTabProperty(this.obj, property, this.options);
             if (tabItem.title) editorTab.title = tabItem.title;
             tabs.push(editorTab);
         }
@@ -162,12 +163,14 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
 
 export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase {
     private propertyEditorValue: SurveyPropertyModalEditor;
-    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty) {
+    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, public options: ISurveyObjectEditorOptions = null) {
         super(obj);
         this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorBase.createEditor(this.property.type, null);
         var self = this;
+        this.propertyEditorValue.options = options;
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
         this.propertyEditorValue.value = this.getValue(this.property);
+        this.propertyEditorValue.editablePropertyName = this.property.name;
     }
     private doOnGetLocale(): string {
         if(this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();

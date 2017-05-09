@@ -30,7 +30,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         }
         return result;
     }
-    protected createNewEditorItem(): any { return { koValue: ko.observable(), koText: ko.observable(), koHasError: ko.observable(false) }; }
+    protected createNewEditorItem(): any { 
+        var itemValue = new Survey.ItemValue(null);
+        if(this.options) {
+            this.options.onItemValueAddedCallback(this.editablePropertyName, itemValue);
+        }
+        return this.createEditorItem(itemValue); 
+    }
     protected createEditorItem(item: any) {
         var itemValue = new Survey.ItemValue(null);
         if( itemValue["setData"]) {

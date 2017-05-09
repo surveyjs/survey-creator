@@ -4,6 +4,7 @@ import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/proper
 import {SurveyObjectProperty} from "../src/objectProperty";
 import {SurveyPropertyTextEditor} from "../src/propertyEditors/propertyModalEditor";
 import {SurveyPropertyResultfullEditor} from "../src/propertyEditors/propertyRestfullEditor";
+import {ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
 import * as Survey from "survey-knockout";
 import "../src/propertyEditors/propertyTextItemsEditor";
 import {
@@ -16,6 +17,12 @@ import {
 } from "../src/propertyEditors/propertyValidatorsEditor";
 
 export default QUnit.module("PropertyEditorsTests");
+
+class EditorOptionsTests implements ISurveyObjectEditorOptions {
+    alwaySaveTextInPropertyEditors: boolean;
+    onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {}
+    onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
+}
 
 QUnit.test("Create correct property editor", function (assert) {
     var propertyEditor = SurveyPropertyEditorBase.createEditor("unknown", null);
@@ -111,7 +118,9 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same and editor.alwaySav
     var itemValueProperty = new SurveyPropertyItemValuesEditor();
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
     itemValueProperty.value = choices;
-    itemValueProperty.options = { alwaySaveTextInPropertyEditors: true };
+    var options = new EditorOptionsTests();
+    options.alwaySaveTextInPropertyEditors = true;
+    itemValueProperty.options = options;
     assert.equal(itemValueProperty.koItems().length, 2, "there are three elements");
     itemValueProperty.onApplyClick();
     assert.equal(choices.length, 2, "there are two items");

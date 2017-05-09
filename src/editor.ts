@@ -1,6 +1,7 @@
 ﻿import * as ko from "knockout";
 import {editorLocalization} from "./editorLocalization";
 import {SurveyObjectEditor} from "./objectEditor";
+import {ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
 import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
@@ -30,7 +31,7 @@ export interface IToolbarItem {
     items?: KnockoutObservableArray<IToolbarItem>;
 }
 
-export class SurveyEditor {
+export class SurveyEditor implements ISurveyObjectEditorOptions {
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
     private renderedElement: HTMLElement;
     private surveyjs: HTMLElement;
@@ -54,13 +55,15 @@ export class SurveyEditor {
     private showTestSurveyTabValue: boolean;
     private showEmbededSurveyTabValue: boolean;
     private select2: any = null;
+    private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
     public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
-    public alwaySaveTextInPropertyEditors: boolean = false;
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onItemValueAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onMatrixColumnAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
@@ -112,7 +115,7 @@ export class SurveyEditor {
 
         this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
 
-        this.selectedObjectEditor = new SurveyObjectEditor(this.options);
+        this.selectedObjectEditor = new SurveyObjectEditor(this);
         this.selectedObjectEditor.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
             return self.onCanShowObjectProperty(object, property);
         }
@@ -224,7 +227,6 @@ export class SurveyEditor {
             SurveyObjects.intend = options.objectsIntend;
         }
         this.koDesignerHeight()
-        if (this.selectedObjectEditor) this.selectedObjectEditor.setOptions(options);
     }
     public get survey(): SurveyForDesigner {
         return this.surveyValue;
@@ -586,7 +588,7 @@ export class SurveyEditor {
     }
     public showQuestionEditor(question: Survey.QuestionBase) {
         var self = this;
-        this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); });
+        this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); }, this);
     }
     private onQuestionEditorChanged(question: Survey.QuestionBase) {
         this.surveyObjects.nameChanged(question);
@@ -658,6 +660,21 @@ export class SurveyEditor {
             annotations.push(annotation);
         }
         return annotations;
+    }
+    //implements ISurveyObjectEditorOptions
+    get alwaySaveTextInPropertyEditors(): boolean {
+        return this.alwaySaveTextInPropertyEditorsValue;  
+    }
+    set alwaySaveTextInPropertyEditors(value: boolean) {
+        this.alwaySaveTextInPropertyEditorsValue = value;
+    }
+    onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
+        var options = {propertyName: propertyName, newItem: itemValue};
+        this.onItemValueAdded.fire(this, options);
+    }
+    onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
+        var options = {newColumn: column};
+        this.onMatrixColumnAdded.fire(this, options);
     }
 }
 

@@ -1,9 +1,10 @@
 ﻿import * as ko from "knockout";
-import {SurveyPropertyEditorBase} from "./propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
 export declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
+
 
 export class SurveyObjectProperty {
     private objectValue: any;
@@ -23,7 +24,7 @@ export class SurveyObjectProperty {
     public baseEditorType: string;
     public choices: Array<any>;
 
-    constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: any = null) {
+    constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.onPropertyChanged = onPropertyChanged;
         this.name = this.property.name;
         this.disabled = property["readOnly"];
@@ -39,6 +40,7 @@ export class SurveyObjectProperty {
         this.editor = SurveyPropertyEditorBase.createEditor(this.editorType, onItemChanged);
         this.editor.onGetLocale = this.doOnGetLocale;
         this.editor.options = propertyEditorOptions;
+        this.editor.editablePropertyName = this.property.name;
         this.editorType = this.editor.editorType;
         this.modalName = "modelEditor" + this.editorType + this.name;
         this.modalNameTarget = "#" + this.modalName;

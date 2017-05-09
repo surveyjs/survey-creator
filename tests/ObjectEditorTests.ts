@@ -1,5 +1,9 @@
 ﻿import {SurveyObjectEditor} from "../src/objectEditor";
+import {SurveyObjectProperty} from "../src/objectProperty";
 import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
+import {ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
+import {SurveyPropertyItemValuesEditor} from "../src/propertyEditors/propertyItemValuesEditor";
+import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import * as Survey from "survey-knockout";
 
 export default QUnit.module("objectEditorTests");
@@ -83,4 +87,47 @@ QUnit.test("Use onCanShowPropertyCallback", function (assert) {
     var car = new TruckDefaultValue();
     editor.selectedObject = car;
     assert.equal(editor.koProperties().length, 1, "Only one property is accepted");
+});
+
+class EditorOptionsTests implements ISurveyObjectEditorOptions {
+    alwaySaveTextInPropertyEditors: boolean;
+    propertyName: string;
+    onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
+        itemValue.value = "item1";
+        this.propertyName = propertyName;
+    }
+    onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
+        column.name = "column1";
+    }
+}
+
+QUnit.test("On new ItemValue added", function (assert) {
+    var options = new EditorOptionsTests();
+    var editor = new SurveyObjectEditor(options);
+    var question = new Survey.QuestionDropdown("q1");
+    question.choices = [];
+    editor.selectedObject = question;
+    editor.onPropertyValueChanged.add((sender, options) => { question.choices = options.newValue; });
+    var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+    var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+    itemValuesEditor.onAddClick();
+    itemValuesEditor.onApplyClick();
+    assert.equal(question.choices.length, 1, "One item is added");
+    assert.equal(question.choices[0].value, "item1", "auto generated value");
+    assert.equal(options.propertyName, "choices", "property name set correcty")
+});
+
+QUnit.test("On new Matrix Column added", function (assert) {
+    var options = new EditorOptionsTests();
+    var editor = new SurveyObjectEditor(options);
+    var question = new Survey.QuestionMatrixDropdown("q1");
+    question.columns = [];
+    editor.selectedObject = question;
+    editor.onPropertyValueChanged.add((sender, options) => { question.columns = options.newValue; });
+    var property = <SurveyObjectProperty>editor.getPropertyEditor("columns");
+    var itemValuesEditor = <SurveyPropertyDropdownColumnsEditor>property.editor;
+    itemValuesEditor.onAddClick();
+    itemValuesEditor.onApplyClick();
+    assert.equal(question.columns.length, 1, "One item is added");
+    assert.equal(question.columns[0].name, "column1", "auto generated column name");
 });

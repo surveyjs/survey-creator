@@ -1,19 +1,18 @@
 ﻿import * as ko from "knockout";
 import {SurveyObjectProperty} from "./objectProperty";
+import {ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;
-    public propertyEditorOptions: any = null;
     public koProperties: any;
     public koActiveProperty: any;
     public koHasObject: any;
     public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
     public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean;
 
-    constructor(propertyEditorOptions: any = null) {
-        this.setOptions(propertyEditorOptions);
+    constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.koProperties = ko.observableArray();
         this.koActiveProperty = ko.observable();
         this.koHasObject = ko.observable();
@@ -25,9 +24,6 @@ export class SurveyObjectEditor {
         this.selectedObjectValue = value;
         this.updateProperties();
         this.updatePropertiesObject();
-    }
-    public setOptions(propertyEditorOptions: any) {
-        this.propertyEditorOptions = propertyEditorOptions;
     }
     public getPropertyEditor(name: string) {
         var properties = this.koProperties();

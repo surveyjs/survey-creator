@@ -13,9 +13,12 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     }
     public get editorType(): string { return "matrixdropdowncolumns"; }
     protected createNewEditorItem(): any { 
-        var newColumn = new Survey.MatrixDropdownColumn("", this.options);
+        var newColumn = new Survey.MatrixDropdownColumn("");
+        if(this.options) {
+            this.options.onMatrixDropdownColumnAddedCallback(newColumn);
+        }
         //newColumn.colOwner = TODO set colOwner.
-        return new SurveyPropertyMatrixDropdownColumnsItem(newColumn); 
+        return new SurveyPropertyMatrixDropdownColumnsItem(newColumn, this.options); 
     }
     protected createEditorItem(item: any) { return new SurveyPropertyMatrixDropdownColumnsItem(item, this.options); }
     protected createItemFromEditorItem(editorItem: any) {  return editorItem.column; }
@@ -39,7 +42,7 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
         this.koCanEdit = ko.computed(function () { return self.koCellType() != "default"; });
         this.koEditorName = ko.computed(function() { return editorLocalization.getString("pe.columnEdit")["format"](self.koName());});
     }
-    protected createSurveyQuestionEditor() { return new SurveyQuestionEditor(this.column, null, "matrixdropdowncolumn@" + this.koCellType()); }
+    protected createSurveyQuestionEditor() { return new SurveyQuestionEditor(this.column, null, "matrixdropdowncolumn@" + this.koCellType(), this.options); }
     public hasError(): boolean {
         if(super.hasError()) return true;
         this.koHasError(!this.koName());

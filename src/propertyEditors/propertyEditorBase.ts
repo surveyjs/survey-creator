@@ -1,4 +1,12 @@
-﻿export class SurveyPropertyEditorBase {
+﻿import * as Survey from "survey-knockout";
+
+export interface ISurveyObjectEditorOptions {
+    alwaySaveTextInPropertyEditors: boolean;
+    onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
+    onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
+}
+
+export class SurveyPropertyEditorBase {
     public static defaultEditor: string = "string";
     private static editorRegisteredList = {};
     public static registerEditor(name: string, creator: () => SurveyPropertyEditorBase) {
@@ -13,9 +21,10 @@
     }
 
     private value_: any = null;
-    public options: any = null;
+    public options: ISurveyObjectEditorOptions = null;
     public onChanged: (newValue: any) => any;
     public onGetLocale: () => string;
+    public editablePropertyName: string;
     constructor() {
     }
     public get editorType(): string { throw "editorType is not defined"; }
