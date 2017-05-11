@@ -220,6 +220,7 @@ export class DragDropHelper {
             event.stopPropagation();
         }
         if (this.isSurveyDragging(event)) {
+            event.preventDefault();
             this.ddTarget.doDrop();
             if(this.onModifiedCallback) this.onModifiedCallback();
         }
