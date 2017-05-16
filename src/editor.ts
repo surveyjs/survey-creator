@@ -258,11 +258,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         return this.jsonEditor.text;
     }
     public set text(value: string) {
+        this.changeText(value, true);
+    }
+    public changeText(value: string, clearState = false) {
         var textWorker = new SurveyTextWorker(value);
         if (textWorker.isJsonCorrect) {
             this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
             this.showDesigner();
-            this.setUndoRedoCurrentState(true);
+            this.setUndoRedoCurrentState(clearState);
         } else {
             this.setTextValue(value);
             this.koViewType("editor");
@@ -390,7 +393,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 this.surveyObjects.selectObject(selObj);
             }
         }
-        this.setState(this.undoRedo.koCanUndo() ? "modified" : "saved");
+        this.setState("modified");
+        this.isAutoSave && this.doSave();
     }
     private findObjByName(name: string): Survey.Base {
         var page = this.survey.getPageByName(name);
@@ -410,6 +414,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             return false;
         }
         this.initSurvey(new Survey.JsonObject().toJsonObject(this.jsonEditor.survey));
+        this.setModified();
         return true;
     }
     public showDesigner() {
