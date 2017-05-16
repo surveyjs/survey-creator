@@ -376,7 +376,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             }
         }
         this.setModified();
-        if(obj === this.survey && property.name == "locale") {
+        //TODO add a flag to a property, may change other properties
+        if(property.name == "locale" || property.name == "hasComment" || property.name == "hasOther") {
             this.selectedObjectEditor.ObjectChanged();
         }
         this.survey.render();
