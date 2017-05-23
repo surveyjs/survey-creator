@@ -150,6 +150,38 @@ QUnit.test("Move item startWithNewLine=false, 3", function (assert) {
     dragTarget.doDrop();
     assert.equal(page.questions[0].name, "q2", "The first question is q2 now");    
 });
+QUnit.test("Move panel startWithNewLine=false", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("p1");
+    var p1 = page.addNewPanel("p1");
+    var p2 = page.addNewPanel("p2");
+    var p3 = page.addNewPanel("p3");
+    p1.startWithNewLine = false;
+    var target = new Survey.QuestionText("p1");
+    target.startWithNewLine = false;
+
+    var dragTarget = new DragDropTargetElement(page, target, p1);
+    dragTarget.moveTo(p3, true, true);
+    assert.equal(page["koRows"]().length, 3, "Move 1. No rows should be added");
+    assert.equal(page["koRows"]()[2]["koElements"]().length, 2, "Move 1. There are two elements in the last row");
+    assert.equal(page["koRows"]()[2]["koElements"]()[1].name, "p1", "Move 1. The first panel is the last element");
+    dragTarget.moveTo(target, false, false);
+    dragTarget.moveTo(p3, true, true);
+    dragTarget.moveTo(target, true, true);
+    dragTarget.moveTo(p3, true, true);
+    assert.equal(page["koRows"]().length, 3, "Move 1.1. No rows should be added");
+    assert.equal(page["koRows"]()[2]["koElements"]().length, 2, "Move 1.1. There are two elements in the last row");
+    assert.equal(page["koRows"]()[2]["koElements"]()[1].name, "p1", "Move 1.1. The first panel is the last element");
+    dragTarget.moveTo(p3, false, true);
+    assert.equal(page["koRows"]().length, 3, "Move 2. No rows should be added");
+    assert.equal(page["koRows"]()[1]["koElements"]().length, 2, "Move 2. There are two elements in the second row");
+    assert.equal(page["koRows"]()[2]["koElements"]().length, 1, "Move 2. There is one elements in the last row");
+    assert.equal(page["koRows"]()[1]["koElements"]()[1].name, "p1", "Move 2. The first panel is the last element in the first row");
+    dragTarget.doDrop();
+    assert.equal(page.elements.length, 3, "we have only 3 panels");
+    assert.equal(page.elements[1].name, "p1", "The second element is p1 now");    
+});
+
 QUnit.test("Move item into empty panel", function (assert) {
     var survey = new Survey.Survey();
     var page = <Survey.Page>survey.addNewPage("page1");

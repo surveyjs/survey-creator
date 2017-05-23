@@ -13,7 +13,7 @@ export class DragDropTargetElement {
             this.clear();
             return false;
         }
-        var targetInfo = this.findInfo(this.target);
+        var targetInfo = this.findInfo(this.target, true);
         this.updateInfo(destInfo, isBottom, isEdge);
         if(this.isInfoEquals(targetInfo, destInfo)) return true;
         this.clearByInfo(targetInfo);
@@ -30,13 +30,13 @@ export class DragDropTargetElement {
         var index = this.getIndexByInfo(destInfo);
         destInfo.panel.addElement(this.getNewTargetElement(), index); 
         if(this.source) {
-            var srcInfo = this.findInfo(this.source);
+            var srcInfo = this.findInfo(this.source, true);
             var panel = srcInfo ? srcInfo.panel : this.page;
             panel.removeElement(this.source); 
         }
     }
     public clear() {
-        this.clearByInfo(this.findInfo(this.target));
+        this.clearByInfo(this.findInfo(this.target, true));
     }
     private getIndexByInfo(info: any) {
         if(!info) return 0;
@@ -79,6 +79,9 @@ export class DragDropTargetElement {
         }
     }
     private addInfo(info: any) {
+        if(this.target.isPanel) {
+            this.target.parent = info.panel;
+        }
         if(this.target.startWithNewLine || info.elIndex < 1 
             || info.rIndex < 0 || info.rIndex >= info.panel.koRows().length) {
             this.AddInfoAsRow(info);
@@ -96,9 +99,6 @@ export class DragDropTargetElement {
     }
     private AddInfoAsRow(info: any) {
         var row = new Survey.QuestionRow(info.panel);
-        if(this.target.isPanel) {
-            this.target.parent = info.panel;
-        }
         row.addElement(this.target);
         var rows = info.panel.koRows();
         if(info.rIndex >= 0 && info.rIndex < info.panel.koRows().length) {
@@ -130,13 +130,14 @@ export class DragDropTargetElement {
     private findInfo(el: any, isEdge: boolean = false): any {
         return this.findInfoInPanel(this.page, el, isEdge);
     }
+    
     private findInfoInPanel(panel: Survey.PanelModelBase, el: any, isEdge: boolean): any {
         if(el == panel) {
             var parent = panel;
             if(panel.parent && (isEdge || this.target.isPanel)) {
                 parent = panel.parent;
             }
-            return { panel: parent, row: null, rIndex: 0, elIndex: 0, element: panel };
+            return { panel: parent, rIndex: 0, elIndex: 0, element: panel };
         }
         var rows = panel["koRows"]();
         for(var i = 0; i < rows.length; i ++) {
@@ -152,9 +153,8 @@ export class DragDropTargetElement {
                         }
                         return res;
                     }
-                } else {
-                    if(elements[j] == el) return { panel: panel, row: row, rIndex: i, elIndex: j, element: elements[j] };
                 }
+                if(elements[j] == el) return { panel: panel, rIndex: i, elIndex: j, element: elements[j] };
             }
         }
         return null;
