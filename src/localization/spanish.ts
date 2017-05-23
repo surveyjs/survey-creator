@@ -1,4 +1,4 @@
-import {defaultStrings, editorLocalization} from "surveyjs-editor"
+import {editorLocalization} from "../editorLocalization"
 
 var spanishTranslation: {
     // strings for survey templates
@@ -172,4 +172,4 @@ var spanishTranslation: {
     };
 };
 
-editorLocalization.locales["es"] = defaultStrings;
+editorLocalization.locales["es"] = spanishTranslation;
