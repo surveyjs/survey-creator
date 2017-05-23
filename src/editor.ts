@@ -150,12 +150,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.doRedoClick = function () { self.doUndoRedo(self.undoRedo.redo()); };
 
         this.jsonEditor = new SurveyJSONEditor();
-        
-        this.text = "";
 
         if (renderedElement) {
             this.render(renderedElement);
         }
+
+        this.text = "";
 
         this.toolbarItems.push({
             id: 'svd-undo',
@@ -258,11 +258,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         return this.jsonEditor.text;
     }
     public set text(value: string) {
+        this.changeText(value, true);
+    }
+    public changeText(value: string, clearState = false) {
         var textWorker = new SurveyTextWorker(value);
         if (textWorker.isJsonCorrect) {
             this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
             this.showDesigner();
-            this.setUndoRedoCurrentState(true);
+            this.setUndoRedoCurrentState(clearState);
         } else {
             this.setTextValue(value);
             this.koViewType("editor");
@@ -390,7 +393,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 this.surveyObjects.selectObject(selObj);
             }
         }
-        this.setState(this.undoRedo.koCanUndo() ? "modified" : "saved");
+        this.setState("modified");
+        this.isAutoSave && this.doSave();
     }
     private findObjByName(name: string): Survey.Base {
         var page = this.survey.getPageByName(name);
@@ -410,6 +414,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             return false;
         }
         this.initSurvey(new Survey.JsonObject().toJsonObject(this.jsonEditor.survey));
+        this.setModified();
         return true;
     }
     public showDesigner() {
@@ -455,7 +460,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.koCanDeleteObject(canDeleteObject);
         //Select2 work-around
         if(this.select2) {
-            var el = document.getElementById("select2-objectSelector-container"); //TODO
+            var el = <HTMLElement>this.renderedElement.querySelector("#select2-objectSelector-container"); //TODO
             if(el) {
                 var item = this.surveyObjects.koSelected();
                 if(item && item.text) {
@@ -468,7 +473,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         if (this.renderedElement == null) return;
         ko.cleanNode(this.renderedElement);
         ko.applyBindings(this, this.renderedElement);
-        this.surveyjs = document.getElementById("surveyjs");
+        this.surveyjs = <HTMLElement>this.renderedElement.querySelector("#surveyjs");
         if (this.surveyjs) {
             var self = this;
             this.surveyjs.onkeydown = function (e) {
@@ -479,7 +484,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 }
             };
         }
-        this.surveyjsExample = document.getElementById("surveyjsExample");
+        this.surveyjsExample = <HTMLElement>this.renderedElement.querySelector("#surveyjsExample");
 
         this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
         this.setUndoRedoCurrentState(true);
@@ -493,7 +498,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private initSurvey(json: any) {
         var self = this;
         this.surveyValue = new SurveyForDesigner();
-        this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() });
+        this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() }, this.renderedElement);
         this.surveyValue["setJsonObject"](json); //TODO
         if (this.surveyValue.isEmpty) {
             this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
@@ -564,7 +569,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             index = page.questions.indexOf(this.survey.selectedElement) + 1;
         }
         page.addQuestion(question, index);
-        this.dragDropHelper.scrollToElement(document.getElementById(question.id));
+        this.dragDropHelper.scrollToElement(<HTMLElement>this.renderedElement.querySelector("#"+question.id));
         this.setModified();
     }
     private deleteQuestion() {
@@ -630,8 +635,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             }
             var survey = new Survey.Survey(json);
             var self = this;
-            var surveyjsExampleResults = document.getElementById("surveyjsExampleResults");
-            var surveyjsExamplereRun = document.getElementById("surveyjsExamplereRun");
+            var surveyjsExampleResults = <HTMLElement>this.renderedElement.querySelector("#surveyjsExampleResults");
+            var surveyjsExamplereRun = <HTMLElement>this.renderedElement.querySelector("#surveyjsExamplereRun");
             if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
             if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = "none";
             survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = ""; });

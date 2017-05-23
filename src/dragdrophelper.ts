@@ -178,9 +178,9 @@ export class DragDropHelper {
     private prevCoordinates: {x: number, y: number};
     static counter: number  = 1;
     private id: number = DragDropHelper.counter ++;
-    constructor(public data: Survey.ISurvey, onModifiedCallback: () => any, scrollableElName: string = null) {
+    constructor(public data: Survey.ISurvey, onModifiedCallback: () => any, parent: HTMLElement = null) {
         this.onModifiedCallback = onModifiedCallback;
-        this.scrollableElement = document.getElementById((scrollableElName ? scrollableElName : "scrollableDiv"));
+        this.scrollableElement = parent && <HTMLElement>parent.querySelector("#scrollableDiv");
         this.prevCoordinates = {x: -1, y: -1}
     }
     public get survey(): Survey.Survey { return <Survey.Survey>this.data; }
