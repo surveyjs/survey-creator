@@ -86,6 +86,36 @@ QUnit.test("onQuestionAdded event", function (assert) {
     assert.equal(counter, 1, "One question was added");
 });
 
+QUnit.test("fast copy tests, copy a question", function (assert) {
+    var editor = new SurveyEditor();
+    var q1 = <Survey.QuestionText>editor.survey.pages[0].addNewQuestion("text", "question1");
+    q1.placeHolder = "I'm here";
+    editor.fastCopyQuestion(q1);
+    assert.equal(editor.survey.pages[0].questions.length, 2, "There are two questions now");
+    var q2 = <Survey.QuestionText>editor.survey.pages[0].questions[1];
+    assert.equal(q2.name, "question2", "a new correct question name was created");
+    assert.equal(q2.placeHolder, "I'm here", "a property copied correctly");
+});
+
+QUnit.test("fast copy tests, copy a panel with questions and a nested panel", function (assert) {
+    var editor = new SurveyEditor();
+    var survey = editor.survey;
+    var p1 = survey.pages[0].addNewPanel("panel1");
+    var q1 = p1.addNewQuestion("text", "question1");
+    var p2 = p1.addNewPanel("panel2");
+    var q2 = p2.addNewQuestion("text", "question2");
+    editor.fastCopyQuestion(p1);
+
+    assert.equal(survey.pages[0].elements.length, 2, "There are two panels now");
+    var newPanel = <Survey.Panel>survey.pages[0].elements[1];
+    assert.equal(newPanel.name, "panel3", "a new panel should have name 'panel3'");
+    assert.equal(newPanel.questions[0].name, "question3", "A question in new panel should have name 'question3'");
+    var nestedPanel = <Survey.Panel>newPanel.elements[1];
+    assert.equal(nestedPanel.name, "panel4", "a new nested panel should have name 'panel3'");
+    assert.equal(nestedPanel.questions[0].name, "question4", "A question in new nested panel should have name 'question3'");
+});
+
+
 function getSurveyJson(): any {
     return {
         pages: [{

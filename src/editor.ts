@@ -532,26 +532,51 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private doDraggingToolboxItem(json: any, e) {
         this.dragDropHelper.startDragToolboxItem(e, this.getNewName(json["type"]), json);
     }
+    private newQuestions: Array<any> = [];
+    private newPanels: Array<any> = [];
     private doClickToolboxItem(json: any) {
-        var name = this.getNewName(json["type"]);
-        var question = Survey.JsonObject.metaData.createClass(json["type"]);
-        new Survey.JsonObject().toObject(json, question);
-        question.name = name;
-        this.doClickQuestionCore(question);
+        var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
+        new Survey.JsonObject().toObject(json, newElement);
+        this.newQuestions = [];
+        this.newPanels = [];
+        this.setNewNames(newElement);
+        this.doClickQuestionCore(newElement);
+    }
+    private setNewNames(element: Survey.IElement) {
+        element.name = this.getNewName(element["getType"]());
+        if(element.isPanel) {
+            this.newPanels.push(element);
+            var panel = <Survey.Panel>element;
+            for(var i = 0; i < panel.elements.length; i ++) {
+                this.setNewNames(panel.elements[i]);
+            }
+        } else {
+            this.newQuestions.push(element);
+        }
     }
     private getNewName(type: string) : string {
         return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
     }
     private getNewQuestionName(): string {
-        return SurveyHelper.getNewQuestionName(this.survey.getAllQuestions());
+        return SurveyHelper.getNewQuestionName(this.getAllQuestions());
     }
     private getNewPanelName(): string {
         return SurveyHelper.getNewPanelName(this.getAllPanels());
+    }
+    private getAllQuestions(): Array<any> {
+        var result =  this.survey.getAllQuestions();
+        for(var i = 0; i < this.newQuestions.length; i ++) {
+            result.push(this.newQuestions[i]);
+        }
+        return result;
     }
     private getAllPanels(): Array<any> {
         var result = [];
         for(var i = 0; i < this.survey.pages.length; i ++) {
             this.addPanels(this.survey.pages[i], result);
+        }
+        for(var i = 0; i < this.newPanels.length; i ++) {
+            result.push(this.newPanels[i]);
         }
         return result;
     }
@@ -569,7 +594,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             index = page.questions.indexOf(this.survey.selectedElement) + 1;
         }
         page.addQuestion(question, index);
-        this.dragDropHelper.scrollToElement(<HTMLElement>this.renderedElement.querySelector("#"+question.id));
+        if(this.renderedElement) {
+            this.dragDropHelper.scrollToElement(<HTMLElement>this.renderedElement.querySelector("#"+question.id));
+        }
         this.setModified();
     }
     private deleteQuestion() {
@@ -606,7 +633,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.toolbox.addCopiedItem(question);
     }
 
-    public fastCopyQuestion(question: Survey.QuestionBase) {
+    public fastCopyQuestion(question: Survey.Base) {
         var json = new Survey.JsonObject().toJsonObject(question);
         json.type = question.getType();
         this.doClickToolboxItem( json );

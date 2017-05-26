@@ -27,10 +27,10 @@ export class SurveyForDesigner extends Survey.Survey {
         if (value == this.selectedElementValue) return;
         var oldValue = this.selectedElementValue;
         this.selectedElementValue = value;
-        if (oldValue != null) {
+        if (oldValue != null && oldValue["onSelectedElementChanged"]) {
             oldValue["onSelectedElementChanged"]();
         }
-        if (this.selectedElementValue != null) {
+        if (this.selectedElementValue != null && this.selectedElementValue["onSelectedElementChanged"]) {
             this.selectedElementValue["onSelectedElementChanged"]();
         }
         this.onSelectedElementChanged.fire(this, { 'oldElement': oldValue, 'newElement': value });
