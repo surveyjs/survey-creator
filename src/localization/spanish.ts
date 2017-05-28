@@ -106,7 +106,7 @@ var spanishTranslation: {
             choicesByUrl: "Opciones desde la Web",
             matrixChoices: "Opciones por defecto",
             multipleTextItems: "Entradas de texto",
-            validators: "Validadores",
+            validators: "Validadores"
         },
         editProperty: "Editar propiedad '{0}'",
         items: "[ Items: {0} ]",
@@ -123,7 +123,7 @@ var spanishTranslation: {
         triggerSetValue: "a: ",
         triggerIsVariable: "No colocar la variable en el resultado de la encuesta",
         verbChangeType: "Cambiar tipo ",
-        verbChangePage: "Cambiar página ",
+        verbChangePage: "Cambiar página "
     },
     // strings for operators
     op: {
@@ -136,7 +136,7 @@ var spanishTranslation: {
         greater: "mayor",
         less: "menor",
         greaterorequal: "mayor o igual",
-        lessorequal: "menor o igual",
+        lessorequal: "menor o igual"
     },
     // strings for embed window
     ew: {
@@ -152,7 +152,7 @@ var spanishTranslation: {
         loadFromServer: "Cargar Survey JSON desde el servidor",
         titleScript: "Scripts y estilos",
         titleHtml: "HTML",
-        titleJavaScript: "JavaScript",
+        titleJavaScript: "JavaScript"
     },
     // strings of properties
     p: {
@@ -163,13 +163,13 @@ var spanishTranslation: {
         },
         survey_title: {
             name: "titulo",
-            title: "Sé mostrará en cada página.",
+            title: "Sé mostrará en cada página."
         },
         page_title: {
             name: "titulo",
-            title: "Título de página",
+            title: "Título de página"
         },
-    },
+    }
 };
 
 editorLocalization.locales["es"] = spanishTranslation;
