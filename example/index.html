@@ -22,6 +22,7 @@
     <div id="manage" data-bind="template: 'surveys-manage'"></div>
     <div id="editor"></div>
     <script type="text/javascript">
+        // SurveyEditor.editorLocalization.currentLocale = "es";
         var editor = new SurveyEditor.SurveyEditor("editor");
         //editor.surveyId = '5af48e08-a0a5-44a5-83f4-1c90e8e98de1';
         //editor.surveyPostId = '3ce10f8b-2d8a-4ca2-a110-2994b9e697a1';
@@ -32,6 +33,7 @@
         editor.showState = true;
         //editor.loadSurvey("a0f7f132-eee4-42e4-b8c8-f8b16840a478");
         //editor.loadSurvey("65c74d4a-3b16-412f-8200-9ac53c8f5c0b");
+        
 
         ko.applyBindings(new SurveyEditor.SurveysManager("https://dxsurvey.com", "a797f29b53f8455e8b3ef317f8904dac", editor), document.getElementById("manage"));
     </script>
