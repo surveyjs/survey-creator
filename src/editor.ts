@@ -487,7 +487,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         }
         this.surveyjsExample = <HTMLElement>this.renderedElement.querySelector("#surveyjsExample");
 
-        this.initSurvey(new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText));
+        this.initSurvey(this.getDefaultSurveyJson());
         this.setUndoRedoCurrentState(true);
 
         this.jsonEditor.init();
@@ -496,13 +496,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             jQuery("#objectSelector").width("100%");
         }
     }
+    private getDefaultSurveyJson(): any {
+        var json = new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText);
+        if(json["pages"] && json["pages"]["length"] > 0 && json["pages"][0]["name"]) {
+            json["pages"][0]["name"] = editorLocalization.getString("ed.newPageName") + "1";
+        }
+        return json;
+    }
     private initSurvey(json: any) {
         var self = this;
         this.surveyValue = new SurveyForDesigner();
         this.dragDropHelper = new DragDropHelper(<Survey.ISurvey>this.survey, function () { self.setModified() }, this.renderedElement);
         this.surveyValue["setJsonObject"](json); //TODO
         if (this.surveyValue.isEmpty) {
-            this.surveyValue["setJsonObject"](new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText)); //TODO
+            this.surveyValue["setJsonObject"](this.getDefaultSurveyJson()); //TODO
         }
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
         this.survey.render(this.surveyjs);
