@@ -7,18 +7,20 @@ import * as Survey from "survey-knockout";
 export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     koQuestions: any; koPages: any;
     public koSelected: any;
+    public koTriggers: any;
     public availableTriggers: Array<string> = [];
     private triggerClasses: Array<Survey.JsonMetadataClass> = [];
     constructor() {
         super();
         var self = this;
         this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); };
-        this.onAddClick = function (triggerType) { self.addItem(triggerType); };
+        this.onAddClick = function (item) { self.addItem(item.value); };
         this.koSelected = ko.observable(null);
         this.koPages = ko.observableArray();
         this.koQuestions = ko.observableArray();
         this.triggerClasses = Survey.JsonObject.metaData.getChildrenClasses("surveytrigger", true);
         this.availableTriggers = this.getAvailableTriggers();
+        this.koTriggers = ko.observableArray(this.getLocalizedTriggers());
     }
     public get editorType(): string { return "triggers"; }
     protected onValueChanged() {
@@ -47,6 +49,14 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     protected createItemFromEditorItem(editorItem: any) {
         var editorTrigger = <SurveyPropertyTrigger>editorItem;
         return editorTrigger.createTrigger();
+    }
+    private getLocalizedTriggers(): Array<any> {
+        var res = [];
+        for(var i = 0; i < this.availableTriggers.length; i ++) {
+            var name = this.availableTriggers[i];
+            res.push({value: name, text: editorLocalization.getTriggerName(name)});
+        }
+        return res;
     }
     private getAvailableTriggers(): Array<string> {
         var result = [];

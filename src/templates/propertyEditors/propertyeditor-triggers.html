@@ -11,8 +11,8 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <!-- ko foreach: availableTriggers -->
-                        <li><a data-bind="click: $parent.onAddClick"><span data-bind="text:$data"></span></a></li>
+                        <!-- ko foreach: koTriggers -->
+                        <li><a data-bind="click: $parent.onAddClick"><span data-bind="text:$data.text"></span></a></li>
                         <!-- /ko  -->
                     </ul>
                 </div>

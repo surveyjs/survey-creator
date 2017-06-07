@@ -2,9 +2,7 @@
     currentLocale: "",
     locales: {},
     getString: function (strName: string, locale: string = null) {
-        if (!locale) locale = this.currentLocale;
-        var loc = locale ? this.locales[locale] : defaultStrings;
-        if (!loc) loc = defaultStrings;
+        var loc = this.getLocale(locale); 
         var path = strName.split('.');
         var obj = loc;
         for (var i = 0; i < path.length; i++) {
@@ -36,11 +34,24 @@
     },
     getPropertyValue: function(value: any, locale: string = null) {
         if(value === "" || value === null || typeof value === undefined) return "";
+        return this.getValueInternal(value, "pv", locale);
+    },
+    getValidatorName: function(name: string, locale: string = null) {
+        return this.getValueInternal(name, "validators", locale);
+    },
+    getTriggerName: function(name: string, locale: string = null) {
+        return this.getValueInternal(name, "triggers", locale);
+    },
+    getLocale(locale: string) {
         if (!locale) locale = this.currentLocale;
         var loc = locale ? this.locales[locale] : defaultStrings;
         if (!loc) loc = defaultStrings;
-        var res = loc["pv"] ? loc["pv"][value] : null;
-        if(!res) res = defaultStrings["pv"][value];
+        return loc;
+    },
+    getValueInternal(value: any, prefix: string, locale: string = null) {
+        var loc = this.getLocale(locale); 
+        var res = loc[prefix] ? loc[prefix][value] : null;
+        if(!res) res = defaultStrings[prefix][value];
         return res ? res : value;
     },
     getLocales: function (): Array<string> {
@@ -235,6 +246,18 @@ export var defaultStrings = {
         titleScript: "Scripts and styles",
         titleHtml: "HTML",
         titleJavaScript: "JavaScript"
+    },
+    validators: {
+        answercountvalidator: "answer count",
+        emailvalidator: "e-mail",
+        numericvalidator: "numeric",
+        regexvalidator: "regex",
+        textvalidator: "text"
+    },
+    triggers: {
+        completetrigger: "complete survey",
+        setvaluetrigger: "set value",
+        visibletrigger: "change visibility"
     },
     //Properties
     p: {

@@ -216,6 +216,7 @@ QUnit.test("Triggers property editor", function (assert) {
     propEditor.onChanged = (newValue: any) => { result = newValue };
     propEditor.object = survey;
     propEditor.value = survey.triggers;
+    assert.equal(propEditor.koTriggers().length, propEditor.availableTriggers.length, "localized triggers created correctly");
     assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
     var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
     assert.equal(koTrigger.koName(), "question1", "Name set correctly");
@@ -223,7 +224,7 @@ QUnit.test("Triggers property editor", function (assert) {
     assert.equal(koTrigger.koValue(), "val1", "value set correctly");
     assert.deepEqual(koTrigger.questions.koChoosen(), ["question2"], "questions set correctly");
 
-    propEditor.onAddClick("visibletrigger");
+    propEditor.onAddClick({value: "visibletrigger"});
     assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
     koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
     assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
@@ -246,7 +247,7 @@ QUnit.test("Triggers property editor", function (assert) {
     assert.deepEqual(trigger.pages, ["page2"], "create trigger correctly: pages");
     assert.deepEqual(trigger.questions, ["question3"], "create trigger correctly: questions");
 
-    propEditor.onAddClick("visibletrigger");
+    propEditor.onAddClick({value: "visibletrigger"});
     assert.equal(propEditor.koItems().length, 3, "There are three triggers now");
     propEditor.onDeleteClick();
     assert.equal(propEditor.koItems().length, 2, "There are again two triggers");
@@ -254,7 +255,7 @@ QUnit.test("Triggers property editor", function (assert) {
     propEditor.onApplyClick();
     assert.equal(result.length, 2, "Two triggers are saved");
 
-    propEditor.onAddClick("completetrigger");
+    propEditor.onAddClick({value: "completetrigger"});
     koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
     koTrigger.koName("question2");
     koTrigger.koOperator("notempty");
@@ -270,6 +271,8 @@ QUnit.test("Validators property editor", function (assert) {
     question.validators.push(validator);
     var result = [];
     var propEditor = new SurveyPropertyValidatorsEditor();
+    assert.equal(propEditor.availableValidators.length, propEditor.koValidators().length, "Localized validators have been created");
+
     propEditor.onChanged = (newValue: any) => { result = newValue };
     propEditor.object = question;
     propEditor.value = question.validators;
@@ -279,14 +282,14 @@ QUnit.test("Validators property editor", function (assert) {
     assert.equal((<Survey.NumericValidator>koValidator.validator).minValue, 10, "Validator 'minValue' is set correctly");
     assert.equal((<Survey.NumericValidator>koValidator.validator).maxValue, 100, "Validator 'maxValue' is set correctly");
 
-    propEditor.onAddClick("textvalidator");
+    propEditor.onAddClick({value: "textvalidator"});
     assert.equal(propEditor.koItems().length, 2, "There are two validators now");
     var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
-    assert.equal(koValidator.text, "textvalidator", "Created with corrected value");
+    assert.equal(koValidator.text, "text", "Created with corrected value");
     (<Survey.TextValidator>koValidator.validator).minLength = 20;
     koValidator.validator.text = "text is short.";
 
-    propEditor.onAddClick("textvalidator");
+    propEditor.onAddClick({value: "textvalidator"});
     assert.equal(propEditor.koItems().length, 3, "There are three validators now");
     propEditor.onDeleteClick();
     assert.equal(propEditor.koItems().length, 2, "There are two validators again");
