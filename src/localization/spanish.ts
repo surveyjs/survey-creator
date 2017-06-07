@@ -1,6 +1,6 @@
 import {editorLocalization} from "../editorLocalization";
 
-var spanishTranslation: {
+var spanishTranslation = {
     // strings for survey templates
     survey: {
         dropQuestion: "Por favor coloque una pregunta aquí",
