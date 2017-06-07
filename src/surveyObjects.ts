@@ -1,5 +1,6 @@
 ﻿import * as ko from "knockout";
 import {SurveyHelper, ObjType} from "./surveyHelper";
+import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
 export class SurveyObjectItem {
@@ -149,7 +150,7 @@ export class SurveyObjects {
         return -1;
     }
     private getText(item: SurveyObjectItem): string {
-        if(item.level == 0) return "Survey";
+        if(item.level == 0) return editorLocalization.getString("ed.survey");
         var intend = SurveyObjects.intend;
         for(var i = 1; i < item.level; i ++) {
             intend += SurveyObjects.intend;
