@@ -16,23 +16,32 @@
         }
         return obj;
     },
-    getPropertyName: function (strName: string, local: string = null) {
-        var obj = this.getProperty(strName, local);
+    getPropertyName: function (strName: string, locale: string = null) {
+        var obj = this.getProperty(strName, locale);
         if (obj["name"]) return obj["name"];
         return obj;
     },
-    getPropertyTitle: function (strName: string, local: string = null) {
-        var obj = this.getProperty(strName, local);
+    getPropertyTitle: function (strName: string, locale: string = null) {
+        var obj = this.getProperty(strName, locale);
         if (obj["title"]) return obj["title"];
         return "";
     },
-    getProperty: function (strName: string, local: string = null) {
-        var obj = this.getString("p." + strName, local);
+    getProperty: function (strName: string, locale: string = null) {
+        var obj = this.getString("p." + strName, locale);
         if (obj !== strName) return obj;
         var pos = strName.indexOf('_');
         if (pos < -1) return obj;
         strName = strName.substr(pos + 1);
-        return this.getString("p." + strName, local);
+        return this.getString("p." + strName, locale);
+    },
+    getPropertyValue: function(value: any, locale: string = null) {
+        if(value === "" || value === null || typeof value === undefined) return "";
+        if (!locale) locale = this.currentLocale;
+        var loc = locale ? this.locales[locale] : defaultStrings;
+        if (!loc) loc = defaultStrings;
+        var res = loc["pv"] ? loc["pv"][value] : null;
+        if(!res) res = defaultStrings["pv"][value];
+        return res ? res : value;
     },
     getLocales: function (): Array<string> {
         var res = [];
@@ -155,7 +164,6 @@ export var defaultStrings = {
             multipleTextItems: "Text Inputs",
             validators: "Validators"
         },
-
         editProperty: "Edit property '{0}'",
         items: "[ Items: {0} ]",
 
@@ -173,6 +181,30 @@ export var defaultStrings = {
         triggerIsVariable: "Do not put the variable into the survey result.",
         verbChangeType: "Change type ",
         verbChangePage: "Change page "
+    },
+    //Property values
+    pv: {
+        true: "true",
+        false: "false",
+
+        ar: "العربية",
+        cz: "čeština",
+        da: "dansk",
+        de: "deutsch",
+        en: "english",
+        es: "español",
+        fi: "suomalainen",
+        fr: "français",
+        gr: "ελληνικά",
+        it: "italiano",
+        is: "íslenska",
+        nl: "hollandsk",
+        pl: "polski",
+        pt: "português",
+        ro: "română",
+        ru: "русский",
+        sv: "svenska",
+        tr: "türkçe"
     },
     //Operators
     op: {

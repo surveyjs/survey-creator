@@ -1,4 +1,5 @@
 ﻿import * as Survey from "survey-knockout";
+import {editorLocalization} from "../editorLocalization";
 
 export interface ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
@@ -59,12 +60,20 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
         super();
     }
     public get editorType(): string { return "dropdown"; }
+    public getValueText(value: any): string { 
+        if(!value) return value;
+        var res = editorLocalization.getPropertyValue(value);
+        return res ? res : value;
+    }
 }
 export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
     constructor() {
         super();
     }
     public get editorType(): string { return "boolean"; }
+    public getValueText(value: any): string { 
+        return editorLocalization.getPropertyValue(value);
+    }
 }
 export class SurveyNumberPropertyEditor extends SurveyPropertyEditorBase {
     constructor() {

@@ -36,6 +36,15 @@ QUnit.test("Create correct property editor", function (assert) {
         assert.equal(propertyEditor.editorType, propType, "Create '" + propType  + "' property editor");
     }
 });
+QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
+    var property = new Survey.JsonObjectProperty("dropdown");
+    property.setChoices([1, 2, 3], null);
+    var propertyEditor = new SurveyObjectProperty(property);
+    assert.equal(propertyEditor.editorType, "dropdown", "Dropdown editor should be created");
+    assert.equal(propertyEditor.koChoices().length, 3, "There are 3 items");
+    assert.equal(propertyEditor.koChoices()[0].value, 1, "The first value");
+    assert.equal(propertyEditor.koChoices()[0].text, 1, "The first text");
+});
 QUnit.test("SurveyPropertyItemValue", function (assert) {
     var choices = [{ value: 1, text: "item1" }, { value: 2, text: "item2" }, { value: 3, text: "item3" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor();

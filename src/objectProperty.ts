@@ -23,6 +23,7 @@ export class SurveyObjectProperty {
     public editorType: string;
     public baseEditorType: string;
     public choices: Array<any>;
+    public koChoices: any;
 
     constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.onPropertyChanged = onPropertyChanged;
@@ -35,6 +36,7 @@ export class SurveyObjectProperty {
         //TODO
         if (this.choices != null) {
             this.editorType = "dropdown";
+            this.koChoices = ko.observableArray(this.getLocalizableChoices());
         }
         var onItemChanged = function (newValue: any) { self.onApplyEditorValue(newValue); };
         this.editor = SurveyPropertyEditorBase.createEditor(this.editorType, onItemChanged);
@@ -81,6 +83,14 @@ export class SurveyObjectProperty {
     }
     private updateEditorData(newValue: any) {
         this.editor.value = newValue;
+    }
+    private getLocalizableChoices() {
+        var res = [];
+        for(var i = 0; i < this.choices.length; i ++) {
+            var value = this.choices[i];
+            res.push({value: value, text: editorLocalization.getPropertyValue(value)});
+        }
+        return res;
     }
     protected getValue(): any {
 	if(this.property["getPropertyValue"]) return this.property["getPropertyValue"](this.object); //TODO make the only call
