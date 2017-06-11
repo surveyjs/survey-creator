@@ -98,7 +98,7 @@ export class SurveyEmbedingWindow {
         if (this.koScriptUsing() != "bootstrap") {
             str += "\n<link href=\"" + this.getCDNPath +  "survey.css\" type=\"text/css\" rel=\"stylesheet\" />";
         }
-        str += "\n<script src=\"" + this.getCDNPath +   "survey." + this.platformSurveyJSPrefix[this.koLibraryVersion()] +  " .min.js\"></script>";
+        str += "\n<script src=\"" + this.getCDNPath +   "survey." + this.platformSurveyJSPrefix[this.koLibraryVersion()] +  ".min.js\"></script>";
 
         this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, str);
     }
