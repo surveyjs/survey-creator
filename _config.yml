@@ -1,6 +1,6 @@
 markdown: kramdown
 
-surveyjs_version: "0.12.17"
+surveyjs_version: "0.12.18"
 
 sass:
     sass_dir: _sass
