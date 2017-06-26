@@ -35,7 +35,7 @@ export class SurveyObjectEditor {
     public changeActiveProperty(property: SurveyObjectProperty) {
         this.koActiveProperty(property);
     }
-    public ObjectChanged() {
+    public objectChanged() {
         this.updatePropertiesObject();
     }
     protected updateProperties() {

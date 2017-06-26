@@ -39,7 +39,7 @@ QUnit.test("isDefault property value", function (assert) {
     assert.equal(property.koIsDefault(), true, "the value is default");
     assert.equal(property.editorType, "boolean", "It is a boolean editor");
     car.isNew = true;
-    editor.ObjectChanged();
+    editor.objectChanged();
     assert.equal(property.koIsDefault(), false, "the value is not default");
 });
 QUnit.test("Active property", function (assert) {

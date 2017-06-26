@@ -38,7 +38,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private surveyjsExample: HTMLElement;
 
     private jsonEditor: SurveyJSONEditor;
-    private selectedObjectEditor: SurveyObjectEditor;
+    private selectedObjectEditorValue: SurveyObjectEditor;
     private questionEditorWindow: SurveyPropertyEditorShowWindow;
     private pagesEditor: SurveyPagesEditor;
     private surveyEmbeding: SurveyEmbedingWindow;
@@ -116,11 +116,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
         this.surveyVerbs = new SurveyVerbs(function () { self.setModified(); });
 
-        this.selectedObjectEditor = new SurveyObjectEditor(this);
-        this.selectedObjectEditor.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
+        this.selectedObjectEditorValue = new SurveyObjectEditor(this);
+        this.selectedObjectEditorValue.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
             return self.onCanShowObjectProperty(object, property);
         }
-        this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
+        this.selectedObjectEditorValue.onPropertyValueChanged.add((sender, options) => {
             self.onPropertyValueChanged(options.property, options.object, options.newValue);
         });
         this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
@@ -232,6 +232,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     public get survey(): SurveyForDesigner {
         return this.surveyValue;
     }
+    public get selectedObjectEditor() : SurveyObjectEditor { return this.selectedObjectEditorValue; }
     public render(element: any = null, options: any = null) {
         if (options) this.setOptions(options);
         var self = this;
@@ -382,7 +383,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.setModified();
         //TODO add a flag to a property, may change other properties
         if(property.name == "locale" || property.name == "hasComment" || property.name == "hasOther") {
-            this.selectedObjectEditor.ObjectChanged();
+            this.selectedObjectEditorValue.objectChanged();
         }
         this.survey.render();
     }
@@ -444,7 +445,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     private selectedObjectChanged(obj: Survey.Base) {
         var canDeleteObject = false;
-        this.selectedObjectEditor.selectedObject = obj;
+        this.selectedObjectEditorValue.selectedObject = obj;
         this.surveyVerbs.obj = obj;
         var objType = SurveyHelper.getObjectType(obj);
         if (objType == ObjType.Page) {
@@ -634,7 +635,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     private onQuestionEditorChanged(question: Survey.QuestionBase) {
         this.surveyObjects.nameChanged(question);
-        this.selectedObjectEditor.ObjectChanged();
+        this.selectedObjectEditorValue.objectChanged();
         this.setModified();
         this.survey.render();
     }
