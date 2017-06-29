@@ -11,7 +11,7 @@ npm install surveyjs-editor
 ```
 ## Include into your project
 ### Explore examples
-To learn how to include the visual editor on your page and explore examples of using, please go to [editor.surveyjs.io](http://editor.surveyjs.io) web site
+To learn how to include the visual editor on your page and explore examples of using, please go to [surveyjs.io/Editor](http://surveyjs.io/Editor) web site
 ### Use quickstart repos
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart), [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
 
@@ -50,4 +50,4 @@ To build library yourself:
  The library depends on: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
 ## License
-The SurveyJS Editor is NOT FREE for commercial using. Please find more about licensing the product [here](http://editor.surveyjs.io/license.html).
+The SurveyJS Editor is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
