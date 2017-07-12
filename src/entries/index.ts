@@ -49,4 +49,5 @@ export {SurveysManager} from "../manage";
 import '../localization/french';
 import '../localization/spanish';
 import '../localization/portuguese';
+import '../localization/italian';
 
