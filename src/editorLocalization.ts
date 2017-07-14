@@ -2,7 +2,7 @@
     currentLocale: "",
     locales: {},
     getString: function (strName: string, locale: string = null) {
-        var loc = this.getLocale(locale); 
+        var loc = this.getLocale(locale);
         var path = strName.split('.');
         var obj = loc;
         for (var i = 0; i < path.length; i++) {
@@ -49,7 +49,7 @@
         return loc;
     },
     getValueInternal(value: any, prefix: string, locale: string = null) {
-        var loc = this.getLocale(locale); 
+        var loc = this.getLocale(locale);
         var res = loc[prefix] ? loc[prefix][value] : null;
         if(!res) res = defaultStrings[prefix][value];
         return res ? res : value;
@@ -136,7 +136,7 @@ export var defaultStrings = {
         required: "Required?",
         columnEdit: "Edit column: {0}",
         itemEdit: "Edit item: {0}",
-        
+
         hasOther: "Has other item",
         name: "Name",
         title: "Title",
@@ -153,10 +153,10 @@ export var defaultStrings = {
         maxSize: "Maximum file size in bytes",
         imageHeight: "Image height",
         imageWidth: "Image width",
-        rowCount: "Row count", 
-        addRowText: "Add row button text", 
+        rowCount: "Row count",
+        addRowText: "Add row button text",
         removeRowText: "Remove row button text",
-        minRateDescription: "Minimum rate description", 
+        minRateDescription: "Minimum rate description",
         maxRateDescription: "Maximum rate description",
         inputType: "Input type",
         optionsCaption: "Options caption",
@@ -216,7 +216,8 @@ export var defaultStrings = {
         ro: "română",
         ru: "русский",
         sv: "svenska",
-        tr: "türkçe"
+        tr: "türkçe",
+        zh_cn: "简体中文"
     },
     //Operators
     op: {
