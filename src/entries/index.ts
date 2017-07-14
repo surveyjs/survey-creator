@@ -50,4 +50,5 @@ import '../localization/french';
 import '../localization/spanish';
 import '../localization/portuguese';
 import '../localization/italian';
+import '../localization/simplified-chinese';
 
