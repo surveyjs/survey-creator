@@ -217,7 +217,7 @@ export var defaultStrings = {
         ru: "русский",
         sv: "svenska",
         tr: "türkçe",
-        zh-cn: "中文"
+        zh_cn: "简体中文"
     },
     //Operators
     op: {
