@@ -40,7 +40,7 @@ var packagePlatformJson = {
         "surveyeditor.d.ts",
         "surveyeditor.min.js"
     ],
-    "main": "surveyeditor.min.js",
+    "main": "surveyeditor.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/surveyjs/editor.git"
