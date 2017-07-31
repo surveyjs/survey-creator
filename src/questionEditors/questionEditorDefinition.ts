@@ -45,23 +45,23 @@ export class SurveyQuestionEditorDefinition {
         },
         "matrixdropdowncolumn@checkbox" : {
             properties: ["hasOther", "choicesOrder", "colCount"],
-            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}, {name: "visibleIf", index: 12}]
         },
         "matrixdropdowncolumn@radiogroup" : {
             properties: ["hasOther", "choicesOrder", "colCount"],
-            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}, {name: "visibleIf", index: 12}]
         },
         "matrixdropdowncolumn@dropdown" : {
             properties: ["hasOther", "choicesOrder", "optionsCaption"],
-            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}]
+            tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}, {name: "visibleIf", index: 12}]
         },
         "matrixdropdowncolumn@text" : {
             properties: ["inputType", "placeHolder"],
-            tabs: [{name: "validators", index: 10}]
+            tabs: [{name: "validators", index: 10}, {name: "visibleIf", index: 12}]
         },
         "matrixdropdowncolumn@comment" : {
             properties: ["placeHolder"],
-            tabs: [{name: "validators", index: 10}]
+            tabs: [{name: "validators", index: 10}, {name: "visibleIf", index: 12}]
         },
         "multipletextitem": {
             properties: ["inputType", "placeHolder"],
