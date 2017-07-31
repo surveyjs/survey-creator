@@ -85,6 +85,7 @@ export var defaultStrings = {
         matrixdynamic: "Matrix (dynamic rows)",
         multipletext: "Multiple Text",
         panel: "Panel",
+        paneldynamic: "Panel (dynamic panels)",
         radiogroup: "Radiogroup",
         rating: "Rating",
         text: "Single Input"

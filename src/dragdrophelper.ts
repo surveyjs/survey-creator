@@ -239,7 +239,11 @@ export class DragDropHelper {
         targetElement = Survey.JsonObject.metaData.createClass(json["type"]);
         new Survey.JsonObject().toObject(json, targetElement);
         targetElement.name = elementName;
-        targetElement.setData(this.survey);
+        if(targetElement["setSurveyImpl"]) {
+            targetElement["setSurveyImpl"](this.survey);
+        } else {
+            targetElement["setData"](this.survey);
+        }
         targetElement.renderWidth = "100%";
         targetElement["koIsDragging"](true);
         return targetElement;
