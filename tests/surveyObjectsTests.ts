@@ -112,8 +112,8 @@ QUnit.test("addQuestion into the QuestionPanelDynamic", function (assert) {
     var objects = new SurveyObjects(ko.observableArray(), ko.observable());
     objects.survey = survey;
     var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
-    objects.addElement(pnlQuestion, page);
     if(!pnlQuestion) return;
+    objects.addElement(pnlQuestion, page);
     var newQuestion = pnlQuestion["template"].addNewQuestion("text", "question1");
 
     objects.addElement(newQuestion, pnlQuestion["template"]);
