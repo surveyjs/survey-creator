@@ -389,3 +389,16 @@ QUnit.test("Add item into page", function (assert) {
     assert.equal(page.elements.length, 1, "There is one element on the page");    
     assert.equal(page.elements[0].name, "panel1", "The first element is 'panel1'");    
 });
+QUnit.test("Move item into empty paneldynamic", function (assert) {
+    var survey = new Survey.Survey();
+    var page = <Survey.Page>survey.addNewPage("page1");
+    var panelDynamic = page.addNewQuestion("paneldynamic", "panel1");
+    if(!panelDynamic) return;
+    assert.equal(panelDynamic["template"].elements.length, 0, "There is no questions in the template");    
+    var target = new Survey.QuestionText("q1");
+    var dragTarget = new DragDropTargetElement(page, target, null);
+    assert.equal(dragTarget.moveTo(panelDynamic["template"], true), true, "You can move a question here");
+    dragTarget.doDrop();
+    assert.equal(panelDynamic["template"].elements.length, 1, "There are two questions in the template");    
+    assert.equal(panelDynamic["template"].elements[0].name, "q1", "It is the 'q1' question");    
+});

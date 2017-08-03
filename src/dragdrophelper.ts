@@ -1,4 +1,5 @@
 ﻿import * as Survey from "survey-knockout";
+import {SurveyHelper} from "./surveyHelper";
 
 export class DragDropTargetElement {
     constructor(public page: Survey.Page, public target: any, public source: any) {
@@ -144,17 +145,28 @@ export class DragDropTargetElement {
             var row = rows[i];
             var elements = row["koElements"]();
             for(var j = 0; j < elements.length; j ++) {
-                if(elements[j].isPanel) {
-                    var res = this.findInfoInPanel(elements[j], el, isEdge);
+                var element = elements[j];
+                if(element.isPanel) {
+                    var res = this.findInfoInPanel(element, el, isEdge);
                     if(res) {
-                        if(res.element == elements[j]) {
+                        if(res.element == element) {
                             res.rIndex = i;
                             res.elIndex = j;
                         }
                         return res;
                     }
                 }
-                if(elements[j] == el) return { panel: panel, rIndex: i, elIndex: j, element: elements[j] };
+                if(element == el) return { panel: panel, rIndex: i, elIndex: j, element: element };
+                //TODO refactor!!!
+                if(!element.isPanel) {
+                    var childElements = this.getElements(element);
+                    for(var k = 0; k < childElements.length; k ++) {
+                        if(childElements[k].isPanel) {
+                            var res = this.findInfoInPanel(childElements[k], el, isEdge);
+                            if(res) return res;
+                        }
+                    }
+                }
             }
         }
         return null;
@@ -164,6 +176,9 @@ export class DragDropTargetElement {
         var json = new Survey.JsonObject().toJsonObject(this.target);
         new Survey.JsonObject().toObject(json, result);
         return result;
+    }
+    private getElements(element: any): Array<any> {
+        return SurveyHelper.getElements(element, true);
     }
 }
 

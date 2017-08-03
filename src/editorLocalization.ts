@@ -67,6 +67,7 @@
 export var defaultStrings = {
     //survey templates
     survey: {
+        edit: "Edit",
         dropQuestion: "Please drop a question here.",
         copy: "Copy",
         addToToolbox: "Add to toolbox",

@@ -24,6 +24,7 @@ export class SurveyForDesigner extends Survey.Survey {
     }
     public get selectedElement(): any {return this.selectedElementValue;}
     public set selectedElement(value: any) {
+        if(value && value["selectedElementInDesign"]) value = value["selectedElementInDesign"];
         if (value == this.selectedElementValue) return;
         var oldValue = this.selectedElementValue;
         this.selectedElementValue = value;
@@ -40,6 +41,13 @@ export class SurveyForDesigner extends Survey.Survey {
     }
 }
 
+function getSurvey(el: any) : any {
+    if(!el) return null;
+    var res = el["survey"];
+    if(res) return res;
+    return el["data"];
+}
+
 function panelBaseOnCreating(self: any) {
     self.dragEnterCounter = 0;
     self.emptyElement = null;
@@ -54,7 +62,7 @@ function elementOnCreating(self: any, className: string) {
     self.dragDropHelperValue = null;
     self.dragDropHelper = function () {
         if (self.dragDropHelperValue == null) {
-            self.dragDropHelperValue = self.data["dragDropHelper"];
+            self.dragDropHelperValue = getSurvey(self)["dragDropHelper"];
         }
         return self.dragDropHelperValue;
     };
@@ -86,7 +94,7 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
         dragDropHelper.doDragDropOver(e, self);
     };
     var eSpan: HTMLSpanElement = document.createElement("span");
-    eSpan.textContent = self.data.getEditorLocString('survey.dropQuestion');
+    eSpan.textContent = getSurvey(self).getEditorLocString('survey.dropQuestion');
     eDiv.appendChild(eSpan);
     root.appendChild(eDiv);
     return eDiv;
@@ -114,7 +122,7 @@ function createElementAddons(data: any, isPanel: boolean): HTMLElement {
     btn.className = "btn btn-primary  btn-xs";
     btn.onclick = function(e) { data.editQuestionClick();};
     var span = document.createElement("span");
-    span.innerText = "Edit"; //TODO
+    span.innerText = data.getEditorLocString('survey.edit');
     btn.appendChild(span);
     main.appendChild(btn);
     btn = document.createElement("button");
@@ -171,22 +179,25 @@ function elementOnAfterRendering(el: any, self: any, className: string, isPanel:
     el.onclick = function(e) { 
         if(!e["markEvent"]) {
             e["markEvent"] = true;
-            self.data["selectedElement"] = self; 
+            getSurvey(self)["selectedElement"] = self; 
         }
     };
     el.onkeydown = function(e) {
-        if(e.witch == 46) self.data.deleteCurrentObjectClick(); 
+        if(e.witch == 46) getSurvey(self).deleteCurrentObjectClick(); 
         return true;
     }
+    disable = disable && !(self.getType() == "paneldynamic"); //TODO
     if(disable) {
         var childs = el.childNodes;
         for(var i = 0; i < childs.length; i ++) {
             if(childs[i].style) childs[i].style.pointerEvents = "none";
         }
     }
-    self.addonsElement = createElementAddons(self.data, isPanel);
-    self.addonsElement.style.display = self.koIsSelected() ? "": "none";    
-    el.appendChild(self.addonsElement);
+    if(!self["selectedElementInDesign"] || self["selectedElementInDesign"] === self) {
+        self.addonsElement = createElementAddons(getSurvey(self), isPanel);
+        self.addonsElement.style.display = self.koIsSelected() ? "": "none";    
+        el.appendChild(self.addonsElement);
+    }
 }
 
 Survey.Page.prototype["onCreating"] = function () {
@@ -194,9 +205,9 @@ Survey.Page.prototype["onCreating"] = function () {
 };
 
 Survey.Page.prototype["onAfterRenderPage"] = function(el) {
-    if(!this.data.isDesignMode) return;
+    if(!getSurvey(this).isDesignMode) return;
     var self = this;
-    var dragDropHelper = this.data["dragDropHelper"];
+    var dragDropHelper = getSurvey(this)["dragDropHelper"];
     this.dragEnterCounter = 0;
     el.ondragenter = function (e) { 
         e.preventDefault(); 
@@ -220,7 +231,7 @@ Survey.Panel.prototype["onCreating"] = function () {
 };
 
 Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
-    if(!this.data.isDesignMode) return;
+    if(!getSurvey(this).isDesignMode) return;
     var rows = this.koRows();
     var self = this;
     if(this.elements.length == 0) {
@@ -230,8 +241,8 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
 }
 
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {
-    if (this.data == null) return;
-    this.koIsSelected(this.data["selectedElementValue"] == this);
+    if (getSurvey(this) == null) return;
+    this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
 
 Survey.QuestionBase.prototype["onCreating"] = function () {
@@ -239,11 +250,11 @@ Survey.QuestionBase.prototype["onCreating"] = function () {
 };
 
 Survey.QuestionBase.prototype["onAfterRenderQuestion"] = function(el) {
-    if(!this.data.isDesignMode) return;
+    if(!getSurvey(this).isDesignMode) return;
     elementOnAfterRendering(el, this, question_design_class, false, true);
 };
 
 Survey.QuestionBase.prototype["onSelectedElementChanged"] = function() {
-    if (this.data == null) return;
-    this.koIsSelected(this.data["selectedElementValue"] == this);
+    if (getSurvey(this) == null) return;
+    this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };

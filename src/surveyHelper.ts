@@ -36,8 +36,16 @@ export class SurveyHelper {
         if (obj["name"]) return obj["name"];
         var objType = SurveyHelper.getObjectType(obj);
         if (objType != ObjType.Page) return "";
-        var data = <Survey.Survey>(<Survey.Page>obj).data;
+        var data = <Survey.Survey>(<Survey.Page>obj)["data"];
+        if(!data) data = <Survey.Survey>(<Survey.Page>obj)["survey"]; //TODO
         var index = data.pages.indexOf(<Survey.Page>obj);
         return "[Page " + (index + 1) + "]";
     }
+    public static getElements(element: any, includeHidden: boolean = false): Array<any> {
+        if(!element) return [];
+        if(element.getElementsInDesign) return element.getElementsInDesign(includeHidden);
+        if(element.elements) return element.elements;
+        return [];
+    }
+
 }

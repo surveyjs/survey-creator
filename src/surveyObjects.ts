@@ -27,7 +27,7 @@ export class SurveyObjects {
     public addElement(element: any, parent: any) {
         var parentIndex = parent != null ? this.getItemIndex(parent) : 0;
         if (parentIndex < 0) return;
-        var elements = parent != null ? parent.elements : this.survey.pages;
+        var elements = parent != null ? this.getElements(parent) : this.survey.pages;
         var elementIndex = elements.indexOf(element);
         var newIndex = elementIndex + 1 + parentIndex;
         if(elementIndex > 0) {
@@ -36,12 +36,10 @@ export class SurveyObjects {
         }
         var item = this.createItem(element, this.koObjects()[parentIndex]);
         this.addItem(item, newIndex);
-        if(element.elements) {
-            var objs = [];
-            this.buildElements(objs, element.elements, item);
-            for(var i = 0; i < objs.length; i ++){
-                this.koObjects.splice(newIndex + 1 + i, 0, objs[i]);   
-            }
+        var objs = [];
+        this.buildElements(objs, this.getElements(element), item);
+        for(var i = 0; i < objs.length; i ++){
+            this.koObjects.splice(newIndex + 1 + i, 0, objs[i]);   
         }
         this.koSelected(item);
     }
@@ -83,10 +81,10 @@ export class SurveyObjects {
         this.koSelected(objs[itemIndex]);
     }
     private getAllElementCount(element: any) {
-        if(!element.elements) return 0;
+        var elements = this.getElements(element);
         var res = 0;
-        for(var i = 0; i < element.elements.length; i ++) {
-            res += 1 + this.getAllElementCount(element.elements[i]);
+        for(var i = 0; i < elements.length; i ++) {
+            res += 1 + this.getAllElementCount(elements[i]);
         }
         return res;
     }
@@ -117,22 +115,20 @@ export class SurveyObjects {
             var page = <Survey.Page>this.survey.pages[i];
             var pageItem = this.createItem(page, root);
             objs.push(pageItem);
-            this.buildElements(objs, page.elements, pageItem);
+            this.buildElements(objs, this.getElements(page), pageItem);
         }
         this.koObjects(objs);
         this.selectObject(this.survey)
     }
-    private buildElements(objs: Array<any>, elements: Array<Survey.IElement>, parentItem: SurveyObjectItem) {
+    private getElements(element: any): Array<any> {
+        return SurveyHelper.getElements(element);
+    }
+    private buildElements(objs: Array<any>, elements: Array<any>, parentItem: SurveyObjectItem) {
         for (var i = 0; i < elements.length; i++) {
             var el = elements[i];
-            if(el.isPanel) {
-                var panelItem = this.createItem(<Survey.Panel>el, parentItem);
-                objs.push(panelItem);
-                this.buildElements(objs, (<Survey.Panel>el).elements, panelItem);
-            }
-            else {
-                objs.push(this.createItem(<Survey.QuestionBase>el, parentItem));
-            }
+            var item = this.createItem(<Survey.Base>el, parentItem);
+            objs.push(item);
+            this.buildElements(objs, this.getElements(el), item);
         }
     }
     private createItem(value: Survey.Base, parent: SurveyObjectItem) {
@@ -143,6 +139,7 @@ export class SurveyObjects {
         return item;
     }
     private getItemIndex(value: Survey.Base): number {
+        if(value["selectedElementInDesign"]) value = value["selectedElementInDesign"];
         var objs = this.koObjects();
         for (var i = 0; i < objs.length; i++) {
             if (objs[i].value == value) return i;

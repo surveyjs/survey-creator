@@ -106,6 +106,20 @@ QUnit.test("addQuestion to the first page", function (assert) {
     assert.equal(objects.koObjects()[1 + page.questions.length].value, question, "new object is added");
     assert.equal(objects.koSelected().value, question, "new question is selected");
 });
+QUnit.test("addQuestion into the QuestionPanelDynamic", function (assert) {
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var objects = new SurveyObjects(ko.observableArray(), ko.observable());
+    objects.survey = survey;
+    var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
+    objects.addElement(pnlQuestion, page);
+    if(!pnlQuestion) return;
+    var newQuestion = pnlQuestion["template"].addNewQuestion("text", "question1");
+
+    objects.addElement(newQuestion, pnlQuestion["template"]);
+    assert.equal(objects.koObjects().length, 1 + 1 + 1 + 1, "survey + page + paneldynamic + new question");
+    assert.equal(objects.koSelected().value.name, newQuestion.name, "new question is selected");
+});
 QUnit.test("removeObject method - remove Question", function (assert) {
     var survey = createSurvey();
     var objects = new SurveyObjects(ko.observableArray(), ko.observable());
@@ -202,6 +216,18 @@ QUnit.test("SurveyVerbChangePageItem test", function (assert) {
     verb.koSelectedItem(survey.pages[2]);
     assert.equal(survey.pages[0].questions.length, 1, "one question left on the first page");
     assert.equal(survey.pages[2].questions.length, 3, "three question now on the third page");
+});
+
+QUnit.test("PanelDynamic test", function (assert) {
+    var survey = new Survey.Survey();
+    survey.addNewPage("p1");
+    var q = survey.pages[0].addNewQuestion("paneldynamic", "q1");
+    if(!q) return;
+    q["template"].addNewQuestion("text", "question1");
+    q["template"].addNewQuestion("text", "question2");
+    var objects = new SurveyObjects(ko.observableArray(), ko.observable());
+    objects.survey = survey;
+    assert.equal(objects.koObjects().length, 1 + 1 + 1 + 2, "survey + 1 pages + 1 dynamic page +  2 questions.");
 });
 
 function createSurvey(): Survey.Survey {

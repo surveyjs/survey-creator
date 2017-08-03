@@ -574,27 +574,29 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         return SurveyHelper.getNewPanelName(this.getAllPanels());
     }
     private getAllQuestions(): Array<any> {
-        var result =  this.survey.getAllQuestions();
-        for(var i = 0; i < this.newQuestions.length; i ++) {
-            result.push(this.newQuestions[i]);
+        var result =  [];
+        for(var i = 0; i < this.survey.pages.length; i ++) {
+            this.addElements(this.survey.pages[i].elements, false, result);
         }
+        this.addElements(this.newPanels, false, result);
+        this.addElements(this.newQuestions, false, result);
         return result;
     }
     private getAllPanels(): Array<any> {
         var result = [];
         for(var i = 0; i < this.survey.pages.length; i ++) {
-            this.addPanels(this.survey.pages[i], result);
+            this.addElements(this.survey.pages[i].elements, true, result);
         }
-        for(var i = 0; i < this.newPanels.length; i ++) {
-            result.push(this.newPanels[i]);
-        }
+        this.addElements(this.newPanels, true, result);
+        this.addElements(this.newQuestions, true, result);
         return result;
     }
-    private addPanels(panel: any, result: Array<any>) {
-        for(var i = 0; i < panel.elements.length; i ++) {
-            if(!panel.elements[i].isPanel) continue;
-            result.push(panel.elements[i]);
-            this.addPanels(panel.elements[i], result);
+    private addElements(elements: Array<any>, isPanel : boolean, result: Array<any>) {
+        for(var i = 0; i < elements.length; i ++) {
+            if(elements[i].isPanel === isPanel) {
+                result.push(elements[i]);
+            }
+            this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
         }
     }
     private doClickQuestionCore(question: Survey.QuestionBase) {
