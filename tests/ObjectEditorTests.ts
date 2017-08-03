@@ -91,6 +91,7 @@ QUnit.test("Use onCanShowPropertyCallback", function (assert) {
 
 class EditorOptionsTests implements ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
+    showApplyButtonInEditors: boolean;
     propertyName: string;
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
         itemValue.value = "item1";

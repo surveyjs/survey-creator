@@ -54,7 +54,7 @@ export class SurveyQuestionEditor {
     public onOkClick: any;
     public onApplyClick: any;
     public onResetClick: any;
-    koTabs: any; koActiveTab: any; koTitle: any;
+    koTabs: any; koActiveTab: any; koTitle: any; koShowApplyButton: any;
     onTabClick: any;
     constructor(public obj: Survey.Base, public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean, 
         public className: string = null, public options: ISurveyObjectEditorOptions = null) {
@@ -69,6 +69,7 @@ export class SurveyQuestionEditor {
         this.koActiveTab = ko.observable(tabs[0].name);
         this.koTabs = ko.observableArray(tabs);
         this.koTitle = ko.observable();
+        this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
         if(this.obj["name"]) {
             this.koTitle(editorLocalization.getString("pe.qEditorTitle")["format"](this.obj["name"]));
         }

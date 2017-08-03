@@ -3,6 +3,7 @@ import {editorLocalization} from "../editorLocalization";
 
 export interface ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
+    showApplyButtonInEditors: boolean;
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any);
@@ -23,7 +24,7 @@ export class SurveyPropertyEditorBase {
     }
 
     private value_: any = null;
-    public options: ISurveyObjectEditorOptions = null;
+    private optionsValue: ISurveyObjectEditorOptions = null; 
     public onChanged: (newValue: any) => any;
     public onGetLocale: () => string;
     public editablePropertyName: string;
@@ -41,6 +42,12 @@ export class SurveyPropertyEditorBase {
         if(this.onGetLocale) return this.onGetLocale();
         return "";
     }
+    public get options(): ISurveyObjectEditorOptions { return this.optionsValue; }
+    public set options(value: ISurveyObjectEditorOptions) { 
+        this.optionsValue = value; 
+        this.onOptionsChanged();
+    }
+    protected onOptionsChanged() {}
     protected setValueCore(value: any) {
         this.value_ = value;
     }

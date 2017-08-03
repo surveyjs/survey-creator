@@ -56,6 +56,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private showEmbededSurveyTabValue: boolean;
     private select2: any = null;
     private alwaySaveTextInPropertyEditorsValue: boolean = false;
+    private showApplyButtonValue: boolean = true;
 
     public surveyId: string = null;
     public surveyPostId: string = null;
@@ -708,12 +709,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         return annotations;
     }
     //implements ISurveyObjectEditorOptions
-    get alwaySaveTextInPropertyEditors(): boolean {
-        return this.alwaySaveTextInPropertyEditorsValue;  
-    }
-    set alwaySaveTextInPropertyEditors(value: boolean) {
-        this.alwaySaveTextInPropertyEditorsValue = value;
-    }
+    get alwaySaveTextInPropertyEditors(): boolean { return this.alwaySaveTextInPropertyEditorsValue; }
+    set alwaySaveTextInPropertyEditors(value: boolean) { this.alwaySaveTextInPropertyEditorsValue = value; }
+    get showApplyButtonInEditors(): boolean { return this.showApplyButtonValue; }
+    set showApplyButtonInEditors(value: boolean) { this.showApplyButtonValue = value; }
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
         var options = {propertyName: propertyName, newItem: itemValue};
         this.onItemValueAdded.fire(this, options);

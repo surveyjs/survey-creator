@@ -6,15 +6,20 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public title: any;
     public onApplyClick: any;
     public onResetClick: any;
+    koShowApplyButton: any;
     constructor() {
         super();
         this.title = ko.observable();
         var self = this;
+        this.koShowApplyButton = ko.observable(true);
         self.onApplyClick = function () { self.apply(); };
         self.onResetClick = function () { self.reset(); };
     }
     public setTitle(value: string) { this.title(value); }
     public hasError(): boolean { return false; }
+    protected onOptionsChanged() {
+        this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
+    }
     protected onBeforeApply() { }
     private reset() {
         this.value = this.value;
