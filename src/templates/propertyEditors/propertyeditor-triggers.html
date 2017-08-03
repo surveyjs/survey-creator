@@ -6,7 +6,7 @@
     <div class="row" style="margin-bottom:10px">
         <div class="col-lg-12">
             <div class="input-group form-inline">
-                <div class="input-group-btn">
+                <div class="input-group-btn" data-bind="visible: koAllowAddRemoveItems">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
@@ -17,7 +17,7 @@
                     </ul>
                 </div>
                 <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-                <span class="input-group-btn">
+                <span class="input-group-btn" data-bind="visible: koAllowAddRemoveItems">
                     <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
                 </span>
             </div>

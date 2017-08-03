@@ -171,6 +171,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
         this.propertyEditorValue.value = this.getValue(this.property);
         this.propertyEditorValue.editablePropertyName = this.property.name;
+        this.propertyEditorValue.setObject(obj);
     }
     private doOnGetLocale(): string {
         if(this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();

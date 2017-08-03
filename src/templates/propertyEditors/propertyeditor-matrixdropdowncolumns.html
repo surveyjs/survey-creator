@@ -29,12 +29,12 @@
                     <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
                 </td>
                 <td><input type="text" class="form-control" data-bind="value:koTitle" style="width:120px" /></td>
-                <td><button type="button" class="btn" data-bind="click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                <td><button type="button" class="btn" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
             </tr>
             <!-- /ko -->
             <tr>
                 <td colspan="5">
-                    <div class="row btn-toolbar">
+                    <div class="row btn-toolbar" data-bind="visible: koAllowAddRemoveItems">
                         <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/>
                         <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
                     </div>

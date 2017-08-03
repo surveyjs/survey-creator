@@ -23,13 +23,13 @@
                 </td>
                 <td><input type="text" class="form-control" data-bind="value:koName" style="width:180px" /></td>
                 <td><input type="text" class="form-control" data-bind="value:koTitle" style="width:180px" /></td>
-                <td><button type="button" class="btn" data-bind="click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                <td><button type="button" class="btn" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
             </tr>
             <!-- /ko -->
             <tr>
                 <td colspan="4">
-                    <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')"/>
-                    <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+                    <input type="button" class="btn btn-success" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')"/>
+                    <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')" />
                 </td>
             </tr>
         </tbody>
