@@ -2,7 +2,7 @@
     <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
 </script>
 <script type="text/html" class="btn-xs" id="propertyeditorcontent-itemvalues">
-    <div style="margin-bottom:3px">
+    <div style="margin-bottom:3px" data-bind="visible: koShowTextView">
         <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() == 'form', 'btn-link':koActiveView() != 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
         <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() != 'form', 'btn-link':koActiveView() == 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
     </div>
@@ -30,15 +30,15 @@
                         <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
                     </td>
                     <td><input type="text" class="form-control" data-bind="value:koText" style="width:200px" /></td>
-                    <td><button type="button" class="btn btn-xs" data-bind="click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                    <td><button type="button" class="btn btn-xs" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
                 </tr>
                 <!-- /ko -->
             </tbody>
         </table>
     </div>
     <div class="row btn-toolbar" data-bind="visible:koActiveView() == 'form'">
-        <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
-        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+        <input type="button" class="btn btn-success" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')" />
+        <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')" />
     </div>
     <div data-bind="visible:koActiveView() != 'form'">
         <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>

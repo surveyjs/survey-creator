@@ -6,12 +6,14 @@ import * as Survey from "survey-knockout";
 export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     koActiveView: any;
     koItemsText: any;
+    koShowTextView: any;
     changeToTextViewClick: any;
     changeToFormViewClick: any;
     constructor() {
         super();
         var self = this;
         this.koActiveView = ko.observable("form");
+        this.koShowTextView = ko.observable(true);
         this.koItemsText = ko.observable("");
         this.koActiveView.subscribe(function (newValue) {
             if (newValue == "form") self.updateItems(self.koItemsText());
@@ -29,6 +31,15 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
             result = result || item.koHasError();
         }
         return result;
+    }
+    protected createEditorOptions(): any { 
+        var options = super.createEditorOptions();
+        options.showTextView = true;
+        return options; 
+    }
+    protected onSetEditorOptions(editorOptions: any) {
+        super.onSetEditorOptions(editorOptions);
+        this.koShowTextView(editorOptions.showTextView);
     }
     protected createNewEditorItem(): any { 
         var itemValue = new Survey.ItemValue(null);

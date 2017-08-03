@@ -67,6 +67,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     public onDesignerSurveyCreated: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onSetPropertyEditorOptions: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
     public get isAutoSave() { return this.koAutoSave();}
     public set isAutoSave(newVal) { this.koAutoSave(newVal); }
@@ -720,6 +721,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
         var options = {newColumn: column};
         this.onMatrixColumnAdded.fire(this, options);
+    }
+    onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any) {
+        var options = {propertyName: propertyName, obj: obj, editorOptions: editorOptions};
+        this.onSetPropertyEditorOptions.fire(this, options);
     }
 }
 

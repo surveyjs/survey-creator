@@ -19,7 +19,10 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     private reset() {
         this.value = this.value;
     }
-    public setObject(value: any) { this.object = value; }
+    public setObject(value: any) { 
+        this.object = value; 
+        super.setObject(value);
+    }
     public get isEditable(): boolean { return false; }
     public apply() {
         if (this.hasError()) return;

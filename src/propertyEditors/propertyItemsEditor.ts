@@ -9,11 +9,13 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     public onMoveDownClick: any;
     public onAddClick: any;
     public onClearClick: any;
+    koAllowAddRemoveItems: any;
 
     constructor() {
         super();
         this.koItems = ko.observableArray();
         this.value = [];
+        this.koAllowAddRemoveItems = ko.observable(true);
         var self = this;
         self.onDeleteClick = function (item) { self.koItems.remove(item); };
         self.onClearClick = function (item) { self.koItems.removeAll(); };
@@ -29,6 +31,11 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         if (value == null || !Array.isArray(value)) value = [];
         return value;
     }
+    protected createEditorOptions(): any { return { allowAddRemoveItems: true }; }
+    protected onSetEditorOptions(editorOptions: any) {
+        this.koAllowAddRemoveItems(editorOptions.allowAddRemoveItems);
+    }
+
     protected AddItem() {
         this.koItems.push(this.createNewEditorItem());
     }

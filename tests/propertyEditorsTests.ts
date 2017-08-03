@@ -22,6 +22,8 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {}
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
+    onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any) {
+    }
 }
 
 QUnit.test("Create correct property editor", function (assert) {

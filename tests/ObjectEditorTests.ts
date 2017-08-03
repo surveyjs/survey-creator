@@ -99,6 +99,11 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
         column.name = "column1";
     }
+    onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any) {
+        if(propertyName == "choices" && obj["name"] == "hideAddRemove") {
+            editorOptions.allowAddRemoveItems = false;
+        }
+    }
 }
 
 QUnit.test("On new ItemValue added", function (assert) {
@@ -130,4 +135,21 @@ QUnit.test("On new Matrix Column added", function (assert) {
     itemValuesEditor.onApplyClick();
     assert.equal(question.columns.length, 1, "One item is added");
     assert.equal(question.columns[0].name, "column1", "auto generated column name");
+});
+
+QUnit.test("hideAddRemoveButtons", function (assert) {
+    var options = new EditorOptionsTests();
+    var editor = new SurveyObjectEditor(options);
+    var question1 = new Survey.QuestionDropdown("q1");
+    var question2 = new Survey.QuestionDropdown("hideAddRemove");
+    
+    editor.selectedObject = question1;
+    var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+    var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+    assert.equal(itemValuesEditor.koAllowAddRemoveItems(), true, "Show buttons for the first question");
+    
+    editor.selectedObject = question2;
+    property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+    itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+    assert.equal(itemValuesEditor.koAllowAddRemoveItems(), false, "Hide buttons for the second question");
 });

@@ -5,6 +5,7 @@ export interface ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
+    onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any);
 }
 
 export class SurveyPropertyEditorBase {
@@ -44,7 +45,15 @@ export class SurveyPropertyEditorBase {
         this.value_ = value;
     }
     public setTitle(value: string) { }
-    public setObject(value: any) { }
+    public setObject(value: any) { 
+        if(this.options) {
+            var editorOptions = this.createEditorOptions();
+            this.options.onSetPropertyEditorOptionsCallback(this.editablePropertyName, value, editorOptions);
+            this.onSetEditorOptions(editorOptions);
+        }
+    }
+    protected createEditorOptions(): any { return {}; }
+    protected onSetEditorOptions(editorOptions: any) {}
     protected onValueChanged() {
     }
     protected getCorrectedValue(value: any): any {  return value;  }
