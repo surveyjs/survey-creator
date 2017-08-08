@@ -446,6 +446,10 @@ $editor-height:75vh;
     background-image: url('./images/Panel.svg');
     @include svg-icon(16px);
 }
+.icon-paneldynamic:before {
+    background-image: url('./images/PanelDynamic.svg');
+    @include svg-icon(16px);
+}
 .icon-checkbox:before {
     background-image: url('./images/Checkbox.svg');
     @include svg-icon(16px);
