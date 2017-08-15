@@ -1,6 +1,6 @@
-import {editorLocalization} from "../editorLocalization";
+import { editorLocalization } from "../editorLocalization";
 
-var spanishTranslation = {
+var italianTranslation = {
     // strings for survey templates
     survey: {
         dropQuestion: "Aggiungi una domanda qui",
@@ -169,7 +169,13 @@ var spanishTranslation = {
             name: "titolo",
             title: "Titolo della pagina"
         },
+        indent: 'rientro',
+        inputType: "tipo di inserimento",
+        isRequired: "richiesto",
+        placeHolder: "testo di riferimento",
+        size: 'numero massimo di caratteri',
+        readOnly: 'sola lettura'
     }
 };
 
-editorLocalization.locales["it"] = spanishTranslation;
+editorLocalization.locales["it"] = italianTranslation;
