@@ -2,16 +2,43 @@
 import * as Survey from "survey-knockout";
 import {editorLocalization} from "./editorLocalization";
 
+/**
+ * The Toolbox item description
+ */
 export interface IQuestionToolboxItem {
+    /**
+     * An unique name
+     */
     name: string;
+    /**
+     * Icon name
+     */
     iconName: string;
+    /**
+     * The JSON that used to create a new question/panel. The 'type' attribute is requried.
+     */
     json: any;
+    /**
+     * Toolbox item title
+     */
     title: string;
+    /**
+     * True, if an end user added this item into Toolbox from the survey
+     */
     isCopied: boolean;
 }
 
+/**
+ * The list of Toolbox items.
+ */
 export class QuestionToolbox {
+    /**
+     * Modify this array to change the toolbox items order.
+     */
     public orderedQuestions = ["text", "checkbox", "radiogroup", "dropdown", "comment", "rating", "html"];
+    /**
+     * The maximum number of copied toolbox items. If an user adding copiedItemMaxCount + 1 item, the first added item will be removed.
+     */
     public copiedItemMaxCount: number = 3;
     private itemsValue: Array<IQuestionToolboxItem> = [];
 
@@ -21,6 +48,9 @@ export class QuestionToolbox {
         this.koItems = ko.observableArray();
         this.createDefaultItems(supportedQuestions);
     }
+    /**
+     * The Array of Toolbox items as Text JSON.
+     */
     public get jsonText() {
         return JSON.stringify(this.itemsValue);
     }
@@ -28,6 +58,9 @@ export class QuestionToolbox {
         this.itemsValue = (value) ? JSON.parse(value) : [];
         this.onItemsChanged();
     }
+    /**
+     * The Array of copied Toolbox items as Text JSON.
+     */
     public get copiedJsonText(): string {
         return JSON.stringify(this.copiedItems);
     }
@@ -39,7 +72,13 @@ export class QuestionToolbox {
             this.addItem(newItems[i]);
         }
     }
+    /**
+     * The Array of Toolbox items
+     */
     public get items(): Array<IQuestionToolboxItem> { return this.itemsValue; }
+    /**
+     * The Array of copied Toolbox items
+     */
     public get copiedItems(): Array<IQuestionToolboxItem> {
         var result = [];
         for (var i = 0; i < this.itemsValue.length; i++) {
@@ -47,12 +86,21 @@ export class QuestionToolbox {
         }
         return result;
     }
+    /**
+     * Add toolbox items into the Toolbox
+     * @param items the list of new items
+     * @param clearAll set it to true to clear all previous items.
+     */
     public addItems(items: Array<IQuestionToolboxItem>, clearAll: boolean = false) {
         if (clearAll) {
             this.clearItems();
         }
         this.onItemsChanged();
     }
+    /**
+     * Add a copied Question into Toolbox
+     * @param question a copied Survey.Question
+     */
     public addCopiedItem(question: Survey.QuestionBase) {
         var item = { name: question.name, title: question.name, isCopied: true, iconName: "icon-default", json: this.getQuestionJSON(question) };
         if (this.replaceItem(item)) return;
@@ -60,10 +108,20 @@ export class QuestionToolbox {
         if (this.copiedItemMaxCount > 0 && copied.length == this.copiedItemMaxCount) this.removeItem(copied[this.copiedItemMaxCount - 1].name);
         this.addItem(item);
     }
+    /**
+     * Add a toolbox item
+     * @param item the toolbox item description
+     * @see IQuestionToolboxItem 
+     */
     public addItem(item: IQuestionToolboxItem) {
         this.itemsValue.push(item);
         this.onItemsChanged();
     }
+    /**
+     * Add a new toolbox item, add delete the old item with the same name
+     * @param item the toolbox item description
+     * @see IQuestionToolboxItem 
+     */
     public replaceItem(item: IQuestionToolboxItem): boolean {
         var index = this.indexOf(item.name);
         if (index < 0) return;
@@ -71,6 +129,11 @@ export class QuestionToolbox {
         this.onItemsChanged();
         return true;
     }
+    /**
+     * Remove a toolbox item by it's name
+     * @param name toolbox item name
+     * @see IQuestionToolboxItem 
+     */
     public removeItem(name: string): boolean {
         var index = this.indexOf(name);
         if (index < 0) return false;
@@ -78,10 +141,16 @@ export class QuestionToolbox {
         this.onItemsChanged();
         return true;
     }
+    /**
+     * Remove all toolbox items.
+     */
     public clearItems() {
         this.itemsValue = [];
         this.onItemsChanged();
     }
+    /**
+     * Remove all copied toolbox items.
+     */
     public clearCopiedItems() {
         var removedItems = this.copiedItems;
         for (var i = 0; i < removedItems.length; i++) {

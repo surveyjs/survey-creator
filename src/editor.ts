@@ -18,19 +18,42 @@ var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates
 import * as Survey from "survey-knockout";
 import {SurveyForDesigner} from "./surveyjsObjects"
 
+/**
+ * The toolbar item description
+ */
 export interface IToolbarItem {
+    /**
+     * Unique string id
+     */
     id: string;
+    /**
+     * Set this property to false to make the toolbar item invisible.
+     */
     visible: KnockoutObservable<boolean> | boolean;
+    /**
+     * Toolbar item title
+     */
     title: KnockoutObservable<string> | string;
+    /**
+     * Set this property to false to disable the toolbar item.
+     */
     enabled?: KnockoutObservable<boolean> | boolean;
+    /**
+     * A callback that calls on toolbar item click.
+     */
     action?: () => void;
+    /**
+     * css class
+     */
     css?: KnockoutObservable<string> | string;
     innerCss?: KnockoutObservable<string> | string;
     data?: any;
     template?: string;
     items?: KnockoutObservableArray<IToolbarItem>;
 }
-
+/**
+ * Survey Editor is WYSIWYG editor. 
+ */
 export class SurveyEditor implements ISurveyObjectEditorOptions {
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
     private renderedElement: HTMLElement;
@@ -58,21 +81,87 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private alwaySaveTextInPropertyEditorsValue: boolean = false;
     private showApplyButtonValue: boolean = true;
 
+    /**
+     * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
+     * @see showEmbededSurveyTab
+     */
     public surveyId: string = null;
+    /**
+     * This property is assign to the survey.surveyPostId property on showing in the "Embed Survey" tab.
+     * @see showEmbededSurveyTab
+     */
     public surveyPostId: string = null;
+    /**
+     * This callback is called on changing "Generate Valid JSON" option.
+     */
     public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
+    /**
+     * The event is called before showing a property in the Property Grid or in Question Editor. 
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj the survey object, Survey, Page, Panel or Question
+     * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+     * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid or in Question Editor
+     */
     public onCanShowProperty: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.question a new added survey question. Survey.QuestionBase object
+     * <br/> options.page the survey Page object where question has been added.
+     */
     public onQuestionAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
+     * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.property  the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+     * <br/> options.newItem a new created Survey.ItemValue object.
+     */
     public onItemValueAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property. 
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.newColumn a new created Survey.MatrixDropdownColumn object.
+     */
     public onMatrixColumnAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.panel a new added survey panel. Survey.Panel object
+     * <br/> options.page the survey Page object where question has been added.
+     */
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
+     * <br/> sender the survey editor object that fires the event
+     */
     public onModified: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * The event is fired when the Survey Editor is initialized and a survey object (Survey.Survey) is created.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.survey  the survey object showing in the editor.
+     */
     public onDesignerSurveyCreated: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * Use this event to control Property Editors UI.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj  the survey object which property is edited in the Property Editor.
+     * <br/> options.propertyName  the name of the edited property.
+     * <br/> options.editorOptions  options that can be changed.
+     * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
+     * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
+     */
     public onSetPropertyEditorOptions: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
+    /**
+     * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
+     */
     public get isAutoSave() { return this.koAutoSave();}
     public set isAutoSave(newVal) { this.koAutoSave(newVal); }
     koShowState = ko.observable(false);
+    /**
+     * A boolean property, false by default. Set it to true to show the state in the toolbar (saving/saved).
+     */
     public get showState() { return this.koShowState();}
     public set showState(newVal) { this.koShowState(newVal); }
 
@@ -91,7 +180,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     saveButtonClick: any;
     draggingToolboxItem: any; clickToolboxItem: any;
     dragEnd: any;
-
+    /**
+     * The Survey Editor constructor.
+     * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
+     * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+     */
     constructor(renderedElement: any = null, options: any = null) {
 
         this.koShowOptions = ko.observable();
@@ -231,10 +324,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         }
         this.koDesignerHeight()
     }
+    /**
+     * The editing survey object (Survey.Survey)
+     */
     public get survey(): SurveyForDesigner {
         return this.surveyValue;
     }
     public get selectedObjectEditor() : SurveyObjectEditor { return this.selectedObjectEditorValue; }
+    /**
+     * Call this method to render the survey editor.
+     * @param element HtmlElement or html element id where Survey Editor will be rendered
+     * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+     */
     public render(element: any = null, options: any = null) {
         if (options) this.setOptions(options);
         var self = this;
@@ -257,6 +358,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             }
         });
     }
+    /**
+     * The Survey JSON as a text. Use it to get Survey JSON or change it.
+     */
     public get text() {
         if (this.koIsShowDesigner()) return this.getSurveyTextFromDesigner();
         return this.jsonEditor.text;
@@ -264,6 +368,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     public set text(value: string) {
         this.changeText(value, true);
     }
+    /**
+     * Set JSON as text  into survey. Clear undo/redo states optionally.
+     * @param value JSON as text
+     * @param clearState default false. Set this parameter to true to clear undo/redo states.
+     */
     public changeText(value: string, clearState = false) {
         var textWorker = new SurveyTextWorker(value);
         if (textWorker.isJsonCorrect) {
@@ -275,10 +384,24 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             this.koViewType("editor");
         }
     }
+    /**
+     * Toolbox object. Contains information about Question toolbox items.
+     * @see QuestionToolbox
+     */
     public get toolbox(): QuestionToolbox { return this.toolboxValue; }
+    /**
+     * The list of toolbar items. You may add/remove/replace them.
+     * @see IToolbarItem
+     */
     public toolbarItems = ko.observableArray<IToolbarItem>();
+    /**
+     * Get and set the maximum of copied questions/panels in the toolbox. The default value is 3
+     */
     public get customToolboxQuestionMaxCount(): number { return this.toolbox.copiedItemMaxCount; }
     public set customToolboxQuestionMaxCount(value: number) { this.toolbox.copiedItemMaxCount = value; }
+    /**
+     * Returns the Editor state. It may return empty string or "saving" and "saved".
+     */
     public get state(): string { return this.stateValue; }
     protected setState(value: string) {
         this.stateValue = value;
@@ -313,17 +436,33 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         var selObj = this.koSelectedObject() ? this.koSelectedObject().value : null;
         this.undoRedo.setCurrent(this.surveyValue, selObj ? selObj.name : null);
     }
+    /**
+     * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
+     * @see isAutoSave
+     */
     public get saveSurveyFunc() { return this.saveSurveyFuncValue; }
     public set saveSurveyFunc(value: any) {
         this.saveSurveyFuncValue = value;
         this.koShowSaveButton(value != null && !this.isAutoSave);
     }
+    /**
+     * Set it to true to show "Options" menu and to false to hide the menu
+     */
     public get showOptions() { return this.koShowOptions(); }
     public set showOptions(value: boolean) { this.koShowOptions(value); }
+    /**
+     * Set it to true to show "JSON Editor" tab and to false to hide the tab
+     */
     public get showJSONEditorTab() { return this.showJSONEditorTabValue; }
     public set showJSONEditorTab(value: boolean) { this.showJSONEditorTabValue = value; }
+    /**
+     * Set it to true to show "Test Survey" tab and to false to hide the tab
+     */
     public get showTestSurveyTab() { return this.showTestSurveyTabValue; }
     public set showTestSurveyTab(value: boolean) { this.showTestSurveyTabValue = value; }
+    /**
+     * Set it to true to show "Embed Survey" tab and to false to hide the tab
+     */
     public get showEmbededSurveyTab() { return this.showEmbededSurveyTabValue; }
     public set showEmbededSurveyTab(value: boolean) { this.showEmbededSurveyTabValue = value; }
 
@@ -336,12 +475,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private setTextValue(value: string) {
         this.jsonEditor.text = value;
     }
+    /**
+     * Add a new page into the editing survey.
+     */
     public addPage() {
         var name = SurveyHelper.getNewPageName(this.survey.pages);
         var page = <Survey.Page>this.surveyValue.addNewPage(name);
         this.addPageToUI(page);
         this.setModified();
     }
+    /**
+     * Returns the localized string by it's id
+     * @param str the string id.
+     */
     public getLocString(str: string) { return editorLocalization.getString(str); }
     private movePage(indexFrom: number, indexTo: number) {
         var page = <Survey.Page>this.survey.pages[indexFrom];
@@ -421,20 +567,32 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.setModified();
         return true;
     }
+    /**
+     * Make a "Survey Designer" tab active.
+     */
     public showDesigner() {
         if (!this.canSwitchViewType("designer")) return;
         this.koViewType("designer");
     }
+    /**
+     * Make a "JSON Editor" tab active.
+     */
     public showJsonEditor() {
         if (this.koViewType() == "editor") return;
         this.jsonEditor.show(this.getSurveyTextFromDesigner());
         this.koViewType("editor");
     }
+    /**
+     * Make a "Test Survey" tab active.
+     */
     public showTestSurvey() {
         if (!this.canSwitchViewType(null)) return;
         this.showLiveSurvey();
         this.koViewType("test");
     }
+    /**
+     * Make a Embed Survey" tab active.
+     */
     public showEmbedEditor() {
         if (!this.canSwitchViewType("embed")) return;
         this.showSurveyEmbeding();
@@ -633,6 +791,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private deleteCurrentObject() {
         this.deleteObject(this.koSelectedObject().value);
     }
+    /**
+     * Show the Question Editor dialog.
+     * @param question The Survey.Question object
+     */
     public showQuestionEditor(question: Survey.QuestionBase) {
         var self = this;
         this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); }, this);
@@ -643,10 +805,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.setModified();
         this.survey.render();
     }
+    /**
+     * Add a question into Toolbox object
+     * @param question an added Survey.Question
+     * @see toolbox
+     */
     public addCustomToolboxQuestion(question: Survey.QuestionBase) {
         this.toolbox.addCopiedItem(question);
     }
-
+    /**
+     * Copy a question to the active page
+     * @param question A copied Survey.Question
+     */
     public fastCopyQuestion(question: Survey.Base) {
         var json = new Survey.JsonObject().toJsonObject(question);
         json.type = question.getType();
