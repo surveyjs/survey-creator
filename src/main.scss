@@ -47,7 +47,6 @@ $editor-height:75vh;
         padding: 19px 15px 0 15px;
 
         > li > a {
-            color: $text-color;
             border: none;
             border-radius: 0;
             padding: 8px 9px 9px 11px;
@@ -62,7 +61,6 @@ $editor-height:75vh;
         }
 
         > li.active > a {
-            color: $main-color;
             background-color: $dark-bg-color;
             border: 1px solid $light-border-color;
             border-bottom-color: $dark-bg-color;
@@ -74,15 +72,24 @@ $editor-height:75vh;
         }
     }
 
+    a {
+        color: $main-color;
+    }
+
+    .btn.btn-primary {
+        background-color: $main-color;
+        border-color: $main-color;
+    }
+
     .svd_actions {
-        padding: 0 0 5px 0;
+        padding: 5px 0;
 
         .btn.btn-primary {
             margin-right: 10px;
             font-size: 11px;
         }
 
-        .btn-group.open .dropdown-toggle{
+        .btn-group.open .dropdown-toggle {
             background-color: $main-color;
             border-color: $main-color;
         }
@@ -93,6 +100,8 @@ $editor-height:75vh;
     }
     .svd_state {
         float: right;
+        padding: 10px 0;
+
         .icon {
             display: inline-block;
         }
@@ -100,13 +109,29 @@ $editor-height:75vh;
 
     .svd_content {
         background-color: $dark-bg-color;
-        padding: 10px 30px 30px 30px;
+        padding: 30px;
         margin: 0;
 
         .svd_survey_designer {
+            .svd_toolbar {
+                list-style: none;
+                background-color: transparent;
+                border: none;
+                height: 34px;
+                padding: 0;
+            }
+
             .svd_toolbox {
                 background-color: $dark-bg-color;
                 border: none;
+
+                .svd_toolbox_title {
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    color: #6d7072;
+                    padding-top: 5px;
+                    padding-bottom: 10px;
+                }
 
                 .panel-heading {
                     background-color: $dark-bg-color;
@@ -144,7 +169,6 @@ $editor-height:75vh;
                     }
                 }
             }
-
 
             .svd_editors {
                 .svd_pages_editor {

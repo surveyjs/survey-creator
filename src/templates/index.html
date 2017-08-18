@@ -4,18 +4,14 @@
         <li data-bind="visible: showJSONEditorTab, css: {active: koViewType() == 'editor'}"><a href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
         <li data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}"><a href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
         <li data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}"><a href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
-
-        <!-- ko foreach: toolbarItems -->
-        <li class="svd_actions" data-bind="css: $data.css, visible: visible, attr: { id: id }">
-            <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
-            <!-- /ko -->
-        </li>
-        <!-- /ko -->
     </ul>
 
     <div class="panel svd_content">
         <div class="row svd_survey_designer"  data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 panel panel-default svd_toolbox">
+                <div class="svd_toolbox_title">
+                    Toolbox
+                </div>
                 <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                     <!-- ko foreach: toolbox.koItems -->
                     <div class="btn btn-default" style="text-align:left; margin:1px;min-height:37px; width:100%" draggable="true" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
@@ -26,6 +22,14 @@
                 </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-8 col-xs-11 svd_editors">
+                <ul class="svd_toolbar nav-tabs svd_menu">
+                    <!-- ko foreach: toolbarItems -->
+                    <li class="svd_actions" data-bind="css: $data.css, visible: visible, attr: { id: id }">
+                        <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+                        <!-- /ko -->
+                    </li>
+                    <!-- /ko -->
+                </ul>
                 <div class="svd_pages_editor" data-bind="template: { name: 'pageeditor', data: pagesEditor }"></div>
                 <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: {height: koDesignerHeight}">
                     <div id="surveyjs"></div>
