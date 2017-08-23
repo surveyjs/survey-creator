@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
 
 ## Download
-Dowload the latest version as zip file [Download](http://surveyjs.org/downloads/surveyjs.editor.zip)
+Dowload the latest version as zip file [Download](https://github.com/surveyjs/editor/releases)
 
 Install the library using npm.
 ```
@@ -16,7 +16,7 @@ To learn how to include the visual editor on your page and explore examples of u
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart), [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
 
 ## See editor in action
-See the visual editor in [action](http://surveyjs.org/builder/).
+See the visual editor in [action](http://surveyjs.io/Editor/Editor/).
 
 ## Building surveyjs Editor from sources
 
@@ -47,7 +47,7 @@ To build library yourself:
 
 
 ## Dependencies
- The library depends on: [surveyjs](http://surveyjs.org), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
+ The library depends on: [surveyjs](http://surveyjs.io/Library/), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
 ## License
 The SurveyJS Editor is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
