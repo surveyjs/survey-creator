@@ -89,7 +89,8 @@ export var defaultStrings = {
         paneldynamic: "Panel (dynamic panels)",
         radiogroup: "Radiogroup",
         rating: "Rating",
-        text: "Single Input"
+        text: "Single Input",
+        boolean: "Boolean"
     },
     //Strings in Editor
     ed: {

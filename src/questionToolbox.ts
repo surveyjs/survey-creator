@@ -35,7 +35,7 @@ export class QuestionToolbox {
     /**
      * Modify this array to change the toolbox items order.
      */
-    public orderedQuestions = ["text", "checkbox", "radiogroup", "dropdown", "comment", "rating", "html"];
+    public orderedQuestions = ["text", "checkbox", "radiogroup", "dropdown", "comment", "rating", "boolean", "html"];
     /**
      * The maximum number of copied toolbox items. If an user adding copiedItemMaxCount + 1 item, the first added item will be removed.
      */
