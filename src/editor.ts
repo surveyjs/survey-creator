@@ -308,7 +308,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
     }
     protected setOptions(options: any) {
-        if(!options) options = { generateValidJSON: true };
+        if(!options) options = {};
+        if(!options.hasOwnProperty('generateValidJSON'))  options.generateValidJSON = true;
         this.options = options;
         this.showJSONEditorTabValue = typeof (options.showJSONEditorTab) !== 'undefined' ? options.showJSONEditorTab : true;
         this.showTestSurveyTabValue = typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;

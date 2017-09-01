@@ -115,6 +115,10 @@ QUnit.test("fast copy tests, copy a panel with questions and a nested panel", fu
     assert.equal(nestedPanel.questions[0].name, "question4", "A question in new nested panel should have name 'question3'");
 });
 
+QUnit.test("generateValidJSON should be true by default, bug #135", function (assert) {
+    var editor = new SurveyEditor(null, {});
+    assert.equal(editor.koGenerateValidJSON(), true, "The default value is true");
+});
 
 function getSurveyJson(): any {
     return {
