@@ -11,8 +11,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th data-bind="text: $root.getLocString('pe.value')"></th>
-                    <th data-bind="text: $root.getLocString('pe.text')"></th>
+                    <!-- ko foreach: columns -->
+                    <th data-bind="text: text"></th>
+                    <!-- /ko -->
                     <th></th>
                 </tr>
             </thead>
@@ -25,11 +26,12 @@
                             <button type="button" class="btn btn-xs" style="float:none" data-bind="visible: $index() < $parent.koItems().length - 1, click: $parent.onMoveDownClick"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
                         </div>
                     </td>
+                    <!-- ko foreach: cells -->
                     <td>
-                        <input type="text" class="form-control" data-bind="value:koValue" style="width:200px" />
+                        <input type="text" class="form-control" data-bind="value:koValue" style="width:100%" />
                         <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
                     </td>
-                    <td><input type="text" class="form-control" data-bind="value:koText" style="width:200px" /></td>
+                    <!-- /ko -->
                     <td><button type="button" class="btn btn-xs" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
                 </tr>
                 <!-- /ko -->
