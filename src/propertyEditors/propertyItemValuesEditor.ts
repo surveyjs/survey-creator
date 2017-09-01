@@ -2,6 +2,7 @@
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
+import {SurveyObjectProperty} from "../objectProperty";
 import * as Survey from "survey-knockout";
 
 export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
@@ -152,20 +153,23 @@ export class SurveyPropertyItemValuesEditorItem {
     }
 }
 export class SurveyPropertyItemValuesEditorCell {
-    koValue: any;
+    private objectPropertyValue : SurveyObjectProperty;
     koHasError: any;
     private nameValue: string;
     constructor(public item: Survey.ItemValue, public column: SurveyPropertyItemValuesEditorColumn) {
         this.nameValue = this.property.name;
-        this.koValue = ko.observable(this.value);
-        this.koHasError = ko.observable(false);
         var self = this;
-        this.koValue.subscribe(function (newValue) {
+        var propEvent = (property: SurveyObjectProperty, newValue: any) => {
             self.value = newValue;
-        });
+        };
+        this.objectPropertyValue = new SurveyObjectProperty(this.property, propEvent);
+        this.objectProperty.object = item;
+        this.koHasError = ko.observable(false);
     }
     public get property(): Survey.JsonObjectProperty { return this.column.property; }
     public get name(): string { return this.nameValue; }
+    public get objectProperty(): SurveyObjectProperty { return this.objectPropertyValue; }
+    public get koValue(): any { return this.objectProperty.koValue; }
     public get value() {  return this.property.getValue(this.item); }
     public set value(val: any) { this.property.setValue(this.item, val, null); }
     public get hasError(): boolean {

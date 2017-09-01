@@ -171,7 +171,7 @@ QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
     Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
 });
 QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
-    //TODO create properties if needed.
+    //TODO remove later - create property if it doesn't exist
     var propertyEditor = new SurveyPropertyItemValuesEditor();
     
     var property = Survey.JsonObject.metaData.findProperty("itemvalue", "value");
@@ -188,6 +188,17 @@ QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     cell.koValue(null);
     assert.equal(cell.hasError, true, "There is empty error in hasError");
     assert.equal(cell.koHasError(), true, "There is empty error in koHasError");
+});
+QUnit.test("SurveyPropertyItemValuesEditorCell + property editor", function (assert) {
+    var property = new Survey.JsonObjectProperty("testBoolean");
+    property.type = "boolean";
+    var column = new SurveyPropertyItemValuesEditorColumn(property);
+    var itemValue = new Survey.ItemValue(1);
+    itemValue["testBoolean"] = true;
+    var cell = new SurveyPropertyItemValuesEditorCell(itemValue, column);
+    assert.equal(cell.value, true, "value equals true");
+    assert.equal(cell.koValue(), true, "koValue equals true");
+    assert.equal(cell.objectProperty.editorType, "boolean", "create boolean editor type");
 });
 QUnit.test("SurveyPropertyItemValuesEditorItem", function (assert) {
     var propertyEditor = new SurveyPropertyItemValuesEditor();
