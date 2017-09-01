@@ -161,6 +161,15 @@ QUnit.test("SurveyPropertyItemValue columns generation", function (assert) {
     assert.equal(propertyEditor.columns[1].property.name, "text", "The second column is text");
     assert.equal(propertyEditor.columns[1].isRequired, false, "The second column is not required");
 });
+QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
+    Survey.JsonObject.metaData.addProperty("itemvalue", {name: "imageLink"});
+
+    var propertyEditor = new SurveyPropertyItemValuesEditor();
+    assert.equal(propertyEditor.columns.length, 3, "There are two columns value + text");
+    assert.equal(propertyEditor.koShowTextView(), false, "Do not show text view with custom properties");
+
+    Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
+});
 QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     //TODO create properties if needed.
     var propertyEditor = new SurveyPropertyItemValuesEditor();

@@ -16,7 +16,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         var self = this;
         this.columnsValue = this.createColumns();
         this.koActiveView = ko.observable("form");
-        this.koShowTextView = ko.observable(true);
+        this.koShowTextView = ko.observable(this.canShowTextView);
         this.koItemsText = ko.observable("");
         this.koActiveView.subscribe(function (newValue) {
             if (newValue == "form") self.updateItems(self.koItemsText());
@@ -64,7 +64,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     }
     protected onSetEditorOptions(editorOptions: any) {
         super.onSetEditorOptions(editorOptions);
-        this.koShowTextView(editorOptions.showTextView);
+        this.koShowTextView(this.canShowTextView && editorOptions.showTextView);
     }
     protected createNewEditorItem(): any { 
         var itemValue = new Survey.ItemValue(null);
@@ -119,6 +119,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         }
         return text.join("\n");
     }
+    private get canShowTextView(): boolean { return this.columns.length == 2; }
 }
 
 export class SurveyPropertyItemValuesEditorColumn {
