@@ -197,6 +197,17 @@ QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
 
     Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
 });
+QUnit.test("extended SurveyPropertyItemValue + custom property", function (assert) {
+    Survey.JsonObject.metaData.addClass("itemvalues_ex", ["imageLink"], function() { return new Survey.ItemValue(null); }, "itemvalue")
+    var property = new Survey.JsonObjectProperty("test");
+    property.type = "itemvalues_ex";
+    var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+    assert.equal(propEditor.editorType, "itemvalues", "It is item value, use parent");
+    var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
+    assert.equal(propertyEditor.columns.length, 3, "There are two columns value + text");
+    assert.equal(propertyEditor.koShowTextView(), false, "Do not show text view with custom properties");
+    Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
+});
 QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     //TODO remove later - create property if it doesn't exist
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);

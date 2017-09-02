@@ -5,10 +5,14 @@ import {editorLocalization} from "../editorLocalization";
 
 export class SurveyPropertyEditorFactory {
     public static defaultEditor: string = "string";
-    private static editorRegisteredList = {};
+    private static creatorList = {};
+    private static creatorByClassList = {};
     private static widgetRegisterList = {};
-    public static registerEditor(name: string, creator: (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase) {
-        SurveyPropertyEditorFactory.editorRegisteredList[name] = creator;
+    public static registerEditor(name: string, 
+        creator: (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase, editableClassName: string = null) {
+        SurveyPropertyEditorFactory.creatorList[name] = creator;
+        var className = editableClassName ? editableClassName : name;
+        SurveyPropertyEditorFactory.creatorByClassList[className] = creator;
     }
     public static registerCustomEditor(name: string, widgetJSON: any) {
         SurveyPropertyEditorFactory.widgetRegisterList[name] = widgetJSON;
@@ -20,11 +24,11 @@ export class SurveyPropertyEditorFactory {
         }
         var propertyEditor = SurveyPropertyEditorFactory.createCustomEditor(editorType, property);
         if (!propertyEditor) {
-            var creator = SurveyPropertyEditorFactory.editorRegisteredList[editorType];
+            var creator = SurveyPropertyEditorFactory.creatorList[editorType];
             if(creator) propertyEditor = creator(property);
         }
         if (!propertyEditor) {
-            creator = SurveyPropertyEditorFactory.editorRegisteredList[SurveyPropertyEditorFactory.defaultEditor];
+            creator = SurveyPropertyEditorFactory.findParentCreator(editorType);
             propertyEditor = creator(property);
         }
         propertyEditor.onChanged = func;
@@ -34,6 +38,15 @@ export class SurveyPropertyEditorFactory {
         var widgetJSON = SurveyPropertyEditorFactory.widgetRegisterList[name];
         if(!widgetJSON) return null;
         return new SurveyPropertyCustomEditor(property, widgetJSON);
+    }
+    private static findParentCreator(name: string): (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase {
+        var jsonClass = Survey.JsonObject.metaData.findClass(name);
+        while(jsonClass && jsonClass.parentName) {
+            var creator = SurveyPropertyEditorFactory.creatorByClassList[jsonClass.parentName];
+            if(creator) return creator;
+            jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
+        }
+        return SurveyPropertyEditorFactory.creatorList[SurveyPropertyEditorFactory.defaultEditor];
     }
 }
 

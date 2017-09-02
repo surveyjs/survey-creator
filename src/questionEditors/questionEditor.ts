@@ -179,7 +179,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     }
     public get name(): string { return this.property.name; }
     public hasError(): boolean { return this.propertyEditor.hasError(); }
-    public get htmlTemplate(): string { return "propertyeditorcontent-" + this.property.type; }
+    public get htmlTemplate(): string { return "propertyeditorcontent-" + this.propertyEditor.editorType; }
     public get templateObject(): any { return this.propertyEditor; }
     public get propertyEditor(): SurveyPropertyModalEditor { return this.propertyEditorValue; }
     public reset() {

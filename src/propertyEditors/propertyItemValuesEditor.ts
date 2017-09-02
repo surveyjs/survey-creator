@@ -47,6 +47,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         return result;
     }
     protected getProperties(): Array<Survey.JsonObjectProperty> {
+        //TODO remove these class and property registration later.
         if(!Survey.JsonObject.metaData.findClass("itemvalue")) {
             Survey.JsonObject.metaData.addClass("itemvalue", []);
         }
@@ -56,7 +57,9 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         if(!Survey.JsonObject.metaData.findProperty("itemvalue", "text")) {
             Survey.JsonObject.metaData.addProperty("itemvalue", {name: "text", onGetValue: function (obj: any) { return obj.locText.pureText; }});
         }
-        var properties = Survey.JsonObject.metaData.getProperties("itemvalue");
+        var className = this.property ? this.property.type : "itemvalue";
+        if(className == this.editorType) className = "itemvalue";
+        var properties = Survey.JsonObject.metaData.getProperties(className);
         return properties;
     }
     protected createEditorOptions(): any { 
@@ -180,4 +183,4 @@ export class SurveyPropertyItemValuesEditorCell {
     }
 }
 
-SurveyPropertyEditorFactory.registerEditor("itemvalues", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyItemValuesEditor(property); });
+SurveyPropertyEditorFactory.registerEditor("itemvalues", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyItemValuesEditor(property); }, "itemvalue");
