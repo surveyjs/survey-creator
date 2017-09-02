@@ -2,6 +2,7 @@
 import * as jQuery from "jquery";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions}  from "../propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorFactory}   from "../propertyEditors/propertyEditorFactory";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyQuestionEditorGeneralProperty, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperties} from "./questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "./questionEditorDefinition";
@@ -140,9 +141,7 @@ export class SurveyQuestionEditorTabBase {
     public reset() { }
     public apply() { }
     protected getValue(property: Survey.JsonObjectProperty): any {
-	if(property["getPropertyValue"]) return property["getPropertyValue"](this.obj); //TODO make the only call
-        if (property.hasToUseGetValue) return property.getValue(this.obj);
-        return this.obj[property.name];
+        return property.getPropertyValue(this.obj);
     }
 }
 
@@ -166,7 +165,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     private propertyEditorValue: SurveyPropertyModalEditor;
     constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, public options: ISurveyObjectEditorOptions = null) {
         super(obj);
-        this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorBase.createEditor(this.property.type, null);
+        this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorFactory.createEditor(this.property, null);
         var self = this;
         this.propertyEditorValue.options = options;
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };

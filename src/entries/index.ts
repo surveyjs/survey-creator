@@ -9,16 +9,15 @@ global["jQuery"] = jQuery;
 import "bootstrap";
 
 export {DragDropHelper} from "../dragdrophelper";
-export {
-    SurveyPropertyEditorBase, SurveyStringPropertyEditor,
-    SurveyDropdownPropertyEditor, SurveyBooleanPropertyEditor, SurveyNumberPropertyEditor
-} from "../propertyEditors/propertyEditorBase";
+export {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
+export {SurveyPropertyCustomEditor} from "../propertyEditors/propertyCustomEditor";
+export {SurveyPropertyEditorFactory} from "../propertyEditors/propertyEditorFactory";
+export {SurveyStringPropertyEditor, SurveyDropdownPropertyEditor, SurveyBooleanPropertyEditor, SurveyNumberPropertyEditor} from "../propertyEditors/propertyEditorFactory";
 export {SurveyPropertyTextItemsEditor} from "../propertyEditors/propertyTextItemsEditor";
 export {SurveyPropertyItemsEditor} from "../propertyEditors/propertyItemsEditor";
 export {SurveyPropertyItemValuesEditor} from "../propertyEditors/propertyItemValuesEditor";
 export {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "../propertyEditors/propertyNestedPropertyEditor"
-export {SurveyPropertyDropdownColumnsEditor, SurveyPropertyMatrixDropdownColumnsItem}
-    from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
+export {SurveyPropertyDropdownColumnsEditor, SurveyPropertyMatrixDropdownColumnsItem} from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 export {SurveyPropertyResultfullEditor} from "../propertyEditors/propertyRestfullEditor";
 export {SurveyPropertyTriggersEditor} from "../propertyEditors/propertyTriggersEditor";
@@ -41,6 +40,7 @@ export {SurveyEmbedingWindow} from "../surveyEmbedingWindow";
 export {SurveyVerbs, SurveyVerbItem, SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../objectVerbs";
 export {SurveyUndoRedo, UndoRedoItem} from "../undoredo";
 export {SurveyForDesigner} from "../surveyjsObjects"
+export {Extentions} from "../extentions";
 export {SurveyEditor} from "../editor";
 
 export {SurveysManager} from "../manage";

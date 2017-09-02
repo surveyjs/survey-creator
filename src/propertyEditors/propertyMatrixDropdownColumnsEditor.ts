@@ -1,15 +1,16 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyQuestionEditor} from "../questionEditors/questionEditor";
 import {SurveyPropertyItemValuesEditor} from "./propertyItemValuesEditor";
 import {editorLocalization} from "../editorLocalization";
-import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./propertyNestedPropertyEditor"
-import * as Survey from "survey-knockout";
+import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./propertyNestedPropertyEditor";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEditor {
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
     }
     public get editorType(): string { return "matrixdropdowncolumns"; }
     protected createNewEditorItem(): any { 
@@ -64,4 +65,4 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     }
 }
 
-SurveyPropertyEditorBase.registerEditor("matrixdropdowncolumns", function (): SurveyPropertyEditorBase { return new SurveyPropertyDropdownColumnsEditor(); });
+SurveyPropertyEditorFactory.registerEditor("matrixdropdowncolumns", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyDropdownColumnsEditor(property); });

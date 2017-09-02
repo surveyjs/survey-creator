@@ -1,9 +1,10 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyObjectProperty} from "../objectProperty";
-import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     koActiveView: any;
@@ -12,8 +13,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     changeToTextViewClick: any;
     changeToFormViewClick: any;
     private columnsValue: Array<SurveyPropertyItemValuesEditorColumn>;
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         var self = this;
         this.columnsValue = this.createColumns();
         this.koActiveView = ko.observable("form");
@@ -179,4 +180,4 @@ export class SurveyPropertyItemValuesEditorCell {
     }
 }
 
-SurveyPropertyEditorBase.registerEditor("itemvalues", function (): SurveyPropertyEditorBase { return new SurveyPropertyItemValuesEditor(); });
+SurveyPropertyEditorFactory.registerEditor("itemvalues", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyItemValuesEditor(property); });

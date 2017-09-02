@@ -1,16 +1,17 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyModalEditor} from "./propertyModalEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
-import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     koUrl: any; koPath: any; koValueName: any; koTitleName: any; 
     public survey: Survey.Survey;
     public question: Survey.QuestionDropdown;
 
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         this.koUrl = ko.observable();
         this.koPath = ko.observable();
         this.koValueName = ko.observable();
@@ -61,4 +62,4 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     }
 }
 
-SurveyPropertyEditorBase.registerEditor("restfull", function (): SurveyPropertyEditorBase { return new SurveyPropertyResultfullEditor(); });
+SurveyPropertyEditorFactory.registerEditor("restfull", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyResultfullEditor(property); });

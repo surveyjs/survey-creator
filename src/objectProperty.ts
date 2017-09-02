@@ -1,5 +1,6 @@
 ﻿import * as ko from "knockout";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorFactory} from "./propertyEditors/propertyEditorFactory";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
@@ -32,14 +33,11 @@ export class SurveyObjectProperty {
         this.koValue = ko.observable();
         this.choices = property.choices;
         var self = this;
-        this.editorType = property.type;
-        //TODO
         if (this.choices != null) {
-            this.editorType = "dropdown";
             this.koChoices = ko.observableArray(this.getLocalizableChoices());
         }
         var onItemChanged = function (newValue: any) { self.onApplyEditorValue(newValue); };
-        this.editor = SurveyPropertyEditorBase.createEditor(this.editorType, onItemChanged);
+        this.editor = SurveyPropertyEditorFactory.createEditor(property, onItemChanged);
         this.editor.onGetLocale = this.doOnGetLocale;
         this.editor.options = propertyEditorOptions;
         this.editor.editablePropertyName = this.property.name;
@@ -93,9 +91,7 @@ export class SurveyObjectProperty {
         return res;
     }
     protected getValue(): any {
-	if(this.property["getPropertyValue"]) return this.property["getPropertyValue"](this.object); //TODO make the only call
-        if (this.property.hasToUseGetValue) return this.property.getValue(this.object);
-        return this.object[this.name];
+        return this.property.getPropertyValue(this.object);
     }
     protected getValueText(value: any): string { return this.editor.getValueText(value); }
 }

@@ -1,4 +1,5 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyModalEditor} from "./propertyModalEditor";
 import {editorLocalization} from "../editorLocalization";
 
@@ -11,8 +12,8 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     public onClearClick: any;
     koAllowAddRemoveItems: any;
 
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         this.koItems = ko.observableArray();
         this.value = [];
         this.koAllowAddRemoveItems = ko.observable(true);

@@ -1,5 +1,7 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public object: any;
@@ -7,8 +9,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public onApplyClick: any;
     public onResetClick: any;
     koShowApplyButton: any;
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         this.title = ko.observable();
         var self = this;
         this.koShowApplyButton = ko.observable(true);
@@ -41,8 +43,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
 export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
     public koValue: any;
 
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         this.koValue = ko.observable();
     }
     public get editorType(): string { return "text"; }
@@ -64,19 +66,19 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
 }
 
 export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
     }
     public get editorType(): string { return "html"; }
 }
 
 export class SurveyPropertyExpressionEditor extends SurveyPropertyTextEditor {
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
     }
     public get editorType(): string { return "expression"; }
 }
 
-SurveyPropertyEditorBase.registerEditor("text", function (): SurveyPropertyEditorBase { return new SurveyPropertyTextEditor(); });
-SurveyPropertyEditorBase.registerEditor("html", function (): SurveyPropertyEditorBase { return new SurveyPropertyHtmlEditor(); });
-SurveyPropertyEditorBase.registerEditor("expression", function (): SurveyPropertyEditorBase { return new SurveyPropertyExpressionEditor(); });
+SurveyPropertyEditorFactory.registerEditor("text", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyTextEditor(property); });
+SurveyPropertyEditorFactory.registerEditor("html", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyHtmlEditor(property); });
+SurveyPropertyEditorFactory.registerEditor("expression", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyExpressionEditor(property); });

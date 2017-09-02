@@ -1,16 +1,16 @@
 import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyQuestionEditor} from "../questionEditors/questionEditor";
 import {SurveyPropertyItemValuesEditor} from "./propertyItemValuesEditor";
 import {editorLocalization} from "../editorLocalization";
-import * as Survey from "survey-knockout";
 
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     koEditItem: any; koIsList: any;
     onEditItemClick: any; onCancelEditItemClick: any;
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         var self = this;
         this.koEditItem = ko.observable(null);
         this.koIsList = ko.observable(true);

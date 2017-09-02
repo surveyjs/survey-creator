@@ -1,9 +1,10 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyObjectEditor} from "../objectEditor";
 import {editorLocalization} from "../editorLocalization";
-import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyValidatorsEditor extends SurveyPropertyItemsEditor {
     private selectedObjectEditor: SurveyObjectEditor;
@@ -11,8 +12,8 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyItemsEditor {
     public koValidators: any;
     public availableValidators: Array<string> = [];
     private validatorClasses: Array<Survey.JsonMetadataClass> = [];
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         var self = this;
         this.selectedObjectEditor = new SurveyObjectEditor();
         this.selectedObjectEditor.onPropertyValueChanged.add((sender, options) => {
@@ -77,4 +78,4 @@ export class SurveyPropertyValidatorItem {
 }
 
 
-SurveyPropertyEditorBase.registerEditor("validators", function (): SurveyPropertyEditorBase { return new SurveyPropertyValidatorsEditor(); });
+SurveyPropertyEditorFactory.registerEditor("validators", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyValidatorsEditor(property); });

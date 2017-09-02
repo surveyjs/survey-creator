@@ -1,8 +1,9 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {editorLocalization} from "../editorLocalization";
-import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     koQuestions: any; koPages: any;
@@ -10,8 +11,8 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     public koTriggers: any;
     public availableTriggers: Array<string> = [];
     private triggerClasses: Array<Survey.JsonMetadataClass> = [];
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
         var self = this;
         this.onDeleteClick = function () { self.koItems.remove(self.koSelected()); };
         this.onAddClick = function (item) { self.addItem(item.value); };
@@ -208,4 +209,4 @@ export class SurveyPropertyTriggerObjects {
     }
 }
 
-SurveyPropertyEditorBase.registerEditor("triggers", function (): SurveyPropertyEditorBase { return new SurveyPropertyTriggersEditor(); });
+SurveyPropertyEditorFactory.registerEditor("triggers", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyTriggersEditor(property); });

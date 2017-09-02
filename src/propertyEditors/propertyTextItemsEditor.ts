@@ -1,15 +1,16 @@
-﻿import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+import {SurveyPropertyItemsEditor} from "./propertyItemsEditor";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyHelper} from "../surveyHelper";
 import {editorLocalization} from "../editorLocalization";
 import {SurveyQuestionEditor} from "../questionEditors/questionEditor";
-import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./propertyNestedPropertyEditor"
-import * as Survey from "survey-knockout";
-import * as ko from "knockout";
+import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./propertyNestedPropertyEditor";
+import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
-    constructor() {
-        super();
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
     }
     public get editorType(): string { return "textitems"; }
     protected createNewEditorItem(): any { 
@@ -58,4 +59,4 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
 }
 
 
-SurveyPropertyEditorBase.registerEditor("textitems", function (): SurveyPropertyEditorBase { return new SurveyPropertyTextItemsEditor(); });
+SurveyPropertyEditorFactory.registerEditor("textitems", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyTextItemsEditor(property); });
