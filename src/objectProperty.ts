@@ -11,8 +11,6 @@ export class SurveyObjectProperty {
     private isValueUpdating: boolean;
     private onPropertyChanged: SurveyOnPropertyChangedCallback;
     public name: string;
-    public displayName: string;
-    public title: string;
     public disabled: boolean;
     public editor: SurveyPropertyEditorBase;
     public editorType: string;
@@ -29,6 +27,8 @@ export class SurveyObjectProperty {
         this.editor.options = propertyEditorOptions;
         this.editorType = this.editor.editorType;
     }
+    public get displayName(): string { return this.editor.displayName; }
+    public get title(): string { return this.editor.title; }
     public get koValue(): any { return this.editor.koValue; }
     public get koText(): any { return this.editor.koText; }
     public get koIsDefault(): any { return this.editor.koIsDefault; }

@@ -18,6 +18,8 @@ export class SurveyPropertyEditorBase {
     private optionsValue: ISurveyObjectEditorOptions = null; 
     private property_: Survey.JsonObjectProperty;
     private isRequriedValue: boolean = false;
+    private titleValue: string;
+    private displayNameValue: string;
     public koValue: any;
     public koText: any;
     public koIsDefault: any;
@@ -33,15 +35,19 @@ export class SurveyPropertyEditorBase {
         this.koIsDefault = ko.computed(function () { return self.property ? self.property.isDefaultValue(self.koValue()) : false; });
         this.koErrorText = ko.observable("");
         this.setIsRequired();
+        this.setTitleAndDisplayName();
     }
     public get editorType(): string { throw "editorType is not defined"; }
     public get property(): Survey.JsonObjectProperty { return this.property_; }
     public get editablePropertyName(): string { return this.property ? this.property.name : "" };
+    public get title(): string { return this.titleValue; }
+    public get displayName(): string { return this.displayNameValue; }
     
     public get object(): any { return this.objectValue; }
     public set object(value: any) {
         this.objectValue = value;
         this.setIsRequired();
+        this.setTitleAndDisplayName();
         this.setObject(this.object);
         this.updateValue();
     }
@@ -76,6 +82,16 @@ export class SurveyPropertyEditorBase {
             if(!jsonClass.parentName) return;
             jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
         }
+    }
+    protected setTitleAndDisplayName() {
+        this.displayNameValue = this.property ? this.property.name : "";
+        this.titleValue = this.displayNameValue;
+        if(!this.property || !this.object || !this.object.getType) return;
+        var locName = this.object.getType() + '_' + this.property.name;
+        this.displayNameValue = editorLocalization.getPropertyName(locName);
+        var title = editorLocalization.getPropertyTitle(locName);
+        if (!title) title = this.displayNameValue;
+        this.titleValue = title;
     }
     protected onBeforeApply() { }
     public apply() {
