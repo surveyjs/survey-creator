@@ -67,6 +67,19 @@ QUnit.test("Create custom property editor", function (assert) {
     propertyEditor.editingValue = 3;
     assert.equal(propertyValue, 3, "value has been set to 3 as well");
 });
+QUnit.test("PropertyEditor and hasError - required", function (assert) {
+    var question = new Survey.QuestionText("q1");
+    var property = Survey.JsonObject.metaData.findProperty("questionbase", "name");
+    var propertyEditor = new SurveyObjectProperty(property);
+    propertyEditor.object = question;
+    var editor = propertyEditor.editor;
+    assert.equal(editor.isRequired, true, "The property is required");
+    assert.equal(editor.hasError(), false, "There is value here");
+    assert.equal(editor.koErrorText(), "", "The error is empty");
+    editor.koValue("");
+    assert.equal(editor.hasError(), true, "There is no value here");
+    assert.notEqual(editor.koErrorText(), "", "The error is not empty");
+});
 QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
     var property = new Survey.JsonObjectProperty("dropdown");
     property.setChoices([1, 2, 3], null);

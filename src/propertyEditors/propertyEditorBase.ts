@@ -17,28 +17,22 @@ export class SurveyPropertyEditorBase {
     private isValueUpdating: boolean;
     private optionsValue: ISurveyObjectEditorOptions = null; 
     private property_: Survey.JsonObjectProperty;
+    private isRequriedValue: boolean = false;
     public koValue: any;
     public koText: any;
     public koIsDefault: any;
-    public title: any;
-    public modalName: string;
-    public modalNameTarget: string;
+    public koErrorText: any;
     public onChanged: (newValue: any) => any;
     public onGetLocale: () => string;
     constructor(property: Survey.JsonObjectProperty) {
         this.property_ = property;
-        this.title = ko.observable();
-        var name = property ? property.name : "";
-        this.modalName = "modelEditor" + this.editorType + name;
-        this.modalNameTarget = "#" + this.modalName;
-        if(this.property) {
-            this.title(editorLocalization.getString("pe.editProperty")["format"](this.property.name));
-        }
         var self = this;
         this.koValue = ko.observable();
         this.koValue.subscribe(function (newValue) { self.onkoValueChanged(newValue); });
         this.koText = ko.computed(() => { return self.getValueText(self.koValue()); });
         this.koIsDefault = ko.computed(function () { return self.property ? self.property.isDefaultValue(self.koValue()) : false; });
+        this.koErrorText = ko.observable("");
+        this.setIsRequired();
     }
     public get editorType(): string { throw "editorType is not defined"; }
     public get property(): Survey.JsonObjectProperty { return this.property_; }
@@ -47,6 +41,7 @@ export class SurveyPropertyEditorBase {
     public get object(): any { return this.objectValue; }
     public set object(value: any) {
         this.objectValue = value;
+        this.setIsRequired();
         this.setObject(this.object);
         this.updateValue();
     }
@@ -58,7 +53,30 @@ export class SurveyPropertyEditorBase {
         this.setValueCore(value);
         this.onValueChanged();
     }
-    public hasError(): boolean { return false; }
+    public hasError(): boolean { 
+        if(this.isRequired) {
+            var er = Survey.Base.isValueEmpty(this.koValue());
+            this.koErrorText(er ? editorLocalization.getString("pe.propertyIsEmpty") : "");
+            return er;
+        }
+        return false; 
+    }
+    public get isRequired() : boolean { return this.isRequriedValue; }
+    //TODO remove this function, replace it with property.isRequired later
+    protected setIsRequired() {
+        this.isRequriedValue = false;
+        if(!this.property || !this.object || !this.object.getType) return;
+        var jsonClass = Survey.JsonObject.metaData.findClass(this.object.getType());
+        while(jsonClass) {
+            var reqProperties = jsonClass.requiredProperties;
+            if(reqProperties) {
+                this.isRequriedValue = reqProperties.indexOf(this.property.name) > -1;
+                if(this.isRequriedValue) return;
+            }
+            if(!jsonClass.parentName) return;
+            jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
+        }
+    }
     protected onBeforeApply() { }
     public apply() {
         if (this.hasError()) return;

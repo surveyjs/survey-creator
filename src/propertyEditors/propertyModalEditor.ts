@@ -2,14 +2,25 @@
 import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
+import {editorLocalization} from "../editorLocalization";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public editingObject: any;
     public onApplyClick: any;
     public onResetClick: any;
+    public modalName: string;
+    public modalNameTarget: string;
     koShowApplyButton: any;
+    koTitleCaption: any;
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
+        this.koTitleCaption = ko.observable("");
+        if(this.property) {
+            this.koTitleCaption(editorLocalization.getString("pe.editProperty")["format"](this.property.name));
+        }
+        var name = property ? property.name : "";
+        this.modalName = "modelEditor" + this.editorType + name;
+        this.modalNameTarget = "#" + this.modalName;
         var self = this;
         this.koShowApplyButton = ko.observable(true);
         self.onApplyClick = function () { self.apply(); };
