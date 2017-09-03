@@ -80,6 +80,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private select2: any = null;
     private alwaySaveTextInPropertyEditorsValue: boolean = false;
     private showApplyButtonValue: boolean = true;
+    private isRTLValue: boolean = false;
 
     /**
      * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
@@ -317,6 +318,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.koShowOptions(typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
         this.koGenerateValidJSON(this.options.generateValidJSON);
         this.isAutoSave = typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
+        this.isRTLValue = typeof (options.isRTL) !== 'undefined' ? options.isRTL : false;
         if(options.designerHeight) {
             this.koDesignerHeight(options.designerHeight);
         }
@@ -466,6 +468,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      */
     public get showEmbededSurveyTab() { return this.showEmbededSurveyTabValue; }
     public set showEmbededSurveyTab(value: boolean) { this.showEmbededSurveyTabValue = value; }
+    /**
+     * Set it to true to active RTL support
+     */
+    public get isRTL() { return this.isRTLValue; }
+    public set isRTL(value: boolean) { this.isRTLValue = value; }
 
     protected onCanShowObjectProperty(object: any, property: Survey.JsonObjectProperty): boolean {
         var options = { obj: object, property: property, canShow: true };
@@ -654,7 +661,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
         this.jsonEditor.init();
         if(jQuery && jQuery()["select2"]) {
-            this.select2 = jQuery("#objectSelector")["select2"]();
+            this.select2 = jQuery("#objectSelector")["select2"](this.isRTLValue ? {dir: "rtl"} : '');
             jQuery("#objectSelector").width("100%");
         }
     }
