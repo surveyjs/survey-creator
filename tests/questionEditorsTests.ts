@@ -15,11 +15,11 @@ QUnit.test("Create correct question editor property tab ", function (assert) {
     var tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
     assert.equal(tab.htmlTemplate, "propertyeditorcontent-itemvalues", "itemvalues template should be created");
     assert.equal(tab.propertyEditor.editorType, "itemvalues", "create correct property editor");
-    assert.deepEqual(tab.propertyEditor.value, ["item1"], "set value to property editor correctly");
+    assert.deepEqual(tab.propertyEditor.editingValue, ["item1"], "set value to property editor correctly");
 
     property = properties.getProperty("visibleIf");
     tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
-    assert.equal(tab.propertyEditor.value, dropdownQuestion.visibleIf, "set value of 'visibleIf' to property editor correctly");
+    assert.equal(tab.propertyEditor.editingValue, dropdownQuestion.visibleIf, "set value of 'visibleIf' to property editor correctly");
 });
 
 QUnit.test("Question Editor apply/reset/onChanged", function (assert) {

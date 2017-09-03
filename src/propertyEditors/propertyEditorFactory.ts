@@ -1,3 +1,4 @@
+import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyCustomEditor} from "./propertyCustomEditor";
@@ -57,14 +58,26 @@ export class SurveyStringPropertyEditor extends SurveyPropertyEditorBase {
     public get editorType(): string { return "string"; }
 }
 export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
+    public koChoices: any;
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
+        this.koChoices = ko.observableArray(this.getLocalizableChoices());
     }
     public get editorType(): string { return "dropdown"; }
     public getValueText(value: any): string { 
         if(!value) return value;
         var res = editorLocalization.getPropertyValue(value);
         return res ? res : value;
+    }
+    private getLocalizableChoices() {
+        if(!this.property || !this.property.choices) return [];
+        var choices = this.property.choices;
+        var res = [];
+        for(var i = 0; i < choices.length; i ++) {
+            var value = choices[i];
+            res.push({value: value, text: editorLocalization.getPropertyValue(value)});
+        }
+        return res;
     }
 }
 export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {

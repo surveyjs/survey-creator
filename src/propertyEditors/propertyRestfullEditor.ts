@@ -24,7 +24,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
         this.koTitleName.subscribe(function (newValue) { self.question.choicesByUrl.titleName = newValue; self.run(); });
     }
     public get editorType(): string { return "restfull"; }
-    public get restfullValue() { return <Survey.ChoicesRestfull>this.value; }
+    public get restfullValue() { return <Survey.ChoicesRestfull>this.editingValue; }
     public getValueText(value: any): string {
         if (!value || !value.url) return editorLocalization.getString("pe.empty");
         var str = value.url;

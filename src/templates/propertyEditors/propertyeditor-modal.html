@@ -1,5 +1,5 @@
 ﻿<script type="text/html" id="propertyeditor-modal">
-    <div class="input-group" data-bind="visible:!editor.isEditable">
+    <div class="input-group" data-bind="visible:!$data.isEditable">
         <a data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}"><span data-bind="text: koText"></span></a>
         <div class="input-group-btn">
             <button class="btn btn-default" data-toggle="modal" style="padding: 2px;" data-bind="attr: {'data-target' : modalNameTarget}">
@@ -7,7 +7,7 @@
             </button>
         </div>
     </div>
-    <div class="input-group" data-bind="visible:editor.isEditable" style="display:table">
+    <div class="input-group" data-bind="visible:$data.isEditable" style="display:table">
         <input class="form-control" type="text" data-bind="value: koValue" style="display:table-cell; width:100%" />
         <div class="input-group-btn">
             <button type="button" class="btn btn-default" style="display:table-cell; padding: 2px;"  data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">
@@ -21,16 +21,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" data-bind="text:editor.title"></h4>
+                    <h4 class="modal-title" data-bind="text:$data.title"></h4>
                 </div>  
                 <div class="modal-body svd_notopbottompaddings">
-                    <!-- ko template: { name: 'propertyeditorcontent-' + editorType, data: editor } -->
+                    <!-- ko template: { name: 'propertyeditorcontent-' + editorType, data: $data } -->
                     <!-- /ko -->
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-primary" data-bind="visible: editor.koShowApplyButton, click: editor.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
-                    <input type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: editor.onApplyClick, value: $root.getLocString('pe.ok')" style="width:100px" />
-                    <input type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: editor.onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px" />
+                    <input type="button" class="btn btn-primary" data-bind="visible: $data.koShowApplyButton, click: $data.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
+                    <input type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $data.onApplyClick, value: $root.getLocString('pe.ok')" style="width:100px" />
+                    <input type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: $data.onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px" />
                 </div>
             </div>
         </div>

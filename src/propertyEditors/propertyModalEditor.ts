@@ -4,48 +4,36 @@ import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
-    public object: any;
-    public title: any;
+    public editingObject: any;
     public onApplyClick: any;
     public onResetClick: any;
     koShowApplyButton: any;
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
-        this.title = ko.observable();
         var self = this;
         this.koShowApplyButton = ko.observable(true);
         self.onApplyClick = function () { self.apply(); };
         self.onResetClick = function () { self.reset(); };
     }
-    public setTitle(value: string) { this.title(value); }
-    public hasError(): boolean { return false; }
     protected onOptionsChanged() {
         this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
     }
-    protected onBeforeApply() { }
     private reset() {
-        this.value = this.value;
+        this.editingValue = this.koValue();
     }
     public setObject(value: any) { 
-        this.object = value; 
+        this.editingObject = value; 
         super.setObject(value);
     }
     public get isEditable(): boolean { return false; }
-    public apply() {
-        if (this.hasError()) return;
-        this.onBeforeApply();
-        if (this.onChanged) {
-            this.onChanged(this.value);
-        }
-    }
 }
 
 export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
-    public koValue: any;
+    public koTextValue: any;
 
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
-        this.koValue = ko.observable();
+        this.koTextValue = ko.observable();
     }
     public get editorType(): string { return "text"; }
     public get isEditable(): boolean { return true; }
@@ -58,10 +46,10 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
         return str;
     }
     protected onValueChanged() {
-        this.koValue(this.value);
+        this.koTextValue(this.editingValue);
     }
     protected onBeforeApply() {
-        this.setValueCore(this.koValue());
+        this.setValueCore(this.koTextValue());
     }
 }
 

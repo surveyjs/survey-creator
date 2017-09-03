@@ -1,4 +1,5 @@
-﻿import * as Survey from "survey-knockout";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {editorLocalization} from "../editorLocalization";
 
 export interface ISurveyObjectEditorOptions {
@@ -10,23 +11,61 @@ export interface ISurveyObjectEditorOptions {
 }
 
 export class SurveyPropertyEditorBase {
-    private value_: any = null;
+    private editingValue_: any = null;
+    private isApplyinNewValue: boolean = false;
+    private objectValue: any;
+    private isValueUpdating: boolean;
     private optionsValue: ISurveyObjectEditorOptions = null; 
-    private propertyValue: Survey.JsonObjectProperty;
+    private property_: Survey.JsonObjectProperty;
+    public koValue: any;
+    public koText: any;
+    public koIsDefault: any;
+    public title: any;
+    public modalName: string;
+    public modalNameTarget: string;
     public onChanged: (newValue: any) => any;
     public onGetLocale: () => string;
-    public editablePropertyName: string;
     constructor(property: Survey.JsonObjectProperty) {
-        this.propertyValue = property;
+        this.property_ = property;
+        this.title = ko.observable();
+        var name = property ? property.name : "";
+        this.modalName = "modelEditor" + this.editorType + name;
+        this.modalNameTarget = "#" + this.modalName;
+        if(this.property) {
+            this.title(editorLocalization.getString("pe.editProperty")["format"](this.property.name));
+        }
+        var self = this;
+        this.koValue = ko.observable();
+        this.koValue.subscribe(function (newValue) { self.onkoValueChanged(newValue); });
+        this.koText = ko.computed(() => { return self.getValueText(self.koValue()); });
+        this.koIsDefault = ko.computed(function () { return self.property ? self.property.isDefaultValue(self.koValue()) : false; });
     }
     public get editorType(): string { throw "editorType is not defined"; }
-    public get property(): Survey.JsonObjectProperty { return this.propertyValue; }
+    public get property(): Survey.JsonObjectProperty { return this.property_; }
+    public get editablePropertyName(): string { return this.property ? this.property.name : "" };
+    
+    public get object(): any { return this.objectValue; }
+    public set object(value: any) {
+        this.objectValue = value;
+        this.setObject(this.object);
+        this.updateValue();
+    }
+    
     public getValueText(value: any): string { return value; }
-    public get value(): any { return this.value_; }
-    public set value(value: any) {
+    public get editingValue(): any { return this.editingValue_; }
+    public set editingValue(value: any) {
         value = this.getCorrectedValue(value);
         this.setValueCore(value);
         this.onValueChanged();
+    }
+    public hasError(): boolean { return false; }
+    protected onBeforeApply() { }
+    public apply() {
+        if (this.hasError()) return;
+        this.onBeforeApply();
+        this.isApplyinNewValue = true;
+        this.koValue(this.editingValue);
+        this.isApplyinNewValue = false;
     }
     public get locale() : string { 
         if(this.onGetLocale) return this.onGetLocale();
@@ -39,9 +78,8 @@ export class SurveyPropertyEditorBase {
     }
     protected onOptionsChanged() {}
     protected setValueCore(value: any) {
-        this.value_ = value;
+        this.editingValue_ = value;
     }
-    public setTitle(value: string) { }
     public setObject(value: any) { 
         if(this.options) {
             var editorOptions = this.createEditorOptions();
@@ -54,4 +92,21 @@ export class SurveyPropertyEditorBase {
     protected onValueChanged() {
     }
     protected getCorrectedValue(value: any): any {  return value;  }
+    protected updateValue() {
+        this.isValueUpdating = true;
+        this.koValue(this.getValue());
+        this.editingValue = this.koValue()
+        this.isValueUpdating = false;
+    }
+    protected getValue(): any {
+        return this.property && this.object ? this.property.getPropertyValue(this.object) : null;
+    }
+    private onkoValueChanged(newValue: any) {
+        if(this.isValueUpdating) return;
+        if(!this.isApplyinNewValue) {
+            this.editingValue = newValue;
+        }
+        if (this.property && this.object && this.getValue() == newValue) return;
+        if (this.onChanged != null) this.onChanged(newValue);
+    }
 }

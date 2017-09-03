@@ -15,7 +15,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
         this.koItems = ko.observableArray();
-        this.value = [];
+        this.editingValue = [];
         this.koAllowAddRemoveItems = ko.observable(true);
         var self = this;
         self.onDeleteClick = function (item) { self.koItems.remove(item); };
@@ -62,7 +62,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
 
     protected getItemsFromValue(value: any = null): Array<any> {
         var items = [];
-        if(!value) value = this.value;
+        if(!value) value = this.editingValue;
         for (var i = 0; i < value.length; i++) {
             items.push(this.createEditorItem(value[i]));
         }

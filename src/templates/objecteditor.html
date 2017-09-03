@@ -6,7 +6,7 @@
                 <td width="50%">
                     <span data-bind="text: koText, visible: $parent.koActiveProperty() != $data || disabled, attr: {title: koText}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
                     <div data-bind="visible: $parent.koActiveProperty() == $data && !disabled">
-                        <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data } -->
+                        <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor } -->
                         <!-- /ko -->
                     </div>
                 </td>

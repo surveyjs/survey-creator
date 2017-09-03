@@ -25,9 +25,9 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     }
     public get editorType(): string { return "triggers"; }
     protected onValueChanged() {
-        if (this.object) {
-            this.koPages(this.getNames((<Survey.Survey>this.object).pages));
-            this.koQuestions(this.getNames((<Survey.Survey>this.object).getAllQuestions()));
+        if (this.editingObject) {
+            this.koPages(this.getNames((<Survey.Survey>this.editingObject).pages));
+            this.koQuestions(this.getNames((<Survey.Survey>this.editingObject).getAllQuestions()));
         }
         super.onValueChanged();
         if (this.koSelected) {

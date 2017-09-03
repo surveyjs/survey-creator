@@ -173,7 +173,7 @@ export class SurveyPropertyItemValuesEditorCell {
     public get property(): Survey.JsonObjectProperty { return this.column.property; }
     public get name(): string { return this.nameValue; }
     public get objectProperty(): SurveyObjectProperty { return this.objectPropertyValue; }
-    public get koValue(): any { return this.objectProperty.koValue; }
+    public get koValue(): any { return this.objectProperty.editor.koValue; }
     public get value() {  return this.property.getValue(this.item); }
     public set value(val: any) { this.property.setValue(this.item, val, null); }
     public get hasError(): boolean {

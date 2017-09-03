@@ -28,7 +28,7 @@
                     </td>
                     <!-- ko foreach: cells -->
                     <td>
-                        <!-- ko template: { name: 'propertyeditor-' + objectProperty.editorType, data: objectProperty } --><!-- /ko -->
+                        <!-- ko template: { name: 'propertyeditor-' + objectProperty.editorType, data: objectProperty.editor } --><!-- /ko -->
                         <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
                     </td>
                     <!-- /ko -->

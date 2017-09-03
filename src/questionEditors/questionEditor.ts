@@ -169,8 +169,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
         var self = this;
         this.propertyEditorValue.options = options;
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
-        this.propertyEditorValue.value = this.getValue(this.property);
-        this.propertyEditorValue.editablePropertyName = this.property.name;
+        this.propertyEditorValue.editingValue = this.getValue(this.property);
         this.propertyEditorValue.setObject(obj);
     }
     private doOnGetLocale(): string {
@@ -183,10 +182,10 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     public get templateObject(): any { return this.propertyEditor; }
     public get propertyEditor(): SurveyPropertyModalEditor { return this.propertyEditorValue; }
     public reset() {
-        this.propertyEditorValue.value = this.getValue(this.property);
+        this.propertyEditorValue.editingValue = this.getValue(this.property);
     }
     public apply() {
         this.propertyEditor.apply();
-        this.obj[this.property.name] = this.propertyEditorValue.value;
+        this.obj[this.property.name] = this.propertyEditorValue.editingValue;
     }
 }
