@@ -44,6 +44,7 @@ export class SurveyPropertyEditorBase {
     public get editorType(): string { throw "editorType is not defined"; }
     public get property(): Survey.JsonObjectProperty { return this.property_; }
     public get editablePropertyName(): string { return this.property ? this.property.name : "" };
+    public get readOnly() { return this.property ? this.property.readOnly : false; }
     public get title(): string { return this.titleValue; }
     public get displayName(): string { return this.displayNameValue; }
     public set displayName(val: string) { 
