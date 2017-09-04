@@ -9,6 +9,7 @@ export interface ISurveyObjectEditorOptions {
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any);
     onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string;
+    onValueChangingCallback(options: any);
 }
 
 export class SurveyPropertyEditorBase {
@@ -162,11 +163,26 @@ export class SurveyPropertyEditorBase {
     protected getValue(): any {
         return this.property && this.object ? this.property.getPropertyValue(this.object) : null;
     }
+    private iskoValueChanging: boolean = false;
     private onkoValueChanged(newValue: any) {
-        if(this.isValueUpdating) return;
+        if(this.isValueUpdating || this.iskoValueChanging) return;
+
+        this.iskoValueChanging = true;
+        if(this.options && this.property && this.object) {
+            var options = {propertyName: this.property.name, obj: this.object, value: newValue, newValue: null, doValidation: false};
+            this.options.onValueChangingCallback(options);
+            if(!Survey.Base.isValueEmpty(options.newValue)) {
+                this.koValue(options.newValue);
+            }
+            if(options.doValidation) {
+                this.hasError();
+            }
+        }
         if(!this.isApplyinNewValue) {
             this.editingValue = newValue;
         }
+        this.iskoValueChanging = false;
+
         if (this.property && this.object && this.getValue() == newValue) return;
         if (this.onChanged != null) this.onChanged(newValue);
     }

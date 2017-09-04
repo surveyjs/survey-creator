@@ -160,8 +160,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      * <br/> options.propertyName  the name of the edited property.
      * <br/> options.value the property value.
      * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
+     * @see onPropertyValueChanging
      */
-    public onCustomErrorOnValidation: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    public onPropertyValidationCustomError: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj  the survey object which property is edited in the Property Editor.
+     * <br/> options.propertyName  the name of the edited property.
+     * <br/> options.value the property value.
+     * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
+     * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
+     * @see onPropertyValidationCustomError
+     */
+    public onPropertyValueChanging: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
     /**
      * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -478,7 +490,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     public get showEmbededSurveyTab() { return this.showEmbededSurveyTabValue; }
     public set showEmbededSurveyTab(value: boolean) { this.showEmbededSurveyTabValue = value; }
     /**
-     * Set it to true to active RTL support
+     * Set it to true to activate RTL support
      */
     public get isRTL() { return this.isRTLValue; }
     public set isRTL(value: boolean) { this.isRTLValue = value; }
@@ -914,10 +926,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
         var options = {propertyName: propertyName, obj: obj, value: value, error: ""};
-        this.onCustomErrorOnValidation.fire(this, options);
+        this.onPropertyValidationCustomError.fire(this, options);
         return options.error;
     }
-    
+    onValueChangingCallback(options: any) {
+        this.onPropertyValueChanging.fire(this, options);
+    }
 }
 
 Survey.Survey.cssType = "bootstrap";

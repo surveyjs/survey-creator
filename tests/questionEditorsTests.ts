@@ -140,7 +140,7 @@ QUnit.test("Question editor definition: getTabs", function (assert) {
 QUnit.test("Question editor: custom errors", function (assert) {
     var question = new Survey.QuestionText("q1");
     var editor = new SurveyEditor();
-    editor.onCustomErrorOnValidation.add(function(editor, options) {
+    editor.onPropertyValidationCustomError.add(function(editor, options) {
         if(options.propertyName != "title") return;
         if(!options.value) {
             options.error = "The value can't be empty";
@@ -157,4 +157,29 @@ QUnit.test("Question editor: custom errors", function (assert) {
     assert.equal(properties.hasError(), true, "title should contains name, but it equals 'q'");
     titleEditor.koValue("!q1!");
     assert.equal(properties.hasError(), false, "There is no error now");
+});
+
+QUnit.test("Question editor: on property value changing", function (assert) {
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyEditor();
+    var errorText = "The value should have at least 3 symbols";
+    editor.onPropertyValidationCustomError.add(function(editor, options) {
+        if(options.propertyName != "title") return;
+        if(!options.value || options.value.length < 3) {
+            options.error = "The value should have at least 3 symbols";
+        }
+    });
+    editor.onPropertyValueChanging.add(function(editor, options) {
+        if(options.propertyName != "title") return;
+        options.newValue = options.value + options.value;
+        options.doValidation = true;
+    });
+    var properties = new SurveyQuestionEditorGeneralProperties(question, ["name", "title"], null, editor);
+    var titleEditor = properties.rows[1].properties[0].editor;
+    titleEditor.koValue("q");
+    assert.equal(titleEditor.koValue(), "qq", "Double the value");
+    assert.equal(titleEditor.koErrorText(), errorText, "There is the error");
+    titleEditor.koValue("ab");
+    assert.equal(titleEditor.koValue(), "abab", "Double the value, 2");
+    assert.equal(titleEditor.koErrorText(), "", "There is no error now");
 });

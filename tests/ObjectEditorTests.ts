@@ -108,6 +108,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
         return "";
     }
+    onValueChangingCallback(options: any) { }
 }
 
 QUnit.test("On new ItemValue added", function (assert) {
