@@ -211,8 +211,10 @@ export var defaultStrings = {
         fi: "suomalainen",
         fr: "français",
         gr: "ελληνικά",
+        hu: "magyar",
         it: "italiano",
         is: "íslenska",
+        lv: "latviešu",
         nl: "hollandsk",
         pl: "polski",
         pt: "português",
@@ -220,7 +222,7 @@ export var defaultStrings = {
         ru: "русский",
         sv: "svenska",
         tr: "türkçe",
-        zh_cn: "简体中文"
+        "zh-cn": "简体中文"
     },
     //Operators
     op: {
