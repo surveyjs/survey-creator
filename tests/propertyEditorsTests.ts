@@ -29,6 +29,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any) {
     }
+    onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
+        return "";
+    }
 }
 
 QUnit.test("Create correct property editor", function (assert) {

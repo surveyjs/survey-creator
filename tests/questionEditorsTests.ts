@@ -1,6 +1,7 @@
 ﻿import {SurveyQuestionProperties, SurveyQuestionEditor, SurveyQuestionEditorTabGeneral, SurveyQuestionEditorTabProperty} from "../src/questionEditors/questionEditor";
 import {SurveyQuestionEditorGeneralProperties, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperty} from "../src/questionEditors/questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "../src/questionEditors/questionEditorDefinition";
+import {SurveyEditor} from "../src/editor";
 import * as Survey from "survey-knockout";
 
 export default QUnit.module("QuestionEditorsTests");
@@ -134,4 +135,26 @@ QUnit.test("Question editor definition: getTabs", function (assert) {
     assert.equal(tabs.length, 2, "Rating has two tabs");
     assert.equal(tabs[0].name, "rateValues", "The first tab");
     assert.equal(tabs[1].name, "visibleIf", "The last tab");
+});
+
+QUnit.test("Question editor: custom errors", function (assert) {
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyEditor();
+    editor.onCustomErrorOnValidation.add(function(editor, options) {
+        if(options.propertyName != "title") return;
+        if(!options.value) {
+            options.error = "The value can't be empty";
+            return;
+        }
+        if(options.value.indexOf(question.name) < 0) {
+            options.error = "The value should contain the name property";
+        }
+    });
+    var properties = new SurveyQuestionEditorGeneralProperties(question, ["name", "title"], null, editor);
+    assert.equal(properties.hasError(), true, "title should contains name, but it is empty");
+    var titleEditor = properties.rows[1].properties[0].editor;
+    titleEditor.koValue("q");
+    assert.equal(properties.hasError(), true, "title should contains name, but it equals 'q'");
+    titleEditor.koValue("!q1!");
+    assert.equal(properties.hasError(), false, "There is no error now");
 });

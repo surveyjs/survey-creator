@@ -8,6 +8,7 @@ export interface ISurveyObjectEditorOptions {
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any);
+    onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string;
 }
 
 export class SurveyPropertyEditorBase {
@@ -85,6 +86,10 @@ export class SurveyPropertyEditorBase {
             var er = Survey.Base.isValueEmpty(this.koValue());
             this.koErrorText(er ? editorLocalization.getString("pe.propertyIsEmpty") : "");
             return er;
+        }
+        if(this.property && this.options && this.options.onGetErrorTextOnValidationCallback) {
+            this.koErrorText(this.options.onGetErrorTextOnValidationCallback(this.property.name, this.object, this.koValue()));
+            if(this.koErrorText()) return true;
         }
         return false; 
     }

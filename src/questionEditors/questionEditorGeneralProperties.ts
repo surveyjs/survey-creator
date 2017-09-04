@@ -2,15 +2,16 @@ import * as ko from "knockout";
 import {editorLocalization} from "../editorLocalization";
 import * as Survey from "survey-knockout";
 import {SurveyObjectProperty} from "../objectProperty";
-import {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions}  from "../propertyEditors/propertyEditorBase";
 
 export class SurveyQuestionEditorGeneralProperty {
     private objectPropertyValue: SurveyObjectProperty;
     koValue: any; koErrorText: any; koHasError: any;
-    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, displayName: string) {
+    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, displayName: string, options: ISurveyObjectEditorOptions = null) {
         var self = this;
         this.objectPropertyValue = new SurveyObjectProperty(this.property, null);
         this.editor.showDisplayName = true;
+        this.editor.options = options;
         if(!displayName) {
             displayName = editorLocalization.getString("pe." + this.property.name);
         }
@@ -35,8 +36,8 @@ export class SurveyQuestionEditorGeneralRow {
     public properties: Array<SurveyQuestionEditorGeneralProperty> = [];
     constructor(public obj: Survey.Base) {
     }
-    public addProperty(property: any, displayName: string) {
-        this.properties.push(new SurveyQuestionEditorGeneralProperty(this.obj, property, displayName));
+    public addProperty(property: any, displayName: string, options: ISurveyObjectEditorOptions) {
+        this.properties.push(new SurveyQuestionEditorGeneralProperty(this.obj, property, displayName, options));
     }
     public hasError() : boolean {
         var isError = false;
@@ -51,7 +52,7 @@ export class SurveyQuestionEditorGeneralProperties {
     private properties: Array<Survey.JsonObjectProperty>;
     private onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean;
     public rows: Array<SurveyQuestionEditorGeneralRow> = [];
-    constructor(public obj: Survey.Base, properties: Array<any>, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean = null) {
+    constructor(public obj: Survey.Base, properties: Array<any>, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean = null, public options: ISurveyObjectEditorOptions = null) {
         this.onCanShowPropertyCallback = onCanShowPropertyCallback;
         this.properties = Survey.JsonObject.metaData.getProperties(this.obj.getType()); 
         this.buildRows(properties);
@@ -83,10 +84,10 @@ export class SurveyQuestionEditorGeneralProperties {
             var jsonProperty = this.getProperty(name);
             if(!jsonProperty) continue;
             var row = this.getRowByCategory(properties[i].category);
-            if(row) row.addProperty(jsonProperty, properties[i].title);
+            if(row) row.addProperty(jsonProperty, properties[i].title, this.options);
             else {
                 row = new SurveyQuestionEditorGeneralRow(this.obj);
-                row.addProperty(jsonProperty, properties[i].title);
+                row.addProperty(jsonProperty, properties[i].title, this.options);
                 if(properties[i].category) row.category = properties[i].category;
                 this.rows.push(row);
             }
