@@ -1,4 +1,5 @@
 ﻿import * as ko from "knockout";
+import * as jQuery from "jquery";
 import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
@@ -7,6 +8,7 @@ import {editorLocalization} from "../editorLocalization";
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public editingObject: any;
     public onApplyClick: any;
+    public onOkClick: any;
     public onResetClick: any;
     public modalName: string;
     public modalNameTarget: string;
@@ -24,6 +26,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         var self = this;
         this.koShowApplyButton = ko.observable(true);
         self.onApplyClick = function () { self.apply(); };
+        self.onOkClick = function() {self.apply(); if(!self.koHasError()) jQuery(self.modalNameTarget).modal("hide");; };
         self.onResetClick = function () { self.reset(); };
     }
     public get isModal(): boolean { return true; }
