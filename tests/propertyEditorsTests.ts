@@ -18,7 +18,7 @@ import {
 } from "../src/propertyEditors/propertyValidatorsEditor";
 import {SurveyPropertyCustomEditor} from "../src/propertyEditors/propertyCustomEditor";
 import {Extentions} from "../src/extentions";
-import {SurveyPropertyEditorFactory} from "../src/propertyEditors/propertyEditorFactory";
+import {SurveyPropertyEditorFactory, SurveyDropdownPropertyEditor} from "../src/propertyEditors/propertyEditorFactory";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -28,6 +28,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {}
     onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any) {
+    }
+    onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
+        return "";
     }
 }
 
@@ -51,7 +54,7 @@ QUnit.test("Create custom property editor", function (assert) {
     var propertyValue = null;
     var widgetJSON = {
         render: function(editor, el) {
-            propertyValue = propertyEditor.value;
+            propertyValue = propertyEditor.editingValue;
             editor.onValueChangedCallback = function(newValue) {
                 propertyValue = newValue;
             }
@@ -64,23 +67,37 @@ QUnit.test("Create custom property editor", function (assert) {
     assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
     assert.deepEqual((<SurveyPropertyCustomEditor>propertyEditor).widgetJSON, widgetJSON, "widgetJSON set correctly");
     widgetJSON.render(propertyEditor, null);
-    propertyEditor.value = 3;
+    propertyEditor.editingValue = 3;
     assert.equal(propertyValue, 3, "value has been set to 3 as well");
+});
+QUnit.test("PropertyEditor and hasError - required", function (assert) {
+    var question = new Survey.QuestionText("q1");
+    var property = Survey.JsonObject.metaData.findProperty("questionbase", "name");
+    var propertyEditor = new SurveyObjectProperty(property);
+    propertyEditor.object = question;
+    var editor = propertyEditor.editor;
+    assert.equal(editor.isRequired, true, "The property is required");
+    assert.equal(editor.hasError(), false, "There is value here");
+    assert.equal(editor.koErrorText(), "", "The error is empty");
+    editor.koValue("");
+    assert.equal(editor.hasError(), true, "There is no value here");
+    assert.notEqual(editor.koErrorText(), "", "The error is not empty");
 });
 QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
     var property = new Survey.JsonObjectProperty("dropdown");
     property.setChoices([1, 2, 3], null);
     var propertyEditor = new SurveyObjectProperty(property);
+    var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
     assert.equal(propertyEditor.editorType, "dropdown", "Dropdown editor should be created");
-    assert.equal(propertyEditor.koChoices().length, 3, "There are 3 items");
-    assert.equal(propertyEditor.koChoices()[0].value, 1, "The first value");
-    assert.equal(propertyEditor.koChoices()[0].text, 1, "The first text");
+    assert.equal(editor.koChoices().length, 3, "There are 3 items");
+    assert.equal(editor.koChoices()[0].value, 1, "The first value");
+    assert.equal(editor.koChoices()[0].text, 1, "The first text");
 });
 QUnit.test("SurveyPropertyItemValue", function (assert) {
     var choices = [{ value: 1, text: "item1" }, { value: 2, text: "item2" }, { value: 3, text: "item3" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {  choices = newValue; };
-    itemValueProperty.value = choices;
+    itemValueProperty.editingValue = choices;
     assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
     assert.equal(itemValueProperty.koItems()[1].cells[0].value, 2, "check value of the second element");
     assert.equal(itemValueProperty.koItems()[1].cells[1].value, "item2", "check text of the second element");
@@ -117,7 +134,7 @@ QUnit.test("SurveyPropertyItemValue", function (assert) {
 QUnit.test("SurveyPropertyItemValue different view type", function (assert) {
     var choices = [{ value: 1, text: "item1" }, { value: 2 } ];
     var editor = new SurveyPropertyItemValuesEditor(null);
-    editor.value = choices;
+    editor.editingValue = choices;
     editor.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
     assert.equal(editor.koItemsText(), "", "It is empty by default");
     editor.koActiveView("text");
@@ -144,7 +161,7 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (assert)
     assert.equal(choices[0].hasText, true, "the first item has text");
     assert.equal(choices[1].hasText, true, "the second item has text");
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { Survey.ItemValue.setData(choices, newValue); };
-    itemValueProperty.value = choices;
+    itemValueProperty.editingValue = choices;
     assert.equal(itemValueProperty.koItems().length, 2, "there are three elements");
     itemValueProperty.onApplyClick();
     assert.equal(choices.length, 2, "there are two items");
@@ -157,7 +174,7 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same and editor.alwaySav
     var choices = [{ value: 1, text: "1" }, { value: "item 2", text: "item 2" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
-    itemValueProperty.value = choices;
+    itemValueProperty.editingValue = choices;
     var options = new EditorOptionsTests();
     options.alwaySaveTextInPropertyEditors = true;
     itemValueProperty.options = options;
@@ -173,7 +190,7 @@ QUnit.test("SurveyPropertyItemValue_PureValue", function (assert) {
     var choices = [1, "item2", { value: 3, text: "item3" }];
     var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => { choices = newValue; };
-    itemValueProperty.value = choices;
+    itemValueProperty.editingValue = choices;
     assert.equal(itemValueProperty.koItems().length, 3, "there are three elements");
     assert.equal(itemValueProperty.koItems()[0].cells[0].koValue(), 1, "check value of the first element");
     assert.equal(itemValueProperty.koItems()[1].cells[0].koValue(), "item2", "check value of the second element");
@@ -184,9 +201,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function (assert) {
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);
     assert.equal(propertyEditor.columns.length, 2, "There are two columns value + text");
     assert.equal(propertyEditor.columns[0].property.name, "value", "The first column is value");
-    assert.equal(propertyEditor.columns[0].isRequired, true, "The first column is required");
     assert.equal(propertyEditor.columns[1].property.name, "text", "The second column is text");
-    assert.equal(propertyEditor.columns[1].isRequired, false, "The second column is not required");
 });
 QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
     Survey.JsonObject.metaData.addProperty("itemvalue", {name: "imageLink"});
@@ -222,10 +237,10 @@ QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     assert.equal(cell.value, 5, "value equals 5");
     assert.equal(itemValue.value, 5, "itemValue.value equals 5");
     assert.equal(cell.hasError, false, "There is no errors in hasError");
-    assert.equal(cell.koHasError(), false, "There is no errors in koHasError");
+    assert.equal(cell.editor.koHasError(), false, "There is no errors in koHasError");
     cell.koValue(null);
     assert.equal(cell.hasError, true, "There is empty error in hasError");
-    assert.equal(cell.koHasError(), true, "There is empty error in koHasError");
+    assert.equal(cell.editor.koHasError(), true, "There is empty error in koHasError");
 });
 QUnit.test("SurveyPropertyItemValuesEditorCell + property editor", function (assert) {
     var property = new Survey.JsonObjectProperty("testBoolean");
@@ -240,12 +255,11 @@ QUnit.test("SurveyPropertyItemValuesEditorCell + property editor", function (ass
 });
 QUnit.test("SurveyPropertyItemValuesEditorItem", function (assert) {
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);
-    var itemValue = new Survey.ItemValue(1);
+    var itemValue = new Survey.ItemValue(null);
     var item = new SurveyPropertyItemValuesEditorItem(itemValue, propertyEditor.columns);
     assert.equal(item.cells.length, 2, "There are two cells");
-    itemValue.value = null;
     assert.equal(item.hasError, true, "There is an error");
-    itemValue.value = 0;
+    item.cells[0].koValue(0);
     assert.equal(item.hasError, false, "There is no errors");
 });
 
@@ -256,7 +270,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (asser
     columns[0].choices = [1, 2, "three"];
     var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
     itemValueProperty.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => { columns = newValue; };
-    itemValueProperty.value = columns;
+    itemValueProperty.editingValue = columns;
     assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
     assert.equal(itemValueProperty.koItems()[0].koName(), "column 1", "the first column name");
     itemValueProperty.onAddClick();
@@ -273,7 +287,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (
     columns.push(new Survey.MatrixDropdownColumn("column 2"));
     var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
     itemValueProperty.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => { columns = newValue; };
-    itemValueProperty.value = columns;
+    itemValueProperty.editingValue = columns;
 
     assert.equal(itemValueProperty.koEditItem(), null, "It is null by default");
     itemValueProperty.koEditItem(itemValueProperty.koItems()[1]);
@@ -286,15 +300,15 @@ QUnit.test("Text property test - two way binding", function (assert) {
     property.type = "text";
     var propertyEditor = new SurveyObjectProperty(property);
     var editor = <SurveyPropertyTextEditor>(propertyEditor.editor);
-    editor.koValue("1");
+    editor.koTextValue("1");
     editor.onApplyClick();
-    assert.equal(propertyEditor.koValue(), "1", "the value is set correctly from the editor");
-    propertyEditor.koValue("2");
-    assert.equal(editor.koValue(), "2", "the value is set correctly from text input");
+    assert.equal(propertyEditor.editor.koValue(), "1", "the value is set correctly from the editor");
+    propertyEditor.editor.koValue("2");
+    assert.equal(editor.koTextValue(), "2", "the value is set correctly from text input");
 });
 QUnit.test("SurveyPropertyResultfullEditor test", function (assert) {
     var editor = new SurveyPropertyResultfullEditor(null);
-    editor.value = new Survey.ChoicesRestfull();
+    editor.editingValue = new Survey.ChoicesRestfull();
     editor.koPath("path1");
     editor.koValueName("name2");
     editor.koTitleName("title3");
@@ -313,8 +327,8 @@ QUnit.test("Triggers property editor", function (assert) {
     var result = [];
     var propEditor = new SurveyPropertyTriggersEditor(null);
     propEditor.onChanged = (newValue: any) => { result = newValue };
-    propEditor.object = survey;
-    propEditor.value = survey.triggers;
+    propEditor.editingObject = survey;
+    propEditor.editingValue = survey.triggers;
     assert.equal(propEditor.koTriggers().length, propEditor.availableTriggers.length, "localized triggers created correctly");
     assert.equal(propEditor.koItems().length, 1, "There are one trigger initially");
     var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
@@ -373,8 +387,8 @@ QUnit.test("Validators property editor", function (assert) {
     assert.equal(propEditor.availableValidators.length, propEditor.koValidators().length, "Localized validators have been created");
 
     propEditor.onChanged = (newValue: any) => { result = newValue };
-    propEditor.object = question;
-    propEditor.value = question.validators;
+    propEditor.editingObject = question;
+    propEditor.editingValue = question.validators;
     assert.equal(propEditor.koItems().length, 1, "There are one validator initially");
     var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
     assert.equal(koValidator.validator.text, "validatortext", "Validator Text is set correctly");

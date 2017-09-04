@@ -3,26 +3,7 @@
         <!-- ko foreach: properties.rows -->
         <div class="form-group">
             <!-- ko foreach: properties -->
-                    <div class="alert alert-danger" role="alert" data-bind="visible:koHasError">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only">Error:</span>
-                        <span  data-bind="text:koErrorText"></span>
-                    </div>            
-                    <!-- ko if: editType != 'check' -->
-                        <label data-bind="text:title"></label>
-                    <!-- /ko -->
-                    <!-- ko if: editType == 'text' -->
-                        <input type="text" class="form-control" data-bind="value: koValue, disable: disabled" />
-                    <!-- /ko -->
-                    <!-- ko if: editType == 'textarea' -->
-                        <textarea type="text" rows="2" class="form-control" data-bind="value: koValue, disable: disabled"></textarea>
-                    <!-- /ko -->
-                    <!-- ko if: editType == 'check' -->
-                        <span class="checkbox-inline"><input type="checkbox" data-bind="checked: koValue, disable: disabled"><label data-bind="text:title"></label></span>
-                    <!-- /ko -->
-                    <!-- ko if: editType == 'dropdown' -->
-                        <select class="form-control"  data-bind="value: koValue, options: choices, disable: disabled"></select>
-                    <!-- /ko -->
+                <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
             <!-- /ko  -->
         </div>
         <!-- /ko  -->

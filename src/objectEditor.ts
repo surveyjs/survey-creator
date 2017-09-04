@@ -58,11 +58,6 @@ export class SurveyObjectEditor {
         for (var i = 0; i < properties.length; i++) {
             if (!this.canShowProperty(properties[i])) continue;
             var objectProperty = new SurveyObjectProperty(properties[i], propEvent, this.propertyEditorOptions);
-            var locName = this.selectedObject.getType() + '_' + properties[i].name;
-            objectProperty.displayName = editorLocalization.getPropertyName(locName);
-            var title = editorLocalization.getPropertyTitle(locName);
-            if (!title) title = objectProperty.displayName;
-            objectProperty.title = title;
             objectProperties.push(objectProperty);
         }
         this.koProperties(objectProperties);

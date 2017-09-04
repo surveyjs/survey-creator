@@ -17,7 +17,7 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
         if(this.isValueChanging) return;
         this.isValueChanging = true;
         super.onValueChanged();
-        if(this.onValueChangedCallback) this.onValueChangedCallback(this.value);
+        if(this.onValueChangedCallback) this.onValueChangedCallback(this.editingValue);
         this.isValueChanging = false;
     }
     protected get widgetRender(): any { return this.widgetJSON ? this.widgetJSON.render : null; }

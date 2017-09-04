@@ -105,6 +105,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
             editorOptions.allowAddRemoveItems = false;
         }
     }
+    onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
+        return "";
+    }
 }
 
 QUnit.test("On new ItemValue added", function (assert) {

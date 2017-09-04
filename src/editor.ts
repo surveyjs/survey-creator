@@ -153,6 +153,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
      */
     public onSetPropertyEditorOptions: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj  the survey object which property is edited in the Property Editor.
+     * <br/> options.propertyName  the name of the edited property.
+     * <br/> options.value the property value.
+     * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
+     */
+    public onCustomErrorOnValidation: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
     /**
      * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -903,6 +912,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         var options = {propertyName: propertyName, obj: obj, editorOptions: editorOptions};
         this.onSetPropertyEditorOptions.fire(this, options);
     }
+    onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string {
+        var options = {propertyName: propertyName, obj: obj, value: value, error: ""};
+        this.onCustomErrorOnValidation.fire(this, options);
+        return options.error;
+    }
+    
 }
 
 Survey.Survey.cssType = "bootstrap";
