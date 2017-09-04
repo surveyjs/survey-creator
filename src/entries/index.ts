@@ -51,4 +51,4 @@ import '../localization/spanish';
 import '../localization/portuguese';
 import '../localization/italian';
 import '../localization/simplified-chinese';
-
+import '../localization/persian';
