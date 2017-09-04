@@ -29,7 +29,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     }
     public get editorType(): string { return "itemvalues"; }
     public get columns() : Array<SurveyPropertyItemValuesEditorColumn> { return this.columnsValue; }
-    public hasError(): boolean {
+    protected checkForErrors(): boolean {
         var result = false;
         for (var i = 0; i < this.koItems().length; i++) {
             var item = this.koItems()[i];
@@ -128,12 +128,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
 }
 
 export class SurveyPropertyItemValuesEditorColumn {
-    private isRequiredValue: boolean;
     constructor(public property: Survey.JsonObjectProperty) {
-        //TODO terrible code. isRequired property is added into JsonObjectProperty in ver > v0.12.23
-        this.isRequiredValue = Survey.JsonObject.metaData.findClass("itemvalue").requiredProperties.indexOf(property.name) > -1;
     }
-    public get isRequired(): boolean { return this.isRequiredValue; }
     public get text(): string {
         var text = editorLocalization.getString("pe." + this.property.name);
         return text ? text : this.property.name;
@@ -158,28 +154,22 @@ export class SurveyPropertyItemValuesEditorItem {
 }
 export class SurveyPropertyItemValuesEditorCell {
     private objectPropertyValue : SurveyObjectProperty;
-    koHasError: any;
-    private nameValue: string;
     constructor(public item: Survey.ItemValue, public column: SurveyPropertyItemValuesEditorColumn) {
-        this.nameValue = this.property.name;
         var self = this;
         var propEvent = (property: SurveyObjectProperty, newValue: any) => {
             self.value = newValue;
         };
         this.objectPropertyValue = new SurveyObjectProperty(this.property, propEvent);
         this.objectProperty.object = item;
-        this.koHasError = ko.observable(false);
     }
     public get property(): Survey.JsonObjectProperty { return this.column.property; }
-    public get name(): string { return this.nameValue; }
     public get objectProperty(): SurveyObjectProperty { return this.objectPropertyValue; }
+    public get editor(): SurveyPropertyEditorBase { return this.objectProperty.editor; }
     public get koValue(): any { return this.objectProperty.editor.koValue; }
     public get value() {  return this.property.getValue(this.item); }
     public set value(val: any) { this.property.setValue(this.item, val, null); }
     public get hasError(): boolean {
-        var res = this.column.isRequired && Survey.Base.isValueEmpty(this.value);
-        this.koHasError(res);
-        return res;
+        return this.editor.hasError();
     }
 }
 

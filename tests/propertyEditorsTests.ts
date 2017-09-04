@@ -198,9 +198,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function (assert) {
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);
     assert.equal(propertyEditor.columns.length, 2, "There are two columns value + text");
     assert.equal(propertyEditor.columns[0].property.name, "value", "The first column is value");
-    assert.equal(propertyEditor.columns[0].isRequired, true, "The first column is required");
     assert.equal(propertyEditor.columns[1].property.name, "text", "The second column is text");
-    assert.equal(propertyEditor.columns[1].isRequired, false, "The second column is not required");
 });
 QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
     Survey.JsonObject.metaData.addProperty("itemvalue", {name: "imageLink"});
@@ -236,10 +234,10 @@ QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     assert.equal(cell.value, 5, "value equals 5");
     assert.equal(itemValue.value, 5, "itemValue.value equals 5");
     assert.equal(cell.hasError, false, "There is no errors in hasError");
-    assert.equal(cell.koHasError(), false, "There is no errors in koHasError");
+    assert.equal(cell.editor.koHasError(), false, "There is no errors in koHasError");
     cell.koValue(null);
     assert.equal(cell.hasError, true, "There is empty error in hasError");
-    assert.equal(cell.koHasError(), true, "There is empty error in koHasError");
+    assert.equal(cell.editor.koHasError(), true, "There is empty error in koHasError");
 });
 QUnit.test("SurveyPropertyItemValuesEditorCell + property editor", function (assert) {
     var property = new Survey.JsonObjectProperty("testBoolean");
@@ -254,12 +252,11 @@ QUnit.test("SurveyPropertyItemValuesEditorCell + property editor", function (ass
 });
 QUnit.test("SurveyPropertyItemValuesEditorItem", function (assert) {
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);
-    var itemValue = new Survey.ItemValue(1);
+    var itemValue = new Survey.ItemValue(null);
     var item = new SurveyPropertyItemValuesEditorItem(itemValue, propertyEditor.columns);
     assert.equal(item.cells.length, 2, "There are two cells");
-    itemValue.value = null;
     assert.equal(item.hasError, true, "There is an error");
-    itemValue.value = 0;
+    item.cells[0].koValue(0);
     assert.equal(item.hasError, false, "There is no errors");
 });
 

@@ -26,6 +26,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         self.onApplyClick = function () { self.apply(); };
         self.onResetClick = function () { self.reset(); };
     }
+    public get isModal(): boolean { return true; }
     protected onOptionsChanged() {
         this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
     }

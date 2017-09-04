@@ -133,7 +133,7 @@ export var defaultStrings = {
         testService: "Test the service",
         expressionHelp: "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
 
-        propertyIsEmpty: "Please enter value into the property",
+        propertyIsEmpty: "Please enter a value",
         value: "Value",
         text: "Text",
         required: "Required?",

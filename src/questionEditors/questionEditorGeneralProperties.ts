@@ -1,58 +1,42 @@
 import * as ko from "knockout";
 import {editorLocalization} from "../editorLocalization";
 import * as Survey from "survey-knockout";
-
-
+import {SurveyObjectProperty} from "../objectProperty";
+import {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";
 
 export class SurveyQuestionEditorGeneralProperty {
-    public name: string;
-    public title: string;
-    public editType: string;
-    public disabled: boolean;
-    public choices: Array<any> = [];
+    private objectPropertyValue: SurveyObjectProperty;
     koValue: any; koErrorText: any; koHasError: any;
-    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, public isRequired: boolean = false) {
-        this.name = property.name;
-        this.disabled = property["readOnly"];
-        this.editType = "text";
-        if(property.type == "text") this.editType = "textarea";
-        if(property.type == "boolean") this.editType = "check";
-        if(property.choices) {
-            this.choices = property.choices;
-            this.editType = "dropdown";
+    constructor(public obj: Survey.Base, public property: Survey.JsonObjectProperty, displayName: string) {
+        var self = this;
+        this.objectPropertyValue = new SurveyObjectProperty(this.property, null);
+        this.editor.showDisplayName = true;
+        if(!displayName) {
+            displayName = editorLocalization.getString("pe." + this.property.name);
         }
-        this.koValue = ko.observable();
-        this.koErrorText = ko.observable("");
-        this.koHasError = ko.observable(false);
-        this.title = editorLocalization.getString("pe." + this.name);
-        if(!this.title) this.title = this.name;
-        this.reset();
+        if(displayName) this.editor.displayName = displayName;
+        this.objectProperty.object = obj;
     }
+    public get objectProperty(): SurveyObjectProperty { return this.objectPropertyValue; }
+    public get editor(): SurveyPropertyEditorBase { return this.objectProperty.editor; }
     public hasError(): boolean {
-        var isError = this.isRequired && (this.koValue() !== false) && !this.koValue();
-        this.koErrorText(isError ? editorLocalization.getString("pe.propertyIsEmpty"): "");
-        this.koHasError(isError);
-        return isError;
+        return this.editor.hasError();
     }
     public apply() {
-        this.obj[this.name] = this.koValue();
+        this.obj[this.property.name] = this.editor.koValue();
     }
     public reset() {
-        this.koValue(this.getValue());
-    }
-    private getValue(): any {
-        return this.property.getPropertyValue(this.obj);
+        this.editor.koValue(this.property.getPropertyValue(this.obj));
     }
 }
 
 export class SurveyQuestionEditorGeneralRow {
     public category: string;
     public properties: Array<SurveyQuestionEditorGeneralProperty> = [];
-    constructor(public obj: Survey.Base, property: Survey.JsonObjectProperty, isPropertyRequired: boolean = false) {
-        this.addProperty(property, isPropertyRequired);
+    constructor(public obj: Survey.Base) {
     }
-    public addProperty(property: any, isPropertyRequired: boolean = false) {
-        this.properties.push(new SurveyQuestionEditorGeneralProperty(this.obj, property, isPropertyRequired));
+    public addProperty(property: any, displayName: string) {
+        this.properties.push(new SurveyQuestionEditorGeneralProperty(this.obj, property, displayName));
     }
     public hasError() : boolean {
         var isError = false;
@@ -94,22 +78,17 @@ export class SurveyQuestionEditorGeneralProperties {
         }
     }
     protected buildRows(properties) {
-        var requiredProperties: Array<string> = Survey.JsonObject.metaData.getRequiredProperties(this.obj.getType());
-        if(!requiredProperties) requiredProperties = [];
         for(var i = 0 ; i < properties.length; i ++) {
             var name = this.getName(properties[i]);
             var jsonProperty = this.getProperty(name);
             if(!jsonProperty) continue;
-            var isPropertyRequired: boolean = requiredProperties.indexOf(name) > -1;
             var row = this.getRowByCategory(properties[i].category);
-            if(row) row.addProperty(jsonProperty, isPropertyRequired);
+            if(row) row.addProperty(jsonProperty, properties[i].title);
             else {
-                row = new SurveyQuestionEditorGeneralRow(this.obj, jsonProperty, isPropertyRequired);
+                row = new SurveyQuestionEditorGeneralRow(this.obj);
+                row.addProperty(jsonProperty, properties[i].title);
                 if(properties[i].category) row.category = properties[i].category;
                 this.rows.push(row);
-            }
-            if(properties[i].title) {
-                row.properties[row.properties.length - 1].title = properties[i].title;
             }
         }
    }

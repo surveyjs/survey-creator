@@ -24,7 +24,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
             self.koEditItem(null); 
         };
     }
-    public hasError(): boolean {
+    protected checkForErrors(): boolean {
         var result = false;
         for (var i = 0; i < this.koItems().length; i++) {
             result = result || this.koItems()[i].hasError();

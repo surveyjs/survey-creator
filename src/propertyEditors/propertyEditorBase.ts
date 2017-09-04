@@ -19,11 +19,14 @@ export class SurveyPropertyEditorBase {
     private property_: Survey.JsonObjectProperty;
     private isRequriedValue: boolean = false;
     private titleValue: string;
+    private isCustomDisplayName: boolean = false;
     private displayNameValue: string;
     public koValue: any;
     public koText: any;
     public koIsDefault: any;
+    public koHasError: any;
     public koErrorText: any;
+    public showDisplayName: boolean = false;
     public onChanged: (newValue: any) => any;
     public onGetLocale: () => string;
     constructor(property: Survey.JsonObjectProperty) {
@@ -33,6 +36,7 @@ export class SurveyPropertyEditorBase {
         this.koValue.subscribe(function (newValue) { self.onkoValueChanged(newValue); });
         this.koText = ko.computed(() => { return self.getValueText(self.koValue()); });
         this.koIsDefault = ko.computed(function () { return self.property ? self.property.isDefaultValue(self.koValue()) : false; });
+        this.koHasError = ko.observable(false);
         this.koErrorText = ko.observable("");
         this.setIsRequired();
         this.setTitleAndDisplayName();
@@ -42,6 +46,18 @@ export class SurveyPropertyEditorBase {
     public get editablePropertyName(): string { return this.property ? this.property.name : "" };
     public get title(): string { return this.titleValue; }
     public get displayName(): string { return this.displayNameValue; }
+    public set displayName(val: string) { 
+        this.isCustomDisplayName = true;
+        this.displayNameValue = val; 
+    }
+    public get showDisplayNameOnTop(): boolean { return this.showDisplayName && this.canShowDisplayNameOnTop; }
+    public get canShowDisplayNameOnTop(): boolean { return true; }
+    public get contentTemplateName(): string {
+        var res = "propertyeditor";
+        if(this.isModal) res += "content";
+        return res + "-" + this.editorType;
+    }
+    public get isModal(): boolean { return false; }
     
     public get object(): any { return this.objectValue; }
     public set object(value: any) {
@@ -60,6 +76,10 @@ export class SurveyPropertyEditorBase {
         this.onValueChanged();
     }
     public hasError(): boolean { 
+        this.koHasError(this.checkForErrors());
+        return this.koHasError();
+    }
+    protected checkForErrors(): boolean {
         if(this.isRequired) {
             var er = Survey.Base.isValueEmpty(this.koValue());
             this.koErrorText(er ? editorLocalization.getString("pe.propertyIsEmpty") : "");
@@ -84,6 +104,7 @@ export class SurveyPropertyEditorBase {
         }
     }
     protected setTitleAndDisplayName() {
+        if(this.isCustomDisplayName) return;
         this.displayNameValue = this.property ? this.property.name : "";
         this.titleValue = this.displayNameValue;
         if(!this.property || !this.object || !this.object.getType) return;

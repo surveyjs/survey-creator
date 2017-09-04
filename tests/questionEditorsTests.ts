@@ -29,10 +29,10 @@ QUnit.test("Question Editor apply/reset/onChanged", function (assert) {
     var editor = new SurveyQuestionEditor(dropdownQuestion, null);
     editor.onChanged = function () { changeCounter++; };
     var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
-    assert.equal(generalTab.properties.rows[0].properties[0].koValue(), "q1", "name set correct");
-    assert.equal(generalTab.properties.rows[1].properties[0].koValue(), "", "title set correct");
-    generalTab.properties.rows[0].properties[0].koValue("newName");
-    generalTab.properties.rows[1].properties[0].koValue("new title");
+    assert.equal(generalTab.properties.rows[0].properties[0].editor.koValue(), "q1", "name set correct");
+    assert.equal(generalTab.properties.rows[1].properties[0].editor.koValue(), "", "title set correct");
+    generalTab.properties.rows[0].properties[0].editor.koValue("newName");
+    generalTab.properties.rows[1].properties[0].editor.koValue("new title");
     var visibleIfTab = <SurveyQuestionEditorTabProperty>editor.koTabs()[editor.koTabs().length - 1];
     visibleIfTab.propertyEditor["koValue"]("false");
     editor.apply();
@@ -63,7 +63,7 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function (assert) {
     for(var i = 0; i < prop.rows.length; i ++) {
         var row = prop.rows[i];
         for(var j = 0; j < row.properties.length; j ++) {
-            if(row.properties[j].name == "startWithNewLine") {
+            if(row.properties[j].property.name == "startWithNewLine") {
                 hasFound = true;
                 break;
             }
@@ -76,8 +76,8 @@ QUnit.test("Create  general properties", function (assert) {
     var question = new Survey.QuestionText("q1");
     var properties = new SurveyQuestionEditorGeneralProperties(question, [{name: "name"}, "visible", "dummy"]);
     assert.equal(properties.rows.length, 2, "There are two rows");
-    assert.equal(properties.rows[0].properties[0].name, "name", "The first property created correctly");
-    assert.equal(properties.rows[1].properties[0].name, "visible", "The second property created correctly");
+    assert.equal(properties.rows[0].properties[0].property.name, "name", "The first property created correctly");
+    assert.equal(properties.rows[1].properties[0].property.name, "visible", "The second property created correctly");
 });
 
 QUnit.test("General properties different categories", function (assert) {
@@ -85,29 +85,29 @@ QUnit.test("General properties different categories", function (assert) {
     var properties = new SurveyQuestionEditorGeneralProperties(question, [{name: "name", category: "1", title: "MyName"}, { name: "visible"}, {name: "title", category: "1"}]);
     assert.equal(properties.rows.length, 2, "There are two rows");
     assert.equal(properties.rows[0].properties.length, 2, "There are two rows");
-    assert.equal(properties.rows[0].properties[0].name, "name", "The first property in row is name");
-    assert.equal(properties.rows[0].properties[1].name, "title", "The second property in row is title");
-    assert.equal(properties.rows[0].properties[0].title, "MyName", "Title property was set correctly");
+    assert.equal(properties.rows[0].properties[0].property.name, "name", "The first property in row is name");
+    assert.equal(properties.rows[0].properties[1].property.name, "title", "The second property in row is title");
+    assert.equal(properties.rows[0].properties[0].editor.displayName, "MyName", "Title property was set correctly");
 });
 
 QUnit.test("General properties, editor type", function (assert) {
     var question = new Survey.QuestionText("q1");
     var properties = new SurveyQuestionEditorGeneralProperties(question, ["name", "visible", "title"]);
-    assert.equal(properties.rows[0].properties[0].editType, "text", "Name property has text edit type");
-    assert.equal(properties.rows[1].properties[0].editType, "check", "visible property has check edit type");
-    assert.equal(properties.rows[2].properties[0].editType, "textarea", "title property has textarea edit type");
+    assert.equal(properties.rows[0].properties[0].objectProperty.editorType, "string", "Name property has text edit type");
+    assert.equal(properties.rows[1].properties[0].objectProperty.editorType, "boolean", "visible property has check edit type");
+    assert.equal(properties.rows[2].properties[0].objectProperty.editorType, "text", "title property has textarea edit type");
 });
 
 QUnit.test("General properties, apply/reset", function (assert) {
     var question = new Survey.QuestionText("q1");
     var properties = new SurveyQuestionEditorGeneralProperties(question, ["name", "visible", "title"]);
-    assert.equal(properties.rows[0].properties[0].koValue(), "q1", "Initially it is q1");
-    properties.rows[0].properties[0].koValue("q2");
+    assert.equal(properties.rows[0].properties[0].editor.koValue(), "q1", "Initially it is q1");
+    properties.rows[0].properties[0].editor.koValue("q2");
     properties.apply();
     assert.equal(question.name, "q2", "question.name is 'q2'");
-    properties.rows[0].properties[0].koValue("q3");
+    properties.rows[0].properties[0].editor.koValue("q3");
     properties.reset();
-    assert.equal(properties.rows[0].properties[0].koValue(), "q2", "reset to q2");
+    assert.equal(properties.rows[0].properties[0].editor.koValue(), "q2", "reset to q2");
 });
 
 QUnit.test("General properties, has errors", function (assert) {
@@ -115,9 +115,9 @@ QUnit.test("General properties, has errors", function (assert) {
     var properties = new SurveyQuestionEditorGeneralProperties(question, [{name: "name"}, "visible", "dummy"]);
     var prop = properties.rows[0].properties[0];
     assert.equal(prop.hasError(), false, "There is no error");
-    prop.koValue("");
+    prop.editor.koValue("");
     assert.equal(prop.hasError(), true, "There is an error");
-    prop.koValue("q2");
+    prop.editor.koValue("q2");
     assert.equal(prop.hasError(), false, "There is no error");
 });
 

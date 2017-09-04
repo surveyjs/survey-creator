@@ -28,8 +28,7 @@
                     </td>
                     <!-- ko foreach: cells -->
                     <td>
-                        <!-- ko template: { name: 'propertyeditor-' + objectProperty.editorType, data: objectProperty.editor } --><!-- /ko -->
-                        <div class="alert alert-danger no-padding" role="alert" data-bind="visible:koHasError, text: $root.getLocString('pe.enterNewValue')"></div>
+                        <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
                     </td>
                     <!-- /ko -->
                     <td><button type="button" class="btn btn-xs" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
