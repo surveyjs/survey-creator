@@ -160,26 +160,30 @@ QUnit.test("Question editor: custom errors", function (assert) {
 });
 
 QUnit.test("Question editor: on property value changing", function (assert) {
+    Survey.JsonObject.metaData.addProperty("question", {name: "targetEntity"});
+    Survey.JsonObject.metaData.addProperty("question", {name: "targetField", choices: []});
     var question = new Survey.QuestionText("q1");
     var editor = new SurveyEditor();
-    var errorText = "The value should have at least 3 symbols";
-    editor.onPropertyValidationCustomError.add(function(editor, options) {
-        if(options.propertyName != "title") return;
-        if(!options.value || options.value.length < 3) {
-            options.error = "The value should have at least 3 symbols";
+    editor.onPropertyEditorObjectAssign.add(function(editor, options) {
+        if(options.propertyName != "targetField") return;
+        if(options.obj) {
+            options.obj.targetFieldEditor = options.editor;
         }
     });
     editor.onPropertyValueChanging.add(function(editor, options) {
-        if(options.propertyName != "title") return;
-        options.newValue = options.value + options.value;
-        options.doValidation = true;
+        if(options.propertyName != "targetEntity") return;
+        if(options.obj &&  options.obj.targetFieldEditor) {
+            var choices = [];
+            choices.push(options.value + " 1");
+            choices.push(options.value + " 2");
+            options.obj.targetFieldEditor.koChoices(choices);
+        }
     });
-    var properties = new SurveyQuestionEditorGeneralProperties(question, ["name", "title"], null, editor);
-    var titleEditor = properties.rows[1].properties[0].editor;
-    titleEditor.koValue("q");
-    assert.equal(titleEditor.koValue(), "qq", "Double the value");
-    assert.equal(titleEditor.koErrorText(), errorText, "There is the error");
-    titleEditor.koValue("ab");
-    assert.equal(titleEditor.koValue(), "abab", "Double the value, 2");
-    assert.equal(titleEditor.koErrorText(), "", "There is no error now");
+    var properties = new SurveyQuestionEditorGeneralProperties(question, ["targetEntity", "targetField"], null, editor);
+    var entityEditor = properties.rows[0].properties[0].editor;
+    var targetEditor = properties.rows[1].properties[0].editor;
+
+    assert.deepEqual(targetEditor["koChoices"](), [], "The choices is empty");
+    entityEditor.koValue("item")
+    assert.deepEqual(targetEditor["koChoices"](), ["item 1", "item 2"], "The choices has two items");
 });

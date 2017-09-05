@@ -10,6 +10,7 @@ export interface ISurveyObjectEditorOptions {
     onSetPropertyEditorOptionsCallback(propertyName: string, obj: Survey.Base, editorOptions: any);
     onGetErrorTextOnValidationCallback(propertyName: string, obj: Survey.Base, value: any): string;
     onValueChangingCallback(options: any);
+    onPropertyEditorObjectSetCallback(propertyName: string, obj: Survey.Base, editor: SurveyPropertyEditorBase);
 }
 
 export class SurveyPropertyEditorBase {
@@ -69,6 +70,9 @@ export class SurveyPropertyEditorBase {
         this.setTitleAndDisplayName();
         this.setObject(this.object);
         this.updateValue();
+        if(this.options && this.property) {
+            this.options.onPropertyEditorObjectSetCallback(this.property.name, this.object, this);
+        }
     }
     
     public getValueText(value: any): string { return value; }

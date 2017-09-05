@@ -1,7 +1,7 @@
 ﻿import {SurveyObjectEditor} from "../src/objectEditor";
 import {SurveyObjectProperty} from "../src/objectProperty";
 import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
-import {ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
+import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
 import {SurveyPropertyItemValuesEditor} from "../src/propertyEditors/propertyItemValuesEditor";
 import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import * as Survey from "survey-knockout";
@@ -109,6 +109,8 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
         return "";
     }
     onValueChangingCallback(options: any) { }
+    onPropertyEditorObjectSetCallback(propertyName: string, obj: Survey.Base, editor: SurveyPropertyEditorBase) { }
+            
 }
 
 QUnit.test("On new ItemValue added", function (assert) {

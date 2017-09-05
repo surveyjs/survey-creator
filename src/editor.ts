@@ -1,7 +1,7 @@
 ﻿import * as ko from "knockout";
 import {editorLocalization} from "./editorLocalization";
 import {SurveyObjectEditor} from "./objectEditor";
-import {ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
+import {ISurveyObjectEditorOptions, SurveyPropertyEditorBase} from "./propertyEditors/propertyEditorBase";
 import {SurveyPagesEditor} from "./pagesEditor";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
@@ -174,6 +174,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      * @see onPropertyValidationCustomError
      */
     public onPropertyValueChanging: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj  the survey object which property is edited in the Property Editor.
+     * <br/> options.propertyName  the name of the edited property.
+     * <br/> options.editor the instance of Property Editor.
+     * @see onPropertyValueChanging
+     */
+    public onPropertyEditorObjectAssign: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
     /**
      * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -931,6 +940,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     onValueChangingCallback(options: any) {
         this.onPropertyValueChanging.fire(this, options);
+    }
+    onPropertyEditorObjectSetCallback(propertyName: string, obj: Survey.Base, editor: SurveyPropertyEditorBase) {
+        var options = {propertyName: propertyName, obj: obj, editor: editor};
+        this.onPropertyEditorObjectAssign.fire(this, options);
     }
 }
 
