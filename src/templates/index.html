@@ -9,7 +9,7 @@
     <div class="panel svd_content">
         <div class="row svd_survey_designer"  data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 panel panel-default svd_toolbox">
-                <div class="svd_toolbox_title" data-bind="text: $root.getLocString('ed.toolbox')"></div>
+                <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <div class="btn-group-vertical" style="width:100%;padding-right:2px">
                     <!-- ko foreach: toolbox.koItems -->
                     <div class="btn btn-default" style="text-align:left; margin:1px;min-height:37px; width:100%" draggable="true" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
@@ -19,7 +19,7 @@
                     <!-- /ko  -->
                 </div>
             </div>
-            <div class="col-lg-7 col-md-7 col-sm-8 col-xs-11 svd_editors">
+            <div class="col-xs-11 svd_editors" data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid()}">
                 <ul class="svd_toolbar nav-tabs svd_menu">
                     <!-- ko foreach: toolbarItems -->
                     <li class="svd_actions" data-bind="css: $data.css, visible: visible, attr: { id: id }">
@@ -33,7 +33,7 @@
                     <div id="surveyjs"></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs panel panel-default svd_properties">
+            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs panel panel-default svd_properties" data-bind="visible: koShowPropertyGrid">
                 <div class="panel-heading input-group">
                     <div class="custom-select">
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>

@@ -103,7 +103,8 @@ export class SurveyQuestionEditor {
     }
     private buildTabs(): Array<SurveyQuestionEditorTabBase> {
         var tabs = [];
-        var properties = new SurveyQuestionEditorGeneralProperties(this.obj, SurveyQuestionEditorDefinition.getProperties(this.className), this.onCanShowPropertyCallback);
+        var properties = new SurveyQuestionEditorGeneralProperties(this.obj, SurveyQuestionEditorDefinition.getProperties(this.className), 
+                this.onCanShowPropertyCallback, this.options);
         tabs.push(new SurveyQuestionEditorTabGeneral(this.obj, properties));
         this.addPropertiesTabs(tabs);
         for (var i = 0; i < tabs.length; i++) {

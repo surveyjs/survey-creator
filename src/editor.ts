@@ -201,7 +201,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     koCanDeleteObject: any;
     koObjects: any; koSelectedObject: any;
     koShowSaveButton: any;
-    koGenerateValidJSON: any; koShowOptions: any; koTestSurveyWidth: any; koDesignerHeight: any;
+    koGenerateValidJSON: any; koShowOptions: any; koShowPropertyGrid: any; koTestSurveyWidth: any; koDesignerHeight: any;
     selectDesignerClick: any; selectEditorClick: any; selectTestClick: any; selectEmbedClick: any;
     generateValidJSONClick: any; generateReadableJSONClick: any;
     doUndoClick: any; doRedoClick: any;
@@ -220,6 +220,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
         this.koShowOptions = ko.observable();
         this.koGenerateValidJSON = ko.observable(true);
+        this.koShowPropertyGrid = ko.observable(true);
         this.koDesignerHeight = ko.observable();
         this.setOptions(options);
         this.koCanDeleteObject = ko.observable(false);
@@ -346,6 +347,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.showTestSurveyTabValue = typeof (options.showTestSurveyTab) !== 'undefined' ? options.showTestSurveyTab : true;
         this.showEmbededSurveyTabValue = typeof (options.showEmbededSurveyTab) !== 'undefined' ? options.showEmbededSurveyTab : false;
         this.koShowOptions(typeof (options.showOptions) !== 'undefined' ? options.showOptions : false);
+        this.koShowPropertyGrid(typeof (options.showPropertyGrid) !== 'undefined' ? options.showPropertyGrid : true);
         this.koGenerateValidJSON(this.options.generateValidJSON);
         this.isAutoSave = typeof (options.isAutoSave) !== 'undefined' ? options.isAutoSave : false;
         this.isRTLValue = typeof (options.isRTL) !== 'undefined' ? options.isRTL : false;
@@ -483,6 +485,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      */
     public get showOptions() { return this.koShowOptions(); }
     public set showOptions(value: boolean) { this.koShowOptions(value); }
+    /**
+     * Set it to false to hide the Property Grid on the right. It allows to edit the properties of the selected object (question/panel/page/survey).
+     */
+    public get showPropertyGrid() { return this.koShowPropertyGrid(); }
+    public set showPropertyGrid(value: boolean) { this.koShowPropertyGrid(value); }
     /**
      * Set it to true to show "JSON Editor" tab and to false to hide the tab
      */
