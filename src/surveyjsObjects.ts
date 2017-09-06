@@ -2,14 +2,18 @@ import * as ko from "knockout";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
+export interface ISurveyObjectMenuItem {
+    name: string;
+    text: string;
+    onClick: (obj: Survey.Base) => any;
+}
+
 export class SurveyForDesigner extends Survey.Survey {
     private selectedElementValue: any;
-    editQuestionClick: any; copyQuestionClick: any; fastCopyQuestionClick: any; deleteCurrentObjectClick: any;
+    editQuestionClick: any; 
     public  onSelectedElementChanged: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    public onEditQuestion: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    public onCopyQuestion: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    public onFastCopyQuestion: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-    public onDeleteCurrentObject: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+    public onEditButtonClick: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>(); 
+    public  onGetMenuItems: Survey.Event<(sender: Survey.Survey, options: any) => any, any> = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
     constructor(jsonObj: any = null, renderedElement: any = null, css: any = null) {
         super(jsonObj, renderedElement, css);
         var self = this;
@@ -17,10 +21,13 @@ export class SurveyForDesigner extends Survey.Survey {
         this.onAfterRenderPage.add((sender: Survey.Survey, options) => { options.page["onAfterRenderPage"](options.htmlElement); });
         this.onAfterRenderQuestion.add((sender: Survey.Survey, options) => { options.question["onAfterRenderQuestion"](options.htmlElement); });
         this.onAfterRenderPanel.add((sender: Survey.Survey, options) => { options.panel["onAfterRenderPanel"](options.htmlElement); });
-        this.editQuestionClick = function () { self.onEditQuestion.fire(self, null); };
-        this.copyQuestionClick = function () { self.onCopyQuestion.fire(self, null); };
-        this.fastCopyQuestionClick = function () { self.onFastCopyQuestion.fire(self, null); };
-        this.deleteCurrentObjectClick = function () { self.onDeleteCurrentObject.fire(self, null); }
+        this.editQuestionClick = function () { self.onEditButtonClick.fire(self, null); };
+    }
+    public getMenuItems(obj: Survey.Base): Array<ISurveyObjectMenuItem> {
+        var items = [];
+        var options = {obj: obj, items: items};
+        this.onGetMenuItems.fire(this, options)
+        return options.items;
     }
     public get selectedElement(): any {return this.selectedElementValue;}
     public set selectedElement(value: any) {
@@ -103,17 +110,17 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
 const question_design_class: string = "svd_question well well-sm svd_q_design_border";
 const panel_design_class: string = "svd_question well well-sm svd_q_design_border";
 
-function createQuestionDesignItem(onClick: any, text: string): HTMLLIElement {
+function createQuestionDesignItem(obj: any, onClick: any, text: string): HTMLLIElement {
     var res = <HTMLLIElement>document.createElement("li");
     var btn = document.createElement("button");
     btn.innerText = text;
-    btn.onclick = onClick;
+    btn.onclick = function() { onClick(obj); }
     btn.className = "btn btn-primary btn-xs";
     res.appendChild(btn);
     return res;
 }
 
-function createElementAddons(data: any, isPanel: boolean): HTMLElement {
+function createElementAddons(obj: Survey.Base, data: any, isPanel: boolean): HTMLElement {
     var main: HTMLDivElement = document.createElement("div");
     main.className = "svd_question_menu btn-group";
     main["role"] = "group";
@@ -137,10 +144,10 @@ function createElementAddons(data: any, isPanel: boolean): HTMLElement {
     main.appendChild(btn);
     var ul = document.createElement("ul");
     ul.className = "dropdown-menu";
-    ul.appendChild(createQuestionDesignItem(data.copyQuestionClick, data.getEditorLocString('survey.addToToolbox')));
-    ul.appendChild(createQuestionDesignItem(data.fastCopyQuestionClick, data.getEditorLocString('survey.copy')));
-    var deleteLocaleName = isPanel ? 'survey.deletePanel' : 'survey.deleteQuestion';
-    ul.appendChild(createQuestionDesignItem(data.deleteCurrentObjectClick, data.getEditorLocString(deleteLocaleName)));
+    var menuItems = data.getMenuItems(obj);
+    for(var i = 0; i < menuItems.length; i ++) {
+        ul.appendChild(createQuestionDesignItem(obj, menuItems[i].onClick, menuItems[i].text));
+    }
     main.appendChild(ul);
     return main;
 }
@@ -194,7 +201,7 @@ function elementOnAfterRendering(el: any, self: any, className: string, isPanel:
         }
     }
     if(!self["selectedElementInDesign"] || self["selectedElementInDesign"] === self) {
-        self.addonsElement = createElementAddons(getSurvey(self), isPanel);
+        self.addonsElement = createElementAddons(self, getSurvey(self), isPanel);
         self.addonsElement.style.display = self.koIsSelected() ? "": "none";    
         el.appendChild(self.addonsElement);
     }

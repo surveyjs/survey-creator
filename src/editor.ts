@@ -183,6 +183,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      * @see onPropertyValueChanging
      */
     public onPropertyEditorObjectAssign: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
+     * Use this event to add/remove/modify the element (question/panel) menu items.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.obj  the survey object which property is edited in the Property Editor.
+     * <br/> options.items the list of menu items. It has two requried fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
+     */
+    public onDefineElementMenuItems: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     koAutoSave = ko.observable(false);
     /**
      * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -718,16 +725,25 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             this.surveyValue["setJsonObject"](this.getDefaultSurveyJson()); //TODO
         }
         this.surveyValue["dragDropHelper"] = this.dragDropHelper;
+        this.surveyValue.onGetMenuItems.add((sender, options) => {
+            options.items.push({name: "addToToolbox", text: self.getLocString("survey.addToToolbox"), 
+                onClick : function(selObj){ 
+                    self.addCustomToolboxQuestion(selObj);
+                } });
+            options.items.push({name: "copy", text: self.getLocString("survey.copy"), onClick : function(selObj){ self.fastCopyQuestion(selObj);} });
+            var deleteLocaleName = options.obj.isPanel ? 'survey.deletePanel' : 'survey.deleteQuestion';
+            options.items.push({name: "delete", text: self.getLocString(deleteLocaleName), onClick : function(selObj){ self.deleteCurrentObject();} });
+            self.onDefineElementMenuItems.fire(self, options);
+        });
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
         this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
         this.surveyVerbs.survey = this.survey;
         this.surveyValue.onSelectedElementChanged.add((sender: Survey.Survey, options) => { self.surveyObjects.selectObject(sender["selectedElement"]); });
-        this.surveyValue.onEditQuestion.add((sender: Survey.Survey, options) => { self.showQuestionEditor(self.koSelectedObject().value); });
-        this.surveyValue.onCopyQuestion.add((sender: Survey.Survey, options) => { self.addCustomToolboxQuestion(self.koSelectedObject().value); });
-        this.surveyValue.onFastCopyQuestion.add((sender: Survey.Survey, options) => { self.fastCopyQuestion(self.koSelectedObject().value); });
-        this.surveyValue.onDeleteCurrentObject.add((sender: Survey.Survey, options) => { self.deleteCurrentObject(); });
+        this.surveyValue.onEditButtonClick.add((sender: Survey.Survey) => {
+            self.showQuestionEditor(self.koSelectedObject().value);
+        });
         this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => { options.html = self.processHtml(options.html); });
         this.surveyValue.onCurrentPageChanged.add((sender: Survey.Survey, options) => { self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage); });
         this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => { self.doOnQuestionAdded(options.question, options.parentPanel); });
