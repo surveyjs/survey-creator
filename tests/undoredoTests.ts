@@ -1,6 +1,7 @@
-﻿import {SurveyUndoRedo} from "../src/undoredo";
-import {SurveyEditor} from "../src/editor";
+﻿import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import {SurveyUndoRedo} from "../src/undoredo";
+import {SurveyEditor} from "../src/editor";
 
 export default QUnit.module("UndoRedoTests");
 

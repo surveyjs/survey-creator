@@ -1,4 +1,5 @@
-﻿import * as Survey from "survey-knockout";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 
 export class Car {
     public name: string;

@@ -1,8 +1,9 @@
-﻿import {SurveyQuestionProperties, SurveyQuestionEditor, SurveyQuestionEditorTabGeneral, SurveyQuestionEditorTabProperty} from "../src/questionEditors/questionEditor";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+import {SurveyQuestionProperties, SurveyQuestionEditor, SurveyQuestionEditorTabGeneral, SurveyQuestionEditorTabProperty} from "../src/questionEditors/questionEditor";
 import {SurveyQuestionEditorGeneralProperties, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperty} from "../src/questionEditors/questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "../src/questionEditors/questionEditorDefinition";
 import {SurveyEditor} from "../src/editor";
-import * as Survey from "survey-knockout";
 
 export default QUnit.module("QuestionEditorsTests");
 

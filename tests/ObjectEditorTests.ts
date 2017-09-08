@@ -1,10 +1,11 @@
-﻿import {SurveyObjectEditor} from "../src/objectEditor";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+import {SurveyObjectEditor} from "../src/objectEditor";
 import {SurveyObjectProperty} from "../src/objectProperty";
 import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
 import {SurveyPropertyItemValuesEditor} from "../src/propertyEditors/propertyItemValuesEditor";
 import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
-import * as Survey from "survey-knockout";
 
 export default QUnit.module("objectEditorTests");
 

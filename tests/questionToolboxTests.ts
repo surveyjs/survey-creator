@@ -1,5 +1,6 @@
-﻿import {QuestionToolbox} from "../src/questionToolbox";
+﻿import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import {QuestionToolbox} from "../src/questionToolbox";
 
 export default QUnit.module("questionToolboxTests");
 

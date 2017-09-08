@@ -1,7 +1,7 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {SurveyObjects} from "../src/surveyObjects";
 import {SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../src/objectVerbs";
-import * as Survey from "survey-knockout";
 
 export default QUnit.module("surveyObjects");
 

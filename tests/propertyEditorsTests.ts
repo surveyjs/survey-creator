@@ -1,4 +1,6 @@
-﻿import {SurveyPropertyEditorBase} from "../src/propertyEditors/propertyEditorBase";
+﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorBase} from "../src/propertyEditors/propertyEditorBase";
 import {SurveyPropertyItemValuesEditor, SurveyPropertyItemValuesEditorColumn, 
     SurveyPropertyItemValuesEditorCell, SurveyPropertyItemValuesEditorItem} from "../src/propertyEditors/propertyItemValuesEditor";
 import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
@@ -6,7 +8,6 @@ import {SurveyObjectProperty} from "../src/objectProperty";
 import {SurveyPropertyTextEditor} from "../src/propertyEditors/propertyModalEditor";
 import {SurveyPropertyResultfullEditor} from "../src/propertyEditors/propertyRestfullEditor";
 import {ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
-import * as Survey from "survey-knockout";
 import "../src/propertyEditors/propertyTextItemsEditor";
 import {
     SurveyPropertyTriggersEditor,
