@@ -3,6 +3,7 @@
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
+    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
     "build_prod": "npm run build_dev && webpack --env.buildType prod"
@@ -46,6 +47,7 @@
     "sass-loader": "4.1.1",
     "standard-version": "4.0.0",
     "style-loader": "0.13.1",
+    "testcafe": "^0.17.2",
     "ts-loader": "2.0.0",
     "typescript": "2.1.5",
     "url-loader": "0.5.8",
