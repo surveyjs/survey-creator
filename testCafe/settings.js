@@ -9,9 +9,7 @@ export const init = ClientFunction(() => {
     var editor = new SurveyEditor.SurveyEditor("editorElement");
     editor.saveSurveyFunc = function (saveNo, callback) { alert('ok'); callback(saveNo, true) };
     editor.showOptions = true;
-    editor.showState = true;   
-    
-    ko.applyBindings(new SurveyEditor.SurveysManager("https://dxsurvey.com", "a797f29b53f8455e8b3ef317f8904dac", editor), document.getElementById("manage"));
+    editor.showState = true;
     
     window.editor = editor;
 });
