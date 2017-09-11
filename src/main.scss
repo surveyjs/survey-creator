@@ -526,6 +526,10 @@ $editor-height:75vh;
     background-image: url('./images/Text.svg');
     @include svg-icon(16px);
 }
+.icon-boolean:before {
+    background-image: url('./images/Boolean.svg');
+    @include svg-icon(16px);
+}
 
 .icon-delete:before {
     background-image: url('./images/Delete_24x24.svg');

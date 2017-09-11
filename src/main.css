@@ -35,7 +35,6 @@
 }
 
 .svd_container .svd_menu > li > a {
-  color: #676a6c;
   border: none;
   border-radius: 0;
   padding: 8px 9px 9px 11px;
@@ -50,7 +49,6 @@
 }
 
 .svd_container .svd_menu > li.active > a {
-  color: #1ab394;
   background-color: #f3f3f4;
   border: 1px solid #e7eaec;
   border-bottom-color: #f3f3f4;
@@ -61,8 +59,17 @@
   background-color: #f3f3f4;
 }
 
+.svd_container a {
+  color: #1ab394;
+}
+
+.svd_container .btn.btn-primary {
+  background-color: #1ab394;
+  border-color: #1ab394;
+}
+
 .svd_container .svd_actions {
-  padding: 0 0 5px 0;
+  padding: 5px 0;
 }
 
 .svd_container .svd_actions .btn.btn-primary {
@@ -81,6 +88,7 @@
 
 .svd_container .svd_state {
   float: right;
+  padding: 10px 0;
 }
 
 .svd_container .svd_state .icon {
@@ -89,13 +97,29 @@
 
 .svd_container .svd_content {
   background-color: #f3f3f4;
-  padding: 10px 30px 30px 30px;
+  padding: 30px;
   margin: 0;
+}
+
+.svd_container .svd_content .svd_survey_designer .svd_toolbar {
+  list-style: none;
+  background-color: transparent;
+  border: none;
+  height: 34px;
+  padding: 0;
 }
 
 .svd_container .svd_content .svd_survey_designer .svd_toolbox {
   background-color: #f3f3f4;
   border: none;
+}
+
+.svd_container .svd_content .svd_survey_designer .svd_toolbox .svd_toolbox_title {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6d7072;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .svd_container .svd_content .svd_survey_designer .svd_toolbox .panel-heading {
@@ -534,6 +558,14 @@
 
 .icon-text:before {
   background-image: url("./images/Text.svg");
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 8px;
+}
+
+.icon-boolean:before {
+  background-image: url("./images/Boolean.svg");
   content: "";
   background-repeat: no-repeat;
   background-position: center;
