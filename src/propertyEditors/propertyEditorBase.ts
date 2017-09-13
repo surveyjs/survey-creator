@@ -119,7 +119,7 @@ export class SurveyPropertyEditorBase {
         this.displayNameValue = this.property ? this.property.name : "";
         this.titleValue = this.displayNameValue;
         if(!this.property || !this.object || !this.object.getType) return;
-        var locName = this.object.getType() + '_' + this.property.name;
+        var locName =  this.property.name;
         this.displayNameValue = editorLocalization.getPropertyName(locName);
         var title = editorLocalization.getPropertyTitle(locName);
         if (!title) title = this.displayNameValue;
