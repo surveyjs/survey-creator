@@ -170,8 +170,8 @@ export class SurveyPropertyEditorBase {
     private iskoValueChanging: boolean = false;
     private onkoValueChanged(newValue: any) {
         if(this.isValueUpdating || this.iskoValueChanging) return;
-
         this.iskoValueChanging = true;
+        newValue = this.getCorrectedValue(newValue);
         if(this.options && this.property && this.object) {
             var options = {propertyName: this.property.name, obj: this.object, value: newValue, newValue: null, doValidation: false};
             this.options.onValueChangingCallback(options);

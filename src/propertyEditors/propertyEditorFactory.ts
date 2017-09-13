@@ -95,6 +95,14 @@ export class SurveyNumberPropertyEditor extends SurveyPropertyEditorBase {
         super(property);
     }
     public get editorType(): string { return "number"; }
+    protected getCorrectedValue(value: any): any {  
+        if(!value) return value;
+        if (typeof value === 'string' || value instanceof String) {
+            value = Number(value);
+            if(!value) value = 0;
+        }
+        return value;  
+    }
 }
 
 SurveyPropertyEditorFactory.registerEditor("string", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyStringPropertyEditor(property); });
