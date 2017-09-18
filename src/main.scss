@@ -355,6 +355,9 @@ $editor-height:75vh;
         -khtml-user-drag: element;
         -webkit-user-drag: element;
     }
+    .svd_wrap_elements {
+        white-space: normal;
+    }
     .svd_table-nowrap {
         table-layout: fixed;
     }

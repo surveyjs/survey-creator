@@ -34,6 +34,10 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     private createSurvey() {
         var qjson = new Survey.JsonObject().toJsonObject(this.object);
         qjson.type = this.object.getType();
+        delete qjson["visible"];
+        delete qjson["visibleIf"];
+        delete qjson["enable"];
+        delete qjson["enableIf"];
         var json = '{ "questions": [' + JSON.stringify(qjson) + ']}';
         this.survey = new Survey.Survey(json);
         this.survey.setValue(this.object.name, this.editingValue);
