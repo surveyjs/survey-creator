@@ -187,7 +187,7 @@ export var defaultStrings = {
         createtrigger: "Please create a trigger",
         triggerOn: "On ",
         triggerMakePagesVisible: "Make pages visible:",
-        triggerMakeQuestionsVisible: "Make questions visible:",
+        triggerMakeQuestionsVisible: "Make elements visible:",
         triggerCompleteText: "Complete the survey if succeed.",
         triggerNotSet: "The trigger is not set",
         triggerRunIf: "Run if",

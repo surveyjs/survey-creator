@@ -6,6 +6,7 @@ import {BigCar, Truck, TruckDefaultValue} from "./ObjectEditorTestedClasses";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "../src/propertyEditors/propertyEditorBase";
 import {SurveyPropertyItemValuesEditor} from "../src/propertyEditors/propertyItemValuesEditor";
 import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
+import {defaultStrings} from "../src/editorLocalization";
 
 export default QUnit.module("objectEditorTests");
 
@@ -18,9 +19,11 @@ QUnit.test("Created properties on set selected Object", function (assert) {
     assert.equal(editor.koProperties()[0].name, "name", "name property");
     assert.equal(editor.koProperties()[0].editorType, "string", "It is a text editor");
 
+    defaultStrings.p["maxWeight"] = "Maximum weight";
     editor.selectedObject = new Truck();
     assert.equal(editor.koProperties().length, 3, "Two property object");
     assert.equal(editor.koProperties()[0].name, "maxWeight", "maxWeight property");
+    assert.equal(editor.koProperties()[0].displayName, "Maximum weight", "maxWeight property");
     assert.equal(editor.koProperties()[1].name, "name", "name property");
 });
 QUnit.test("Get Property Value", function (assert) {

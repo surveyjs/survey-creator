@@ -20,6 +20,7 @@ export {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "../pro
 export {SurveyPropertyDropdownColumnsEditor, SurveyPropertyMatrixDropdownColumnsItem} from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 export {SurveyPropertyResultfullEditor} from "../propertyEditors/propertyRestfullEditor";
+export {SurveyPropertyDefaultValueEditor} from "../propertyEditors/propertyDefaultValueEditor";
 export {SurveyPropertyTriggersEditor} from "../propertyEditors/propertyTriggersEditor";
 export {SurveyPropertyValidatorsEditor} from "../propertyEditors/propertyValidatorsEditor";
 export {SurveyObjects} from "../surveyObjects";

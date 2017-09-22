@@ -95,6 +95,9 @@ export class QuestionToolbox {
         if (clearAll) {
             this.clearItems();
         }
+        for(var i = 0; i < items.length; i ++) {
+            this.itemsValue.push(items[i]);
+        }
         this.onItemsChanged();
     }
     /**
