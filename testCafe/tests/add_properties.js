@@ -7,7 +7,7 @@ const init = ClientFunction(() => {
     Survey.Survey.cssType = "bootstrap";
     Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
     //add a property to the survey object
-    Survey.JsonObject.metaData.addProperty("survey", {name:"customProperty:number", default: 123});
+    Survey.JsonObject.metaData.addProperty("survey", {name:"customProperty:number", default: 123456});
     var editorOptions = { };
     var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
     
@@ -23,12 +23,9 @@ fixture `surveyjseditor: ${title}`
     });
 
     test(`check the new prop exists`, async t => {
-        const newProp = Selector('td').with({
-            text: 'tag',
-            visibilityCheck: true
-        });
+        const newProp = Selector('td', {visibilityCheck: true}).withText('11231rnd2231rnd2somernd13123123');
        
         await t
-            .hover(newProp)
+            .click(newProp)
             .expect(newProp.child("input").value, 124);
     });
