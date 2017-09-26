@@ -1,9 +1,20 @@
 language: node_js
 node_js:
-- '4'
+- '6'
+
+before_install:
+  - stty cols 80
+
 env:
   global:
     secure: AXsZaIfPL0T4XqIrTiDk8vDhEWoSCNEeRJOdkAVqlJ6flmjT/jC6HW0ZBJYJHpx0g9/iRu7bY7XY/jz+AAHl6Ev4N9bXFAMi+oOi33r/sbwA9QUBTIGg9LVQs61E9+FXCrFnN4/PyuB7aueTeZZvMLRlqgzfC7ivVYKF0Ptj6gNCqswM9EwVh5G+/VKYYA4xHMgcrMyiJmaqtNbI/eiL3qKBuVgI/Xen7weY3MI31Y+F89nThUvOT2DBSeKBse3uYIPmWw9fUnJ7bPkK3bBpfqwRDrkqGgpDkJXH5b0qTcpp/ljtJ+FMucuk5vzabRr6lPOhnonVRXg1ScLnBCrZo5G4ClGg9HHdDb34zjDy8eMUr9YmAgGWM0id3y7r8a/R6dOPykApuveFAunSi+eFi4CcDuad2ae42pwLxrCjR2z3p94XLBOcuz2Ccj+PZ79dgqgqDEV/2XQCAJP/VOpC5B8/ymSW/SpMLkVgBn26u52upxWGvuSBc+cQ0+1kXpeP7HKp5zrtXWwTHZrZ+Ib28DZzHAfjZcs3WT57xYRd2DEpb3bQ+XH8i1MvtWqXJtCWRtRjZz35VrOaHxMckrjppL/IxcjktoQyLINaJHRz9OZEtPozEMbfBI9MAuVCzOu39mM3C75mbISzuC3G+OYUnSmZ/0PiHHqgGO43+lnaKkc=
+addons:
+  firefox: latest
+  apt:
+    sources:
+     - google-chrome
+    packages:
+     - google-chrome-stable
 before_script:
 - npm install -g concurrently
 script:
