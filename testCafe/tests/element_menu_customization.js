@@ -144,7 +144,7 @@ fixture `surveyjseditor: ${title}`
         await init();
     });
 
-    test(`check toolbox customization`, async t => {
+    test(`check element menu customization`, async t => {
         const getToolboxItemsCount = ClientFunction(() =>
             document.querySelectorAll(".svd_toolbox div>.btn").length);
 
