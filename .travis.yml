@@ -16,6 +16,9 @@ addons:
     packages:
      - google-chrome-stable
 before_script:
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- sleep 3
 - npm install -g concurrently
 script:
 - npm run build_prod
