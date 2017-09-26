@@ -23,9 +23,8 @@ fixture `surveyjseditor: ${title}`
     });
 
     test(`check the new prop exists`, async t => {
-        const newProp = Selector('td', {visibilityCheck: true}).withText('11231rnd2231rnd2somernd13123123');
-       
-        await t
-            .click(newProp)
-            .expect(newProp.child("input").value, 124);
+        const getPosition = ClientFunction(() =>
+            document.documentElement.innerHTML.indexOf('customProperty'));
+
+        assert.notEqual(await getPosition(), -1);
     });
