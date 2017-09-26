@@ -9,6 +9,8 @@ before_script:
 script:
 - npm run build_prod
 - karma start --single-run
+- http-server --silent &
+- testcafe chrome testCafe/ --reporter minimal
 before_deploy: tar -zcvf surveyeditor.tar.gz package
 deploy:
 - provider: releases
