@@ -221,7 +221,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     /**
      * The Survey Editor constructor.
      * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
-     * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+     * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showPropertyGrid, showOptions, generateValidJSON, isAutoSave, designerHeight.
      */
     constructor(renderedElement: any = null, options: any = null) {
 
