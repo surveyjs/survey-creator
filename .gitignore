@@ -6,7 +6,8 @@ node_modules/*
 *.cmd
 package/*
 tmp/*
-*.js
+/src/*.js
+/tests/*.js
 _site/
 .sass-cache
 .vscode/
