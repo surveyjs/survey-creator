@@ -4,7 +4,7 @@ var persianStrings = {
     //survey templates
     survey: {
         edit: "ویرایش",
-        dropQuestion: "لطفا سوالی در اینجا بندازید",
+        dropQuestion: "لطفا سوالی در اینجا قرار دهید",
         copy: "کپی",
         addToToolbox: "اضافه کردن به جعبه ابزار",
         deletePanel: "حذف پنل",
@@ -26,7 +26,7 @@ var persianStrings = {
         radiogroup: "گروه انتخاب",
         rating: "رتبه بندی",
         text: "متن تک خطی",
-        boolean: "بولی"
+        boolean: "صحیح و غلط"
     },
     //Strings in Editor
     ed: {
@@ -55,7 +55,7 @@ var persianStrings = {
     //Property Editors
     pe: {
         apply: "اجرا",
-        ok: "بسیارخب",
+        ok: "تایید",
         cancel: "لغو",
         reset: "بازنشانی",
         close: "بستن",
@@ -74,19 +74,19 @@ var persianStrings = {
         text: "متن",
         required: "اجباری است؟",
         columnEdit: "ویرایش ستون: {0}",
-        itemEdit: "ویرایش آتم: {0}",
+        itemEdit: "ویرایش آیتم: {0}",
 
         hasOther: "دارای آیتم دیگر",
         name: "نام",
         title: "عنوان",
         cellType: "نوع سلول",
         colCount: "تعداد ستون",
-        choicesOrder: "انتخاب ترتییب گزینه ها",
+        choicesOrder: "انتخاب ترتیب گزینه ها",
         visible: "نمایش داده شود؟",
         isRequired: "ضروری است؟",
         startWithNewLine: "با سطر جدید شروع شود؟",
         rows: "تعداد سطر",
-        placeHolder: "نگهدارنده متن در گزینه",
+        placeHolder: "نگهدارنده متن",
         showPreview: "پیشنمایش تصویر نشان داده شود؟",
         storeDataAsText: "ذخیره کردن محتوای فایل در کد نتیجه به عنوان متن",
         maxSize: "حداکثر سایز به بایت",
@@ -108,7 +108,7 @@ var persianStrings = {
             columns: "ستون ها",
             rows: "سطرها",
             choices: "انتخاب ها",
-            visibleIf: "نمایش اگر",
+            visibleIf: "نمایش در صورت",
             rateValues: "مقادیر رتبه بندی",
             choicesByUrl: "انتخاب ها از وب",
             matrixChoices: "انتخاب های پیشفرض",
@@ -126,10 +126,10 @@ var persianStrings = {
         triggerMakeQuestionsVisible: "سوالات را قابل نمایش کن:",
         triggerCompleteText: "پرسشنامه را تکمیل کن اگر موفق بود.",
         triggerNotSet: "اجرا کننده تنظیم نشده.",
-        triggerRunIf: "اجرا اگر",
-        triggerSetToName: "تعییر وقدار از: ",
+        triggerRunIf: "اجرا در صورت",
+        triggerSetToName: "تعییر مقدار از: ",
         triggerSetValue: "به: ",
-        triggerIsVariable: "عدم درج متعییر در نتایج پرسشنامه",
+        triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه",
         verbChangeType: "تغییر نوع ",
         verbChangePage: "تغییر صفحه "
     },
@@ -202,7 +202,7 @@ var persianStrings = {
     //Properties
     p: {
         name: "name",
-        title: { name: "title", title: "اگذ خالی باشد مانند نام درج می شود" },
+        title: { name: "title", title: "اگر خالی باشد مانند نام درج می شود" },
         survey_title: { name: "title", title: "در تمام صفحات دیده می شود" },
         page_title: { name: "title", title: "عنوان صفحه" }
     }
