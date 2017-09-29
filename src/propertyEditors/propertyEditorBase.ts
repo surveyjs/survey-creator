@@ -88,7 +88,7 @@ export class SurveyPropertyEditorBase {
     }
     protected checkForErrors(): boolean {
         if(this.isRequired) {
-            var er = Survey.Base.isValueEmpty(this.koValue());
+            var er = this.isValueEmpty(this.koValue());
             this.koErrorText(er ? editorLocalization.getString("pe.propertyIsEmpty") : "");
             return er;
         }
@@ -175,7 +175,7 @@ export class SurveyPropertyEditorBase {
         if(this.options && this.property && this.object) {
             var options = {propertyName: this.property.name, obj: this.object, value: newValue, newValue: null, doValidation: false};
             this.options.onValueChangingCallback(options);
-            if(!Survey.Base.isValueEmpty(options.newValue)) {
+            if(!this.isValueEmpty(options.newValue)) {
                 this.koValue(options.newValue);
             }
             if(options.doValidation) {
@@ -189,5 +189,10 @@ export class SurveyPropertyEditorBase {
 
         if (this.property && this.object && this.getValue() == newValue) return;
         if (this.onChanged != null) this.onChanged(newValue);
+    }
+    private isValueEmpty(val): boolean {
+        //TODO remove the line
+        if(Survey.Base["isValueEmpty"]) return Survey.Base["isValueEmpty"](val);
+        return Survey.Helpers.isValueEmpty(val);
     }
 }

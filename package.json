@@ -12,7 +12,7 @@
     "jquery": "^2.1.0",
     "knockout": "^3.4.0",
     "bootstrap": "^3.3.6",
-    "survey-knockout": "^0.12.24"
+    "survey-knockout": "^0.12.29"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
