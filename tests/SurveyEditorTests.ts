@@ -116,6 +116,21 @@ QUnit.test("fast copy tests, copy a panel with questions and a nested panel", fu
     assert.equal(nestedPanel.questions[0].name, "question4", "A question in new nested panel should have name 'question3'");
 });
 
+QUnit.test("addQuestion into the QuestionPanelDynamic into second page", function (assert) {
+    var editor = new SurveyEditor();
+    var survey = editor.survey;
+    survey.addNewPage("p1")
+    var page = survey.addNewPage("p2");
+    var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
+    var newQuestion = pnlQuestion["template"].addNewQuestion("text", "question1");
+    //TODO rebuld items
+    editor["surveyObjects"].survey = null;
+    editor["surveyObjects"].survey = survey;
+    survey.selectedElement = newQuestion;
+    assert.equal(editor.survey.selectedElement.name, newQuestion.name, "The embeded question is selected");
+    assert.equal(editor.survey.currentPage.name, "p2", "The second page is selected");
+});
+
 QUnit.test("generateValidJSON should be true by default, bug #135", function (assert) {
     var editor = new SurveyEditor(null, {});
     assert.equal(editor.koGenerateValidJSON(), true, "The default value is true");

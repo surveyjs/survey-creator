@@ -554,7 +554,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.surveyObjects.addPage(page);
     }
     private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
-        var page = <Survey.Page>this.survey.getPageByElement(question);
+        var page = this.getPageByElement(question);
         var options = { question: question, page: page };
         this.onQuestionAdded.fire(this, options);
         this.surveyObjects.addElement(question, parentPanel);
@@ -565,7 +565,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.survey.render();
     }
     private doOnPanelAdded(panel: Survey.Panel, parentPanel: any) {
-        var page = <Survey.Page>this.survey.getPageByElement(panel);
+        var page = this.getPageByElement(panel);
         var options = { panel: panel, page: page };
         this.onPanelAdded.fire(this, options);
         this.surveyObjects.addElement(panel, parentPanel);
@@ -655,6 +655,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         if (this.options && this.options.generateValidJSON) return JSON.stringify(json, null, 1);
         return new SurveyJSON5().stringify(json, null, 1);
     }
+    private getPageByElement(obj: Survey.Base) : Survey.Page {
+        var page = this.survey.getPageByElement(<Survey.IElement><any>obj);
+        if(page) return <Survey.Page>page;
+        return this.surveyObjects.getSelectedObjectPage(obj);
+    }
     private selectedObjectChanged(obj: Survey.Base) {
         var canDeleteObject = false;
         this.selectedObjectEditorValue.selectedObject = obj;
@@ -667,7 +672,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         if (objType == ObjType.Question || objType == ObjType.Panel) {
             this.survey.selectedElement = obj;
             canDeleteObject = true;
-            this.survey.currentPage = this.survey.getPageByQuestion(this.survey.selectedElement);
+            this.survey.currentPage = this.getPageByElement(obj);
         } else {
             this.survey.selectedElement = null;
         }

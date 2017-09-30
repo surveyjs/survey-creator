@@ -52,6 +52,21 @@ export class SurveyObjects {
             }
         }
     }
+    public getSelectedObjectPage(obj: Survey.Base = null): Survey.Page {
+        if(!this.survey) return null;
+        if(!obj) {
+            if(!this.koSelected()) return;
+            obj = this.koSelected().value;
+        }
+        var objs = this.koObjects();
+        var index = this.getItemIndex(obj);
+        while(index > 0) {
+            var item = objs[index];
+            if(item.level == 1) return item.value;
+            index --;
+        }
+        return null;
+    }
     public removeObject(obj: Survey.Base) {
         var index = this.getItemIndex(obj);
         if (index < 0) return;

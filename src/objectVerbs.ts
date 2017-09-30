@@ -34,7 +34,7 @@ export class SurveyVerbs {
         var objType = SurveyHelper.getObjectType(this.obj);
         if (objType == ObjType.Question) {
             var question = <Survey.QuestionBase>this.obj;
-            if (this.survey.pages.length > 1) {
+            if (this.survey.pages.length > 1 && this.survey.getPageByQuestion(question)) {
                 array.push(new SurveyVerbChangePageItem(this.survey, question, this.onModifiedCallback));
             }
             if (this.choicesClasses.indexOf(question.getType()) > -1) {
@@ -85,6 +85,8 @@ export class SurveyVerbChangePageItem extends SurveyVerbItem {
     private prevPage: Survey.Page;
     constructor(public survey: Survey.Survey, public question: Survey.QuestionBase, public onModifiedCallback: () => any) {
         super(survey, question, onModifiedCallback);
+        this.prevPage = <Survey.Page>this.survey.getPageByQuestion(question);
+        if(!this.prevPage) return;
         var array = [];
         for (var i = 0; i < this.survey.pages.length; i++) {
             var page = this.survey.pages[i];
@@ -98,7 +100,7 @@ export class SurveyVerbChangePageItem extends SurveyVerbItem {
     }
     public get text(): string { return editorLocalization.getString("pe.verbChangePage"); }
     private changePage(newPage: Survey.Page) {
-        if (newPage == null || newPage == this.prevPage) return;
+        if (!newPage || !newPage || newPage == this.prevPage) return;
         this.prevPage.removeQuestion(this.question);
         newPage.addQuestion(this.question);
         if (this.onModifiedCallback) this.onModifiedCallback();
