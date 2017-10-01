@@ -16,6 +16,7 @@ export {SurveyStringPropertyEditor, SurveyDropdownPropertyEditor, SurveyBooleanP
 export {SurveyPropertyTextItemsEditor} from "../propertyEditors/propertyTextItemsEditor";
 export {SurveyPropertyItemsEditor} from "../propertyEditors/propertyItemsEditor";
 export {SurveyPropertyItemValuesEditor} from "../propertyEditors/propertyItemValuesEditor";
+export {SurveyPropertyMultipleValuesEditor} from "../propertyEditors/propertyMultipleValuesEditor";
 export {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "../propertyEditors/propertyNestedPropertyEditor"
 export {SurveyPropertyDropdownColumnsEditor, SurveyPropertyMatrixDropdownColumnsItem} from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";

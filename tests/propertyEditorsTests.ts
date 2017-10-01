@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "../src/propertyEditors/propertyEditorBase";
 import {SurveyPropertyItemValuesEditor, SurveyPropertyItemValuesEditorColumn, 
     SurveyPropertyItemValuesEditorCell, SurveyPropertyItemValuesEditorItem} from "../src/propertyEditors/propertyItemValuesEditor";
+import {SurveyPropertyMultipleValuesEditor} from "../src/propertyEditors/propertyMultipleValuesEditor";    
 import {SurveyPropertyDropdownColumnsEditor} from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import {SurveyObjectProperty} from "../src/objectProperty";
 import {SurveyPropertyTextEditor} from "../src/propertyEditors/propertyModalEditor";
@@ -264,6 +265,14 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function (assert) {
     assert.equal(item.hasError, true, "There is an error");
     item.cells[0].koValue(0);
     assert.equal(item.hasError, false, "There is no errors");
+});
+
+QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
+    Survey.JsonObject.metaData.addProperty("question", {name: "multiple:multiplevalues", choices: [{value: 1, text: "Item 1"}, {value: 2, text: "Item 2"},{value: 3, text: "Item 3"}]});
+    var property = Survey.JsonObject.metaData.findProperty("question", "multiple");
+    var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
+    assert.equal(propertyEditor.getValueText([1, 3]), "[Item 1, Item 3]", "Use text for displaying the value");
+    Survey.JsonObject.metaData.removeProperty("question", "multiple");
 });
 
 QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (assert) {
