@@ -62,6 +62,7 @@ export class SurveyDescription implements ISurveyInfo {
 
 
 export class SurveysManager {
+    public static serviceUrlPath: string = "/api/MySurveys";
     static StorageKey = "mySurveys";
     private api: ServiceAPI;
 
@@ -80,7 +81,7 @@ export class SurveysManager {
         if(hash.indexOf("#") === 0) {
             this.surveyId(hash.slice(1));
         }
-        this.api = new ServiceAPI(baseUrl + "/api/MySurveys", accessKey);
+        this.api = new ServiceAPI(baseUrl + SurveysManager.serviceUrlPath, accessKey);
 
         editor.isAutoSave = true;
         editor.showState = true;
