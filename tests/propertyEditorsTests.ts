@@ -21,6 +21,7 @@ import {
 import {SurveyPropertyCustomEditor} from "../src/propertyEditors/propertyCustomEditor";
 import {Extentions} from "../src/extentions";
 import {SurveyPropertyEditorFactory, SurveyDropdownPropertyEditor} from "../src/propertyEditors/propertyEditorFactory";
+import {defaultStrings} from "../src/editorLocalization"
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -53,6 +54,12 @@ QUnit.test("Create correct property editor", function (assert) {
         propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
         assert.equal(propertyEditor.editorType, propType, "Create '" + propType  + "' property editor");
     }
+});
+QUnit.test("propertyEditor.displayName", function (assert) {
+    var property = Survey.JsonObject.metaData.findProperty("question", "enableIf");
+    defaultStrings.p["enableIf"] = "It is enableIf";
+    var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+    assert.equal(propertyEditor.displayName, "It is enableIf", "The displayName was set correctly");
 });
 QUnit.test("Create custom property editor", function (assert) {
     var propertyValue = null;
