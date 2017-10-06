@@ -13,7 +13,7 @@ export interface ISurveyObjectEditorOptions {
     onPropertyEditorObjectSetCallback(propertyName: string, obj: Survey.Base, editor: SurveyPropertyEditorBase);
 }
 
-export class SurveyPropertyEditorBase {
+export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     private editingValue_: any = null;
     private isApplyinNewValue: boolean = false;
     private objectValue: any;
@@ -137,6 +137,8 @@ export class SurveyPropertyEditorBase {
         if(this.onGetLocale) return this.onGetLocale();
         return "";
     }
+    public getLocale() { return this.locale; }
+    public getMarkdownHtml(text: string): string { return text; }
     public get options(): ISurveyObjectEditorOptions { return this.optionsValue; }
     public set options(value: ISurveyObjectEditorOptions) { 
         this.optionsValue = value; 

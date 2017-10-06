@@ -234,6 +234,27 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function (asser
     assert.equal(propertyEditor.koShowTextView(), false, "Do not show text view with custom properties");
     Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
 });
+QUnit.test("SurveyPropertyItemValuesEditor + locale", function (assert) {
+    var survey = new Survey.Survey();
+    var p = survey.addNewPage();
+    var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+    q.choices = [1, 2, 3];
+    survey.locale = "en";
+    q.choices[0].text = "Engish 1";
+
+    survey.locale = "de";
+    var property = Survey.JsonObject.metaData.findProperty("selectbase", "choices");
+    var propEditor = <SurveyPropertyItemValuesEditor>SurveyPropertyEditorFactory.createEditor(property, function(newValue) {q.choices = newValue;});
+    propEditor.object = q;
+    assert.equal(propEditor.koItems()[0].cells[1].koValue(), "", "There is no value for deutsch");
+    propEditor.koItems()[0].cells[1].koValue("Deutsch 1");
+    assert.equal(propEditor.koItems()[0].cells[1].koValue(), "Deutsch 1", "Replace with deutch");
+    propEditor.apply();
+    survey.locale = "en";
+    assert.equal(q.choices[0].text, "Engish 1", "value is english");
+    survey.locale = "de";
+    assert.equal(q.choices[0].text, "Deutsch 1", "value is deutsch");
+});
 QUnit.test("SurveyPropertyItemValuesEditorCell", function (assert) {
     //TODO remove later - create property if it doesn't exist
     var propertyEditor = new SurveyPropertyItemValuesEditor(null);

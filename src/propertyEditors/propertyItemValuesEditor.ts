@@ -73,6 +73,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     }
     protected createNewEditorItem(): any { 
         var itemValue = new Survey.ItemValue(null);
+        itemValue.locOwner = this;
         if(this.options) {
             this.options.onItemValueAddedCallback(this.editablePropertyName, itemValue);
         }
@@ -80,6 +81,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     }
     protected createEditorItem(item: any): any {
         var itemValue = new Survey.ItemValue(null);
+        itemValue.locOwner = this;
         itemValue.setData(item);
         return new SurveyPropertyItemValuesEditorItem(itemValue, this.columns);
     }
