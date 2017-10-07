@@ -66,6 +66,10 @@ export class SurveyQuestionEditorDefinition {
             properties: ["placeHolder"],
             tabs: [{name: "validators", index: 10}, {name: "visibleIf", index: 12}]
         },
+        "matrixdropdowncolumn@boolean" : {
+            properties: ["booleanDefaultValue"],
+            tabs: [{name: "visibleIf", index: 12}]
+        },
         "multipletextitem": {
             properties: ["inputType", "placeHolder"],
             tabs: [{name: "validators", index: 10}]
