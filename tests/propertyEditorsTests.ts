@@ -349,9 +349,10 @@ QUnit.test("Text property test - two way binding", function (assert) {
 QUnit.test("SurveyPropertyResultfullEditor test", function (assert) {
     var editor = new SurveyPropertyResultfullEditor(null);
     editor.editingValue = new Survey.ChoicesRestfull();
-    editor.koPath("path1");
-    editor.koValueName("name2");
-    editor.koTitleName("title3");
+    assert.equal(editor.koItems().length, 4, "There are 4 items, 4 properties");
+    editor.koItems()[1].koValue("path1");
+    editor.koItems()[2].koValue("name2");
+    editor.koItems()[3].koValue("title3");
     assert.equal(editor.question.choicesByUrl.path, "path1", "test path is set");
     assert.equal(editor.question.choicesByUrl.valueName, "name2", "test name is set");
     assert.equal(editor.question.choicesByUrl.titleName, "title3", "test title is set");

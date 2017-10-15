@@ -6,25 +6,22 @@ import {editorLocalization} from "../editorLocalization";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
-    koUrl: any; koPath: any; koValueName: any; koTitleName: any; 
+    koItems: any;
     public survey: Survey.Survey;
     public question: Survey.QuestionDropdown;
+    private items: Array<SurveyPropertyResultfullEditorItem> = [];
 
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
-        this.koUrl = ko.observable();
-        this.koPath = ko.observable();
-        this.koValueName = ko.observable();
-        this.koTitleName = ko.observable();
+        this.koItems = ko.observableArray();
         this.createSurvey();
-        var self = this;
-        this.koUrl.subscribe(function (newValue) { self.question.choicesByUrl.url = newValue; self.run(); });
-        this.koPath.subscribe(function (newValue) { self.question.choicesByUrl.path = newValue; self.run(); });
-        this.koValueName.subscribe(function (newValue) { self.question.choicesByUrl.valueName = newValue; self.run(); });
-        this.koTitleName.subscribe(function (newValue) { self.question.choicesByUrl.titleName = newValue; self.run(); });
     }
     public get editorType(): string { return "restfull"; }
-    public get restfullValue() { return <Survey.ChoicesRestfull>this.editingValue; }
+    public get restfullValue() { 
+        if(this.editingObject) return this.editingObject[this.property.name];
+        if(this.editingValue) return this.editingValue;
+        return null; 
+    }
     public getValueText(value: any): string {
         if (!value || !value.url) return editorLocalization.getString("pe.empty");
         var str = value.url;
@@ -33,19 +30,37 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
         }
         return str;
     }
+    private addItem(propName: string, val: any) {
+        var self = this;
+        this.items.push(new SurveyPropertyResultfullEditorItem(propName, val ? val[propName] : "", function(item) {self.onItemValueChanged(item) }));
+    }
+    private onItemValueChanged(item: SurveyPropertyResultfullEditorItem) {
+        this.question.choicesByUrl[item.name] = item.koValue();
+        this.run();
+    }
     protected onValueChanged() {
         var val = this.restfullValue;
-        this.koUrl(val ? val.url : "");
-        this.koPath(val ? val.path : "");
-        this.koValueName(val ? val.valueName : "");
-        this.koTitleName(val ? val.titleName : "");
+        this.items = [];
+        this.addItem("url", val);
+        this.addItem("path", val);
+        this.addItem("valueName", val);
+        this.addItem("titleName", val);
+        if(val && val["getCustomPropertiesNames"]) {
+            var customProperties = val["getCustomPropertiesNames"]();
+            for(var i = 0; i < customProperties.length; i ++) {
+                var propName = customProperties[i];
+                this.addItem(propName, val);
+            }
+        }
+        this.koItems(this.items);
     }
     protected onBeforeApply() {
         var val = new Survey.ChoicesRestfull();
-        val.url = this.koUrl();
-        val.path = this.koPath();
-        val.valueName = this.koValueName();
-        val.titleName = this.koTitleName();
+        val["owner"] = this.editingObject;
+        for(var i = 0; i < this.items.length; i ++) {
+            var item = this.items[i];
+            val[item.name] = item.koValue();
+        }
         this.setValueCore(val);
     }
     private run() {
@@ -59,6 +74,21 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
         this.question = <Survey.QuestionDropdown>page.addNewQuestion("dropdown", "q1");
         this.question.title = editorLocalization.getString("pe.testService")
         this.question.choices = [];
+    }
+}
+
+export class SurveyPropertyResultfullEditorItem {
+    public koValue: any;
+    private isSetttingValue: boolean = false;
+    constructor(public name: string, val: string, public onValueChanged: (item:SurveyPropertyResultfullEditorItem) => any) {
+        this.koValue = ko.observable(val ? val : "");
+        var self = this;
+        this.koValue.subscribe(function (newValue) { if(!self.isSetttingValue) { self.onValueChanged(self); } });
+    }
+    public setValue(val: string) {
+        this.isSetttingValue = true;
+        this.koValue(val);
+        this.isSetttingValue = false;
     }
 }
 
