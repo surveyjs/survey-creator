@@ -1,6 +1,7 @@
 **survey.js.editor** is the visual editor for [surveyjs](https://github.com/surveyjs/surveyjs). It uses JSON to store the survey metadata.
 
-[![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
+[![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor) 
+[![npm package](https://badge.fury.io/js/surveyjs-editor.svg)](https://www.npmjs.com/package/surveyjs-editor)
 
 ## Download
 Dowload the latest version as zip file [Download](https://github.com/surveyjs/editor/releases)
