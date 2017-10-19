@@ -42,4 +42,4 @@ deploy:
 notifications:
   email:
     recipients:
-      - andrew.telnov@gmail.com
+    - andrew.telnov@gmail.com
