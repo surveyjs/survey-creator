@@ -186,9 +186,11 @@ export class QuestionToolbox {
     }
     private registerCustomWidgets() {
         var inst = Survey.CustomWidgetCollection.Instance;
+        var getActivatedByFunc = inst.getActivatedBy;
+        if(!getActivatedByFunc) return;
         var widgets = inst.widgets;
         for(var i = 0; i < widgets.length; i ++) {
-            if(inst.getActivatedBy(widgets[i].name) != "customtype") continue;
+            if(getActivatedByFunc(widgets[i].name) != "customtype") continue;
             var widgetJson = widgets[i].widgetJson;
             if(!widgetJson.widgetIsLoaded || !widgetJson.widgetIsLoaded()) continue;
             var iconName = widgetJson.iconName ? widgetJson.iconName : "icon-default";
