@@ -208,7 +208,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     koCanDeleteObject: any;
     koObjects: any; koSelectedObject: any;
     koShowSaveButton: any;
-    koGenerateValidJSON: any; koShowOptions: any; koShowPropertyGrid: any; koTestSurveyWidth: any; koDesignerHeight: any;
+    koGenerateValidJSON: any; koShowOptions: any; koShowPropertyGrid: any; koTestSurveyWidth: any; koDesignerHeight: any; koShowPagesToolbox: any;
     selectDesignerClick: any; selectEditorClick: any; selectTestClick: any; selectEmbedClick: any;
     generateValidJSONClick: any; generateReadableJSONClick: any;
     doUndoClick: any; doRedoClick: any;
@@ -229,6 +229,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.koGenerateValidJSON = ko.observable(true);
         this.koShowPropertyGrid = ko.observable(true);
         this.koDesignerHeight = ko.observable();
+        this.koShowPagesToolbox = ko.observable(true);
         this.setOptions(options);
         this.koCanDeleteObject = ko.observable(false);
 
@@ -363,6 +364,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         }
         if(options.objectsIntend) {
             SurveyObjects.intend = options.objectsIntend;
+        }
+        if(typeof (options.showPagesToolbox) !== 'undefined') {
+            this.koShowPagesToolbox(options.showPagesToolbox)
         }
         this.koDesignerHeight()
     }
