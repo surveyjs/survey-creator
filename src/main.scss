@@ -117,8 +117,14 @@ $editor-height:75vh;
                 list-style: none;
                 background-color: transparent;
                 border: none;
-                height: 34px;
                 padding: 0;
+
+                &.svd_menu {
+                    & > li.svd_actions:not(.svd_state) {
+                        float: none;
+                        display: inline-block;
+                    }
+                }
             }
 
             .svd_toolbox {

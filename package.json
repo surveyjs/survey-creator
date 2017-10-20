@@ -1,5 +1,5 @@
 {
-  "version": "0.12.32",
+  "version": "0.12.34",
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
