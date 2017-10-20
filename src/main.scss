@@ -120,7 +120,7 @@ $editor-height:75vh;
                 padding: 0;
 
                 &.svd_menu {
-                    & > li.svd_actions {
+                    & > li.svd_actions:not(.svd_state) {
                         float: none;
                         display: inline-block;
                     }
