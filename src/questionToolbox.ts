@@ -181,7 +181,27 @@ export class QuestionToolbox {
             var item = { name: name, iconName: 'icon-' + name, title: editorLocalization.getString('qt.' + name), json: json, isCopied: false };
             this.itemsValue.push(item);
         }
+        this.registerCustomWidgets();
         this.onItemsChanged();
+    }
+    private registerCustomWidgets() {
+        var inst = Survey.CustomWidgetCollection.Instance;
+        var widgets = inst.widgets;
+        for(var i = 0; i < widgets.length; i ++) {
+            if(inst.getActivatedBy(widgets[i].name) != "customtype") continue;
+            var widgetJson = widgets[i].widgetJson;
+            if(!widgetJson.widgetIsLoaded || !widgetJson.widgetIsLoaded()) continue;
+            var iconName = widgetJson.iconName ? widgetJson.iconName : "icon-default";
+            var title = editorLocalization.getString('qt.' + widgetJson.name);
+            if(!title || title == widgetJson.name) title = widgetJson.title;
+            if(!title) title = widgetJson.name;
+            var json = widgetJson.defaultJSON ? widgetJson.defaultJSON : {};
+            if(!json.type) {             
+                json.type = widgetJson.name;
+            }
+            var item = { name: widgetJson.name, iconName: iconName, title: title, json: json, isCopied: false };
+            this.itemsValue.push(item);
+        }
     }
     private getQuestionJSON(question: any): any {
         var json = new Survey.JsonObject().toJsonObject(question);
