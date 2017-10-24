@@ -71,11 +71,14 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     }
     private getLocalizableChoices() {
         if(!this.property || !this.property.choices) return [];
-        var choices = this.property.choices;
-        var res = [];
-        for(var i = 0; i < choices.length; i ++) {
-            var value = choices[i];
-            res.push({value: value, text: editorLocalization.getPropertyValue(value)});
+        var res = new Array<Survey.ItemValue>();
+        Survey.ItemValue.setData(res, this.property.choices);
+        for(var i = 0; i < res.length; i ++) {
+            var value = res[i].value;
+            var text = editorLocalization.getPropertyValue(value)
+            if(text != value) {
+                res[i].text = text;
+            }
         }
         return res;
     }
