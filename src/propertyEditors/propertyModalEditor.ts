@@ -10,6 +10,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public onApplyClick: any;
     public onOkClick: any;
     public onResetClick: any;
+    public onShowModal: any;
+    public onHideModal: any;
     public modalName: string;
     public modalNameTarget: string;
     koShowApplyButton: any;
@@ -26,8 +28,18 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         var self = this;
         this.koShowApplyButton = ko.observable(true);
         self.onApplyClick = function () { self.apply(); };
-        self.onOkClick = function() {self.apply(); if(!self.koHasError()) jQuery(self.modalNameTarget).modal("hide");; };
-        self.onResetClick = function () { self.reset(); };
+        self.onOkClick = function() { self.apply(); if(!self.koHasError()) self.onHideModal() };
+        self.onResetClick = function () { self.reset(); self.onHideModal() };
+        self.onShowModal = function () {
+            var modal = new window["RModal"](document.querySelector(self.modalNameTarget), {closeTimeout: 100});
+            modal.open();
+    
+            document.addEventListener('keydown', function(ev) {
+                modal.keydown(ev);
+            }, false);
+    
+            self.onHideModal = function() {modal.close()};
+        };
     }
     public get isModal(): boolean { return true; }
     protected onOptionsChanged() {

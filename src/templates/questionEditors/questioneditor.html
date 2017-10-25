@@ -1,9 +1,9 @@
 ﻿<script type="text/html" id="questioneditor">
-    <div id="surveyquestioneditorwindow" class="modal fade" role="dialog"data-bind="with:koEditor">
+    <div id="surveyquestioneditorwindow" class="modal" data-bind="with:koEditor">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: onResetClick">&times;</button>
                     <h4 class="modal-title" data-bind="text:koTitle"></h4>
                 </div>  
                 <div class="modal-body svd_notopbottompaddings">

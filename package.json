@@ -9,9 +9,10 @@
     "build_prod": "npm run build_dev && webpack --env.buildType prod"
   },
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "jquery": "^2.1.0",
     "knockout": "^3.4.0",
-    "bootstrap": "^3.3.6",
+    "rmodal": "^1.0.28",
     "survey-knockout": "^0.12.34"
   },
   "devDependencies": {

@@ -22,8 +22,15 @@ export class SurveyPropertyEditorShowWindow {
 
         this.koEditor(editor);
         this.koVisible(true);
-        jQuery("#surveyquestioneditorwindow").modal("show");
-        editor.onHideWindow = function() {jQuery("#surveyquestioneditorwindow").modal("hide");};
+
+        var modal = new window["RModal"](document.getElementById('surveyquestioneditorwindow'), {closeTimeout: 100});
+        modal.open();
+
+        document.addEventListener('keydown', function(ev) {
+            modal.keydown(ev);
+        }, false);
+
+        editor.onHideWindow = function() {modal.close()};
     }
 }
 
@@ -64,7 +71,7 @@ export class SurveyQuestionEditor {
         this.properties = new SurveyQuestionProperties(obj, onCanShowPropertyCallback);
         self.onApplyClick = function () { self.apply(); };
         self.onOkClick = function() {self.apply(); if(!self.hasError() && self.onHideWindow) self.onHideWindow(); };
-        self.onResetClick = function () { self.reset(); };
+        self.onResetClick = function () { self.reset(); self.onHideWindow(); };
         this.onTabClick = function (tab) { self.koActiveTab(tab.name); };
         var tabs = this.buildTabs();
         this.koActiveTab = ko.observable(tabs[0].name);
