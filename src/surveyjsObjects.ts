@@ -107,8 +107,8 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
     return eDiv;
 }
 
-const question_design_class: string = "svd_question well well-sm svd_q_design_border";
-const panel_design_class: string = "svd_question well well-sm svd_q_design_border";
+const question_design_class: string = "sv_qstn svd_question well well-sm svd_q_design_border";
+const panel_design_class: string = "sv_p_container svd_question well well-sm svd_q_design_border";
 
 function createQuestionDesignItem(obj: any, onClick: any, text: string): HTMLLIElement {
     var res = <HTMLLIElement>document.createElement("li");
