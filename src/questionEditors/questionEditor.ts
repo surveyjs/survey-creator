@@ -26,7 +26,7 @@ export class SurveyPropertyEditorShowWindow {
 
         var modal = new RModal(document.getElementById('surveyquestioneditorwindow'), {
             closeTimeout: 100,
-            dialogOpenClass: 'animated fadeInDown',
+            dialogOpenClass: 'animated fadeIn',
             focus: false
         });
         modal.open();
