@@ -4,6 +4,7 @@ import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 import {editorLocalization} from "../editorLocalization";
+import RModal from "rmodal";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public editingObject: any;
@@ -31,7 +32,11 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         self.onOkClick = function() { self.apply(); if(!self.koHasError()) self.onHideModal() };
         self.onResetClick = function () { self.reset(); self.onHideModal() };
         self.onShowModal = function () {
-            var modal = new window["RModal"](document.querySelector(self.modalNameTarget), {closeTimeout: 100});
+            var modal = new RModal(document.querySelector(self.modalNameTarget), {
+                closeTimeout: 100,
+                dialogOpenClass: 'animated fadeInDown',
+                focus: false
+            });
             modal.open();
     
             document.addEventListener('keydown', function(ev) {

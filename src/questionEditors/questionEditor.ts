@@ -7,6 +7,7 @@ import {editorLocalization} from "../editorLocalization";
 import {SurveyQuestionEditorGeneralProperty, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperties} from "./questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "./questionEditorDefinition";
 import * as Survey from "survey-knockout";
+import RModal from "rmodal";
 
 export class SurveyPropertyEditorShowWindow {
     koVisible: any;
@@ -23,7 +24,11 @@ export class SurveyPropertyEditorShowWindow {
         this.koEditor(editor);
         this.koVisible(true);
 
-        var modal = new window["RModal"](document.getElementById('surveyquestioneditorwindow'), {closeTimeout: 100});
+        var modal = new RModal(document.getElementById('surveyquestioneditorwindow'), {
+            closeTimeout: 100,
+            dialogOpenClass: 'animated fadeInDown',
+            focus: false
+        });
         modal.open();
 
         document.addEventListener('keydown', function(ev) {
