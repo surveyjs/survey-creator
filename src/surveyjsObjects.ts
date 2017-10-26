@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
+import createDdmenu from "./utils/ddmenu";
 
 export interface ISurveyObjectMenuItem {
     name: string;
@@ -132,23 +133,17 @@ function createElementAddons(obj: Survey.Base, data: any, isPanel: boolean): HTM
     span.innerText = data.getEditorLocString('survey.edit');
     btn.appendChild(span);
     main.appendChild(btn);
-    btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "btn btn-primary  btn-xs dropdown-toggle";
-    btn.setAttribute("data-toggle", "dropdown");
-    btn.setAttribute("aria-haspopup", "true");
-    btn.setAttribute("aria-expanded", "false");
-    span = document.createElement("span");
-    span.className = "glyphicon glyphicon-option-horizontal";
-    btn.appendChild(span);
-    main.appendChild(btn);
-    var ul = document.createElement("ul");
-    ul.className = "dropdown-menu";
+
+
+    var nodes = [];
     var menuItems = data.getMenuItems(obj);
     for(var i = 0; i < menuItems.length; i ++) {
-        ul.appendChild(createQuestionDesignItem(obj, menuItems[i].onClick, menuItems[i].text));
+        nodes.push(createQuestionDesignItem(obj, menuItems[i].onClick, menuItems[i].text));
     }
-    main.appendChild(ul);
+    var ddmenu = createDdmenu(nodes, "element-addons")
+
+    main.appendChild(ddmenu);
+
     return main;
 }
 

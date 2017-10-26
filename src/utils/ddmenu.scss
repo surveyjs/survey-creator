@@ -1,0 +1,54 @@
+.ddmenu-container {
+    display: inline-block;
+
+    .ddmenu {
+        position: relative;
+    }
+    
+    .ddmenu > span {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .ddmenu > span,
+    .ddmenu > div {
+        cursor: pointer;
+        outline: 0;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    
+    .ddmenu > div {
+        background-color: rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+    }
+    
+    .ddmenu > span:focus ~ div {
+        display: block;
+    }
+    
+    .ddmenu > ul {
+        position: absolute;
+        z-index: 1;
+        visibility: hidden;
+        transition: visibility 0.5s;
+        opacity: 0;
+        right: 0;
+
+        li {
+            list-style-type: none;
+        }
+    }
+    
+    .ddmenu > span:focus ~ ul {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+

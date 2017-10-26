@@ -1,4 +1,5 @@
 // styles
+import "../utils/ddmenu.scss";
 import "../main.scss";
 
 export let Version: string;

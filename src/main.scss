@@ -9,7 +9,6 @@ $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
 $editor-height:75vh;
 
-
 @media (max-width: 816px) {
     .svd_container .nav-tabs.svd_menu > li.active > a {
         color: $main-color;
@@ -234,29 +233,32 @@ $editor-height:75vh;
                                 right: 5px;
                                 top: 5px;
 
-                                .dropdown-toggle {
-                                    background-color: transparent;
-                                    border: none;
-                                    box-shadow: none;
-
-                                    .glyphicon-option-horizontal {
-                                        color: $main-color;
-                                        font-size: 20px
-                                    }
-                                }
-
-                                .dropdown-menu {
-                                    top: 25px;
-                                    right: 0;
-                                    left: auto;
-
-                                    li {
-                                        margin: 5px;
-
-                                        .btn {
-                                            width: 100%;
+                                .ddmenu-container {
+                                    &.element-addons{
+                                        margin-left: 5px;
+                                    
+                                        ul {
+                                            background: white;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            padding: 5px 0;
+                                            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                                            min-width: 160px;
+                                    
+                                            li {
+                                                margin: 5px;
+                                    
+                                                button {
+                                                    width: 100%;
+                                                }
+                                            }
                                         }
                                     }
+                                }
+                               
+                                .glyphicon-option-horizontal {
+                                    color: $main-color;
+                                    font-size: 20px
                                 }
                             }
                         }
