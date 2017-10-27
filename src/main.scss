@@ -419,7 +419,7 @@ $editor-height:75vh;
         text-overflow: ellipsis;
 
         .ddmenu-container {
-            &.propertyeditor-triggers {
+            &.propertyeditor-triggers, &.propertyeditor-validators {
             
                 ul {
                     background: white;
