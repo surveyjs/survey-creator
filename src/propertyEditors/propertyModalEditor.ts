@@ -28,6 +28,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         this.modalNameTarget = "#" + this.modalName;
         var self = this;
         this.koShowApplyButton = ko.observable(true);
+
+        self.onHideModal = function () {};
         self.onApplyClick = function () { self.apply(); };
         self.onOkClick = function() { self.apply(); if(!self.koHasError()) self.onHideModal() };
         self.onResetClick = function () { self.reset(); self.onHideModal() };
