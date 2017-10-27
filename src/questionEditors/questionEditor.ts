@@ -1,5 +1,4 @@
 ﻿import * as ko from "knockout";
-import * as jQuery from "jquery";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions}  from "../propertyEditors/propertyEditorBase";
 import {SurveyPropertyEditorFactory}   from "../propertyEditors/propertyEditorFactory";

@@ -1,5 +1,4 @@
 ﻿import * as ko from "knockout";
-import * as jQuery from "jquery";
 import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
