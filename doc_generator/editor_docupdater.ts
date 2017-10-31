@@ -28,14 +28,16 @@ repository.writeFile(
    classesContent,
    'Updated Editor API documentation',
    errorHandler
-);
+).then(function(val) {
 
-var pmesContent = fs.readFileSync('doc_generator/pmes.json', 'utf8');
+   var pmesContent = fs.readFileSync('doc_generator/pmes.json', 'utf8');
 
-repository.writeFile(
-   'master',
-   'surveyjs.io/App_Data/DocsEditor/pmes.json',
-   pmesContent,
-   'Updated Editor API documentation',
-   errorHandler
-);
+   repository.writeFile(
+      'master',
+      'surveyjs.io/App_Data/DocsEditor/pmes.json',
+      pmesContent,
+      'Updated Editor API documentation',
+      errorHandler
+   );
+
+});
