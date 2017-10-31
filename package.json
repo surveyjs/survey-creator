@@ -4,6 +4,7 @@
   "scripts": {
     "test": "karma start",
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
+    "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
     "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
@@ -30,10 +31,12 @@
     "babel-preset-latest": "6.22.0",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.26.1",
+    "dotenv": "4.0.0",
     "dts-bundle": "0.7.2",
     "extract-text-webpack-plugin": "2.1.0",
     "file-loader": "0.10.0",
     "generate-json-webpack-plugin": "0.2.1",
+    "github-api": "3.0.0",
     "html-loader": "0.4.4",
     "http-server": "0.10.0",
     "karma": "1.4.0",
@@ -50,13 +53,13 @@
     "sass-loader": "4.1.1",
     "standard-version": "4.0.0",
     "style-loader": "0.13.1",
+    "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
     "testcafe": "0.17.2",
     "ts-loader": "2.3.4",
     "ts-node": "3.3.0",
     "typescript": "2.3.2",
     "url-loader": "0.5.8",
     "val-loader": "0.5.0",
-    "webpack": "2.2.1",
-    "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git"
+    "webpack": "2.2.1"
   }
 }

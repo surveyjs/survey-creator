@@ -30,3 +30,4 @@ _site/
 /obj/Debug
 /web.config
 /doc_generator/*.json
+*.env
