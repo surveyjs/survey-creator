@@ -2,16 +2,21 @@
     <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss"><span data-bind="text: title"></span></button>
 </script>
 <script type="text/html" id="svd-toolbar-options">
-    <div class="btn-group inline">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span data-bind="text: title"></span>
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <!-- ko foreach: items -->
-            <li data-bind="css: $data.css"><a href="#" data-bind="click: action, text: title"></a></li>
-            <!-- /ko -->
-        </ul>
+    <div class="ddmenu-container toolbar-options btn-group inline">
+        <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+
+        <div class="ddmenu">
+            <span class="btn btn-primary" tabindex="0">
+                <span data-bind="text: title"></span>
+                <span class="caret"></span>
+            </span>
+            <div tabindex="0" onclick="return true"></div>
+            <ul>
+                <!-- ko foreach: items -->
+                <li data-bind="css: $data.css"><a href="#" data-bind="click: action, text: title"></a></li>
+                <!-- /ko -->
+            </ul>
+        </div>
     </div>
 </script>
 <script type="text/html" id="svd-toolbar-state">

@@ -9,7 +9,6 @@ $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
 $editor-height:75vh;
 
-
 @media (max-width: 816px) {
     .svd_container .nav-tabs.svd_menu > li.active > a {
         color: $main-color;
@@ -118,6 +117,49 @@ $editor-height:75vh;
                 background-color: transparent;
                 border: none;
                 padding: 0;
+
+                .ddmenu-container {
+                    &.toolbar-options{
+                    
+                        ul {
+                            background: white;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                            padding: 0;
+                            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                            min-width: 160px;
+                            left: 0;
+                            margin-top: -1px;
+                            border-top-left-radius: 0;
+                            border-top-right-radius: 0;
+                    
+                            li {
+                                margin: 5px 0;
+
+                                &.active {
+                                    a {
+                                        background-color: #1ab394;
+                                        color: white;
+                                    }
+                                }
+                    
+                                a {
+                                    width: 100%;
+                                    white-space: nowrap;
+                                    display: block;
+                                    padding: 3px 20px;
+                                    clear: both;
+                                    font-weight: 400;
+                                    line-height: 1.42857143;
+                                    color: #333;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
 
                 &.svd_menu {
                     & > li.svd_actions:not(.svd_state) {
@@ -234,29 +276,33 @@ $editor-height:75vh;
                                 right: 5px;
                                 top: 5px;
 
-                                .dropdown-toggle {
-                                    background-color: transparent;
-                                    border: none;
-                                    box-shadow: none;
-
-                                    .glyphicon-option-horizontal {
-                                        color: $main-color;
-                                        font-size: 20px
-                                    }
-                                }
-
-                                .dropdown-menu {
-                                    top: 25px;
-                                    right: 0;
-                                    left: auto;
-
-                                    li {
-                                        margin: 5px;
-
-                                        .btn {
-                                            width: 100%;
+                                .ddmenu-container {
+                                    &.element-addons{
+                                        margin-left: 5px;
+                                    
+                                        ul {
+                                            background: white;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            padding: 5px 0;
+                                            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                                            min-width: 160px;
+                                            right: 0;
+                                    
+                                            li {
+                                                margin: 5px;
+                                    
+                                                button {
+                                                    width: 100%;
+                                                }
+                                            }
                                         }
                                     }
+                                }
+                               
+                                .glyphicon-option-horizontal {
+                                    color: $main-color;
+                                    font-size: 20px
                                 }
                             }
                         }
@@ -371,6 +417,42 @@ $editor-height:75vh;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        .ddmenu-container {
+            &.propertyeditor-triggers, &.propertyeditor-validators {
+            
+                ul {
+                    background: white;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    padding: 0;
+                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    min-width: 160px;
+                    left: 0;
+                    z-index: 2000;
+                    margin-top: 3px;
+                    font-size: 14px;
+            
+                    li {
+                        margin: 5px 0;
+                        width: 100%;
+
+                        a {
+                            padding: 3px 20px;
+                            color: #262626;
+                            width: 100%;
+                            font-weight: 400;
+                            display: block;
+
+                            &:hover {
+                                background-color: #f5f5f5;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     .svd_q_selected {
         border: 1px solid $main-color !important;
@@ -571,4 +653,79 @@ $editor-height:75vh;
 .icon-cloud:before {
     background-image: url('./images/Cloud_24x24.svg');
     @include svg-icon(24px);
+}
+
+.animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+
+@-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+
+.modal {
+    display: none;
+    background: rgba(0, 0, 0, .30);
+    z-index: 999;
+}
+
+.modal-open {
+    overflow-y: inherit;
 }

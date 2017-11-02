@@ -1,9 +1,9 @@
 ﻿import * as ko from "knockout";
-import * as jQuery from "jquery";
 import * as Survey from "survey-knockout";
 import {SurveyPropertyEditorBase} from "./propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 import {editorLocalization} from "../editorLocalization";
+import RModal from "rmodal";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     private static afterRenderFuncs;
@@ -20,6 +20,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public onApplyClick: any;
     public onOkClick: any;
     public onResetClick: any;
+    public onShowModal: any;
+    public onHideModal: any;
     public modalName: string;
     public modalNameTarget: string;
     koShowApplyButton: any;
@@ -36,9 +38,25 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         this.modalNameTarget = "#" + this.modalName;
         var self = this;
         this.koShowApplyButton = ko.observable(true);
+
+        self.onHideModal = function () {};
         self.onApplyClick = function () { self.apply(); };
-        self.onOkClick = function() {self.apply(); if(!self.koHasError()) jQuery(self.modalNameTarget).modal("hide");; };
-        self.onResetClick = function () { self.reset(); };
+        self.onOkClick = function() { self.apply(); if(!self.koHasError()) self.onHideModal() };
+        self.onResetClick = function () { self.reset(); self.onHideModal() };
+        self.onShowModal = function () {
+            var modal = new RModal(document.querySelector(self.modalNameTarget), {
+                closeTimeout: 100,
+                dialogOpenClass: 'animated fadeInDown',
+                focus: false
+            });
+            modal.open();
+    
+            document.addEventListener('keydown', function(ev) {
+                modal.keydown(ev);
+            }, false);
+    
+            self.onHideModal = function() {modal.close()};
+        };
         self.koAfterRender = function(el, con) { return self.afterRender(el, con); };
     }
     public get isModal(): boolean { return true; }

@@ -713,7 +713,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.setUndoRedoCurrentState(true);
 
         this.jsonEditor.init();
-        if(jQuery && jQuery()["select2"]) {
+        if(typeof jQuery !== "undefined" && jQuery()["select2"]) {
             this.select2 = jQuery("#objectSelector")["select2"](this.isRTLValue ? {dir: "rtl"} : '');
             jQuery("#objectSelector").width("100%");
         }

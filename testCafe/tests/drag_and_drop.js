@@ -13,8 +13,8 @@ fixture `surveyjseditor: ${title}`
 
     test(`check d&d`, async t => {
         const getQuestionsAddedCount = ClientFunction(() =>
-            document.querySelectorAll("#surveyjs .svd_question ").length);
+            document.querySelectorAll(".svd_container .svd_question ").length);
         
-        await t.dragToElement( `[title~=Radiogroup]`, `#surveyjs` );
+        await t.dragToElement( `[title~=Radiogroup]`, `.svd_container .well` );
         assert.equal(await getQuestionsAddedCount(), 1);
     });

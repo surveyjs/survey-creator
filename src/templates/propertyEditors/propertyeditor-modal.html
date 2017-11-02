@@ -1,8 +1,8 @@
 ﻿<script type="text/html" id="propertyeditor-modal">
     <div class="input-group" data-bind="visible:!$data.isEditable">
-        <a data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}"><span data-bind="text: koText"></span></a>
+        <a data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}"><span data-bind="text: koText"></span></a>
         <div class="input-group-btn">
-            <button class="btn btn-default" data-toggle="modal" style="padding: 2px;" data-bind="attr: {'data-target' : modalNameTarget}">
+            <button class="btn btn-default" style="padding: 2px;" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </div>
@@ -10,17 +10,17 @@
     <div class="input-group" data-bind="visible:$data.isEditable" style="display:table">
         <input class="form-control" type="text" data-bind="value: koValue" style="display:table-cell; width:100%" />
         <div class="input-group-btn">
-            <button type="button" class="btn btn-default" style="display:table-cell; padding: 2px;"  data-toggle="modal" data-bind="attr: {'data-target' : modalNameTarget}">
+            <button type="button" class="btn btn-default" style="display:table-cell; padding: 2px;" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </div>
     </div>
 
-    <div data-bind="attr: {id : modalName}" class="modal fade" role="dialog">
+    <div data-bind="attr: {id : modalName}" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-bind="click: onResetClick">&times;</button>
                     <h4 class="modal-title" data-bind="text:$data.koTitleCaption"></h4>
                 </div>  
                 <div class="modal-body svd_notopbottompaddings">
@@ -30,7 +30,7 @@
                 <div class="modal-footer">
                     <input type="button" class="btn btn-primary" data-bind="visible: $data.koShowApplyButton, click: $data.onApplyClick, value: $root.getLocString('pe.apply')" style="width:100px" />
                     <input type="button" class="btn btn-default" data-bind="click: $data.onOkClick, value: $root.getLocString('pe.ok')" style="width:100px" />
-                    <input type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: $data.onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px" />
+                    <input type="button" class="btn btn-primary" data-bind="click: $data.onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px" />
                 </div>
             </div>
         </div>

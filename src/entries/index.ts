@@ -1,12 +1,9 @@
 // styles
+import "../utils/ddmenu.scss";
 import "../main.scss";
 
 export let Version: string;
 Version = `${process.env.VERSION}`;
-
-import * as jQuery from "jquery";
-global["jQuery"] = jQuery;
-import "bootstrap";
 
 export {DragDropHelper} from "../dragdrophelper";
 export {SurveyPropertyEditorBase} from "../propertyEditors/propertyEditorBase";

@@ -7,14 +7,22 @@
         <div class="col-lg-12">
             <div class="input-group form-inline">
                 <div class="input-group-btn"  data-bind="visible: koAllowAddRemoveItems">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <!-- ko foreach: koValidators -->
-                        <li><a href="#" data-bind="click: $parent.onAddClick"><span data-bind="text:$data.text"></span></a></li>
-                        <!-- /ko  -->
-                    </ul>
+                    <div class="ddmenu-container propertyeditor-validators btn-group inline">
+                        <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+                
+                        <div class="ddmenu">
+                             <span class="btn btn-default" tabindex="0">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </span>
+
+                            <div tabindex="0" onclick="return true"></div>
+                            <ul>
+                                <!-- ko foreach: koValidators -->
+                                    <li><a href="#" data-bind="click: $parent.onAddClick"><span data-bind="text:$data.text"></span></a></li>
+                                <!-- /ko  -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
                 <span class="input-group-btn" data-bind="visible: koAllowAddRemoveItems">

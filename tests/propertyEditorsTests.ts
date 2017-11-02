@@ -22,6 +22,7 @@ import {SurveyPropertyCustomEditor} from "../src/propertyEditors/propertyCustomE
 import {Extentions} from "../src/extentions";
 import {SurveyPropertyEditorFactory, SurveyDropdownPropertyEditor} from "../src/propertyEditors/propertyEditorFactory";
 import {defaultStrings} from "../src/editorLocalization"
+import RModal from "rmodal";
 
 export default QUnit.module("PropertyEditorsTests");
 

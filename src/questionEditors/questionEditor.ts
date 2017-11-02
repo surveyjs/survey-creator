@@ -1,5 +1,4 @@
 ﻿import * as ko from "knockout";
-import * as jQuery from "jquery";
 import {SurveyPropertyModalEditor} from "../propertyEditors/propertyModalEditor";
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions}  from "../propertyEditors/propertyEditorBase";
 import {SurveyPropertyEditorFactory}   from "../propertyEditors/propertyEditorFactory";
@@ -7,6 +6,7 @@ import {editorLocalization} from "../editorLocalization";
 import {SurveyQuestionEditorGeneralProperty, SurveyQuestionEditorGeneralRow, SurveyQuestionEditorGeneralProperties} from "./questionEditorGeneralProperties";
 import {SurveyQuestionEditorDefinition} from "./questionEditorDefinition";
 import * as Survey from "survey-knockout";
+import RModal from "rmodal";
 
 export class SurveyPropertyEditorShowWindow {
     koVisible: any;
@@ -22,8 +22,19 @@ export class SurveyPropertyEditorShowWindow {
 
         this.koEditor(editor);
         this.koVisible(true);
-        jQuery("#surveyquestioneditorwindow").modal("show");
-        editor.onHideWindow = function() {jQuery("#surveyquestioneditorwindow").modal("hide");};
+
+        var modal = new RModal(document.getElementById('surveyquestioneditorwindow'), {
+            closeTimeout: 100,
+            dialogOpenClass: 'animated fadeIn',
+            focus: false
+        });
+        modal.open();
+
+        document.addEventListener('keydown', function(ev) {
+            modal.keydown(ev);
+        }, false);
+
+        editor.onHideWindow = function() {modal.close()};
     }
 }
 
@@ -64,7 +75,7 @@ export class SurveyQuestionEditor {
         this.properties = new SurveyQuestionProperties(obj, onCanShowPropertyCallback);
         self.onApplyClick = function () { self.apply(); };
         self.onOkClick = function() {self.apply(); if(!self.hasError() && self.onHideWindow) self.onHideWindow(); };
-        self.onResetClick = function () { self.reset(); };
+        self.onResetClick = function () { self.reset(); self.onHideWindow(); };
         this.onTabClick = function (tab) { self.koActiveTab(tab.name); };
         var tabs = this.buildTabs();
         this.koActiveTab = ko.observable(tabs[0].name);
