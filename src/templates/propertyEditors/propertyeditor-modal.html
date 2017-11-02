@@ -24,7 +24,7 @@
                     <h4 class="modal-title" data-bind="text:$data.koTitleCaption"></h4>
                 </div>  
                 <div class="modal-body svd_notopbottompaddings">
-                    <!-- ko template: { name: 'propertyeditorcontent-' + editorType, data: $data } -->
+                    <!-- ko template: { name: 'propertyeditorcontent-' + editorType, data: $data, afterRender: $data.koAfterRender } -->
                     <!-- /ko -->
                 </div>
                 <div class="modal-footer">

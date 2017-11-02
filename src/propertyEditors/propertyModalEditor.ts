@@ -6,6 +6,16 @@ import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 import {editorLocalization} from "../editorLocalization";
 
 export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
+    private static afterRenderFuncs;
+    public static registerAfteRender(editorType: string, func: (editor: SurveyPropertyModalEditor, el: HTMLElement) => any) {
+        if(!SurveyPropertyModalEditor.afterRenderFuncs) SurveyPropertyModalEditor.afterRenderFuncs = {};
+        SurveyPropertyModalEditor.afterRenderFuncs[editorType] = func;
+    }
+    public static getAfterRender(editorType: string): (editor: SurveyPropertyModalEditor, el: HTMLElement) => any {
+        if(!SurveyPropertyModalEditor.afterRenderFuncs) return null;
+        return SurveyPropertyModalEditor.afterRenderFuncs[editorType];
+    }
+
     public editingObject: any;
     public onApplyClick: any;
     public onOkClick: any;
@@ -14,6 +24,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     public modalNameTarget: string;
     koShowApplyButton: any;
     koTitleCaption: any;
+    koAfterRender: any;
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
         this.koTitleCaption = ko.observable("");
@@ -28,6 +39,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         self.onApplyClick = function () { self.apply(); };
         self.onOkClick = function() {self.apply(); if(!self.koHasError()) jQuery(self.modalNameTarget).modal("hide");; };
         self.onResetClick = function () { self.reset(); };
+        self.koAfterRender = function(el, con) { return self.afterRender(el, con); };
     }
     public get isModal(): boolean { return true; }
     protected onOptionsChanged() {
@@ -41,6 +53,24 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         super.setObject(value);
     }
     public get isEditable(): boolean { return false; }
+    protected afterRender(elements, con) {
+        var afterRenderFunc = SurveyPropertyModalEditor.getAfterRender(this.editorType); 
+        if(!afterRenderFunc) return;
+        var el = this.GetFirstNonTextElement(elements);
+        var tEl = elements[0];
+        if (tEl.nodeName == "#text") tEl.data = "";
+        tEl = elements[elements.length - 1];
+        if (tEl.nodeName == "#text") tEl.data = "";
+        afterRenderFunc(this, el);
+    }
+    private GetFirstNonTextElement(elements: any) {
+        if (!elements || !elements.length) return;
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].nodeName != "#text" && elements[i].nodeName != "#comment") return elements[i];
+        }
+        return null;
+    }
+
 }
 
 export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {

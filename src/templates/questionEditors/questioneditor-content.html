@@ -4,7 +4,7 @@
     </ul>               
     <!-- ko foreach: koTabs -->
     <div data-bind="visible:$parent.koActiveTab() == $data.name" style="margin-top:5px">
-        <!-- ko template: { name: $data.htmlTemplate, data: $data.templateObject } -->
+        <!-- ko template: { name: $data.htmlTemplate, data: $data.templateObject, afterRender: $data.koAfterRender } -->
         <!-- /ko -->
     </div>
     <!-- /ko  -->

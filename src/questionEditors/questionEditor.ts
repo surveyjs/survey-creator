@@ -126,8 +126,10 @@ export class SurveyQuestionEditor {
 }
 
 export class SurveyQuestionEditorTabBase {
+    koAfterRender: any;
     private titleValue: string;
     constructor(public obj: Survey.Base) {
+        this.koAfterRender = function(el, con) {  };        
     }
     public get name(): string { return "name"; }
     public get title() {
@@ -171,6 +173,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
         this.propertyEditorValue.options = options;
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
         this.propertyEditorValue.object = obj;
+        this.koAfterRender = function(el, con) { self.propertyEditor.koAfterRender(el, con); };        
     }
     private doOnGetLocale(): string {
         if(this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();
