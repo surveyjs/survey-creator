@@ -5,15 +5,43 @@ import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 import {editorLocalization} from "../editorLocalization";
 import RModal from "rmodal";
 
-export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
-    private static afterRenderFuncs;
-    public static registerAfteRender(editorType: string, func: (editor: SurveyPropertyModalEditor, el: HTMLElement) => any) {
-        if(!SurveyPropertyModalEditor.afterRenderFuncs) SurveyPropertyModalEditor.afterRenderFuncs = {};
-        SurveyPropertyModalEditor.afterRenderFuncs[editorType] = func;
+export class SurveyPropertyModalEditorCustomWidget {
+    private static customWidgetId = 1;
+    private static customWidgetName = "modalEditorCustomWidget";
+    constructor(public json: any) {
+
     }
-    public static getAfterRender(editorType: string): (editor: SurveyPropertyModalEditor, el: HTMLElement) => any {
-        if(!SurveyPropertyModalEditor.afterRenderFuncs) return null;
-        return SurveyPropertyModalEditor.afterRenderFuncs[editorType];
+    public afterRender(editor: SurveyPropertyModalEditor, el: HTMLElement) {
+        if(this.json && this.json.afterRender) {
+            if(!el.id) {
+                el.id = SurveyPropertyModalEditorCustomWidget.customWidgetName + SurveyPropertyModalEditorCustomWidget.customWidgetId;
+                SurveyPropertyModalEditorCustomWidget.customWidgetId ++;
+            }
+            this.json.afterRender(editor, el);
+            if(this.json.destroy) {
+                var self = this;
+                ko.utils.domNodeDisposal.addDisposeCallback(el, function () {
+                    self.destroy(editor, el);
+                });
+            }
+        }
+    }
+    public destroy(editor: SurveyPropertyModalEditor, el: HTMLElement) {
+        if(this.json && this.json.destroy) {
+            this.json.destroy(editor, el);
+        }
+    }
+}
+
+export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
+    private static customWidgets;
+    public static registerCustomWidget(editorType: string, json: any) {
+        if(!SurveyPropertyModalEditor.customWidgets) SurveyPropertyModalEditor.customWidgets = {};
+        SurveyPropertyModalEditor.customWidgets[editorType] = new SurveyPropertyModalEditorCustomWidget(json);
+    }
+    public static getCustomWidget(editorType: string): SurveyPropertyModalEditorCustomWidget {
+        if(!SurveyPropertyModalEditor.customWidgets) return null;
+        return SurveyPropertyModalEditor.customWidgets[editorType];
     }
 
     public editingObject: any;
@@ -72,14 +100,14 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     }
     public get isEditable(): boolean { return false; }
     protected afterRender(elements, con) {
-        var afterRenderFunc = SurveyPropertyModalEditor.getAfterRender(this.editorType); 
-        if(!afterRenderFunc) return;
+        var customWidget = SurveyPropertyModalEditor.getCustomWidget(this.editorType); 
+        if(!customWidget) return;
         var el = this.GetFirstNonTextElement(elements);
         var tEl = elements[0];
         if (tEl.nodeName == "#text") tEl.data = "";
         tEl = elements[elements.length - 1];
         if (tEl.nodeName == "#text") tEl.data = "";
-        afterRenderFunc(this, el);
+        customWidget.afterRender(this, el);
     }
     private GetFirstNonTextElement(elements: any) {
         if (!elements || !elements.length) return;
