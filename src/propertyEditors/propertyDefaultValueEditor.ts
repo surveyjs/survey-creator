@@ -33,7 +33,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     public get editorType(): string { return "value"; }
     private createSurvey() {
         var qjson = new Survey.JsonObject().toJsonObject(this.object);
-        qjson.type = this.object.getType();
+        qjson.type = this.getJsonType(this.object.getType());
         delete qjson["visible"];
         delete qjson["visibleIf"];
         delete qjson["enable"];
@@ -44,6 +44,9 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
         this.survey.showNavigationButtons = false;
         this.survey.showQuestionNumbers = "off";
         this.survey.render("surveyjsDefaultValue");
+    }
+    private getJsonType(type: string): string {
+        return type != "expression" ? type : "text";
     }
    
 }

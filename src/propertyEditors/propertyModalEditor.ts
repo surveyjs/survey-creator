@@ -157,7 +157,14 @@ export class SurveyPropertyExpressionEditor extends SurveyPropertyTextEditor {
     }
     public get editorType(): string { return "expression"; }
 }
+export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
+    constructor(property: Survey.JsonObjectProperty) {
+        super(property);
+    }
+    public get editorType(): string { return "condition"; }
+}
 
 SurveyPropertyEditorFactory.registerEditor("text", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyTextEditor(property); });
 SurveyPropertyEditorFactory.registerEditor("html", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyHtmlEditor(property); });
+SurveyPropertyEditorFactory.registerEditor("condition", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyConditionEditor(property); });
 SurveyPropertyEditorFactory.registerEditor("expression", function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase { return new SurveyPropertyExpressionEditor(property); });

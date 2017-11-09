@@ -90,7 +90,8 @@ export var defaultStrings = {
         radiogroup: "Radiogroup",
         rating: "Rating",
         text: "Single Input",
-        boolean: "Boolean"
+        boolean: "Boolean",
+        expression: "Expression"
     },
     //Strings in Editor
     ed: {
@@ -131,7 +132,8 @@ export var defaultStrings = {
         fastEntry: "Fast Entry",
         formEntry: "Form Entry",
         testService: "Test the service",
-        expressionHelp: "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
+        conditionHelp: "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+        expressionHelp: "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'" ,
 
         propertyIsEmpty: "Please enter a value",
         value: "Value",
