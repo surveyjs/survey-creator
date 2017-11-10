@@ -9,8 +9,10 @@ import {SurveyNestedPropertyEditor, SurveyNestedPropertyEditorItem} from "./prop
 import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 
 export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
+    public isTitleVisible: boolean;
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
+        this.isTitleVisible = this.getIsTitleVisible();
     }
     public get editorType(): string { return "textitems"; }
     protected createNewEditorItem(): any { 
@@ -28,6 +30,10 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
             objs.push({ name: items[i].koName() });
         }
         return SurveyHelper.getNewName(objs, "text");
+    }
+    private getIsTitleVisible(): boolean {
+        var property = Survey.JsonObject.metaData.findProperty("multipletextitem", "title");
+        return property != null && property.visible;
     }
 }
 

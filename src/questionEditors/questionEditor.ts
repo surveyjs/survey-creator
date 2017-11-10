@@ -7,6 +7,7 @@ import {SurveyQuestionEditorGeneralProperty, SurveyQuestionEditorGeneralRow, Sur
 import {SurveyQuestionEditorDefinition} from "./questionEditorDefinition";
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
+import { SurveyHelper } from '../surveyHelper';
 
 export class SurveyPropertyEditorShowWindow {
     koVisible: any;
@@ -51,11 +52,7 @@ export class SurveyQuestionProperties {
                 break;
             }
         }
-        if(property && property["visible"] === false) property = null;
-        if (property && this.onCanShowPropertyCallback) {
-            if (!this.onCanShowPropertyCallback(this.obj, property)) property = null;
-        }
-        return property;
+        return SurveyHelper.isPropertyVisible(this.obj, property, this.onCanShowPropertyCallback) ? property: null;
     } 
 }
 

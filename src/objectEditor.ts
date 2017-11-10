@@ -3,6 +3,7 @@ import {SurveyObjectProperty} from "./objectProperty";
 import {ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
 import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
+import { SurveyHelper } from './surveyHelper';
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;
@@ -64,9 +65,7 @@ export class SurveyObjectEditor {
         this.koActiveProperty(this.getPropertyEditor("name"));
     }
     protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
-        if(property["visible"] === false) return false;
-        if (this.onCanShowPropertyCallback) return this.onCanShowPropertyCallback(this.selectedObject, property);
-        return true;
+        return SurveyHelper.isPropertyVisible(this.selectedObject, property, this.onCanShowPropertyCallback);
     }
     protected updatePropertiesObject() {
         var properties = this.koProperties();

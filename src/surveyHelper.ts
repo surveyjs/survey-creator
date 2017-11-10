@@ -47,5 +47,10 @@ export class SurveyHelper {
         if(element.elements) return element.elements;
         return [];
     }
+    public static isPropertyVisible(obj: any, property: Survey.JsonObjectProperty, onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean = null) : boolean {
+        if(!property || !property.visible) return false;
+        if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property)) return false;
+        return true;
+    }
 
 }
