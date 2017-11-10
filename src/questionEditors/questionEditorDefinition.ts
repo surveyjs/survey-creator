@@ -46,6 +46,9 @@ export class SurveyQuestionEditorDefinition {
         "boolean" : {
             properties: ["label"]
         },
+        "expression" : {
+            tabs: [{name: "expression", index: 10}]
+        },
         "matrixdropdowncolumn@checkbox" : {
             properties: ["hasOther", "choicesOrder", "colCount"],
             tabs: [{name: "choices", index: 10}, {name: "choicesByUrl", index: 11}, {name: "visibleIf", index: 12}]
