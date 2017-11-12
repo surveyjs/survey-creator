@@ -144,6 +144,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      */
     public onDesignerSurveyCreated: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     /**
+     * The event is fired when the Survey Editor runs the survey in the test mode.
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.survey  the survey object showing in the "Test survey" tab.
+     */
+    public onTestSurveyCreated: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
      * Use this event to control Property Editors UI.
      * <br/> sender the survey editor object that fires the event
      * <br/> options.obj  the survey object which property is edited in the Property Editor.
@@ -744,6 +750,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             options.items.push({name: "delete", text: self.getLocString(deleteLocaleName), onClick : function(selObj){ self.deleteCurrentObject();} });
             self.onDefineElementMenuItems.fire(self, options);
         });
+        this.onDesignerSurveyCreated.fire(this, {survey: this.surveyValue});
         this.survey.render(this.surveyjs);
         this.surveyObjects.survey = this.survey;
         this.pagesEditor.survey = this.survey;
@@ -759,7 +766,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
         this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel, options.parentPanel); });
         this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
-        this.onDesignerSurveyCreated.fire(this, {survey: this.surveyValue});
     }
     private processHtml(html: string): string {
         if (!html) return html;
@@ -921,6 +927,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
             if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = "none";
             survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = ""; });
+            this.onTestSurveyCreated.fire(this, {survey: survey});
             survey.render(this.surveyjsExample);
         } else {
             this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");
