@@ -776,9 +776,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
         this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel, options.parentPanel); });
         this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
-        var onPageAdded = <any>this.surveyValue["onPageAdded"];
-        if(onPageAdded) {
-            onPageAdded.add((sender: Survey.Survey, options) => { self.doOnPageAdded(options.page); });
+        var pAdded = <any>this.surveyValue["onPageAdded"];
+        if(pAdded && pAdded.add) {
+            pAdded.add((sender: Survey.Survey, options) => { self.doOnPageAdded(options.page); });
         }
     }
     private processHtml(html: string): string {
