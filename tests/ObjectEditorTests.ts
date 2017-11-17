@@ -52,6 +52,20 @@ QUnit.test("Active property", function (assert) {
     editor.selectedObject = new TruckDefaultValue();
     assert.equal(editor.koActiveProperty().name, "name", "name property is active by default");
 });
+QUnit.test("Is show property", function (assert) {
+    var editor = new SurveyObjectEditor();
+    editor.selectedObject = new TruckDefaultValue();
+    var nameProperty = editor.getPropertyEditor("name");
+    var maxWeightProperty = editor.getPropertyEditor("maxWeight");
+    var isNewProperty = editor.getPropertyEditor("isNew");
+    assert.equal(nameProperty.koIsShowEditor(), true, "name property is active by default");
+    assert.equal(maxWeightProperty.koIsShowEditor(), false, "name property is not active");
+    editor.koActiveProperty(maxWeightProperty);
+    assert.equal(nameProperty.koIsShowEditor(), false, "name property is inactive now");
+    assert.equal(maxWeightProperty.koIsShowEditor(), true, "maxWeight property is active");
+
+    assert.equal(isNewProperty.koIsShowEditor(), true, "isNewProperty property always show Editor");
+});
 QUnit.test("On property changed", function (assert) {
     var editor = new SurveyObjectEditor();
     var car = new TruckDefaultValue();

@@ -16,6 +16,8 @@ export class SurveyObjectEditor {
     constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.koProperties = ko.observableArray();
         this.koActiveProperty = ko.observable();
+        this.koActiveProperty.subscribe(function(oldValue) { if(oldValue) oldValue.isActive = false; }, null, "beforeChange");
+        this.koActiveProperty.subscribe(function(newValue) { if(newValue) newValue.isActive = true;  });        
         this.koHasObject = ko.observable();
     }
     public get selectedObject(): any { return this.selectedObjectValue; }
