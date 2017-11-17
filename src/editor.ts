@@ -133,6 +133,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      */
     public onPanelAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
     /**
+     * The event is called on adding a new page into the survey.  
+     * <br/> sender the survey editor object that fires the event
+     * <br/> options.page the new survey Page object.
+     */
+    public onPageAdded: Survey.Event<(sender: SurveyEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+    /**
      * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
      * <br/> sender the survey editor object that fires the event
      */
@@ -581,6 +587,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.surveyObjects.addElement(panel, parentPanel);
         this.survey.render();
     }
+    private doOnPageAdded(page: Survey.Page) {
+        var options = { page: page };
+        this.onPageAdded.fire(this, options);
+    }
     private onPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
         var isDefault = property.isDefaultValue(newValue);
         obj[property.name] = newValue;
@@ -766,6 +776,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.question); });
         this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => { self.doOnPanelAdded(options.panel, options.parentPanel); });
         this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => { self.doOnElementRemoved(options.panel); });
+        var pAdded = <any>this.surveyValue["onPageAdded"];
+        if(pAdded && pAdded.add) {
+            pAdded.add((sender: Survey.Survey, options) => { self.doOnPageAdded(options.page); });
+        }
     }
     private processHtml(html: string): string {
         if (!html) return html;
