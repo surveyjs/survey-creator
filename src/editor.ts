@@ -693,6 +693,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             this.survey.selectedElement = obj;
             canDeleteObject = true;
             this.survey.currentPage = this.getPageByElement(obj);
+            var id = obj["id"];
+            if(id) {
+                let el = document.getElementById(id);
+                if(el && el.scrollIntoView) {
+                    el.scrollIntoView();
+                }
+            }
         } else {
             this.survey.selectedElement = null;
         }
