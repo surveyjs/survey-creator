@@ -43,7 +43,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         if(!SurveyPropertyModalEditor.customWidgets) return null;
         return SurveyPropertyModalEditor.customWidgets[editorType];
     }
-
+    private isShowingModalValue: boolean = false;
     public editingObject: any;
     public onApplyClick: any;
     public onOkClick: any;
@@ -72,6 +72,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         self.onOkClick = function() { self.apply(); if(!self.koHasError()) self.onHideModal() };
         self.onResetClick = function () { self.reset(); self.onHideModal() };
         self.onShowModal = function () {
+            self.beforeShowModal();
             var modal = new RModal(document.querySelector(self.modalNameTarget), {
                 closeTimeout: 100,
                 dialogOpenClass: 'animated fadeInDown',
@@ -83,11 +84,18 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
                 modal.keydown(ev);
             }, false);
     
-            self.onHideModal = function() {modal.close()};
+            self.onHideModal = function() { self.beforeCloseModal(); modal.close()};
         };
         self.koAfterRender = function(el, con) { return self.afterRender(el, con); };
     }
     public get isModal(): boolean { return true; }
+    public get isShowingModal(): boolean { return this.isShowingModalValue; }
+    protected beforeShowModal() {
+        this.isShowingModalValue = true;
+    }
+    protected beforeCloseModal() {
+        this.isShowingModalValue = false;
+    }
     protected onOptionsChanged() {
         this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
     }

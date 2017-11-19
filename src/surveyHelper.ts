@@ -52,5 +52,19 @@ export class SurveyHelper {
         if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property)) return false;
         return true;
     }
+    public static scrollIntoViewIfNeeded(el: HTMLElement, page: Survey.PageModel) {
+        if(!el || !el.scrollIntoView || !page) return;
+        var pEl = document.getElementById(page.id);
+        if(!pEl) return;
+        var rect = el.getBoundingClientRect();
+        var height = pEl.offsetParent ? pEl.offsetParent.clientHeight :  pEl.clientHeight;
+        if (rect.bottom > height) {
+            el.scrollIntoView(false);
+        } else {
+            if (rect.top < pEl.offsetTop) {
+                el.scrollIntoView();
+            } 
+        }
+    }
 
 }

@@ -696,9 +696,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             var id = obj["id"];
             if(id) {
                 let el = document.getElementById(id);
-                if(el && el.scrollIntoView) {
-                    el.scrollIntoView();
-                }
+                SurveyHelper.scrollIntoViewIfNeeded(el, this.survey.currentPage);
             }
         } else {
             this.survey.selectedElement = null;
