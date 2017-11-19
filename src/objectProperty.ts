@@ -36,6 +36,7 @@ export class SurveyObjectProperty {
     public get title(): string { return this.editor.title; }
     public get isActive(): boolean { return this.isActiveValue; }
     public set isActive(val: boolean) {
+        if(this.isActive == val) return;
         this.isActiveValue = val;
         this.koIsShowEditor(!this.disabled && (this.editor.alwaysShowEditor || this.isActive));
     }

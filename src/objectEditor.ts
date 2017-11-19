@@ -7,6 +7,7 @@ import { SurveyHelper } from './surveyHelper';
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;
+    private oldActiveProperty: SurveyObjectProperty;
     public koProperties: any;
     public koActiveProperty: any;
     public koHasObject: any;
@@ -16,8 +17,14 @@ export class SurveyObjectEditor {
     constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.koProperties = ko.observableArray();
         this.koActiveProperty = ko.observable();
-        this.koActiveProperty.subscribe(function(oldValue) { if(oldValue) oldValue.isActive = false; }, null, "beforeChange");
-        this.koActiveProperty.subscribe(function(newValue) { if(newValue) newValue.isActive = true;  });        
+        this.oldActiveProperty = null;
+        var self = this;
+        this.koActiveProperty.subscribe(function(newValue) { 
+            if(self.oldActiveProperty === newValue) return;
+            if(self.oldActiveProperty) self.oldActiveProperty.isActive = false;
+            self.oldActiveProperty = newValue;            
+            if(newValue) newValue.isActive = true;  }
+        );        
         this.koHasObject = ko.observable();
     }
     public get selectedObject(): any { return this.selectedObjectValue; }
