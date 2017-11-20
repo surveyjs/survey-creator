@@ -626,7 +626,7 @@ $editor-height:75vh;
     @include svg-icon(16px);
 }
 .icon-editor:before {
-    //background-image: url('./images/cw/...'); TODO need to add
+    background-image: url('./images/cw/Editor.svg');
     @include svg-icon(16px);
 }
 .icon-imagepicker:before {
