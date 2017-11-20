@@ -76,7 +76,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
             var modal = new RModal(document.querySelector(self.modalNameTarget), {
                 closeTimeout: 100,
                 dialogOpenClass: 'animated fadeInDown',
-                focus: false
+                focus: false,
             });
             modal.open();
     
@@ -90,10 +90,10 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     }
     public get isModal(): boolean { return true; }
     public get isShowingModal(): boolean { return this.isShowingModalValue; }
-    protected beforeShowModal() {
+    public beforeShowModal() {
         this.isShowingModalValue = true;
     }
-    protected beforeCloseModal() {
+    public beforeCloseModal() {
         this.isShowingModalValue = false;
     }
     protected onOptionsChanged() {

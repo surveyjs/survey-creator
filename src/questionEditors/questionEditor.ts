@@ -71,8 +71,8 @@ export class SurveyQuestionEditor {
         if(!this.className) this.className = this.obj.getType();
         this.properties = new SurveyQuestionProperties(obj, onCanShowPropertyCallback);
         self.onApplyClick = function () { self.apply(); };
-        self.onOkClick = function() {self.apply(); if(!self.hasError() && self.onHideWindow) self.onHideWindow(); };
-        self.onResetClick = function () { self.reset(); self.onHideWindow(); };
+        self.onOkClick = function() {self.doCloseWindow(false); };
+        self.onResetClick = function () { self.doCloseWindow(true); };
         this.onTabClick = function (tab) { self.koActiveTab(tab.name); };
         var tabs = this.buildTabs();
         this.koActiveTab = ko.observable(tabs[0].name);
@@ -81,6 +81,20 @@ export class SurveyQuestionEditor {
         this.koShowApplyButton = ko.observable(!this.options || this.options.showApplyButtonInEditors);
         if(this.obj["name"]) {
             this.koTitle(editorLocalization.getString("pe.qEditorTitle")["format"](this.obj["name"]));
+        }
+    }
+    protected doCloseWindow(isCancel: boolean) {
+        if(isCancel) {
+            this.reset();
+        } else {
+            this.apply();
+        }
+        if(isCancel || !this.hasError()) {
+            var tabs = this.koTabs();
+            for(var i = 0; i < tabs.length; i ++) {
+                tabs[i].doCloseWindow();
+            }
+            if(this.onHideWindow) this.onHideWindow();
         }
     }
     public hasError(): boolean {
@@ -151,6 +165,7 @@ export class SurveyQuestionEditorTabBase {
     public hasError(): boolean { return false; }
     public reset() { }
     public apply() { }
+    public doCloseWindow() {}
     protected getValue(property: Survey.JsonObjectProperty): any {
         return property.getPropertyValue(this.obj);
     }
@@ -181,6 +196,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
         this.propertyEditorValue.options = options;
         this.propertyEditorValue.onGetLocale = function() { return self.doOnGetLocale() };
         this.propertyEditorValue.object = obj;
+        this.propertyEditorValue.beforeShowModal();
         this.koAfterRender = function(el, con) { self.propertyEditor.koAfterRender(el, con); };        
     }
     private doOnGetLocale(): string {
@@ -198,5 +214,8 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     public apply() {
         this.propertyEditor.apply();
         this.obj[this.property.name] = this.propertyEditorValue.editingValue;
+    }
+    public doCloseWindow() {
+        this.propertyEditor.beforeCloseModal();
     }
 }

@@ -60,19 +60,14 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         this.koItems(this.getItemsFromValue());
     }
     protected onValueChanged() {
-        this.setupItems();
-    }
-    /* TODO it will increase the speed on selecting elements in times.
-    protected onValueChanged() {
         if(this.isShowingModal) {
             this.setupItems();
         }
     }
-    protected beforeShowModal() {
+    public beforeShowModal() {
         super.beforeShowModal();
         this.setupItems();
     }
-    */
     protected getItemsFromValue(value: any = null): Array<any> {
         var items = [];
         if(!value) value = this.editingValue;
