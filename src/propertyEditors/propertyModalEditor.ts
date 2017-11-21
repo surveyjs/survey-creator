@@ -39,6 +39,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         if(!SurveyPropertyModalEditor.customWidgets) SurveyPropertyModalEditor.customWidgets = {};
         SurveyPropertyModalEditor.customWidgets[editorType] = new SurveyPropertyModalEditorCustomWidget(json);
     }
+    private static idCounter = 1;
     public static getCustomWidget(editorType: string): SurveyPropertyModalEditorCustomWidget {
         if(!SurveyPropertyModalEditor.customWidgets) return null;
         return SurveyPropertyModalEditor.customWidgets[editorType];
@@ -62,7 +63,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
             this.koTitleCaption(editorLocalization.getString("pe.editProperty")["format"](this.property.name));
         }
         var name = property ? property.name : "";
-        this.modalName = "modelEditor" + this.editorType + name;
+        this.modalName = "modelEditor" + this.editorType + SurveyPropertyModalEditor.idCounter;
+        SurveyPropertyModalEditor.idCounter ++;
         this.modalNameTarget = "#" + this.modalName;
         var self = this;
         this.koShowApplyButton = ko.observable(true);
