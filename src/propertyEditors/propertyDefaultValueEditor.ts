@@ -8,25 +8,19 @@ import {SurveyPropertyEditorFactory} from "./propertyEditorFactory";
 export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor {
     public survey: Survey.Survey;
     public question: Survey.Question;
+    koSurvey: any;
     
     constructor(property: Survey.JsonObjectProperty) {
         super(property);
+        this.koSurvey = ko.observable(new Survey.Survey());
     }
     public getValueText(value: any): string {
         if (!value) return editorLocalization.getString("pe.empty");
         return JSON.stringify(value);
     }
-    protected updateValue() {
-        super.updateValue();
-        if(this.survey) {
-            this.survey.setValue(this.object.name, this.editingValue);    
-        }
-    }
     public beforeShowModal() {
         super.beforeShowModal();
-        if(!this.survey) {
-            this.createSurvey();
-        }
+        this.createSurvey();
     }
     protected onBeforeApply() {
         if(!this.survey) return;
@@ -45,7 +39,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
         this.survey.setValue(this.object.name, this.editingValue);
         this.survey.showNavigationButtons = false;
         this.survey.showQuestionNumbers = "off";
-        this.survey.render("surveyjsDefaultValue");
+        this.koSurvey(this.survey);
     }
     private getJsonType(type: string): string {
         return type != "expression" ? type : "text";
