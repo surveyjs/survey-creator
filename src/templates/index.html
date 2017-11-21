@@ -55,13 +55,11 @@
             <div data-bind="template: { name: 'jsoneditor', data: jsonEditor }"></div>
         </div>
 
-        <div id="surveyjsTest" data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
-            <div id="surveyjsExample"></div>
-            <div id="surveyjsExampleResults"></div>
-            <button id="surveyjsExamplereRun" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurveyAgain')" style="display:none">Test Again</button>
+        <div data-bind="visible: koViewType() == 'test', style: {width: koTestSurveyWidth}">
+            <div data-bind="template: { name: 'surveylive', data: surveyLive }"></div>
         </div>
 
-        <div id="surveyjsEmbed" data-bind="visible: koViewType() == 'embed'">
+        <div data-bind="visible: koViewType() == 'embed'">
             <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
         </div>
     </div>

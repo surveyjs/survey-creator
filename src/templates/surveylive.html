@@ -1,0 +1,5 @@
+<script type="text/html" id="surveylive">
+    <survey-widget params="survey: koSurvey"></survey-widget>
+    <div data-bind="text: koResultText, visible: koIsRunning() == false"></div>
+    <button data-bind="visible: koIsRunning() == false, click:selectTestClick, text: testSurveyAgainText">Test Again</button>
+</script>

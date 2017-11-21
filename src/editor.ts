@@ -3,6 +3,7 @@ import {editorLocalization} from "./editorLocalization";
 import {SurveyObjectEditor} from "./objectEditor";
 import {ISurveyObjectEditorOptions, SurveyPropertyEditorBase} from "./propertyEditors/propertyEditorBase";
 import {SurveyPagesEditor} from "./pagesEditor";
+import {SurveyLiveTester} from "./surveylive";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
 import {SurveyVerbs} from "./objectVerbs";
@@ -58,12 +59,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
     private renderedElement: HTMLElement;
     private surveyjs: HTMLElement;
-    private surveyjsExample: HTMLElement;
 
     private jsonEditor: SurveyJSONEditor;
     private selectedObjectEditorValue: SurveyObjectEditor;
     private questionEditorWindow: SurveyPropertyEditorShowWindow;
     private pagesEditor: SurveyPagesEditor;
+    private surveyLive: SurveyLiveTester;
     private surveyEmbeding: SurveyEmbedingWindow;
     private surveyObjects: SurveyObjects;
     private toolboxValue: QuestionToolbox;
@@ -276,6 +277,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         }
         this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
             (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
+        this.surveyLive = new SurveyLiveTester();
         this.surveyEmbeding = new SurveyEmbedingWindow();
         this.toolboxValue = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null);
 
@@ -694,16 +696,17 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             canDeleteObject = true;
             this.survey.currentPage = this.getPageByElement(obj);
             var id = obj["id"];
-            if(id) {
-                let el = document.getElementById(id);
-                SurveyHelper.scrollIntoViewIfNeeded(el, this.survey.currentPage);
+            if(this.renderedElement && id && this.survey.currentPage) {
+                let el = <HTMLElement>this.renderedElement.querySelector('#' + id);
+                let pageEl = <HTMLElement>this.renderedElement.querySelector('#' + this.survey.currentPage.id);
+                SurveyHelper.scrollIntoViewIfNeeded(el, pageEl);
             }
         } else {
             this.survey.selectedElement = null;
         }
         this.koCanDeleteObject(canDeleteObject);
         //Select2 work-around
-        if(this.select2) {
+        if(this.renderedElement && this.select2) {
             var el = <HTMLElement>this.renderedElement.querySelector("#select2-objectSelector-container"); //TODO
             if(el) {
                 var item = this.surveyObjects.koSelected();
@@ -728,7 +731,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 }
             };
         }
-        this.surveyjsExample = <HTMLElement>this.renderedElement.querySelector("#surveyjsExample");
 
         this.initSurvey(this.getDefaultSurveyJson());
         this.setUndoRedoCurrentState(true);
@@ -892,7 +894,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
      */
     public showQuestionEditor(question: Survey.QuestionBase) {
         var self = this;
-        this.questionEditorWindow.show(question, function (question) { self.onQuestionEditorChanged(question); }, this);
+        var elWindow = this.renderedElement ? <HTMLElement>this.renderedElement.querySelector("#surveyquestioneditorwindow") : null;
+        this.questionEditorWindow.show(question, elWindow, function (question) { self.onQuestionEditorChanged(question); }, this);
     }
     private onQuestionEditorChanged(question: Survey.QuestionBase) {
         this.surveyObjects.nameChanged(question);
@@ -933,24 +936,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.survey.render();
     }
     private showLiveSurvey() {
-        if (!this.surveyjsExample) return;
-        var json = this.getSurveyJSON();
-        if (json != null) {
-            if (json.cookieName) {
-                delete json.cookieName;
-            }
-            var survey = new Survey.Survey(json);
-            var self = this;
-            var surveyjsExampleResults = <HTMLElement>this.renderedElement.querySelector("#surveyjsExampleResults");
-            var surveyjsExamplereRun = <HTMLElement>this.renderedElement.querySelector("#surveyjsExamplereRun");
-            if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = "";
-            if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = "none";
-            survey.onComplete.add((sender: Survey.Survey) => { if (surveyjsExampleResults) surveyjsExampleResults.innerHTML = this.getLocString("ed.surveyResults") + JSON.stringify(survey.data); if (surveyjsExamplereRun) surveyjsExamplereRun.style.display = ""; });
-            this.onTestSurveyCreated.fire(this, {survey: survey});
-            survey.render(this.surveyjsExample);
-        } else {
-            this.surveyjsExample.innerHTML = this.getLocString("ed.correctJSON");
-        }
+        var self = this;
+        this.surveyLive.onSurveyCreatedCallback = function(survey: Survey.Survey) {
+            self.onTestSurveyCreated.fire(self, {survey: survey});
+        } 
+        this.surveyLive.setJSON(this.getSurveyJSON());
+        this.surveyLive.show();
     }
     private showSurveyEmbeding() {
         var json = this.getSurveyJSON();
@@ -1006,3 +997,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 }
 
 Survey.Survey.cssType = "bootstrap";
+
+var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
+koSurveyTemplate = koSurveyTemplate.replace("name: 'survey-content', afterRender: koEventAfterRender", "name: 'survey-content', data: survey");
+//koSurveyTemplate = "<div data-bind='data: survey'>" + koSurveyTemplate + "</div>";
+
+ko.components.register('survey-widget', {
+    viewModel: function(params) {
+        this.survey = params.survey;
+    },
+    template: koSurveyTemplate
+});
