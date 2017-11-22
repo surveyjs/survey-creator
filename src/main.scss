@@ -230,10 +230,9 @@ $editor-height:75vh;
                         > li {
                             border: 1px solid $dark-border-color;
                             border-radius: 3px;
-                            padding: 7px 10px 7px 12px;
+                            padding: 7px 22px 7px 12px;
                             margin-right: 2px;
                             margin-bottom: 2px;
-                            min-width: 95px;
                             cursor: pointer;
 
                             &.active {
@@ -251,7 +250,6 @@ $editor-height:75vh;
                             }
 
                             &:last-child {
-                                min-width: 40px;
                                 border: none;
                                 &:hover {
                                     background-color: transparent; 
@@ -269,7 +267,10 @@ $editor-height:75vh;
 
                             .ddmenu-container {
                                 &.page-nav {
-                                    float: right;
+                                    position: absolute;
+                                    right: 5px;
+                                    top: 8px;
+
                                     .ddmenu {
                                         .glyphicon {
                                             top: 2px;
