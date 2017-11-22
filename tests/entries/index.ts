@@ -10,3 +10,4 @@ export * from "../undoredoTests";
 export * from "../dragdroptests";
 export * from "../surveyObjectsTests"
 export * from "../surveylivetests";
+export * from "../questonconvertertests"
