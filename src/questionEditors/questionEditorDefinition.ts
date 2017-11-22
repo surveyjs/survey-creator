@@ -80,6 +80,10 @@ export class SurveyQuestionEditorDefinition {
         "panel": {
             properties: ["name", "title", {name: "visible", category: "checks"} ],
             tabs: [{name: "visibleIf", index: 100}]
+        },
+        "page": {
+            properties: ["name", "title", {name: "visible", category: "checks"} ],
+            tabs: [{name: "visibleIf", index: 100}]
         }
     }
     public static getProperties(className: string): Array<any> {
