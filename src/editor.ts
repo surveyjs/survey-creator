@@ -275,8 +275,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.questionEditorWindow.onCanShowPropertyCallback = function (object: any, property: Survey.JsonObjectProperty) {
             return self.onCanShowObjectProperty(object, property);
         }
-        this.pagesEditor = new SurveyPagesEditor(() => { self.addPage(); }, (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
-            (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); }, (page: Survey.Page) => { self.deleteCurrentObject(); });
+        this.pagesEditor = new SurveyPagesEditor(
+            () => { self.addPage(); }, 
+            (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
+            (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); },
+            (page: Survey.Page) => { self.deleteCurrentObject(); }
+        );
         this.surveyLive = new SurveyLiveTester();
         this.surveyEmbeding = new SurveyEmbedingWindow();
         this.toolboxValue = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null);
