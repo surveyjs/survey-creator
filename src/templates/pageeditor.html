@@ -7,8 +7,8 @@
            dragover:function(el, e){ $parent.dragOver(el);},
            dragend:function(el, e){ $parent.dragEnd();},
            drop:function(el, e){ $parent.dragDrop(el);}
-         }"> 
-            <a class="svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
+         }, click:$parent.selectPageClick"> 
+            <a class="svd_page_nav" href="#">
                 <span data-bind="text: title"></span>
             </a>
             <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: koSelected.call($parent)">

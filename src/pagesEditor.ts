@@ -5,6 +5,7 @@ import * as Survey from "survey-knockout";
 export declare type SurveyAddNewPageCallback = () => void;
 export declare type SurveySelectPageCallback = (page: Survey.Page) => void;
 export declare type SurveyMovePageCallback = (indexFrom: number, indexTo: number) => void;
+export declare type SurveyOnModifiedCallback = () => void;
 
 export class SurveyPagesEditor {
     surveyValue: Survey.Survey;
@@ -15,17 +16,20 @@ export class SurveyPagesEditor {
     onSelectPageCallback: SurveySelectPageCallback;
     onDeletePageCallback: SurveySelectPageCallback;
     onMovePageCallback: SurveyMovePageCallback;
+    onModifiedCallback: SurveyOnModifiedCallback;
     draggingPage: any = null;
     dragStart: any; dragOver: any; dragEnd: any; dragDrop: any; keyDown: any;
 
     constructor(onAddNewPageCallback: SurveyAddNewPageCallback = null, onSelectPageCallback: SurveySelectPageCallback = null,
-                onMovePageCallback: SurveyMovePageCallback = null, onDeletePageCallback: SurveySelectPageCallback = null) {
+                onMovePageCallback: SurveyMovePageCallback = null, onDeletePageCallback: SurveySelectPageCallback = null, 
+                onModifiedCallback: SurveyOnModifiedCallback = null) {
         this.koPages = ko.observableArray();
         this.koIsValid = ko.observable(false);
         this.onAddNewPageCallback = onAddNewPageCallback;
         this.onSelectPageCallback = onSelectPageCallback;
         this.onMovePageCallback = onMovePageCallback;
         this.onDeletePageCallback = onDeletePageCallback;
+        this.onModifiedCallback = onModifiedCallback;
         var self = this;
         this.selectPageClick = function(pageItem) {
             if (self.onSelectPageCallback) {
@@ -59,6 +63,8 @@ export class SurveyPagesEditor {
         var page = data.page;       
         this.surveyValue.removePage(page);
         this.removePage(page);
+        this.onModifiedCallback();
+        this.surveyValue.render();
     }
     public removePage(page: Survey.Page) {
         var index = this.getIndexByPage(page);

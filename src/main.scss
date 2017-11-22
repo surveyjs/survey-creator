@@ -232,6 +232,9 @@ $editor-height:75vh;
                             border-radius: 3px;
                             padding: 7px 10px 7px 12px;
                             margin-right: 2px;
+                            margin-bottom: 2px;
+                            min-width: 95px;
+                            cursor: pointer;
 
                             &.active {
                                 .svd_page_nav  {
@@ -245,6 +248,14 @@ $editor-height:75vh;
 
                             &:hover {
                                 background-color: #eee; 
+                            }
+
+                            &:last-child {
+                                min-width: 40px;
+                                border: none;
+                                &:hover {
+                                    background-color: transparent; 
+                                }
                             }
 
                             .svd_page_nav {
@@ -293,6 +304,10 @@ $editor-height:75vh;
                         padding: 0;
                         box-shadow: none;
                         background-color: transparent;
+
+                        &:focus {
+                            outline: none;
+                        }
 
                         &:hover {
                             background-color: transparent;

@@ -279,7 +279,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             () => { self.addPage(); }, 
             (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
             (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); },
-            (page: Survey.Page) => { self.deleteCurrentObject(); }
+            (page: Survey.Page) => { self.deleteCurrentObject(); },
+            () => { self.setModified(); }, 
         );
         this.surveyLive = new SurveyLiveTester();
         this.surveyEmbeding = new SurveyEmbedingWindow();
