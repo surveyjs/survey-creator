@@ -7,6 +7,7 @@ import {SurveyLiveTester} from "./surveylive";
 import {SurveyEmbedingWindow} from "./surveyEmbedingWindow";
 import {SurveyObjects} from "./surveyObjects";
 import {SurveyVerbs} from "./objectVerbs";
+import {QuestionConverter} from "./questionconverter";
 import {SurveyPropertyEditorShowWindow} from "./questionEditors/questionEditor";
 import {SurveyJSONEditor} from "./surveyJSONEditor";
 import {SurveyTextWorker} from "./textWorker"
@@ -768,6 +769,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                     self.addCustomToolboxQuestion(selObj);
                 } });
             options.items.push({name: "copy", text: self.getLocString("survey.copy"), onClick : function(selObj){ self.fastCopyQuestion(selObj);} });
+            var convertClasses = QuestionConverter.getConvertToClasses(options.obj.getType());
+            for(var i = 0; i < convertClasses.length; i ++) {
+                var className = convertClasses[i];
+                var text = this.getLocString("survey.convertTo") + " " + this.getLocString("qt." + className);
+                options.items.push({name: "convertTo" + className, text: text, className: className, onClick : function(selObj, item){  self.convertCurrentObject(selObj, item.className);} });
+            }
             var deleteLocaleName = options.obj.isPanel ? 'survey.deletePanel' : 'survey.deleteQuestion';
             options.items.push({name: "delete", text: self.getLocString(deleteLocaleName), onClick : function(selObj){ self.deleteCurrentObject();} });
             self.onDefineElementMenuItems.fire(self, options);
@@ -892,6 +899,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     private deleteCurrentObject() {
         this.deleteObject(this.koSelectedObject().value);
+    }
+    private convertCurrentObject(obj: Survey.QuestionBase, className: string) {
+        var newQuestion = QuestionConverter.convertObject(obj, className);
+        this.setModified();
     }
     /**
      * Show the Question Editor dialog.

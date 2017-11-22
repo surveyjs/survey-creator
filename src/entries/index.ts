@@ -37,7 +37,7 @@ export {SurveyTextWorker} from "../textWorker";
 export {ObjType, SurveyHelper} from "../surveyHelper";
 export {SurveyLiveTester} from "../surveylive";
 export {SurveyEmbedingWindow} from "../surveyEmbedingWindow";
-export {SurveyVerbs, SurveyVerbItem, SurveyVerbChangeTypeItem, SurveyVerbChangePageItem} from "../objectVerbs";
+export {SurveyVerbs, SurveyVerbItem, SurveyVerbChangePageItem} from "../objectVerbs";
 export {QuestionConverter} from "../questionconverter";
 export {SurveyUndoRedo, UndoRedoItem} from "../undoredo";
 export {SurveyForDesigner} from "../surveyjsObjects"

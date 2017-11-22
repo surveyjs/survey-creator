@@ -16,7 +16,7 @@ export class QuestionConverter {
         return res ? res : [];
     }
     public static convertObject(obj: Survey.QuestionBase, convertToClass: string): Survey.QuestionBase {
-        if (!obj || !obj.parent || convertToClass == obj.getType()) return;
+        if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
         var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
         var jsonObj = new Survey.JsonObject();
         var json = jsonObj.toJsonObject(obj);
@@ -25,6 +25,7 @@ export class QuestionConverter {
         var index = panel.elements.indexOf(obj);
         panel.removeElement(obj);
         panel.addElement(newQuestion, index);
+        return newQuestion;
     }
 }
 

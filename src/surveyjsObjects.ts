@@ -32,7 +32,7 @@ export class SurveyForDesigner extends Survey.Survey {
     }
     public get selectedElement(): any {return this.selectedElementValue;}
     public set selectedElement(value: any) {
-        if(value && value["selectedElementInDesign"]) value = value["selectedElementInDesign"];
+        if(value && value.selectedElementInDesign) value = value.selectedElementInDesign;
         if (value == this.selectedElementValue) return;
         var oldValue = this.selectedElementValue;
         this.selectedElementValue = value;
@@ -111,11 +111,12 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
 const question_design_class: string = "sv_qstn svd_question well well-sm svd_q_design_border";
 const panel_design_class: string = "sv_p_container svd_question well well-sm svd_q_design_border";
 
-function createQuestionDesignItem(obj: any, onClick: any, text: string): HTMLLIElement {
+function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
     var res = <HTMLLIElement>document.createElement("li");
     var btn = document.createElement("button");
-    btn.innerText = text;
-    btn.onclick = function() { onClick(obj); }
+    btn.innerText = item.text;
+    var onClick = item.onClick;
+    btn.onclick = function() { onClick(obj, item); }
     btn.className = "btn btn-primary btn-xs";
     res.appendChild(btn);
     return res;
@@ -138,7 +139,7 @@ function createElementAddons(obj: Survey.Base, data: any, isPanel: boolean): HTM
     var nodes = [];
     var menuItems = data.getMenuItems(obj);
     for(var i = 0; i < menuItems.length; i ++) {
-        nodes.push(createQuestionDesignItem(obj, menuItems[i].onClick, menuItems[i].text));
+        nodes.push(createQuestionDesignItem(obj, menuItems[i]));
     }
     var ddmenu = createDdmenu(nodes, "element-addons")
 
@@ -181,7 +182,9 @@ function elementOnAfterRendering(el: any, self: any, className: string, isPanel:
     el.onclick = function(e) { 
         if(!e["markEvent"]) {
             e["markEvent"] = true;
-            getSurvey(self)["selectedElement"] = self; 
+            if(self.parent) {
+                getSurvey(self)["selectedElement"] = self; 
+            }
         }
     };
     el.onkeydown = function(e) {
@@ -195,7 +198,7 @@ function elementOnAfterRendering(el: any, self: any, className: string, isPanel:
             if(childs[i].style) childs[i].style.pointerEvents = "none";
         }
     }
-    if(!self["selectedElementInDesign"] || self["selectedElementInDesign"] === self) {
+    if(!self.selectedElementInDesign || self.selectedElementInDesign === self) {
         self.addonsElement = createElementAddons(self, getSurvey(self), isPanel);
         self.addonsElement.style.display = self.koIsSelected() ? "": "none";    
         el.appendChild(self.addonsElement);
