@@ -13,3 +13,21 @@ QUnit.test("get converted classes", function (assert) {
     assert.equal(classes[0], "comment", "it is comment");
 });
 
+QUnit.test("Convert question", function (assert) {
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage();
+    var panel = page.addNewPanel();
+    var q1 = <Survey.QuestionRadiogroup>page.addNewQuestion("radiogroup");
+    var q2 = <Survey.QuestionComment>panel.addNewQuestion("comment");
+    q1.choices = ["myitem1", "myitem2"];
+    q2.placeHolder = "type here";
+    QuestionConverter.convertObject(q1, "checkbox");
+    QuestionConverter.convertObject(q2, "text");
+    assert.equal((<Survey.Base><any>page.elements[1]).getType(), "checkbox", "converted to checkbox");
+    assert.equal((<Survey.Base><any>panel.elements[0]).getType(), "text", "converted to text");
+    var newQ1 = <Survey.QuestionCheckbox>page.elements[1];
+    var newQ2 = <Survey.QuestionText>panel.elements[0];
+    assert.equal(newQ1.choices.length, 2, "The choices converted correct - length");
+    assert.equal(newQ1.choices[0].value, "myitem1", "The choices converted correct - value");
+    assert.equal(newQ2.placeHolder, "type here", "The placeHolder converted correct");
+});

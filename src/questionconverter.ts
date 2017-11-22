@@ -16,12 +16,12 @@ export class QuestionConverter {
         return res ? res : [];
     }
     public static convertObject(obj: Survey.QuestionBase, convertToClass: string): Survey.QuestionBase {
-        if (!obj || obj["parent"] || convertToClass == obj.getType()) return;
+        if (!obj || !obj.parent || convertToClass == obj.getType()) return;
         var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
         var jsonObj = new Survey.JsonObject();
-        var json = jsonObj.toJsonObject(convertToClass);
+        var json = jsonObj.toJsonObject(obj);
         jsonObj.toObject(json, newQuestion);
-        var panel = <Survey.PanelModelBase>obj["parent"];
+        var panel = <Survey.PanelModelBase>obj.parent;
         var index = panel.elements.indexOf(obj);
         panel.removeElement(obj);
         panel.addElement(newQuestion, index);
