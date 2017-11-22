@@ -115,7 +115,7 @@ export class SurveyPagesEditor {
             this.setSelectedPage(page);
         }
     }
-    protected updatePages() {
+    public updatePages() {
         if (this.surveyValue == null) {
             this.koPages([]);
             return;

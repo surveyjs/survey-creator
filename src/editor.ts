@@ -906,6 +906,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private onQuestionEditorChanged(question: Survey.QuestionBase) {
         this.surveyObjects.nameChanged(question);
         this.selectedObjectEditorValue.objectChanged();
+        this.pagesEditor.updatePages();
+        this.pagesEditor.setSelectedPage(<any>question);
         this.setModified();
         this.survey.render();
     }
