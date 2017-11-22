@@ -11,6 +11,25 @@
             <a class="svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
                 <span data-bind="text: title"></span>
             </a>
+            <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: koSelected.call($parent)">
+                <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+        
+                <div class="ddmenu">
+                    <span tabindex="0">
+                        <span class="glyphicon glyphicon-option-horizontal"></span>
+                    </span>
+
+                    <div tabindex="0" onclick="return true"></div>
+                    <ul>
+                        <li>
+                            <button class="btn btn-primary btn-xs" data-bind="click: $parent.addNewPageClick.bind($parent), text: $root.getLocString('ed.editPage')"></button>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-xs" data-bind="click: $parent.addNewPageClick.bind($parent), text: $root.getLocString('ed.deletePage')"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </li>
         <!-- /ko  -->
         <li><button class="btn btn-default svd_add_new_page_btn" data-bind="click:addNewPageClick, attr: {title:  $root.getLocString('ed.addNewPage')}" ><span class="glyphicon glyphicon-plus"></span></button></li>

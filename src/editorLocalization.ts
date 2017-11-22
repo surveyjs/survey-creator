@@ -97,6 +97,8 @@ export var defaultStrings = {
     ed: {
         survey: "Survey",
         addNewPage: "Add New Page",
+        deletePage: "Delete Page",
+        editPage: "Edit Page",
         newPageName: "page",
         newQuestionName: "question",
         newPanelName: "panel",
