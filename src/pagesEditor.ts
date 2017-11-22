@@ -55,6 +55,11 @@ export class SurveyPagesEditor {
             this.onAddNewPageCallback();
         }
     }
+    public deletePageClick(data: any) {
+        var page = data.page;       
+        this.surveyValue.removePage(page);
+        this.removePage(page);
+    }
     public removePage(page: Survey.Page) {
         var index = this.getIndexByPage(page);
         if (index > -1) {
