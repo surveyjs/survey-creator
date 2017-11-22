@@ -72,7 +72,8 @@ export var defaultStrings = {
         copy: "Copy",
         addToToolbox: "Add to toolbox",
         deletePanel: "Delete Panel",
-        deleteQuestion: "Delete Question"
+        deleteQuestion: "Delete Question",
+        convertTo: "Convert to"
     },
     //questionTypes
     qt: {
