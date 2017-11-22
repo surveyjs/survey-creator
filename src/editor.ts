@@ -281,7 +281,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
             (page: Survey.Page) => { self.surveyObjects.selectObject(page); },
             (indexFrom: number, indexTo: number) => { self.movePage(indexFrom, indexTo); },
             (page: Survey.Page) => { self.deleteCurrentObject(); },
-            () => { self.setModified(); }, 
+            () => { self.setModified(); },
+            (page: Survey.QuestionBase) => { self.showQuestionEditor(page); }
         );
         this.surveyLive = new SurveyLiveTester();
         this.surveyEmbeding = new SurveyEmbedingWindow();
@@ -916,6 +917,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     private onQuestionEditorChanged(question: Survey.QuestionBase) {
         this.surveyObjects.nameChanged(question);
         this.selectedObjectEditorValue.objectChanged();
+        this.pagesEditor.updatePages();
+        this.pagesEditor.setSelectedPage(<any>question);
         this.setModified();
         this.survey.render();
     }
