@@ -257,6 +257,10 @@ export var defaultStrings = {
         titleHtml: "HTML",
         titleJavaScript: "JavaScript"
     },
+    //Test Survey 
+    ts: {
+        selectPage: "Select the page to test it:"
+    },
     validators: {
         answercountvalidator: "answer count",
         emailvalidator: "e-mail",

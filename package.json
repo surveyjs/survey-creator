@@ -15,7 +15,7 @@
     "jquery": "^2.1.0",
     "knockout": "^3.4.0",
     "rmodal": "^1.0.28",
-    "survey-knockout": "^0.12.34"
+    "survey-knockout": "^0.96.1"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
