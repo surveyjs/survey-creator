@@ -88,6 +88,9 @@ export class SurveyPagesEditor {
             this.koPages()[index].title(SurveyHelper.getObjectName(page));
         }
     }
+    public isLastPage() {
+        return this.koPages().length === 1;
+    }
     protected getIndexByPage(page: Survey.Page): number {
         var pages = this.koPages();
         for (var i = 0; i < pages.length; i++) {

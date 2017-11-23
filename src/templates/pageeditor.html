@@ -25,7 +25,7 @@
                             <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.showQuestionEditor.bind($parent), text: $root.getLocString('ed.editPage')"></button>
                         </li>
                         <li>
-                            <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.deletePageClick.bind($parent), text: $root.getLocString('ed.deletePage')"></button>
+                            <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.deletePageClick.bind($parent), text: $root.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
                         </li>
                     </ul>
                 </div>
