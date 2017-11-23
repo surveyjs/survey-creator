@@ -334,9 +334,13 @@ $editor-height:75vh;
                     border: none;
                     border-bottom: 1px solid $light-border-color;
 
-                    .custom-select {
+                    .svd_custom_select {
                         display: inline-block;
                         width: 100%;
+
+                        &>select {
+                            width: 100%;
+                        }
                     }
 
                     .btn {
