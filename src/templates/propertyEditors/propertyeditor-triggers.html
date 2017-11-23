@@ -11,7 +11,7 @@
                         <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
                 
                         <div class="ddmenu">
-                             <span class="btn btn-default" tabindex="0">
+                             <span class="btn btn-default" tabindex="0" data-bind="attr: { title: $root.getLocString('pe.addNew') }">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </span>
 
@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-                <span class="input-group-btn" data-bind="visible: koAllowAddRemoveItems">
-                    <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <span class="input-group-btn" data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }">
+                    <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
                 </span>
             </div>
         </div>

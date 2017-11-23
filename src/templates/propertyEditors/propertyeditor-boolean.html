@@ -1,6 +1,6 @@
 ﻿<script type="text/html" id="propertyeditor-boolean">
     <!-- ko if: showDisplayName -->
-    <label class="checkbox-inline"><input type="checkbox" data-bind="checked: koValue, disable: readOnly"><span data-bind="text:displayName"></span></label>
+    <label class="checkbox-inline form-check-label"><input type="checkbox" data-bind="checked: koValue, disable: readOnly"><span data-bind="text: displayName"></span></label>
     <!-- /ko -->
     <!-- ko if: !showDisplayName -->
     <input class="form-control" type="checkbox" data-bind="checked: koValue, disable: readOnly" />

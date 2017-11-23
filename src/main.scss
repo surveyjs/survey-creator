@@ -71,8 +71,9 @@ $editor-height:75vh;
         }
     }
 
-    a {
+    a, a.nav-link {
         color: $main-color;
+        cursor: pointer;
     }
 
     .btn.btn-primary {
@@ -110,6 +111,7 @@ $editor-height:75vh;
         background-color: $dark-bg-color;
         padding: 30px;
         margin: 0;
+        border: none;
 
         .svd_survey_designer {
             .svd_toolbar {
@@ -119,7 +121,7 @@ $editor-height:75vh;
                 padding: 0;
 
                 .ddmenu-container {
-                    &.toolbar-options{
+                    &.toolbar-options {
                     
                         ul {
                             background: white;
@@ -181,7 +183,7 @@ $editor-height:75vh;
                     padding-bottom: 10px;
                 }
 
-                .panel-heading {
+                .panel-heading, .card-header {
                     background-color: $dark-bg-color;
                     color: $text-color;
                     border: none;
@@ -265,11 +267,13 @@ $editor-height:75vh;
                     height: $editor-height;
                     overflow-y: scroll;
 
-                    .panel-body {
+                    .panel-body, .card-block {
                         .svd_question {
                             box-shadow: none;
                             border-radius: 0;
                             padding: 20px 9px;
+                            background-color: #f5f5f5;
+                            margin-bottom: 20px;
 
                             .svd_question_menu {
                                 position: absolute;
@@ -302,7 +306,6 @@ $editor-height:75vh;
                                
                                 .glyphicon-option-horizontal {
                                     color: $main-color;
-                                    font-size: 20px
                                 }
                             }
                         }
@@ -326,7 +329,7 @@ $editor-height:75vh;
                 border-radius: 0;
                 padding: 0;
 
-                .panel-heading {
+                .panel-heading, .card-header {
                     background-color: #fff;
                     border: none;
                     border-bottom: 1px solid $light-border-color;
@@ -387,15 +390,44 @@ $editor-height:75vh;
         }
 
         .svd_json_editor {
-            height:450px;
+            height: 450px;
         }
         .svd_json_editor_area {
-            height:450px;
-            width:100%;
+            height: 450px;
+            width: 100%;
+        }
+    }
+
+    .glyphicon {
+        font-weight: bold;
+        display: inline-block;
+        font-family: inherit;
+        cursor: pointer;
+
+        &.glyphicon-plus::before {
+            font-size: 20px;
+            content: '+';
+        }
+        &.glyphicon-option-horizontal::before {
+            font-size: 20px;
+            content: '⋯';
+        }
+        &.glyphicon-remove::before {
+            font-size: 20px;
+            content: '✖';
+        }
+        &.glyphicon-edit::before {
+            content: '';
+        }
+        &.glyphicon-trash::before {
+            font-size: 1.25em;
+            content: '🗑';
+        }
+        &.glyphicon-list-alt::before {
+            content: '⇐'; // '🗸'
         }
     }
 }
-
 
 .svd_container {
     [draggable] {
@@ -750,16 +782,20 @@ $editor-height:75vh;
       transform: none;
     }
   }
-  
-  .fadeInDown {
+
+.fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
-  }
+}
 
 .modal {
     display: none;
     background: rgba(0, 0, 0, .30);
     z-index: 999;
+
+    .modal-dialog {
+        max-width: 600px;
+    }
 }
 
 .modal-open {

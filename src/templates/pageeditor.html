@@ -1,14 +1,14 @@
 ﻿<script type="text/html" id="pageeditor">
     <ul class="nav nav-tabs" data-bind="tabs:true">
         <!-- ko foreach: koPages -->
-        <li data-bind="css: {active: koSelected()},event:{
+        <li data-bind="css: { active: koSelected() }, event:{
            keydown:function(el, e){ $parent.keyDown(el, e); },
            dragstart:function(el, e){ $parent.dragStart(el); return true; },
            dragover:function(el, e){ $parent.dragOver(el);},
            dragend:function(el, e){ $parent.dragEnd();},
            drop:function(el, e){ $parent.dragDrop(el);}
          }"> 
-            <a class="svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
+            <a class="nav-link svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
                 <span data-bind="text: title"></span>
             </a>
         </li>

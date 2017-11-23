@@ -15,27 +15,27 @@
             <option value="page" data-bind="text: $root.getLocString('ew.showOnPage')"></option>
             <option value="window" data-bind="text: $root.getLocString('ew.showInWindow')"></option>
         </select>
-        <label class="checkbox-inline" data-bind="visible:koHasIds">
+        <label class="checkbox-inline form-check-label" data-bind="visible:koHasIds">
             <input type="checkbox" data-bind="checked:koLoadSurvey" />
             <span data-bind="text: $root.getLocString('ew.loadFromServer')"></span>
         </label>
     </div>
-    <div class="panel">
-        <div class="panel-heading" data-bind="text: $root.getLocString('ew.titleScript')"></div>
+    <div class="panel card">
+        <div class="panel-heading card-header" data-bind="text: $root.getLocString('ew.titleScript')"></div>
         <div data-bind="visible:hasAceEditor">
             <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
         </div>
         <textarea data-bind="visible:!hasAceEditor, text: koHeadText" style="height:70px;width:100%"></textarea>
     </div>
-    <div class="panel" data-bind="visible: koVisibleHtml">
-        <div class="panel-heading"  data-bind="text: $root.getLocString('ew.titleHtml')"></div>
+    <div class="panel card" data-bind="visible: koVisibleHtml">
+        <div class="panel-heading card-header"  data-bind="text: $root.getLocString('ew.titleHtml')"></div>
         <div data-bind="visible:hasAceEditor">
             <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
         </div>
         <textarea data-bind="visible:!hasAceEditor, text: koBodyText" style="height:30px;width:100%"></textarea>
     </div>
-    <div class="panel">
-        <div class="panel-heading"  data-bind="text: $root.getLocString('ew.titleJavaScript')"></div>
+    <div class="panel card">
+        <div class="panel-heading card-header"  data-bind="text: $root.getLocString('ew.titleJavaScript')"></div>
         <div data-bind="visible:hasAceEditor">
             <div id="surveyEmbedingJava" style="height:300px;width:100%"></div>
         </div>

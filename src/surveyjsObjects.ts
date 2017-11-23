@@ -97,7 +97,7 @@ function elementOnCreating(self: any, className: string) {
 
 function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any): HTMLElement {
     var eDiv: HTMLDivElement = document.createElement("div");
-    eDiv.className = "well";
+    eDiv.className = "well card card-block";
     eDiv.ondragover = function(e) { 
         dragDropHelper.doDragDropOver(e, self);
     };
@@ -108,15 +108,15 @@ function addEmptyPanelElement(root: HTMLElement, dragDropHelper: any, self: any)
     return eDiv;
 }
 
-const question_design_class: string = "sv_qstn svd_question well well-sm svd_q_design_border";
-const panel_design_class: string = "sv_p_container svd_question well well-sm svd_q_design_border";
+const question_design_class: string = "sv_qstn svd_question well well-sm card card-block svd_q_design_border";
+const panel_design_class: string = "sv_p_container svd_question well well-sm card card-block svd_q_design_border";
 
 function createQuestionDesignItem(obj: any, onClick: any, text: string): HTMLLIElement {
     var res = <HTMLLIElement>document.createElement("li");
     var btn = document.createElement("button");
     btn.innerText = text;
     btn.onclick = function() { onClick(obj); }
-    btn.className = "btn btn-primary btn-xs";
+    btn.className = "btn btn-primary btn-sm btn-xs";
     res.appendChild(btn);
     return res;
 }
@@ -127,7 +127,7 @@ function createElementAddons(obj: Survey.Base, data: any, isPanel: boolean): HTM
     main["role"] = "group";
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "btn btn-primary  btn-xs";
+    btn.className = "btn btn-primary btn-sm btn-xs";
     btn.onclick = function(e) { data.editQuestionClick();};
     var span = document.createElement("span");
     span.innerText = data.getEditorLocString('survey.edit');
