@@ -230,13 +230,14 @@ $editor-height:75vh;
                         border: none;
 
                         > li {
+                            position: relative;
+                            margin-right: 2px;
+                            margin-bottom: 2px;
                             border: 1px solid $dark-border-color;
                             border-radius: 3px;
                             padding: 7px 22px 7px 12px;
-                            margin-right: 2px;
-                            margin-bottom: 2px;
                             cursor: pointer;
-
+                            
                             &.active {
                                 .svd_page_nav  {
                                     color: $main-color;
