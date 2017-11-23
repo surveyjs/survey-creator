@@ -490,6 +490,12 @@ $editor-height:75vh;
         &.glyphicon-list-alt::before {
             content: '⇐'; // '🗸'
         }
+        &.glyphicon-arrow-down::before {
+            content: '↓';
+        }
+        &.glyphicon-arrow-up::before {
+            content: '↑';
+        }
     }
 }
 
