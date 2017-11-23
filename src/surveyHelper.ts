@@ -52,16 +52,14 @@ export class SurveyHelper {
         if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property)) return false;
         return true;
     }
-    public static scrollIntoViewIfNeeded(el: HTMLElement, page: Survey.PageModel) {
-        if(!el || !el.scrollIntoView || !page) return;
-        var pEl = document.getElementById(page.id);
-        if(!pEl) return;
+    public static scrollIntoViewIfNeeded(el: HTMLElement, pageEl: HTMLElement) {
+        if(!el || !el.scrollIntoView || !pageEl) return;
         var rect = el.getBoundingClientRect();
-        var height = pEl.offsetParent ? pEl.offsetParent.clientHeight :  pEl.clientHeight;
+        var height = pageEl.offsetParent ? pageEl.offsetParent.clientHeight :  pageEl.clientHeight;
         if (rect.bottom > height) {
             el.scrollIntoView(false);
         } else {
-            if (rect.top < pEl.offsetTop) {
+            if (rect.top < pageEl.offsetTop) {
                 el.scrollIntoView();
             } 
         }

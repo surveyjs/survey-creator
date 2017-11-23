@@ -37,9 +37,6 @@ export class SurveyVerbs {
             if (this.survey.pages.length > 1 && this.survey.getPageByQuestion(question)) {
                 array.push(new SurveyVerbChangePageItem(this.survey, question, this.onModifiedCallback));
             }
-            if (this.choicesClasses.indexOf(question.getType()) > -1) {
-                array.push(new SurveyVerbChangeTypeItem(this.survey, question, this.onModifiedCallback));
-            }
         }
         this.koVerbs(array);
         this.koHasVerbs(array.length > 0);
@@ -53,33 +50,6 @@ export class SurveyVerbItem {
         this.koSelectedItem = ko.observable();
     }
     public get text(): string { return ""; }
-}
-export class SurveyVerbChangeTypeItem extends SurveyVerbItem {
-    constructor(public survey: Survey.Survey, public question: Survey.QuestionBase, public onModifiedCallback: () => any) {
-        super(survey, question, onModifiedCallback);
-        var classes = Survey.JsonObject.metaData.getChildrenClasses("selectbase", true);
-        var array = [];
-        for (var i = 0; i < classes.length; i++) {
-            array.push({ value: classes[i].name, text: editorLocalization.getString("qt." + classes[i].name) });
-        }
-        this.koItems(array);
-        this.koSelectedItem(question.getType());
-        var self = this;
-        this.koSelectedItem.subscribe(function (newValue) { self.changeType(newValue); });
-    }
-    public get text(): string { return editorLocalization.getString("pe.verbChangeType"); }
-    private changeType(questionType: string) {
-        if (questionType == this.question.getType()) return;
-        var page = this.survey.getPageByQuestion(this.question);
-        var index = page.questions.indexOf(this.question);
-        var newQuestion = Survey.QuestionFactory.Instance.createQuestion(questionType, this.question.name);
-        var jsonObj = new Survey.JsonObject();
-        var json = jsonObj.toJsonObject(this.question);
-        jsonObj.toObject(json, newQuestion);
-        page.removeQuestion(this.question);
-        page.addQuestion(newQuestion, index);
-        if (this.onModifiedCallback) this.onModifiedCallback();
-    }
 }
 export class SurveyVerbChangePageItem extends SurveyVerbItem {
     private prevPage: Survey.Page;

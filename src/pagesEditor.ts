@@ -1,31 +1,39 @@
 ﻿import * as ko from "knockout";
 import {SurveyHelper} from "./surveyHelper";
 import * as Survey from "survey-knockout";
+import {SurveyPropertyEditorShowWindow} from "./questionEditors/questionEditor";
 
-export declare type SurveyAddNewPageCallback = () => void;
-export declare type SurveySelectPageCallback = (page: Survey.Page) => void;
+export declare type SurveyVoidCallback = () => void;
+export declare type SurveyPageParamCallback = (page: Survey.Page) => void;
 export declare type SurveyMovePageCallback = (indexFrom: number, indexTo: number) => void;
+export declare type SurveyQuestionParamCallback = (page: Survey.QuestionBase) => void; 
 
 export class SurveyPagesEditor {
     surveyValue: Survey.Survey;
     koPages: any;
     koIsValid: any;
     selectPageClick: any;
-    onAddNewPageCallback: SurveyAddNewPageCallback;
-    onSelectPageCallback: SurveySelectPageCallback;
-    onDeletePageCallback: SurveySelectPageCallback;
+    onAddNewPageCallback: SurveyVoidCallback;
+    onSelectPageCallback: SurveyPageParamCallback;
+    onDeletePageCallback: SurveyPageParamCallback;
     onMovePageCallback: SurveyMovePageCallback;
+    onModifiedCallback: SurveyVoidCallback;
+    onShowPageEditDialog: SurveyQuestionParamCallback 
     draggingPage: any = null;
     dragStart: any; dragOver: any; dragEnd: any; dragDrop: any; keyDown: any;
+    questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-    constructor(onAddNewPageCallback: SurveyAddNewPageCallback = null, onSelectPageCallback: SurveySelectPageCallback = null,
-                onMovePageCallback: SurveyMovePageCallback = null, onDeletePageCallback: SurveySelectPageCallback = null) {
+    constructor(onAddNewPageCallback: SurveyVoidCallback = null, onSelectPageCallback: SurveyPageParamCallback = null,
+                onMovePageCallback: SurveyMovePageCallback = null, onDeletePageCallback: SurveyPageParamCallback = null, 
+                onModifiedCallback: SurveyVoidCallback = null, onShowPageEditDialog: SurveyQuestionParamCallback = null) {
         this.koPages = ko.observableArray();
         this.koIsValid = ko.observable(false);
         this.onAddNewPageCallback = onAddNewPageCallback;
         this.onSelectPageCallback = onSelectPageCallback;
         this.onMovePageCallback = onMovePageCallback;
         this.onDeletePageCallback = onDeletePageCallback;
+        this.onModifiedCallback = onModifiedCallback;
+        this.onShowPageEditDialog = onShowPageEditDialog;
         var self = this;
         this.selectPageClick = function(pageItem) {
             if (self.onSelectPageCallback) {
@@ -37,6 +45,7 @@ export class SurveyPagesEditor {
         this.dragOver = function (el: any) {  };
         this.dragEnd = function () { self.draggingPage = null; };
         this.dragDrop = function (el: any) { self.moveDraggingPageTo(el); };
+        this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     }
     public get survey(): Survey.Survey { return this.surveyValue; }
     public set survey(value: Survey.Survey) {
@@ -54,6 +63,18 @@ export class SurveyPagesEditor {
         if (this.onAddNewPageCallback) {
             this.onAddNewPageCallback();
         }
+    }
+    public showQuestionEditor(data: any) {
+        var page = data.page;
+
+        this.onShowPageEditDialog(page);
+    }
+    public deletePageClick(data: any) {
+        var page = data.page;       
+        this.surveyValue.removePage(page);
+        this.removePage(page);
+        this.onModifiedCallback();
+        this.surveyValue.render();
     }
     public removePage(page: Survey.Page) {
         var index = this.getIndexByPage(page);
@@ -94,7 +115,7 @@ export class SurveyPagesEditor {
             this.setSelectedPage(page);
         }
     }
-    protected updatePages() {
+    public updatePages() {
         if (this.surveyValue == null) {
             this.koPages([]);
             return;

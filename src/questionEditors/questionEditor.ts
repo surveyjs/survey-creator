@@ -17,14 +17,14 @@ export class SurveyPropertyEditorShowWindow {
         this.koVisible = ko.observable(false);
         this.koEditor = ko.observable(null);
     }
-    public show(questionBase: Survey.QuestionBase, onChanged: (question: Survey.QuestionBase) => any, options: ISurveyObjectEditorOptions = null) {
+    public show(questionBase: Survey.QuestionBase, elWindow: HTMLElement, onChanged: (question: Survey.QuestionBase) => any, options: ISurveyObjectEditorOptions = null) {
         var editor = new SurveyQuestionEditor(questionBase, this.onCanShowPropertyCallback, null, options);
         editor.onChanged = onChanged;
 
         this.koEditor(editor);
         this.koVisible(true);
 
-        var modal = new RModal(document.getElementById('surveyquestioneditorwindow'), {
+        var modal = new RModal(elWindow, {
             closeTimeout: 100,
             dialogOpenClass: 'animated fadeIn',
             focus: false

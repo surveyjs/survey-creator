@@ -229,17 +229,76 @@ $editor-height:75vh;
                     .nav-tabs {
                         border: none;
 
-                        li {
-                            &.active .svd_page_nav  {
-                                border: 1px solid $dark-border-color;
-                                color: $main-color;
+                        > li {
+                            border: 1px solid $dark-border-color;
+                            border-radius: 3px;
+                            padding: 7px 22px 7px 12px;
+                            margin-right: 2px;
+                            margin-bottom: 2px;
+                            cursor: pointer;
+
+                            &.active {
+                                .svd_page_nav  {
+                                    color: $main-color;
+                                }
+
+                                &:hover {
+                                    background-color: transparent;
+                                }
+                            }
+
+                            &:hover {
+                                background-color: #eee; 
+                            }
+
+                            &:last-child {
+                                border: none;
+                                &:hover {
+                                    background-color: transparent; 
+                                }
                             }
 
                             .svd_page_nav {
-                                border: 1px solid $light-border-color;
-                                border-radius: 3px;
-                                padding: 7px 10px 7px 12px;
+                                display: inline-block;
+                                border: none;
+                                padding: 0;
+                                margin-bottom: 1px;
+                                color: #676a6c;
+                                background-color: transparent;
+                            }
 
+                            .ddmenu-container {
+                                &.page-nav {
+                                    position: absolute;
+                                    right: 5px;
+                                    top: 8px;
+
+                                    .ddmenu {
+                                        .glyphicon {
+                                            top: 2px;
+                                        }
+                                    }
+                                    ul {
+                                        background: white;
+                                        border: 1px solid #ccc;
+                                        border-radius: 4px;
+                                        padding: 0;
+                                        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                                        min-width: 160px;
+                                        right: -6px;
+                                        margin-top: 7px;
+                                        border-top-left-radius: 0;
+                                        border-top-right-radius: 0;
+                                
+                                        li {
+                                            margin: 5px;
+                                
+                                            button {
+                                                width: 100%;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -247,9 +306,12 @@ $editor-height:75vh;
                     .svd_add_new_page_btn {
                         border: none;
                         padding: 0;
-                        margin: 5px;
                         box-shadow: none;
                         background-color: transparent;
+
+                        &:focus {
+                            outline: none;
+                        }
 
                         &:hover {
                             background-color: transparent;
@@ -257,7 +319,6 @@ $editor-height:75vh;
 
                         .glyphicon-plus {
                             color: $text-color;
-                            margin-top: 3px;
                         }
                     }
                 }
