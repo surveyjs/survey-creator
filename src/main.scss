@@ -241,6 +241,7 @@ $editor-height:75vh;
                             &.active {
                                 .svd_page_nav  {
                                     color: $main-color;
+                                    margin-right: 2px;
                                 }
 
                                 &:hover {
@@ -274,11 +275,6 @@ $editor-height:75vh;
                                     right: 5px;
                                     top: 8px;
 
-                                    .ddmenu {
-                                        .glyphicon {
-                                            top: 2px;
-                                        }
-                                    }
                                     ul {
                                         background: white;
                                         border: 1px solid #ccc;
@@ -469,9 +465,11 @@ $editor-height:75vh;
         display: inline-block;
         font-family: inherit;
         cursor: pointer;
+        line-height: 1em;
 
         &.glyphicon-plus::before {
             font-size: 20px;
+            line-height: 20px;
             content: '+';
         }
         &.glyphicon-option-horizontal::before {
