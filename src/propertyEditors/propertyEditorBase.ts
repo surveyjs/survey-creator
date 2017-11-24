@@ -1,152 +1,152 @@
-import * as ko from 'knockout'
-import * as Survey from 'survey-knockout'
-import { editorLocalization } from '../editorLocalization'
-import { setTimeout } from 'timers'
+import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+import { editorLocalization } from "../editorLocalization";
+import { setTimeout } from "timers";
 
 export interface ISurveyObjectEditorOptions {
-  alwaySaveTextInPropertyEditors: boolean
-  showApplyButtonInEditors: boolean
-  onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue)
-  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn)
+  alwaySaveTextInPropertyEditors: boolean;
+  showApplyButtonInEditors: boolean;
+  onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
+  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Survey.Base,
     editorOptions: any
-  )
+  );
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Survey.Base,
     value: any
-  ): string
-  onValueChangingCallback(options: any)
+  ): string;
+  onValueChangingCallback(options: any);
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
-  )
+  );
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
-  private editingValue_: any = null
-  private isApplyinNewValue: boolean = false
-  private objectValue: any
-  private isValueUpdating: boolean
-  private optionsValue: ISurveyObjectEditorOptions = null
-  private property_: Survey.JsonObjectProperty
-  private isRequriedValue: boolean = false
-  private titleValue: string
-  private isCustomDisplayName: boolean = false
-  private displayNameValue: string
-  private rootElement: any
-  private elements: any[] = []
-  public koValue: any
-  public koText: any
-  public koIsDefault: any
-  public koHasError: any
-  public koErrorText: any
-  public showDisplayName: boolean = false
-  public onChanged: (newValue: any) => any
-  public onGetLocale: () => string
+  private editingValue_: any = null;
+  private isApplyinNewValue: boolean = false;
+  private objectValue: any;
+  private isValueUpdating: boolean;
+  private optionsValue: ISurveyObjectEditorOptions = null;
+  private property_: Survey.JsonObjectProperty;
+  private isRequriedValue: boolean = false;
+  private titleValue: string;
+  private isCustomDisplayName: boolean = false;
+  private displayNameValue: string;
+  private rootElement: any;
+  private elements: any[] = [];
+  public koValue: any;
+  public koText: any;
+  public koIsDefault: any;
+  public koHasError: any;
+  public koErrorText: any;
+  public showDisplayName: boolean = false;
+  public onChanged: (newValue: any) => any;
+  public onGetLocale: () => string;
   constructor(property: Survey.JsonObjectProperty) {
-    this.property_ = property
-    var self = this
-    this.koValue = ko.observable()
+    this.property_ = property;
+    var self = this;
+    this.koValue = ko.observable();
     this.koValue.subscribe(function(newValue) {
-      self.onkoValueChanged(newValue)
-    })
+      self.onkoValueChanged(newValue);
+    });
     this.koText = ko.computed(() => {
-      return self.getValueText(self.koValue())
-    })
+      return self.getValueText(self.koValue());
+    });
     this.koIsDefault = ko.computed(function() {
       return self.property
         ? self.property.isDefaultValue(self.koValue())
-        : false
-    })
-    this.koHasError = ko.observable(false)
-    this.koErrorText = ko.observable('')
-    this.setIsRequired()
-    this.setTitleAndDisplayName()
+        : false;
+    });
+    this.koHasError = ko.observable(false);
+    this.koErrorText = ko.observable("");
+    this.setIsRequired();
+    this.setTitleAndDisplayName();
   }
   public get editorType(): string {
-    throw 'editorType is not defined'
+    throw "editorType is not defined";
   }
   public get property(): Survey.JsonObjectProperty {
-    return this.property_
+    return this.property_;
   }
   public get editablePropertyName(): string {
-    return this.property ? this.property.name : ''
+    return this.property ? this.property.name : "";
   }
   public get readOnly() {
-    return this.property ? this.property.readOnly : false
+    return this.property ? this.property.readOnly : false;
   }
   public get alwaysShowEditor(): boolean {
-    return false
+    return false;
   }
   public get title(): string {
-    return this.titleValue
+    return this.titleValue;
   }
   public get displayName(): string {
-    return this.displayNameValue
+    return this.displayNameValue;
   }
   public set displayName(val: string) {
-    this.isCustomDisplayName = true
-    this.displayNameValue = val
+    this.isCustomDisplayName = true;
+    this.displayNameValue = val;
   }
   public get showDisplayNameOnTop(): boolean {
-    return this.showDisplayName && this.canShowDisplayNameOnTop
+    return this.showDisplayName && this.canShowDisplayNameOnTop;
   }
   public get canShowDisplayNameOnTop(): boolean {
-    return true
+    return true;
   }
   public get contentTemplateName(): string {
-    var res = 'propertyeditor'
-    if (this.isModal) res += 'content'
-    return res + '-' + this.editorType
+    var res = "propertyeditor";
+    if (this.isModal) res += "content";
+    return res + "-" + this.editorType;
   }
   public get isModal(): boolean {
-    return false
+    return false;
   }
 
   public get object(): any {
-    return this.objectValue
+    return this.objectValue;
   }
   public set object(value: any) {
-    this.objectValue = value
-    this.setIsRequired()
-    this.setTitleAndDisplayName()
-    this.setObject(this.object)
-    this.updateValue()
+    this.objectValue = value;
+    this.setIsRequired();
+    this.setTitleAndDisplayName();
+    this.setObject(this.object);
+    this.updateValue();
     if (this.options && this.property) {
       this.options.onPropertyEditorObjectSetCallback(
         this.property.name,
         this.object,
         this
-      )
+      );
     }
   }
 
   public getValueText(value: any): string {
-    return value
+    return value;
   }
   public get editingValue(): any {
-    return this.editingValue_
+    return this.editingValue_;
   }
   public set editingValue(value: any) {
-    value = this.getCorrectedValue(value)
-    this.setValueCore(value)
-    this.onValueChanged()
+    value = this.getCorrectedValue(value);
+    this.setValueCore(value);
+    this.onValueChanged();
   }
   public hasError(): boolean {
-    this.koHasError(this.checkForErrors())
-    return this.koHasError()
+    this.koHasError(this.checkForErrors());
+    return this.koHasError();
   }
   protected checkForErrors(): boolean {
     if (this.isRequired) {
-      var er = this.isValueEmpty(this.koValue())
+      var er = this.isValueEmpty(this.koValue());
       this.koErrorText(
-        er ? editorLocalization.getString('pe.propertyIsEmpty') : ''
-      )
-      return er
+        er ? editorLocalization.getString("pe.propertyIsEmpty") : ""
+      );
+      return er;
     }
     if (
       this.property &&
@@ -159,146 +159,146 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
           this.object,
           this.koValue()
         )
-      )
-      if (this.koErrorText()) return true
+      );
+      if (this.koErrorText()) return true;
     }
-    return false
+    return false;
   }
   public get isRequired(): boolean {
-    return this.isRequriedValue
+    return this.isRequriedValue;
   }
   //TODO remove this function, replace it with property.isRequired later
   protected setIsRequired() {
-    this.isRequriedValue = false
-    if (!this.property || !this.object || !this.object.getType) return
-    var jsonClass = Survey.JsonObject.metaData.findClass(this.object.getType())
+    this.isRequriedValue = false;
+    if (!this.property || !this.object || !this.object.getType) return;
+    var jsonClass = Survey.JsonObject.metaData.findClass(this.object.getType());
     while (jsonClass) {
-      var reqProperties = jsonClass.requiredProperties
+      var reqProperties = jsonClass.requiredProperties;
       if (reqProperties) {
-        this.isRequriedValue = reqProperties.indexOf(this.property.name) > -1
-        if (this.isRequriedValue) return
+        this.isRequriedValue = reqProperties.indexOf(this.property.name) > -1;
+        if (this.isRequriedValue) return;
       }
-      if (!jsonClass.parentName) return
-      jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName)
+      if (!jsonClass.parentName) return;
+      jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
     }
   }
   protected setTitleAndDisplayName() {
-    if (this.isCustomDisplayName) return
-    this.displayNameValue = this.property ? this.property.name : ''
-    this.titleValue = this.displayNameValue
-    if (!this.property) return
-    var locName = this.property.name
-    this.displayNameValue = editorLocalization.getPropertyName(locName)
-    var title = editorLocalization.getPropertyTitle(locName)
-    if (!title) title = this.displayNameValue
-    this.titleValue = title
+    if (this.isCustomDisplayName) return;
+    this.displayNameValue = this.property ? this.property.name : "";
+    this.titleValue = this.displayNameValue;
+    if (!this.property) return;
+    var locName = this.property.name;
+    this.displayNameValue = editorLocalization.getPropertyName(locName);
+    var title = editorLocalization.getPropertyTitle(locName);
+    if (!title) title = this.displayNameValue;
+    this.titleValue = title;
   }
   protected onBeforeApply() {}
   public apply() {
-    if (this.hasError()) return
-    this.onBeforeApply()
-    this.isApplyinNewValue = true
-    this.koValue(this.editingValue)
-    this.isApplyinNewValue = false
+    if (this.hasError()) return;
+    this.onBeforeApply();
+    this.isApplyinNewValue = true;
+    this.koValue(this.editingValue);
+    this.isApplyinNewValue = false;
   }
   public get locale(): string {
-    if (this.onGetLocale) return this.onGetLocale()
-    return ''
+    if (this.onGetLocale) return this.onGetLocale();
+    return "";
   }
   public getLocale() {
-    return this.locale
+    return this.locale;
   }
   public getMarkdownHtml(text: string): string {
-    return text
+    return text;
   }
   public get options(): ISurveyObjectEditorOptions {
-    return this.optionsValue
+    return this.optionsValue;
   }
   public set options(value: ISurveyObjectEditorOptions) {
-    this.optionsValue = value
-    this.onOptionsChanged()
+    this.optionsValue = value;
+    this.onOptionsChanged();
   }
   protected onOptionsChanged() {}
   protected setValueCore(value: any) {
-    this.editingValue_ = value
+    this.editingValue_ = value;
   }
   public setObject(value: any) {
     if (this.options) {
-      var editorOptions = this.createEditorOptions()
+      var editorOptions = this.createEditorOptions();
       this.options.onSetPropertyEditorOptionsCallback(
         this.editablePropertyName,
         value,
         editorOptions
-      )
-      this.onSetEditorOptions(editorOptions)
+      );
+      this.onSetEditorOptions(editorOptions);
     }
   }
   public setRenderedElements(rootElement: any, elements: any[]) {
-    this.rootElement = rootElement
-    this.elements = elements
+    this.rootElement = rootElement;
+    this.elements = elements;
   }
   public activate() {
     if (!!this.rootElement) {
       var elements = this.rootElement.getElementsByClassName(
-        'svd_editor_control'
-      )
+        "svd_editor_control"
+      );
       if (elements.length > 0) {
-        setTimeout(() => elements[0].focus(), 1)
+        setTimeout(() => elements[0].focus(), 1);
       }
     }
   }
 
   protected createEditorOptions(): any {
-    return {}
+    return {};
   }
   protected onSetEditorOptions(editorOptions: any) {}
   protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
-    return value
+    return value;
   }
   protected updateValue() {
-    this.isValueUpdating = true
-    this.koValue(this.getValue())
-    this.editingValue = this.koValue()
-    this.isValueUpdating = false
+    this.isValueUpdating = true;
+    this.koValue(this.getValue());
+    this.editingValue = this.koValue();
+    this.isValueUpdating = false;
   }
   protected getValue(): any {
     return this.property && this.object
       ? this.property.getPropertyValue(this.object)
-      : null
+      : null;
   }
-  private iskoValueChanging: boolean = false
+  private iskoValueChanging: boolean = false;
   private onkoValueChanged(newValue: any) {
-    if (this.isValueUpdating || this.iskoValueChanging) return
-    this.iskoValueChanging = true
-    newValue = this.getCorrectedValue(newValue)
+    if (this.isValueUpdating || this.iskoValueChanging) return;
+    this.iskoValueChanging = true;
+    newValue = this.getCorrectedValue(newValue);
     if (this.options && this.property && this.object) {
       var options = {
         propertyName: this.property.name,
         obj: this.object,
         value: newValue,
         newValue: null,
-        doValidation: false,
-      }
-      this.options.onValueChangingCallback(options)
+        doValidation: false
+      };
+      this.options.onValueChangingCallback(options);
       if (!this.isValueEmpty(options.newValue)) {
-        this.koValue(options.newValue)
+        this.koValue(options.newValue);
       }
       if (options.doValidation) {
-        this.hasError()
+        this.hasError();
       }
     }
     if (!this.isApplyinNewValue) {
-      this.editingValue = newValue
+      this.editingValue = newValue;
     }
-    this.iskoValueChanging = false
+    this.iskoValueChanging = false;
 
-    if (this.property && this.object && this.getValue() == newValue) return
-    if (this.onChanged != null) this.onChanged(newValue)
+    if (this.property && this.object && this.getValue() == newValue) return;
+    if (this.onChanged != null) this.onChanged(newValue);
   }
   private isValueEmpty(val): boolean {
     //TODO remove the line
-    if (Survey.Base['isValueEmpty']) return Survey.Base['isValueEmpty'](val)
-    return Survey.Helpers.isValueEmpty(val)
+    if (Survey.Base["isValueEmpty"]) return Survey.Base["isValueEmpty"](val);
+    return Survey.Helpers.isValueEmpty(val);
   }
 }

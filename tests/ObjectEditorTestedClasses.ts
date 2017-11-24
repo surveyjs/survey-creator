@@ -1,102 +1,102 @@
-import * as ko from 'knockout'
-import * as Survey from 'survey-knockout'
+import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 
 export class Car {
-  public name: string
-  private titleValue: string
+  public name: string;
+  private titleValue: string;
   public getType(): string {
-    return 'car'
+    return "car";
   }
   public get title(): string {
-    return this.titleValue ? this.titleValue : this.name
+    return this.titleValue ? this.titleValue : this.name;
   }
   public set title(newValue: string) {
-    this.titleValue = newValue
+    this.titleValue = newValue;
   }
 }
 export class FastCar extends Car {
   public getType(): string {
-    return 'fast'
+    return "fast";
   }
 }
 export class BigCar extends Car {
   public getType(): string {
-    return 'big'
+    return "big";
   }
 }
 export class SportCar extends FastCar {
-  public maxSpeed: number
+  public maxSpeed: number;
   public getType(): string {
-    return 'sport'
+    return "sport";
   }
 }
 export class Truck extends BigCar {
-  public maxWeight: number
+  public maxWeight: number;
   public getType(): string {
-    return 'truck'
+    return "truck";
   }
 }
 export class TruckDefaultValue extends Truck {
-  private truckTitleValue: string
-  public isNew: boolean
+  private truckTitleValue: string;
+  public isNew: boolean;
   public getType(): string {
-    return 'truckDefault'
+    return "truckDefault";
   }
   public get truckTitle(): string {
-    return '!' + this.truckTitleValue + '!'
+    return "!" + this.truckTitleValue + "!";
   }
   public set truckTitle(value: string) {
-    this.truckTitleValue = value
+    this.truckTitleValue = value;
   }
 }
 
 Survey.JsonObject.metaData.addClass(
-  'fast',
+  "fast",
   [],
   function() {
-    return new FastCar()
+    return new FastCar();
   },
-  'car'
-)
-Survey.JsonObject.metaData.addClass('big', [], null, 'car')
-Survey.JsonObject.metaData.addClass('car', [
-  'name',
+  "car"
+);
+Survey.JsonObject.metaData.addClass("big", [], null, "car");
+Survey.JsonObject.metaData.addClass("car", [
+  "name",
   {
-    name: 'title:text',
+    name: "title:text",
     onGetValue: function(obj: any) {
-      return obj.titleValue
-    },
-  },
-])
+      return obj.titleValue;
+    }
+  }
+]);
 Survey.JsonObject.metaData.addClass(
-  'truck',
-  ['maxWeight:number'],
+  "truck",
+  ["maxWeight:number"],
   function() {
-    return new Truck()
+    return new Truck();
   },
-  'big'
-)
+  "big"
+);
 Survey.JsonObject.metaData.addClass(
-  'sport',
-  ['!maxSpeed:number'],
+  "sport",
+  ["!maxSpeed:number"],
   function() {
-    return new SportCar()
+    return new SportCar();
   },
-  'fast'
-)
+  "fast"
+);
 Survey.JsonObject.metaData.addClass(
-  'truckDefault',
+  "truckDefault",
   [
-    'isNew:boolean',
+    "isNew:boolean",
     {
-      name: 'truckTitle:string',
+      name: "truckTitle:string",
       onGetValue: function(obj: any) {
-        return obj.truckTitleValue
-      },
-    },
+        return obj.truckTitleValue;
+      }
+    }
   ],
   function() {
-    return new TruckDefaultValue()
+    return new TruckDefaultValue();
   },
-  'truck'
-)
+  "truck"
+);

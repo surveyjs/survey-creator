@@ -1,18 +1,18 @@
-import { Selector, ClientFunction } from 'testcafe'
+import { Selector, ClientFunction } from "testcafe";
 
-export const url = 'http://127.0.0.1:7777/example/'
+export const url = "http://127.0.0.1:7777/example/";
 
 export const init = ClientFunction(() => {
-  Survey.Survey.cssType = 'bootstrap'
-  Survey.defaultBootstrapCss.navigationButton = 'btn btn-green'
+  Survey.Survey.cssType = "bootstrap";
+  Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
 
-  var editor = new SurveyEditor.SurveyEditor('editorElement')
+  var editor = new SurveyEditor.SurveyEditor("editorElement");
   editor.saveSurveyFunc = function(saveNo, callback) {
-    alert('ok')
-    callback(saveNo, true)
-  }
-  editor.showOptions = true
-  editor.showState = true
+    alert("ok");
+    callback(saveNo, true);
+  };
+  editor.showOptions = true;
+  editor.showState = true;
 
-  window.editor = editor
-})
+  window.editor = editor;
+});

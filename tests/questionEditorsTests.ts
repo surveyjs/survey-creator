@@ -1,336 +1,336 @@
-import * as ko from 'knockout'
-import * as Survey from 'survey-knockout'
+import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
   SurveyQuestionEditorTabGeneral,
-  SurveyQuestionEditorTabProperty,
-} from '../src/questionEditors/questionEditor'
+  SurveyQuestionEditorTabProperty
+} from "../src/questionEditors/questionEditor";
 import {
   SurveyQuestionEditorGeneralProperties,
   SurveyQuestionEditorGeneralRow,
-  SurveyQuestionEditorGeneralProperty,
-} from '../src/questionEditors/questionEditorGeneralProperties'
-import { SurveyQuestionEditorDefinition } from '../src/questionEditors/questionEditorDefinition'
-import { SurveyEditor } from '../src/editor'
+  SurveyQuestionEditorGeneralProperty
+} from "../src/questionEditors/questionEditorGeneralProperties";
+import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
+import { SurveyEditor } from "../src/editor";
 
-export default QUnit.module('QuestionEditorsTests')
+export default QUnit.module("QuestionEditorsTests");
 
-QUnit.test('Create correct question editor property tab ', function(assert) {
-  var dropdownQuestion = new Survey.QuestionDropdown('q1')
-  dropdownQuestion.choices = ['item1']
-  dropdownQuestion.visibleIf = 'true'
-  var properties = new SurveyQuestionProperties(dropdownQuestion, null)
+QUnit.test("Create correct question editor property tab ", function(assert) {
+  var dropdownQuestion = new Survey.QuestionDropdown("q1");
+  dropdownQuestion.choices = ["item1"];
+  dropdownQuestion.visibleIf = "true";
+  var properties = new SurveyQuestionProperties(dropdownQuestion, null);
 
-  var property = properties.getProperty('choices')
-  var tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property)
+  var property = properties.getProperty("choices");
+  var tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
   assert.equal(
     tab.htmlTemplate,
-    'propertyeditorcontent-itemvalues',
-    'itemvalues template should be created'
-  )
+    "propertyeditorcontent-itemvalues",
+    "itemvalues template should be created"
+  );
   assert.equal(
     tab.propertyEditor.editorType,
-    'itemvalues',
-    'create correct property editor'
-  )
+    "itemvalues",
+    "create correct property editor"
+  );
   assert.deepEqual(
     tab.propertyEditor.editingValue,
-    ['item1'],
-    'set value to property editor correctly'
-  )
+    ["item1"],
+    "set value to property editor correctly"
+  );
 
-  property = properties.getProperty('visibleIf')
-  tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property)
+  property = properties.getProperty("visibleIf");
+  tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
   assert.equal(
     tab.propertyEditor.editingValue,
     dropdownQuestion.visibleIf,
     "set value of 'visibleIf' to property editor correctly"
-  )
-})
+  );
+});
 
-QUnit.test('Question Editor apply/reset/onChanged', function(assert) {
-  var dropdownQuestion = new Survey.QuestionDropdown('q1')
-  dropdownQuestion.visibleIf = 'true'
-  var changeCounter = 0
-  var editor = new SurveyQuestionEditor(dropdownQuestion, null)
+QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
+  var dropdownQuestion = new Survey.QuestionDropdown("q1");
+  dropdownQuestion.visibleIf = "true";
+  var changeCounter = 0;
+  var editor = new SurveyQuestionEditor(dropdownQuestion, null);
   editor.onChanged = function() {
-    changeCounter++
-  }
-  var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0]
+    changeCounter++;
+  };
+  var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
   assert.equal(
     generalTab.properties.rows[0].properties[0].editor.koValue(),
-    'q1',
-    'name set correct'
-  )
+    "q1",
+    "name set correct"
+  );
   assert.equal(
     generalTab.properties.rows[1].properties[0].editor.koValue(),
-    '',
-    'title set correct'
-  )
-  generalTab.properties.rows[0].properties[0].editor.koValue('newName')
-  generalTab.properties.rows[1].properties[0].editor.koValue('new title')
+    "",
+    "title set correct"
+  );
+  generalTab.properties.rows[0].properties[0].editor.koValue("newName");
+  generalTab.properties.rows[1].properties[0].editor.koValue("new title");
   var visibleIfTab = <SurveyQuestionEditorTabProperty>editor.koTabs()[
     editor.koTabs().length - 1
-  ]
-  visibleIfTab.propertyEditor['koValue']('false')
-  editor.apply()
-  assert.equal(changeCounter, 1, 'changed one time')
-  assert.equal(dropdownQuestion.name, 'newName', 'name assign correct')
-  assert.equal(dropdownQuestion.title, 'new title', 'title assign correct')
-  assert.equal(dropdownQuestion.visibleIf, 'false', 'visibleIf assign correct')
-})
+  ];
+  visibleIfTab.propertyEditor["koValue"]("false");
+  editor.apply();
+  assert.equal(changeCounter, 1, "changed one time");
+  assert.equal(dropdownQuestion.name, "newName", "name assign correct");
+  assert.equal(dropdownQuestion.title, "new title", "title assign correct");
+  assert.equal(dropdownQuestion.visibleIf, "false", "visibleIf assign correct");
+});
 
-QUnit.test('Create correct Question Editor by question type', function(assert) {
-  var radioGroupQuestion = new Survey.QuestionRadiogroup('q1')
-  var editor = new SurveyQuestionEditor(radioGroupQuestion, null)
-  assert.equal(editor.koTabs().length, 4, 'There are 3 tabs')
+QUnit.test("Create correct Question Editor by question type", function(assert) {
+  var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
+  var editor = new SurveyQuestionEditor(radioGroupQuestion, null);
+  assert.equal(editor.koTabs().length, 4, "There are 3 tabs");
   assert.equal(
     editor.koTabs()[1].name,
-    'choices',
+    "choices",
     "The name of the second tab is 'choices'"
-  )
-})
+  );
+});
 
-QUnit.test('Hide visibleIf tab and startWithNewLine', function(assert) {
-  var radioGroupQuestion = new Survey.QuestionRadiogroup('q1')
+QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
+  var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var onCanShowPropertyCallback = function(
     object: any,
     property: Survey.JsonObjectProperty
   ) {
-    return property.name != 'visibleIf' && property.name != 'startWithNewLine'
-  }
+    return property.name != "visibleIf" && property.name != "startWithNewLine";
+  };
   var editor = new SurveyQuestionEditor(
     radioGroupQuestion,
     onCanShowPropertyCallback
-  )
-  assert.equal(editor.koTabs().length, 3, 'There are 2 tabs')
+  );
+  assert.equal(editor.koTabs().length, 3, "There are 2 tabs");
   assert.equal(
     editor.koTabs()[1].name,
-    'choices',
+    "choices",
     "The name of the second tab is 'choices'"
-  )
-  var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0]
-  var hasFound = false
-  var prop = generalTab.properties
+  );
+  var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
+  var hasFound = false;
+  var prop = generalTab.properties;
   for (var i = 0; i < prop.rows.length; i++) {
-    var row = prop.rows[i]
+    var row = prop.rows[i];
     for (var j = 0; j < row.properties.length; j++) {
-      if (row.properties[j].property.name == 'startWithNewLine') {
-        hasFound = true
-        break
+      if (row.properties[j].property.name == "startWithNewLine") {
+        hasFound = true;
+        break;
       }
     }
   }
-  assert.equal(hasFound, false, "We have made 'startWithNewLine' invisible")
-})
+  assert.equal(hasFound, false, "We have made 'startWithNewLine' invisible");
+});
 
-QUnit.test('Create  general properties', function(assert) {
-  var question = new Survey.QuestionText('q1')
+QUnit.test("Create  general properties", function(assert) {
+  var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorGeneralProperties(question, [
-    { name: 'name' },
-    'visible',
-    'dummy',
-  ])
-  assert.equal(properties.rows.length, 2, 'There are two rows')
+    { name: "name" },
+    "visible",
+    "dummy"
+  ]);
+  assert.equal(properties.rows.length, 2, "There are two rows");
   assert.equal(
     properties.rows[0].properties[0].property.name,
-    'name',
-    'The first property created correctly'
-  )
+    "name",
+    "The first property created correctly"
+  );
   assert.equal(
     properties.rows[1].properties[0].property.name,
-    'visible',
-    'The second property created correctly'
-  )
-})
+    "visible",
+    "The second property created correctly"
+  );
+});
 
-QUnit.test('General properties different categories', function(assert) {
-  var question = new Survey.QuestionText('q1')
+QUnit.test("General properties different categories", function(assert) {
+  var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorGeneralProperties(question, [
-    { name: 'name', category: '1', title: 'MyName' },
-    { name: 'visible' },
-    { name: 'title', category: '1' },
-  ])
-  assert.equal(properties.rows.length, 2, 'There are two rows')
-  assert.equal(properties.rows[0].properties.length, 2, 'There are two rows')
+    { name: "name", category: "1", title: "MyName" },
+    { name: "visible" },
+    { name: "title", category: "1" }
+  ]);
+  assert.equal(properties.rows.length, 2, "There are two rows");
+  assert.equal(properties.rows[0].properties.length, 2, "There are two rows");
   assert.equal(
     properties.rows[0].properties[0].property.name,
-    'name',
-    'The first property in row is name'
-  )
+    "name",
+    "The first property in row is name"
+  );
   assert.equal(
     properties.rows[0].properties[1].property.name,
-    'title',
-    'The second property in row is title'
-  )
+    "title",
+    "The second property in row is title"
+  );
   assert.equal(
     properties.rows[0].properties[0].editor.displayName,
-    'MyName',
-    'Title property was set correctly'
-  )
-})
+    "MyName",
+    "Title property was set correctly"
+  );
+});
 
-QUnit.test('General properties, editor type', function(assert) {
-  var question = new Survey.QuestionText('q1')
+QUnit.test("General properties, editor type", function(assert) {
+  var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorGeneralProperties(question, [
-    'name',
-    'visible',
-    'title',
-  ])
+    "name",
+    "visible",
+    "title"
+  ]);
   assert.equal(
     properties.rows[0].properties[0].objectProperty.editorType,
-    'string',
-    'Name property has text edit type'
-  )
+    "string",
+    "Name property has text edit type"
+  );
   assert.equal(
     properties.rows[1].properties[0].objectProperty.editorType,
-    'boolean',
-    'visible property has check edit type'
-  )
+    "boolean",
+    "visible property has check edit type"
+  );
   assert.equal(
     properties.rows[2].properties[0].objectProperty.editorType,
-    'text',
-    'title property has textarea edit type'
-  )
-})
+    "text",
+    "title property has textarea edit type"
+  );
+});
 
-QUnit.test('General properties, apply/reset', function(assert) {
-  var question = new Survey.QuestionText('q1')
+QUnit.test("General properties, apply/reset", function(assert) {
+  var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorGeneralProperties(question, [
-    'name',
-    'visible',
-    'title',
-  ])
+    "name",
+    "visible",
+    "title"
+  ]);
   assert.equal(
     properties.rows[0].properties[0].editor.koValue(),
-    'q1',
-    'Initially it is q1'
-  )
-  properties.rows[0].properties[0].editor.koValue('q2')
-  properties.apply()
-  assert.equal(question.name, 'q2', "question.name is 'q2'")
-  properties.rows[0].properties[0].editor.koValue('q3')
-  properties.reset()
+    "q1",
+    "Initially it is q1"
+  );
+  properties.rows[0].properties[0].editor.koValue("q2");
+  properties.apply();
+  assert.equal(question.name, "q2", "question.name is 'q2'");
+  properties.rows[0].properties[0].editor.koValue("q3");
+  properties.reset();
   assert.equal(
     properties.rows[0].properties[0].editor.koValue(),
-    'q2',
-    'reset to q2'
-  )
-})
+    "q2",
+    "reset to q2"
+  );
+});
 
-QUnit.test('General properties, has errors', function(assert) {
-  var question = new Survey.QuestionText('q1')
+QUnit.test("General properties, has errors", function(assert) {
+  var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorGeneralProperties(question, [
-    { name: 'name' },
-    'visible',
-    'dummy',
-  ])
-  var prop = properties.rows[0].properties[0]
-  assert.equal(prop.hasError(), false, 'There is no error')
-  prop.editor.koValue('')
-  assert.equal(prop.hasError(), true, 'There is an error')
-  prop.editor.koValue('q2')
-  assert.equal(prop.hasError(), false, 'There is no error')
-})
+    { name: "name" },
+    "visible",
+    "dummy"
+  ]);
+  var prop = properties.rows[0].properties[0];
+  assert.equal(prop.hasError(), false, "There is no error");
+  prop.editor.koValue("");
+  assert.equal(prop.hasError(), true, "There is an error");
+  prop.editor.koValue("q2");
+  assert.equal(prop.hasError(), false, "There is no error");
+});
 
-QUnit.test('Question editor definition: getProperties', function(assert) {
+QUnit.test("Question editor definition: getProperties", function(assert) {
   var baseProperties = SurveyQuestionEditorDefinition.getProperties(
-    'questionbase'
-  )
-  var properties = SurveyQuestionEditorDefinition.getProperties('rating')
+    "questionbase"
+  );
+  var properties = SurveyQuestionEditorDefinition.getProperties("rating");
   assert.equal(
     properties.length,
     baseProperties.length + 2,
-    'Rating adds two properties'
-  )
-  assert.equal(properties[0], 'name', 'The first rating property')
+    "Rating adds two properties"
+  );
+  assert.equal(properties[0], "name", "The first rating property");
   assert.equal(
     properties[properties.length - 1],
-    'maxRateDescription',
-    'The last rating property'
-  )
-})
+    "maxRateDescription",
+    "The last rating property"
+  );
+});
 
-QUnit.test('Question editor definition: getTabs', function(assert) {
-  var tabs = SurveyQuestionEditorDefinition.getTabs('rating')
-  assert.equal(tabs.length, 2, 'Rating has two tabs')
-  assert.equal(tabs[0].name, 'rateValues', 'The first tab')
-  assert.equal(tabs[1].name, 'visibleIf', 'The last tab')
-})
+QUnit.test("Question editor definition: getTabs", function(assert) {
+  var tabs = SurveyQuestionEditorDefinition.getTabs("rating");
+  assert.equal(tabs.length, 2, "Rating has two tabs");
+  assert.equal(tabs[0].name, "rateValues", "The first tab");
+  assert.equal(tabs[1].name, "visibleIf", "The last tab");
+});
 
-QUnit.test('Question editor: custom errors', function(assert) {
-  var question = new Survey.QuestionText('q1')
-  var editor = new SurveyEditor()
+QUnit.test("Question editor: custom errors", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  var editor = new SurveyEditor();
   editor.onPropertyValidationCustomError.add(function(editor, options) {
-    if (options.propertyName != 'title') return
+    if (options.propertyName != "title") return;
     if (!options.value) {
-      options.error = "The value can't be empty"
-      return
+      options.error = "The value can't be empty";
+      return;
     }
     if (options.value.indexOf(question.name) < 0) {
-      options.error = 'The value should contain the name property'
+      options.error = "The value should contain the name property";
     }
-  })
+  });
   var properties = new SurveyQuestionEditorGeneralProperties(
     question,
-    ['name', 'title'],
+    ["name", "title"],
     null,
     editor
-  )
+  );
   assert.equal(
     properties.hasError(),
     true,
-    'title should contains name, but it is empty'
-  )
-  var titleEditor = properties.rows[1].properties[0].editor
-  titleEditor.koValue('q')
+    "title should contains name, but it is empty"
+  );
+  var titleEditor = properties.rows[1].properties[0].editor;
+  titleEditor.koValue("q");
   assert.equal(
     properties.hasError(),
     true,
     "title should contains name, but it equals 'q'"
-  )
-  titleEditor.koValue('!q1!')
-  assert.equal(properties.hasError(), false, 'There is no error now')
-})
+  );
+  titleEditor.koValue("!q1!");
+  assert.equal(properties.hasError(), false, "There is no error now");
+});
 
-QUnit.test('Question editor: on property value changing', function(assert) {
-  Survey.JsonObject.metaData.addProperty('question', { name: 'targetEntity' })
-  Survey.JsonObject.metaData.addProperty('question', {
-    name: 'targetField',
-    choices: [],
-  })
-  var question = new Survey.QuestionText('q1')
-  var editor = new SurveyEditor()
+QUnit.test("Question editor: on property value changing", function(assert) {
+  Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });
+  Survey.JsonObject.metaData.addProperty("question", {
+    name: "targetField",
+    choices: []
+  });
+  var question = new Survey.QuestionText("q1");
+  var editor = new SurveyEditor();
   editor.onPropertyEditorObjectAssign.add(function(editor, options) {
-    if (options.propertyName != 'targetField') return
+    if (options.propertyName != "targetField") return;
     if (options.obj) {
-      options.obj.targetFieldEditor = options.editor
+      options.obj.targetFieldEditor = options.editor;
     }
-  })
+  });
   editor.onPropertyValueChanging.add(function(editor, options) {
-    if (options.propertyName != 'targetEntity') return
+    if (options.propertyName != "targetEntity") return;
     if (options.obj && options.obj.targetFieldEditor) {
-      var choices = []
-      choices.push(options.value + ' 1')
-      choices.push(options.value + ' 2')
-      options.obj.targetFieldEditor.koChoices(choices)
+      var choices = [];
+      choices.push(options.value + " 1");
+      choices.push(options.value + " 2");
+      options.obj.targetFieldEditor.koChoices(choices);
     }
-  })
+  });
   var properties = new SurveyQuestionEditorGeneralProperties(
     question,
-    ['targetEntity', 'targetField'],
+    ["targetEntity", "targetField"],
     null,
     editor
-  )
-  var entityEditor = properties.rows[0].properties[0].editor
-  var targetEditor = properties.rows[1].properties[0].editor
+  );
+  var entityEditor = properties.rows[0].properties[0].editor;
+  var targetEditor = properties.rows[1].properties[0].editor;
 
-  assert.deepEqual(targetEditor['koChoices'](), [], 'The choices is empty')
-  entityEditor.koValue('item')
+  assert.deepEqual(targetEditor["koChoices"](), [], "The choices is empty");
+  entityEditor.koValue("item");
   assert.deepEqual(
-    targetEditor['koChoices'](),
-    ['item 1', 'item 2'],
-    'The choices has two items'
-  )
-})
+    targetEditor["koChoices"](),
+    ["item 1", "item 2"],
+    "The choices has two items"
+  );
+});

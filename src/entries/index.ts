@@ -1,103 +1,105 @@
 // styles
-import '../utils/ddmenu.scss'
-import '../main.scss'
+import "../utils/ddmenu.scss";
+import "../main.scss";
 
-export let Version: string
-Version = `${process.env.VERSION}`
+export let Version: string;
+Version = `${process.env.VERSION}`;
 
-export { DragDropHelper } from '../dragdrophelper'
-export { SurveyPropertyEditorBase } from '../propertyEditors/propertyEditorBase'
+export { DragDropHelper } from "../dragdrophelper";
 export {
-  SurveyPropertyCustomEditor,
-} from '../propertyEditors/propertyCustomEditor'
+  SurveyPropertyEditorBase
+} from "../propertyEditors/propertyEditorBase";
 export {
-  SurveyPropertyEditorFactory,
-} from '../propertyEditors/propertyEditorFactory'
+  SurveyPropertyCustomEditor
+} from "../propertyEditors/propertyCustomEditor";
+export {
+  SurveyPropertyEditorFactory
+} from "../propertyEditors/propertyEditorFactory";
 export {
   SurveyStringPropertyEditor,
   SurveyDropdownPropertyEditor,
   SurveyBooleanPropertyEditor,
-  SurveyNumberPropertyEditor,
-} from '../propertyEditors/propertyEditorFactory'
+  SurveyNumberPropertyEditor
+} from "../propertyEditors/propertyEditorFactory";
 export {
-  SurveyPropertyTextItemsEditor,
-} from '../propertyEditors/propertyTextItemsEditor'
+  SurveyPropertyTextItemsEditor
+} from "../propertyEditors/propertyTextItemsEditor";
 export {
-  SurveyPropertyItemsEditor,
-} from '../propertyEditors/propertyItemsEditor'
+  SurveyPropertyItemsEditor
+} from "../propertyEditors/propertyItemsEditor";
 export {
-  SurveyPropertyItemValuesEditor,
-} from '../propertyEditors/propertyItemValuesEditor'
+  SurveyPropertyItemValuesEditor
+} from "../propertyEditors/propertyItemValuesEditor";
 export {
-  SurveyPropertyMultipleValuesEditor,
-} from '../propertyEditors/propertyMultipleValuesEditor'
+  SurveyPropertyMultipleValuesEditor
+} from "../propertyEditors/propertyMultipleValuesEditor";
 export {
   SurveyNestedPropertyEditor,
-  SurveyNestedPropertyEditorItem,
-} from '../propertyEditors/propertyNestedPropertyEditor'
+  SurveyNestedPropertyEditorItem
+} from "../propertyEditors/propertyNestedPropertyEditor";
 export {
   SurveyPropertyDropdownColumnsEditor,
-  SurveyPropertyMatrixDropdownColumnsItem,
-} from '../propertyEditors/propertyMatrixDropdownColumnsEditor'
+  SurveyPropertyMatrixDropdownColumnsItem
+} from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export {
-  SurveyPropertyModalEditor,
-} from '../propertyEditors/propertyModalEditor'
+  SurveyPropertyModalEditor
+} from "../propertyEditors/propertyModalEditor";
 export {
-  SurveyPropertyResultfullEditor,
-} from '../propertyEditors/propertyRestfullEditor'
+  SurveyPropertyResultfullEditor
+} from "../propertyEditors/propertyRestfullEditor";
 export {
-  SurveyPropertyDefaultValueEditor,
-} from '../propertyEditors/propertyDefaultValueEditor'
+  SurveyPropertyDefaultValueEditor
+} from "../propertyEditors/propertyDefaultValueEditor";
 export {
-  SurveyPropertyTriggersEditor,
-} from '../propertyEditors/propertyTriggersEditor'
+  SurveyPropertyTriggersEditor
+} from "../propertyEditors/propertyTriggersEditor";
 export {
-  SurveyPropertyValidatorsEditor,
-} from '../propertyEditors/propertyValidatorsEditor'
-export { SurveyObjects } from '../surveyObjects'
+  SurveyPropertyValidatorsEditor
+} from "../propertyEditors/propertyValidatorsEditor";
+export { SurveyObjects } from "../surveyObjects";
 
-export { editorLocalization, defaultStrings } from '../editorLocalization'
+export { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export {
   SurveyQuestionEditorGeneralProperties,
   SurveyQuestionEditorGeneralRow,
-  SurveyQuestionEditorGeneralProperty,
-} from '../questionEditors/questionEditorGeneralProperties'
+  SurveyQuestionEditorGeneralProperty
+} from "../questionEditors/questionEditorGeneralProperties";
 export {
-  SurveyQuestionEditorDefinition,
-} from '../questionEditors/questionEditorDefinition'
+  SurveyQuestionEditorDefinition
+} from "../questionEditors/questionEditorDefinition";
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
   SurveyQuestionEditorTabGeneral,
-  SurveyQuestionEditorTabProperty,
-} from '../questionEditors/questionEditor'
+  SurveyQuestionEditorTabProperty
+} from "../questionEditors/questionEditor";
 
-export { QuestionToolbox } from '../questionToolbox'
-export { SurveyObjectProperty } from '../objectProperty'
-export { SurveyObjectEditor } from '../objectEditor'
-export { SurveyPagesEditor } from '../pagesEditor'
-export { SurveyTextWorker } from '../textWorker'
-export { ObjType, SurveyHelper } from '../surveyHelper'
-export { SurveyLiveTester } from '../surveylive'
-export { SurveyEmbedingWindow } from '../surveyEmbedingWindow'
+export { QuestionToolbox } from "../questionToolbox";
+export { SurveyObjectProperty } from "../objectProperty";
+export { SurveyObjectEditor } from "../objectEditor";
+export { SurveyPagesEditor } from "../pagesEditor";
+export { SurveyTextWorker } from "../textWorker";
+export { ObjType, SurveyHelper } from "../surveyHelper";
+export { SurveyLiveTester } from "../surveylive";
+export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export {
   SurveyVerbs,
   SurveyVerbItem,
-  SurveyVerbChangePageItem,
-} from '../objectVerbs'
-export { QuestionConverter } from '../questionconverter'
-export { SurveyUndoRedo, UndoRedoItem } from '../undoredo'
-export { SurveyForDesigner } from '../surveyjsObjects'
-export { Extentions } from '../extentions'
-export { SurveyEditor } from '../editor'
+  SurveyVerbChangePageItem
+} from "../objectVerbs";
+export { QuestionConverter } from "../questionconverter";
+export { SurveyUndoRedo, UndoRedoItem } from "../undoredo";
+export { SurveyForDesigner } from "../surveyjsObjects";
+export { Extentions } from "../extentions";
+export { SurveyEditor } from "../editor";
 
-export { SurveysManager } from '../manage'
+export { SurveysManager } from "../manage";
 
 //editorLocalization
-import '../localization/french'
-import '../localization/spanish'
-import '../localization/portuguese'
-import '../localization/italian'
-import '../localization/simplified-chinese'
-import '../localization/persian'
+import "../localization/french";
+import "../localization/spanish";
+import "../localization/portuguese";
+import "../localization/italian";
+import "../localization/simplified-chinese";
+import "../localization/persian";
