@@ -1,11 +1,11 @@
-import {editorLocalization} from "../editorLocalization"
+import { editorLocalization } from '../editorLocalization'
 
 var frenchTranslation = {
   //Strings in Editor
   ed: {
     addNewPage: 'Ajouter une page',
     correctJSON: 'SVP corriger le json',
-    delSelObject: 'Supprimer l\'objet sélectionné',
+    delSelObject: "Supprimer l'objet sélectionné",
     designer: 'Designer de questionnaire',
     embedSurvey: 'Intégrer le questionnaire',
     generateReadableJSON: 'Générer un JSON lisible',
@@ -21,7 +21,7 @@ var frenchTranslation = {
     testSurveyAgain: 'Tester à nouveau le questionnaire',
     testSurveyWidth: 'Largeur du questionnaire: ',
     toolbox: 'Boite à outils',
-    undo: 'Annuler'
+    undo: 'Annuler',
   },
   //Embed window
   ew: {
@@ -37,7 +37,7 @@ var frenchTranslation = {
     titleHtml: 'HTML',
     titleJavaScript: 'JavaScript',
     titleScript: 'Scripts et styles',
-    vue: 'Utiliser la version Vue'
+    vue: 'Utiliser la version Vue',
   },
   //Operators
   op: {
@@ -49,12 +49,12 @@ var frenchTranslation = {
     less: 'plus petit',
     lessorequal: 'plus petit ou égal',
     notcontains: 'ne contient pas',
-    notempty: 'n\'est pas vide',
-    notequal: 'n\'est pas égal'
+    notempty: "n'est pas vide",
+    notequal: "n'est pas égal",
   },
   //Properties
   p: {
-    addRowText:'Bouton ajouter une ligne',
+    addRowText: 'Bouton ajouter une ligne',
     cellType: 'Type de cellule',
     choices: 'Choix',
     choicesByUrl: 'Choix par API',
@@ -70,13 +70,14 @@ var frenchTranslation = {
     completedHtml: 'Html questionnaire finalisé',
     cookieName: 'Nom du cookie',
     edit: 'Editer',
-    focusFirstQuestionAutomatic: 'Focus sur la première question automatiquement',
+    focusFirstQuestionAutomatic:
+      'Focus sur la première question automatiquement',
     goNextPageAutomatic: 'Aller à la page suivante automatiquement',
     hasComment: 'Champs commentaire ?',
     hasOther: 'Choix autre ?',
     horizontalScroll: 'Scroll horizontal',
-    imageHeight: 'Hauteur de l \'image',
-    imageWidth: 'Largeur de l\'image',
+    imageHeight: "Hauteur de l 'image",
+    imageWidth: "Largeur de l'image",
     indent: 'Indentation',
     inputType: 'Type de champs',
     isAllRowRequired: 'Toutes les lignes sont-elle obligatoires ?',
@@ -88,23 +89,29 @@ var frenchTranslation = {
     maxSize: 'Taille maximum',
     minRateDescription: 'Description note minimum',
     minRowCount: 'Nombre de ligne minimal',
-    mode: 'Mode d\'affichage',
+    mode: "Mode d'affichage",
     name: 'Nom',
     optionsCaption: 'Texte par défaut',
     otherErrorText: 'Texte Erreur champs autre',
-    otherText: { name: 'Text autre', title: 'Champ commentaire ou choix autre' },
+    otherText: {
+      name: 'Text autre',
+      title: 'Champ commentaire ou choix autre',
+    },
     pageNextText: 'Bouton page suivante',
     pagePrevText: 'Bouton page précédente',
     page_title: { name: 'titre', title: 'Titre de la page' },
     placeHolder: 'PlaceHolder (indice dans le champs)',
     questionStartIndex: 'Index de numérotation des question',
     questionTitleLocation: 'Emplacement titre question',
-    questionTitleTemplate: { name: 'Template d\'affichage des question', title: 'Exemple: {no}) {title} {require}:' },
+    questionTitleTemplate: {
+      name: "Template d'affichage des question",
+      title: 'Exemple: {no}) {title} {require}:',
+    },
     rateValues: 'Barème',
     removeRowText: 'Bouton supprimer une ligne',
     requiredText: 'Texte pour les champs requis',
-    rowCount:'Nombre de lignes',
-    rows:'Nombre de ligne',
+    rowCount: 'Nombre de lignes',
+    rows: 'Nombre de ligne',
     sendResultOnPageNext: '',
     showCompletedPage: 'Voir la page formulaire complété ?',
     showNavigationButtons: 'Boutons de navigation',
@@ -125,7 +132,7 @@ var frenchTranslation = {
     triggers: 'Déclencheurs',
     validators: 'Validateurs',
     visibleIf: 'Visible si ',
-    width: 'Largeur'
+    width: 'Largeur',
   },
   //Property Editors
   pe: {
@@ -134,7 +141,7 @@ var frenchTranslation = {
     apply: 'Appliquer',
     cancel: 'Annuler',
     cellType: 'Type de cellule',
-    choicesOrder: 'Sélectionner l\'ordre des choix',
+    choicesOrder: "Sélectionner l'ordre des choix",
     close: 'Fermer',
     colCount: 'Nombre de colonnes',
     columnEdit: 'Editer la colonne: {0}',
@@ -144,12 +151,13 @@ var frenchTranslation = {
     editProperty: 'Editer la propriété "{0}"',
     empty: '<vide>',
     enterNewValue: 'Veuillez saisir la valeur.',
-    expressionHelp: 'Veuillez entrer une expression booléenne. Elle doit retourner Vrai(true) pour garder la question/page visible. Par exemple: {question1} = "valeur1" or ({question2} = 3 and {question3} < 5)',
+    expressionHelp:
+      'Veuillez entrer une expression booléenne. Elle doit retourner Vrai(true) pour garder la question/page visible. Par exemple: {question1} = "valeur1" or ({question2} = 3 and {question3} < 5)',
     fastEntry: 'Ajout rapide',
     formEntry: 'Ajout via formulaire',
     hasOther: 'Has other item',
-    imageHeight: 'Hauteur de l\'image',
-    imageWidth: 'Largeur de l\'image',
+    imageHeight: "Hauteur de l'image",
+    imageWidth: "Largeur de l'image",
     inputType: 'Type de champ',
     isRequired: 'Est requis ?',
     items: '[ Elements: {0} ]',
@@ -157,7 +165,7 @@ var frenchTranslation = {
     maxSize: 'Taille maximum du fichier en octets',
     minRateDescription: 'Description note minimum',
     name: 'Nom',
-    noquestions: 'Il n\'y a aucune question dans le questionnaire.',
+    noquestions: "Il n'y a aucune question dans le questionnaire.",
     ok: 'OK',
     optionsCaption: 'Texte par défaut',
     placeHolder: 'PlaceHolder (indice dans le champs)',
@@ -169,9 +177,10 @@ var frenchTranslation = {
     reset: 'Réinitialiser',
     rowCount: 'Nombre de lignes',
     rows: 'Nombre de lignes',
-    showPreview: 'L\'aperçu d\'image est-il affiché ?',
+    showPreview: "L'aperçu d'image est-il affiché ?",
     startWithNewLine: 'Commencer avec une nouvelle ligne ?',
-    storeDataAsText: 'Stocker le contenu du fichier dans le résultat JSON sous forme de texte',
+    storeDataAsText:
+      'Stocker le contenu du fichier dans le résultat JSON sous forme de texte',
     tabs: {
       choices: 'Choix',
       choicesByUrl: 'Choix depuis api web',
@@ -183,16 +192,17 @@ var frenchTranslation = {
       multipleTextItems: 'Text Inputs',
       rateValues: 'Barème',
       rows: 'Lignes',
-      visibleIf: 'Visible Si'
+      visibleIf: 'Visible Si',
     },
     testService: 'Tester le service',
     text: 'Texte',
     title: 'Titre',
     triggerCompleteText: 'Complete the survey if succeed.',
-    triggerIsVariable: 'Ne placez pas la variable dans le résultat du questionnaire.',
+    triggerIsVariable:
+      'Ne placez pas la variable dans le résultat du questionnaire.',
     triggerMakePagesVisible: 'Rendre les pages visibles:',
     triggerMakeQuestionsVisible: 'Rendre les questions visibles:',
-    triggerNotSet: 'Le déclencheur n\'est pas défini',
+    triggerNotSet: "Le déclencheur n'est pas défini",
     triggerOn: 'On ',
     triggerRunIf: 'Exécuster si',
     triggerSetToName: 'Changer la valeur de: ',
@@ -200,7 +210,7 @@ var frenchTranslation = {
     value: 'Valeur',
     verbChangePage: 'Changer de page ',
     verbChangeType: 'Changer le type ',
-    visible: 'Est visible ?'
+    visible: 'Est visible ?',
   },
   //questionTypes
   qt: {
@@ -215,14 +225,14 @@ var frenchTranslation = {
     multipletext: 'champ multilignes',
     radiogroup: 'Boutons radio',
     rating: 'Evaluation',
-    text: 'Champ simple'
+    text: 'Champ simple',
   },
   survey: {
     addToToolbox: 'Ajouter à la boîte à outils',
     copy: 'Copier',
     deleteQuestion: 'Supprimer la question',
-    dropQuestion: 'Déposer votre question ici.'
-  }
-};
+    dropQuestion: 'Déposer votre question ici.',
+  },
+}
 
-editorLocalization.locales["fr"] = frenchTranslation;
+editorLocalization.locales['fr'] = frenchTranslation

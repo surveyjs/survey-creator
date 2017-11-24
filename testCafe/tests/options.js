@@ -1,64 +1,62 @@
-import { url, init } from "../settings";
-import {Selector, ClientFunction} from 'testcafe';
-const assert = require('assert');
-const title = `options`;
+import { url, init } from '../settings'
+import { Selector, ClientFunction } from 'testcafe'
+const assert = require('assert')
+const title = `options`
 
-fixture `surveyjseditor: ${title}`
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+  await init()
+})
 
-    .page `${url}`
+test(`showJSONEditorTab`, async t => {
+  const isTabExists = ClientFunction(() =>
+    document.documentElement.innerText.indexOf('JSON Editor')
+  )
+  const hideTab = ClientFunction(() => {
+    let editorOptions = {
+      showJSONEditorTab: false,
+    }
+    editor.render(null, editorOptions)
+  })
 
-    .beforeEach( async ctx => {
-        await init();
-    });
+  assert.notEqual(await isTabExists(), -1)
 
-    test(`showJSONEditorTab`, async t => {
-        const isTabExists = ClientFunction(() =>
-            document.documentElement.innerText.indexOf("JSON Editor"));
-        const hideTab = ClientFunction(() => {
-            let editorOptions = {
-                showJSONEditorTab: false
-            };
-            editor.render(null, editorOptions);
-        });
+  await hideTab()
 
-        assert.notEqual(await isTabExists(), -1);
+  assert.equal(await isTabExists(), -1)
+})
 
-        await hideTab();
+test(`showTestSurveyTab`, async t => {
+  const isTabExists = ClientFunction(() =>
+    document.documentElement.innerText.indexOf('Test Survey')
+  )
+  const hideTab = ClientFunction(() => {
+    let editorOptions = {
+      showTestSurveyTab: false,
+    }
+    editor.render(null, editorOptions)
+  })
 
-        assert.equal(await isTabExists(), -1);
-    });
+  assert.notEqual(await isTabExists(), -1)
 
-    test(`showTestSurveyTab`, async t => {
-        const isTabExists = ClientFunction(() =>
-            document.documentElement.innerText.indexOf("Test Survey"));
-        const hideTab = ClientFunction(() => {
-            let editorOptions = {
-                showTestSurveyTab: false
-            };
-            editor.render(null, editorOptions);
-        });
+  await hideTab()
 
-        assert.notEqual(await isTabExists(), -1);
+  assert.equal(await isTabExists(), -1)
+})
 
-        await hideTab();
+test(`showEmbededSurveyTab`, async t => {
+  const isTabExists = ClientFunction(() =>
+    document.documentElement.innerText.indexOf('Embed Survey')
+  )
+  const showTab = ClientFunction(() => {
+    let editorOptions = {
+      showEmbededSurveyTab: true,
+    }
+    editor.render(null, editorOptions)
+  })
 
-        assert.equal(await isTabExists(), -1);
-    });
+  assert.equal(await isTabExists(), -1)
 
-    
-    test(`showEmbededSurveyTab`, async t => {
-        const isTabExists = ClientFunction(() =>
-            document.documentElement.innerText.indexOf("Embed Survey"));
-        const showTab = ClientFunction(() => {
-            let editorOptions = {
-                showEmbededSurveyTab: true
-            };
-            editor.render(null, editorOptions);
-        });
+  await showTab()
 
-        assert.equal(await isTabExists(), -1);
-
-        await showTab();
-
-        assert.notEqual(await isTabExists(), -1);
-    });
+  assert.notEqual(await isTabExists(), -1)
+})

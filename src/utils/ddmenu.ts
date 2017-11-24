@@ -1,35 +1,41 @@
 export default (menuItems, className) => {
-    var container = document.createElement("div");
-    container.className = "ddmenu-container " + className;
+  var container = document.createElement('div')
+  container.className = 'ddmenu-container ' + className
 
-    var ioshack = document.createElement("div");
-    ioshack.onclick = function() {return true};
-    ioshack.style.webkitTapHighlightColor = "rgba(0,0,0,0)";
+  var ioshack = document.createElement('div')
+  ioshack.onclick = function() {
+    return true
+  }
+  ioshack.style.webkitTapHighlightColor = 'rgba(0,0,0,0)'
 
-    var ddmenu = document.createElement("div");
-    ddmenu.className = "ddmenu";
+  var ddmenu = document.createElement('div')
+  ddmenu.className = 'ddmenu'
 
-    var icon = document.createElement("span");
-    icon.onclick = function() {return true};
-    icon.setAttribute("tabindex", "0");
-    icon.className = "glyphicon glyphicon-option-horizontal";
+  var icon = document.createElement('span')
+  icon.onclick = function() {
+    return true
+  }
+  icon.setAttribute('tabindex', '0')
+  icon.className = 'glyphicon glyphicon-option-horizontal'
 
-    var div = document.createElement("div");
-    div.onclick = function() {return true};
-    div.setAttribute("tabindex", "0");
+  var div = document.createElement('div')
+  div.onclick = function() {
+    return true
+  }
+  div.setAttribute('tabindex', '0')
 
-    var ul = document.createElement("ul");
-    
-    for(var i = 0; i < menuItems.length; i ++) {
-        ul.appendChild(menuItems[i]);
-    }
+  var ul = document.createElement('ul')
 
-    ddmenu.appendChild(icon);
-    ddmenu.appendChild(div);
-    ddmenu.appendChild(ul);
+  for (var i = 0; i < menuItems.length; i++) {
+    ul.appendChild(menuItems[i])
+  }
 
-    container.appendChild(ioshack);
-    container.appendChild(ddmenu);
+  ddmenu.appendChild(icon)
+  ddmenu.appendChild(div)
+  ddmenu.appendChild(ul)
 
-    return container;
+  container.appendChild(ioshack)
+  container.appendChild(ddmenu)
+
+  return container
 }
