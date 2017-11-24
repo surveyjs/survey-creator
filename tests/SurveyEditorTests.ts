@@ -23,6 +23,17 @@ QUnit.test("Set Text property", function (assert) {
     editor.text = jsonText;
     assert.equal(editor.koIsShowDesigner(), false);
 });
+QUnit.test("Escape HTML question string", function (assert) {
+    var jsonText = JSON.stringify({"pages":[{"name":"page1","elements":[{"type":"html","name":"question3","html":"<img src=\"https://placehold.it/300x100\" alt=\"test\"/>"}]}]});
+    //var jsonText = '{\"pages\":[{\"name\":\"page1\",\"elements\":[{\"type\":\"html\",\"name\":\"question3\",\"html\":\"<img src=\\\"https://placehold.it/300x100\\\" alt=\\\"test\\\"/>\"}]}]}'; 
+    var editor = new SurveyEditor();
+    editor.text = jsonText;
+    assert.equal(editor.survey.getAllQuestions().length, 1);
+    var q3 = editor.survey.getQuestionByName("question3");
+    assert.ok(!!q3);
+    assert.equal((<Survey.QuestionHtml>q3).html, "<img src=\"https://placehold.it/300x100\" alt=\"test\"/>");
+    assert.equal(editor.text.replace(/\s+|\t+|\n+/g, ""), jsonText.replace(/\s+|\t+|\n+/g, ""));
+});
 QUnit.test("At least one page should be available", function (assert) {
     var editor = new SurveyEditor();
     editor.text = JSON.stringify(getSurveyJson());
