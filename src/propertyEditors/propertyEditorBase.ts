@@ -1,6 +1,7 @@
 ﻿import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import {editorLocalization} from "../editorLocalization";
+import { setTimeout } from 'timers';
 
 export interface ISurveyObjectEditorOptions {
     alwaySaveTextInPropertyEditors: boolean;
@@ -24,6 +25,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     private titleValue: string;
     private isCustomDisplayName: boolean = false;
     private displayNameValue: string;
+    private rootElement: any;
+    private elements: any[] = [];
     public koValue: any;
     public koText: any;
     public koIsDefault: any;
@@ -156,6 +159,19 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
             this.onSetEditorOptions(editorOptions);
         }
     }
+    public setRenderedElements(rootElement: any, elements: any[]) {
+        this.rootElement = rootElement;
+        this.elements = elements;
+    }
+    public activate() {
+        if(!!this.rootElement) {
+            var elements = this.rootElement.getElementsByClassName("svd_editor_control");
+            if(elements.length > 0) {
+                setTimeout(() => elements[0].focus(), 1);
+            }
+        }
+    }
+    
     protected createEditorOptions(): any { return {}; }
     protected onSetEditorOptions(editorOptions: any) {}
     protected onValueChanged() {

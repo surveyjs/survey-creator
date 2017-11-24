@@ -1,32 +1,29 @@
 ﻿import * as ko from "knockout";
-import {SurveyObjectProperty} from "./objectProperty";
-import {ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
-import {editorLocalization} from "./editorLocalization";
 import * as Survey from "survey-knockout";
+
+import { SurveyObjectProperty } from "./objectProperty";
+import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
+import { editorLocalization } from "./editorLocalization";
 import { SurveyHelper } from './surveyHelper';
 
 export class SurveyObjectEditor {
     private selectedObjectValue: any;
-    private oldActiveProperty: SurveyObjectProperty;
-    public koProperties: any;
-    public koActiveProperty: any;
-    public koHasObject: any;
+    private oldActiveProperty: SurveyObjectProperty = null;
+    public koProperties = ko.observableArray<SurveyObjectProperty>();
+    public koActiveProperty = ko.observable<SurveyObjectProperty>();
+    public koHasObject = ko.observable<boolean>();
     public onPropertyValueChanged: Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any> = new Survey.Event<(sender: SurveyObjectEditor, options: any) => any, any>();
     public onCanShowPropertyCallback: (object: any, property: Survey.JsonObjectProperty) => boolean;
 
     constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
-        this.koProperties = ko.observableArray();
-        this.koActiveProperty = ko.observable();
-        this.oldActiveProperty = null;
-        var self = this;
-        this.koActiveProperty.subscribe(function(newValue) { 
-            if(self.oldActiveProperty === newValue) return;
-            if(self.oldActiveProperty) self.oldActiveProperty.isActive = false;
-            self.oldActiveProperty = newValue;            
-            if(newValue) newValue.isActive = true;  }
-        );        
-        this.koHasObject = ko.observable();
+        this.koActiveProperty.subscribe(newValue => { 
+            if(this.oldActiveProperty === newValue) return;
+            if(this.oldActiveProperty) this.oldActiveProperty.isActive = false;
+            this.oldActiveProperty = newValue;            
+            if(newValue) newValue.isActive = true;
+        });        
     }
+    
     public get selectedObject(): any { return this.selectedObjectValue; }
     public set selectedObject(value: any) {
         if (this.selectedObjectValue == value) return;

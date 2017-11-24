@@ -1,8 +1,9 @@
 ﻿import * as ko from "knockout";
+import * as Survey from "survey-knockout";
+
 import {SurveyPropertyEditorBase, ISurveyObjectEditorOptions} from "./propertyEditors/propertyEditorBase";
 import {SurveyPropertyEditorFactory} from "./propertyEditors/propertyEditorFactory";
 import {editorLocalization} from "./editorLocalization";
-import * as Survey from "survey-knockout";
 
 export declare type SurveyOnPropertyChangedCallback = (property: SurveyObjectProperty, newValue: any) => void;
 
@@ -17,7 +18,7 @@ export class SurveyObjectProperty {
     public editorType: string;
     public baseEditorType: string;
 
-    koIsShowEditor: any;
+    koIsShowEditor = ko.observable(false);
 
     constructor(public property: Survey.JsonObjectProperty, onPropertyChanged: SurveyOnPropertyChangedCallback = null, propertyEditorOptions: ISurveyObjectEditorOptions = null) {
         this.onPropertyChanged = onPropertyChanged;
@@ -29,7 +30,6 @@ export class SurveyObjectProperty {
         this.editor.onGetLocale = this.doOnGetLocale;
         this.editor.options = propertyEditorOptions;
         this.editorType = this.editor.editorType;
-        this.koIsShowEditor = ko.observable(false);
         this.isActive = false;
     }
     public get displayName(): string { return this.editor.displayName; }
@@ -39,6 +39,7 @@ export class SurveyObjectProperty {
         if(this.isActive == val) return;
         this.isActiveValue = val;
         this.koIsShowEditor(!this.disabled && (this.editor.alwaysShowEditor || this.isActive));
+        this.editor.activate();
     }
     public get koValue(): any { return this.editor.koValue; }
     public get koText(): any { return this.editor.koText; }
@@ -54,5 +55,9 @@ export class SurveyObjectProperty {
     }
     protected onEditorValueChanged(newValue) {
         if(this.onPropertyChanged && this.object) this.onPropertyChanged(this, newValue);
+    }
+
+    public afterRenderHandler = (rootElement, elements) => {
+        this.editor.setRenderedElements(rootElement, elements);
     }
 }

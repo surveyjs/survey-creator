@@ -6,7 +6,7 @@
                 <td width="50%">
                     <span data-bind="text: koText, visible: !koIsShowEditor(), attr: {title: koText}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
                     <div data-bind="visible: koIsShowEditor()">
-                        <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor } -->
+                        <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor, afterRender: function(elements) { afterRenderHandler($element.parentElement, elements); } } -->
                         <!-- /ko -->
                     </div>
                 </td>
