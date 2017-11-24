@@ -72,7 +72,7 @@ export class SurveyJSONEditor {
       this.timeoutId = -1;
     } else {
       var self = this;
-      this.timeoutId = setTimeout(function() {
+      this.timeoutId = window.setTimeout(function() {
         self.timeoutId = -1;
         self.processJson(self.text);
       }, SurveyJSONEditor.updateTextTimeout);
