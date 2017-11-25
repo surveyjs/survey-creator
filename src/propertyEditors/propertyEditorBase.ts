@@ -30,7 +30,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private editingValue_: any = null;
   private isApplyinNewValue: boolean = false;
   private objectValue: any;
-  private isValueUpdating: boolean;
+  private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
   private property_: Survey.JsonObjectProperty;
   private isRequriedValue: boolean = false;
@@ -256,11 +256,19 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected getCorrectedValue(value: any): any {
     return value;
   }
+  protected beginValueUpdating() {
+    this.valueUpdatingCounter++;
+  }
+  protected endValueUpdating() {
+    if (this.valueUpdatingCounter > 0) {
+      this.valueUpdatingCounter--;
+    }
+  }
   protected updateValue() {
-    this.isValueUpdating = true;
+    this.beginValueUpdating();
     this.koValue(this.getValue());
     this.editingValue = this.koValue();
-    this.isValueUpdating = false;
+    this.endValueUpdating();
   }
   protected getValue(): any {
     return this.property && this.object
@@ -269,7 +277,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   private iskoValueChanging: boolean = false;
   private onkoValueChanged(newValue: any) {
-    if (this.isValueUpdating || this.iskoValueChanging) return;
+    if (this.valueUpdatingCounter > 0 || this.iskoValueChanging) return;
     this.iskoValueChanging = true;
     newValue = this.getCorrectedValue(newValue);
     if (this.options && this.property && this.object) {
