@@ -973,6 +973,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     } else {
       this.survey.selectedElement = null;
     }
+    this.pagesEditor.setSelectedObject(obj);
     this.koCanDeleteObject(canDeleteObject);
     //Select2 work-around
     if (this.renderedElement && this.select2) {

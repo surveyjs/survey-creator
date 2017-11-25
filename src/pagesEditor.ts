@@ -17,6 +17,7 @@ export class SurveyPagesEditor {
   surveyValue: Survey.Survey;
   koPages: any;
   koIsValid: any;
+  koActiveObject: any;
   selectPageClick: any;
   onAddNewPageCallback: SurveyVoidCallback;
   onSelectPageCallback: SurveyPageParamCallback;
@@ -42,6 +43,7 @@ export class SurveyPagesEditor {
   ) {
     this.koPages = ko.observableArray();
     this.koIsValid = ko.observable(false);
+    this.koActiveObject = ko.observable(null);
     this.onAddNewPageCallback = onAddNewPageCallback;
     this.onSelectPageCallback = onSelectPageCallback;
     this.onMovePageCallback = onMovePageCallback;
@@ -82,6 +84,9 @@ export class SurveyPagesEditor {
     for (var i = 0; i < pages.length; i++) {
       pages[i].koSelected(pages[i].page == page);
     }
+  }
+  public setSelectedObject(obj: any) {
+    this.koActiveObject(obj);
   }
   public addNewPageClick() {
     if (this.onAddNewPageCallback) {
