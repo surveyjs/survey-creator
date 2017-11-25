@@ -1,13 +1,21 @@
 ﻿<div class="svd_container">
     <ul class="navbar-default container-fluid nav nav-tabs svd_menu">
-        <li class="nav-item" data-bind="css: {active: koViewType() == 'designer'}"><a class="nav-link" href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a></li>
-        <li class="nav-item" data-bind="visible: showJSONEditorTab, css: {active: koViewType() == 'editor'}"><a class="nav-link" href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a></li>
-        <li class="nav-item" data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}"><a class="nav-link" href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a></li>
-        <li class="nav-item" data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}"><a class="nav-link" href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a></li>
+        <li class="nav-item" data-bind="css: {active: koViewType() == 'designer'}">
+            <a class="nav-link" href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a>
+        </li>
+        <li class="nav-item" data-bind="visible: showJSONEditorTab, css: {active: koViewType() == 'editor'}">
+            <a class="nav-link" href="#" data-bind="click:selectEditorClick, text: $root.getLocString('ed.jsonEditor')"></a>
+        </li>
+        <li class="nav-item" data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}">
+            <a class="nav-link" href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a>
+        </li>
+        <li class="nav-item" data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}">
+            <a class="nav-link" href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a>
+        </li>
     </ul>
 
     <div class="panel card svd_content">
-        <div class="row svd_survey_designer"  data-bind="visible: koViewType() == 'designer'">
+        <div class="row svd_survey_designer" data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 panel panel-default card card-block svd_toolbox">
                 <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <div class="btn-group-vertical" style="width:100%;padding-right:2px">
@@ -39,14 +47,13 @@
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
                     <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
                     <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
-                </div>
-                <div class="panel-footer card-footer" data-bind="visible:surveyVerbs.koHasVerbs">
-                    <div data-bind="template: { name: 'objectverbs', data: surveyVerbs }"></div>
                 </div>
             </div>
         </div>

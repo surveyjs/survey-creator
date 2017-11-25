@@ -9,7 +9,6 @@ import { SurveyPagesEditor } from "./pagesEditor";
 import { SurveyLiveTester } from "./surveylive";
 import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
 import { SurveyObjects } from "./surveyObjects";
-import { SurveyVerbs } from "./objectVerbs";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
@@ -72,7 +71,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private surveyEmbeding: SurveyEmbedingWindow;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
-  private surveyVerbs: SurveyVerbs;
   private undoRedo: SurveyUndoRedo;
   private surveyValue: SurveyForDesigner;
   private saveSurveyFuncValue: (
@@ -338,10 +336,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.koSelectedObject
     );
     this.undoRedo = new SurveyUndoRedo();
-
-    this.surveyVerbs = new SurveyVerbs(function() {
-      self.setModified();
-    });
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
     this.selectedObjectEditorValue.onCanShowPropertyCallback = function(
@@ -959,7 +953,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private selectedObjectChanged(obj: Survey.Base) {
     var canDeleteObject = false;
     this.selectedObjectEditorValue.selectedObject = obj;
-    this.surveyVerbs.obj = obj;
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
       this.survey.currentPage = <Survey.Page>obj;
@@ -1099,7 +1092,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyObjects.survey = this.survey;
     this.pagesEditor.survey = this.survey;
     this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
-    this.surveyVerbs.survey = this.survey;
     this.surveyValue.onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
         self.surveyObjects.selectObject(sender["selectedElement"]);

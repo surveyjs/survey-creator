@@ -200,9 +200,7 @@ export var defaultStrings = {
     triggerRunIf: "Run if",
     triggerSetToName: "Change value of: ",
     triggerSetValue: "to: ",
-    triggerIsVariable: "Do not put the variable into the survey result.",
-    verbChangeType: "Change type ",
-    verbChangePage: "Change page "
+    triggerIsVariable: "Do not put the variable into the survey result."
   },
   //Property values
   pv: {
