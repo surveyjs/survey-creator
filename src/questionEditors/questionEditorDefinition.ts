@@ -1,7 +1,16 @@
 import * as Survey from "survey-knockout";
 
+export interface ISurveyQuestionEditorDefinition {
+  properties?: Array<
+    string | { name: string; category?: string; tab?: string }
+  >;
+  tabs?: Array<{ name: string; index?: number; title?: string }>;
+}
+
 export class SurveyQuestionEditorDefinition {
-  public static definition: any = {
+  public static definition: {
+    [key: string]: ISurveyQuestionEditorDefinition;
+  } = {
     questionbase: {
       properties: [
         "name",
@@ -132,7 +141,12 @@ export class SurveyQuestionEditorDefinition {
       var def = allDefinitions[i];
       if (def.properties) {
         for (var j = 0; j < def.properties.length; j++) {
-          properties.push(def.properties[j]);
+          if (
+            !def.properties[j]["tab"] ||
+            def.properties[j]["tab"] === "general"
+          ) {
+            properties.push(def.properties[j]);
+          }
         }
       }
     }
@@ -156,7 +170,9 @@ export class SurveyQuestionEditorDefinition {
     });
     return tabs;
   }
-  static getAllDefinitionsByClass(className: string): Array<any> {
+  static getAllDefinitionsByClass(
+    className: string
+  ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
     if (
       className.indexOf("@") > -1 &&

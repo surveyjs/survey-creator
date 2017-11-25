@@ -104,7 +104,7 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
     radioGroupQuestion,
     onCanShowPropertyCallback
   );
-  assert.equal(editor.koTabs().length, 3, "There are 2 tabs");
+  assert.equal(editor.koTabs().length, 3, "There are 3 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
@@ -168,6 +168,64 @@ QUnit.test("General properties different categories", function(assert) {
     properties.rows[0].properties[0].editor.displayName,
     "MyName",
     "Title property was set correctly"
+  );
+});
+
+QUnit.test("Get tabs", function(assert) {
+  SurveyQuestionEditorDefinition.definition["@testClass"] = {
+    properties: [
+      "name",
+      "car",
+      { name: "prop1", tab: "tab1" },
+      { name: "prop2", tab: "tab2" }
+    ],
+    tabs: [
+      { name: "tab1", title: "Title 1" },
+      { name: "tab2", title: "Title 2" }
+    ]
+  };
+
+  var tabs = SurveyQuestionEditorDefinition.getTabs("@testClass");
+
+  assert.equal(tabs.length, 2, "There are three tabs");
+  assert.equal(tabs[0].title, "Title 1", "Tab 1 Title");
+  assert.equal(tabs[1].title, "Title 2", "Tab 2 Title");
+});
+
+QUnit.test("Dynamically generated tabs", function(assert) {
+  SurveyQuestionEditorDefinition.definition["@testClass"] = {
+    properties: [
+      "name",
+      "car",
+      { name: "prop1", tab: "tab1" },
+      { name: "prop2", tab: "tab2" }
+    ],
+    tabs: [
+      { name: "tab1", title: "Title 1" },
+      { name: "tab2", title: "Title 2" }
+    ]
+  };
+  Survey.JsonObject.metaData.addClass(
+    "@testClass",
+    ["name:string", "prop1", "prop2", "car"],
+    () => {
+      return {};
+    }
+  );
+
+  var question = { getType: () => "@testClass" };
+  var editor = new SurveyQuestionEditor(<any>question, null);
+
+  var generalTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[0];
+  assert.equal(editor.koTabs().length, 3, "There are three tabs");
+  assert.equal(generalTab.title, "General", "Tab 1 Title");
+  assert.equal(editor.koTabs()[1].title, "Title 1", "Tab 2 Title");
+  assert.equal(editor.koTabs()[2].title, "Title 2", "Tab 3 Title");
+
+  assert.equal(
+    generalTab.properties.rows.length,
+    2,
+    "General tab should have 2 rows"
   );
 });
 

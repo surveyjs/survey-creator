@@ -11,7 +11,10 @@ import {
   SurveyQuestionEditorGeneralRow,
   SurveyQuestionEditorGeneralProperties
 } from "./questionEditorGeneralProperties";
-import { SurveyQuestionEditorDefinition } from "./questionEditorDefinition";
+import {
+  SurveyQuestionEditorDefinition,
+  ISurveyQuestionEditorDefinition
+} from "./questionEditorDefinition";
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
@@ -67,6 +70,7 @@ export class SurveyPropertyEditorShowWindow {
 
 export class SurveyQuestionProperties {
   private properties: Array<Survey.JsonObjectProperty>;
+  private editorDefinition: Array<ISurveyQuestionEditorDefinition>;
   constructor(
     public obj: Survey.Base,
     public onCanShowPropertyCallback: (
@@ -75,6 +79,9 @@ export class SurveyQuestionProperties {
     ) => boolean
   ) {
     this.properties = Survey.JsonObject.metaData.getProperties(
+      this.obj.getType()
+    );
+    this.editorDefinition = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       this.obj.getType()
     );
   }
@@ -94,6 +101,13 @@ export class SurveyQuestionProperties {
       ? property
       : null;
   }
+  public getProperties(tabName: string): Array<Survey.JsonObjectProperty> {
+    return this.editorDefinition
+      .reduce((a, b) => a.concat(b.properties), [])
+      .filter(prop => typeof prop !== "string" && prop.tab === tabName)
+      .map(prop => typeof prop !== "string" && this.getProperty(prop.name))
+      .filter(prop => !!prop);
+  }
 }
 
 export class SurveyQuestionEditor {
@@ -103,7 +117,7 @@ export class SurveyQuestionEditor {
   public onOkClick: any;
   public onApplyClick: any;
   public onResetClick: any;
-  koTabs: any;
+  koTabs: KnockoutObservableArray<SurveyQuestionEditorTabBase>;
   koActiveTab: any;
   koTitle: any;
   koShowApplyButton: any;
@@ -137,7 +151,7 @@ export class SurveyQuestionEditor {
     };
     var tabs = this.buildTabs();
     this.koActiveTab = ko.observable(tabs[0].name);
-    this.koTabs = ko.observableArray(tabs);
+    this.koTabs = ko.observableArray<SurveyQuestionEditorTabBase>(tabs);
     this.koTitle = ko.observable();
     this.koShowApplyButton = ko.observable(
       !this.options || this.options.showApplyButtonInEditors
@@ -210,14 +224,31 @@ export class SurveyQuestionEditor {
     for (var i = 0; i < tabNames.length; i++) {
       var tabItem = tabNames[i];
       var property = this.properties.getProperty(tabItem.name);
-      if (!property) continue;
-      var editorTab = new SurveyQuestionEditorTabProperty(
-        this.obj,
-        property,
-        this.options
-      );
-      if (tabItem.title) editorTab.title = tabItem.title;
-      tabs.push(editorTab);
+      if (!!property) {
+        var editorTab = new SurveyQuestionEditorTabProperty(
+          this.obj,
+          property,
+          this.options
+        );
+        if (tabItem.title) editorTab.title = tabItem.title;
+        tabs.push(editorTab);
+      } else {
+        var properties = this.properties.getProperties(tabItem.name);
+        if (properties.length > 0) {
+          var peopertiesTab = new SurveyQuestionEditorTab(
+            tabItem.name,
+            this.obj,
+            new SurveyQuestionEditorGeneralProperties(
+              this.obj,
+              properties,
+              this.onCanShowPropertyCallback,
+              this.options
+            )
+          );
+          peopertiesTab.title = tabItem.title;
+          tabs.push(peopertiesTab);
+        }
+      }
     }
   }
 }
@@ -284,6 +315,29 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
   }
   public apply() {
     this.properties.apply();
+  }
+}
+
+export class SurveyQuestionEditorTab extends SurveyQuestionEditorTabBase {
+  constructor(
+    private tabName: string,
+    public obj: Survey.Base,
+    public properties: SurveyQuestionEditorGeneralProperties = null
+  ) {
+    super(obj);
+    this.properties = properties
+      ? properties
+      : new SurveyQuestionEditorGeneralProperties(
+          obj,
+          SurveyQuestionEditorDefinition.getProperties(obj.getType()),
+          null
+        );
+  }
+  public get name(): string {
+    return this.tabName;
+  }
+  public get htmlTemplate(): string {
+    return "questioneditortab-general";
   }
 }
 
