@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyObjects } from "../src/surveyObjects";
-import { SurveyVerbChangePageItem } from "../src/objectVerbs";
 
 export default QUnit.module("surveyObjects");
 
@@ -334,31 +333,6 @@ QUnit.test("Large test on adding/remove objects with Panel", function(assert) {
   survey.removePage(page1);
   objects.removeObject(page1);
   assert.equal(objects.koObjects().length, 2, "There are two objects now");
-});
-
-QUnit.test("SurveyVerbChangePageItem test", function(assert) {
-  var survey = createSurvey();
-  var verb = new SurveyVerbChangePageItem(
-    survey,
-    survey.pages[0].questions[1],
-    null
-  );
-  assert.equal(
-    verb.koSelectedItem(),
-    survey.pages[0],
-    "The default value is first page"
-  );
-  verb.koSelectedItem(survey.pages[2]);
-  assert.equal(
-    survey.pages[0].questions.length,
-    1,
-    "one question left on the first page"
-  );
-  assert.equal(
-    survey.pages[2].questions.length,
-    3,
-    "three question now on the third page"
-  );
 });
 
 QUnit.test("PanelDynamic test", function(assert) {
