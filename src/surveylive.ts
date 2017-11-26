@@ -24,6 +24,9 @@ export class SurveyLiveTester {
     };
     this.selectPageClick = function(pageItem) {
       if (self.survey) {
+        if (self.survey.state == "starting") {
+          self.survey["start"](); //TODO
+        }
         self.survey.currentPage = pageItem.page;
       }
     };
@@ -46,6 +49,12 @@ export class SurveyLiveTester {
         self.surveyResultsText + JSON.stringify(self.survey.data)
       );
     });
+    //TODO
+    if (this.survey["onStarted"]) {
+      this.survey["onStarted"].add((sender: Survey.Survey) => {
+        self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
+      });
+    }
     this.survey.onCurrentPageChanged.add((sender: Survey.Survey, options) => {
       self.setActivePageItem(options.oldCurrentPage, false);
       self.setActivePageItem(options.newCurrentPage, true);
@@ -65,7 +74,9 @@ export class SurveyLiveTester {
         page: page,
         title: SurveyHelper.getObjectName(page),
         koVisible: ko.observable(page.isVisible),
-        koActive: ko.observable(page === this.survey.currentPage)
+        koActive: ko.observable(
+          this.survey.state == "running" && page === this.survey.currentPage
+        )
       });
     }
     this.koPages(pages);
