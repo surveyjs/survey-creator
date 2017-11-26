@@ -155,17 +155,25 @@ export class DragDropTargetElement {
     );
   }
   private findInfo(el: any, isEdge: boolean = false): any {
-    return this.findInfoInPanel(this.page, el, isEdge);
+    return this.findInfoInPanel(this.page, el, isEdge, el);
   }
 
   private findInfoInPanel(
     panel: Survey.PanelModelBase,
     el: any,
-    isEdge: boolean
+    isEdge: boolean,
+    root: any
   ): any {
     if (el == panel) {
       var parent = panel;
-      if (panel.parent && (isEdge || this.target.isPanel)) {
+      if (
+        panel.parent &&
+        (isEdge ||
+          (root &&
+            this.target &&
+            root.name == this.target.name &&
+            this.target.isPanel))
+      ) {
         parent = panel.parent;
       }
       return { panel: parent, rIndex: 0, elIndex: 0, element: panel };
@@ -177,7 +185,7 @@ export class DragDropTargetElement {
       for (var j = 0; j < elements.length; j++) {
         var element = elements[j];
         if (element.isPanel) {
-          var res = this.findInfoInPanel(element, el, isEdge);
+          var res = this.findInfoInPanel(element, el, isEdge, root);
           if (res) {
             if (res.element == element) {
               res.rIndex = i;
@@ -193,7 +201,12 @@ export class DragDropTargetElement {
           var childElements = this.getElements(element);
           for (var k = 0; k < childElements.length; k++) {
             if (childElements[k].isPanel) {
-              var res = this.findInfoInPanel(childElements[k], el, isEdge);
+              var res = this.findInfoInPanel(
+                childElements[k],
+                el,
+                isEdge,
+                root
+              );
               if (res) return res;
             }
           }
