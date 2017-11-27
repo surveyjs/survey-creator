@@ -132,7 +132,12 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "visibleIf", index: 100 }]
     },
     survey: {
-      properties: ["name", "title"]
+      properties: [
+        "title",
+        "requiredText",
+        "showPageNumbers",
+        "showProgressBar"
+      ]
     }
   };
   public static getProperties(className: string): Array<any> {
