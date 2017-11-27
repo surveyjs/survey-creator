@@ -1,5 +1,5 @@
 ﻿$main-color: #1ab394;
-$dark-main-color:#18a689;
+$dark-main-color: #18a689;
 $text-color: #676a6c;
 $light-text-color: #a7a7a7;
 $light-border-color: #e7eaec;
@@ -7,867 +7,871 @@ $dark-border-color: #ddd;
 $light-bg-color: #fff;
 $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
-$editor-height:75vh;
+$editor-height: 75vh;
 
 @media (max-width: 816px) {
-    .svd_container .nav-tabs.svd_menu > li.active > a {
-        color: $main-color;
-        background-color: transparent;
-        border: none;
+  .svd_container .nav-tabs.svd_menu > li.active > a {
+    color: $main-color;
+    background-color: transparent;
+    border: none;
 
-        &:hover, &:focus {
-            color: $main-color;
-            background-color: transparent;
-        }
+    &:hover,
+    &:focus {
+      color: $main-color;
+      background-color: transparent;
     }
+  }
 }
-
 
 .svd_object_editor {
-    background-color: $light-bg-color;
-    height: $editor-height;
-    overflow-y: scroll;
+  background-color: $light-bg-color;
+  height: $editor-height;
+  overflow-y: scroll;
 }
 
 .svd_container {
+  background-color: $light-bg-color;
+  position: relative;
+
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+
+  .svd_menu {
     background-color: $light-bg-color;
-    position: relative;
+    border-top: 1px solid $light-border-color;
+    border-bottom: 1px solid $light-border-color;
+    padding: 19px 15px 0 15px;
 
-    * {
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
+    > li > a {
+      border: none;
+      border-radius: 0;
+      padding: 8px 9px 9px 11px;
+      width: 115px;
+      text-align: center;
+      font-size: 11px;
+
+      &:hover,
+      &:focus {
+        background-color: $dark-bg-color;
+        border-bottom: 1px solid $dark-bg-color;
+      }
     }
 
-    .svd_menu {
-        background-color: $light-bg-color;
-        border-top: 1px solid $light-border-color;
-        border-bottom: 1px solid $light-border-color;
-        padding: 19px 15px 0 15px;
+    > li.active > a {
+      background-color: $dark-bg-color;
+      border: 1px solid $light-border-color;
+      border-bottom-color: $dark-bg-color;
 
-        > li > a {
-            border: none;
-            border-radius: 0;
-            padding: 8px 9px 9px 11px;
-            width: 115px;
-            text-align: center;
-            font-size: 11px;
-
-            &:hover, &:focus {
-                background-color: $dark-bg-color;
-                border-bottom: 1px solid $dark-bg-color;
-            }
-        }
-
-        > li.active > a {
-            background-color: $dark-bg-color;
-            border: 1px solid $light-border-color;
-            border-bottom-color: $dark-bg-color;
-
-            &:hover, &:focus {
-                color: $main-color;
-                background-color: $dark-bg-color;
-            }
-        }
-    }
-
-    a, a.nav-link {
+      &:hover,
+      &:focus {
         color: $main-color;
-        cursor: pointer;
+        background-color: $dark-bg-color;
+      }
     }
+  }
+
+  a,
+  a.nav-link {
+    color: $main-color;
+    cursor: pointer;
+  }
+
+  .btn.btn-primary {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
+  .svd_actions {
+    padding: 5px 0;
 
     .btn.btn-primary {
-        background-color: $main-color;
-        border-color: $main-color;
+      margin-right: 10px;
+      font-size: 11px;
     }
 
-    .svd_actions {
-        padding: 5px 0;
-
-        .btn.btn-primary {
-            margin-right: 10px;
-            font-size: 11px;
-        }
-
-        .btn-group.open .dropdown-toggle {
-            background-color: $main-color;
-            border-color: $main-color;
-        }
-
-        .dropdown-menu > .active > a {
-            background-color: $main-color;
-        }
-    }
-    .svd_state {
-        float: right;
-        padding: 10px 0;
-
-        .icon {
-            display: inline-block;
-        }
+    .btn-group.open .dropdown-toggle {
+      background-color: $main-color;
+      border-color: $main-color;
     }
 
-    .svd_content {
-        background-color: $dark-bg-color;
-        padding: 30px;
-        margin: 0;
+    .dropdown-menu > .active > a {
+      background-color: $main-color;
+    }
+  }
+  .svd_state {
+    float: right;
+    padding: 10px 0;
+
+    .icon {
+      display: inline-block;
+    }
+  }
+
+  .svd_content {
+    background-color: $dark-bg-color;
+    padding: 30px;
+    margin: 0;
+    border: none;
+
+    .svd_survey_designer {
+      .svd_toolbar {
+        list-style: none;
+        background-color: transparent;
         border: none;
-
-        .svd_survey_designer {
-            .svd_toolbar {
-                list-style: none;
-                background-color: transparent;
-                border: none;
-                padding: 0;
-
-                .ddmenu-container {
-                    &.toolbar-options {
-                    
-                        ul {
-                            background: white;
-                            border: 1px solid #ccc;
-                            border-radius: 4px;
-                            padding: 0;
-                            box-shadow: 0 6px 12px rgba(0,0,0,.175);
-                            min-width: 160px;
-                            left: 0;
-                            margin-top: -1px;
-                            border-top-left-radius: 0;
-                            border-top-right-radius: 0;
-                    
-                            li {
-                                margin: 5px 0;
-
-                                &.active {
-                                    a {
-                                        background-color: #1ab394;
-                                        color: white;
-                                    }
-                                }
-                    
-                                a {
-                                    width: 100%;
-                                    white-space: nowrap;
-                                    display: block;
-                                    padding: 3px 20px;
-                                    clear: both;
-                                    font-weight: 400;
-                                    line-height: 1.42857143;
-                                    color: #333;
-                                    text-decoration: none;
-                                }
-                            }
-                        }
-                    }
-                }
-
-
-
-                &.svd_menu {
-                    & > li.svd_actions:not(.svd_state) {
-                        float: none;
-                        display: inline-block;
-                    }
-                }
-            }
-
-            .svd_toolbox {
-                background-color: $dark-bg-color;
-                border: none;
-
-                .svd_toolbox_title {
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    color: #6d7072;
-                    padding-top: 5px;
-                    padding-bottom: 10px;
-                }
-
-                .panel-heading, .card-header {
-                    background-color: $dark-bg-color;
-                    color: $text-color;
-                    border: none;
-                    padding: 0 0 30px 0;
-                    font-size: 15px;
-                }
-
-                .btn-group-vertical {
-                    .btn {
-                        background-color: $dark-bg-color;
-                        border: none;
-                        padding: 8px 0;
-                        border-bottom: 1px solid $light-border-color;
-                        box-shadow: none;
-
-                        [class^="icon-"], [class*=" icon-"] {
-                            font-size: 16px;
-                            position: absolute;
-                            color: $text-color;
-                        }
-
-                        .icon-default {
-                            color: $main-color;
-                        }
-
-                        .svd_toolbox_item_text {
-                            margin-left: 35px;
-                            color: $text-color;
-                            position: relative;
-                            line-height: 16px;
-                            vertical-align: middle;
-                        }
-                    }
-                }
-            }
-
-            .svd_editors {
-                .svd_pages_editor {
-                    background-color: $light-bg-color;
-                    border-top: 2px solid $light-border-color;
-                    padding: 10px 15px 0 15px;
-
-                    .nav-tabs {
-                        border: none;
-
-                        > li {
-                            position: relative;
-                            margin-right: 2px;
-                            margin-bottom: 2px;
-                            border: 1px solid $dark-border-color;
-                            border-radius: 3px;
-                            padding: 7px 22px 7px 12px;
-                            cursor: pointer;
-                            
-                            &.active {
-                                .svd_page_nav  {
-                                    color: $main-color;
-                                    margin-right: 2px;
-                                }
-
-                                &:hover {
-                                    background-color: transparent;
-                                }
-                            }
-
-                            &:hover {
-                                background-color: #eee; 
-                            }
-
-                            &:last-child {
-                                border: none;
-                                &:hover {
-                                    background-color: transparent; 
-                                }
-                            }
-
-                            .svd_page_nav {
-                                display: inline-block;
-                                border: none;
-                                padding: 0;
-                                margin-bottom: 1px;
-                                color: #676a6c;
-                                background-color: transparent;
-                            }
-
-                            .ddmenu-container {
-                                &.page-nav {
-                                    position: absolute;
-                                    right: 5px;
-                                    top: 8px;
-
-                                    ul {
-                                        background: white;
-                                        border: 1px solid #ccc;
-                                        border-radius: 4px;
-                                        padding: 0;
-                                        box-shadow: 0 6px 12px rgba(0,0,0,.175);
-                                        min-width: 160px;
-                                        right: -6px;
-                                        margin-top: 7px;
-                                        border-top-left-radius: 0;
-                                        border-top-right-radius: 0;
-                                
-                                        li {
-                                            margin: 5px;
-                                
-                                            button {
-                                                width: 100%;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    .svd_add_new_page_btn {
-                        border: none;
-                        padding: 0;
-                        box-shadow: none;
-                        background-color: transparent;
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                        &:hover {
-                            background-color: transparent;
-                        }
-
-                        .glyphicon-plus {
-                            color: $text-color;
-                        }
-                    }
-                }
-
-                .svd_questions_editor {
-                    background-color: $light-bg-color;
-                    height: $editor-height;
-                    overflow-y: scroll;
-
-                    .panel-body, .card-block {
-                        .svd_question {
-                            box-shadow: none;
-                            border-radius: 0;
-                            padding: 20px 9px;
-                            background-color: #f5f5f5;
-                            margin-bottom: 20px;
-
-                            .svd_question_menu {
-                                position: absolute;
-                                right: 5px;
-                                top: 5px;
-
-                                .ddmenu-container {
-                                    &.element-addons{
-                                        margin-left: 5px;
-                                    
-                                        ul {
-                                            background: white;
-                                            border: 1px solid #ccc;
-                                            border-radius: 4px;
-                                            padding: 5px 0;
-                                            box-shadow: 0 6px 12px rgba(0,0,0,.175);
-                                            min-width: 160px;
-                                            right: 0;
-                                    
-                                            li {
-                                                margin: 5px;
-                                    
-                                                button {
-                                                    width: 100%;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                               
-                                .glyphicon-option-horizontal {
-                                    color: $main-color;
-                                }
-                            }
-                        }
-
-                        .svd_question_container .svd_question {
-                            background-color: $bg-color;
-                            border-top: 1px solid $dark-border-color;
-                            border-bottom: 1px solid $dark-border-color;
-
-                            &.svd_q_selected {
-                                border: 1px solid $main-color !important;
-                            }
-                        }
-                    }
-                }
-            }
-
-            .svd_properties {
-                border: none;
-                border-top: 2px solid $light-border-color;
-                border-radius: 0;
-                padding: 0;
-
-                .panel-heading, .card-header {
-                    background-color: #fff;
-                    border: none;
-                    border-bottom: 1px solid $light-border-color;
-
-                    .svd_custom_select {
-                        display: inline-block;
-                        width: 100%;
-
-                        &>select {
-                            width: 100%;
-                        }
-                    }
-
-                    .btn {
-                        display: inline-block;
-                        padding: 0;
-                        margin: 0 0 0 10px;
-                        border: none;
-
-                        &:hover {
-                            background-color: transparent;
-                        }
-                    }
-                }
-
-                .input-group-btn {
-                    .btn {
-                        margin-left: 5px;
-                        border: none;
-                        background: transparent;
-
-                        &:active {
-                            box-shadow: none;
-                        }
-                    }
-                }
-
-                input[type="checkbox"].form-control {
-                    width: 25px;
-                }
-
-                .table {
-                    color: $text-color;
-                    font-weight: 600;
-
-                    .active > td:nth-child(1) {
-                        border-left: 1px solid $light-bg-color;
-                    }
-
-                    td {
-                        border: none;
-                        height: 40px;
-                        padding: 0 10px 0 10px;
-                        vertical-align: middle;
-
-                        &:nth-child(2) {
-                            color: $light-text-color;
-                        }
-                    }
-                }
-            }
-        }
-
-        .svd_json_editor {
-            height: 450px;
-        }
-        .svd_json_editor_area {
-            height: 450px;
-            width: 100%;
-        }
-    }
-
-    .glyphicon {
-        font-weight: bold;
-        display: inline-block;
-        font-family: inherit;
-        cursor: pointer;
-        line-height: 1em;
-
-        &.glyphicon-plus::before {
-            font-size: 20px;
-            line-height: 20px;
-            content: '+';
-        }
-        &.glyphicon-option-horizontal::before {
-            font-size: 20px;
-            content: '⋯';
-        }
-        &.glyphicon-remove::before {
-            font-size: 20px;
-            content: '✖';
-        }
-        &.glyphicon-edit::before {
-            content: '';
-        }
-        &.glyphicon-trash::before {
-            font-size: 1.25em;
-            content: '🗑';
-        }
-        &.glyphicon-list-alt::before {
-            content: '⇐'; // '🗸'
-        }
-        &.glyphicon-arrow-down::before {
-            content: '↓';
-        }
-        &.glyphicon-arrow-up::before {
-            content: '↑';
-        }
-    }
-}
-
-.svd_container {
-    [draggable] {
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-        /* Required to make elements draggable in old WebKit */
-        -khtml-user-drag: element;
-        -webkit-user-drag: element;
-    }
-    .svd_wrap_elements {
-        white-space: normal;
-    }
-    .svd_table-nowrap {
-        table-layout: fixed;
-    }
-    .svd_table-nowrap td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        padding: 0;
 
         .ddmenu-container {
-            &.propertyeditor-triggers, &.propertyeditor-validators {
-            
-                ul {
+          &.toolbar-options {
+            ul {
+              background: white;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 0;
+              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+              min-width: 160px;
+              left: 0;
+              margin-top: -1px;
+              border-top-left-radius: 0;
+              border-top-right-radius: 0;
+
+              li {
+                margin: 5px 0;
+
+                &.active {
+                  a {
+                    background-color: #1ab394;
+                    color: white;
+                  }
+                }
+
+                a {
+                  width: 100%;
+                  white-space: nowrap;
+                  display: block;
+                  padding: 3px 20px;
+                  clear: both;
+                  font-weight: 400;
+                  line-height: 1.42857143;
+                  color: #333;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+
+        &.svd_menu {
+          & > li.svd_actions:not(.svd_state) {
+            float: none;
+            display: inline-block;
+          }
+        }
+      }
+
+      .svd_toolbox {
+        background-color: $dark-bg-color;
+        border: none;
+
+        .svd_toolbox_title {
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #6d7072;
+          padding-top: 5px;
+          padding-bottom: 10px;
+        }
+
+        .panel-heading,
+        .card-header {
+          background-color: $dark-bg-color;
+          color: $text-color;
+          border: none;
+          padding: 0 0 30px 0;
+          font-size: 15px;
+        }
+
+        .btn-group-vertical {
+          .btn {
+            background-color: $dark-bg-color;
+            border: none;
+            padding: 8px 0;
+            border-bottom: 1px solid $light-border-color;
+            box-shadow: none;
+
+            [class^="icon-"],
+            [class*=" icon-"] {
+              font-size: 16px;
+              position: absolute;
+              color: $text-color;
+            }
+
+            .icon-default {
+              color: $main-color;
+            }
+
+            .svd_toolbox_item_text {
+              margin-left: 35px;
+              color: $text-color;
+              position: relative;
+              line-height: 16px;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+
+      .svd_editors {
+        .svd_pages_editor {
+          background-color: $light-bg-color;
+          border-top: 2px solid $light-border-color;
+          padding: 10px 15px 0 15px;
+
+          .nav-tabs {
+            border: none;
+
+            > li {
+              position: relative;
+              margin-right: 2px;
+              margin-bottom: 2px;
+              border: 1px solid $dark-border-color;
+              border-radius: 3px;
+              padding: 7px 22px 7px 12px;
+              cursor: pointer;
+
+              &.active {
+                .svd_page_nav {
+                  color: $main-color;
+                  margin-right: 2px;
+                }
+
+                &:hover {
+                  background-color: transparent;
+                }
+              }
+
+              &:hover {
+                background-color: #eee;
+              }
+
+              &:last-child {
+                border: none;
+                &:hover {
+                  background-color: transparent;
+                }
+              }
+
+              .svd_page_nav {
+                display: inline-block;
+                border: none;
+                padding: 0;
+                margin-bottom: 1px;
+                color: #676a6c;
+                background-color: transparent;
+              }
+
+              .ddmenu-container {
+                &.page-nav {
+                  position: absolute;
+                  right: 5px;
+                  top: 8px;
+
+                  ul {
                     background: white;
                     border: 1px solid #ccc;
                     border-radius: 4px;
                     padding: 0;
-                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
                     min-width: 160px;
-                    left: 0;
-                    z-index: 2000;
-                    margin-top: 3px;
-                    font-size: 14px;
-            
+                    right: -6px;
+                    margin-top: 7px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+
                     li {
-                        margin: 5px 0;
+                      margin: 5px;
+
+                      button {
                         width: 100%;
-
-                        a {
-                            padding: 3px 20px;
-                            color: #262626;
-                            width: 100%;
-                            font-weight: 400;
-                            display: block;
-
-                            &:hover {
-                                background-color: #f5f5f5;
-                                text-decoration: none;
-                            }
-                        }
+                      }
                     }
+                  }
                 }
+              }
             }
+          }
+
+          .svd_add_new_page_btn {
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            background-color: transparent;
+
+            &:focus {
+              outline: none;
+            }
+
+            &:hover {
+              background-color: transparent;
+            }
+
+            .glyphicon-plus {
+              color: $text-color;
+            }
+          }
         }
+
+        .svd_questions_editor {
+          background-color: $light-bg-color;
+          height: $editor-height;
+          overflow-y: scroll;
+
+          .panel-body,
+          .card-block {
+            .svd_question {
+              box-shadow: none;
+              border-radius: 0;
+              padding: 20px 9px;
+              background-color: #f5f5f5;
+              margin-bottom: 20px;
+
+              .svd_question_menu {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+
+                .ddmenu-container {
+                  &.element-addons {
+                    margin-left: 5px;
+
+                    ul {
+                      background: white;
+                      border: 1px solid #ccc;
+                      border-radius: 4px;
+                      padding: 5px 0;
+                      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+                      min-width: 160px;
+                      right: 0;
+
+                      li {
+                        margin: 5px;
+
+                        button {
+                          width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                .glyphicon-option-horizontal {
+                  color: $main-color;
+                }
+              }
+            }
+
+            .svd_question_container .svd_question {
+              background-color: $bg-color;
+              border-top: 1px solid $dark-border-color;
+              border-bottom: 1px solid $dark-border-color;
+
+              &.svd_q_selected {
+                border: 1px solid $main-color !important;
+              }
+            }
+          }
+        }
+      }
+
+      .svd_properties {
+        border: none;
+        border-top: 2px solid $light-border-color;
+        border-radius: 0;
+        padding: 0;
+
+        .panel-heading,
+        .card-header {
+          background-color: #fff;
+          border: none;
+          border-bottom: 1px solid $light-border-color;
+
+          .svd_custom_select {
+            display: inline-block;
+            width: 100%;
+
+            & > select {
+              width: 100%;
+            }
+          }
+
+          .btn {
+            display: inline-block;
+            padding: 0;
+            margin: 0 0 0 10px;
+            border: none;
+
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+
+        .input-group-btn {
+          .btn {
+            margin-left: 5px;
+            border: none;
+            background: transparent;
+
+            &:active {
+              box-shadow: none;
+            }
+          }
+        }
+
+        input[type="checkbox"].form-control {
+          width: 25px;
+        }
+
+        .table {
+          color: $text-color;
+          font-weight: 600;
+
+          .active > td:nth-child(1) {
+            border-left: 1px solid $light-bg-color;
+          }
+
+          td {
+            border: none;
+            height: 40px;
+            padding: 0 10px 0 10px;
+            vertical-align: middle;
+
+            &:nth-child(2) {
+              color: $light-text-color;
+            }
+          }
+        }
+      }
     }
-    .svd_q_selected {
-        border: 1px solid $main-color !important;
+
+    .svd_json_editor {
+      height: 450px;
     }
-    .svd_q_design {
-        pointer-events: none;
+    .svd_json_editor_area {
+      height: 450px;
+      width: 100%;
     }
-    .svd_q_design_border {
-        position: relative;
+  }
+
+  .glyphicon {
+    font-weight: bold;
+    display: inline-block;
+    font-family: inherit;
+    cursor: pointer;
+    line-height: 1em;
+
+    &.glyphicon-plus::before {
+      font-size: 20px;
+      line-height: 20px;
+      content: "+";
     }
-    .svd_dragover {
-        pointer-events: none;
-        width: 100%;
-        height: 5px;
-        border: 2px dashed #000;
+    &.glyphicon-option-horizontal::before {
+      font-size: 20px;
+      content: "⋯";
     }
-    .svd_navbarbuttons {
-        margin-top: 3px
+    &.glyphicon-remove::before {
+      font-size: 20px;
+      content: "✖";
     }
+    &.glyphicon-edit::before {
+      content: "";
+    }
+    &.glyphicon-trash::before {
+      font-size: 1.25em;
+      content: "🗑";
+    }
+    &.glyphicon-list-alt::before {
+      content: "⇐"; // '🗸'
+    }
+    &.glyphicon-arrow-down::before {
+      content: "↓";
+    }
+    &.glyphicon-arrow-up::before {
+      content: "↑";
+    }
+  }
+}
+
+.svd_container {
+  [draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+  }
+  .svd_wrap_elements {
+    white-space: normal;
+  }
+  .svd_table-nowrap {
+    table-layout: fixed;
+  }
+  .svd_table-nowrap td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .ddmenu-container {
+      &.propertyeditor-triggers,
+      &.propertyeditor-validators {
+        ul {
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 0;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          min-width: 160px;
+          left: 0;
+          z-index: 2000;
+          margin-top: 3px;
+          font-size: 14px;
+
+          li {
+            margin: 5px 0;
+            width: 100%;
+
+            a {
+              padding: 3px 20px;
+              color: #262626;
+              width: 100%;
+              font-weight: 400;
+              display: block;
+
+              &:hover {
+                background-color: #f5f5f5;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .svd_q_selected {
+    border: 1px solid $main-color !important;
+  }
+  .svd_q_design {
+    pointer-events: none;
+  }
+  .svd_q_design_border {
+    position: relative;
+  }
+  .svd_dragover {
+    pointer-events: none;
+    width: 100%;
+    height: 5px;
+    border: 2px dashed #000;
+  }
+  .svd_navbarbuttons {
+    margin-top: 3px;
+  }
 }
 
 .svd-manage-mask {
-    z-index:9999;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.15);
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .svd-manage {
-    margin: 10px 15px;
-    position: relative;
+  margin: 10px 15px;
+  position: relative;
 
-    .svd-manage-control {
-        width: calc(100% - 150px);
-        display: inline-block;
+  .svd-manage-control {
+    width: calc(100% - 150px);
+    display: inline-block;
 
-        > * {
-            width: 100%;
-            height: 32px;
-            padding: 5px;
-            color: $text-color;
-        }
-        > select {
-            border-color: $light-border-color;
-        }
-        > input {
-            border-color: none;
-        }
+    > * {
+      width: 100%;
+      height: 32px;
+      padding: 5px;
+      color: $text-color;
     }
-    .svd-manage-buttons {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 120px;
-        text-align: right;
-        margin-right: 15px;
-
-        .icon {
-            color: $main-color;
-            cursor: pointer;
-            vertical-align: middle;
-            line-height: 32px;
-            display: inline-block;
-
-            &:hover {
-                color: $dark-main-color;
-            }
-        }
-        .icon-edit {
-            margin-right: 20px;
-        }
+    > select {
+      border-color: $light-border-color;
     }
+    > input {
+      border-color: none;
+    }
+  }
+  .svd-manage-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    text-align: right;
+    margin-right: 15px;
+
+    .icon {
+      color: $main-color;
+      cursor: pointer;
+      vertical-align: middle;
+      line-height: 32px;
+      display: inline-block;
+
+      &:hover {
+        color: $dark-main-color;
+      }
+    }
+    .icon-edit {
+      margin-right: 20px;
+    }
+  }
 }
 .svd_container {
-    .svd_menu > li.link-to-attach > a {
-        width: auto;
-        color: #18a689;
-    }
-    .svd_menu > li.link-to-attach > a:hover {
-        background-color: transparent;
-        color: #1ab394;
-        border: none;
-    }
-    .svd_actions.link-to-attach {
-        margin-left: 5px;
-        font-weight: 500;
-        background-color: transparent;
-        border: none;
-    }
-    .link-to-attach span:last-child {
-        margin-left: 5px;
-    }
+  .svd_menu > li.link-to-attach > a {
+    width: auto;
+    color: #18a689;
+  }
+  .svd_menu > li.link-to-attach > a:hover {
+    background-color: transparent;
+    color: #1ab394;
+    border: none;
+  }
+  .svd_actions.link-to-attach {
+    margin-left: 5px;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+  }
+  .link-to-attach span:last-child {
+    margin-left: 5px;
+  }
 }
 
 @mixin svg-icon($icon-size) {
-    content: "";
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: $icon-size / 2;
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: $icon-size / 2;
 }
 
 .icon-panel:before {
-    background-image: url('./images/Panel.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Panel.svg");
+  @include svg-icon(16px);
 }
 .icon-paneldynamic:before {
-    background-image: url('./images/PanelDynamic.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/PanelDynamic.svg");
+  @include svg-icon(16px);
 }
 .icon-checkbox:before {
-    background-image: url('./images/Checkbox.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Checkbox.svg");
+  @include svg-icon(16px);
 }
 .icon-comment:before {
-    background-image: url('./images/Comment.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Comment.svg");
+  @include svg-icon(16px);
 }
 .icon-dropdown:before {
-    background-image: url('./images/Dropdown.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Dropdown.svg");
+  @include svg-icon(16px);
 }
 .icon-file:before {
-    background-image: url('./images/File.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/File.svg");
+  @include svg-icon(16px);
 }
 .icon-html:before {
-    background-image: url('./images/HTML.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/HTML.svg");
+  @include svg-icon(16px);
 }
 .icon-default:before {
-    background-image: url('./images/Matrix.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Matrix.svg");
+  @include svg-icon(16px);
 }
 .icon-matrixdynamic:before {
-    background-image: url('./images/Matrix_dynamic.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Matrix_dynamic.svg");
+  @include svg-icon(16px);
 }
 .icon-matrixdropdown:before {
-    background-image: url('./images/Matrix_multiple.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Matrix_multiple.svg");
+  @include svg-icon(16px);
 }
 .icon-matrix:before {
-    background-image: url('./images/Matrix_single.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Matrix_single.svg");
+  @include svg-icon(16px);
 }
 .icon-multipletext:before {
-    background-image: url('./images/Multipletext.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Multipletext.svg");
+  @include svg-icon(16px);
 }
 .icon-radiogroup:before {
-    background-image: url('./images/Radiogroup.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Radiogroup.svg");
+  @include svg-icon(16px);
 }
 .icon-rating:before {
-    background-image: url('./images/Rating.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Rating.svg");
+  @include svg-icon(16px);
 }
 .icon-text:before {
-    background-image: url('./images/Text.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Text.svg");
+  @include svg-icon(16px);
 }
 .icon-boolean:before {
-    background-image: url('./images/Boolean.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Boolean.svg");
+  @include svg-icon(16px);
 }
 .icon-expression:before {
-    background-image: url('./images/Expression.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/Expression.svg");
+  @include svg-icon(16px);
 }
 .icon-editor:before {
-    background-image: url('./images/cw/Editor.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/Editor.svg");
+  @include svg-icon(16px);
 }
 .icon-imagepicker:before {
-    background-image: url('./images/cw/ImagePicker.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/ImagePicker.svg");
+  @include svg-icon(16px);
 }
 .icon-barrating:before {
-    background-image: url('./images/cw/Barrating.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/Barrating.svg");
+  @include svg-icon(16px);
 }
 .icon-datepicker:before {
-    background-image: url('./images/cw/DatePicker.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/DatePicker.svg");
+  @include svg-icon(16px);
 }
 .icon-nouislider:before {
-    background-image: url('./images/cw/noUISlider.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/noUISlider.svg");
+  @include svg-icon(16px);
 }
 .icon-tagbox:before {
-    background-image: url('./images/cw/TagBox.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/TagBox.svg");
+  @include svg-icon(16px);
 }
 .icon-signaturepad:before {
-    background-image: url('./images/cw/SingaturePad.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/SingaturePad.svg");
+  @include svg-icon(16px);
 }
 .icon-sortablelist:before {
-    background-image: url('./images/cw/SortableJS.svg');
-    @include svg-icon(16px);
+  background-image: url("./images/cw/SortableJS.svg");
+  @include svg-icon(16px);
 }
 
 .icon-delete:before {
-    background-image: url('./images/Delete_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Delete_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-edit:before {
-    background-image: url('./images/Edit_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Edit_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-fork:before {
-    background-image: url('./images/Fork_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Fork_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-modified:before {
-    background-image: url('./images/Modified_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Modified_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-new:before {
-    background-image: url('./images/New_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/New_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-saved:before {
-    background-image: url('./images/Saved_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Saved_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-saving:before {
-    background-image: url('./images/Saving_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Saving_24x24.svg");
+  @include svg-icon(24px);
 }
 .icon-cloud:before {
-    background-image: url('./images/Cloud_24x24.svg');
-    @include svg-icon(24px);
+  background-image: url("./images/Cloud_24x24.svg");
+  @include svg-icon(24px);
 }
 
 .animated {
-    -webkit-animation-duration: 0.2s;
-    animation-duration: 0.2s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  @-webkit-keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-  
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-  
-    to {
-      opacity: 1;
-    }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
+
+  to {
+    opacity: 1;
   }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
 
 @-webkit-keyframes fadeInDown {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
-  }
-  
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
-    }
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
 
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
 .fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
 }
 
 .modal {
-    display: none;
-    background: rgba(0, 0, 0, .30);
-    z-index: 999;
+  display: none;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
 
-    .modal-dialog {
-        max-width: 600px;
-    }
+  .modal-dialog {
+    max-width: 600px;
+  }
 }
 
 .modal-open {
-    overflow-y: inherit;
+  overflow-y: inherit;
 }
