@@ -52,11 +52,10 @@ var packagePlatformJson = {
     "survey-knockout": "^" + packageJson.version,
     knockout: "^3.4.0",
     bootstrap: "^3.3.6",
-    "ace-builds": "^1.2.2"
-  },
-  devDependencies: {
+    "ace-builds": "^1.2.2",
     "@types/knockout": "^3.4.0"
-  }
+  },
+  devDependencies: {}
 };
 
 module.exports = function(options) {
