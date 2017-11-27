@@ -1,4 +1,6 @@
 ﻿<script type="text/html" id="pageeditor">
+    <button class="btn btn-default svd_edit_survey" data-bind="click:editSurveyClick, text:  $root.getLocString('ed.editSurvey')">
+    </button>
     <ul class="nav nav-tabs" data-bind="tabs:true">
         <!-- ko foreach: koPages -->
         <li data-bind="css: { active: koSelected() }, event:{
@@ -7,13 +9,13 @@
            dragover:function(el, e){ $parent.dragOver(el);},
            dragend:function(el, e){ $parent.dragEnd();},
            drop:function(el, e){ $parent.dragDrop(el);}
-         }, click:$parent.selectPageClick"> 
+         }, click:$parent.selectPageClick">
             <a class="nav-link svd_page_nav" href="#">
                 <span data-bind="text: title"></span>
             </a>
             <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: $parent.koActiveObject() == $data.page">
                 <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
-        
+
                 <div class="ddmenu">
                     <span tabindex="0">
                         <span class="glyphicon glyphicon-option-horizontal"></span>
@@ -32,6 +34,10 @@
             </div>
         </li>
         <!-- /ko  -->
-        <li><button class="btn btn-default svd_add_new_page_btn" data-bind="click:addNewPageClick, attr: {title:  $root.getLocString('ed.addNewPage')}" ><span class="glyphicon glyphicon-plus"></span></button></li>
+        <li>
+            <button class="btn btn-default svd_add_new_page_btn" data-bind="click:addNewPageClick, attr: {title:  $root.getLocString('ed.addNewPage')}">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </li>
     </ul>
 </script>

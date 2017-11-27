@@ -378,6 +378,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       (page: Survey.QuestionBase) => {
         self.showQuestionEditor(page);
+      },
+      () => {
+        self.showQuestionEditor(this.survey);
       }
     );
     this.surveyLive = new SurveyLiveTester();
@@ -1248,7 +1251,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Show the Question Editor dialog.
    * @param question The Survey.Question object
    */
-  public showQuestionEditor(question: Survey.QuestionBase) {
+  public showQuestionEditor(question: Survey.Base) {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>this.renderedElement.querySelector(

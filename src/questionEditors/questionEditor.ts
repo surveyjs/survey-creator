@@ -31,7 +31,7 @@ export class SurveyPropertyEditorShowWindow {
     this.koEditor = ko.observable(null);
   }
   public show(
-    questionBase: Survey.QuestionBase,
+    questionBase: Survey.Base,
     elWindow: HTMLElement,
     onChanged: (question: Survey.QuestionBase) => any,
     options: ISurveyObjectEditorOptions = null
@@ -163,6 +163,8 @@ export class SurveyQuestionEditor {
           .getString("pe.qEditorTitle")
           ["format"](this.obj["name"])
       );
+    } else {
+      this.koTitle(editorLocalization.getString("pe.surveyEditorTitle"));
     }
   }
   protected doCloseWindow(isCancel: boolean) {

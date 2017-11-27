@@ -97,6 +97,7 @@ export var defaultStrings = {
   //Strings in Editor
   ed: {
     survey: "Survey",
+    editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     deletePage: "Delete Page",
     editPage: "Edit Page",
@@ -171,6 +172,7 @@ export var defaultStrings = {
     inputType: "Input type",
     optionsCaption: "Options caption",
 
+    surveyEditorTitle: "Edit survey",
     qEditorTitle: "Edit question: {0}",
     tabs: {
       general: "General",

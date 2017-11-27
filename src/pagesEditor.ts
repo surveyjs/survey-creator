@@ -19,6 +19,7 @@ export class SurveyPagesEditor {
   koIsValid: any;
   koActiveObject: any;
   selectPageClick: any;
+  onShowSurveyEditDialog: SurveyVoidCallback;
   onAddNewPageCallback: SurveyVoidCallback;
   onSelectPageCallback: SurveyPageParamCallback;
   onDeletePageCallback: SurveyPageParamCallback;
@@ -39,11 +40,13 @@ export class SurveyPagesEditor {
     onMovePageCallback: SurveyMovePageCallback = null,
     onDeletePageCallback: SurveyPageParamCallback = null,
     onModifiedCallback: SurveyVoidCallback = null,
-    onShowPageEditDialog: SurveyQuestionParamCallback = null
+    onShowPageEditDialog: SurveyQuestionParamCallback = null,
+    onShowSurveyEditDialog: SurveyVoidCallback = null
   ) {
     this.koPages = ko.observableArray();
     this.koIsValid = ko.observable(false);
     this.koActiveObject = ko.observable(null);
+    this.onShowSurveyEditDialog = onShowSurveyEditDialog;
     this.onAddNewPageCallback = onAddNewPageCallback;
     this.onSelectPageCallback = onSelectPageCallback;
     this.onMovePageCallback = onMovePageCallback;
@@ -91,6 +94,11 @@ export class SurveyPagesEditor {
   public addNewPageClick() {
     if (this.onAddNewPageCallback) {
       this.onAddNewPageCallback();
+    }
+  }
+  public editSurveyClick() {
+    if (this.onShowSurveyEditDialog) {
+      this.onShowSurveyEditDialog();
     }
   }
   public showQuestionEditor(data: any) {
