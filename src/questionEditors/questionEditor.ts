@@ -48,6 +48,7 @@ export class SurveyPropertyEditorShowWindow {
     this.koVisible(true);
 
     var modal = new RModal(elWindow, {
+      bodyClass: "",
       closeTimeout: 100,
       dialogOpenClass: "animated fadeIn",
       focus: false

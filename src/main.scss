@@ -797,81 +797,79 @@ $editor-height: 75vh;
   @include svg-icon(24px);
 }
 
-.animated {
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
+.svd_container {
+  .animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
 
-  to {
-    opacity: 1;
-  }
-}
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    to {
+      opacity: 1;
+    }
   }
 
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    to {
+      opacity: 1;
+    }
   }
 
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
   }
-}
 
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-}
+  @-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
 
-.modal {
-  display: none;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 999;
-
-  .modal-dialog {
-    max-width: 600px;
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
   }
-}
 
-.modal-open {
-  overflow-y: inherit;
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+
+  .modal {
+    display: none;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+
+    .modal-dialog {
+      max-width: 600px;
+    }
+  }
 }

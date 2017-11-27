@@ -94,6 +94,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     self.onShowModal = function() {
       self.beforeShowModal();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
+        bodyClass: "",
         closeTimeout: 100,
         dialogOpenClass: "animated fadeInDown",
         focus: false
