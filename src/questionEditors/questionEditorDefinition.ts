@@ -134,9 +134,54 @@ export class SurveyQuestionEditorDefinition {
     survey: {
       properties: [
         "title",
-        "requiredText",
-        "showPageNumbers",
-        "showProgressBar"
+        "showTitle",
+        "locale",
+        "mode",
+        "clearInvisibleValues",
+        "cookieName",
+        { name: "sendResultOnPageNext", category: "data" },
+        { name: "storeOthersAsComment", category: "data" },
+        { name: "showPageTitles", category: "page" },
+        { name: "showPageNumbers", category: "page" },
+
+        { name: "pagePrevText", tab: "navigation" },
+        { name: "pageNextText", tab: "navigation" },
+        { name: "completeText", tab: "navigation" },
+        { name: "startSurveyText", tab: "navigation" },
+        {
+          name: "showNavigationButtons",
+          tab: "navigation",
+          category: "navbuttons"
+        },
+        { name: "showPrevButton", tab: "navigation", category: "navbuttons" },
+        { name: "firstPageIsStarted", tab: "navigation", category: "navpages" },
+        { name: "showCompletedPage", tab: "navigation", category: "navpages" },
+        { name: "goNextPageAutomatic", tab: "navigation", category: "navopt" },
+        { name: "showProgressBar", tab: "navigation", category: "navopt" },
+
+        { name: "questionTitleLocation", tab: "question" },
+        { name: "requiredText", tab: "question" },
+        { name: "questionStartIndex", tab: "question" },
+        { name: "showQuestionNumbers", tab: "question" },
+        { name: "questionTitleTemplate", tab: "question" },
+        { name: "questionErrorLocation", tab: "question" },
+        {
+          name: "focusFirstQuestionAutomatic",
+          tab: "question"
+        },
+
+        { name: "maxTimeToFinish", tab: "timer" },
+        { name: "maxTimeToFinishPage", tab: "timer" },
+        { name: "showTimerPanel", tab: "timer", category: "check" },
+        { name: "showTimerPanelMode", tab: "timer", category: "check" }
+      ],
+      tabs: [
+        { name: "navigation", index: 10 },
+        { name: "question", index: 20 },
+        { name: "completedHtml", index: 70 },
+        { name: "loadingHtml", index: 80 },
+        { name: "timer", index: 90 },
+        { name: "triggers", index: 100 }
       ]
     }
   };

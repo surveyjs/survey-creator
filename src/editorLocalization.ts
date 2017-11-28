@@ -174,6 +174,41 @@ export var defaultStrings = {
 
     surveyEditorTitle: "Edit survey",
     qEditorTitle: "Edit question: {0}",
+
+    //survey
+    showTitle: "Show/hide title",
+    locale: "Default language",
+    mode: "Mode (edit/read only)",
+    clearInvisibleValues: "Clear invisible values",
+    cookieName: "Cookie name (to disable run survey two times locally)",
+    sendResultOnPageNext: "Send survey results on page next",
+    storeOthersAsComment: "Store 'others' value in separate field",
+    showPageTitles: "Show page titles",
+    showPageNumbers: "Show page numbers",
+    pagePrevText: "Page previous button text",
+    pageNextText: "Page next button text",
+    completeText: "Complete button text",
+    startSurveyText: "Start button text",
+    showNavigationButtons: "Show navigation buttons (default navigation)",
+    showPrevButton: "Show previous button (user may return on previous page)",
+    firstPageIsStarted: "The first page in the survey is a started page.",
+    showCompletedPage: "Show the completed page at the end (completedHtml)",
+    goNextPageAutomatic:
+      "On answering all questions, go to the next page automatically",
+    showProgressBar: "Show progress ba",
+    questionTitleLocation: "Question title location",
+    requiredText: "The question required symbol(s)",
+    questionStartIndex: "Question start index (1, 2 or 'A', 'a')",
+    showQuestionNumbers: "Show question numbers",
+    questionTitleTemplate:
+      "Question title template, default is: '{no}. {require} {title}",
+    questionErrorLocation: "Question error location",
+    focusFirstQuestionAutomatic: "Focus first question on changing the page",
+    maxTimeToFinish: "Maximum time to finish the survey",
+    maxTimeToFinishPage: "Maximum time to finish a page in the survey",
+    showTimerPanel: "Show timer panel",
+    showTimerPanelMode: "Show timer panel mode",
+
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -186,7 +221,13 @@ export var defaultStrings = {
       choicesByUrl: "Choices from Web",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
-      validators: "Validators"
+      validators: "Validators",
+      navigation: "Navigation",
+      question: "Question",
+      completedHtml: "Completed Html",
+      loadingHtml: "Loading Html",
+      timer: "Timer/Quiz",
+      triggers: "Triggers"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -283,7 +324,6 @@ export var defaultStrings = {
       name: "title",
       title: "Leave it empty, if it is the same as 'Name'"
     },
-    survey_title: { name: "title", title: "It will be shown on every page." },
     page_title: { name: "title", title: "Page title" }
   }
 };
