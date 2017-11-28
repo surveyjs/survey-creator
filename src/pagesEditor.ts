@@ -66,7 +66,6 @@ export class SurveyPagesEditor {
     this.selectSurveyClick = function() {
       if (self.onSelectSurveyCallback) {
         self.onSelectSurveyCallback();
-        self.setSelectedPage(null);
       }
     };
     this.keyDown = function(el: any, e: KeyboardEvent) {
@@ -105,6 +104,9 @@ export class SurveyPagesEditor {
     return (
       this.koActiveObject() && this.koActiveObject().getType() === "survey"
     );
+  }
+  public isPageActive() {
+    return this.koActiveObject() && this.koActiveObject().getType() === "page";
   }
   public addNewPageClick() {
     if (this.onAddNewPageCallback) {
