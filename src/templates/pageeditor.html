@@ -1,6 +1,4 @@
 ﻿<script type="text/html" id="pageeditor">
-    <button class="btn btn-default svd_edit_survey" data-bind="click:editSurveyClick, text:  $root.getLocString('ed.editSurvey')">
-    </button>
     <ul class="nav nav-tabs" data-bind="tabs:true">
         <!-- ko foreach: koPages -->
         <li data-bind="css: { active: koSelected() }, event:{
@@ -13,7 +11,7 @@
             <a class="nav-link svd_page_nav" href="#">
                 <span data-bind="text: title"></span>
             </a>
-            <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: $parent.koActiveObject() == $data.page">
+            <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: koSelected()">
                 <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 
                 <div class="ddmenu">
@@ -34,10 +32,31 @@
             </div>
         </li>
         <!-- /ko  -->
-        <li>
+        <li class="svd_add_page_li">
             <button class="btn btn-default svd_add_new_page_btn" data-bind="click:addNewPageClick, attr: {title:  $root.getLocString('ed.addNewPage')}">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
+        </li>
+        <li class="svd_edit_survey_li" data-bind="click:selectSurveyClick, css: { active: isSurveyActive() }">
+            <a class="nav-link svd_page_nav" href="#">
+                <span data-bind="text:$root.getLocString('ed.Survey')"></span>
+            </a>
+            <div class="ddmenu-container page-nav btn-group inline" data-bind="visible: isSurveyActive()">
+                <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+
+                <div class="ddmenu">
+                    <span tabindex="0">
+                        <span class="glyphicon glyphicon-option-horizontal"></span>
+                    </span>
+
+                    <div tabindex="0" onclick="return true"></div>
+                    <ul>
+                        <li>
+                            <button class="btn btn-primary btn-sm btn-xs" data-bind="click: editSurveyClick, text: $root.getLocString('ed.editSurvey')"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </li>
     </ul>
 </script>

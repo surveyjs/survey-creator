@@ -230,6 +230,8 @@ $editor-height: 75vh;
 
           .nav-tabs {
             border: none;
+            position: relative;
+            padding-right: 100px;
 
             > li {
               position: relative;
@@ -255,11 +257,17 @@ $editor-height: 75vh;
                 background-color: #eee;
               }
 
-              &:last-child {
+              &.svd_add_page_li {
                 border: none;
                 &:hover {
                   background-color: transparent;
                 }
+              }
+
+              &.svd_edit_survey_li {
+                position: absolute;
+                right: 0;
+                margin-right: 10px;
               }
 
               .svd_page_nav {
@@ -300,10 +308,6 @@ $editor-height: 75vh;
                 }
               }
             }
-          }
-
-          .svd_edit_survey {
-            margin-bottom: 5px;
           }
 
           .svd_add_new_page_btn {

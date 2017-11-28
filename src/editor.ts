@@ -381,6 +381,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       () => {
         self.showQuestionEditor(this.survey);
+      },
+      () => {
+        self.surveyObjects.selectObject(this.survey);
       }
     );
     this.surveyLive = new SurveyLiveTester();

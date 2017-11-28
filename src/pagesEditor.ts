@@ -19,9 +19,11 @@ export class SurveyPagesEditor {
   koIsValid: any;
   koActiveObject: any;
   selectPageClick: any;
+  selectSurveyClick: any;
   onShowSurveyEditDialog: SurveyVoidCallback;
   onAddNewPageCallback: SurveyVoidCallback;
   onSelectPageCallback: SurveyPageParamCallback;
+  onSelectSurveyCallback: SurveyVoidCallback;
   onDeletePageCallback: SurveyPageParamCallback;
   onMovePageCallback: SurveyMovePageCallback;
   onModifiedCallback: SurveyVoidCallback;
@@ -41,7 +43,8 @@ export class SurveyPagesEditor {
     onDeletePageCallback: SurveyPageParamCallback = null,
     onModifiedCallback: SurveyVoidCallback = null,
     onShowPageEditDialog: SurveyQuestionParamCallback = null,
-    onShowSurveyEditDialog: SurveyVoidCallback = null
+    onShowSurveyEditDialog: SurveyVoidCallback = null,
+    onSelectSurveyCallback: SurveyVoidCallback = null
   ) {
     this.koPages = ko.observableArray();
     this.koIsValid = ko.observable(false);
@@ -49,6 +52,7 @@ export class SurveyPagesEditor {
     this.onShowSurveyEditDialog = onShowSurveyEditDialog;
     this.onAddNewPageCallback = onAddNewPageCallback;
     this.onSelectPageCallback = onSelectPageCallback;
+    this.onSelectSurveyCallback = onSelectSurveyCallback;
     this.onMovePageCallback = onMovePageCallback;
     this.onDeletePageCallback = onDeletePageCallback;
     this.onModifiedCallback = onModifiedCallback;
@@ -57,6 +61,12 @@ export class SurveyPagesEditor {
     this.selectPageClick = function(pageItem) {
       if (self.onSelectPageCallback) {
         self.onSelectPageCallback(pageItem.page);
+      }
+    };
+    this.selectSurveyClick = function() {
+      if (self.onSelectSurveyCallback) {
+        self.onSelectSurveyCallback();
+        self.setSelectedPage(null);
       }
     };
     this.keyDown = function(el: any, e: KeyboardEvent) {
@@ -90,6 +100,11 @@ export class SurveyPagesEditor {
   }
   public setSelectedObject(obj: any) {
     this.koActiveObject(obj);
+  }
+  public isSurveyActive() {
+    return (
+      this.koActiveObject() && this.koActiveObject().getType() === "survey"
+    );
   }
   public addNewPageClick() {
     if (this.onAddNewPageCallback) {
