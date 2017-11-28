@@ -195,13 +195,13 @@ export var defaultStrings = {
     showCompletedPage: "Show the completed page at the end (completedHtml)",
     goNextPageAutomatic:
       "On answering all questions, go to the next page automatically",
-    showProgressBar: "Show progress ba",
+    showProgressBar: "Show progress bar",
     questionTitleLocation: "Question title location",
     requiredText: "The question required symbol(s)",
     questionStartIndex: "Question start index (1, 2 or 'A', 'a')",
     showQuestionNumbers: "Show question numbers",
     questionTitleTemplate:
-      "Question title template, default is: '{no}. {require} {title}",
+      "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Question error location",
     focusFirstQuestionAutomatic: "Focus first question on changing the page",
     maxTimeToFinish: "Maximum time to finish the survey",
