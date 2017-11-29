@@ -2,13 +2,13 @@
     <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
     <!-- /ko -->
 </script>
-<script type="text/html" class="btn-xs" id="propertyeditorcontent-itemvalues">
+<script type="text/html" id="propertyeditorcontent-itemvalues">
     <div style="margin-bottom:3px" data-bind="visible: koShowTextView">
-        <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() == 'form', 'btn-link':koActiveView() != 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
-        <button class="btn-xs" data-bind="css: {'btn btn-primary':koActiveView() != 'form', 'btn-link':koActiveView() == 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
+        <button class="btn-sm btn-xs" data-bind="css: {'btn btn-primary':koActiveView() == 'form', 'btn-link':koActiveView() != 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
+        <button class="btn-sm btn-xs" data-bind="css: {'btn btn-primary':koActiveView() != 'form', 'btn-link':koActiveView() == 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
     </div>
     <div data-bind="visible:koActiveView() == 'form'" style="overflow-y: auto; overflow-x:hidden; max-height:400px;min-height:200px">
-        <table class="table">
+        <table class="svd_items_table">
             <thead>
                 <tr>
                     <th></th>
@@ -22,11 +22,11 @@
                 <!-- ko foreach: koItems -->
                 <tr>
                     <td>
-                        <div class="btn-group" role="group">
+                        <div>
                             <button type="button" class="btn btn-sm btn-xs" data-bind="visible: $index() > 0, click: $parent.onMoveUpClick">
                                 <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-sm btn-xs" style="float:none" data-bind="visible: $index() < $parent.koItems().length - 1, click: $parent.onMoveDownClick">
+                            <button type="button" class="btn btn-sm btn-xs" data-bind="visible: $index() < $parent.koItems().length - 1, click: $parent.onMoveDownClick">
                                 <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
                             </button>
                         </div>
@@ -47,7 +47,7 @@
             </tbody>
         </table>
     </div>
-    <div class="btn-toolbar" data-bind="visible:koActiveView() == 'form'">
+    <div data-bind="visible:koActiveView() == 'form'">
         <input type="button" class="btn btn-success" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')"
         />
         <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')"

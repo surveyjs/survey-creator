@@ -3,7 +3,7 @@
     <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-matrixdropdowncolumns">
-    <table class="table" data-bind="visible: koIsList">
+    <table class="svd_items_table" data-bind="visible: koIsList">
         <thead>
             <tr>
                 <th data-bind="text: $root.getLocString('pe.required')"></th>
@@ -41,7 +41,7 @@
             <!-- /ko -->
             <tr>
                 <td colspan="5">
-                    <div class="btn-toolbar" data-bind="visible: koAllowAddRemoveItems">
+                    <div data-bind="visible: koAllowAddRemoveItems">
                         <input type="button" class="btn btn-success" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
                         <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
                     </div>

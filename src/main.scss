@@ -880,4 +880,14 @@ $editor-height: 75vh;
       max-width: 600px;
     }
   }
+
+  .svd_items_table {
+    width: 100%;
+    tr {
+      th,
+      td {
+        padding: 0.25em;
+      }
+    }
+  }
 }
