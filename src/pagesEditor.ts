@@ -123,12 +123,10 @@ export class SurveyPagesEditor {
 
     this.onShowPageEditDialog(page);
   }
-  public deletePageClick(data: any) {
-    var page = data.page;
-    this.surveyValue.removePage(page);
-    this.removePage(page);
-    this.onModifiedCallback();
-    this.surveyValue.render();
+  public deletePageClick(page: Survey.Page) {
+    if (this.onDeletePageCallback) {
+      this.onDeletePageCallback(page);
+    }
   }
   public removePage(page: Survey.Page) {
     var index = this.getIndexByPage(page);
