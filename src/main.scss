@@ -52,6 +52,7 @@ $editor-height: 75vh;
       width: 115px;
       text-align: center;
       font-size: 11px;
+      font-weight: bold;
 
       &:hover,
       &:focus {
@@ -90,6 +91,7 @@ $editor-height: 75vh;
     .btn.btn-primary {
       margin-right: 10px;
       font-size: 11px;
+      font-weight: bold;
     }
 
     .btn-group.open .dropdown-toggle {
