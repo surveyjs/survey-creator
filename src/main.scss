@@ -106,9 +106,16 @@ $editor-height: 75vh;
   .svd_state {
     float: right;
     padding: 10px 0;
+    margin-right: 40px;
 
     .icon {
       display: inline-block;
+
+      + span {
+        color: #a7a7a7;
+        font-size: 13px;
+        font-weight: bold;
+      }
     }
   }
 
