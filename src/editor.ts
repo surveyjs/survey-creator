@@ -598,7 +598,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (typeof options.showPagesToolbox !== "undefined") {
       this.koShowPagesToolbox(options.showPagesToolbox);
     }
-    this.koDesignerHeight();
   }
   /**
    * The editing survey object (Survey.Survey)
@@ -1015,7 +1014,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.initSurvey(this.getDefaultSurveyJson());
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init();
+    this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
+      "#surveyjsJSONEditor"
+    ));
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       this.select2 = jQuery("#objectSelector")["select2"](
         this.isRTLValue ? { dir: "rtl" } : ""

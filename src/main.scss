@@ -36,7 +36,7 @@ $editor-height: 75vh;
   .form-control:focus {
     border-color: #1ab394;
     outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #1ab394;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #1ab394;
   }
 
   * {
@@ -479,10 +479,10 @@ $editor-height: 75vh;
     }
 
     .svd_json_editor {
-      height: 450px;
+      height: $editor-height;
     }
     .svd_json_editor_area {
-      height: 450px;
+      height: $editor-height;
       width: 100%;
     }
   }
