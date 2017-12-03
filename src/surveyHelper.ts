@@ -85,11 +85,14 @@ export class SurveyHelper {
     var height = pageEl.offsetParent
       ? pageEl.offsetParent.clientHeight
       : pageEl.clientHeight;
-    if (rect.bottom > height) {
-      el.scrollIntoView(false);
+    if (rect.top < pageEl.offsetTop) {
+      el.scrollIntoView();
     } else {
-      if (rect.top < pageEl.offsetTop) {
-        el.scrollIntoView();
+      if (
+        rect.bottom > height &&
+        (rect.top > pageEl.offsetTop + height || rect.height < height)
+      ) {
+        el.scrollIntoView(false);
       }
     }
   }
