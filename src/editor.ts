@@ -1212,12 +1212,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
   }
   private doClickQuestionCore(question: Survey.QuestionBase) {
-    var page = this.survey.currentPage;
+    var parent = this.survey.currentPage;
     var index = -1;
-    if (this.survey.selectedElement != null) {
-      index = page.questions.indexOf(this.survey.selectedElement) + 1;
+    var elElement = this.survey.selectedElement;
+    if (elElement && elElement.parent) {
+      parent = elElement.parent;
+      index = parent.elements.indexOf(this.survey.selectedElement);
+      if (index > -1) index++;
     }
-    page.addQuestion(question, index);
+    parent.addElement(question, index);
     if (this.renderedElement) {
       this.dragDropHelper.scrollToElement(
         <HTMLElement>this.renderedElement.querySelector("#" + question.id)

@@ -199,6 +199,7 @@ QUnit.test(
     var q1 = p1.addNewQuestion("text", "question1");
     var p2 = p1.addNewPanel("panel2");
     var q2 = p2.addNewQuestion("text", "question2");
+    editor.survey.selectedElement = p1;
     editor.fastCopyQuestion(p1);
 
     assert.equal(
@@ -230,6 +231,28 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("fast copy tests, set the correct parent", function(assert) {
+  var editor = new SurveyEditor();
+  var survey = editor.survey;
+  var p1 = survey.pages[0].addNewPanel("panel1");
+  var q1 = p1.addNewQuestion("text", "question1");
+  var p2 = p1.addNewPanel("panel2");
+  var q2 = p2.addNewQuestion("text", "question2");
+  editor.survey.selectedElement = q2;
+  editor.fastCopyQuestion(q2);
+  assert.equal(
+    p2.questions.length,
+    2,
+    "There are two questions in the panel now"
+  );
+  var newQuestion = <Survey.QuestionText>p2.questions[1];
+  assert.equal(
+    newQuestion.name,
+    "question3",
+    "a new correct question name was created"
+  );
+});
 
 QUnit.test(
   "addQuestion into the QuestionPanelDynamic into second page",
