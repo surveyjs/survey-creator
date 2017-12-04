@@ -27,6 +27,14 @@ $editor-height: 75vh;
   background-color: $light-bg-color;
   height: $editor-height;
   overflow-y: scroll;
+
+  .table>tbody>tr.active>td {
+    background: white;
+  }
+
+  .form-control {
+    border-radius: 0;
+  }
 }
 
 .svd_container {

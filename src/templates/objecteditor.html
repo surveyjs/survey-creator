@@ -4,7 +4,8 @@
             <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
                 <td data-bind="text: displayName, attr: {title: title}" width="50%"></td>
                 <td width="50%">
-                    <span data-bind="text: koText, visible: !koIsShowEditor(), attr: {title: koText}" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
+                    <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
+                        style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
                     <div data-bind="visible: koIsShowEditor()">
                         <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor, afterRender: function(elements) { afterRenderHandler($element.parentElement, elements); } } -->
                         <!-- /ko -->
