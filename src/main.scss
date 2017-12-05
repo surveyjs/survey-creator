@@ -28,7 +28,7 @@ $editor-height: 75vh;
   height: $editor-height;
   overflow-y: scroll;
 
-  .table>tbody>tr.active>td {
+  .table > tbody > tr.active > td {
     background: white;
   }
 
@@ -792,6 +792,10 @@ $editor-height: 75vh;
 }
 .icon-sortablelist:before {
   background-image: url("./images/cw/SortableJS.svg");
+  @include svg-icon(16px);
+}
+.icon-autocomplete:before {
+  background-image: url("./images/cw/autocomplete.svg");
   @include svg-icon(16px);
 }
 
