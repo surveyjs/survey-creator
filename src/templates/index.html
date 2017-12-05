@@ -47,8 +47,8 @@
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
                     <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" data-bind="enable: koCanDeleteObject, click: deleteCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}">
-                            <span class="glyphicon glyphicon-remove"></span>
+                        <button class="btn btn-default" type="button" data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.delSelObject')}">
+                            <span class="icon-edit"></span>
                         </button>
                     </div>
                 </div>
