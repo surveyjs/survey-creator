@@ -23,8 +23,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   background-color: #eee;
 }
 
@@ -52,10 +52,10 @@
 
 /* Style the checkmark/indicator */
 .sjs-cb-container .checkmark:after {
-  left: 11px;
+  left: 9px;
   top: 5px;
-  width: 8px;
-  height: 15px;
+  width: 7px;
+  height: 12px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

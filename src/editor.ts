@@ -1250,6 +1250,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private deleteCurrentObject() {
     this.deleteObject(this.koSelectedObject().value);
   }
+  private editCurrentObject() {
+    this.showQuestionEditor(this.koSelectedObject().value);
+  }
   private convertCurrentObject(obj: Survey.QuestionBase, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
     this.setModified();
