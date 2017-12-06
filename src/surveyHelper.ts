@@ -1,5 +1,6 @@
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
+import { Helpers } from "survey-knockout";
 
 export enum ObjType {
   Unknown,
@@ -46,6 +47,14 @@ export class SurveyHelper {
     if (obj.getType() == "survey") return ObjType.Survey;
     if (obj["name"]) return ObjType.Question;
     return ObjType.Unknown;
+  }
+  public static getObjectTypeStr(obj: any): string {
+    var objType = SurveyHelper.getObjectType(obj);
+    if (objType === ObjType.Survey) return "survey";
+    if (objType === ObjType.Page) return "page";
+    if (objType === ObjType.Panel) return "panel";
+    if (objType === ObjType.Question) return "question";
+    return "unknown";
   }
   public static getObjectName(obj: any): string {
     if (obj["name"]) return obj["name"];

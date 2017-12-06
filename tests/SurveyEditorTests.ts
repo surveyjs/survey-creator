@@ -172,6 +172,36 @@ QUnit.test("onQuestionAdded event", function(assert) {
   assert.equal(counter, 1, "One question was added");
 });
 
+QUnit.test("onElementDeleting event", function(assert) {
+  var editor = new SurveyEditor();
+  var counter = 0;
+  var canRemove = true;
+  editor.onElementDeleting.add(function(editor, options) {
+    options.allowing = canRemove;
+    counter++;
+  });
+  var page = editor.survey.pages[0];
+  var q1 = page.addNewQuestion("text", "q1");
+  var q2 = page.addNewQuestion("text", "q2");
+
+  assert.equal(page.questions.length, 2, "There are two questions initially");
+  editor.koSelectedObject({ value: q2 });
+  editor.deleteObjectClick();
+  assert.equal(page.questions.length, 1, "Delete one question");
+  assert.equal(counter, 1, "onElementRemoving called one time");
+
+  canRemove = false;
+  editor.koSelectedObject({ value: q1 });
+  editor.deleteObjectClick();
+  assert.equal(page.questions.length, 1, "Disable delete operation");
+  assert.equal(counter, 2, "onElementRemoving called one time");
+
+  canRemove = true;
+  editor.deleteObjectClick();
+  assert.equal(page.questions.length, 0, "Enable delete operation");
+  assert.equal(counter, 3, "onElementRemoving called one time");
+});
+
 QUnit.test("fast copy tests, copy a question", function(assert) {
   var editor = new SurveyEditor();
   var q1 = <Survey.QuestionText>editor.survey.pages[0].addNewQuestion(

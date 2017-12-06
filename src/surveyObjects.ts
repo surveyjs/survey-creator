@@ -170,6 +170,7 @@ export class SurveyObjects {
     return item;
   }
   private getItemIndex(value: Survey.Base): number {
+    if (!value) return -1;
     if (value["selectedElementInDesign"])
       value = value["selectedElementInDesign"];
     var objs = this.koObjects();

@@ -114,6 +114,17 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.element an instance of the deleting element
+   * <br/> options.elementType the type of the element: 'question', 'panel' or 'page'.
+   * <br/> options.allowing set it to false to cancel the element deleting
+   */
+  public onElementDeleting: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
    * <br/> sender the survey editor object that fires the event
    * <br/> options.question a new added survey question. Survey.QuestionBase object
@@ -1304,6 +1315,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
 
   private deleteObject(obj: any) {
+    var options = {
+      element: obj,
+      elementType: SurveyHelper.getObjectType(obj),
+      allowing: true
+    };
+    this.onElementDeleting.fire(this, options);
+    if (!options.allowing) return;
     this.surveyObjects.removeObject(obj);
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
