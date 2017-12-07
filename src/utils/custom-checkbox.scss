@@ -1,21 +1,22 @@
+.sjs-cb-wrapper {
+  line-height: 26px;
+}
+
 /* The container */
 .sjs-cb-container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-/* Hide the browser's default checkbox */
-.sjs-cb-container input {
-  position: absolute;
-  opacity: 0;
+  /* Hide the browser's default checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+  }
 }
 
 /* Create a custom checkbox */
