@@ -532,7 +532,7 @@ $editor-height: 75vh;
       content: "⋯";
     }
     &.glyphicon-remove::before {
-      font-size: 20px;
+      vertical-align: middle;
       content: "✖";
     }
     &.glyphicon-edit::before {
