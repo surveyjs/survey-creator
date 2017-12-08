@@ -176,6 +176,45 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
    * <br/> sender the survey editor object that fires the event
+   * <br/> options object contains the information about certain modifications
+   * <br/> options.type contains string constant describing certain modification
+   * <br/> Available values:
+   * <br/>
+   * <br/> options.type: "ADDED_FROM_TOOLBOX"
+   * <br/> options.question: newly added question
+   * <br/>
+   * <br/> options.type: "PAGE_ADDED"
+   * <br/> options.newValue: newly created page
+   * <br/>
+   * <br/> options.type: "PAGE_MOVED"
+   * <br/> options.page: page has been moved
+   * <br/> options.indexFrom: pevious index
+   * <br/> options.indexTo: new index
+   * <br/>
+   * <br/> options.type: "QUESTION_CONVERTED"
+   * <br/> options.className: the converted class name
+   * <br/> options.oldValue: pevious object
+   * <br/> options.newValue: the new object, converted from oldVale to the given class name
+   * <br/>
+   * <br/> options.type: "QUESTION_CHANGED_BY_EDITOR"
+   * <br/> options.question: question has been edited in the popup question editor
+   * <br/>
+   * <br/> options.type: "PROPERTY_CHANGED"
+   * <br/> options.name: the name of the property has been changed
+   * <br/> options.target: the object containing the changed property
+   * <br/> options.oldValue: the previous value of the changed property
+   * <br/> options.newValue: the new value of the changed property
+   * <br/>
+   * <br/> options.type: "OBJECT_DELETED"
+   * <br/> options.target: deleted object
+   * <br/>
+   * <br/> options.type: "VIEW_TYPE_CHANGED"
+   * <br/> options.newType: new type of the editor view: editor or designer
+   * <br/>
+   * <br/> options.type: "DO_DROP"
+   * <br/> options.page: the page of the drap/drop operation
+   * <br/> options.source: the source dragged object
+   * <br/> options.target: the drop target
    */
   public onModified: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -933,7 +972,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.initSurvey(
       new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
     );
-    this.setModified({ type: "VIEW_TYPE_CHANGED", newMode: newType });
+    this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
     return true;
   }
   /**
