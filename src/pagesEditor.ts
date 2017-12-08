@@ -4,6 +4,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 
 export declare type SurveyVoidCallback = () => void;
+export declare type SurveyOptionsCallback = (options?: any) => void;
 export declare type SurveyPageParamCallback = (page: Survey.Page) => void;
 export declare type SurveyMovePageCallback = (
   indexFrom: number,
@@ -26,7 +27,7 @@ export class SurveyPagesEditor {
   onSelectSurveyCallback: SurveyVoidCallback;
   onDeletePageCallback: SurveyPageParamCallback;
   onMovePageCallback: SurveyMovePageCallback;
-  onModifiedCallback: SurveyVoidCallback;
+  onModifiedCallback: SurveyOptionsCallback;
   onShowPageEditDialog: SurveyQuestionParamCallback;
   draggingPage: any = null;
   dragStart: any;
@@ -41,7 +42,7 @@ export class SurveyPagesEditor {
     onSelectPageCallback: SurveyPageParamCallback = null,
     onMovePageCallback: SurveyMovePageCallback = null,
     onDeletePageCallback: SurveyPageParamCallback = null,
-    onModifiedCallback: SurveyVoidCallback = null,
+    onModifiedCallback: SurveyOptionsCallback = null,
     onShowPageEditDialog: SurveyQuestionParamCallback = null,
     onShowSurveyEditDialog: SurveyVoidCallback = null,
     onSelectSurveyCallback: SurveyVoidCallback = null

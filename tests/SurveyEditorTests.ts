@@ -320,6 +320,70 @@ QUnit.test("generateValidJSON should be true by default, bug #135", function(
   assert.equal(editor.koGenerateValidJSON(), true, "The default value is true");
 });
 
+QUnit.test("onModified options", function(assert) {
+  var editor = new SurveyEditor();
+  var modifiedOptions = [];
+  editor.onModified.add(function(survey, options) {
+    modifiedOptions.push(options);
+  });
+  var survey = editor.survey;
+
+  editor.clickToolboxItem({
+    name: "checkbox",
+    iconName: "icon-checkbox",
+    title: "Checkbox",
+    json: {
+      name: "q1",
+      choices: ["item1", "item2", "item3"],
+      type: "checkbox"
+    },
+    isCopied: false
+  });
+  assert.equal(modifiedOptions.length, 1, "One operation - add item");
+  var opts = modifiedOptions.pop();
+  assert.equal(
+    opts.type,
+    "ADDED_FROM_TOOLBOX",
+    "Operation type ADDED_FROM_TOOLBOX"
+  );
+  assert.equal(
+    opts.question.getType(),
+    "checkbox",
+    "New question of type checkbox"
+  );
+  var question: Survey.QuestionCheckbox = opts.question;
+
+  editor.addPage();
+  assert.equal(modifiedOptions.length, 1, "One operation - add pege");
+  var opts = modifiedOptions.pop();
+  assert.equal(opts.type, "PAGE_ADDED", "Operation type ADD_PAGE");
+  assert.equal(opts.oldValue, undefined, "No previous value");
+  assert.equal(opts.newValue.getType(), "page", "New page");
+  var page = opts.newValue;
+
+  editor.selectedObjectEditor.selectedObject = question;
+  var titleEditor = editor.selectedObjectEditor.getPropertyEditor("title");
+  titleEditor.koValue("Some text");
+  assert.equal(modifiedOptions.length, 1, "One operation - change property");
+  var opts = modifiedOptions.pop();
+  assert.equal(
+    opts.type,
+    "PROPERTY_CHANGED",
+    "Operation type PROPERTY_CHANGED"
+  );
+  assert.equal(opts.target, question, "Object - question");
+  assert.equal(opts.name, "title", "Property name - title");
+  assert.equal(opts.oldValue, "question1", "No previous value");
+  assert.equal(opts.newValue, "Some text", "New value - Some text");
+
+  editor.koSelectedObject({ value: page });
+  editor.deleteObjectClick();
+  assert.equal(modifiedOptions.length, 1, "One operation - delete");
+  var opts = modifiedOptions.pop();
+  assert.equal(opts.type, "OBJECT_DELETED", "Operation type OBJECT_DELETED");
+  assert.equal(opts.target, page, "Object - page");
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

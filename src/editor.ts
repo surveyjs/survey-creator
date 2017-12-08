@@ -384,8 +384,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       (page: Survey.Page) => {
         self.deleteCurrentObject();
       },
-      () => {
-        self.setModified();
+      options => {
+        self.setModified(options);
       },
       (page: Survey.QuestionBase) => {
         self.showQuestionEditor(page);
@@ -725,10 +725,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       });
     }
   }
-  protected setModified() {
+  protected setModified(options: any = null) {
     this.setState("modified");
     this.setUndoRedoCurrentState();
-    this.onModified.fire(this, null);
+    this.onModified.fire(this, options);
     this.isAutoSave && this.doSave();
   }
   private setUndoRedoCurrentState(clearState: boolean = false) {
@@ -823,7 +823,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var name = SurveyHelper.getNewPageName(this.survey.pages);
     var page = <Survey.Page>this.surveyValue.addNewPage(name);
     this.addPageToUI(page);
-    this.setModified();
+    this.setModified({ type: "PAGE_ADDED", newValue: page });
   }
   /**
    * Returns the localized string by it's id
@@ -838,7 +838,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.survey.pages.splice(indexTo, 0, page);
     this.pagesEditor.survey = this.survey;
     this.surveyObjects.selectObject(page);
-    this.setModified();
+    this.setModified({
+      type: "PAGE_MOVED",
+      page: page,
+      indexFrom: indexFrom,
+      indexTo: indexTo
+    });
   }
   private addPageToUI(page: Survey.Page) {
     this.pagesEditor.survey = this.surveyValue;
@@ -872,6 +877,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     newValue: any
   ) {
     var isDefault = property.isDefaultValue(newValue);
+    var oldValue = obj[property.name];
     obj[property.name] = newValue;
     if (property.name == "name") {
       this.surveyObjects.nameChanged(obj);
@@ -879,7 +885,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         this.pagesEditor.changeName(<Survey.Page>obj);
       }
     }
-    this.setModified();
+    this.setModified({
+      type: "PROPERTY_CHANGED",
+      name: property.name,
+      target: obj,
+      oldValue: oldValue,
+      newValue: newValue
+    });
     //TODO add a flag to a property, may change other properties
     if (
       property.name == "locale" ||
@@ -921,7 +933,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.initSurvey(
       new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
     );
-    this.setModified();
+    this.setModified({ type: "VIEW_TYPE_CHANGED", newMode: newType });
     return true;
   }
   /**
@@ -1051,8 +1063,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyValue = new SurveyForDesigner();
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
-      function() {
-        self.setModified();
+      function(options) {
+        self.setModified(options);
       },
       this.renderedElement
     );
@@ -1237,7 +1249,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         <HTMLElement>this.renderedElement.querySelector("#" + question.id)
       );
     }
-    this.setModified();
+    this.setModified({ type: "ADDED_FROM_TOOLBOX", question: question });
   }
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
@@ -1266,7 +1278,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private convertCurrentObject(obj: Survey.QuestionBase, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
-    this.setModified();
+    this.setModified({
+      type: "QUESTION_CONVERTED",
+      className: className,
+      oldValue: obj,
+      newValue: newQuestion
+    });
   }
   /**
    * Show the Question Editor dialog.
@@ -1293,7 +1310,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.selectedObjectEditorValue.objectChanged();
     this.pagesEditor.updatePages();
     this.pagesEditor.setSelectedPage(<any>question);
-    this.setModified();
+    this.setModified({
+      type: "QUESTION_CHANGED_BY_EDITOR",
+      question: question
+    });
     this.survey.render();
   }
   /**
@@ -1332,7 +1352,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.survey.selectedElement = null;
       this.surveyObjects.selectObject(this.survey.currentPage);
     }
-    this.setModified();
+    this.setModified({
+      type: "OBJECT_DELETED",
+      target: obj
+    });
     this.survey.render();
   }
   private showLiveSurvey() {

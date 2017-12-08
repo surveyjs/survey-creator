@@ -231,7 +231,7 @@ export class DragDropHelper {
   static dataStart: string = "surveyjs,";
   static dragData: any = { text: "", json: null };
   static prevEvent = { element: null, x: -1, y: -1 };
-  private onModifiedCallback: () => any;
+  private onModifiedCallback: (options?: any) => any;
   private scrollableElement: HTMLElement = null;
   private ddTarget: DragDropTargetElement = null;
   private prevCoordinates: { x: number; y: number };
@@ -239,7 +239,7 @@ export class DragDropHelper {
   private id: number = DragDropHelper.counter++;
   constructor(
     public data: Survey.ISurvey,
-    onModifiedCallback: () => any,
+    onModifiedCallback: (options?: any) => any,
     parent: HTMLElement = null
   ) {
     this.onModifiedCallback = onModifiedCallback;
@@ -301,7 +301,14 @@ export class DragDropHelper {
     if (this.isSurveyDragging(event)) {
       event.preventDefault();
       this.ddTarget.doDrop();
-      if (this.onModifiedCallback) this.onModifiedCallback();
+      if (this.onModifiedCallback)
+        this.onModifiedCallback({
+          type: "DO_DROP",
+          page: this.ddTarget.page,
+          source: this.ddTarget.source,
+          target: this.ddTarget.target,
+          moveTo: this.ddTarget.moveTo
+        });
     }
     this.end();
   }
