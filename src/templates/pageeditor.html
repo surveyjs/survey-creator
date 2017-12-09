@@ -25,6 +25,9 @@
                             <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.showQuestionEditor.bind($parent), text: $root.getLocString('ed.editPage')"></button>
                         </li>
                         <li>
+                            <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.copyPageClick.bind($parent), text: $root.getLocString('survey.Copy')"></button>
+                        </li>
+                        <li>
                             <button class="btn btn-primary btn-sm btn-xs" data-bind="click: $parent.deletePageClick.bind($parent), text: $root.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
                         </li>
                     </ul>

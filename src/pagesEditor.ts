@@ -21,14 +21,15 @@ export class SurveyPagesEditor {
   koActiveObject: any;
   selectPageClick: any;
   selectSurveyClick: any;
-  onShowSurveyEditDialog: SurveyVoidCallback;
-  onAddNewPageCallback: SurveyVoidCallback;
-  onSelectPageCallback: SurveyPageParamCallback;
-  onSelectSurveyCallback: SurveyVoidCallback;
-  onDeletePageCallback: SurveyPageParamCallback;
-  onMovePageCallback: SurveyMovePageCallback;
-  onModifiedCallback: SurveyOptionsCallback;
-  onShowPageEditDialog: SurveyQuestionParamCallback;
+  public onShowSurveyEditDialog: SurveyVoidCallback;
+  public onAddNewPageCallback: SurveyVoidCallback;
+  public onSelectPageCallback: SurveyPageParamCallback;
+  public onSelectSurveyCallback: SurveyVoidCallback;
+  public onDeletePageCallback: SurveyPageParamCallback;
+  public onCopyPageCallback: SurveyPageParamCallback;
+  public onMovePageCallback: SurveyMovePageCallback;
+  public onModifiedCallback: SurveyOptionsCallback;
+  public onShowPageEditDialog: SurveyQuestionParamCallback;
   draggingPage: any = null;
   dragStart: any;
   dragOver: any;
@@ -37,27 +38,10 @@ export class SurveyPagesEditor {
   keyDown: any;
   questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-  constructor(
-    onAddNewPageCallback: SurveyVoidCallback = null,
-    onSelectPageCallback: SurveyPageParamCallback = null,
-    onMovePageCallback: SurveyMovePageCallback = null,
-    onDeletePageCallback: SurveyPageParamCallback = null,
-    onModifiedCallback: SurveyOptionsCallback = null,
-    onShowPageEditDialog: SurveyQuestionParamCallback = null,
-    onShowSurveyEditDialog: SurveyVoidCallback = null,
-    onSelectSurveyCallback: SurveyVoidCallback = null
-  ) {
+  constructor() {
     this.koPages = ko.observableArray();
     this.koIsValid = ko.observable(false);
     this.koActiveObject = ko.observable(null);
-    this.onShowSurveyEditDialog = onShowSurveyEditDialog;
-    this.onAddNewPageCallback = onAddNewPageCallback;
-    this.onSelectPageCallback = onSelectPageCallback;
-    this.onSelectSurveyCallback = onSelectSurveyCallback;
-    this.onMovePageCallback = onMovePageCallback;
-    this.onDeletePageCallback = onDeletePageCallback;
-    this.onModifiedCallback = onModifiedCallback;
-    this.onShowPageEditDialog = onShowPageEditDialog;
     var self = this;
     this.selectPageClick = function(pageItem) {
       if (self.onSelectPageCallback) {
@@ -124,9 +108,14 @@ export class SurveyPagesEditor {
 
     this.onShowPageEditDialog(page);
   }
-  public deletePageClick(page: Survey.Page) {
+  public deletePageClick(pageItem) {
     if (this.onDeletePageCallback) {
-      this.onDeletePageCallback(page);
+      this.onDeletePageCallback(pageItem.page);
+    }
+  }
+  public copyPageClick(pageItem) {
+    if (this.onDeletePageCallback) {
+      this.onCopyPageCallback(pageItem.page);
     }
   }
   public removePage(page: Survey.Page) {

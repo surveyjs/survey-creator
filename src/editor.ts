@@ -410,32 +410,38 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.pagesEditor = new SurveyPagesEditor(
-      () => {
-        self.addPage();
-      },
-      (page: Survey.Page) => {
-        self.surveyObjects.selectObject(page);
-      },
-      (indexFrom: number, indexTo: number) => {
-        self.movePage(indexFrom, indexTo);
-      },
-      (page: Survey.Page) => {
-        self.deleteCurrentObject();
-      },
-      options => {
-        self.setModified(options);
-      },
-      (page: Survey.QuestionBase) => {
-        self.showQuestionEditor(page);
-      },
-      () => {
-        self.showQuestionEditor(this.survey);
-      },
-      () => {
-        self.surveyObjects.selectObject(this.survey);
-      }
-    );
+    this.pagesEditor = new SurveyPagesEditor();
+    this.pagesEditor = new SurveyPagesEditor();
+    this.pagesEditor.onAddNewPageCallback = () => {
+      self.addPage();
+    };
+    this.pagesEditor.onSelectPageCallback = (page: Survey.Page) => {
+      self.surveyObjects.selectObject(page);
+    };
+    this.pagesEditor.onMovePageCallback = (
+      indexFrom: number,
+      indexTo: number
+    ) => {
+      self.movePage(indexFrom, indexTo);
+    };
+    this.pagesEditor.onDeletePageCallback = (page: Survey.Page) => {
+      self.deleteCurrentObject();
+    };
+    this.pagesEditor.onCopyPageCallback = (page: Survey.Page) => {
+      self.copyPage(page);
+    };
+    this.pagesEditor.onModifiedCallback = options => {
+      self.setModified(options);
+    };
+    this.pagesEditor.onShowPageEditDialog = (page: Survey.QuestionBase) => {
+      self.showQuestionEditor(page);
+    };
+    this.pagesEditor.onShowSurveyEditDialog = () => {
+      self.showQuestionEditor(this.survey);
+    };
+    this.pagesEditor.onSelectSurveyCallback = () => {
+      self.surveyObjects.selectObject(this.survey);
+    };
     this.surveyLive = new SurveyLiveTester();
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.toolboxValue = new QuestionToolbox(
@@ -1215,26 +1221,42 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private doClickToolboxItem(json: any) {
-    var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
-    new Survey.JsonObject().toObject(json, newElement);
-    this.newQuestions = [];
-    this.newPanels = [];
-    this.setNewNames(newElement);
+    var newElement = this.createNewElement(json);
     this.doClickQuestionCore(newElement);
   }
+  private copyElement(element: Survey.Base): Survey.IElement {
+    var json = new Survey.JsonObject().toJsonObject(element);
+    json.type = element.getType();
+    return this.createNewElement(json);
+  }
+  private createNewElement(json: any): Survey.IElement {
+    var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
+    new Survey.JsonObject().toObject(json, newElement);
+    this.setNewNames(newElement);
+    return newElement;
+  }
   private setNewNames(element: Survey.IElement) {
-    element.name = this.getNewName(element["getType"]());
-    if (element.isPanel) {
-      this.newPanels.push(element);
-      var panel = <Survey.Panel>element;
+    this.newQuestions = [];
+    this.newPanels = [];
+    this.setNewNamesCore(element);
+  }
+  private setNewNamesCore(element: Survey.IElement) {
+    var elType = element["getType"]();
+    element.name = this.getNewName(elType);
+    if (element.isPanel || elType == "page") {
+      if (element.isPanel) {
+        this.newPanels.push(element);
+      }
+      var panel = <Survey.PanelModelBase>(<any>element);
       for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNames(panel.elements[i]);
+        this.setNewNamesCore(panel.elements[i]);
       }
     } else {
       this.newQuestions.push(element);
     }
   }
   private getNewName(type: string): string {
+    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
   }
   private getNewQuestionName(): string {
@@ -1273,7 +1295,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
     }
   }
-  private doClickQuestionCore(question: Survey.QuestionBase) {
+  private doClickQuestionCore(element: Survey.IElement) {
     var parent = this.survey.currentPage;
     var index = -1;
     var elElement = this.survey.selectedElement;
@@ -1282,13 +1304,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       index = parent.elements.indexOf(this.survey.selectedElement);
       if (index > -1) index++;
     }
-    parent.addElement(question, index);
+    parent.addElement(element, index);
     if (this.renderedElement) {
       this.dragDropHelper.scrollToElement(
-        <HTMLElement>this.renderedElement.querySelector("#" + question.id)
+        <HTMLElement>this.renderedElement.querySelector("#" + element["id"])
       );
     }
-    this.setModified({ type: "ADDED_FROM_TOOLBOX", question: question });
+    this.setModified({ type: "ADDED_FROM_TOOLBOX", question: element });
   }
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
@@ -1368,9 +1390,24 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @param question A copied Survey.Question
    */
   public fastCopyQuestion(question: Survey.Base) {
-    var json = new Survey.JsonObject().toJsonObject(question);
-    json.type = question.getType();
-    this.doClickToolboxItem(json);
+    var newElement = this.copyElement(question);
+    this.doClickQuestionCore(newElement);
+  }
+  /**
+   * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
+   * @param page A copied Survey.Page
+   */
+  public copyPage(page: Survey.PageModel): Survey.PageModel {
+    var newPage = <Survey.Page>(<any>this.copyElement(page));
+    var index = this.survey.pages.indexOf(page);
+    if (index > -1) {
+      this.survey.pages.splice(index + 1, 0, newPage);
+    } else {
+      this.survey.pages.push(newPage);
+    }
+    this.addPageToUI(newPage);
+    this.setModified({ type: "PAGE_ADDED", newValue: newPage });
+    return newPage;
   }
 
   private deleteObject(obj: any) {

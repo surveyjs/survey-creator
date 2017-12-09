@@ -262,6 +262,43 @@ QUnit.test(
   }
 );
 
+QUnit.test("Copy a page", function(assert) {
+  var editor = new SurveyEditor();
+  var survey = editor.survey;
+  var p1 = survey.pages[0].addNewPanel("panel1");
+  var q1 = p1.addNewQuestion("text", "question1");
+  var p2 = p1.addNewPanel("panel2");
+  var q2 = p2.addNewQuestion("text", "question2");
+  survey.addNewPage("page2");
+  var page = editor.copyPage(<Survey.Page>survey.pages[0]);
+  assert.equal(survey.pages.length, 3, "There are two pages now");
+  assert.equal(survey.pages.indexOf(page), 1, "The new page has index 1");
+  assert.equal(page.name, "page3", "The page name is page3");
+  assert.equal(page.elements.length, 1, "There is one pane ");
+  var newPanel = <Survey.Panel>page.elements[0];
+  assert.equal(
+    newPanel.name,
+    "panel3",
+    "a new panel should have name 'panel3'"
+  );
+  assert.equal(
+    newPanel.questions[0].name,
+    "question3",
+    "A question in new panel should have name 'question3'"
+  );
+  var nestedPanel = <Survey.Panel>newPanel.elements[1];
+  assert.equal(
+    nestedPanel.name,
+    "panel4",
+    "a new nested panel should have name 'panel3'"
+  );
+  assert.equal(
+    nestedPanel.questions[0].name,
+    "question4",
+    "A question in new nested panel should have name 'question3'"
+  );
+});
+
 QUnit.test("fast copy tests, set the correct parent", function(assert) {
   var editor = new SurveyEditor();
   var survey = editor.survey;
