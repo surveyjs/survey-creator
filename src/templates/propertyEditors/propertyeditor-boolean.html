@@ -1,11 +1,13 @@
 ﻿<script type="text/html" id="propertyeditor-boolean">
     <div class="sjs-cb-wrapper">
-        <label class="sjs-cb-container">
-            <input class="form-control svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: readOnly">
-            <span class="checkmark"></span>
+        <label>
+            <div class="sjs-cb-container">
+                <input class="form-control svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: readOnly">
+                <span class="checkmark"></span>
+                <!-- ko if: showDisplayName -->
+                <span class="sjs-cb-label" data-bind="text: displayName"></span>
+                <!-- /ko -->
+            </div>
         </label>
-        <!-- ko if: showDisplayName -->
-        <span class="sjs-cb-label" data-bind="text: displayName"></span>
-        <!-- /ko -->
     </div>
 </script>
