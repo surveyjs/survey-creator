@@ -926,6 +926,11 @@ $editor-height: 75vh;
     .modal-dialog {
       max-width: 600px;
     }
+
+    .modal-body {
+      max-height: 70vh;
+      overflow: auto;
+    }
   }
 
   .svd_items_table {
