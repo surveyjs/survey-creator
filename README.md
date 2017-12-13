@@ -12,8 +12,8 @@ npm install surveyjs-editor
 ```
 
 Or use Azure CDN:
-https://surveyjs.azureedge.net/{version-number}/surveyeditor.js
-https://surveyjs.azureedge.net/{version-number}/surveyeditor.css
+* https://surveyjs.azureedge.net/{version-number}/surveyeditor.js
+* https://surveyjs.azureedge.net/{version-number}/surveyeditor.css
 
 ## Include into your project
 ### Explore examples
