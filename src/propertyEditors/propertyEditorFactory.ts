@@ -90,9 +90,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     return "dropdown";
   }
   public getValueText(value: any): string {
-    if (!value) return value;
-    var res = editorLocalization.getPropertyValue(value);
-    return res ? res : value;
+    return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
     super.setObject(value);

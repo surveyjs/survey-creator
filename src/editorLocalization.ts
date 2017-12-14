@@ -33,7 +33,6 @@ export var editorLocalization = {
     return this.getString("p." + strName, locale);
   },
   getPropertyValue: function(value: any, locale: string = null) {
-    if (value === "" || value === null || typeof value === undefined) return "";
     return this.getValueInternal(value, "pv", locale);
   },
   getValidatorName: function(name: string, locale: string = null) {
@@ -49,6 +48,8 @@ export var editorLocalization = {
     return loc;
   },
   getValueInternal(value: any, prefix: string, locale: string = null) {
+    if (value === "" || value === null || value === undefined) return "";
+    value = value.toString();
     var loc = this.getLocale(locale);
     var res = loc[prefix] ? loc[prefix][value] : null;
     if (!res) res = defaultStrings[prefix][value];
