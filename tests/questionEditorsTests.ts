@@ -26,7 +26,7 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
   var tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
   assert.equal(
     tab.htmlTemplate,
-    "propertyeditorcontent-itemvalues",
+    "propertyeditor-modalcontent",
     "itemvalues template should be created"
   );
   assert.equal(

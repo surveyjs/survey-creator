@@ -215,6 +215,15 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
   ) {}
+  onPropertyEditorModalShowDescriptionCallback(
+    propertyName: string,
+    obj: Survey.Base
+  ): any {
+    var res = { top: "", bottom: "" };
+    if (obj["name"] == "showOnTop") res.top = "topValue";
+    if (obj["name"] == "showOnBottom") res.bottom = "bottomValue";
+    return res;
+  }
 }
 
 QUnit.test("On new ItemValue added", function(assert) {
@@ -278,5 +287,43 @@ QUnit.test("hideAddRemoveButtons", function(assert) {
     itemValuesEditor.koAllowAddRemoveItems(),
     false,
     "Hide buttons for the second question"
+  );
+});
+
+QUnit.test("show top/bottom description", function(assert) {
+  var options = new EditorOptionsTests();
+  var editor = new SurveyObjectEditor(options);
+  var question1 = new Survey.QuestionDropdown("showOnTop");
+  var question2 = new Survey.QuestionDropdown("showOnBottom");
+  var question3 = new Survey.QuestionDropdown("donotshow");
+
+  editor.selectedObject = question1;
+  var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+  var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+  assert.equal(
+    itemValuesEditor.koHtmlTop(),
+    "topValue",
+    "top value set correctly"
+  );
+  assert.equal(itemValuesEditor.koHtmlBottom(), "", "bottom value is not set");
+
+  editor.selectedObject = question2;
+  property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+  itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+  assert.equal(itemValuesEditor.koHtmlTop(), "", "top value is not set");
+  assert.equal(
+    itemValuesEditor.koHtmlBottom(),
+    "bottomValue",
+    "bottom value set correctly"
+  );
+
+  editor.selectedObject = question3;
+  property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
+  itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
+  assert.equal(itemValuesEditor.koHtmlTop(), "", "top value should not be set");
+  assert.equal(
+    itemValuesEditor.koHtmlBottom(),
+    "",
+    "bottom value should not be set"
   );
 });

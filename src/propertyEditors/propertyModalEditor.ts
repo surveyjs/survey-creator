@@ -61,9 +61,13 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   koShowApplyButton: any;
   koTitleCaption: any;
   koAfterRender: any;
+  koHtmlTop: any;
+  koHtmlBottom: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koTitleCaption = ko.observable("");
+    this.koHtmlTop = ko.observable("");
+    this.koHtmlBottom = ko.observable("");
     if (this.property) {
       this.koTitleCaption(
         editorLocalization
@@ -141,6 +145,16 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   public setObject(value: any) {
     this.editingObject = value;
     super.setObject(value);
+    if (this.options && this.property) {
+      var html = this.options.onPropertyEditorModalShowDescriptionCallback(
+        this.property.name,
+        value
+      );
+      if (html) {
+        if (html.top) this.koHtmlTop(html.top);
+        if (html.bottom) this.koHtmlBottom(html.bottom);
+      }
+    }
   }
   public get isEditable(): boolean {
     return false;

@@ -56,6 +56,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
   ) {}
+  onPropertyEditorModalShowDescriptionCallback(
+    propertyName: string,
+    obj: Survey.Base
+  ): any {
+    return null;
+  }
 }
 
 QUnit.test("Create correct property editor", function(assert) {

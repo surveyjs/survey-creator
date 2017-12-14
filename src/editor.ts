@@ -300,6 +300,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     (sender: SurveyEditor, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * Use this event to show the description on the top or/and bottom of the property modal editor.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName the property name
+   * <br/> options.htmlTop the html  that you want to see on the top of the modal window
+   * <br/> options.htmlBottom the html that you want to see on the bottom of the modal window
+   */
+  public onShowPropertyModalEditorDescription: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   koAutoSave = ko.observable(false);
   /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -1529,6 +1541,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   ) {
     var options = { propertyName: propertyName, obj: obj, editor: editor };
     this.onPropertyEditorObjectAssign.fire(this, options);
+  }
+  onPropertyEditorModalShowDescriptionCallback(
+    propertyName: string,
+    obj: Survey.Base
+  ): any {
+    var options = {
+      obj: obj,
+      propertyName: propertyName,
+      htmlTop: "",
+      htmlBottom: ""
+    };
+    this.onShowPropertyModalEditorDescription.fire(this, options);
+    var res = { top: options.htmlTop, bottom: options.htmlBottom };
+    return res;
   }
 }
 
