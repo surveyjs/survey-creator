@@ -123,6 +123,16 @@ export class SurveyQuestionEditorDefinition {
       properties: ["inputType", "placeHolder"],
       tabs: [{ name: "validators", index: 10 }]
     },
+    paneldynamic: {
+      properties: [
+        { name: "renderMode", category: "render" },
+        { name: "allowAddPanel", category: "render" },
+        { name: "allowRemovePanel", category: "render" },
+        "panelAddText",
+        "panelRemoveText"
+      ],
+      tabs: [{ name: "templateTitle", index: 10 }]
+    },
     panel: {
       properties: ["name", "title", { name: "visible", category: "checks" }],
       tabs: [{ name: "visibleIf", index: 100 }]

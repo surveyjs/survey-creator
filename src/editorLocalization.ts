@@ -210,6 +210,11 @@ export var defaultStrings = {
     maxTimeToFinishPage: "Maximum time to finish a page in the survey",
     showTimerPanel: "Show timer panel",
     showTimerPanelMode: "Show timer panel mode",
+    renderMode: "Render mode",
+    allowAddPanel: "Allow adding a panel",
+    allowRemovePanel: "Allow removing the panel",
+    panelAddText: "Adding panel text",
+    panelRemoveText: "Removing panel text",
 
     tabs: {
       general: "General",
@@ -229,7 +234,8 @@ export var defaultStrings = {
       completedHtml: "Completed Html",
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
-      triggers: "Triggers"
+      triggers: "Triggers",
+      templateTitle: "Template title"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
