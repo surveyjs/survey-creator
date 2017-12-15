@@ -31,16 +31,18 @@ export class DragDropTargetElement {
     this.addInfo(destInfo);
     return true;
   }
-  public doDrop() {
+  public doDrop(): any {
     var destInfo = this.findInfo(this.target);
     if (!destInfo) return;
     var index = this.getIndexByInfo(destInfo);
-    destInfo.panel.addElement(this.getNewTargetElement(), index);
+    var newElement = this.getNewTargetElement();
+    destInfo.panel.addElement(newElement, index);
     if (this.source) {
       var srcInfo = this.findInfo(this.source, true);
       var panel = srcInfo ? srcInfo.panel : this.page;
       panel.removeElement(this.source);
     }
+    return newElement;
   }
   public clear() {
     this.clearByInfo(this.findInfo(this.target, true));
@@ -300,13 +302,14 @@ export class DragDropHelper {
     }
     if (this.isSurveyDragging(event)) {
       event.preventDefault();
-      this.ddTarget.doDrop();
+      var newElement = this.ddTarget.doDrop();
       if (this.onModifiedCallback)
         this.onModifiedCallback({
           type: "DO_DROP",
           page: this.ddTarget.page,
           source: this.ddTarget.source,
           target: this.ddTarget.target,
+          newElement: this.ddTarget.source ? null : newElement,
           moveTo: this.ddTarget.moveTo
         });
     }

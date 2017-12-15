@@ -215,6 +215,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> options.page: the page of the drap/drop operation
    * <br/> options.source: the source dragged object
    * <br/> options.target: the drop target
+   * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
    */
   public onModified: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
