@@ -43,6 +43,7 @@ export class SurveyTextWorker {
     if (this.jsonValue != null) {
       this.updateJsonPositions(this.jsonValue);
       this.surveyValue = new Survey.Survey(this.jsonValue);
+      this.surveyValue.setDesignMode(true);
       if (this.surveyValue.jsonErrors != null) {
         for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
           var error = this.surveyValue.jsonErrors[i];
