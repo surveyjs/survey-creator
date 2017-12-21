@@ -9,7 +9,7 @@ $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
 $editor-height: 75vh;
 @media (max-width: 816px) {
-  .svd_container .nav-tabs.svd_menu>li.active>a {
+  .svd_container .nav-tabs.svd_menu > li.active > a {
     color: $main-color;
     background-color: transparent;
     border: none;
@@ -25,7 +25,7 @@ $editor-height: 75vh;
   background-color: $light-bg-color;
   height: $editor-height;
   overflow-y: scroll;
-  .table>tbody>tr.active>td {
+  .table > tbody > tr.active > td {
     background: white;
   }
   .form-control {
@@ -73,7 +73,8 @@ $editor-height: 75vh;
       }
     }
   }
-  .select2-container {
+  .select2-container,
+  .select2-container--default.select2-container--open {
     .select2-selection--single {
       border-radius: 0;
       border: 1px solid #ccc;
@@ -85,7 +86,7 @@ $editor-height: 75vh;
         right: 0px;
         width: 34px;
         b {
-          border-color: white transparent transparent transparent;
+          border-color: white transparent white transparent;
         }
       }
     }
@@ -100,7 +101,7 @@ $editor-height: 75vh;
     border-top: 1px solid $light-border-color;
     border-bottom: 1px solid $light-border-color;
     padding: 19px 15px 0 15px;
-    >li>a {
+    > li > a {
       border: none;
       border-radius: 0;
       padding: 8px 9px 9px 11px;
@@ -114,7 +115,7 @@ $editor-height: 75vh;
         border-bottom: 1px solid $dark-bg-color;
       }
     }
-    >li.active>a {
+    > li.active > a {
       background-color: $dark-bg-color;
       border: 1px solid $light-border-color;
       border-bottom-color: $dark-bg-color;
@@ -145,7 +146,7 @@ $editor-height: 75vh;
       background-color: $main-color;
       border-color: $main-color;
     }
-    .dropdown-menu>.active>a {
+    .dropdown-menu > .active > a {
       background-color: $main-color;
     }
   }
@@ -155,7 +156,7 @@ $editor-height: 75vh;
     margin-right: 40px;
     .icon {
       display: inline-block;
-      +span {
+      + span {
         color: #a7a7a7;
         font-size: 13px;
         font-weight: bold;
@@ -210,7 +211,7 @@ $editor-height: 75vh;
           }
         }
         &.svd_menu {
-          &>li.svd_actions:not(.svd_state) {
+          & > li.svd_actions:not(.svd_state) {
             float: none;
             display: inline-block;
           }
@@ -268,10 +269,10 @@ $editor-height: 75vh;
           .nav-tabs {
             border: none;
             position: relative;
-            >ul {
+            > ul {
               display: table-cell;
             }
-            >li {
+            > li {
               position: relative;
               margin-right: 2px;
               margin-bottom: 2px;
@@ -280,7 +281,7 @@ $editor-height: 75vh;
               path.gear-icon {
                 fill: lightgray;
               }
-              &>div {
+              & > div {
                 display: inline-block;
                 cursor: pointer;
                 padding: 7px 12px;
@@ -407,7 +408,7 @@ $editor-height: 75vh;
           .svd_custom_select {
             display: inline-block;
             width: 100%;
-            &>select {
+            & > select {
               width: 100%;
             }
           }
@@ -437,7 +438,7 @@ $editor-height: 75vh;
         .table {
           color: $text-color;
           font-weight: 600;
-          .active>td:nth-child(1) {
+          .active > td:nth-child(1) {
             border-left: 1px solid $light-bg-color;
           }
           td {
@@ -556,16 +557,16 @@ $editor-height: 75vh;
   .svd-manage-control {
     width: calc(100% - 150px);
     display: inline-block;
-    >* {
+    > * {
       width: 100%;
       height: 32px;
       padding: 5px;
       color: $text-color;
     }
-    >select {
+    > select {
       border-color: $light-border-color;
     }
-    >input {
+    > input {
       border-color: none;
     }
   }
@@ -593,11 +594,11 @@ $editor-height: 75vh;
 }
 
 .svd_container {
-  .svd_menu>li.link-to-attach>a {
+  .svd_menu > li.link-to-attach > a {
     width: auto;
     color: #18a689;
   }
-  .svd_menu>li.link-to-attach>a:hover {
+  .svd_menu > li.link-to-attach > a:hover {
     background-color: transparent;
     color: #1ab394;
     border: none;
