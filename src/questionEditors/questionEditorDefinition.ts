@@ -138,7 +138,12 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "visibleIf", index: 100 }]
     },
     page: {
-      properties: ["name", "title", { name: "visible", category: "checks" }],
+      properties: [
+        "name",
+        "title",
+        { name: "visible", category: "checks" },
+        "questionsOrder"
+      ],
       tabs: [{ name: "visibleIf", index: 100 }]
     },
     survey: {
@@ -168,6 +173,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showCompletedPage", tab: "navigation", category: "navpages" },
         { name: "goNextPageAutomatic", tab: "navigation", category: "navopt" },
         { name: "showProgressBar", tab: "navigation", category: "navopt" },
+        { name: "isSinglePage", tab: "navigation" },
 
         { name: "questionTitleLocation", tab: "question" },
         { name: "requiredText", tab: "question" },
@@ -179,6 +185,7 @@ export class SurveyQuestionEditorDefinition {
           name: "focusFirstQuestionAutomatic",
           tab: "question"
         },
+        { name: "questionsOrder", tab: "question" },
 
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },
