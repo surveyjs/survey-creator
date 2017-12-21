@@ -8,13 +8,11 @@ $light-bg-color: #fff;
 $bg-color: #f9f9f9;
 $dark-bg-color: #f3f3f4;
 $editor-height: 75vh;
-
 @media (max-width: 816px) {
-  .svd_container .nav-tabs.svd_menu > li.active > a {
+  .svd_container .nav-tabs.svd_menu>li.active>a {
     color: $main-color;
     background-color: transparent;
     border: none;
-
     &:hover,
     &:focus {
       color: $main-color;
@@ -27,11 +25,9 @@ $editor-height: 75vh;
   background-color: $light-bg-color;
   height: $editor-height;
   overflow-y: scroll;
-
-  .table > tbody > tr.active > td {
+  .table>tbody>tr.active>td {
     background: white;
   }
-
   .form-control {
     border-radius: 0;
   }
@@ -40,13 +36,11 @@ $editor-height: 75vh;
 .svd_container {
   background-color: $light-bg-color;
   position: relative;
-
   .form-control:focus {
     border-color: #1ab394;
     outline: 0;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #1ab394;
   }
-
   .ddmenu-container {
     &.propertyeditor-triggers,
     &.propertyeditor-validators {
@@ -61,18 +55,15 @@ $editor-height: 75vh;
         z-index: 2000;
         margin-top: 3px;
         font-size: 14px;
-
         li {
           margin: 5px 0;
           width: 100%;
-
           a {
             padding: 3px 20px;
             color: #262626;
             width: 100%;
             font-weight: 400;
             display: block;
-
             &:hover {
               background-color: #f5f5f5;
               text-decoration: none;
@@ -82,40 +73,34 @@ $editor-height: 75vh;
       }
     }
   }
-
   .select2-container {
     .select2-selection--single {
       border-radius: 0;
       border: 1px solid #ccc;
       height: 34px;
-
       .select2-selection__arrow {
         background: #1ab394;
         height: 34px;
         top: 0px;
         right: 0px;
         width: 34px;
-
         b {
           border-color: white transparent transparent transparent;
         }
       }
     }
   }
-
   * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
   }
-
   .svd_menu {
     background-color: $light-bg-color;
     border-top: 1px solid $light-border-color;
     border-bottom: 1px solid $light-border-color;
     padding: 19px 15px 0 15px;
-
-    > li > a {
+    >li>a {
       border: none;
       border-radius: 0;
       padding: 8px 9px 9px 11px;
@@ -123,19 +108,16 @@ $editor-height: 75vh;
       text-align: center;
       font-size: 11px;
       font-weight: bold;
-
       &:hover,
       &:focus {
         background-color: $dark-bg-color;
         border-bottom: 1px solid $dark-bg-color;
       }
     }
-
-    > li.active > a {
+    >li.active>a {
       background-color: $dark-bg-color;
       border: 1px solid $light-border-color;
       border-bottom-color: $dark-bg-color;
-
       &:hover,
       &:focus {
         color: $main-color;
@@ -143,33 +125,27 @@ $editor-height: 75vh;
       }
     }
   }
-
   a,
   a.nav-link {
     color: $main-color;
     cursor: pointer;
   }
-
   .btn.btn-primary {
     background-color: $main-color;
     border-color: $main-color;
   }
-
   .svd_actions {
     padding: 5px 0;
-
     .btn.btn-primary {
       margin-right: 10px;
       font-size: 11px;
       font-weight: bold;
     }
-
     .btn-group.open .dropdown-toggle {
       background-color: $main-color;
       border-color: $main-color;
     }
-
-    .dropdown-menu > .active > a {
+    .dropdown-menu>.active>a {
       background-color: $main-color;
     }
   }
@@ -177,31 +153,26 @@ $editor-height: 75vh;
     float: right;
     padding: 10px 0;
     margin-right: 40px;
-
     .icon {
       display: inline-block;
-
-      + span {
+      +span {
         color: #a7a7a7;
         font-size: 13px;
         font-weight: bold;
       }
     }
   }
-
   .svd_content {
     background-color: $dark-bg-color;
     padding: 30px;
     margin: 0;
     border: none;
-
     .svd_survey_designer {
       .svd_toolbar {
         list-style: none;
         background-color: transparent;
         border: none;
         padding: 0;
-
         .ddmenu-container {
           &.toolbar-options {
             ul {
@@ -215,17 +186,14 @@ $editor-height: 75vh;
               margin-top: -1px;
               border-top-left-radius: 0;
               border-top-right-radius: 0;
-
               li {
                 margin: 5px 0;
-
                 &.active {
                   a {
                     background-color: #1ab394;
                     color: white;
                   }
                 }
-
                 a {
                   width: 100%;
                   white-space: nowrap;
@@ -241,19 +209,16 @@ $editor-height: 75vh;
             }
           }
         }
-
         &.svd_menu {
-          & > li.svd_actions:not(.svd_state) {
+          &>li.svd_actions:not(.svd_state) {
             float: none;
             display: inline-block;
           }
         }
       }
-
       .svd_toolbox {
         background-color: $dark-bg-color;
         border: none;
-
         .svd_toolbox_title {
           text-transform: uppercase;
           font-weight: 600;
@@ -261,7 +226,6 @@ $editor-height: 75vh;
           padding-top: 5px;
           padding-bottom: 10px;
         }
-
         .panel-heading,
         .card-header {
           background-color: $dark-bg-color;
@@ -270,7 +234,6 @@ $editor-height: 75vh;
           padding: 0 0 30px 0;
           font-size: 15px;
         }
-
         .btn-group-vertical {
           .btn {
             background-color: $dark-bg-color;
@@ -278,18 +241,15 @@ $editor-height: 75vh;
             padding: 8px 0;
             border-bottom: 1px solid $light-border-color;
             box-shadow: none;
-
             [class^="icon-"],
             [class*=" icon-"] {
               font-size: 16px;
               position: absolute;
               color: $text-color;
             }
-
             .icon-default {
               color: $main-color;
             }
-
             .svd_toolbox_item_text {
               margin-left: 35px;
               color: $text-color;
@@ -300,55 +260,42 @@ $editor-height: 75vh;
           }
         }
       }
-
       .svd_editors {
         .svd_pages_editor {
           background-color: $light-bg-color;
           border-top: 2px solid $light-border-color;
           padding: 10px 15px 0 15px;
-
           .nav-tabs {
             border: none;
             position: relative;
-            padding-right: 100px;
-
-            > li {
+            >ul {
+              display: table-cell;
+            }
+            >li {
               position: relative;
               margin-right: 2px;
               margin-bottom: 2px;
-              border: 1px solid $dark-border-color;
-              border-radius: 3px;
-              padding: 7px 22px 7px 12px;
-              cursor: pointer;
-
-              &.active {
-                .svd_page_nav {
-                  color: $main-color;
-                  margin-right: 2px;
+              border-radius: 2px;
+              font-weight: bold;
+              path.gear-icon {
+                fill: lightgray;
+              }
+              &>div {
+                display: inline-block;
+                cursor: pointer;
+                padding: 7px 12px;
+                &:hover {
+                  background-color: #eee;
                 }
-
+              }
+              .svd_add_page_li {
                 &:hover {
                   background-color: transparent;
                 }
               }
-
-              &:hover {
-                background-color: #eee;
-              }
-
-              &.svd_add_page_li {
-                border: none;
-                &:hover {
-                  background-color: transparent;
-                }
-              }
-
               &.svd_edit_survey_li {
-                position: absolute;
-                right: 0;
-                margin-right: 10px;
+                display: table-cell;
               }
-
               .svd_page_nav {
                 display: inline-block;
                 border: none;
@@ -357,29 +304,20 @@ $editor-height: 75vh;
                 color: #676a6c;
                 background-color: transparent;
               }
-
               .ddmenu-container {
                 &.page-nav {
-                  position: absolute;
-                  right: 5px;
-                  top: 8px;
-
                   ul {
                     background: white;
                     border: 1px solid #ccc;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     padding: 0;
-                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                    min-width: 160px;
-                    right: -6px;
                     margin-top: 7px;
-                    border-top-left-radius: 0;
-                    border-top-right-radius: 0;
-
                     li {
-                      margin: 5px;
-
+                      margin: 7px;
                       button {
+                        padding: 6px 15px;
+                        font-size: 11px;
+                        font-weight: bold;
                         width: 100%;
                       }
                     }
@@ -388,32 +326,26 @@ $editor-height: 75vh;
               }
             }
           }
-
           .svd_add_new_page_btn {
             border: none;
             padding: 0;
             box-shadow: none;
             background-color: transparent;
-
             &:focus {
               outline: none;
             }
-
             &:hover {
               background-color: transparent;
             }
-
             .glyphicon-plus {
               color: $text-color;
             }
           }
         }
-
         .svd_questions_editor {
           background-color: $light-bg-color;
           height: $editor-height;
           overflow-y: scroll;
-
           .panel-body,
           .card-block {
             .svd_question {
@@ -422,16 +354,13 @@ $editor-height: 75vh;
               padding: 20px 9px;
               background-color: #f5f5f5;
               margin-bottom: 20px;
-
               .svd_question_menu {
                 position: absolute;
                 right: 5px;
                 top: 5px;
-
                 .ddmenu-container {
                   &.element-addons {
                     margin-left: 5px;
-
                     ul {
                       background: white;
                       border: 1px solid #ccc;
@@ -440,10 +369,8 @@ $editor-height: 75vh;
                       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
                       min-width: 160px;
                       right: 0;
-
                       li {
                         margin: 5px;
-
                         button {
                           width: 100%;
                         }
@@ -451,18 +378,15 @@ $editor-height: 75vh;
                     }
                   }
                 }
-
                 .glyphicon-option-horizontal {
                   color: $main-color;
                 }
               }
             }
-
             .svd_question_container .svd_question {
               background-color: $bg-color;
               border-top: 1px solid $dark-border-color;
               border-bottom: 1px solid $dark-border-color;
-
               &.svd_q_selected {
                 border: 1px solid $main-color !important;
               }
@@ -470,70 +394,57 @@ $editor-height: 75vh;
           }
         }
       }
-
       .svd_properties {
         border: none;
         border-top: 2px solid $light-border-color;
         border-radius: 0;
         padding: 0;
-
         .panel-heading,
         .card-header {
           background-color: #fff;
           border: none;
           border-bottom: 1px solid $light-border-color;
-
           .svd_custom_select {
             display: inline-block;
             width: 100%;
-
-            & > select {
+            &>select {
               width: 100%;
             }
           }
-
           .btn {
             display: inline-block;
             padding: 0;
             margin: 0 0 0 10px;
             border: none;
-
             &:hover {
               background-color: transparent;
             }
           }
         }
-
         .input-group-btn {
           .btn {
             margin-left: 5px;
             border: none;
             background: transparent;
-
             &:active {
               box-shadow: none;
             }
           }
         }
-
         input[type="checkbox"].form-control {
           width: 25px;
         }
-
         .table {
           color: $text-color;
           font-weight: 600;
-
-          .active > td:nth-child(1) {
+          .active>td:nth-child(1) {
             border-left: 1px solid $light-bg-color;
           }
-
           td {
             border: none;
             height: 40px;
             padding: 0 10px 0 10px;
             vertical-align: middle;
-
             &:nth-child(2) {
               color: $light-text-color;
             }
@@ -541,7 +452,6 @@ $editor-height: 75vh;
         }
       }
     }
-
     .svd_json_editor {
       height: $editor-height;
     }
@@ -550,18 +460,17 @@ $editor-height: 75vh;
       width: 100%;
     }
   }
-
   .glyphicon {
     font-weight: bold;
     display: inline-block;
     font-family: inherit;
     cursor: pointer;
     line-height: 1em;
-
     &.glyphicon-plus::before {
       font-size: 20px;
       line-height: 20px;
       content: "+";
+      color: $main-color;
     }
     &.glyphicon-option-horizontal::before {
       font-size: 20px;
@@ -644,21 +553,19 @@ $editor-height: 75vh;
 .svd-manage {
   margin: 10px 15px;
   position: relative;
-
   .svd-manage-control {
     width: calc(100% - 150px);
     display: inline-block;
-
-    > * {
+    >* {
       width: 100%;
       height: 32px;
       padding: 5px;
       color: $text-color;
     }
-    > select {
+    >select {
       border-color: $light-border-color;
     }
-    > input {
+    >input {
       border-color: none;
     }
   }
@@ -669,14 +576,12 @@ $editor-height: 75vh;
     width: 120px;
     text-align: right;
     margin-right: 15px;
-
     .icon {
       color: $main-color;
       cursor: pointer;
       vertical-align: middle;
       line-height: 32px;
       display: inline-block;
-
       &:hover {
         color: $dark-main-color;
       }
@@ -686,12 +591,13 @@ $editor-height: 75vh;
     }
   }
 }
+
 .svd_container {
-  .svd_menu > li.link-to-attach > a {
+  .svd_menu>li.link-to-attach>a {
     width: auto;
     color: #18a689;
   }
-  .svd_menu > li.link-to-attach > a:hover {
+  .svd_menu>li.link-to-attach>a:hover {
     background-color: transparent;
     color: #1ab394;
     border: none;
@@ -718,102 +624,127 @@ $editor-height: 75vh;
   background-image: url("./images/Panel.svg");
   @include svg-icon(16px);
 }
+
 .icon-paneldynamic:before {
   background-image: url("./images/PanelDynamic.svg");
   @include svg-icon(16px);
 }
+
 .icon-checkbox:before {
   background-image: url("./images/Checkbox.svg");
   @include svg-icon(16px);
 }
+
 .icon-comment:before {
   background-image: url("./images/Comment.svg");
   @include svg-icon(16px);
 }
+
 .icon-dropdown:before {
   background-image: url("./images/Dropdown.svg");
   @include svg-icon(16px);
 }
+
 .icon-file:before {
   background-image: url("./images/File.svg");
   @include svg-icon(16px);
 }
+
 .icon-html:before {
   background-image: url("./images/HTML.svg");
   @include svg-icon(16px);
 }
+
 .icon-default:before {
   background-image: url("./images/Matrix.svg");
   @include svg-icon(16px);
 }
+
 .icon-matrixdynamic:before {
   background-image: url("./images/Matrix_dynamic.svg");
   @include svg-icon(16px);
 }
+
 .icon-matrixdropdown:before {
   background-image: url("./images/Matrix_multiple.svg");
   @include svg-icon(16px);
 }
+
 .icon-matrix:before {
   background-image: url("./images/Matrix_single.svg");
   @include svg-icon(16px);
 }
+
 .icon-multipletext:before {
   background-image: url("./images/Multipletext.svg");
   @include svg-icon(16px);
 }
+
 .icon-radiogroup:before {
   background-image: url("./images/Radiogroup.svg");
   @include svg-icon(16px);
 }
+
 .icon-rating:before {
   background-image: url("./images/Rating.svg");
   @include svg-icon(16px);
 }
+
 .icon-text:before {
   background-image: url("./images/Text.svg");
   @include svg-icon(16px);
 }
+
 .icon-boolean:before {
   background-image: url("./images/Boolean.svg");
   @include svg-icon(16px);
 }
+
 .icon-expression:before {
   background-image: url("./images/Expression.svg");
   @include svg-icon(16px);
 }
+
 .icon-editor:before {
   background-image: url("./images/cw/Editor.svg");
   @include svg-icon(16px);
 }
+
 .icon-imagepicker:before {
   background-image: url("./images/cw/ImagePicker.svg");
   @include svg-icon(16px);
 }
+
 .icon-barrating:before {
   background-image: url("./images/cw/Barrating.svg");
   @include svg-icon(16px);
 }
+
 .icon-datepicker:before {
   background-image: url("./images/cw/DatePicker.svg");
   @include svg-icon(16px);
 }
+
 .icon-nouislider:before {
   background-image: url("./images/cw/noUISlider.svg");
   @include svg-icon(16px);
 }
+
 .icon-tagbox:before {
   background-image: url("./images/cw/TagBox.svg");
   @include svg-icon(16px);
 }
+
 .icon-signaturepad:before {
   background-image: url("./images/cw/SingaturePad.svg");
   @include svg-icon(16px);
 }
+
 .icon-sortablelist:before {
   background-image: url("./images/cw/SortableJS.svg");
   @include svg-icon(16px);
 }
+
 .icon-autocomplete:before {
   background-image: url("./images/cw/autocomplete.svg");
   @include svg-icon(16px);
@@ -823,33 +754,50 @@ $editor-height: 75vh;
   background-image: url("./images/Delete_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-edit:before {
   background-image: url("./images/Edit_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-fork:before {
   background-image: url("./images/Fork_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-modified:before {
   background-image: url("./images/Modified_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-new:before {
   background-image: url("./images/New_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-saved:before {
   background-image: url("./images/Saved_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-saving:before {
   background-image: url("./images/Saving_24x24.svg");
   @include svg-icon(24px);
 }
+
 .icon-cloud:before {
   background-image: url("./images/Cloud_24x24.svg");
   @include svg-icon(24px);
+}
+
+.icon-gear:before {
+  background-image: url("./images/Gear_12x12.svg");
+  @include svg-icon(12px);
+}
+
+.icon-gear-active:before {
+  background-image: url("./images/Gear_12x12_active.svg");
+  @include svg-icon(12px);
 }
 
 .svd_container {
@@ -859,80 +807,66 @@ $editor-height: 75vh;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
-
   @-webkit-keyframes fadeIn {
     from {
       opacity: 0;
     }
-
     to {
       opacity: 1;
     }
   }
-
   @keyframes fadeIn {
     from {
       opacity: 0;
     }
-
     to {
       opacity: 1;
     }
   }
-
   .fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
   }
-
   @-webkit-keyframes fadeInDown {
     from {
       opacity: 0;
       -webkit-transform: translate3d(0, -100%, 0);
       transform: translate3d(0, -100%, 0);
     }
-
     to {
       opacity: 1;
       -webkit-transform: none;
       transform: none;
     }
   }
-
   @keyframes fadeInDown {
     from {
       opacity: 0;
       -webkit-transform: translate3d(0, -100%, 0);
       transform: translate3d(0, -100%, 0);
     }
-
     to {
       opacity: 1;
       -webkit-transform: none;
       transform: none;
     }
   }
-
   .fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
   }
-
   .modal {
     display: none;
     background: rgba(0, 0, 0, 0.3);
     z-index: 999;
-
     .modal-dialog {
       max-width: 600px;
     }
-
     .modal-body {
       max-height: 75vh;
       overflow: auto;
     }
   }
-
   .svd_items_table {
     width: 100%;
     tr {
