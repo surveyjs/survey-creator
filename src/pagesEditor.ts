@@ -93,11 +93,11 @@ export class SurveyPagesEditor {
   public isPageActive() {
     return this.koActiveObject() && this.koActiveObject().getType() === "page";
   }
-  public addNewPageClick() {
+  public addNewPageClick = () => {
     if (this.onAddNewPageCallback) {
       this.onAddNewPageCallback();
     }
-  }
+  };
   public editSurveyClick() {
     if (this.onShowSurveyEditDialog) {
       this.onShowSurveyEditDialog();
@@ -123,6 +123,9 @@ export class SurveyPagesEditor {
     if (index > -1) {
       this.koPages.splice(index, 1);
     }
+  }
+  public getSelectedClass() {
+    return this.isSurveyActive() ? "icon-gear-active" : "icon-gear";
   }
   public changeName(page: Survey.Page) {
     var index = this.getIndexByPage(page);
@@ -172,7 +175,10 @@ export class SurveyPagesEditor {
       pages.push({
         title: ko.observable(SurveyHelper.getObjectName(page)),
         page: page,
-        koSelected: ko.observable(false)
+        koSelected: ko.observable(false),
+        getSelectedClass: function() {
+          return this.koSelected() ? "icon-gear-active" : "icon-gear";
+        }
       });
     }
     this.koPages(pages);
