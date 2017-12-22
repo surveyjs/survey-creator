@@ -18,6 +18,7 @@ import {
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
+import { underline } from "chalk";
 
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
@@ -105,7 +106,10 @@ export class SurveyQuestionProperties {
   public getProperties(tabName: string): Array<Survey.JsonObjectProperty> {
     return this.editorDefinition
       .reduce((a, b) => a.concat(b.properties), [])
-      .filter(prop => typeof prop !== "string" && prop.tab === tabName)
+      .filter(
+        prop =>
+          prop !== undefined && typeof prop !== "string" && prop.tab === tabName
+      )
       .map(prop => typeof prop !== "string" && this.getProperty(prop.name))
       .filter(prop => !!prop);
   }

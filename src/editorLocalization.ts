@@ -206,6 +206,7 @@ export var defaultStrings = {
       "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Question error location",
     focusFirstQuestionAutomatic: "Focus first question on changing the page",
+    questionsOrder: "Elements order on the page",
     maxTimeToFinish: "Maximum time to finish the survey",
     maxTimeToFinishPage: "Maximum time to finish a page in the survey",
     showTimerPanel: "Show timer panel",
@@ -215,6 +216,7 @@ export var defaultStrings = {
     allowRemovePanel: "Allow removing the panel",
     panelAddText: "Adding panel text",
     panelRemoveText: "Removing panel text",
+    isSinglePage: "Show all elements on one page",
 
     tabs: {
       general: "General",
