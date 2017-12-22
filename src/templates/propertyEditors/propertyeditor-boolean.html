@@ -2,9 +2,9 @@
     <div class="sjs-cb-wrapper">
         <label>
             <div class="sjs-cb-container">
-                <input class="form-control svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: readOnly">
+                <input class="form-control svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: $data.readOnly">
                 <span class="checkmark"></span>
-                <!-- ko if: showDisplayName -->
+                <!-- ko if: $data.showDisplayName === undefined || $data.showDisplayName -->
                 <span class="sjs-cb-label" data-bind="text: displayName"></span>
                 <!-- /ko -->
             </div>
