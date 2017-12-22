@@ -1,36 +1,37 @@
 ﻿<script type="text/html" id="propertyeditor-validators">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-validators">
-<div class="panel">
-    <div class="row" style="margin-bottom:10px">
-        <div class="col-lg-12">
-            <div class="input-group form-inline">
-                <div class="input-group-btn"  data-bind="visible: koAllowAddRemoveItems">
-                    <div class="ddmenu-container propertyeditor-validators btn-group inline">
-                        <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
-                
-                        <div class="ddmenu">
-                             <span class="btn btn-default" tabindex="0">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </span>
+    <div class="panel propertyeditor-validators">
+        <div class="input-group form-group">
+            <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems">
+                <div class="ddmenu-container">
+                    <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 
-                            <div tabindex="0" onclick="return true"></div>
-                            <ul>
-                                <!-- ko foreach: koValidators -->
-                                    <li><a href="#" data-bind="click: $parent.onAddClick"><span data-bind="text:$data.text"></span></a></li>
-                                <!-- /ko  -->
-                            </ul>
-                        </div>
+                    <div class="ddmenu">
+                        <span tabindex="0">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </span>
+
+                        <div tabindex="0" onclick="return true"></div>
+                        <ul>
+                            <!-- ko foreach: koValidators -->
+                            <li>
+                                <a href="#" data-bind="click: $parent.onAddClick">
+                                    <span data-bind="text:$data.text"></span>
+                                </a>
+                            </li>
+                            <!-- /ko  -->
+                        </ul>
                     </div>
                 </div>
-                <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
-                <span class="input-group-btn" data-bind="visible: koAllowAddRemoveItems">
-                    <button type="button" data-bind="enable: koSelected() != null, click: onDeleteClick" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
-                </span>
             </div>
+            <select class="form-control" data-bind="options: koItems, optionsText: 'text', value: koSelected"></select>
+            <span class="input-group-addon btn-danger" data-bind="visible: koAllowAddRemoveItems, enable: koSelected() != null, click: onDeleteClick">
+                <span class="glyphicon glyphicon-remove"></span>
+            </span>
         </div>
+        <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
     </div>
-    <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
-</div>
 </script>
