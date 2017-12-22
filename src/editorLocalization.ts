@@ -102,7 +102,7 @@ export var defaultStrings = {
     addNewPage: "Add New Page",
     deletePage: "Delete Page",
     editPage: "Edit Page",
-    newPageName: "Page",
+    newPageName: "page",
     newQuestionName: "question",
     newPanelName: "panel",
     testSurvey: "Test Survey",
