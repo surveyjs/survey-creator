@@ -226,6 +226,7 @@ export var defaultStrings = {
       rows: "Rows",
       choices: "Choices",
       visibleIf: "Visible If",
+      enableIf: "Enable If",
       rateValues: "Rate Values",
       choicesByUrl: "Choices from Web",
       matrixChoices: "Default Choices",
