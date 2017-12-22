@@ -5,7 +5,7 @@
                 <a class="nav-link svd_page_nav" href="#">
                     <span data-bind="text:$root.getLocString('ed.Survey')"></span>
                 </a>
-                <div class="ddmenu-container page-nav btn-group inline">
+                <div class="ddmenu-container page-nav btn-group inline menu-disabled" data-bind="css: { 'menu-disabled': !isSurveyActive() }">
                     <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 
                     <div class="ddmenu">
@@ -36,7 +36,7 @@
                     <a class="nav-link svd_page_nav" href="#">
                         <span data-bind="text: title"></span>
                     </a>
-                    <div class="ddmenu-container page-nav btn-group inline">
+                    <div class="ddmenu-container page-nav btn-group inline menu-disabled" data-bind="css: { 'menu-disabled': !koSelected() }">
                         <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 
                         <div class="ddmenu">
