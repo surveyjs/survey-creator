@@ -1,16 +1,16 @@
 ﻿<script type="text/html" id="propertyeditor-triggersitems">
-    <div class="panel card no-margins no-padding">
-        <div data-bind="text: title" style="margin-bottom:10px"></div>
-        <div class="input-group">
+    <div>
+        <div class="form-group" data-bind="text: title"></div>
+        <div class="form-group input-group">
             <select class="form-control" multiple="multiple" data-bind="options:koChoosen, value: koChoosenSelected"></select>
-            <span class="input-group-btn" style="vertical-align:top">
-                <button type="button" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+            <span class="input-group-addon btn-danger" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick">
+                <span class="glyphicon glyphicon-remove"></span>
             </span>
         </div>
-        <div class="input-group" style="margin-top:5px">
+        <div class="form-group input-group">
             <select class="form-control" data-bind="options:koObjects, value: koSelected"></select>
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" data-bind="enable: koSelected() != null, click: onAddClick" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+            <span class="input-group-addon btn-default" data-bind="enable: koSelected() != null, click: onAddClick">
+                <span class="glyphicon glyphicon-plus"></span>
             </span>
         </div>
     </div>
