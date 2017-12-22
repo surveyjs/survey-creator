@@ -165,6 +165,7 @@ export class SurveyPagesEditor {
     }
   }
   public updatePages() {
+    var self = this;
     if (this.surveyValue == null) {
       this.koPages([]);
       return;
@@ -177,7 +178,9 @@ export class SurveyPagesEditor {
         page: page,
         koSelected: ko.observable(false),
         getSelectedClass: function() {
-          return this.koSelected() ? "icon-gear-active" : "icon-gear";
+          return this.koSelected() && self.isPageActive()
+            ? "icon-gear-active"
+            : "icon-gear";
         }
       });
     }
