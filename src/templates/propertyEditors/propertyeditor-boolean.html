@@ -5,7 +5,7 @@
                 <input class="svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: $data.readOnly">
                 <span class="checkmark"></span>
                 <!-- ko if: $data.showDisplayName === undefined || $data.showDisplayName -->
-                <span class="sjs-cb-label" data-bind="text: displayName"></span>
+                <span class="sjs-cb-label" data-bind="text: $data.displayName"></span>
                 <!-- /ko -->
             </div>
         </label>

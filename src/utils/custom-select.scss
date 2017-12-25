@@ -1,0 +1,36 @@
+$main-color: #1ab394;
+
+@mixin svg-icon() {
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.svd_custom_select {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+
+  select {
+    display: block;
+    position: relative;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  &:before {
+    padding: 17px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $main-color;
+    background-image: url("../images/ArrowDown_34x34.svg");
+    @include svg-icon();
+  }
+}

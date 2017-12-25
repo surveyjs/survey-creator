@@ -37,6 +37,10 @@ $editor-height: 75vh;
   background-color: $light-bg-color;
   position: relative;
 
+  .form-control {
+    border-radius: 2px;
+  }
+
   .svd_property_editor_dropdown {
     margin-bottom: 0.5em;
   }
