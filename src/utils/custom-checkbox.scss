@@ -1,14 +1,12 @@
 .sjs-cb-wrapper {
   display: inline-block;
   margin-right: 1em;
-  margin-bottom: 0.5em;
 }
 
 .sjs-cb-container {
   position: relative;
-  height: 26px;
-  margin: 0;
-  vertical-align: middle;
+  display: inline-block;
+  height: 1em;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
