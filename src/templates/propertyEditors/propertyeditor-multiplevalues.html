@@ -1,5 +1,6 @@
 <script type="text/html" id="propertyeditor-multiplevalues">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
 </script>
 <script type="text/html" class="btn-xs" id="propertyeditorcontent-multiplevalues">
     <div style="max-height:300px; overflow-y:scroll;">
@@ -7,7 +8,9 @@
         <div data-bind="style:{display: 'inline-block'">
             <label>
                 <input type="checkbox" data-bind="attr: {value: item.value}, checked: $parent.koEditingValue" />
-                <span class="checkbox-material"><span class="check"></span></span>
+                <span class="checkbox-material">
+                    <span class="check"></span>
+                </span>
                 <span style="position: static;" data-bind="text: item.text"></span>
             </label>
         </div>

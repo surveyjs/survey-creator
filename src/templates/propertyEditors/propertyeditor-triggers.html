@@ -24,7 +24,9 @@
                     </div>
                 </div>
             </div>
-            <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+            <div class="form-control svd_custom_select">
+                <select data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+            </div>
             <span data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }, enable: koSelected() != null, click: onDeleteClick"
                 class="input-group-addon btn-danger">
                 <span class="glyphicon glyphicon-remove"></span>
@@ -38,8 +40,12 @@
             <div data-bind="with: koSelected">
                 <div class="form-inline form-group">
                     <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
-                    <select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select>
-                    <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                    <div class="form-control svd_custom_select">
+                        <select data-bind="options:$parent.koQuestions, value: koName"></select>
+                    </div>
+                    <div class="form-control svd_custom_select">
+                        <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                    </div>
                     <input class="form-control" type="text" data-bind="visible: koRequireValue, value:koValue" />
                 </div>
 
