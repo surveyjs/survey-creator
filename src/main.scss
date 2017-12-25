@@ -36,6 +36,11 @@ $editor-height: 75vh;
 .svd_container {
   background-color: $light-bg-color;
   position: relative;
+
+  .svd_property_editor_dropdown {
+    margin-bottom: 0.5em;
+  }
+
   .form-control:focus {
     border-color: #1ab394;
     outline: 0;
@@ -44,7 +49,6 @@ $editor-height: 75vh;
   .propertyeditor-triggers,
   .propertyeditor-validators {
     min-height: 150px;
-
     .first-addon {
       padding: 0;
     }
@@ -313,7 +317,6 @@ $editor-height: 75vh;
                 margin-bottom: 1px;
                 color: #676a6c;
                 background-color: transparent;
-
                 &.active-page {
                   color: $main-color;
                 }
@@ -480,6 +483,7 @@ $editor-height: 75vh;
     font-family: inherit;
     cursor: pointer;
     line-height: 1em;
+    top: 0;
     &.glyphicon-plus::before {
       font-size: 20px;
       line-height: 20px;
