@@ -17,7 +17,8 @@
                 <!-- ko foreach: koItems -->
                 <tr>
                     <td>
-                        <input type="checkbox" data-bind="checked: koIsRequired" />
+                        <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
+                        <!-- /ko -->
                         <button type="button" class="btn btn-sm" data-bind="click: $parent.onEditItemClick, attr: { title: $root.getLocString('pe.edit') }">
                             <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
                         </button>
