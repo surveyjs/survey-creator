@@ -1,25 +1,9 @@
-﻿$main-color: #1ab394;
-$dark-main-color: #18a689;
-$text-color: #676a6c;
-$light-text-color: #a7a7a7;
-$light-border-color: #e7eaec;
-$dark-border-color: #ddd;
-$light-bg-color: #fff;
-$bg-color: #f9f9f9;
-$dark-bg-color: #f3f3f4;
-$editor-height: 75vh;
-@media (max-width: 816px) {
-  .svd_container .nav-tabs.svd_menu > li.active > a {
-    color: $main-color;
-    background-color: transparent;
-    border: none;
-    &:hover,
-    &:focus {
-      color: $main-color;
-      background-color: transparent;
-    }
-  }
-}
+﻿$editor-height: 75vh;
+
+@import "colors";
+@import "editor-tabs";
+@import "toolbox";
+@import "toolbar";
 
 .svd_object_editor {
   background-color: $light-bg-color;
@@ -36,6 +20,10 @@ $editor-height: 75vh;
 .svd_container {
   background-color: $light-bg-color;
   position: relative;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  color: $text-color;
 
   .form-control {
     border-radius: 2px;
@@ -63,14 +51,14 @@ $editor-height: 75vh;
       ul {
         background: white;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 2px;
         padding: 0;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         min-width: 160px;
         left: 0;
         z-index: 2000;
         margin-top: 3px;
-        font-size: 14px;
+        font-size: 1.17em;
         li {
           margin: 5px 0;
           width: 100%;
@@ -112,71 +100,23 @@ $editor-height: 75vh;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
   }
-  .svd_menu {
-    background-color: $light-bg-color;
-    border-top: 1px solid $light-border-color;
-    border-bottom: 1px solid $light-border-color;
-    padding: 19px 15px 0 15px;
-    > li > a {
-      border: none;
-      border-radius: 0;
-      padding: 8px 9px 9px 11px;
-      width: 115px;
-      text-align: center;
-      font-size: 11px;
-      font-weight: bold;
-      &:hover,
-      &:focus {
-        background-color: $dark-bg-color;
-        border-bottom: 1px solid $dark-bg-color;
-      }
-    }
-    > li.active > a {
-      background-color: $dark-bg-color;
-      border: 1px solid $light-border-color;
-      border-bottom-color: $dark-bg-color;
-      &:hover,
-      &:focus {
-        color: $main-color;
-        background-color: $dark-bg-color;
-      }
-    }
-  }
+
   a,
   a.nav-link {
-    color: $main-color;
+    color: $text-color;
     cursor: pointer;
   }
-  .btn.btn-primary {
-    background-color: $main-color;
-    border-color: $main-color;
-  }
-  .svd_actions {
-    padding: 5px 0;
-    .btn.btn-primary {
-      margin-right: 10px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-    .btn-group.open .dropdown-toggle {
+  .btn {
+    border-radius: 2px;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    line-height: 1em;
+    min-width: 6em;
+    font-weight: bold;
+
+    &.btn-primary {
       background-color: $main-color;
       border-color: $main-color;
-    }
-    .dropdown-menu > .active > a {
-      background-color: $main-color;
-    }
-  }
-  .svd_state {
-    float: right;
-    padding: 10px 0;
-    margin-right: 40px;
-    .icon {
-      display: inline-block;
-      + span {
-        color: #a7a7a7;
-        font-size: 13px;
-        font-weight: bold;
-      }
     }
   }
   .svd_content {
@@ -185,98 +125,6 @@ $editor-height: 75vh;
     margin: 0;
     border: none;
     .svd_survey_designer {
-      .svd_toolbar {
-        list-style: none;
-        background-color: transparent;
-        border: none;
-        padding: 0;
-        .ddmenu-container {
-          &.toolbar-options {
-            ul {
-              background: white;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-              padding: 0;
-              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-              min-width: 160px;
-              left: 0;
-              margin-top: -1px;
-              border-top-left-radius: 0;
-              border-top-right-radius: 0;
-              li {
-                margin: 5px 0;
-                &.active {
-                  a {
-                    background-color: #1ab394;
-                    color: white;
-                  }
-                }
-                a {
-                  width: 100%;
-                  white-space: nowrap;
-                  display: block;
-                  padding: 3px 20px;
-                  clear: both;
-                  font-weight: 400;
-                  line-height: 1.42857143;
-                  color: #333;
-                  text-decoration: none;
-                }
-              }
-            }
-          }
-        }
-        &.svd_menu {
-          & > li.svd_actions:not(.svd_state) {
-            float: none;
-            display: inline-block;
-          }
-        }
-      }
-      .svd_toolbox {
-        background-color: $dark-bg-color;
-        border: none;
-        .svd_toolbox_title {
-          text-transform: uppercase;
-          font-weight: 600;
-          color: #6d7072;
-          padding-top: 5px;
-          padding-bottom: 10px;
-        }
-        .panel-heading,
-        .card-header {
-          background-color: $dark-bg-color;
-          color: $text-color;
-          border: none;
-          padding: 0 0 30px 0;
-          font-size: 15px;
-        }
-        .btn-group-vertical {
-          .btn {
-            background-color: $dark-bg-color;
-            border: none;
-            padding: 8px 0;
-            border-bottom: 1px solid $light-border-color;
-            box-shadow: none;
-            [class^="icon-"],
-            [class*=" icon-"] {
-              font-size: 16px;
-              position: absolute;
-              color: $text-color;
-            }
-            .icon-default {
-              color: $main-color;
-            }
-            .svd_toolbox_item_text {
-              margin-left: 35px;
-              color: $text-color;
-              position: relative;
-              line-height: 16px;
-              vertical-align: middle;
-            }
-          }
-        }
-      }
       .svd_editors {
         .svd_pages_editor {
           background-color: $light-bg-color;
@@ -312,6 +160,7 @@ $editor-height: 75vh;
                   background-color: #eee;
                 }
               }
+
               .svd_add_page_li {
                 &:hover {
                   background-color: transparent;
@@ -341,7 +190,6 @@ $editor-height: 75vh;
                       margin: 7px;
                       button {
                         padding: 6px 15px;
-                        font-size: 11px;
                         font-weight: bold;
                         width: 100%;
                       }
@@ -385,11 +233,13 @@ $editor-height: 75vh;
                 top: 5px;
                 .ddmenu-container {
                   &.element-addons {
-                    margin-left: 5px;
+                    margin-left: 0.5em;
+                    line-height: 2.2em;
+                    padding-top: 0.2em;
                     ul {
                       background: white;
                       border: 1px solid #ccc;
-                      border-radius: 4px;
+                      border-radius: 2px;
                       padding: 5px 0;
                       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
                       min-width: 160px;
@@ -628,7 +478,7 @@ $editor-height: 75vh;
     color: #1ab394;
     border: none;
   }
-  .svd_actions.link-to-attach {
+  .svd_action.link-to-attach {
     margin-left: 5px;
     font-weight: 500;
     background-color: transparent;

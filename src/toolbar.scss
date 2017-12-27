@@ -1,0 +1,57 @@
+.svd_container {
+  .svd_toolbar {
+    margin-bottom: 1.17em;
+
+    .svd_action {
+      margin-right: 0.65em;
+    }
+    .svd_state {
+      float: right;
+      line-height: 2.2em;
+      .icon {
+        display: inline-block;
+        + span {
+          color: $light-text-color;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .ddmenu-container {
+      &.toolbar-options {
+        ul {
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 2px;
+          padding: 0;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          min-width: 160px;
+          left: 0;
+          margin-top: -1px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          li {
+            margin: 5px 0;
+            &.active {
+              a {
+                background-color: #1ab394;
+                color: white;
+              }
+            }
+            a {
+              width: 100%;
+              white-space: nowrap;
+              display: block;
+              padding: 3px 20px;
+              clear: both;
+              font-weight: 400;
+              line-height: 1.42857143;
+              color: #333;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

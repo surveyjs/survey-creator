@@ -1,5 +1,5 @@
 ﻿<div class="svd_container">
-    <ul class="navbar-default container-fluid nav nav-tabs svd_menu">
+    <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
         <li class="nav-item" data-bind="css: {active: koViewType() == 'designer'}">
             <a class="nav-link" href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a>
         </li>
@@ -16,26 +16,24 @@
 
     <div class="panel card svd_content">
         <div class="row svd_survey_designer" data-bind="visible: koViewType() == 'designer'">
-            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 panel panel-default card card-block svd_toolbox">
+            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox">
                 <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
-                <div class="btn-group-vertical" style="width:100%;padding-right:2px">
-                    <!-- ko foreach: toolbox.koItems -->
-                    <div class="btn btn-default" style="text-align:left; margin:1px;min-height:37px; width:100%" draggable="true" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
-                        <span data-bind="css: iconName, attr: {title: title}"></span>
-                        <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text:title"></span>
-                    </div>
-                    <!-- /ko  -->
+                <!-- ko foreach: toolbox.koItems -->
+                <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
+                    <span data-bind="css: iconName, attr: {title: title}"></span>
+                    <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text:title"></span>
                 </div>
+                <!-- /ko  -->
             </div>
             <div class="col-xs-11 svd_editors" data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid()}">
-                <ul class="svd_toolbar nav-tabs svd_menu">
+                <div class="svd_toolbar">
                     <!-- ko foreach: toolbarItems -->
-                    <li class="nav-item svd_actions" data-bind="css: $data.css, visible: visible, attr: { id: id }">
+                    <span class="svd_action" data-bind="css: $data.css, visible: visible, attr: { id: id }">
                         <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
                         <!-- /ko -->
-                    </li>
+                    </span>
                     <!-- /ko -->
-                </ul>
+                </div>
                 <div class="svd_pages_editor" data-bind="visible: koShowPagesToolbox, template: { name: 'pageeditor', data: pagesEditor }"></div>
                 <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: {height: koDesignerHeight}">
                     <div id="surveyjs"></div>

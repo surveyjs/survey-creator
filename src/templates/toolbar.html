@@ -1,5 +1,7 @@
 ﻿<script type="text/html" id="svd-toolbar-button">
-    <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss"><span data-bind="text: title"></span></button>
+    <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss">
+        <span data-bind="text: title"></span>
+    </button>
 </script>
 <script type="text/html" id="svd-toolbar-options">
     <div class="ddmenu-container toolbar-options btn-group inline">
@@ -13,7 +15,9 @@
             <div tabindex="0" onclick="return true"></div>
             <ul>
                 <!-- ko foreach: items -->
-                <li data-bind="css: $data.css"><a href="#" data-bind="click: action, text: title"></a></li>
+                <li data-bind="css: $data.css">
+                    <a href="#" data-bind="click: action, text: title"></a>
+                </li>
                 <!-- /ko -->
             </ul>
         </div>
