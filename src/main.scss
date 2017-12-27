@@ -4,6 +4,7 @@
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
+@import "pages-editor";
 
 .svd_object_editor {
   background-color: $light-bg-color;
@@ -126,95 +127,6 @@
     border: none;
     .svd_survey_designer {
       .svd_editors {
-        .svd_pages_editor {
-          background-color: $light-bg-color;
-          border-top: 2px solid $light-border-color;
-          padding: 10px 15px 0 15px;
-          .nav-tabs {
-            border: none;
-            position: relative;
-            > ul {
-              display: table-cell;
-            }
-            > li {
-              position: relative;
-              margin-right: 2px;
-              margin-bottom: 2px;
-              border-radius: 2px;
-              font-weight: bold;
-              path.gear-icon {
-                fill: lightgray;
-              }
-
-              &.active {
-                & > div {
-                  background-color: #eee;
-                }
-              }
-
-              & > div {
-                display: inline-block;
-                cursor: pointer;
-                padding: 7px 12px;
-                &:hover {
-                  background-color: #eee;
-                }
-              }
-
-              .svd_add_page_li {
-                &:hover {
-                  background-color: transparent;
-                }
-              }
-              &.svd_edit_survey_li {
-                display: table-cell;
-              }
-              .svd_page_nav {
-                display: inline-block;
-                border: none;
-                padding: 0;
-                text-decoration: none;
-                margin-bottom: 1px;
-                color: #676a6c;
-                background-color: transparent;
-              }
-              .ddmenu-container {
-                &.page-nav {
-                  ul {
-                    background: white;
-                    border: 1px solid #ccc;
-                    border-radius: 2px;
-                    padding: 0;
-                    margin-top: 7px;
-                    li {
-                      margin: 7px;
-                      button {
-                        padding: 6px 15px;
-                        font-weight: bold;
-                        width: 100%;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          .svd_add_new_page_btn {
-            border: none;
-            padding: 0;
-            box-shadow: none;
-            background-color: transparent;
-            &:focus {
-              outline: none;
-            }
-            &:hover {
-              background-color: transparent;
-            }
-            .glyphicon-plus {
-              color: $text-color;
-            }
-          }
-        }
         .svd_questions_editor {
           background-color: $light-bg-color;
           height: $editor-height;
@@ -343,9 +255,8 @@
     line-height: 1em;
     top: 0;
     &.glyphicon-plus::before {
-      font-size: 20px;
-      line-height: 20px;
-      content: "+";
+      font-family: "Glyphicons Halflings";
+      font-weight: normal;
       color: $main-color;
     }
     &.glyphicon-option-horizontal::before {
