@@ -297,6 +297,13 @@ $editor-height: 75vh;
               path.gear-icon {
                 fill: lightgray;
               }
+
+              &.active {
+                & > div {
+                  background-color: #eee;
+                }
+              }
+
               & > div {
                 display: inline-block;
                 cursor: pointer;
@@ -321,9 +328,6 @@ $editor-height: 75vh;
                 margin-bottom: 1px;
                 color: #676a6c;
                 background-color: transparent;
-                &.active-page {
-                  color: $main-color;
-                }
               }
               .ddmenu-container {
                 &.page-nav {

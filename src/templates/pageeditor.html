@@ -33,7 +33,7 @@
             drop:function(el, e){ $parent.dragDrop(el);}
           }">
                 <div data-bind="click:$parent.selectPageClick">
-                    <a class="nav-link svd_page_nav" data-bind="css: {'active-page': koSelected()}" href="#">
+                    <a class="nav-link svd_page_nav" href="#">
                         <span data-bind="text: title"></span>
                     </a>
                     <div class="ddmenu-container page-nav btn-group inline menu-disabled" data-bind="css: { 'menu-disabled': (!koSelected() || !$parent.isPageActive()) }">
