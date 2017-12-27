@@ -8,7 +8,9 @@
             </span>
         </div>
         <div class="form-group input-group">
-            <select class="form-control" data-bind="options:koObjects, value: koSelected"></select>
+            <div class="form-control svd_custom_select">
+                <select data-bind="options:koObjects, value: koSelected"></select>
+            </div>
             <span class="input-group-addon btn-default" data-bind="enable: koSelected() != null, click: onAddClick">
                 <span class="glyphicon glyphicon-plus"></span>
             </span>

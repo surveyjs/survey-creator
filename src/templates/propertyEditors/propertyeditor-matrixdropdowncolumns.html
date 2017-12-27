@@ -17,13 +17,16 @@
             <!-- ko foreach: koItems -->
             <tr>
                 <td>
-                    <input type="checkbox" data-bind="checked: koIsRequired" />
+                    <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
+                    <!-- /ko -->
                     <button type="button" class="btn btn-sm" data-bind="visible: koCanEdit, click: $parent.onEditItemClick">
                         <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
                     </button>
                 </td>
                 <td>
-                    <select class="form-control" data-bind="options: cellTypeChoices, value: koCellType" style="width:110px"></select>
+                    <div class="svd_custom_select" style="width:125px">
+                        <select class="form-control" data-bind="options: cellTypeChoices, value: koCellType"></select>
+                    </div>
                 </td>
                 <td>
                     <input type="text" class="form-control" data-bind="value:koName" style="width:100px" />

@@ -1,5 +1,6 @@
 ﻿<script type="text/html" id="propertyeditor-restfull">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
 </script>
 
 <script type="text/html" id="propertyeditorcontent-restfull">
@@ -9,8 +10,12 @@
             <input type="text" data-bind="attr: {id: name}, value:koValue" class="form-control"></input>
         </div>
         <div class="form-group">
-            <label for="titleName"><span data-bind="text:$root.getLocString('pe.testService')"></span></label>
-            <select class="form-control" data-bind="options: question.koVisibleChoices, optionsText: 'text', optionsValue: 'value', optionsCaption: question.optionsCaption"></select>
+            <label for="titleName">
+                <span data-bind="text:$root.getLocString('pe.testService')"></span>
+            </label>
+            <div class="form-control svd_custom_select" style="display: block;">
+                <select data-bind="options: question.koVisibleChoices, optionsText: 'text', optionsValue: 'value', optionsCaption: question.optionsCaption"></select>
+            </div>
         </div>
     </form>
 </script>

@@ -1,5 +1,6 @@
 // styles
 import "../utils/custom-checkbox.scss";
+import "../utils/custom-select.scss";
 import "../utils/ddmenu.scss";
 import "../main.scss";
 

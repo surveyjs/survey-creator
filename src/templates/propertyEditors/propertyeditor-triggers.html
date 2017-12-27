@@ -4,35 +4,33 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-triggers">
     <div class="panel propertyeditor-triggers">
-        <div class="row" style="margin-bottom:10px">
-            <div class="col-lg-12">
-                <div class="input-group">
-                    <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems">
-                        <div class="ddmenu-container btn-group inline">
-                            <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+        <div class="input-group form-group">
+            <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems">
+                <div class="ddmenu-container">
+                    <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 
-                            <div class="ddmenu">
-                                <span tabindex="0" data-bind="attr: { title: $root.getLocString('pe.addNew') }">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </span>
-                                <div tabindex="0" onclick="return true"></div>
-                                <ul>
-                                    <!-- ko foreach: koTriggers -->
-                                    <li>
-                                        <a data-bind="click: $parent.onAddClick, text:$data.text"></a>
-                                    </li>
-                                    <!-- /ko  -->
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="ddmenu">
+                        <span tabindex="0" data-bind="attr: { title: $root.getLocString('pe.addNew') }">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </span>
+                        <div tabindex="0" onclick="return true"></div>
+                        <ul>
+                            <!-- ko foreach: koTriggers -->
+                            <li>
+                                <a data-bind="click: $parent.onAddClick, text:$data.text"></a>
+                            </li>
+                            <!-- /ko  -->
+                        </ul>
                     </div>
-                    <select class="form-control" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
-                    <span data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }, enable: koSelected() != null, click: onDeleteClick"
-                        class="input-group-addon btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </span>
                 </div>
             </div>
+            <div class="form-control svd_custom_select">
+                <select data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+            </div>
+            <span data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }, enable: koSelected() != null, click: onDeleteClick"
+                class="input-group-addon btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>
+            </span>
         </div>
         <div data-bind="visible: koSelected() == null">
             <div data-bind="visible: koQuestions().length == 0, text: $root.getLocString('pe.noquestions')"></div>
@@ -42,8 +40,12 @@
             <div data-bind="with: koSelected">
                 <div class="form-inline form-group">
                     <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
-                    <select class="form-control" data-bind="options:$parent.koQuestions, value: koName"></select>
-                    <select class="form-control" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                    <div class="form-control svd_custom_select">
+                        <select data-bind="options:$parent.koQuestions, value: koName"></select>
+                    </div>
+                    <div class="form-control svd_custom_select">
+                        <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
+                    </div>
                     <input class="form-control" type="text" data-bind="visible: koRequireValue, value:koValue" />
                 </div>
 
