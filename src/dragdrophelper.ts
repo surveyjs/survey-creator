@@ -2,6 +2,8 @@ import * as Survey from "survey-knockout";
 import { SurveyHelper } from "./surveyHelper";
 
 export class DragDropTargetElement {
+  public moveToParent: any;
+  public moveToIndex: number;
   constructor(
     public page: Survey.Page,
     public target: any,
@@ -36,6 +38,8 @@ export class DragDropTargetElement {
     if (!destInfo) return;
     var index = this.getIndexByInfo(destInfo);
     var newElement = this.getNewTargetElement();
+    this.moveToParent = destInfo.panel;
+    this.moveToIndex = index;
     destInfo.panel.addElement(newElement, index);
     if (this.source) {
       var srcInfo = this.findInfo(this.source, true);
@@ -310,7 +314,8 @@ export class DragDropHelper {
           source: this.ddTarget.source,
           target: this.ddTarget.target,
           newElement: this.ddTarget.source ? null : newElement,
-          moveTo: this.ddTarget.moveTo
+          moveToParent: this.ddTarget.moveToParent,
+          moveToIndex: this.ddTarget.moveToIndex
         });
     }
     this.end();
