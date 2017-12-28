@@ -180,7 +180,6 @@
       width: 100%;
     }
   }
-
 }
 
 .svd_container {
@@ -370,6 +369,10 @@
       th,
       td {
         padding: 0.25em;
+
+        .btn {
+          min-width: auto;
+        }
       }
     }
   }

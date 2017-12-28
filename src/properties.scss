@@ -46,6 +46,9 @@
           &:nth-child(2) {
             color: $light-text-color;
           }
+          .modal-content {
+            line-height: initial;
+          }
         }
       }
     }
