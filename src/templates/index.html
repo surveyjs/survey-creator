@@ -39,16 +39,12 @@
                     <div id="surveyjs"></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs panel panel-default card card-block svd_properties" data-bind="visible: koShowPropertyGrid">
-                <div class="panel-heading card-header input-group">
+            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties" data-bind="visible: koShowPropertyGrid">
+                <div class="svd_object_selector">
                     <div class="svd_custom_select">
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}">
-                            <span class="icon-edit"></span>
-                        </button>
-                    </div>
+                    <span class="icon-edit" data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}"></span>
                 </div>
                 <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
                     <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>

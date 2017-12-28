@@ -1,22 +1,12 @@
 ﻿$editor-height: 75vh;
 
 @import "colors";
+@import "icons";
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
 @import "pages-editor";
-
-.svd_object_editor {
-  background-color: $light-bg-color;
-  height: $editor-height;
-  overflow-y: scroll;
-  .table > tbody > tr.active > td {
-    background: white;
-  }
-  .form-control {
-    border-radius: 0;
-  }
-}
+@import "properties";
 
 .svd_container {
   background-color: $light-bg-color;
@@ -181,63 +171,6 @@
           }
         }
       }
-      .svd_properties {
-        border: none;
-        border-top: 2px solid $light-border-color;
-        border-radius: 0;
-        padding: 0;
-        .panel-heading,
-        .card-header {
-          background-color: #fff;
-          border: none;
-          border-bottom: 1px solid $light-border-color;
-          .svd_custom_select {
-            display: inline-block;
-            width: 100%;
-            & > select {
-              width: 100%;
-            }
-          }
-          .btn {
-            display: inline-block;
-            padding: 0;
-            margin: 0 0 0 10px;
-            border: none;
-            &:hover {
-              background-color: transparent;
-            }
-          }
-        }
-        .input-group-btn {
-          .btn {
-            margin-left: 5px;
-            border: none;
-            background: transparent;
-            &:active {
-              box-shadow: none;
-            }
-          }
-        }
-        input[type="checkbox"].form-control {
-          width: 25px;
-        }
-        .table {
-          color: $text-color;
-          font-weight: 600;
-          .active > td:nth-child(1) {
-            border-left: 1px solid $light-bg-color;
-          }
-          td {
-            border: none;
-            height: 40px;
-            padding: 0 10px 0 10px;
-            vertical-align: middle;
-            &:nth-child(2) {
-              color: $light-text-color;
-            }
-          }
-        }
-      }
     }
     .svd_json_editor {
       height: $editor-height;
@@ -247,43 +180,7 @@
       width: 100%;
     }
   }
-  .glyphicon {
-    font-weight: bold;
-    display: inline-block;
-    font-family: inherit;
-    cursor: pointer;
-    line-height: 1em;
-    top: 0;
-    &.glyphicon-plus::before {
-      font-family: "Glyphicons Halflings";
-      font-weight: normal;
-      color: $main-color;
-    }
-    &.glyphicon-option-horizontal::before {
-      font-size: 20px;
-      content: "⋯";
-    }
-    &.glyphicon-remove::before {
-      vertical-align: middle;
-      content: "✖";
-    }
-    &.glyphicon-edit::before {
-      content: "";
-    }
-    &.glyphicon-trash::before {
-      font-size: 1.25em;
-      content: "🗑";
-    }
-    &.glyphicon-list-alt::before {
-      content: "⇐"; // '🗸'
-    }
-    &.glyphicon-arrow-down::before {
-      content: "↓";
-    }
-    &.glyphicon-arrow-up::before {
-      content: "↑";
-    }
-  }
+
 }
 
 .svd_container {
@@ -398,193 +295,6 @@
   .link-to-attach span:last-child {
     margin-left: 5px;
   }
-}
-
-@mixin svg-icon($icon-size) {
-  content: "";
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: $icon-size / 2;
-}
-
-.icon-panel:before {
-  background-image: url("./images/Panel.svg");
-  @include svg-icon(16px);
-}
-
-.icon-paneldynamic:before {
-  background-image: url("./images/PanelDynamic.svg");
-  @include svg-icon(16px);
-}
-
-.icon-checkbox:before {
-  background-image: url("./images/Checkbox.svg");
-  @include svg-icon(16px);
-}
-
-.icon-comment:before {
-  background-image: url("./images/Comment.svg");
-  @include svg-icon(16px);
-}
-
-.icon-dropdown:before {
-  background-image: url("./images/Dropdown.svg");
-  @include svg-icon(16px);
-}
-
-.icon-file:before {
-  background-image: url("./images/File.svg");
-  @include svg-icon(16px);
-}
-
-.icon-html:before {
-  background-image: url("./images/HTML.svg");
-  @include svg-icon(16px);
-}
-
-.icon-default:before {
-  background-image: url("./images/Matrix.svg");
-  @include svg-icon(16px);
-}
-
-.icon-matrixdynamic:before {
-  background-image: url("./images/Matrix_dynamic.svg");
-  @include svg-icon(16px);
-}
-
-.icon-matrixdropdown:before {
-  background-image: url("./images/Matrix_multiple.svg");
-  @include svg-icon(16px);
-}
-
-.icon-matrix:before {
-  background-image: url("./images/Matrix_single.svg");
-  @include svg-icon(16px);
-}
-
-.icon-multipletext:before {
-  background-image: url("./images/Multipletext.svg");
-  @include svg-icon(16px);
-}
-
-.icon-radiogroup:before {
-  background-image: url("./images/Radiogroup.svg");
-  @include svg-icon(16px);
-}
-
-.icon-rating:before {
-  background-image: url("./images/Rating.svg");
-  @include svg-icon(16px);
-}
-
-.icon-text:before {
-  background-image: url("./images/Text.svg");
-  @include svg-icon(16px);
-}
-
-.icon-boolean:before {
-  background-image: url("./images/Boolean.svg");
-  @include svg-icon(16px);
-}
-
-.icon-expression:before {
-  background-image: url("./images/Expression.svg");
-  @include svg-icon(16px);
-}
-
-.icon-editor:before {
-  background-image: url("./images/cw/Editor.svg");
-  @include svg-icon(16px);
-}
-
-.icon-imagepicker:before {
-  background-image: url("./images/cw/ImagePicker.svg");
-  @include svg-icon(16px);
-}
-
-.icon-barrating:before {
-  background-image: url("./images/cw/Barrating.svg");
-  @include svg-icon(16px);
-}
-
-.icon-datepicker:before {
-  background-image: url("./images/cw/DatePicker.svg");
-  @include svg-icon(16px);
-}
-
-.icon-nouislider:before {
-  background-image: url("./images/cw/noUISlider.svg");
-  @include svg-icon(16px);
-}
-
-.icon-tagbox:before {
-  background-image: url("./images/cw/TagBox.svg");
-  @include svg-icon(16px);
-}
-
-.icon-signaturepad:before {
-  background-image: url("./images/cw/SingaturePad.svg");
-  @include svg-icon(16px);
-}
-
-.icon-sortablelist:before {
-  background-image: url("./images/cw/SortableJS.svg");
-  @include svg-icon(16px);
-}
-
-.icon-autocomplete:before {
-  background-image: url("./images/cw/autocomplete.svg");
-  @include svg-icon(16px);
-}
-
-.icon-delete:before {
-  background-image: url("./images/Delete_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-edit:before {
-  background-image: url("./images/Edit_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-fork:before {
-  background-image: url("./images/Fork_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-modified:before {
-  background-image: url("./images/Modified_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-new:before {
-  background-image: url("./images/New_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-saved:before {
-  background-image: url("./images/Saved_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-saving:before {
-  background-image: url("./images/Saving_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-cloud:before {
-  background-image: url("./images/Cloud_24x24.svg");
-  @include svg-icon(24px);
-}
-
-.icon-gear:before {
-  background-image: url("./images/Gear_12x12.svg");
-  @include svg-icon(12px);
-}
-
-.icon-gear-active:before {
-  background-image: url("./images/Gear_12x12_active.svg");
-  @include svg-icon(12px);
 }
 
 .svd_container {
