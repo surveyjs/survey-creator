@@ -35,7 +35,8 @@ export class SurveyPropertyEditorShowWindow {
     questionBase: Survey.Base,
     elWindow: HTMLElement,
     onChanged: (question: Survey.QuestionBase) => any,
-    options: ISurveyObjectEditorOptions = null
+    options: ISurveyObjectEditorOptions = null,
+    onClosed: () => any = null
   ) {
     var editor = new SurveyQuestionEditor(
       questionBase,
@@ -66,6 +67,7 @@ export class SurveyPropertyEditorShowWindow {
 
     editor.onHideWindow = function() {
       modal.close();
+      if (onClosed) onClosed();
     };
   }
 }

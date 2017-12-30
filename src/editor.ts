@@ -1360,23 +1360,37 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     });
   }
   /**
-   * Show the Question Editor dialog.
-   * @param question The Survey.Question object
+   * Show the Editor dialog. The element can be a question, panel, page or survey
+   * @param element The survey element
    */
-  public showQuestionEditor(question: Survey.Base) {
+  public showElementEditor(
+    element: Survey.Base,
+    onClose: (isCanceled: boolean) => any
+  ) {
+    this.showQuestionEditor(element, onClose);
+  }
+  public showQuestionEditor(
+    element: Survey.Base,
+    onClose: (isCanceled: boolean) => any = null
+  ) {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>this.renderedElement.querySelector(
           "#surveyquestioneditorwindow"
         )
       : null;
+    var isCanceled = true;
     this.questionEditorWindow.show(
-      question,
+      element,
       elWindow,
       function(question) {
         self.onQuestionEditorChanged(question);
+        isCanceled = false;
       },
-      this
+      this,
+      function() {
+        if (onClose) onClose(isCanceled);
+      }
     );
   }
   private onQuestionEditorChanged(question: Survey.QuestionBase) {
@@ -1422,7 +1436,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.setModified({ type: "PAGE_ADDED", newValue: newPage });
     return newPage;
   }
-
+  /**
+   * Delete an element in the survey. It can be a question, a panel or a page.
+   * @param element a survey element.
+   */
+  public deleteElement(element: Survey.Base) {
+    this.deleteObject(element);
+  }
   private deleteObject(obj: any) {
     var options = {
       element: obj,
