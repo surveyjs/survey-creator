@@ -367,9 +367,7 @@ export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase
     };
     this.propertyEditorValue.object = obj;
     this.propertyEditorValue.beforeShowModal();
-    this.koAfterRender = function(el, con) {
-      self.propertyEditor.koAfterRender(el, con);
-    };
+    this.koAfterRender = function(el, con) {};
   }
   private doOnGetLocale(): string {
     if (this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();
