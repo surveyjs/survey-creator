@@ -24,6 +24,7 @@ export class SurveyForDesigner extends Survey.Survey {
     (sender: Survey.Survey, options: any) => any,
     any
   > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+  public onUpdateElementAllowingOptions: (options: any) => any;
   constructor(
     jsonObj: any = null,
     renderedElement: any = null,
@@ -44,6 +45,12 @@ export class SurveyForDesigner extends Survey.Survey {
     this.editQuestionClick = function() {
       self.onEditButtonClick.fire(self, null);
     };
+  }
+  public updateElementAllowingOptions(obj: Survey.Base) {
+    if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
+      obj["allowingOptions"].obj = obj;
+      this.onUpdateElementAllowingOptions(obj["allowingOptions"]);
+    }
   }
   public getMenuItems(obj: Survey.Base): Array<ISurveyObjectMenuItem> {
     var items = [];
@@ -97,6 +104,14 @@ function panelBaseOnCreating(self: any) {
 }
 
 function elementOnCreating(self: any, className: string) {
+  self.allowingOptions = {
+    allowDelete: true,
+    allowEdit: true,
+    allowCopy: true,
+    allowAddToToolbox: true,
+    allowDragging: true,
+    allowChangeType: true
+  };
   self.dragDropHelperValue = null;
   self.dragDropHelper = function() {
     if (self.dragDropHelperValue == null) {
@@ -177,16 +192,20 @@ function createElementAddons(
   var span = document.createElement("span");
   span.innerText = data.getEditorLocString("survey.edit");
   btn.appendChild(span);
-  main.appendChild(btn);
+  if (obj["allowingOptions"] && obj["allowingOptions"].allowEdit) {
+    main.appendChild(btn);
+  }
 
   var nodes = [];
   var menuItems = data.getMenuItems(obj);
-  for (var i = 0; i < menuItems.length; i++) {
-    nodes.push(createQuestionDesignItem(obj, menuItems[i]));
-  }
-  var ddmenu = createDdmenu(nodes, "element-addons");
+  if (menuItems.length > 0) {
+    for (var i = 0; i < menuItems.length; i++) {
+      nodes.push(createQuestionDesignItem(obj, menuItems[i]));
+    }
+    var ddmenu = createDdmenu(nodes, "element-addons");
 
-  main.appendChild(ddmenu);
+    main.appendChild(ddmenu);
+  }
 
   return main;
 }
@@ -201,13 +220,15 @@ function elementOnAfterRendering(
   disable: boolean
 ) {
   self.renderedElement = el;
+  getSurvey(self).updateElementAllowingOptions(self);
   var newClass = className;
   if (self.koIsSelected()) newClass += " svd_q_selected";
 
   el.className = newClass;
   el.style.opacity = self.koIsDragging() ? 0.4 : 1;
-  el.draggable = true;
+  el.draggable = self.allowingOptions.allowDragging;
   el.ondragover = function(e) {
+    if (!self.allowingOptions.allowDragging) return false;
     if (!e["markEvent"]) {
       e["markEvent"] = true;
       self.dragDropHelper().doDragDropOver(e, self, true);
@@ -220,6 +241,7 @@ function elementOnAfterRendering(
     }
   };
   el.ondragstart = function(e) {
+    if (!self.allowingOptions.allowDragging) return false;
     if (!e["markEvent"]) {
       e["markEvent"] = true;
       self.dragDropHelper().startDragQuestion(e, self);

@@ -292,10 +292,26 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * Use this event to disable some operations for an element (question/panel).
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object question/panel
+   * <br/> options.allowDelete set it to false to disable deleting the object
+   * <br/> options.allowEdit set it to false to disable calling the modal Editor
+   * <br/> options.allowCopy set it to false to disable copying the object
+   * <br/> options.allowAddToToolbox set it to false to disable adding element to Toolbox
+   * <br/> options.allowDragging set it to false to disable adding element to Toolbox
+   * <br/> options.allowChangeType set it to false to disable changing element type
+   */
+  public onElementAllowOperations: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * Use this event to add/remove/modify the element (question/panel) menu items.
    * <br/> sender the survey editor object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.items the list of menu items. It has two requried fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
+   * @see onElementAllowOperations
    */
   public onDefineElementMenuItems: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -1131,51 +1147,65 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.surveyValue["setJsonObject"](this.getDefaultSurveyJson()); //TODO
     }
     this.surveyValue["dragDropHelper"] = this.dragDropHelper;
+    this.surveyValue.onUpdateElementAllowingOptions = function(options) {
+      self.onElementAllowOperations.fire(self, options);
+    };
     this.surveyValue.onGetMenuItems.add((sender, options) => {
-      options.items.push({
-        name: "addToToolbox",
-        text: self.getLocString("survey.addToToolbox"),
-        onClick: function(selObj) {
-          self.addCustomToolboxQuestion(selObj);
-        }
-      });
-      options.items.push({
-        name: "copy",
-        text: self.getLocString("survey.copy"),
-        onClick: function(selObj) {
-          self.fastCopyQuestion(selObj);
-        }
-      });
-      var convertClasses = QuestionConverter.getConvertToClasses(
-        options.obj.getType()
-      );
-      for (var i = 0; i < convertClasses.length; i++) {
-        var className = convertClasses[i];
-        var text =
-          this.getLocString("survey.convertTo") +
-          " " +
-          this.getLocString("qt." + className);
+      let opts = options.obj.allowingOptions;
+      if (!opts) opts = {};
+      if (opts.allowAddToToolbox) {
         options.items.push({
-          name: "convertTo" + className,
-          text: text,
-          className: className,
-          onClick: function(selObj, item) {
-            self.convertCurrentObject(selObj, item.className);
+          name: "addToToolbox",
+          text: self.getLocString("survey.addToToolbox"),
+          onClick: function(selObj) {
+            self.addCustomToolboxQuestion(selObj);
           }
         });
       }
-      var deleteLocaleName = options.obj.isPanel
-        ? "survey.deletePanel"
-        : "survey.deleteQuestion";
-      options.items.push({
-        name: "delete",
-        text: self.getLocString(deleteLocaleName),
-        onClick: function(selObj) {
-          self.deleteCurrentObject();
+      if (opts.allowCopy) {
+        options.items.push({
+          name: "copy",
+          text: self.getLocString("survey.copy"),
+          onClick: function(selObj) {
+            self.fastCopyQuestion(selObj);
+          }
+        });
+      }
+      if (opts.allowChangeType) {
+        var convertClasses = QuestionConverter.getConvertToClasses(
+          options.obj.getType()
+        );
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          var text =
+            this.getLocString("survey.convertTo") +
+            " " +
+            this.getLocString("qt." + className);
+          options.items.push({
+            name: "convertTo" + className,
+            text: text,
+            className: className,
+            onClick: function(selObj, item) {
+              self.convertCurrentObject(selObj, item.className);
+            }
+          });
         }
-      });
+      }
+      if (opts.allowDelete) {
+        var deleteLocaleName = options.obj.isPanel
+          ? "survey.deletePanel"
+          : "survey.deleteQuestion";
+        options.items.push({
+          name: "delete",
+          text: self.getLocString(deleteLocaleName),
+          onClick: function(selObj) {
+            self.deleteCurrentObject();
+          }
+        });
+      }
       self.onDefineElementMenuItems.fire(self, options);
     });
+
     this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue });
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
