@@ -17,7 +17,7 @@ const init = ClientFunction(() => {
     "questionbase",
     "tag"
   ).readOnly = true;
-  SurveyEditor.defaultStrings.p.tag = {name: "tag", title: "MyTag"};
+  SurveyEditor.defaultStrings.p.tag = { name: "tag", title: "MyTag" };
   var editorOptions = {};
   var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 
@@ -65,7 +65,10 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
 
 test(`check a guid in the tag`, async t => {
   const getGuidFromUi = ClientFunction(
-    () => document.querySelectorAll("[title=MyTag] + td span")[0].title
+    () =>
+      document
+        .querySelectorAll("[title=MyTag]")[0]
+        .parentNode.nextElementSibling.querySelector("span").title
   );
   const getGuid = ClientFunction(() => window.qguid);
 
