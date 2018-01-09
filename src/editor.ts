@@ -1115,9 +1115,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       "#surveyjsJSONEditor"
     ));
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
-      this.select2 = jQuery("#objectSelector")["select2"](
-        this.isRTLValue ? { dir: "rtl" } : ""
-      );
+      var options: any = {
+        width: "100%"
+      };
+      if (this.isRTLValue) {
+        options.dir = "rtl";
+      }
+      this.select2 = jQuery("#objectSelector")["select2"](options);
     }
   }
   private getDefaultSurveyJson(): any {
