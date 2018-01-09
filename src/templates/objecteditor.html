@@ -2,7 +2,9 @@
     <table class="table svd_table-nowrap">
         <tbody data-bind="foreach: koProperties">
             <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
-                <td data-bind="text: displayName, attr: {title: title}" width="50%"></td>
+                <td width="50%">
+                    <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
+                </td>
                 <td width="50%">
                     <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
                         style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
