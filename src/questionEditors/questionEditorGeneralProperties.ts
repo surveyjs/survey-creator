@@ -28,6 +28,7 @@ export class SurveyQuestionEditorGeneralProperty {
     }
     if (displayName) this.editor.displayName = displayName;
     this.objectProperty.object = obj;
+    this.editor.setup();
   }
   public get objectProperty(): SurveyObjectProperty {
     return this.objectPropertyValue;
@@ -39,6 +40,7 @@ export class SurveyQuestionEditorGeneralProperty {
     return this.editor.hasError();
   }
   public apply() {
+    this.editor.apply();
     this.obj[this.property.name] = this.editor.koValue();
   }
   public reset() {

@@ -107,7 +107,9 @@ export class SurveyQuestionProperties {
   }
   public getProperties(tabName: string): Array<Survey.JsonObjectProperty> {
     return this.editorDefinition
-      .reduce((a, b) => a.concat(b.properties), [])
+      .reduce((a, b) => a.concat(b.properties), [
+        <any>{ name: tabName, tab: tabName }
+      ])
       .filter(
         prop =>
           prop !== undefined && typeof prop !== "string" && prop.tab === tabName
@@ -232,27 +234,26 @@ export class SurveyQuestionEditor {
     var tabNames = SurveyQuestionEditorDefinition.getTabs(this.className);
     for (var i = 0; i < tabNames.length; i++) {
       var tabItem = tabNames[i];
-      var property = this.properties.getProperty(tabItem.name);
-      if (!!property) {
+      var properties = this.properties.getProperties(tabItem.name);
+      if (!!properties && properties.length === 1) {
         var editorTab = new SurveyQuestionEditorTabProperty(
           this.obj,
-          property,
+          properties[0],
           this.options
         );
         if (tabItem.title) editorTab.title = tabItem.title;
         tabs.push(editorTab);
       } else {
-        var properties = this.properties.getProperties(tabItem.name);
         if (properties.length > 0) {
-          var peopertiesTab = new SurveyQuestionEditorTab(
-            tabItem.name,
+          var peopertiesTab = new SurveyQuestionEditorTabGeneral(
             this.obj,
             new SurveyQuestionEditorGeneralProperties(
               this.obj,
               properties,
               this.onCanShowPropertyCallback,
               this.options
-            )
+            ),
+            tabItem.name
           );
           peopertiesTab.title = tabItem.title;
           tabs.push(peopertiesTab);
@@ -299,7 +300,8 @@ export class SurveyQuestionEditorTabBase {
 export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase {
   constructor(
     public obj: Survey.Base,
-    public properties: SurveyQuestionEditorGeneralProperties = null
+    public properties: SurveyQuestionEditorGeneralProperties = null,
+    private _name = "general"
   ) {
     super(obj);
     this.properties = properties
@@ -311,7 +313,7 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
         );
   }
   public get name(): string {
-    return "general";
+    return this._name;
   }
   public get htmlTemplate(): string {
     return "questioneditortab-general";
@@ -324,29 +326,6 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
   }
   public apply() {
     this.properties.apply();
-  }
-}
-
-export class SurveyQuestionEditorTab extends SurveyQuestionEditorTabBase {
-  constructor(
-    private tabName: string,
-    public obj: Survey.Base,
-    public properties: SurveyQuestionEditorGeneralProperties = null
-  ) {
-    super(obj);
-    this.properties = properties
-      ? properties
-      : new SurveyQuestionEditorGeneralProperties(
-          obj,
-          SurveyQuestionEditorDefinition.getProperties(obj.getType()),
-          null
-        );
-  }
-  public get name(): string {
-    return this.tabName;
-  }
-  public get htmlTemplate(): string {
-    return "questioneditortab-general";
   }
 }
 

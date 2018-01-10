@@ -59,7 +59,12 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "rateValues", index: 10 }]
     },
     selectbase: {
-      properties: ["hasOther", "choicesOrder", "colCount"],
+      properties: [
+        { name: "hasOther", tab: "choices" },
+        { name: "otherText", tab: "choices" },
+        "choicesOrder",
+        "colCount"
+      ],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 }

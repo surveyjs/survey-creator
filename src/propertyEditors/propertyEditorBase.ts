@@ -51,6 +51,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public showDisplayName: boolean = false;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
+  public setup() {};
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;

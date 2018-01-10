@@ -198,7 +198,9 @@ QUnit.test("Dynamically generated tabs", function(assert) {
       "name",
       "car",
       { name: "prop1", tab: "tab1" },
-      { name: "prop2", tab: "tab2" }
+      { name: "prop2", tab: "tab2" },
+      { name: "prop11", tab: "tab1" },
+      { name: "prop21", tab: "tab2" }
     ],
     tabs: [
       { name: "tab1", title: "Title 1" },
@@ -207,7 +209,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
   };
   Survey.JsonObject.metaData.addClass(
     "@testClass",
-    ["name:string", "prop1", "prop2", "car"],
+    ["name:string", "prop1", "prop2", "prop11", "prop21", "car"],
     () => {
       return {};
     }
