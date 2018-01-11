@@ -28,8 +28,12 @@
   .propertyeditor-condition {
     width: 100%;
     textarea {
-      width: calc(100% - 200px);
+      max-width: calc(100% - 200px);
+      min-width: calc(100% - 200px);
       border-color: $dark-border-color;
+    }
+    a {
+      color: $main-color;
     }
     .assistant {
       padding-left: 1em;

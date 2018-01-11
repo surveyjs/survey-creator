@@ -142,6 +142,8 @@ export var defaultStrings = {
       "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
+    showMore: "For more details please check the documentation",
+    assistantTitle: "Available questions:",
 
     propertyIsEmpty: "Please enter a value",
     value: "Value",
