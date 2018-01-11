@@ -115,7 +115,15 @@ export class SurveyQuestionProperties {
           prop !== undefined && typeof prop !== "string" && prop.tab === tabName
       )
       .map(prop => typeof prop !== "string" && this.getProperty(prop.name))
-      .filter(prop => !!prop);
+      .filter(
+        prop =>
+          !!prop &&
+          SurveyHelper.isPropertyVisible(
+            this.obj,
+            prop,
+            this.onCanShowPropertyCallback
+          )
+      );
   }
 }
 
@@ -235,29 +243,19 @@ export class SurveyQuestionEditor {
     for (var i = 0; i < tabNames.length; i++) {
       var tabItem = tabNames[i];
       var properties = this.properties.getProperties(tabItem.name);
-      if (!!properties && properties.length === 1) {
-        var editorTab = new SurveyQuestionEditorTabProperty(
+      if (properties.length > 0) {
+        var peopertiesTab = new SurveyQuestionEditorTabGeneral(
           this.obj,
-          properties[0],
-          this.options
-        );
-        if (tabItem.title) editorTab.title = tabItem.title;
-        tabs.push(editorTab);
-      } else {
-        if (properties.length > 0) {
-          var peopertiesTab = new SurveyQuestionEditorTabGeneral(
+          new SurveyQuestionEditorGeneralProperties(
             this.obj,
-            new SurveyQuestionEditorGeneralProperties(
-              this.obj,
-              properties,
-              this.onCanShowPropertyCallback,
-              this.options
-            ),
-            tabItem.name
-          );
-          peopertiesTab.title = tabItem.title;
-          tabs.push(peopertiesTab);
-        }
+            properties,
+            this.onCanShowPropertyCallback,
+            this.options
+          ),
+          tabItem.name
+        );
+        peopertiesTab.title = tabItem.title;
+        tabs.push(peopertiesTab);
       }
     }
   }
@@ -326,58 +324,5 @@ export class SurveyQuestionEditorTabGeneral extends SurveyQuestionEditorTabBase 
   }
   public apply() {
     this.properties.apply();
-  }
-}
-
-export class SurveyQuestionEditorTabProperty extends SurveyQuestionEditorTabBase {
-  private propertyEditorValue: SurveyPropertyModalEditor;
-  constructor(
-    public obj: Survey.Base,
-    public property: Survey.JsonObjectProperty,
-    public options: ISurveyObjectEditorOptions = null
-  ) {
-    super(obj);
-    this.propertyEditorValue = <SurveyPropertyModalEditor>SurveyPropertyEditorFactory.createEditor(
-      this.property,
-      null
-    );
-    var self = this;
-    this.propertyEditorValue.options = options;
-    this.propertyEditorValue.onGetLocale = function() {
-      return self.doOnGetLocale();
-    };
-    this.propertyEditorValue.object = obj;
-    this.propertyEditorValue.beforeShowModal();
-    this.koAfterRender = function(el, con) {};
-  }
-  private doOnGetLocale(): string {
-    if (this.obj && this.obj["getLocale"]) return this.obj["getLocale"]();
-    return "";
-  }
-  public get name(): string {
-    return this.property.name;
-  }
-  public hasError(): boolean {
-    return this.propertyEditor.hasError();
-  }
-  public get htmlTemplate(): string {
-    return "propertyeditor-modalcontent";
-    //return "propertyeditorcontent-" + this.propertyEditor.editorType;
-  }
-  public get templateObject(): any {
-    return this.propertyEditor;
-  }
-  public get propertyEditor(): SurveyPropertyModalEditor {
-    return this.propertyEditorValue;
-  }
-  public reset() {
-    this.propertyEditorValue.editingValue = this.getValue(this.property);
-  }
-  public apply() {
-    this.propertyEditor.apply();
-    this.obj[this.property.name] = this.propertyEditorValue.editingValue;
-  }
-  public doCloseWindow() {
-    this.propertyEditor.beforeCloseModal();
   }
 }

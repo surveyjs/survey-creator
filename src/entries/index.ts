@@ -73,8 +73,7 @@ export {
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTabGeneral,
-  SurveyQuestionEditorTabProperty
+  SurveyQuestionEditorTabGeneral
 } from "../questionEditors/questionEditor";
 
 export { QuestionToolbox } from "../questionToolbox";

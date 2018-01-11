@@ -3,8 +3,7 @@ import * as Survey from "survey-knockout";
 import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTabGeneral,
-  SurveyQuestionEditorTabProperty
+  SurveyQuestionEditorTabGeneral
 } from "../src/questionEditors/questionEditor";
 import {
   SurveyQuestionEditorGeneralProperties,
@@ -23,27 +22,33 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
   var properties = new SurveyQuestionProperties(dropdownQuestion, null);
 
   var property = properties.getProperty("choices");
-  var tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
+  var tab = new SurveyQuestionEditorTabGeneral(
+    dropdownQuestion,
+    new SurveyQuestionEditorGeneralProperties(dropdownQuestion, [property])
+  );
   assert.equal(
     tab.htmlTemplate,
-    "propertyeditor-modalcontent",
+    "questioneditortab-general",
     "itemvalues template should be created"
   );
   assert.equal(
-    tab.propertyEditor.editorType,
+    tab.properties.rows[0].properties[0].editor.editorType,
     "itemvalues",
     "create correct property editor"
   );
   assert.deepEqual(
-    tab.propertyEditor.editingValue,
+    tab.properties.rows[0].properties[0].editor.editingValue,
     ["item1"],
     "set value to property editor correctly"
   );
 
   property = properties.getProperty("visibleIf");
-  tab = new SurveyQuestionEditorTabProperty(dropdownQuestion, property);
+  tab = new SurveyQuestionEditorTabGeneral(
+    dropdownQuestion,
+    new SurveyQuestionEditorGeneralProperties(dropdownQuestion, [property])
+  );
   assert.equal(
-    tab.propertyEditor.editingValue,
+    tab.properties.rows[0].properties[0].editor.editingValue,
     dropdownQuestion.visibleIf,
     "set value of 'visibleIf' to property editor correctly"
   );
@@ -70,10 +75,10 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   );
   generalTab.properties.rows[0].properties[0].editor.koValue("newName");
   generalTab.properties.rows[1].properties[0].editor.koValue("new title");
-  var visibleIfTab = <SurveyQuestionEditorTabProperty>editor.koTabs()[
+  var visibleIfTab = <SurveyQuestionEditorTabGeneral>editor.koTabs()[
     editor.koTabs().length - 1
   ];
-  visibleIfTab.propertyEditor["koValue"]("false");
+  visibleIfTab.properties.rows[0].properties[0].editor["koValue"]("false");
   editor.apply();
   assert.equal(changeCounter, 1, "changed one time");
   assert.equal(dropdownQuestion.name, "newName", "name assign correct");

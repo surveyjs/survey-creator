@@ -37,10 +37,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   public get columns(): Array<SurveyPropertyItemValuesEditorColumn> {
     return this.columnsValue;
   }
-  public setup() {
-    this.showDisplayName = false;
-    this.beforeShowModal();
-  }
   protected checkForErrors(): boolean {
     var result = false;
     for (var i = 0; i < this.koItems().length; i++) {
