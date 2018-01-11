@@ -1,10 +1,20 @@
 ﻿<script type="text/html" id="propertyeditor-expression">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
 </script>
 
 <script type="text/html" id="propertyeditorcontent-expression">
-    <div>
-        <textarea class="form-control" data-bind="value:koValue" style="width:100%" rows="8" autofocus="autofocus"></textarea>
+    <div class="propertyeditor-expression">
+        <textarea data-bind="value:koValue" rows="8" autofocus="autofocus"></textarea>
+        <div class="assistant">
+            <div class="assistant-title" data-bind="text:$root.getLocString('pe.assistantTitle')"></div>
+            <div class="assistant-content" data-bind="foreach:availableQuestions">
+                <div class="assistant-item" data-bind=" text:(name === title ? name : name + ' - ' + title), click:function () { $parent.insertQuestion($data, $element); } "></div>
+            </div>
+        </div>
         <span data-bind="text:$root.getLocString('pe.expressionHelp')" style="white-space:normal"></span>
+        <!-- <div>
+            <a data-bind="text:$root.getLocString('pe.showMore')" target="_blank" href="https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf"></a>
+        </div> -->
     </div>
 </script>

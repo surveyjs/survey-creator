@@ -224,19 +224,13 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
   }
 }
 
-export class SurveyPropertyExpressionEditor extends SurveyPropertyTextEditor {
-  constructor(property: Survey.JsonObjectProperty) {
+export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
+  constructor(property: Survey.JsonObjectProperty, private _type: string) {
     super(property);
   }
   public get editorType(): string {
-    return "expression";
+    return this._type;
   }
-}
-export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
-  constructor(property: Survey.JsonObjectProperty) {
-    super(property);
-  }
-
   public get availableQuestions(): any[] {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
@@ -246,10 +240,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       "textarea"
     );
     insertAtCursor(textarea, "{" + question.name + "}");
-  }
-
-  public get editorType(): string {
-    return "condition";
   }
 }
 
@@ -266,10 +256,10 @@ SurveyPropertyEditorFactory.registerEditor("html", function(
 SurveyPropertyEditorFactory.registerEditor("condition", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(property);
+  return new SurveyPropertyConditionEditor(property, "condition");
 });
 SurveyPropertyEditorFactory.registerEditor("expression", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
-  return new SurveyPropertyExpressionEditor(property);
+  return new SurveyPropertyConditionEditor(property, "expression");
 });

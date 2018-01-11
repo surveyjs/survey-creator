@@ -7,7 +7,6 @@
     <div class="propertyeditor-condition">
         <textarea data-bind="value:koValue" rows="8" autofocus="autofocus"></textarea>
         <div class="assistant">
-            <!-- TODO add text into localization -->
             <div class="assistant-title" data-bind="text:$root.getLocString('pe.assistantTitle')"></div>
             <div class="assistant-content" data-bind="foreach:availableQuestions">
                 <div class="assistant-item" data-bind=" text:(name === title ? name : name + ' - ' + title), click:function () { $parent.insertQuestion($data, $element); } "></div>
