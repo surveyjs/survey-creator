@@ -38,6 +38,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     return this.columnsValue;
   }
   public setup() {
+    this.showDisplayName = false;
     this.beforeShowModal();
   }
   protected checkForErrors(): boolean {
