@@ -1,10 +1,18 @@
 ﻿<script type="text/html" id="propertyeditor-condition">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } --><!-- /ko -->
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
 </script>
 
 <script type="text/html" id="propertyeditorcontent-condition">
-    <div>
-        <textarea class="form-control" data-bind="value:koValue" style="width:100%" rows="8" autofocus="autofocus"></textarea>
-        <span data-bind="text:$root.getLocString('pe.conditionHelp')" style="white-space:normal"></span>
+    <div class="propertyeditor-condition">
+        <textarea data-bind="value:koValue" rows="8" autofocus="autofocus"></textarea>
+        <div class="assistant">
+            <!-- TODO add text into localization -->
+            <div class="assistant-title">Available questions:</div>
+            <div class="assistant-content" data-bind="foreach:availableQuestions">
+                <div class="assistant-item" data-bind=" text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
+            </div>
+        </div>
     </div>
+    <span data-bind="text:$root.getLocString( 'pe.conditionHelp') " style="white-space:normal "></span>
 </script>

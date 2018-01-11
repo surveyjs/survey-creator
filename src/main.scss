@@ -25,6 +25,33 @@
     outline: 0;
     box-shadow: none;
   }
+  .propertyeditor-condition {
+    width: 100%;
+    textarea {
+      width: calc(100% - 200px);
+      border-color: $dark-border-color;
+    }
+    .assistant {
+      padding-left: 1em;
+      width: 200px;
+      float: right;
+
+      .assistant-title {
+        margin-bottom: 0.5em;
+        font-weight: bold;
+      }
+
+      .assistant-content {
+        overflow-y: auto;
+        height: 125px;
+
+        .assistant-item {
+          margin-bottom: 0.5em;
+          cursor: pointer;
+        }
+      }
+    }
+  }
   .propertyeditor-triggers,
   .propertyeditor-validators {
     min-height: 150px;

@@ -4,6 +4,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { editorLocalization } from "../editorLocalization";
 import RModal from "rmodal";
+import insertAtCursor from "../utils/insertAtCursor";
 
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
@@ -235,6 +236,18 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
   }
+
+  public get availableQuestions(): any[] {
+    return (this.object && this.object.survey.getAllQuestions()) || [];
+  }
+
+  public insertQuestion(question, element) {
+    var textarea = element.parentNode.parentNode.parentNode.querySelector(
+      "textarea"
+    );
+    insertAtCursor(textarea, "{" + question.name + "}");
+  }
+
   public get editorType(): string {
     return "condition";
   }
