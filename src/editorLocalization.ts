@@ -153,6 +153,7 @@ export var defaultStrings = {
     itemEdit: "Edit item: {0}",
 
     hasOther: "Has other item",
+    otherText: "Other item text",
     name: "Name",
     title: "Title",
     cellType: "Cell type",

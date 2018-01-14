@@ -83,7 +83,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "expression", index: 10 }]
     },
     "matrixdropdowncolumn@checkbox": {
-      properties: ["hasOther", "choicesOrder", "colCount"],
+      properties: ["hasOther", "otherText", "choicesOrder", "colCount"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -92,7 +92,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
-      properties: ["hasOther", "choicesOrder", "colCount"],
+      properties: ["hasOther", "otherText", "choicesOrder", "colCount"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -101,7 +101,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@dropdown": {
-      properties: ["hasOther", "choicesOrder", "optionsCaption"],
+      properties: ["hasOther", "otherText", "choicesOrder", "optionsCaption"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
