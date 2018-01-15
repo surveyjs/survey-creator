@@ -265,6 +265,7 @@ export var defaultStrings = {
     false: "false",
 
     ar: "العربية",
+    ca: "català",
     cz: "čeština",
     da: "dansk",
     de: "deutsch",
