@@ -51,7 +51,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public showDisplayName: boolean = false;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
-  public setup() {};
+  public setup() {}
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
@@ -77,6 +77,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public get property(): Survey.JsonObjectProperty {
     return this.property_;
+  }
+  public get defaultValue(): any {
+    return this.property.defaultValue;
   }
   public get editablePropertyName(): string {
     return this.property ? this.property.name : "";
