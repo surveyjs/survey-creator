@@ -56,6 +56,9 @@ export class SurveyNestedPropertyEditorItem {
     if (this.itemEditorValue && this.itemEditorValue.hasError()) return true;
     return false;
   }
+  protected resetSurveyQuestionEditor() {
+    this.itemEditorValue = null;
+  }
   protected createSurveyQuestionEditor() {
     return null;
   }

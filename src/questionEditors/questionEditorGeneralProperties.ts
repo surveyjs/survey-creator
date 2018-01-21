@@ -92,9 +92,9 @@ export class SurveyQuestionEditorGeneralProperties {
     public options: ISurveyObjectEditorOptions = null
   ) {
     this.onCanShowPropertyCallback = onCanShowPropertyCallback;
-    this.properties = Survey.JsonObject.metaData.getProperties(
-      this.obj.getType()
-    );
+    this.properties = Survey.JsonObject.metaData["getPropertiesByObj"]
+      ? Survey.JsonObject.metaData["getPropertiesByObj"](this.obj)
+      : Survey.JsonObject.metaData.getProperties(this.obj.getType());
     this.buildRows(properties);
   }
   public apply() {

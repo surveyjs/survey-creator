@@ -62,9 +62,9 @@ export class SurveyObjectEditor {
       this.koActiveProperty(null);
       return;
     }
-    var properties = Survey.JsonObject.metaData.getProperties(
-      this.selectedObject.getType()
-    );
+    var properties = Survey.JsonObject.metaData["getPropertiesByObj"]
+      ? Survey.JsonObject.metaData["getPropertiesByObj"](this.selectedObject)
+      : Survey.JsonObject.metaData.getProperties(this.selectedObject.getType());
     properties.sort((a, b) => {
       if (a.name == b.name) return 0;
       if (a.name > b.name) return 1;

@@ -126,7 +126,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@boolean": {
-      properties: ["booleanDefaultValue"],
+      properties: ["defaultValue"],
       tabs: [{ name: "visibleIf", index: 12 }, { name: "enableIf", index: 20 }]
     },
     multipletextitem: {

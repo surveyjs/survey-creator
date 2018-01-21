@@ -49,7 +49,7 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     public options = null
   ) {
     super();
-    this.cellTypeChoices = this.getPropertyChoices("cellType");
+    this.cellTypeChoices = this.getPropertyChoices();
     this.koName = ko.observable(column.name);
     this.koCellType = ko.observable(column.cellType);
     this.koTitle = ko.observable(
@@ -67,8 +67,12 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
         .getString("pe.columnEdit")
         ["format"](self.koName());
     });
+    this.koCellType.subscribe(function(newValue) {
+      self.resetSurveyQuestionEditor();
+    });
   }
   protected createSurveyQuestionEditor() {
+    this.column.cellType = this.koCellType();
     return new SurveyQuestionEditor(
       this.column,
       null,
@@ -88,14 +92,12 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     this.column.cellType = this.koCellType();
     this.column.isRequired = this.koIsRequired();
   }
-  private getPropertyChoices(propetyName: string): Array<any> {
-    var properties = Survey.JsonObject.metaData.getProperties(
-      "matrixdropdowncolumn"
+  private getPropertyChoices(): Array<any> {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "matrixdropdowncolumn",
+      "cellType"
     );
-    for (var i = 0; i < properties.length; i++) {
-      if (properties[i].name == propetyName) return properties[i].choices;
-    }
-    return [];
+    return property ? property.choices : [];
   }
 }
 
