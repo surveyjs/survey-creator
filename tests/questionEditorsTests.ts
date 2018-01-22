@@ -359,6 +359,36 @@ QUnit.test("Question editor: custom errors", function(assert) {
   assert.equal(properties.hasError(), false, "There is no error now");
 });
 
+
+QUnit.test("Question editor: custom errors on required field", function(assert) {
+  var question = new Survey.QuestionText("invalidName");
+  var editor = new SurveyEditor();
+  editor.onPropertyValidationCustomError.add(function(editor, options) {
+    if (options.propertyName != "name") return;
+    if (options.value == 'invalidName') {
+      options.error = "I'm sorry you can not use that name";
+      return;
+    }
+  });
+  var properties = new SurveyQuestionEditorGeneralProperties(
+    question,
+    ["name"],
+    null,
+    editor
+  );
+  assert.equal(
+    properties.hasError(),
+    true,
+    "error message should be triggered"
+  );
+  var nameEditor = properties.rows[0].properties[0].editor;
+  nameEditor.koValue("validName");
+  assert.equal(properties.hasError(), false, "There is no error now");
+
+  nameEditor.koValue("");
+  assert.equal(properties.hasError(), true, "Validator still checks that property is not empty");
+
+});
 QUnit.test("Question editor: on property value changing", function(assert) {
   Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });
   Survey.JsonObject.metaData.addProperty("question", {

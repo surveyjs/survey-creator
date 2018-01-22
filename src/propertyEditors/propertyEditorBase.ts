@@ -151,10 +151,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected checkForErrors(): boolean {
     if (this.isRequired) {
       var er = this.isValueEmpty(this.koValue());
-      this.koErrorText(
-        er ? editorLocalization.getString("pe.propertyIsEmpty") : ""
-      );
-      return er;
+      if (er) {
+        this.koErrorText(editorLocalization.getString("pe.propertyIsEmpty"));
+        return er;
+      }
     }
     if (
       this.property &&
