@@ -359,13 +359,14 @@ QUnit.test("Question editor: custom errors", function(assert) {
   assert.equal(properties.hasError(), false, "There is no error now");
 });
 
-
-QUnit.test("Question editor: custom errors on required field", function(assert) {
+QUnit.test("Question editor: custom errors on required field", function(
+  assert
+) {
   var question = new Survey.QuestionText("invalidName");
   var editor = new SurveyEditor();
   editor.onPropertyValidationCustomError.add(function(editor, options) {
     if (options.propertyName != "name") return;
-    if (options.value == 'invalidName') {
+    if (options.value == "invalidName") {
       options.error = "I'm sorry you can not use that name";
       return;
     }
@@ -386,8 +387,34 @@ QUnit.test("Question editor: custom errors on required field", function(assert) 
   assert.equal(properties.hasError(), false, "There is no error now");
 
   nameEditor.koValue("");
-  assert.equal(properties.hasError(), true, "Validator still checks that property is not empty");
-
+  assert.equal(
+    properties.hasError(),
+    true,
+    "Validator still checks that property is not empty"
+  );
+  assert.ok(nameEditor.koErrorText(), "Required error text is show");
+  nameEditor.koValue("correctName");
+  assert.equal(properties.hasError(), false, "There is no errors");
+  assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
+});
+QUnit.test("Question editor: required field errors", function(assert) {
+  var question = new Survey.QuestionText("name");
+  var editor = new SurveyEditor();
+  var properties = new SurveyQuestionEditorGeneralProperties(
+    question,
+    ["name"],
+    null,
+    editor
+  );
+  var nameEditor = properties.rows[0].properties[0].editor;
+  assert.equal(properties.hasError(), false, "there is no errors");
+  assert.notOk(nameEditor.koErrorText(), "Error text is empty");
+  nameEditor.koValue("");
+  assert.equal(properties.hasError(), true, "Property is empty");
+  assert.ok(nameEditor.koErrorText(), "Required error text is show");
+  nameEditor.koValue("correctName");
+  assert.equal(properties.hasError(), false, "There is no errors");
+  assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
 });
 QUnit.test("Question editor: on property value changing", function(assert) {
   Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });

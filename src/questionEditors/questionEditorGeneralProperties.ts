@@ -11,8 +11,6 @@ import { SurveyHelper } from "../surveyHelper";
 export class SurveyQuestionEditorGeneralProperty {
   private objectPropertyValue: SurveyObjectProperty;
   koValue: any;
-  koErrorText: any;
-  koHasError: any;
   constructor(
     public obj: Survey.Base,
     public property: Survey.JsonObjectProperty,

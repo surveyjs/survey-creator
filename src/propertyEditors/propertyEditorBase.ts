@@ -149,28 +149,27 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return this.koHasError();
   }
   protected checkForErrors(): boolean {
+    var errorText = "";
     if (this.isRequired) {
       var er = this.isValueEmpty(this.koValue());
       if (er) {
-        this.koErrorText(editorLocalization.getString("pe.propertyIsEmpty"));
-        return er;
+        errorText = editorLocalization.getString("pe.propertyIsEmpty");
       }
     }
     if (
+      !errorText &&
       this.property &&
       this.options &&
       this.options.onGetErrorTextOnValidationCallback
     ) {
-      this.koErrorText(
-        this.options.onGetErrorTextOnValidationCallback(
-          this.property.name,
-          this.object,
-          this.koValue()
-        )
+      errorText = this.options.onGetErrorTextOnValidationCallback(
+        this.property.name,
+        this.object,
+        this.koValue()
       );
-      if (this.koErrorText()) return true;
     }
-    return false;
+    this.koErrorText(errorText);
+    return errorText !== "";
   }
   public get isRequired(): boolean {
     return this.isRequriedValue;
