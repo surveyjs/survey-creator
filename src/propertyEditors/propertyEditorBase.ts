@@ -108,8 +108,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public get contentTemplateName(): string {
     var res = "propertyeditor";
-    if (this.isModal) res += "content";
-    return res + "-" + this.editorType;
+    if (this.isModal) {
+      res += "-modalcontent";
+    } else {
+      res += "-" + this.editorType;
+    }
+    return res;
   }
   public get isModal(): boolean {
     return false;

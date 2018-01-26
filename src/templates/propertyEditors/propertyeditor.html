@@ -5,6 +5,6 @@
         <span class="sr-only">Error:</span>
         <span data-bind="text:koErrorText"></span>
     </div>
-    <!-- ko template: contentTemplateName -->
+    <!-- ko template: {name: $data.contentTemplateName, data: $data} -->
     <!-- /ko -->
 </script>
