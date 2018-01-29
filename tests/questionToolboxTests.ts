@@ -26,6 +26,15 @@ QUnit.test("toolbox support options", function(assert) {
   );
 });
 
+QUnit.test("toolbox reorder items", function(assert) {
+  var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  assert.equal(toolbox.items[0].name, "text");
+  assert.equal(toolbox.items[1].name, "dropdown");
+  toolbox.orderedQuestions = ["dropdown", "text"];
+  assert.equal(toolbox.items[0].name, "dropdown");
+  assert.equal(toolbox.items[1].name, "text");
+});
+
 QUnit.test("toolbox copied questions", function(assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.copiedItems.length, 0, "There is no copied questions");

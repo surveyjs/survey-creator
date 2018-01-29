@@ -32,10 +32,7 @@ export interface IQuestionToolboxItem {
  * The list of Toolbox items.
  */
 export class QuestionToolbox {
-  /**
-   * Modify this array to change the toolbox items order.
-   */
-  public orderedQuestions = [
+  private _orderedQuestions = [
     "text",
     "checkbox",
     "radiogroup",
@@ -45,16 +42,26 @@ export class QuestionToolbox {
     "boolean",
     "html"
   ];
+
+  /**
+   * Modify this array to change the toolbox items order.
+   */
+  public get orderedQuestions() {
+    return this._orderedQuestions;
+  }
+  public set orderedQuestions(questions) {
+    this._orderedQuestions = questions;
+    this.createDefaultItems(this.supportedQuestions);
+  }
   /**
    * The maximum number of copied toolbox items. If an user adding copiedItemMaxCount + 1 item, the first added item will be removed.
    */
   public copiedItemMaxCount: number = 3;
   private itemsValue: Array<IQuestionToolboxItem> = [];
 
-  koItems: any;
+  koItems = ko.observableArray();
 
-  constructor(supportedQuestions: Array<string> = null) {
-    this.koItems = ko.observableArray();
+  constructor(private supportedQuestions: Array<string> = null) {
     this.createDefaultItems(supportedQuestions);
   }
   /**
@@ -191,6 +198,7 @@ export class QuestionToolbox {
     return -1;
   }
   private createDefaultItems(supportedQuestions: Array<string>) {
+    this.clearItems();
     var questions = this.getQuestionTypes(supportedQuestions);
     for (var i = 0; i < questions.length; i++) {
       var name = questions[i];
