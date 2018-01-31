@@ -51,7 +51,7 @@ export class QuestionToolbox {
   }
   public set orderedQuestions(questions) {
     this._orderedQuestions = questions;
-    this.createDefaultItems(this.supportedQuestions);
+    this.reorderItems();
   }
   /**
    * The maximum number of copied toolbox items. If an user adding copiedItemMaxCount + 1 item, the first added item will be removed.
@@ -196,6 +196,16 @@ export class QuestionToolbox {
       if (this.itemsValue[i].name == name) return i;
     }
     return -1;
+  }
+  private reorderItems() {
+    this.itemsValue.sort((i1, i2) => {
+      var index1 = this._orderedQuestions.indexOf(i1.name);
+      if (index1 === -1) index1 = Number.MAX_VALUE;
+      var index2 = this._orderedQuestions.indexOf(i2.name);
+      if (index2 === -1) index2 = Number.MAX_VALUE;
+      return index1 - index2;
+    });
+    this.onItemsChanged();
   }
   private createDefaultItems(supportedQuestions: Array<string>) {
     this.clearItems();

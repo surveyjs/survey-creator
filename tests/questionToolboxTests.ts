@@ -33,6 +33,15 @@ QUnit.test("toolbox reorder items", function(assert) {
   toolbox.orderedQuestions = ["dropdown", "text"];
   assert.equal(toolbox.items[0].name, "dropdown");
   assert.equal(toolbox.items[1].name, "text");
+
+  toolbox.addItem(<any>{ name: "countries" });
+  assert.equal(toolbox.items[0].name, "dropdown");
+  assert.equal(toolbox.items[1].name, "text");
+  assert.equal(toolbox.items[2].name, "countries");
+  toolbox.orderedQuestions = ["dropdown", "countries", "text"];
+  assert.equal(toolbox.items[0].name, "dropdown");
+  assert.equal(toolbox.items[1].name, "countries");
+  assert.equal(toolbox.items[2].name, "text");
 });
 
 QUnit.test("toolbox copied questions", function(assert) {
