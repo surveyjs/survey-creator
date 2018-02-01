@@ -47,9 +47,9 @@ var simplifiedChineseTranslation = {
     delSelObject: "删除所选对象",
     correctJSON: "请修正 JSON 数据",
     surveyResults: "问卷结果: ",
-    modified: "Modified",
-    saving: "Saving",
-    saved: "Saved"
+    modified: "已修改",
+    saving: "保存中...",
+    saved: "已保存"
   },
   // strings for property editors
   pe: {
@@ -66,11 +66,11 @@ var simplifiedChineseTranslation = {
     fastEntry: "快速输入",
     formEntry: "表单输入",
     testService: "测试服务",
+    showMore:"更多细节请查看文档",
     conditionHelp:
-      "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+      "请输入一个布尔表达式。当布尔值为真，问题/页面可见。例如：{question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "请输入一项条件判断。当条件判断为真时问题/页面将可见。例如: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
-    showMore: "For more details please check the documentation",
     propertyIsEmpty: "请为该属性设定一个值",
     value: "值",
     text: "显示文本",
@@ -78,7 +78,7 @@ var simplifiedChineseTranslation = {
     columnEdit: "编辑列: {0}",
     itemEdit: "编辑选项: {0}",
     hasOther: "可添加其他答案?",
-    otherText: "Other item text",
+    otherText: "其他答案文本",
     url: "URL",
     path: "Path",
     valueName: "Value name",
@@ -181,6 +181,27 @@ var simplifiedChineseTranslation = {
   },
   // strings of properties
   p: {
+    commentText:"备注文本",
+    choices:"选项",
+    choicesByUrl:"Url选项",
+    choicesOrder:"选项排序",
+    colCount:"列数",
+    correctAnswer:"正确答案",
+    defaultVaule:"默认选项",
+    description:"说明",
+    enableIf:"允许判断",
+    hasComment:"hasComment",
+    hasOther:"允许其他答案",
+    otherText:"其他答案文本",
+    page:"所在页面",
+    readOnly:"只读",
+    indent:"缩进",
+    isRequired:"必选",
+    requiredErrorText:"requiredErrorText",
+    otherErrorText:"requiredErrorText",
+    startWithNewLine:"允许问题在新行",
+    storeOthersAsComment:"storeOthersAsComment",
+    
     name: "名字",
     title: {
       name: "标题",
