@@ -108,6 +108,12 @@ var simplifiedChineseTranslation = {
     qEditorTitle: "编辑问题: {0}",
     tabs: {
       general: "通用项",
+      navigation:"导航",
+      question:"问题",
+      completedHtml:"完成后的Html",
+      loadingHtml:"加载中的Html",
+      timer:"问卷计时器",
+      trigger:"触发器",
       fileOptions: "选项",
       html: "HTML 编辑器",
       columns: "设置列",
