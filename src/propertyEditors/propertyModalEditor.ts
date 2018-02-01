@@ -199,6 +199,10 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
   public get isEditable(): boolean {
     return true;
   }
+  public setup() {
+    super.setup();
+    this.showDisplayName = true;
+  }
   public getValueText(value: any): string {
     if (!value) return null;
     var str = value;
@@ -234,7 +238,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public get availableQuestions(): any[] {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
-
+  public setup() {
+    super.setup();
+    this.showDisplayName = false;
+  }
   public insertQuestion(question, element) {
     var textarea = element.parentNode.parentNode.parentNode.querySelector(
       "textarea"
