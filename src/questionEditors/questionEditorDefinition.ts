@@ -129,6 +129,10 @@ export class SurveyQuestionEditorDefinition {
       properties: ["defaultValue"],
       tabs: [{ name: "visibleIf", index: 12 }, { name: "enableIf", index: 20 }]
     },
+    "matrixdropdowncolumn@expression": {
+      properties: ["name"],
+      tabs: [{ name: "expression", index: 10 }]
+    },
     multipletextitem: {
       properties: ["inputType", "placeHolder"],
       tabs: [{ name: "validators", index: 10 }]
