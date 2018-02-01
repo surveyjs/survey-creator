@@ -635,11 +635,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       css: "svd_state",
       innerCss: ko.computed(() => "icon-" + this.koState()),
       title: ko.computed(
-        () =>
-          this.koState() &&
-          this.koState()
-            .charAt(0)
-            .toUpperCase() + this.koState().slice(1)
+        () => this.getLocString("ed." + this.koState())
       ),
       template: "svd-toolbar-state"
     });

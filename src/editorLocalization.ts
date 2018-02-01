@@ -121,7 +121,10 @@ export var defaultStrings = {
     delSelObject: "Delete selected object",
     editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
-    surveyResults: "Survey Result: "
+    surveyResults: "Survey Result: ",
+    modified: "Modified",
+    saving: "Saving",
+    saved: "Saved"
   },
   //Property Editors
   pe: {
@@ -151,6 +154,11 @@ export var defaultStrings = {
     required: "Required?",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
+
+    url: "URL",
+    path: "Path",
+    valueName: "Value name",
+    titleName: "Title name",
 
     hasOther: "Has other item",
     otherText: "Other item text",

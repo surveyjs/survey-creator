@@ -46,7 +46,10 @@ var simplifiedChineseTranslation = {
     toolbox: "工具箱",
     delSelObject: "删除所选对象",
     correctJSON: "请修正 JSON 数据",
-    surveyResults: "问卷结果: "
+    surveyResults: "问卷结果: ",
+    modified: "Modified",
+    saving: "Saving",
+    saved: "Saved"
   },
   // strings for property editors
   pe: {
@@ -63,8 +66,11 @@ var simplifiedChineseTranslation = {
     fastEntry: "快速输入",
     formEntry: "表单输入",
     testService: "测试服务",
+    conditionHelp:
+      "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "请输入一项条件判断。当条件判断为真时问题/页面将可见。例如: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
+    showMore: "For more details please check the documentation",
     propertyIsEmpty: "请为该属性设定一个值",
     value: "值",
     text: "显示文本",
@@ -72,6 +78,11 @@ var simplifiedChineseTranslation = {
     columnEdit: "编辑列: {0}",
     itemEdit: "编辑选项: {0}",
     hasOther: "可添加其他答案?",
+    otherText: "Other item text",
+    url: "URL",
+    path: "Path",
+    valueName: "Value name",
+    titleName: "Title name",
     name: "题目名",
     title: "题目文本",
     cellType: "单元格类型",
@@ -103,6 +114,7 @@ var simplifiedChineseTranslation = {
       rows: "设置行",
       choices: "设置选项",
       visibleIf: "设置可见条件",
+      enableIf: "Enable If",
       rateValues: "设置评分值",
       choicesByUrl: "通过 URL 导入选项",
       matrixChoices: "默认选项",
