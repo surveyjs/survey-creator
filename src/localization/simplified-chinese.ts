@@ -254,7 +254,6 @@ var simplifiedChineseTranslation = {
     requiredErrorText:"requiredErrorText",
     otherErrorText:"requiredErrorText",
     startWithNewLine:"允许问题在新行",
-    storeOthersAsComment:"storeOthersAsComment",
     //survey
     showTitle: "显示/隐藏 标题",
     locale: "默认语言",
