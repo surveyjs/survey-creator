@@ -32,7 +32,11 @@ var simplifiedChineseTranslation = {
   },
   // strings for editor
   ed: {
+    survey: "调查问卷",
+    editSurvey: "修改",
     addNewPage: "添加新页面",
+    deletePage: "删除页面",
+    editPage: "编辑页面",
     newPageName: "页面",
     newQuestionName: "问题",
     newPanelName: "面板",
@@ -50,6 +54,7 @@ var simplifiedChineseTranslation = {
     generateReadableJSON: "生成易读的 JSON 数据",
     toolbox: "工具箱",
     delSelObject: "删除所选对象",
+    editSelObject: "编辑所选对象",
     correctJSON: "请修正 JSON 数据",
     surveyResults: "问卷结果: ",
     modified: "已修改",
@@ -111,6 +116,51 @@ var simplifiedChineseTranslation = {
     inputType: "文本框类型",
     optionsCaption: "下拉框提示语",
     qEditorTitle: "编辑问题: {0}",
+    //survey
+            showTitle: "显示/隐藏 标题",
+            locale: "默认语言",
+            mode: "模式 (编辑/只读)",
+            clearInvisibleValues: "清除隐藏值",
+            cookieName: "Cookie name (to disable run survey two times locally)",
+            sendResultOnPageNext: "Send survey results on page next",
+            storeOthersAsComment: "Store 'others' value in separate field",
+            showPageTitles: "显示页面标题",
+            showPageNumbers: "显示页数",
+            pagePrevText: "前一页按钮文本",
+            pageNextText: "后一页按钮文本",
+            completeText: "完成按钮文本",
+            startSurveyText: "开始按钮文本",
+            showNavigationButtons:
+              "显示导航按钮 (默认导航)",
+            showPrevButton:
+              "显示前一页按钮 (用户可返回至前一页面)",
+            firstPageIsStarted:
+              "调查的第一页面为起始页.",
+            showCompletedPage:
+              "结尾展示完成后的页面 (completedHtml)",
+            goNextPageAutomatic:
+              "回答本页所有问题后，自动跳转到下一页",
+            showProgressBar: "显示进度条",
+            questionTitleLocation: "问题的标题位置",
+            requiredText: "The question required symbol(s)",
+            questionStartIndex: "问题起始标志 (1, 2 or 'A', 'a')",
+            showQuestionNumbers: "显示问题编号",
+            questionTitleTemplate:
+              "问题标题模板, 默认为: '{no}. {require} {title}'",
+            questionErrorLocation: "问题错误定位",
+            focusFirstQuestionAutomatic:
+              "改变页面时聚焦在第一个问题",
+            questionsOrder: "Elements order on the page",
+            maxTimeToFinish: "完成调查的最长时间",
+            maxTimeToFinishPage: "完成调查中页面的最长时间",
+            showTimerPanel: "显示计时器面板",
+            showTimerPanelMode: "显示计时器面板模式",
+            renderMode: "渲染模式",
+            allowAddPanel: "允许添加面板",
+            allowRemovePanel: "允许删除面板",
+            panelAddText: "添加面板文本",
+            panelRemoveText: "删除面板文本",
+            isSinglePage: "在一个页面上展示所有元素",
     tabs: {
       general: "通用项",
       navigation:"导航",
