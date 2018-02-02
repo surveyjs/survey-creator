@@ -3,11 +3,13 @@ import { editorLocalization } from "../editorLocalization";
 var simplifiedChineseTranslation = {
   // strings for survey templates
   survey: {
+    edit: "编辑",
     dropQuestion: "请将问题放置于此",
     copy: "复制",
     addToToolbox: "添加到工具箱",
     deletePanel: "删除面板",
-    deleteQuestion: "删除题目"
+    deleteQuestion: "删除题目",
+    convertTo: "转变为"
   },
   // strings for question types
   qt: {
@@ -21,9 +23,12 @@ var simplifiedChineseTranslation = {
     matrixdynamic: "矩阵 (动态问题)",
     multipletext: "文本框组",
     panel: "面板",
+    paneldynamic: "面板(动态)",
     radiogroup: "单项选择",
     rating: "评分",
-    text: "文本框"
+    text: "文本框",
+    boolean: "布尔选择",
+    expression: "表达式"
   },
   // strings for editor
   ed: {
