@@ -1,4 +1,4 @@
-**survey.js.editor** is the visual editor for [surveyjs](https://github.com/surveyjs/surveyjs). It uses JSON to store the survey metadata.
+**survey.js.editor** is the visual survey builder for [SurveyJS](https://github.com/surveyjs/surveyjs). It uses JSON to store the survey metadata.
 
 [![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor) 
 [![npm package](https://badge.fury.io/js/surveyjs-editor.svg)](https://www.npmjs.com/package/surveyjs-editor)
@@ -17,12 +17,12 @@ Or use Azure CDN:
 
 ## Include into your project
 ### Explore examples
-To learn how to include the visual editor on your page and explore examples of using, please go to [surveyjs.io/Editor](http://surveyjs.io/Editor) web site
+To learn how to include the visual survey builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Builder](http://surveyjs.io/Examples/Builder) web site
 ### Use quickstart repos
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart), [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
 
 ## See editor in action
-See the visual editor in [action](http://surveyjs.io/Editor/Editor/).
+See the visual editor in [action](http://surveyjs.io/Survey/Builder/).
 
 ## Building surveyjs Editor from sources
 
@@ -56,4 +56,4 @@ To build library yourself:
  The library depends on: [surveyjs](http://surveyjs.io/Library/), [knockoutjs](http://knockoutjs.com), [bootstrap](http://getbootstrap.com) and [ace editor](https://ace.c9.io/).
 
 ## License
-The SurveyJS Editor is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
+The SurveyJS Builder (Editor) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
