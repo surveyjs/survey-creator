@@ -89,7 +89,13 @@ export class SurveyObjectEditor {
       objectProperties.push(objectProperty);
     }
     this.koProperties(objectProperties);
-    this.koActiveProperty(this.getPropertyEditor("name"));
+    var propEditor = this.getPropertyEditor("name");
+    if (!propEditor && objectProperties.length > 0) {
+      propEditor = this.getPropertyEditor(objectProperties[0].name);
+    }
+    if (propEditor) {
+      this.koActiveProperty(propEditor);
+    }
   }
   protected canShowProperty(property: Survey.JsonObjectProperty): boolean {
     return SurveyHelper.isPropertyVisible(
