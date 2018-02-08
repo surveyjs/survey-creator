@@ -93,6 +93,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get title(): string {
     return this.titleValue;
   }
+  public get isDiplayNameVisible() {
+    return this.showDisplayName && this.displayName !== ".";
+  }
   public get displayName(): string {
     return this.displayNameValue;
   }
@@ -101,7 +104,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.displayNameValue = val;
   }
   public get showDisplayNameOnTop(): boolean {
-    return this.showDisplayName && this.canShowDisplayNameOnTop;
+    return this.isDiplayNameVisible && this.canShowDisplayNameOnTop;
   }
   public get canShowDisplayNameOnTop(): boolean {
     return true;
