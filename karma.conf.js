@@ -2,6 +2,8 @@
 var webpackConfigCreator = require("./webpack.config");
 var webpackConfig = webpackConfigCreator({ buildType: "dev" });
 
+process.env.CHROME_BIN = require("puppeteer").executablePath();
+
 module.exports = function(config) {
   config.set({
     basePath: "",
@@ -30,7 +32,7 @@ module.exports = function(config) {
       ]
     },
     reporters: ["progress", "dots", "junit"],
-    browsers: ["PhantomJS"],
+    browsers: ["ChromeHeadless"],
     colors: true,
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_WARN,
