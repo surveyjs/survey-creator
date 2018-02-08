@@ -1682,3 +1682,40 @@ ko.components.register("survey-widget", {
   },
   template: koSurveyTemplate
 });
+
+ko.bindingHandlers.aceEditor = {
+  init: function(element, options) {
+    var langTools = ace.require("ace/ext/language_tools");
+    var editor = ace.edit(element);
+    editor.setOptions({ enableBasicAutocompletion: true });
+
+    // TODO (get real data)
+    // uses http://rhymebrain.com/api.html
+    var rhymeCompleter = {
+      getCompletions: function(editor, session, pos, prefix, callback) {
+        if (prefix.length === 0) {
+          callback(null, []);
+          return;
+        }
+        $.getJSON(
+          "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
+          function(wordList) {
+            // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
+            callback(
+              null,
+              wordList.map(function(ea) {
+                return {
+                  name: ea.word,
+                  value: ea.word,
+                  score: ea.score,
+                  meta: "rhyme"
+                };
+              })
+            );
+          }
+        );
+      }
+    };
+    langTools.addCompleter(rhymeCompleter);
+  }
+};

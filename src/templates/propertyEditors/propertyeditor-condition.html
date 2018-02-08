@@ -5,7 +5,16 @@
 
 <script type="text/html" id="propertyeditorcontent-condition">
     <div class="propertyeditor-condition">
+        <!-- ko if: $parent.hasAceEditor -->
+        <!-- TODO change ace help text -->
+        <span data-bind="text:$root.getLocString('pe.aceEditorHelp')"></span>
+        <div id="expression-ace-editor" style="height: 500px; width: 800px" data-bind="value:koValue, aceEditor:{}"></div>
+        <!-- /ko -->
+
+        <!-- ko if: !$parent.hasAceEditor -->
         <textarea data-bind="value:koValue" rows="8" autofocus="autofocus"></textarea>
+        <!-- /ko -->
+
         <!-- <div class="assistant">
             <div class="assistant-title" data-bind="text:$root.getLocString('pe.assistantTitle')"></div>
             <div class="assistant-content" data-bind="foreach:availableQuestions">

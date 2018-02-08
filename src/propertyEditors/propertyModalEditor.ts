@@ -238,6 +238,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public get availableQuestions(): any[] {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
+  public get hasAceEditor(): boolean {
+    return typeof ace !== "undefined";
+  }
   public setup() {
     super.setup();
     this.showDisplayName = false;
