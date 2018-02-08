@@ -1685,37 +1685,30 @@ ko.components.register("survey-widget", {
 
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
+    var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
     var editor = ace.edit(element);
     editor.setOptions({ enableBasicAutocompletion: true });
 
-    // TODO (get real data)
-    // uses http://rhymebrain.com/api.html
-    var rhymeCompleter = {
+    var completer = {
       getCompletions: function(editor, session, pos, prefix, callback) {
-        if (prefix.length === 0) {
+        if (prefix.length === 0 || !configs.questions) {
           callback(null, []);
           return;
         }
-        $.getJSON(
-          "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
-          function(wordList) {
-            // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
-            callback(
-              null,
-              wordList.map(function(ea) {
-                return {
-                  name: ea.word,
-                  value: ea.word,
-                  score: ea.score,
-                  meta: "rhyme"
-                };
-              })
-            );
-          }
+        callback(
+          null,
+          configs.questions.map(function(q) {
+            return {
+              name: "",
+              value: q.name,
+              some: "",
+              meta: "available_questions"
+            };
+          })
         );
       }
     };
-    langTools.addCompleter(rhymeCompleter);
+    langTools.addCompleter(completer);
   }
 };
