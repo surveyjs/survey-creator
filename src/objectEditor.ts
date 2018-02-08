@@ -23,6 +23,11 @@ export class SurveyObjectEditor {
     object: any,
     property: Survey.JsonObjectProperty
   ) => boolean;
+  public onSortPropertyCallback: (
+    object: any,
+    property1: Survey.JsonObjectProperty,
+    property2: Survey.JsonObjectProperty
+  ) => number;
 
   constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
     this.koActiveProperty.subscribe(newValue => {
@@ -65,11 +70,6 @@ export class SurveyObjectEditor {
     var properties = Survey.JsonObject.metaData["getPropertiesByObj"]
       ? Survey.JsonObject.metaData["getPropertiesByObj"](this.selectedObject)
       : Survey.JsonObject.metaData.getProperties(this.selectedObject.getType());
-    properties.sort((a, b) => {
-      if (a.name == b.name) return 0;
-      if (a.name > b.name) return 1;
-      return -1;
-    });
     var objectProperties = [];
     var self = this;
     var propEvent = (property: SurveyObjectProperty, newValue: any) => {
@@ -79,10 +79,28 @@ export class SurveyObjectEditor {
         newValue: newValue
       });
     };
+    var visibleProperties = [];
     for (var i = 0; i < properties.length; i++) {
       if (!this.canShowProperty(properties[i])) continue;
+      visibleProperties.push(properties[i]);
+    }
+    var sortEvent = function(
+      a: Survey.JsonObjectProperty,
+      b: Survey.JsonObjectProperty
+    ): number {
+      var res = 0;
+      if (self.onSortPropertyCallback) {
+        res = self.onSortPropertyCallback(self.selectedObject, a, b);
+      }
+      if (res) return res;
+      if (a.name == b.name) return 0;
+      if (a.name > b.name) return 1;
+      return -1;
+    };
+    visibleProperties = visibleProperties.sort(sortEvent);
+    for (var i = 0; i < visibleProperties.length; i++) {
       var objectProperty = new SurveyObjectProperty(
-        properties[i],
+        visibleProperties[i],
         propEvent,
         this.propertyEditorOptions
       );

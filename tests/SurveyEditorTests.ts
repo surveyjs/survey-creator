@@ -421,6 +421,20 @@ QUnit.test("onModified options", function(assert) {
   assert.equal(opts.target, page, "Object - page");
 });
 
+QUnit.test("onCustomPropertySort event", function(assert) {
+  var editor = new SurveyEditor();
+  editor.onCustomSortProperty.add(function(editor, options) {
+    if (options.property1.name == "name") options.result = -1;
+    if (options.property2.name == "name") options.result = 1;
+  });
+  editor.selectedObjectEditor.selectedObject = editor.survey.pages[0];
+  assert.equal(
+    editor.selectedObjectEditor.koProperties()[0].name,
+    "name",
+    "The name property is now the first"
+  );
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

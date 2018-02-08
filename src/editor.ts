@@ -114,6 +114,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property1 the left object property (Survey.JsonObjectProperty object).
+   * <br/> options.property2 the right object property (Survey.JsonObjectProperty object).
+   * <br/> options.result the result of comparing. It can be 0 (use default behavior),  -1 options.property1 is less than options.property2 or 1 options.property1 is more than options.property2
+   */
+  public onCustomSortProperty: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
    * <br/> sender the survey editor object that fires the event
    * <br/> options.element an instance of the deleting element
@@ -423,6 +435,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
+    this.selectedObjectEditorValue.onSortPropertyCallback = function(
+      obj: any,
+      property1: Survey.JsonObjectProperty,
+      property2: Survey.JsonObjectProperty
+    ): number {
+      return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
+    };
     this.selectedObjectEditorValue.onPropertyValueChanged.add(
       (sender, options) => {
         self.onPropertyValueChanged(
@@ -634,9 +653,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       visible: this.koShowState,
       css: "svd_state",
       innerCss: ko.computed(() => "icon-" + this.koState()),
-      title: ko.computed(
-        () => this.getLocString("ed." + this.koState())
-      ),
+      title: ko.computed(() => this.getLocString("ed." + this.koState())),
       template: "svd-toolbar-state"
     });
   }
@@ -881,6 +898,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var options = { obj: object, property: property, canShow: true };
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
+  }
+  protected onCustomSortPropertyObjectProperty(
+    object: any,
+    property1: Survey.JsonObjectProperty,
+    property2: Survey.JsonObjectProperty
+  ): number {
+    if (this.onCustomSortProperty.isEmpty) return 0;
+    var options = {
+      obj: object,
+      property1: property1,
+      property2: property2,
+      result: 0
+    };
+    this.onCustomSortProperty.fire(this, options);
+    return options.result;
   }
 
   private setTextValue(value: string) {

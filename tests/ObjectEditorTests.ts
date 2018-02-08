@@ -45,6 +45,18 @@ QUnit.test("Created properties on set selected Object", function(assert) {
   );
   assert.equal(editor.koProperties()[1].name, "name", "name property");
 });
+QUnit.test("Custom sort properties", function(assert) {
+  var editor = new SurveyObjectEditor();
+  editor.onSortPropertyCallback = function(obj, a, b) {
+    if (a.name == "name") return -1;
+    if (b.name == "name") return 1;
+    return 0;
+  };
+  editor.selectedObject = new Truck();
+
+  assert.equal(editor.koProperties().length, 3, "Two property object");
+  assert.equal(editor.koProperties()[0].name, "name", "name property");
+});
 QUnit.test("Get Property Value", function(assert) {
   var editor = new SurveyObjectEditor();
   var car = new Truck();
