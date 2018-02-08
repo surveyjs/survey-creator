@@ -612,7 +612,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
   var columns: Array<Survey.MatrixDropdownColumn> = [];
   columns.push(new Survey.MatrixDropdownColumn("column 1"));
   columns.push(new Survey.MatrixDropdownColumn("column 2"));
-  columns[0].choices = [1, 2, "three"];
+  columns[0]["choices"] = [1, 2, "three"];
   var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
   itemValueProperty.beforeShowModal();
   itemValueProperty.onChanged = (
