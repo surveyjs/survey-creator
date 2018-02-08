@@ -126,6 +126,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The event allows you modify DOM element for a property in the Property Grid. For example, you may change it's styles.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and it's editor.
+   * <br/> options.property object property (Survey.JsonObjectProperty object).
+   * <br/> options.propertyEditor the property Editor.
+   */
+  public onPropertyAfterRender: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
    * <br/> sender the survey editor object that fires the event
    * <br/> options.element an instance of the deleting element
@@ -451,6 +463,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         );
       }
     );
+    this.selectedObjectEditorValue.onAfterRenderCallback = function(
+      obj,
+      htmlElement,
+      prop
+    ) {
+      if (self.onPropertyAfterRender.isEmpty) return;
+      var options = {
+        obj: obj,
+        htmlElement: htmlElement,
+        property: prop.property,
+        propertyEditor: prop.editor
+      };
+      self.onPropertyAfterRender.fire(self, options);
+    };
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.questionEditorWindow.onCanShowPropertyCallback = function(
       object: any,

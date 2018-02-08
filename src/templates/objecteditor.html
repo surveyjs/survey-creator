@@ -1,19 +1,23 @@
 ﻿<script type="text/html" id="objecteditor">
     <table class="table svd_table-nowrap">
         <tbody data-bind="foreach: koProperties">
-            <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
-                <td width="50%">
-                    <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
-                </td>
-                <td width="50%">
-                    <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
-                        style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
-                    <div data-bind="visible: koIsShowEditor()">
-                        <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor, afterRender: function(elements) { afterRenderHandler($element.parentElement, elements); } } -->
-                        <!-- /ko -->
-                    </div>
-                </td>
-            </tr>
+            <!-- ko template: { name: 'objecteditorproperty', afterRender: $parent.koAfterRender } -->
+            <!-- /ko -->
         </tbody>
     </table>
+</script>
+<script type="text/html" id="objecteditorproperty">
+    <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
+        <td width="50%">
+            <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
+        </td>
+        <td width="50%">
+            <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
+                style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
+            <div data-bind="visible: koIsShowEditor()">
+                <!-- ko template: { name: 'propertyeditor-' + editorType, data: $data.editor, afterRender: function(elements) { afterRenderHandler($element.parentElement, elements); } } -->
+                <!-- /ko -->
+            </div>
+        </td>
+    </tr>
 </script>

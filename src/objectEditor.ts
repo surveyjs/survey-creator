@@ -9,6 +9,7 @@ import { SurveyHelper } from "./surveyHelper";
 export class SurveyObjectEditor {
   private selectedObjectValue: any;
   private oldActiveProperty: SurveyObjectProperty = null;
+  koAfterRender: any;
   public koProperties = ko.observableArray<SurveyObjectProperty>();
   public koActiveProperty = ko.observable<SurveyObjectProperty>();
   public koHasObject = ko.observable<boolean>();
@@ -28,6 +29,11 @@ export class SurveyObjectEditor {
     property1: Survey.JsonObjectProperty,
     property2: Survey.JsonObjectProperty
   ) => number;
+  public onAfterRenderCallback: (
+    object: any,
+    htmlElement: HTMLElement,
+    property: SurveyObjectProperty
+  ) => any;
 
   constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
     this.koActiveProperty.subscribe(newValue => {
@@ -36,6 +42,10 @@ export class SurveyObjectEditor {
       this.oldActiveProperty = newValue;
       if (newValue) newValue.isActive = true;
     });
+    var self = this;
+    this.koAfterRender = function(el, con) {
+      self.afterRender(el, con);
+    };
   }
 
   public get selectedObject(): any {
@@ -60,6 +70,20 @@ export class SurveyObjectEditor {
   }
   public objectChanged() {
     this.updatePropertiesObject();
+  }
+  protected afterRender(elements, prop) {
+    if (
+      !Survey.SurveyElement ||
+      !Survey.SurveyElement.GetFirstNonTextElement ||
+      !this.onAfterRenderCallback
+    )
+      return;
+    var el = Survey.SurveyElement.GetFirstNonTextElement(elements);
+    var tEl = elements[0];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    tEl = elements[elements.length - 1];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    this.onAfterRenderCallback(this.selectedObject, el, prop);
   }
   protected updateProperties() {
     if (!this.selectedObject || !this.selectedObject.getType) {
