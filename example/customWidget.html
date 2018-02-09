@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>survey.js Editor Test </title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
     <script src="https://surveyjs.azureedge.net/0.12.28/survey.ko.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
@@ -19,7 +22,8 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./index.css">
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" /> 
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet"
+    />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -42,27 +46,47 @@
     <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/fontawesome-stars-o.css">
 
 </head>
+
 <body>
     <div id="manage" data-bind="template: 'surveys-manage'"></div>
     <div id="editorElement"></div>
     <script type="text/javascript">
-        if(!window["%hammerhead%"]) {
+        if (!window["%hammerhead%"]) {
             Survey.Survey.cssType = "bootstrap";
             Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
             //Add date format property into text question
-            Survey.JsonObject.metaData.addProperty("text", {name: "dateFormat", default: "dd/mm/yy"});
+            Survey.JsonObject.metaData.addProperty("text", {
+                name: "dateFormat",
+                default: "dd/mm/yy"
+            });
 
             //Add properties for Bar Rating
-            Survey.JsonObject.metaData.addProperty("dropdown", {name: "renderAs", default: "standard", choices: ["standard", "barrating"]});
-            Survey.JsonObject.metaData.addProperty("dropdown", {name: "ratingTheme", default: "fontawesome-stars", choices: ["fontawesome-stars", "css-stars", "bars-pill", "bars-1to10", "bars-movie", "bars-square", "bars-reversed", "bars-horizontal", "bootstrap-stars", "fontawesome-stars-o"]});
-            Survey.JsonObject.metaData.addProperty("dropdown", {name: "showValues:boolean", default: false});
+            Survey.JsonObject.metaData.addProperty("dropdown", {
+                name: "renderAs",
+                default: "standard",
+                choices: ["standard", "barrating"]
+            });
+            Survey.JsonObject.metaData.addProperty("dropdown", {
+                name: "ratingTheme",
+                default: "fontawesome-stars",
+                choices: ["fontawesome-stars", "css-stars", "bars-pill", "bars-1to10", "bars-movie",
+                    "bars-square", "bars-reversed", "bars-horizontal", "bootstrap-stars",
+                    "fontawesome-stars-o"
+                ]
+            });
+            Survey.JsonObject.metaData.addProperty("dropdown", {
+                name: "showValues:boolean",
+                default: false
+            });
 
             //jQuery date picker. It is used for "text" question if inputType equals to 'date'.
             var dateWidget = {
                 name: "datepicker",
                 htmlTemplate: "<input id='widget-datepicker' type='text'>",
-                isFit : function(question) { return question.inputType === 'date'; },
-                afterRender: function(question, el) {
+                isFit: function (question) {
+                    return question.inputType === 'date';
+                },
+                afterRender: function (question, el) {
 
                     var dateFormat = question.dateFormat ? question.dateFormat : "dd/mm/yy";
                     var widget = $(el).datepicker({
@@ -71,7 +95,7 @@
                     widget.on("change", function (e) {
                         question.value = $(this).val();
                     });
-                    question.valueChangedCallback = function() {
+                    question.valueChangedCallback = function () {
                         widget.datepicker('setDate', new Date(question.value));
                     }
                 }
@@ -81,24 +105,26 @@
             //Antennaio jQuery Bar Rating. It is based on "dropdown" question. If renderAs equals to 'barrating' then it is used.
             var barRatingWidget = {
                 name: "antennaio-jquery-bar-rating",
-                isFit : function(question) { return question["renderAs"] === 'barrating'; },
+                isFit: function (question) {
+                    return question["renderAs"] === 'barrating';
+                },
                 isDefaultRender: true,
-                afterRender: function(question, el) {
+                afterRender: function (question, el) {
 
                     var $el = $(el);
                     var ratingTheme = question.ratingTheme ? question.ratingTheme : "fontawesome-stars";
-                    var showValues = question.showValues ? question.showValues : false; 
+                    var showValues = question.showValues ? question.showValues : false;
                     $el.barrating('show', {
                         theme: ratingTheme,
                         initialRating: question.value,
                         showValues: showValues,
                         showSelectedRating: false,
-                        onSelect: function(value, text) {
+                        onSelect: function (value, text) {
                             question.value = value;
                         }
                     });
 
-                    question.valueChangedCallback = function() {
+                    question.valueChangedCallback = function () {
                         $(el).find('select').barrating('set', question.value);
                     }
                 }
@@ -109,19 +135,26 @@
             var select2Widget = {
                 name: "select2",
                 htmlTemplate: "<select style='width: 100%;'></select>",
-                isFit : function(question) { return question.getType() === 'dropdown'; },
-                afterRender: function(question, el) {
+                isFit: function (question) {
+                    return question.getType() === 'dropdown';
+                },
+                afterRender: function (question, el) {
 
                     var $el = $(el);
 
                     var widget = $el.select2({
-                        data: question.choices.map(function(choice) { return { id: choice.value, text: choice.text }; }),
+                        data: question.choices.map(function (choice) {
+                            return {
+                                id: choice.value,
+                                text: choice.text
+                            };
+                        }),
                         theme: "classic"
                     });
                     $el.on('select2:select', function (e) {
                         question.value = e.target.value;
                     });
-                    var updateHandler = function() {
+                    var updateHandler = function () {
                         $el.val(question.value).trigger("change");
                     };
                     question.valueChangedCallback = updateHandler;
@@ -134,26 +167,33 @@
             var select2TagBoxWidget = {
                 name: "select2tagbox",
                 htmlTemplate: "<select multiple='multiple' style='width: 100%;'></select>",
-                isFit : function(question) { return question.getType() === 'checkbox'; },
-                afterRender: function(question, el) {
+                isFit: function (question) {
+                    return question.getType() === 'checkbox';
+                },
+                afterRender: function (question, el) {
 
                     var $el = $(el);
 
                     var widget = $el.select2({
                         tags: "true",
-                        data: question.choices.map(function(choice) { return { id: choice.value, text: choice.text }; }),
+                        data: question.choices.map(function (choice) {
+                            return {
+                                id: choice.value,
+                                text: choice.text
+                            };
+                        }),
                         theme: "classic"
                     });
                     $el.on('select2:unselect', function (e) {
                         var index = (question.value || []).indexOf(e.params.data.id);
-                        if(index !== -1) {
+                        if (index !== -1) {
                             question.value = question.value.splice(index, 1);
                         }
                     });
                     $el.on('select2:select', function (e) {
                         question.value = (question.value || []).concat(e.params.data.id);
                     });
-                    var updateHandler = function() {
+                    var updateHandler = function () {
                         $el.val(question.value).trigger("change");
                     };
                     question.valueChangedCallback = updateHandler;
@@ -165,19 +205,21 @@
             //iCheck. All radio group questions are rendered as iCheck
             var iCheckWidget = {
                 name: "icheck",
-                isFit : function(question) { return question.getType() == "radiogroup"; },
+                isFit: function (question) {
+                    return question.getType() == "radiogroup";
+                },
                 isDefaultRender: true,
-                afterRender: function(question, el) {
-                    var select = function() {
-                    $(el).find("input[value=" + question.value + "]").iCheck('check');
+                afterRender: function (question, el) {
+                    var select = function () {
+                        $(el).find("input[value=" + question.value + "]").iCheck('check');
                     }
                     $(el).find('input').iCheck({
-                    checkboxClass: 'iradio_square-blue',
-                    radioClass: 'iradio_square-blue',
-                    increaseArea: '20%' // optional
+                        checkboxClass: 'iradio_square-blue',
+                        radioClass: 'iradio_square-blue',
+                        increaseArea: '20%' // optional
                     });
-                    $(el).find('input').on('ifChecked', function(event){
-                    question.value = event.target.value;
+                    $(el).find('input').on('ifChecked', function (event) {
+                        question.value = event.target.value;
                     });
                     question.valueChangedCallback = select;
                     select();
@@ -186,42 +228,55 @@
             Survey.CustomWidgetCollection.Instance.addCustomWidget(iCheckWidget);
 
             //Hide json tab and allow to drop only three questions
-            var editorOptions = {questionTypes : ["text", "radiogroup", "dropdown"], showJSONEditorTab : false};
+            var editorOptions = {
+                questionTypes: ["text", "radiogroup", "dropdown"],
+                showJSONEditorTab: false
+            };
             var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 
             //Hide some properties.
-            editor.onCanShowProperty.add(function(sender, options){
-                if(options.obj.getType() == "dropdown") {
-                    var forbiddenBarRatingProperties = ["choicesOrder", "choicesByUrl", "optionsCaption", "hasOther"];
+            editor.onCanShowProperty.add(function (sender, options) {
+                if (options.obj.getType() == "dropdown") {
+                    var forbiddenBarRatingProperties = ["choicesOrder", "choicesByUrl", "optionsCaption",
+                        "hasOther"
+                    ];
                     var forbiddenDropDownProperties = ["ratingTheme", "showValues"];
                     var isBarRating = options.obj["renderAs"] == "barrating";
                     var propName = options.property.name;
                     //hide renderAs property
                     var canShow = propName != "renderAs";
                     //hide properties for standard dropdown
-                    if(canShow && !isBarRating) canShow =  forbiddenDropDownProperties.indexOf(propName) < 0;
+                    if (canShow && !isBarRating) canShow = forbiddenDropDownProperties.indexOf(propName) < 0;
                     //hide properties for Bar Rating
-                    if(canShow && isBarRating) canShow =  forbiddenBarRatingProperties.indexOf(propName) < 0;
+                    if (canShow && isBarRating) canShow = forbiddenBarRatingProperties.indexOf(propName) < 0;
                     options.canShow = canShow;
                 }
             });
 
             //Add Bar Rating question into Toolbox
             editor.toolbox.addItem({
-                    name: "barrating",
-                    iconName: "icon-rating",
-                    title: "Bar Rating",
-                    json: { "type": "dropdown",  "renderAs": "barrating", "choices": [1, 2, 3, 4, 5] } 
+                name: "barrating",
+                iconName: "icon-rating",
+                title: "Bar Rating",
+                json: {
+                    "type": "dropdown",
+                    "renderAs": "barrating",
+                    "choices": [1, 2, 3, 4, 5]
+                }
             });
 
             //Add Multiple Select question into Toolbox
             editor.toolbox.addItem({
-                    name: "multiple",
-                    iconName: "icon-checkbox",
-                    title: "Multiple Selector",
-                    json: { "type": "checkbox",  "choices": [1, 2, 3] } 
+                name: "multiple",
+                iconName: "icon-checkbox",
+                title: "Multiple Selector",
+                json: {
+                    "type": "checkbox",
+                    "choices": [1, 2, 3]
+                }
             });
         }
     </script>
 </body>
+
 </html>
