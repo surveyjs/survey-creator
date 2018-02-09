@@ -1683,32 +1683,171 @@ ko.components.register("survey-widget", {
   template: koSurveyTemplate
 });
 
+var operations = [
+  {
+    value: "and",
+    title: "logical 'and' operator"
+  },
+  {
+    value: "&&",
+    title: "logical 'and' operator"
+  },
+  {
+    value: "or",
+    title: "logical 'or' operator"
+  },
+  {
+    value: "||",
+    title: "logical 'or' operator"
+  },
+  {
+    value: "empty",
+    title: "returns true if the left operand is empty	{questionName} empty"
+  },
+  {
+    value: "notempty",
+    title:
+      "returns true if the left operand is not empty	{questionName} notempty"
+  },
+  {
+    value: "=",
+    title:
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+  },
+  {
+    value: "==",
+    title:
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+  },
+  {
+    value: "equal",
+    title:
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+  },
+  {
+    value: "<>",
+    title:
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+  },
+  {
+    value: "!=",
+    title:
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+  },
+  {
+    value: "notequal",
+    title:
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+  },
+  {
+    value: ">",
+    title:
+      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'"
+  },
+  {
+    value: "greater",
+    title:
+      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'"
+  },
+  {
+    value: "<",
+    title:
+      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'"
+  },
+  {
+    value: "less",
+    title:
+      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'"
+  },
+  {
+    value: ">=",
+    title:
+      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'"
+  },
+  {
+    value: "greaterorequal",
+    title:
+      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'"
+  },
+  {
+    value: "<=",
+    title:
+      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'"
+  },
+  {
+    value: "lessorequal",
+    title:
+      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'"
+  },
+  {
+    value: "contains",
+    title:
+      "return true if the left operand is an array and it contains a value of the second operand	{questionName} contains 'a'"
+  },
+  {
+    value: "notcontains",
+    title:
+      "return true if the left operand is an array and it does not contain a value of the second operand"
+  }
+];
+
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
     var editor = ace.edit(element);
-    editor.setOptions({ enableBasicAutocompletion: true });
-
     var completer = {
       getCompletions: function(editor, session, pos, prefix, callback) {
-        if (prefix.length === 0 || !configs.questions) {
-          callback(null, []);
-          return;
+        var leftPart = editor.session
+          .getLine(pos.row)
+          .substring(0, pos.column)
+          .trim();
+        var leftPartTrimmed = leftPart.trim();
+        var needOperation = leftPartTrimmed[leftPartTrimmed.length - 1] === "}";
+        if (!!configs.questions) {
+          if (prefix === "") {
+            if (needOperation) {
+              callback(
+                null,
+                operations.map(op => {
+                  return {
+                    name: "",
+                    value: op.value,
+                    some: "",
+                    meta: op.title
+                  };
+                })
+              );
+            } else {
+              var valPrefix = leftPart[leftPart.length - 1] !== " " ? " " : "";
+              callback(
+                null,
+                configs.questions.map(function(q) {
+                  return {
+                    name: "",
+                    value: valPrefix + "{" + q.name + "} ",
+                    some: "",
+                    meta: q.title
+                  };
+                })
+              );
+            }
+            return;
+          } else if (prefix === "row") {
+          } else if (prefix === "panel") {
+          }
         }
-        callback(
-          null,
-          configs.questions.map(function(q) {
-            return {
-              name: "",
-              value: q.name,
-              some: "",
-              meta: "available_questions"
-            };
-          })
-        );
+        callback(null, []);
       }
     };
-    langTools.addCompleter(completer);
+    langTools.setCompleters([completer]);
+    editor.setOptions({
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true
+    });
+
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+      editor.destroy();
+    });
   }
 };
