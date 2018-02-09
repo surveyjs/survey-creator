@@ -47,6 +47,12 @@ export {
   SurveyPropertyModalEditor
 } from "../propertyEditors/propertyModalEditor";
 export {
+  SurveyPropertyTextEditor
+} from "../propertyEditors/propertyModalEditor";
+export {
+  SurveyPropertyConditionEditor
+} from "../propertyEditors/propertyConditionEditor";
+export {
   SurveyPropertyResultfullEditor
 } from "../propertyEditors/propertyRestfullEditor";
 export {
