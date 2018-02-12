@@ -16,7 +16,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
   public get hasAceEditor(): boolean {
-    return typeof ace !== "undefined";
+    return (
+      typeof ace !== "undefined" &&
+      typeof ace.require("ace/ext/language_tools") !== "undefined"
+    );
   }
   public setup() {
     super.setup();
