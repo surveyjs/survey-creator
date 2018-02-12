@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyTextEditor } from "./propertyModalEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
+import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   constructor(property: Survey.JsonObjectProperty, private _type: string) {
@@ -148,13 +149,58 @@ ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
+    var langUtils = ace.require("ace/autocomplete/util");
     var editor = ace.edit(element);
+    var currentQuestion: Survey.QuestionBase = configs.question;
+    var usableQuestions = (configs.questions || []).filter(
+      q => q !== currentQuestion
+    );
     var completer = {
       identifierRegexps: [ID_REGEXP],
       getCompletions: (editor, session, pos, prefix, callback) => {
-        if (!!configs.questions) {
-          if (prefix === "row") {
-          } else if (prefix === "panel") {
+        if (
+          !!usableQuestions ||
+          currentQuestion instanceof Survey.QuestionMatrixDynamic ||
+          currentQuestion instanceof Survey.QuestionPanelDynamic
+        ) {
+          if (
+            langUtils.retrievePrecedingIdentifier(
+              session.getLine(pos.row),
+              pos.column - 1
+            ) === "row" &&
+            currentQuestion instanceof Survey.QuestionMatrixDynamic
+          ) {
+            callback(
+              null,
+              currentQuestion.columns.map(column => {
+                return {
+                  name: "",
+                  value: "{row." + column.name + "}",
+                  some: "",
+                  meta: column.title,
+                  identifierRegex: ID_REGEXP
+                };
+              })
+            );
+          } else if (
+            langUtils.retrievePrecedingIdentifier(
+              session.getLine(pos.row),
+              pos.column - 1
+            ) === "panel" &&
+            currentQuestion instanceof Survey.QuestionPanelDynamic
+          ) {
+            callback(
+              null,
+              currentQuestion.template.elements.map(element => {
+                return {
+                  name: "",
+                  value: "{panel." + element.name + "}",
+                  some: "",
+                  meta: element.name,
+                  identifierRegex: ID_REGEXP
+                };
+              })
+            );
           } else {
             var operationsFiltered = operations.filter(
               op => op.value.indexOf(prefix) !== -1
@@ -162,36 +208,55 @@ ko.bindingHandlers.aceEditor = {
             if (operationsFiltered.length === 0) {
               operationsFiltered = operations;
             }
-            var questionsFiltered = configs.questions.filter(
+            var questionsFiltered = usableQuestions.filter(
               op => op.name.indexOf(prefix) !== -1
             );
             if (questionsFiltered.length === 0) {
-              questionsFiltered = configs.questions;
+              questionsFiltered = usableQuestions;
             }
-            callback(
-              null,
-              operationsFiltered
-                .map(op => {
+            var completions = operationsFiltered
+              .map(op => {
+                return {
+                  name: "",
+                  value: op.value,
+                  some: "",
+                  meta: op.title,
+                  identifierRegex: ID_REGEXP
+                };
+              })
+              .concat(
+                questionsFiltered.map(q => {
                   return {
                     name: "",
-                    value: op.value,
+                    value: "{" + q.name + "}",
                     some: "",
-                    meta: op.title,
+                    meta: q.title,
                     identifierRegex: ID_REGEXP
                   };
                 })
-                .concat(
-                  questionsFiltered.map(q => {
-                    return {
-                      name: "",
-                      value: "{" + q.name + "} ",
-                      some: "",
-                      meta: q.title,
-                      identifierRegex: ID_REGEXP
-                    };
-                  })
-                )
-            );
+              );
+            if (currentQuestion instanceof Survey.QuestionMatrixDynamic) {
+              completions.push({
+                name: "",
+                value: "{row.",
+                some: "",
+                meta: editorLocalization.editorLocalization.getString(
+                  editorLocalization.defaultStrings.pe.aceEditorRowTitle
+                ),
+                identifierRegex: ID_REGEXP
+              });
+            } else if (currentQuestion instanceof Survey.QuestionPanelDynamic) {
+              completions.push({
+                name: "",
+                value: "{panel.",
+                some: "",
+                meta: editorLocalization.editorLocalization.getString(
+                  editorLocalization.defaultStrings.pe.aceEditorPanelTitle
+                ),
+                identifierRegex: ID_REGEXP
+              });
+            }
+            callback(null, completions);
           }
           return;
         }

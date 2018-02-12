@@ -8,7 +8,7 @@
         <!-- ko if: $parent.hasAceEditor -->
         <!-- TODO change ace help text -->
         <span data-bind="text:$root.getLocString('pe.aceEditorHelp')"></span>
-        <div id="expression-ace-editor" style="height: 500px; width: 800px" data-bind="value:koValue, aceEditor:{}"></div>
+        <div id="expression-ace-editor" style="height: 400px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject}"></div>
         <!-- /ko -->
 
         <!-- ko if: !$parent.hasAceEditor -->

@@ -146,6 +146,8 @@ export var defaultStrings = {
     expressionHelp:
       "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
+    aceEditorRowTitle: "Current row",
+    aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
     assistantTitle: "Available questions:",
 
