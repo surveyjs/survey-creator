@@ -142,14 +142,16 @@ var operations = [
   }
 ];
 
+var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
+
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
     var editor = ace.edit(element);
     var completer = {
-      identifierRegexps: [/[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/],
-      getCompletions: function(editor, session, pos, prefix, callback) {
+      identifierRegexps: [ID_REGEXP],
+      getCompletions: (editor, session, pos, prefix, callback) => {
         if (!!configs.questions) {
           if (prefix === "row") {
           } else if (prefix === "panel") {
@@ -174,7 +176,8 @@ ko.bindingHandlers.aceEditor = {
                     name: "",
                     value: op.value,
                     some: "",
-                    meta: op.title
+                    meta: op.title,
+                    identifierRegex: ID_REGEXP
                   };
                 })
                 .concat(
@@ -183,7 +186,8 @@ ko.bindingHandlers.aceEditor = {
                       name: "",
                       value: "{" + q.name + "} ",
                       some: "",
-                      meta: q.title
+                      meta: q.title,
+                      identifierRegex: ID_REGEXP
                     };
                   })
                 )
