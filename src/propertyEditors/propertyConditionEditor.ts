@@ -185,10 +185,11 @@ var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
-    var objectEditor: SurveyPropertyConditionEditor = configs.editor;
     var langTools = ace.require("ace/ext/language_tools");
     var langUtils = ace.require("ace/autocomplete/util");
     var editor = ace.edit(element);
+    var objectEditor: SurveyPropertyConditionEditor = configs.editor;
+    var isUpdating = false;
 
     editor.setOption("useWorker", false);
 
@@ -197,7 +198,9 @@ ko.bindingHandlers.aceEditor = {
         editor.getValue(),
         objectEditor.syntaxCheckMethodName
       );
+      isUpdating = true;
       objectEditor.koTextValue(editor.getValue());
+      isUpdating = false;
       //   objectEditor.koHasError(errors.length > 0);
       //   if (errors.length > 0) {
       //     objectEditor.koErrorText(errors[0].text);
@@ -205,13 +208,20 @@ ko.bindingHandlers.aceEditor = {
       editor.getSession().setAnnotations(errors);
     });
 
-    var currentQuestion: Survey.QuestionBase = configs.question;
-    var usableQuestions = (configs.questions || []).filter(
-      q => q !== currentQuestion
-    );
+    var valueSubscription = objectEditor.koTextValue.subscribe(newVal => {
+      if (!isUpdating) {
+        editor.setValue(newVal || "");
+      }
+    });
+
     var completer = {
       identifierRegexps: [ID_REGEXP],
       getCompletions: (editor, session, pos, prefix, callback) => {
+        var configs = options();
+        var currentQuestion: Survey.QuestionBase = configs.question;
+        var usableQuestions = (configs.questions || []).filter(
+          q => q !== currentQuestion
+        );
         if (
           !!usableQuestions ||
           currentQuestion instanceof Survey.QuestionMatrixDynamic ||
@@ -325,6 +335,7 @@ ko.bindingHandlers.aceEditor = {
 
     ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
       editor.destroy();
+      valueSubscription.dispose();
     });
 
     editor.focus();
