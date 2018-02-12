@@ -6,7 +6,11 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
-  constructor(property: Survey.JsonObjectProperty, private _type: string) {
+  constructor(
+    property: Survey.JsonObjectProperty,
+    private _type: string,
+    public syntaxCheckMethodName: string
+  ) {
     super(property);
   }
   public get editorType(): string {
@@ -30,12 +34,20 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
 SurveyPropertyEditorFactory.registerEditor("condition", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(property, "condition");
+  return new SurveyPropertyConditionEditor(
+    property,
+    "condition",
+    "createCondition"
+  );
 });
 SurveyPropertyEditorFactory.registerEditor("expression", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(property, "expression");
+  return new SurveyPropertyConditionEditor(
+    property,
+    "expression",
+    "parseExpression"
+  );
 });
 
 var operations = [
@@ -146,14 +158,53 @@ var operations = [
   }
 ];
 
+const createAnnotations = (
+  condition: string,
+  syntaxCheckMethodName: string
+): AceAjax.Annotation[] => {
+  condition = condition || "";
+  var annotations = new Array<AceAjax.Annotation>();
+  var conditionParser: any = new Survey.ConditionsParser();
+  conditionParser[syntaxCheckMethodName](condition);
+  if (conditionParser.error) {
+    var toErrorSubstring = condition.substring(0, conditionParser.error.at);
+    var column = toErrorSubstring.length - toErrorSubstring.lastIndexOf("\n");
+    var annotation: AceAjax.Annotation = {
+      row: condition.match(/\n/g) ? condition.match(/\n/g).length : 0,
+      column: column,
+      text: conditionParser.error.code + " (" + column + ")",
+      type: "error"
+    };
+    annotations.push(annotation);
+  }
+  return annotations;
+};
+
 var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
 
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
+    var objectEditor: SurveyPropertyConditionEditor = configs.editor;
     var langTools = ace.require("ace/ext/language_tools");
     var langUtils = ace.require("ace/autocomplete/util");
     var editor = ace.edit(element);
+
+    editor.setOption("useWorker", false);
+
+    editor.getSession().on("change", function() {
+      var errors = createAnnotations(
+        editor.getValue(),
+        objectEditor.syntaxCheckMethodName
+      );
+      objectEditor.koTextValue(editor.getValue());
+      //   objectEditor.koHasError(errors.length > 0);
+      //   if (errors.length > 0) {
+      //     objectEditor.koErrorText(errors[0].text);
+      //   }
+      editor.getSession().setAnnotations(errors);
+    });
+
     var currentQuestion: Survey.QuestionBase = configs.question;
     var usableQuestions = (configs.questions || []).filter(
       q => q !== currentQuestion
@@ -275,5 +326,7 @@ ko.bindingHandlers.aceEditor = {
     ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
       editor.destroy();
     });
+
+    editor.focus();
   }
 };
