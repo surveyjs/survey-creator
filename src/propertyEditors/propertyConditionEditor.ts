@@ -216,6 +216,29 @@ ko.bindingHandlers.aceEditor = {
 
     var completer = {
       identifierRegexps: [ID_REGEXP],
+      insertMatch: (editor, data) => {
+        if (editor.completer.completions.filterText) {
+          var allRanges = editor.selection.getAllRanges();
+          for (
+            var rangeIndex = 0, range;
+            (range = allRanges[rangeIndex]);
+            rangeIndex++
+          ) {
+            range.start.column -=
+              editor.completer.completions.filterText.length;
+            var rangeText = editor.session.getTextRange(range);
+            if (rangeText.indexOf("{") !== 0) {
+              var extRange = range.clone();
+              extRange.start.column--;
+              if (editor.session.getTextRange(extRange).indexOf("{") === 0) {
+                range = extRange;
+              }
+            }
+            editor.session.remove(range);
+          }
+        }
+        editor.execCommand("insertstring", data.value || data);
+      },
       getCompletions: (editor, session, pos, prefix, callback) => {
         var configs = options();
         var currentQuestion: Survey.QuestionBase = configs.question;
@@ -278,27 +301,7 @@ ko.bindingHandlers.aceEditor = {
             if (questionsFiltered.length === 0) {
               questionsFiltered = usableQuestions;
             }
-            var completions = operationsFiltered
-              .map(op => {
-                return {
-                  name: "",
-                  value: op.value,
-                  some: "",
-                  meta: op.title,
-                  identifierRegex: ID_REGEXP
-                };
-              })
-              .concat(
-                questionsFiltered.map(q => {
-                  return {
-                    name: "",
-                    value: "{" + q.name + "}",
-                    some: "",
-                    meta: q.title,
-                    identifierRegex: ID_REGEXP
-                  };
-                })
-              );
+            var completions = [];
             if (currentQuestion instanceof Survey.QuestionMatrixDynamic) {
               completions.push({
                 name: "",
@@ -320,6 +323,30 @@ ko.bindingHandlers.aceEditor = {
                 identifierRegex: ID_REGEXP
               });
             }
+            completions = completions
+              .concat(
+                questionsFiltered.map(q => {
+                  return {
+                    completer: completer,
+                    name: "",
+                    value: "{" + q.name + "}",
+                    some: "",
+                    meta: q.title,
+                    identifierRegex: ID_REGEXP
+                  };
+                })
+              )
+              .concat(
+                operationsFiltered.map(op => {
+                  return {
+                    name: "",
+                    value: op.value,
+                    some: "",
+                    meta: op.title,
+                    identifierRegex: ID_REGEXP
+                  };
+                })
+              );
             callback(null, completions);
           }
           return;
