@@ -169,7 +169,7 @@ const createAnnotations = (
   var annotations = new Array<AceAjax.Annotation>();
   var conditionParser: any = new Survey.ConditionsParser();
   conditionParser[syntaxCheckMethodName](condition);
-  if (conditionParser.error) {
+  if (!!condition && conditionParser.error) {
     var toErrorSubstring = condition.substring(0, conditionParser.error.at);
     var column = toErrorSubstring.length - toErrorSubstring.lastIndexOf("\n");
     var annotation: AceAjax.Annotation = {
