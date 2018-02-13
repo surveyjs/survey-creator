@@ -2,9 +2,9 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
+import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { editorLocalization } from "../editorLocalization";
 import RModal from "rmodal";
-import insertAtCursor from "../utils/insertAtCursor";
 
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
@@ -228,28 +228,6 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
   }
 }
 
-export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
-  constructor(property: Survey.JsonObjectProperty, private _type: string) {
-    super(property);
-  }
-  public get editorType(): string {
-    return this._type;
-  }
-  public get availableQuestions(): any[] {
-    return (this.object && this.object.survey.getAllQuestions()) || [];
-  }
-  public setup() {
-    super.setup();
-    this.showDisplayName = false;
-  }
-  public insertQuestion(question, element) {
-    var textarea = element.parentNode.parentNode.parentNode.querySelector(
-      "textarea"
-    );
-    insertAtCursor(textarea, "{" + question.name + "}");
-  }
-}
-
 SurveyPropertyEditorFactory.registerEditor("text", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
@@ -259,14 +237,4 @@ SurveyPropertyEditorFactory.registerEditor("html", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyHtmlEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("condition", function(
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(property, "condition");
-});
-SurveyPropertyEditorFactory.registerEditor("expression", function(
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(property, "expression");
 });
