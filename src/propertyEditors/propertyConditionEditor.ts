@@ -205,15 +205,17 @@ export function doGetCompletions(
       prevIdentifier === "row" &&
       currentQuestion instanceof Survey.MatrixDropdownColumn
     ) {
-      completions = currentQuestion.colOwner["columns"].map(column => {
-        return {
-          name: "",
-          value: "{row." + column.name + "}",
-          some: "",
-          meta: column.title,
-          identifierRegex: ID_REGEXP
-        };
-      });
+      completions = currentQuestion.colOwner["columns"]
+        .filter(e => e.name !== currentQuestion.name)
+        .map(column => {
+          return {
+            name: "",
+            value: "{row." + column.name + "}",
+            some: "",
+            meta: column.title,
+            identifierRegex: ID_REGEXP
+          };
+        });
     } else if (
       prevIdentifier === "panel" &&
       currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
@@ -232,17 +234,11 @@ export function doGetCompletions(
         });
     } else {
       var operationsFiltered = operations.filter(
-        op => op.value.indexOf(prefix) !== -1
+        op => !prefix || op.value.indexOf(prefix) !== -1
       );
-      if (operationsFiltered.length === 0) {
-        operationsFiltered = operations;
-      }
       var questionsFiltered = usableQuestions.filter(
-        op => op.name.indexOf(prefix) !== -1
+        op => !prefix || op.name.indexOf(prefix) !== -1
       );
-      if (questionsFiltered.length === 0) {
-        questionsFiltered = usableQuestions;
-      }
       if (currentQuestion instanceof Survey.MatrixDropdownColumn) {
         completions.push({
           name: "",
