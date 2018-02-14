@@ -185,6 +185,139 @@ const createAnnotations = (
 
 var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
 
+export function doGetCompletions(
+  prevIdentifier: string,
+  prefix: string,
+  config: { question: Survey.QuestionBase; questions: Survey.Question[] },
+  completer = null
+) {
+  var completions = [];
+  var currentQuestion: Survey.QuestionBase = config.question;
+  var usableQuestions = (config.questions || []).filter(
+    q => q !== currentQuestion
+  );
+  if (
+    !!usableQuestions ||
+    currentQuestion instanceof Survey.MatrixDropdownColumn ||
+    currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
+  ) {
+    if (
+      prevIdentifier === "row" &&
+      currentQuestion instanceof Survey.MatrixDropdownColumn
+    ) {
+      completions = currentQuestion.colOwner["columns"].map(column => {
+        return {
+          name: "",
+          value: "{row." + column.name + "}",
+          some: "",
+          meta: column.title,
+          identifierRegex: ID_REGEXP
+        };
+      });
+    } else if (
+      prevIdentifier === "panel" &&
+      currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
+    ) {
+      var panel: Survey.PanelModel = currentQuestion.data.panel;
+      completions = panel.elements
+        .filter(e => e.name !== currentQuestion.name)
+        .map(element => {
+          return {
+            name: "",
+            value: "{panel." + element.name + "}",
+            some: "",
+            meta: element.name,
+            identifierRegex: ID_REGEXP
+          };
+        });
+    } else {
+      var operationsFiltered = operations.filter(
+        op => op.value.indexOf(prefix) !== -1
+      );
+      if (operationsFiltered.length === 0) {
+        operationsFiltered = operations;
+      }
+      var questionsFiltered = usableQuestions.filter(
+        op => op.name.indexOf(prefix) !== -1
+      );
+      if (questionsFiltered.length === 0) {
+        questionsFiltered = usableQuestions;
+      }
+      if (currentQuestion instanceof Survey.MatrixDropdownColumn) {
+        completions.push({
+          name: "",
+          value: "{row.",
+          some: "",
+          meta: editorLocalization.editorLocalization.getString(
+            editorLocalization.defaultStrings.pe.aceEditorRowTitle
+          ),
+          identifierRegex: ID_REGEXP
+        });
+      } else if (
+        currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
+      ) {
+        completions.push({
+          name: "",
+          value: "{panel.",
+          some: "",
+          meta: editorLocalization.editorLocalization.getString(
+            editorLocalization.defaultStrings.pe.aceEditorPanelTitle
+          ),
+          identifierRegex: ID_REGEXP
+        });
+      }
+      completions = completions
+        .concat(
+          questionsFiltered.map(q => {
+            return {
+              completer: completer,
+              name: "",
+              value: "{" + q.name + "}",
+              some: "",
+              meta: q.title,
+              identifierRegex: ID_REGEXP
+            };
+          })
+        )
+        .concat(
+          operationsFiltered.map(op => {
+            return {
+              name: "",
+              value: op.value,
+              some: "",
+              meta: op.title,
+              identifierRegex: ID_REGEXP
+            };
+          })
+        );
+    }
+  }
+  return completions;
+}
+
+export function insertMatch(editor, data) {
+  if (editor.completer.completions.filterText) {
+    var allRanges = editor.selection.getAllRanges();
+    for (
+      var rangeIndex = 0, range;
+      (range = allRanges[rangeIndex]);
+      rangeIndex++
+    ) {
+      range.start.column -= editor.completer.completions.filterText.length;
+      var rangeText = editor.session.getTextRange(range);
+      if (rangeText.indexOf("{") !== 0) {
+        var extRange = range.clone();
+        extRange.start.column--;
+        if (editor.session.getTextRange(extRange).indexOf("{") === 0) {
+          range = extRange;
+        }
+      }
+      editor.session.remove(range);
+    }
+  }
+  editor.execCommand("insertstring", data.value || data);
+}
+
 ko.bindingHandlers.aceEditor = {
   init: function(element, options) {
     var configs = options();
@@ -221,147 +354,19 @@ ko.bindingHandlers.aceEditor = {
 
     var completer = {
       identifierRegexps: [ID_REGEXP],
-      insertMatch: (editor, data) => {
-        if (editor.completer.completions.filterText) {
-          var allRanges = editor.selection.getAllRanges();
-          for (
-            var rangeIndex = 0, range;
-            (range = allRanges[rangeIndex]);
-            rangeIndex++
-          ) {
-            range.start.column -=
-              editor.completer.completions.filterText.length;
-            var rangeText = editor.session.getTextRange(range);
-            if (rangeText.indexOf("{") !== 0) {
-              var extRange = range.clone();
-              extRange.start.column--;
-              if (editor.session.getTextRange(extRange).indexOf("{") === 0) {
-                range = extRange;
-              }
-            }
-            editor.session.remove(range);
-          }
-        }
-        editor.execCommand("insertstring", data.value || data);
-      },
+      insertMatch: insertMatch,
       getCompletions: (editor, session, pos, prefix, callback) => {
-        var configs = options();
-        var currentQuestion: Survey.QuestionBase = configs.question;
-        var usableQuestions = (configs.questions || []).filter(
-          q => q !== currentQuestion
+        var prevIdentifier = langUtils.retrievePrecedingIdentifier(
+          session.getLine(pos.row),
+          pos.column - 1
         );
-        if (
-          !!usableQuestions ||
-          currentQuestion instanceof Survey.MatrixDropdownColumn ||
-          currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
-        ) {
-          if (
-            langUtils.retrievePrecedingIdentifier(
-              session.getLine(pos.row),
-              pos.column - 1
-            ) === "row" &&
-            currentQuestion instanceof Survey.MatrixDropdownColumn
-          ) {
-            callback(
-              null,
-              currentQuestion.colOwner["columns"].map(column => {
-                return {
-                  name: "",
-                  value: "{row." + column.name + "}",
-                  some: "",
-                  meta: column.title,
-                  identifierRegex: ID_REGEXP
-                };
-              })
-            );
-          } else if (
-            langUtils.retrievePrecedingIdentifier(
-              session.getLine(pos.row),
-              pos.column - 1
-            ) === "panel" &&
-            currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
-          ) {
-            var panel: Survey.PanelModel = currentQuestion.data.panel;
-            callback(
-              null,
-              panel.elements
-                .filter(e => e.name !== currentQuestion.name)
-                .map(element => {
-                  return {
-                    name: "",
-                    value: "{panel." + element.name + "}",
-                    some: "",
-                    meta: element.name,
-                    identifierRegex: ID_REGEXP
-                  };
-                })
-            );
-          } else {
-            var operationsFiltered = operations.filter(
-              op => op.value.indexOf(prefix) !== -1
-            );
-            if (operationsFiltered.length === 0) {
-              operationsFiltered = operations;
-            }
-            var questionsFiltered = usableQuestions.filter(
-              op => op.name.indexOf(prefix) !== -1
-            );
-            if (questionsFiltered.length === 0) {
-              questionsFiltered = usableQuestions;
-            }
-            var completions = [];
-            if (currentQuestion instanceof Survey.MatrixDropdownColumn) {
-              completions.push({
-                name: "",
-                value: "{row.",
-                some: "",
-                meta: editorLocalization.editorLocalization.getString(
-                  editorLocalization.defaultStrings.pe.aceEditorRowTitle
-                ),
-                identifierRegex: ID_REGEXP
-              });
-            } else if (
-              currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
-            ) {
-              completions.push({
-                name: "",
-                value: "{panel.",
-                some: "",
-                meta: editorLocalization.editorLocalization.getString(
-                  editorLocalization.defaultStrings.pe.aceEditorPanelTitle
-                ),
-                identifierRegex: ID_REGEXP
-              });
-            }
-            completions = completions
-              .concat(
-                questionsFiltered.map(q => {
-                  return {
-                    completer: completer,
-                    name: "",
-                    value: "{" + q.name + "}",
-                    some: "",
-                    meta: q.title,
-                    identifierRegex: ID_REGEXP
-                  };
-                })
-              )
-              .concat(
-                operationsFiltered.map(op => {
-                  return {
-                    name: "",
-                    value: op.value,
-                    some: "",
-                    meta: op.title,
-                    identifierRegex: ID_REGEXP
-                  };
-                })
-              );
-            callback(null, completions);
-          }
-          return;
-        }
-        callback(null, []);
+        var completions = doGetCompletions(
+          prevIdentifier,
+          prefix,
+          configs,
+          completer
+        );
+        callback(null, completions);
       }
     };
     langTools.setCompleters([completer]);
