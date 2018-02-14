@@ -252,7 +252,8 @@ ko.bindingHandlers.aceEditor = {
         );
         if (
           !!usableQuestions ||
-          currentQuestion instanceof Survey.MatrixDropdownColumn
+          currentQuestion instanceof Survey.MatrixDropdownColumn ||
+          currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
         ) {
           if (
             langUtils.retrievePrecedingIdentifier(
@@ -272,6 +273,28 @@ ko.bindingHandlers.aceEditor = {
                   identifierRegex: ID_REGEXP
                 };
               })
+            );
+          } else if (
+            langUtils.retrievePrecedingIdentifier(
+              session.getLine(pos.row),
+              pos.column - 1
+            ) === "panel" &&
+            currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
+          ) {
+            var panel: Survey.PanelModel = currentQuestion.data.panel;
+            callback(
+              null,
+              panel.elements
+                .filter(e => e.name !== currentQuestion.name)
+                .map(element => {
+                  return {
+                    name: "",
+                    value: "{panel." + element.name + "}",
+                    some: "",
+                    meta: element.name,
+                    identifierRegex: ID_REGEXP
+                  };
+                })
             );
           } else {
             var operationsFiltered = operations.filter(
@@ -294,6 +317,18 @@ ko.bindingHandlers.aceEditor = {
                 some: "",
                 meta: editorLocalization.editorLocalization.getString(
                   editorLocalization.defaultStrings.pe.aceEditorRowTitle
+                ),
+                identifierRegex: ID_REGEXP
+              });
+            } else if (
+              currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
+            ) {
+              completions.push({
+                name: "",
+                value: "{panel.",
+                some: "",
+                meta: editorLocalization.editorLocalization.getString(
+                  editorLocalization.defaultStrings.pe.aceEditorPanelTitle
                 ),
                 identifierRegex: ID_REGEXP
               });
