@@ -48,7 +48,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public koIsDefault: any;
   public koHasError: any;
   public koErrorText: any;
-  public showDisplayName: boolean = false;
+  public isTabProperty: boolean = false;
+  public isInplaceProperty: boolean = false;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public setup() {}
@@ -94,7 +95,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return this.titleValue;
   }
   public get isDiplayNameVisible() {
-    return this.showDisplayName && this.displayName !== ".";
+    return (
+      !this.isTabProperty && !this.isInplaceProperty && this.displayName !== "."
+    );
   }
   public get displayName(): string {
     return this.displayNameValue;

@@ -184,6 +184,7 @@ export var defaultStrings = {
     maxRateDescription: "Maximum rate description",
     inputType: "Input type",
     optionsCaption: "Options caption",
+    defaultValue: "Default value",
 
     surveyEditorTitle: "Edit survey",
     qEditorTitle: "Edit question: {0}",

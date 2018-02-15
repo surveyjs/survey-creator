@@ -197,6 +197,7 @@ export class SurveyPropertyItemValuesEditorCell {
       this.property,
       propEvent
     );
+    this.objectPropertyValue.editor.isInplaceProperty = true;
     this.objectProperty.object = item;
   }
   public get property(): Survey.JsonObjectProperty {

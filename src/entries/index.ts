@@ -63,17 +63,17 @@ export { SurveyObjects } from "../surveyObjects";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export {
-  SurveyQuestionEditorGeneralProperties,
-  SurveyQuestionEditorGeneralRow,
-  SurveyQuestionEditorGeneralProperty
-} from "../questionEditors/questionEditorGeneralProperties";
+  SurveyQuestionEditorProperties,
+  SurveyQuestionEditorRow,
+  SurveyQuestionEditorProperty
+} from "../questionEditors/questionEditorProperties";
 export {
   SurveyQuestionEditorDefinition
 } from "../questionEditors/questionEditorDefinition";
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTabGeneral
+  SurveyQuestionEditorTab
 } from "../questionEditors/questionEditor";
 
 export { QuestionToolbox } from "../questionToolbox";

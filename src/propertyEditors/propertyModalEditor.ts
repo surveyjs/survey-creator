@@ -124,7 +124,6 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     };
   }
   public setup() {
-    this.showDisplayName = false;
     this.beforeShowModal();
   }
   public get isModal(): boolean {
@@ -201,7 +200,6 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
   }
   public setup() {
     super.setup();
-    this.showDisplayName = true;
   }
   public getValueText(value: any): string {
     if (!value) return null;
@@ -240,7 +238,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public setup() {
     super.setup();
-    this.showDisplayName = false;
   }
   public insertQuestion(question, element) {
     var textarea = element.parentNode.parentNode.parentNode.querySelector(
