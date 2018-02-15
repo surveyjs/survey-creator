@@ -30,7 +30,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public setup() {
     super.setup();
-    this.showDisplayName = false;
   }
 }
 

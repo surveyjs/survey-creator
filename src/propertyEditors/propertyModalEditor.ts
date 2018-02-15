@@ -226,27 +226,6 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
   }
 }
 
-export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
-  constructor(property: Survey.JsonObjectProperty, private _type: string) {
-    super(property);
-  }
-  public get editorType(): string {
-    return this._type;
-  }
-  public get availableQuestions(): any[] {
-    return (this.object && this.object.survey.getAllQuestions()) || [];
-  }
-  public setup() {
-    super.setup();
-  }
-  public insertQuestion(question, element) {
-    var textarea = element.parentNode.parentNode.parentNode.querySelector(
-      "textarea"
-    );
-    insertAtCursor(textarea, "{" + question.name + "}");
-  }
-}
-
 SurveyPropertyEditorFactory.registerEditor("text", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
