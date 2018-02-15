@@ -1,34 +1,34 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyPropertyEditorBase } from "../src/propertyEditors/propertyEditorBase";
+import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEditorBase";
 import {
   SurveyPropertyItemValuesEditor,
   SurveyPropertyItemValuesEditorColumn,
   SurveyPropertyItemValuesEditorCell,
   SurveyPropertyItemValuesEditorItem
-} from "../src/propertyEditors/propertyItemValuesEditor";
-import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/propertyMultipleValuesEditor";
-import { SurveyPropertyDropdownColumnsEditor } from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
-import { SurveyObjectProperty } from "../src/objectProperty";
-import { SurveyPropertyTextEditor } from "../src/propertyEditors/propertyModalEditor";
-import { SurveyPropertyResultfullEditor } from "../src/propertyEditors/propertyRestfullEditor";
-import { ISurveyObjectEditorOptions } from "../src/propertyEditors/propertyEditorBase";
-import "../src/propertyEditors/propertyTextItemsEditor";
+} from "../../src/propertyEditors/propertyItemValuesEditor";
+import { SurveyPropertyMultipleValuesEditor } from "../../src/propertyEditors/propertyMultipleValuesEditor";
+import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
+import { SurveyObjectProperty } from "../../src/objectProperty";
+import { SurveyPropertyTextEditor } from "../../src/propertyEditors/propertyModalEditor";
+import { SurveyPropertyResultfullEditor } from "../../src/propertyEditors/propertyRestfullEditor";
+import { ISurveyObjectEditorOptions } from "../../src/propertyEditors/propertyEditorBase";
+import "../../src/propertyEditors/propertyTextItemsEditor";
 import {
   SurveyPropertyTriggersEditor,
   SurveyPropertyVisibleTrigger
-} from "../src/propertyEditors/propertyTriggersEditor";
+} from "../../src/propertyEditors/propertyTriggersEditor";
 import {
   SurveyPropertyValidatorsEditor,
   SurveyPropertyValidatorItem
-} from "../src/propertyEditors/propertyValidatorsEditor";
-import { SurveyPropertyCustomEditor } from "../src/propertyEditors/propertyCustomEditor";
-import { Extentions } from "../src/extentions";
+} from "../../src/propertyEditors/propertyValidatorsEditor";
+import { SurveyPropertyCustomEditor } from "../../src/propertyEditors/propertyCustomEditor";
+import { Extentions } from "../../src/extentions";
 import {
   SurveyPropertyEditorFactory,
   SurveyDropdownPropertyEditor
-} from "../src/propertyEditors/propertyEditorFactory";
-import { defaultStrings } from "../src/editorLocalization";
+} from "../../src/propertyEditors/propertyEditorFactory";
+import { defaultStrings } from "../../src/editorLocalization";
 import RModal from "rmodal";
 
 export default QUnit.module("PropertyEditorsTests");
