@@ -128,6 +128,7 @@ export class SurveyObjectEditor {
         propEvent,
         this.propertyEditorOptions
       );
+      objectProperty.editor.isInplaceProperty = true;
       objectProperties.push(objectProperty);
     }
     this.koProperties(objectProperties);
