@@ -92,9 +92,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * You have right to set this property to true if you have bought the commercial licence only.
    * It will remove the text about uncommerical usage on the top of the widget.
    * Setting this property true without having a commercial licence is illegal.
-   * @see haveCommercialLicence
+   * @see haveCommercialLicense
    */
-  public haveCommercialLicence: false;
+  public haveCommercialLicense: false;
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
@@ -707,9 +707,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
         : false;
-    this.haveCommercialLicence =
-      typeof options.haveCommercialLicence !== "undefined"
-        ? options.haveCommercialLicence
+    this.haveCommercialLicense =
+      typeof options.haveCommercialLicense !== "undefined"
+        ? options.haveCommercialLicense
         : false;
     this.koShowOptions(
       typeof options.showOptions !== "undefined" ? options.showOptions : false
