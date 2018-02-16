@@ -60,6 +60,7 @@ export interface IToolbarItem {
  */
 export class SurveyEditor implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
+  private _haveCommercialLicense = ko.observable(false);
   private renderedElement: HTMLElement;
   private surveyjs: HTMLElement;
 
@@ -94,7 +95,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Setting this property true without having a commercial licence is illegal.
    * @see haveCommercialLicense
    */
-  public haveCommercialLicense: false;
+  public get haveCommercialLicense() {
+    return this._haveCommercialLicense();
+  }
+  public set haveCommercialLicense(val) {
+    this._haveCommercialLicense(val);
+  }
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab

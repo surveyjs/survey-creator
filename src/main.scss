@@ -407,3 +407,21 @@
     }
   }
 }
+
+.svd_container {
+  .svd_commercial_container {
+    padding: 1em 0 0 2em;
+    .svd_commercial_text {
+      font-weight: bold;
+      text-decoration: none;
+
+      .svd_commercial_product {
+        color: $main-color;
+        padding-left: 0.5em;
+      }
+      .svd_commercial_company {
+        color: $light-text-color;
+      }
+    }
+  }
+}

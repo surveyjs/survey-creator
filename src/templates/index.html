@@ -1,4 +1,13 @@
 ﻿<div class="svd_container">
+    <!-- ko ifnot: haveCommercialLicense -->
+    <div class="svd_commercial_container">
+        <a class="svd_commercial_text" href="https://surveyjs.io/Licenses#BuildSurvey" target="_blank">
+            <span class="icon-commercial"></span>
+            <span class="svd_commercial_product">SurveyJS Builder</span>
+            <span class="svd_commercial_company">by DevSoftBaltic</span>
+        </a>
+    </div>
+    <!-- /ko  -->
     <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
         <li class="nav-item" data-bind="css: {active: koViewType() == 'designer'}">
             <a class="nav-link" href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a>
