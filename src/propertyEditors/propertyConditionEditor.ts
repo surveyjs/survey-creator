@@ -362,6 +362,12 @@ ko.bindingHandlers.aceEditor = {
           completer
         );
         callback(null, completions);
+      },
+      getDocTooltip: function(item) {
+        item.docHTML =
+          "<div style='max-width: 300px; white-space: normal;'>" +
+          item.meta +
+          "</div>";
       }
     };
     langTools.setCompleters([completer]);
