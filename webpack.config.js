@@ -10,18 +10,18 @@ var packageJson = require("./package.json");
 var fs = require("fs");
 
 var banner = [
-  "surveyjs Editor v" + packageJson.version,
+  "surveyjs Builder(Editor) v" + packageJson.version,
   "(c) Devsoft Baltic O� - http://surveyjs.io/",
-  "Github - https://github.com/surveyjs/editor",
-  "License: (http://editor.surveyjs.io/license.html)"
+  "Github: https://github.com/surveyjs/editor",
+  "License: https://surveyjs.io/Licenses#BuildSurvey"
 ].join("\n");
 
 var dts_banner = [
-  "Type definitions for Surveyjs Editor JavaScript library v" +
+  "Type definitions for Surveyjs Builder(Editor) JavaScript library v" +
     packageJson.version,
   "(c) Devsoft Baltic O� - http://surveyjs.io/",
-  "Github - https://github.com/surveyjs/editor",
-  "License: (http://editor.surveyjs.io/license.html)",
+  "Github: https://github.com/surveyjs/editor",
+  "License: https://surveyjs.io/Licenses#BuildSurvey",
   ""
 ].join("\n");
 
@@ -29,10 +29,10 @@ var packagePlatformJson = {
   name: "surveyjs-editor",
   version: packageJson.version,
   description:
-    "Use surveyjs Editor to create or edit JSON for surveyjs library.",
-  keywords: ["Survey", "JavaScript", "Editor", "surveyjs"],
-  homepage: "http://editor.surveyjs.io",
-  license: "http://editor.surveyjs.io/license.html",
+    "Use surveyjs Builder(Editor) to create or edit JSON for surveyjs library.",
+  keywords: ["Survey", "JavaScript", "Editor", "Builder", "surveyjs"],
+  homepage: "https://surveyjs.io/Builder",
+  license: "https://surveyjs.io/Licenses#BuildSurvey",
   files: [
     "surveyeditor.css",
     "surveyeditor.js",
@@ -155,6 +155,9 @@ module.exports = function(options) {
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version)
       }),
+      new webpack.BannerPlugin({
+        banner: banner
+      }),
       extractCSS
     ],
     devtool: "inline-source-map"
@@ -164,7 +167,6 @@ module.exports = function(options) {
     config.devtool = false;
     config.plugins = config.plugins.concat([
       new webpack.optimize.UglifyJsPlugin(),
-      new webpack.BannerPlugin(banner),
       new GenerateJsonPlugin(
         packagePath + "package.json",
         packagePlatformJson,
