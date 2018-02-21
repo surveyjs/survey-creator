@@ -105,3 +105,4 @@ import "../localization/portuguese";
 import "../localization/italian";
 import "../localization/simplified-chinese";
 import "../localization/persian";
+import "../localization/polish";
