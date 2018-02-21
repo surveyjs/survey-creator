@@ -259,7 +259,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         "svd_editor_control"
       );
       if (elements.length > 0) {
-        setTimeout(() => elements[0].focus(), 1);
+        setTimeout(() => elements[0].focus({ preventScroll: true }), 1);
       }
     }
   }
