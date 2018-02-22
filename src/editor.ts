@@ -91,7 +91,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
-   * It will remove the text about uncommerical usage on the top of the widget.
+   * It will remove the text about non-commerical usage on the top of the widget.
    * Setting this property true without having a commercial licence is illegal.
    * @see haveCommercialLicense
    */

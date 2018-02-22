@@ -53,7 +53,10 @@ export class SurveyPropertyEditorShowWindow {
       bodyClass: "",
       closeTimeout: 100,
       dialogOpenClass: "animated fadeIn",
-      focus: false
+      focus: false,
+      afterClose: function() {
+        if (onClosed) onClosed();
+      }
     });
     modal.open();
 
@@ -67,7 +70,6 @@ export class SurveyPropertyEditorShowWindow {
 
     editor.onHideWindow = function() {
       modal.close();
-      if (onClosed) onClosed();
     };
   }
 }
