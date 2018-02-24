@@ -33,9 +33,9 @@
       input[type="checkbox"].form-control {
         width: 25px;
       }
-      .table {
+      .table.svd_properties_grid {
         color: $text-color;
-        td {
+        >tbody>tr>td {
           border: none;
           padding: 0;
           line-height: 3.25em;
