@@ -4,10 +4,6 @@ import { DragDropTargetElement } from "../src/dragdrophelper";
 
 export default QUnit.module("Drag and Drop Tests");
 
-QUnit.test("dummy test", function(assert) {
-  assert.equal(1, 1);
-});
-
 QUnit.test("Show/hide new created item, simple test", function(assert) {
   var survey = new Survey.Survey();
   var page = <Survey.Page>survey.addNewPage("p1");

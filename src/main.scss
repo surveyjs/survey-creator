@@ -151,6 +151,13 @@
           background-color: $light-bg-color;
           height: $editor-height;
           overflow-y: scroll;
+
+          .empty-message {
+            text-align: center;
+            line-height: 60vh;
+            font-size: 22px;
+          }
+
           .panel-body,
           .card-block {
             .svd_question {

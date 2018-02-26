@@ -232,6 +232,7 @@ function elementOnAfterRendering(
     if (!e["markEvent"]) {
       e["markEvent"] = true;
       self.dragDropHelper().doDragDropOver(e, self, true);
+      return false;
     }
   };
   el.ondrop = function(e) {
@@ -299,9 +300,9 @@ Survey.Page.prototype["onAfterRenderPage"] = function(el) {
   el.ondrop = function(e) {
     dragDropHelper.doDrop(e);
   };
-  if (this.elements.length == 0) {
-    this.emptyElement = addEmptyPanelElement(el, dragDropHelper, self);
-  }
+  // if (this.elements.length == 0) {
+  //   this.emptyElement = addEmptyPanelElement(el, dragDropHelper, self);
+  // }
 };
 
 Survey.Panel.prototype["onCreating"] = function() {

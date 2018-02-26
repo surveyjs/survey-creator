@@ -1210,6 +1210,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private initSurvey(json: any) {
     var self = this;
     this.surveyValue = new SurveyForDesigner();
+    this.surveyValue.onAfterRenderPage.add((sender: Survey.Survey, options) => {
+      this.isCurrentPageEmpty(!this.survey.currentPage || this.survey.currentPage.elements.length == 0)
+    });
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
@@ -1347,6 +1350,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     json.type = element.getType();
     return this.createNewElement(json);
   }
+  public isCurrentPageEmpty = ko.observable(true);
   private createNewElement(json: any): Survey.IElement {
     var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);
