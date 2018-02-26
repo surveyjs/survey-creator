@@ -96,7 +96,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public get isDiplayNameVisible() {
     return (
-      !this.isTabProperty && !this.isInplaceProperty && this.displayName !== "."
+      (!this.isTabProperty || !this.isModal) &&
+      !this.isInplaceProperty &&
+      this.displayName !== "."
     );
   }
   public get displayName(): string {
