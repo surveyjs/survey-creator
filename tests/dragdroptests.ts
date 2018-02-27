@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { DragDropTargetElement } from "../src/dragdrophelper";
+import { DragDropTargetElement, DragDropHelper } from "../src/dragdrophelper";
 
 export default QUnit.module("Drag and Drop Tests");
 
@@ -94,6 +94,28 @@ QUnit.test("Show/hide/create for empty page", function(assert) {
   dragTarget.doDrop();
   assert.equal(page.questions.length, 1, "one question now");
   assert.equal(page.questions[0].name, "qt", "A new question");
+});
+
+QUnit.test("Replace target element", function(assert) {
+  var survey = new Survey.Survey();
+  var page = <Survey.Page>survey.addNewPage("p1");
+  var ddhelper = new DragDropHelper(survey, null);
+  var target = new Survey.QuestionText("qt");
+
+  var result = ddhelper.replaceTargetElement(page);
+  assert.equal(result, page);
+
+  var result = ddhelper.replaceTargetElement(target);
+  assert.equal(result, target);
+
+  page.addElement(target);
+  var result = ddhelper.replaceTargetElement(page);
+  assert.equal(result, target);
+
+  var target1 = new Survey.QuestionBoolean("qb");
+  page.addElement(target1);
+  var result = ddhelper.replaceTargetElement(page);
+  assert.equal(result, target1);
 });
 
 QUnit.test("Move item startWithNewLine=false", function(assert) {

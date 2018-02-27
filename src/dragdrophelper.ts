@@ -289,14 +289,14 @@ export class DragDropHelper {
     )
       return;
 
-    element = this.replaceDragElement(element);
+    element = this.replaceTargetElement(element);
 
     var bottomInfo = this.isBottom(event, element);
     isEdge = element.isPanel ? isEdge && bottomInfo.isEdge : true;
     if (element.isPanel && !isEdge && element.elements.length > 0) return;
     this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
   }
-  private replaceDragElement(element) {
+  public replaceTargetElement(element) {
     if (
       element.getType &&
       element.getType() === "page" &&
