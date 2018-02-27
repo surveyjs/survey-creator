@@ -16,6 +16,12 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
+      &:hover {
+        -webkit-box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
+        -moz-box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
+        box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
+      }
       .svd_toolbox_item_text {
         margin-left: 1em;
       }
