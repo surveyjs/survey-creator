@@ -12,6 +12,6 @@ test(`check d&d`, async t => {
     () => document.querySelectorAll(".svd_container .svd_question ").length
   );
 
-  await t.dragToElement(`[title~=Radiogroup]`, `.svd_container .well`);
+  await t.dragToElement(`[title~=Radiogroup]`, `.svd_container .svd_questions_editor`);
   assert.equal(await getQuestionsAddedCount(), 1);
 });
