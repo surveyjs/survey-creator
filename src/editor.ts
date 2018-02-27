@@ -73,7 +73,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   private undoRedo: SurveyUndoRedo;
-  private surveyValue: SurveyForDesigner;
+  private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
     onSaveCallback: (no: number, isSuccess: boolean) => void
@@ -744,7 +744,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * The editing survey object (Survey.Survey)
    */
   public get survey(): SurveyForDesigner {
-    return this.surveyValue;
+    return this.surveyValue();
   }
   public get selectedObjectEditor(): SurveyObjectEditor {
     return this.selectedObjectEditorValue;
@@ -866,7 +866,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.undoRedo.clear();
     }
     var selObj = this.koSelectedObject() ? this.koSelectedObject().value : null;
-    this.undoRedo.setCurrent(this.surveyValue, selObj ? selObj.name : null);
+    this.undoRedo.setCurrent(this.surveyValue(), selObj ? selObj.name : null);
   }
   /**
    * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
@@ -966,7 +966,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public addPage() {
     var name = SurveyHelper.getNewPageName(this.survey.pages);
-    var page = <Survey.Page>this.surveyValue.addNewPage(name);
+    var page = <Survey.Page>this.surveyValue().addNewPage(name);
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
   }
@@ -991,7 +991,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     });
   }
   private addPageToUI(page: Survey.Page) {
-    this.pagesEditor.survey = this.surveyValue;
+    this.pagesEditor.survey = this.surveyValue();
     this.surveyObjects.addPage(page);
   }
   private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
@@ -1209,10 +1209,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue = new SurveyForDesigner();
-    this.surveyValue.onAfterRenderPage.add((sender: Survey.Survey, options) => {
-      this.isCurrentPageEmpty(!this.survey.currentPage || this.survey.currentPage.elements.length == 0)
-    });
+    this.surveyValue(new SurveyForDesigner());
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
@@ -1220,15 +1217,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       this.renderedElement
     );
-    this.surveyValue["setJsonObject"](json); //TODO
-    if (this.surveyValue.isEmpty) {
-      this.surveyValue["setJsonObject"](this.getDefaultSurveyJson()); //TODO
+    this.surveyValue()["setJsonObject"](json); //TODO
+    if (this.surveyValue().isEmpty) {
+      this.surveyValue()["setJsonObject"](this.getDefaultSurveyJson()); //TODO
     }
-    this.surveyValue["dragDropHelper"] = this.dragDropHelper;
-    this.surveyValue.onUpdateElementAllowingOptions = function(options) {
+    this.surveyValue()["dragDropHelper"] = this.dragDropHelper;
+    this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
     };
-    this.surveyValue.onGetMenuItems.add((sender, options) => {
+    this.surveyValue().onGetMenuItems.add((sender, options) => {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
       if (opts.allowAddToToolbox) {
@@ -1284,40 +1281,42 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       self.onDefineElementMenuItems.fire(self, options);
     });
 
-    this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue });
+    this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue() });
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
     this.pagesEditor.survey = this.survey;
     this.pagesEditor.setSelectedPage(<Survey.Page>this.survey.currentPage);
-    this.surveyValue.onSelectedElementChanged.add(
+    this.surveyValue().onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
         self.surveyObjects.selectObject(sender["selectedElement"]);
       }
     );
-    this.surveyValue.onEditButtonClick.add((sender: Survey.Survey) => {
+    this.surveyValue().onEditButtonClick.add((sender: Survey.Survey) => {
       self.showQuestionEditor(self.koSelectedObject().value);
     });
-    this.surveyValue.onProcessHtml.add((sender: Survey.Survey, options) => {
+    this.surveyValue().onProcessHtml.add((sender: Survey.Survey, options) => {
       options.html = self.processHtml(options.html);
     });
-    this.surveyValue.onCurrentPageChanged.add(
+    this.surveyValue().onCurrentPageChanged.add(
       (sender: Survey.Survey, options) => {
         self.pagesEditor.setSelectedPage(<Survey.Page>sender.currentPage);
       }
     );
-    this.surveyValue.onQuestionAdded.add((sender: Survey.Survey, options) => {
+    this.surveyValue().onQuestionAdded.add((sender: Survey.Survey, options) => {
       self.doOnQuestionAdded(options.question, options.parentPanel);
     });
-    this.surveyValue.onQuestionRemoved.add((sender: Survey.Survey, options) => {
-      self.doOnElementRemoved(options.question);
-    });
-    this.surveyValue.onPanelAdded.add((sender: Survey.Survey, options) => {
+    this.surveyValue().onQuestionRemoved.add(
+      (sender: Survey.Survey, options) => {
+        self.doOnElementRemoved(options.question);
+      }
+    );
+    this.surveyValue().onPanelAdded.add((sender: Survey.Survey, options) => {
       self.doOnPanelAdded(options.panel, options.parentPanel);
     });
-    this.surveyValue.onPanelRemoved.add((sender: Survey.Survey, options) => {
+    this.surveyValue().onPanelRemoved.add((sender: Survey.Survey, options) => {
       self.doOnElementRemoved(options.panel);
     });
-    var pAdded = <any>this.surveyValue["onPageAdded"];
+    var pAdded = <any>this.surveyValue()["onPageAdded"];
     if (pAdded && pAdded.add) {
       pAdded.add((sender: Survey.Survey, options) => {
         self.doOnPageAdded(options.page);
@@ -1350,7 +1349,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     json.type = element.getType();
     return this.createNewElement(json);
   }
-  public isCurrentPageEmpty = ko.observable(true);
+  public isCurrentPageEmpty = ko.computed(
+    () =>
+      !!this.surveyValue() &&
+      !!this.surveyValue().koCurrentPage() &&
+      this.surveyValue()
+        .koCurrentPage()
+        .koRows().length === 0
+  );
+  public dragOverQuestionsEditor(data, e) {
+    data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
+    return false;
+  }
+  public dropOnQuestionsEditor(data, e) {
+    data.survey.dragDropHelper.doDrop(e);
+  }
   private createNewElement(json: any): Survey.IElement {
     var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);

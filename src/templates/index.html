@@ -44,7 +44,7 @@
                     <!-- /ko -->
                 </div>
                 <div class="svd_pages_editor" data-bind="visible: koShowPagesToolbox, template: { name: 'pageeditor', data: pagesEditor }"></div>
-                <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: function(data, e) { survey.dragDropHelper.doDragDropOver(e, survey.currentPage); return false; }, drop: function(data, e) { survey.dragDropHelper.doDrop(e); } }">
+                <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }">
                     <div id="surveyjs"></div>
                     <!-- ko if: isCurrentPageEmpty -->
                     <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
