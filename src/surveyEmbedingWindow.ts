@@ -187,7 +187,7 @@ export class SurveyEmbedingWindow {
   private getSaveFuncCode() {
     if (this.koHasIds())
       return "    survey.sendResult('" + this.surveyPostId + "');";
-    return "    //send Ajax request to your web server.\n    alert(\"The results are:\" + JSON.stringify(s.data));";
+    return "    //send Ajax request to your web server.\n    alert(\"The results are:\" + JSON.stringify(survey.data));";
   }
   private getJsonText(): string {
     if (this.koHasIds() && this.koLoadSurvey()) {
