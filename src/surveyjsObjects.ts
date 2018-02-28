@@ -279,7 +279,7 @@ function elementOnAfterRendering(
   addAdorner(el, self);
 }
 
-var adornersConfig = { };
+var adornersConfig = {};
 
 export function registerAdorner(name, adorner) {
   adornersConfig[name] = adorner;
@@ -298,9 +298,11 @@ function onUpdateQuestionCssClasses(survey, options) {
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach(element => {
     var selector = "." + adornersConfig[element].getCss();
-    node.querySelectorAll(selector).forEach(domEl => {
-      adornersConfig[element].afterRender(domEl, model);
-    });
+    var elements = node.querySelectorAll(selector);
+
+    if (elements.length > 0) {
+      adornersConfig[element].afterRender(elements, model);
+    }
   });
 }
 

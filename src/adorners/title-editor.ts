@@ -28,6 +28,7 @@ class NameEditorViewModel {
   };
   postEdit = () => {
     this.cancelEdit();
+    this.prevName(this.editingName());
     !!this.valueChanged && this.valueChanged(this.editingName());
   };
   cancelEdit = () => {
@@ -65,13 +66,30 @@ export var titleAdorner = {
   getCss: () => {
     return "title_editable";
   },
-  afterRender: (domEl: HTMLElement, model) => {
+  afterRender: (elements: HTMLElement[], model) => {
     var decoration = document.createElement("span");
     decoration.innerHTML =
       "<title-editor params='name: \"title\", model: $data'></title-editor>";
-    domEl.appendChild(decoration);
+    elements[0].appendChild(decoration);
     ko.applyBindings(model, decoration);
   }
 };
 
 registerAdorner("title", titleAdorner);
+
+export var itemAdorner = {
+  getCss: () => {
+    return "item_editable";
+  },
+  afterRender: (elements: HTMLElement[], model) => {
+    for (var i = 0; i < elements.length; i++) {
+      var decoration = document.createElement("span");
+      decoration.innerHTML =
+        "<title-editor params='name: \"text\", model: $data'></title-editor>";
+      elements[i].appendChild(decoration);
+      ko.applyBindings(model.choices[i], decoration);
+    }
+  }
+};
+
+registerAdorner("item", itemAdorner);

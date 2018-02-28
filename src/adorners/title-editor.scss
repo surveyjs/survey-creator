@@ -1,11 +1,13 @@
-.title_editable {
+.title_editable,
+.item_editable {
   pointer-events: all;
   .svda-title-editor-start {
     cursor: pointer;
     visibility: hidden;
   }
 }
-.title_editable:hover {
+.title_editable:hover,
+.item_editable:hover {
   .svda-title-editor-start {
     visibility: visible;
   }
