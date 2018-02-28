@@ -1,0 +1,14 @@
+<div class="svda-content">
+    <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
+        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
+        />
+        <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">✓</span>
+        <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span>
+    </span>
+    <span class="svda-title-editor-content svda-title-editor-start" data-bind="visible: !isEditing()">
+        <span style="display: none;" data-bind="text: editingName"></span>
+        <span class="edit-survey-name" data-bind="click: startEdit" title="Change Name">
+            <img class="svda-edit-icon" src="/src/images/Edit_24x24.svg" />
+        </span>
+    </span>
+</div>

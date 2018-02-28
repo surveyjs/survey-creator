@@ -45,6 +45,7 @@ export class SurveyForDesigner extends Survey.Survey {
     this.editQuestionClick = function() {
       self.onEditButtonClick.fire(self, null);
     };
+    this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -275,6 +276,32 @@ function elementOnAfterRendering(
     self.addonsElement.style.display = self.koIsSelected() ? "" : "none";
     el.appendChild(self.addonsElement);
   }
+  addAdorner(el, self);
+}
+
+var adornersConfig = { };
+
+export function registerAdorner(name, adorner) {
+  adornersConfig[name] = adorner;
+}
+
+function onUpdateQuestionCssClasses(survey, options) {
+  var classes = options.cssClasses;
+  Object.keys(adornersConfig).forEach(element => {
+    // if (options.question.getType() === "checkbox") {
+    //   classes.root = "sq-root sq-root-cb";
+    // }
+    classes[element] = adornersConfig[element].getCss();
+  });
+}
+
+function addAdorner(node, model) {
+  Object.keys(adornersConfig).forEach(element => {
+    var selector = "." + adornersConfig[element].getCss();
+    node.querySelectorAll(selector).forEach(domEl => {
+      adornersConfig[element].afterRender(domEl, model);
+    });
+  });
 }
 
 Survey.Page.prototype["onCreating"] = function() {

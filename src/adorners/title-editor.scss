@@ -1,0 +1,33 @@
+.title_editable {
+  pointer-events: all;
+  .svda-title-editor-start {
+    cursor: pointer;
+    visibility: hidden;
+  }
+}
+.title_editable:hover {
+  .svda-title-editor-start {
+    visibility: visible;
+  }
+}
+
+title-editor {
+  display: inline-block;
+
+  .svda-content {
+    position: relative;
+    pointer-events: all;
+
+    .svda-title-editor-content {
+      white-space: nowrap;
+    }
+    .svda-edit-button {
+      padding: 0 5px;
+      cursor: pointer;
+    }
+    .svda-edit-icon {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
