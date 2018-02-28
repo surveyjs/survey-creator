@@ -1430,7 +1430,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
     }
   }
-  private doClickQuestionCore(element: Survey.IElement) {
+  private doClickQuestionCore(
+    element: Survey.IElement,
+    modifiedType: string = "ADDED_FROM_TOOLBOX"
+  ) {
     var parent = this.survey.currentPage;
     var index = -1;
     var elElement = this.survey.selectedElement;
@@ -1445,7 +1448,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         <HTMLElement>this.renderedElement.querySelector("#" + element["id"])
       );
     }
-    this.setModified({ type: "ADDED_FROM_TOOLBOX", question: element });
+    this.setModified({ type: modifiedType, question: element });
   }
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
@@ -1540,7 +1543,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public fastCopyQuestion(question: Survey.Base) {
     var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement);
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
   }
   /**
    * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
