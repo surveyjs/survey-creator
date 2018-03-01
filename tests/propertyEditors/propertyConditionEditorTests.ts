@@ -1,6 +1,9 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { doGetCompletions } from "../../src/propertyEditors/propertyConditionEditor";
+import {
+  doGetCompletions,
+  SurveyPropertyConditionEditor
+} from "../../src/propertyEditors/propertyConditionEditor";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
@@ -121,4 +124,57 @@ QUnit.test("Autocomplete with panel test", function(assert) {
 
   assert.equal(completions.length, 1, "panel completions");
   assert.equal(completions[0].value, "{panel.q2}", "second panel");
+});
+
+QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  question.visibleIf = "ddd";
+  var property = Survey.JsonObject.metaData.findProperty(
+    "questionbase",
+    "visibleIf"
+  );
+  var editor = new SurveyPropertyConditionEditor(property);
+  assert.equal(editor.koIsValid(), true, "The empty value is valid");
+  editor.object = question;
+  assert.equal(
+    editor.koIsValid(),
+    false,
+    "The question.visibleIf was not valid"
+  );
+  editor.koTextValue("{q} = 1");
+  assert.equal(editor.koIsValid(), true, "The condition is value now");
+});
+
+QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  question.visibleIf = "{q} = 1";
+  var property = Survey.JsonObject.metaData.findProperty(
+    "questionbase",
+    "visibleIf"
+  );
+  var editor = new SurveyPropertyConditionEditor(property);
+  assert.equal(editor.koCanAddCondition(), false, "We can't add condition");
+  editor.koAddConditionQuestion("q2");
+  assert.equal(editor.koCanAddCondition(), false, "value is empty");
+  editor.koAddConditionValue("2");
+  assert.equal(editor.koCanAddCondition(), true, "Can add condition");
+  editor.object = question;
+  editor.addCondition();
+  assert.equal(
+    editor.koTextValue(),
+    "{q} = 1 and {q2} equal 2",
+    "condition was added"
+  );
+  assert.equal(editor.koCanAddCondition(), false, "values were reset.");
+  editor.koAddConditionQuestion("q1");
+  editor.koAddConditionValue("1");
+
+  editor.koTextValue("fdfdfdf");
+  editor.addCondition();
+  assert.equal(editor.koTextValue(), "{q1} equal 1", "condition was replaced");
+
+  editor.koAddConditionQuestion("q1");
+  assert.equal(editor.koCanAddCondition(), false, "value is not set");
+  editor.koAddConditionOperator("empty");
+  assert.equal(editor.koCanAddCondition(), true, "empty doesn't require value");
 });

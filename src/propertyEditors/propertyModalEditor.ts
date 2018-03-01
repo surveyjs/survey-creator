@@ -191,6 +191,10 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koTextValue = ko.observable();
+    var self = this;
+    this.koTextValue.subscribe(function(newValue) {
+      self.onkoTextValueChanged(newValue);
+    });
   }
   public get editorType(): string {
     return "text";
@@ -209,6 +213,7 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
     }
     return str;
   }
+  protected onkoTextValueChanged(newValue) {}
   protected onValueChanged() {
     this.koTextValue(this.editingValue);
   }

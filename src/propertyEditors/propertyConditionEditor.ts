@@ -6,12 +6,58 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
+  public availableOperators = [];
+  koIsValid: any;
+  koCanAddCondition: any;
+  koAddConditionQuestion: any;
+  koAddConditionOperator: any;
+  koAddConditionValue: any;
+  koAddConditionType: any;
+  koShowAddConditionType: any;
+  koAddConditionButtonText: any;
+  koAddContionValueEnabled: any;
+  onConditionAddClick: any;
   constructor(
     property: Survey.JsonObjectProperty,
-    private _type: string,
-    public syntaxCheckMethodName: string
+    private _type: string = "condition",
+    public syntaxCheckMethodName: string = "createCondition"
   ) {
     super(property);
+    this.availableOperators = SurveyPropertyEditorFactory.getOperators();
+    this.koIsValid = ko.observable(true);
+    this.koAddConditionQuestion = ko.observable("");
+    this.koAddConditionOperator = ko.observable("");
+    this.koAddConditionValue = ko.observable("");
+    this.koAddConditionType = ko.observable("and");
+    var self = this;
+    this.koCanAddCondition = ko.computed(function() {
+      return (
+        this.koAddConditionQuestion() != "" &&
+        this.koAddConditionQuestion() != undefined &&
+        this.koAddConditionOperator() != "" &&
+        (!this.koAddContionValueEnabled() || this.koAddConditionValue() != "")
+      );
+    }, this);
+    this.koShowAddConditionType = ko.computed(function() {
+      if (!this.koIsValid()) return false;
+      var text = this.koTextValue();
+      if (text) text = text.trim();
+      return text;
+    }, this);
+    this.koAddConditionButtonText = ko.computed(function() {
+      var name = this.koIsValid()
+        ? "conditionButtonAdd"
+        : "conditionButtonReplace";
+      return editorLocalization.editorLocalization.getString("pe." + name);
+    }, this);
+    this.koAddContionValueEnabled = ko.computed(function() {
+      var op = this.koAddConditionOperator();
+      return op != "empty" && op != "notempty";
+    }, this);
+    this.onConditionAddClick = function() {
+      self.addCondition();
+    };
+    this.resetAddConditionValues();
   }
   public get editorType(): string {
     return this._type;
@@ -22,6 +68,14 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     }
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
+  public get allCondtionQuestions(): any[] {
+    var res = [];
+    var questions = this.availableQuestions;
+    for (var i = 0; i < questions.length; i++) {
+      res.push(questions[i].name);
+    }
+    return res;
+  }
   public get hasAceEditor(): boolean {
     return (
       typeof ace !== "undefined" &&
@@ -30,6 +84,42 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public setup() {
     super.setup();
+  }
+  public get addConditionQuestionOptions(): string {
+    return editorLocalization.editorLocalization.getString(
+      "pe.conditionSelectQuestion"
+    );
+  }
+  public addCondition() {
+    if (!this.koCanAddCondition()) return;
+    var text = "";
+    if (this.koShowAddConditionType()) {
+      text = this.koTextValue() + " " + this.koAddConditionType() + " ";
+    }
+    text +=
+      "{" +
+      this.koAddConditionQuestion() +
+      "} " +
+      this.koAddConditionOperator();
+    if (this.koAddContionValueEnabled()) {
+      text += " " + this.koAddConditionValue();
+    }
+    this.koTextValue(text);
+    this.resetAddConditionValues();
+  }
+  protected onkoTextValueChanged(newValue) {
+    if (!newValue) {
+      this.koIsValid(true);
+    } else {
+      var conditionParser: any = new Survey.ConditionsParser();
+      conditionParser[this.syntaxCheckMethodName](newValue);
+      this.koIsValid(!conditionParser.error);
+    }
+  }
+  private resetAddConditionValues() {
+    this.koAddConditionQuestion("");
+    this.koAddConditionOperator("equal");
+    this.koAddConditionValue("");
   }
 }
 
