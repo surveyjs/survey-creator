@@ -162,16 +162,16 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   editor.addCondition();
   assert.equal(
     editor.koTextValue(),
-    "{q} = 1 and {q2} equal 2",
+    "{q} = 1 and {q2} = 2",
     "condition was added"
   );
   assert.equal(editor.koCanAddCondition(), false, "values were reset.");
   editor.koAddConditionQuestion("q1");
-  editor.koAddConditionValue("1");
+  editor.koAddConditionValue("abc");
 
   editor.koTextValue("fdfdfdf");
   editor.addCondition();
-  assert.equal(editor.koTextValue(), "{q1} equal 1", "condition was replaced");
+  assert.equal(editor.koTextValue(), "{q1} = 'abc'", "condition was replaced");
 
   editor.koAddConditionQuestion("q1");
   assert.equal(editor.koCanAddCondition(), false, "value is not set");

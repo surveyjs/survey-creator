@@ -100,12 +100,34 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       "{" +
       this.koAddConditionQuestion() +
       "} " +
-      this.koAddConditionOperator();
+      this.getAddConditionOperator();
     if (this.koAddContionValueEnabled()) {
-      text += " " + this.koAddConditionValue();
+      text += " " + this.getAddConditionValue();
     }
     this.koTextValue(text);
     this.resetAddConditionValues();
+  }
+  private getAddConditionOperator(): string {
+    var op = this.koAddConditionOperator();
+    if (op == "equal") return "=";
+    if (op == "notequal") return "<>";
+    if (op == "greater") return ">";
+    if (op == "less") return "<";
+    if (op == "greaterorequal") return ">=";
+    if (op == "lessorequal") return "<=";
+    return op;
+  }
+  private getAddConditionValue(): string {
+    var val = this.koAddConditionValue();
+    if (!val) return val;
+    if (val == "true" || val == "false") return val;
+    if (!isNaN(val)) return val;
+    if (!this.isQuote(val[0])) val = "'" + val;
+    if (!this.isQuote(val[val.length - 1])) val = val + "'";
+    return val;
+  }
+  private isQuote(ch: string): boolean {
+    return ch == "'" || ch == '"';
   }
   protected onkoTextValueChanged(newValue) {
     if (!newValue) {
