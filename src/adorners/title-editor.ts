@@ -63,7 +63,7 @@ ko.components.register("title-editor", {
 });
 
 export var titleAdorner = {
-  getCss: () => {
+  getMarkerClass: model => {
     return "title_editable";
   },
   afterRender: (elements: HTMLElement[], model) => {
@@ -78,8 +78,8 @@ export var titleAdorner = {
 registerAdorner("title", titleAdorner);
 
 export var itemAdorner = {
-  getCss: () => {
-    return "item_editable";
+  getMarkerClass: model => {
+    return !!model.choices ? "item_editable" : "";
   },
   afterRender: (elements: HTMLElement[], model) => {
     for (var i = 0; i < elements.length; i++) {

@@ -288,20 +288,18 @@ export function registerAdorner(name, adorner) {
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
-    // if (options.question.getType() === "checkbox") {
-    //   classes.root = "sq-root sq-root-cb";
-    // }
-    classes[element] = adornersConfig[element].getCss();
+    classes[element] = adornersConfig[element].getMarkerClass(options.question);
   });
 }
 
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach(element => {
-    var selector = "." + adornersConfig[element].getCss();
-    var elements = node.querySelectorAll(selector);
-
-    if (elements.length > 0) {
-      adornersConfig[element].afterRender(elements, model);
+    var elementClass = adornersConfig[element].getMarkerClass(model);
+    if (!!elementClass) {
+      var elements = node.querySelectorAll("." + elementClass);
+      if (elements.length > 0) {
+        adornersConfig[element].afterRender(elements, model);
+      }
     }
   });
 }
