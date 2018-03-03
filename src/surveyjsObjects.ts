@@ -24,6 +24,10 @@ export class SurveyForDesigner extends Survey.Survey {
     (sender: Survey.Survey, options: any) => any,
     any
   > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+  public onElementDoubleClick: Survey.Event<
+    (sender: Survey.Survey, options: any) => any,
+    any
+  > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
   public onUpdateElementAllowingOptions: (options: any) => any;
   constructor(
     jsonObj: any = null,
@@ -80,6 +84,9 @@ export class SurveyForDesigner extends Survey.Survey {
       oldElement: oldValue,
       newElement: value
     });
+  }
+  public doElementDoubleClick(obj: Survey.Base) {
+    this.onElementDoubleClick.fire(this, { element: obj });
   }
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
@@ -262,6 +269,9 @@ function elementOnAfterRendering(
   el.onkeydown = function(e) {
     if (e.witch == 46) getSurvey(self).deleteCurrentObjectClick();
     return true;
+  };
+  el.ondblclick = function(e) {
+    getSurvey(self).doElementDoubleClick(self);
   };
   disable = disable && !(self.getType() == "paneldynamic"); //TODO
   if (disable) {
