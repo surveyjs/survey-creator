@@ -199,3 +199,68 @@ QUnit.test("SurveyPropertyConditionEditor.allCondtionQuestions", function(
     "returns questions correctly"
   );
 });
+
+QUnit.test(
+  "SurveyPropertyConditionEditor.allCondtionQuestions for matrix column",
+  function(assert) {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "matrixdropdowncolumn",
+      "visibleIf"
+    );
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = <Survey.QuestionMatrixDropdown>page.addNewQuestion(
+      "matrixdropdown",
+      "q1"
+    );
+    question.columns.splice(0, question.columns.length);
+    question.addColumn("col1");
+    var column = question.addColumn("col2");
+    question.addColumn("col3");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = column;
+    assert.equal(
+      editor.allCondtionQuestions.indexOf("row.col1") > -1,
+      true,
+      "row.col1 is here"
+    );
+    assert.equal(
+      editor.allCondtionQuestions.indexOf("row.col2") > -1,
+      false,
+      "row.col2 is not here"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor.allCondtionQuestions for panel dynamic",
+  function(assert) {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "questionbase",
+      "visibleIf"
+    );
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = <Survey.QuestionPanelDynamic>page.addNewQuestion(
+      "paneldynamic",
+      "q1"
+    );
+    question.template.addNewQuestion("text", "q1");
+    question.template.addNewQuestion("text", "q2");
+    question.template.addNewQuestion("text", "q3");
+    question.panelCount = 1;
+    var panelQuestion = question.panels[0].questions[1];
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = panelQuestion;
+    assert.equal(
+      editor.allCondtionQuestions.indexOf("panel.q1") > -1,
+      true,
+      "panel.q1 is here"
+    );
+    assert.equal(
+      editor.allCondtionQuestions.indexOf("panel.q2") > -1,
+      false,
+      "panel.q2 is not here"
+    );
+  }
+);

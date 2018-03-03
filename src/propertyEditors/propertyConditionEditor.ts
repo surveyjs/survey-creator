@@ -69,16 +69,19 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
   public get allCondtionQuestions(): any[] {
+    if (!this.object) return [];
     var names = [];
     var questions = this.availableQuestions;
     for (var i = 0; i < questions.length; i++) {
       this.addConditionQuestionNames(questions[i], names);
     }
+    this.addMatrixColumnsToCondtion(names);
+    this.addPanelDynamicQuestionsToCondtion(names);
     names.sort();
     return names;
   }
   private addConditionQuestionNames(
-    question: Survey.Question,
+    question: Survey.QuestionBase,
     names: Array<string>
   ) {
     if (question == this.object) return;
@@ -86,6 +89,33 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       question["addConditionNames"](names);
     } else {
       names.push(question.name);
+    }
+  }
+  private addMatrixColumnsToCondtion(names: Array<string>) {
+    if (
+      !(this.object instanceof Survey.MatrixDropdownColumn) ||
+      !this.object ||
+      !this.object.colOwner ||
+      !this.object.colOwner["columns"]
+    )
+      return;
+    var columns = this.object.colOwner["columns"];
+    for (var i = 0; i < columns.length; i++) {
+      if (columns[i] == this.object) continue;
+      names.push("row." + columns[i].name);
+    }
+  }
+  private addPanelDynamicQuestionsToCondtion(names: Array<string>) {
+    if (!(this.object.data instanceof Survey.QuestionPanelDynamicItem)) return;
+    var panel: Survey.PanelModel = this.object.data.panel;
+    var questionNames = [];
+    for (var i = 0; i < panel.questions.length; i++) {
+      var q = panel.questions[i];
+      if (q.name == this.object.name) continue;
+      this.addConditionQuestionNames(q, questionNames);
+    }
+    for (var i = 0; i < questionNames.length; i++) {
+      names.push("panel." + questionNames[i]);
     }
   }
   public get hasAceEditor(): boolean {
