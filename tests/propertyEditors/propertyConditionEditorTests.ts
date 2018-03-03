@@ -178,3 +178,24 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   editor.koAddConditionOperator("empty");
   assert.equal(editor.koCanAddCondition(), true, "empty doesn't require value");
 });
+
+QUnit.test("SurveyPropertyConditionEditor.allCondtionQuestions", function(
+  assert
+) {
+  var property = Survey.JsonObject.metaData.findProperty(
+    "questionbase",
+    "visibleIf"
+  );
+  var survey = new Survey.Survey();
+  var page = survey.addNewPage("p");
+  var question = page.addNewQuestion("text", "q1");
+  page.addNewQuestion("text", "q2");
+  page.addNewQuestion("text", "q3");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  assert.deepEqual(
+    editor.allCondtionQuestions,
+    ["q2", "q3"],
+    "returns questions correctly"
+  );
+});

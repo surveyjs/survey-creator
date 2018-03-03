@@ -69,12 +69,24 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return (this.object && this.object.survey.getAllQuestions()) || [];
   }
   public get allCondtionQuestions(): any[] {
-    var res = [];
+    var names = [];
     var questions = this.availableQuestions;
     for (var i = 0; i < questions.length; i++) {
-      res.push(questions[i].name);
+      this.addConditionQuestionNames(questions[i], names);
     }
-    return res;
+    names.sort();
+    return names;
+  }
+  private addConditionQuestionNames(
+    question: Survey.Question,
+    names: Array<string>
+  ) {
+    if (question == this.object) return;
+    if (question["addConditionNames"]) {
+      question["addConditionNames"](names);
+    } else {
+      names.push(question.name);
+    }
   }
   public get hasAceEditor(): boolean {
     return (
