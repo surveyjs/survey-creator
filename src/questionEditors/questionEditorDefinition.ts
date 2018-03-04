@@ -4,7 +4,12 @@ export interface ISurveyQuestionEditorDefinition {
   properties?: Array<
     string | { name: string; category?: string; tab?: string }
   >;
-  tabs?: Array<{ name: string; index?: number; title?: string }>;
+  tabs?: Array<{
+    name: string;
+    index?: number;
+    title?: string;
+    visible?: boolean;
+  }>;
 }
 
 export class SurveyQuestionEditorDefinition {
@@ -236,8 +241,7 @@ export class SurveyQuestionEditorDefinition {
     }
     return properties;
   }
-  public static getTabs(className: string): Array<any> {
-    var tabs = [];
+  public static isGeneralTabVisible(className: string): boolean {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
     );
@@ -245,7 +249,29 @@ export class SurveyQuestionEditorDefinition {
       var def = allDefinitions[i];
       if (def.tabs) {
         for (var j = 0; j < def.tabs.length; j++) {
-          tabs.push(def.tabs[j]);
+          var tab = def.tabs[j];
+          if (tab.name == "general") return tab.visible !== false;
+        }
+      }
+    }
+    return true;
+  }
+  public static getTabs(className: string): Array<any> {
+    var tabs = [];
+    var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
+      className
+    );
+    var tabsNamesHash = {};
+    for (var i = 0; i < allDefinitions.length; i++) {
+      var def = allDefinitions[i];
+      if (def.tabs) {
+        for (var j = 0; j < def.tabs.length; j++) {
+          var tab = def.tabs[j];
+          if (tabsNamesHash[tab.name]) continue;
+          tabsNamesHash[tab.name] = true;
+          if (tab.visible !== false) {
+            tabs.push(tab);
+          }
         }
       }
     }
