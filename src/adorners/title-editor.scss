@@ -13,6 +13,16 @@
   }
 }
 
+.drag-handle {
+  cursor: move;
+  visibility: hidden;
+}
+.item_draggable:hover {
+  .drag-handle {
+    visibility: visible;
+  }
+}
+
 title-editor {
   display: inline-block;
 

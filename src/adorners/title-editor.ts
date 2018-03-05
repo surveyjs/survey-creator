@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
+import Sortable from "sortablejs";
 
 import "./title-editor.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
@@ -99,3 +100,23 @@ export var itemAdorner = {
 };
 
 registerAdorner("controlLabel", itemAdorner);
+
+export var itemDraggableAdorner = {
+  getMarkerClass: model => {
+    return !!model.choices ? "item_draggable" : "";
+  },
+  afterRender: (elements: HTMLElement[], model) => {
+    var sortable = Sortable.create(elements[0].parentElement, {
+      handle: ".drag-handle",
+      animation: 150,
+      onEnd: evt => {
+        var choices = model.choices;
+        var choice = choices[evt.oldIndex];
+        choices.splice(evt.oldIndex, 1);
+        choices.splice(evt.newIndex, 0, choice);
+      }
+    });
+  }
+};
+
+registerAdorner("item", itemDraggableAdorner);

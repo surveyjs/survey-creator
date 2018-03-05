@@ -15,6 +15,7 @@
     "jquery": "^3.1.1",
     "knockout": "^3.4.0",
     "rmodal": "^1.0.28",
+    "sortablejs": "1.7.0",
     "survey-knockout": "^1.0.0"
   },
   "devDependencies": {
