@@ -5,6 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyEditor } from "../editor";
+import { getNextValue } from "../utils/getNextValue";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -90,7 +91,13 @@ export var itemDraggableAdorner = {
     addNew.innerText = editorLocalization.getString("pe.addNew");
     addNew.className = "svda-add-new-item btn btn-primary";
     addNew.onclick = () => {
-      var itemValue = new Survey.ItemValue("newvalue");
+      var nextValue = null;
+      var values = model.choices.map(function(item) {
+        return item.itemValue;
+      });
+      nextValue = getNextValue("item", values);
+
+      var itemValue = new Survey.ItemValue(nextValue);
       itemValue.locOwner = {
         getLocale: () => {
           if (!!model["getLocale"]) return model.getLocale();
