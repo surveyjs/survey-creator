@@ -1,18 +1,38 @@
-.title_editable {
+.item_editable {
   pointer-events: all;
   .svda-title-editor-start {
     cursor: pointer;
     visibility: hidden;
   }
 }
-.title_editable:hover {
+.item_editable:hover {
   .svda-title-editor-start {
     visibility: visible;
   }
 }
 
+.svda-drag-handle {
+  cursor: move;
+  visibility: hidden;
+}
+.item_draggable:hover {
+  .svda-drag-handle {
+    visibility: visible;
+  }
+}
 
-title-editor {
+.svda-delete-item {
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.item_editable:hover {
+  .svda-delete-item {
+    visibility: visible;
+  }
+}
+
+item-editor {
   display: inline-block;
 
   .svda-content {

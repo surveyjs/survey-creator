@@ -6,12 +6,12 @@ import Sortable from "sortablejs";
 import "./title-editor.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
-class NameEditorViewModel {
+export class TitleInplaceEditor {
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
-  constructor(name: string, private rootElement) {
+  constructor(name: string, protected rootElement) {
     this.editingName(name);
     this.prevName(name);
   }
@@ -57,7 +57,7 @@ class NameEditorViewModel {
 ko.components.register("title-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = new NameEditorViewModel(
+      var model = new TitleInplaceEditor(
         params.model[params.name],
         componentInfo.element
       );
@@ -82,41 +82,3 @@ export var titleAdorner = {
 };
 
 registerAdorner("title", titleAdorner);
-
-export var itemAdorner = {
-  getMarkerClass: model => {
-    return !!model.choices ? "item_editable" : "";
-  },
-  afterRender: (elements: HTMLElement[], model) => {
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].onclick = e => e.preventDefault();
-      var decoration = document.createElement("span");
-      decoration.innerHTML =
-        "<title-editor params='name: \"text\", model: $data'></title-editor>";
-      elements[i].appendChild(decoration);
-      ko.applyBindings(model.choices[i], decoration);
-    }
-  }
-};
-
-registerAdorner("controlLabel", itemAdorner);
-
-export var itemDraggableAdorner = {
-  getMarkerClass: model => {
-    return !!model.choices ? "item_draggable" : "";
-  },
-  afterRender: (elements: HTMLElement[], model) => {
-    var sortable = Sortable.create(elements[0].parentElement, {
-      handle: ".drag-handle",
-      animation: 150,
-      onEnd: evt => {
-        var choices = model.choices;
-        var choice = choices[evt.oldIndex];
-        choices.splice(evt.oldIndex, 1);
-        choices.splice(evt.newIndex, 0, choice);
-      }
-    });
-  }
-};
-
-registerAdorner("item", itemDraggableAdorner);
