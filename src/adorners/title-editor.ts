@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import { registerAdorner } from "../surveyjsObjects";
+import { editorLocalization } from "../editorLocalization";
 
 import "./title-editor.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
@@ -15,6 +16,10 @@ class NameEditorViewModel {
   }
 
   valueChanged: (any) => void;
+
+  public getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
 
   startEdit = (model, event) => {
     this.editingName(this.prevName());
