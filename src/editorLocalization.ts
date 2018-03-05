@@ -192,8 +192,8 @@ export var defaultStrings = {
     optionsCaption: "Options caption",
     defaultValue: "Default value",
 
-    surveyEditorTitle: "Edit survey",
-    qEditorTitle: "Edit question: {0}",
+    surveyEditorTitle: "Edit survey settings",
+    qEditorTitle: "Edit: {0}",
 
     //survey
     showTitle: "Show/hide title",

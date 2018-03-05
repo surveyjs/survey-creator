@@ -3,23 +3,11 @@
         <li class="svd_edit_survey_li" data-bind="click:selectSurveyClick, css: { active: isSurveyActive() }">
             <div>
                 <a class="nav-link svd_page_nav" href="#">
-                    <span data-bind="text:$root.getLocString('ed.Survey')"></span>
+                    <span data-bind="text:$root.getLocString('ed.survey')"></span>
                 </a>
-                <div class="ddmenu-container page-nav btn-group inline menu-disabled" data-bind="css: { 'menu-disabled': !isSurveyActive() }">
+                <div class="page-nav btn-group inline menu-disabled" data-bind="css: { 'menu-disabled': !isSurveyActive() }">
                     <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
-
-                    <div class="ddmenu">
-                        <span tabindex="0">
-                            <span data-bind="css: getSelectedClass()"></span>
-                        </span>
-
-                        <div tabindex="0" onclick="return true"></div>
-                        <ul>
-                            <li>
-                                <button class="btn btn-primary btn-sm btn-xs" data-bind="click: editSurveyClick, text: $root.getLocString('ed.editSurvey')"></button>
-                            </li>
-                        </ul>
-                    </div>
+                    <span data-bind="click: editSurveyClick, css: getSelectedClass()"></span>
                 </div>
             </div>
         </li>
