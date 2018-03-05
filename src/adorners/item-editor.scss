@@ -25,11 +25,15 @@
   cursor: pointer;
   visibility: hidden;
 }
-
 .item_editable:hover {
   .svda-delete-item {
     visibility: visible;
   }
+}
+
+.svda-add-new-item {
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 item-editor {

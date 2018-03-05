@@ -1217,6 +1217,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       this.renderedElement
     );
+    this.surveyValue()["getEditor"] = () => self;
     this.surveyValue()["setJsonObject"](json); //TODO
     if (this.surveyValue().isEmpty) {
       this.surveyValue()["setJsonObject"](this.getDefaultSurveyJson()); //TODO
@@ -1515,7 +1516,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       }
     );
   }
-  private onQuestionEditorChanged(question: Survey.QuestionBase) {
+  public onQuestionEditorChanged(question: Survey.QuestionBase) {
     this.surveyObjects.nameChanged(question);
     this.selectedObjectEditorValue.objectChanged();
     this.pagesEditor.updatePages();

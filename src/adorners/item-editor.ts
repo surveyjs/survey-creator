@@ -1,8 +1,10 @@
 import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
+import { SurveyEditor } from "../editor";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -68,8 +70,13 @@ export var itemDraggableAdorner = {
   getMarkerClass: model => {
     return !!model.choices ? "item_draggable" : "";
   },
-  afterRender: (elements: HTMLElement[], model) => {
-    var sortable = Sortable.create(elements[0].parentElement, {
+  afterRender: (
+    elements: HTMLElement[],
+    model: QuestionSelectBase,
+    editor: SurveyEditor
+  ) => {
+    var itemsRoot = elements[0].parentElement;
+    var sortable = Sortable.create(itemsRoot, {
       handle: ".svda-drag-handle",
       animation: 150,
       onEnd: evt => {
@@ -79,6 +86,24 @@ export var itemDraggableAdorner = {
         choices.splice(evt.newIndex, 0, choice);
       }
     });
+    var addNew = document.createElement("div");
+    addNew.innerText = editorLocalization.getString("pe.addNew");
+    addNew.className = "svda-add-new-item btn btn-primary";
+    addNew.onclick = () => {
+      var itemValue = new Survey.ItemValue("newvalue");
+      itemValue.locOwner = {
+        getLocale: () => {
+          if (!!model["getLocale"]) return model.getLocale();
+          return "";
+        },
+        getMarkdownHtml: (text: string) => {
+          return text;
+        }
+      };
+      model.choices.push(itemValue);
+      editor.onQuestionEditorChanged(model);
+    };
+    itemsRoot.appendChild(addNew);
   }
 };
 

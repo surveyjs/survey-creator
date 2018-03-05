@@ -298,7 +298,11 @@ function addAdorner(node, model) {
     if (!!elementClass) {
       var elements = node.querySelectorAll("." + elementClass);
       if (elements.length > 0) {
-        adornersConfig[element].afterRender(elements, model);
+        adornersConfig[element].afterRender(
+          elements,
+          model,
+          getSurvey(model).getEditor()
+        );
       }
     }
   });
