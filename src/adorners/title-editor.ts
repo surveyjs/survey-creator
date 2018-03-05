@@ -83,6 +83,7 @@ export var itemAdorner = {
   },
   afterRender: (elements: HTMLElement[], model) => {
     for (var i = 0; i < elements.length; i++) {
+      elements[i].onclick = e => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.innerHTML =
         "<title-editor params='name: \"text\", model: $data'></title-editor>";
@@ -92,4 +93,4 @@ export var itemAdorner = {
   }
 };
 
-registerAdorner("item", itemAdorner);
+registerAdorner("controlLabel", itemAdorner);
