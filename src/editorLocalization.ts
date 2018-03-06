@@ -297,6 +297,7 @@ export var defaultStrings = {
     ka: "ქართული",
     lv: "latviešu",
     nl: "hollandsk",
+    no: "norsk",
     pl: "polski",
     pt: "português",
     ro: "română",
