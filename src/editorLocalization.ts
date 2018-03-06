@@ -135,6 +135,7 @@ export var defaultStrings = {
     close: "Close",
     delete: "Delete",
     addNew: "Add New",
+    addItem: "Click to add an item...",
     removeAll: "Remove All",
     edit: "Edit",
     move: "Move",
