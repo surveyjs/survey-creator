@@ -11,6 +11,8 @@
             <img class="svda-edit-icon" src="/src/images/Edit_24x24.svg" />
         </span>
     </span>
+    <!-- ko if: notOther -->
     <span class="svda-drag-handle" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">☰</span>
+    <!-- /ko -->
     <span class="svda-delete-item" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">✕</span>
 </div>
