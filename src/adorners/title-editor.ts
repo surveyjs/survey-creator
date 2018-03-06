@@ -11,9 +11,24 @@ export class TitleInplaceEditor {
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
+  protected forNeibours(func: (el) => void) {
+    var holder = this.rootElement.parentElement.parentElement;
+    for (var i = 0; i < holder.children.length - 1; i++) {
+      var element = holder.children[i];
+      func(element);
+    }
+  }
+
   constructor(name: string, protected rootElement) {
     this.editingName(name);
     this.prevName(name);
+    this.forNeibours(
+      element =>
+        (element.onclick = e => {
+          this.startEdit(this, e);
+          e.preventDefault();
+        })
+    );
   }
 
   valueChanged: (any) => void;
@@ -25,11 +40,7 @@ export class TitleInplaceEditor {
   startEdit = (model, event) => {
     this.editingName(this.prevName());
     this.isEditing(true);
-    var holder = this.rootElement.parentElement.parentElement;
-    for (var i = 0; i < holder.children.length - 1; i++) {
-      var element = holder.children[i];
-      element.style.display = "none";
-    }
+    this.forNeibours(element => (element.style.display = "none"));
     this.rootElement.getElementsByTagName("input")[0].focus();
   };
   postEdit = () => {
@@ -39,11 +50,7 @@ export class TitleInplaceEditor {
   };
   cancelEdit = () => {
     this.isEditing(false);
-    var holder = this.rootElement.parentElement.parentElement;
-    for (var i = 0; i < holder.children.length - 1; i++) {
-      var element = holder.children[i];
-      element.style.display = "";
-    }
+    this.forNeibours(element => (element.style.display = ""));
   };
   nameEditorKeypress = (model, event) => {
     if (event.keyCode === 13) {
