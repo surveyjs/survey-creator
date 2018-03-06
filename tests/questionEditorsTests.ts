@@ -91,12 +91,36 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var editor = new SurveyQuestionEditor(radioGroupQuestion, null);
-  assert.equal(editor.koTabs().length, 4, "There are 3 tabs");
+  assert.equal(editor.koTabs().length, 4, "There are 4 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
     "The name of the second tab is 'choices'"
   );
+});
+
+QUnit.test("Hide a tab if it's visible attribute set to false", function(
+  assert
+) {
+  var savedDefinition = JSON.stringify(
+    SurveyQuestionEditorDefinition.definition.html
+  );
+  SurveyQuestionEditorDefinition.definition.html = {
+    tabs: [
+      { name: "html" },
+      { name: "general", visible: false },
+      { name: "visibleIf", visible: false }
+    ]
+  };
+  var htmlQuestion = new Survey.QuestionHtml("q1");
+  var editor = new SurveyQuestionEditor(htmlQuestion, null);
+  assert.equal(editor.koTabs().length, 1, "There is one visible tab");
+  assert.equal(
+    editor.koTabs()[0].name,
+    "html",
+    "The name of the visible tab is 'html'"
+  );
+  SurveyQuestionEditorDefinition.definition.html = JSON.parse(savedDefinition);
 });
 
 QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {

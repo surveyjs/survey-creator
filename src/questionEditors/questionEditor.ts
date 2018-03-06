@@ -234,7 +234,9 @@ export class SurveyQuestionEditor {
       this.options,
       false
     );
-    tabs.push(new SurveyQuestionEditorTab(this.obj, properties, "general"));
+    if (SurveyQuestionEditorDefinition.isGeneralTabVisible(this.className)) {
+      tabs.push(new SurveyQuestionEditorTab(this.obj, properties, "general"));
+    }
     this.addPropertiesTabs(tabs);
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].onCanShowPropertyCallback = this.onCanShowPropertyCallback;

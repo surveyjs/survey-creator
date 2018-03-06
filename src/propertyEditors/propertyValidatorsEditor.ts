@@ -54,6 +54,7 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyItemsEditor {
     var jsonObj = new Survey.JsonObject();
     var validator = Survey.JsonObject.metaData.createClass(item.getType());
     jsonObj.toObject(item, validator);
+    validator.locOwner = this;
     return new SurveyPropertyValidatorItem(validator);
   }
   protected createItemFromEditorItem(editorItem: any) {
@@ -64,6 +65,7 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyItemsEditor {
     var newValidator = new SurveyPropertyValidatorItem(
       Survey.JsonObject.metaData.createClass(validatorType)
     );
+    newValidator["locOwner"] = this;
     this.koItems.push(newValidator);
     this.koSelected(newValidator);
   }

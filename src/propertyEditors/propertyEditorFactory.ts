@@ -10,6 +10,29 @@ export class SurveyPropertyEditorFactory {
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
+  public static getOperators(): Array<any> {
+    var operators = [
+      "empty",
+      "notempty",
+      "equal",
+      "notequal",
+      "contains",
+      "notcontains",
+      "greater",
+      "less",
+      "greaterorequal",
+      "lessorequal"
+    ];
+    var result = [];
+    for (var i = 0; i < operators.length; i++) {
+      var name = operators[i];
+      result.push({
+        name: name,
+        text: editorLocalization.getString("op." + name)
+      });
+    }
+    return result;
+  }
   public static registerEditor(
     name: string,
     creator: (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase,

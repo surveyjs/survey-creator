@@ -143,6 +143,9 @@ export var defaultStrings = {
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
+    conditionSelectQuestion: "Select question...",
+    conditionButtonAdd: "Add",
+    conditionButtonReplace: "Replace",
     conditionHelp:
       "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
@@ -191,8 +194,8 @@ export var defaultStrings = {
     optionsCaption: "Options caption",
     defaultValue: "Default value",
 
-    surveyEditorTitle: "Edit survey",
-    qEditorTitle: "Edit question: {0}",
+    surveyEditorTitle: "Edit survey settings",
+    qEditorTitle: "Edit: {0}",
 
     //survey
     showTitle: "Show/hide title",
@@ -315,7 +318,7 @@ export var defaultStrings = {
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",
-    lessorequal: "Less or Equals"
+    lessorequal: "less or equals"
   },
   //Embed window
   ew: {

@@ -131,18 +131,6 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   }
 }
 export class SurveyPropertyTrigger {
-  private operators = [
-    "empty",
-    "notempty",
-    "equal",
-    "notequal",
-    "contains",
-    "notcontains",
-    "greater",
-    "less",
-    "greaterorequal",
-    "lessorequal"
-  ];
   private triggerType: string;
   availableOperators = [];
   koName: any;
@@ -154,7 +142,7 @@ export class SurveyPropertyTrigger {
   koRequireValue: any;
 
   constructor(public trigger: Survey.SurveyTrigger) {
-    this.createOperators();
+    this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.triggerType = trigger.getType();
     this.koType = ko.observable(this.triggerType);
     this.koName = ko.observable(trigger.name);
@@ -184,15 +172,6 @@ export class SurveyPropertyTrigger {
     trigger.operator = this.koOperator();
     trigger.value = this.koValue();
     return trigger;
-  }
-  private createOperators() {
-    for (var i = 0; i < this.operators.length; i++) {
-      var name = this.operators[i];
-      this.availableOperators.push({
-        name: name,
-        text: editorLocalization.getString("op." + name)
-      });
-    }
   }
   private getText(): string {
     if (!this.koIsValid())

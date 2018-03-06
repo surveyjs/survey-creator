@@ -172,6 +172,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The event is called when an end-user double click on an element (question/panel).
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.element an instance of the element
+   */
+  public onElementDoubleClick: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
    * <br/> sender the survey editor object that fires the event
@@ -1295,6 +1304,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyValue().onEditButtonClick.add((sender: Survey.Survey) => {
       self.showQuestionEditor(self.koSelectedObject().value);
     });
+    this.surveyValue().onElementDoubleClick.add(
+      (sender: Survey.Survey, options) => {
+        self.onElementDoubleClick.fire(self, options);
+      }
+    );
     this.surveyValue().onProcessHtml.add((sender: Survey.Survey, options) => {
       options.html = self.processHtml(options.html);
     });
@@ -1431,7 +1445,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
     }
   }
-  private doClickQuestionCore(element: Survey.IElement) {
+  private doClickQuestionCore(
+    element: Survey.IElement,
+    modifiedType: string = "ADDED_FROM_TOOLBOX"
+  ) {
     var parent = this.survey.currentPage;
     var index = -1;
     var elElement = this.survey.selectedElement;
@@ -1446,7 +1463,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         <HTMLElement>this.renderedElement.querySelector("#" + element["id"])
       );
     }
-    this.setModified({ type: "ADDED_FROM_TOOLBOX", question: element });
+    this.setModified({ type: modifiedType, question: element });
   }
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
@@ -1541,7 +1558,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public fastCopyQuestion(question: Survey.Base) {
     var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement);
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
   }
   /**
    * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
