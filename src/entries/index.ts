@@ -65,7 +65,6 @@ export {
   SurveyPropertyValidatorsEditor
 } from "../propertyEditors/propertyValidatorsEditor";
 export { SurveyObjects } from "../surveyObjects";
-export { registerAdorner } from "../surveyjsObjects";
 
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 
@@ -93,7 +92,11 @@ export { SurveyLiveTester } from "../surveylive";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
 export { SurveyUndoRedo, UndoRedoItem } from "../undoredo";
-export { SurveyForDesigner } from "../surveyjsObjects";
+export {
+  SurveyForDesigner,
+  registerAdorner,
+  removeAdorners
+} from "../surveyjsObjects";
 export { Extentions } from "../extentions";
 export { SurveyEditor } from "../editor";
 

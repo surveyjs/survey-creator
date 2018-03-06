@@ -290,41 +290,49 @@ function elementOnAfterRendering(
   addAdorner(el, self);
 }
 
-var adornersConfig = {};
+var adornersConfig: { [index: string]: any[] } = {};
 
 export function registerAdorner(name, adorner) {
-  adornersConfig[name] = adorner;
+  if (!adornersConfig[name]) {
+    adornersConfig[name] = [];
+  }
+  adornersConfig[name].push(adorner);
+}
+export function removeAdorners(names: string[] = undefined) {
+  if (names !== undefined) {
+    (names || []).forEach(name => delete adornersConfig[name]);
+  } else {
+    adornersConfig = {};
+  }
 }
 
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
-    classes[element] =
-      classes[element] +
-      " " +
-      adornersConfig[element].getMarkerClass(options.question);
+    adornersConfig[element].forEach(adorner => {
+      classes[element] =
+        classes[element] + " " + adorner.getMarkerClass(options.question);
+    });
   });
 }
 
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach(element => {
-    var elementClass = adornersConfig[element].getMarkerClass(model);
-    if (!!elementClass) {
-      var elements = node.querySelectorAll("." + elementClass);
-      if (
-        elements.length === 0 &&
-        node.className.indexOf(elementClass) !== -1
-      ) {
-        elements = [node];
+    adornersConfig[element].forEach(adorner => {
+      var elementClass = adorner.getMarkerClass(model);
+      if (!!elementClass) {
+        var elements = node.querySelectorAll("." + elementClass);
+        if (
+          elements.length === 0 &&
+          node.className.indexOf(elementClass) !== -1
+        ) {
+          elements = [node];
+        }
+        if (elements.length > 0) {
+          adorner.afterRender(elements, model, getSurvey(model).getEditor());
+        }
       }
-      if (elements.length > 0) {
-        adornersConfig[element].afterRender(
-          elements,
-          model,
-          getSurvey(model).getEditor()
-        );
-      }
-    }
+    });
   });
 }
 
