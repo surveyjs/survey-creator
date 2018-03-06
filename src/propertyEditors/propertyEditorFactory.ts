@@ -113,6 +113,13 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     return "dropdown";
   }
   public getValueText(value: any): string {
+    if (this.property.name === "locale") {
+      var localeNames = Survey.surveyLocalization["localeNames"];
+      if (localeNames) {
+        var text = localeNames[value];
+        if (text) return text;
+      }
+    }
     return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
@@ -130,7 +137,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
       var value = res[i].value;
-      var text = editorLocalization.getPropertyValue(value);
+      var text = this.getValueText(value);
       if (text != value) {
         res[i].text = text;
       }
