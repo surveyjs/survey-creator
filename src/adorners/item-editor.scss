@@ -41,6 +41,10 @@
 .svda-add-new-item {
   cursor: pointer;
   pointer-events: auto;
+  padding-left: 16px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 item-editor {

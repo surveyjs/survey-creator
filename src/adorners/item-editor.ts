@@ -88,8 +88,8 @@ export var itemDraggableAdorner = {
       }
     });
     var addNew = document.createElement("div");
-    addNew.innerText = editorLocalization.getString("pe.addNew");
-    addNew.className = "svda-add-new-item btn btn-primary";
+    addNew.innerText = editorLocalization.getString("pe.addItem");
+    addNew.className = "svda-add-new-item";
     addNew.onclick = () => {
       var nextValue = null;
       var values = model.choices.map(function(item) {
