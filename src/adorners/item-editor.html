@@ -1,6 +1,6 @@
 <div class="svda-content">
     <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
-        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
+        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block; display: inline-block; width: calc(100% - 55px);"
         />
         <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">✓</span>
         <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span>
@@ -11,6 +11,6 @@
             <img class="svda-edit-icon" src="/src/images/Edit_24x24.svg" />
         </span>
     </span>
-    <span class="svda-drag-handle">☰</span>
-    <span class="svda-delete-item" data-bind="click: deleteItem">✕</span>
+    <span class="svda-drag-handle" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">☰</span>
+    <span class="svda-delete-item" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">✕</span>
 </div>

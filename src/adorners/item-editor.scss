@@ -3,6 +3,7 @@
   .svda-title-editor-start {
     cursor: pointer;
     visibility: hidden;
+    padding-left: 5px;
   }
 }
 .item_editable:hover {
@@ -14,16 +15,25 @@
 .svda-drag-handle {
   cursor: move;
   visibility: hidden;
+  font-size: 10px;
+  padding-left: 5px;
 }
-.item_draggable:hover {
-  .svda-drag-handle {
-    visibility: visible;
+.item_draggable {
+  white-space: nowrap;
+  &:hover {
+    .svda-drag-handle {
+      visibility: visible;
+    }
   }
 }
 
 .svda-delete-item {
   cursor: pointer;
   visibility: hidden;
+  padding-left: 5px;
+  vertical-align: middle;
+  font-size: 14px;
+  color: darkred;
 }
 .item_editable:hover {
   .svda-delete-item {
@@ -34,6 +44,10 @@
 .svda-add-new-item {
   cursor: pointer;
   pointer-events: auto;
+  padding-left: 16px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 item-editor {
@@ -47,7 +61,7 @@ item-editor {
       white-space: nowrap;
     }
     .svda-edit-button {
-      padding: 0 5px;
+      padding-left: 5px;
       cursor: pointer;
     }
     .svda-edit-icon {
