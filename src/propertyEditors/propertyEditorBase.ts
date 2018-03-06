@@ -132,6 +132,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public set object(value: any) {
     this.objectValue = value;
+    if (typeof value.registerFunctionOnPropertyValueChanged === "function") {
+      value.registerFunctionOnPropertyValueChanged(
+        this.property.name,
+        () => this.updateValue(),
+        this.property.name
+      );
+    }
     this.setIsRequired();
     this.setTitleAndDisplayName();
     this.setObject(this.object);
