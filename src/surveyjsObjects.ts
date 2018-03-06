@@ -49,6 +49,7 @@ export class SurveyForDesigner extends Survey.Survey {
     this.editQuestionClick = function() {
       self.onEditButtonClick.fire(self, null);
     };
+    this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -266,10 +267,10 @@ function elementOnAfterRendering(
       }
     }
   };
-  el.onkeydown = function(e) {
-    if (e.witch == 46) getSurvey(self).deleteCurrentObjectClick();
-    return true;
-  };
+  // el.onkeydown = function(e) {
+  //   if (e.witch == 46) getSurvey(self).deleteCurrentObjectClick();
+  //   return true;
+  // };
   el.ondblclick = function(e) {
     getSurvey(self).doElementDoubleClick(self);
   };
@@ -285,6 +286,36 @@ function elementOnAfterRendering(
     self.addonsElement.style.display = self.koIsSelected() ? "" : "none";
     el.appendChild(self.addonsElement);
   }
+  addAdorner(el, self);
+}
+
+var adornersConfig = {};
+
+export function registerAdorner(name, adorner) {
+  adornersConfig[name] = adorner;
+}
+
+function onUpdateQuestionCssClasses(survey, options) {
+  var classes = options.cssClasses;
+  Object.keys(adornersConfig).forEach(element => {
+    classes[element] = adornersConfig[element].getMarkerClass(options.question);
+  });
+}
+
+function addAdorner(node, model) {
+  Object.keys(adornersConfig).forEach(element => {
+    var elementClass = adornersConfig[element].getMarkerClass(model);
+    if (!!elementClass) {
+      var elements = node.querySelectorAll("." + elementClass);
+      if (elements.length > 0) {
+        adornersConfig[element].afterRender(
+          elements,
+          model,
+          getSurvey(model).getEditor()
+        );
+      }
+    }
+  });
 }
 
 Survey.Page.prototype["onCreating"] = function() {

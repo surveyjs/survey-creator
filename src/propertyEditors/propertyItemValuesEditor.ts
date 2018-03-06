@@ -5,6 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
+import { getNextValue } from "../utils/getNextValue";
 
 export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   koActiveView: any;
@@ -85,7 +86,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     this.koShowTextView(this.canShowTextView && editorOptions.showTextView);
   }
   protected createNewEditorItem(): any {
-    var itemValue = new Survey.ItemValue(null);
+    var nextValue = null;
+    var values = this.koItems().map(function(item) {
+      return item.item.itemValue;
+    });
+    nextValue = getNextValue("item", values);
+
+    var itemValue = new Survey.ItemValue(nextValue);
     itemValue.locOwner = this;
     if (this.options) {
       this.options.onItemValueAddedCallback(

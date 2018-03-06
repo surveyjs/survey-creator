@@ -65,6 +65,7 @@ export {
   SurveyPropertyValidatorsEditor
 } from "../propertyEditors/propertyValidatorsEditor";
 export { SurveyObjects } from "../surveyObjects";
+export { registerAdorner } from "../surveyjsObjects";
 
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 
@@ -106,3 +107,7 @@ import "../localization/italian";
 import "../localization/simplified-chinese";
 import "../localization/persian";
 import "../localization/polish";
+
+//adorners
+export { titleAdorner } from "../adorners/title-editor";
+export { itemAdorner } from "../adorners/item-editor";
