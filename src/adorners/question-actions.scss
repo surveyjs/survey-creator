@@ -1,0 +1,17 @@
+.svda-question-actions {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #1ab394;
+  padding: 0 5px;
+  color: white;
+}
+
+question-actions {
+  display: none;
+}
+.svd_q_selected {
+  question-actions {
+    display: block;
+  }
+}

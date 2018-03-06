@@ -138,9 +138,11 @@ function elementOnCreating(self: any, className: string) {
   });
   self.koIsSelected.subscribe(function(newValue) {
     if (self.renderedElement) {
-      var newClass = className;
-      if (newValue) newClass += " svd_q_selected ";
-      self.renderedElement.className = newClass;
+      if (newValue) {
+        self.renderedElement.classList.add("svd_q_selected");
+      } else {
+        self.renderedElement.classList.remove("svd_q_selected");
+      }
     }
     if (self.addonsElement) {
       self.addonsElement.style.display = newValue ? "" : "none";
@@ -228,11 +230,10 @@ function elementOnAfterRendering(
   disable: boolean
 ) {
   self.renderedElement = el;
+  self.renderedElement.classList.add("svd_question");
+  self.renderedElement.classList.add("svd_q_design_border");
   getSurvey(self).updateElementAllowingOptions(self);
-  var newClass = className;
-  if (self.koIsSelected()) newClass += " svd_q_selected";
-
-  el.className = newClass;
+  if (self.koIsSelected()) self.renderedElement.classList.add("svd_q_selected");
   el.style.opacity = self.koIsDragging() ? 0.4 : 1;
   el.draggable = self.allowingOptions.allowDragging;
   el.ondragover = function(e) {
@@ -298,7 +299,10 @@ export function registerAdorner(name, adorner) {
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
-    classes[element] = adornersConfig[element].getMarkerClass(options.question);
+    classes[element] =
+      classes[element] +
+      " " +
+      adornersConfig[element].getMarkerClass(options.question);
   });
 }
 
@@ -307,6 +311,12 @@ function addAdorner(node, model) {
     var elementClass = adornersConfig[element].getMarkerClass(model);
     if (!!elementClass) {
       var elements = node.querySelectorAll("." + elementClass);
+      if (
+        elements.length === 0 &&
+        node.className.indexOf(elementClass) !== -1
+      ) {
+        elements = [node];
+      }
       if (elements.length > 0) {
         adornersConfig[element].afterRender(
           elements,

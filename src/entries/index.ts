@@ -111,3 +111,4 @@ import "../localization/polish";
 //adorners
 export { titleAdorner } from "../adorners/title-editor";
 export { itemAdorner } from "../adorners/item-editor";
+export { questionActionsAdorner } from "../adorners/question-actions";
