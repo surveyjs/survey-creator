@@ -132,7 +132,7 @@ export var itemDraggableAdorner = {
           return text;
         }
       };
-      model.choices.push(itemValue);
+      model.choices = model.choices.concat([itemValue]);
       editor.onQuestionEditorChanged(model);
     };
     itemsRoot.appendChild(addNew);
