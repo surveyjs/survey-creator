@@ -260,10 +260,10 @@ function elementOnAfterRendering(
       }
     }
   };
-  el.onkeydown = function(e) {
-    if (e.witch == 46) getSurvey(self).deleteCurrentObjectClick();
-    return true;
-  };
+  // el.onkeydown = function(e) {
+  //   if (e.witch == 46) getSurvey(self).deleteCurrentObjectClick();
+  //   return true;
+  // };
   disable = disable && !(self.getType() == "paneldynamic"); //TODO
   if (disable) {
     var childs = el.childNodes;
