@@ -137,6 +137,7 @@ export var defaultStrings = {
     addNew: "Add New",
     removeAll: "Remove All",
     edit: "Edit",
+    move: "Move",
     empty: "<empty>",
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
