@@ -1,5 +1,5 @@
 ﻿<script type="text/html" id="propertyeditor-itemvalues">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- ko template: { name: 'propertyeditor-modal' } -->
     <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-itemvalues">
@@ -18,33 +18,8 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- ko foreach: koItems -->
-                <tr>
-                    <td>
-                        <div>
-                            <button type="button" class="btn btn-sm btn-xs" data-bind="visible: $index() > 0, click: $parent.onMoveUpClick">
-                                <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-xs" data-bind="visible: $index() < $parent.koItems().length - 1, click: $parent.onMoveDownClick">
-                                <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                    <!-- ko foreach: cells -->
-                    <td>
-                        <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
-                        <!-- /ko -->
-                    </td>
-                    <!-- /ko -->
-                    <td>
-                        <button type="button" class="btn btn-sm btn-xs btn-danger" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                    </td>
-                </tr>
-                <!-- /ko -->
-            </tbody>
+            <!-- ko template: { name: 'propertyeditor-itemvalues-items', afterRender: afterItemsRendered} -->
+            <!-- /ko -->
         </table>
     </div>
     <div data-bind="visible:koActiveView() == 'form'">
@@ -56,4 +31,28 @@
     <div data-bind="visible:koActiveView() != 'form'">
         <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
     </div>
+</script>
+<script type="text/html" id="propertyeditor-itemvalues-items">
+    <tbody>
+        <!-- ko foreach: koItems -->
+        <tr>
+            <td>
+                <div class="svd-drag-handle">
+                    ☰
+                </div>
+            </td>
+            <!-- ko foreach: cells -->
+            <td>
+                <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td>
+                <button type="button" class="btn btn-sm btn-xs btn-danger" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+        <!-- /ko -->
+    </tbody>
 </script>
