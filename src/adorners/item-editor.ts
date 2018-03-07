@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyEditor } from "../editor";
-import { getNextValue } from "../utils/getNextValue";
+import { getNextValue, findParentNode } from "../utils/utils";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -25,11 +25,7 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     if (this.notOther) {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);
-      var item = this.rootElement;
-      while (
-        (item = item.parentElement) &&
-        !item.classList.contains("item_draggable")
-      );
+      var item = findParentNode("item_draggable", this.rootElement);
       item.parentElement.removeChild(item);
     } else {
       this.question.hasOther = false;

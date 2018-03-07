@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 import createDdmenu from "./utils/ddmenu";
+import { findParentNode } from "./utils/utils";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -316,12 +317,24 @@ function onUpdateQuestionCssClasses(survey, options) {
   });
 }
 
+function filterNestedQuestions(rootQuestionNode, elements) {
+  var targetElements = [];
+  for (var i = 0; i < elements.length; i++) {
+    var questionElement = findParentNode("svd_question", elements[i]);
+    if (questionElement === rootQuestionNode) {
+      targetElements.push(elements[i]);
+    }
+  }
+  return targetElements;
+}
+
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
       var elementClass = adorner.getMarkerClass(model);
       if (!!elementClass) {
         var elements = node.querySelectorAll("." + elementClass);
+        elements = filterNestedQuestions(node, elements);
         if (
           elements.length === 0 &&
           node.className.indexOf(elementClass) !== -1
