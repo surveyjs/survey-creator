@@ -1181,7 +1181,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       var self = this;
       this.surveyjs.onkeydown = function(e) {
         if (!e) return;
-        if (e.keyCode == 46) self.deleteQuestion();
+        // if (e.keyCode == 46) self.deleteQuestion();
         if (e.keyCode == 38 || e.keyCode == 40) {
           self.selectQuestion(e.keyCode == 38);
         }
