@@ -8,8 +8,12 @@ import { QuestionConverter } from "../questionconverter";
 export class QuestionActionsAdorner {
   constructor(private question, private editor) {}
 
-  public localizeType(type) {
-    return editorLocalization.getString("qt." + type);
+  public localize(entryString) {
+    return editorLocalization.getString(entryString);
+  }
+
+  public editElement(model: QuestionActionsAdorner) {
+    model.editor.showQuestionEditor(model.question);
   }
 
   get type() {
@@ -27,7 +31,7 @@ export class QuestionActionsAdorner {
 
   private createTypeByClass(className) {
     return {
-      name: this.localizeType(className),
+      name: this.localize("qt." + className),
       value: className
     };
   }
@@ -78,4 +82,4 @@ export var questionActionsAdorner = {
   }
 };
 
-//registerAdorner("mainRoot", questionActionsAdorner);
+registerAdorner("mainRoot", questionActionsAdorner);

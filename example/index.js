@@ -12,6 +12,10 @@ if (!window["%hammerhead%"]) {
 
   //   SurveyEditor.registerAdorner("title", titleAdorner);
 
+  // SurveyEditor.editorLocalization.currentLocale = "fr";
+
+  // SurveyEditor.removeAdorners(["mainRoot"]);
+
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   // SurveyEditor.editorLocalization.currentLocale = "es";

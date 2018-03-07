@@ -22,6 +22,9 @@
 
 question-actions {
   display: none;
+  .svda_question_action {
+    cursor: pointer;
+  }
 }
 .svd_q_selected > .svda-question-actions {
   question-actions {

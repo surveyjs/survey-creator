@@ -1,4 +1,5 @@
 <div>
+    <span class="svda_question_action" data-bind="text: localize('survey.edit'), click:editElement"></span>
     <!-- ko if: allowChangeType -->
     <select data-bind="foreach: availableTypes, event: { change: onConvertType }">
         <option data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
@@ -6,6 +7,6 @@
     <!-- /ko -->
 
     <!-- ko ifnot: allowChangeType -->
-    <span data-bind="text: localizeType(type)"> </span>
+    <span data-bind="text: localize('qt.'+type)"> </span>
     <!-- /ko -->
 </div>
