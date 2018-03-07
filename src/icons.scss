@@ -206,6 +206,11 @@
     @include svg-icon(12px);
   }
 
+  .icon-inplace-check:before {
+    background-image: url("./images/inplace/Check_12x12.svg");
+    @include svg-icon(12px);
+  }
+
   .glyphicon {
     font-weight: bold;
     display: inline-block;
