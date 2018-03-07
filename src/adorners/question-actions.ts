@@ -78,4 +78,4 @@ export var questionActionsAdorner = {
   }
 };
 
-registerAdorner("mainRoot", questionActionsAdorner);
+//registerAdorner("mainRoot", questionActionsAdorner);
