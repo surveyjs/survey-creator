@@ -17,8 +17,12 @@ export class QuestionActionsAdorner {
   }
 
   get allowChangeType() {
-    return true;
-    // return this.question.allowChangeType; TODO retuned undefined
+    var convertClasses = QuestionConverter.getConvertToClasses(
+      this.question.getType()
+    );
+    return (
+      convertClasses.length > 0 && this.question.allowingOptions.allowChangeType
+    );
   }
 
   private createTypeByClass(className) {

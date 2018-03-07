@@ -2,9 +2,22 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  // background-color: #1ab394;
+  background-color: #1ab394;
   padding: 0 5px;
-  // color: white;
+  color: white;
+
+  select {
+    background-color: #1ab394;
+    border: none;
+    outline: none;
+    &:focus {
+      border: none;
+      outline: none;
+    }
+    option {
+      background: #1ab394;
+    }
+  }
 }
 
 question-actions {
