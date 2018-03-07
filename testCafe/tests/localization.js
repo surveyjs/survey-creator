@@ -20,7 +20,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
 
 test(`check on French locale`, async t => {
   const isTabExists = ClientFunction(() =>
-    document.documentElement.innerText.indexOf("Designer de questionnaire")
+    document.documentElement.innerText.indexOf("Éditeur de questionnaire")
   );
 
   assert.notEqual(await isTabExists(), -1);
