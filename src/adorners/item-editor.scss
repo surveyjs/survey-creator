@@ -45,9 +45,13 @@
   cursor: pointer;
   pointer-events: auto;
   padding-left: 16px;
+  display: none;
   &:hover {
     text-decoration: underline;
   }
+}
+.svd_q_selected .svda-add-new-item {
+  display: block;
 }
 
 item-editor {
