@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyEditor } from "../editor";
-import { getNextValue } from "../utils/getNextValue";
+import { getNextValue, findParentNode } from "../utils/utils";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -22,14 +22,18 @@ class ItemInplaceEditor extends TitleInplaceEditor {
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
-    var index = model.question.choices.indexOf(model.item);
-    model.question.choices.splice(index, 1);
-    var item = this.rootElement;
-    while (
-      (item = item.parentElement) &&
-      !item.classList.contains("item_draggable")
-    );
-    item.parentElement.removeChild(item);
+    if (this.notOther) {
+      var index = model.question.choices.indexOf(model.item);
+      model.question.choices.splice(index, 1);
+      var item = findParentNode("item_draggable", this.rootElement);
+      item.parentElement.removeChild(item);
+    } else {
+      this.question.hasOther = false;
+    }
+  }
+
+  get notOther() {
+    return this.question.otherItem !== this.item;
   }
 }
 
@@ -37,12 +41,12 @@ ko.components.register("item-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new ItemInplaceEditor(
-        params.model[params.name],
+        params.target[params.name],
         params.question,
-        params.model,
+        params.item,
         componentInfo.element
       );
-      model.valueChanged = newValue => (params.model[params.name] = newValue);
+      model.valueChanged = newValue => (params.target[params.name] = newValue);
       return model;
     }
   },
@@ -53,14 +57,27 @@ export var itemAdorner = {
   getMarkerClass: model => {
     return !!model.choices ? "item_editable" : "";
   },
-  afterRender: (elements: HTMLElement[], model) => {
+  afterRender: (elements: HTMLElement[], model: QuestionSelectBase) => {
     for (var i = 0; i < elements.length; i++) {
       elements[i].onclick = e => e.preventDefault();
       var decoration = document.createElement("span");
-      decoration.innerHTML =
-        "<item-editor params='name: \"text\", model: item, question: question'></item-editor>";
-      elements[i].appendChild(decoration);
-      ko.applyBindings({ item: model.choices[i], question: model }, decoration);
+      if (i === elements.length - 1 && model.hasOther) {
+        decoration.innerHTML =
+          "<item-editor params='name: \"otherText\", target: target, item: item, question: question'></item-editor>";
+        elements[i].appendChild(decoration);
+        ko.applyBindings(
+          { item: model.otherItem, question: model, target: model },
+          decoration
+        );
+      } else {
+        decoration.innerHTML =
+          "<item-editor params='name: \"text\", target: target, item: item, question: question'></item-editor>";
+        elements[i].appendChild(decoration);
+        ko.applyBindings(
+          { item: model.choices[i], question: model, target: model.choices[i] },
+          decoration
+        );
+      }
     }
   }
 };
@@ -77,8 +94,12 @@ export var itemDraggableAdorner = {
     editor: SurveyEditor
   ) => {
     var itemsRoot = elements[0].parentElement;
+    if (model.hasOther) {
+      elements[elements.length - 1].classList.remove("item_draggable");
+    }
     var sortable = Sortable.create(itemsRoot, {
       handle: ".svda-drag-handle",
+      draggable: ".item_draggable",
       animation: 150,
       onEnd: evt => {
         var choices = model.choices;
@@ -107,7 +128,7 @@ export var itemDraggableAdorner = {
           return text;
         }
       };
-      model.choices.push(itemValue);
+      model.choices = model.choices.concat([itemValue]);
       editor.onQuestionEditorChanged(model);
     };
     itemsRoot.appendChild(addNew);

@@ -37,6 +37,10 @@ export class TitleInplaceEditor {
     return editorLocalization.getString(str);
   }
 
+  hideEditor = () => {
+    this.isEditing(false);
+    this.forNeibours(element => (element.style.display = ""));
+  };
   startEdit = (model, event) => {
     this.editingName(this.prevName());
     this.isEditing(true);
@@ -44,13 +48,15 @@ export class TitleInplaceEditor {
     this.rootElement.getElementsByTagName("input")[0].focus();
   };
   postEdit = () => {
-    this.cancelEdit();
-    this.prevName(this.editingName());
-    !!this.valueChanged && this.valueChanged(this.editingName());
+    if (this.prevName() !== this.editingName()) {
+      this.prevName(this.editingName());
+      !!this.valueChanged && this.valueChanged(this.editingName());
+    }
+    this.hideEditor();
   };
   cancelEdit = () => {
-    this.isEditing(false);
-    this.forNeibours(element => (element.style.display = ""));
+    this.editingName(this.prevName());
+    this.hideEditor();
   };
   nameEditorKeypress = (model, event) => {
     if (event.keyCode === 13) {

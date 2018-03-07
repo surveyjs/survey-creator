@@ -12,3 +12,12 @@ export function getNextValue(prefix: string, values: string[]) {
   }, 1);
   return prefix + index;
 }
+
+export function findParentNode(className: string, sourceNode: HTMLElement) {
+  var parent = sourceNode;
+  while (
+    (parent = parent.parentElement) &&
+    !parent.classList.contains(className)
+  );
+  return parent;
+}

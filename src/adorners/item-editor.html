@@ -3,14 +3,17 @@
         <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block; display: inline-block; width: calc(100% - 55px);"
         />
         <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">✓</span>
-        <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span>
+        <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
     </span>
     <span class="svda-title-editor-content svda-title-editor-start" data-bind="visible: !isEditing()">
         <span style="display: none;" data-bind="text: editingName"></span>
-        <span class="edit-survey-name" data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }">
-            <img class="svda-edit-icon" src="/src/images/Edit_24x24.svg" />
+        <span class="edit-survey-name icon-inplace-edit" data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }">
         </span>
     </span>
-    <span class="svda-drag-handle" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">☰</span>
-    <span class="svda-delete-item" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">✕</span>
+    <!-- ko if: notOther -->
+    <span class="svda-drag-handle icon-inplace-draggable" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">
+    </span>
+    <!-- /ko -->
+    <span class="svda-delete-item icon-inplace-delete" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">
+    </span>
 </div>

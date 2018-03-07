@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 import createDdmenu from "./utils/ddmenu";
+import { findParentNode } from "./utils/utils";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -138,9 +139,11 @@ function elementOnCreating(self: any, className: string) {
   });
   self.koIsSelected.subscribe(function(newValue) {
     if (self.renderedElement) {
-      var newClass = className;
-      if (newValue) newClass += " svd_q_selected ";
-      self.renderedElement.className = newClass;
+      if (newValue) {
+        self.renderedElement.classList.add("svd_q_selected");
+      } else {
+        self.renderedElement.classList.remove("svd_q_selected");
+      }
     }
     if (self.addonsElement) {
       self.addonsElement.style.display = newValue ? "" : "none";
@@ -228,11 +231,10 @@ function elementOnAfterRendering(
   disable: boolean
 ) {
   self.renderedElement = el;
+  self.renderedElement.classList.add("svd_question");
+  self.renderedElement.classList.add("svd_q_design_border");
   getSurvey(self).updateElementAllowingOptions(self);
-  var newClass = className;
-  if (self.koIsSelected()) newClass += " svd_q_selected";
-
-  el.className = newClass;
+  if (self.koIsSelected()) self.renderedElement.classList.add("svd_q_selected");
   el.style.opacity = self.koIsDragging() ? 0.4 : 1;
   el.draggable = self.allowingOptions.allowDragging;
   el.ondragover = function(e) {
@@ -289,32 +291,61 @@ function elementOnAfterRendering(
   addAdorner(el, self);
 }
 
-var adornersConfig = {};
+var adornersConfig: { [index: string]: any[] } = {};
 
 export function registerAdorner(name, adorner) {
-  adornersConfig[name] = adorner;
+  if (!adornersConfig[name]) {
+    adornersConfig[name] = [];
+  }
+  adornersConfig[name].push(adorner);
+}
+export function removeAdorners(names: string[] = undefined) {
+  if (names !== undefined) {
+    (names || []).forEach(name => delete adornersConfig[name]);
+  } else {
+    adornersConfig = {};
+  }
 }
 
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
-    classes[element] = adornersConfig[element].getMarkerClass(options.question);
+    adornersConfig[element].forEach(adorner => {
+      classes[element] =
+        classes[element] + " " + adorner.getMarkerClass(options.question);
+    });
   });
+}
+
+function filterNestedQuestions(rootQuestionNode, elements) {
+  var targetElements = [];
+  for (var i = 0; i < elements.length; i++) {
+    var questionElement = findParentNode("svd_question", elements[i]);
+    if (questionElement === rootQuestionNode) {
+      targetElements.push(elements[i]);
+    }
+  }
+  return targetElements;
 }
 
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach(element => {
-    var elementClass = adornersConfig[element].getMarkerClass(model);
-    if (!!elementClass) {
-      var elements = node.querySelectorAll("." + elementClass);
-      if (elements.length > 0) {
-        adornersConfig[element].afterRender(
-          elements,
-          model,
-          getSurvey(model).getEditor()
-        );
+    adornersConfig[element].forEach(adorner => {
+      var elementClass = adorner.getMarkerClass(model);
+      if (!!elementClass) {
+        var elements = node.querySelectorAll("." + elementClass);
+        elements = filterNestedQuestions(node, elements);
+        if (
+          elements.length === 0 &&
+          node.className.indexOf(elementClass) !== -1
+        ) {
+          elements = [node];
+        }
+        if (elements.length > 0) {
+          adorner.afterRender(elements, model, getSurvey(model).getEditor());
+        }
       }
-    }
+    });
   });
 }
 

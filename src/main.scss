@@ -16,6 +16,11 @@
   font-size: 12px;
   color: $text-color;
 
+  .svd-drag-handle {
+    font-size: 20px;
+    cursor: move;
+  }
+
   .form-control {
     border-radius: 2px;
   }

@@ -1,4 +1,4 @@
-import { getNextValue } from "../src/utils/getNextValue";
+import { getNextValue } from "../src/utils/utils";
 
 export default QUnit.module("UtilsTests");
 

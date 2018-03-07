@@ -5,7 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { getNextValue } from "../utils/getNextValue";
+import { getNextValue } from "../utils/utils";
 
 export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   koActiveView: any;

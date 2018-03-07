@@ -1,11 +1,12 @@
 .title_editable {
   pointer-events: all;
+  cursor: text;
   .svda-title-editor-start {
     cursor: pointer;
     visibility: hidden;
   }
 }
-.title_editable:hover {
+.svd_q_selected .title_editable:hover {
   .svda-title-editor-start {
     visibility: visible;
   }
@@ -24,10 +25,6 @@ title-editor {
     .svda-edit-button {
       padding-left: 5px;
       cursor: pointer;
-    }
-    .svda-edit-icon {
-      width: 12px;
-      height: 12px;
     }
   }
 }
