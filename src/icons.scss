@@ -191,6 +191,21 @@
     @include svg-icon(12px);
   }
 
+  .icon-inplace-edit:before {
+    background-image: url("./images/inplace/Edit_12x12.svg");
+    @include svg-icon(12px);
+  }
+
+  .icon-inplace-delete:before {
+    background-image: url("./images/inplace/Delete_12x12.svg");
+    @include svg-icon(12px);
+  }
+
+  .icon-inplace-draggable:before {
+    background-image: url("./images/inplace/Dragging_12x12.svg");
+    @include svg-icon(12px);
+  }
+
   .glyphicon {
     font-weight: bold;
     display: inline-block;
