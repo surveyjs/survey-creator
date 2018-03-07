@@ -10,7 +10,7 @@
 question-actions {
   display: none;
 }
-.svd_q_selected {
+.svd_q_selected > .svda-question-actions {
   question-actions {
     display: block;
   }
