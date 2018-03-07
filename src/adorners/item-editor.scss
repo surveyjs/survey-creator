@@ -16,7 +16,6 @@
 .svda-drag-handle {
   cursor: move;
   visibility: hidden;
-  font-size: 10px;
   padding-left: 5px;
 }
 .svd_q_selected .item_draggable {
@@ -32,9 +31,6 @@
   cursor: pointer;
   visibility: hidden;
   padding-left: 5px;
-  vertical-align: middle;
-  font-size: 14px;
-  color: darkred;
 }
 .svd_q_selected .item_editable:hover {
   .svda-delete-item {
