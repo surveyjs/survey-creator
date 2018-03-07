@@ -34,7 +34,7 @@ To build library yourself:
 	cd surveyjs.editor
 	```
 
- 2. **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. 
+ 2. **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. You need a version of Node.js greater than 6.0.0 and npm greater than 2.7.0
 	```
 	npm install
 	```
