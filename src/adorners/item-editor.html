@@ -7,16 +7,13 @@
     </span>
     <span class="svda-title-editor-content svda-title-editor-start" data-bind="visible: !isEditing()">
         <span style="display: none;" data-bind="text: editingName"></span>
-        <span class="edit-survey-name" data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }">
-            <img class="svda-edit-icon" src="/src/images/inplace/Edit_12x12.svg" />
+        <span class="edit-survey-name icon-inplace-edit" data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }">
         </span>
     </span>
     <!-- ko if: notOther -->
-    <span class="svda-drag-handle" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">
-        <img class="svda-edit-icon" src="/src/images/inplace/Dragging_12x12.svg" />
+    <span class="svda-drag-handle icon-inplace-draggable" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">
     </span>
     <!-- /ko -->
-    <span class="svda-delete-item" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">
-        <img class="svda-edit-icon" src="/src/images/inplace/Delete_12x12.svg" />
+    <span class="svda-delete-item icon-inplace-delete" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">
     </span>
 </div>
