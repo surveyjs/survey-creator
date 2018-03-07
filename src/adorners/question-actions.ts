@@ -3,18 +3,57 @@ import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import "./question-actions.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./question-actions.html");
+import { QuestionConverter } from "../questionconverter";
 
 export class QuestionActionsAdorner {
-  constructor(private question) {}
+  constructor(private question, private editor) {}
+
+  public localizeType(type) {
+    return editorLocalization.getString("qt." + type);
+  }
+
   get type() {
-    return editorLocalization.getString("qt." + this.question.getType());
+    return this.question.getType();
+  }
+
+  get allowChangeType() {
+    return true;
+    // return this.question.allowChangeType; TODO retuned undefined
+  }
+
+  private createTypeByClass(className) {
+    return {
+      name: this.localizeType(className),
+      value: className
+    };
+  }
+
+  get availableTypes() {
+    var availableTypes = [];
+    var convertClasses = QuestionConverter.getConvertToClasses(
+      this.question.getType()
+    );
+
+    availableTypes.push(this.createTypeByClass(this.type));
+
+    for (var i = 0; i < convertClasses.length; i++) {
+      var className = convertClasses[i];
+      availableTypes.push(this.createTypeByClass(className));
+    }
+
+    return availableTypes;
+  }
+
+  onConvertType(data, event) {
+    var newType = event.target.value;
+    this.editor.convertCurrentObject(this.question, newType);
   }
 }
 
 ko.components.register("question-actions", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = new QuestionActionsAdorner(params.question);
+      var model = new QuestionActionsAdorner(params.question, params.editor);
       return model;
     }
   },
@@ -25,11 +64,11 @@ export var questionActionsAdorner = {
   getMarkerClass: model => {
     return "question_actions";
   },
-  afterRender: (elements: HTMLElement[], model) => {
+  afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("div");
     decoration.className = "svda-question-actions";
     decoration.innerHTML =
-      "<question-actions params='question: $data'></question-actions>";
+      "<question-actions params='question: $data, editor:editor'></question-actions>";
     elements[0].appendChild(decoration);
     ko.applyBindings(model, decoration);
   }

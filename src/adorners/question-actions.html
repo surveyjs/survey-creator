@@ -1,3 +1,11 @@
 <div>
-    <span data-bind="text: type"></span>
+    <!-- ko if: allowChangeType -->
+    <select data-bind="foreach: availableTypes, event: { change: onConvertType }">
+        <option data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
+    </select>
+    <!-- /ko -->
+
+    <!-- ko ifnot: allowChangeType -->
+    <span data-bind="text: localizeType(type)"> </span>
+    <!-- /ko -->
 </div>

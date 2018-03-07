@@ -253,6 +253,34 @@ export class DragDropHelper {
       parent && <HTMLElement>parent.querySelector("#scrollableDiv");
     this.prevCoordinates = { x: -1, y: -1 };
   }
+  public attachToElement(domElement, surveyElement) {
+    domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
+    domElement.draggable = surveyElement.allowingOptions.allowDragging;
+    domElement.ondragover = function(e) {
+      if (!surveyElement.allowingOptions.allowDragging) return false;
+      if (!e["markEvent"]) {
+        e["markEvent"] = true;
+        surveyElement.dragDropHelper().doDragDropOver(e, surveyElement, true);
+        return false;
+      }
+    };
+    domElement.ondrop = function(e) {
+      if (!e["markEvent"]) {
+        e["markEvent"] = true;
+        surveyElement.dragDropHelper().doDrop(e);
+      }
+    };
+    domElement.ondragstart = function(e) {
+      if (!surveyElement.allowingOptions.allowDragging) return false;
+      if (!e["markEvent"]) {
+        e["markEvent"] = true;
+        surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
+      }
+    };
+    domElement.ondragend = function(e) {
+      surveyElement.dragDropHelper().end();
+    };
+  }
   public get survey(): Survey.Survey {
     return <Survey.Survey>this.data;
   }
