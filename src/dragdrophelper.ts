@@ -314,6 +314,9 @@ export class DragDropHelper {
     this.isScrollStop = true;
     this.clearData();
   }
+  public get isMoving(): boolean {
+    return this.ddTarget && this.ddTarget.source;
+  }
   public doDrop(event: DragEvent) {
     if (event.stopPropagation) {
       event.stopPropagation();

@@ -1004,9 +1004,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyObjects.addPage(page);
   }
   private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
-    var page = this.getPageByElement(question);
-    var options = { question: question, page: page };
-    this.onQuestionAdded.fire(this, options);
+    if (!this.dragDropHelper.isMoving) {
+      var page = this.getPageByElement(question);
+      var options = { question: question, page: page };
+      this.onQuestionAdded.fire(this, options);
+    }
     this.surveyObjects.addElement(question, parentPanel);
     this.survey.render();
   }
