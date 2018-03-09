@@ -97,7 +97,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       self.onHideModal();
     };
     self.onShowModal = function() {
-      self.beforeShowModal();
+      self.beforeShow();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
         bodyClass: "",
         closeTimeout: 100,
@@ -124,7 +124,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     };
   }
   public setup() {
-    this.beforeShowModal();
+    super.setup();
+    this.beforeShow();
   }
   public get isModal(): boolean {
     return true;
@@ -132,7 +133,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   public get isShowingModal(): boolean {
     return this.isShowingModalValue;
   }
-  public beforeShowModal() {
+  public beforeShow() {
     this.isShowingModalValue = true;
   }
   public beforeCloseModal() {
@@ -201,9 +202,6 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
   }
   public get isEditable(): boolean {
     return true;
-  }
-  public setup() {
-    super.setup();
   }
   public getValueText(value: any): string {
     if (!value) return null;

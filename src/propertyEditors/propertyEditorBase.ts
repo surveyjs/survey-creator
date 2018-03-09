@@ -52,7 +52,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public isInplaceProperty: boolean = false;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
+  public onValueUpdated: (newValue: any) => any;
   public setup() {}
+  public beforeShow() {}
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
@@ -293,6 +295,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.beginValueUpdating();
     this.koValue(this.getValue());
     this.editingValue = this.koValue();
+    if (this.onValueUpdated) this.onValueUpdated(this.editingValue);
     this.endValueUpdating();
   }
   protected getValue(): any {

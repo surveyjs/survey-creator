@@ -45,6 +45,9 @@ export class SurveyQuestionEditorProperty {
   public reset() {
     this.editor.koValue(this.property.getPropertyValue(this.obj));
   }
+  public beforeShow() {
+    this.editor.beforeShow();
+  }
 }
 
 export class SurveyQuestionEditorRow {
@@ -100,10 +103,13 @@ export class SurveyQuestionEditorProperties {
     this.buildRows(properties);
   }
   public apply() {
-    this.applyOrReset(true);
+    this.performForAllProperties("apply");
   }
   public reset() {
-    this.applyOrReset(false);
+    this.performForAllProperties("reset");
+  }
+  public beforeShow() {
+    this.performForAllProperties("beforeShow");
   }
   public hasError(): boolean {
     var isError = false;
@@ -112,11 +118,13 @@ export class SurveyQuestionEditorProperties {
     }
     return isError;
   }
-  protected applyOrReset(isApply: boolean) {
+  private performForAllProperties(methodName: string) {
     for (var i = 0; i < this.rows.length; i++) {
       for (var j = 0; j < this.rows[i].properties.length; j++) {
-        if (isApply) this.rows[i].properties[j].apply();
-        else this.rows[i].properties[j].reset();
+        var property = this.rows[i].properties[j];
+        if (methodName === "apply") property.apply();
+        if (methodName === "reset") property.reset();
+        if (methodName === "beforeShow") property.beforeShow();
       }
     }
   }

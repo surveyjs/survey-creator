@@ -18,8 +18,8 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     if (!value) return editorLocalization.getString("pe.empty");
     return JSON.stringify(value);
   }
-  public beforeShowModal() {
-    super.beforeShowModal();
+  public beforeShow() {
+    super.beforeShow();
     this.createSurvey();
   }
   protected onBeforeApply() {
