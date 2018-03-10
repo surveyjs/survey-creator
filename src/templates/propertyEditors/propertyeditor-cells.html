@@ -1,0 +1,37 @@
+<script type="text/html" id="propertyeditor-cells">
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
+</script>
+<script type="text/html" id="propertyeditorcontent-cells">
+    <div class="panel card">
+        <div data-bind="visible:!koCanEdit()">There is should be at least one column or row</div>
+        <div  data-bind="visible: koCanEdit" style="overflow:auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <!-- ko foreach: koColumns -->
+                        <th>
+                            <span data-bind="text:$data"></span>
+                        </th>
+                        <!-- /ko -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: koRows  -->
+                    <tr>
+                        <td>
+                        <span data-bind="text:row.text"></span>
+                        </td>
+                        <!-- ko foreach: koCells -->
+                        <td>
+                            <input type="text" class="form-control" data-bind="textInput:text"/>
+                        </td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
