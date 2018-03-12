@@ -251,6 +251,9 @@ export class QuestionToolbox {
           koCollapsed: ko.observable(categoryName !== prevActiveCategory),
           expand: function() {
             self.koActiveCategory(this.name);
+          },
+          koExpanded: function() {
+            return !this.koCollapsed;
           }
         };
         categoriesHash[categoryName] = category;

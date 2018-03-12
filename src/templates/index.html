@@ -30,12 +30,12 @@
                 <!-- ko if: toolbox.koHasCategories -->
                 <div class="panel-group" role="tablist" data-bind="foreach: toolbox.koCategories">
                     <div class="panel panel-info">
-                        <div class="panel-heading" role="tab">
+                        <div class="panel-heading" role="tab" data-bind="css: { 'expand': koExpanded}">
                             <h4 class="panel-title">
                                 <a href="#" data-bind="text: name, click: expand"></a>
                             </h4>
                         </div>
-                        <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed }">
+                        <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed , 'expand': koExpanded}">
                             <!-- ko foreach: items -->
                             <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                                 <span data-bind="css: iconName, attr: {title: title}"></span>

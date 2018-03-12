@@ -28,5 +28,22 @@
         margin-left: 1em;
       }
     }
+    .panel-info {
+      border: none;
+      &.panel {
+        background: transparent;
+      }
+
+      & > .panel-heading {
+        border: none;
+        background-color: transparent;
+
+        &.expand {
+          .panel-title a {
+            color: $main-color;
+          }
+        }
+      }
+    }
   }
 }
