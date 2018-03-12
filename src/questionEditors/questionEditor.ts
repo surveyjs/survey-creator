@@ -169,8 +169,19 @@ export class SurveyQuestionEditor {
       self.koActiveTab(tab.name);
     };
     var tabs = this.buildTabs();
-    this.koActiveTab = ko.observable(tabs[0].name);
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
+    this.koActiveTab = ko.observable();
+    this.koActiveTab.subscribe(function(newValue) {
+      for (var i = 0; i < self.koTabs().length; i++) {
+        if (self.koTabs()[i].name == newValue) {
+          self.koTabs()[i].beforeShow();
+          return;
+        }
+      }
+    });
+    if (tabs.length > 0) {
+      this.koActiveTab(tabs[0].name);
+    }
     this.koTitle = ko.observable();
     this.koShowApplyButton = ko.observable(
       !this.options || this.options.showApplyButtonInEditors
@@ -296,6 +307,9 @@ export class SurveyQuestionEditorTab {
   }
   public hasError(): boolean {
     return this.properties.hasError();
+  }
+  public beforeShow() {
+    this.properties.beforeShow();
   }
   public reset() {
     this.properties.reset();

@@ -124,9 +124,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       typeof ace.require("ace/ext/language_tools") !== "undefined"
     );
   }
-  public setup() {
-    super.setup();
-  }
   public get addConditionQuestionOptions(): string {
     return editorLocalization.editorLocalization.getString(
       "pe.conditionSelectQuestion"

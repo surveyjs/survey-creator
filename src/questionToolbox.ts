@@ -26,6 +26,10 @@ export interface IQuestionToolboxItem {
    * True, if an end user added this item into Toolbox from the survey
    */
   isCopied: boolean;
+  /**
+   * Toolbox item category. If it is empty, it goes to 'General' category.
+   */
+  category: string;
 }
 
 /**
@@ -60,9 +64,19 @@ export class QuestionToolbox {
   private itemsValue: Array<IQuestionToolboxItem> = [];
 
   koItems = ko.observableArray();
+  koCategories = ko.observableArray();
+  koActiveCategory = ko.observable("");
+  koHasCategories = ko.observable(false);
 
   constructor(private supportedQuestions: Array<string> = null) {
     this.createDefaultItems(supportedQuestions);
+    var self = this;
+    this.koActiveCategory.subscribe(function(newValue) {
+      for (var i = 0; i < self.koCategories().length; i++) {
+        var category = self.koCategories()[i];
+        (<any>category).koCollapsed((<any>category).name !== newValue);
+      }
+    });
   }
   /**
    * The Array of Toolbox items as Text JSON.
@@ -131,7 +145,8 @@ export class QuestionToolbox {
       title: question.name,
       isCopied: true,
       iconName: "icon-default",
-      json: this.getQuestionJSON(question)
+      json: this.getQuestionJSON(question),
+      category: ""
     };
     if (this.replaceItem(item)) return;
     var copied = this.copiedItems;
@@ -188,8 +203,68 @@ export class QuestionToolbox {
       this.removeItem(removedItems[i].name);
     }
   }
+  /**
+   * Returns toolbox item by its name. Returns null if there is no toolbox item with this name
+   * @param name
+   */
+  public getItemByName(name: string): IQuestionToolboxItem {
+    var index = this.indexOf(name);
+    return index > -1 ? this.itemsValue[index] : null;
+  }
+  /**
+   * Change the category of the toolbox item
+   * @param name the toolbox item name
+   * @param category new category name
+   */
+  public changeCategory(name: string, category: string) {
+    this.changeCategories([{ name: name, category: category }]);
+  }
+  /**
+   * Change categories for several toolbox items.
+   * @param changedItems the array of objects {name: "your toolbox item name", category: "new category name"}
+   */
+  public changeCategories(changedItems: Array<any>) {
+    for (var i = 0; i < changedItems.length; i++) {
+      var item = changedItems[i];
+      var toolboxItem = this.getItemByName(item.name);
+      if (toolboxItem) {
+        toolboxItem.category = item.category;
+      }
+    }
+    this.onItemsChanged();
+  }
   protected onItemsChanged() {
     this.koItems(this.itemsValue);
+    var categories = [];
+    var categoriesHash = {};
+    var prevActiveCategory = this.koActiveCategory();
+    var self = this;
+    for (var i = 0; i < this.itemsValue.length; i++) {
+      var item = this.itemsValue[i];
+      var categoryName = item.category
+        ? item.category
+        : editorLocalization.getString("ed.toolboxGeneralCategory"); //TODO
+      if (!categoriesHash[categoryName]) {
+        var category = {
+          name: categoryName,
+          items: [],
+          koCollapsed: ko.observable(categoryName !== prevActiveCategory),
+          expand: function() {
+            self.koActiveCategory(this.name);
+          }
+        };
+        categoriesHash[categoryName] = category;
+        categories.push(category);
+      }
+      categoriesHash[categoryName].items.push(item);
+    }
+    this.koCategories(categories);
+    if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
+      this.koActiveCategory(prevActiveCategory);
+    } else {
+      this.koActiveCategory(categories.length > 0 ? categories[0].name : "");
+    }
+    this.koHasCategories(categories.length > 1);
   }
   private indexOf(name: string) {
     for (var i = 0; i < this.itemsValue.length; i++) {
@@ -222,7 +297,8 @@ export class QuestionToolbox {
         iconName: "icon-" + name,
         title: editorLocalization.getString("qt." + name),
         json: json,
-        isCopied: false
+        isCopied: false,
+        category: ""
       };
       this.itemsValue.push(item);
     }
@@ -250,7 +326,8 @@ export class QuestionToolbox {
         iconName: iconName,
         title: title,
         json: json,
-        isCopied: false
+        isCopied: false,
+        category: ""
       };
       this.itemsValue.push(item);
     }

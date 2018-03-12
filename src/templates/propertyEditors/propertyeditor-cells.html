@@ -1,0 +1,37 @@
+<script type="text/html" id="propertyeditor-cells">
+    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+    <!-- /ko -->
+</script>
+<script type="text/html" id="propertyeditorcontent-cells">
+    <div class="panel card">
+        <div data-bind="visible:!koCanEdit(), text: $root.getLocString('pe.cellsEmptyRowsColumns')"></div>
+        <div  data-bind="visible: koCanEdit" style="overflow:auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <!-- ko foreach: koColumns -->
+                        <th>
+                            <span data-bind="text:$data"></span>
+                        </th>
+                        <!-- /ko -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: koRows  -->
+                    <tr>
+                        <td>
+                        <span data-bind="text:row.text"></span>
+                        </td>
+                        <!-- ko foreach: koCells -->
+                        <td style="min-width:120px">
+                            <textarea rows="2" cols="25" class="form-control" data-bind="textInput:text"></textarea>
+                        </td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>

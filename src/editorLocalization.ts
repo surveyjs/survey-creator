@@ -118,6 +118,7 @@ export var defaultStrings = {
     generateValidJSON: "Generate Valid JSON",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
+    toolboxGeneralCategory: "General",
     delSelObject: "Delete selected object",
     editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
@@ -140,6 +141,7 @@ export var defaultStrings = {
     edit: "Edit",
     move: "Move",
     empty: "<empty>",
+    notEmpty: "<edit value>",
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -155,6 +157,7 @@ export var defaultStrings = {
     aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
     assistantTitle: "Available questions:",
+    cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
     value: "Value",

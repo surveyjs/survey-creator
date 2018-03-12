@@ -64,6 +64,9 @@ export {
 export {
   SurveyPropertyValidatorsEditor
 } from "../propertyEditors/propertyValidatorsEditor";
+export {
+  SurveyPropertyCellsEditor
+} from "../propertyEditors/propertyCellsEditor";
 export { SurveyObjects } from "../surveyObjects";
 
 export { editorLocalization, defaultStrings } from "../editorLocalization";

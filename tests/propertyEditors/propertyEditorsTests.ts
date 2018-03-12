@@ -190,7 +190,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
     { value: 3, text: "item3" }
   ];
   var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-  itemValueProperty.beforeShowModal();
+  itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
     choices = newValue;
   };
@@ -287,7 +287,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
 QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   var choices = [{ value: 1, text: "item1" }, { value: 2 }];
   var editor = new SurveyPropertyItemValuesEditor(null);
-  editor.beforeShowModal();
+  editor.beforeShow();
   editor.editingValue = choices;
   editor.onChanged = (newValue: Array<Survey.ItemValue>) => {
     choices = newValue;
@@ -340,7 +340,7 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
   choices.push(new Survey.ItemValue(1, "1"));
   choices.push(new Survey.ItemValue("item 2", "item 2"));
   var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-  itemValueProperty.beforeShowModal();
+  itemValueProperty.beforeShow();
   assert.equal(choices[0].hasText, true, "the first item has text");
   assert.equal(choices[1].hasText, true, "the second item has text");
   itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
@@ -367,7 +367,7 @@ QUnit.test(
       { value: "item 2", text: "item 2" }
     ];
     var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-    itemValueProperty.beforeShowModal();
+    itemValueProperty.beforeShow();
     itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
       choices = newValue;
     };
@@ -391,7 +391,7 @@ QUnit.test(
 QUnit.test("SurveyPropertyItemValue_PureValue", function(assert) {
   var choices = [1, "item2", { value: 3, text: "item3" }];
   var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-  itemValueProperty.beforeShowModal();
+  itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
     choices = newValue;
   };
@@ -508,7 +508,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
       q.choices = newValue;
     }
   );
-  propEditor.beforeShowModal();
+  propEditor.beforeShow();
   propEditor.object = q;
   assert.equal(
     propEditor.koItems()[0].cells[1].koValue(),
@@ -614,7 +614,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
   columns.push(new Survey.MatrixDropdownColumn("column 2"));
   columns[0]["choices"] = [1, 2, "three"];
   var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
-  itemValueProperty.beforeShowModal();
+  itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (
     newValue: Array<Survey.MatrixDropdownColumn>
   ) => {
@@ -650,7 +650,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   columns.push(new Survey.MatrixDropdownColumn("column 1"));
   columns.push(new Survey.MatrixDropdownColumn("column 2"));
   var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
-  itemValueProperty.beforeShowModal();
+  itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (
     newValue: Array<Survey.MatrixDropdownColumn>
   ) => {
@@ -720,7 +720,7 @@ QUnit.test("Triggers property editor", function(assert) {
   survey.triggers.push(trigger);
   var result = [];
   var propEditor = new SurveyPropertyTriggersEditor(null);
-  propEditor.beforeShowModal();
+  propEditor.beforeShow();
   propEditor.onChanged = (newValue: any) => {
     result = newValue;
   };
@@ -809,7 +809,7 @@ QUnit.test("Validators property editor", function(assert) {
   question.validators.push(validator);
   var result = [];
   var propEditor = new SurveyPropertyValidatorsEditor(null);
-  propEditor.beforeShowModal();
+  propEditor.beforeShow();
   assert.equal(
     propEditor.availableValidators.length,
     propEditor.koValidators().length,
