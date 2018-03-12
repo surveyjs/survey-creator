@@ -4,7 +4,7 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-cells">
     <div class="panel card">
-        <div data-bind="visible:!koCanEdit()">There is should be at least one column or row</div>
+        <div data-bind="visible:!koCanEdit(), text: $root.getLocString('pe.cellsEmptyRowsColumns')"></div>
         <div  data-bind="visible: koCanEdit" style="overflow:auto">
             <table class="table">
                 <thead>
@@ -25,7 +25,7 @@
                         </td>
                         <!-- ko foreach: koCells -->
                         <td>
-                            <input type="text" class="form-control" data-bind="textInput:text"/>
+                            <textarea rows="2" cols="25" class="form-control" data-bind="textInput:text"></textarea>
                         </td>
                         <!-- /ko -->
                     </tr>

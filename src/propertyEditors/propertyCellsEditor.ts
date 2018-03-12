@@ -15,6 +15,10 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     this.koColumns = ko.observableArray();
     this.koCanEdit = ko.observable(false);
   }
+  public getValueText(value: any): string {
+    var strName = !value ? "empty" : "notEmpty";
+    return editorLocalization.getString("pe." + strName);
+  }
   public beforeShow() {
     super.beforeShow();
     this.setupCells();
@@ -32,7 +36,11 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
         (<any>matrix).setCellText(i, j, cells[j].text());
       }
     }
-    this.koValue((<any>matrix).cells);
+    if (!(<any>matrix).cells.isEmpty) {
+      this.koValue((<any>matrix).cells);
+    } else {
+      this.koValue(null);
+    }
   }
   public get editorType(): string {
     return "cells";
