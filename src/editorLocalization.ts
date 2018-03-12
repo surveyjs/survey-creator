@@ -118,6 +118,7 @@ export var defaultStrings = {
     generateValidJSON: "Generate Valid JSON",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
+    toolboxGeneralCategory: "General",
     delSelObject: "Delete selected object",
     editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",

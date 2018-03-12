@@ -92,6 +92,28 @@ QUnit.test("toolbox several categories", function(assert) {
   );
 });
 
+QUnit.test("toolbox change categories", function(assert) {
+  var toolbox = new QuestionToolbox([
+    "text",
+    "dropdown",
+    "checkbox",
+    "radiogroup",
+    "comment",
+    "matrix"
+  ]);
+  assert.equal(
+    toolbox.koCategories().length,
+    1,
+    "There is one category by default"
+  );
+  toolbox.changeCategories([
+    { name: "comment", category: "comment" },
+    { name: "matrix", category: "matrix" }
+  ]);
+  assert.equal(toolbox.koCategories().length, 3, "There are 3 categories now");
+  toolbox.changeCategory("radiogroup", "radio");
+  assert.equal(toolbox.koCategories().length, 4, "There are 4 categories now");
+});
 QUnit.test("toolbox copied questions", function(assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.copiedItems.length, 0, "There is no copied questions");

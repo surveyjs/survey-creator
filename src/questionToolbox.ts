@@ -203,6 +203,36 @@ export class QuestionToolbox {
       this.removeItem(removedItems[i].name);
     }
   }
+  /**
+   * Returns toolbox item by its name. Returns null if there is no toolbox item with this name
+   * @param name
+   */
+  public getItemByName(name: string): IQuestionToolboxItem {
+    var index = this.indexOf(name);
+    return index > -1 ? this.itemsValue[index] : null;
+  }
+  /**
+   * Change the category of the toolbox item
+   * @param name the toolbox item name
+   * @param category new category name
+   */
+  public changeCategory(name: string, category: string) {
+    this.changeCategories([{ name: name, category: category }]);
+  }
+  /**
+   * Change categories for several toolbox items.
+   * @param changedItems the array of objects {name: "your toolbox item name", category: "new category name"}
+   */
+  public changeCategories(changedItems: Array<any>) {
+    for (var i = 0; i < changedItems.length; i++) {
+      var item = changedItems[i];
+      var toolboxItem = this.getItemByName(item.name);
+      if (toolboxItem) {
+        toolboxItem.category = item.category;
+      }
+    }
+    this.onItemsChanged();
+  }
   protected onItemsChanged() {
     this.koItems(this.itemsValue);
     var categories = [];
@@ -211,7 +241,9 @@ export class QuestionToolbox {
     var self = this;
     for (var i = 0; i < this.itemsValue.length; i++) {
       var item = this.itemsValue[i];
-      var categoryName = item.category ? item.category : "General"; //TODO
+      var categoryName = item.category
+        ? item.category
+        : editorLocalization.getString("ed.toolboxGeneralCategory"); //TODO
       if (!categoriesHash[categoryName]) {
         var category = {
           name: categoryName,
