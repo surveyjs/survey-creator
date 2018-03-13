@@ -1,4 +1,4 @@
-<div>
+<div data-bind="css: {'svda_same_line' : !question.startWithNewLine}">
     <!-- ko foreach: actions -->
     <!-- ko if: !$data.template -->
     <span class="svda_question_action" data-bind="click: function() { onClick($parent.question); }, attr: {title: text}, css: $parent.getStyle($data)"></span>

@@ -39,6 +39,14 @@ question-actions {
 .svd_q_selected > .svda-question-actions {
   question-actions {
     display: block;
+
+    .svda_same_line {
+      .svda_action_separator {
+        display: block;
+        margin: 0;
+        border: 0;
+      }
+    }
   }
 
   .svda_action_separator {
