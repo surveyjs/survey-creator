@@ -211,6 +211,16 @@
     @include svg-icon(12px);
   }
 
+  .icon-toolbox-arrow-up:before {
+    background-image: url("./images/Arrow_up_10x10.svg");
+    @include svg-icon(10px);
+  }
+
+  .icon-toolbox-arrow-down:before {
+    background-image: url("./images/Arrow_down_10x10.svg");
+    @include svg-icon(10px);
+  }
+
   .glyphicon {
     font-weight: bold;
     display: inline-block;
