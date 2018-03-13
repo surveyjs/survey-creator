@@ -26,16 +26,14 @@
     <div class="panel card svd_content">
         <div class="row svd_survey_designer" data-bind="visible: koViewType() == 'designer'">
             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox">
-                <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <!-- ko if: toolbox.koHasCategories -->
                 <div class="panel-group" role="tablist" data-bind="foreach: toolbox.koCategories">
                     <div class="panel panel-info">
-                        <div class="panel-heading" role="tab" data-bind="css: { 'expand': koExpanded}">
-                            <h4 class="panel-title">
-                                <a href="#" data-bind="text: name, click: expand"></a>
-                            </h4>
+                        <div class="panel-heading" role="tab" data-bind="css: { 'header-expand': !koCollapsed() }, click: expand">
+                            <span data-bind="text: name"></span>
+                            <span class="icon-toolbox-arrow" data-bind="css: { 'icon-toolbox-arrow-down': koCollapsed(), 'icon-toolbox-arrow-up': !koCollapsed()}"></span>
                         </div>
-                        <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed , 'expand': koExpanded}">
+                        <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
                             <!-- ko foreach: items -->
                             <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                                 <span data-bind="css: iconName, attr: {title: title}"></span>
@@ -47,6 +45,7 @@
                 </div>
                 <!-- /ko  -->
                 <!-- ko if: !toolbox.koHasCategories() -->
+                <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <!-- ko foreach: toolbox.koItems -->
                 <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                     <span data-bind="css: iconName, attr: {title: title}"></span>
