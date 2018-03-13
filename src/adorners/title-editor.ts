@@ -11,7 +11,7 @@ export class TitleInplaceEditor {
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
-  protected forNeibours(func: (el) => void) {
+  protected forNeibours(func: (el: HTMLElement) => void) {
     var holder = this.rootElement.parentElement.parentElement;
     for (var i = 0; i < holder.children.length - 1; i++) {
       var element = holder.children[i];
@@ -31,7 +31,7 @@ export class TitleInplaceEditor {
     );
   }
 
-  valueChanged: (any) => void;
+  valueChanged: (newVal: any) => void;
 
   public getLocString(str: string) {
     return editorLocalization.getString(str);
