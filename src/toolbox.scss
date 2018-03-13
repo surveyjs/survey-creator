@@ -10,7 +10,7 @@
       padding-bottom: 10px;
     }
     .svd_toolbox_item {
-      padding: 8px 0;
+      padding: 8px;
       border-bottom: 1px solid $light-border-color;
       line-height: 1.2em;
       white-space: nowrap;
@@ -18,14 +18,45 @@
       text-overflow: ellipsis;
       cursor: pointer;
       &:hover {
-        -webkit-box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
-        -moz-box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
-        box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 1);
-        padding-left: 5px;
-        padding-right: 5px;
+        background-color: #e6eaed;
       }
       .svd_toolbox_item_text {
         margin-left: 1em;
+      }
+    }
+    .panel-info {
+      border: none;
+      &.panel {
+        background: transparent;
+      }
+
+      & > .panel-heading {
+        border: none;
+        background-color: transparent;
+        padding-left: 0;
+        font-size: 1.17em;
+        font-weight: 600;
+        cursor: pointer;
+
+        span {
+          color: $text-color;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+
+        .icon-toolbox-arrow {
+          float: right;
+        }
+
+        &.header-expand {
+          span {
+            color: $main-color;
+          }
+        }
+      }
+
+      [role="tabpanel"] {
+        padding-left: 15px;
       }
     }
   }
