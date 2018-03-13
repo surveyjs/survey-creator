@@ -40,4 +40,13 @@ question-actions {
   question-actions {
     display: block;
   }
+
+  .svda_action_separator {
+    display: inline-block;
+    height: 16px;
+    border-left: 1px solid #ddd;
+    vertical-align: middle;
+    margin-left: 15px;
+    margin-top: -5px;
+  }
 }

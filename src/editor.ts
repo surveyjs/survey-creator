@@ -1262,6 +1262,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
+      if(options.items.length > 0) {
+        options.items.push({template: "action-separator"})
+      }
+
       if (opts.allowCopy) {
         options.items.push({
           name: "copy",
@@ -1283,7 +1287,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       }
 
       if (opts.allowChangeType) {
-        var currentType = options.obj.getType();
+        if(options.items.length > 0) {
+          options.items.push({template: "action-separator"})
+        }
+          var currentType = options.obj.getType();
         var convertClasses = QuestionConverter.getConvertToClasses(currentType);
         var allowChangeType = convertClasses.length > 0;
         var createTypeByClass = className => {
