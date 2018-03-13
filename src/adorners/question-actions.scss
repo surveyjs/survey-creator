@@ -1,21 +1,26 @@
 .svda-question-actions {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  background-color: #1ab394;
-  padding: 0 5px;
-  color: white;
+  right: 15px;
+  top: 15px;
 
-  select {
-    background-color: #1ab394;
+  .svda_current_type {
+    color: #1ab394;
+    font-weight: 700;
+    cursor: auto;
+  }
+
+  select.svda_current_type {
+    background-color: #f5f5f5;
     border: none;
     outline: none;
+    cursor: pointer;
+
     &:focus {
       border: none;
       outline: none;
     }
     option {
-      background: #1ab394;
+      background: #f5f5f5;
     }
   }
 }
@@ -24,6 +29,11 @@ question-actions {
   display: none;
   .svda_question_action {
     cursor: pointer;
+    margin-left: 1em;
+  }
+
+  > div {
+    white-space: nowrap;
   }
 }
 .svd_q_selected > .svda-question-actions {

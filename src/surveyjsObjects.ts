@@ -8,6 +8,7 @@ export interface ISurveyObjectMenuItem {
   name: string;
   text: string;
   onClick: (obj: Survey.Base) => any;
+  template?: string;
 }
 
 export class SurveyForDesigner extends Survey.Survey {
@@ -131,7 +132,6 @@ function elementOnCreating(surveyElement: any) {
     return surveyElement.dragDropHelperValue;
   };
   surveyElement.renderedElement = null;
-  surveyElement.addonsElement = null;
   surveyElement.koIsDragging = ko.observable(false);
   surveyElement.koIsSelected = ko.observable(false);
   surveyElement.koIsDragging.subscribe(function(newValue) {
@@ -146,9 +146,6 @@ function elementOnCreating(surveyElement: any) {
       } else {
         surveyElement.renderedElement.classList.remove("svd_q_selected");
       }
-    }
-    if (surveyElement.addonsElement) {
-      surveyElement.addonsElement.style.display = newValue ? "" : "none";
     }
   });
 }
@@ -181,41 +178,6 @@ function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
   btn.className = "btn btn-primary btn-sm btn-xs";
   res.appendChild(btn);
   return res;
-}
-
-function createElementAddons(
-  obj: Survey.Base,
-  survey: any,
-  isPanel: boolean
-): HTMLElement {
-  var main: HTMLDivElement = document.createElement("div");
-  main.className = "svd_question_menu btn-group";
-  main["role"] = "group";
-  var btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "btn btn-primary btn-sm btn-xs";
-  btn.onclick = function(e) {
-    survey.editQuestionClick();
-  };
-  var span = document.createElement("span");
-  span.innerText = survey.getEditorLocString("survey.edit");
-  btn.appendChild(span);
-  if (obj["allowingOptions"] && obj["allowingOptions"].allowEdit) {
-    main.appendChild(btn);
-  }
-
-  var nodes = [];
-  var menuItems = survey.getMenuItems(obj);
-  if (menuItems.length > 0) {
-    for (var i = 0; i < menuItems.length; i++) {
-      nodes.push(createQuestionDesignItem(obj, menuItems[i]));
-    }
-    var ddmenu = createDdmenu(nodes, "element-addons");
-
-    main.appendChild(ddmenu);
-  }
-
-  return main;
 }
 
 function elementOnAfterRendering(
@@ -252,20 +214,6 @@ function elementOnAfterRendering(
     for (var i = 0; i < childs.length; i++) {
       if (childs[i].style) childs[i].style.pointerEvents = "none";
     }
-  }
-  if (
-    !surveyElement.selectedElementInDesign ||
-    surveyElement.selectedElementInDesign === surveyElement
-  ) {
-    surveyElement.addonsElement = createElementAddons(
-      surveyElement,
-      getSurvey(surveyElement),
-      isPanel
-    );
-    surveyElement.addonsElement.style.display = surveyElement.koIsSelected()
-      ? ""
-      : "none";
-    domElement.appendChild(surveyElement.addonsElement);
   }
   addAdorner(domElement, surveyElement);
 }

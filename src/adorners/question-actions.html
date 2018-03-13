@@ -1,12 +1,11 @@
 <div>
-    <span class="svda_question_action" data-bind="text: localize('survey.edit'), click:editElement"></span>
-    <!-- ko if: allowChangeType -->
-    <select data-bind="foreach: availableTypes, event: { change: onConvertType }">
-        <option data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
-    </select>
+    <!-- ko foreach: actions -->
+    <!-- ko if: !$data.template -->
+    <span class="svda_question_action" data-bind="click: function() { onClick($parent.question); }, attr: {title: text}, css: $parent.getStyle($data)"></span>
     <!-- /ko -->
-
-    <!-- ko ifnot: allowChangeType -->
-    <span data-bind="text: localize('qt.'+type)"> </span>
+    <!-- ko if: !!$data.template -->
+    <!-- ko template: template -->
+    <!-- /ko -->
+    <!-- /ko -->
     <!-- /ko -->
 </div>

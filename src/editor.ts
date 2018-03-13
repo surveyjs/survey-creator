@@ -1240,44 +1240,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyValue().onGetMenuItems.add((sender, options) => {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
-      if (opts.allowAddToToolbox) {
+
+      if (opts.allowEdit) {
         options.items.push({
-          name: "addToToolbox",
-          text: self.getLocString("survey.addToToolbox"),
-          onClick: function(selObj) {
-            self.addCustomToolboxQuestion(selObj);
-          }
+          name: "editElement",
+          text: this.getLocString("survey.edit"),
+          onClick: question => this.showQuestionEditor(question)
         });
       }
-      if (opts.allowCopy) {
-        options.items.push({
-          name: "copy",
-          text: self.getLocString("survey.copy"),
-          onClick: function(selObj) {
-            self.fastCopyQuestion(selObj);
-          }
-        });
-      }
-      if (opts.allowChangeType) {
-        var convertClasses = QuestionConverter.getConvertToClasses(
-          options.obj.getType()
-        );
-        for (var i = 0; i < convertClasses.length; i++) {
-          var className = convertClasses[i];
-          var text =
-            this.getLocString("survey.convertTo") +
-            " " +
-            this.getLocString("qt." + className);
-          options.items.push({
-            name: "convertTo" + className,
-            text: text,
-            className: className,
-            onClick: function(selObj, item) {
-              self.convertCurrentObject(selObj, item.className);
-            }
-          });
-        }
-      }
+
       if (opts.allowDelete) {
         var deleteLocaleName = options.obj.isPanel
           ? "survey.deletePanel"
@@ -1290,6 +1261,56 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           }
         });
       }
+
+      if (opts.allowCopy) {
+        options.items.push({
+          name: "copy",
+          text: self.getLocString("survey.copy"),
+          onClick: function(selObj) {
+            self.fastCopyQuestion(selObj);
+          }
+        });
+      }
+
+      if (opts.allowAddToToolbox) {
+        options.items.push({
+          name: "addToToolbox",
+          text: self.getLocString("survey.addToToolbox"),
+          onClick: function(selObj) {
+            self.addCustomToolboxQuestion(selObj);
+          }
+        });
+      }
+
+      if (opts.allowChangeType) {
+        var currentType = options.obj.getType();
+        var convertClasses = QuestionConverter.getConvertToClasses(currentType);
+        var allowChangeType = convertClasses.length > 0;
+        var createTypeByClass = className => {
+          return {
+            name: this.getLocString("qt." + className),
+            value: className
+          };
+        };
+        var availableTypes = [createTypeByClass(currentType)];
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          availableTypes.push(createTypeByClass(className));
+        }
+        options.items.push({
+          text: this.getLocString("qt." + currentType),
+          title: this.getLocString("survey.convertTo"),
+          type: currentType,
+          allowChangeType: allowChangeType,
+          template: "convert-action",
+          availableTypes: availableTypes,
+          onConvertType: (data, event) => {
+            var newType = event.target.value;
+            this.convertCurrentObject(options.obj, newType);
+          }
+        });
+      }
+
       self.onDefineElementMenuItems.fire(self, options);
     });
 

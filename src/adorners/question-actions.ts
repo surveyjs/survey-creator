@@ -1,60 +1,28 @@
 import * as ko from "knockout";
-import { registerAdorner } from "../surveyjsObjects";
+import {
+  registerAdorner,
+  SurveyForDesigner,
+  ISurveyObjectMenuItem
+} from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import "./question-actions.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./question-actions.html");
 import { QuestionConverter } from "../questionconverter";
 
 export class QuestionActionsAdorner {
-  constructor(private question, private editor) {}
+  constructor(public question, private editor) {
+    var surveyForDesigner: SurveyForDesigner = editor.survey;
+    this.actions(surveyForDesigner.getMenuItems(question));
+  }
+
+  public actions = ko.observableArray<ISurveyObjectMenuItem>();
+
+  public getStyle(model: ISurveyObjectMenuItem) {
+    return "icon-action-" + model.name;
+  }
 
   public localize(entryString) {
     return editorLocalization.getString(entryString);
-  }
-
-  public editElement(model: QuestionActionsAdorner) {
-    model.editor.showQuestionEditor(model.question);
-  }
-
-  get type() {
-    return this.question.getType();
-  }
-
-  get allowChangeType() {
-    var convertClasses = QuestionConverter.getConvertToClasses(
-      this.question.getType()
-    );
-    return (
-      convertClasses.length > 0 && this.question.allowingOptions.allowChangeType
-    );
-  }
-
-  private createTypeByClass(className) {
-    return {
-      name: this.localize("qt." + className),
-      value: className
-    };
-  }
-
-  get availableTypes() {
-    var availableTypes = [];
-    var convertClasses = QuestionConverter.getConvertToClasses(
-      this.question.getType()
-    );
-
-    availableTypes.push(this.createTypeByClass(this.type));
-
-    for (var i = 0; i < convertClasses.length; i++) {
-      var className = convertClasses[i];
-      availableTypes.push(this.createTypeByClass(className));
-    }
-
-    return availableTypes;
-  }
-
-  onConvertType(data, event) {
-    var newType = event.target.value;
-    this.editor.convertCurrentObject(this.question, newType);
   }
 }
 

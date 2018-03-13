@@ -1,0 +1,12 @@
+<script type="text/html" id="convert-action">
+    <span class="svda_question_action">
+        <!-- ko if: allowChangeType -->
+        <select class="svda_current_type" data-bind="foreach: availableTypes, event: { change: onConvertType }, attr: {title: title}">
+            <option data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
+        </select>
+        <!-- /ko -->
+        <!-- ko ifnot: allowChangeType -->
+        <span data-bind="text: text" class="svda_current_type"> </span>
+        <!-- /ko -->
+    </span>
+</script>
