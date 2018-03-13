@@ -109,8 +109,7 @@ export var itemDraggableAdorner = {
       }
     });
     var addNew = document.createElement("div");
-    addNew.innerText = editorLocalization.getString("pe.addItem");
-    addNew.className = "svda-add-new-item";
+    addNew.className = "svda-add-new-item icon-inplace-add-item";
     addNew.onclick = () => {
       var nextValue = null;
       var values = model.choices.map(function(item) {
