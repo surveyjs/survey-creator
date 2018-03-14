@@ -16,7 +16,8 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     name: string,
     private question: QuestionSelectBase,
     private item,
-    rootElement
+    rootElement,
+    private editor: SurveyEditor
   ) {
     super(name, rootElement);
   }
@@ -30,6 +31,8 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     } else {
       this.question.hasOther = false;
     }
+
+    this.editor.onQuestionEditorChanged(this.question);
   }
 
   get notOther() {
@@ -44,9 +47,17 @@ ko.components.register("item-editor", {
         params.target[params.name],
         params.question,
         params.item,
-        componentInfo.element
+        componentInfo.element,
+        params.editor
       );
-      model.valueChanged = newValue => (params.target[params.name] = newValue);
+      var property = Survey.JsonObject.metaData.findProperty(
+        params.target.getType(),
+        params.name
+      );
+      model.valueChanged = newValue => {
+        params.target[params.name] = newValue;
+        params.editor.onPropertyValueChanged(property, params.target, newValue);
+      };
       return model;
     }
   },
@@ -57,24 +68,34 @@ export var itemAdorner = {
   getMarkerClass: model => {
     return !!model.choices ? "item_editable" : "";
   },
-  afterRender: (elements: HTMLElement[], model: QuestionSelectBase) => {
+  afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     for (var i = 0; i < elements.length; i++) {
       elements[i].onclick = e => e.preventDefault();
       var decoration = document.createElement("span");
       if (i === elements.length - 1 && model.hasOther) {
         decoration.innerHTML =
-          "<item-editor params='name: \"otherText\", target: target, item: item, question: question'></item-editor>";
+          "<item-editor params='name: \"otherText\", target: target, item: item, question: question, editor: editor'></item-editor>";
         elements[i].appendChild(decoration);
         ko.applyBindings(
-          { item: model.otherItem, question: model, target: model },
+          {
+            item: model.otherItem,
+            question: model,
+            target: model,
+            editor: editor
+          },
           decoration
         );
       } else {
         decoration.innerHTML =
-          "<item-editor params='name: \"text\", target: target, item: item, question: question'></item-editor>";
+          "<item-editor params='name: \"text\", target: target, item: item, question: question, editor: editor'></item-editor>";
         elements[i].appendChild(decoration);
         ko.applyBindings(
-          { item: model.choices[i], question: model, target: model.choices[i] },
+          {
+            item: model.choices[i],
+            question: model,
+            target: model.choices[i],
+            editor: editor
+          },
           decoration
         );
       }
@@ -106,6 +127,7 @@ export var itemDraggableAdorner = {
         var choice = choices[evt.oldIndex];
         choices.splice(evt.oldIndex, 1);
         choices.splice(evt.newIndex, 0, choice);
+        editor.onQuestionEditorChanged(model);
       }
     });
     var addNew = document.createElement("div");
