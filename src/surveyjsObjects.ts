@@ -8,6 +8,7 @@ export interface ISurveyObjectMenuItem {
   name: string;
   text: string;
   onClick: (obj: Survey.Base) => any;
+  hasTitle?: boolean;
   template?: string;
 }
 

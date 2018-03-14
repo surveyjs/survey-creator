@@ -1250,6 +1250,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "editElement",
           text: this.getLocString("survey.edit"),
+          hasTitle: true,
           onClick: question => this.showQuestionEditor(question)
         });
       }
@@ -1267,8 +1268,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
-      if(options.items.length > 0) {
-        options.items.push({template: "action-separator"})
+      if (options.items.length > 0) {
+        options.items.push({ template: "action-separator" });
       }
 
       if (opts.allowCopy) {
@@ -1292,10 +1293,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       }
 
       if (opts.allowChangeType) {
-        if(options.items.length > 0) {
-          options.items.push({template: "action-separator"})
+        if (options.items.length > 0) {
+          options.items.push({ template: "action-separator" });
         }
-          var currentType = options.obj.getType();
+        var currentType = options.obj.getType();
         var convertClasses = QuestionConverter.getConvertToClasses(currentType);
         var allowChangeType = convertClasses.length > 0;
         var createTypeByClass = className => {
