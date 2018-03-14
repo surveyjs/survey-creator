@@ -7,6 +7,9 @@ import "../main.scss";
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
+export { enStrings } from "../localization/english";
+export { editorLocalization, defaultStrings } from "../editorLocalization";
+
 export { DragDropHelper } from "../dragdrophelper";
 export {
   SurveyPropertyEditorBase
@@ -69,8 +72,6 @@ export {
 } from "../propertyEditors/propertyCellsEditor";
 export { SurveyObjects } from "../surveyObjects";
 
-export { editorLocalization, defaultStrings } from "../editorLocalization";
-
 export {
   SurveyQuestionEditorProperties,
   SurveyQuestionEditorRow,
@@ -107,12 +108,13 @@ export { SurveysManager } from "../manage";
 
 //editorLocalization
 import "../localization/french";
-import "../localization/spanish";
-import "../localization/portuguese";
+import "../localization/german";
 import "../localization/italian";
-import "../localization/simplified-chinese";
 import "../localization/persian";
 import "../localization/polish";
+import "../localization/portuguese";
+import "../localization/simplified-chinese";
+import "../localization/spanish";
 
 //adorners
 export { titleAdorner } from "../adorners/title-editor";
