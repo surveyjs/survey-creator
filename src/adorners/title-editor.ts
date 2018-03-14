@@ -6,6 +6,10 @@ import Sortable from "sortablejs";
 import "./title-editor.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
+function resizeInput(target) {
+  target.size = target.value.length;
+}
+
 export class TitleInplaceEditor {
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
@@ -45,7 +49,9 @@ export class TitleInplaceEditor {
     this.editingName(this.prevName());
     this.isEditing(true);
     this.forNeibours(element => (element.style.display = "none"));
-    this.rootElement.getElementsByTagName("input")[0].focus();
+    var inputElem = this.rootElement.getElementsByTagName("input")[0];
+    inputElem.focus();
+    resizeInput(inputElem);
   };
   postEdit = () => {
     if (this.prevName() !== this.editingName()) {
@@ -59,6 +65,7 @@ export class TitleInplaceEditor {
     this.hideEditor();
   };
   nameEditorKeypress = (model, event) => {
+    resizeInput(event.target);
     if (event.keyCode === 13) {
       this.postEdit();
     } else if (event.keyCode === 27) {
