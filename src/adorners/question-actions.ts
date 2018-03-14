@@ -44,9 +44,9 @@ export var questionActionsAdorner = {
     var decoration = document.createElement("div");
     decoration.className = "svda-question-actions";
     decoration.innerHTML =
-      "<question-actions params='question: $data, editor:editor'></question-actions>";
+      "<question-actions params='question: model, editor: editor'></question-actions>";
     elements[0].appendChild(decoration);
-    ko.applyBindings(model, decoration);
+    ko.applyBindings({ model: model, editor: editor }, decoration);
   }
 };
 
