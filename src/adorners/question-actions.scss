@@ -1,7 +1,10 @@
 .svda-question-actions {
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 5px;
+  left: 15px;
+  text-align: right;
+  line-height: 30px;
 
   .svda_current_type {
     color: #1ab394;
@@ -31,22 +34,10 @@ question-actions {
     cursor: pointer;
     margin-left: 1em;
   }
-
-  > div {
-    white-space: nowrap;
-  }
 }
 .svd_q_selected > .svda-question-actions {
   question-actions {
     display: block;
-
-    .svda_same_line {
-      .svda_action_separator {
-        display: block;
-        margin: 0;
-        border: 0;
-      }
-    }
   }
 
   .svda_action_separator {
