@@ -743,7 +743,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
     this.isRTLValue =
       typeof options.isRTL !== "undefined" ? options.isRTL : false;
-    this.scrollToNewElement = typeof options.scrollToNewElement !== "undefined" ? options.scrollToNewElement : true;
+    this.scrollToNewElement =
+      typeof options.scrollToNewElement !== "undefined"
+        ? options.scrollToNewElement
+        : true;
     if (options.designerHeight) {
       this.koDesignerHeight(options.designerHeight);
     }
@@ -1032,7 +1035,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
-  private onPropertyValueChanged(
+  public onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any

@@ -4,6 +4,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 
 import "./title-editor.scss";
+import * as Survey from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 function resizeInput(target) {
@@ -81,7 +82,14 @@ ko.components.register("title-editor", {
         params.model[params.name],
         componentInfo.element
       );
-      model.valueChanged = newValue => (params.model[params.name] = newValue);
+      var property = Survey.JsonObject.metaData.findProperty(
+        params.model.getType(),
+        params.name
+      );
+      model.valueChanged = newValue => {
+        params.model[params.name] = newValue;
+        params.editor.onPropertyValueChanged(property, params.model, newValue);
+      };
       return model;
     }
   },
@@ -92,12 +100,12 @@ export var titleAdorner = {
   getMarkerClass: model => {
     return "title_editable";
   },
-  afterRender: (elements: HTMLElement[], model) => {
+  afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("span");
     decoration.innerHTML =
-      "<title-editor params='name: \"title\", model: $data'></title-editor>";
+      "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
     elements[0].appendChild(decoration);
-    ko.applyBindings(model, decoration);
+    ko.applyBindings({ model: model, editor: editor }, decoration);
   }
 };
 
