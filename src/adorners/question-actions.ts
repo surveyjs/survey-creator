@@ -38,7 +38,7 @@ ko.components.register("question-actions", {
 
 export var questionActionsAdorner = {
   getMarkerClass: model => {
-    return "question_actions";
+    return !model.isPanel ? "question_actions" : "";
   },
   afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("div");
@@ -51,3 +51,12 @@ export var questionActionsAdorner = {
 };
 
 registerAdorner("mainRoot", questionActionsAdorner);
+
+export var panelActionsAdorner = {
+  getMarkerClass: model => {
+    return !!model.isPanel ? "panel_actions" : "";
+  },
+  afterRender: questionActionsAdorner.afterRender
+};
+
+registerAdorner("container", panelActionsAdorner);

@@ -53,6 +53,7 @@ export class SurveyForDesigner extends Survey.Survey {
       self.onEditButtonClick.fire(self, null);
     };
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
+    this.onUpdatePanelCssClasses.add(onUpdateQuestionCssClasses);
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -236,11 +237,13 @@ export function removeAdorners(names: string[] = undefined) {
 }
 
 function onUpdateQuestionCssClasses(survey, options) {
-  var classes = options.cssClasses;
+  var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
       classes[element] =
-        classes[element] + " " + adorner.getMarkerClass(options.question);
+        classes[element] +
+        " " +
+        adorner.getMarkerClass(options.question || options.panel);
     });
   });
 }
