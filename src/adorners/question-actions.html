@@ -1,7 +1,10 @@
 <div>
     <!-- ko foreach: actions -->
     <!-- ko if: !$data.template -->
-    <span class="svda_question_action" data-bind="click: function() { onClick($parent.question); }, attr: {title: text}, css: $parent.getStyle($data)"></span>
+    <span class="svda_question_action" data-bind="click: function() { onClick($parent.question); }, attr: {title: text}">
+        <span data-bind="css: $parent.getStyle($data)"></span>
+        <span data-bind="text: $data.hasTitle ? text: ''"></span>
+    </span>
     <!-- /ko -->
     <!-- ko if: !!$data.template -->
     <!-- ko template: template -->
