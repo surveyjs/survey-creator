@@ -88,6 +88,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
+  /**
+   * If set to true (default value) the Editor scrolls to a new element. A new element can be added from Toolbox or by copying.
+   */
+  public scrollToNewElement: boolean = true;
 
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
@@ -739,6 +743,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
     this.isRTLValue =
       typeof options.isRTL !== "undefined" ? options.isRTL : false;
+    this.scrollToNewElement = typeof options.scrollToNewElement !== "undefined" ? options.scrollToNewElement : true;
     if (options.designerHeight) {
       this.koDesignerHeight(options.designerHeight);
     }
@@ -1488,7 +1493,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       if (index > -1) index++;
     }
     parent.addElement(element, index);
-    if (this.renderedElement) {
+    if (this.renderedElement && this.scrollToNewElement) {
       this.dragDropHelper.scrollToElement(
         <HTMLElement>this.renderedElement.querySelector("#" + element["id"])
       );
