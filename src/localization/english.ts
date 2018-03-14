@@ -218,34 +218,7 @@ export var enStrings = {
   //Property values
   pv: {
     true: "true",
-    false: "false",
-
-    ar: "العربية",
-    ca: "català",
-    cz: "čeština",
-    da: "dansk",
-    de: "deutsch",
-    en: "english",
-    es: "español",
-    fa: "فارْسِى",
-    fi: "suomalainen",
-    fr: "français",
-    gr: "ελληνικά",
-    he: "עברית",
-    hu: "magyar",
-    it: "italiano",
-    is: "íslenska",
-    ka: "ქართული",
-    lv: "latviešu",
-    nl: "hollandsk",
-    no: "norsk",
-    pl: "polski",
-    pt: "português",
-    ro: "română",
-    ru: "русский",
-    sv: "svenska",
-    tr: "türkçe",
-    "zh-cn": "简体中文"
+    false: "false"
   },
   //Operators
   op: {

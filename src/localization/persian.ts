@@ -80,20 +80,20 @@ var persianStrings = {
       "لطفا یک مقدار بولین توصیفی وارد کنید که صحیح یا غلط را برگرداند تا صفحه سوالات نمایش داده شود. برای مثال: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "لطفا یک عبارت توصیفی را وارد کنید. شما ممکن است از کروشه برای دسترسی به مقدار سوالات استفاده کنید. برای مثال: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
-    
+
     aceEditorHelp: "برای مشاهده نکات تکمیلی ctrl+space را بفشارید",
     aceEditorRowTitle: "سطر فعلی",
     aceEditorPanelTitle: "پنل فعلی",
     showMore: "برای اطلاعات بیشتر لطفا سند راهنما را مطالعه کنید",
     assistantTitle: "سوالات موجود:",
-    
+
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     value: "مقدار",
     text: "متن",
     required: "اجباری؟",
     columnEdit: "ویرایش ستون: {0}",
     itemEdit: "ویرایش آیتم: {0}",
-    
+
     url: "URL",
     path: "Path",
     valueName: "نام مقدار",
@@ -123,10 +123,10 @@ var persianStrings = {
     inputType: "نوع ورودی",
     optionsCaption: "نوشته انتخاب ها",
     defaultValue: "مقدار پیش فرض",
-    
+
     surveyEditorTitle: "ویرایش نظرسنجی",
     qEditorTitle: "ویرایش سوال: {0}",
-     //survey
+    //survey
     showTitle: "نمایش/پنهان کردن عنوان",
     locale: "زبان پیش فرض",
     mode: "حالت (ویرایش/خواندن)",
@@ -209,27 +209,7 @@ var persianStrings = {
   //Property values
   pv: {
     true: "صحیح",
-    false: "نادرست",
-
-    ar: "العربية",
-    cz: "čeština",
-    da: "dansk",
-    de: "deutsch",
-    en: "english",
-    es: "español",
-    fi: "suomalainen",
-    fr: "français",
-    gr: "ελληνικά",
-    it: "italiano",
-    is: "íslenska",
-    nl: "hollandsk",
-    pl: "polski",
-    pt: "português",
-    ro: "română",
-    ru: "русский",
-    sv: "svenska",
-    tr: "türkçe",
-    zh_cn: "简体中文"
+    false: "نادرست"
   },
   //Operators
   op: {

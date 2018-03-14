@@ -137,29 +137,7 @@ var germanTranslation = {
   //Property values
   pv: {
     true: "true",
-    false: "false",
-
-    ar: "العربية",
-    cz: "čeština",
-    da: "dansk",
-    de: "deutsch",
-    en: "english",
-    es: "español",
-    fi: "suomalainen",
-    fr: "français",
-    gr: "ελληνικά",
-    hu: "magyar",
-    it: "italiano",
-    is: "íslenska",
-    lv: "latviešu",
-    nl: "hollandsk",
-    pl: "polski",
-    pt: "português",
-    ro: "română",
-    ru: "русский",
-    sv: "svenska",
-    tr: "türkçe",
-    "zh-cn": "简体中文"
+    false: "false"
   },
   //Operators
   op: {
