@@ -119,4 +119,5 @@ import "../localization/spanish";
 //adorners
 export { titleAdorner } from "../adorners/title-editor";
 export { itemAdorner } from "../adorners/item-editor";
+export { labelAdorner } from "../adorners/label-editor";
 export { questionActionsAdorner } from "../adorners/question-actions";

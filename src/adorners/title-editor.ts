@@ -8,7 +8,7 @@ import * as Survey from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 function resizeInput(target) {
-  target.size = target.value.length;
+  target.size = target.value.length || 5;
 }
 
 export class TitleInplaceEditor {

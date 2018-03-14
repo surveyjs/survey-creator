@@ -1257,8 +1257,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
               question.titleLocation = "hidden";
+              if (question.getType() === "boolean") {
+                question["showTitle"] = false;
+              }
             } else {
               question.titleLocation = "default";
+              if (question.getType() === "boolean") {
+                question["showTitle"] = true;
+              }
             }
             this.onQuestionEditorChanged(question);
           }
