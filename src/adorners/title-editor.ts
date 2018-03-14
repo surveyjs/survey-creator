@@ -44,12 +44,17 @@ export class TitleInplaceEditor {
 
   hideEditor = () => {
     this.isEditing(false);
-    this.forNeibours(element => (element.style.display = ""));
+    this.forNeibours(element => {
+      element.style.display = element.style["oldDisplay"];
+    });
   };
   startEdit = (model, event) => {
     this.editingName(this.prevName());
     this.isEditing(true);
-    this.forNeibours(element => (element.style.display = "none"));
+    this.forNeibours(element => {
+      element.style["oldDisplay"] = element.style.display;
+      element.style.display = "none";
+    });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
     inputElem.focus();
     resizeInput(inputElem);
