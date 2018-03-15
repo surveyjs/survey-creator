@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import Sortable from "sortablejs";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { createAddItemHandler } from "./item-editor";
@@ -13,6 +14,10 @@ ko.components.register("select-items-editor", {
     createViewModel: (params, componentInfo) => {
       var isExpanded = ko.observable(false);
       var choices = ko.observableArray(params.question.choices);
+      var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
+        "svda-select-items-content"
+      )[0];
+      var sortable = null;
       return {
         choices: choices,
         question: params.question,
@@ -21,7 +26,25 @@ ko.components.register("select-items-editor", {
         toggle: () => isExpanded(!isExpanded()),
         addItem: createAddItemHandler(params.question, itemValue =>
           choices(params.question.choices)
-        )
+        ),
+        choicesRendered: () => {
+          if (sortable) {
+            sortable.destroy();
+          }
+          sortable = Sortable.create(sortableElement, {
+            handle: ".svda-drag-handle",
+            draggable: ".item_draggable",
+            animation: 150,
+            onEnd: evt => {
+              var newChoices = [].concat(params.question.choices);
+              var choice = newChoices[evt.oldIndex];
+              newChoices.splice(evt.oldIndex, 1);
+              newChoices.splice(evt.newIndex, 0, choice);
+              params.question.choices = newChoices;
+              choices(newChoices);
+            }
+          });
+        }
       };
     }
   },

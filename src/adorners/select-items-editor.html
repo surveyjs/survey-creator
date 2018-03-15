@@ -3,7 +3,7 @@
         <span data-bind="css: { 'icon-toolbox-arrow-down-green': !isExpanded(), 'icon-toolbox-arrow-up': isExpanded }"></span>
     </div>
     <div class="svda-select-items-content" data-bind="visible: isExpanded">
-        <!-- ko foreach: choices -->
+        <!-- ko foreach: { data: choices, afterRender: choicesRendered } -->
         <div class="item_editable item_draggable">
             <span data-bind="text: text"></span>
             <span>
