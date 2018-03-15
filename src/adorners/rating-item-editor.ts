@@ -136,7 +136,9 @@ export var ratingItemAdorner = {
     addNew.onclick = createAddItemHandler(model, itemValue =>
       editor.onQuestionEditorChanged(model)
     );
-    elements[0].parentElement.parentElement.appendChild(addNew);
+    var parent = elements[0].parentElement.parentElement;
+    parent.appendChild(addNew);
+    parent.classList.add("svda_rating_question");
   }
 };
 
