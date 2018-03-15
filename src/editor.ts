@@ -1249,10 +1249,31 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
+      if (opts.allowEdit) {
+        options.items.push({
+          name: "editElement",
+          text: this.getLocString("survey.edit"),
+          hasTitle: true,
+          onClick: question => this.showQuestionEditor(question)
+        });
+      }
+
+      if (opts.allowDelete) {
+        var deleteLocaleName = options.obj.isPanel
+          ? "survey.deletePanel"
+          : "survey.deleteQuestion";
+        options.items.push({
+          name: "delete",
+          text: self.getLocString(deleteLocaleName),
+          onClick: function(selObj) {
+            self.deleteCurrentObject();
+          }
+        });
+      }
+
       if (typeof options.obj.titleLocation !== "undefined") {
         options.items.push({
           name: "showTitle",
-          hasTitle: true,
           text: this.getLocString("pe.showTitle"),
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
@@ -1274,33 +1295,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       if (typeof options.obj.isRequired !== "undefined") {
         options.items.push({
           name: "isRequired",
-          hasTitle: true,
           text: this.getLocString("pe.isRequired"),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
             this.onQuestionEditorChanged(question);
-          }
-        });
-      }
-
-      if (opts.allowEdit) {
-        options.items.push({
-          name: "editElement",
-          text: this.getLocString("survey.edit"),
-          hasTitle: true,
-          onClick: question => this.showQuestionEditor(question)
-        });
-      }
-
-      if (opts.allowDelete) {
-        var deleteLocaleName = options.obj.isPanel
-          ? "survey.deletePanel"
-          : "survey.deleteQuestion";
-        options.items.push({
-          name: "delete",
-          text: self.getLocString(deleteLocaleName),
-          onClick: function(selObj) {
-            self.deleteCurrentObject();
           }
         });
       }

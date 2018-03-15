@@ -251,6 +251,16 @@
     @include svg-icon(16px);
   }
 
+  .icon-action-isRequired:before {
+    background-image: url("./images/actions/Required_16x16.svg");
+    @include svg-icon(16px);
+  }
+
+  .icon-action-showTitle:before {
+    background-image: url("./images/actions/ShowTitle_16x16.svg");
+    @include svg-icon(16px);
+  }
+
   .glyphicon {
     font-weight: bold;
     display: inline-block;
