@@ -15,7 +15,7 @@ ko.components.register("select-items-editor", {
       var isExpanded = ko.observable(false);
       var choices = ko.observableArray(params.question.choices);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
-        "svda-select-items-content"
+        "svda-select-items-collection"
       )[0];
       var sortable = null;
       return {
