@@ -4,6 +4,7 @@ import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyEditor } from "../editor";
+import { getNextValue, findParentNode } from "../utils/utils";
 
 import "./rating-item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -74,6 +75,34 @@ ko.components.register("rating-item-editor", {
   template: templateHtml
 });
 
+export var createAddItemHandler = (
+  question: Survey.QuestionRating,
+  onItemAdded: (itemValue: Survey.ItemValue) => void
+) => () => {
+  if (question.rateValues.length === 0) {
+    question.rateMax += question.rateStep;
+  } else {
+    var nextValue = null;
+    var values = question.rateValues.map(function(item) {
+      return item.itemValue;
+    });
+    nextValue = getNextValue("item", values);
+
+    var itemValue = new Survey.ItemValue(nextValue);
+    itemValue.locOwner = {
+      getLocale: () => {
+        if (!!question["getLocale"]) return question.getLocale();
+        return "";
+      },
+      getMarkdownHtml: (text: string) => {
+        return text;
+      }
+    };
+    question.rateValues = question.rateValues.concat([itemValue]);
+  }
+  !!onItemAdded && onItemAdded(itemValue);
+};
+
 export var ratingItemAdorner = {
   getMarkerClass: model => {
     return !!model.visibleRateValues ? "item_editable" : "";
@@ -100,68 +129,15 @@ export var ratingItemAdorner = {
         decoration
       );
     }
+
+    var addNew = document.createElement("span");
+    addNew.title = editorLocalization.getString("pe.addItem");
+    addNew.className = "svda-add-new-item icon-inplace-add-item";
+    addNew.onclick = createAddItemHandler(model, itemValue =>
+      editor.onQuestionEditorChanged(model)
+    );
+    elements[0].parentElement.parentElement.appendChild(addNew);
   }
 };
 
 registerAdorner("itemText", ratingItemAdorner);
-
-// export var createAddItemHandler = (
-//   question: Survey.QuestionSelectBase,
-//   onItemAdded: (itemValue: Survey.ItemValue) => void
-// ) => () => {
-//   var nextValue = null;
-//   var values = question.choices.map(function(item) {
-//     return item.itemValue;
-//   });
-//   nextValue = getNextValue("item", values);
-
-//   var itemValue = new Survey.ItemValue(nextValue);
-//   itemValue.locOwner = {
-//     getLocale: () => {
-//       if (!!question["getLocale"]) return question.getLocale();
-//       return "";
-//     },
-//     getMarkdownHtml: (text: string) => {
-//       return text;
-//     }
-//   };
-//   question.choices = question.choices.concat([itemValue]);
-//   !!onItemAdded && onItemAdded(itemValue);
-// };
-
-// export var itemDraggableAdorner = {
-//   getMarkerClass: model => {
-//     return !!model.choices ? "item_draggable" : "";
-//   },
-//   afterRender: (
-//     elements: HTMLElement[],
-//     model: QuestionSelectBase,
-//     editor: SurveyEditor
-//   ) => {
-//     var itemsRoot = elements[0].parentElement;
-//     if (model.hasOther) {
-//       elements[elements.length - 1].classList.remove("item_draggable");
-//     }
-//     var sortable = Sortable.create(itemsRoot, {
-//       handle: ".svda-drag-handle",
-//       draggable: ".item_draggable",
-//       animation: 150,
-//       onEnd: evt => {
-//         var choices = model.choices;
-//         var choice = choices[evt.oldIndex];
-//         choices.splice(evt.oldIndex, 1);
-//         choices.splice(evt.newIndex, 0, choice);
-//         editor.onQuestionEditorChanged(model);
-//       }
-//     });
-//     var addNew = document.createElement("div");
-//     addNew.title = editorLocalization.getString("pe.addItem");
-//     addNew.className = "svda-add-new-item icon-inplace-add-item";
-//     addNew.onclick = createAddItemHandler(model, itemValue =>
-//       editor.onQuestionEditorChanged(model)
-//     );
-//     itemsRoot.appendChild(addNew);
-//   }
-// };
-
-// registerAdorner("item", itemDraggableAdorner);
