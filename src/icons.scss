@@ -226,6 +226,11 @@
     @include svg-icon(10px);
   }
 
+  .icon-toolbox-arrow-down-green:before {
+    background-image: url("./images/Arrow_down_green_10x10.svg");
+    @include svg-icon(10px);
+  }
+
   .icon-action-addToToolbox:before {
     background-image: url("./images/actions/AddToToolbox_16х16.svg");
     @include svg-icon(16px);

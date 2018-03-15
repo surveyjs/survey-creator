@@ -1,0 +1,16 @@
+<div class="svda-select-items-editor">
+    <div class="svda-select-items-title" data-bind="click: toggle">
+        <span data-bind="css: { 'icon-toolbox-arrow-down-green': !isExpanded(), 'icon-toolbox-arrow-up': isExpanded }"></span>
+    </div>
+    <div class="svda-select-items-content" data-bind="visible: isExpanded">
+        <!-- ko foreach: choices -->
+        <div class="item_editable item_draggable">
+            <span data-bind="text: text"></span>
+            <span>
+                <item-editor params='name: \"text\", target: $data, item: $data, question: $parent.question, editor: $parent.editor'></item-editor>
+            </span>
+        </div>
+        <!-- /ko  -->
+        <div class="svda-add-new-item icon-inplace-add-item" data-bind="click: addItem"></div>
+    </div>
+</div>

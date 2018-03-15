@@ -1,0 +1,20 @@
+select-items-editor {
+  display: none;
+
+  .svda-select-items-editor {
+    position: relative;
+    pointer-events: all;
+
+    .svda-select-items-title {
+      text-align: center;
+    }
+
+    .svda-select-items-content {
+      padding-left: 1em;
+    }
+  }
+}
+
+.svd_q_selected select-items-editor {
+  display: block;
+}
