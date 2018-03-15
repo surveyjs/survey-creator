@@ -20,7 +20,7 @@ ko.components.register("select-items-editor", {
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
         addItem: createAddItemHandler(params.question, itemValue =>
-          choices.push(itemValue)
+          choices(params.question.choices)
         )
       };
     }
