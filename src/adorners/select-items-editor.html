@@ -11,6 +11,14 @@
             </span>
         </div>
         <!-- /ko  -->
+        <!-- ko if: question.hasOther -->
+        <div class="item_editable">
+            <span data-bind="text: question.otherText"></span>
+            <span>
+                <item-editor params='name: \"otherText\", target: question, item: question.otherItem, question: question, editor: editor'></item-editor>
+            </span>
+        </div>
+        <!-- /ko  -->
         <div class="svda-add-new-item icon-inplace-add-item" data-bind="click: addItem"></div>
     </div>
 </div>
