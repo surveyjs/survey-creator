@@ -122,7 +122,9 @@ function elementOnCreating(surveyElement: any) {
     allowCopy: true,
     allowAddToToolbox: true,
     allowDragging: true,
-    allowChangeType: true
+    allowChangeType: true,
+    allowShowHideTitle: true,
+    allowChangeRequired: true
   };
   surveyElement.dragDropHelperValue = null;
   surveyElement.dragDropHelper = function() {

@@ -1271,7 +1271,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
-      if (typeof options.obj.titleLocation !== "undefined") {
+      if (
+        opts.allowShowHideTitle &&
+        typeof options.obj.titleLocation !== "undefined"
+      ) {
         options.items.push({
           name: "showTitle",
           text: this.getLocString("pe.showTitle"),
@@ -1292,7 +1295,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
-      if (typeof options.obj.isRequired !== "undefined") {
+      if (
+        opts.allowChangeRequired &&
+        typeof options.obj.isRequired !== "undefined"
+      ) {
         options.items.push({
           name: "isRequired",
           text: this.getLocString("pe.isRequired"),
