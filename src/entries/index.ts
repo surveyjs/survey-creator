@@ -122,3 +122,4 @@ export { itemAdorner } from "../adorners/item-editor";
 export { labelAdorner } from "../adorners/label-editor";
 export { questionActionsAdorner } from "../adorners/question-actions";
 export { selectItemsEditorAdorner } from "../adorners/select-items-editor";
+export { ratingItemAdorner } from "../adorners/rating-item-editor";

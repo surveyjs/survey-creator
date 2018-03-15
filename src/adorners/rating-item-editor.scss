@@ -1,0 +1,22 @@
+rating-item-editor {
+  display: none;
+
+  .svda-content {
+    position: relative;
+    pointer-events: all;
+
+    .svda-title-editor-content {
+      white-space: nowrap;
+    }
+    .svda-edit-button {
+      padding-left: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.item_editable:hover {
+  rating-item-editor {
+    display: inline-block;
+  }
+}
