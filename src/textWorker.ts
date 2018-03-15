@@ -10,6 +10,15 @@ class TextParserPropery {
   valueEnd: number;
 }
 
+class SurveyForTextWorker extends Survey.Survey {
+  constructor(jsonObj: any) {
+    super(jsonObj);
+  }
+  public get isDesignMode(): boolean {
+    return true;
+  }
+}
+
 export class SurveyTextWorker {
   public static newLineChar: string;
   public errors: Array<any>;
@@ -42,8 +51,7 @@ export class SurveyTextWorker {
     }
     if (this.jsonValue != null) {
       this.updateJsonPositions(this.jsonValue);
-      this.surveyValue = new Survey.Survey(this.jsonValue);
-      this.surveyValue.setDesignMode(true);
+      this.surveyValue = new SurveyForTextWorker(this.jsonValue);
       if (this.surveyValue.jsonErrors != null) {
         for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
           var error = this.surveyValue.jsonErrors[i];
