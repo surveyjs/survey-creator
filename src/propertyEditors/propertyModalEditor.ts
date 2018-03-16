@@ -93,7 +93,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       if (!self.koHasError()) self.onHideModal();
     };
     self.onResetClick = function() {
-      self.reset();
+      self.updateValue();
       self.onHideModal();
     };
     self.onShowModal = function() {
@@ -135,6 +135,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   }
   public beforeShow() {
     this.isShowingModalValue = true;
+    this.updateValue();
   }
   public beforeCloseModal() {
     this.isShowingModalValue = false;
@@ -143,9 +144,6 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.koShowApplyButton = ko.observable(
       !this.options || this.options.showApplyButtonInEditors
     );
-  }
-  private reset() {
-    this.editingValue = this.koValue();
   }
   public setObject(value: any) {
     this.editingObject = value;
