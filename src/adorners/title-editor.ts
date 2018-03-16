@@ -115,3 +115,24 @@ export var titleAdorner = {
 };
 
 registerAdorner("title", titleAdorner);
+
+export var itemTitleAdorner = {
+  getMarkerClass: model => {
+    return "item_title_editable title_editable";
+  },
+  afterRender: (
+    elements: HTMLElement[],
+    model: Survey.QuestionMultipleText,
+    editor
+  ) => {
+    for (var i = 0; i < elements.length; i++) {
+      var decoration = document.createElement("span");
+      decoration.innerHTML =
+        "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
+      elements[i].appendChild(decoration);
+      ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
+    }
+  }
+};
+
+registerAdorner("itemTitle", itemTitleAdorner);

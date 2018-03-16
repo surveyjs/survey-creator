@@ -266,7 +266,9 @@ function addAdorner(node, model) {
     adornersConfig[element].forEach(adorner => {
       var elementClass = adorner.getMarkerClass(model);
       if (!!elementClass) {
-        var elements = node.querySelectorAll("." + elementClass);
+        var elements = node.querySelectorAll(
+          "." + elementClass.replace(/\s/g, ".")
+        );
         elements = filterNestedQuestions(node, elements);
         if (
           elements.length === 0 &&
