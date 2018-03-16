@@ -27,6 +27,7 @@ ko.components.register("select-items-editor", {
         addItem: createAddItemHandler(params.question, itemValue =>
           choices(params.question.choices)
         ),
+        getLocString: str => editorLocalization.getString(str),
         choicesRendered: () => {
           if (sortable) {
             sortable.destroy();
