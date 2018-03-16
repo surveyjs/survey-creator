@@ -132,6 +132,7 @@ export var enStrings = {
     inputType: "Input type",
     optionsCaption: "Options caption",
     defaultValue: "Default value",
+    cellsDefaultRow: "Default cells texts",
 
     surveyEditorTitle: "Edit survey settings",
     qEditorTitle: "Edit: {0}",

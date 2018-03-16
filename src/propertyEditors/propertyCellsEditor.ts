@@ -29,15 +29,21 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     matrix.setSurveyImpl(this.object.survey);
     matrix.rows = this.rows;
     matrix.columns = this.columns;
-    (<any>matrix).cells = this.object.cells;
-    for (var i = 0; i < matrix.rows.length; i++) {
-      var cells = this.koRows()[i].koCells();
+    matrix.cells = this.object.cells;
+    var rows = this.koRows();
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var cells = row.koCells();
       for (var j = 0; j < matrix.columns.length; j++) {
-        (<any>matrix).setCellText(i, j, cells[j].text());
+        if (row.rowIndex < 0) {
+          (<any>matrix).setDefaultCellText(j, cells[j].text());
+        } else {
+          matrix.setCellText(rows[i].rowIndex, j, cells[j].text());
+        }
       }
     }
-    if (!(<any>matrix).cells.isEmpty) {
-      this.koValue((<any>matrix).cells);
+    if (!matrix.cells.isEmpty) {
+      this.koValue(matrix.cells);
     } else {
       this.koValue(null);
     }
@@ -60,6 +66,7 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     return this.object && this.object.columns ? this.object.columns : [];
   }
   protected getCellText(rowIndex: number, columnIndex: number): string {
+    if (rowIndex < 0) return this.object.getDefaultCellText(columnIndex);
     return this.object.getCellText(rowIndex, columnIndex);
   }
   protected setupCells() {
@@ -72,15 +79,19 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
       cols.push(this.columns[i].text);
     }
     var rows = [];
+    rows.push(
+      this.createRow(-1, editorLocalization.getString("pe.cellsDefaultRow"))
+    );
     for (var i = 0; i < this.rows.length; i++) {
-      rows.push(this.createRow(i));
+      rows.push(this.createRow(i, this.rows[i].text));
     }
     this.koColumns(cols);
     this.koRows(rows);
   }
-  protected createRow(rowIndex: number): any {
+  protected createRow(rowIndex: number, rowText: string): any {
     var row = {
-      row: this.rows[rowIndex],
+      rowIndex: rowIndex,
+      rowText: rowText,
       koCells: ko.observableArray()
     };
     var cells = [];
