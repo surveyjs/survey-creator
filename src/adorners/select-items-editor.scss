@@ -7,10 +7,15 @@ select-items-editor {
 
     .svda-select-items-title {
       text-align: center;
+      position: absolute;
+      top: -2em;
+      left: 0;
+      right: 0;
+      height: 2em;
     }
 
     .svda-select-items-content {
-      padding-left: 1em;
+      padding: 1em;
     }
   }
 }
