@@ -242,12 +242,27 @@ function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
-      classes[element] =
-        classes[element] +
-        " " +
-        adorner.getMarkerClass(options.question || options.panel);
+      var adornerMarkerClass = adorner.getMarkerClass(
+        options.question || options.panel
+      );
+
+      classes[element] = applyAdornerClass(
+        classes[element],
+        adornerMarkerClass
+      );
     });
   });
+}
+
+export function applyAdornerClass(classes, adornerClass) {
+  debugger;
+  var result = classes;
+
+  if (!!adornerClass) {
+    result = !!result ? result + " " + adornerClass : adornerClass;
+  }
+
+  return result;
 }
 
 function filterNestedQuestions(rootQuestionNode, elements) {
