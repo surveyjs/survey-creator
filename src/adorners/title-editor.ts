@@ -8,7 +8,7 @@ import * as Survey from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 function resizeInput(target) {
-  target.size = target.value.length;
+  target.size = target.value.length || 5;
 }
 
 export class TitleInplaceEditor {
@@ -44,12 +44,17 @@ export class TitleInplaceEditor {
 
   hideEditor = () => {
     this.isEditing(false);
-    this.forNeibours(element => (element.style.display = ""));
+    this.forNeibours(element => {
+      element.style.display = element.style["oldDisplay"];
+    });
   };
   startEdit = (model, event) => {
     this.editingName(this.prevName());
     this.isEditing(true);
-    this.forNeibours(element => (element.style.display = "none"));
+    this.forNeibours(element => {
+      element.style["oldDisplay"] = element.style.display;
+      element.style.display = "none";
+    });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
     inputElem.focus();
     resizeInput(inputElem);
@@ -110,3 +115,24 @@ export var titleAdorner = {
 };
 
 registerAdorner("title", titleAdorner);
+
+export var itemTitleAdorner = {
+  getMarkerClass: model => {
+    return "item_title_editable title_editable";
+  },
+  afterRender: (
+    elements: HTMLElement[],
+    model: Survey.QuestionMultipleText,
+    editor
+  ) => {
+    for (var i = 0; i < elements.length; i++) {
+      var decoration = document.createElement("span");
+      decoration.innerHTML =
+        "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
+      elements[i].appendChild(decoration);
+      ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
+    }
+  }
+};
+
+registerAdorner("itemTitle", itemTitleAdorner);

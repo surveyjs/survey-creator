@@ -105,6 +105,30 @@ export var itemAdorner = {
 
 registerAdorner("controlLabel", itemAdorner);
 
+export var createAddItemHandler = (
+  question: Survey.QuestionSelectBase,
+  onItemAdded: (itemValue: Survey.ItemValue) => void
+) => () => {
+  var nextValue = null;
+  var values = question.choices.map(function(item) {
+    return item.itemValue;
+  });
+  nextValue = getNextValue("item", values);
+
+  var itemValue = new Survey.ItemValue(nextValue);
+  itemValue.locOwner = {
+    getLocale: () => {
+      if (!!question["getLocale"]) return question.getLocale();
+      return "";
+    },
+    getMarkdownHtml: (text: string) => {
+      return text;
+    }
+  };
+  question.choices = question.choices.concat([itemValue]);
+  !!onItemAdded && onItemAdded(itemValue);
+};
+
 export var itemDraggableAdorner = {
   getMarkerClass: model => {
     return !!model.choices ? "item_draggable" : "";
@@ -133,26 +157,9 @@ export var itemDraggableAdorner = {
     var addNew = document.createElement("div");
     addNew.title = editorLocalization.getString("pe.addItem");
     addNew.className = "svda-add-new-item icon-inplace-add-item";
-    addNew.onclick = () => {
-      var nextValue = null;
-      var values = model.choices.map(function(item) {
-        return item.itemValue;
-      });
-      nextValue = getNextValue("item", values);
-
-      var itemValue = new Survey.ItemValue(nextValue);
-      itemValue.locOwner = {
-        getLocale: () => {
-          if (!!model["getLocale"]) return model.getLocale();
-          return "";
-        },
-        getMarkdownHtml: (text: string) => {
-          return text;
-        }
-      };
-      model.choices = model.choices.concat([itemValue]);
-      editor.onQuestionEditorChanged(model);
-    };
+    addNew.onclick = createAddItemHandler(model, itemValue =>
+      editor.onQuestionEditorChanged(model)
+    );
     itemsRoot.appendChild(addNew);
   }
 };

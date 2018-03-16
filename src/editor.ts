@@ -1271,6 +1271,44 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
+      if (
+        opts.allowShowHideTitle &&
+        typeof options.obj.titleLocation !== "undefined"
+      ) {
+        options.items.push({
+          name: "showTitle",
+          text: this.getLocString("pe.showTitle"),
+          onClick: (question: Survey.Question) => {
+            if (question.titleLocation !== "hidden") {
+              question.titleLocation = "hidden";
+              if (question.getType() === "boolean") {
+                question["showTitle"] = false;
+              }
+            } else {
+              question.titleLocation = "default";
+              if (question.getType() === "boolean") {
+                question["showTitle"] = true;
+              }
+            }
+            this.onQuestionEditorChanged(question);
+          }
+        });
+      }
+
+      if (
+        opts.allowChangeRequired &&
+        typeof options.obj.isRequired !== "undefined"
+      ) {
+        options.items.push({
+          name: "isRequired",
+          text: this.getLocString("pe.isRequired"),
+          onClick: (question: Survey.Question) => {
+            question.isRequired = !question.isRequired;
+            this.onQuestionEditorChanged(question);
+          }
+        });
+      }
+
       if (options.items.length > 0) {
         options.items.push({ template: "action-separator" });
       }

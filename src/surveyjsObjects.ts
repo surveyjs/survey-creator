@@ -53,6 +53,7 @@ export class SurveyForDesigner extends Survey.Survey {
       self.onEditButtonClick.fire(self, null);
     };
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
+    this.onUpdatePanelCssClasses.add(onUpdateQuestionCssClasses);
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -121,7 +122,9 @@ function elementOnCreating(surveyElement: any) {
     allowCopy: true,
     allowAddToToolbox: true,
     allowDragging: true,
-    allowChangeType: true
+    allowChangeType: true,
+    allowShowHideTitle: true,
+    allowChangeRequired: true
   };
   surveyElement.dragDropHelperValue = null;
   surveyElement.dragDropHelper = function() {
@@ -236,11 +239,13 @@ export function removeAdorners(names: string[] = undefined) {
 }
 
 function onUpdateQuestionCssClasses(survey, options) {
-  var classes = options.cssClasses;
+  var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
       classes[element] =
-        classes[element] + " " + adorner.getMarkerClass(options.question);
+        classes[element] +
+        " " +
+        adorner.getMarkerClass(options.question || options.panel);
     });
   });
 }
@@ -261,7 +266,9 @@ function addAdorner(node, model) {
     adornersConfig[element].forEach(adorner => {
       var elementClass = adorner.getMarkerClass(model);
       if (!!elementClass) {
-        var elements = node.querySelectorAll("." + elementClass);
+        var elements = node.querySelectorAll(
+          "." + elementClass.replace(/\s/g, ".")
+        );
         elements = filterNestedQuestions(node, elements);
         if (
           elements.length === 0 &&

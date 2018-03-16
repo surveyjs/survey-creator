@@ -1,0 +1,13 @@
+.label_editable {
+  pointer-events: all;
+  cursor: text;
+  .svda-title-editor-start {
+    cursor: pointer;
+    visibility: hidden;
+  }
+}
+.svd_q_selected .label_editable:hover {
+  .svda-title-editor-start {
+    visibility: visible;
+  }
+}
