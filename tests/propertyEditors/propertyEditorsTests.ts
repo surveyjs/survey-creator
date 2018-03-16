@@ -189,12 +189,14 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
     { value: 2, text: "item2" },
     { value: 3, text: "item3" }
   ];
-  var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
+  var property = new Survey.JsonObjectProperty("choices");
+  property.type = "itemvalue";
+  var itemValueProperty = new SurveyPropertyItemValuesEditor(property);
+  itemValueProperty.object = { choices: choices };
   itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
     choices = newValue;
   };
-  itemValueProperty.editingValue = choices;
   assert.equal(
     itemValueProperty.koItems().length,
     3,
