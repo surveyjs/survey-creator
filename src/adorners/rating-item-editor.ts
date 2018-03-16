@@ -132,13 +132,12 @@ export var ratingItemAdorner = {
 
     var addNew = document.createElement("span");
     addNew.title = editorLocalization.getString("pe.addItem");
-    addNew.className = "svda-add-new-item icon-inplace-add-item";
+    addNew.className = "svda-add-new-rating-item icon-inplace-add-item";
     addNew.onclick = createAddItemHandler(model, itemValue =>
       editor.onQuestionEditorChanged(model)
     );
     var parent = elements[0].parentElement.parentElement;
     parent.appendChild(addNew);
-    parent.classList.add("svda_rating_question");
   }
 };
 

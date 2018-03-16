@@ -1,29 +1,51 @@
-.svda_rating_question {
-  rating-item-editor {
-    display: none;
+rating-item-editor {
+  display: none;
 
-    .svda-content {
-      position: relative;
-      pointer-events: all;
+  .svda-content {
+    position: relative;
+    pointer-events: none;
 
-      .svda-title-editor-content {
-        white-space: nowrap;
-      }
-      .svda-edit-button {
-        padding-left: 5px;
-        cursor: pointer;
-      }
+    .svda-title-editor-content {
+      white-space: nowrap;
+    }
+    .svda-edit-button {
+      padding-left: 5px;
+      cursor: pointer;
     }
   }
 
-  .svda-add-new-item {
-    margin-top: 5px;
-    padding-right: 10px;
+  .svda-title-editor-start,
+  .svda-delete-item {
+    display: none;
+  }
+}
+
+.svda-add-new-rating-item {
+  pointer-events: all;
+  padding: 0 1em;
+  line-height: 2em;
+  display: none;
+}
+
+.svd_q_selected {
+  rating-item-editor {
+    display: inline-block;
+
+    .svda-content {
+      pointer-events: all;
+    }
   }
 
   .item_editable:hover {
     rating-item-editor {
-      display: inline-block;
+      .svda-title-editor-start,
+      .svda-delete-item {
+        display: inline-block;
+      }
     }
+  }
+
+  .svda-add-new-rating-item {
+    display: inline-block;
   }
 }
