@@ -255,7 +255,6 @@ function onUpdateQuestionCssClasses(survey, options) {
 }
 
 export function applyAdornerClass(classes, adornerClass) {
-  debugger;
   var result = classes;
 
   if (!!adornerClass) {

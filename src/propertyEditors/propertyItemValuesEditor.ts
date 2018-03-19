@@ -79,11 +79,16 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   protected createEditorOptions(): any {
     var options = super.createEditorOptions();
     options.showTextView = true;
+    options.itemsEntryType =
+      (this.options["options"] &&
+        this.options["options"].itemValuesEditorEntryType) ||
+      "form";
     return options;
   }
   protected onSetEditorOptions(editorOptions: any) {
     super.onSetEditorOptions(editorOptions);
     this.koShowTextView(this.canShowTextView && editorOptions.showTextView);
+    this.koActiveView(editorOptions.itemsEntryType || "form");
   }
   protected createNewEditorItem(): any {
     var nextValue = null;
@@ -119,8 +124,16 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     itemValue.setData(item);
     return itemValue;
   }
+  protected onValueChanged() {
+    super.onValueChanged();
+    if (this.isShowingModal) {
+      if (this.koActiveView() !== "form") {
+        this.koItemsText(this.getItemsText());
+      }
+    }
+  }
   protected onBeforeApply() {
-    if (this.koActiveView() != "form") {
+    if (this.koActiveView() !== "form") {
       this.updateItems(this.koItemsText());
     }
     super.onBeforeApply();
