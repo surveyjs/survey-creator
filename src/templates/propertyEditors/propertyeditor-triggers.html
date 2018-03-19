@@ -33,15 +33,15 @@
             </span>
         </div>
         <div data-bind="visible: koSelected() == null">
-            <div data-bind="visible: koQuestions().length == 0, text: $root.getLocString('pe.noquestions')"></div>
-            <div data-bind="visible: koQuestions().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
+            <div data-bind="visible: koQuestionNames().length == 0, text: $root.getLocString('pe.noquestions')"></div>
+            <div data-bind="visible: koQuestionNames().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
         </div>
         <div data-bind="visible: koSelected() != null">
             <div data-bind="with: koSelected">
                 <div class="form-inline form-group">
                     <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
                     <div class="form-control svd_custom_select">
-                        <select data-bind="options:$parent.koQuestions, value: koName"></select>
+                        <select data-bind="options:$parent.koQuestionNames, value: koName"></select>
                     </div>
                     <div class="form-control svd_custom_select">
                         <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
