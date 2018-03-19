@@ -12,7 +12,7 @@ var templateHtml = require("html-loader?interpolate!val-loader!./select-items-ed
 ko.components.register("select-items-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var isExpanded = ko.observable(false);
+      var isExpanded = ko.observable(true);
       var choices = ko.observableArray(params.question.choices);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
         "svda-select-items-collection"
