@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyEditor } from "../src/editor";
+import { SurveyPagesEditor } from "../src/pagesEditor";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -433,6 +434,51 @@ QUnit.test("onCustomPropertySort event", function(assert) {
     "name",
     "The name property is now the first"
   );
+});
+
+QUnit.test("onQuestionEditorChanged method", function(assert) {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>'
+          }
+        ]
+      }
+    ]
+  });
+  var editor = new SurveyEditor();
+  editor.text = jsonText;
+  var pagesEditor: SurveyPagesEditor = editor["pagesEditor"];
+  pagesEditor.selectPageClick(pagesEditor.koPages()[0]);
+  var pageClass = pagesEditor.koPages()[0].getSelectedClass();
+  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(editor.koSelectedObject().value, pagesEditor.koPages()[0].page);
+  assert.ok(pagesEditor.koPages()[0].koSelected());
+  assert.ok(pagesEditor.isPageActive());
+
+  editor.survey.selectedElement = <any>editor.survey.pages[0].elements[0];
+  assert.equal(editor.koSelectedObject().value, editor.survey.pages[0].elements[0]);
+  pageClass = pagesEditor.koPages()[0].getSelectedClass();
+  assert.equal(pageClass, "icon-gear");
+  assert.ok(pagesEditor.koPages()[0].koSelected());
+  assert.notOk(pagesEditor.isPageActive());
+
+  editor.onQuestionEditorChanged(<any>editor.survey.pages[0].elements[0]);
+  assert.equal(pageClass, "icon-gear");
+  assert.ok(pagesEditor.koPages()[0].koSelected());
+  assert.notOk(pagesEditor.isPageActive());
+
+  pagesEditor.selectPageClick(pagesEditor.koPages()[0]);
+  assert.ok(pagesEditor.isPageActive());
+  assert.ok(pagesEditor.koPages()[0].koSelected());
+  pageClass = pagesEditor.koPages()[0].getSelectedClass();
+  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(editor.koSelectedObject().value, pagesEditor.koPages()[0].page);
 });
 
 function getSurveyJson(): any {
