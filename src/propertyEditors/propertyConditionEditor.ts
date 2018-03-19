@@ -9,6 +9,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public availableOperators = [];
   koIsValid: any;
   koCanAddCondition: any;
+  koAddConditionQuestions: any;
   koAddConditionQuestion: any;
   koAddConditionOperator: any;
   koAddConditionValue: any;
@@ -25,6 +26,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     super(property);
     this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.koIsValid = ko.observable(true);
+    this.koAddConditionQuestions = ko.observableArray();
     this.koAddConditionQuestion = ko.observable("");
     this.koAddConditionOperator = ko.observable("");
     this.koAddConditionValue = ko.observable("");
@@ -59,6 +61,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     };
     this.resetAddConditionValues();
   }
+  public setObject(value: any) {
+    super.setObject(value);
+    this.koAddConditionQuestions(this.allCondtionQuestions);
+  }
   public get editorType(): string {
     return this._type;
   }
@@ -66,7 +72,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (this.object instanceof Survey.MatrixDropdownColumn) {
       return this.object.colOwner["survey"].getAllQuestions();
     }
-    return (this.object && this.object.survey.getAllQuestions()) || [];
+    return (
+      (this.object &&
+        this.object.survey &&
+        this.object.survey.getAllQuestions()) ||
+      []
+    );
   }
   public get allCondtionQuestions(): any[] {
     if (!this.object) return [];
@@ -76,7 +87,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       this.addConditionQuestionNames(questions[i], names);
     }
     this.addMatrixColumnsToCondtion(names);
-    this.addPanelDynamicQuestionsToCondtion(names);
+    this.addPanelDynamicQuestionsToCondition(names);
     names.sort();
     return names;
   }
@@ -85,11 +96,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     names: Array<string>
   ) {
     if (question == this.object) return;
-    if (question["addConditionNames"]) {
-      question["addConditionNames"](names);
-    } else {
-      names.push(question.name);
-    }
+    question.addConditionNames(names);
   }
   private addMatrixColumnsToCondtion(names: Array<string>) {
     if (
@@ -105,7 +112,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       names.push("row." + columns[i].name);
     }
   }
-  private addPanelDynamicQuestionsToCondtion(names: Array<string>) {
+  private addPanelDynamicQuestionsToCondition(names: Array<string>) {
     if (!(this.object.data instanceof Survey.QuestionPanelDynamicItem)) return;
     var panel: Survey.PanelModel = this.object.data.panel;
     var questionNames = [];
