@@ -8,6 +8,7 @@ export interface ISurveyObjectMenuItem {
   name: string;
   text: string;
   onClick: (obj: Survey.Base) => any;
+  icon?: string | (() => string);
   hasTitle?: boolean;
   template?: string;
 }
@@ -255,7 +256,6 @@ function onUpdateQuestionCssClasses(survey, options) {
 }
 
 export function applyAdornerClass(classes, adornerClass) {
-  debugger;
   var result = classes;
 
   if (!!adornerClass) {

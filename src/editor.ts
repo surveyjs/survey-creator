@@ -297,6 +297,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> options.editorOptions  options that can be changed.
    * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
    * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
+   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
    */
   public onSetPropertyEditorOptions: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -1275,9 +1276,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowShowHideTitle &&
         typeof options.obj.titleLocation !== "undefined"
       ) {
+        var isShowTitle = ko.observable<boolean>(
+          options.obj.titleLocation !== "hidden"
+        );
         options.items.push({
           name: "showTitle",
           text: this.getLocString("pe.showTitle"),
+          icon: ko.computed(() => {
+            if (isShowTitle()) {
+              return "icon-action-showTitle";
+            }
+            return "icon-action-hideTitle";
+          }),
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
               question.titleLocation = "hidden";
@@ -1290,6 +1300,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 question["showTitle"] = true;
               }
             }
+            isShowTitle(question.titleLocation !== "hidden");
             this.onQuestionEditorChanged(question);
           }
         });
@@ -1299,11 +1310,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowChangeRequired &&
         typeof options.obj.isRequired !== "undefined"
       ) {
+        var isRequired = ko.observable<boolean>(options.obj.isRequired);
         options.items.push({
           name: "isRequired",
           text: this.getLocString("pe.isRequired"),
+          icon: ko.computed(() => {
+            if (isRequired()) {
+              return "icon-action-isRequired";
+            }
+            return "icon-action-notRequired";
+          }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
+            isRequired(question.isRequired);
             this.onQuestionEditorChanged(question);
           }
         });
@@ -1614,7 +1633,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyObjects.nameChanged(question);
     this.selectedObjectEditorValue.objectChanged();
     this.pagesEditor.updatePages();
-    this.pagesEditor.setSelectedPage(<any>question);
     this.setModified({
       type: "QUESTION_CHANGED_BY_EDITOR",
       question: question

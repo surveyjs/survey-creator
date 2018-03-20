@@ -1,7 +1,7 @@
 .svda-question-actions {
   position: absolute;
   right: 15px;
-  top: 5px;
+  top: -30px;
   left: 15px;
   text-align: right;
   line-height: 30px;
@@ -13,7 +13,7 @@
   }
 
   select.svda_current_type {
-    background-color: #f5f5f5;
+    background-color: white;
     border: none;
     outline: none;
     cursor: pointer;
@@ -23,7 +23,7 @@
       outline: none;
     }
     option {
-      background: #f5f5f5;
+      background: white;
     }
   }
 }

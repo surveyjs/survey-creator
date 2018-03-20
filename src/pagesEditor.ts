@@ -170,13 +170,16 @@ export class SurveyPagesEditor {
       this.koPages([]);
       return;
     }
+    var prevSelectedPageObject = this.koPages().filter(p => p.koSelected())[0];
     var pages = [];
     for (var i = 0; i < this.surveyValue.pages.length; i++) {
       var page = this.surveyValue.pages[i];
       pages.push({
         title: ko.observable(SurveyHelper.getObjectName(page)),
         page: page,
-        koSelected: ko.observable(false),
+        koSelected: ko.observable(
+          !!prevSelectedPageObject && page === prevSelectedPageObject.page
+        ),
         getSelectedClass: function() {
           return this.koSelected() && self.isPageActive()
             ? "icon-gear-active"
