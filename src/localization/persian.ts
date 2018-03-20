@@ -202,9 +202,7 @@ var persianStrings = {
     triggerRunIf: "اجرا در صورت",
     triggerSetToName: "تعییر مقدار از: ",
     triggerSetValue: "به: ",
-    triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه",
-    verbChangeType: "تغییر نوع ",
-    verbChangePage: "تغییر صفحه "
+    triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه"
   },
   //Property values
   pv: {

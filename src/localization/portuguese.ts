@@ -127,9 +127,7 @@ var portugueseTranslation = {
     triggerRunIf: "Executar se",
     triggerSetToName: "Mudar o valor de: ",
     triggerSetValue: "para: ",
-    triggerIsVariable: "Não colocar a variável no resultado da pesquisa.",
-    verbChangeType: "Alterar tipo ",
-    verbChangePage: "Alterar página "
+    triggerIsVariable: "Não colocar a variável no resultado da pesquisa."
   },
   //Operators
   op: {

@@ -307,9 +307,7 @@ var frenchTranslation = {
     triggerSetToName: "Changer la valeur de: ",
     triggerSetValue: "à: ",
     triggerIsVariable:
-      "Ne placez pas la variable dans le résultat du questionnaire.",
-    verbChangePage: "Changer de page ",
-    verbChangeType: "Changer le type "
+      "Ne placez pas la variable dans le résultat du questionnaire."
   },
   //questionTypes
   qt: {
