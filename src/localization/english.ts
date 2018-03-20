@@ -387,6 +387,7 @@ export var enStrings = {
 
     columns: "columns",
     cells: "cells",
+    isAllRowRequired: "isAllRowRequired",
 
     horizontalScroll: "horizontalScroll",
     cellType: "cellType",
