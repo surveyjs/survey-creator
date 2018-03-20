@@ -106,16 +106,13 @@
     -ms-user-select: none;
     user-select: none;
 
-    select {
-      min-width: 100px;
-    }
-
     .svd-pages {
       position: relative;
       vertical-align: middle;
       overflow: hidden;
       white-space: nowrap;
-      width: calc(100% - 160px);
+      width: calc(100% - 400px);
+      letter-spacing: -3px;
     }
 
     .svd-page-selector,
@@ -129,23 +126,39 @@
     .svd-page-scroller-arrow,
     .svd-page-add {
       cursor: pointer;
+      padding: 0 1em;
     }
 
     .svd-page {
+      letter-spacing: initial;
       cursor: pointer;
-      background-color: lightgray;
+      background-color: #f5f5f5;
       line-height: 1em;
-      padding: 1em;
-      border: 1px solid gray;
+      padding: 1.2em 1.2em 1.4em 1.2em;
+      font-weight: bold;
+      border: 1px solid $light-border-color;
       border-right: none;
       &:last-child {
-        border-right: 1px solid gray;
+        border-right: 1px solid $light-border-color;
       }
     }
 
     .svd_selected_page {
       background-color: white;
-      border-bottom: none;
+      border-bottom: 1px solid white;
+    }
+
+    .svd-page-selector.svd_custom_select {
+      max-width: 250px;
+      line-height: 2.44em;
+      background: white;
+      border: 1px solid #e7eaec;
+      font-size: 14px;
+      padding-left: 20px;
+      select {
+        min-width: 100px;
+        border: none;
+      }
     }
   }
 }

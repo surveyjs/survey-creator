@@ -64,7 +64,7 @@
                     <!-- /ko -->
                 </div>
                 <div class="svd_pages_editor" data-bind="visible: koShowPagesToolbox, template: { name: 'pageeditor', data: pagesEditor }"></div>
-                <pages-editor class="svd_pages_editor" params="survey: survey, editor: $data" data-bind="visible: koShowPagesToolbox"></pages-editor>
+                <pages-editor params="survey: survey, editor: $data" data-bind="visible: koShowPagesToolbox"></pages-editor>
                 <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }">
                     <div id="surveyjs"></div>
                     <!-- ko if: isCurrentPageEmpty -->
