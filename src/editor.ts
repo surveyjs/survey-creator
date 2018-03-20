@@ -1276,9 +1276,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowShowHideTitle &&
         typeof options.obj.titleLocation !== "undefined"
       ) {
+        var isShowTitle = ko.observable<boolean>(
+          options.obj.titleLocation !== "hidden"
+        );
         options.items.push({
           name: "showTitle",
           text: this.getLocString("pe.showTitle"),
+          icon: ko.computed(() => {
+            if (isShowTitle()) {
+              return "icon-action-showTitle";
+            }
+            return "icon-action-hideTitle";
+          }),
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
               question.titleLocation = "hidden";
@@ -1291,6 +1300,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
                 question["showTitle"] = true;
               }
             }
+            isShowTitle(question.titleLocation !== "hidden");
             this.onQuestionEditorChanged(question);
           }
         });
@@ -1300,11 +1310,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowChangeRequired &&
         typeof options.obj.isRequired !== "undefined"
       ) {
+        var isRequired = ko.observable<boolean>(options.obj.isRequired);
         options.items.push({
           name: "isRequired",
           text: this.getLocString("pe.isRequired"),
+          icon: ko.computed(() => {
+            if (isRequired()) {
+              return "icon-action-isRequired";
+            }
+            return "icon-action-notRequired";
+          }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
+            isRequired(question.isRequired);
             this.onQuestionEditorChanged(question);
           }
         });
