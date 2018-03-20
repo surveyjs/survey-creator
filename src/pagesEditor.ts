@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { SurveyHelper } from "./surveyHelper";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
+import { SurveyForDesigner, SurveyEditor } from "./entries";
 
 export declare type SurveyVoidCallback = () => void;
 export declare type SurveyOptionsCallback = (options?: any) => void;
@@ -202,3 +203,87 @@ export class SurveyPagesEditor {
     }
   }
 }
+
+class PagesEditor {
+  public pages = ko.observableArray();
+  public selectedPage = ko.observable();
+  public selectedPageSelect = ko.computed({
+    read: () => this.selectedPage(),
+    write: newVal => {
+      this.selectedPage(newVal);
+      this.moveToSelectedPage();
+    }
+  });
+
+  constructor(
+    private editor: SurveyEditor,
+    private survey: SurveyForDesigner,
+    private element: any
+  ) {
+    this.pages([].concat(survey.pages));
+    this.selectedPage(this.pages()[0]);
+    editor.koSelectedObject.subscribe(newVal => {
+      if (!!newVal && newVal.value instanceof Survey.Page) {
+        if (newVal.value !== this.selectedPage()) {
+          this.selectedPage(newVal.value);
+        }
+      }
+    });
+    this.selectedPage.subscribe(newSel => {
+      editor.surveyObjects.selectObject(<any>newSel);
+    });
+  }
+
+  getPageClass = page => {
+    return page === this.selectedPage() ? "svd_selected_page" : "";
+  };
+  selectPage = page => {
+    this.selectedPage(page);
+  };
+  addPage() {
+    var name = SurveyHelper.getNewPageName(this.survey.pages);
+    var newPage = <Survey.Page>this.survey.addNewPage(name);
+    this.pages.push(newPage);
+    this.selectedPage(newPage);
+
+    this.editor.addPageToUI(newPage);
+    this.editor.setModified({ type: "PAGE_ADDED", newValue: newPage });
+  }
+  moveLeft(model, event) {
+    var pagesElement = this.element.querySelector(".svd-pages");
+    pagesElement.scrollLeft -= 50;
+  }
+  moveRight(model, event) {
+    var pagesElement = this.element.querySelector(".svd-pages");
+    pagesElement.scrollLeft += 50;
+  }
+  moveToSelectedPage() {
+    var pagesElement: any = this.element.querySelector(".svd-pages");
+    var index = this.pages().indexOf(this.selectedPage());
+    var pageElement = pagesElement.children[index];
+    pagesElement.scrollTo(
+      pageElement.offsetLeft - pagesElement.offsetWidth / 2,
+      0
+    );
+  }
+  onWheel(model, event) {
+    var pagesElement = model.element.querySelector(".svd-pages");
+    event = event || window.event;
+    var delta = event.deltaY || event.detail || event.wheelDelta;
+    pagesElement.scrollLeft -= delta;
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+  }
+}
+
+ko.components.register("pages-editor", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      return new PagesEditor(
+        ko.unwrap(params.editor),
+        ko.unwrap(params.survey),
+        componentInfo.element
+      );
+    }
+  },
+  template: { element: "svd-page-selector-template" }
+});

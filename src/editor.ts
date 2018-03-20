@@ -70,7 +70,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private pagesEditor: SurveyPagesEditor;
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
-  private surveyObjects: SurveyObjects;
+  public surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   private undoRedo: SurveyUndoRedo;
   private surveyValue = ko.observable<SurveyForDesigner>();
@@ -405,7 +405,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   koViewType: any;
   koCanDeleteObject: any;
   koObjects: any;
-  koSelectedObject: any;
+  koSelectedObject: KnockoutObservable<any>;
   koShowSaveButton: any;
   koGenerateValidJSON: any;
   koShowOptions: any;
@@ -511,7 +511,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.pagesEditor = new SurveyPagesEditor();
     this.pagesEditor = new SurveyPagesEditor();
     this.pagesEditor.onAddNewPageCallback = () => {
       self.addPage();
@@ -873,7 +872,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       });
     }
   }
-  protected setModified(options: any = null) {
+  public setModified(options: any = null) {
     this.setState("modified");
     this.setUndoRedoCurrentState();
     this.onModified.fire(this, options);
@@ -1008,7 +1007,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       indexTo: indexTo
     });
   }
-  private addPageToUI(page: Survey.Page) {
+  public addPageToUI(page: Survey.Page) {
     this.pagesEditor.survey = this.surveyValue();
     this.surveyObjects.addPage(page);
   }

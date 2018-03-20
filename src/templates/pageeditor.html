@@ -59,3 +59,22 @@
         </ul>
     </ul>
 </script>
+
+<script type="text/html" id="svd-page-selector-template">
+    <div class="svd-page-selector">
+        <select data-bind="options: pages, value: selectedPageSelect, optionsText:'name'"></select>
+    </div>
+    <div class="svd-page-scroller-arrow" data-bind="click: moveLeft">
+        ◀
+    </div>
+    <div class="svd-pages" data-bind="foreach: pages, event: {wheel: onWheel}">
+        <div class="svd-page" data-bind="text: name, css: $parent.getPageClass($data), click: $parent.selectPage">
+        </div>
+    </div>
+    <div class="svd-page-scroller-arrow" data-bind="click: moveRight">
+        ▶
+    </div>
+    <div class="svd-page-add" data-bind="click: addPage">
+        +
+    </div>
+</script>

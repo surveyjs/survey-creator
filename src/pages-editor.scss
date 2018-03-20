@@ -93,3 +93,59 @@
     }
   }
 }
+
+.svd_container {
+  pages-editor {
+    display: block;
+    width: 100%;
+    -border: 1px solid green;
+    webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    select {
+      min-width: 100px;
+    }
+
+    .svd-pages {
+      position: relative;
+      vertical-align: middle;
+      overflow: hidden;
+      white-space: nowrap;
+      width: calc(100% - 160px);
+    }
+
+    .svd-page-selector,
+    .svd-page-scroller-arrow,
+    .svd-page-add,
+    .svd-pages,
+    .svd-page {
+      display: inline-block;
+    }
+
+    .svd-page-scroller-arrow,
+    .svd-page-add {
+      cursor: pointer;
+    }
+
+    .svd-page {
+      cursor: pointer;
+      background-color: lightgray;
+      line-height: 1em;
+      padding: 1em;
+      border: 1px solid gray;
+      border-right: none;
+      &:last-child {
+        border-right: 1px solid gray;
+      }
+    }
+
+    .svd_selected_page {
+      background-color: white;
+      border-bottom: none;
+    }
+  }
+}
