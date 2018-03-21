@@ -335,6 +335,7 @@ export var enStrings = {
     description: "description",
     state: "state",
     isRequired: "isRequired",
+    indent: "indent",
     requiredErrorText: "requiredErrorText",
     startWithNewLine: "startWithNewLine",
     innerIndent: "innerIndent",
@@ -388,6 +389,7 @@ export var enStrings = {
 
     columns: "columns",
     cells: "cells",
+    isAllRowRequired: "isAllRowRequired",
 
     horizontalScroll: "horizontalScroll",
     cellType: "cellType",
@@ -435,6 +437,7 @@ export var enStrings = {
     inputType: "inputType",
     size: "size",
 
+    locale: "locale",
     focusFirstQuestionAutomatic: "focusFirstQuestionAutomatic",
     completedHtml: "completedHtml",
     completedBeforeHtml: "completedBeforeHtml",
