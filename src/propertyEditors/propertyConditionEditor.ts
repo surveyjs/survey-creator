@@ -21,6 +21,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   onConditionAddClick: any;
   koValueSurvey: any;
   private isValueChanging: boolean = false;
+  private static emptySurvey = new Survey.Survey();
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -35,7 +36,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koAddConditionValue = ko.observable("");
     this.koAddConditionType = ko.observable("and");
     this.koHasValueSurvey = ko.observable(false);
-    this.koValueSurvey = ko.observable(null);
+    this.koValueSurvey = ko.observable(
+      SurveyPropertyConditionEditor.emptySurvey
+    );
     var self = this;
     this.koAddConditionQuestion.subscribe(function(newValue) {
       self.onValueSurveyChanged(newValue, self.koAddConditionOperator());
