@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import { SurveyHelper } from "./surveyHelper";
 import * as Survey from "survey-knockout";
+import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyForDesigner, SurveyEditor } from "./entries";
 
@@ -207,6 +208,7 @@ export class SurveyPagesEditor {
 class PagesEditor {
   public pages = ko.observableArray();
   public selectedPage = ko.observable();
+  public isActive = ko.observable();
   public selectedPageSelect = ko.computed({
     read: () => this.selectedPage(),
     write: newVal => {
@@ -224,9 +226,12 @@ class PagesEditor {
     this.selectedPage(this.pages()[0]);
     editor.koSelectedObject.subscribe(newVal => {
       if (!!newVal && newVal.value instanceof Survey.Page) {
+        this.isActive(true);
         if (newVal.value !== this.selectedPage()) {
           this.selectedPage(newVal.value);
         }
+      } else {
+        this.isActive(false);
       }
     });
     this.selectedPage.subscribe(newSel => {
@@ -236,6 +241,16 @@ class PagesEditor {
 
   getPageClass = page => {
     return page === this.selectedPage() ? "svd_selected_page" : "";
+  };
+  getPageMenuClass = page => {
+    return page !== this.selectedPage() || !this.isActive()
+      ? "menu-disabled"
+      : null;
+  };
+  getPageMenuIconClass = page => {
+    return page === this.selectedPage() && this.isActive()
+      ? "icon-gear-active"
+      : "icon-gear";
   };
   selectPage = page => {
     this.selectedPage(page);
@@ -272,6 +287,12 @@ class PagesEditor {
     var delta = event.deltaY || event.detail || event.wheelDelta;
     pagesElement.scrollLeft -= delta;
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+  }
+  getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
+  isLastPage() {
+    return this.pages().length === 1;
   }
 }
 

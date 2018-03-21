@@ -107,7 +107,6 @@
     user-select: none;
 
     .svd-pages {
-      position: relative;
       vertical-align: middle;
       overflow: hidden;
       white-space: nowrap;
@@ -140,6 +139,30 @@
       border-right: none;
       &:last-child {
         border-right: 1px solid $light-border-color;
+      }
+
+      .ddmenu-container {
+        .ddmenu {
+          position: static;
+
+          ul {
+            background: white;
+            border: 1px solid $dark-bg-color;
+            border-radius: 2px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            padding: 0;
+            margin-top: 5px;
+            li {
+              margin: 7px;
+              button {
+                padding: 6px 15px;
+                font-weight: bold;
+                width: 100%;
+              }
+            }
+          }
+        }
       }
     }
 

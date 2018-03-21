@@ -68,7 +68,30 @@
         <span class="icon-pe-left"></span>
     </div>
     <div class="svd-pages" data-bind="foreach: pages, event: {wheel: onWheel}">
-        <div class="svd-page" data-bind="text: name, css: $parent.getPageClass($data), click: $parent.selectPage">
+        <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: $parent.selectPage">
+            <span data-bind="text: name"></span>
+            <div class="ddmenu-container" data-bind="css: $parent.getPageMenuClass($data)">
+                <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+
+                <div class="ddmenu">
+                    <span tabindex="0">
+                        <span data-bind="css: $parent.getPageMenuIconClass($data)"></span>
+                    </span>
+
+                    <div tabindex="0" onclick="return true"></div>
+                    <ul>
+                        <li>
+                            <button class="btn btn-primary" data-bind="text: $parent.getLocString('ed.editPage')"></button>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" data-bind=" text: $parent.getLocString('survey.Copy')"></button>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" data-bind="text: $parent.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="svd-page-scroller-arrow" data-bind="click: moveRight">
