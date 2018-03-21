@@ -264,39 +264,6 @@ class PagesEditor {
     this.editor.addPageToUI(newPage);
     this.editor.setModified({ type: "PAGE_ADDED", newValue: newPage });
   }
-  moveLeft(model, event) {
-    var pagesElement = this.element.querySelector(".svd-pages");
-    pagesElement.scrollLeft -= 50;
-  }
-  moveRight(model, event) {
-    var pagesElement = this.element.querySelector(".svd-pages");
-    pagesElement.scrollLeft += 50;
-  }
-  moveToSelectedPage() {
-    var pagesElement: any = this.element.querySelector(".svd-pages");
-    var index = this.pages().indexOf(this.selectedPage());
-    var pageElement = pagesElement.children[index];
-    pagesElement.scrollTo(
-      pageElement.offsetLeft - pagesElement.offsetWidth / 2,
-      0
-    );
-  }
-  onWheel(model, event) {
-    var pagesElement = model.element.querySelector(".svd-pages");
-    event = event || window.event;
-    var delta = event.deltaY || event.detail || event.wheelDelta;
-    pagesElement.scrollLeft -= delta;
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-  }
-  getLocString(str: string) {
-    return editorLocalization.getString(str);
-  }
-  isLastPage() {
-    return this.pages().length === 1;
-  }
-  showPageSettings(page) {
-    this.editor.showQuestionEditor(page);
-  }
   copyPage(page) {
     var editor = this.editor;
     var newPage = <Survey.Page>(<any>editor.copyElement(page));
@@ -326,6 +293,39 @@ class PagesEditor {
     } else {
       this.selectedPage(pages()[index - 1]);
     }
+  }
+  isLastPage() {
+    return this.pages().length === 1;
+  }
+  moveLeft(model, event) {
+    var pagesElement = this.element.querySelector(".svd-pages");
+    pagesElement.scrollLeft -= 50;
+  }
+  moveRight(model, event) {
+    var pagesElement = this.element.querySelector(".svd-pages");
+    pagesElement.scrollLeft += 50;
+  }
+  moveToSelectedPage() {
+    var pagesElement: any = this.element.querySelector(".svd-pages");
+    var index = this.pages().indexOf(this.selectedPage());
+    var pageElement = pagesElement.children[index];
+    pagesElement.scrollTo(
+      pageElement.offsetLeft - pagesElement.offsetWidth / 2,
+      0
+    );
+  }
+  onWheel(model, event) {
+    var pagesElement = model.element.querySelector(".svd-pages");
+    event = event || window.event;
+    var delta = event.deltaY || event.detail || event.wheelDelta;
+    pagesElement.scrollLeft -= delta;
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+  }
+  getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
+  showPageSettings(page) {
+    this.editor.showQuestionEditor(page);
   }
 }
 
