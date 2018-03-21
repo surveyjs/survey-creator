@@ -17,7 +17,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   koShowAddConditionType: any;
   koAddConditionButtonText: any;
   koAddContionValueEnabled: any;
+  koHasValueSurvey: any;
   onConditionAddClick: any;
+  koValueSurvey: any;
+  private isValueChanging: boolean = false;
+  private static emptySurvey = new Survey.Survey();
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -31,7 +35,24 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koAddConditionOperator = ko.observable("");
     this.koAddConditionValue = ko.observable("");
     this.koAddConditionType = ko.observable("and");
+    this.koHasValueSurvey = ko.observable(false);
+    this.koValueSurvey = ko.observable(
+      SurveyPropertyConditionEditor.emptySurvey
+    );
     var self = this;
+    this.koAddConditionQuestion.subscribe(function(newValue) {
+      self.onValueSurveyChanged(newValue, self.koAddConditionOperator());
+    });
+    this.koAddConditionOperator.subscribe(function(newValue) {
+      self.onValueSurveyChanged(self.koAddConditionQuestion(), newValue);
+    });
+    this.koAddConditionValue.subscribe(function(newValue) {
+      if (self.koHasValueSurvey()) {
+        self.isValueChanging = true;
+        self.koValueSurvey().setValue("question", newValue);
+        self.isValueChanging = false;
+      }
+    });
     this.koCanAddCondition = ko.computed(function() {
       return (
         this.koAddConditionQuestion() != "" &&
@@ -53,8 +74,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       return editorLocalization.editorLocalization.getString("pe." + name);
     }, this);
     this.koAddContionValueEnabled = ko.computed(function() {
-      var op = this.koAddConditionOperator();
-      return op != "empty" && op != "notempty";
+      return self.canShowValueByOperator(self.koAddConditionOperator());
     }, this);
     this.onConditionAddClick = function() {
       self.addCondition();
@@ -124,6 +144,70 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     for (var i = 0; i < questionNames.length; i++) {
       names.push("panel." + questionNames[i]);
     }
+  }
+  private onValueSurveyChanged(questionName: string, operator: string) {
+    if (
+      !this.canShowValueByOperator(operator) ||
+      !questionName ||
+      !this.object ||
+      !this.object.survey
+    ) {
+      this.koHasValueSurvey(false);
+      return;
+    }
+    var json = this.getQuestionConditionJson(questionName, operator);
+    this.koHasValueSurvey(json && json.type);
+    if (this.koHasValueSurvey()) {
+      this.koValueSurvey(this.createValueSurvey(json));
+    }
+  }
+  private createValueSurvey(qjson: any): Survey.Survey {
+    qjson.name = "question";
+    qjson.title = editorLocalization.editorLocalization.getString(
+      "pe.conditionValueQuestionTitle"
+    );
+    delete qjson["visible"];
+    delete qjson["visibleIf"];
+    delete qjson["enable"];
+    delete qjson["enableIf"];
+    var json = {
+      questions: [],
+      showNavigationButtons: false,
+      showQuestionNumbers: "off"
+    };
+    json.questions.push(qjson);
+    var survey = new Survey.Survey(json);
+    var self = this;
+    survey.onValueChanged.add(function(survey, options) {
+      if (!self.isValueChanging) {
+        self.koAddConditionValue(options.value);
+      }
+    });
+    return survey;
+  }
+  private getQuestionConditionJson(
+    questionName: string,
+    operator: string
+  ): any {
+    var path = "";
+    var pos = questionName.indexOf(".");
+    if (pos > -1) {
+      path = questionName.substr(pos + 1);
+      questionName = questionName.substr(0, pos);
+      pos = questionName.indexOf("[");
+      if (pos > -1) {
+        questionName = questionName.substr(0, pos);
+      }
+    }
+    var question = this.object.survey.getQuestionByName(questionName);
+    var json =
+      question && question.getConditionJson
+        ? question.getConditionJson(operator, path)
+        : null;
+    return json && (json.type !== "text" || json.inputType) ? json : null;
+  }
+  private canShowValueByOperator(operator: string) {
+    return operator != "empty" && operator != "notempty";
   }
   public get hasAceEditor(): boolean {
     return (
