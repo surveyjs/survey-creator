@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyHelper } from "./surveyHelper";
+import { SurveyHelper, ObjType } from "./surveyHelper";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
@@ -225,7 +225,10 @@ class PagesEditor {
     this.pages([].concat(survey.pages));
     this.selectedPage(this.pages()[0]);
     editor.koSelectedObject.subscribe(newVal => {
-      if (!!newVal && newVal.value instanceof Survey.Page) {
+      if (
+        !!newVal &&
+        SurveyHelper.getObjectType(newVal.value) == ObjType.Page
+      ) {
         this.isActive(true);
         if (newVal.value !== this.selectedPage()) {
           this.selectedPage(newVal.value);
@@ -234,9 +237,28 @@ class PagesEditor {
         this.isActive(false);
       }
     });
+    editor.onPropertyValueChanging.add((sender, options) => {
+      var obj = options.obj;
+      if (
+        options.propertyName == "name" &&
+        SurveyHelper.getObjectType(obj) == ObjType.Page
+      ) {
+        var index = this.pages.indexOf(this.selectedPage());
+        this.dirtyPageNameUpdate(index, options.value);
+        this.selectedPage(this.pages()[index]);
+      }
+    });
     this.selectedPage.subscribe(newSel => {
       editor.surveyObjects.selectObject(<any>newSel);
     });
+  }
+
+  // TODO dirty method, why does .valueHasMutated(); method or native observable not work?
+  dirtyPageNameUpdate(index, newName) {
+    this.pages()[index]["name"] = newName;
+    var data = this.pages().slice(0);
+    this.pages([]);
+    this.pages(data);
   }
 
   getPageClass = page => {
@@ -309,6 +331,7 @@ class PagesEditor {
     var pagesElement: any = this.element.querySelector(".svd-pages");
     var index = this.pages().indexOf(this.selectedPage());
     var pageElement = pagesElement.children[index];
+    if (!pageElement) return;
     pagesElement.scrollTo(
       pageElement.offsetLeft - pagesElement.offsetWidth / 2,
       0
