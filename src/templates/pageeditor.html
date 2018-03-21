@@ -68,7 +68,7 @@
         <span class="icon-pe-left"></span>
     </div>
     <div class="svd-pages" data-bind="foreach: pages, event: {wheel: onWheel}">
-        <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: $parent.selectPage">
+        <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: (model, event)=>{$parent.selectPage($data);event.stopPropagation();}">
             <span data-bind="text: name"></span>
             <div class="ddmenu-container" data-bind="css: $parent.getPageMenuClass($data)">
                 <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
@@ -81,13 +81,13 @@
                     <div tabindex="0" onclick="return true"></div>
                     <ul>
                         <li>
-                            <button class="btn btn-primary" data-bind="text: $parent.getLocString('ed.editPage')"></button>
+                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.showPageSettings($data); event.stopPropagation();}, text: $parent.getLocString('ed.editPage')"></button>
                         </li>
                         <li>
-                            <button class="btn btn-primary" data-bind=" text: $parent.getLocString('survey.Copy')"></button>
+                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.copyPage($data); event.stopPropagation();}, text: $parent.getLocString('survey.Copy')"></button>
                         </li>
                         <li>
-                            <button class="btn btn-primary" data-bind="text: $parent.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
+                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.deletePage($data); event.stopPropagation();}, text: $parent.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
                         </li>
                     </ul>
                 </div>

@@ -294,6 +294,39 @@ class PagesEditor {
   isLastPage() {
     return this.pages().length === 1;
   }
+  showPageSettings(page) {
+    this.editor.showQuestionEditor(page);
+  }
+  copyPage(page) {
+    var editor = this.editor;
+    var newPage = <Survey.Page>(<any>editor.copyElement(page));
+    var index = editor.survey.pages.indexOf(page);
+    if (index > -1) {
+      editor.survey.pages.splice(index + 1, 0, newPage);
+    } else {
+      editor.survey.pages.push(newPage);
+    }
+    this.pages.push(newPage);
+    this.selectedPage(newPage);
+
+    editor.addPageToUI(newPage);
+    editor.setModified({ type: "PAGE_ADDED", newValue: newPage });
+  }
+  deletePage() {
+    var pages = this.pages;
+    var index = -1;
+
+    this.editor.deleteCurrentObject();
+
+    index = pages.indexOf(this.selectedPage());
+    if (index !== -1) pages.splice(index, 1);
+
+    if (index === 0) {
+      this.selectedPage(pages()[index]);
+    } else {
+      this.selectedPage(pages()[index - 1]);
+    }
+  }
 }
 
 ko.components.register("pages-editor", {

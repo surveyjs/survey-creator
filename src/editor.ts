@@ -1454,7 +1454,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var newElement = this.createNewElement(json);
     this.doClickQuestionCore(newElement);
   }
-  private copyElement(element: Survey.Base): Survey.IElement {
+  public copyElement(element: Survey.Base): Survey.IElement {
     var json = new Survey.JsonObject().toJsonObject(element);
     json.type = element.getType();
     return this.createNewElement(json);
@@ -1579,7 +1579,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       ? <Survey.QuestionBase>obj
       : null;
   }
-  private deleteCurrentObject() {
+  public deleteCurrentObject() {
     this.deleteObject(this.koSelectedObject().value);
   }
   private editCurrentObject() {
