@@ -238,7 +238,7 @@ var frenchTranslation = {
     color: "couleur",
     date: "date",
     datetime: "heure",
-    datetime-local: "heure locale",
+    "datetime-local": "heure locale",
     email: "email",
     month: "mois",
     number: "nombre",
