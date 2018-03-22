@@ -206,7 +206,7 @@ export class SurveyPagesEditor {
   }
 }
 
-class PagesEditor {
+export class PagesEditor {
   public pages = ko.observableArray();
   public selectedPage = ko.observable();
   public isActive = ko.observable();
@@ -253,19 +253,21 @@ class PagesEditor {
       editor.surveyObjects.selectObject(<any>newSel);
     });
 
-    Sortable.create(element.querySelector(".svd-pages"), {
-      handle: ".svd-page-name",
-      animation: 150,
-      onEnd: evt => {
-        var pages = this.pages();
-        var element = pages[evt.oldIndex];
-        pages.splice(evt.oldIndex, 1);
-        pages.splice(evt.newIndex, 0, element);
-        debugger;
-        this.editor.movePage(evt.oldIndex, evt.newIndex);
-        // this.dirtyPagesUpdate();
-      }
-    });
+    if(!!element) {
+      Sortable.create(element.querySelector(".svd-pages"), {
+        handle: ".svd-page-name",
+        animation: 150,
+        onEnd: evt => {
+          var pages = this.pages();
+          var element = pages[evt.oldIndex];
+          pages.splice(evt.oldIndex, 1);
+          pages.splice(evt.newIndex, 0, element);
+          debugger;
+          this.editor.movePage(evt.oldIndex, evt.newIndex);
+          // this.dirtyPagesUpdate();
+        }
+      });
+    }
   }
 
   // TODO dirty method, why does .valueHasMutated(); method or native observable not work?
