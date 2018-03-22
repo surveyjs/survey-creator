@@ -4,6 +4,7 @@ import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyForDesigner, SurveyEditor } from "./entries";
+import Sortable from "sortablejs";
 
 export declare type SurveyVoidCallback = () => void;
 export declare type SurveyOptionsCallback = (options?: any) => void;
@@ -251,11 +252,28 @@ class PagesEditor {
     this.selectedPage.subscribe(newSel => {
       editor.surveyObjects.selectObject(<any>newSel);
     });
+
+    Sortable.create(element.querySelector(".svd-pages"), {
+      handle: ".svd-page-name",
+      animation: 150,
+      onEnd: evt => {
+        var pages = this.pages();
+        var element = pages[evt.oldIndex];
+        pages.splice(evt.oldIndex, 1);
+        pages.splice(evt.newIndex, 0, element);
+        debugger;
+        this.editor.movePage(evt.oldIndex, evt.newIndex);
+        // this.dirtyPagesUpdate();
+      }
+    });
   }
 
   // TODO dirty method, why does .valueHasMutated(); method or native observable not work?
   dirtyPageNameUpdate(index, newName) {
     this.pages()[index]["name"] = newName;
+    this.dirtyPagesUpdate();
+  }
+  dirtyPagesUpdate() {
     var data = this.pages().slice(0);
     this.pages([]);
     this.pages(data);

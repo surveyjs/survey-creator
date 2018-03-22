@@ -69,7 +69,7 @@
     </div>
     <div class="svd-pages" data-bind="foreach: pages, event: {wheel: onWheel}">
         <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: (model, event)=>{$parent.selectPage($data);event.stopPropagation();}">
-            <span data-bind="text: name"></span>
+            <span class="svd-page-name" data-bind="text: name"></span>
             <div class="ddmenu-container" data-bind="css: $parent.getPageMenuClass($data)">
                 <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
 

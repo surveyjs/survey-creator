@@ -129,6 +129,8 @@
     }
 
     .svd-page {
+      overflow: hidden;
+      margin-bottom: -5px;
       letter-spacing: initial;
       cursor: pointer;
       background-color: #f5f5f5;

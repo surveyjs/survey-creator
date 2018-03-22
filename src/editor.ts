@@ -513,12 +513,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
     this.pagesEditor = new SurveyPagesEditor();
 
-    this.pagesEditor.onMovePageCallback = (
-      indexFrom: number,
-      indexTo: number
-    ) => {
-      self.movePage(indexFrom, indexTo);
-    };
     this.pagesEditor.onShowSurveyEditDialog = () => {
       self.showQuestionEditor(this.survey);
     };
@@ -977,7 +971,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }
-  private movePage(indexFrom: number, indexTo: number) {
+  public movePage(indexFrom: number, indexTo: number) {
     var page = <Survey.Page>this.survey.pages[indexFrom];
     this.survey.pages.splice(indexFrom, 1);
     this.survey.pages.splice(indexTo, 0, page);
