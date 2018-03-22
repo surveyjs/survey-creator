@@ -206,9 +206,9 @@ export class SurveyPagesEditor {
   }
 }
 
-class PagesEditor {
-  public pages = ko.observableArray();
-  public selectedPage = ko.observable();
+export class PagesEditor {
+  public pages = ko.observableArray<Survey.Page>();
+  public selectedPage = ko.observable<Survey.Page>();
   public isActive = ko.observable();
   public selectedPageSelect = ko.computed({
     read: () => this.selectedPage(),
