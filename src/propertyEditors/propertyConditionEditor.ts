@@ -49,7 +49,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koAddConditionValue.subscribe(function(newValue) {
       if (self.koHasValueSurvey()) {
         self.isValueChanging = true;
-        self.koValueSurvey().setValue("question", newValue);
+        self.koValueSurvey().setValue("question", JSON.parse(newValue));
         self.isValueChanging = false;
       }
     });
@@ -180,7 +180,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var self = this;
     survey.onValueChanged.add(function(survey, options) {
       if (!self.isValueChanging) {
-        self.koAddConditionValue(options.value);
+        self.koAddConditionValue(JSON.stringify(options.value));
       }
     });
     return survey;
@@ -252,6 +252,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (!val) return val;
     if (val == "true" || val == "false") return val;
     if (!isNaN(val)) return val;
+    if (val[0] == "[") return val;
     if (!this.isQuote(val[0])) val = "'" + val;
     if (!this.isQuote(val[val.length - 1])) val = val + "'";
     return val;
