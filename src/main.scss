@@ -235,6 +235,13 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
   }
+
+  survey-widget {
+    .form-control {
+      width: 100%;
+    }
+  }
+
   .svd_wrap_elements {
     white-space: normal;
   }
