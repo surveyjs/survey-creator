@@ -216,9 +216,20 @@ export class PagesEditor {
     private addPage: Function,
     private copyPage: Function,
     private deletePage: Function,
+    private movePage: Function,
     private element: any
   ) {
     this.pages = pages;
+
+    if (!!element) {
+      Sortable.create(element.querySelector(".svd-pages"), {
+        handle: ".svd-page-name",
+        animation: 150,
+        onEnd: evt => {
+          this.movePage(evt.oldIndex, evt.newIndex);
+        }
+      });
+    }
   }
 
   get selectedPage() {
@@ -292,6 +303,7 @@ ko.components.register("pages-editor", {
         params.addPage,
         params.copyPage,
         params.deletePage,
+        params.movePage,
         componentInfo.element
       );
     }

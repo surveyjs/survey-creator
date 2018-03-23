@@ -989,18 +989,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }
-  public movePage(indexFrom: number, indexTo: number) {
+  public movePage = (indexFrom: number, indexTo: number) => {
     var page = <Survey.Page>this.pages()[indexFrom];
     this.pages.splice(indexFrom, 1);
     this.pages.splice(indexTo, 0, page);
+
+    this.surveyObjects.rebuild();
     this.surveyObjects.selectObject(page);
+
     this.setModified({
       type: "PAGE_MOVED",
       page: page,
       indexFrom: indexFrom,
       indexTo: indexTo
     });
-  }
+  };
   public addPageToUI(page: Survey.Page) {
     this.surveyObjects.addPage(page);
   }
