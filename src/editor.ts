@@ -55,9 +55,11 @@ export interface IToolbarItem {
   template?: string;
   items?: KnockoutObservableArray<IToolbarItem>;
 }
+
 /**
  * Survey Editor is WYSIWYG editor.
  */
+
 export class SurveyEditor implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private _haveCommercialLicense = ko.observable(false);
@@ -969,12 +971,17 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * Add a new page into the editing survey.
    */
-  public addPage() {
+  public addPage = () => {
     var name = SurveyHelper.getNewPageName(this.pages());
-    var page = <Survey.Page>this.surveyValue().addNewPage(name);
+    var page = <Survey.Page>this.survey.addNewPage(name);
+    this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
-  }
+  };
+  private deletePage = () => {
+    this.deleteCurrentObject();
+    this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
+  };
   /**
    * Returns the localized string by it's id
    * @param str the string id.
@@ -1031,6 +1038,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     obj[property.name] = newValue;
     if (property.name == "name") {
       this.surveyObjects.nameChanged(obj);
+      this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     }
     this.setModified({
       type: "PROPERTY_CHANGED",
@@ -1180,7 +1188,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       };
     }
 
-    this.initSurvey(this.getDefaultSurveyJson());   
+    this.initSurvey(this.getDefaultSurveyJson());
     this.setUndoRedoCurrentState(true);
 
     this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
@@ -1580,10 +1588,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   ) {
     this.showQuestionEditor(element, onClose);
   }
-  public showQuestionEditor(
+  public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
-  ) {
+  ) => {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>this.renderedElement.querySelector(
@@ -1603,16 +1611,27 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         if (onClose) onClose(isCanceled);
       }
     );
-  }
+  };
   public onQuestionEditorChanged(question: Survey.QuestionBase) {
     this.surveyObjects.nameChanged(question);
     this.selectedObjectEditorValue.objectChanged();
+    this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     this.setModified({
       type: "QUESTION_CHANGED_BY_EDITOR",
       question: question
     });
     this.survey.render();
   }
+
+  //TODO why this is need ? (ko problem)
+  private dirtyPageUpdate = () => {
+    var selectedObject = this.koSelectedObject().value;
+    var index;
+    if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
+    index = this.pages.indexOf(selectedObject);
+    this.pages.splice(index, 1);
+    this.pages.splice(index, 0, selectedObject);
+  };
 
   /**
    * Add a question into Toolbox object
@@ -1634,7 +1653,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
    * @param page A copied Survey.Page
    */
-  public copyPage(page: Survey.PageModel): Survey.PageModel {
+  public copyPage = (page: Survey.PageModel): Survey.PageModel => {
     var newPage = <Survey.Page>(<any>this.copyElement(page));
     var index = this.pages.indexOf(page);
     if (index > -1) {
@@ -1645,7 +1664,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.addPageToUI(newPage);
     this.setModified({ type: "PAGE_ADDED", newValue: newPage });
     return newPage;
-  }
+  };
   /**
    * Delete an element in the survey. It can be a question, a panel or a page.
    * @param element a survey element.

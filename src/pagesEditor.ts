@@ -208,84 +208,27 @@ export class SurveyPagesEditor {
 }
 
 export class PagesEditor {
-  // public selectedPageSelect = ko.computed({
-  //   read: () => this.selectedPage(),
-  //   write: newVal => {
-  //     this.selectedPage(newVal);
-  //     this.moveToSelectedPage();
-  //   }
-  // });
-
   constructor(
     private pages: KnockoutObservableArray<Survey.PageModel>,
     private globalSelectedObject: KnockoutObservable<SurveyObjectItem>,
-    private selectPageGlobal: Function,
+    private selectPage: Function,
+    private showPageSettings: Function,
+    private addPage: Function,
+    private copyPage: Function,
+    private deletePage: Function,
     private element: any
   ) {
-    // this.pages([].concat(survey.pages));
     this.pages = pages;
-
-    // this.selectedPage(this.pages()[0]);
-    // editor.koSelectedObject.subscribe(newVal => {
-    //   if (
-    //     !!newVal &&
-    //     SurveyHelper.getObjectType(newVal.value) == ObjType.Page
-    //   ) {
-    //     // this.isActive(true);
-    //     if (newVal.value !== this.selectedPage()) {
-    //       this.selectedPage(newVal.value);
-    //     }
-    //   } else {
-    //     //this.isActive(false);
-    //   }
-    // });
-    // editor.onPropertyValueChanging.add((sender, options) => {
-    //   var obj = options.obj;
-    //   if (
-    //     options.propertyName == "name" &&
-    //     SurveyHelper.getObjectType(obj) == ObjType.Page
-    //   ) {
-    //     var index = this.pages.indexOf(this.selectedPage());
-    //     this.dirtyPageNameUpdate(index, options.value);
-    //     this.selectedPage(this.pages()[index]);
-    //   }
-    // });
-    // this.selectedPage.subscribe(newSel => {
-    //   editor.surveyObjects.selectObject(<any>newSel);
-    // });
-
-    // if(!!element) {
-    //   Sortable.create(element.querySelector(".svd-pages"), {
-    //     handle: ".svd-page-name",
-    //     animation: 150,
-    //     onEnd: evt => {
-    //       var pages = this.pages();
-    //       var element = pages[evt.oldIndex];
-    //       pages.splice(evt.oldIndex, 1);
-    //       pages.splice(evt.newIndex, 0, element);
-    //       debugger;
-    //       this.editor.movePage(evt.oldIndex, evt.newIndex);
-    //       // this.dirtyPagesUpdate();
-    //     }
-    //   });
-    // }
   }
 
   get selectedPage() {
-    return this.isActive() ? this.globalSelectedObject().value : this.pages()[0];
+    return this.isActive()
+      ? this.globalSelectedObject().value
+      : this.pages()[0];
   }
-
-  // TODO dirty method, why does .valueHasMutated(); method or native observable not work?
-  dirtyPageNameUpdate(index, newName) {
-    this.pages()[index]["name"] = newName;
-    this.dirtyPagesUpdate();
+  set selectedPage(newPage) {
+    this.selectPage(newPage);
   }
-  dirtyPagesUpdate() {
-    var data = this.pages().slice(0);
-    this.pages([]);
-    this.pages(data);
-  }
-
   getPageClass = page => {
     return page === this.selectedPage ? "svd_selected_page" : "";
   };
@@ -299,43 +242,6 @@ export class PagesEditor {
       ? "icon-gear-active"
       : "icon-gear";
   };
-  selectPage = page => {
-    this.selectPageGlobal(page);
-  };
-  addPage() {
-    // var name = SurveyHelper.getNewPageName(this.survey.pages);
-    // var newPage = <Survey.Page>this.survey.addNewPage(name);
-    // this.pages.push(newPage);
-    // this.selectedPage(newPage);
-    // this.editor.addPageToUI(newPage);
-    // this.editor.setModified({ type: "PAGE_ADDED", newValue: newPage });
-  }
-  copyPage(page) {
-    // var editor = this.editor;
-    // var newPage = <Survey.Page>(<any>editor.copyElement(page));
-    // var index = editor.survey.pages.indexOf(page);
-    // if (index > -1) {
-    //   editor.survey.pages.splice(index + 1, 0, newPage);
-    // } else {
-    //   editor.survey.pages.push(newPage);
-    // }
-    // this.pages.push(newPage);
-    // this.selectedPage(newPage);
-    // editor.addPageToUI(newPage);
-    // editor.setModified({ type: "PAGE_ADDED", newValue: newPage });
-  }
-  deletePage() {
-    // var pages = this.pages;
-    // var index = -1;
-    // this.editor.deleteCurrentObject();
-    // index = pages.indexOf(this.selectedPage());
-    // if (index !== -1) pages.splice(index, 1);
-    // if (index === 0) {
-    //   this.selectedPage(pages()[index]);
-    // } else {
-    //   this.selectedPage(pages()[index - 1]);
-    // }
-  }
   isLastPage() {
     return this.pages().length === 1;
   }
@@ -367,12 +273,10 @@ export class PagesEditor {
   getLocString(str: string) {
     return editorLocalization.getString(str);
   }
-  // showPageSettings(page) {
-  //   this.editor.showQuestionEditor(page);
-  // }
   isActive() {
     return (
-      SurveyHelper.getObjectType(this.globalSelectedObject().value) === ObjType.Page
+      SurveyHelper.getObjectType(this.globalSelectedObject().value) ===
+      ObjType.Page
     );
   }
 }
@@ -383,7 +287,11 @@ ko.components.register("pages-editor", {
       return new PagesEditor(
         params.pages,
         params.globalSelectedObject,
-        params.selectPageGlobal,
+        params.selectPage,
+        params.showPageSettings,
+        params.addPage,
+        params.copyPage,
+        params.deletePage,
         componentInfo.element
       );
     }
