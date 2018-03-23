@@ -14,7 +14,7 @@
             </div>
             <input class="form-control" type="text" data-bind="textInput:koAddConditionValue, enable: koAddContionValueEnabled" style="width:120px" />
             <input type="button" class="form-control btn btn-primary" data-bind="enable: koCanAddCondition, click: onConditionAddClick, value: koAddConditionButtonText" />
-            <div class="form-group svd_wrap_elements" data-bind="visible:koHasValueSurvey">
+            <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
                 <survey-widget params="survey: koValueSurvey"></survey-widget>
             </div>
         </div>
