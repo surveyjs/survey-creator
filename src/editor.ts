@@ -67,7 +67,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private jsonEditor: SurveyJSONEditor;
   public selectedObjectEditorValue: SurveyObjectEditor;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
+
   private pagesEditor: SurveyPagesEditor;
+  private pages: KnockoutObservableArray<Survey.PageModel>;
+
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
   public surveyObjects: SurveyObjects;
@@ -445,14 +448,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     var self = this;
 
+    this.pages = ko.observableArray([]);
+
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
     this.saveButtonClick = function() {
       self.doSave();
     };
     this.koObjects = ko.observableArray();
+    window["sel"] = this.koSelectedObject;
     this.koSelectedObject = ko.observable();
     this.koSelectedObject.subscribe(function(newValue) {
+      debugger;
       self.selectedObjectChanged(newValue != null ? newValue.value : null);
     });
     this.koGenerateValidJSON.subscribe(function(newValue) {
@@ -686,6 +693,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       template: "svd-toolbar-state"
     });
   }
+
   protected setOptions(options: any) {
     if (!options) options = {};
     if (!options.hasOwnProperty("generateValidJSON"))
@@ -959,7 +967,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Add a new page into the editing survey.
    */
   public addPage() {
-    var name = SurveyHelper.getNewPageName(this.survey.pages);
+    var name = SurveyHelper.getNewPageName(this.pages());
     var page = <Survey.Page>this.surveyValue().addNewPage(name);
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
@@ -972,9 +980,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     return editorLocalization.getString(str);
   }
   public movePage(indexFrom: number, indexTo: number) {
-    var page = <Survey.Page>this.survey.pages[indexFrom];
-    this.survey.pages.splice(indexFrom, 1);
-    this.survey.pages.splice(indexTo, 0, page);
+    var page = <Survey.Page>this.pages()[indexFrom];
+    this.pages.splice(indexFrom, 1);
+    this.pages.splice(indexTo, 0, page);
     this.surveyObjects.selectObject(page);
     this.setModified({
       type: "PAGE_MOVED",
@@ -1120,7 +1128,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
       this.survey.currentPage = <Survey.Page>obj;
-      canDeleteObject = this.survey.pages.length > 1;
+      canDeleteObject = this.pages.length > 1;
     }
     if (objType == ObjType.Question || objType == ObjType.Panel) {
       this.survey.selectedElement = obj;
@@ -1170,6 +1178,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
 
     this.initSurvey(this.getDefaultSurveyJson());
+    this.pages(this.survey.pages);
     this.setUndoRedoCurrentState(true);
 
     this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
@@ -1465,7 +1474,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
   }
   private getNewName(type: string): string {
-    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
+    if (type == "page") return SurveyHelper.getNewPageName(this.pages());
     return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
   }
   private getNewQuestionName(): string {
@@ -1476,8 +1485,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getAllQuestions(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
+    for (var i = 0; i < this.pages.length; i++) {
+      this.addElements(this.pages()[i].elements, false, result);
     }
     this.addElements(this.newPanels, false, result);
     this.addElements(this.newQuestions, false, result);
@@ -1485,8 +1494,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getAllPanels(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
+    for (var i = 0; i < this.pages.length; i++) {
+      this.addElements(this.pages()[i].elements, true, result);
     }
     this.addElements(this.newPanels, true, result);
     this.addElements(this.newQuestions, true, result);
@@ -1624,11 +1633,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public copyPage(page: Survey.PageModel): Survey.PageModel {
     var newPage = <Survey.Page>(<any>this.copyElement(page));
-    var index = this.survey.pages.indexOf(page);
+    var index = this.pages.indexOf(page);
     if (index > -1) {
-      this.survey.pages.splice(index + 1, 0, newPage);
+      this.pages.splice(index + 1, 0, newPage);
     } else {
-      this.survey.pages.push(newPage);
+      this.pages.push(newPage);
     }
     this.addPageToUI(newPage);
     this.setModified({ type: "PAGE_ADDED", newValue: newPage });
