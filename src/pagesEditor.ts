@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import { SurveyHelper, ObjType } from "./surveyHelper";
+import { SurveyObjectItem } from "./surveyObjects";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
@@ -217,7 +218,8 @@ export class PagesEditor {
 
   constructor(
     private pages: KnockoutObservableArray<Survey.PageModel>,
-    private globalSelectedObject: KnockoutObservable<any>,
+    private globalSelectedObject: KnockoutObservable<SurveyObjectItem>,
+    private selectPageGlobal: Function,
     private element: any
   ) {
     // this.pages([].concat(survey.pages));
@@ -270,7 +272,7 @@ export class PagesEditor {
   }
 
   get selectedPage() {
-    return this.isActive() ? this.globalSelectedObject : this.pages()[0];
+    return this.isActive() ? this.globalSelectedObject().value : this.pages()[0];
   }
 
   // TODO dirty method, why does .valueHasMutated(); method or native observable not work?
@@ -298,8 +300,7 @@ export class PagesEditor {
       : "icon-gear";
   };
   selectPage = page => {
-    debugger;
-    this.globalSelectedObject(page);
+    this.selectPageGlobal(page);
   };
   addPage() {
     // var name = SurveyHelper.getNewPageName(this.survey.pages);
@@ -371,7 +372,7 @@ export class PagesEditor {
   // }
   isActive() {
     return (
-      SurveyHelper.getObjectType(this.globalSelectedObject) === ObjType.Page
+      SurveyHelper.getObjectType(this.globalSelectedObject().value) === ObjType.Page
     );
   }
 }
@@ -382,6 +383,7 @@ ko.components.register("pages-editor", {
       return new PagesEditor(
         params.pages,
         params.globalSelectedObject,
+        params.selectPageGlobal,
         componentInfo.element
       );
     }

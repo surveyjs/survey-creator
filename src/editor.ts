@@ -70,6 +70,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   private pagesEditor: SurveyPagesEditor;
   private pages: KnockoutObservableArray<Survey.PageModel>;
+  private selectPageGlobal: Function;
 
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
@@ -459,7 +460,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     window["sel"] = this.koSelectedObject;
     this.koSelectedObject = ko.observable();
     this.koSelectedObject.subscribe(function(newValue) {
-      debugger;
       self.selectedObjectChanged(newValue != null ? newValue.value : null);
     });
     this.koGenerateValidJSON.subscribe(function(newValue) {
@@ -472,6 +472,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.koObjects,
       this.koSelectedObject
     );
+    this.selectPageGlobal = (page: Survey.PageModel) => {
+      this.surveyObjects.selectObject(page);
+    };
     this.undoRedo = new SurveyUndoRedo();
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
@@ -1177,8 +1180,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       };
     }
 
-    this.initSurvey(this.getDefaultSurveyJson());
-    this.pages(this.survey.pages);
+    this.initSurvey(this.getDefaultSurveyJson());   
     this.setUndoRedoCurrentState(true);
 
     this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
@@ -1369,6 +1371,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue() });
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
+    this.pages(this.survey.pages);
     this.surveyValue().onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
         self.surveyObjects.selectObject(sender["selectedElement"]);
