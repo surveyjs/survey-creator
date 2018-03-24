@@ -6,6 +6,7 @@ import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyForDesigner, SurveyEditor } from "./entries";
 import Sortable from "sortablejs";
+// import "knockout-sortablejs";
 
 export declare type SurveyVoidCallback = () => void;
 export declare type SurveyOptionsCallback = (options?: any) => void;
@@ -219,18 +220,11 @@ export class PagesEditor {
     private movePage: Function,
     private element: any
   ) {
-    this.pages = pages;
-
-    if (!!element) {
-      Sortable.create(element.querySelector(".svd-pages"), {
-        handle: ".svd-page-name",
-        animation: 150,
-        onEnd: evt => {
-          this.movePage(evt.oldIndex, evt.newIndex);
-        }
-      });
-    }
   }
+
+  onDragEnd = evt => {
+    this.movePage(evt.oldIndex, evt.newIndex);
+  };
 
   get selectedPage() {
     return this.isActive()

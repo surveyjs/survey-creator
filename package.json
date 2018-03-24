@@ -17,6 +17,7 @@
     "bootstrap": "^3.3.6",
     "jquery": "^3.1.1",
     "knockout": "^3.4.0",
+    "knockout-sortablejs": "0.1.0",
     "rmodal": "^1.0.28",
     "sortablejs": "1.6.1",
     "survey-knockout": "^1.0.14"
