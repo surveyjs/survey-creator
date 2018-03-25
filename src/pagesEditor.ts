@@ -6,7 +6,7 @@ import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyForDesigner, SurveyEditor } from "./entries";
 import Sortable from "sortablejs";
-// import "knockout-sortablejs";
+import "knockout-sortablejs";
 
 export declare type SurveyVoidCallback = () => void;
 export declare type SurveyOptionsCallback = (options?: any) => void;
@@ -219,8 +219,7 @@ export class PagesEditor {
     private deletePage: Function,
     private movePage: Function,
     private element: any
-  ) {
-  }
+  ) {}
 
   onDragEnd = evt => {
     this.movePage(evt.oldIndex, evt.newIndex);
