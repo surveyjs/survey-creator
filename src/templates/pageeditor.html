@@ -68,7 +68,7 @@
         <span class="icon-pe-left"></span>
     </div>
 
-    <div class="svd-pages" data-bind="sortable: {foreach: pages, options: {onEnd: onDragEnd, handle: '.svd-page-name', animation: 150}}, event: {wheel: onWheel}">
+    <div class="svd-pages" data-bind="sortable: {foreach: pages, options: sortableOptions}, event: {wheel: onWheel}">
         <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: (model, event)=>{$parent.selectPage($data);event.stopPropagation();}">
             <span class="svd-page-name" data-bind="text: name"></span>
             <div class="ddmenu-container" data-bind="css: $parent.getPageMenuClass($data)">

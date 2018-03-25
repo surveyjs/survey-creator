@@ -221,9 +221,15 @@ export class PagesEditor {
     private element: any
   ) {}
 
-  onDragEnd = evt => {
-    this.movePage(evt.oldIndex, evt.newIndex);
-  };
+  get sortableOptions() {
+    return {
+      onEnd: evt => {
+        this.movePage(evt.oldIndex, evt.newIndex);
+      },
+      handle: ".svd-page-name",
+      animation: 150
+    };
+  }
 
   get selectedPage() {
     return this.isActive()
