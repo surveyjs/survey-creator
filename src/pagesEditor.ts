@@ -105,10 +105,9 @@ export class PagesEditor {
     return editorLocalization.getString(str);
   }
   isActive() {
-    return (
-      SurveyHelper.getObjectType(this.globalSelectedObject().value) ===
-      ObjType.Page
-    );
+    var selectedObject = this.globalSelectedObject();
+    if (!selectedObject) return;
+    return SurveyHelper.getObjectType(selectedObject.value) === ObjType.Page;
   }
 }
 

@@ -995,6 +995,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   public movePage = (indexFrom: number, indexTo: number) => {
     var page = <Survey.Page>this.pages()[indexTo];
+    this.surveyObjects.survey = null;  //TODO may be we don't need this hack
+    this.surveyObjects.survey = this.survey;
     this.surveyObjects.selectObject(page);
     this.setModified({
       type: "PAGE_MOVED",
@@ -1633,6 +1635,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     index = this.pages.indexOf(selectedObject);
     this.pages.splice(index, 1);
     this.pages.splice(index, 0, selectedObject);
+    this.surveyObjects.selectObject(selectedObject);
   };
 
   /**

@@ -129,7 +129,7 @@ export class SurveyObjects {
       this.koObjects.splice(index, 0, item);
     }
   }
-  public rebuild() {
+  private rebuild() {
     var objs = [];
     if (this.survey == null) {
       this.koObjects(objs);
