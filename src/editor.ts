@@ -5,7 +5,6 @@ import {
   ISurveyObjectEditorOptions,
   SurveyPropertyEditorBase
 } from "./propertyEditors/propertyEditorBase";
-import { SurveyPagesEditor } from "./pagesEditor";
 import { SurveyLiveTester } from "./surveylive";
 import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
 import { SurveyObjects } from "./surveyObjects";
@@ -70,7 +69,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public selectedObjectEditorValue: SurveyObjectEditor;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-  private pagesEditor: SurveyPagesEditor;
   private pages: KnockoutObservableArray<Survey.PageModel>;
   private selectPageGlobal: Function;
 
@@ -523,14 +521,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.pagesEditor = new SurveyPagesEditor();
-
-    this.pagesEditor.onShowSurveyEditDialog = () => {
-      self.showQuestionEditor(this.survey);
-    };
-    this.pagesEditor.onSelectSurveyCallback = () => {
-      self.surveyObjects.selectObject(this.survey);
-    };
     this.surveyLive = new SurveyLiveTester();
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.toolboxValue = new QuestionToolbox(
@@ -595,6 +585,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.text = "";
 
+    this.addToolbarItems();
+  }
+
+  protected addToolbarItems() {
     this.toolbarItems.push({
       id: "svd-undo",
       visible: this.koIsShowDesigner,
@@ -608,6 +602,16 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       enabled: this.undoRedo.koCanRedo,
       action: this.doRedoClick,
       title: this.getLocString("ed.redo")
+    });
+    this.toolbarItems.push({
+      id: "svd-survey-settings",
+      visible: this.koIsShowDesigner,
+      enabled: false,
+      action: () => {
+        this.surveyObjects.selectObject(this.survey);
+        this.showQuestionEditor(this.survey);
+      },
+      title: this.getLocString("ed.settings")
     });
     this.toolbarItems.push({
       id: "svd-options",

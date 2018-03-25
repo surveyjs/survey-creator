@@ -34,6 +34,7 @@ export var enStrings = {
   //Strings in Editor
   ed: {
     survey: "Survey",
+    settings: "Survey Settings",
     editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     deletePage: "Delete Page",
