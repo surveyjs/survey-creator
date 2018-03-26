@@ -175,7 +175,6 @@
 
     .svd-page-selector.svd_custom_select {
       max-width: 250px;
-      line-height: 2.44em;
       background: white;
       border: 1px solid #e7eaec;
       font-size: 14px;
@@ -183,6 +182,7 @@
         padding-left: 20px;
         min-width: 100px;
         border: none;
+        height: 2.44em;
       }
     }
   }
