@@ -1,5 +1,7 @@
 /* fork of the https://github.com/SortableJS/knockout-sortablejs because of es modules build error 
-    (waiting for approve pullrequest https://github.com/SortableJS/knockout-sortablejs/pull/9)\
+    waiting for approve pullrequests:
+     * https://github.com/SortableJS/knockout-sortablejs/pull/9)
+     * https://github.com/SortableJS/knockout-sortablejs/pull/1/files
 */
 
 /*global ko*/
@@ -207,8 +209,8 @@
           // drop an item above the 3rd visible item, but the 2nd visible item
           // has an actual index of 5.
           if (e.item.previousElementSibling) {
-            newIndex =
-              to().indexOf(ko.dataFor(e.item.previousElementSibling)) + 1;
+            newIndex = to().indexOf(ko.dataFor(e.item.previousElementSibling));
+            newIndex += newIndex > originalIndex ? 0 : 1;
           }
 
           // Remove sortables "unbound" element
