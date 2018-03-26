@@ -1198,6 +1198,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
       "#surveyjsJSONEditor"
     ));
+    if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
+      var options: any = {
+        width: "100%"
+      };
+      if (this.isRTLValue) {
+        options.dir = "rtl";
+      }
+      this.select2 = jQuery("#objectSelector")["select2"](options);
+    }
   }
   private getDefaultSurveyJson(): any {
     var json = new SurveyJSON5().parse(SurveyEditor.defaultNewSurveyText);
@@ -1818,31 +1827,3 @@ ko.components.register("survey-widget", {
   },
   template: koSurveyTemplate
 });
-
-ko.bindingHandlers["svd-select2"] = {
-  after: ["options", "value", "optionsText"],
-  init: function(el, valueAccessor, allBindingsAccessor, viewModel) {
-    if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
-      var options: any = ko.unwrap(valueAccessor()) || {};
-      options.width = "100%";
-      if (viewModel.isRTLValue) {
-        options.dir = "rtl";
-      }
-      $(el).select2(options);
-      ko.utils.domNodeDisposal.addDisposeCallback(el, function() {
-        $(el).select2("destroy");
-      });
-    }
-  },
-  update: function(el, valueAccessor, allBindingsAccessor, viewModel) {
-    if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
-      var allBindings = allBindingsAccessor();
-      if ("value" in allBindings) {
-        var newValue = ko.unwrap(allBindings.value);
-        var $el = $(el);
-        $el.select2("data", newValue);
-        $el.trigger("change");
-      }
-    }
-  }
-};
