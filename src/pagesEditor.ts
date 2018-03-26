@@ -9,10 +9,7 @@ import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
   private isNeedAutoScroll = true;
-  constructor(
-    private editor:SurveyEditor,
-    private element: any
-  ) {
+  constructor(private editor: SurveyEditor, private element: any) {
     this.editor.koSelectedObject.subscribe(() => {
       if (!this.isActive()) return;
 
@@ -32,7 +29,7 @@ export class PagesEditor {
     this.editor.addPage();
   }
 
-  copyPage(page:Survey.PageModel) {
+  copyPage(page: Survey.PageModel) {
     this.editor.copyPage(page);
   }
 
@@ -40,7 +37,7 @@ export class PagesEditor {
     this.editor.deletePage();
   }
 
-  showPageSettings(page:Survey.PageModel) {
+  showPageSettings(page: Survey.PageModel) {
     this.editor.showQuestionEditor(page);
   }
 
@@ -128,6 +125,9 @@ export class PagesEditor {
   onWheel(model, event) {
     var pagesElement = model.element.querySelector(".svd-pages");
     event = event || window.event;
+    if (!!event.originalEvent) {
+      event = event.originalEvent;
+    } 
     var delta = event.deltaY || event.detail || event.wheelDelta;
     pagesElement.scrollLeft -= delta;
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
@@ -145,10 +145,7 @@ export class PagesEditor {
 ko.components.register("pages-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      return new PagesEditor(
-        params.editor,
-        componentInfo.element
-      );
+      return new PagesEditor(params.editor, componentInfo.element);
     }
   },
   template: { element: "svd-page-selector-template" }
