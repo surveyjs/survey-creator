@@ -8,6 +8,7 @@ import { SurveyForDesigner, SurveyEditor } from "./entries";
 import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
+  private isNeedAutoScroll = true;
   constructor(
     private pages: KnockoutObservableArray<Survey.PageModel>,
     private globalSelectedObject: KnockoutObservable<SurveyObjectItem>,
@@ -18,7 +19,23 @@ export class PagesEditor {
     private deletePage: Function,
     private movePage: Function,
     private element: any
-  ) {}
+  ) {
+    this.globalSelectedObject.subscribe(() => {
+      if (!this.isActive()) return;
+
+      if (this.isNeedAutoScroll) {
+        this.scrollToSelectedPage();
+      } else {
+        this.isNeedAutoScroll = true;
+      }
+    });
+  }
+
+  onPageClick = (model, event) => {
+    this.isNeedAutoScroll = false;
+    this.selectPage(model);
+    event.stopPropagation();
+  };
 
   get sortableOptions() {
     return {
@@ -32,7 +49,7 @@ export class PagesEditor {
 
   get selectedPage() {
     return this.isActive()
-      ? this.globalSelectedObject().value
+      ? <Survey.PageModel>this.globalSelectedObject().value
       : this.pages()[0];
   }
   set selectedPage(newPage) {
@@ -62,16 +79,16 @@ export class PagesEditor {
     var pagesElement = this.element.querySelector(".svd-pages");
     pagesElement.scrollLeft += 50;
   }
-  // moveToSelectedPage() {
-  //   var pagesElement: any = this.element.querySelector(".svd-pages");
-  //   var index = this.pages().indexOf(this.selectedPage());
-  //   var pageElement = pagesElement.children[index];
-  //   if (!pageElement) return;
-  //   pagesElement.scrollTo(
-  //     pageElement.offsetLeft - pagesElement.offsetWidth / 2,
-  //     0
-  //   );
-  // }
+  scrollToSelectedPage() {
+    var pagesElement: any = this.element.querySelector(".svd-pages");
+    var index = this.pages().indexOf(this.selectedPage);
+    var pageElement = pagesElement.children[index];
+    if (!pageElement) return;
+    pagesElement.scrollTo(
+      pageElement.offsetLeft - pagesElement.offsetWidth / 2,
+      0
+    );
+  }
   // onKeyDown(el: any, e: KeyboardEvent) {
   //   if (this.koPages().length <= 1) return;
   //   var pages = this.koPages();
