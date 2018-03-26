@@ -272,7 +272,9 @@ export var enStrings = {
     onHidden: "onHidden",
     all: "all",
     page: "page",
-    survey: "survey"
+    survey: "survey",
+    onNextPage: "onNextPage",
+    onValueChanged: "onValueChanged"
   },
   //Operators
   op: {
@@ -456,6 +458,7 @@ export var enStrings = {
     showProgressBar: "showProgressBar",
     mode: "mode",
     goNextPageAutomatic: "goNextPageAutomatic",
+    checkErrorsMode: "checkErrorsMode",
     clearInvisibleValues: "clearInvisibleValues",
     startSurveyText: "startSurveyText",
     pagePrevText: "pagePrevText",
