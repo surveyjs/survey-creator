@@ -37,6 +37,8 @@ export var enStrings = {
     settings: "Survey Settings",
     editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
+    moveRight: "Scroll to the Right",
+    moveLeft: "Scroll to the Left",
     deletePage: "Delete Page",
     editPage: "Edit Page",
     newPageName: "page",

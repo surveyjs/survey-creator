@@ -2,7 +2,7 @@
     <div class="svd-page-selector svd_custom_select">
         <select data-bind="options: pages, value: selectedPage, optionsText:'name'"></select>
     </div>
-    <div class="svd-page-scroller-arrow" data-bind="click: moveLeft">
+    <div class="svd-page-scroller-arrow" data-bind="click: moveLeft, attr: {title: getLocString('ed.moveLeft')}">
         <span class="icon-pe-left"></span>
     </div>
 
@@ -33,10 +33,10 @@
             </div>
         </div>
     </div>
-    <div class="svd-page-scroller-arrow" data-bind="click: moveRight">
+    <div class="svd-page-scroller-arrow" data-bind="click: moveRight, attr: {title: getLocString('ed.moveRight')}">
         <span class="icon-pe-right"></span>
     </div>
-    <div class="svd-page-add" data-bind="click: addPage">
+    <div class="svd-page-add" data-bind="click: addPage, attr: {title: getLocString('ed.addNewPage')}">
         <span class="icon-pe-add"></span>
     </div>
 </script>
