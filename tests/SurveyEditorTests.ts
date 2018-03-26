@@ -484,6 +484,49 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
   assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 });
 
+QUnit.test("pagesEditor activePage when question selected", function(assert) {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: []
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>'
+          }
+        ]
+      }
+    ]
+  });
+  var editor = new SurveyEditor();
+  var pages = editor["pages"];
+  var pagesEditor = new PagesEditor(editor, document.createElement("div"));
+  editor.text = jsonText;
+
+  var currentPage = editor.pages()[1];
+
+  editor.selectPage(currentPage);
+
+  var pageClass = pagesEditor.getPageMenuIconClass(currentPage);
+  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(editor.koSelectedObject().value, currentPage);
+  assert.equal(pagesEditor["selectedPage"], currentPage);
+
+  editor.survey.selectedElement = <any>editor.survey.pages[1].elements[0];
+  assert.equal(
+    editor.koSelectedObject().value,
+    editor.survey.pages[1].elements[0]
+  );
+  pageClass = pagesEditor.getPageMenuIconClass(currentPage);
+  assert.equal(pageClass, "icon-gear");
+  assert.equal(pagesEditor["selectedPage"], currentPage);
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

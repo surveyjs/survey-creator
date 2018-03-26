@@ -9,9 +9,13 @@ import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
   private isNeedAutoScroll = true;
+  private _selectedPage = ko.observable<Survey.Page>();
+
   constructor(private editor: SurveyEditor, private element: any) {
-    this.editor.koSelectedObject.subscribe(() => {
+    this.editor.koSelectedObject.subscribe((newVal) => {
       if (!this.isActive()) return;
+
+      this._selectedPage(newVal.value);
 
       if (this.isNeedAutoScroll) {
         this.scrollToSelectedPage();
@@ -58,10 +62,9 @@ export class PagesEditor {
     };
   }
 
+  
   get selectedPage() {
-    return this.isActive()
-      ? <Survey.PageModel>this.editor.koSelectedObject().value
-      : this.editor.pages()[0];
+    return this._selectedPage();
   }
   set selectedPage(newPage) {
     this.editor.selectPage(newPage);
@@ -128,7 +131,7 @@ export class PagesEditor {
     event = event || window.event;
     if (!!event.originalEvent) {
       event = event.originalEvent;
-    } 
+    }
     var delta = event.deltaY || event.detail || event.wheelDelta;
     pagesElement.scrollLeft -= delta;
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
