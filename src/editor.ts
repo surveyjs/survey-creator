@@ -74,7 +74,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
-  public surveyObjects: SurveyObjects;
+  private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   private undoRedo: SurveyUndoRedo;
   private surveyValue = ko.observable<SurveyForDesigner>();
@@ -982,7 +982,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
   };
-  private deletePage = () => {
+  public deletePage = () => {
     this.deleteCurrentObject();
     this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
   };
@@ -995,7 +995,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   public movePage = (indexFrom: number, indexTo: number) => {
     var page = <Survey.Page>this.pages()[indexTo];
-    this.surveyObjects.survey = null;  //TODO may be we don't need this hack
+    this.surveyObjects.survey = null; // TODO may be we don't need this hack
     this.surveyObjects.survey = this.survey;
     this.surveyObjects.selectObject(page);
     this.setModified({

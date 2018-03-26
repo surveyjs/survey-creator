@@ -5,7 +5,7 @@ import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
 import { SurveyForDesigner, SurveyEditor } from "./entries";
-import "knockout-sortablejs";
+import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
   constructor(
