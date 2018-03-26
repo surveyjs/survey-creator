@@ -527,6 +527,31 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
   assert.equal(pagesEditor["selectedPage"], currentPage);
 });
 
+QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: []
+      }
+    ]
+  });
+  var editor = new SurveyEditor();
+  editor.text = jsonText;
+
+  var pagesEditor = new PagesEditor(editor, document.createElement("div"));
+
+  assert.equal(1, editor["pages"]().length);
+
+  assert.equal(pagesEditor.selectedPage, editor["pages"]()[1]);
+  assert.equal(pagesEditor.pagesSelection().length, 2);
+
+  pagesEditor.pageSelection(pagesEditor.pagesSelection()[1]);
+
+  assert.equal(pagesEditor.pagesSelection().length, 3);
+  assert.equal(editor["pages"]()[1], pagesEditor.selectedPage);
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

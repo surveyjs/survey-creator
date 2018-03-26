@@ -9,10 +9,17 @@ import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
   private isNeedAutoScroll = true;
-  private _selectedPage = ko.observable<Survey.Page>();
+  private _selectedPage = ko.observable<Survey.PageModel>();
+  pagesSelection: KnockoutComputed<Survey.PageModel[]>;
 
   constructor(private editor: SurveyEditor, private element: any) {
-    this.editor.koSelectedObject.subscribe((newVal) => {
+    this.pagesSelection = ko.computed<Survey.PageModel[]>(() =>
+      this.editor
+        .pages()
+        .concat([<any>{ name: this.getLocString("ed.addNewPage") }])
+    );
+
+    this.editor.koSelectedObject.subscribe(newVal => {
       if (!this.isActive()) return;
 
       this._selectedPage(newVal.value);
@@ -25,9 +32,16 @@ export class PagesEditor {
     });
   }
 
-  get pages() {
-    return this.editor.pages;
-  }
+  pageSelection = ko.computed({
+    read: () => this._selectedPage(),
+    write: newVal => {
+      if (typeof newVal.getType === "function") {
+        this.selectedPage = newVal;
+      } else {
+        this.addPage();
+      }
+    }
+  });
 
   addPage() {
     this.editor.addPage();
@@ -62,7 +76,6 @@ export class PagesEditor {
     };
   }
 
-  
   get selectedPage() {
     return this._selectedPage();
   }
