@@ -50,6 +50,7 @@ export class PagesEditor {
   get sortableOptions() {
     return {
       onEnd: evt => {
+        this.isNeedAutoScroll = false;
         this.editor.movePage(evt.oldIndex, evt.newIndex);
       },
       handle: ".svd-page-name",
