@@ -10,17 +10,10 @@ import "../vendor/knockout-sortable.js";
 export class PagesEditor {
   private isNeedAutoScroll = true;
   constructor(
-    private pages: KnockoutObservableArray<Survey.PageModel>,
-    private globalSelectedObject: KnockoutObservable<SurveyObjectItem>,
-    private selectPage: Function,
-    private showPageSettings: Function,
-    private addPage: Function,
-    private copyPage: Function,
-    private deletePage: Function,
-    private movePage: Function,
+    private editor:SurveyEditor,
     private element: any
   ) {
-    this.globalSelectedObject.subscribe(() => {
+    this.editor.koSelectedObject.subscribe(() => {
       if (!this.isActive()) return;
 
       if (this.isNeedAutoScroll) {
@@ -31,16 +24,36 @@ export class PagesEditor {
     });
   }
 
+  get pages() {
+    return this.editor.pages;
+  }
+
+  addPage() {
+    this.editor.addPage();
+  }
+
+  copyPage(page:Survey.PageModel) {
+    this.editor.copyPage(page);
+  }
+
+  deletePage() {
+    this.editor.deletePage();
+  }
+
+  showPageSettings(page:Survey.PageModel) {
+    this.editor.showQuestionEditor(page);
+  }
+
   onPageClick = (model, event) => {
     this.isNeedAutoScroll = false;
-    this.selectPage(model);
+    this.editor.selectPage(model);
     event.stopPropagation();
   };
 
   get sortableOptions() {
     return {
       onEnd: evt => {
-        this.movePage(evt.oldIndex, evt.newIndex);
+        this.editor.movePage(evt.oldIndex, evt.newIndex);
       },
       handle: ".svd-page-name",
       animation: 150
@@ -49,11 +62,11 @@ export class PagesEditor {
 
   get selectedPage() {
     return this.isActive()
-      ? <Survey.PageModel>this.globalSelectedObject().value
-      : this.pages()[0];
+      ? <Survey.PageModel>this.editor.koSelectedObject().value
+      : this.editor.pages()[0];
   }
   set selectedPage(newPage) {
-    this.selectPage(newPage);
+    this.editor.selectPage(newPage);
   }
   getPageClass = page => {
     return page === this.selectedPage ? "svd_selected_page" : "";
@@ -69,7 +82,7 @@ export class PagesEditor {
       : "icon-gear";
   };
   isLastPage() {
-    return this.pages().length === 1;
+    return this.editor.pages().length === 1;
   }
   moveLeft(model, event) {
     var pagesElement = this.element.querySelector(".svd-pages");
@@ -81,7 +94,8 @@ export class PagesEditor {
   }
   scrollToSelectedPage() {
     var pagesElement: any = this.element.querySelector(".svd-pages");
-    var index = this.pages().indexOf(this.selectedPage);
+    if (!pagesElement) return;
+    var index = this.editor.pages().indexOf(this.selectedPage);
     var pageElement = pagesElement.children[index];
     if (!pageElement) return;
     pagesElement.scrollTo(
@@ -122,7 +136,7 @@ export class PagesEditor {
     return editorLocalization.getString(str);
   }
   isActive() {
-    var selectedObject = this.globalSelectedObject();
+    var selectedObject = this.editor.koSelectedObject();
     if (!selectedObject) return;
     return SurveyHelper.getObjectType(selectedObject.value) === ObjType.Page;
   }
@@ -132,14 +146,7 @@ ko.components.register("pages-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       return new PagesEditor(
-        params.pages,
-        params.globalSelectedObject,
-        params.selectPage,
-        params.showPageSettings,
-        params.addPage,
-        params.copyPage,
-        params.deletePage,
-        params.movePage,
+        params.editor,
         componentInfo.element
       );
     }

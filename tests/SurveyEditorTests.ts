@@ -301,9 +301,10 @@ QUnit.test("Copy a page", function(assert) {
 });
 
 QUnit.test("fast copy tests, set the correct parent", function(assert) {
+  debugger;
   var editor = new SurveyEditor();
   var survey = editor.survey;
-  var p1 = survey.pages[0].addNewPanel("panel1");
+  var p1 = editor["pages"]()[0].addNewPanel("panel1");
   var q1 = p1.addNewQuestion("text", "question1");
   var p2 = p1.addNewPanel("panel2");
   var q2 = p2.addNewQuestion("text", "question2");
@@ -452,30 +453,35 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
     ]
   });
   var editor = new SurveyEditor();
+  var pages = editor["pages"];
+  var pagesEditor = new PagesEditor(editor, document.createElement("div"));
   editor.text = jsonText;
-  var pagesEditor = new PagesEditor(editor, editor.survey, undefined);
-  pagesEditor.selectPage(pagesEditor.pages()[0]);
-  var pageClass = pagesEditor.getPageMenuIconClass(pagesEditor.pages()[0]);
+
+  editor.selectPage(editor.pages()[0]);
+  var pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
   assert.equal(pageClass, "icon-gear-active");
-  assert.equal(editor.koSelectedObject().value, pagesEditor.pages()[0]);
-  assert.equal(pagesEditor.selectedPage(), pagesEditor.pages()[0]);
+  assert.equal(editor.koSelectedObject().value, editor.pages()[0]);
+  assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 
   editor.survey.selectedElement = <any>editor.survey.pages[0].elements[0];
-  assert.equal(editor.koSelectedObject().value, editor.survey.pages[0].elements[0]);
-  pageClass = pagesEditor.getPageMenuIconClass(pagesEditor.pages()[0]);
+  assert.equal(
+    editor.koSelectedObject().value,
+    editor.survey.pages[0].elements[0]
+  );
+  pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
   assert.equal(pageClass, "icon-gear");
-  assert.equal(pagesEditor.selectedPage(), pagesEditor.pages()[0]);
+  assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 
   editor.onQuestionEditorChanged(<any>editor.survey.pages[0].elements[0]);
-  pageClass = pagesEditor.getPageMenuIconClass(pagesEditor.pages()[0]);
+  pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
   assert.equal(pageClass, "icon-gear");
-  assert.equal(pagesEditor.selectedPage(), pagesEditor.pages()[0]);
+  assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 
-  pagesEditor.selectPage(pagesEditor.pages()[0]);
-  pageClass = pagesEditor.getPageMenuIconClass(pagesEditor.pages()[0]);
+  editor.selectPage(editor.pages()[0]);
+  pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
   assert.equal(pageClass, "icon-gear-active");
-  assert.equal(editor.koSelectedObject().value, pagesEditor.pages()[0]);
-  assert.equal(pagesEditor.selectedPage(), pagesEditor.pages()[0]);
+  assert.equal(editor.koSelectedObject().value, editor.pages()[0]);
+  assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 });
 
 function getSurveyJson(): any {

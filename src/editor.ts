@@ -69,8 +69,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public selectedObjectEditorValue: SurveyObjectEditor;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-  private pages: KnockoutObservableArray<Survey.PageModel>;
-  private selectPageGlobal: Function;
+  public pages: KnockoutObservableArray<Survey.PageModel>;
+  public selectPage: Function;
 
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
@@ -449,7 +449,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     var self = this;
 
-    this.pages = ko.observableArray([]);
+    this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
@@ -472,7 +472,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.koObjects,
       this.koSelectedObject
     );
-    this.selectPageGlobal = (page: Survey.PageModel) => {
+    this.selectPage = (page: Survey.PageModel) => {
       this.surveyObjects.selectObject(page);
     };
     this.undoRedo = new SurveyUndoRedo();
@@ -1143,7 +1143,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
       this.survey.currentPage = <Survey.Page>obj;
-      canDeleteObject = this.pages.length > 1;
+      canDeleteObject = this.pages().length > 1;
     }
     if (objType == ObjType.Question || objType == ObjType.Panel) {
       this.survey.selectedElement = obj;
@@ -1500,7 +1500,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getAllQuestions(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.pages.length; i++) {
+    for (var i = 0; i < this.pages().length; i++) {
       this.addElements(this.pages()[i].elements, false, result);
     }
     this.addElements(this.newPanels, false, result);
@@ -1509,7 +1509,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getAllPanels(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.pages.length; i++) {
+    for (var i = 0; i < this.pages().length; i++) {
       this.addElements(this.pages()[i].elements, true, result);
     }
     this.addElements(this.newPanels, true, result);
