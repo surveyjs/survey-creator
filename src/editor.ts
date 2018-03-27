@@ -1635,7 +1635,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var selectedObject = this.koSelectedObject().value;
     if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
     var index = this.pages.indexOf(selectedObject);
-    this.pages.splice(index, 1, selectedObject);
+    this.pages.splice(index, 1);
+    this.pages.splice(index, 0, selectedObject);
     this.surveyObjects.selectObject(selectedObject);
   };
 
