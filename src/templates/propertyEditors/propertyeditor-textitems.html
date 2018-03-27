@@ -16,10 +16,12 @@
             <tbody>
                 <!-- ko foreach: koItems -->
                 <tr>
-                    <td>
-                        <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
-                        <!-- /ko -->
-                        <button type="button" class="btn btn-sm" data-bind="click: $parent.onEditItemClick, attr: { title: $root.getLocString('pe.edit') }">
+                    <td class="svd-textitems-column" style="width: 150px;">
+                        <div class="svd-textitems-isrequired">
+                            <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
+                            <!-- /ko -->
+                        </div>
+                        <button type="button" class="btn btn-sm svd-textitems-edit" data-bind="click: $parent.onEditItemClick, attr: { title: $root.getLocString('pe.edit') }">
                             <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
                         </button>
                     </td>

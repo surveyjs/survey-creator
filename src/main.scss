@@ -16,6 +16,23 @@
   font-size: 12px;
   color: $text-color;
 
+  .svd-textitems-column {
+    width: 100%;
+    display: inline-block;
+
+    .svd-textitems-isrequired {
+      vertical-align: top;
+      padding-top: 3px;
+      display: inline-block;
+    }
+
+    .svd-textitems-edit {
+      vertical-align: top;
+      display: inline-block;
+      margin-left: 1.7em;
+    }
+  }
+
   .svd-drag-handle {
     font-size: 20px;
     cursor: move;
