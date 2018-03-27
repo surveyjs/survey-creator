@@ -543,13 +543,48 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
 
   assert.equal(1, editor["pages"]().length);
 
-  assert.equal(pagesEditor.selectedPage, editor["pages"]()[1]);
+  assert.equal(pagesEditor.selectedPage, editor["pages"]()[0]);
   assert.equal(pagesEditor.pagesSelection().length, 2);
 
   pagesEditor.pageSelection(pagesEditor.pagesSelection()[1]);
 
   assert.equal(pagesEditor.pagesSelection().length, 3);
   assert.equal(editor["pages"]()[1], pagesEditor.selectedPage);
+});
+
+QUnit.test("PagesEditor change question's page", function(assert) {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>'
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: []
+      }
+    ]
+  });
+  var editor = new SurveyEditor();
+  editor.text = jsonText;
+  var pagesEditor = new PagesEditor(editor, document.createElement("div"));
+
+  assert.equal(pagesEditor.selectedPage, editor["pages"]()[0]);
+
+  var question = <Survey.QuestionBase>editor.survey.pages[0].elements[0];
+  question.page = editor["pages"]()[1];
+  editor.onPropertyValueChanged(
+    <any>{ name: "page", isDefaultValue: () => false },
+    question,
+    editor["pages"]()[1]
+  );
+  assert.equal(pagesEditor.selectedPage, editor["pages"]()[1]);
 });
 
 function getSurveyJson(): any {

@@ -18,7 +18,7 @@ export class PagesEditor {
         .pages()
         .concat([<any>{ name: this.getLocString("ed.addNewPage") }])
     );
-
+    this._selectedPage(this.editor.pages()[0]);
     this.editor.koSelectedObject.subscribe(newVal => {
       if (!this.isActive()) return;
 

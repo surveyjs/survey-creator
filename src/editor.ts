@@ -1040,9 +1040,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var isDefault = property.isDefaultValue(newValue);
     var oldValue = obj[property.name];
     obj[property.name] = newValue;
-    if (property.name == "name") {
+    if (property.name === "name") {
       this.surveyObjects.nameChanged(obj);
       this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
+    } else if (property.name === "page") {
+      this.selectPage(newValue);
+      this.surveyObjects.selectObject(obj);
     }
     this.setModified({
       type: "PROPERTY_CHANGED",
@@ -1630,11 +1633,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   //TODO why this is need ? (ko problem)
   private dirtyPageUpdate = () => {
     var selectedObject = this.koSelectedObject().value;
-    var index;
     if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
-    index = this.pages.indexOf(selectedObject);
-    this.pages.splice(index, 1);
-    this.pages.splice(index, 0, selectedObject);
+    var index = this.pages.indexOf(selectedObject);
+    this.pages.splice(index, 1, selectedObject);
     this.surveyObjects.selectObject(selectedObject);
   };
 
