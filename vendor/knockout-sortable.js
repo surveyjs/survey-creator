@@ -230,7 +230,7 @@
             from.valueHasMutated();
           }
           // Force deferred tasks to run now, registering the removal
-          ko.tasks.runEarly();
+          !!ko.tasks && ko.tasks.runEarly();
           // Insert the item on its new position
           to().splice(newIndex, 0, itemVM);
           // Make sure to tell knockout that we've modified the actual array.
