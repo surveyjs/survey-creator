@@ -7,7 +7,7 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //add a property to the survey object
-  Survey.JsonObject.metaData.addProperty("page", {
+  Survey.JsonObject.metaData.addProperty("survey", {
     name: "customProperty:number",
     default: 123456
   });
@@ -25,6 +25,5 @@ test(`check the new prop exists`, async t => {
   const getPosition = ClientFunction(() =>
     document.documentElement.innerHTML.indexOf("customProperty")
   );
-
   assert.notEqual(await getPosition(), -1);
 });
