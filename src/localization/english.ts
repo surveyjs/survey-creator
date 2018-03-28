@@ -41,6 +41,7 @@ export var enStrings = {
     moveLeft: "Scroll to the Left",
     deletePage: "Delete Page",
     editPage: "Edit Page",
+    edit: "Edit",
     newPageName: "page",
     newQuestionName: "question",
     newPanelName: "panel",

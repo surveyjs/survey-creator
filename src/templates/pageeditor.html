@@ -9,28 +9,19 @@
     <div class="svd-pages" data-bind="sortable: {foreach: editor.pages, options: sortableOptions}, event: {wheel: onWheel}">
         <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: $parent.onPageClick">
             <span class="svd-page-name" data-bind="text: name"></span>
-            <div class="ddmenu-container" data-bind="css: $parent.getPageMenuClass($data)">
-                <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
-
-                <div class="ddmenu">
-                    <span tabindex="0">
-                        <span data-bind="css: $parent.getPageMenuIconClass($data)"></span>
-                    </span>
-
-                    <div tabindex="0" onclick="return true"></div>
-                    <ul>
-                        <li>
-                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.showPageSettings($data); event.stopPropagation();}, text: $parent.getLocString('ed.editPage')"></button>
-                        </li>
-                        <li>
-                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.copyPage($data); event.stopPropagation();}, text: $parent.getLocString('survey.Copy')"></button>
-                        </li>
-                        <li>
-                            <button class="btn btn-primary" data-bind="click: (model, event)=>{$parent.deletePage($data); event.stopPropagation();}, text: $parent.getLocString('ed.deletePage'), visible: !$parent.isLastPage()"></button>
-                        </li>
-                    </ul>
+            <span class="svd-page-actions-container" data-bind="css: $parent.getPageMenuIconClass($data)">
+                <div style="position: static">
+                    <div class="svd-page-actions" data-bind="visible: $parent.showActions($data)">
+                        <span class="svd-page-action" data-bind="click: (model, event)=>{$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
+                            <span class="icon-action-editElement"></span>
+                            <span class="svd-page-action-edit-text" data-bind="text: $parent.getLocString('ed.edit')"></span>
+                        </span>
+                        <span class="svd-page-action icon-action-delete" data-bind="click: (model, event)=>{$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()"></span>
+                        <span class="svda_action_separator" data-bind="visible: !$parent.isLastPage()"></span>
+                        <span class="svd-page-action icon-action-copy" data-bind="click: (model, event)=>{$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}"></span>
+                    </div>
                 </div>
-            </div>
+            </span>
         </div>
     </div>
     <div class="svd-page-scroller-arrow" data-bind="click: moveRight, attr: {title: getLocString('ed.moveRight')}">

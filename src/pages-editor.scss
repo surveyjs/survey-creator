@@ -1,100 +1,4 @@
 .svd_container {
-  .svd_pages_editor {
-    background-color: $light-bg-color;
-    border-top: 2px solid $light-border-color;
-    padding: 10px 15px 0 15px;
-    .nav-tabs {
-      border: none;
-      position: relative;
-      > ul {
-        display: table-cell;
-      }
-      > li {
-        position: relative;
-        margin-right: 1px;
-        margin-bottom: 3px;
-        border-radius: 2px;
-        font-weight: bold;
-        path.gear-icon {
-          fill: lightgray;
-        }
-
-        &.active {
-          & > div {
-            background-color: $dark-bg-color;
-          }
-        }
-
-        & > div {
-          display: inline-block;
-          cursor: pointer;
-          padding: 6px 12px;
-          &:hover {
-            background-color: $dark-bg-color;
-          }
-        }
-
-        .svd_add_page_li {
-          &:hover {
-            background-color: transparent;
-          }
-        }
-        &.svd_edit_survey_li {
-          display: table-cell;
-          margin-right: 2em;
-        }
-        .svd_page_nav {
-          display: inline-block;
-          border: none;
-          padding: 0;
-          text-decoration: none;
-          margin-bottom: 1px;
-          color: $text-color;
-          background-color: transparent;
-        }
-        .ddmenu-container {
-          &.page-nav {
-            ul {
-              background: white;
-              border: 1px solid $dark-bg-color;
-              border-radius: 2px;
-              border-top-left-radius: 0;
-              border-top-right-radius: 0;
-              padding: 0;
-              margin-top: 5px;
-              li {
-                margin: 7px;
-                button {
-                  padding: 6px 15px;
-                  font-weight: bold;
-                  width: 100%;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    .svd_add_new_page_btn {
-      border: none;
-      box-shadow: none;
-      background-color: transparent;
-      padding-left: 1em;
-      &:focus {
-        outline: none;
-      }
-      &:hover {
-        background-color: transparent;
-      }
-      .glyphicon-plus {
-        color: $text-color;
-        top: 2px;
-      }
-    }
-  }
-}
-
-.svd_container {
   pages-editor {
     display: block;
     width: 100%;
@@ -107,11 +11,11 @@
     user-select: none;
 
     .svd-pages {
-      vertical-align: middle;
-      overflow: hidden;
       white-space: nowrap;
       width: calc(100% - 400px);
       letter-spacing: -3px;
+      overflow: hidden;
+      vertical-align: bottom;
     }
 
     .svd-page-selector,
@@ -130,40 +34,58 @@
 
     .svd-page {
       overflow: hidden;
-      margin-bottom: -5px;
+      vertical-align: bottom;
       letter-spacing: initial;
       cursor: pointer;
       background-color: #f5f5f5;
-      line-height: 1em;
-      padding: 1.2em 1.2em 1.4em 1.2em;
+      height: 4em;
+      padding: 1em 1.5em;
       font-weight: bold;
       border: 1px solid $light-border-color;
+      border-bottom: none;
       border-right: none;
       &:last-child {
         border-right: 1px solid $light-border-color;
       }
 
-      .ddmenu-container {
-        .ddmenu {
-          position: static;
+      .svd-page-actions-container {
+        display: inline-block;
+        .svd-page-actions {
+          box-shadow: 5px 5px 5px -5px #333;
+          position: absolute;
+          background-color: white;
+          padding: 5px;
+          border: 1px solid lightgray;
+          visibility: hidden;
+          z-index: 1;
 
-          ul {
-            background: white;
-            border: 1px solid $dark-bg-color;
-            border-radius: 2px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            padding: 0;
-            margin-top: 5px;
-            li {
-              margin: 7px;
-              button {
-                padding: 6px 15px;
-                font-weight: bold;
-                width: 100%;
-              }
+          .svda_action_separator {
+            display: inline-block;
+            height: 16px;
+            border-left: 1px solid #ddd;
+            vertical-align: middle;
+            margin-left: 0.5em;
+          }
+
+          .svd-page-action {
+            margin-right: 0.5em;
+            vertical-align: middle;
+
+            .svd-page-action-edit-text {
+              color: $main-color;
+            }
+
+            &:last-child {
+              margin-left: 0.5em;
+              display: inline-block;
             }
           }
+        }
+      }
+
+      &:hover {
+        .svd-page-actions {
+          visibility: visible;
         }
       }
     }
@@ -179,6 +101,7 @@
       background: white;
       border: 1px solid #e7eaec;
       font-size: 14px;
+      margin-bottom: 7px;
       select {
         padding-left: 20px;
         min-width: 100px;

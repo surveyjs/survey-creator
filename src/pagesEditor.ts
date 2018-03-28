@@ -85,15 +85,13 @@ export class PagesEditor {
   getPageClass = page => {
     return page === this.selectedPage ? "svd_selected_page" : "";
   };
-  getPageMenuClass = page => {
-    return page !== this.selectedPage || !this.isActive()
-      ? "menu-disabled"
-      : null;
-  };
   getPageMenuIconClass = page => {
     return page === this.selectedPage && this.isActive()
       ? "icon-gear-active"
       : "icon-gear";
+  };
+  showActions = page => {
+    return page === this.selectedPage && this.isActive();
   };
   isLastPage() {
     return this.editor.pages().length === 1;
@@ -101,10 +99,12 @@ export class PagesEditor {
   moveLeft(model, event) {
     var pagesElement = this.element.querySelector(".svd-pages");
     pagesElement.scrollLeft -= 50;
+    this.updateMenuPosition();
   }
   moveRight(model, event) {
     var pagesElement = this.element.querySelector(".svd-pages");
     pagesElement.scrollLeft += 50;
+    this.updateMenuPosition();
   }
   scrollToSelectedPage() {
     var pagesElement: any = this.element.querySelector(".svd-pages");
@@ -116,6 +116,7 @@ export class PagesEditor {
       pageElement.offsetLeft - pagesElement.offsetWidth / 2,
       0
     );
+    this.updateMenuPosition();
   }
   // onKeyDown(el: any, e: KeyboardEvent) {
   //   if (this.koPages().length <= 1) return;
@@ -148,6 +149,17 @@ export class PagesEditor {
     var delta = event.deltaY || event.detail || event.wheelDelta;
     pagesElement.scrollLeft -= delta;
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+    this.updateMenuPosition();
+  }
+  updateMenuPosition() {
+    var pagesElement = this.element.querySelector(".svd-pages");
+    var menuElements = pagesElement.getElementsByClassName("svd-page-actions");
+    for (var i = 0; i < menuElements.length; i++) {
+      menuElements[i].style.left =
+        menuElements[i].parentElement.offsetLeft -
+        pagesElement.scrollLeft +
+        "px";
+    }
   }
   getLocString(str: string) {
     return editorLocalization.getString(str);
