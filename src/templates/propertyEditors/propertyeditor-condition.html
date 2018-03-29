@@ -7,7 +7,7 @@
     <div class="propertyeditor-condition">
         <div class="form-inline form-group">
             <div class="form-control svd_custom_select">
-                <select data-bind="options: koAddConditionQuestions, value: koAddConditionQuestion, optionsCaption: addConditionQuestionOptions"></select>
+                <select style="max-width:200px" data-bind="options: koAddConditionQuestions, value: koAddConditionQuestion, optionsCaption: addConditionQuestionOptions"></select>
             </div>
             <div class="form-control svd_custom_select">
                 <select data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koAddConditionOperator"></select>
@@ -20,7 +20,7 @@
         </div>
         <!-- ko if: $parent.hasAceEditor -->
         <span data-bind="text:$root.getLocString('pe.aceEditorHelp')"></span>
-        <div id="expression-ace-editor" style="height: 400px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
+        <div id="expression-ace-editor" style="height: 200px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
         <!-- /ko -->
 
         <!-- ko if: !$parent.hasAceEditor -->
