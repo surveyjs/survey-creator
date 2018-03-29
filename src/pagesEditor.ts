@@ -63,6 +63,7 @@ export class PagesEditor {
     this.isNeedAutoScroll = false;
     this.editor.selectPage(model);
     event.stopPropagation();
+    this.updateMenuPosition();
   };
 
   get sortableOptions() {
@@ -112,10 +113,10 @@ export class PagesEditor {
     var index = this.editor.pages().indexOf(this.selectedPage);
     var pageElement = pagesElement.children[index];
     if (!pageElement) return;
-    pagesElement.scrollTo(
-      pageElement.offsetLeft - pagesElement.offsetWidth / 2,
-      0
-    );
+    pagesElement.scrollLeft =
+      pageElement.offsetLeft -
+      pagesElement.offsetLeft -
+      pagesElement.offsetWidth / 2;
     this.updateMenuPosition();
   }
   // onKeyDown(el: any, e: KeyboardEvent) {
