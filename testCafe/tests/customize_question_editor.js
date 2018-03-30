@@ -54,7 +54,7 @@ test(`check new editor dialog`, async t => {
   await t
     .click(`[title~=Radiogroup]`)
     .click(`.svd_question`)
-    .click(`.icon-action-editElement`);
+    .click(`.svda_question_action .icon-action-editElement`);
 
   assert.notEqual(await getPosition1(), -1);
   assert.notEqual(await getPosition2(), -1);
