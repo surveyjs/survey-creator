@@ -80,7 +80,7 @@ module.exports = function(options) {
         replace(
           {
             files: packagePath + "surveyeditor.d.ts",
-            from: /export let\s+\w+:\s+\w+;/g,
+            from: /export let\s+\w+:\s+\w+;/,
             to: ""
           },
           (error, changes) => {
