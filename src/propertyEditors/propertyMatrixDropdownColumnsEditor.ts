@@ -97,7 +97,13 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
       "matrixdropdowncolumn",
       "cellType"
     );
-    return property ? property.choices : [];
+    var choices = property ? property.choices : [];
+    var objChoices = [];
+    for (var i = 0; i < choices.length; i++) {
+      var text = editorLocalization.getString("qt." + choices[i]);
+      objChoices.push({ value: choices[i], text: text });
+    }
+    return objChoices;
   }
 }
 

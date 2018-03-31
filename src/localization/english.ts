@@ -14,6 +14,7 @@ export var enStrings = {
   },
   //questionTypes
   qt: {
+    default: "Default",
     checkbox: "Checkbox",
     comment: "Comment",
     dropdown: "Dropdown",
