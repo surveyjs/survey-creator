@@ -139,7 +139,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "expression", index: 10 }]
     },
     multipletextitem: {
-      properties: ["inputType", "placeHolder"],
+      properties: ["inputType", "maxLength", "placeHolder"],
       tabs: [{ name: "validators", index: 10 }]
     },
     paneldynamic: {

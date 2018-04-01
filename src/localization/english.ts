@@ -192,6 +192,7 @@ export var enStrings = {
       columns: "Columns",
       rows: "Rows",
       choices: "Choices",
+      items: "Items",
       visibleIf: "Visible If",
       enableIf: "Enable If",
       rateValues: "Rate Values",
