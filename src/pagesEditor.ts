@@ -13,11 +13,11 @@ export class PagesEditor {
   pagesSelection: KnockoutComputed<Survey.PageModel[]>;
 
   constructor(private editor: SurveyEditor, private element: any) {
-    this.pagesSelection = ko.computed<Survey.PageModel[]>(() =>
-      this.editor
+    this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
+      return this.editor
         .pages()
-        .concat([<any>{ name: this.getLocString("ed.addNewPage") }])
-    );
+        .concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+    });
     this._selectedPage(this.editor.pages()[0]);
     this.editor.koSelectedObject.subscribe(newVal => {
       if (!this.isActive()) return;
@@ -35,10 +35,12 @@ export class PagesEditor {
   pageSelection = ko.computed({
     read: () => this._selectedPage(),
     write: newVal => {
-      if (typeof newVal.getType === "function") {
+      if (!!newVal && typeof newVal.getType === "function") {
         this.selectedPage = newVal;
       } else {
-        this.addPage();
+        if (this.editor.pages().length > 0) {
+          this.addPage();
+        }
       }
     }
   });
