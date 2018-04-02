@@ -1380,6 +1380,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         });
       }
 
+      if (opts.allowDragging) {
+        options.items.push({
+          name: "dragElement",
+          text: self.getLocString("survey.drag"),
+          onClick: function(selObj) {}
+        });
+      }
+
       self.onDefineElementMenuItems.fire(self, options);
     });
 

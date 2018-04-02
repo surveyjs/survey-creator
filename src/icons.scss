@@ -276,6 +276,16 @@
     @include svg-icon(16px);
   }
 
+  .icon-action-dragElement:before {
+    content: "☰";
+    font-size: 20px;
+    cursor: move;
+    color: $main-color;
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+  }
+
   .icon-pe-add:before {
     background-image: url("./images/Add_16x16.svg");
     @include svg-icon(16px);

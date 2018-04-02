@@ -10,7 +10,8 @@ export var enStrings = {
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
-    convertTo: "Convert to"
+    convertTo: "Convert to",
+    drag: "Drag element"
   },
   //questionTypes
   qt: {
