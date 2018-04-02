@@ -54,7 +54,7 @@ ko.components.register("select-items-editor", {
 
 export var selectItemsEditorAdorner = {
   getMarkerClass: model => {
-    return !!model.choices ? "select_items_editor" : "";
+    return !!model.parent && !!model.choices ? "select_items_editor" : "";
   },
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     elements[0].onclick = e => e.preventDefault();
