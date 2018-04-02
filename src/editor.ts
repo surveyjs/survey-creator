@@ -1635,6 +1635,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       type: "QUESTION_CHANGED_BY_EDITOR",
       question: question
     });
+    this.survey.endLoadingFromJson();
     this.survey.render();
   }
 
