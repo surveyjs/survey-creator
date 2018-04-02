@@ -75,7 +75,7 @@ ko.components.register("rating-item-editor", {
   template: templateHtml
 });
 
-export var createAddItemHandler = (
+var createAddItemHandler = (
   question: Survey.QuestionRating,
   onItemAdded: (itemValue: Survey.ItemValue) => void
 ) => () => {

@@ -89,7 +89,7 @@ export {
 export { QuestionToolbox } from "../questionToolbox";
 export { SurveyObjectProperty } from "../objectProperty";
 export { SurveyObjectEditor } from "../objectEditor";
-export { SurveyPagesEditor } from "../pagesEditor";
+export { PagesEditor } from "../pagesEditor";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../surveylive";

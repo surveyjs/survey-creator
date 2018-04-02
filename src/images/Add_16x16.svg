@@ -5,8 +5,5 @@
 <style type="text/css">
 	.st0{fill:#1AB394;}
 </style>
-<g>
-	<circle class="st0" cx="7.5" cy="13.5" r="1.5"/>
-	<polygon class="st0" points="8,10 9,1 6,1 7,10 	"/>
-</g>
+<polygon class="st0" points="14,7 10,7 10,3 7,3 7,7 3,7 3,10 7,10 7,14 10,14 10,10 14,10 "/>
 </svg>

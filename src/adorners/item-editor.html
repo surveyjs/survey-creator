@@ -2,7 +2,7 @@
     <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
         <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
         />
-        <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">✓</span>
+        <span class="svda-edit-button icon-inplace-check" data-bind="click: postEdit, enable: editingName() != ''"></span>
         <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
     </span>
     <span class="svda-title-editor-content svda-title-editor-start" data-bind="visible: !isEditing()">

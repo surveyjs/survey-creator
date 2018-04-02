@@ -130,9 +130,7 @@ var germanTranslation = {
     triggerRunIf: "Ausführen wenn",
     triggerSetToName: "Ändere Wert von: ",
     triggerSetValue: "auf: ",
-    triggerIsVariable: "Variable nicht im Umfrageergebnis einbinden.",
-    verbChangeType: "Typ ändern ",
-    verbChangePage: "Seite ändern "
+    triggerIsVariable: "Variable nicht im Umfrageergebnis einbinden."
   },
   //Property values
   pv: {

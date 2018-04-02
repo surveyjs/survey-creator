@@ -66,7 +66,7 @@ ko.components.register("item-editor", {
 
 export var itemAdorner = {
   getMarkerClass: model => {
-    return !!model.choices ? "item_editable" : "";
+    return !!model.parent && !!model.choices ? "item_editable" : "";
   },
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     for (var i = 0; i < elements.length; i++) {
@@ -131,7 +131,7 @@ export var createAddItemHandler = (
 
 export var itemDraggableAdorner = {
   getMarkerClass: model => {
-    return !!model.choices ? "item_draggable" : "";
+    return !!model.parent && !!model.choices ? "item_draggable" : "";
   },
   afterRender: (
     elements: HTMLElement[],

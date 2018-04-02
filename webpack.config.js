@@ -8,6 +8,7 @@ var rimraf = require("rimraf");
 var GenerateJsonPlugin = require("generate-json-webpack-plugin");
 var packageJson = require("./package.json");
 var fs = require("fs");
+var replace = require("replace-in-file");
 
 var banner = [
   "surveyjs Builder(Editor) v" + packageJson.version,
@@ -75,6 +76,22 @@ module.exports = function(options) {
           outputAsModuleFolder: true,
           headerText: dts_banner
         });
+
+        replace(
+          {
+            files: packagePath + "surveyeditor.d.ts",
+            from: /export let\s+\w+:\s+\w+;/,
+            to: ""
+          },
+          (error, changes) => {
+            if (error) {
+              return console.error("Error occurred:", error);
+            }
+            console.log("check me :     " + packagePath + "surveyeditor.d.ts");
+            console.log("Modified files:", changes.join(", "));
+          }
+        );
+
         rimraf.sync(packagePath + "typings");
         fs
           .createReadStream("./npmREADME.md")

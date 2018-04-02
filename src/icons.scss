@@ -261,8 +261,43 @@
     @include svg-icon(16px);
   }
 
+  .icon-action-notRequired:before {
+    background-image: url("./images/actions/Not_Required_16x16.svg");
+    @include svg-icon(16px);
+  }
+
   .icon-action-showTitle:before {
     background-image: url("./images/actions/ShowTitle_16x16.svg");
+    @include svg-icon(16px);
+  }
+
+  .icon-action-hideTitle:before {
+    background-image: url("./images/actions/HideTitle_16x16.svg");
+    @include svg-icon(16px);
+  }
+
+  .icon-action-dragElement:before {
+    content: "☰";
+    font-size: 20px;
+    cursor: move;
+    color: $main-color;
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+  }
+
+  .icon-pe-add:before {
+    background-image: url("./images/Add_16x16.svg");
+    @include svg-icon(16px);
+  }
+
+  .icon-pe-left:before {
+    background-image: url("./images/Left_16x16.svg");
+    @include svg-icon(16px);
+  }
+
+  .icon-pe-right:before {
+    background-image: url("./images/Right_16x16.svg");
     @include svg-icon(16px);
   }
 

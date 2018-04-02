@@ -16,6 +16,28 @@
   font-size: 12px;
   color: $text-color;
 
+  .svd-textitems-column {
+    width: 100%;
+    display: inline-block;
+
+    .btn-danger {
+      min-width: 2em;
+      padding: 0.78em 1em;
+    }
+
+    .svd-textitems-isrequired {
+      vertical-align: top;
+      padding-top: 3px;
+      display: inline-block;
+    }
+
+    .svd-textitems-edit {
+      vertical-align: top;
+      display: inline-block;
+      margin-left: 1.7em;
+    }
+  }
+
   .svd-drag-handle {
     font-size: 20px;
     cursor: move;
@@ -156,6 +178,7 @@
           background-color: $light-bg-color;
           height: $editor-height;
           overflow-y: scroll;
+          padding-top: 18px;
 
           .empty-message {
             text-align: center;
@@ -170,7 +193,7 @@
               border-radius: 0;
               padding: 20px 9px;
               background-color: #f5f5f5;
-              margin-bottom: 20px;
+              margin-bottom: 38px;
               .svd_question_menu {
                 position: absolute;
                 right: 5px;
@@ -234,6 +257,13 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
   }
+
+  survey-widget {
+    .form-control {
+      width: 100%;
+    }
+  }
+
   .svd_wrap_elements {
     white-space: normal;
   }

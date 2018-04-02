@@ -25,6 +25,5 @@ test(`check the new prop exists`, async t => {
   const getPosition = ClientFunction(() =>
     document.documentElement.innerHTML.indexOf("customProperty")
   );
-
   assert.notEqual(await getPosition(), -1);
 });

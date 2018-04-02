@@ -1,14 +1,11 @@
 {
-  "version": "1.0.14",
+  "version": "1.0.16",
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
-    "doc_gen":
-      "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
-    "doc_update":
-      "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
-    "testcafe":
-      "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
+    "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
+    "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
+    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
     "build_prod": "npm run build_dev && webpack --env.buildType prod"
@@ -18,7 +15,7 @@
     "jquery": "^3.1.1",
     "knockout": "^3.4.0",
     "rmodal": "^1.0.28",
-    "sortablejs": "1.7.0",
+    "sortablejs": "1.6.1",
     "survey-knockout": "^1.0.14"
   },
   "devDependencies": {
@@ -52,16 +49,15 @@
     "node-sass": "4.4.0",
     "puppeteer": "^1.0.0",
     "qunitjs": "2.2.0",
+    "replace-in-file": "^3.4.0",
     "rimraf": "2.5.4",
     "sass-loader": "4.1.1",
     "standard-version": "4.0.0",
     "style-loader": "0.13.1",
-    "surveyjs-doc-generator":
-      "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
+    "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
     "testcafe": "0.17.2",
     "ts-loader": "2.3.4",
     "ts-node": "3.3.0",
-    "typescript": "2.3.2",
     "url-loader": "0.5.8",
     "val-loader": "0.5.0",
     "webpack": "2.2.1"
