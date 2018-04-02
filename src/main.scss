@@ -20,6 +20,11 @@
     width: 100%;
     display: inline-block;
 
+    .btn-danger {
+      min-width: 2em;
+      padding: 0.78em 1em;
+    }
+
     .svd-textitems-isrequired {
       vertical-align: top;
       padding-top: 3px;
