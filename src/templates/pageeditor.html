@@ -12,13 +12,13 @@
             <span class="svd-page-actions-container" data-bind="css: $parent.getPageMenuIconClass($data)">
                 <div style="position: static">
                     <div class="svd-page-actions" data-bind="visible: $parent.showActions($data)">
-                        <span class="svd-page-action" data-bind="click: (model, event)=>{$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
+                        <span class="svd-page-action" data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
                             <span class="icon-action-editElement"></span>
                             <span class="svd-page-action-edit-text" data-bind="text: $parent.getLocString('ed.edit')"></span>
                         </span>
-                        <span class="svd-page-action icon-action-delete" data-bind="click: (model, event)=>{$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()"></span>
+                        <span class="svd-page-action icon-action-delete" data-bind="click: function(model, event) {$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()"></span>
                         <span class="svda_action_separator" data-bind="visible: !$parent.isLastPage()"></span>
-                        <span class="svd-page-action icon-action-copy" data-bind="click: (model, event)=>{$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}"></span>
+                        <span class="svd-page-action icon-action-copy" data-bind="click: function(model, event) {$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}"></span>
                     </div>
                 </div>
             </span>
