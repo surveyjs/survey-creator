@@ -6,6 +6,9 @@
             <span class="svd_commercial_product">SurveyJS Builder</span>
             <span class="svd_noncommercial_use">for non-commercial use only</span>
         </a>
+        <svg className='svg-icon'>
+            <use xlink:href='#icon-matrix' />
+        </svg>
     </div>
     <!-- /ko  -->
     <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
@@ -63,8 +66,7 @@
                     </span>
                     <!-- /ko -->
                 </div>
-                <pages-editor params="editor:$data"
-                    data-bind="visible: koShowPagesToolbox">
+                <pages-editor params="editor:$data" data-bind="visible: koShowPagesToolbox">
                 </pages-editor>
                 <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }">
                     <div id="surveyjs"></div>

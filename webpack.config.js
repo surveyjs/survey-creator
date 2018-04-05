@@ -9,6 +9,7 @@ var GenerateJsonPlugin = require("generate-json-webpack-plugin");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
+var SvgStore = require("webpack-svgstore-plugin");
 
 var banner = [
   "surveyjs Builder(Editor) v" + packageJson.version,
@@ -175,7 +176,14 @@ module.exports = function(options) {
       new webpack.BannerPlugin({
         banner: banner
       }),
-      extractCSS
+      extractCSS,
+      new SvgStore({
+        // svgo options
+        svgoOptions: {
+          plugins: [{ removeTitle: true }]
+        },
+        prefix: "icon-"
+      })
     ],
     devtool: "inline-source-map"
   };

@@ -17,9 +17,15 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "./questionToolbox";
 import { SurveyJSON5 } from "./json5";
-var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
+var svgIcons = require("html-loader?interpolate!val-loader!./templates/svg.html");
+var templateEditorHtml = require("html-loader?interpolate!url-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
 import { SurveyForDesigner } from "./surveyjsObjects";
+
+var __svg__ = { path: "./images/**/*.svg", name: "src/bundle.svg" };
+require("../node_modules/webpack-svgstore-plugin/src/helpers/svgxhr.js")(
+  __svg__
+);
 
 /**
  * The toolbar item description
@@ -776,7 +782,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     element = this.renderedElement;
     if (!element) return;
-    element.innerHTML = templateEditorHtml;
+    element.innerHTML = svgIcons + templateEditorHtml;
     self.applyBinding();
   }
   public loadSurvey(surveyId: string) {
