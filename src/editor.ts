@@ -1842,16 +1842,18 @@ ko.components.register("survey-widget", {
 ko.components.register("svg-icon", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var size = (ko.unwrap(params.size) || 16) + "px";
-      var svgElem: any = componentInfo.element.childNodes[0];
-      svgElem.style.width = size;
-      svgElem.style.height = size;
-      var node: any = svgElem.childNodes[0];
-      node.setAttributeNS(
-        "http://www.w3.org/1999/xlink",
-        "xlink:href",
-        "#" + ko.unwrap(params.iconName)
-      );
+      ko.computed(() => {
+        var size = (ko.unwrap(params.size) || 16) + "px";
+        var svgElem: any = componentInfo.element.childNodes[0];
+        svgElem.style.width = size;
+        svgElem.style.height = size;
+        var node: any = svgElem.childNodes[0];
+        node.setAttributeNS(
+          "http://www.w3.org/1999/xlink",
+          "xlink:href",
+          "#" + ko.unwrap(params.iconName)
+        );
+      });
     }
   },
   template: "<svg class='svd-svg-icon'><use></use></svg>"

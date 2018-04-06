@@ -28,6 +28,14 @@
       fill: #d0d0d0;
     }
   }
+
+  .icon-status {
+    .svd-svg-icon {
+      fill: #9d9fa1;
+      margin-bottom: 0.3em;
+    }
+  }
+
   .icon-default:before {
     background-image: url("./images/elements/matrix.svg");
     @include svg-icon(16px);
@@ -53,23 +61,8 @@
     @include svg-icon(24px);
   }
 
-  .icon-modified:before {
-    background-image: url("./images/Modified_24x24.svg");
-    @include svg-icon(24px);
-  }
-
   .icon-new:before {
     background-image: url("./images/New_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-saved:before {
-    background-image: url("./images/Saved_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-saving:before {
-    background-image: url("./images/Saving_24x24.svg");
     @include svg-icon(24px);
   }
 
