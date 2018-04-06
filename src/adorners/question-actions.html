@@ -2,7 +2,9 @@
     <!-- ko foreach: actions -->
     <!-- ko if: !$data.template -->
     <span class="svda_question_action" data-bind="click: function() { onClick($parent.question); }, attr: {title: text}">
-        <span data-bind="css: $parent.getStyle($data)"></span>
+        <span>
+            <svg-icon class="svd-icon-green" params="iconName: $parent.getStyle($data)"></svg-icon>
+        </span>
         <span data-bind="text: $data.hasTitle ? text: ''"></span>
     </span>
     <!-- /ko -->

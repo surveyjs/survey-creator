@@ -1248,7 +1248,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowEdit) {
         options.items.push({
-          name: "editElement",
+          name: "editelement",
           text: this.getLocString("survey.edit"),
           hasTitle: true,
           onClick: question => this.showQuestionEditor(question)
@@ -1276,13 +1276,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           options.obj.titleLocation !== "hidden"
         );
         options.items.push({
-          name: "showTitle",
+          name: "showtitle",
           text: this.getLocString("pe.showTitle"),
           icon: ko.computed(() => {
             if (isShowTitle()) {
-              return "icon-action-showTitle";
+              return "icon-actionshowtitle";
             }
-            return "icon-action-hideTitle";
+            return "icon-actionhidetitle";
           }),
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
@@ -1308,13 +1308,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       ) {
         var isRequired = ko.observable<boolean>(options.obj.isRequired);
         options.items.push({
-          name: "isRequired",
-          text: this.getLocString("pe.isRequired"),
+          name: "isrequired",
+          text: this.getLocString("pe.isrequired"),
           icon: ko.computed(() => {
             if (isRequired()) {
-              return "icon-action-isRequired";
+              return "icon-actionisrequired";
             }
-            return "icon-action-notRequired";
+            return "icon-actionnotrequired";
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
@@ -1340,8 +1340,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowAddToToolbox) {
         options.items.push({
-          name: "addToToolbox",
-          text: self.getLocString("survey.addToToolbox"),
+          name: "addtotoolbox",
+          text: self.getLocString("survey.addtotoolbox"),
           onClick: function(selObj) {
             self.addCustomToolboxQuestion(selObj);
           }
@@ -1382,7 +1382,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowDragging) {
         options.items.push({
-          name: "dragElement",
+          name: "dragelement",
           text: self.getLocString("survey.drag"),
           onClick: function(selObj) {}
         });

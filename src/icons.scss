@@ -117,51 +117,6 @@
     @include svg-icon(10px);
   }
 
-  .icon-action-addToToolbox:before {
-    background-image: url("./images/actions/AddToToolbox_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-convert-action:before {
-    background-image: url("./images/actions/ConvertTo_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-copy:before {
-    background-image: url("./images/actions/Copy_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-delete:before {
-    background-image: url("./images/actions/Delete_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-editElement:before {
-    background-image: url("./images/actions/Edit_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-isRequired:before {
-    background-image: url("./images/actions/Required_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-notRequired:before {
-    background-image: url("./images/actions/Not_Required_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-showTitle:before {
-    background-image: url("./images/actions/ShowTitle_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-hideTitle:before {
-    background-image: url("./images/actions/HideTitle_16x16.svg");
-    @include svg-icon(16px);
-  }
-
   .icon-action-dragElement:before {
     content: "☰";
     font-size: 20px;
