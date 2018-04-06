@@ -90,7 +90,7 @@ export class PagesEditor {
   };
   getPageMenuIconClass = page => {
     return page === this.selectedPage && this.isActive()
-      ? "icon-gear-active"
+      ? "icon-gearactive"
       : "icon-gear";
   };
   showActions = page => {

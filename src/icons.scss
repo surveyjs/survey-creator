@@ -17,6 +17,17 @@
     }
   }
 
+  .icon-gearactive {
+    .svd-svg-icon {
+      fill: #1ab394;
+    }
+  }
+
+  .icon-gear {
+    .svd-svg-icon {
+      fill: #d0d0d0;
+    }
+  }
   .icon-default:before {
     background-image: url("./images/elements/matrix.svg");
     @include svg-icon(16px);
@@ -67,16 +78,6 @@
     @include svg-icon(24px);
   }
 
-  .icon-gear:before {
-    background-image: url("./images/Gear_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-gear-active:before {
-    background-image: url("./images/Gear_12x12_active.svg");
-    @include svg-icon(12px);
-  }
-
   .icon-toolbox-arrow-up:before {
     background-image: url("./images/Arrow_up_10x10.svg");
     @include svg-icon(10px);
@@ -96,21 +97,6 @@
     cursor: move;
     position: absolute;
     left: 0;
-  }
-
-  .icon-pe-add:before {
-    background-image: url("./images/Add_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-pe-left:before {
-    background-image: url("./images/Left_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-pe-right:before {
-    background-image: url("./images/Right_16x16.svg");
-    @include svg-icon(16px);
   }
 
   .glyphicon {
