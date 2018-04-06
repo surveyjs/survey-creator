@@ -6,9 +6,6 @@
             <span class="svd_commercial_product">SurveyJS Builder</span>
             <span class="svd_noncommercial_use">for non-commercial use only</span>
         </a>
-        <svg className='svd-svg-icon'>
-            <use xlink:href='#icon-matrix' />
-        </svg>
     </div>
     <!-- /ko  -->
     <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
@@ -39,7 +36,11 @@
                         <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
                             <!-- ko foreach: items -->
                             <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
-                                <span data-bind="css: iconName, attr: {title: title}"></span>
+                                <span data-bind="attr: {title: title}">
+                                    <svg class="svd-svg-icon" width="16px" height="16px">
+                                        <use data-bind="attr: { 'xlink:href': '#' + iconName }" />
+                                    </svg>
+                                </span>
                                 <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text:title"></span>
                             </div>
                             <!-- /ko  -->
@@ -51,7 +52,9 @@
                 <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <!-- ko foreach: toolbox.koItems -->
                 <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
-                    <span data-bind="css: iconName, attr: {title: title}"></span>
+                    <span data-bind="attr: {title: title}">
+                        <svg-icon params="iconName: iconName"></svg-icon>
+                    </span>
                     <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text:title"></span>
                 </div>
                 <!-- /ko  -->

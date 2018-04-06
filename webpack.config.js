@@ -195,6 +195,7 @@ module.exports = function(options) {
       }
     },
     plugins: [
+      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
