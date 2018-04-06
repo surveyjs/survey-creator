@@ -9,7 +9,10 @@ var GenerateJsonPlugin = require("generate-json-webpack-plugin");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
-var SvgStore = require("webpack-svgstore-plugin");
+var svgStoreUtils = require(path.resolve(
+  __dirname,
+  "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
+));
 
 var banner = [
   "surveyjs Builder(Editor) v" + packageJson.version,
@@ -66,9 +69,33 @@ module.exports = function(options) {
     filename: packagePath + "surveyeditor.css"
   });
 
+  function createSVGBundle() {
+    var options = {
+      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
+      template: path.resolve(
+        __dirname,
+        "./node_modules/webpack-svgstore-plugin/src/templates/layout.pug"
+      ),
+      svgoOptions: {
+        plugins: [{ removeTitle: true }]
+      },
+      prefix: "icon-"
+    };
+
+    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), files => {
+      const fileContent = svgStoreUtils.createSprite(
+        svgStoreUtils.parseFiles(files, options),
+        options.template
+      );
+
+      fs.writeFileSync(options.fileName, fileContent);
+    });
+  }
+
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
+      createSVGBundle();
     } else if (1 == percentage) {
       if (options.buildType === "prod") {
         dts.bundle({
@@ -176,14 +203,7 @@ module.exports = function(options) {
       new webpack.BannerPlugin({
         banner: banner
       }),
-      extractCSS,
-      new SvgStore({
-        // svgo options
-        svgoOptions: {
-          plugins: [{ removeTitle: true }]
-        },
-        prefix: "icon-"
-      })
+      extractCSS
     ],
     devtool: "inline-source-map"
   };

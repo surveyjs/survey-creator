@@ -31,3 +31,4 @@ _site/
 /web.config
 /doc_generator/*.json
 *.env
+svgbundle.html

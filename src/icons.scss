@@ -6,6 +6,9 @@
     padding: $icon-size / 2;
   }
 
+  .svd-svg-icon {
+  }
+
   .icon-panel:before {
     background-image: url("./images/Panel.svg");
     @include svg-icon(16px);
