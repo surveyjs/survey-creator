@@ -85,7 +85,9 @@
                     <div class="svd_custom_select">
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
-                    <span class="icon-edit" data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}"></span>
+                    <span data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}">
+                        <svg-icon class="svd-icon-green" params="iconName: 'icon-edit', size:24"></svg-icon>
+                    </span>
                 </div>
                 <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
                     <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
