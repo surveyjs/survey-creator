@@ -106,6 +106,8 @@ export { SurveyEditor } from "../editor";
 
 export { SurveysManager } from "../manage";
 
+export { StylesManager } from "../stylesmanager";
+
 //editorLocalization
 import "../localization/french";
 import "../localization/german";

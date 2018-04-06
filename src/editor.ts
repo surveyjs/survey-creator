@@ -20,6 +20,7 @@ import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
 import { SurveyForDesigner } from "./surveyjsObjects";
+import { StylesManager } from "./stylesmanager";
 
 /**
  * The toolbar item description
@@ -60,6 +61,8 @@ export interface IToolbarItem {
  */
 
 export class SurveyEditor implements ISurveyObjectEditorOptions {
+  private static stylesManager = new StylesManager();
+
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private _haveCommercialLicense = ko.observable(false);
   private renderedElement: HTMLElement;
