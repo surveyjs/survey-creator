@@ -11,6 +11,11 @@
     vertical-align: middle;
     fill: #3d4d5d;
   }
+  .svd-icon-green {
+    .svd-svg-icon {
+      fill: #1ab394;
+    }
+  }
 
   .icon-default:before {
     background-image: url("./images/elements/matrix.svg");
@@ -30,11 +35,6 @@
   .icon-edit:before {
     background-image: url("./images/Edit_24x24.svg");
     @include svg-icon(24px);
-  }
-
-  .icon-commercial:before {
-    background-image: url("./images/NonCommercial_20x20.svg");
-    @include svg-icon(20px);
   }
 
   .icon-fork:before {
