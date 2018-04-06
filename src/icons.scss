@@ -9,136 +9,16 @@
   .svd-svg-icon {
     display: inline-block;
     vertical-align: middle;
-    fill: red;
-  }
-
-  .icon-panel:before {
-    background-image: url("./images/Panel.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-paneldynamic:before {
-    background-image: url("./images/PanelDynamic.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-checkbox:before {
-    background-image: url("./images/Checkbox.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-comment:before {
-    background-image: url("./images/Comment.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-dropdown:before {
-    background-image: url("./images/Dropdown.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-file:before {
-    background-image: url("./images/File.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-html:before {
-    background-image: url("./images/HTML.svg");
-    @include svg-icon(16px);
+    fill: #3d4d5d;
   }
 
   .icon-default:before {
-    background-image: url("./images/Matrix.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrixdynamic:before {
-    background-image: url("./images/Matrix_dynamic.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrixdropdown:before {
-    background-image: url("./images/Matrix_multiple.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrix:before {
-    background-image: url("./images/Matrix_single.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-multipletext:before {
-    background-image: url("./images/Multipletext.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-radiogroup:before {
-    background-image: url("./images/Radiogroup.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-rating:before {
-    background-image: url("./images/Rating.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-text:before {
-    background-image: url("./images/Text.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-boolean:before {
-    background-image: url("./images/Boolean.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-expression:before {
-    background-image: url("./images/Expression.svg");
+    background-image: url("./images/elements/matrix.svg");
     @include svg-icon(16px);
   }
 
   .icon-editor:before {
     background-image: url("./images/cw/Editor.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-imagepicker:before {
-    background-image: url("./images/cw/ImagePicker.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-barrating:before {
-    background-image: url("./images/cw/Barrating.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-datepicker:before {
-    background-image: url("./images/cw/DatePicker.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-nouislider:before {
-    background-image: url("./images/cw/noUISlider.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-tagbox:before {
-    background-image: url("./images/cw/TagBox.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-signaturepad:before {
-    background-image: url("./images/cw/SingaturePad.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-sortablelist:before {
-    background-image: url("./images/cw/SortableJS.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-autocomplete:before {
-    background-image: url("./images/cw/autocomplete.svg");
     @include svg-icon(16px);
   }
 
