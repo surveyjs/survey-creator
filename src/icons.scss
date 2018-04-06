@@ -9,29 +9,29 @@
   .svd-svg-icon {
     display: inline-block;
     vertical-align: middle;
-    fill: #3d4d5d;
+    fill: $svd-svg-icon-color;
   }
   .svd-icon-green {
     .svd-svg-icon {
-      fill: #1ab394;
+      fill: $main-color;
     }
   }
 
   .icon-gearactive {
     .svd-svg-icon {
-      fill: #1ab394;
+      fill: $main-color;
     }
   }
 
   .icon-gear {
     .svd-svg-icon {
-      fill: #d0d0d0;
+      fill: $icon-gear-color;
     }
   }
 
   .icon-status {
     .svd-svg-icon {
-      fill: #9d9fa1;
+      fill: $icon-status-color;
       margin-bottom: 0.3em;
     }
   }

@@ -97,8 +97,8 @@
         padding: 6px 12px;
       }
       ul {
-        background: white;
-        border: 1px solid #ccc;
+        background: $light-bg-color;
+        border: 1px solid $dd-menu-border;
         border-radius: 2px;
         padding: 0;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -112,12 +112,12 @@
           width: 100%;
           a {
             padding: 3px 20px;
-            color: #262626;
+            color: $dd-menu-link-color;
             width: 100%;
             font-weight: 400;
             display: block;
             &:hover {
-              background-color: #f5f5f5;
+              background-color: $dark-bg-color;
               text-decoration: none;
             }
           }
@@ -129,16 +129,16 @@
   .select2-container--default.select2-container--open {
     .select2-selection--single {
       border-radius: 0;
-      border: 1px solid #ccc;
+      border: 1px solid $dd-menu-border;
       height: 34px;
       .select2-selection__arrow {
-        background: #1ab394;
+        background: $main-color;
         height: 34px;
         top: 0px;
         right: 0px;
         width: 34px;
         b {
-          border-color: white transparent white transparent;
+          border-color: $light-bg-color transparent $light-bg-color transparent;
         }
       }
     }
@@ -192,7 +192,7 @@
               box-shadow: none;
               border-radius: 0;
               padding: 20px 9px;
-              background-color: #f5f5f5;
+              background-color: $dark-bg-color;
               margin-bottom: 38px;
               .svd_question_menu {
                 position: absolute;
@@ -204,8 +204,8 @@
                     line-height: 2.2em;
                     padding-top: 0.2em;
                     ul {
-                      background: white;
-                      border: 1px solid #ccc;
+                      background: $light-bg-color;
+                      border: 1px solid $dd-menu-border;
                       border-radius: 2px;
                       padding: 5px 0;
                       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -284,12 +284,6 @@
   .svd_q_design_border {
     position: relative;
   }
-  .svd_dragover {
-    pointer-events: none;
-    width: 100%;
-    height: 5px;
-    border: 2px dashed #000;
-  }
   .svd_navbarbuttons {
     margin-top: 3px;
   }
@@ -350,11 +344,11 @@
 .svd_container {
   .svd_menu > li.link-to-attach > a {
     width: auto;
-    color: #18a689;
+    color: $dark-main-color;
   }
   .svd_menu > li.link-to-attach > a:hover {
     background-color: transparent;
-    color: #1ab394;
+    color: $main-color;
     border: none;
   }
   .svd_action.link-to-attach {

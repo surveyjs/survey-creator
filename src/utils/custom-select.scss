@@ -1,4 +1,4 @@
-$main-color: #1ab394;
+@import "../colors";
 
 @mixin svg-icon() {
   content: "";

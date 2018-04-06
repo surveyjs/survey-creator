@@ -39,7 +39,7 @@
       vertical-align: bottom;
       letter-spacing: normal;
       cursor: pointer;
-      background-color: #f5f5f5;
+      background-color: $dark-bg-color;
       height: 4em;
       padding: 1em 1.5em;
       font-weight: bold;
@@ -53,18 +53,18 @@
       .svd-page-actions-container {
         display: inline-block;
         .svd-page-actions {
-          box-shadow: 5px 5px 5px -5px #333;
+          box-shadow: 5px 5px 5px -5px $dd-menu-link-color;
           position: absolute;
-          background-color: white;
+          background-color: $light-bg-color;
           padding: 5px;
-          border: 1px solid lightgray;
+          border: 1px solid $dark-border-color;
           visibility: hidden;
           z-index: 1;
 
           .svda_action_separator {
             display: inline-block;
             height: 16px;
-            border-left: 1px solid #ddd;
+            border-left: 1px solid $dark-border-color;
             vertical-align: middle;
             margin-left: 0.5em;
           }
@@ -93,16 +93,16 @@
     }
 
     .svd_selected_page {
-      background-color: white;
-      border-bottom: 1px solid white;
+      background-color: $light-bg-color;
+      border-bottom: 1px solid $light-bg-color;
     }
 
     .svd-page-selector.svd_custom_select {
       max-width: 250px;
       line-height: 2.44em;
       height: 2.44em;
-      background: white;
-      border: 1px solid #e7eaec;
+      background: $light-bg-color;
+      border: 1px solid $light-border-color;
       font-size: 14px;
       margin-bottom: 7px;
       select {

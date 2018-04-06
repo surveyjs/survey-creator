@@ -1,3 +1,5 @@
+@import "../colors";
+
 select-items-editor {
   display: none;
 
@@ -13,7 +15,7 @@ select-items-editor {
       height: 2em;
 
       span {
-        color: #1ab394;
+        color: $main-color;
         font-weight: bold;
         cursor: pointer;
       }
@@ -21,8 +23,8 @@ select-items-editor {
 
     .svda-select-items-content {
       padding: 1em;
-      background-color: white;
-      border: 1px solid lightgray;
+      background-color: $light-bg-color;
+      border: 1px solid $dark-border-color;
       border-top: none;
     }
   }
