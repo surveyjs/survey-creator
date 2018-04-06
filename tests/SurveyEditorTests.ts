@@ -459,7 +459,7 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
 
   editor.selectPage(editor.pages()[0]);
   var pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
-  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(pageClass, "icon-gearactive");
   assert.equal(editor.koSelectedObject().value, editor.pages()[0]);
   assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 
@@ -479,7 +479,7 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
 
   editor.selectPage(editor.pages()[0]);
   pageClass = pagesEditor.getPageMenuIconClass(editor.pages()[0]);
-  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(pageClass, "icon-gearactive");
   assert.equal(editor.koSelectedObject().value, editor.pages()[0]);
   assert.equal(pagesEditor["selectedPage"], editor.pages()[0]);
 });
@@ -513,7 +513,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
   editor.selectPage(currentPage);
 
   var pageClass = pagesEditor.getPageMenuIconClass(currentPage);
-  assert.equal(pageClass, "icon-gear-active");
+  assert.equal(pageClass, "icon-gearactive");
   assert.equal(editor.koSelectedObject().value, currentPage);
   assert.equal(pagesEditor["selectedPage"], currentPage);
 
