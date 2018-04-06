@@ -77,31 +77,6 @@
     @include svg-icon(12px);
   }
 
-  .icon-inplace-edit:before {
-    background-image: url("./images/inplace/Edit_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-delete:before {
-    background-image: url("./images/inplace/Delete_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-draggable:before {
-    background-image: url("./images/inplace/Dragging_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-check:before {
-    background-image: url("./images/inplace/Check_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-add-item:before {
-    background-image: url("./images/inplace/Plus_12x12.svg");
-    @include svg-icon(12px);
-  }
-
   .icon-toolbox-arrow-up:before {
     background-image: url("./images/Arrow_up_10x10.svg");
     @include svg-icon(10px);
@@ -117,14 +92,10 @@
     @include svg-icon(10px);
   }
 
-  .icon-action-dragElement:before {
-    content: "☰";
-    font-size: 20px;
+  .icon-actiondragelement {
     cursor: move;
-    color: $main-color;
     position: absolute;
     left: 0;
-    font-size: 16px;
   }
 
   .icon-pe-add:before {
