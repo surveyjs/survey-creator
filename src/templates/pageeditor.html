@@ -9,7 +9,7 @@
     </div>
 
     <div class="svd-pages" data-bind="sortable: {foreach: editor.pages, options: sortableOptions}, event: {wheel: onWheel}">
-        <div class="svd-page svd-dark-bg-color" data-bind="css: $parent.getPageClass($data), click: $parent.onPageClick">
+        <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: $parent.onPageClick">
             <span class="svd-page-name" data-bind="text: name"></span>
             <span class="svd-page-actions-container">
                 <svg-icon data-bind="css: $parent.getPageMenuIconClass($data)" params="iconName: $parent.getPageMenuIconClass($data), size: 12"></svg-icon>
