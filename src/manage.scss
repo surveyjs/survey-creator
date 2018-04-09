@@ -1,0 +1,55 @@
+.svd-manage {
+  margin: 10px 15px;
+  position: relative;
+  .svd-manage-control {
+    width: calc(100% - 150px);
+    display: inline-block;
+    > * {
+      width: 100%;
+      height: 32px;
+      padding: 5px;
+    }
+    > select {
+      border-color: $light-border-color;
+    }
+    > input {
+      border-color: none;
+    }
+  }
+  .svd-manage-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    text-align: right;
+    margin-right: 15px;
+    .icon {
+      cursor: pointer;
+      vertical-align: middle;
+      line-height: 32px;
+      display: inline-block;
+    }
+    .icon-edit {
+      margin-right: 20px;
+    }
+  }
+}
+
+.svd_container {
+  .svd_menu > li.link-to-attach > a {
+    width: auto;
+  }
+  .svd_menu > li.link-to-attach > a:hover {
+    background-color: transparent;
+    border: none;
+  }
+  .svd_action.link-to-attach {
+    margin-left: 5px;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+  }
+  .link-to-attach span:last-child {
+    margin-left: 5px;
+  }
+}

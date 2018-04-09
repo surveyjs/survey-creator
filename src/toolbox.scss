@@ -30,28 +30,22 @@
         background: transparent;
       }
 
-      & > .panel-heading {
+      & > .svd-toolbox-category-header {
         border: none;
         background-color: transparent;
         padding-left: 0;
         font-size: 1.17em;
         font-weight: 600;
         cursor: pointer;
+        padding: 10px 15px;
 
         span {
-          color: $text-color;
           text-decoration: none;
           text-transform: uppercase;
         }
 
         .icon-toolbox-arrow {
           float: right;
-        }
-
-        &.header-expand {
-          span {
-            color: $main-color;
-          }
         }
       }
 

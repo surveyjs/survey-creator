@@ -26,15 +26,6 @@
   left: 0;
   height: 22px;
   width: 22px;
-  background-color: $boolean-background;
-}
-
-.sjs-cb-container:hover input ~ .checkmark {
-  background-color: $dd-menu-border;
-}
-
-.sjs-cb-container input:checked ~ .checkmark {
-  background-color: $main-color;
 }
 
 .checkmark:after {

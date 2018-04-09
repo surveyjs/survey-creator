@@ -147,9 +147,15 @@ function elementOnCreating(surveyElement: any) {
   surveyElement.koIsSelected.subscribe(function(newValue) {
     if (surveyElement.renderedElement) {
       if (newValue) {
-        surveyElement.renderedElement.classList.add("svd_q_selected");
+        surveyElement.renderedElement.classList.add(
+          "svd_q_selected",
+          "svd-main-border-color"
+        );
       } else {
-        surveyElement.renderedElement.classList.remove("svd_q_selected");
+        surveyElement.renderedElement.classList.remove(
+          "svd_q_selected",
+          "svd-main-border-color"
+        );
       }
     }
   });
@@ -196,7 +202,10 @@ function elementOnAfterRendering(
   surveyElement.renderedElement.classList.add("svd_q_design_border");
   getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
   if (surveyElement.koIsSelected())
-    surveyElement.renderedElement.classList.add("svd_q_selected");
+    surveyElement.renderedElement.classList.add(
+      "svd_q_selected",
+      "svd-main-border-color"
+    );
   surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
   domElement.onclick = function(e) {
     if (!e["markEvent"]) {

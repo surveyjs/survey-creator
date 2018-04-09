@@ -16,7 +16,7 @@ export default (menuItems, className) => {
     return true;
   };
   icon.setAttribute("tabindex", "0");
-  icon.className = "glyphicon glyphicon-option-horizontal";
+  icon.className = "glyphicon glyphicon-option-horizontal svd-main-color";
 
   var div = document.createElement("div");
   div.onclick = function() {

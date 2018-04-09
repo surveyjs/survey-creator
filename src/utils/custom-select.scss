@@ -22,7 +22,6 @@
     padding: 6px 12px;
     padding-right: 3em;
     &:focus {
-      border-color: $main-color;
       outline: 0;
       box-shadow: none;
     }
@@ -57,7 +56,6 @@
     position: absolute;
     right: 0;
     top: 0;
-    background-color: $main-color;
     background-image: url("../images/ArrowDown_34x34.svg");
     @include svg-icon();
   }

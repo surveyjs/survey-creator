@@ -5,7 +5,7 @@
             <span>
                 <svg-icon class="svd-icon-green" params="iconName: 'icon-noncommercial', size: 20"></svg-icon>
             </span>
-            <span class="svd_commercial_product">SurveyJS Builder</span>
+            <span class="svd_commercial_product svd-main-color">SurveyJS Builder</span>
             <span class="svd_noncommercial_use">for non-commercial use only</span>
         </a>
     </div>
@@ -31,17 +31,20 @@
                 <!-- ko if: toolbox.koHasCategories -->
                 <div class="panel-group" role="tablist" data-bind="foreach: toolbox.koCategories">
                     <div class="panel panel-info">
-                        <div class="panel-heading" role="tab" data-bind="css: { 'header-expand': !koCollapsed() }, click: expand">
-                            <span data-bind="text: name"></span>
-                            <span class="icon-toolbox-arrow" data-bind="css: { 'icon-toolbox-arrow-down': koCollapsed(), 'icon-toolbox-arrow-up': !koCollapsed()}"></span>
+                        <div class="svd-toolbox-category-header" role="tab" data-bind="click: expand">
+                            <span data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"></span>
+                            <!-- ko if: koCollapsed -->
+                            <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
+                            <!-- /ko -->
+                            <!-- ko ifnot: koCollapsed -->
+                            <svg-icon class="icon-toolbox-arrow svd-icon-green" params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
+                            <!-- /ko -->
                         </div>
                         <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
                             <!-- ko foreach: items -->
                             <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                                 <span data-bind="attr: {title: title}">
-                                    <svg class="svd-svg-icon" width="16px" height="16px">
-                                        <use data-bind="attr: { 'xlink:href': '#' + iconName }" />
-                                    </svg>
+                                    <svg-icon params="iconName: iconName"></svg-icon>
                                 </span>
                                 <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text:title"></span>
                             </div>

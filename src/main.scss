@@ -2,6 +2,7 @@
 
 @import "colors";
 @import "icons";
+@import "manage";
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
@@ -9,12 +10,10 @@
 @import "properties";
 
 .svd_container {
-  background-color: $light-bg-color;
   position: relative;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
     "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
-  color: $text-color;
 
   .svd-textitems-column {
     width: 100%;
@@ -48,7 +47,6 @@
   }
 
   .form-control:focus {
-    border-color: $main-color;
     outline: 0;
     box-shadow: none;
   }
@@ -62,9 +60,7 @@
       min-width: calc(100%);
       border-color: $dark-border-color;
     }
-    a {
-      color: $main-color;
-    }
+
     .assistant {
       padding-left: 1em;
       width: 200px;
@@ -161,11 +157,6 @@
     line-height: 1em;
     min-width: 6em;
     font-weight: bold;
-
-    &.btn-primary {
-      background-color: $main-color;
-      border-color: $main-color;
-    }
   }
   .svd_content {
     background-color: $dark-bg-color;
@@ -194,44 +185,11 @@
               padding: 20px 9px;
               background-color: $dark-bg-color;
               margin-bottom: 38px;
-              .svd_question_menu {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                .ddmenu-container {
-                  &.element-addons {
-                    margin-left: 0.5em;
-                    line-height: 2.2em;
-                    padding-top: 0.2em;
-                    ul {
-                      background: $light-bg-color;
-                      border: 1px solid $dd-menu-border;
-                      border-radius: 2px;
-                      padding: 5px 0;
-                      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                      min-width: 160px;
-                      right: 0;
-                      li {
-                        margin: 5px;
-                        button {
-                          width: 100%;
-                        }
-                      }
-                    }
-                  }
-                }
-                .glyphicon-option-horizontal {
-                  color: $main-color;
-                }
-              }
             }
             .svd_question_container .svd_question {
               background-color: $bg-color;
               border-top: 1px solid $dark-border-color;
               border-bottom: 1px solid $dark-border-color;
-              &.svd_q_selected {
-                border: 1px solid $main-color !important;
-              }
             }
           }
         }
@@ -276,7 +234,7 @@
     text-overflow: ellipsis;
   }
   .svd_q_selected {
-    border: 1px solid $main-color !important;
+    border: 1px solid transparent;
   }
   .svd_q_design {
     pointer-events: none;
@@ -297,69 +255,6 @@
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.15);
-}
-
-.svd-manage {
-  margin: 10px 15px;
-  position: relative;
-  .svd-manage-control {
-    width: calc(100% - 150px);
-    display: inline-block;
-    > * {
-      width: 100%;
-      height: 32px;
-      padding: 5px;
-      color: $text-color;
-    }
-    > select {
-      border-color: $light-border-color;
-    }
-    > input {
-      border-color: none;
-    }
-  }
-  .svd-manage-buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 120px;
-    text-align: right;
-    margin-right: 15px;
-    .icon {
-      color: $main-color;
-      cursor: pointer;
-      vertical-align: middle;
-      line-height: 32px;
-      display: inline-block;
-      &:hover {
-        color: $dark-main-color;
-      }
-    }
-    .icon-edit {
-      margin-right: 20px;
-    }
-  }
-}
-
-.svd_container {
-  .svd_menu > li.link-to-attach > a {
-    width: auto;
-    color: $dark-main-color;
-  }
-  .svd_menu > li.link-to-attach > a:hover {
-    background-color: transparent;
-    color: $main-color;
-    border: none;
-  }
-  .svd_action.link-to-attach {
-    margin-left: 5px;
-    font-weight: 500;
-    background-color: transparent;
-    border: none;
-  }
-  .link-to-attach span:last-child {
-    margin-left: 5px;
-  }
 }
 
 .svd_container {
@@ -452,7 +347,6 @@
       text-decoration: none;
 
       .svd_commercial_product {
-        color: $main-color;
         padding-left: 0.5em;
       }
       .svd_noncommercial_use {

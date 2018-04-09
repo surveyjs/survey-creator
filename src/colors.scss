@@ -11,8 +11,98 @@ $dark-bg-color: #f3f3f4;
 $dd-menu-border: #ccc;
 $dd-menu-link-color: #262626;
 
-$boolean-background: #eee;
-
 $svd-svg-icon-color: #3d4d5d;
 $icon-gear-color: #d0d0d0;
 $icon-status-color: #9d9fa1;
+
+.svd_container {
+  color: $text-color;
+  background-color: $light-bg-color;
+
+  a {
+    color: $main-color;
+  }
+  a:hover {
+    color: $dark-main-color;
+  }
+
+  .sjs-cb-container:hover input ~ .checkmark {
+    background-color: $dd-menu-border;
+  }
+
+  .sjs-cb-container:hover input:checked ~ .checkmark {
+    background-color: $dark-main-color;
+  }
+
+  >.nav-tabs a {
+    color: $text-color;
+  }
+  >.nav-tabs > .active > a {
+    color: $main-color;
+  }
+
+  .svd_custom_select:before {
+    background-color: $main-color;
+  }
+  .form-control:focus {
+    border-color: $main-color;
+  }
+
+  .btn-primary {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
+  .svd-main-color {
+    color: $main-color;
+  }
+  .svd-main-background-color {
+    background-color: $main-color;
+  }
+  .svd-main-border-color {
+    border-color: $main-color;
+  }
+
+  .svd-dark-main-color {
+    color: #18a689;
+  }
+  .svd-text-color {
+    color: #676a6c;
+  }
+  .svd-light-text-color {
+    color: #a7a7a7;
+  }
+  .svd-light-border-color {
+    background-color: $light-border-color;
+  }
+  .svd-dark-border-color {
+    color: #ddd;
+  }
+  .svd-light-bg-color {
+    color: #fff;
+  }
+  .svd-bg-color {
+    color: #f9f9f9;
+  }
+  .svd-dark-bg-color {
+    color: #f3f3f4;
+  }
+
+  .svd-dd-menu-link-color {
+    color: #262626;
+  }
+
+  .svd-boolean-background {
+    color: #eee;
+  }
+
+  .svd-svd-svg-icon-color {
+    color: #3d4d5d;
+  }
+  .svd-icon-gear-color {
+    color: #d0d0d0;
+  }
+  .svd-icon-status-color {
+    color: #9d9fa1;
+  }
+}

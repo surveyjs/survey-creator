@@ -19,7 +19,7 @@
                             <span>
                                 <svg-icon class="svd-icon-green" params="iconName: 'icon-actioneditelement'"></svg-icon>
                             </span>
-                            <span class="svd-page-action-edit-text" data-bind="text: $parent.getLocString('ed.edit')"></span>
+                            <span class="svd-main-color" data-bind="text: $parent.getLocString('ed.edit')"></span>
                         </span>
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()">
                             <svg-icon class="svd-icon-green" params="iconName: 'icon-actiondelete'"></svg-icon>

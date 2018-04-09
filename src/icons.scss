@@ -56,21 +56,6 @@
     @include svg-icon(24px);
   }
 
-  .icon-toolbox-arrow-up:before {
-    background-image: url("./images/Arrow_up_10x10.svg");
-    @include svg-icon(10px);
-  }
-
-  .icon-toolbox-arrow-down:before {
-    background-image: url("./images/Arrow_down_10x10.svg");
-    @include svg-icon(10px);
-  }
-
-  .icon-toolbox-arrow-down-green:before {
-    background-image: url("./images/Arrow_down_green_10x10.svg");
-    @include svg-icon(10px);
-  }
-
   .icon-actiondragelement {
     cursor: move;
     position: absolute;
@@ -87,7 +72,6 @@
     &.glyphicon-plus::before {
       font-weight: normal;
       font-size: 20px;
-      color: $main-color;
       content: "+";
     }
     &.glyphicon-option-horizontal::before {
@@ -100,18 +84,8 @@
     &.glyphicon-edit::before {
       content: "";
     }
-    &.glyphicon-trash::before {
-      font-size: 1.25em;
-      content: "🗑";
-    }
     &.glyphicon-list-alt::before {
       content: "⇐"; // '🗸'
-    }
-    &.glyphicon-arrow-down::before {
-      content: "↓";
-    }
-    &.glyphicon-arrow-up::before {
-      content: "↑";
     }
   }
 }

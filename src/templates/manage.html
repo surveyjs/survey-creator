@@ -6,7 +6,8 @@
                         optionsText: 'name',
                         value: currentSurvey,
                         optionsCaption: 'Choose survey to edit or start editing and survey will be saved automatically...'"></select>
-            <input type="text" class="svd-manage-name" data-bind="visible: isEditMode, value: currentSurveyName, event: { keyup: nameEditorKeypress }"/>
+            <input type="text" class="svd-manage-name" data-bind="visible: isEditMode, value: currentSurveyName, event: { keyup: nameEditorKeypress }"
+            />
         </div>
         <div class="svd-manage-buttons">
             <span class="icon" data-bind="visible: currentSurvey, click: edit, css: cssEdit, attr: { title: titleEdit }"></span>
@@ -16,5 +17,8 @@
     </div>
 </script>
 <script type="text/html" id="attach-survey">
-    <a target="_blank" href="#" data-bind="attr: { href: action, title: title }"><span class="icon" data-bind="css: innerCss"></span><span data-bind="text: title"></span></a>
+    <a target="_blank" href="#" data-bind="attr: { href: action, title: title }">
+        <span class="icon" data-bind="css: innerCss"></span>
+        <span data-bind="text: title"></span>
+    </a>
 </script>
