@@ -93,7 +93,6 @@
         padding: 6px 12px;
       }
       ul {
-        background: $light-bg-color;
         border: 1px solid $dd-menu-border;
         border-radius: 2px;
         padding: 0;
@@ -134,7 +133,7 @@
         right: 0px;
         width: 34px;
         b {
-          border-color: $light-bg-color transparent $light-bg-color transparent;
+          border-color: #fff transparent #fff transparent;
         }
       }
     }
@@ -147,7 +146,6 @@
 
   a,
   a.nav-link {
-    color: $text-color;
     cursor: pointer;
   }
   .btn {
@@ -159,14 +157,12 @@
     font-weight: bold;
   }
   .svd_content {
-    background-color: $dark-bg-color;
     padding: 30px;
     margin: 0;
     border: none;
     .svd_survey_designer {
       .svd_editors {
         .svd_questions_editor {
-          background-color: $light-bg-color;
           height: $editor-height;
           overflow-y: scroll;
           padding-top: 18px;
@@ -183,13 +179,7 @@
               box-shadow: none;
               border-radius: 0;
               padding: 20px 9px;
-              background-color: $dark-bg-color;
               margin-bottom: 38px;
-            }
-            .svd_question_container .svd_question {
-              background-color: $bg-color;
-              border-top: 1px solid $dark-border-color;
-              border-bottom: 1px solid $dark-border-color;
             }
           }
         }

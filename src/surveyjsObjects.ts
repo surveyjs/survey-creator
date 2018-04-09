@@ -197,7 +197,10 @@ function elementOnAfterRendering(
   disable: boolean
 ) {
   surveyElement.renderedElement = domElement;
-  surveyElement.renderedElement.classList.add("svd_question");
+  surveyElement.renderedElement.classList.add(
+    "svd_question",
+    "svd-dark-bg-color"
+  );
   surveyElement.renderedElement.classList.add("svd_q_design_border");
   getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
   if (surveyElement.koIsSelected())

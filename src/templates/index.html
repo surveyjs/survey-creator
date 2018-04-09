@@ -1,4 +1,4 @@
-﻿<div class="svd_container">
+﻿<div class="svd_container svd-light-bg-color">
     <!-- ko ifnot: haveCommercialLicense -->
     <div class="svd_commercial_container">
         <a class="svd_commercial_text" href="https://surveyjs.io/Licenses#BuildSurvey" target="_blank">
@@ -10,7 +10,7 @@
         </a>
     </div>
     <!-- /ko  -->
-    <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
+    <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color">
         <li class="nav-item" data-bind="css: {active: koViewType() == 'designer'}">
             <a class="nav-link" href="#" data-bind="click:selectDesignerClick, text: $root.getLocString('ed.designer')"></a>
         </li>
@@ -25,9 +25,9 @@
         </li>
     </ul>
 
-    <div class="panel card svd_content">
+    <div class="panel card svd_content svd-dark-bg-color">
         <div class="row svd_survey_designer" data-bind="visible: koViewType() == 'designer'">
-            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox">
+            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox svd-dark-bg-color">
                 <!-- ko if: toolbox.koHasCategories -->
                 <div class="panel-group" role="tablist" data-bind="foreach: toolbox.koCategories">
                     <div class="panel panel-info">
@@ -76,14 +76,14 @@
                 </div>
                 <pages-editor params="editor:$data" data-bind="visible: koShowPagesToolbox">
                 </pages-editor>
-                <div class="svd_questions_editor" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }">
+                <div class="svd_questions_editor svd-light-bg-color" id="scrollableDiv" data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }">
                     <div id="surveyjs"></div>
                     <!-- ko if: isCurrentPageEmpty -->
                     <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
                     <!-- /ko -->
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties" data-bind="visible: koShowPropertyGrid">
+            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-bg-color" data-bind="visible: koShowPropertyGrid">
                 <div class="svd_object_selector">
                     <div class="svd_custom_select">
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>

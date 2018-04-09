@@ -9,49 +9,63 @@ export class StylesManager {
       "$text-color": "#676a6c",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     },
     orange: {
       "$main-color": "#f78119",
       "$text-color": "#4a4a4a",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#e77109",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "lightgray",
+      "$dark-bg-color": "#f4f4f4"
     },
     darkblue: {
       "$main-color": "#3c4f6d",
       "$text-color": "#4a4a4a",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     },
     darkrose: {
       "$main-color": "#68656e",
       "$text-color": "#4a4a4a",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     },
     stone: {
       "$main-color": "#0f0f33",
       "$text-color": "#0f0f33",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#0f0f23",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     },
     winter: {
       "$main-color": "#3c3b40",
       "$text-color": "#000",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#2c2b30",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     },
     winterstone: {
       "$main-color": "#5ac8fa",
       "$text-color": "#000",
       "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d"
+      "$svd-svg-icon-color": "#3d4d5d",
+      "$light-bg-color": "#fff",
+      "$dark-bg-color": "#f4f4f4"
     }
   };
   public static ThemeCss: { [key: string]: string } = {
@@ -68,7 +82,7 @@ export class StylesManager {
     ".svd_container .svd-icon-green .svd-svg-icon": "fill: $main-color;",
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $main-color;",
     ".svd_container .nav-tabs a": "color: $text-color",
-    ".svd_container .nav-tabs > .active > a": "color: $main-color",
+    ".svd_container .nav-tabs > li.active > a": "color: $main-color",
 
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
@@ -79,8 +93,23 @@ export class StylesManager {
       "background-color: $main-color;",
     ".svd_container .form-control:focus": "border-color: $main-color;",
 
-    ".svd_container .svd-light-text-color": "color: $light-text-color;"
-  
+    ".svd_container .svd-light-text-color": "color: $light-text-color;",
+
+    ".svd-light-bg-color": "background-color: $light-bg-color;",
+    ".svd_container .svd-light-bg-color": "background-color: $light-bg-color;",
+
+    ".svd_container .svd_toolbar li.active a":
+      "background-color: $main-color; color: $light-bg-color;",
+
+    ".svd_container .svd_selected_page":
+      "border-bottom: 1px solid $light-bg-color;",
+
+    ".svd_container .editor-tabs > li > a:hover":
+      "background-color: $dark-bg-color; border-bottom: 1px solid $dark-bg-color;",
+    ".svd_container .editor-tabs > li > a:focus":
+      "background-color: $dark-bg-color; border-bottom: 1px solid $dark-bg-color;",
+    ".svd_container .editor-tabs > li.active > a":
+      "color: $main-color; background-color: $dark-bg-color; border: 1px solid $light-border-color; border-bottom-color: $dark-bg-color;"
   };
 
   private sheet: CSSStyleSheet = null;

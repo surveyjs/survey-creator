@@ -1,5 +1,5 @@
 ﻿<script type="text/html" id="svd-page-selector-template">
-    <div class="svd-page-selector svd_custom_select">
+    <div class="svd-page-selector svd_custom_select svd-light-bg-color">
         <select data-bind="options: pagesSelection, value: pageSelection, optionsText:'name'"></select>
     </div>
     <div class="svd-page-scroller-arrow" data-bind="click: moveLeft, attr: {title: getLocString('ed.moveLeft')}">
@@ -9,12 +9,12 @@
     </div>
 
     <div class="svd-pages" data-bind="sortable: {foreach: editor.pages, options: sortableOptions}, event: {wheel: onWheel}">
-        <div class="svd-page" data-bind="css: $parent.getPageClass($data), click: $parent.onPageClick">
+        <div class="svd-page svd-dark-bg-color" data-bind="css: $parent.getPageClass($data), click: $parent.onPageClick">
             <span class="svd-page-name" data-bind="text: name"></span>
             <span class="svd-page-actions-container">
                 <svg-icon data-bind="css: $parent.getPageMenuIconClass($data)" params="iconName: $parent.getPageMenuIconClass($data), size: 12"></svg-icon>
                 <div style="position: static">
-                    <div class="svd-page-actions" data-bind="visible: $parent.showActions($data)">
+                    <div class="svd-page-actions svd-light-bg-color" data-bind="visible: $parent.showActions($data)">
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
                             <span>
                                 <svg-icon class="svd-icon-green" params="iconName: 'icon-actioneditelement'"></svg-icon>

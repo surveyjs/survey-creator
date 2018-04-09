@@ -4,7 +4,6 @@
     border-top: 2px solid $light-border-color;
     border-radius: 0;
     padding: 0;
-    background-color: $light-bg-color;
     font-size: 1.17em;
 
     .svd_object_selector {
@@ -34,8 +33,7 @@
         width: 25px;
       }
       .table.svd_properties_grid {
-        color: $text-color;
-        >tbody>tr>td {
+        > tbody > tr > td {
           border: none;
           padding: 0;
           line-height: 3.25em;

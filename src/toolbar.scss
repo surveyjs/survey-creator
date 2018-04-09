@@ -19,7 +19,6 @@
     .ddmenu-container {
       &.toolbar-options {
         ul {
-          background: $light-bg-color;
           border: 1px solid $dd-menu-border;
           border-radius: 2px;
           padding: 0;
@@ -31,12 +30,6 @@
           border-top-right-radius: 0;
           li {
             margin: 5px 0;
-            &.active {
-              a {
-                background-color: $main-color;
-                color: $light-bg-color;
-              }
-            }
             a {
               width: 100%;
               white-space: nowrap;
@@ -45,7 +38,6 @@
               clear: both;
               font-weight: 400;
               line-height: 1.42857143;
-              color: $dd-menu-link-color;
               text-decoration: none;
             }
           }

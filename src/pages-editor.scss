@@ -39,7 +39,6 @@
       vertical-align: bottom;
       letter-spacing: normal;
       cursor: pointer;
-      background-color: $dark-bg-color;
       height: 4em;
       padding: 1em 1.5em;
       font-weight: bold;
@@ -55,7 +54,6 @@
         .svd-page-actions {
           box-shadow: 5px 5px 5px -5px $dd-menu-link-color;
           position: absolute;
-          background-color: $light-bg-color;
           padding: 5px;
           border: 1px solid $dark-border-color;
           visibility: hidden;
@@ -88,16 +86,10 @@
       }
     }
 
-    .svd_selected_page {
-      background-color: $light-bg-color;
-      border-bottom: 1px solid $light-bg-color;
-    }
-
     .svd-page-selector.svd_custom_select {
       max-width: 250px;
       line-height: 2.44em;
       height: 2.44em;
-      background: $light-bg-color;
       border: 1px solid $light-border-color;
       font-size: 14px;
       margin-bottom: 7px;

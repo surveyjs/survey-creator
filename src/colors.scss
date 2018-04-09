@@ -2,11 +2,12 @@ $main-color: #1ab394;
 $dark-main-color: #18a689;
 $text-color: #676a6c;
 $light-text-color: #a7a7a7;
+
+$light-bg-color: #ffffff;
+$dark-bg-color: #f4f4f4;
+
 $light-border-color: #e7eaec;
 $dark-border-color: #ddd;
-$light-bg-color: #fff;
-$bg-color: #f9f9f9;
-$dark-bg-color: #f3f3f4;
 
 $dd-menu-border: #ccc;
 $dd-menu-link-color: #262626;
@@ -17,7 +18,6 @@ $icon-status-color: #9d9fa1;
 
 .svd_container {
   color: $text-color;
-  background-color: $light-bg-color;
 
   a {
     color: $main-color;
@@ -34,11 +34,38 @@ $icon-status-color: #9d9fa1;
     background-color: $dark-main-color;
   }
 
-  > .nav-tabs a {
+  .svd_selected_page {
+    border-bottom: 1px solid $light-bg-color;
+  }
+
+  .svd_toolbar li.active a {
+    background-color: $main-color;
+    color: $light-bg-color;
+  }
+
+  .svd_toolbar li a {
+    color: $dd-menu-link-color;
+  }
+
+  .nav-tabs a {
     color: $text-color;
   }
-  > .nav-tabs > .active > a {
+  .nav-tabs > li.active > a {
     color: $main-color;
+  }
+
+  .editor-tabs > li > a {
+    &:hover,
+    &:focus {
+      background-color: $dark-bg-color;
+      border-bottom: 1px solid $dark-bg-color;
+    }
+  }
+  .editor-tabs > li.active > a {
+    color: $main-color;
+    background-color: $dark-bg-color;
+    border: 1px solid $light-border-color;
+    border-bottom-color: $dark-bg-color;
   }
 
   .svd_custom_select:before {
@@ -73,13 +100,10 @@ $icon-status-color: #9d9fa1;
     color: #ddd;
   }
   .svd-light-bg-color {
-    color: #fff;
-  }
-  .svd-bg-color {
-    color: #f9f9f9;
+    background-color: $light-bg-color;
   }
   .svd-dark-bg-color {
-    color: #f3f3f4;
+    background-color: $dark-bg-color;
   }
 
   .svd-dd-menu-link-color {

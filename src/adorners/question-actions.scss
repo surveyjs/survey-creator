@@ -14,7 +14,6 @@
   }
 
   select.svda_current_type {
-    background-color: $light-bg-color;
     border: none;
     outline: none;
     cursor: pointer;
@@ -22,9 +21,6 @@
     &:focus {
       border: none;
       outline: none;
-    }
-    option {
-      background: $light-bg-color;
     }
   }
 }
