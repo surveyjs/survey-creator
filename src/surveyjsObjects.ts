@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
-import createDdmenu from "./utils/ddmenu";
 import { findParentNode } from "./utils/utils";
 
 export interface ISurveyObjectMenuItem {
