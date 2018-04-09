@@ -34,10 +34,10 @@ $icon-status-color: #9d9fa1;
     background-color: $dark-main-color;
   }
 
-  >.nav-tabs a {
+  > .nav-tabs a {
     color: $text-color;
   }
-  >.nav-tabs > .active > a {
+  > .nav-tabs > .active > a {
     color: $main-color;
   }
 
@@ -63,14 +63,8 @@ $icon-status-color: #9d9fa1;
     border-color: $main-color;
   }
 
-  .svd-dark-main-color {
-    color: #18a689;
-  }
-  .svd-text-color {
-    color: #676a6c;
-  }
   .svd-light-text-color {
-    color: #a7a7a7;
+    color: $light-text-color;
   }
   .svd-light-border-color {
     background-color: $light-border-color;

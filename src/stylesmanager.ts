@@ -7,42 +7,49 @@ export class StylesManager {
     default: {
       "$main-color": "#1ab394",
       "$text-color": "#676a6c",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     orange: {
       "$main-color": "#f78119",
       "$text-color": "#4a4a4a",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#e77109",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     darkblue: {
       "$main-color": "#3c4f6d",
       "$text-color": "#4a4a4a",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     darkrose: {
       "$main-color": "#68656e",
       "$text-color": "#4a4a4a",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     stone: {
       "$main-color": "#0f0f33",
       "$text-color": "#0f0f33",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#0f0f23",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     winter: {
       "$main-color": "#3c3b40",
       "$text-color": "#000",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#2c2b30",
       "$svd-svg-icon-color": "#3d4d5d"
     },
     winterstone: {
       "$main-color": "#5ac8fa",
       "$text-color": "#000",
+      "$light-text-color": "#a7a7a7",
       "$dark-main-color": "#18a689",
       "$svd-svg-icon-color": "#3d4d5d"
     }
@@ -70,7 +77,10 @@ export class StylesManager {
 
     ".svd_container .svd_custom_select:before":
       "background-color: $main-color;",
-    ".svd_container .form-control:focus": "border-color: $main-color;"
+    ".svd_container .form-control:focus": "border-color: $main-color;",
+
+    ".svd_container .svd-light-text-color": "color: $light-text-color;"
+  
   };
 
   private sheet: CSSStyleSheet = null;
