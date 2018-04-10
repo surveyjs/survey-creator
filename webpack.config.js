@@ -74,7 +74,7 @@ module.exports = function(options) {
       fileName: path.resolve(__dirname, "./src/svgbundle.html"),
       template: path.resolve(
         __dirname,
-        "./node_modules/webpack-svgstore-plugin/src/templates/layout.pug"
+        "./svgbundle.pug"
       ),
       svgoOptions: {
         plugins: [{ removeTitle: true }]
