@@ -10,7 +10,9 @@
     }
     .svd_toolbox_item {
       padding: 8px;
-      border-bottom: 1px solid $light-border-color;
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-style: solid;
       line-height: 1.2em;
       white-space: nowrap;
       overflow: hidden;

@@ -42,13 +42,13 @@
       height: 4em;
       padding: 1em 1.5em;
       font-weight: bold;
-      border: 1px solid $light-border-color;
+      border-width: 0;
+      border-width: 1px;
+      border-style: solid;
       border-bottom: none;
-      border-right: none;
-      &:last-child {
-        border-right: 1px solid $light-border-color;
+      &.svd-border-right-none {
+        border-right: none;
       }
-
       .svd-page-actions-container {
         display: inline-block;
         .svd-page-actions {
@@ -90,7 +90,9 @@
       max-width: 250px;
       line-height: 2.44em;
       height: 2.44em;
-      border: 1px solid $light-border-color;
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-style: solid;
       font-size: 14px;
       margin-bottom: 7px;
       select {

@@ -93,8 +93,11 @@ $icon-status-color: #9d9fa1;
   .svd-light-text-color {
     color: $light-text-color;
   }
-  .svd-light-border-color {
+  .svd-light-background-color {
     background-color: $light-border-color;
+  }
+  .svd-light-border-color {
+    border-color: $light-border-color;
   }
   .svd-dark-border-color {
     color: #ddd;

@@ -42,7 +42,7 @@
                         </div>
                         <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
                             <!-- ko foreach: items -->
-                            <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
+                            <div draggable="true" class="svd_toolbox_item svd-light-border-color" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                                 <span data-bind="attr: {title: title}">
                                     <svg-icon params="iconName: iconName"></svg-icon>
                                 </span>
@@ -56,7 +56,7 @@
                 <!-- ko if: !toolbox.koHasCategories() -->
                 <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <!-- ko foreach: toolbox.koItems -->
-                <div draggable="true" class="svd_toolbox_item" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
+                <div draggable="true" class="svd_toolbox_item svd-light-border-color" data-bind="click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                     <span data-bind="attr: {title: title}">
                         <svg-icon params="iconName: iconName"></svg-icon>
                     </span>
@@ -83,8 +83,8 @@
                     <!-- /ko -->
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-bg-color" data-bind="visible: koShowPropertyGrid">
-                <div class="svd_object_selector">
+            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-border-color svd-light-bg-color" data-bind="visible: koShowPropertyGrid">
+                <div class="svd_object_selector svd-light-border-color">
                     <div class="svd_custom_select">
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
