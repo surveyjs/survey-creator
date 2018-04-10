@@ -1,9 +1,17 @@
 .svd_container {
+  .svda_action_separator {
+    display: inline-block;
+    height: 16px;
+    border-width: 0;
+    border-left-width: 1px;
+    border-style: solid;
+    vertical-align: middle;
+  }
+
   pages-editor {
     display: block;
     width: 100%;
-    -border: 1px solid green;
-    webkit-touch-callout: none;
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -55,14 +63,12 @@
           box-shadow: 5px 5px 5px -5px $dd-menu-link-color;
           position: absolute;
           padding: 5px;
-          border: 1px solid $dark-border-color;
+          border-width: 1px;
+          border-style: solid;
           visibility: hidden;
           z-index: 1;
 
           .svda_action_separator {
-            display: inline-block;
-            height: 16px;
-            border-left: 1px solid $dark-border-color;
             vertical-align: middle;
             margin-left: 0.5em;
           }

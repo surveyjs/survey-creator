@@ -100,7 +100,7 @@ $icon-status-color: #9d9fa1;
     border-color: $light-border-color;
   }
   .svd-dark-border-color {
-    color: #ddd;
+    color: $dark-border-color;
   }
   .svd-light-bg-color {
     background-color: $light-bg-color;
@@ -109,21 +109,13 @@ $icon-status-color: #9d9fa1;
     background-color: $dark-bg-color;
   }
 
-  .svd-dd-menu-link-color {
-    color: #262626;
-  }
-
-  .svd-boolean-background {
-    color: #eee;
-  }
-
-  .svd-svd-svg-icon-color {
-    color: #3d4d5d;
-  }
-  .svd-icon-gear-color {
-    color: #d0d0d0;
-  }
-  .svd-icon-status-color {
-    color: #9d9fa1;
-  }
+  // .svd-svd-svg-icon-color {
+  //   color: #3d4d5d;
+  // }
+  // .svd-icon-gear-color {
+  //   color: #d0d0d0;
+  // }
+  // .svd-icon-status-color {
+  //   color: #9d9fa1;
+  // }
 }

@@ -12,7 +12,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     orange: {
       "$main-color": "#f78119",
@@ -22,7 +23,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "lightgray",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     darkblue: {
       "$main-color": "#3c4f6d",
@@ -32,7 +34,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     darkrose: {
       "$main-color": "#68656e",
@@ -42,7 +45,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     stone: {
       "$main-color": "#0f0f33",
@@ -52,7 +56,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     winter: {
       "$main-color": "#3c3b40",
@@ -62,7 +67,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     },
     winterstone: {
       "$main-color": "#5ac8fa",
@@ -72,7 +78,8 @@ export class StylesManager {
       "$svd-svg-icon-color": "#3d4d5d",
       "$light-bg-color": "#fff",
       "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec"
+      "$light-border-color": "#e7eaec",
+      "$dark-border-color": "#ddd"
     }
   };
   public static ThemeCss: { [key: string]: string } = {
@@ -119,7 +126,9 @@ export class StylesManager {
       "color: $main-color; background-color: $dark-bg-color; border: 1px solid $light-border-color; border-bottom-color: $dark-bg-color;",
 
     ".svd_container .svd-light-border-color":
-      "border-color: $light-border-color"
+      "border-color: $light-border-color",
+
+    ".svd_container .svd-dark-border-color": "border-color: $dark-border-color"
   };
 
   private sheet: CSSStyleSheet = null;

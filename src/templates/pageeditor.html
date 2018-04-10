@@ -14,7 +14,7 @@
             <span class="svd-page-actions-container">
                 <svg-icon data-bind="css: $parent.getPageMenuIconClass($data)" params="iconName: $parent.getPageMenuIconClass($data), size: 12"></svg-icon>
                 <div style="position: static">
-                    <div class="svd-page-actions svd-light-bg-color" data-bind="visible: $parent.showActions($data)">
+                    <div class="svd-page-actions svd-dark-border-color svd-light-bg-color" data-bind="visible: $parent.showActions($data)">
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
                             <span>
                                 <svg-icon class="svd-icon-green" params="iconName: 'icon-actioneditelement'"></svg-icon>
@@ -24,7 +24,7 @@
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()">
                             <svg-icon class="svd-icon-green" params="iconName: 'icon-actiondelete'"></svg-icon>
                         </span>
-                        <span class="svda_action_separator" data-bind="visible: !$parent.isLastPage()"></span>
+                        <span class="svda_action_separator svd-dark-border-color" data-bind="visible: !$parent.isLastPage()"></span>
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}">
                             <svg-icon class="svd-icon-green" params="iconName: 'icon-actioncopy'"></svg-icon>
                         </span>

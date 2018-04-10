@@ -22,7 +22,8 @@ select-items-editor {
 
     .svda-select-items-content {
       padding: 1em;
-      border: 1px solid $dark-border-color;
+      border-style: solid;
+      border-width: 1px;
       border-top: none;
     }
   }
