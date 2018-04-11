@@ -395,6 +395,11 @@
     line-height: inherit;
   }
 
+  .sjs-cb-container .checkmark:after {
+    left: 6px;
+    top: 3px;
+  }
+
   .nav-tabs {
     margin-bottom: 6px;
   }
