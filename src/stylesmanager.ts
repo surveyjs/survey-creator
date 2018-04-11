@@ -84,6 +84,7 @@ export class StylesManager {
   };
   public static ThemeCss: { [key: string]: string } = {
     ".svd_container": "color: $text-color;",
+
     ".svd_container a": "color: $main-color;",
     ".svd_container a:hover": "color: $dark-main-color;",
     ".svd_container .svd-main-color": "color: $main-color;",
@@ -91,7 +92,7 @@ export class StylesManager {
     ".svd_container .svd-main-background-color":
       "background-color: $main-color;",
     ".svd_container .btn-primary":
-      "background-color: $main-color; border-color: $main-color;",
+      "color: $light-bg-color; background-color: $main-color; border-color: $main-color;",
     ".svd_container .svd-svg-icon": "fill: $svd-svg-icon-color;",
     ".svd_container .svd-icon-green .svd-svg-icon": "fill: $main-color;",
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $main-color;",

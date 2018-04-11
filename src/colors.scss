@@ -26,6 +26,10 @@ $icon-status-color: #9d9fa1;
     color: $dark-main-color;
   }
 
+  .btn-primary {
+    color: $light-bg-color;
+  }
+
   .sjs-cb-container:hover input ~ .checkmark {
     background-color: $dd-menu-border;
   }
