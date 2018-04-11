@@ -494,7 +494,20 @@
         .modal-header {
           padding: 15px;
           border-bottom: 1px solid #e5e5e5;
+          h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+          }
           button.close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=20);
+            opacity: 0.2;
             -webkit-appearance: none;
             padding: 0;
             cursor: pointer;
