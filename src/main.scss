@@ -396,16 +396,32 @@
   }
 
   .nav-tabs {
-    margin-bottom: 6px;
+    margin-bottom: 0;
+    padding: 0;
+    // border-bottom: 1px solid $dark-border-color;
+    line-height: 2.5em;
   }
   .nav-item {
     display: inline-block;
     margin-left: -3px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
   .nav-link {
     border-radius: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     padding: 0.5em 1em;
     text-align: center;
+    background-color: $light-bg-color;
+    &.active {
+      border: 1px solid $dark-border-color;
+      border-bottom-color: transparent;
+    }
+    &:hover {
+      background-color: $dark-border-color;
+    }
   }
 
   .svd_toolbox {
@@ -435,6 +451,7 @@
         question-actions {
           .svda_question_action {
             display: inline-block;
+            font-size: 12px;
             .icon-actiondragelement {
               bottom: 0;
             }
