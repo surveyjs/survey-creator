@@ -1826,7 +1826,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
 }
 
-Survey.Survey.cssType = "bootstrap";
+// Survey.Survey.cssType = "bootstrap";
 
 var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
 koSurveyTemplate = koSurveyTemplate.replace(

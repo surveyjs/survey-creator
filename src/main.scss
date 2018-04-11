@@ -341,3 +341,126 @@
     }
   }
 }
+
+.svd_container {
+  a {
+    text-decoration: unset;
+  }
+  .btn,
+  .btn:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    span {
+      display: inline-block;
+      padding: 1px;
+    }
+  }
+  .btn[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 0.65;
+  }
+
+  input,
+  .form-control {
+    padding: 6px 12px;
+    line-height: 1.5em;
+  }
+
+  select,
+  textarea {
+    line-height: inherit;
+  }
+
+  .navbar-default {
+    margin-bottom: 6px;
+  }
+
+  .nav-item {
+    display: inline-block;
+    margin-left: -3px;
+  }
+
+  .svd_toolbox {
+    float: left;
+    width: 15%;
+  }
+  .svd_editors {
+    display: inline-block;
+    width: 60%;
+    padding: 0 15px;
+  }
+  .svd_properties {
+    float: right;
+    width: 25%;
+  }
+
+  #surveyjs {
+    .sv_row {
+      background-color: transparent;
+      .svd_question {
+        margin-top: 2em;
+        // question-actions {
+        //   .svda_question_action {
+        //     display: inline-block;
+        //   }
+        // }
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+
+    .modal-dialog {
+      position: relative;
+      max-width: 600px;
+      margin: 30px auto;
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        .modal-header {
+          padding: 15px;
+          border-bottom: 1px solid #e5e5e5;
+          button.close {
+            -webkit-appearance: none;
+            padding: 0;
+            cursor: pointer;
+            background: 0 0;
+            border: 0;
+          }
+        }
+        .modal-body {
+          padding: 15px;
+        }
+        .modal-footer {
+          padding: 15px;
+          text-align: right;
+          border-top: 1px solid #e5e5e5;
+        }
+      }
+    }
+  }
+}
