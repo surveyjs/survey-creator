@@ -414,6 +414,10 @@
       display: table-cell;
     }
 
+    .form-control {
+      float: left;
+    }
+
     .input-group-addon {
       padding: 6px 12px;
       font-size: 14px;
@@ -512,6 +516,10 @@
               bottom: 0;
             }
           }
+        }
+        .svda-select-items-title {
+          top: -1.8em;
+          right: 2.5em;
         }
       }
     }
