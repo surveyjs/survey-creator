@@ -365,6 +365,13 @@
     opacity: 0.65;
   }
 
+  :after,
+  :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
   label {
     display: inline-block;
     max-width: 100%;
@@ -393,11 +400,6 @@
   select,
   textarea {
     line-height: inherit;
-  }
-
-  .sjs-cb-container .checkmark:after {
-    left: 6px;
-    top: 3px;
   }
 
   .nav-tabs {
