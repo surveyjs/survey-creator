@@ -365,6 +365,17 @@
     opacity: 0.65;
   }
 
+  label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
   input,
   .form-control {
     padding: 6px 12px;
@@ -376,13 +387,17 @@
     line-height: inherit;
   }
 
-  .navbar-default {
+  .nav-tabs {
     margin-bottom: 6px;
   }
-
   .nav-item {
     display: inline-block;
     margin-left: -3px;
+  }
+  .nav-link {
+    border-radius: 0;
+    padding: 0.5em 1em;
+    text-align: center;
   }
 
   .svd_toolbox {
