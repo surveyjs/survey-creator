@@ -397,7 +397,9 @@
     height: 34px;
     &.svd_custom_select {
       padding: 0;
-      height: auto;
+      select {
+        height: 32px;
+      }
     }
   }
 
@@ -434,6 +436,18 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
+    }
+  }
+
+  .form-inline {
+    .input-group {
+      display: inline-table;
+      vertical-align: middle;
+    }
+    .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
     }
   }
 
