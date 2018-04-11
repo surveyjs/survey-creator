@@ -382,6 +382,14 @@
     line-height: 1.5em;
   }
 
+  .form-control {
+    border: 1px solid $dd-menu-border;
+    display: block;
+    width: 100%;
+    height: 34px;
+    font-size: 14px;
+  }
+
   select,
   textarea {
     line-height: inherit;
