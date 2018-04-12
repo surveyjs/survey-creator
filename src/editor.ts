@@ -61,7 +61,7 @@ export interface IToolbarItem {
  */
 
 export class SurveyEditor implements ISurveyObjectEditorOptions {
-  private static stylesManager = new StylesManager();
+  public currentTheme = "bootstrap";
 
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private _haveCommercialLicense = ko.observable(false);
@@ -451,6 +451,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koCanDeleteObject = ko.observable(false);
 
     var self = this;
+
+    this.currentTheme = StylesManager.currentTheme;
 
     this.pages = ko.observableArray<Survey.Page>();
 

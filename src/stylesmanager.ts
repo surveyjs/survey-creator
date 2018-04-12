@@ -154,10 +154,18 @@ export class StylesManager {
     return <CSSStyleSheet>style.sheet;
   }
 
+  public static currentTheme = "bootstrap";
+
   public static applyTheme(
     themeName: string = "default",
     themeSelector: string = ".svd_container"
   ) {
+    StylesManager.currentTheme = themeName;
+
+    if (themeName === "default") {
+      themeSelector += " .svd-bootstrap-theme";
+    }
+
     let sheet = StylesManager.findSheet(themeName + themeSelector);
     if (!sheet) {
       sheet = StylesManager.createSheet(themeName + themeSelector);
