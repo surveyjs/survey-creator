@@ -129,9 +129,13 @@ export class StylesManager {
     ".svd_container .svd-light-border-color":
       "border-color: $light-border-color",
 
-    ".svd_container .svd-dark-border-color": "border-color: $dark-border-color"
-  };
+    ".svd_container .svd-dark-border-color": "border-color: $dark-border-color",
 
+    ".svd_container .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow":
+      "background:  $main-color;",
+    ".svd_container .select2-container .select2-selection--single .select2-selection__arrow":
+      "background:  $main-color;"
+  };
   private sheet: CSSStyleSheet = null;
 
   static findSheet(styleSheetId: string) {
