@@ -166,10 +166,6 @@ export class StylesManager {
   ) {
     StylesManager.currentTheme = themeName;
 
-    if (themeName === "default") {
-      themeSelector += " .svd-bootstrap-theme";
-    }
-
     let sheet = StylesManager.findSheet(themeName + themeSelector);
     if (!sheet) {
       sheet = StylesManager.createSheet(themeName + themeSelector);

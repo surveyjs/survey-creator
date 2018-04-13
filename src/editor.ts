@@ -453,8 +453,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var self = this;
 
     this.currentTheme = StylesManager.currentTheme;
+    Survey.Survey.cssType =
+      this.currentTheme === "bootstrap" ? "bootstrap" : "default";
     Survey.StylesManager.applyTheme(this.currentTheme);
-    
+
     this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
@@ -592,6 +594,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.text = "";
 
     this.addToolbarItems();
+  }
+
+  get themeCss() {
+    return this.currentTheme === "bootstrap"
+      ? "sv_bootstrap_css"
+      : "sv_default_css";
   }
 
   protected addToolbarItems() {
@@ -1828,8 +1836,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     return res;
   }
 }
-
-// Survey.Survey.cssType = "bootstrap";
 
 var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
 koSurveyTemplate = koSurveyTemplate.replace(
