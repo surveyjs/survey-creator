@@ -21,6 +21,7 @@ if (!window["%hammerhead%"]) {
   // SurveyEditor.editorLocalization.currentLocale = "es";\
   // SurveyEditor.StylesManager.applyTheme("winter");
   var editor = new SurveyEditor.SurveyEditor("editorElement");
+  SurveyEditor.StylesManager.applyTheme("orange");
   //editor.surveyId = '5af48e08-a0a5-44a5-83f4-1c90e8e98de1';
   //editor.surveyPostId = '3ce10f8b-2d8a-4ca2-a110-2994b9e697a1';
   editor.saveSurveyFunc = function(saveNo, callback) {

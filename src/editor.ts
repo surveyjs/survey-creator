@@ -61,8 +61,6 @@ export interface IToolbarItem {
  */
 
 export class SurveyEditor implements ISurveyObjectEditorOptions {
-  public currentTheme = "bootstrap";
-
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private _haveCommercialLicense = ko.observable(false);
   private renderedElement: HTMLElement;
@@ -452,11 +450,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     var self = this;
 
-    this.currentTheme = StylesManager.currentTheme;
-    Survey.Survey.cssType =
-      this.currentTheme === "bootstrap" ? "bootstrap" : "default";
-    Survey.StylesManager.applyTheme(this.currentTheme);
-
     this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
@@ -596,11 +589,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.addToolbarItems();
   }
 
-  get themeCss() {
-    return this.currentTheme === "bootstrap"
+  themeCss = ko.computed(() => {
+    return StylesManager.currentTheme() === "bootstrap"
       ? "sv_bootstrap_css"
       : "sv_default_css";
-  }
+  });
 
   protected addToolbarItems() {
     this.toolbarItems.push({

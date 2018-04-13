@@ -1,3 +1,5 @@
+import * as Survey from "survey-knockout";
+
 export class StylesManager {
   private static SurveyJSStylesSheetId = "surveyjs";
 
@@ -158,13 +160,16 @@ export class StylesManager {
     return <CSSStyleSheet>style.sheet;
   }
 
-  public static currentTheme = "bootstrap";
+  public static currentTheme = ko.observable("bootstrap");
 
   public static applyTheme(
     themeName: string = "default",
     themeSelector: string = ".svd_container"
   ) {
-    StylesManager.currentTheme = themeName;
+    StylesManager.currentTheme(themeName);
+    Survey.Survey.cssType =
+      this.currentTheme() === "bootstrap" ? "bootstrap" : "default";
+    Survey.StylesManager.applyTheme(themeName);
 
     let sheet = StylesManager.findSheet(themeName + themeSelector);
     if (!sheet) {
