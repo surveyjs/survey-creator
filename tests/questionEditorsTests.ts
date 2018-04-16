@@ -78,7 +78,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   generalTab.properties.rows[0].properties[0].editor.koValue("newName");
   generalTab.properties.rows[1].properties[0].editor.koValue("new title");
   var visibleIfTab = <SurveyQuestionEditorTab>editor.koTabs()[
-    editor.koTabs().length - 1
+    editor.koTabs().length - 2
   ];
   visibleIfTab.properties.rows[0].properties[0].editor["koValue"]("false");
   editor.apply();
@@ -91,7 +91,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var editor = new SurveyQuestionEditor(radioGroupQuestion, null);
-  assert.equal(editor.koTabs().length, 4, "There are 4 tabs");
+  assert.equal(editor.koTabs().length, 5, "There are 5 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
@@ -135,11 +135,21 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
     radioGroupQuestion,
     onCanShowPropertyCallback
   );
-  assert.equal(editor.koTabs().length, 3, "There are 3 tabs");
+  assert.equal(editor.koTabs().length, 4, "There are 4 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
     "The name of the second tab is 'choices'"
+  );
+  assert.equal(
+    editor.koTabs()[2].name,
+    "choicesByUrl",
+    "The name of the second tab is 'choicesByUrl'"
+  );
+  assert.equal(
+    editor.koTabs()[3].name,
+    "enableIf",
+    "The name of the second tab is 'enableIf'"
   );
   var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
   var hasFound = false;
@@ -345,9 +355,10 @@ QUnit.test("Question editor definition: getProperties", function(assert) {
 
 QUnit.test("Question editor definition: getTabs", function(assert) {
   var tabs = SurveyQuestionEditorDefinition.getTabs("rating");
-  assert.equal(tabs.length, 2, "Rating has two tabs");
+  assert.equal(tabs.length, 3, "Rating has three tabs");
   assert.equal(tabs[0].name, "rateValues", "The first tab");
   assert.equal(tabs[1].name, "visibleIf", "The last tab");
+  assert.equal(tabs[2].name, "enableIf", "The last tab");
 });
 
 QUnit.test("Question editor: custom errors", function(assert) {
