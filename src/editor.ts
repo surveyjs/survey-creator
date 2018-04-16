@@ -450,6 +450,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     var self = this;
 
+    StylesManager.applyTheme(StylesManager.currentTheme());
+
     this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
