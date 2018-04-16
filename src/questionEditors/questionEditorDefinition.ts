@@ -24,7 +24,10 @@ export class SurveyQuestionEditorDefinition {
         { name: "isRequired", category: "checks" },
         { name: "startWithNewLine", category: "checks" }
       ],
-      tabs: [{ name: "visibleIf", index: 100 }]
+      tabs: [
+        { name: "visibleIf", index: 100 },
+        { name: "enableIf", index: 110 }
+      ]
     },
     comment: {
       properties: ["rows", "placeHolder"]
