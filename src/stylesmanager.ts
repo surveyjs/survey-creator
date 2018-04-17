@@ -14,7 +14,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -28,7 +27,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#e77109",
-      "$secondary-hover-color": "#3a3a3a",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -51,7 +49,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -65,7 +62,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -79,7 +75,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#0f0f23",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -93,7 +88,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#2c2b30",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -107,7 +101,6 @@ export class StylesManager {
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
-      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -124,12 +117,8 @@ export class StylesManager {
     ".svd_container .svd-main-border-color": "border-color: $primary-color;",
     ".svd_container .svd-main-background-color":
       "background-color: $primary-color;",
-    ".svd_container .svd-secondary-background-color":
-      "background-color: $secondary-color;",
     ".svd_container .svd-light-background-color":
       "background-color: $primary-border-color;",
-    ".svd_container .svd-secondary-light-background-color":
-      "background-color: $secondary-hover-color;",
 
     ".svd_container .btn-primary":
       "color: $inverted-text-color; background-color: $secondary-color; border-color: $secondary-color;",
@@ -142,7 +131,7 @@ export class StylesManager {
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
     ".svd_container .sjs-cb-container:hover input:checked ~ .checkmark":
-      "background-color: $secondary-hover-color",
+      "background-color: $primary-hover-color",
 
     ".svd_container .svd_custom_select:before":
       "background-color: $primary-color;",
