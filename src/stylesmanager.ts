@@ -12,7 +12,9 @@ export class StylesManager {
       "$secondary-color": "#1ab394",
       "$primary-text-color": "#676a6c",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -21,22 +23,35 @@ export class StylesManager {
     },
     orange: {
       "$primary-color": "#f78119",
-      "$secondary-color": "rgb(74, 74, 74)",
-      "$primary-text-color": "#4a4a4a",
+      "$secondary-color": "#4a4a4a",
+      "$primary-text-color": "#676a6c",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#e77109",
+      "$secondary-hover-color": "#3a3a3a",
       "$primary-icon-color": "#3d4d5d",
-      "$primary-bg-color": "lightgray",
+      "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd"
+
+      // "$primary-text-color": "#4a4a4a",
+      // "$secondary-text-color": "#a7a7a7",
+      // "$inverted-text-color": "#ffffff",
+      // "$primary-icon-color": "#3d4d5d",
+      // "$primary-bg-color": "lightgray",
+      // "$secondary-bg-color": "#f4f4f4",
+      // "$primary-border-color": "#e7eaec",
+      // "$secondary-border-color": "#ddd"
     },
     darkblue: {
       "$primary-color": "#3c4f6d",
       "$secondary-color": "rgb(74, 74, 74)",
       "$primary-text-color": "#4a4a4a",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -48,7 +63,9 @@ export class StylesManager {
       "$secondary-color": "rgb(74, 74, 74)",
       "$primary-text-color": "#4a4a4a",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -60,7 +77,9 @@ export class StylesManager {
       "$secondary-color": "rgb(74, 74, 74)",
       "$primary-text-color": "#0f0f33",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#0f0f23",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -72,7 +91,9 @@ export class StylesManager {
       "$secondary-color": "rgb(74, 74, 74)",
       "$primary-text-color": "#000",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#2c2b30",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -84,7 +105,9 @@ export class StylesManager {
       "$secondary-color": "rgb(74, 74, 74)",
       "$primary-text-color": "#000",
       "$secondary-text-color": "#a7a7a7",
+      "$inverted-text-color": "#ffffff",
       "$primary-hover-color": "#18a689",
+      "$secondary-hover-color": "#e7eaec",
       "$primary-icon-color": "#3d4d5d",
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
@@ -101,8 +124,15 @@ export class StylesManager {
     ".svd_container .svd-main-border-color": "border-color: $primary-color;",
     ".svd_container .svd-main-background-color":
       "background-color: $primary-color;",
+    ".svd_container .svd-secondary-background-color":
+      "background-color: $secondary-color;",
+    ".svd_container .svd-light-background-color":
+      "background-color: $primary-border-color;",
+    ".svd_container .svd-secondary-light-background-color":
+      "background-color: $secondary-hover-color;",
+
     ".svd_container .btn-primary":
-      "color: $primary-bg-color; background-color: $primary-color; border-color: $primary-color;",
+      "color: $inverted-text-color; background-color: $secondary-color; border-color: $secondary-color;",
     ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
     ".svd_container .svd-icon-green .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
@@ -112,7 +142,7 @@ export class StylesManager {
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
     ".svd_container .sjs-cb-container:hover input:checked ~ .checkmark":
-      "background-color: $primary-hover-color",
+      "background-color: $secondary-hover-color",
 
     ".svd_container .svd_custom_select:before":
       "background-color: $primary-color;",

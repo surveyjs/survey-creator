@@ -474,13 +474,9 @@
     border-top-right-radius: 2px;
     padding: 0.5em 1em;
     text-align: center;
-    background-color: $primary-bg-color;
     &.active {
       border: 1px solid $secondary-border-color;
       border-bottom-color: transparent;
-    }
-    &:hover {
-      background-color: $secondary-border-color;
     }
   }
 

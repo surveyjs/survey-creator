@@ -2,9 +2,11 @@ $primary-color: #1ab394;
 $secondary-color: #1ab394;
 
 $primary-hover-color: #18a689;
+$secondary-hover-color: #18a689;
 
 $primary-text-color: #676a6c;
 $secondary-text-color: #a7a7a7;
+$inverted-text-color: #ffffff;
 
 $primary-bg-color: #ffffff;
 $secondary-bg-color: #f4f4f4;
@@ -30,7 +32,9 @@ $icon-status-color: #9d9fa1;
   }
 
   .btn-primary {
-    color: $primary-bg-color;
+    color: $inverted-text-color;
+    background-color: $secondary-color;
+    border-color: $secondary-color;
   }
 
   .sjs-cb-container:hover input ~ .checkmark {
@@ -38,7 +42,7 @@ $icon-status-color: #9d9fa1;
   }
 
   .sjs-cb-container:hover input:checked ~ .checkmark {
-    background-color: $primary-hover-color;
+    background-color: $secondary-hover-color;
   }
 
   .svd_selected_page {
@@ -59,6 +63,12 @@ $icon-status-color: #9d9fa1;
   }
   .nav-tabs > li.active > a {
     color: $primary-color;
+  }
+  .nav-link {
+    background-color: transparent;
+    &:hover {
+      background-color: $secondary-border-color;
+    }
   }
 
   .editor-tabs > li > a {
@@ -82,16 +92,17 @@ $icon-status-color: #9d9fa1;
     border-color: $primary-color;
   }
 
-  .btn-primary {
-    background-color: $primary-color;
-    border-color: $primary-color;
-  }
-
   .svd-main-color {
     color: $primary-color;
   }
   .svd-main-background-color {
     background-color: $primary-color;
+  }
+  .svd-secondary-background-color {
+    background-color: $secondary-color;
+  }
+  .svd-secondary-light-background-color {
+    background-color: $secondary-hover-color;
   }
   .svd-main-border-color {
     border-color: $primary-color;
