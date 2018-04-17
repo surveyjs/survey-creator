@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 import { findParentNode } from "./utils/utils";
+import { StylesManager } from "./stylesmanager";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -197,10 +198,10 @@ function elementOnAfterRendering(
   disable: boolean
 ) {
   surveyElement.renderedElement = domElement;
-  surveyElement.renderedElement.classList.add(
-    "svd_question",
-    "svd-dark-bg-color"
-  );
+  surveyElement.renderedElement.classList.add("svd_question");
+  if (StylesManager.currentTheme() === "bootstrap") {
+    surveyElement.renderedElement.classList.add("svd-dark-bg-color");
+  }
   surveyElement.renderedElement.classList.add("svd_q_design_border");
   getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
   if (surveyElement.koIsSelected())
