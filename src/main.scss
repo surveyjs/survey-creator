@@ -15,6 +15,12 @@
     "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
 
+  #surveyjs {
+    .svd_question {
+      overflow: visible;
+    }
+  }
+
   .svd-textitems-column {
     width: 100%;
     display: inline-block;
