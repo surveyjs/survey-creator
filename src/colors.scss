@@ -76,6 +76,9 @@ $icon-status-color: #9d9fa1;
       background-color: $secondary-border-color;
     }
   }
+  .nav-item.active .nav-link {
+    background-color: $primary-bg-color;
+  }
 
   .editor-tabs > li > a {
     &:hover,

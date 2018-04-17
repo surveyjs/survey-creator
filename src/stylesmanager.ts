@@ -131,6 +131,7 @@ export class StylesManager {
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .nav-tabs a": "color: $primary-text-color",
     ".svd_container .nav-tabs > li.active > a": "color: $primary-color",
+    ".svd_container .nav-item.active .nav-link": "background-color: $primary-bg-color;",
 
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
