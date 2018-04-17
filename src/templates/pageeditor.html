@@ -4,7 +4,7 @@
     </div>
     <div class="svd-page-scroller-arrow" data-bind="click: moveLeft, attr: {title: getLocString('ed.moveLeft')}">
         <span>
-            <svg-icon class="svd-icon-green" params="iconName: 'icon-left'"></svg-icon>
+            <svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon>
         </span>
     </div>
 
@@ -17,16 +17,16 @@
                     <div class="svd-page-actions svd-dark-border-color svd-light-bg-color" data-bind="visible: $parent.showActions($data)">
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
                             <span>
-                                <svg-icon class="svd-icon-green" params="iconName: 'icon-actioneditelement'"></svg-icon>
+                                <svg-icon class="svd-primary-icon" params="iconName: 'icon-actioneditelement'"></svg-icon>
                             </span>
                             <span class="svd-main-color" data-bind="text: $parent.getLocString('ed.edit')"></span>
                         </span>
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()">
-                            <svg-icon class="svd-icon-green" params="iconName: 'icon-actiondelete'"></svg-icon>
+                            <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
                         </span>
                         <span class="svda_action_separator svd-dark-border-color" data-bind="visible: !$parent.isLastPage()"></span>
                         <span class="svd-page-action" data-bind="click: function(model, event) {$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}">
-                            <svg-icon class="svd-icon-green" params="iconName: 'icon-actioncopy'"></svg-icon>
+                            <svg-icon class="svd-primary-icon" params="iconName: 'icon-actioncopy'"></svg-icon>
                         </span>
                     </div>
                 </div>
@@ -35,12 +35,12 @@
     </div>
     <div class="svd-page-scroller-arrow" data-bind="click: moveRight, attr: {title: getLocString('ed.moveRight')}">
         <span>
-            <svg-icon class="svd-icon-green" params="iconName: 'icon-right'"></svg-icon>
+            <svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon>
         </span>
     </div>
     <div class="svd-page-add" data-bind="click: addPage, attr: {title: getLocString('ed.addNewPage')}">
         <span>
-            <svg-icon class="svd-icon-green" params="iconName: 'icon-add'"></svg-icon>
+            <svg-icon class="svd-secondary-icon" params="iconName: 'icon-add'"></svg-icon>
         </span>
     </div>
 </script>

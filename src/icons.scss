@@ -11,9 +11,14 @@
     vertical-align: middle;
     fill: $primary-icon-color;
   }
-  .svd-icon-green {
+  .svd-primary-icon {
     .svd-svg-icon {
       fill: $primary-color;
+    }
+  }
+  .svd-secondary-icon {
+    .svd-svg-icon {
+      fill: $secondary-color;
     }
   }
 

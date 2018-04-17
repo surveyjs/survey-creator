@@ -114,7 +114,7 @@ export class StylesManager {
     ".svd_container a": "color: $primary-color;",
     ".svd_container a:hover": "color: $primary-hover-color;",
     ".svd_container .svd-main-color": "color: $primary-color;",
-    ".svd_container .svd-main-border-color": "border-color: $primary-color;",
+    ".svd_container .svd-main-border-color": "border-color: $secondary-color;",
     ".svd_container .svd-main-background-color":
       "background-color: $primary-color;",
     ".svd_container .svd-light-background-color":
@@ -122,8 +122,13 @@ export class StylesManager {
 
     ".svd_container .btn-primary":
       "color: $inverted-text-color; background-color: $secondary-color; border-color: $secondary-color;",
+    ".svd_container .btn-link":
+      "color: $primary-text-color; background-color: $secondary-bg-color; border-color: $secondary-bg-color;",
+
     ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
-    ".svd_container .svd-icon-green .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .svd-primary-icon .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .svd-secondary-icon .svd-svg-icon":
+      "fill: $secondary-color;",
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .nav-tabs a": "color: $primary-text-color",
     ".svd_container .nav-tabs > li.active > a": "color: $primary-color",

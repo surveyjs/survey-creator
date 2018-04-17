@@ -156,7 +156,7 @@ export var itemDraggableAdorner = {
     });
     var addNew = document.createElement("div");
     addNew.title = editorLocalization.getString("pe.addItem");
-    addNew.className = "svda-add-new-item svd-icon-green";
+    addNew.className = "svda-add-new-item svd-primary-icon";
     addNew.onclick = createAddItemHandler(model, itemValue =>
       editor.onQuestionEditorChanged(model)
     );

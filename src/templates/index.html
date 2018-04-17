@@ -3,7 +3,7 @@
     <div class="svd_commercial_container">
         <a class="svd_commercial_text" href="https://surveyjs.io/Licenses#BuildSurvey" target="_blank">
             <span>
-                <svg-icon class="svd-icon-green" params="iconName: 'icon-noncommercial', size: 20"></svg-icon>
+                <svg-icon class="svd-primary-icon" params="iconName: 'icon-noncommercial', size: 20"></svg-icon>
             </span>
             <span class="svd_commercial_product svd-main-color">SurveyJS Builder</span>
             <span class="svd_noncommercial_use svd-light-text-color">for non-commercial use only</span>
@@ -37,7 +37,7 @@
                             <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
                             <!-- /ko -->
                             <!-- ko ifnot: koCollapsed -->
-                            <svg-icon class="icon-toolbox-arrow svd-icon-green" params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
+                            <svg-icon class="icon-toolbox-arrow svd-primary-icon" params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
                             <!-- /ko -->
                         </div>
                         <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
@@ -89,7 +89,7 @@
                         <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
                     <span data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}">
-                        <svg-icon class="svd-icon-green icon-edit" params="iconName: 'icon-edit', size:24"></svg-icon>
+                        <svg-icon class="svd-primary-icon icon-edit" params="iconName: 'icon-edit', size:24"></svg-icon>
                     </span>
                 </div>
                 <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">

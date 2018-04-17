@@ -36,6 +36,12 @@ $icon-status-color: #9d9fa1;
     border-color: $secondary-color;
   }
 
+  .btn-link {
+    color: $primary-text-color;
+    background-color: $secondary-bg-color;
+    border-color: $secondary-bg-color;
+  }
+
   .sjs-cb-container:hover input ~ .checkmark {
     background-color: $dd-menu-border;
   }
@@ -98,7 +104,7 @@ $icon-status-color: #9d9fa1;
     background-color: $primary-color;
   }
   .svd-main-border-color {
-    border-color: $primary-color;
+    border-color: $secondary-color;
   }
 
   .svd-light-text-color {
