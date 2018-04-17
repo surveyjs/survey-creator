@@ -111,7 +111,7 @@
             font-weight: 400;
             display: block;
             &:hover {
-              background-color: $dark-bg-color;
+              background-color: $secondary-bg-color;
               text-decoration: none;
             }
           }
@@ -126,7 +126,7 @@
       border: 1px solid $dd-menu-border;
       height: 34px;
       .select2-selection__arrow {
-        background: $main-color;
+        background: $primary-color;
         height: 34px;
         top: 0px;
         right: 0px;
@@ -424,8 +424,8 @@
       font-weight: 400;
       line-height: 1;
       text-align: center;
-      background-color: $light-border-color;
-      border: 1px solid $dark-border-color;
+      background-color: $primary-border-color;
+      border: 1px solid $secondary-border-color;
       border-radius: 2px;
       width: 1%;
       white-space: nowrap;
@@ -458,7 +458,7 @@
   .nav-tabs {
     margin-bottom: 0;
     padding: 0;
-    // border-bottom: 1px solid $dark-border-color;
+    // border-bottom: 1px solid $secondary-border-color;
     line-height: 2.5em;
   }
   .nav-item {
@@ -474,13 +474,13 @@
     border-top-right-radius: 2px;
     padding: 0.5em 1em;
     text-align: center;
-    background-color: $light-bg-color;
+    background-color: $primary-bg-color;
     &.active {
-      border: 1px solid $dark-border-color;
+      border: 1px solid $secondary-border-color;
       border-bottom-color: transparent;
     }
     &:hover {
-      background-color: $dark-border-color;
+      background-color: $secondary-border-color;
     }
   }
 

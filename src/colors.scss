@@ -1,33 +1,36 @@
-$main-color: #1ab394;
-$dark-main-color: #18a689;
-$text-color: #676a6c;
-$light-text-color: #a7a7a7;
+$primary-color: #1ab394;
+$secondary-color: #1ab394;
 
-$light-bg-color: #ffffff;
-$dark-bg-color: #f4f4f4;
+$primary-hover-color: #18a689;
 
-$light-border-color: #e7eaec;
-$dark-border-color: #ddd;
+$primary-text-color: #676a6c;
+$secondary-text-color: #a7a7a7;
+
+$primary-bg-color: #ffffff;
+$secondary-bg-color: #f4f4f4;
+
+$primary-border-color: #e7eaec;
+$secondary-border-color: #ddd;
 
 $dd-menu-border: #ccc;
 $dd-menu-link-color: #262626;
 
-$svd-svg-icon-color: #3d4d5d;
+$primary-icon-color: #3d4d5d;
 $icon-gear-color: #d0d0d0;
 $icon-status-color: #9d9fa1;
 
 .svd_container {
-  color: $text-color;
+  color: $primary-text-color;
 
   a {
-    color: $main-color;
+    color: $primary-color;
   }
   a:hover {
-    color: $dark-main-color;
+    color: $primary-hover-color;
   }
 
   .btn-primary {
-    color: $light-bg-color;
+    color: $primary-bg-color;
   }
 
   .sjs-cb-container:hover input ~ .checkmark {
@@ -35,16 +38,16 @@ $icon-status-color: #9d9fa1;
   }
 
   .sjs-cb-container:hover input:checked ~ .checkmark {
-    background-color: $dark-main-color;
+    background-color: $primary-hover-color;
   }
 
   .svd_selected_page {
-    border-bottom: 1px solid $light-bg-color;
+    border-bottom: 1px solid $primary-bg-color;
   }
 
   .svd_toolbar li.active a {
-    background-color: $main-color;
-    color: $light-bg-color;
+    background-color: $primary-color;
+    color: $primary-bg-color;
   }
 
   .svd_toolbar li a {
@@ -52,65 +55,65 @@ $icon-status-color: #9d9fa1;
   }
 
   .nav-tabs a {
-    color: $text-color;
+    color: $primary-text-color;
   }
   .nav-tabs > li.active > a {
-    color: $main-color;
+    color: $primary-color;
   }
 
   .editor-tabs > li > a {
     &:hover,
     &:focus {
-      background-color: $dark-bg-color;
-      border-bottom: 1px solid $dark-bg-color;
+      background-color: $secondary-bg-color;
+      border-bottom: 1px solid $secondary-bg-color;
     }
   }
   .editor-tabs > li.active > a {
-    color: $main-color;
-    background-color: $dark-bg-color;
-    border: 1px solid $light-border-color;
-    border-bottom-color: $dark-bg-color;
+    color: $primary-color;
+    background-color: $secondary-bg-color;
+    border: 1px solid $primary-border-color;
+    border-bottom-color: $secondary-bg-color;
   }
 
   .svd_custom_select:before {
-    background-color: $main-color;
+    background-color: $primary-color;
   }
   .form-control:focus {
-    border-color: $main-color;
+    border-color: $primary-color;
   }
 
   .btn-primary {
-    background-color: $main-color;
-    border-color: $main-color;
+    background-color: $primary-color;
+    border-color: $primary-color;
   }
 
   .svd-main-color {
-    color: $main-color;
+    color: $primary-color;
   }
   .svd-main-background-color {
-    background-color: $main-color;
+    background-color: $primary-color;
   }
   .svd-main-border-color {
-    border-color: $main-color;
+    border-color: $primary-color;
   }
 
   .svd-light-text-color {
-    color: $light-text-color;
+    color: $secondary-text-color;
   }
   .svd-light-background-color {
-    background-color: $light-border-color;
+    background-color: $primary-border-color;
   }
   .svd-light-border-color {
-    border-color: $light-border-color;
+    border-color: $primary-border-color;
   }
   .svd-dark-border-color {
-    color: $dark-border-color;
+    color: $secondary-border-color;
   }
   .svd-light-bg-color {
-    background-color: $light-bg-color;
+    background-color: $primary-bg-color;
   }
   .svd-dark-bg-color {
-    background-color: $dark-bg-color;
+    background-color: $secondary-bg-color;
   }
 
   // .svd-svd-svg-icon-color {

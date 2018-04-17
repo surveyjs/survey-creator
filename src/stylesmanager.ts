@@ -8,136 +8,145 @@ export class StylesManager {
 
   public static ThemeColors: { [key: string]: { [key: string]: string } } = {
     default: {
-      "$main-color": "#1ab394",
-      "$text-color": "#676a6c",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#1ab394",
+      "$secondary-color": "#1ab394",
+      "$primary-text-color": "#676a6c",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#18a689",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     orange: {
-      "$main-color": "#f78119",
-      "$text-color": "#4a4a4a",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#e77109",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "lightgray",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#f78119",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#4a4a4a",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#e77109",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "lightgray",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     darkblue: {
-      "$main-color": "#3c4f6d",
-      "$text-color": "#4a4a4a",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#3c4f6d",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#4a4a4a",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#18a689",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     darkrose: {
-      "$main-color": "#68656e",
-      "$text-color": "#4a4a4a",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#68656e",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#4a4a4a",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#18a689",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     stone: {
-      "$main-color": "#0f0f33",
-      "$text-color": "#0f0f33",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#0f0f23",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#0f0f33",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#0f0f33",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#0f0f23",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     winter: {
-      "$main-color": "#3c3b40",
-      "$text-color": "#000",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#2c2b30",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#3c3b40",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#000",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#2c2b30",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     },
     winterstone: {
-      "$main-color": "#5ac8fa",
-      "$text-color": "#000",
-      "$light-text-color": "#a7a7a7",
-      "$dark-main-color": "#18a689",
-      "$svd-svg-icon-color": "#3d4d5d",
-      "$light-bg-color": "#fff",
-      "$dark-bg-color": "#f4f4f4",
-      "$light-border-color": "#e7eaec",
-      "$dark-border-color": "#ddd"
+      "$primary-color": "#5ac8fa",
+      "$secondary-color": "rgb(74, 74, 74)",
+      "$primary-text-color": "#000",
+      "$secondary-text-color": "#a7a7a7",
+      "$primary-hover-color": "#18a689",
+      "$primary-icon-color": "#3d4d5d",
+      "$primary-bg-color": "#fff",
+      "$secondary-bg-color": "#f4f4f4",
+      "$primary-border-color": "#e7eaec",
+      "$secondary-border-color": "#ddd"
     }
   };
   public static ThemeCss: { [key: string]: string } = {
-    ".svd_container": "color: $text-color;",
+    ".svd_container": "color: $primary-text-color;",
 
-    ".svd_container a": "color: $main-color;",
-    ".svd_container a:hover": "color: $dark-main-color;",
-    ".svd_container .svd-main-color": "color: $main-color;",
-    ".svd_container .svd-main-border-color": "border-color: $main-color;",
+    ".svd_container a": "color: $primary-color;",
+    ".svd_container a:hover": "color: $primary-hover-color;",
+    ".svd_container .svd-main-color": "color: $primary-color;",
+    ".svd_container .svd-main-border-color": "border-color: $primary-color;",
     ".svd_container .svd-main-background-color":
-      "background-color: $main-color;",
+      "background-color: $primary-color;",
     ".svd_container .btn-primary":
-      "color: $light-bg-color; background-color: $main-color; border-color: $main-color;",
-    ".svd_container .svd-svg-icon": "fill: $svd-svg-icon-color;",
-    ".svd_container .svd-icon-green .svd-svg-icon": "fill: $main-color;",
-    ".svd_container .icon-gearactive .svd-svg-icon": "fill: $main-color;",
-    ".svd_container .nav-tabs a": "color: $text-color",
-    ".svd_container .nav-tabs > li.active > a": "color: $main-color",
+      "color: $primary-bg-color; background-color: $primary-color; border-color: $primary-color;",
+    ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
+    ".svd_container .svd-icon-green .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .nav-tabs a": "color: $primary-text-color",
+    ".svd_container .nav-tabs > li.active > a": "color: $primary-color",
 
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
     ".svd_container .sjs-cb-container:hover input:checked ~ .checkmark":
-      "background-color: $dark-main-color",
+      "background-color: $primary-hover-color",
 
     ".svd_container .svd_custom_select:before":
-      "background-color: $main-color;",
-    ".svd_container .form-control:focus": "border-color: $main-color;",
+      "background-color: $primary-color;",
+    ".svd_container .form-control:focus": "border-color: $primary-color;",
 
-    ".svd_container .svd-light-text-color": "color: $light-text-color;",
+    ".svd_container .svd-light-text-color": "color: $secondary-text-color;",
 
-    ".svd-light-bg-color": "background-color: $light-bg-color;",
-    ".svd_container .svd-light-bg-color": "background-color: $light-bg-color;",
+    ".svd-light-bg-color": "background-color: $primary-bg-color;",
+    ".svd_container .svd-light-bg-color":
+      "background-color: $primary-bg-color;",
 
     ".svd_container .svd_toolbar li.active a":
-      "background-color: $main-color; color: $light-bg-color;",
+      "background-color: $primary-color; color: $primary-bg-color;",
 
     ".svd_container .svd_selected_page":
-      "border-bottom: 1px solid $light-bg-color;",
+      "border-bottom: 1px solid $primary-bg-color;",
 
     ".svd_container .editor-tabs > li > a:hover":
-      "background-color: $dark-bg-color; border-bottom: 1px solid $dark-bg-color;",
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color;",
     ".svd_container .editor-tabs > li > a:focus":
-      "background-color: $dark-bg-color; border-bottom: 1px solid $dark-bg-color;",
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color;",
     ".svd_container .editor-tabs > li.active > a":
-      "color: $main-color; background-color: $dark-bg-color; border: 1px solid $light-border-color; border-bottom-color: $dark-bg-color;",
+      "color: $primary-color; background-color: $secondary-bg-color; border: 1px solid $primary-border-color; border-bottom-color: $secondary-bg-color;",
 
     ".svd_container .svd-light-border-color":
-      "border-color: $light-border-color",
+      "border-color: $primary-border-color",
 
-    ".svd_container .svd-dark-border-color": "border-color: $dark-border-color",
+    ".svd_container .svd-dark-border-color":
+      "border-color: $secondary-border-color",
 
     ".svd_container .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow":
-      "background:  $main-color;",
+      "background:  $primary-color;",
     ".svd_container .select2-container .select2-selection--single .select2-selection__arrow":
-      "background:  $main-color;"
+      "background:  $primary-color;"
   };
   private sheet: CSSStyleSheet = null;
 
