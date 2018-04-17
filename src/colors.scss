@@ -2,6 +2,7 @@ $primary-color: #1ab394;
 $secondary-color: #1ab394;
 
 $primary-hover-color: #18a689;
+$selection-border-color: #1ab394;
 
 $primary-text-color: #676a6c;
 $secondary-text-color: #a7a7a7;
@@ -104,7 +105,7 @@ $icon-status-color: #9d9fa1;
     background-color: $primary-color;
   }
   .svd-main-border-color {
-    border-color: $secondary-color;
+    border-color: $selection-border-color;
   }
 
   .svd-light-text-color {
