@@ -88,6 +88,21 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   assert.equal(dropdownQuestion.visibleIf, "false", "visibleIf assign correct");
 });
 
+QUnit.test("Question Editor preserve title on tab changed", function(assert) {
+  var dropdownQuestion = new Survey.QuestionDropdown("q1");
+  var editor = new SurveyQuestionEditor(dropdownQuestion, null);
+  var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
+  generalTab.properties.rows[1].properties[0].editor.koValue("new title");
+  editor.koActiveTab("choices");
+  editor.koActiveTab("general");
+
+  assert.equal(
+    generalTab.properties.rows[1].properties[0].editor.koValue(),
+    "new title",
+    "entered title is ok"
+  );
+});
+
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var editor = new SurveyQuestionEditor(radioGroupQuestion, null);
