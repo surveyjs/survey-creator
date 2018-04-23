@@ -236,6 +236,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     if (obj["name"] == "showOnBottom") res.bottom = "bottomValue";
     return res;
   }
+  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+    return title;
+  }
 }
 
 QUnit.test("On new ItemValue added", function(assert) {

@@ -385,6 +385,16 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     (sender: SurveyEditor, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * Use this event to change the text showing in the dropdown of the property grid.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object.
+   * <br/> options.text the current object text, commonly it is a name. You must change this attribute
+   */
+  public onGetObjectTextInPropertyGrid: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   koAutoSave = ko.observable(false);
   /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -475,6 +485,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.koObjects,
       this.koSelectedObject
     );
+    this.surveyObjects.getItemTextCallback = function(obj, text) {
+      var options = { obj: obj, text: text };
+      self.onGetObjectTextInPropertyGrid.fire(self, options);
+      return options.text;
+    };
     this.selectPage = (page: Survey.PageModel) => {
       this.surveyObjects.selectObject(page);
     };
@@ -1049,8 +1064,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var isDefault = property.isDefaultValue(newValue);
     var oldValue = obj[property.name];
     obj[property.name] = newValue;
-    if (property.name === "name") {
+    if (property.name == "name" || property.name == "title") {
       this.surveyObjects.nameChanged(obj);
+    }
+    if (property.name === "name") {
       this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     } else if (property.name === "page") {
       this.selectPage(newValue);
@@ -1829,6 +1846,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.onShowPropertyModalEditorDescription.fire(this, options);
     var res = { top: options.htmlTop, bottom: options.htmlBottom };
     return res;
+  }
+  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+    return title;
   }
 }
 

@@ -28,6 +28,7 @@ export interface ISurveyObjectEditorOptions {
     propertyName: string,
     obj: Survey.Base
   ): any;
+  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string;
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {

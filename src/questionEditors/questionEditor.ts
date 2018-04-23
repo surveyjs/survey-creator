@@ -178,15 +178,21 @@ export class SurveyQuestionEditor {
     this.koShowApplyButton = ko.observable(
       !this.options || this.options.showApplyButtonInEditors
     );
+    this.koTitle(this.getTitle());
+  }
+  private getTitle(): string {
+    var res;
     if (this.obj["name"]) {
-      this.koTitle(
-        editorLocalization
-          .getString("pe.qEditorTitle")
-          ["format"](this.obj["name"])
-      );
+      res = editorLocalization
+        .getString("pe.qEditorTitle")
+        ["format"](this.obj["name"]);
     } else {
-      this.koTitle(editorLocalization.getString("pe.surveyEditorTitle"));
+      res = editorLocalization.getString("pe.surveyEditorTitle");
     }
+    if (this.options && this.options.onGetElementEditorTitleCallback) {
+      res = this.options.onGetElementEditorTitleCallback(this.obj, res);
+    }
+    return res;
   }
   protected doCloseWindow(isCancel: boolean) {
     if (isCancel) {
