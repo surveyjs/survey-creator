@@ -18,7 +18,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <!-- ko template: { name: 'propertyeditor-itemvalues-items', afterRender: afterItemsRendered} -->
+            <!-- ko template: { name: 'propertyeditor-itemvalues-items' } -->
             <!-- /ko -->
         </table>
     </div>
@@ -33,8 +33,7 @@
     </div>
 </script>
 <script type="text/html" id="propertyeditor-itemvalues-items">
-    <tbody>
-        <!-- ko foreach: koItems -->
+    <tbody data-bind="sortable: { foreach: koItems, options: sortableOptions }">
         <tr>
             <td>
                 <div class="svd-drag-handle">
@@ -53,6 +52,5 @@
                 </button>
             </td>
         </tr>
-        <!-- /ko -->
     </tbody>
 </script>

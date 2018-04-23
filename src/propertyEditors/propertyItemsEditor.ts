@@ -41,26 +41,16 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   protected onSetEditorOptions(editorOptions: any) {
     this.koAllowAddRemoveItems(editorOptions.allowAddRemoveItems);
   }
-  public onDragEnd = evt => {
-    var choices = this.koItems();
-    var choice = choices[evt.oldIndex];
-    choices.splice(evt.oldIndex, 1);
-    choices.splice(evt.newIndex, 0, choice);
-    this.koItems(choices);
-  };
-  public afterItemsRendered = elements => {
-    Sortable.create(elements.filter(el => el.nodeName === "TBODY")[0], {
-      handle: ".svd-drag-handle",
-      animation: 150,
-      onEnd: this.onDragEnd
-    });
+  public sortableOptions = {
+    handle: ".svd-drag-handle",
+    animation: 150
   };
   protected AddItem() {
     this.koItems.push(this.createNewEditorItem());
   }
 
   protected setupItems() {
-    this.koItems(this.getItemsFromValue());
+    this.koItems(this.getItemsFromValue(this.editingValue));
   }
   protected onValueChanged() {
     if (this.isShowingModal) {
