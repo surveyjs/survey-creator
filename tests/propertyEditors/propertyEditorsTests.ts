@@ -254,29 +254,6 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
   assert.equal(choices[2].value, 4, "check value of the last element");
   assert.equal(choices[2].text, "item4", "check text of the last element");
 
-  itemValueProperty.onDragEnd({ oldIndex: 0, newIndex: 1 });
-  assert.equal(
-    itemValueProperty.koItems()[0].cells[0].koValue(),
-    3,
-    "check the first element"
-  );
-  assert.equal(
-    itemValueProperty.koItems()[1].cells[0].koValue(),
-    1,
-    "check the second element"
-  );
-  itemValueProperty.onDragEnd({ oldIndex: 1, newIndex: 0 });
-  assert.equal(
-    itemValueProperty.koItems()[0].cells[0].koValue(),
-    1,
-    "check the first element"
-  );
-  assert.equal(
-    itemValueProperty.koItems()[1].cells[0].koValue(),
-    3,
-    "check the second element"
-  );
-
   itemValueProperty.onAddClick();
   itemValueProperty.onAddClick();
   itemValueProperty.onResetClick();
