@@ -429,12 +429,12 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
   assert.equal(
     propertyEditor.columns.length,
     3,
-    "There are two columns value + text"
+    "There are three columns value + text + link"
   );
   assert.equal(
     propertyEditor.koShowTextView(),
-    false,
-    "Do not show text view with custom properties"
+    true,
+    "Allow to show text view with custom properties"
   );
 
   Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
@@ -462,15 +462,74 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   assert.equal(
     propertyEditor.columns.length,
     3,
-    "There are two columns value + text"
+    "There are three columns value + text + link"
   );
   assert.equal(
     propertyEditor.koShowTextView(),
-    false,
-    "Do not show text view with custom properties"
+    true,
+    "Allow to show text view with custom properties"
   );
   Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
 });
+QUnit.test(
+  "extended SurveyPropertyItemValue + custom property - process items with custom properties",
+  function(assert) {
+    Survey.JsonObject.metaData.addClass(
+      "itemvalues_ex",
+      ["imageLink"],
+      function() {
+        return new Survey.ItemValue(null);
+      },
+      "itemvalue"
+    );
+    var property = new Survey.JsonObjectProperty("test");
+    property.type = "itemvalues_ex";
+    var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+    var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
+    assert.equal(
+      propertyEditor.columns.length,
+      3,
+      "There are three columns value + text + link"
+    );
+    assert.equal(
+      propertyEditor.koShowTextView(),
+      true,
+      "Allow to show text view with custom properties"
+    );
+    assert.equal(propertyEditor.koItems().length, 0, "No items");
+    assert.equal(propertyEditor.koItemsText(), "", "Editor is empty");
+
+    propertyEditor.onAddClick();
+    assert.equal(propertyEditor.koItems().length, 1, "One item");
+
+    propertyEditor.koItems()[0].cells[0].value = "item";
+    propertyEditor.koItems()[0].cells[1].value = "2nd";
+    propertyEditor.koItems()[0].cells[2].value = "custom";
+    propertyEditor.koActiveView("fast");
+    assert.equal(propertyEditor.koItemsText(), "item|2nd|custom", "One item");
+
+    propertyEditor.koItemsText("item|2nd|custom\nitem2|2nd2|custom2");
+    propertyEditor.koActiveView("form");
+    assert.equal(propertyEditor.koItems().length, 2, "Two items");
+    assert.equal(
+      propertyEditor.koItems()[1].cells[0].value,
+      "item2",
+      "Row 1 Col 1"
+    );
+    assert.equal(
+      propertyEditor.koItems()[1].cells[1].value,
+      "2nd2",
+      "Row 1 Col 2"
+    );
+    assert.equal(
+      propertyEditor.koItems()[1].cells[2].value,
+      "custom2",
+      "Row 1 Col 3"
+    );
+
+    Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
+  }
+);
 QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   var survey = new Survey.Survey();
   var p = survey.addNewPage();

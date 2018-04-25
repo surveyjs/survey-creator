@@ -141,34 +141,36 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   protected updateItems(text: string) {
     var items = [];
     if (text) {
+      var properties = this.getProperties();
       var texts = text.split("\n");
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;
-        var valueItem = new Survey.ItemValue(texts[i]);
-        var item = {
-          value: valueItem.value,
-          text: valueItem.hasText ? valueItem.text : ""
-        };
+        var elements = texts[i].split(Survey.ItemValue.Separator);
+        var valueItem = new Survey.ItemValue("");
+        var item: any = {};
+        properties.forEach((p, i) => {
+          valueItem[p.name] = elements[i];
+          item[p.name] = elements[i];
+        });
+        item.text = valueItem.hasText ? valueItem.text : "";
         items.push(item);
       }
     }
     this.koItems(this.getItemsFromValue(items));
   }
   protected getItemsText(): string {
-    var text = [];
-    var items = this.koItems();
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      if (item.cells[0].hasError) continue;
-      var itemText = item.cells[0].value;
-      if (item.cells[1].value)
-        itemText += Survey.ItemValue.Separator + item.cells[1].value;
-      text.push(itemText);
-    }
-    return text.join("\n");
+    return this.koItems()
+      .filter(item => !item.cells[0].hasError)
+      .map(item =>
+        item.cells
+          .map(cell => cell.value || "")
+          .join(Survey.ItemValue.Separator)
+          .replace(/\|$/, "")
+      )
+      .join("\n");
   }
   private get canShowTextView(): boolean {
-    return this.columns.length == 2;
+    return this.columns.length > 0;
   }
 }
 
