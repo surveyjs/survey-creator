@@ -1335,7 +1335,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         var isRequired = ko.observable<boolean>(options.obj.isRequired);
         options.items.push({
           name: "isrequired",
-          text: this.getLocString("pe.isrequired"),
+          text: this.getLocString("pe.isRequired"),
           icon: ko.computed(() => {
             if (isRequired()) {
               return "icon-actionisrequired";
@@ -1367,7 +1367,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       if (opts.allowAddToToolbox) {
         options.items.push({
           name: "addtotoolbox",
-          text: self.getLocString("survey.addtotoolbox"),
+          text: self.getLocString("survey.addToToolbox"),
           onClick: function(selObj) {
             self.addCustomToolboxQuestion(selObj);
           }
