@@ -270,7 +270,12 @@ export class DragDropHelper {
         surveyElement.dragDropHelper().doDrop(e);
       }
     };
-    domElement.ondragstart = function(e) {
+    domElement.ondragstart = function(e: DragEvent) {
+      var target: any = e.target || e.srcElement;
+      if (target.contains(document.activeElement)) {
+        e.preventDefault();
+        return false;
+      }
       if (!surveyElement.allowingOptions.allowDragging) return false;
       if (!e["markEvent"]) {
         e["markEvent"] = true;
