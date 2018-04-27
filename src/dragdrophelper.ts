@@ -4,6 +4,7 @@ import { SurveyHelper } from "./surveyHelper";
 export class DragDropTargetElement {
   public moveToParent: any;
   public moveToIndex: number;
+  public nestedPanelDepth: number = -1;
   constructor(
     public page: Survey.Page,
     public target: any,
@@ -161,7 +162,28 @@ export class DragDropTargetElement {
     );
   }
   private findInfo(el: any, isEdge: boolean = false): any {
-    return this.findInfoInPanel(this.page, el, isEdge, el);
+    var res = this.findInfoInPanel(this.page, el, isEdge, el);
+    if (
+      res &&
+      this.target &&
+      this.target.isPanel &&
+      this.nestedPanelDepth > -1
+    ) {
+      var parents = this.getParentElements(res.panel);
+      if (this.nestedPanelDepth + 1 < parents.length) {
+        res.panel = parents[this.nestedPanelDepth];
+        res.element = parents[this.nestedPanelDepth + 1];
+      }
+    }
+    return res;
+  }
+  private getParentElements(panel: any): Array<any> {
+    var res = [];
+    while (panel) {
+      res.unshift(panel);
+      panel = panel.parent;
+    }
+    return res;
   }
 
   private findInfoInPanel(
@@ -234,6 +256,7 @@ export class DragDropTargetElement {
 
 export class DragDropHelper {
   public static edgeHeight: number = 20;
+  public static nestedPanelDepth: number = -1;
   static dataStart: string = "surveyjs,";
   static dragData: any = { text: "", json: null };
   static prevEvent = { element: null, x: -1, y: -1 };
@@ -500,6 +523,7 @@ export class DragDropHelper {
       targetElement,
       null
     );
+    this.ddTarget.nestedPanelDepth = DragDropHelper.nestedPanelDepth;
   }
   private setData(event: DragEvent, text: string) {
     if (event["originalEvent"]) {

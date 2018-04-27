@@ -297,6 +297,29 @@ QUnit.test("Move panel into empty panel", function(assert) {
   assert.equal(panel.elements[0].name, "p1", "It is the 'p1' panel");
 });
 
+QUnit.test("Optionally forbiden move panel into panel", function(assert) {
+  var survey = new Survey.Survey();
+  var page = <Survey.Page>survey.addNewPage("page1");
+  var panel = page.addNewPanel("panel1");
+  var target = new Survey.Panel("p1");
+
+  var dragTarget = new DragDropTargetElement(page, target, null);
+  dragTarget.nestedPanelDepth = 0;
+
+  assert.equal(page["koRows"]().length, 1, "There is one row");
+  assert.equal(
+    dragTarget.moveTo(panel, false),
+    true,
+    "You can move a question here"
+  );
+  assert.equal(panel["koRows"]().length, 0, "There is no row in panel");
+  assert.equal(page["koRows"]().length, 2, "There are two rows in page");
+  dragTarget.doDrop();
+  assert.equal(panel.elements.length, 0, "There is no elements in panel");
+  assert.equal(page.elements.length, 2, "There are two elements in page");
+  assert.equal(page.elements[0].name, "p1", "It is the 'p1' panel");
+});
+
 QUnit.test("Move item in panel", function(assert) {
   var survey = new Survey.Survey();
   var page = <Survey.Page>survey.addNewPage("page1");
