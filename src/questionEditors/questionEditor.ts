@@ -19,6 +19,7 @@ import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
 import { underline } from "chalk";
+import { focusFirstControl } from "../utils/utils";
 
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
@@ -277,14 +278,14 @@ export class SurveyQuestionEditor {
 }
 
 export class SurveyQuestionEditorTab {
-  koAfterRender: any;
   private titleValue: string;
   constructor(
     public obj: Survey.Base,
     public properties: SurveyQuestionEditorProperties = null,
     private _name
-  ) {
-    this.koAfterRender = function(el, con) {};
+  ) {}
+  public koAfterRender(elements: HTMLElement[], context) {
+    focusFirstControl(elements);
   }
   public get name(): string {
     return this._name;

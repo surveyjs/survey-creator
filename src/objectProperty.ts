@@ -88,8 +88,4 @@ export class SurveyObjectProperty {
     if (this.onPropertyChanged && this.object)
       this.onPropertyChanged(this, newValue);
   }
-
-  public afterRenderHandler = (rootElement, elements) => {
-    this.editor.setRenderedElements(rootElement, elements);
-  };
 }
