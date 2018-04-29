@@ -18,14 +18,15 @@ QUnit.test("koPages, koActive", function(assert) {
   var test = new SurveyLiveTester();
   test.setJSON({
     pages: [
-      { questions: [{ type: "text", name: "q1" }] },
-      { questions: [{ type: "text", name: "q2" }] },
-      { questions: [{ type: "text", name: "q3" }] }
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3", questions: [{ type: "text", name: "q3" }] }
     ]
   });
   test.show();
   assert.equal(test.koPages().length, 3, "There are 3 pages");
   assert.equal(test.koPages()[0].koActive(), true, "The first page is active");
+  assert.equal(test.koActivePage().name, "page1", "The active page is first");
   assert.equal(
     test.koPages()[1].koActive(),
     false,
@@ -38,6 +39,7 @@ QUnit.test("koPages, koActive", function(assert) {
     "The first page is inactive"
   );
   assert.equal(test.koPages()[1].koActive(), true, "The second page is active");
+  assert.equal(test.koActivePage().name, "page2", "The active page is second");
   test.selectPageClick(test.koPages()[2]);
   assert.equal(
     test.survey.currentPage.name,
@@ -64,10 +66,20 @@ QUnit.test("koPages, visibility", function(assert) {
     false,
     "The second page is invisible"
   );
+  assert.equal(
+    test.koPages()[1].koDisabled(),
+    true,
+    "The second page is disabled"
+  );
   q.visible = true;
   assert.equal(
     test.koPages()[1].koVisible(),
     true,
     "The second page is visible"
+  );
+  assert.equal(
+    test.koPages()[1].koDisabled(),
+    false,
+    "The second page is enabled"
   );
 });
