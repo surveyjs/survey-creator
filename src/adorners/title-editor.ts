@@ -117,7 +117,7 @@ registerAdorner("title", titleAdorner);
 
 export var itemTitleAdorner = {
   getMarkerClass: model => {
-    return "item_title_editable title_editable";
+    return !!model.items ? "item_title_editable title_editable" : "";
   },
   afterRender: (
     elements: HTMLElement[],

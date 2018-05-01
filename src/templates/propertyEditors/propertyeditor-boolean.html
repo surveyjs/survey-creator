@@ -3,7 +3,7 @@
         <label>
             <div class="sjs-cb-container">
                 <input class="svd_editor_control" type="checkbox" data-bind="checked: koValue, disable: $data.readOnly">
-                <span class="checkmark"></span>
+                <span class="checkmark" data-bind="css: { 'svd-main-background-color': koValue, 'svd-light-background-color': !koValue() }"></span>
                 <!-- ko if: $data.isDiplayNameVisible -->
                 <span class="sjs-cb-label" data-bind="text: $data.displayName"></span>
                 <!-- /ko -->

@@ -20,6 +20,7 @@ import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
 import { SurveyForDesigner } from "./surveyjsObjects";
+import { StylesManager } from "./stylesmanager";
 
 /**
  * The toolbar item description
@@ -384,6 +385,16 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     (sender: SurveyEditor, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * Use this event to change the text showing in the dropdown of the property grid.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object.
+   * <br/> options.text the current object text, commonly it is a name. You must change this attribute
+   */
+  public onGetObjectTextInPropertyGrid: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   koAutoSave = ko.observable(false);
   /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
@@ -449,6 +460,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     var self = this;
 
+    StylesManager.applyTheme(StylesManager.currentTheme());
+
     this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
@@ -472,6 +485,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.koObjects,
       this.koSelectedObject
     );
+    this.surveyObjects.getItemTextCallback = function(obj, text) {
+      var options = { obj: obj, text: text };
+      self.onGetObjectTextInPropertyGrid.fire(self, options);
+      return options.text;
+    };
     this.selectPage = (page: Survey.PageModel) => {
       this.surveyObjects.selectObject(page);
     };
@@ -587,6 +605,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.addToolbarItems();
   }
+
+  themeCss = ko.computed(() => {
+    return StylesManager.currentTheme() === "bootstrap"
+      ? "sv_bootstrap_css"
+      : "sv_default_css";
+  });
 
   protected addToolbarItems() {
     this.toolbarItems.push({
@@ -1040,8 +1064,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var isDefault = property.isDefaultValue(newValue);
     var oldValue = obj[property.name];
     obj[property.name] = newValue;
-    if (property.name === "name") {
+    if (property.name == "name" || property.name == "title") {
       this.surveyObjects.nameChanged(obj);
+    }
+    if (property.name === "name") {
       this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     } else if (property.name === "page") {
       this.selectPage(newValue);
@@ -1248,7 +1274,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowEdit) {
         options.items.push({
-          name: "editElement",
+          name: "editelement",
           text: this.getLocString("survey.edit"),
           hasTitle: true,
           onClick: question => this.showQuestionEditor(question)
@@ -1276,13 +1302,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           options.obj.titleLocation !== "hidden"
         );
         options.items.push({
-          name: "showTitle",
+          name: "showtitle",
           text: this.getLocString("pe.showTitle"),
           icon: ko.computed(() => {
             if (isShowTitle()) {
-              return "icon-action-showTitle";
+              return "icon-actionshowtitle";
             }
-            return "icon-action-hideTitle";
+            return "icon-actionhidetitle";
           }),
           onClick: (question: Survey.Question) => {
             if (question.titleLocation !== "hidden") {
@@ -1308,13 +1334,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       ) {
         var isRequired = ko.observable<boolean>(options.obj.isRequired);
         options.items.push({
-          name: "isRequired",
+          name: "isrequired",
           text: this.getLocString("pe.isRequired"),
           icon: ko.computed(() => {
             if (isRequired()) {
-              return "icon-action-isRequired";
+              return "icon-actionisrequired";
             }
-            return "icon-action-notRequired";
+            return "icon-actionnotrequired";
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
@@ -1340,7 +1366,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowAddToToolbox) {
         options.items.push({
-          name: "addToToolbox",
+          name: "addtotoolbox",
           text: self.getLocString("survey.addToToolbox"),
           onClick: function(selObj) {
             self.addCustomToolboxQuestion(selObj);
@@ -1382,7 +1408,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
       if (opts.allowDragging) {
         options.items.push({
-          name: "dragElement",
+          name: "dragelement",
           text: self.getLocString("survey.drag"),
           onClick: function(selObj) {}
         });
@@ -1821,9 +1847,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var res = { top: options.htmlTop, bottom: options.htmlBottom };
     return res;
   }
+  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+    return title;
+  }
 }
-
-Survey.Survey.cssType = "bootstrap";
 
 var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
 koSurveyTemplate = koSurveyTemplate.replace(
@@ -1837,4 +1864,24 @@ ko.components.register("survey-widget", {
     this.survey = params.survey;
   },
   template: koSurveyTemplate
+});
+
+ko.components.register("svg-icon", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      ko.computed(() => {
+        var size = (ko.unwrap(params.size) || 16) + "px";
+        var svgElem: any = componentInfo.element.childNodes[0];
+        svgElem.style.width = size;
+        svgElem.style.height = size;
+        var node: any = svgElem.childNodes[0];
+        node.setAttributeNS(
+          "http://www.w3.org/1999/xlink",
+          "xlink:href",
+          "#" + ko.unwrap(params.iconName)
+        );
+      });
+    }
+  },
+  template: "<svg class='svd-svg-icon'><use></use></svg>"
 });

@@ -7,13 +7,11 @@
   line-height: 30px;
 
   .svda_current_type {
-    color: #1ab394;
     font-weight: 700;
     cursor: auto;
   }
 
   select.svda_current_type {
-    background-color: white;
     border: none;
     outline: none;
     cursor: pointer;
@@ -22,16 +20,12 @@
       border: none;
       outline: none;
     }
-    option {
-      background: white;
-    }
   }
 }
 
 question-actions {
   display: none;
   .svda_question_action {
-    color: #1ab394;
     font-weight: 700;
     cursor: pointer;
     margin-left: 1em;
@@ -43,10 +37,6 @@ question-actions {
   }
 
   .svda_action_separator {
-    display: inline-block;
-    height: 16px;
-    border-left: 1px solid #ddd;
-    vertical-align: middle;
     margin-left: 15px;
     margin-top: -5px;
   }

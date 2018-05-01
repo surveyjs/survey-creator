@@ -2,6 +2,7 @@
 
 @import "colors";
 @import "icons";
+@import "manage";
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
@@ -9,12 +10,16 @@
 @import "properties";
 
 .svd_container {
-  background-color: $light-bg-color;
   position: relative;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
     "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
-  color: $text-color;
+
+  #surveyjs {
+    .svd_question {
+      overflow: visible;
+    }
+  }
 
   .svd-textitems-column {
     width: 100%;
@@ -38,6 +43,10 @@
     }
   }
 
+  .svd-items-control-footer {
+    margin-top: 1em;
+  }
+
   .svd-drag-handle {
     font-size: 20px;
     cursor: move;
@@ -48,7 +57,6 @@
   }
 
   .form-control:focus {
-    border-color: $main-color;
     outline: 0;
     box-shadow: none;
   }
@@ -60,11 +68,8 @@
       // min-width: calc(100% - 200px);
       max-width: calc(100%);
       min-width: calc(100%);
-      border-color: $dark-border-color;
     }
-    a {
-      color: $main-color;
-    }
+
     .assistant {
       padding-left: 1em;
       width: 200px;
@@ -97,8 +102,7 @@
         padding: 6px 12px;
       }
       ul {
-        background: white;
-        border: 1px solid #ccc;
+        border: 1px solid $dd-menu-border;
         border-radius: 2px;
         padding: 0;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -112,12 +116,12 @@
           width: 100%;
           a {
             padding: 3px 20px;
-            color: #262626;
+            color: $dd-menu-link-color;
             width: 100%;
             font-weight: 400;
             display: block;
             &:hover {
-              background-color: #f5f5f5;
+              background-color: $secondary-bg-color;
               text-decoration: none;
             }
           }
@@ -129,16 +133,16 @@
   .select2-container--default.select2-container--open {
     .select2-selection--single {
       border-radius: 0;
-      border: 1px solid #ccc;
+      border: 1px solid $dd-menu-border;
       height: 34px;
       .select2-selection__arrow {
-        background: #1ab394;
+        background: $primary-color;
         height: 34px;
         top: 0px;
         right: 0px;
         width: 34px;
         b {
-          border-color: white transparent white transparent;
+          border-color: #fff transparent #fff transparent;
         }
       }
     }
@@ -151,7 +155,6 @@
 
   a,
   a.nav-link {
-    color: $text-color;
     cursor: pointer;
   }
   .btn {
@@ -161,21 +164,14 @@
     line-height: 1em;
     min-width: 6em;
     font-weight: bold;
-
-    &.btn-primary {
-      background-color: $main-color;
-      border-color: $main-color;
-    }
   }
   .svd_content {
-    background-color: $dark-bg-color;
     padding: 30px;
     margin: 0;
     border: none;
     .svd_survey_designer {
       .svd_editors {
         .svd_questions_editor {
-          background-color: $light-bg-color;
           height: $editor-height;
           overflow-y: scroll;
           padding-top: 18px;
@@ -192,46 +188,7 @@
               box-shadow: none;
               border-radius: 0;
               padding: 20px 9px;
-              background-color: #f5f5f5;
               margin-bottom: 38px;
-              .svd_question_menu {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                .ddmenu-container {
-                  &.element-addons {
-                    margin-left: 0.5em;
-                    line-height: 2.2em;
-                    padding-top: 0.2em;
-                    ul {
-                      background: white;
-                      border: 1px solid #ccc;
-                      border-radius: 2px;
-                      padding: 5px 0;
-                      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-                      min-width: 160px;
-                      right: 0;
-                      li {
-                        margin: 5px;
-                        button {
-                          width: 100%;
-                        }
-                      }
-                    }
-                  }
-                }
-                .glyphicon-option-horizontal {
-                  color: $main-color;
-                }
-              }
-            }
-            .svd_question_container .svd_question {
-              background-color: $bg-color;
-              border-top: 1px solid $dark-border-color;
-              border-bottom: 1px solid $dark-border-color;
-              &.svd_q_selected {
-                border: 1px solid $main-color !important;
-              }
             }
           }
         }
@@ -276,19 +233,13 @@
     text-overflow: ellipsis;
   }
   .svd_q_selected {
-    border: 1px solid $main-color !important;
+    border: 1px solid transparent;
   }
   .svd_q_design {
     pointer-events: none;
   }
   .svd_q_design_border {
     position: relative;
-  }
-  .svd_dragover {
-    pointer-events: none;
-    width: 100%;
-    height: 5px;
-    border: 2px dashed #000;
   }
   .svd_navbarbuttons {
     margin-top: 3px;
@@ -303,69 +254,6 @@
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.15);
-}
-
-.svd-manage {
-  margin: 10px 15px;
-  position: relative;
-  .svd-manage-control {
-    width: calc(100% - 150px);
-    display: inline-block;
-    > * {
-      width: 100%;
-      height: 32px;
-      padding: 5px;
-      color: $text-color;
-    }
-    > select {
-      border-color: $light-border-color;
-    }
-    > input {
-      border-color: none;
-    }
-  }
-  .svd-manage-buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 120px;
-    text-align: right;
-    margin-right: 15px;
-    .icon {
-      color: $main-color;
-      cursor: pointer;
-      vertical-align: middle;
-      line-height: 32px;
-      display: inline-block;
-      &:hover {
-        color: $dark-main-color;
-      }
-    }
-    .icon-edit {
-      margin-right: 20px;
-    }
-  }
-}
-
-.svd_container {
-  .svd_menu > li.link-to-attach > a {
-    width: auto;
-    color: #18a689;
-  }
-  .svd_menu > li.link-to-attach > a:hover {
-    background-color: transparent;
-    color: #1ab394;
-    border: none;
-  }
-  .svd_action.link-to-attach {
-    margin-left: 5px;
-    font-weight: 500;
-    background-color: transparent;
-    border: none;
-  }
-  .link-to-attach span:last-child {
-    margin-left: 5px;
-  }
 }
 
 .svd_container {
@@ -458,11 +346,250 @@
       text-decoration: none;
 
       .svd_commercial_product {
-        color: $main-color;
         padding-left: 0.5em;
       }
-      .svd_noncommercial_use {
-        color: $light-text-color;
+    }
+  }
+}
+
+.svd_container.sv_default_css {
+  a {
+    text-decoration: unset;
+  }
+  .btn,
+  .btn:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    span {
+      display: inline-block;
+      padding: 1px;
+    }
+  }
+  .btn[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 0.65;
+  }
+
+  :after,
+  :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  select,
+  textarea {
+    line-height: inherit;
+  }
+
+  .form-control {
+    padding: 6px 12px;
+    line-height: 1.5em;
+    border: 1px solid $dd-menu-border;
+    display: block;
+    width: 100%;
+    height: 34px;
+    &.svd_custom_select {
+      padding: 0;
+      select {
+        height: 32px;
+      }
+    }
+  }
+
+  .input-group {
+    position: relative;
+    display: table;
+    border-spacing: 0;
+
+    .form-control,
+    .input-group-addon,
+    .input-group-btn {
+      display: table-cell;
+    }
+
+    .form-control {
+      float: left;
+    }
+
+    .input-group-addon {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      text-align: center;
+      background-color: $primary-border-color;
+      border: 1px solid $secondary-border-color;
+      border-radius: 2px;
+      width: 1%;
+      white-space: nowrap;
+      vertical-align: middle;
+      &:first-child {
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .form-inline {
+    .input-group {
+      display: inline-table;
+      vertical-align: middle;
+    }
+    .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+
+  .nav-tabs {
+    margin-bottom: 0;
+    padding: 0;
+    // border-bottom: 1px solid $secondary-border-color;
+    line-height: 2.5em;
+  }
+  .nav-item {
+    display: inline-block;
+    margin-left: -3px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .nav-link {
+    border-radius: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 0.5em 1em;
+    text-align: center;
+    &.active {
+      border: 1px solid $secondary-border-color;
+      border-bottom-color: transparent;
+    }
+  }
+
+  .svd_toolbox {
+    float: left;
+    width: 15%;
+  }
+  .svd_editors {
+    display: inline-block;
+    width: 60%;
+    padding: 0 15px;
+  }
+  .svd_properties {
+    float: right;
+    width: 25%;
+
+    table {
+      width: 100%;
+    }
+  }
+
+  #surveyjs {
+    .sv_row {
+      .svd_question {
+        margin-top: 30px;
+        overflow: visible;
+        question-actions {
+          .svda_question_action {
+            display: inline-block;
+            font-size: 12px;
+            .icon-actiondragelement {
+              bottom: 0;
+            }
+          }
+        }
+        .svda-select-items-title {
+          top: -1.8em;
+          right: 2.5em;
+        }
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+
+    .modal-dialog {
+      position: relative;
+      max-width: 600px;
+      margin: 30px auto;
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        .modal-header {
+          padding: 15px;
+          border-bottom: 1px solid #e5e5e5;
+          h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+          }
+          button.close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=20);
+            opacity: 0.2;
+            -webkit-appearance: none;
+            padding: 0;
+            cursor: pointer;
+            background: 0 0;
+            border: 0;
+          }
+        }
+        .modal-body {
+          padding: 15px;
+        }
+        .modal-footer {
+          padding: 15px;
+          text-align: right;
+          border-top: 1px solid #e5e5e5;
+        }
       }
     }
   }

@@ -19,6 +19,7 @@ import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
 import { underline } from "chalk";
+import { focusFirstControl } from "../utils/utils";
 
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
@@ -137,10 +138,11 @@ export class SurveyQuestionEditor {
   public onApplyClick: any;
   public onResetClick: any;
   koTabs: KnockoutObservableArray<SurveyQuestionEditorTab>;
-  koActiveTab: any;
-  koTitle: any;
+  koActiveTab = ko.observable<string>();
+  koTitle = ko.observable<string>();
   koShowApplyButton: any;
   onTabClick: any;
+
   constructor(
     public obj: Survey.Base,
     public onCanShowPropertyCallback: (
@@ -169,32 +171,29 @@ export class SurveyQuestionEditor {
       self.koActiveTab(tab.name);
     };
     var tabs = this.buildTabs();
+    tabs.forEach(tab => tab.beforeShow());
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
-    this.koActiveTab = ko.observable();
-    this.koActiveTab.subscribe(function(newValue) {
-      for (var i = 0; i < self.koTabs().length; i++) {
-        if (self.koTabs()[i].name == newValue) {
-          self.koTabs()[i].beforeShow();
-          return;
-        }
-      }
-    });
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
-    this.koTitle = ko.observable();
     this.koShowApplyButton = ko.observable(
       !this.options || this.options.showApplyButtonInEditors
     );
+    this.koTitle(this.getTitle());
+  }
+  private getTitle(): string {
+    var res;
     if (this.obj["name"]) {
-      this.koTitle(
-        editorLocalization
-          .getString("pe.qEditorTitle")
-          ["format"](this.obj["name"])
-      );
+      res = editorLocalization
+        .getString("pe.qEditorTitle")
+        ["format"](this.obj["name"]);
     } else {
-      this.koTitle(editorLocalization.getString("pe.surveyEditorTitle"));
+      res = editorLocalization.getString("pe.surveyEditorTitle");
     }
+    if (this.options && this.options.onGetElementEditorTitleCallback) {
+      res = this.options.onGetElementEditorTitleCallback(this.obj, res);
+    }
+    return res;
   }
   protected doCloseWindow(isCancel: boolean) {
     if (isCancel) {
@@ -279,14 +278,14 @@ export class SurveyQuestionEditor {
 }
 
 export class SurveyQuestionEditorTab {
-  koAfterRender: any;
   private titleValue: string;
   constructor(
     public obj: Survey.Base,
     public properties: SurveyQuestionEditorProperties = null,
     private _name
-  ) {
-    this.koAfterRender = function(el, con) {};
+  ) {}
+  public koAfterRender(elements: HTMLElement[], context) {
+    focusFirstControl(elements);
   }
   public get name(): string {
     return this._name;

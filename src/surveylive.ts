@@ -12,12 +12,15 @@ export class SurveyLiveTester {
   survey: Survey.Survey;
   koSurvey: any;
   koPages: any;
+  koActivePage: any;
+  setPageDisable: any;
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor() {
     this.koIsRunning = ko.observable(true);
     this.koResultText = ko.observable("");
     this.koPages = ko.observableArray([]);
+    this.koActivePage = ko.observable(null);
     var self = this;
     this.selectTestClick = function() {
       self.testAgain();
@@ -29,6 +32,12 @@ export class SurveyLiveTester {
         }
         self.survey.currentPage = pageItem.page;
       }
+    };
+    this.koActivePage.subscribe(function(newValue) {
+      self.survey.currentPage = newValue;
+    });
+    this.setPageDisable = function(option, item) {
+      ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
     this.survey = new Survey.Survey();
     this.koSurvey = ko.observable(this.survey);
@@ -56,6 +65,7 @@ export class SurveyLiveTester {
       });
     }
     this.survey.onCurrentPageChanged.add((sender: Survey.Survey, options) => {
+      self.koActivePage(options.newCurrentPage);
       self.setActivePageItem(options.oldCurrentPage, false);
       self.setActivePageItem(options.newCurrentPage, true);
     });
@@ -63,6 +73,7 @@ export class SurveyLiveTester {
       var item = self.getPageItemByPage(options.page);
       if (item) {
         item.koVisible(options.visible);
+        item.koDisabled(!options.visible);
       }
     });
   }
@@ -74,6 +85,7 @@ export class SurveyLiveTester {
         page: page,
         title: SurveyHelper.getObjectName(page),
         koVisible: ko.observable(page.isVisible),
+        koDisabled: ko.observable(!page.isVisible),
         koActive: ko.observable(
           this.survey.state == "running" && page === this.survey.currentPage
         )
@@ -81,6 +93,7 @@ export class SurveyLiveTester {
     }
     this.koPages(pages);
     this.koSurvey(this.survey);
+    this.koActivePage(this.survey.currentPage);
     this.koIsRunning(true);
   }
   public get testSurveyAgainText() {

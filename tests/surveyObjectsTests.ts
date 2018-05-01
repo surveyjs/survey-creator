@@ -355,6 +355,24 @@ QUnit.test("PanelDynamic test", function(assert) {
     "the selected page is p1"
   );
 });
+QUnit.test("getItemTextCallback", function(assert) {
+  var intend = SurveyObjects.intend;
+  var survey = createSurvey();
+  var objects = new SurveyObjects(ko.observableArray(), ko.observable());
+  objects.getItemTextCallback = function(obj, text) {
+    if (obj["title"]) return obj["name"] + "-" + obj["title"];
+    return text;
+  };
+  var q = <Survey.Question>survey.getQuestionByName("question3");
+  q.name = "q3";
+  q.title = "title3";
+  objects.survey = survey;
+  assert.equal(
+    objects.koObjects()[5].text(),
+    intend + intend + "q3-title3",
+    "The third question"
+  );
+});
 
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({

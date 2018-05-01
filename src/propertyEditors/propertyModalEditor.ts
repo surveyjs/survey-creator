@@ -4,6 +4,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { editorLocalization } from "../editorLocalization";
+import { focusFirstControl } from "../utils/utils";
 import RModal from "rmodal";
 
 export class SurveyPropertyModalEditorCustomWidget {
@@ -51,6 +52,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     return SurveyPropertyModalEditor.customWidgets[editorType];
   }
   private isShowingModalValue: boolean = false;
+  private elements: HTMLElement[];
   public editingObject: any;
   public onApplyClick: any;
   public onOkClick: any;
@@ -118,6 +120,9 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         self.beforeCloseModal();
         modal.close();
       };
+      if (!!this.elements) {
+        focusFirstControl(this.elements);
+      }
     };
     self.koAfterRender = function(el, con) {
       return self.afterRender(el, con);
@@ -163,16 +168,19 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     return false;
   }
   protected afterRender(elements, con) {
+    this.elements = elements;
     var customWidget = SurveyPropertyModalEditor.getCustomWidget(
       this.editorType
     );
-    if (!customWidget) return;
-    var el = this.GetFirstNonTextElement(elements);
-    var tEl = elements[0];
-    if (tEl.nodeName == "#text") tEl.data = "";
-    tEl = elements[elements.length - 1];
-    if (tEl.nodeName == "#text") tEl.data = "";
-    customWidget.afterRender(this, el);
+    if (!!customWidget) {
+      var el = this.GetFirstNonTextElement(elements);
+      var tEl = elements[0];
+      if (tEl.nodeName == "#text") tEl.data = "";
+      tEl = elements[elements.length - 1];
+      if (tEl.nodeName == "#text") tEl.data = "";
+      customWidget.afterRender(this, el);
+    }
+    focusFirstControl(elements);
   }
   private GetFirstNonTextElement(elements: any) {
     if (!elements || !elements.length) return;

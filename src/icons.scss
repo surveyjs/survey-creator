@@ -6,134 +6,39 @@
     padding: $icon-size / 2;
   }
 
-  .icon-panel:before {
-    background-image: url("./images/Panel.svg");
-    @include svg-icon(16px);
+  .svd-svg-icon {
+    display: inline-block;
+    vertical-align: middle;
+    fill: $primary-icon-color;
+  }
+  .svd-primary-icon {
+    .svd-svg-icon {
+      fill: $primary-color;
+    }
+  }
+  .svd-secondary-icon {
+    .svd-svg-icon {
+      fill: $secondary-color;
+    }
   }
 
-  .icon-paneldynamic:before {
-    background-image: url("./images/PanelDynamic.svg");
-    @include svg-icon(16px);
+  .icon-gearactive {
+    .svd-svg-icon {
+      fill: $primary-color;
+    }
   }
 
-  .icon-checkbox:before {
-    background-image: url("./images/Checkbox.svg");
-    @include svg-icon(16px);
+  .icon-gear {
+    .svd-svg-icon {
+      fill: $icon-gear-color;
+    }
   }
 
-  .icon-comment:before {
-    background-image: url("./images/Comment.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-dropdown:before {
-    background-image: url("./images/Dropdown.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-file:before {
-    background-image: url("./images/File.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-html:before {
-    background-image: url("./images/HTML.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-default:before {
-    background-image: url("./images/Matrix.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrixdynamic:before {
-    background-image: url("./images/Matrix_dynamic.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrixdropdown:before {
-    background-image: url("./images/Matrix_multiple.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-matrix:before {
-    background-image: url("./images/Matrix_single.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-multipletext:before {
-    background-image: url("./images/Multipletext.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-radiogroup:before {
-    background-image: url("./images/Radiogroup.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-rating:before {
-    background-image: url("./images/Rating.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-text:before {
-    background-image: url("./images/Text.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-boolean:before {
-    background-image: url("./images/Boolean.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-expression:before {
-    background-image: url("./images/Expression.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-editor:before {
-    background-image: url("./images/cw/Editor.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-imagepicker:before {
-    background-image: url("./images/cw/ImagePicker.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-barrating:before {
-    background-image: url("./images/cw/Barrating.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-datepicker:before {
-    background-image: url("./images/cw/DatePicker.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-nouislider:before {
-    background-image: url("./images/cw/noUISlider.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-tagbox:before {
-    background-image: url("./images/cw/TagBox.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-signaturepad:before {
-    background-image: url("./images/cw/SingaturePad.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-sortablelist:before {
-    background-image: url("./images/cw/SortableJS.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-autocomplete:before {
-    background-image: url("./images/cw/autocomplete.svg");
-    @include svg-icon(16px);
+  .icon-status {
+    .svd-svg-icon {
+      fill: $icon-status-color;
+      margin-bottom: 0.3em;
+    }
   }
 
   .icon-delete:before {
@@ -141,23 +46,8 @@
     @include svg-icon(24px);
   }
 
-  .icon-edit:before {
-    background-image: url("./images/Edit_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-commercial:before {
-    background-image: url("./images/NonCommercial_20x20.svg");
-    @include svg-icon(20px);
-  }
-
   .icon-fork:before {
     background-image: url("./images/Fork_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-modified:before {
-    background-image: url("./images/Modified_24x24.svg");
     @include svg-icon(24px);
   }
 
@@ -166,139 +56,15 @@
     @include svg-icon(24px);
   }
 
-  .icon-saved:before {
-    background-image: url("./images/Saved_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-saving:before {
-    background-image: url("./images/Saving_24x24.svg");
-    @include svg-icon(24px);
-  }
-
   .icon-cloud:before {
     background-image: url("./images/Cloud_24x24.svg");
     @include svg-icon(24px);
   }
 
-  .icon-gear:before {
-    background-image: url("./images/Gear_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-gear-active:before {
-    background-image: url("./images/Gear_12x12_active.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-edit:before {
-    background-image: url("./images/inplace/Edit_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-delete:before {
-    background-image: url("./images/inplace/Delete_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-draggable:before {
-    background-image: url("./images/inplace/Dragging_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-check:before {
-    background-image: url("./images/inplace/Check_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-inplace-add-item:before {
-    background-image: url("./images/inplace/Plus_12x12.svg");
-    @include svg-icon(12px);
-  }
-
-  .icon-toolbox-arrow-up:before {
-    background-image: url("./images/Arrow_up_10x10.svg");
-    @include svg-icon(10px);
-  }
-
-  .icon-toolbox-arrow-down:before {
-    background-image: url("./images/Arrow_down_10x10.svg");
-    @include svg-icon(10px);
-  }
-
-  .icon-toolbox-arrow-down-green:before {
-    background-image: url("./images/Arrow_down_green_10x10.svg");
-    @include svg-icon(10px);
-  }
-
-  .icon-action-addToToolbox:before {
-    background-image: url("./images/actions/AddToToolbox_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-convert-action:before {
-    background-image: url("./images/actions/ConvertTo_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-copy:before {
-    background-image: url("./images/actions/Copy_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-delete:before {
-    background-image: url("./images/actions/Delete_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-editElement:before {
-    background-image: url("./images/actions/Edit_16х16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-isRequired:before {
-    background-image: url("./images/actions/Required_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-notRequired:before {
-    background-image: url("./images/actions/Not_Required_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-showTitle:before {
-    background-image: url("./images/actions/ShowTitle_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-hideTitle:before {
-    background-image: url("./images/actions/HideTitle_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-action-dragElement:before {
-    content: "☰";
-    font-size: 20px;
+  .icon-actiondragelement {
     cursor: move;
-    color: $main-color;
     position: absolute;
     left: 0;
-    font-size: 16px;
-  }
-
-  .icon-pe-add:before {
-    background-image: url("./images/Add_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-pe-left:before {
-    background-image: url("./images/Left_16x16.svg");
-    @include svg-icon(16px);
-  }
-
-  .icon-pe-right:before {
-    background-image: url("./images/Right_16x16.svg");
-    @include svg-icon(16px);
   }
 
   .glyphicon {
@@ -311,7 +77,6 @@
     &.glyphicon-plus::before {
       font-weight: normal;
       font-size: 20px;
-      color: $main-color;
       content: "+";
     }
     &.glyphicon-option-horizontal::before {
@@ -324,18 +89,8 @@
     &.glyphicon-edit::before {
       content: "";
     }
-    &.glyphicon-trash::before {
-      font-size: 1.25em;
-      content: "🗑";
-    }
     &.glyphicon-list-alt::before {
       content: "⇐"; // '🗸'
-    }
-    &.glyphicon-arrow-down::before {
-      content: "↓";
-    }
-    &.glyphicon-arrow-up::before {
-      content: "↑";
     }
   }
 }

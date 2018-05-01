@@ -156,10 +156,30 @@ export var itemDraggableAdorner = {
     });
     var addNew = document.createElement("div");
     addNew.title = editorLocalization.getString("pe.addItem");
-    addNew.className = "svda-add-new-item icon-inplace-add-item";
+    addNew.className = "svda-add-new-item svd-primary-icon";
     addNew.onclick = createAddItemHandler(model, itemValue =>
       editor.onQuestionEditorChanged(model)
     );
+
+    var svgElem: any = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    svgElem.setAttribute("class", "svd-svg-icon");
+    svgElem.style.width = "12px";
+    svgElem.style.height = "12px";
+    var useElem: any = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "use"
+    );
+    useElem.setAttributeNS(
+      "http://www.w3.org/1999/xlink",
+      "xlink:href",
+      "#icon-inplaceplus"
+    );
+    svgElem.appendChild(useElem);
+    addNew.appendChild(svgElem);
+
     itemsRoot.appendChild(addNew);
   }
 };

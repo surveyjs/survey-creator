@@ -1,6 +1,5 @@
 .svd_container {
   .editor-tabs {
-    background-color: $light-bg-color;
     padding: 19px 15px 0 30px;
     > li > a {
       border: 1px solid transparent;
@@ -8,17 +7,6 @@
       padding: 0.5em 1em;
       text-align: center;
       font-weight: bold;
-      &:hover,
-      &:focus {
-        background-color: $dark-bg-color;
-        border-bottom: 1px solid $dark-bg-color;
-      }
-    }
-    > li.active > a {
-      background-color: $dark-bg-color;
-      border: 1px solid $light-border-color;
-      border-bottom-color: $dark-bg-color;
-      color: $main-color;
     }
   }
 }

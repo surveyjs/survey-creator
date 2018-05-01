@@ -1,15 +1,13 @@
 <script type="text/html" id="surveylive">
     <div data-bind="visible: koIsRunning() && koPages().length > 1">
-        <ul  class="nav nav-tabs" data-bind="tabs:true">
-            <li style="padding-top: 10px; padding-right: 10px"><span data-bind="text: selectPageText"></span></li>
-            <!-- ko foreach: koPages -->
-            <li data-bind="visible: koVisible, css: {active: koActive() == true}"> 
-                <a class="svd_page_nav" href="#" data-bind="click:$parent.selectPageClick">
-                    <span data-bind="text: title"></span>
-                </a>
-            </li>
-            <!-- /ko  -->
-        </ul>
+        <div>
+            <span style="white-space: nowrap">
+                <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
+                <div  id="testSurveyPageChanged">
+                    <select class="form-control" style="width:300px" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+                </div>
+            </span>
+        </div>        
     </div>
     <survey-widget params="survey: koSurvey"></survey-widget>
     <div data-bind="text: koResultText, visible: koIsRunning() == false"></div>

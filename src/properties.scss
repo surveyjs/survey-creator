@@ -1,15 +1,17 @@
 .svd_container {
   .svd_properties {
-    border: none;
-    border-top: 2px solid $light-border-color;
+    border-width: 0;
+    border-top-width: 2px;
+    border-style: solid;
     border-radius: 0;
     padding: 0;
-    background-color: $light-bg-color;
     font-size: 1.17em;
 
     .svd_object_selector {
       padding: 1.4em;
-      border-bottom: solid 1px $light-border-color;
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-style: solid;
 
       .svd_custom_select {
         display: inline-block;
@@ -34,8 +36,7 @@
         width: 25px;
       }
       .table.svd_properties_grid {
-        color: $text-color;
-        >tbody>tr>td {
+        > tbody > tr > td {
           border: none;
           padding: 0;
           line-height: 3.25em;
@@ -43,9 +44,6 @@
           vertical-align: middle;
           &:nth-child(1) {
             font-weight: 600;
-          }
-          &:nth-child(2) {
-            color: $light-text-color;
           }
           .modal-content {
             line-height: initial;

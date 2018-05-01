@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
-import createDdmenu from "./utils/ddmenu";
 import { findParentNode } from "./utils/utils";
+import { StylesManager } from "./stylesmanager";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -147,9 +147,15 @@ function elementOnCreating(surveyElement: any) {
   surveyElement.koIsSelected.subscribe(function(newValue) {
     if (surveyElement.renderedElement) {
       if (newValue) {
-        surveyElement.renderedElement.classList.add("svd_q_selected");
+        surveyElement.renderedElement.classList.add(
+          "svd_q_selected",
+          "svd-main-border-color"
+        );
       } else {
-        surveyElement.renderedElement.classList.remove("svd_q_selected");
+        surveyElement.renderedElement.classList.remove(
+          "svd_q_selected",
+          "svd-main-border-color"
+        );
       }
     }
   });
@@ -193,10 +199,16 @@ function elementOnAfterRendering(
 ) {
   surveyElement.renderedElement = domElement;
   surveyElement.renderedElement.classList.add("svd_question");
+  if (StylesManager.currentTheme() === "bootstrap") {
+    surveyElement.renderedElement.classList.add("svd-dark-bg-color");
+  }
   surveyElement.renderedElement.classList.add("svd_q_design_border");
   getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
   if (surveyElement.koIsSelected())
-    surveyElement.renderedElement.classList.add("svd_q_selected");
+    surveyElement.renderedElement.classList.add(
+      "svd_q_selected",
+      "svd-main-border-color"
+    );
   surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
   domElement.onclick = function(e) {
     if (!e["markEvent"]) {

@@ -13,7 +13,6 @@ select-items-editor {
       height: 2em;
 
       span {
-        color: #1ab394;
         font-weight: bold;
         cursor: pointer;
       }
@@ -21,8 +20,8 @@ select-items-editor {
 
     .svda-select-items-content {
       padding: 1em;
-      background-color: white;
-      border: 1px solid lightgray;
+      border-style: solid;
+      border-width: 1px;
       border-top: none;
     }
   }

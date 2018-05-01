@@ -103,13 +103,13 @@ export class SurveyQuestionEditorProperties {
     this.buildRows(properties);
   }
   public apply() {
-    this.performForAllProperties("apply");
+    this.performForAllProperties(p => p.apply());
   }
   public reset() {
-    this.performForAllProperties("reset");
+    this.performForAllProperties(p => p.reset());
   }
   public beforeShow() {
-    this.performForAllProperties("beforeShow");
+    this.performForAllProperties(p => p.beforeShow());
   }
   public hasError(): boolean {
     var isError = false;
@@ -118,13 +118,13 @@ export class SurveyQuestionEditorProperties {
     }
     return isError;
   }
-  private performForAllProperties(methodName: string) {
+  private performForAllProperties(
+    func: (p: SurveyQuestionEditorProperty) => void
+  ) {
     for (var i = 0; i < this.rows.length; i++) {
       for (var j = 0; j < this.rows[i].properties.length; j++) {
         var property = this.rows[i].properties[j];
-        if (methodName === "apply") property.apply();
-        if (methodName === "reset") property.reset();
-        if (methodName === "beforeShow") property.beforeShow();
+        func(property);
       }
     }
   }

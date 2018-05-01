@@ -18,10 +18,10 @@ export class QuestionActionsAdorner {
   public actions = ko.observableArray<ISurveyObjectMenuItem>();
 
   public getStyle(model: ISurveyObjectMenuItem) {
-    if(!!model.icon) {
+    if (!!model.icon) {
       return ko.unwrap(model.icon);
     }
-    return "icon-action-" + model.name;
+    return "icon-action" + model.name;
   }
 
   public localize(entryString) {

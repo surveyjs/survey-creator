@@ -1,8 +1,8 @@
 <div class="svda-select-items-editor">
     <div class="svda-select-items-title" data-bind="click: toggle">
-        <span data-bind="text: getLocString('pe.editChoices')"></span>
+        <span class="svd-main-color" data-bind="text: getLocString('pe.editChoices')"></span>
     </div>
-    <div class="svda-select-items-content" data-bind="visible: isExpanded">
+    <div class="svda-select-items-content svd-dark-border-color svd-light-bg-color" data-bind="visible: isExpanded">
         <div class="svda-select-items-collection">
             <!-- ko foreach: { data: choices, afterRender: choicesRendered } -->
             <div class="item_editable item_draggable">
@@ -21,6 +21,8 @@
             </span>
         </div>
         <!-- /ko  -->
-        <div class="svda-add-new-item icon-inplace-add-item" data-bind="click: addItem, attr: { title: getLocString('pe.addItem') }"></div>
+        <div class="svda-add-new-item" data-bind="click: addItem, attr: { title: getLocString('pe.addItem') }">
+            <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplaceplus', size: 12"></svg-icon>
+        </div>
     </div>
 </div>

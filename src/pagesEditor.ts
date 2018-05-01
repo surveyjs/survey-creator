@@ -86,11 +86,18 @@ export class PagesEditor {
     this.editor.selectPage(newPage);
   }
   getPageClass = page => {
-    return page === this.selectedPage ? "svd_selected_page" : "";
+    var result =
+      page === this.selectedPage ? "svd_selected_page svd-light-bg-color" : "";
+
+    if (this.editor.pages().indexOf(page) !== this.editor.pages().length - 1) {
+      result += " svd-border-right-none";
+    }
+
+    return result;
   };
   getPageMenuIconClass = page => {
     return page === this.selectedPage && this.isActive()
-      ? "icon-gear-active"
+      ? "icon-gearactive"
       : "icon-gear";
   };
   showActions = page => {

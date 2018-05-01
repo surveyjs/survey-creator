@@ -6,6 +6,7 @@
     <table class="svd_items_table" data-bind="visible: koIsList">
         <thead>
             <tr>
+                <th></th>
                 <th data-bind="text: $root.getLocString('pe.required')"></th>
                 <th data-bind="text: $root.getLocString('pe.cellType')"></th>
                 <th data-bind="text: $root.getLocString('pe.name')"></th>
@@ -13,9 +14,13 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            <!-- ko foreach: koItems -->
+        <tbody data-bind="sortable: { foreach: koItems, options: { handle: '.svd-drag-handle', animation: 150 } }">
             <tr>
+                <td>
+                    <div class="svd-drag-handle">
+                        ☰
+                    </div>
+                </td>
                 <td class="svd-textitems-column">
                     <div class="svd-textitems-isrequired">
                         <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
@@ -43,17 +48,12 @@
                     </button>
                 </td>
             </tr>
-            <!-- /ko -->
-            <tr>
-                <td colspan="5">
-                    <div data-bind="visible: koAllowAddRemoveItems">
-                        <input type="button" class="btn btn-primary" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
-                        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
-                    </div>
-                </td>
-            </tr>
         </tbody>
     </table>
+    <div class="svd-items-control-footer" data-bind="visible: koAllowAddRemoveItems">
+        <input type="button" class="btn btn-primary" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
+        <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+    </div>
     <!-- ko if: !koIsList() -->
     <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
     <!-- /ko -->

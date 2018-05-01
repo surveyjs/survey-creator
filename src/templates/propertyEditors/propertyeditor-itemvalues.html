@@ -4,8 +4,8 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-itemvalues">
     <div style="margin-bottom:3px" data-bind="visible: koShowTextView">
-        <button class="btn-sm btn-xs" data-bind="css: {'btn btn-primary':koActiveView() == 'form', 'btn-link':koActiveView() != 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
-        <button class="btn-sm btn-xs" data-bind="css: {'btn btn-primary':koActiveView() != 'form', 'btn-link':koActiveView() == 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
+        <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
+        <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
     </div>
     <div data-bind="visible:koActiveView() == 'form'" style="overflow-y: auto; overflow-x:hidden; max-height:400px;min-height:200px">
         <table class="svd_items_table">
@@ -18,11 +18,11 @@
                     <th></th>
                 </tr>
             </thead>
-            <!-- ko template: { name: 'propertyeditor-itemvalues-items', afterRender: afterItemsRendered} -->
+            <!-- ko template: { name: 'propertyeditor-itemvalues-items' } -->
             <!-- /ko -->
         </table>
     </div>
-    <div data-bind="visible:koActiveView() == 'form'">
+    <div class="svd-items-control-footer" data-bind="visible:koActiveView() == 'form'">
         <input type="button" class="btn btn-primary" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')"
         />
         <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')"
@@ -33,8 +33,7 @@
     </div>
 </script>
 <script type="text/html" id="propertyeditor-itemvalues-items">
-    <tbody>
-        <!-- ko foreach: koItems -->
+    <tbody data-bind="sortable: { foreach: koItems, options: sortableOptions }">
         <tr>
             <td>
                 <div class="svd-drag-handle">
@@ -53,6 +52,5 @@
                 </button>
             </td>
         </tr>
-        <!-- /ko -->
     </tbody>
 </script>

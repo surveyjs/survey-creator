@@ -1,6 +1,5 @@
 .svd_container {
   .svd_toolbox {
-    background-color: $dark-bg-color;
     border: none;
     font-size: 1.17em;
     .svd_toolbox_title {
@@ -11,14 +10,16 @@
     }
     .svd_toolbox_item {
       padding: 8px;
-      border-bottom: 1px solid $light-border-color;
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-style: solid;
       line-height: 1.2em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       cursor: pointer;
       &:hover {
-        background-color: #e6eaed;
+        background-color: $primary-border-color;
       }
       .svd_toolbox_item_text {
         margin-left: 1em;
@@ -30,28 +31,22 @@
         background: transparent;
       }
 
-      & > .panel-heading {
+      & > .svd-toolbox-category-header {
         border: none;
         background-color: transparent;
         padding-left: 0;
         font-size: 1.17em;
         font-weight: 600;
         cursor: pointer;
+        padding: 10px 15px;
 
         span {
-          color: $text-color;
           text-decoration: none;
           text-transform: uppercase;
         }
 
         .icon-toolbox-arrow {
           float: right;
-        }
-
-        &.header-expand {
-          span {
-            color: $main-color;
-          }
         }
       }
 

@@ -11,7 +11,6 @@
       .icon {
         display: inline-block;
         + span {
-          color: $light-text-color;
           font-weight: bold;
         }
       }
@@ -20,8 +19,7 @@
     .ddmenu-container {
       &.toolbar-options {
         ul {
-          background: white;
-          border: 1px solid #ccc;
+          border: 1px solid $dd-menu-border;
           border-radius: 2px;
           padding: 0;
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -32,12 +30,6 @@
           border-top-right-radius: 0;
           li {
             margin: 5px 0;
-            &.active {
-              a {
-                background-color: #1ab394;
-                color: white;
-              }
-            }
             a {
               width: 100%;
               white-space: nowrap;
@@ -46,7 +38,6 @@
               clear: both;
               font-weight: 400;
               line-height: 1.42857143;
-              color: #333;
               text-decoration: none;
             }
           }
