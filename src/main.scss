@@ -467,6 +467,9 @@
     display: inline-block;
     width: 60%;
     padding: 0 15px;
+    &.svd_wide {
+      width: 85%;
+    }
   }
   .svd_properties {
     float: right;

@@ -65,7 +65,7 @@
                 <!-- /ko  -->
                 <!-- /ko  -->
             </div>
-            <div class="col-xs-11 svd_editors" data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid()}">
+            <div class="col-xs-11 svd_editors" data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid(), 'svd_wide': !koShowPropertyGrid()}">
                 <div class="svd_toolbar">
                     <!-- ko foreach: toolbarItems -->
                     <span class="svd_action" data-bind="css: $data.css, visible: visible, attr: { id: id }">
