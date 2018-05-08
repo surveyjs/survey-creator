@@ -1,5 +1,4 @@
 ﻿$editor-height: 75vh;
-
 @import "colors";
 @import "icons";
 @import "manage";
@@ -8,54 +7,48 @@
 @import "toolbar";
 @import "pages-editor";
 @import "properties";
-
 .svd_container {
   position: relative;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
-
+  #testSurveyPageChanged {
+    width: 300px;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
   #surveyjs {
     .svd_question {
       overflow: visible;
     }
   }
-
   .svd-textitems-column {
     width: 100%;
     display: inline-block;
-
     .btn-danger {
       min-width: 2em;
       padding: 0.78em 1em;
     }
-
     .svd-textitems-isrequired {
       vertical-align: top;
       padding-top: 3px;
       display: inline-block;
     }
-
     .svd-textitems-edit {
       vertical-align: top;
       display: inline-block;
       margin-left: 1.7em;
     }
   }
-
   .svd-items-control-footer {
     margin-top: 1em;
   }
-
   .svd-drag-handle {
     font-size: 20px;
     cursor: move;
   }
-
   .form-control {
     border-radius: 2px;
   }
-
   .form-control:focus {
     outline: 0;
     box-shadow: none;
@@ -69,21 +62,17 @@
       max-width: calc(100%);
       min-width: calc(100%);
     }
-
     .assistant {
       padding-left: 1em;
       width: 200px;
       float: right;
-
       .assistant-title {
         margin-bottom: 0.5em;
         font-weight: bold;
       }
-
       .assistant-content {
         overflow-y: auto;
         height: 125px;
-
         .assistant-item {
           margin-bottom: 0.5em;
           cursor: pointer;
@@ -98,7 +87,7 @@
       padding: 0;
     }
     .ddmenu-container {
-      .ddmenu > span {
+      .ddmenu>span {
         padding: 6px 12px;
       }
       ul {
@@ -152,7 +141,6 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
   }
-
   a,
   a.nav-link {
     cursor: pointer;
@@ -175,13 +163,11 @@
           height: $editor-height;
           overflow-y: scroll;
           padding-top: 18px;
-
           .empty-message {
             text-align: center;
             line-height: 60vh;
             font-size: 22px;
           }
-
           .panel-body,
           .card-block {
             .svd_question {
@@ -214,13 +200,11 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
   }
-
   survey-widget {
     .form-control {
       width: 100%;
     }
   }
-
   .svd_wrap_elements {
     white-space: normal;
   }
@@ -329,7 +313,6 @@
       th,
       td {
         padding: 0.25em;
-
         .btn {
           min-width: auto;
         }
@@ -344,7 +327,6 @@
     .svd_commercial_text {
       font-weight: bold;
       text-decoration: none;
-
       .svd_commercial_product {
         padding-left: 0.5em;
       }
@@ -374,30 +356,25 @@
     box-shadow: none;
     opacity: 0.65;
   }
-
   :after,
   :before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-
   label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: 700;
   }
-
   .form-group {
     margin-bottom: 15px;
   }
-
   select,
   textarea {
     line-height: inherit;
   }
-
   .form-control {
     padding: 6px 12px;
     line-height: 1.5em;
@@ -412,22 +389,18 @@
       }
     }
   }
-
   .input-group {
     position: relative;
     display: table;
     border-spacing: 0;
-
     .form-control,
     .input-group-addon,
     .input-group-btn {
       display: table-cell;
     }
-
     .form-control {
       float: left;
     }
-
     .input-group-addon {
       padding: 6px 12px;
       font-size: 14px;
@@ -452,7 +425,6 @@
       }
     }
   }
-
   .form-inline {
     .input-group {
       display: inline-table;
@@ -464,11 +436,9 @@
       vertical-align: middle;
     }
   }
-
   .nav-tabs {
     margin-bottom: 0;
-    padding: 0;
-    // border-bottom: 1px solid $secondary-border-color;
+    padding: 0; // border-bottom: 1px solid $secondary-border-color;
     line-height: 2.5em;
   }
   .nav-item {
@@ -489,7 +459,6 @@
       border-bottom-color: transparent;
     }
   }
-
   .svd_toolbox {
     float: left;
     width: 15%;
@@ -498,16 +467,17 @@
     display: inline-block;
     width: 60%;
     padding: 0 15px;
+    &.svd_wide {
+      width: 85%;
+    }
   }
   .svd_properties {
     float: right;
     width: 25%;
-
     table {
       width: 100%;
     }
   }
-
   #surveyjs {
     .sv_row {
       .svd_question {
@@ -529,7 +499,6 @@
       }
     }
   }
-
   .modal {
     position: fixed;
     top: 0;
@@ -542,7 +511,6 @@
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
     outline: 0;
-
     .modal-dialog {
       position: relative;
       max-width: 600px;
