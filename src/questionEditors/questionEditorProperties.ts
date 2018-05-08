@@ -80,6 +80,7 @@ export class SurveyQuestionEditorRow {
 }
 
 export class SurveyQuestionEditorProperties {
+  public isTabProperty: boolean = false;
   private properties: Array<Survey.JsonObjectProperty>;
   private onCanShowPropertyCallback: (
     object: any,
@@ -94,8 +95,9 @@ export class SurveyQuestionEditorProperties {
       property: Survey.JsonObjectProperty
     ) => boolean = null,
     public options: ISurveyObjectEditorOptions = null,
-    public isTabProperty: boolean = false
+    private tab: any = null
   ) {
+    this.isTabProperty = !!tab;
     this.onCanShowPropertyCallback = onCanShowPropertyCallback;
     this.properties = Survey.JsonObject.metaData["getPropertiesByObj"]
       ? Survey.JsonObject.metaData["getPropertiesByObj"](this.obj)
@@ -169,6 +171,13 @@ export class SurveyQuestionEditorProperties {
         break;
       }
     }
+    if (!property) return null;
+    if (
+      !!this.tab &&
+      property.name == this.tab.name &&
+      this.tab.visible === true
+    )
+      return property;
     return SurveyHelper.isPropertyVisible(
       this.obj,
       property,

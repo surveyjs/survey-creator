@@ -6,8 +6,16 @@ import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { getNextValue } from "../utils/utils";
+import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
+import {
+  SurveyNestedPropertyEditor,
+  SurveyNestedPropertyEditorItem
+} from "./propertyNestedPropertyEditor";
+import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 
-export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
+export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
+  private detailDefinition: any;
+  private optionsShowTextView: boolean = true;
   koActiveView: any;
   koItemsText: any;
   koShowTextView: any;
@@ -16,10 +24,14 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   private columnsValue: Array<SurveyPropertyItemValuesEditorColumn>;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
+    this.koShowTextView = ko.observable(true);
     var self = this;
+    if (property) {
+      this.detailDefinition =
+        SurveyQuestionEditorDefinition.definition[this.getItemValueClassName()];
+    }
     this.columnsValue = this.createColumns();
     this.koActiveView = ko.observable("form");
-    this.koShowTextView = ko.observable(this.canShowTextView);
     this.koItemsText = ko.observable("");
     this.koActiveView.subscribe(function(newValue) {
       if (newValue == "form") self.updateItems(self.koItemsText());
@@ -35,14 +47,26 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   public get editorType(): string {
     return "itemvalues";
   }
+  public get hasDetailButton(): boolean {
+    return !!this.detailDefinition;
+  }
   public get columns(): Array<SurveyPropertyItemValuesEditorColumn> {
     return this.columnsValue;
+  }
+  protected getItemValueClassName() {
+    return this.property ? this.editorType + "@" + this.property.name : "";
+  }
+  protected getEditorName(): string {
+    if (!this.koEditItem() || !this.koEditItem().item) return "";
+    return editorLocalization
+      .getString("pe.itemEdit")
+      ["format"](this.koEditItem().item.value);
   }
   protected checkForErrors(): boolean {
     var result = false;
     for (var i = 0; i < this.koItems().length; i++) {
       var item = this.koItems()[i];
-      result = item.hasError || result;
+      result = item.hasError() || result;
     }
     return result;
   }
@@ -56,21 +80,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
     return result;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
-    //TODO remove these class and property registration later.
-    if (!Survey.JsonObject.metaData.findClass("itemvalue")) {
-      Survey.JsonObject.metaData.addClass("itemvalue", []);
-    }
-    if (!Survey.JsonObject.metaData.findProperty("itemvalue", "value")) {
-      Survey.JsonObject.metaData.addProperty("itemvalue", { name: "!value" });
-    }
-    if (!Survey.JsonObject.metaData.findProperty("itemvalue", "text")) {
-      Survey.JsonObject.metaData.addProperty("itemvalue", {
-        name: "text",
-        onGetValue: function(obj: any) {
-          return obj.locText.pureText;
-        }
-      });
-    }
     var className = this.property ? this.property.type : "itemvalue";
     if (className == this.editorType) className = "itemvalue";
     var properties = Survey.JsonObject.metaData.getProperties(className);
@@ -87,7 +96,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
   }
   protected onSetEditorOptions(editorOptions: any) {
     super.onSetEditorOptions(editorOptions);
-    this.koShowTextView(this.canShowTextView && editorOptions.showTextView);
+    this.optionsShowTextView = editorOptions.showTextView;
+    this.updateShowTextViewVisibility();
     this.koActiveView(editorOptions.itemsEntryType || "form");
   }
   protected createNewEditorItem(): any {
@@ -105,13 +115,21 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         itemValue
       );
     }
-    return new SurveyPropertyItemValuesEditorItem(itemValue, this.columns);
+    return new SurveyPropertyItemValuesEditorItem(
+      itemValue,
+      this.columns,
+      this.getItemValueClassName()
+    );
   }
   protected createEditorItem(item: any): any {
     var itemValue = new Survey.ItemValue(null);
     itemValue.locOwner = this;
     itemValue.setData(item);
-    return new SurveyPropertyItemValuesEditorItem(itemValue, this.columns);
+    return new SurveyPropertyItemValuesEditorItem(
+      itemValue,
+      this.columns,
+      this.getItemValueClassName()
+    );
   }
   protected createItemFromEditorItem(editorItem: any) {
     var item = editorItem.item;
@@ -131,12 +149,17 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
         this.koItemsText(this.getItemsText());
       }
     }
+    this.updateShowTextViewVisibility();
   }
   protected onBeforeApply() {
     if (this.koActiveView() !== "form") {
       this.updateItems(this.koItemsText());
     }
     super.onBeforeApply();
+  }
+  protected onListDetailViewChanged() {
+    super.onListDetailViewChanged();
+    this.updateShowTextViewVisibility();
   }
   protected updateItems(text: string) {
     var items = [];
@@ -169,8 +192,21 @@ export class SurveyPropertyItemValuesEditor extends SurveyPropertyItemsEditor {
       )
       .join("\n");
   }
-  private get canShowTextView(): boolean {
-    return this.columns.length > 0;
+  private updateShowTextViewVisibility() {
+    if (!this.koShowTextView) return;
+    if (!this.optionsShowTextView || this.columns.length == 0) {
+      this.koShowTextView(false);
+      return;
+    }
+
+    this.koShowTextView(!this.hasVisibleIf());
+  }
+  private hasVisibleIf(): boolean {
+    var items = this.koItems();
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].item.visibleIf) return true;
+    }
+    return false;
   }
 }
 
@@ -182,22 +218,28 @@ export class SurveyPropertyItemValuesEditorColumn {
   }
 }
 
-export class SurveyPropertyItemValuesEditorItem {
+export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEditorItem {
   private cellsValue: Array<SurveyPropertyItemValuesEditorCell> = [];
   constructor(
     public item: Survey.ItemValue,
-    public columns: Array<SurveyPropertyItemValuesEditorColumn>
+    public columns: Array<SurveyPropertyItemValuesEditorColumn>,
+    private className: string = ""
   ) {
+    super();
     for (var i = 0; i < columns.length; i++) {
       this.cellsValue.push(
         new SurveyPropertyItemValuesEditorCell(item, columns[i])
       );
     }
   }
+  protected createSurveyQuestionEditor() {
+    return new SurveyQuestionEditor(this.item, null, this.className, null);
+  }
   public get cells(): Array<SurveyPropertyItemValuesEditorCell> {
     return this.cellsValue;
   }
-  public get hasError(): boolean {
+  public hasError(): boolean {
+    if (super.hasError()) return true;
     var res = false;
     for (var i = 0; i < this.cells.length; i++) {
       res = this.cells[i].hasError || res;

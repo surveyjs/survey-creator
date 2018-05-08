@@ -1,6 +1,7 @@
 import * as Survey from "survey-knockout";
 
 export interface ISurveyQuestionEditorDefinition {
+  title?: string;
   properties?: Array<
     string | { name: string; category?: string; tab?: string }
   >;
@@ -76,6 +77,13 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 }
+      ]
+    },
+    "itemvalues@choices": {
+      title: "Rules",
+      tabs: [
+        { name: "general", visible: false },
+        { name: "visibleIf", visible: true }
       ]
     },
     dropdown: {

@@ -81,6 +81,7 @@ export var enStrings = {
     addItem: "Click to add an item...",
     removeAll: "Remove All",
     edit: "Edit",
+    itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     move: "Move",
     empty: "<empty>",

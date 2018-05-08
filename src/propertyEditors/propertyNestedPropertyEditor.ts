@@ -11,6 +11,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koIsList: any;
   onEditItemClick: any;
   onCancelEditItemClick: any;
+  koEditorName: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     var self = this;
@@ -18,6 +19,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     this.koIsList = ko.observable(true);
     this.koEditItem.subscribe(function(newValue) {
       self.koIsList(self.koEditItem() == null);
+      self.onListDetailViewChanged();
     });
     this.onEditItemClick = function(item) {
       self.koEditItem(item);
@@ -27,7 +29,14 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       if (editItem.itemEditor && editItem.itemEditor.hasError()) return;
       self.koEditItem(null);
     };
+    this.koEditorName = ko.computed(function() {
+      return self.getEditorName();
+    });
   }
+  protected getEditorName(): string {
+    return "";
+  }
+  protected onListDetailViewChanged() {}
   protected checkForErrors(): boolean {
     var result = false;
     for (var i = 0; i < this.koItems().length; i++) {
@@ -36,11 +45,11 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     return result;
   }
   protected onBeforeApply() {
-    super.onBeforeApply();
     var internalItems = this.koItems();
     for (var i = 0; i < internalItems.length; i++) {
       internalItems[i].apply();
     }
+    super.onBeforeApply();
   }
 }
 

@@ -79,7 +79,7 @@ export class SurveyQuestionProperties {
   private properties: Array<Survey.JsonObjectProperty>;
   private editorDefinition: Array<ISurveyQuestionEditorDefinition>;
   constructor(
-    public obj: Survey.Base,
+    public obj: any,
     public onCanShowPropertyCallback: (
       object: any,
       property: Survey.JsonObjectProperty
@@ -93,13 +93,8 @@ export class SurveyQuestionProperties {
     );
   }
   public getProperty(propertyName: string): Survey.JsonObjectProperty {
-    var property = null;
-    for (var i = 0; i < this.properties.length; i++) {
-      if (this.properties[i].name == propertyName) {
-        property = this.properties[i];
-        break;
-      }
-    }
+    var property = this.getPropertyCore(propertyName);
+    if (!property) return null;
     return SurveyHelper.isPropertyVisible(
       this.obj,
       property,
@@ -108,24 +103,34 @@ export class SurveyQuestionProperties {
       ? property
       : null;
   }
-  public getProperties(tabName: string): Array<Survey.JsonObjectProperty> {
+  private getPropertyCore(propertyName: string): Survey.JsonObjectProperty {
+    var property = null;
+    for (var i = 0; i < this.properties.length; i++) {
+      if (this.properties[i].name == propertyName) return this.properties[i];
+    }
+    return null;
+  }
+  public getProperties(tab: any): Array<Survey.JsonObjectProperty> {
     return this.editorDefinition
       .reduce((a, b) => a.concat(b.properties), [
-        <any>{ name: tabName, tab: tabName }
+        <any>{ name: tab.name, tab: tab.name }
       ])
       .filter(
         prop =>
-          prop !== undefined && typeof prop !== "string" && prop.tab === tabName
+          prop !== undefined &&
+          typeof prop !== "string" &&
+          prop.tab === tab.name
       )
-      .map(prop => typeof prop !== "string" && this.getProperty(prop.name))
+      .map(prop => typeof prop !== "string" && this.getPropertyCore(prop.name))
       .filter(
         prop =>
           !!prop &&
-          SurveyHelper.isPropertyVisible(
-            this.obj,
-            prop,
-            this.onCanShowPropertyCallback
-          )
+          ((prop.name == tab.name && tab.visible === true) ||
+            SurveyHelper.isPropertyVisible(
+              this.obj,
+              prop,
+              this.onCanShowPropertyCallback
+            ))
       );
   }
 }
@@ -144,7 +149,7 @@ export class SurveyQuestionEditor {
   onTabClick: any;
 
   constructor(
-    public obj: Survey.Base,
+    public obj: any,
     public onCanShowPropertyCallback: (
       object: any,
       property: Survey.JsonObjectProperty
@@ -153,7 +158,9 @@ export class SurveyQuestionEditor {
     public options: ISurveyObjectEditorOptions = null
   ) {
     var self = this;
-    if (!this.className) this.className = this.obj.getType();
+    if (!this.className && this.obj.getType) {
+      this.className = this.obj.getType();
+    }
     this.properties = new SurveyQuestionProperties(
       obj,
       onCanShowPropertyCallback
@@ -241,8 +248,7 @@ export class SurveyQuestionEditor {
       this.obj,
       SurveyQuestionEditorDefinition.getProperties(this.className),
       this.onCanShowPropertyCallback,
-      this.options,
-      false
+      this.options
     );
     if (SurveyQuestionEditorDefinition.isGeneralTabVisible(this.className)) {
       tabs.push(new SurveyQuestionEditorTab(this.obj, properties, "general"));
@@ -257,7 +263,7 @@ export class SurveyQuestionEditor {
     var tabNames = SurveyQuestionEditorDefinition.getTabs(this.className);
     for (var i = 0; i < tabNames.length; i++) {
       var tabItem = tabNames[i];
-      var properties = this.properties.getProperties(tabItem.name);
+      var properties = this.properties.getProperties(tabItem);
       if (properties.length > 0) {
         var propertyTab = new SurveyQuestionEditorTab(
           this.obj,
@@ -266,7 +272,7 @@ export class SurveyQuestionEditor {
             properties,
             this.onCanShowPropertyCallback,
             this.options,
-            true
+            tabItem
           ),
           tabItem.name
         );
@@ -280,7 +286,7 @@ export class SurveyQuestionEditor {
 export class SurveyQuestionEditorTab {
   private titleValue: string;
   constructor(
-    public obj: Survey.Base,
+    public obj: any,
     public properties: SurveyQuestionEditorProperties = null,
     private _name
   ) {}

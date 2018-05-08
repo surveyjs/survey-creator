@@ -20,6 +20,12 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   public get editorType(): string {
     return "textitems";
   }
+  protected getEditorName(): string {
+    if (!this.koEditItem()) return "";
+    return editorLocalization
+      .getString("pe.columnEdit")
+      ["format"](this.koEditItem().koName());
+  }
   protected createNewEditorItem(): any {
     var newItem = new Survey.MultipleTextItem(this.getNewName());
     //newColumn.colOwner = TODO set colOwner.
@@ -53,7 +59,6 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
   koName: any;
   koTitle: any;
   koIsRequired: any;
-  koEditorName: any;
   koHasError: any;
   constructor(public item: Survey.MultipleTextItem) {
     super();
@@ -61,13 +66,6 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
     this.koTitle = ko.observable(item.name === item.title ? "" : item.title);
     this.koIsRequired = ko.observable(this.item.isRequired);
     this.koHasError = ko.observable(false);
-
-    var self = this;
-    this.koEditorName = ko.computed(function() {
-      return editorLocalization
-        .getString("pe.itemEdit")
-        ["format"](self.koName());
-    });
   }
   protected createSurveyQuestionEditor() {
     return new SurveyQuestionEditor(this.item, null, "multipletextitem");

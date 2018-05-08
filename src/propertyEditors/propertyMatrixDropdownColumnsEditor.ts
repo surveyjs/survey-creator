@@ -18,6 +18,12 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   public get editorType(): string {
     return "matrixdropdowncolumns";
   }
+  protected getEditorName(): string {
+    if (!this.koEditItem()) return "";
+    return editorLocalization
+      .getString("pe.columnEdit")
+      ["format"](this.koEditItem().koName());
+  }
   protected createNewEditorItem(): any {
     var newColumn = new Survey.MatrixDropdownColumn("");
     if (this.options) {
@@ -39,10 +45,8 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
   koTitle: any;
   koCellType: any;
   koIsRequired: any;
-  koEditorName: any;
   koHasError: any;
   koCanEdit: any;
-  public onShowChoicesClick: any;
   public cellTypeChoices: Array<any>;
   constructor(
     public column: Survey.MatrixDropdownColumn,
@@ -61,11 +65,6 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     var self = this;
     this.koCanEdit = ko.computed(function() {
       return self.koCellType() != "default";
-    });
-    this.koEditorName = ko.computed(function() {
-      return editorLocalization
-        .getString("pe.columnEdit")
-        ["format"](self.koName());
     });
     this.koCellType.subscribe(function(newValue) {
       self.resetSurveyQuestionEditor();

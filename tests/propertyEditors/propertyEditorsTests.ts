@@ -620,9 +620,9 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
     propertyEditor.columns
   );
   assert.equal(item.cells.length, 2, "There are two cells");
-  assert.equal(item.hasError, true, "There is an error");
+  assert.equal(item.hasError(), true, "There is an error");
   item.cells[0].koValue(0);
-  assert.equal(item.hasError, false, "There is no errors");
+  assert.equal(item.hasError(), false, "There is no errors");
 });
 
 QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
