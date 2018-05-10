@@ -3,7 +3,7 @@
     <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-itemvalues">
-    <div  data-bind="visible: koIsList">
+    <div data-bind="visible: koIsList">
         <div style="margin-bottom:3px" data-bind="visible: koShowTextView">
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
@@ -42,7 +42,7 @@
     <tbody data-bind="sortable: { foreach: koItems, options: sortableOptions }">
         <tr>
             <td>
-                <div class="svd-drag-handle">
+                <div class="svd-drag-handle svd-itemvalue-action">
                     ☰
                 </div>
                 <button type="button" class="btn btn-sm svd-textitems-edit" data-bind="visible: $parent.hasDetailButton, click: $parent.onEditItemClick">
