@@ -107,9 +107,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     });
     nextValue = getNextValue("item", values);
 
-    var itemValue = new Survey.ItemValue(nextValue);
-    itemValue["survey"] = this.object.survey;
-    itemValue.locOwner = this;
+    var itemValue = this.createEditorItemCore(nextValue);
     if (this.options) {
       this.options.onItemValueAddedCallback(
         this.editablePropertyName,
@@ -123,15 +121,21 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
   }
   protected createEditorItem(item: any): any {
-    var itemValue = new Survey.ItemValue(null);
-    itemValue["survey"] = this.object.survey;
-    itemValue.locOwner = this;
+    var itemValue = this.createEditorItemCore(null);
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
       this.columns,
       this.getItemValueClassName()
     );
+  }
+  private createEditorItemCore(item: any) {
+    var itemValue = new Survey.ItemValue(item);
+    if (itemValue["visibleIf"]) {
+      itemValue["survey"] = this.object.survey;
+    }
+    itemValue.locOwner = this;
+    return itemValue;
   }
   protected createItemFromEditorItem(editorItem: any) {
     var item = editorItem.item;
