@@ -72,18 +72,24 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   protected createColumns(): Array<SurveyPropertyItemValuesEditorColumn> {
     var result = [];
-    var properties = this.getProperties();
+    var properties = this.getProperties(true);
     for (var i = 0; i < properties.length; i++) {
-      if (!properties[i].visible) continue;
       result.push(new SurveyPropertyItemValuesEditorColumn(properties[i]));
     }
     return result;
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getProperties(
+    visibleOnly: boolean = false
+  ): Array<Survey.JsonObjectProperty> {
     var className = this.property ? this.property.type : "itemvalue";
     if (className == this.editorType) className = "itemvalue";
     var properties = Survey.JsonObject.metaData.getProperties(className);
-    return properties;
+    var res = [];
+    for (var i = 0; i < properties.length; i++) {
+      if (visibleOnly && !properties[i].visible) continue;
+      res.push(properties[i]);
+    }
+    return res;
   }
   protected createEditorOptions(): any {
     var options = super.createEditorOptions();
@@ -170,7 +176,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   protected updateItems(text: string) {
     var items = [];
     if (text) {
-      var properties = this.getProperties();
+      var properties = this.getProperties(true);
       var texts = text.split("\n");
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;

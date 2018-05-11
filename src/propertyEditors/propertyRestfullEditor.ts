@@ -59,6 +59,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
       var customProperties = val["getCustomPropertiesNames"]();
       for (var i = 0; i < customProperties.length; i++) {
         var propName = customProperties[i];
+        if (propName === "visibleIfName") continue; //TODO remove later
         this.addItem(propName, val);
       }
     }

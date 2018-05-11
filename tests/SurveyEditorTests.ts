@@ -301,7 +301,6 @@ QUnit.test("Copy a page", function(assert) {
 });
 
 QUnit.test("fast copy tests, set the correct parent", function(assert) {
-  debugger;
   var editor = new SurveyEditor();
   var survey = editor.survey;
   var p1 = editor["pages"]()[0].addNewPanel("panel1");
