@@ -108,6 +108,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     nextValue = getNextValue("item", values);
 
     var itemValue = new Survey.ItemValue(nextValue);
+    itemValue["survey"] = this.object.survey;
     itemValue.locOwner = this;
     if (this.options) {
       this.options.onItemValueAddedCallback(
@@ -123,6 +124,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   protected createEditorItem(item: any): any {
     var itemValue = new Survey.ItemValue(null);
+    itemValue["survey"] = this.object.survey;
     itemValue.locOwner = this;
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
