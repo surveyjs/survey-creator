@@ -98,6 +98,13 @@ export class SurveyQuestionEditorDefinition {
     expression: {
       tabs: [{ name: "expression", index: 10 }]
     },
+    "matrixdropdowncolumn@default": {
+      tabs: [
+        { name: "general", visible: false },
+        { name: "visibleIf", index: 12 },
+        { name: "enableIf", index: 20 }
+      ]
+    },
     "matrixdropdowncolumn@checkbox": {
       properties: ["hasOther", "otherText", "choicesOrder", "colCount"],
       tabs: [

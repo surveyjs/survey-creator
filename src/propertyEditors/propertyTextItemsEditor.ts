@@ -61,7 +61,7 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
   koIsRequired: any;
   koHasError: any;
   constructor(public item: Survey.MultipleTextItem) {
-    super();
+    super(item, []);
     this.koName = ko.observable(item.name);
     this.koTitle = ko.observable(item.name === item.title ? "" : item.title);
     this.koIsRequired = ko.observable(this.item.isRequired);

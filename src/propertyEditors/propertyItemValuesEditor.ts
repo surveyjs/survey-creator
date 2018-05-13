@@ -9,7 +9,9 @@ import { getNextValue } from "../utils/utils";
 import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 import {
   SurveyNestedPropertyEditor,
-  SurveyNestedPropertyEditorItem
+  SurveyNestedPropertyEditorItem,
+  SurveyNestedPropertyEditorEditorCell,
+  SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 
@@ -21,7 +23,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   koShowTextView: any;
   changeToTextViewClick: any;
   changeToFormViewClick: any;
-  private columnsValue: Array<SurveyPropertyItemValuesEditorColumn>;
+  private columnsValue: Array<SurveyNestedPropertyEditorColumn>;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koShowTextView = ko.observable(true);
@@ -50,7 +52,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   public get hasDetailButton(): boolean {
     return !!this.detailDefinition;
   }
-  public get columns(): Array<SurveyPropertyItemValuesEditorColumn> {
+  public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.columnsValue;
   }
   protected getItemValueClassName() {
@@ -70,11 +72,11 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     return result;
   }
-  protected createColumns(): Array<SurveyPropertyItemValuesEditorColumn> {
+  protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
     var result = [];
     var properties = this.getProperties(true);
     for (var i = 0; i < properties.length; i++) {
-      result.push(new SurveyPropertyItemValuesEditorColumn(properties[i]));
+      result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
     }
     return result;
   }
@@ -222,80 +224,16 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
 }
 
-export class SurveyPropertyItemValuesEditorColumn {
-  constructor(public property: Survey.JsonObjectProperty) {}
-  public get text(): string {
-    var text = editorLocalization.getString("pe." + this.property.name);
-    return text ? text : this.property.name;
-  }
-}
-
 export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEditorItem {
-  private cellsValue: Array<SurveyPropertyItemValuesEditorCell> = [];
   constructor(
     public item: Survey.ItemValue,
-    public columns: Array<SurveyPropertyItemValuesEditorColumn>,
+    public columns: Array<SurveyNestedPropertyEditorColumn>,
     private className: string = ""
   ) {
-    super();
-    for (var i = 0; i < columns.length; i++) {
-      this.cellsValue.push(
-        new SurveyPropertyItemValuesEditorCell(item, columns[i])
-      );
-    }
+    super(item, columns);
   }
   protected createSurveyQuestionEditor() {
     return new SurveyQuestionEditor(this.item, null, this.className, null);
-  }
-  public get cells(): Array<SurveyPropertyItemValuesEditorCell> {
-    return this.cellsValue;
-  }
-  public hasError(): boolean {
-    if (super.hasError()) return true;
-    var res = false;
-    for (var i = 0; i < this.cells.length; i++) {
-      res = this.cells[i].hasError || res;
-    }
-    return res;
-  }
-}
-export class SurveyPropertyItemValuesEditorCell {
-  private objectPropertyValue: SurveyObjectProperty;
-  constructor(
-    public item: Survey.ItemValue,
-    public column: SurveyPropertyItemValuesEditorColumn
-  ) {
-    var self = this;
-    var propEvent = (property: SurveyObjectProperty, newValue: any) => {
-      self.value = newValue;
-    };
-    this.objectPropertyValue = new SurveyObjectProperty(
-      this.property,
-      propEvent
-    );
-    this.objectPropertyValue.editor.isInplaceProperty = true;
-    this.objectProperty.object = item;
-  }
-  public get property(): Survey.JsonObjectProperty {
-    return this.column.property;
-  }
-  public get objectProperty(): SurveyObjectProperty {
-    return this.objectPropertyValue;
-  }
-  public get editor(): SurveyPropertyEditorBase {
-    return this.objectProperty.editor;
-  }
-  public get koValue(): any {
-    return this.objectProperty.editor.koValue;
-  }
-  public get value() {
-    return this.property.getValue(this.item);
-  }
-  public set value(val: any) {
-    this.property.setValue(this.item, val, null);
-  }
-  public get hasError(): boolean {
-    return this.editor.hasError();
   }
 }
 

@@ -120,6 +120,10 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
         if (text) return text;
       }
     }
+    if (this.property.name === "cellType") {
+      var text = editorLocalization.getString("qt." + value);
+      if (text) return text;
+    }
     return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
