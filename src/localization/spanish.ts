@@ -62,6 +62,10 @@ var spanishTranslation = {
     saving: "Salvando",
     saved: "Salvado"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Requerido?"
+  },
   //Property Editors
   pe: {
     apply: "Aplicar",
@@ -95,7 +99,6 @@ var spanishTranslation = {
     propertyIsEmpty: "Por favor proporcione un valor",
     value: "Valor",
     text: "Texto",
-    required: "Requerido?",
     columnEdit: "Editar columna: {0}",
     itemEdit: "Editar artículo: {0}",
     url: "URL",

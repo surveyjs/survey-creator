@@ -98,6 +98,9 @@ export class SurveyQuestionEditorDefinition {
     expression: {
       tabs: [{ name: "expression", index: 10 }]
     },
+    matrixdropdowncolumn: {
+      properties: ["isRequired", "cellType", "name", "title"]
+    },
     "matrixdropdowncolumn@default": {
       tabs: [
         { name: "general", visible: false },

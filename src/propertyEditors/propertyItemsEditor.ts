@@ -61,9 +61,6 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     super.setup();
     this.updateValue();
   }
-  public beforeShow() {
-    super.beforeShow();
-  }
   protected getItemsFromValue(value: any = null): Array<any> {
     var items = [];
     if (!value) value = this.editingValue;

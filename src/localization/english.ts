@@ -69,6 +69,10 @@ export var enStrings = {
     saving: "Saving",
     saved: "Saved"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Required?"
+  },
   //Property Editors
   pe: {
     apply: "Apply",
@@ -107,7 +111,6 @@ export var enStrings = {
     propertyIsEmpty: "Please enter a value",
     value: "Value",
     text: "Text",
-    required: "Required?",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
 

@@ -2,6 +2,10 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEditorBase";
 import {
+  SurveyQuestionEditor,
+  SurveyQuestionEditorTab
+} from "../../src/questionEditors/questionEditor";
+import {
   SurveyPropertyItemValuesEditor,
   SurveyPropertyItemValuesEditorItem
 } from "../../src/propertyEditors/propertyItemValuesEditor";
@@ -9,6 +13,7 @@ import {
   SurveyNestedPropertyEditorEditorCell,
   SurveyNestedPropertyEditorColumn
 } from "../../src/propertyEditors/propertyNestedPropertyEditor";
+import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
 
 import { SurveyPropertyMultipleValuesEditor } from "../../src/propertyEditors/propertyMultipleValuesEditor";
 import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
@@ -663,32 +668,30 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
   columns.push(new Survey.MatrixDropdownColumn("column 1"));
   columns.push(new Survey.MatrixDropdownColumn("column 2"));
   columns[0]["choices"] = [1, 2, "three"];
-  var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(null);
-  itemValueProperty.beforeShow();
-  itemValueProperty.onChanged = (
-    newValue: Array<Survey.MatrixDropdownColumn>
-  ) => {
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(null);
+  columnsEditor.beforeShow();
+  columnsEditor.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => {
     columns = newValue;
   };
 
-  assert.equal(itemValueProperty.columns.length, 4, "By default four columns");
+  assert.equal(columnsEditor.columns.length, 4, "By default four columns");
 
-  itemValueProperty.editingValue = columns;
-  assert.equal(itemValueProperty.koItems().length, 2, "there are two elements");
+  columnsEditor.editingValue = columns;
+  assert.equal(columnsEditor.koItems().length, 2, "there are two elements");
   assert.equal(
-    itemValueProperty.koItems()[0].cells[2].value,
+    columnsEditor.koItems()[0].cells[2].value,
     "column 1",
     "the first column name"
   );
-  itemValueProperty.onAddClick();
-  itemValueProperty.koItems()[2].cells[1].value = "checkbox";
-  itemValueProperty.koItems()[2].cells[2].value = "column 3";
+  columnsEditor.onAddClick();
+  columnsEditor.koItems()[2].cells[1].value = "checkbox";
+  columnsEditor.koItems()[2].cells[2].value = "column 3";
   assert.equal(
-    itemValueProperty.koItems().length,
+    columnsEditor.koItems().length,
     3,
     "There are 3 columns in editor"
   );
-  itemValueProperty.onApplyClick();
+  columnsEditor.onApplyClick();
   assert.equal(columns.length, 3, "There are 3 columns");
   assert.equal(
     columns[2]["cellType"],
@@ -701,6 +704,33 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
     "the last column name set correctly"
   );
 });
+
+QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function(
+  assert
+) {
+  var saveProperties =
+    SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties;
+
+  SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = [
+    "cellType",
+    "name",
+    "readOnly"
+  ];
+
+  var columns: Array<Survey.MatrixDropdownColumn> = [];
+  columns.push(new Survey.MatrixDropdownColumn("column 1"));
+  columns.push(new Survey.MatrixDropdownColumn("column 2"));
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(null);
+  assert.equal(columnsEditor.columns.length, 3, "There are 3 columns");
+  assert.equal(
+    columnsEditor.columns[2].property.name,
+    "readOnly",
+    "The last column is readonly"
+  );
+
+  SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = saveProperties;
+});
+
 QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   assert
 ) {
@@ -710,30 +740,44 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   question.addColumn("column 1");
   question.addColumn("column 2");
   survey.pages[0].addElement(question);
-  var itemValueProperty = new SurveyPropertyDropdownColumnsEditor(
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
     Survey.JsonObject.metaData.findProperty(question.getType(), "columns")
   );
-  itemValueProperty.object = question;
-  itemValueProperty.beforeShow();
-  itemValueProperty.onChanged = (
-    newValue: Array<Survey.MatrixDropdownColumn>
-  ) => {
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  columnsEditor.onChanged = (newValue: Array<Survey.MatrixDropdownColumn>) => {
     question.columns = newValue;
   };
-  itemValueProperty.editingValue = question.columns;
+  columnsEditor.editingValue = question.columns;
 
-  assert.equal(itemValueProperty.koEditItem(), null, "It is null by default");
-  itemValueProperty.koEditItem(itemValueProperty.koItems()[1]);
+  assert.equal(columnsEditor.koEditItem(), null, "It is null by default");
+  columnsEditor.koItems()[1].column.cellType = "dropdown";
+  columnsEditor.koEditItem(columnsEditor.koItems()[1]);
+  var colDetailEditor = <SurveyQuestionEditor>columnsEditor.koEditItem()
+    .itemEditor;
   assert.notEqual(
-    itemValueProperty.koEditItem().itemEditor.obj,
+    colDetailEditor.obj,
     null,
     "The question editor obj is not null"
   );
   assert.equal(
-    itemValueProperty.koEditItem().itemEditor.obj.getType(),
+    colDetailEditor.obj.getType(),
     "matrixdropdowncolumn",
     "itemEditor edit the second item"
   );
+  var generalTab = <SurveyQuestionEditorTab>colDetailEditor.koTabs()[0];
+  var rows = generalTab.properties.rows;
+  for (var i = 0; i < rows.length; i++) {
+    for (var j = 0; j < rows[i].properties.length; j++) {
+      var prop = rows[i].properties[j];
+      if (prop.editor.editorType == "boolean") continue;
+      assert.equal(
+        prop.editor.showDisplayNameOnTop,
+        true,
+        "It should be shown on top"
+      );
+    }
+  }
 });
 
 QUnit.test("Text property test - two way binding", function(assert) {

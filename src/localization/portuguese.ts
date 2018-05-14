@@ -48,6 +48,10 @@ var portugueseTranslation = {
     correctJSON: "Por favor corrija o JSON.",
     surveyResults: "Resultado da pesquisa: "
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Obrigatório?"
+  },
   //Property Editors
   pe: {
     apply: "Aplicar",
@@ -69,7 +73,6 @@ var portugueseTranslation = {
     propertyIsEmpty: "Por favor informe um valor na propriedade",
     value: "Valor",
     text: "Texto",
-    required: "Obrigatório?",
     columnEdit: "Editar coluna: {0}",
     itemEdit: "Editar item: {0}",
 

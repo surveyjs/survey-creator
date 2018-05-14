@@ -34,6 +34,10 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       return self.getEditorName();
     });
   }
+  public beforeShow() {
+    super.beforeShow();
+    this.koEditItem(null);
+  }
   protected getEditorName(): string {
     return "";
   }
@@ -97,8 +101,13 @@ export class SurveyNestedPropertyEditorItem {
 export class SurveyNestedPropertyEditorColumn {
   constructor(public property: Survey.JsonObjectProperty) {}
   public get text(): string {
-    var text = editorLocalization.getString("pe." + this.property.name);
+    var text = editorLocalization.hasString("pel." + this.property.name)
+      ? this.getLocText("pel.")
+      : this.getLocText("pe.");
     return text ? text : this.property.name;
+  }
+  private getLocText(prefix: string) {
+    return editorLocalization.getString(prefix + this.property.name);
   }
 }
 
