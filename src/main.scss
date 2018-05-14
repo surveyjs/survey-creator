@@ -215,6 +215,11 @@
   .svd_wrap_elements {
     white-space: normal;
   }
+  .svd-matrixdropdowncolumns-table {
+    th {
+      white-space: nowrap;
+    }
+  }
   .svd_table-nowrap {
     table-layout: fixed;
   }
@@ -312,6 +317,10 @@
     .modal-body {
       max-height: 75vh;
       overflow: auto;
+    }
+    .svd_property_editor_dropdown {
+      min-width: 140px;
+      display: block;
     }
   }
   .svd_items_table {
