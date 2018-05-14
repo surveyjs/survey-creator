@@ -272,9 +272,9 @@ QUnit.test("On new Matrix Column added", function(assert) {
     question.columns = options.newValue;
   });
   var property = <SurveyObjectProperty>editor.getPropertyEditor("columns");
-  var itemValuesEditor = <SurveyPropertyDropdownColumnsEditor>property.editor;
-  itemValuesEditor.onAddClick();
-  itemValuesEditor.onApplyClick();
+  var columnsEditor = <SurveyPropertyDropdownColumnsEditor>property.editor;
+  columnsEditor.onAddClick();
+  columnsEditor.onApplyClick();
   assert.equal(question.columns.length, 1, "One item is added");
   assert.equal(
     question.columns[0].name,

@@ -61,6 +61,10 @@ var simplifiedChineseTranslation = {
     saving: "保存中...",
     saved: "已保存"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "是否为必填项?"
+  },
   // strings for property editors
   pe: {
     apply: "应用",
@@ -84,7 +88,6 @@ var simplifiedChineseTranslation = {
     propertyIsEmpty: "请为该属性设定一个值",
     value: "值",
     text: "显示文本",
-    required: "是否为必填项?",
     columnEdit: "编辑列: {0}",
     itemEdit: "编辑选项: {0}",
     hasOther: "可添加其他答案?",

@@ -61,6 +61,10 @@ var persianStrings = {
     saving: "در حال ذخیره سازی",
     saved: "ذخیره شد"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "اجباری؟"
+  },
   //Property Editors
   pe: {
     apply: "اعمال",
@@ -90,7 +94,6 @@ var persianStrings = {
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     value: "مقدار",
     text: "متن",
-    required: "اجباری؟",
     columnEdit: "ویرایش ستون: {0}",
     itemEdit: "ویرایش آیتم: {0}",
 

@@ -61,6 +61,10 @@ var polishStrings = {
     saving: "Trwa zapis",
     saved: "Zapisano"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Wymagane?"
+  },
   //Property Editors
   pe: {
     apply: "Zastosuj",
@@ -89,7 +93,6 @@ var polishStrings = {
     propertyIsEmpty: "Podaj wartość",
     value: "Wartość",
     text: "Etykieta",
-    required: "Wymagane?",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
 

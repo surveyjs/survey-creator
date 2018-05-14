@@ -52,6 +52,10 @@ var germanTranslation = {
     correctJSON: "Bitte JSON korrigieren.",
     surveyResults: "Umfrageergebnis: "
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Erforderlich?"
+  },
   //Property Editors
   pe: {
     apply: "Anwenden",
@@ -73,7 +77,6 @@ var germanTranslation = {
     propertyIsEmpty: "Bitte geben Sie einen Wert ein",
     value: "Wert",
     text: "Text",
-    required: "Erforderlich?",
     columnEdit: "Spalte bearbeiten: {0}",
     itemEdit: "Element bearbeiten: {0}",
 

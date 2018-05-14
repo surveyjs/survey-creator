@@ -16,6 +16,16 @@ export var editorLocalization = {
     }
     return obj;
   },
+  hasString: function(strName: string, locale: string = null) {
+    var loc = this.getLocale(locale);
+    var path = strName.split(".");
+    var obj = loc;
+    for (var i = 0; i < path.length; i++) {
+      obj = obj[path[i]];
+      if (!obj) return false;
+    }
+    return true;
+  },
   getPropertyName: function(strName: string, locale: string = null) {
     var obj = this.getProperty(strName, locale);
     if (obj["name"]) return obj["name"];

@@ -62,6 +62,10 @@ var frenchTranslation = {
     saving: "Sauvegarde en cours",
     saved: "Sauvegardé"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Obligatoire ?"
+  },
   //Property Editors
   pe: {
     apply: "Appliquer",
@@ -83,18 +87,21 @@ var frenchTranslation = {
     conditionSelectQuestion: "Sélectionner une question...",
     conditionButtonAdd: "Ajouter",
     conditionButtonReplace: "Remplacer",
-    conditionHelp: "Veuillez entrer une expression booléenne. Elle doit retourner Vrai(true) pour garder la question/page visible. Par exemple: {question1} = \"valeur1\" or ({question2} = 3 and {question3} < 5)",
-    expressionHelp: "Veuillez entrer une expression. Vous pouvez utiliser des accolades pour accéder aux valeurs des questions '{question1} + {question2}', '({prix}*{quantite}) * (100 - {remise})'",
-    aceEditorHelp: "Appuyer sur Ctrl + espace pour obtenir une aide pour la saisie d'expression",
+    conditionHelp:
+      'Veuillez entrer une expression booléenne. Elle doit retourner Vrai(true) pour garder la question/page visible. Par exemple: {question1} = "valeur1" or ({question2} = 3 and {question3} < 5)',
+    expressionHelp:
+      "Veuillez entrer une expression. Vous pouvez utiliser des accolades pour accéder aux valeurs des questions '{question1} + {question2}', '({prix}*{quantite}) * (100 - {remise})'",
+    aceEditorHelp:
+      "Appuyer sur Ctrl + espace pour obtenir une aide pour la saisie d'expression",
     aceEditorRowTitle: "Ligne courante",
     aceEditorPanelTitle: "Panneau courant",
-    showMore: "Pour plus d'informations, veuillez vous référer à la documentation",
+    showMore:
+      "Pour plus d'informations, veuillez vous référer à la documentation",
     assistantTitle: "Questions disponibles :",
     cellsEmptyRowsColumns: "Il faut au minimum une ligne ou une colonne",
     propertyIsEmpty: "Veuillez entrer une valeur pour la propriété",
     value: "Valeur",
     text: "Texte",
-    required: "Obligatoire ?",
     columnEdit: "Éditer la colonne: {0}",
     itemEdit: "Éditer l'item: {0}",
     url: "URL",
@@ -114,13 +121,14 @@ var frenchTranslation = {
     rows: "Nombre de lignes",
     placeHolder: "Placeholder (indice dans le champ)",
     showPreview: "L'aperçu d'image est-il affiché ?",
-    storeDataAsText: "Stocker le contenu du fichier dans le résultat JSON sous forme de texte",
+    storeDataAsText:
+      "Stocker le contenu du fichier dans le résultat JSON sous forme de texte",
     maxSize: "Taille maximum du fichier en octets",
     imageHeight: "Hauteur de l'image",
     imageWidth: "Largeur de l'image",
     rowCount: "Nombre de lignes",
-    addRowText: "Texte bouton \"Ajouter une ligne\"",
-    removeRowText: "Texte bouton \"Supprimer une ligne\"",
+    addRowText: 'Texte bouton "Ajouter une ligne"',
+    removeRowText: 'Texte bouton "Supprimer une ligne"',
     minRateDescription: "Description note minimum",
     maxRateDescription: "Description note maximum",
     inputType: "Type de champ",
@@ -135,28 +143,35 @@ var frenchTranslation = {
     locale: "Langue par défaut",
     mode: "Mode (édition/lecture seule)",
     clearInvisibleValues: "Effacer les valeurs invisibles",
-    cookieName: "Nom du cookie (pour empêcher de compléter 2 fois le questionnaire localement)",
+    cookieName:
+      "Nom du cookie (pour empêcher de compléter 2 fois le questionnaire localement)",
     sendResultOnPageNext: "Envoyer les résultats au changement de page",
-    storeOthersAsComment: "Sauvegarder la valeur \"Autres\" dans un champ séparé",
+    storeOthersAsComment: 'Sauvegarder la valeur "Autres" dans un champ séparé',
     showPageTitles: "Afficher les titres de pages",
     showPageNumbers: "Afficher les numéros de pages",
     pagePrevText: "Texte bouton page précédente",
     pageNextText: "Texte bouton page suivante",
     completeText: "Texte bouton terminer",
     startSurveyText: "Texte bouton commencer",
-    showNavigationButtons: "Afficher les boutons de navigation (navigation par défaut)",
-    showPrevButton: "Afficher le bouton précédent (l'utilisateur pourra retourner sur la page précédente)",
-    firstPageIsStarted: "La première page du questionnaire est une page de démarrage.",
-    showCompletedPage: "Afficher la page \"terminé\" à la fin (completedHtml)",
-    goNextPageAutomatic: "Aller à la page suivante automatiquement pour toutes les questions",
+    showNavigationButtons:
+      "Afficher les boutons de navigation (navigation par défaut)",
+    showPrevButton:
+      "Afficher le bouton précédent (l'utilisateur pourra retourner sur la page précédente)",
+    firstPageIsStarted:
+      "La première page du questionnaire est une page de démarrage.",
+    showCompletedPage: 'Afficher la page "terminé" à la fin (completedHtml)',
+    goNextPageAutomatic:
+      "Aller à la page suivante automatiquement pour toutes les questions",
     showProgressBar: "Afficher la barre de progression",
     questionTitleLocation: "Emplacement du titre de la question",
     requiredText: "La question requiert un/des symbole(s)",
     questionStartIndex: "Index de départ de la question (1, 2 ou 'A', 'a')",
     showQuestionNumbers: "Afficher les numéros de questions",
-    questionTitleTemplate: "Gabarit du titre de question, par défaut : '{no}. {require} {title}'",
+    questionTitleTemplate:
+      "Gabarit du titre de question, par défaut : '{no}. {require} {title}'",
     questionErrorLocation: "Emplacement de l'erreur",
-    focusFirstQuestionAutomatic: "Focus sur la première question au changement de page",
+    focusFirstQuestionAutomatic:
+      "Focus sur la première question au changement de page",
     questionsOrder: "Ordre des éléments sur la page",
     maxTimeToFinish: "Temps maximum pour terminer le questionnaire",
     maxTimeToFinishPage: "Temps maximum pour terminer une page",
@@ -190,7 +205,7 @@ var frenchTranslation = {
       triggers: "Déclencheurs",
       templateTitle: "Titre de gabarit"
     },
-    editProperty: "Éditer la propriété \"{0}\"",
+    editProperty: 'Éditer la propriété "{0}"',
     items: "[ Éléments: {0} ]",
     enterNewValue: "Veuillez saisir la valeur.",
     noquestions: "Il n'y a aucune question dans le questionnaire.",
@@ -203,7 +218,8 @@ var frenchTranslation = {
     triggerRunIf: "Exécuter si",
     triggerSetToName: "Changer la valeur de: ",
     triggerSetValue: "à: ",
-    triggerIsVariable: "Ne placez pas la variable dans le résultat du questionnaire.",
+    triggerIsVariable:
+      "Ne placez pas la variable dans le résultat du questionnaire."
   },
   //Property values
   pv: {
@@ -312,7 +328,7 @@ var frenchTranslation = {
     name: "Nom",
     title: {
       name: "Titre",
-      title: "Laissez vide, si même texte que le \"Nom\""
+      title: 'Laissez vide, si même texte que le "Nom"'
     },
     navigationButtonsVisibility: "Visibilité des boutons de navigation",
     questionsOrder: "Ordre des questions",
@@ -342,7 +358,7 @@ var frenchTranslation = {
     choicesOrder: "Ordre des choix",
     choicesByUrl: "Choix par API",
     otherText: "Autre texte",
-    otherErrorText: "Texte d'erreur champ \"Autre\"",
+    otherErrorText: 'Texte d\'erreur champ "Autre"',
     storeOthersAsComment: "Sauvegarder choix autre comme commentaire",
     label: "Intitulé",
     showTitle: "Afficher le titre",
@@ -439,6 +455,6 @@ var frenchTranslation = {
     isAllRowRequired: "Toutes les lignes sont-elle obligatoires ?",
     locale: "Langue"
   }
-}
+};
 
 editorLocalization.locales["fr"] = frenchTranslation;

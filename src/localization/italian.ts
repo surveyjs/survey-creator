@@ -28,7 +28,6 @@ var italianTranslation = {
     rating: "Valutazione",
     text: "Testo semplice",
     expression: "Espressione"
-
   },
   // strings for editor
   ed: {
@@ -61,6 +60,10 @@ var italianTranslation = {
     saving: "Salvataggio",
     saved: "Salvato"
   },
+  //Property names in table headers
+  pel: {
+    isRequired: "Richiesto"
+  },
   // strings for property editors
   pe: {
     apply: "Applica",
@@ -80,10 +83,12 @@ var italianTranslation = {
     conditionSelectQuestion: "Seleziona domanda...",
     conditionButtonAdd: "Aggiungi",
     conditionButtonReplace: "Sostituisci",
-    conditionHelp:  "Per favore, inserire una espressione booleana. Dovrebbe restituire true per mantenere la domanda/pagina visibile. Ad esempio: {domanda1} = 'valore1' or ({domanda2} * {domanda4}  > 20 and {domanda3} < 5)",
+    conditionHelp:
+      "Per favore, inserire una espressione booleana. Dovrebbe restituire true per mantenere la domanda/pagina visibile. Ad esempio: {domanda1} = 'valore1' or ({domanda2} * {domanda4}  > 20 and {domanda3} < 5)",
     expressionHelp:
-    "Per favore inserire una espressione. Puoi usare parentesi graffe per ottenere l'accesso ai valori delle domande: '{domanda1} + {domanda2}', '({prezzo}*{qta}) * (100 - {sconto})'",
-    aceEditorHelp: "Premi ctrl+space per ottenere un suggerimento sul completamento dell'espressione",
+      "Per favore inserire una espressione. Puoi usare parentesi graffe per ottenere l'accesso ai valori delle domande: '{domanda1} + {domanda2}', '({prezzo}*{qta}) * (100 - {sconto})'",
+    aceEditorHelp:
+      "Premi ctrl+space per ottenere un suggerimento sul completamento dell'espressione",
     aceEditorRowTitle: "Riga corrente",
     aceEditorPanelTitle: "Pannello Corrente",
     showMore: "Per favore, per maggiori dettagli guardare la documentazione",
@@ -92,7 +97,6 @@ var italianTranslation = {
     propertyIsEmpty: "Per favore, inserire un valore per la propietà",
     value: "Valore",
     text: "Testo",
-    required: "Richiesto",
     columnEdit: "Modifica colonna: {0}",
     itemEdit: "Modifica elemento: {0}",
     url: "URL",
@@ -132,8 +136,10 @@ var italianTranslation = {
     locale: "Lingua Default",
     mode: "Modalità (modifica/sola lettura)",
     clearInvisibleValues: "Pulischi valori non visibili",
-    cookieName: "Nome cookie (per disabilitare esegui il questionario due volte in locale)",
-    sendResultOnPageNext: "Invia i risultati del sondaggio alla pagina successiva",
+    cookieName:
+      "Nome cookie (per disabilitare esegui il questionario due volte in locale)",
+    sendResultOnPageNext:
+      "Invia i risultati del sondaggio alla pagina successiva",
     storeOthersAsComment: "Memorizza il valore 'altri' in campi separati",
     showPageTitles: "Visualizza titoli pagina",
     showPageNumbers: "Visualizza numeri pagina",
@@ -141,10 +147,14 @@ var italianTranslation = {
     pageNextText: "Testo bottone pagina successiva",
     completeText: "Testo bottone Completato",
     startSurveyText: "Testo bottone Inizia",
-    showNavigationButtons: "Visualizza bottoni di navigazione (navigazione di default)",
-    showPrevButton: "Visualizza bottone precedente(l'utente può tornare alla pagina precedente)",
-    firstPageIsStarted: "La prima pagina nel questionario è la pagina iniziale.",
-    showCompletedPage: "Visualizza la pagina completata alla fine del questionario (completedHtml)",
+    showNavigationButtons:
+      "Visualizza bottoni di navigazione (navigazione di default)",
+    showPrevButton:
+      "Visualizza bottone precedente(l'utente può tornare alla pagina precedente)",
+    firstPageIsStarted:
+      "La prima pagina nel questionario è la pagina iniziale.",
+    showCompletedPage:
+      "Visualizza la pagina completata alla fine del questionario (completedHtml)",
     goNextPageAutomatic:
       "Rispondendo a tutte le domande, vai alla pagina successiva in automatico.",
     showProgressBar: "Visualizza barra di avanzamento",
@@ -155,7 +165,8 @@ var italianTranslation = {
     questionTitleTemplate:
       "Template titolo della domanda, il default è: '{no}. {require} {title}'",
     questionErrorLocation: "Posizione notifica errore sulla domanda",
-    focusFirstQuestionAutomatic: "Sul cambio pagina, posiziona il cursore sulla prima domanda",
+    focusFirstQuestionAutomatic:
+      "Sul cambio pagina, posiziona il cursore sulla prima domanda",
     questionsOrder: "Ordine di elementi sulla pagina",
     maxTimeToFinish: "Tempo massimo per terminare il sondaggio",
     maxTimeToFinishPage: "Tempo massimo per terminare una pagina del sondaggio",

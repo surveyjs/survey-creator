@@ -12,6 +12,7 @@ import {
   SurveyNestedPropertyEditorEditorCell
 } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
+import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEditor {
   private columnsValue: Array<SurveyNestedPropertyEditorColumn>;
@@ -63,18 +64,34 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     return newColumn;
   }
   protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
-    var result = [];
-    var names = ["isRequired", "cellType", "name", "title"];
+    var res = [];
+    var names = this.getPropertiesNames();
     for (var i = 0; i < names.length; i++) {
       var prop = Survey.JsonObject.metaData.findProperty(
         "matrixdropdowncolumn",
         names[i]
       );
       if (prop) {
-        result.push(new SurveyNestedPropertyEditorColumn(prop));
+        res.push(new SurveyNestedPropertyEditorColumn(prop));
       }
     }
-    return result;
+    return res;
+  }
+  protected getPropertiesNames(): Array<string> {
+    var res = [];
+    var properties = SurveyQuestionEditorDefinition.getProperties(
+      "matrixdropdowncolumn"
+    );
+    if (properties) {
+      for (var i = 0; i < properties.length; i++) {
+        var prop = properties[i];
+        res.push(prop.name ? prop.name : prop);
+      }
+    }
+    if (res.length == 0) {
+      res = ["isRequired", "cellType", "name", "title"];
+    }
+    return res;
   }
 }
 
