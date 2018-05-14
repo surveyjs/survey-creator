@@ -72,23 +72,41 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     return result;
   }
-  protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
-    var result = [];
-    var properties = this.getProperties(true);
-    for (var i = 0; i < properties.length; i++) {
-      result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
+  public beforeShow() {
+    super.beforeShow();
+    var props = this.getDefinedProperties();
+    if (!!props && props.length > 0) {
+      this.columnsValue = this.createColumns();
     }
-    return result;
   }
-  protected getProperties(
-    visibleOnly: boolean = false
-  ): Array<Survey.JsonObjectProperty> {
+  protected getProperties(): Array<Survey.JsonObjectProperty> {
+    var props = this.getDefinedProperties();
+    if (!!props && props.length > 0) return props;
+    return this.getDefaultProperties();
+  }
+  protected get itemValueClasseName(): string {
     var className = this.property ? this.property.type : "itemvalue";
     if (className == this.editorType) className = "itemvalue";
-    var properties = Survey.JsonObject.metaData.getProperties(className);
+    return className;
+  }
+  protected getDefinedProperties(): Array<any> {
+    if (this.property && this.object && this.object.getType) {
+      var properties = SurveyQuestionEditorDefinition.getProperties(
+        this.object.getType() + "@" + this.property.name
+      );
+      if (properties && properties.length > 0) {
+        return this.getPropertiesByNames(this.itemValueClasseName, properties);
+      }
+    }
+    return [];
+  }
+  protected getDefaultProperties(): Array<Survey.JsonObjectProperty> {
+    var properties = Survey.JsonObject.metaData.getProperties(
+      this.itemValueClasseName
+    );
     var res = [];
     for (var i = 0; i < properties.length; i++) {
-      if (visibleOnly && !properties[i].visible) continue;
+      if (!properties[i].visible) continue;
       res.push(properties[i]);
     }
     return res;
@@ -178,7 +196,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   protected updateItems(text: string) {
     var items = [];
     if (text) {
-      var properties = this.getProperties(true);
+      var properties = this.getProperties();
       var texts = text.split("\n");
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;

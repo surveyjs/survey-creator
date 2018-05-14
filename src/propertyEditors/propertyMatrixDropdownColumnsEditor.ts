@@ -63,19 +63,9 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     newColumn.colOwner = this.object;
     return newColumn;
   }
-  protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
-    var res = [];
+  protected getProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames();
-    for (var i = 0; i < names.length; i++) {
-      var prop = Survey.JsonObject.metaData.findProperty(
-        "matrixdropdowncolumn",
-        names[i]
-      );
-      if (prop) {
-        res.push(new SurveyNestedPropertyEditorColumn(prop));
-      }
-    }
-    return res;
+    return this.getPropertiesByNames("matrixdropdowncolumn", names);
   }
   protected getPropertiesNames(): Array<string> {
     var res = [];

@@ -38,6 +38,33 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     super.beforeShow();
     this.koEditItem(null);
   }
+  protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
+    var result = [];
+    var properties = this.getProperties();
+    for (var i = 0; i < properties.length; i++) {
+      result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
+    }
+    return result;
+  }
+  protected getProperties(): Array<Survey.JsonObjectProperty> {
+    return [];
+  }
+  protected getPropertiesByNames(
+    className: string,
+    names: Array<any>
+  ): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    for (var i = 0; i < names.length; i++) {
+      var name = names[i];
+      name.name ? name.name : name;
+      var prop = Survey.JsonObject.metaData.findProperty(className, name);
+      if (prop && prop.visible) {
+        res.push(prop);
+      }
+    }
+    return res;
+  }
+
   protected getEditorName(): string {
     return "";
   }

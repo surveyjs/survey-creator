@@ -447,6 +447,48 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
 
   Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
 });
+QUnit.test("SurveyPropertyItemValue columns define in definition", function(
+  assert
+) {
+  Survey.JsonObject.metaData.addProperty("itemvalue", "description");
+  SurveyQuestionEditorDefinition.definition["checkbox@choices"] = {
+    properties: ["value", "text"]
+  };
+
+  var qRadio = new Survey.QuestionRadiogroup("q1");
+  var qCheck = new Survey.QuestionCheckbox("q2");
+
+  var propertyEditor = new SurveyPropertyItemValuesEditor(
+    Survey.JsonObject.metaData.findProperty("selectbase", "choices")
+  );
+  propertyEditor.object = qRadio;
+  propertyEditor.editingValue = qRadio.choices;
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    3,
+    "There are three columns value + text + description"
+  );
+  assert.equal(
+    propertyEditor.columns[2].property.name,
+    "description",
+    "The last column name is"
+  );
+  propertyEditor = new SurveyPropertyItemValuesEditor(
+    Survey.JsonObject.metaData.findProperty("selectbase", "choices")
+  );
+  propertyEditor.object = qCheck;
+  propertyEditor.editingValue = qCheck.choices;
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    2,
+    "There are two columns value + text"
+  );
+
+  delete SurveyQuestionEditorDefinition.definition["radiogroup@choices"];
+  Survey.JsonObject.metaData.removeProperty("itemvalue", "description");
+});
 QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   assert
 ) {
