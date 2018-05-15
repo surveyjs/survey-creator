@@ -726,8 +726,8 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
     "the first column name"
   );
   columnsEditor.onAddClick();
-  columnsEditor.koItems()[2].cells[1].value = "checkbox";
-  columnsEditor.koItems()[2].cells[2].value = "column 3";
+  columnsEditor.koItems()[2].cells[1].koValue("checkbox");
+  columnsEditor.koItems()[2].cells[2].koValue("column 3");
   assert.equal(
     columnsEditor.koItems().length,
     3,
