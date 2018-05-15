@@ -105,6 +105,8 @@ export var enStrings = {
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
+    conditionShowMoreUrl:
+      "https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf",
     assistantTitle: "Available questions:",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 

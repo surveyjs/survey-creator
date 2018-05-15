@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- ko if: $parent.hasAceEditor -->
-        <span data-bind="text:$root.getLocString('pe.aceEditorHelp')"></span>
+        <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
         <div id="expression-ace-editor" style="height: 200px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
         <!-- /ko -->
 
@@ -30,14 +30,14 @@
         <!-- /ko -->
 
         <!-- <div class="assistant">
-            <div class="assistant-title" data-bind="text:$root.getLocString('pe.assistantTitle')"></div>
+            <div class="assistant-title" data-bind="text:$data.getLocString('pe.assistantTitle')"></div>
             <div class="assistant-content" data-bind="foreach:availableQuestions">
                 <div class="assistant-item" data-bind=" text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
             </div>
         </div> -->
-        <span data-bind="text:$root.getLocString('pe.conditionHelp')" style="white-space:normal "></span>
-        <div>
-            <a data-bind="text:$root.getLocString('pe.showMore')" target="_blank" href="https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf"></a>
+        <span data-bind="text:$data.getLocString('pe.conditionHelp')" style="white-space:normal "></span>
+        <div data-bind="visible: $data.hasLocString('pe.conditionShowMoreUrl')">
+            <a data-bind="attr: { href: $data.getLocString('pe.conditionShowMoreUrl')}, text:$data.getLocString('pe.showMore')" target="_blank"></a>
         </div>
     </div>
 </script>
