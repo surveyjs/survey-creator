@@ -9,7 +9,8 @@
 @import "properties";
 .svd_container {
   position: relative;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
   #testSurveyPageChanged {
     width: 300px;
@@ -89,12 +90,12 @@
   }
   .propertyeditor-triggers,
   .propertyeditor-validators {
-    min-height: 150px;
+    min-height: 200px;
     .first-addon {
       padding: 0;
     }
     .ddmenu-container {
-      .ddmenu>span {
+      .ddmenu > span {
         padding: 6px 12px;
       }
       ul {
