@@ -253,7 +253,7 @@ export class QuestionToolbox {
     this.onItemsChanged();
   }
   /**
-   * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is false.
+   * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty.
    * @see allowExpandMultipleCategories
    * @see expandCategory
    * @see collapseCategory

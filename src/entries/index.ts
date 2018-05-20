@@ -50,7 +50,8 @@ export {
   SurveyPropertyModalEditor
 } from "../propertyEditors/propertyModalEditor";
 export {
-  SurveyPropertyTextEditor
+  SurveyPropertyTextEditor,
+  SurveyPropertyHtmlEditor
 } from "../propertyEditors/propertyModalEditor";
 export {
   SurveyPropertyConditionEditor
