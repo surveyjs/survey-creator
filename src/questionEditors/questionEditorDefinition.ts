@@ -46,7 +46,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "html", index: 10 }]
     },
     matrixdropdownbase: {
-      properties: ["cellType"],
+      properties: ["cellType", "columnsLocation"],
       tabs: [
         { name: "columns", index: 10 },
         { name: "rows", index: 11 },
@@ -54,7 +54,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     matrixdynamic: {
-      properties: ["rowCount", "addRowText", "removeRowText"]
+      properties: ["rowCount", "addRowLocation", "addRowText", "removeRowText"]
     },
     matrix: {
       tabs: [{ name: "columns", index: 10 }, { name: "rows", index: 11 }]

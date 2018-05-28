@@ -139,6 +139,8 @@ export var enStrings = {
     imageHeight: "Image height",
     imageWidth: "Image width",
     rowCount: "Row count",
+    columnsLocation: "Columns location",
+    addRowLocation: "Add row button location",
     addRowText: "Add row button text",
     removeRowText: "Remove row button text",
     minRateDescription: "Minimum rate description",
@@ -258,8 +260,11 @@ export var enStrings = {
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
+    horizontal: "horizontal",
+    vertical: "vertical",
     top: "top",
     bottom: "bottom",
+    topBottom: "top and bottom",
     left: "left",
     color: "color",
     date: "date",
@@ -410,6 +415,7 @@ export var enStrings = {
 
     horizontalScroll: "horizontalScroll",
     cellType: "cellType",
+    columnsLocation: "columnsLocation",
     columnColCount: "columnColCount",
     columnMinWidth: "columnMinWidth",
 
@@ -420,6 +426,7 @@ export var enStrings = {
     keyDuplicationError: "keyDuplicationError",
     confirmDelete: "confirmDelete",
     confirmDeleteText: "confirmDeleteText",
+    addRowLocation: "addRowLocation",
     addRowText: "addRowText",
     removeRowText: "removeRowText",
 
