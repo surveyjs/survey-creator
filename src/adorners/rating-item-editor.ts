@@ -96,6 +96,9 @@ var createAddItemHandler = (
       },
       getMarkdownHtml: (text: string) => {
         return text;
+      },
+      getProcessedText: (text: string) => {
+        return text;
       }
     };
     question.rateValues = question.rateValues.concat([itemValue]);

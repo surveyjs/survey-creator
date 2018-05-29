@@ -123,6 +123,9 @@ export var createAddItemHandler = (
     },
     getMarkdownHtml: (text: string) => {
       return text;
+    },
+    getProcessedText: (text: string) => {
+      return text;
     }
   };
   question.choices = question.choices.concat([itemValue]);

@@ -242,6 +242,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public getMarkdownHtml(text: string): string {
     return text;
   }
+  public getProcessedText(text: string): string {
+    return text;
+  }
   public get options(): ISurveyObjectEditorOptions {
     return this.optionsValue;
   }
