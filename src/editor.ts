@@ -397,6 +397,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   koAutoSave = ko.observable(false);
   /**
+   * The event is called when end-user addes new element (question or panel) into the survey toolbox.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.element is a new added element
+   */
+  public onCustomElementAddedIntoToolbox: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
   public get isAutoSave() {
@@ -1682,6 +1691,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public addCustomToolboxQuestion(question: Survey.QuestionBase) {
     this.toolbox.addCopiedItem(question);
+    this.onCustomElementAddedIntoToolbox.fire(this, {element: question});
   }
   /**
    * Copy a question to the active page
