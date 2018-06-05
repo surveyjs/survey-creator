@@ -100,6 +100,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", visible: true }
       ]
     },
+    checkbox: {},
+    radiogroup: {},
     dropdown: {
       properties: ["optionsCaption"]
     },
@@ -327,9 +329,9 @@ export class SurveyQuestionEditorDefinition {
       return result;
     }
     while (className) {
-      var metaClass = <Survey.JsonMetadataClass>Survey.JsonObject.metaData[
-        "findClass"
-      ](className);
+      var metaClass = <Survey.JsonMetadataClass>(
+        Survey.JsonObject.metaData["findClass"](className)
+      );
       if (!metaClass) break;
       if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
         result.push(SurveyQuestionEditorDefinition.definition[metaClass.name]);
