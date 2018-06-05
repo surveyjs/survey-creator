@@ -53,11 +53,14 @@ var packagePlatformJson = {
     node: ">=0.10.0"
   },
   typings: "surveyeditor.d.ts",
+  peerDependencies: {
+    bootstrap: "^3.3.6",
+    jquery: "^3.1.1",
+    "ace-builds": "^1.2.2"
+  },
   dependencies: {
     "survey-knockout": "^" + packageJson.version,
     knockout: "^3.4.0",
-    bootstrap: "^3.3.6",
-    "ace-builds": "^1.2.2",
     "@types/knockout": "^3.4.0"
   },
   devDependencies: {}
