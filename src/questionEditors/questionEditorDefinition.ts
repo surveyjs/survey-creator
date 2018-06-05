@@ -86,6 +86,20 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", visible: true }
       ]
     },
+    "itemvalues@rows": {
+      title: "Rules",
+      tabs: [
+        { name: "general", visible: false },
+        { name: "visibleIf", visible: true }
+      ]
+    },
+    "itemvalues@columns": {
+      title: "Rules",
+      tabs: [
+        { name: "general", visible: false },
+        { name: "visibleIf", visible: true }
+      ]
+    },
     dropdown: {
       properties: ["optionsCaption"]
     },

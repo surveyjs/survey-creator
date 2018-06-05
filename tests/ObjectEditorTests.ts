@@ -368,8 +368,8 @@ QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function(
   var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
   assert.equal(
     itemValuesEditor.hasDetailButton,
-    false,
-    "Columns property has not Rules button"
+    true,
+    "Columns property has Rules button now"
   );
 });
 
