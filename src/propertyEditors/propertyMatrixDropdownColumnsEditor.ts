@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase } from "./propertyEditorBase";
+import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "./propertyItemValuesEditor";
 import { editorLocalization } from "../editorLocalization";
@@ -89,9 +89,9 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
   constructor(
     public column: Survey.MatrixDropdownColumn,
     public columns: Array<SurveyNestedPropertyEditorColumn>,
-    public options = null
+    options: ISurveyObjectEditorOptions = null
   ) {
-    super(column, columns);
+    super(column, columns, options);
     var self = this;
     column.registerFunctionOnPropertyValueChanged(
       "cellType",

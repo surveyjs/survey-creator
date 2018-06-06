@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase } from "./propertyEditorBase";
+import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
@@ -142,7 +142,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns,
+      this.columns, this.options,
       this.getItemValueClassName()
     );
   }
@@ -151,7 +151,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns,
+      this.columns, this.options,
       this.getItemValueClassName()
     );
   }
@@ -246,12 +246,13 @@ export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEdit
   constructor(
     public item: Survey.ItemValue,
     public columns: Array<SurveyNestedPropertyEditorColumn>,
+    options: ISurveyObjectEditorOptions,
     private className: string = ""
   ) {
-    super(item, columns);
+    super(item, columns, options);
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyQuestionEditor(this.item, null, this.className, null);
+    return new SurveyQuestionEditor(this.item, null, this.className, this.options);
   }
 }
 

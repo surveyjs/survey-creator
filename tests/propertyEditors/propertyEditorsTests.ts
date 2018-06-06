@@ -593,11 +593,10 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
     "selectbase",
     "choices"
   );
-  var propEditor = <SurveyPropertyItemValuesEditor>SurveyPropertyEditorFactory.createEditor(
-    property,
-    function(newValue) {
+  var propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
       q.choices = newValue;
-    }
+    })
   );
   propEditor.beforeShow();
   propEditor.object = q;
@@ -673,7 +672,8 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
   var itemValue = new Survey.ItemValue(null);
   var item = new SurveyPropertyItemValuesEditorItem(
     itemValue,
-    propertyEditor.columns
+    propertyEditor.columns,
+    null
   );
   assert.equal(item.cells.length, 2, "There are two cells");
   assert.equal(item.hasError(), true, "There is an error");
@@ -795,8 +795,9 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   assert.equal(columnsEditor.koEditItem(), null, "It is null by default");
   columnsEditor.koItems()[1].column.cellType = "dropdown";
   columnsEditor.koEditItem(columnsEditor.koItems()[1]);
-  var colDetailEditor = <SurveyQuestionEditor>columnsEditor.koEditItem()
-    .itemEditor;
+  var colDetailEditor = <SurveyQuestionEditor>(
+    columnsEditor.koEditItem().itemEditor
+  );
   assert.notEqual(
     colDetailEditor.obj,
     null,

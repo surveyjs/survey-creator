@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "./propertyItemValuesEditor";
 import { editorLocalization } from "../editorLocalization";
@@ -86,15 +89,22 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
 }
 
 export class SurveyNestedPropertyEditorItem {
+  protected options: ISurveyObjectEditorOptions;
   private cellsValue: Array<SurveyNestedPropertyEditorEditorCell> = [];
   private itemEditorValue: SurveyQuestionEditor;
   constructor(
     public obj: any,
-    public columns: Array<SurveyNestedPropertyEditorColumn>
+    public columns: Array<SurveyNestedPropertyEditorColumn>,
+    options: ISurveyObjectEditorOptions
   ) {
+    this.options = options;
     for (var i = 0; i < columns.length; i++) {
       this.cellsValue.push(
-        new SurveyNestedPropertyEditorEditorCell(obj, columns[i].property)
+        new SurveyNestedPropertyEditorEditorCell(
+          obj,
+          columns[i].property,
+          this.options
+        )
       );
     }
   }
@@ -140,14 +150,21 @@ export class SurveyNestedPropertyEditorColumn {
 
 export class SurveyNestedPropertyEditorEditorCell {
   private objectPropertyValue: SurveyObjectProperty;
-  constructor(public obj: any, public property: Survey.JsonObjectProperty) {
+  private options: ISurveyObjectEditorOptions;
+  constructor(
+    public obj: any,
+    public property: Survey.JsonObjectProperty,
+    options: ISurveyObjectEditorOptions = null
+  ) {
+    this.options = options;
     var self = this;
     var propEvent = (property: SurveyObjectProperty, newValue: any) => {
       self.value = newValue;
     };
     this.objectPropertyValue = new SurveyObjectProperty(
       this.property,
-      propEvent
+      propEvent,
+      this.options
     );
     this.objectPropertyValue.editor.isInplaceProperty = true;
     this.objectProperty.object = obj;
