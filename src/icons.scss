@@ -1,11 +1,4 @@
 .svd_container {
-  @mixin svg-icon($icon-size) {
-    content: "";
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: $icon-size / 2;
-  }
-
   .svd-svg-icon {
     display: inline-block;
     vertical-align: middle;
@@ -21,52 +14,27 @@
       fill: $secondary-color;
     }
   }
-
   .icon-gearactive {
     .svd-svg-icon {
       fill: $primary-color;
     }
   }
-
   .icon-gear {
     .svd-svg-icon {
       fill: $icon-gear-color;
     }
   }
-
   .icon-status {
     .svd-svg-icon {
       fill: $icon-status-color;
       margin-bottom: 0.3em;
     }
   }
-
-  .icon-delete:before {
-    background-image: url("./images/Delete_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-fork:before {
-    background-image: url("./images/Fork_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-new:before {
-    background-image: url("./images/New_24x24.svg");
-    @include svg-icon(24px);
-  }
-
-  .icon-cloud:before {
-    background-image: url("./images/Cloud_24x24.svg");
-    @include svg-icon(24px);
-  }
-
   .icon-actiondragelement {
     cursor: move;
     position: absolute;
     left: 0;
   }
-
   .glyphicon {
     font-weight: bold;
     display: inline-block;

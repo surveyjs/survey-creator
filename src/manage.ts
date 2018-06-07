@@ -12,7 +12,7 @@ class ServiceAPI extends Survey.dxSurveyService {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", this.baseUrl + "/getActive?accessKey=" + this.accessKey);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
+    xhr.onload = function () {
       var result = xhr.response ? JSON.parse(xhr.response) : null;
       onLoad(xhr.status == 200, result, xhr.response);
     };
@@ -28,7 +28,7 @@ class ServiceAPI extends Survey.dxSurveyService {
       this.baseUrl + "/create?accessKey=" + this.accessKey + "&name=" + name
     );
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
+    xhr.onload = function () {
       var result = xhr.response ? JSON.parse(xhr.response) : null;
       onCreate(xhr.status == 200, result, xhr.response);
     };
@@ -42,7 +42,7 @@ class ServiceAPI extends Survey.dxSurveyService {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", this.baseUrl + "/changeJson?accessKey=" + this.accessKey);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onload = function() {
+    xhr.onload = function () {
       var result = xhr.response ? JSON.parse(xhr.response) : null;
       !!onSave && onSave(xhr.status == 200, result, xhr.response);
     };
@@ -57,15 +57,15 @@ class ServiceAPI extends Survey.dxSurveyService {
     xhr.open(
       "GET",
       this.baseUrl +
-        "/changeName/" +
-        id +
-        "?accessKey=" +
-        this.accessKey +
-        "&name=" +
-        name
+      "/changeName/" +
+      id +
+      "?accessKey=" +
+      this.accessKey +
+      "&name=" +
+      name
     );
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
+    xhr.onload = function () {
       var result = xhr.response ? JSON.parse(xhr.response) : null;
       !!onUpdate && onUpdate(xhr.status == 200, result, xhr.response);
     };
@@ -86,7 +86,7 @@ export class SurveyDescription implements ISurveyInfo {
     public id = "",
     public resultId = "",
     public postId = ""
-  ) {}
+  ) { }
 }
 
 export class SurveysManager {
@@ -211,10 +211,7 @@ export class SurveysManager {
       } else {
         this.currentSurveyName(survey.name());
         this.isEditMode(true);
-        $(event.target)
-          .parents(".svd-manage")
-          .find("input")
-          .focus();
+        event.target.parentNode.parentElement.getElementsByTagName("input")[0].focus();
       }
     }
   }
