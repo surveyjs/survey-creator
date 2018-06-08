@@ -56,6 +56,7 @@ export var selectItemsEditorAdorner = {
   getMarkerClass: model => {
     return !!model.parent && !!model.choices ? "select_items_editor" : "";
   },
+  getElementName: model => "selectWrapper",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     elements[0].onclick = e => e.preventDefault();
     var decoration = document.createElement("div");
@@ -72,4 +73,4 @@ export var selectItemsEditorAdorner = {
   }
 };
 
-registerAdorner("selectWrapper", selectItemsEditorAdorner);
+registerAdorner("select-choices", selectItemsEditorAdorner);

@@ -104,6 +104,7 @@ export var titleAdorner = {
   getMarkerClass: model => {
     return "title_editable";
   },
+  getElementName: model => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("span");
     decoration.innerHTML =
@@ -119,6 +120,7 @@ export var itemTitleAdorner = {
   getMarkerClass: model => {
     return !!model.items ? "item_title_editable title_editable" : "";
   },
+  getElementName: model => "itemTitle",
   afterRender: (
     elements: HTMLElement[],
     model: Survey.QuestionMultipleText,
@@ -134,4 +136,4 @@ export var itemTitleAdorner = {
   }
 };
 
-registerAdorner("itemTitle", itemTitleAdorner);
+registerAdorner("item-title", itemTitleAdorner);

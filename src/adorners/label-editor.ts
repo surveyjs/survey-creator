@@ -11,6 +11,7 @@ export var labelAdorner = {
     }
     return "";
   },
+  getElementName: model => "label",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("span");
     decoration.innerHTML =

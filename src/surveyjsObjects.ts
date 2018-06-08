@@ -255,12 +255,11 @@ function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
-      var adornerMarkerClass = adorner.getMarkerClass(
-        options.question || options.panel
-      );
+      var classesElementName = adorner.getElementName(options.question || options.panel);
+      var adornerMarkerClass = adorner.getMarkerClass(options.question || options.panel);
 
-      classes[element] = applyAdornerClass(
-        classes[element],
+      classes[classesElementName] = applyAdornerClass(
+        classes[classesElementName],
         adornerMarkerClass
       );
     });

@@ -43,6 +43,7 @@ export var questionActionsAdorner = {
   getMarkerClass: model => {
     return !model.isPanel ? "question_actions" : "";
   },
+  getElementName: model => "mainRoot",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("div");
     decoration.className = "svda-question-actions";
@@ -53,13 +54,14 @@ export var questionActionsAdorner = {
   }
 };
 
-registerAdorner("mainRoot", questionActionsAdorner);
+registerAdorner("question-actions", questionActionsAdorner);
 
 export var panelActionsAdorner = {
   getMarkerClass: model => {
     return !!model.isPanel ? "panel_actions" : "";
   },
+  getElementName: model => "container",
   afterRender: questionActionsAdorner.afterRender
 };
 
-registerAdorner("container", panelActionsAdorner);
+registerAdorner("panel-actions", panelActionsAdorner);

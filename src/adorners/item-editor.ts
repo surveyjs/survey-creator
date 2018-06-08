@@ -68,6 +68,7 @@ export var itemAdorner = {
   getMarkerClass: model => {
     return !!model.parent && !!model.choices ? "item_editable" : "";
   },
+  getElementName: model => "controlLabel",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     for (var i = 0; i < elements.length; i++) {
       elements[i].onclick = e => e.preventDefault();
@@ -103,20 +104,20 @@ export var itemAdorner = {
   }
 };
 
-registerAdorner("controlLabel", itemAdorner);
+registerAdorner("choices-label", itemAdorner);
 
 export var createAddItemHandler = (
   question: Survey.QuestionSelectBase,
   onItemAdded: (itemValue: Survey.ItemValue) => void
 ) => () => {
   var nextValue = null;
-  var values = question.choices.map(function(item) {
+  var values = question.choices.map(function (item) {
     return item.itemValue;
   });
   nextValue = getNextValue("item", values);
 
   var itemValue = new Survey.ItemValue(nextValue);
-  itemValue.locOwner = {
+  itemValue.locOwner = <any>{
     getLocale: () => {
       if (!!question["getLocale"]) return question.getLocale();
       return "";
@@ -136,6 +137,7 @@ export var itemDraggableAdorner = {
   getMarkerClass: model => {
     return !!model.parent && !!model.choices ? "item_draggable" : "";
   },
+  getElementName: model => "item",
   afterRender: (
     elements: HTMLElement[],
     model: QuestionSelectBase,
@@ -187,4 +189,4 @@ export var itemDraggableAdorner = {
   }
 };
 
-registerAdorner("item", itemDraggableAdorner);
+registerAdorner("choices-draggable", itemDraggableAdorner);
