@@ -65,6 +65,7 @@ ko.components.register("item-editor", {
 });
 
 export var itemAdorner = {
+  inplaceEditForValues: false,
   getMarkerClass: model => {
     return !!model.parent && !!model.choices ? "item_editable" : "";
   },
@@ -88,7 +89,9 @@ export var itemAdorner = {
         );
       } else {
         decoration.innerHTML =
-          "<item-editor params='name: \"text\", target: target, item: item, question: question, editor: editor'></item-editor>";
+          "<item-editor params='name: \"" +
+          (itemAdorner.inplaceEditForValues ? "value" : "text") +
+          "\", target: target, item: item, question: question, editor: editor'></item-editor>";
         elements[i].appendChild(decoration);
         ko.applyBindings(
           {
@@ -111,7 +114,7 @@ export var createAddItemHandler = (
   onItemAdded: (itemValue: Survey.ItemValue) => void
 ) => () => {
   var nextValue = null;
-  var values = question.choices.map(function (item) {
+  var values = question.choices.map(function(item) {
     return item.itemValue;
   });
   nextValue = getNextValue("item", values);

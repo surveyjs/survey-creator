@@ -21,6 +21,7 @@ var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates
 import * as Survey from "survey-knockout";
 import { SurveyForDesigner } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
+import { itemAdorner } from "./adorners/item-editor";
 
 /**
  * The toolbar item description
@@ -110,6 +111,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public set haveCommercialLicense(val) {
     this._haveCommercialLicense(val);
   }
+
+  /**
+   * You need to set this property to true if you want to inplace edit item values instead of texts.
+   * @see inplaceEditForValues
+   */
+  public get inplaceEditForValues() {
+    return itemAdorner.inplaceEditForValues;
+  }
+  public set inplaceEditForValues(val) {
+    itemAdorner.inplaceEditForValues = val;
+  }
+
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
@@ -757,6 +770,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
         : false;
+    this.inplaceEditForValues =
+      typeof options.inplaceEditForValues !== "undefined"
+        ? options.inplaceEditForValues
+        : false;
     this.koShowOptions(
       typeof options.showOptions !== "undefined" ? options.showOptions : false
     );
@@ -1190,8 +1207,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       var id = obj["id"];
       if (this.renderedElement && id && this.survey.currentPage) {
         let el = <HTMLElement>this.renderedElement.querySelector("#" + id);
-        let pageEl = <HTMLElement>this.renderedElement.querySelector(
-          "#" + this.survey.currentPage.id
+        let pageEl = <HTMLElement>(
+          this.renderedElement.querySelector("#" + this.survey.currentPage.id)
         );
         SurveyHelper.scrollIntoViewIfNeeded(el, pageEl);
       }
@@ -1201,8 +1218,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koCanDeleteObject(canDeleteObject);
     //Select2 work-around
     if (this.renderedElement && this.select2) {
-      var el = <HTMLElement>this.renderedElement.querySelector(
-        "#select2-objectSelector-container"
+      var el = <HTMLElement>(
+        this.renderedElement.querySelector("#select2-objectSelector-container")
       ); //TODO
       if (el) {
         var item = this.surveyObjects.koSelected();
@@ -1216,8 +1233,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (this.renderedElement == null) return;
     ko.cleanNode(this.renderedElement);
     ko.applyBindings(this, this.renderedElement);
-    this.surveyjs = <HTMLElement>this.renderedElement.querySelector(
-      "#surveyjs"
+    this.surveyjs = <HTMLElement>(
+      this.renderedElement.querySelector("#surveyjs")
     );
     if (this.surveyjs) {
       var self = this;
@@ -1233,8 +1250,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.initSurvey(this.getDefaultSurveyJson());
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(<HTMLElement>this.renderedElement.querySelector(
-      "#surveyjsJSONEditor"
+    this.jsonEditor.init(<HTMLElement>(
+      this.renderedElement.querySelector("#surveyjsJSONEditor")
     ));
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
@@ -1588,9 +1605,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     parent.addElement(element, index);
     if (this.renderedElement && this.scrollToNewElement) {
-      this.dragDropHelper.scrollToElement(
-        <HTMLElement>this.renderedElement.querySelector("#" + element["id"])
-      );
+      this.dragDropHelper.scrollToElement(<HTMLElement>(
+        this.renderedElement.querySelector("#" + element["id"])
+      ));
     }
     this.setModified({ type: modifiedType, question: element });
   }
@@ -1644,8 +1661,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   ) => {
     var self = this;
     var elWindow = this.renderedElement
-      ? <HTMLElement>this.renderedElement.querySelector(
-          "#surveyquestioneditorwindow"
+      ? <HTMLElement>(
+          this.renderedElement.querySelector("#surveyquestioneditorwindow")
         )
       : null;
     var isCanceled = true;
@@ -1691,7 +1708,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public addCustomToolboxQuestion(question: Survey.QuestionBase) {
     this.toolbox.addCopiedItem(question);
-    this.onCustomElementAddedIntoToolbox.fire(this, {element: question});
+    this.onCustomElementAddedIntoToolbox.fire(this, { element: question });
   }
   /**
    * Copy a question to the active page
