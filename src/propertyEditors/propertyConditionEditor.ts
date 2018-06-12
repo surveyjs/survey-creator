@@ -106,7 +106,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     for (var i = 0; i < questions.length; i++) {
       this.addConditionQuestionNames(questions[i], names);
     }
-    this.addMatrixColumnsToCondtion(names);
+    this.addMatrixColumnsToCondition(names);
     this.addPanelDynamicQuestionsToCondition(names);
     names.sort();
     return names;
@@ -118,7 +118,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (question == this.object) return;
     question.addConditionNames(names);
   }
-  private addMatrixColumnsToCondtion(names: Array<string>) {
+  private addMatrixColumnsToCondition(names: Array<string>) {
     if (
       !(this.object instanceof Survey.MatrixDropdownColumn) ||
       !this.object ||
@@ -185,6 +185,23 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     });
     return survey;
   }
+  private getQuestionByName(questionName: string): Survey.Question {
+    if (!this.object || !this.object.survey) return null;
+    var pos = questionName.indexOf(".");
+    if (pos > -1) {
+      questionName = questionName.substr(0, pos);
+      pos = questionName.indexOf("[");
+      if (pos > -1) {
+        questionName = questionName.substr(0, pos);
+      }
+    }
+    return this.object.survey.getQuestionByName(questionName);
+  }
+  private getQuestionValueByName(questionName: string): string {
+    var question = this.getQuestionByName(questionName);
+    if (question) return question.getValueName();
+    return questionName;
+  }
   private getQuestionConditionJson(
     questionName: string,
     operator: string
@@ -193,13 +210,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var pos = questionName.indexOf(".");
     if (pos > -1) {
       path = questionName.substr(pos + 1);
-      questionName = questionName.substr(0, pos);
-      pos = questionName.indexOf("[");
-      if (pos > -1) {
-        questionName = questionName.substr(0, pos);
-      }
     }
-    var question = this.object.survey.getQuestionByName(questionName);
+    var question = this.getQuestionByName(questionName);
     var json =
       question && question.getConditionJson
         ? question.getConditionJson(operator, path)
@@ -228,7 +240,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     }
     text +=
       "{" +
-      this.koAddConditionQuestion() +
+      this.getQuestionValueByName(this.koAddConditionQuestion()) +
       "} " +
       this.getAddConditionOperator();
     if (this.koAddContionValueEnabled()) {
