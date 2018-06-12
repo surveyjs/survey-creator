@@ -35,7 +35,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     json.questions.push(qjson);
     this.survey = new Survey.Survey(json);
 
-    this.survey.setValue(this.object.name, this.editingValue);
+    this.survey.setValue(this.object.name, this.getSurveyInitialValue());
     this.koSurvey(this.survey);
   }
   protected buildQuestionJson(): any {
@@ -47,6 +47,9 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     delete qjson["enable"];
     delete qjson["enableIf"];
     return qjson;
+  }
+  protected getSurveyInitialValue(): any {
+    return this.editingValue;
   }
   protected getSurveyResult(): any {
     return this.survey.getValue(this.object.name);
@@ -73,6 +76,14 @@ export class SurveyPropertyDefaultRowValueEditor extends SurveyPropertyDefaultVa
   }
   public get editorTypeTemplate(): string {
     return "value";
+  }
+  protected getSurveyInitialValue(): any {
+    var res = this.editingValue;
+    if (!res) return res;
+    if (!Array.isArray(res)) {
+      res = [res];
+    }
+    return res;
   }
   protected getSurveyResult(): any {
     var res = super.getSurveyResult();
