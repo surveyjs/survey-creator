@@ -76,6 +76,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get editorType(): string {
     throw "editorType is not defined";
   }
+  public get editorTypeTemplate(): string {
+    return this.editorType;
+  }
   public get property(): Survey.JsonObjectProperty {
     return this.property_;
   }
@@ -119,7 +122,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     if (this.isModal) {
       res += "-modalcontent";
     } else {
-      res += "-" + this.editorType;
+      res += "-" + this.editorTypeTemplate;
     }
     return res;
   }

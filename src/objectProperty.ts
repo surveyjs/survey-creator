@@ -22,6 +22,7 @@ export class SurveyObjectProperty {
   public disabled: boolean;
   public editor: SurveyPropertyEditorBase;
   public editorType: string;
+  public editorTypeTemplate: string;
   public baseEditorType: string;
 
   koIsShowEditor = ko.observable(false);
@@ -45,6 +46,7 @@ export class SurveyObjectProperty {
     this.editor.onGetLocale = this.doOnGetLocale;
     this.editor.options = propertyEditorOptions;
     this.editorType = this.editor.editorType;
+    this.editorTypeTemplate = this.editor.editorTypeTemplate;
     this.isActive = false;
   }
   public get displayName(): string {
