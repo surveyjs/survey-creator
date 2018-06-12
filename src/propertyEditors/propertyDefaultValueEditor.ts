@@ -59,20 +59,9 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   }
 }
 
-export class SurveyPropertyDefaultRowValueEditor extends SurveyPropertyDefaultValueEditor {
+export class SurveyPropertyDefaultRowValueEditorBase extends SurveyPropertyDefaultValueEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-  }
-  protected buildQuestionJson(): any {
-    var qjson = super.buildQuestionJson();
-    qjson.rowCount = 1;
-    qjson.minRowCount = 1;
-    qjson.maxRowCount = 1;
-    qjson.columnsLocation = "vertical";
-    return qjson;
-  }
-  public get editorType(): string {
-    return "rowvalue";
   }
   public get editorTypeTemplate(): string {
     return "value";
@@ -95,6 +84,39 @@ export class SurveyPropertyDefaultRowValueEditor extends SurveyPropertyDefaultVa
   }
 }
 
+export class SurveyPropertyDefaultRowValueEditor extends SurveyPropertyDefaultRowValueEditorBase {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  protected buildQuestionJson(): any {
+    var qjson = super.buildQuestionJson();
+    qjson.rowCount = 1;
+    qjson.minRowCount = 1;
+    qjson.maxRowCount = 1;
+    qjson.columnsLocation = "vertical";
+    return qjson;
+  }
+  public get editorType(): string {
+    return "rowvalue";
+  }
+}
+
+export class SurveyPropertyDefaultPanelValueEditor extends SurveyPropertyDefaultRowValueEditorBase {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  protected buildQuestionJson(): any {
+    var qjson = super.buildQuestionJson();
+    qjson.panelCount = 1;
+    qjson.minPanelCount = 1;
+    qjson.maxPanelCount = 1;
+    return qjson;
+  }
+  public get editorType(): string {
+    return "panelvalue";
+  }
+}
+
 SurveyPropertyEditorFactory.registerEditor("value", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
@@ -105,4 +127,10 @@ SurveyPropertyEditorFactory.registerEditor("rowvalue", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyDefaultRowValueEditor(property);
+});
+
+SurveyPropertyEditorFactory.registerEditor("panelvalue", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyPropertyDefaultPanelValueEditor(property);
 });
