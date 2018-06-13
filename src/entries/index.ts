@@ -126,3 +126,9 @@ export { labelAdorner } from "../adorners/label-editor";
 export { questionActionsAdorner } from "../adorners/question-actions";
 export { selectItemsEditorAdorner } from "../adorners/select-items-editor";
 export { ratingItemAdorner } from "../adorners/rating-item-editor";
+
+export {
+  IAccordionItemData,
+  AccordionItemModel,
+  AccordionModel
+} from "../utils/accordion";

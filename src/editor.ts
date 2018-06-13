@@ -124,6 +124,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
 
   /**
+   * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
+   * @see useTabsInElementEditor
+   */
+  public useTabsInElementEditor = false;
+
+  /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
    */
@@ -469,7 +475,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * The Survey Editor constructor.
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
-   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showPropertyGrid, questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight.
+   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid, questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight.
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -773,6 +779,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.inplaceEditForValues =
       typeof options.inplaceEditForValues !== "undefined"
         ? options.inplaceEditForValues
+        : false;
+    this.useTabsInElementEditor =
+      typeof options.useTabsInElementEditor !== "undefined"
+        ? options.useTabsInElementEditor
         : false;
     this.koShowOptions(
       typeof options.showOptions !== "undefined" ? options.showOptions : false

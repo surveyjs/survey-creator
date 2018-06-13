@@ -281,6 +281,9 @@ export class SurveyQuestionEditor {
       }
     }
   }
+  get useTabsInElementEditor() {
+    return this.options.useTabsInElementEditor;
+  }
 }
 
 export class SurveyQuestionEditorTab {

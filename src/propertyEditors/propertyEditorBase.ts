@@ -5,6 +5,7 @@ import { setTimeout } from "timers";
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
+  useTabsInElementEditor: boolean;
   onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
   onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
   onSetPropertyEditorOptionsCallback(
