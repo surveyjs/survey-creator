@@ -249,6 +249,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koTextValue(text);
     this.resetAddConditionValues();
   }
+  protected onBeforeApply() {
+    if (!this.koTextValue() && this.koCanAddCondition()) {
+      this.addCondition();
+    }
+    super.onBeforeApply();
+  }
   private getAddConditionOperator(): string {
     var op = this.koAddConditionOperator();
     if (op == "equal") return "=";

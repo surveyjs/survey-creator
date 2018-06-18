@@ -44,6 +44,7 @@ export default QUnit.module("PropertyEditorsTests");
 class EditorOptionsTests implements ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
+  useTabsInElementEditor: boolean;
   onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {}
   onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
   onSetPropertyEditorOptionsCallback(

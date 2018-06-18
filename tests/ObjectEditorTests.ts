@@ -200,6 +200,7 @@ QUnit.test("Use onCanShowPropertyCallback", function(assert) {
 class EditorOptionsTests implements ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
+  useTabsInElementEditor: boolean;
   propertyName: string;
   onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
     itemValue.value = "item1";
@@ -393,7 +394,9 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
   var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
   var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
   itemValuesEditor.beforeShow();
-  var firstItem = <SurveyPropertyItemValuesEditorItem>itemValuesEditor.koItems()[0];
+  var firstItem = <SurveyPropertyItemValuesEditorItem>(
+    itemValuesEditor.koItems()[0]
+  );
   itemValuesEditor.koEditItem(firstItem);
   assert.equal(firstItem.itemEditor.koTabs().length, 1, "There is one tab");
   assert.equal(

@@ -204,6 +204,31 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button",
+  function(assert) {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "questionbase",
+      "visibleIf"
+    );
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = page.addNewQuestion("text", "q1");
+    var question2 = <Survey.Question>page.addNewQuestion("text", "q2");
+    question2.valueName = "val2";
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.koAddConditionQuestion("q2");
+    editor.koAddConditionValue("abc");
+    editor.apply();
+    assert.equal(
+      editor.koTextValue(),
+      "{val2} = 'abc'",
+      "valueName property is used"
+    );
+  }
+);
+
 QUnit.test("SurveyPropertyConditionEditor.allCondtionQuestions", function(
   assert
 ) {
