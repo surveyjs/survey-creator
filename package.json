@@ -8,7 +8,8 @@
     "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
-    "build_prod": "npm run build_dev && webpack --env.buildType prod"
+    "build_prod": "npm run build_dev && webpack --env.buildType prod",
+    "watch_dev": "webpack --env.buildType dev --watch"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",

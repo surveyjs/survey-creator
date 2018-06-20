@@ -26,8 +26,6 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     if (this.notOther) {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);
-      var item = findParentNode("item_draggable", this.rootElement);
-      item.parentElement.removeChild(item);
     } else {
       this.question.hasOther = false;
     }
