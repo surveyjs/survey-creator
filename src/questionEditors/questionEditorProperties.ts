@@ -145,7 +145,7 @@ export class SurveyQuestionEditorProperties {
         jsonProperty,
         properties[i].title,
         this.options,
-        this.isTabProperty
+        properties.length === 1 && this.isTabProperty
       );
     }
   }
