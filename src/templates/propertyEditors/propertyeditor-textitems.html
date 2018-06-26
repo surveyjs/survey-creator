@@ -25,11 +25,11 @@
                             <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
                         </button>
                     </td>
-                    <td>
+                    <td class="form-group">
                         <input type="text" class="form-control" data-bind="value:koName, style: {width: $parent.isTitleVisible? '180px': '100%'}"
                         />
                     </td>
-                    <td data-bind="visible: $parent.isTitleVisible">
+                    <td data-bind="visible: $parent.isTitleVisible" class="form-group">
                         <input type="text" class="form-control" data-bind="value:koTitle" style="width:180px" />
                     </td>
                     <td class="svd-textitems-column">

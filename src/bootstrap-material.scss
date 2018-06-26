@@ -1,0 +1,50 @@
+$primary-color-m: #1ab394;
+$primary-text-color-m: #676a6c;
+$secondary-bg-color-m: #f4f4f4;
+$primary-border-color-m: #e7eaec;
+
+.svd_container.sv_bootstrapmaterial_css {
+  .panel.card {
+    box-shadow: none;
+  }
+  .form-group {
+    margin-top: 0;
+  }
+  .svd_custom_select .form-group,
+  .svd_properties_grid .form-group {
+    margin-top: 0;
+    padding-bottom: 0;
+    .form-control {
+      margin-top: -3px;
+      margin-bottom: 0;
+    }
+  }
+  .editor-tabs > li > a {
+    color: $primary-text-color-m !important;
+  }
+  .editor-tabs > li > a:hover {
+    color: $primary-color-m !important;
+    background-color: $secondary-bg-color-m !important;
+    border-bottom: 1px solid $secondary-bg-color-m !important;
+  }
+  .editor-tabs > li > a:focus {
+    color: $primary-color-m !important;
+    background-color: $secondary-bg-color-m !important;
+    border-bottom: 1px solid $secondary-bg-color-m !important;
+  }
+  .editor-tabs > li.active > a {
+    color: $primary-color-m !important;
+    background-color: $secondary-bg-color-m !important;
+    border: 1px solid $primary-border-color-m !important;
+    border-bottom-color: $secondary-bg-color-m !important;
+  }
+  .item_editable > span {
+    position: static;
+    display: inline-block;
+  }
+  .svda-adorner-root span {
+    position: static;
+    display: inline-block;
+    transition: none;
+  }
+}

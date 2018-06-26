@@ -7,6 +7,7 @@
 @import "toolbar";
 @import "pages-editor";
 @import "properties";
+@import "bootstrap-material";
 .svd_container {
   position: relative;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
@@ -579,5 +580,5 @@
 }
 
 .svd_container.sv_bootstrapmaterial_css {
-  
+
 }
