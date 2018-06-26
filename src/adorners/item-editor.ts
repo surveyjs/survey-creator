@@ -72,6 +72,7 @@ export var itemAdorner = {
     for (var i = 0; i < elements.length; i++) {
       elements[i].onclick = e => e.preventDefault();
       var decoration = document.createElement("span");
+      decoration.className = "svda-adorner-root";
       if (i === elements.length - 1 && model.hasOther) {
         decoration.innerHTML =
           "<item-editor params='name: \"otherText\", target: target, item: item, question: question, editor: editor'></item-editor>";
