@@ -35,7 +35,10 @@
         width: 25px;
       }
       .table.svd_properties_grid {
-        >tbody>tr>td {
+        .form-group {
+          margin-bottom: 0;
+        }
+        > tbody > tr > td {
           border: none;
           padding: 0;
           line-height: 3.25em;

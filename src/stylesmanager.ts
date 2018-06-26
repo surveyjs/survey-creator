@@ -131,7 +131,8 @@ export class StylesManager {
     ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .nav-tabs a": "color: $primary-text-color",
     ".svd_container .nav-tabs > li.active > a": "color: $primary-color",
-    ".svd_container .nav-item.active .nav-link": "background-color: $primary-bg-color;",
+    ".svd_container .nav-item.active .nav-link":
+      "background-color: $primary-bg-color;",
 
     ".svd_container .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
@@ -201,9 +202,8 @@ export class StylesManager {
     themeSelector: string = ".svd_container"
   ) {
     StylesManager.currentTheme(themeName);
-    Survey.Survey.cssType =
-      this.currentTheme() === "bootstrap" ? "bootstrap" : "default";
-    Survey.StylesManager.applyTheme(themeName);
+
+    StylesManager.applySurveyTheme(themeName);
 
     let sheet = StylesManager.findSheet(themeName + themeSelector);
     if (!sheet) {
@@ -226,6 +226,15 @@ export class StylesManager {
         );
       });
     }
+  }
+
+  public static applySurveyTheme(themeName) {
+    if (["bootstrap", "bootstrapmaterial"].indexOf(themeName) !== -1) {
+      Survey.Survey.cssType = themeName;
+    } else {
+      Survey.Survey.cssType = "default";
+    }
+    Survey.StylesManager.applyTheme(themeName);
   }
 
   constructor() {

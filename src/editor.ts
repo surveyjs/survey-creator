@@ -635,9 +635,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
 
   themeCss = ko.computed(() => {
-    return StylesManager.currentTheme() === "bootstrap"
-      ? "sv_bootstrap_css"
-      : "sv_default_css";
+    return ["bootstrap", "bootstrapmaterial"].indexOf(
+      StylesManager.currentTheme()
+    ) === -1
+      ? "sv_default_css"
+      : ("sv_" + StylesManager.currentTheme() + "_css");
   });
 
   protected addToolbarItems() {

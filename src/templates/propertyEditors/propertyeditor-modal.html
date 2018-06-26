@@ -1,5 +1,5 @@
 ﻿<script type="text/html" id="propertyeditor-modal">
-    <div class="input-group" data-bind="visible:!$data.isEditable">
+    <div class="input-group form-group" data-bind="visible:!$data.isEditable">
         <a class="form-control" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
             <span data-bind="text: koText"></span>
         </a>
@@ -7,7 +7,7 @@
             <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></span>
         </div>
     </div>
-    <div class="input-group" data-bind="visible:$data.isEditable">
+    <div class="input-group form-group" data-bind="visible:$data.isEditable">
         <input class="form-control svd_editor_control" type="text" data-bind="value: koValue" />
         <div class="input-group-addon">
             <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></span>
