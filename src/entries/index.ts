@@ -113,6 +113,7 @@ export { StylesManager } from "../stylesmanager";
 import "../localization/french";
 import "../localization/german";
 import "../localization/italian";
+import "../localization/korean";
 import "../localization/persian";
 import "../localization/polish";
 import "../localization/portuguese";
