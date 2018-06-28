@@ -60,7 +60,9 @@ export {
   SurveyPropertyResultfullEditor
 } from "../propertyEditors/propertyRestfullEditor";
 export {
-  SurveyPropertyDefaultValueEditor
+  SurveyPropertyDefaultValueEditor,
+  SurveyPropertyDefaultRowValueEditor,
+  SurveyPropertyDefaultPanelValueEditor
 } from "../propertyEditors/propertyDefaultValueEditor";
 export {
   SurveyPropertyTriggersEditor
