@@ -38,6 +38,25 @@ $primary-border-color-m: #e7eaec;
     border: 1px solid $primary-border-color-m !important;
     border-bottom-color: $secondary-bg-color-m !important;
   }
+  .modal-tabs {
+    background: transparent;
+  }
+  .modal-tabs > li > a {
+    color: $primary-text-color-m !important;
+  }
+  .modal-tabs > li > a:hover {
+    color: $primary-color-m !important;
+    border-bottom: 1px solid white !important;
+  }
+  .modal-tabs > li > a:focus {
+    color: $primary-color-m !important;
+    border-bottom: 1px solid white !important;
+  }
+  .modal-tabs > li.active > a {
+    color: $primary-color-m !important;
+    border: 1px solid $primary-border-color-m !important;
+    border-bottom-color: white !important;
+  }
   .item_editable > span {
     position: static;
     display: inline-block;
@@ -46,5 +65,24 @@ $primary-border-color-m: #e7eaec;
     position: static;
     display: inline-block;
     transition: none;
+  }
+  .modal-footer .btn + .btn {
+    margin-bottom: 10px;
+  }
+
+  .propertyeditor-condition {
+    textarea {
+      color: $primary-text-color-m;
+    }
+  }
+
+  .svda_current_type {
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+  }
+
+  .svd_question {
+    border: 1px solid $primary-border-color-m;
   }
 }

@@ -1,6 +1,6 @@
 <script type="text/html" id="questioneditor-content">
     <!-- ko if: $data.useTabsInElementEditor -->
-    <ul class="nav nav-tabs" data-bind="foreach: koTabs">
+    <ul class="nav nav-tabs modal-tabs" data-bind="foreach: koTabs">
         <li class="nav-item" role="presentation" data-bind="css: {active: $parent.koActiveTab() == $data.name}, click: $parent.onTabClick">
             <a class="nav-link" data-bind="css: {active: $parent.koActiveTab() == $data.name}">
                 <span data-bind="text:$data.title"></span>
