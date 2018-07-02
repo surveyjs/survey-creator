@@ -7,6 +7,7 @@ import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public availableOperators = [];
+  public showHelpText: boolean = true;
   koIsValid: any;
   koCanAddCondition: any;
   koAddConditionQuestions: any;

@@ -38,6 +38,11 @@
         </div>
         <div data-bind="visible: koSelected() != null">
             <div data-bind="with: koSelected">
+                <!-- ko if: conditionEditor != null -->
+                    <!-- ko template: { name: 'propertyeditorcontent-condition', data: conditionEditor } -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: conditionEditor == null -->
                 <div class="form-inline form-group">
                     <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
                     <div class="form-control svd_custom_select">
@@ -48,7 +53,7 @@
                     </div>
                     <input class="form-control" type="text" data-bind="visible: koRequireValue, value:koValue" />
                 </div>
-
+                <!-- /ko -->
                 <!-- ko if: koType() == 'visibletrigger' -->
                 <div class="row">
                     <div class="col-lg-6 col-sm-6">

@@ -35,9 +35,11 @@
                 <div class="assistant-item" data-bind=" text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
             </div>
         </div> -->
+        <!-- ko if: showHelpText -->
         <span data-bind="text:$data.getLocString('pe.conditionHelp')" style="white-space:normal "></span>
         <div data-bind="visible: $data.hasLocString('pe.conditionShowMoreUrl')">
             <a data-bind="attr: { href: $data.getLocString('pe.conditionShowMoreUrl')}, text:$data.getLocString('pe.showMore')" target="_blank"></a>
         </div>
+        <!-- /ko -->
     </div>
 </script>

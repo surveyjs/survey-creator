@@ -19,9 +19,11 @@
                 <div class="assistant-item" data-bind="text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
             </div>
         </div> -->
-        <span data-bind="text:$root.getLocString('pe.expressionHelp')" style="white-space:normal"></span>
-        <!-- <div>
-            <a data-bind="text:$root.getLocString('pe.showMore')" target="_blank" href="https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf"></a>
-        </div> -->
+        <!-- ko if: showHelpText -->        
+            <span data-bind="text:$root.getLocString('pe.expressionHelp')" style="white-space:normal"></span>
+            <!-- <div>
+                <a data-bind="text:$root.getLocString('pe.showMore')" target="_blank" href="https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf"></a>
+            </div> -->
+        <!-- /ko -->
     </div>
 </script>
