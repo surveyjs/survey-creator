@@ -1,5 +1,7 @@
+import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyHelper } from "./surveyHelper";
+ko.options.useOnlyNativeEvents = true;
 
 export class DragDropTargetElement {
   public moveToParent: any;
@@ -304,6 +306,7 @@ export class DragDropHelper {
         e["markEvent"] = true;
         surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
       }
+      e.cancelBubble = true;
     };
     domElement.ondragend = function(e) {
       surveyElement.dragDropHelper().end();
@@ -324,6 +327,7 @@ export class DragDropHelper {
     elementJson: any
   ) {
     this.prepareData(event, elementName, elementJson);
+    event.cancelBubble = true;
   }
   public isSurveyDragging(event: DragEvent): boolean {
     if (!event) return false;
