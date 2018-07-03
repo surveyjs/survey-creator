@@ -889,9 +889,11 @@ QUnit.test("Triggers property editor", function(assert) {
     "There are one trigger initially"
   );
   var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-  assert.equal(koTrigger.koName(), "question1", "Name set correctly");
-  assert.equal(koTrigger.koOperator(), "notequal", "operator set correctly");
-  assert.equal(koTrigger.koValue(), "val1", "value set correctly");
+  assert.equal(
+    koTrigger.conditionEditor.koTextValue(),
+    "{question1} notequal 'val1'",
+    "expression set correctly"
+  );
   assert.deepEqual(
     koTrigger.questions.koChoosen(),
     ["question2"],
@@ -901,17 +903,13 @@ QUnit.test("Triggers property editor", function(assert) {
   propEditor.onAddClick({ value: "visibletrigger" });
   assert.equal(propEditor.koItems().length, 2, "There are two triggers now");
   koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-  assert.equal(koTrigger.koOperator(), "equal", "default operator is equal");
+
   assert.equal(koTrigger.koIsValid(), false, "the trigger is not valid");
-  koTrigger.koName("question2");
-  assert.equal(koTrigger.koIsValid(), false, "the trigger is still not valid");
-  assert.equal(koTrigger.koRequireValue(), true, "value should be set");
-  koTrigger.koOperator("notempty");
+  koTrigger.conditionEditor.koTextValue("{question2} notempty");
   assert.equal(koTrigger.koIsValid(), true, "the trigger is valid");
-  assert.equal(koTrigger.koRequireValue(), false, "value should not be set");
   assert.equal(
     koTrigger.koText(),
-    "Run if 'question2' is not empty",
+    "Run if: {question2} notempty",
     "text for valid trigger"
   );
 
@@ -919,13 +917,11 @@ QUnit.test("Triggers property editor", function(assert) {
   koTrigger.questions.koChoosen.push("question3");
   koTrigger.koValue(1);
   trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
-  assert.equal(trigger.name, "question2", "create trigger correctly: name");
   assert.equal(
-    trigger.operator,
-    "notempty",
-    "create trigger correctly: operator"
+    koTrigger.conditionEditor.koTextValue(),
+    "{question2} notempty",
+    "set condition correctly"
   );
-  assert.equal(trigger.value, 1, "create trigger correctly: value");
   assert.deepEqual(trigger.pages, ["page2"], "create trigger correctly: pages");
   assert.deepEqual(
     trigger.questions,

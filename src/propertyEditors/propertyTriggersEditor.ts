@@ -175,8 +175,9 @@ export class SurveyPropertyTrigger {
         expressionProperty
       );
       this.conditionEditor.showHelpText = false;
-      //TODO replace with property and function
-      this.trigger["expression"] = this.trigger["buildExpression"]();
+      if (!this.trigger.expression) {
+        this.trigger.expression = this.trigger.buildExpression();
+      }
       this.conditionEditor.object = this.trigger;
     }
     var self = this;
@@ -184,12 +185,15 @@ export class SurveyPropertyTrigger {
       return self.koOperator() != "empty" && self.koOperator() != "notempty";
     });
     this.koIsValid = ko.computed(() => {
+      if (!!this.conditionEditor) {
+        var text = self.conditionEditor.koTextValue();
+        return !!text;
+      }
       if (self.koName() && (!self.koRequireValue() || self.koValue()))
         return true;
       return false;
     });
     this.koText = ko.computed(() => {
-      if (!!self.conditionEditor) return self.conditionEditor.koTextValue();
       self.koName();
       self.koOperator();
       self.koValue();
@@ -213,6 +217,11 @@ export class SurveyPropertyTrigger {
   private getText(): string {
     if (!this.koIsValid())
       return editorLocalization.getString("pe.triggerNotSet");
+    if (!!this.conditionEditor) {
+      var res = this.conditionEditor.koTextValue();
+      if (!res) return "";
+      return editorLocalization.getString("pe.triggerRunIf") + ": " + res;
+    }
     return (
       editorLocalization.getString("pe.triggerRunIf") +
       " '" +

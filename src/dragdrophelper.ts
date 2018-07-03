@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyHelper } from "./surveyHelper";
-ko.options.useOnlyNativeEvents = true;
+
+if (!!ko.options) {
+  ko.options.useOnlyNativeEvents = true;
+}
 
 export class DragDropTargetElement {
   public moveToParent: any;
