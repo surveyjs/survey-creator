@@ -19,6 +19,20 @@ $primary-border-color-m: #e7eaec;
       margin-bottom: 0;
     }
   }
+  .svd_properties_grid {
+    .glyphicon-edit {
+      border-radius: 0;
+      background-color: $primary-color-m;
+      color: white;
+      text-transform: uppercase;
+      padding: 5px;
+      font-size: 12px;
+
+      &:hover {
+        background-color: rgba(153, 153, 153, 0.2);
+      }
+    }
+  }
   .editor-tabs > li > a {
     color: $primary-text-color-m !important;
   }
