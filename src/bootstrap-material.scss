@@ -19,6 +19,20 @@ $primary-border-color-m: #e7eaec;
       margin-bottom: 0;
     }
   }
+  .svd_properties_grid {
+    .glyphicon-edit {
+      border-radius: 0;
+      background-color: $primary-color-m;
+      color: white;
+      text-transform: uppercase;
+      padding: 5px;
+      font-size: 12px;
+
+      &:hover {
+        background-color: rgba(153, 153, 153, 0.2);
+      }
+    }
+  }
   .editor-tabs > li > a {
     color: $primary-text-color-m !important;
   }
@@ -40,9 +54,11 @@ $primary-border-color-m: #e7eaec;
   }
   .modal-tabs {
     background: transparent;
+    padding-bottom: 10px;
   }
   .modal-tabs > li > a {
     color: $primary-text-color-m !important;
+    border: 1px solid transparent !important;
   }
   .modal-tabs > li > a:hover {
     color: $primary-color-m !important;
@@ -84,5 +100,38 @@ $primary-border-color-m: #e7eaec;
 
   .svd_question {
     border: 1px solid $primary-border-color-m;
+  }
+
+  .modal-content {
+    .form-group {
+      .sjs-cb-wrapper {
+        margin-bottom: 6px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .modal-content {
+    @media (min-width: 768px) {
+      .form-inline .checkbox input[type="checkbox"],
+      .form-inline .radio input[type="radio"] {
+        position: absolute;
+        margin-left: 0;
+      }
+
+      .form-inline .checkbox span,
+      .form-inline .radio span {
+        top: 4px;
+      }
+
+      .form-inline .checkbox label,
+      .form-inline .radio label {
+        padding-left: 45px;
+        margin-bottom: 10px;
+      }
+    }
   }
 }
