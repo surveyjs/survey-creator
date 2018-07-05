@@ -33,46 +33,7 @@ $primary-border-color-m: #e7eaec;
       }
     }
   }
-  .editor-tabs > li > a {
-    color: $primary-text-color-m !important;
-  }
-  .editor-tabs > li > a:hover {
-    color: $primary-color-m !important;
-    background-color: $secondary-bg-color-m !important;
-    border-bottom: 1px solid $secondary-bg-color-m !important;
-  }
-  .editor-tabs > li > a:focus {
-    color: $primary-color-m !important;
-    background-color: $secondary-bg-color-m !important;
-    border-bottom: 1px solid $secondary-bg-color-m !important;
-  }
-  .editor-tabs > li.active > a {
-    color: $primary-color-m !important;
-    background-color: $secondary-bg-color-m !important;
-    border: 1px solid $primary-border-color-m !important;
-    border-bottom-color: $secondary-bg-color-m !important;
-  }
-  .modal-tabs {
-    background: transparent;
-    padding-bottom: 10px;
-  }
-  .modal-tabs > li > a {
-    color: $primary-text-color-m !important;
-    border: 1px solid transparent !important;
-  }
-  .modal-tabs > li > a:hover {
-    color: $primary-color-m !important;
-    border-bottom: 1px solid white !important;
-  }
-  .modal-tabs > li > a:focus {
-    color: $primary-color-m !important;
-    border-bottom: 1px solid white !important;
-  }
-  .modal-tabs > li.active > a {
-    color: $primary-color-m !important;
-    border: 1px solid $primary-border-color-m !important;
-    border-bottom-color: white !important;
-  }
+
   .item_editable > span {
     position: static;
     display: inline-block;
@@ -92,7 +53,7 @@ $primary-border-color-m: #e7eaec;
     }
   }
 
-  .svda_current_type {
+  select.svda_current_type {
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
     appearance: menulist;
@@ -110,6 +71,13 @@ $primary-border-color-m: #e7eaec;
         &:last-child {
           margin-bottom: 0;
         }
+      }
+    }
+
+    .btn-danger {
+      color: $primary-text-color;
+      &:hover {
+        opacity: 0.5;
       }
     }
   }

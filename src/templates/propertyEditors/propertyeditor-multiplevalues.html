@@ -5,13 +5,15 @@
 <script type="text/html" class="btn-xs" id="propertyeditorcontent-multiplevalues">
     <div style="max-height:300px; overflow-y:scroll;">
         <!-- ko foreach: { data: koItems, as: 'item'}  -->
-        <div data-bind="style:{display: 'inline-block'">
+        <div class="sjs-cb-wrapper" data-bind="style:{display: 'inline-block'">
             <label>
-                <input type="checkbox" data-bind="attr: {value: item.value}, checked: $parent.koEditingValue" />
-                <span class="checkbox-material">
-                    <span class="check"></span>
-                </span>
-                <span style="position: static;" data-bind="text: item.text"></span>
+                <div class="sjs-cb-container">
+                    <input type="checkbox" data-bind="attr: {value: item.value}, checked: $parent.koEditingValue" />
+                    <span class="checkmark svd-main-background-color">
+                        <span class="check"></span>
+                    </span>
+                    <span class="sjs-cb-label" style="position: static;" data-bind="text: item.text"></span>
+                </div>
             </label>
         </div>
         <!-- /ko -->
