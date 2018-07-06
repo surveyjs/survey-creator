@@ -43,6 +43,7 @@ export class QuestionToolbox {
     "dropdown",
     "comment",
     "rating",
+    "imagepicker",
     "boolean",
     "html"
   ];
