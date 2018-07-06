@@ -139,7 +139,7 @@ export var enStrings = {
     imageHeight: "Image height",
     imageWidth: "Image width",
     rowCount: "Row count",
-    columnsLocation: "Columns location",
+    columnLayout: "Columns layout",
     addRowLocation: "Add row button location",
     addRowText: "Add row button text",
     removeRowText: "Remove row button text",
@@ -415,7 +415,7 @@ export var enStrings = {
 
     horizontalScroll: "horizontalScroll",
     cellType: "cellType",
-    columnsLocation: "columnsLocation",
+    columnsLayout: "columnsLayout",
     columnColCount: "columnColCount",
     columnMinWidth: "columnMinWidth",
 
@@ -492,6 +492,11 @@ export var enStrings = {
     maxTimeToFinishPage: "maxTimeToFinishPage",
     showTimerPanel: "showTimerPanel",
     showTimerPanelMode: "showTimerPanelMode",
+
+    defaultPanelValue: "defaultPanelValue",
+    defaultRowValue: "defaultRowValue",
+    hasNone: "hasNone",
+    noneText: "noneText",
 
     text: "text",
     minValue: "minimum value",
