@@ -18,6 +18,7 @@ export var enStrings = {
     default: "Default",
     checkbox: "Checkbox",
     comment: "Comment",
+    imagepicker: "Image picker",
     dropdown: "Dropdown",
     file: "File",
     html: "Html",
@@ -113,6 +114,8 @@ export var enStrings = {
     propertyIsEmpty: "Please enter a value",
     value: "Value",
     text: "Text",
+    rowid: "Row ID",
+    imageLink: "Image Link",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
 
