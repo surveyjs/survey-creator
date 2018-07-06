@@ -187,14 +187,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private getQuestionByName(questionName: string): Survey.Question {
     if (!this.object || !this.object.survey) return null;
-    var pos = questionName.indexOf(".");
-    if (pos > -1) {
-      questionName = questionName.substr(0, pos);
-      pos = questionName.indexOf("[");
-      if (pos > -1) {
-        questionName = questionName.substr(0, pos);
-      }
-    }
     return this.object.survey.getQuestionByName(questionName);
   }
   private getQuestionValueByName(questionName: string): string {
