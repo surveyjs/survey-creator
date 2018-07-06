@@ -267,7 +267,9 @@ export class StylesManager {
       "color: $primary-color !important; border: 1px solid $primary-border-color !important; border-bottom-color: $inverted-text-color !important;",
 
     ".svd_container.sv_bootstrapmaterial_css .form-group.is-focused .form-control":
-      "background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#D2D2D2, #D2D2D2);"
+      "background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#D2D2D2, #D2D2D2);",
+    ".svd_container.sv_bootstrapmaterial_css .form-group.is-focused label":
+      "color:$primary-color;"
   };
 
   private sheet: CSSStyleSheet = null;
@@ -310,7 +312,6 @@ export class StylesManager {
         StylesManager.ThemeColors["default"];
 
       let ThemeCss;
-
       if (["bootstrap", "bootstrapmaterial"].indexOf(themeName) !== -1) {
         ThemeCss = StylesManager.BootstrapMaterialThemeCss;
       } else {
