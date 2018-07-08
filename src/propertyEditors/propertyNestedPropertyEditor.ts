@@ -13,6 +13,7 @@ import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEdito
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koEditItem: any;
   koIsList: any;
+  koActiveView: any;
   onEditItemClick: any;
   onCancelEditItemClick: any;
   koEditorName: any;
@@ -23,6 +24,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koEditItem = ko.observable(null);
     this.koIsList = ko.observable(true);
+    this.koActiveView = ko.observable("form");
     this.koEditItem.subscribe(function(newValue) {
       self.koIsList(self.koEditItem() == null);
       self.onListDetailViewChanged();

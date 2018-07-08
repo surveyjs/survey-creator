@@ -21,7 +21,6 @@ import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private detailDefinition: any;
   private optionsShowTextView: boolean = true;
-  koActiveView: any;
   koItemsText: any;
   koShowTextView: any;
   changeToTextViewClick: any;
@@ -34,7 +33,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       this.detailDefinition =
         SurveyQuestionEditorDefinition.definition[this.getItemValueClassName()];
     }
-    this.koActiveView = ko.observable("form");
     this.koItemsText = ko.observable("");
     this.koActiveView.subscribe(function(newValue) {
       if (newValue == "form") self.updateItems(self.koItemsText());
