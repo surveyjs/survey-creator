@@ -160,7 +160,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["placeHolder"],
+      properties: ["rows", "placeHolder"],
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },

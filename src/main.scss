@@ -23,6 +23,12 @@
       overflow: visible;
     }
   }
+  #surveyjs,
+  #surveyjsExample {
+    .sv_main .sv_custom_header {
+      background-color: transparent;
+    }
+  }
   .svd-textitems-column {
     width: 100%;
     display: inline-block;
@@ -580,5 +586,4 @@
 }
 
 .svd_container.sv_bootstrapmaterial_css {
-
 }

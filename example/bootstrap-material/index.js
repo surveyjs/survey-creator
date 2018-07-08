@@ -24,9 +24,6 @@ if (!window["%hammerhead%"]) {
   defaultThemeColorsEditor["$primary-text-color"] = textColor;
   defaultThemeColorsEditor["$selection-border-color"] = mainColor;
 
-  // Survey.StylesManager.applyTheme("bootstrapmaterial");
-  // SurveyEditor.StylesManager.applyTheme("bootstrapmaterial");
-
   let kpiList = [
     { value: 1, text: "Item 1" },
     { value: 2, text: "Item 2" },
@@ -46,6 +43,8 @@ if (!window["%hammerhead%"]) {
 
   $.material.init();
 
+  Survey.Survey.cssType = "bootstrapmaterial";
+  Survey.StylesManager.applyTheme("bootstrapmaterial");
   SurveyEditor.StylesManager.applyTheme("bootstrapmaterial");
   var editor = new SurveyEditor.SurveyEditor("editorElement", {
     useTabsInElementEditor: true
