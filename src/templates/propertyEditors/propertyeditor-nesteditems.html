@@ -1,0 +1,46 @@
+<script type="text/html" id="propertyeditorcontent-nesteditems">
+    <div data-bind="visible: koIsList">
+        <table class="svd_items_table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <!-- ko foreach: columns -->
+                    <th data-bind="text: text"></th>
+                    <!-- /ko -->
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="sortable: { foreach: koItems, options: { handle: '.svd-drag-handle', animation: 150 } }">
+                <tr>
+                    <td class="svd-itemvalue-actions-container">
+                        <div class="svd-drag-handle svd-itemvalue-action">
+                            ☰
+                        </div>
+                        <button type="button" class="btn btn-sm svd-textitems-edit svd-itemvalue-action" data-bind="click: $parent.onEditItemClick">
+                            <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
+                        </button>
+                    </td>
+                    <!-- ko foreach: cells -->
+                    <td>
+                        <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
+                        <!-- /ko -->
+                    </td>
+                    <!-- /ko -->
+                    <td class="svd-textitems-column">
+                        <button type="button" class="btn btn-sm btn-danger" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="svd-items-control-footer" data-bind="visible: koAllowAddRemoveItems">
+            <input type="button" class="btn btn-primary" data-bind="click: onAddClick, value: $root.getLocString('pe.addNew')" />
+            <input type="button" class="btn btn-danger" data-bind="click: onClearClick, value: $root.getLocString('pe.removeAll')" />
+        </div>
+    </div>
+    <!-- ko if: !koIsList() -->
+    <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
+    <!-- /ko -->
+    <!-- /ko -->
+</script>
