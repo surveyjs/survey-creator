@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
@@ -23,7 +26,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   koShowTextView: any;
   changeToTextViewClick: any;
   changeToFormViewClick: any;
-  private columnsValue: Array<SurveyNestedPropertyEditorColumn>;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koShowTextView = ko.observable(true);
@@ -32,7 +34,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       this.detailDefinition =
         SurveyQuestionEditorDefinition.definition[this.getItemValueClassName()];
     }
-    this.columnsValue = this.createColumns();
     this.koActiveView = ko.observable("form");
     this.koItemsText = ko.observable("");
     this.koActiveView.subscribe(function(newValue) {
@@ -51,9 +52,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   public get hasDetailButton(): boolean {
     return !!this.detailDefinition;
-  }
-  public get columns(): Array<SurveyNestedPropertyEditorColumn> {
-    return this.columnsValue;
   }
   protected getItemValueClassName() {
     return this.property ? this.editorType + "@" + this.property.name : "";
@@ -76,7 +74,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     super.beforeShow();
     var props = this.getDefinedProperties();
     if (!!props && props.length > 0) {
-      this.columnsValue = this.createColumns();
+      this.createColumns();
     }
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
@@ -142,7 +140,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns, this.options,
+      this.columns,
+      this.options,
       this.getItemValueClassName()
     );
   }
@@ -151,7 +150,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns, this.options,
+      this.columns,
+      this.options,
       this.getItemValueClassName()
     );
   }
@@ -252,7 +252,12 @@ export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEdit
     super(item, columns, options);
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyQuestionEditor(this.item, null, this.className, this.options);
+    return new SurveyQuestionEditor(
+      this.item,
+      null,
+      this.className,
+      this.options
+    );
   }
 }
 

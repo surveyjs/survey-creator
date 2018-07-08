@@ -1,30 +1,25 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
-import { SurveyPropertyItemValuesEditor } from "./propertyItemValuesEditor";
 import { editorLocalization } from "../editorLocalization";
 import {
   SurveyNestedPropertyEditor,
   SurveyNestedPropertyEditorItem,
-  SurveyNestedPropertyEditorColumn,
-  SurveyNestedPropertyEditorEditorCell
+  SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEditor {
-  private columnsValue: Array<SurveyNestedPropertyEditorColumn>;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-    this.columnsValue = this.createColumns();
   }
   public get editorType(): string {
     return "matrixdropdowncolumns";
-  }
-  public get columns(): Array<SurveyNestedPropertyEditorColumn> {
-    return this.columnsValue;
   }
   protected getEditorName(): string {
     if (!this.koEditItem()) return "";
@@ -64,24 +59,13 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     return newColumn;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
-    var names = this.getPropertiesNames();
+    var names = this.getPropertiesNames("matrixdropdowncolumn", [
+      "isRequired",
+      "cellType",
+      "name",
+      "title"
+    ]);
     return this.getPropertiesByNames("matrixdropdowncolumn", names);
-  }
-  protected getPropertiesNames(): Array<string> {
-    var res = [];
-    var properties = SurveyQuestionEditorDefinition.getProperties(
-      "matrixdropdowncolumn"
-    );
-    if (properties) {
-      for (var i = 0; i < properties.length; i++) {
-        var prop = properties[i];
-        res.push(prop.name ? prop.name : prop);
-      }
-    }
-    if (res.length == 0) {
-      res = ["isRequired", "cellType", "name", "title"];
-    }
-    return res;
   }
 }
 
