@@ -1272,7 +1272,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       if (this.isRTLValue) {
         options.dir = "rtl";
       }
-      this.select2 = jQuery("#objectSelector")["select2"](options);
+      var $objectSelector = jQuery("#objectSelector");
+      this.select2 = $objectSelector["select2"](options);
+      $objectSelector.on("select2:select", (sel_evt: any) => {
+        this.koSelectedObject(sel_evt.target.value);
+      });
     }
   }
   private getDefaultSurveyJson(): any {
