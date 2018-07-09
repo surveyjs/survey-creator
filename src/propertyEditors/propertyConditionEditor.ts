@@ -22,6 +22,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   onConditionAddClick: any;
   koValueSurvey: any;
   private isValueChanging: boolean = false;
+  private addConditionQuestionsHash = {};
   private static emptySurvey = new Survey.Survey();
   constructor(
     property: Survey.JsonObjectProperty,
@@ -84,7 +85,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public setObject(value: any) {
     super.setObject(value);
-    this.koAddConditionQuestions(this.allCondtionQuestions);
+    this.addConditionQuestionsHash = {};
+    this.koAddConditionQuestions(this.allConditionQuestions);
   }
   public get editorType(): string {
     return this._type;
@@ -100,7 +102,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       []
     );
   }
-  public get allCondtionQuestions(): any[] {
+  public get allConditionQuestions(): any[] {
     if (!this.object) return [];
     var names = [];
     var questions = this.availableQuestions;
@@ -112,12 +114,24 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     names.sort();
     return names;
   }
+  private addQuestionNames(
+    question: Survey.QuestionBase,
+    questionNames: Array<string>,
+    names: Array<string>
+  ) {
+    for (var i = 0; i < questionNames.length; i++) {
+      this.addConditionQuestionsHash[questionNames[i]] = question;
+      names.push(questionNames[i]);
+    }
+  }
   private addConditionQuestionNames(
     question: Survey.QuestionBase,
     names: Array<string>
   ) {
     if (question == this.object) return;
-    question.addConditionNames(names);
+    var questionNames = [];
+    question.addConditionNames(questionNames);
+    this.addQuestionNames(question, questionNames, names);
   }
   private addMatrixColumnsToCondition(names: Array<string>) {
     if (
@@ -130,7 +144,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var columns = this.object.colOwner["columns"];
     for (var i = 0; i < columns.length; i++) {
       if (columns[i] == this.object) continue;
-      names.push("row." + columns[i].name);
+      var colName = "row." + columns[i].name;
+      names.push(colName);
+      this.addConditionQuestionsHash[colName] = this.object.colOwner;
     }
   }
   private addPanelDynamicQuestionsToCondition(names: Array<string>) {
@@ -143,7 +159,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       this.addConditionQuestionNames(q, questionNames);
     }
     for (var i = 0; i < questionNames.length; i++) {
-      names.push("panel." + questionNames[i]);
+      var questionName = "panel." + questionNames[i];
+      names.push(questionName);
+      this.addConditionQuestionsHash[questionName] = panel;
     }
   }
   private onValueSurveyChanged(questionName: string, operator: string) {
@@ -157,7 +175,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       return;
     }
     var json = this.getQuestionConditionJson(questionName, operator);
-    this.koHasValueSurvey(json && json.type);
+    this.koHasValueSurvey(!!json && !!json.type);
     if (this.koHasValueSurvey()) {
       this.koValueSurvey(this.createValueSurvey(json));
     }
@@ -188,19 +206,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private getQuestionByName(questionName: string): Survey.Question {
     if (!this.object || !this.object.survey) return null;
-    var pos = questionName.indexOf(".");
-    if (pos > -1) {
-      questionName = questionName.substr(0, pos);
-      pos = questionName.indexOf("[");
-      if (pos > -1) {
-        questionName = questionName.substr(0, pos);
-      }
-    }
-    return this.object.survey.getQuestionByName(questionName);
+    return this.addConditionQuestionsHash[questionName];
   }
   private getQuestionValueByName(questionName: string): string {
     var question = this.getQuestionByName(questionName);
-    if (question) return question.getValueName();
+    if (question && question.name != question.getValueName())
+      return questionName.replace(question.name, question.getValueName());
     return questionName;
   }
   private getQuestionConditionJson(
@@ -208,11 +219,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     operator: string
   ): any {
     var path = "";
-    var pos = questionName.indexOf(".");
-    if (pos > -1) {
-      path = questionName.substr(pos + 1);
-    }
     var question = this.getQuestionByName(questionName);
+    if (!question) return null;
+    var path = questionName.substr(question.name.length);
+    if (!!path && path[0] == ".") {
+      path = path.substr(1);
+    }
     var json =
       question && question.getConditionJson
         ? question.getConditionJson(operator, path)

@@ -3,55 +3,6 @@
     <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-textitems">
-    <div class="panel card">
-        <table class="table" data-bind="visible: koIsList">
-            <thead>
-                <tr>
-                    <th data-bind="text: $root.getLocString('pe.isRequired')"></th>
-                    <th data-bind="text: $root.getLocString('pe.name'), style: {width: isTitleVisible? '': '100%'}"></th>
-                    <th data-bind="visible: isTitleVisible, text: $root.getLocString('pe.title')"></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- ko foreach: koItems -->
-                <tr>
-                    <td class="svd-textitems-column" style="width: 130px;">
-                        <div class="svd-textitems-isrequired">
-                            <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koIsRequired } } -->
-                            <!-- /ko -->
-                        </div>
-                        <button type="button" class="btn btn-sm svd-textitems-edit" data-bind="click: $parent.onEditItemClick, attr: { title: $root.getLocString('pe.edit') }">
-                            <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
-                        </button>
-                    </td>
-                    <td class="form-group">
-                        <input type="text" class="form-control" data-bind="value:koName, style: {width: $parent.isTitleVisible? '180px': '100%'}"
-                        />
-                    </td>
-                    <td data-bind="visible: $parent.isTitleVisible" class="form-group">
-                        <input type="text" class="form-control" data-bind="value:koTitle" style="width:180px" />
-                    </td>
-                    <td class="svd-textitems-column">
-                        <button type="button" class="btn btn-sm btn-danger" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick, attr: { title: $root.getLocString('pe.delete') }">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                    </td>
-                </tr>
-                <!-- /ko -->
-                <tr>
-                    <td colspan="4">
-                        <input type="button" class="btn btn-primary" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')"
-                        />
-                        <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')"
-                        />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- ko if: !koIsList() -->
-        <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
-        <!-- /ko -->
-        <!-- /ko -->
-    </div>
+    <!-- ko template: { name: 'propertyeditorcontent-nesteditems', data: $data } -->
+    <!-- /ko -->
 </script>

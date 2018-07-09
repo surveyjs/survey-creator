@@ -156,6 +156,8 @@ export var enStrings = {
     surveyEditorTitle: "Edit survey settings",
     qEditorTitle: "Edit: {0}",
 
+    maxLength: "Maximum length",
+
     //survey
     showTitle: "Show/hide title",
     locale: "Default language",

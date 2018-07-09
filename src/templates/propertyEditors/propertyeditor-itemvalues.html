@@ -3,63 +3,15 @@
     <!-- /ko -->
 </script>
 <script type="text/html" id="propertyeditorcontent-itemvalues">
-    <div data-bind="visible: koIsList">
-        <div style="margin-bottom:3px" data-bind="visible: koShowTextView">
-            <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
-            <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
-        </div>
-        <div data-bind="visible:koActiveView() == 'form'" style="overflow-y: auto; overflow-x:hidden; max-height:400px;min-height:200px">
-            <table class="svd_items_table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <!-- ko foreach: columns -->
-                        <th data-bind="text: text"></th>
-                        <!-- /ko -->
-                        <th></th>
-                    </tr>
-                </thead>
-                <!-- ko template: { name: 'propertyeditor-itemvalues-items' } -->
-                <!-- /ko -->
-            </table>
-        </div>
-        <div class="svd-items-control-footer" data-bind="visible:koActiveView() == 'form'">
-            <input type="button" class="btn btn-primary" data-bind="visible: koAllowAddRemoveItems, click: onAddClick, value: $root.getLocString('pe.addNew')"
-            />
-            <input type="button" class="btn btn-danger" data-bind="visible: koAllowAddRemoveItems, click: onClearClick, value: $root.getLocString('pe.removeAll')"
-            />
-        </div>
-        <div data-bind="visible:koActiveView() != 'form'">
-            <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
-        </div>
+    <div style="margin-bottom:3px" data-bind="visible: koIsList() && koShowTextView()">
+        <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:changeToFormViewClick, text: $root.getLocString('pe.formEntry')"></button>
+        <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:changeToTextViewClick, text: $root.getLocString('pe.fastEntry')"></button>
     </div>
-    <!-- ko if: !koIsList() -->
-    <!-- ko template: { name: "propertyeditorcontent-nested", data: $data } -->
-    <!-- /ko -->
-    <!-- /ko -->
-</script>
-<script type="text/html" id="propertyeditor-itemvalues-items">
-    <tbody data-bind="sortable: { foreach: koItems, options: sortableOptions }">
-        <tr>
-            <td class="svd-itemvalue-actions-container">
-                <div class="svd-drag-handle svd-itemvalue-action">
-                    ☰
-                </div>
-                <button type="button" class="btn btn-sm svd-textitems-edit svd-itemvalue-action" data-bind="visible: $parent.hasDetailButton, click: $parent.onEditItemClick">
-                    <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.itemValueEdit')"></span>
-                </button>
-            </td>
-            <!-- ko foreach: cells -->
-            <td class="form-group">
-                <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
-                <!-- /ko -->
-            </td>
-            <!-- /ko -->
-            <td>
-                <button type="button" class="btn btn-sm btn-xs btn-danger" data-bind="visible: $parent.koAllowAddRemoveItems, click: $parent.onDeleteClick">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-            </td>
-        </tr>
-    </tbody>
+    <div data-bind="visible: koActiveView() == 'form'">
+        <!-- ko template: { name: 'propertyeditorcontent-nesteditems', data: $data } -->
+        <!-- /ko -->
+    </div>
+    <div data-bind="visible:koIsList() && koActiveView() != 'form'">
+        <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
+    </div>
 </script>

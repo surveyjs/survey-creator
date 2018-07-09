@@ -191,6 +191,14 @@ QUnit.test(
     var question = page.addNewQuestion("text", "q1");
     var question2 = <Survey.Question>page.addNewQuestion("text", "q2");
     question2.valueName = "val2";
+    var matrix = <Survey.QuestionMatrixDropdown>(
+      page.addNewQuestion("matrixdropdown", "matrix")
+    );
+    matrix.choices = [1, 2];
+    matrix.rows = ["row1"];
+    matrix.addColumn("column1");
+    matrix.valueName = "val3";
+
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.koAddConditionQuestion("q2");
@@ -200,6 +208,73 @@ QUnit.test(
       editor.koTextValue(),
       "{val2} = 'abc'",
       "valueName property is used"
+    );
+
+    editor.koTextValue("");
+    editor.koAddConditionQuestion("matrix.row1.column1");
+    editor.koAddConditionValue("1");
+    editor.addCondition();
+    assert.equal(
+      editor.koTextValue(),
+      "{val3.row1.column1} = 1",
+      "valueName property is used in matrix"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, use question.valueName, bug: #367",
+  function(assert) {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "questionbase",
+      "visibleIf"
+    );
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = <Survey.QuestionDropdown>page.addNewQuestion("text", "q1");
+    var question2 = <Survey.QuestionDropdown>(
+      page.addNewQuestion("dropdown", "q2.")
+    );
+    question2.choices = [1, 2, 3, 4];
+    question2.valueName = "val2";
+
+    var matrix = <Survey.QuestionMatrixDropdown>(
+      page.addNewQuestion("matrixdropdown", "matrix")
+    );
+    matrix.choices = [1, 2];
+    matrix.rows = ["row1"];
+    matrix.addColumn("column1");
+
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+
+    editor.koAddConditionQuestion("q2.");
+    assert.equal(editor.koHasValueSurvey(), true, "There is value survey");
+    var valueSurvey = editor.koValueSurvey();
+    var valueQuestion = valueSurvey.getQuestionByName("question");
+    assert.ok(valueQuestion, "Value survey created correctly");
+    assert.equal(
+      valueQuestion.choices.length,
+      4,
+      "value question created correctly"
+    );
+
+    editor.koAddConditionQuestion("matrix.row1.column1");
+    assert.equal(
+      editor.koHasValueSurvey(),
+      true,
+      "Thre is value survey for matrix column"
+    );
+    var valueSurvey = editor.koValueSurvey();
+    var valueQuestion = valueSurvey.getQuestionByName("question");
+    assert.ok(
+      valueQuestion,
+      "Value survey for matrix column created correctly"
+    );
+    assert.equal(
+      valueQuestion.choices.length,
+      2,
+      "value question  for matrix column created correctly"
     );
   }
 );
@@ -229,7 +304,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyConditionEditor.allCondtionQuestions", function(
+QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   assert
 ) {
   var property = Survey.JsonObject.metaData.findProperty(
@@ -244,7 +319,7 @@ QUnit.test("SurveyPropertyConditionEditor.allCondtionQuestions", function(
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   assert.deepEqual(
-    editor.allCondtionQuestions,
+    editor.allConditionQuestions,
     ["q2", "q3"],
     "returns questions correctly"
   );
@@ -269,12 +344,12 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = column;
     assert.equal(
-      editor.allCondtionQuestions.indexOf("row.col1") > -1,
+      editor.allConditionQuestions.indexOf("row.col1") > -1,
       true,
       "row.col1 is here"
     );
     assert.equal(
-      editor.allCondtionQuestions.indexOf("row.col2") > -1,
+      editor.allConditionQuestions.indexOf("row.col2") > -1,
       false,
       "row.col2 is not here"
     );
@@ -301,12 +376,12 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = panelQuestion;
     assert.equal(
-      editor.allCondtionQuestions.indexOf("panel.q1") > -1,
+      editor.allConditionQuestions.indexOf("panel.q1") > -1,
       true,
       "panel.q1 is here"
     );
     assert.equal(
-      editor.allCondtionQuestions.indexOf("panel.q2") > -1,
+      editor.allConditionQuestions.indexOf("panel.q2") > -1,
       false,
       "panel.q2 is not here"
     );

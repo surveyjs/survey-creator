@@ -6,21 +6,25 @@ import {
   ISurveyObjectEditorOptions
 } from "./propertyEditorBase";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
-import { SurveyPropertyItemValuesEditor } from "./propertyItemValuesEditor";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
+import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koEditItem: any;
   koIsList: any;
+  koActiveView: any;
   onEditItemClick: any;
   onCancelEditItemClick: any;
   koEditorName: any;
+  private columnsValue: Array<SurveyNestedPropertyEditorColumn>;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
+    this.createColumns();
     var self = this;
     this.koEditItem = ko.observable(null);
     this.koIsList = ko.observable(true);
+    this.koActiveView = ko.observable("form");
     this.koEditItem.subscribe(function(newValue) {
       self.koIsList(self.koEditItem() == null);
       self.onListDetailViewChanged();
@@ -37,20 +41,42 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       return self.getEditorName();
     });
   }
+  public get columns(): Array<SurveyNestedPropertyEditorColumn> {
+    return this.columnsValue;
+  }
   public beforeShow() {
     super.beforeShow();
     this.koEditItem(null);
   }
-  protected createColumns(): Array<SurveyNestedPropertyEditorColumn> {
+  protected createColumns() {
     var result = [];
     var properties = this.getProperties();
     for (var i = 0; i < properties.length; i++) {
       result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
     }
-    return result;
+    this.columnsValue = result;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
     return [];
+  }
+  protected getPropertiesNames(
+    definitionName: string,
+    defaultNames: Array<string>
+  ): Array<string> {
+    var res = [];
+    var properties = SurveyQuestionEditorDefinition.getProperties(
+      definitionName
+    );
+    if (properties) {
+      for (var i = 0; i < properties.length; i++) {
+        var prop = properties[i];
+        res.push(prop.name ? prop.name : prop);
+      }
+    }
+    if (res.length == 0) {
+      res = defaultNames;
+    }
+    return res;
   }
   protected getPropertiesByNames(
     className: string,
