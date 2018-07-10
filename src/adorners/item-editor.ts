@@ -137,7 +137,12 @@ export var createAddItemHandler = (
 
 export var itemDraggableAdorner = {
   getMarkerClass: model => {
-    return !!model.parent && !!model.choices ? "item_draggable" : "";
+    return !!model.parent &&
+      !!model.choices &&
+      typeof model.getType === "function" &&
+      model.getType() !== "imagepicker"
+      ? "item_draggable"
+      : "";
   },
   getElementName: model => "item",
   afterRender: (
