@@ -248,11 +248,6 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .select2-container .select2-selection--single .select2-selection__arrow":
       "background:  $primary-color;",
 
-    ".svd_container.sv_bootstrap_css .svd_properties_grid  .glyphicon-edit":
-      "background-color: $primary-color;",
-    ".svd_container.sv_bootstrap_css .svd_properties_grid  .glyphicon-edit:hover":
-      "background-color:  $primary-hover-color;",
-
     ".svd_container.sv_bootstrap_css .modal-tabs":
       "background: transparent; padding-bottom: 10px;",
     ".svd_container.sv_bootstrap_css .modal-tabs > li > a":
