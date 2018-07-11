@@ -323,6 +323,10 @@
     .modal-body {
       max-height: 75vh;
       overflow: auto;
+
+      .sv_main .sv_custom_header {
+        background: transparent;
+      }
     }
     .svd_property_editor_dropdown {
       min-width: 140px;

@@ -16,12 +16,12 @@
                         <div class="svd-drag-handle svd-itemvalue-action">
                             ☰
                         </div>
-                        <button type="button" class="btn btn-sm svd-textitems-edit svd-itemvalue-action" data-bind="click: $parent.onEditItemClick">
+                        <button type="button" class="btn btn-default btn-secondary svd-textitems-edit svd-itemvalue-action" data-bind="click: $parent.onEditItemClick">
                             <span class="glyphicon glyphicon-edit" data-bind="text: $root.getLocString('pe.edit')"></span>
                         </button>
                     </td>
                     <!-- ko foreach: cells -->
-                    <td>
+                    <td class="form-group">
                         <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
                         <!-- /ko -->
                     </td>

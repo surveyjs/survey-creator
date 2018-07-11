@@ -48,6 +48,14 @@ $primary-border-color-m: #e7eaec;
   }
 
   .propertyeditor-condition {
+    .btn-primary {
+      margin-bottom: 20px;
+    }
+
+    .svd_custom_select {
+      max-width: 165px;
+    }
+
     textarea {
       color: $primary-text-color-m;
     }
@@ -75,9 +83,10 @@ $primary-border-color-m: #e7eaec;
     }
 
     .btn-danger {
-      color: $primary-text-color;
+      background-color: #f44336;
+      color: $secondary-bg-color-m;
       &:hover {
-        opacity: 0.5;
+        opacity: 0.7;
       }
     }
   }

@@ -43,8 +43,6 @@ if (!window["%hammerhead%"]) {
 
   $.material.init();
 
-  Survey.Survey.cssType = "bootstrapmaterial";
-  Survey.StylesManager.applyTheme("bootstrapmaterial");
   SurveyEditor.StylesManager.applyTheme("bootstrapmaterial");
   var editor = new SurveyEditor.SurveyEditor("editorElement", {
     useTabsInElementEditor: true

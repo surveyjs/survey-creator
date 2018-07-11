@@ -282,6 +282,10 @@ export class StylesManager {
 
     ".svd_container.sv_bootstrapmaterial_css .btn-primary":
       "color: $inverted-text-color; background-color: $secondary-color; border-color: $secondary-color;",
+    ".svd_container.sv_bootstrapmaterial_css .btn-secondary":
+      "background-color: $primary-border-color;",
+    ".svd_container.sv_bootstrapmaterial_css .btn-secondary:hover":
+      "opacity: 0.8;",
     ".svd_container.sv_bootstrapmaterial_css .btn-link":
       "color: $primary-text-color; background-color: $secondary-bg-color; border-color: $secondary-bg-color;",
 
