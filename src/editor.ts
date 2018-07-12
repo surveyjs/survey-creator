@@ -920,10 +920,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         no: number,
         isSuccess: boolean
       ) {
-        self.setState("saved");
-        if (self.saveNo == no) {
-          if (isSuccess) self.setState("saved");
-          //else TODO
+        if (self.saveNo === no) {
+          if (isSuccess) {
+            self.setState("saved");
+          } else {
+            alert(self.getLocString("ed.saveError"));
+            self.setState("modified");
+          }
         }
       });
     }

@@ -68,7 +68,8 @@ export var enStrings = {
     surveyResults: "Survey Result: ",
     modified: "Modified",
     saving: "Saving",
-    saved: "Saved"
+    saved: "Saved",
+    saveError: "Error! Editor content is not saved."
   },
   //Property names in table headers
   pel: {

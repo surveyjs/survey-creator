@@ -108,11 +108,12 @@ QUnit.test("options.questionTypes", function(assert) {
 });
 QUnit.test("Editor state property", function(assert) {
   var editor = new SurveyEditor();
+  var success = true;
   editor.saveSurveyFunc = function(
     no: number,
     doSaveCallback: (no: number, isSuccess: boolean) => void
   ) {
-    doSaveCallback(no, true);
+    doSaveCallback(no, success);
   };
   editor.text = JSON.stringify(getSurveyJson());
   assert.equal(editor.state, "");
@@ -120,6 +121,11 @@ QUnit.test("Editor state property", function(assert) {
   assert.equal(editor.state, "modified");
   editor.saveButtonClick();
   assert.equal(editor.state, "saved");
+  editor.addPage();
+  assert.equal(editor.state, "modified");
+  success = false;
+  editor.saveButtonClick();
+  assert.equal(editor.state, "modified");
   /*
      editor.addPage();
      assert.equal(editor.state, "modified");
