@@ -20,6 +20,7 @@ ko.components.register("select-items-editor", {
       var sortable = null;
       return {
         choices: choices,
+        valueName: params.valueName,
         question: params.question,
         editor: params.editor,
         isExpanded: isExpanded,
