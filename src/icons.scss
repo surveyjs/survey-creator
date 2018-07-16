@@ -60,5 +60,8 @@
     &.glyphicon-list-alt::before {
       content: "⇐"; // '🗸'
     }
+    &.glyphicon-exclamation-sign::before {
+      content: "⚠";
+    }
   }
 }
