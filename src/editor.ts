@@ -786,6 +786,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.useTabsInElementEditor !== "undefined"
         ? options.useTabsInElementEditor
         : false;
+    this.showState =
+      typeof options.showState !== "undefined" ? options.showState : false;
     this.koShowOptions(
       typeof options.showOptions !== "undefined" ? options.showOptions : false
     );

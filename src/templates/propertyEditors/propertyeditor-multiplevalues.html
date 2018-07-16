@@ -9,7 +9,7 @@
             <label>
                 <div class="sjs-cb-container">
                     <input type="checkbox" data-bind="attr: {value: item.value}, checked: $parent.koEditingValue" />
-                    <span class="checkmark svd-main-background-color">
+                    <span class="checkmark" data-bind="css: $parent.getBackgroundCls(item.value)">
                         <span class="check"></span>
                     </span>
                     <span class="sjs-cb-label" style="position: static;" data-bind="text: item.text"></span>
