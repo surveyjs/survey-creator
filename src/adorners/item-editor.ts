@@ -169,9 +169,10 @@ export var itemDraggableAdorner = {
     var addNew = document.createElement("div");
     addNew.title = editorLocalization.getString("pe.addItem");
     addNew.className = "svda-add-new-item svd-primary-icon";
-    addNew.onclick = createAddItemHandler(model, itemValue =>
-      editor.onQuestionEditorChanged(model)
-    );
+    addNew.onclick = createAddItemHandler(model, itemValue => {
+      editor.onQuestionEditorChanged(model);
+      editor.onItemValueAddedCallback("choices", itemValue);
+    });
 
     var svgElem: any = document.createElementNS(
       "http://www.w3.org/2000/svg",

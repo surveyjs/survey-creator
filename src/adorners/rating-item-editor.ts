@@ -83,7 +83,7 @@ var createAddItemHandler = (
     question.rateMax += question.rateStep;
   } else {
     var nextValue = null;
-    var values = question.rateValues.map(function (item) {
+    var values = question.rateValues.map(function(item) {
       return item.itemValue;
     });
     nextValue = getNextValue("item", values);
@@ -138,9 +138,10 @@ export var ratingItemAdorner = {
     addNew.title = editorLocalization.getString("pe.addItem");
     addNew.className =
       "svda-add-new-rating-item icon-inplace-add-item svd-primary-icon";
-    addNew.onclick = createAddItemHandler(model, itemValue =>
-      editor.onQuestionEditorChanged(model)
-    );
+    addNew.onclick = createAddItemHandler(model, itemValue => {
+      editor.onQuestionEditorChanged(model);
+      editor.onItemValueAddedCallback("rateValues", itemValue);
+    });
     var svgElem: any = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
