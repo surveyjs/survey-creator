@@ -236,6 +236,7 @@ export var enStrings = {
     triggerNotSet: "The trigger is not set",
     triggerRunIf: "Run if",
     triggerSetToName: "Change value of: ",
+    triggerFromName: "Copy value from: ",
     triggerSetValue: "to: ",
     triggerIsVariable: "Do not put the variable into the survey result."
   },
@@ -343,6 +344,7 @@ export var enStrings = {
   triggers: {
     completetrigger: "complete survey",
     setvaluetrigger: "set value",
+    copyvaluetrigger: "copy value",
     visibletrigger: "change visibility"
   },
   //Properties

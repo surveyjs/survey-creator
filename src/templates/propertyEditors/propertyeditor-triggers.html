@@ -90,6 +90,22 @@
                 <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koisVariable, displayName: $root.getLocString('pe.triggerIsVariable'), isDiplayNameVisible: true } } -->
                 <!-- /ko -->
                 <!-- /ko -->
+                <!-- ko if: koType() == 'copyvaluetrigger' -->
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
+                            <input class="form-control" type="text" data-bind="value:kosetToName" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <div data-bind="text: $root.getLocString('pe.triggerFromName')"></div>
+                            <input class="form-control" type="text" data-bind="value:kofromName" />
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
         </div>
     </div>
