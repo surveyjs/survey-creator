@@ -24,6 +24,12 @@ export interface ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
   );
+  onPropertyEditorKeyDownCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    event: KeyboardEvent
+  );
   onPropertyEditorModalShowDescriptionCallback(
     propertyName: string,
     obj: Survey.Base
@@ -334,5 +340,17 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     //TODO remove the line
     if (Survey.Base["isValueEmpty"]) return Survey.Base["isValueEmpty"](val);
     return Survey.Helpers.isValueEmpty(val);
+  }
+  public keyDownHandler(property, event) {
+    var surveyEditor: ISurveyObjectEditorOptions = property.editor.options;
+    if (!!surveyEditor) {
+      surveyEditor.onPropertyEditorKeyDownCallback(
+        property.property.name,
+        property.obj,
+        property.editor,
+        event
+      );
+    }
+    return true;
   }
 }

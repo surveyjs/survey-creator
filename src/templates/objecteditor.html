@@ -14,7 +14,7 @@
         <td class="svd-light-text-color form-group" width="50%">
             <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
                 style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
-            <div data-bind="visible: koIsShowEditor()">
+            <div data-bind="visible: koIsShowEditor(), event: { keydown: $data.editor.keyDownHandler }">
                 <!-- ko template: { name: 'propertyeditor-' + editorTypeTemplate, data: $data.editor } -->
                 <!-- /ko -->
             </div>

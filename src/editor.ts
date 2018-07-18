@@ -367,6 +367,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * Use this event to process key down event in a property editor
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.editor the instance of Property Editor.
+   * <br/> options.event the instance of mouse event.
+   */
+  public onPropertyEditorKeyDown: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * Use this event to disable some operations for an element (question/panel).
    * <br/> sender the survey editor object that fires the event
    * <br/> options.obj  the survey object question/panel
@@ -639,7 +651,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       StylesManager.currentTheme()
     ) === -1
       ? "sv_default_css"
-      : ("sv_" + StylesManager.currentTheme() + "_css");
+      : "sv_" + StylesManager.currentTheme() + "_css";
   });
 
   protected addToolbarItems() {
@@ -1872,6 +1884,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   onValueChangingCallback(options: any) {
     this.onPropertyValueChanging.fire(this, options);
+  }
+  onPropertyEditorKeyDownCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    event: KeyboardEvent
+  ) {
+    var options = {
+      propertyName: propertyName,
+      obj: obj,
+      editor: editor,
+      event: event
+    };
+    this.onPropertyEditorKeyDown.fire(this, options);
   }
   onPropertyEditorObjectSetCallback(
     propertyName: string,
