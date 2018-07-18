@@ -152,7 +152,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@text": {
-      properties: ["inputType", "placeHolder"],
+      properties: ["inputType", "placeHolder", "maxLength"],
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
@@ -160,7 +160,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["rows", "placeHolder"],
+      properties: ["rows", "placeHolder", "maxLength"],
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
