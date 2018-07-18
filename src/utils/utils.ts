@@ -1,3 +1,5 @@
+import * as ko from "knockout";
+
 export function getNextValue(prefix: string, values: string[]) {
   var index = values.reduce((res, val) => {
     if (typeof val === "string" && val.indexOf(prefix) === 0) {
@@ -44,3 +46,9 @@ export function focusFirstControl(renderedElements: HTMLElement[]) {
     }
   }
 }
+
+ko.bindingHandlers["trueclick"] = {
+  init: function(element, valueAccessor, allBindingsAccessor) {
+    element.onclick = () => true;
+  }
+};

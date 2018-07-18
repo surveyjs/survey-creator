@@ -7,13 +7,13 @@
         <div class="input-group form-group">
             <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems">
                 <div class="ddmenu-container">
-                    <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true"></div>
+                    <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" data-bind="trueclick"></div>
 
                     <div class="ddmenu">
                         <span tabindex="0" data-bind="attr: { title: $root.getLocString('pe.addNew') }">
                             <span class="glyphicon glyphicon-plus svd-main-color"></span>
                         </span>
-                        <div tabindex="0" onclick="return true"></div>
+                        <div tabindex="0" data-bind="trueclick"></div>
                         <ul class="svd-light-bg-color">
                             <!-- ko foreach: koTriggers -->
                             <li>
