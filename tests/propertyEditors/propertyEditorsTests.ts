@@ -58,6 +58,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): string {
     return "";
   }
+  onPropertyEditorKeyDownCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    event: KeyboardEvent
+  ) {}
   onValueChangingCallback(options: any) {}
   onPropertyEditorObjectSetCallback(
     propertyName: string,

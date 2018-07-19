@@ -218,6 +218,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
       editorOptions.allowAddRemoveItems = false;
     }
   }
+  onPropertyEditorKeyDownCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    event: KeyboardEvent
+  ) {}
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Survey.Base,
