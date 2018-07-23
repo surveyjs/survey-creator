@@ -147,6 +147,12 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
         this.koQuestions
       );
     }
+    if (trigger.getType() == "runexpressiontrigger") {
+      triggerItem = new SurveyPropertyRunExpressionTrigger(
+        trigger,
+        this.koQuestions
+      );
+    }
     if (!triggerItem) {
       triggerItem = new SurveyPropertyTrigger(trigger);
     }
@@ -316,6 +322,24 @@ export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {
     return trigger;
   }
 }
+export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
+  koQuestions: any;
+  kosetToName: any;
+  korunExpression: any;
+  constructor(public trigger: Survey.SurveyTrigger, koQuestions: any) {
+    super(trigger);
+    this.koQuestions = koQuestions;
+    this.kosetToName = ko.observable(trigger["setToName"]);
+    this.korunExpression = ko.observable(trigger["runExpression"]);
+  }
+  public createTrigger(): Survey.SurveyTrigger {
+    var trigger = super.createTrigger();
+    trigger["setToName"] = this.kosetToName();
+    trigger["runExpression"] = this.korunExpression();
+    return trigger;
+  }
+}
+
 export class SurveyPropertyTriggerObjects {
   koObjects: any;
   koChoosen: any;
