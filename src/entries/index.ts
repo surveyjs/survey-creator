@@ -135,3 +135,5 @@ export {
   AccordionItemModel,
   AccordionModel
 } from "../utils/accordion";
+
+export { SplitterComponentViewModel } from "../utils/splitter";
