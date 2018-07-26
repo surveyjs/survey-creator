@@ -173,6 +173,8 @@
     margin: 0;
     border: none;
     .svd_survey_designer {
+      position: relative;
+
       .svd_editors {
         .svd_questions_editor {
           height: $editor-height;

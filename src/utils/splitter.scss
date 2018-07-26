@@ -1,0 +1,15 @@
+svd-splitter {
+  display: block;
+  z-index: 999;
+  overflow: hidden;
+  position: absolute;
+  width: 4px;
+  top: 0;
+  bottom: 0;
+  cursor: ew-resize;
+
+  &:hover,
+  &.svd-active-splitter {
+    background-color: gray;
+  }
+}
