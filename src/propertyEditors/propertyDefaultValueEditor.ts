@@ -43,6 +43,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     qjson.type = this.getJsonType(this.object.getType());
     qjson.titleLocation = "hidden";
     qjson.showClearButton = true;
+    qjson.storeOthersAsComment = false;
     delete qjson["visible"];
     delete qjson["visibleIf"];
     delete qjson["enable"];
