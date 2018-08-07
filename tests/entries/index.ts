@@ -14,3 +14,4 @@ export * from "../surveylivetests";
 export * from "../questonconvertertests";
 export * from "../utilsTests";
 export * from "../adornersTests";
+export * from "../textWorker";

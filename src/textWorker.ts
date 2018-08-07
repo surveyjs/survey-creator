@@ -51,7 +51,8 @@ export class SurveyTextWorker {
     }
     if (this.jsonValue != null) {
       this.updateJsonPositions(this.jsonValue);
-      this.surveyValue = new SurveyForTextWorker(this.jsonValue);
+      var pureJsonValue = new SurveyJSON5().parse(this.text);
+      this.surveyValue = new SurveyForTextWorker(pureJsonValue);
       if (this.surveyValue.jsonErrors != null) {
         for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
           var error = this.surveyValue.jsonErrors[i];
