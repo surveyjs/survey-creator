@@ -623,6 +623,46 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   survey.locale = "de";
   assert.equal(q.choices[0].text, "Deutsch 1", "value is deutsch");
 });
+QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
+  assert
+) {
+  var survey = new Survey.Survey();
+  var p = survey.addNewPage();
+  var q = <Survey.QuestionMatrixDynamic>p.addNewQuestion("matrixdynamic", "q1");
+  q.addColumn("col1");
+  survey.locale = "en";
+  q.columns[0].title = "Engish 1";
+
+  survey.locale = "de";
+  var property = Survey.JsonObject.metaData.findProperty(
+    "matrixdropdownbase",
+    "columns"
+  );
+  var propEditor = <SurveyPropertyDropdownColumnsEditor>(
+    SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
+      q.columns = newValue;
+    })
+  );
+  propEditor.beforeShow();
+  propEditor.object = q;
+  assert.equal(
+    propEditor.koItems()[0].cells[3].koValue(),
+    "Column 1",
+    "There is no value for deutsch"
+  );
+  propEditor.koItems()[0].cells[3].koValue("Deutsch 1");
+  assert.equal(
+    propEditor.koItems()[0].cells[3].koValue(),
+    "Deutsch 1",
+    "Replace with deutch"
+  );
+  propEditor.apply();
+  survey.locale = "en";
+  assert.equal(q.columns[0].title, "Engish 1", "value is english");
+  survey.locale = "de";
+  assert.equal(q.columns[0].title, "Deutsch 1", "value is deutsch");
+});
+
 QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
   //TODO remove later - create property if it doesn't exist
   var propertyEditor = new SurveyPropertyItemValuesEditor(null);

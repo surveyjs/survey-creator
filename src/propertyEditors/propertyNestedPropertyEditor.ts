@@ -208,7 +208,7 @@ export class SurveyNestedPropertyEditorEditorCell {
     return this.property.getValue(this.obj);
   }
   public set value(val: any) {
-    this.property.setValue(this.obj, val, null);
+    this.obj[this.property.name] = val;
   }
   public get hasError(): boolean {
     return this.editor.hasError();
