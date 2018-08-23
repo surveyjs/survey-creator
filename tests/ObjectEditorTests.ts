@@ -202,8 +202,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
   propertyName: string;
-  onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
-    itemValue.value = "item1";
+  onItemValueAddedCallback(
+    propertyName: string,
+    itemValue: Survey.ItemValue,
+    itemValues: Array<Survey.ItemValue>
+  ) {
+    itemValue.value = "item" + (itemValues.length + 1);
     this.propertyName = propertyName;
   }
   onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
@@ -267,6 +271,10 @@ QUnit.test("On new ItemValue added", function(assert) {
   assert.equal(question.choices.length, 1, "One item is added");
   assert.equal(question.choices[0].value, "item1", "auto generated value");
   assert.equal(options.propertyName, "choices", "property name set correcty");
+  itemValuesEditor.onAddClick();
+  itemValuesEditor.onApplyClick();
+  assert.equal(question.choices.length, 2, "Two items are added");
+  assert.equal(question.choices[1].value, "item2", "auto generated value 2");
 });
 
 QUnit.test("On new Matrix Column added", function(assert) {

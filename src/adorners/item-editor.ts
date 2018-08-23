@@ -110,7 +110,8 @@ registerAdorner("choices-label", itemAdorner);
 
 export var createAddItemHandler = (
   question: Survey.QuestionSelectBase,
-  onItemAdded: (itemValue: Survey.ItemValue) => void
+  onItemAdded: (itemValue: Survey.ItemValue) => void,
+  onItemAdding: (itemValue: Survey.ItemValue) => void = null
 ) => () => {
   var nextValue = null;
   var values = question.choices.map(function(item) {
@@ -131,6 +132,7 @@ export var createAddItemHandler = (
       return text;
     }
   };
+  !!onItemAdding && onItemAdding(itemValue);
   question.choices = question.choices.concat([itemValue]);
   itemValue = question.choices.filter(
     choiceItem => choiceItem.value === itemValue.value
@@ -172,10 +174,15 @@ export var itemDraggableAdorner = {
     var addNew = document.createElement("div");
     addNew.title = editorLocalization.getString("pe.addItem");
     addNew.className = "svda-add-new-item svd-primary-icon";
-    addNew.onclick = createAddItemHandler(model, itemValue => {
-      editor.onQuestionEditorChanged(model);
-      editor.onItemValueAddedCallback("choices", itemValue);
-    });
+    addNew.onclick = createAddItemHandler(
+      model,
+      itemValue => {
+        editor.onQuestionEditorChanged(model);
+      },
+      itemValue => {
+        editor.onItemValueAddedCallback("choices", itemValue, model.choices);
+      }
+    );
 
     var svgElem: any = document.createElementNS(
       "http://www.w3.org/2000/svg",

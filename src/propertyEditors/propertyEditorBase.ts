@@ -6,7 +6,11 @@ export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
-  onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue);
+  onItemValueAddedCallback(
+    propertyName: string,
+    itemValue: Survey.ItemValue,
+    itemValues: Array<Survey.ItemValue>
+  );
   onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
   onSetPropertyEditorOptionsCallback(
     propertyName: string,

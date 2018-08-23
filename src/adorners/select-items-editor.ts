@@ -25,10 +25,19 @@ ko.components.register("select-items-editor", {
         editor: params.editor,
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
-        addItem: createAddItemHandler(params.question, itemValue => {
-          choices(params.question.choices);
-          params.editor.onItemValueAddedCallback("choices", itemValue);
-        }),
+        addItem: createAddItemHandler(
+          params.question,
+          itemValue => {
+            choices(params.question.choices);
+          },
+          itemValue => {
+            params.editor.onItemValueAddedCallback(
+              "choices",
+              itemValue,
+              params.question.choices
+            );
+          }
+        ),
         getLocString: str => editorLocalization.getString(str),
         choicesRendered: () => {
           if (sortable) {

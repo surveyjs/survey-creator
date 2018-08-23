@@ -133,7 +133,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     if (this.options) {
       this.options.onItemValueAddedCallback(
         this.editablePropertyName,
-        itemValue
+        itemValue, values
       );
     }
     return new SurveyPropertyItemValuesEditorItem(

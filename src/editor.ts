@@ -214,6 +214,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> sender the survey editor object that fires the event
    * <br/> options.property  the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.newItem a new created Survey.ItemValue object.
+   * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
    */
   public onItemValueAdded: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -1848,8 +1849,16 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   set showApplyButtonInEditors(value: boolean) {
     this.showApplyButtonValue = value;
   }
-  onItemValueAddedCallback(propertyName: string, itemValue: Survey.ItemValue) {
-    var options = { propertyName: propertyName, newItem: itemValue };
+  onItemValueAddedCallback(
+    propertyName: string,
+    itemValue: Survey.ItemValue,
+    itemValues: Array<Survey.ItemValue>
+  ) {
+    var options = {
+      propertyName: propertyName,
+      newItem: itemValue,
+      itemValues: itemValues
+    };
     this.onItemValueAdded.fire(this, options);
   }
   onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
