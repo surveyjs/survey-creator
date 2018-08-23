@@ -65,7 +65,12 @@ ko.components.register("item-editor", {
 export var itemAdorner = {
   inplaceEditForValues: false,
   getMarkerClass: model => {
-    return !!model.parent && !!model.choices ? "item_editable" : "";
+    return !!model.parent &&
+      !!model.choices &&
+      typeof model.getType === "function" &&
+      model.getType() !== "imagepicker"
+      ? "item_editable"
+      : "";
   },
   getElementName: model => "controlLabel",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
@@ -138,6 +143,33 @@ export var createAddItemHandler = (
   !!onItemAdded && onItemAdded(itemValue);
 };
 
+export var createAddItemElement = handler => {
+  var addNew = document.createElement("div");
+  addNew.title = editorLocalization.getString("pe.addItem");
+  addNew.className = "svda-add-new-item svd-primary-icon";
+  addNew.onclick = handler;
+
+  var svgElem: any = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  svgElem.setAttribute("class", "svd-svg-icon");
+  svgElem.style.width = "12px";
+  svgElem.style.height = "12px";
+  var useElem: any = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+  useElem.setAttributeNS(
+    "http://www.w3.org/1999/xlink",
+    "xlink:href",
+    "#icon-inplaceplus"
+  );
+  svgElem.appendChild(useElem);
+  addNew.appendChild(svgElem);
+  return addNew;
+};
+
 export var itemDraggableAdorner = {
   getMarkerClass: model => {
     return !!model.parent &&
@@ -169,33 +201,13 @@ export var itemDraggableAdorner = {
         editor.onQuestionEditorChanged(model);
       }
     });
-    var addNew = document.createElement("div");
-    addNew.title = editorLocalization.getString("pe.addItem");
-    addNew.className = "svda-add-new-item svd-primary-icon";
-    addNew.onclick = createAddItemHandler(model, itemValue => {
-      editor.onQuestionEditorChanged(model);
-      editor.onItemValueAddedCallback("choices", itemValue);
-    });
 
-    var svgElem: any = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
+    var addNew = createAddItemElement(
+      createAddItemHandler(model, itemValue => {
+        editor.onQuestionEditorChanged(model);
+        editor.onItemValueAddedCallback("choices", itemValue);
+      })
     );
-    svgElem.setAttribute("class", "svd-svg-icon");
-    svgElem.style.width = "12px";
-    svgElem.style.height = "12px";
-    var useElem: any = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "use"
-    );
-    useElem.setAttributeNS(
-      "http://www.w3.org/1999/xlink",
-      "xlink:href",
-      "#icon-inplaceplus"
-    );
-    svgElem.appendChild(useElem);
-    addNew.appendChild(svgElem);
-
     itemsRoot.appendChild(addNew);
   }
 };

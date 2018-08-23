@@ -437,6 +437,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The event is fired on uploading the file. There are two properties in options: options.name options.callback.
+   * <br/> sender the survey object that fires the event
+   * name: name, file: file, accept: accept
+   * <br/> file the Javascript File object
+   * <br/> callback called on upload complete
+   * @see uploadFile
+   */
+  public onUploadFile: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
   public get isAutoSave() {
@@ -1923,6 +1935,28 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;
+  }
+  /**
+   * Upload the files on a server
+   * @param files files to upload
+   * @param uploadingCallback a call back function to get the status on uploading the file and operation result - URI of the uploaded file
+   */
+  public uploadFiles(
+    files: File[],
+    uploadingCallback: (status: string, data: any) => any
+  ) {
+    if (this.onUploadFile.isEmpty) {
+      let fileReader = new FileReader();
+      fileReader.onload = e => {
+        uploadingCallback("success", fileReader.result);
+      };
+      fileReader.readAsDataURL(files[0]);
+    } else {
+      this.onUploadFile.fire(this, {
+        files: files || [],
+        callback: uploadingCallback
+      });
+    }
   }
 }
 

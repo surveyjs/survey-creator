@@ -1,0 +1,50 @@
+.image_item_editable {
+  position: relative;
+}
+
+.sv_imgsel {
+  .svda-add-new-item {
+    vertical-align: top;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0;
+  }
+}
+
+.svd_q_selected .image_item_editable {
+  image-item-editor {
+    display: block;
+  }
+  .svda-drag-handle {
+    visibility: visible;
+  }
+  .svda-delete-item {
+    visibility: visible;
+  }
+}
+
+.svda-image-editor {
+  overflow: hidden;
+}
+
+image-item-editor {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 0 1em;
+  border-radius: 0.5em;
+  background-color: white;
+  opacity: 0.75;
+
+  .svda-content {
+    position: relative;
+    pointer-events: all;
+
+    .edit-image-item {
+      cursor: pointer;
+    }
+  }
+}
