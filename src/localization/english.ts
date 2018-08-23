@@ -36,6 +36,7 @@ export var enStrings = {
   },
   //Strings in Editor
   ed: {
+    defaultLocale: "Default ({0})",
     survey: "Survey",
     settings: "Survey Settings",
     editSurvey: "Edit Survey",

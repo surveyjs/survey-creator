@@ -116,7 +116,11 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     if (this.property.name === "locale") {
       var localeNames = Survey.surveyLocalization["localeNames"];
       if (localeNames) {
-        var text = localeNames[value];
+        var text = !!value
+          ? localeNames[value]
+          : editorLocalization
+              .getString("ed.defaultLocale")
+              ["format"](localeNames[Survey.surveyLocalization.defaultLocale]);
         if (text) return text;
       }
     }
