@@ -596,7 +596,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
   q.choices = [1, 2, 3];
   survey.locale = "en";
-  q.choices[0].text = "Engish 1";
+  q.choices[0].text = "English 1";
 
   survey.locale = "de";
   var property = Survey.JsonObject.metaData.findProperty(
@@ -608,11 +608,14 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
       q.choices = newValue;
     })
   );
+  propEditor.onGetLocale = function() {
+    return survey.locale;
+  };
   propEditor.beforeShow();
   propEditor.object = q;
   assert.equal(
     propEditor.koItems()[0].cells[1].koValue(),
-    "",
+    "English 1",
     "There is no value for deutsch"
   );
   propEditor.koItems()[0].cells[1].koValue("Deutsch 1");
@@ -623,7 +626,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   );
   propEditor.apply();
   survey.locale = "en";
-  assert.equal(q.choices[0].text, "Engish 1", "value is english");
+  assert.equal(q.choices[0].text, "English 1", "value is english");
   survey.locale = "de";
   assert.equal(q.choices[0].text, "Deutsch 1", "value is deutsch");
 });
@@ -635,7 +638,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
   var q = <Survey.QuestionMatrixDynamic>p.addNewQuestion("matrixdynamic", "q1");
   q.addColumn("col1");
   survey.locale = "en";
-  q.columns[0].title = "Engish 1";
+  q.columns[0].title = "English 1";
 
   survey.locale = "de";
   var property = Survey.JsonObject.metaData.findProperty(
@@ -647,11 +650,15 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
       q.columns = newValue;
     })
   );
+  propEditor.onGetLocale = function() {
+    return survey.locale;
+  };
+
   propEditor.beforeShow();
   propEditor.object = q;
   assert.equal(
     propEditor.koItems()[0].cells[3].koValue(),
-    "Column 1",
+    "English 1",
     "There is no value for deutsch"
   );
   propEditor.koItems()[0].cells[3].koValue("Deutsch 1");
@@ -662,7 +669,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
   );
   propEditor.apply();
   survey.locale = "en";
-  assert.equal(q.columns[0].title, "Engish 1", "value is english");
+  assert.equal(q.columns[0].title, "English 1", "value is english");
   survey.locale = "de";
   assert.equal(q.columns[0].title, "Deutsch 1", "value is deutsch");
 });
