@@ -16,6 +16,11 @@ export class TitleInplaceEditor {
   isEditing = ko.observable<boolean>(false);
 
   protected forNeibours(func: (el: HTMLElement) => void) {
+    if (
+      !this.rootElement.parentElement ||
+      !this.rootElement.parentElement.parentElement
+    )
+      return;
     var holder = this.rootElement.parentElement.parentElement;
     for (var i = 0; i < holder.children.length - 1; i++) {
       var element = holder.children[i];

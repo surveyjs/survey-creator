@@ -300,7 +300,7 @@ export class DragDropHelper {
     };
     domElement.ondragstart = function(e: DragEvent) {
       var target: any = e.target || e.srcElement;
-      if (!!target && target.contains(document.activeElement)) {
+      if (!!target && !!target.contains && target.contains(document.activeElement)) {
         e.preventDefault();
         return false;
       }
