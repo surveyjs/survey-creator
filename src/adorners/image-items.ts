@@ -68,7 +68,7 @@ ko.components.register("image-item-editor", {
         params.itemsRoot
       );
       var property = Survey.JsonObject.metaData.findProperty(
-        "imageitemvalues", //params.target.getType(),
+        "imageitemvalue", //params.target.getType(),
         params.name
       );
       model.valueChanged = files => {
@@ -141,10 +141,6 @@ export var imageItemsAdorner = {
 
         var nextValue = getNextValue("item", model.choices);
         var itemValue = new Survey.ItemValue(nextValue);
-        // var itemValue = Survey.JsonObject.metaData.createClass(
-        //   "imageitemvalues"
-        // );
-        // itemValue.value = nextValue;
         itemValue.locOwner = <any>{
           getLocale: () => {
             if (!!model["getLocale"]) return model.getLocale();
@@ -162,7 +158,7 @@ export var imageItemsAdorner = {
         editor.onItemValueAddedCallback("choices", itemValue);
 
         var property = Survey.JsonObject.metaData.findProperty(
-          "imageitemvalues",
+          "imageitemvalue",
           "imageLink"
         );
         editor.uploadFiles(files, (_, link) => {
@@ -172,8 +168,8 @@ export var imageItemsAdorner = {
       };
       fileInput.click();
     });
-    addItemElement.style.width = model["imageWidth"] || "200px";
-    addItemElement.style.height = model["imageHeight"] || "150px";
+    addItemElement.style.width = (model["imageWidth"] || 200) + 10 + "px";
+    addItemElement.style.height = (model["imageHeight"] || 150) + 10 + "px";
     addItemElement.style.lineHeight = addItemElement.style.height;
     itemsRoot.appendChild(addItemElement);
 
