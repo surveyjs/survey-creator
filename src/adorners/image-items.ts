@@ -139,8 +139,15 @@ export var imageItemsAdorner = {
           files.push(fileInput.files[i]);
         }
 
-        var nextValue = getNextValue("item", model.choices);
-        var itemValue = new Survey.ItemValue(nextValue);
+        var nextValue = getNextValue(
+          "item",
+          (model.choices || []).map(c => c.value)
+        );
+        var itemValue = new Survey.ItemValue(
+          nextValue,
+          undefined,
+          "imageitemvalue"
+        );
         itemValue.locOwner = <any>{
           getLocale: () => {
             if (!!model["getLocale"]) return model.getLocale();
@@ -154,6 +161,7 @@ export var imageItemsAdorner = {
           }
         };
         model.choices = model.choices.concat([itemValue]);
+        itemValue = model.choices[model.choices.length - 1];
         editor.onQuestionEditorChanged(model);
         editor.onItemValueAddedCallback("choices", itemValue);
 
