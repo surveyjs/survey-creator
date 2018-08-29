@@ -143,7 +143,7 @@ export var imageItemsAdorner = {
           "item",
           (model.choices || []).map(c => c.value)
         );
-        var itemValue = new Survey.ItemValue(
+        var itemValue = new Survey["ItemValue"](
           nextValue,
           undefined,
           "imageitemvalue"
