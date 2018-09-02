@@ -129,7 +129,7 @@ export { labelAdorner } from "../adorners/label-editor";
 export { questionActionsAdorner } from "../adorners/question-actions";
 export { selectItemsEditorAdorner } from "../adorners/select-items-editor";
 export { ratingItemAdorner } from "../adorners/rating-item-editor";
-//export { imageItemsAdorner } from "../adorners/image-items";
+export { imageItemsAdorner } from "../adorners/image-items";
 
 export {
   IAccordionItemData,

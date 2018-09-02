@@ -555,7 +555,7 @@ export class DragDropHelper {
     return DragDropHelper.dragData;
   }
   private clearData() {
-    //this.ddTarget = null;
+    this.ddTarget = null; // We should reset ddTarget to null due to the https://surveyjs.answerdesk.io/ticket/details/T1003 - onQuestionAdded not fired after D&D
     DragDropHelper.dragData = { text: "", json: null };
     var prev = DragDropHelper.prevEvent;
     prev.element = null;
