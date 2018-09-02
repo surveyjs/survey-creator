@@ -169,15 +169,19 @@ export class QuestionToolbox {
   /**
    * Add a copied Question into Toolbox
    * @param question a copied Survey.Question
+   * @param options a json object that allows you to override question properties. Attributes are: name, title, isCopied, iconName, json and category.
    */
-  public addCopiedItem(question: Survey.QuestionBase) {
+  public addCopiedItem(question: Survey.QuestionBase, options: any = null) {
+    if (!options) options = {};
+    var name = !!options.name ? options.name : question.name;
+    var title = !!options.title ? options.title : name;
     var item = {
-      name: question.name,
-      title: question.name,
-      isCopied: true,
-      iconName: "icon-default",
-      json: this.getQuestionJSON(question),
-      category: ""
+      name: name,
+      title: title,
+      isCopied: options.isCopied !== false,
+      iconName: !!options.iconName ? options.iconName : "icon-default",
+      json: !!options.json ? options.json : this.getQuestionJSON(question),
+      category: !!options.category ? options.category : ""
     };
     if (this.replaceItem(item)) return;
     var copied = this.copiedItems;

@@ -430,8 +430,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   koAutoSave = ko.observable(false);
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
+   * It calls before adding the element into toolbox and it allows to change the toolbox item attributes using options.itemOptions parameter
    * <br/> sender the survey editor object that fires the event
    * <br/> options.element is a new added element
+   * <br/> options.itemOptions a json object that allows you to override question properties. Attributes are: name, title, isCopied, iconName, json and category.
+   * @see onCustomElementAddedIntoToolbox
+   */
+  public onCustomElementAddingIntoToolbox: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * The event is called when end-user addes new element (question or panel) into the survey toolbox.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.element is a new added element
+   * @see onCustomElementAddingIntoToolbox
    */
   public onCustomElementAddedIntoToolbox: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -1753,7 +1766,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @see toolbox
    */
   public addCustomToolboxQuestion(question: Survey.QuestionBase) {
-    this.toolbox.addCopiedItem(question);
+    var options = {};
+    this.onCustomElementAddingIntoToolbox.fire(this, {
+      element: question,
+      itemOptions: options
+    });
+    this.toolbox.addCopiedItem(question, options);
     this.onCustomElementAddedIntoToolbox.fire(this, { element: question });
   }
   /**
