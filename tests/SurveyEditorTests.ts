@@ -108,6 +108,7 @@ QUnit.test("options.questionTypes", function(assert) {
 });
 QUnit.test("Editor state property", function(assert) {
   var editor = new SurveyEditor();
+  editor.showErrorOnFailedSave = false;
   var success = true;
   editor.saveSurveyFunc = function(
     no: number,
@@ -211,9 +212,8 @@ QUnit.test("onElementDeleting event", function(assert) {
 
 QUnit.test("fast copy tests, copy a question", function(assert) {
   var editor = new SurveyEditor();
-  var q1 = <Survey.QuestionText>editor.survey.pages[0].addNewQuestion(
-    "text",
-    "question1"
+  var q1 = <Survey.QuestionText>(
+    editor.survey.pages[0].addNewQuestion("text", "question1")
   );
   q1.placeHolder = "I'm here";
   editor.fastCopyQuestion(q1);
@@ -591,6 +591,33 @@ QUnit.test("PagesEditor change question's page", function(assert) {
   );
   assert.equal(pagesEditor.selectedPage, editor["pages"]()[1]);
 });
+
+QUnit.test(
+  "Element name should be unique - property grid + Question Editor",
+  function(assert) {
+    var editor = new SurveyEditor();
+    editor.survey.currentPage.addNewQuestion("text", "question1");
+    editor.survey.currentPage.addNewQuestion("text", "question2");
+    var question = editor.survey.currentPage.addNewQuestion("text", "question");
+    editor.selectedObjectEditor.selectedObject = question;
+    var namePropertyEditor = editor.selectedObjectEditor.getPropertyEditor(
+      "name"
+    );
+    editor.selectedObjectEditor.changeActiveProperty(namePropertyEditor);
+    namePropertyEditor.koValue("question2");
+    assert.equal(
+      namePropertyEditor.koValue(),
+      "question3",
+      "The name should be unique"
+    );
+    question.name = "question";
+    editor.onQuestionEditorChanged(question);
+    assert.equal(question.name, "question", "the name is correct");
+    question.name = "question2";
+    editor.onQuestionEditorChanged(question);
+    assert.equal(question.name, "question3", "the name is corrected");
+  }
+);
 
 function getSurveyJson(): any {
   return {

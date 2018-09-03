@@ -28,6 +28,19 @@ export class SurveyHelper {
       editorLocalization.getString("ed.newPanelName")
     );
   }
+  public static generateNewName(name: string): string {
+    var pos = name.length;
+    while (pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
+      pos--;
+    }
+    var base = name.substr(0, pos);
+    var num = 0;
+    if (pos < name.length) {
+      num = parseInt(name.substr(pos));
+    }
+    num++;
+    return base + num;
+  }
   public static getNewName(objs: Array<any>, baseName: string): string {
     var hash = {};
     for (var i = 0; i < objs.length; i++) {

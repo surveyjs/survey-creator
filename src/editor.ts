@@ -471,6 +471,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public set isAutoSave(newVal) {
     this.koAutoSave(newVal);
   }
+  /**
+   * Set it to false to suppress an alert message about error on saving the survey into database.
+   */
+  public showErrorOnFailedSave: boolean = true;
   koShowState = ko.observable(false);
   /**
    * A boolean property, false by default. Set it to true to show the state in the toolbar (saving/saved).
@@ -513,7 +517,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * The Survey Editor constructor.
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
-   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid, questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight.
+   * @param options Survey Editor options. The following options are available: showJSONEditorTab,
+   * showTestSurveyTab, showEmbededSurveyTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
+   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -577,7 +583,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
     this.selectedObjectEditorValue.onPropertyValueChanged.add(
       (sender, options) => {
-        self.onPropertyValueChanged(
+        options.updatedValue = self.onPropertyValueChanged(
           options.property,
           options.object,
           options.newValue
@@ -837,6 +843,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koGenerateValidJSON(this.options.generateValidJSON);
     this.isAutoSave =
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
+    this.showErrorOnFailedSave =
+      typeof options.showErrorOnFailedSave !== "undefined"
+        ? options.showErrorOnFailedSave
+        : true;
     this.isRTLValue =
       typeof options.isRTL !== "undefined" ? options.isRTL : false;
     this.scrollToNewElement =
@@ -964,7 +974,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           if (isSuccess) {
             self.setState("saved");
           } else {
-            alert(self.getLocString("ed.saveError"));
+            if (self.showErrorOnFailedSave) {
+              alert(self.getLocString("ed.saveError"));
+            }
             self.setState("modified");
           }
         }
@@ -1145,6 +1157,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     var isDefault = property.isDefaultValue(newValue);
     var oldValue = obj[property.name];
     obj[property.name] = newValue;
+    if (property.name == "name") {
+      var newName = this.generateUniqueName(obj, newValue);
+      if (newName != newValue) {
+        return newName;
+      }
+    }
     if (property.name == "name" || property.name == "title") {
       this.surveyObjects.nameChanged(obj);
     }
@@ -1170,6 +1188,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.selectedObjectEditorValue.objectChanged();
     }
     this.survey.render();
+    return null;
   }
   private doUndoRedo(item: UndoRedoItem) {
     this.initSurvey(item.surveyJSON);
@@ -1610,6 +1629,30 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.newQuestions.push(element);
     }
   }
+  private generateUniqueName(el: Survey.Base, newName: string): string {
+    while (!this.isNameUnique(el, newName)) {
+      newName = SurveyHelper.generateNewName(newName);
+    }
+    return newName;
+  }
+  private isNameUnique(el: Survey.Base, newName: string): boolean {
+    if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
+    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+      return false;
+    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+  }
+  private isNameUniqueInArray(
+    elements: Array<any>,
+    el: Survey.Base,
+    newName: string
+  ): boolean {
+    newName = newName.toLowerCase();
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i] != el && elements[i].name.toLowerCase() == newName)
+        return false;
+    }
+    return true;
+  }
   private getNewName(type: string): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.pages());
     return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
@@ -1739,6 +1782,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     );
   };
   public onQuestionEditorChanged(question: Survey.QuestionBase) {
+    if (!this.isNameUnique(question, question.name)) {
+      question.name = this.generateUniqueName(question, question.name);
+    }
     this.surveyObjects.nameChanged(question);
     this.selectedObjectEditorValue.objectChanged();
     this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)

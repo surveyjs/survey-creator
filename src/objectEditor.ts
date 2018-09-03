@@ -58,7 +58,7 @@ export class SurveyObjectEditor {
     this.updateProperties();
     this.updatePropertiesObject();
   }
-  public getPropertyEditor(name: string) {
+  public getPropertyEditor(name: string): SurveyObjectProperty {
     var properties = this.koProperties();
     for (var i = 0; i < properties.length; i++) {
       if (properties[i].name == name) return properties[i];
@@ -97,11 +97,16 @@ export class SurveyObjectEditor {
     var objectProperties = [];
     var self = this;
     var propEvent = (property: SurveyObjectProperty, newValue: any) => {
-      self.onPropertyValueChanged.fire(this, {
+      var options = {
         property: property.property,
         object: property.object,
-        newValue: newValue
-      });
+        newValue: newValue,
+        updatedValue: null
+      };
+      self.onPropertyValueChanged.fire(this, options);
+      if (!!options.updatedValue && options.updatedValue != options.newValue) {
+        property.koValue(options.updatedValue);
+      }
     };
     var visibleProperties = [];
     for (var i = 0; i < properties.length; i++) {
