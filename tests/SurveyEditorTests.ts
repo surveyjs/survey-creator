@@ -616,6 +616,8 @@ QUnit.test(
     question.name = "question2";
     editor.onQuestionEditorChanged(question);
     assert.equal(question.name, "question3", "the name is corrected");
+    //should not have an error
+    editor.onQuestionEditorChanged(<any>editor.survey);
   }
 );
 

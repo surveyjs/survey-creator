@@ -1782,7 +1782,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     );
   };
   public onQuestionEditorChanged(question: Survey.QuestionBase) {
-    if (!this.isNameUnique(question, question.name)) {
+    if (!!question.name && !this.isNameUnique(question, question.name)) {
       question.name = this.generateUniqueName(question, question.name);
     }
     this.surveyObjects.nameChanged(question);
