@@ -213,20 +213,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get isRequired(): boolean {
     return this.isRequriedValue;
   }
-  //TODO remove this function, replace it with property.isRequired later
   protected setIsRequired() {
-    this.isRequriedValue = false;
-    if (!this.property || !this.object || !this.object.getType) return;
-    var jsonClass = Survey.JsonObject.metaData.findClass(this.object.getType());
-    while (jsonClass) {
-      var reqProperties = jsonClass.requiredProperties;
-      if (reqProperties) {
-        this.isRequriedValue = reqProperties.indexOf(this.property.name) > -1;
-        if (this.isRequriedValue) return;
-      }
-      if (!jsonClass.parentName) return;
-      jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
-    }
+    this.isRequriedValue = !!this.property ? this.property.isRequired : false;
   }
   protected setTitleAndDisplayName() {
     if (this.isCustomDisplayName) return;
