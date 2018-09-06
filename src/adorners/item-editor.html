@@ -1,7 +1,6 @@
 <div class="svda-content">
     <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
-        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
-        />
+        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;" />
         <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">
             <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplacecheck', size: 12"></svg-icon>
         </span>
@@ -13,7 +12,7 @@
             <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplaceedit', size: 12"></svg-icon>
         </span>
     </span>
-    <!-- ko if: notOther -->
+    <!-- ko if: isDraggable -->
     <span class="svda-drag-handle" data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()">
         <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplacedraggable', size: 12"></svg-icon>
     </span>

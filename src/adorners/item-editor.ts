@@ -23,18 +23,25 @@ class ItemInplaceEditor extends TitleInplaceEditor {
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
-    if (this.notOther) {
+    if (this.question.otherItem === this.item) {
+      this.question.hasOther = false;
+    } else if (this.question["selectAllItem"] === this.item) {
+      this.question["hasSelectAll"] = false;
+    } else if (this.question["noneItem"] === this.item) {
+      this.question["hasNone"] = false;
+    } else {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);
-    } else {
-      this.question.hasOther = false;
     }
-
     this.editor.onQuestionEditorChanged(this.question);
   }
 
-  get notOther() {
-    return this.question.otherItem !== this.item;
+  get isDraggable() {
+    return (
+      this.question.otherItem !== this.item &&
+      this.question["selectAllItem"] !== this.item &&
+      this.question["noneItem"] !== this.item
+    );
   }
 }
 
@@ -78,35 +85,35 @@ export var itemAdorner = {
       elements[i].onclick = e => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
-      if (i === elements.length - 1 && model.hasOther) {
-        decoration.innerHTML =
-          "<item-editor params='name: \"otherText\", target: target, item: item, question: question, editor: editor'></item-editor>";
-        elements[i].appendChild(decoration);
-        ko.applyBindings(
-          {
-            item: model.otherItem,
-            question: model,
-            target: model,
-            editor: editor
-          },
-          decoration
-        );
-      } else {
-        decoration.innerHTML =
-          "<item-editor params='name: \"" +
-          (itemAdorner.inplaceEditForValues ? "value" : "text") +
-          "\", target: target, item: item, question: question, editor: editor'></item-editor>";
-        elements[i].appendChild(decoration);
-        ko.applyBindings(
-          {
-            item: model.choices[i],
-            question: model,
-            target: model.choices[i],
-            editor: editor
-          },
-          decoration
-        );
+      var itemValue = ko.dataFor(elements[i]);
+      var propertyName = itemAdorner.inplaceEditForValues ? "value" : "text";
+      var target = itemValue;
+      if (itemValue === model["selectAllItem"]) {
+        target = model;
+        propertyName = "selectAllText";
       }
+      if (itemValue === model["noneItemValue"]) {
+        target = model;
+        propertyName = "noneText";
+      }
+      if (itemValue === model["otherItemValue"]) {
+        target = model;
+        propertyName = "otherText";
+      }
+      decoration.innerHTML =
+        "<item-editor params='name: \"" +
+        propertyName +
+        "\", target: target, item: item, question: question, editor: editor'></item-editor>";
+      elements[i].appendChild(decoration);
+      ko.applyBindings(
+        {
+          item: itemValue,
+          question: model,
+          target: target,
+          editor: editor
+        },
+        decoration
+      );
     }
   }
 };
@@ -188,8 +195,15 @@ export var itemDraggableAdorner = {
     editor: SurveyEditor
   ) => {
     var itemsRoot = elements[0].parentElement;
-    if (model.hasOther) {
-      elements[elements.length - 1].classList.remove("item_draggable");
+    for (var i = 0; i < elements.length; i++) {
+      var itemValue = ko.dataFor(elements[i]);
+      if (
+        itemValue === model["selectAllItemValue"] ||
+        itemValue === model["noneItemValue"] ||
+        itemValue === model["otherItemValue"]
+      ) {
+        elements[i].classList.remove("item_draggable");
+      }
     }
     var sortable = Sortable.create(itemsRoot, {
       handle: ".svda-drag-handle",
