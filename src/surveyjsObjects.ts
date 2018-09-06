@@ -255,8 +255,12 @@ function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
-      var classesElementName = adorner.getElementName(options.question || options.panel);
-      var adornerMarkerClass = adorner.getMarkerClass(options.question || options.panel);
+      var classesElementName = adorner.getElementName(
+        options.question || options.panel
+      );
+      var adornerMarkerClass = adorner.getMarkerClass(
+        options.question || options.panel
+      );
 
       classes[classesElementName] = applyAdornerClass(
         classes[classesElementName],
@@ -295,6 +299,14 @@ function addAdorner(node, model) {
         var elements = node.querySelectorAll(
           "." + elementClass.replace(/\s/g, ".")
         );
+        var temp = [];
+        for (var i = 0; i < elements.length; i++) {
+          temp.push(elements[i]);
+        }
+        elements = temp;
+        if (node.className.split(" ").indexOf(elementClass) !== -1) {
+          elements.unshift(node);
+        }
         elements = filterNestedQuestions(node, elements);
         if (
           elements.length === 0 &&

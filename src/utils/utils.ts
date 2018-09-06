@@ -17,10 +17,9 @@ export function getNextValue(prefix: string, values: string[]) {
 
 export function findParentNode(className: string, sourceNode: HTMLElement) {
   var parent = sourceNode;
-  while (
-    (parent = parent.parentElement) &&
-    !parent.classList.contains(className)
-  );
+  while (!!parent && !parent.classList.contains(className)) {
+    parent = parent.parentElement;
+  }
   return parent;
 }
 
