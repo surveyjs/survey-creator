@@ -57,6 +57,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public koIsDefault: any;
   public koHasError: any;
   public koErrorText: any;
+  public koDisplayError: any;
   public isTabProperty: boolean = false;
   public isInplaceProperty: boolean = false;
   public onChanged: (newValue: any) => any;
@@ -81,6 +82,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     });
     this.koHasError = ko.observable(false);
     this.koErrorText = ko.observable("");
+    this.koDisplayError = ko.computed(function() {
+      return self.koHasError() && !!self.koErrorText();
+    });
     this.setIsRequired();
     this.setTitleAndDisplayName();
   }
