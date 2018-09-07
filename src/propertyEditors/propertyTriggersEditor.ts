@@ -294,6 +294,7 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   kosetValue: any;
   koisVariable: any;
   koSurvey: any;
+  koHasSurvey: any;
   survey: Survey.Survey;
   constructor(
     public trigger: Survey.SurveyTriggerSetValue,
@@ -302,7 +303,8 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   ) {
     super(trigger);
     this.koQuestions = koQuestions;
-    this.koSurvey = ko.observable(null);
+    this.koSurvey = ko.observable(SurveyPropertySetValueTrigger.emptySurvey);
+    this.koHasSurvey = ko.observable(false);
     this.kosetToName = ko.observable(trigger.setToName);
     this.kosetValue = ko.observable(trigger.setValue);
     this.koisVariable = ko.observable(trigger.isVariable);
@@ -337,12 +339,14 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
         : null;
     if (!question) {
       this.survey = null;
+      this.koHasSurvey(false);
       this.koSurvey(SurveyPropertySetValueTrigger.emptySurvey);
       return;
     }
     var qJson = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
       question
     );
+    qJson.titleLocation = "top";
     qJson.title = editorLocalization.getString("pe.triggerSetValue");
     this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
       qJson
@@ -353,6 +357,7 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
       self.kosetValue(options.value);
     });
     this.koSurvey(this.survey);
+    this.koHasSurvey(true);
   }
 }
 export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {

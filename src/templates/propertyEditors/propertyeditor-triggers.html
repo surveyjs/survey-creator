@@ -87,11 +87,11 @@
                         <!-- /ko -->
                     </div>
                     <div class="col-lg-12 col-sm-12">
-                        <div class="form-group" data-bind="visible:koSurvey() == null">
+                        <div class="form-group" data-bind="visible:koisVariable">
                             <div data-bind="text: $root.getLocString('pe.triggerSetValue')"></div>
                             <input class="form-control" type="text" data-bind="value:kosetValue" />
                         </div>
-                        <div class="form-group" data-bind="visible:koSurvey() != null">
+                        <div class="form-group" data-bind="visible:koHasSurvey">
                             <survey-widget params="survey: koSurvey"></survey-widget>
                         </div>
                     </div>
