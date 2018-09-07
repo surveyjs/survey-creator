@@ -103,7 +103,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     for (var i = 0; i < this.koItems().length; i++) {
       result = result || this.koItems()[i].hasError();
     }
-    return result;
+    return super.checkForErrors() || result;
   }
   protected onBeforeApply() {
     var internalItems = this.koItems();

@@ -60,14 +60,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       .getString("pe.itemEdit")
       ["format"](this.koEditItem().item.value);
   }
-  protected checkForErrors(): boolean {
-    var result = false;
-    for (var i = 0; i < this.koItems().length; i++) {
-      var item = this.koItems()[i];
-      result = item.hasError() || result;
-    }
-    return result;
-  }
   public beforeShow() {
     super.beforeShow();
     var props = this.getDefinedProperties();
@@ -133,7 +125,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     if (this.options) {
       this.options.onItemValueAddedCallback(
         this.editablePropertyName,
-        itemValue, values
+        itemValue,
+        values
       );
     }
     return new SurveyPropertyItemValuesEditorItem(

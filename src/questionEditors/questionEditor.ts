@@ -203,12 +203,13 @@ export class SurveyQuestionEditor {
     return res;
   }
   protected doCloseWindow(isCancel: boolean) {
+    var appliedSuccesfull = false;
     if (isCancel) {
       this.reset();
     } else {
-      this.apply();
+      appliedSuccesfull = this.apply();
     }
-    if (isCancel || !this.hasError()) {
+    if (isCancel || appliedSuccesfull) {
       var tabs = this.koTabs();
       for (var i = 0; i < tabs.length; i++) {
         tabs[i].doCloseWindow();
@@ -232,15 +233,25 @@ export class SurveyQuestionEditor {
       tabs[i].reset();
     }
   }
-  public apply() {
-    if (this.hasError()) return;
+  public apply(): boolean {
+    var res = true;
+    var isFirstError = false;
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
-      tabs[i].apply();
+      var tabRes = tabs[i].apply();
+      if (!tabRes) {
+        tabs[i].expand();
+        if (!isFirstError) {
+          this.koActiveTab(tabs[i].name);
+          isFirstError = true;
+        }
+      }
+      res = tabRes && res;
     }
-    if (this.onChanged) {
+    if (res && this.onChanged) {
       this.onChanged(this.obj);
     }
+    return res;
   }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
@@ -288,11 +299,15 @@ export class SurveyQuestionEditor {
 
 export class SurveyQuestionEditorTab {
   private titleValue: string;
+  public onExpand: () => void;
   constructor(
     public obj: any,
     public properties: SurveyQuestionEditorProperties = null,
     private _name
   ) {}
+  public expand() {
+    if (!!this.onExpand) this.onExpand();
+  }
   public koAfterRender(elements: HTMLElement[], context) {
     focusFirstControl(elements);
   }
@@ -322,8 +337,8 @@ export class SurveyQuestionEditorTab {
   public reset() {
     this.properties.reset();
   }
-  public apply() {
-    this.properties.apply();
+  public apply(): boolean {
+    return this.properties.apply();
   }
   public doCloseWindow() {}
   protected getValue(property: Survey.JsonObjectProperty): any {

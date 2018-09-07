@@ -38,9 +38,12 @@ export class SurveyQuestionEditorProperty {
   public hasError(): boolean {
     return this.editor.hasError();
   }
-  public apply() {
-    this.editor.apply();
-    this.obj[this.property.name] = this.editor.koValue();
+  public apply(): boolean {
+    if (this.editor.apply()) {
+      this.obj[this.property.name] = this.editor.koValue();
+      return true;
+    }
+    return false;
   }
   public reset() {
     this.editor.koValue(this.property.getPropertyValue(this.obj));
@@ -105,7 +108,9 @@ export class SurveyQuestionEditorProperties {
     this.buildRows(properties);
   }
   public apply() {
-    this.performForAllProperties(p => p.apply());
+    var res = true;
+    this.performForAllProperties(p => (res = p.apply() && res));
+    return res;
   }
   public reset() {
     this.performForAllProperties(p => p.reset());

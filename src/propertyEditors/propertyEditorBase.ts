@@ -208,7 +208,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
         this.object,
-        this.koValue()
+        this.editingValue
       );
     }
     this.koErrorText(errorText);
@@ -231,12 +231,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.titleValue = title;
   }
   protected onBeforeApply() {}
-  public apply() {
-    if (this.hasError()) return;
+  public apply(): boolean {
     this.onBeforeApply();
+    if (this.hasError()) return false;
     this.isApplyinNewValue = true;
     this.koValue(this.editingValue);
     this.isApplyinNewValue = false;
+    return true;
   }
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();

@@ -77,9 +77,9 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   );
   generalTab.properties.rows[0].properties[0].editor.koValue("newName");
   generalTab.properties.rows[1].properties[0].editor.koValue("new title");
-  var visibleIfTab = <SurveyQuestionEditorTab>editor.koTabs()[
-    editor.koTabs().length - 2
-  ];
+  var visibleIfTab = <SurveyQuestionEditorTab>(
+    editor.koTabs()[editor.koTabs().length - 2]
+  );
   visibleIfTab.properties.rows[0].properties[0].editor["koValue"]("false");
   editor.apply();
   assert.equal(changeCounter, 1, "changed one time");
@@ -449,6 +449,47 @@ QUnit.test("Question editor: custom errors on required field", function(
   assert.equal(properties.hasError(), false, "There is no errors");
   assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
 });
+QUnit.test("Question editor: custom errors on unique itemvalues", function(
+  assert
+) {
+  var question = new Survey.QuestionCheckbox("question");
+  var editor = new SurveyEditor();
+  editor.onPropertyValidationCustomError.add(function(editor, options) {
+    if (options.propertyName !== "choices") return;
+    var items = options.value;
+    if (!items || !Array.isArray(items)) return;
+    var hash = {};
+    for (var i = 0; i < items.length; i++) {
+      var val = !!items[i].value ? items[i].value : items[i];
+      if (!val) continue;
+      if (hash[val]) {
+        options.error =
+          "The value '" + val + "' is not unique. Please correct it";
+        return;
+      }
+      hash[val] = 1;
+    }
+  });
+  question.choices = ["item1", "item2", "item2"];
+  var properties = new SurveyQuestionEditorProperties(
+    question,
+    ["choices"],
+    null,
+    editor
+  );
+  assert.equal(
+    properties.hasError(),
+    true,
+    "error message should be triggered"
+  );
+  question.choices = ["item1", "item2", "item3"];
+  assert.equal(
+    properties.hasError(),
+    false,
+    "error message should not be triggered"
+  );
+});
+
 QUnit.test("Question editor: required field errors", function(assert) {
   var question = new Survey.QuestionText("name");
   var editor = new SurveyEditor();
