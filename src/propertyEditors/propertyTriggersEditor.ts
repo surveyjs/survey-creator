@@ -5,6 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
+import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 
 export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   koElements: any;
@@ -138,7 +139,8 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     if (trigger.getType() == "setvaluetrigger") {
       triggerItem = new SurveyPropertySetValueTrigger(
         <Survey.SurveyTriggerSetValue>trigger,
-        this.koQuestions
+        this.koQuestions,
+        this.editingObject
       );
     }
     if (trigger.getType() == "copyvaluetrigger") {
@@ -286,16 +288,37 @@ export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
 }
 
 export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
+  private static emptySurvey = new Survey.Survey();
   koQuestions: any;
   kosetToName: any;
   kosetValue: any;
   koisVariable: any;
-  constructor(public trigger: Survey.SurveyTriggerSetValue, koQuestions: any) {
+  koSurvey: any;
+  survey: Survey.Survey;
+  constructor(
+    public trigger: Survey.SurveyTriggerSetValue,
+    koQuestions: any,
+    public triggerSurvey: Survey.Survey
+  ) {
     super(trigger);
     this.koQuestions = koQuestions;
+    this.koSurvey = ko.observable(null);
     this.kosetToName = ko.observable(trigger.setToName);
     this.kosetValue = ko.observable(trigger.setValue);
     this.koisVariable = ko.observable(trigger.isVariable);
+    var self = this;
+    this.kosetToName.subscribe(function(newValue) {
+      if (!self.koisVariable()) {
+        self.kosetValue(null);
+      }
+      self.buildSurvey();
+    });
+    this.koisVariable.subscribe(function(newValue) {
+      self.kosetToName("");
+      self.kosetValue(null);
+      self.buildSurvey();
+    });
+    this.buildSurvey();
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = <Survey.SurveyTriggerSetValue>super.createTrigger();
@@ -303,6 +326,33 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     trigger.setValue = this.kosetValue();
     trigger.isVariable = this.koisVariable();
     return trigger;
+  }
+  public get setToNameOptions(): string {
+    return editorLocalization.getString("pe.conditionSelectQuestion");
+  }
+  private buildSurvey() {
+    var question =
+      !this.koisVariable() && !!this.kosetToName()
+        ? this.triggerSurvey.getQuestionByName(this.kosetToName())
+        : null;
+    if (!question) {
+      this.survey = null;
+      this.koSurvey(SurveyPropertySetValueTrigger.emptySurvey);
+      return;
+    }
+    var qJson = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question
+    );
+    qJson.title = editorLocalization.getString("pe.triggerSetValue");
+    this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
+      qJson
+    );
+    this.survey.setValue("question", this.kosetValue());
+    var self = this;
+    this.survey.onValueChanged.add(function(sender, options) {
+      self.kosetValue(options.value);
+    });
+    this.koSurvey(this.survey);
   }
 }
 export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {

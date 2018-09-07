@@ -24,7 +24,8 @@ import { ISurveyObjectEditorOptions } from "../../src/propertyEditors/propertyEd
 import { SurveyPropertyTextItemsEditor } from "../../src/propertyEditors/propertyTextItemsEditor";
 import {
   SurveyPropertyTriggersEditor,
-  SurveyPropertyVisibleTrigger
+  SurveyPropertyVisibleTrigger,
+  SurveyPropertySetValueTrigger
 } from "../../src/propertyEditors/propertyTriggersEditor";
 import {
   SurveyPropertyValidatorsEditor,
@@ -1005,6 +1006,58 @@ QUnit.test("Triggers property editor", function(assert) {
     "Complete trigger is created"
   );
 });
+QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
+  var survey = createSurvey();
+  var trigger = new Survey.SurveyTriggerSetValue();
+  trigger.expression = "{question1} != 'val1'";
+  survey.triggers.push(trigger);
+  var result = [];
+  var propEditor = new SurveyPropertyTriggersEditor(null);
+  propEditor.beforeShow();
+  propEditor.onChanged = (newValue: any) => {
+    result = newValue;
+  };
+  propEditor.editingObject = survey;
+  propEditor.editingValue = survey.triggers;
+  assert.equal(
+    propEditor.koItems().length,
+    1,
+    "There is one trigger initially"
+  );
+  var saveTriggerEditor = <SurveyPropertySetValueTrigger>(
+    propEditor.koItems()[0]
+  );
+  assert.notOk(saveTriggerEditor.survey, "There is no survey by default");
+  saveTriggerEditor.kosetToName("question1");
+  assert.ok(saveTriggerEditor.survey, "Survey has been created");
+  saveTriggerEditor.kosetValue("val2");
+  saveTriggerEditor.kosetToName("question2");
+  assert.notOk(saveTriggerEditor.kosetValue(), "value is empty");
+  assert.equal(
+    saveTriggerEditor
+      .koSurvey()
+      .getQuestionByName("question")
+      .getType(),
+    "checkbox",
+    "We have a checkbox question"
+  );
+  saveTriggerEditor.survey.setValue("question", ["one", "two"]);
+  assert.deepEqual(
+    saveTriggerEditor.kosetValue(),
+    ["one", "two"],
+    "value is set from survey"
+  );
+  saveTriggerEditor.koisVariable(true);
+  assert.notOk(
+    saveTriggerEditor.kosetToName(),
+    "question is empty, isVariable is true"
+  );
+  assert.notOk(
+    saveTriggerEditor.kosetValue(),
+    "value is empty, isVariable is true"
+  );
+});
+
 QUnit.test("Validators property editor", function(assert) {
   var survey = createSurvey();
   var validator = new Survey.NumericValidator(10, 100);

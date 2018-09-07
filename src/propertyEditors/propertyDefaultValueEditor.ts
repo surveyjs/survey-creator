@@ -6,8 +6,33 @@ import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 
 export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor {
+  public static defaultQuestionName = "question";
+  public static createJsonFromQuestion(obj: any): any {
+    var qjson = new Survey.JsonObject().toJsonObject(obj);
+    qjson.name = SurveyPropertyDefaultValueEditor.defaultQuestionName;
+    qjson.type = obj.getType();
+    if (qjson.type == "expression") {
+      qjson.type = "text";
+    }
+    qjson.titleLocation = "hidden";
+    qjson.showClearButton = true;
+    qjson.storeOthersAsComment = false;
+    delete qjson["visible"];
+    delete qjson["visibleIf"];
+    delete qjson["enable"];
+    delete qjson["enableIf"];
+    return qjson;
+  }
+  public static createSurveyFromJsonQuestion(questionJson: any): Survey.Survey {
+    var json = {
+      questions: [],
+      showNavigationButtons: false,
+      showQuestionNumbers: "off"
+    };
+    json.questions.push(questionJson);
+    return new Survey.Survey(json);
+  }
   public survey: Survey.Survey;
-  public question: Survey.Question;
   koSurvey: any;
 
   constructor(property: Survey.JsonObjectProperty) {
@@ -30,31 +55,26 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     return "value";
   }
   private createSurvey() {
-    var qjson = this.buildQuestionJson();
-    var json = { questions: [], showNavigationButtons: false };
-    json.questions.push(qjson);
-    this.survey = new Survey.Survey(json);
+    this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
+      this.buildQuestionJson()
+    );
 
-    this.survey.setValue(this.object.name, this.getSurveyInitialValue());
+    this.survey.setValue(
+      SurveyPropertyDefaultValueEditor.defaultQuestionName,
+      this.getSurveyInitialValue()
+    );
     this.koSurvey(this.survey);
   }
   protected buildQuestionJson(): any {
-    var qjson = new Survey.JsonObject().toJsonObject(this.object);
-    qjson.type = this.getJsonType(this.object.getType());
-    qjson.titleLocation = "hidden";
-    qjson.showClearButton = true;
-    qjson.storeOthersAsComment = false;
-    delete qjson["visible"];
-    delete qjson["visibleIf"];
-    delete qjson["enable"];
-    delete qjson["enableIf"];
-    return qjson;
+    return SurveyPropertyDefaultValueEditor.createJsonFromQuestion(this.object);
   }
   protected getSurveyInitialValue(): any {
     return this.editingValue;
   }
   protected getSurveyResult(): any {
-    return this.survey.getValue(this.object.name);
+    return this.survey.getValue(
+      SurveyPropertyDefaultValueEditor.defaultQuestionName
+    );
   }
   private getJsonType(type: string): string {
     return type != "expression" ? type : "text";
