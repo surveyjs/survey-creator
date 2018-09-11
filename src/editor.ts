@@ -486,6 +486,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koShowState(newVal);
   }
 
+  private isPageUpdating = false;
+
   koIsShowDesigner: any;
   koViewType: any;
   koCanDeleteObject: any;
@@ -1146,6 +1148,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.survey.render();
   }
   private doOnPageAdded(page: Survey.Page) {
+    if (this.isPageUpdating) return;
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
@@ -1798,12 +1801,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   //TODO why this is need ? (ko problem)
   private dirtyPageUpdate = () => {
-    var selectedObject = this.koSelectedObject().value;
-    if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
-    var index = this.pages.indexOf(selectedObject);
-    this.pages.splice(index, 1);
-    this.pages.splice(index, 0, selectedObject);
-    this.surveyObjects.selectObject(selectedObject);
+    this.isPageUpdating = true;
+    try {
+      var selectedObject = this.koSelectedObject().value;
+      if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
+      var index = this.pages.indexOf(selectedObject);
+      this.pages.splice(index, 1);
+      this.pages.splice(index, 0, selectedObject);
+      this.surveyObjects.selectObject(selectedObject);
+    }
+    finally {
+      this.isPageUpdating = false;
+    }
   };
 
   /**
