@@ -122,6 +122,13 @@ import "../localization/portuguese";
 import "../localization/simplified-chinese";
 import "../localization/spanish";
 
+export {
+  Translation,
+  TranslationGroup,
+  TranslationItem,
+  TranslationItemBase
+} from "../translation";
+
 //adorners
 export { titleAdorner } from "../adorners/title-editor";
 export { itemAdorner } from "../adorners/item-editor";
