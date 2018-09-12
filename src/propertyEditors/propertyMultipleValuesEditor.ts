@@ -36,7 +36,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     this.setEditingValue();
   }
   protected onBeforeApply() {
-    this.koValue(this.koEditingValue());
+    this.koValue([].concat(this.koEditingValue()));
   }
   public get editorType(): string {
     return "multiplevalues";
