@@ -22,6 +22,7 @@ import * as Survey from "survey-knockout";
 import { SurveyForDesigner } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
+import { Translation } from "./translation";
 
 /**
  * The toolbar item description
@@ -76,6 +77,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
+  private translationValue: Translation;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   private undoRedo: SurveyUndoRedo;
@@ -90,6 +92,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private showJSONEditorTabValue: boolean;
   private showTestSurveyTabValue: boolean;
   private showEmbededSurveyTabValue: boolean;
+  private showTranslationTabValue: boolean;
   private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
@@ -504,6 +507,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   selectEditorClick: any;
   selectTestClick: any;
   selectEmbedClick: any;
+  selectTranslationClick: any;
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -511,7 +515,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   deleteObjectClick: any;
   koState = ko.observable("");
   runSurveyClick: any;
-  embedingSurveyClick: any;
+
   saveButtonClick: any;
   draggingToolboxItem: any;
   clickToolboxItem: any;
@@ -520,7 +524,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * The Survey Editor constructor.
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
    * @param options Survey Editor options. The following options are available: showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
+   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave
    */
   constructor(renderedElement: any = null, options: any = null) {
@@ -615,6 +619,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
     this.surveyLive = new SurveyLiveTester();
     this.surveyEmbeding = new SurveyEmbedingWindow();
+    this.translationValue = new Translation(new Survey.Survey());
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -637,6 +642,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.selectEmbedClick = function() {
       self.showEmbedEditor();
     };
+    this.selectTranslationClick = function() {
+      self.showTranslationEditor();
+    };
     this.generateValidJSONClick = function() {
       self.koGenerateValidJSON(true);
     };
@@ -645,9 +653,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
     this.runSurveyClick = function() {
       self.showLiveSurvey();
-    };
-    this.embedingSurveyClick = function() {
-      self.showSurveyEmbeding();
     };
     this.deleteObjectClick = function() {
       self.deleteCurrentObject();
@@ -820,6 +825,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
         : false;
+    this.showTranslationTabValue =
+      typeof options.showTranslationTab !== "undefined"
+        ? options.showTranslationTab
+        : false;
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
@@ -877,7 +886,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * Call this method to render the survey editor.
    * @param element HtmlElement or html element id where Survey Editor will be rendered
-   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
    */
   public render(element: any = null, options: any = null) {
     if (options) this.setOptions(options);
@@ -937,6 +946,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    */
   public get toolbox(): QuestionToolbox {
     return this.toolboxValue;
+  }
+  public get translation(): Translation {
+    return this.translationValue;
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -1053,6 +1065,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   public set showEmbededSurveyTab(value: boolean) {
     this.showEmbededSurveyTabValue = value;
+  }
+  /**
+   * Set it to true to show "Translation" tab and to false to hide the tab
+   */
+  public get showTranslationTab() {
+    return this.showTranslationTabValue;
+  }
+  public set showTranslationTab(value: boolean) {
+    this.showTranslationTabValue = value;
   }
   /**
    * Set it to true to activate RTL support
@@ -1251,12 +1272,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koViewType("test");
   }
   /**
-   * Make a Embed Survey" tab active.
+   * Make a "Embed Survey" tab active.
    */
   public showEmbedEditor() {
     if (!this.canSwitchViewType("embed")) return;
     this.showSurveyEmbeding();
     this.koViewType("embed");
+  }
+  /**
+   * Make a "Translation"" tab active.
+   */
+  public showTranslationEditor() {
+    if (!this.canSwitchViewType("translation")) return;
+    this.showSurveyTranslation();
+    this.koViewType("translation");
   }
   private getSurveyTextFromDesigner() {
     var json = new Survey.JsonObject().toJsonObject(this.survey);
@@ -1809,8 +1838,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.pages.splice(index, 1);
       this.pages.splice(index, 0, selectedObject);
       this.surveyObjects.selectObject(selectedObject);
-    }
-    finally {
+    } finally {
       this.isPageUpdating = false;
     }
   };
@@ -1899,6 +1927,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyEmbeding.generateValidJSON =
       this.options && this.options.generateValidJSON;
     this.surveyEmbeding.show();
+  }
+  private showSurveyTranslation() {
+    this.translationValue = new Translation(this.survey);
   }
   private getSurveyJSON(): any {
     if (this.koIsShowDesigner())

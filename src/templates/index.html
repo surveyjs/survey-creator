@@ -20,6 +20,9 @@
         <li class="nav-item" data-bind="visible: showTestSurveyTab, css: {active: koViewType() == 'test'}">
             <a class="nav-link" href="#" data-bind="click:selectTestClick, text: $root.getLocString('ed.testSurvey')"></a>
         </li>
+        <li class="nav-item" data-bind="visible: showTranslationTab, css: {active: koViewType() == 'translation'}">
+            <a class="nav-link" href="#" data-bind="click:selectTranslationClick, text: $root.getLocString('ed.translation')"></a>
+        </li>
         <li class="nav-item" data-bind="visible: showEmbededSurveyTab, css: {active: koViewType() == 'embed'}">
             <a class="nav-link" href="#" data-bind="click:selectEmbedClick, text: $root.getLocString('ed.embedSurvey')"></a>
         </li>
@@ -110,6 +113,9 @@
 
         <div data-bind="visible: koViewType() == 'embed'">
             <div data-bind="template: { name: 'surveyembeding', data: surveyEmbeding }"></div>
+        </div>
+        <div data-bind="visible: koViewType() == 'translation'">
+            <div data-bind="template: { name: 'translation', data: translation }"></div>
         </div>
     </div>
     <div data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"></div>
