@@ -1237,6 +1237,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (this.koViewType() == "designer") {
       this.jsonEditor.text = this.getSurveyTextFromDesigner();
     }
+    if (this.koViewType() == "translation" && newType == "designer") {
+      this.survey.render();
+    }
     if (this.koViewType() != "editor") return true;
     if (!this.jsonEditor.isJsonCorrect) {
       alert(this.getLocString("ed.correctJSON"));

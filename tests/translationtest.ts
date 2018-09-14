@@ -45,6 +45,11 @@ QUnit.test("Survey child groups", function(assert) {
   translation.addLocale("fr");
   translation.addLocale("de");
   assert.equal(translation.locales.length, 3, "There are three locales now");
+  translation.reset();
+  assert.equal(translation.locales.length, 2, "There are two locales again");
+  survey.title = "test";
+  translation.reset();
+  assert.equal(translation.locales.length, 2, "There are two locales again-2");
 });
 QUnit.test("Localization strings editing", function(assert) {
   var question = new Survey.QuestionText("q1");

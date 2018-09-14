@@ -28,6 +28,7 @@ export class TranslationItem extends TranslationItemBase {
   }
   public fillLocales(locales: Array<string>) {
     var json = this.locString.getJson();
+    if (!json || typeof json === "string") return;
     for (var key in json) {
       if (!!key && locales.indexOf(key) < 0) {
         locales.push(key);
