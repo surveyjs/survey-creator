@@ -9,14 +9,19 @@ import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
   private isNeedAutoScroll = true;
+  private isDraggingPage = ko.observable(false);
+  private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
   pagesSelection: KnockoutComputed<Survey.PageModel[]>;
 
   constructor(private editor: SurveyEditor, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
-      return this.editor
-        .pages()
-        .concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+      if (!this.isDraggingPage()) {
+        this.prevPagesForSelector = this.editor
+          .pages()
+          .concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+      }
+      return this.prevPagesForSelector;
     });
     this._selectedPage(this.editor.pages()[0]);
     this.editor.koSelectedObject.subscribe(newVal => {
@@ -70,9 +75,13 @@ export class PagesEditor {
 
   get sortableOptions() {
     return {
+      onStart: evt => {
+        this.isDraggingPage(true);
+      },
       onEnd: evt => {
         this.isNeedAutoScroll = false;
         this.editor.movePage(evt.oldIndex, evt.newIndex);
+        this.isDraggingPage(false);
       },
       handle: ".svd-page-name",
       animation: 150
