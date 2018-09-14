@@ -53,6 +53,7 @@ export var enStrings = {
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
     embedSurvey: "Embed Survey",
+    translation: "Translation",
     saveSurvey: "Save Survey",
     designer: "Survey Designer",
     jsonEditor: "JSON Editor",
