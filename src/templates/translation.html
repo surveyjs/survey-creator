@@ -1,2 +1,31 @@
 <script type="text/html" id="translation">
+    <!-- ko template: { name: "translation-group", data: $data.koRoot } -->
+    <!-- /ko -->
+</script>
+<script type="text/html" id="translation-group">
+    <table class="svd_items_table">
+        <thead>
+            <tr>
+                <th></th>
+                <!-- ko foreach: $data.koLocales -->
+                <th data-bind="text: $data"></th>
+                <!-- /ko -->
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: {data: $data.locItems, as: 'item' }">
+            <tr>
+                <td><span data-bind="text:item.name"></span></td>
+                <!-- ko foreach: $parent.koLocales -->
+                <td>
+                    <input type="text" data-bind="value:item.koValue($data)" />
+                </td>
+                <!-- /ko -->
+            </tr>
+        </tbody>
+    </table>
+    <div data-bind="foreach: {data: $data.groups, as: 'group' }">
+        <div data-bind="text:group.name"></div>
+        <!-- ko template: { name: "translation-group", data: group } -->
+        <!-- /ko -->
+    </div>
 </script>

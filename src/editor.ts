@@ -1929,7 +1929,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyEmbeding.show();
   }
   private showSurveyTranslation() {
-    this.translationValue = new Translation(this.survey);
+    this.translation.survey = this.survey;
   }
   private getSurveyJSON(): any {
     if (this.koIsShowDesigner())
