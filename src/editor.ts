@@ -1935,7 +1935,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.translation.survey = this.survey;
   }
   private getSurveyJSON(): any {
-    if (this.koIsShowDesigner())
+    if (this.koIsShowDesigner() || this.koViewType() == "translation")
       return new Survey.JsonObject().toJsonObject(this.survey);
     if (this.jsonEditor.isJsonCorrect)
       return new Survey.JsonObject().toJsonObject(this.jsonEditor.survey);
