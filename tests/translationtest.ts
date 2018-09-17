@@ -17,6 +17,30 @@ QUnit.test("Text question localization properties", function(assert) {
     "There are five or more localization strings"
   );
 });
+QUnit.test("Text question choices localization", function(assert) {
+  var question = new Survey.QuestionCheckbox("q1");
+  question.choices = ["item1", { value: "item2", text: "text 2" }];
+  var group = new TranslationGroup(question.name, question);
+  var choices: TranslationGroup = null;
+  for (var i = 0; i < group.groups.length; i++) {
+    if (group.groups[i].name == "choices") {
+      choices = group.groups[i];
+      break;
+    }
+  }
+  assert.ok(choices, "choices has been created as group");
+  assert.equal(choices.items.length, 2, "There are two items");
+  assert.equal(
+    choices.items[0].name,
+    "item1",
+    "Value is set correctly for item 1"
+  );
+  assert.equal(
+    choices.items[1].name,
+    "item2",
+    "Value is set correctly for item 2"
+  );
+});
 QUnit.test("Survey child groups", function(assert) {
   var survey = new Survey.Survey();
   var group = new TranslationGroup("root", survey);

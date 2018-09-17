@@ -11,16 +11,16 @@
             <tr>
                 <th></th>
                 <!-- ko foreach: $data.koLocales -->
-                <th data-bind="text: $parent.getLocaleName($data)"></th>
+                <th data-bind="text: $parent.getLocaleName($data), style: {width: $parent.locWidth}"></th>
                 <!-- /ko -->
             </tr>
         </thead>
         <tbody data-bind="foreach: {data: $data.locItems, as: 'item' }">
             <tr>
-                <td><span data-bind="text:item.name"></span></td>
+                <td style="max-width: 200px; min-width:100px"><span data-bind="text:item.name"></span></td>
                 <!-- ko foreach: $parent.koLocales -->
                 <td>
-                    <input type="text" data-bind="value:item.koValue($data)" />
+                    <textarea style="width:100%" data-bind="value:item.koValue($data)"></textarea>
                 </td>
                 <!-- /ko -->
             </tr>

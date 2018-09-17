@@ -88,6 +88,11 @@ export class TranslationGroup extends TranslationItemBase {
   public get localeCount(): number {
     return !!this.koLocales ? this.koLocales().length : 0;
   }
+  public get locWidth(): string {
+    var count = this.localeCount;
+    if (count < 2) return "100%";
+    return Math.floor(100 / count).toString() + "%";
+  }
   public getLocaleName(loc: string) {
     return editorLocalization.getLocaleName(loc);
   }
@@ -101,6 +106,11 @@ export class TranslationGroup extends TranslationItemBase {
     }
   }
   private fillItems() {
+    if (this.isItemValueArray(this.obj)) {
+      this.createItemValues();
+      return;
+    }
+    if (!this.obj || !this.obj.getType) return;
     var properties = Survey.JsonObject.metaData.getProperties(
       this.obj.getType()
     );
@@ -108,19 +118,38 @@ export class TranslationGroup extends TranslationItemBase {
       var property = properties[i];
       if (!property.isSerializable && !property.isLocalizable) continue;
       if (property.isLocalizable) {
-        this.itemValues.push(
-          new TranslationItem(
-            property.name,
-            this.obj[property.serializationProperty]
-          )
-        );
+        if (!property.readOnly && property.visible) {
+          this.itemValues.push(
+            new TranslationItem(
+              property.name,
+              this.obj[property.serializationProperty]
+            )
+          );
+        }
       } else {
         var value = this.obj[property.name];
-        if (!!value && Array.isArray(value)) {
-          this.createGroups(value);
+        if (!!value && Array.isArray(value) && value.length > 0) {
+          //If ItemValue array?
+          if (this.isItemValueArray(value)) {
+            this.itemValues.push(
+              new TranslationGroup(property.name, value, this.translation)
+            );
+          } else {
+            this.createGroups(value);
+          }
         }
       }
     }
+  }
+  private isItemValueArray(val: any) {
+    return (
+      !!val &&
+      Array.isArray(val) &&
+      val.length > 0 &&
+      !!val[0] &&
+      !!val[0]["getType"] &&
+      !!val[0]["setData"]
+    );
   }
   private createGroups(value: any) {
     for (var i = 0; i < value.length; i++) {
@@ -130,6 +159,12 @@ export class TranslationGroup extends TranslationItemBase {
           new TranslationGroup(obj["name"], obj, this.translation)
         );
       }
+    }
+  }
+  private createItemValues() {
+    for (var i = 0; i < this.obj.length; i++) {
+      var val = this.obj[i];
+      this.itemValues.push(new TranslationItem(val.value, val.locText));
     }
   }
 }
