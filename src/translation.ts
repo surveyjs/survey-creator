@@ -31,7 +31,11 @@ export class TranslationItem extends TranslationItemBase {
     var json = this.locString.getJson();
     if (!json || typeof json === "string") return;
     for (var key in json) {
-      if (!!key && locales.indexOf(key) < 0) {
+      if (
+        !!key &&
+        locales.indexOf(key) < 0 &&
+        key !== Survey.LocalizableString.defaultLocale
+      ) {
         locales.push(key);
       }
     }

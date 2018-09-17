@@ -51,6 +51,18 @@ QUnit.test("Survey child groups", function(assert) {
   translation.reset();
   assert.equal(translation.locales.length, 2, "There are two locales again-2");
 });
+QUnit.test("get locales", function(assert) {
+  var survey = new Survey.Survey({
+    title: { default: "t1", de: "dfdfdf" },
+    description: "text1"
+  });
+  var translation = new Translation(survey);
+  assert.equal(
+    translation.locales.length,
+    2,
+    "There are two locales only, 'default'/empty and 'de'"
+  );
+});
 QUnit.test("Localization strings editing", function(assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question);
