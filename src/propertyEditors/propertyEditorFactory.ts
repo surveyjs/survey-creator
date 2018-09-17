@@ -114,18 +114,11 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
   }
   public getValueText(value: any): string {
     if (this.property.name === "locale") {
-      var localeNames = Survey.surveyLocalization["localeNames"];
-      if (localeNames) {
-        var text = !!value
-          ? localeNames[value]
-          : editorLocalization
-              .getString("ed.defaultLocale")
-              ["format"](localeNames[Survey.surveyLocalization.defaultLocale]);
-        if (text) return text;
-      }
+      let text = editorLocalization.getLocaleName(value);
+      if (text) return text;
     }
     if (this.property.name === "cellType") {
-      var text = editorLocalization.getString("qt." + value);
+      let text = editorLocalization.getString("qt." + value);
       if (text) return text;
     }
     return editorLocalization.getPropertyValue(value);

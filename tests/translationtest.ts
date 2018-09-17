@@ -73,3 +73,34 @@ QUnit.test("Localization strings editing", function(assert) {
     "The french value has been updated"
   );
 });
+QUnit.test("Translation for adding", function(assert) {
+  var translation = new Translation(new Survey.Survey());
+  var locales = Survey.surveyLocalization.locales;
+  var count = 0;
+  for (var key in locales) count++;
+  assert.equal(
+    translation.koAvailableLanguages().length,
+    count - 1,
+    "All locales - 1"
+  );
+  translation.addLocale("de");
+  assert.equal(
+    translation.koAvailableLanguages().length,
+    count - 2,
+    "All locales - 2"
+  );
+  assert.equal(translation.locales.length, 2, "There are two locales");
+  assert.equal(
+    translation.koSelectedLanguageToAdd(),
+    null,
+    "No language selected"
+  );
+  translation.koSelectedLanguageToAdd({ value: "fr", text: "French" });
+  assert.equal(translation.locales.length, 3, "There are three locales");
+  assert.equal(translation.locales[2], "fr", "The last added locale is 'fr'");
+  assert.equal(
+    translation.koSelectedLanguageToAdd(),
+    null,
+    "No language selected again"
+  );
+});

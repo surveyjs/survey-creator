@@ -1,4 +1,7 @@
 <script type="text/html" id="translation">
+    <div class="svd-page-selector svd_custom_select svd-light-bg-color svd-light-border-color" style="max-width: 250px">
+        <select data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption"></select>
+    </div>
     <!-- ko template: { name: "translation-group", data: $data.koRoot } -->
     <!-- /ko -->
 </script>
@@ -8,7 +11,7 @@
             <tr>
                 <th></th>
                 <!-- ko foreach: $data.koLocales -->
-                <th data-bind="text: $data"></th>
+                <th data-bind="text: $parent.getLocaleName($data)"></th>
                 <!-- /ko -->
             </tr>
         </thead>

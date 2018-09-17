@@ -1,4 +1,5 @@
 import { enStrings } from "./localization/english";
+import * as Survey from "survey-knockout";
 
 export var editorLocalization = {
   currentLocale: "",
@@ -25,6 +26,14 @@ export var editorLocalization = {
       if (!obj) return false;
     }
     return true;
+  },
+  getLocaleName: function(loc: string): string {
+    var localeNames = Survey.surveyLocalization["localeNames"];
+    return !!loc
+      ? localeNames[loc]
+      : editorLocalization
+          .getString("ed.defaultLocale")
+          ["format"](localeNames[Survey.surveyLocalization.defaultLocale]);
   },
   getPropertyName: function(strName: string, locale: string = null) {
     var obj = this.getProperty(strName, locale);

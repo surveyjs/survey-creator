@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import { editorLocalization } from "./editorLocalization";
 import { ArrayIterator } from "lodash";
 
 export class TranslationItemBase {
@@ -83,6 +84,9 @@ export class TranslationGroup extends TranslationItemBase {
   public get localeCount(): number {
     return !!this.koLocales ? this.koLocales().length : 0;
   }
+  public getLocaleName(loc: string) {
+    return editorLocalization.getLocaleName(loc);
+  }
   public reset() {
     this.itemValues = [];
     this.fillItems();
@@ -129,11 +133,21 @@ export class TranslationGroup extends TranslationItemBase {
 export class Translation implements ITranslationLocales {
   public koLocales: any;
   public koRoot: any;
+  public koAvailableLanguages: any;
+  public koSelectedLanguageToAdd: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey) {
     this.koLocales = ko.observableArray([""]);
     this.koRoot = ko.observable(null);
+    this.koAvailableLanguages = ko.observableArray();
+    this.koSelectedLanguageToAdd = ko.observable(null);
+    var self = this;
+    this.koSelectedLanguageToAdd.subscribe(function(newValue) {
+      if (!!newValue) {
+        self.addLocale(newValue.value);
+      }
+    });
     this.survey = survey;
   }
   public get survey(): Survey.Survey {
@@ -167,7 +181,22 @@ export class Translation implements ITranslationLocales {
     this.root.fillLocales(locales);
     this.setLocales(locales);
   }
+  public get selectLanguageOptionsCaption() {
+    return editorLocalization.getString("ed.translationAddLanguage");
+  }
   private setLocales(locs: Array<string>) {
     this.koLocales(locs);
+    this.updateAvailableTranlations();
+  }
+  private updateAvailableTranlations() {
+    var res = [];
+    var locales = Survey.surveyLocalization.locales;
+    for (var loc in locales) {
+      if (this.locales.indexOf(loc) > -1) continue;
+      if (loc == Survey.surveyLocalization.defaultLocale) continue;
+      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
+    }
+    this.koSelectedLanguageToAdd(null);
+    this.koAvailableLanguages(res);
   }
 }
