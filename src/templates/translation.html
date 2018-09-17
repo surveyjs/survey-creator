@@ -26,9 +26,19 @@
             </tr>
         </tbody>
     </table>
-    <div data-bind="foreach: {data: $data.groups, as: 'group' }">
-        <div data-bind="text:group.name"></div>
+    <div data-bind="foreach: {data: $data.groups, as: 'group' }" style="padding-left: 20px">
+        <div class="svd-toolbox-category-header" role="tab" data-bind="click: function(){ group.koExpanded(!group.koExpanded())}">
+            <span data-bind="css: { 'svd-main-color': group.koExpanded() }, text: group.name"></span>
+            <!-- ko ifnot: koExpanded -->
+            <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
+            <!-- /ko -->
+            <!-- ko if: koExpanded -->
+            <svg-icon class="icon-toolbox-arrow svd-primary-icon" params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
+            <!-- /ko -->
+        </div>
+        <div data-bind="visible: koExpanded">
         <!-- ko template: { name: "translation-group", data: group } -->
         <!-- /ko -->
+        <div>
     </div>
 </script>
