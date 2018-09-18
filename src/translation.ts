@@ -52,11 +52,12 @@ export class TranslationItem extends TranslationItemBase {
 
 export interface ITranslationLocales {
   koLocales: any;
+  showAllStrings: boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
   koExpanded: any;
-  itemValues: Array<TranslationItemBase>;
+  private itemValues: Array<TranslationItemBase>;
   constructor(
     public name,
     public obj: any,
@@ -113,6 +114,9 @@ export class TranslationGroup extends TranslationItemBase {
       this.items[i].fillLocales(locales);
     }
   }
+  public get showAllStrings(): boolean {
+    return !!this.translation ? this.translation.showAllStrings : true;
+  }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValues();
@@ -127,12 +131,14 @@ export class TranslationGroup extends TranslationItemBase {
       if (!property.isSerializable && !property.isLocalizable) continue;
       if (property.isLocalizable) {
         if (!property.readOnly && property.visible) {
+          var defaultValue = this.getDefaultValue(property);
+          var locStr = <Survey.LocalizableString>(
+            this.obj[property.serializationProperty]
+          );
+          if (!locStr) continue;
+          if (!this.showAllStrings && !defaultValue && locStr.isEmpty) continue;
           this.itemValues.push(
-            new TranslationItem(
-              property.name,
-              this.obj[property.serializationProperty],
-              this.getDefaultValue(property)
-            )
+            new TranslationItem(property.name, locStr, defaultValue)
           );
         }
       } else {
@@ -202,11 +208,13 @@ export class Translation implements ITranslationLocales {
   public koRoot: any;
   public koAvailableLanguages: any;
   public koSelectedLanguageToAdd: any;
+  public koShowAllStrings: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
-  constructor(survey: Survey.Survey) {
+  constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
     this.koLocales = ko.observableArray([""]);
     this.koRoot = ko.observable(null);
+    this.koShowAllStrings = ko.observable(showAllStrings);
     this.koAvailableLanguages = ko.observableArray();
     this.koSelectedLanguageToAdd = ko.observable(null);
     var self = this;
@@ -215,6 +223,9 @@ export class Translation implements ITranslationLocales {
         self.addLocale(newValue.value);
       }
     });
+    this.koShowAllStrings.subscribe(function(newValue) {
+      self.reset();
+    });
     this.survey = survey;
   }
   public get survey(): Survey.Survey {
@@ -222,9 +233,8 @@ export class Translation implements ITranslationLocales {
   }
   public set survey(val: Survey.Survey) {
     this.surveyValue = val;
-    this.rootValue = new TranslationGroup("survey", this.survey, this); //TODO translate
+    this.rootValue = new TranslationGroup("", this.survey, this);
     this.reset();
-    this.koRoot(this.root);
   }
   public get root(): TranslationGroup {
     return this.rootValue;
@@ -232,6 +242,7 @@ export class Translation implements ITranslationLocales {
   public reset() {
     this.root.reset();
     this.resetLocales();
+    this.koRoot(this.root);
   }
   public get locales(): Array<string> {
     return this.koLocales();
@@ -250,6 +261,15 @@ export class Translation implements ITranslationLocales {
   }
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
+  }
+  public get showAllStrings(): boolean {
+    return this.koShowAllStrings();
+  }
+  public set showAllStrings(val: boolean) {
+    this.koShowAllStrings(val);
+  }
+  public get showAllStringsText(): string {
+    return "Show All Strings";
   }
   private setLocales(locs: Array<string>) {
     this.koLocales(locs);

@@ -61,7 +61,7 @@ QUnit.test("Survey child groups", function(assert) {
   var question = <Survey.QuestionText>(
     survey.pages[0].addNewQuestion("text", "q1")
   );
-  var translation = new Translation(survey);
+  var translation = new Translation(survey, true);
   assert.equal(translation.locales.length, 1, "There is only default locale");
   question.locTitle.setLocaleText("de", "Deutch text");
   translation.reset();
@@ -80,7 +80,7 @@ QUnit.test("get locales", function(assert) {
     title: { default: "t1", de: "dfdfdf" },
     description: "text1"
   });
-  var translation = new Translation(survey);
+  var translation = new Translation(survey, true);
   assert.equal(
     translation.locales.length,
     2,
@@ -110,7 +110,7 @@ QUnit.test("Localization strings editing", function(assert) {
   );
 });
 QUnit.test("Translation for adding", function(assert) {
-  var translation = new Translation(new Survey.Survey());
+  var translation = new Translation(new Survey.Survey(), true);
   var locales = Survey.surveyLocalization.locales;
   var count = 0;
   for (var key in locales) count++;
@@ -139,4 +139,23 @@ QUnit.test("Translation for adding", function(assert) {
     null,
     "No language selected again"
   );
+});
+QUnit.test("Translation show All strings", function(assert) {
+  var survey = new Survey.Survey();
+  survey.completedHtml = "Test";
+  survey.addNewPage("page1");
+  survey.pages[0].addNewQuestion("checkbox", "question1");
+  var translation = new Translation(survey);
+  assert.equal(
+    translation.root.locItems.length,
+    1,
+    "There is one item to translate - completedHtml"
+  );
+  assert.equal(translation.root.groups.length, 1, "There is one group - page");
+  var pageGroup = translation.root.groups[0];
+  assert.equal(pageGroup.groups.length, 1, "There is one group - question");
+  assert.equal(pageGroup.locItems.length, 1, "There is one item - title");
+  var questionGroup = pageGroup.groups[0];
+  assert.equal(questionGroup.groups.length, 1, "There is one group - choices");
+  assert.equal(questionGroup.locItems.length, 1, "There is one item - title");
 });

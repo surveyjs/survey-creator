@@ -1,12 +1,16 @@
 <script type="text/html" id="translation">
-    <div class="svd-page-selector svd_custom_select svd-light-bg-color svd-light-border-color" style="max-width: 250px">
+    <div class="form-group">
+        <label>
+            <input type="checkbox" data-bind="checked: koShowAllStrings">
+            <span data-bind="text: $data.showAllStringsText"></span>
+        </label>
         <select data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption"></select>
-    </div>
+    </div>    
     <!-- ko template: { name: "translation-group", data: $data.koRoot } -->
     <!-- /ko -->
 </script>
 <script type="text/html" id="translation-group">
-    <table class="svd_items_table">
+    <table class="svd_items_table" data-bind="visible: $data.locItems.length > 0">
         <thead>
             <tr>
                 <th></th>
