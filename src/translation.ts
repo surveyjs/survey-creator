@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { ArrayIterator } from "lodash";
+import { TSImportEqualsDeclaration } from "babel-types";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -13,9 +14,16 @@ export class TranslationItemBase {
 
 export class TranslationItem extends TranslationItemBase {
   private values: Survey.HashTable<any>;
-  constructor(public name: string, public locString: Survey.LocalizableString) {
+  constructor(
+    public name: string,
+    public locString: Survey.LocalizableString,
+    public defaultValue: string = ""
+  ) {
     super(name);
     this.values = {};
+  }
+  public get text() {
+    return editorLocalization.getPropertyName(this.name);
   }
   public koValue(loc: string): any {
     if (!!this.values[loc]) return this.values[loc];
@@ -122,7 +130,8 @@ export class TranslationGroup extends TranslationItemBase {
           this.itemValues.push(
             new TranslationItem(
               property.name,
-              this.obj[property.serializationProperty]
+              this.obj[property.serializationProperty],
+              this.getDefaultValue(property)
             )
           );
         }
@@ -140,6 +149,23 @@ export class TranslationGroup extends TranslationItemBase {
         }
       }
     }
+  }
+  private getDefaultValue(property: Survey.JsonObjectProperty): string {
+    if (
+      property.name == "title" &&
+      property.isLocalizable &&
+      !!property.serializationProperty
+    ) {
+      var locStr = <Survey.LocalizableString>(
+        this.obj[property.serializationProperty]
+      );
+      if (
+        !!locStr &&
+        (!!locStr.onGetTextCallback || locStr.onRenderedHtmlCallback)
+      )
+        return this.obj["name"];
+    }
+    return "";
   }
   private isItemValueArray(val: any) {
     return (
@@ -164,7 +190,9 @@ export class TranslationGroup extends TranslationItemBase {
   private createItemValues() {
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
-      this.itemValues.push(new TranslationItem(val.value, val.locText));
+      this.itemValues.push(
+        new TranslationItem(val.value, val.locText, val.value)
+      );
     }
   }
 }
