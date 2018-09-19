@@ -69,11 +69,6 @@ QUnit.test("Survey child groups", function(assert) {
   translation.addLocale("fr");
   translation.addLocale("de");
   assert.equal(translation.locales.length, 3, "There are three locales now");
-  translation.reset();
-  assert.equal(translation.locales.length, 2, "There are two locales again");
-  survey.title = "test";
-  translation.reset();
-  assert.equal(translation.locales.length, 2, "There are two locales again-2");
 });
 QUnit.test("get locales", function(assert) {
   var survey = new Survey.Survey({
@@ -138,6 +133,21 @@ QUnit.test("Translation for adding", function(assert) {
     translation.koSelectedLanguageToAdd(),
     null,
     "No language selected again"
+  );
+});
+QUnit.test("Do not reset locales on reset", function(assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("page1");
+  survey.pages[0].addNewQuestion("checkbox", "question1");
+  var translation = new Translation(survey);
+  translation.addLocale("fr");
+  translation.addLocale("de");
+  assert.equal(translation.koLocales().length, 3, "There are 3 locations");
+  translation.reset();
+  assert.equal(
+    translation.koLocales().length,
+    3,
+    "There are still 3 locations"
   );
 });
 QUnit.test("Translation show All strings", function(assert) {

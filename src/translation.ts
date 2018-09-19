@@ -95,7 +95,13 @@ export class TranslationGroup extends TranslationItemBase {
     return !!this.translation ? this.translation.koLocales : null;
   }
   public get localeCount(): number {
-    return !!this.koLocales ? this.koLocales().length : 0;
+    if (!this.koLocales()) return 0;
+    var locales = this.koLocales();
+    var res = 0;
+    for (var i = 0; i < locales.length; i++) {
+      if (locales[i].koVisible()) res++;
+    }
+    return res;
   }
   public get locWidth(): string {
     var count = this.localeCount;
@@ -212,7 +218,9 @@ export class Translation implements ITranslationLocales {
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
-    this.koLocales = ko.observableArray([""]);
+    this.koLocales = ko.observableArray([
+      { locale: "", koVisible: ko.observable(true) }
+    ]);
     this.koRoot = ko.observable(null);
     this.koShowAllStrings = ko.observable(showAllStrings);
     this.koAvailableLanguages = ko.observableArray();
@@ -245,10 +253,25 @@ export class Translation implements ITranslationLocales {
     this.koRoot(this.root);
   }
   public get locales(): Array<string> {
-    return this.koLocales();
+    var res = [];
+    var locales = this.koLocales();
+    for (var i = 0; i < locales.length; i++) {
+      res.push(locales[i].locale);
+    }
+    return res;
+  }
+  public getLocaleName(loc: string) {
+    return editorLocalization.getLocaleName(loc);
+  }
+  public hasLocale(locale: string): boolean {
+    var locales = this.koLocales();
+    for (var i = 0; i < locales.length; i++) {
+      if (locales[i].locale == locale) return true;
+    }
+    return false;
   }
   public addLocale(locale: string) {
-    if (this.locales.indexOf(locale) < 0) {
+    if (!this.hasLocale(locale)) {
       var locs = this.locales;
       locs.push(locale);
       this.setLocales(locs);
@@ -269,17 +292,23 @@ export class Translation implements ITranslationLocales {
     this.koShowAllStrings(val);
   }
   public get showAllStringsText(): string {
-    return "Show All Strings";
+    return editorLocalization.getString("ed.translationShowAllStrings");
   }
   private setLocales(locs: Array<string>) {
-    this.koLocales(locs);
+    var locales = this.koLocales();
+    for (var i = 0; i < locs.length; i++) {
+      var loc = locs[i];
+      if (this.hasLocale(loc)) continue;
+      locales.push({ locale: loc, koVisible: ko.observable(true) });
+    }
+    this.koLocales(locales);
     this.updateAvailableTranlations();
   }
   private updateAvailableTranlations() {
     var res = [];
     var locales = Survey.surveyLocalization.locales;
     for (var loc in locales) {
-      if (this.locales.indexOf(loc) > -1) continue;
+      if (this.hasLocale(loc)) continue;
       if (loc == Survey.surveyLocalization.defaultLocale) continue;
       res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
     }
