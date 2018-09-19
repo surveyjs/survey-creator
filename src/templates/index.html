@@ -46,7 +46,7 @@
                         <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
                             <!-- ko foreach: items -->
                             <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color"
-                                data-bind="key2click, click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
+                                data-bind="key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                                 <span data-bind="attr: {title: title}">
                                     <svg-icon params="iconName: iconName"></svg-icon>
                                 </span>
@@ -60,7 +60,7 @@
                 <!-- ko if: !toolbox.koHasCategories() -->
                 <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')"></div>
                 <!-- ko foreach: toolbox.koItems -->
-                <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color" data-bind="key2click, click: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
+                <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color" data-bind="key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}">
                     <span data-bind="attr: {title: title}">
                         <svg-icon params="iconName: iconName"></svg-icon>
                     </span>

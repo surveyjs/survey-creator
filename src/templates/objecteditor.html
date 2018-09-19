@@ -7,7 +7,7 @@
     </table>
 </script>
 <script type="text/html" id="objecteditorproperty">
-    <tr tabindex="0" data-bind="key2click, click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
+    <tr tabindex="0" data-bind="key2click, clickNoFocus: function() { $parent.changeActiveProperty($data); }, css: {'active': $parent.koActiveProperty() == $data}">
         <td width="50%">
             <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
         </td>

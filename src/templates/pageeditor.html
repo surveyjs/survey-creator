@@ -2,14 +2,14 @@
     <div class="svd-page-selector svd_custom_select svd-light-bg-color svd-light-border-color">
         <select data-bind="options: pagesSelection, value: pageSelection, optionsText:'name'"></select>
     </div>
-    <div tabindex="0" class="svd-page-scroller-arrow" data-bind="key2click, click: moveLeft, attr: {title: getLocString('ed.moveLeft')}">
+    <div tabindex="0" class="svd-page-scroller-arrow" data-bind="key2click, clickNoFocus: moveLeft, attr: {title: getLocString('ed.moveLeft')}">
         <span>
             <svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon>
         </span>
     </div>
 
     <div class="svd-pages" data-bind="sortable: {foreach: editor.pages, options: sortableOptions}, event: {wheel: onWheel}">
-        <div tabindex="0" class="svd-page svd-light-border-color" data-bind="key2click, css: $parent.getPageClass($data), click: $parent.onPageClick">
+        <div tabindex="0" class="svd-page svd-light-border-color" data-bind="key2click, css: $parent.getPageClass($data), clickNoFocus: $parent.onPageClick">
             <span class="svd-page-name" data-bind="text: name"></span>
             <span class="svd-page-actions-container">
                 <svg-icon data-bind="css: $parent.getPageMenuIconClass($data)" params="iconName: $parent.getPageMenuIconClass($data), size: 12"></svg-icon>
@@ -33,12 +33,12 @@
             </span>
         </div>
     </div>
-    <div tabindex="0" class="svd-page-scroller-arrow" data-bind="key2click, click: moveRight, attr: {title: getLocString('ed.moveRight')}">
+    <div tabindex="0" class="svd-page-scroller-arrow" data-bind="key2click, clickNoFocus: moveRight, attr: {title: getLocString('ed.moveRight')}">
         <span>
             <svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon>
         </span>
     </div>
-    <div tabindex="0" class="svd-page-add" data-bind="key2click, click: addPage, attr: {title: getLocString('ed.addNewPage')}">
+    <div tabindex="0" class="svd-page-add" data-bind="key2click, clickNoFocus: addPage, attr: {title: getLocString('ed.addNewPage')}">
         <span>
             <svg-icon class="svd-secondary-icon" params="iconName: 'icon-add'"></svg-icon>
         </span>
