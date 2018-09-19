@@ -100,6 +100,17 @@ $icon-status-color: #9d9fa1;
   .form-control:focus {
     border-color: $primary-color;
   }
+  a:focus,
+  div:focus,
+  span:focus,
+  select:focus,
+  tr:focus,
+  tr:focus-within {
+    outline-color: $primary-color;
+    outline-style: dotted;
+    outline-width: 0.5px;
+    outline-offset: -1px;
+  }
 
   .svd-main-color {
     color: $primary-color;

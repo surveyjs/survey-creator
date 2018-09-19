@@ -210,12 +210,19 @@ function elementOnAfterRendering(
       "svd-main-border-color"
     );
   surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
+  domElement.tabindex = "0";
   domElement.onclick = function(e) {
     if (!e["markEvent"]) {
       e["markEvent"] = true;
       if (surveyElement.parent) {
         getSurvey(surveyElement)["selectedElement"] = surveyElement;
       }
+    }
+  };
+  domElement.onkeyup = function(e) {
+    var char = e.which || e.keyCode;
+    if (char === 0x13 || char === 0x20) {
+      domElement.click();
     }
   };
   // el.onkeydown = function(e) {
