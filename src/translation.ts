@@ -140,9 +140,7 @@ export class TranslationGroup extends TranslationItemBase {
       return;
     }
     if (!this.obj || !this.obj.getType) return;
-    var properties = Survey.JsonObject.metaData.getProperties(
-      this.obj.getType()
-    );
+    var properties = Survey.JsonObject.metaData.getPropertiesByObj(this.obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
       if (!property.isSerializable && !property.isLocalizable) continue;

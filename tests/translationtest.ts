@@ -189,7 +189,6 @@ QUnit.test("Question validators name", function(assert) {
     "use property name + indexes"
   );
 });
-
 QUnit.test("Default locale name", function(assert) {
   var survey = new Survey.Survey();
   var translation = new Translation(survey);
@@ -202,4 +201,12 @@ QUnit.test("Default locale name", function(assert) {
     "deutsch",
     "Default is deutsch now"
   );
+});
+QUnit.test("Add properties for columns", function(assert) {
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.addColumn("col1");
+  question.columns[0]["choices"] = ["1", "2"];
+  var group = new TranslationGroup(question.name, question);
+  var column0Group = group.groups[0];
+  assert.equal(column0Group.groups.length, 1, "choices should be here");
 });
