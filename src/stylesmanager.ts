@@ -110,6 +110,7 @@ export class StylesManager {
     ".svd_container": "color: $primary-text-color;",
     ".svd_container a:focus, .svd_container select:focus, .svd_container span:focus, .svd_container div:focus, .svd_container tr:focus, .svd_container tr:focus-within":
       "outline-color: $primary-color;",
+    ".svd_container button:focus": "outline-color: $primary-text-color;",
 
     ".svd_container a": "color: $primary-color;",
     ".svd_container a:hover": "color: $primary-hover-color;",
@@ -180,6 +181,8 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css": "color: $primary-text-color;",
     ".svd_container.sv_bootstrap_css a:focus, .svd_container.sv_bootstrap_css select:focus, .svd_container.sv_bootstrap_css span:focus, .svd_container.sv_bootstrap_css div:focus, .svd_container.sv_bootstrap_css tr:focus, .svd_container.sv_bootstrap_css tr:focus-within":
       "outline-color: $primary-color;",
+    ".svd_container.sv_bootstrap_css button:focus":
+      "outline-color: $primary-text-color;",
 
     ".svd_container.sv_bootstrap_css a": "color: $primary-color;",
     ".svd_container.sv_bootstrap_css a:hover": "color: $primary-hover-color;",

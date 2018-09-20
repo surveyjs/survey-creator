@@ -111,6 +111,9 @@ $icon-status-color: #9d9fa1;
     outline-width: 0.5px;
     outline-offset: -1px;
   }
+  .svd_toolbar button:focus {
+    outline-color: $primary-text-color;
+  }
 
   .svd-main-color {
     color: $primary-color;
