@@ -53,6 +53,7 @@ export class TranslationItem extends TranslationItemBase {
 export interface ITranslationLocales {
   koLocales: any;
   showAllStrings: boolean;
+  getLocaleName(loc: string): string;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -109,7 +110,9 @@ export class TranslationGroup extends TranslationItemBase {
     return Math.floor(100 / count).toString() + "%";
   }
   public getLocaleName(loc: string) {
-    return editorLocalization.getLocaleName(loc);
+    return this.translation
+      ? this.translation.getLocaleName(loc)
+      : editorLocalization.getLocaleName(loc);
   }
   public reset() {
     this.itemValues = [];
@@ -281,7 +284,15 @@ export class Translation implements ITranslationLocales {
     }
     return res;
   }
+  public get defaultLocale(): string {
+    return !!this.survey.locale
+      ? this.survey.locale
+      : Survey.surveyLocalization.defaultLocale;
+  }
   public getLocaleName(loc: string) {
+    if (!loc) {
+      loc = this.defaultLocale;
+    }
     return editorLocalization.getLocaleName(loc);
   }
   public hasLocale(locale: string): boolean {
@@ -330,7 +341,7 @@ export class Translation implements ITranslationLocales {
     var locales = Survey.surveyLocalization.locales;
     for (var loc in locales) {
       if (this.hasLocale(loc)) continue;
-      if (loc == Survey.surveyLocalization.defaultLocale) continue;
+      if (loc == this.defaultLocale) continue;
       res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
     }
     this.koSelectedLanguageToAdd(null);
