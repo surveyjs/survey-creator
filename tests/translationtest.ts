@@ -169,3 +169,23 @@ QUnit.test("Translation show All strings", function(assert) {
   assert.equal(questionGroup.groups.length, 1, "There is one group - choices");
   assert.equal(questionGroup.locItems.length, 1, "There is one item - title");
 });
+QUnit.test("Do not add group if there is no items in it.", function(assert) {
+  var survey = new Survey.Survey();
+  survey.triggers.push(new Survey.SurveyTriggerComplete());
+  var translation = new Translation(survey);
+  assert.equal(
+    translation.root.groups.length,
+    0,
+    "There should not be groups in this empty survey"
+  );
+});
+QUnit.test("Question validators name", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  question.validators.push(new Survey.RegexValidator(""));
+  var group = new TranslationGroup(question.name, question);
+  assert.equal(
+    group.groups[0].name,
+    "validators[0]",
+    "use property name + indexes"
+  );
+});

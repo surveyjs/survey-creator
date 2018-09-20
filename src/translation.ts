@@ -123,6 +123,14 @@ export class TranslationGroup extends TranslationItemBase {
   public get showAllStrings(): boolean {
     return !!this.translation ? this.translation.showAllStrings : true;
   }
+  public get hasItems(): boolean {
+    if (this.locItems.length > 0) return true;
+    var groups = this.groups;
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].hasItems) return true;
+    }
+    return false;
+  }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValues();
@@ -156,11 +164,19 @@ export class TranslationGroup extends TranslationItemBase {
               new TranslationGroup(property.name, value, this.translation)
             );
           } else {
-            this.createGroups(value);
+            this.createGroups(value, property);
           }
         }
       }
     }
+    this.itemValues.sort(function(
+      a: TranslationItemBase,
+      b: TranslationItemBase
+    ) {
+      if (!a.name) return -1;
+      if (!b.name) return 1;
+      return a.name.localeCompare(b.name);
+    });
   }
   private getDefaultValue(property: Survey.JsonObjectProperty): string {
     if (
@@ -189,13 +205,18 @@ export class TranslationGroup extends TranslationItemBase {
       !!val[0]["setData"]
     );
   }
-  private createGroups(value: any) {
+  private createGroups(value: any, property: Survey.JsonObjectProperty) {
     for (var i = 0; i < value.length; i++) {
       var obj = value[i];
       if (!!obj && obj.getType) {
-        this.itemValues.push(
-          new TranslationGroup(obj["name"], obj, this.translation)
-        );
+        var name = obj["name"];
+        if (!name) {
+          name = property.name + "[" + i.toString() + "]";
+        }
+        var group = new TranslationGroup(name, obj, this.translation);
+        if (group.hasItems) {
+          this.itemValues.push(group);
+        }
       }
     }
   }
