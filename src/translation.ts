@@ -249,11 +249,13 @@ export class Translation implements ITranslationLocales {
     this.koShowAllStrings = ko.observable(showAllStrings);
     this.koAvailableLanguages = ko.observableArray();
     this.koSelectedLanguageToAdd = ko.observable(null);
-    this.koFilteredPage = ko.observable({
-      value: null,
-      text: this.showAllPagesText
-    });
-    this.koFilteredPages = ko.observableArray();
+    this.koFilteredPage = ko.observable();
+    this.koFilteredPages = ko.observableArray([
+      {
+        value: null,
+        text: this.showAllPagesText
+      }
+    ]);
     var self = this;
     this.koSelectedLanguageToAdd.subscribe(function(newValue) {
       if (!!newValue) {
@@ -286,7 +288,7 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPage(val);
   }
   public reset() {
-    var rootObj = this.filteredPage ? this.filteredPage : this.survey;
+    var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     this.rootValue = new TranslationGroup("", rootObj, this);
     this.root.reset();
     this.resetLocales();
