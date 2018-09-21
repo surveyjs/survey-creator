@@ -237,6 +237,8 @@ export class Translation implements ITranslationLocales {
   public koAvailableLanguages: any;
   public koSelectedLanguageToAdd: any;
   public koShowAllStrings: any;
+  public koFilteredPage: any;
+  public koFilteredPages: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -247,6 +249,11 @@ export class Translation implements ITranslationLocales {
     this.koShowAllStrings = ko.observable(showAllStrings);
     this.koAvailableLanguages = ko.observableArray();
     this.koSelectedLanguageToAdd = ko.observable(null);
+    this.koFilteredPage = ko.observable({
+      value: null,
+      text: this.showAllPagesText
+    });
+    this.koFilteredPages = ko.observableArray();
     var self = this;
     this.koSelectedLanguageToAdd.subscribe(function(newValue) {
       if (!!newValue) {
@@ -256,6 +263,9 @@ export class Translation implements ITranslationLocales {
     this.koShowAllStrings.subscribe(function(newValue) {
       self.reset();
     });
+    this.koFilteredPage.subscribe(function(newValue) {
+      self.reset();
+    });
     this.survey = survey;
   }
   public get survey(): Survey.Survey {
@@ -263,13 +273,21 @@ export class Translation implements ITranslationLocales {
   }
   public set survey(val: Survey.Survey) {
     this.surveyValue = val;
-    this.rootValue = new TranslationGroup("", this.survey, this);
+    this.updateFilteredPages();
     this.reset();
   }
   public get root(): TranslationGroup {
     return this.rootValue;
   }
+  public get filteredPage(): Survey.Page {
+    return this.koFilteredPage();
+  }
+  public set filteredPage(val: Survey.Page) {
+    this.koFilteredPage(val);
+  }
   public reset() {
+    var rootObj = this.filteredPage ? this.filteredPage : this.survey;
+    this.rootValue = new TranslationGroup("", rootObj, this);
     this.root.reset();
     this.resetLocales();
     this.koRoot(this.root);
@@ -324,6 +342,9 @@ export class Translation implements ITranslationLocales {
   public get showAllStringsText(): string {
     return editorLocalization.getString("ed.translationShowAllStrings");
   }
+  public get showAllPagesText(): string {
+    return editorLocalization.getString("ed.translationShowAllPages");
+  }
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
@@ -344,5 +365,13 @@ export class Translation implements ITranslationLocales {
     }
     this.koSelectedLanguageToAdd(null);
     this.koAvailableLanguages(res);
+  }
+  private updateFilteredPages() {
+    var res = [{ value: null, text: this.showAllPagesText }];
+    for (var i = 0; i < this.survey.pages.length; i++) {
+      var page = this.survey.pages[i];
+      res.push({ value: page, text: page.name });
+    }
+    this.koFilteredPages(res);
   }
 }

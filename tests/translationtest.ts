@@ -210,3 +210,21 @@ QUnit.test("Add properties for columns", function(assert) {
   var column0Group = group.groups[0];
   assert.equal(column0Group.groups.length, 1, "choices should be here");
 });
+QUnit.test("Filter by Page", function(assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("Page 1");
+  survey.addNewPage("Page 2");
+  var translation = new Translation(survey);
+  assert.equal(translation.root.groups.length, 2, "There are two pages");
+  translation.filteredPage = <Survey.Page>survey.pages[0];
+  assert.equal(translation.root.obj.name, "Page 1", "The root is page 1");
+  assert.equal(translation.root.groups.length, 0, "It doesn't have groups");
+  translation.filteredPage = <Survey.Page>survey.pages[1];
+  assert.equal(translation.root.obj.name, "Page 2", "The root is page 2");
+  translation.filteredPage = null;
+  assert.equal(
+    translation.root.groups.length,
+    2,
+    "There are two pages - survey is the root"
+  );
+});
