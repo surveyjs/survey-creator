@@ -239,6 +239,14 @@ function elementOnAfterRendering(
       if (childs[i].style) childs[i].style.pointerEvents = "none";
     }
   }
+  var setTabIndex = element => {
+    element.tabIndex = -1;
+  };
+  ["input", "select", "textarea"].forEach(sel => {
+    var elements = <any>domElement.querySelectorAll(sel);
+    elements.forEach(setTabIndex);
+  });
+
   addAdorner(domElement, surveyElement);
 }
 
