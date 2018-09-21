@@ -104,7 +104,8 @@ $icon-status-color: #9d9fa1;
   div:focus,
   span:focus,
   select:focus,
-  tr:focus {
+  tr:focus,
+  input[type="checkbox"]:focus + span.checkmark {
     outline-color: $primary-color;
     outline-style: dotted;
     outline-width: 0.5px;

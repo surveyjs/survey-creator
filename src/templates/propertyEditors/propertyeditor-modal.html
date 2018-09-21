@@ -1,6 +1,6 @@
 ﻿<script type="text/html" id="propertyeditor-modal">
     <div class="input-group form-group" data-bind="visible:!$data.isEditable">
-        <a class="form-control" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
+        <a tabindex="0" class="form-control" data-bind="key2click, click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
             <span data-bind="text: koText"></span>
         </a>
         <div class="input-group-addon">

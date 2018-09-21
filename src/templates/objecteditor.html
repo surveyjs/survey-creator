@@ -7,14 +7,12 @@
     </table>
 </script>
 <script type="text/html" id="objecteditorproperty">
-    <tr tabindex="0" data-bind="key2click, clickNoFocus: function() { $parent.changeActiveProperty($data); }, css: {'active': $parent.koActiveProperty() == $data}">
+    <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
         <td width="50%">
             <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
         </td>
         <td class="svd-light-text-color form-group" width="50%">
-            <span data-bind="css: {'form-control': !editor.alwaysShowEditor && (koText() === '' || koText() === null) }, text: koText, visible: !koIsShowEditor(), attr: {title: koText}"
-                style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden"></span>
-            <div data-bind="visible: koIsShowEditor(), event: { keydown: $data.editor.keyDownHandler }">
+            <div data-bind="event: { keydown: $data.editor.keyDownHandler }">
                 <!-- ko template: { name: 'propertyeditor-' + editorTypeTemplate, data: $data.editor } -->
                 <!-- /ko -->
             </div>
