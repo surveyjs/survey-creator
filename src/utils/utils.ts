@@ -72,6 +72,7 @@ ko.bindingHandlers["clickNoFocus"] = {
       setTimeout(() => {
         element.blur();
       }, 1);
+      return true;
     };
   }
 };
