@@ -68,7 +68,7 @@ test(`check a guid in the tag`, async t => {
     () =>
       document
         .querySelectorAll("[title=MyTag]")[0]
-        .parentNode.nextElementSibling.querySelector("span").title
+        .parentNode.nextElementSibling.querySelector("input").value
   );
   const getGuid = ClientFunction(() => window.qguid);
 
