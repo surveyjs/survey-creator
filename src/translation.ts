@@ -190,6 +190,7 @@ export class TranslationGroup extends TranslationItemBase {
       );
       if (
         !!locStr &&
+        this.obj.getType() != "page" &&
         (!!locStr.onGetTextCallback || locStr.onRenderedHtmlCallback)
       )
         return this.obj["name"];
@@ -239,6 +240,7 @@ export class Translation implements ITranslationLocales {
   public koShowAllStrings: any;
   public koFilteredPage: any;
   public koFilteredPages: any;
+  public koIsEmpty: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -247,6 +249,7 @@ export class Translation implements ITranslationLocales {
     ]);
     this.koRoot = ko.observable(null);
     this.koShowAllStrings = ko.observable(showAllStrings);
+    this.koIsEmpty = ko.observable(true);
     this.koAvailableLanguages = ko.observableArray();
     this.koSelectedLanguageToAdd = ko.observable(null);
     this.koFilteredPage = ko.observable();
@@ -292,6 +295,7 @@ export class Translation implements ITranslationLocales {
     this.rootValue = new TranslationGroup("", rootObj, this);
     this.root.reset();
     this.resetLocales();
+    this.koIsEmpty(!this.root.hasItems);
     this.koRoot(this.root);
   }
   public get locales(): Array<string> {
@@ -346,6 +350,9 @@ export class Translation implements ITranslationLocales {
   }
   public get showAllPagesText(): string {
     return editorLocalization.getString("ed.translationShowAllPages");
+  }
+  public get noStringsText(): string {
+    return editorLocalization.getString("ed.translationNoStrings");
   }
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();

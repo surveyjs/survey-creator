@@ -74,7 +74,8 @@ export var enStrings = {
     saveError: "Error! Editor content is not saved.",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "Show all strings",
-    translationShowAllPages: "Show all pages"
+    translationShowAllPages: "Show all pages",
+    translationNoStrings: "No strings to translate. Please, change the filter."
   },
   //Property names in table headers
   pel: {

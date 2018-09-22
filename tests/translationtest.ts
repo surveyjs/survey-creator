@@ -154,6 +154,7 @@ QUnit.test("Translation show All strings", function(assert) {
   var survey = new Survey.Survey();
   survey.completedHtml = "Test";
   survey.addNewPage("page1");
+  survey.pages[0].title = "title1";
   survey.pages[0].addNewQuestion("checkbox", "question1");
   var translation = new Translation(survey);
   assert.equal(
@@ -213,7 +214,9 @@ QUnit.test("Add properties for columns", function(assert) {
 QUnit.test("Filter by Page", function(assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("Page 1");
+  survey.pages[0].title = "title1";
   survey.addNewPage("Page 2");
+  survey.pages[1].title = "title2";
   var translation = new Translation(survey);
   assert.equal(translation.root.groups.length, 2, "There are two pages");
   translation.filteredPage = <Survey.Page>survey.pages[0];
