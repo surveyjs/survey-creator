@@ -238,3 +238,82 @@ QUnit.test("Filter by Page", function(assert) {
     "There are two pages - survey is the root"
   );
 });
+QUnit.test("Export to csv", function(assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "question1",
+        columns: [
+          {
+            name: "col1",
+            title: {
+              default: "col1 en",
+              de: "col1 de"
+            },
+            cellType: "dropdown",
+            isRequired: true,
+            choices: [
+              {
+                value: "item1",
+                text: {
+                  default: "item en",
+                  de: "item de"
+                }
+              }
+            ]
+          },
+          {
+            name: "col2"
+          },
+          {
+            name: "col3"
+          }
+        ],
+        choices: [1, 2, 3, 4, 5],
+        rows: [
+          {
+            value: "item1",
+            text: {
+              default: "Row 1",
+              de: "Row 1-de"
+            }
+          }
+        ]
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  var str = translation.exportToCSV();
+  var strs = str.split("\n");
+  assert.equal(
+    strs.length,
+    7,
+    "locales+question.title+3 column+column choice+ one row"
+  );
+  assert.equal(strs[0], ",default,de", "check locale line");
+  assert.equal(
+    strs[1],
+    "survey.page1.question1.title,question1,",
+    "use default value"
+  );
+  var translatedStr =
+    ",default,de\n" +
+    "survey.page1.question1.title,question1_1,\n" +
+    "survey.page1.question1.col1.title,col1 en1,col1 de1";
+  translation.importFromCSV(translatedStr);
+  var question = <Survey.QuestionMatrixDropdown>(
+    survey.getQuestionByName("question1")
+  );
+  assert.equal(question.title, "question1_1", "title has been changed");
+  assert.equal(
+    question.columns[0].locTitle.getLocaleText(""),
+    "col1 en1",
+    "default text in column title has been changed"
+  );
+  assert.equal(
+    question.columns[0].locTitle.getLocaleText("de"),
+    "col1 de1",
+    "de text in column title has been changed"
+  );
+});

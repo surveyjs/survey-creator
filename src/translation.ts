@@ -364,6 +364,98 @@ export class Translation implements ITranslationLocales {
   public get noStringsText(): string {
     return editorLocalization.getString("ed.translationNoStrings");
   }
+  public exportToCSV(): string {
+    var res = [];
+    var title = "";
+    var visLocales = this.getVisibleLocales();
+    for (var i = 0; i < visLocales.length; i++) {
+      title += "," + (!!visLocales[i] ? visLocales[i] : "default");
+    }
+    res.push(title);
+    var itemsHash = {};
+    this.fillItemsHash("", this.root, itemsHash);
+    for (var key in itemsHash) {
+      var line = key;
+      var item = <TranslationItem>itemsHash[key];
+      for (var i = 0; i < visLocales.length; i++) {
+        var val = item.locString.getLocaleText(visLocales[i]);
+        if (!val && i == 0) {
+          val = item.defaultValue;
+        }
+        line += "," + val;
+      }
+      res.push(line);
+    }
+    return res.join("\n");
+  }
+  public importFromCSV(str: string) {
+    if (!str) return;
+    var lines = str.split("\n");
+    if (lines.length < 2) return;
+    var locales = this.readLocales(lines[0]);
+    var translation = new Translation(this.survey, true);
+    var itemsHash = [];
+    this.fillItemsHash("", translation.root, itemsHash);
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i]) continue;
+      var vals = lines[i].split(",");
+      var name = vals[0].trim();
+      if (!name) continue;
+      var item = itemsHash[name];
+      if (!item) continue;
+      this.updateItemWithStrings(item, vals, locales);
+    }
+    this.reset();
+  }
+  private updateItemWithStrings(
+    item: TranslationItem,
+    values: Array<string>,
+    locales: Array<string>
+  ) {
+    for (var i = 0; i < values.length - 1 && i < locales.length; i++) {
+      var val = values[i + 1].trim();
+      if (!val) continue;
+      item.koValue(locales[i])(val);
+    }
+  }
+  private getVisibleLocales(): Array<string> {
+    var res = [];
+    var locales = this.koLocales();
+    for (var i = 0; i < locales.length; i++) {
+      if (locales[i].koVisible()) {
+        res.push(locales[i].locale);
+      }
+    }
+    return res;
+  }
+  private readLocales(str: string): Array<string> {
+    var res = [];
+    if (!str) return res;
+    var locs = str.split(",");
+    for (var i = 1; i < locs.length; i++) {
+      var loc = locs[i].trim();
+      if (loc == "default") loc = "";
+      res.push(loc);
+    }
+    return res;
+  }
+  private fillItemsHash(
+    parentName: string,
+    group: TranslationGroup,
+    itemsHash: any
+  ) {
+    var name = parentName;
+    if (!!name) name += ".";
+    name += group.name;
+    var items = group.locItems;
+    for (var i = 0; i < items.length; i++) {
+      itemsHash[name + "." + items[i].name] = items[i];
+    }
+    var groups = group.groups;
+    for (var i = 0; i < groups.length; i++) {
+      this.fillItemsHash(name, groups[i], itemsHash);
+    }
+  }
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
