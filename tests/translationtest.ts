@@ -211,6 +211,13 @@ QUnit.test("Add properties for columns", function(assert) {
   var column0Group = group.groups[0];
   assert.equal(column0Group.groups.length, 1, "choices should be here");
 });
+QUnit.test("Do not allow translate choices with numbers", function(assert) {
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.choices = [1, 2, 3];
+  var translation = new Translation(new Survey.Survey());
+  var group = new TranslationGroup(question.name, question, translation);
+  assert.equal(group.groups.length, 0, "There is no groups in empty question");
+});
 QUnit.test("Filter by Page", function(assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("Page 1");

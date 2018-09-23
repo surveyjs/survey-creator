@@ -161,9 +161,14 @@ export class TranslationGroup extends TranslationItemBase {
         if (!!value && Array.isArray(value) && value.length > 0) {
           //If ItemValue array?
           if (this.isItemValueArray(value)) {
-            this.itemValues.push(
-              new TranslationGroup(property.name, value, this.translation)
+            var group = new TranslationGroup(
+              property.name,
+              value,
+              this.translation
             );
+            if (group.hasItems) {
+              this.itemValues.push(group);
+            }
           } else {
             this.createGroups(value, property);
           }
@@ -225,9 +230,13 @@ export class TranslationGroup extends TranslationItemBase {
   private createItemValues() {
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
-      this.itemValues.push(
-        new TranslationItem(val.value, val.locText, val.value)
-      );
+      var canAdd =
+        this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
+      if (canAdd) {
+        this.itemValues.push(
+          new TranslationItem(val.value, val.locText, val.value)
+        );
+      }
     }
   }
 }
@@ -292,7 +301,8 @@ export class Translation implements ITranslationLocales {
   }
   public reset() {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
-    this.rootValue = new TranslationGroup("", rootObj, this);
+    var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
+    this.rootValue = new TranslationGroup(rootName, rootObj, this);
     this.root.reset();
     this.resetLocales();
     this.koIsEmpty(!this.root.hasItems);
