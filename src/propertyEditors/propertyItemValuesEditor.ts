@@ -158,12 +158,19 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var item = editorItem.item;
     var alwaySaveTextInPropertyEditors =
       this.options && this.options.alwaySaveTextInPropertyEditors;
-    if (!alwaySaveTextInPropertyEditors && item.text == item.value) {
+    if (
+      !alwaySaveTextInPropertyEditors &&
+      item.text == item.value &&
+      !this.isTextLocalized(item)
+    ) {
       item.text = null;
     }
     var itemValue = new Survey.ItemValue(null);
     itemValue.setData(item);
     return itemValue;
+  }
+  private isTextLocalized(item) {
+    return Object.keys(item.locText.values).length > 1;
   }
   protected onValueChanged() {
     super.onValueChanged();
