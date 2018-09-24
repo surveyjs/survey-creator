@@ -250,6 +250,7 @@ export class Translation implements ITranslationLocales {
   public koFilteredPage: any;
   public koFilteredPages: any;
   public koIsEmpty: any;
+  public koExportToSCVFile: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -280,6 +281,9 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPage.subscribe(function(newValue) {
       self.reset();
     });
+    this.koExportToSCVFile = function() {
+      self.exportToSCVFile("survey_translation.csv");
+    }
     this.survey = survey;
   }
   public get survey(): Survey.Survey {
@@ -364,6 +368,9 @@ export class Translation implements ITranslationLocales {
   public get noStringsText(): string {
     return editorLocalization.getString("ed.translationNoStrings");
   }
+  public get exportToCSVText(): string {
+    return "Export to CSV";
+  }
   public exportToCSV(): string {
     var res = [];
     var title = "";
@@ -406,6 +413,21 @@ export class Translation implements ITranslationLocales {
       this.updateItemWithStrings(item, vals, locales);
     }
     this.reset();
+  }
+  public exportToSCVFile(fileName: string) {
+    var data = this.exportToCSV();
+    var blob = new Blob([data], {type: 'text/csv'});
+    if(window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, fileName);
+    }
+    else{
+        var elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = fileName;        
+        document.body.appendChild(elem);
+        elem.click();        
+        document.body.removeChild(elem);
+    }    
   }
   private updateItemWithStrings(
     item: TranslationItem,
