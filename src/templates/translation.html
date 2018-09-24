@@ -13,6 +13,10 @@
         </label>
         <select data-bind="options: koFilteredPages, value: koFilteredPage, optionsValue: 'value', optionsText:'text'"></select>
         <button data-bind="text:$data.exportToCSVText, click:$data.koExportToSCVFile"></button>
+        <button onclick="this.getElementsByTagName('input')[0].click();">
+            <input type="file" style="display:none;" accept=".csv" data-bind="event: { change: function() { $data.koImportFromSCVFile($element) } }" />
+            <span data-bind="text:$data.importFromCSVText"></span>
+        </button>
     </div>    
     <div data-bind="visible:$data.koIsEmpty">
         <span data-bind="text:$data.noStringsText"></span>
