@@ -251,6 +251,7 @@ export class Translation implements ITranslationLocales {
   public koFilteredPages: any;
   public koIsEmpty: any;
   public koExportToSCVFile: any;
+  public koImportFromSCVFile: any;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -283,7 +284,12 @@ export class Translation implements ITranslationLocales {
     });
     this.koExportToSCVFile = function() {
       self.exportToSCVFile("survey_translation.csv");
-    }
+    };
+    this.koImportFromSCVFile = function(el) {
+      if (el.files.length < 1) return;
+      self.importFromSCVFile(el.files[0]);
+      el.value = "";
+    };
     this.survey = survey;
   }
   public get survey(): Survey.Survey {
@@ -369,7 +375,10 @@ export class Translation implements ITranslationLocales {
     return editorLocalization.getString("ed.translationNoStrings");
   }
   public get exportToCSVText(): string {
-    return "Export to CSV";
+    return editorLocalization.getString("ed.translationExportToSCVButton");
+  }
+  public get importFromCSVText(): string {
+    return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
   public exportToCSV(): string {
     var res = [];
@@ -416,18 +425,25 @@ export class Translation implements ITranslationLocales {
   }
   public exportToSCVFile(fileName: string) {
     var data = this.exportToCSV();
-    var blob = new Blob([data], {type: 'text/csv'});
-    if(window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveBlob(blob, fileName);
+    var blob = new Blob([data], { type: "text/csv" });
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveBlob(blob, fileName);
+    } else {
+      var elem = window.document.createElement("a");
+      elem.href = window.URL.createObjectURL(blob);
+      elem.download = fileName;
+      document.body.appendChild(elem);
+      elem.click();
+      document.body.removeChild(elem);
     }
-    else{
-        var elem = window.document.createElement('a');
-        elem.href = window.URL.createObjectURL(blob);
-        elem.download = fileName;        
-        document.body.appendChild(elem);
-        elem.click();        
-        document.body.removeChild(elem);
-    }    
+  }
+  public importFromSCVFile(file: File) {
+    var fileReader = new FileReader();
+    var self = this;
+    fileReader.onload = function(e) {
+      self.importFromCSV(<string>fileReader.result);
+    };
+    fileReader.readAsText(file);
   }
   private updateItemWithStrings(
     item: TranslationItem,
