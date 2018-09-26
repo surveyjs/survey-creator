@@ -582,7 +582,7 @@ QUnit.test("PagesEditor change question's page", function(assert) {
 
   assert.equal(pagesEditor.selectedPage, editor["pages"]()[0]);
 
-  var question = <Survey.QuestionBase>editor.survey.pages[0].elements[0];
+  var question = <Survey.Question>editor.survey.pages[0].elements[0];
   question.page = editor["pages"]()[1];
   editor.onPropertyValueChanged(
     <any>{ name: "page", isDefaultValue: () => false },

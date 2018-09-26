@@ -162,7 +162,7 @@ QUnit.test("Create custom property editor", function(assert) {
 QUnit.test("PropertyEditor and hasError - required", function(assert) {
   var question = new Survey.QuestionText("q1");
   var property = Survey.JsonObject.metaData.findProperty(
-    "questionbase",
+    "question",
     "name"
   );
   var propertyEditor = new SurveyObjectProperty(property);

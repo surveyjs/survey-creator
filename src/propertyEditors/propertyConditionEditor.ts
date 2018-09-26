@@ -4,6 +4,7 @@ import { SurveyPropertyTextEditor } from "./propertyModalEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import * as editorLocalization from "../editorLocalization";
+import { SurveyValidator } from "survey-knockout";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public availableOperators = [];
@@ -115,7 +116,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return names;
   }
   private addQuestionNames(
-    question: Survey.QuestionBase,
+    question: Survey.Question,
     questionNames: Array<string>,
     names: Array<string>
   ) {
@@ -125,7 +126,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     }
   }
   private addConditionQuestionNames(
-    question: Survey.QuestionBase,
+    question: Survey.Question,
     names: Array<string>
   ) {
     if (question == this.object) return;
@@ -156,7 +157,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     for (var i = 0; i < panel.questions.length; i++) {
       var q = panel.questions[i];
       if (q.name == this.object.name) continue;
-      this.addConditionQuestionNames(q, questionNames);
+      this.addConditionQuestionNames(<Survey.Question>q, questionNames);
     }
     for (var i = 0; i < questionNames.length; i++) {
       var questionName = "panel." + questionNames[i];
@@ -461,11 +462,11 @@ var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
 export function doGetCompletions(
   prevIdentifier: string,
   prefix: string,
-  config: { question: Survey.QuestionBase; questions: Survey.Question[] },
+  config: { question: Survey.Question; questions: Survey.Question[] },
   completer = null
 ) {
   var completions = [];
-  var currentQuestion: Survey.QuestionBase = config.question;
+  var currentQuestion: Survey.Question = config.question;
   var usableQuestions = (config.questions || []).filter(
     q => q !== currentQuestion
   );

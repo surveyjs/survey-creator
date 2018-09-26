@@ -115,12 +115,12 @@ export class SurveyObjects {
     }
     return res;
   }
-  private getSelectedQuestion(): Survey.QuestionBase {
+  private getSelectedQuestion(): Survey.Question {
     if (!this.koSelected()) return null;
     var obj = this.koSelected().value;
     if (!obj) return null;
     return SurveyHelper.getObjectType(obj) == ObjType.Question
-      ? <Survey.QuestionBase>obj
+      ? <Survey.Question>obj
       : null;
   }
   private addItem(item: SurveyObjectItem, index: number) {

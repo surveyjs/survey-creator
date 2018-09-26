@@ -7,10 +7,10 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //Add a tag property to all questions
-  Survey.JsonObject.metaData.addProperty("questionbase", "tag");
+  Survey.JsonObject.metaData.addProperty("question", "tag");
   // Change the order of name and title properties, remove the startWithNewLine property and add a tag property
   SurveyEditor.SurveyQuestionEditorDefinition.definition[
-    "questionbase"
+    "question"
   ].properties = [
     "title",
     "name",
@@ -20,7 +20,7 @@ const init = ClientFunction(() => {
   ];
   // make visibleIf tab the second after general for all questions
   SurveyEditor.SurveyQuestionEditorDefinition.definition[
-    "questionbase"
+    "question"
   ].tabs = [{ name: "visibleIf", index: 1 }];
 
   var editorOptions = {};

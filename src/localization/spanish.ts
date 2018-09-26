@@ -107,7 +107,7 @@ var spanishTranslation = {
     aceEditorPanelTitle: "Panel actual",
     showMore: "Por favor use la documentación para más detalles",
     conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf",
+      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "Preguntas disponibles:",
     cellsEmptyRowsColumns: "Debe haber al menos una columna o fila",
     propertyIsEmpty: "Por favor proporcione un valor",

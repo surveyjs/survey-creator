@@ -195,7 +195,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
    * <br/> sender the survey editor object that fires the event
-   * <br/> options.question a new added survey question. Survey.QuestionBase object
+   * <br/> options.question a new added survey question. Survey.Question object
    * <br/> options.page the survey Page object where question has been added.
    */
   public onQuestionAdded: Survey.Event<
@@ -1148,7 +1148,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public addPageToUI(page: Survey.Page) {
     this.surveyObjects.addPage(page);
   }
-  private doOnQuestionAdded(question: Survey.QuestionBase, parentPanel: any) {
+  private doOnQuestionAdded(question: Survey.Question, parentPanel: any) {
     if (!this.dragDropHelper.isMoving) {
       var page = this.getPageByElement(question);
       var options = { question: question, page: page };
@@ -1157,7 +1157,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyObjects.addElement(question, parentPanel);
     this.survey.render();
   }
-  private doOnElementRemoved(question: Survey.QuestionBase) {
+  private doOnElementRemoved(question: Survey.Question) {
     this.surveyObjects.removeObject(question);
     this.survey.render();
   }
@@ -1228,7 +1228,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private findObjByName(name: string): Survey.Base {
     var page = this.survey.getPageByName(name);
     if (page) return page;
-    var question = <Survey.QuestionBase>this.survey.getQuestionByName(name);
+    var question = <Survey.Question>this.survey.getQuestionByName(name);
     if (question) return question;
     return null;
   }
@@ -1760,11 +1760,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       this.surveyObjects.selectNextQuestion(isUp);
     }
   }
-  private getSelectedObjAsQuestion(): Survey.QuestionBase {
+  private getSelectedObjAsQuestion(): Survey.Question {
     var obj = this.koSelectedObject().value;
     if (!obj) return null;
     return SurveyHelper.getObjectType(obj) == ObjType.Question
-      ? <Survey.QuestionBase>obj
+      ? <Survey.Question>obj
       : null;
   }
   public deleteCurrentObject() {
@@ -1773,7 +1773,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private editCurrentObject() {
     this.showQuestionEditor(this.koSelectedObject().value);
   }
-  private convertCurrentObject(obj: Survey.QuestionBase, className: string) {
+  private convertCurrentObject(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
     this.setModified({
       type: "QUESTION_CONVERTED",
@@ -1816,7 +1816,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       }
     );
   };
-  public onQuestionEditorChanged(question: Survey.QuestionBase) {
+  public onQuestionEditorChanged(question: Survey.Question) {
     if (!!question.name && !this.isNameUnique(question, question.name)) {
       question.name = this.generateUniqueName(question, question.name);
     }
@@ -1851,7 +1851,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @param question an added Survey.Question
    * @see toolbox
    */
-  public addCustomToolboxQuestion(question: Survey.QuestionBase) {
+  public addCustomToolboxQuestion(question: Survey.Question) {
     var options = {};
     this.onCustomElementAddingIntoToolbox.fire(this, {
       element: question,

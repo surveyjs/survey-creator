@@ -105,7 +105,7 @@ export var koreanStrings = {
     aceEditorPanelTitle: "현재 패널",
     showMore: "자세한 내용은 설명서를 확인하십시오.",
     conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf",
+      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "유효 질문:",
     cellsEmptyRowsColumns: "최소한 하나의 열 또는 행이 있어야 합니다.",
 

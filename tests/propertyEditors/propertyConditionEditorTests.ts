@@ -130,7 +130,7 @@ QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
   var question = new Survey.QuestionText("q1");
   question.visibleIf = "ddd";
   var property = Survey.JsonObject.metaData.findProperty(
-    "questionbase",
+    "question",
     "visibleIf"
   );
   var editor = new SurveyPropertyConditionEditor(property);
@@ -149,7 +149,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   var question = new Survey.QuestionText("q1");
   question.visibleIf = "{q} = 1";
   var property = Survey.JsonObject.metaData.findProperty(
-    "questionbase",
+    "question",
     "visibleIf"
   );
   var editor = new SurveyPropertyConditionEditor(property);
@@ -183,7 +183,7 @@ QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #353",
   function(assert) {
     var property = Survey.JsonObject.metaData.findProperty(
-      "questionbase",
+      "question",
       "visibleIf"
     );
     var survey = new Survey.Survey();
@@ -226,7 +226,7 @@ QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #367",
   function(assert) {
     var property = Survey.JsonObject.metaData.findProperty(
-      "questionbase",
+      "question",
       "visibleIf"
     );
     var survey = new Survey.Survey();
@@ -283,7 +283,7 @@ QUnit.test(
   "SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button",
   function(assert) {
     var property = Survey.JsonObject.metaData.findProperty(
-      "questionbase",
+      "question",
       "visibleIf"
     );
     var survey = new Survey.Survey();
@@ -308,7 +308,7 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   assert
 ) {
   var property = Survey.JsonObject.metaData.findProperty(
-    "questionbase",
+    "question",
     "visibleIf"
   );
   var survey = new Survey.Survey();
@@ -360,7 +360,7 @@ QUnit.test(
   "SurveyPropertyConditionEditor.allCondtionQuestions for panel dynamic",
   function(assert) {
     var property = Survey.JsonObject.metaData.findProperty(
-      "questionbase",
+      "question",
       "visibleIf"
     );
     var survey = new Survey.Survey();

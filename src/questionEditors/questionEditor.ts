@@ -33,14 +33,14 @@ export class SurveyPropertyEditorShowWindow {
     this.koEditor = ko.observable(null);
   }
   public show(
-    questionBase: Survey.Base,
+    question: Survey.Base,
     elWindow: HTMLElement,
-    onChanged: (question: Survey.QuestionBase) => any,
+    onChanged: (question: Survey.Question) => any,
     options: ISurveyObjectEditorOptions = null,
     onClosed: () => any = null
   ) {
     var editor = new SurveyQuestionEditor(
-      questionBase,
+      question,
       this.onCanShowPropertyCallback,
       null,
       options

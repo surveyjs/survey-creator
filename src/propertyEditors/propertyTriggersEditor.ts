@@ -114,7 +114,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   private getQuestionNames(questions: Array<Survey.IQuestion>): Array<string> {
     var items = [];
     for (var i = 0; i < questions.length; i++) {
-      (<Survey.QuestionBase>questions[i]).addConditionNames(items);
+      (<Survey.Question>questions[i]).addConditionNames(items);
     }
     var names = [];
     for (var i = 0; i < items.length; i++) {

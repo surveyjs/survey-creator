@@ -352,7 +352,7 @@ QUnit.test("General properties, has errors", function(assert) {
 
 QUnit.test("Question editor definition: getProperties", function(assert) {
   var baseProperties = SurveyQuestionEditorDefinition.getProperties(
-    "questionbase"
+    "question"
   );
   var properties = SurveyQuestionEditorDefinition.getProperties("rating");
   assert.equal(

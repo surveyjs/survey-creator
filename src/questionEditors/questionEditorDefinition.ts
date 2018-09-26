@@ -17,7 +17,7 @@ export class SurveyQuestionEditorDefinition {
   public static definition: {
     [key: string]: ISurveyQuestionEditorDefinition;
   } = {
-    questionbase: {
+    question: {
       properties: [
         "name",
         "title",
