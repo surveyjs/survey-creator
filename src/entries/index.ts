@@ -121,6 +121,7 @@ import "../localization/polish";
 import "../localization/portuguese";
 import "../localization/simplified-chinese";
 import "../localization/spanish";
+import "../localization/traditional-chinese";
 
 export {
   Translation,
