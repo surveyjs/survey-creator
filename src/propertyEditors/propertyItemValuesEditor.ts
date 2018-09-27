@@ -150,6 +150,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var itemValue = new Survey.ItemValue(item);
     if (this.object) {
       itemValue["survey"] = this.object.survey;
+      itemValue["object"] = this.object;
     }
     itemValue.locOwner = this;
     return itemValue;

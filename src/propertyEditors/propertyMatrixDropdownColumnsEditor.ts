@@ -51,6 +51,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   protected createEditorItemCore(item: any): Survey.MatrixDropdownColumn {
     var newColumn = new Survey.MatrixDropdownColumn("");
+    newColumn["object"] = this.object;
     newColumn.colOwner = this.object;
     if (item) {
       var json = new Survey.JsonObject().toJsonObject(item);

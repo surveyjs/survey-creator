@@ -30,6 +30,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   }
   protected createNewEditorItem(): any {
     var newItem = new Survey.MultipleTextItem(this.getNewName());
+    newItem["object"] = this.object;
     //newColumn.colOwner = TODO set colOwner.
     return new SurveyPropertyTextItemsItem(newItem, this.columns, this.options);
   }
