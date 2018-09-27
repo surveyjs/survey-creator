@@ -40,6 +40,7 @@ var packagePlatformJson = {
   license: "https://surveyjs.io/Licenses#BuildSurvey",
   files: [
     "surveyeditor.css",
+    "surveyeditor.min.css",
     "surveyeditor.js",
     "surveyeditor.d.ts",
     "surveyeditor.min.js"
@@ -69,16 +70,17 @@ var packagePlatformJson = {
 module.exports = function(options) {
   var packagePath = "./package/";
   var extractCSS = new ExtractTextPlugin({
-    filename: packagePath + "surveyeditor.css"
+    filename:
+      packagePath +
+      (options.buildType === "prod"
+        ? "surveyeditor.min.css"
+        : "surveyeditor.css")
   });
 
   function createSVGBundle() {
     var options = {
       fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(
-        __dirname,
-        "./svgbundle.pug"
-      ),
+      template: path.resolve(__dirname, "./svgbundle.pug"),
       svgoOptions: {
         plugins: [{ removeTitle: true }]
       },
@@ -124,9 +126,9 @@ module.exports = function(options) {
         );
 
         rimraf.sync(packagePath + "typings");
-        fs
-          .createReadStream("./npmREADME.md")
-          .pipe(fs.createWriteStream(packagePath + "README.md"));
+        fs.createReadStream("./npmREADME.md").pipe(
+          fs.createWriteStream(packagePath + "README.md")
+        );
       }
     }
   };
@@ -157,7 +159,17 @@ module.exports = function(options) {
           test: /\.scss$/,
           loader: extractCSS.extract({
             fallbackLoader: "style-loader",
-            loader: "css-loader!sass-loader"
+            use: [
+              {
+                loader: "css-loader",
+                options: {
+                  minimize: options.buildType === "prod"
+                }
+              },
+              {
+                loader: "sass-loader" 
+              }
+            ]
           })
         },
         {
