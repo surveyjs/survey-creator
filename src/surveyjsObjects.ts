@@ -385,16 +385,20 @@ Survey.Panel.prototype["onSelectedElementChanged"] = function() {
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
 
-Survey.QuestionBase.prototype["onCreating"] = function() {
+var questionPrototype = !!Survey.QuestionBase
+  ? Survey.QuestionBase.prototype
+  : Survey.Question.prototype;
+
+questionPrototype["onCreating"] = function() {
   elementOnCreating(this);
 };
 
-Survey.QuestionBase.prototype["onAfterRenderQuestion"] = function(el) {
+questionPrototype["onAfterRenderQuestion"] = function(el) {
   if (!getSurvey(this).isDesignMode) return;
   elementOnAfterRendering(el, this, false, true);
 };
 
-Survey.QuestionBase.prototype["onSelectedElementChanged"] = function() {
+questionPrototype["onSelectedElementChanged"] = function() {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
