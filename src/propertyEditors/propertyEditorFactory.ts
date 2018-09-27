@@ -105,9 +105,18 @@ export class SurveyStringPropertyEditor extends SurveyPropertyEditorBase {
 }
 export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
   public koChoices: any;
+  public koHasFocus: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koChoices = ko.observableArray(this.getLocalizableChoices());
+    this.koHasFocus = ko.observable(false);
+    var self = this;
+    this.koHasFocus.subscribe(function(newValue) {
+      if (newValue && self.property["isDynamicChoices"]) {
+        //TODO
+        self.koChoices(self.getLocalizableChoices());
+      }
+    });
   }
   public get editorType(): string {
     return "dropdown";
