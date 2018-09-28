@@ -1548,6 +1548,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       if (opts.allowDragging) {
         options.items.push({
           name: "dragelement",
+          needFocus: false,
           text: self.getLocString("survey.drag"),
           onClick: function(selObj) {}
         });
