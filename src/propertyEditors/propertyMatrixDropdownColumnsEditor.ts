@@ -29,8 +29,17 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   protected createNewEditorItem(): any {
     var newColumn = this.createEditorItemCore(null);
+    var columns = [];
+    for (var i = 0; i < this.koItems().length; i++) {
+      columns.push(this.koItems()[i].column);
+    }
+    columns.push(newColumn);
     if (this.options) {
-      this.options.onMatrixDropdownColumnAddedCallback(newColumn);
+      this.options.onMatrixDropdownColumnAddedCallback(
+        this.object,
+        newColumn,
+        columns
+      );
     }
     return new SurveyPropertyMatrixDropdownColumnsItem(
       newColumn,

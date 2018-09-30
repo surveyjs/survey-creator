@@ -210,8 +210,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     itemValue.value = "item" + (itemValues.length + 1);
     this.propertyName = propertyName;
   }
-  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
+  onMatrixDropdownColumnAddedCallback(matrix: Survey.Question, column: Survey.MatrixDropdownColumn, columns: Array<Survey.MatrixDropdownColumn>) {
     column.name = "column1";
+    matrix["columnCount"] = columns.length;
   }
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
@@ -289,6 +290,7 @@ QUnit.test("On new Matrix Column added", function(assert) {
   var property = <SurveyObjectProperty>editor.getPropertyEditor("columns");
   var columnsEditor = <SurveyPropertyDropdownColumnsEditor>property.editor;
   columnsEditor.onAddClick();
+  assert.equal(question["columnCount"], 1, "1 column in editor");
   columnsEditor.onApplyClick();
   assert.equal(question.columns.length, 1, "One item is added");
   assert.equal(

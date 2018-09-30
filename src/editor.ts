@@ -226,7 +226,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   /**
    * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
    * <br/> sender the survey editor object that fires the event
+   * <br/> options.matrix a matrix question where column is located, matrix.columns.
    * <br/> options.newColumn a new created Survey.MatrixDropdownColumn object.
+   * <br/> options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
    */
   public onMatrixColumnAdded: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -1981,8 +1983,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
     this.onItemValueAdded.fire(this, options);
   }
-  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {
-    var options = { newColumn: column };
+  onMatrixDropdownColumnAddedCallback(
+    matrix: Survey.Question,
+    column: Survey.MatrixDropdownColumn,
+    columns: Array<Survey.MatrixDropdownColumn>
+  ) {
+    var options = { newColumn: column, matrix: matrix, columns: columns };
     this.onMatrixColumnAdded.fire(this, options);
   }
   onSetPropertyEditorOptionsCallback(
