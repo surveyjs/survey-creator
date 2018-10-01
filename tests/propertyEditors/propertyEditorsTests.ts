@@ -50,7 +50,11 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
   ) {}
-  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn) {}
+  onMatrixDropdownColumnAddedCallback(
+    matrix: Survey.Question,
+    column: Survey.MatrixDropdownColumn,
+    columns: Array<Survey.MatrixDropdownColumn>
+  ) {}
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -161,10 +165,7 @@ QUnit.test("Create custom property editor", function(assert) {
 });
 QUnit.test("PropertyEditor and hasError - required", function(assert) {
   var question = new Survey.QuestionText("q1");
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "name"
-  );
+  var property = Survey.JsonObject.metaData.findProperty("question", "name");
   var propertyEditor = new SurveyObjectProperty(property);
   propertyEditor.object = question;
   var editor = propertyEditor.editor;

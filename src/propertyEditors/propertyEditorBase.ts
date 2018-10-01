@@ -11,7 +11,7 @@ export interface ISurveyObjectEditorOptions {
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
   );
-  onMatrixDropdownColumnAddedCallback(column: Survey.MatrixDropdownColumn);
+  onMatrixDropdownColumnAddedCallback(matrix: Survey.Question, column: Survey.MatrixDropdownColumn, columns: Array<Survey.MatrixDropdownColumn>);
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Survey.Base,

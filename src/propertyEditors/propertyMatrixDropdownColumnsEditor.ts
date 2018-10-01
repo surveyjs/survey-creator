@@ -29,8 +29,17 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   protected createNewEditorItem(): any {
     var newColumn = this.createEditorItemCore(null);
+    var columns = [];
+    for (var i = 0; i < this.koItems().length; i++) {
+      columns.push(this.koItems()[i].column);
+    }
+    columns.push(newColumn);
     if (this.options) {
-      this.options.onMatrixDropdownColumnAddedCallback(newColumn);
+      this.options.onMatrixDropdownColumnAddedCallback(
+        this.object,
+        newColumn,
+        columns
+      );
     }
     return new SurveyPropertyMatrixDropdownColumnsItem(
       newColumn,
@@ -51,6 +60,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   protected createEditorItemCore(item: any): Survey.MatrixDropdownColumn {
     var newColumn = new Survey.MatrixDropdownColumn("");
+    newColumn["object"] = this.object;
     newColumn.colOwner = this.object;
     if (item) {
       var json = new Survey.JsonObject().toJsonObject(item);
