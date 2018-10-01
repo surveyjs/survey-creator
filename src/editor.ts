@@ -1162,9 +1162,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.survey.render();
   }
   private doOnPanelAdded(panel: Survey.Panel, parentPanel: any) {
-    var page = this.getPageByElement(panel);
-    var options = { panel: panel, page: page };
-    this.onPanelAdded.fire(this, options);
+    if (!this.dragDropHelper.isMoving) {
+      var page = this.getPageByElement(panel);
+      var options = { panel: panel, page: page };
+      this.onPanelAdded.fire(this, options);
+    }
     this.surveyObjects.addElement(panel, parentPanel);
     this.survey.render();
   }
