@@ -242,6 +242,7 @@ export class TranslationGroup extends TranslationItemBase {
 }
 
 export class Translation implements ITranslationLocales {
+  public static csvDelimiter = "|";
   public koLocales: any;
   public koRoot: any;
   public koAvailableLanguages: any;
@@ -385,7 +386,9 @@ export class Translation implements ITranslationLocales {
     var title = "";
     var visLocales = this.getVisibleLocales();
     for (var i = 0; i < visLocales.length; i++) {
-      title += "," + (!!visLocales[i] ? visLocales[i] : "default");
+      title +=
+        Translation.csvDelimiter +
+        (!!visLocales[i] ? visLocales[i] : "default");
     }
     res.push(title);
     var itemsHash = {};
@@ -398,7 +401,7 @@ export class Translation implements ITranslationLocales {
         if (!val && i == 0) {
           val = item.defaultValue;
         }
-        line += "," + val;
+        line += Translation.csvDelimiter + val;
       }
       res.push(line);
     }
@@ -414,7 +417,7 @@ export class Translation implements ITranslationLocales {
     this.fillItemsHash("", translation.root, itemsHash);
     for (var i = 1; i < lines.length; i++) {
       if (!lines[i]) continue;
-      var vals = lines[i].split(",");
+      var vals = lines[i].split(Translation.csvDelimiter);
       var name = vals[0].trim();
       if (!name) continue;
       var item = itemsHash[name];
@@ -469,7 +472,7 @@ export class Translation implements ITranslationLocales {
   private readLocales(str: string): Array<string> {
     var res = [];
     if (!str) return res;
-    var locs = str.split(",");
+    var locs = str.split(Translation.csvDelimiter);
     for (var i = 1; i < locs.length; i++) {
       var loc = locs[i].trim();
       if (loc == "default") loc = "";

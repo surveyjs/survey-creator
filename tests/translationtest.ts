@@ -291,16 +291,16 @@ QUnit.test("Export to csv", function(assert) {
     7,
     "locales+question.title+3 column+column choice+ one row"
   );
-  assert.equal(strs[0], ",default,de", "check locale line");
+  assert.equal(strs[0], "|default|de", "check locale line");
   assert.equal(
     strs[1],
-    "survey.page1.question1.title,question1,",
+    "survey.page1.question1.title|question1|",
     "use default value"
   );
   var translatedStr =
-    ",default,de\n" +
-    "survey.page1.question1.title,question1_1,\n" +
-    "survey.page1.question1.col1.title,col1 en1,col1 de1";
+    "|default|de\n" +
+    "survey.page1.question1.title|question1_1|\n" +
+    "survey.page1.question1.col1.title|col1 en1|col1 de1";
   translation.importFromCSV(translatedStr);
   var question = <Survey.QuestionMatrixDropdown>(
     survey.getQuestionByName("question1")
