@@ -385,8 +385,8 @@ Survey.Panel.prototype["onSelectedElementChanged"] = function() {
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
 
-var questionPrototype = !!Survey.QuestionBase
-  ? Survey.QuestionBase.prototype
+var questionPrototype = !!Survey["QuestionBase"]
+  ? Survey["QuestionBase"].prototype
   : Survey.Question.prototype;
 
 questionPrototype["onCreating"] = function() {

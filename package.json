@@ -17,7 +17,7 @@
     "knockout": "^3.4.0",
     "rmodal": "^1.0.28",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.0.40"
+    "survey-knockout": "^1.0.47"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
@@ -48,7 +48,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.2",
     "node-sass": "4.9.2",
-    "puppeteer": "^1.0.0",
+    "puppeteer": "^1.8.0",
     "qunitjs": "2.2.0",
     "replace-in-file": "^3.4.0",
     "rimraf": "2.5.4",
