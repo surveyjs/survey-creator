@@ -621,6 +621,24 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
+  function(assert) {
+    var editor = new SurveyEditor();
+    editor.onPanelAdded.add(function(sender, options) {
+      let parent = options.panel.parent;
+      parent.removeElement(options.panel);
+    });
+
+    editor.clickToolboxItem({ json: { name: "q1", type: "panel" } });
+    assert.equal(
+      editor["surveyObjects"].koObjects().length,
+      2,
+      "panel has not been added"
+    );
+  }
+);
+
 function getSurveyJson(): any {
   return {
     pages: [

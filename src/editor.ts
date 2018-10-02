@@ -1155,8 +1155,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       var page = this.getPageByElement(question);
       var options = { question: question, page: page };
       this.onQuestionAdded.fire(this, options);
+      if (parentPanel.elements.indexOf(question) !== -1) {
+        this.surveyObjects.addElement(question, parentPanel);
+      }
     }
-    this.surveyObjects.addElement(question, parentPanel);
     this.survey.render();
   }
   private doOnElementRemoved(question: Survey.Question) {
@@ -1168,8 +1170,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       var page = this.getPageByElement(panel);
       var options = { panel: panel, page: page };
       this.onPanelAdded.fire(this, options);
+      if (parentPanel.elements.indexOf(panel) !== -1) {
+        this.surveyObjects.addElement(panel, parentPanel);
+      }
     }
-    this.surveyObjects.addElement(panel, parentPanel);
     this.survey.render();
   }
   private doOnPageAdded(page: Survey.Page) {
