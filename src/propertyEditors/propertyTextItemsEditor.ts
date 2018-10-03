@@ -38,7 +38,10 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     return new SurveyPropertyTextItemsItem(item, this.columns, this.options);
   }
   protected createItemFromEditorItem(editorItem: any) {
-    return editorItem.item;
+    var newItem = new Survey.MultipleTextItem();
+    var json = new Survey.JsonObject().toJsonObject(editorItem.item);
+    new Survey.JsonObject().toObject(json, newItem);
+    return newItem;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("multipletext@items", [
