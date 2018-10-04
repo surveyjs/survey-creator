@@ -1632,13 +1632,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     json.type = element.getType();
     return this.createNewElement(json);
   }
+  private getRows(pnl: Survey.PanelModelBase): Array<any> {
+    return !!pnl["koRows"] ? pnl["koRows"]() : pnl.rows;
+  }
   public isCurrentPageEmpty = ko.computed(
     () =>
       !!this.surveyValue() &&
       !!this.surveyValue().koCurrentPage() &&
-      this.surveyValue()
-        .koCurrentPage()
-        .koRows().length === 0
+      this.getRows(this.surveyValue().koCurrentPage()).length === 0
   );
   public dragOverQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);

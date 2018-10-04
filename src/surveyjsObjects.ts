@@ -109,9 +109,13 @@ function getSurvey(el: any): any {
 function panelBaseOnCreating(self: any) {
   self.dragEnterCounter = 0;
   self.emptyElement = null;
-  self.koRows.subscribe(function(changes) {
+  self.rowCount = ko.computed(function() {
+    var rows = !!self["koRow"] ? self["koRows"]() : self.rows;
+    return rows.length;
+  }, self);
+  self.rowCount.subscribe(function(value) {
     if (self.emptyElement) {
-      self.emptyElement.style.display = self.koRows().length > 0 ? "none" : "";
+      self.emptyElement.style.display = value > 0 ? "none" : "";
     }
   });
 }
@@ -360,9 +364,6 @@ Survey.Page.prototype["onAfterRenderPage"] = function(el) {
   el.ondrop = function(e) {
     dragDropHelper.doDrop(e);
   };
-  // if (this.elements.length == 0) {
-  //   this.emptyElement = addEmptyPanelElement(el, dragDropHelper, self);
-  // }
 };
 
 Survey.Panel.prototype["onCreating"] = function() {
@@ -372,7 +373,6 @@ Survey.Panel.prototype["onCreating"] = function() {
 
 Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
   if (!getSurvey(this).isDesignMode) return;
-  var rows = this.koRows();
   var self = this;
   if (this.elements.length == 0) {
     this.emptyElement = addEmptyPanelElement(el, self.dragDropHelper(), self);
