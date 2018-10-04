@@ -168,6 +168,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     var itemValue = new Survey.ItemValue(null);
     itemValue.setData(item);
+    delete itemValue["survey"];
+    delete itemValue["object"];
     return itemValue;
   }
   private isTextLocalized(item) {
