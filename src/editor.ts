@@ -468,6 +468,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * The method is called when the translation from csv file is imported.
+   * @see translation
+   * @see showTranslationTab
+   */
+  public onTranslationImported: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
   public get isAutoSave() {
@@ -622,6 +631,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.surveyLive = new SurveyLiveTester();
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.translationValue = new Translation(new Survey.Survey());
+    this.translation.importFinishedCallback = function() {
+      self.onTranslationImported.fire(self, {});
+    };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -949,6 +961,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public get toolbox(): QuestionToolbox {
     return this.toolboxValue;
   }
+  /**
+   * Return the translation mode object.
+   * @see showTranslationTab
+   */
   public get translation(): Translation {
     return this.translationValue;
   }

@@ -253,6 +253,7 @@ export class Translation implements ITranslationLocales {
   public koIsEmpty: any;
   public koExportToSCVFile: any;
   public koImportFromSCVFile: any;
+  public importFinishedCallback: () => void;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -425,6 +426,7 @@ export class Translation implements ITranslationLocales {
       this.updateItemWithStrings(item, vals, locales);
     }
     this.reset();
+    if (this.importFinishedCallback) this.importFinishedCallback();
   }
   public exportToSCVFile(fileName: string) {
     var data = this.exportToCSV();
