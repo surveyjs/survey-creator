@@ -25,8 +25,15 @@ export class PagesEditor {
     });
     this._selectedPage(this.editor.pages()[0]);
     this.editor.koSelectedObject.subscribe(newVal => {
-      if (!this.isActive()) return;
-
+      if (!this.isActive()) {
+        if (
+          !!editor.survey.currentPage &&
+          editor.survey.currentPage != this._selectedPage()
+        ) {
+          this._selectedPage(editor.survey.currentPage);
+        }
+        return;
+      }
       this._selectedPage(newVal.value);
 
       if (this.isNeedAutoScroll) {

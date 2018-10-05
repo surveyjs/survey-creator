@@ -639,6 +639,31 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "Change page on changing survey.selectedElement if needed, Bug#424",
+  function(assert) {
+    var editor = new SurveyEditor();
+    editor.text = JSON.stringify(getSurveyJson());
+    var pagesEditor = new PagesEditor(editor, editor.survey.pages[0]);
+    editor.survey.selectedElement = editor.survey.getQuestionByName(
+      "question4"
+    );
+    assert.equal(
+      pagesEditor.pageSelection().name,
+      "page3",
+      "Page 3 is selected"
+    );
+    editor.survey.selectedElement = editor.survey.getQuestionByName(
+      "question3"
+    );
+    assert.equal(
+      pagesEditor.pageSelection().name,
+      "page2",
+      "Page 2 is selected"
+    );
+  }
+);
+
 function getSurveyJson(): any {
   return {
     pages: [
