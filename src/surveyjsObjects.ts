@@ -247,8 +247,10 @@ function elementOnAfterRendering(
     element.tabIndex = -1;
   };
   ["input", "select", "textarea"].forEach(sel => {
-    var elements = <any>domElement.querySelectorAll(sel);
-    elements.forEach(setTabIndex);
+    var elements = domElement.querySelectorAll(sel);
+    for (var i = 0; i < elements.length; i++) {
+      setTabIndex(elements[i]);
+    }
   });
 
   addAdorner(domElement, surveyElement);
