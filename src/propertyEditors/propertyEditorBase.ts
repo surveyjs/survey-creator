@@ -11,7 +11,11 @@ export interface ISurveyObjectEditorOptions {
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
   );
-  onMatrixDropdownColumnAddedCallback(matrix: Survey.Question, column: Survey.MatrixDropdownColumn, columns: Array<Survey.MatrixDropdownColumn>);
+  onMatrixDropdownColumnAddedCallback(
+    matrix: Survey.Question,
+    column: Survey.MatrixDropdownColumn,
+    columns: Array<Survey.MatrixDropdownColumn>
+  );
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -191,10 +195,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public hasLocString(name: string) {
     return editorLocalization.hasString(name);
   }
+  protected get isCurrentValueEmpty() {
+    return this.isValueEmpty(this.koValue());
+  }
   protected checkForErrors(): boolean {
     var errorText = "";
     if (this.isRequired) {
-      var er = this.isValueEmpty(this.koValue());
+      var er = this.isCurrentValueEmpty;
       if (er) {
         errorText = this.getLocString("pe.propertyIsEmpty");
       }
@@ -334,8 +341,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     if (this.onChanged != null) this.onChanged(newValue);
   }
   private isValueEmpty(val): boolean {
-    //TODO remove the line
-    if (Survey.Base["isValueEmpty"]) return Survey.Base["isValueEmpty"](val);
     return Survey.Helpers.isValueEmpty(val);
   }
   public keyDownHandler(property, event) {

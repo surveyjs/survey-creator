@@ -69,6 +69,9 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     }
     return items;
   }
+  protected get isCurrentValueEmpty() {
+    return this.koItems().length == 0;
+  }
   protected onBeforeApply() {
     var items = [];
     var internalItems = this.koItems();

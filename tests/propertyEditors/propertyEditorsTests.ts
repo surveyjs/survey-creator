@@ -1152,6 +1152,24 @@ QUnit.test(
   }
 );
 
+QUnit.test("be able to modify empty items, bug#428", function(assert) {
+    var question = new Survey.QuestionMultipleText("q1");
+    var property = Survey.JsonObject.metaData.findProperty(
+      "multipletext",
+      "items"
+    );
+    var editor = new SurveyPropertyTextItemsEditor(property);
+    editor.onChanged = (newValue: any) => {
+      question.items = newValue;
+    };
+    editor.object = question;
+    editor.beforeShow();
+    editor.onAddClick();
+    editor.onApplyClick();
+    assert.equal(question.items.length, 1, "The item has been added");
+  }
+);
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [
