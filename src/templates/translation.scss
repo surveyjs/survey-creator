@@ -4,7 +4,7 @@
       display: inline-block;
       min-width: 200px;
       &:nth-child(2) {
-        margin: 0 25px;
+        margin-left: 100px;
       }
     }
   }
@@ -42,9 +42,10 @@
   }
   .svd-translation-panel-strings {
     padding: 10px;
+    padding-left: 0;
   }
   .svd-translation-panel-strings-title {
-    font-size: 25px;
+    font-weight: bold;
     line-height: 25px;
     padding: 5px 0;
     & + svg-icon {
@@ -56,4 +57,16 @@
   .svd-toolbox-category-header {
     margin-top: 20px;
   }
+  .sjs-cb-wrapper {
+    margin-right: 5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .svd-translation-tab-show-all-strings-container {
+    margin-left: 1px;
+  }
+}
+
+.svd_container.sv_default_css .svd-translation-tab label {
+  margin-bottom: 0;
 }
