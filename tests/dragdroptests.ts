@@ -15,28 +15,28 @@ QUnit.test("Show/hide new created item, simple test", function(assert) {
   assert.equal(dragTarget.moveTo(q1, false), true, "It can be done: 1");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 1");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "qt",
     "Move 1"
   );
   assert.equal(dragTarget.moveTo(q1, true), true, "It can be done: 2");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 2");
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "qt",
     "Move 2"
   );
   assert.equal(dragTarget.moveTo(q2, false), true, "It can be done: 3");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 3");
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "qt",
     "Move 3"
   );
   assert.equal(dragTarget.moveTo(q2, true), true, "It can be done: 4");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 4");
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]()[0].name,
+    dragTarget.getRows(page)[2]["elements"][0].name,
     "qt",
     "Move 4"
   );
@@ -62,7 +62,7 @@ QUnit.test("Show/hide move item, simple test", function(assert) {
   assert.equal(dragTarget.moveTo(q1, false), true, "It can be done: 1");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 1");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "q2",
     "Move 1"
   );
@@ -112,7 +112,7 @@ QUnit.test("Show/hide/create for empty page", function(assert) {
   assert.equal(dragTarget.moveTo(page, false), true, "It can be done: 1");
   assert.equal(dragTarget.getRows(page).length, 1, "Move 1");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "qt",
     "Move 1"
   );
@@ -164,12 +164,12 @@ QUnit.test("Move item startWithNewLine=false", function(assert) {
     "Move 1. No rows should be added"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]().length,
+    dragTarget.getRows(page)[2]["elements"].length,
     2,
     "Move 1. There are two elements in the last row"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]()[1].name,
+    dragTarget.getRows(page)[2]["elements"][1].name,
     "q1",
     "Move 1. The first question is the last element"
   );
@@ -180,17 +180,17 @@ QUnit.test("Move item startWithNewLine=false", function(assert) {
     "Move 2. No rows should be added"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]().length,
+    dragTarget.getRows(page)[1]["elements"].length,
     2,
     "Move 2. There are two elements in the second row"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]().length,
+    dragTarget.getRows(page)[2]["elements"].length,
     1,
     "Move 2. There is one elements in the last row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[1].name,
+    dragTarget.getRows(page)[1]["elements"][1].name,
     "q1",
     "Move 2. The first question is the last element in the first row"
   );
@@ -251,12 +251,12 @@ QUnit.test("Move panel startWithNewLine=false", function(assert) {
     "Move 1. No rows should be added"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]().length,
+    dragTarget.getRows(page)[2]["elements"].length,
     2,
     "Move 1. There are two elements in the last row"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]()[1].name,
+    dragTarget.getRows(page)[2]["elements"][1].name,
     "p1",
     "Move 1. The first panel is the last element"
   );
@@ -270,12 +270,12 @@ QUnit.test("Move panel startWithNewLine=false", function(assert) {
     "Move 1.1. No rows should be added"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]().length,
+    dragTarget.getRows(page)[2]["elements"].length,
     2,
     "Move 1.1. There are two elements in the last row"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]()[1].name,
+    dragTarget.getRows(page)[2]["elements"][1].name,
     "p1",
     "Move 1.1. The first panel is the last element"
   );
@@ -286,17 +286,17 @@ QUnit.test("Move panel startWithNewLine=false", function(assert) {
     "Move 2. No rows should be added"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]().length,
+    dragTarget.getRows(page)[1]["elements"].length,
     2,
     "Move 2. There are two elements in the second row"
   );
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]().length,
+    dragTarget.getRows(page)[2]["elements"].length,
     1,
     "Move 2. There is one elements in the last row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[1].name,
+    dragTarget.getRows(page)[1]["elements"][1].name,
     "p1",
     "Move 2. The first panel is the last element in the first row"
   );
@@ -390,7 +390,7 @@ QUnit.test("Move item in panel", function(assert) {
   );
   assert.equal(dragTarget.getRows(panel).length, 3, "There are 3 rows");
   assert.equal(
-    dragTarget.getRows(panel)[2]["koElements"]()[0].name,
+    dragTarget.getRows(panel)[2]["elements"][0].name,
     "q1",
     "Move 1. The 'q1' is in the last row"
   );
@@ -421,7 +421,7 @@ QUnit.test("Move new item in panel with one question", function(assert) {
   );
   assert.equal(dragTarget.getRows(panel).length, 2, "Move 0. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(panel)[0]["koElements"]()[0].name,
+    dragTarget.getRows(panel)[0]["elements"][0].name,
     "q2",
     "Move 0. The 'q1' is in the last row"
   );
@@ -432,7 +432,7 @@ QUnit.test("Move new item in panel with one question", function(assert) {
   );
   assert.equal(dragTarget.getRows(panel).length, 2, "Move 1. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(panel)[0]["koElements"]()[0].name,
+    dragTarget.getRows(panel)[0]["elements"][0].name,
     "q2",
     "Move 1. The 'q1' is in the last row"
   );
@@ -443,7 +443,7 @@ QUnit.test("Move new item in panel with one question", function(assert) {
   );
   assert.equal(dragTarget.getRows(panel).length, 2, "Move 1. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(panel)[1]["koElements"]()[0].name,
+    dragTarget.getRows(panel)[1]["elements"][0].name,
     "q2",
     "Move 1. The 'q1' is in the last row"
   );
@@ -529,7 +529,7 @@ QUnit.test("Move panel", function(assert) {
   assert.equal(dragTarget.moveTo(q1, false), true, "You can move a panel here");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 1. There are 3 rows");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "panel1",
     "Move 1. The panel is in the first row"
   );
@@ -537,7 +537,7 @@ QUnit.test("Move panel", function(assert) {
   assert.equal(dragTarget.moveTo(q1, true), true, "You can move a panel here");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 2. There are 3 rows");
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "panel1",
     "Move 2. The panel is in the first row"
   );
@@ -545,7 +545,7 @@ QUnit.test("Move panel", function(assert) {
   assert.equal(dragTarget.moveTo(q2, true), true, "You can move a panel here");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 3. There are 3 rows");
   assert.equal(
-    dragTarget.getRows(page)[2]["koElements"]()[0].name,
+    dragTarget.getRows(page)[2]["elements"][0].name,
     "panel1",
     "Move 3. The panel is in the first row"
   );
@@ -579,12 +579,12 @@ QUnit.test("Move panel, 2", function(assert) {
   assert.equal(dragTarget.moveTo(q1, true), true, "You can move a panel here");
   assert.equal(dragTarget.getRows(page).length, 2, "Move 1. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "q1",
     "Move 1. The q1 is in the first row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "panel1",
     "Move 1. The panel1 is in the last row"
   );
@@ -596,12 +596,12 @@ QUnit.test("Move panel, 2", function(assert) {
   );
   assert.equal(dragTarget.getRows(page).length, 2, "Move 2. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "q1",
     "Move 2. The q1 is in the first row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "panel1",
     "Move 2. The panel1 is in the last row"
   );
@@ -628,12 +628,12 @@ QUnit.test("Move existing panel, 1", function(assert) {
   assert.equal(dragTarget.moveTo(q1, false), true, "You can move a panel here");
   assert.equal(dragTarget.getRows(page).length, 3, "Move 2. There are 3 rows");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "panel1",
     "Move 2. The panel1 is in the first row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "q1",
     "Move 2. The q1 is in the second row"
   );
@@ -667,12 +667,12 @@ QUnit.test("Move question out of the panel", function(assert) {
   );
   assert.equal(dragTarget.getRows(page).length, 2, "Move 1. There are 2 rows");
   assert.equal(
-    dragTarget.getRows(page)[0]["koElements"]()[0].name,
+    dragTarget.getRows(page)[0]["elements"][0].name,
     "q1",
     "Move 1. The q1 is in the first row"
   );
   assert.equal(
-    dragTarget.getRows(page)[1]["koElements"]()[0].name,
+    dragTarget.getRows(page)[1]["elements"][0].name,
     "panel1",
     "Move 1. The panel1 is in the last row"
   );
