@@ -1,0 +1,59 @@
+.svd-translation-tab {
+  .svd-language-select {
+    & > div {
+      display: inline-block;
+      min-width: 200px;
+      &:nth-child(2) {
+        margin: 0 25px;
+      }
+    }
+  }
+  .form-group {
+    margin-top: 1em;
+  }
+
+  .svd-translation-no-strings {
+    min-height: 300px;
+    text-align: center;
+    line-height: 300px;
+    vertical-align: middle;
+    font-size: 40px;
+  }
+
+  .svd_custom_select {
+    max-width: 250px;
+    line-height: 2.44em;
+    height: 2.44em;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-style: solid;
+    font-size: 14px;
+    margin-bottom: 7px;
+    select {
+      padding-left: 20px;
+      min-width: 100px;
+      border: none;
+    }
+  }
+  .svd-translation-strings {
+    border-top-style: solid;
+    border-top-width: 1px;
+    padding: 10px;
+  }
+  .svd-translation-panel-strings {
+    padding: 10px;
+  }
+  .svd-translation-panel-strings-title {
+    font-size: 25px;
+    line-height: 25px;
+    padding: 5px 0;
+    & + svg-icon {
+      line-height: 25px;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+  .svd-toolbox-category-header {
+    margin-top: 20px;
+  }
+}
