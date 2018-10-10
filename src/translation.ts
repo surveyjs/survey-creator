@@ -511,8 +511,10 @@ export class Translation implements ITranslationLocales {
   }
   private updateAvailableTranlations() {
     var res = [];
-    var locales = Survey.surveyLocalization.locales;
-    for (var loc in locales) {
+    var locales = Survey.surveyLocalization.getLocales();
+    for (var i = 0; i < locales.length; i++) {
+      var loc = locales[i];
+      if (!loc) continue;
       if (this.hasLocale(loc)) continue;
       if (loc == this.defaultLocale) continue;
       res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
