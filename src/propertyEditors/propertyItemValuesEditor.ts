@@ -131,7 +131,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns,
+      () => this.columns,
       this.options,
       this.getItemValueClassName()
     );
@@ -141,7 +141,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
-      this.columns,
+      () => this.columns,
       this.options,
       this.getItemValueClassName()
     );
@@ -246,11 +246,11 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
 export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEditorItem {
   constructor(
     public item: Survey.ItemValue,
-    public columns: Array<SurveyNestedPropertyEditorColumn>,
+    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
     options: ISurveyObjectEditorOptions,
     private className: string = ""
   ) {
-    super(item, columns, options);
+    super(item, getColumns, options);
   }
   protected createSurveyQuestionEditor() {
     return new SurveyQuestionEditor(

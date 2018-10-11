@@ -43,7 +43,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     }
     return new SurveyPropertyMatrixDropdownColumnsItem(
       newColumn,
-      this.columns,
+      () => this.columns,
       this.options
     );
   }
@@ -51,7 +51,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     var newColumn = this.createEditorItemCore(item);
     return new SurveyPropertyMatrixDropdownColumnsItem(
       newColumn,
-      this.columns,
+      () => this.columns,
       this.options
     );
   }
@@ -85,10 +85,10 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
 export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropertyEditorItem {
   constructor(
     public column: Survey.MatrixDropdownColumn,
-    public columns: Array<SurveyNestedPropertyEditorColumn>,
+    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
     options: ISurveyObjectEditorOptions = null
   ) {
-    super(column, columns, options);
+    super(column, getColumns, options);
     var self = this;
     column.registerFunctionOnPropertyValueChanged(
       "cellType",

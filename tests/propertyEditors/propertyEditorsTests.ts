@@ -731,7 +731,7 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
   var itemValue = new Survey.ItemValue(null);
   var item = new SurveyPropertyItemValuesEditorItem(
     itemValue,
-    propertyEditor.columns,
+    () => propertyEditor.columns,
     null
   );
   assert.equal(item.cells.length, 2, "There are two cells");
@@ -1153,22 +1153,21 @@ QUnit.test(
 );
 
 QUnit.test("be able to modify empty items, bug#428", function(assert) {
-    var question = new Survey.QuestionMultipleText("q1");
-    var property = Survey.JsonObject.metaData.findProperty(
-      "multipletext",
-      "items"
-    );
-    var editor = new SurveyPropertyTextItemsEditor(property);
-    editor.onChanged = (newValue: any) => {
-      question.items = newValue;
-    };
-    editor.object = question;
-    editor.beforeShow();
-    editor.onAddClick();
-    editor.onApplyClick();
-    assert.equal(question.items.length, 1, "The item has been added");
-  }
-);
+  var question = new Survey.QuestionMultipleText("q1");
+  var property = Survey.JsonObject.metaData.findProperty(
+    "multipletext",
+    "items"
+  );
+  var editor = new SurveyPropertyTextItemsEditor(property);
+  editor.onChanged = (newValue: any) => {
+    question.items = newValue;
+  };
+  editor.object = question;
+  editor.beforeShow();
+  editor.onAddClick();
+  editor.onApplyClick();
+  assert.equal(question.items.length, 1, "The item has been added");
+});
 
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
