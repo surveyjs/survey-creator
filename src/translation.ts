@@ -210,7 +210,7 @@ export class TranslationGroup extends TranslationItemBase {
       !!val[0] &&
       !!val[0]["getType"] &&
       !!val[0]["setData"] &&
-      !!val[0]["hasText"]
+      !!val[0]["setLocText"]
     );
   }
   private createGroups(value: any, property: Survey.JsonObjectProperty) {

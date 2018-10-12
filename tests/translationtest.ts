@@ -241,19 +241,16 @@ QUnit.test("Filter by Page", function(assert) {
 QUnit.test("MultipleText question", function(assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("Page 1");
-  var question = <Survey.QuestionMultipleText>(
-    survey.pages[0].addNewQuestion("multipletext", "q1")
-  );
+  var question = new Survey.QuestionMultipleText("q1");
   question.addItem("i1", "item 1");
   question.addItem("i2", "item 2");
+  survey.pages[0].addQuestion(question);
   var translation = new Translation(survey);
   translation.filteredPage = <Survey.Page>survey.pages[0];
   var qGroup = translation.root.groups[0];
   assert.ok(qGroup, "question group is here");
-  var itemsGroup = qGroup.groups[0];
-  assert.ok(itemsGroup, "items group is here");
-  assert.equal(itemsGroup.items.length, 2, "There are two items");
-  assert.equal(itemsGroup.items[0].name, "title", "the name is i1");
+  assert.equal(qGroup.groups.length, 2, "There are 2 groups");
+  assert.equal(qGroup.groups[0].items[0].name, "title", "It is item title");
 });
 QUnit.test("Export to csv", function(assert) {
   var survey = new Survey.Survey({
