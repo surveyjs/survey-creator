@@ -209,7 +209,8 @@ export class TranslationGroup extends TranslationItemBase {
       val.length > 0 &&
       !!val[0] &&
       !!val[0]["getType"] &&
-      !!val[0]["setData"]
+      !!val[0]["setData"] &&
+      !!val[0]["hasText"]
     );
   }
   private createGroups(value: any, property: Survey.JsonObjectProperty) {

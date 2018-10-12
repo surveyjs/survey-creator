@@ -238,6 +238,23 @@ QUnit.test("Filter by Page", function(assert) {
     "There are two pages - survey is the root"
   );
 });
+QUnit.test("MultipleText question", function(assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("Page 1");
+  var question = <Survey.QuestionMultipleText>(
+    survey.pages[0].addNewQuestion("multipletext", "q1")
+  );
+  question.addItem("i1", "item 1");
+  question.addItem("i2", "item 2");
+  var translation = new Translation(survey);
+  translation.filteredPage = <Survey.Page>survey.pages[0];
+  var qGroup = translation.root.groups[0];
+  assert.ok(qGroup, "question group is here");
+  var itemsGroup = qGroup.groups[0];
+  assert.ok(itemsGroup, "items group is here");
+  assert.equal(itemsGroup.items.length, 2, "There are two items");
+  assert.equal(itemsGroup.items[0].name, "title", "the name is i1");
+});
 QUnit.test("Export to csv", function(assert) {
   var survey = new Survey.Survey({
     elements: [
