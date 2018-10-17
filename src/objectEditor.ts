@@ -114,19 +114,22 @@ export class SurveyObjectEditor {
       visibleProperties.push(properties[i]);
     }
     var sortEvent = function(
-      a: Survey.JsonObjectProperty,
-      b: Survey.JsonObjectProperty
+      a: SurveyObjectProperty,
+      b: SurveyObjectProperty
     ): number {
       var res = 0;
       if (self.onSortPropertyCallback) {
-        res = self.onSortPropertyCallback(self.selectedObject, a, b);
+        res = self.onSortPropertyCallback(
+          self.selectedObject,
+          a.property,
+          b.property
+        );
       }
       if (res) return res;
-      if (a.name == b.name) return 0;
-      if (a.name > b.name) return 1;
+      if (a.displayName == b.displayName) return 0;
+      if (a.displayName > b.displayName) return 1;
       return -1;
     };
-    visibleProperties = visibleProperties.sort(sortEvent);
     for (var i = 0; i < visibleProperties.length; i++) {
       var objectProperty = new SurveyObjectProperty(
         visibleProperties[i],
@@ -136,6 +139,7 @@ export class SurveyObjectEditor {
       objectProperty.editor.isInplaceProperty = true;
       objectProperties.push(objectProperty);
     }
+    objectProperties.sort(sortEvent);
     this.koProperties(objectProperties);
     var propEditor = this.getPropertyEditor("name");
     if (!propEditor && objectProperties.length > 0) {

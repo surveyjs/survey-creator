@@ -47,6 +47,7 @@ QUnit.test("Created properties on set selected Object", function(assert) {
     "maxWeight property"
   );
   assert.equal(editor.koProperties()[1].name, "name", "name property");
+  delete defaultStrings.p["maxWeight"];
 });
 QUnit.test("Custom sort properties", function(assert) {
   var editor = new SurveyObjectEditor();
@@ -59,6 +60,15 @@ QUnit.test("Custom sort properties", function(assert) {
 
   assert.equal(editor.koProperties().length, 3, "Two property object");
   assert.equal(editor.koProperties()[0].name, "name", "name property");
+});
+QUnit.test("Sort by displayName by default", function(assert) {
+  defaultStrings.p["maxWeight"] = "zzz maximum weight";
+  var editor = new SurveyObjectEditor();
+  editor.selectedObject = new Truck();
+
+  assert.equal(editor.koProperties().length, 3, "Three properties object");
+  assert.equal(editor.koProperties()[2].name, "maxWeight", "It is a last property, sort by display name");
+  delete defaultStrings.p["maxWeight"];
 });
 QUnit.test("Get Property Value", function(assert) {
   var editor = new SurveyObjectEditor();
