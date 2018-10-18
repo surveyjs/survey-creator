@@ -1175,11 +1175,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (parentPanel.elements.indexOf(question) !== -1) {
       this.surveyObjects.addElement(question, parentPanel);
     }
-    this.survey.render();
   }
   private doOnElementRemoved(question: Survey.Question) {
     this.surveyObjects.removeObject(question);
-    this.survey.render();
   }
   private doOnPanelAdded(panel: Survey.Panel, parentPanel: any) {
     if (!this.dragDropHelper.isMoving) {
@@ -1190,7 +1188,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (parentPanel.elements.indexOf(panel) !== -1) {
       this.surveyObjects.addElement(panel, parentPanel);
     }
-    this.survey.render();
   }
   private doOnPageAdded(page: Survey.Page) {
     if (this.isPageUpdating) return;
@@ -1202,7 +1199,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     obj: any,
     newValue: any
   ) {
-    var isDefault = property.isDefaultValue(newValue);
     var oldValue = obj[property.name];
     obj[property.name] = newValue;
     if (property.name == "name") {
@@ -1235,7 +1231,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     ) {
       this.selectedObjectEditorValue.objectChanged();
     }
-    this.survey.render();
     return null;
   }
   private doUndoRedo(item: UndoRedoItem) {
@@ -1854,7 +1849,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       question: question
     });
     this.survey.endLoadingFromJson();
-    this.survey.render();
   }
 
   //TODO why this is need ? (ko problem)
@@ -1938,7 +1932,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       type: "OBJECT_DELETED",
       target: obj
     });
-    this.survey.render();
   }
   private showLiveSurvey() {
     var self = this;
