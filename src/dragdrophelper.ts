@@ -14,265 +14,28 @@ export class DragDropTargetElement {
     public page: Survey.Page,
     public target: any,
     public source: any
-  ) {}
+  ) {
+    page.dragDropStart(source, target); //, DragDropTargetElement.nestedPanelPath);
+  }
   public moveTo(
     destination: any,
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
-    //console.log("dest: " + destination.name + ", isBottom:" + isBottom + ", isEdge:" + isEdge);
-    isEdge = isEdge || !destination.isPanel;
-    if (destination === this.target) return !this.target.isPanel;
-    var destInfo = this.findInfo(destination, isEdge);
-    if (!destInfo) {
-      this.clear();
-      return false;
-    }
-    var targetInfo = this.findInfo(this.target, true);
-    this.updateInfo(destInfo, isBottom, isEdge);
-    if (this.isInfoEquals(targetInfo, destInfo)) return true;
-    this.clearByInfo(targetInfo);
-    destInfo = this.findInfo(destination, isEdge);
-    if (!destInfo) return false;
-    this.updateInfo(destInfo, isBottom, isEdge);
-    if (!this.canMove(destInfo)) return false;
-    this.addInfo(destInfo);
-    return true;
+    return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
-    var destInfo = this.findInfo(this.target);
-    if (!destInfo) return;
-    var index = this.getIndexByInfo(destInfo);
-    var newElement = this.getNewTargetElement();
-    this.moveToParent = destInfo.panel;
-    this.moveToIndex = index;
-    destInfo.panel.addElement(newElement, index);
-    if (this.source) {
-      var srcInfo = this.findInfo(this.source, true);
-      var panel = srcInfo ? srcInfo.panel : this.page;
-      panel.removeElement(this.source);
-    }
-    return newElement;
+    this.clearCore();
+    return this.page.dragDropFinish();
   }
   public clear() {
-    this.clearByInfo(this.findInfo(this.target, true));
+    this.clearCore();
+    this.page.dragDropFinish(true);
   }
-  public getRows(pnl: Survey.PanelModelBase): Array<any> {
-    return !!pnl["koRows"] ? pnl["koRows"]() : pnl.rows;
-  }
-  protected setRows(pnl: Survey.PanelModelBase, rows: Array<any>) {
-    if (!!pnl["koRows"]) {
-      pnl["koRows"](rows);
-    } else {
-      pnl.setPropertyValue("rows", rows);
+  private clearCore() {
+    if (!!this.target) {
+      this.target["koIsDragging"](false);
     }
-  }
-  protected getRowElements(row: any): Array<any> {
-    return !!row["koElements"] ? row["koElements"]() : row.elements;
-  }
-  protected setRowElements(row: any, elements: Array<any>) {
-    if (!!row["koElements"]) {
-      row["koElements"](elements);
-    } else {
-      row.setPropertyValue("elements", elements);
-    }
-  }
-  private getIndexByInfo(info: any) {
-    if (!info) return 0;
-    var rows = this.getRows(info.panel);
-    var index = 0;
-    for (var i = 0; i < info.rIndex; i++) {
-      index += this.getRowElements(rows[i]).length;
-    }
-    return index + info.elIndex;
-  }
-  private canMove(destInfo: any): boolean {
-    if (this.target.isPanel && destInfo.element) {
-      if (
-        this.target == destInfo.element ||
-        this.target.containsElement(destInfo.element)
-      )
-        return false;
-      if (
-        this.source &&
-        (this.source == destInfo.element ||
-          this.source.containsElement(destInfo.element))
-      )
-        return false;
-    }
-    if (!this.source) return true;
-    var srcInfo = this.findInfo(this.source);
-    if (srcInfo == null || srcInfo.panel != destInfo.panel) return true;
-    var srcIndex = this.getIndexByInfo(srcInfo);
-    var destIndex = this.getIndexByInfo(destInfo);
-    var diff = destIndex - srcIndex;
-    return diff < 0 || diff > 1;
-  }
-  private isLastElementInRow(info: any) {
-    var rows = this.getRows(info.panel);
-    return info.elIndex == this.getRowElements(rows[info.rIndex]).length - 1;
-  }
-  private updateInfo(info: any, isBottom: boolean, isEdge: boolean) {
-    if (info.rIndex < 0) return;
-    if (this.target.startWithNewLine) {
-      if (isBottom) info.rIndex++;
-    } else {
-      if (isBottom) {
-        info.elIndex++;
-      } else {
-        if (info.elIndex == 0 && info.rIndex > 0) {
-          info.rIndex--;
-          var row = this.getRows(info.panel)[info.rIndex];
-          info.elIndex = this.getRowElements(row).length;
-        }
-      }
-    }
-  }
-  private addInfo(info: any) {
-    if (this.target.isPanel) {
-      this.target.parent = info.panel;
-    }
-    if (
-      this.target.startWithNewLine ||
-      info.elIndex < 1 ||
-      info.rIndex < 0 ||
-      info.rIndex >= this.getRows(info.panel).length
-    ) {
-      this.AddInfoAsRow(info);
-    } else {
-      var row = this.getRows(info.panel)[info.rIndex];
-      var elements = this.getRowElements(row);
-      if (info.elIndex < elements.length) {
-        elements.splice(info.elIndex, 0, this.target);
-      } else {
-        elements.push(this.target);
-      }
-      this.setRowElements(row, elements);
-      row.updateVisible();
-    }
-  }
-  private AddInfoAsRow(info: any) {
-    var row = new Survey.QuestionRow(info.panel);
-    row.addElement(this.target);
-    var rows = this.getRows(info.panel);
-    if (info.rIndex >= 0 && info.rIndex < this.getRows(info.panel).length) {
-      rows.splice(info.rIndex, 0, row);
-    } else {
-      rows.push(row);
-    }
-    this.setRows(info.panel, rows);
-  }
-  private clearByInfo(info: any) {
-    if (info == null) return;
-    var rows = this.getRows(info.panel);
-    if (info.rIndex < 0 || info.rIndex >= rows.length) return;
-    var row = rows[info.rIndex];
-    var elements = this.getRowElements(row);
-    if (elements.length > 1) {
-      elements.splice(info.elIndex, 1);
-      this.setRowElements(row, elements);
-      row.updateVisible();
-    } else {
-      rows.splice(info.rIndex, 1);
-      this.setRows(info.panel, rows);
-    }
-  }
-  private isInfoEquals(a: any, b: any): boolean {
-    if (a == null || b == null) return false;
-    return (
-      a.panel === b.panel && a.rIndex === b.rIndex && a.elIndex === b.elIndex
-    );
-  }
-  private findInfo(el: any, isEdge: boolean = false): any {
-    var res = this.findInfoInPanel(this.page, el, isEdge, el);
-    if (
-      res &&
-      this.target &&
-      this.target.isPanel &&
-      this.nestedPanelDepth > -1
-    ) {
-      var parents = this.getParentElements(res.panel);
-      if (this.nestedPanelDepth + 1 < parents.length) {
-        res.panel = parents[this.nestedPanelDepth];
-        res.element = parents[this.nestedPanelDepth + 1];
-      }
-    }
-    return res;
-  }
-  private getParentElements(panel: any): Array<any> {
-    var res = [];
-    while (panel) {
-      res.unshift(panel);
-      panel = panel.parent;
-    }
-    return res;
-  }
-
-  private findInfoInPanel(
-    panel: Survey.PanelModelBase,
-    el: any,
-    isEdge: boolean,
-    root: any
-  ): any {
-    if (el == panel) {
-      var parent = panel;
-      if (
-        panel.parent &&
-        (isEdge ||
-          (root &&
-            this.target &&
-            root.name == this.target.name &&
-            this.target.isPanel))
-      ) {
-        parent = panel.parent;
-      }
-      return { panel: parent, rIndex: 0, elIndex: 0, element: panel };
-    }
-    var rows = this.getRows(panel);
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      var elements = this.getRowElements(row);
-      for (var j = 0; j < elements.length; j++) {
-        var element = elements[j];
-        if (element.isPanel) {
-          var res = this.findInfoInPanel(element, el, isEdge, root);
-          if (res) {
-            if (res.element == element) {
-              res.rIndex = i;
-              res.elIndex = j;
-            }
-            return res;
-          }
-        }
-        if (element == el)
-          return { panel: panel, rIndex: i, elIndex: j, element: element };
-        //TODO refactor!!!
-        if (!element.isPanel) {
-          var childElements = this.getElements(element);
-          for (var k = 0; k < childElements.length; k++) {
-            if (childElements[k].isPanel) {
-              var res = this.findInfoInPanel(
-                childElements[k],
-                el,
-                isEdge,
-                root
-              );
-              if (res) return res;
-            }
-          }
-        }
-      }
-    }
-    return null;
-  }
-  private getNewTargetElement(): any {
-    var result = Survey.JsonObject.metaData.createClass(this.target.getType());
-    var json = new Survey.JsonObject().toJsonObject(this.target);
-    new Survey.JsonObject().toObject(json, result);
-    return result;
-  }
-  private getElements(element: any): Array<any> {
-    return SurveyHelper.getElements(element, true);
   }
 }
 
@@ -342,15 +105,14 @@ export class DragDropHelper {
   public startDragQuestion(event: DragEvent, element: any) {
     var json = new Survey.JsonObject().toJsonObject(element);
     json["type"] = element.getType();
-    this.prepareData(event, element.name, json);
-    this.ddTarget.source = element;
+    this.prepareData(event, element.name, json, element);
   }
   public startDragToolboxItem(
     event: DragEvent,
     elementName: string,
     elementJson: any
   ) {
-    this.prepareData(event, elementName, elementJson);
+    this.prepareData(event, elementName, elementJson, null);
     event.cancelBubble = true;
   }
   public isSurveyDragging(event: DragEvent): boolean {
@@ -542,14 +304,19 @@ export class DragDropHelper {
     }
     return result;
   }
-  private prepareData(event: DragEvent, elementName: string, json) {
+  private prepareData(
+    event: DragEvent,
+    elementName: string,
+    json: any,
+    source: Survey.IElement
+  ) {
     var str = DragDropHelper.dataStart + "questionname:" + elementName;
     this.setData(event, str);
     var targetElement = this.createTargetElement(elementName, json);
     this.ddTarget = new DragDropTargetElement(
       <Survey.Page>this.survey.currentPage,
       targetElement,
-      null
+      source
     );
     this.ddTarget.nestedPanelDepth = DragDropHelper.nestedPanelDepth;
   }
