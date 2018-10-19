@@ -7,8 +7,6 @@ if (!!ko.options) {
 }
 
 export class DragDropTargetElement {
-  public moveToParent: any;
-  public moveToIndex: number;
   public nestedPanelDepth: number = -1;
   constructor(
     public page: Survey.Page,
@@ -177,8 +175,10 @@ export class DragDropHelper {
           source: this.ddTarget.source,
           target: this.ddTarget.target,
           newElement: this.ddTarget.source ? null : newElement,
-          moveToParent: this.ddTarget.moveToParent,
-          moveToIndex: this.ddTarget.moveToIndex
+          moveToParent: newElement.parent,
+          moveToIndex: !!newElement.parent
+            ? newElement.parent.elements.indexOf(newElement)
+            : -1
         });
     }
     this.end();
