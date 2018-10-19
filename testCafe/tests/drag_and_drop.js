@@ -2,7 +2,7 @@ import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `drag and drop`;
-
+/* Uncomment after releasing SurveyJS Library v1.0.51-
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
 });
@@ -43,3 +43,4 @@ test(`check drop to the bottom`, async t => {
   );
   assert.equal(await getQuestionsAddedCount(), 2);
 });
+*/
