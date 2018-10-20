@@ -20,6 +20,7 @@ export class DragDropTargetElement {
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
+    //console.log(!!destination ? destination.name : "null");
     return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
@@ -132,24 +133,12 @@ export class DragDropHelper {
       this.isSamePlace(event, element)
     )
       return;
-
-    element = this.replaceTargetElement(element);
+    if (element.isPage && element.elements.length > 0) return;
 
     var bottomInfo = this.isBottom(event, element);
     isEdge = element.isPanel ? isEdge && bottomInfo.isEdge : true;
     if (element.isPanel && !isEdge && element.elements.length > 0) return;
     this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
-  }
-  public replaceTargetElement(element) {
-    if (
-      element.getType &&
-      element.getType() === "page" &&
-      element.elements.length !== 0
-    ) {
-      var elements = element.elements;
-      element = elements[elements.length - 1];
-    }
-    return element;
   }
   public end() {
     if (this.ddTarget) {
@@ -184,7 +173,7 @@ export class DragDropHelper {
     this.end();
   }
   public doLeavePage(event: DragEvent) {
-    this.ddTarget.clear();
+    this.ddTarget.moveTo(null, false);
   }
   public scrollToElement(el: HTMLElement) {
     if (!this.scrollableElement || !el) return;
