@@ -1848,7 +1848,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       type: "QUESTION_CHANGED_BY_EDITOR",
       question: question
     });
-    this.survey.endLoadingFromJson();
+    //question.endLoadingFromJson();
+    //this.survey.endLoadingFromJson();
   }
 
   //TODO why this is need ? (ko problem)

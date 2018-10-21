@@ -133,9 +133,15 @@ export class DragDropHelper {
       this.isSamePlace(event, element)
     )
       return;
-    if (element.isPage && element.elements.length > 0) return;
+    var bottomInfo = this.isBottom(event);
+    if (element.isPage && element.elements.length > 0) {
+      var lastEl = element.elements[element.elements.length - 1];
+      if (!this.isBottomThanElement(event, lastEl)) return;
+      element = lastEl;
+      bottomInfo.isEdge = true;
+      bottomInfo.isBottom = true;
+    }
 
-    var bottomInfo = this.isBottom(event, element);
     isEdge = element.isPanel ? isEdge && bottomInfo.isEdge : true;
     if (element.isPanel && !isEdge && element.elements.length > 0) return;
     this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
@@ -194,7 +200,7 @@ export class DragDropHelper {
     targetElement["koIsDragging"](true);
     return targetElement;
   }
-  private isBottom(event: DragEvent, surveyEl: any): any {
+  private isBottom(event: DragEvent): any {
     event = this.getEvent(event);
     var height = <number>event.currentTarget["clientHeight"];
     var y = event.offsetY;
@@ -208,6 +214,17 @@ export class DragDropHelper {
         y <= DragDropHelper.edgeHeight ||
         height - y <= DragDropHelper.edgeHeight
     };
+  }
+  private isBottomThanElement(event: DragEvent, lastEl: any): boolean {
+    var el = lastEl.renderedElement;
+    if (!el) return false;
+    event = this.getEvent(event);
+    var elY = <number>el.offsetTop + <number>el.clientHeight;
+    var y = event.offsetY;
+    if (event.hasOwnProperty("layerX")) {
+      y = event.layerY - <number>event.currentTarget["offsetTop"];
+    }
+    return y > elY;
   }
   private isSameCoordinates(event: DragEvent): boolean {
     var res =
