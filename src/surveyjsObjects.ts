@@ -404,3 +404,9 @@ questionPrototype["onSelectedElementChanged"] = function() {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
+
+Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function() {
+  (<any>this.question)["koVisibleChoices"].subscribe(() => {
+    (<any>this.question)["koElementType"].notifySubscribers();
+  });
+};
