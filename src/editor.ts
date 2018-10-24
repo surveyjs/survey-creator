@@ -457,8 +457,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
    * The event is fired on uploading the file. There are two properties in options: options.name options.callback.
-   * <br/> sender the survey object that fires the event
-   * name: name, file: file, accept: accept
+   * <br/> sender the survey editor object that fires the event
+   * <br/>  name: name, file: file, accept: accept
    * <br/> file the Javascript File object
    * <br/> callback called on upload complete
    * @see uploadFile
@@ -473,6 +473,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @see showTranslationTab
    */
   public onTranslationImported: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * Use this event to control drag&drop operations.
+   * <br/> sender the survey editor object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.allow set it to false to disable dragging.
+   * <br/> options.target a target element that is dragging.
+   * <br/> options.source a source element. It can be null, if it is a new element, dragging from toolbox.
+   * <br/> options.parent a page or panel where target element is dragging.
+   * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
+   * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
+   */
+  public onDragDropAllow: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
@@ -1417,15 +1432,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       this.renderedElement
     );
-    this.surveyValue()["getEditor"] = () => self;
-    this.surveyValue()["setJsonObject"](json); //TODO
+    this.surveyValue().getEditor = () => self;
+    this.surveyValue().setJsonObject(json);
     if (this.surveyValue().isEmpty) {
-      this.surveyValue()["setJsonObject"](this.getDefaultSurveyJson()); //TODO
+      this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
     }
-    this.surveyValue()["dragDropHelper"] = this.dragDropHelper;
+    this.surveyValue().dragDropHelper = this.dragDropHelper;
     this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
     };
+    this.surveyValue().onDragDropAllow.add(function(sender, options) {
+      options.survey = sender;
+      self.onDragDropAllow.fire(self, options);
+    });
     this.surveyValue().onGetMenuItems.add((sender, options) => {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
