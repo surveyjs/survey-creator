@@ -335,10 +335,10 @@ export class Translation implements ITranslationLocales {
       : Survey.surveyLocalization.defaultLocale;
   }
   public getLocaleName(loc: string) {
-    if (!loc) {
-      loc = this.defaultLocale;
-    }
-    return editorLocalization.getLocaleName(loc);
+    //if (!loc) {
+    //  loc = this.defaultLocale;
+    //}
+    return editorLocalization.getLocaleName(loc, this.defaultLocale);
   }
   public hasLocale(locale: string): boolean {
     var locales = this.koLocales();

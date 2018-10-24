@@ -27,13 +27,16 @@ export var editorLocalization = {
     }
     return true;
   },
-  getLocaleName: function(loc: string): string {
+  getLocaleName: function(loc: string, defaultLocale: string = null): string {
     var localeNames = Survey.surveyLocalization["localeNames"];
+    if (!defaultLocale) {
+      defaultLocale = Survey.surveyLocalization.defaultLocale;
+    }
     return !!loc
       ? localeNames[loc]
       : editorLocalization
           .getString("ed.defaultLocale")
-          ["format"](localeNames[Survey.surveyLocalization.defaultLocale]);
+          ["format"](localeNames[defaultLocale]);
   },
   getPropertyName: function(strName: string, locale: string = null) {
     var obj = this.getProperty(strName, locale);

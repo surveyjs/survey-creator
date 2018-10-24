@@ -193,13 +193,17 @@ QUnit.test("Question validators name", function(assert) {
 QUnit.test("Default locale name", function(assert) {
   var survey = new Survey.Survey();
   var translation = new Translation(survey);
-  assert.equal(translation.getLocaleName(""), "english", "Default is english");
+  assert.equal(
+    translation.getLocaleName(""),
+    "Default (english)",
+    "Default is english"
+  );
   survey = new Survey.Survey();
   survey.locale = "de";
   translation.survey = survey;
   assert.equal(
     translation.getLocaleName(""),
-    "deutsch",
+    "Default (deutsch)",
     "Default is deutsch now"
   );
 });
