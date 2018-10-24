@@ -35,13 +35,15 @@ import { SurveyPropertyCustomEditor } from "../../src/propertyEditors/propertyCu
 import { Extentions } from "../../src/extentions";
 import {
   SurveyPropertyEditorFactory,
-  SurveyDropdownPropertyEditor
+  SurveyDropdownPropertyEditor,
+  SurveyStringPropertyEditor
 } from "../../src/propertyEditors/propertyEditorFactory";
 import { defaultStrings } from "../../src/editorLocalization";
 
 export default QUnit.module("PropertyEditorsTests");
 
 class EditorOptionsTests implements ISurveyObjectEditorOptions {
+  doValueChangingCallback: (options: any) => any;
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
@@ -73,7 +75,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     event: KeyboardEvent
   ) {}
-  onValueChangingCallback(options: any) {}
+  onValueChangingCallback(options: any) {
+    if (!!this.doValueChangingCallback) this.doValueChangingCallback(options);
+  }
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -1167,6 +1171,25 @@ QUnit.test("be able to modify empty items, bug#428", function(assert) {
   editor.onAddClick();
   editor.onApplyClick();
   assert.equal(question.items.length, 1, "The item has been added");
+});
+
+QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  var property = Survey.JsonObject.metaData.findProperty("question", "title");
+  var stringProperty = new SurveyStringPropertyEditor(property);
+  stringProperty.beforeShow();
+  stringProperty.onChanged = (newValue: any) => {
+    question.title = newValue;
+  };
+  stringProperty.object = question;
+  var options = new EditorOptionsTests();
+  options.doValueChangingCallback = function(options) {
+    options.newValue = options.value.trim();
+  };
+  stringProperty.options = options;
+  stringProperty.koValue(" ss   ");
+  stringProperty.apply();
+  assert.equal(question.title, "ss", "The value has been trimmed");
 });
 
 function createSurvey(): Survey.Survey {

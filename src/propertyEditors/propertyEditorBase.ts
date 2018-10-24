@@ -326,7 +326,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       };
       this.options.onValueChangingCallback(options);
       if (!this.isValueEmpty(options.newValue)) {
-        this.koValue(options.newValue);
+        newValue = options.newValue;
+        this.koValue(newValue);
       }
       if (options.doValidation) {
         this.hasError();
