@@ -77,7 +77,8 @@ export var enStrings = {
     translationShowAllPages: "Show all pages",
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
-    translationImportFromSCVButton: "Import from CSV"
+    translationImportFromSCVButton: "Import from CSV",
+    translationMergeLocaleWithDefault: "Merge {0} with default locale"
   },
   //Property names in table headers
   pel: {
