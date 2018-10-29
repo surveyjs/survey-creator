@@ -2,7 +2,7 @@
     <div data-bind="visible: koIsRunning() && koPages().length > 1">
         <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
         <span id="testSurveyPageChanged">
-            <select class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+            <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
         </span>
     </div>
     <survey-widget params="survey: koSurvey"></survey-widget>

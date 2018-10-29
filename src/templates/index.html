@@ -93,7 +93,7 @@
                 data-bind="visible: koShowPropertyGrid">
                 <div class="svd_object_selector svd-light-border-color">
                     <div class="svd_custom_select">
-                        <select id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
+                        <select onmousewheel="return false;" id="objectSelector" class="form-control" data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"></select>
                     </div>
                     <span data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}">
                         <svg-icon class="svd-primary-icon icon-edit" params="iconName: 'icon-edit', size:24"></svg-icon>

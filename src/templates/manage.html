@@ -2,7 +2,7 @@
     <div class="svd-manage">
         <div class="svd-manage-mask" data-bind="visible: isLoading"></div>
         <div class="svd-manage-control svd-light-border-color">
-            <select class="svd-manage-select" data-bind="visible: !isEditMode(), options: surveys,
+            <select onmousewheel="return false;" class="svd-manage-select" data-bind="visible: !isEditMode(), options: surveys,
                         optionsText: 'name',
                         value: currentSurvey,
                         optionsCaption: 'Choose survey to edit or start editing and survey will be saved automatically...'"></select>
