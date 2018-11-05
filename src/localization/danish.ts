@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization } from "../editorLocalization";
 
 export var danishStrings = {
   //survey templates
