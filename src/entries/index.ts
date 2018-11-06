@@ -112,6 +112,7 @@ export { SurveysManager } from "../manage";
 export { StylesManager } from "../stylesmanager";
 
 //editorLocalization
+import "../localization/danish";
 import "../localization/french";
 import "../localization/german";
 import "../localization/italian";
