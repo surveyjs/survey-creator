@@ -60,6 +60,15 @@ ko.components.register("item-editor", {
         params.name
       );
       model.valueChanged = newValue => {
+        var options = {
+          propertyName: property.name,
+          obj: params.model,
+          value: newValue,
+          newValue: null,
+          doValidation: false
+        };
+        params.editor.onValueChangingCallback(options);
+        newValue = options.newValue === null ? options.value : options.newValue;
         params.target[params.name] = newValue;
         params.editor.onPropertyValueChanged(property, params.target, newValue);
       };

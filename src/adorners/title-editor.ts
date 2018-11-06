@@ -9,21 +9,23 @@ var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.ht
 const FRIENDLY_PADDING = 36;
 function resizeInput(target) {
   let computedStyle = window.getComputedStyle(target);
-  target.style.width = (getTextWidth(target.value, computedStyle.font) + FRIENDLY_PADDING) + 'px';
+  target.style.width =
+    getTextWidth(target.value, computedStyle.font) + FRIENDLY_PADDING + "px";
 }
 
 /**
  * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
- * 
+ *
  * @param {String} text The text to be rendered.
  * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
- * 
+ *
  * @see https://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
  */
 let cachedCanvas;
 function getTextWidth(text, font) {
   // re-use canvas object for better performance
-  var canvas = cachedCanvas || (cachedCanvas = document.createElement("canvas"));
+  var canvas =
+    cachedCanvas || (cachedCanvas = document.createElement("canvas"));
   var context = canvas.getContext("2d");
   context.font = font;
   var metrics = context.measureText(text);
@@ -116,6 +118,15 @@ ko.components.register("title-editor", {
         params.name
       );
       model.valueChanged = newValue => {
+        var options = {
+          propertyName: property.name,
+          obj: params.model,
+          value: newValue,
+          newValue: null,
+          doValidation: false
+        };
+        params.editor.onValueChangingCallback(options);
+        newValue = options.newValue === null ? options.value : options.newValue;
         params.model[params.name] = newValue;
         params.editor.onPropertyValueChanged(property, params.model, newValue);
       };

@@ -74,6 +74,15 @@ ko.components.register("image-item-editor", {
       model.valueChanged = files => {
         if (!files[0]) return;
         params.editor.uploadFiles(files, (_, link) => {
+          var options = {
+            propertyName: property.name,
+            obj: params.model,
+            value: link,
+            newValue: null,
+            doValidation: false
+          };
+          params.editor.onValueChangingCallback(options);
+          link = options.newValue === null ? options.value : options.newValue;
           params.target[params.name] = link;
           params.editor.onPropertyValueChanged(property, params.target, link);
         });
@@ -170,6 +179,15 @@ export var imageItemsAdorner = {
           "imageLink"
         );
         editor.uploadFiles(files, (_, link) => {
+          var options = {
+            propertyName: property.name,
+            obj: itemValue,
+            value: link,
+            newValue: null,
+            doValidation: false
+          };
+          editor.onValueChangingCallback(options);
+          link = options.newValue === null ? options.value : options.newValue;
           itemValue["imageLink"] = link;
           editor.onPropertyValueChanged(property, itemValue, link);
         });
