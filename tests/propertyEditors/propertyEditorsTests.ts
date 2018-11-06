@@ -321,8 +321,8 @@ QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   );
   assert.equal(
     editor.koItems()[2].cells[1].koValue(),
-    "",
-    "Text of 3-th item is empty"
+    "3",
+    "Text of 3-th item same as value"
   );
   assert.equal(
     editor.koItems()[3].cells[0].koValue(),
@@ -331,8 +331,8 @@ QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   );
   assert.equal(
     editor.koItems()[3].cells[1].koValue(),
-    "",
-    "Text of 4-th item is empty"
+    "i4",
+    "Text of 4-th item same as value"
   );
   editor.koActiveView("text");
   editor.koItemsText("1|item1");
