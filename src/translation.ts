@@ -270,6 +270,7 @@ export class Translation implements ITranslationLocales {
   public koMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefaultText: any;
   public importFinishedCallback: () => void;
+  public availableTranlationsChangedCallback: () => void;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
@@ -552,6 +553,8 @@ export class Translation implements ITranslationLocales {
     }
     this.koSelectedLanguageToAdd(null);
     this.koAvailableLanguages(res);
+    !!this.availableTranlationsChangedCallback &&
+      this.availableTranlationsChangedCallback();
   }
   private updateFilteredPages() {
     var res = [{ value: null, text: this.showAllPagesText }];

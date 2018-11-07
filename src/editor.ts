@@ -296,6 +296,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> options.source: the source dragged object
    * <br/> options.target: the drop target
    * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
+   * <br/>
+   * <br/> options.type: "TRANSLATIONS_CHANGED"
    */
   public onModified: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -648,6 +650,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.translationValue = new Translation(new Survey.Survey());
     this.translation.importFinishedCallback = function() {
       self.onTranslationImported.fire(self, {});
+    };
+    this.translation.availableTranlationsChangedCallback = () => {
+      this.setModified({ type: "TRANSLATIONS_CHANGED" });
     };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
