@@ -28,7 +28,7 @@ export class SurveyLiveTester {
     this.selectPageClick = function(pageItem) {
       if (self.survey) {
         if (self.survey.state == "starting") {
-          self.survey["start"](); //TODO
+          self.survey.start();
         }
         self.survey.currentPage = pageItem.page;
       }
@@ -58,24 +58,24 @@ export class SurveyLiveTester {
         self.surveyResultsText + JSON.stringify(self.survey.data)
       );
     });
-    //TODO
-    if (this.survey["onStarted"]) {
-      this.survey["onStarted"].add((sender: Survey.Survey) => {
-        self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
-      });
-    }
+    this.survey.onStarted.add((sender: Survey.Survey) => {
+      self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
+    });
     this.survey.onCurrentPageChanged.add((sender: Survey.Survey, options) => {
       self.koActivePage(options.newCurrentPage);
       self.setActivePageItem(options.oldCurrentPage, false);
       self.setActivePageItem(options.newCurrentPage, true);
     });
     this.survey.onPageVisibleChanged.add((sender: Survey.Survey, options) => {
-      var item = self.getPageItemByPage(options.page);
-      if (item) {
-        item.koVisible(options.visible);
-        item.koDisabled(!options.visible);
-      }
+      self.updatePageItem(options.page);
     });
+  }
+  private updatePageItem(page: Survey.Page) {
+    var item = this.getPageItemByPage(page);
+    if (item) {
+      item.koVisible(page.isVisible);
+      item.koDisabled(!page.isVisible);
+    }
   }
   public show() {
     var pages = [];
@@ -104,6 +104,9 @@ export class SurveyLiveTester {
   }
   public get selectPageText() {
     return editorLocalization.getString("ts.selectPage");
+  }
+  public get showInvisibleElementsText() {
+    return editorLocalization.getString("ts.showInvisibleElements");
   }
   private testAgain() {
     this.setJSON(this.json);

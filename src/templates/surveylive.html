@@ -1,11 +1,20 @@
 <script type="text/html" id="surveylive">
-    <div data-bind="visible: koIsRunning() && koPages().length > 1">
-        <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
-        <span id="testSurveyPageChanged">
-            <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+    <div data-bind="visible: koIsRunning()">
+        <span data-bind="visible: koPages().length > 1">
+            <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
+            <span id="testSurveyPageChanged">
+                <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+            </span>
         </span>
+        <label>
+            <div class="sjs-cb-container">
+                <input class="svd_editor_control" type="checkbox" data-bind="checked: survey.showInvisibleElements">
+                <span class="checkmark" data-bind="css: { 'svd-main-background-color': survey.showInvisibleElements, 'svd-light-background-color': !survey.showInvisibleElements }"></span>
+                <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
+            </div>
+         </label>
     </div>
     <survey-widget params="survey: koSurvey"></survey-widget>
     <div data-bind="text: koResultText, visible: koIsRunning() == false"></div>
-    <button data-bind="visible: koIsRunning() == false, click:selectTestClick, text: testSurveyAgainText">Test Again</button>
+    <button data-bind="visible: koIsRunning() == false, click:selectTestClick, text: testSurveyAgainText"></button>
 </script>

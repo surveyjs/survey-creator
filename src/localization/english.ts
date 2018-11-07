@@ -341,7 +341,8 @@ export var enStrings = {
   },
   //Test Survey
   ts: {
-    selectPage: "Select the page to test it:"
+    selectPage: "Select the page to test it:",
+    showInvisibleElements: "Show invisible elements"
   },
   validators: {
     answercountvalidator: "answer count",
