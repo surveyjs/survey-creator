@@ -209,11 +209,11 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .icon-gearactive .svd-svg-icon":
       "fill: $primary-color;",
     ".svd_container.sv_bootstrap_css .nav-tabs a":
-      "color: $primary-text-color !important;",
+      "color: $primary-text-color;",
     ".svd_container.sv_bootstrap_css .nav-tabs > li.active > a":
-      "color: $primary-color !important;",
+      "color: $primary-color;",
     ".svd_container.sv_bootstrap_css .nav-item.active .nav-link":
-      "background-color: $primary-bg-color !important;",
+      "background-color: $primary-bg-color;",
 
     ".svd_container.sv_bootstrap_css .sjs-cb-container:hover input ~ .checkmark":
       "background-color: $dd-menu-border",
@@ -239,11 +239,11 @@ export class StylesManager {
       "border-bottom: 1px solid $primary-bg-color;",
 
     ".svd_container.sv_bootstrap_css .editor-tabs > li > a:hover":
-      "background-color: $secondary-bg-color !important; border-bottom: 1px solid $secondary-bg-color !important;",
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color;",
     ".svd_container.sv_bootstrap_css .editor-tabs > li > a:focus":
-      "background-color: $secondary-bg-color !important; border-bottom: 1px solid $secondary-bg-color !important",
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color",
     ".svd_container.sv_bootstrap_css .editor-tabs > li.active > a":
-      "color: $primary-color !important; background-color: $secondary-bg-color !important; border: 1px solid $primary-border-color !important; border-bottom-color: $secondary-bg-color !important;",
+      "color: $primary-color; background-color: $secondary-bg-color; border: 1px solid $primary-border-color; border-bottom-color: $secondary-bg-color;",
 
     ".svd_container.sv_bootstrap_css .svd-light-border-color":
       "border-color: $primary-border-color",
@@ -259,13 +259,13 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .modal-tabs":
       "background: transparent; padding-bottom: 10px;",
     ".svd_container.sv_bootstrap_css .modal-tabs > li > a":
-      "color: $primary-text-color !important; border: 1px solid transparent !important;",
+      "color: $primary-text-color; border: 1px solid transparent;",
     ".svd_container.sv_bootstrap_css .modal-tabs > li > a:hover":
-      "color: $primary-color !important; border-bottom: 1px solid $inverted-text-color !important;",
+      "color: $primary-color; border-bottom: 1px solid $inverted-text-color;",
     ".svd_container.sv_bootstrap_css .modal-tabs > li > a:focus":
-      "$primary-color !important; border-bottom: 1px solid $inverted-text-color !important;",
+      "$primary-color; border-bottom: 1px solid $inverted-text-color;",
     ".svd_container.sv_bootstrap_css .modal-tabs > li.active > a":
-      "color: $primary-color !important; border: 1px solid $primary-border-color !important; border-bottom-color: $inverted-text-color !important;",
+      "color: $primary-color; border: 1px solid $primary-border-color; border-bottom-color: $inverted-text-color;",
 
     ".svd_container.sv_bootstrap_css .form-group.is-focused .form-control":
       "background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#D2D2D2, #D2D2D2);",
