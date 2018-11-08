@@ -44,7 +44,9 @@ export class SurveyLiveTester {
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
     this.koActiveLanguage.subscribe(function(newValue) {
+      if (self.survey.locale == newValue) return;
       self.survey.locale = newValue;
+      self.koSurvey(self.survey);
     });
     this.survey = new Survey.Survey();
     this.koSurvey = ko.observable(this.survey);
