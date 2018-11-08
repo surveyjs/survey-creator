@@ -29,7 +29,7 @@ test(`showJSONEditorTab`, async t => {
   await addItem();
 
   const tab = await getTestTab();
-  const dropdown = Selector("#surveyjsExample select").nth(1);
+  const dropdown = Selector("#surveyjsExample select").nth(2);
   const optionCuba = dropdown.find("option[value=Cuba]");
 
   await t
