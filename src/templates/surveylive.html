@@ -6,6 +6,12 @@
                 <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
             </span>
         </span>
+         <span>
+            <label  for="testSurveyLocale" data-bind="text: localeText"></label>
+            <span id="testSurveyLocale">
+                <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
+            </span>
+        </span>
         <label>
             <div class="sjs-cb-container">
                 <input class="svd_editor_control" type="checkbox" data-bind="checked: survey.showInvisibleElements">

@@ -14,6 +14,8 @@ export class SurveyLiveTester {
   koPages: any;
   koActivePage: any;
   setPageDisable: any;
+  koLanguages: any;
+  koActiveLanguage: any;
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor() {
@@ -39,6 +41,11 @@ export class SurveyLiveTester {
     this.setPageDisable = function(option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
+    this.koLanguages = ko.observable(this.getLanguages());
+    this.koActiveLanguage = ko.observable("");
+    this.koActiveLanguage.subscribe(function(newValue) {
+      self.survey.locale = newValue;
+    });
     this.survey = new Survey.Survey();
     this.koSurvey = ko.observable(this.survey);
   }
@@ -94,6 +101,7 @@ export class SurveyLiveTester {
     this.koPages(pages);
     this.koSurvey(this.survey);
     this.koActivePage(this.survey.currentPage);
+    this.koActiveLanguage(this.survey.locale);
     this.koIsRunning(true);
   }
   public get testSurveyAgainText() {
@@ -107,6 +115,9 @@ export class SurveyLiveTester {
   }
   public get showInvisibleElementsText() {
     return editorLocalization.getString("ts.showInvisibleElements");
+  }
+  public get localeText() {
+    return editorLocalization.getString("pe.locale");
   }
   private testAgain() {
     this.setJSON(this.json);
@@ -124,5 +135,14 @@ export class SurveyLiveTester {
       if (items[i].page === page) return items[i];
     }
     return null;
+  }
+  private getLanguages(): Array<any> {
+    var res = [];
+    var locales = Survey.surveyLocalization.getLocales();
+    for (var i = 0; i < locales.length; i++) {
+      var loc = locales[i];
+      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
+    }
+    return res;
   }
 }
