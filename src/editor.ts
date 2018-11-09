@@ -375,6 +375,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * Use this event to modify the survey that used on setting value for condition/expression properties, like visibleIf, enableIf and so on.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.editor the instance of Property Editor.
+   * <br/> options.valueQuestionName the name of the question that shows in the survey for choosing the value
+   * <br/> options.survey the instance of the survey that allows to choose the value. You may modify it before it shows to the end-user
+   */
+  public onConditionValueSurveyCreated: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * Use this event to process key down event in a property editor
    * <br/> sender the survey editor object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
@@ -2099,6 +2112,22 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;
+  }
+  onConditionValueSurveyCreatedCallBack(
+    valueQuestionName: string,
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    survey: Survey.Survey
+  ) {
+    var options = {
+      valueQuestionName: valueQuestionName,
+      propertyName: propertyName,
+      obj: obj,
+      editor: editor,
+      survey: survey
+    };
+    this.onConditionValueSurveyCreated.fire(this, options);
   }
   /**
    * Upload the files on a server

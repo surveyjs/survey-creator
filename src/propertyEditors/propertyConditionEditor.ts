@@ -178,10 +178,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var json = this.getQuestionConditionJson(questionName, operator);
     this.koHasValueSurvey(!!json && !!json.type);
     if (this.koHasValueSurvey()) {
-      this.koValueSurvey(this.createValueSurvey(json));
+      this.koValueSurvey(this.createValueSurvey(json, questionName));
     }
   }
-  private createValueSurvey(qjson: any): Survey.Survey {
+  private createValueSurvey(qjson: any, questionName: string): Survey.Survey {
     qjson.name = "question";
     qjson.title = editorLocalization.editorLocalization.getString(
       "pe.conditionValueQuestionTitle"
@@ -203,6 +203,16 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         self.koAddConditionValue(JSON.stringify(options.value));
       }
     });
+    if (this.options) {
+      var propName = !!this.property ? this.property.name : "";
+      this.options.onConditionValueSurveyCreatedCallBack(
+        questionName,
+        propName,
+        this.object,
+        this,
+        survey
+      );
+    }
     return survey;
   }
   private getQuestionByName(questionName: string): Survey.Question {

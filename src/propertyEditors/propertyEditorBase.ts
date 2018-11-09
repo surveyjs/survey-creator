@@ -43,6 +43,13 @@ export interface ISurveyObjectEditorOptions {
     obj: Survey.Base
   ): any;
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string;
+  onConditionValueSurveyCreatedCallBack(
+    valueQuestionName: string,
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    survey: Survey.Survey
+  );
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
@@ -200,9 +207,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   protected checkForErrors(): boolean {
     var errorText = "";
-    if (
-      this.isRequired || this.checkForItemValue()
-    ) {
+    if (this.isRequired || this.checkForItemValue()) {
       var er = this.isCurrentValueEmpty;
       if (er) {
         errorText = this.getLocString("pe.propertyIsEmpty");
@@ -225,7 +230,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   private checkForItemValue() {
     //TODO Problem is in 882ca3ac commit. ItemValue without value should be invalid. Need to better fix for the problem.
-    return this.property && this.property.name === "value" && this.objectValue && typeof this.objectValue.getType === "function" && this.objectValue.getType() === "itemvalue"
+    return (
+      this.property &&
+      this.property.name === "value" &&
+      this.objectValue &&
+      typeof this.objectValue.getType === "function" &&
+      this.objectValue.getType() === "itemvalue"
+    );
   }
   public get isRequired(): boolean {
     return this.isRequriedValue;

@@ -67,7 +67,11 @@ QUnit.test("Sort by displayName by default", function(assert) {
   editor.selectedObject = new Truck();
 
   assert.equal(editor.koProperties().length, 3, "Three properties object");
-  assert.equal(editor.koProperties()[2].name, "maxWeight", "It is a last property, sort by display name");
+  assert.equal(
+    editor.koProperties()[2].name,
+    "maxWeight",
+    "It is a last property, sort by display name"
+  );
   delete defaultStrings.p["maxWeight"];
 });
 QUnit.test("Get Property Value", function(assert) {
@@ -220,7 +224,11 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     itemValue.value = "item" + (itemValues.length + 1);
     this.propertyName = propertyName;
   }
-  onMatrixDropdownColumnAddedCallback(matrix: Survey.Question, column: Survey.MatrixDropdownColumn, columns: Array<Survey.MatrixDropdownColumn>) {
+  onMatrixDropdownColumnAddedCallback(
+    matrix: Survey.Question,
+    column: Survey.MatrixDropdownColumn,
+    columns: Array<Survey.MatrixDropdownColumn>
+  ) {
     column.name = "column1";
     matrix["columnCount"] = columns.length;
   }
@@ -264,6 +272,13 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;
   }
+  onConditionValueSurveyCreatedCallBack(
+    valueQuestionName: string,
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    survey: Survey.Survey
+  ) {}
 }
 
 QUnit.test("On new ItemValue added", function(assert) {
