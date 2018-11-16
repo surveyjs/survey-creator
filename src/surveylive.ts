@@ -5,24 +5,22 @@ import * as Survey from "survey-knockout";
 
 export class SurveyLiveTester {
   private json: any;
-  koIsRunning: any;
+  koIsRunning = ko.observable(true);
   selectTestClick: any;
   selectPageClick: any;
-  koResultText: any;
+  koResultText = ko.observable("");
+  koResultData = ko.observableArray();
+  koResultViewType = ko.observable("table");
   survey: Survey.Survey;
   koSurvey: any;
-  koPages: any;
-  koActivePage: any;
+  koPages = ko.observableArray([]);
+  koActivePage = ko.observable(null);
   setPageDisable: any;
   koLanguages: any;
   koActiveLanguage: any;
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor() {
-    this.koIsRunning = ko.observable(true);
-    this.koResultText = ko.observable("");
-    this.koPages = ko.observableArray([]);
-    this.koActivePage = ko.observable(null);
     var self = this;
     this.selectTestClick = function() {
       self.testAgain();
@@ -63,8 +61,14 @@ export class SurveyLiveTester {
     var self = this;
     this.survey.onComplete.add((sender: Survey.Survey) => {
       self.koIsRunning(false);
-      self.koResultText(
-        self.surveyResultsText + JSON.stringify(self.survey.data)
+      self.koResultText(JSON.stringify(self.survey.data, null, 4));
+      self.koResultData(
+        self.survey.getPlainData().map((dataItem: any) => {
+          if (dataItem.isNode) {
+            dataItem.collapsed = ko.observable(true);
+          }
+          return dataItem;
+        })
       );
     });
     this.survey.onStarted.add((sender: Survey.Survey) => {
@@ -112,11 +116,29 @@ export class SurveyLiveTester {
   public get surveyResultsText() {
     return editorLocalization.getString("ed.surveyResults");
   }
+  public get resultsTitle() {
+    return editorLocalization.getString("ed.resultsTitle");
+  }
+  public get resultsName() {
+    return editorLocalization.getString("ed.resultsName");
+  }
+  public get resultsValue() {
+    return editorLocalization.getString("ed.resultsValue");
+  }
+  public get resultsDisplayValue() {
+    return editorLocalization.getString("ed.resultsDisplayValue");
+  }
   public get selectPageText() {
     return editorLocalization.getString("ts.selectPage");
   }
   public get showInvisibleElementsText() {
     return editorLocalization.getString("ts.showInvisibleElements");
+  }
+  public selectTableClick(model: SurveyLiveTester) {
+    model.koResultViewType("table");
+  }
+  public selectJsonClick(model: SurveyLiveTester) {
+    model.koResultViewType("text");
   }
   public get localeText() {
     return editorLocalization.getString("pe.locale");
