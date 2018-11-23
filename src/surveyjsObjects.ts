@@ -406,7 +406,8 @@ questionPrototype["onSelectedElementChanged"] = function() {
 };
 
 Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function() {
-  (<any>this.question)["koVisibleChoices"].subscribe(() => {
-    (<any>this.question)["koElementType"].notifySubscribers();
+  var q: any = this.question;
+  this.question.registerFunctionOnPropertyValueChanged("choices", function() {
+    q["koElementType"].notifySubscribers();
   });
 };
