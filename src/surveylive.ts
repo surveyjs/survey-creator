@@ -34,7 +34,9 @@ export class SurveyLiveTester {
       }
     };
     this.koActivePage.subscribe(function(newValue) {
-      self.survey.currentPage = newValue;
+      if (!!newValue) {
+        self.survey.currentPage = newValue;
+      }
     });
     this.setPageDisable = function(option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
