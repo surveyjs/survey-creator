@@ -83,7 +83,8 @@ export class SurveyQuestionEditorDefinition {
       title: "Rules",
       tabs: [
         { name: "general", visible: false },
-        { name: "visibleIf", visible: true }
+        { name: "visibleIf", visible: true },
+        { name: "enableIf", visible: true }
       ]
     },
     "itemvalues@rows": {
