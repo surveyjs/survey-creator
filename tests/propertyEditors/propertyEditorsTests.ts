@@ -299,7 +299,9 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
 });
 QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   var choices = [{ value: 1, text: "item1" }, { value: 2 }];
-  var editor = new SurveyPropertyItemValuesEditor(null);
+  var editor = new SurveyPropertyItemValuesEditor(
+    Survey.JsonObject.metaData.findProperty("selectbase", "choices")
+  );
   editor.beforeShow();
   editor.editingValue = choices;
   editor.onChanged = (newValue: Array<Survey.ItemValue>) => {
@@ -550,9 +552,7 @@ QUnit.test(
     Survey.JsonObject.metaData.addClass(
       "itemvalues_ex",
       ["imageLink"],
-      function() {
-        return new Survey.ItemValue(null);
-      },
+      null,
       "itemvalue"
     );
     var property = new Survey.JsonObjectProperty("test");
