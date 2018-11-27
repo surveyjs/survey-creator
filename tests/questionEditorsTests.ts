@@ -34,7 +34,7 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
   );
   assert.equal(
     tab.properties.rows[0].properties[0].editor.editorType,
-    "itemvalues",
+    "itemvalue[]",
     "create correct property editor"
   );
   assert.equal(

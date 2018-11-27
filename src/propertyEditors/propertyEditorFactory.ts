@@ -65,6 +65,12 @@ export class SurveyPropertyEditorFactory {
       if (creator) propertyEditor = creator(property);
     }
     if (!propertyEditor) {
+      if(property.isArray && Survey.JsonObject.metaData.isDescendantOf(property.className, "itemvalue")) {
+        var creator = SurveyPropertyEditorFactory.creatorList["itemvalue[]"];
+        if (creator) propertyEditor = creator(property);
+      }
+    }
+    if (!propertyEditor) {
       creator = SurveyPropertyEditorFactory.findParentCreator(editorType);
       propertyEditor = creator(property);
     }
