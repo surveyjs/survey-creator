@@ -382,6 +382,17 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
   elementOnAfterRendering(el, this, true, this.koIsDragging());
 };
 
+if (!!Survey["FlowPanel"]) {
+  Survey["FlowPanel"].prototype["onCreating"] = function() {
+    elementOnCreating(this);
+  };
+  Survey["FlowPanel"].prototype["onAfterRenderPanel"] = function(el) {
+    if (!getSurvey(this).isDesignMode) return;
+    var self = this;
+    elementOnAfterRendering(el, this, true, this.koIsDragging());
+  };
+}
+
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
