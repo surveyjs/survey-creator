@@ -1,5 +1,5 @@
 {
-  "version": "1.0.56",
+  "version": "1.0.59",
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
@@ -17,7 +17,7 @@
     "knockout": "^3.4.0",
     "rmodal": "^1.0.28",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.0.52"
+    "survey-knockout": "^1.0.57"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",

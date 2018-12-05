@@ -17,6 +17,7 @@ import {
   SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
+import { SurveyPropertyModalEditor } from '../entries';
 
 export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private detailDefinition: any;
@@ -44,8 +45,16 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     this.changeToFormViewClick = function() {
       self.koActiveView("form");
     };
+
+    this.modalName =
+    "modelEditor" + "itemvalues" + SurveyPropertyModalEditor.idCounter;
+    SurveyPropertyModalEditor.idCounter++;
+    this.modalNameTarget = "#" + this.modalName;
   }
   public get editorType(): string {
+    return "itemvalue[]";
+  }
+  public get editorTypeTemplate(): string {
     return "itemvalues";
   }
   public get hasDetailButton(): boolean {
@@ -72,25 +81,20 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     if (!!props && props.length > 0) return props;
     return this.getDefaultProperties();
   }
-  protected get itemValueClasseName(): string {
-    var className = this.property ? this.property.type : "itemvalue";
-    if (className == this.editorType) className = "itemvalue";
-    return className;
-  }
   protected getDefinedProperties(): Array<any> {
     if (this.property && this.object && this.object.getType) {
       var properties = SurveyQuestionEditorDefinition.getProperties(
         this.object.getType() + "@" + this.property.name
       );
       if (properties && properties.length > 0) {
-        return this.getPropertiesByNames(this.itemValueClasseName, properties);
+        return this.getPropertiesByNames(this.property.className, properties);
       }
     }
     return [];
   }
   protected getDefaultProperties(): Array<Survey.JsonObjectProperty> {
     var properties = Survey.JsonObject.metaData.getProperties(
-      this.itemValueClasseName
+      this.property.className
     );
     var res = [];
     for (var i = 0; i < properties.length; i++) {
@@ -147,7 +151,11 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
   }
   private createEditorItemCore(item: any) {
-    var itemValue = new Survey.ItemValue(item);
+    var itemValue = Survey.JsonObject.metaData.createClass(
+      this.property.className
+    );
+    itemValue.setData(item);
+
     if (this.object) {
       itemValue["survey"] = this.object.survey;
       itemValue["object"] = this.object;
@@ -166,7 +174,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     ) {
       item.text = null;
     }
-    var itemValue = new Survey.ItemValue(null);
+    var itemValue = Survey.JsonObject.metaData.createClass(item.getType());
     itemValue.setData(item);
     delete itemValue["survey"];
     delete itemValue["object"];
@@ -202,14 +210,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;
         var elements = texts[i].split(Survey.ItemValue.Separator);
-        var valueItem = new Survey.ItemValue("");
-        var item: any = {};
+        var valueItem = Survey.JsonObject.metaData.createClass(
+          this.property.className
+        );
         properties.forEach((p, i) => {
           valueItem[p.name] = elements[i];
-          item[p.name] = elements[i];
         });
-        item.text = valueItem.hasText ? valueItem.text : "";
-        items.push(item);
+        items.push(valueItem);
       }
     }
     this.koItems(this.getItemsFromValue(items));
@@ -232,12 +239,12 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       return;
     }
 
-    this.koShowTextView(!this.hasVisibleIf());
+    this.koShowTextView(!this.hasVisibleIfOrEnableIf());
   }
-  private hasVisibleIf(): boolean {
+  private hasVisibleIfOrEnableIf(): boolean {
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      if (items[i].item.visibleIf) return true;
+      if (!!items[i].item.visibleIf || items[i].item.enableIf) return true;
     }
     return false;
   }
@@ -263,7 +270,7 @@ export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEdit
 }
 
 SurveyPropertyEditorFactory.registerEditor(
-  "itemvalues",
+  "itemvalue[]",
   function(property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
     return new SurveyPropertyItemValuesEditor(property);
   },

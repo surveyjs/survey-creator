@@ -42,6 +42,12 @@ import { defaultStrings } from "../../src/editorLocalization";
 
 export default QUnit.module("PropertyEditorsTests");
 
+class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEditor {
+  constructor() {
+    super(Survey.JsonObject.metaData.findProperty("selectbase", "choices"));
+  }
+}
+
 class EditorOptionsTests implements ISurveyObjectEditorOptions {
   doValueChangingCallback: (options: any) => any;
   alwaySaveTextInPropertyEditors: boolean;
@@ -118,7 +124,7 @@ QUnit.test("Create correct property editor", function(assert) {
     "dropdown",
     "text",
     "html",
-    "itemvalues",
+    "itemvalue[]",
     "matrixdropdowncolumns",
     "textitems",
     "triggers",
@@ -223,9 +229,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
     { value: 2, text: "item2" },
     { value: 3, text: "item3" }
   ];
-  var property = new Survey.JsonObjectProperty("choices");
-  property.type = "itemvalue";
-  var itemValueProperty = new SurveyPropertyItemValuesEditor(property);
+  var itemValueProperty = new SurveyPropertyItemValuesEditorForTests();
   itemValueProperty.object = { choices: choices };
   itemValueProperty.beforeShow();
   itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
@@ -299,7 +303,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
 });
 QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   var choices = [{ value: 1, text: "item1" }, { value: 2 }];
-  var editor = new SurveyPropertyItemValuesEditor(null);
+  var editor = new SurveyPropertyItemValuesEditorForTests();
   editor.beforeShow();
   editor.editingValue = choices;
   editor.onChanged = (newValue: Array<Survey.ItemValue>) => {
@@ -352,20 +356,20 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
   var choices: Array<Survey.ItemValue> = [];
   choices.push(new Survey.ItemValue(1, "1"));
   choices.push(new Survey.ItemValue("item 2", "item 2"));
-  var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-  itemValueProperty.beforeShow();
+  var itemValuePropertyEditor = new SurveyPropertyItemValuesEditorForTests();
+  itemValuePropertyEditor.beforeShow();
   assert.equal(choices[0].hasText, true, "the first item has text");
   assert.equal(choices[1].hasText, true, "the second item has text");
-  itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
+  itemValuePropertyEditor.onChanged = (newValue: Array<Survey.ItemValue>) => {
     Survey.ItemValue.setData(choices, newValue);
   };
-  itemValueProperty.editingValue = choices;
+  itemValuePropertyEditor.editingValue = choices;
   assert.equal(
-    itemValueProperty.koItems().length,
+    itemValuePropertyEditor.koItems().length,
     2,
     "there are three elements"
   );
-  itemValueProperty.onApplyClick();
+  itemValuePropertyEditor.onApplyClick();
   assert.equal(choices.length, 2, "there are two items");
   assert.equal(choices[0].value, 1, "the first value is 1");
   assert.equal(choices[0].hasText, false, "the first text is null");
@@ -379,21 +383,21 @@ QUnit.test(
       { value: 1, text: "1" },
       { value: "item 2", text: "item 2" }
     ];
-    var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-    itemValueProperty.beforeShow();
-    itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
+    var itemValuePropertyEditor = new SurveyPropertyItemValuesEditorForTests();
+    itemValuePropertyEditor.beforeShow();
+    itemValuePropertyEditor.onChanged = (newValue: Array<Survey.ItemValue>) => {
       choices = newValue;
     };
-    itemValueProperty.editingValue = choices;
+    itemValuePropertyEditor.editingValue = choices;
     var options = new EditorOptionsTests();
     options.alwaySaveTextInPropertyEditors = true;
-    itemValueProperty.options = options;
+    itemValuePropertyEditor.options = options;
     assert.equal(
-      itemValueProperty.koItems().length,
+      itemValuePropertyEditor.koItems().length,
       2,
       "there are three elements"
     );
-    itemValueProperty.onApplyClick();
+    itemValuePropertyEditor.onApplyClick();
     assert.equal(choices.length, 2, "there are two items");
     assert.equal(choices[0].value, 1, "the first value is 1");
     assert.equal(choices[0].text, "1", "the first text is '1'");
@@ -403,40 +407,40 @@ QUnit.test(
 );
 QUnit.test("SurveyPropertyItemValue_PureValue", function(assert) {
   var choices = [1, "item2", { value: 3, text: "item3" }];
-  var itemValueProperty = new SurveyPropertyItemValuesEditor(null);
-  itemValueProperty.beforeShow();
-  itemValueProperty.onChanged = (newValue: Array<Survey.ItemValue>) => {
+  var itemValuePropertyEditor = new SurveyPropertyItemValuesEditorForTests();
+  itemValuePropertyEditor.beforeShow();
+  itemValuePropertyEditor.onChanged = (newValue: Array<Survey.ItemValue>) => {
     choices = newValue;
   };
-  itemValueProperty.editingValue = choices;
+  itemValuePropertyEditor.editingValue = choices;
   assert.equal(
-    itemValueProperty.koItems().length,
+    itemValuePropertyEditor.koItems().length,
     3,
     "there are three elements"
   );
   assert.equal(
-    itemValueProperty.koItems()[0].cells[0].koValue(),
+    itemValuePropertyEditor.koItems()[0].cells[0].koValue(),
     1,
     "check value of the first element"
   );
   assert.equal(
-    itemValueProperty.koItems()[1].cells[0].koValue(),
+    itemValuePropertyEditor.koItems()[1].cells[0].koValue(),
     "item2",
     "check value of the second element"
   );
   assert.equal(
-    itemValueProperty.koItems()[2].cells[0].koValue(),
+    itemValuePropertyEditor.koItems()[2].cells[0].koValue(),
     3,
     "check value of the third element"
   );
   assert.equal(
-    itemValueProperty.koItems()[2].cells[1].koValue(),
+    itemValuePropertyEditor.koItems()[2].cells[1].koValue(),
     "item3",
     "check text of the third element"
   );
 });
 QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
-  var propertyEditor = new SurveyPropertyItemValuesEditor(null);
+  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   assert.equal(
     propertyEditor.columns.length,
     2,
@@ -456,7 +460,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
 QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
   Survey.JsonObject.metaData.addProperty("itemvalue", { name: "imageLink" });
 
-  var propertyEditor = new SurveyPropertyItemValuesEditor(null);
+  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   assert.equal(
     propertyEditor.columns.length,
     3,
@@ -482,7 +486,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   var qCheck = new Survey.QuestionCheckbox("q2");
 
   var propertyEditor = new SurveyPropertyItemValuesEditor(
-    Survey.JsonObject.metaData.findProperty("selectbase", "choices")
+    Survey.JsonObject.metaData.findProperty("radiogroup", "choices")
   );
   propertyEditor.object = qRadio;
   propertyEditor.editingValue = qRadio.choices;
@@ -498,7 +502,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
     "The last column name is"
   );
   propertyEditor = new SurveyPropertyItemValuesEditor(
-    Survey.JsonObject.metaData.findProperty("selectbase", "choices")
+    Survey.JsonObject.metaData.findProperty("checkbox", "choices")
   );
   propertyEditor.object = qCheck;
   propertyEditor.editingValue = qCheck.choices;
@@ -524,11 +528,11 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
     "itemvalue"
   );
   var property = new Survey.JsonObjectProperty("test");
-  property.type = "itemvalues_ex";
+  property.type = "itemvalues_ex[]";
   var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
   assert.equal(
     propEditor.editorType,
-    "itemvalues",
+    "itemvalue[]",
     "It is item value, use parent"
   );
   var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
@@ -550,13 +554,11 @@ QUnit.test(
     Survey.JsonObject.metaData.addClass(
       "itemvalues_ex",
       ["imageLink"],
-      function() {
-        return new Survey.ItemValue(null);
-      },
+      null,
       "itemvalue"
     );
     var property = new Survey.JsonObjectProperty("test");
-    property.type = "itemvalues_ex";
+    property.type = "itemvalues_ex[]";
     var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
     var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
     assert.equal(
@@ -689,7 +691,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
 
 QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
   //TODO remove later - create property if it doesn't exist
-  var propertyEditor = new SurveyPropertyItemValuesEditor(null);
+  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
 
   var property = Survey.JsonObject.metaData.findProperty("itemvalue", "value");
   var column = new SurveyNestedPropertyEditorColumn(property);
@@ -738,7 +740,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function(
   );
 });
 QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
-  var propertyEditor = new SurveyPropertyItemValuesEditor(null);
+  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   var itemValue = new Survey.ItemValue(null);
   var item = new SurveyPropertyItemValuesEditorItem(
     itemValue,

@@ -439,11 +439,16 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
     itemValuesEditor.koItems()[0]
   );
   itemValuesEditor.koEditItem(firstItem);
-  assert.equal(firstItem.itemEditor.koTabs().length, 1, "There is one tab");
+  assert.equal(firstItem.itemEditor.koTabs().length, 2, "There are two tabs");
   assert.equal(
     firstItem.itemEditor.koTabs()[0].name,
     "visibleIf",
     "It is visibleIf tab"
+  );
+  assert.equal(
+    firstItem.itemEditor.koTabs()[1].name,
+    "enableIf",
+    "It is enableIf tab"
   );
   firstItem.item["visibleIf"] = "{cars} contains {item}";
   itemValuesEditor.koEditItem(null);

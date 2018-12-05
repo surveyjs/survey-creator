@@ -44,7 +44,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       editorType
     ] = new SurveyPropertyModalEditorCustomWidget(json);
   }
-  private static idCounter = 1;
+  protected static idCounter = 1;
   public static getCustomWidget(
     editorType: string
   ): SurveyPropertyModalEditorCustomWidget {

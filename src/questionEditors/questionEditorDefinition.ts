@@ -79,7 +79,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesByUrl", index: 11 }
       ]
     },
-    "itemvalues@choices": {
+    "itemvalue[]@choices": {
       title: "Rules",
       tabs: [
         { name: "general", visible: false },
@@ -87,14 +87,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "enableIf", visible: true }
       ]
     },
-    "itemvalues@rows": {
+    "itemvalue[]@rows": {
       title: "Rules",
       tabs: [
         { name: "general", visible: false },
         { name: "visibleIf", visible: true }
       ]
     },
-    "itemvalues@columns": {
+    "itemvalue[]@columns": {
       title: "Rules",
       tabs: [
         { name: "general", visible: false },
