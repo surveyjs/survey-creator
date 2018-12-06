@@ -965,8 +965,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * The Survey JSON as a text. Use it to get Survey JSON or change it.
    */
   public get text() {
-    if (this.koIsShowDesigner() || this.koViewType() == "translation") return this.getSurveyTextFromDesigner();
-    return this.jsonEditor.text;
+    if (this.koViewType() == "editor") return this.jsonEditor.text;
+    return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
     this.changeText(value, true);
