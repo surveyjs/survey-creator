@@ -133,6 +133,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public useTabsInElementEditor = false;
 
   /**
+   * You need to set this property to true if you want to show titles instead of names in pages editor and expression editor.
+   * @see showObjectTitles
+   */
+  public showObjectTitles = false;
+
+  /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
    */
@@ -579,7 +585,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
    * @param options Survey Editor options. The following options are available: showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave
+   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -615,7 +621,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     });
     this.surveyObjects = new SurveyObjects(
       this.koObjects,
-      this.koSelectedObject
+      this.koSelectedObject,
+      this.showObjectTitles
     );
     this.surveyObjects.getItemTextCallback = function(obj, text) {
       var options = { obj: obj, text: text };
@@ -672,6 +679,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       return self.onCanShowObjectProperty(object, property);
     };
     this.surveyLive = new SurveyLiveTester();
+    this.surveyLive.showObjectTitles = this.showObjectTitles;
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.translationValue = new Translation(new Survey.Survey());
     this.translation.importFinishedCallback = function() {
@@ -896,6 +904,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.inplaceEditForValues =
       typeof options.inplaceEditForValues !== "undefined"
         ? options.inplaceEditForValues
+        : false;
+    this.showObjectTitles =
+      typeof options.showObjectTitles !== "undefined"
+        ? options.showObjectTitles
         : false;
     this.useTabsInElementEditor =
       typeof options.useTabsInElementEditor !== "undefined"

@@ -44,7 +44,11 @@ export class PagesEditor {
     });
   }
 
-  pageSelection = ko.computed({
+  getDisplayText = (page: Survey.PageModel) => {
+    return (this.editor.showObjectTitles ? page.title : "") || page.name;
+  };
+
+  pageSelection = ko.computed<Survey.PageModel>({
     read: () => this._selectedPage(),
     write: newVal => {
       if (!!newVal && typeof newVal.getType === "function") {
