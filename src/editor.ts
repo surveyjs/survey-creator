@@ -157,12 +157,25 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> sender the survey editor object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid and in Question Editor.
+   */
+  public onShowingProperty: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
+   * Obsolete, please use onShowingProperty event.
+   * The event is called before showing a property in the Property Grid or in Question Editor.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid or in Question Editor
+   * @see onShowingProperty
    */
   public onCanShowProperty: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
     any
-  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  > = this.onShowingProperty;
   /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
    * <br/> sender the survey editor object that fires the event
