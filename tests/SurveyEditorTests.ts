@@ -664,11 +664,32 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380",
+  function(assert) {
+    var editor = new SurveyEditor();
+    editor.showObjectTitles = true;
+    editor.text = JSON.stringify(getSurveyJson());
+    var pagesEditor = new PagesEditor(editor, editor.survey.pages[0]);
+    assert.equal(
+      pagesEditor.getDisplayText(pagesEditor.pagesSelection()[0]),
+      "Page 1",
+      "page1 title"
+    );
+    assert.equal(
+      pagesEditor.getDisplayText(editor.pages()[0]),
+      "Page 1",
+      "page1 title"
+    );
+  }
+);
+
 function getSurveyJson(): any {
   return {
     pages: [
       {
         name: "page1",
+        title: "Page 1",
         questions: [
           { type: "text", name: "question1" },
           {

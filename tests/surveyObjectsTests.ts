@@ -374,13 +374,38 @@ QUnit.test("getItemTextCallback", function(assert) {
   );
 });
 
+QUnit.test(
+  "Initial objects building with titles - https://surveyjs.answerdesk.io/ticket/details/T1380",
+  function(assert) {
+    var intend = SurveyObjects.intend;
+    var survey = createSurvey();
+    var objects = new SurveyObjects(
+      ko.observableArray(),
+      ko.observable(),
+      true
+    );
+    objects.survey = survey;
+    assert.equal(
+      objects.koObjects()[1].text(),
+      intend + "Page 1",
+      "page1 title"
+    );
+    assert.equal(
+      objects.koObjects()[2].text(),
+      intend + intend + "Q 1",
+      "First question title"
+    );
+  }
+);
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [
       {
         name: "page1",
+        title: "Page 1",
         questions: [
-          { type: "text", name: "question1" },
+          { type: "text", name: "question1", title: "Q 1" },
           {
             name: "question2",
             choices: [

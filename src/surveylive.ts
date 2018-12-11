@@ -18,6 +18,7 @@ export class SurveyLiveTester {
   setPageDisable: any;
   koLanguages: any;
   koActiveLanguage: any;
+  showObjectTitles = false;
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor() {
@@ -98,7 +99,7 @@ export class SurveyLiveTester {
       var page = this.survey.pages[i];
       pages.push({
         page: page,
-        title: SurveyHelper.getObjectName(page),
+        title: SurveyHelper.getObjectName(page, this.showObjectTitles),
         koVisible: ko.observable(page.isVisible),
         koDisabled: ko.observable(!page.isVisible),
         koActive: ko.observable(
