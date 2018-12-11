@@ -180,6 +180,48 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
 });
 
 QUnit.test(
+  "SurveyPropertyConditionEditor add question for dynamic panel",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        {
+          name: "dp",
+          type: "paneldynamic",
+          templateElements: [
+            {
+              name: "q1",
+              type: "text",
+              visibleIf: "{panel.q2} = 1"
+            },
+            {
+              name: "q2",
+              type: "text"
+            }
+          ]
+        }
+      ]
+    });
+    survey.setDesignMode(true);
+    var panel = <Survey.QuestionPanelDynamic>survey.getQuestionByName("dp");
+    var question = panel.template.getQuestionByName("q1");
+    var property = Survey.JsonObject.metaData.findProperty(
+      "question",
+      "visibleIf"
+    );
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.koAddConditionQuestion("panel.q2");
+    editor.koAddConditionValue("2");
+    editor.addCondition();
+    assert.equal(
+      editor.koTextValue(),
+      "{panel.q2} = 1 and {panel.q2} = 2",
+      "condition was added correctly"
+    );
+  }
+);
+
+QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #353",
   function(assert) {
     var property = Survey.JsonObject.metaData.findProperty(

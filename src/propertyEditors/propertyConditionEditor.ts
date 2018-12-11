@@ -153,16 +153,17 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   private addPanelDynamicQuestionsToCondition(names: Array<string>) {
     if (!(this.object.data instanceof Survey.QuestionPanelDynamicItem)) return;
     var panel: Survey.PanelModel = this.object.data.panel;
-    var questionNames = [];
     for (var i = 0; i < panel.questions.length; i++) {
       var q = panel.questions[i];
-      if (q.name == this.object.name) continue;
+      var questionNames = [];
       this.addConditionQuestionNames(<Survey.Question>q, questionNames);
-    }
-    for (var i = 0; i < questionNames.length; i++) {
-      var questionName = "panel." + questionNames[i];
-      names.push(questionName);
-      this.addConditionQuestionsHash[questionName] = panel;
+      for (var j = 0; j < questionNames.length; j++) {
+        var questionName = "panel." + questionNames[j];
+        if (q.name != this.object.name) {
+          names.push(questionName);
+        }
+        this.addConditionQuestionsHash[questionName] = q;
+      }
     }
   }
   private onValueSurveyChanged(questionName: string, operator: string) {
