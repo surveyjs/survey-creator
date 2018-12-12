@@ -669,7 +669,7 @@
 @media all and (-ms-high-contrast: none) {
   *::-ms-backdrop,
   .svd_container use {
-    /* IE11 - https://surveyjs.answerdesk.io/ticket/details/T1387*/
+    /* IE11 - https://surveyjs.answerdesk.io/ticket/details/T1387 */
     pointer-events: none;
   }
 }
