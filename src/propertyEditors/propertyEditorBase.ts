@@ -7,6 +7,7 @@ export interface ISurveyObjectEditorOptions {
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
   showObjectTitles: boolean;
+  showTitlesInExpressions: boolean;
   onItemValueAddedCallback(
     propertyName: string,
     itemValue: Survey.ItemValue,

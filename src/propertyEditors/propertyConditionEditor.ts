@@ -122,7 +122,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       }
       this.addConditionQuestionsHash = {};
       for (var i = 0; i < res.length; i++) {
-        if (!this.options.showObjectTitles) {
+        if (!this.options.showTitlesInExpressions) {
           res[i].text = res[i].name;
         }
         this.addConditionQuestionsHash[res[i].name] = res[i].question;
