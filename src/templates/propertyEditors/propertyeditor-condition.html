@@ -1,45 +1,45 @@
 ﻿<script type="text/html" id="propertyeditor-condition">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
-    <!-- /ko -->
+  <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+  <!-- /ko -->
 </script>
 
 <script type="text/html" id="propertyeditorcontent-condition">
-    <div class="propertyeditor-condition">
-        <div class="form-inline form-group">
-            <div class="form-control svd_custom_select">
-                <select onmousewheel="return false;" style="max-width:200px" data-bind="options: koAddConditionQuestions, value: koAddConditionQuestion, optionsCaption: addConditionQuestionOptions"></select>
-            </div>
-            <div class="form-control svd_custom_select">
-                <select onmousewheel="return false;" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koAddConditionOperator"></select>
-            </div>
-            <input class="form-control" type="text" data-bind="textInput:koAddConditionValue, enable: koAddContionValueEnabled" style="width:120px"
-            />
-            <input type="button" class="form-control btn btn-primary" data-bind="enable: koCanAddCondition, click: onConditionAddClick, value: koAddConditionButtonText"
-            />
-            <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
-                <survey-widget params="survey: koValueSurvey"></survey-widget>
-            </div>
-        </div>
-        <!-- ko if: $parent.hasAceEditor -->
-        <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
-        <div id="expression-ace-editor" style="height: 200px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
-        <!-- /ko -->
+  <div class="propertyeditor-condition">
+      <div class="form-inline form-group">
+          <div class="form-control svd_custom_select">
+              <select onmousewheel="return false;" style="max-width:200px" data-bind="options: koAddConditionQuestions, value: koAddConditionQuestion, optionsValue: 'name', optionsText: 'text', optionsCaption: addConditionQuestionOptions"></select>
+          </div>
+          <div class="form-control svd_custom_select">
+              <select onmousewheel="return false;" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koAddConditionOperator"></select>
+          </div>
+          <input class="form-control" type="text" data-bind="textInput:koAddConditionValue, enable: koAddContionValueEnabled" style="width:120px"
+          />
+          <input type="button" class="form-control btn btn-primary" data-bind="enable: koCanAddCondition, click: onConditionAddClick, value: koAddConditionButtonText"
+          />
+          <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
+              <survey-widget params="survey: koValueSurvey"></survey-widget>
+          </div>
+      </div>
+      <!-- ko if: $parent.hasAceEditor -->
+      <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
+      <div id="expression-ace-editor" style="height: 200px; width: 100%;" data-bind="value:koValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
+      <!-- /ko -->
 
-        <!-- ko if: !$parent.hasAceEditor -->
-        <textarea class="svd-dark-border-color" data-bind="value:koTextValue" rows="4" autofocus="autofocus"></textarea>
-        <!-- /ko -->
+      <!-- ko if: !$parent.hasAceEditor -->
+      <textarea class="svd-dark-border-color" data-bind="value:koTextValue" rows="4" autofocus="autofocus"></textarea>
+      <!-- /ko -->
 
-        <!-- <div class="assistant">
-            <div class="assistant-title" data-bind="text:$data.getLocString('pe.assistantTitle')"></div>
-            <div class="assistant-content" data-bind="foreach:availableQuestions">
-                <div class="assistant-item" data-bind=" text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
-            </div>
-        </div> -->
-        <!-- ko if: showHelpText -->
-        <span data-bind="text:$data.getLocString('pe.conditionHelp')" style="white-space:normal "></span>
-        <div data-bind="visible: $data.hasLocString('pe.conditionShowMoreUrl')">
-            <a data-bind="attr: { href: $data.getLocString('pe.conditionShowMoreUrl')}, text:$data.getLocString('pe.showMore')" target="_blank"></a>
-        </div>
-        <!-- /ko -->
-    </div>
+      <!-- <div class="assistant">
+          <div class="assistant-title" data-bind="text:$data.getLocString('pe.assistantTitle')"></div>
+          <div class="assistant-content" data-bind="foreach:availableQuestions">
+              <div class="assistant-item" data-bind=" text:name, click:function () { $parent.insertQuestion($data, $element); } "></div>
+          </div>
+      </div> -->
+      <!-- ko if: showHelpText -->
+      <span data-bind="text:$data.getLocString('pe.conditionHelp')" style="white-space:normal "></span>
+      <div data-bind="visible: $data.hasLocString('pe.conditionShowMoreUrl')">
+          <a data-bind="attr: { href: $data.getLocString('pe.conditionShowMoreUrl')}, text:$data.getLocString('pe.showMore')" target="_blank"></a>
+      </div>
+      <!-- /ko -->
+  </div>
 </script>

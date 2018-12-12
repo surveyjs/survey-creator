@@ -362,7 +362,7 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   editor.object = question;
   assert.deepEqual(
     editor.allConditionQuestions,
-    ["q2", "q3"],
+    [{ name: "q2", text: "q2" }, { name: "q3", text: "q3" }],
     "returns questions correctly"
   );
 });
@@ -386,12 +386,14 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = column;
     assert.equal(
-      editor.allConditionQuestions.indexOf("row.col1") > -1,
+      editor.allConditionQuestions.filter(e => e.name === "row.col1").length >
+        0,
       true,
       "row.col1 is here"
     );
     assert.equal(
-      editor.allConditionQuestions.indexOf("row.col2") > -1,
+      editor.allConditionQuestions.filter(e => e.name === "row.col2").length >
+        0,
       false,
       "row.col2 is not here"
     );
@@ -418,12 +420,14 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = panelQuestion;
     assert.equal(
-      editor.allConditionQuestions.indexOf("panel.q1") > -1,
+      editor.allConditionQuestions.filter(e => e.name === "panel.q1").length >
+        0,
       true,
       "panel.q1 is here"
     );
     assert.equal(
-      editor.allConditionQuestions.indexOf("panel.q2") > -1,
+      editor.allConditionQuestions.filter(e => e.name === "panel.q2").length >
+        0,
       false,
       "panel.q2 is not here"
     );

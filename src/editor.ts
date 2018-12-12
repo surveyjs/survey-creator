@@ -134,7 +134,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
   /**
    * You need to set this property to true if you want to show titles instead of names in pages editor and expression editor.
-   * @see showObjectTitles
    */
   public showObjectTitles = false;
 

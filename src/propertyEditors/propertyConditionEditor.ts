@@ -5,6 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import * as editorLocalization from "../editorLocalization";
 import { SurveyValidator } from "survey-knockout";
+import { stringLiteral } from "babel-types";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public availableOperators = [];
@@ -104,16 +105,41 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     );
   }
   public get allConditionQuestions(): any[] {
+    var res = this.getConditionQuetions();
+    res.sort(function(a, b) {
+      return a.text.localeCompare(b.text);
+    });
+    return res;
+  }
+  private getConditionQuetions(): any[] {
     if (!this.object) return [];
-    var names = [];
+    var res = [];
     var questions = this.availableQuestions;
-    for (var i = 0; i < questions.length; i++) {
-      this.addConditionQuestionNames(questions[i], names);
+    if (questions.length > 0 && questions[0]["addConditionObjectsByContext"]) {
+      for (var i = 0; i < questions.length; i++) {
+        if (this.object == questions[i]) continue;
+        questions[i].addConditionObjectsByContext(res, this.object);
+      }
+      this.addConditionQuestionsHash = {};
+      for (var i = 0; i < res.length; i++) {
+        if (!this.options.showObjectTitles) {
+          res[i].text = res[i].name;
+        }
+        this.addConditionQuestionsHash[res[i].name] = res[i].question;
+      }
+    } else {
+      //TODO remove old code
+      var names = [];
+      for (var i = 0; i < questions.length; i++) {
+        this.addConditionQuestionNames(questions[i], names);
+      }
+      this.addMatrixColumnsToCondition(names);
+      this.addPanelDynamicQuestionsToCondition(names);
+      for (var i = 0; i < names.length; i++) {
+        res.push({ name: names[i], text: names[i] });
+      }
     }
-    this.addMatrixColumnsToCondition(names);
-    this.addPanelDynamicQuestionsToCondition(names);
-    names.sort();
-    return names;
+    return res;
   }
   private addQuestionNames(
     question: Survey.Question,
