@@ -1,4 +1,5 @@
 ﻿$editor-height: 75vh;
+
 @import "colors";
 @import "icons";
 @import "manage";
@@ -9,6 +10,7 @@
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
+
 .svd_container {
   position: relative;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
@@ -661,5 +663,13 @@
         }
       }
     }
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+  *::-ms-backdrop,
+  .svd_container use {
+    /* IE11 - https://surveyjs.answerdesk.io/ticket/details/T1387*/
+    pointer-events: none;
   }
 }
