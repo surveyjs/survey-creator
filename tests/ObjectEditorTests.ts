@@ -217,6 +217,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   useTabsInElementEditor: boolean;
   propertyName: string;
   showObjectTitles: boolean;
+  showTitlesInExpressions: boolean;
   onItemValueAddedCallback(
     propertyName: string,
     itemValue: Survey.ItemValue,

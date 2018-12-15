@@ -133,9 +133,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public useTabsInElementEditor = false;
 
   /**
-   * You need to set this property to true if you want to show titles instead of names in pages editor and expression editor.
+   * You need to set this property to true if you want to show titles instead of names in pages editor and object selector.
    */
   public showObjectTitles = false;
+
+  /**
+   * You need to set this property to true if you want to show titles instead of names in expression editor.
+   */
+  public showTitlesInExpressions = false;
 
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
@@ -584,7 +589,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
    * @param options Survey Editor options. The following options are available: showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles
+   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -907,6 +912,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.showObjectTitles =
       typeof options.showObjectTitles !== "undefined"
         ? options.showObjectTitles
+        : false;
+    this.showTitlesInExpressions =
+      typeof options.showTitlesInExpressions !== "undefined"
+        ? options.showTitlesInExpressions
         : false;
     this.useTabsInElementEditor =
       typeof options.useTabsInElementEditor !== "undefined"
