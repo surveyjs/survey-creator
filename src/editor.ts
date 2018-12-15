@@ -1772,7 +1772,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getNewName(type: string): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.pages());
-    return type == "panel" ? this.getNewPanelName() : this.getNewQuestionName();
+    return type == "panel" || type == "flowpanel" ? this.getNewPanelName() : this.getNewQuestionName();
   }
   private getNewQuestionName(): string {
     return SurveyHelper.getNewQuestionName(this.getAllQuestions());

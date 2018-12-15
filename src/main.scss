@@ -11,6 +11,14 @@
 @import "properties";
 @import "bootstrap-material";
 
+.svd_flowpanel[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+}
+.svd_flowpanel[contenteditable="true"] {
+  padding: 5px;
+  display: block; /* For Firefox */
+}
+
 .svd_container {
   position: relative;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",

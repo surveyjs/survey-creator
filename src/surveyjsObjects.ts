@@ -207,6 +207,16 @@ function elementOnAfterRendering(
     surveyElement.renderedElement.classList.add("svd-dark-bg-color");
   }
   surveyElement.renderedElement.classList.add("svd_q_design_border");
+
+  var isRowLayout =
+    !surveyElement.getLayoutType || surveyElement.getLayoutType() == "row";
+  var opt = surveyElement.allowingOptions;
+  opt.allowCopy = opt.allowCopy && isRowLayout;
+  opt.allowAddToToolbox = opt.allowAddToToolbox && isRowLayout;
+  opt.allowChangeType = opt.allowChangeType && isRowLayout;
+  opt.allowShowHideTitle = opt.allowShowHideTitle && isRowLayout;
+  opt.allowChangeRequired = opt.allowChangeRequired && isRowLayout;
+
   getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
   if (surveyElement.koIsSelected())
     surveyElement.renderedElement.classList.add(
@@ -384,12 +394,21 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
 
 if (!!Survey["FlowPanel"]) {
   Survey["FlowPanel"].prototype["onCreating"] = function() {
+    //TODO
+    this.placeHolder = "Enter here text or drop a question";
     elementOnCreating(this);
   };
   Survey["FlowPanel"].prototype["onAfterRenderPanel"] = function(el) {
     if (!getSurvey(this).isDesignMode) return;
-    var self = this;
     elementOnAfterRendering(el, this, true, this.koIsDragging());
+    var pnlEl = el.querySelector("f-panel");
+    if (!!pnlEl) {
+      if (!!pnlEl.className) {
+        pnlEl.className += " svd_flowpanel";
+      } else {
+        pnlEl.className = "svd_flowpanel";
+      }
+    }
   };
 }
 
