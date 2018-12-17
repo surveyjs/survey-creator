@@ -38,7 +38,7 @@ test(`dropdown change item values`, async t => {
         `.svda-select-items-editor .svda-select-items-collection+.item_editable > span:first-child`
       ).innerText
     )
-    .eql("Other (describe)puppiesOther")
-    //.debug()
-    .wait(3000);
+    .eql("Other (describe)puppiesOther");
+  //.debug()
+  //.wait(3000);
 });
