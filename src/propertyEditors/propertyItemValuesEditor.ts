@@ -17,7 +17,7 @@ import {
   SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
-import { SurveyPropertyModalEditor } from '../entries';
+import { SurveyPropertyModalEditor } from "../entries";
 
 export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private detailDefinition: any;
@@ -47,7 +47,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     };
 
     this.modalName =
-    "modelEditor" + "itemvalues" + SurveyPropertyModalEditor.idCounter;
+      "modelEditor" + "itemvalues" + SurveyPropertyModalEditor.idCounter;
     SurveyPropertyModalEditor.idCounter++;
     this.modalNameTarget = "#" + this.modalName;
   }
@@ -239,7 +239,22 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       return;
     }
 
-    this.koShowTextView(!this.hasVisibleIfOrEnableIf());
+    this.koShowTextView(
+      !this.hasVisibleIfOrEnableIf() && !this.hasMultipleLanguage()
+    );
+  }
+  private hasMultipleLanguage(): boolean {
+    var items = this.koItems();
+    for (var i = 0; i < items.length; i++) {
+      //TODO replace with locText.hasNonDefaultText()
+      var json = items[i].item.locText.getJson();
+      if (!!json) {
+        var keys = Object.keys(json);
+        if (keys.length > 1) return true;
+        return keys[0] != "default";
+      }
+    }
+    return false;
   }
   private hasVisibleIfOrEnableIf(): boolean {
     var items = this.koItems();

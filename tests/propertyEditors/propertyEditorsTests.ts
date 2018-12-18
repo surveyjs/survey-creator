@@ -379,6 +379,27 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
   assert.equal(choices[1].hasText, false, "the second text is null");
 });
 QUnit.test(
+  "SurveyPropertyItemValue disable viewtext for multiple languages",
+  function(assert) {
+    var survey = new Survey.Survey({
+      questions: [
+        {
+          type: "checkbox",
+          name: "q1",
+          choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }]
+        }
+      ]
+    });
+    survey.locale = "de";
+    var q = <Survey.QuestionCheckbox>survey.getQuestionByName("q1");
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.beforeShow();
+    editor.editingValue = q.choices;
+    assert.equal(editor.koShowTextView(), false, "Can't show as text ");
+  }
+);
+
+QUnit.test(
   "SurveyPropertyItemValue: Value and Text are same and editor.alwaySaveTextInPropertyEditors = true",
   function(assert) {
     var choices = [
