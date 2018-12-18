@@ -71,6 +71,8 @@ ko.components.register("item-editor", {
         newValue = options.newValue === null ? options.value : options.newValue;
         params.target[params.name] = newValue;
         params.editor.onPropertyValueChanged(property, params.target, newValue);
+        !!params.valueChanged &&
+          params.valueChanged(params.target, property.name, newValue);
       };
       return model;
     }

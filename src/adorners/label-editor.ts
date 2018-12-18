@@ -15,7 +15,7 @@ export var labelAdorner = {
   afterRender: (elements: HTMLElement[], model, editor) => {
     var decoration = document.createElement("span");
     decoration.innerHTML =
-      "<title-editor params='name: \"label\", model: model, editor: editor'></title-editor>";
+      "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
     elements[0].onclick = e => e.preventDefault();
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
