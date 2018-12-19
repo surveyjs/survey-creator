@@ -5,7 +5,7 @@
     "test": "karma start",
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
-    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/adorners.js\"",
+    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
     "build_prod": "npm run build_dev && webpack --env.buildType prod",
