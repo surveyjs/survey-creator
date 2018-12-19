@@ -115,30 +115,30 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (!this.object) return [];
     var res = [];
     var questions = this.availableQuestions;
-    if (questions.length > 0 && questions[0]["addConditionObjectsByContext"]) {
-      for (var i = 0; i < questions.length; i++) {
-        if (this.object == questions[i]) continue;
-        questions[i].addConditionObjectsByContext(res, this.object);
-      }
-      this.addConditionQuestionsHash = {};
-      for (var i = 0; i < res.length; i++) {
-        if (!this.options.showTitlesInExpressions) {
-          res[i].text = res[i].name;
-        }
-        this.addConditionQuestionsHash[res[i].name] = res[i].question;
-      }
-    } else {
-      //TODO remove old code
-      var names = [];
-      for (var i = 0; i < questions.length; i++) {
-        this.addConditionQuestionNames(questions[i], names);
-      }
-      this.addMatrixColumnsToCondition(names);
-      this.addPanelDynamicQuestionsToCondition(names);
-      for (var i = 0; i < names.length; i++) {
-        res.push({ name: names[i], text: names[i] });
-      }
+    // if (questions.length > 0 && questions[0]["addConditionObjectsByContext"]) {
+    //   for (var i = 0; i < questions.length; i++) {
+    //     if (this.object == questions[i]) continue;
+    //     questions[i].addConditionObjectsByContext(res, this.object);
+    //   }
+    //   this.addConditionQuestionsHash = {};
+    //   for (var i = 0; i < res.length; i++) {
+    //     if (!this.options || !this.options.showTitlesInExpressions) {
+    //       res[i].text = res[i].name;
+    //     }
+    //     this.addConditionQuestionsHash[res[i].name] = res[i].question;
+    //   }
+    // } else {
+    //TODO remove old code
+    var names = [];
+    for (var i = 0; i < questions.length; i++) {
+      this.addConditionQuestionNames(questions[i], names);
     }
+    this.addMatrixColumnsToCondition(names);
+    this.addPanelDynamicQuestionsToCondition(names);
+    for (var i = 0; i < names.length; i++) {
+      res.push({ name: names[i], text: names[i] });
+    }
+    //}
     return res;
   }
   private addQuestionNames(
