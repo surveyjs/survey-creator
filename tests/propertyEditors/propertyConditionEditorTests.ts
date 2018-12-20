@@ -360,8 +360,13 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   page.addNewQuestion("text", "q3");
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
+  var res = [];
+  for (var i = 0; i < editor.allConditionQuestions.length; i++) {
+    var item = editor.allConditionQuestions[i];
+    res.push({ name: item.name, text: item.text });
+  }
   assert.deepEqual(
-    editor.allConditionQuestions,
+    res,
     [{ name: "q2", text: "q2" }, { name: "q3", text: "q3" }],
     "returns questions correctly"
   );
@@ -416,7 +421,7 @@ QUnit.test(
     question.template.addNewQuestion("text", "q2");
     question.template.addNewQuestion("text", "q3");
     question.panelCount = 1;
-    var panelQuestion = question.panels[0].questions[1];
+    var panelQuestion = question.template.questions[1];
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = panelQuestion;
     assert.equal(
