@@ -681,3 +681,50 @@
     pointer-events: none;
   }
 }
+
+.svd_container.sv_default_css #surveyjs .sv_row .svd_question {
+  f-panel {
+    min-width: 100px;
+
+    .svd_question {
+      margin: 0;
+      padding: 0 10px;
+      vertical-align: baseline;
+      position: relative;
+
+      .form-group {
+        margin: 0;
+      }
+
+      select {
+        min-width: 250px;
+      }
+
+      .svda-question-actions {
+        top: 0;
+        transition: top 0.25s;
+      }
+
+      &.svd_q_selected {
+        .svda-question-actions {
+          position: absolute;
+          left: 0;
+          top: -30px;
+          transition: top 0.25s;
+          width: 100%;
+          line-height: 30px;
+          text-align: right;
+          //background-color: rgba(50, 50, 50, 0.025);
+          background-color: rgb(240, 240, 240);
+        }
+
+        .select_items_editor {
+          & > select + div {
+            position: absolute;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
