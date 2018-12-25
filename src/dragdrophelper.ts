@@ -63,8 +63,14 @@ export class DragDropHelper {
   public attachToElement(domElement, surveyElement) {
     domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
     domElement.draggable = surveyElement.allowingOptions.allowDragging;
+    var isFlowPanel =
+      surveyElement.isPanel && surveyElement.getChildrenLayoutType() == "flow";
     domElement.ondragover = function(e) {
       if (!surveyElement.allowingOptions.allowDragging) return false;
+      if (isFlowPanel)
+        return surveyElement
+          .dragDropHelper()
+          .doDragDropOverFlow(e, surveyElement);
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         surveyElement.dragDropHelper().doDragDropOver(e, surveyElement, true);
@@ -72,28 +78,43 @@ export class DragDropHelper {
       }
     };
     domElement.ondrop = function(e) {
-      if (!e["markEvent"]) {
-        e["markEvent"] = true;
-        surveyElement.dragDropHelper().doDrop(e);
-      }
-    };
-    domElement.ondragstart = function(e: DragEvent) {
-      var target: any = e.target || e.srcElement;
+      var helper = surveyElement.dragDropHelper();
       if (
-        !!target &&
-        !!target.contains &&
-        target.contains(document.activeElement)
+        isFlowPanel &&
+        !!helper.ddTarget &&
+        !!helper.ddTarget.source &&
+        helper.ddTarget.source.parent == surveyElement
       ) {
-        e.preventDefault();
-        return false;
+        if (!!e.stopPropagation) {
+          e.stopPropagation();
+        }
+        return;
       }
-      if (!surveyElement.allowingOptions.allowDragging) return false;
+
       if (!e["markEvent"]) {
         e["markEvent"] = true;
-        surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
+        helper.doDrop(e);
       }
-      e.cancelBubble = true;
     };
+    if (!isFlowPanel) {
+      domElement.ondragstart = function(e: DragEvent) {
+        var target: any = e.target || e.srcElement;
+        if (
+          !!target &&
+          !!target.contains &&
+          target.contains(document.activeElement)
+        ) {
+          e.preventDefault();
+          return false;
+        }
+        if (!surveyElement.allowingOptions.allowDragging) return false;
+        if (!e["markEvent"]) {
+          e["markEvent"] = true;
+          surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
+        }
+        e.cancelBubble = true;
+      };
+    }
     domElement.ondragend = function(e) {
       surveyElement.dragDropHelper().end();
     };
@@ -146,6 +167,16 @@ export class DragDropHelper {
     if (element.isPanel && !isEdge && element.elements.length > 0) return;
     this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
   }
+  public doDragDropOverFlow(event: DragEvent, element: any) {
+    event = this.getEvent(event);
+    if (!!event.stopPropagation) {
+      event.stopPropagation();
+    }
+    if (!!this.ddTarget) {
+      return this.ddTarget.moveTo(element, false, false);
+    }
+    return true;
+  }
   public end() {
     if (this.ddTarget) {
       this.ddTarget.clear();
@@ -179,7 +210,9 @@ export class DragDropHelper {
     this.end();
   }
   public doLeavePage(event: DragEvent) {
-    this.ddTarget.moveTo(null, false);
+    if (!!this.ddTarget) {
+      this.ddTarget.moveTo(null, false);
+    }
   }
   public scrollToElement(el: HTMLElement) {
     if (!this.scrollableElement || !el) return;
