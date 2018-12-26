@@ -41,7 +41,7 @@ export class DragDropTargetElement {
 export class DragDropHelper {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
-  static dataStart: string = "surveyjs,";
+  static dataStart: string = "{element:";
   static dragData: any = { text: "", json: null };
   static prevEvent = { element: null, x: -1, y: -1 };
   private onModifiedCallback: (options?: any) => any;
@@ -79,21 +79,15 @@ export class DragDropHelper {
     };
     domElement.ondrop = function(e) {
       var helper = surveyElement.dragDropHelper();
-      if (
+      var preventDefault = !(
         isFlowPanel &&
         !!helper.ddTarget &&
         !!helper.ddTarget.source &&
         helper.ddTarget.source.parent == surveyElement
-      ) {
-        if (!!e.stopPropagation) {
-          e.stopPropagation();
-        }
-        return;
-      }
-
+      );
       if (!e["markEvent"]) {
         e["markEvent"] = true;
-        helper.doDrop(e);
+        helper.doDrop(e, preventDefault);
       }
     };
     if (!isFlowPanel) {
@@ -187,12 +181,14 @@ export class DragDropHelper {
   public get isMoving(): boolean {
     return this.ddTarget && this.ddTarget.source;
   }
-  public doDrop(event: DragEvent) {
+  public doDrop(event: DragEvent, prevedDefault: boolean = true) {
     if (event.stopPropagation) {
       event.stopPropagation();
     }
     if (this.isSurveyDragging(event)) {
-      event.preventDefault();
+      if (prevedDefault) {
+        event.preventDefault();
+      }
       var newElement = this.ddTarget.doDrop();
       if (this.onModifiedCallback)
         this.onModifiedCallback({
@@ -349,7 +345,7 @@ export class DragDropHelper {
     json: any,
     source: Survey.IElement
   ) {
-    var str = DragDropHelper.dataStart + "questionname:" + elementName;
+    var str = DragDropHelper.dataStart + elementName + "}";
     this.setData(event, str);
     var targetElement = this.createTargetElement(elementName, json);
     this.ddTarget = new DragDropTargetElement(
