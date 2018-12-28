@@ -18,9 +18,8 @@ steps:
 - script: |
     npm install
     npm run build_prod
-    karma start --single-run
   displayName: 'npm install and build'
 
 - script: |
-    karma start --single-run
+    npm run test_ci
   displayName: 'run unit tests'
