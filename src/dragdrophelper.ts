@@ -64,7 +64,9 @@ export class DragDropHelper {
     domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
     domElement.draggable = surveyElement.allowingOptions.allowDragging;
     var isFlowPanel =
-      surveyElement.isPanel && surveyElement.getChildrenLayoutType() == "flow";
+      surveyElement.isPanel &&
+      typeof surveyElement.getChildrenLayoutType === "function" &&
+      surveyElement.getChildrenLayoutType() === "flow";
     domElement.ondragover = function(e) {
       if (!surveyElement.allowingOptions.allowDragging) return false;
       if (isFlowPanel)
