@@ -3,6 +3,7 @@
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
+    "test_ci": "karma start --single-run",
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
     "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
