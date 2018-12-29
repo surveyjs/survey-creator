@@ -23,3 +23,7 @@ steps:
 - script: |
     npm run test_ci
   displayName: 'run unit tests'
+
+- script: |
+    npm run testcafe_ci
+    displayName: 'Run TestCafe Tests'
