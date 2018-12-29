@@ -25,5 +25,6 @@ steps:
   displayName: 'run unit tests'
 
 - script: |
+    npm install -g concurrently
     npm run testcafe_ci
     displayName: 'Run TestCafe Tests'
