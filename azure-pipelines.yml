@@ -27,4 +27,4 @@ steps:
 - script: |
     npm install -g concurrently
     npm run testcafe_ci
-    displayName: 'Run TestCafe Tests'
+    displayName: 'run TestCafe tests'
