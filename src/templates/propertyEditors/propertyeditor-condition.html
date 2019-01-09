@@ -7,7 +7,12 @@
   <div class="propertyeditor-condition">
       <div class="form-inline form-group">
           <div class="form-control svd_custom_select">
-              <select onmousewheel="return false;" style="max-width:200px" data-bind="options: koAddConditionQuestions, value: koAddConditionQuestion, optionsValue: 'name', optionsText: 'text', optionsCaption: addConditionQuestionOptions"></select>
+              <select onmousewheel="return false;" style="max-width:200px" data-bind="value: koAddConditionQuestion">
+                <option data-bind="text: addConditionQuestionOptions, attr: {title: addConditionQuestionOptions}" ></option>
+                <!-- ko foreach: koAddConditionQuestions -->
+                <option data-bind="value: name, text: (text || '').substring(0, 80), attr: {title: text}" ></option>
+                <!-- /ko -->
+              </select>
           </div>
           <div class="form-control svd_custom_select">
               <select onmousewheel="return false;" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koAddConditionOperator"></select>
