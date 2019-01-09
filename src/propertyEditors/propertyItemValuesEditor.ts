@@ -123,7 +123,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var values = this.koItems().map(function(item) {
       return item.item.itemValue;
     });
-    nextValue = getNextValue("item", values);
+    var itemText = Survey.surveyLocalization.getString("choices_Item");
+    nextValue = getNextValue(itemText, values);
 
     var itemValue = this.createEditorItemCore(nextValue);
     if (this.options) {

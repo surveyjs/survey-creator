@@ -140,7 +140,8 @@ export var createAddItemHandler = (
   var values = question.choices.map(function(item) {
     return item.itemValue;
   });
-  nextValue = getNextValue("item", values);
+  var itemText = Survey.surveyLocalization.getString("choices_Item");
+  nextValue = getNextValue(itemText, values);
 
   var itemValue = new Survey.ItemValue(nextValue);
   itemValue.locOwner = <any>{
