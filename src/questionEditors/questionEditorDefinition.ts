@@ -122,7 +122,8 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "general", visible: false },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@checkbox": {
@@ -131,7 +132,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
@@ -140,7 +142,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@dropdown": {
@@ -149,7 +152,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@text": {
@@ -157,7 +161,8 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@comment": {
@@ -165,12 +170,17 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 }
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
       ]
     },
     "matrixdropdowncolumn@boolean": {
       properties: ["defaultValue"],
-      tabs: [{ name: "visibleIf", index: 12 }, { name: "enableIf", index: 20 }]
+      tabs: [
+        { name: "visibleIf", index: 12 },
+        { name: "enableIf", index: 20 },
+        { name: "requiredIf", index: 30 }
+      ]
     },
     "matrixdropdowncolumn@expression": {
       properties: ["name"],
