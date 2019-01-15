@@ -19,7 +19,7 @@ export class QuestionActionsAdorner {
 
   public getStyle(model: ISurveyObjectMenuItem) {
     if (!!model.icon) {
-      return ko.unwrap(model.icon);
+      return ko.unwrap(<any>model.icon);
     }
     return "icon-action" + model.name;
   }

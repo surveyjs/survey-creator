@@ -26,17 +26,17 @@ export function findParentNode(className: string, sourceNode: HTMLElement) {
 export function focusFirstControl(renderedElements: HTMLElement[]) {
   for (var i = 0; i < renderedElements.length; i++) {
     if (typeof renderedElements[i].getElementsByClassName === "function") {
-      var elements: NodeListOf<Element> | Array<HTMLElement> = renderedElements[
-        i
-      ].getElementsByClassName("form-control");
+      var elements = <HTMLCollectionOf<HTMLElement>>(
+        renderedElements[i].getElementsByClassName("form-control")
+      );
       if (
         elements.length === 0 &&
         renderedElements[i].className.indexOf("form-control") !== -1
       ) {
-        elements = [renderedElements[i]];
+        elements = <any>[renderedElements[i]];
       }
       if (elements.length > 0) {
-        var element = <any>elements[0];
+        var element = elements[0];
         if (element.tagName.toLowerCase() !== "a") {
           setTimeout(() => element.focus({ preventScroll: true }), 10);
           break;
