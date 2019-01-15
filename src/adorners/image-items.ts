@@ -120,6 +120,8 @@ export var imageItemsAdorner = {
         },
         decoration
       );
+      ko.tasks.runEarly();
+      editor.onAdornerRenderedCallback(model, "image-items", decoration);
     }
 
     var sortable = Sortable.create(itemsRoot, {

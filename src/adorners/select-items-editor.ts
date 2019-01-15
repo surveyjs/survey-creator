@@ -93,6 +93,8 @@ export var selectItemsEditorAdorner = {
       },
       decoration
     );
+    ko.tasks.runEarly();
+    editor.onAdornerRenderedCallback(model, "select-choices", decoration);
   }
 };
 

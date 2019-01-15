@@ -530,6 +530,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * Use this event to get access rendered adorder.
+   * <br/> sender the survey editor object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.question the survey element of the adorner.
+   * <br/> options.adorner the adorner id.
+   * <br/> options.element a root adorner element.
+   */
+  public onAdornerRendered: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
   public get isAutoSave() {
@@ -1781,7 +1793,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   private getNewName(type: string): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.pages());
-    return type == "panel" || type == "flowpanel" ? this.getNewPanelName() : this.getNewQuestionName();
+    return type == "panel" || type == "flowpanel"
+      ? this.getNewPanelName()
+      : this.getNewQuestionName();
   }
   private getNewQuestionName(): string {
     return SurveyHelper.getNewQuestionName(this.getAllQuestions());
@@ -2161,6 +2175,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       survey: survey
     };
     this.onConditionValueSurveyCreated.fire(this, options);
+  }
+  onAdornerRenderedCallback(
+    question: Survey.Question,
+    adorner: string,
+    element: HTMLElement
+  ) {
+    var options = {
+      survey: this.survey,
+      question: question,
+      adorner: adorner,
+      element: element
+    };
+    this.onAdornerRendered.fire(this, options);
   }
   /**
    * Upload the files on a server

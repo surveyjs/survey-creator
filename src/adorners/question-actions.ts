@@ -51,6 +51,8 @@ export var questionActionsAdorner = {
       "<question-actions params='question: model, editor: editor'></question-actions>";
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
+    ko.tasks.runEarly();
+    editor.onAdornerRenderedCallback(model, "question-actions", decoration);
   }
 };
 

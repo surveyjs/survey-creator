@@ -46,7 +46,9 @@ export class TitleInplaceEditor {
     var holder = this.rootElement.parentElement.parentElement;
     for (var i = 0; i < holder.children.length - 1; i++) {
       var element = holder.children[i];
-      func(element);
+      if (element.className.indexOf("svda-custom-content") === -1) {
+        func(element);
+      }
     }
   }
 
@@ -147,6 +149,8 @@ export var titleAdorner = {
       "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
+    ko.tasks.runEarly();
+    editor.onAdornerRenderedCallback(model, "title", decoration);
   }
 };
 
@@ -168,6 +172,8 @@ export var itemTitleAdorner = {
         "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
       elements[i].appendChild(decoration);
       ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
+      ko.tasks.runEarly();
+      editor.onAdornerRenderedCallback(model, "item-title", decoration);
     }
   }
 };
