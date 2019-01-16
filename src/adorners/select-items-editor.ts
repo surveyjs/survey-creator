@@ -62,6 +62,12 @@ ko.components.register("select-items-editor", {
           var newChoices = [].concat(params.question.choices);
           choices([]);
           choices(newChoices);
+          ko.tasks.runEarly();
+          params.editor.onAdornerRenderedCallback(
+            params.question,
+            "select-choices",
+            componentInfo.element
+          );
         },
         otherText: otherText,
         otherValueChanged: (itemValue, propertyName, newValue) => {
