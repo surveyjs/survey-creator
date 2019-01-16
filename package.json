@@ -1,5 +1,5 @@
 {
-  "version": "1.0.63",
+  "version": "1.0.64",
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
@@ -25,7 +25,7 @@
     "@types/ace": "0.0.32",
     "@types/bootstrap": "3.3.32",
     "@types/jquery": "2.0.41",
-    "@types/knockout": "3.4.39",
+    "@types/knockout": "3.4.63",
     "@types/node": "7.0.4",
     "@types/qunit": "2.0.31",
     "ace-builds": "1.2.2",
@@ -61,6 +61,7 @@
     "testcafe": "0.17.2",
     "ts-loader": "2.3.4",
     "ts-node": "3.3.0",
+    "typescript": "3.2.2",
     "url-loader": "0.5.8",
     "val-loader": "0.5.0",
     "webpack": "2.2.1",
