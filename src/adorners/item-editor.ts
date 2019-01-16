@@ -126,7 +126,12 @@ export var itemAdorner = {
         decoration
       );
       ko.tasks.runEarly();
-      editor.onAdornerRenderedCallback(model, "choices-label", decoration);
+      editor.onAdornerRenderedCallback(
+        model,
+        "choices-label",
+        decoration,
+        itemValue
+      );
     }
   }
 };

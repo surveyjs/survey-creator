@@ -536,6 +536,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * <br/> options.question the survey element of the adorner.
    * <br/> options.adorner the adorner id.
    * <br/> options.element a root adorner element.
+   * <br/> options.context a context for adorner element, e.g. current item of a select base question.
    */
   public onAdornerRendered: Survey.Event<
     (sender: SurveyEditor, options: any) => any,
@@ -2179,13 +2180,15 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   onAdornerRenderedCallback(
     question: Survey.Question,
     adorner: string,
-    element: HTMLElement
+    element: HTMLElement,
+    context?: any
   ) {
     var options = {
       survey: this.survey,
       question: question,
       adorner: adorner,
-      element: element
+      element: element,
+      context: context
     };
     this.onAdornerRendered.fire(this, options);
   }

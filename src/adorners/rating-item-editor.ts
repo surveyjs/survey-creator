@@ -135,7 +135,7 @@ export var ratingItemAdorner = {
         decoration
       );
       ko.tasks.runEarly();
-      editor.onAdornerRenderedCallback(model, "rating-item", decoration);
+      editor.onAdornerRenderedCallback(model, "rating-item", decoration, item);
     }
 
     var addNew = document.createElement("span");

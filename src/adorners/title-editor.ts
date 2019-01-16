@@ -173,7 +173,12 @@ export var itemTitleAdorner = {
       elements[i].appendChild(decoration);
       ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
       ko.tasks.runEarly();
-      editor.onAdornerRenderedCallback(model, "item-title", decoration);
+      editor.onAdornerRenderedCallback(
+        model,
+        "item-title",
+        decoration,
+        model.items[i]
+      );
     }
   }
 };
