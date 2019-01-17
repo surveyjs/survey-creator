@@ -113,6 +113,7 @@ export class SurveyQuestionEditorDefinition {
       properties: ["label"]
     },
     expression: {
+      properties: ["currency", "displayStyle"],
       tabs: [{ name: "expression", index: 10 }]
     },
     matrixdropdowncolumn: {
@@ -183,7 +184,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@expression": {
-      properties: ["name"],
+      properties: ["name", "displayStyle", "currency"],
       tabs: [{ name: "expression", index: 10 }]
     },
     multipletextitem: {
