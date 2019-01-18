@@ -62,3 +62,17 @@ QUnit.test("add de localization", function(assert) {
     "default localization"
   );
 });
+
+QUnit.test("change default ('en') locale", function(assert) {
+  var enStrings = defaultStrings;
+  enStrings.p.isRequired = "some new text";
+
+  editorLocalization.locales["en"] = enStrings;
+  editorLocalization.currentLocale = "en";
+
+  assert.equal(
+    editorLocalization.getString("p.isRequired"),
+    enStrings.p.isRequired,
+    "en localization"
+  );
+});

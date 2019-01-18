@@ -6,12 +6,13 @@ export var editorLocalization = {
   locales: {},
   getString: function(strName: string, locale: string = null) {
     var loc = this.getLocale(locale);
+    var defaultLocale = this.getLocale("en");
     var path = strName.split(".");
     var obj = loc;
     for (var i = 0; i < path.length; i++) {
       obj = obj[path[i]];
       if (!obj) {
-        if (loc === defaultStrings) return path[i];
+        if (loc === defaultLocale) return path[i];
         return this.getString(strName, "en");
       }
     }
