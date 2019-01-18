@@ -281,6 +281,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     survey: Survey.Survey
   ) {}
+  onConditionQuestionsGetListCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    list: any[]
+  ) {}
 }
 
 QUnit.test("On new ItemValue added", function(assert) {

@@ -411,6 +411,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
+   * Use this event to modify the list (name and titles) od the questions available in a condition editor.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.editor the instance of Property Editor.
+   * <br/> options.list the the list of the questions available for condition
+   */
+  public onConditionQuestionsGetList: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * Use this event to process key down event in a property editor
    * <br/> sender the survey editor object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
@@ -2176,6 +2188,20 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       survey: survey
     };
     this.onConditionValueSurveyCreated.fire(this, options);
+  }
+  onConditionQuestionsGetListCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    list: any[]
+  ) {
+    var options = {
+      propertyName: propertyName,
+      obj: obj,
+      editor: editor,
+      list: list
+    };
+    this.onConditionQuestionsGetList.fire(this, options);
   }
   onAdornerRenderedCallback(
     question: Survey.Question,

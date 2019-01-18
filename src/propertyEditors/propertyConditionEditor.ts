@@ -139,6 +139,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         res.push({ name: names[i], text: names[i] });
       }
     }
+    !!this.options &&
+      this.options.onConditionQuestionsGetListCallback(
+        this.editablePropertyName,
+        this.object,
+        this,
+        res
+      );
     return res;
   }
   private addQuestionNames(
