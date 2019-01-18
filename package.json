@@ -3,6 +3,7 @@
   "name": "surveyjs.editor",
   "scripts": {
     "test": "karma start",
+    "testsingle": "karma start --single-run",
     "test_ci": "karma start --single-run",
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docgenerator.ts src/entries/index.ts ",
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/editor_docupdater.ts",
@@ -65,6 +66,12 @@
     "url-loader": "0.5.8",
     "val-loader": "0.5.0",
     "webpack": "2.2.1",
+    "husky": "^1.2.1",
     "webpack-svgstore-plugin": "4.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run testsingle"
+    }
   }
 }
