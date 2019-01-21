@@ -365,6 +365,7 @@ export class QuestionToolbox {
     return null;
   }
   protected onItemsChanged() {
+    this.koItems([]);
     this.koItems(this.itemsValue);
     var categories = [];
     var categoriesHash = {};
