@@ -1,15 +1,15 @@
 ﻿<script type="text/html" id="questioneditortab">
-    <div class="row">
-        <div class="col-sm-12">
-            <!-- ko foreach: properties.rows -->
-            <div class="form-group">
-                <!-- ko foreach: properties -->
-                    <div data-bind="event: { keydown: objectProperty.editor.keyDownHandler }">
-                    <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
-                    </div>
-                <!-- /ko  -->
-            </div>
-            <!-- /ko  -->
-        </div>
-    </div>
+  <div class="row" data-bind="css: 'svd-popup-editor-tab-' + name">
+      <div class="col-sm-12">
+          <!-- ko foreach: properties.rows -->
+          <div class="form-group">
+              <!-- ko foreach: properties -->
+                  <div data-bind="event: { keydown: objectProperty.editor.keyDownHandler }">
+                  <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
+                  </div>
+              <!-- /ko  -->
+          </div>
+          <!-- /ko  -->
+      </div>
+  </div>
 </script>
