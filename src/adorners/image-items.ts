@@ -155,8 +155,9 @@ export var imageItemsAdorner = {
           files.push(fileInput.files[i]);
         }
 
+        var itemText = Survey.surveyLocalization.getString("choices_Item");
         var nextValue = getNextValue(
-          "item",
+          itemText,
           (model.choices || []).map(c => c.value)
         );
         var itemValue = new (<any>Survey)["ItemValue"](
