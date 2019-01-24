@@ -249,7 +249,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     for (var i = 0; i < items.length; i++) {
       //TODO replace with locText.hasNonDefaultText()
       var json = items[i].item.locText.getJson();
-      if (!!json) {
+      if (!!json && typeof json !== "string") {
         var keys = Object.keys(json);
         if (keys.length > 1) return true;
         return keys[0] != "default";

@@ -358,6 +358,16 @@ QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   editor.onApplyClick();
   assert.equal(choices.length, 1, "The value is still applied");
 });
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534",
+  function(assert) {
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.beforeShow();
+    editor.editingValue = ["1|item1", "item2"];
+    assert.ok(editor.koShowTextView(), "Editor can show text view (fastEntry)");
+  }
+);
+
 QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
   assert
 ) {
