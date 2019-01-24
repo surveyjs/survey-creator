@@ -1954,7 +1954,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.isPageUpdating = true;
     try {
       var selectedObject = this.koSelectedObject().value;
-      if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) return;
+      if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
+        if (SurveyHelper.getObjectType(selectedObject) === ObjType.Question && !!selectedObject["koElementType"]) {
+          selectedObject["koElementType"].notifySubscribers();
+        }
+        return;
+      }
       var index = this.pages.indexOf(selectedObject);
       this.pages.splice(index, 1);
       this.pages.splice(index, 0, selectedObject);
