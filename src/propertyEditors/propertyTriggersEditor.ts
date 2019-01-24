@@ -152,7 +152,8 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     if (trigger.getType() == "runexpressiontrigger") {
       triggerItem = new SurveyPropertyRunExpressionTrigger(
         trigger,
-        this.koQuestions
+        this.koQuestions,
+        this.options
       );
     }
     if (!triggerItem) {
@@ -164,6 +165,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
 export class SurveyPropertyTrigger {
   private triggerType: string;
   availableOperators = [];
+  options: any;
   koName: any;
   koOperator: any;
   koValue: any;
@@ -173,7 +175,7 @@ export class SurveyPropertyTrigger {
   koRequireValue: any;
   conditionEditor: SurveyPropertyConditionEditor = null;
 
-  constructor(public trigger: Survey.SurveyTrigger) {
+  constructor(public trigger: Survey.SurveyTrigger, options?: any) {
     this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.triggerType = trigger.getType();
     this.koType = ko.observable(this.triggerType);
@@ -188,6 +190,7 @@ export class SurveyPropertyTrigger {
       this.conditionEditor = new SurveyPropertyConditionEditor(
         expressionProperty
       );
+      this.conditionEditor.options = options;
       this.conditionEditor.showHelpText = false;
       if (!this.trigger.expression) {
         this.trigger.expression = this.trigger.buildExpression();
@@ -381,8 +384,12 @@ export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
   koQuestions: any;
   kosetToName: any;
   korunExpression: any;
-  constructor(public trigger: Survey.SurveyTrigger, koQuestions: any) {
-    super(trigger);
+  constructor(
+    public trigger: Survey.SurveyTrigger,
+    koQuestions: any,
+    options?: any
+  ) {
+    super(trigger, options);
     this.koQuestions = koQuestions;
     this.kosetToName = ko.observable(trigger["setToName"]);
     this.korunExpression = ko.observable(trigger["runExpression"]);
