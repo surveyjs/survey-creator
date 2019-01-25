@@ -85,8 +85,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     };
     this.resetAddConditionValues();
   }
-  public setObject(value: any) {
-    super.setObject(value);
+  public beforeShow() {
+    super.beforeShow();
     this.addConditionQuestionsHash = {};
     this.koAddConditionQuestions(this.allConditionQuestions);
   }
