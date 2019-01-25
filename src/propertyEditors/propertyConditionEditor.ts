@@ -51,9 +51,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       self.onValueSurveyChanged(self.koAddConditionQuestion(), newValue);
     });
     this.koAddConditionValue.subscribe(function(newValue) {
+      var newValue = newValue === "" ? {} : JSON.parse(newValue);
       if (self.koHasValueSurvey()) {
         self.isValueChanging = true;
-        self.koValueSurvey().setValue("question", JSON.parse(newValue));
+        self.koValueSurvey().setValue("question", newValue);
         self.isValueChanging = false;
       }
     });
