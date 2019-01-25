@@ -26,6 +26,11 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       self.addItem(item.value);
     };
     this.koSelected = ko.observable(null);
+    this.koSelected.subscribe(function(newValue) {
+      if (!!newValue) {
+        newValue.beforeShow();
+      }
+    });
     this.koPages = ko.observableArray();
     this.koQuestions = ko.observableArray();
     this.koQuestionNames = ko.observableArray();
@@ -105,7 +110,11 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     var names = [];
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
-      if (this.options && this.options.showTitlesInExpressions && item["title"]) {
+      if (
+        this.options &&
+        this.options.showTitlesInExpressions &&
+        item["title"]
+      ) {
         names.push(item["title"]);
       } else if (item["name"]) {
         names.push(item["name"]);
@@ -221,6 +230,11 @@ export class SurveyPropertyTrigger {
       self.koValue();
       return self.getText();
     });
+  }
+  public beforeShow() {
+    if (!!this.conditionEditor) {
+      this.conditionEditor.beforeShow();
+    }
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = <Survey.SurveyTrigger>(
