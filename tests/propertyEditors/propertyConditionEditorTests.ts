@@ -243,6 +243,7 @@ QUnit.test(
 
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
+    editor.beforeShow();
     editor.koAddConditionQuestion("q2");
     editor.koAddConditionValue("abc");
     editor.addCondition();
@@ -289,6 +290,7 @@ QUnit.test(
 
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
+    editor.beforeShow();
 
     editor.koAddConditionQuestion("q2.");
     assert.equal(editor.koHasValueSurvey(), true, "There is value survey");
@@ -335,6 +337,7 @@ QUnit.test(
     question2.valueName = "val2";
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
+    editor.beforeShow();
     editor.koAddConditionQuestion("q2");
     editor.koAddConditionValue("abc");
     editor.apply();
