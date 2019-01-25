@@ -105,7 +105,9 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     var names = [];
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
-      if (item["name"]) {
+      if (this.options && this.options.showTitlesInExpressions && item["title"]) {
+        names.push(item["title"]);
+      } else if (item["name"]) {
         names.push(item["name"]);
       }
     }
@@ -133,20 +135,23 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       triggerItem = new SurveyPropertyVisibleTrigger(
         <Survey.SurveyTriggerVisible>trigger,
         this.koPages,
-        this.koElements
+        this.koElements,
+        this.options
       );
     }
     if (trigger.getType() == "setvaluetrigger") {
       triggerItem = new SurveyPropertySetValueTrigger(
         <Survey.SurveyTriggerSetValue>trigger,
         this.koQuestions,
-        this.editingObject
+        this.editingObject,
+        this.options
       );
     }
     if (trigger.getType() == "copyvaluetrigger") {
       triggerItem = new SurveyPropertyCopyValueTrigger(
         trigger,
-        this.koQuestions
+        this.koQuestions,
+        this.options
       );
     }
     if (trigger.getType() == "runexpressiontrigger") {
@@ -157,7 +162,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       );
     }
     if (!triggerItem) {
-      triggerItem = new SurveyPropertyTrigger(trigger);
+      triggerItem = new SurveyPropertyTrigger(trigger, this.options);
     }
     return triggerItem;
   }
@@ -268,18 +273,21 @@ export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
   constructor(
     public trigger: Survey.SurveyTriggerVisible,
     koPages: any,
-    koQuestions: any
+    koQuestions: any,
+    options?: any
   ) {
-    super(trigger);
+    super(trigger, options);
     this.pages = new SurveyPropertyTriggerObjects(
       editorLocalization.getString("pe.triggerMakePagesVisible"),
       koPages(),
-      trigger.pages
+      trigger.pages,
+      options
     );
     this.questions = new SurveyPropertyTriggerObjects(
       editorLocalization.getString("pe.triggerMakeQuestionsVisible"),
       koQuestions(),
-      trigger.questions
+      trigger.questions,
+      options
     );
   }
   public createTrigger(): Survey.SurveyTrigger {
@@ -302,9 +310,10 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   constructor(
     public trigger: Survey.SurveyTriggerSetValue,
     koQuestions: any,
-    public triggerSurvey: Survey.Survey
+    public triggerSurvey: Survey.Survey,
+    options?: any
   ) {
-    super(trigger);
+    super(trigger, options);
     this.koQuestions = koQuestions;
     this.koSurvey = ko.observable(SurveyPropertySetValueTrigger.emptySurvey);
     this.koHasSurvey = ko.observable(false);
@@ -367,8 +376,12 @@ export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {
   koQuestions: any;
   kosetToName: any;
   kofromName: any;
-  constructor(public trigger: Survey.SurveyTrigger, koQuestions: any) {
-    super(trigger);
+  constructor(
+    public trigger: Survey.SurveyTrigger,
+    koQuestions: any,
+    options?: any
+  ) {
+    super(trigger, options);
     this.koQuestions = koQuestions;
     this.kosetToName = ko.observable(trigger["setToName"]);
     this.kofromName = ko.observable(trigger["fromName"]);
@@ -412,7 +425,8 @@ export class SurveyPropertyTriggerObjects {
   constructor(
     public title: string,
     allObjects: Array<string>,
-    choosenObjects: Array<string>
+    choosenObjects: Array<string>,
+    options?: any
   ) {
     this.koChoosen = ko.observableArray(choosenObjects);
     var array = [];
