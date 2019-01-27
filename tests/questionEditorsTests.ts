@@ -361,9 +361,7 @@ QUnit.test("General properties, has errors", function(assert) {
 });
 
 QUnit.test("Question editor definition: getProperties", function(assert) {
-  var baseProperties = SurveyQuestionEditorDefinition.getProperties(
-    "question"
-  );
+  var baseProperties = SurveyQuestionEditorDefinition.getProperties("question");
   var properties = SurveyQuestionEditorDefinition.getProperties("rating");
   assert.equal(
     properties.length,
@@ -558,4 +556,50 @@ QUnit.test("Question editor: on property value changing", function(assert) {
     ["item 1", "item 2"],
     "The choices has two items"
   );
+  Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
+  Survey.JsonObject.metaData.removeProperty("question", "targetField");
+});
+
+QUnit.test("Question editor: depended property, choices", function(assert) {
+  Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });
+  Survey.JsonObject.metaData.addProperty("question", {
+    name: "targetField",
+    choices: function(obj: any) {
+      var entity = !!obj ? obj.getEditingPropertyValue("targetEntity") : null;
+      if (!entity) return [];
+      return [entity + " 1", entity + " 2"];
+    }
+  });
+  var question = new Survey.QuestionText("q1");
+  var editor = new SurveyEditor();
+  editor.onPropertyEditorObjectAssign.add(function(editor, options) {
+    if (options.propertyName != "targetField") return;
+    if (options.obj) {
+      options.obj.targetFieldEditor = options.editor;
+    }
+  });
+  editor.onPropertyValueChanging.add(function(editor, options) {
+    if (options.propertyName != "targetEntity") return;
+    if (options.obj && options.obj.targetFieldEditor) {
+      options.obj.targetFieldEditor.updateChoices();
+    }
+  });
+  var properties = new SurveyQuestionEditorProperties(
+    question,
+    ["targetEntity", "targetField"],
+    null,
+    editor
+  );
+  var entityEditor = properties.rows[0].properties[0].editor;
+  var targetEditor = properties.rows[1].properties[0].editor;
+
+  assert.deepEqual(targetEditor["koChoices"](), [], "The choices is empty");
+  entityEditor.koValue("item");
+  assert.deepEqual(
+    targetEditor["koChoices"](),
+    ["item 1", "item 2"],
+    "The choices has two items"
+  );
+  Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
+  Survey.JsonObject.metaData.removeProperty("question", "targetField");
 });
