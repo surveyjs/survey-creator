@@ -206,6 +206,7 @@ QUnit.test("SurveyPropertyDropdown - choices", function(assert) {
   property.setChoices([1, 2, 3], null);
   var propertyEditor = new SurveyObjectProperty(property);
   var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  editor.setObject({});
   assert.equal(
     propertyEditor.editorType,
     "dropdown",
@@ -227,6 +228,7 @@ QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function(
     "dropdown",
     "Dropdown editor should be created"
   );
+  editor.setObject({});
   assert.equal(editor.koChoices().length, 3, "There are 3 items");
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, "Item 1", "Use text property");
