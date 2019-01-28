@@ -450,6 +450,8 @@ export class SurveyPropertyTriggerObjects {
         array.push(item);
       }
     }
+    options &&
+      options.onConditionQuestionsGetListCallback(title, this, options, array);
     this.koObjects = ko.observableArray(array);
     this.koSelected = ko.observable();
     this.koChoosenSelected = ko.observable();
