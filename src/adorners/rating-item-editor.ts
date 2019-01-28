@@ -40,6 +40,10 @@ class RatingItemEditor extends TitleInplaceEditor {
     }
     model.editor.onQuestionEditorChanged(question);
   }
+
+  get isLastItem() {
+    return this.question.visibleRateValues.length === 1;
+  }
 }
 
 ko.components.register("rating-item-editor", {

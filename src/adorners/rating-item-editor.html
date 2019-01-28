@@ -1,19 +1,48 @@
 <div class="svda-content">
-    <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
-        <input data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }" style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block; margin: -6px;"
-        />
-        <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">
-            <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplacecheck', size: 12"></svg-icon>
-        </span>
-        <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
+  <span
+    class="svda-title-editor-content"
+    data-bind="visible: isEditing"
+    style="display: none;"
+  >
+    <input
+      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }"
+      style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block; margin: -6px;"
+    />
+    <span
+      class="svda-edit-button"
+      data-bind="click: postEdit, enable: editingName() != ''"
+    >
+      <svg-icon
+        class="svd-primary-icon"
+        params="iconName: 'icon-inplacecheck', size: 12"
+      ></svg-icon>
     </span>
-    <span class="svda-title-editor-content svda-title-editor-start" data-bind="visible: !isEditing()">
-        <span style="display: none;" data-bind="text: editingName"></span>
-        <span class="edit-survey-name" data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }">
-            <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplaceedit', size: 12"></svg-icon>
-        </span>
+    <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
+  </span>
+  <span
+    class="svda-title-editor-content svda-title-editor-start"
+    data-bind="visible: !isEditing()"
+  >
+    <span style="display: none;" data-bind="text: editingName"></span>
+    <span
+      class="edit-survey-name"
+      data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }"
+    >
+      <svg-icon
+        class="svd-primary-icon"
+        params="iconName: 'icon-inplaceedit', size: 12"
+      ></svg-icon>
     </span>
-    <span class="svda-delete-item" data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()">
-        <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplacedelete', size: 12"></svg-icon>
-    </span>
+  </span>
+  <!--ko ifnot: isLastItem -->
+  <span
+    class="svda-delete-item"
+    data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()"
+  >
+    <svg-icon
+      class="svd-primary-icon"
+      params="iconName: 'icon-inplacedelete', size: 12"
+    ></svg-icon>
+  </span>
+  <!-- /ko -->
 </div>

@@ -43,6 +43,10 @@ class ItemInplaceEditor extends TitleInplaceEditor {
       this.question["noneItem"] !== this.item
     );
   }
+
+  get isLastItem() {
+    return this.question.choices.length === 1;
+  }
 }
 
 ko.components.register("item-editor", {

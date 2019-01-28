@@ -29,6 +29,10 @@ class ImageItemInplaceEditor {
     }
   }
 
+  get isLastItem() {
+    return this.question.choices.length === 1;
+  }
+
   chooseImage(model, event) {
     var fileInput = this.itemsRoot.getElementsByClassName(
       "svda-choose-file"
