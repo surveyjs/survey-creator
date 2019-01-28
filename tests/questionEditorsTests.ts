@@ -595,11 +595,11 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
 
   assert.deepEqual(targetEditor["koChoices"](), [], "The choices is empty");
   entityEditor.koValue("item");
-  assert.deepEqual(
-    targetEditor["koChoices"](),
-    ["item 1", "item 2"],
-    "The choices has two items"
-  );
+  var choices = targetEditor["koChoices"]();
+  assert.deepEqual(choices.length, 2, "The choices has two items");
+  assert.deepEqual(choices[0].value, "item 1", "The first item value");
+  assert.deepEqual(choices[1].value, "item 2", "The second item value");
+
   Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
   Survey.JsonObject.metaData.removeProperty("question", "targetField");
 });
