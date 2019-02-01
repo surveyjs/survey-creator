@@ -1513,6 +1513,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (this.surveyValue().isEmpty) {
       this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
     }
+    Survey.surveyLocalization.currentLocale = this.surveyValue()["locale"];
     this.surveyValue().dragDropHelper = this.dragDropHelper;
     this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
@@ -1955,7 +1956,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     try {
       var selectedObject = this.koSelectedObject().value;
       if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
-        if (SurveyHelper.getObjectType(selectedObject) === ObjType.Question && !!selectedObject["koElementType"]) {
+        if (
+          SurveyHelper.getObjectType(selectedObject) === ObjType.Question &&
+          !!selectedObject["koElementType"]
+        ) {
           selectedObject["koElementType"].notifySubscribers();
         }
         return;
