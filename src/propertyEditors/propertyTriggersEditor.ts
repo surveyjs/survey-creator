@@ -107,15 +107,47 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     return result;
   }
   private getNames(items: Array<any>): Array<string> {
+    interface Element {
+      text?: string;
+      name?: string;
+      page?: Survey.Page;
+      question?: Survey.Question;
+    }
+
+    var elements = [];
+    var options = <any>this.options;
     var names = [];
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
+
+    items.forEach(item => {
+      var element: Element = {};
+      element.text = item.title;
+      element.name = item.name;
+
+      if (item.isPage) {
+        element.page = item;
+      } else {
+        element.question = item;
+      }
+
+      elements.push(element);
+    });
+
+    options &&
+      options.onConditionQuestionsGetListCallback(
+        this.editablePropertyName,
+        this,
+        options,
+        elements
+      );
+
+    for (var i = 0; i < elements.length; i++) {
+      var item = elements[i];
       if (
         this.options &&
         this.options.showTitlesInExpressions &&
-        item["title"]
+        item["text"]
       ) {
-        names.push(item["title"]);
+        names.push(item["text"]);
       } else if (item["name"]) {
         names.push(item["name"]);
       }
@@ -450,8 +482,6 @@ export class SurveyPropertyTriggerObjects {
         array.push(item);
       }
     }
-    options &&
-      options.onConditionQuestionsGetListCallback(title, this, options, array);
     this.koObjects = ko.observableArray(array);
     this.koSelected = ko.observable();
     this.koChoosenSelected = ko.observable();
