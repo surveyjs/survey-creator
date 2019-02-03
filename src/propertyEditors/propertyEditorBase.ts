@@ -8,6 +8,11 @@ export interface ISurveyObjectEditorOptions {
   useTabsInElementEditor: boolean;
   showObjectTitles: boolean;
   showTitlesInExpressions: boolean;
+  onIsEditorReadOnlyCallback(
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    readOnly: boolean
+  ): boolean;
   onItemValueAddedCallback(
     propertyName: string,
     itemValue: Survey.ItemValue,
@@ -79,6 +84,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public koDisplayError: any;
   public isTabProperty: boolean = false;
   public isInplaceProperty: boolean = false;
+  public readOnly: any;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
@@ -106,6 +112,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     });
     this.setIsRequired();
     this.setTitleAndDisplayName();
+    this.readOnly = ko.observable(this.getReadOnly());
   }
   public get editorType(): string {
     throw "editorType is not defined";
@@ -122,8 +129,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get editablePropertyName(): string {
     return this.property ? this.property.name : "";
   }
-  public get readOnly() {
-    return this.property ? this.property.readOnly : false;
+  private getReadOnly(): boolean {
+    var res = this.property ? this.property.readOnly : false;
+    if (!!this.options && !!this.property && !!this.object) {
+      res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
+    }
+    return res;
   }
   public get alwaysShowEditor(): boolean {
     return false;
@@ -186,6 +197,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         this.object,
         this
       );
+      this.readOnly(this.getReadOnly());
     }
   }
 

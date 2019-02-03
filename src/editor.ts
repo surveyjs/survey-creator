@@ -23,6 +23,7 @@ import { SurveyForDesigner } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
+import { isProperty } from "babel-types";
 
 /**
  * The toolbar item description
@@ -180,6 +181,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     (sender: SurveyEditor, options: any) => any,
     any
   > = this.onShowingProperty;
+  /**
+   * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
+   * You may changed it and make the property editor read only or enabled for a particular object.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
+   */
+  public onGetPropertyReadOnly: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
    * <br/> sender the survey editor object that fires the event
@@ -1955,7 +1968,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     try {
       var selectedObject = this.koSelectedObject().value;
       if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
-        if (SurveyHelper.getObjectType(selectedObject) === ObjType.Question && !!selectedObject["koElementType"]) {
+        if (
+          SurveyHelper.getObjectType(selectedObject) === ObjType.Question &&
+          !!selectedObject["koElementType"]
+        ) {
           selectedObject["koElementType"].notifySubscribers();
         }
         return;
@@ -2089,6 +2105,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
   set showApplyButtonInEditors(value: boolean) {
     this.showApplyButtonValue = value;
+  }
+  onIsEditorReadOnlyCallback(
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    readOnly: boolean
+  ): boolean {
+    if (this.onGetPropertyReadOnly.isEmpty) return readOnly;
+    var options = {
+      obj: obj,
+      property: editor.property,
+      readOnly: readOnly,
+      propertyName: editor.property.name
+    };
+    this.onGetPropertyReadOnly.fire(this, options);
+    return options.readOnly;
   }
   onItemValueAddedCallback(
     propertyName: string,

@@ -603,3 +603,30 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
   Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
   Survey.JsonObject.metaData.removeProperty("question", "targetField");
 });
+QUnit.test("Question editor: change editor.readOnly", function(assert) {
+  var question = new Survey.QuestionText("q2");
+  var editor = new SurveyEditor();
+  editor.onGetPropertyReadOnly.add(function(editor, options) {
+    if (options.propertyName != "name") return;
+    options.readOnly = options.obj.name == "q1";
+  });
+  var properties = new SurveyQuestionEditorProperties(
+    question,
+    ["name"],
+    null,
+    editor
+  );
+  var questionEditor = properties.rows[0].properties[0].editor;
+  assert.equal(
+    questionEditor.readOnly(),
+    false,
+    "The question 'q2' is not readOnly"
+  );
+  question.name = "q1";
+  questionEditor.object = question;
+  assert.equal(
+    questionEditor.readOnly(),
+    true,
+    "The question 'q1' is readOnly"
+  );
+});

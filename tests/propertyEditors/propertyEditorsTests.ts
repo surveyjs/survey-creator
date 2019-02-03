@@ -55,6 +55,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   useTabsInElementEditor: boolean;
   showObjectTitles: boolean;
   showTitlesInExpressions: boolean;
+  onIsEditorReadOnlyCallback(
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase, readOnly: boolean
+  ): boolean {
+    return false;
+  }
   onItemValueAddedCallback(
     propertyName: string,
     itemValue: Survey.ItemValue,
