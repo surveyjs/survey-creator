@@ -529,10 +529,10 @@ export var enStrings = {
     text: "text",
     minValue: "minimum value",
     maxValue: "maximum value",
-    minLength: "minumum length",
+    minLength: "minimum length",
     maxLength: "maximum length",
     allowDigits: "allow digits",
-    minCount: "minumum count",
+    minCount: "minimum count",
     maxCount: "maximum count",
     regex: "regular expression"
   }

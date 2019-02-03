@@ -1526,6 +1526,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (this.surveyValue().isEmpty) {
       this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
     }
+    Survey.surveyLocalization.currentLocale = this.surveyValue()["locale"];
     this.surveyValue().dragDropHelper = this.dragDropHelper;
     this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
