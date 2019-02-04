@@ -1,19 +1,19 @@
 ﻿<script type="text/html" id="propertyeditor-triggersitems">
-    <div>
-        <div class="form-group" data-bind="text: title"></div>
-        <div class="form-group input-group">
-            <select onmousewheel="return false;" class="form-control" multiple="multiple" data-bind="options:koChoosen, value: koChoosenSelected"></select>
-            <span class="input-group-addon btn-danger" data-bind="enable: koChoosenSelected() != null, click: onDeleteClick">
-                <span class="glyphicon glyphicon-remove"></span>
-            </span>
-        </div>
-        <div class="form-group input-group">
-            <div class="form-control svd_custom_select">
-                <select onmousewheel="return false;" data-bind="options:koObjects, value: koSelected"></select>
-            </div>
-            <span class="input-group-addon btn-default" data-bind="enable: koSelected() != null, click: onAddClick">
-                <span class="glyphicon glyphicon-plus svd-main-color"></span>
-            </span>
-        </div>
-    </div>
+  <div>
+      <div class="form-group" data-bind="text: title"></div>
+      <div class="form-group input-group">
+          <select onmousewheel="return false;" class="form-control" multiple="multiple" data-bind="options:koChoosen, value: koChoosenSelected, optionsText: 'text'"></select>
+          <span class="input-group-addon btn-danger" data-bind="click: deleteItem">
+              <span class="glyphicon glyphicon-remove"></span>
+          </span>
+      </div>
+      <div class="form-group input-group">
+          <div class="form-control svd_custom_select">
+              <select onmousewheel="return false;" data-bind="options:koObjects, value: koSelected, optionsText: 'text'"></select>
+          </div>
+          <span class="input-group-addon btn-default" data-bind="click: addItem">
+              <span class="glyphicon glyphicon-plus svd-main-color"></span>
+          </span>
+      </div>
+  </div>
 </script>

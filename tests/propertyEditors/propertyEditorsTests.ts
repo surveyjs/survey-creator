@@ -1013,7 +1013,7 @@ QUnit.test("Triggers property editor", function(assert) {
     "expression set correctly"
   );
   assert.deepEqual(
-    koTrigger.questions.koChoosen(),
+    koTrigger.questions.koChoosen().map(o => o.name),
     ["question2"],
     "questions set correctly"
   );
@@ -1031,8 +1031,8 @@ QUnit.test("Triggers property editor", function(assert) {
     "text for valid trigger"
   );
 
-  koTrigger.pages.koChoosen.push("page2");
-  koTrigger.questions.koChoosen.push("question3");
+  koTrigger.pages.koChoosen.push({name:"page2"});
+  koTrigger.questions.koChoosen.push({name:"question3"});
   koTrigger.koValue(1);
   trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
   assert.equal(

@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <input class="form-control" type="text" data-bind="value:kosetToName, visible: koisVariable" />
                             <div class="form-control svd_custom_select" data-bind="visible: !koisVariable()">
-                                <select onmousewheel="return false;" data-bind="options:koQuestions, value: kosetToName, optionsCaption: setToNameOptions"></select>
+                                <select onmousewheel="return false;" data-bind="options:koQuestions, value: kosetToName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
                             </div>
                         </div>
                     </div>

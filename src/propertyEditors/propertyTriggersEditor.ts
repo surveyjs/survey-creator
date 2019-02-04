@@ -7,6 +7,13 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 
+interface Element {
+  text?: string;
+  name?: string;
+  page?: Survey.Page;
+  question?: Survey.Question;
+}
+
 export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   koElements: any;
   koQuestions: any;
@@ -48,10 +55,10 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   protected onValueChanged() {
     if (this.editingObject) {
       var allQuestions = (<Survey.Survey>this.editingObject).getAllQuestions();
-      this.koPages(this.getNames((<Survey.Survey>this.editingObject).pages));
-      this.koQuestions(this.getNames(allQuestions));
+      this.koPages(this.getElements((<Survey.Survey>this.editingObject).pages));
+      this.koQuestions(this.getElements(allQuestions));
       this.koQuestionNames(this.getQuestionNames(allQuestions));
-      this.koElements(this.getNames(this.getAllElements()));
+      this.koElements(this.getElements(this.getAllElements()));
     }
     super.onValueChanged();
     if (this.koSelected) {
@@ -106,22 +113,23 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     }
     return result;
   }
-  private getNames(items: Array<any>): Array<string> {
-    interface Element {
-      text?: string;
-      name?: string;
-      page?: Survey.Page;
-      question?: Survey.Question;
-    }
-
+  private getElements(items: Array<any>): Array<string> {
     var elements = [];
     var options = <any>this.options;
-    var names = [];
 
     items.forEach(item => {
       var element: Element = {};
-      element.text = item.title;
+
       element.name = item.name;
+      element.text = item.name;
+
+      if (
+        this.options &&
+        this.options.showTitlesInExpressions &&
+        item["title"]
+      ) {
+        element.text = item.title;
+      }
 
       if (item.isPage) {
         element.page = item;
@@ -140,19 +148,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
         elements
       );
 
-    for (var i = 0; i < elements.length; i++) {
-      var item = elements[i];
-      if (
-        this.options &&
-        this.options.showTitlesInExpressions &&
-        item["text"]
-      ) {
-        names.push(item["text"]);
-      } else if (item["name"]) {
-        names.push(item["name"]);
-      }
-    }
-    return names;
+    return elements;
   }
   private getQuestionNames(questions: Array<Survey.IQuestion>): Array<string> {
     var items = [];
@@ -326,20 +322,18 @@ export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
     this.pages = new SurveyPropertyTriggerObjects(
       editorLocalization.getString("pe.triggerMakePagesVisible"),
       koPages(),
-      trigger.pages,
-      options
+      trigger.pages
     );
     this.questions = new SurveyPropertyTriggerObjects(
       editorLocalization.getString("pe.triggerMakeQuestionsVisible"),
       koQuestions(),
-      trigger.questions,
-      options
+      trigger.questions
     );
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = <Survey.SurveyTriggerVisible>super.createTrigger();
-    trigger.pages = this.pages.koChoosen();
-    trigger.questions = this.questions.koChoosen();
+    trigger.pages = this.pages.koChoosen().map(o => o.name);
+    trigger.questions = this.questions.koChoosen().map(o => o.name);
     return trigger;
   }
 }
@@ -462,44 +456,37 @@ export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
 }
 
 export class SurveyPropertyTriggerObjects {
-  koObjects: any;
-  koChoosen: any;
-  koSelected: any;
-  koChoosenSelected: any;
+  koObjects = ko.observableArray<Element>();
+  koChoosen = ko.observableArray<Element>();
+  koSelected = ko.observable<Element>();
+  koChoosenSelected = ko.observable<Element>();
   public onDeleteClick: any;
   public onAddClick: any;
   constructor(
     public title: string,
-    allObjects: Array<string>,
-    choosenObjects: Array<string>,
-    options?: any
+    allObjects: Array<Element>,
+    choosenObjects: Array<string>
   ) {
-    this.koChoosen = ko.observableArray(choosenObjects);
-    var array = [];
-    for (var i = 0; i < allObjects.length; i++) {
-      var item = allObjects[i];
-      if (choosenObjects.indexOf(item) < 0) {
-        array.push(item);
+    allObjects.forEach(obj => {
+      if (choosenObjects.indexOf(obj.name) !== -1) {
+        this.koChoosen.push(obj);
+      } else {
+        this.koObjects.push(obj);
       }
-    }
-    this.koObjects = ko.observableArray(array);
-    this.koSelected = ko.observable();
-    this.koChoosenSelected = ko.observable();
-    var self = this;
-    this.onDeleteClick = function() {
-      self.deleteItem();
-    };
-    this.onAddClick = function() {
-      self.addItem();
-    };
+    });
   }
-  private deleteItem() {
+  private deleteItem = () => {
     this.changeItems(this.koChoosenSelected(), this.koChoosen, this.koObjects);
-  }
-  private addItem() {
+  };
+  private addItem = () => {
     this.changeItems(this.koSelected(), this.koObjects, this.koChoosen);
-  }
-  private changeItems(item: string, removedFrom: any, addTo: any) {
+  };
+  private changeItems(
+    item: Element,
+    removedFrom: KnockoutObservableArray<Element>,
+    addTo: KnockoutObservableArray<Element>
+  ) {
+    if (!item) return;
     removedFrom.remove(item);
     addTo.push(item);
     removedFrom.sort();
