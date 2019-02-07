@@ -61,13 +61,15 @@ export class DragDropHelper {
     this.prevCoordinates = { x: -1, y: -1 };
   }
   public attachToElement(domElement, surveyElement) {
-    domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
-    domElement.draggable = surveyElement.allowingOptions.allowDragging;
     var isFlowPanel =
       surveyElement.isPanel &&
       typeof surveyElement.getChildrenLayoutType === "function" &&
       surveyElement.getChildrenLayoutType() === "flow";
     var isFlowPanelInChrome = isFlowPanel && !!window["chrome"];
+
+    domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
+    domElement.draggable =
+      surveyElement.allowingOptions.allowDragging && !isFlowPanel;
     if (isFlowPanelInChrome) {
       domElement.onpaste = function doPaste(e, el) {
         e.preventDefault();
@@ -161,7 +163,8 @@ export class DragDropHelper {
         }
         e.cancelBubble = true;
       };
-    } else {
+    }
+    if (isFlowPanelInChrome) {
       domElement.ondragstart = function(e: DragEvent) {
         surveyElement.isDragStarted = true;
       };
@@ -220,10 +223,6 @@ export class DragDropHelper {
     this.ddTarget.moveTo(element, bottomInfo.isBottom, isEdge);
   }
   public doDragDropOverFlow(event: DragEvent, element: any) {
-    event = this.getEvent(event);
-    if (!!event.stopPropagation) {
-      event.stopPropagation();
-    }
     if (!!this.ddTarget) {
       return this.ddTarget.moveTo(element, false, false);
     }
