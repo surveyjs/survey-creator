@@ -1304,7 +1304,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     newValue: any
   ) {
     var oldValue = obj[property.name];
-    obj[property.name] = newValue;
+    if (property.name === "page" && typeof newValue === "string") {
+      obj[property.name] = obj.survey.getPageByName(newValue);
+    } else {
+      obj[property.name] = newValue;
+    }
+
     if (property.name == "name") {
       var newName = this.generateUniqueName(obj, newValue);
       if (newName != newValue) {
