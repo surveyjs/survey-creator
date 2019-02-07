@@ -67,6 +67,26 @@ export class DragDropHelper {
       surveyElement.isPanel &&
       typeof surveyElement.getChildrenLayoutType === "function" &&
       surveyElement.getChildrenLayoutType() === "flow";
+    var isFlowPanelInChrome = isFlowPanel && !!window["chrome"];
+    if (isFlowPanelInChrome) {
+      domElement.onpaste = function doPaste(e, el) {
+        e.preventDefault();
+        var clipData = window["clipboardData"];
+        if (!!clipData) {
+          var content = clipData.getData("text");
+          if (window.getSelection) {
+            var selObj = window.getSelection();
+            var selRange = selObj.getRangeAt(0);
+            selRange.deleteContents();
+            selRange.insertNode(document.createTextNode(content));
+          }
+        } else if ((e.originalEvent || e).clipboardData) {
+          content = (e.originalEvent || e).clipboardData.getData("text/plain");
+          document.execCommand("insertText", false, content);
+        }
+        return true;
+      };
+    }
     domElement.ondragover = function(e) {
       if (!surveyElement.allowingOptions.allowDragging) return false;
       if (isFlowPanel)
@@ -87,6 +107,37 @@ export class DragDropHelper {
         !!helper.ddTarget.source &&
         helper.ddTarget.source.parent == surveyElement
       );
+      //Fix the bug for chrome in contenteditable
+      if (isFlowPanelInChrome) {
+        var content = e.dataTransfer.getData("text");
+        var dropRange = null;
+        if (!!document.caretRangeFromPoint) {
+          dropRange = document.caretRangeFromPoint(e.clientX, e.clientY);
+        } else {
+          if (!!document.caretPositionFromPoint) {
+            dropRange = document.caretPositionFromPoint(e.clientX, e.clientY);
+          }
+        }
+        if (!!dropRange) {
+          preventDefault = true;
+          e.preventDefault();
+          if (surveyElement["isDragStarted"]) {
+            var selObj = window.getSelection();
+            if (!!selObj && selObj.rangeCount > 0) {
+              var selRange = selObj.getRangeAt(0);
+              if (!!selRange) {
+                selRange.deleteContents();
+              }
+            }
+          }
+          dropRange.insertNode(document.createTextNode(content));
+          let selection = window.getSelection();
+          if (!!selection) {
+            selection.removeAllRanges();
+            selection.addRange(dropRange);
+          }
+        }
+      }
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         helper.doDrop(e, preventDefault);
@@ -110,8 +161,13 @@ export class DragDropHelper {
         }
         e.cancelBubble = true;
       };
+    } else {
+      domElement.ondragstart = function(e: DragEvent) {
+        surveyElement.isDragStarted = true;
+      };
     }
     domElement.ondragend = function(e) {
+      delete surveyElement["isDragStarted"];
       surveyElement.dragDropHelper().end();
     };
   }
