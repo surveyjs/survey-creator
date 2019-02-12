@@ -391,6 +391,10 @@ Survey.Panel.prototype["onAfterRenderPanel"] = function(el) {
   }
   elementOnAfterRendering(el, this, true, this.koIsDragging());
 };
+Survey.Panel.prototype["onSelectedElementChanged"] = function() {
+  if (getSurvey(this) == null) return;
+  this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
+};
 
 if (!!Survey["FlowPanel"]) {
   Survey["FlowPanel"].prototype["onCreating"] = function() {
@@ -410,12 +414,11 @@ if (!!Survey["FlowPanel"]) {
       }
     }
   };
+  Survey["FlowPanel"].prototype["onSelectedElementChanged"] = function() {
+    if (getSurvey(this) == null) return;
+    this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
+  };
 }
-
-Survey.PanelModel.prototype["onSelectedElementChanged"] = function() {
-  if (getSurvey(this) == null) return;
-  this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
-};
 
 var questionPrototype = !!Survey["QuestionBase"]
   ? Survey["QuestionBase"].prototype
