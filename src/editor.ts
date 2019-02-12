@@ -90,10 +90,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private options: any;
   private stateValue: string = "";
   private dragDropHelper: DragDropHelper = null;
-  private showJSONEditorTabValue: boolean;
-  private showTestSurveyTabValue: boolean;
-  private showEmbededSurveyTabValue: boolean;
-  private showTranslationTabValue: boolean;
+  private showJSONEditorTabValue = ko.observable<boolean>(false);
+  private showTestSurveyTabValue = ko.observable<boolean>(false);
+  private showEmbededSurveyTabValue = ko.observable<boolean>(false);
+  private showTranslationTabValue = ko.observable<boolean>(false);
   private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
@@ -964,22 +964,26 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
     this.options = options;
-    this.showJSONEditorTabValue =
+    this.showJSONEditorTabValue(
       typeof options.showJSONEditorTab !== "undefined"
         ? options.showJSONEditorTab
-        : true;
-    this.showTestSurveyTabValue =
+        : true
+    );
+    this.showTestSurveyTabValue(
       typeof options.showTestSurveyTab !== "undefined"
         ? options.showTestSurveyTab
-        : true;
-    this.showEmbededSurveyTabValue =
+        : true
+    );
+    this.showEmbededSurveyTabValue(
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
-        : false;
-    this.showTranslationTabValue =
+        : false
+    );
+    this.showTranslationTabValue(
       typeof options.showTranslationTab !== "undefined"
         ? options.showTranslationTab
-        : false;
+        : false
+    );
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
@@ -1206,37 +1210,37 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
   public get showJSONEditorTab() {
-    return this.showJSONEditorTabValue;
+    return this.showJSONEditorTabValue();
   }
   public set showJSONEditorTab(value: boolean) {
-    this.showJSONEditorTabValue = value;
+    this.showJSONEditorTabValue(value);
   }
   /**
    * Set it to true to show "Test Survey" tab and to false to hide the tab
    */
   public get showTestSurveyTab() {
-    return this.showTestSurveyTabValue;
+    return this.showTestSurveyTabValue();
   }
   public set showTestSurveyTab(value: boolean) {
-    this.showTestSurveyTabValue = value;
+    this.showTestSurveyTabValue(value);
   }
   /**
    * Set it to true to show "Embed Survey" tab and to false to hide the tab
    */
   public get showEmbededSurveyTab() {
-    return this.showEmbededSurveyTabValue;
+    return this.showEmbededSurveyTabValue();
   }
   public set showEmbededSurveyTab(value: boolean) {
-    this.showEmbededSurveyTabValue = value;
+    this.showEmbededSurveyTabValue(value);
   }
   /**
    * Set it to true to show "Translation" tab and to false to hide the tab
    */
   public get showTranslationTab() {
-    return this.showTranslationTabValue;
+    return this.showTranslationTabValue();
   }
   public set showTranslationTab(value: boolean) {
-    this.showTranslationTabValue = value;
+    this.showTranslationTabValue(value);
   }
   /**
    * Set it to true to activate RTL support
