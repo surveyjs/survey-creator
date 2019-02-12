@@ -182,6 +182,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     any
   > = this.onShowingProperty;
   /**
+   * The event is called when editor tab has been rendered.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.tabName the name of the rendered tab
+   * <br/> options.elements the rendered elements
+   * <br/> options.model current context model
+   * <br/> options.tabData the data of the rendered tab
+   */
+  public onEditorTabRendered: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
+  /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
    * You may changed it and make the property editor read only or enabled for a particular object.
    * <br/> sender the survey editor object that fires the event
@@ -605,11 +617,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   koTestSurveyWidth: any;
   koDesignerHeight: any;
   koShowPagesToolbox: any;
-  selectDesignerClick: any;
-  selectEditorClick: any;
-  selectTestClick: any;
-  selectEmbedClick: any;
-  selectTranslationClick: any;
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -740,21 +747,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koIsShowDesigner = ko.computed(function() {
       return self.koViewType() == "designer";
     });
-    this.selectDesignerClick = function() {
-      self.showDesigner();
-    };
-    this.selectEditorClick = function() {
-      self.showJsonEditor();
-    };
-    this.selectTestClick = function() {
-      self.showTestSurvey();
-    };
-    this.selectEmbedClick = function() {
-      self.showEmbedEditor();
-    };
-    this.selectTranslationClick = function() {
-      self.showTranslationEditor();
-    };
     this.generateValidJSONClick = function() {
       self.koGenerateValidJSON(true);
     };
@@ -786,6 +778,53 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.jsonEditor = new SurveyJSONEditor();
 
+    ko.computed(() => {
+      this.tabs([]);
+      this.tabs.push({
+        name: "designer",
+        title: this.getLocString("ed.designer"),
+        template: "se-tab-designer",
+        data: this,
+        action: () => this.showDesigner()
+      });
+      if (this.showJSONEditorTab) {
+        this.tabs.push({
+          name: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "jsoneditor",
+          data: this.jsonEditor,
+          action: () => this.showJsonEditor()
+        });
+      }
+      if (this.showTestSurveyTab) {
+        this.tabs.push({
+          name: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "se-tab-test",
+          data: this,
+          action: () => this.showTestSurvey()
+        });
+      }
+      if (this.showEmbededSurveyTab) {
+        this.tabs.push({
+          name: "embed",
+          title: this.getLocString("ed.embedSurvey"),
+          template: "surveyembeding",
+          data: this.surveyEmbeding,
+          action: () => this.showEmbedEditor()
+        });
+      }
+      if (this.showTranslationTab) {
+        this.tabs.push({
+          name: "translation",
+          title: this.getLocString("ed.translation"),
+          template: "translation",
+          data: this.translation,
+          action: () => this.showTranslationEditor()
+        });
+      }
+    });
+
     if (renderedElement) {
       this.render(renderedElement);
     }
@@ -794,6 +833,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.addToolbarItems();
   }
+
+  tabs = ko.observableArray();
 
   themeCss = ko.computed(() => {
     return ["bootstrap", "bootstrapmaterial"].indexOf(
@@ -2112,6 +2153,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   set showApplyButtonInEditors(value: boolean) {
     this.showApplyButtonValue = value;
   }
+  onEditorTabRenderedCallback = (
+    tabName: string,
+    elements: HTMLDivElement[],
+    model: any,
+    tabData: any
+  ) => {
+    this.onEditorTabRendered.fire(this, {
+      tabName,
+      elements,
+      model,
+      tabData
+    });
+  };
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
