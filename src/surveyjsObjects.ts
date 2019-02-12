@@ -412,7 +412,7 @@ if (!!Survey["FlowPanel"]) {
   };
 }
 
-Survey.Panel.prototype["onSelectedElementChanged"] = function() {
+Survey.PanelModel.prototype["onSelectedElementChanged"] = function() {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
