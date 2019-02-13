@@ -2345,7 +2345,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
 koSurveyTemplate = koSurveyTemplate.replace(
   "name: 'survey-content', afterRender: koEventAfterRender",
-  "name: 'survey-content', data: survey"
+  "name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender"
 );
 //koSurveyTemplate = "<div data-bind='data: survey'>" + koSurveyTemplate + "</div>";
 
