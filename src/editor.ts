@@ -1649,7 +1649,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowChangeRequired &&
         typeof options.obj.isRequired !== "undefined"
       ) {
-        var isRequired = ko.observable<boolean>(options.obj.isRequired);
+        var isRequired = ko.computed(() => options.obj.isRequired);
         options.items.push({
           name: "isrequired",
           text: this.getLocString("pe.isRequired"),
@@ -1661,7 +1661,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
-            isRequired(question.isRequired);
             this.onQuestionEditorChanged(question);
           }
         });
