@@ -24,7 +24,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
 
 test(`check widgets`, async t => {
   const getTestTab = Selector(
-    () => document.querySelectorAll(".svd_container ul li:nth-child(3)")[0]
+    () => document.querySelectorAll(".svd_container ul li:nth-child(2)")[0]
   );
 
   await t

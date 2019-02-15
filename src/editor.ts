@@ -90,10 +90,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private options: any;
   private stateValue: string = "";
   private dragDropHelper: DragDropHelper = null;
-  private showJSONEditorTabValue: boolean;
-  private showTestSurveyTabValue: boolean;
-  private showEmbededSurveyTabValue: boolean;
-  private showTranslationTabValue: boolean;
+  private showJSONEditorTabValue = ko.observable<boolean>(false);
+  private showTestSurveyTabValue = ko.observable<boolean>(false);
+  private showEmbededSurveyTabValue = ko.observable<boolean>(false);
+  private showTranslationTabValue = ko.observable<boolean>(false);
   private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
@@ -181,6 +181,18 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     (sender: SurveyEditor, options: any) => any,
     any
   > = this.onShowingProperty;
+  /**
+   * The event is called when editor tab has been rendered.
+   * <br/> sender the survey editor object that fires the event
+   * <br/> options.tabName the name of the rendered tab
+   * <br/> options.elements the rendered elements
+   * <br/> options.model current context model
+   * <br/> options.tabData the data of the rendered tab
+   */
+  public onEditorTabRendered: Survey.Event<
+    (sender: SurveyEditor, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyEditor, options: any) => any, any>();
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
    * You may changed it and make the property editor read only or enabled for a particular object.
@@ -605,11 +617,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   koTestSurveyWidth: any;
   koDesignerHeight: any;
   koShowPagesToolbox: any;
-  selectDesignerClick: any;
-  selectEditorClick: any;
-  selectTestClick: any;
-  selectEmbedClick: any;
-  selectTranslationClick: any;
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -740,21 +747,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.koIsShowDesigner = ko.computed(function() {
       return self.koViewType() == "designer";
     });
-    this.selectDesignerClick = function() {
-      self.showDesigner();
-    };
-    this.selectEditorClick = function() {
-      self.showJsonEditor();
-    };
-    this.selectTestClick = function() {
-      self.showTestSurvey();
-    };
-    this.selectEmbedClick = function() {
-      self.showEmbedEditor();
-    };
-    this.selectTranslationClick = function() {
-      self.showTranslationEditor();
-    };
     this.generateValidJSONClick = function() {
       self.koGenerateValidJSON(true);
     };
@@ -786,6 +778,53 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.jsonEditor = new SurveyJSONEditor();
 
+    ko.computed(() => {
+      this.tabs([]);
+      this.tabs.push({
+        name: "designer",
+        title: this.getLocString("ed.designer"),
+        template: "se-tab-designer",
+        data: this,
+        action: () => this.showDesigner()
+      });
+      if (this.showJSONEditorTab) {
+        this.tabs.push({
+          name: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "jsoneditor",
+          data: this.jsonEditor,
+          action: () => this.showJsonEditor()
+        });
+      }
+      if (this.showTestSurveyTab) {
+        this.tabs.push({
+          name: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "se-tab-test",
+          data: this,
+          action: () => this.showTestSurvey()
+        });
+      }
+      if (this.showEmbededSurveyTab) {
+        this.tabs.push({
+          name: "embed",
+          title: this.getLocString("ed.embedSurvey"),
+          template: "surveyembeding",
+          data: this.surveyEmbeding,
+          action: () => this.showEmbedEditor()
+        });
+      }
+      if (this.showTranslationTab) {
+        this.tabs.push({
+          name: "translation",
+          title: this.getLocString("ed.translation"),
+          template: "translation",
+          data: this.translation,
+          action: () => this.showTranslationEditor()
+        });
+      }
+    });
+
     if (renderedElement) {
       this.render(renderedElement);
     }
@@ -794,6 +833,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 
     this.addToolbarItems();
   }
+
+  tabs = ko.observableArray();
 
   themeCss = ko.computed(() => {
     return ["bootstrap", "bootstrapmaterial"].indexOf(
@@ -923,22 +964,26 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
     this.options = options;
-    this.showJSONEditorTabValue =
+    this.showJSONEditorTabValue(
       typeof options.showJSONEditorTab !== "undefined"
         ? options.showJSONEditorTab
-        : true;
-    this.showTestSurveyTabValue =
+        : true
+    );
+    this.showTestSurveyTabValue(
       typeof options.showTestSurveyTab !== "undefined"
         ? options.showTestSurveyTab
-        : true;
-    this.showEmbededSurveyTabValue =
+        : true
+    );
+    this.showEmbededSurveyTabValue(
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
-        : false;
-    this.showTranslationTabValue =
+        : false
+    );
+    this.showTranslationTabValue(
       typeof options.showTranslationTab !== "undefined"
         ? options.showTranslationTab
-        : false;
+        : false
+    );
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
@@ -1165,37 +1210,37 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
   public get showJSONEditorTab() {
-    return this.showJSONEditorTabValue;
+    return this.showJSONEditorTabValue();
   }
   public set showJSONEditorTab(value: boolean) {
-    this.showJSONEditorTabValue = value;
+    this.showJSONEditorTabValue(value);
   }
   /**
    * Set it to true to show "Test Survey" tab and to false to hide the tab
    */
   public get showTestSurveyTab() {
-    return this.showTestSurveyTabValue;
+    return this.showTestSurveyTabValue();
   }
   public set showTestSurveyTab(value: boolean) {
-    this.showTestSurveyTabValue = value;
+    this.showTestSurveyTabValue(value);
   }
   /**
    * Set it to true to show "Embed Survey" tab and to false to hide the tab
    */
   public get showEmbededSurveyTab() {
-    return this.showEmbededSurveyTabValue;
+    return this.showEmbededSurveyTabValue();
   }
   public set showEmbededSurveyTab(value: boolean) {
-    this.showEmbededSurveyTabValue = value;
+    this.showEmbededSurveyTabValue(value);
   }
   /**
    * Set it to true to show "Translation" tab and to false to hide the tab
    */
   public get showTranslationTab() {
-    return this.showTranslationTabValue;
+    return this.showTranslationTabValue();
   }
   public set showTranslationTab(value: boolean) {
-    this.showTranslationTabValue = value;
+    this.showTranslationTabValue(value);
   }
   /**
    * Set it to true to activate RTL support
@@ -1604,7 +1649,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
         opts.allowChangeRequired &&
         typeof options.obj.isRequired !== "undefined"
       ) {
-        var isRequired = ko.observable<boolean>(options.obj.isRequired);
+        var isRequired = ko.computed(() => options.obj.isRequired);
         options.items.push({
           name: "isrequired",
           text: this.getLocString("pe.isRequired"),
@@ -1616,7 +1661,6 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
-            isRequired(question.isRequired);
             this.onQuestionEditorChanged(question);
           }
         });
@@ -2112,6 +2156,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   set showApplyButtonInEditors(value: boolean) {
     this.showApplyButtonValue = value;
   }
+  onEditorTabRenderedCallback = (
+    tabName: string,
+    elements: HTMLDivElement[],
+    model: any,
+    tabData: any
+  ) => {
+    this.onEditorTabRendered.fire(this, {
+      tabName,
+      elements,
+      model,
+      tabData
+    });
+  };
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
@@ -2287,7 +2344,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
 var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
 koSurveyTemplate = koSurveyTemplate.replace(
   "name: 'survey-content', afterRender: koEventAfterRender",
-  "name: 'survey-content', data: survey"
+  "name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender"
 );
 //koSurveyTemplate = "<div data-bind='data: survey'>" + koSurveyTemplate + "</div>";
 

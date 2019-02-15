@@ -142,13 +142,13 @@ QUnit.test("Do not reload surey on 'Designer' tab click", function(assert) {
   var pageCount = editor.survey.PageCount;
   editor.addPage();
   assert.equal(editor.survey.PageCount, pageCount + 1, "new Page is added");
-  editor.selectDesignerClick();
+  editor.showDesigner();
   assert.equal(
     editor.survey.PageCount,
     pageCount + 1,
     "new Page is stil there"
   );
-  editor.selectTestClick();
+  editor.showDesigner();
   assert.equal(
     editor.survey.PageCount,
     pageCount + 1,
