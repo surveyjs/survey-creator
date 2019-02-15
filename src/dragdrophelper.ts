@@ -110,7 +110,12 @@ export class DragDropHelper {
         helper.ddTarget.source.parent == surveyElement
       );
       //Fix the bug for chrome in contenteditable
-      if (isFlowPanelInChrome) {
+      if (
+        isFlowPanelInChrome &&
+        (!helper.ddTarget ||
+          !helper.ddTarget.destination ||
+          helper.ddTarget.destination.isLayoutTypeSupported("flow"))
+      ) {
         var content = e.dataTransfer.getData("text");
         var dropRange = null;
         if (!!document.caretRangeFromPoint) {
@@ -163,10 +168,15 @@ export class DragDropHelper {
         }
         e.cancelBubble = true;
       };
-    }
-    if (isFlowPanelInChrome) {
+    } else {
       domElement.ondragstart = function(e: DragEvent) {
         surveyElement.isDragStarted = true;
+        if (!e["markEvent"]) {
+          e["markEvent"] = true;
+          if (!surveyElement.dragDropHelper().getData(e).text) {
+            surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
+          }
+        }
       };
     }
     domElement.ondragend = function(e) {
@@ -200,15 +210,8 @@ export class DragDropHelper {
     element: any,
     isEdge: boolean = false
   ) {
-    event = this.getEvent(event);
-    if (this.isSameCoordinates(event)) return;
-    this.checkScrollY(event);
-    if (
-      !element ||
-      !this.isSurveyDragging(event) ||
-      this.isSamePlace(event, element)
-    )
-      return;
+    event = this.isCanDragContinue(event, element);
+    if (!event) return;
     var bottomInfo = this.isBottom(event);
     if (element.isPage && element.elements.length > 0) {
       var lastEl = element.elements[element.elements.length - 1];
@@ -224,9 +227,24 @@ export class DragDropHelper {
   }
   public doDragDropOverFlow(event: DragEvent, element: any) {
     if (!!this.ddTarget) {
-      return this.ddTarget.moveTo(element, false, false);
+      event = this.isCanDragContinue(event, element);
+      if (!event) return true;
+      var bottomInfo = this.isBottom(event);
+      return this.ddTarget.moveTo(element, bottomInfo.isBottom, false);
     }
     return true;
+  }
+  private isCanDragContinue(event: DragEvent, element: any): DragEvent {
+    event = this.getEvent(event);
+    if (this.isSameCoordinates(event)) return null;
+    this.checkScrollY(event);
+    if (
+      !element ||
+      !this.isSurveyDragging(event) ||
+      this.isSamePlace(event, element)
+    )
+      return null;
+    return event;
   }
   public end() {
     if (this.ddTarget) {
@@ -293,7 +311,6 @@ export class DragDropHelper {
     if (event.hasOwnProperty("layerX")) {
       y = event.layerY - <number>event.currentTarget["offsetTop"];
     }
-
     return {
       isBottom: y > height / 2,
       isEdge:
