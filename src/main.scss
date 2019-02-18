@@ -640,6 +640,10 @@
           }
         }
 
+        .survey-result-value {
+          word-break: break-all;
+        }
+
         tr {
           vertical-align: top;
         }
