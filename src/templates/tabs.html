@@ -42,7 +42,7 @@
               tabindex="0"
               draggable="true"
               class="svd_toolbox_item svd-light-border-color"
-              data-bind="key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
+              data-bind="css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
             >
               <span data-bind="attr: {title: title}">
                 <svg-icon params="iconName: iconName"></svg-icon>
@@ -67,7 +67,7 @@
         tabindex="0"
         draggable="true"
         class="svd_toolbox_item svd-light-border-color"
-        data-bind="key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
+        data-bind="css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
       >
         <span data-bind="attr: {title: title}">
           <svg-icon params="iconName: iconName"></svg-icon>
