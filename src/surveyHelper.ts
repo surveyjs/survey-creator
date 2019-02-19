@@ -98,6 +98,12 @@ export class SurveyHelper {
     ) => boolean = null
   ): boolean {
     if (!property || !property.visible) return false;
+    if (
+      !!property.isVisible &&
+      !!obj.getLayoutType &&
+      !property.isVisible(obj.getLayoutType())
+    )
+      return false;
     if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property))
       return false;
     return true;
