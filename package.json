@@ -2,6 +2,7 @@
   "version": "1.0.71",
   "name": "surveyjs.editor",
   "scripts": {
+    "start": "webpack-dev-server --env.buildType dev",
     "test": "karma start",
     "testsingle": "karma start --single-run",
     "test_ci": "karma start --single-run",
@@ -67,6 +68,8 @@
     "url-loader": "0.5.8",
     "val-loader": "0.5.0",
     "webpack": "2.2.1",
+    "webpack-cli": "^2.1.5",
+    "webpack-dev-server": "^2.9.1",
     "webpack-svgstore-plugin": "4.0.1"
   },
   "husky": {

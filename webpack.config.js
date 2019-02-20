@@ -138,7 +138,7 @@ module.exports = function(options) {
       surveyeditor: path.resolve(__dirname, "./src/entries/index.ts")
     },
     resolve: {
-      extensions: [".ts", ".tsx", ".scss"],
+      extensions: [".ts", ".js", ".tsx", ".scss"],
       alias: {
         tslib: path.join(__dirname, "./src/entries/helpers.ts")
       }
@@ -167,7 +167,7 @@ module.exports = function(options) {
                 }
               },
               {
-                loader: "sass-loader" 
+                loader: "sass-loader"
               }
             ]
           })
