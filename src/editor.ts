@@ -2341,18 +2341,11 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   }
 }
 
-var koSurveyTemplate = new Survey.SurveyTemplateText()["text"];
-koSurveyTemplate = koSurveyTemplate.replace(
-  "name: 'survey-content', afterRender: koEventAfterRender",
-  "name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender"
-);
-//koSurveyTemplate = "<div data-bind='data: survey'>" + koSurveyTemplate + "</div>";
-
 ko.components.register("survey-widget", {
   viewModel: function(params) {
     this.survey = params.survey;
   },
-  template: koSurveyTemplate
+  template: "<!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko -->"
 });
 
 ko.components.register("svg-icon", {
