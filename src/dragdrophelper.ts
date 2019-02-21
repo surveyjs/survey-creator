@@ -230,7 +230,11 @@ export class DragDropHelper {
       event = this.isCanDragContinue(event, element);
       if (!event) return true;
       var bottomInfo = this.isBottom(event);
-      return this.ddTarget.moveTo(element, bottomInfo.isBottom, false);
+      return this.ddTarget.moveTo(
+        element,
+        bottomInfo.isBottom,
+        bottomInfo.isEdge
+      );
     }
     return true;
   }
