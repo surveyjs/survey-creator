@@ -56,9 +56,9 @@ test(`boolean change title`, async t => {
 test(`text change title`, async t => {
   await t
     .click(`[title="Single Input"]`)
-    .click(`.title_editable > span`)
+    .click(`.title_editable > span:nth-child(3)`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.title_editable > span`).innerText)
-    .eql("1. question1puppies");
+    .expect(Selector(`.title_editable > span:nth-child(3)`).innerText)
+    .eql("question1puppies");
 });
