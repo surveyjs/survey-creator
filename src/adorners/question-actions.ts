@@ -60,7 +60,9 @@ registerAdorner("question-actions", questionActionsAdorner);
 
 export var panelActionsAdorner = {
   getMarkerClass: model => {
-    return !!model.isPanel ? "panel_actions" : "";
+    return !!model.isPanel && model.getType() !== "flowpanel"
+      ? "panel_actions"
+      : "";
   },
   getElementName: model => "container",
   afterRender: questionActionsAdorner.afterRender

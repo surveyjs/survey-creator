@@ -1,0 +1,46 @@
+flowpanel-actions {
+  display: none;
+  position: relative;
+  .svda_question_action {
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 1em;
+  }
+}
+.svd_q_selected > .svda-question-actions {
+  flowpanel-actions {
+    display: block;
+  }
+
+  .svda_action_separator {
+    margin-left: 15px;
+    margin-top: -5px;
+  }
+}
+
+/************************************************************/
+/***********move to the surveyjs library*********************/
+
+.sv_main .sv_container {
+  f-panel {
+    span[question="true"] {
+      & > div.sv_qstn {
+        display: inline-block;
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+
+.svd_survey_designer {
+  f-panel {
+    .svda-question-actions {
+      left: 0;
+      right: 0;
+      padding: 0 15px;
+      & > question-actions {
+        position: relative;
+      }
+    }
+  }
+}

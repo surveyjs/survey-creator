@@ -32,7 +32,8 @@ export var enStrings = {
     rating: "Rating",
     text: "Single Input",
     boolean: "Boolean",
-    expression: "Expression"
+    expression: "Expression",
+    flowpanel: "Flow Panel"
   },
   //Strings in Editor
   ed: {
@@ -84,7 +85,11 @@ export var enStrings = {
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
-    translationMergeLocaleWithDefault: "Merge {0} with default locale"
+    translationMergeLocaleWithDefault: "Merge {0} with default locale",
+    bold: "Bold",
+    italic: "Italic",
+    underline: "Underline",
+    fpAddQuestion: "Add question..."
   },
   //Property names in table headers
   pel: {

@@ -1,17 +1,28 @@
 <script type="text/html" id="convert-action">
-    <span class="svda_question_action">
-        <!-- ko if: allowChangeType -->
-        <select onmousewheel="return false;" class="svda_current_type svd-main-color svd-light-bg-color" data-bind="foreach: availableTypes, event: { change: onConvertType }, attr: {title: title}">
-            <option class="svd-light-bg-color" data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
-        </select>
-        <!-- /ko -->
-        <!-- ko ifnot: allowChangeType -->
-        <span data-bind="text: text" class="svda_current_type svd-main-color"> </span>
-        <!-- /ko -->
-    </span>
+  <span class="svda_question_action">
+      <!-- ko if: allowChangeType -->
+      <select onmousewheel="return false;" class="svda_current_type svd-main-color svd-light-bg-color" data-bind="foreach: availableTypes, event: { change: onConvertType }, attr: {title: title}">
+          <option class="svd-light-bg-color" data-bind="text: $data.name, value: $data.value, attr:{selected: $data.value === $parent.type ? 'selected': null}"></option>
+      </select>
+      <!-- /ko -->
+      <!-- ko ifnot: allowChangeType -->
+      <span data-bind="text: text" class="svda_current_type svd-main-color"> </span>
+      <!-- /ko -->
+  </span>
 </script>
 
 <script type="text/html" id="action-separator">
-    <span class="svda_action_separator svd-dark-border-color">
-    </span>
+  <span class="svda_action_separator svd-dark-border-color">
+  </span>
+</script>
+
+<script type="text/html" id="fp-add-question">
+  <span class="svda_question_action">
+      <select onmousewheel="return false;" class="svda_current_type svd-main-color svd-light-bg-color" data-bind="event: { change: onAddQuestion }, attr: {title: title}">
+        <option class="svd-light-bg-color" data-bind="text: title, value: undefined"></option>
+        <!-- ko foreach: availableTypes -->
+          <option class="svd-light-bg-color" data-bind="text: $data.name || $data, value: $data.value || $data"></option>
+        <!-- /ko -->
+    </select>
+  </span>
 </script>

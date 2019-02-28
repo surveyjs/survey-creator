@@ -125,7 +125,6 @@ import "../localization/spanish";
 import "../localization/traditional-chinese";
 import "../localization/norwegian";
 
-
 export {
   Translation,
   TranslationGroup,
@@ -141,6 +140,7 @@ export { questionActionsAdorner } from "../adorners/question-actions";
 export { selectItemsEditorAdorner } from "../adorners/select-items-editor";
 export { ratingItemAdorner } from "../adorners/rating-item-editor";
 export { imageItemsAdorner } from "../adorners/image-items";
+export { flowpanelActionsAdorner } from "../adorners/flowpanel-actions";
 
 export {
   IAccordionItemData,
