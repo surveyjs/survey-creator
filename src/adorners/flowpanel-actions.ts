@@ -39,19 +39,16 @@ export class FlowPanelActionsAdorner extends QuestionActionsAdorner {
     this.actions.splice(0, 0, {
       name: "bold",
       text: this.localize("ed.bold") || "B",
-      hasTitle: true,
       onClick: createWrappingFunction("b")
     });
     this.actions.splice(1, 0, {
       name: "italic",
       text: this.localize("ed.italic") || "I",
-      hasTitle: true,
       onClick: createWrappingFunction("i")
     });
     this.actions.splice(2, 0, {
       name: "underline",
       text: this.localize("ed.underline") || "U",
-      hasTitle: true,
       onClick: createWrappingFunction("u")
     });
     this.actions.splice(3, 0, <any>{
