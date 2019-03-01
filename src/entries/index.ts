@@ -116,6 +116,7 @@ import "../localization/danish";
 import "../localization/french";
 import "../localization/german";
 import "../localization/italian";
+import "../localization/indonesian";
 import "../localization/korean";
 import "../localization/persian";
 import "../localization/polish";
