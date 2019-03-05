@@ -18,20 +18,6 @@ flowpanel-actions {
   }
 }
 
-/************************************************************/
-/***********move to the surveyjs library*********************/
-
-.sv_main .sv_container {
-  f-panel {
-    span[question="true"] {
-      & > div.sv_qstn {
-        display: inline-block;
-        vertical-align: baseline;
-      }
-    }
-  }
-}
-
 .svd_survey_designer {
   f-panel {
     .svda-question-actions {
