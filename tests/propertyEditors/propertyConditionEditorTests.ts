@@ -180,6 +180,27 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
 });
 
 QUnit.test(
+  "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
+  function(assert) {
+    var question = new Survey.QuestionText("q1");
+    var property = Survey.JsonObject.metaData.findProperty(
+      "question",
+      "visibleIf"
+    );
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.koAddConditionQuestion("q2");
+    editor.koAddConditionValue("d'2");
+    editor.object = question;
+    editor.addCondition();
+    assert.equal(
+      editor.koTextValue(),
+      "{q2} = 'd\\'2'",
+      "Apostrophe is escaped"
+    );
+  }
+);
+
+QUnit.test(
   "SurveyPropertyConditionEditor add question for dynamic panel",
   function(assert) {
     var survey = new Survey.Survey({

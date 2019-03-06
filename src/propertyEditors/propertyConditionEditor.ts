@@ -332,7 +332,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (val[0] == "[") return val;
     if (!this.isQuote(val[0])) val = "'" + val;
     if (!this.isQuote(val[val.length - 1])) val = val + "'";
-    return val;
+    return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
   }
   private isQuote(ch: string): boolean {
     return ch == "'" || ch == '"';
