@@ -2,6 +2,14 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpackConfigCreator = require("./webpack.config");
 var webpackConfig = webpackConfigCreator({ buildType: "dev" });
+var path = require('path');
+
+webpackConfig.module.rules.push({
+  test: /entry\.html$/,
+  use: [{
+    loader: path.resolve(__dirname, 'mock-loader.js')
+  }]
+});
 
 process.env.CHROME_BIN = require("puppeteer").executablePath();
 
