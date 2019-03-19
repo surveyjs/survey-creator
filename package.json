@@ -1,5 +1,5 @@
 {
-  "version": "1.0.74",
+  "version": "1.0.75",
   "name": "surveyjs.editor",
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev",
