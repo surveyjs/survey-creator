@@ -1047,6 +1047,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     return this.selectedObjectEditorValue;
   }
   /**
+   * Use this method to force update this element in editor.
+   * @param element Survey.Question is element to update
+   */
+  public update(element: Survey.Question) {
+    element["koElementType"].notifySubscribers();
+  }
+  /**
    * Call this method to render the survey editor.
    * @param element HtmlElement or html element id where Survey Editor will be rendered
    * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
