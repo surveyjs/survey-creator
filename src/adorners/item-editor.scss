@@ -1,6 +1,8 @@
 .item_editable {
   pointer-events: all;
   cursor: text;
+  position: relative;
+
   .svda-title-editor-start {
     cursor: pointer;
     visibility: hidden;
