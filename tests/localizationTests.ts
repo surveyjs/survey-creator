@@ -22,7 +22,7 @@ QUnit.test("Get nested property", function(assert) {
 QUnit.test("Get property name and title", function(assert) {
   assert.equal(
     editorLocalization.getPropertyName("text_name"),
-    defaultStrings.p.name,
+    "Name",
     "find the Name property"
   );
   assert.equal(
@@ -39,6 +39,20 @@ QUnit.test("Get property name and title", function(assert) {
     editorLocalization.getPropertyTitle("text_title"),
     defaultStrings.p.title.title,
     "find the title for Title property"
+  );
+});
+QUnit.test("getProperty fnction breaks on word automatically", function(
+  assert
+) {
+  assert.equal(
+    editorLocalization.getProperty("someGoodProperty"),
+    "Some Good Property",
+    "break on words automatically"
+  );
+  assert.equal(
+    editorLocalization.getPropertyName("title"),
+    "Title",
+    "make it up"
   );
 });
 QUnit.test("add de localization", function(assert) {

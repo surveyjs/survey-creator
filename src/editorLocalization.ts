@@ -41,7 +41,10 @@ export var editorLocalization = {
   },
   getPropertyName: function(strName: string, locale: string = null) {
     var obj = this.getProperty(strName, locale);
-    if (obj["name"]) return obj["name"];
+    var name = obj["name"];
+    if (!!name) {
+      return name != strName ? name : this.getAutoPropertyName(name);
+    }
     return obj;
   },
   getPropertyTitle: function(strName: string, locale: string = null) {
@@ -53,9 +56,22 @@ export var editorLocalization = {
     var obj = this.getString("p." + strName, locale);
     if (obj !== strName) return obj;
     var pos = strName.indexOf("_");
-    if (pos < -1) return obj;
+    if (pos < -1) return this.getAutoPropertyName(obj);
     strName = strName.substr(pos + 1);
-    return this.getString("p." + strName, locale);
+    obj = this.getString("p." + strName, locale);
+    if (obj !== strName) return obj;
+    return this.getAutoPropertyName(obj);
+  },
+  getAutoPropertyName: function(propName: string) {
+    if (!propName) return propName;
+    var res = propName[0].toUpperCase();
+    for (var i = 1; i < propName.length; i++) {
+      if (propName[i] === propName[i].toUpperCase()) {
+        res += " ";
+      }
+      res += propName[i];
+    }
+    return res;
   },
   getPropertyValue: function(value: any, locale: string = null) {
     return this.getValueInternal(value, "pv", locale);
