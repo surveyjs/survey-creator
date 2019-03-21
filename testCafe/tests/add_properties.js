@@ -23,7 +23,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
 
 test(`check the new prop exists`, async t => {
   const getPosition = ClientFunction(() =>
-    document.documentElement.innerHTML.indexOf("customProperty")
+    document.documentElement.innerHTML.indexOf("Custom Property")
   );
   assert.notEqual(await getPosition(), -1);
 });
