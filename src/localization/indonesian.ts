@@ -348,7 +348,8 @@ export var indonesianStrings = {
   //Test Survey
   ts: {
     selectPage: "Pilih halaman untuk dicoba:",
-    showInvisibleElements: "Tampilkan elemen tak terlihat"
+    showInvisibleElements: "Tampilkan elemen tak terlihat",
+    emptySurveyText: "Tidak ada halaman atau pertanyaan yang tersedia di survei ini."
   },
   validators: {
     answercountvalidator: "jumlah jawaban",
