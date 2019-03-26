@@ -247,7 +247,7 @@ export var itemDraggableAdorner = {
           editor.onQuestionEditorChanged(model);
         },
         itemValue => {
-          editor.onItemValueAddedCallback("choices", itemValue, model.choices);
+          editor.onItemValueAddedCallback(model, "choices", itemValue, model.choices);
         }
       )
     );

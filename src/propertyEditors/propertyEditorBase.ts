@@ -14,6 +14,7 @@ export interface ISurveyObjectEditorOptions {
     readOnly: boolean
   ): boolean;
   onItemValueAddedCallback(
+    obj: Survey.Base,
     propertyName: string,
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>

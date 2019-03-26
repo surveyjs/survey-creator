@@ -152,6 +152,7 @@ export var ratingItemAdorner = {
       itemValue => {
         editor.onQuestionEditorChanged(model);
         editor.onItemValueAddedCallback(
+          model,
           "rateValues",
           itemValue,
           model.visibleRateValues
@@ -159,6 +160,7 @@ export var ratingItemAdorner = {
       },
       itemValue => {
         editor.onItemValueAddedCallback(
+          model,
           "rateValues",
           itemValue,
           model.visibleRateValues

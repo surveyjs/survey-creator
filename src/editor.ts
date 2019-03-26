@@ -263,7 +263,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
    * <br/> sender the survey editor object that fires the event
-   * <br/> options.property  the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br /> options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
+   * <br/> options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
    * <br/> options.newItem a new created Survey.ItemValue object.
    * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
    */
@@ -2192,11 +2193,13 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     return options.readOnly;
   }
   onItemValueAddedCallback(
+    obj: Survey.Base,
     propertyName: string,
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
   ) {
     var options = {
+      obj: obj,
       propertyName: propertyName,
       newItem: itemValue,
       itemValues: itemValues
@@ -2352,7 +2355,8 @@ ko.components.register("survey-widget", {
   viewModel: function(params) {
     this.survey = params.survey;
   },
-  template: "<!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko -->"
+  template:
+    "<!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko -->"
 });
 
 ko.components.register("svg-icon", {

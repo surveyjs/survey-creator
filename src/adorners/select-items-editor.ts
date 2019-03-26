@@ -33,6 +33,7 @@ ko.components.register("select-items-editor", {
           },
           itemValue => {
             params.editor.onItemValueAddedCallback(
+              params.question,
               "choices",
               itemValue,
               params.question.choices

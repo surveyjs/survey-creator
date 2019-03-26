@@ -184,7 +184,7 @@ export var imageItemsAdorner = {
         model.choices = model.choices.concat([itemValue]);
         itemValue = model.choices[model.choices.length - 1];
         editor.onQuestionEditorChanged(model);
-        editor.onItemValueAddedCallback("choices", itemValue);
+        editor.onItemValueAddedCallback(model, "choices", itemValue, model.choices);
 
         var property = Survey.JsonObject.metaData.findProperty(
           "imageitemvalue",

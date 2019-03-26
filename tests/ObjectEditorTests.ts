@@ -225,6 +225,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     return false;
   }
   onItemValueAddedCallback(
+    obj: Survey.Base,
     propertyName: string,
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>

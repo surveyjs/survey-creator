@@ -129,6 +129,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var itemValue = this.createEditorItemCore(nextValue);
     if (this.options) {
       this.options.onItemValueAddedCallback(
+        this.object,
         this.editablePropertyName,
         itemValue,
         values
