@@ -22,7 +22,9 @@ script:
 - karma start --single-run
 - http-server -p 7777 --silent &
 - testcafe chrome testCafe/ --reporter minimal
-before_deploy: tar -zcvf surveyeditor.tar.gz package
+before_deploy:
+- tar -zcvf surveyeditor.tar.gz package
+- npm run doc_gen
 deploy:
 - provider: releases
   api_key:
@@ -37,7 +39,7 @@ deploy:
   on:
     tags: true
 - provider: script
-  script: npm run doc_gen && npm run doc_update
+  script: npm run doc_update
   skip_cleanup: true
 notifications:
   email:

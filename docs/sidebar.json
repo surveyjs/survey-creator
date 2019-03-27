@@ -1,0 +1,39 @@
+{
+  "Categories": [
+    {
+      "Name": "Survey-Builder-Overview",
+      "Title": "Survey Builder Overview"
+    },
+    {
+      "Name": "Add-Survey-Builder-into-your-Web-Page",
+      "Title": "Add Survey Builder into you Web Page"
+    },
+    {
+      "Name": "BuilderOverview",
+      "Title": "Overview",
+      "IsHidden": true
+    },
+    {
+      "Name": "api",
+      "Title": "Builder API",
+      "Items": [
+        {
+          "Name": "surveyeditor",
+          "Title": "Survey Builder"
+        },
+        {
+          "Name": "questiontoolbox",
+          "Title": "Toolbox"
+        },
+        {
+          "Name": "iquestiontoolboxitem",
+          "Title": "Toolbox Item"
+        },
+        {
+          "Name": "itoolbaritem",
+          "Title": "Toolbar Item"
+        }
+      ]
+    }
+  ]
+}

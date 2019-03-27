@@ -6,7 +6,7 @@
     "test": "karma start",
     "testsingle": "karma start --single-run",
     "test_ci": "karma start --single-run",
-    "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts ",
+    "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc_update": "node doc_generator/editor_docupdater.js",
     "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "testcafe_ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
