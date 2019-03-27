@@ -65,18 +65,14 @@ export class SurveyLiveTester {
     this.survey.onComplete.add((sender: Survey.Survey) => {
       self.koIsRunning(false);
       self.koResultText(JSON.stringify(self.survey.data, null, 4));
-      var addCollapsed = (items: any[]) => {
-        items.forEach((item: any) => {
-          if (!!item && item.isNode) {
-            item.collapsed = ko.observable(true);
-            item.data = addCollapsed(item.data || []);
+      self.koResultData(
+        self.survey.getPlainData().map((dataItem: any) => {
+          if (dataItem.isNode) {
+            dataItem.collapsed = ko.observable(true);
           }
-        });
-        return items.filter(item => !!item);
-      };
-      var plainData = self.survey.getPlainData({ includeEmpty: false });
-      plainData = addCollapsed(plainData);
-      self.koResultData(plainData);
+          return dataItem;
+        })
+      );
     });
     this.survey.onStarted.add((sender: Survey.Survey) => {
       self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
