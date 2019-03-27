@@ -1,5 +1,5 @@
 {
-  "version": "1.0.75",
+  "version": "1.0.76",
   "name": "surveyjs.editor",
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev",
@@ -8,7 +8,7 @@
     "test_ci": "karma start --single-run",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc_update": "node doc_generator/editor_docupdater.js",
-    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
+    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/custom_widgets.js\"",
     "testcafe_ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
     "release": "standard-version --message \"Release: %s\"",
     "build_dev": "webpack --env.buildType dev",
