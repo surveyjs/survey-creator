@@ -89,7 +89,7 @@ There are several options that you may set to change the Survey Builder (Editor)
 |_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox(#toolbox) section to get more information.|
 |_isAutoSave: true,_|Set this options to true and Builder (Editor) will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
 |_isRTL: true,_|Set this options to true for Right-to-Left web sites.|
-|_designerHeight: 1200px,|Set the designer heigth to the specific value.|
+|_designerHeight: 1200px,_|Set the designer heigth to the specific value.|
 |_showPagesToolbox: false,_|If you are going to allow your users creating only one page surveys, then set this property to false. It will hide the pages toolbox.|
 |_useTabsInElementEditor: false,_|If you want to tabs instead of accordion in the element popup editor, then set this property to true. It will change accordion to tab control.|
 |_showState: false,_|Set it to true to show the state in the toolbar (saving/saved).|
@@ -435,7 +435,11 @@ Change the category of the toolbox item
 
 Change categories for several toolbox items. changedItems parameter is an array of objects {name: "your toolbox item name", category: "new category name"}. Here is the example
 ```javascript
-editor.toolbox.changeCategories([{ name: "panel", category: "Panels" }, { name: "paneldynamic", category: "Panels" }, { name: "matrix", category: "Matrix" }]);
+editor.toolbox.changeCategories([
+    { name: "panel", category: "Panels" }, 
+    { name: "paneldynamic", category: "Panels" }, 
+    { name: "matrix", category: "Matrix" }
+]);
 ```
 ---
 
@@ -492,12 +496,15 @@ Let’s review several examples
 //add a property to the base question class and as result to all questions
 //It has name: "tag", type "number" and the default value is 0
 Survey.JsonObject.metaData.addProperty("question", { name: "tag:number", default: 0 });
-//Survey.JsonObject.metaData.addProperty("question", { name: "tag", type: "number" default: 0 }); //you may set the type using this decrlaration as well
+//Survey.JsonObject.metaData.addProperty("question", { name: "tag", type: "number" default: 0 });
+//you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
 //It means that html property editor is used to set its value in the Survey Editor
 Survey.JsonObject.metaData.addProperty("survey", "description:html");
-//Add a colour string property into page. The user will be able to select only predefined values from the dropdown
-//The default property type is "string", we may not set it. The default value is not set and it is undefined by default.
+//Add a colour string property into page.
+//The user will be able to select only predefined values from the dropdown
+//The default property type is "string", we may not set it.
+//The default value is not set and it is undefined by default.
 Survey.JsonObject.metaData.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
 ```
 
@@ -570,7 +577,12 @@ It is an optional attribute. You may assign a function to return a value differe
 
 It is an optional attribute. You may assign a function to set a different object property and/or perform some actions.
 ```javascript
-{ name: "myValue", onSetValue: function (obj, value, jsonConverter) {obj.myValue = value; /* Perform some actions */ }}
+{ 
+    name: "myValue", 
+    onSetValue: function (obj, value, jsonConverter) {
+        obj.myValue = value; /* Perform some actions */ 
+    }
+}
 ```
 ---
 
@@ -612,15 +624,18 @@ You will have to work with **SurveyEditor.SurveyQuestionEditorDefinition** objec
 The code bellow adds two new tabs into dropdown question Editor.
 ```javascript
 var editorDefinition = SurveyEditor.SurveyQuestionEditorDefinition.definition["dropdown"];
-// The tabs and properties may be empty for an element type. It means that uses the definition from the parent class.
+// The tabs and properties may be empty for an element type.
+// It means that uses the definition from the parent class.
 // For example question is the base class for all questions.
 if (!editorDefinition.tabs) editorDefinition.tabs = [];
 if (!editorDefinition.properties) editorDefinition.properties = [];
-//Add a new tab correctAnswer. Since the name the same as the property correctAnswer, the editor for property correctAnswer will be shown on the tab.
+// Add a new tab correctAnswer. Since the name the same as the property correctAnswer,
+// the editor for property correctAnswer will be shown on the tab.
 editorDefinition.tabs.push({ name: "correctAnswer", index: 12 });
 //Add a new tab, that doesn't contains properties
 editorDefinition.tabs.push({ name: "general_addition", title: "Additional Settings", index: 15 });
-//Add three properties into this new tab. If tab is empty, then a property is shown in the first "general" tab.
+//Add three properties into this new tab.
+//If tab is empty, then a property is shown in the first "general" tab.
 editorDefinition.properties.push({ name: "otherErrorText", tab: "general_addition" });
 editorDefinition.properties.push({ name: "indent", tab: "general_addition" });
 editorDefinition.properties.push({ name: "width", tab: "general_addition" });
@@ -638,7 +653,8 @@ editorDefinition.tabs = editorDefinition.tabs.filter(function (tab) {
 If you want to hide the the same tab for dropdown question Editor only, then you have to add this tab with visible attribute equals to false. The reason you must to do it in this way, beacause the definition for every element type is merging with all its parent types.
 ```javascript
 var editorDefinition = SurveyEditor.SurveyQuestionEditorDefinition.definition["dropdown"];
-// The tabs and properties may be empty for an element type. It means that uses the definition from the parent class.
+// The tabs and properties may be empty for an element type.
+// It means that uses the definition from the parent class.
 // For example question is the base class for all questions.
 if (!editorDefinition.tabs) editorDefinition.tabs = [];
 editorDefinition.tabs.push({ name: "enableIf", visible: false });
