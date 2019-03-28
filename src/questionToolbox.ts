@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 
 /**
- * The Toolbox item description
+ * The Toolbox item description.
  */
 export interface IQuestionToolboxItem {
   /**
@@ -23,7 +23,7 @@ export interface IQuestionToolboxItem {
    */
   title: string;
   /**
-   * True, if an end user added this item into Toolbox from the survey
+   * True, if an end user added this item into Toolbox from the survey.
    */
   isCopied: boolean;
   /**

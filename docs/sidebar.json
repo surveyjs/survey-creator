@@ -16,7 +16,8 @@
     {
       "Name": "api",
       "Title": "Builder API",
-      "Items": [
+      "Items":
+       [
         {
           "Name": "surveyeditor",
           "Title": "Survey Builder"
