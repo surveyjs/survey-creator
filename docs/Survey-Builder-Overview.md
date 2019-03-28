@@ -2,7 +2,7 @@
 
 This paper will explain how to use, customize and get the maximum from SurveyJS Editor Library. 
 
-If you want to use Survey Builder on your website with minimum customization, then we recommend you go to [Builder examples](/Examples/Builder/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Builder into your Web Page article](/Documentation/Editor/?id=Add-Survey-Builder-into-your-Web-Page).
+If you want to use Survey Builder on your website with minimum customization, then we recommend you go to [Builder examples](https://surveyjs.io/Examples/Builder/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Builder into your Web Page article](https://surveyjs.io/Documentation/Editor/?id=Add-Survey-Builder-into-your-Web-Page).
 
 If you want to get the most from our Editor, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
@@ -107,7 +107,8 @@ editor.text = window.localStorage.getItem("YourStorageName") || "";
 When Survey Builder needs to save the data it calls the **saveSurveyFunc** callback function. As soon as you assign a function to this callback, the "Save" button will appeare on the Builder Toolbox.
 ```javascript
 editor.saveSurveyFunc = function(saveNo, callback) {
-    //Save the survey definition into a local storage window.localStorage.setItem("YourStorageName", editor.text);
+    //Save the survey definition into a local storage
+    //window.localStorage.setItem("YourStorageName", editor.text);
     !!callback && callback(saveNo, true);
 };
 ```
@@ -170,7 +171,7 @@ curStrings.ed.jsonEditor = "Edit As Text";
 
 All localizable strings you may find in our [GitHub repo in english.ts file](https://github.com/surveyjs/editor/blob/master/src/localization/english.ts).
 
-Here is the link on [localization example](/Examples/Builder/?id=localization) on our site.
+Here is the link on [localization example](https://surveyjs.io/Examples/Builder/?id=localization) on our site.
 
 <div id="multiplelanguages"></div>
 
@@ -185,7 +186,7 @@ First of all, you may limited the number of languages they may choose in the **s
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 ```
 
-And the most important, is to show the **Translation** tab. It would allow your Builder (Editor) users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](/Examples/Builder/?id=multiplelanguages).
+And the most important, is to show the **Translation** tab. It would allow your Builder (Editor) users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Builder/?id=multiplelanguages).
 
 <div id="appearance"></div>
 
@@ -198,6 +199,7 @@ Right now, you have two options. You may use the bootstrap or use our themes. Su
 SurveyEditor.StylesManager.applyTheme("orange");
 ```
 The following themes are available:
+
 |Theme name|Required library|
 |---|---|
 |default||
@@ -209,7 +211,7 @@ The following themes are available:
 |winter||
 |winterstone||
             
-You may change any our theme. Please review [this demo](/Examples/Builder?id=editor-custom-theme) to see how to do it.
+You may change any our theme. Please review [this demo](https://surveyjs.io/Examples/Builder?id=editor-custom-theme) to see how to do it.
 
 <div id="toolbox"></div>
             
@@ -238,10 +240,10 @@ Here is the list of available default question types.
 |matrixdropdown|Matrix dropdown question. You may use a dropdown, checkbox, radiogroup, text and comment and others questions as a cell editors|
 |matrixdynamic|Matrix dymanic question. You may use a dropdown, checkbox, radiogroup, text and comment questions as a cell editors. An end-user may dynamically add/remove rows, unlike in matrix dropdown question|
 |multipletext|Multiple text question. Several text inputs in one question can be placed in one or several columns|
-|panel||Container element. It may contain questions and other panels.|
+|panel|Container element. It may contain questions and other panels.|
 |paneldynamic|Panel dymanic question. You setup the template panel, but adding elements (any question or a panel) and assign a text to it's title, and this panel will be used as a template on creating dynamic panels. The number of panels is defined by panelCount property. An end-user may dynamically add/remove panels, unless you forbidden this.|
 |radiogroup|Radiogroup question. A single choice question.|
-|rating||Rating question|
+|rating|Rating question|
 |text|Input text question|
 
 By default, all these question types are shown on the Toolbox. You may show only some of them by using the following code:
@@ -256,7 +258,7 @@ var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 
 ### Add custom widgets
 
-To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Builder (Editor) will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](/Examples/Builder/?id=customwidgets).
+To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Builder (Editor) will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Builder/?id=customwidgets).
                 
 <div id="toolbox-existing"></div>
 
@@ -299,13 +301,17 @@ editor.toolbox.changeCategory("paneldynamic", "Panels");
 ```
 The better way is to use changeCategories function. It will rebuild toolbox presentation model just one time:
 ```javascript
-editor.toolbox.changeCategories([{ name: "panel", category: "Panels" }, { name: "paneldynamic", category: "Panels" }, { name: "matrix", category: "Matrix" }]);
+editor.toolbox.changeCategories([
+    { name: "panel", category: "Panels" }, 
+    { name: "paneldynamic", category: "Panels" }, 
+    { name: "matrix", category: "Matrix" }
+]);
 ```
 You may change the name of the default (General) category as any other localizable string. Please make sure to run this code before creating the Editor.
 ```javascript
 SurveyEditor.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
-Please go to the [Survey Toolbox categories example](/Examples/Builder/?id=toolboxcategories) to see how it works.
+Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Builder/?id=toolboxcategories) to see how it works.
 
 <div id="toolbox-property"></div>
 
@@ -326,23 +332,29 @@ Here are properties of the item object:
                 
 Here is the list of functions and properties for **editor.toolbox** object:
 
-jsonText
+---
+**jsonText**
 
 The string property. Allows to get and set all toolbox items as a string.
+
 ---
-copiedJsonText
+**copiedJsonText**
 
 The string property. Allows to get and set copied questions as a string. End-user may add a queston into toolbox by clicking on 'Add to Toolbox' question menu item.
+
 ---
-items
+**items**
 
 Returns the list of current toolbox items. Toolbox item properties are described above.
+
 ---
-copiedItems
+**copiedItems**
 
 Returns the list of current copied toolbox items. End-user may add a queston into toolbox by clicking on 'Add to Toolbox' question menu item
+
 ---
-addItem(item)
+**addItem(item)**
+
 Add a new item into toolobx. If the item with the same name already exists, then replace it. The current code will add a new item into Toolbox 
 ```javascript
 //Add all countries question into toolbox
@@ -361,15 +373,17 @@ editor.toolbox.addItem({
 });
 ```
 ---
-addItems(items[, clearAll])
+**addItems(items[, clearAll])**
 
 Add the list of toolbox items into toolbox. If an optional parameter clearAll is set to true, all previous items will be removed.
+
 ---
-addCopiedItem(question)
+**addCopiedItem(question)**
 
 Add a question into Toolbox as a copied item.
+
 ---
-getItemByName(name)
+**getItemByName(name)**
 
 Returns toolbox item by its name. Returns null if there is no toolbox item with this name. The following code change the default json for radiogroup
 ```javascript
@@ -379,43 +393,53 @@ editor.toolbox.getItemByName("radiogroup").json = {
 };
 ```
 ---
-clearItems()
+**clearItems()**
 
 Remove all items from the toolbox.
+
 ---
-clearCopiedItems()
+**clearCopiedItems()**
 
 Remove all copied items from the toolbox.
+
 ---
-replaceItem(item)
+**replaceItem(item)**
 
 Find an existing item by item.name and replace its properties. Return false if the item with the same name doesn't exist.
+
 ---
-removeItem(name)
+**removeItem(name)**
 
 Find an existing item by name parameter and remove it. Here is the example of removing complex matrix questions
 ```javascript
 editor.toolbox.removeItem("matrixdropdown");
 editor.toolbox.removeItem("matrixdynamic");
 ```
-activeCategory
+---
+**activeCategory**
 
 Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty. You should have at least one category in your items that is not empty or 'General'.
+
 ---
-allowExpandMultipleCategories
+**allowExpandMultipleCategories**
+
 Set it to true, to allow end-user to expand more than one category. There will no active category in this case
+
 ---
-changeCategory(name, newCategory)
+**changeCategory(name, newCategory)**
 
 Change the category of the toolbox item
+
 ---
-changeCategories(changedItems)
+**changeCategories(changedItems)**
+
 Change categories for several toolbox items. changedItems parameter is an array of objects {name: "your toolbox item name", category: "new category name"}. Here is the example
 ```javascript
 editor.toolbox.changeCategories([{ name: "panel", category: "Panels" }, { name: "paneldynamic", category: "Panels" }, { name: "matrix", category: "Matrix" }]);
 ```
+---
 
-Please review and play with the [Survey Toolbox customization](/Examples/Builder/?id=toolboxcustomization) example.
+Please review and play with the [Survey Toolbox customization](https://surveyjs.io/Examples/Builder/?id=toolboxcustomization) example.
 
 
 <div id="removeproperties"></div>
@@ -451,7 +475,7 @@ editor.onCanShowProperty.add(function (sender, options) {
 });
 ```
 
-You may review the [Remove properties](/Examples/Builder/?id=removeproperties) example.
+You may review the [Remove properties](https://surveyjs.io/Examples/Builder/?id=removeproperties) example.
 
 
 <div id="addproperties"></div>
@@ -476,17 +500,21 @@ Survey.JsonObject.metaData.addProperty("survey", "description:html");
 //The default property type is "string", we may not set it. The default value is not set and it is undefined by default.
 Survey.JsonObject.metaData.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
 ```
+
 Here is the available attributes and callback functions in the property definition
+
 ---
-name
+**name**
 
 The property name. It is the only required property
+
 ---
-type
+**type**
 
 The property type. The list of avaiable property types you may in the next table.
+
 ---
-default
+**default**
 
 It is an optional attribute. The library do not serialize the default value into JSON. By default, the empty text is default for string value, 0 is for numeric and false for boolean. You may change it by using this attribute.
 ```javascript
@@ -494,7 +522,7 @@ It is an optional attribute. The library do not serialize the default value into
 { name: "showTitle:boolean", default: true }
 ```
 ---
-choices
+**choices**
 
 It is an optional attribute. It makes sense for string and numeric property types only. If the choices attribute is set, the property editor for the property becomes dropdown. You may assign the array of values to this attribute or a function that will return the array of strings or numbers.
 ```javascript
@@ -503,19 +531,22 @@ It is an optional attribute. It makes sense for string and numeric property type
 { name: "locale", choices: function() { return Survey.surveyLocalization.getLocales(); } }
 ```
 ---
-isRequired
+**isRequired**
 
 An optional Boolean property. The default value is false. Set it to true, if you want to require from a user to set this property in the Survey Builder (Editor). You may use “!” mark before property name as an alternative declaration. For example: “!name” or “!type”.
+
 ---
-isSerializable
+**isSerializable**
 
 An optional Boolean property. If you do not want to serialize this property into JSON then set its value to false. It is true by default.
+
 ---
-visible
+**visible**
 
 An optional Boolean property. By default, it is true. Set it to false, if you want to hide this property from the Survey Builder (Editor)
+
 ---
-readOnly
+**readOnly**
 
 An optional Boolean property. By default, it is false. Set it to true, if you want to make this property disabled in the Survey Builder (Editor) inputs. 
 
@@ -524,7 +555,7 @@ The following code makes the choices and matrix rows/columns value property read
 Survey.JsonObject.metaData.findProperty('itemvalue', "value").readOnly = true;
 ```
 ---
-onGetValue
+**onGetValue**
 
 It is an optional attribute. You may assign a function to return a value different from the property value.
 ```javascript
@@ -535,7 +566,7 @@ It is an optional attribute. You may assign a function to return a value differe
 { name: "calcProperty", onGetValue: function (obj: any) { return null; } }
 ```
 ---
-onSetValue
+**onSetValue**
 
 It is an optional attribute. You may assign a function to set a different object property and/or perform some actions.
 ```javascript
@@ -558,7 +589,7 @@ Avaliable property types. Every property type has a correspondet Property Editor
 |triggers|Survey triggers property has this type|
 |validators|Question validators property has this type|
 
-You may review the [Add properties](/Examples/Builder/?id=addproperties) example.
+You may review the [Add properties](https://surveyjs.io/Examples/Builder/?id=addproperties) example.
 
 <div id="elementseditor"></div>
 
@@ -655,7 +686,7 @@ SurveyEditor.SurveyQuestionEditorDefinition.definition["matrixdropdowncolumn@fil
 };
 ```
 
-Finally, you may show any html on the top or on the bottom of Modal Property Editor by using [onShowPropertyModalEditorDescription](/Documentation/Builder/?id=surveyeditor#onShowPropertyModalEditorDescription) event.
+Finally, you may show any html on the top or on the bottom of Modal Property Editor by using [onShowPropertyModalEditorDescription](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onShowPropertyModalEditorDescription) event.
 
 <div id="modifynewobjects"></div>
 
@@ -667,11 +698,11 @@ Here is the list of these events
 
 |Event name|Fires on|
 |---|---|
-|[onQuestionAdded](/Documentation/Builder/?id=surveyeditor#onQuestionAdded)|Fires on dropping a question from the Toolbox into designer surface|
-|[onPanelAdded](/Documentation/Builder/?id=surveyeditor#onPanelAdded)|Fires on dropping a panel (container) from the Toolbox into designer surface|
-|[onPageAdded](/Documentation/Builder/?id=surveyeditor#onPageAdded)|Fires on pressing "Add New Page" button or on selecting "Add New Page" item in the page selector|
-|[onMatrixColumnAdded](/Documentation/Builder/?id=surveyeditor#onMatrixColumnAdded)|Fires on clicking "Add New" button in the columns Property Editor of matrix dropdown or matrix dynamic questions|
-|[onItemValueAdded](/Documentation/Builder/?id=surveyeditor#onItemValueAdded)|Fires on clicking "Add New" button in the itemvalue Property Editor or on clicking a "+" button during inplace editing checkbox, dropdown and radigroup questions|
+|[onQuestionAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onQuestionAdded)|Fires on dropping a question from the Toolbox into designer surface|
+|[onPanelAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onPanelAdded)|Fires on dropping a panel (container) from the Toolbox into designer surface|
+|[onPageAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onPageAdded)|Fires on pressing "Add New Page" button or on selecting "Add New Page" item in the page selector|
+|[onMatrixColumnAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onMatrixColumnAdded)|Fires on clicking "Add New" button in the columns Property Editor of matrix dropdown or matrix dynamic questions|
+|[onItemValueAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onItemValueAdded)|Fires on clicking "Add New" button in the itemvalue Property Editor or on clicking a "+" button during inplace editing checkbox, dropdown and radigroup questions|
 
 The code bellow generated a custom question name as "Question" + "Questiontype" + Counter, for example: QuestionCheckbox1, QuestionDropdown1, QuestionCheckbox2.
 ```javascript
@@ -702,7 +733,7 @@ There are two surveys instance inside the Builder (Editor). Designer survey that
 
 The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **editor.survey**.
 
-However, you should be careful and do not cache this instance, since Builder (Editor) may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](/Documentation/Builder/?id=surveyeditor#onDesignerSurveyCreated) event.
+However, you should be careful and do not cache this instance, since Builder (Editor) may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onDesignerSurveyCreated) event.
 
 By accessing the designer survey instance, you may modify the survey as you need it. For example, the following code add a new page, make it current and add a panel with two questions in it.
 ```javascript
