@@ -4,17 +4,21 @@ The easiest way to add the survey into your web page, is to go to [one of our ex
 
 If you do not want to use our Azure CDN, you may download our script files from GitHub: [SurveyJS Editor/Builder](https://github.com/surveyjs/editor/releases) and [SurveyJS library](https://github.com/surveyjs/surveyjs/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
 
-Finally you may install our npm package.
+Finally you may install our npm package:
 ```npm install surveyjs-editor```
 
 ## Step 1. Add links to [knockout](http://knockoutjs.com).
 
-```<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>```
+```javascript
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+```
 
 ## Step 2.  Add links to surveyjs.editor and surveyjs libraries
 
 Add link to builder classes.
-```<link href="https://surveyjs.azureedge.net/@SurveyJSVersion/surveyeditor.css" type="text/css" rel="stylesheet" />```
+```javascript
+<link href="https://surveyjs.azureedge.net/@SurveyJSVersion/surveyeditor.css" type="text/css" rel="stylesheet" />
+```
 
 Link to the SurveyJS Library knockout version and Editor library.
 ```javascript
@@ -36,7 +40,10 @@ SurveyEditor.StylesManager.applyTheme("darkblue");
 ## Step 4. Show Survey Builder on the page
 
 Inside your web page
-```<div id="surveyEditorContainer"></div>```
+
+```
+<div id="surveyEditorContainer"></div>
+```
 
 ```javascript
 var editorOptions = {showEmbededSurveyTab: true}; //see examples below
@@ -89,7 +96,7 @@ Add link to ace editor library.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js" type="text/javascript"></script></code></pre>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js" type="text/javascript"></script>
 ```
 
 Add link to select2 and jQuery plugin.
