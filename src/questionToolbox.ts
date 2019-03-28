@@ -134,7 +134,7 @@ export class QuestionToolbox {
     }
   }
   /**
-   * The Array of Toolbox items
+   * The Array of Toolbox items.
    */
   public get items(): Array<IQuestionToolboxItem> {
     return this.itemsValue;

@@ -25,7 +25,7 @@ function commit(inputPath, outputPath, comment) {
             console.log('Success: ' + log);
          }
          else{ 
-            console.log('Failure: ' + log);
+            console.log('Failure: ' + log + "\n" + err);
          }
       }
    );

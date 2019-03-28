@@ -26,7 +26,7 @@ import { Translation } from "./translation";
 import { isProperty } from "babel-types";
 
 /**
- * The toolbar item description
+ * The toolbar item description.
  */
 export interface IToolbarItem {
   /**
