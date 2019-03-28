@@ -86,7 +86,7 @@ There are several options that you may set to change the Survey Builder (Editor)
 |_showEmbededSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
-|_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox(#toolbox) section to get more information.|
+|_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
 |_isAutoSave: true,_|Set this options to true and Builder (Editor) will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
 |_isRTL: true,_|Set this options to true for Right-to-Left web sites.|
 |_designerHeight: 1200px,_|Set the designer heigth to the specific value.|
@@ -156,9 +156,11 @@ The strings localization is supported by the community. Survey Builder (Editor) 
 To change the current "en" locale to another one, you will have to write one line of code:
 ```javascript
 //Make french locale active
-SurveyEditor.editorLocalization.currentLocale = "fr";```
-        If you want to change a text of any Survey Editor element, then you may use the following code:
-        ```javascriptvar curLocale = SurveyEditor.editorLocalization.currentLocale;
+SurveyEditor.editorLocalization.currentLocale = "fr";
+```
+If you want to change a text of any Survey Editor element, then you may use the following code:
+```javascript
+var curLocale = SurveyEditor.editorLocalization.currentLocale;
 // get the current locale strings object
 var curStrings = SurveyEditor.editorLocalization.getLocale("");
 //change the text for visible property in Property Grid
