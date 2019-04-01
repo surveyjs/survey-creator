@@ -33,7 +33,7 @@ You may use bootstrap
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 ```
 
-Or you may use one of our default themes (you may create your own theme)
+Or you may use one of our default themes (you may create your own theme).
 ```javascript
 //You may use any of these: "default", "orange", "darkblue", "darkrose", "stone", "winter", "winterstone"
 SurveyEditor.StylesManager.applyTheme("darkblue");

@@ -11,7 +11,8 @@ tmp/*
 _site/
 .sass-cache
 .vscode/
-
+docs/pmes.json
+docs/classes.json
 /dist/css
 /shippable
 /Properties
