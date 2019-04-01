@@ -268,19 +268,21 @@ export class DragDropHelper {
       if (prevedDefault) {
         event.preventDefault();
       }
-      var newElement = this.ddTarget.doDrop();
-      if (this.onModifiedCallback)
-        this.onModifiedCallback({
-          type: "DO_DROP",
-          page: this.ddTarget.page,
-          source: this.ddTarget.source,
-          target: this.ddTarget.target,
-          newElement: this.ddTarget.source ? null : newElement,
-          moveToParent: newElement.parent,
-          moveToIndex: !!newElement.parent
-            ? newElement.parent.elements.indexOf(newElement)
-            : -1
-        });
+      if(!this.readOnly) {
+        var newElement = this.ddTarget.doDrop();
+        if (this.onModifiedCallback)
+          this.onModifiedCallback({
+            type: "DO_DROP",
+            page: this.ddTarget.page,
+            source: this.ddTarget.source,
+            target: this.ddTarget.target,
+            newElement: this.ddTarget.source ? null : newElement,
+            moveToParent: newElement.parent,
+            moveToIndex: !!newElement.parent
+              ? newElement.parent.elements.indexOf(newElement)
+              : -1
+          });
+      }
     }
     this.end();
   }
@@ -465,4 +467,5 @@ export class DragDropHelper {
     this.prevCoordinates.x = -1;
     this.prevCoordinates.y = -1;
   }
+  public readOnly: boolean = false;
 }

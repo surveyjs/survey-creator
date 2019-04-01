@@ -791,6 +791,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     };
 
     this.jsonEditor = new SurveyJSONEditor();
+    ko.computed(() => {
+      this.jsonEditor.readOnly = this.readOnly;
+    });
 
     ko.computed(() => {
       this.tabs([]);
@@ -1442,10 +1445,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       alert(this.getLocString("ed.correctJSON"));
       return false;
     }
-    this.initSurvey(
-      new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
-    );
-    this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
+    if(!this.readOnly) {
+      this.initSurvey(
+        new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
+      );
+      this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
+    }
     return true;
   }
   /**
@@ -1595,6 +1600,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       },
       this.renderedElement
     );
+    this.dragDropHelper.readOnly = this.readOnly;
     this.surveyValue().getEditor = () => self;
     this.surveyValue().setJsonObject(json);
     if (this.surveyValue().isEmpty) {
