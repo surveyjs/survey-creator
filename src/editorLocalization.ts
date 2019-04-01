@@ -11,7 +11,7 @@ export var editorLocalization = {
     var obj = loc;
     for (var i = 0; i < path.length; i++) {
       obj = obj[path[i]];
-      if (!obj) {
+      if (!obj && obj !== "") {
         if (loc === defaultLocale) return path[i];
         return this.getString(strName, "en");
       }
@@ -24,7 +24,7 @@ export var editorLocalization = {
     var obj = loc;
     for (var i = 0; i < path.length; i++) {
       obj = obj[path[i]];
-      if (!obj) return false;
+      if (!obj && obj !== "") return false;
     }
     return true;
   },

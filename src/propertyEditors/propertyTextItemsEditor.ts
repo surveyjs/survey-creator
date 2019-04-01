@@ -68,7 +68,10 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
         objs.push({ name: item.name });
       }
     }
-    return SurveyHelper.getNewName(objs, "text");
+    return SurveyHelper.getNewName(
+      objs,
+      editorLocalization.getString("ed.newTextItemName")
+    );
   }
 }
 

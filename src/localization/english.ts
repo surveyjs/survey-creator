@@ -50,6 +50,7 @@ export var enStrings = {
     newPageName: "page",
     newQuestionName: "question",
     newPanelName: "panel",
+    newTextItemName: "text",
     testSurvey: "Test Survey",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",

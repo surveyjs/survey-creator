@@ -90,3 +90,16 @@ QUnit.test("change default ('en') locale", function(assert) {
     "en localization"
   );
 });
+
+QUnit.test("change string to empty string", function(assert) {
+  var enStrings = defaultStrings;
+  var prevValue = enStrings.ed.newTextItemName;
+  enStrings.ed.newTextItemName = "";
+
+  assert.strictEqual(
+    editorLocalization.getString("ed.newTextItemName"),
+    "",
+    "value is empty string"
+  );
+  enStrings.ed.newTextItemName = prevValue;
+});
