@@ -19,7 +19,7 @@ export class PagesEditor {
       if (!this.isDraggingPage()) {
         this.prevPagesForSelector = this.editor.pages();
         if(!this.readOnly) {
-          this.prevPagesForSelector.concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+          this.prevPagesForSelector = this.prevPagesForSelector.concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
         }
       }
       return this.prevPagesForSelector;
