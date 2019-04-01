@@ -13,6 +13,7 @@
           <span class="svd-page-name" data-bind="text: $parent.getDisplayText($data)"></span>
           <span class="svd-page-actions-container">
               <svg-icon data-bind="css: $parent.getPageMenuIconClass($data)" params="iconName: $parent.getPageMenuIconClass($data), size: 12"></svg-icon>
+              <!-- ko ifnot: $parent.readOnly -->
               <div style="position: static">
                   <div class="svd-page-actions svd-dark-border-color svd-light-bg-color" data-bind="visible: $parent.showActions($data)">
                       <span class="svd-page-action" data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}">
@@ -30,6 +31,7 @@
                       </span>
                   </div>
               </div>
+              <!-- /ko -->
           </span>
       </div>
   </div>
@@ -38,9 +40,11 @@
           <svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon>
       </span>
   </div>
+  <!-- ko ifnot: readOnly -->
   <div tabindex="0" class="svd-page-add" data-bind="key2click, clickNoFocus: addPage, attr: {title: getLocString('ed.addNewPage')}">
       <span>
           <svg-icon class="svd-secondary-icon" params="iconName: 'icon-add'"></svg-icon>
       </span>
   </div>
+  <!-- /ko -->
 </script>

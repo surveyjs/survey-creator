@@ -17,9 +17,10 @@ export class PagesEditor {
   constructor(private editor: SurveyEditor, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
       if (!this.isDraggingPage()) {
-        this.prevPagesForSelector = this.editor
-          .pages()
-          .concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+        this.prevPagesForSelector = this.editor.pages();
+        if(!this.readOnly) {
+          this.prevPagesForSelector.concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+        }
       }
       return this.prevPagesForSelector;
     });
@@ -199,6 +200,17 @@ export class PagesEditor {
     if (!selectedObject) return;
     return SurveyHelper.getObjectType(selectedObject.value) === ObjType.Page;
   }
+  private _readOnly = ko.observable(false);
+  /**
+   * A boolean property, false by default. Set it to true to deny pages editing.
+   */
+  public get readOnly() {
+    return this.editor.readOnly || this._readOnly();
+  }
+  public set readOnly(newVal) {
+    this._readOnly(newVal);
+  }
+
 }
 
 ko.components.register("pages-editor", {

@@ -603,6 +603,16 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public set showState(newVal) {
     this.koShowState(newVal);
   }
+  koReadOnly = ko.observable(false);
+  /**
+   * A boolean property, false by default. Set it to true to deny editing.
+   */
+  public get readOnly() {
+    return this.koReadOnly();
+  }
+  public set readOnly(newVal) {
+    this.koReadOnly(newVal);
+  }
 
   private isPageUpdating = false;
 
@@ -1039,6 +1049,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     if (typeof options.showPagesToolbox !== "undefined") {
       this.koShowPagesToolbox(options.showPagesToolbox);
+    }
+    if (typeof options.readOnly !== "undefined") {
+      this.koReadOnly(options.readOnly);
     }
   }
   /**
@@ -1804,8 +1817,10 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private doClickToolboxItem(json: any) {
-    var newElement = this.createNewElement(json);
-    this.doClickQuestionCore(newElement);
+    if(!this.readOnly) {
+      var newElement = this.createNewElement(json);
+      this.doClickQuestionCore(newElement);
+    }
   }
   public copyElement(element: Survey.Base): Survey.IElement {
     var json = new Survey.JsonObject().toJsonObject(element);
@@ -2185,11 +2200,12 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     readOnly: boolean
   ): boolean {
-    if (this.onGetPropertyReadOnly.isEmpty) return readOnly;
+    var proposedValue = this.readOnly || readOnly;
+    if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     var options = {
       obj: obj,
       property: editor.property,
-      readOnly: readOnly,
+      readOnly: proposedValue,
       propertyName: editor.property.name
     };
     this.onGetPropertyReadOnly.fire(this, options);
