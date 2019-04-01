@@ -18,7 +18,9 @@ export class TranslationItem extends TranslationItemBase {
   constructor(
     public name: string,
     public locString: Survey.LocalizableString,
-    public defaultValue: string = ""
+    public defaultValue: string = "",
+    private translation: ITranslationLocales,
+    private context: any
   ) {
     super(name);
     this.values = {};
@@ -32,6 +34,7 @@ export class TranslationItem extends TranslationItemBase {
     var self = this;
     val.subscribe(function(newValue) {
       self.locString.setLocaleText(loc, newValue);
+      !!self.translation.tranlationChangedCallback && self.translation.tranlationChangedCallback(loc, self.name, newValue, self.context);
     });
     this.values[loc] = val;
     return val;
@@ -61,6 +64,8 @@ export interface ITranslationLocales {
   koLocales: any;
   showAllStrings: boolean;
   getLocaleName(loc: string): string;
+  availableTranlationsChangedCallback: () => void;
+  tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -165,7 +170,7 @@ export class TranslationGroup extends TranslationItemBase {
           if (!locStr) continue;
           if (!this.showAllStrings && !defaultValue && locStr.isEmpty) continue;
           this.itemValues.push(
-            new TranslationItem(property.name, locStr, defaultValue)
+            new TranslationItem(property.name, locStr, defaultValue, this.translation, this.obj)
           );
         }
       } else {
@@ -247,7 +252,7 @@ export class TranslationGroup extends TranslationItemBase {
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
       if (canAdd) {
         this.itemValues.push(
-          new TranslationItem(val.value, val.locText, val.value)
+          new TranslationItem(val.value, val.locText, val.value, this.translation, val)
         );
       }
     }
@@ -271,6 +276,7 @@ export class Translation implements ITranslationLocales {
   public koMergeLocaleWithDefaultText: any;
   public importFinishedCallback: () => void;
   public availableTranlationsChangedCallback: () => void;
+  public tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {

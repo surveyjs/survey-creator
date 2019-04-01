@@ -738,6 +738,9 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.translation.availableTranlationsChangedCallback = () => {
       this.setModified({ type: "TRANSLATIONS_CHANGED" });
     };
+    this.translation.tranlationChangedCallback = (locale: string, name: string, value: string, context: any) => {
+      this.setModified({ type: "TRANSLATIONS_CHANGED", locale, name, value, context });
+    };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
