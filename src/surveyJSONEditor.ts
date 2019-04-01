@@ -22,6 +22,7 @@ export class SurveyJSONEditor {
   public init(editorElement: HTMLElement) {
     if (!this.hasAceEditor) return;
     this.aceEditor = ace.edit(editorElement);
+    this.aceEditor.setReadOnly(this.readOnly);
     var self = this;
     //TODO add event to change ace theme and mode
     //this.aceEditor.setTheme("ace/theme/monokai");
@@ -101,5 +102,15 @@ export class SurveyJSONEditor {
       annotations.push(annotation);
     }
     return annotations;
+  }
+  private _readOnly = ko.observable(false);
+  /**
+   * A boolean property, false by default. Set it to true to deny editing.
+   */
+  public get readOnly() {
+    return this._readOnly();
+  }
+  public set readOnly(newVal) {
+    this._readOnly(newVal);
   }
 }
