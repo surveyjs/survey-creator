@@ -242,7 +242,9 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
 
     this.koShowTextView(
-      !this.hasVisibleIfOrEnableIf() && !this.hasMultipleLanguage()
+      this.isValuePropertyVisible() &&
+        !this.hasVisibleIfOrEnableIf() &&
+        !this.hasMultipleLanguage()
     );
   }
   private hasMultipleLanguage(): boolean {
@@ -257,6 +259,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       }
     }
     return false;
+  }
+  private isValuePropertyVisible(): boolean {
+    var valueProp = Survey.JsonObject.metaData.findProperty(
+      "itemvalue",
+      "value"
+    );
+    return !!valueProp && valueProp.visible && !valueProp.readOnly;
   }
   private hasVisibleIfOrEnableIf(): boolean {
     var items = this.koItems();

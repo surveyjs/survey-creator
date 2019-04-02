@@ -57,7 +57,8 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   showTitlesInExpressions: boolean;
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
-    editor: SurveyPropertyEditorBase, readOnly: boolean
+    editor: SurveyPropertyEditorBase,
+    readOnly: boolean
   ): boolean {
     return false;
   }
@@ -374,6 +375,40 @@ QUnit.test(
     editor.beforeShow();
     editor.editingValue = ["1|item1", "item2"];
     assert.ok(editor.koShowTextView(), "Editor can show text view (fastEntry)");
+  }
+);
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837",
+  function(assert) {
+    Survey.JsonObject.metaData.findProperty(
+      "ItemValue",
+      "value"
+    ).readOnly = true;
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.beforeShow();
+    assert.equal(editor.koShowTextView(), false, "item.value is read only");
+    Survey.JsonObject.metaData.findProperty(
+      "ItemValue",
+      "value"
+    ).readOnly = false;
+    Survey.JsonObject.metaData.findProperty(
+      "ItemValue",
+      "value"
+    ).visible = false;
+    editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.beforeShow();
+    assert.equal(editor.koShowTextView(), false, "item.value is invisible");
+    Survey.JsonObject.metaData.findProperty(
+      "ItemValue",
+      "value"
+    ).visible = true;
+    editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.beforeShow();
+    assert.equal(
+      editor.koShowTextView(),
+      true,
+      "item.value is visible and editable"
+    );
   }
 );
 
@@ -1032,8 +1067,8 @@ QUnit.test("Triggers property editor", function(assert) {
     "text for valid trigger"
   );
 
-  koTrigger.pages.koChoosen.push({name:"page2"});
-  koTrigger.questions.koChoosen.push({name:"question3"});
+  koTrigger.pages.koChoosen.push({ name: "page2" });
+  koTrigger.questions.koChoosen.push({ name: "question3" });
   koTrigger.koValue(1);
   trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
   assert.equal(
