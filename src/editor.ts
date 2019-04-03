@@ -144,6 +144,21 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   public showTitlesInExpressions = false;
 
   /**
+   * Set this property to false to hide the pages selector in the Test Survey Tab
+   */
+  public showPagesInTestSurveyTab = true;
+
+  /**
+   * Set this property to false to hide the default language selector in the Test Survey Tab
+   */
+  public showDefaultLanguageInTestSurveyTab = true;
+
+  /**
+   * Set this property to false to hide the show invisible element checkbox in the Test Survey Tab
+   */
+  public showInvisibleElementsInTestSurveyTab = true;
+
+  /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
    */
@@ -645,7 +660,8 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
    * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
    * @param options Survey Editor options. The following options are available: showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions
+   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -748,8 +764,19 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     this.translation.availableTranlationsChangedCallback = () => {
       this.setModified({ type: "TRANSLATIONS_CHANGED" });
     };
-    this.translation.tranlationChangedCallback = (locale: string, name: string, value: string, context: any) => {
-      this.setModified({ type: "TRANSLATIONS_CHANGED", locale, name, value, context });
+    this.translation.tranlationChangedCallback = (
+      locale: string,
+      name: string,
+      value: string,
+      context: any
+    ) => {
+      this.setModified({
+        type: "TRANSLATIONS_CHANGED",
+        locale,
+        name,
+        value,
+        context
+      });
     };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -1055,6 +1082,17 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
     }
     if (typeof options.readOnly !== "undefined") {
       this.koReadOnly(options.readOnly);
+    }
+    if (typeof options.showPagesInTestSurveyTab !== "undefined") {
+      this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+    }
+    if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
+      this.showDefaultLanguageInTestSurveyTab =
+        options.showDefaultLanguageInTestSurveyTab;
+    }
+    if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
+      this.showInvisibleElementsInTestSurveyTab =
+        options.showInvisibleElementsInTestSurveyTab;
     }
   }
   /**
@@ -1445,7 +1483,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       alert(this.getLocString("ed.correctJSON"));
       return false;
     }
-    if(!this.readOnly) {
+    if (!this.readOnly) {
       this.initSurvey(
         new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
       );
@@ -1823,7 +1861,7 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private doClickToolboxItem(json: any) {
-    if(!this.readOnly) {
+    if (!this.readOnly) {
       var newElement = this.createNewElement(json);
       this.doClickQuestionCore(newElement);
     }
@@ -2140,7 +2178,14 @@ export class SurveyEditor implements ISurveyObjectEditorOptions {
       self.onTestSurveyCreated.fire(self, { survey: survey });
     };
     this.surveyLive.setJSON(this.getSurveyJSON());
-    this.surveyLive.show();
+    var options = {
+      showPagesInTestSurveyTab: this.showPagesInTestSurveyTab,
+      showDefaultLanguageInTestSurveyTab: this
+        .showDefaultLanguageInTestSurveyTab,
+      showInvisibleElementsInTestSurveyTab: this
+        .showInvisibleElementsInTestSurveyTab
+    };
+    this.surveyLive.show(options);
   }
   private showSurveyEmbeding() {
     var json = this.getSurveyJSON();
