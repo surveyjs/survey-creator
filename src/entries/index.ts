@@ -62,7 +62,8 @@ export {
 export {
   SurveyPropertyDefaultValueEditor,
   SurveyPropertyDefaultRowValueEditor,
-  SurveyPropertyDefaultPanelValueEditor
+  SurveyPropertyDefaultPanelValueEditor,
+  SurveyPropertySetEditor
 } from "../propertyEditors/propertyDefaultValueEditor";
 export {
   SurveyPropertyTriggersEditor
