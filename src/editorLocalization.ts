@@ -64,7 +64,7 @@ export var editorLocalization = {
     return this.getAutoPropertyName(obj);
   },
   getAutoPropertyName: function(propName: string) {
-    if (!propName || !this.camelCaseBreacking) return propName;
+    if (!propName || !this.camelCaseBreaking) return propName;
     var res = propName[0].toUpperCase();
     for (var i = 1; i < propName.length; i++) {
       if (propName[i] === propName[i].toUpperCase()) {
