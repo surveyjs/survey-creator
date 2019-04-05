@@ -54,13 +54,13 @@ QUnit.test("getProperty fnction breaks on word automatically", function(
     "Title",
     "make it up"
   );
-  editorLocalization.camelCaseBreacking = false;
+  editorLocalization.camelCaseBreaking = false;
   assert.equal(
     editorLocalization.getProperty("aGoodProperty"),
     "aGoodProperty",
     "camel Case Breacking is turn off"
   );
-  editorLocalization.camelCaseBreacking = true;
+  editorLocalization.camelCaseBreaking = true;
 });
 QUnit.test("add de localization", function(assert) {
   var deutschStrings = {

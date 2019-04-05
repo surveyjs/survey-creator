@@ -2,7 +2,7 @@ import { enStrings } from "./localization/english";
 import * as Survey from "survey-knockout";
 
 export var editorLocalization = {
-  camelCaseBreacking: true,
+  camelCaseBreaking: true,
   currentLocale: "",
   locales: {},
   getString: function(strName: string, locale: string = null) {
