@@ -156,11 +156,18 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
   }
   protected buildQuestionJson(): any {
     var question = new Survey.QuestionCheckbox("q1");
-    question.hasSelectAll = true;
+    var hasTagbox = !!Survey.JsonObject.metaData.findClass("tagbox");
+    question.hasSelectAll = !hasTagbox;
     if (!!this.property) {
       question.choices = this.property.getChoices(this.object);
     }
-    return SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question);
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question
+    );
+    if (hasTagbox) {
+      json.type = "tagbox";
+    }
+    return json;
   }
 }
 
