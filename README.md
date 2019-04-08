@@ -32,11 +32,11 @@ To find out more about the library concepts and the you may customize it, please
 
 [Angular 2](https://github.com/surveyjs/surveyjs_angular_quickstart), [Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
 
-## See editor in action
+## See survey creator in action
 
-See the visual editor in [action](http://surveyjs.io/Survey/Builder/).
+See the survey cretor in [action](http://surveyjs.io/Survey/Builder/).
 
-## Building surveyjs Editor from sources
+## Building Survey Creator from sources
 
 To build library yourself:
 
@@ -74,4 +74,4 @@ Optionally you may use [bootstrap](http://getbootstrap.com), [ace editor](https:
 
 ## License
 
-The SurveyJS Builder (Editor) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
+The Survey Creator (Form Builder) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
