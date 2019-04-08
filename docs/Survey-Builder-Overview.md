@@ -1,13 +1,13 @@
-# Survey Builder(Editor) Overview
+# Survey Creator / Form Builder Overview
 
-This paper will explain how to use, customize and get the maximum from SurveyJS Editor Library. 
+This paper will explain how to use, customize and get the maximum from Survey Creator Library. 
 
-If you want to use Survey Builder on your website with minimum customization, then we recommend you go to [Builder examples](https://surveyjs.io/Examples/Builder/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Builder into your Web Page article](https://surveyjs.io/Documentation/Editor/?id=Add-Survey-Builder-into-your-Web-Page).
+If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Builder/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Builder/?id=Add-Survey-Builder-into-your-Web-Page).
 
-If you want to get the most from our Editor, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
+If you want to get the most from our Survey Creator, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
 * [Supported Platforms and Examples](#platforms)
-* [Show Survey Builder(Editor) on the page and set its options](#showeditor_options)
+* [Show Survey Creator on the page and set its options](#show_survey_creator_options)
 * [Load and Save Survey](#loadsavesurvey)
 * [Localization and changing the default strings text](#localization)
 * [Multiple languages support](#multiplelanguages)
@@ -25,7 +25,7 @@ If you want to get the most from our Editor, then we hope that the following art
 
 ## Supported Platforms and Examples
 
-Unlike SurveyJS Library, SurveyJS Editor uses only knockoutjs. The reason we have chosen this framework is simple. It has a tiny size, comparing with other popular modern frameworks, and it works perfectly with angular2+, reactjs and others.
+Unlike SurveyJS Library, Survey Creator uses only knockoutjs. The reason we have chosen this framework is simple. It has a tiny size, comparing with other popular modern frameworks, and it works perfectly with angular2+, reactjs and others.
 
 We have created several Quick Start GitHub repositories for different client platforms, to give you an easy start.
 
@@ -33,49 +33,49 @@ We have created several Quick Start GitHub repositories for different client pla
 |---|---|
 | [Angular2(3)](https://angular.io/) | [Angular 2 + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_angular_quickstart) |
 | [Angular CLI](https://cli.angular.io/) | [Angular 5 Cli + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_angular_cli) |
-| [Angular 4+](https://cli.angular.io/) | [Angular 4 and SurveyJS library/Editor example](https://github.com/surveyjs/angular4-surveyjs) |
+| [Angular 4+](https://cli.angular.io/) | [Angular 4 and SurveyJS library and Survey Creator example](https://github.com/surveyjs/angular4-surveyjs) |
 | [React](https://facebook.github.io/react/) | [React + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_react_quickstart) |
 | [Vue.js](https://vuejs.org/) | [SurveyJS + VueJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_vue_quickstart) |
 
-We have created a plugin for WordPress and we are working on plugins for other popular CMS. You may use our code to integrate our Library and Builder into these popular CMS.
+We have created a plugin for WordPress and we are working on plugins for other popular CMS. You may use our code to integrate our Library and Survey Creator into these popular CMS.
 
 | Product Name | GitHub Repository | Plugin Site |
 |---|---|---|
 | WordPress | [Sources for SurveyJS WordPress plugin](https://github.com/surveyjs/surveyjs-wordpress) | [WordPress plugin](https://wordpress.org/plugins/surveyjs/) |
 
-Since, Survey Builder commonly requires integration with existing solutions, we have created several samples for different Server Frameworks.
+Since, Survey Creator commonly requires integration with existing solutions, we have created several samples for different Server Frameworks.
 
 | Server Frameworks | GitHub Repository | Example Site |
 |---|---|---|
-| PHP | [Sample PHP backend for SurveyJS library and Editor](https://github.com/surveyjs/surveyjs-php) | [Run demo](https://surveyjs-php.herokuapp.com/) |
-|  Asp.Net Core | [Sample .NET Core backend for SurveyJS library and Editor](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run demo](https://surveyjs-aspnet-mvc.azurewebsites.net/) |
-| NodeJS | [Sample NodeJS backend for SurveyJS library and Editor](https://github.com/surveyjs/surveyjs-nodejs) | [Run demo](https://surveyjs-nodejs.herokuapp.com/) |
+| PHP | [Sample PHP backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-php) | [Run demo](https://surveyjs-php.herokuapp.com/) |
+|  Asp.Net Core | [Sample .NET Core backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run demo](https://surveyjs-aspnet-mvc.azurewebsites.net/) |
+| NodeJS | [Sample NodeJS backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-nodejs) | [Run demo](https://surveyjs-nodejs.herokuapp.com/) |
 
-<div id="showeditor_options"></div>
+<div id="show_survey_creator_options"></div>
 
-## Show Survey Builder on the web page and set its options
+## Show Survey Creator / Form Builder on the web page and set its options
 
-The code for creating and rendering the Survey Builder widget with default options can be written literraly as one line:
+The code for creating and rendering the Survey Creator widget with default options can be written literraly as one line:
 ```javascript
-var editor = new SurveyEditor.SurveyEditor("editorDivElementID");
+var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivElementID");
 ```
 You may pass to the constructor the element ID or a link to the DOM element.
             
 In many cases you may want to set some options:
 ```javascript
-var editorOptions = {}; //Use default options
-var editor = new SurveyEditor.SurveyEditor("editorDivElementID", editorOptions);
+var options = {}; //Use default options
+var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivElementID", options);
 ```
 
 Finally, if you are going to set events, then it is better to create a widget, set events and then render it. In this case you may have the following code:
 ```javascript
-var editorOptions = {}; //Use default options
-var editor = new SurveyEditor.SurveyEditor(null, editorOptions);
+var options = {}; //Use default options
+var surveyCreator = new SurveyEditor.SurveyEditor(null, options);
 //set events here
-editor.render("editorDivElementID");
+surveyCreator.render("surveyCreatorDivElementID");
 ```
 
-There are several options that you may set to change the Survey Builder (Editor) behavior.
+There are several options that you may set to change the Survey Creator behavior.
 
 | Option Name | Description |
 |---|---|
@@ -87,7 +87,7 @@ There are several options that you may set to change the Survey Builder (Editor)
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
 |_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
-|_isAutoSave: true,_|Set this options to true and Builder (Editor) will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
+|_isAutoSave: true,_|Set this options to true and Survey Creator will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
 |_isRTL: true,_|Set this options to true for Right-to-Left web sites.|
 |_designerHeight: 1200px,_|Set the designer heigth to the specific value.|
 |_showPagesToolbox: false,_|If you are going to allow your users creating only one page surveys, then set this property to false. It will hide the pages toolbox.|
@@ -99,33 +99,33 @@ There are several options that you may set to change the Survey Builder (Editor)
 
 ## Load and Save Survey
 
-To load the Survey Definition into the Survey Builder you have to simply set it's text property. The next line load the Survey Definition from the local storage:
+To load the Survey Definition into the Survey Creator you have to simply set it's text property. The next line load the Survey Definition from the local storage:
 ```javascript
 //Load the survey definition from a local storage
-editor.text = window.localStorage.getItem("YourStorageName") || "";
+surveyCreator.text = window.localStorage.getItem("YourStorageName") || "";
 ```
-When Survey Builder needs to save the data it calls the **saveSurveyFunc** callback function. As soon as you assign a function to this callback, the "Save" button will appeare on the Builder Toolbox.
+When Survey Creator needs to save the data it calls the **saveSurveyFunc** callback function. As soon as you assign a function to this callback, the "Save" button will appeare on the Survey Creator Toolbox.
 ```javascript
-editor.saveSurveyFunc = function(saveNo, callback) {
+surveyCreator.saveSurveyFunc = function(saveNo, callback) {
     //Save the survey definition into a local storage
-    //window.localStorage.setItem("YourStorageName", editor.text);
+    //window.localStorage.setItem("YourStorageName", surveyCreator.text);
     !!callback && callback(saveNo, true);
 };
 ```
 
-The first line in this callback function is obvious. The second one tells Survey Builder that the saving operation **#saveNo** was successfully execuated. Set the last parameter of the callback function to **false**, if an error during saving was happend.
+The first line in this callback function is obvious. The second one tells Survey Creator that the saving operation **#saveNo** was successfully execuated. Set the last parameter of the callback function to **false**, if an error during saving was happend.
 
 The reason it is done as a callback function and we have a **saveNo** parameter (the numeric parameter that increase with every saving operation, starting from 1), because in a real world application, you will likely save the Survey definition into your Storage/Database. You will make an asyn call of your web service. It means that if two saving operations are happened almost at the same time, the last operation may be processed by your server code faster than the previous one. In this case you will have to ignore all saving operations that has the **saveNo** parameter less than you have already proccessed.
 
 Here is the example of **saveSurveyFunc** callback implementation (with help of jQuery magic).
 ```javascript
-editor.saveSurveyFunc = function (saveNo, callback) {
+surveyCreator.saveSurveyFunc = function (saveNo, callback) {
     $.ajax({
         url: "UrlToYourWebService",
         type: "POST",
         data: {
             surveyId: yourEditUniqueSurveyI,
-            surveyText : editor.text
+            surveyText : surveyCreator.text
         },
         success: function (data) {
             callback(saveNo, data.isSuccess);
@@ -138,27 +138,27 @@ editor.saveSurveyFunc = function (saveNo, callback) {
 }
 ```
 
-The modern editors, for example the Editor on this site, do not have a "Save" button. They are saving the changes automatically after every change with a small delay. Survey Builder has this functionality as well. You have to set **isAutoSave** property to true (default is false). 
+The modern online editors do not have a "Save" button. They are saving the changes automatically after every change with a small delay. Survey Creator has this functionality as well. You have to set **isAutoSave** property to true (default is false). 
 
-Optionally, you may ask Survey Builder to show the current status on the Toolbar: Saving/Saved/Error. Set the property showState to true as well.
+Optionally, you may ask Survey Creator to show the current status on the Toolbar: Saving/Saved/Error. Set the property showState to true as well.
             
 ```javascript
-editor.isAutoSave = true;
-editor.showState = true;
+surveyCreator.isAutoSave = true;
+surveyCreator.showState = true;
 ```
 
 <div id="localization"></div>
 
 ## Localization and changing the default strings text
 
-The strings localization is supported by the community. Survey Builder (Editor) strings are localized on 7 languages so far. You may check the current localization progress on our [GitHub repo](https://github.com/surveyjs/editor/tree/master/src/localization). SurveyJS Library (Runner) itself, are localized on 24 languages.
+The strings localization is supported by the community. Survey Creator strings are localized on 7 languages so far. You may check the current localization progress on our [GitHub repo](https://github.com/surveyjs/survey-creator/tree/master/src/localization). SurveyJS Library (Runner) itself, are localized on 24 languages.
 
 To change the current "en" locale to another one, you will have to write one line of code:
 ```javascript
 //Make french locale active
 SurveyEditor.editorLocalization.currentLocale = "fr";
 ```
-If you want to change a text of any Survey Editor element, then you may use the following code:
+If you want to change a text of any Survey Creator element, then you may use the following code:
 ```javascript
 var curLocale = SurveyEditor.editorLocalization.currentLocale;
 // get the current locale strings object
@@ -171,7 +171,7 @@ curStrings.pe.visible = "Is element visible?";
 curStrings.ed.jsonEditor = "Edit As Text";
 ```
 
-All localizable strings you may find in our [GitHub repo in english.ts file](https://github.com/surveyjs/editor/blob/master/src/localization/english.ts).
+All localizable strings you may find in our [GitHub repo in english.ts file](https://github.com/surveyjs/survey-creator/blob/master/src/localization/english.ts).
 
 Here is the link on [localization example](https://surveyjs.io/Examples/Builder/?id=localization) on our site.
 
@@ -181,22 +181,22 @@ Here is the link on [localization example](https://surveyjs.io/Examples/Builder/
 
 You may build one survey for several languages. The default strings, like text for buttons “Next” and “Previous” are translated on many languages. All you need to do is to set the **survey.locale** property in run-time into needed locale, as “fr” or “es” or any other from over twenty languages that our users have localized and you are done.
 
-However, except the default strings, there are strings that you must localize in the survey itself, like page or question title, dropdown or checkbox choices, text errors and so on. Users of SurveyJS Builder integrated into your app must localize them by themselves. It is not the easy task for a large survey. However, you may help them here.
+However, except the default strings, there are strings that you must localize in the survey itself, like page or question title, dropdown or checkbox choices, text errors and so on. Users of SurveyJS Creator integrated into your app must localize them by themselves. It is not the easy task for a large survey. However, you may help them here.
 
 First of all, you may limited the number of languages they may choose in the **survey.locale** property and in **Translation** tab. It can be done via this code 
 ```javascript
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 ```
 
-And the most important, is to show the **Translation** tab. It would allow your Builder (Editor) users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Builder/?id=multiplelanguages).
+And the most important, is to show the **Translation** tab. It would allow your Survey Creator users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Builder/?id=multiplelanguages).
 
 <div id="appearance"></div>
 
 ## Appearance: Bootstrap and Themes
 
-Initially, we were using bootstrap functionality, to show modal windows. We have made SurveyJS Editor bootstrap free on April 2018. Since that you may use bootstrap, only if you need it, for example you have a site built on bootstrap. It stopped to be a requirement.
+Initially, we were using bootstrap functionality, to show modal windows. We have made Survey Creator "bootstrap free" on April 2018. Since that you may use bootstrap, only if you need it, for example you have a site built on bootstrap. It stopped to be a requirement.
 
-Right now, you have two options. You may use the bootstrap or use our themes. SurveyJS Editor is using bootstrap by default, all you need is to include the bootstrap css into your web page. If you want to set one of our theme, then you have to call the following function:
+Right now, you have two options. You may use the bootstrap or use our themes. Survey Creator is using bootstrap by default, all you need is to include the bootstrap css into your web page. If you want to set one of our theme, then you have to call the following function:
 ```javascript
 SurveyEditor.StylesManager.applyTheme("orange");
 ```
@@ -250,17 +250,17 @@ Here is the list of available default question types.
 
 By default, all these question types are shown on the Toolbox. You may show only some of them by using the following code:
 ```javascript
-var editorOptions = {
+var options = {
     questionTypes: ["text", "checkbox", "radiogroup", "dropdown"]
 };
-var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivId", options);
 ```
 
 <div id="toolbox-customwidgets"></div>
 
 ### Add custom widgets
 
-To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Builder (Editor) will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Builder/?id=customwidgets).
+To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Creator will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Builder/?id=customwidgets).
                 
 <div id="toolbox-existing"></div>
 
@@ -274,22 +274,22 @@ Let’s talk here about available options that you have.
 
 By default, a user may add only 3 elements from the designer. If there are already 3 custom/copied elements on the Toolbox, then on adding a new one, the first added element will be removed. To change the number of copied elements your user may have, you must set this property to the value you need:
 ```javascript
-editor.toolbox.copiedItemMaxCount = 10;
+surveyCreator.toolbox.copiedItemMaxCount = 10;
 ```
 To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOptions** event. Here is the example:
 
 ```javascript
-editor.onElementAllowOptions.add(function(sender, options){
+surveyCreator.onElementAllowOptions.add(function(sender, options){
     options.allowAddToToolbox = false;
 });
 ```
 If you want to persist the copied items on the Toolbox for your end-user for another session or another survey, then you must use the copiedJsonText properties:
 
 ```javascript
-var savedItems = editor.toolbox.copiedJsonText; //save into localstorage or your database
+var savedItems = surveyCreator.toolbox.copiedJsonText; //save into localstorage or your database
 //....
 //Restored savedItems from localstorage or your database.
-editor.toolbox.copiedJsonText = savedItems;
+surveyCreator.toolbox.copiedJsonText = savedItems;
 ```
 
 <div id="toolbox-categories"></div>
@@ -298,18 +298,18 @@ editor.toolbox.copiedJsonText = savedItems;
 
 By default there is one category in the Toolbox (General) and its title is not shown. You may change the category of the default question types by calling **changeCategory** function:
 ```javascript
-editor.toolbox.changeCategory("panel", "Panels");
-editor.toolbox.changeCategory("paneldynamic", "Panels");
+surveyCreator.toolbox.changeCategory("panel", "Panels");
+surveyCreator.toolbox.changeCategory("paneldynamic", "Panels");
 ```
 The better way is to use changeCategories function. It will rebuild toolbox presentation model just one time:
 ```javascript
-editor.toolbox.changeCategories([
+surveyCreator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
     { name: "matrix", category: "Matrix" }
 ]);
 ```
-You may change the name of the default (General) category as any other localizable string. Please make sure to run this code before creating the Editor.
+You may change the name of the default (General) category as any other localizable string. Please make sure to run this code before creating the Survey Creator.
 ```javascript
 SurveyEditor.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
@@ -317,7 +317,7 @@ Please go to the [Survey Toolbox categories example](https://surveyjs.io/Example
 
 <div id="toolbox-property"></div>
 
-### Full control via editor.toolbox property
+### Full control via surveyCreator.toolbox property
 
 Edtor **toolbox** property contains the information about items are shown Toolbox and functions and properties to allow adding/deleting/changing items.
 
@@ -332,7 +332,7 @@ Here are properties of the item object:
 |isCopied|true if the item is created by clicking on 'Add to Toolbox' question menu item.|
 |category|The category to which this item is belong to. It is empty (default value) then category is “General”. Please read topic Toolbox Categories in this section for more information.|
                 
-Here is the list of functions and properties for **editor.toolbox** object:
+Here is the list of functions and properties for **surveyCreator.toolbox** object:
 
 ---
 **jsonText**
@@ -360,7 +360,7 @@ Returns the list of current copied toolbox items. End-user may add a queston int
 Add a new item into toolobx. If the item with the same name already exists, then replace it. The current code will add a new item into Toolbox 
 ```javascript
 //Add all countries question into toolbox
-editor.toolbox.addItem({
+surveyCreator.toolbox.addItem({
     name: "countries",
     isCopied: true,
     iconName: "icon-default",
@@ -389,7 +389,7 @@ Add a question into Toolbox as a copied item.
 
 Returns toolbox item by its name. Returns null if there is no toolbox item with this name. The following code change the default json for radiogroup
 ```javascript
-editor.toolbox.getItemByName("radiogroup").json = {
+surveyCreator.toolbox.getItemByName("radiogroup").json = {
     "type": "radiogroup",
     choices: ["Blue", "Red"]
 };
@@ -414,8 +414,8 @@ Find an existing item by item.name and replace its properties. Return false if t
 
 Find an existing item by name parameter and remove it. Here is the example of removing complex matrix questions
 ```javascript
-editor.toolbox.removeItem("matrixdropdown");
-editor.toolbox.removeItem("matrixdynamic");
+surveyCreator.toolbox.removeItem("matrixdropdown");
+surveyCreator.toolbox.removeItem("matrixdynamic");
 ```
 ---
 **activeCategory**
@@ -437,7 +437,7 @@ Change the category of the toolbox item
 
 Change categories for several toolbox items. changedItems parameter is an array of objects {name: "your toolbox item name", category: "new category name"}. Here is the example
 ```javascript
-editor.toolbox.changeCategories([
+surveyCreator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
     { name: "matrix", category: "Matrix" }
@@ -452,7 +452,7 @@ Please review and play with the [Survey Toolbox customization](https://surveyjs.
 
 ## Remove properties from SurveyJS Elements or hide them
 
-The most popular task is to remove or hide existing properties from the Survey Builder Editor.
+The most popular task is to remove or hide existing properties from the Survey Creator.
 
 There is a difference between removing and hiding. If you remove the property, then SurveyJS will not be able to restore it from JSON and save it back to JSON. SurveyJS will not have any information about it. You may still do it, if you know that you do not need this property.
 
@@ -464,7 +464,7 @@ Survey.JsonObject.metaData.removeProperty("question", "description");
 Survey.JsonObject.metaData.removeProperty("selectbase", "choicesUrl");
 ```
 
-You may make these properties invisible in Survey Builder (Editor) and still be able to load/save them in JSON by setting their visible property to false
+You may make these properties invisible in Survey Creator and still be able to load/save them in JSON by setting their visible property to false
 ```javascript
 //make a property, from the question class and as result from all questions, invisible
 Survey.JsonObject.metaData.findProperty("question", "description").visible = false;
@@ -473,7 +473,7 @@ Survey.JsonObject.metaData.findProperty("selectbase", "choicesUrl").visible = fa
 ```
 This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onCanShowProperty** event.
 ```javascript
-editor.onCanShowProperty.add(function (sender, options) {
+surveyCreator.onCanShowProperty.add(function (sender, options) {
     //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
     options.canShow = myBlackList.indexOf(options.property.name) < 0; //show if it is not in a blacklist
     //You may do opposite and use the white list
@@ -501,7 +501,7 @@ Survey.JsonObject.metaData.addProperty("question", { name: "tag:number", default
 //Survey.JsonObject.metaData.addProperty("question", { name: "tag", type: "number" default: 0 });
 //you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
-//It means that html property editor is used to set its value in the Survey Editor
+//It means that html property editor is used to set its value in the Survey Creator
 Survey.JsonObject.metaData.addProperty("survey", "description:html");
 //Add a colour string property into page.
 //The user will be able to select only predefined values from the dropdown
@@ -542,7 +542,7 @@ It is an optional attribute. It makes sense for string and numeric property type
 ---
 **isRequired**
 
-An optional Boolean property. The default value is false. Set it to true, if you want to require from a user to set this property in the Survey Builder (Editor). You may use “!” mark before property name as an alternative declaration. For example: “!name” or “!type”.
+An optional Boolean property. The default value is false. Set it to true, if you want to require from a user to set this property in the Survey Creator. You may use “!” mark before property name as an alternative declaration. For example: “!name” or “!type”.
 
 ---
 **isSerializable**
@@ -552,12 +552,12 @@ An optional Boolean property. If you do not want to serialize this property into
 ---
 **visible**
 
-An optional Boolean property. By default, it is true. Set it to false, if you want to hide this property from the Survey Builder (Editor)
+An optional Boolean property. By default, it is true. Set it to false, if you want to hide this property from the Survey Creator
 
 ---
 **readOnly**
 
-An optional Boolean property. By default, it is false. Set it to true, if you want to make this property disabled in the Survey Builder (Editor) inputs. 
+An optional Boolean property. By default, it is false. Set it to true, if you want to make this property disabled in the Survey Creator inputs. 
 
 The following code makes the choices and matrix rows/columns value property read-only.
 ```javascript
@@ -609,17 +609,17 @@ You may review the [Add properties](https://surveyjs.io/Examples/Builder/?id=add
 
 ## Customize SurveyJS Elements Editor</h2>
 
-End-users may change SurveyJS elements properties by using Element Editor Modal Window. It is more user friendly and many our customers [hide the property grid](#showeditor_options) on the right and left Element Editor as the only option for element modification.
+End-users may change SurveyJS elements properties by using Element Editor Modal Window. It is more user friendly and many our customers [hide the property grid](#show_survey_creator_options) on the right and left Element Editor as the only option for element modification.
 
 <p align="center">
 
-![Radio group question Editor](https://github.com/surveyjs/editor/blob/master/docs/images/builder-question-editor.png)
+![Radio group question Editor](https://github.com/surveyjs/survey-creator   /blob/master/docs/images/builder-question-editor.png)
 
 _The radiogroup question Editor_
 
 </p>
 
-If you want to hide any property from the Editor, then you may simply remove or hide the property as described in [this section](#removeproperties).
+If you want to hide any property from the Survey Creator, then you may simply remove or hide the property as described in [this section](#removeproperties).
 
 You will have to work with **SurveyEditor.SurveyQuestionEditorDefinition** object, if you want to remove, add or reorder tabs and add a property or change its tab or location.
 
@@ -726,7 +726,7 @@ The code bellow generated a custom question name as "Question" + "Questiontype" 
 ```javascript
 var questionCounter = {};
 //Set the name property different from the default value
-editor.onQuestionAdded.add(function (sender, options) {
+surveyCreator.onQuestionAdded.add(function (sender, options) {
     var q = options.question;
     var t = q.getType();
     if(!questionCounter[t]) questionCounter[t] = 1;
@@ -738,7 +738,7 @@ editor.onQuestionAdded.add(function (sender, options) {
 
 This code adds a new text question into new created page
 ```javascript
-editor.onPageAdded.add(function (sender, options) {
+surveyCreator.onPageAdded.add(function (sender, options) {
     options.page.addNewQuestion("text", "Question_" + page.name);
 });
 ```
@@ -747,18 +747,18 @@ editor.onPageAdded.add(function (sender, options) {
 
 ## Accessing Surveys instance: designer and test surveys
 
-There are two surveys instance inside the Builder (Editor). Designer survey that you may see on “Survey Designer” tab and test survey that you may test on “Test Survey” tab.
+There are two surveys instance inside the Survey Creator. Designer survey that you may see on “Survey Designer” tab and test survey that you may test on “Test Survey” tab.
 
-The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **editor.survey**.
+The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **surveyCreator.survey**.
 
-However, you should be careful and do not cache this instance, since Builder (Editor) may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onDesignerSurveyCreated) event.
+However, you should be careful and do not cache this instance, since Survey Creator may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onDesignerSurveyCreated) event.
 
 By accessing the designer survey instance, you may modify the survey as you need it. For example, the following code add a new page, make it current and add a panel with two questions in it.
 ```javascript
 //add New Page and make it current;
-editor.addPage();
+surveyCreator.addPage();
 //get survey instance
-var survey = editor.survey;
+var survey = surveyCreator.survey;
 //Add panel and questions as you would do with the regular survey instance
 var panel = survey.currentPage.addNewPanel("address");
 panel.title = "Please type your contact information:";
@@ -772,7 +772,7 @@ phone.inputType = "tel";
 
 Unlike designer survey, test survey instance exists when end-user switches into “Test Survey” tab. You should handle onTestSurveyCreated event to get its instance and make all required modification.
 ```javascript
-editor.onTestSurveyCreated.add(function(editor, options) {
+surveyCreator.onTestSurveyCreated.add(function(sender, options) {
   options.survey.title = "You are testing survey at: " + new Date().toLocaleTimeString();
 });
 ```
@@ -794,7 +794,7 @@ SurveyEditor.removeAdorners();
 ```
 <p align="center">
 
-![SurveyJS Builder Adorners](https://github.com/surveyjs/editor/blob/master/docs/images/builder-adorners.png)
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/builder-adorners.png)
 
 _Dropdown question standard adorners_
 
@@ -818,7 +818,7 @@ There are a lot of actions in "question-actions" and "panel-actions" adorners. Y
 
 Here is the example of using it:
 ```javascript
-editor.onElementAllowOperations.add(function (editor, options) {
+surveyCreator.onElementAllowOperations.add(function (sender, options) {
     var obj = options.obj;
     if (!obj || !obj.page) return;
     //if it is panel
