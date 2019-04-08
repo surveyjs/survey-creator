@@ -1,7 +1,7 @@
 **survey.creator** is the visual survey creator / form builder for [SurveyJS](https://github.com/surveyjs/survey-library). It uses JSON to store the survey metadata.
 
-[![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
-[![npm package](https://badge.fury.io/js/surveyjs-editor.svg)](https://www.npmjs.com/package/surveyjs-editor)
+[![Build Status](https://travis-ci.org/surveyjs/survey-creator.svg?branch=master)](https://travis-ci.org/surveyjs/survey-creator)
+[![npm package](https://badge.fury.io/js/surveyjs-survey-creator.svg)](https://www.npmjs.com/package/survey-creator)
 
 ## Download
 
@@ -10,7 +10,7 @@ Dowload the latest version as zip file [Download](https://github.com/surveyjs/su
 Install the library using npm.
 
 ```
-npm install surveyjs-editor
+npm install survey-creator
 ```
 
 Or use Azure CDN:

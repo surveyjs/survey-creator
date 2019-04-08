@@ -485,6 +485,7 @@ You may review the [Remove properties](https://surveyjs.io/Examples/Builder/?id=
 
 
 <div id="addproperties"></div>
+
 ## Add properties into SurveyJS Elements
 
 You may add a new property into all question types, panel, page and survey. If you add a property into base type, like “question” then it will be available in all its successors. “questionbase” is base class for all questions and “question” is base class for all questions that has a value property. “html” question is derived from “questionbase” and not “question” type.
