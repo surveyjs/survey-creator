@@ -1,11 +1,11 @@
-**survey.js.editor** is the visual survey builder / form builder for [SurveyJS](https://github.com/surveyjs/surveyjs). It uses JSON to store the survey metadata.
+**survey.creator** is the visual survey creator / form builder for [SurveyJS](https://github.com/surveyjs/survey-library). It uses JSON to store the survey metadata.
 
 [![Build Status](https://travis-ci.org/surveyjs/editor.svg?branch=master)](https://travis-ci.org/surveyjs/editor)
 [![npm package](https://badge.fury.io/js/surveyjs-editor.svg)](https://www.npmjs.com/package/surveyjs-editor)
 
 ## Download
 
-Dowload the latest version as zip file [Download](https://github.com/surveyjs/editor/releases)
+Dowload the latest version as zip file [Download](https://github.com/surveyjs/survey-creator/releases)
 
 Install the library using npm.
 
@@ -22,7 +22,7 @@ Or use Azure CDN:
 
 ### Explore examples
 
-To learn how to include the visual survey builder / form builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Builder](https://surveyjs.io/Examples/Builder) web site
+To learn how to include the visual survey creator / form builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Builder](https://surveyjs.io/Examples/Builder) web site
 
 ### Read documentation
 
@@ -43,8 +43,8 @@ To build library yourself:
 1.  **Clone the repo from GitHub**
 
     ```
-    git clone https://github.com/surveyjs/editor.git
-    cd surveyjs.editor
+    git clone https://github.com/surveyjs/survey-creator.git
+    cd survey-creator
     ```
 
 2.  **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. You need a version of Node.js greater than 6.0.0 and npm greater than 2.7.0
