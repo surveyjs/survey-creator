@@ -15,17 +15,17 @@ var svgStoreUtils = require(path.resolve(
 ));
 
 var banner = [
-  "surveyjs Builder(Editor) v" + packageJson.version,
+  "SurveyJS Creator v" + packageJson.version,
   "(c) Devsoft Baltic O� - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/editor",
+  "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#BuildSurvey"
 ].join("\n");
 
 var dts_banner = [
-  "Type definitions for Surveyjs Builder(Editor) JavaScript library v" +
+  "Type definitions for SurveyJS Creator JavaScript library v" +
     packageJson.version,
   "(c) Devsoft Baltic O� - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/editor",
+  "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#BuildSurvey",
   ""
 ].join("\n");
@@ -34,8 +34,15 @@ var packagePlatformJson = {
   name: "surveyjs-editor",
   version: packageJson.version,
   description:
-    "Use surveyjs Builder(Editor) to create or edit JSON for surveyjs library.",
-  keywords: ["Survey", "JavaScript", "Editor", "Builder", "surveyjs"],
+    "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+  keywords: [
+    "Survey",
+    "Creator",
+    "JavaScript",
+    "Editor",
+    "Builder",
+    "surveyjs"
+  ],
   homepage: "https://surveyjs.io/Builder",
   license: "https://surveyjs.io/Licenses#BuildSurvey",
   files: [
@@ -67,8 +74,53 @@ var packagePlatformJson = {
   devDependencies: {}
 };
 
+var buildPlatformJson = {
+  name: "survey-creator",
+  version: packageJson.version,
+  description:
+    "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+  keywords: [
+    "Survey",
+    "Creator",
+    "JavaScript",
+    "Editor",
+    "Builder",
+    "surveyjs"
+  ],
+  homepage: "https://surveyjs.io/Builder",
+  license: "https://surveyjs.io/Licenses#BuildSurvey",
+  files: [
+    "survey-creator.css",
+    "survey-creator.min.css",
+    "survey-creator.js",
+    "survey-creator.d.ts",
+    "survey-creator.min.js"
+  ],
+  main: "survey-creator.js",
+  repository: {
+    type: "git",
+    url: "https://github.com/surveyjs/survey-creator.git"
+  },
+  engines: {
+    node: ">=0.10.0"
+  },
+  typings: "survey-creator.d.ts",
+  peerDependencies: {
+    bootstrap: "^3.3.6",
+    jquery: "^3.1.1",
+    "ace-builds": "^1.2.2"
+  },
+  dependencies: {
+    "survey-knockout": "^" + packageJson.version,
+    knockout: "^3.4.0",
+    "@types/knockout": "^3.4.0"
+  },
+  devDependencies: {}
+};
+
 module.exports = function(options) {
   var packagePath = "./package/";
+  var buildPath = "./build/";
   var extractCSS = new ExtractTextPlugin({
     filename:
       packagePath +
@@ -129,6 +181,34 @@ module.exports = function(options) {
         fs.createReadStream("./npmREADME.md").pipe(
           fs.createWriteStream(packagePath + "README.md")
         );
+      }
+
+      if (options.libraryName === "SurveyCreator") {
+        if (!fs.existsSync(buildPath)) {
+          fs.mkdirSync(buildPath);
+        }
+        function copyToBuild(oldFile, newFile) {
+          fs.createReadStream(packagePath + oldFile).pipe(
+            fs.createWriteStream(buildPath + newFile)
+          );
+        }
+
+        if (options.buildType === "prod") {
+          copyToBuild("surveyeditor.min.js", "survey-creator.min.js");
+          copyToBuild("surveyeditor.min.css", "survey-creator.min.css");
+          copyToBuild("surveyeditor.d.ts", "survey-creator.d.ts");
+          fs.createReadStream("./npmREADME.md").pipe(
+            fs.createWriteStream(buildPath + "README.md")
+          );
+          fs.writeFileSync(
+            buildPath + "package.json",
+            JSON.stringify(buildPlatformJson, null, 2),
+            "utf8"
+          );
+        } else {
+          copyToBuild("surveyeditor.js", "survey-creator.js");
+          copyToBuild("surveyeditor.css", "survey-creator.css");
+        }
       }
     }
   };
@@ -191,7 +271,7 @@ module.exports = function(options) {
         "[name]" +
         (options.buildType === "prod" ? ".min" : "") +
         ".js",
-      library: "SurveyEditor",
+      library: options.libraryName || "SurveyEditor",
       libraryTarget: "umd",
       umdNamedDefine: true
     },
