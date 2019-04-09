@@ -22,13 +22,13 @@ script:
 - http-server -p 7777 --silent &
 - testcafe chrome testCafe/ --reporter minimal
 before_deploy:
-- tar -zcvf surveyeditor.tar.gz package
+- tar -zcvf survey-creator.tar.gz package
 - npm run doc_gen
 deploy:
 - provider: releases
   api_key:
     secure: Fe+bRA8WO1T345iLvXkrOusCkr9RTblojIGfTNV80sY9+Q5Zt7gPeDa2snvlvTWmdkN+y2vZzP73JN7HZv1kxg1egt9lFHvllGw6YTeka+CE74sPnHGMFx4OqJHtd4D0hLVXg5wM8BbgFJ4R+jqbLwWY2+brDY1hsM7bXSf17kjcUFhKCoyYMvHCr5cngf99igTaFDYFc3IcNMyfXgqsMiFR415v0CklfZiEQU4Tt2Eu8foC27hApzpSQVgLtIAsYPVVTFYD9yghRcpth5ouL5KTq83Qa/E7senwTJKHU1wBeOT/6BNwKxlXQrBzjAKTmNrB1KG0ES3UR5TuXocIid1+cEK1jUpwl7gldKYSdckTMTM1FDTZ7Wj2hrIof2NyPKIaiCk7c4Qlc61XR5zQCZF4n3Yyxtj9FLRkv+9DQpfKOS5yEqlAXqdU4s5kv3SN3FXMMDBNGv4szI1xMGKT+ld8rT2FnHJcrhn9QYlyCv/gahb3igOOC+1LRmo6oGHg3/ks8EeTOwMR/pOY0BuK6RxVoD2Da4ZD7pY9+/CthF9+1bcHaHeeQYWTs47NZijX/zawl/Xc65ktGCzav2hX9M0jWBckDiGRsB/34MuFvPGtuIFhJAxsb0PGO3bEEcMzMpdte9TxO0zlufoHRHpfifehbNKkmL2582fUiYS1ouI=
-  file: surveyeditor.tar.gz
+  file: survey-creator.tar.gz
   skip_cleanup: true
   on:
     tags: true

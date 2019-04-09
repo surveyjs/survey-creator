@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { applyAdornerClass } from "../src/surveyjsObjects";
 import { titleAdorner } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
-import { SurveyEditor } from "../src/editor";
+import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("Adorners Tests");
 
@@ -50,7 +50,7 @@ QUnit.test(
   function(assert) {
     var done = assert.async();
     var adorner = titleAdorner.getElementName;
-    var editor = new SurveyEditor();
+    var editor = new SurveyCreator();
     var item = new Survey.ItemValue("1");
     ko.components.get("title-editor", (component: any) => {
       var titleEditorViewModel = component.createViewModel(

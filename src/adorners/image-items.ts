@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
-import { SurveyEditor } from "../editor";
+import { SurveyCreator } from "../editor";
 import { createAddItemElement } from "./item-editor";
 import { getNextValue } from "../utils/utils";
 
@@ -17,7 +17,7 @@ class ImageItemInplaceEditor {
     private question: QuestionSelectBase,
     private item,
     private rootElement,
-    private editor: SurveyEditor,
+    private editor: SurveyCreator,
     private itemsRoot
   ) {}
 
@@ -184,7 +184,12 @@ export var imageItemsAdorner = {
         model.choices = model.choices.concat([itemValue]);
         itemValue = model.choices[model.choices.length - 1];
         editor.onQuestionEditorChanged(model);
-        editor.onItemValueAddedCallback(model, "choices", itemValue, model.choices);
+        editor.onItemValueAddedCallback(
+          model,
+          "choices",
+          itemValue,
+          model.choices
+        );
 
         var property = Survey.JsonObject.metaData.findProperty(
           "imageitemvalue",
