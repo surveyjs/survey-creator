@@ -1,6 +1,12 @@
 {
   "version": "1.0.78",
-  "name": "surveyjs.editor",
+  "name": "survey-creator",
+  "homepage": "https://surveyjs.io/Builder",
+  "license": "https://surveyjs.io/Licenses#BuildSurvey",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev",
     "test": "karma start",

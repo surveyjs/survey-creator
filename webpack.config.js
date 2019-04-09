@@ -55,7 +55,7 @@ var packagePlatformJson = {
   main: "surveyeditor.js",
   repository: {
     type: "git",
-    url: "https://github.com/surveyjs/editor.git"
+    url: "https://github.com/surveyjs/survey-creator.git"
   },
   engines: {
     node: ">=0.10.0"
@@ -178,7 +178,7 @@ module.exports = function(options) {
         );
 
         rimraf.sync(packagePath + "typings");
-        fs.createReadStream("./npmREADME.md").pipe(
+        fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(packagePath + "README.md")
         );
       }
@@ -197,7 +197,7 @@ module.exports = function(options) {
           copyToBuild("surveyeditor.min.js", "survey-creator.min.js");
           copyToBuild("surveyeditor.min.css", "survey-creator.min.css");
           copyToBuild("surveyeditor.d.ts", "survey-creator.d.ts");
-          fs.createReadStream("./npmREADME.md").pipe(
+          fs.createReadStream("./README.md").pipe(
             fs.createWriteStream(buildPath + "README.md")
           );
           fs.writeFileSync(
