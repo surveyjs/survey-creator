@@ -3,6 +3,11 @@
 [![Build Status](https://travis-ci.org/surveyjs/survey-creator.svg?branch=master)](https://travis-ci.org/surveyjs/survey-creator)
 [![npm package](https://badge.fury.io/js/surveyjs-survey-creator.svg)](https://www.npmjs.com/package/survey-creator)
 
+## See Survey Creator / Form Builder in action
+
+[Create your Survey or Form now](https://surveyjs.io/survey/Builder/)
+
+
 ## Download
 
 Dowload the latest version as zip file [Download](https://github.com/surveyjs/survey-creator/releases)
