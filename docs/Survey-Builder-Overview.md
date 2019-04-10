@@ -57,20 +57,20 @@ Since, Survey Creator commonly requires integration with existing solutions, we 
 
 The code for creating and rendering the Survey Creator widget with default options can be written literraly as one line:
 ```javascript
-var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivElementID");
+var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID");
 ```
 You may pass to the constructor the element ID or a link to the DOM element.
             
 In many cases you may want to set some options:
 ```javascript
 var options = {}; //Use default options
-var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivElementID", options);
+var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID", options);
 ```
 
 Finally, if you are going to set events, then it is better to create a widget, set events and then render it. In this case you may have the following code:
 ```javascript
 var options = {}; //Use default options
-var surveyCreator = new SurveyEditor.SurveyEditor(null, options);
+var surveyCreator = new SurveyCreator.SurveyCreator(null, options);
 //set events here
 surveyCreator.render("surveyCreatorDivElementID");
 ```
@@ -156,13 +156,13 @@ The strings localization is supported by the community. Survey Creator strings a
 To change the current "en" locale to another one, you will have to write one line of code:
 ```javascript
 //Make french locale active
-SurveyEditor.editorLocalization.currentLocale = "fr";
+SurveyCreator.localization.currentLocale = "fr";
 ```
 If you want to change a text of any Survey Creator element, then you may use the following code:
 ```javascript
-var curLocale = SurveyEditor.editorLocalization.currentLocale;
+var curLocale = SurveyCreator.localization.currentLocale;
 // get the current locale strings object
-var curStrings = SurveyEditor.editorLocalization.getLocale("");
+var curStrings = SurveyCreator.localization.getLocale("");
 //change the text for visible property in Property Grid
 curStrings.p.visible = "Is visible";
 //change the text for visible property in Modal Editor
@@ -198,7 +198,7 @@ Initially, we were using bootstrap functionality, to show modal windows. We have
 
 Right now, you have two options. You may use the bootstrap or use our themes. Survey Creator is using bootstrap by default, all you need is to include the bootstrap css into your web page. If you want to set one of our theme, then you have to call the following function:
 ```javascript
-SurveyEditor.StylesManager.applyTheme("orange");
+SurveyCreator.StylesManager.applyTheme("orange");
 ```
 The following themes are available:
 
@@ -253,7 +253,7 @@ By default, all these question types are shown on the Toolbox. You may show only
 var options = {
     questionTypes: ["text", "checkbox", "radiogroup", "dropdown"]
 };
-var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorDivId", options);
+var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivId", options);
 ```
 
 <div id="toolbox-customwidgets"></div>
@@ -311,7 +311,7 @@ surveyCreator.toolbox.changeCategories([
 ```
 You may change the name of the default (General) category as any other localizable string. Please make sure to run this code before creating the Survey Creator.
 ```javascript
-SurveyEditor.defaultStrings.ed.toolboxGeneralCategory = "Common";
+SurveyCreator.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
 Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Builder/?id=toolboxcategories) to see how it works.
 
@@ -328,7 +328,7 @@ Here are properties of the item object:
 |name| The required attribute. The unique item id. By default it is a question type|
 |iconName|The optional attribute. The icon name. The default value is 'icon-default'. It is 'icon-' + [question_type] for a standard Survey question|
 |json|The required attribute. A new element on designer is created based on this json. The json should has at least the 'type' string property. You may change it to set other question properties by default.|
-|title|The toolbox item title. For default questions, titles are defined in localization files. Here is the example of changing title for **comment** question: _SurveyEditor.defaultStrings.qt.comment = "Multiple line input";_ Please go to <a href="#localization">Localization section</a> to get more information.|
+|title|The toolbox item title. For default questions, titles are defined in localization files. Here is the example of changing title for **comment** question: _SurveyCreator.defaultStrings.qt.comment = "Multiple line input";_ Please go to <a href="#localization">Localization section</a> to get more information.|
 |isCopied|true if the item is created by clicking on 'Add to Toolbox' question menu item.|
 |category|The category to which this item is belong to. It is empty (default value) then category is “General”. Please read topic Toolbox Categories in this section for more information.|
                 
@@ -614,7 +614,7 @@ End-users may change SurveyJS elements properties by using Element Editor Modal 
 
 <p align="center">
 
-![Radio group question Editor](https://github.com/surveyjs/survey-creator   /blob/master/docs/images/builder-question-editor.png)
+![Radio group question Editor](https://github.com/surveyjs/survey-creator/blob/master/docs/images/builder-question-editor.png?raw=true)
 
 _The radiogroup question Editor_
 
@@ -622,11 +622,11 @@ _The radiogroup question Editor_
 
 If you want to hide any property from the Survey Creator, then you may simply remove or hide the property as described in [this section](#removeproperties).
 
-You will have to work with **SurveyEditor.SurveyQuestionEditorDefinition** object, if you want to remove, add or reorder tabs and add a property or change its tab or location.
+You will have to work with **SurveyCreator.SurveyQuestionEditorDefinition** object, if you want to remove, add or reorder tabs and add a property or change its tab or location.
 
 The code bellow adds two new tabs into dropdown question Editor.
 ```javascript
-var editorDefinition = SurveyEditor.SurveyQuestionEditorDefinition.definition["dropdown"];
+var editorDefinition = SurveyCreator.SurveyQuestionEditorDefinition.definition["dropdown"];
 // The tabs and properties may be empty for an element type.
 // It means that uses the definition from the parent class.
 // For example question is the base class for all questions.
@@ -644,9 +644,9 @@ editorDefinition.properties.push({ name: "indent", tab: "general_addition" });
 editorDefinition.properties.push({ name: "width", tab: "general_addition" });
 ```
 
-If you modify "question" definition, **SurveyEditor.SurveyQuestionEditorDefinition.definition["question"]**, then it will apply to all questions. For example, if you want to hide "enabledIf" tab for all questions, you would have to write the following code
+If you modify "question" definition, **SurveyCreator.SurveyQuestionEditorDefinition.definition["question"]**, then it will apply to all questions. For example, if you want to hide "enabledIf" tab for all questions, you would have to write the following code
 ```javascript
-var editorDefinition = SurveyEditor.SurveyQuestionEditorDefinition.definition["question"];
+var editorDefinition = SurveyCreator.SurveyQuestionEditorDefinition.definition["question"];
 //Create a new tabs array without enableIf tab
 editorDefinition.tabs = editorDefinition.tabs.filter(function (tab) {
     return tab.name !== 'enableIf';
@@ -655,7 +655,7 @@ editorDefinition.tabs = editorDefinition.tabs.filter(function (tab) {
 
 If you want to hide the the same tab for dropdown question Editor only, then you have to add this tab with visible attribute equals to false. The reason you must to do it in this way, beacause the definition for every element type is merging with all its parent types.
 ```javascript
-var editorDefinition = SurveyEditor.SurveyQuestionEditorDefinition.definition["dropdown"];
+var editorDefinition = SurveyCreator.SurveyQuestionEditorDefinition.definition["dropdown"];
 // The tabs and properties may be empty for an element type.
 // It means that uses the definition from the parent class.
 // For example question is the base class for all questions.
@@ -672,7 +672,7 @@ Bellow you will find definitions for base types. Changes to them would apply to 
 |matrixdropdownbase|For matrixdynamic and matrixdropdown|
 |matrixdropdowncolumn|To all column types for matrixdropdown and matrixdynamic questions|
 
-To modify **survey** and **page** definition, please use these names in the definition hash object **SurveyEditor.SurveyQuestionEditorDefinition.definition["survey"]**.
+To modify **survey** and **page** definition, please use these names in the definition hash object **SurveyCreator.SurveyQuestionEditorDefinition.definition["survey"]**.
 
 Currently there are two types of "complex" Editor types. It is Editors for matrixdropdown and matrixdynamic questions columns and itemvalue Editor.
 
@@ -699,7 +699,7 @@ The code bellow adds a new cell type into columns and define a new Editor defini
 //add file type into matrix columns (run-time)
 Survey.matrixDropdownColumnTypes.file = { properties: ["showPreview", "imageHeight", "imageWidth"] };
 //add file type into matrix columns (design-time/editor)
-SurveyEditor.SurveyQuestionEditorDefinition.definition["matrixdropdowncolumn@file"] = {
+SurveyCreator.SurveyQuestionEditorDefinition.definition["matrixdropdowncolumn@file"] = {
     properties: ["showPreview", "imageHeight", "imageWidth"],
         tabs: [ { name: "visibleIf", index: 12 }, { name: "enableIf", index: 20 }]
 };
@@ -787,15 +787,15 @@ Working on end-user usability issues, we have introduced adorners concepts in sp
 As result the UI has been changed greatly, and additionally, developers got more control under it. You may register your own adorner or remove an existing adorner or remove all of them.
 ```javascript
 //Register a new adorner
-SurveyEditor.registerAdorner("adornerName", adornerInstance);
+SurveyCreator.registerAdorner("adornerName", adornerInstance);
 //Remove two existing adorners
-SurveyEditor.removeAdorners(["adornerName1", "adornerName2"]);
+SurveyCreator.removeAdorners(["adornerName1", "adornerName2"]);
 //The removeAdorners function without parameters, will remove all adorners
-SurveyEditor.removeAdorners();
+SurveyCreator.removeAdorners();
 ```
 <p align="center">
 
-![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/builder-adorners.png)
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/builder-adorners.png?raw=true)
 
 _Dropdown question standard adorners_
 

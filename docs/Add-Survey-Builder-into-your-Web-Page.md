@@ -5,7 +5,7 @@ The easiest way to add the survey creator into your web page, is to go to [one o
 If you do not want to use our Azure CDN, you may download our script files from GitHub: [SurveyJS Builder](https://github.com/surveyjs/survey-creator/releases) and [SurveyJS library](https://github.com/surveyjs/survey-library/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
 
 Finally you may install our npm package:
-```npm install surveyjs-editor```
+```npm install surveyjs-creator```
 
 ## Step 1. Add links to [knockout](http://knockoutjs.com).
 
@@ -17,13 +17,13 @@ Finally you may install our npm package:
 
 Add link to builder classes.
 ```javascript
-<link href="https://surveyjs.azureedge.net/@SurveyJSVersion/surveyeditor.css" type="text/css" rel="stylesheet" />
+<link href="https://surveyjs.azureedge.net/@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
 ```
 
-Link to the SurveyJS Library knockout version and Editor library.
+Link to the SurveyJS Library knockout version and Survey Creator library.
 ```javascript
 <script src="https://surveyjs.azureedge.net/@SurveyJSVersion/survey.ko.min.js">
-<script src="https://surveyjs.azureedge.net/@SurveyJSVersion/surveyeditor.min.js"></script>
+<script src="https://surveyjs.azureedge.net/@SurveyJSVersion/survey-creator.min.js"></script>
 ```
 
 ## Step 3. Use boostrap or use our Themes
@@ -36,7 +36,7 @@ You may use bootstrap
 Or you may use one of our default themes (you may create your own theme).
 ```javascript
 //You may use any of these: "default", "orange", "darkblue", "darkrose", "stone", "winter", "winterstone"
-SurveyEditor.StylesManager.applyTheme("darkblue");
+SurveyCreator.StylesManager.applyTheme("darkblue");
 ```
 
 ## Step 4. Show Survey Builder on the page
@@ -49,7 +49,7 @@ Inside your web page
 
 ```javascript
 var options = {showEmbededSurveyTab: true}; //see examples below
-var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorContainer", options);
+var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
 //set function on save callback
 surveyCreator.saveSurveyFunc = saveMySurvey;
 ```
@@ -83,7 +83,7 @@ var options = {
  showOptions: true                          
 };
 // pass the options into the constructor. It is an optional parameter.
-var surveyCreator = new SurveyEditor.SurveyEditor("surveyCreatorContainer", options);
+var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
 ```
 
 ## Step 7. Optional external libraries.
