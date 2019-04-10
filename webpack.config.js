@@ -37,11 +37,12 @@ var packagePlatformJson = {
     "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
   keywords: [
     "Survey",
-    "Creator",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
     "JavaScript",
-    "Editor",
-    "Builder",
-    "surveyjs"
+    "TypeScript"
   ],
   homepage: "https://surveyjs.io/Builder",
   license: "https://surveyjs.io/Licenses#BuildSurvey",
