@@ -11,7 +11,7 @@ import {
   SurveyQuestionEditorProperty
 } from "../src/questionEditors/questionEditorProperties";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
-import { SurveyEditor } from "../src/editor";
+import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -386,7 +386,7 @@ QUnit.test("Question editor definition: getTabs", function(assert) {
 
 QUnit.test("Question editor: custom errors", function(assert) {
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onPropertyValidationCustomError.add(function(editor, options) {
     if (options.propertyName != "title") return;
     if (!options.value) {
@@ -423,7 +423,7 @@ QUnit.test("Question editor: custom errors on required field", function(
   assert
 ) {
   var question = new Survey.QuestionText("invalidName");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onPropertyValidationCustomError.add(function(editor, options) {
     if (options.propertyName != "name") return;
     if (options.value == "invalidName") {
@@ -461,7 +461,7 @@ QUnit.test("Question editor: custom errors on unique itemvalues", function(
   assert
 ) {
   var question = new Survey.QuestionCheckbox("question");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onPropertyValidationCustomError.add(function(editor, options) {
     if (options.propertyName !== "choices") return;
     var items = options.value;
@@ -500,7 +500,7 @@ QUnit.test("Question editor: custom errors on unique itemvalues", function(
 
 QUnit.test("Question editor: required field errors", function(assert) {
   var question = new Survey.QuestionText("name");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["name"],
@@ -524,7 +524,7 @@ QUnit.test("Question editor: on property value changing", function(assert) {
     choices: []
   });
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onPropertyEditorObjectAssign.add(function(editor, options) {
     if (options.propertyName != "targetField") return;
     if (options.obj) {
@@ -571,7 +571,7 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
     }
   });
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onPropertyEditorObjectAssign.add(function(editor, options) {
     if (options.propertyName != "targetField") return;
     if (options.obj) {
@@ -605,7 +605,7 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
 });
 QUnit.test("Question editor: change editor.readOnly", function(assert) {
   var question = new Survey.QuestionText("q2");
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.onGetPropertyReadOnly.add(function(editor, options) {
     if (options.propertyName != "name") return;
     options.readOnly = options.obj.name == "q1";

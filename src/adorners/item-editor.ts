@@ -4,7 +4,7 @@ import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
-import { SurveyEditor } from "../editor";
+import { SurveyCreator } from "../editor";
 import { getNextValue, findParentNode } from "../utils/utils";
 
 import "./item-editor.scss";
@@ -17,7 +17,7 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     private question: QuestionSelectBase,
     private item,
     rootElement,
-    private editor: SurveyEditor
+    private editor: SurveyCreator
   ) {
     super(name, rootElement);
   }
@@ -215,7 +215,7 @@ export var itemDraggableAdorner = {
   afterRender: (
     elements: HTMLElement[],
     model: QuestionSelectBase,
-    editor: SurveyEditor
+    editor: SurveyCreator
   ) => {
     var itemsRoot = elements[0].parentElement;
     for (var i = 0; i < elements.length; i++) {
@@ -247,7 +247,12 @@ export var itemDraggableAdorner = {
           editor.onQuestionEditorChanged(model);
         },
         itemValue => {
-          editor.onItemValueAddedCallback(model, "choices", itemValue, model.choices);
+          editor.onItemValueAddedCallback(
+            model,
+            "choices",
+            itemValue,
+            model.choices
+          );
         }
       )
     );

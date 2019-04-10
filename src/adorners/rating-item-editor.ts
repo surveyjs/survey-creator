@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { TitleInplaceEditor } from "./title-editor";
-import { SurveyEditor } from "../editor";
+import { SurveyCreator } from "../editor";
 import { getNextValue, findParentNode } from "../utils/utils";
 
 import "./rating-item-editor.scss";
@@ -16,7 +16,7 @@ class RatingItemEditor extends TitleInplaceEditor {
     private question: Survey.QuestionRating,
     private item,
     rootElement,
-    private editor: SurveyEditor
+    private editor: SurveyCreator
   ) {
     super(name, rootElement);
   }
