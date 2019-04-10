@@ -31,7 +31,9 @@ var italianTranslation = {
   },
   // strings for editor
   ed: {
+    defaultLocale: "Default ({0})",
     survey: "Questionario",
+    settings: "Impostazioni Questionario",
     editSurvey: "Modifica Questionario",
     addNewPage: "Aggiungi Nuova Pagina",
     deletePage: "Elimina Pagina",
@@ -186,7 +188,7 @@ var italianTranslation = {
       rows: "Righe",
       choices: "Scelte",
       visibleIf: "Visibile se",
-      rateValues: "Volori della classifica",
+      rateValues: "Valori della classifica",
       choicesByUrl: "Opzioni dal Web",
       matrixChoices: "Opzioni predefinite",
       multipleTextItems: "Voci di testo",
@@ -246,7 +248,8 @@ var italianTranslation = {
   },
   //Test Survey
   ts: {
-    selectPage: "Seleziona la pagina da testare:"
+    selectPage: "Seleziona la pagina da testare:",
+    showInvisibleElements: "Mostra elementi nascosti"
   },
   validators: {
     answercountvalidator: "numero risposte",
@@ -260,14 +263,47 @@ var italianTranslation = {
     setvaluetrigger: "setta valore",
     visibletrigger: "cambia visibilità"
   },
-  // strings of properties
+  //Properties
   p: {
-    name: "nome",
+    name: "Nome",
     title: {
-      name: "titolo",
-      title: "Lascia vuoto se è lo stesso di 'Nome'"
+      name: "Titolo",
+      title: "Lascialo vuoto, se è uguale a 'Nome'"
     },
-    page_title: { name: "titolo", title: "Titolo della pagina" }
+
+    visible: "Visibile",
+    visibleIf: "Visibile Se",
+    description: "Descrizione",
+    isRequired: "Richiesto",
+    requiredIf: "Richiesto Se",
+    page: "Pagina",
+    width: "Larghezza",
+    enableIf: "Abilitato se",
+    defaultValue: "Valore di default",
+    readOnly: "Sola Lettura",
+    hasComment: "Ha un commento",
+    hasOther: "Ha altro",
+    choices: "Scelte",
+    choicesOrder: "Ordine Scelte",
+    choicesByUrl: "Url Scelte",
+    label: "label",
+    showTitle: "Mostra Titolo",
+    valueTrue: "Valore True",
+    valueFalse: "Valore False",
+    cols: "Colonne",
+    rows: "Righe",
+    currency: "Valuta",
+    showPreview: "Visualizza Anteprima",
+    html: "html",
+    rateValues: "Valori della classifica",
+    size: "Dimensione",
+    locale: "locale",
+    minValue: "Valore minimo",
+    maxValue: "Valore massimo",
+    minLength: "Lunghezza minima",
+    maxLength: "Lunghezza massima",
+    allowDigits: "Consenti cifre",
+    regex: "Espressione regolare"
   }
 };
 
