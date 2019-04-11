@@ -64,11 +64,11 @@ To build library yourself:
     npm run build_prod
     ```
 
-    After that you should have the library at 'package' directory.
+    After that you should have the library at 'build' directory.
 
 4.  **Run unit tests**
     ```
-    karma start
+    npm test
     ```
     This command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
 
