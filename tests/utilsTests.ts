@@ -14,4 +14,12 @@ QUnit.test("getNextValue", function(assert) {
     "item5"
   );
   assert.equal(getNextValue(prefix, []), "item1");
+  assert.equal(
+    getNextValue(prefix, ["Column 1", "Column 3", "Column 2"]),
+    "Column 4"
+  );
+  assert.equal(getNextValue(prefix, ["1", "3", "4"]), "5");
+  assert.equal(getNextValue(prefix, ["yes"]), "no");
+  assert.equal(getNextValue(prefix, ["No"]), "Yes");
+  assert.equal(getNextValue(prefix, ["TRUE"]), "FALSE");
 });

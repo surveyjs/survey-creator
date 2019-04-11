@@ -1,18 +1,57 @@
 import * as ko from "knockout";
+import { numberTypeAnnotation } from "babel-types";
+
+function getNumericFromString(str: string): string {
+  if (!str) return "";
+  var num = "";
+  for (var i = str.length - 1; i >= 0; i--) {
+    if (str[i] >= "0" && str[i] <= "9") {
+      num = str[i] + num;
+    }
+  }
+  return num;
+}
+const opositeValues = {
+  true: "false",
+  True: "False",
+  TRUE: "FALSE",
+  false: "true",
+  False: "True",
+  FALSE: "TRUE",
+  yes: "no",
+  Yes: "No",
+  YES: "NO",
+  no: "yes",
+  No: "Yes",
+  NO: "YES"
+};
+function getOpositValue(str: string): string {
+  if (!!opositeValues[str]) return opositeValues[str];
+  return null;
+}
 
 export function getNextValue(prefix: string, values: string[]) {
-  var index = values.reduce((res, val) => {
-    if (typeof val === "string" && val.indexOf(prefix) === 0) {
-      try {
-        var candidate = parseInt(val.substring(prefix.length));
-        if (candidate >= res) {
-          return candidate + 1;
-        }
-      } catch (e) {}
+  if (values.length > 0)
+    var oposite = getOpositValue(values[values.length - 1]);
+  if (oposite && values.indexOf(oposite) < 0) return oposite;
+  var numStr = "";
+  var baseStr = "";
+  for (var i = values.length - 1; i >= 0; i--) {
+    var str = values[i];
+    numStr = getNumericFromString(str);
+    if (!!numStr) {
+      baseStr = str.substr(0, str.length - numStr.length);
+      break;
     }
-    return res;
-  }, 1);
-  return prefix + index;
+  }
+  if (!!numStr) {
+    var num = parseInt(numStr);
+    while (values.indexOf(baseStr + num) > -1) {
+      num++;
+    }
+    return baseStr + num;
+  }
+  return prefix + 1;
 }
 
 export function findParentNode(className: string, sourceNode: HTMLElement) {
