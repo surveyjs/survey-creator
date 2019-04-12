@@ -2,7 +2,7 @@
 
 The easiest way to add the survey creator into your web page, is to go to [one of our examples](](https://surveyjs.io//Examples/Builder/), click on plunker button and copy the code from plunker editors into your web application.
 
-If you do not want to use our Azure CDN, you may download our script files from GitHub: [SurveyJS Builder](https://github.com/surveyjs/survey-creator/releases) and [SurveyJS library](https://github.com/surveyjs/survey-library/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
+If you do not want to use our Azure CDN, you may download our script files from GitHub: [Survey Creator](https://github.com/surveyjs/survey-creator/releases) and [SurveyJS library](https://github.com/surveyjs/survey-library/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
 
 Finally you may install our npm package:
 ```npm install surveyjs-creator```
@@ -15,7 +15,7 @@ Finally you may install our npm package:
 
 ## Step 2.  Add links to survey creator and survey library
 
-Add link to builder classes.
+Add link to Survey Creator classes.
 ```javascript
 <link href="https://surveyjs.azureedge.net/@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
 ```
@@ -39,7 +39,7 @@ Or you may use one of our default themes (you may create your own theme).
 SurveyCreator.StylesManager.applyTheme("darkblue");
 ```
 
-## Step 4. Show Survey Builder on the page
+## Step 4. Show Survey Creator on the page
 
 Inside your web page
 
@@ -69,7 +69,7 @@ Set Survey JSON directly
 Load Survey from SurveyJS Service
 ```surveyCreator.loadSurvey(yourSurveyId);```
 
-## Step 6. Customize Builder via options
+## Step 6. Customize Survey Creator via options
 
 ```javascript
 var options = {
