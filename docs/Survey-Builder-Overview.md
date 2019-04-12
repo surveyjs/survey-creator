@@ -95,8 +95,8 @@ There are several options that you may set to change the Survey Creator behavior
 |_showState: false,_|Set it to true to show the state in the toolbar (saving/saved).|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
-|showDefaultLanguageInTestSurveyTab: false,_|Set this property to false to hide the language selector in the "Test Survey" tab.|
-|showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
+|_showDefaultLanguageInTestSurveyTab: false,_|Set this property to false to hide the language selector in the "Test Survey" tab.|
+|_showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
 |_};_||
 
 <div id="loadsavesurvey"></div>
