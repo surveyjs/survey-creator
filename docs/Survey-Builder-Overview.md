@@ -91,7 +91,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_isRTL: true,_|Set this options to true for Right-to-Left web sites.|
 |_designerHeight: 1200px,_|Set the designer heigth to the specific value.|
 |_showPagesToolbox: false,_|If you are going to allow your users creating only one page surveys, then set this property to false. It will hide the pages toolbox.|
-|_useTabsInElementEditor: false,_|If you want to tabs instead of accordion in the element popup editor, then set this property to true. It will change accordion to tab control.|
+|_useTabsInElementEditor: true,_|If you want to tabs instead of accordion in the element popup editor, then set this property to true. It will change accordion to tab control.|
 |_showState: false,_|Set it to true to show the state in the toolbar (saving/saved).|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
