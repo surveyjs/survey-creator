@@ -2,6 +2,7 @@ import { enStrings } from "./localization/english";
 import * as Survey from "survey-knockout";
 
 export var editorLocalization = {
+  camelCaseBreaking: true,
   currentLocale: "",
   locales: {},
   getString: function(strName: string, locale: string = null) {
@@ -63,7 +64,7 @@ export var editorLocalization = {
     return this.getAutoPropertyName(obj);
   },
   getAutoPropertyName: function(propName: string) {
-    if (!propName) return propName;
+    if (!propName || !this.camelCaseBreaking) return propName;
     var res = propName[0].toUpperCase();
     for (var i = 1; i < propName.length; i++) {
       if (propName[i] === propName[i].toUpperCase()) {

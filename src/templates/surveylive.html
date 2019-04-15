@@ -1,18 +1,18 @@
 <script type="text/html" id="surveylive">
   <div data-bind="visible: koIsRunning()">
-      <span data-bind="visible: koPages().length > 1">
+      <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
           <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
           <span id="testSurveyPageChanged">
               <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
           </span>
       </span>
-       <span>
+       <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
           <label  for="testSurveyLocale" data-bind="text: localeText"></label>
           <span id="testSurveyLocale">
               <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
           </span>
       </span>
-      <label>
+      <label data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
           <div class="sjs-cb-container">
               <input class="svd_editor_control" type="checkbox" data-bind="checked: survey.showInvisibleElements">
               <span class="checkmark" data-bind="css: { 'svd-main-background-color': survey.showInvisibleElements, 'svd-light-background-color': !survey.showInvisibleElements }"></span>

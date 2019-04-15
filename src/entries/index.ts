@@ -9,6 +9,7 @@ Version = `${process.env.VERSION}`;
 
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
+export { editorLocalization as localization } from "../editorLocalization";
 
 export { DragDropHelper } from "../dragdrophelper";
 export {
@@ -62,7 +63,8 @@ export {
 export {
   SurveyPropertyDefaultValueEditor,
   SurveyPropertyDefaultRowValueEditor,
-  SurveyPropertyDefaultPanelValueEditor
+  SurveyPropertyDefaultPanelValueEditor,
+  SurveyPropertySetEditor
 } from "../propertyEditors/propertyDefaultValueEditor";
 export {
   SurveyPropertyTriggersEditor
@@ -106,12 +108,13 @@ export {
 } from "../surveyjsObjects";
 export { Extentions } from "../extentions";
 export { SurveyEditor } from "../editor";
+export { SurveyCreator } from "../editor";
 
 export { SurveysManager } from "../manage";
 
 export { StylesManager } from "../stylesmanager";
 
-//editorLocalization
+//localization
 import "../localization/danish";
 import "../localization/french";
 import "../localization/german";

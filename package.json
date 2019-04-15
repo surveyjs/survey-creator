@@ -1,6 +1,12 @@
 {
-  "version": "1.0.78",
-  "name": "surveyjs.editor",
+  "version": "1.0.79",
+  "name": "survey-creator",
+  "homepage": "https://surveyjs.io/Builder",
+  "license": "https://surveyjs.io/Licenses#BuildSurvey",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev",
     "test": "karma start",
@@ -8,18 +14,18 @@
     "test_ci": "karma start --single-run",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc_update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
-    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/custom_widgets.js\"",
+    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
     "testcafe_ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
     "release": "standard-version --message \"Release: %s\"",
-    "build_dev": "webpack --env.buildType dev",
-    "build_prod": "npm run build_dev && webpack --env.buildType prod",
+    "build_dev": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType dev",
+    "build_prod": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType prod --env.libraryName SurveyCreator && webpack --env.buildType dev && webpack --env.buildType prod",
     "watch_dev": "webpack --env.buildType dev --watch"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "jquery": "^3.1.1",
     "knockout": "^3.4.0",
-    "rmodal": "^1.0.28",
+    "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
     "survey-knockout": "^1.0.65"
   },

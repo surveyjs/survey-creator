@@ -533,14 +533,14 @@ export var enStrings = {
     noneText: "noneText",
 
     text: "text",
-    minValue: "minimum value",
-    maxValue: "maximum value",
-    minLength: "minimum length",
-    maxLength: "maximum length",
-    allowDigits: "allow digits",
-    minCount: "minimum count",
-    maxCount: "maximum count",
-    regex: "regular expression"
+    minValue: "minimumValue",
+    maxValue: "maximumValue",
+    minLength: "minimumLength",
+    maxLength: "maximumLength",
+    allowDigits: "allowDigits",
+    minCount: "minimumCount",
+    maxCount: "maximumCount",
+    regex: "regularExpression"
   }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.

@@ -19,6 +19,9 @@ export class SurveyLiveTester {
   koLanguages: any;
   koActiveLanguage: any;
   showObjectTitles = false;
+  koShowPagesInTestSurveyTab = ko.observable(true);
+  koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
+  koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor() {
@@ -97,7 +100,7 @@ export class SurveyLiveTester {
       item.koDisabled(!page.isVisible);
     }
   }
-  public show() {
+  public show(options: any = null) {
     var pages = [];
     for (var i = 0; i < this.survey.pages.length; i++) {
       var page = this.survey.pages[i];
@@ -110,6 +113,22 @@ export class SurveyLiveTester {
           this.survey.state == "running" && page === this.survey.currentPage
         )
       });
+    }
+    if (!!options && options.showPagesInTestSurveyTab != undefined) {
+      this.koShowPagesInTestSurveyTab(options.showPagesInTestSurveyTab);
+    }
+    if (!!options && options.showDefaultLanguageInTestSurveyTab != undefined) {
+      this.koShowDefaultLanguageInTestSurveyTab(
+        options.showDefaultLanguageInTestSurveyTab
+      );
+    }
+    if (
+      !!options &&
+      options.showInvisibleElementsInTestSurveyTab != undefined
+    ) {
+      this.koShowInvisibleElementsInTestSurveyTab(
+        options.showInvisibleElementsInTestSurveyTab
+      );
     }
     this.koPages(pages);
     this.koSurvey(this.survey);

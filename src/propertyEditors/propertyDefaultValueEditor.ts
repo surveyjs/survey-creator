@@ -76,9 +76,6 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
       SurveyPropertyDefaultValueEditor.defaultQuestionName
     );
   }
-  private getJsonType(type: string): string {
-    return type != "expression" ? type : "text";
-  }
 }
 
 export class SurveyPropertyDefaultRowValueEditorBase extends SurveyPropertyDefaultValueEditor {
@@ -139,6 +136,41 @@ export class SurveyPropertyDefaultPanelValueEditor extends SurveyPropertyDefault
   }
 }
 
+export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public get editorType(): string {
+    return "set";
+  }
+  public get editorTypeTemplate(): string {
+    return "value";
+  }
+  protected getSurveyInitialValue(): any {
+    var res = this.editingValue;
+    if (!res) return res;
+    if (!Array.isArray(res)) {
+      res = [res];
+    }
+    return res;
+  }
+  protected buildQuestionJson(): any {
+    var question = new Survey.QuestionCheckbox("q1");
+    var hasTagbox = !!Survey.JsonObject.metaData.findClass("tagbox");
+    question.hasSelectAll = !hasTagbox;
+    if (!!this.property) {
+      question.choices = this.property.getChoices(this.object);
+    }
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question
+    );
+    if (hasTagbox) {
+      json.type = "tagbox";
+    }
+    return json;
+  }
+}
+
 SurveyPropertyEditorFactory.registerEditor("value", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
@@ -155,4 +187,10 @@ SurveyPropertyEditorFactory.registerEditor("panelvalue", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyDefaultPanelValueEditor(property);
+});
+
+SurveyPropertyEditorFactory.registerEditor("set", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyPropertySetEditor(property);
 });

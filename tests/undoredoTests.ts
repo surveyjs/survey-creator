@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyUndoRedo } from "../src/undoredo";
-import { SurveyEditor } from "../src/editor";
+import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("UndoRedoTests");
 
@@ -70,7 +70,7 @@ QUnit.test("Undo maximum count", function(assert) {
   assert.equal(undo.koCanUndo(), false, "Store only for two undo");
 });
 QUnit.test("Do undo/redo with editor", function(assert) {
-  var editor = new SurveyEditor();
+  var editor = new SurveyCreator();
   editor.text = JSON.stringify(getSurveyJson());
   editor.addPage();
   assert.equal(4, editor.survey.pages.length);
