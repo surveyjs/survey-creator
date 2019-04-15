@@ -198,10 +198,14 @@
           height: $editor-height;
           overflow-y: scroll;
           padding-top: 18px;
+          position: relative;
           .empty-message {
             text-align: center;
-            line-height: 60vh;
             font-size: 22px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
           }
           .panel-body,
           .card-block {
