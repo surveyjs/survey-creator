@@ -107,7 +107,7 @@ export {
   removeAdorners
 } from "../surveyjsObjects";
 export { Extentions } from "../extentions";
-export { SurveyCreator as SurveyEditor } from "../editor";
+export { SurveyEditor } from "../editor";
 export { SurveyCreator } from "../editor";
 
 export { SurveysManager } from "../manage";

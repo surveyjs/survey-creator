@@ -1,10 +1,8 @@
 import * as ko from "knockout";
 import { SurveyHelper, ObjType } from "./surveyHelper";
-import { SurveyObjectItem } from "./surveyObjects";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
-import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
-import { SurveyForDesigner, SurveyEditor } from "./entries";
+import { SurveyCreator } from "./editor";
 import "../vendor/knockout-sortable.js";
 
 export class PagesEditor {
@@ -14,11 +12,11 @@ export class PagesEditor {
   private _selectedPage = ko.observable<Survey.PageModel>();
   pagesSelection: KnockoutComputed<Survey.PageModel[]>;
 
-  constructor(private editor: SurveyEditor, private element: any) {
+  constructor(private editor: SurveyCreator, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
       if (!this.isDraggingPage()) {
         this.prevPagesForSelector = this.editor.pages();
-        if(!this.readOnly) {
+        if (!this.readOnly) {
           this.prevPagesForSelector = this.prevPagesForSelector.concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
         }
       }
