@@ -2448,3 +2448,9 @@ ko.components.register("svg-icon", {
   },
   template: "<svg class='svd-svg-icon'><use></use></svg>"
 });
+
+export class SurveyEditor extends SurveyCreator {
+  constructor(renderedElement: any = null, options: any = null) {
+    super(renderedElement, options);
+  }
+}
