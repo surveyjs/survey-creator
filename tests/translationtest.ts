@@ -13,7 +13,7 @@ QUnit.test("Text question localization properties", function(assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question);
   assert.ok(
-    group.items.length >= 5,
+    group.items.length >= 4,
     "There are five or more localization strings"
   );
 });
