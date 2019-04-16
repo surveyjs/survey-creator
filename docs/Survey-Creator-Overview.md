@@ -31,9 +31,7 @@ We have created several Quick Start GitHub repositories for different client pla
 
 | Client Libraries | GitHub Repository |
 |---|---|
-| [Angular2(3)](https://angular.io/) | [Angular 2 + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_angular_quickstart) |
 | [Angular CLI](https://cli.angular.io/) | [Angular 5 Cli + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_angular_cli) |
-| [Angular 4+](https://cli.angular.io/) | [Angular 4 and SurveyJS library and Survey Creator example](https://github.com/surveyjs/angular4-surveyjs) |
 | [React](https://facebook.github.io/react/) | [React + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_react_quickstart) |
 | [Vue.js](https://vuejs.org/) | [SurveyJS + VueJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_vue_quickstart) |
 
