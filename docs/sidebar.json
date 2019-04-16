@@ -2,11 +2,11 @@
   "Categories": [
     {
       "Name": "Survey-Builder-Overview",
-      "Title": "Survey Builder Overview"
+      "Title": "Survey Creator Overview"
     },
     {
       "Name": "Add-Survey-Builder-into-your-Web-Page",
-      "Title": "Add Survey Builder into you Web Page"
+      "Title": "Add Survey Creator into you Web Page"
     },
     {
       "Name": "BuilderOverview",
@@ -15,11 +15,11 @@
     },
     {
       "Name": "api",
-      "Title": "Builder API",
+      "Title": "Survey Creator API",
       "Items": [
         {
-          "Name": "surveyeditor",
-          "Title": "Survey Builder"
+          "Name": "surveycreator",
+          "Title": "Survey Creator"
         },
         {
           "Name": "questiontoolbox",

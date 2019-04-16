@@ -2,7 +2,7 @@
 
 This paper will explain how to use, customize and get the maximum from Survey Creator Library. 
 
-If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Builder/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Builder/?id=Add-Survey-Builder-into-your-Web-Page).
+If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Survey-Creator/?id=Add-Survey-Builder-into-your-Web-Page).
 
 If you want to get the most from our Survey Creator, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
@@ -177,7 +177,7 @@ curStrings.ed.jsonEditor = "Edit As Text";
 
 All localizable strings you may find in our [GitHub repo in english.ts file](https://github.com/surveyjs/survey-creator/blob/master/src/localization/english.ts).
 
-Here is the link on [localization example](https://surveyjs.io/Examples/Builder/?id=localization) on our site.
+Here is the link on [localization example](https://surveyjs.io/Examples/Survey-Creator/?id=localization) on our site.
 
 <div id="multiplelanguages"></div>
 
@@ -192,7 +192,7 @@ First of all, you may limited the number of languages they may choose in the **s
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 ```
 
-And the most important, is to show the **Translation** tab. It would allow your Survey Creator users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Builder/?id=multiplelanguages).
+And the most important, is to show the **Translation** tab. It would allow your Survey Creator users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages).
 
 <div id="appearance"></div>
 
@@ -217,7 +217,7 @@ The following themes are available:
 |winter||
 |winterstone||
             
-You may change any our theme. Please review [this demo](https://surveyjs.io/Examples/Builder?id=editor-custom-theme) to see how to do it.
+You may change any our theme. Please review [this demo](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme) to see how to do it.
 
 <div id="toolbox"></div>
             
@@ -264,7 +264,7 @@ var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivId", option
 
 ### Add custom widgets
 
-To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Creator will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Builder/?id=customwidgets).
+To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Creator will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Survey-Creator/?id=customwidgets).
                 
 <div id="toolbox-existing"></div>
 
@@ -317,7 +317,7 @@ You may change the name of the default (General) category as any other localizab
 ```javascript
 SurveyCreator.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
-Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Builder/?id=toolboxcategories) to see how it works.
+Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Survey-Creator/?id=toolboxcategories) to see how it works.
 
 <div id="toolbox-property"></div>
 
@@ -449,7 +449,7 @@ surveyCreator.toolbox.changeCategories([
 ```
 ---
 
-Please review and play with the [Survey Toolbox customization](https://surveyjs.io/Examples/Builder/?id=toolboxcustomization) example.
+Please review and play with the [Survey Toolbox customization](https://surveyjs.io/Examples/Survey-Creator/?id=toolboxcustomization) example.
 
 
 <div id="removeproperties"></div>
@@ -485,7 +485,7 @@ surveyCreator.onCanShowProperty.add(function (sender, options) {
 });
 ```
 
-You may review the [Remove properties](https://surveyjs.io/Examples/Builder/?id=removeproperties) example.
+You may review the [Remove properties](https://surveyjs.io/Examples/Survey-Creator/?id=removeproperties) example.
 
 
 <div id="addproperties"></div>
@@ -608,7 +608,7 @@ Avaliable property types. Every property type has a correspondet Property Editor
 |triggers|Survey triggers property has this type|
 |validators|Question validators property has this type|
 
-You may review the [Add properties](https://surveyjs.io/Examples/Builder/?id=addproperties) example.
+You may review the [Add properties](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties) example.
 
 <div id="elementseditor"></div>
 
@@ -709,7 +709,7 @@ SurveyCreator.SurveyQuestionEditorDefinition.definition["matrixdropdowncolumn@fi
 };
 ```
 
-Finally, you may show any html on the top or on the bottom of Modal Property Editor by using [onShowPropertyModalEditorDescription](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onShowPropertyModalEditorDescription) event.
+Finally, you may show any html on the top or on the bottom of Modal Property Editor by using [onShowPropertyModalEditorDescription](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onShowPropertyModalEditorDescription) event.
 
 <div id="modifynewobjects"></div>
 
@@ -721,11 +721,11 @@ Here is the list of these events
 
 |Event name|Fires on|
 |---|---|
-|[onQuestionAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onQuestionAdded)|Fires on dropping a question from the Toolbox into designer surface|
-|[onPanelAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onPanelAdded)|Fires on dropping a panel (container) from the Toolbox into designer surface|
-|[onPageAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onPageAdded)|Fires on pressing "Add New Page" button or on selecting "Add New Page" item in the page selector|
-|[onMatrixColumnAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onMatrixColumnAdded)|Fires on clicking "Add New" button in the columns Property Editor of matrix dropdown or matrix dynamic questions|
-|[onItemValueAdded](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onItemValueAdded)|Fires on clicking "Add New" button in the itemvalue Property Editor or on clicking a "+" button during inplace editing checkbox, dropdown and radigroup questions|
+|[onQuestionAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onQuestionAdded)|Fires on dropping a question from the Toolbox into designer surface|
+|[onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onPanelAdded)|Fires on dropping a panel (container) from the Toolbox into designer surface|
+|[onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onPageAdded)|Fires on pressing "Add New Page" button or on selecting "Add New Page" item in the page selector|
+|[onMatrixColumnAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onMatrixColumnAdded)|Fires on clicking "Add New" button in the columns Property Editor of matrix dropdown or matrix dynamic questions|
+|[onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onItemValueAdded)|Fires on clicking "Add New" button in the itemvalue Property Editor or on clicking a "+" button during inplace editing checkbox, dropdown and radigroup questions|
 
 The code bellow generated a custom question name as "Question" + "Questiontype" + Counter, for example: QuestionCheckbox1, QuestionDropdown1, QuestionCheckbox2.
 ```javascript
@@ -756,7 +756,7 @@ There are two surveys instance inside the Survey Creator. Designer survey that y
 
 The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **surveyCreator.survey**.
 
-However, you should be careful and do not cache this instance, since Survey Creator may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Builder/?id=surveyeditor#onDesignerSurveyCreated) event.
+However, you should be careful and do not cache this instance, since Survey Creator may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
 
 By accessing the designer survey instance, you may modify the survey as you need it. For example, the following code add a new page, make it current and add a panel with two questions in it.
 ```javascript

@@ -1,7 +1,7 @@
 {
   "version": "1.0.79",
   "name": "survey-creator",
-  "homepage": "https://surveyjs.io/Builder",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#BuildSurvey",
   "repository": {
     "type": "git",

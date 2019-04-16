@@ -5,7 +5,7 @@
 
 ## See Survey Creator / Form Builder in action
 
-[Create your Survey or Form now](https://surveyjs.io/survey/Builder/)
+[Create your Survey or Form now](https://surveyjs.io/create-survey/)
 
 
 ## Download
@@ -27,11 +27,11 @@ Or use Azure CDN:
 
 ### Explore examples
 
-To learn how to include the visual survey creator / form builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Builder](https://surveyjs.io/Examples/Builder) web site
+To learn how to include the visual survey creator / form builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Survey-Creator](https://surveyjs.io/Examples/Survey-Creator) web site
 
 ### Read documentation
 
-To find out more about the library concepts and the you may customize it, please read [our documentation](https://surveyjs.io/Documentation/Builder)
+To find out more about the library concepts and the you may customize it, please read [our documentation](https://surveyjs.io/Documentation/Survey-Creator)
 
 ### Use quickstart repos
 

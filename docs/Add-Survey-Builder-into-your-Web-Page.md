@@ -1,6 +1,6 @@
 # Add Survey Creator / Form Builder  into your page
 
-The easiest way to add the survey creator into your web page, is to go to [one of our examples](](https://surveyjs.io//Examples/Builder/), click on plunker button and copy the code from plunker editors into your web application.
+The easiest way to add the survey creator into your web page, is to go to [one of our examples](](https://surveyjs.io//Examples/Survey-Creator/), click on plunker button and copy the code from plunker editors into your web application.
 
 If you do not want to use our Azure CDN, you may download our script files from GitHub: [Survey Creator](https://github.com/surveyjs/survey-creator/releases) and [SurveyJS library](https://github.com/surveyjs/survey-library/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
 
