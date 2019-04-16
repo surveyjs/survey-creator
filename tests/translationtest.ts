@@ -9,15 +9,15 @@ import { equal } from "assert";
 
 export default QUnit.module("TranslatonTests");
 
-QUnit.test("Text question localization properties", function(assert) {
+QUnit.test("Text question localization properties", function (assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question);
   assert.ok(
-    group.items.length >= 5,
-    "There are five or more localization strings"
+    group.items.length >= 4,
+    "There are four or more localization strings"
   );
 });
-QUnit.test("Text question choices localization", function(assert) {
+QUnit.test("Text question choices localization", function (assert) {
   var question = new Survey.QuestionCheckbox("q1");
   question.choices = ["item1", { value: "item2", text: "text 2" }];
   var group = new TranslationGroup(question.name, question);
