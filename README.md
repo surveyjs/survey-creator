@@ -1,7 +1,7 @@
 **survey.creator** is the visual survey creator / form builder for [SurveyJS](https://github.com/surveyjs/survey-library). It uses JSON to store the survey metadata.
 
 [![Build Status](https://travis-ci.org/surveyjs/survey-creator.svg?branch=master)](https://travis-ci.org/surveyjs/survey-creator)
-[![npm package](https://badge.fury.io/js/surveyjs-survey-creator.svg)](https://www.npmjs.com/package/survey-creator)
+<a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
 ## See Survey Creator / Form Builder in action
 
