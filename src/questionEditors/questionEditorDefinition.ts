@@ -107,7 +107,8 @@ export class SurveyQuestionEditorDefinition {
       properties: ["optionsCaption"]
     },
     text: {
-      properties: ["inputType", "placeHolder"]
+      properties: ["inputType", "placeHolder"],
+      tabs: [{ name: "validators", index: 200 }]
     },
     boolean: {
       properties: ["label"]
