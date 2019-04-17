@@ -32,7 +32,7 @@ export var enStrings = {
     rating: "Rating",
     text: "Single Input",
     boolean: "Boolean",
-    expression: "Expression",
+    expression: "Expression (read-only)",
     flowpanel: "Flow Panel"
   },
   //Strings in Editor
