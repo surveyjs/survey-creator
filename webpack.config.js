@@ -23,7 +23,7 @@ var banner = [
 
 var dts_banner = [
   "Type definitions for SurveyJS Creator JavaScript library v" +
-  packageJson.version,
+    packageJson.version,
   "(c) Devsoft Baltic O� - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#BuildSurvey",
@@ -82,11 +82,12 @@ var buildPlatformJson = {
     "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
   keywords: [
     "Survey",
-    "Creator",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
     "JavaScript",
-    "Editor",
-    "Builder",
-    "surveyjs"
+    "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#BuildSurvey",
@@ -119,7 +120,7 @@ var buildPlatformJson = {
   devDependencies: {}
 };
 
-module.exports = function (options) {
+module.exports = function(options) {
   var packagePath = "./package/";
   var buildPath = "./build/";
   var extractCSS = new ExtractTextPlugin({
