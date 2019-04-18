@@ -165,6 +165,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
     "{q} = 1 and {q2} = 2",
     "condition was added"
   );
+  assert.notOk(editor.koAddConditionQuestion(), "question should empty");
   assert.equal(editor.koCanAddCondition(), false, "values were reset.");
   editor.koAddConditionQuestion("q1");
   editor.koAddConditionValue("abc");
