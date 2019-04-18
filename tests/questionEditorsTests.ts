@@ -365,7 +365,7 @@ QUnit.test("Question editor definition: getProperties", function(assert) {
   var properties = SurveyQuestionEditorDefinition.getProperties("rating");
   assert.equal(
     properties.length,
-    baseProperties.length + 2,
+    baseProperties.length + 5,
     "Rating adds two properties"
   );
   assert.equal(properties[0], "name", "The first rating property");
