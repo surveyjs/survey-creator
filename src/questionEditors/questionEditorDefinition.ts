@@ -65,9 +65,9 @@ export class SurveyQuestionEditorDefinition {
     },
     rating: {
       properties: [
-        { name: "rateMin", category: "rate" },
-        { name: "rateMax", category: "rate" },
-        { name: "rateStep", category: "rate" },
+        "rateMin",
+        "rateMax",
+        "rateStep",
         "minRateDescription",
         "maxRateDescription"
       ],
