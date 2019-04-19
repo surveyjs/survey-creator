@@ -4,6 +4,7 @@ import "./accordion.scss";
 var template = require("html-loader?interpolate!val-loader!./accordion.html");
 
 export interface IAccordionItemData {
+  name: string | KnockoutObservable<string>;
   title: string | KnockoutObservable<string>;
   onExpand: () => void;
 }
@@ -16,7 +17,15 @@ export class AccordionItemModel {
     };
   }
   collapsed = ko.observable(true);
-  toggle = () => this.collapsed(!this.collapsed());
+  toggle = () => {
+    this.collapsed(!this.collapsed());
+    if (!this.collapsed() && !!document) {
+      var el = document.getElementById("editor_tab_id_" + this.data.name);
+      if (!!el) {
+        el.scrollIntoView(false);
+      }
+    }
+  };
   get title() {
     return this.data.title;
   }
