@@ -12,6 +12,7 @@ import {
 } from "../src/questionEditors/questionEditorProperties";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
 import { SurveyCreator } from "../src/editor";
+import { assertRegExpLiteral } from "babel-types";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -629,4 +630,37 @@ QUnit.test("Question editor: change editor.readOnly", function(assert) {
     true,
     "The question 'q1' is readOnly"
   );
+});
+
+class SurveyQuestionEditorTester extends Survey.Base {
+  constructor() {
+    super();
+  }
+  public getType() {
+    return "classTester";
+  }
+  public html: string;
+  public name: string;
+}
+Survey.JsonObject.metaData.addClass(
+  "classTester",
+  ["name", "html:html"],
+  function() {
+    return new SurveyQuestionEditorTester();
+  },
+  "base"
+);
+
+QUnit.test("Question editor: build properties on fly", function(assert) {
+  var obj = new SurveyQuestionEditorTester();
+  var elementEditor = new SurveyQuestionEditor(obj, null, null, null);
+  assert.equal(elementEditor.koTabs().length, 1, "There are one tab");
+  var tab = elementEditor.koTabs()[0];
+  assert.equal(
+    tab.properties.rows.length,
+    2,
+    "There are two rows, two properties"
+  );
+  var propertyEditor = elementEditor.getPropertyEditorByName("html");
+  assert.ok(propertyEditor, "Find the property");
 });

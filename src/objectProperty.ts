@@ -7,6 +7,7 @@ import {
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFactory";
 import { editorLocalization } from "./editorLocalization";
+import { TSImportEqualsDeclaration } from "babel-types";
 
 export declare type SurveyOnPropertyChangedCallback = (
   property: SurveyObjectProperty,
@@ -15,9 +16,9 @@ export declare type SurveyOnPropertyChangedCallback = (
 
 export class SurveyObjectProperty {
   private objectValue: any;
-  private isValueUpdating: boolean;
   private onPropertyChanged: SurveyOnPropertyChangedCallback;
   private isActiveValue: boolean;
+  public onChanged: (newValue: any) => any;
   public name: string;
   public disabled: boolean;
   public editor: SurveyPropertyEditorBase;
@@ -87,7 +88,9 @@ export class SurveyObjectProperty {
     this.editor.object = value;
   }
   protected onEditorValueChanged(newValue) {
-    if (this.onPropertyChanged && this.object)
-      this.onPropertyChanged(this, newValue);
+    if (this.object) {
+      if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
+      if (!!this.onChanged) this.onChanged(newValue);
+    }
   }
 }

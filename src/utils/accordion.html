@@ -1,17 +1,33 @@
 <div>
-    <!-- ko foreach: tabs -->
-    <div class="svd-accordion-tab-header" role="tab" data-bind="click: toggle">
-        <span data-bind="css: { 'svd-main-color': !collapsed() }, text: title"></span>
-        <!-- ko if: collapsed -->
-        <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
-        <!-- /ko -->
-        <!-- ko ifnot: collapsed -->
-        <svg-icon class="icon-toolbox-arrow svd-primary-icon" params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
-        <!-- /ko -->
-    </div>
-    <div class="svd-accordion-tab-content" role="tab" data-bind="ifnot: collapsed">
-        <!-- ko template: { name: template, data: data } -->
-        <!-- /ko -->
-    </div>
+  <!-- ko foreach: tabs -->
+  <div
+    class="svd-accordion-tab-header"
+    role="tab"
+    data-bind="click: toggle, visible: $parent.tabs().length > 1"
+  >
+    <span
+      data-bind="css: { 'svd-main-color': !collapsed() }, text: title"
+    ></span>
+    <!-- ko if: collapsed -->
+    <svg-icon
+      class="icon-toolbox-arrow"
+      params="iconName: 'icon-arrow_down_10x10', size: 10"
+    ></svg-icon>
     <!-- /ko -->
+    <!-- ko ifnot: collapsed -->
+    <svg-icon
+      class="icon-toolbox-arrow svd-primary-icon"
+      params="iconName: 'icon-arrow_up_10x10', size: 10"
+    ></svg-icon>
+    <!-- /ko -->
+  </div>
+  <div
+    class="svd-accordion-tab-content"
+    role="tab"
+    data-bind="ifnot: collapsed"
+  >
+    <!-- ko template: { name: template, data: data } -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
 </div>

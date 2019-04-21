@@ -1,0 +1,22 @@
+﻿<script type="text/html" id="propertyeditor-htmlconditions">
+  <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+  <!-- /ko -->
+</script>
+<script type="text/html" id="propertyeditorcontent-htmlconditions">
+  <div class="propertyeditor-htmlconditions">
+      <div class="input-group form-group">
+        <span class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems, click: onAddClick">
+            <span class="glyphicon glyphicon-plus"></span>
+        </span>
+        <div class="form-control svd_custom_select">
+            <select onmousewheel="return false;" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+        </div>
+        <span class="input-group-addon btn-danger" data-bind="visible: koAllowAddRemoveItems, enable: koSelected() != null, click: onDeleteClick">
+            <span class="glyphicon glyphicon-remove"></span>
+        </span>
+      </div>
+      <!-- ko if: selectedObjectEditor() != null -->
+        <!-- ko template: { name: "questioneditor-content", data: selectedObjectEditor() } --><!-- /ko -->
+      <!-- /ko -->
+  </div>
+</script>

@@ -70,6 +70,9 @@ export {
   SurveyPropertyTriggersEditor
 } from "../propertyEditors/propertyTriggersEditor";
 export {
+  SurveyPropertyHtmlConditionEditor
+} from "../propertyEditors/propertyHtmlConditionEditor";
+export {
   SurveyPropertyValidatorsEditor
 } from "../propertyEditors/propertyValidatorsEditor";
 export {
