@@ -463,3 +463,38 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test(
+  "SurveyPropertyConditionEditor show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921",
+  function(assert) {
+    var property = Survey.JsonObject.metaData.findProperty(
+      "question",
+      "visibleIf"
+    );
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = page.addNewQuestion("text", "q1");
+    var radioQuestion = page.addNewQuestion("dropdown", "q2");
+    radioQuestion.choices = [
+      { value: 1, visibleIf: "{a} = 1" },
+      { value: 1, enabledIf: "{b} = 1" }
+    ];
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(
+      editor.allConditionQuestions.length,
+      1,
+      "There are one question"
+    );
+    assert.equal(
+      editor.allConditionQuestions[0].name,
+      "q2",
+      "It is our question"
+    );
+    editor.koAddConditionQuestion("q2");
+    var vSurvey = editor.koValueSurvey();
+    var vQuestion = <Survey.QuestionRadiogroup>vSurvey.getAllQuestions()[0];
+    assert.equal(vQuestion.visibleChoices.length, 2, "Show all choices");
+  }
+);
