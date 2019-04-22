@@ -78,7 +78,6 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
           ["format"](this.property.name)
       );
     }
-    var name = property ? property.name : "";
     this.modalName =
       "modelEditor" + this.editorType + SurveyPropertyModalEditor.idCounter;
     SurveyPropertyModalEditor.idCounter++;

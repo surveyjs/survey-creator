@@ -6,7 +6,8 @@ export var enStrings = {
   survey: {
     edit: "Edit",
     externalHelpLink: "Watch and learn how to create surveys",
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+    externalHelpLinkUrl:
+      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Please drop a question here from the Toolbox on the left.",
     copy: "Copy",
     addToToolbox: "Add to toolbox",
@@ -228,6 +229,14 @@ export var enStrings = {
     isSinglePage: "Show all elements on one page",
     html: "Html",
     expression: "Expression",
+
+    minValue: "Minimum value",
+    maxValue: "Maximum value",
+    minLength: "Minimum length",
+    allowDigits: "Allow digits",
+    minCount: "Minimum count",
+    maxCount: "Maximum count",
+    regex: "Regular expression",
 
     tabs: {
       general: "General",
@@ -541,15 +550,7 @@ export var enStrings = {
     hasNone: "hasNone",
     noneText: "noneText",
 
-    text: "text",
-    minValue: "Minimum value",
-    maxValue: "Maximum value",
-    minLength: "Minimum length",
-    maxLength: "Maximum length",
-    allowDigits: "Allow digits",
-    minCount: "Minimum count",
-    maxCount: "Maximum count",
-    regex: "Regular expression"
+    text: "text"
   }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.

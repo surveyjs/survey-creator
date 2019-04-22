@@ -1171,9 +1171,8 @@ QUnit.test("Validators property editor", function(assert) {
   var result = [];
   var propEditor = new SurveyPropertyValidatorsEditor(null);
   propEditor.beforeShow();
-  assert.equal(
-    propEditor.availableValidators.length,
-    propEditor.koValidators().length,
+  assert.ok(
+    propEditor.koAvailableClasses().length > 1,
     "Localized validators have been created"
   );
 
@@ -1189,17 +1188,17 @@ QUnit.test("Validators property editor", function(assert) {
   );
   var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
   assert.equal(
-    koValidator.validator.text,
+    (<Survey.NumericValidator>koValidator.obj).text,
     "validatortext",
     "Validator Text is set correctly"
   );
   assert.equal(
-    (<Survey.NumericValidator>koValidator.validator).minValue,
+    (<Survey.NumericValidator>koValidator.obj).minValue,
     10,
     "Validator 'minValue' is set correctly"
   );
   assert.equal(
-    (<Survey.NumericValidator>koValidator.validator).maxValue,
+    (<Survey.NumericValidator>koValidator.obj).maxValue,
     100,
     "Validator 'maxValue' is set correctly"
   );
@@ -1207,9 +1206,7 @@ QUnit.test("Validators property editor", function(assert) {
   propEditor.onAddClick({ value: "textvalidator" });
   assert.equal(propEditor.koItems().length, 2, "There are two validators now");
   var koValidator = <SurveyPropertyValidatorItem>propEditor.koSelected();
-  assert.equal(koValidator.text, "text", "Created with corrected value");
-  (<Survey.TextValidator>koValidator.validator).minLength = 20;
-  koValidator.validator.text = "text is short.";
+  assert.equal(koValidator.koText(), "text", "Created with corrected value");
 
   propEditor.onAddClick({ value: "textvalidator" });
   assert.equal(
@@ -1224,9 +1221,8 @@ QUnit.test("Validators property editor", function(assert) {
     "There are two validators again"
   );
 
-  propEditor.onApplyClick();
+  propEditor.apply();
   assert.equal(result.length, 2, "Two validators are saved");
-  assert.equal(result[1].minLength, 20, "The properties are saved too");
 });
 
 QUnit.test(
