@@ -106,10 +106,8 @@
       >
         <div id="surveyjs"></div>
         <!-- ko if: isCurrentPageEmpty -->
-        <div
-          class="empty-message"
-          data-bind="text: $root.getLocString('survey.dropQuestion')"
-        ></div>
+        <!-- ko template: "se-empty-placeholder" -->
+        <!-- /ko -->
         <!-- /ko -->
       </div>
     </div>
@@ -150,5 +148,20 @@
 <script type="text/html" id="se-tab-test">
   <div data-bind="style: {width: koTestSurveyWidth}">
     <div id="surveyjsExample" data-bind="template: { name: 'surveylive', data: surveyLive }"></div>
+  </div>
+</script>
+<script type="text/html" id="se-empty-placeholder">
+  <div class="svd-survey-placeholder-root">
+    <div class="svd-survey-placeholder">
+      <!-- ko if: showExternalHelpLink -->
+      <div class="svd-survey-gallery">
+        <a data-bind="attr: { href: $root.getLocString('survey.externalHelpLinkUrl') }">
+          <img src="../images/YouTube.png"/>
+          <span data-bind="text: $root.getLocString('survey.externalHelpLink')"></span>
+        </a>
+      </div>
+      <!-- /ko -->
+      <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
+    </div>
   </div>
 </script>

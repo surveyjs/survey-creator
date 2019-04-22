@@ -1298,6 +1298,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set showEmbededSurveyTab(value: boolean) {
     this.showEmbededSurveyTabValue(value);
   }
+  showExternalHelpLink = ko.observable(false);
   /**
    * Set it to true to show "Translation" tab and to false to hide the tab
    */

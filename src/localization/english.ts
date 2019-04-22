@@ -5,6 +5,8 @@ export var enStrings = {
   //survey templates
   survey: {
     edit: "Edit",
+    externalHelpLink: "Watch and learn how to create surveys",
+    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Please drop a question here from the Toolbox on the left.",
     copy: "Copy",
     addToToolbox: "Add to toolbox",

@@ -259,7 +259,7 @@ module.exports = function(options) {
           loader: "html-loader"
         },
         {
-          test: /\.svg/,
+          test: /\.(svg|png)$/,
           use: {
             loader: "url-loader",
             options: {}
