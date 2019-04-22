@@ -125,15 +125,30 @@ export class SurveyQuestionEditorProperties {
     }
     return isError;
   }
+  public getPropertyEditorByName(
+    propertyName: string
+  ): SurveyQuestionEditorProperty {
+    var props = this.getAllProperties();
+    for (var i = 0; i < props.length; i++) {
+      if (props[i].property.name == propertyName) return props[i];
+    }
+  }
   private performForAllProperties(
     func: (p: SurveyQuestionEditorProperty) => void
   ) {
+    var props = this.getAllProperties();
+    for (var i = 0; i < props.length; i++) {
+      func(props[i]);
+    }
+  }
+  private getAllProperties(): Array<SurveyQuestionEditorProperty> {
+    var res = [];
     for (var i = 0; i < this.rows.length; i++) {
       for (var j = 0; j < this.rows[i].properties.length; j++) {
-        var property = this.rows[i].properties[j];
-        func(property);
+        res.push(this.rows[i].properties[j]);
       }
     }
+    return res;
   }
   protected buildRows(properties) {
     for (var i = 0; i < properties.length; i++) {

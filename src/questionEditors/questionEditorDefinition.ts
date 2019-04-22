@@ -271,6 +271,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "navigation", index: 10 },
         { name: "question", index: 20 },
         { name: "completedHtml", index: 70 },
+        { name: "completedHtmlOnCondition", index: 75 },
         { name: "loadingHtml", index: 80 },
         { name: "timer", index: 90 },
         { name: "triggers", index: 100 }
@@ -347,15 +348,26 @@ export class SurveyQuestionEditorDefinition {
       result.push(SurveyQuestionEditorDefinition.definition[className]);
       return result;
     }
-    while (className) {
+    var curClassName = className;
+    while (curClassName) {
       var metaClass = <Survey.JsonMetadataClass>(
-        Survey.JsonObject.metaData["findClass"](className)
+        Survey.JsonObject.metaData.findClass(curClassName)
       );
       if (!metaClass) break;
       if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
         result.push(SurveyQuestionEditorDefinition.definition[metaClass.name]);
       }
-      className = metaClass.parentName;
+      curClassName = metaClass.parentName;
+    }
+    if (result.length == 0) {
+      var properties = Survey.JsonObject.metaData.getProperties(className);
+      var classRes = { properties: [] };
+      for (var i = 0; i < properties.length; i++) {
+        if (properties[i].isVisible(null)) {
+          classRes.properties.push(properties[i].name);
+        }
+      }
+      result.push(classRes);
     }
     return result;
   }

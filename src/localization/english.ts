@@ -92,7 +92,8 @@ export var enStrings = {
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
-    fpAddQuestion: "Add question..."
+    fpAddQuestion: "Add question...",
+    completedHtmlOnConditionItemText: "Show if:"
   },
   //Property names in table headers
   pel: {
@@ -225,6 +226,8 @@ export var enStrings = {
     panelAddText: "Adding panel text",
     panelRemoveText: "Removing panel text",
     isSinglePage: "Show all elements on one page",
+    html: "Html",
+    expression: "Expression",
 
     tabs: {
       general: "General",
@@ -245,6 +248,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question",
       completedHtml: "Completed Html",
+      completedHtmlOnCondition: "Completed Html on Condition",
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
       triggers: "Triggers",

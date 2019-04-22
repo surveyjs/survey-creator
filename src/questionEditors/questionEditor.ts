@@ -197,7 +197,7 @@ export class SurveyQuestionEditor {
     } else {
       res = editorLocalization.getString("pe.surveyEditorTitle");
     }
-    if (this.options && this.options.onGetElementEditorTitleCallback) {
+    if (!!this.options && this.options.onGetElementEditorTitleCallback) {
       res = this.options.onGetElementEditorTitleCallback(this.obj, res);
     }
     return res;
@@ -253,6 +253,16 @@ export class SurveyQuestionEditor {
     }
     return res;
   }
+  public getPropertyEditorByName(
+    propertyName: string
+  ): SurveyQuestionEditorProperty {
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      var res = tabs[i].getPropertyEditorByName(propertyName);
+      if (!!res) return res;
+    }
+    return res;
+  }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
     var properties = new SurveyQuestionEditorProperties(
@@ -293,7 +303,11 @@ export class SurveyQuestionEditor {
     }
   }
   get useTabsInElementEditor() {
-    return this.options.useTabsInElementEditor;
+    return (
+      !!this.options &&
+      this.options.useTabsInElementEditor &&
+      this.koTabs().length > 1
+    );
   }
 }
 
@@ -339,6 +353,11 @@ export class SurveyQuestionEditorTab {
   }
   public apply(): boolean {
     return this.properties.apply();
+  }
+  public getPropertyEditorByName(
+    propertyName: string
+  ): SurveyQuestionEditorProperty {
+    return this.properties.getPropertyEditorByName(propertyName);
   }
   public doCloseWindow() {}
   protected getValue(property: Survey.JsonObjectProperty): any {
