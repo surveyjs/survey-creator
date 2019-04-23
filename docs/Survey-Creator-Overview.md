@@ -218,7 +218,7 @@ The following themes are available:
 You may change any our theme. Please review [this demo](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme) to see how to do it.
 
 <div id="toolbox"></div>
-            
+
 ## Customize Toolbox
 
 You may fully customize Toolbox as you want. You may add/remove any item on it (question/panel types), change items names and icons, the generated json and categories and so on.
