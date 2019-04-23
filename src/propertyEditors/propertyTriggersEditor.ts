@@ -109,7 +109,9 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   private getAvailableTriggers(): Array<string> {
     var result = [];
     for (var i = 0; i < this.triggerClasses.length; i++) {
-      result.push(this.triggerClasses[i].name);
+      var name = this.triggerClasses[i].name;
+      if (name == "visibletrigger") continue;
+      result.push(name);
     }
     return result;
   }

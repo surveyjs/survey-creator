@@ -388,7 +388,7 @@ export var enStrings = {
     setvaluetrigger: "set value",
     copyvaluetrigger: "copy value",
     runexpressiontrigger: "run expression",
-    visibletrigger: "change visibility"
+    visibletrigger: "change visibility (deprecated)"
   },
   //Properties
   p: {
