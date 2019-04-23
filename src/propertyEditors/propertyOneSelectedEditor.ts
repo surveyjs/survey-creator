@@ -76,7 +76,8 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   private setItemProperties(obj: any) {
     if (this.object) {
-      obj["survey"] = this.object.survey;
+      obj["survey"] =
+        this.object.getType() == "survey" ? this.object : this.object.survey;
     }
     obj.locOwner = this;
   }
