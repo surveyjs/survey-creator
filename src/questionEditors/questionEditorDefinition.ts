@@ -216,6 +216,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "name",
         "title",
+        "description",
         { name: "visible", category: "checks" },
         "questionsOrder"
       ],
