@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { ArrayIterator } from "lodash";
 import { TSImportEqualsDeclaration } from "babel-types";
+import { IToolbarItem } from "./editor";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -277,6 +278,7 @@ export class Translation implements ITranslationLocales {
   public importFinishedCallback: () => void;
   public availableTranlationsChangedCallback: () => void;
   public tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
+  public toolbarItems = ko.observableArray<IToolbarItem>();
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {

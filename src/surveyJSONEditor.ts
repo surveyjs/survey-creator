@@ -1,9 +1,11 @@
 import * as ko from "knockout";
 import { SurveyTextWorker } from "./textWorker";
+import { IToolbarItem } from "./editor";
 import * as Survey from "survey-knockout";
 
 export class SurveyJSONEditor {
   public static updateTextTimeout: number = 1000;
+  public toolbarItems = ko.observableArray<IToolbarItem>();
 
   private isProcessingImmediately: boolean = false;
   private aceEditor: AceAjax.Editor;

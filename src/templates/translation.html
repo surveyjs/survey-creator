@@ -1,5 +1,17 @@
 <script type="text/html" id="translation">
     <div class="form-group svd-translation-tab">
+        <div class="svd_toolbar">
+        <!-- ko foreach: toolbarItems -->
+        <span
+            tabindex="0"
+            class="svd_action"
+            data-bind="css: $data.css, visible: visible, attr: { id: id }"
+        >
+            <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+            <!-- /ko -->
+        </span>
+        <!-- /ko -->
+        </div>
         <div class="form-group svd-language-select">
         <div class="svd_custom_select svd-light-bg-color svd-light-border-color"> 
             <select onmousewheel="return false;" data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption"></select>

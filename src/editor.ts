@@ -832,6 +832,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         action: () => this.showDesigner()
       });
       if (this.showJSONEditorTab) {
+        this.jsonEditor.toolbarItems = this.toolbarItems;
         this.tabs.push({
           name: "editor",
           title: this.getLocString("ed.jsonEditor"),
@@ -859,6 +860,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         });
       }
       if (this.showTranslationTab) {
+        this.translation.toolbarItems = this.toolbarItems;
         this.tabs.push({
           name: "translation",
           title: this.getLocString("ed.translation"),

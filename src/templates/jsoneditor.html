@@ -7,5 +7,17 @@
         </div>
         <!-- /ko  -->
     </div>
+    <div class="svd_toolbar">
+    <!-- ko foreach: toolbarItems -->
+    <span
+        tabindex="0"
+        class="svd_action"
+        data-bind="css: $data.css, visible: visible, attr: { id: id }"
+    >
+        <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+        <!-- /ko -->
+    </span>
+    <!-- /ko -->
+    </div>
     <div id="surveyjsJSONEditor" class="svd_json_editor"></div>
 </script>
