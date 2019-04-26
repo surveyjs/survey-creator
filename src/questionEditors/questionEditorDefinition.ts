@@ -224,6 +224,7 @@ export class SurveyQuestionEditorDefinition {
     survey: {
       properties: [
         "title",
+        "description",
         "showTitle",
         "locale",
         "mode",
