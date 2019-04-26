@@ -831,15 +831,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         data: this,
         action: () => this.showDesigner()
       });
-      if (this.showJSONEditorTab) {
-        this.tabs.push({
-          name: "editor",
-          title: this.getLocString("ed.jsonEditor"),
-          template: "jsoneditor",
-          data: this.jsonEditor,
-          action: () => this.showJsonEditor()
-        });
-      }
       if (this.showTestSurveyTab) {
         this.tabs.push({
           name: "test",
@@ -847,6 +838,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           template: "se-tab-test",
           data: this,
           action: () => this.showTestSurvey()
+        });
+      }
+      if (this.showJSONEditorTab) {
+        this.tabs.push({
+          name: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "jsoneditor",
+          data: this.jsonEditor,
+          action: () => this.showJsonEditor()
         });
       }
       if (this.showEmbededSurveyTab) {
