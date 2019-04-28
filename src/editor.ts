@@ -831,6 +831,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         data: this,
         action: () => this.showDesigner()
       });
+      if (this.showTestSurveyTab) {
+        this.tabs.push({
+          name: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "se-tab-test",
+          data: this,
+          action: () => this.showTestSurvey()
+        });
+      }
       if (this.showJSONEditorTab) {
         this.jsonEditor.toolbarItems = this.toolbarItems;
         this.tabs.push({
@@ -839,15 +848,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           template: "jsoneditor",
           data: this.jsonEditor,
           action: () => this.showJsonEditor()
-        });
-      }
-      if (this.showTestSurveyTab) {
-        this.tabs.push({
-          name: "test",
-          title: this.getLocString("ed.testSurvey"),
-          template: "se-tab-test",
-          data: this,
-          action: () => this.showTestSurvey()
         });
       }
       if (this.showEmbededSurveyTab) {
