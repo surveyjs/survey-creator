@@ -7,13 +7,13 @@ if (!!ko.options) {
 }
 
 export class DragDropTargetElement {
-  public nestedPanelDepth: number = -1;
   constructor(
     public page: Survey.Page,
     public target: any,
-    public source: any
+    public source: any,
+    nestedPanelDepth: number = -1
   ) {
-    page.dragDropStart(source, target); //, DragDropTargetElement.nestedPanelPath);
+    page.dragDropStart(source, target, nestedPanelDepth);
   }
   public moveTo(
     destination: any,
@@ -268,7 +268,7 @@ export class DragDropHelper {
       if (prevedDefault) {
         event.preventDefault();
       }
-      if(!this.readOnly) {
+      if (!this.readOnly) {
         var newElement = this.ddTarget.doDrop();
         if (this.onModifiedCallback)
           this.onModifiedCallback({
@@ -431,9 +431,9 @@ export class DragDropHelper {
     this.ddTarget = new DragDropTargetElement(
       <Survey.Page>this.survey.currentPage,
       targetElement,
-      source
+      source,
+      DragDropHelper.nestedPanelDepth
     );
-    this.ddTarget.nestedPanelDepth = DragDropHelper.nestedPanelDepth;
   }
   private setData(event: DragEvent, text: string) {
     if (event["originalEvent"]) {
