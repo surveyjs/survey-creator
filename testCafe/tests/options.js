@@ -62,17 +62,11 @@ test(`showEmbededSurveyTab`, async t => {
 });
 
 test(`hideObjectProperties`, async t => {
-  const isPropertiesShown = ClientFunction(() =>
-    document.documentElement.innerText.indexOf("Hide Object Properties")
-  );
-  const isPropertiesHidden = ClientFunction(() =>
-    document.documentElement.innerText.indexOf("Show Object Properties")
-  );
-
-  assert.notEqual(await isPropertiesShown(), -1);
+  const hideButton = Selector('.svd-header-hide-button');
+  const showButton = Selector('.svd-header-show-button');
 
   await t
-    .click(`.svd-property-grid__header-hide-button`);
-
-  assert.notEqual(await isPropertiesHidden(), -1);
+    .expect(hideButton).ok()
+    .click(`.svd-property-grid__header-hide-button`)
+    .expect(showButton).ok();
 });
