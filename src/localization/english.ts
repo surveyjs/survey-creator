@@ -43,7 +43,7 @@ export var enStrings = {
     defaultLocale: "Default ({0})",
     survey: "Survey",
     settings: "Survey Settings",
-    questionSettings: "Settings",
+    opjectPropertiesHeader: "Advanced",
     showObjectProperties: "Show Object Properties",
     hideObjectProperties: "Hide Object Properties",
     editSurvey: "Edit Survey",
