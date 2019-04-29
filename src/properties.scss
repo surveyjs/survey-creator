@@ -1,12 +1,30 @@
+.svd-property-grid__header {
+  padding: 0.4em 1.5em 0.75em 1.5em;
+  height: 1.5em;
+  margin-bottom: 3em;
+  margin-top: 0.35em;
+  
+  .svd-property-grid__header-title {
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    color: $secondary-text-color;
+  }
+  .svd-property-grid__header-hide-button {
+    float: right;
+    cursor: pointer;
+  }
+}
+
 .svd_container {
   .svd_properties {
-    border-width: 0;
-    border-top-width: 2px;
-    border-style: solid;
-    border-radius: 0;
+    border: none;
     padding: 0;
     margin-left: -0.5px;
     font-size: 1.17em;
+
     .modal {
       font-size: 0.857em;
       color: $primary-text-color;

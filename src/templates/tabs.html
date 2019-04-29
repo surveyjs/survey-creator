@@ -86,7 +86,13 @@
       data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid(), 'svd_wide': !koShowPropertyGrid()}"
     >
       <div class="svd_toolbar">
-        <!-- ko foreach: toolbarItems -->
+        <!-- ko ifnot: $root.koShowPropertyGrid -->
+        <div class="svd-property-grid__header" data-bind="click: function() { $root.koShowPropertyGrid(true); }, attr: { title: $root.getLocString('ed.showObjectProperties') }">
+            <span class="svd-property-grid__header-title" data-bind="text: $root.getLocString('ed.questionSettings')"></span>
+            <span class="svd-property-grid__header-hide-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
+          </div>
+          <!-- /ko -->
+          <!-- ko foreach: toolbarItems -->
         <span
           tabindex="0"
           class="svd_action"
@@ -113,9 +119,13 @@
     </div>
     <svd-splitter params="minLeft: 600, minRight: 150"></svd-splitter>
     <div
-      class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-border-color svd-light-bg-color"
+      class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-border-color svd-dark-bg-color"
       data-bind="visible: koShowPropertyGrid"
     >
+      <div class="svd-property-grid__header">
+        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.questionSettings')"></span>
+        <span class="svd-property-grid__header-hide-button" data-bind="click: function() { koShowPropertyGrid(false); }, attr: { title: $root.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
+      </div>
       <div class="svd_object_selector svd-light-border-color">
         <div class="svd_custom_select">
           <select

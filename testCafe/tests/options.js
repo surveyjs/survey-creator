@@ -60,3 +60,19 @@ test(`showEmbededSurveyTab`, async t => {
 
   assert.notEqual(await isTabExists(), -1);
 });
+
+test(`hideObjectProperties`, async t => {
+  const isPropertiesShown = ClientFunction(() =>
+    document.documentElement.innerText.indexOf("Hide Object Properties")
+  );
+  const isPropertiesHidden = ClientFunction(() =>
+    document.documentElement.innerText.indexOf("Show Object Properties")
+  );
+
+  assert.notEqual(await isPropertiesShown(), -1);
+
+  await t
+    .click(`.svd-property-grid__header-hide-button`);
+
+  assert.notEqual(await isPropertiesHidden(), -1);
+});
