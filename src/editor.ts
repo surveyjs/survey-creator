@@ -1447,6 +1447,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (
       property.name == "locale" ||
       property.name == "hasComment" ||
+      property.name == "hasSelectAll" ||
+      property.name == "hasNone" ||
       property.name == "hasOther"
     ) {
       this.selectedObjectEditorValue.objectChanged();

@@ -26,6 +26,7 @@ ko.components.register("select-items-editor", {
         editor: params.editor,
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
+        addOther: () => params.question.hasOther = !params.question.hasOther,
         addItem: createAddItemHandler(
           params.question,
           itemValue => {

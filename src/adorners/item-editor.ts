@@ -178,7 +178,7 @@ export var createAddItemHandler = (
 export var createAddItemElement = handler => {
   var addNew = document.createElement("div");
   addNew.title = editorLocalization.getString("pe.addItem");
-  addNew.className = "svda-add-new-item svd-primary-icon";
+  addNew.className = "svda-add-new-item svd-primary-icon svda-add-custom-item";
   addNew.onclick = handler;
 
   var svgElem: any = document.createElementNS(
@@ -199,6 +199,20 @@ export var createAddItemElement = handler => {
   );
   svgElem.appendChild(useElem);
   addNew.appendChild(svgElem);
+  // var title = document.createElement("span");
+  // title.innerHTML = addNew.title;
+  // addNew.appendChild(title);
+  return addNew;
+};
+
+export var createCustomElement = (title, handler) => {
+  var addNew = document.createElement("div");
+  addNew.title = title;
+  addNew.className = "svda-add-new-item svda-add-custom-item";
+  addNew.onclick = handler;
+  var titleEl = document.createElement("span");
+  titleEl.innerHTML = addNew.title;
+  addNew.appendChild(titleEl);
   return addNew;
 };
 
@@ -257,6 +271,13 @@ export var itemDraggableAdorner = {
       )
     );
     itemsRoot.appendChild(addNew);
+    itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addOther"), () => model.hasOther = !model.hasOther));
+    if (model.hasSelectAll !== undefined) {
+      itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addSelectAll"), () => model.hasSelectAll = !model.hasSelectAll));
+    }
+    if (model.hasNone !== undefined) {
+      itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addNone"), () => model.hasNone = !model.hasNone));
+    }
   }
 };
 

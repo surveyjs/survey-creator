@@ -1,3 +1,5 @@
+@import "../colors";
+
 .item_editable {
   pointer-events: all;
   cursor: text;
@@ -46,6 +48,13 @@
   display: none;
   &:hover {
     text-decoration: underline;
+  }
+}
+.svda-add-custom-item {
+  color: $primary-color;
+  &>span {
+    vertical-align: middle;
+    display: inline-block;
   }
 }
 .svd_q_selected .svda-add-new-item {
