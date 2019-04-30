@@ -175,7 +175,8 @@ export class StylesManager {
     ".svd_container .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow":
       "background:  $primary-color;",
     ".svd_container .select2-container .select2-selection--single .select2-selection__arrow":
-      "background:  $primary-color;"
+      "background:  $primary-color;",
+    ".svd_container .svd_custom_select": "background-color: $primary-bg-color;"
   };
 
   public static bootstrapThemeCss: { [key: string]: string } = {

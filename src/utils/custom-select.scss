@@ -1,3 +1,5 @@
+@import "../colors";
+
 @mixin svg-icon() {
   content: "";
   background-repeat: no-repeat;
@@ -33,6 +35,7 @@
   width: 100%;
   position: relative;
   display: inline-block;
+  background-color: $primary-bg-color;
 
   select {
     width: 100%;
