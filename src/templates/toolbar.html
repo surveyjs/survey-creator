@@ -1,6 +1,15 @@
 ﻿<script type="text/html" id="svd-toolbar-button">
     <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss">
-        <span data-bind="text: title"></span>
+        <!-- ko if: $data.icon -->
+        <div class="svd-toolbar-button__image">
+            <svg-icon class="svd-svg-icon icon-white" params="iconName: icon, size: 12"></svg-icon>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.showTitle === undefined || (!!$data.icon && !ko.unwrap($data.showTitle)) -->
+        <div class="svd-toolbar-button__title">
+            <span data-bind="text: title"></span>
+        </div>
+        <!-- /ko -->
     </button>
 </script>
 <script type="text/html" id="svd-toolbar-options">

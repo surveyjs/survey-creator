@@ -46,16 +46,24 @@ export interface IToolbarItem {
    */
   enabled?: KnockoutObservable<boolean> | boolean;
   /**
+   * Set this property to false to hide the toolbar item title.
+   */
+  showTitle?: KnockoutObservable<boolean> | boolean;
+  /**
    * A callback that calls on toolbar item click.
    */
   action?: () => void;
   /**
-   * css class
+   * Toolbar item css class
    */
   css?: KnockoutObservable<string> | string;
   innerCss?: KnockoutObservable<string> | string;
   data?: any;
   template?: string;
+  /**
+   * Toolbar item icon name
+   */
+  icon?: string;
   items?: KnockoutObservableArray<IToolbarItem>;
 }
 
@@ -891,6 +899,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   protected addToolbarItems() {
     this.toolbarItems.push({
       id: "svd-undo",
+      icon: "icon-actionundo",
       visible: this.koIsShowDesigner,
       enabled: this.undoRedo.koCanUndo,
       action: this.doUndoClick,
@@ -898,6 +907,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
     this.toolbarItems.push({
       id: "svd-redo",
+      icon: "icon-actionredo",
       visible: this.koIsShowDesigner,
       enabled: this.undoRedo.koCanRedo,
       action: this.doRedoClick,
@@ -905,6 +915,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
     this.toolbarItems.push({
       id: "svd-survey-settings",
+      icon: "icon-actionsettings",
       visible: this.koIsShowDesigner,
       enabled: false,
       action: () => {

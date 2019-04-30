@@ -129,6 +129,7 @@ export class StylesManager {
       "color: $primary-text-color; background-color: $secondary-bg-color; border-color: $secondary-bg-color;",
 
     ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
+    ".svd_container .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
     ".svd_container .svd-primary-icon .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .svd-secondary-icon .svd-svg-icon":
       "fill: $secondary-color;",
@@ -203,6 +204,7 @@ export class StylesManager {
 
     ".svd_container.sv_bootstrap_css .svd-svg-icon":
       "fill: $primary-icon-color;",
+    ".svd_container.sv_bootstrap_css .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
     ".svd_container.sv_bootstrap_css .svd-primary-icon .svd-svg-icon":
       "fill: $primary-color;",
     ".svd_container.sv_bootstrap_css .svd-secondary-icon .svd-svg-icon":
@@ -300,6 +302,7 @@ export class StylesManager {
 
     ".svd_container.sv_bootstrapmaterial_css .svd-svg-icon":
       "fill: $primary-icon-color;",
+    ".svd_container.sv_bootstrapmaterial_css .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
     ".svd_container.sv_bootstrapmaterial_css .svd-primary-icon .svd-svg-icon":
       "fill: $primary-color;",
     ".svd_container.sv_bootstrapmaterial_css .svd-secondary-icon .svd-svg-icon":
