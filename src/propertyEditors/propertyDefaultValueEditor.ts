@@ -17,11 +17,22 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     qjson.titleLocation = "hidden";
     qjson.showClearButton = true;
     qjson.storeOthersAsComment = false;
-    delete qjson["visible"];
-    delete qjson["visibleIf"];
-    delete qjson["enable"];
-    delete qjson["enableIf"];
+    qjson.readOnly = false;
+    SurveyPropertyDefaultValueEditor.deleteConditionProperties(qjson);
+    if (!!qjson.choices) {
+      for (var i = 0; i < qjson.choices.length; i++) {
+        SurveyPropertyDefaultValueEditor.deleteConditionProperties(
+          qjson.choices[i]
+        );
+      }
+    }
     return qjson;
+  }
+  private static deleteConditionProperties(json: any) {
+    delete json["visible"];
+    delete json["visibleIf"];
+    delete json["enable"];
+    delete json["enableIf"];
   }
   public static createSurveyFromJsonQuestion(questionJson: any): Survey.Survey {
     var json = {

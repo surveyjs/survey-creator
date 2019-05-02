@@ -138,41 +138,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       );
     return res;
   }
-  private addQuestionNames(
-    question: Survey.Question,
-    questionNames: Array<string>,
-    names: Array<string>
-  ) {
-    for (var i = 0; i < questionNames.length; i++) {
-      this.addConditionQuestionsHash[questionNames[i]] = question;
-      names.push(questionNames[i]);
-    }
-  }
-  private addConditionQuestionNames(
-    question: Survey.Question,
-    names: Array<string>
-  ) {
-    if (question == this.object) return;
-    var questionNames = [];
-    question.addConditionNames(questionNames);
-    this.addQuestionNames(question, questionNames, names);
-  }
-  private addMatrixColumnsToCondition(names: Array<string>) {
-    if (
-      !(this.object instanceof Survey.MatrixDropdownColumn) ||
-      !this.object ||
-      !this.object.colOwner ||
-      !this.object.colOwner["columns"]
-    )
-      return;
-    var columns = this.object.colOwner["columns"];
-    for (var i = 0; i < columns.length; i++) {
-      if (columns[i] == this.object) continue;
-      var colName = "row." + columns[i].name;
-      names.push(colName);
-      this.addConditionQuestionsHash[colName] = this.object.colOwner;
-    }
-  }
   private onValueSurveyChanged(questionName: string, operator: string) {
     if (
       !this.canShowValueByOperator(operator) ||
