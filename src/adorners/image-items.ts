@@ -89,6 +89,7 @@ ko.components.register("image-item-editor", {
           link = options.newValue === null ? options.value : options.newValue;
           params.target[params.name] = link;
           params.editor.onPropertyValueChanged(property, params.target, link);
+          params.editor.onQuestionEditorChanged(params.question);
         });
       };
       return model;
@@ -207,6 +208,7 @@ export var imageItemsAdorner = {
           link = options.newValue === null ? options.value : options.newValue;
           itemValue["imageLink"] = link;
           editor.onPropertyValueChanged(property, itemValue, link);
+          editor.onQuestionEditorChanged(model);
         });
       };
       fileInput.click();
