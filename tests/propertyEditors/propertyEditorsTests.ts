@@ -67,17 +67,17 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     propertyName: string,
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
-  ) {}
+  ) { }
   onMatrixDropdownColumnAddedCallback(
     matrix: Survey.Question,
     column: Survey.MatrixDropdownColumn,
     columns: Array<Survey.MatrixDropdownColumn>
-  ) {}
+  ) { }
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Survey.Base,
     editorOptions: any
-  ) {}
+  ) { }
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -90,7 +90,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     event: KeyboardEvent
-  ) {}
+  ) { }
   onValueChangingCallback(options: any) {
     if (!!this.doValueChangingCallback) this.doValueChangingCallback(options);
   }
@@ -98,7 +98,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     propertyName: string,
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
-  ) {}
+  ) { }
   onPropertyEditorModalShowDescriptionCallback(
     propertyName: string,
     obj: Survey.Base
@@ -114,16 +114,19 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     survey: Survey.Survey
-  ) {}
+  ) { }
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     list: any[]
-  ) {}
+  ) { }
+  public createSurvey(json: any = {}, reason: string = "designer", surveyType = Survey.Survey) {
+    return new surveyType(json);
+  }
 }
 
-QUnit.test("Create correct property editor", function(assert) {
+QUnit.test("Create correct property editor", function (assert) {
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "unknown";
   var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
@@ -159,7 +162,7 @@ QUnit.test("Create correct property editor", function(assert) {
     );
   }
 });
-QUnit.test("propertyEditor.displayName", function(assert) {
+QUnit.test("propertyEditor.displayName", function (assert) {
   var property = Survey.JsonObject.metaData.findProperty(
     "question",
     "enableIf"
@@ -172,12 +175,12 @@ QUnit.test("propertyEditor.displayName", function(assert) {
     "The displayName was set correctly"
   );
 });
-QUnit.test("Create custom property editor", function(assert) {
+QUnit.test("Create custom property editor", function (assert) {
   var propertyValue = null;
   var widgetJSON = {
-    render: function(editor, el) {
+    render: function (editor, el) {
       propertyValue = propertyEditor.editingValue;
-      editor.onValueChangedCallback = function(newValue) {
+      editor.onValueChangedCallback = function (newValue) {
         propertyValue = newValue;
       };
     }
@@ -196,7 +199,7 @@ QUnit.test("Create custom property editor", function(assert) {
   propertyEditor.editingValue = 3;
   assert.equal(propertyValue, 3, "value has been set to 3 as well");
 });
-QUnit.test("PropertyEditor and hasError - required", function(assert) {
+QUnit.test("PropertyEditor and hasError - required", function (assert) {
   var question = new Survey.QuestionText("q1");
   var property = Survey.JsonObject.metaData.findProperty("question", "name");
   var propertyEditor = new SurveyObjectProperty(property);
@@ -209,7 +212,7 @@ QUnit.test("PropertyEditor and hasError - required", function(assert) {
   assert.equal(editor.hasError(), true, "There is no value here");
   assert.notEqual(editor.koErrorText(), "", "The error is not empty");
 });
-QUnit.test("SurveyPropertyDropdown - choices", function(assert) {
+QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
   var property = new Survey.JsonObjectProperty("dropdown");
   property.setChoices([1, 2, 3], null);
   var propertyEditor = new SurveyObjectProperty(property);
@@ -224,7 +227,7 @@ QUnit.test("SurveyPropertyDropdown - choices", function(assert) {
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, 1, "The first text");
 });
-QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function(
+QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function (
   assert
 ) {
   var property = new Survey.JsonObjectProperty("dropdown");
@@ -241,7 +244,7 @@ QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function(
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, "Item 1", "Use text property");
 });
-QUnit.test("SurveyPropertyItemValue", function(assert) {
+QUnit.test("SurveyPropertyItemValue", function (assert) {
   var choices = [
     { value: 1, text: "item1" },
     { value: 2, text: "item2" },
@@ -319,7 +322,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
     "there are three elements"
   );
 });
-QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
+QUnit.test("SurveyPropertyItemValue different view type", function (assert) {
   var choices = [{ value: 1, text: "item1" }, { value: 2 }];
   var editor = new SurveyPropertyItemValuesEditorForTests();
   editor.beforeShow();
@@ -370,7 +373,7 @@ QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
 });
 QUnit.test(
   "SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyPropertyItemValuesEditorForTests();
     editor.beforeShow();
     editor.editingValue = ["1|item1", "item2"];
@@ -379,7 +382,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837",
-  function(assert) {
+  function (assert) {
     Survey.JsonObject.metaData.findProperty(
       "ItemValue",
       "value"
@@ -412,7 +415,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
+QUnit.test("SurveyPropertyItemValue: Value and Text are same", function (
   assert
 ) {
   var choices: Array<Survey.ItemValue> = [];
@@ -440,7 +443,7 @@ QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
 });
 QUnit.test(
   "SurveyPropertyItemValue disable viewtext for multiple languages",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       questions: [
         {
@@ -461,7 +464,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyItemValue: Value and Text are same and editor.alwaySaveTextInPropertyEditors = true",
-  function(assert) {
+  function (assert) {
     var choices = [
       { value: 1, text: "1" },
       { value: "item 2", text: "item 2" }
@@ -488,7 +491,7 @@ QUnit.test(
     assert.equal(choices[1].text, "item 2", "the second text is 'item 2'");
   }
 );
-QUnit.test("SurveyPropertyItemValue_PureValue", function(assert) {
+QUnit.test("SurveyPropertyItemValue_PureValue", function (assert) {
   var choices = [1, "item2", { value: 3, text: "item3" }];
   var itemValuePropertyEditor = new SurveyPropertyItemValuesEditorForTests();
   itemValuePropertyEditor.beforeShow();
@@ -522,7 +525,7 @@ QUnit.test("SurveyPropertyItemValue_PureValue", function(assert) {
     "check text of the third element"
   );
 });
-QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
+QUnit.test("SurveyPropertyItemValue columns generation", function (assert) {
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   assert.equal(
     propertyEditor.columns.length,
@@ -540,7 +543,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
     "The second column is text"
   );
 });
-QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
+QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
   Survey.JsonObject.metaData.addProperty("itemvalue", { name: "imageLink" });
 
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
@@ -557,7 +560,7 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
 
   Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
 });
-QUnit.test("SurveyPropertyItemValue columns define in definition", function(
+QUnit.test("SurveyPropertyItemValue columns define in definition", function (
   assert
 ) {
   Survey.JsonObject.metaData.addProperty("itemvalue", "description");
@@ -599,13 +602,13 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   delete SurveyQuestionEditorDefinition.definition["radiogroup@choices"];
   Survey.JsonObject.metaData.removeProperty("itemvalue", "description");
 });
-QUnit.test("extended SurveyPropertyItemValue + custom property", function(
+QUnit.test("extended SurveyPropertyItemValue + custom property", function (
   assert
 ) {
   Survey.JsonObject.metaData.addClass(
     "itemvalues_ex",
     ["imageLink"],
-    function() {
+    function () {
       return new Survey.ItemValue(null);
     },
     "itemvalue"
@@ -633,7 +636,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
 });
 QUnit.test(
   "extended SurveyPropertyItemValue + custom property - process items with custom properties",
-  function(assert) {
+  function (assert) {
     Survey.JsonObject.metaData.addClass(
       "itemvalues_ex",
       ["imageLink"],
@@ -688,7 +691,7 @@ QUnit.test(
     Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
   }
 );
-QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
+QUnit.test("SurveyPropertyItemValuesEditor + locale", function (assert) {
   var survey = new Survey.Survey();
   var p = survey.addNewPage();
   var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
@@ -702,11 +705,11 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
     "choices"
   );
   var propEditor = <SurveyPropertyItemValuesEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
+    SurveyPropertyEditorFactory.createEditor(property, function (newValue) {
       q.choices = newValue;
     })
   );
-  propEditor.onGetLocale = function() {
+  propEditor.onGetLocale = function () {
     return survey.locale;
   };
   propEditor.beforeShow();
@@ -728,7 +731,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   survey.locale = "de";
   assert.equal(q.choices[0].text, "Deutsch 1", "value is deutsch");
 });
-QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
+QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function (
   assert
 ) {
   var survey = new Survey.Survey();
@@ -744,11 +747,11 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
     "columns"
   );
   var propEditor = <SurveyPropertyDropdownColumnsEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
+    SurveyPropertyEditorFactory.createEditor(property, function (newValue) {
       q.columns = newValue;
     })
   );
-  propEditor.onGetLocale = function() {
+  propEditor.onGetLocale = function () {
     return survey.locale;
   };
 
@@ -772,7 +775,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
   assert.equal(q.columns[0].title, "Deutsch 1", "value is deutsch");
 });
 
-QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
+QUnit.test("SurveyNestedPropertyEditorEditorCell", function (assert) {
   //TODO remove later - create property if it doesn't exist
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
 
@@ -802,7 +805,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
     "There is empty error in koHasError"
   );
 });
-QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function(
+QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function (
   assert
 ) {
   var property = new Survey.JsonObjectProperty("testBoolean");
@@ -822,7 +825,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function(
     "create boolean editor type"
   );
 });
-QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
+QUnit.test("SurveyPropertyItemValuesEditorItem", function (assert) {
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   var itemValue = new Survey.ItemValue(null);
   var item = new SurveyPropertyItemValuesEditorItem(
@@ -836,7 +839,7 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
   assert.equal(item.hasError(), false, "There is no errors");
 });
 
-QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
+QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
   Survey.JsonObject.metaData.addProperty("question", {
     name: "multiple:multiplevalues",
     choices: [
@@ -858,7 +861,7 @@ QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
   Survey.JsonObject.metaData.removeProperty("question", "multiple");
 });
 
-QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
+QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function (
   assert
 ) {
   var columns: Array<Survey.MatrixDropdownColumn> = [];
@@ -902,7 +905,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
   );
 });
 
-QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function(
+QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function (
   assert
 ) {
   var saveProperties =
@@ -928,7 +931,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function(
   SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = saveProperties;
 });
 
-QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
+QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function (
   assert
 ) {
   var survey = new Survey.Survey();
@@ -978,7 +981,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   }
 });
 
-QUnit.test("Text property test - two way binding", function(assert) {
+QUnit.test("Text property test - two way binding", function (assert) {
   var property = new Survey.JsonObjectProperty("text");
   property.type = "text";
   var propertyEditor = new SurveyObjectProperty(property);
@@ -997,7 +1000,7 @@ QUnit.test("Text property test - two way binding", function(assert) {
     "the value is set correctly from text input"
   );
 });
-QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
+QUnit.test("SurveyPropertyResultfullEditor test", function (assert) {
   var editor = new SurveyPropertyResultfullEditor(null);
   editor.editingValue = new Survey.ChoicesRestfull();
   assert.equal(editor.koItems().length, 4, "There are 4 items, 4 properties");
@@ -1016,7 +1019,7 @@ QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
     "test title is set"
   );
 });
-QUnit.test("Triggers property editor", function(assert) {
+QUnit.test("Triggers property editor", function (assert) {
   var survey = createSurvey();
   var trigger = new Survey.SurveyTriggerVisible();
   trigger.name = "question1";
@@ -1103,7 +1106,7 @@ QUnit.test("Triggers property editor", function(assert) {
     "Complete trigger is created"
   );
 });
-QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
+QUnit.test("Triggers property editor and setvalue trigger", function (assert) {
   var survey = createSurvey();
   var trigger = new Survey.SurveyTriggerSetValue();
   trigger.expression = "{question1} != 'val1'";
@@ -1162,7 +1165,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
 });
 
-QUnit.test("Validators property editor", function(assert) {
+QUnit.test("Validators property editor", function (assert) {
   var survey = createSurvey();
   var validator = new Survey.NumericValidator(10, 100);
   validator.text = "validatortext";
@@ -1227,7 +1230,7 @@ QUnit.test("Validators property editor", function(assert) {
 
 QUnit.test(
   "automicatilly create name for new item in SurveyPropertyTextItemsEditor",
-  function(assert) {
+  function (assert) {
     var question = new Survey.QuestionMultipleText("q1");
     question.addItem("text1");
     question.addItem("text2");
@@ -1244,7 +1247,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("be able to modify empty items, bug#428", function(assert) {
+QUnit.test("be able to modify empty items, bug#428", function (assert) {
   var question = new Survey.QuestionMultipleText("q1");
   var property = Survey.JsonObject.metaData.findProperty(
     "multipletext",
@@ -1261,7 +1264,7 @@ QUnit.test("be able to modify empty items, bug#428", function(assert) {
   assert.equal(question.items.length, 1, "The item has been added");
 });
 
-QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
+QUnit.test("onPropertyValueChanging callback, Bug #438", function (assert) {
   var question = new Survey.QuestionText("q1");
   var property = Survey.JsonObject.metaData.findProperty("question", "title");
   var stringProperty = new SurveyStringPropertyEditor(property);
@@ -1271,7 +1274,7 @@ QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
   };
   stringProperty.object = question;
   var options = new EditorOptionsTests();
-  options.doValueChangingCallback = function(options) {
+  options.doValueChangingCallback = function (options) {
     options.newValue = options.value.trim();
   };
   stringProperty.options = options;

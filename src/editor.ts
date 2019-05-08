@@ -107,7 +107,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
   /**
-   * If set to true (default value) the Editor scrolls to a new element. A new element can be added from Toolbox or by copying.
+   * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
   public scrollToNewElement: boolean = true;
 
@@ -182,7 +182,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
   /**
    * The event is called before showing a property in the Property Grid or in Question Editor.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid and in Question Editor.
@@ -194,7 +194,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Obsolete, please use onShowingProperty event.
    * The event is called before showing a property in the Property Grid or in Question Editor.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid or in Question Editor
@@ -206,7 +206,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = this.onShowingProperty;
   /**
    * The event is called when editor tab has been rendered.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.tabName the name of the rendered tab
    * <br/> options.elements the rendered elements
    * <br/> options.model current context model
@@ -219,7 +219,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
    * You may changed it and make the property editor read only or enabled for a particular object.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
@@ -230,7 +230,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property1 the left object property (Survey.JsonObjectProperty object).
    * <br/> options.property2 the right object property (Survey.JsonObjectProperty object).
@@ -242,7 +242,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event allows you modify DOM element for a property in the Property Grid. For example, you may change it's styles.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and it's editor.
    * <br/> options.property object property (Survey.JsonObjectProperty object).
@@ -254,7 +254,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.element an instance of the deleting element
    * <br/> options.elementType the type of the element: 'question', 'panel' or 'page'.
    * <br/> options.allowing set it to false to cancel the element deleting
@@ -265,7 +265,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.question a new added survey question. Survey.Question object
    * <br/> options.page the survey Page object where question has been added.
    */
@@ -275,7 +275,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called when an end-user double click on an element (question/panel).
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.element an instance of the element
    */
   public onElementDoubleClick: Survey.Event<
@@ -285,7 +285,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br /> options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
    * <br/> options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
    * <br/> options.newItem a new created Survey.ItemValue object.
@@ -297,7 +297,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.matrix a matrix question where column is located, matrix.columns.
    * <br/> options.newColumn a new created Survey.MatrixDropdownColumn object.
    * <br/> options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
@@ -308,7 +308,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.panel a new added survey panel. Survey.Panel object
    * <br/> options.page the survey Page object where question has been added.
    */
@@ -318,7 +318,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on adding a new page into the survey.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.page the new survey Page object.
    */
   public onPageAdded: Survey.Event<
@@ -327,7 +327,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options object contains the information about certain modifications
    * <br/> options.type contains string constant describing certain modification
    * <br/> Available values:
@@ -361,7 +361,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.target: deleted object
    * <br/>
    * <br/> options.type: "VIEW_TYPE_CHANGED"
-   * <br/> options.newType: new type of the editor view: editor or designer
+   * <br/> options.newType: new type of the creator view: editor or designer
    * <br/>
    * <br/> options.type: "DO_DROP"
    * <br/> options.page: the page of the drap/drop operation
@@ -376,17 +376,27 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is fired when the Survey Editor is initialized and a survey object (Survey.Survey) is created.
-   * <br/> sender the survey editor object that fires the event
-   * <br/> options.survey  the survey object showing in the editor.
+   * The event is fired when the survey creator creates a survey object (Survey.Survey).
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.survey the survey object showing in the creator.
+   * <br/> options.reason indicates what component of the creator requests the survey.
+   */
+  public onSurveyInstanceCreated: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.survey  the survey object showing in the creator.
    */
   public onDesignerSurveyCreated: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is fired when the Survey Editor runs the survey in the test mode.
-   * <br/> sender the survey editor object that fires the event
+   * The event is fired when the survey creator runs the survey in the test mode.
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the "Test survey" tab.
    */
   public onTestSurveyCreated: Survey.Event<
@@ -395,7 +405,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to control Property Editors UI.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editorOptions  options that can be changed.
@@ -409,7 +419,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.value the property value.
@@ -422,7 +432,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.value the property value.
@@ -436,7 +446,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
@@ -448,7 +458,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to modify the survey that used on setting value for condition/expression properties, like visibleIf, enableIf and so on.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
@@ -461,7 +471,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to modify the list (name and titles) od the questions available in a condition editor.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
@@ -473,7 +483,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to process key down event in a property editor
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
@@ -485,7 +495,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to disable some operations for an element (question/panel).
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object question/panel
    * <br/> options.allowDelete set it to false to disable deleting the object
    * <br/> options.allowEdit set it to false to disable calling the modal Editor
@@ -500,7 +510,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to add/remove/modify the element (question/panel) menu items.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.items the list of menu items. It has two requried fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
    * @see onElementAllowOperations
@@ -511,7 +521,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to show the description on the top or/and bottom of the property modal editor.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName the property name
    * <br/> options.htmlTop the html  that you want to see on the top of the modal window
@@ -523,7 +533,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to change the text showing in the dropdown of the property grid.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object.
    * <br/> options.text the current object text, commonly it is a name. You must change this attribute
    */
@@ -535,7 +545,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
    * It calls before adding the element into toolbox and it allows to change the toolbox item attributes using options.itemOptions parameter
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.element is a new added element
    * <br/> options.itemOptions a json object that allows you to override question properties. Attributes are: name, title, isCopied, iconName, json and category.
    * @see onCustomElementAddedIntoToolbox
@@ -546,7 +556,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/> options.element is a new added element
    * @see onCustomElementAddingIntoToolbox
    */
@@ -556,7 +566,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is fired on uploading the file. There are two properties in options: options.name options.callback.
-   * <br/> sender the survey editor object that fires the event
+   * <br/> sender the survey creator object that fires the event
    * <br/>  name: name, file: file, accept: accept
    * <br/> file the Javascript File object
    * <br/> callback called on upload complete
@@ -577,7 +587,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to control drag&drop operations.
-   * <br/> sender the survey editor object that fires the event.
+   * <br/> sender the survey creator object that fires the event.
    * <br/> options.survey the editing survey object.
    * <br/> options.allow set it to false to disable dragging.
    * <br/> options.target a target element that is dragging.
@@ -592,7 +602,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * Use this event to get access rendered adorder.
-   * <br/> sender the survey editor object that fires the event.
+   * <br/> sender the survey creator object that fires the event.
    * <br/> options.survey the editing survey object.
    * <br/> options.question the survey element of the adorner.
    * <br/> options.adorner the adorner id.
@@ -664,9 +674,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   clickToolboxItem: any;
   dragEnd: any;
   /**
-   * The Survey Editor constructor.
-   * @param renderedElement HtmlElement or html element id where Survey Editor will be rendered
-   * @param options Survey Editor options. The following options are available: showJSONEditorTab,
+   * The Survey Creator constructor.
+   * @param renderedElement HtmlElement or html element id where survey creator will be rendered
+   * @param options survey creator options. The following options are available: showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
@@ -688,16 +698,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
-    this.saveButtonClick = function() {
+    this.saveButtonClick = function () {
       self.doSave();
     };
     this.koObjects = ko.observableArray();
     window["sel"] = this.koSelectedObject;
     this.koSelectedObject = ko.observable();
-    this.koSelectedObject.subscribe(function(newValue) {
+    this.koSelectedObject.subscribe(function (newValue) {
       self.selectedObjectChanged(newValue != null ? newValue.value : null);
     });
-    this.koGenerateValidJSON.subscribe(function(newValue) {
+    this.koGenerateValidJSON.subscribe(function (newValue) {
       if (!self.options) self.options = {};
       self.options.generateValidJSON = newValue;
       if (self.generateValidJSONChangedCallback)
@@ -708,7 +718,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.koSelectedObject,
       this.showObjectTitles
     );
-    this.surveyObjects.getItemTextCallback = function(obj, text) {
+    this.surveyObjects.getItemTextCallback = function (obj, text) {
       var options = { obj: obj, text: text };
       self.onGetObjectTextInPropertyGrid.fire(self, options);
       return options.text;
@@ -719,13 +729,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedo = new SurveyUndoRedo();
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
-    this.selectedObjectEditorValue.onCanShowPropertyCallback = function(
+    this.selectedObjectEditorValue.onCanShowPropertyCallback = function (
       object: any,
       property: Survey.JsonObjectProperty
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.selectedObjectEditorValue.onSortPropertyCallback = function(
+    this.selectedObjectEditorValue.onSortPropertyCallback = function (
       obj: any,
       property1: Survey.JsonObjectProperty,
       property2: Survey.JsonObjectProperty
@@ -741,7 +751,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         );
       }
     );
-    this.selectedObjectEditorValue.onAfterRenderCallback = function(
+    this.selectedObjectEditorValue.onAfterRenderCallback = function (
       obj,
       htmlElement,
       prop
@@ -756,17 +766,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.onPropertyAfterRender.fire(self, options);
     };
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
-    this.questionEditorWindow.onCanShowPropertyCallback = function(
+    this.questionEditorWindow.onCanShowPropertyCallback = function (
       object: any,
       property: Survey.JsonObjectProperty
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.surveyLive = new SurveyLiveTester();
+    this.surveyLive = new SurveyLiveTester(this);
     this.surveyLive.showObjectTitles = this.showObjectTitles;
     this.surveyEmbeding = new SurveyEmbedingWindow();
-    this.translationValue = new Translation(new Survey.Survey());
-    this.translation.importFinishedCallback = function() {
+    this.translationValue = new Translation(this.createSurvey({}, "translation"));
+    this.translation.importFinishedCallback = function () {
       self.onTranslationImported.fire(self, {});
     };
     this.translation.availableTranlationsChangedCallback = () => {
@@ -793,35 +803,35 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
 
     this.koViewType = ko.observable("designer");
-    this.koIsShowDesigner = ko.computed(function() {
+    this.koIsShowDesigner = ko.computed(function () {
       return self.koViewType() == "designer";
     });
-    this.generateValidJSONClick = function() {
+    this.generateValidJSONClick = function () {
       self.koGenerateValidJSON(true);
     };
-    this.generateReadableJSONClick = function() {
+    this.generateReadableJSONClick = function () {
       self.koGenerateValidJSON(false);
     };
-    this.runSurveyClick = function() {
+    this.runSurveyClick = function () {
       self.showLiveSurvey();
     };
-    this.deleteObjectClick = function() {
+    this.deleteObjectClick = function () {
       self.deleteCurrentObject();
     };
-    this.draggingToolboxItem = function(item, e) {
+    this.draggingToolboxItem = function (item, e) {
       self.doDraggingToolboxItem(item.json, e);
     };
-    this.clickToolboxItem = function(item) {
+    this.clickToolboxItem = function (item) {
       self.doClickToolboxItem(item.json);
     };
-    this.dragEnd = function(item, e) {
+    this.dragEnd = function (item, e) {
       self.dragDropHelper.end();
     };
 
-    this.doUndoClick = function() {
+    this.doUndoClick = function () {
       self.doUndoRedo(self.undoRedo.undo());
     };
-    this.doRedoClick = function() {
+    this.doRedoClick = function () {
       self.doUndoRedo(self.undoRedo.redo());
     };
 
@@ -1123,9 +1133,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     element["koElementType"].notifySubscribers();
   }
   /**
-   * Call this method to render the survey editor.
-   * @param element HtmlElement or html element id where Survey Editor will be rendered
-   * @param options Survey Editor options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+   * Call this method to render the Survey Creator.
+   * @param element HtmlElement or html element id where survey creator will be rendered
+   * @param options survey creator options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
    */
   public render(element: any = null, options: any = null) {
     if (options) this.setOptions(options);
@@ -1143,7 +1153,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public loadSurvey(surveyId: string) {
     var self = this;
-    new Survey.dxSurveyService().loadSurvey(surveyId, function(
+    new Survey.dxSurveyService().loadSurvey(surveyId, function (
       success: boolean,
       result: string,
       response: any
@@ -1208,7 +1218,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.toolbox.copiedItemMaxCount = value;
   }
   /**
-   * Returns the Editor state. It may return empty string or "saving" and "saved".
+   * Returns the creator state. It may return empty string or "saving" and "saved".
    */
   public get state(): string {
     return this.stateValue;
@@ -1601,7 +1611,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
     if (this.surveyjs) {
       var self = this;
-      this.surveyjs.onkeydown = function(e) {
+      this.surveyjs.onkeydown = function (e) {
         if (!e) return;
         // if (e.keyCode == 46) self.deleteQuestion();
         if (e.keyCode == 38 || e.keyCode == 40) {
@@ -1642,12 +1652,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     return json;
   }
+  public createSurvey(json: any = {}, reason: string = "designer", surveyType = Survey.Survey) {
+    var survey = new surveyType(json);
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    return survey;
+  }
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(new SurveyForDesigner());
+    this.surveyValue(<SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner));
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
-      function(options) {
+      function (options) {
         self.setModified(options);
       },
       this.renderedElement
@@ -1660,10 +1675,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     Survey.surveyLocalization.currentLocale = this.surveyValue()["locale"];
     this.surveyValue().dragDropHelper = this.dragDropHelper;
-    this.surveyValue().onUpdateElementAllowingOptions = function(options) {
+    this.surveyValue().onUpdateElementAllowingOptions = function (options) {
       self.onElementAllowOperations.fire(self, options);
     };
-    this.surveyValue().onDragDropAllow.add(function(sender, options) {
+    this.surveyValue().onDragDropAllow.add(function (sender, options) {
       options.survey = sender;
       self.onDragDropAllow.fire(self, options);
     });
@@ -1687,7 +1702,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "delete",
           text: self.getLocString(deleteLocaleName),
-          onClick: function(selObj) {
+          onClick: function (selObj) {
             self.deleteCurrentObject();
           }
         });
@@ -1756,7 +1771,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "copy",
           text: self.getLocString("survey.copy"),
-          onClick: function(selObj) {
+          onClick: function (selObj) {
             self.fastCopyQuestion(selObj);
           }
         });
@@ -1766,7 +1781,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "addtotoolbox",
           text: self.getLocString("survey.addToToolbox"),
-          onClick: function(selObj) {
+          onClick: function (selObj) {
             self.addCustomToolboxQuestion(selObj);
           }
         });
@@ -1809,7 +1824,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function(selObj) {}
+          onClick: function (selObj) { }
         });
       }
 
@@ -2048,7 +2063,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
   }
   /**
-   * Show the Editor dialog. The element can be a question, panel, page or survey
+   * Show the creator dialog. The element can be a question, panel, page or survey
    * @param element The survey element
    */
   public showElementEditor(
@@ -2064,19 +2079,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
-          this.renderedElement.querySelector("#surveyquestioneditorwindow")
-        )
+        this.renderedElement.querySelector("#surveyquestioneditorwindow")
+      )
       : null;
     var isCanceled = true;
     this.questionEditorWindow.show(
       element,
       elWindow,
-      function(question) {
+      function (question) {
         self.onQuestionEditorChanged(question);
         isCanceled = false;
       },
       this,
-      function() {
+      function () {
         if (onClose) onClose(isCanceled);
       }
     );
@@ -2188,7 +2203,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private showLiveSurvey() {
     var self = this;
-    this.surveyLive.onSurveyCreatedCallback = function(survey: Survey.Survey) {
+    this.surveyLive.onSurveyCreatedCallback = function (survey: Survey.Survey) {
       self.onTestSurveyCreated.fire(self, { survey: survey });
     };
     this.surveyLive.setJSON(this.getSurveyJSON());
@@ -2436,7 +2451,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 }
 
 ko.components.register("survey-widget", {
-  viewModel: function(params) {
+  viewModel: function (params) {
     this.survey = params.survey;
   },
   template:
