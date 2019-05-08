@@ -19,7 +19,7 @@ class ImageItemInplaceEditor {
     private rootElement,
     private editor: SurveyCreator,
     private itemsRoot
-  ) {}
+  ) { }
 
   deleteItem(model: ImageItemInplaceEditor, event) {
     if (model.question.choices.length > 1) {
@@ -147,6 +147,28 @@ export var imageItemsAdorner = {
       }
     });
 
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.className = "svda-choose-file";
+    input.style.position = "absolute";
+    input.style.opacity = "0";
+    itemsRoot.appendChild(input);
+  }
+};
+
+registerAdorner("image-items", imageItemsAdorner);
+
+export var addImageItemAdorner = {
+  getMarkerClass: model => {
+    return typeof model.getType === "function" &&
+      model.getType() === "imagepicker"
+      ? "sv_imgsel"
+      : "";
+  },
+  getElementName: model => "item",
+  afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
+    var itemsRoot = elements[0];
     var addItemElement = createAddItemElement(() => {
       var fileInput = <HTMLInputElement>(
         itemsRoot.getElementsByClassName("svda-choose-file")[0]
@@ -228,4 +250,4 @@ export var imageItemsAdorner = {
   }
 };
 
-registerAdorner("image-items", imageItemsAdorner);
+registerAdorner("add-image-item", addImageItemAdorner);
