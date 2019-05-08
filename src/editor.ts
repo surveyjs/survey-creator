@@ -2455,7 +2455,7 @@ ko.components.register("survey-widget", {
     this.survey = params.survey;
   },
   template:
-    "<!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko -->"
+    "<!-- ko if: $data.survey --><!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko --><!-- /ko -->"
 });
 
 ko.components.register("svg-icon", {

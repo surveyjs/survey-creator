@@ -32,6 +32,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     public syntaxCheckMethodName: string = "createCondition"
   ) {
     super(property);
+    if (!SurveyPropertyConditionEditor.emptySurvey) {
+      SurveyPropertyConditionEditor.emptySurvey = !!this.options && this.options.createSurvey({}, "conditionEditor");
+    }
     this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.koIsValid = ko.observable(true);
     this.koAddConditionQuestions = ko.observableArray();
@@ -40,9 +43,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koAddConditionValue = ko.observable("");
     this.koAddConditionType = ko.observable("and");
     this.koHasValueSurvey = ko.observable(false);
-    if (!SurveyPropertyConditionEditor.emptySurvey) {
-      SurveyPropertyConditionEditor.emptySurvey = !!this.options && this.options.createSurvey({}, "conditionEditor");
-    }
     this.koValueSurvey = ko.observable(
       SurveyPropertyConditionEditor.emptySurvey
     );

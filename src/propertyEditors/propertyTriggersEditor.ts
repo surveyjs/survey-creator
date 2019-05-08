@@ -356,10 +356,10 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     options?: ISurveyObjectEditorOptions
   ) {
     super(trigger, options);
-    this.koQuestions = koQuestions;
     if (!SurveyPropertySetValueTrigger.emptySurvey) {
       SurveyPropertySetValueTrigger.emptySurvey = !!options && options.createSurvey({}, "triggersEditor");
     }
+    this.koQuestions = koQuestions;
     this.koSurvey = ko.observable(SurveyPropertySetValueTrigger.emptySurvey);
     this.koHasSurvey = ko.observable(false);
     this.kosetToName = ko.observable(trigger.setToName);

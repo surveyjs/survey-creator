@@ -26,6 +26,7 @@ export class SurveyLiveTester {
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor(private surveyProvider: any) {
     var self = this;
+    this.survey = this.surveyProvider.createSurvey({}, "test");
     this.selectTestClick = function () {
       self.testAgain();
     };
@@ -52,7 +53,6 @@ export class SurveyLiveTester {
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
     });
-    this.survey = this.surveyProvider.createSurvey({}, "test");
     this.koSurvey = ko.observable(this.survey);
   }
   public setJSON(json: any) {
