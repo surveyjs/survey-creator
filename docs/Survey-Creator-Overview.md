@@ -597,8 +597,10 @@ Avaliable property types. Every property type has a correspondet Property Editor
 |---|---|
 |string|It is the default value type. Property editor is a text input. "myProperty" and "myProperty:string" - give the same result.|
 |boolean|Boolean type. Property editor is a checkbox.|
+|condition|It shows property editor that helps to build a boolean expression for properties like **visibleIf** and **enabledIf**|
+|expression|It shows property editor that helps to build the expression|
 |number|Numeric type. Property editor is a text input|
-|text||String type. Property editor is text input with an optional modal window for entering large text|
+|text|String type. Property editor is text input with an optional modal window for entering large text|
 |html|string type. Property editor is text input with an optional modal window for entering large text. In the future modal window becomes a very simple html editor.|
 |itemvalues|Array of ItemValue object. ItemValue object has two properties {value: any, text: string}. Dropdown, checkbox and radiogroup questions has choices property with itemvalues type.|
 |matrixdropdowncolumns|Columns for matrixdropdown and matrixdynamic questions|
