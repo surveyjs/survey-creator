@@ -4,8 +4,12 @@ import { SurveyLiveTester } from "../src/surveylive";
 
 export default QUnit.module("surveyLiveTests");
 
-QUnit.test("Create survey", function(assert) {
-  var test = new SurveyLiveTester();
+var surveyCreator = {
+  createSurvey: json => new Survey.Survey(json)
+}
+
+QUnit.test("Create survey", function (assert) {
+  var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({ questions: [{ type: "text", name: "q1" }] });
   assert.equal(
     test.survey.getQuestionByName("q1").name,
@@ -14,8 +18,8 @@ QUnit.test("Create survey", function(assert) {
   );
 });
 
-QUnit.test("koPages, koActive", function(assert) {
-  var test = new SurveyLiveTester();
+QUnit.test("koPages, koActive", function (assert) {
+  var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({
     pages: [
       { name: "page1", questions: [{ type: "text", name: "q1" }] },
@@ -49,8 +53,8 @@ QUnit.test("koPages, koActive", function(assert) {
   assert.equal(test.koPages()[2].koActive(), true, "The third page is active");
 });
 
-QUnit.test("koPages, visibility", function(assert) {
-  var test = new SurveyLiveTester();
+QUnit.test("koPages, visibility", function (assert) {
+  var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({
     pages: [
       { questions: [{ type: "text", name: "q1" }] },

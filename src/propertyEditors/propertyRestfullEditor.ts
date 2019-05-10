@@ -38,7 +38,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
       new SurveyPropertyResultfullEditorItem(
         propName,
         val ? val[propName] : "",
-        function(item) {
+        function (item) {
           self.onItemValueChanged(item);
         }
       )
@@ -78,7 +78,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     this.question.choicesByUrl.run();
   }
   private createSurvey() {
-    this.survey = new Survey.Survey();
+    this.survey = !!this.options ? this.options.createSurvey({}, "restfulEditor") : new Survey.Survey();
     this.survey.showNavigationButtons = false;
     this.survey.showQuestionNumbers = "off";
     var page = this.survey.addNewPage("page1");
@@ -101,7 +101,7 @@ export class SurveyPropertyResultfullEditorItem {
   ) {
     this.koValue = ko.observable(val ? val : "");
     var self = this;
-    this.koValue.subscribe(function(newValue) {
+    this.koValue.subscribe(function (newValue) {
       if (!self.isSetttingValue) {
         self.onValueChanged(self);
       }
@@ -114,7 +114,7 @@ export class SurveyPropertyResultfullEditorItem {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("restfull", function(
+SurveyPropertyEditorFactory.registerEditor("restfull", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyResultfullEditor(property);
