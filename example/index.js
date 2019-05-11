@@ -18,7 +18,7 @@ if (!window["%hammerhead%"]) {
 
   // Survey.Survey.cssType = "bootstrap";
   // Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-  SurveyEditor.editorLocalization.currentLocale = "hu";
+  // SurveyEditor.editorLocalization.currentLocale = "hu";
   // SurveyEditor.StylesManager.applyTheme("winter");
   var editor = new SurveyEditor.SurveyEditor("editorElement");
   // SurveyEditor.StylesManager.applyTheme("orange");
