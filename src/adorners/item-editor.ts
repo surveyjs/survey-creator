@@ -73,6 +73,9 @@ ko.components.register("item-editor", {
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
+        if (!newValue && params.name == "value") {
+          newValue = params.item.value;
+        }
         params.target[params.name] = newValue;
         params.editor.onPropertyValueChanged(property, params.target, newValue);
         !!params.valueChanged &&
@@ -271,12 +274,27 @@ export var itemDraggableAdorner = {
       )
     );
     itemsRoot.appendChild(addNew);
-    itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addOther"), () => model.hasOther = !model.hasOther));
+    itemsRoot.appendChild(
+      createCustomElement(
+        editorLocalization.getString("pe.addOther"),
+        () => (model.hasOther = !model.hasOther)
+      )
+    );
     if (model.hasSelectAll !== undefined) {
-      itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addSelectAll"), () => model.hasSelectAll = !model.hasSelectAll));
+      itemsRoot.appendChild(
+        createCustomElement(
+          editorLocalization.getString("pe.addSelectAll"),
+          () => (model.hasSelectAll = !model.hasSelectAll)
+        )
+      );
     }
     if (model.hasNone !== undefined) {
-      itemsRoot.appendChild(createCustomElement(editorLocalization.getString("pe.addNone"), () => model.hasNone = !model.hasNone));
+      itemsRoot.appendChild(
+        createCustomElement(
+          editorLocalization.getString("pe.addNone"),
+          () => (model.hasNone = !model.hasNone)
+        )
+      );
     }
   }
 };
