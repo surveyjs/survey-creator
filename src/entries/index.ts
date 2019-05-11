@@ -131,6 +131,7 @@ import "../localization/simplified-chinese";
 import "../localization/spanish";
 import "../localization/traditional-chinese";
 import "../localization/norwegian";
+import "../localization/hungarian";
 
 export {
   Translation,
