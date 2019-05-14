@@ -657,7 +657,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koShowSaveButton: any;
   koGenerateValidJSON: any;
   koShowOptions: any;
-  koShowPropertyGrid: any;
+  koShowPropertyGrid = ko.observable(true);
+  koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
   koDesignerHeight: any;
   koShowPagesToolbox: any;
@@ -684,7 +685,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
     this.koGenerateValidJSON = ko.observable(true);
-    this.koShowPropertyGrid = ko.observable(true);
     this.koDesignerHeight = ko.observable();
     this.koShowPagesToolbox = ko.observable(true);
     this.setOptions(options);
@@ -1074,11 +1074,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koShowOptions(
       typeof options.showOptions !== "undefined" ? options.showOptions : false
     );
-    this.koShowPropertyGrid(
+    this.showPropertyGrid =
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
-        : true
-    );
+        : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
     this.isAutoSave =
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
@@ -1291,6 +1290,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set showPropertyGrid(value: boolean) {
     this.koShowPropertyGrid(value);
+    this.koHideAdvancedSettings(!value);
   }
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
