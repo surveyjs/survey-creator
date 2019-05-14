@@ -86,7 +86,7 @@
       data-bind="css: {'col-lg-7 col-md-7 col-sm-8': koShowPropertyGrid, 'col-lg-10 col-md-10 col-sm-11': !koShowPropertyGrid(), 'svd_wide': !koShowPropertyGrid()}"
     >
       <div class="svd_toolbar">
-        <!-- ko ifnot: $root.koShowPropertyGrid -->
+        <!-- ko if: !$root.koShowPropertyGrid -->
         <div class="svd-property-grid__header" data-bind="click: function() { $root.koShowPropertyGrid(true); }, attr: { title: $root.getLocString('ed.showObjectProperties') }">
             <span class="svd-property-grid__header-title" data-bind="text: $root.getLocString('ed.opjectPropertiesHeader')"></span>
             <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
