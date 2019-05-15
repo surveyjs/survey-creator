@@ -27,8 +27,23 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
       this.onValueChangedCallback(this.editingValue);
     this.isValueChanging = false;
   }
+  protected checkForErrors(): boolean {
+    var res = super.checkForErrors();
+    if (!!res) return res;
+    var errorText = this.widgetValidate();
+    if (!!errorText) {
+      this.koErrorText(errorText);
+    }
+    return !!errorText;
+  }
   protected get widgetRender(): any {
     return this.widgetJSON ? this.widgetJSON.render : null;
+  }
+  protected widgetValidate(): string {
+    if (this.widgetJSON && this.widgetJSON.validate) {
+      return this.widgetJSON.validate(this, this.koValue());
+    }
+    return null;
   }
   protected doAfterRender(elements, con) {
     var el = elements[0];

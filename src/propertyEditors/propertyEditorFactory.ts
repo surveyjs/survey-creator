@@ -45,6 +45,9 @@ export class SurveyPropertyEditorFactory {
   public static registerCustomEditor(name: string, widgetJSON: any) {
     SurveyPropertyEditorFactory.widgetRegisterList[name] = widgetJSON;
   }
+  public static unregisterCustomEditor(name: string) {
+    delete SurveyPropertyEditorFactory.widgetRegisterList[name];
+  }
   public static createEditor(
     property: Survey.JsonObjectProperty,
     func: (newValue: any) => any
