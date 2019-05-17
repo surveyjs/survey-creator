@@ -107,10 +107,22 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", visible: true }
       ]
     },
-    checkbox: {},
+    checkbox: {
+      properties: [
+        { name: "hasSelectAll", tab: "choices" },
+        { name: "selectAllText", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" }
+      ]
+    },
     radiogroup: {},
     dropdown: {
-      properties: ["optionsCaption"]
+      properties: [
+        "optionsCaption",
+        { name: "choicesMin", tab: "choices" },
+        { name: "choicesMax", tab: "choices" },
+        { name: "choicesStep", tab: "choices" }
+      ]
     },
     text: {
       properties: ["inputType", "placeHolder"],
@@ -285,7 +297,7 @@ export class SurveyQuestionEditorDefinition {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
     );
-    for (var i = allDefinitions.length - 1; i >= 0; i--) {
+    for (var i = 0; i < allDefinitions.length; i++) {
       var def = allDefinitions[i];
       if (def.properties) {
         for (var j = 0; j < def.properties.length; j++) {
@@ -304,7 +316,7 @@ export class SurveyQuestionEditorDefinition {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
     );
-    for (var i = allDefinitions.length - 1; i >= 0; i--) {
+    for (var i = 0; i < allDefinitions.length; i++) {
       var def = allDefinitions[i];
       if (def.tabs) {
         for (var j = 0; j < def.tabs.length; j++) {
@@ -321,7 +333,7 @@ export class SurveyQuestionEditorDefinition {
       className
     );
     var tabsNamesHash = {};
-    for (var i = 0; i < allDefinitions.length; i++) {
+    for (var i = allDefinitions.length - 1; i >= 0; i--) {
       var def = allDefinitions[i];
       if (def.tabs) {
         for (var j = 0; j < def.tabs.length; j++) {
@@ -357,7 +369,9 @@ export class SurveyQuestionEditorDefinition {
       );
       if (!metaClass) break;
       if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
-        result.push(SurveyQuestionEditorDefinition.definition[metaClass.name]);
+        result.unshift(
+          SurveyQuestionEditorDefinition.definition[metaClass.name]
+        );
       }
       curClassName = metaClass.parentName;
     }

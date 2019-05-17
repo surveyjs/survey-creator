@@ -158,6 +158,13 @@ export var enStrings = {
 
     hasOther: "Has other item",
     otherText: "Other item text",
+    hasNone: "Has none item",
+    noneText: "None item text",
+    hasSelectAll: "Has select all item",
+    selectAllText: "Select all item text",
+    choicesMin: "Minimum value for auto generated items",
+    choicesMax: "Maximum value for auto generated items",
+    choicesStep: "The difference between auto generated items",
     name: "Name",
     title: "Title",
     cellType: "Cell type",
