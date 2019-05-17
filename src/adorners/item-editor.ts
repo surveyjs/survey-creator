@@ -151,7 +151,7 @@ export var createAddItemHandler = (
   onItemAdding: (itemValue: Survey.ItemValue) => void = null
 ) => () => {
   var nextValue = null;
-  var values = question.choices.map(function(item) {
+  var values = question.choices.map(function (item) {
     return item.itemValue;
   });
   var itemText = Survey.surveyLocalization.getString("choices_Item");
@@ -274,13 +274,15 @@ export var itemDraggableAdorner = {
       )
     );
     itemsRoot.appendChild(addNew);
-    itemsRoot.appendChild(
-      createCustomElement(
-        editorLocalization.getString("pe.addOther"),
-        () => (model.hasOther = !model.hasOther)
-      )
-    );
-    if (model.hasSelectAll !== undefined) {
+    if (editor.canShowObjectProperty(model, "hasOther")) {
+      itemsRoot.appendChild(
+        createCustomElement(
+          editorLocalization.getString("pe.addOther"),
+          () => (model.hasOther = !model.hasOther)
+        )
+      );
+    }
+    if (model.hasSelectAll !== undefined && editor.canShowObjectProperty(model, "hasSelectAll")) {
       itemsRoot.appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
@@ -288,7 +290,7 @@ export var itemDraggableAdorner = {
         )
       );
     }
-    if (model.hasNone !== undefined) {
+    if (model.hasNone !== undefined && editor.canShowObjectProperty(model, "hasNone")) {
       itemsRoot.appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addNone"),

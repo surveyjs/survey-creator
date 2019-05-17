@@ -12,7 +12,7 @@ var templateHtml = require("html-loader?interpolate!val-loader!./select-items-ed
 ko.components.register("select-items-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var isExpanded = ko.observable(true);
+      var isExpanded = ko.observable(selectItemsEditorAdorner.isExpanded);
       var choices = ko.observableArray(params.question.choices);
       var otherText = ko.observable(params.question.otherText);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
@@ -103,7 +103,8 @@ export var selectItemsEditorAdorner = {
     );
     ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "select-choices", decoration);
-  }
+  },
+  isExpanded: true
 };
 
 registerAdorner("select-choices", selectItemsEditorAdorner);
