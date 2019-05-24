@@ -251,6 +251,13 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
 
+    totalText: "Total text",
+    totalType: "Total type",
+    totalExpression: "Total expression",
+    totalDisplayStyle: "Total display style",
+    totalCurrency: "Total currency",
+    totalFormat: "Total format",
+
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -274,7 +281,8 @@ export var enStrings = {
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
       triggers: "Triggers",
-      templateTitle: "Template title"
+      templateTitle: "Template title",
+      totals: "Totals"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
