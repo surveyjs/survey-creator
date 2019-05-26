@@ -172,6 +172,7 @@ export var enStrings = {
     choicesOrder: "Select choices order",
     visible: "Is visible?",
     isRequired: "Is required?",
+    requiredErrorText: "Required error text",
     startWithNewLine: "Is start with new line?",
     rows: "Row count",
     placeHolder: "Input place holder",

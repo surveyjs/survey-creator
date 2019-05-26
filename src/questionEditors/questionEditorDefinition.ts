@@ -231,7 +231,6 @@ export class SurveyQuestionEditorDefinition {
         "inputType",
         "maxLength",
         "placeHolder",
-        "isRequired",
         "requiredErrorText"
       ],
       tabs: [{ name: "validators", index: 10 }]
