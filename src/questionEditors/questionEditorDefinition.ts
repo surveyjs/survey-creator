@@ -227,7 +227,13 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "expression", index: 10 }, { name: "totals", index: 40 }]
     },
     multipletextitem: {
-      properties: ["inputType", "maxLength", "placeHolder"],
+      properties: [
+        "inputType",
+        "maxLength",
+        "placeHolder",
+        "isRequired",
+        "requiredErrorText"
+      ],
       tabs: [{ name: "validators", index: 10 }]
     },
     paneldynamic: {
