@@ -371,6 +371,8 @@ export var enStrings = {
     notequal: "not equals",
     contains: "contains",
     notcontains: "not contains",
+    anyof: "any of",
+    allof: "all of",
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",
