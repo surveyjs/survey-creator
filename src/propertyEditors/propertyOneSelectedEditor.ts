@@ -4,16 +4,14 @@ import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 
 export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
-  public selectedObjectEditor: any;
-  public koSelected: any;
+  public selectedObjectEditor = ko.observable<SurveyQuestionEditor>(null);
+  public koSelected = ko.observable(null);
   public koAvailableClasses: any;
   private currentObjClassName: string;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
-    this.selectedObjectEditor = ko.observable(null);
-    this.koSelected = ko.observable(null);
     this.koSelected.subscribe(function(newValue) {
       if (!!self.selectedObjectEditor()) {
         self.selectedObjectEditor().apply();
@@ -30,6 +28,12 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     this.onAddClick = function(item: any) {
       self.addNewItem(!!item ? item.value : null);
     };
+  }
+  protected onBeforeApply() {
+    if (!!this.selectedObjectEditor()) {
+      this.selectedObjectEditor().apply();
+    }
+    super.onBeforeApply();
   }
   public get editorTypeTemplate(): string {
     return "oneselected";

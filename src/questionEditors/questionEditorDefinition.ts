@@ -56,6 +56,9 @@ export class SurveyQuestionEditorDefinition {
     matrixdynamic: {
       properties: ["rowCount", "addRowLocation", "addRowText", "removeRowText"]
     },
+    matrixdropdown: {
+      properties: ["totalText"]
+    },
     matrix: {
       tabs: [{ name: "columns", index: 10 }, { name: "rows", index: 11 }]
     },
@@ -107,10 +110,22 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", visible: true }
       ]
     },
-    checkbox: {},
+    checkbox: {
+      properties: [
+        { name: "hasSelectAll", tab: "choices" },
+        { name: "selectAllText", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" }
+      ]
+    },
     radiogroup: {},
     dropdown: {
-      properties: ["optionsCaption"]
+      properties: [
+        "optionsCaption",
+        { name: "choicesMin", tab: "choices" },
+        { name: "choicesMax", tab: "choices" },
+        { name: "choicesStep", tab: "choices" }
+      ]
     },
     text: {
       properties: ["inputType", "placeHolder"],
@@ -120,18 +135,29 @@ export class SurveyQuestionEditorDefinition {
       properties: ["label"]
     },
     expression: {
-      properties: ["currency", "displayStyle"],
+      properties: ["currency", "displayStyle", "format"],
       tabs: [{ name: "expression", index: 10 }]
     },
     matrixdropdowncolumn: {
-      properties: ["isRequired", "cellType", "name", "title"]
+      properties: [
+        "isRequired",
+        "cellType",
+        "name",
+        "title",
+        { name: "totalType", tab: "totals" },
+        { name: "totalDisplayStyle", tab: "totals" },
+        { name: "totalCurrency", tab: "totals" },
+        { name: "totalFormat", tab: "totals" },
+        { name: "totalExpression", tab: "totals" }
+      ]
     },
     "matrixdropdowncolumn@default": {
       tabs: [
         { name: "general", visible: false },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@checkbox": {
@@ -141,7 +167,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
@@ -151,7 +178,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@dropdown": {
@@ -161,7 +189,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesByUrl", index: 11 },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@text": {
@@ -170,7 +199,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@comment": {
@@ -179,7 +209,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@boolean": {
@@ -187,15 +218,21 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 }
+        { name: "requiredIf", index: 30 },
+        { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@expression": {
       properties: ["name", "displayStyle", "currency"],
-      tabs: [{ name: "expression", index: 10 }]
+      tabs: [{ name: "expression", index: 10 }, { name: "totals", index: 40 }]
     },
     multipletextitem: {
-      properties: ["inputType", "maxLength", "placeHolder"],
+      properties: [
+        "inputType",
+        "maxLength",
+        "placeHolder",
+        "requiredErrorText"
+      ],
       tabs: [{ name: "validators", index: 10 }]
     },
     paneldynamic: {
@@ -285,7 +322,7 @@ export class SurveyQuestionEditorDefinition {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
     );
-    for (var i = allDefinitions.length - 1; i >= 0; i--) {
+    for (var i = 0; i < allDefinitions.length; i++) {
       var def = allDefinitions[i];
       if (def.properties) {
         for (var j = 0; j < def.properties.length; j++) {
@@ -304,7 +341,7 @@ export class SurveyQuestionEditorDefinition {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
     );
-    for (var i = allDefinitions.length - 1; i >= 0; i--) {
+    for (var i = 0; i < allDefinitions.length; i++) {
       var def = allDefinitions[i];
       if (def.tabs) {
         for (var j = 0; j < def.tabs.length; j++) {
@@ -321,7 +358,7 @@ export class SurveyQuestionEditorDefinition {
       className
     );
     var tabsNamesHash = {};
-    for (var i = 0; i < allDefinitions.length; i++) {
+    for (var i = allDefinitions.length - 1; i >= 0; i--) {
       var def = allDefinitions[i];
       if (def.tabs) {
         for (var j = 0; j < def.tabs.length; j++) {
@@ -357,7 +394,9 @@ export class SurveyQuestionEditorDefinition {
       );
       if (!metaClass) break;
       if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
-        result.push(SurveyQuestionEditorDefinition.definition[metaClass.name]);
+        result.unshift(
+          SurveyQuestionEditorDefinition.definition[metaClass.name]
+        );
       }
       curClassName = metaClass.parentName;
     }

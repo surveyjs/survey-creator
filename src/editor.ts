@@ -647,8 +647,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koReadOnly(newVal);
   }
 
-  private isPageUpdating = false;
-
   koIsShowDesigner: any;
   koViewType: any;
   koCanDeleteObject: any;
@@ -1455,7 +1453,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   private doOnPageAdded(page: Survey.Page) {
-    if (this.isPageUpdating) return;
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
@@ -2142,31 +2139,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       type: "QUESTION_CHANGED_BY_EDITOR",
       question: question
     });
-    //question.endLoadingFromJson();
-    //this.survey.endLoadingFromJson();
   }
 
   //TODO why this is need ? (ko problem)
   private dirtyPageUpdate = () => {
-    this.isPageUpdating = true;
-    try {
-      var selectedObject = this.koSelectedObject().value;
-      if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
-        if (
-          SurveyHelper.getObjectType(selectedObject) === ObjType.Question &&
-          !!selectedObject["koElementType"]
-        ) {
-          selectedObject["koElementType"].notifySubscribers();
-        }
-        return;
+    var selectedObject = this.koSelectedObject().value;
+    if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
+      if (
+        SurveyHelper.getObjectType(selectedObject) === ObjType.Question &&
+        !!selectedObject["koElementType"]
+      ) {
+        selectedObject["koElementType"].notifySubscribers();
       }
-      var index = this.pages.indexOf(selectedObject);
-      this.pages.splice(index, 1);
-      this.pages.splice(index, 0, selectedObject);
-      this.surveyObjects.selectObject(selectedObject);
-    } finally {
-      this.isPageUpdating = false;
+      return;
     }
+    this.pages.notifySubscribers();
+    this.surveyObjects.selectObject(selectedObject);
   };
 
   /**

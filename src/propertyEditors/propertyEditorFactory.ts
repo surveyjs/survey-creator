@@ -18,6 +18,8 @@ export class SurveyPropertyEditorFactory {
       "notequal",
       "contains",
       "notcontains",
+      "anyof",
+      "allof",
       "greater",
       "less",
       "greaterorequal",

@@ -158,6 +158,13 @@ export var enStrings = {
 
     hasOther: "Has other item",
     otherText: "Other item text",
+    hasNone: "Has none item",
+    noneText: "None item text",
+    hasSelectAll: "Has select all item",
+    selectAllText: "Select all item text",
+    choicesMin: "Minimum value for auto generated items",
+    choicesMax: "Maximum value for auto generated items",
+    choicesStep: "The difference between auto generated items",
     name: "Name",
     title: "Title",
     cellType: "Cell type",
@@ -165,6 +172,7 @@ export var enStrings = {
     choicesOrder: "Select choices order",
     visible: "Is visible?",
     isRequired: "Is required?",
+    requiredErrorText: "Required error text",
     startWithNewLine: "Is start with new line?",
     rows: "Row count",
     placeHolder: "Input place holder",
@@ -244,6 +252,13 @@ export var enStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
 
+    totalText: "Total text",
+    totalType: "Total type",
+    totalExpression: "Total expression",
+    totalDisplayStyle: "Total display style",
+    totalCurrency: "Total currency",
+    totalFormat: "Total format",
+
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -267,7 +282,8 @@ export var enStrings = {
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
       triggers: "Triggers",
-      templateTitle: "Template title"
+      templateTitle: "Template title",
+      totals: "Totals"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -355,6 +371,8 @@ export var enStrings = {
     notequal: "not equals",
     contains: "contains",
     notcontains: "not contains",
+    anyof: "any of",
+    allof: "all of",
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",

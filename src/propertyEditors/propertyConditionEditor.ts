@@ -33,7 +33,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   ) {
     super(property);
     if (!SurveyPropertyConditionEditor.emptySurvey) {
-      SurveyPropertyConditionEditor.emptySurvey = !!this.options && this.options.createSurvey({}, "conditionEditor");
+      SurveyPropertyConditionEditor.emptySurvey =
+        !!this.options && this.options.createSurvey({}, "conditionEditor");
     }
     this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.koIsValid = ko.observable(true);
@@ -47,13 +48,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       SurveyPropertyConditionEditor.emptySurvey
     );
     var self = this;
-    this.koAddConditionQuestion.subscribe(function (newValue) {
+    this.koAddConditionQuestion.subscribe(function(newValue) {
       self.onValueSurveyChanged(newValue, self.koAddConditionOperator());
     });
-    this.koAddConditionOperator.subscribe(function (newValue) {
+    this.koAddConditionOperator.subscribe(function(newValue) {
       self.onValueSurveyChanged(self.koAddConditionQuestion(), newValue);
     });
-    this.koAddConditionValue.subscribe(function (newValue) {
+    this.koAddConditionValue.subscribe(function(newValue) {
       if (self.koHasValueSurvey()) {
         var newParsedValue = !newValue ? {} : JSON.parse(newValue);
         self.isValueChanging = true;
@@ -61,7 +62,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         self.isValueChanging = false;
       }
     });
-    this.koCanAddCondition = ko.computed(function () {
+    this.koCanAddCondition = ko.computed(function() {
       return (
         this.koAddConditionQuestion() != "" &&
         this.koAddConditionQuestion() != undefined &&
@@ -69,22 +70,22 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         (!this.koAddContionValueEnabled() || this.koAddConditionValue() != "")
       );
     }, this);
-    this.koShowAddConditionType = ko.computed(function () {
+    this.koShowAddConditionType = ko.computed(function() {
       if (!this.koIsValid()) return false;
       var text = this.koTextValue();
       if (text) text = text.trim();
       return text;
     }, this);
-    this.koAddConditionButtonText = ko.computed(function () {
+    this.koAddConditionButtonText = ko.computed(function() {
       var name = this.koIsValid()
         ? "conditionButtonAdd"
         : "conditionButtonReplace";
       return editorLocalization.editorLocalization.getString("pe." + name);
     }, this);
-    this.koAddContionValueEnabled = ko.computed(function () {
+    this.koAddContionValueEnabled = ko.computed(function() {
       return self.canShowValueByOperator(self.koAddConditionOperator());
     }, this);
-    this.onConditionAddClick = function () {
+    this.onConditionAddClick = function() {
       self.addCondition();
     };
     this.resetAddConditionValues();
@@ -110,7 +111,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public get allConditionQuestions(): any[] {
     var res = this.getConditionQuetions();
-    res.sort(function (a, b) {
+    res.sort(function(a, b) {
       return a.text.localeCompare(b.text);
     });
     return res;
@@ -180,9 +181,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       showQuestionNumbers: "off"
     };
     json.questions.push(qjson);
-    var survey = !!this.options ? this.options.createSurvey(json, "conditionEditor") : new Survey.Survey(json);
+    var survey = !!this.options
+      ? this.options.createSurvey(json, "conditionEditor")
+      : new Survey.Survey(json);
     var self = this;
-    survey.onValueChanged.add(function (survey, options) {
+    survey.onValueChanged.add(function(survey, options) {
       if (!self.isValueChanging) {
         self.koAddConditionValue(JSON.stringify(options.value));
       }
@@ -302,7 +305,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("condition", function (
+SurveyPropertyEditorFactory.registerEditor("condition", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyConditionEditor(
@@ -311,7 +314,7 @@ SurveyPropertyEditorFactory.registerEditor("condition", function (
     "createCondition"
   );
 });
-SurveyPropertyEditorFactory.registerEditor("expression", function (
+SurveyPropertyEditorFactory.registerEditor("expression", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyConditionEditor(
@@ -426,6 +429,16 @@ var operations = [
     value: "notcontains",
     title:
       "return true if the left operand is an array and it does not contain a value of the second operand"
+  },
+  {
+    value: "anyof",
+    title:
+      "return true if the left operand is an array and it contains any value of the second array operand"
+  },
+  {
+    value: "allof",
+    title:
+      "return true if the left operand is an array and it contains all values of the second array operand"
   }
 ];
 
@@ -583,7 +596,7 @@ export function insertMatch(editor, data) {
 }
 
 ko.bindingHandlers.aceEditor = {
-  init: function (element, options) {
+  init: function(element, options) {
     var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
     var langUtils = ace.require("ace/autocomplete/util");
@@ -593,7 +606,7 @@ ko.bindingHandlers.aceEditor = {
 
     editor.setOption("useWorker", false);
 
-    editor.getSession().on("change", function () {
+    editor.getSession().on("change", function() {
       var errors = createAnnotations(
         editor.getValue(),
         objectEditor.syntaxCheckMethodName
@@ -632,7 +645,7 @@ ko.bindingHandlers.aceEditor = {
         );
         callback(null, completions);
       },
-      getDocTooltip: function (item) {
+      getDocTooltip: function(item) {
         item.docHTML =
           "<div style='max-width: 300px; white-space: normal;'>" +
           item.meta +
@@ -645,7 +658,7 @@ ko.bindingHandlers.aceEditor = {
       enableLiveAutocompletion: true
     });
 
-    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
       editor.destroy();
       valueSubscription.dispose();
     });
