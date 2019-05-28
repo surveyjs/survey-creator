@@ -1297,7 +1297,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koShowOptions(value);
   }
   /**
-   * Set it to false to hide the Property Grid on the right. It allows to edit the properties of the selected object (question/panel/page/survey).
+   * Set it to false to completely hide the Property Grid on the right. It allows to edit the properties of the selected object (question/panel/page/survey).
    */
   public get showPropertyGrid() {
     return this.koShowPropertyGrid();
@@ -1305,6 +1305,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set showPropertyGrid(value: boolean) {
     this.koShowPropertyGrid(value);
     this.koHideAdvancedSettings(!value);
+  }
+  /**
+   * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
+   */
+  public get hideAdvancedSettings() {
+    return this.koHideAdvancedSettings();
+  }
+  public set hideAdvancedSettings(value: boolean) {
+    this.koHideAdvancedSettings(value);
   }
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
