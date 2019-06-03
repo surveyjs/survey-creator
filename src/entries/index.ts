@@ -12,6 +12,7 @@ export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 
 export { DragDropHelper } from "../dragdrophelper";
+export { EditableObject } from "../propertyEditors/editableObject";
 export {
   SurveyPropertyEditorBase
 } from "../propertyEditors/propertyEditorBase";
