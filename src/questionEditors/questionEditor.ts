@@ -1,14 +1,8 @@
 import * as ko from "knockout";
-import { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
-import {
-  SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
-} from "../propertyEditors/propertyEditorBase";
-import { SurveyPropertyEditorFactory } from "../propertyEditors/propertyEditorFactory";
+import { ISurveyObjectEditorOptions } from "../propertyEditors/propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import {
   SurveyQuestionEditorProperty,
-  SurveyQuestionEditorRow,
   SurveyQuestionEditorProperties
 } from "./questionEditorProperties";
 import {
@@ -18,8 +12,8 @@ import {
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
-import { underline } from "chalk";
 import { focusFirstControl } from "../utils/utils";
+import { EditableObject } from "../propertyEditors/editableObject";
 
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
@@ -104,7 +98,6 @@ export class SurveyQuestionProperties {
       : null;
   }
   private getPropertyCore(propertyName: string): Survey.JsonObjectProperty {
-    var property = null;
     for (var i = 0; i < this.properties.length; i++) {
       if (this.properties[i].name == propertyName) return this.properties[i];
     }
@@ -147,9 +140,10 @@ export class SurveyQuestionEditor {
   koTitle = ko.observable<string>();
   koShowApplyButton: any;
   onTabClick: any;
+  private editableObject: EditableObject;
 
   constructor(
-    public obj: any,
+    obj: any,
     public onCanShowPropertyCallback: (
       object: any,
       property: Survey.JsonObjectProperty
@@ -157,6 +151,7 @@ export class SurveyQuestionEditor {
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null
   ) {
+    this.editableObject = new EditableObject(obj);
     var self = this;
     if (!this.className && this.obj.getType) {
       this.className = this.obj.getType();
@@ -187,6 +182,12 @@ export class SurveyQuestionEditor {
       !this.options || this.options.showApplyButtonInEditors
     );
     this.koTitle(this.getTitle());
+  }
+  public get obj(): any {
+    return this.editableObject.obj;
+  }
+  public get editableObj(): any {
+    return this.editableObject.editableObj;
   }
   private getTitle(): string {
     var res;
@@ -228,6 +229,7 @@ export class SurveyQuestionEditor {
     return false;
   }
   public reset() {
+    this.editableObject.reset();
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].reset();
@@ -248,8 +250,14 @@ export class SurveyQuestionEditor {
       }
       res = tabRes && res;
     }
-    if (res && this.onChanged) {
-      this.onChanged(this.obj);
+
+    if (res) {
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].applyToObj(this.obj);
+      }
+      if (this.onChanged) {
+        this.onChanged(this.obj);
+      }
     }
     return res;
   }
@@ -266,13 +274,15 @@ export class SurveyQuestionEditor {
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
     var properties = new SurveyQuestionEditorProperties(
-      this.obj,
+      this.editableObj,
       SurveyQuestionEditorDefinition.getProperties(this.className),
       this.onCanShowPropertyCallback,
       this.options
     );
     if (SurveyQuestionEditorDefinition.isGeneralTabVisible(this.className)) {
-      tabs.push(new SurveyQuestionEditorTab(this.obj, properties, "general"));
+      tabs.push(
+        new SurveyQuestionEditorTab(this.editableObj, properties, "general")
+      );
     }
     this.addPropertiesTabs(tabs);
     for (var i = 0; i < tabs.length; i++) {
@@ -353,6 +363,9 @@ export class SurveyQuestionEditorTab {
   }
   public apply(): boolean {
     return this.properties.apply();
+  }
+  public applyToObj(obj: Survey.Base) {
+    return this.properties.applyToObj(obj);
   }
   public getPropertyEditorByName(
     propertyName: string

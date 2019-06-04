@@ -19,9 +19,14 @@ export class SurveyQuestionEditorProperty {
     isTabProperty: boolean = false
   ) {
     var self = this;
-    this.objectPropertyValue = new SurveyObjectProperty(this.property, null);
+    this.objectPropertyValue = new SurveyObjectProperty(
+      this.property,
+      function(property, newValue) {
+        self.onPropertyChanged(property, newValue);
+      },
+      options
+    );
     this.editor.isTabProperty = isTabProperty;
-    this.editor.options = options;
     if (!displayName) {
       displayName = editorLocalization.getString("pe." + this.property.name);
     }
@@ -45,11 +50,24 @@ export class SurveyQuestionEditorProperty {
     }
     return false;
   }
+  public applyToObj(obj: Survey.Base) {
+    if (
+      Survey.Helpers.isTwoValueEquals(
+        obj[this.property.name],
+        this.obj[this.property.name]
+      )
+    )
+      return;
+    obj[this.property.name] = this.obj[this.property.name];
+  }
   public reset() {
     this.editor.koValue(this.property.getPropertyValue(this.obj));
   }
   public beforeShow() {
     this.editor.beforeShow();
+  }
+  protected onPropertyChanged(property: SurveyObjectProperty, newValue: any) {
+    this.obj[this.property.name] = newValue;
   }
 }
 
@@ -111,6 +129,9 @@ export class SurveyQuestionEditorProperties {
     var res = true;
     this.performForAllProperties(p => (res = p.apply() && res));
     return res;
+  }
+  public applyToObj(obj: Survey.Base) {
+    this.performForAllProperties(p => p.applyToObj(obj));
   }
   public reset() {
     this.performForAllProperties(p => p.reset());

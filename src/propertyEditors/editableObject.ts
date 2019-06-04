@@ -23,10 +23,24 @@ export class EditableObject {
     if (!this.isPropertyChanged(propertyName)) return;
     this.obj[propertyName] = this.editableObj[propertyName];
   }
+  public reset() {
+    this.assignProperties(this.editableObj);
+  }
   protected createEditableObj(): Survey.Base {
-    var res = <Survey.Base>Survey.Serializer.createClass(this.obj.getType());
-    new Survey.JsonObject().toObject(this.getObjJson(), res);
+    var type = this.obj.getType();
+    var res = <Survey.Base>Survey.Serializer.createClass(type);
+    if (res == null && type == "survey") {
+      res = new Survey.Survey();
+    }
+    this.assignProperties(res);
+    if (type != "survey" && !!res["setSurveyImpl"]) {
+      res["setSurveyImpl"](this.obj["survey"]);
+    }
+    res["isCopy"] = true;
     return res;
+  }
+  private assignProperties(obj: any) {
+    new Survey.JsonObject().toObject(this.getObjJson(), obj);
   }
   protected getObjJson(): any {
     var jsonObj = new Survey.JsonObject();

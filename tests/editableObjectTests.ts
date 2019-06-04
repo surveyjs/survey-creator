@@ -34,6 +34,7 @@ QUnit.test("editable object, apply function test", function(assert) {
     "The property is not changed"
   );
   var edObj = <Survey.QuestionText>editableObj.editableObj;
+  assert.equal((<any>edObj).isCopy, true, "Tell that it is a copy");
   (<Survey.NumericValidator>edObj.validators[0]).maxValue = 100;
   edObj.validators.push(new Survey.TextValidator(5, 10));
   edObj.name = "question1";
@@ -67,4 +68,35 @@ QUnit.test("editable object, apply function test", function(assert) {
     "color",
     "The inputType property is changed correctly"
   );
+});
+
+QUnit.test("Copy question with correct locale", function(assert) {
+  var survey = new Survey.Survey({
+    locale: "de",
+    elements: [{ type: "text", name: "q1" }]
+  });
+  var question = <Survey.Question>survey.getQuestionByName("q1");
+  var editableObj = new EditableObject(question);
+  assert.equal(
+    editableObj.editableObj.getType(),
+    "text",
+    "Create object with correct type"
+  );
+  assert.equal(
+    (<Survey.Question>editableObj.editableObj).getLocale(),
+    "de",
+    "Locale set correctly"
+  );
+});
+
+QUnit.test("Test reset", function(assert) {
+  var survey = new Survey.Survey({
+    locale: "de",
+    elements: [{ type: "text", name: "q1" }]
+  });
+  var question = <Survey.Question>survey.getQuestionByName("q1");
+  var editableObj = new EditableObject(question);
+  editableObj.editableObj["name"] = "q2";
+  editableObj.reset();
+  assert.equal(editableObj.editableObj["name"], "q1", "Reset the value");
 });

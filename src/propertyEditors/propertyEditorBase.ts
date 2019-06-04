@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
-import { setTimeout } from "timers";
+
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
@@ -64,7 +64,11 @@ export interface ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     list: any[]
   );
-  createSurvey(json: any, reason: string, surveyType?: new (json: any) => Survey.Survey);
+  createSurvey(
+    json: any,
+    reason: string,
+    surveyType?: new (json: any) => Survey.Survey
+  );
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
@@ -90,26 +94,26 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
-  public setup() { }
-  public beforeShow() { }
+  public setup() {}
+  public beforeShow() {}
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
     this.koValue = ko.observable();
-    this.koValue.subscribe(function (newValue) {
+    this.koValue.subscribe(function(newValue) {
       self.onkoValueChanged(newValue);
     });
     this.koText = ko.computed(() => {
       return self.getValueText(self.koValue());
     });
-    this.koIsDefault = ko.computed(function () {
+    this.koIsDefault = ko.computed(function() {
       return self.property
         ? self.property.isDefaultValue(self.koValue())
         : false;
     });
     this.koHasError = ko.observable(false);
     this.koErrorText = ko.observable("");
-    this.koDisplayError = ko.computed(function () {
+    this.koDisplayError = ko.computed(function() {
       return self.koHasError() && !!self.koErrorText();
     });
     this.setIsRequired();
@@ -176,11 +180,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get isModal(): boolean {
     return false;
   }
-
   public get object(): any {
     return this.objectValue;
   }
   public set object(value: any) {
+    this.setObjectCore(value);
+  }
+  protected setObjectCore(value: any) {
     this.objectValue = value;
     if (typeof value.registerFunctionOnPropertyValueChanged === "function") {
       value.registerFunctionOnPropertyValueChanged(
@@ -276,7 +282,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
   }
-  protected onBeforeApply() { }
+  protected onBeforeApply() {}
   public apply(): boolean {
     this.onBeforeApply();
     if (this.hasError()) return false;
@@ -305,7 +311,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.optionsValue = value;
     this.onOptionsChanged();
   }
-  protected onOptionsChanged() { }
+  protected onOptionsChanged() {}
   protected setValueCore(value: any) {
     this.editingValue_ = value;
   }
@@ -320,13 +326,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.onSetEditorOptions(editorOptions);
     }
   }
-  public activate() { }
+  public activate() {}
 
   protected createEditorOptions(): any {
     return {};
   }
-  protected onSetEditorOptions(editorOptions: any) { }
-  protected onValueChanged() { }
+  protected onSetEditorOptions(editorOptions: any) {}
+  protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
     return value;
   }

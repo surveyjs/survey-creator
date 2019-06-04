@@ -1,15 +1,10 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
   SurveyQuestionEditorTab
 } from "../src/questionEditors/questionEditor";
-import {
-  SurveyQuestionEditorProperties,
-  SurveyQuestionEditorRow,
-  SurveyQuestionEditorProperty
-} from "../src/questionEditors/questionEditorProperties";
+import { SurveyQuestionEditorProperties } from "../src/questionEditors/questionEditorProperties";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
 import { SurveyCreator } from "../src/editor";
 import { assertRegExpLiteral } from "babel-types";
@@ -253,7 +248,6 @@ QUnit.test("Get tabs", function(assert) {
   };
 
   var tabs = SurveyQuestionEditorDefinition.getTabs("@testClass");
-
   assert.equal(tabs.length, 2, "There are three tabs");
   assert.equal(tabs[0].title, "Title 1", "Tab 1 Title");
   assert.equal(tabs[1].title, "Title 2", "Tab 2 Title");
@@ -278,7 +272,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
     "@testClass",
     ["name:string", "prop1", "prop2", "prop11", "prop21", "car"],
     () => {
-      return {};
+      return { getType: () => "@testClass" };
     }
   );
 
@@ -322,7 +316,7 @@ QUnit.test("General properties, editor type", function(assert) {
   );
 });
 
-QUnit.test("General properties, apply/reset", function(assert) {
+QUnit.test("General properties, work without apply", function(assert) {
   var question = new Survey.QuestionText("q1");
   var properties = new SurveyQuestionEditorProperties(question, [
     "name",
@@ -335,15 +329,7 @@ QUnit.test("General properties, apply/reset", function(assert) {
     "Initially it is q1"
   );
   properties.rows[0].properties[0].editor.koValue("q2");
-  properties.apply();
   assert.equal(question.name, "q2", "question.name is 'q2'");
-  properties.rows[0].properties[0].editor.koValue("q3");
-  properties.reset();
-  assert.equal(
-    properties.rows[0].properties[0].editor.koValue(),
-    "q2",
-    "reset to q2"
-  );
 });
 
 QUnit.test("General properties, has errors", function(assert) {
@@ -663,4 +649,18 @@ QUnit.test("Question editor: build properties on fly", function(assert) {
   );
   var propertyEditor = elementEditor.getPropertyEditorByName("html");
   assert.ok(propertyEditor, "Find the property");
+});
+
+QUnit.test("Question editor: change copied object", function(assert) {
+  var survey = new Survey.Survey({ locale: "de", title: "Survey" });
+  var editor = new SurveyQuestionEditor(survey, null, null, null);
+  assert.ok(editor.editableObj, "copiedObj exists");
+  assert.equal(editor.editableObj.locale, "de", "localed copied correctly");
+  var propLocale = editor.getPropertyEditorByName("locale");
+  propLocale.editor.koValue("fr");
+  assert.equal(
+    editor.editableObj.locale,
+    "fr",
+    "Locale set into editable survey"
+  );
 });
