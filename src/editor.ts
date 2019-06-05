@@ -862,20 +862,20 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.doUndoClick = function () {
       var options = { canUndo: true }
-      this.onBeforeUndo.fire(this, options);
+      self.onBeforeUndo.fire(self, options);
       if (options.canUndo) {
         var item = self.undoRedo.undo();
         self.doUndoRedo(item);
-        this.onAfterUndo.fire(this, { state: item });
+        self.onAfterUndo.fire(self, { state: item });
       }
     };
     this.doRedoClick = function () {
       var options = { canRedo: true }
-      this.onBeforeRedo.fire(this, options);
+      self.onBeforeRedo.fire(self, options);
       if (options.canRedo) {
         var item = self.undoRedo.redo();
         self.doUndoRedo(item);
-        this.onAfterRedo.fire(this, { state: item });
+        self.onAfterRedo.fire(self, { state: item });
       }
     };
 
