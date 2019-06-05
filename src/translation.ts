@@ -261,6 +261,7 @@ export class TranslationGroup extends TranslationItemBase {
 
 export class Translation implements ITranslationLocales {
   public static csvDelimiter = "|";
+  public static newLineDelimiter = "\n";
   public koLocales: any;
   public koRoot: any;
   public koAvailableLanguages: any;
@@ -437,11 +438,11 @@ export class Translation implements ITranslationLocales {
       }
       res.push(line);
     }
-    return res.join("\n");
+    return res.join(Translation.newLineDelimiter);
   }
   public importFromCSV(str: string) {
     if (!str) return;
-    var lines = str.split("\n");
+    var lines = str.split(Translation.newLineDelimiter);
     if (lines.length < 2) return;
     var locales = this.readLocales(lines[0]);
     var translation = new Translation(this.survey, true);
