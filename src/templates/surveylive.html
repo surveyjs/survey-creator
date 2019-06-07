@@ -14,8 +14,8 @@
       </span>
       <label data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
           <div class="sjs-cb-container">
-              <input class="svd_editor_control" type="checkbox" data-bind="checked: survey.showInvisibleElements">
-              <span class="checkmark" data-bind="css: { 'svd-main-background-color': survey.showInvisibleElements, 'svd-light-background-color': !survey.showInvisibleElements }"></span>
+              <input class="svd_editor_control" type="checkbox" data-bind="checked: koShowInvisibleElements">
+              <span class="checkmark" data-bind="css: { 'svd-main-background-color': koShowInvisibleElements(), 'svd-light-background-color': !koShowInvisibleElements() }"></span>
               <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
           </div>
        </label>

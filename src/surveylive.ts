@@ -18,6 +18,7 @@ export class SurveyLiveTester {
   setPageDisable: any;
   koLanguages: any;
   koActiveLanguage: any;
+  koShowInvisibleElements = ko.observable(false);
   showObjectTitles = false;
   koShowPagesInTestSurveyTab = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
@@ -27,10 +28,10 @@ export class SurveyLiveTester {
   constructor(private surveyProvider: any) {
     var self = this;
     this.survey = this.surveyProvider.createSurvey({}, "test");
-    this.selectTestClick = function () {
+    this.selectTestClick = function() {
       self.testAgain();
     };
-    this.selectPageClick = function (pageItem) {
+    this.selectPageClick = function(pageItem) {
       if (self.survey) {
         if (self.survey.state == "starting") {
           self.survey.start();
@@ -38,17 +39,20 @@ export class SurveyLiveTester {
         self.survey.currentPage = pageItem.page;
       }
     };
-    this.koActivePage.subscribe(function (newValue) {
+    this.koActivePage.subscribe(function(newValue) {
       if (!!newValue) {
         self.survey.currentPage = newValue;
       }
     });
-    this.setPageDisable = function (option, item) {
+    this.koShowInvisibleElements.subscribe(function(newValue) {
+      self.survey.showInvisibleElements = newValue;
+    });
+    this.setPageDisable = function(option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
-    this.koActiveLanguage.subscribe(function (newValue) {
+    this.koActiveLanguage.subscribe(function(newValue) {
       if (self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
@@ -62,7 +66,9 @@ export class SurveyLiveTester {
         delete json.cookieName;
       }
     }
-    this.survey = json ? this.surveyProvider.createSurvey(json, "test") : this.surveyProvider.createSurvey({}, "test");
+    this.survey = json
+      ? this.surveyProvider.createSurvey(json, "test")
+      : this.surveyProvider.createSurvey({}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     var self = this;
     this.survey.onComplete.add((sender: Survey.Survey) => {
@@ -130,6 +136,7 @@ export class SurveyLiveTester {
         options.showInvisibleElementsInTestSurveyTab
       );
     }
+    this.koShowInvisibleElements(false);
     this.koPages(pages);
     this.koSurvey(this.survey);
     this.koActivePage(this.survey.currentPage);
