@@ -26,12 +26,13 @@ export var indonesianStrings = {
     matrixdynamic: "Matriks (baris dinamis)",
     multipletext: "Teks Ganda",
     panel: "Panel",
-    paneldynamic: "Panel (dynamic panels)",
+    paneldynamic: "Panel (panel dinamis)",
     radiogroup: "Pilihan Ganda",
     rating: "Peringkat",
     text: "Input Tunggal",
     boolean: "Boolean",
-    expression: "Ekspresi"
+    expression: "Ekspresi (dibaca saja)",
+    flowpanel: "Panel Aliran"
   },
   //Strings in Editor
   ed: {
@@ -83,7 +84,12 @@ export var indonesianStrings = {
     translationNoStrings: "Tidak ada string diterjemahkan. Silahkan ganti penyaring.",
     translationExportToSCVButton: "Eksport ke CSV",
     translationImportFromSCVButton: "Import dari CSV",
-    translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale"
+    translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
+    bold: "Tebal",
+    italic: "Miring",
+    underline: "Garis Bawah",
+    fpAddQuestion: "Tambah pertanyaan...",
+    completedHtmlOnConditionItemText: "Tampilkan jika:"
   },
   //Property names in table headers
   pel: {
@@ -213,6 +219,23 @@ export var indonesianStrings = {
     panelAddText: "Menambah teks panel",
     panelRemoveText: "Menghapus teks panel",
     isSinglePage: "Tampilkan seluruh elemen pada halaman",
+    html: "Html",
+    expression: "Ekspresi",
+    
+    minValue: "Nilai minimum",
+    maxValue: "Nilai maksimum",
+    minLength: "Panjang minimum",
+    allowDigits: "Bolehkan angka",
+    minCount: "Hitungan minimum",
+    maxCount: "Hitungan maksimum",
+    regex: "Ekspresi reguler",
+
+    totalText: "Total teks",
+    totalType: "Total tipe",
+    totalExpression: "Total ekspresi",
+    totalDisplayStyle: "Total gaya tampilan",
+    totalCurrency: "Total mata uang",
+    totalFormat: "Total format",
 
     tabs: {
       general: "Umum",
@@ -236,7 +259,8 @@ export var indonesianStrings = {
       loadingHtml: "Loading Html",
       timer: "Pengatur Waktu/Kuis",
       triggers: "Triggers",
-      templateTitle: "Template title"
+      templateTitle: "Template title",
+      totals: "Total"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -527,14 +551,6 @@ export var indonesianStrings = {
     noneText: "Non-teks",
 
     text: "teks",
-    minValue: "nilai minimum",
-    maxValue: "nilai maksimum",
-    minLength: "panjang minimum",
-    maxLength: "panjang maksimum",
-    allowDigits: "bolehkan angka",
-    minCount: "jumlah minimum",
-    maxCount: "jumlah maksimum",
-    regex: "ekspresi reguler"
   }
 };
 
