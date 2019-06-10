@@ -34,6 +34,7 @@ var frenchTranslation = {
   ed: {
     survey: "Questionnaire",
     editSurvey: "Éditer le questionnaire",
+    settings: "Configuration du questionnaire",
     addNewPage: "Ajouter une page",
     deletePage: "Supprimer une page",
     editPage: "Éditer une page",
@@ -76,6 +77,9 @@ var frenchTranslation = {
     delete: "Supprimer",
     addNew: "Ajouter un nouveau",
     addItem: "Cliquer pour ajouter un item...",
+    addOther: "Autre",
+    addSelectAll: "Tout sélectionner",
+    addNone: "Aucun",
     removeAll: "Tout supprimer",
     edit: "Éditer",
     move: "Déplacer",
