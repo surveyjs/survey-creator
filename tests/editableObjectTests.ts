@@ -1,5 +1,5 @@
 import * as Survey from "survey-knockout";
-import { EditableObject } from "../src/entries";
+import { EditableObject } from "../src/propertyEditors/editableObject";
 
 export default QUnit.module("Editable Object Tests");
 
