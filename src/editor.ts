@@ -23,7 +23,6 @@ import { SurveyForDesigner } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
-import { isProperty } from "babel-types";
 
 /**
  * The toolbar item description.
@@ -209,6 +208,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.state is an undo/redo item.
    */
   public onAfterRedo: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
+   * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanging: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is called after the selected element is changed.
+   * <br/> options.newSelectedElement the new selected element in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanged: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
@@ -1654,7 +1669,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (page) return <Survey.Page>page;
     return this.surveyObjects.getSelectedObjectPage(obj);
   }
+  /**
+   * Get or set the current selected object in the Creator. It can be a question, panel, page or survey itself.
+   */
+  public get selectedElement(): any {
+    return !!this.koSelectedObject() ? this.koSelectedObject().value : null;
+  }
+  public set selectedElement(val: any) {
+    this.surveyObjects.selectObject(val);
+  }
   private selectedObjectChanged(obj: Survey.Base) {
+    var options = { newSelectedElement: obj };
+    this.onSelectedElementChanging.fire(this, options);
+    if (obj != options.newSelectedElement) {
+      this.surveyObjects.selectObject(options.newSelectedElement);
+      return;
+    }
     var canDeleteObject = false;
     this.selectedObjectEditorValue.selectedObject = obj;
     var objType = SurveyHelper.getObjectType(obj);
@@ -1690,6 +1720,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         }
       }
     }
+    this.onSelectedElementChanged.fire(this, options);
   }
   private applyBinding() {
     if (this.renderedElement == null) return;

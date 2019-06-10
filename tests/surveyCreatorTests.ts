@@ -684,6 +684,23 @@ QUnit.test(
   }
 );
 
+QUnit.test("Do not allow to select page object", function(assert) {
+  var creator = new SurveyCreator();
+  creator.text = JSON.stringify(getSurveyJson());
+  creator.selectedElement = creator.survey.getQuestionByName("question1");
+  assert.equal(creator.selectedElement.name, "question1");
+  creator.onSelectedElementChanging.add(function(c, options) {
+    if (
+      options.newSelectedElement != null &&
+      options.newSelectedElement.getType() == "page"
+    ) {
+      options.newSelectedElement = creator.survey;
+    }
+  });
+  creator.selectedElement = creator.survey.pages[0];
+  assert.equal(creator.selectedElement.getType(), "survey");
+});
+
 function getSurveyJson(): any {
   return {
     pages: [
