@@ -728,16 +728,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
-    this.saveButtonClick = function () {
+    this.saveButtonClick = function() {
       self.doSave();
     };
     this.koObjects = ko.observableArray();
     window["sel"] = this.koSelectedObject;
     this.koSelectedObject = ko.observable();
-    this.koSelectedObject.subscribe(function (newValue) {
+    this.koSelectedObject.subscribe(function(newValue) {
       self.selectedObjectChanged(newValue != null ? newValue.value : null);
     });
-    this.koGenerateValidJSON.subscribe(function (newValue) {
+    this.koGenerateValidJSON.subscribe(function(newValue) {
       if (!self.options) self.options = {};
       self.options.generateValidJSON = newValue;
       if (self.generateValidJSONChangedCallback)
@@ -748,7 +748,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.koSelectedObject,
       this.showObjectTitles
     );
-    this.surveyObjects.getItemTextCallback = function (obj, text) {
+    this.surveyObjects.getItemTextCallback = function(obj, text) {
       var options = { obj: obj, text: text };
       self.onGetObjectTextInPropertyGrid.fire(self, options);
       return options.text;
@@ -759,13 +759,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedo = new SurveyUndoRedo();
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
-    this.selectedObjectEditorValue.onCanShowPropertyCallback = function (
+    this.selectedObjectEditorValue.onCanShowPropertyCallback = function(
       object: any,
       property: Survey.JsonObjectProperty
     ) {
       return self.onCanShowObjectProperty(object, property);
     };
-    this.selectedObjectEditorValue.onSortPropertyCallback = function (
+    this.selectedObjectEditorValue.onSortPropertyCallback = function(
       obj: any,
       property1: Survey.JsonObjectProperty,
       property2: Survey.JsonObjectProperty
@@ -781,7 +781,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         );
       }
     );
-    this.selectedObjectEditorValue.onAfterRenderCallback = function (
+    this.selectedObjectEditorValue.onAfterRenderCallback = function(
       obj,
       htmlElement,
       prop
@@ -796,7 +796,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.onPropertyAfterRender.fire(self, options);
     };
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
-    this.questionEditorWindow.onCanShowPropertyCallback = function (
+    this.questionEditorWindow.onCanShowPropertyCallback = function(
       object: any,
       property: Survey.JsonObjectProperty
     ) {
@@ -808,7 +808,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.translationValue = new Translation(
       this.createSurvey({}, "translation")
     );
-    this.translation.importFinishedCallback = function () {
+    this.translation.importFinishedCallback = function() {
       self.onTranslationImported.fire(self, {});
     };
     this.translation.availableTranlationsChangedCallback = () => {
@@ -835,33 +835,33 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
 
     this.koViewType = ko.observable("designer");
-    this.koIsShowDesigner = ko.computed(function () {
+    this.koIsShowDesigner = ko.computed(function() {
       return self.koViewType() == "designer";
     });
-    this.generateValidJSONClick = function () {
+    this.generateValidJSONClick = function() {
       self.koGenerateValidJSON(true);
     };
-    this.generateReadableJSONClick = function () {
+    this.generateReadableJSONClick = function() {
       self.koGenerateValidJSON(false);
     };
-    this.runSurveyClick = function () {
+    this.runSurveyClick = function() {
       self.showLiveSurvey();
     };
-    this.deleteObjectClick = function () {
+    this.deleteObjectClick = function() {
       self.deleteCurrentObject();
     };
-    this.draggingToolboxItem = function (item, e) {
+    this.draggingToolboxItem = function(item, e) {
       self.doDraggingToolboxItem(item.json, e);
     };
-    this.clickToolboxItem = function (item) {
+    this.clickToolboxItem = function(item) {
       self.doClickToolboxItem(item.json);
     };
-    this.dragEnd = function (item, e) {
+    this.dragEnd = function(item, e) {
       self.dragDropHelper.end();
     };
 
-    this.doUndoClick = function () {
-      var options = { canUndo: true }
+    this.doUndoClick = function() {
+      var options = { canUndo: true };
       self.onBeforeUndo.fire(self, options);
       if (options.canUndo) {
         var item = self.undoRedo.undo();
@@ -869,8 +869,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         self.onAfterUndo.fire(self, { state: item });
       }
     };
-    this.doRedoClick = function () {
-      var options = { canRedo: true }
+    this.doRedoClick = function() {
+      var options = { canRedo: true };
       self.onBeforeRedo.fire(self, options);
       if (options.canRedo) {
         var item = self.undoRedo.redo();
@@ -1196,7 +1196,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public loadSurvey(surveyId: string) {
     var self = this;
-    new Survey.dxSurveyService().loadSurvey(surveyId, function (
+    new Survey.dxSurveyService().loadSurvey(surveyId, function(
       success: boolean,
       result: string,
       response: any
@@ -1593,6 +1593,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return true;
   }
   /**
+   * Returns the current show view name. The possible returns values are:
+   * "designer", "editor", "test", "embed" and "translation".
+   * @see showDesigner
+   * @see showTestSurvey
+   * @see showJsonEditor
+   * @see showTranslationEditor
+   * @see showEmbedEditor
+   */
+  public get showingViewName(): string {
+    return this.koViewType();
+  }
+  /**
    * Make a "Survey Designer" tab active.
    */
   public showDesigner() {
@@ -1688,7 +1700,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
     if (this.surveyjs) {
       var self = this;
-      this.surveyjs.onkeydown = function (e) {
+      this.surveyjs.onkeydown = function(e) {
         if (!e) return;
         // if (e.keyCode == 46) self.deleteQuestion();
         if (e.keyCode == 38 || e.keyCode == 40) {
@@ -1745,7 +1757,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ));
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
-      function (options) {
+      function(options) {
         self.setModified(options);
       },
       this.renderedElement
@@ -1758,10 +1770,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     Survey.surveyLocalization.currentLocale = this.surveyValue()["locale"];
     this.surveyValue().dragDropHelper = this.dragDropHelper;
-    this.surveyValue().onUpdateElementAllowingOptions = function (options) {
+    this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
     };
-    this.surveyValue().onDragDropAllow.add(function (sender, options) {
+    this.surveyValue().onDragDropAllow.add(function(sender, options) {
       options.survey = sender;
       self.onDragDropAllow.fire(self, options);
     });
@@ -1785,7 +1797,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "delete",
           text: self.getLocString(deleteLocaleName),
-          onClick: function (selObj) {
+          onClick: function(selObj) {
             self.deleteCurrentObject();
           }
         });
@@ -1854,7 +1866,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "copy",
           text: self.getLocString("survey.copy"),
-          onClick: function (selObj) {
+          onClick: function(selObj) {
             self.fastCopyQuestion(selObj);
           }
         });
@@ -1864,7 +1876,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         options.items.push({
           name: "addtotoolbox",
           text: self.getLocString("survey.addToToolbox"),
-          onClick: function (selObj) {
+          onClick: function(selObj) {
             self.addCustomToolboxQuestion(selObj);
           }
         });
@@ -1907,7 +1919,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function (selObj) { }
+          onClick: function(selObj) {}
         });
       }
 
@@ -2162,19 +2174,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
-        this.renderedElement.querySelector("#surveyquestioneditorwindow")
-      )
+          this.renderedElement.querySelector("#surveyquestioneditorwindow")
+        )
       : null;
     var isCanceled = true;
     this.questionEditorWindow.show(
       element,
       elWindow,
-      function (question) {
+      function(question) {
         self.onQuestionEditorChanged(question);
         isCanceled = false;
       },
       this,
-      function () {
+      function() {
         if (onClose) onClose(isCanceled);
       }
     );
@@ -2277,7 +2289,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private showLiveSurvey() {
     var self = this;
-    this.surveyLive.onSurveyCreatedCallback = function (survey: Survey.Survey) {
+    this.surveyLive.onSurveyCreatedCallback = function(survey: Survey.Survey) {
       self.onTestSurveyCreated.fire(self, { survey: survey });
     };
     this.surveyLive.setJSON(this.getSurveyJSON());
@@ -2525,7 +2537,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 }
 
 ko.components.register("survey-widget", {
-  viewModel: function (params) {
+  viewModel: function(params) {
     this.survey = params.survey;
   },
   template:
