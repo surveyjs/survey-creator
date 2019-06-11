@@ -101,7 +101,7 @@ export class SurveyHelper {
     if (
       !!property.isVisible &&
       !!obj.getLayoutType &&
-      !property.isVisible(obj.getLayoutType())
+      !(<any>property["isVisible"])(obj.getLayoutType(), null)
     )
       return false;
     if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property))

@@ -16,7 +16,7 @@ import { defaultStrings } from "../src/editorLocalization";
 
 export default QUnit.module("objectEditorTests");
 
-QUnit.test("Created properties on set selected Object", function (assert) {
+QUnit.test("Created properties on set selected Object", function(assert) {
   var editor = new SurveyObjectEditor();
   assert.equal(
     editor.koProperties().length,
@@ -49,9 +49,9 @@ QUnit.test("Created properties on set selected Object", function (assert) {
   assert.equal(editor.koProperties()[1].name, "name", "name property");
   delete defaultStrings.p["maxWeight"];
 });
-QUnit.test("Custom sort properties", function (assert) {
+QUnit.test("Custom sort properties", function(assert) {
   var editor = new SurveyObjectEditor();
-  editor.onSortPropertyCallback = function (obj, a, b) {
+  editor.onSortPropertyCallback = function(obj, a, b) {
     if (a.name == "name") return -1;
     if (b.name == "name") return 1;
     return 0;
@@ -61,7 +61,7 @@ QUnit.test("Custom sort properties", function (assert) {
   assert.equal(editor.koProperties().length, 3, "Two property object");
   assert.equal(editor.koProperties()[0].name, "name", "name property");
 });
-QUnit.test("Sort by displayName by default", function (assert) {
+QUnit.test("Sort by displayName by default", function(assert) {
   defaultStrings.p["maxWeight"] = "zzz maximum weight";
   var editor = new SurveyObjectEditor();
   editor.selectedObject = new Truck();
@@ -74,7 +74,7 @@ QUnit.test("Sort by displayName by default", function (assert) {
   );
   delete defaultStrings.p["maxWeight"];
 });
-QUnit.test("Get Property Value", function (assert) {
+QUnit.test("Get Property Value", function(assert) {
   var editor = new SurveyObjectEditor();
   var car = new Truck();
   car.name = "truckCar";
@@ -91,7 +91,7 @@ QUnit.test("Get Property Value", function (assert) {
     "get maxWeight property"
   );
 });
-QUnit.test("isDefault property value", function (assert) {
+QUnit.test("isDefault property value", function(assert) {
   var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
   editor.selectedObject = car;
@@ -102,7 +102,7 @@ QUnit.test("isDefault property value", function (assert) {
   editor.objectChanged();
   assert.equal(property.koIsDefault(), false, "the value is not default");
 });
-QUnit.test("Active property", function (assert) {
+QUnit.test("Active property", function(assert) {
   var editor = new SurveyObjectEditor();
   assert.equal(editor.koActiveProperty(), null, "no properties");
   editor.selectedObject = new TruckDefaultValue();
@@ -112,7 +112,7 @@ QUnit.test("Active property", function (assert) {
     "name property is active by default"
   );
 });
-QUnit.test("Is show property", function (assert) {
+QUnit.test("Is show property", function(assert) {
   var editor = new SurveyObjectEditor();
   editor.selectedObject = new TruckDefaultValue();
   var nameProperty = editor.getPropertyEditor("name");
@@ -146,7 +146,7 @@ QUnit.test("Is show property", function (assert) {
     "isNewProperty property always show Editor"
   );
 });
-QUnit.test("On property changed", function (assert) {
+QUnit.test("On property changed", function(assert) {
   var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
   car.name = "myName";
@@ -160,7 +160,7 @@ QUnit.test("On property changed", function (assert) {
   assert.equal(car.name, "newName", "on property changed event is working");
   assert.equal(callCounter, 1, "It should be called only one time");
 });
-QUnit.test("Use metadata getPropertyValue function", function (assert) {
+QUnit.test("Use metadata getPropertyValue function", function(assert) {
   var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
   car.truckTitle = "test";
@@ -172,7 +172,7 @@ QUnit.test("Use metadata getPropertyValue function", function (assert) {
 });
 QUnit.test(
   "Fix the bug with title property, https://github.com/surveyjs/editor/issues/33",
-  function (assert) {
+  function(assert) {
     var editor = new SurveyObjectEditor();
     var car = new BigCar();
     car.name = "name1";
@@ -194,9 +194,9 @@ QUnit.test(
     );
   }
 );
-QUnit.test("Use onCanShowPropertyCallback", function (assert) {
+QUnit.test("Use onCanShowPropertyCallback", function(assert) {
   var editor = new SurveyObjectEditor();
-  editor.onCanShowPropertyCallback = function (
+  editor.onCanShowPropertyCallback = function(
     object: any,
     property: Survey.JsonObjectProperty
   ) {
@@ -220,7 +220,8 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   showTitlesInExpressions: boolean;
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
-    editor: SurveyPropertyEditorBase, readOnly: boolean
+    editor: SurveyPropertyEditorBase,
+    readOnly: boolean
   ): boolean {
     return false;
   }
@@ -255,7 +256,7 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     event: KeyboardEvent
-  ) { }
+  ) {}
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -263,12 +264,12 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): string {
     return "";
   }
-  onValueChangingCallback(options: any) { }
+  onValueChangingCallback(options: any) {}
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase
-  ) { }
+  ) {}
   onPropertyEditorModalShowDescriptionCallback(
     propertyName: string,
     obj: Survey.Base
@@ -287,19 +288,23 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     survey: Survey.Survey
-  ) { }
+  ) {}
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     list: any[]
-  ) { }
-  public createSurvey(json: any = {}, reason: string = "designer", surveyType = Survey.Survey) {
+  ) {}
+  public createSurvey(
+    json: any = {},
+    reason: string = "designer",
+    surveyType = Survey.Survey
+  ) {
     return new surveyType(json);
   }
 }
 
-QUnit.test("On new ItemValue added", function (assert) {
+QUnit.test("On new ItemValue added", function(assert) {
   var options = new EditorOptionsTests();
   var editor = new SurveyObjectEditor(options);
   var question = new Survey.QuestionDropdown("q1");
@@ -321,7 +326,7 @@ QUnit.test("On new ItemValue added", function (assert) {
   assert.equal(question.choices[1].value, "item2", "auto generated value 2");
 });
 
-QUnit.test("On new Matrix Column added", function (assert) {
+QUnit.test("On new Matrix Column added", function(assert) {
   var options = new EditorOptionsTests();
   var editor = new SurveyObjectEditor(options);
   var question = new Survey.QuestionMatrixDropdown("q1");
@@ -343,7 +348,7 @@ QUnit.test("On new Matrix Column added", function (assert) {
   );
 });
 
-QUnit.test("hideAddRemoveButtons", function (assert) {
+QUnit.test("hideAddRemoveButtons", function(assert) {
   var options = new EditorOptionsTests();
   var editor = new SurveyObjectEditor(options);
   var question1 = new Survey.QuestionDropdown("q1");
@@ -368,7 +373,7 @@ QUnit.test("hideAddRemoveButtons", function (assert) {
   );
 });
 
-QUnit.test("show top/bottom description", function (assert) {
+QUnit.test("show top/bottom description", function(assert) {
   var options = new EditorOptionsTests();
   var editor = new SurveyObjectEditor(options);
   var question1 = new Survey.QuestionDropdown("showOnTop");
@@ -406,7 +411,7 @@ QUnit.test("show top/bottom description", function (assert) {
   );
 });
 
-QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function (
+QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function(
   assert
 ) {
   var options = new EditorOptionsTests();
@@ -433,7 +438,7 @@ QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function 
   );
 });
 
-QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function (assert) {
+QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
   var visibleIfProperty = Survey.JsonObject.metaData.findProperty(
     "itemvalue",
     "visibleIf"
@@ -486,4 +491,32 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function (assert) {
   if (!visibleIfProperty) {
     Survey.JsonObject.metaData.removeProperty("itemvalue", "visibleIf");
   }
+});
+
+QUnit.test("DependedOn properties, koVisible", function(assert) {
+  Survey.Serializer.addProperty("text", {
+    name: "customProp1",
+    dependsOn: ["inputType"],
+    visibleIf: function(obj) {
+      return obj.inputType == "date";
+    }
+  });
+  var options = new EditorOptionsTests();
+  var editor = new SurveyObjectEditor(options);
+  var question = new Survey.QuestionText("q1");
+  editor.onPropertyValueChanged.add((sender, options) => {
+    question[options.property.name] = options.newValue;
+  });
+
+  editor.selectedObject = question;
+  var custPropEditor = editor.getPropertyEditor("customProp1");
+  var inputTypePropEditor = editor.getPropertyEditor("inputType");
+
+  assert.equal(custPropEditor.koVisible(), false, "It is invisible by default");
+  inputTypePropEditor.koValue("date");
+  assert.equal(custPropEditor.koVisible(), true, "It is visible now");
+  inputTypePropEditor.koValue("range");
+  assert.equal(custPropEditor.koVisible(), false, "It is invisible again");
+
+  Survey.Serializer.removeProperty("text", "customProp1");
 });
