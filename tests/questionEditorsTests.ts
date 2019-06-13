@@ -664,3 +664,45 @@ QUnit.test("Question editor: change copied object", function(assert) {
     "Locale set into editable survey"
   );
 });
+QUnit.test("DependedOn properties, koVisible", function(assert) {
+  Survey.Serializer.addProperty("text", {
+    name: "customProp1",
+    dependsOn: ["inputType"],
+    visibleIf: function(obj) {
+      return obj.inputType == "date";
+    }
+  });
+  var savedDefinition = JSON.stringify(
+    SurveyQuestionEditorDefinition.definition.text
+  );
+  SurveyQuestionEditorDefinition.definition.text.properties.push("customProp1");
+
+  var question = new Survey.QuestionText("q1");
+
+  var editor = new SurveyQuestionEditor(question, null, null, null);
+  var tab = editor.koTabs()[0];
+  var prop1 = tab.getPropertyEditorByName("inputType");
+  var prop2 = tab.getPropertyEditorByName("customProp1");
+
+  assert.equal(
+    prop2.objectProperty.name,
+    "customProp1",
+    "The property name is correct"
+  );
+  assert.equal(
+    prop2.objectProperty.koVisible(),
+    false,
+    "It is invisible by default"
+  );
+  prop1.objectProperty.koValue("date");
+  assert.equal(prop2.objectProperty.koVisible(), true, "It visible now");
+  prop1.objectProperty.koValue("range");
+  assert.equal(
+    prop2.objectProperty.koVisible(),
+    false,
+    "It is invisible again"
+  );
+
+  SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
+  Survey.Serializer.removeProperty("text", "customProp1");
+});

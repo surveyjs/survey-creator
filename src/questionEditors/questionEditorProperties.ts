@@ -10,13 +10,17 @@ import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyQuestionEditorProperty {
   private objectPropertyValue: SurveyObjectProperty;
+
   koValue: any;
   constructor(
     public obj: Survey.Base,
     public property: Survey.JsonObjectProperty,
     displayName: string,
     options: ISurveyObjectEditorOptions = null,
-    isTabProperty: boolean = false
+    isTabProperty: boolean = false,
+    private getEditorPropertyByName: (
+      name: string
+    ) => SurveyQuestionEditorProperty = null
   ) {
     var self = this;
     this.objectPropertyValue = new SurveyObjectProperty(
@@ -31,6 +35,11 @@ export class SurveyQuestionEditorProperty {
       displayName = editorLocalization.getString("pe." + this.property.name);
     }
     if (displayName) this.editor.displayName = displayName;
+    this.objectProperty.onDependedPropertyUpdateCallback = function(
+      propertyName: string
+    ) {
+      self.updateDependedProperty(propertyName);
+    };
     this.objectProperty.object = obj;
     this.editor.setup();
   }
@@ -65,16 +74,29 @@ export class SurveyQuestionEditorProperty {
   }
   public beforeShow() {
     this.editor.beforeShow();
+    this.objectProperty.updateDynamicProperties();
   }
   protected onPropertyChanged(property: SurveyObjectProperty, newValue: any) {
     this.obj[this.property.name] = newValue;
+  }
+  private updateDependedProperty(propertyName: string) {
+    if (!this.getEditorPropertyByName) return;
+    var prop = this.getEditorPropertyByName(propertyName);
+    if (!!prop) {
+      prop.objectProperty.updateDynamicProperties();
+    }
   }
 }
 
 export class SurveyQuestionEditorRow {
   public category: string;
   public properties: Array<SurveyQuestionEditorProperty> = [];
-  constructor(public obj: Survey.Base) {}
+  constructor(
+    public obj: Survey.Base,
+    private getEditorPropertyByName: (
+      name: string
+    ) => SurveyQuestionEditorProperty = null
+  ) {}
   public addProperty(
     property: any,
     displayName: string,
@@ -87,7 +109,8 @@ export class SurveyQuestionEditorRow {
         property,
         displayName,
         options,
-        isTabProperty
+        isTabProperty,
+        this.getEditorPropertyByName
       )
     );
   }
@@ -116,7 +139,10 @@ export class SurveyQuestionEditorProperties {
       property: Survey.JsonObjectProperty
     ) => boolean = null,
     public options: ISurveyObjectEditorOptions = null,
-    private tab: any = null
+    private tab: any = null,
+    private getEditorPropertyByName: (
+      name: string
+    ) => SurveyQuestionEditorProperty = null
   ) {
     this.isTabProperty = !!tab;
     this.onCanShowPropertyCallback = onCanShowPropertyCallback;
@@ -178,7 +204,10 @@ export class SurveyQuestionEditorProperties {
       if (!jsonProperty) continue;
       var row = this.getRowByCategory(properties[i].category);
       if (!row) {
-        row = new SurveyQuestionEditorRow(this.obj);
+        row = new SurveyQuestionEditorRow(
+          this.obj,
+          this.getEditorPropertyByName
+        );
         if (properties[i].category) row.category = properties[i].category;
         this.rows.push(row);
       }

@@ -173,8 +173,8 @@ export class SurveyQuestionEditor {
       self.koActiveTab(tab.name);
     };
     var tabs = this.buildTabs();
-    tabs.forEach(tab => tab.beforeShow());
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
+    tabs.forEach(tab => tab.beforeShow());
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
@@ -273,11 +273,16 @@ export class SurveyQuestionEditor {
   }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
+    var self = this;
     var properties = new SurveyQuestionEditorProperties(
       this.editableObj,
       SurveyQuestionEditorDefinition.getProperties(this.className),
       this.onCanShowPropertyCallback,
-      this.options
+      this.options,
+      null,
+      function(propName: string) {
+        return self.getQuestionEditorPropertyByName(propName);
+      }
     );
     if (SurveyQuestionEditorDefinition.isGeneralTabVisible(this.className)) {
       tabs.push(
@@ -291,6 +296,7 @@ export class SurveyQuestionEditor {
     return tabs;
   }
   private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
+    var self = this;
     var tabNames = SurveyQuestionEditorDefinition.getTabs(this.className);
     for (var i = 0; i < tabNames.length; i++) {
       var tabItem = tabNames[i];
@@ -303,7 +309,10 @@ export class SurveyQuestionEditor {
             properties,
             this.onCanShowPropertyCallback,
             this.options,
-            tabItem
+            tabItem,
+            function(propName: string) {
+              return self.getQuestionEditorPropertyByName(propName);
+            }
           ),
           tabItem.name
         );
@@ -311,6 +320,17 @@ export class SurveyQuestionEditor {
         tabs.push(propertyTab);
       }
     }
+  }
+  private getQuestionEditorPropertyByName(
+    propName: string
+  ): SurveyQuestionEditorProperty {
+    if (!this.koTabs) return null;
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      var res = tabs[i].getPropertyEditorByName(propName);
+      if (!!res) return res;
+    }
+    return null;
   }
   get useTabsInElementEditor() {
     return (
