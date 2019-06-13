@@ -137,6 +137,11 @@ export class SurveyObjectEditor {
         this.propertyEditorOptions
       );
       objectProperty.editor.isInplaceProperty = true;
+      objectProperty.onDependedPropertyUpdateCallback = function(
+        propName: string
+      ) {
+        self.updatePropertyEditor(propName);
+      };
       objectProperties.push(objectProperty);
     }
     objectProperties.sort(sortEvent);
@@ -147,6 +152,12 @@ export class SurveyObjectEditor {
     }
     if (propEditor) {
       this.koActiveProperty(propEditor);
+    }
+  }
+  private updatePropertyEditor(propName: string) {
+    var propEd = this.getPropertyEditor(propName);
+    if (!!propEd) {
+      propEd.updateDynamicProperties();
     }
   }
   protected canShowProperty(property: Survey.JsonObjectProperty): boolean {

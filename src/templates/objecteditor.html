@@ -1,21 +1,21 @@
 ﻿<script type="text/html" id="objecteditor">
-    <table class="table svd_table-nowrap svd_properties_grid">
-        <tbody data-bind="foreach: koProperties">
-            <!-- ko template: { name: 'objecteditorproperty', afterRender: $parent.koAfterRender } -->
-            <!-- /ko -->
-        </tbody>
-    </table>
+  <table class="table svd_table-nowrap svd_properties_grid">
+      <tbody data-bind="foreach: koProperties">
+          <!-- ko template: { name: 'objecteditorproperty', afterRender: $parent.koAfterRender } -->
+          <!-- /ko -->
+      </tbody>
+  </table>
 </script>
 <script type="text/html" id="objecteditorproperty">
-    <tr data-bind="click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
-        <td width="50%">
-            <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
-        </td>
-        <td class="svd-light-text-color form-group" width="50%">
-            <div data-bind="event: { keydown: $data.editor.keyDownHandler }">
-                <!-- ko template: { name: 'propertyeditor-' + editorTypeTemplate, data: $data.editor } -->
-                <!-- /ko -->
-            </div>
-        </td>
-    </tr>
+  <tr data-bind="visible: koVisible, click: $parent.changeActiveProperty($data), css: {'active': $parent.koActiveProperty() == $data}">
+      <td width="50%">
+          <span data-bind="text: displayName, attr: {title: title || displayName}"></span>
+      </td>
+      <td class="svd-light-text-color form-group" width="50%">
+          <div data-bind="event: { keydown: $data.editor.keyDownHandler }">
+              <!-- ko template: { name: 'propertyeditor-' + editorTypeTemplate, data: $data.editor } -->
+              <!-- /ko -->
+          </div>
+      </td>
+  </tr>
 </script>
