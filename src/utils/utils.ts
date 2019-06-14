@@ -1,5 +1,4 @@
 import * as ko from "knockout";
-import { numberTypeAnnotation } from "babel-types";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";

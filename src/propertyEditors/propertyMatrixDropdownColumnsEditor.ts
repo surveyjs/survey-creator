@@ -12,7 +12,7 @@ import {
   SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
+import { getNextValue } from "../utils/utils";
 
 export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEditor {
   constructor(property: Survey.JsonObjectProperty) {
@@ -29,6 +29,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   protected createNewEditorItem(): any {
     var newColumn = this.createEditorItemCore(null);
+    newColumn.name = getNextValue("", this.getColumnNames());
     var columns = [];
     for (var i = 0; i < this.koItems().length; i++) {
       columns.push(this.koItems()[i].column);
@@ -79,6 +80,17 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
       "title"
     ]);
     return this.getPropertiesByNames("matrixdropdowncolumn", names);
+  }
+  private getColumnNames(): Array<string> {
+    var res = [];
+    var items = this.koItems();
+    for (var i = 0; i < items.length; i++) {
+      var name = items[i].column.name;
+      if (!!name) {
+        res.push(name);
+      }
+    }
+    return res;
   }
 }
 

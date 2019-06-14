@@ -923,8 +923,13 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
     "the first column name"
   );
   columnsEditor.onAddClick();
+  assert.equal(
+    columnsEditor.koItems()[2].cells[2].koValue(),
+    "column 3",
+    "set default column name"
+  );
   columnsEditor.koItems()[2].cells[1].koValue("checkbox");
-  columnsEditor.koItems()[2].cells[2].koValue("column 3");
+  columnsEditor.koItems()[2].cells[2].koValue("column 5");
   assert.equal(
     columnsEditor.koItems().length,
     3,
@@ -939,7 +944,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
   );
   assert.equal(
     columns[2]["name"],
-    "column 3",
+    "column 5",
     "the last column name set correctly"
   );
 });
@@ -1267,34 +1272,43 @@ QUnit.test("Validators property editor", function(assert) {
   assert.equal(result.length, 2, "Two validators are saved");
 });
 
-QUnit.test("Validators property editor update existing validator property - https://surveyjs.answerdesk.io/ticket/details/T2058", function(assert) {
-  var survey = createSurvey();
-  var validator = new Survey.NumericValidator(10, 100);
-  validator.text = "validatortext";
-  var question = <Survey.Question>survey.getQuestionByName("question1");
-  question.validators.push(validator);
-  var result = [];
-  var propEditor = new SurveyPropertyValidatorsEditor(null);
-  propEditor.beforeShow();
-  assert.ok(
-    propEditor.koAvailableClasses().length > 1,
-    "Localized validators have been created"
-  );
+QUnit.test(
+  "Validators property editor update existing validator property - https://surveyjs.answerdesk.io/ticket/details/T2058",
+  function(assert) {
+    var survey = createSurvey();
+    var validator = new Survey.NumericValidator(10, 100);
+    validator.text = "validatortext";
+    var question = <Survey.Question>survey.getQuestionByName("question1");
+    question.validators.push(validator);
+    var result = [];
+    var propEditor = new SurveyPropertyValidatorsEditor(null);
+    propEditor.beforeShow();
+    assert.ok(
+      propEditor.koAvailableClasses().length > 1,
+      "Localized validators have been created"
+    );
 
-  propEditor.onChanged = (newValue: any) => {
-    result = newValue;
-  };
-  propEditor.editingObject = question;
-  propEditor.editingValue = question.validators;
-  
-  var maxValuePropertyEditor = propEditor.selectedObjectEditor().getPropertyEditorByName("maxValue");
-  assert.equal(maxValuePropertyEditor.editor.koValue(), 100, "Initial max value = 100");
-  
-  maxValuePropertyEditor.editor.koValue(101);
-  propEditor.apply();
+    propEditor.onChanged = (newValue: any) => {
+      result = newValue;
+    };
+    propEditor.editingObject = question;
+    propEditor.editingValue = question.validators;
 
-  assert.equal(result[0].maxValue, 101, "New value is saved into object");
-});
+    var maxValuePropertyEditor = propEditor
+      .selectedObjectEditor()
+      .getPropertyEditorByName("maxValue");
+    assert.equal(
+      maxValuePropertyEditor.editor.koValue(),
+      100,
+      "Initial max value = 100"
+    );
+
+    maxValuePropertyEditor.editor.koValue(101);
+    propEditor.apply();
+
+    assert.equal(result[0].maxValue, 101, "New value is saved into object");
+  }
+);
 
 QUnit.test(
   "automicatilly create name for new item in SurveyPropertyTextItemsEditor",
