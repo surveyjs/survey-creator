@@ -7,7 +7,7 @@ import {
 import { SurveyQuestionEditorProperties } from "../src/questionEditors/questionEditorProperties";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
 import { SurveyCreator } from "../src/editor";
-import { assertRegExpLiteral } from "babel-types";
+import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -705,4 +705,48 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
 
   SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
   Survey.Serializer.removeProperty("text", "customProp1");
+});
+
+QUnit.test("DependedOn properties, dynamic choices", function(assert) {
+  Survey.Serializer.addProperty("text", { name: "targetEntity" });
+  Survey.Serializer.addProperty("text", {
+    name: "targetField",
+    dependsOn: "targetEntity",
+    choices: function(obj) {
+      return getChoicesByEntity(obj);
+    }
+  });
+  function getChoicesByEntity(obj: any): Array<any> {
+    var entity = !!obj ? obj["targetEntity"] : null;
+    var choices = [];
+    if (!entity) return choices;
+    choices.push({ value: null });
+    choices.push({ value: entity + " 1", text: entity + " 1" });
+    choices.push({ value: entity + " 2", text: entity + " 2" });
+    return choices;
+  }
+  var editorDefinition = SurveyQuestionEditorDefinition.definition.text;
+  var savedDefinition = JSON.stringify(editorDefinition);
+  editorDefinition.properties.push("targetEntity");
+  editorDefinition.properties.push("targetField");
+
+  var question = new Survey.QuestionText("q1");
+
+  var editor = new SurveyQuestionEditor(question, null, null, null);
+  var tab = editor.koTabs()[0];
+  var entityProp = tab.getPropertyEditorByName("targetEntity");
+  var fieldProp = tab.getPropertyEditorByName("targetField");
+  var fieldPropEditor = <SurveyDropdownPropertyEditor>fieldProp.editor;
+
+  assert.equal(fieldPropEditor.koChoices().length, 0, "It is empty by default");
+  entityProp.objectProperty.koValue("Account");
+  assert.equal(
+    fieldPropEditor.koChoices().length,
+    3,
+    "Choices updated immediately"
+  );
+
+  SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
+  Survey.Serializer.removeProperty("text", "targetEntity");
+  Survey.Serializer.removeProperty("text", "targetField");
 });

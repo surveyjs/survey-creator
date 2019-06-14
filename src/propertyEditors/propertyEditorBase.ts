@@ -399,6 +399,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private isValueEmpty(val): boolean {
     return Survey.Helpers.isValueEmpty(val);
   }
+  public updateDynamicProperties() {}
   public keyDownHandler(property, event) {
     var surveyEditor: ISurveyObjectEditorOptions = property.editor.options;
     if (!!surveyEditor) {

@@ -91,6 +91,7 @@ export class SurveyObjectProperty {
   }
   public updateDynamicProperties() {
     this.koVisible(this.isVisible());
+    this.editor.updateDynamicProperties();
   }
   protected isVisible(): boolean {
     if (!this.object) return true;

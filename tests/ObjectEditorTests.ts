@@ -13,6 +13,7 @@ import {
 } from "../src/propertyEditors/propertyItemValuesEditor";
 import { SurveyPropertyDropdownColumnsEditor } from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { defaultStrings } from "../src/editorLocalization";
+import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
 
 export default QUnit.module("objectEditorTests");
 
@@ -519,4 +520,52 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
   assert.equal(custPropEditor.koVisible(), false, "It is invisible again");
 
   Survey.Serializer.removeProperty("text", "customProp1");
+});
+
+QUnit.test("DependedOn properties, koVisible", function(assert) {
+  Survey.Serializer.addProperty("question", "targetEntity");
+  Survey.Serializer.addProperty("question", {
+    name: "targetField",
+    dependsOn: "targetEntity",
+    choices: function(obj) {
+      return getChoicesByEntity(obj);
+    }
+  });
+  function getChoicesByEntity(obj: any): Array<any> {
+    var entity = !!obj ? obj["targetEntity"] : null;
+    var choices = [];
+    if (!entity) return choices;
+    choices.push({ value: null });
+    choices.push({ value: entity + " 1", text: entity + " 1" });
+    choices.push({ value: entity + " 2", text: entity + " 2" });
+    return choices;
+  }
+
+  var options = new EditorOptionsTests();
+  var editor = new SurveyObjectEditor(options);
+  var question = new Survey.QuestionText("q1");
+  editor.onPropertyValueChanged.add((sender, options) => {
+    question[options.property.name] = options.newValue;
+  });
+
+  editor.selectedObject = question;
+  var entityPropEditor = editor.getPropertyEditor("targetEntity");
+  var targetPropEditor = <SurveyDropdownPropertyEditor>(
+    editor.getPropertyEditor("targetField").editor
+  );
+
+  assert.equal(
+    targetPropEditor.koChoices().length,
+    0,
+    "It is empty by default"
+  );
+  entityPropEditor.koValue("Account");
+  assert.equal(
+    targetPropEditor.koChoices().length,
+    3,
+    "Choices updated immediately"
+  );
+
+  Survey.Serializer.removeProperty("question", "targetEntity");
+  Survey.Serializer.removeProperty("question", "targetField");
 });

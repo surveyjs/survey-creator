@@ -164,6 +164,9 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     }
     this.endValueUpdating();
   }
+  public updateDynamicProperties() {
+    this.updateChoices();
+  }
   public updateChoices() {
     this.koChoices(this.getLocalizableChoices());
   }
