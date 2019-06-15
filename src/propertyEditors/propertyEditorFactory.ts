@@ -136,9 +136,9 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     this.koHasFocus = ko.observable(false);
     var self = this;
     this.koHasFocus.subscribe(function(newValue) {
+      //TODO isDynamicChoices obsolete, use dependsOn attribute
       if (newValue && self.property["isDynamicChoices"]) {
-        //TODO
-        self.koChoices(self.getLocalizableChoices());
+        self.updateChoices();
       }
     });
   }
@@ -168,11 +168,17 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     this.updateChoices();
   }
   public updateChoices() {
-    this.koChoices(this.getLocalizableChoices());
-  }
-  private getLocalizableChoices() {
     var choices = this.getPropertyChoices();
-    if (!choices || choices.length == 0) return [];
+    this.setChoices(choices);
+  }
+  private setChoices(choices: Array<Survey.ItemValue>) {
+    choices = this.makeChoicesLocalizable(choices);
+    if (!!choices && Array.isArray(choices)) {
+      this.koChoices(choices);
+    }
+  }
+  private makeChoicesLocalizable(choices: Array<Survey.ItemValue>) {
+    if (!choices) return choices;
     var res = new Array<Survey.ItemValue>();
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
@@ -194,7 +200,12 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
         return obj[name];
       };
     }
-    return this.property.getChoices(this.object);
+    var self = this;
+    return (<any>this.property["getChoices"])(this.object, function(
+      choices: any
+    ) {
+      self.setChoices(choices);
+    });
   }
 }
 export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
