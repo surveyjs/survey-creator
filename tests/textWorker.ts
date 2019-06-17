@@ -25,7 +25,7 @@ QUnit.test(
         ]
     }`;
 
-    Survey.JsonObject.metaData.addProperty("question", {
+    Survey.Serializer.addProperty("question", {
       name: "snippets"
     });
     var textWorker = new SurveyTextWorker(jsonText);
@@ -34,6 +34,6 @@ QUnit.test(
     assert.equal(textWorker.errors.length, 0);
     assert.deepEqual(q["snippets"], [{ function: "q1" }]);
 
-    Survey.JsonObject.metaData.removeProperty("question", "snippets");
+    Survey.Serializer.removeProperty("question", "snippets");
   }
 );

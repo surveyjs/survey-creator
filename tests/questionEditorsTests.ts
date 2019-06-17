@@ -268,7 +268,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
       { name: "tab2", title: "Title 2" }
     ]
   };
-  Survey.JsonObject.metaData.addClass(
+  Survey.Serializer.addClass(
     "@testClass",
     ["name:string", "prop1", "prop2", "prop11", "prop21", "car"],
     () => {
@@ -505,8 +505,8 @@ QUnit.test("Question editor: required field errors", function(assert) {
   assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
 });
 QUnit.test("Question editor: on property value changing", function(assert) {
-  Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });
-  Survey.JsonObject.metaData.addProperty("question", {
+  Survey.Serializer.addProperty("question", { name: "targetEntity" });
+  Survey.Serializer.addProperty("question", {
     name: "targetField",
     choices: []
   });
@@ -543,13 +543,13 @@ QUnit.test("Question editor: on property value changing", function(assert) {
     ["item 1", "item 2"],
     "The choices has two items"
   );
-  Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
-  Survey.JsonObject.metaData.removeProperty("question", "targetField");
+  Survey.Serializer.removeProperty("question", "targetEntity");
+  Survey.Serializer.removeProperty("question", "targetField");
 });
 
 QUnit.test("Question editor: depended property, choices", function(assert) {
-  Survey.JsonObject.metaData.addProperty("question", { name: "targetEntity" });
-  Survey.JsonObject.metaData.addProperty("question", {
+  Survey.Serializer.addProperty("question", { name: "targetEntity" });
+  Survey.Serializer.addProperty("question", {
     name: "targetField",
     choices: function(obj: any) {
       var entity = !!obj ? obj.getEditingPropertyValue("targetEntity") : null;
@@ -587,8 +587,8 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
   assert.deepEqual(choices[0].value, "item 1", "The first item value");
   assert.deepEqual(choices[1].value, "item 2", "The second item value");
 
-  Survey.JsonObject.metaData.removeProperty("question", "targetEntity");
-  Survey.JsonObject.metaData.removeProperty("question", "targetField");
+  Survey.Serializer.removeProperty("question", "targetEntity");
+  Survey.Serializer.removeProperty("question", "targetField");
 });
 QUnit.test("Question editor: change editor.readOnly", function(assert) {
   var question = new Survey.QuestionText("q2");
@@ -628,7 +628,7 @@ class SurveyQuestionEditorTester extends Survey.Base {
   public html: string;
   public name: string;
 }
-Survey.JsonObject.metaData.addClass(
+Survey.Serializer.addClass(
   "classTester",
   ["name", "html:html"],
   function() {

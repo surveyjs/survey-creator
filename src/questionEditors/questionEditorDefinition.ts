@@ -390,7 +390,7 @@ export class SurveyQuestionEditorDefinition {
     var curClassName = className;
     while (curClassName) {
       var metaClass = <Survey.JsonMetadataClass>(
-        Survey.JsonObject.metaData.findClass(curClassName)
+        Survey.Serializer.findClass(curClassName)
       );
       if (!metaClass) break;
       if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
@@ -401,7 +401,7 @@ export class SurveyQuestionEditorDefinition {
       curClassName = metaClass.parentName;
     }
     if (result.length == 0) {
-      var properties = Survey.JsonObject.metaData.getProperties(className);
+      var properties = Survey.Serializer.getProperties(className);
       var classRes = { properties: [] };
       for (var i = 0; i < properties.length; i++) {
         if (properties[i].isVisible(null)) {

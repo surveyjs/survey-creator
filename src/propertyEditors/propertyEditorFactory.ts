@@ -72,7 +72,7 @@ export class SurveyPropertyEditorFactory {
     if (!propertyEditor) {
       if (
         property.isArray &&
-        Survey.JsonObject.metaData.isDescendantOf(
+        Survey.Serializer.isDescendantOf(
           property.className,
           "itemvalue"
         )
@@ -106,12 +106,12 @@ export class SurveyPropertyEditorFactory {
   private static findParentCreator(
     name: string
   ): (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase {
-    var jsonClass = Survey.JsonObject.metaData.findClass(name);
+    var jsonClass = Survey.Serializer.findClass(name);
     while (jsonClass && jsonClass.parentName) {
       var creator =
         SurveyPropertyEditorFactory.creatorByClassList[jsonClass.parentName];
       if (creator) return creator;
-      jsonClass = Survey.JsonObject.metaData.findClass(jsonClass.parentName);
+      jsonClass = Survey.Serializer.findClass(jsonClass.parentName);
     }
     return SurveyPropertyEditorFactory.creatorList[
       SurveyPropertyEditorFactory.defaultEditor

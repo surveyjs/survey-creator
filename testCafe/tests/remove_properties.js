@@ -7,7 +7,7 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //remove a property to the page object. You can't set it in JSON as well
-  Survey.JsonObject.metaData.removeProperty("survey", "cookieName");
+  Survey.Serializer.removeProperty("survey", "cookieName");
   var editorOptions = {};
   var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 

@@ -93,9 +93,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return [];
   }
   protected getDefaultProperties(): Array<Survey.JsonObjectProperty> {
-    var properties = Survey.JsonObject.metaData.getProperties(
-      this.property.className
-    );
+    var properties = Survey.Serializer.getProperties(this.property.className);
     var res = [];
     for (var i = 0; i < properties.length; i++) {
       if (!properties[i].visible) continue;
@@ -160,9 +158,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
   }
   private createEditorItemCore(item: any) {
-    var itemValue = Survey.JsonObject.metaData.createClass(
-      this.property.className
-    );
+    var itemValue = Survey.Serializer.createClass(this.property.className);
     itemValue.setData(item);
 
     if (this.object) {
@@ -183,7 +179,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     ) {
       item.text = null;
     }
-    var itemValue = Survey.JsonObject.metaData.createClass(item.getType());
+    var itemValue = Survey.Serializer.createClass(item.getType());
     itemValue.setData(item);
     delete itemValue["survey"];
     delete itemValue["object"];
@@ -219,9 +215,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;
         var elements = texts[i].split(Survey.ItemValue.Separator);
-        var valueItem = Survey.JsonObject.metaData.createClass(
-          this.property.className
-        );
+        var valueItem = Survey.Serializer.createClass(this.property.className);
         properties.forEach((p, i) => {
           valueItem[p.name] = elements[i];
         });
@@ -268,10 +262,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return false;
   }
   private isValuePropertyVisible(): boolean {
-    var valueProp = Survey.JsonObject.metaData.findProperty(
-      "itemvalue",
-      "value"
-    );
+    var valueProp = Survey.Serializer.findProperty("itemvalue", "value");
     return !!valueProp && valueProp.visible && !valueProp.readOnly;
   }
   private hasVisibleIfOrEnableIf(): boolean {

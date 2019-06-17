@@ -115,7 +115,7 @@ ko.components.register("title-editor", {
         params.model[params.name],
         componentInfo.element
       );
-      var property = Survey.JsonObject.metaData.findProperty(
+      var property = Survey.Serializer.findProperty(
         params.model.getType(),
         params.name
       );

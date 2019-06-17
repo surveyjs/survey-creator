@@ -22,7 +22,7 @@ QUnit.test("adorners getMarkerClass test", function(assert) {
 QUnit.test(
   "Serialize custom properties - https://surveyjs.answerdesk.io/ticket/details/T875",
   function(assert) {
-    Survey.JsonObject.metaData.addProperty("itemvalue", "guid");
+    Survey.Serializer.addProperty("itemvalue", "guid");
     var question = new Survey.QuestionCheckboxModel("q1");
     var addItemHandler = createAddItemHandler(
       question,
@@ -41,7 +41,7 @@ QUnit.test(
       originalJson,
       "Custom property has serialized correctly"
     );
-    Survey.JsonObject.metaData.removeProperty("itemvalue", "guid");
+    Survey.Serializer.removeProperty("itemvalue", "guid");
   }
 );
 

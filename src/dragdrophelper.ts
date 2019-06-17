@@ -298,7 +298,7 @@ export class DragDropHelper {
   private createTargetElement(elementName: string, json: any): any {
     if (!elementName || !json) return null;
     var targetElement = null;
-    targetElement = Survey.JsonObject.metaData.createClass(json["type"]);
+    targetElement = Survey.Serializer.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, targetElement);
     targetElement.name = elementName;
     if (targetElement["setSurveyImpl"]) {

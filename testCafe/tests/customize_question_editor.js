@@ -7,7 +7,7 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //Add a tag property to all questions
-  Survey.JsonObject.metaData.addProperty("question", "tag");
+  Survey.Serializer.addProperty("question", "tag");
   // Change the order of name and title properties, remove the startWithNewLine property and add a tag property
   SurveyEditor.SurveyQuestionEditorDefinition.definition[
     "question"
@@ -19,9 +19,9 @@ const init = ClientFunction(() => {
     { name: "isRequired", category: "checks" }
   ];
   // make visibleIf tab the second after general for all questions
-  SurveyEditor.SurveyQuestionEditorDefinition.definition[
-    "question"
-  ].tabs = [{ name: "visibleIf", index: 1 }];
+  SurveyEditor.SurveyQuestionEditorDefinition.definition["question"].tabs = [
+    { name: "visibleIf", index: 1 }
+  ];
 
   var editorOptions = {};
   var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);

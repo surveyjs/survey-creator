@@ -1426,7 +1426,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!object || !object.getType) {
       return true;
     }
-    var property = Survey.JsonObject.metaData.findProperty(
+    var property = Survey.Serializer.findProperty(
       object.getType(),
       propertyName
     );
@@ -2043,7 +2043,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     data.survey.dragDropHelper.doDrop(e);
   }
   private createNewElement(json: any): Survey.IElement {
-    var newElement = Survey.JsonObject.metaData.createClass(json["type"]);
+    var newElement = Survey.Serializer.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);
     this.setNewNames(newElement);
     return newElement;

@@ -58,7 +58,7 @@ ko.components.register("rating-item-editor", {
       );
       var question: Survey.QuestionRating = params.question;
 
-      var property = Survey.JsonObject.metaData.findProperty(
+      var property = Survey.Serializer.findProperty(
         params.target.getType(),
         params.name
       );

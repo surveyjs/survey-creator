@@ -59,7 +59,7 @@ ko.components.register("item-editor", {
         componentInfo.element,
         params.editor
       );
-      var property = Survey.JsonObject.metaData.findProperty(
+      var property = Survey.Serializer.findProperty(
         params.target.getType(),
         params.name
       );

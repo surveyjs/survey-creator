@@ -146,9 +146,7 @@ export class SurveyQuestionEditorProperties {
   ) {
     this.isTabProperty = !!tab;
     this.onCanShowPropertyCallback = onCanShowPropertyCallback;
-    this.properties = Survey.JsonObject.metaData["getPropertiesByObj"]
-      ? Survey.JsonObject.metaData["getPropertiesByObj"](this.obj)
-      : Survey.JsonObject.metaData.getProperties(this.obj.getType());
+    this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildRows(properties);
   }
   public apply() {

@@ -91,9 +91,7 @@ export class SurveyObjectEditor {
       this.koActiveProperty(null);
       return;
     }
-    var properties = Survey.JsonObject.metaData["getPropertiesByObj"]
-      ? Survey.JsonObject.metaData["getPropertiesByObj"](this.selectedObject)
-      : Survey.JsonObject.metaData.getProperties(this.selectedObject.getType());
+    var properties = Survey.Serializer.getPropertiesByObj(this.selectedObject);
     var objectProperties = [];
     var self = this;
     var propEvent = (property: SurveyObjectProperty, newValue: any) => {

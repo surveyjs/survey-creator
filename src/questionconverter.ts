@@ -36,10 +36,7 @@ export class QuestionConverter {
 }
 
 function createDefaultQuestionConverterItems() {
-  var classes = Survey.JsonObject.metaData.getChildrenClasses(
-    "selectbase",
-    true
-  );
+  var classes = Survey.Serializer.getChildrenClasses("selectbase", true);
   for (var i = 0; i < classes.length; i++) {
     for (var j = 0; j < classes.length; j++) {
       if (i == j) continue;

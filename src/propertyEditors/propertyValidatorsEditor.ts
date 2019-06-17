@@ -19,10 +19,7 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyOneSelectedEdi
     return new SurveyPropertyValidatorItem(obj);
   }
   protected getAvailableClasses(): Array<any> {
-    var classes = Survey.JsonObject.metaData.getChildrenClasses(
-      "surveyvalidator",
-      true
-    );
+    var classes = Survey.Serializer.getChildrenClasses("surveyvalidator", true);
     var res = [];
     for (var i = 0; i < classes.length; i++) {
       var name = classes[i].name;

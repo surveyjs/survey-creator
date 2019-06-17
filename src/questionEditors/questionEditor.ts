@@ -79,9 +79,7 @@ export class SurveyQuestionProperties {
       property: Survey.JsonObjectProperty
     ) => boolean
   ) {
-    this.properties = Survey.JsonObject.metaData["getPropertiesByObj"]
-      ? Survey.JsonObject.metaData["getPropertiesByObj"](this.obj)
-      : Survey.JsonObject.metaData.getProperties(this.obj.getType());
+    this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.editorDefinition = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       this.obj.getType()
     );

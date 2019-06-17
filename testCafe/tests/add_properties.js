@@ -7,7 +7,7 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //add a property to the survey object
-  Survey.JsonObject.metaData.addProperty("survey", {
+  Survey.Serializer.addProperty("survey", {
     name: "customProperty:number",
     default: 123456
   });

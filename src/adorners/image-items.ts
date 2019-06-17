@@ -71,7 +71,7 @@ ko.components.register("image-item-editor", {
         params.editor,
         params.itemsRoot
       );
-      var property = Survey.JsonObject.metaData.findProperty(
+      var property = Survey.Serializer.findProperty(
         "imageitemvalue", //params.target.getType(),
         params.name
       );
@@ -214,7 +214,7 @@ export var addImageItemAdorner = {
           model.choices
         );
 
-        var property = Survey.JsonObject.metaData.findProperty(
+        var property = Survey.Serializer.findProperty(
           "imageitemvalue",
           "imageLink"
         );

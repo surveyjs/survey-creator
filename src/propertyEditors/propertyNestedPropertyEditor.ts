@@ -91,7 +91,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     for (var i = 0; i < names.length; i++) {
       var name = names[i];
       name.name ? name.name : name;
-      var prop = Survey.JsonObject.metaData.findProperty(className, name);
+      var prop = Survey.Serializer.findProperty(className, name);
       if (prop && prop.visible) {
         res.push(prop);
       }

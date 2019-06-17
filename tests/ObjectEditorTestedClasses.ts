@@ -50,7 +50,7 @@ export class TruckDefaultValue extends Truck {
   }
 }
 
-Survey.JsonObject.metaData.addClass(
+Survey.Serializer.addClass(
   "fast",
   [],
   function() {
@@ -58,8 +58,8 @@ Survey.JsonObject.metaData.addClass(
   },
   "car"
 );
-Survey.JsonObject.metaData.addClass("big", [], null, "car");
-Survey.JsonObject.metaData.addClass("car", [
+Survey.Serializer.addClass("big", [], null, "car");
+Survey.Serializer.addClass("car", [
   "name",
   {
     name: "title:text",
@@ -68,7 +68,7 @@ Survey.JsonObject.metaData.addClass("car", [
     }
   }
 ]);
-Survey.JsonObject.metaData.addClass(
+Survey.Serializer.addClass(
   "truck",
   ["maxWeight:number"],
   function() {
@@ -76,7 +76,7 @@ Survey.JsonObject.metaData.addClass(
   },
   "big"
 );
-Survey.JsonObject.metaData.addClass(
+Survey.Serializer.addClass(
   "sport",
   ["!maxSpeed:number"],
   function() {
@@ -84,7 +84,7 @@ Survey.JsonObject.metaData.addClass(
   },
   "fast"
 );
-Survey.JsonObject.metaData.addClass(
+Survey.Serializer.addClass(
   "truckDefault",
   [
     "isNew:boolean",

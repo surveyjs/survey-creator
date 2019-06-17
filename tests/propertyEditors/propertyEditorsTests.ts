@@ -44,7 +44,7 @@ export default QUnit.module("PropertyEditorsTests");
 
 class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEditor {
   constructor() {
-    super(Survey.JsonObject.metaData.findProperty("selectbase", "choices"));
+    super(Survey.Serializer.findProperty("selectbase", "choices"));
   }
 }
 
@@ -167,10 +167,7 @@ QUnit.test("Create correct property editor", function(assert) {
   }
 });
 QUnit.test("propertyEditor.displayName", function(assert) {
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "enableIf"
-  );
+  var property = Survey.Serializer.findProperty("question", "enableIf");
   defaultStrings.p["enableIf"] = "It is enableIf";
   var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
   assert.equal(
@@ -240,7 +237,7 @@ QUnit.test("Custom property editor - validation", function(assert) {
 
 QUnit.test("PropertyEditor and hasError - required", function(assert) {
   var question = new Survey.QuestionText("q1");
-  var property = Survey.JsonObject.metaData.findProperty("question", "name");
+  var property = Survey.Serializer.findProperty("question", "name");
   var propertyEditor = new SurveyObjectProperty(property);
   propertyEditor.object = question;
   var editor = propertyEditor.editor;
@@ -422,28 +419,16 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837",
   function(assert) {
-    Survey.JsonObject.metaData.findProperty(
-      "ItemValue",
-      "value"
-    ).readOnly = true;
+    Survey.Serializer.findProperty("ItemValue", "value").readOnly = true;
     var editor = new SurveyPropertyItemValuesEditorForTests();
     editor.beforeShow();
     assert.equal(editor.koShowTextView(), false, "item.value is read only");
-    Survey.JsonObject.metaData.findProperty(
-      "ItemValue",
-      "value"
-    ).readOnly = false;
-    Survey.JsonObject.metaData.findProperty(
-      "ItemValue",
-      "value"
-    ).visible = false;
+    Survey.Serializer.findProperty("ItemValue", "value").readOnly = false;
+    Survey.Serializer.findProperty("ItemValue", "value").visible = false;
     editor = new SurveyPropertyItemValuesEditorForTests();
     editor.beforeShow();
     assert.equal(editor.koShowTextView(), false, "item.value is invisible");
-    Survey.JsonObject.metaData.findProperty(
-      "ItemValue",
-      "value"
-    ).visible = true;
+    Survey.Serializer.findProperty("ItemValue", "value").visible = true;
     editor = new SurveyPropertyItemValuesEditorForTests();
     editor.beforeShow();
     assert.equal(
@@ -583,7 +568,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
   );
 });
 QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
-  Survey.JsonObject.metaData.addProperty("itemvalue", { name: "imageLink" });
+  Survey.Serializer.addProperty("itemvalue", { name: "imageLink" });
 
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   assert.equal(
@@ -597,12 +582,12 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
     "Allow to show text view with custom properties"
   );
 
-  Survey.JsonObject.metaData.removeProperty("itemvalue", "imageLink");
+  Survey.Serializer.removeProperty("itemvalue", "imageLink");
 });
 QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   assert
 ) {
-  Survey.JsonObject.metaData.addProperty("itemvalue", "description");
+  Survey.Serializer.addProperty("itemvalue", "description");
   SurveyQuestionEditorDefinition.definition["checkbox@choices"] = {
     properties: ["value", "text"]
   };
@@ -611,7 +596,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   var qCheck = new Survey.QuestionCheckbox("q2");
 
   var propertyEditor = new SurveyPropertyItemValuesEditor(
-    Survey.JsonObject.metaData.findProperty("radiogroup", "choices")
+    Survey.Serializer.findProperty("radiogroup", "choices")
   );
   propertyEditor.object = qRadio;
   propertyEditor.editingValue = qRadio.choices;
@@ -627,7 +612,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
     "The last column name is"
   );
   propertyEditor = new SurveyPropertyItemValuesEditor(
-    Survey.JsonObject.metaData.findProperty("checkbox", "choices")
+    Survey.Serializer.findProperty("checkbox", "choices")
   );
   propertyEditor.object = qCheck;
   propertyEditor.editingValue = qCheck.choices;
@@ -639,12 +624,12 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   );
 
   delete SurveyQuestionEditorDefinition.definition["radiogroup@choices"];
-  Survey.JsonObject.metaData.removeProperty("itemvalue", "description");
+  Survey.Serializer.removeProperty("itemvalue", "description");
 });
 QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   assert
 ) {
-  Survey.JsonObject.metaData.addClass(
+  Survey.Serializer.addClass(
     "itemvalues_ex",
     ["imageLink"],
     function() {
@@ -671,12 +656,12 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
     true,
     "Allow to show text view with custom properties"
   );
-  Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
+  Survey.Serializer.removeProperty("itemvalue_ex", "imageLink");
 });
 QUnit.test(
   "extended SurveyPropertyItemValue + custom property - process items with custom properties",
   function(assert) {
-    Survey.JsonObject.metaData.addClass(
+    Survey.Serializer.addClass(
       "itemvalues_ex",
       ["imageLink"],
       null,
@@ -727,7 +712,7 @@ QUnit.test(
       "Row 1 Col 3"
     );
 
-    Survey.JsonObject.metaData.removeProperty("itemvalue_ex", "imageLink");
+    Survey.Serializer.removeProperty("itemvalue_ex", "imageLink");
   }
 );
 QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
@@ -739,10 +724,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   q.choices[0].text = "English 1";
 
   survey.locale = "de";
-  var property = Survey.JsonObject.metaData.findProperty(
-    "selectbase",
-    "choices"
-  );
+  var property = Survey.Serializer.findProperty("selectbase", "choices");
   var propEditor = <SurveyPropertyItemValuesEditor>(
     SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
       q.choices = newValue;
@@ -781,7 +763,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
   q.columns[0].title = "English 1";
 
   survey.locale = "de";
-  var property = Survey.JsonObject.metaData.findProperty(
+  var property = Survey.Serializer.findProperty(
     "matrixdropdownbase",
     "columns"
   );
@@ -818,7 +800,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
   //TODO remove later - create property if it doesn't exist
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
 
-  var property = Survey.JsonObject.metaData.findProperty("itemvalue", "value");
+  var property = Survey.Serializer.findProperty("itemvalue", "value");
   var column = new SurveyNestedPropertyEditorColumn(property);
   var itemValue = new Survey.ItemValue(1);
   var cell = new SurveyNestedPropertyEditorEditorCell(
@@ -879,7 +861,7 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
 });
 
 QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
-  Survey.JsonObject.metaData.addProperty("question", {
+  Survey.Serializer.addProperty("question", {
     name: "multiple:multiplevalues",
     choices: [
       { value: 1, text: "Item 1" },
@@ -887,17 +869,14 @@ QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
       { value: 3, text: "Item 3" }
     ]
   });
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "multiple"
-  );
+  var property = Survey.Serializer.findProperty("question", "multiple");
   var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
   assert.equal(
     propertyEditor.getValueText([1, 3]),
     "[Item 1, Item 3]",
     "Use text for displaying the value"
   );
-  Survey.JsonObject.metaData.removeProperty("question", "multiple");
+  Survey.Serializer.removeProperty("question", "multiple");
 });
 
 QUnit.test("SurveyPropertyMatrixDropdownColumns set properties", function(
@@ -985,7 +964,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   question.addColumn("column 2");
   survey.pages[0].addElement(question);
   var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
-    Survey.JsonObject.metaData.findProperty(question.getType(), "columns")
+    Survey.Serializer.findProperty(question.getType(), "columns")
   );
   columnsEditor.object = question;
   columnsEditor.beforeShow();
@@ -1316,10 +1295,7 @@ QUnit.test(
     var question = new Survey.QuestionMultipleText("q1");
     question.addItem("text1");
     question.addItem("text2");
-    var property = Survey.JsonObject.metaData.findProperty(
-      "multipletext",
-      "items"
-    );
+    var property = Survey.Serializer.findProperty("multipletext", "items");
     var editor = new SurveyPropertyTextItemsEditor(property);
     editor.object = question;
     editor.beforeShow();
@@ -1331,10 +1307,7 @@ QUnit.test(
 
 QUnit.test("be able to modify empty items, bug#428", function(assert) {
   var question = new Survey.QuestionMultipleText("q1");
-  var property = Survey.JsonObject.metaData.findProperty(
-    "multipletext",
-    "items"
-  );
+  var property = Survey.Serializer.findProperty("multipletext", "items");
   var editor = new SurveyPropertyTextItemsEditor(property);
   editor.onChanged = (newValue: any) => {
     question.items = newValue;
@@ -1348,7 +1321,7 @@ QUnit.test("be able to modify empty items, bug#428", function(assert) {
 
 QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
   var question = new Survey.QuestionText("q1");
-  var property = Survey.JsonObject.metaData.findProperty("question", "title");
+  var property = Survey.Serializer.findProperty("question", "title");
   var stringProperty = new SurveyStringPropertyEditor(property);
   stringProperty.beforeShow();
   stringProperty.onChanged = (newValue: any) => {

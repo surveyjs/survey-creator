@@ -427,7 +427,7 @@ export class QuestionToolbox {
       var name = questions[i];
       var question = Survey.ElementFactory.Instance.createElement(name, "q1");
       if (!question) {
-        question = Survey.JsonObject.metaData.createClass(name);
+        question = Survey.Serializer.createClass(name);
       }
       var json = this.getQuestionJSON(question);
       var item = {

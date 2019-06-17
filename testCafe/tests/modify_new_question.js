@@ -7,16 +7,10 @@ const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //Add a tag property
-  Survey.JsonObject.metaData.addProperty("question", "tag");
+  Survey.Serializer.addProperty("question", "tag");
   //Make name and tag properties read-only
-  Survey.JsonObject.metaData.findProperty(
-    "question",
-    "name"
-  ).readOnly = true;
-  Survey.JsonObject.metaData.findProperty(
-    "question",
-    "tag"
-  ).readOnly = true;
+  Survey.Serializer.findProperty("question", "name").readOnly = true;
+  Survey.Serializer.findProperty("question", "tag").readOnly = true;
   SurveyEditor.defaultStrings.p.tag = { name: "tag", title: "MyTag" };
   var editorOptions = {};
   var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);

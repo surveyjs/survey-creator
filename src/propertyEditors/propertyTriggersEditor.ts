@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
@@ -26,14 +29,14 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     var self = this;
-    this.onDeleteClick = function () {
+    this.onDeleteClick = function() {
       self.koItems.remove(self.koSelected());
     };
-    this.onAddClick = function (item) {
+    this.onAddClick = function(item) {
       self.addItem(item.value);
     };
     this.koSelected = ko.observable(null);
-    this.koSelected.subscribe(function (newValue) {
+    this.koSelected.subscribe(function(newValue) {
       if (!!newValue) {
         newValue.beforeShow();
       }
@@ -42,7 +45,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     this.koQuestions = ko.observableArray();
     this.koQuestionNames = ko.observableArray();
     this.koElements = ko.observableArray();
-    this.triggerClasses = Survey.JsonObject.metaData.getChildrenClasses(
+    this.triggerClasses = Survey.Serializer.getChildrenClasses(
       "surveytrigger",
       true
     );
@@ -83,14 +86,14 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     }
   }
   private addItem(triggerType: string) {
-    var trigger = Survey.JsonObject.metaData.createClass(triggerType);
+    var trigger = Survey.Serializer.createClass(triggerType);
     var triggerItem = this.createPropertyTrigger(trigger);
     this.koItems.push(triggerItem);
     this.koSelected(triggerItem);
   }
   protected createEditorItem(item: any) {
     var jsonObj = new Survey.JsonObject();
-    var trigger = Survey.JsonObject.metaData.createClass(item.getType());
+    var trigger = Survey.Serializer.createClass(item.getType());
     jsonObj.toObject(item, trigger);
     return this.createPropertyTrigger(<Survey.SurveyTrigger>trigger);
   }
@@ -226,7 +229,7 @@ export class SurveyPropertyTrigger {
     this.koName = ko.observable(trigger.name);
     this.koOperator = ko.observable(trigger.operator);
     this.koValue = ko.observable(trigger.value);
-    var expressionProperty = Survey.JsonObject.metaData.findProperty(
+    var expressionProperty = Survey.Serializer.findProperty(
       "trigger",
       "expression"
     );
@@ -268,7 +271,7 @@ export class SurveyPropertyTrigger {
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = <Survey.SurveyTrigger>(
-      Survey.JsonObject.metaData.createClass(this.triggerType)
+      Survey.Serializer.createClass(this.triggerType)
     );
     if (!!this.conditionEditor) {
       trigger["expression"] = this.conditionEditor.koTextValue();
@@ -357,7 +360,8 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   ) {
     super(trigger, options);
     if (!SurveyPropertySetValueTrigger.emptySurvey) {
-      SurveyPropertySetValueTrigger.emptySurvey = !!options && options.createSurvey({}, "triggersEditor");
+      SurveyPropertySetValueTrigger.emptySurvey =
+        !!options && options.createSurvey({}, "triggersEditor");
     }
     this.koQuestions = koQuestions;
     this.koSurvey = ko.observable(SurveyPropertySetValueTrigger.emptySurvey);
@@ -366,13 +370,13 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     this.kosetValue = ko.observable(trigger.setValue);
     this.koisVariable = ko.observable(trigger.isVariable);
     var self = this;
-    this.kosetToName.subscribe(function (newValue) {
+    this.kosetToName.subscribe(function(newValue) {
       if (!self.koisVariable()) {
         self.kosetValue(null);
       }
       self.buildSurvey();
     });
-    this.koisVariable.subscribe(function (newValue) {
+    this.koisVariable.subscribe(function(newValue) {
       self.kosetToName("");
       self.kosetValue(null);
       self.buildSurvey();
@@ -406,11 +410,12 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     qJson.titleLocation = "top";
     qJson.title = editorLocalization.getString("pe.triggerSetValue");
     this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
-      qJson, this.options
+      qJson,
+      this.options
     );
     this.survey.setValue("question", this.kosetValue());
     var self = this;
-    this.survey.onValueChanged.add(function (sender, options) {
+    this.survey.onValueChanged.add(function(sender, options) {
       self.kosetValue(options.value);
     });
     this.koSurvey(this.survey);
@@ -499,7 +504,7 @@ export class SurveyPropertyTriggerObjects {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("triggers", function (
+SurveyPropertyEditorFactory.registerEditor("triggers", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyTriggersEditor(property);

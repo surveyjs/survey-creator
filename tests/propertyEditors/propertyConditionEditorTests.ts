@@ -131,10 +131,7 @@ QUnit.test("Autocomplete with panel test", function(assert) {
 QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
   var question = new Survey.QuestionText("q1");
   question.visibleIf = "ddd";
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "visibleIf"
-  );
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
   var editor = new SurveyPropertyConditionEditor(property);
   assert.equal(editor.koIsValid(), true, "The empty value is valid");
   editor.object = question;
@@ -151,10 +148,7 @@ QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
 QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   var question = new Survey.QuestionText("q1");
   question.visibleIf = "{q} = 1";
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "visibleIf"
-  );
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
   var editor = new SurveyPropertyConditionEditor(property);
   assert.equal(editor.koCanAddCondition(), false, "We can't add condition");
   editor.koAddConditionQuestion("q2");
@@ -187,10 +181,7 @@ QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
   function(assert) {
     var question = new Survey.QuestionText("q1");
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var editor = new SurveyPropertyConditionEditor(property);
     editor.koAddConditionQuestion("q2");
     editor.koAddConditionValue("d'2");
@@ -229,10 +220,7 @@ QUnit.test(
     survey.setDesignMode(true);
     var panel = <Survey.QuestionPanelDynamic>survey.getQuestionByName("dp");
     var question = panel.template.getQuestionByName("q1");
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.koAddConditionQuestion("panel.q2");
@@ -249,10 +237,7 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #353",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");
@@ -293,10 +278,7 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #367",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = <Survey.QuestionDropdown>page.addNewQuestion("text", "q1");
@@ -351,10 +333,7 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");
@@ -377,10 +356,7 @@ QUnit.test(
 QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   assert
 ) {
-  var property = Survey.JsonObject.metaData.findProperty(
-    "question",
-    "visibleIf"
-  );
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
   var survey = new Survey.Survey();
   var page = survey.addNewPage("p");
   var question = page.addNewQuestion("text", "q1");
@@ -403,7 +379,7 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
 QUnit.test(
   "SurveyPropertyConditionEditor.allCondtionQuestions for matrix column",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
+    var property = Survey.Serializer.findProperty(
       "matrixdropdowncolumn",
       "visibleIf"
     );
@@ -436,10 +412,7 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyConditionEditor.allCondtionQuestions for panel dynamic",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = <Survey.QuestionPanelDynamic>(
@@ -470,10 +443,7 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyConditionEditor show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921",
   function(assert) {
-    var property = Survey.JsonObject.metaData.findProperty(
-      "question",
-      "visibleIf"
-    );
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");

@@ -63,14 +63,14 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   protected createEditorItem(item: any) {
     var jsonObj = new Survey.JsonObject();
-    var newItem = Survey.JsonObject.metaData.createClass(item.getType());
+    var newItem = Survey.Serializer.createClass(item.getType());
     jsonObj.toObject(item, newItem);
     this.setItemProperties(newItem);
     return this.createOneSelectedItem(newItem);
   }
   protected createNewEditorItem(): any {
     return this.createEditorItem(
-      Survey.JsonObject.metaData.createClass(this.getObjClassName())
+      Survey.Serializer.createClass(this.getObjClassName())
     );
   }
   protected createItemFromEditorItem(editorItem: any) {

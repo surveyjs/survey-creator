@@ -440,12 +440,12 @@ QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function(
 });
 
 QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
-  var visibleIfProperty = Survey.JsonObject.metaData.findProperty(
+  var visibleIfProperty = Survey.Serializer.findProperty(
     "itemvalue",
     "visibleIf"
   );
   if (!visibleIfProperty) {
-    Survey.JsonObject.metaData.addProperty("itemvalue", {
+    Survey.Serializer.addProperty("itemvalue", {
       name: "visibleIf:condition",
       visible: false
     });
@@ -481,16 +481,8 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
     false,
     "visibleIf will be lost in text editing"
   );
-  /* TODO add it later
-  itemValuesEditor.apply();
-  assert.equal(
-    qChoices.choices[0]["visibleIf"],
-    "{cars} contains {item}",
-    "visibleIf has been saved"
-  );
-  */
   if (!visibleIfProperty) {
-    Survey.JsonObject.metaData.removeProperty("itemvalue", "visibleIf");
+    Survey.Serializer.removeProperty("itemvalue", "visibleIf");
   }
 });
 

@@ -461,17 +461,17 @@ There is a difference between removing and hiding. If you remove the property, t
 Here is the example of removing the description and choicesUrl properties
 ```javascript
 //remove a property from the question class and as result from all questions
-Survey.JsonObject.metaData.removeProperty("question", "description");
+Survey.Serializer.removeProperty("question", "description");
 //remove choicesByUrl from checkbox, dropdown and radiogroup questions
-Survey.JsonObject.metaData.removeProperty("selectbase", "choicesUrl");
+Survey.Serializer.removeProperty("selectbase", "choicesUrl");
 ```
 
 You may make these properties invisible in Survey Creator and still be able to load/save them in JSON by setting their visible property to false
 ```javascript
 //make a property, from the question class and as result from all questions, invisible
-Survey.JsonObject.metaData.findProperty("question", "description").visible = false;
+Survey.Serializer.findProperty("question", "description").visible = false;
 //make choicesByUrl property from checkbox, dropdown and radiogroup questions invisible
-Survey.JsonObject.metaData.findProperty("selectbase", "choicesUrl").visible = false;
+Survey.Serializer.findProperty("selectbase", "choicesUrl").visible = false;
 ```
 This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onCanShowProperty** event.
 ```javascript
@@ -500,17 +500,17 @@ Let’s review several examples
 ```javascript
 //add a property to the base question class and as result to all questions
 //It has name: "tag", type "number" and the default value is 0
-Survey.JsonObject.metaData.addProperty("question", { name: "tag:number", default: 0 });
-//Survey.JsonObject.metaData.addProperty("question", { name: "tag", type: "number" default: 0 });
+Survey.Serializer.addProperty("question", { name: "tag:number", default: 0 });
+//Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0 });
 //you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
 //It means that html property editor is used to set its value in the Survey Creator
-Survey.JsonObject.metaData.addProperty("survey", "description:html");
+Survey.Serializer.addProperty("survey", "description:html");
 //Add a colour string property into page.
 //The user will be able to select only predefined values from the dropdown
 //The default property type is "string", we may not set it.
 //The default value is not set and it is undefined by default.
-Survey.JsonObject.metaData.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
+Survey.Serializer.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
 ```
 
 Here is the available attributes and callback functions in the property definition
@@ -564,7 +564,7 @@ An optional Boolean property. By default, it is false. Set it to true, if you wa
 
 The following code makes the choices and matrix rows/columns value property read-only.
 ```javascript
-Survey.JsonObject.metaData.findProperty('itemvalue', "value").readOnly = true;
+Survey.Serializer.findProperty('itemvalue', "value").readOnly = true;
 ```
 ---
 **onGetValue**

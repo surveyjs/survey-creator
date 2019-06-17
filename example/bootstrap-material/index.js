@@ -32,7 +32,7 @@ if (!window["%hammerhead%"]) {
   // Here is some API request to get kpiList data from backend
 
   // Add KPI property to questions
-  Survey.JsonObject.metaData.addProperty("question", {
+  Survey.Serializer.addProperty("question", {
     name: "kpis:multiplevalues",
     choices: kpiList
   });

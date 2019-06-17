@@ -115,7 +115,7 @@ const init = ClientFunction(() => {
   window.createDefaultItem = function(typeName) {
     var question = Survey.ElementFactory.Instance.createElement(typeName, "q1");
     if (!question) {
-      question = Survey.JsonObject.metaData.createClass(typeName);
+      question = Survey.Serializer.createClass(typeName);
     }
     var json = new Survey.JsonObject().toJsonObject(question);
     json.type = question.getType();
