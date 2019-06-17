@@ -44,7 +44,7 @@ export class EditableObject {
   }
   protected getObjJson(): any {
     var jsonObj = new Survey.JsonObject();
-    jsonObj["lightSerializing"] = true; //TODO
+    jsonObj.lightSerializing = true;
     return jsonObj.toJsonObject(this.obj);
   }
 }

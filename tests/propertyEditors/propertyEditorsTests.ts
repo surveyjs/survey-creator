@@ -797,9 +797,6 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
 });
 
 QUnit.test("SurveyNestedPropertyEditorEditorCell", function(assert) {
-  //TODO remove later - create property if it doesn't exist
-  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
-
   var property = Survey.Serializer.findProperty("itemvalue", "value");
   var column = new SurveyNestedPropertyEditorColumn(property);
   var itemValue = new Survey.ItemValue(1);

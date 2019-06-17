@@ -121,11 +121,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var values = this.koItems().map(function(item) {
       return item.item.itemValue;
     });
-    //TODO use getBaseValue from v1.0.82
-    var itemText = "";
-    if (!!this.property && !!this.property["getBaseValue"]) {
-      itemText = this.property["getBaseValue"]();
-    }
+    var itemText = this.property.getBaseValue();
     if (!itemText) {
       itemText = Survey.surveyLocalization.getString("choices_Item");
     }
@@ -251,13 +247,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private hasMultipleLanguage(): boolean {
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      //TODO replace with locText.hasNonDefaultText()
-      var json = items[i].item.locText.getJson();
-      if (!!json && typeof json !== "string") {
-        var keys = Object.keys(json);
-        if (keys.length > 1) return true;
-        return keys[0] != "default";
-      }
+      if (items[i].item.locText.hasNonDefaultText()) return true;
     }
     return false;
   }
