@@ -19,6 +19,10 @@ ko.components.register("select-items-editor", {
         "svda-select-items-collection"
       )[0];
       var sortable = null;
+      var property = Survey.JsonObject.metaData.findProperty(
+        params.question.getType(),
+        "choices"
+      );
       return {
         choices: choices,
         valueName: params.valueName,
@@ -26,10 +30,18 @@ ko.components.register("select-items-editor", {
         editor: params.editor,
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
-        addOther: () => params.question.hasOther = !params.question.hasOther,
+        addOther: () => (params.question.hasOther = !params.question.hasOther),
         addItem: createAddItemHandler(
           params.question,
           itemValue => {
+            var options = {
+              propertyName: "choices",
+              obj: params.question,
+              value: params.question.choices,
+              newValue: null,
+              doValidation: false
+            };
+            params.editor.onValueChangingCallback(options);
             choices(params.question.choices);
           },
           itemValue => {
@@ -37,6 +49,11 @@ ko.components.register("select-items-editor", {
               params.question,
               "choices",
               itemValue,
+              params.question.choices
+            );
+            params.editor.onPropertyValueChanged(
+              property,
+              params.question,
               params.question.choices
             );
           }
