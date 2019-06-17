@@ -19,7 +19,7 @@ ko.components.register("select-items-editor", {
         "svda-select-items-collection"
       )[0];
       var sortable = null;
-      var property = Survey.JsonObject.metaData.findProperty(
+      var property = Survey.Serializer.findProperty(
         params.question.getType(),
         "choices"
       );
