@@ -92,12 +92,14 @@ export class QuestionToolbox {
    */
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
+  private keepAllCategoriesExpandedValue: boolean = false;
   private itemsValue: Array<IQuestionToolboxItem> = [];
 
   koItems = ko.observableArray();
   koCategories = ko.observableArray();
   koActiveCategory = ko.observable("");
   koHasCategories = ko.observable(false);
+  koCanCollapseCategories = ko.observable(true);
 
   constructor(private supportedQuestions: Array<string> = null) {
     this.createDefaultItems(supportedQuestions);
@@ -255,8 +257,27 @@ export class QuestionToolbox {
   }
   public set allowExpandMultipleCategories(val: boolean) {
     this.allowExpandMultipleCategoriesValue = val;
-    if (val) {
+    this.updateCategoriesState();
+  }
+  /**
+   * Set it to true to expand all categories and hide expand/collapse category buttons
+   */
+  public get keepAllCategoriesExpanded(): boolean {
+    return this.keepAllCategoriesExpandedValue;
+  }
+  public set keepAllCategoriesExpanded(val: boolean) {
+    this.keepAllCategoriesExpandedValue = val;
+    this.koCanCollapseCategories(!this.keepAllCategoriesExpanded);
+    this.updateCategoriesState();
+  }
+  private updateCategoriesState() {
+    var noActive =
+      this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
+    if (noActive) {
       this.activeCategory = "";
+      if (this.keepAllCategoriesExpanded) {
+        this.expandAllCategories();
+      }
     } else {
       if (this.koCategories().length > 0) {
         this.activeCategory = (<any>this.koCategories()[0]).name;
@@ -299,6 +320,7 @@ export class QuestionToolbox {
     this.koActiveCategory(val);
   }
   private doCategoryClick(categoryName: string) {
+    if (this.keepAllCategoriesExpanded) return;
     if (this.allowExpandMultipleCategories) {
       var category = this.getCategoryByName(categoryName);
       if (category) {

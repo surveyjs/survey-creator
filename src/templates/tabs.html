@@ -20,6 +20,7 @@
             <span
               data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"
             ></span>
+            <!--ko if: $parent.koCanCollapseCategories -->
             <!-- ko if: koCollapsed -->
             <svg-icon
               class="icon-toolbox-arrow"
@@ -31,6 +32,7 @@
               class="icon-toolbox-arrow svd-primary-icon"
               params="iconName: 'icon-arrow_up_10x10', size: 10"
             ></svg-icon>
+            <!-- /ko -->
             <!-- /ko -->
           </div>
           <div
