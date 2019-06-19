@@ -440,9 +440,20 @@ questionPrototype["onSelectedElementChanged"] = function() {
 
 Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function() {
   var q: any = this.question;
-  var updateTriggerFunction = function () {
+  var updateTriggerFunction = function() {
     setTimeout(() => q["koElementType"].notifySubscribers(), 0);
   };
-  ["choices", "hasOther", "hasComment", "hasNone", "hasSelectAll"]
-    .forEach(propertyName => this.question.registerFunctionOnPropertyValueChanged(propertyName, updateTriggerFunction));
+  [
+    "choices",
+    "hasOther",
+    "hasComment",
+    "hasNone",
+    "hasSelectAll",
+    "colCount"
+  ].forEach(propertyName =>
+    this.question.registerFunctionOnPropertyValueChanged(
+      propertyName,
+      updateTriggerFunction
+    )
+  );
 };
