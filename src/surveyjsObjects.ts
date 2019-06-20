@@ -234,6 +234,14 @@ function elementOnAfterRendering(
     }
   };
   domElement.onkeyup = function(e) {
+    var activeElement = !!document && document.activeElement;
+    if (
+      !!activeElement &&
+      !!activeElement["dataset"] &&
+      activeElement["dataset"].svdInfo === "adorner"
+    ) {
+      return;
+    }
     var char = e.which || e.keyCode;
     if (char === 0x13 || char === 0x20) {
       domElement.click();
