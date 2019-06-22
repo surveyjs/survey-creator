@@ -542,6 +542,37 @@ It is an optional attribute. It makes sense for string and numeric property type
 //returns the supported languages in the surveyjs library.
 { name: "locale", choices: function() { return Survey.surveyLocalization.getLocales(); } }
 ```
+From v1.0.94, you can get the choices from the web. Here is the example of adding the "country" getting its values from web service.
+```javascript
+//It uses rest full service and choicesCallback function to tell property editor that choices are loaded from the web
+Survey.Serializer.addProperty("survey", { name: "country", choices: function(obj, choicesCallback) {
+    //We are going to use choicesCallback here
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://restcountries.eu/rest/v2/all");
+    xhr.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded"
+    );
+    //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
+    xhr.onload = function() {
+    if (xhr.status === 200) {
+        var serverRes = JSON.parse(xhr.response);
+        var res = [];
+        //We will use ItemValue array here, since we want to have value different from display text
+        //If your value equals to display text, then you may simply return the array of strings.
+        res.push({ value: null });
+        for (var i = 0; i < serverRes.length; i++) {
+        var item = serverRes[i];
+        res.push({ value: item.alpha2Code, text: item.name });
+        }
+        //return the result into Survey Creator property editor
+        choicesCallback(res);
+    }
+    };
+  xhr.send();
+}
+});
+```
 ---
 **isRequired**
 
@@ -558,6 +589,25 @@ An optional Boolean property. If you do not want to serialize this property into
 An optional Boolean property. By default, it is true. Set it to false, if you want to hide this property from the Survey Creator
 
 ---
+**visibleIf**
+
+Available since v1.0.94. It is a function that has an obj parameter, the editing object. It should return the boolean value: true to show the property and false to hide the property. If the property depends on another property value, then use **dependsOn**. On changing any property from the **dependsOn** array, the visibleIf function will be called to check, if it returns other value then before. Here is the example:
+```javascript
+//This property depends on date format property of text question
+//It is visible if inputFormat property equals to "date*" values
+Survey.Serializer.addProperty("text", {
+  name: "dateFormat",
+  dependsOn: ["inputType"],
+  visibleIf: function(obj) {
+    return (
+      obj.inputType == "date" ||
+      obj.inputType == "datetime" ||
+      obj.inputType == "datetime-local"
+    );
+  }
+});
+```
+---
 **readOnly**
 
 An optional Boolean property. By default, it is false. Set it to true, if you want to make this property disabled in the Survey Creator inputs. 
@@ -566,6 +616,83 @@ The following code makes the choices and matrix rows/columns value property read
 ```javascript
 Survey.Serializer.findProperty('itemvalue', "value").readOnly = true;
 ```
+
+---
+**dependsOn**
+
+Available since v1.0.94. An optional array of strings. It contains properties names. You may use it together with visibleIf and choices attributes, where choices is a function and not a static array. If any property from this list is changed, then property editor calls visibleIf and choices functions to check if they return other values.
+
+The following code creates two new properties. The choices of the second property fully depends on property value of the first property.
+```javascript
+Survey.Serializer.addProperty("question", {
+  name: "targetEntity",
+  choices: ["", "Account", "Developement"]
+});
+//This property depends from targetEntity property.
+//If targetEntity property is empty then choices for targetField are empty as well.
+Survey.Serializer.addProperty("question", {
+  name: "targetField",
+  dependsOn: "targetEntity",
+  choices: function(obj) {
+    var choices = [];
+    var entity = !!obj ? obj.targetEntity : null;
+    //If targetEntity is empty then return the empty array
+    if (!entity) return choices;
+    //The correct way to set the nullable value
+    choices.push({ value: null });
+    choices.push(entity + " 1");
+    choices.push(entity + " 2");
+    choices.push(entity + " 3");
+    return choices;
+  }
+});
+```
+This example is more complicated, since the second property retrieves its choices from a web service. And again, the second property choices depends on property value of the first proeprty.
+```javascript
+Survey.Serializer.addProperty("survey", {
+  name: "region",
+  choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+});
+//This property country depends on the selected region.
+//It allows to select all countries if region is empty or if it is not empty, only countries from this region
+//It uses rest full service and choicesCallback function to tell property editor that loading choices from the web service is completed
+Survey.Serializer.addProperty("survey", {
+  name: "country",
+  dependsOn: "region",
+  choices: function(obj, choicesCallback) {
+    //We are going to use choicesCallback here
+    var xhr = new XMLHttpRequest();
+    //if region is empty then get all countries, otherwise get coutries by region.
+    var url =
+      !!obj && !!obj.region
+        ? "https://restcountries.eu/rest/v2/region/" + obj.region
+        : "https://restcountries.eu/rest/v2/all";
+    xhr.open("GET", url);
+    xhr.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var serverRes = JSON.parse(xhr.response);
+        var res = [];
+        //We will use ItemValue array here, since we want to have value different from display text
+        res.push({ value: null });
+        for (var i = 0; i < serverRes.length; i++) {
+          var item = serverRes[i];
+          res.push({ value: item.alpha2Code, text: item.name });
+        }
+        //return the result into Survey Creator property editor
+        choicesCallback(res);
+      }
+    };
+    xhr.send();
+  }
+});
+```
+
+
 ---
 **onGetValue**
 
