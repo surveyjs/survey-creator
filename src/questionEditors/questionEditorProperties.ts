@@ -162,6 +162,13 @@ export class SurveyQuestionEditorProperties {
   }
   public beforeShow() {
     this.performForAllProperties(p => p.beforeShow());
+    if (
+      this.getAllProperties().length === 1 &&
+      this.isTabProperty &&
+      this.tab.visible !== undefined
+    ) {
+      this.getAllProperties()[0].objectProperty.koVisible(this.tab.visible);
+    }
   }
   public hasError(): boolean {
     var isError = false;

@@ -151,7 +151,7 @@ export var createAddItemHandler = (
   onItemAdding: (itemValue: Survey.ItemValue) => void = null
 ) => () => {
   var nextValue = null;
-  var values = question.choices.map(function (item) {
+  var values = question.choices.map(function(item) {
     return item.itemValue;
   });
   var itemText = Survey.surveyLocalization.getString("choices_Item");
@@ -181,7 +181,8 @@ export var createAddItemHandler = (
 export var createAddItemElement = handler => {
   var addNew = document.createElement("div");
   addNew.title = editorLocalization.getString("pe.addItem");
-  addNew.className = "svda-add-new-item svd-primary-icon svda-add-custom-item";
+  addNew.className =
+    "sv_technical svda-add-new-item svd-primary-icon svda-add-custom-item";
   addNew.onclick = handler;
 
   var svgElem: any = document.createElementNS(
@@ -209,14 +210,14 @@ export var createAddItemElement = handler => {
 };
 
 export var createCustomElement = (title, handler) => {
-  var addNew = document.createElement("div");
-  addNew.title = title;
-  addNew.className = "svda-add-new-item svda-add-custom-item";
-  addNew.onclick = handler;
+  var element = document.createElement("div");
+  element.title = title;
+  element.className = "sv_technical svda-add-new-item svda-add-custom-item";
+  element.onclick = handler;
   var titleEl = document.createElement("span");
-  titleEl.innerHTML = addNew.title;
-  addNew.appendChild(titleEl);
-  return addNew;
+  titleEl.innerHTML = element.title;
+  element.appendChild(titleEl);
+  return element;
 };
 
 export var itemDraggableAdorner = {
@@ -234,7 +235,12 @@ export var itemDraggableAdorner = {
     model: QuestionSelectBase,
     editor: SurveyCreator
   ) => {
-    var itemsRoot = elements[0].parentElement;
+    var itemsRoot = [];
+    for (var i = 0; i < elements.length; i++) {
+      if (itemsRoot.indexOf(elements[i].parentElement) === -1) {
+        itemsRoot.push(elements[i].parentElement);
+      }
+    }
     for (var i = 0; i < elements.length; i++) {
       var itemValue = ko.dataFor(elements[i]);
       if (
@@ -245,18 +251,30 @@ export var itemDraggableAdorner = {
         elements[i].classList.remove("item_draggable");
       }
     }
-    var sortable = Sortable.create(itemsRoot, {
-      handle: ".svda-drag-handle",
-      draggable: ".item_draggable",
-      animation: 150,
-      onEnd: evt => {
-        var choices = model.choices;
-        var choice = choices[evt.oldIndex];
-        choices.splice(evt.oldIndex, 1);
-        choices.splice(evt.newIndex, 0, choice);
-        editor.onQuestionEditorChanged(model);
-      }
-    });
+    itemsRoot.forEach(itemRoot =>
+      Sortable.create(itemRoot, {
+        handle: ".svda-drag-handle",
+        group: model.id,
+        draggable: ".item_draggable",
+        animation: 150,
+        onEnd: evt => {
+          var oldIndex = evt.oldIndex;
+          var newIndex = evt.newIndex;
+          var choices = model.choices;
+          var choice = choices[evt.oldIndex];
+          if (model.hasColumns) {
+            choice = ko.dataFor(evt.item);
+            var columnContent = ko.dataFor(evt.item.parentElement);
+            var itemBefore = columnContent && columnContent[newIndex];
+            oldIndex = choices.indexOf(choice);
+            newIndex = choices.indexOf(itemBefore);
+          }
+          choices.splice(oldIndex, 1);
+          choices.splice(newIndex, 0, choice);
+          editor.onQuestionEditorChanged(model);
+        }
+      })
+    );
     var addNew = createAddItemElement(
       createAddItemHandler(
         model,
@@ -273,25 +291,31 @@ export var itemDraggableAdorner = {
         }
       )
     );
-    itemsRoot.appendChild(addNew);
+    itemsRoot[0].appendChild(addNew);
     if (editor.canShowObjectProperty(model, "hasOther")) {
-      itemsRoot.appendChild(
+      itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addOther"),
           () => (model.hasOther = !model.hasOther)
         )
       );
     }
-    if (model.hasSelectAll !== undefined && editor.canShowObjectProperty(model, "hasSelectAll")) {
-      itemsRoot.appendChild(
+    if (
+      model.hasSelectAll !== undefined &&
+      editor.canShowObjectProperty(model, "hasSelectAll")
+    ) {
+      itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
           () => (model.hasSelectAll = !model.hasSelectAll)
         )
       );
     }
-    if (model.hasNone !== undefined && editor.canShowObjectProperty(model, "hasNone")) {
-      itemsRoot.appendChild(
+    if (
+      model.hasNone !== undefined &&
+      editor.canShowObjectProperty(model, "hasNone")
+    ) {
+      itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addNone"),
           () => (model.hasNone = !model.hasNone)

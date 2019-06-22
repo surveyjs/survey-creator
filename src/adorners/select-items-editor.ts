@@ -19,10 +19,10 @@ ko.components.register("select-items-editor", {
         "svda-select-items-collection"
       )[0];
       var sortable = null;
-      var property = Survey.Serializer.findProperty(
-        params.question.getType(),
-        "choices"
-      );
+      // var property = Survey.Serializer.findProperty(
+      //   params.question.getType(),
+      //   "choices"
+      // );
       return {
         choices: choices,
         valueName: params.valueName,
@@ -34,14 +34,14 @@ ko.components.register("select-items-editor", {
         addItem: createAddItemHandler(
           params.question,
           itemValue => {
-            var options = {
-              propertyName: "choices",
-              obj: params.question,
-              value: params.question.choices,
-              newValue: null,
-              doValidation: false
-            };
-            params.editor.onValueChangingCallback(options);
+            // var options = {
+            //   propertyName: "choices",
+            //   obj: params.question,
+            //   value: params.question.choices,
+            //   newValue: null,
+            //   doValidation: false
+            // };
+            // params.editor.onValueChangingCallback(options);
             choices(params.question.choices);
           },
           itemValue => {
@@ -51,11 +51,12 @@ ko.components.register("select-items-editor", {
               itemValue,
               params.question.choices
             );
-            params.editor.onPropertyValueChanged(
-              property,
-              params.question,
-              params.question.choices
-            );
+            // params.editor.onPropertyValueChanged(
+            //   property,
+            //   params.question,
+            //   params.question.choices
+            // );
+            params.editor.onQuestionEditorChanged(params.question);
           }
         ),
         getLocString: str => editorLocalization.getString(str),
