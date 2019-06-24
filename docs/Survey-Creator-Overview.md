@@ -315,6 +315,14 @@ You may change the name of the default (General) category as any other localizab
 ```javascript
 SurveyCreator.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
+
+To allow expaned more then one category, set the property **allowExpandMultipleCategories** to true.
+If you want to keep all your categories always expanded, then set the following property **keepAllCategoriesExpanded** property to true.
+```javascript
+creator.toolbox.allowExpandMultipleCategories = true;
+creator.toolbox.keepAllCategoriesExpanded = true;` 
+```
+
 Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Survey-Creator/?id=toolboxcategories) to see how it works.
 
 <div id="toolbox-property"></div>
