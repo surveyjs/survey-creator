@@ -203,9 +203,7 @@ export class SurveyQuestionEditor {
   }
   protected doCloseWindow(isCancel: boolean) {
     var appliedSuccesfull = false;
-    if (isCancel) {
-      this.reset();
-    } else {
+    if (!isCancel) {
       appliedSuccesfull = this.apply();
     }
     if (isCancel || appliedSuccesfull) {
