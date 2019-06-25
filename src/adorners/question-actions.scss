@@ -41,3 +41,18 @@ question-actions {
     margin-top: -5px;
   }
 }
+
+.svd_question:hover {
+  border: 1px solid transparent;
+
+  & > .svda-question-actions {
+    question-actions {
+      display: block;
+    }
+
+    .svda_action_separator {
+      margin-left: 15px;
+      margin-top: -5px;
+    }
+  }
+}

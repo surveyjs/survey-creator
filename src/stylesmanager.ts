@@ -177,7 +177,9 @@ export class StylesManager {
       "background:  $primary-color;",
     ".svd_container .select2-container .select2-selection--single .select2-selection__arrow":
       "background:  $primary-color;",
-    ".svd_container .svd_custom_select": "background-color: $primary-bg-color;"
+    ".svd_container .svd_custom_select": "background-color: $primary-bg-color;",
+
+    ".svd_container .svd_question:hover": "border: 1px solid $primary-color;"
   };
 
   public static bootstrapThemeCss: { [key: string]: string } = {
@@ -204,7 +206,8 @@ export class StylesManager {
 
     ".svd_container.sv_bootstrap_css .svd-svg-icon":
       "fill: $primary-icon-color;",
-    ".svd_container.sv_bootstrap_css .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
+    ".svd_container.sv_bootstrap_css .icon-white .svd-svg-icon":
+      "fill: $primary-bg-color;",
     ".svd_container.sv_bootstrap_css .svd-primary-icon .svd-svg-icon":
       "fill: $primary-color;",
     ".svd_container.sv_bootstrap_css .svd-secondary-icon .svd-svg-icon":
@@ -273,7 +276,10 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .form-group.is-focused .form-control":
       "background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#D2D2D2, #D2D2D2);",
     ".svd_container.sv_bootstrap_css .form-group.is-focused label":
-      "color:$primary-color;"
+      "color:$primary-color;",
+
+    ".svd_container.sv_bootstrap_css .svd_question:hover":
+      "border: 1px solid $primary-color;"
   };
 
   public static bootstrapmaterialThemeCss: { [key: string]: string } = {
@@ -302,7 +308,8 @@ export class StylesManager {
 
     ".svd_container.sv_bootstrapmaterial_css .svd-svg-icon":
       "fill: $primary-icon-color;",
-    ".svd_container.sv_bootstrapmaterial_css .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
+    ".svd_container.sv_bootstrapmaterial_css .icon-white .svd-svg-icon":
+      "fill: $primary-bg-color;",
     ".svd_container.sv_bootstrapmaterial_css .svd-primary-icon .svd-svg-icon":
       "fill: $primary-color;",
     ".svd_container.sv_bootstrapmaterial_css .svd-secondary-icon .svd-svg-icon":
@@ -376,7 +383,10 @@ export class StylesManager {
     ".svd_container.sv_bootstrapmaterial_css .form-group.is-focused .form-control":
       "background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#D2D2D2, #D2D2D2);",
     ".svd_container.sv_bootstrapmaterial_css .form-group.is-focused label":
-      "color:$primary-color;"
+      "color:$primary-color;",
+
+    ".svd_container.sv_bootstrapmaterial_css .svd_question:hover":
+      "border: 1px solid $primary-color;"
   };
 
   private sheet: CSSStyleSheet = null;
