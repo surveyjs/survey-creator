@@ -1829,7 +1829,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "delete",
           text: self.getLocString(deleteLocaleName),
           onClick: function(selObj) {
-            self.deleteCurrentObject();
+            self.deleteObject(selObj);
           }
         });
       }
