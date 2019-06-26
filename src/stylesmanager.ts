@@ -179,7 +179,10 @@ export class StylesManager {
       "background:  $primary-color;",
     ".svd_container .svd_custom_select": "background-color: $primary-bg-color;",
 
-    ".svd_container .svd_question:hover": "border: 1px solid $primary-color;"
+    ".svd_container .question_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;",
+    ".svd_container .panel_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;"
   };
 
   public static bootstrapThemeCss: { [key: string]: string } = {
@@ -278,8 +281,10 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .form-group.is-focused label":
       "color:$primary-color;",
 
-    ".svd_container.sv_bootstrap_css .svd_question:hover":
-      "border: 1px solid $primary-color;"
+    ".svd_container.sv_bootstrap_css .question_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;",
+    ".svd_container.sv_bootstrap_css .panel_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;"
   };
 
   public static bootstrapmaterialThemeCss: { [key: string]: string } = {
@@ -385,8 +390,10 @@ export class StylesManager {
     ".svd_container.sv_bootstrapmaterial_css .form-group.is-focused label":
       "color:$primary-color;",
 
-    ".svd_container.sv_bootstrapmaterial_css .svd_question:hover":
-      "border: 1px solid $primary-color;"
+    ".svd_container.sv_bootstrapmaterial_css .question_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;",
+    ".svd_container.sv_bootstrapmaterial_css .panel_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;"
   };
 
   private sheet: CSSStyleSheet = null;

@@ -42,8 +42,9 @@ question-actions {
   }
 }
 
-.svd_question:hover {
-  border: 1px solid transparent;
+.question_actions.svd_question:hover,
+.panel_actions.svd_question:hover {
+  border-top: 1px solid transparent;
 
   & > .svda-question-actions {
     question-actions {
