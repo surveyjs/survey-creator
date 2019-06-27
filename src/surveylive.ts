@@ -34,6 +34,7 @@ export class SurveyLiveTester {
       };
     })
   );
+  koLandscapeOrientation = ko.observable(true);
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor(private surveyProvider: any) {
@@ -71,13 +72,14 @@ export class SurveyLiveTester {
     this.koSurvey = ko.observable(this.survey);
     this.koActiveDevice.subscribe(newValue => {
       if (!!this.simulator) {
-        this.simulator.options({
-          device: newValue || "iPad",
-          // osVersionNumber: 7,
-          orientation: "l",
-          // scale: 1,
-          considerDPI: true
-        });
+        this.simulatorOptions.device = newValue || "iPad";
+        this.simulator.options(this.simulatorOptions);
+      }
+    });
+    this.koLandscapeOrientation.subscribe(newValue => {
+      if (!!this.simulator) {
+        this.simulatorOptions.orientation = newValue ? "l" : "p";
+        this.simulator.options(this.simulatorOptions);
       }
     });
   }
@@ -201,6 +203,9 @@ export class SurveyLiveTester {
   public get simulatorText() {
     return editorLocalization.getString("pe.simulator");
   }
+  public get landscapeOrientationText() {
+    return editorLocalization.getString("pe.landscapeOrientation");
+  }
   private testAgain() {
     this.setJSON(this.json);
     this.show();
@@ -233,13 +238,17 @@ export class SurveyLiveTester {
   }
 
   private simulator;
+  public simulatorOptions = {
+    device: "iPad",
+    // osVersionNumber: 7,
+    orientation: "l",
+    // scale: 1,
+    considerDPI: true
+  };
   public simulatorRendered(remplateElements: any, surveyLive: any) {
-    surveyLive.simulator = new Simulator(remplateElements[1].children[0], {
-      // device: "iPhone5",
-      // osVersionNumber: 7,
-      orientation: "l",
-      // scale: 1,
-      considerDPI: true
-    });
+    surveyLive.simulator = new Simulator(
+      remplateElements[1].children[0],
+      surveyLive.simulatorOptions
+    );
   }
 }

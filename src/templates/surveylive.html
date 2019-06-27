@@ -24,6 +24,13 @@
           <span id="testDeviceSelector">
               <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"></select>
           </span>
+          <label id="testDeviceOrientation">
+            <div class="sjs-cb-container">
+                <input class="svd_editor_control" type="checkbox" data-bind="checked: koLandscapeOrientation">
+                <span class="checkmark" data-bind="css: { 'svd-main-background-color': koLandscapeOrientation(), 'svd-light-background-color': !koLandscapeOrientation() }"></span>
+                <span class="sjs-cb-label" data-bind="text: landscapeOrientationText"></span>
+            </div>
+         </label>
       </span>
   </div>
     <!-- ko template: { name: "survey-simulator", afterRender: simulatorRendered }-->
