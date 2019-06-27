@@ -1,64 +1,70 @@
 <script type="text/html" id="surveylive">
-  <div data-bind="visible: koIsRunning()">
-      <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
-          <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
-          <span id="testSurveyPageChanged">
-              <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+    <div data-bind="visible: koIsRunning()">
+        <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
+            <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
+            <span id="testSurveyPageChanged">
+                <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+            </span>
+        </span>
+         <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
+            <label  for="testSurveyLocale" data-bind="text: localeText"></label>
+            <span id="testSurveyLocale">
+                <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
+            </span>
+        </span>
+        <label id="testShowInvisibleElements" data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
+            <div class="sjs-cb-container">
+                <input class="svd_editor_control" type="checkbox" data-bind="checked: koShowInvisibleElements">
+                <span class="checkmark" data-bind="css: { 'svd-main-background-color': koShowInvisibleElements(), 'svd-light-background-color': !koShowInvisibleElements() }"></span>
+                <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
+            </div>
+         </label>
+         <span>
+          <label for="testDeviceSelector" data-bind="text: simulatorText"></label>
+          <span id="testDeviceSelector">
+              <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"></select>
           </span>
       </span>
-       <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
-          <label  for="testSurveyLocale" data-bind="text: localeText"></label>
-          <span id="testSurveyLocale">
-              <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
-          </span>
-      </span>
-      <label data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
-          <div class="sjs-cb-container">
-              <input class="svd_editor_control" type="checkbox" data-bind="checked: koShowInvisibleElements">
-              <span class="checkmark" data-bind="css: { 'svd-main-background-color': koShowInvisibleElements(), 'svd-light-background-color': !koShowInvisibleElements() }"></span>
-              <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
-          </div>
-       </label>
   </div>
-  <!-- ko template: { name: "survey-simulator", afterRender: simulatorRendered }-->
-  <!-- /ko -->
-  <!-- ko ifnot: koIsRunning -->
-  <div class="svd_test_results">
-      <div class="svd_results_header">
-          <button class="btn btn-primary" data-bind="click: selectTestClick, text: testSurveyAgainText"></button>
-          <h2 data-bind="text: surveyResultsText"></h2>
-      </div>
-      <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
-          <li class="nav-item active" data-bind="css: {active: koResultViewType() === 'table'}">
-              <a class="nav-link" href="#" data-bind="click: selectTableClick, text: $root.getLocString('ed.surveyResultsTable')"></a>
-          </li>
-          <li class="nav-item" data-bind="css: {active: koResultViewType() === 'text'}">
-              <a class="nav-link" href="#" data-bind="click: selectJsonClick, text: $root.getLocString('ed.surveyResultsJson')"></a>
-          </li>
-      </ul>
-      <div class="svd_results_text svd-light-bg-color" data-bind="visible: koResultViewType() === 'text'">
-          <div data-bind="text: koResultText"></div>
-      </div>
-      <div class="svd_results_table svd-light-bg-color" data-bind="visible: koResultViewType() === 'table'">
-          <table>
-              <thead>
-                  <tr class="svd-light-background-color">
-                      <th class="svd-dark-border-color" data-bind="text: resultsTitle"></th>
-                      <th class="svd-dark-border-color" data-bind="text: resultsName"></th>
-                      <th class="svd-dark-border-color" data-bind="text: resultsValue"></th>
-                      <th class="svd-dark-border-color" data-bind="text: resultsDisplayValue"></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <!-- ko foreach: koResultData -->
-                  <!-- ko template: "survey-result-table-row" -->
-                  <!-- /ko -->
-                  <!-- /ko -->
-              </tbody>
-          </table>
-      </div>
-  </div>
-  <!-- /ko -->
+    <!-- ko template: { name: "survey-simulator", afterRender: simulatorRendered }-->
+    <!-- /ko -->
+    <!-- ko ifnot: koIsRunning -->
+    <div class="svd_test_results">
+        <div class="svd_results_header">
+            <button class="btn btn-primary" data-bind="click: selectTestClick, text: testSurveyAgainText"></button>
+            <h2 data-bind="text: surveyResultsText"></h2>
+        </div>
+        <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
+            <li class="nav-item active" data-bind="css: {active: koResultViewType() === 'table'}">
+                <a class="nav-link" href="#" data-bind="click: selectTableClick, text: $root.getLocString('ed.surveyResultsTable')"></a>
+            </li>
+            <li class="nav-item" data-bind="css: {active: koResultViewType() === 'text'}">
+                <a class="nav-link" href="#" data-bind="click: selectJsonClick, text: $root.getLocString('ed.surveyResultsJson')"></a>
+            </li>
+        </ul>
+        <div class="svd_results_text svd-light-bg-color" data-bind="visible: koResultViewType() === 'text'">
+            <div data-bind="text: koResultText"></div>
+        </div>
+        <div class="svd_results_table svd-light-bg-color" data-bind="visible: koResultViewType() === 'table'">
+            <table>
+                <thead>
+                    <tr class="svd-light-background-color">
+                        <th class="svd-dark-border-color" data-bind="text: resultsTitle"></th>
+                        <th class="svd-dark-border-color" data-bind="text: resultsName"></th>
+                        <th class="svd-dark-border-color" data-bind="text: resultsValue"></th>
+                        <th class="svd-dark-border-color" data-bind="text: resultsDisplayValue"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: koResultData -->
+                    <!-- ko template: "survey-result-table-row" -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /ko -->
 </script>
 <script type="text/html" id="survey-result-table-row">
   <tr data-bind="click: function() { isNode && collapsed(!collapsed()); }">

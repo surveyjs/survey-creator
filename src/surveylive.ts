@@ -25,6 +25,15 @@ export class SurveyLiveTester {
   koShowPagesInTestSurveyTab = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
+  koActiveDevice = ko.observable("iPad");
+  koDevices = ko.observableArray(
+    Object.keys(Simulator.prototype.devices).map(key => {
+      return {
+        text: key,
+        value: key
+      };
+    })
+  );
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor(private surveyProvider: any) {
@@ -60,6 +69,17 @@ export class SurveyLiveTester {
       self.koSurvey(self.survey);
     });
     this.koSurvey = ko.observable(this.survey);
+    this.koActiveDevice.subscribe(newValue => {
+      if (!!this.simulator) {
+        this.simulator.options({
+          device: newValue || "iPad",
+          // osVersionNumber: 7,
+          orientation: "l",
+          // scale: 1,
+          considerDPI: true
+        });
+      }
+    });
   }
   public setJSON(json: any) {
     this.json = json;
@@ -178,6 +198,9 @@ export class SurveyLiveTester {
   public get localeText() {
     return editorLocalization.getString("pe.locale");
   }
+  public get simulatorText() {
+    return editorLocalization.getString("pe.simulator");
+  }
   private testAgain() {
     this.setJSON(this.json);
     this.show();
@@ -209,9 +232,9 @@ export class SurveyLiveTester {
     survey["afterRenderSurvey"](element);
   }
 
+  private simulator;
   public simulatorRendered(remplateElements: any, surveyLive: any) {
-    debugger;
-    var simulator = new Simulator(remplateElements[1].children[0], {
+    surveyLive.simulator = new Simulator(remplateElements[1].children[0], {
       // device: "iPhone5",
       // osVersionNumber: 7,
       orientation: "l",
