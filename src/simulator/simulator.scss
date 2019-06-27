@@ -36,7 +36,7 @@
   width: 320px;
   height: 568px;
   padding: 82px 100px 100px;
-  background: url(images/xenarius-phone-p.svg) 0 0 no-repeat;
+  background: url(images/iphone5-p.png) 0 0 no-repeat;
   background-position: center;
 }
 
@@ -44,7 +44,7 @@
   width: 568px;
   height: 320px;
   padding: 150px 150px 150px 134px;
-  background: url(images/xenarius-phone-l.svg) 0 0 no-repeat;
+  background: url(images/iphone5-l.png) 0 0 no-repeat;
   background-position: center;
 }
 
@@ -68,7 +68,7 @@
   width: 768px;
   height: 1024px;
   padding: 110px 100px 150px;
-  background: url(images/xenarius-tablet-p.svg) 0 0 no-repeat;
+  background: url(images/ipad-mini-p.png) 0 0 no-repeat;
   background-position: center;
 }
 
@@ -76,9 +76,8 @@
   width: 1024px;
   height: 768px;
   padding: 110px 184px 150px;
-  background: url(images/xenarius-tablet-l.svg) 0 0 no-repeat;
+  background: url(images/ipad-mini-l.png) 0 0 no-repeat;
   background-position: center;
-  margin-top: -50px;
 }
 
 /* Android phone */
@@ -146,11 +145,15 @@
 .svd-simulator-nexus7-p {
   width: 608px;
   height: 965px;
+  padding: 98px 52px 138px 58px;
+  background: url(images/nexus7-p.png) 0 0 no-repeat;
 }
 
 .svd-simulator-nexus7-l {
   width: 965px;
   height: 608px;
+  padding: 52px 128px 68px 106px;
+  background: url(images/nexus7-l.png) 0 0 no-repeat;
 }
 
 /* Win8 Phone */
@@ -335,7 +338,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 1), 0 0 0 3px rgba(0, 0, 0, 1);
+  box-shadow: inset 0 0 0 1px rgb(19, 16, 16), 0 0 0 3px rgba(0, 0, 0, 1);
   content: "";
 }
 
@@ -369,4 +372,5 @@
   width: 100%;
   height: 100%;
   background-color: white;
+  overflow: auto;
 }
