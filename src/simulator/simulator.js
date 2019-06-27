@@ -204,8 +204,8 @@ Simulator.prototype = {
   },
 
   _wrapFrame: function(frame) {
-    if (!$(".dx-simulator-wrapper").length) {
-      frame.wrap("<div class='dx-simulator-wrapper'/>");
+    if (!$(".svd-simulator-wrapper").length) {
+      frame.wrap("<div class='svd-simulator-wrapper'/>");
     }
   },
 
@@ -239,17 +239,17 @@ Simulator.prototype = {
     var scale = this.getAbsoluteScale();
 
     if (
-      "-webkit-transform" in $(".dx-simulator")[0].style ||
-      "-moz-transform" in $(".dx-simulator")[0].style ||
-      "-ms-transform" in $(".dx-simulator")[0].style ||
-      "-o-transform" in $(".dx-simulator")[0].style ||
-      "transform" in $(".dx-simulator")[0].style
+      "-webkit-transform" in $(".svd-simulator")[0].style ||
+      "-moz-transform" in $(".svd-simulator")[0].style ||
+      "-ms-transform" in $(".svd-simulator")[0].style ||
+      "-o-transform" in $(".svd-simulator")[0].style ||
+      "transform" in $(".svd-simulator")[0].style
     ) {
-      $(".dx-simulator-wrapper")
-        .width($(".dx-simulator").outerWidth(true) * scale)
-        .height($(".dx-simulator").outerHeight(true) * scale);
+      $(".svd-simulator-wrapper")
+        .width($(".svd-simulator").outerWidth(true) * scale)
+        .height($(".svd-simulator").outerHeight(true) * scale);
 
-      $(".dx-simulator").css({
+      $(".svd-simulator").css({
         "-webkit-transform": "scale(" + scale + ")",
         "-moz-transform": "scale(" + scale + ")",
         "-ms-transform": "scale(" + scale + ")",
@@ -262,11 +262,11 @@ Simulator.prototype = {
         "-o-transform-origin": "0 0"
       });
     } else {
-      $(".dx-simulator").css("zoom", 1);
-      $(".dx-simulator-wrapper")
-        .width($(".dx-simulator").outerWidth(true) * scale)
-        .height($(".dx-simulator").outerHeight(true) * scale);
-      $(".dx-simulator").css("zoom", scale);
+      $(".svd-simulator").css("zoom", 1);
+      $(".svd-simulator-wrapper")
+        .width($(".svd-simulator").outerWidth(true) * scale)
+        .height($(".svd-simulator").outerHeight(true) * scale);
+      $(".svd-simulator").css("zoom", scale);
     }
   },
 
@@ -275,11 +275,11 @@ Simulator.prototype = {
 
     this.wrapperDiv = $("<div></div>");
     this.backDiv = $("<a></a>")
-      .addClass("dx-simulator-back")
+      .addClass("svd-simulator-back")
       .click($.proxy(this._handleBack, this));
 
     var $backDivWrapper = $("<div></div>")
-      .addClass("dx-simulator-back-wrapper")
+      .addClass("svd-simulator-back-wrapper")
       .append(this.backDiv);
 
     this.frame.wrap(this.wrapperDiv);
@@ -359,8 +359,8 @@ Simulator.prototype = {
     var emptyChrome = this.options("chrome") == "none" ? "empty-chrome" : "";
 
     return [
-      "dx-simulator",
-      ["dx-simulator", device, this.options("orientation")].join("-"),
+      "svd-simulator",
+      ["svd-simulator", device, this.options("orientation")].join("-"),
       simpleChrome,
       emptyChrome
     ].join(" ");

@@ -1,4 +1,4 @@
-﻿.dx-simulator {
+﻿.svd-simulator {
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -7,97 +7,89 @@
   box-sizing: content-box;
 }
 
-.dx-simulator-wrapper {
+.svd-simulator-wrapper {
   height: 100%;
   margin: 0 auto;
 }
 
-.dx-simulator iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: white;
-}
-
-.dx-simulator-back-wrapper {
+.svd-simulator-back-wrapper {
   position: relative;
 }
 
 /* iPhone */
-.dx-simulator-iphone-p {
+.svd-simulator-iphone-p {
   width: 320px;
   height: 480px;
   padding: 154px 60px 168px;
-  background: url(Images/iphone-p.png) 0 0 no-repeat;
+  background: url(images/iphone-p.png) 0 0 no-repeat;
 }
 
-.dx-simulator-iphone-l {
+.svd-simulator-iphone-l {
   width: 480px;
   height: 320px;
   padding: 50px 158px 70px 164px;
-  background: url(Images/iphone-l.png) 0 0 no-repeat;
+  background: url(images/iphone-l.png) 0 0 no-repeat;
 }
 
 /* iPhone 5 */
-.dx-simulator-iphone5-p {
+.svd-simulator-iphone5-p {
   width: 320px;
   height: 568px;
   padding: 82px 100px 100px;
-  background: url(Images/xenarius-phone-p.svg) 0 0 no-repeat;
+  background: url(images/xenarius-phone-p.svg) 0 0 no-repeat;
   background-position: center;
 }
 
-.dx-simulator-iphone5-l {
+.svd-simulator-iphone5-l {
   width: 568px;
   height: 320px;
   padding: 150px 150px 150px 134px;
-  background: url(Images/xenarius-phone-l.svg) 0 0 no-repeat;
+  background: url(images/xenarius-phone-l.svg) 0 0 no-repeat;
   background-position: center;
 }
 
 /* iPad */
-.dx-simulator-ipad-p {
+.svd-simulator-ipad-p {
   width: 768px;
   height: 1024px;
   padding: 165px 173px 202px;
-  background: url(Images/ipad-p.png) 0 0 no-repeat;
+  background: url(images/ipad-p.png) 0 0 no-repeat;
 }
 
-.dx-simulator-ipad-l {
+.svd-simulator-ipad-l {
   width: 1024px;
   height: 768px;
   padding: 158px 187px 188px 180px;
-  background: url(Images/ipad-l.png) 0 0 no-repeat;
+  background: url(images/ipad-l.png) 0 0 no-repeat;
 }
 
 /* iPad Mini */
-.dx-simulator-ipadmini-p {
+.svd-simulator-ipadmini-p {
   width: 768px;
   height: 1024px;
   padding: 110px 100px 150px;
-  background: url(Images/xenarius-tablet-p.svg) 0 0 no-repeat;
+  background: url(images/xenarius-tablet-p.svg) 0 0 no-repeat;
   background-position: center;
 }
 
-.dx-simulator-ipadmini-l {
+.svd-simulator-ipadmini-l {
   width: 1024px;
   height: 768px;
   padding: 110px 184px 150px;
-  background: url(Images/xenarius-tablet-l.svg) 0 0 no-repeat;
+  background: url(images/xenarius-tablet-l.svg) 0 0 no-repeat;
   background-position: center;
   margin-top: -50px;
 }
 
 /* Android phone */
-.dx-simulator-androidphone-p {
+.svd-simulator-androidphone-p {
   width: 360px;
   height: 640px;
   padding: 98px 52px 138px 58px;
-  background: url(Images/androidphone-p.png) 0 0 no-repeat;
+  background: url(images/androidphone-p.png) 0 0 no-repeat;
 }
 
-.dx-simulator-androidphone-p .dx-simulator-back {
+.svd-simulator-androidphone-p .svd-simulator-back {
   top: 30px;
   left: 272px;
   position: absolute;
@@ -106,14 +98,14 @@
   cursor: pointer;
 }
 
-.dx-simulator-androidphone-l {
+.svd-simulator-androidphone-l {
   width: 640px;
   height: 360px;
   padding: 52px 128px 68px 106px;
-  background: url(Images/androidphone-l.png) 0 0 no-repeat;
+  background: url(images/androidphone-l.png) 0 0 no-repeat;
 }
 
-.dx-simulator-androidphone-l .dx-simulator-back {
+.svd-simulator-androidphone-l .svd-simulator-back {
   position: absolute;
   top: -330px;
   left: 670px;
@@ -123,60 +115,60 @@
 }
 
 /* Android tablet */
-.dx-simulator-androidtablet-p {
+.svd-simulator-androidtablet-p {
   width: 575px;
   height: 815px;
   padding: 198px 147px 243px 146px;
-  background: url(Images/androidtablet-p.png) 0 0 no-repeat;
+  background: url(images/androidtablet-p.png) 0 0 no-repeat;
 }
 
-.dx-simulator-androidtablet-p .dx-simulator-back {
+.svd-simulator-androidtablet-p .svd-simulator-back {
   position: absolute;
   width: 100px;
   height: 60px;
   cursor: pointer;
 }
 
-.dx-simulator-androidtablet-l {
+.svd-simulator-androidtablet-l {
   width: 855px;
   height: 534px;
   padding: 123px 183px 156px 197px;
-  background: url(Images/androidtablet-l.png) 0 0 no-repeat;
+  background: url(images/androidtablet-l.png) 0 0 no-repeat;
 }
 
-.dx-simulator-androidtablet-l .dx-simulator-back {
+.svd-simulator-androidtablet-l .svd-simulator-back {
   position: absolute;
   width: 100px;
   height: 60px;
   cursor: pointer;
 }
 
-.dx-simulator-nexus7-p {
+.svd-simulator-nexus7-p {
   width: 608px;
   height: 965px;
 }
 
-.dx-simulator-nexus7-l {
+.svd-simulator-nexus7-l {
   width: 965px;
   height: 608px;
 }
 
 /* Win8 Phone */
-.dx-simulator-win8phone-p {
-  background: url(Images/Win8Phone.png) no-repeat 50% 50%;
+.svd-simulator-win8phone-p {
+  background: url(images/Win8Phone.png) no-repeat 50% 50%;
   width: 331px;
   height: 568px;
   padding: 123px 41px 131px 42px;
 }
 
-.dx-simulator-win8phone-l {
-  background: url(Images/Win8Phone-l.png) no-repeat 50% 50%;
+.svd-simulator-win8phone-l {
+  background: url(images/Win8Phone-l.png) no-repeat 50% 50%;
   width: 568px;
   height: 330px;
   padding: 41px 130px 42px 123px;
 }
 
-.dx-simulator-win8phone-p .dx-simulator-back {
+.svd-simulator-win8phone-p .svd-simulator-back {
   position: absolute;
   width: 100px;
   height: 80px;
@@ -185,7 +177,7 @@
   left: -4px;
 }
 
-.dx-simulator-win8phone-l .dx-simulator-back {
+.svd-simulator-win8phone-l .svd-simulator-back {
   position: absolute;
   width: 80px;
   height: 100px;
@@ -195,25 +187,25 @@
 }
 
 /* Nokia 920 */
-.dx-simulator-nokia920-p {
+.svd-simulator-nokia920-p {
   width: 461px;
   height: 768px;
 }
 
-.dx-simulator-nokia920-l {
+.svd-simulator-nokia920-l {
   width: 768px;
   height: 461px;
 }
 
 /* Tizen */
-.dx-simulator-tizen-p {
+.svd-simulator-tizen-p {
   width: 361px;
   height: 640px;
   padding: 96px 48px 103px 48px;
-  background: url(Images/tizen-p.png) 0 0 no-repeat;
+  background: url(images/tizen-p.png) 0 0 no-repeat;
 }
 
-.dx-simulator-tizen-p .dx-simulator-back {
+.svd-simulator-tizen-p .svd-simulator-back {
   top: 30px;
   left: 272px;
   position: absolute;
@@ -222,14 +214,14 @@
   cursor: pointer;
 }
 
-.dx-simulator-tizen-l {
+.svd-simulator-tizen-l {
   width: 640px;
   height: 360px;
   padding: 45px 103px 49px 96px;
-  background: url(Images/tizen-l.png) 0 0 no-repeat;
+  background: url(images/tizen-l.png) 0 0 no-repeat;
 }
 
-.dx-simulator-tizen-l .dx-simulator-back {
+.svd-simulator-tizen-l .svd-simulator-back {
   position: absolute;
   top: -330px;
   left: 670px;
@@ -239,37 +231,37 @@
 }
 
 /* Generic phone */
-.dx-simulator-genericphone-p {
+.svd-simulator-genericphone-p {
   width: 360px;
   height: 640px;
   padding: 107px 62px 143px;
-  background: url(Images/generic-p.png) 0 0 no-repeat;
+  background: url(images/generic-p.png) 0 0 no-repeat;
 }
 
 /* MS Surface */
 
-.dx-simulator-mssurface-l {
+.svd-simulator-mssurface-l {
   width: 1366px;
   height: 768px;
   padding: 130px 154px;
-  background: url(Images/mssurface-l.png) 0 0 no-repeat;
+  background: url(images/mssurface-l.png) 0 0 no-repeat;
 }
 
-.dx-simulator-mssurface-p {
+.svd-simulator-mssurface-p {
   height: 1366px;
   width: 768px;
   padding: 154px 130px;
-  background: url(Images/mssurface-p.png) 0 0 no-repeat;
+  background: url(images/mssurface-p.png) 0 0 no-repeat;
 }
 
 /* Desktop */
-.dx-simulator-desktop-p {
+.svd-simulator-desktop-p {
   background: white;
   width: 100%;
   height: 100%;
 }
 
-.dx-simulator-desktop-l {
+.svd-simulator-desktop-l {
   background: white;
   width: 766px;
   border-radius: 7px;
@@ -278,32 +270,32 @@
   margin-top: 53px;
 }
 
-.dx-simulator-desktop_1280x720-p {
+.svd-simulator-desktop_1280x720-p {
   width: 720px;
   height: 1280px;
 }
 
-.dx-simulator-desktop_1280x720-l {
+.svd-simulator-desktop_1280x720-l {
   width: 1280px;
   height: 720px;
 }
 
-.dx-simulator-desktop_1440x900-p {
+.svd-simulator-desktop_1440x900-p {
   width: 900px;
   height: 1440px;
 }
 
-.dx-simulator-desktop_1440x900-l {
+.svd-simulator-desktop_1440x900-l {
   width: 1440px;
   height: 900px;
 }
 
-.dx-simulator-desktop_1920x1080-p {
+.svd-simulator-desktop_1920x1080-p {
   width: 1080px;
   height: 1920px;
 }
 
-.dx-simulator-desktop_1920x1080-l {
+.svd-simulator-desktop_1920x1080-l {
   width: 1920px;
   height: 1080px;
 }
@@ -312,8 +304,8 @@
   height: 692px;
 }
 
-.dx-simulator.dx-simulator-ipadmini-p,
-.dx-simulator.dx-simulator-ipadmini-l {
+.svd-simulator.svd-simulator-ipadmini-p,
+.svd-simulator.svd-simulator-ipadmini-l {
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -326,14 +318,14 @@
   transform-origin: center 0;
 }
 
-.dx-simulator.simple-chrome {
+.svd-simulator.simple-chrome {
   background: none;
   padding: 36px;
   border-radius: 30px;
   border: solid 11px transparent;
 }
 
-.dx-simulator.simple-chrome:before {
+.svd-simulator.simple-chrome:before {
   top: -6px;
   left: -6px;
   position: absolute;
@@ -347,7 +339,7 @@
   content: "";
 }
 
-.dx-simulator.empty-chrome {
+.svd-simulator.empty-chrome {
   background: none;
   padding: 0;
 }
