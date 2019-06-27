@@ -158,3 +158,5 @@ export {
 } from "../utils/accordion";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
+
+export * from "../simulator/simulator.js";

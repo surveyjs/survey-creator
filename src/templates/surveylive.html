@@ -20,7 +20,8 @@
           </div>
        </label>
   </div>
-  <survey-widget params="survey: koSurvey"></survey-widget>
+  <!-- ko template: { name: "survey-simulator", afterRender: simulatorRendered }-->
+  <!-- /ko -->
   <!-- ko ifnot: koIsRunning -->
   <div class="svd_test_results">
       <div class="svd_results_header">
@@ -76,4 +77,10 @@
   <!-- /ko -->
   <!-- /ko -->
   <!-- /ko -->
+</script>
+
+<script type="text/html" id="survey-simulator">
+  <div class="svd-simulator-main">
+      <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+    </div>
 </script>

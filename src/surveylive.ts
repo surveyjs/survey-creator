@@ -3,6 +3,8 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 
+import { Simulator } from "./simulator/simulator";
+
 export class SurveyLiveTester {
   private json: any;
   koIsRunning = ko.observable(true);
@@ -205,5 +207,16 @@ export class SurveyLiveTester {
   public koEventAfterRender(element: any, survey: any) {
     survey.onRendered.fire(self, {});
     survey["afterRenderSurvey"](element);
+  }
+
+  public simulatorRendered(remplateElements: any, surveyLive: any) {
+    debugger;
+    var simulator = new Simulator(remplateElements[1].children[0], {
+      // device: "iPhone5",
+      // osVersionNumber: 7,
+      orientation: "l",
+      // scale: 1,
+      considerDPI: true
+    });
   }
 }
