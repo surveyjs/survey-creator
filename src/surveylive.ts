@@ -25,7 +25,15 @@ export class SurveyLiveTester {
   koShowPagesInTestSurveyTab = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
-  koActiveDevice = ko.observable("iPad");
+
+  private simulator;
+  public simulatorOptions = {
+    device: "desktop",
+    orientation: "l"
+    // scale: 1,
+    //considerDPI: true
+  };
+  koActiveDevice = ko.observable("desktop");
   koDevices = ko.observableArray(
     Object.keys(Simulator.prototype.devices).map(key => {
       return {
@@ -72,7 +80,7 @@ export class SurveyLiveTester {
     this.koSurvey = ko.observable(this.survey);
     this.koActiveDevice.subscribe(newValue => {
       if (!!this.simulator) {
-        this.simulatorOptions.device = newValue || "iPad";
+        this.simulatorOptions.device = newValue || "desktop";
         this.simulator.options(this.simulatorOptions);
       }
     });
@@ -237,14 +245,6 @@ export class SurveyLiveTester {
     survey["afterRenderSurvey"](element);
   }
 
-  private simulator;
-  public simulatorOptions = {
-    device: "iPad",
-    // osVersionNumber: 7,
-    orientation: "l",
-    // scale: 1,
-    considerDPI: true
-  };
   public simulatorRendered(remplateElements: any, surveyLive: any) {
     surveyLive.simulator = new Simulator(
       remplateElements[1].children[0],
