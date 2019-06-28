@@ -29,7 +29,7 @@ export class SurveyLiveTester {
   koDevices = ko.observableArray(
     Object.keys(Simulator.prototype.devices).map(key => {
       return {
-        text: key,
+        text: Simulator.prototype.devices[key].title,
         value: key
       };
     })

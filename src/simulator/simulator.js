@@ -63,125 +63,130 @@ Simulator.prototype = {
       ppi: 326,
       width: 640,
       height: 960,
-      config: DEFAULT_IPHONE_CONFIG
+      config: DEFAULT_IPHONE_CONFIG,
+      title: "iPhone"
     },
     iPhone5: {
       cssPixelRatio: 2,
       ppi: 326,
       width: 640,
       height: 1136,
-      config: DEFAULT_IPHONE_CONFIG
+      config: DEFAULT_IPHONE_CONFIG,
+      title: "iPhone 5"
     },
     iPhone6: {
       cssPixelRatio: 2,
       ppi: 326,
       width: 750,
       height: 1334,
-      config: DEFAULT_IPHONE_CONFIG
+      config: DEFAULT_IPHONE_CONFIG,
+      title: "iPhone 6"
     },
     iPhone6plus: {
       cssPixelRatio: 2,
       ppi: 401,
       width: 1080,
       height: 1920,
-      config: DEFAULT_IPHONE_CONFIG
+      config: DEFAULT_IPHONE_CONFIG,
+      title: "iPhone 6 Plus"
     },
     iPhone7: {
       cssPixelRatio: 2,
       ppi: 326,
       width: 750,
       height: 1334,
-      config: DEFAULT_IPHONE_CONFIG
+      config: DEFAULT_IPHONE_CONFIG,
+      title: "iPhone7"
     },
     iPad: {
       cssPixelRatio: 2,
       ppi: 264,
       width: 1536,
       height: 2048,
-      config: DEFAULT_IPAD_CONFIG
+      config: DEFAULT_IPAD_CONFIG,
+      title: "iPad"
     },
     iPadMini: {
       cssPixelRatio: 1,
       ppi: 163,
       width: 768,
       height: 1024,
-      config: DEFAULT_IPAD_CONFIG
+      config: DEFAULT_IPAD_CONFIG,
+      title: "iPad Mini"
     },
     androidPhone: {
       cssPixelRatio: 2,
       ppi: 316,
       width: 720,
       height: 1280,
-      config: ANDROID_PHONE_CONFIG
+      config: ANDROID_PHONE_CONFIG,
+      title: "Android Phone"
     },
     androidTablet: {
       cssPixelRatio: 1.5,
       ppi: 149,
       width: 800,
       height: 1280,
-      config: ANDROID_TABLET_CONFIG
-    },
-    nexus7: {
-      cssPixelRatio: 1.325,
-      ppi: 216,
-      width: 800,
-      height: 1280,
-      config: ANDROID_PHONE_CONFIG
-    },
-    nokia920: {
-      cssPixelRatio: 1.666,
-      ppi: 332,
-      width: 768,
-      height: 1280,
-      config: WIN_PHONE_CONFIG
+      config: ANDROID_TABLET_CONFIG,
+      title: "Android Tablet"
     },
     win10Phone: {
       cssPixelRatio: 1,
       ppi: 152,
       width: 330,
-      height: 568
+      height: 568,
+      title: "Windows 10 Phone"
     },
     msSurface: {
       cssPixelRatio: 1,
       ppi: 148,
       width: 768,
-      height: 1366
+      height: 1366,
+      title: "MS Surface"
     },
     //Sumsung Reference Device-PQ
     tizen: {
       cssPixelRatio: 2,
       ppi: 306,
       width: 720,
-      height: 1280
+      height: 1280,
+      title: "Tizen"
     },
     desktop: {
       cssPixelRatio: 1,
       ppi: 149,
       width: 600,
-      height: 766
+      height: 766,
+      title: "Desktop"
     },
     desktop_1280x720: {
       cssPixelRatio: 1,
       ppi: DEFAULT_MONITOR_DPI,
       width: 720,
       height: 1280,
-      config: DEFAULT_DESKTOP_CONFIG
+      config: DEFAULT_DESKTOP_CONFIG,
+      title: "Desktop 1280x720"
     },
     desktop_1440x900: {
       cssPixelRatio: 1,
       ppi: DEFAULT_MONITOR_DPI,
       width: 900,
       height: 1440,
-      config: DEFAULT_DESKTOP_CONFIG
+      config: DEFAULT_DESKTOP_CONFIG,
+      title: "Desktop 1440x900"
     },
     desktop_1920x1080: {
       cssPixelRatio: 1,
       ppi: DEFAULT_MONITOR_DPI,
       width: 1080,
       height: 1920,
-      config: DEFAULT_DESKTOP_CONFIG
+      config: DEFAULT_DESKTOP_CONFIG,
+      title: "Desktop 1920x1080"
     },
-    genericPhone: {}
+    genericPhone: {
+      cssPixelRatio: 1,
+      title: "Custom"
+    }
   },
 
   _calculateDeviceScale: function() {

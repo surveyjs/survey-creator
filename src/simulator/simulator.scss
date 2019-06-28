@@ -18,6 +18,7 @@
 
 /* iPhone */
 .svd-simulator-iphone-p {
+  margin-top: 20px;
   width: 320px;
   height: 480px;
   padding: 154px 60px 168px;
@@ -25,6 +26,7 @@
 }
 
 .svd-simulator-iphone-l {
+  margin-top: 20px;
   width: 480px;
   height: 320px;
   padding: 50px 158px 70px 164px;
@@ -35,7 +37,7 @@
 .svd-simulator-iphone5-p {
   width: 320px;
   height: 568px;
-  padding: 82px 100px 100px;
+  padding: 170px 100px 180px 100px;
   background: url(images/iphone5-p.png) 0 0 no-repeat;
   background-position: center;
 }
@@ -142,36 +144,22 @@
   cursor: pointer;
 }
 
-.svd-simulator-nexus7-p {
-  width: 608px;
-  height: 965px;
-  padding: 98px 52px 138px 58px;
-  background: url(images/nexus7-p.png) 0 0 no-repeat;
-}
-
-.svd-simulator-nexus7-l {
-  width: 965px;
-  height: 608px;
-  padding: 52px 128px 68px 106px;
-  background: url(images/nexus7-l.png) 0 0 no-repeat;
-}
-
 /* Win8 Phone */
-.svd-simulator-win8phone-p {
-  background: url(images/Win8Phone.png) no-repeat 50% 50%;
+.svd-simulator-win10phone-p {
+  background: url(images/win10phone.png) no-repeat 50% 50%;
   width: 331px;
   height: 568px;
   padding: 123px 41px 131px 42px;
 }
 
-.svd-simulator-win8phone-l {
-  background: url(images/Win8Phone-l.png) no-repeat 50% 50%;
+.svd-simulator-win10phone-l {
+  background: url(images/win10phone-l.png) no-repeat 50% 50%;
   width: 568px;
   height: 330px;
   padding: 41px 130px 42px 123px;
 }
 
-.svd-simulator-win8phone-p .svd-simulator-back {
+.svd-simulator-win10phone-p .svd-simulator-back {
   position: absolute;
   width: 100px;
   height: 80px;
@@ -180,24 +168,13 @@
   left: -4px;
 }
 
-.svd-simulator-win8phone-l .svd-simulator-back {
+.svd-simulator-win10phone-l .svd-simulator-back {
   position: absolute;
   width: 80px;
   height: 100px;
   cursor: pointer;
   top: -100px;
   left: 573px;
-}
-
-/* Nokia 920 */
-.svd-simulator-nokia920-p {
-  width: 461px;
-  height: 768px;
-}
-
-.svd-simulator-nokia920-l {
-  width: 768px;
-  height: 461px;
 }
 
 /* Tizen */
