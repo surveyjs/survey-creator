@@ -8,32 +8,26 @@ var ANDROID_PANEL_HEIGHT = 41,
   DEFAULT_MONITOR_DPI = 102.69,
   DEFAULT_IPHONE_CONFIG = {
     deviceType: "phone",
-    platform: "ios",
-    version: [7]
+    platform: "ios"
   },
   DEFAULT_IPAD_CONFIG = {
     deviceType: "tablet",
-    platform: "ios",
-    version: [6]
+    platform: "ios"
   },
   DEFAULT_DESKTOP_CONFIG = {
-    platform: "desktop",
-    version: []
+    platform: "desktop"
   },
   ANDROID_PHONE_CONFIG = {
     platform: "android",
-    deviceType: "phone",
-    version: [5]
+    deviceType: "phone"
   },
   ANDROID_TABLET_CONFIG = {
     platform: "android",
-    deviceType: "tablet",
-    version: [5]
+    deviceType: "tablet"
   },
   WIN_PHONE_CONFIG = {
     platform: "win",
-    deviceType: "phone",
-    version: [10]
+    deviceType: "phone"
   };
 
 export var Simulator = function(frame, options) {
@@ -48,8 +42,8 @@ export var Simulator = function(frame, options) {
 
 Simulator.prototype = {
   DEFAULT_OPTIONS: {
-    device: "iPad",
-    orientation: "p",
+    device: "desktop",
+    orientation: "l",
     considerDPI: false,
     wrapFrame: true,
     // none, realDevice, simple
@@ -96,7 +90,7 @@ Simulator.prototype = {
       width: 750,
       height: 1334,
       config: DEFAULT_IPHONE_CONFIG,
-      title: "iPhone7"
+      title: "iPhone 7"
     },
     iPad: {
       cssPixelRatio: 2,
@@ -135,6 +129,7 @@ Simulator.prototype = {
       ppi: 152,
       width: 330,
       height: 568,
+      config: WIN_PHONE_CONFIG,
       title: "Windows 10 Phone"
     },
     msSurface: {
@@ -144,19 +139,12 @@ Simulator.prototype = {
       height: 1366,
       title: "MS Surface"
     },
-    //Sumsung Reference Device-PQ
-    tizen: {
-      cssPixelRatio: 2,
-      ppi: 306,
-      width: 720,
-      height: 1280,
-      title: "Tizen"
-    },
     desktop: {
       cssPixelRatio: 1,
       ppi: 149,
       width: 600,
       height: 766,
+      config: DEFAULT_DESKTOP_CONFIG,
       title: "Desktop"
     },
     desktop_1280x720: {
@@ -279,9 +267,8 @@ Simulator.prototype = {
     this.frame = $frame;
 
     this.wrapperDiv = $("<div></div>");
-    this.backDiv = $("<a></a>")
-      .addClass("svd-simulator-back")
-      .click($.proxy(this._handleBack, this));
+    this.backDiv = $("<a></a>").addClass("svd-simulator-back");
+    //.click();
 
     var $backDivWrapper = $("<div></div>")
       .addClass("svd-simulator-back-wrapper")
@@ -314,41 +301,9 @@ Simulator.prototype = {
     var prevOptions = this._options,
       newOptions = (this._options = $.extend({}, prevOptions, changes));
 
-    var deviceChanged = prevOptions.device !== newOptions.device;
-    if (deviceChanged) {
-      newOptions.osVersionNumber = changes.osVersionNumber;
-    }
-    deviceChanged |= prevOptions.osVersionNumber != newOptions.osVersionNumber;
-
     this.wrapperDiv.attr("class", this._wrapperClasses());
 
     this.setScale(newOptions);
-  },
-
-  _getDeviceToForce: function(device, osVersionNumber) {
-    if (this.devices[device] && this.devices[device].config) {
-      return $.extend(
-        {},
-        this.devices[device].config,
-        osVersionNumber ? { version: [parseInt(osVersionNumber)] } : null
-      );
-    }
-    return device;
-  },
-
-  _isAppleDevice: function(deviceName) {
-    return (
-      this.devices[deviceName] &&
-      this.devices[deviceName].config &&
-      this.devices[deviceName].config.platform == "ios"
-    );
-  },
-
-  _isOsVersionNumber: function(osVersionNumber) {
-    return (
-      this._options.osVersionNumber &&
-      parseInt(this._options.osVersionNumber) === osVersionNumber
-    );
   },
 
   destroy: function() {
@@ -369,10 +324,5 @@ Simulator.prototype = {
       simpleChrome,
       emptyChrome
     ].join(" ");
-  },
-
-  _handleBack: function() {
-    var framedWindow = this.frame[0].contentWindow;
-    framedWindow.$(framedWindow).trigger("dxback");
   }
 };
