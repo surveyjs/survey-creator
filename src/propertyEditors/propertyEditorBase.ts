@@ -326,8 +326,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.onSetEditorOptions(editorOptions);
     }
   }
-  public activate() {}
-
   protected createEditorOptions(): any {
     return {};
   }

@@ -33,7 +33,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   }
   protected getCorrectedValue(value: any): any {
     if (value == null || !Array.isArray(value)) value = [];
-    return value;
+    return super.getCorrectedValue(value);
   }
   protected createEditorOptions(): any {
     return { allowAddRemoveItems: true };

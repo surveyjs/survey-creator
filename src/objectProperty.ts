@@ -66,7 +66,6 @@ export class SurveyObjectProperty {
     this.koIsShowEditor(
       !this.disabled && (this.editor.alwaysShowEditor || this.isActive)
     );
-    this.editor.activate();
   }
   public get koValue(): any {
     return this.editor.koValue;

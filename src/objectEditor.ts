@@ -95,6 +95,13 @@ export class SurveyObjectEditor {
     var objectProperties = [];
     var self = this;
     var propEvent = (property: SurveyObjectProperty, newValue: any) => {
+      if (
+        property.property.isRequired &&
+        Survey.Helpers.isValueEmpty(newValue)
+      ) {
+        property.koValue(property.object[property.name]);
+        return;
+      }
       var options = {
         property: property.property,
         object: property.object,

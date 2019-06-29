@@ -72,10 +72,7 @@ export class SurveyPropertyEditorFactory {
     if (!propertyEditor) {
       if (
         property.isArray &&
-        Survey.Serializer.isDescendantOf(
-          property.className,
-          "itemvalue"
-        )
+        Survey.Serializer.isDescendantOf(property.className, "itemvalue")
       ) {
         var creator = SurveyPropertyEditorFactory.creatorList["itemvalue[]"];
         if (creator) propertyEditor = creator(property);
@@ -238,7 +235,7 @@ export class SurveyNumberPropertyEditor extends SurveyPropertyEditorBase {
       value = Number(value);
       if (!value) value = 0;
     }
-    return value;
+    return super.getCorrectedValue(value);
   }
 }
 

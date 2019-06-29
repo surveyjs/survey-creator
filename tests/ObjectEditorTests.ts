@@ -561,3 +561,19 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
   Survey.Serializer.removeProperty("question", "targetEntity");
   Survey.Serializer.removeProperty("question", "targetField");
 });
+
+QUnit.test("Property Editor - property.isRequired = true", function(assert) {
+  var options = new EditorOptionsTests();
+  var editor = new SurveyObjectEditor(options);
+  var question = new Survey.QuestionText("q1");
+  editor.onPropertyValueChanged.add((sender, options) => {
+    question[options.property.name] = options.newValue;
+  });
+  editor.selectedObject = question;
+  var nameEditor = editor.getPropertyEditor("name").editor;
+  nameEditor.koValue("q2");
+  assert.equal(question.name, "q2", "Set correctly");
+  nameEditor.koValue("");
+  assert.equal(question.name, "q2", "We can't set nullable value");
+  assert.equal(nameEditor.koValue(), "q2", "Return the value to correct state");
+});
