@@ -1,8 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
-import { ArrayIterator } from "lodash";
-import { TSImportEqualsDeclaration } from "babel-types";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
