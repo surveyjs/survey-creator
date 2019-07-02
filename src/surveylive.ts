@@ -26,6 +26,13 @@ export class SurveyLiveTester {
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
 
+  private _simulatorEnabled = ko.observable<boolean>(true);
+  public get simulatorEnabled() {
+    return this._simulatorEnabled();
+  }
+  public set simulatorEnabled(value: boolean) {
+    this._simulatorEnabled(value);
+  }
   private simulator;
   public simulatorOptions = {
     device: "desktop",
@@ -249,15 +256,14 @@ export class SurveyLiveTester {
 
   public koHasFrame = ko.computed(() => {
     var device = simulatorDevices[this.koActiveDevice()];
-    return device.deviceType !== "desktop";
+    return this.simulatorEnabled && device.deviceType !== "desktop";
   });
 
   public koSimulatorFrame = ko.computed(() => {
-    var device = simulatorDevices[this.koActiveDevice()];
-    var hasFrame = device.deviceType !== "desktop";
-    if (!hasFrame) {
+    if (!this.koHasFrame) {
       return undefined;
     }
+    var device = simulatorDevices[this.koActiveDevice()];
     var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
     var width =
       ((this.koLandscapeOrientation() ? device.height : device.width) /
@@ -270,14 +276,13 @@ export class SurveyLiveTester {
     var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
     var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
     return {
-      hasFrame: hasFrame,
       scale: scale,
       width: width,
       height: height,
-      frameWidth: width * (hasFrame ? 1.33 : 1),
-      frameHeight: height * (hasFrame ? 1.34 : 1),
-      frameX: width * (hasFrame ? offsetRatioX : 0),
-      frameY: height * (hasFrame ? offsetRatioY : 0)
+      frameWidth: width * 1.33,
+      frameHeight: height * 1.34,
+      frameX: width * offsetRatioX,
+      frameY: height * offsetRatioY
     };
   });
 }
@@ -446,16 +451,3 @@ export var simulatorDevices = {
     title: ""
   }
 };
-
-// $(".svd-simulator").css({
-//   "-webkit-transform": "scale(" + scale + ")",
-//   "-moz-transform": "scale(" + scale + ")",
-//   "-ms-transform": "scale(" + scale + ")",
-//   "-o-transform": "scale(" + scale + ")",
-//   transform: "scale(" + scale + ")",
-//   "-webkit-transform-origin": "0 0",
-//   "transform-origin": "0 0",
-//   "-ms-transform-origin": "0 0",
-//   "-moz-transform-origin": "0 0",
-//   "-o-transform-origin": "0 0"
-// });

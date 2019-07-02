@@ -6,7 +6,7 @@
                 <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
             </span>
         </span>
-         <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
+        <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
             <label  for="testSurveyLocale" data-bind="text: localeText"></label>
             <span id="testSurveyLocale">
                 <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
@@ -18,22 +18,24 @@
                 <span class="checkmark" data-bind="css: { 'svd-main-background-color': koShowInvisibleElements(), 'svd-light-background-color': !koShowInvisibleElements() }"></span>
                 <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
             </div>
-         </label>
-         <span>
+        </label>
+        <!-- ko if: simulatorEnabled -->
+        <span>
           <label for="testDeviceSelector" data-bind="text: simulatorText"></label>
           <span id="testDeviceSelector">
               <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"></select>
           </span>
-          <!-- ko if: koHasFrame -->
-          <label for="testDeviceOrientation">
+        </span>
+        <!-- /ko -->
+        <!-- ko if: koHasFrame -->
+        <label for="testDeviceOrientation">
             <div class="sjs-cb-container">
                 <input id="testDeviceOrientation" class="svd_editor_control" type="checkbox" data-bind="checked: koLandscapeOrientation">
                 <span class="checkmark" data-bind="css: { 'svd-main-background-color': koLandscapeOrientation(), 'svd-light-background-color': !koLandscapeOrientation() }"></span>
                 <span class="sjs-cb-label" data-bind="text: landscapeOrientationText"></span>
             </div>
-         </label>
+        </label>
         <!-- /ko -->
-      </span>
   </div>
     <!-- ko template: "survey-simulator" -->
     <!-- /ko -->
@@ -96,7 +98,7 @@
 
 <script type="text/html" id="survey-simulator">
     <div class="svd-simulator-main">
-      <!-- ko if: koSimulatorFrame -->
+      <!-- ko if: koHasFrame -->
       <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
         <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
         <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
@@ -105,7 +107,7 @@
         </div>
       </div>
       <!-- /ko -->
-      <!-- ko ifnot: koSimulatorFrame -->
+      <!-- ko ifnot: koHasFrame -->
       <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
       <!-- /ko -->
   </div>
