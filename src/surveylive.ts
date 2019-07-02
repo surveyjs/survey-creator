@@ -35,12 +35,14 @@ export class SurveyLiveTester {
   };
   koActiveDevice = ko.observable("desktop");
   koDevices = ko.observableArray(
-    Object.keys(simulatorDevices).map(key => {
-      return {
-        text: simulatorDevices[key].title,
-        value: key
-      };
-    })
+    Object.keys(simulatorDevices)
+      .filter(key => !!simulatorDevices[key].title)
+      .map(key => {
+        return {
+          text: simulatorDevices[key].title,
+          value: key
+        };
+      })
   );
   koLandscapeOrientation = ko.observable(true);
 
@@ -245,9 +247,17 @@ export class SurveyLiveTester {
     survey["afterRenderSurvey"](element);
   }
 
+  public koHasFrame = ko.computed(() => {
+    var device = simulatorDevices[this.koActiveDevice()];
+    return device.deviceType !== "desktop";
+  });
+
   public koSimulatorFrame = ko.computed(() => {
     var device = simulatorDevices[this.koActiveDevice()];
     var hasFrame = device.deviceType !== "desktop";
+    if (!hasFrame) {
+      return undefined;
+    }
     var scale = device.ppi / device.cssPixelRatio;
     var width =
       ((this.koLandscapeOrientation() ? device.height : device.width) /
@@ -257,19 +267,50 @@ export class SurveyLiveTester {
       ((this.koLandscapeOrientation() ? device.width : device.height) /
         device.cssPixelRatio) *
       (DEFAULT_MONITOR_DPI / scale);
+    var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
+    var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
     return {
+      hasFrame: hasFrame,
       width: width,
       height: height,
       frameWidth: width * (hasFrame ? 1.33 : 1),
       frameHeight: height * (hasFrame ? 1.34 : 1),
-      frameX: width * (hasFrame ? 0.15 : 0),
-      frameY: height * (hasFrame ? 0.17 : 0)
+      frameX: width * (hasFrame ? offsetRatioX : 0),
+      frameY: height * (hasFrame ? offsetRatioY : 0)
     };
   });
 }
 
 export var DEFAULT_MONITOR_DPI = 102.69;
 export var simulatorDevices = {
+  desktop: {
+    deviceType: "desktop",
+    title: "Desktop"
+  },
+  // desktop_1280x720: {
+  //   cssPixelRatio: 1,
+  //   ppi: DEFAULT_MONITOR_DPI,
+  //   width: 720,
+  //   height: 1280,
+  //   deviceType: "desktop",
+  //   title: "Desktop 1280x720"
+  // },
+  // desktop_1440x900: {
+  //   cssPixelRatio: 1,
+  //   ppi: DEFAULT_MONITOR_DPI,
+  //   width: 900,
+  //   height: 1440,
+  //   deviceType: "desktop",
+  //   title: "Desktop 1440x900"
+  // },
+  // desktop_1920x1080: {
+  //   cssPixelRatio: 1,
+  //   ppi: DEFAULT_MONITOR_DPI,
+  //   width: 1080,
+  //   height: 1920,
+  //   deviceType: "desktop",
+  //   title: "Desktop 1920x1080"
+  // },
   iPhone: {
     cssPixelRatio: 2,
     ppi: 326,
@@ -358,42 +399,10 @@ export var simulatorDevices = {
     deviceType: "tablet",
     title: "MS Surface"
   },
-  desktop: {
-    cssPixelRatio: 1,
-    ppi: 149,
-    width: 600,
-    height: 766,
-    deviceType: "desktop",
-    title: "Desktop"
-  },
-  desktop_1280x720: {
-    cssPixelRatio: 1,
-    ppi: DEFAULT_MONITOR_DPI,
-    width: 720,
-    height: 1280,
-    deviceType: "desktop",
-    title: "Desktop 1280x720"
-  },
-  desktop_1440x900: {
-    cssPixelRatio: 1,
-    ppi: DEFAULT_MONITOR_DPI,
-    width: 900,
-    height: 1440,
-    deviceType: "desktop",
-    title: "Desktop 1440x900"
-  },
-  desktop_1920x1080: {
-    cssPixelRatio: 1,
-    ppi: DEFAULT_MONITOR_DPI,
-    width: 1080,
-    height: 1920,
-    deviceType: "desktop",
-    title: "Desktop 1920x1080"
-  },
   genericPhone: {
     cssPixelRatio: 1,
     deviceType: "phone",
-    title: "Custom"
+    title: ""
   }
 };
 

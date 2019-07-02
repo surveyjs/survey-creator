@@ -24,13 +24,15 @@
           <span id="testDeviceSelector">
               <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"></select>
           </span>
-          <label id="testDeviceOrientation">
+          <!-- ko if: koHasFrame -->
+          <label for="testDeviceOrientation">
             <div class="sjs-cb-container">
-                <input class="svd_editor_control" type="checkbox" data-bind="checked: koLandscapeOrientation">
+                <input id="testDeviceOrientation" class="svd_editor_control" type="checkbox" data-bind="checked: koLandscapeOrientation">
                 <span class="checkmark" data-bind="css: { 'svd-main-background-color': koLandscapeOrientation(), 'svd-light-background-color': !koLandscapeOrientation() }"></span>
                 <span class="sjs-cb-label" data-bind="text: landscapeOrientationText"></span>
             </div>
          </label>
+        <!-- /ko -->
       </span>
   </div>
     <!-- ko template: "survey-simulator" -->
@@ -93,13 +95,18 @@
 </script>
 
 <script type="text/html" id="survey-simulator">
-  <div class="svd-simulator-main">
-    <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
-      <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
-      <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
-      <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width + 'px', height: koSimulatorFrame().height + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px' }">
-        <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+    <div class="svd-simulator-main">
+      <!-- ko if: koSimulatorFrame -->
+      <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
+        <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
+        <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
+        <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width + 'px', height: koSimulatorFrame().height + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px' }">
+          <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+        </div>
       </div>
-    </div>
+      <!-- /ko -->
+      <!-- ko ifnot: koSimulatorFrame -->
+      <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+      <!-- /ko -->
   </div>
 </script>
