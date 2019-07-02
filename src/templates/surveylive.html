@@ -33,7 +33,7 @@
          </label>
       </span>
   </div>
-    <!-- ko template: { name: "survey-simulator", afterRender: simulatorRendered }-->
+    <!-- ko template: "survey-simulator" -->
     <!-- /ko -->
     <!-- ko ifnot: koIsRunning -->
     <div class="svd_test_results">
@@ -94,6 +94,12 @@
 
 <script type="text/html" id="survey-simulator">
   <div class="svd-simulator-main">
-      <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+    <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
+      <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
+      <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
+      <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width + 'px', height: koSimulatorFrame().height + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px' }">
+        <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+      </div>
     </div>
+  </div>
 </script>

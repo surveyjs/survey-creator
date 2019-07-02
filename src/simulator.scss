@@ -1,0 +1,35 @@
+﻿.svd-simulator {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: content-box;
+  position: absolute;
+}
+
+.svd-simulator-wrapper {
+  margin: 0 auto;
+  position: relative;
+}
+
+.svd-simulator-frame {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.svd-simulator-main {
+  height: 100%;
+  overflow: auto;
+}
+
+.svd-simulator-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow: auto;
+}
