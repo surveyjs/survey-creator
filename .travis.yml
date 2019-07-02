@@ -22,7 +22,7 @@ script:
 - http-server -p 7777 --silent &
 - testcafe chrome testCafe/ --reporter minimal
 before_deploy:
-- tar -zcvf survey-creator.tar.gz package
+- tar -zcvf survey-creator.tar.gz build
 - npm run doc_gen
 deploy:
 - provider: releases
