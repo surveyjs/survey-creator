@@ -33,6 +33,13 @@ export class SurveyLiveTester {
   public set simulatorEnabled(value: boolean) {
     this._simulatorEnabled(value);
   }
+  private _simulatorScaleEnabled = ko.observable<boolean>(true);
+  public get simulatorScaleEnabled() {
+    return this._simulatorScaleEnabled();
+  }
+  public set simulatorScaleEnabled(value: boolean) {
+    this._simulatorScaleEnabled(value);
+  }
   private simulator;
   public simulatorOptions = {
     device: "desktop",
@@ -276,7 +283,7 @@ export class SurveyLiveTester {
     var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
     var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
     return {
-      scale: scale,
+      scale: this.simulatorScaleEnabled ? scale : 1,
       width: width,
       height: height,
       frameWidth: width * 1.33,
