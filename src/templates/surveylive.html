@@ -100,7 +100,7 @@
       <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
         <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
         <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
-        <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width + 'px', height: koSimulatorFrame().height + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px' }">
+        <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px', transform: 'scale(' + koSimulatorFrame().scale + ')' }">
           <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
         </div>
       </div>

@@ -258,19 +258,20 @@ export class SurveyLiveTester {
     if (!hasFrame) {
       return undefined;
     }
-    var scale = device.ppi / device.cssPixelRatio;
+    var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
     var width =
       ((this.koLandscapeOrientation() ? device.height : device.width) /
         device.cssPixelRatio) *
-      (DEFAULT_MONITOR_DPI / scale);
+      scale;
     var height =
       ((this.koLandscapeOrientation() ? device.width : device.height) /
         device.cssPixelRatio) *
-      (DEFAULT_MONITOR_DPI / scale);
+      scale;
     var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
     var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
     return {
       hasFrame: hasFrame,
+      scale: scale,
       width: width,
       height: height,
       frameWidth: width * (hasFrame ? 1.33 : 1),
