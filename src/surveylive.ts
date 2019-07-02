@@ -343,13 +343,37 @@ export var simulatorDevices = {
     deviceType: "phone",
     title: "iPhone 6 Plus"
   },
-  iPhone7: {
+  iPhone8: {
     cssPixelRatio: 2,
     ppi: 326,
     width: 750,
     height: 1334,
     deviceType: "phone",
-    title: "iPhone 7"
+    title: "iPhone 8"
+  },
+  iPhone8plus: {
+    cssPixelRatio: 2,
+    ppi: 401,
+    width: 1080,
+    height: 1920,
+    deviceType: "phone",
+    title: "iPhone 8 Plus"
+  },
+  iPhoneX: {
+    cssPixelRatio: 2,
+    ppi: 458,
+    width: 1125,
+    height: 2436,
+    deviceType: "phone",
+    title: "iPhone X"
+  },
+  iPhoneXmax: {
+    cssPixelRatio: 2,
+    ppi: 458,
+    width: 1242,
+    height: 2688,
+    deviceType: "phone",
+    title: "iPhone X Max"
   },
   iPad: {
     cssPixelRatio: 2,
@@ -366,6 +390,22 @@ export var simulatorDevices = {
     height: 1024,
     deviceType: "tablet",
     title: "iPad Mini"
+  },
+  iPadPro: {
+    cssPixelRatio: 1,
+    ppi: 264,
+    width: 1688,
+    height: 2388,
+    deviceType: "tablet",
+    title: 'iPad Pro 11"'
+  },
+  iPadPro13: {
+    cssPixelRatio: 1,
+    ppi: 264,
+    width: 2048,
+    height: 2732,
+    deviceType: "tablet",
+    title: 'iPad Pro 12,9"'
   },
   androidPhone: {
     cssPixelRatio: 2,
