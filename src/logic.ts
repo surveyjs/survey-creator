@@ -10,11 +10,17 @@ export interface ISurveyLogicType {
 
 export class SurveyLogicType {
   constructor(
-    public logicType: ISurveyLogicType,
+    private logicType: ISurveyLogicType,
     public survey: Survey.SurveyModel
   ) {}
   public get name(): string {
     return this.logicType.name;
+  }
+  public get baseClass(): string {
+    return this.logicType.baseClass;
+  }
+  public get propertyName(): string {
+    return this.logicType.propertyName;
   }
   public get visible(): boolean {
     return !this.logicType.showIf || this.logicType.showIf(this.survey);
@@ -22,7 +28,10 @@ export class SurveyLogicType {
 }
 
 export class SurveyLogicItem {
-  constructor(public logicType: ISurveyLogicType) {}
+  constructor(
+    public logicType: ISurveyLogicType,
+    public element: Survey.Base
+  ) {}
 }
 
 export class SurveyLogic {
@@ -57,7 +66,7 @@ export class SurveyLogic {
   constructor(public survey: Survey.SurveyModel) {
     this.logicTypes = this.createLogicTypes();
     this.items = ko.observableArray();
-    this.buildItems();
+    this.update();
   }
   public getTypeByName(name: string): SurveyLogicType {
     for (var i = 0; i < this.logicTypes.length; i++) {
@@ -65,8 +74,58 @@ export class SurveyLogic {
     }
     return null;
   }
-  public update() {}
-  protected buildItems() {}
+  public update() {
+    this.items(this.buildItems());
+  }
+  protected buildItems(): Array<SurveyLogicItem> {
+    var res = [];
+    var elements = this.getAllElements();
+    for (var i = 0; i < elements.length; i++) {
+      this.buildItemsByElement(elements[i], res);
+    }
+    return res;
+  }
+  protected getAllElements(): Array<Survey.Base> {
+    var res = [];
+    this.AddElements(this.survey.pages, res);
+    this.AddElements(this.survey.getAllQuestions(), res);
+    this.AddElements(this.survey.getAllPanels(), res);
+    return res;
+  }
+  private AddElements(src: Array<any>, dest: Array<any>) {
+    for (var i = 0; i < src.length; i++) {
+      dest.push(src[i]);
+    }
+  }
+  private buildItemsByElement(
+    element: Survey.Base,
+    dest: Array<SurveyLogicItem>
+  ) {
+    var types = this.getElementAllTypes(element);
+    for (var i = 0; i < this.logicTypes.length; i++) {
+      var lt = this.logicTypes[i];
+      if (
+        types.indexOf(lt.baseClass) > -1 &&
+        !Survey.Helpers.isValueEmpty(element[lt.propertyName])
+      ) {
+        dest.push(new SurveyLogicItem(lt, element));
+      }
+    }
+  }
+  private getElementAllTypes(element: Survey.Base) {
+    var types = [];
+    var type = element.getType();
+    types.push(type);
+    while (!!type && type != "base") {
+      var cl = Survey.Serializer.findClass(type);
+      if (!cl) break;
+      type = cl.parentName;
+      if (!!type) {
+        types.push(type);
+      }
+    }
+    return types;
+  }
   protected createLogicTypes(): Array<SurveyLogicType> {
     var res = [];
     for (var i = 0; i < SurveyLogic.types.length; i++) {
