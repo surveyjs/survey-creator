@@ -61,11 +61,13 @@ export class SurveyLogic {
       }
     }
   ];
-  public items: any;
+  public koItems: any;
+  public koMode: any;
   public logicTypes: Array<SurveyLogicType>;
   constructor(public survey: Survey.SurveyModel) {
     this.logicTypes = this.createLogicTypes();
-    this.items = ko.observableArray();
+    this.koItems = ko.observableArray();
+    this.koMode = ko.observable("view");
     this.update();
   }
   public getTypeByName(name: string): SurveyLogicType {
@@ -75,7 +77,21 @@ export class SurveyLogic {
     return null;
   }
   public update() {
-    this.items(this.buildItems());
+    this.koItems(this.buildItems());
+    this.mode = this.items.length > 0 ? "view" : "select_type";
+  }
+  public get items(): Array<SurveyLogicItem> {
+    return this.koItems();
+  }
+  /**
+   * There are 3 modes: view, select_type, edit
+   */
+  public get mode() {
+    return this.koMode();
+  }
+  public set mode(val: string) {
+    if (val !== "view" && val !== "select_type" && val !== "edit") return;
+    this.koMode(val);
   }
   protected buildItems(): Array<SurveyLogicItem> {
     var res = [];

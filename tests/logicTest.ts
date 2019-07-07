@@ -51,5 +51,18 @@ QUnit.test("Add visible Items", function(assert) {
     ]
   });
   var logic = new SurveyLogic(survey);
-  assert.equal(logic.items().length, 2, "There are two items");
+  assert.equal(logic.items.length, 2, "There are two items");
+});
+QUnit.test("Add visible Items", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "select_type", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q2}=1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "view", "There are items");
 });
