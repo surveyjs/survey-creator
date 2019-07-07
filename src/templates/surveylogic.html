@@ -1,0 +1,19 @@
+<script type="text/html" id="surveylogic">
+  <div data-bind="visible: koMode() == 'view'">
+    <button onclick="$data.mode='select_type'">Add New</button>
+    <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
+    <div>
+        <span data-bind="text: item.element.name"></span>
+        <br/>
+        <span data-bind="text: item.logicType.text"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div data-bind="visible: koMode() == 'select_type'">
+    <!-- ko foreach: {data: $data.logicTypes, as: 'logicType' } -->
+    <div>
+        <span data-bind="text: logicType.text"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+</script>

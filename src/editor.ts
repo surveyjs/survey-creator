@@ -23,6 +23,7 @@ import { SurveyForDesigner } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
+import { SurveyLogic } from "./logic";
 
 /**
  * The toolbar item description.
@@ -86,6 +87,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
   private translationValue: Translation;
+  private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   private undoRedo: SurveyUndoRedo;
@@ -101,6 +103,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showTestSurveyTabValue = ko.observable<boolean>(false);
   private showEmbededSurveyTabValue = ko.observable<boolean>(false);
   private showTranslationTabValue = ko.observable<boolean>(false);
+  private showLogicTabValue = ko.observable<boolean>(false);
   private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
@@ -723,7 +726,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
    * @param options survey creator options. The following options are available: showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
+   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
    */
@@ -843,6 +846,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         context
       });
     };
+    this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"));
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -942,6 +946,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           template: "translation",
           data: this.translation,
           action: () => this.showTranslationEditor()
+        });
+      }
+      if (this.showLogicTab) {
+        this.tabs.push({
+          name: "logic",
+          title: this.getLocString("ed.logic"),
+          template: "surveylogic",
+          data: this.logic,
+          action: () => this.showLogicEditor()
         });
       }
     });
@@ -1108,6 +1121,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         ? options.showTranslationTab
         : false
     );
+    this.showLogicTabValue(
+      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
+    );
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
@@ -1193,7 +1209,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Call this method to render the Survey Creator.
    * @param element HtmlElement or html element id where survey creator will be rendered
-   * @param options survey creator options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
+   * @param options survey creator options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab,
+   * showTranslationTab, showLogicTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
    */
   public render(element: any = null, options: any = null) {
     if (options) this.setOptions(options);
@@ -1260,6 +1277,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get translation(): Translation {
     return this.translationValue;
+  }
+  /**
+   * Return the logic mode object.
+   * @see showLogicTab
+   */
+  public get logic(): SurveyLogic {
+    return this.logicValue;
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -1412,6 +1436,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set showTranslationTab(value: boolean) {
     this.showTranslationTabValue(value);
+  }
+  /**
+   * Set it to true to show "Logic" tab and to false to hide the tab
+   */
+  public get showLogicTab() {
+    return this.showLogicTabValue();
+  }
+  public set showLogicTab(value: boolean) {
+    this.showLogicTabValue(value);
   }
   /**
    * Set it to true to activate RTL support
@@ -1591,7 +1624,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.koViewType() == "designer") {
       this.jsonEditor.text = this.getSurveyTextFromDesigner();
     }
-    if (this.koViewType() == "translation" && newType == "designer") {
+    if (
+      (this.koViewType() == "translation" || this.koViewType() == "logic") &&
+      newType == "designer"
+    ) {
       this.survey.render();
     }
     if (this.koViewType() != "editor") return true;
@@ -1609,10 +1645,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   /**
    * Returns the current show view name. The possible returns values are:
-   * "designer", "editor", "test", "embed" and "translation".
+   * "designer", "editor", "test", "embed", "logic" and "translation".
    * @see showDesigner
    * @see showTestSurvey
    * @see showJsonEditor
+   * @see showLogicEditor
    * @see showTranslationEditor
    * @see showEmbedEditor
    */
@@ -1657,6 +1694,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!this.canSwitchViewType("translation")) return;
     this.showSurveyTranslation();
     this.koViewType("translation");
+  }
+  /**
+   * Make a "Logic" tab active.
+   */
+  public showLogicEditor() {
+    if (!this.canSwitchViewType("logic")) return;
+    this.showSurveyLogic();
+    this.koViewType("logic");
   }
   private getSurveyTextFromDesigner() {
     var json = new Survey.JsonObject().toJsonObject(this.survey);
@@ -2345,8 +2390,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showSurveyTranslation() {
     this.translation.survey = this.survey;
   }
+  private showSurveyLogic() {
+    this.logic.update(this.survey);
+  }
   private getSurveyJSON(): any {
-    if (this.koIsShowDesigner() || this.koViewType() == "translation")
+    if (
+      this.koIsShowDesigner() ||
+      this.koViewType() == "translation" ||
+      this.koViewType() == "logic"
+    )
       return new Survey.JsonObject().toJsonObject(this.survey);
     if (this.jsonEditor.isJsonCorrect)
       return new Survey.JsonObject().toJsonObject(this.jsonEditor.survey);

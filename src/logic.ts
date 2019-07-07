@@ -16,6 +16,9 @@ export class SurveyLogicType {
   public get name(): string {
     return this.logicType.name;
   }
+  public get text(): string {
+    return this.name;
+  }
   public get baseClass(): string {
     return this.logicType.baseClass;
   }
@@ -76,7 +79,10 @@ export class SurveyLogic {
     }
     return null;
   }
-  public update() {
+  public update(survey: Survey.SurveyModel = null) {
+    if (!!survey) {
+      this.survey = survey;
+    }
     this.koItems(this.buildItems());
     this.mode = this.items.length > 0 ? "view" : "select_type";
   }
@@ -90,7 +96,13 @@ export class SurveyLogic {
     return this.koMode();
   }
   public set mode(val: string) {
-    if (val !== "view" && val !== "select_type" && val !== "edit") return;
+    if (
+      val !== "view" &&
+      val !== "select_type" &&
+      val !== "new" &&
+      val !== "edit"
+    )
+      return;
     this.koMode(val);
   }
   protected buildItems(): Array<SurveyLogicItem> {
