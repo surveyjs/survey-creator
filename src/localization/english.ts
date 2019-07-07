@@ -204,6 +204,8 @@ export var enStrings = {
     //survey
     showTitle: "Show/hide title",
     locale: "Default language",
+    simulator: "Choose device",
+    landscapeOrientation: "Landscape",
     mode: "Mode (edit/read only)",
     clearInvisibleValues: "Clear invisible values",
     cookieName: "Cookie name (to disable run survey two times locally)",

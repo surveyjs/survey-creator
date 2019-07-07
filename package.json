@@ -1,5 +1,5 @@
 {
-  "version": "1.0.95",
+  "version": "1.0.96",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#BuildSurvey",
@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "jquery": "^3.1.1",
     "knockout": "^3.4.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
@@ -33,7 +32,6 @@
   "devDependencies": {
     "@types/ace": "0.0.32",
     "@types/bootstrap": "3.3.32",
-    "@types/jquery": "2.0.41",
     "@types/knockout": "3.4.63",
     "@types/node": "7.0.4",
     "@types/qunit": "2.0.31",
@@ -53,6 +51,7 @@
     "html-loader": "0.4.4",
     "http-server": "0.10.0",
     "husky": "^1.2.1",
+    "jquery": "^3.4.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-junit-reporter": "1.0.0",
