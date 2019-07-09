@@ -522,8 +522,8 @@ QUnit.test("Question editor: on property value changing", function(assert) {
     if (options.propertyName != "targetEntity") return;
     if (options.obj && options.obj.targetFieldEditor) {
       var choices = [];
-      choices.push(options.value + " 1");
-      choices.push(options.value + " 2");
+      choices.push(options.newValue + " 1");
+      choices.push(options.newValue + " 2");
       options.obj.targetFieldEditor.koChoices(choices);
     }
   });
