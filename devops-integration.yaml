@@ -24,3 +24,9 @@ steps:
 - script: |
     npm run test_ci
   displayName: 'run unit tests'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'SurveyJSCreatorBuild'
+    publishLocation: 'Container'
