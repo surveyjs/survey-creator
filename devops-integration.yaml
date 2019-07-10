@@ -25,6 +25,11 @@ steps:
     npm run test_ci
   displayName: 'run unit tests'
 
+- task: CopyFiles@2
+  inputs:
+    contents: 'build/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
