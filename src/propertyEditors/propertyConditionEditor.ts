@@ -99,6 +99,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return this._type;
   }
   public get availableQuestions(): any[] {
+    if (this.object instanceof Survey.SurveyModel)
+      return this.object.getAllQuestions();
     if (this.object instanceof Survey.MatrixDropdownColumn) {
       return this.object.colOwner["survey"].getAllQuestions();
     }

@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditionEditor";
 
 export interface ISurveyLogicType {
   name: string;
@@ -30,11 +31,30 @@ export class SurveyLogicType {
   }
 }
 
-export class SurveyLogicItem {
+export class SurveyLogicOperation {
   constructor(
     public logicType: ISurveyLogicType,
     public element: Survey.Base
   ) {}
+  public get text(): string {
+    return (
+      this.logicType + (!!this.element ? " - " + this.element["name"] : "")
+    );
+  }
+}
+
+export class SurveyLogicItem {
+  public koOperations: any;
+  constructor(public expression: string = "") {
+    this.koOperations = ko.observableArray();
+  }
+  public get operations(): Array<SurveyLogicOperation> {
+    return this.koOperations();
+  }
+  public addOperation(lt: SurveyLogicType, element: Survey.Base = null) {
+    var op = new SurveyLogicOperation(lt, element);
+    this.koOperations.push(op);
+  }
 }
 
 export class SurveyLogic {
@@ -65,13 +85,48 @@ export class SurveyLogic {
     }
   ];
   public koItems: any;
+  public koLogicTypes: any;
   public koMode: any;
-  public logicTypes: Array<SurveyLogicType>;
+  public koAddNew: any;
+  public koAddNewItem: any;
+  public koEditableItem: any;
+  public expressionEditor: SurveyPropertyConditionEditor;
+
   constructor(public survey: Survey.SurveyModel) {
-    this.logicTypes = this.createLogicTypes();
+    this.createExpressionPropertyEditor();
     this.koItems = ko.observableArray();
+    this.koLogicTypes = ko.observableArray();
     this.koMode = ko.observable("view");
+    var self = this;
+    this.koMode.subscribe(function(newValue) {
+      if (newValue == "new") {
+        self.koEditableItem(new SurveyLogicItem());
+      }
+    });
+    this.koAddNew = function() {
+      self.mode = "new";
+    };
+    this.koAddNewItem = function(logicType: SurveyLogicType) {
+      self.addNewOperation(logicType);
+    };
+    this.koEditableItem = ko.observable(null);
     this.update();
+  }
+  private getExpressionProperty(): Survey.JsonObjectProperty {
+    var property = Survey.Serializer.findProperty("survey", "hiddenLogic");
+    if (!!property) return property;
+    Survey.Serializer.addProperty("survey", {
+      name: "hiddenLogic:condition",
+      visible: false,
+      isSerializable: false
+    });
+    return Survey.Serializer.findProperty("survey", "hiddenLogic");
+  }
+  private createExpressionPropertyEditor() {
+    this.expressionEditor = new SurveyPropertyConditionEditor(
+      this.getExpressionProperty()
+    );
+    this.expressionEditor.object = this.survey;
   }
   public getTypeByName(name: string): SurveyLogicType {
     for (var i = 0; i < this.logicTypes.length; i++) {
@@ -83,27 +138,36 @@ export class SurveyLogic {
     if (!!survey) {
       this.survey = survey;
     }
+    this.koLogicTypes(this.createLogicTypes());
     this.koItems(this.buildItems());
-    this.mode = this.items.length > 0 ? "view" : "select_type";
+    this.mode = this.items.length > 0 ? "view" : "new";
+    this.koEditableItem(null);
+    this.expressionEditor.object = this.survey;
+    this.expressionEditor.beforeShow();
   }
   public get items(): Array<SurveyLogicItem> {
     return this.koItems();
   }
+  public get logicTypes(): Array<SurveyLogicType> {
+    return this.koLogicTypes();
+  }
+  public get editableItem(): SurveyLogicItem {
+    return this.koEditableItem();
+  }
+
   /**
-   * There are 3 modes: view, select_type, edit
+   * There are 3 modes: view, new, edit
    */
   public get mode() {
     return this.koMode();
   }
   public set mode(val: string) {
-    if (
-      val !== "view" &&
-      val !== "select_type" &&
-      val !== "new" &&
-      val !== "edit"
-    )
-      return;
+    if (val !== "view" && val !== "new" && val !== "edit") return;
     this.koMode(val);
+  }
+  public addNewOperation(logicType: SurveyLogicType) {
+    this.koEditableItem(new SurveyLogicItem());
+    this.mode = "new";
   }
   protected buildItems(): Array<SurveyLogicItem> {
     var res = [];
@@ -132,11 +196,14 @@ export class SurveyLogic {
     var types = this.getElementAllTypes(element);
     for (var i = 0; i < this.logicTypes.length; i++) {
       var lt = this.logicTypes[i];
+      var expression = element[lt.propertyName];
       if (
         types.indexOf(lt.baseClass) > -1 &&
-        !Survey.Helpers.isValueEmpty(element[lt.propertyName])
+        !Survey.Helpers.isValueEmpty(expression)
       ) {
-        dest.push(new SurveyLogicItem(lt, element));
+        var item = new SurveyLogicItem(expression);
+        item.addOperation(lt, element);
+        dest.push(item);
       }
     }
   }

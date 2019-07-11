@@ -56,13 +56,23 @@ QUnit.test("Add visible Items", function(assert) {
 QUnit.test("Add visible Items", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
-  assert.equal(logic.mode, "select_type", "There is no items");
+  assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
-      { type: "text", name: "q2", visibleIf: "{q1}=1" }
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3" }
     ]
   });
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
+  logic.mode = "new";
+  assert.equal(logic.mode, "new", "change to the select type mode");
+  assert.ok(logic.editableItem, "Editable item is created");
+  assert.ok(logic.expressionEditor, "expression editor is created");
+  assert.equal(
+    logic.expressionEditor.koAddConditionQuestions().length,
+    3,
+    "We have 3 questions here"
+  );
 });

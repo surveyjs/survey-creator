@@ -1,18 +1,27 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
-    <button onclick="$data.mode='select_type'">Add New</button>
+    <button data-bind="click: $data.koAddNew">Add New</button>
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
     <div>
-        <span data-bind="text: item.element.name"></span>
+        <span data-bind="text: item.expression"></span>
         <br/>
-        <span data-bind="text: item.logicType.text"></span>
-    </div>
+        <!-- ko foreach: {data: item.koOperations, as: 'op' } -->
+        <div>
+          <span data-bind="text: item.text"></span>
+          <br/>
+        </div>
+      <!-- /ko -->
+  </div>
     <!-- /ko -->
   </div>
-  <div data-bind="visible: koMode() == 'select_type'">
-    <!-- ko foreach: {data: $data.logicTypes, as: 'logicType' } -->
+  <div data-bind="visible: koMode() == 'new'">
+    <span>
+        Here is the expression:
+    </span>
+    <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
+    <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div>
-        <span data-bind="text: logicType.text"></span>
+        <span data-bind="text: item.text"></span>
     </div>
     <!-- /ko -->
   </div>
