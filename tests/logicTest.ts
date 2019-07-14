@@ -185,3 +185,81 @@ QUnit.test("Update available elements", function(assert) {
     "Just one question is available, op0"
   );
 });
+QUnit.test("Remove same operations on save", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  logic.editItem(logic.items[0]);
+  var lt = logic.getTypeByName("question_visibility");
+  logic.editableItem.addOperation(lt, <Survey.Question>(
+    survey.getQuestionByName("q1")
+  ));
+  logic.editableItem.addOperation(lt, <Survey.Question>(
+    survey.getQuestionByName("q2")
+  ));
+  logic.editableItem.addOperation(lt, <Survey.Question>(
+    survey.getQuestionByName("q2")
+  ));
+  assert.equal(
+    logic.editableItem.operations.length,
+    4,
+    "There are 4 operations"
+  );
+  logic.saveEditableItem();
+  assert.equal(
+    logic.editableItem.operations.length,
+    2,
+    "There are 2 operations left"
+  );
+});
+QUnit.test("Remove existing operation", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  logic.editItem(logic.items[0]);
+  logic.editableItem.removeOperation(logic.items[0].operations[1]);
+  logic.saveEditableItem();
+  assert.equal(
+    (<Survey.Question>survey.getQuestionByName("q2")).visibleIf,
+    "",
+    "Remove the visibleIf"
+  );
+});
+QUnit.test("Remove existing item", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 0, "There is no more items");
+  assert.equal(
+    (<Survey.Question>survey.getQuestionByName("q1")).visibleIf,
+    "",
+    "Remove the visibleIf from q1"
+  );
+  assert.equal(
+    (<Survey.Question>survey.getQuestionByName("q2")).visibleIf,
+    "",
+    "Remove the visibleIf from q2"
+  );
+});

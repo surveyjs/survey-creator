@@ -68,6 +68,10 @@ export class SurveyLogicOperation {
   public set element(val: Survey.Base) {
     this.koElement(val);
   }
+  public apply(expression: string) {
+    if (!this.element) return;
+    this.element[this.logicType.propertyName] = expression;
+  }
   public update() {
     this.koElements(this.logicType.elements);
   }
@@ -77,6 +81,9 @@ export class SurveyLogicOperation {
       this.koElements.push(op.element);
     }
   }
+  public equals(op: SurveyLogicOperation): boolean {
+    return this.logicType === op.logicType && this.element === op.element;
+  }
   public get text(): string {
     return (
       this.logicType.text + (!!this.element ? " - " + this.element["name"] : "")
@@ -85,8 +92,10 @@ export class SurveyLogicOperation {
 }
 
 export class SurveyLogicItem {
+  private removedOperations: Array<SurveyLogicOperation>;
   public koOperations: any;
   constructor(public expression: string = "") {
+    this.removedOperations = [];
     this.koOperations = ko.observableArray();
   }
   public get operations(): Array<SurveyLogicOperation> {
@@ -102,6 +111,7 @@ export class SurveyLogicItem {
     this.koOperations.push(op);
   }
   public removeOperation(op: SurveyLogicOperation) {
+    this.removedOperations.push(op);
     var index = this.koOperations().indexOf(op);
     if (index > -1) {
       this.koOperations.splice(index, 1);
@@ -117,12 +127,25 @@ export class SurveyLogicItem {
     }
   }
   public apply(expression: string) {
+    this.removeSameOperations();
+    for (var i = 0; i < this.removedOperations.length; i++) {
+      this.removedOperations[i].apply("");
+    }
+    this.removedOperations = [];
     this.expression = expression;
     var ops = this.operations;
     for (var i = 0; i < ops.length; i++) {
-      var op = ops[i];
-      if (!!op.element) {
-        op.element[op.logicType.propertyName] = expression;
+      ops[i].apply(expression);
+    }
+  }
+  private removeSameOperations() {
+    var ops = this.operations;
+    for (var i = ops.length - 1; i >= 0; i--) {
+      for (var j = i - 1; j >= 0; j--) {
+        if (ops[i].equals(ops[j])) {
+          this.removeOperation(ops[i]);
+          break;
+        }
       }
     }
   }
@@ -277,7 +300,13 @@ export class SurveyLogic {
     this.mode = "edit";
     item.update();
   }
-  public removeItem(item: SurveyLogicItem) {}
+  public removeItem(item: SurveyLogicItem) {
+    item.apply("");
+    var index = this.items.indexOf(item);
+    if (index > -1) {
+      this.items.splice(index, 1);
+    }
+  }
   public addNewOperation(logicType: SurveyLogicType) {
     this.editableItem.addOperation(logicType);
   }
