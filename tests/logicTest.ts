@@ -43,7 +43,7 @@ QUnit.test("Panel visibility logic", function(assert) {
   panelVis = logic.getTypeByName("panel_visibility");
   assert.equal(panelVis.visible, true, "There is a panel");
 });
-QUnit.test("Add visible Items", function(assert) {
+QUnit.test("Add existing visible Items", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
@@ -53,7 +53,7 @@ QUnit.test("Add visible Items", function(assert) {
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
-QUnit.test("Add visible Items", function(assert) {
+QUnit.test("Add new item", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "new", "There is no items");
@@ -74,5 +74,114 @@ QUnit.test("Add visible Items", function(assert) {
     logic.expressionEditor.koAddConditionQuestions().length,
     3,
     "We have 3 questions here"
+  );
+  logic.addNewOperation(logic.getTypeByName("question_visibility"));
+  assert.equal(
+    logic.editableItem.operations.length,
+    1,
+    "There is one operation in new item"
+  );
+  assert.equal(
+    logic.editableItem.operations[0].koElements().length,
+    1,
+    "There is one element available for adding"
+  );
+  assert.equal(
+    logic.editableItem.operations[0].koElements()[0].name,
+    "q3",
+    "The available element is q3"
+  );
+  logic.removeOperation(logic.editableItem.operations[0]);
+  assert.equal(
+    logic.editableItem.operations.length,
+    0,
+    "There is no operations"
+  );
+  logic.addNewOperation(logic.getTypeByName("question_visibility"));
+  var q3 = <Survey.Question>survey.getQuestionByName("q3");
+  logic.editableItem.operations[0].element = q3;
+  logic.expressionEditor.editingValue = "{q1} = 2";
+  logic.saveEditableItem();
+  assert.equal(q3.visibleIf, "{q1} = 2");
+});
+QUnit.test("Edit existing item", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3} =1" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "view", "There are items");
+  assert.equal(logic.items.length, 1, "There is one item");
+  assert.equal(
+    logic.items[0].operations.length,
+    2,
+    "The item has two operations"
+  );
+  assert.equal(
+    logic.items[0].operations[0].element["name"],
+    "q1",
+    "Element in the first operation set correctly"
+  );
+  logic.editItem(logic.items[0]);
+  assert.ok(logic.editableItem, "Editable item is set");
+  assert.equal(
+    logic.expressionEditor.editingValue,
+    "{q3}=1",
+    "Expression is set for editing"
+  );
+  assert.equal(
+    logic.editableItem.operations[0].koElements().length,
+    3,
+    "All questions are available, op0"
+  );
+  assert.equal(
+    logic.editableItem.operations[1].koElements().length,
+    3,
+    "All questions are available, op1"
+  );
+  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
+  assert.equal(
+    logic.editableItem.operations[2].koElements().length,
+    3,
+    "All questions are available, op2"
+  );
+});
+QUnit.test("Update available elements", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+      { type: "text", name: "q3", visibleIf: "{q2}=1" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "view", "There are items");
+  assert.equal(logic.items.length, 2, "There are two items");
+  logic.editItem(logic.items[0]);
+  assert.equal(
+    logic.editableItem.operations[0].koElements().length,
+    3,
+    "All questions are available, op0"
+  );
+  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"), <
+    Survey.Question
+  >survey.getQuestionByName("q4"));
+  logic.saveEditableItem();
+  logic.mode = "view";
+  logic.editItem(logic.items[1]);
+  assert.equal(
+    logic.editableItem.operations[0].koElements().length,
+    1,
+    "Just one question is available, op0"
   );
 });

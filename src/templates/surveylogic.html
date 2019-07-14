@@ -7,22 +7,45 @@
         <br/>
         <!-- ko foreach: {data: item.koOperations, as: 'op' } -->
         <div>
-          <span data-bind="text: item.text"></span>
+          <span data-bind="text: op.text"></span>
           <br/>
         </div>
       <!-- /ko -->
-  </div>
+      <button data-bind="click:$parent.koEditItem">Edit</button><button data-bind="click:$parent.koRemoveItem">Remove</button>
+    </div>
     <!-- /ko -->
   </div>
-  <div data-bind="visible: koMode() == 'new'">
+  <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
+    <button data-bind="click:$data.koShowView">Back</button>
     <span>
         Here is the expression:
     </span>
     <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
+    <!--ko if: $data.koEditableItem() != null -->
+    <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
+    <div>
+        <span data-bind="text: op.text"></span><button data-bind="click:$parent.koRemoveOperation">Remove</button>
+        <!-- ko template: { name: op.template, data: op } --><!-- /ko -->
+        <br/>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <button data-bind="click:$data.koSaveEditableItem">Save</button>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div>
-        <span data-bind="text: item.text"></span>
+        <span data-bind="text: item.text"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>
     </div>
     <!-- /ko -->
   </div>
+</script>
+<script type="text/html" id="surveylogic_selectelement">
+  <div class="form-control svd_custom_select">
+      <select onmousewheel="return false;" style="max-width:200px" data-bind="value: koElement, valueAllowUnset: true">
+          <option>Select...</option>
+        <!-- ko foreach: koElements -->
+        <option data-bind="value: $data, text:name"></option>
+        <!-- /ko -->
+      </select>
+  </div>
+</script>
 </script>
