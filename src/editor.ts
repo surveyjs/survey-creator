@@ -661,6 +661,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The event is called after user closes the popup element editor.
+   * <br/> options.element the edited element.
+   * <br/> options.isCanceled indicated user clicked Cancel.
+   */
+  public onElementEditorClosed: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+
+  /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
   public get isAutoSave() {
@@ -2219,6 +2229,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this,
       function() {
         if (onClose) onClose(isCanceled);
+        this.onElementEditorClosed.fire(self, { isCanceled: isCanceled, element: element });
       }
     );
   };
