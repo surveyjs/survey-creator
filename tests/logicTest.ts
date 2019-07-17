@@ -66,10 +66,16 @@ QUnit.test("Add new item", function(assert) {
   });
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
-  logic.mode = "new";
+  logic.editItem(logic.items[0]);
+  logic.addNew();
   assert.equal(logic.mode, "new", "change to the select type mode");
   assert.ok(logic.editableItem, "Editable item is created");
   assert.ok(logic.expressionEditor, "expression editor is created");
+  assert.equal(
+    logic.expressionEditor.editingValue,
+    "",
+    "the expression is empty"
+  );
   assert.equal(
     logic.expressionEditor.koAddConditionQuestions().length,
     3,
@@ -103,6 +109,7 @@ QUnit.test("Add new item", function(assert) {
   logic.expressionEditor.editingValue = "{q1} = 2";
   logic.saveEditableItem();
   assert.equal(q3.visibleIf, "{q1} = 2");
+  assert.equal(logic.items.length, 3, "There are 3 items now");
 });
 QUnit.test("Edit existing item", function(assert) {
   var survey = new Survey.SurveyModel();

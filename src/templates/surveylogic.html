@@ -32,7 +32,7 @@
     <!-- /ko -->
     <button data-bind="click:$data.koSaveEditableItem">Save</button>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
-    <div>
+    <div data-bind="visible: item.koVisible">
         <span data-bind="text: item.text"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>
     </div>
     <!-- /ko -->

@@ -13,10 +13,12 @@ export interface ISurveyLogicType {
 
 export class SurveyLogicType {
   private elementsValue: Array<any>;
+  public koVisible: any;
   constructor(
     private logicType: ISurveyLogicType,
     public survey: Survey.SurveyModel
   ) {
+    this.koVisible = ko.observable(true);
     this.update();
   }
   public get name(): string {
@@ -43,6 +45,7 @@ export class SurveyLogicType {
     this.elementsValue = !!this.logicType.elements
       ? this.logicType.elements(this.survey)
       : null;
+    this.koVisible(this.visible);
   }
   public get visible(): boolean {
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
@@ -219,13 +222,8 @@ export class SurveyLogic {
     this.koLogicTypes = ko.observableArray();
     this.koMode = ko.observable("view");
     var self = this;
-    this.koMode.subscribe(function(newValue) {
-      if (newValue == "new") {
-        self.koEditableItem(new SurveyLogicItem());
-      }
-    });
     this.koAddNew = function() {
-      self.mode = "new";
+      self.addNew();
     };
     this.koEditItem = function(item: SurveyLogicItem) {
       self.editItem(item);
@@ -269,6 +267,9 @@ export class SurveyLogic {
     if (!this.editableItem) return;
     this.expressionEditor.apply();
     this.editableItem.apply(this.expressionEditor.editingValue);
+    if (this.koItems.indexOf(this.editableItem) < 0) {
+      this.koItems.push(this.editableItem);
+    }
   }
   public get items(): Array<SurveyLogicItem> {
     return this.koItems();
@@ -294,6 +295,11 @@ export class SurveyLogic {
     }
     this.koMode(val);
   }
+  public addNew() {
+    this.koEditableItem(new SurveyLogicItem());
+    this.expressionEditor.editingValue = "";
+    this.mode = "new";
+  }
   public editItem(item: SurveyLogicItem) {
     this.koEditableItem(item);
     this.expressionEditor.editingValue = item.expression;
@@ -302,9 +308,9 @@ export class SurveyLogic {
   }
   public removeItem(item: SurveyLogicItem) {
     item.apply("");
-    var index = this.items.indexOf(item);
+    var index = this.koItems.indexOf(item);
     if (index > -1) {
-      this.items.splice(index, 1);
+      this.koItems.splice(index, 1);
     }
   }
   public addNewOperation(logicType: SurveyLogicType) {
