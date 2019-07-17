@@ -2229,7 +2229,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this,
       function() {
         if (onClose) onClose(isCanceled);
-        this.onElementEditorClosed.fire(self, { isCanceled: isCanceled, element: element });
+        self.onElementEditorClosed.fire(self, { isCanceled: isCanceled, element: element });
       }
     );
   };
