@@ -283,7 +283,7 @@ export class SurveyLiveTester {
     var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
     var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
     return {
-      scale: this.simulatorScaleEnabled ? scale : 1,
+      scale: this.simulatorScaleEnabled ? scale * 2 : 1,
       width: width,
       height: height,
       frameWidth: width * 1.33,

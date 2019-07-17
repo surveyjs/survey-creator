@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
   properties?: Array<
-    string | { name: string; category?: string; tab?: string }
+    string | { name: string; title?: string; category?: string; tab?: string }
   >;
   tabs?: Array<{
     name: string;
