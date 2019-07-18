@@ -21,7 +21,7 @@ export class SurveyLiveTester {
   koLanguages: any;
   koActiveLanguage: any;
   koShowInvisibleElements = ko.observable(false);
-  showObjectTitles = false;
+  public onGetObjectDisplayName: (obj: Survey.Base) => string = null;
   koShowPagesInTestSurveyTab = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
@@ -160,7 +160,9 @@ export class SurveyLiveTester {
       var page = this.survey.pages[i];
       pages.push({
         page: page,
-        title: SurveyHelper.getObjectName(page, this.showObjectTitles),
+        title: this.onGetObjectDisplayName
+          ? this.onGetObjectDisplayName(page)
+          : page.name,
         koVisible: ko.observable(page.isVisible),
         koDisabled: ko.observable(!page.isVisible),
         koActive: ko.observable(

@@ -17,7 +17,7 @@ export class SurveyObjects {
   constructor(
     public koObjects: any,
     public koSelected: any,
-    private showObjectTitles = false
+    private getObjectDisplayName: (obj: Survey.Base) => string = null
   ) {}
   public get survey(): Survey.Survey {
     return this.surveyValue;
@@ -190,7 +190,9 @@ export class SurveyObjects {
     for (var i = 1; i < item.level; i++) {
       intend += SurveyObjects.intend;
     }
-    var text = SurveyHelper.getObjectName(item.value, this.showObjectTitles);
+    var text = !!this.getObjectDisplayName
+      ? this.getObjectDisplayName(item.value)
+      : SurveyHelper.getObjectName(item.value, false);
     if (this.getItemTextCallback) {
       text = this.getItemTextCallback(item.value, text);
     }

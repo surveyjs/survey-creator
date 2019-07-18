@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyLiveTester } from "../src/surveylive";
+import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("surveyLiveTests");
 
@@ -117,3 +118,36 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("Use title for pages", function(assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    pages: [
+      {
+        name: "p1",
+        title: "First Page",
+        elements: [{ type: "text", name: "q1" }]
+      },
+      {
+        name: "p2",
+        title: "Second Page",
+        elements: [{ type: "text", name: "q2" }]
+      }
+    ]
+  };
+  assert.equal(creator.survey.pages.length, 2, "There are two pages in survey");
+  creator.showObjectTitles = true;
+  creator.onGetObjectDisplayName.add(function(sender, options) {
+    if (options.obj.name == "p2") options.displayName = "My Second Page";
+  });
+  creator.showTestSurvey();
+  var test = creator.surveyLiveTester;
+  assert.equal(
+    test.survey.pages.length,
+    2,
+    "There are two pages in test survey"
+  );
+  assert.equal(test.koPages().length, 2, "There are two pages in selector");
+  assert.equal(test.koPages()[0].title, "First Page", "Use Page title");
+  assert.equal(test.koPages()[1].title, "My Second Page", "Use Page title");
+});
