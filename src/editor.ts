@@ -145,6 +145,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   /**
    * You need to set this property to true if you want to show titles instead of names in pages editor and object selector.
+   * @see onShowObjectDisplayName
    */
   public showObjectTitles = false;
 
@@ -287,6 +288,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.result the result of comparing. It can be 0 (use default behavior),  -1 options.property1 is less than options.property2 or 1 options.property1 is more than options.property2
    */
   public onCustomSortProperty: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
+   * Use this event, if you want custom display name for objects.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.displayName change this property to show your custom display name for the object
+   * @see showObjectTitles
+   */
+  public onGetObjectDisplayName: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
@@ -774,7 +787,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.surveyObjects = new SurveyObjects(
       this.koObjects,
       this.koSelectedObject,
-      this.showObjectTitles
+      function(obj: Survey.Base): string {
+        return self.getObjectDisplayName(obj);
+      }
     );
     this.surveyObjects.getItemTextCallback = function(obj, text) {
       var options = { obj: obj, text: text };
@@ -831,7 +846,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return self.onCanShowObjectProperty(object, property);
     };
     this.surveyLive = new SurveyLiveTester(this);
-    this.surveyLive.showObjectTitles = this.showObjectTitles;
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.translationValue = new Translation(
       this.createSurvey({}, "translation")
@@ -1250,13 +1264,28 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   /**
    * The Survey JSON as a text. Use it to get Survey JSON or change it.
+   * @see JSON
    */
-  public get text() {
+  public get text(): string {
     if (this.koViewType() == "editor") return this.jsonEditor.text;
     return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
     this.changeText(value, true);
+  }
+  /**
+   * The Survey JSON. Use it to get Survey JSON or change it.
+   * @see text
+   */
+  public get JSON(): any {
+    return this.survey.toJSON();
+  }
+  public set JSON(val: any) {
+    if (this.koViewType() == "editor") {
+      this.setTextValue(JSON.stringify(val));
+    } else {
+      this.initSurveyWithJSON(val, true);
+    }
   }
   /**
    * Set JSON as text  into survey. Clear undo/redo states optionally.
@@ -1266,13 +1295,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public changeText(value: string, clearState = false) {
     var textWorker = new SurveyTextWorker(value);
     if (textWorker.isJsonCorrect) {
-      this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
-      this.showDesigner();
-      this.setUndoRedoCurrentState(clearState);
+      this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
       this.setTextValue(value);
       this.koViewType("editor");
     }
+  }
+  private initSurveyWithJSON(json: any, clearState: boolean) {
+    this.initSurvey(json);
+    this.showDesigner();
+    this.setUndoRedoCurrentState(clearState);
   }
   /**
    * Toolbox object. Contains information about Question toolbox items.
@@ -1714,7 +1746,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koViewType("logic");
   }
   private getSurveyTextFromDesigner() {
-    var json = new Survey.JsonObject().toJsonObject(this.survey);
+    var json = this.survey.toJSON();
     if (this.options && this.options.generateValidJSON)
       return JSON.stringify(json, null, 1);
     return new SurveyJSON5().stringify(json, null, 1);
@@ -2274,7 +2306,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this,
       function() {
         if (onClose) onClose(isCanceled);
-        self.onElementEditorClosed.fire(self, { isCanceled: isCanceled, element: element });
+        self.onElementEditorClosed.fire(self, {
+          isCanceled: isCanceled,
+          element: element
+        });
       }
     );
   };
@@ -2374,6 +2409,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       target: obj
     });
   }
+  public get surveyLiveTester(): SurveyLiveTester {
+    return this.surveyLive;
+  }
   private showLiveSurvey() {
     var self = this;
     this.surveyLive.onSurveyCreatedCallback = function(survey: Survey.Survey) {
@@ -2386,6 +2424,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         .showDefaultLanguageInTestSurveyTab,
       showInvisibleElementsInTestSurveyTab: this
         .showInvisibleElementsInTestSurveyTab
+    };
+    this.surveyLive.onGetObjectDisplayName = function(obj): string {
+      return self.getObjectDisplayName(obj);
     };
     this.surveyLive.show(options);
   }
@@ -2428,6 +2469,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       annotations.push(annotation);
     }
     return annotations;
+  }
+  public getObjectDisplayName(obj: Survey.Base): string {
+    var displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
+    var options = { obj: obj, displayName: displayName };
+    this.onGetObjectDisplayName.fire(this, options);
+    return options.displayName;
   }
   //implements ISurveyObjectEditorOptions
   get alwaySaveTextInPropertyEditors(): boolean {

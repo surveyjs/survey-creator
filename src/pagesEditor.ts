@@ -17,7 +17,9 @@ export class PagesEditor {
       if (!this.isDraggingPage()) {
         this.prevPagesForSelector = this.editor.pages();
         if (!this.readOnly) {
-          this.prevPagesForSelector = this.prevPagesForSelector.concat([<any>{ name: this.getLocString("ed.addNewPage") }]);
+          this.prevPagesForSelector = this.prevPagesForSelector.concat([
+            <any>{ name: this.getLocString("ed.addNewPage") }
+          ]);
         }
       }
       return this.prevPagesForSelector;
@@ -44,7 +46,7 @@ export class PagesEditor {
   }
 
   getDisplayText = (page: Survey.PageModel) => {
-    return (this.editor.showObjectTitles ? page.title : "") || page.name;
+    return this.editor.getObjectDisplayName(page);
   };
 
   pageSelection = ko.computed<Survey.PageModel>({
@@ -208,7 +210,6 @@ export class PagesEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
-
 }
 
 ko.components.register("pages-editor", {

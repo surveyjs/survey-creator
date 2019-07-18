@@ -53,7 +53,9 @@ class EditorOptionsTests implements ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
-  showObjectTitles: boolean;
+  getObjectDisplayName(obj: Survey.Base): string {
+    return obj["name"];
+  }
   showTitlesInExpressions: boolean;
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
@@ -1326,7 +1328,7 @@ QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
   };
   stringProperty.object = question;
   var options = new EditorOptionsTests();
-  options.doValueChangingCallback = function (options) {
+  options.doValueChangingCallback = function(options) {
     options.newValue = options.newValue.trim();
   };
   stringProperty.options = options;

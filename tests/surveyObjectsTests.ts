@@ -382,7 +382,9 @@ QUnit.test(
     var objects = new SurveyObjects(
       ko.observableArray(),
       ko.observable(),
-      true
+      function(obj: any) {
+        return obj["title"];
+      }
     );
     objects.survey = survey;
     assert.equal(
