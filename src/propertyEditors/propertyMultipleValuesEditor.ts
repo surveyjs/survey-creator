@@ -42,11 +42,23 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     return "multiplevalues";
   }
   public getBackgroundCls(value) {
-    return this.koEditingValue().indexOf("" + value) === -1 ? "svd-light-background-color" : "svd-main-background-color"
+    return this.koEditingValue().indexOf("" + value) === -1
+      ? "svd-light-background-color"
+      : "svd-main-background-color";
+  }
+  private setChoices(choices: Array<Survey.ItemValue>) {
+    if (!choices || !Array.isArray(choices) || !choices.length) return;
+    Survey.ItemValue.setData(this.items, choices);
+    this.koItems(this.items);
   }
   private setItems() {
-    Survey.ItemValue.setData(this.items, this.property.choices);
-    this.koItems(this.items);
+    var self = this;
+    var choices = (<any>this.property["getChoices"])(this.object, function(
+      choices: any
+    ) {
+      self.setChoices(choices);
+    });
+    this.setChoices(choices);
   }
   private getTextByItemValue(val: any) {
     for (var i = 0; i < this.items.length; i++) {
