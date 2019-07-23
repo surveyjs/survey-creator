@@ -53,6 +53,11 @@ export var editorLocalization = {
     if (obj["title"]) return obj["title"];
     return "";
   },
+  getPropertyInEditor: function(strName: string, locale: string = null) {
+    var obj = this.getString("pe." + strName, locale);
+    if (obj !== strName) return obj;
+    return this.getProperty(strName);
+  },
   getProperty: function(strName: string, locale: string = null) {
     var obj = this.getString("p." + strName, locale);
     if (obj !== strName) return obj;

@@ -80,7 +80,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       var name = this.koIsValid()
         ? "conditionButtonAdd"
         : "conditionButtonReplace";
-      return editorLocalization.editorLocalization.getString("pe." + name);
+      return editorLocalization.editorLocalization.getPropertyInEditor(name);
     }, this);
     this.koAddContionValueEnabled = ko.computed(function() {
       return self.canShowValueByOperator(self.koAddConditionOperator());
