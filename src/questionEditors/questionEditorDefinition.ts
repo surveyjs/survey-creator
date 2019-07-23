@@ -60,6 +60,7 @@ export class SurveyQuestionEditorDefinition {
       properties: ["totalText"]
     },
     matrix: {
+      properties: ["isAllRowRequired"],
       tabs: [{ name: "columns", index: 10 }, { name: "rows", index: 11 }]
     },
     multipletext: {
