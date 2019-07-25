@@ -1662,43 +1662,55 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koViewType();
   }
   /**
+   * Change the active view/tab. It will return false if it can't change the current tab.
+   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
+   */
+  public makeNewViewActive(viewName: string): boolean {
+    if (!this.canSwitchViewType(viewName)) return false;
+    if (viewName == "editor") {
+      this.jsonEditor.show(this.getSurveyTextFromDesigner());
+    }
+    if (viewName == "test") {
+      this.showLiveSurvey();
+    }
+    if (viewName == "embed") {
+      this.showSurveyEmbeding();
+    }
+    if (viewName == "translation") {
+      this.showSurveyTranslation();
+    }
+    this.koViewType(viewName);
+    return true;
+  }
+  /**
    * Make a "Survey Designer" tab active.
    */
   public showDesigner() {
-    if (!this.canSwitchViewType("designer")) return;
-    this.koViewType("designer");
+    this.makeNewViewActive("designer");
   }
   /**
    * Make a "JSON Editor" tab active.
    */
   public showJsonEditor() {
-    if (this.koViewType() == "editor") return;
-    this.jsonEditor.show(this.getSurveyTextFromDesigner());
-    this.koViewType("editor");
+    this.makeNewViewActive("editor");
   }
   /**
    * Make a "Test Survey" tab active.
    */
   public showTestSurvey() {
-    if (!this.canSwitchViewType(null)) return;
-    this.showLiveSurvey();
-    this.koViewType("test");
+    this.makeNewViewActive("test");
   }
   /**
    * Make a "Embed Survey" tab active.
    */
   public showEmbedEditor() {
-    if (!this.canSwitchViewType("embed")) return;
-    this.showSurveyEmbeding();
-    this.koViewType("embed");
+    this.makeNewViewActive("embed");
   }
   /**
    * Make a "Translation"" tab active.
    */
   public showTranslationEditor() {
-    if (!this.canSwitchViewType("translation")) return;
-    this.showSurveyTranslation();
-    this.koViewType("translation");
+    this.makeNewViewActive("translation");
   }
   private getSurveyTextFromDesigner() {
     var json = this.survey.toJSON();
