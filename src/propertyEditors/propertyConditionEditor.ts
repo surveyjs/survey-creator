@@ -531,6 +531,7 @@ export function doGetCompletions(
           identifierRegex: ID_REGEXP
         });
       } else if (
+        !!currentQuestion &&
         currentQuestion.data instanceof Survey.QuestionPanelDynamicItem
       ) {
         completions.push({
@@ -620,7 +621,9 @@ ko.bindingHandlers.aceEditor = {
       //   }
       editor.getSession().setAnnotations(errors);
     });
-
+    editor.on("focus", function() {
+      editor.setReadOnly(objectEditor.readOnly());
+    });
     var updateCallback = () => {
       if (!isUpdating) {
         editor.setValue(objectEditor.koTextValue() || "");
