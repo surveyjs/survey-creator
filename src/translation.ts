@@ -418,6 +418,23 @@ export class Translation implements ITranslationLocales {
     this.root.fillLocales(locales);
     this.setLocales(locales);
   }
+  public getSelectedLocales(): Array<string> {
+    var res = [];
+    var locs = this.koLocales();
+    for (var i = 0; i < locs.length; i++) {
+      if (locs[i].koVisible()) res.push(locs[i].locale);
+    }
+    return res;
+  }
+  public setSelectedLocales(selectedLocales: Array<string>) {
+    selectedLocales = selectedLocales || [];
+    var res = [];
+    var locs = this.koLocales();
+    for (var i = 0; i < locs.length; i++) {
+      locs[i].koVisible(selectedLocales.indexOf(locs[i].locale) > -1);
+    }
+    return res;
+  }
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
   }

@@ -481,9 +481,9 @@ Survey.Serializer.findProperty("question", "description").visible = false;
 //make choicesByUrl property from checkbox, dropdown and radiogroup questions invisible
 Survey.Serializer.findProperty("selectbase", "choicesUrl").visible = false;
 ```
-This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onCanShowProperty** event.
+This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onShowingProperty** event.
 ```javascript
-surveyCreator.onCanShowProperty.add(function (sender, options) {
+surveyCreator.onShowingProperty.add(function (sender, options) {
     //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
     options.canShow = myBlackList.indexOf(options.property.name) < 0; //show if it is not in a blacklist
     //You may do opposite and use the white list

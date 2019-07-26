@@ -9,7 +9,7 @@ import { equal } from "assert";
 
 export default QUnit.module("TranslatonTests");
 
-QUnit.test("Text question localization properties", function (assert) {
+QUnit.test("Text question localization properties", function(assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question);
   assert.ok(
@@ -17,7 +17,7 @@ QUnit.test("Text question localization properties", function (assert) {
     "There are four or more localization strings"
   );
 });
-QUnit.test("Text question choices localization", function (assert) {
+QUnit.test("Text question choices localization", function(assert) {
   var question = new Survey.QuestionCheckbox("q1");
   question.choices = ["item1", { value: "item2", text: "text 2" }];
   var group = new TranslationGroup(question.name, question);
@@ -148,6 +148,49 @@ QUnit.test("Do not reset locales on reset", function(assert) {
     translation.koLocales().length,
     3,
     "There are still 3 locations"
+  );
+});
+QUnit.test("get/set the selected locales", function(assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("page1");
+  survey.pages[0].addNewQuestion("checkbox", "question1");
+  var translation = new Translation(survey);
+  translation.addLocale("fr");
+  translation.addLocale("de");
+  translation.addLocale("it");
+  translation.setSelectedLocales(null);
+  assert.deepEqual(
+    translation.getSelectedLocales(),
+    [],
+    "There is no selected locales"
+  );
+  translation.koLocales()[1].koVisible(true);
+  translation.koLocales()[3].koVisible(true);
+  assert.deepEqual(
+    translation.getSelectedLocales(),
+    ["fr", "it"],
+    "There are two selected locales now"
+  );
+  translation.setSelectedLocales(["de", "it"]);
+  assert.deepEqual(
+    translation.getSelectedLocales(),
+    ["de", "it"],
+    "There are two different selected locales now"
+  );
+  assert.equal(
+    translation.koLocales()[1].koVisible(),
+    false,
+    "'fr' is not selected"
+  );
+  assert.equal(
+    translation.koLocales()[2].koVisible(),
+    true,
+    "'de' is selected"
+  );
+  assert.equal(
+    translation.koLocales()[3].koVisible(),
+    true,
+    "'it' is selected"
   );
 });
 QUnit.test("Translation show All strings", function(assert) {
