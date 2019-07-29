@@ -2,7 +2,7 @@
     <div
     class="row svd_survey_designer"
   >
-    <div
+    <div data-bind="visible: koShowToolbox"
       class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox svd-dark-bg-color"
     >
       <!-- ko if: toolbox.koHasCategories -->
@@ -82,10 +82,12 @@
       <!-- /ko  -->
       <!-- /ko  -->
     </div>
+    <!-- ko if: koShowToolbox -->
     <svd-splitter params="minLeft: 100, minRight: 600"></svd-splitter>
+    <!-- /ko  -->
     <div
       class="col-xs-11 svd_editors"
-      data-bind="css: {'col-lg-7 col-md-7 col-sm-8': !koHideAdvancedSettings(), 'col-lg-10 col-md-10 col-sm-11': koHideAdvancedSettings, 'svd_wide': koHideAdvancedSettings}"
+      data-bind="css: {'col-lg-7 col-md-7 col-sm-8 col-xs-8': !koHideAdvancedSettings() && koShowToolbox(), 'col-lg-9 col-md-9 col-sm-9 col-xs-9': !koHideAdvancedSettings() && !koShowToolbox(), 'col-lg-10 col-md-10 col-sm-11 col-xs-11': koHideAdvancedSettings() && koShowToolbox(), 'col-lg-12 col-md-12 col-sm-12 col-xs-12': koHideAdvancedSettings() && !koShowToolbox(), 'svd_wide': koHideAdvancedSettings}"
     >
       <div class="svd_toolbar">
         <!-- ko if: koShowPropertyGrid() && koHideAdvancedSettings()  -->

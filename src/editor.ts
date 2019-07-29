@@ -731,6 +731,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koGenerateValidJSON: any;
   koShowOptions: any;
   koShowPropertyGrid = ko.observable(true);
+  koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
   koDesignerHeight: any;
@@ -751,10 +752,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
    * @param options survey creator options. The following options are available: showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
+   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor,
+   * showPropertyGrid, showToolbox, allowModifyPages
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
-   * allowModifyPages
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -1167,6 +1168,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
+    this.showToolbox =
+      typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
     this.isAutoSave =
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
@@ -1417,6 +1420,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set showPropertyGrid(value: boolean) {
     this.koShowPropertyGrid(value);
     this.koHideAdvancedSettings(!value);
+  }
+  /**
+   * Set it to false to  hide the question toolbox on the left.
+   */
+  public get showToolbox() {
+    return this.koShowToolbox();
+  }
+  public set showToolbox(value: boolean) {
+    this.koShowToolbox(value);
   }
   /**
    * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
