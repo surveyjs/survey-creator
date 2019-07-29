@@ -1716,7 +1716,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.makeNewViewActive("embed");
   }
   /**
-   * Make a "Translation"" tab active.
+   * Make a "Translation" tab active.
    */
   public showTranslationEditor() {
     this.makeNewViewActive("translation");
