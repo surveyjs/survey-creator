@@ -157,6 +157,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public showPagesInTestSurveyTab = true;
 
   /**
+   * Set this property to false to disable pages adding, editing and deleting
+   */
+  public allowModifyPages = true;
+
+  /**
    * Set this property to false to hide the default language selector in the Test Survey Tab
    */
   public showDefaultLanguageInTestSurveyTab = true;
@@ -749,6 +754,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
+   * allowModifyPages
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -1196,6 +1202,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
       this.showInvisibleElementsInTestSurveyTab =
         options.showInvisibleElementsInTestSurveyTab;
+    }
+    if (typeof options.allowModifyPages !== "undefined") {
+      this.allowModifyPages = options.allowModifyPages;
     }
   }
   /**

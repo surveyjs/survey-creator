@@ -557,6 +557,27 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
   assert.equal(editor["pages"]()[1], pagesEditor.selectedPage);
 });
 
+QUnit.test("pagesEditor.readOnly", function(assert) {
+  var creator = new SurveyCreator();
+  var pagesEditor = new PagesEditor(creator, document.createElement("div"));
+  assert.equal(pagesEditor.readOnly, false, "page editor is not read-only by default");
+  
+  creator.readOnly = true;
+  pagesEditor = new PagesEditor(creator, document.createElement("div"));
+  assert.equal(pagesEditor.readOnly, true, "page editor is read-only editor.readOnly");
+
+  creator.readOnly = false;
+  pagesEditor = new PagesEditor(creator, document.createElement("div"));
+  assert.equal(pagesEditor.readOnly, false, "page editor is not read-only again");
+  
+  assert.equal(creator.allowModifyPages, true, "The property is true by default");
+  var creator = new SurveyCreator(null, {allowModifyPages: false});
+  assert.equal(creator.allowModifyPages, false, "The parameter set correctly");
+  pagesEditor = new PagesEditor(creator, document.createElement("div"));
+  assert.equal(pagesEditor.readOnly, true, "page editor is read-only allowModifyPages");
+});
+
+
 QUnit.test("PagesEditor change question's page", function(assert) {
   var jsonText = JSON.stringify({
     pages: [
