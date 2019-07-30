@@ -371,7 +371,7 @@ QUnit.test("SurveyPropertyItemValue different view type", function(assert) {
   assert.equal(editor.koItemsText(), "", "It is empty by default");
   editor.koActiveView("text");
   assert.equal(editor.koItemsText(), "1|item1\n2", "It is empty by default");
-  editor.koItemsText("1|item1\n\n2|item2\n3\ni4");
+  editor.koItemsText("1|item1\n\n2|item2\n3|3\ni4|i4");
   editor.koActiveView("form");
   assert.equal(editor.koItems().length, 4, "There are 4 items");
   assert.equal(

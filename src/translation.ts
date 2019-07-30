@@ -230,7 +230,7 @@ export class TranslationGroup extends TranslationItemBase {
       if (
         !!locStr &&
         this.obj.getType() != "page" &&
-        (!!locStr.onGetTextCallback || locStr.onRenderedHtmlCallback)
+        (!!locStr.onGetTextCallback || locStr['onRenderedHtmlCallback'])
       )
         return this.obj["name"];
     }
