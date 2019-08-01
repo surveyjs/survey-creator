@@ -20,12 +20,30 @@ steps:
 
 - script: |
     npm install
-    npm run build_prod
-  displayName: 'npm install and build'
+  displayName: 'npm install'
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+    pipeline: '7'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSLibraryBuild'
+    downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
+    Contents: '**'
+    TargetFolder: '$(Build.Repository.LocalPath)/node_modules/survey-knockout'
+    OverWrite: true
 
 - script: |
+    npm run build_prod
     npm run test_ci
-  displayName: 'run unit tests'
+  displayName: 'run build and run unit tests'
 
 - task: CopyFiles@2
   inputs:
