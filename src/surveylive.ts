@@ -174,9 +174,7 @@ export class SurveyLiveTester {
       this.koShowPagesInTestSurveyTab(options.showPagesInTestSurveyTab);
     }
     if (!!options && options.showDefaultLanguageInTestSurveyTab != undefined) {
-      this.koShowDefaultLanguageInTestSurveyTab(
-        options.showDefaultLanguageInTestSurveyTab
-      );
+      this.setDefaultLanguageOption(options.showDefaultLanguageInTestSurveyTab);
     }
     if (
       !!options &&
@@ -236,6 +234,18 @@ export class SurveyLiveTester {
     this.setJSON(this.json);
     this.show();
   }
+  private setDefaultLanguageOption(opt: boolean | string) {
+    var vis =
+      opt === true ||
+      opt === "all" ||
+      (opt === "auto" && this.survey.getUsedLocales().length > 1);
+    this.koShowDefaultLanguageInTestSurveyTab(vis);
+    if (vis) {
+      this.koLanguages(
+        this.getLanguages(opt !== "all" ? this.survey.getUsedLocales() : null)
+      );
+    }
+  }
   private setActivePageItem(page: Survey.Page, val: boolean) {
     var item = this.getPageItemByPage(page);
     if (item) {
@@ -249,9 +259,12 @@ export class SurveyLiveTester {
     }
     return null;
   }
-  private getLanguages(): Array<any> {
+  private getLanguages(usedLanguages: Array<string> = null): Array<any> {
     var res = [];
-    var locales = Survey.surveyLocalization.getLocales();
+    var locales =
+      !!usedLanguages && usedLanguages.length > 1
+        ? usedLanguages
+        : Survey.surveyLocalization.getLocales();
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
       res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });

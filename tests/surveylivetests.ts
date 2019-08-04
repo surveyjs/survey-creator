@@ -151,3 +151,86 @@ QUnit.test("Use title for pages", function(assert) {
   assert.equal(test.koPages()[0].title, "First Page", "Use Page title");
   assert.equal(test.koPages()[1].title, "My Second Page", "Use Page title");
 });
+function getLiveSurveyByCreator(creator: SurveyCreator): SurveyLiveTester {
+  creator.showDesigner();
+  creator.showTestSurvey();
+  return creator.surveyLiveTester;
+}
+QUnit.test(
+  "showDefaultLanguageInTestSurveyTab: auto, true, false, all",
+  function(assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1"
+        }
+      ]
+    };
+    assert.equal(
+      creator.showDefaultLanguageInTestSurveyTab,
+      "auto",
+      "Show if there are more then one language"
+    );
+    var test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      false,
+      "There is one language"
+    );
+
+    creator.showDefaultLanguageInTestSurveyTab = true;
+    test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      true,
+      "true-1:Show languages"
+    );
+    assert.ok(test.koLanguages().length > 10, "true-1:Show all languages");
+
+    creator.showDefaultLanguageInTestSurveyTab = "auto";
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+          title: { default: "1", de: "2" }
+        }
+      ]
+    };
+    test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      true,
+      "auto:There are two language"
+    );
+    assert.equal(test.koLanguages().length, 2, "auto:There are two languages");
+
+    creator.showDefaultLanguageInTestSurveyTab = true;
+    test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      true,
+      "true-2: Show languages"
+    );
+    assert.equal(test.koLanguages().length, 2, "true-2: Show two languages");
+
+    creator.showDefaultLanguageInTestSurveyTab = false;
+    test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      false,
+      "false: Do not show languages"
+    );
+
+    creator.showDefaultLanguageInTestSurveyTab = "all";
+    test = getLiveSurveyByCreator(creator);
+    assert.equal(
+      test.koShowDefaultLanguageInTestSurveyTab(),
+      true,
+      "all: Show languages"
+    );
+    assert.ok(test.koLanguages().length > 10, "all: Show all languages");
+  }
+);
