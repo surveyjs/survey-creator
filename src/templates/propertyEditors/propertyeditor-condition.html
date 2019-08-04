@@ -19,7 +19,7 @@
           </div>
           <input class="form-control" type="text" data-bind="textInput:koAddConditionValue, enable: koAddContionValueEnabled" style="width:120px"
           />
-          <input type="button" class="form-control btn btn-primary" data-bind="enable: koCanAddCondition, click: onConditionAddClick, value: koAddConditionButtonText"
+          <input type="button" class="form-control btn btn-primary" data-bind="enable: koCanAddCondition() && !readOnly(), click: onConditionAddClick, value: koAddConditionButtonText"
           />
           <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
               <survey-widget params="survey: koValueSurvey"></survey-widget>
@@ -31,7 +31,7 @@
       <!-- /ko -->
 
       <!-- ko if: !$parent.hasAceEditor -->
-      <textarea class="svd-dark-border-color" data-bind="value:koTextValue" rows="3" autofocus="autofocus"></textarea>
+      <textarea class="svd-dark-border-color" data-bind="value:koTextValue, disable: readOnly" rows="3" autofocus="autofocus"></textarea>
       <!-- /ko -->
 
       <!-- <div class="assistant">

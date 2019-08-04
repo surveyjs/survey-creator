@@ -17,7 +17,7 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
   }
   public getValueText(value: any): string {
     var strName = !value ? "empty" : "notEmpty";
-    return editorLocalization.getString("pe." + strName);
+    return editorLocalization.getPropertyInEditor(strName);
   }
   public beforeShow() {
     super.beforeShow();

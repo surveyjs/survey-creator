@@ -110,3 +110,21 @@ QUnit.test("change string to empty string", function(assert) {
   );
   enStrings.ed.newTextItemName = prevValue;
 });
+
+QUnit.test("getPropertyInEditor", function(assert) {
+  assert.equal(
+    editorLocalization.getPropertyInEditor("rateMin"),
+    "Minimum rate",
+    "Get Property Directly"
+  );
+  assert.equal(
+    editorLocalization.getPropertyInEditor("someGoodProperty"),
+    "Some Good Property",
+    "break on words automatically"
+  );
+  assert.equal(
+    editorLocalization.getPropertyInEditor("title"),
+    "Title",
+    "make it up"
+  );
+});

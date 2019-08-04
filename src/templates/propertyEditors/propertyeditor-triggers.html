@@ -5,7 +5,7 @@
 <script type="text/html" id="propertyeditorcontent-triggers">
   <div class="propertyeditor-triggers">
       <div class="input-group form-group">
-          <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems">
+          <div class="input-group-addon first-addon" data-bind="visible: koAllowAddRemoveItems() && !readOnly()">
               <div class="ddmenu-container">
                   <div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" data-bind="trueclick"></div>
 
@@ -27,7 +27,7 @@
           <div class="form-control svd_custom_select">
               <select onmousewheel="return false;" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
           </div>
-          <span data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }, enable: koSelected() != null, click: onDeleteClick"
+          <span data-bind="visible: koAllowAddRemoveItems, attr: { title: $root.getLocString('pe.delete') }, enable: koSelected() != null && !readOnly(), click: onDeleteClick"
               class="input-group-addon btn-danger">
               <span class="glyphicon glyphicon-remove"></span>
           </span>

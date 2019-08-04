@@ -13,7 +13,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     super(property);
     this.koEditingValue = ko.observableArray();
     this.koItems = ko.observableArray();
-    this.setItems();
+    this.updateChoices();
   }
   public getValueText(value: any): string {
     if (!value) return editorLocalization.getString("pe.empty");
@@ -28,7 +28,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
   }
   public setObject(value: any) {
     super.setObject(value);
-    this.setItems();
+    this.updateChoices();
     this.setEditingValue();
   }
   protected updateValue() {
@@ -42,11 +42,26 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     return "multiplevalues";
   }
   public getBackgroundCls(value) {
-    return this.koEditingValue().indexOf("" + value) === -1 ? "svd-light-background-color" : "svd-main-background-color"
+    return this.koEditingValue().indexOf("" + value) === -1
+      ? "svd-light-background-color"
+      : "svd-main-background-color";
   }
-  private setItems() {
-    Survey.ItemValue.setData(this.items, this.property.choices);
+  public updateDynamicProperties() {
+    this.updateChoices();
+  }
+  private setChoices(choices: Array<Survey.ItemValue>) {
+    if (!choices || !Array.isArray(choices) || !choices.length) return;
+    Survey.ItemValue.setData(this.items, choices);
     this.koItems(this.items);
+  }
+  private updateChoices() {
+    var self = this;
+    var choices = (<any>this.property["getChoices"])(this.object, function(
+      choices: any
+    ) {
+      self.setChoices(choices);
+    });
+    this.setChoices(choices);
   }
   private getTextByItemValue(val: any) {
     for (var i = 0; i < this.items.length; i++) {

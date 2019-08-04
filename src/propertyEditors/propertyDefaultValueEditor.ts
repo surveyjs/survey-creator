@@ -1,13 +1,16 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyModalEditor } from "./propertyModalEditor";
-import { SurveyPropertyEditorBase, ISurveyObjectEditorOptions } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 
 export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor {
   public static defaultQuestionName = "question";
-  public static createJsonFromQuestion(obj: any): any {
+  public static createJsonFromQuestion(obj: any, readOnly: boolean): any {
     var qjson = new Survey.JsonObject().toJsonObject(obj);
     qjson.name = SurveyPropertyDefaultValueEditor.defaultQuestionName;
     qjson.type = obj.getType();
@@ -17,7 +20,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     qjson.titleLocation = "hidden";
     qjson.showClearButton = true;
     qjson.storeOthersAsComment = false;
-    qjson.readOnly = false;
+    qjson.readOnly = readOnly;
     SurveyPropertyDefaultValueEditor.deleteConditionProperties(qjson);
     if (!!qjson.choices) {
       for (var i = 0; i < qjson.choices.length; i++) {
@@ -34,21 +37,28 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     delete json["enable"];
     delete json["enableIf"];
   }
-  public static createSurveyFromJsonQuestion(questionJson: any, options: ISurveyObjectEditorOptions): Survey.Survey {
+  public static createSurveyFromJsonQuestion(
+    questionJson: any,
+    options: ISurveyObjectEditorOptions
+  ): Survey.Survey {
     var json = {
       questions: [],
       showNavigationButtons: false,
       showQuestionNumbers: "off"
     };
     json.questions.push(questionJson);
-    return !!options ? options.createSurvey(json, "defaultValueEditor") : new Survey.Survey(json);
+    return !!options
+      ? options.createSurvey(json, "defaultValueEditor")
+      : new Survey.Survey(json);
   }
   public survey: Survey.Survey;
   koSurvey: any;
 
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-    this.koSurvey = ko.observable(!!this.options && this.options.createSurvey({}, "defaultValueEditor"));
+    this.koSurvey = ko.observable(
+      !!this.options && this.options.createSurvey({}, "defaultValueEditor")
+    );
   }
   public getValueText(value: any): string {
     if (!value) return editorLocalization.getString("pe.empty");
@@ -67,7 +77,8 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   }
   private createSurvey() {
     this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
-      this.buildQuestionJson(), this.options
+      this.buildQuestionJson(),
+      this.options
     );
 
     this.survey.setValue(
@@ -77,7 +88,10 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     this.koSurvey(this.survey);
   }
   protected buildQuestionJson(): any {
-    return SurveyPropertyDefaultValueEditor.createJsonFromQuestion(this.object);
+    return SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      this.object,
+      this.readOnly()
+    );
   }
   protected getSurveyInitialValue(): any {
     return this.editingValue;
@@ -173,7 +187,8 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
       question.choices = this.property.getChoices(this.object);
     }
     var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
-      question
+      question,
+      this.readOnly()
     );
     if (hasTagbox) {
       json.type = "tagbox";
@@ -182,25 +197,25 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("value", function (
+SurveyPropertyEditorFactory.registerEditor("value", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyDefaultValueEditor(property);
 });
 
-SurveyPropertyEditorFactory.registerEditor("rowvalue", function (
+SurveyPropertyEditorFactory.registerEditor("rowvalue", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyDefaultRowValueEditor(property);
 });
 
-SurveyPropertyEditorFactory.registerEditor("panelvalue", function (
+SurveyPropertyEditorFactory.registerEditor("panelvalue", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyDefaultPanelValueEditor(property);
 });
 
-SurveyPropertyEditorFactory.registerEditor("set", function (
+SurveyPropertyEditorFactory.registerEditor("set", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertySetEditor(property);

@@ -32,7 +32,7 @@ export class SurveyQuestionEditorProperty {
     );
     this.editor.isTabProperty = isTabProperty;
     if (!displayName) {
-      displayName = editorLocalization.getString("pe." + this.property.name);
+      displayName = editorLocalization.getPropertyInEditor(this.property.name);
     }
     if (displayName) this.editor.displayName = displayName;
     this.objectProperty.onDependedPropertyUpdateCallback = function(

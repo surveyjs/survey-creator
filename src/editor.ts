@@ -160,6 +160,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public showPagesInTestSurveyTab = true;
 
   /**
+   * Set this property to false to disable pages adding, editing and deleting
+   */
+  public allowModifyPages = true;
+
+  /**
    * Set this property to false to hide the default language selector in the Test Survey Tab
    */
   public showDefaultLanguageInTestSurveyTab = true;
@@ -729,6 +734,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koGenerateValidJSON: any;
   koShowOptions: any;
   koShowPropertyGrid = ko.observable(true);
+  koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
   koDesignerHeight: any;
@@ -749,7 +755,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
    * @param options survey creator options. The following options are available: showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor, showPropertyGrid,
+   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor,
+   * showPropertyGrid, showToolbox, allowModifyPages
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
    */
@@ -1177,6 +1184,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
+    this.showToolbox =
+      typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
     this.isAutoSave =
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
@@ -1212,6 +1221,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
       this.showInvisibleElementsInTestSurveyTab =
         options.showInvisibleElementsInTestSurveyTab;
+    }
+    if (typeof options.allowModifyPages !== "undefined") {
+      this.allowModifyPages = options.allowModifyPages;
     }
   }
   /**
@@ -1432,6 +1444,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set showPropertyGrid(value: boolean) {
     this.koShowPropertyGrid(value);
     this.koHideAdvancedSettings(!value);
+  }
+  /**
+   * Set it to false to  hide the question toolbox on the left.
+   */
+  public get showToolbox() {
+    return this.koShowToolbox();
+  }
+  public set showToolbox(value: boolean) {
+    this.koShowToolbox(value);
   }
   /**
    * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
@@ -1699,43 +1720,55 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koViewType();
   }
   /**
+   * Change the active view/tab. It will return false if it can't change the current tab.
+   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
+   */
+  public makeNewViewActive(viewName: string): boolean {
+    if (!this.canSwitchViewType(viewName)) return false;
+    if (viewName == "editor") {
+      this.jsonEditor.show(this.getSurveyTextFromDesigner());
+    }
+    if (viewName == "test") {
+      this.showLiveSurvey();
+    }
+    if (viewName == "embed") {
+      this.showSurveyEmbeding();
+    }
+    if (viewName == "translation") {
+      this.showSurveyTranslation();
+    }
+    this.koViewType(viewName);
+    return true;
+  }
+  /**
    * Make a "Survey Designer" tab active.
    */
   public showDesigner() {
-    if (!this.canSwitchViewType("designer")) return;
-    this.koViewType("designer");
+    this.makeNewViewActive("designer");
   }
   /**
    * Make a "JSON Editor" tab active.
    */
   public showJsonEditor() {
-    if (this.koViewType() == "editor") return;
-    this.jsonEditor.show(this.getSurveyTextFromDesigner());
-    this.koViewType("editor");
+    this.makeNewViewActive("editor");
   }
   /**
    * Make a "Test Survey" tab active.
    */
   public showTestSurvey() {
-    if (!this.canSwitchViewType(null)) return;
-    this.showLiveSurvey();
-    this.koViewType("test");
+    this.makeNewViewActive("test");
   }
   /**
    * Make a "Embed Survey" tab active.
    */
   public showEmbedEditor() {
-    if (!this.canSwitchViewType("embed")) return;
-    this.showSurveyEmbeding();
-    this.koViewType("embed");
+    this.makeNewViewActive("embed");
   }
   /**
-   * Make a "Translation"" tab active.
+   * Make a "Translation" tab active.
    */
   public showTranslationEditor() {
-    if (!this.canSwitchViewType("translation")) return;
-    this.showSurveyTranslation();
-    this.koViewType("translation");
+    this.makeNewViewActive("translation");
   }
   /**
    * Make a "Logic" tab active.

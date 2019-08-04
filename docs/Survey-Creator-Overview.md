@@ -481,9 +481,9 @@ Survey.Serializer.findProperty("question", "description").visible = false;
 //make choicesByUrl property from checkbox, dropdown and radiogroup questions invisible
 Survey.Serializer.findProperty("selectbase", "choicesUrl").visible = false;
 ```
-This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onCanShowProperty** event.
+This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onShowingProperty** event.
 ```javascript
-surveyCreator.onCanShowProperty.add(function (sender, options) {
+surveyCreator.onShowingProperty.add(function (sender, options) {
     //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
     options.canShow = myBlackList.indexOf(options.property.name) < 0; //show if it is not in a blacklist
     //You may do opposite and use the white list
@@ -738,6 +738,7 @@ Avaliable property types. Every property type has a correspondet Property Editor
 |text|String type. Property editor is text input with an optional modal window for entering large text|
 |html|string type. Property editor is text input with an optional modal window for entering large text. In the future modal window becomes a very simple html editor.|
 |itemvalues|Array of ItemValue object. ItemValue object has two properties {value: any, text: string}. Dropdown, checkbox and radiogroup questions has choices property with itemvalues type.|
+|value|any type. Property Editor for defaultValue and correctValue properties. It shows a survey with the only one current question.|
 |matrixdropdowncolumns|Columns for matrixdropdown and matrixdynamic questions|
 |textitems|items property of multiple text question has this type|
 |triggers|Survey triggers property has this type|

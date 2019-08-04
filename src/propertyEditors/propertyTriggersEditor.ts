@@ -30,6 +30,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     super(property);
     var self = this;
     this.onDeleteClick = function() {
+      if (self.readOnly()) return;
       self.koItems.remove(self.koSelected());
     };
     this.onAddClick = function(item) {
@@ -405,7 +406,8 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
       return;
     }
     var qJson = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
-      question
+      question,
+      false
     );
     qJson.titleLocation = "top";
     qJson.title = editorLocalization.getString("pe.triggerSetValue");

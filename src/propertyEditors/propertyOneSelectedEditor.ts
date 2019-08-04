@@ -23,6 +23,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
       self.selectedObjectEditor(editor);
     });
     this.onDeleteClick = function() {
+      if (self.readOnly()) return;
       self.koItems.remove(self.koSelected());
     };
     this.onAddClick = function(item: any) {

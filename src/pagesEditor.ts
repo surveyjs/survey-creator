@@ -205,7 +205,9 @@ export class PagesEditor {
    * A boolean property, false by default. Set it to true to deny pages editing.
    */
   public get readOnly() {
-    return this.editor.readOnly || this._readOnly();
+    return (
+      this.editor.readOnly || !this.editor.allowModifyPages || this._readOnly()
+    );
   }
   public set readOnly(newVal) {
     this._readOnly(newVal);
