@@ -43,7 +43,7 @@ SurveyCreator.StylesManager.applyTheme("darkblue");
 
 Inside your web page
 
-```
+```html
 <div id="surveyCreatorContainer"></div>
 ```
 

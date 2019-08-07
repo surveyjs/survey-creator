@@ -165,9 +165,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public allowModifyPages = true;
 
   /**
-   * Set this property to false to hide the default language selector in the Test Survey Tab
+   * The default value is _"auto"_. It shows the language selector if there are more than two languages are using in the survey.
+   * It shows only used languages in the survey.
+   * Set this property to _false_ to hide the default language selector in the Test Survey Tab.
+   * Set it to _true_ to show this selector even if there is only one language in the survey
+   * Set it to _all_ to show the selector with all available languages (30+)
    */
-  public showDefaultLanguageInTestSurveyTab = true;
+  public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
 
   /**
    * Set this property to false to hide the show invisible element checkbox in the Test Survey Tab

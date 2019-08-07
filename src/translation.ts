@@ -228,7 +228,7 @@ export class TranslationGroup extends TranslationItemBase {
       if (
         !!locStr &&
         this.obj.getType() != "page" &&
-        (!!locStr.onGetTextCallback || locStr['onRenderedHtmlCallback'])
+        (!!locStr.onGetTextCallback || locStr["onRenderedHtmlCallback"])
       )
         return this.obj["name"];
     }
@@ -426,6 +426,11 @@ export class Translation implements ITranslationLocales {
   }
   public setSelectedLocales(selectedLocales: Array<string>) {
     selectedLocales = selectedLocales || [];
+    for (var i = 0; i < selectedLocales.length; i++) {
+      if (!this.hasLocale(selectedLocales[i])) {
+        this.addLocale(selectedLocales[i]);
+      }
+    }
     var res = [];
     var locs = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
