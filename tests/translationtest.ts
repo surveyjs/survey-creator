@@ -5,7 +5,7 @@ import {
   TranslationItem,
   Translation
 } from "../src/translation";
-import { equal } from "assert";
+import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("TranslatonTests");
 
@@ -193,6 +193,27 @@ QUnit.test("get/set the selected locales", function(assert) {
     "'it' is selected"
   );
 });
+QUnit.test(
+  "get/set the selected locales with inactive translation tab",
+  function(assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+          title: { default: "t", de: "de_t", fr: "fr_t", it: "it_d" }
+        }
+      ]
+    };
+    creator.translation.setSelectedLocales(["de", "it"]);
+    assert.deepEqual(
+      creator.translation.getSelectedLocales(),
+      ["de", "it"],
+      "Works without selected toolbox"
+    );
+  }
+);
 QUnit.test("Translation show All strings", function(assert) {
   var survey = new Survey.Survey();
   survey.completedHtml = "Test";
