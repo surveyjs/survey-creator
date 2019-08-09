@@ -270,3 +270,33 @@ QUnit.test("Remove existing item", function(assert) {
     "Remove the visibleIf from q2"
   );
 });
+
+QUnit.test("Rename the name", function(assert) {
+  var survey = new Survey.SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        visibleIf: "{q2} != 2",
+        elements: [{ type: "text", name: "q1" }]
+      },
+      {
+        name: "page2",
+        visibleIf: "{Q1} != 1 and {q1} < 1",
+        elements: [{ type: "text", name: "q2" }]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  logic.renameQuestion("Q1", "question1");
+  logic.renameQuestion("q2", "question2");
+  assert.equal(
+    survey.pages[0].visibleIf,
+    "{question2} != 2",
+    "Rename q1: page1.visibleIf"
+  );
+  assert.equal(
+    survey.pages[1].visibleIf,
+    "{question1} != 1 and {question1} < 1",
+    "Rename q2: page1.visibleIf"
+  );
+});

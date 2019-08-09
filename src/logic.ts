@@ -135,6 +135,28 @@ export class SurveyLogicItem {
       this.removedOperations[i].apply("");
     }
     this.removedOperations = [];
+    this.applyExpression(expression);
+  }
+  public renameQuestion(oldName: string, newName: string) {
+    if (!oldName || !newName || !this.expression) return;
+    var newExpression = this.expression;
+    var expression = this.expression.toLocaleLowerCase();
+    oldName = "{" + oldName.toLowerCase() + "}";
+    newName = "{" + newName + "}";
+    var index = expression.lastIndexOf(oldName, expression.length);
+    while (index > -1) {
+      newExpression =
+        newExpression.substring(0, index) +
+        newName +
+        newExpression.substr(index + oldName.length, +newExpression.length);
+      expression = expression.substring(0, index);
+      index = expression.lastIndexOf(oldName, expression.length);
+    }
+    if (newExpression != this.expression) {
+      this.applyExpression(newExpression);
+    }
+  }
+  private applyExpression(expression: string) {
     this.expression = expression;
     var ops = this.operations;
     for (var i = 0; i < ops.length; i++) {
@@ -279,6 +301,12 @@ export class SurveyLogic {
   }
   public get editableItem(): SurveyLogicItem {
     return this.koEditableItem();
+  }
+  public renameQuestion(oldName: string, newName: string) {
+    var items = this.items;
+    for (var i = 0; i < items.length; i++) {
+      items[i].renameQuestion(oldName, newName);
+    }
   }
 
   /**
