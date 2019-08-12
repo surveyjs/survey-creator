@@ -53,6 +53,19 @@ QUnit.test("Add existing visible Items", function(assert) {
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
+QUnit.test("Do not add expression question into visible Items", function(
+  assert
+) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "expression", name: "q2", expression: "{q1}+1" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.items.length, 0, "There is not visible items");
+  assert.equal(logic.invisibleItems.length, 1, "There is one invisible item");
+});
 QUnit.test("Add new item", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
@@ -277,16 +290,58 @@ QUnit.test("Rename the name", function(assert) {
       {
         name: "page1",
         visibleIf: "{q2} != 2",
-        elements: [{ type: "text", name: "q1" }]
+        elements: [{ type: "text", name: "q1", enableIf: "{q2} > 2" }]
       },
       {
         name: "page2",
         visibleIf: "{Q1} != 1 and {q1} < 1",
-        elements: [{ type: "text", name: "q2" }]
+        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }]
+      },
+      {
+        name: "page3",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            visibleIf: "{q1} = 1",
+            enableIf: "{q2} = 2",
+            elements: [{ type: "text", name: "q3" }]
+          }
+        ]
+      },
+      {
+        name: "page4",
+        elements: [
+          { type: "expression", name: "q4", expression: "{q1} + {q2}" }
+        ]
+      },
+      {
+        name: "page5",
+        elements: [
+          {
+            type: "matrixdropdown",
+            name: "q5",
+            columns: [
+              {
+                name: "col1",
+                visibleIf: "{q1} = 1",
+                enableIf: "{q2} = 2",
+                requiredIf: "{q1} = 1",
+                totalExpression: "{q1} + {q2}"
+              }
+            ]
+          }
+        ]
       }
     ]
   });
   var logic = new SurveyLogic(survey);
+  var q1 = <Survey.Question>survey.getQuestionByName("q1");
+  var q2 = <Survey.Question>survey.getQuestionByName("q2");
+  var panel1 = <Survey.Panel>survey.getPanelByName("panel1");
+  var q4 = <Survey.QuestionExpression>survey.getQuestionByName("q4");
+  var q5 = <Survey.QuestionMatrixDropdown>survey.getQuestionByName("q5");
+  var q5col1 = q5.columns[0];
   logic.renameQuestion("Q1", "question1");
   logic.renameQuestion("q2", "question2");
   assert.equal(
@@ -298,5 +353,43 @@ QUnit.test("Rename the name", function(assert) {
     survey.pages[1].visibleIf,
     "{question1} != 1 and {question1} < 1",
     "Rename q2: page1.visibleIf"
+  );
+  assert.equal(q1.enableIf, "{question2} > 2", "Rename q2: q1.enableIf");
+  assert.equal(q2.requiredIf, "{question1} < 1", "Rename q1: q2.requiredIf");
+
+  assert.equal(
+    panel1.visibleIf,
+    "{question1} = 1",
+    "Rename panel1: panel1.visibleIf"
+  );
+  assert.equal(
+    panel1.enableIf,
+    "{question2} = 2",
+    "Rename panel1: panel1.enableIf"
+  );
+  assert.equal(
+    q4.expression,
+    "{question1} + {question2}",
+    "Rename q4(expression): q4.expression"
+  );
+  assert.equal(
+    q5col1.visibleIf,
+    "{question1} = 1",
+    "Rename q1: q5_column1.visibleIf"
+  );
+  assert.equal(
+    q5col1.enableIf,
+    "{question2} = 2",
+    "Rename q2: q5_column1.enableIf"
+  );
+  assert.equal(
+    q5col1.requiredIf,
+    "{question1} = 1",
+    "Rename q1: q5_column1.requiredIf"
+  );
+  assert.equal(
+    q5col1.totalExpression,
+    "{question1} + {question2}",
+    "Rename q1 and q2: q5_column1.totalExpression"
   );
 });

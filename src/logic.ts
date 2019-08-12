@@ -7,6 +7,7 @@ export interface ISurveyLogicType {
   baseClass: string;
   propertyName: string;
   templateName?: string;
+  showInUI?: boolean;
   elements?: (survey: Survey.SurveyModel) => Array<any>;
   showIf?: (survey: Survey.SurveyModel) => boolean;
 }
@@ -51,6 +52,9 @@ export class SurveyLogicType {
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
     if (!!this.elementsValue) return this.elementsValue.length > 0;
     return true;
+  }
+  public get showInUI(): boolean {
+    return this.logicType.showInUI !== false;
   }
 }
 
@@ -223,9 +227,88 @@ export class SurveyLogic {
           "visibleIf"
         );
       }
+    },
+    {
+      name: "question_enable",
+      baseClass: "question",
+      propertyName: "enableIf",
+      elements: function(survey: Survey.SurveyModel) {
+        return SurveyLogic.getAvaiableElements(
+          survey.getAllQuestions(),
+          "enableIf"
+        );
+      }
+    },
+    {
+      name: "question_require",
+      baseClass: "question",
+      propertyName: "requiredIf",
+      elements: function(survey: Survey.SurveyModel) {
+        return SurveyLogic.getAvaiableElements(
+          survey.getAllQuestions(),
+          "requiredIf"
+        );
+      }
+    },
+    {
+      name: "panel_enable",
+      baseClass: "panel",
+      propertyName: "enableIf",
+      elements: function(survey: Survey.SurveyModel) {
+        return SurveyLogic.getAvaiableElements(
+          survey.getAllPanels(),
+          "enableIf"
+        );
+      }
+    },
+    {
+      name: "expression_expression",
+      baseClass: "expression",
+      propertyName: "expression",
+      showInUI: false,
+      elements: function(survey: Survey.SurveyModel) {
+        return [];
+      }
+    },
+    {
+      name: "matrixdropdowncolumn_visibleIf",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "visibleIf",
+      showInUI: false,
+      elements: function(survey: Survey.SurveyModel) {
+        return [];
+      }
+    },
+    {
+      name: "matrixdropdowncolumn_enableIf",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "enableIf",
+      showInUI: false,
+      elements: function(survey: Survey.SurveyModel) {
+        return [];
+      }
+    },
+    {
+      name: "matrixdropdowncolumn_requiredIf",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "requiredIf",
+      showInUI: false,
+      elements: function(survey: Survey.SurveyModel) {
+        return [];
+      }
+    },
+    {
+      name: "matrixdropdowncolumn_totalExpression",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "totalExpression",
+      showInUI: false,
+      elements: function(survey: Survey.SurveyModel) {
+        return [];
+      }
     }
   ];
   public koItems: any;
+  public invisibleItems: Array<SurveyLogicItem> = [];
   public koLogicTypes: any;
   public koMode: any;
   public koAddNew: any;
@@ -279,7 +362,8 @@ export class SurveyLogic {
       this.survey = survey;
     }
     this.koLogicTypes(this.createLogicTypes());
-    this.koItems(this.buildItems());
+    this.koItems(this.buildItems(true));
+    this.invisibleItems = this.buildItems(false);
     this.mode = this.items.length > 0 ? "view" : "new";
     this.koEditableItem(null);
     this.expressionEditor.object = this.survey;
@@ -303,7 +387,14 @@ export class SurveyLogic {
     return this.koEditableItem();
   }
   public renameQuestion(oldName: string, newName: string) {
-    var items = this.items;
+    this.renameQuestionCore(oldName, newName, this.items);
+    this.renameQuestionCore(oldName, newName, this.invisibleItems);
+  }
+  private renameQuestionCore(
+    oldName: string,
+    newName: string,
+    items: Array<SurveyLogicItem>
+  ) {
     for (var i = 0; i < items.length; i++) {
       items[i].renameQuestion(oldName, newName);
     }
@@ -347,12 +438,12 @@ export class SurveyLogic {
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);
   }
-  protected buildItems(): Array<SurveyLogicItem> {
+  protected buildItems(showInUI: boolean): Array<SurveyLogicItem> {
     var res = [];
     var hash = {};
     var elements = this.getAllElements();
     for (var i = 0; i < elements.length; i++) {
-      this.buildItemsByElement(elements[i], res, hash);
+      this.buildItemsByElement(elements[i], res, hash, showInUI);
     }
     return res;
   }
@@ -361,6 +452,20 @@ export class SurveyLogic {
     this.AddElements(this.survey.pages, res);
     this.AddElements(this.survey.getAllQuestions(), res);
     this.AddElements(this.survey.getAllPanels(), res);
+    this.AddElements(this.getMatrixColumns(), res);
+    return res;
+  }
+  private getMatrixColumns(): Array<Survey.Base> {
+    var res = [];
+    var questions = this.survey.getAllQuestions();
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      var columns = q["columns"];
+      if (!columns) continue;
+      var prop = Survey.Serializer.findProperty(q.getType(), "columns");
+      if (!prop || prop.className !== "matrixdropdowncolumn") continue;
+      this.AddElements(columns, res);
+    }
     return res;
   }
   private updateLogicTypes() {
@@ -377,11 +482,13 @@ export class SurveyLogic {
   private buildItemsByElement(
     element: Survey.Base,
     dest: Array<SurveyLogicItem>,
-    hash: Survey.HashTable<SurveyLogicItem>
+    hash: Survey.HashTable<SurveyLogicItem>,
+    showInUI: boolean
   ) {
     var types = this.getElementAllTypes(element);
     for (var i = 0; i < this.logicTypes.length; i++) {
       var lt = this.logicTypes[i];
+      if (lt.showInUI !== showInUI) continue;
       var expression = element[lt.propertyName];
       if (
         types.indexOf(lt.baseClass) > -1 &&
