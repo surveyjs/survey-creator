@@ -274,37 +274,83 @@ export class SurveyLogic {
       name: "matrixdropdowncolumn_visibleIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
-      showInUI: false,
-      elements: function(survey: Survey.SurveyModel) {
-        return [];
-      }
+      showInUI: false
     },
     {
       name: "matrixdropdowncolumn_enableIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "enableIf",
-      showInUI: false,
-      elements: function(survey: Survey.SurveyModel) {
-        return [];
-      }
+      showInUI: false
     },
     {
       name: "matrixdropdowncolumn_requiredIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "requiredIf",
-      showInUI: false,
-      elements: function(survey: Survey.SurveyModel) {
-        return [];
-      }
+      showInUI: false
     },
     {
       name: "matrixdropdowncolumn_totalExpression",
       baseClass: "matrixdropdowncolumn",
       propertyName: "totalExpression",
-      showInUI: false,
-      elements: function(survey: Survey.SurveyModel) {
-        return [];
-      }
+      showInUI: false
+    },
+    {
+      name: "trigger_expression",
+      baseClass: "surveytrigger",
+      propertyName: "expression"
+    },
+    {
+      name: "trigger_runExpression",
+      baseClass: "runexpressiontrigger",
+      propertyName: "runExpression"
+    },
+    {
+      name: "question_expressionValidator",
+      baseClass: "expressionvalidator",
+      propertyName: "expression",
+      showInUI: false
+    },
+    {
+      name: "matrix_rowsVisibleIf",
+      baseClass: "matrix",
+      propertyName: "rowsVisibleIf",
+      showInUI: false
+    },
+    {
+      name: "matrix_columnsVisibleIf",
+      baseClass: "matrix",
+      propertyName: "columnsVisibleIf",
+      showInUI: false
+    },
+    {
+      name: "matrixdropdown_rowsVisibleIf",
+      baseClass: "matrixdropdown",
+      propertyName: "rowsVisibleIf",
+      showInUI: false
+    },
+    {
+      name: "select_choicesVisibleIf",
+      baseClass: "selectbase",
+      propertyName: "choicesVisibleIf",
+      showInUI: false
+    },
+    {
+      name: "select_choicesEnableIf",
+      baseClass: "selectbase",
+      propertyName: "choicesEnableIf",
+      showInUI: false
+    },
+    {
+      name: "itemvalue_visibleIf",
+      baseClass: "itemvalue",
+      propertyName: "visibleIf",
+      showInUI: false
+    },
+    {
+      name: "itemvalue_enableIf",
+      baseClass: "itemvalue",
+      propertyName: "enableIf",
+      showInUI: false
     }
   ];
   public koItems: any;
@@ -452,7 +498,10 @@ export class SurveyLogic {
     this.AddElements(this.survey.pages, res);
     this.AddElements(this.survey.getAllQuestions(), res);
     this.AddElements(this.survey.getAllPanels(), res);
+    this.AddElements(this.survey.triggers, res);
     this.AddElements(this.getMatrixColumns(), res);
+    this.AddElements(this.getValidators(), res);
+    this.AddElements(this.getItemValues(), res);
     return res;
   }
   private getMatrixColumns(): Array<Survey.Base> {
@@ -465,6 +514,27 @@ export class SurveyLogic {
       var prop = Survey.Serializer.findProperty(q.getType(), "columns");
       if (!prop || prop.className !== "matrixdropdowncolumn") continue;
       this.AddElements(columns, res);
+    }
+    return res;
+  }
+  private getValidators(): Array<Survey.Base> {
+    var res = [];
+    var questions = this.survey.getAllQuestions();
+    for (var i = 0; i < questions.length; i++) {
+      this.AddElements((<Survey.Question>questions[i]).validators, res);
+    }
+    return res;
+  }
+  private getItemValues(): Array<Survey.Base> {
+    var res = [];
+    var questions = this.survey.getAllQuestions();
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      var choices = q["choices"];
+      if (!choices) continue;
+      var prop = Survey.Serializer.findProperty(q.getType(), "choices");
+      if (!prop || prop.type !== "itemvalue[]") continue;
+      this.AddElements(choices, res);
     }
     return res;
   }

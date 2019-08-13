@@ -305,7 +305,15 @@ QUnit.test("Rename the name", function(assert) {
             name: "panel1",
             visibleIf: "{q1} = 1",
             enableIf: "{q2} = 2",
-            elements: [{ type: "text", name: "q3" }]
+            elements: [
+              {
+                type: "text",
+                name: "q3",
+                validators: [
+                  { type: "expressionvalidator", expression: "{q1} > 1" }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -332,15 +340,56 @@ QUnit.test("Rename the name", function(assert) {
             ]
           }
         ]
+      },
+      {
+        name: "page6",
+        elements: [
+          {
+            type: "matrixdropdown",
+            name: "q6",
+            rowsVisibleIf: "{item} = {q1}"
+          },
+          {
+            type: "matrix",
+            name: "q7",
+            rowsVisibleIf: "{item} = {q1}",
+            columnsVisibleIf: "{item} = {q2}"
+          }
+        ]
+      },
+      {
+        name: "page7",
+        elements: [
+          {
+            type: "radiogroup",
+            name: "q8",
+            choicesVisibleIf: "{item} = {q1}",
+            choicesEnableIf: "{item} = {q2}",
+            choices: [{ value: 1, visibleIf: "{q1} = 1", enableIf: "{q2} = 2" }]
+          }
+        ]
+      }
+    ],
+    triggers: [
+      {
+        type: "runexpression",
+        expression: "{q1} = 1",
+        runExpression: "{q2} + 1"
       }
     ]
   });
   var logic = new SurveyLogic(survey);
   var q1 = <Survey.Question>survey.getQuestionByName("q1");
   var q2 = <Survey.Question>survey.getQuestionByName("q2");
+  var q3 = <Survey.Question>survey.getQuestionByName("q3");
+  var validator = <Survey.ExpressionValidator>q3.validators[0];
   var panel1 = <Survey.Panel>survey.getPanelByName("panel1");
   var q4 = <Survey.QuestionExpression>survey.getQuestionByName("q4");
   var q5 = <Survey.QuestionMatrixDropdown>survey.getQuestionByName("q5");
+  var q6 = <Survey.QuestionMatrixDropdown>survey.getQuestionByName("q6");
+  var q7 = <Survey.QuestionMatrix>survey.getQuestionByName("q7");
+  var q8 = <Survey.QuestionRadiogroup>survey.getQuestionByName("q8");
+  var trigger = <Survey.SurveyTriggerRunExpression>survey.triggers[0];
   var q5col1 = q5.columns[0];
   logic.renameQuestion("Q1", "question1");
   logic.renameQuestion("q2", "question2");
@@ -391,5 +440,55 @@ QUnit.test("Rename the name", function(assert) {
     q5col1.totalExpression,
     "{question1} + {question2}",
     "Rename q1 and q2: q5_column1.totalExpression"
+  );
+  assert.equal(
+    trigger.expression,
+    "{question1} = 1",
+    "Rename q1: trigger.expression"
+  );
+  assert.equal(
+    trigger.runExpression,
+    "{question2} + 1",
+    "Rename q2: trigger.runExpression"
+  );
+  assert.equal(
+    validator.expression,
+    "{question1} > 1",
+    "Rename q1: validator.expression"
+  );
+  assert.equal(
+    q6.rowsVisibleIf,
+    "{item} = {question1}",
+    "Rename q1: matrixdropdown.rowsVisibleIf"
+  );
+  assert.equal(
+    q7.rowsVisibleIf,
+    "{item} = {question1}",
+    "Rename q1: matrix.rowsVisibleIf"
+  );
+  assert.equal(
+    q7.columnsVisibleIf,
+    "{item} = {question2}",
+    "Rename q2: matrix.columnsVisibleIf"
+  );
+  assert.equal(
+    q8.choicesVisibleIf,
+    "{item} = {question1}",
+    "Rename q1: radiogroup.choicesVisibleIf"
+  );
+  assert.equal(
+    q8.choicesEnableIf,
+    "{item} = {question2}",
+    "Rename q2: radiogroup.choicesVisibleIf"
+  );
+  assert.equal(
+    q8.choices[0].visibleIf,
+    "{question1} = 1",
+    "Rename q1: radiogroup.choices[0].visibleIf"
+  );
+  assert.equal(
+    q8.choices[0].enableIf,
+    "{question2} = 2",
+    "Rename q2: radiogroup.choices[0].enableIf"
   );
 });
