@@ -43,6 +43,13 @@ QUnit.test("Panel visibility logic", function(assert) {
   panelVis = logic.getTypeByName("panel_visibility");
   assert.equal(panelVis.visible, true, "There is a panel");
 });
+QUnit.test("Do not show ShowInUI=false visibility logic", function(assert) {
+  var survey = new Survey.SurveyModel({});
+  var logic = new SurveyLogic(survey);
+  var validatorLogic = logic.getTypeByName("question_expressionValidator");
+  assert.ok(validatorLogic);
+  assert.equal(validatorLogic.visible, false, "showInUI returns false");
+});
 QUnit.test("Add existing visible Items", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
@@ -375,6 +382,16 @@ QUnit.test("Rename the name", function(assert) {
         type: "runexpression",
         expression: "{q1} = 1",
         runExpression: "{q2} + 1"
+      },
+      {
+        type: "complete",
+        expression: "{q1} = 1"
+      }
+    ],
+    completedHtmlOnCondition: [
+      {
+        expression: "{q1} = 1",
+        html: "text"
       }
     ]
   });
@@ -389,7 +406,8 @@ QUnit.test("Rename the name", function(assert) {
   var q6 = <Survey.QuestionMatrixDropdown>survey.getQuestionByName("q6");
   var q7 = <Survey.QuestionMatrix>survey.getQuestionByName("q7");
   var q8 = <Survey.QuestionRadiogroup>survey.getQuestionByName("q8");
-  var trigger = <Survey.SurveyTriggerRunExpression>survey.triggers[0];
+  var trigger1 = <Survey.SurveyTriggerRunExpression>survey.triggers[0];
+  var trigger2 = <Survey.SurveyTriggerComplete>survey.triggers[0];
   var q5col1 = q5.columns[0];
   logic.renameQuestion("Q1", "question1");
   logic.renameQuestion("q2", "question2");
@@ -442,14 +460,19 @@ QUnit.test("Rename the name", function(assert) {
     "Rename q1 and q2: q5_column1.totalExpression"
   );
   assert.equal(
-    trigger.expression,
+    trigger1.expression,
     "{question1} = 1",
     "Rename q1: trigger.expression"
   );
   assert.equal(
-    trigger.runExpression,
+    trigger1.runExpression,
     "{question2} + 1",
     "Rename q2: trigger.runExpression"
+  );
+  assert.equal(
+    trigger2.expression,
+    "{question1} = 1",
+    "Rename q1: trigger2.expression"
   );
   assert.equal(
     validator.expression,
@@ -490,5 +513,10 @@ QUnit.test("Rename the name", function(assert) {
     q8.choices[0].enableIf,
     "{question2} = 2",
     "Rename q2: radiogroup.choices[0].enableIf"
+  );
+  assert.equal(
+    survey.completedHtmlOnCondition[0].expression,
+    "{question1} = 1",
+    "Rename q1: survey.completedHtmlOnCondition[0].expression"
   );
 });

@@ -49,6 +49,7 @@ export class SurveyLogicType {
     this.koVisible(this.visible);
   }
   public get visible(): boolean {
+    if (!this.showInUI) return false;
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
     if (!!this.elementsValue) return this.elementsValue.length > 0;
     return true;
@@ -305,6 +306,11 @@ export class SurveyLogic {
       propertyName: "runExpression"
     },
     {
+      name: "survey_completedHtmlOnCondition",
+      baseClass: "htmlconditionitem",
+      propertyName: "expression"
+    },
+    {
       name: "question_expressionValidator",
       baseClass: "expressionvalidator",
       propertyName: "expression",
@@ -499,6 +505,7 @@ export class SurveyLogic {
     this.AddElements(this.survey.getAllQuestions(), res);
     this.AddElements(this.survey.getAllPanels(), res);
     this.AddElements(this.survey.triggers, res);
+    this.AddElements(this.survey.completedHtmlOnCondition, res);
     this.AddElements(this.getMatrixColumns(), res);
     this.AddElements(this.getValidators(), res);
     this.AddElements(this.getItemValues(), res);
