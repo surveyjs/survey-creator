@@ -1636,7 +1636,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     if (property.name == "name") {
       var newName = this.generateUniqueName(obj, newValue);
-      new SurveyLogic(this.survey).renameQuestion(oldValue, newName);
+      this.updateConditions(oldValue, newName);
       if (newName != newValue) {
         return newName;
       }
@@ -2323,6 +2323,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ) {
     this.showQuestionEditor(element, onClose);
   }
+  private showEditorOldName: string;
+  private updateConditions(oldName: string, newName: string) {
+    new SurveyLogic(this.survey).renameQuestion(oldName, newName);
+  }
   public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
@@ -2334,6 +2338,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         )
       : null;
     var isCanceled = true;
+    this.showEditorOldName = element["name"];
     this.questionEditorWindow.show(
       element,
       elWindow,
@@ -2354,6 +2359,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public onQuestionEditorChanged(question: Survey.Question) {
     if (!!question.name && !this.isNameUnique(question, question.name)) {
       question.name = this.generateUniqueName(question, question.name);
+    }
+    if (
+      !!this.showEditorOldName &&
+      !!question.name &&
+      this.showEditorOldName != question.name
+    ) {
+      this.updateConditions(this.showEditorOldName, question.name);
+      this.showEditorOldName = "";
     }
     this.surveyObjects.nameChanged(question);
     this.selectedObjectEditorValue.objectChanged();
