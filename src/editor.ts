@@ -1636,6 +1636,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     if (property.name == "name") {
       var newName = this.generateUniqueName(obj, newValue);
+      new SurveyLogic(this.survey).renameQuestion(oldValue, newName);
       if (newName != newValue) {
         return newName;
       }

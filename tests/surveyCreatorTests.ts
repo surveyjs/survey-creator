@@ -560,23 +560,42 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
 QUnit.test("pagesEditor.readOnly", function(assert) {
   var creator = new SurveyCreator();
   var pagesEditor = new PagesEditor(creator, document.createElement("div"));
-  assert.equal(pagesEditor.readOnly, false, "page editor is not read-only by default");
-  
+  assert.equal(
+    pagesEditor.readOnly,
+    false,
+    "page editor is not read-only by default"
+  );
+
   creator.readOnly = true;
   pagesEditor = new PagesEditor(creator, document.createElement("div"));
-  assert.equal(pagesEditor.readOnly, true, "page editor is read-only editor.readOnly");
+  assert.equal(
+    pagesEditor.readOnly,
+    true,
+    "page editor is read-only editor.readOnly"
+  );
 
   creator.readOnly = false;
   pagesEditor = new PagesEditor(creator, document.createElement("div"));
-  assert.equal(pagesEditor.readOnly, false, "page editor is not read-only again");
-  
-  assert.equal(creator.allowModifyPages, true, "The property is true by default");
-  var creator = new SurveyCreator(null, {allowModifyPages: false});
+  assert.equal(
+    pagesEditor.readOnly,
+    false,
+    "page editor is not read-only again"
+  );
+
+  assert.equal(
+    creator.allowModifyPages,
+    true,
+    "The property is true by default"
+  );
+  var creator = new SurveyCreator(null, { allowModifyPages: false });
   assert.equal(creator.allowModifyPages, false, "The parameter set correctly");
   pagesEditor = new PagesEditor(creator, document.createElement("div"));
-  assert.equal(pagesEditor.readOnly, true, "page editor is read-only allowModifyPages");
+  assert.equal(
+    pagesEditor.readOnly,
+    true,
+    "page editor is read-only allowModifyPages"
+  );
 });
-
 
 QUnit.test("PagesEditor change question's page", function(assert) {
   var jsonText = JSON.stringify({
@@ -641,6 +660,29 @@ QUnit.test(
     editor.onQuestionEditorChanged(<any>editor.survey);
   }
 );
+
+QUnit.test("Update conditions/expressions on changing question.name", function(
+  assert
+) {
+  var editor = new SurveyCreator();
+  editor.survey.currentPage.addNewQuestion("text", "question1");
+  editor.survey.currentPage.addNewQuestion("text", "question2");
+  var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
+  var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
+  q2.visibleIf = "{question1} = 1";
+  editor.selectedObjectEditor.selectedObject = q1;
+  var namePropertyEditor = editor.selectedObjectEditor.getPropertyEditor(
+    "name"
+  );
+  editor.selectedObjectEditor.changeActiveProperty(namePropertyEditor);
+  namePropertyEditor.koValue("myUpdatedQuestion1");
+  editor.onQuestionEditorChanged(q1);
+  assert.equal(
+    q2.visibleIf,
+    "{myUpdatedQuestion1} = 1",
+    "Update the condition accordingly"
+  );
+});
 
 QUnit.test(
   "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
