@@ -203,8 +203,13 @@ export class QuestionToolbox {
    * @see IQuestionToolboxItem
    */
   public addItem(item: IQuestionToolboxItem) {
+    this.correctItem(item);
     this.itemsValue.push(item);
     this.onItemsChanged();
+  }
+  private correctItem(item: IQuestionToolboxItem) {
+    if (!item.title) item.title = item.name;
+    if (!item.tooltip) item.tooltip = item.title;
   }
   /**
    * Add a new toolbox item, add delete the old item with the same name
@@ -212,6 +217,7 @@ export class QuestionToolbox {
    * @see IQuestionToolboxItem
    */
   public replaceItem(item: IQuestionToolboxItem): boolean {
+    this.correctItem(item);
     var index = this.indexOf(item.name);
     if (index < 0) return;
     this.itemsValue[index] = item;

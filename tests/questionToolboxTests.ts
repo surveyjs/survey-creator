@@ -38,6 +38,8 @@ QUnit.test("toolbox reorder items", function(assert) {
   assert.equal(toolbox.items[0].name, "dropdown");
   assert.equal(toolbox.items[1].name, "text");
   assert.equal(toolbox.items[2].name, "countries");
+  assert.equal(toolbox.items[2].title, "countries", "title = name");
+  assert.equal(toolbox.items[2].tooltip, "countries", "tooltip = title = name");
   toolbox.orderedQuestions = ["dropdown", "countries", "text"];
   assert.equal(toolbox.items[0].name, "dropdown");
   assert.equal(toolbox.items[1].name, "countries");
