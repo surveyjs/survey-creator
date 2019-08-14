@@ -23,6 +23,10 @@ export interface IQuestionToolboxItem {
    */
   title: string;
   /**
+   * Toolbox item tooltip. It equals to title if it is empty
+   */
+  tooltip?: string;
+  /**
    * True, if an end user added this item into Toolbox from the survey.
    */
   isCopied: boolean;
@@ -171,15 +175,17 @@ export class QuestionToolbox {
   /**
    * Add a copied Question into Toolbox
    * @param question a copied Survey.Question
-   * @param options a json object that allows you to override question properties. Attributes are: name, title, isCopied, iconName, json and category.
+   * @param options a json object that allows you to override question properties. Attributes are: name, title, tooltip, isCopied, iconName, json and category.
    */
   public addCopiedItem(question: Survey.Question, options: any = null) {
     if (!options) options = {};
     var name = !!options.name ? options.name : question.name;
     var title = !!options.title ? options.title : name;
+    var tooltip = !!options.tooltip ? options.tooltip : title;
     var item = {
       name: name,
       title: title,
+      tooltip: tooltip,
       isCopied: options.isCopied !== false,
       iconName: !!options.iconName ? options.iconName : "icon-default",
       json: !!options.json ? options.json : this.getQuestionJSON(question),
@@ -452,10 +458,12 @@ export class QuestionToolbox {
         question = Survey.Serializer.createClass(name);
       }
       var json = this.getQuestionJSON(question);
+      var title = editorLocalization.getString("qt." + name);
       var item = {
         name: name,
         iconName: "icon-" + name,
-        title: editorLocalization.getString("qt." + name),
+        title: title,
+        tooltip: title,
         json: json,
         isCopied: false,
         category: ""
@@ -485,6 +493,7 @@ export class QuestionToolbox {
         name: widgetJson.name,
         iconName: iconName,
         title: title,
+        tooltip: title,
         json: json,
         isCopied: false,
         category: ""

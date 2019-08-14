@@ -40,20 +40,7 @@
             data-bind="css: { 'panel-collapse collapse': koCollapsed}"
           >
             <!-- ko foreach: items -->
-            <div
-              tabindex="0"
-              draggable="true"
-              class="svd_toolbox_item svd-light-border-color"
-              data-bind="css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
-            >
-              <span data-bind="attr: {title: title}">
-                <svg-icon params="iconName: iconName"></svg-icon>
-              </span>
-              <span
-                class="svd_toolbox_item_text hidden-sm hidden-xs"
-                data-bind="text:title"
-              ></span>
-            </div>
+              <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
             <!-- /ko  -->
           </div>
         </div>
@@ -65,20 +52,7 @@
         data-bind="text: $root.getLocString('ed.toolbox')"
       ></div>
       <!-- ko foreach: toolbox.koItems -->
-      <div
-        tabindex="0"
-        draggable="true"
-        class="svd_toolbox_item svd-light-border-color"
-        data-bind="css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
-      >
-        <span data-bind="attr: {title: title}">
-          <svg-icon params="iconName: iconName"></svg-icon>
-        </span>
-        <span
-          class="svd_toolbox_item_text hidden-sm hidden-xs"
-          data-bind="text:title"
-        ></span>
-      </div>
+        <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
       <!-- /ko  -->
       <!-- /ko  -->
     </div>
@@ -177,5 +151,21 @@
       <!-- /ko -->
       <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
     </div>
+  </div>
+</script>
+<script type="text/html" id="se-tab-designer-item">
+    <div
+    tabindex="0"
+    draggable="true"
+    class="svd_toolbox_item svd-light-border-color"
+    data-bind="attr: {title:  tooltip}, css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
+  >
+    <span>
+      <svg-icon params="iconName: iconName"></svg-icon>
+    </span>
+    <span
+      class="svd_toolbox_item_text hidden-sm hidden-xs"
+      data-bind="text:title"
+    ></span>
   </div>
 </script>
