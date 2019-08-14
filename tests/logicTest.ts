@@ -520,3 +520,43 @@ QUnit.test("Rename the name", function(assert) {
     "Rename q1: survey.completedHtmlOnCondition[0].expression"
   );
 });
+QUnit.test("Add new item with two triggers", function(assert) {
+  var survey = new Survey.SurveyModel();
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "There is no items");
+  survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1" }]
+  });
+  logic = new SurveyLogic(survey);
+  logic.addNew();
+  assert.equal(logic.mode, "new", "There is no items");
+  assert.ok(logic.editableItem, "Editable item is created");
+  assert.ok(logic.expressionEditor, "expression editor is created");
+  assert.equal(
+    logic.expressionEditor.editingValue,
+    "",
+    "the expression is empty"
+  );
+  var lt = logic.getTypeByName("trigger_complete");
+  logic.addNewOperation(lt);
+  //assert.equal(lt.visible, false, "It is not visible now"); TODO
+  assert.equal(
+    logic.editableItem.operations.length,
+    1,
+    "There is one operation in new item"
+  );
+  logic.expressionEditor.editingValue = "{q1} = 2";
+  assert.equal(survey.triggers.length, 0, "There is no triggers yet");
+  logic.saveEditableItem();
+  assert.equal(survey.triggers.length, 1, "There is one trigger now");
+  assert.equal(
+    survey.triggers[0].getType(),
+    "completetrigger",
+    "It is a complete trigger"
+  );
+  assert.equal(
+    survey.triggers[0].expression,
+    "{q1} = 2",
+    "Complete trigger has the correct expression property"
+  );
+});

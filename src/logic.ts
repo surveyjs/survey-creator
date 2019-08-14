@@ -10,6 +10,8 @@ export interface ISurveyLogicType {
   showInUI?: boolean;
   elements?: (survey: Survey.SurveyModel) => Array<any>;
   showIf?: (survey: Survey.SurveyModel) => boolean;
+  createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
+  saveElement?: (element: Survey.Base) => void;
 }
 
 export class SurveyLogicType {
@@ -57,6 +59,14 @@ export class SurveyLogicType {
   public get showInUI(): boolean {
     return this.logicType.showInUI !== false;
   }
+  public createNewElement(survey: Survey.SurveyModel): Survey.Base {
+    if (!this.logicType.createNewElement) return null;
+    return this.logicType.createNewElement(survey);
+  }
+  public saveElement(element: Survey.Base): void {
+    if (!this.logicType.saveElement) return;
+    this.logicType.saveElement(element);
+  }
 }
 
 export class SurveyLogicOperation {
@@ -79,6 +89,7 @@ export class SurveyLogicOperation {
   public apply(expression: string) {
     if (!this.element) return;
     this.element[this.logicType.propertyName] = expression;
+    this.logicType.saveElement(this.element);
   }
   public update() {
     this.koElements(this.logicType.elements);
@@ -296,19 +307,48 @@ export class SurveyLogic {
       showInUI: false
     },
     {
-      name: "trigger_expression",
-      baseClass: "surveytrigger",
+      name: "trigger_complete",
+      baseClass: "completetrigger",
+      propertyName: "expression",
+      createNewElement: function(survey) {
+        var res = new Survey.SurveyTriggerComplete();
+        res["survey"] = survey;
+        res.setOwner(survey);
+        return res;
+      },
+      saveElement: function(element: Survey.Base) {
+        var trigger = <Survey.SurveyTrigger>element;
+        var survey = <Survey.SurveyModel>element["survey"];
+        if (survey.triggers.indexOf(trigger) < 0) {
+          survey.triggers.push(trigger);
+        }
+      }
+    },
+    {
+      name: "trigger_setvalue",
+      baseClass: "setvaluetrigger",
+      propertyName: "expression"
+    },
+    {
+      name: "trigger_copyvalue",
+      baseClass: "copyvaluetrigger",
       propertyName: "expression"
     },
     {
       name: "trigger_runExpression",
       baseClass: "runexpressiontrigger",
-      propertyName: "runExpression"
+      propertyName: "expression"
     },
     {
       name: "survey_completedHtmlOnCondition",
       baseClass: "htmlconditionitem",
       propertyName: "expression"
+    },
+    {
+      name: "trigger_runExpression_Expression",
+      baseClass: "runexpressiontrigger",
+      propertyName: "runExpression",
+      showInUI: false
     },
     {
       name: "question_expressionValidator",
@@ -485,7 +525,8 @@ export class SurveyLogic {
     }
   }
   public addNewOperation(logicType: SurveyLogicType) {
-    this.editableItem.addOperation(logicType);
+    var element = logicType.createNewElement(this.survey);
+    this.editableItem.addOperation(logicType, element);
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);
