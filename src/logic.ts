@@ -319,7 +319,7 @@ export class SurveyLogic {
       saveElement: function(element: Survey.Base) {
         var trigger = <Survey.SurveyTrigger>element;
         var survey = <Survey.SurveyModel>element["survey"];
-        if (survey.triggers.indexOf(trigger) < 0) {
+        if (!!survey && survey.triggers.indexOf(trigger) < 0) {
           survey.triggers.push(trigger);
         }
       }

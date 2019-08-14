@@ -520,14 +520,12 @@ QUnit.test("Rename the name", function(assert) {
     "Rename q1: survey.completedHtmlOnCondition[0].expression"
   );
 });
+
 QUnit.test("Add new item with two triggers", function(assert) {
-  var survey = new Survey.SurveyModel();
-  var logic = new SurveyLogic(survey);
-  assert.equal(logic.mode, "new", "There is no items");
-  survey = new Survey.SurveyModel({
+  var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }]
   });
-  logic = new SurveyLogic(survey);
+  var logic = new SurveyLogic(survey);
   logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   assert.ok(logic.editableItem, "Editable item is created");
