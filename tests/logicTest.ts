@@ -386,6 +386,12 @@ QUnit.test("Rename the name", function(assert) {
       {
         type: "complete",
         expression: "{q1} = 1"
+      },
+      {
+        type: "copyvalue",
+        expression: "{q1} = 1",
+        setToName: "q1",
+        fromName: "q2"
       }
     ],
     completedHtmlOnCondition: [
@@ -407,7 +413,8 @@ QUnit.test("Rename the name", function(assert) {
   var q7 = <Survey.QuestionMatrix>survey.getQuestionByName("q7");
   var q8 = <Survey.QuestionRadiogroup>survey.getQuestionByName("q8");
   var trigger1 = <Survey.SurveyTriggerRunExpression>survey.triggers[0];
-  var trigger2 = <Survey.SurveyTriggerComplete>survey.triggers[0];
+  var trigger2 = <Survey.SurveyTriggerComplete>survey.triggers[1];
+  var trigger3 = <Survey.SurveyTriggerCopyValue>survey.triggers[2];
   var q5col1 = q5.columns[0];
   logic.renameQuestion("Q1", "question1");
   logic.renameQuestion("q2", "question2");
@@ -474,6 +481,17 @@ QUnit.test("Rename the name", function(assert) {
     "{question1} = 1",
     "Rename q1: trigger2.expression"
   );
+  assert.equal(
+    trigger3.expression,
+    "{question1} = 1",
+    "Rename q1: trigger3.expression"
+  );
+  assert.equal(
+    trigger3.setToName,
+    "question1",
+    "Rename q1: trigger3.setToName"
+  );
+  assert.equal(trigger3.fromName, "question2", "Rename q2: trigger3.fromName");
   assert.equal(
     validator.expression,
     "{question1} > 1",

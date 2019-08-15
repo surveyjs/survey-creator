@@ -13,6 +13,7 @@ export interface ISurveyLogicType {
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
   saveElement?: (element: Survey.Base) => void;
   isUniqueItem?: boolean;
+  questionNames?: Array<string>;
 }
 
 export class SurveyLogicType {
@@ -74,6 +75,9 @@ export class SurveyLogicType {
   public get isUniqueItem(): boolean {
     return this.logicType.isUniqueItem === true;
   }
+  public get questionNames(): Array<string> {
+    return this.logicType.questionNames;
+  }
   private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
     if (!operations) return false;
     for (var i = 0; i < operations.length; i++) {
@@ -107,6 +111,16 @@ export class SurveyLogicOperation {
   }
   public update() {
     this.koElements(this.logicType.elements);
+  }
+  public renameQuestion(oldName: string, newName: string) {
+    if (!this.element || !this.logicType.questionNames) return;
+    var names = this.logicType.questionNames;
+    for (var i = 0; i < names.length; i++) {
+      var str = this.element[names[i]];
+      if (!!str && str.toLowerCase() == oldName.toLowerCase()) {
+        this.element[names[i]] = newName;
+      }
+    }
   }
   public anotherOperationAdded(op: SurveyLogicOperation) {
     if (!op.element || op.logicType !== this.logicType) return;
@@ -177,7 +191,15 @@ export class SurveyLogicItem {
     this.applyExpression(expression);
   }
   public renameQuestion(oldName: string, newName: string) {
-    if (!oldName || !newName || !this.expression) return;
+    if (!oldName || !newName) return;
+    this.renameQuestionInExpression(oldName, newName);
+    var ops = this.operations;
+    for (var i = 0; i < ops.length; i++) {
+      ops[i].renameQuestion(oldName, newName);
+    }
+  }
+  private renameQuestionInExpression(oldName: string, newName: string) {
+    if (!this.expression) return;
     var newExpression = this.expression;
     var expression = this.expression.toLocaleLowerCase();
     oldName = "{" + oldName.toLowerCase() + "}";
@@ -356,24 +378,32 @@ export class SurveyLogic {
       name: "trigger_setvalue",
       baseClass: "setvaluetrigger",
       propertyName: "expression",
-      isUniqueItem: true
+      questionNames: ["setToName"]
     },
     {
       name: "trigger_copyvalue",
       baseClass: "copyvaluetrigger",
       propertyName: "expression",
+      questionNames: ["setToName", "fromName"]
+    },
+    {
+      name: "trigger_skip",
+      baseClass: "skiptrigger",
+      propertyName: "expression",
+      questionNames: ["gotoName"],
       isUniqueItem: true
     },
     {
       name: "trigger_runExpression",
       baseClass: "runexpressiontrigger",
       propertyName: "expression",
-      isUniqueItem: true
+      questionNames: ["setToName"]
     },
     {
       name: "survey_completedHtmlOnCondition",
       baseClass: "htmlconditionitem",
-      propertyName: "expression"
+      propertyName: "expression",
+      isUniqueItem: true
     },
     {
       name: "trigger_runExpression_Expression",
