@@ -12,10 +12,12 @@ export interface ISurveyLogicType {
   showIf?: (survey: Survey.SurveyModel) => boolean;
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
   saveElement?: (element: Survey.Base) => void;
+  isUniqueItem?: boolean;
 }
 
 export class SurveyLogicType {
   private elementsValue: Array<any>;
+  private hasUniqueItem: boolean = false;
   public koVisible: any;
   constructor(
     private logicType: ISurveyLogicType,
@@ -44,14 +46,16 @@ export class SurveyLogicType {
   public get elements(): Array<any> {
     return !!this.elementsValue ? this.elementsValue : [];
   }
-  public update() {
+  public update(operations: Array<SurveyLogicOperation> = null) {
     this.elementsValue = !!this.logicType.elements
       ? this.logicType.elements(this.survey)
       : null;
+    this.hasUniqueItem = this.isUniqueItem && this.hasThisOperation(operations);
     this.koVisible(this.visible);
   }
   public get visible(): boolean {
     if (!this.showInUI) return false;
+    if (this.hasUniqueItem) return false;
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
     if (!!this.elementsValue) return this.elementsValue.length > 0;
     return true;
@@ -66,6 +70,16 @@ export class SurveyLogicType {
   public saveElement(element: Survey.Base): void {
     if (!this.logicType.saveElement) return;
     this.logicType.saveElement(element);
+  }
+  public get isUniqueItem(): boolean {
+    return this.logicType.isUniqueItem === true;
+  }
+  private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
+    if (!operations) return false;
+    for (var i = 0; i < operations.length; i++) {
+      if (operations[i].logicType == this) return true;
+    }
+    return false;
   }
 }
 
@@ -120,7 +134,10 @@ export class SurveyLogicItem {
   public get operations(): Array<SurveyLogicOperation> {
     return this.koOperations();
   }
-  public addOperation(lt: SurveyLogicType, element: Survey.Base = null) {
+  public addOperation(
+    lt: SurveyLogicType,
+    element: Survey.Base = null
+  ): SurveyLogicOperation {
     var ops = this.operations;
     var op = new SurveyLogicOperation(lt, element);
     for (var i = 0; i < ops.length; i++) {
@@ -128,18 +145,24 @@ export class SurveyLogicItem {
       op.anotherOperationAdded(ops[i]);
     }
     this.koOperations.push(op);
+    lt.update(this.operations);
+    return op;
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.removedOperations.push(op);
     var index = this.koOperations().indexOf(op);
     if (index > -1) {
       this.koOperations.splice(index, 1);
+      if (!!op.logicType) {
+        op.logicType.update(this.operations);
+      }
     }
   }
   public update() {
     var ops = this.operations;
     for (var i = 0; i < ops.length; i++) {
       ops[i].update();
+      ops[i].logicType.update(this.operations);
       for (var j = 0; j < ops.length; j++) {
         ops[i].anotherOperationAdded(ops[j]);
       }
@@ -310,6 +333,7 @@ export class SurveyLogic {
       name: "trigger_complete",
       baseClass: "completetrigger",
       propertyName: "expression",
+      isUniqueItem: true,
       createNewElement: function(survey) {
         var res = new Survey.SurveyTriggerComplete();
         res["survey"] = survey;
@@ -319,7 +343,11 @@ export class SurveyLogic {
       saveElement: function(element: Survey.Base) {
         var trigger = <Survey.SurveyTrigger>element;
         var survey = <Survey.SurveyModel>element["survey"];
-        if (!!survey && survey.triggers.indexOf(trigger) < 0) {
+        if (
+          !!survey &&
+          survey.triggers.indexOf(trigger) < 0 &&
+          !!trigger.expression
+        ) {
           survey.triggers.push(trigger);
         }
       }
@@ -327,17 +355,20 @@ export class SurveyLogic {
     {
       name: "trigger_setvalue",
       baseClass: "setvaluetrigger",
-      propertyName: "expression"
+      propertyName: "expression",
+      isUniqueItem: true
     },
     {
       name: "trigger_copyvalue",
       baseClass: "copyvaluetrigger",
-      propertyName: "expression"
+      propertyName: "expression",
+      isUniqueItem: true
     },
     {
       name: "trigger_runExpression",
       baseClass: "runexpressiontrigger",
-      propertyName: "expression"
+      propertyName: "expression",
+      isUniqueItem: true
     },
     {
       name: "survey_completedHtmlOnCondition",
@@ -524,9 +555,9 @@ export class SurveyLogic {
       this.koItems.splice(index, 1);
     }
   }
-  public addNewOperation(logicType: SurveyLogicType) {
+  public addNewOperation(logicType: SurveyLogicType): SurveyLogicOperation {
     var element = logicType.createNewElement(this.survey);
-    this.editableItem.addOperation(logicType, element);
+    return this.editableItem.addOperation(logicType, element);
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);

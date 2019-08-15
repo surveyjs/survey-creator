@@ -38,94 +38,94 @@
       </div>
       <div data-bind="visible: koSelected() != null">
           <div data-bind="with: koSelected">
-              <!-- ko if: conditionEditor != null -->
-                  <!-- ko template: { name: 'propertyeditorcontent-condition', data: conditionEditor } -->
-                  <!-- /ko -->
-              <!-- /ko -->
-              <!-- ko if: conditionEditor == null -->
-              <div class="form-inline form-group">
-                  <span class="input-group" data-bind="text: $root.getLocString('pe.triggerOn')"></span>
-                  <div class="form-control svd_custom_select">
-                      <select onmousewheel="return false;" data-bind="options:$parent.koQuestionNames, value: koName"></select>
-                  </div>
-                  <div class="form-control svd_custom_select">
-                      <select onmousewheel="return false;" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koOperator"></select>
-                  </div>
-                  <input class="form-control" type="text" data-bind="visible: koRequireValue, value:koValue" />
-              </div>
-              <!-- /ko -->
-              <!-- ko if: koType() == 'visibletrigger' -->
-              <div class="row">
-                  <div class="col-lg-6 col-sm-6">
-                      <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
-                      <!-- /ko -->
-                  </div>
-                  <div class="col-lg-6 col-sm-6">
-                      <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
-                      <!-- /ko -->
-                  </div>
-              </div>
-              <!-- /ko -->
-              <!-- ko if: koType() == 'completetrigger' -->
-              <div class="row">
-                  <div style="margin: 10px" data-bind="text: $root.getLocString('pe.triggerCompleteText')"></div>
-              </div>
-              <!-- /ko -->
-              <!-- ko if: koType() == 'setvaluetrigger' -->
-              <div class="row col-lg-12 col-sm-12">
-                  <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
-              </div>
-              <div class="row">
-                  <div class="col-lg-6 col-sm-6">
-                      <div class="form-group">
-                          <input class="form-control" type="text" data-bind="value:kosetToName, visible: koisVariable" />
-                          <div class="form-control svd_custom_select" data-bind="visible: !koisVariable()">
-                              <select onmousewheel="return false;" data-bind="options:koQuestions, value: kosetToName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-6 col-sm-6">
-                      <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koisVariable, displayName: $root.getLocString('pe.triggerIsVariable'), isDiplayNameVisible: true } } -->
-                      <!-- /ko -->
-                  </div>
-                  <div class="col-lg-12 col-sm-12">
-                      <div class="form-group" data-bind="visible:koisVariable">
-                          <div data-bind="text: $root.getLocString('pe.triggerSetValue')"></div>
-                          <input class="form-control" type="text" data-bind="value:kosetValue" />
-                      </div>
-                      <div class="form-group" data-bind="visible:koHasSurvey">
-                          <survey-widget params="survey: koSurvey"></survey-widget>
-                      </div>
-                  </div>
-              </div>
-              <!-- /ko -->
-              <!-- ko if: koType() == 'copyvaluetrigger' -->
-              <div class="row">
-                  <div class="col-lg-6 col-sm-6">
-                      <div class="form-group">
-                          <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
-                          <input class="form-control" type="text" data-bind="value:kosetToName" />
-                      </div>
-                  </div>
-                  <div class="col-lg-6 col-sm-6">
-                      <div class="form-group">
-                          <div data-bind="text: $root.getLocString('pe.triggerFromName')"></div>
-                          <input class="form-control" type="text" data-bind="value:kofromName" />
-                      </div>
-                  </div>
-              </div>
-              <!-- /ko -->
-              <!-- ko if: koType() == 'runexpressiontrigger' -->
-              <div class="row">
-                  <div class="form-group col-lg-12 col-sm-12">
-                      <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
-                      <input class="form-control" type="text" data-bind="value:kosetToName" />
-                      <div data-bind="text: $root.getLocString('pe.triggerRunExpression')"></div>
-                      <textarea class="form-control" type="text" data-bind="value:korunExpression" rows="3"></textarea>
-                  </div>
-              </div>
-              <!-- /ko -->
+            <!-- ko template: { name: 'propertyeditorcontent-condition', data: conditionEditor } -->
+            <!-- /ko -->
+            <!-- ko template: { name: 'propertyeditorcontent-trigger-content', data: $data } -->
+            <!-- /ko -->
           </div>
       </div>
   </div>
+</script>
+<script type="text/html" id="propertyeditorcontent-trigger-content">
+      <!-- ko if: koType() == 'visibletrigger' -->
+      <div class="row">
+      <div class="col-lg-6 col-sm-6">
+          <!-- ko template: { name: 'propertyeditor-triggersitems', data: pages } -->
+          <!-- /ko -->
+      </div>
+      <div class="col-lg-6 col-sm-6">
+          <!-- ko template: { name: 'propertyeditor-triggersitems', data: questions } -->
+          <!-- /ko -->
+      </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: koType() == 'completetrigger' -->
+  <div class="row">
+      <div style="margin: 10px" data-bind="text: $root.getLocString('pe.triggerCompleteText')"></div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: koType() == 'setvaluetrigger' -->
+  <div class="row col-lg-12 col-sm-12">
+      <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
+  </div>
+  <div class="row">
+      <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+              <input class="form-control" type="text" data-bind="value:kosetToName, visible: koisVariable" />
+              <div class="form-control svd_custom_select" data-bind="visible: !koisVariable()">
+                  <select onmousewheel="return false;" data-bind="options:koQuestions, value: kosetToName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-6 col-sm-6">
+          <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koisVariable, displayName: $root.getLocString('pe.triggerIsVariable'), isDiplayNameVisible: true } } -->
+          <!-- /ko -->
+      </div>
+      <div class="col-lg-12 col-sm-12">
+          <div class="form-group" data-bind="visible:koisVariable">
+              <div data-bind="text: $root.getLocString('pe.triggerSetValue')"></div>
+              <input class="form-control" type="text" data-bind="value:kosetValue" />
+          </div>
+          <div class="form-group" data-bind="visible:koHasSurvey">
+              <survey-widget params="survey: koSurvey"></survey-widget>
+          </div>
+      </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: koType() == 'copyvaluetrigger' -->
+  <div class="row">
+      <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+              <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
+              <input class="form-control" type="text" data-bind="value:kosetToName" />
+          </div>
+      </div>
+      <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+              <div data-bind="text: $root.getLocString('pe.triggerFromName')"></div>
+              <input class="form-control" type="text" data-bind="value:kofromName" />
+          </div>
+      </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: koType() == 'skiptrigger' -->
+  <div class="col-lg-12 col-sm-12">
+        <div class="form-group">
+            <div data-bind="text: $root.getLocString('pe.triggerGotoName')"></div>
+            <div class="form-control svd_custom_select">
+                <select onmousewheel="return false;" data-bind="options:koQuestions, value: koGotoName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
+            </div>
+        </div>
+    </div>
+  <!-- /ko -->
+    <!-- ko if: koType() == 'runexpressiontrigger' -->
+  <div class="row">
+      <div class="form-group col-lg-12 col-sm-12">
+          <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
+          <input class="form-control" type="text" data-bind="value:kosetToName" />
+          <div data-bind="text: $root.getLocString('pe.triggerRunExpression')"></div>
+          <textarea class="form-control" type="text" data-bind="value:korunExpression" rows="3"></textarea>
+      </div>
+  </div>
+  <!-- /ko -->
 </script>

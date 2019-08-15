@@ -536,13 +536,21 @@ QUnit.test("Add new item with two triggers", function(assert) {
     "the expression is empty"
   );
   var lt = logic.getTypeByName("trigger_complete");
-  logic.addNewOperation(lt);
-  //assert.equal(lt.visible, false, "It is not visible now"); TODO
+  var op = logic.addNewOperation(lt);
+  assert.equal(lt.visible, false, "Trigger logic type is not visible");
   assert.equal(
     logic.editableItem.operations.length,
     1,
     "There is one operation in new item"
   );
+  logic.removeOperation(op);
+  assert.equal(
+    logic.editableItem.operations.length,
+    0,
+    "There no operations in new item"
+  );
+  assert.equal(lt.visible, true, "Trigger logic type is visible again");
+  op = logic.addNewOperation(lt);
   logic.expressionEditor.editingValue = "{q1} = 2";
   assert.equal(survey.triggers.length, 0, "There is no triggers yet");
   logic.saveEditableItem();

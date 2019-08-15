@@ -304,6 +304,7 @@ export var enStrings = {
     triggerFromName: "Copy value from: ",
     triggerRunExpression: "Run this Expression:",
     triggerSetValue: "to: ",
+    triggerGotoName: "Go to the question:",
     triggerIsVariable: "Do not put the variable into the survey result."
   },
   //Property values
@@ -414,6 +415,7 @@ export var enStrings = {
     completetrigger: "complete survey",
     setvaluetrigger: "set value",
     copyvaluetrigger: "copy value",
+    skiptrigger: "skip to question",
     runexpressiontrigger: "run expression",
     visibletrigger: "change visibility (deprecated)"
   },
