@@ -33,8 +33,8 @@
           </span>
       </div>
       <div data-bind="visible: koSelected() == null">
-          <div data-bind="visible: koQuestionNames().length == 0, text: $root.getLocString('pe.noquestions')"></div>
-          <div data-bind="visible: koQuestionNames().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
+          <div data-bind="visible: koQuestions().length == 0, text: $root.getLocString('pe.noquestions')"></div>
+          <div data-bind="visible: koQuestions().length > 0, text: $root.getLocString('pe.createtrigger')"></div>
       </div>
       <div data-bind="visible: koSelected() != null">
           <div data-bind="with: koSelected">

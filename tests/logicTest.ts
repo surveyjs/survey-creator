@@ -584,3 +584,37 @@ QUnit.test("Add new item with two triggers", function(assert) {
     "Complete trigger has the correct expression property"
   );
 });
+
+QUnit.test("Edit triggers via trigger editor", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ],
+    triggers: [
+      {
+        type: "runexpression",
+        expression: "{q1} = 1",
+        runExpression: "{q2} + 1",
+        setToName: "q2"
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.items.length, 1, "There is one item");
+  logic.editItem(logic.items[0]);
+  assert.ok(logic.editableItem, "Editable item is created");
+  assert.equal(
+    logic.expressionEditor.editingValue,
+    "{q1} = 1",
+    "the expression set correctly"
+  );
+  assert.equal(
+    logic.editableItem.operations.length,
+    1,
+    "There is one operation"
+  );
+  var op = logic.editableItem.operations[0];
+  //assert.ok(op.templateObject, "Template object is created"); TODO
+});

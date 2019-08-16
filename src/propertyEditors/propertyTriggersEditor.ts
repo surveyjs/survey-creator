@@ -21,7 +21,6 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   koElements: any;
   koQuestions: any;
   koPages: any;
-  koQuestionNames: any;
   public koSelected: any;
   public koTriggers: any;
   public availableTriggers: Array<string> = [];
@@ -44,7 +43,6 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     });
     this.koPages = ko.observableArray();
     this.koQuestions = ko.observableArray();
-    this.koQuestionNames = ko.observableArray();
     this.koElements = ko.observableArray();
     this.triggerClasses = Survey.Serializer.getChildrenClasses(
       "surveytrigger",
@@ -61,7 +59,6 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       var allQuestions = (<Survey.Survey>this.editingObject).getAllQuestions();
       this.koPages(this.getElements((<Survey.Survey>this.editingObject).pages));
       this.koQuestions(this.getElements(allQuestions));
-      this.koQuestionNames(this.getQuestionNames(allQuestions));
       this.koElements(this.getElements(this.getAllElements()));
     }
     super.onValueChanged();
@@ -155,19 +152,6 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       );
 
     return elements;
-  }
-  private getQuestionNames(questions: Array<Survey.IQuestion>): Array<string> {
-    var items = [];
-    for (var i = 0; i < questions.length; i++) {
-      (<Survey.Question>questions[i]).addConditionNames(items);
-    }
-    var names = [];
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].indexOf("[") < 0) {
-        names.push(items[i]);
-      }
-    }
-    return names;
   }
   private createPropertyTrigger(
     trigger: Survey.SurveyTrigger

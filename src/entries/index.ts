@@ -14,6 +14,9 @@ export { editorLocalization as localization } from "../editorLocalization";
 export { DragDropHelper } from "../dragdrophelper";
 export { EditableObject } from "../propertyEditors/editableObject";
 export {
+  SurveyElementSelector
+} from "../propertyEditors/surveyElementSelector";
+export {
   SurveyPropertyEditorBase
 } from "../propertyEditors/propertyEditorBase";
 export {
@@ -105,6 +108,7 @@ export { SurveyLiveTester } from "../surveylive";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
 export { SurveyUndoRedo, UndoRedoItem } from "../undoredo";
+export { SurveyLogic } from "../logic";
 export {
   SurveyForDesigner,
   registerAdorner,

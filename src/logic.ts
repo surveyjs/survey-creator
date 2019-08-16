@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditionEditor";
+import { SurveyPropertyTrigger } from "./propertyEditors/propertyTriggersEditor";
 
 export interface ISurveyLogicType {
   name: string;
@@ -12,6 +13,7 @@ export interface ISurveyLogicType {
   showIf?: (survey: Survey.SurveyModel) => boolean;
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
   saveElement?: (element: Survey.Base) => void;
+  createTemplateObject?: (element: Survey.Base) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
 }
@@ -78,6 +80,10 @@ export class SurveyLogicType {
   public get questionNames(): Array<string> {
     return this.logicType.questionNames;
   }
+  public createTemplateObject(element: Survey.Base): any {
+    if (!this.logicType.createTemplateObject) return null;
+    return this.logicType.createTemplateObject(element);
+  }
   private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
     if (!operations) return false;
     for (var i = 0; i < operations.length; i++) {
@@ -90,9 +96,11 @@ export class SurveyLogicType {
 export class SurveyLogicOperation {
   public koElements: any;
   public koElement: any;
+  public templateObject: any;
   constructor(public logicType: SurveyLogicType, element: Survey.Base) {
     this.koElements = ko.observableArray(this.logicType.elements);
     this.koElement = ko.observable(element);
+    this.templateObject = logicType.createTemplateObject(element);
     this.anotherOperationAdded(this);
   }
   public get template(): string {
