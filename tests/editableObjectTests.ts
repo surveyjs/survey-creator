@@ -82,6 +82,10 @@ QUnit.test("Copy question with correct locale", function(assert) {
     "text",
     "Create object with correct type"
   );
+  assert.ok(
+    editableObj.editableObj["parent"],
+    "Create object with correct parent"
+  );
   assert.equal(
     (<Survey.Question>editableObj.editableObj).getLocale(),
     "de",

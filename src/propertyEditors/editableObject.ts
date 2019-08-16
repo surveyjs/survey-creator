@@ -36,6 +36,9 @@ export class EditableObject {
     if (type != "survey" && !!res["setSurveyImpl"]) {
       res["setSurveyImpl"](this.obj["survey"]);
     }
+    if (!!this.obj["parent"]) {
+      res["parent"] = this.obj["parent"];
+    }
     res["isCopy"] = true;
     return res;
   }

@@ -665,6 +665,28 @@ QUnit.test("Question editor: change copied object", function(assert) {
     "Locale set into editable survey"
   );
 });
+QUnit.test(
+  "Question editor: copied object should have parent property, bug: https://surveyjs.answerdesk.io/ticket/details/T2531",
+  function(assert) {
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("page1");
+    var panel = page.addNewPanel("panel1");
+    var q1 = page.addNewQuestion("text", "q1");
+    var q2 = panel.addNewQuestion("text", "q2");
+    var editor = new SurveyQuestionEditor(q1, null, null, null);
+    assert.equal(
+      editor.editableObj.parent.name,
+      "page1",
+      "copied object has page as parent"
+    );
+    editor = new SurveyQuestionEditor(q2, null, null, null);
+    assert.equal(
+      editor.editableObj.parent.name,
+      "panel1",
+      "copied object has panel as parent"
+    );
+  }
+);
 QUnit.test("DependedOn properties, koVisible", function(assert) {
   Survey.Serializer.addProperty("text", {
     name: "customProp1",
