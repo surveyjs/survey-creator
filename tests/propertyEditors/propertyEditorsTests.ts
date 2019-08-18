@@ -1094,7 +1094,6 @@ QUnit.test("Triggers property editor", function(assert) {
 
   koTrigger.pages.koChoosen.push({ name: "page2" });
   koTrigger.questions.koChoosen.push({ name: "question3" });
-  koTrigger.koValue(1);
   trigger = <Survey.SurveyTriggerVisible>koTrigger.createTrigger();
   assert.equal(
     koTrigger.conditionEditor.koTextValue(),
@@ -1118,8 +1117,7 @@ QUnit.test("Triggers property editor", function(assert) {
 
   propEditor.onAddClick({ value: "completetrigger" });
   koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
-  koTrigger.koName("question2");
-  koTrigger.koOperator("notempty");
+  koTrigger.conditionEditor.koTextValue("{question2} notempty");
   propEditor.onApplyClick();
   assert.equal(result.length, 3, "There are 3 triggers");
   assert.equal(

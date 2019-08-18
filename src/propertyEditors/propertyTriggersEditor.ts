@@ -203,24 +203,15 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
 }
 export class SurveyPropertyTrigger {
   private triggerType: string;
-  availableOperators = [];
   options: any;
-  koName: any;
-  koOperator: any;
-  koValue: any;
   koType: any;
   koText: any;
   koIsValid: any;
-  koRequireValue: any;
   conditionEditor: SurveyPropertyConditionEditor = null;
 
   constructor(public trigger: Survey.SurveyTrigger, options?: any) {
-    this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.triggerType = trigger.getType();
     this.koType = ko.observable(this.triggerType);
-    this.koName = ko.observable(trigger.name);
-    this.koOperator = ko.observable(trigger.operator);
-    this.koValue = ko.observable(trigger.value);
     var expressionProperty = Survey.Serializer.findProperty(
       "trigger",
       "expression"
@@ -235,17 +226,11 @@ export class SurveyPropertyTrigger {
     }
     this.conditionEditor.object = this.trigger;
     var self = this;
-    this.koRequireValue = ko.computed(() => {
-      return self.koOperator() != "empty" && self.koOperator() != "notempty";
-    });
     this.koIsValid = ko.computed(() => {
       var text = self.conditionEditor.koTextValue();
       return !!text;
     });
     this.koText = ko.computed(() => {
-      self.koName();
-      self.koOperator();
-      self.koValue();
       return self.getText();
     });
   }
