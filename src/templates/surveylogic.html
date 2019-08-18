@@ -23,9 +23,9 @@
     <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
     <!--ko if: $data.koEditableItem() != null -->
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
-    <div>
+    <div data-bind="visible: op.templateObject !== null">
         <span data-bind="text: op.text"></span><button data-bind="click:$parent.koRemoveOperation">Remove</button>
-        <!-- ko template: { name: op.template, data: op } --><!-- /ko -->
+        <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
         <br/>
     </div>
     <!-- /ko -->
@@ -37,15 +37,4 @@
     </div>
     <!-- /ko -->
   </div>
-</script>
-<script type="text/html" id="surveylogic_selectelement">
-  <div class="form-control svd_custom_select">
-      <select onmousewheel="return false;" style="max-width:200px" data-bind="value: koElement, valueAllowUnset: true">
-          <option>Select...</option>
-        <!-- ko foreach: koElements -->
-        <option data-bind="value: $data, text:name"></option>
-        <!-- /ko -->
-      </select>
-  </div>
-</script>
 </script>

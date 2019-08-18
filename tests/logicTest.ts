@@ -60,6 +60,22 @@ QUnit.test("Add existing visible Items", function(assert) {
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
+QUnit.test("Add new operation immediately", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "new", "Add new item");
+  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
+  logic.editableItem.operations[0].itemSelector.koValue("q1");
+  logic.expressionEditor.koValue("{q2} = 1");
+  logic.saveEditableItem();
+  assert.equal(
+    (<Survey.Question>survey.getQuestionByName("q1")).visibleIf,
+    "{q2} = 1",
+    "Set q1.visibleIf correctly"
+  );
+});
 QUnit.test("Do not add expression question into visible Items", function(
   assert
 ) {
@@ -107,15 +123,23 @@ QUnit.test("Add new item", function(assert) {
     1,
     "There is one operation in new item"
   );
+  var itemSelector = logic.editableItem.operations[0].itemSelector;
+  assert.equal(itemSelector.koElements().length, 3, "There are two questions");
+  itemSelector.updateItems();
   assert.equal(
-    logic.editableItem.operations[0].koElements().length,
-    1,
-    "There is one element available for adding"
+    itemSelector.koElements()[0].koDisabled(),
+    true,
+    "q1 is disabled"
   );
   assert.equal(
-    logic.editableItem.operations[0].koElements()[0].name,
-    "q3",
-    "The available element is q3"
+    itemSelector.koElements()[1].koDisabled(),
+    true,
+    "q2 is disabled"
+  );
+  assert.equal(
+    itemSelector.koElements()[2].koDisabled(),
+    false,
+    "q3 is enabled"
   );
   logic.removeOperation(logic.editableItem.operations[0]);
   assert.equal(
@@ -162,24 +186,8 @@ QUnit.test("Edit existing item", function(assert) {
     "{q3}=1",
     "Expression is set for editing"
   );
-  assert.equal(
-    logic.editableItem.operations[0].koElements().length,
-    3,
-    "All questions are available, op0"
-  );
-  assert.equal(
-    logic.editableItem.operations[1].koElements().length,
-    3,
-    "All questions are available, op1"
-  );
-  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
-  assert.equal(
-    logic.editableItem.operations[2].koElements().length,
-    3,
-    "All questions are available, op2"
-  );
 });
-QUnit.test("Update available elements", function(assert) {
+QUnit.test("Use SurveyItemSelector for editing", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "new", "There is no items");
@@ -195,21 +203,44 @@ QUnit.test("Update available elements", function(assert) {
   assert.equal(logic.mode, "view", "There are items");
   assert.equal(logic.items.length, 2, "There are two items");
   logic.editItem(logic.items[0]);
+  var itemSelector = logic.editableItem.operations[0].itemSelector;
+  itemSelector.updateItems();
+  assert.ok(itemSelector, "itemSelector has been created");
   assert.equal(
-    logic.editableItem.operations[0].koElements().length,
-    3,
+    itemSelector.koElements().length,
+    4,
     "All questions are available, op0"
   );
-  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"), <
-    Survey.Question
-  >survey.getQuestionByName("q4"));
+  assert.equal(
+    itemSelector.koElements()[1].koDisabled(),
+    true,
+    "The q2 is disabled, op0"
+  );
+  assert.equal(
+    itemSelector.koElements()[2].koDisabled(),
+    true,
+    "The q3 is disabled, op0"
+  );
+
+  var op = logic.editableItem.addOperation(
+    logic.getTypeByName("question_visibility")
+  );
+  op.itemSelector.koValue("q4");
+  assert.equal(op.element["name"], "q4", "Eleement set correctly");
   logic.saveEditableItem();
   logic.mode = "view";
   logic.editItem(logic.items[1]);
+  itemSelector = logic.editableItem.operations[0].itemSelector;
+  itemSelector.updateItems();
   assert.equal(
-    logic.editableItem.operations[0].koElements().length,
-    1,
+    itemSelector.koElements().length,
+    4,
     "Just one question is available, op0"
+  );
+  assert.equal(
+    itemSelector.koElements()[0].koDisabled(),
+    true,
+    "The q1 is disabled"
   );
 });
 QUnit.test("Remove same operations on save", function(assert) {

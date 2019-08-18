@@ -17,4 +17,4 @@ export * from "../textWorker";
 export * from "../translationtest";
 export * from "../editableObjectTests";
 export * from "../logicTest";
-export * from "../selectElementSelectorTests";
+export * from "../surveyElementSelectorTests";

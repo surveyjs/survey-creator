@@ -6,7 +6,6 @@ QUnit.test("SurveyElementSelector get/set value", function(assert) {
   var survey = createSurvey();
   var counter = 0;
   var value = "q1";
-  var q1 = <Survey.Question>survey.getAllQuestions()[0];
   var selector = new SurveyElementSelector(survey);
   assert.equal(selector.koElements().length, 5, "We have five questions");
   selector.onValueChangedCallback = function(newValue: string) {
@@ -15,9 +14,61 @@ QUnit.test("SurveyElementSelector get/set value", function(assert) {
   };
   selector.value = value;
   assert.equal(selector.koValue(), "q1", "Updated value");
+  assert.equal(
+    (<Survey.Question>selector.element).name,
+    "q1",
+    "Element set correctly, q1"
+  );
   selector.koValue("q2");
   assert.equal(value, "q2", "Callback is working");
   assert.equal(counter, 1, "Callback was called one time");
+  assert.equal(
+    (<Survey.Question>selector.element).name,
+    "q2",
+    "Element set correctly, q2"
+  );
+  selector.element = <Survey.Question>survey.getAllQuestions()[2];
+  assert.equal(selector.value, "q3", "Set via element property");
+});
+
+QUnit.test("SurveyElementSelector diffrent types", function(assert) {
+  var survey = createSurvey();
+  var selector = new SurveyElementSelector(survey, "page");
+  assert.equal(selector.koElements().length, 2, "We have two pages");
+  selector = new SurveyElementSelector(survey, "panel");
+  assert.equal(selector.koElements().length, 1, "We have one panel");
+});
+
+QUnit.test("SurveyElementSelector item.koDisabled()", function(assert) {
+  var survey = createSurvey();
+  (<Survey.Question>survey.getAllQuestions()[0]).visibleIf = "some text";
+  (<Survey.Question>survey.getAllQuestions()[1]).visibleIf = "some text";
+  var selector = new SurveyElementSelector(survey);
+  selector.disabledPropertyName = "visibleIf";
+  selector.value = "q1";
+  selector.updateItems();
+  assert.equal(
+    selector.koElements()[0].koDisabled(),
+    false,
+    "The first item is not disabled"
+  );
+  assert.equal(
+    selector.koElements()[1].koDisabled(),
+    true,
+    "The second item is disabled"
+  );
+  assert.equal(
+    selector.koElements()[2].koDisabled(),
+    false,
+    "The third item is not disabled"
+  );
+  selector.value = "q3";
+  selector.updateItems();
+  assert.equal(
+    selector.koElements()[0].koDisabled(),
+    false,
+    "The first item is not disabled, since it was selected before"
+  );
 });
 
 function createSurvey(): Survey.SurveyModel {

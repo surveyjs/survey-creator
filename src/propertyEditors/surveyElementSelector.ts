@@ -5,16 +5,20 @@ import { editorLocalization } from "../editorLocalization";
 export interface SurveyElementSelectorItem {
   name: string;
   text: string;
-  koEnabled: any;
+  element: Survey.Base;
+  koDisabled: any;
 }
 
 export class SurveyElementSelector {
   private showTitle: boolean;
   private optionsCaptionValue: string;
   private disableCallback: boolean = false;
+  private selectedValues: Array<string> = [];
   public koElements: any;
   public koValue: any;
+  public koHasFocus: any;
   public onValueChangedCallback: (val: string) => void;
+  public disabledPropertyName: string;
   constructor(
     public survey: Survey.SurveyModel,
     elementType: string = "question",
@@ -32,6 +36,12 @@ export class SurveyElementSelector {
       self.onValueChangedCallback(newValue);
     });
     this.koElements = ko.observableArray(this.buildElements(elementType));
+    this.koHasFocus = ko.observable(false);
+    this.koHasFocus.subscribe(function(newValue) {
+      if (newValue) {
+        self.updateItems();
+      }
+    });
   }
   public get value(): string {
     return this.koValue();
@@ -39,23 +49,68 @@ export class SurveyElementSelector {
   public set value(val: string) {
     this.disableCallback = true;
     this.koValue(val);
+    this.selectedValues.push(val);
     this.disableCallback = false;
   }
+  public get element(): Survey.Base {
+    var el = this.findItemByName(this.value);
+    return !!el ? el.element : null;
+  }
+  public set element(val: Survey.Base) {
+    var el = this.findItemByElement(val);
+    if (!!el) {
+      this.value = el.name;
+    }
+  }
+  private findItemByName(name: string): SurveyElementSelectorItem {
+    if (!name) return null;
+    var items = this.koElements();
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].name == name) return items[i];
+    }
+    return null;
+  }
+  private findItemByElement(el: Survey.Base): SurveyElementSelectorItem {
+    if (!el) return null;
+    var items = this.koElements();
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].element === el) return items[i];
+    }
+    return null;
+  }
   public get optionsCaption() {
-    return this.optionsCaption;
+    return this.optionsCaptionValue;
+  }
+  public updateItems() {
+    if (!this.disabledPropertyName) return;
+    var items = this.koElements();
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var disabled =
+        !!item.element[this.disabledPropertyName] &&
+        this.selectedValues.indexOf(item.name) < 0;
+      item.koDisabled(disabled);
+    }
   }
   private buildElements(elementType: string): Array<SurveyElementSelectorItem> {
     var elements = [];
     if (elementType == "question") {
       elements = this.survey.getAllQuestions();
     }
+    if (elementType == "page") {
+      elements = this.survey.pages;
+    }
+    if (elementType == "panel") {
+      elements = this.survey.getAllPanels();
+    }
     var res = [];
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
       res.push({
         name: el.name,
-        text: el.name,
-        koEnabled: ko.observable(true)
+        text: this.showTitle ? el.title : el.name,
+        element: el,
+        koDisabled: ko.observable(false)
       });
     }
     return res;
