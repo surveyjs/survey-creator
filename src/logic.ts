@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditionEditor";
-import { SurveyPropertyTrigger } from "./propertyEditors/propertyTriggersEditor";
+import {
+  SurveyPropertyTrigger,
+  SurveyPropertyTriggersEditor
+} from "./propertyEditors/propertyTriggersEditor";
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 
 export interface ISurveyLogicType {
@@ -12,8 +15,8 @@ export interface ISurveyLogicType {
   showInUI?: boolean;
   showIf?: (survey: Survey.SurveyModel) => boolean;
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
-  saveElement?: (element: Survey.Base) => void;
-  createTemplateObject?: (element: Survey.Base) => any;
+  saveElement?: (op: SurveyLogicOperation) => void;
+  createTemplateObject?: (op: SurveyLogicOperation) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
 }
@@ -41,6 +44,7 @@ export class SurveyLogicType {
     return this.logicType.propertyName;
   }
   public get templateName(): string {
+    if (this.isTrigger) return "propertyeditorcontent-trigger-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
       : "elementselector";
@@ -56,9 +60,7 @@ export class SurveyLogicType {
     return true;
   }
   public get hasItemSelector(): boolean {
-    return (
-      !!this.baseClass && this.showInUI && !this.logicType.createNewElement
-    );
+    return !!this.baseClass && this.showInUI && !this.canCreateNewElement();
   }
   public createItemSelector(): SurveyElementSelector {
     if (!this.hasItemSelector) return null;
@@ -69,13 +71,31 @@ export class SurveyLogicType {
   public get showInUI(): boolean {
     return this.logicType.showInUI !== false;
   }
-  public createNewElement(survey: Survey.SurveyModel): Survey.Base {
-    if (!this.logicType.createNewElement) return null;
-    return this.logicType.createNewElement(survey);
+  private canCreateNewElement(): boolean {
+    return !!this.logicType.createNewElement || this.isTrigger;
   }
-  public saveElement(element: Survey.Base): void {
-    if (!this.logicType.saveElement) return;
-    this.logicType.saveElement(element);
+  private get isTrigger(): boolean {
+    return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
+  }
+  public createNewElement(survey: Survey.SurveyModel): Survey.Base {
+    if (!!this.logicType.createNewElement)
+      return this.logicType.createNewElement(survey);
+    if (this.isTrigger) return this.createTriggerElement(survey);
+    return null;
+  }
+  public saveElement(op: SurveyLogicOperation): void {
+    if (!!this.logicType.saveElement) {
+      this.logicType.saveElement(op);
+    }
+    if (this.isTrigger) {
+      this.saveTriggerElement(op);
+    }
+  }
+  public createTemplateObject(op: SurveyLogicOperation): any {
+    if (!!this.logicType.createTemplateObject)
+      return this.logicType.createTemplateObject(op);
+    if (this.isTrigger) return this.createTriggerTemplateObject(op);
+    return null;
   }
   public get isUniqueItem(): boolean {
     return this.logicType.isUniqueItem === true;
@@ -83,16 +103,39 @@ export class SurveyLogicType {
   public get questionNames(): Array<string> {
     return this.logicType.questionNames;
   }
-  public createTemplateObject(element: Survey.Base): any {
-    if (!this.logicType.createTemplateObject) return null;
-    return this.logicType.createTemplateObject(element);
-  }
   private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
     if (!operations) return false;
     for (var i = 0; i < operations.length; i++) {
       if (operations[i].logicType == this) return true;
     }
     return false;
+  }
+  private createTriggerElement(survey: Survey.SurveyModel): Survey.Base {
+    var res = <Survey.SurveyTrigger>(
+      Survey.Serializer.createClass(this.baseClass)
+    );
+    res["survey"] = survey;
+    res.setOwner(survey);
+    return res;
+  }
+  private saveTriggerElement(op: SurveyLogicOperation) {
+    var trigger = <Survey.SurveyTrigger>op.element;
+    op.templateObject.applyProperties(trigger);
+    var survey = this.survey;
+    if (
+      !!survey &&
+      survey.triggers.indexOf(trigger) < 0 &&
+      !!trigger.expression
+    ) {
+      survey.triggers.push(trigger);
+    }
+  }
+  private createTriggerTemplateObject(op: SurveyLogicOperation) {
+    return SurveyPropertyTriggersEditor.createTriggerEditor(
+      this.survey,
+      <Survey.SurveyTrigger>op.element,
+      null
+    );
   }
 }
 
@@ -110,7 +153,7 @@ export class SurveyLogicOperation {
         self.element = self.itemSelector.element;
       };
     }
-    this.templateObjectValue = logicType.createTemplateObject(element);
+    this.templateObjectValue = logicType.createTemplateObject(this);
   }
   public get template(): string {
     return this.logicType.templateName;
@@ -129,10 +172,12 @@ export class SurveyLogicOperation {
   public get itemSelector(): SurveyElementSelector {
     return this.itemSelectorValue;
   }
-  public apply(expression: string) {
+  public apply(expression: string, isRenaming: boolean = false) {
     if (!this.element) return;
     this.element[this.logicType.propertyName] = expression;
-    this.logicType.saveElement(this.element);
+    if (!isRenaming) {
+      this.logicType.saveElement(this);
+    }
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!this.element || !this.logicType.questionNames) return;
@@ -189,7 +234,7 @@ export class SurveyLogicItem {
       this.removedOperations[i].apply("");
     }
     this.removedOperations = [];
-    this.applyExpression(expression);
+    this.applyExpression(expression, false);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!oldName || !newName) return;
@@ -215,14 +260,14 @@ export class SurveyLogicItem {
       index = expression.lastIndexOf(oldName, expression.length);
     }
     if (newExpression != this.expression) {
-      this.applyExpression(newExpression);
+      this.applyExpression(newExpression, true);
     }
   }
-  private applyExpression(expression: string) {
+  private applyExpression(expression: string, isRenaming: boolean) {
     this.expression = expression;
     var ops = this.operations;
     for (var i = 0; i < ops.length; i++) {
-      ops[i].apply(expression);
+      ops[i].apply(expression, isRenaming);
     }
   }
   private removeSameOperations() {
@@ -363,24 +408,7 @@ export class SurveyLogic {
       name: "trigger_complete",
       baseClass: "completetrigger",
       propertyName: "expression",
-      isUniqueItem: true,
-      createNewElement: function(survey) {
-        var res = new Survey.SurveyTriggerComplete();
-        res["survey"] = survey;
-        res.setOwner(survey);
-        return res;
-      },
-      saveElement: function(element: Survey.Base) {
-        var trigger = <Survey.SurveyTrigger>element;
-        var survey = <Survey.SurveyModel>element["survey"];
-        if (
-          !!survey &&
-          survey.triggers.indexOf(trigger) < 0 &&
-          !!trigger.expression
-        ) {
-          survey.triggers.push(trigger);
-        }
-      }
+      isUniqueItem: true
     },
     {
       name: "trigger_setvalue",

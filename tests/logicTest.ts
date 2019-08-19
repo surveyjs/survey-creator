@@ -647,5 +647,11 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
     "There is one operation"
   );
   var op = logic.editableItem.operations[0];
-  //assert.ok(op.templateObject, "Template object is created"); TODO
+  assert.ok(op.templateObject, "Template object is created");
+  logic.renameQuestion("q1", "question1");
+  assert.equal(
+    survey.triggers[0].expression,
+    "{question1} = 1",
+    "Rename correctly"
+  );
 });
