@@ -127,6 +127,8 @@ export var enStrings = {
     formEntry: "Form Entry",
     testService: "Test the service",
     conditionSelectQuestion: "Select question...",
+    conditionSelectPage: "Select page...",
+    conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
     conditionButtonAdd: "Add",
     conditionButtonReplace: "Replace",

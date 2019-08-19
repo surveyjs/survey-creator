@@ -1148,9 +1148,9 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     propEditor.koItems()[0]
   );
   assert.equal(saveTriggerEditor.koHasSurvey(), false, "survey is not visible");
-  assert.notOk(saveTriggerEditor.survey, "There is no survey by default");
+  assert.notOk(saveTriggerEditor.valueSurvey, "There is no survey by default");
   saveTriggerEditor.kosetToName("question1");
-  assert.ok(saveTriggerEditor.survey, "Survey has been created");
+  assert.ok(saveTriggerEditor.valueSurvey, "Survey has been created");
   assert.equal(saveTriggerEditor.koHasSurvey(), true, "survey is visible");
   saveTriggerEditor.kosetValue("val2");
   saveTriggerEditor.kosetToName("question2");
@@ -1163,7 +1163,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     "checkbox",
     "We have a checkbox question"
   );
-  saveTriggerEditor.survey.setValue("question", ["one", "two"]);
+  saveTriggerEditor.valueSurvey.setValue("question", ["one", "two"]);
   assert.deepEqual(
     saveTriggerEditor.kosetValue(),
     ["one", "two"],

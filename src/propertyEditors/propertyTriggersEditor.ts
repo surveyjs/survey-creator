@@ -9,6 +9,7 @@ import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
+import { SurveyElementSelector } from "../entries";
 
 interface Element {
   text?: string;
@@ -157,59 +158,63 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
     trigger: Survey.SurveyTrigger
   ): SurveyPropertyTrigger {
     var triggerItem = null;
-    trigger["survey"] = this.object;
+    var survey = !!this.object ? this.object : this.editingObject;
+    trigger["survey"] = survey;
     if (trigger.getType() == "visibletrigger") {
       triggerItem = new SurveyPropertyVisibleTrigger(
+        survey,
         <Survey.SurveyTriggerVisible>trigger,
+        this.options,
         this.koPages,
-        this.koElements,
-        this.options
+        this.koElements
       );
     }
     if (trigger.getType() == "setvaluetrigger") {
       triggerItem = new SurveyPropertySetValueTrigger(
+        survey,
         <Survey.SurveyTriggerSetValue>trigger,
-        this.koQuestions,
-        this.editingObject,
         this.options
       );
     }
     if (trigger.getType() == "copyvaluetrigger") {
       triggerItem = new SurveyPropertyCopyValueTrigger(
+        survey,
         trigger,
-        this.koQuestions,
         this.options
       );
     }
     if (trigger.getType() == "skiptrigger") {
       triggerItem = new SurveyPropertySkipTrigger(
+        survey,
         trigger,
-        this.koQuestions,
         this.options
       );
     }
     if (trigger.getType() == "runexpressiontrigger") {
       triggerItem = new SurveyPropertyRunExpressionTrigger(
+        survey,
         trigger,
-        this.koQuestions,
         this.options
       );
     }
     if (!triggerItem) {
-      triggerItem = new SurveyPropertyTrigger(trigger, this.options);
+      triggerItem = new SurveyPropertyTrigger(survey, trigger, this.options);
     }
     return triggerItem;
   }
 }
 export class SurveyPropertyTrigger {
   private triggerType: string;
-  options: any;
   koType: any;
   koText: any;
   koIsValid: any;
   conditionEditor: SurveyPropertyConditionEditor = null;
 
-  constructor(public trigger: Survey.SurveyTrigger, options?: any) {
+  constructor(
+    public survey: Survey.SurveyModel,
+    public trigger: Survey.SurveyTrigger,
+    public options?: any
+  ) {
     this.triggerType = trigger.getType();
     this.koType = ko.observable(this.triggerType);
     var expressionProperty = Survey.Serializer.findProperty(
@@ -254,18 +259,31 @@ export class SurveyPropertyTrigger {
   public get setToNameOptions(): string {
     return editorLocalization.getString("pe.conditionSelectQuestion");
   }
+  protected createElementSelector(koValue: any): SurveyElementSelector {
+    var res = new SurveyElementSelector(
+      this.survey,
+      "question",
+      !!this.options && this.options.showTitlesInExpressions
+    );
+    res.value = koValue();
+    res.onValueChangedCallback = function(newValue: string) {
+      koValue(newValue);
+    };
+    return res;
+  }
 }
 
 export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
   public pages: SurveyPropertyTriggerObjects;
   public questions: SurveyPropertyTriggerObjects;
   constructor(
+    public valueSurvey: Survey.SurveyModel,
     public trigger: Survey.SurveyTriggerVisible,
+    public options: any,
     koPages: any,
-    koQuestions: any,
-    options?: any
+    koQuestions: any
   ) {
-    super(trigger, options);
+    super(valueSurvey, trigger, options);
     this.pages = new SurveyPropertyTriggerObjects(
       editorLocalization.getString("pe.triggerMakePagesVisible"),
       koPages(),
@@ -287,30 +305,29 @@ export class SurveyPropertyVisibleTrigger extends SurveyPropertyTrigger {
 
 export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   private static emptySurvey = undefined;
-  koQuestions: any;
+  setToNameSelector: SurveyElementSelector;
   kosetToName: any;
   kosetValue: any;
   koisVariable: any;
   koSurvey: any;
   koHasSurvey: any;
-  survey: Survey.Survey;
+  valueSurvey: Survey.Survey;
   constructor(
+    public survey: Survey.SurveyModel,
     public trigger: Survey.SurveyTriggerSetValue,
-    koQuestions: any,
-    public triggerSurvey: Survey.Survey,
-    options?: ISurveyObjectEditorOptions
+    public options: any
   ) {
-    super(trigger, options);
+    super(survey, trigger, options);
     if (!SurveyPropertySetValueTrigger.emptySurvey) {
       SurveyPropertySetValueTrigger.emptySurvey =
         !!options && options.createSurvey({}, "triggersEditor");
     }
-    this.koQuestions = koQuestions;
     this.koSurvey = ko.observable(SurveyPropertySetValueTrigger.emptySurvey);
     this.koHasSurvey = ko.observable(false);
     this.kosetToName = ko.observable(trigger.setToName);
     this.kosetValue = ko.observable(trigger.setValue);
     this.koisVariable = ko.observable(trigger.isVariable);
+    this.setToNameSelector = this.createElementSelector(this.kosetToName);
     var self = this;
     this.kosetToName.subscribe(function(newValue) {
       if (!self.koisVariable()) {
@@ -335,10 +352,10 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
   private buildSurvey() {
     var question =
       !this.koisVariable() && !!this.kosetToName()
-        ? this.triggerSurvey.getQuestionByName(this.kosetToName())
+        ? this.survey.getQuestionByName(this.kosetToName())
         : null;
     if (!question) {
-      this.survey = null;
+      this.valueSurvey = null;
       this.koHasSurvey(false);
       this.koSurvey(SurveyPropertySetValueTrigger.emptySurvey);
       return;
@@ -349,32 +366,34 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     );
     qJson.titleLocation = "top";
     qJson.title = editorLocalization.getString("pe.triggerSetValue");
-    this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
+    this.valueSurvey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
       qJson,
       this.options
     );
-    this.survey.setValue("question", this.kosetValue());
+    this.valueSurvey.setValue("question", this.kosetValue());
     var self = this;
-    this.survey.onValueChanged.add(function(sender, options) {
+    this.valueSurvey.onValueChanged.add(function(sender, options) {
       self.kosetValue(options.value);
     });
-    this.koSurvey(this.survey);
+    this.koSurvey(this.valueSurvey);
     this.koHasSurvey(true);
   }
 }
 export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {
-  koQuestions: any;
+  setToNameSelector: SurveyElementSelector;
+  fromNameSelector: SurveyElementSelector;
   kosetToName: any;
   kofromName: any;
   constructor(
+    public survey: Survey.SurveyModel,
     public trigger: Survey.SurveyTrigger,
-    koQuestions: any,
     options?: any
   ) {
-    super(trigger, options);
-    this.koQuestions = koQuestions;
+    super(survey, trigger, options);
     this.kosetToName = ko.observable(trigger["setToName"]);
     this.kofromName = ko.observable(trigger["fromName"]);
+    this.setToNameSelector = this.createElementSelector(this.kosetToName);
+    this.fromNameSelector = this.createElementSelector(this.kofromName);
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = super.createTrigger();
@@ -386,14 +405,15 @@ export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {
 export class SurveyPropertySkipTrigger extends SurveyPropertyTrigger {
   koQuestions: any;
   koGotoName: any;
+  gotoNameSelector: SurveyElementSelector;
   constructor(
+    public survey: Survey.SurveyModel,
     public trigger: Survey.SurveyTrigger,
-    koQuestions: any,
     options?: any
   ) {
-    super(trigger, options);
-    this.koQuestions = koQuestions;
+    super(survey, trigger, options);
     this.koGotoName = ko.observable(trigger["gotoName"]);
+    this.gotoNameSelector = this.createElementSelector(this.koGotoName);
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = super.createTrigger();
@@ -402,18 +422,18 @@ export class SurveyPropertySkipTrigger extends SurveyPropertyTrigger {
   }
 }
 export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
-  koQuestions: any;
+  setToNameSelector: SurveyElementSelector;
   kosetToName: any;
   korunExpression: any;
   constructor(
+    public survey: Survey.SurveyModel,
     public trigger: Survey.SurveyTrigger,
-    koQuestions: any,
     options?: any
   ) {
-    super(trigger, options);
-    this.koQuestions = koQuestions;
+    super(survey, trigger, options);
     this.kosetToName = ko.observable(trigger["setToName"]);
     this.korunExpression = ko.observable(trigger["runExpression"]);
+    this.setToNameSelector = this.createElementSelector(this.kosetToName);
   }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = super.createTrigger();

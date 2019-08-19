@@ -26,9 +26,10 @@ export class SurveyElementSelector {
     optionsCaptionName: string = ""
   ) {
     this.showTitle = showTitle;
-    this.optionsCaptionValue = !!optionsCaptionName
-      ? editorLocalization.getString(optionsCaptionName)
-      : "";
+    this.optionsCaptionValue = this.getOptionsText(
+      optionsCaptionName,
+      elementType
+    );
     this.koValue = ko.observable("");
     var self = this;
     this.koValue.subscribe(function(newValue) {
@@ -114,5 +115,19 @@ export class SurveyElementSelector {
       });
     }
     return res;
+  }
+  private getOptionsText(
+    optionsCaptionName: string,
+    elementType: string
+  ): string {
+    if (!optionsCaptionName) {
+      optionsCaptionName =
+        elementType == "page"
+          ? "pe.conditionSelectPage"
+          : elementType == "panel"
+          ? "pe.conditionSelectPanel"
+          : "pe.conditionSelectQuestion";
+    }
+    return editorLocalization.getString(optionsCaptionName);
   }
 }

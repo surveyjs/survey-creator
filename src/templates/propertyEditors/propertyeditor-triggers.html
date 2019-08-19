@@ -69,23 +69,12 @@
       <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
   </div>
   <div class="row">
-      <div class="col-lg-6 col-sm-6">
+      <div class="col-lg-12 col-sm-12">
           <div class="form-group">
-              <input class="form-control" type="text" data-bind="value:kosetToName, visible: koisVariable" />
-              <div class="form-control svd_custom_select" data-bind="visible: !koisVariable()">
-                  <select onmousewheel="return false;" data-bind="options:koQuestions, value: kosetToName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
-              </div>
+              <!-- ko template: { name: "elementselector", data: setToNameSelector } --><!-- /ko -->
           </div>
-      </div>
-      <div class="col-lg-6 col-sm-6">
-          <!-- ko template: { name: "propertyeditor-boolean", data: { koValue: koisVariable, displayName: $root.getLocString('pe.triggerIsVariable'), isDiplayNameVisible: true } } -->
-          <!-- /ko -->
       </div>
       <div class="col-lg-12 col-sm-12">
-          <div class="form-group" data-bind="visible:koisVariable">
-              <div data-bind="text: $root.getLocString('pe.triggerSetValue')"></div>
-              <input class="form-control" type="text" data-bind="value:kosetValue" />
-          </div>
           <div class="form-group" data-bind="visible:koHasSurvey">
               <survey-widget params="survey: koSurvey"></survey-widget>
           </div>
@@ -97,13 +86,13 @@
       <div class="col-lg-6 col-sm-6">
           <div class="form-group">
               <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
-              <input class="form-control" type="text" data-bind="value:kosetToName" />
+              <!-- ko template: { name: "elementselector", data: setToNameSelector } --><!-- /ko -->
           </div>
       </div>
       <div class="col-lg-6 col-sm-6">
           <div class="form-group">
               <div data-bind="text: $root.getLocString('pe.triggerFromName')"></div>
-              <input class="form-control" type="text" data-bind="value:kofromName" />
+              <!-- ko template: { name: "elementselector", data: fromNameSelector } --><!-- /ko -->
           </div>
       </div>
   </div>
@@ -112,9 +101,7 @@
   <div class="col-lg-12 col-sm-12">
         <div class="form-group">
             <div data-bind="text: $root.getLocString('pe.triggerGotoName')"></div>
-            <div class="form-control svd_custom_select">
-                <select onmousewheel="return false;" data-bind="options:koQuestions, value: koGotoName, optionsText: 'text', optionsValue: 'name', optionsCaption: setToNameOptions"></select>
-            </div>
+            <!-- ko template: { name: "elementselector", data: gotoNameSelector } --><!-- /ko -->
         </div>
     </div>
   <!-- /ko -->
@@ -122,7 +109,7 @@
   <div class="row">
       <div class="form-group col-lg-12 col-sm-12">
           <div data-bind="text: $root.getLocString('pe.triggerSetToName')"></div>
-          <input class="form-control" type="text" data-bind="value:kosetToName" />
+          <!-- ko template: { name: "elementselector", data: setToNameSelector } --><!-- /ko -->
           <div data-bind="text: $root.getLocString('pe.triggerRunExpression')"></div>
           <textarea class="form-control" type="text" data-bind="value:korunExpression" rows="3"></textarea>
       </div>
