@@ -648,10 +648,32 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   );
   var op = logic.editableItem.operations[0];
   assert.ok(op.templateObject, "Template object is created");
-  logic.renameQuestion("q1", "question1");
+  logic.expressionEditor.editingValue = "{q1} = 10";
+  op.templateObject.kosetToName("q3");
+  logic.saveEditableItem();
+  assert.equal(
+    survey.triggers[0]["setToName"],
+    "q3",
+    "Trigger property editor works correctly, setToName"
+  );
   assert.equal(
     survey.triggers[0].expression,
-    "{question1} = 1",
-    "Rename correctly"
+    "{q1} = 10",
+    "Trigger property editor works correctly, expression"
   );
 });
+/*
+QUnit.test("Edit condition complete via its editor", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  logic.addNewOperation(logic.getTypeByName("survey_completedHtmlOnCondition"));
+  var op = logic.editableItem.operations[0];
+
+});
+*/
