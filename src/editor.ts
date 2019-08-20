@@ -956,6 +956,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           action: () => this.showTestSurvey()
         });
       }
+      if (this.showLogicTab) {
+        this.tabs.push({
+          name: "logic",
+          title: this.getLocString("ed.logic"),
+          template: "surveylogic",
+          data: this.logic,
+          action: () => this.showLogicEditor()
+        });
+      }
       if (this.showJSONEditorTab) {
         this.tabs.push({
           name: "editor",
@@ -981,15 +990,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           template: "translation",
           data: this.translation,
           action: () => this.showTranslationEditor()
-        });
-      }
-      if (this.showLogicTab) {
-        this.tabs.push({
-          name: "logic",
-          title: this.getLocString("ed.logic"),
-          template: "surveylogic",
-          data: this.logic,
-          action: () => this.showLogicEditor()
         });
       }
     });

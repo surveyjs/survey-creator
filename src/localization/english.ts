@@ -60,6 +60,7 @@ export var enStrings = {
     testSurvey: "Test Survey",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
+    logic: "Survey Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
     saveSurvey: "Save Survey",
