@@ -662,7 +662,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
     "Trigger property editor works correctly, expression"
   );
 });
-/*
+
 QUnit.test("Edit condition complete via its editor", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
@@ -674,6 +674,43 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
   var logic = new SurveyLogic(survey);
   logic.addNewOperation(logic.getTypeByName("survey_completedHtmlOnCondition"));
   var op = logic.editableItem.operations[0];
-
+  logic.expressionEditor.editingValue = "{q1} = 10";
+  op.templateObject.koValue("Some text");
+  logic.saveEditableItem();
+  assert.equal(survey.completedHtmlOnCondition.length, 1, "There is one item");
+  assert.equal(
+    survey.completedHtmlOnCondition[0].expression,
+    "{q1} = 10",
+    "Expression set correctly"
+  );
+  assert.equal(
+    survey.completedHtmlOnCondition[0].html,
+    "Some text",
+    "html set correctly"
+  );
+  logic.editItem(logic.items[0]);
+  assert.equal(
+    logic.items[0].operations.length,
+    1,
+    "There is one operation here"
+  );
+  logic.expressionEditor.editingValue =
+    logic.expressionEditor.editingValue + "0";
+  op.templateObject.koValue(op.templateObject.koValue() + " 2");
+  logic.saveEditableItem();
+  assert.equal(
+    survey.completedHtmlOnCondition.length,
+    1,
+    "There is still one item"
+  );
+  assert.equal(
+    survey.completedHtmlOnCondition[0].expression,
+    "{q1} = 100",
+    "Expression is changed correctly"
+  );
+  assert.equal(
+    survey.completedHtmlOnCondition[0].html,
+    "Some text 2",
+    "html is changed correctly"
+  );
 });
-*/

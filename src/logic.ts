@@ -15,8 +15,8 @@ export interface ISurveyLogicType {
   showInUI?: boolean;
   showIf?: (survey: Survey.SurveyModel) => boolean;
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
-  saveElement?: (op: SurveyLogicOperation) => void;
-  createTemplateObject?: (op: SurveyLogicOperation) => any;
+  saveElement?: (survey: Survey.SurveyModel, op: SurveyLogicOperation) => void;
+  createTemplateObject?: (element: Survey.Base) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
 }
@@ -85,16 +85,16 @@ export class SurveyLogicType {
   }
   public saveElement(op: SurveyLogicOperation): void {
     if (!!this.logicType.saveElement) {
-      this.logicType.saveElement(op);
+      this.logicType.saveElement(this.survey, op);
     }
     if (this.isTrigger) {
       this.saveTriggerElement(op);
     }
   }
-  public createTemplateObject(op: SurveyLogicOperation): any {
+  public createTemplateObject(element: Survey.Base): any {
     if (!!this.logicType.createTemplateObject)
-      return this.logicType.createTemplateObject(op);
-    if (this.isTrigger) return this.createTriggerTemplateObject(op);
+      return this.logicType.createTemplateObject(element);
+    if (this.isTrigger) return this.createTriggerTemplateObject(element);
     return null;
   }
   public get isUniqueItem(): boolean {
@@ -130,10 +130,10 @@ export class SurveyLogicType {
       survey.triggers.push(trigger);
     }
   }
-  private createTriggerTemplateObject(op: SurveyLogicOperation) {
+  private createTriggerTemplateObject(element: Survey.Base) {
     return SurveyPropertyTriggersEditor.createTriggerEditor(
       this.survey,
-      <Survey.SurveyTrigger>op.element,
+      <Survey.SurveyTrigger>element,
       null
     );
   }
@@ -153,7 +153,7 @@ export class SurveyLogicOperation {
         self.element = self.itemSelector.element;
       };
     }
-    this.templateObjectValue = logicType.createTemplateObject(this);
+    this.templateObjectValue = logicType.createTemplateObject(this.element);
   }
   public get template(): string {
     return this.logicType.templateName;
@@ -439,7 +439,25 @@ export class SurveyLogic {
       name: "survey_completedHtmlOnCondition",
       baseClass: "htmlconditionitem",
       propertyName: "expression",
-      isUniqueItem: true
+      isUniqueItem: true,
+      templateName: "propertyeditorcontent-html",
+      createNewElement: function(survey: Survey.SurveyModel) {
+        return new Survey.HtmlConditionItem();
+      },
+      createTemplateObject: function(element: Survey.Base) {
+        var item = <Survey.HtmlConditionItem>element;
+        return { koValue: ko.observable(item.html), readOnly: false };
+      },
+      saveElement: function(
+        survey: Survey.SurveyModel,
+        op: SurveyLogicOperation
+      ) {
+        var item = <Survey.HtmlConditionItem>op.element;
+        item.html = op.templateObject.koValue();
+        if (survey.completedHtmlOnCondition.indexOf(item) < 0) {
+          survey.completedHtmlOnCondition.push(item);
+        }
+      }
     },
     {
       name: "trigger_runExpression_Expression",
