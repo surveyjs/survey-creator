@@ -33,8 +33,14 @@ export class EditableObject {
       res = new Survey.Survey();
     }
     this.assignProperties(res);
-    if (type != "survey" && !!res["setSurveyImpl"]) {
-      res["setSurveyImpl"](this.obj["survey"]);
+    if (type != "survey") {
+      if (!!res["setSurveyImpl"]) {
+        res["setSurveyImpl"](this.obj["survey"]);
+      } else {
+        if (!!this.obj["survey"] && !res["survey"]) {
+          res["survey"] = this.obj["survey"];
+        }
+      }
     }
     if (!!this.obj["parent"]) {
       res["parent"] = this.obj["parent"];
