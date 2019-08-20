@@ -1249,6 +1249,39 @@ QUnit.test("Validators property editor", function(assert) {
 });
 
 QUnit.test(
+  "Validators property editor - custom property, Bug: https://surveyjs.answerdesk.io/ticket/details/T2537",
+  function(assert) {
+    Survey.Serializer.addProperty("surveyvalidator", "validationType");
+
+    var survey = createSurvey();
+    var validator = new Survey.NumericValidator(10, 100);
+    validator["validationType"] = "Error";
+    validator.text = "validatortext";
+    var question = <Survey.Question>survey.getQuestionByName("question1");
+    question.validators.push(validator);
+    var result = [];
+    var propEditor = new SurveyPropertyValidatorsEditor(null);
+    propEditor.beforeShow();
+    propEditor.editingObject = question;
+    propEditor.editingValue = question.validators;
+    assert.equal(propEditor.koItems().length, 1, "There is one validator");
+    var editingValidator = propEditor.koItems()[0].obj;
+    assert.equal(
+      editingValidator.text,
+      "validatortext",
+      "Standard property set correctly"
+    );
+    assert.equal(
+      editingValidator.validationType,
+      "Error",
+      "Custom property set correctly"
+    );
+
+    Survey.Serializer.removeProperty("surveyvalidator", "validationType");
+  }
+);
+
+QUnit.test(
   "Validators property editor update existing validator property - https://surveyjs.answerdesk.io/ticket/details/T2058",
   function(assert) {
     var survey = createSurvey();
