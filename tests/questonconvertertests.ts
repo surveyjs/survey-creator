@@ -13,6 +13,36 @@ QUnit.test("get converted classes", function(assert) {
   assert.equal(classes[0], "comment", "it is comment");
 });
 
+QUnit.test("get converted classes based on available types", function(assert) {
+  var classes = QuestionConverter.getConvertToClasses("radiogroup", []);
+  assert.equal(classes.length, 3, "There are three classes for radiogroup");
+  classes = QuestionConverter.getConvertToClasses("radiogroup", [
+    "dropdown",
+    "checkbox"
+  ]);
+  assert.equal(
+    classes.length,
+    2,
+    "There are two classes for radiogroup, remove imagepicker"
+  );
+  classes = QuestionConverter.getConvertToClasses("radiogroup", [
+    "radiogroup",
+    "checkbox",
+    "text"
+  ]);
+  assert.equal(
+    classes.length,
+    1,
+    "There is one class for radiogroup, checkbox"
+  );
+  classes = QuestionConverter.getConvertToClasses("radiogroup", [
+    "radiogroup",
+    "comment",
+    "text"
+  ]);
+  assert.equal(classes.length, 0, "There is no classes for radiogroup");
+});
+
 QUnit.test("Convert question", function(assert) {
   var survey = new Survey.Survey();
   var page = survey.addNewPage();

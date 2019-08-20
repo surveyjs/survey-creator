@@ -145,6 +145,13 @@ export class QuestionToolbox {
   public get items(): Array<IQuestionToolboxItem> {
     return this.itemsValue;
   }
+  public get itemNames(): Array<string> {
+    var res = [];
+    for (var i = 0; i < this.items.length; i++) {
+      res.push(this.items[i].name);
+    }
+    return res;
+  }
   /**
    * The Array of copied Toolbox items
    */

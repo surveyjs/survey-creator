@@ -2043,7 +2043,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           options.items.push({ template: "action-separator" });
         }
         var currentType = options.obj.getType();
-        var convertClasses = QuestionConverter.getConvertToClasses(currentType);
+        var convertClasses = QuestionConverter.getConvertToClasses(
+          currentType,
+          this.toolbox.itemNames
+        );
         var allowChangeType = convertClasses.length > 0;
         var createTypeByClass = className => {
           return {
