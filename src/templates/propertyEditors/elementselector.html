@@ -1,7 +1,7 @@
 <script type="text/html" id="elementselector">
   <div class="form-control svd_custom_select">
-      <select onmousewheel="return false;" data-bind="value: koValue, valueAllowUnset: true, hasFocus: koHasFocus">
-        <option data-bind="text: optionsCaption"></option>
+      <select onmousewheel="return false;" data-bind="value: koValue, optionsCaption: optionsCaption, valueAllowUnset: true, hasFocus: koHasFocus">
+        <option value="" data-bind="text: optionsCaption"></option>
         <!-- ko foreach: koElements -->
         <option data-bind="attr: { disabled: koDisabled, value: name }, text:text"></option>
         <!-- /ko -->
