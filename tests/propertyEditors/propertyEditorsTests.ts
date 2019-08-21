@@ -20,7 +20,7 @@ import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/p
 import { SurveyObjectProperty } from "../../src/objectProperty";
 import { SurveyPropertyTextEditor } from "../../src/propertyEditors/propertyModalEditor";
 import { SurveyPropertyResultfullEditor } from "../../src/propertyEditors/propertyRestfullEditor";
-import { ISurveyObjectEditorOptions } from "../../src/propertyEditors/propertyEditorBase";
+import { EditorOptionsTests } from "../editorOptionsTests";
 import { SurveyPropertyTextItemsEditor } from "../../src/propertyEditors/propertyTextItemsEditor";
 import {
   SurveyPropertyTriggersEditor,
@@ -45,90 +45,6 @@ export default QUnit.module("PropertyEditorsTests");
 class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEditor {
   constructor() {
     super(Survey.Serializer.findProperty("selectbase", "choices"));
-  }
-}
-
-class EditorOptionsTests implements ISurveyObjectEditorOptions {
-  doValueChangingCallback: (options: any) => any;
-  alwaySaveTextInPropertyEditors: boolean;
-  showApplyButtonInEditors: boolean;
-  useTabsInElementEditor: boolean;
-  getObjectDisplayName(obj: Survey.Base): string {
-    return obj["name"];
-  }
-  showTitlesInExpressions: boolean;
-  onIsEditorReadOnlyCallback(
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
-    readOnly: boolean
-  ): boolean {
-    return false;
-  }
-  onItemValueAddedCallback(
-    obj: Survey.Base,
-    propertyName: string,
-    itemValue: Survey.ItemValue,
-    itemValues: Array<Survey.ItemValue>
-  ) {}
-  onMatrixDropdownColumnAddedCallback(
-    matrix: Survey.Question,
-    column: Survey.MatrixDropdownColumn,
-    columns: Array<Survey.MatrixDropdownColumn>
-  ) {}
-  onSetPropertyEditorOptionsCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editorOptions: any
-  ) {}
-  onGetErrorTextOnValidationCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    value: any
-  ): string {
-    return "";
-  }
-  onPropertyEditorKeyDownCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
-    event: KeyboardEvent
-  ) {}
-  onValueChangingCallback(options: any) {
-    if (!!this.doValueChangingCallback) this.doValueChangingCallback(options);
-  }
-  onPropertyEditorObjectSetCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase
-  ) {}
-  onPropertyEditorModalShowDescriptionCallback(
-    propertyName: string,
-    obj: Survey.Base
-  ): any {
-    return null;
-  }
-  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
-    return title;
-  }
-  onConditionValueSurveyCreatedCallBack(
-    valueQuestionName: string,
-    propertyName: string,
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
-    survey: Survey.Survey
-  ) {}
-  onConditionQuestionsGetListCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
-    list: any[]
-  ) {}
-  public createSurvey(
-    json: any = {},
-    reason: string = "designer",
-    surveyType = Survey.Survey
-  ) {
-    return new surveyType(json);
   }
 }
 

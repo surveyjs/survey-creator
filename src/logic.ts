@@ -1,11 +1,9 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditionEditor";
-import {
-  SurveyPropertyTrigger,
-  SurveyPropertyTriggersEditor
-} from "./propertyEditors/propertyTriggersEditor";
+import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggersEditor";
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
+import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 
 export interface ISurveyLogicType {
   name: string;
@@ -26,7 +24,8 @@ export class SurveyLogicType {
   public koVisible: any;
   constructor(
     private logicType: ISurveyLogicType,
-    public survey: Survey.SurveyModel
+    public survey: Survey.SurveyModel,
+    public options: ISurveyObjectEditorOptions = null
   ) {
     this.koVisible = ko.observable(true);
     this.update();
@@ -59,12 +58,19 @@ export class SurveyLogicType {
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
     return true;
   }
+  public get showTitlesInExpression(): boolean {
+    return !!this.options && this.options.showTitlesInExpressions;
+  }
   public get hasItemSelector(): boolean {
     return !!this.baseClass && this.showInUI && !this.canCreateNewElement();
   }
   public createItemSelector(): SurveyElementSelector {
     if (!this.hasItemSelector) return null;
-    var res = new SurveyElementSelector(this.survey, this.baseClass);
+    var res = new SurveyElementSelector(
+      this.survey,
+      this.baseClass,
+      this.showTitlesInExpression
+    );
     res.disabledPropertyName = this.propertyName;
     return res;
   }
@@ -134,7 +140,7 @@ export class SurveyLogicType {
     return SurveyPropertyTriggersEditor.createTriggerEditor(
       this.survey,
       <Survey.SurveyTrigger>element,
-      null
+      this.options
     );
   }
 }
@@ -528,7 +534,10 @@ export class SurveyLogic {
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
 
-  constructor(public survey: Survey.SurveyModel) {
+  constructor(
+    public survey: Survey.SurveyModel,
+    public options: ISurveyObjectEditorOptions = null
+  ) {
     this.createExpressionPropertyEditor();
     this.koItems = ko.observableArray();
     this.koLogicTypes = ko.observableArray();
@@ -760,7 +769,9 @@ export class SurveyLogic {
   protected createLogicTypes(): Array<SurveyLogicType> {
     var res = [];
     for (var i = 0; i < SurveyLogic.types.length; i++) {
-      res.push(new SurveyLogicType(SurveyLogic.types[i], this.survey));
+      res.push(
+        new SurveyLogicType(SurveyLogic.types[i], this.survey, this.options)
+      );
     }
     return res;
   }

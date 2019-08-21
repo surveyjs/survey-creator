@@ -1,5 +1,6 @@
 import * as Survey from "survey-knockout";
 import { SurveyLogic, SurveyLogicItem } from "../src/logic";
+import {EditorOptionsTests} from "./editorOptionsTests";
 export default QUnit.module("LogicTabTests");
 
 QUnit.test("Page visibility logic", function(assert) {
@@ -713,4 +714,14 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     "Some text 2",
     "html is changed correctly"
   );
+});
+QUnit.test("Use survey creator options", function(assert) {
+  var options = new EditorOptionsTests();
+  options.showTitlesInExpressions = true;
+  var survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1", title: "Question 1" }, { type: "text", name: "q2", title: "Question 2" }]
+  });
+  var logic = new SurveyLogic(survey, options);
+  logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
+  assert.equal(logic.editableItem.operations[0].itemSelector.koElements()[0].text, "Question 1", "Use showTitlesInExpression");
 });
