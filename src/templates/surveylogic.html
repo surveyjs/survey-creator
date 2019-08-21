@@ -1,6 +1,6 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
-    <button data-bind="click: $data.koAddNew">Add New</button>
+    <button data-bind="visible: !koReadOnly(), click: $data.koAddNew">Add New</button>
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
     <div>
         <span data-bind="text: item.expression"></span>
@@ -11,7 +11,7 @@
           <br/>
         </div>
       <!-- /ko -->
-      <button data-bind="click:$parent.koEditItem">Edit</button><button data-bind="click:$parent.koRemoveItem">Remove</button>
+      <button data-bind="visible: !$parent.koReadOnly(), click:$parent.koEditItem">Edit</button><button data-bind="visible: !$parent.koReadOnly(), click:$parent.koRemoveItem">Remove</button>
     </div>
     <!-- /ko -->
   </div>

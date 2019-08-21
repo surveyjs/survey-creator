@@ -1,24 +1,24 @@
 ﻿<script type="text/html" id="questioneditor">
-    <div id="surveyquestioneditorwindow" class="modal" data-bind="with:koEditor">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-bind="click: onResetClick">&times;</button>
-                    <h4 class="modal-title" data-bind="text:koTitle"></h4>
-                </div>
-                <div class="modal-body svd_notopbottompaddings">
-                    <!-- ko template: { name: "questioneditor-content", data: $data } -->
-                    <!-- /ko -->
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-primary" data-bind="visible: koShowApplyButton, click: onApplyClick, value: $root.getLocString('pe.apply')"
-                        style="width:100px" />
-                    <input type="button" class="btn btn-default btn-secondary" data-bind="click: onOkClick, value: $root.getLocString('pe.ok')"
-                        style="width:100px" />
-                    <input type="button" class="btn btn-primary" data-bind="click: onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px"
-                    />
-                </div>
-            </div>
-        </div>
-    </div>
+  <div id="surveyquestioneditorwindow" class="modal" data-bind="with:koEditor">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-bind="click: onResetClick">&times;</button>
+                  <h4 class="modal-title" data-bind="text:koTitle"></h4>
+              </div>
+              <div class="modal-body svd_notopbottompaddings">
+                  <!-- ko template: { name: "questioneditor-content", data: $data } -->
+                  <!-- /ko -->
+              </div>
+              <div class="modal-footer">
+                  <input type="button" class="btn btn-primary" data-bind="visible: koShowApplyButton, disable: readOnly, click: onApplyClick, value: $root.getLocString('pe.apply')"
+                      style="width:100px" />
+                  <input type="button" class="btn btn-default btn-secondary" data-bind="click: onOkClick, disable: readOnly, value: $root.getLocString('pe.ok')"
+                      style="width:100px" />
+                  <input type="button" class="btn btn-primary" data-bind="click: onResetClick, value: $root.getLocString('pe.cancel')" style="width:100px"
+                  />
+              </div>
+          </div>
+      </div>
+  </div>
 </script>

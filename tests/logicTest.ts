@@ -737,3 +737,13 @@ QUnit.test("Use survey creator options", function(assert) {
     "Use showTitlesInExpression"
   );
 });
+QUnit.test("Disable editing for readOnly", function(assert) {
+  var options = new EditorOptionsTests();
+  options.readOnly = true;
+  var survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  });
+  var logic = new SurveyLogic(survey, options);
+  assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
+  assert.equal(logic.koReadOnly(), true, "It is readOnly");
+});

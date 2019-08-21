@@ -9,6 +9,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
+  readOnly: boolean;
   propertyName: string;
   getObjectDisplayName(obj: Survey.Base): string {
     return obj["name"];

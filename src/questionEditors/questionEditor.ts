@@ -187,6 +187,9 @@ export class SurveyQuestionEditor {
   public get editableObj(): any {
     return this.editableObject.editableObj;
   }
+  public get readOnly(): boolean {
+    return !!this.options && this.options.readOnly;
+  }
   private getTitle(): string {
     var res;
     if (this.obj["name"]) {

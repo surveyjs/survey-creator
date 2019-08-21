@@ -533,6 +533,7 @@ export class SurveyLogic {
   public koRemoveOperation: any;
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
+  public koReadOnly: any;
 
   constructor(
     public survey: Survey.SurveyModel,
@@ -542,6 +543,7 @@ export class SurveyLogic {
     this.koItems = ko.observableArray();
     this.koLogicTypes = ko.observableArray();
     this.koMode = ko.observable("view");
+    this.koReadOnly = ko.observable(this.readOnly);
     var self = this;
     this.koAddNew = function() {
       self.addNew();
@@ -587,13 +589,17 @@ export class SurveyLogic {
     this.koItems(this.buildItems(true));
     this.invisibleItems = this.buildItems(false);
     this.koEditableItem(null);
-    this.mode = this.items.length > 0 ? "view" : "new";
+    this.koReadOnly(this.readOnly);
+    this.mode = this.items.length > 0 || this.readOnly ? "view" : "new";
     if (this.mode == "new") {
       this.addNew();
     }
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
     this.expressionEditor.beforeShow();
+  }
+  public get readOnly() {
+    return !!this.options && this.options.readOnly;
   }
   public saveEditableItem() {
     if (!this.editableItem) return;
