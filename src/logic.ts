@@ -573,9 +573,15 @@ export class SurveyLogic {
     }
     return null;
   }
-  public update(survey: Survey.SurveyModel = null) {
+  public update(
+    survey: Survey.SurveyModel = null,
+    options: ISurveyObjectEditorOptions = null
+  ) {
     if (!!survey) {
       this.survey = survey;
+    }
+    if (!!options) {
+      this.options = options;
     }
     this.koLogicTypes(this.createLogicTypes());
     this.koItems(this.buildItems(true));
@@ -586,6 +592,7 @@ export class SurveyLogic {
       this.addNew();
     }
     this.expressionEditor.object = this.survey;
+    this.expressionEditor.options = this.options;
     this.expressionEditor.beforeShow();
   }
   public saveEditableItem() {

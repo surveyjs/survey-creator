@@ -2497,7 +2497,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.translation.survey = this.survey;
   }
   private showSurveyLogic() {
-    this.logic.update(this.survey);
+    this.logic.update(this.survey, this);
   }
   private getSurveyJSON(): any {
     if (
