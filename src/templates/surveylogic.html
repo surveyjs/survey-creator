@@ -3,7 +3,7 @@
     <button data-bind="visible: !koReadOnly(), click: $data.koAddNew">Add New</button>
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
     <div>
-        <span data-bind="text: item.expression"></span>
+        <span data-bind="text: item.expressionText"></span>
         <br/>
         <!-- ko foreach: {data: item.koOperations, as: 'op' } -->
         <div>
@@ -16,15 +16,15 @@
     <!-- /ko -->
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
-    <button data-bind="click:$data.koShowView">Back</button>
-    <span>
-        Here is the expression:
-    </span>
+    <div>
+      <button data-bind="click:$data.koShowView">Back</button>
+    </div>
     <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
+    <hr />
     <!--ko if: $data.koEditableItem() != null -->
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
     <div data-bind="visible: op.templateObject !== null">
-        <span data-bind="text: op.text"></span><button data-bind="click:$parent.koRemoveOperation">Remove</button>
+        <span data-bind="text: op.name"></span><button data-bind="click:$parent.koRemoveOperation">Remove</button>
         <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
         <br/>
     </div>
@@ -33,7 +33,7 @@
     <button data-bind="click:$data.koSaveEditableItem">Save</button>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
-        <span data-bind="text: item.text"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>
+        <span data-bind="text: item.displayName"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>
     </div>
     <!-- /ko -->
   </div>

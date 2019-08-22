@@ -878,4 +878,6 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
     findOp("completedHtmlOnCondition").text,
     "Show custom text for the 'Thank you page'."
   );
+
+  assert.equal(findOp("page_visibility").name, "Page visibility");
 });

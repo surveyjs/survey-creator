@@ -101,6 +101,19 @@ export var enStrings = {
     completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
+      page_visibilityName: "Page visibility",
+      panel_visibilityName: "Panel visibility",
+      panel_enableName: "Panel enable/disable",
+      question_visibilityName: "Question visibility",
+      question_enableName: "Question enable/disable",
+      question_requireName: "Question optional required",
+      trigger_completeName: "Complete survey",
+      trigger_setvalueName: "Set question value",
+      trigger_copyvalueName: "Copy question value",
+      trigger_skipName: "Skip to question",
+      trigger_runExpressionName: "Run custom expression",
+      completedHtmlOnConditionName: "Custom 'Thank you page' text",
+
       itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
       page_visibilityText: "Page {0} becomes visible", //{0} page name
       panel_visibilityText: "Panel {0} becomes visible", //{0} panel name
@@ -114,7 +127,10 @@ export var enStrings = {
       trigger_skipText: "Survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "Run expression: '{0}'", //{0} the expression
       trigger_runExpressionText2: " and set it's result into question: {0}", //{0} question name
-      completedHtmlOnConditionText: "Show custom text for the 'Thank you page'."
+      completedHtmlOnConditionText:
+        "Show custom text for the 'Thank you page'.",
+
+      expressionEditorTitle: "Setup the logic expression"
     }
   },
   //Property names in table headers

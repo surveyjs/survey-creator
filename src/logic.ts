@@ -22,6 +22,10 @@ export interface ISurveyLogicType {
   getDisplayTextName?: (element: Survey.Base) => string;
 }
 
+function getLogicString(name: string) {
+  return editorLocalization.getString("ed.lg." + name);
+}
+
 export class SurveyLogicType {
   public static formatElName(name: string): string {
     return "{" + name + "}";
@@ -38,9 +42,6 @@ export class SurveyLogicType {
   }
   public get name(): string {
     return this.logicType.name;
-  }
-  public get text(): string {
-    return this.name;
   }
   public get baseClass(): string {
     return this.logicType.baseClass;
@@ -115,8 +116,11 @@ export class SurveyLogicType {
   public get questionNames(): Array<string> {
     return this.logicType.questionNames;
   }
+  public get displayName(): string {
+    return getLogicString(this.name + "Name");
+  }
   public getDisplayText(element: Survey.Base): string {
-    var str = editorLocalization.getString("ed.lg." + this.name + "Text");
+    var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
       return this.logicType.getDisplayText(element, str);
     var name = "";
@@ -220,6 +224,9 @@ export class SurveyLogicOperation {
   }
   public equals(op: SurveyLogicOperation): boolean {
     return this.logicType === op.logicType && this.element === op.element;
+  }
+  public get name(): string {
+    return this.logicType.displayName;
   }
   public get text(): string {
     return this.logicType.getDisplayText(this.element);
@@ -491,15 +498,11 @@ export class SurveyLogic {
         element: Survey.Base,
         formatStr: string
       ): string {
-        var res = editorLocalization.getString(
-          "ed.lg.trigger_runExpressionText1"
-        );
+        var res = getLogicString("trigger_runExpressionText1");
         res = res["format"](element["runExpression"]);
         var setToName = element["setToName"];
         if (!!setToName) {
-          var str = editorLocalization.getString(
-            "ed.lg.trigger_runExpressionText2"
-          );
+          var str = getLogicString("trigger_runExpressionText2");
           res += str["format"](
             SurveyLogicType.formatElName(element["setToName"])
           );
@@ -662,6 +665,8 @@ export class SurveyLogic {
     }
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
+    this.expressionEditor.displayName = getLogicString("expressionEditorTitle");
+    this.expressionEditor.showHelpText = false;
     this.expressionEditor.beforeShow();
   }
   public get readOnly() {
