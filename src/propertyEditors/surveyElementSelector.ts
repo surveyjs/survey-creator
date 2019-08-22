@@ -107,9 +107,14 @@ export class SurveyElementSelector {
     var res = [];
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
+      var text = "";
+      if (this.showTitle) {
+        text = el.locTitle.renderedHtml;
+      }
+      if (!text) text = el.name;
       res.push({
         name: el.name,
-        text: this.showTitle ? el.title : el.name,
+        text: text,
         element: el,
         koDisabled: ko.observable(false)
       });

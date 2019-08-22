@@ -39,6 +39,20 @@ QUnit.test("SurveyElementSelector diffrent types", function(assert) {
   assert.equal(selector.koElements().length, 1, "We have one panel");
 });
 
+QUnit.test("SurveyElementSelector showTitle = true", function(assert) {
+  var survey = createSurvey();
+  var selector = new SurveyElementSelector(survey, "question", true);
+  assert.equal(
+    selector.koElements()[0].text,
+    "Question 1",
+    "Get question title"
+  );
+  assert.equal(selector.koElements()[1].text, "q2", "Get question name");
+  selector = new SurveyElementSelector(survey, "page", true);
+  assert.equal(selector.koElements()[0].text, "Page 1", "Get page title");
+  assert.equal(selector.koElements()[1].text, "page2", "Get page name");
+});
+
 QUnit.test("SurveyElementSelector item.koDisabled()", function(assert) {
   var survey = createSurvey();
   (<Survey.Question>survey.getAllQuestions()[0]).visibleIf = "some text";
@@ -76,10 +90,12 @@ function createSurvey(): Survey.SurveyModel {
     pages: [
       {
         name: "page1",
+        title: "Page 1",
         elements: [
           {
             type: "text",
-            name: "q1"
+            name: "q1",
+            title: "Question 1"
           },
           {
             type: "text",
