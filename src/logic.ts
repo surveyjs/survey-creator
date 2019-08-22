@@ -4,6 +4,7 @@ import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditi
 import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggersEditor";
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
+import { editorLocalization } from "./editorLocalization";
 
 export interface ISurveyLogicType {
   name: string;
@@ -17,9 +18,14 @@ export interface ISurveyLogicType {
   createTemplateObject?: (element: Survey.Base) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
+  getDisplayText?: (element: Survey.Base, formatStr: string) => string;
+  getDisplayTextName?: (element: Survey.Base) => string;
 }
 
 export class SurveyLogicType {
+  public static formatElName(name: string): string {
+    return "{" + name + "}";
+  }
   private hasUniqueItem: boolean = false;
   public koVisible: any;
   constructor(
@@ -108,6 +114,23 @@ export class SurveyLogicType {
   }
   public get questionNames(): Array<string> {
     return this.logicType.questionNames;
+  }
+  public getDisplayText(element: Survey.Base): string {
+    var str = editorLocalization.getString("ed.lg." + this.name + "Text");
+    if (!!this.logicType.getDisplayText)
+      return this.logicType.getDisplayText(element, str);
+    var name = "";
+    if (!!this.logicType.getDisplayTextName) {
+      name = this.logicType.getDisplayTextName(element);
+    } else {
+      if (!!element && !!element["name"]) {
+        name = element["name"];
+      }
+    }
+    if (!!name) {
+      return str["format"](SurveyLogicType.formatElName(name));
+    }
+    return str;
   }
   private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
     if (!operations) return false;
@@ -199,9 +222,7 @@ export class SurveyLogicOperation {
     return this.logicType === op.logicType && this.element === op.element;
   }
   public get text(): string {
-    return (
-      this.logicType.text + (!!this.element ? " - " + this.element["name"] : "")
-    );
+    return this.logicType.getDisplayText(this.element);
   }
 }
 
@@ -249,6 +270,11 @@ export class SurveyLogicItem {
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);
     }
+  }
+  public get expressionText(): string {
+    return editorLocalization
+      .getString("ed.lg.itemExpressionText")
+      ["format"](this.expression);
   }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;
@@ -329,23 +355,31 @@ export class SurveyLogic {
       }
     },
     {
-      name: "question_visibility",
-      baseClass: "question",
-      propertyName: "visibleIf",
-      showIf: function(survey: Survey.SurveyModel) {
-        return SurveyLogic.hasNeededElements(
-          survey.getAllQuestions(),
-          "visibleIf"
-        );
-      }
-    },
-    {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
       showIf: function(survey: Survey.SurveyModel) {
         return SurveyLogic.hasNeededElements(
           survey.getAllPanels(),
+          "visibleIf"
+        );
+      }
+    },
+    {
+      name: "panel_enable",
+      baseClass: "panel",
+      propertyName: "enableIf",
+      showIf: function(survey: Survey.SurveyModel) {
+        return SurveyLogic.hasNeededElements(survey.getAllPanels(), "enableIf");
+      }
+    },
+    {
+      name: "question_visibility",
+      baseClass: "question",
+      propertyName: "visibleIf",
+      showIf: function(survey: Survey.SurveyModel) {
+        return SurveyLogic.hasNeededElements(
+          survey.getAllQuestions(),
           "visibleIf"
         );
       }
@@ -370,14 +404,6 @@ export class SurveyLogic {
           survey.getAllQuestions(),
           "requiredIf"
         );
-      }
-    },
-    {
-      name: "panel_enable",
-      baseClass: "panel",
-      propertyName: "enableIf",
-      showIf: function(survey: Survey.SurveyModel) {
-        return SurveyLogic.hasNeededElements(survey.getAllPanels(), "enableIf");
       }
     },
     {
@@ -420,29 +446,69 @@ export class SurveyLogic {
       name: "trigger_setvalue",
       baseClass: "setvaluetrigger",
       propertyName: "expression",
-      questionNames: ["setToName"]
+      questionNames: ["setToName"],
+      getDisplayText: function(
+        element: Survey.Base,
+        formatStr: string
+      ): string {
+        return formatStr["format"](
+          SurveyLogicType.formatElName(element["setToName"]),
+          element["setValue"]
+        );
+      }
     },
     {
       name: "trigger_copyvalue",
       baseClass: "copyvaluetrigger",
       propertyName: "expression",
-      questionNames: ["setToName", "fromName"]
+      questionNames: ["setToName", "fromName"],
+      getDisplayText: function(
+        element: Survey.Base,
+        formatStr: string
+      ): string {
+        return formatStr["format"](
+          SurveyLogicType.formatElName(element["setToName"]),
+          SurveyLogicType.formatElName(element["fromName"])
+        );
+      }
     },
     {
       name: "trigger_skip",
       baseClass: "skiptrigger",
       propertyName: "expression",
       questionNames: ["gotoName"],
-      isUniqueItem: true
+      isUniqueItem: true,
+      getDisplayTextName: function(element: Survey.Base): string {
+        return element["gotoName"];
+      }
     },
     {
       name: "trigger_runExpression",
       baseClass: "runexpressiontrigger",
       propertyName: "expression",
-      questionNames: ["setToName"]
+      questionNames: ["setToName"],
+      getDisplayText: function(
+        element: Survey.Base,
+        formatStr: string
+      ): string {
+        var res = editorLocalization.getString(
+          "ed.lg.trigger_runExpressionText1"
+        );
+        res = res["format"](element["runExpression"]);
+        var setToName = element["setToName"];
+        if (!!setToName) {
+          var str = editorLocalization.getString(
+            "ed.lg.trigger_runExpressionText2"
+          );
+          res += str["format"](
+            SurveyLogicType.formatElName(element["setToName"])
+          );
+        }
+        return res;
+      }
     },
     {
-      name: "survey_completedHtmlOnCondition",
+      name: "completedHtmlOnCondition",
       baseClass: "htmlconditionitem",
       propertyName: "expression",
       isUniqueItem: true,

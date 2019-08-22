@@ -1,5 +1,5 @@
 import * as Survey from "survey-knockout";
-import { SurveyLogic, SurveyLogicItem } from "../src/logic";
+import { SurveyLogic, SurveyLogicOperation } from "../src/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
 export default QUnit.module("LogicTabTests");
 
@@ -673,7 +673,7 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     ]
   });
   var logic = new SurveyLogic(survey);
-  logic.addNewOperation(logic.getTypeByName("survey_completedHtmlOnCondition"));
+  logic.addNewOperation(logic.getTypeByName("completedHtmlOnCondition"));
   var op = logic.editableItem.operations[0];
   logic.expressionEditor.editingValue = "{q1} = 10";
   op.templateObject.koValue("Some text");
@@ -746,4 +746,136 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   var logic = new SurveyLogic(survey, options);
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
   assert.equal(logic.koReadOnly(), true, "It is readOnly");
+});
+QUnit.test("Displaying correct text for logic operation", function(assert) {
+  var survey = new Survey.SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        visibleIf: "{q1} = 1",
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", enableIf: "{q1} = 1" },
+          { type: "text", name: "q4", requiredIf: "{q1} = 1" },
+          {
+            type: "panel",
+            name: "panel1",
+            visibleIf: "{q1} = 1",
+            enableIf: "{q1} = 1",
+            elements: [
+              {
+                type: "text",
+                name: "q5"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    triggers: [
+      {
+        type: "complete",
+        expression: "{q1} = 1"
+      },
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2"
+      },
+      {
+        type: "runexpression",
+        expression: "{q1} = 1",
+        runExpression: "{q2} + 1",
+        setToName: "q3"
+      },
+      {
+        type: "copyvalue",
+        expression: "{q1} = 1",
+        setToName: "q1",
+        fromName: "q2"
+      },
+      {
+        type: "setvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        setValue: "q2Value"
+      }
+    ],
+    completedHtmlOnCondition: [
+      {
+        expression: "{q1} = 1",
+        html: "text"
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.items.length, 1, "We have one item");
+  var ops = logic.items[0].operations;
+  var logicTypes = [
+    "page_visibility",
+    "panel_visibility",
+    "panel_enable",
+    "question_visibility",
+    "question_enable",
+    "question_require",
+    "trigger_complete",
+    "trigger_setvalue",
+    "trigger_copyvalue",
+    "trigger_skip",
+    "trigger_runExpression",
+    "completedHtmlOnCondition"
+  ];
+  assert.equal(
+    ops.length,
+    logicTypes.length,
+    "There are 11 operations: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
+  );
+  var findOp = function(name: string): SurveyLogicOperation {
+    for (var i = 0; i < ops.length; i++) {
+      if (ops[i].logicType.name == name) return ops[i];
+    }
+    return ops[i];
+  };
+  for (var i = 0; i < logicTypes.length; i++) {
+    assert.ok(findOp(logicTypes[i]), logicTypes[i] + " is here.");
+  }
+  assert.equal(
+    logic.items[0].expressionText,
+    "When expression: '{q1} = 1' returns true:",
+    "Item expressionText"
+  );
+  assert.equal(findOp("page_visibility").text, "Page {page1} becomes visible");
+  assert.equal(
+    findOp("panel_visibility").text,
+    "Panel {panel1} becomes visible"
+  );
+  assert.equal(findOp("panel_enable").text, "Panel {panel1} becomes enable");
+  assert.equal(
+    findOp("question_visibility").text,
+    "Question {q2} becomes visible"
+  );
+  assert.equal(findOp("question_enable").text, "Question {q3} becomes enable");
+  assert.equal(
+    findOp("question_require").text,
+    "Question {q4} becomes required"
+  );
+  assert.equal(findOp("trigger_complete").text, "Survey is completed");
+  assert.equal(
+    findOp("trigger_setvalue").text,
+    "Set into question: {q2} value q2Value"
+  );
+  assert.equal(
+    findOp("trigger_copyvalue").text,
+    "Copy into question: {q1} value from question {q2}"
+  );
+  assert.equal(findOp("trigger_skip").text, "Survey skip to the question {q2}");
+  assert.equal(
+    findOp("trigger_runExpression").text,
+    "Run expression: '{q2} + 1' and set it's result into question: {q3}"
+  );
+  assert.equal(
+    findOp("completedHtmlOnCondition").text,
+    "Show custom text for the 'Thank you page'."
+  );
 });

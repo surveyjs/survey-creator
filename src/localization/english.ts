@@ -98,7 +98,24 @@ export var enStrings = {
     italic: "Italic",
     underline: "Underline",
     fpAddQuestion: "Add question...",
-    completedHtmlOnConditionItemText: "Show if:"
+    completedHtmlOnConditionItemText: "Show if:",
+    lg: {
+      //Logic tab strings
+      itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
+      page_visibilityText: "Page {0} becomes visible", //{0} page name
+      panel_visibilityText: "Panel {0} becomes visible", //{0} panel name
+      panel_enableText: "Panel {0} becomes enable", //{0} panel name
+      question_visibilityText: "Question {0} becomes visible", //{0} question name
+      question_enableText: "Question {0} becomes enable", //{0} question name
+      question_requireText: "Question {0} becomes required", //{0} question name
+      trigger_completeText: "Survey is completed",
+      trigger_setvalueText: "Set into question: {0} value {1}", //{0} question name, {1} setValue
+      trigger_copyvalueText: "Copy into question: {0} value from question {1}", //{0} and {1} question names
+      trigger_skipText: "Survey skip to the question {0}", //{0} question name
+      trigger_runExpressionText1: "Run expression: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " and set it's result into question: {0}", //{0} question name
+      completedHtmlOnConditionText: "Show custom text for the 'Thank you page'."
+    }
   },
   //Property names in table headers
   pel: {
