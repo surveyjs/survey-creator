@@ -120,6 +120,30 @@ QUnit.test("Create custom property editor", function(assert) {
   Extentions.unregisterCustomPropertyEditor("customBool");
 });
 
+QUnit.test(
+  "Сustom property editor should be rendered regardless the editor.object value - https://surveyjs.answerdesk.io/ticket/details/t2550/file-upload-property-not-working-in-the-1-1-6-version",
+  function(assert) {
+    var renderCount = 0;
+    var widgetJSON = {
+      render: function(editor, el) {
+        renderCount++;
+      }
+    };
+    Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
+    var property = new Survey.JsonObjectProperty("testname");
+    property.type = "customBool";
+    var propertyEditor = <SurveyPropertyCustomEditor>(
+      SurveyPropertyEditorFactory.createEditor(property, null)
+    );
+    assert.equal(renderCount, 0, "Initial counter");
+    assert.equal(propertyEditor.object, undefined, "Object is not assigned");
+    propertyEditor["doAfterRender"]([{}], null);
+    assert.equal(propertyEditor.object, undefined, "Object is not assigned");
+    assert.equal(renderCount, 1, "Render has been called");
+    Extentions.unregisterCustomPropertyEditor("customBool");
+  }
+);
+
 QUnit.test("Custom property editor - validation", function(assert) {
   var widgetJSON = {
     validate: function(editor, newValue): string {
