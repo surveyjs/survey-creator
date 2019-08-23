@@ -28,9 +28,16 @@
         <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
         <br/>
     </div>
+    <hr />
     <!-- /ko -->
     <!-- /ko -->
-    <button data-bind="click:$data.koSaveEditableItem">Save</button>
+    <div>
+      <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
+    </div>
+    <div class="modal-footer" style="text-align:left">
+        <input type="button" class="btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $root.getLocString('pe.save')"
+        style="width:100px" />
+    </div>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
         <span data-bind="text: item.displayName"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>

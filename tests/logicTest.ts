@@ -149,10 +149,15 @@ QUnit.test("Add new item", function(assert) {
     "There is no operations"
   );
   logic.addNewOperation(logic.getTypeByName("question_visibility"));
-  var q3 = <Survey.Question>survey.getQuestionByName("q3");
-  logic.editableItem.operations[0].element = q3;
+  logic.editableItem.operations[0].itemSelector.koValue("q3");
   logic.expressionEditor.editingValue = "{q1} = 2";
-  logic.saveEditableItem();
+  assert.equal(
+    logic.editableItem.operations[0].element["name"],
+    "q3",
+    "Question set correctly"
+  );
+  assert.equal(logic.saveEditableItem(), true, "Save correctly");
+  var q3 = <Survey.Question>survey.getQuestionByName("q3");
   assert.equal(q3.visibleIf, "{q1} = 2");
   assert.equal(logic.items.length, 3, "There are 3 items now");
 });
@@ -880,4 +885,40 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
   );
 
   assert.equal(findOp("page_visibility").name, "Page visibility");
+});
+
+QUnit.test("Logic editing errors", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(logic.saveEditableItem(), false, "Expression is empty");
+  assert.equal(
+    logic.koErrorText(),
+    "The expression is empty or invalid. Please correct it."
+  );
+  logic.expressionEditor.koValue("ww++++2");
+  assert.equal(logic.saveEditableItem(), false, "Expression is invalid");
+  assert.equal(
+    logic.koErrorText(),
+    "The expression is empty or invalid. Please correct it."
+  );
+  logic.expressionEditor.koValue("{q1} = 1");
+  assert.equal(logic.saveEditableItem(), false, "There is no operations");
+  assert.equal(logic.koErrorText(), "Please, add at least one operation.");
+  var op = logic.addNewOperation(logic.getTypeByName("question_visibility"));
+  assert.equal(logic.saveEditableItem(), false, "Operation is incorret");
+  assert.equal(
+    logic.koErrorText(),
+    "Please, fix problems in your operation(s)."
+  );
+  op.itemSelector.koValue("q2");
+  assert.equal(logic.saveEditableItem(), true, "Operation is corret now");
+
+  op = logic.addNewOperation(logic.getTypeByName("trigger_setvalue"));
+  assert.equal(logic.saveEditableItem(), false, "setToName is empty");
+  assert.equal(op.hasError(), true, "setToName is empty");
+  op.templateObject.setToNameSelector.koValue("q2");
+  assert.equal(logic.saveEditableItem(), true, "setToName is correct");
+  assert.equal(op.hasError(), false, "setToName  is correct");
 });

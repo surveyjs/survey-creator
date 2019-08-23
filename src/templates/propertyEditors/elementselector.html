@@ -1,5 +1,6 @@
 <script type="text/html" id="elementselector">
-  <div class="form-control svd_custom_select">
+      <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
+      <div class="form-control svd_custom_select">
       <select onmousewheel="return false;" data-bind="value: koValue, optionsCaption: optionsCaption, valueAllowUnset: true, hasFocus: koHasFocus">
         <option value="" data-bind="text: optionsCaption"></option>
         <!-- ko foreach: koElements -->

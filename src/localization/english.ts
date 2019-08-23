@@ -130,7 +130,12 @@ export var enStrings = {
       completedHtmlOnConditionText:
         "Show custom text for the 'Thank you page'.",
 
-      expressionEditorTitle: "Setup the logic expression"
+      expressionEditorTitle: "Setup the logic expression",
+
+      expressionInvalid:
+        "The expression is empty or invalid. Please correct it.",
+      noOperationError: "Please, add at least one operation.",
+      operationInvalid: "Please, fix problems in your operation(s)."
     }
   },
   //Property names in table headers
@@ -141,6 +146,7 @@ export var enStrings = {
   pe: {
     apply: "Apply",
     ok: "OK",
+    save: "Save",
     cancel: "Cancel",
     reset: "Reset",
     close: "Close",
@@ -160,6 +166,7 @@ export var enStrings = {
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
+    itemSelectorEmpty: "Please select the element",
     conditionSelectQuestion: "Select question...",
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
@@ -341,7 +348,8 @@ export var enStrings = {
     triggerRunExpression: "Run this Expression:",
     triggerSetValue: "to: ",
     triggerGotoName: "Go to the question:",
-    triggerIsVariable: "Do not put the variable into the survey result."
+    triggerIsVariable: "Do not put the variable into the survey result.",
+    triggerRunExpressionEmpty: "Please enter a valid expression"
   },
   //Property values
   pv: {

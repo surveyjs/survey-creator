@@ -235,6 +235,9 @@ export class SurveyPropertyTrigger {
   public beforeShow() {
     this.conditionEditor.beforeShow();
   }
+  public hasError(): boolean {
+    return false;
+  }
   public createTrigger(): Survey.SurveyTrigger {
     var trigger = <Survey.SurveyTrigger>(
       Survey.Serializer.createClass(this.triggerType)
@@ -337,6 +340,9 @@ export class SurveyPropertySetValueTrigger extends SurveyPropertyTrigger {
     });
     this.buildSurvey();
   }
+  public hasError(): boolean {
+    return this.setToNameSelector.hasError();
+  }
   public applyProperties(trigger: Survey.SurveyTrigger) {
     super.applyProperties(trigger);
     var tr = <Survey.SurveyTriggerSetValue>trigger;
@@ -390,6 +396,11 @@ export class SurveyPropertyCopyValueTrigger extends SurveyPropertyTrigger {
     this.setToNameSelector = this.createElementSelector(this.kosetToName);
     this.fromNameSelector = this.createElementSelector(this.kofromName);
   }
+  public hasError(): boolean {
+    var a = this.setToNameSelector.hasError();
+    var b = this.fromNameSelector.hasError();
+    return a || b;
+  }
   public applyProperties(trigger: Survey.SurveyTrigger) {
     super.applyProperties(trigger);
     var tr = <Survey.SurveyTriggerCopyValue>trigger;
@@ -410,6 +421,9 @@ export class SurveyPropertySkipTrigger extends SurveyPropertyTrigger {
     this.koGotoName = ko.observable(trigger["gotoName"]);
     this.gotoNameSelector = this.createElementSelector(this.koGotoName);
   }
+  public hasError(): boolean {
+    return this.gotoNameSelector.hasError();
+  }
   public applyProperties(trigger: Survey.SurveyTrigger) {
     super.applyProperties(trigger);
     trigger["gotoName"] = this.koGotoName();
@@ -419,6 +433,9 @@ export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
   setToNameSelector: SurveyElementSelector;
   kosetToName: any;
   korunExpression: any;
+  public koErrorText: any;
+  public koDisplayError: any;
+
   constructor(
     public survey: Survey.SurveyModel,
     public trigger: Survey.SurveyTrigger,
@@ -428,6 +445,18 @@ export class SurveyPropertyRunExpressionTrigger extends SurveyPropertyTrigger {
     this.kosetToName = ko.observable(trigger["setToName"]);
     this.korunExpression = ko.observable(trigger["runExpression"]);
     this.setToNameSelector = this.createElementSelector(this.kosetToName);
+    this.koErrorText = ko.observable("");
+    var self = this;
+    this.koDisplayError = ko.computed(function() {
+      return !!self.koErrorText();
+    });
+  }
+  public hasError(): boolean {
+    var text = !this.korunExpression()
+      ? editorLocalization.getString("pe.triggerRunExpressionEmpty")
+      : "";
+    this.koErrorText(text);
+    return !!text;
   }
   public applyProperties(trigger: Survey.SurveyTrigger) {
     super.applyProperties(trigger);

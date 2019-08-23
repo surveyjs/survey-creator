@@ -213,8 +213,8 @@ export class SurveyLogicOperation {
     }
   }
   public renameQuestion(oldName: string, newName: string) {
-    if (!this.element || !this.logicType.questionNames) return;
-    var names = this.logicType.questionNames;
+    if (!this.element) return;
+    var names = this.questionNames;
     for (var i = 0; i < names.length; i++) {
       var str = this.element[names[i]];
       if (!!str && str.toLowerCase() == oldName.toLowerCase()) {
@@ -230,6 +230,16 @@ export class SurveyLogicOperation {
   }
   public get text(): string {
     return this.logicType.getDisplayText(this.element);
+  }
+  public hasError(): boolean {
+    if (!!this.itemSelector) return this.itemSelector.hasError();
+    if (!!this.templateObject && !!this.templateObject.hasError)
+      return this.templateObject.hasError();
+    return false;
+  }
+  private get questionNames(): Array<string> {
+    if (!this.logicType.questionNames) return [];
+    return this.logicType.questionNames;
   }
 }
 
@@ -603,6 +613,8 @@ export class SurveyLogic {
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
   public koReadOnly: any;
+  public koErrorText: any;
+  public koDisplayError: any;
 
   constructor(
     public survey: Survey.SurveyModel,
@@ -613,7 +625,11 @@ export class SurveyLogic {
     this.koLogicTypes = ko.observableArray();
     this.koMode = ko.observable("view");
     this.koReadOnly = ko.observable(this.readOnly);
+    this.koErrorText = ko.observable("");
     var self = this;
+    this.koDisplayError = ko.computed(function() {
+      return !!self.koErrorText();
+    });
     this.koAddNew = function() {
       self.addNew();
     };
@@ -672,13 +688,15 @@ export class SurveyLogic {
   public get readOnly() {
     return !!this.options && this.options.readOnly;
   }
-  public saveEditableItem() {
-    if (!this.editableItem) return;
+  public saveEditableItem(): boolean {
+    if (!this.editableItem) return false;
     this.expressionEditor.apply();
     this.editableItem.apply(this.expressionEditor.editingValue);
+    if (this.hasError()) return false;
     if (this.koItems.indexOf(this.editableItem) < 0) {
       this.koItems.push(this.editableItem);
     }
+    return true;
   }
   public get items(): Array<SurveyLogicItem> {
     return this.koItems();
@@ -692,6 +710,29 @@ export class SurveyLogic {
   public renameQuestion(oldName: string, newName: string) {
     this.renameQuestionCore(oldName, newName, this.items);
     this.renameQuestionCore(oldName, newName, this.invisibleItems);
+  }
+  public hasError(): boolean {
+    if (!this.editableItem) return false;
+    var text = "";
+    if (!this.isExpressionValid) {
+      text = getLogicString("expressionInvalid");
+    }
+    var ops = this.editableItem.operations;
+    if (!text && ops.length == 0) {
+      text = getLogicString("noOperationError");
+    }
+    if (!text) {
+      for (var i = 0; i < ops.length; i++) {
+        if (ops[i].hasError()) {
+          text = getLogicString("operationInvalid");
+        }
+      }
+    }
+    this.koErrorText(text);
+    return !!text;
+  }
+  private get isExpressionValid(): boolean {
+    return this.expressionEditor.isExpressionValid;
   }
   private renameQuestionCore(
     oldName: string,

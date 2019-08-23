@@ -85,6 +85,20 @@ QUnit.test("SurveyElementSelector item.koDisabled()", function(assert) {
   );
 });
 
+QUnit.test("SurveyElementSelector validation", function(assert) {
+  var survey = createSurvey();
+  var selector = new SurveyElementSelector(survey, "question", true);
+  assert.equal(selector.hasError(), true, "Value is not selected");
+  assert.equal(
+    selector.koErrorText(),
+    "Please select the element",
+    "Error text is correct"
+  );
+  selector.koValue("q1");
+  assert.equal(selector.hasError(), false, "Value is selected");
+  assert.equal(selector.koErrorText(), "", "Error text is empty");
+});
+
 function createSurvey(): Survey.SurveyModel {
   return new Survey.SurveyModel({
     pages: [

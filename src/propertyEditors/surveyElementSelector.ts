@@ -17,6 +17,8 @@ export class SurveyElementSelector {
   public koElements: any;
   public koValue: any;
   public koHasFocus: any;
+  public koErrorText: any;
+  public koDisplayError: any;
   public onValueChangedCallback: (val: string) => void;
   public disabledPropertyName: string;
   constructor(
@@ -42,6 +44,10 @@ export class SurveyElementSelector {
       if (newValue) {
         self.updateItems();
       }
+    });
+    this.koErrorText = ko.observable("");
+    this.koDisplayError = ko.computed(function() {
+      return !!self.koErrorText();
     });
   }
   public get value(): string {
@@ -92,6 +98,13 @@ export class SurveyElementSelector {
         this.selectedValues.indexOf(item.name) < 0;
       item.koDisabled(disabled);
     }
+  }
+  public hasError(): boolean {
+    var text = !this.element
+      ? editorLocalization.getString("pe.itemSelectorEmpty")
+      : "";
+    this.koErrorText(text);
+    return !!text;
   }
   private buildElements(elementType: string): Array<SurveyElementSelectorItem> {
     var elements = [];

@@ -118,6 +118,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     });
     return res;
   }
+  public get isExpressionValid(): boolean {
+    var text = this.koTextValue();
+    if (!text) return false;
+    var runner = new Survey.ConditionRunner(text);
+    return runner.canRun();
+  }
   private getConditionQuetions(): any[] {
     if (!this.object) return [];
     var res = [];
