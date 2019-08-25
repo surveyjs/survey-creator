@@ -47,6 +47,6 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
   }
   protected doAfterRender(elements, con) {
     var el = elements[0];
-    if (!!this.object && !!el && this.widgetRender) this.widgetRender(this, el);
+    if (!!el && this.widgetRender) this.widgetRender(this, el);
   }
 }
