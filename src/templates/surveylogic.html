@@ -1,6 +1,6 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
-    <button data-bind="visible: !koReadOnly(), click: $data.koAddNew">Add New</button>
+    <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
     <div>
         <span data-bind="text: item.expressionText"></span>
@@ -11,20 +11,21 @@
           <br/>
         </div>
       <!-- /ko -->
-      <button data-bind="visible: !$parent.koReadOnly(), click:$parent.koEditItem">Edit</button><button data-bind="visible: !$parent.koReadOnly(), click:$parent.koRemoveItem">Remove</button>
+      <input type="button" class="btn btn-primary" data-bind="visible: !$parent.koReadOnly(), click:$parent.koEditItem, value: $root.getLocString('pe.edit')" />
+      <input type="button" class="btn btn-primary" data-bind="visible: !$parent.koReadOnly(), click:$parent.koRemoveItem, value: $root.getLocString('pe.delete')" />
     </div>
     <!-- /ko -->
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
     <div>
-      <button data-bind="click:$data.koShowView">Back</button>
+      <input type="button" class="btn btn-primary" data-bind="click:$data.koShowView, value: $root.getLocString('pe.back')" />
     </div>
     <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
     <hr />
     <!--ko if: $data.koEditableItem() != null -->
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
     <div data-bind="visible: op.templateObject !== null">
-        <span data-bind="text: op.name"></span><button data-bind="click:$parent.koRemoveOperation">Remove</button>
+        <span data-bind="text: op.name"></span><input type="button" class="btn btn-primary" data-bind="click:$parent.koRemoveOperation, value: $root.getLocString('pe.delete')" />
         <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
         <br/>
     </div>
@@ -40,7 +41,7 @@
     </div>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
-        <span data-bind="text: item.displayName"></span> <button data-bind="click:$parent.koAddNewOperation">Add</button>
+        <span data-bind="text: item.displayName"></span> <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: $root.getLocString('pe.add')" />
     </div>
     <!-- /ko -->
   </div>

@@ -133,7 +133,7 @@ export var enStrings = {
       expressionEditorTitle: "Setup the logic expression",
 
       expressionInvalid:
-        "The expression is empty or invalid. Please correct it.",
+        "The logic expression is empty or invalid. Please correct it.",
       noOperationError: "Please, add at least one operation.",
       operationInvalid: "Please, fix problems in your operation(s)."
     }
@@ -151,6 +151,7 @@ export var enStrings = {
     reset: "Reset",
     close: "Close",
     delete: "Delete",
+    add: "Add",
     addNew: "Add New",
     addItem: "Click to add an item...",
     addOther: "Other",
@@ -158,6 +159,7 @@ export var enStrings = {
     addNone: "None",
     removeAll: "Remove All",
     edit: "Edit",
+    back: "Back",
     itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     move: "Move",
