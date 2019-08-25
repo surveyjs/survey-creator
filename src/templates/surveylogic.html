@@ -1,20 +1,7 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
     <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
-    <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
-    <div>
-        <span data-bind="text: item.expressionText"></span>
-        <br/>
-        <!-- ko foreach: {data: item.koOperations, as: 'op' } -->
-        <div>
-          <span data-bind="text: op.text"></span>
-          <br/>
-        </div>
-      <!-- /ko -->
-      <input type="button" class="btn btn-primary" data-bind="visible: !$parent.koReadOnly(), click:$parent.koEditItem, value: $root.getLocString('pe.edit')" />
-      <input type="button" class="btn btn-primary" data-bind="visible: !$parent.koReadOnly(), click:$parent.koRemoveItem, value: $root.getLocString('pe.delete')" />
-    </div>
-    <!-- /ko -->
+    <svd-accordion params="tabs: koItems, template: 'surveylogic_viewitem'"></svd-accordion>
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
     <div>
@@ -44,5 +31,19 @@
         <span data-bind="text: item.displayName"></span> <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: $root.getLocString('pe.add')" />
     </div>
     <!-- /ko -->
+  </div>
+</script>
+<script type="text/html" id="surveylogic_viewitem">
+  <div>
+      <span data-bind="text: $data.expressionText"></span>
+      <br/>
+      <!-- ko foreach: {data: $data.koOperations, as: 'op' } -->
+      <div>
+        <span data-bind="text: op.text"></span>
+        <br/>
+      </div>
+    <!-- /ko -->
+    <input type="button" class="btn btn-primary" data-bind="visible: !$data.isReadOnly, click:$data.edit, value: editText" />
+    <input type="button" class="btn btn-primary" data-bind="visible: !$data.isReadOnly, click:$data.remove, value: deleteText" />
   </div>
 </script>

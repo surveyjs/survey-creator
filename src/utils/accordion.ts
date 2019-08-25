@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 
 import "./accordion.scss";
+import { isVar } from "babel-types";
 var template = require("html-loader?interpolate!val-loader!./accordion.html");
 
 export interface IAccordionItemData {
@@ -34,13 +35,16 @@ export class AccordionItemModel {
 export class AccordionModel {
   constructor(params) {
     this.tabs = ko.computed<AccordionItemModel>(() => {
-      return ko
+      var res = ko
         .unwrap(params.tabs)
         .map(
           tabData => new AccordionItemModel(tabData, ko.unwrap(params.template))
         );
+      if (res.length > 0) {
+        res[0].collapsed(false);
+      }
+      return res;
     });
-    !!this.tabs()[0] && this.tabs()[0].collapsed(false);
   }
   tabs: KnockoutObservable<AccordionItemModel>;
 }

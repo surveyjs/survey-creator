@@ -243,12 +243,47 @@ export class SurveyLogicOperation {
   }
 }
 
+export interface ISurveyLogicItemOwner {
+  readOnly: boolean;
+  editItem(item: SurveyLogicItem);
+  removeItem(item: SurveyLogicItem);
+}
+
 export class SurveyLogicItem {
+  private static counter = 0;
+  private id = ++SurveyLogicItem.counter;
+  public onExpand: () => void;
   private removedOperations: Array<SurveyLogicOperation>;
   public koOperations: any;
-  constructor(public expression: string = "") {
+  constructor(
+    private owner: ISurveyLogicItemOwner,
+    public expression: string = ""
+  ) {
     this.removedOperations = [];
     this.koOperations = ko.observableArray();
+  }
+  public get name() {
+    return "logicItem" + this.id;
+  }
+  public get title() {
+    var res = this.expression;
+    if (!!res && res.length > 50) {
+      res = res.substr(1, 50) + "...";
+    }
+    return res;
+  }
+  public edit() {
+    if (!!this.owner) {
+      this.owner.editItem(this);
+    }
+  }
+  public remove() {
+    if (!!this.owner) {
+      this.owner.removeItem(this);
+    }
+  }
+  public get isReadOnly() {
+    return !!this.owner && this.owner.readOnly;
   }
   public get operations(): Array<SurveyLogicOperation> {
     return this.koOperations();
@@ -293,6 +328,12 @@ export class SurveyLogicItem {
       .getString("ed.lg.itemExpressionText")
       ["format"](this.expression);
   }
+  public get editText(): string {
+    return editorLocalization.getString("pe.edit");
+  }
+  public get deleteText(): string {
+    return editorLocalization.getString("pe.delete");
+  }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;
     var newExpression = this.expression;
@@ -332,20 +373,7 @@ export class SurveyLogicItem {
   }
 }
 
-export class SurveyLogic {
-  private static getAvaiableElements(
-    elements: Array<any>,
-    propName: string
-  ): Array<any> {
-    var res = [];
-    for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      if (!el[propName]) {
-        res.push(el);
-      }
-    }
-    return res;
-  }
+export class SurveyLogic implements ISurveyLogicItemOwner {
   private static hasNeededElements(
     elements: Array<any>,
     propName: string
@@ -759,7 +787,7 @@ export class SurveyLogic {
     this.koMode(val);
   }
   public addNew() {
-    this.koEditableItem(new SurveyLogicItem());
+    this.koEditableItem(new SurveyLogicItem(this));
     this.expressionEditor.editingValue = "";
     this.mode = "new";
   }
@@ -866,7 +894,7 @@ export class SurveyLogic {
         var key = this.getExpressionHashKey(expression);
         var item = hash[key];
         if (!item) {
-          item = new SurveyLogicItem(expression);
+          item = new SurveyLogicItem(this, expression);
           hash[key] = item;
           dest.push(item);
         }
