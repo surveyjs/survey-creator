@@ -1,6 +1,8 @@
 import * as Survey from "survey-knockout";
 import { SurveyLogic, SurveyLogicOperation } from "../src/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
+import { SurveyCreator } from "../src/editor";
+
 export default QUnit.module("LogicTabTests");
 
 QUnit.test("Page visibility logic", function(assert) {
@@ -961,4 +963,42 @@ QUnit.test("Return without saving", function(assert) {
     "operation gotoName is not changed"
   );
   assert.notOk(logic.koErrorText(), "The error is cleared");
+});
+
+QUnit.test("Make Survey Creator modified on changes", function(assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" }
+        ]
+      }
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2"
+      }
+    ]
+  };
+  creator.showLogicEditor();
+  var modifiedCounter = 0;
+  creator.onModified.add(function() {
+    modifiedCounter++;
+  });
+  var logic = creator.logic;
+  var item = logic.items[0];
+  item.edit();
+  logic.expressionEditor.koTextValue("{q1} = 2");
+  item.addOperation(logic.getTypeByName("question_visibility"));
+  item.operations[2].itemSelector.koValue("q3");
+  assert.equal(modifiedCounter, 0, "Has not changed yet");
+  logic.saveEditableItem();
+  assert.equal(modifiedCounter, 1, "It was changed one time");
+  logic.removeItem(logic.items[0]);
+  assert.equal(modifiedCounter, 2, "It was changed two times");
 });

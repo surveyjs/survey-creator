@@ -651,6 +651,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koReadOnly: any;
   public koErrorText: any;
   public koDisplayError: any;
+  public onChangedCallback: (item: SurveyLogicItem, changeType: string) => void;
 
   constructor(
     public survey: Survey.SurveyModel,
@@ -737,10 +738,17 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     if (!this.editableItem || this.hasError()) return false;
     this.expressionEditor.apply();
     this.editableItem.apply(this.expressionEditor.editingValue);
-    if (this.koItems.indexOf(this.editableItem) < 0) {
+    var isNew = this.koItems.indexOf(this.editableItem) < 0;
+    if (isNew) {
       this.koItems.push(this.editableItem);
     }
+    this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
     return true;
+  }
+  protected onItemChanged(item: SurveyLogicItem, changeType: string) {
+    if (!!this.onChangedCallback) {
+      this.onChangedCallback(item, changeType);
+    }
   }
   public get items(): Array<SurveyLogicItem> {
     return this.koItems();
@@ -822,6 +830,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     if (index > -1) {
       this.koItems.splice(index, 1);
     }
+    this.onItemChanged(item, "delete");
   }
   public addNewOperation(logicType: SurveyLogicType): SurveyLogicOperation {
     var element = logicType.createNewElement(this.survey);

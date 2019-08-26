@@ -442,6 +442,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
    * <br/>
    * <br/> options.type: "TRANSLATIONS_CHANGED"
+   * <br/>
+   * <br/> options.type: "LOGIC_CHANGED"
+   * <br/> options.item: the survey logic item. It has expression and operations (list of operations) properties
+   * <br/> options.changeType: There are three possible values: "new", "modify" and "delete"
    */
   public onModified: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
@@ -882,6 +886,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       });
     };
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"));
+    this.logic.onChangedCallback = (item, changeType) => {
+      this.setModified({
+        type: "LOGIC_CHANGED",
+        item: item,
+        changeType: changeType
+      });
+    };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
