@@ -852,22 +852,16 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
     "When expression: '{q1} = 1' returns true:",
     "Item expressionText"
   );
-  assert.equal(findOp("page_visibility").text, "Page {page1} becomes visible");
-  assert.equal(
-    findOp("panel_visibility").text,
-    "Panel {panel1} becomes visible"
-  );
-  assert.equal(findOp("panel_enable").text, "Panel {panel1} becomes enable");
+  assert.equal(findOp("page_visibility").text, "Make page {page1} visible");
+  assert.equal(findOp("panel_visibility").text, "Make panel {panel1} visible");
+  assert.equal(findOp("panel_enable").text, "Make panel {panel1} enable");
   assert.equal(
     findOp("question_visibility").text,
-    "Question {q2} becomes visible"
+    "Make question {q2} visible"
   );
-  assert.equal(findOp("question_enable").text, "Question {q3} becomes enable");
-  assert.equal(
-    findOp("question_require").text,
-    "Question {q4} becomes required"
-  );
-  assert.equal(findOp("trigger_complete").text, "Survey is completed");
+  assert.equal(findOp("question_enable").text, "Make question {q3} enable");
+  assert.equal(findOp("question_require").text, "Make question {q4} required");
+  assert.equal(findOp("trigger_complete").text, "Survey becomes completed");
   assert.equal(
     findOp("trigger_setvalue").text,
     "Set into question: {q2} value q2Value"
