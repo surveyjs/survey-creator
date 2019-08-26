@@ -119,6 +119,9 @@ export class SurveyLogicType {
   public get displayName(): string {
     return getLogicString(this.name + "Name");
   }
+  public get description(): string {
+    return getLogicString(this.name + "Description");
+  }
   public getDisplayText(element: Survey.Base): string {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)

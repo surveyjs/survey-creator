@@ -114,6 +114,31 @@ export var enStrings = {
       trigger_runExpressionName: "Run custom expression",
       completedHtmlOnConditionName: "Custom 'Thank you page' text",
 
+      page_visibilityDescription:
+        "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_visibilityDescription:
+        "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_enableDescription:
+        "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
+      question_visibilityDescription:
+        "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
+      question_enableDescription:
+        "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
+      question_requireDescription:
+        "Question becomes required when the logic expression returns true.",
+      trigger_completeDescription:
+        "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
+      trigger_setvalueDescription:
+        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
+      trigger_copyvalueDescription:
+        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
+      trigger_skipDescription:
+        "When the logic expression returns true then the survey skip to / focus the selected question.",
+      trigger_runExpressionDescription:
+        "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
+      completedHtmlOnConditionDescription:
+        "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
+
       itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
       page_visibilityText: "Page {0} becomes visible", //{0} page name
       panel_visibilityText: "Panel {0} becomes visible", //{0} panel name

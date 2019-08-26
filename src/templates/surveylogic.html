@@ -1,7 +1,7 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
     <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
-    <svd-accordion params="tabs: koItems, template: 'surveylogic_viewitem'"></svd-accordion>
+    <svd-accordion params="tabs: koItems, template: 'surveylogic_viewitem', showFirstHeader: true"></svd-accordion>
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
     <div>
@@ -12,11 +12,10 @@
     <!--ko if: $data.koEditableItem() != null -->
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
     <div data-bind="visible: op.templateObject !== null">
-        <span data-bind="text: op.name"></span><input type="button" class="btn btn-primary" data-bind="click:$parent.koRemoveOperation, value: $root.getLocString('pe.delete')" />
+        <div class="svd-accordion-tab-header"><span data-bind="text: op.name"></span></div>
         <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
-        <br/>
+        <input type="button" class="btn btn-primary" data-bind="click:$parent.koRemoveOperation, value: $root.getLocString('pe.delete')" />
     </div>
-    <hr />
     <!-- /ko -->
     <!-- /ko -->
     <div>
@@ -26,9 +25,13 @@
         <input type="button" class="btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $root.getLocString('pe.save')"
         style="width:100px" />
     </div>
+    <div class="svd-accordion-tab-header"><span data-bind="">Add New Operation(s)</span></div>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
-        <span data-bind="text: item.displayName"></span> <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: $root.getLocString('pe.add')" />
+        <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: item.displayName" />
+        <div>
+        <span data-bind="text:item.description"></span>
+        </div>
     </div>
     <!-- /ko -->
   </div>

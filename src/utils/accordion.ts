@@ -45,8 +45,12 @@ export class AccordionModel {
       }
       return res;
     });
+    this.showHeader = ko.computed<boolean>(() => {
+      return this.tabs.length > 1 || params.showFirstHeader;
+    });
   }
   tabs: KnockoutObservable<AccordionItemModel>;
+  showHeader: KnockoutObservable<boolean>;
 }
 
 ko.components.register("svd-accordion", {
