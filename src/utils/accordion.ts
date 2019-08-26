@@ -46,7 +46,7 @@ export class AccordionModel {
       return res;
     });
     this.showHeader = ko.computed<boolean>(() => {
-      return this.tabs.length > 1 || params.showFirstHeader;
+      return params.tabs().length > 1;
     });
   }
   tabs: KnockoutObservable<AccordionItemModel>;
