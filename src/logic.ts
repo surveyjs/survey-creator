@@ -236,6 +236,9 @@ export class SurveyLogicOperation {
   public get text(): string {
     return this.logicType.getDisplayText(this.element);
   }
+  public get deleteOperationText(): string {
+    return getLogicString("deleteOperation");
+  }
   public hasError(): boolean {
     if (!!this.itemSelector) return this.itemSelector.hasError();
     if (!!this.templateObject && !!this.templateObject.hasError)

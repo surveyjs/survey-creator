@@ -1,7 +1,31 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
     <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
-    <svd-accordion params="tabs: koItems, template: 'surveylogic_viewitem', showFirstHeader: true"></svd-accordion>
+    <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
+      <div class="svd-logic-item-header">
+          <span class="svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.edit, attr: {title: $data.editText }">
+              <span>
+                  <svg-icon class="svd-primary-icon" params="iconName: 'icon-actioneditelement'"></svg-icon>
+              </span>
+              <span data-bind="text: $data.editText"></span>
+            </span>
+            <span class="svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.remove, attr: {title: $data.deleteText }">
+            <span>
+                <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
+            </span>
+          </span>
+          <span class="svda_action_separator svd-dark-border-color"></span>
+          <span data-bind="text: item.title"></span>
+      </div>
+      <div>
+          <span data-bind="text: item.expressionText"></span>
+          <!-- ko foreach: {data: $data.koOperations, as: 'op' } -->
+          <div>
+            <span data-bind="text: op.text"></span>
+          </div>
+        <!-- /ko -->
+      </div>
+    <!-- /ko -->
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
     <div>
@@ -16,13 +40,20 @@
     <!--ko if: $data.koEditableItem() != null -->
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
     <div data-bind="visible: op.templateObject !== null">
-        <div class="svd-accordion-tab-header"><span data-bind="text: op.name"></span></div>
+        <div class="svd-logic-item-header">
+          <span class="svd-main-color" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
+            <span>
+                <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
+            </span>
+          </span>
+          <span class="svda_action_separator svd-dark-border-color"></span>
+          <span data-bind="text: op.name"></span>
+        </div>
         <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
-        <input type="button" class="btn btn-primary" data-bind="click:$parent.koRemoveOperation, value: $root.getLocString('pe.delete')" />
     </div>
     <!-- /ko -->
     <!-- /ko -->
-    <div class="svd-accordion-tab-header"><span data-bind="">Add New Operation(s)</span></div>
+    <div class="svd-logic-item-header"><span data-bind="">Add New Operation(s)</span></div>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
         <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: item.displayName" />
@@ -32,17 +63,5 @@
         <hr />
     </div>
     <!-- /ko -->
-  </div>
-</script>
-<script type="text/html" id="surveylogic_viewitem">
-  <div>
-      <span data-bind="text: $data.expressionText"></span>
-      <!-- ko foreach: {data: $data.koOperations, as: 'op' } -->
-      <div>
-        <span data-bind="text: op.text"></span>
-      </div>
-    <!-- /ko -->
-    <input type="button" class="btn btn-primary" data-bind="visible: !$data.isReadOnly, click:$data.edit, value: editText" />
-    <input type="button" class="btn btn-primary" data-bind="visible: !$data.isReadOnly, click:$data.remove, value: deleteText" />
   </div>
 </script>

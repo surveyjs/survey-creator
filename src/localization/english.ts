@@ -157,6 +157,8 @@ export var enStrings = {
 
       expressionEditorTitle: "Setup the logic expression",
 
+      deleteOperation: "Delete operation",
+
       expressionInvalid:
         "The logic expression is empty or invalid. Please correct it.",
       noOperationError: "Please, add at least one operation.",
