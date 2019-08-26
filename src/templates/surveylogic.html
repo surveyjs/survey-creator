@@ -53,7 +53,7 @@
     </div>
     <!-- /ko -->
     <!-- /ko -->
-    <div class="svd-logic-item-header"><span data-bind="">Add New Operation(s)</span></div>
+    <div class="svd-logic-item-header"><span data-bind="text:$data.addNewOperationText"></span></div>
     <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
     <div data-bind="visible: item.koVisible">
         <input type="button" class="btn btn-primary" data-bind="click:$parent.koAddNewOperation, value: item.displayName" />
