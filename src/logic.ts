@@ -178,10 +178,8 @@ export class SurveyLogicType {
 
 export class SurveyLogicOperation {
   public koElement: any;
-  public koText: any;
   private templateObjectValue: any;
   private itemSelectorValue: SurveyElementSelector = null;
-  private koDummy: any;
   constructor(public logicType: SurveyLogicType, element: Survey.Base) {
     this.koElement = ko.observable(element);
     this.itemSelectorValue = this.logicType.createItemSelector();
@@ -193,11 +191,6 @@ export class SurveyLogicOperation {
       };
     }
     this.templateObjectValue = logicType.createTemplateObject(this.element);
-    this.koDummy = ko.observable(0);
-    this.koText = ko.computed<string>(() => {
-      this.koDummy();
-      return this.text;
-    });
   }
   public get template(): string {
     return this.logicType.templateName;
@@ -223,7 +216,6 @@ export class SurveyLogicOperation {
         this.logicType.saveElement(this);
       }
     }
-    this.koDummy(this.koDummy() + 1);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!this.element) return;
@@ -264,33 +256,20 @@ export interface ISurveyLogicItemOwner {
 
 export class SurveyLogicItem {
   public koOperations: any;
-  public koExpressionText: any;
-  public title: any;
-  private onExpand: () => void;
   private static counter = 0;
   private id = ++SurveyLogicItem.counter;
   private removedOperations: Array<SurveyLogicOperation>;
-  private koDummy: any;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
   ) {
     this.removedOperations = [];
     this.koOperations = ko.observableArray();
-    this.koDummy = ko.observable(0);
-    this.koExpressionText = ko.computed<string>(() => {
-      this.koDummy();
-      return this.expressionText;
-    });
-    this.title = ko.computed<string>(() => {
-      this.koDummy();
-      return this.getTitle();
-    });
   }
   public get name() {
     return "logicItem" + this.id;
   }
-  private getTitle() {
+  public get title() {
     var res = this.expression;
     if (!!res && res.length > 50) {
       res = res.substr(1, 50) + "...";
@@ -339,7 +318,6 @@ export class SurveyLogicItem {
     }
     this.removedOperations = [];
     this.applyExpression(expression, false);
-    this.koDummy(this.koDummy() + 1);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!oldName || !newName) return;
@@ -661,6 +639,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koEditItem: any;
   public koRemoveItem: any;
   public koShowView: any;
+  public koSaveAndShowView: any;
   public koSaveEditableItem: any;
   public koAddNewOperation: any;
   public koRemoveOperation: any;
@@ -696,6 +675,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koShowView = function() {
       self.mode = "view";
     };
+    this.koSaveAndShowView = function() {
+      if (self.saveEditableItem()) {
+        self.mode = "view";
+      }
+    };
     this.koSaveEditableItem = function() {
       self.saveEditableItem();
     };
@@ -725,9 +709,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       this.options = options;
     }
     this.koLogicTypes(this.createLogicTypes());
-    this.koItems(this.buildItems(true));
+    this.updateVisibleItems();
     this.invisibleItems = this.buildItems(false);
-    this.koEditableItem(null);
     this.koReadOnly(this.readOnly);
     this.mode = this.items.length > 0 || this.readOnly ? "view" : "new";
     if (this.mode == "new") {
@@ -739,14 +722,18 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.showHelpText = false;
     this.expressionEditor.beforeShow();
   }
+  private updateVisibleItems() {
+    this.koItems(this.buildItems(true));
+    this.koEditableItem(null);
+    this.koErrorText("");
+  }
   public get readOnly() {
     return !!this.options && this.options.readOnly;
   }
   public saveEditableItem(): boolean {
-    if (!this.editableItem) return false;
+    if (!this.editableItem || this.hasError()) return false;
     this.expressionEditor.apply();
     this.editableItem.apply(this.expressionEditor.editingValue);
-    if (this.hasError()) return false;
     if (this.koItems.indexOf(this.editableItem) < 0) {
       this.koItems.push(this.editableItem);
     }
@@ -807,8 +794,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public set mode(val: string) {
     if (val !== "view" && val !== "new" && val !== "edit") return;
     if (this.mode == val) return;
+    var oldMode = this.mode;
     if (val == "new" || val == "edit") {
       this.updateLogicTypes();
+    }
+    if ((oldMode == "new" || oldMode == "edit") && val == "view") {
+      this.updateVisibleItems();
     }
     this.koMode(val);
   }
