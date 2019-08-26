@@ -38,11 +38,11 @@
 </script>
 <script type="text/html" id="surveylogic_viewitem">
   <div>
-      <span data-bind="text: $data.expressionText"></span>
+      <span data-bind="text: $data.koExpressionText"></span>
       <br/>
       <!-- ko foreach: {data: $data.koOperations, as: 'op' } -->
       <div>
-        <span data-bind="text: op.text"></span>
+        <span data-bind="text: op.koText"></span>
         <br/>
       </div>
     <!-- /ko -->

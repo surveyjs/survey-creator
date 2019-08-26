@@ -5,6 +5,7 @@ import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggers
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
+import { stringLiteral } from "babel-types";
 
 export interface ISurveyLogicType {
   name: string;
@@ -177,8 +178,10 @@ export class SurveyLogicType {
 
 export class SurveyLogicOperation {
   public koElement: any;
+  public koText: any;
   private templateObjectValue: any;
   private itemSelectorValue: SurveyElementSelector = null;
+  private koDummy: any;
   constructor(public logicType: SurveyLogicType, element: Survey.Base) {
     this.koElement = ko.observable(element);
     this.itemSelectorValue = this.logicType.createItemSelector();
@@ -190,6 +193,11 @@ export class SurveyLogicOperation {
       };
     }
     this.templateObjectValue = logicType.createTemplateObject(this.element);
+    this.koDummy = ko.observable(0);
+    this.koText = ko.computed<string>(() => {
+      this.koDummy();
+      return this.text;
+    });
   }
   public get template(): string {
     return this.logicType.templateName;
@@ -209,11 +217,13 @@ export class SurveyLogicOperation {
     return this.itemSelectorValue;
   }
   public apply(expression: string, isRenaming: boolean = false) {
-    if (!this.element) return;
-    this.element[this.logicType.propertyName] = expression;
-    if (!isRenaming) {
-      this.logicType.saveElement(this);
+    if (!!this.element) {
+      this.element[this.logicType.propertyName] = expression;
+      if (!isRenaming) {
+        this.logicType.saveElement(this);
+      }
     }
+    this.koDummy(this.koDummy() + 1);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!this.element) return;
@@ -253,22 +263,34 @@ export interface ISurveyLogicItemOwner {
 }
 
 export class SurveyLogicItem {
+  public koOperations: any;
+  public koExpressionText: any;
+  public title: any;
+  private onExpand: () => void;
   private static counter = 0;
   private id = ++SurveyLogicItem.counter;
-  public onExpand: () => void;
   private removedOperations: Array<SurveyLogicOperation>;
-  public koOperations: any;
+  private koDummy: any;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
   ) {
     this.removedOperations = [];
     this.koOperations = ko.observableArray();
+    this.koDummy = ko.observable(0);
+    this.koExpressionText = ko.computed<string>(() => {
+      this.koDummy();
+      return this.expressionText;
+    });
+    this.title = ko.computed<string>(() => {
+      this.koDummy();
+      return this.getTitle();
+    });
   }
   public get name() {
     return "logicItem" + this.id;
   }
-  public get title() {
+  private getTitle() {
     var res = this.expression;
     if (!!res && res.length > 50) {
       res = res.substr(1, 50) + "...";
@@ -317,6 +339,7 @@ export class SurveyLogicItem {
     }
     this.removedOperations = [];
     this.applyExpression(expression, false);
+    this.koDummy(this.koDummy() + 1);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!oldName || !newName) return;

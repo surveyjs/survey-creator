@@ -887,6 +887,58 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
   assert.equal(findOp("page_visibility").name, "Page visibility");
 });
 
+QUnit.test("Change displaying knockout text on saving", function(assert) {
+  var survey = new Survey.SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" }
+        ]
+      }
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2"
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var item = logic.items[0];
+  assert.equal(
+    item.koExpressionText(),
+    "When expression: '{q1} = 1' returns true:",
+    "Item koExpressionText"
+  );
+  assert.equal(
+    item.operations[0].koText(),
+    "Question {q2} becomes visible",
+    "operation question visibility koText"
+  );
+  assert.equal(
+    item.operations[1].koText(),
+    "Survey skip to the question {q2}",
+    "operation skip to question, koText"
+  );
+  item.edit();
+  logic.expressionEditor.koTextValue("{q1} = 2");
+  item.operations[1].templateObject.gotoNameSelector.koValue("q3");
+  logic.saveEditableItem();
+  assert.equal(
+    item.koExpressionText(),
+    "When expression: '{q1} = 2' returns true:",
+    "Item koExpressionText, after save"
+  );
+  assert.equal(
+    item.operations[1].koText(),
+    "Survey skip to the question {q3}",
+    "operation skip to question, koText, after save"
+  );
+});
+
 QUnit.test("Logic editing errors", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
