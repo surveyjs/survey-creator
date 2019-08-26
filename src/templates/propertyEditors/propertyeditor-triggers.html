@@ -98,12 +98,12 @@
   </div>
   <!-- /ko -->
   <!-- ko if: koType() == 'skiptrigger' -->
-  <div class="col-lg-12 col-sm-12">
-        <div class="form-group">
-            <div data-bind="text: $root.getLocString('pe.triggerGotoName')"></div>
-            <!-- ko template: { name: "elementselector", data: gotoNameSelector } --><!-- /ko -->
-        </div>
+  <div class="row">
+    <div class="form-group col-lg-12 col-sm-12">
+        <div data-bind="text: $root.getLocString('pe.triggerGotoName')"></div>
+        <!-- ko template: { name: "elementselector", data: gotoNameSelector } --><!-- /ko -->
     </div>
+  </div>
   <!-- /ko -->
     <!-- ko if: koType() == 'runexpressiontrigger' -->
   <div class="row">
