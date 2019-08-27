@@ -37,7 +37,7 @@
     <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
     <div data-bind="visible: op.templateObject !== null">
         <div class="svd-logic-item-header">
-          <span class="svd-main-color" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
+          <span class="svd-logic-header-item-icon svd-main-color" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
             <span>
                 <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
             </span>
