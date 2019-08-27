@@ -3,19 +3,15 @@
     <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
       <div class="svd-logic-item-header">
-          <span class="svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.edit, attr: {title: $data.editText }">
-              <span>
-                  <svg-icon class="svd-primary-icon" params="iconName: 'icon-actioneditelement'"></svg-icon>
-              </span>
-              <span data-bind="text: $data.editText"></span>
-            </span>
-            <span class="svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.remove, attr: {title: $data.deleteText }">
-            <span>
-                <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
-            </span>
+          <span class="svd-logic-header-item-icon svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.edit, attr: {title: $data.editText }">
+            <svg-icon class="svd-primary-icon" params="iconName: 'icon-actioneditelement'"></svg-icon>
+            <span class="svd-logic-header-icon-text" data-bind="text: $data.editText"></span>
+          </span>
+          <span class="svd-logic-header-item-icon svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.remove, attr: {title: $data.deleteText }">
+            <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
           </span>
           <span class="svda_action_separator svd-dark-border-color"></span>
-          <span data-bind="text: item.title"></span>
+          <span class="svd-logic-header-item-text" data-bind="text: item.title"></span>
       </div>
       <div>
           <span data-bind="text: item.expressionText"></span>

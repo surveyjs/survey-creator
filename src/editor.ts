@@ -1147,6 +1147,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
     this.options = options;
+    this.showLogicTabValue(
+      typeof options.showLogicTab !== "undefined"
+        ? options.showLogicTab
+        : false
+    );
     this.showJSONEditorTabValue(
       typeof options.showJSONEditorTab !== "undefined"
         ? options.showJSONEditorTab
