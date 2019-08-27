@@ -68,6 +68,8 @@ QUnit.test("Add new operation immediately", function(assert) {
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
   });
   var logic = new SurveyLogic(survey);
+  assert.equal(logic.mode, "view", "Default is mode is view");
+  logic.addNew();
   assert.equal(logic.mode, "new", "Add new item");
   logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
   logic.editableItem.operations[0].itemSelector.koValue("q1");
@@ -95,6 +97,7 @@ QUnit.test("Do not add expression question into visible Items", function(
 QUnit.test("Add new item", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -166,6 +169,7 @@ QUnit.test("Add new item", function(assert) {
 QUnit.test("Edit existing item", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -198,6 +202,7 @@ QUnit.test("Edit existing item", function(assert) {
 QUnit.test("Use SurveyItemSelector for editing", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -254,6 +259,7 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
 QUnit.test("Remove same operations on save", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -288,6 +294,7 @@ QUnit.test("Remove same operations on save", function(assert) {
 QUnit.test("Remove existing operation", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -308,6 +315,7 @@ QUnit.test("Remove existing operation", function(assert) {
 QUnit.test("Remove existing item", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.mode, "new", "There is no items");
   survey = new Survey.SurveyModel({
     elements: [
@@ -680,6 +688,7 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     ]
   });
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   logic.addNewOperation(logic.getTypeByName("completedHtmlOnCondition"));
   var op = logic.editableItem.operations[0];
   logic.expressionEditor.editingValue = "{q1} = 10";
@@ -732,6 +741,7 @@ QUnit.test("Use survey creator options", function(assert) {
     ]
   });
   var logic = new SurveyLogic(survey, options);
+  logic.addNew();
   logic.editableItem.addOperation(logic.getTypeByName("question_visibility"));
   assert.equal(
     logic.expressionEditor.options.showTitlesInExpressions,
@@ -888,6 +898,7 @@ QUnit.test("Logic editing errors", function(assert) {
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
   });
   var logic = new SurveyLogic(survey);
+  logic.addNew();
   assert.equal(logic.saveEditableItem(), false, "Expression is empty");
   assert.equal(
     logic.koErrorText(),

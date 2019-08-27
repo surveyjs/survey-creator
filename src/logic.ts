@@ -716,10 +716,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.updateVisibleItems();
     this.invisibleItems = this.buildItems(false);
     this.koReadOnly(this.readOnly);
-    this.mode = this.items.length > 0 || this.readOnly ? "view" : "new";
-    if (this.mode == "new") {
-      this.addNew();
-    }
+    this.mode = "view";
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
     this.expressionEditor.displayName = getLogicString("expressionEditorTitle");
