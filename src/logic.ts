@@ -783,6 +783,9 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koErrorText(text);
     return !!text;
   }
+  public get addNewOperationText(): string {
+    return getLogicString("addNewOperation");
+  }
   private get isExpressionValid(): boolean {
     return this.expressionEditor.isExpressionValid;
   }
