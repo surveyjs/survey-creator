@@ -807,13 +807,9 @@ QUnit.test("DependedOn properties + multiple, dynamic choices", function(
   var fieldProp = tab.getPropertyEditorByName("targetField");
   var fieldPropEditor = <SurveyPropertyMultipleValuesEditor>fieldProp.editor;
 
-  assert.equal(fieldPropEditor.koItems().length, 0, "It is empty by default");
+  assert.equal(fieldPropEditor.items.length, 0, "It is empty by default");
   entityProp.objectProperty.koValue("Account");
-  assert.equal(
-    fieldPropEditor.koItems().length,
-    3,
-    "Choices updated immediately"
-  );
+  assert.equal(fieldPropEditor.items.length, 3, "Choices updated immediately");
 
   SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
   Survey.Serializer.removeProperty("text", "targetEntity");

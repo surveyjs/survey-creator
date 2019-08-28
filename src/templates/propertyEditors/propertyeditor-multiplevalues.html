@@ -1,21 +1,28 @@
 <script type="text/html" id="propertyeditor-multiplevalues">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
-    <!-- /ko -->
+  <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+  <!-- /ko -->
 </script>
-<script type="text/html" class="btn-xs" id="propertyeditorcontent-multiplevalues">
-    <div style="max-height:300px; overflow-y:scroll;">
-        <!-- ko foreach: { data: koItems, as: 'item'}  -->
-        <div class="sjs-cb-wrapper" data-bind="style:{display: 'inline-block'">
-            <label>
-                <div class="sjs-cb-container">
-                    <input type="checkbox" data-bind="attr: {value: item.value}, checked: $parent.koEditingValue" />
-                    <span class="checkmark" data-bind="css: $parent.getBackgroundCls(item.value)">
-                        <span class="check"></span>
-                    </span>
-                    <span class="sjs-cb-label" style="position: static;" data-bind="text: item.text"></span>
-                </div>
-            </label>
-        </div>
-        <!-- /ko -->
-    </div>
+<script
+  type="text/html"
+  class="btn-xs"
+  id="propertyeditorcontent-multiplevalues"
+>
+  <div style="white-space: normal">
+      <!-- ko foreach: { data: koCategories, as: 'cat'}  -->
+      <div class="svd-logic-item-header" data-bind="visible: cat.koTitleVisible"><span data-bind="text: cat.koCategory()"></span></div>
+      <!-- ko foreach: { data: cat.koItems, as: 'item'}  -->
+      <div class="sjs-cb-wrapper" data-bind="style:{display: 'inline-block'">
+          <label>
+              <div class="sjs-cb-container">
+                  <input type="checkbox" data-bind="attr: {value: item.value}, checked: cat.editor.koEditingValue" />
+                  <span class="checkmark" data-bind="css: cat.editor.getBackgroundCls(item.value)">
+                      <span class="check"></span>
+                  </span>
+                  <span class="sjs-cb-label" style="position: static;" data-bind="text: item.text"></span>
+              </div>
+          </label>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+  </div>
 </script>

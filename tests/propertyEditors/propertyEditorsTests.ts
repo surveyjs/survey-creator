@@ -1308,6 +1308,52 @@ QUnit.test("onPropertyValueChanging callback, Bug #438", function(assert) {
   assert.equal(question.title, "ss", "The value has been trimmed");
 });
 
+QUnit.test("SurveyPropertyMultipleValuesEditor - categories ", function(
+  assert
+) {
+  Survey.Serializer.addProperty("question", {
+    name: "multiple:multiplevalues",
+    choices: function(obj) {
+      return [
+        { value: 5, text: "item 5", category: "category 2" },
+        { value: 4, text: "item 4", category: "category 1" },
+        { value: 6, text: "item 6", category: "category 2" },
+        { value: 1, text: "item 1" },
+        { value: 3, text: "item 3", category: "category 1" },
+        { value: 2, text: "item 2" }
+      ];
+    }
+  });
+  var property = Survey.Serializer.findProperty("question", "multiple");
+
+  var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
+  var categories = propertyEditor.koCategories();
+  assert.equal(categories.length, 3, "There are 3 categories");
+  assert.equal(categories[0].koCategory(), "", "The first category is empty");
+  assert.equal(
+    categories[0].koTitleVisible(),
+    false,
+    "The first category is invisible"
+  );
+  assert.equal(
+    categories[1].koCategory(),
+    "category 1",
+    "The second category is 1"
+  );
+  assert.equal(
+    categories[1].koTitleVisible(),
+    true,
+    "The second category is visible"
+  );
+  assert.equal(
+    categories[2].koCategory(),
+    "category 2",
+    "The third category is 2"
+  );
+
+  Survey.Serializer.removeProperty("question", "multiple");
+});
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [

@@ -5,14 +5,21 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 
-export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEditor {
-  private items: Array<Survey.ItemValue> = [];
+interface IMultipleValuesCategory {
+  koCategory: any;
+  koTitleVisible: any;
   koItems: any;
+}
+
+export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEditor {
+  public items: Array<Survey.ItemValue> = [];
+  koCategories: any;
   koEditingValue: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koEditingValue = ko.observableArray();
-    this.koItems = ko.observableArray();
+    this.koCategories = ko.observableArray();
+    this.koCategories = ko.observableArray();
     this.updateChoices();
   }
   public getValueText(value: any): string {
@@ -52,7 +59,19 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
   private setChoices(choices: Array<Survey.ItemValue>) {
     if (!choices || !Array.isArray(choices) || !choices.length) return;
     Survey.ItemValue.setData(this.items, choices);
-    this.koItems(this.items);
+    this.setCategories(choices);
+    this.items.sort(function(a, b) {
+      var ca = !!a.category ? a.category : "";
+      var cb = !!b.category ? b.category : "";
+      if (ca != cb) return ca < cb ? -1 : 1;
+      ca = !!a.text ? a.text : "";
+      cb = !!b.text ? b.text : "";
+      if (ca != cb) return ca < cb ? -1 : 1;
+      if (ca.value < cb.value) return -1;
+      if (ca.value > cb.value) return 1;
+      return 0;
+    });
+    this.koCategories(this.buildCategories());
   }
   private updateChoices() {
     var self = this;
@@ -74,6 +93,34 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     if (val == null || val == undefined) val = [];
     if (!Array.isArray(val)) val = [val];
     this.koEditingValue(val);
+  }
+  private setCategories(choices: Array<Survey.ItemValue>) {
+    for (var i = 0; i < this.items.length; i++) {
+      if (!!choices[i].category) {
+        this.items[i].category = choices[i].category;
+      }
+    }
+  }
+  private buildCategories(): Array<IMultipleValuesCategory> {
+    var res = [];
+    var curCategory = "";
+    var category = null;
+    for (var i = 0; i < this.items.length; i++) {
+      var item = this.items[i];
+      var itemCategory = !!item.category ? item.category : "";
+      if (category == null || curCategory != itemCategory) {
+        curCategory = itemCategory;
+        category = {
+          koTitleVisible: ko.observable(curCategory != ""),
+          koCategory: ko.observable(curCategory),
+          koItems: ko.observableArray(),
+          editor: this
+        };
+        res.push(category);
+      }
+      category.koItems.push(item);
+    }
+    return res;
   }
 }
 SurveyPropertyEditorFactory.registerEditor("multiplevalues", function(
