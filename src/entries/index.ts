@@ -162,3 +162,8 @@ export {
 } from "../utils/accordion";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
+
+export {
+  SurveyPropertyOneSelectedEditor,
+  SurveyPropertyOneSelectedItem
+} from "../propertyEditors/propertyOneSelectedEditor";

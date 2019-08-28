@@ -164,7 +164,7 @@ module.exports = function(options) {
           headerText: dts_banner
         });
 
-        replace(
+        replace.sync(
           {
             files: packagePath + "surveyeditor.d.ts",
             from: /export let\s+\w+:\s+\w+;/,
