@@ -115,6 +115,9 @@ ko.components.register("title-editor", {
         params.model[params.name],
         componentInfo.element
       );
+      ko.computed(() => {
+        model.prevName(ko.unwrap(params.model[params.name]));
+      });
       var property = Survey.Serializer.findProperty(
         params.model.getType(),
         params.name
