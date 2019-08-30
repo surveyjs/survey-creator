@@ -19,6 +19,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   koAddConditionType: any;
   koShowAddConditionType: any;
   koAddConditionButtonText: any;
+  koCanAddConditionValue: any;
   koAddContionValueEnabled: any;
   koHasValueSurvey: any;
   onConditionAddClick: any;
@@ -49,6 +50,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     );
     var self = this;
     this.koAddConditionQuestion.subscribe(function(newValue) {
+      self.koAddConditionValue("");
       self.onValueSurveyChanged(newValue, self.koAddConditionOperator());
     });
     this.koAddConditionOperator.subscribe(function(newValue) {
@@ -67,7 +69,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         this.koAddConditionQuestion() != "" &&
         this.koAddConditionQuestion() != undefined &&
         this.koAddConditionOperator() != "" &&
-        (!this.koAddContionValueEnabled() || this.koAddConditionValue() != "")
+        (!this.koCanAddConditionValue() || this.koAddConditionValue() != "")
       );
     }, this);
     this.koShowAddConditionType = ko.computed(function() {
@@ -82,8 +84,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         : "conditionButtonReplace";
       return editorLocalization.editorLocalization.getPropertyInEditor(name);
     }, this);
-    this.koAddContionValueEnabled = ko.computed(function() {
+    this.koCanAddConditionValue = ko.computed(function() {
       return self.canShowValueByOperator(self.koAddConditionOperator());
+    }, this);
+    this.koAddContionValueEnabled = ko.computed(function() {
+      return self.koCanAddConditionValue() && !self.koHasValueSurvey();
     }, this);
     this.onConditionAddClick = function() {
       self.addCondition();
@@ -262,7 +267,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       this.getQuestionValueByName(this.koAddConditionQuestion()) +
       "} " +
       this.getAddConditionOperator();
-    if (this.koAddContionValueEnabled()) {
+    if (this.koCanAddConditionValue()) {
       text += " " + this.getAddConditionValue();
     }
     this.koTextValue(text);

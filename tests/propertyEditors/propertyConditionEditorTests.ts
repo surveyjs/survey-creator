@@ -471,3 +471,40 @@ QUnit.test(
     assert.equal(vQuestion.visibleChoices.length, 2, "Show all choices");
   }
 );
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, error in value input, Bug# T2598 (customer marked it private)",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q2", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: ["a", "b"] }
+      ]
+    });
+    var question = survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.koAddConditionQuestion("q1");
+    assert.equal(editor.koHasValueSurvey(), true, "Value Survey is ready");
+    assert.equal(
+      editor.koAddContionValueEnabled(),
+      false,
+      "It has survey for setting value"
+    );
+    editor.koValueSurvey().setValue("question", 1);
+    assert.equal(
+      editor.koAddConditionValue(),
+      1,
+      "Set condition value from survey"
+    );
+    editor.koAddConditionQuestion("q3");
+    assert.equal(
+      editor.koAddConditionValue(),
+      "",
+      "Empty condition value on changing question name"
+    );
+  }
+);
