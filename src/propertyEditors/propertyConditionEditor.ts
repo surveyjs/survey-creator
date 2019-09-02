@@ -4,8 +4,6 @@ import { SurveyPropertyTextEditor } from "./propertyModalEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import * as editorLocalization from "../editorLocalization";
-import { SurveyValidator } from "survey-knockout";
-import { stringLiteral } from "babel-types";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public availableOperators = [];
@@ -104,17 +102,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return this._type;
   }
   public get availableQuestions(): any[] {
-    if (this.object instanceof Survey.SurveyModel)
-      return this.object.getAllQuestions();
-    if (this.object instanceof Survey.MatrixDropdownColumn) {
-      return this.object.colOwner["survey"].getAllQuestions();
-    }
-    return (
-      (this.object &&
-        this.object.survey &&
-        this.object.survey.getAllQuestions()) ||
-      []
-    );
+    var survey = this.getSurvey();
+    return !!survey ? survey.getAllQuestions() : [];
+  }
+  protected getSurvey(): Survey.SurveyModel {
+    if (this.object instanceof Survey.SurveyModel) return this.object;
+    if (this.object instanceof Survey.MatrixDropdownColumn)
+      return this.object.colOwner["survey"];
+    if (!!this.object && !!this.object.survey) return this.object.survey;
+    return null;
   }
   public get allConditionQuestions(): any[] {
     var res = this.getConditionQuetions();
@@ -146,6 +142,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         this.addConditionQuestionsHash[res[i].name] = res[i].question;
       }
     }
+    this.addCalculatedValues(res);
     !!this.options &&
       this.options.onConditionQuestionsGetListCallback(
         this.editablePropertyName,
@@ -154,6 +151,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         res
       );
     return res;
+  }
+  private addCalculatedValues(res: Array<any>) {
+    var survey = this.getSurvey();
+    if (!survey || !survey["calculatedValues"]) return; //TODO
+    var values = survey["calculatedValues"];
+    for (var i = 0; i < values.length; i++) {
+      var name = values[i].name;
+      res.push({ name: name, text: name, question: null });
+    }
   }
   private onValueSurveyChanged(questionName: string, operator: string) {
     if (
