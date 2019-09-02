@@ -77,6 +77,9 @@ export {
   SurveyPropertyHtmlConditionEditor
 } from "../propertyEditors/propertyHtmlConditionEditor";
 export {
+  SurveyPropertyCalculatedValueEditor
+} from "../propertyEditors/propertyCalculatedValues";
+export {
   SurveyPropertyValidatorsEditor
 } from "../propertyEditors/propertyValidatorsEditor";
 export {

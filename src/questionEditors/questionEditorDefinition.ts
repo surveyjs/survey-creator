@@ -314,6 +314,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "completedHtmlOnCondition", index: 75 },
         { name: "loadingHtml", index: 80 },
         { name: "timer", index: 90 },
+        { name: "calculatedValues", index: 95 },
         { name: "triggers", index: 100 }
       ]
     }

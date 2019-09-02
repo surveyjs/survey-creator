@@ -358,6 +358,7 @@ export var enStrings = {
       completedHtmlOnCondition: "Completed Html on Condition",
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
+      calculatedValues: "Calculated Values",
       triggers: "Triggers",
       templateTitle: "Template title",
       totals: "Totals"
