@@ -446,6 +446,12 @@ QUnit.test("Rename the name", function(assert) {
         expression: "{q1} = 1",
         html: "text"
       }
+    ],
+    calculatedValues: [
+      {
+        name: "var1",
+        expression: "{q1} = 1"
+      }
     ]
   });
   var logic = new SurveyLogic(survey);
@@ -583,6 +589,16 @@ QUnit.test("Rename the name", function(assert) {
     survey.completedHtmlOnCondition[0].expression,
     "{question1} = 1",
     "Rename q1: survey.completedHtmlOnCondition[0].expression"
+  );
+  assert.equal(
+    survey.calculatedValues.length,
+    1,
+    "There is one calculated value"
+  );
+  assert.equal(
+    survey.calculatedValues[0].expression,
+    "{question1} = 1",
+    "Rename q1: survey.calculatedValues[0].expression"
   );
 });
 

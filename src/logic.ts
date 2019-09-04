@@ -632,6 +632,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "itemvalue",
       propertyName: "enableIf",
       showInUI: false
+    },
+    {
+      name: "calculatedValue",
+      baseClass: "calculatedvalue",
+      propertyName: "expression",
+      showInUI: false
     }
   ];
   public koItems: any;
@@ -855,6 +861,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.AddElements(this.survey.getAllPanels(), res);
     this.AddElements(this.survey.triggers, res);
     this.AddElements(this.survey.completedHtmlOnCondition, res);
+    this.AddElements(this.survey.calculatedValues, res);
     this.AddElements(this.getMatrixColumns(), res);
     this.AddElements(this.getValidators(), res);
     this.AddElements(this.getItemValues(), res);
