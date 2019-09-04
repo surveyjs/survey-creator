@@ -1,5 +1,5 @@
 {
-  "version": "1.1.7",
+  "version": "1.1.8",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#BuildSurvey",
@@ -27,7 +27,7 @@
     "knockout": "^3.4.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.1.7"
+    "survey-knockout": "^1.1.8"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
