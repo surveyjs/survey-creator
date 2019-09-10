@@ -5,8 +5,8 @@ import { isVar } from "babel-types";
 var template = require("html-loader?interpolate!val-loader!./accordion.html");
 
 export interface IAccordionItemData {
-  name: string | KnockoutObservable<string>;
-  title: string | KnockoutObservable<string>;
+  name: string | any;
+  title: string | any;
   onExpand: () => void;
 }
 
@@ -49,8 +49,8 @@ export class AccordionModel {
       return params.tabs().length > 1;
     });
   }
-  tabs: KnockoutObservable<AccordionItemModel>;
-  showHeader: KnockoutObservable<boolean>;
+  tabs: any;
+  showHeader: any;
 }
 
 ko.components.register("svd-accordion", {

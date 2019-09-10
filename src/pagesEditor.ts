@@ -10,7 +10,7 @@ export class PagesEditor {
   private isDraggingPage = ko.observable(false);
   private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
-  pagesSelection: KnockoutComputed<Survey.PageModel[]>;
+  pagesSelection: any;
 
   constructor(private editor: SurveyCreator, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {

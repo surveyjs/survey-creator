@@ -1,3 +1,4 @@
+import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "./editor";
 
@@ -74,7 +75,7 @@ class ServiceAPI extends Survey.dxSurveyService {
 }
 
 export interface ISurveyInfo {
-  name: KnockoutObservable<string>;
+  name: any;
   id: string;
   postId: string;
 }
