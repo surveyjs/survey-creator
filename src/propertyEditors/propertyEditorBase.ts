@@ -92,6 +92,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public isTabProperty: boolean = false;
   public isInplaceProperty: boolean = false;
   public readOnly: any;
+  public koMaxLength: any;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
@@ -116,6 +117,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.koErrorText = ko.observable("");
     this.koDisplayError = ko.computed(function() {
       return self.koHasError() && !!self.koErrorText();
+    });
+    this.koMaxLength = ko.computed(function() {
+      return !!self.property &&
+        !!self.property["maxLength"] &&
+        self.property["maxLength"] > 0
+        ? self.property["maxLength"]
+        : 524288;
     });
     this.setIsRequired();
     this.setTitleAndDisplayName();
