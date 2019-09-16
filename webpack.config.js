@@ -69,8 +69,7 @@ var packagePlatformJson = {
   },
   dependencies: {
     "survey-knockout": "^" + packageJson.version,
-    knockout: "^3.4.0",
-    "@types/knockout": "^3.4.0"
+    knockout: "^3.5.0"
   },
   devDependencies: {}
 };
@@ -114,8 +113,7 @@ var buildPlatformJson = {
   },
   dependencies: {
     "survey-knockout": "^" + packageJson.version,
-    knockout: "^3.4.0",
-    "@types/knockout": "^3.4.0"
+    knockout: "^3.5.0"
   },
   devDependencies: {}
 };

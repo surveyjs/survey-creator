@@ -13,8 +13,10 @@ var frenchTranslation = {
   },
   //questionTypes
   qt: {
+    default: "Par défaut",
     checkbox: "Cases à cocher",
     comment: "Commentaire",
+    imagepicker: "Choix d'image",
     dropdown: "Liste déroulante",
     file: "Fichier",
     html: "HTML",
@@ -35,16 +37,24 @@ var frenchTranslation = {
     survey: "Questionnaire",
     editSurvey: "Éditer le questionnaire",
     settings: "Configuration du questionnaire",
+    opjectPropertiesHeader: "Propriétés",
+    showObjectProperties: "Afficher les propriétés",
+    hideObjectProperties: "Cacher les propriétés",
     addNewPage: "Ajouter une page",
+    moveRight: "Défiler à droite",
+    moveLeft: "Défiler à gauche",
     deletePage: "Supprimer une page",
     editPage: "Éditer une page",
+    edit: "Éditer",
     newPageName: "page",
     newQuestionName: "question",
     newPanelName: "panneau",
+    newTextItemName: "texte",
     testSurvey: "Tester le questionnaire",
     testSurveyAgain: "Tester à nouveau le questionnaire",
     testSurveyWidth: "Largeur du questionnaire : ",
     embedSurvey: "Intégrer le questionnaire",
+    translation: "Traduction",
     saveSurvey: "Sauvegarder le questionnaire",
     designer: "Éditeur de questionnaire",
     jsonEditor: "Éditer JSON",
@@ -67,7 +77,20 @@ var frenchTranslation = {
     resultsDisplayValue: "Valeur affichée",
     modified: "Modifié",
     saving: "Sauvegarde en cours",
-    saved: "Sauvegardé"
+    saved: "Sauvegardé",
+    saveError: "Erreur! Le contenu de l'éditeur n'a pas été sauvegardé.",
+    translationAddLanguage: "Choisir langue à traduire",
+    translationShowAllStrings: "Afficher tous les termes",
+    translationShowAllPages: "Afficher toutes les pages",
+    translationNoStrings: "Aucun terme à traduire. Veuillez modifier le filtre.",
+    translationExportToSCVButton: "Exporter en CSV",
+    translationImportFromSCVButton: "Importer d'un CSV",
+    translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
+    bold: "Gras",
+    italic: "Italique",
+    underline: "Souligné",
+    fpAddQuestion: "Ajouter question...",
+    completedHtmlOnConditionItemText: "Afficher si :",
   },
   //Property names in table headers
   pel: {
@@ -112,6 +135,8 @@ var frenchTranslation = {
     propertyIsEmpty: "Veuillez entrer une valeur pour la propriété",
     value: "Valeur",
     text: "Texte",
+    rowid: "ID Ligne",
+    imageLink: "URL de l'image",
     columnEdit: "Éditer la colonne: {0}",
     itemEdit: "Éditer l'item: {0}",
     url: "URL",
@@ -134,6 +159,8 @@ var frenchTranslation = {
     choicesOrder: "Sélectionner l'ordre des choix",
     visible: "Est visible ?",
     isRequired: "Est obligatoire ?",
+    isAllRowRequired: "Réponse obligatoire pour toutes les lignes",
+    requiredErrorText: "Message d'erreur lorsque obligatoire",
     startWithNewLine: "Commencer avec une nouvelle ligne ?",
     rows: "Nombre de lignes",
     placeHolder: "Placeholder (indice dans le champ)",
@@ -144,8 +171,12 @@ var frenchTranslation = {
     imageHeight: "Hauteur de l'image",
     imageWidth: "Largeur de l'image",
     rowCount: "Nombre de lignes",
+    addRowLocation: 'Alignement bouton "Ajouter une ligne"',
     addRowText: 'Texte bouton "Ajouter une ligne"',
     removeRowText: 'Texte bouton "Supprimer une ligne"',
+    rateMin: "Note minimum",
+    rateMax: "Note maximum",
+    rateStep: "Intervalle des notes",
     minRateDescription: "Description note minimum",
     maxRateDescription: "Description note maximum",
     inputType: "Type de champ",
@@ -154,10 +185,13 @@ var frenchTranslation = {
     cellsDefaultRow: "Texte de cellule par défaut",
     surveyEditorTitle: "Éditer les préférences du questionnaire",
     qEditorTitle: "Éditer la question: {0}",
+    maxLength: "Longueur maximum",
 
     //survey
     showTitle: "Afficher/cacher le titre",
     locale: "Langue par défaut",
+    simulator: "Choisir appareil",
+    landscapeOrientation: "Paysage",
     mode: "Mode (édition/lecture seule)",
     clearInvisibleValues: "Effacer les valeurs invisibles",
     cookieName:
@@ -200,6 +234,14 @@ var frenchTranslation = {
     panelAddText: "Ajouter un panneau texte",
     panelRemoveText: "Supprimer le panneau texte",
     isSinglePage: "Afficher tous les éléments sur une seule page",
+    expression: "Expression",
+    minValue: "Valeur minimum",
+    maxValue: "Valeur maximum",
+    minLength: "Longueur minimum",
+    allowDigits: "Permettre chiffres",
+    minCount: "Nombre minimum",
+    maxCount: "Nombre maximum",
+    regex: "Expression régulière",
     tabs: {
       general: "Général",
       fileOptions: "Options",
@@ -209,6 +251,7 @@ var frenchTranslation = {
       choices: "Choix",
       visibleIf: "Visible si",
       enableIf: "Actif si",
+      requiredIf: "Requis si",
       rateValues: "Barème",
       choicesByUrl: "Choix depuis API web",
       matrixChoices: "Choix par défaut",
@@ -217,10 +260,13 @@ var frenchTranslation = {
       navigation: "Navigation",
       question: "Question",
       completedHtml: "HTML de fin",
+      completedHtmlOnCondition: "HTML de fin avec condition",
       loadingHtml: "HTML de chargement",
       timer: "Chronomètre/Quiz",
+      calculatedValues: "Variables",
       triggers: "Déclencheurs",
-      templateTitle: "Titre de gabarit"
+      templateTitle: "Titre de gabarit",
+      totals: "Totaux"
     },
     editProperty: 'Éditer la propriété "{0}"',
     items: "[ Éléments: {0} ]",
@@ -233,10 +279,14 @@ var frenchTranslation = {
     triggerCompleteText: "Terminer le questionnaire en cas de succès.",
     triggerNotSet: "Le déclencheur n'est pas défini",
     triggerRunIf: "Exécuter si",
-    triggerSetToName: "Changer la valeur de: ",
-    triggerSetValue: "à: ",
+    triggerSetToName: "Changer la valeur de : ",
+    triggerFromName: "Copier la valeur de : ",
+    triggerRunExpression: "Exécuter cette expression :",
+    triggerSetValue: "à : ",
+    triggerGotoName: "Aller à la question :",
     triggerIsVariable:
-      "Ne placez pas la variable dans le résultat du questionnaire."
+      "Ne placez pas la variable dans le résultat du questionnaire.",
+    triggerRunExpressionEmpty: "Veuillez entrer une expression valide"
   },
   //Property values
   pv: {
@@ -267,6 +317,7 @@ var frenchTranslation = {
     progressTopBottom: "Progression en haut et en bas",
     top: "haut",
     bottom: "bas",
+    topBottom: "haut et bas",
     left: "gauche",
     color: "couleur",
     date: "date",
@@ -301,6 +352,8 @@ var frenchTranslation = {
     notequal: "n'est pas égal",
     contains: "contient",
     notcontains: "ne contient pas",
+    anyof: "n'importe quel de",
+    allof: "tout de",
     greater: "supérieur",
     less: "inférieur",
     greaterorequal: "supérieur ou égal",
@@ -324,7 +377,8 @@ var frenchTranslation = {
   },
   //Test Survey
   ts: {
-    selectPage: "Sélectionner une page pour la tester"
+    selectPage: "Sélectionner une page pour la tester",
+    showInvisibleElements: "Afficher les éléments invisibles"
   },
   //Validators
   validators: {
@@ -338,6 +392,9 @@ var frenchTranslation = {
   triggers: {
     completetrigger: "terminer le questionnaire",
     setvaluetrigger: "définir la valeur",
+    copyvaluetrigger: "copier la valeur",
+    skiptrigger: "sauter à la question",
+    runexpressiontrigger: "exécuter expression",
     visibletrigger: "modifier la visibilité"
   },
   //Properties

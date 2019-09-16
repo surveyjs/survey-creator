@@ -7,7 +7,7 @@
   <div class="propertyeditor-condition">
       <div class="form-inline form-group">
           <div class="form-control svd_custom_select">
-              <select onmousewheel="return false;" style="max-width:200px" data-bind="value: koAddConditionQuestion">
+              <select onmousewheel="return false;" style="max-width:200px" data-bind="if: true, value: koAddConditionQuestion">
                 <option value="" data-bind="text: addConditionQuestionOptions, attr: {title: addConditionQuestionOptions}" ></option>
                 <!-- ko foreach: koAddConditionQuestions -->
                 <option data-bind="value: name, text: (text || '').substring(0, 80), attr: {title: text}" ></option>

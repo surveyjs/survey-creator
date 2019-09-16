@@ -36,19 +36,19 @@ export interface IToolbarItem {
   /**
    * Set this property to false to make the toolbar item invisible.
    */
-  visible: KnockoutObservable<boolean> | boolean;
+  visible: ko.Computed<boolean> | ko.Observable<boolean> | boolean;
   /**
    * Toolbar item title
    */
-  title: KnockoutObservable<string> | string;
+  title: ko.Computed<string> | string;
   /**
    * Set this property to false to disable the toolbar item.
    */
-  enabled?: KnockoutObservable<boolean> | boolean;
+  enabled?: ko.Computed<boolean> | boolean;
   /**
    * Set this property to false to hide the toolbar item title.
    */
-  showTitle?: KnockoutObservable<boolean> | boolean;
+  showTitle?: ko.Computed<boolean> | boolean;
   /**
    * A callback that calls on toolbar item click.
    */
@@ -56,15 +56,15 @@ export interface IToolbarItem {
   /**
    * Toolbar item css class
    */
-  css?: KnockoutObservable<string> | string;
-  innerCss?: KnockoutObservable<string> | string;
+  css?: ko.Computed<string> | string;
+  innerCss?: ko.Computed<string> | string;
   data?: any;
   template?: string;
   /**
    * Toolbar item icon name
    */
   icon?: string;
-  items?: KnockoutObservableArray<IToolbarItem>;
+  items?: ko.ObservableArray<IToolbarItem>;
 }
 
 /**
@@ -81,7 +81,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public selectedObjectEditorValue: SurveyObjectEditor;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-  public pages: KnockoutObservableArray<Survey.PageModel>;
+  public pages: ko.ObservableArray<Survey.PageModel>;
   public selectPage: Function;
 
   private surveyLive: SurveyLiveTester;
@@ -737,7 +737,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koViewType: any;
   koCanDeleteObject: any;
   koObjects: any;
-  koSelectedObject: KnockoutObservable<any>;
+  koSelectedObject: ko.Observable<any>;
   koShowSaveButton: any;
   koGenerateValidJSON: any;
   koShowOptions: any;

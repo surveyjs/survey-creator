@@ -315,7 +315,7 @@ export class DragDropHelper {
     var height = <number>event.currentTarget["clientHeight"];
     var y = event.offsetY;
     if (event.hasOwnProperty("layerX")) {
-      y = event.layerY - <number>event.currentTarget["offsetTop"];
+      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return {
       isBottom: y > height / 2,
@@ -331,7 +331,7 @@ export class DragDropHelper {
     var elY = <number>el.offsetTop + <number>el.clientHeight;
     var y = event.offsetY;
     if (event.hasOwnProperty("layerX")) {
-      y = event.layerY - <number>event.currentTarget["offsetTop"];
+      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return y > elY;
   }

@@ -493,8 +493,8 @@ export class SurveyPropertyTriggerObjects {
   };
   private changeItems(
     item: Element,
-    removedFrom: KnockoutObservableArray<Element>,
-    addTo: KnockoutObservableArray<Element>
+    removedFrom: any,
+    addTo: any
   ) {
     if (!item) return;
     removedFrom.remove(item);
