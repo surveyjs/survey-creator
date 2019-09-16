@@ -4,7 +4,7 @@
           <!-- ko foreach: properties.rows -->
           <div class="form-group">
               <!-- ko foreach: properties -->
-                  <div data-bind="visible: objectProperty.koVisible, event: { keydown: objectProperty.editor.keyDownHandler }">
+                  <div data-bind="visible: objectProperty.koVisible, event: { keydown: objectProperty.editor.keyDownHandler }, attr: { 'data-property': property.name }">
                   <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } --><!-- /ko -->
                   </div>
               <!-- /ko  -->
