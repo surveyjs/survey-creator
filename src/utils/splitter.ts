@@ -33,9 +33,14 @@ export class SplitterComponentViewModel {
       if (newLeft > minLeft && newRight > minRight) {
         splitterElement.style.left =
           splitterElement.offsetLeft + event.movementX + "px";
-        leftElement.style.width = (newLeft / container.offsetWidth) * 100 + "%";
-        rightElement.style.width =
-          (newRight / container.offsetWidth) * 100 + "%";
+        var leftWidth = (newLeft / container.offsetWidth) * 100 + "%";
+        var rightWidth = (newRight / container.offsetWidth) * 100 + "%";
+        leftElement.style.width = leftWidth;
+        leftElement.style.maxWidth = leftWidth;
+        leftElement.style.flexBasis = leftWidth;
+        rightElement.style.width = rightWidth;
+        rightElement.style.maxWidth = rightWidth;
+        rightElement.style.flexBasis = rightWidth;
       }
     };
     var onmouseup = () => {
