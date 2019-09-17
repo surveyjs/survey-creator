@@ -21,7 +21,7 @@ test(`dropdown change item values`, async t => {
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.item_editable.item_draggable>span`).innerText)
     .eql("item1puppies")
-    .click(`.svd_properties_grid tr:nth-child(15) input[type='checkbox']`)
+    .click(`.svd_properties_grid tr:nth-child(16) input[type='checkbox']`)
     .expect(
       Selector(
         `.svda-select-items-editor .svda-select-items-collection+.item_editable > span:first-child`
