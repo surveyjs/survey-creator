@@ -66,7 +66,7 @@ ko.components.register("item-editor", {
       model.valueChanged = newValue => {
         var options = {
           propertyName: property.name,
-          obj: params.model,
+          obj: params.item,
           value: newValue,
           newValue: null,
           doValidation: false
