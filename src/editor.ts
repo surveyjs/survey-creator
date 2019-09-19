@@ -19,7 +19,7 @@ import { QuestionToolbox } from "./questionToolbox";
 import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
-import { SurveyForDesigner } from "./surveyjsObjects";
+import { SurveyForDesigner, createAfterRenderHandler } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
@@ -1945,11 +1945,38 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
     };
+    var afterRenderElementHandler = createAfterRenderHandler(this, this.surveyValue());
+    this.surveyValue().onAfterRenderQuestion.add((sender, options) => {
+      afterRenderElementHandler(options.htmlElement, options.question, false, true);
+    });
+    this.surveyValue().onAfterRenderPanel.add((sender, options) => {
+      if(options.panel.getType() === "flowpanel") {
+        afterRenderElementHandler(options.htmlElement, options.panel, true, options.panel.koIsDragging());
+        var pnlEl = options.htmlElement.querySelector("f-panel");
+        if (!!pnlEl) {
+          if (!!pnlEl.className) {
+            pnlEl.className += " svd_flowpanel";
+          } else {
+            pnlEl.className = "svd_flowpanel";
+          }
+        }
+      }
+      else {
+        if (options.panel.elements.length == 0) {
+          options.panel.emptyElement = addEmptyPanelElement(this.surveyValue(), options.htmlElement, options.panel.dragDropHelper(), options.panel);
+        }
+        afterRenderElementHandler(options.htmlElement, options.panel, true, options.panel.koIsDragging());
+      }
+    });
     this.surveyValue().onDragDropAllow.add(function(sender, options) {
       options.survey = sender;
       self.onDragDropAllow.fire(self, options);
     });
     this.surveyValue().onGetMenuItems.add((sender, options) => {
+      if(this.readOnly) {
+        return;
+      }
+
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
@@ -2779,4 +2806,22 @@ export class SurveyEditor extends SurveyCreator {
   constructor(renderedElement: any = null, options: any = null) {
     super(renderedElement, options);
   }
+}
+
+function addEmptyPanelElement(
+  survey: SurveyForDesigner,
+  root: HTMLElement,
+  dragDropHelper: any,
+  panel: any
+): HTMLElement {
+  var eDiv: HTMLDivElement = document.createElement("div");
+  eDiv.className = "well card card-block";
+  eDiv.ondragover = function(e) {
+    dragDropHelper.doDragDropOver(e, panel);
+  };
+  var eSpan: HTMLSpanElement = document.createElement("span");
+  eSpan.textContent = survey.getEditorLocString("survey.dropQuestion");
+  eDiv.appendChild(eSpan);
+  root.appendChild(eDiv);
+  return eDiv;
 }
