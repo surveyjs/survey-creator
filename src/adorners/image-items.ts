@@ -80,7 +80,7 @@ ko.components.register("image-item-editor", {
         params.editor.uploadFiles(files, (_, link) => {
           var options = {
             propertyName: property.name,
-            obj: params.model,
+            obj: params.item,
             value: link,
             newValue: null,
             doValidation: false

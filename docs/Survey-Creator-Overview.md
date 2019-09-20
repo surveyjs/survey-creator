@@ -625,6 +625,15 @@ The following code makes the choices and matrix rows/columns value property read
 ```javascript
 Survey.Serializer.findProperty('itemvalue', "value").readOnly = true;
 ```
+---
+**maxLength**
+
+An optional numeric property. It works for string and text properties. It limits the string length that user can enter in the property editor.
+
+The following code limits the size of the question name, that user may enter, to 20.
+```javascript
+Survey.Serializer.findProperty('question', "name").maxLength = 20;
+```
 
 ---
 **dependsOn**
