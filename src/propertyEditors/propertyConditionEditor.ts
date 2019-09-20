@@ -300,7 +300,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (!val) return val;
     if (val == "true" || val == "false") return val;
     if (!isNaN(val)) return val;
-    if (val[0] == "[") return val;
+    if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
     if (!this.isQuote(val[0])) val = "'" + val;
     if (!this.isQuote(val[val.length - 1])) val = val + "'";
     return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
