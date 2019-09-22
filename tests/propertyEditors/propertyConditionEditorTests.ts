@@ -177,6 +177,27 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   assert.equal(editor.koCanAddCondition(), true, "empty doesn't require value");
 });
 
+QUnit.test("SurveyPropertyConditionEditor.addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", function(assert) {
+  var question = new Survey.QuestionText("q1");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.koAddConditionQuestion("q2");
+  editor.koAddConditionValue(JSON.stringify(["item1's"]));
+  editor.object = question;
+  editor.addCondition();
+  assert.equal(
+    editor.koTextValue(),
+    "{q2} = [\"item1\\'s\"]",
+    "Single quote escaped in condition"
+  );
+  // editor.apply();
+  // assert.equal(
+  //   question.visibleIf,
+  //   "{q2} = [\"item1\\'s\"]",
+  //   "Single quote escaped in condition"
+  // );
+});
+
 QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
   function(assert) {
