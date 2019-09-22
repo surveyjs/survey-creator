@@ -21,6 +21,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "name",
         "title",
+        "description",
         { name: "visible", category: "checks" },
         { name: "isRequired", category: "checks" },
         { name: "startWithNewLine", category: "checks" }
