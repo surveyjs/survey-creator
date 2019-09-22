@@ -265,7 +265,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = this.onShowingProperty;
   /**
-   * The event is called when editor tab has been rendered.
+   * The event is called when creator tab has been rendered.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.tabName the name of the rendered tab
    * <br/> options.elements the rendered elements
@@ -276,6 +276,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is called when creator active tab is changed.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
+  public onActiveTabChanged: Survey.Event<
+  (sender: SurveyCreator, options: any) => any,
+  any
+> = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
    * You may changed it and make the property editor read only or enabled for a particular object.
@@ -900,6 +909,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
 
     this.koViewType = ko.observable("designer");
+    this.koViewType.subscribe(function(newValue) {
+      self.onActiveTabChanged.fire(self, {tabName: newValue});
+    });
     this.koIsShowDesigner = ko.computed(function() {
       return self.koViewType() == "designer";
     });
