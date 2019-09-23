@@ -108,21 +108,27 @@ export class SurveyHelper {
       return false;
     return true;
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement, pageEl: HTMLElement) {
-    if (!el || !el.scrollIntoView || !pageEl) return;
+  public static scrollIntoViewIfNeeded(el: HTMLElement) {
+    if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
-    var height = pageEl.offsetParent
-      ? pageEl.offsetParent.clientHeight
-      : pageEl.clientHeight;
-    if (rect.top < pageEl.offsetTop) {
+    var scrollableDiv = SurveyHelper.getScrollableDiv(el);
+    if (!scrollableDiv) return;
+    var height = scrollableDiv.clientHeight;
+    if (rect.top < scrollableDiv.offsetTop) {
       el.scrollIntoView();
     } else {
-      if (
-        rect.bottom > height &&
-        (rect.top > pageEl.offsetTop + height || rect.height < height)
-      ) {
+      let offsetTop = height + scrollableDiv.offsetTop;
+      if (rect.bottom > offsetTop && rect.height < height) {
         el.scrollIntoView(false);
       }
     }
+  }
+  public static getScrollableDiv(el: HTMLElement): HTMLElement {
+    while (!!el) {
+      if (!!el.id && el.id.indexOf("scrollableDiv") > -1) return el;
+      if (!el.offsetParent) return null;
+      el = <HTMLElement>el.offsetParent;
+    }
+    return null;
   }
 }

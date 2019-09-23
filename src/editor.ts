@@ -282,9 +282,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.tabName the name of new active tab
    */
   public onActiveTabChanged: Survey.Event<
-  (sender: SurveyCreator, options: any) => any,
-  any
-> = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
    * You may changed it and make the property editor read only or enabled for a particular object.
@@ -910,7 +910,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.koViewType = ko.observable("designer");
     this.koViewType.subscribe(function(newValue) {
-      self.onActiveTabChanged.fire(self, {tabName: newValue});
+      self.onActiveTabChanged.fire(self, { tabName: newValue });
     });
     this.koIsShowDesigner = ko.computed(function() {
       return self.koViewType() == "designer";
@@ -1160,9 +1160,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       options.generateValidJSON = true;
     this.options = options;
     this.showLogicTabValue(
-      typeof options.showLogicTab !== "undefined"
-        ? options.showLogicTab
-        : false
+      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
     );
     this.showJSONEditorTabValue(
       typeof options.showJSONEditorTab !== "undefined"
@@ -1852,10 +1850,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       var id = obj["id"];
       if (this.renderedElement && id && this.survey.currentPage) {
         let el = <HTMLElement>this.renderedElement.querySelector("#" + id);
-        let pageEl = <HTMLElement>(
-          this.renderedElement.querySelector("#" + this.survey.currentPage.id)
-        );
-        SurveyHelper.scrollIntoViewIfNeeded(el, pageEl);
+        SurveyHelper.scrollIntoViewIfNeeded(el);
       }
     } else {
       this.survey.selectedElement = null;
@@ -1957,13 +1952,26 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.surveyValue().onUpdateElementAllowingOptions = function(options) {
       self.onElementAllowOperations.fire(self, options);
     };
-    var afterRenderElementHandler = createAfterRenderHandler(this, this.surveyValue());
+    var afterRenderElementHandler = createAfterRenderHandler(
+      this,
+      this.surveyValue()
+    );
     this.surveyValue().onAfterRenderQuestion.add((sender, options) => {
-      afterRenderElementHandler(options.htmlElement, options.question, false, true);
+      afterRenderElementHandler(
+        options.htmlElement,
+        options.question,
+        false,
+        true
+      );
     });
     this.surveyValue().onAfterRenderPanel.add((sender, options) => {
-      if(options.panel.getType() === "flowpanel") {
-        afterRenderElementHandler(options.htmlElement, options.panel, true, options.panel.koIsDragging());
+      if (options.panel.getType() === "flowpanel") {
+        afterRenderElementHandler(
+          options.htmlElement,
+          options.panel,
+          true,
+          options.panel.koIsDragging()
+        );
         var pnlEl = options.htmlElement.querySelector("f-panel");
         if (!!pnlEl) {
           if (!!pnlEl.className) {
@@ -1972,12 +1980,21 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
             pnlEl.className = "svd_flowpanel";
           }
         }
-      }
-      else {
+      } else {
         if (options.panel.elements.length == 0) {
-          options.panel.emptyElement = addEmptyPanelElement(this.surveyValue(), options.htmlElement, options.panel.dragDropHelper(), options.panel);
+          options.panel.emptyElement = addEmptyPanelElement(
+            this.surveyValue(),
+            options.htmlElement,
+            options.panel.dragDropHelper(),
+            options.panel
+          );
         }
-        afterRenderElementHandler(options.htmlElement, options.panel, true, options.panel.koIsDragging());
+        afterRenderElementHandler(
+          options.htmlElement,
+          options.panel,
+          true,
+          options.panel.koIsDragging()
+        );
       }
     });
     this.surveyValue().onDragDropAllow.add(function(sender, options) {
@@ -1985,7 +2002,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.onDragDropAllow.fire(self, options);
     });
     this.surveyValue().onGetMenuItems.add((sender, options) => {
-      if(this.readOnly) {
+      if (this.readOnly) {
         return;
       }
 
@@ -2331,9 +2348,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     parent.addElement(element, index);
     if (this.renderedElement && this.scrollToNewElement) {
-      this.dragDropHelper.scrollToElement(<HTMLElement>(
+      SurveyHelper.scrollIntoViewIfNeeded(
         this.renderedElement.querySelector("#" + element["id"])
-      ));
+      );
     }
     this.setModified({ type: modifiedType, question: element });
   }

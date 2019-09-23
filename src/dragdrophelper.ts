@@ -291,10 +291,6 @@ export class DragDropHelper {
       this.ddTarget.moveTo(null, false);
     }
   }
-  public scrollToElement(el: HTMLElement) {
-    if (!this.scrollableElement || !el) return;
-    el.scrollIntoView(false);
-  }
   private createTargetElement(elementName: string, json: any): any {
     if (!elementName || !json) return null;
     var targetElement = null;
