@@ -3,9 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyObjectEditor } from "../src/objectEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
 import { BigCar, Truck, TruckDefaultValue } from "./ObjectEditorTestedClasses";
-import {
-  EditorOptionsTests
-} from "./editorOptionsTests";
+import { EditorOptionsTests } from "./editorOptionsTests";
 import {
   SurveyPropertyItemValuesEditor,
   SurveyPropertyItemValuesEditorItem
@@ -210,7 +208,6 @@ QUnit.test("Use onCanShowPropertyCallback", function(assert) {
     "Only one property is accepted"
   );
 });
-
 
 QUnit.test("On new ItemValue added", function(assert) {
   var options = new EditorOptionsTests();

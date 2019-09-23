@@ -54,6 +54,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
       : "svd-main-background-color";
   }
   public updateDynamicProperties() {
+    super.updateDynamicProperties();
     this.updateChoices();
   }
   private setChoices(choices: Array<Survey.ItemValue>) {

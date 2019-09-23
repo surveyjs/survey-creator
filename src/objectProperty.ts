@@ -87,6 +87,7 @@ export class SurveyObjectProperty {
     this.objectValue = value;
     this.editor.object = value;
     this.updateDependedProperties();
+    this.updateDynamicProperties();
   }
   public updateDynamicProperties() {
     this.koVisible(this.isVisible());
