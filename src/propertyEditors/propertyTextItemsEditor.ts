@@ -24,9 +24,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   }
   protected getEditorName(): string {
     if (!this.koEditItem()) return "";
-    return editorLocalization
-      .getString("pe.columnEdit")
-      ["format"](this.koEditItem().koName());
+    return this.koEditItem().text;
   }
   protected createNewEditorItem(): any {
     var newItem = new Survey.MultipleTextItem(this.getNewName());
@@ -90,6 +88,11 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
       "multipletextitem",
       this.options
     );
+  }
+  public get text(): string {
+    return editorLocalization
+      .getString("pe.columnEdit")
+      ["format"](this.item.name);
   }
 }
 
