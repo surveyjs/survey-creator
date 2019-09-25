@@ -84,7 +84,6 @@ export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem 
   protected createSurveyQuestionEditor() {
     return new SurveyQuestionEditor(
       this.item,
-      null,
       "multipletextitem",
       this.options
     );

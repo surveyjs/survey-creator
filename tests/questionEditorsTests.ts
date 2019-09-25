@@ -9,6 +9,7 @@ import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionE
 import { SurveyCreator } from "../src/editor";
 import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
 import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/propertyMultipleValuesEditor";
+import { EditorOptionsTests } from "./editorOptionsTests";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -16,7 +17,7 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
   var dropdownQuestion = new Survey.QuestionDropdown("q1");
   dropdownQuestion.choices = ["item1"];
   dropdownQuestion.visibleIf = "true";
-  var properties = new SurveyQuestionProperties(dropdownQuestion, null);
+  var properties = new SurveyQuestionProperties(dropdownQuestion);
 
   var property = properties.getProperty("choices");
   var tab = new SurveyQuestionEditorTab(
@@ -67,7 +68,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   var dropdownQuestion = new Survey.QuestionDropdown("q1");
   dropdownQuestion.visibleIf = "true";
   var changeCounter = 0;
-  var editor = new SurveyQuestionEditor(dropdownQuestion, null);
+  var editor = new SurveyQuestionEditor(dropdownQuestion);
   editor.onChanged = function() {
     changeCounter++;
   };
@@ -97,7 +98,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
 
 QUnit.test("Question Editor preserve title on tab changed", function(assert) {
   var dropdownQuestion = new Survey.QuestionDropdown("q1");
-  var editor = new SurveyQuestionEditor(dropdownQuestion, null);
+  var editor = new SurveyQuestionEditor(dropdownQuestion);
   var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
   generalTab.properties.rows[1].properties[0].editor.koValue("new title");
   editor.koActiveTab("choices");
@@ -112,7 +113,7 @@ QUnit.test("Question Editor preserve title on tab changed", function(assert) {
 
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
-  var editor = new SurveyQuestionEditor(radioGroupQuestion, null);
+  var editor = new SurveyQuestionEditor(radioGroupQuestion);
   assert.equal(editor.koTabs().length, 5, "There are 5 tabs");
   assert.equal(
     editor.koTabs()[1].name,
@@ -135,7 +136,7 @@ QUnit.test("Hide a tab if it's visible attribute set to false", function(
     ]
   };
   var htmlQuestion = new Survey.QuestionHtml("q1");
-  var editor = new SurveyQuestionEditor(htmlQuestion, null);
+  var editor = new SurveyQuestionEditor(htmlQuestion);
   assert.equal(editor.koTabs().length, 1, "There is one visible tab");
   assert.equal(
     editor.koTabs()[0].name,
@@ -153,10 +154,9 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
   ) {
     return property.name != "visibleIf" && property.name != "startWithNewLine";
   };
-  var editor = new SurveyQuestionEditor(
-    radioGroupQuestion,
-    onCanShowPropertyCallback
-  );
+  var options = new EditorOptionsTests();
+  options.onCanShowPropertyCallback = onCanShowPropertyCallback;
+  var editor = new SurveyQuestionEditor(radioGroupQuestion, null, options);
   assert.equal(editor.koTabs().length, 4, "There are 4 tabs");
   assert.equal(
     editor.koTabs()[1].name,
@@ -278,7 +278,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
   );
 
   var question = { getType: () => "@testClass" };
-  var editor = new SurveyQuestionEditor(<any>question, null);
+  var editor = new SurveyQuestionEditor(<any>question);
 
   var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
   assert.equal(editor.koTabs().length, 3, "There are three tabs");
@@ -388,7 +388,6 @@ QUnit.test("Question editor: custom errors", function(assert) {
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["name", "title"],
-    null,
     editor
   );
   assert.equal(
@@ -422,7 +421,6 @@ QUnit.test("Question editor: custom errors on required field", function(
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["name"],
-    null,
     editor
   );
   assert.equal(
@@ -470,7 +468,6 @@ QUnit.test("Question editor: custom errors on unique itemvalues", function(
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["choices"],
-    null,
     editor
   );
   assert.equal(
@@ -492,7 +489,6 @@ QUnit.test("Question editor: required field errors", function(assert) {
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["name"],
-    null,
     editor
   );
   var nameEditor = properties.rows[0].properties[0].editor;
@@ -531,7 +527,6 @@ QUnit.test("Question editor: on property value changing", function(assert) {
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["targetEntity", "targetField"],
-    null,
     editor
   );
   var entityEditor = properties.rows[0].properties[0].editor;
@@ -575,7 +570,6 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["targetEntity", "targetField"],
-    null,
     editor
   );
   var entityEditor = properties.rows[0].properties[0].editor;
@@ -601,7 +595,6 @@ QUnit.test("Question editor: change editor.readOnly", function(assert) {
   var properties = new SurveyQuestionEditorProperties(
     question,
     ["name"],
-    null,
     editor
   );
   var questionEditor = properties.rows[0].properties[0].editor;
@@ -640,7 +633,7 @@ Survey.Serializer.addClass(
 
 QUnit.test("Question editor: build properties on fly", function(assert) {
   var obj = new SurveyQuestionEditorTester();
-  var elementEditor = new SurveyQuestionEditor(obj, null, null, null);
+  var elementEditor = new SurveyQuestionEditor(obj);
   assert.equal(elementEditor.koTabs().length, 1, "There are one tab");
   var tab = elementEditor.koTabs()[0];
   assert.equal(
@@ -654,7 +647,7 @@ QUnit.test("Question editor: build properties on fly", function(assert) {
 
 QUnit.test("Question editor: change copied object", function(assert) {
   var survey = new Survey.Survey({ locale: "de", title: "Survey" });
-  var editor = new SurveyQuestionEditor(survey, null, null, null);
+  var editor = new SurveyQuestionEditor(survey);
   assert.ok(editor.editableObj, "copiedObj exists");
   assert.equal(editor.editableObj.locale, "de", "localed copied correctly");
   var propLocale = editor.getPropertyEditorByName("locale");
@@ -673,13 +666,13 @@ QUnit.test(
     var panel = page.addNewPanel("panel1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = panel.addNewQuestion("text", "q2");
-    var editor = new SurveyQuestionEditor(q1, null, null, null);
+    var editor = new SurveyQuestionEditor(q1);
     assert.equal(
       editor.editableObj.parent.name,
       "page1",
       "copied object has page as parent"
     );
-    editor = new SurveyQuestionEditor(q2, null, null, null);
+    editor = new SurveyQuestionEditor(q2);
     assert.equal(
       editor.editableObj.parent.name,
       "panel1",
@@ -702,7 +695,7 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
 
   var question = new Survey.QuestionText("q1");
 
-  var editor = new SurveyQuestionEditor(question, null, null, null);
+  var editor = new SurveyQuestionEditor(question);
   var tab = editor.koTabs()[0];
   var prop1 = tab.getPropertyEditorByName("inputType");
   var prop2 = tab.getPropertyEditorByName("customProp1");
@@ -755,7 +748,7 @@ QUnit.test("DependedOn properties, dynamic choices", function(assert) {
 
   var question = new Survey.QuestionText("q1");
 
-  var editor = new SurveyQuestionEditor(question, null, null, null);
+  var editor = new SurveyQuestionEditor(question);
   var tab = editor.koTabs()[0];
   var entityProp = tab.getPropertyEditorByName("targetEntity");
   var fieldProp = tab.getPropertyEditorByName("targetField");
@@ -801,7 +794,7 @@ QUnit.test("DependedOn properties + multiple, dynamic choices", function(
 
   var question = new Survey.QuestionText("q1");
 
-  var editor = new SurveyQuestionEditor(question, null, null, null);
+  var editor = new SurveyQuestionEditor(question);
   var tab = editor.koTabs()[0];
   var entityProp = tab.getPropertyEditorByName("targetEntity");
   var fieldProp = tab.getPropertyEditorByName("targetField");

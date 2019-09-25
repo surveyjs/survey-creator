@@ -20,10 +20,6 @@ export class SurveyObjectEditor {
     (sender: SurveyObjectEditor, options: any) => any,
     any
   >();
-  public onCanShowPropertyCallback: (
-    object: any,
-    property: Survey.JsonObjectProperty
-  ) => boolean;
   public onSortPropertyCallback: (
     object: any,
     property1: Survey.JsonObjectProperty,
@@ -169,7 +165,7 @@ export class SurveyObjectEditor {
     return SurveyHelper.isPropertyVisible(
       this.selectedObject,
       property,
-      this.onCanShowPropertyCallback
+      this.propertyEditorOptions
     );
   }
   protected updatePropertiesObject() {

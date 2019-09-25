@@ -113,7 +113,6 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
   protected createSurveyQuestionEditor() {
     return new SurveyQuestionEditor(
       this.column,
-      null,
       "matrixdropdowncolumn@" + this.column.cellType,
       this.options
     );

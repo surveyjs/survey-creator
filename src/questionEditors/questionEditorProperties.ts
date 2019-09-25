@@ -126,18 +126,10 @@ export class SurveyQuestionEditorRow {
 export class SurveyQuestionEditorProperties {
   public isTabProperty: boolean = false;
   private properties: Array<Survey.JsonObjectProperty>;
-  private onCanShowPropertyCallback: (
-    object: any,
-    property: Survey.JsonObjectProperty
-  ) => boolean;
   public rows: Array<SurveyQuestionEditorRow> = [];
   constructor(
     public obj: Survey.Base,
     properties: Array<any>,
-    onCanShowPropertyCallback: (
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) => boolean = null,
     public options: ISurveyObjectEditorOptions = null,
     private tab: any = null,
     private getEditorPropertyByName: (
@@ -145,7 +137,6 @@ export class SurveyQuestionEditorProperties {
     ) => SurveyQuestionEditorProperty = null
   ) {
     this.isTabProperty = !!tab;
-    this.onCanShowPropertyCallback = onCanShowPropertyCallback;
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildRows(properties);
   }
@@ -253,11 +244,8 @@ export class SurveyQuestionEditorProperties {
       this.tab.visible === true
     )
       return property;
-    return SurveyHelper.isPropertyVisible(
-      this.obj,
-      property,
-      this.onCanShowPropertyCallback
-    )
+
+    return SurveyHelper.isPropertyVisible(this.obj, property, this.options)
       ? property
       : null;
   }

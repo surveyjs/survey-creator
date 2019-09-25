@@ -18,7 +18,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
       }
       var editor =
         newValue != null
-          ? new SurveyQuestionEditor(newValue.obj, null, null, self.options)
+          ? new SurveyQuestionEditor(newValue.obj, null, self.options)
           : null;
       self.selectedObjectEditor(editor);
     });

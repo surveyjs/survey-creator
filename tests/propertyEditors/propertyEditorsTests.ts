@@ -1354,6 +1354,37 @@ QUnit.test("SurveyPropertyMultipleValuesEditor - categories ", function(
   Survey.Serializer.removeProperty("question", "multiple");
 });
 
+/* Requires some refactoring before implementing this functionality
+QUnit.test("SurveyPropertyItemValuesEditor + koShowDetails", function(assert) {
+  var survey = new Survey.Survey();
+  var p = survey.addNewPage();
+  var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+  q.choices = [1, 2, 3];
+  survey.locale = "en";
+  q.choices[0].text = "English 1";
+
+  var property = Survey.Serializer.findProperty("selectbase", "choices");
+  var propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property, null)
+  );
+  assert.equal(propEditor.koHasDetails(), true);
+  propEditor.object = q;
+  propEditor.beforeShow();
+  assert.equal(propEditor.koHasDetails(), true, "Detail buttons are here");
+  var tabs =
+    SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
+  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [];
+  propEditor.beforeShow();
+  assert.equal(propEditor.koHasDetails(), false, "Detail buttons are hidden");
+  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = tabs;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.koHasDetails(),
+    true,
+    "Detail buttons are shown again"
+  );
+});
+*/
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [

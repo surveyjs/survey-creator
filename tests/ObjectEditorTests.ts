@@ -193,13 +193,15 @@ QUnit.test(
   }
 );
 QUnit.test("Use onCanShowPropertyCallback", function(assert) {
-  var editor = new SurveyObjectEditor();
-  editor.onCanShowPropertyCallback = function(
+  var options = new EditorOptionsTests();
+  options.onCanShowPropertyCallback = function(
     object: any,
     property: Survey.JsonObjectProperty
   ) {
     return property.name == "title";
   };
+  var editor = new SurveyObjectEditor(options);
+
   var car = new TruckDefaultValue();
   editor.selectedObject = car;
   assert.equal(

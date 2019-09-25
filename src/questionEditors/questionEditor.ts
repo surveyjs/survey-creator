@@ -18,10 +18,6 @@ import { EditableObject } from "../propertyEditors/editableObject";
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
   koEditor: any;
-  public onCanShowPropertyCallback: (
-    object: any,
-    property: Survey.JsonObjectProperty
-  ) => boolean;
   constructor() {
     this.koVisible = ko.observable(false);
     this.koEditor = ko.observable(null);
@@ -33,12 +29,7 @@ export class SurveyPropertyEditorShowWindow {
     options: ISurveyObjectEditorOptions = null,
     onClosed: () => any = null
   ) {
-    var editor = new SurveyQuestionEditor(
-      question,
-      this.onCanShowPropertyCallback,
-      null,
-      options
-    );
+    var editor = new SurveyQuestionEditor(question, null, options);
     editor.onChanged = onChanged;
 
     this.koEditor(editor);
@@ -74,10 +65,7 @@ export class SurveyQuestionProperties {
   private editorDefinition: Array<ISurveyQuestionEditorDefinition>;
   constructor(
     public obj: any,
-    public onCanShowPropertyCallback: (
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) => boolean
+    public options: ISurveyObjectEditorOptions = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.editorDefinition = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
@@ -87,11 +75,7 @@ export class SurveyQuestionProperties {
   public getProperty(propertyName: string): Survey.JsonObjectProperty {
     var property = this.getPropertyCore(propertyName);
     if (!property) return null;
-    return SurveyHelper.isPropertyVisible(
-      this.obj,
-      property,
-      this.onCanShowPropertyCallback
-    )
+    return SurveyHelper.isPropertyVisible(this.obj, property, this.options)
       ? property
       : null;
   }
@@ -117,11 +101,7 @@ export class SurveyQuestionProperties {
         prop =>
           !!prop &&
           ((prop.name == tab.name && tab.visible === true) ||
-            SurveyHelper.isPropertyVisible(
-              this.obj,
-              prop,
-              this.onCanShowPropertyCallback
-            ))
+            SurveyHelper.isPropertyVisible(this.obj, prop, this.options))
       );
   }
 }
@@ -142,10 +122,6 @@ export class SurveyQuestionEditor {
 
   constructor(
     obj: any,
-    public onCanShowPropertyCallback: (
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) => boolean,
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null
   ) {
@@ -154,10 +130,7 @@ export class SurveyQuestionEditor {
     if (!this.className && this.obj.getType) {
       this.className = this.obj.getType();
     }
-    this.properties = new SurveyQuestionProperties(
-      obj,
-      onCanShowPropertyCallback
-    );
+    this.properties = new SurveyQuestionProperties(obj, this.options);
     self.onApplyClick = function() {
       self.apply();
     };
@@ -276,7 +249,6 @@ export class SurveyQuestionEditor {
     var properties = new SurveyQuestionEditorProperties(
       this.editableObj,
       SurveyQuestionEditorDefinition.getProperties(this.className),
-      this.onCanShowPropertyCallback,
       this.options,
       null,
       function(propName: string) {
@@ -289,9 +261,6 @@ export class SurveyQuestionEditor {
       );
     }
     this.addPropertiesTabs(tabs);
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].onCanShowPropertyCallback = this.onCanShowPropertyCallback;
-    }
     return tabs;
   }
   private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
@@ -306,7 +275,6 @@ export class SurveyQuestionEditor {
           new SurveyQuestionEditorProperties(
             this.obj,
             properties,
-            this.onCanShowPropertyCallback,
             this.options,
             tabItem,
             function(propName: string) {

@@ -1,6 +1,6 @@
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
-import { Helpers } from "survey-knockout";
+import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 
 export enum ObjType {
   Unknown,
@@ -92,10 +92,7 @@ export class SurveyHelper {
   public static isPropertyVisible(
     obj: any,
     property: Survey.JsonObjectProperty,
-    onCanShowPropertyCallback: (
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) => boolean = null
+    options: ISurveyObjectEditorOptions = null
   ): boolean {
     if (!property || !property.visible) return false;
     if (
@@ -104,8 +101,12 @@ export class SurveyHelper {
       !(<any>property["isVisible"])(obj.getLayoutType(), null)
     )
       return false;
-    if (onCanShowPropertyCallback && !onCanShowPropertyCallback(obj, property))
-      return false;
+    var canShow = !!options
+      ? (object: any, property: Survey.JsonObjectProperty) => {
+          return options.onCanShowPropertyCallback(object, property);
+        }
+      : null;
+    if (!!canShow && !canShow(obj, property)) return false;
     return true;
   }
   public static scrollIntoViewIfNeeded(el: HTMLElement) {

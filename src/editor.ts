@@ -826,12 +826,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedo = new SurveyUndoRedo();
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
-    this.selectedObjectEditorValue.onCanShowPropertyCallback = function(
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) {
-      return self.onCanShowObjectProperty(object, property);
-    };
     this.selectedObjectEditorValue.onSortPropertyCallback = function(
       obj: any,
       property1: Survey.JsonObjectProperty,
@@ -863,12 +857,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.onPropertyAfterRender.fire(self, options);
     };
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
-    this.questionEditorWindow.onCanShowPropertyCallback = function(
-      object: any,
-      property: Survey.JsonObjectProperty
-    ) {
-      return self.onCanShowObjectProperty(object, property);
-    };
     this.surveyLive = new SurveyLiveTester(this);
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.translationValue = new Translation(
@@ -2628,6 +2616,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       tabData
     });
   };
+  onCanShowPropertyCallback(
+    object: any,
+    property: Survey.JsonObjectProperty
+  ): boolean {
+    return this.onCanShowObjectProperty(object, property);
+  }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
