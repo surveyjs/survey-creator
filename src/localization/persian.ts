@@ -4,17 +4,24 @@ var persianStrings = {
   //survey templates
   survey: {
     edit: "ویرایش",
+    externalHelpLink: "Watch and learn how to create surveys",
+    externalHelpLinkUrl:
+        "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "لطفا از جعبه ابزار سوالی در اینجا قرار دهید",
     copy: "کپی",
     addToToolbox: "افزودن به جعبه ابزار",
     deletePanel: "حذف پنل",
     deleteQuestion: "حذف سوال",
-    convertTo: "تبدیل به"
+    convertTo: "تبدیل به",
+    drag: "Drag element"
+
   },
   //questionTypes
   qt: {
+    default: "Default",
     checkbox: "چند انتخابی",
     comment: "نظر",
+    imagepicker: "Image picker",
     dropdown: "لیست انتخابی",
     file: "فایل",
     html: "Html",
@@ -28,12 +35,17 @@ var persianStrings = {
     rating: "رتبه بندی",
     text: "متن تک خطی",
     boolean: "صحیح و غلط",
-    expression: "توصیفی"
+    expression: "توصیفی",
+    flowpanel: "Flow Panel"
   },
   //Strings in Editor
   ed: {
     defaultLocale: "پیش فرض ({0})",
     survey: "نظرسنجی",
+    settings: "Survey Settings",
+    opjectPropertiesHeader: "Advanced",
+    showObjectProperties: "Show Object Properties",
+    hideObjectProperties: "Hide Object Properties",
     editSurvey: "ویرایش نظرسنجی",
     addNewPage: "درج صفحه جدید",
     moveRight: "اسکرول به راست",
@@ -44,9 +56,11 @@ var persianStrings = {
     newPageName: "صفحه",
     newQuestionName: "سوال",
     newPanelName: "پنل",
+    newTextItemName: "text",
     testSurvey: "آزمایش نظرسنجی",
     testSurveyAgain: "آزمایش دوباره نظرسنجی",
     testSurveyWidth: "عرض نظرسنجی: ",
+    logic: "Survey Logic",
     embedSurvey: "نظرسنجی توکار",
     translation: "ترجمه",
     saveSurvey: "ذخیره نظرسنجی",
@@ -79,7 +93,78 @@ var persianStrings = {
     translationNoStrings: "هیچ عبارتی برای ترجمه نیست، لطفا فیلتر را عوض کنید.",
     translationExportToSCVButton: "برون بری به CSV",
     translationImportFromSCVButton: "برون ریزی از CSV",
-    translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض"
+    translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
+    bold: "Bold",
+    italic: "Italic",
+    underline: "Underline",
+    fpAddQuestion: "Add question...",
+    completedHtmlOnConditionItemText: "Show if:",
+    lg: {
+      //Logic tab strings
+      page_visibilityName: "قابلیت رویت صفحه ",
+      panel_visibilityName: "قابلیت رویت پنل",
+      panel_enableName: "فعال/غیرفعال کردن پنل ",
+      question_visibilityName: " قابلیت رویت سوال",
+      question_enableName: "فعال/غیرفعال کردن سوال ",
+      question_requireName: "سوال اختیاری موردنیاز",
+      trigger_completeName: "تکمیل نظرسنجی",
+      trigger_setvalueName: "تنظیم عنوان سوال",
+      trigger_copyvalueName: "کپی مقدار سوال",
+      trigger_skipName: "رد کردن سوال ",
+      trigger_runExpressionName: "اجرای متن شفارشی مورد نظر",
+      completedHtmlOnConditionName: "متن سفارشی صفحه 'تشکر' ",
+
+      page_visibilityDescription:
+          "زمانی که عبارت منطقی مقدار صحیح برمی گرداند صفحه را قابل مشاهده کنید، در غیراینصورت آن را غیرقابل مشاهده نگه دارید.",
+      panel_visibilityDescription:
+          "اگر عبارت منطقی مقدار صحیح بر میگرداند، پنل را فعال کنید، در غیر اینصورت آن را غیرقابل مشاهده نگه دارید.",
+      panel_enableDescription:
+          "یک پنل ایجاد کنید و همه المان های داخل آن را در صورتی که عبارت منطقی مقدار صحیح بر می گرداند را فعال کنید، در غیر اینصورت آن ها را غیرفعال نگه دارید.",
+      question_visibilityDescription:
+          "زمانی که عبارت منطقی مقدار صحیح را برمی گرداند، سوال را قابل مشاهده کنید، در غیر اینصورت آن را غیرمشاهده نگه دارید.",
+      question_enableDescription:
+          "زمانی که عبارت منطقی مقدار صحیح برمی گرداند، سوال را فعال کنید، در غیر اینصورت آن را غیرفعال نگه دارید.",
+      question_requireDescription:
+          "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، سوال اجبار ی می شود.",
+      trigger_completeDescription:
+          "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، و بررسی تکمیل می شود،کاربر نهایی صفحه 'تشکر' را مشاهده می کند.",
+      trigger_setvalueDescription:
+          "زمانی که مقدار سوالی که در عبارت منطقی استفاده شده است تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، آنگاه مقدار برای سوال انتخاب شده تنظیم می شود.",
+      trigger_copyvalueDescription:
+          "زمانی که مقدارهای سوال که در عبارت منطقی استفاده شده اند، تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، سپس مقدار یکی از سوال های انتخاب شده در سوال دیگر انتخاب شده کپی می شود.",
+      trigger_skipDescription:
+          "When the logic expression returns true then the survey skip to / focus the selected question.",
+      trigger_runExpressionDescription:
+          "اگر عبارت منطقی مقدار صحیح برگرداند، آنگاه عبارت سفارشی اجرا می شود. شما ممکن است به طور اختیاری این نتیجه را به سوال انتخاب شده تبدیل کنید.",
+      completedHtmlOnConditionDescription:
+          " اگر عبارت منطقی مقدار صحیح برگرداند متن صفحه 'تشکر' به متن داده شده تغییر می یابد.",
+
+      itemExpressionText: "زمانی که عبارت {0} مقدار صحیح بر می گرداند", //{0} - the expression
+      page_visibilityText: "صفحه {0} را قابل مشاهده کنید.", //{0} page name
+      panel_visibilityText: "پنل {0} را قابل مشاهده کنید.", //{0} panel name
+      panel_enableText: "فعال کردن پنل {0}", //{0} panel name
+      question_visibilityText: "سوال {0} را قابل مشاهده کنید.", //{0} question name
+      question_enableText: "فعال کردن سوال {0}", //{0} question name
+      question_requireText: "ایجاد سوال {0} اجباری", //{0} question name
+      trigger_completeText: "بررسی نظرسنجی تمام شد",
+      trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
+      trigger_copyvalueText: "مقدار سوال {0} را از سوال {1} کپی کنید.", //{0} and {1} question names
+      trigger_skipText: "رد کردن نظرسنجی برای سوال {0}", //{0} question name
+      trigger_runExpressionText1: "اجرای عبارت '{0}' ", //{0} the expression
+      trigger_runExpressionText2: "و نتیجه آن را داخل سوال {0} ذخیره کنید", //{0} question name
+      completedHtmlOnConditionText:
+          "نمایش متن سفارشی برای صفحه 'تشکر'",
+
+      expressionEditorTitle: "عبارت منطقی را تنظیم کنید",
+
+      deleteOperation: "حذف عملکرد",
+      addNewOperation: "اضافه کردن سوال (های) جدید",
+
+      expressionInvalid:
+          "عبارت منطقی خالی یا نادرست است. لطفا آن را تضحیح کنید",
+      noOperationError: "لطفا حداقل یک عملکرد را اضافه نمایید",
+      operationInvalid: "لطفا مشکلات مربوط به عملکرد(های) خود را برطرف نمایید."
+    }
   },
   //Property names in table headers
   pel: {
@@ -89,31 +174,54 @@ var persianStrings = {
   pe: {
     apply: "اعمال",
     ok: "تایید",
+    save: "Save",
     cancel: "لغو",
     reset: "بازنشانی",
     close: "بستن",
     delete: "حذف",
+    add: "Add",
     addNew: "افزودن",
+    addItem: "برای اضافه کردن یک آیتم کلیک کنید...",
+    addOther: "سایر",
+    addSelectAll: "انتخاب همه",
+    addNone: "هیچکدام",
     removeAll: "حذف همه",
     edit: "ویرایش",
+    back: "بازگشت بدون ذخیره",
+    saveAndBack: "ذخیره و بازگشت",
+    itemValueEdit: "قابل مشاهده اگر",
+    editChoices: "ویرایش انتخاب ها",
+    move: "جابجایی",
     empty: "<خالی>",
+    notEmpty: "<ویرایش مقدار>",
     fastEntry: "تکمیل سریع",
     formEntry: "تکمیل فرم",
     testService: "بررسی سرویس",
+    itemSelectorEmpty: "لطفا یک المان را انتخاب کنید ",
+    conditionSelectQuestion: "انتخاب سوال...",
+    conditionSelectPage: "انتخاب صفحه...",
+    conditionSelectPanel: "انتخاب پنل...",
+    conditionValueQuestionTitle: "لطفا مقدار را انتخاب / وارد کنید",
+    conditionButtonAdd: "اضافه",
+    conditionButtonReplace: "جایگزین",
     conditionHelp:
       "لطفا یک مقدار بولین توصیفی وارد کنید که صحیح یا غلط را برگرداند تا صفحه سوالات نمایش داده شود. برای مثال: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "لطفا یک عبارت توصیفی را وارد کنید. شما ممکن است از کروشه برای دسترسی به مقدار سوالات استفاده کنید. برای مثال: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
-
     aceEditorHelp: "برای مشاهده نکات تکمیلی ctrl+space را بفشارید",
     aceEditorRowTitle: "سطر فعلی",
     aceEditorPanelTitle: "پنل فعلی",
     showMore: "برای اطلاعات بیشتر لطفا سند راهنما را مطالعه کنید",
+    conditionShowMoreUrl:
+        "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "سوالات موجود:",
+    cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
 
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     value: "مقدار",
     text: "متن",
+    rowid: "Row ID",
+    imageLink: "لینک تصویر",
     columnEdit: "ویرایش ستون: {0}",
     itemEdit: "ویرایش آیتم: {0}",
 
@@ -123,6 +231,14 @@ var persianStrings = {
     titleName: "نام عنوان",
 
     hasOther: "دارای آیتم دیگر",
+    otherText: "سایر آیتم های متن",
+    hasNone: "هیچ آیتمی ندارد",
+    noneText: "هیچ آیتم متنی وجود ندارد",
+    hasSelectAll: "همه موارد انتخاب شده است",
+    selectAllText: "انتخاب همه آیتم های متن",
+    choicesMin: "حداقل مقدار برای ایجاد خودکار آیتم ها",
+    choicesMax: "حداکثر مقدار برای ایجاد خود آیتم ها",
+    choicesStep: "تفاوت بین موارد تولید شده خودکار",
     name: "نام",
     title: "عنوان",
     cellType: "نوع سلول",
@@ -130,6 +246,8 @@ var persianStrings = {
     choicesOrder: "ترتیب گزینه را انتخاب کنید",
     visible: "نمایش داده شود؟",
     isRequired: "ضروری است؟",
+    isAllRowRequired: "نیاز به پاسخ برای همه سطرها",
+    requiredErrorText: "متن خطای موردنیاز",
     startWithNewLine: "با سطر جدید شروع شود؟",
     rows: "تعداد سطر",
     placeHolder: "نگهدارنده متن",
@@ -139,19 +257,30 @@ var persianStrings = {
     imageHeight: "ارتفاع تصویر",
     imageWidth: "عرض تصویر",
     rowCount: "تعداد سطر",
+    columnLayout: "قالب ستون ها",
+    addRowLocation: "اضافه کردن موقعیت دکمه سطری",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
+    rateMin: "حداقل میزان",
+    rateMax: "حداکثر میزان",
+    rateStep: "میزان مراحل",
     minRateDescription: "توضیح حداقل امتیاز",
     maxRateDescription: "توضیح حداکثر امتیاز",
     inputType: "نوع ورودی",
     optionsCaption: "نوشته انتخاب ها",
     defaultValue: "مقدار پیش فرض",
+    cellsDefaultRow: "متن پیش فرض سلول ها",
 
     surveyEditorTitle: "ویرایش نظرسنجی",
     qEditorTitle: "ویرایش سوال: {0}",
+
+    maxLength: "ماکزیمم طول",
+
     //survey
     showTitle: "نمایش/پنهان کردن عنوان",
     locale: "زبان پیش فرض",
+    simulator: "انتخاب دستگاه",
+    landscapeOrientation: "Landscape",
     mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
@@ -189,6 +318,23 @@ var persianStrings = {
     panelAddText: "متن افزودن پنل",
     panelRemoveText: "متن حذف پنل",
     isSinglePage: "نمایش تمام المان ها در یک صفحه",
+    html: "Html",
+    expression: "عبارت",
+
+    minValue: "حداقل مقدار",
+    maxValue: "حداکثر مقدار",
+    minLength: "حداقل طول",
+    allowDigits: "امکان ورود اعداد",
+    minCount: "حداقل تعداد ",
+    maxCount: "حداکثر مقدار",
+    regex: "فرمت صحیح عبارت ",
+
+    totalText: "متن کامل",
+    totalType: "نوع کامل",
+    totalExpression: "عبارت کامل",
+    totalDisplayStyle: "سبک نمایش کل",
+    totalCurrency: "مجموع ارز",
+    totalFormat: "مجموع فرمت",
 
     tabs: {
       general: "عمومی",
@@ -197,7 +343,10 @@ var persianStrings = {
       columns: "ستون ها",
       rows: "سطرها",
       choices: "انتخاب ها",
+      items: "آیتم ها",
       visibleIf: "نمایش در صورت",
+      enableIf: "فعال اگر",
+      requiredIf: "مورد نیاز ااگر",
       rateValues: "مقادیر رتبه بندی",
       choicesByUrl: "انتخاب ها از وب",
       matrixChoices: "انتخاب های پیشفرض",
@@ -206,10 +355,13 @@ var persianStrings = {
       navigation: "ناوبری",
       question: "سوال",
       completedHtml: "HTML صفحه تکمیل نظرسنجی",
+      completedHtmlOnCondition: "Html در شرط کامل شد",
       loadingHtml: "HTML بارگزاری",
       timer: "زمان سنج/کوئیز",
+      calculatedValues: "مقادیر محاسبه شد",
       triggers: "اجرا کننده",
-      templateTitle: "عنوان قالب"
+      templateTitle: "عنوان قالب",
+      totals: "جمع کل"
     },
     editProperty: "ویرایش خصوصیت '{0}'",
     items: "[ آیتم ها: {0} ]",
@@ -224,8 +376,11 @@ var persianStrings = {
     triggerNotSet: "اجرا کننده تنظیم نشده.",
     triggerRunIf: "اجرا در صورت",
     triggerSetToName: "تعییر مقدار از: ",
+    triggerFromName: "کپی مقدار از: ",
+    triggerRunExpression: "اجرای این عبارت",
     triggerSetValue: "به: ",
-    triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه"
+    triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه",
+    triggerRunExpressionEmpty: "لطفا عبارت معتبری وارد نمایید"
   },
   //Property values
   pv: {
@@ -295,6 +450,8 @@ var persianStrings = {
     notequal: "مساوی نباشد",
     contains: "شامل",
     notcontains: "شامل نباشد",
+    anyof: "هرکدام",
+    allof: "همه",
     greater: "بزرگتر",
     less: "کوچکتر",
     greaterorequal: "بزرگتر یا مساوی",
@@ -331,6 +488,9 @@ var persianStrings = {
   triggers: {
     completetrigger: "تکمیل نظرسنجی",
     setvaluetrigger: "تنظیم مقدار",
+    copyvaluetrigger: "کپی مقدار",
+    skiptrigger: "رد کردن سوال ",
+    runexpressiontrigger: "اجرای عبارت",
     visibletrigger: "تغییر وضعیت دیده شدن"
   },
   //Properties
@@ -339,22 +499,23 @@ var persianStrings = {
     title: { name: "عنوان", title: "اگر خالی باشد مانند نام درج می شود" },
     survey_title: { name: "عنوان", title: "در تمام صفحات دیده می شود" },
     page_title: { name: "عنوان", title: "عنوان صفحه" },
-    
+
+
     navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
     questionsOrder: "ترتیب سوالات",
     maxTimeToFinish: "حداکثر زمان برای تکمیل",
 
     visible: "آشکار",
     visibleIf: "آشکار اگر",
-    questionTitleLocation: "questionTitleLocation",
+    questionTitleLocation: "موقعیت عنوان سوال",
     description: "توضیحات",
     state: "وضعیت",
     isRequired: "اجباری؟",
     requiredIf: "اجبار اگر؟",
     indent: "indent",
-    requiredErrorText: "requiredErrorText",
-    startWithNewLine: "startWithNewLine",
-    innerIndent: "innerIndent",
+    requiredErrorText: "متن خطای اجباری",
+    startWithNewLine: "شروع با خط جدید ",
+    innerIndent: "تو رفتگی داخلی",
     page: "صفحه",
 
     width: "عرض",
