@@ -1381,6 +1381,28 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.stateValue = value;
     this.koState(this.state);
   }
+  /**
+   * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
+   * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
+   * @see isAutoSave
+   */
+  public autoSaveDelay: number = 500;
+  private autoSaveTimerId = null;
+  protected doAutoSave() {
+    if (this.autoSaveDelay <= 0) {
+      this.doSave();
+      return;
+    }
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+    }
+    var self = this;
+    this.autoSaveTimerId = setTimeout(function() {
+      clearTimeout(self.autoSaveTimerId);
+      self.autoSaveTimerId = null;
+      self.doSave();
+    }, this.autoSaveDelay);
+  }
   saveNo: number = 0;
   protected doSave() {
     this.setState("saving");
@@ -1408,7 +1430,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.setState("modified");
     this.setUndoRedoCurrentState();
     this.onModified.fire(this, options);
-    this.isAutoSave && this.doSave();
+    this.isAutoSave && this.doAutoSave();
   }
   /**
    * Undo the latest user operation. Returns true if it performes successful.
