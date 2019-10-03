@@ -1354,8 +1354,9 @@ QUnit.test("SurveyPropertyMultipleValuesEditor - categories ", function(
   Survey.Serializer.removeProperty("question", "multiple");
 });
 
-/* Requires some refactoring before implementing this functionality
-QUnit.test("SurveyPropertyItemValuesEditor + koShowDetails", function(assert) {
+QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
+  assert
+) {
   var survey = new Survey.Survey();
   var p = survey.addNewPage();
   var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
@@ -1367,24 +1368,33 @@ QUnit.test("SurveyPropertyItemValuesEditor + koShowDetails", function(assert) {
   var propEditor = <SurveyPropertyItemValuesEditor>(
     SurveyPropertyEditorFactory.createEditor(property, null)
   );
-  assert.equal(propEditor.koHasDetails(), true);
   propEditor.object = q;
   propEditor.beforeShow();
-  assert.equal(propEditor.koHasDetails(), true, "Detail buttons are here");
+  assert.equal(
+    propEditor.koItems()[0].koHasDetails(),
+    true,
+    "Detail buttons are here for the first item"
+  );
   var tabs =
     SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
-  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [];
+  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+    { name: "general", visible: false }
+  ];
   propEditor.beforeShow();
-  assert.equal(propEditor.koHasDetails(), false, "Detail buttons are hidden");
+  assert.equal(
+    propEditor.koItems()[0].koHasDetails(),
+    false,
+    "Detail buttons are hidden"
+  );
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = tabs;
   propEditor.beforeShow();
   assert.equal(
     propEditor.koHasDetails(),
-    true,
+    propEditor.koItems()[0].koHasDetails(),
     "Detail buttons are shown again"
   );
 });
-*/
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [

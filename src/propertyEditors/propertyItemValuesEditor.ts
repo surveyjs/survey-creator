@@ -128,7 +128,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     nextValue = getNextValue(itemText, values);
 
-    var itemValue = this.createEditorItemCore(nextValue);
+    var itemValue = this.createEditorItemValueCore(nextValue);
     if (this.options) {
       this.options.onItemValueAddedCallback(
         this.object,
@@ -145,7 +145,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
   }
   protected createEditorItem(item: any): any {
-    var itemValue = this.createEditorItemCore(null);
+    var itemValue = this.createEditorItemValueCore(null);
     itemValue.setData(item);
     return new SurveyPropertyItemValuesEditorItem(
       itemValue,
@@ -154,7 +154,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       this.getItemValueClassName()
     );
   }
-  private createEditorItemCore(item: any) {
+  private createEditorItemValueCore(item: any) {
     var itemValue = Survey.Serializer.createClass(this.property.className);
     itemValue.setData(item);
 
@@ -277,8 +277,8 @@ export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEdit
   ) {
     super(item, getColumns, options);
   }
-  protected createSurveyQuestionEditor() {
-    return new SurveyQuestionEditor(this.item, this.className, this.options);
+  protected getClassName(): string {
+    return !!this.className ? this.className : this.obj.getType();
   }
 }
 

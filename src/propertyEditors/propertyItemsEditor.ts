@@ -46,7 +46,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     animation: 150
   };
   protected AddItem() {
-    this.koItems.push(this.createNewEditorItem());
+    this.koItems.push(this.createEditorItemCore());
   }
 
   protected setupItems() {
@@ -65,7 +65,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     var items = [];
     if (!value) value = this.editingValue;
     for (var i = 0; i < value.length; i++) {
-      items.push(this.createEditorItem(value[i]));
+      items.push(this.createEditorItemCore(value[i]));
     }
     return items;
   }
@@ -79,6 +79,15 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       items.push(this.createItemFromEditorItem(internalItems[i]));
     }
     this.setValueCore(items);
+  }
+  protected createEditorItemCore(item: any = null) {
+    var editorItem = !!item
+      ? this.createEditorItem(item)
+      : this.createNewEditorItem();
+    if (!!editorItem.onCreated) {
+      editorItem.onCreated();
+    }
+    return editorItem;
   }
   protected createNewEditorItem(): any {
     throw "Override 'createNewEditorItem' method";

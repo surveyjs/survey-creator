@@ -28,7 +28,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
       ["format"](this.koEditItem().column.name);
   }
   protected createNewEditorItem(): any {
-    var newColumn = this.createEditorItemCore(null);
+    var newColumn = this.createEditorColumnItemCore(null);
     newColumn.name = getNextValue("", this.getColumnNames());
     var columns = [];
     for (var i = 0; i < this.koItems().length; i++) {
@@ -49,7 +49,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     );
   }
   protected createEditorItem(item: any) {
-    var newColumn = this.createEditorItemCore(item);
+    var newColumn = this.createEditorColumnItemCore(item);
     return new SurveyPropertyMatrixDropdownColumnsItem(
       newColumn,
       () => this.columns,
@@ -62,7 +62,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     new Survey.JsonObject().toObject(json, newColumn);
     return newColumn;
   }
-  protected createEditorItemCore(item: any): Survey.MatrixDropdownColumn {
+  protected createEditorColumnItemCore(item: any): Survey.MatrixDropdownColumn {
     var newColumn = new Survey.MatrixDropdownColumn("");
     newColumn["object"] = this.object;
     newColumn.colOwner = this.object;
@@ -110,12 +110,8 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
       "colEdit"
     );
   }
-  protected createSurveyQuestionEditor() {
-    return new SurveyQuestionEditor(
-      this.column,
-      "matrixdropdowncolumn@" + this.column.cellType,
-      this.options
-    );
+  protected getClassName(): string {
+    return "matrixdropdowncolumn@" + this.obj["cellType"];
   }
 }
 

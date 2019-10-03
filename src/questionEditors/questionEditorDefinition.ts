@@ -340,6 +340,12 @@ export class SurveyQuestionEditorDefinition {
     }
     return properties;
   }
+  public static hasTabsToShow(className: string): boolean {
+    return (
+      SurveyQuestionEditorDefinition.isGeneralTabVisible(className) ||
+      SurveyQuestionEditorDefinition.getTabs(className).length > 0
+    );
+  }
   public static isGeneralTabVisible(className: string): boolean {
     var allDefinitions = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       className
