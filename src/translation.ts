@@ -308,7 +308,11 @@ export class Translation implements ITranslationLocales {
   private surveyValue: Survey.Survey;
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
     this.koLocales = ko.observableArray([
-      { locale: "", koVisible: ko.observable(true) }
+      {
+        locale: "",
+        koVisible: ko.observable(true),
+        koEnabled: ko.observable(true)
+      }
     ]);
     this.koRoot = ko.observable(null);
     this.koShowAllStrings = ko.observable(showAllStrings);
@@ -434,7 +438,11 @@ export class Translation implements ITranslationLocales {
     var res = [];
     var locs = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
-      locs[i].koVisible(selectedLocales.indexOf(locs[i].locale) > -1);
+      var enabled = this.isLocaleEnabled(locs[i].locale);
+      locs[i].koVisible(
+        enabled && selectedLocales.indexOf(locs[i].locale) > -1
+      );
+      locs[i].koEnabled(enabled);
     }
     return res;
   }
@@ -533,7 +541,13 @@ export class Translation implements ITranslationLocales {
   public mergeLocaleWithDefault() {
     if (!this.hasLocale(this.defaultLocale)) return;
     this.root.mergeLocaleWithDefault(this.defaultLocale);
-    this.koLocales([{ locale: "", koVisible: ko.observable(true) }]);
+    this.koLocales([
+      {
+        locale: "",
+        koVisible: ko.observable(true),
+        koEnabled: ko.observable(true)
+      }
+    ]);
     this.reset();
   }
   private updateItemWithStrings(
@@ -590,11 +604,22 @@ export class Translation implements ITranslationLocales {
     for (var i = 0; i < locs.length; i++) {
       var loc = locs[i];
       if (this.hasLocale(loc)) continue;
-      locales.push({ locale: loc, koVisible: ko.observable(true) });
+      var enabled = this.isLocaleEnabled(loc);
+      locales.push({
+        locale: loc,
+        koVisible: ko.observable(enabled),
+        koEnabled: ko.observable(enabled)
+      });
     }
     this.koLocales(locales);
     this.koCanMergeLocaleWithDefault(this.hasLocale(this.defaultLocale));
     this.updateAvailableTranlations();
+  }
+  private isLocaleEnabled(locale: string): boolean {
+    if (!locale) return true;
+    var supported = Survey.surveyLocalization.supportedLocales;
+    if (!supported || supported.length <= 0) return true;
+    return supported.indexOf(locale) > -1;
   }
   private updateAvailableTranlations() {
     var res = [];

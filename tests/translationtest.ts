@@ -193,6 +193,37 @@ QUnit.test("get/set the selected locales", function(assert) {
     "'it' is selected"
   );
 });
+QUnit.test("disable locales", function(assert) {
+  var survey = new Survey.Survey({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "question1",
+            title: {
+              default: "question 1",
+              fr: "quéstion 1",
+              it: "quéstion 1",
+              es: "quéstion 1"
+            },
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
+  });
+  Survey.surveyLocalization.supportedLocales = ["", "fr"];
+  var translation = new Translation(survey);
+  var locales = translation.koLocales();
+  assert.equal(locales.length, 4, "There are 3 locales");
+  assert.equal(locales[1].koEnabled(), true, "fr is enabled");
+  assert.equal(locales[2].koEnabled(), false, "it is disabled");
+  assert.equal(locales[1].koVisible(), true, "fr is visible");
+  assert.equal(locales[2].koVisible(), false, "it is invisible");
+  Survey.surveyLocalization.supportedLocales = [];
+});
 QUnit.test(
   "get/set the selected locales with inactive translation tab",
   function(assert) {
