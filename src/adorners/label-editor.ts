@@ -24,4 +24,4 @@ export var labelAdorner = {
   }
 };
 
-registerAdorner("label", labelAdorner);
+//registerAdorner("label", labelAdorner);
