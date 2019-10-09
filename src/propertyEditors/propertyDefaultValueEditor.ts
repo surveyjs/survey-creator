@@ -36,6 +36,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     delete json["visibleIf"];
     delete json["enable"];
     delete json["enableIf"];
+    delete json["valueName"];
   }
   public static createSurveyFromJsonQuestion(
     questionJson: any,
