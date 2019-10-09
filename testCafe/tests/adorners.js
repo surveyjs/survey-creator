@@ -43,15 +43,15 @@ test(`dropdown change item values`, async t => {
   //.wait(3000);
 });
 
-test(`boolean change title`, async t => {
-  await t
-    .click(`[title~=Boolean]`)
-    .click(`.label_editable > span`)
-    .typeText(`input:focus`, `puppies`)
-    .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.label_editable > span`).innerText)
-    .eql("question1puppies");
-});
+// test(`boolean change title`, async t => {
+//   await t
+//     .click(`[title~=Boolean]`)
+//     .click(`.label_editable > span`)
+//     .typeText(`input:focus`, `puppies`)
+//     .click(`input:focus+span.svda-edit-button`)
+//     .expect(Selector(`.label_editable > span`).innerText)
+//     .eql("question1puppies");
+// });
 
 test(`text change title`, async t => {
   await t
