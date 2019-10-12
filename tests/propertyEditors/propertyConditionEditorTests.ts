@@ -177,26 +177,29 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   assert.equal(editor.koCanAddCondition(), true, "empty doesn't require value");
 });
 
-QUnit.test("SurveyPropertyConditionEditor.addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", function(assert) {
-  var question = new Survey.QuestionText("q1");
-  var property = Survey.Serializer.findProperty("question", "visibleIf");
-  var editor = new SurveyPropertyConditionEditor(property);
-  editor.koAddConditionQuestion("q2");
-  editor.koAddConditionValue(JSON.stringify(["item1's"]));
-  editor.object = question;
-  editor.addCondition();
-  assert.equal(
-    editor.koTextValue(),
-    "{q2} = [\"item1\\'s\"]",
-    "Single quote escaped in condition"
-  );
-  // editor.apply();
-  // assert.equal(
-  //   question.visibleIf,
-  //   "{q2} = [\"item1\\'s\"]",
-  //   "Single quote escaped in condition"
-  // );
-});
+QUnit.test(
+  "SurveyPropertyConditionEditor.addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679",
+  function(assert) {
+    var question = new Survey.QuestionText("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.koAddConditionQuestion("q2");
+    editor.koAddConditionValue(JSON.stringify(["item1's"]));
+    editor.object = question;
+    editor.addCondition();
+    assert.equal(
+      editor.koTextValue(),
+      '{q2} = ["item1\\\'s"]',
+      "Single quote escaped in condition"
+    );
+    // editor.apply();
+    // assert.equal(
+    //   question.visibleIf,
+    //   "{q2} = [\"item1\\'s\"]",
+    //   "Single quote escaped in condition"
+    // );
+  }
+);
 
 QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
@@ -526,6 +529,36 @@ QUnit.test(
       editor.koAddConditionValue(),
       "",
       "Empty condition value on changing question name"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, question has defaultValue and user could not add condition with it, Bug# T2778 (customer marked it private)",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "radiogroup", choices: [1, 2, 3], defaultValue: 1 },
+        { name: "q2", type: "text" }
+      ]
+    });
+    var question = survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(editor.koCanAddCondition(), false, "There is no question set");
+    assert.equal(editor.koAddConditionValue(), "", "It is empty by default");
+    editor.koAddConditionQuestion("q1");
+    assert.equal(
+      editor.koAddConditionValue(),
+      "1",
+      "The value equals default value"
+    );
+    assert.equal(
+      editor.koCanAddCondition(),
+      true,
+      "The question has default value"
     );
   }
 );

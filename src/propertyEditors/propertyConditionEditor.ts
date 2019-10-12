@@ -95,6 +95,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public beforeShow() {
     super.beforeShow();
+    this.koAddConditionQuestion("");
     this.addConditionQuestionsHash = {};
     this.koAddConditionQuestions(this.allConditionQuestions);
   }
@@ -175,6 +176,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koHasValueSurvey(!!json && !!json.type);
     if (this.koHasValueSurvey()) {
       this.koValueSurvey(this.createValueSurvey(json, questionName));
+      var question = this.koValueSurvey().getQuestionByName("question");
+      if (!!question && !question.isEmpty()) {
+        this.koAddConditionValue(JSON.stringify(question.value));
+      }
     }
   }
   private deleteConditionProperties(json: any) {
