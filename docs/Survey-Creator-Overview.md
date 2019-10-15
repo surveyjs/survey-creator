@@ -636,6 +636,21 @@ Survey.Serializer.findProperty('question', "name").maxLength = 20;
 ```
 
 ---
+**maxValue** and **minValue**
+
+An optional numeric properties. They work for number properties. They limit the number value that user can enter in the property editor.
+
+The following code add a custom property into question and limits the value of this property between 0 and 100.
+```javascript
+Survey.Serializer.addProperty("question", {
+      name: "cost:number",
+      default: 5,
+      minValue: 0,
+      maxValue: 100
+    });
+```
+
+---
 **dependsOn**
 
 Available since v1.0.94. An optional array of strings. It contains properties names. You may use it together with visibleIf and choices attributes, where choices is a function and not a static array. If any property from this list is changed, then property editor calls visibleIf and choices functions to check if they return other values.

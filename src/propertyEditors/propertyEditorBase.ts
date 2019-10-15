@@ -98,6 +98,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public isInplaceProperty: boolean = false;
   public readOnly: any;
   public koMaxLength: any;
+  public koMaxValue: any;
+  public koMinValue: any;
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
@@ -129,6 +131,16 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         self.property["maxLength"] > 0
         ? self.property["maxLength"]
         : 524288;
+    });
+    this.koMaxValue = ko.computed(function() {
+      return !!self.property && !!self.property["maxValue"]
+        ? self.property["maxValue"]
+        : "";
+    });
+    this.koMinValue = ko.computed(function() {
+      return !!self.property && !!self.property["minValue"]
+        ? self.property["minValue"]
+        : "";
     });
     this.setIsRequired();
     this.setTitleAndDisplayName();
@@ -346,6 +358,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected onSetEditorOptions(editorOptions: any) {}
   protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
+    if (!this.property) return value;
+    if (!Survey.Helpers.isValueEmpty(this.property["minValue"])) {
+      if (value < this.property["minValue"]) return this.property["minValue"];
+    }
+    if (!Survey.Helpers.isValueEmpty(this.property["maxValue"])) {
+      if (value > this.property["maxValue"]) return this.property["maxValue"];
+    }
     return value;
   }
   protected beginValueUpdating() {
