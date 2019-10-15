@@ -7,6 +7,10 @@ rating-item-editor {
 
     .svda-title-editor-content {
       white-space: nowrap;
+
+      &:first-child {
+        margin-left: 5px;
+      }
     }
     .svda-edit-button {
       padding-left: 5px;
