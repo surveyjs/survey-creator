@@ -108,7 +108,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   protected getSurvey(): Survey.SurveyModel {
     if (this.object instanceof Survey.SurveyModel) return this.object;
-    if (this.object instanceof Survey.MatrixDropdownColumn)
+    if (
+      this.object instanceof Survey.MatrixDropdownColumn &&
+      !!this.object.colOwner
+    )
       return this.object.colOwner["survey"];
     if (!!this.object && !!this.object.survey) return this.object.survey;
     return null;

@@ -808,3 +808,22 @@ QUnit.test("DependedOn properties + multiple, dynamic choices", function(
   Survey.Serializer.removeProperty("text", "targetEntity");
   Survey.Serializer.removeProperty("text", "targetField");
 });
+
+QUnit.test(
+  "Survey Editor cancel, Bug#T2809 (customer marked it as private)",
+  function(assert) {
+    var survey = new Survey.SurveyModel({});
+    var editor = new SurveyQuestionEditor(survey);
+    var propertyEditor = editor.getPropertyEditorByName("maxTimeToFinish");
+    propertyEditor.editor.koValue(5);
+    propertyEditor.editor.apply();
+    assert.equal(
+      editor.editableObj["maxTimeToFinish"],
+      5,
+      "Editable obj is set"
+    );
+    assert.equal(editor.obj["maxTimeToFinish"], 0, "obj is not set");
+    editor.reset();
+    assert.equal(survey["maxTimeToFinish"], 0, "survey is not set");
+  }
+);

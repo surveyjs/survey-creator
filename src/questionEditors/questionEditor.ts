@@ -130,7 +130,10 @@ export class SurveyQuestionEditor {
     if (!this.className && this.obj.getType) {
       this.className = this.obj.getType();
     }
-    this.properties = new SurveyQuestionProperties(obj, this.options);
+    this.properties = new SurveyQuestionProperties(
+      this.editableObj,
+      this.options
+    );
     self.onApplyClick = function() {
       self.apply();
     };
@@ -165,15 +168,15 @@ export class SurveyQuestionEditor {
   }
   private getTitle(): string {
     var res;
-    if (this.obj["name"]) {
+    if (this.editableObj["name"]) {
       res = editorLocalization
         .getString("pe.qEditorTitle")
-        ["format"](this.obj["name"]);
+        ["format"](this.editableObj["name"]);
     } else {
       res = editorLocalization.getString("pe.surveyEditorTitle");
     }
     if (!!this.options && this.options.onGetElementEditorTitleCallback) {
-      res = this.options.onGetElementEditorTitleCallback(this.obj, res);
+      res = this.options.onGetElementEditorTitleCallback(this.editableObj, res);
     }
     return res;
   }
@@ -271,9 +274,9 @@ export class SurveyQuestionEditor {
       var properties = this.properties.getProperties(tabItem);
       if (properties.length > 0) {
         var propertyTab = new SurveyQuestionEditorTab(
-          this.obj,
+          this.editableObj,
           new SurveyQuestionEditorProperties(
-            this.obj,
+            this.editableObj,
             properties,
             this.options,
             tabItem,
