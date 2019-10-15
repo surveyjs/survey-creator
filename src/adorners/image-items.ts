@@ -163,10 +163,10 @@ export var addImageItemAdorner = {
   getMarkerClass: model => {
     return typeof model.getType === "function" &&
       model.getType() === "imagepicker"
-      ? "sv_imgsel"
+      ? "sv_imagepicker_root"
       : "";
   },
-  getElementName: model => "item",
+  getElementName: model => "root",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     var itemsRoot = elements[0];
     var addItemElement = createAddItemElement(() => {
