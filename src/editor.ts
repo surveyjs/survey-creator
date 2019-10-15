@@ -1687,7 +1687,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.onElementNameChanged.fire(this, {
         obj: obj,
         oldName: oldValue,
-        newName: newValue
+        newName: newName
       });
       if (newName != newValue) {
         return newName;
