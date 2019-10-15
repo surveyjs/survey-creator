@@ -463,7 +463,7 @@ export class StylesManager {
   }
 
   public static applySurveyTheme(themeName) {
-    if (["bootstrap", "bootstrapmaterial"].indexOf(themeName) !== -1) {
+    if (["bootstrap", "bootstrapmaterial", "modern"].indexOf(themeName) !== -1) {
       Survey.Survey.cssType = themeName;
     } else {
       Survey.Survey.cssType = "default";
