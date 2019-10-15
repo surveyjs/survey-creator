@@ -461,6 +461,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The event is fired on changing question, panel or page name.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the object (question, panel or page)
+   * <br/> options.oldName the previous name of the element
+   * <br/> options.newName the new name of the element
+   */
+  public onElementNameChanged: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The event is fired when the survey creator creates a survey object (Survey.Survey).
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey the survey object showing in the creator.
@@ -1673,6 +1684,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (property.name == "name") {
       var newName = this.generateUniqueName(obj, newValue);
       this.updateConditions(oldValue, newName);
+      this.onElementNameChanged.fire(this, {
+        obj: obj,
+        oldName: oldValue,
+        newName: newValue
+      });
       if (newName != newValue) {
         return newName;
       }
