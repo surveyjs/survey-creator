@@ -18,7 +18,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
       qjson.type = "text";
     }
     qjson.titleLocation = "hidden";
-    qjson.showClearButton = true;
+    //qjson.showClearButton = true;
     qjson.storeOthersAsComment = false;
     qjson.readOnly = readOnly;
     SurveyPropertyDefaultValueEditor.deleteConditionProperties(qjson);
@@ -60,6 +60,12 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     this.koSurvey = ko.observable(
       !!this.options && this.options.createSurvey({}, "defaultValueEditor")
     );
+  }
+  public resetText(): string {
+    return editorLocalization.getString("pe.reset");
+  }
+  public resetValue(model: SurveyPropertyDefaultValueEditor) {
+    model.koSurvey().data = {};
   }
   public getValueText(value: any): string {
     if (!value) return editorLocalization.getString("pe.empty");
