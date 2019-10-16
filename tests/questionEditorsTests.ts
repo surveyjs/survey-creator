@@ -86,7 +86,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   generalTab.properties.rows[0].properties[0].editor.koValue("newName");
   generalTab.properties.rows[1].properties[0].editor.koValue("new title");
   var visibleIfTab = <SurveyQuestionEditorTab>(
-    editor.koTabs()[editor.koTabs().length - 2]
+    editor.koTabs()[editor.koTabs().length - 3]
   );
   visibleIfTab.properties.rows[0].properties[0].editor["koValue"]("false");
   editor.apply();
@@ -114,7 +114,7 @@ QUnit.test("Question Editor preserve title on tab changed", function(assert) {
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var editor = new SurveyQuestionEditor(radioGroupQuestion);
-  assert.equal(editor.koTabs().length, 5, "There are 5 tabs");
+  assert.equal(editor.koTabs().length, 6, "There are 6 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
@@ -157,7 +157,7 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
   var options = new EditorOptionsTests();
   options.onCanShowPropertyCallback = onCanShowPropertyCallback;
   var editor = new SurveyQuestionEditor(radioGroupQuestion, null, options);
-  assert.equal(editor.koTabs().length, 4, "There are 4 tabs");
+  assert.equal(editor.koTabs().length, 5, "There are 5 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
