@@ -87,7 +87,8 @@ export class SurveyQuestionEditorDefinition {
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 }
+        { name: "choicesByUrl", index: 11 },
+        { name: "validators", index: 200 }
       ]
     },
     "itemvalue[]@choices": {
