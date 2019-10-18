@@ -57,7 +57,7 @@
     "karma-qunit": "1.2.1",
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.2",
-    "node-sass": "4.9.2",
+    "node-sass": "^4.12.0",
     "puppeteer": "^1.19.0",
     "qunitjs": "2.2.0",
     "replace-in-file": "^3.4.3",
