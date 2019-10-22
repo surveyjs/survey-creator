@@ -106,92 +106,43 @@ export class SurveyQuestionProperties {
   }
 }
 
-export class SurveyQuestionEditor {
+export class SurveyElementEditorContent {
+  private origionalObjValue: any;
   protected properties: SurveyQuestionProperties;
-  public onChanged: (obj: Survey.Base) => any;
-  public onHideWindow: () => any;
-  public onOkClick: any;
-  public onApplyClick: any;
-  public onResetClick: any;
   koTabs: any;
   koActiveTab = ko.observable<string>();
-  koTitle = ko.observable<string>();
-  koShowApplyButton: any;
-  onTabClick: any;
-  private editableObject: EditableObject;
-
   constructor(
     obj: any,
     public className: string = null,
-    public options: ISurveyObjectEditorOptions = null
+    public options: ISurveyObjectEditorOptions = null,
+    protected useAsPropertyGrid: boolean = false
   ) {
-    this.editableObject = new EditableObject(obj);
-    var self = this;
-    if (!this.className && this.obj.getType) {
-      this.className = this.obj.getType();
+    this.setOrigionalObjValue(obj);
+    if (!this.className && this.origionalObj.getType) {
+      this.className = this.origionalObj.getType();
     }
     this.properties = new SurveyQuestionProperties(
       this.editableObj,
       this.options
     );
-    self.onApplyClick = function() {
-      self.apply();
-    };
-    self.onOkClick = function() {
-      self.doCloseWindow(false);
-    };
-    self.onResetClick = function() {
-      self.doCloseWindow(true);
-    };
-    this.onTabClick = function(tab) {
-      self.koActiveTab(tab.name);
-    };
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
     tabs.forEach(tab => tab.beforeShow());
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
-    this.koShowApplyButton = ko.observable(
-      !this.options || this.options.showApplyButtonInEditors
-    );
-    this.koTitle(this.getTitle());
+  }
+  protected setOrigionalObjValue(obj: any) {
+    this.origionalObjValue = obj;
+  }
+  protected get origionalObj() {
+    return this.origionalObjValue;
   }
   public get obj(): any {
-    return this.editableObject.obj;
+    return this.origionalObjValue;
   }
   public get editableObj(): any {
-    return this.editableObject.editableObj;
-  }
-  public get readOnly(): boolean {
-    return !!this.options && this.options.readOnly;
-  }
-  private getTitle(): string {
-    var res;
-    if (this.editableObj["name"]) {
-      res = editorLocalization
-        .getString("pe.qEditorTitle")
-        ["format"](this.editableObj["name"]);
-    } else {
-      res = editorLocalization.getString("pe.surveyEditorTitle");
-    }
-    if (!!this.options && this.options.onGetElementEditorTitleCallback) {
-      res = this.options.onGetElementEditorTitleCallback(this.editableObj, res);
-    }
-    return res;
-  }
-  protected doCloseWindow(isCancel: boolean) {
-    var appliedSuccesfull = false;
-    if (!isCancel) {
-      appliedSuccesfull = this.apply();
-    }
-    if (isCancel || appliedSuccesfull) {
-      var tabs = this.koTabs();
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].doCloseWindow();
-      }
-      if (this.onHideWindow) this.onHideWindow();
-    }
+    return this.origionalObjValue;
   }
   public hasError(): boolean {
     var tabs = this.koTabs();
@@ -202,39 +153,6 @@ export class SurveyQuestionEditor {
       }
     }
     return false;
-  }
-  public reset() {
-    this.editableObject.reset();
-    var tabs = this.koTabs();
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].reset();
-    }
-  }
-  public apply(): boolean {
-    var res = true;
-    var isFirstError = false;
-    var tabs = this.koTabs();
-    for (var i = 0; i < tabs.length; i++) {
-      var tabRes = tabs[i].apply();
-      if (!tabRes) {
-        tabs[i].expand();
-        if (!isFirstError) {
-          this.koActiveTab(tabs[i].name);
-          isFirstError = true;
-        }
-      }
-      res = tabRes && res;
-    }
-
-    if (res) {
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].applyToObj(this.obj);
-      }
-      if (this.onChanged) {
-        this.onChanged(this.obj);
-      }
-    }
-    return res;
   }
   public getPropertyEditorByName(
     propertyName: string
@@ -304,10 +222,152 @@ export class SurveyQuestionEditor {
   }
   get useTabsInElementEditor() {
     return (
+      !this.useAsPropertyGrid &&
       !!this.options &&
       this.options.useTabsInElementEditor &&
       this.koTabs().length > 1
     );
+  }
+}
+
+export class SurveyQuestionEditor extends SurveyElementEditorContent {
+  public onChanged: (obj: Survey.Base) => any;
+  public onHideWindow: () => any;
+  public onOkClick: any;
+  public onApplyClick: any;
+  public onResetClick: any;
+  koTitle = ko.observable<string>();
+  koShowApplyButton: any;
+  onTabClick: any;
+  private editableObject: EditableObject;
+
+  constructor(
+    obj: any,
+    public className: string = null,
+    public options: ISurveyObjectEditorOptions = null,
+    protected useAsPropertyGrid: boolean = false
+  ) {
+    super(obj, className, options, useAsPropertyGrid);
+    var self = this;
+    self.onApplyClick = function() {
+      self.apply();
+    };
+    self.onOkClick = function() {
+      self.doCloseWindow(false);
+    };
+    self.onResetClick = function() {
+      self.doCloseWindow(true);
+    };
+    this.onTabClick = function(tab) {
+      self.koActiveTab(tab.name);
+    };
+    this.koShowApplyButton = ko.observable(
+      !this.options || this.options.showApplyButtonInEditors
+    );
+    this.koTitle(this.getTitle());
+  }
+  protected setOrigionalObjValue(obj: any) {
+    super.setOrigionalObjValue(obj);
+    this.editableObject = new EditableObject(obj);
+  }
+  public get obj(): any {
+    return this.editableObject.obj;
+  }
+  public get editableObj(): any {
+    return this.editableObject.editableObj;
+  }
+  public get readOnly(): boolean {
+    return !!this.options && this.options.readOnly;
+  }
+  private getTitle(): string {
+    var res;
+    if (this.editableObj["name"]) {
+      res = editorLocalization
+        .getString("pe.qEditorTitle")
+        ["format"](this.editableObj["name"]);
+    } else {
+      res = editorLocalization.getString("pe.surveyEditorTitle");
+    }
+    if (!!this.options && this.options.onGetElementEditorTitleCallback) {
+      res = this.options.onGetElementEditorTitleCallback(this.editableObj, res);
+    }
+    return res;
+  }
+  protected doCloseWindow(isCancel: boolean) {
+    var appliedSuccesfull = false;
+    if (!isCancel) {
+      appliedSuccesfull = this.apply();
+    }
+    if (isCancel || appliedSuccesfull) {
+      var tabs = this.koTabs();
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].doCloseWindow();
+      }
+      if (this.onHideWindow) this.onHideWindow();
+    }
+  }
+  public reset() {
+    this.editableObject.reset();
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].reset();
+    }
+  }
+  public apply(): boolean {
+    var res = true;
+    var isFirstError = false;
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      var tabRes = tabs[i].apply();
+      if (!tabRes) {
+        tabs[i].expand();
+        if (!isFirstError) {
+          this.koActiveTab(tabs[i].name);
+          isFirstError = true;
+        }
+      }
+      res = tabRes && res;
+    }
+
+    if (res) {
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].applyToObj(this.obj);
+      }
+      if (this.onChanged) {
+        this.onChanged(this.obj);
+      }
+    }
+    return res;
+  }
+}
+
+export class SurveyElementPropertyGrid {
+  private selectedObjectValue: any = null;
+  public koElementEditor = ko.observable(null);
+  public koHasObject = ko.observable(false);
+  constructor(
+    public propertyEditorOptions: ISurveyObjectEditorOptions = null
+  ) {}
+  public objectChanged() {}
+  public get selectedObject(): any {
+    return this.selectedObjectValue;
+  }
+  public set selectedObject(value: any) {
+    if (this.selectedObjectValue == value) return;
+    this.selectedObjectValue = value;
+    if (!!value) {
+      this.koElementEditor(
+        new SurveyElementEditorContent(
+          value,
+          "",
+          this.propertyEditorOptions,
+          true
+        )
+      );
+    } else {
+      this.koElementEditor(null);
+    }
+    this.koHasObject(!!value);
   }
 }
 

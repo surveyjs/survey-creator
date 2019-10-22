@@ -126,9 +126,16 @@
         class="svd_object_editor"
         data-bind="style: {height: koDesignerHeight}"
       >
+        <!--ko if: koShowOldPropertyGrid-->
         <div
           data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"
         ></div>
+        <!-- /ko -->
+        <!--ko ifnot: koShowOldPropertyGrid() -->
+        <div
+          data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"
+        ></div>
+        <!-- /ko -->
       </div>
     </div>
   </div>

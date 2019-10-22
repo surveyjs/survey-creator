@@ -9,7 +9,10 @@ import { SurveyLiveTester } from "./surveylive";
 import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
 import { SurveyObjects } from "./surveyObjects";
 import { QuestionConverter } from "./questionconverter";
-import { SurveyPropertyEditorShowWindow } from "./questionEditors/questionEditor";
+import {
+  SurveyElementPropertyGrid,
+  SurveyPropertyEditorShowWindow
+} from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
 import { SurveyUndoRedo, UndoRedoItem } from "./undoredo";
@@ -78,7 +81,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private surveyjs: HTMLElement;
 
   private jsonEditor: SurveyJSONEditor;
-  public selectedObjectEditorValue: SurveyObjectEditor;
+  private selectedObjectEditorValue: SurveyObjectEditor;
+  private elementPropertyGridValue: SurveyElementPropertyGrid;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
   public pages: ko.ObservableArray<Survey.PageModel>;
@@ -762,6 +766,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koGenerateValidJSON: any;
   koShowOptions: any;
   koShowPropertyGrid = ko.observable(true);
+  koShowOldPropertyGrid = ko.observable(false);
   koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
@@ -837,6 +842,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedo = new SurveyUndoRedo();
 
     this.selectedObjectEditorValue = new SurveyObjectEditor(this);
+    this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
+
     this.selectedObjectEditorValue.onSortPropertyCallback = function(
       obj: any,
       property1: Survey.JsonObjectProperty,
@@ -1213,6 +1220,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
+    this.showOldPropertyGrid =
+      typeof options.showOldPropertyGrid !== "undefined"
+        ? options.showOldPropertyGrid
+        : false;
     this.showToolbox =
       typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
@@ -1263,6 +1274,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public get selectedObjectEditor(): SurveyObjectEditor {
     return this.selectedObjectEditorValue;
+  }
+  public get selectedElementPropertyGrid(): SurveyElementPropertyGrid {
+    return this.elementPropertyGridValue;
   }
   /**
    * Use this method to force update this element in editor.
@@ -1493,8 +1507,21 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koShowPropertyGrid();
   }
   public set showPropertyGrid(value: boolean) {
+    if (this.showPropertyGrid == value) return;
+    if (value) {
+      this.setNewObjToPropertyGrid(this.koSelectedObject());
+    }
     this.koShowPropertyGrid(value);
     this.koHideAdvancedSettings(!value);
+  }
+  /**
+   * Set this property to true to show the old style property grid on the right.
+   */
+  public get showOldPropertyGrid() {
+    return this.koShowOldPropertyGrid();
+  }
+  public set showOldPropertyGrid(value: boolean) {
+    this.koShowOldPropertyGrid(value);
   }
   /**
    * Set it to false to  hide the question toolbox on the left.
@@ -1717,9 +1744,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       property.name == "hasNone" ||
       property.name == "hasOther"
     ) {
-      this.selectedObjectEditorValue.objectChanged();
+      this.doPropertyGridChanged();
     }
     return null;
+  }
+  private doPropertyGridChanged() {
+    if (!this.showPropertyGrid) return;
+    this.selectedObjectEditorValue.objectChanged();
+    this.elementPropertyGridValue.objectChanged();
+  }
+  private setNewObjToPropertyGrid(newObj: any) {
+    if (!this.showPropertyGrid) return;
+    this.selectedObjectEditorValue.selectedObject = newObj;
+    this.elementPropertyGridValue.selectedObject = newObj;
   }
   private doUndoRedo(item: UndoRedoItem) {
     this.initSurvey(item.surveyJSON);
@@ -1863,7 +1900,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return;
     }
     var canDeleteObject = false;
-    this.selectedObjectEditorValue.selectedObject = obj;
+    this.setNewObjToPropertyGrid(obj);
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
       this.survey.currentPage = <Survey.Page>obj;
@@ -2470,7 +2507,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.showEditorOldName = "";
     }
     this.surveyObjects.nameChanged(question);
-    this.selectedObjectEditorValue.objectChanged();
+    this.doPropertyGridChanged();
     this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     this.setModified({
       type: "QUESTION_CHANGED_BY_EDITOR",
