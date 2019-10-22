@@ -766,7 +766,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koGenerateValidJSON: any;
   koShowOptions: any;
   koShowPropertyGrid = ko.observable(true);
-  koShowOldPropertyGrid = ko.observable(false);
+  koShowOldPropertyGrid = ko.observable(true);
   koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
@@ -1223,7 +1223,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.showOldPropertyGrid =
       typeof options.showOldPropertyGrid !== "undefined"
         ? options.showOldPropertyGrid
-        : false;
+        : true;
     this.showToolbox =
       typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
