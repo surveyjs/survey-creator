@@ -398,27 +398,53 @@ export class SurveyQuestionEditorDefinition {
       return result;
     }
     var curClassName = className;
+    var usedProperties = [];
+    var hasOthersTab = false;
     while (curClassName) {
-      var metaClass = <Survey.JsonMetadataClass>(
+      let metaClass = <Survey.JsonMetadataClass>(
         Survey.Serializer.findClass(curClassName)
       );
       if (!metaClass) break;
-      if (SurveyQuestionEditorDefinition.definition[metaClass.name]) {
-        result.unshift(
-          SurveyQuestionEditorDefinition.definition[metaClass.name]
-        );
+      let classRes = SurveyQuestionEditorDefinition.definition[metaClass.name];
+      if (classRes) {
+        if (classRes.properties) {
+          for (var i = 0; i < classRes.properties.length; i++) {
+            var prop = classRes.properties[i];
+            usedProperties.push(typeof prop == "string" ? prop : prop.name);
+          }
+        }
+        if (classRes.tabs) {
+          for (var i = 0; i < classRes.tabs.length; i++) {
+            hasOthersTab = hasOthersTab || classRes.tabs[i].name == "others";
+            usedProperties.push(classRes.tabs[i].name);
+          }
+        }
+        result.unshift(classRes);
       }
       curClassName = metaClass.parentName;
     }
-    if (result.length == 0) {
-      var properties = Survey.Serializer.getProperties(className);
-      var classRes = { properties: [] };
+
+    if (!hasOthersTab) {
+      let properties = Survey.Serializer.getProperties(className);
+      let classRes: any = { properties: [] };
+      if (result.length > 0) {
+        classRes.tabs = [{ name: "others", index: 1000 }];
+      }
+      let tabName = result.length == 0 ? "general" : "others";
       for (var i = 0; i < properties.length; i++) {
-        if (properties[i].isVisible(null)) {
-          classRes.properties.push(properties[i].name);
+        if (
+          properties[i].isVisible(null) &&
+          usedProperties.indexOf(properties[i].name) < 0
+        ) {
+          classRes.properties.push({
+            name: properties[i].name,
+            tab: tabName
+          });
         }
       }
-      result.push(classRes);
+      if (classRes.properties.length > 0) {
+        result.push(classRes);
+      }
     }
     return result;
   }

@@ -361,7 +361,8 @@ export var enStrings = {
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
       templateTitle: "Template title",
-      totals: "Totals"
+      totals: "Totals",
+      others: "Others"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",

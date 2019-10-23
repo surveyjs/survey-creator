@@ -83,12 +83,9 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
     "",
     "title set correct"
   );
-  generalTab.properties.rows[0].properties[0].editor.koValue("newName");
-  generalTab.properties.rows[1].properties[0].editor.koValue("new title");
-  var visibleIfTab = <SurveyQuestionEditorTab>(
-    editor.koTabs()[editor.koTabs().length - 3]
-  );
-  visibleIfTab.properties.rows[0].properties[0].editor["koValue"]("false");
+  editor.getPropertyEditorByName("name").editor.koValue("newName");
+  editor.getPropertyEditorByName("title").editor.koValue("new title");
+  editor.getPropertyEditorByName("visibleIf").editor.koValue("false");
   editor.apply();
   assert.equal(changeCounter, 1, "changed one time");
   assert.equal(dropdownQuestion.name, "newName", "name assign correct");
@@ -114,7 +111,7 @@ QUnit.test("Question Editor preserve title on tab changed", function(assert) {
 QUnit.test("Create correct Question Editor by question type", function(assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var editor = new SurveyQuestionEditor(radioGroupQuestion);
-  assert.equal(editor.koTabs().length, 6, "There are 6 tabs");
+  assert.equal(editor.koTabs().length, 7, "There are 7 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
@@ -132,7 +129,8 @@ QUnit.test("Hide a tab if it's visible attribute set to false", function(
     tabs: [
       { name: "html" },
       { name: "general", visible: false },
-      { name: "visibleIf", visible: false }
+      { name: "visibleIf", visible: false },
+      { name: "others", visible: false }
     ]
   };
   var htmlQuestion = new Survey.QuestionHtml("q1");
@@ -157,7 +155,7 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
   var options = new EditorOptionsTests();
   options.onCanShowPropertyCallback = onCanShowPropertyCallback;
   var editor = new SurveyQuestionEditor(radioGroupQuestion, null, options);
-  assert.equal(editor.koTabs().length, 5, "There are 5 tabs");
+  assert.equal(editor.koTabs().length, 6, "There are 6 tabs");
   assert.equal(
     editor.koTabs()[1].name,
     "choices",
@@ -366,7 +364,7 @@ QUnit.test("Question editor definition: getProperties", function(assert) {
 
 QUnit.test("Question editor definition: getTabs", function(assert) {
   var tabs = SurveyQuestionEditorDefinition.getTabs("rating");
-  assert.equal(tabs.length, 3, "Rating has three tabs");
+  assert.equal(tabs.length, 4, "Rating has three tabs + others");
   assert.equal(tabs[0].name, "rateValues", "The first tab");
   assert.equal(tabs[1].name, "visibleIf", "The last tab");
   assert.equal(tabs[2].name, "enableIf", "The last tab");
@@ -825,5 +823,26 @@ QUnit.test(
     assert.equal(editor.obj["maxTimeToFinish"], 0, "obj is not set");
     editor.reset();
     assert.equal(survey["maxTimeToFinish"], 0, "survey is not set");
+  }
+);
+
+QUnit.test(
+  "Survey Editor add visible non-defined properties into Others tab",
+  function(assert) {
+    var survey = new Survey.SurveyModel({});
+    Survey.Serializer.addProperties("survey", ["custom1", "custom2"]);
+
+    var editor = new SurveyQuestionEditor(survey);
+    assert.ok(
+      editor.getPropertyEditorByName("custom1"),
+      "custom1 property is here"
+    );
+    assert.ok(
+      editor.getPropertyEditorByName("custom2"),
+      "custom2 property is here"
+    );
+
+    Survey.Serializer.removeProperty("survey", "custom1");
+    Survey.Serializer.removeProperty("survey", "custom2");
   }
 );
