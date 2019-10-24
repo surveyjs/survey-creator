@@ -60,14 +60,28 @@ export class SurveyPropertyEditorShowWindow {
   }
 }
 
+export class SurveyQuestionEditorPropertyDefinition {
+  public property: Survey.JsonObjectProperty;
+  public title: string;
+  public category: string;
+}
+
+export class SurveyQuestionEditorTabDefinition {
+  public name: string;
+  public title: string;
+  public properties: Array<SurveyQuestionEditorPropertyDefinition> = [];
+}
+
 export class SurveyQuestionProperties {
   private properties: Array<Survey.JsonObjectProperty>;
   private editorDefinition: Array<ISurveyQuestionEditorDefinition>;
+  private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   constructor(
     public obj: any,
     public options: ISurveyObjectEditorOptions = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    this.buildTabs(this.obj.getType());
     this.editorDefinition = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
       this.obj.getType()
     );
@@ -104,6 +118,7 @@ export class SurveyQuestionProperties {
             SurveyHelper.isPropertyVisible(this.obj, prop, this.options))
       );
   }
+  private buildTabs(className: string) {}
 }
 
 export class SurveyElementEditorContent {
