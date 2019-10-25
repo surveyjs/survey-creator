@@ -10,6 +10,7 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 import { SurveyElementSelector } from "../entries";
+import { ExpressionToDisplayText } from "../expressionToDisplayText";
 
 interface Element {
   text?: string;
@@ -252,6 +253,9 @@ export class SurveyPropertyTrigger {
       return editorLocalization.getString("pe.triggerNotSet");
     var res = this.conditionEditor.koTextValue();
     if (!res) return "";
+    if (!!this.options && this.options.showTitlesInExpressions) {
+      res = new ExpressionToDisplayText(this.survey).toDisplayText(res);
+    }
     return editorLocalization.getString("pe.triggerRunIf") + ": " + res;
   }
   public get setToNameOptions(): string {
@@ -491,11 +495,7 @@ export class SurveyPropertyTriggerObjects {
   private addItem = () => {
     this.changeItems(this.koSelected(), this.koObjects, this.koChoosen);
   };
-  private changeItems(
-    item: Element,
-    removedFrom: any,
-    addTo: any
-  ) {
+  private changeItems(item: Element, removedFrom: any, addTo: any) {
     if (!item) return;
     removedFrom.remove(item);
     addTo.push(item);

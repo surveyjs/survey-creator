@@ -5,7 +5,7 @@ import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggers
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
-import { stringLiteral } from "babel-types";
+import { ExpressionToDisplayText } from "./expressionToDisplayText";
 
 export interface ISurveyLogicType {
   name: string;
@@ -19,7 +19,11 @@ export interface ISurveyLogicType {
   createTemplateObject?: (element: Survey.Base) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
-  getDisplayText?: (element: Survey.Base, formatStr: string) => string;
+  getDisplayText?: (
+    element: Survey.Base,
+    formatStr: string,
+    lt: SurveyLogicType
+  ) => string;
   getDisplayTextName?: (element: Survey.Base) => string;
 }
 
@@ -28,8 +32,13 @@ function getLogicString(name: string) {
 }
 
 export class SurveyLogicType {
-  public static formatElName(name: string): string {
-    return "{" + name + "}";
+  public static expressionToDisplayText(
+    survey: Survey.SurveyModel,
+    options: ISurveyObjectEditorOptions,
+    expression: string
+  ): string {
+    if (!options || !options.showTitlesInExpressions) return expression;
+    return new ExpressionToDisplayText(survey).toDisplayText(expression);
   }
   private hasUniqueItem: boolean = false;
   public koVisible: any;
@@ -126,7 +135,7 @@ export class SurveyLogicType {
   public getDisplayText(element: Survey.Base): string {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
-      return this.logicType.getDisplayText(element, str);
+      return this.logicType.getDisplayText(element, str, this);
     var name = "";
     if (!!this.logicType.getDisplayTextName) {
       name = this.logicType.getDisplayTextName(element);
@@ -136,9 +145,25 @@ export class SurveyLogicType {
       }
     }
     if (!!name) {
-      return str["format"](SurveyLogicType.formatElName(name));
+      return str["format"](this.formatElName(name));
     }
     return str;
+  }
+  public formatElName(name: string): string {
+    if (this.showTitlesInExpression && !!this.survey) {
+      var question = this.survey.getQuestionByName(name);
+      if (!!question && !!question.title) {
+        name = question.title;
+      }
+    }
+    return "{" + name + "}";
+  }
+  public formatExpression(expression: string): string {
+    return SurveyLogicType.expressionToDisplayText(
+      this.survey,
+      this.options,
+      expression
+    );
   }
   private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
     if (!operations) return false;
@@ -255,6 +280,7 @@ export interface ISurveyLogicItemOwner {
   readOnly: boolean;
   editItem(item: SurveyLogicItem);
   removeItem(item: SurveyLogicItem);
+  getExpressionAsDisplayText(expression: string): string;
 }
 
 export class SurveyLogicItem {
@@ -273,7 +299,7 @@ export class SurveyLogicItem {
     return "logicItem" + this.id;
   }
   public get title() {
-    var res = this.expression;
+    var res = this.getExpressionAsDisplayText();
     if (!!res && res.length > 50) {
       res = res.substr(1, 50) + "...";
     }
@@ -333,7 +359,12 @@ export class SurveyLogicItem {
   public get expressionText(): string {
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-      ["format"](this.expression);
+      ["format"](this.getExpressionAsDisplayText());
+  }
+  private getExpressionAsDisplayText(): string {
+    return !!this.owner
+      ? this.owner.getExpressionAsDisplayText(this.expression)
+      : this.expression;
   }
   public get editText(): string {
     return editorLocalization.getString("pe.edit");
@@ -501,10 +532,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       questionNames: ["setToName"],
       getDisplayText: function(
         element: Survey.Base,
-        formatStr: string
+        formatStr: string,
+        lt: SurveyLogicType
       ): string {
         return formatStr["format"](
-          SurveyLogicType.formatElName(element["setToName"]),
+          lt.formatElName(element["setToName"]),
           element["setValue"]
         );
       }
@@ -516,11 +548,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       questionNames: ["setToName", "fromName"],
       getDisplayText: function(
         element: Survey.Base,
-        formatStr: string
+        formatStr: string,
+        lt: SurveyLogicType
       ): string {
         return formatStr["format"](
-          SurveyLogicType.formatElName(element["setToName"]),
-          SurveyLogicType.formatElName(element["fromName"])
+          lt.formatElName(element["setToName"]),
+          lt.formatElName(element["fromName"])
         );
       }
     },
@@ -541,16 +574,15 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       questionNames: ["setToName"],
       getDisplayText: function(
         element: Survey.Base,
-        formatStr: string
+        formatStr: string,
+        lt: SurveyLogicType
       ): string {
         var res = getLogicString("trigger_runExpressionText1");
-        res = res["format"](element["runExpression"]);
+        res = res["format"](lt.formatExpression(element["runExpression"]));
         var setToName = element["setToName"];
         if (!!setToName) {
           var str = getLogicString("trigger_runExpressionText2");
-          res += str["format"](
-            SurveyLogicType.formatElName(element["setToName"])
-          );
+          res += str["format"](lt.formatElName(element["setToName"]));
         }
         return res;
       }
@@ -844,6 +876,13 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);
+  }
+  public getExpressionAsDisplayText(expression: string): string {
+    return SurveyLogicType.expressionToDisplayText(
+      this.survey,
+      this.options,
+      expression
+    );
   }
   protected buildItems(showInUI: boolean): Array<SurveyLogicItem> {
     var res = [];

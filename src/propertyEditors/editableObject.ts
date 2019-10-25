@@ -41,6 +41,8 @@ export class EditableObject {
           res["survey"] = this.obj["survey"];
         }
       }
+    } else {
+      res.setPropertyValue("pages", this.obj["pages"]);
     }
     if (!!this.obj["parent"]) {
       res["parent"] = this.obj["parent"];

@@ -169,8 +169,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (
       !this.canShowValueByOperator(operator) ||
       !questionName ||
-      !this.object ||
-      !this.object.survey
+      !this.getSurvey()
     ) {
       this.koHasValueSurvey(false);
       return;
@@ -230,7 +229,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return survey;
   }
   private getQuestionByName(questionName: string): Survey.Question {
-    if (!this.object || !this.object.survey) return null;
+    if (!this.getSurvey()) return null;
     return this.addConditionQuestionsHash[questionName];
   }
   private getQuestionValueByName(questionName: string): string {

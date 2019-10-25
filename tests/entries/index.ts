@@ -18,3 +18,4 @@ export * from "../translationtest";
 export * from "../editableObjectTests";
 export * from "../logicTest";
 export * from "../surveyElementSelectorTests";
+export * from "../expressionToDisplayTextTest";
