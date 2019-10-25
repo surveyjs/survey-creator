@@ -1023,3 +1023,21 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
   logic.removeItem(logic.items[0]);
   assert.equal(modifiedCounter, 2, "It was changed two times");
 });
+
+QUnit.test("Add existing visible Items", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", title: "My Question 1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" }
+    ]
+  });
+  var options = new EditorOptionsTests();
+  options.showTitlesInExpressions = true;
+  var logic = new SurveyLogic(survey, options);
+  assert.equal(logic.items.length, 1, "There one item");
+  assert.equal(
+    logic.items[0].expressionText,
+    "When expression: '{My Question 1}=1' returns true:"
+  );
+});

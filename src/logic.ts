@@ -5,7 +5,7 @@ import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggers
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
-import { stringLiteral } from "babel-types";
+import { ExpressionToDisplayText } from "./expressionToDisplayText";
 
 export interface ISurveyLogicType {
   name: string;
@@ -255,6 +255,7 @@ export interface ISurveyLogicItemOwner {
   readOnly: boolean;
   editItem(item: SurveyLogicItem);
   removeItem(item: SurveyLogicItem);
+  getExpressionAsDisplayText(expression: string): string;
 }
 
 export class SurveyLogicItem {
@@ -273,7 +274,7 @@ export class SurveyLogicItem {
     return "logicItem" + this.id;
   }
   public get title() {
-    var res = this.expression;
+    var res = this.getExpressionAsDisplayText();
     if (!!res && res.length > 50) {
       res = res.substr(1, 50) + "...";
     }
@@ -333,7 +334,12 @@ export class SurveyLogicItem {
   public get expressionText(): string {
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-      ["format"](this.expression);
+      ["format"](this.getExpressionAsDisplayText());
+  }
+  private getExpressionAsDisplayText(): string {
+    return !!this.owner
+      ? this.owner.getExpressionAsDisplayText(this.expression)
+      : this.expression;
   }
   public get editText(): string {
     return editorLocalization.getString("pe.edit");
@@ -844,6 +850,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);
+  }
+  public getExpressionAsDisplayText(expression: string): string {
+    if (!this.options || !this.options.showTitlesInExpressions)
+      return expression;
+    return new ExpressionToDisplayText(this.survey).toDisplayText(expression);
   }
   protected buildItems(showInUI: boolean): Array<SurveyLogicItem> {
     var res = [];

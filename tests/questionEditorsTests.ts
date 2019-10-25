@@ -10,6 +10,7 @@ import { SurveyCreator } from "../src/editor";
 import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
 import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/propertyMultipleValuesEditor";
 import { EditorOptionsTests } from "./editorOptionsTests";
+import { SurveyPropertyTriggersEditor } from "../src/entries";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -827,3 +828,19 @@ QUnit.test(
     assert.equal(survey["maxTimeToFinish"], 0, "survey is not set");
   }
 );
+
+QUnit.test("Survey Editor + trigger, there is no questions", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+  });
+  var editor = new SurveyQuestionEditor(survey);
+  var triggerEditor = <SurveyPropertyTriggersEditor>(
+    editor.getPropertyEditorByName("triggers").editor
+  );
+  var editingSurvey = <Survey.SurveyModel>triggerEditor.object;
+  assert.equal(
+    editingSurvey.getAllQuestions().length,
+    2,
+    "There are two questions here"
+  );
+});

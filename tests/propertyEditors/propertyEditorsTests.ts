@@ -983,6 +983,7 @@ QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
 });
 QUnit.test("Triggers property editor", function(assert) {
   var survey = createSurvey();
+  survey.getQuestionByName("question1").title = "Question1 title";
   var trigger = new Survey.SurveyTriggerVisible();
   trigger.name = "question1";
   trigger.value = "val1";
@@ -991,6 +992,8 @@ QUnit.test("Triggers property editor", function(assert) {
   survey.triggers.push(trigger);
   var result = [];
   var propEditor = new SurveyPropertyTriggersEditor(null);
+  propEditor.options = new EditorOptionsTests();
+  propEditor.options.showTitlesInExpressions = true;
   propEditor.beforeShow();
   propEditor.onChanged = (newValue: any) => {
     result = newValue;
@@ -1009,8 +1012,8 @@ QUnit.test("Triggers property editor", function(assert) {
   );
   var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
   assert.equal(
-    koTrigger.conditionEditor.koTextValue(),
-    "{question1} notequal 'val1'",
+    koTrigger.koText(),
+    "Run if: {Question1 title} notequal 'val1'",
     "expression set correctly"
   );
   assert.deepEqual(
