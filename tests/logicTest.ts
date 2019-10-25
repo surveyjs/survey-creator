@@ -651,9 +651,9 @@ QUnit.test("Add new item with two triggers", function(assert) {
 QUnit.test("Edit triggers via trigger editor", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-      { type: "text", name: "q3" }
+      { type: "text", name: "q1", title: "Question 1" },
+      { type: "text", name: "q2", title: "Question 2" },
+      { type: "text", name: "q3", title: "Question 3" }
     ],
     triggers: [
       {
@@ -664,7 +664,9 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
       }
     ]
   });
-  var logic = new SurveyLogic(survey);
+  var options = new EditorOptionsTests();
+  options.showTitlesInExpressions = true;
+  var logic = new SurveyLogic(survey, options);
   assert.equal(logic.items.length, 1, "There is one item");
   logic.editItem(logic.items[0]);
   assert.ok(logic.editableItem, "Editable item is created");
@@ -684,6 +686,11 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   op.templateObject.kosetToName("q3");
   logic.saveEditableItem();
   assert.equal(
+    logic.items[0].operations[0].text,
+    "Run expression: '{Question 2} + 1' and set it's result into question: {Question 3}",
+    "use showTitlesInExpressions option"
+  );
+  assert.equal(
     survey.triggers[0]["setToName"],
     "q3",
     "Trigger property editor works correctly, setToName"
@@ -698,7 +705,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
 QUnit.test("Edit condition complete via its editor", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
-      { type: "text", name: "q1" },
+      { type: "text", name: "q1", title: "Question 1" },
       { type: "text", name: "q2" },
       { type: "text", name: "q3" }
     ]
