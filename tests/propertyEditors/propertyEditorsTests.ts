@@ -493,6 +493,7 @@ QUnit.test("SurveyPropertyItemValue_PureValue", function(assert) {
 });
 QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
+  propertyEditor.beforeShow();
   assert.equal(
     propertyEditor.columns.length,
     2,
@@ -513,6 +514,7 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
   Survey.Serializer.addProperty("itemvalue", { name: "imageLink" });
 
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
+  propertyEditor.beforeShow();
   assert.equal(
     propertyEditor.columns.length,
     3,
@@ -588,6 +590,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
     "It is item value, use parent"
   );
   var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
+  propEditor.beforeShow();
   assert.equal(
     propertyEditor.columns.length,
     3,
@@ -613,6 +616,7 @@ QUnit.test(
     property.type = "itemvalues_ex[]";
     var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
     var propertyEditor = <SurveyPropertyItemValuesEditor>propEditor;
+    propertyEditor.beforeShow();
     assert.equal(
       propertyEditor.columns.length,
       3,
@@ -793,6 +797,7 @@ QUnit.test("SurveyPropertyItemValuesEditorItem", function(assert) {
     () => propertyEditor.columns,
     null
   );
+  propertyEditor.beforeShow();
   assert.equal(item.cells.length, 2, "There are two cells");
   assert.equal(item.hasError(), true, "There is an error");
   item.cells[0].koValue(0);
@@ -882,7 +887,10 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function(
   var columns: Array<Survey.MatrixDropdownColumn> = [];
   columns.push(new Survey.MatrixDropdownColumn("column 1"));
   columns.push(new Survey.MatrixDropdownColumn("column 2"));
-  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(null);
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.beforeShow();
   assert.equal(columnsEditor.columns.length, 3, "There are 3 columns");
   assert.equal(
     columnsEditor.columns[2].property.name,

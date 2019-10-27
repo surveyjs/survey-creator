@@ -64,42 +64,62 @@ export class SurveyQuestionEditorPropertyDefinition {
   public property: Survey.JsonObjectProperty;
   public title: string;
   public category: string;
+  public get name(): string {
+    return this.property.name;
+  }
 }
 
 export class SurveyQuestionEditorTabDefinition {
   public name: string;
   public title: string;
+  public visible: boolean = true;
+  public index: number = 0;
   public properties: Array<SurveyQuestionEditorPropertyDefinition> = [];
 }
 
 export class SurveyQuestionProperties {
   private properties: Array<Survey.JsonObjectProperty>;
-  private editorDefinition: Array<ISurveyQuestionEditorDefinition>;
+  private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   constructor(
     public obj: any,
-    public options: ISurveyObjectEditorOptions = null
+    public options: ISurveyObjectEditorOptions = null,
+    className: string = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
-    this.buildTabs(this.obj.getType());
-    this.editorDefinition = SurveyQuestionEditorDefinition.getAllDefinitionsByClass(
-      this.obj.getType()
-    );
+    this.fillPropertiesHash();
+    this.buildTabs(className);
   }
   public getProperty(propertyName: string): Survey.JsonObjectProperty {
-    var property = this.getPropertyCore(propertyName);
-    if (!property) return null;
-    return SurveyHelper.isPropertyVisible(this.obj, property, this.options)
-      ? property
-      : null;
+    var res = this.propertiesHash[propertyName];
+    return !!res && res.visible ? res.property : null;
   }
-  private getPropertyCore(propertyName: string): Survey.JsonObjectProperty {
+  private fillPropertiesHash() {
+    this.propertiesHash = {};
     for (var i = 0; i < this.properties.length; i++) {
-      if (this.properties[i].name == propertyName) return this.properties[i];
+      var prop = this.properties[i];
+      this.propertiesHash[prop.name] = {
+        property: prop,
+        visible: SurveyHelper.isPropertyVisible(this.obj, prop, this.options)
+      };
     }
-    return null;
   }
-  public getProperties(tab: any): Array<Survey.JsonObjectProperty> {
+  private isJSONPropertyVisible(property: Survey.JsonObjectProperty): boolean {
+    var res = this.propertiesHash[property.name];
+    return !!res && res.visible;
+  }
+  public getTabs(): Array<SurveyQuestionEditorTabDefinition> {
+    return this.tabs;
+  }
+  public getProperties(
+    tab: SurveyQuestionEditorTabDefinition
+  ): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    for (var i = 0; i < tab.properties.length; i++) {
+      res.push(tab.properties[i].property);
+    }
+    return res;
+    /*
     return this.editorDefinition
       .reduce((a, b) => a.concat(b.properties), [
         <any>{ name: tab.name, tab: tab.name }
@@ -117,8 +137,145 @@ export class SurveyQuestionProperties {
           ((prop.name == tab.name && tab.visible === true) ||
             SurveyHelper.isPropertyVisible(this.obj, prop, this.options))
       );
+      */
   }
-  private buildTabs(className: string) {}
+  private buildTabs(className: string) {
+    if (!className) {
+      className = this.obj.getType();
+    }
+    var definition = this.getAllDefinitionsByClass(className);
+    for (var i = 0; i < definition.length; i++) {
+      var defItem = definition[i];
+      for (var j = 0; !!defItem.tabs && j < defItem.tabs.length; j++) {
+        this.addPropertyIntoTab(defItem.tabs[j], true);
+      }
+      for (
+        var j = 0;
+        !!defItem.properties && j < defItem.properties.length;
+        j++
+      ) {
+        this.addPropertyIntoTab(defItem.properties[j]);
+      }
+    }
+    for (var i = this.tabs.length - 1; i >= 0; i--) {
+      if (!this.tabs[i].visible) {
+        this.tabs.splice(i, 1);
+      }
+    }
+    this.tabs.sort(function(a, b) {
+      return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
+    });
+  }
+  private addPropertyIntoTab(defProperty: any, isTab: boolean = false) {
+    if (isTab) {
+      let tab = this.getTabOrCreate(defProperty.name);
+      if (defProperty.index > 0) {
+        tab.index = defProperty.index;
+      }
+      if (defProperty.visible === false) {
+        tab.visible = false;
+      }
+      if (!!defProperty.title) {
+        tab.title = defProperty.title;
+      }
+    }
+    var isString = typeof defProperty == "string";
+    var name = !isString ? defProperty.name : defProperty;
+    var propRes = this.propertiesHash[name];
+    if (!propRes) return;
+    if (!isString && defProperty.visible === false) return;
+    if (
+      !propRes.visible &&
+      (isString || (!isString && defProperty.visible !== true))
+    )
+      return;
+    var tabName = isTab ? defProperty.name : "general";
+    if (!isTab && !isString && !!defProperty.tab) {
+      tabName = defProperty.tab;
+    }
+    var propertyDefinition = new SurveyQuestionEditorPropertyDefinition();
+    propertyDefinition.property = propRes.property;
+    propertyDefinition.category =
+      !isString && !!defProperty.category ? defProperty.category : "";
+    propertyDefinition.title =
+      !isString && !!defProperty.title ? defProperty.title : "";
+    let tab = this.getTabOrCreate(tabName);
+    tab.properties.push(propertyDefinition);
+  }
+  private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
+    for (var i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].name == tabName) return this.tabs[i];
+    }
+    var res = new SurveyQuestionEditorTabDefinition();
+    res.name = tabName;
+    //TODO make "general" constant
+    if (tabName == "general") {
+      res.index = -1;
+    }
+    this.tabs.push(res);
+    return res;
+  }
+  private getAllDefinitionsByClass(
+    className: string
+  ): Array<ISurveyQuestionEditorDefinition> {
+    var result = [];
+    if (
+      className.indexOf("@") > -1 &&
+      SurveyQuestionEditorDefinition.definition[className]
+    ) {
+      result.push(SurveyQuestionEditorDefinition.definition[className]);
+      return result;
+    }
+    var curClassName = className;
+    var usedProperties = [];
+    var hasOthersTab = false;
+    while (curClassName) {
+      let metaClass = <Survey.JsonMetadataClass>(
+        Survey.Serializer.findClass(curClassName)
+      );
+      if (!metaClass) break;
+      let classRes = SurveyQuestionEditorDefinition.definition[metaClass.name];
+      if (classRes) {
+        if (classRes.properties) {
+          for (var i = 0; i < classRes.properties.length; i++) {
+            var prop = classRes.properties[i];
+            usedProperties.push(typeof prop == "string" ? prop : prop.name);
+          }
+        }
+        if (classRes.tabs) {
+          for (var i = 0; i < classRes.tabs.length; i++) {
+            hasOthersTab = hasOthersTab || classRes.tabs[i].name == "others";
+            usedProperties.push(classRes.tabs[i].name);
+          }
+        }
+        result.unshift(classRes);
+      }
+      curClassName = metaClass.parentName;
+    }
+
+    if (!hasOthersTab) {
+      let classRes: any = { properties: [] };
+      if (result.length > 0) {
+        classRes.tabs = [{ name: "others", index: 1000 }];
+      }
+      let tabName = result.length == 0 ? "general" : "others";
+      for (var i = 0; i < this.properties.length; i++) {
+        if (
+          this.isJSONPropertyVisible(this.properties[i]) &&
+          usedProperties.indexOf(this.properties[i].name) < 0
+        ) {
+          classRes.properties.push({
+            name: this.properties[i].name,
+            tab: tabName
+          });
+        }
+      }
+      if (classRes.properties.length > 0) {
+        result.push(classRes);
+      }
+    }
+    return result;
+  }
 }
 
 export class SurveyElementEditorContent {
@@ -138,7 +295,8 @@ export class SurveyElementEditorContent {
     }
     this.properties = new SurveyQuestionProperties(
       this.editableObj,
-      this.options
+      this.options,
+      this.className
     );
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
@@ -181,6 +339,7 @@ export class SurveyElementEditorContent {
   }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
+    /*
     var self = this;
     var properties = new SurveyQuestionEditorProperties(
       this.editableObj,
@@ -196,14 +355,15 @@ export class SurveyElementEditorContent {
         new SurveyQuestionEditorTab(this.editableObj, properties, "general")
       );
     }
+    */
     this.addPropertiesTabs(tabs);
     return tabs;
   }
   private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var self = this;
-    var tabNames = SurveyQuestionEditorDefinition.getTabs(this.className);
-    for (var i = 0; i < tabNames.length; i++) {
-      var tabItem = tabNames[i];
+    var tabItems = this.properties.getTabs(); //SurveyQuestionEditorDefinition.getTabs(this.className);
+    for (var i = 0; i < tabItems.length; i++) {
+      var tabItem = tabItems[i];
       var properties = this.properties.getProperties(tabItem);
       if (properties.length > 0) {
         var propertyTab = new SurveyQuestionEditorTab(

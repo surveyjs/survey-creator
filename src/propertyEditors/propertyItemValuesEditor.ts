@@ -15,7 +15,10 @@ import {
   SurveyNestedPropertyEditorItem,
   SurveyNestedPropertyEditorColumn
 } from "./propertyNestedPropertyEditor";
-import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
+import {
+  SurveyQuestionEditor,
+  SurveyQuestionProperties
+} from "../questionEditors/questionEditor";
 import { SurveyPropertyModalEditor } from "../entries";
 
 export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
@@ -77,6 +80,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       this.createColumns();
     }
     this.koHasDetails(this.hasDetailsProperties());
+    this.updateShowTextViewVisibility();
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
     var props = this.getDefinedProperties();
@@ -85,13 +89,14 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   protected getDefinedProperties(): Array<any> {
     if (!this.property || !this.object || !this.object.getType) return [];
-    var properties = SurveyQuestionEditorDefinition.getProperties(
+    var properties = this.getDefinedListProperties(
       this.object.getType() + "@" + this.property.name
     );
-    if (properties && properties.length > 0) {
-      return this.getPropertiesByNames(this.property.className, properties);
+    var res = [];
+    for (var i = 0; i < properties.length; i++) {
+      res.push(properties[i].property);
     }
-    return [];
+    return res;
   }
   protected getDefaultProperties(): Array<Survey.JsonObjectProperty> {
     var properties = Survey.Serializer.getProperties(this.property.className);

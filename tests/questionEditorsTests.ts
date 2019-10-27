@@ -237,9 +237,9 @@ QUnit.test("Get tabs", function(assert) {
   SurveyQuestionEditorDefinition.definition["@testClass"] = {
     properties: [
       "name",
-      "car",
-      { name: "prop1", tab: "tab1" },
-      { name: "prop2", tab: "tab2" }
+      "title",
+      { name: "titleLocation", tab: "tab1" },
+      { name: "visibleIf", tab: "tab2" }
     ],
     tabs: [
       { name: "tab1", title: "Title 1" },
@@ -247,10 +247,15 @@ QUnit.test("Get tabs", function(assert) {
     ]
   };
 
-  var tabs = SurveyQuestionEditorDefinition.getTabs("@testClass");
-  assert.equal(tabs.length, 2, "There are three tabs");
-  assert.equal(tabs[0].title, "Title 1", "Tab 1 Title");
-  assert.equal(tabs[1].title, "Title 2", "Tab 2 Title");
+  var tabs = new SurveyQuestionProperties(
+    new Survey.Question("q1"),
+    null,
+    "@testClass"
+  ).getTabs();
+  assert.equal(tabs.length, 3, "There are three tabs");
+  assert.equal(tabs[0].name, "general", "The first tab is 'general'");
+  assert.equal(tabs[1].title, "Title 1", "Tab 1 Title");
+  assert.equal(tabs[2].title, "Title 2", "Tab 2 Title");
 });
 
 QUnit.test("Dynamically generated tabs", function(assert) {
@@ -281,7 +286,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
 
   var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
   assert.equal(editor.koTabs().length, 3, "There are three tabs");
-  assert.equal(generalTab.title, "General", "Tab 1 Title");
+  assert.equal(generalTab.title, "General", "General Title");
   assert.equal(editor.koTabs()[1].title, "Title 1", "Tab 2 Title");
   assert.equal(editor.koTabs()[2].title, "Title 2", "Tab 3 Title");
 
@@ -348,27 +353,36 @@ QUnit.test("General properties, has errors", function(assert) {
 });
 
 QUnit.test("Question editor definition: getProperties", function(assert) {
-  var baseProperties = SurveyQuestionEditorDefinition.getProperties("question");
-  var properties = SurveyQuestionEditorDefinition.getProperties("rating");
+  var baseProperties = new SurveyQuestionProperties(
+    new Survey.Question("q1")
+  ).getTabs()[0].properties;
+  var properties = new SurveyQuestionProperties(
+    new Survey.QuestionRatingModel("q2")
+  ).getTabs()[0].properties;
   assert.equal(
     properties.length,
     baseProperties.length + 5,
-    "Rating adds two properties"
+    "Rating adds five properties"
   );
-  assert.equal(properties[0], "name", "The first rating property");
+  assert.equal(properties[0].name, "name", "The first rating property");
   assert.equal(
-    properties[properties.length - 1],
+    properties[properties.length - 1].name,
     "maxRateDescription",
     "The last rating property"
   );
 });
 
 QUnit.test("Question editor definition: getTabs", function(assert) {
-  var tabs = SurveyQuestionEditorDefinition.getTabs("rating");
-  assert.equal(tabs.length, 4, "Rating has three tabs + others");
-  assert.equal(tabs[0].name, "rateValues", "The first tab");
-  assert.equal(tabs[1].name, "visibleIf", "The last tab");
-  assert.equal(tabs[2].name, "enableIf", "The last tab");
+  var ratingQuestion = new Survey.QuestionRatingModel("q1");
+  var properties = new SurveyQuestionProperties(ratingQuestion, null);
+  var tabs = properties.getTabs();
+  assert.equal(tabs.length, 5, "Rating has three tabs + others");
+  assert.equal(tabs[0].name, "general", "The first tab");
+  assert.equal(tabs[0].index, -1, "The general tab index");
+  assert.equal(tabs[1].name, "rateValues", "The second tab");
+  assert.equal(tabs[1].index, 10, "The rateValues tab rateValues");
+  assert.equal(tabs[2].name, "visibleIf", "The third tab");
+  assert.equal(tabs[3].name, "enableIf", "The fourth tab");
 });
 
 QUnit.test("Question editor: custom errors", function(assert) {
