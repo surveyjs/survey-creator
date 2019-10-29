@@ -1,5 +1,6 @@
 import * as Survey from "survey-knockout";
 import { SurveyElementSelector } from "../src/propertyEditors/surveyElementSelector";
+import { EditableObject } from "../src/propertyEditors/editableObject";
 export default QUnit.module("SurveyElementSelectorTests");
 
 QUnit.test("SurveyElementSelector get/set value", function(assert) {
@@ -97,6 +98,17 @@ QUnit.test("SurveyElementSelector validation", function(assert) {
   selector.koValue("q1");
   assert.equal(selector.hasError(), false, "Value is selected");
   assert.equal(selector.koErrorText(), "", "Error text is empty");
+});
+
+QUnit.test("SurveyElementSelector + editableObject", function(assert) {
+  var survey = createSurvey();
+  var editableObject = new EditableObject(survey);
+  var selector = new SurveyElementSelector(
+    <Survey.SurveyModel>editableObject.editableObj,
+    "question",
+    true
+  );
+  assert.equal(selector.koElements().length, 5, "There are 5 questions");
 });
 
 function createSurvey(): Survey.SurveyModel {

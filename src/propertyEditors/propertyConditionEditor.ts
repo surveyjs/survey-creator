@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyTextEditor } from "./propertyModalEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
+import { EditableObject } from "./editableObject";
 import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
@@ -107,14 +108,20 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return !!survey ? survey.getAllQuestions() : [];
   }
   protected getSurvey(): Survey.SurveyModel {
-    if (this.object instanceof Survey.SurveyModel) return this.object;
+    if (this.object instanceof Survey.SurveyModel) {
+      return this.getOrigionalSurvey(this.object);
+    }
     if (
       this.object instanceof Survey.MatrixDropdownColumn &&
       !!this.object.colOwner
     )
       return this.object.colOwner["survey"];
-    if (!!this.object && !!this.object.survey) return this.object.survey;
+    if (!!this.object && !!this.object.survey)
+      return this.getOrigionalSurvey(this.object.survey);
     return null;
+  }
+  private getOrigionalSurvey(survey: Survey.SurveyModel): Survey.SurveyModel {
+    return EditableObject.getOrigionalSurvey(survey);
   }
   public get allConditionQuestions(): any[] {
     var res = this.getConditionQuetions();
@@ -158,8 +165,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private addCalculatedValues(res: Array<any>) {
     var survey = this.getSurvey();
-    if (!survey || !survey["calculatedValues"]) return; //TODO
-    var values = survey["calculatedValues"];
+    if (!survey) return;
+    var values = survey.calculatedValues;
     for (var i = 0; i < values.length; i++) {
       var name = values[i].name;
       res.push({ name: name, text: name, question: null });

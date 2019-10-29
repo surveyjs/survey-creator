@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
+import { EditableObject } from "./editableObject";
 
 export interface SurveyElementSelectorItem {
   name: string;
@@ -27,6 +28,7 @@ export class SurveyElementSelector {
     showTitle: boolean = false,
     optionsCaptionName: string = ""
   ) {
+    this.survey = EditableObject.getOrigionalSurvey(this.survey);
     this.showTitle = showTitle;
     this.optionsCaptionValue = this.getOptionsText(
       optionsCaptionName,
