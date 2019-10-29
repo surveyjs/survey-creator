@@ -50,11 +50,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     return newItem;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
-    var names = this.getPropertiesNames("multipletext@items", [
-      "isRequired",
-      "name",
-      "title"
-    ]);
+    var names = this.getPropertiesNames("multipletext@items", []);
     return this.getPropertiesByNames("multipletextitem", names);
   }
   private getNewName(): string {

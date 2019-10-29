@@ -339,29 +339,12 @@ export class SurveyElementEditorContent {
   }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
-    /*
-    var self = this;
-    var properties = new SurveyQuestionEditorProperties(
-      this.editableObj,
-      SurveyQuestionEditorDefinition.getProperties(this.className),
-      this.options,
-      null,
-      function(propName: string) {
-        return self.getQuestionEditorPropertyByName(propName);
-      }
-    );
-    if (SurveyQuestionEditorDefinition.isGeneralTabVisible(this.className)) {
-      tabs.push(
-        new SurveyQuestionEditorTab(this.editableObj, properties, "general")
-      );
-    }
-    */
     this.addPropertiesTabs(tabs);
     return tabs;
   }
   private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var self = this;
-    var tabItems = this.properties.getTabs(); //SurveyQuestionEditorDefinition.getTabs(this.className);
+    var tabItems = this.properties.getTabs();
     for (var i = 0; i < tabItems.length; i++) {
       var tabItem = tabItems[i];
       var properties = this.properties.getProperties(tabItem);
