@@ -11,6 +11,7 @@ import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 import { SurveyElementSelector } from "../entries";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
+import { EditableObject } from "./editableObject";
 
 interface Element {
   text?: string;
@@ -79,8 +80,8 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   }
   protected onValueChanged() {
     if (this.editingObject) {
-      var allQuestions = (<Survey.Survey>this.editingObject).getAllQuestions();
-      this.koPages(this.getElements((<Survey.Survey>this.editingObject).pages));
+      var allQuestions = this.getOrigionalSurvey().getAllQuestions();
+      this.koPages(this.getElements(this.getOrigionalSurvey().pages));
       this.koQuestions(this.getElements(allQuestions));
       this.koElements(this.getElements(this.getAllElements()));
     }
@@ -92,7 +93,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   //TODO this code should be in the library
   private getAllElements(): Array<any> {
     var res = [];
-    var pages = (<Survey.Survey>this.editingObject).pages;
+    var pages = this.getOrigionalSurvey().pages;
     for (var i = 0; i < pages.length; i++) {
       this.addElemenetsIntoList(pages[i], res);
     }
@@ -179,7 +180,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
   private createPropertyTrigger(
     trigger: Survey.SurveyTrigger
   ): SurveyPropertyTrigger {
-    var survey = !!this.object ? this.object : this.editingObject;
+    var survey = this.getSurvey();
     trigger["survey"] = survey;
     if (trigger.getType() == "visibletrigger") {
       return new SurveyPropertyVisibleTrigger(
@@ -195,6 +196,12 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyItemsEditor {
       trigger,
       this.options
     );
+  }
+  private getSurvey(): Survey.SurveyModel {
+    return !!this.object ? this.object : this.editingObject;
+  }
+  private getOrigionalSurvey(): Survey.SurveyModel {
+    return EditableObject.getOrigionalSurvey(this.getSurvey());
   }
 }
 export class SurveyPropertyTrigger {

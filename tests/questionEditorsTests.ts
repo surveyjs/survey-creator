@@ -847,9 +847,8 @@ QUnit.test("Survey Editor + trigger, there is no questions", function(assert) {
   var triggerEditor = <SurveyPropertyTriggersEditor>(
     editor.getPropertyEditorByName("triggers").editor
   );
-  var editingSurvey = <Survey.SurveyModel>triggerEditor.object;
   assert.equal(
-    editingSurvey.getAllQuestions().length,
+    triggerEditor.koQuestions().length,
     2,
     "There are two questions here"
   );

@@ -110,7 +110,9 @@ QUnit.test("Copy questions", function(assert) {
   });
   var editableObj = new EditableObject(survey);
   assert.equal(
-    (<Survey.SurveyModel>editableObj.editableObj).getAllQuestions().length,
+    (<Survey.SurveyModel>(
+      editableObj.editableObj["origionalObj"]
+    )).getAllQuestions().length,
     2,
     "Two questions are here"
   );

@@ -1,6 +1,14 @@
 import * as Survey from "survey-knockout";
 
 export class EditableObject {
+  public static getOrigionalSurvey(
+    survey: Survey.SurveyModel
+  ): Survey.SurveyModel {
+    return !!survey && !!survey["origionalObj"]
+      ? survey["origionalObj"]
+      : survey;
+  }
+
   private objValue: Survey.Base;
   private editableObjValue: Survey.Base;
   public constructor(obj: Survey.Base) {
@@ -41,13 +49,12 @@ export class EditableObject {
           res["survey"] = this.obj["survey"];
         }
       }
-    } else {
-      res.setPropertyValue("pages", this.obj["pages"]);
     }
     if (!!this.obj["parent"]) {
       res["parent"] = this.obj["parent"];
     }
     res["isCopy"] = true;
+    res["origionalObj"] = this.obj;
     return res;
   }
   private assignProperties(obj: any) {
