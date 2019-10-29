@@ -816,7 +816,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     window["sel"] = this.koSelectedObject;
     this.koSelectedObject = ko.observable();
     this.koSelectedObject.subscribe(function(newValue) {
-      self.selectedObjectChanged(newValue != null ? newValue.value : null);
+      self.selectedObjectChanged(!!newValue ? newValue.value : null);
     });
     this.koGenerateValidJSON.subscribe(function(newValue) {
       if (!self.options) self.options = {};

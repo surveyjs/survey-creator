@@ -119,25 +119,6 @@ export class SurveyQuestionProperties {
       res.push(tab.properties[i].property);
     }
     return res;
-    /*
-    return this.editorDefinition
-      .reduce((a, b) => a.concat(b.properties), [
-        <any>{ name: tab.name, tab: tab.name }
-      ])
-      .filter(
-        prop =>
-          prop !== undefined &&
-          typeof prop !== "string" &&
-          prop.tab === tab.name
-      )
-      .map(prop => typeof prop !== "string" && this.getPropertyCore(prop.name))
-      .filter(
-        prop =>
-          !!prop &&
-          ((prop.name == tab.name && tab.visible === true) ||
-            SurveyHelper.isPropertyVisible(this.obj, prop, this.options))
-      );
-      */
   }
   private buildTabs(className: string) {
     if (!className) {
@@ -513,6 +494,7 @@ export class SurveyElementPropertyGrid {
   public set selectedObject(value: any) {
     if (this.selectedObjectValue == value) return;
     this.selectedObjectValue = value;
+    this.koHasObject(false);
     if (!!value) {
       this.koElementEditor(
         new SurveyElementEditorContent(
