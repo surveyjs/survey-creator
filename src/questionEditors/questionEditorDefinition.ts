@@ -155,8 +155,9 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@default": {
+      properties: ["width"],
       tabs: [
-        { name: "general", visible: false },
+        { name: "general" },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
         { name: "requiredIf", index: 30 },
