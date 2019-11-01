@@ -41,6 +41,9 @@ export class EditableObject {
       res = new Survey.Survey();
     }
     this.assignProperties(res);
+    if (type == "matrixdropdowncolumn") {
+      res["colOwner"] = this.obj["colOwner"];
+    }
     if (type != "survey") {
       if (!!res["setSurveyImpl"]) {
         res["setSurveyImpl"](this.obj["survey"]);

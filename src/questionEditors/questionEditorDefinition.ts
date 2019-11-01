@@ -157,7 +157,7 @@ export class SurveyQuestionEditorDefinition {
     "matrixdropdowncolumn@default": {
       properties: ["width"],
       tabs: [
-        { name: "general" },
+        { name: "general", visible: false },
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
         { name: "requiredIf", index: 30 },
@@ -165,7 +165,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@checkbox": {
-      properties: ["hasOther", "otherText", "choicesOrder", "colCount"],
+      properties: ["hasOther", "otherText", "choicesOrder", "colCount", "width"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -176,7 +176,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
-      properties: ["hasOther", "otherText", "choicesOrder", "colCount"],
+      properties: ["hasOther", "otherText", "choicesOrder", "colCount", "width"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -187,7 +187,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@dropdown": {
-      properties: ["hasOther", "otherText", "choicesOrder", "optionsCaption"],
+      properties: ["hasOther", "otherText", "choicesOrder", "optionsCaption", "width"],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -198,7 +198,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@text": {
-      properties: ["inputType", "placeHolder", "maxLength"],
+      properties: ["inputType", "placeHolder", "maxLength", "width"],
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
@@ -208,7 +208,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["rows", "placeHolder", "maxLength"],
+      properties: ["rows", "placeHolder", "maxLength", "width"],
       tabs: [
         { name: "validators", index: 10 },
         { name: "visibleIf", index: 12 },
@@ -218,7 +218,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@boolean": {
-      properties: ["defaultValue"],
+      properties: ["defaultValue", "width"],
       tabs: [
         { name: "visibleIf", index: 12 },
         { name: "enableIf", index: 20 },
@@ -227,7 +227,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@expression": {
-      properties: ["name", "displayStyle", "currency"],
+      properties: ["name", "displayStyle", "currency", "width"],
       tabs: [{ name: "expression", index: 10 }, { name: "totals", index: 40 }]
     },
     multipletextitem: {
