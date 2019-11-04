@@ -1,0 +1,42 @@
+{
+  "name": "survey-creator",
+  "version": "1.1.18",
+  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+  "keywords": [
+    "Survey",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#BuildSurvey",
+  "files": [
+    "survey-creator.css",
+    "survey-creator.min.css",
+    "survey-creator.js",
+    "survey-creator.d.ts",
+    "survey-creator.min.js"
+  ],
+  "main": "survey-creator.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "typings": "survey-creator.d.ts",
+  "peerDependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.1.1",
+    "ace-builds": "^1.2.2"
+  },
+  "dependencies": {
+    "survey-knockout": "^1.1.18",
+    "knockout": "^3.5.0"
+  },
+  "devDependencies": {}
+}
