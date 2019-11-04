@@ -140,6 +140,7 @@ import "../localization/spanish";
 import "../localization/traditional-chinese";
 import "../localization/norwegian";
 import "../localization/hungarian";
+import "../localization/russian";
 
 export {
   Translation,
