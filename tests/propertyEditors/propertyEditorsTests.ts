@@ -1013,7 +1013,7 @@ QUnit.test("Triggers property editor", function(assert) {
   var koTrigger = <SurveyPropertyVisibleTrigger>propEditor.koSelected();
   assert.equal(
     koTrigger.koText(),
-    "Run if: {Question1 title} notequal 'val1'",
+    "Run if: ({Question1 title} != val1)",
     "expression set correctly"
   );
   assert.deepEqual(
@@ -1031,7 +1031,7 @@ QUnit.test("Triggers property editor", function(assert) {
   assert.equal(koTrigger.koIsValid(), true, "the trigger is valid");
   assert.equal(
     koTrigger.koText(),
-    "Run if: {question2} notempty",
+    "Run if: notempty {question2}",
     "text for valid trigger"
   );
 
