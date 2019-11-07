@@ -158,6 +158,7 @@ export class SurveyObjectEditor {
   private updatePropertyEditor(propName: string) {
     var propEd = this.getPropertyEditor(propName);
     if (!!propEd) {
+      propEd.object = this.selectedObject;
       propEd.updateDynamicProperties();
     }
   }
