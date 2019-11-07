@@ -38,7 +38,9 @@ export class SurveyLogicType {
     expression: string
   ): string {
     if (!options || !options.showTitlesInExpressions) return expression;
-    return new ExpressionToDisplayText(survey).toDisplayText(expression);
+    return new ExpressionToDisplayText(survey, options).toDisplayText(
+      expression
+    );
   }
   private hasUniqueItem: boolean = false;
   public koVisible: any;

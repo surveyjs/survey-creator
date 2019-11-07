@@ -32,7 +32,7 @@ var traditionalChineseTranslation = {
   },
   // strings for editor
   ed: {
-    survey: "調查問捲",
+    survey: "調查問卷",
     editSurvey: "修改",
     addNewPage: "添加新頁面",
     deletePage: "刪除頁面",
@@ -40,12 +40,12 @@ var traditionalChineseTranslation = {
     newPageName: "頁面",
     newQuestionName: "問題",
     newPanelName: "面板",
-    testSurvey: "測試問捲",
-    testSurveyAgain: "再次測試問捲",
-    testSurveyWidth: "問捲寬度: ",
-    embedSurvey: "將問捲嵌入網頁",
-    saveSurvey: "保存問捲",
-    designer: "問捲設計器",
+    testSurvey: "測試問卷",
+    testSurveyAgain: "再次測試問卷",
+    testSurveyWidth: "問卷寬度: ",
+    embedSurvey: "將問卷嵌入網頁",
+    saveSurvey: "保存問卷",
+    designer: "問卷設計器",
     jsonEditor: "JSON 編輯器",
     undo: "還原",
     redo: "重做",
@@ -163,7 +163,7 @@ var traditionalChineseTranslation = {
       question: "問題",
       completedHtml: "完成後的Html",
       loadingHtml: "加載中的Html",
-      timer: "問捲計時器",
+      timer: "問卷計時器",
       trigger: "觸發器",
       fileOptions: "選項",
       html: "HTML 編輯器",
@@ -181,17 +181,17 @@ var traditionalChineseTranslation = {
     editProperty: "編輯屬性: '{0}'",
     items: "[ 項目數量: {0} ]",
     enterNewValue: "請設定值",
-    noquestions: "問捲中還沒有創建任何問題",
+    noquestions: "問卷中還沒有創建任何問題",
     createtrigger: "請創建觸發器",
     triggerOn: "當 ",
     triggerMakePagesVisible: "使頁面可見:",
     triggerMakeQuestionsVisible: "使問題可見:",
-    triggerCompleteText: "如果滿足條件，則完成問捲",
+    triggerCompleteText: "如果滿足條件，則完成問卷",
     triggerNotSet: "觸發器尚未設置",
     triggerRunIf: "滿足下列條件時執行",
     triggerSetToName: "修改下列問題值: ",
     triggerSetValue: "修改為: ",
-    triggerIsVariable: "在問捲提交結果中不要包含該變量"
+    triggerIsVariable: "在問卷提交結果中不要包含該變量"
   },
   // strings for operators
   op: {
@@ -216,8 +216,8 @@ var traditionalChineseTranslation = {
     bootstrap: "使用 Bootstrap 時",
     standard: "不使用 Bootstrap 時",
     showOnPage: "嵌入頁面顯示",
-    showInWindow: "使用單獨的問捲視窗",
-    loadFromServer: "從服務器加載問捲 JSON 數據",
+    showInWindow: "使用單獨的問卷視窗",
+    loadFromServer: "從服務器加載問卷 JSON 數據",
     titleScript: "腳本和樣式",
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
@@ -230,7 +230,7 @@ var traditionalChineseTranslation = {
     textvalidator: "文本"
   },
   triggers: {
-    completetrigger: "完成問捲",
+    completetrigger: "完成問卷",
     setvaluetrigger: "設置問題值",
     visibletrigger: "修改可見性"
   },
@@ -300,7 +300,7 @@ var traditionalChineseTranslation = {
     },
     survey_title: {
       name: "標題",
-      title: "問捲標題在每頁上都會顯示"
+      title: "問卷標題在每頁上都會顯示"
     },
     page_title: {
       name: "標題",

@@ -111,7 +111,13 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     );
   }
   protected getClassName(): string {
-    return "matrixdropdowncolumn@" + this.obj["cellType"];
+    var base: string = "matrixdropdowncolumn@";
+    if (!this.column["object"] || this.obj.cellType !== "default") {
+      return base + this.obj.cellType;
+    }
+    else {
+      return base + this.column["object"].cellType;
+    }
   }
 }
 

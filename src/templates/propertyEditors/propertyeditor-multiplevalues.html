@@ -11,7 +11,7 @@
       <!-- ko foreach: { data: koCategories, as: 'cat'}  -->
       <div class="svd-logic-item-header" data-bind="visible: cat.koTitleVisible"><span data-bind="text: cat.koCategory()"></span></div>
       <!-- ko foreach: { data: cat.koItems, as: 'item'}  -->
-      <div class="sjs-cb-wrapper" data-bind="style:{display: 'inline-block'">
+      <div class="sjs-cb-wrapper" style="display: inline-block;">
           <label>
               <div class="sjs-cb-container">
                   <input type="checkbox" data-bind="attr: {value: item.value}, checked: cat.editor.koEditingValue" />

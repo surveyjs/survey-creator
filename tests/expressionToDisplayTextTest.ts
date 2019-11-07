@@ -13,12 +13,12 @@ QUnit.test("Replace question titles test", function(assert) {
   var expressionToText = new ExpressionToDisplayText(survey);
   assert.equal(
     expressionToText.toDisplayText("{q1} = 1"),
-    "{My Question 1} = 1",
+    "({My Question 1} == 1)",
     "Replace the question name with title"
   );
   assert.equal(
     expressionToText.toDisplayText("{q2} = 2"),
-    "{q2} = 2",
+    "({q2} == 2)",
     "There is no title"
   );
 });
