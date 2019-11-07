@@ -34,4 +34,3 @@ docs/classes.json
 /doc_generator/*.json
 *.env
 svgbundle.html
-package-lock.json
