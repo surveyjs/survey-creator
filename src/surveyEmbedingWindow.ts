@@ -177,7 +177,7 @@ export class SurveyEmbedingWindow {
   }
   private getSetCss(): string {
     if (this.koScriptUsing() != "bootstrap") return "";
-    return "Survey.Survey.cssType = \"bootstrap\";\n";
+    return "Survey.StylesManager.applyTheme(\"bootstrap\");\n";
   }
   private getSaveFunc() {
     return (
