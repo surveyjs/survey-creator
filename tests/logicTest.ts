@@ -65,7 +65,10 @@ QUnit.test("Add existing visible Items", function(assert) {
 });
 QUnit.test("Add new operation immediately", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "Default is mode is view");
@@ -119,7 +122,7 @@ QUnit.test("Add new item", function(assert) {
     "the expression is empty"
   );
   assert.equal(
-    logic.expressionEditor.koAddConditionQuestions().length,
+    logic.expressionEditor.koConditionQuestions().length,
     3,
     "We have 3 questions here"
   );
@@ -270,15 +273,18 @@ QUnit.test("Remove same operations on save", function(assert) {
   logic = new SurveyLogic(survey);
   logic.editItem(logic.items[0]);
   var lt = logic.getTypeByName("question_visibility");
-  logic.editableItem.addOperation(lt, <Survey.Question>(
-    survey.getQuestionByName("q1")
-  ));
-  logic.editableItem.addOperation(lt, <Survey.Question>(
-    survey.getQuestionByName("q2")
-  ));
-  logic.editableItem.addOperation(lt, <Survey.Question>(
-    survey.getQuestionByName("q2")
-  ));
+  logic.editableItem.addOperation(
+    lt,
+    <Survey.Question>survey.getQuestionByName("q1")
+  );
+  logic.editableItem.addOperation(
+    lt,
+    <Survey.Question>survey.getQuestionByName("q2")
+  );
+  logic.editableItem.addOperation(
+    lt,
+    <Survey.Question>survey.getQuestionByName("q2")
+  );
   assert.equal(
     logic.editableItem.operations.length,
     4,
@@ -781,7 +787,10 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   var options = new EditorOptionsTests();
   options.readOnly = true;
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogic(survey, options);
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
@@ -918,7 +927,10 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
 
 QUnit.test("Logic editing errors", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();

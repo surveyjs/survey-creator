@@ -202,8 +202,11 @@ export var enStrings = {
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    conditionButtonAdd: "Add",
+    conditionButtonApply: "Apply",
     conditionButtonReplace: "Replace",
+    conditionButtonAddAsAnd: "Add as 'and'",
+    conditionButtonAddAsOr: "Add as 'or'",
+    conditionButtonClear: "Clear",
     conditionHelp:
       "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
@@ -218,6 +221,7 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
+    expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",
     rowid: "Row ID",
@@ -276,6 +280,11 @@ export var enStrings = {
     qEditorTitle: "Edit: {0}",
 
     maxLength: "Maximum length",
+
+    buildExpression: "Build",
+    editExpression: "Edit",
+    expressionTextApply: "Apply",
+    expressionTextReset: "Reset",
 
     //survey
     showTitle: "Show/hide title",
