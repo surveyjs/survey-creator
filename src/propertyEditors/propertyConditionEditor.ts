@@ -262,7 +262,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var json = {
       questions: [],
       showNavigationButtons: false,
-      showQuestionNumbers: "off"
+      showQuestionNumbers: "off",
+      textUpdateMode: "onTyping"
     };
     json.questions.push(qjson);
     var survey = !!this.options
