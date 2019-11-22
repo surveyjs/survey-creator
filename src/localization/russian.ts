@@ -8,7 +8,7 @@ export var ruStrings = {
     externalHelpLink: "Научиться создавать опросы",
     externalHelpLinkUrl:
       "Https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    dropQuestion: "Пожалуйста, перетяните необходимый тип вопроса из панели слева",
+    dropQuestion: "Пожалуйста, перетяните необходимый элемент из панели слева",
     copy: "Копировать",
     addToToolbox: "Добавить к инструментам",
     deletePanel: "Удалить панель",
@@ -183,13 +183,13 @@ export var ruStrings = {
     Addnew: "Добавить новый",
     addItem: "Нажмите, чтобы добавить элемент...",
     addOther: "Другое",
-    addSelectAll: "Выбрать все",
+    addSelectAll: "Выбрать все пункты",
     addNone: "Ничего",
     removeAll: "Удалить все",
     edit: "Редактировать",
     back: "Вернуться без сохранения",
     saveAndBack: "Сохранить и вернуться",
-    itemValueEdit: "Видимый если",
+    itemValueEdit: "Отображать, если",
     editChoices: "Редактировать выбор",
     move: "Переместить",
     empty: "<пусто>",
@@ -233,9 +233,9 @@ export var ruStrings = {
     hasOther: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
     hasNone: "Нет ни одного пункта",
-    noneText: "Текст пункта отсутствует",
+    noneText: "Текст пункта 'Ничего'",
     hasSelectAll: "Выбрать все пункты",
-    selectAllText: "Выбрать весь текст пункта",
+    selectAllText: "Текст пункта 'Выбрать все пункты'",
     choicesMin: "Минимальное значение для автоматически сгенерированных элементов",
     choicesMax: "Максимальное значение для автоматически сгенерированных элементов",
     choicesStep: "Разница между автоматически сгенерироваными элементами",
@@ -244,7 +244,7 @@ export var ruStrings = {
     cellType: "Тип ячейки",
     ColCount: "Количество столбцов",
     choicesOrder: "Выбрать порядок отбора",
-    visible: "Видимый?",
+    visible: "Отображать?",
     isRequired: "Обязательный?",
     isAllRowRequired: "Все строки обязательны для заполнения",
     requiredErrorText: "Это поле обязательное для заполнения",
@@ -342,7 +342,7 @@ export var ruStrings = {
       rows: "Строки",
       choices: "Выбор",
       items: "Элементы",
-      visibleIf: "Видимый, если",
+      visibleIf: "Отображать, если",
       enableIf: "Доступен, если",
       requiredIf: "Обязателен для заполнения, если",
       rateValues: "Оценить важность(вес) вопроса",
@@ -365,7 +365,7 @@ export var ruStrings = {
     items: "[Элементы: {0}]",
   
     enterNewValue: "Пожалуйста, введите значение.",
-    noquestions: "В опросе нет ни одного вопроса",
+    noquestions: "В опроснике нет ни одного вопроса",
     createtrigger: "Пожалуйста, создайте триггер",
     triggerOn: "О",
     triggerMakePagesVisible: "Сделать страницы видимыми:",
@@ -378,7 +378,7 @@ export var ruStrings = {
     triggerRunExpression: "Выполнить это выражение:",
     triggerSetValue: "в:",
     triggerGotoName: "Перейти к вопросу:",
-    triggerIsVariable: "Не помещать переменную в результат опроса.",
+    triggerIsVariable: "Не помещать переменную в результат опросника.",
     triggerRunExpressionEmpty: "Пожалуйста, введите корректное выражение"
   },
   // Property values
@@ -432,7 +432,7 @@ export var ruStrings = {
     on: "Включить",
     onPage: "На странице",
     edit: "Редактирование",
-    display: "Отображение",
+    display: "Просмотр",
     onComplete: "По завершению",
     onHidden: "По скрытию",
     all: "Все",
@@ -453,8 +453,8 @@ export var ruStrings = {
     allof: "все из",
     greater: "больше",
     less: "меньше",
-    greaterorequal: "больше или равен",
-    lessorequal: "меньше или равен"
+    greaterorequal: "больше или равно",
+    lessorequal: "меньше или равно"
   },
   // Embed window
   ew: {
@@ -505,7 +505,7 @@ export var ruStrings = {
     maxTimeToFinish: "Максимальное время для завершения",
 
     visible: "Видимый",
-    visibleIf: "Видимый если",
+    visibleIf: "Отображать, если",
     questionTitleLocation: "Расположение заголовка вопроса",
     description: "Описание",
     state: "Состояние",
@@ -650,7 +650,7 @@ export var ruStrings = {
     defaultPanelValue: "Значение панели по умолчанию",
     defaultRowValue: "Значение строки по умолчанию",
     hasNone: "Нет ни одного пункта",
-    noneText: "Текст пункта отсутствует",
+    noneText: "Текст пункта 'Ничего'",
 
     text: "Текст"
   }
