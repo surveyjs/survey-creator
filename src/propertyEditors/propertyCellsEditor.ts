@@ -52,7 +52,7 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     return "cells";
   }
   protected onValueChanged() {
-    if (this.isShowingModal) {
+    if (this.isBeforeShowCalled) {
       this.setupCells();
     }
   }

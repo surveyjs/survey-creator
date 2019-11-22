@@ -51,7 +51,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     if (!SurveyPropertyModalEditor.customWidgets) return null;
     return SurveyPropertyModalEditor.customWidgets[editorType];
   }
-  private isShowingModalValue: boolean = false;
+  private isBeforeShowCalledValue: boolean = false;
   private elements: HTMLElement[];
   public editingObject: any;
   public onApplyClick: any;
@@ -66,6 +66,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   koAfterRender: any;
   koHtmlTop: any;
   koHtmlBottom: any;
+  koIsShowingModal: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koTitleCaption = ko.observable("");
@@ -84,6 +85,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.modalNameTarget = "#" + this.modalName;
     var self = this;
     this.koShowApplyButton = ko.observable(true);
+    this.koIsShowingModal = ko.observable(false);
 
     self.onHideModal = function() {};
     self.onApplyClick = function() {
@@ -99,6 +101,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     };
     self.onShowModal = function() {
       self.beforeShow();
+      self.koIsShowingModal(true);
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
         bodyClass: "",
         closeTimeout: 100,
@@ -134,15 +137,15 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   public get isModal(): boolean {
     return true;
   }
-  public get isShowingModal(): boolean {
-    return this.isShowingModalValue;
+  public get isBeforeShowCalled(): boolean {
+    return this.isBeforeShowCalledValue;
   }
   public beforeShow() {
-    this.isShowingModalValue = true;
+    this.isBeforeShowCalledValue = true;
     this.updateValue();
   }
   public beforeCloseModal() {
-    this.isShowingModalValue = false;
+    this.isBeforeShowCalledValue = false;
   }
   protected onOptionsChanged() {
     this.koShowApplyButton = ko.observable(

@@ -192,7 +192,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   protected onValueChanged() {
     super.onValueChanged();
-    if (this.isShowingModal) {
+    if (this.isBeforeShowCalled) {
       if (this.koActiveView() !== "form") {
         this.koItemsText(this.getItemsText());
       }

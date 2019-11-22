@@ -844,3 +844,21 @@ QUnit.test(
     assert.equal(editor.koBuildType(), "view", "View type again # 2");
   }
 );
+QUnit.test(
+  "SurveyPropertyConditionEditor, do not modify koValue for editor in Modal Window",
+  function(assert) {
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = page.addNewQuestion("text", "q1");
+    var question2 = <Survey.Question>page.addNewQuestion("text", "q2");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.koIsShowingModal(true);
+    editor.koConditionQuestion("q2");
+    editor.addConditionValue = "abc";
+    assert.equal(editor.koValue(), "", "value is not set");
+    assert.equal(question.visibleIf, "", "value is not set into question");
+  }
+);

@@ -239,7 +239,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private setValueFromBuilder(val: string) {
     this.koTextValue(val);
-    this.koValue(val);
+    if (!this.koIsShowingModal()) {
+      this.koValue(val);
+    }
   }
   private deleteConditionProperties(json: any) {
     delete json["visible"];

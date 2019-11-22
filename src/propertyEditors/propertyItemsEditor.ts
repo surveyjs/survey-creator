@@ -53,7 +53,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     this.koItems(this.getItemsFromValue(this.editingValue));
   }
   protected onValueChanged() {
-    if (this.isShowingModal) {
+    if (this.isBeforeShowCalled) {
       this.setupItems();
     }
   }
