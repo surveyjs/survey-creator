@@ -23,7 +23,7 @@
                     </select>
                 </div>
                 <div class="form-control svd_custom_select">
-                    <select onmousewheel="return false;" data-bind="options:availableOperators, optionsValue: 'name', optionsText: 'text', value:koConditionOperator"></select>
+                    <select onmousewheel="return false;" data-bind="options:koVisibleOperators, optionsValue: 'name', optionsText: 'text', value:koConditionOperator, enable: !!koConditionQuestion()"></select>
                 </div>
             </div>
             <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">

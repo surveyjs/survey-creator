@@ -8,11 +8,11 @@ import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
-  public availableOperators = [];
   public showHelpText: boolean = true;
   koIsConditionValid: any;
   koConditionQuestions: any;
   koConditionQuestion: any;
+  koVisibleOperators: any;
   koConditionOperator: any;
   koButtonReplaceText: any;
   koRequireConditionValue: any;
@@ -40,10 +40,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       if (!!this.koTextValue()) return this.getConditionDisplayText();
       return this.getLocString("pe.expressionIsEmpty");
     }, this);
-    this.availableOperators = SurveyPropertyEditorFactory.getOperators();
     this.koConditionQuestions = ko.observableArray();
     this.koConditionQuestion = ko.observable("");
     this.koConditionOperator = ko.observable("");
+    this.koVisibleOperators = ko.computed(function() {
+      return this.getVisibleOperators(this.koConditionQuestion());
+    }, this);
     this.koHasValueSurvey = ko.observable(false);
     this.koValueSurvey = ko.observable(
       SurveyPropertyConditionEditor.emptySurvey
@@ -198,6 +200,44 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         res
       );
     return res;
+  }
+  private getVisibleOperators(questionName: string): Array<any> {
+    var res = [];
+    var question = this.getQuestionByName(questionName);
+    var qType = !!question ? question.getType() : null;
+    var operators = SurveyPropertyEditorFactory.getOperators();
+    for (var i = 0; i < operators.length; i++) {
+      if (this.isOperatorVisible(qType, operators[i].types)) {
+        res.push(operators[i]);
+      }
+    }
+    return res;
+  }
+  private isOperatorVisible(
+    qType: string,
+    operatorTypes: Array<string>
+  ): boolean {
+    if (!qType) return true;
+    if (!operatorTypes || operatorTypes.length == 0) return true;
+    var contains = [];
+    var notContains = [];
+    for (var i = 0; i < operatorTypes.length; i++) {
+      let name = operatorTypes[i];
+      if (name[0] == "!") {
+        notContains.push(name.substr(1));
+      } else {
+        contains.push(name);
+      }
+    }
+    var classInfo = Survey.Serializer.findClass(qType);
+    while (!!classInfo) {
+      if (contains.indexOf(classInfo.name) > -1) return true;
+      if (notContains.indexOf(classInfo.name) > -1) return false;
+      classInfo = !!classInfo.parentName
+        ? Survey.Serializer.findClass(classInfo.parentName)
+        : null;
+    }
+    return contains.length == 0;
   }
   private canAddCondition(questionName: string, operator: string): boolean {
     return (

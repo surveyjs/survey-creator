@@ -4,6 +4,7 @@ import {
   doGetCompletions,
   SurveyPropertyConditionEditor
 } from "../../src/propertyEditors/propertyConditionEditor";
+import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
@@ -862,3 +863,111 @@ QUnit.test(
     assert.equal(question.visibleIf, "", "value is not set into question");
   }
 );
+QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "qText", type: "text" },
+      { name: "qComment", type: "comment" },
+      { name: "qRadio", type: "radiogroup", choices: [1, 2] },
+      { name: "qDropdown", type: "dropdown", choices: [1, 2] },
+      { name: "qCheck", type: "checkbox", choices: [1, 2] },
+      { name: "qBoolean", type: "boolean" },
+      { name: "qExpression", type: "expression" },
+      { name: "qFile", type: "file" },
+      { name: "qImagepicker", type: "imagepicker" },
+      { name: "qMatrix", type: "matrix" },
+      { name: "qMatrixdropdown", type: "matrixdropdown" },
+      { name: "qMatrixdynamic", type: "matrixdynamic" },
+      { name: "qMultipletext", type: "multipletext" }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  var checkFun = function(questionName: string, operatorNames: Array<string>) {
+    editor.koConditionQuestion(questionName);
+    var ops = editor.koVisibleOperators();
+    var names = [];
+    for (var i = 0; i < ops.length; i++) {
+      names.push(ops[i].name);
+    }
+    assert.equal(
+      editor.koVisibleOperators().length,
+      operatorNames.length,
+      "Operators lentgh is correct for question: '" +
+        questionName +
+        "', " +
+        JSON.stringify(names)
+    );
+    for (var i = 0; i < operatorNames.length; i++) {
+      assert.ok(
+        names.indexOf(operatorNames[i]) > -1,
+        "Operator: '" +
+          operatorNames[i] +
+          "' is here for question: " +
+          questionName
+      );
+    }
+  };
+  var checkFunMultiple = function(
+    questionNames: Array<string>,
+    operatorNames: Array<string>
+  ) {
+    for (var i = 0; i < questionNames.length; i++) {
+      checkFun(questionNames[i], operatorNames);
+    }
+  };
+  assert.equal(
+    editor.koVisibleOperators().length,
+    SurveyPropertyEditorFactory.getOperators().length,
+    "Show all operators when question is not set"
+  );
+  checkFunMultiple(
+    ["qText", "qComment"],
+    [
+      "empty",
+      "notempty",
+      "equal",
+      "notequal",
+      "contains",
+      "notcontains",
+      "greater",
+      "less",
+      "greaterorequal",
+      "lessorequal"
+    ]
+  );
+  checkFunMultiple(
+    ["qRadio", "qDropdown"],
+    ["empty", "notempty", "equal", "notequal", "anyof"]
+  );
+  checkFun("qCheck", [
+    "empty",
+    "notempty",
+    "equal",
+    "notequal",
+    "contains",
+    "notcontains",
+    "anyof",
+    "allof"
+  ]);
+  checkFun("qBoolean", ["empty", "notempty", "equal", "notequal"]);
+  checkFun("qExpression", [
+    "empty",
+    "notempty",
+    "equal",
+    "notequal",
+    "greater",
+    "less",
+    "greaterorequal",
+    "lessorequal"
+  ]);
+  checkFun("qFile", ["empty", "notempty"]);
+  checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof"]);
+  //["empty", "notempty", "equal", "notequal", "contains", "notcontains", "anyof", "allof", "greater", "less", "greaterorequal", "lessorequal"]
+});

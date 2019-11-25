@@ -12,25 +12,68 @@ export class SurveyPropertyEditorFactory {
   private static widgetRegisterList = {};
   public static getOperators(): Array<any> {
     var operators = [
-      "empty",
-      "notempty",
-      "equal",
-      "notequal",
-      "contains",
-      "notcontains",
-      "anyof",
-      "allof",
-      "greater",
-      "less",
-      "greaterorequal",
-      "lessorequal"
+      { name: "empty", types: [] },
+      { name: "notempty", types: [] },
+      { name: "equal", types: ["!file"] },
+      { name: "notequal", types: ["!file"] },
+      {
+        name: "contains",
+        types: ["checkbox", "text", "comment"]
+      },
+      {
+        name: "notcontains",
+        types: ["checkbox", "text", "comment"]
+      },
+      { name: "anyof", types: ["selectbase"] },
+      { name: "allof", types: ["checkbox"] },
+      {
+        name: "greater",
+        types: [
+          "!selectbase",
+          "!boolean",
+          "!file",
+          "!matrix",
+          "!matrixdropdownbase"
+        ]
+      },
+      {
+        name: "less",
+        types: [
+          "!selectbase",
+          "!boolean",
+          "!file",
+          "!matrix",
+          "!matrixdropdownbase"
+        ]
+      },
+      {
+        name: "greaterorequal",
+        types: [
+          "!selectbase",
+          "!boolean",
+          "!file",
+          "!matrix",
+          "!matrixdropdownbase"
+        ]
+      },
+      {
+        name: "lessorequal",
+        types: [
+          "!selectbase",
+          "!boolean",
+          "!file",
+          "!matrix",
+          "!matrixdropdownbase"
+        ]
+      }
     ];
     var result = [];
     for (var i = 0; i < operators.length; i++) {
-      var name = operators[i];
+      var name = operators[i].name;
       result.push({
         name: name,
-        text: editorLocalization.getString("op." + name)
+        text: editorLocalization.getString("op." + name),
+        types: operators[i].types
       });
     }
     return result;
