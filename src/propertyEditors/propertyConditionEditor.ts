@@ -145,11 +145,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         .isEmpty()
     );
   }
-  public get addConditionValue(): any {
+  public get conditionValue(): any {
     if (!this.koValueSurvey()) return null;
     return this.koValueSurvey().getValue("question");
   }
-  public set addConditionValue(val: any) {
+  public set conditionValue(val: any) {
     if (!this.koValueSurvey()) return;
     this.koValueSurvey().setValue("question", val);
   }
@@ -281,7 +281,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       !questionName ||
       !this.getSurvey()
     ) {
-      this.addConditionValue = null;
+      this.conditionValue = null;
       this.koHasValueSurvey(false);
       this.updateValueAutomatically(questionName, operator);
       return;
@@ -471,8 +471,18 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return op;
   }
   private getAddConditionValue(): string {
-    var val = this.addConditionValue;
+    var val = this.conditionValue;
     if (!val) return val;
+    if (!Array.isArray(val)) return this.valToText(val);
+    var res = "[";
+    for (var i = 0; i < val.length; i++) {
+      res += this.valToText(val[i]);
+      if (i < val.length - 1) res += ", ";
+    }
+    res += "]";
+    return res;
+  }
+  private valToText(val: any): string {
     if (val == "true" || val == "false") return val;
     if (!isNaN(val)) return val;
     if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
@@ -494,7 +504,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   private resetConditionBuilder() {
     this.koConditionQuestion("");
     this.koConditionOperator("equal");
-    this.addConditionValue = null;
+    this.conditionValue = null;
   }
   private getConditionDisplayText(): string {
     return new ExpressionToDisplayText(

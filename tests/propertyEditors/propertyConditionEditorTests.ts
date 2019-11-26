@@ -171,7 +171,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   assert.equal(editor.koIsConditionValid(), false, "We can't add condition");
   editor.koConditionQuestion("q2");
   assert.equal(editor.koIsConditionValid(), false, "value is empty");
-  editor.addConditionValue = "2";
+  editor.conditionValue = "2";
   assert.equal(editor.koIsConditionValid(), true, "Can add condition");
   editor.object = question;
   editor.addCondition();
@@ -183,7 +183,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   assert.notOk(editor.koConditionQuestion(), "question should empty");
   assert.equal(editor.koIsConditionValid(), false, "values were reset.");
   editor.koConditionQuestion("q1");
-  editor.addConditionValue = "abc";
+  editor.conditionValue = "abc";
 
   editor.koTextValue(""); // TODO: reanimate condition error checks
   editor.addCondition();
@@ -215,7 +215,7 @@ QUnit.test(
     editor.beforeShow();
     editor.koConditionQuestion("q2");
     assert.equal(editor.koHasValueSurvey(), true, "Value survey is created");
-    editor.addConditionValue = JSON.stringify(["item1's"]);
+    editor.conditionValue = JSON.stringify(["item1's"]);
     editor.replaceCondition();
     assert.equal(
       editor.koTextValue(),
@@ -240,7 +240,7 @@ QUnit.test(
     editor.object = question;
     editor.beforeShow();
     editor.koConditionQuestion("q2");
-    editor.addConditionValue = "d'2";
+    editor.conditionValue = "d'2";
     editor.object = question;
     editor.addCondition();
     assert.equal(
@@ -281,7 +281,7 @@ QUnit.test(
     editor.object = question;
     editor.beforeShow();
     editor.koConditionQuestion("panel.q2");
-    editor.addConditionValue = "2";
+    editor.conditionValue = "2";
     editor.addCondition();
     assert.equal(
       editor.koTextValue(),
@@ -312,7 +312,7 @@ QUnit.test(
     editor.object = question;
     editor.beforeShow();
     editor.koConditionQuestion("q2");
-    editor.addConditionValue = "abc";
+    editor.conditionValue = "abc";
     editor.replaceCondition();
     assert.equal(
       editor.koTextValue(),
@@ -322,7 +322,7 @@ QUnit.test(
 
     editor.koTextValue("");
     editor.koConditionQuestion("matrix.row1.column1");
-    editor.addConditionValue = "1";
+    editor.conditionValue = "1";
     editor.replaceCondition();
     assert.equal(
       editor.koTextValue(),
@@ -400,7 +400,7 @@ QUnit.test(
     editor.object = question;
     editor.beforeShow();
     editor.koConditionQuestion("q2");
-    editor.addConditionValue = "abc";
+    editor.conditionValue = "abc";
     editor.apply();
     assert.equal(
       editor.koTextValue(),
@@ -551,14 +551,10 @@ QUnit.test(
     editor.koConditionQuestion("q1");
     assert.equal(editor.koHasValueSurvey(), true, "Value Survey is ready");
     editor.koValueSurvey().setValue("question", 1);
-    assert.equal(
-      editor.addConditionValue,
-      1,
-      "Set condition value from survey"
-    );
+    assert.equal(editor.conditionValue, 1, "Set condition value from survey");
     editor.koConditionQuestion("q3");
     assert.notOk(
-      editor.addConditionValue,
+      editor.conditionValue,
       "Empty condition value on changing question name"
     );
     editor.koConditionQuestion("q4");
@@ -589,13 +585,9 @@ QUnit.test(
       false,
       "There is no question set"
     );
-    assert.notOk(editor.addConditionValue, "It is empty by default");
+    assert.notOk(editor.conditionValue, "It is empty by default");
     editor.koConditionQuestion("q1");
-    assert.equal(
-      editor.addConditionValue,
-      "1",
-      "The value equals default value"
-    );
+    assert.equal(editor.conditionValue, "1", "The value equals default value");
     assert.equal(
       editor.koIsConditionValid(),
       true,
@@ -659,7 +651,7 @@ QUnit.test(
     editor.beforeShow();
     editor.doBuildClick();
     editor.koConditionQuestion("q3");
-    editor.addConditionValue = "val1";
+    editor.conditionValue = "val1";
     assert.equal(
       editor.koTextValue(),
       "{q3} = 'val1'",
@@ -670,7 +662,7 @@ QUnit.test(
       "{q3} = 'val1'",
       "Set koValue automatically"
     );
-    editor.addConditionValue = "val2";
+    editor.conditionValue = "val2";
     assert.equal(
       editor.koTextValue(),
       "{q3} = 'val2'",
@@ -683,14 +675,14 @@ QUnit.test(
     );
     editor.koConditionQuestion("q1");
     assert.equal(editor.koTextValue(), "", "Reset the value");
-    editor.addConditionValue = 2;
+    editor.conditionValue = 2;
     assert.equal(
       editor.koTextValue(),
       "{q1} = 2",
       "Set value automatically #2"
     );
     editor.replaceCondition();
-    editor.addConditionValue = 3;
+    editor.conditionValue = 3;
     assert.equal(editor.koTextValue(), "{q1} = 2", "Stop update the value");
 
     editor.object = survey.getQuestionByName("q3");
@@ -702,7 +694,7 @@ QUnit.test(
       "Update the value on object change"
     );
     editor.koConditionQuestion("q2");
-    editor.addConditionValue = 3;
+    editor.conditionValue = 3;
     assert.equal(
       editor.koTextValue(),
       "{q2} = 1",
@@ -858,7 +850,7 @@ QUnit.test(
     editor.beforeShow();
     editor.koIsShowingModal(true);
     editor.koConditionQuestion("q2");
-    editor.addConditionValue = "abc";
+    editor.conditionValue = "abc";
     assert.equal(editor.koValue(), "", "value is not set");
     assert.equal(question.visibleIf, "", "value is not set into question");
   }
@@ -1032,11 +1024,11 @@ QUnit.test(
     editor.object = question;
     editor.beforeShow();
     editor.koConditionQuestion("question1");
-    editor.addConditionValue = "item1";
+    editor.conditionValue = "item1";
     editor.koConditionOperator("notequal");
-    assert.equal(editor.addConditionValue, "item1", "Keep the value");
+    assert.equal(editor.conditionValue, "item1", "Keep the value");
     editor.koConditionOperator("empty");
-    assert.notOk(editor.addConditionValue, "Reset the value");
+    assert.notOk(editor.conditionValue, "Reset the value");
   }
 );
 QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
@@ -1081,3 +1073,45 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
     "It is radiogroup again"
   );
 });
+QUnit.test(
+  "SurveyPropertyConditionEditor, add apostrophes to string value",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "question1", type: "radiogroup", choices: ["item1", 1] },
+        { name: "question2", type: "checkbox", choices: ["item1", 1] }
+      ]
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.koConditionQuestion("question1");
+    editor.conditionValue = "item1";
+    assert.equal(
+      editor.koTextValue(),
+      "{question1} = 'item1'",
+      "Use apostrophes"
+    );
+    editor.conditionValue = 1;
+    assert.equal(editor.koTextValue(), "{question1} = 1", "No apostrophes");
+    editor.koConditionOperator("anyof");
+    editor.conditionValue = ["item1", 1];
+    assert.equal(
+      editor.koTextValue(),
+      "{question1} anyof ['item1', 1]",
+      "any of"
+    );
+
+    editor.koConditionQuestion("question2");
+    editor.koConditionOperator("equal");
+    editor.conditionValue = ["item1", 1];
+    assert.equal(
+      editor.koTextValue(),
+      "{question2} = ['item1', 1]",
+      "checkbox"
+    );
+  }
+);
