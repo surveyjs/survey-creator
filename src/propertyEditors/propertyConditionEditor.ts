@@ -299,21 +299,21 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       return;
     }
     var json = this.getQuestionConditionJson(questionName, operator, true);
-    var prevHasValueSurvey = this.koHasValueSurvey();
     this.koHasValueSurvey(!!json && !!json.type);
-    if (
+    var useOldValueSurvey =
       isOperatorChanged &&
-      !!this.koHasValueSurvey() &&
-      prevHasValueSurvey &&
+      this.koHasValueSurvey() &&
+      !!this.koValueSurvey() &&
       this.koValueSurvey()
         .getQuestionByName("question")
-        .getType() == json.type
-    )
-      return;
-    if (this.koHasValueSurvey()) {
+        .getType() == json.type;
+    if (!useOldValueSurvey && this.koHasValueSurvey()) {
       this.koValueSurvey(this.createValueSurvey(json, questionName));
     }
     this.updateValueAutomatically(questionName, operator);
+    if (!isOperatorChanged) {
+      this.koConditionOperator("equal");
+    }
   }
   private updateValueAutomatically(questionName: string, operator: string) {
     if (!this.canUpdateAutomatically) return;

@@ -673,6 +673,17 @@ QUnit.test(
       "{q3} = 'val2'",
       "Update koValue automatically"
     );
+    editor.koConditionOperator("notequal");
+    assert.equal(
+      editor.koTextValue(),
+      "{q3} <> 'val2'",
+      "Update text value automatically on changing operator"
+    );
+    assert.equal(
+      editor.koValue(),
+      "{q3} <> 'val2'",
+      "Update koValue automatically on changing operator"
+    );
     editor.koConditionQuestion("q1");
     assert.equal(editor.koTextValue(), "", "Reset the value");
     editor.conditionValue = 2;
