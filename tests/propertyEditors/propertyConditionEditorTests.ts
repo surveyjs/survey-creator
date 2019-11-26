@@ -873,14 +873,33 @@ QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
       { name: "qComment", type: "comment" },
       { name: "qRadio", type: "radiogroup", choices: [1, 2] },
       { name: "qDropdown", type: "dropdown", choices: [1, 2] },
+      { name: "qRating", type: "rating" },
       { name: "qCheck", type: "checkbox", choices: [1, 2] },
       { name: "qBoolean", type: "boolean" },
       { name: "qExpression", type: "expression" },
       { name: "qFile", type: "file" },
       { name: "qImagepicker", type: "imagepicker" },
-      { name: "qMatrix", type: "matrix" },
-      { name: "qMatrixdropdown", type: "matrixdropdown" },
-      { name: "qMatrixdynamic", type: "matrixdynamic" },
+      { name: "qMatrix", type: "matrix", rows: ["row1", "row2"] },
+      {
+        name: "qMatrixdropdown",
+        type: "matrixdropdown",
+        rows: ["row1", "row2"],
+        columns: [
+          { cellType: "text", name: "col1" },
+          { cellType: "radiogroup", name: "col2" },
+          { cellType: "checkbox", name: "col3" }
+        ]
+      },
+      {
+        name: "qMatrixdynamic",
+        type: "matrixdynamic",
+        rowCount: 2,
+        columns: [
+          { cellType: "text", name: "col1" },
+          { cellType: "radiogroup", name: "col2" },
+          { cellType: "checkbox", name: "col3" }
+        ]
+      },
       { name: "qMultipletext", type: "multipletext" }
     ]
   });
@@ -928,7 +947,12 @@ QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
     "Show all operators when question is not set"
   );
   checkFunMultiple(
-    ["qText", "qComment"],
+    [
+      "qText",
+      "qComment",
+      "qMatrixdropdown.row1.col1",
+      "qMatrixdynamic[0].col1"
+    ],
     [
       "empty",
       "notempty",
@@ -943,31 +967,117 @@ QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
     ]
   );
   checkFunMultiple(
-    ["qRadio", "qDropdown"],
-    ["empty", "notempty", "equal", "notequal", "anyof"]
+    [
+      "qRadio",
+      "qDropdown",
+      "qMatrix.row1",
+      "qMatrixdropdown.row1.col2",
+      "qMatrixdynamic[0].col2"
+    ],
+    [
+      "empty",
+      "notempty",
+      "equal",
+      "notequal",
+      "anyof",
+      "greater",
+      "less",
+      "greaterorequal",
+      "lessorequal"
+    ]
   );
-  checkFun("qCheck", [
-    "empty",
-    "notempty",
-    "equal",
-    "notequal",
-    "contains",
-    "notcontains",
-    "anyof",
-    "allof"
-  ]);
+  checkFunMultiple(
+    ["qCheck", "qMatrixdropdown.row1.col3", "qMatrixdynamic[0].col3"],
+    [
+      "empty",
+      "notempty",
+      "equal",
+      "notequal",
+      "contains",
+      "notcontains",
+      "anyof",
+      "allof"
+    ]
+  );
   checkFun("qBoolean", ["empty", "notempty", "equal", "notequal"]);
-  checkFun("qExpression", [
-    "empty",
-    "notempty",
-    "equal",
-    "notequal",
-    "greater",
-    "less",
-    "greaterorequal",
-    "lessorequal"
-  ]);
+  checkFunMultiple(
+    ["qExpression", "qRating"],
+    [
+      "empty",
+      "notempty",
+      "equal",
+      "notequal",
+      "greater",
+      "less",
+      "greaterorequal",
+      "lessorequal"
+    ]
+  );
   checkFun("qFile", ["empty", "notempty"]);
   checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof"]);
   //["empty", "notempty", "equal", "notequal", "contains", "notcontains", "anyof", "allof", "greater", "less", "greaterorequal", "lessorequal"]
+});
+QUnit.test(
+  "SurveyPropertyConditionEditor, keep condition value on changing operation when it possible",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "question1", type: "radiogroup", choices: ["item1", "item2"] }
+      ]
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.koConditionQuestion("question1");
+    editor.addConditionValue = "item1";
+    editor.koConditionOperator("notequal");
+    assert.equal(editor.addConditionValue, "item1", "Keep the value");
+    editor.koConditionOperator("empty");
+    assert.notOk(editor.addConditionValue, "Reset the value");
+  }
+);
+QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "radiogroup", choices: ["item1", "item2"] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  editor.koConditionQuestion("question1");
+  assert.equal(
+    editor
+      .koValueSurvey()
+      .getAllQuestions()[0]
+      .getType(),
+    "radiogroup",
+    "It is radiogroup by default"
+  );
+  editor.koConditionOperator("anyof");
+  assert.equal(
+    editor
+      .koValueSurvey()
+      .getAllQuestions()[0]
+      .getType(),
+    "checkbox",
+    "It is checkbox for anyof"
+  );
+  editor.koConditionOperator("equal");
+  assert.equal(
+    editor
+      .koValueSurvey()
+      .getAllQuestions()[0]
+      .getType(),
+    "radiogroup",
+    "It is radiogroup again"
+  );
 });

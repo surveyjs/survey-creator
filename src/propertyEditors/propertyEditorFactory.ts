@@ -28,43 +28,19 @@ export class SurveyPropertyEditorFactory {
       { name: "allof", types: ["checkbox"] },
       {
         name: "greater",
-        types: [
-          "!selectbase",
-          "!boolean",
-          "!file",
-          "!matrix",
-          "!matrixdropdownbase"
-        ]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
       },
       {
         name: "less",
-        types: [
-          "!selectbase",
-          "!boolean",
-          "!file",
-          "!matrix",
-          "!matrixdropdownbase"
-        ]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
       },
       {
         name: "greaterorequal",
-        types: [
-          "!selectbase",
-          "!boolean",
-          "!file",
-          "!matrix",
-          "!matrixdropdownbase"
-        ]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
       },
       {
         name: "lessorequal",
-        types: [
-          "!selectbase",
-          "!boolean",
-          "!file",
-          "!matrix",
-          "!matrixdropdownbase"
-        ]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
       }
     ];
     var result = [];

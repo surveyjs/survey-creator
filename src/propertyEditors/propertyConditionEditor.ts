@@ -53,10 +53,18 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
     this.koConditionQuestion.subscribe(function(newValue) {
-      self.onValueSurveyChanged(newValue, self.koConditionOperator());
+      self.onQuestionOrOperatorChanged(
+        newValue,
+        self.koConditionOperator(),
+        false
+      );
     });
     this.koConditionOperator.subscribe(function(newValue) {
-      self.onValueSurveyChanged(self.koConditionQuestion(), newValue);
+      self.onQuestionOrOperatorChanged(
+        self.koConditionQuestion(),
+        newValue,
+        true
+      );
     });
     this.koDummy = ko.observable(0);
     this.koIsConditionValid = ko.computed(function() {
@@ -203,8 +211,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private getVisibleOperators(questionName: string): Array<any> {
     var res = [];
-    var question = this.getQuestionByName(questionName);
-    var qType = !!question ? question.getType() : null;
+    var json = this.getQuestionConditionJson(questionName, "equal");
+    var qType = !!json ? json.type : null;
     var operators = SurveyPropertyEditorFactory.getOperators();
     for (var i = 0; i < operators.length; i++) {
       if (this.isOperatorVisible(qType, operators[i].types)) {
@@ -229,6 +237,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
         contains.push(name);
       }
     }
+    return this.isClassContains(qType, contains, notContains);
+  }
+  private isClassContains(
+    qType: string,
+    contains: Array<string>,
+    notContains: Array<string>
+  ): boolean {
     var classInfo = Survey.Serializer.findClass(qType);
     while (!!classInfo) {
       if (contains.indexOf(classInfo.name) > -1) return true;
@@ -256,18 +271,33 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       res.push({ name: name, text: name, question: null });
     }
   }
-  private onValueSurveyChanged(questionName: string, operator: string) {
+  private onQuestionOrOperatorChanged(
+    questionName: string,
+    operator: string,
+    isOperatorChanged: boolean
+  ) {
     if (
       !this.canShowValueByOperator(operator) ||
       !questionName ||
       !this.getSurvey()
     ) {
+      this.addConditionValue = null;
       this.koHasValueSurvey(false);
       this.updateValueAutomatically(questionName, operator);
       return;
     }
-    var json = this.getQuestionConditionJson(questionName, operator);
+    var json = this.getQuestionConditionJson(questionName, operator, true);
+    var prevHasValueSurvey = this.koHasValueSurvey();
     this.koHasValueSurvey(!!json && !!json.type);
+    if (
+      isOperatorChanged &&
+      !!this.koHasValueSurvey() &&
+      prevHasValueSurvey &&
+      this.koValueSurvey()
+        .getQuestionByName("question")
+        .getType() == json.type
+    )
+      return;
     if (this.koHasValueSurvey()) {
       this.koValueSurvey(this.createValueSurvey(json, questionName));
     }
@@ -343,7 +373,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private getQuestionConditionJson(
     questionName: string,
-    operator: string
+    operator: string,
+    convertOnAnyOf: boolean = false
   ): any {
     var path = "";
     var question = this.getQuestionByName(questionName);
@@ -356,6 +387,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       question && question.getConditionJson
         ? question.getConditionJson(operator, path)
         : null;
+    if (!!json && operator == "anyof" && convertOnAnyOf) {
+      if (!this.isClassContains(json.type, ["checkbox"], [])) {
+        json.type = "checkbox";
+      }
+    }
     return !!json ? json : null;
   }
   private canShowValueByOperator(operator: string) {
