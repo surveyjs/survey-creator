@@ -6,13 +6,13 @@
 <script type="text/html" id="propertyeditorcontent-condition">
   <div class="propertyeditor-condition">
     <div data-bind="visible: koBuildType() != 'text'">
-        <div data-bind="visible: !koIsShowingModal()">
+        <div data-bind="visible: koIsCompactMode">
             <span  data-bind="text:koConditionDisplayText"></span>
             <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="visible: koHasConditionAppliedValue(), click: $data.clearCondition(), value: $data.conditionButtonClear"/>
             <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="visible: koBuildType() == 'view', click: $data.doBuildClick, value: $data.buttonBuildText"/>
             <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="click: $data.doEditClick, value: $data.buttonEditText"/>
         </div>
-        <div data-bind="visible: koBuildType() == 'visual' || koIsShowingModal()">
+        <div data-bind="visible: koBuildType() == 'visual' || !koIsCompactMode()">
             <div class="form-inline form-group">
                 <div class="form-control svd_custom_select">
                     <select onmousewheel="return false;" style="max-width:200px" data-bind="if: true, value: koConditionQuestion">
@@ -36,8 +36,8 @@
             </div>
         </div>
     </div>
-    <div data-bind="visible: koBuildType() == 'text' || koIsShowingModal()">
-        <button type="button" class="btn btn-sm btn-secondary" data-bind="visible: !koIsShowingModal(), click: $data.doFromTextToViewClick()">
+    <div data-bind="visible: koBuildType() == 'text' || !koIsCompactMode()">
+        <button type="button" class="btn btn-sm btn-secondary" data-bind="visible: koIsCompactMode, click: $data.doFromTextToViewClick()">
             <span class="glyphicon glyphicon-list-alt"></span>
         </button>
         <!-- ko if: $parent.hasAceEditor -->
@@ -48,7 +48,7 @@
         <!-- ko if: !$parent.hasAceEditor -->
         <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly" rows="3" autofocus="autofocus"></textarea>
         <!-- /ko -->
-        <div class="form-inline form-group" data-bind="visible: !koIsShowingModal()">
+        <div class="form-inline form-group" data-bind="visible: koIsCompactMode">
             <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsTextConditionValid() && !readOnly(), click: $data.doApplyText(), value: buttonTextApplyText"/>
             <input type="button" class="form-control btn btn-primary" data-bind="enable: koValue() != koTextValue() && !readOnly(), click: $data.doResetText(), value: buttonTextResetText"/>
         </div>

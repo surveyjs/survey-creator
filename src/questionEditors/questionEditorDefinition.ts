@@ -265,7 +265,13 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@checkbox": {
-      properties: ["hasOther", "otherText", "choicesOrder", "colCount", "width"],
+      properties: [
+        "hasOther",
+        "otherText",
+        "choicesOrder",
+        "colCount",
+        "width"
+      ],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -276,7 +282,13 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
-      properties: ["hasOther", "otherText", "choicesOrder", "colCount", "width"],
+      properties: [
+        "hasOther",
+        "otherText",
+        "choicesOrder",
+        "colCount",
+        "width"
+      ],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -287,7 +299,13 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "matrixdropdowncolumn@dropdown": {
-      properties: ["hasOther", "otherText", "choicesOrder", "optionsCaption", "width"],
+      properties: [
+        "hasOther",
+        "otherText",
+        "choicesOrder",
+        "optionsCaption",
+        "width"
+      ],
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
@@ -328,7 +346,10 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@expression": {
       properties: ["name", "displayStyle", "currency", "width"],
-      tabs: [{ name: "expression", index: 10 }, { name: "totals", index: 40 }]
+      tabs: [
+        { name: "expression", index: 10 },
+        { name: "totals", index: 40 }
+      ]
     },
     multipletextitem: {
       properties: ["inputType", "maxLength", "placeHolder", "requiredErrorText"]
@@ -445,6 +466,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "triggers", tab: "logic" },
 
         { name: "clearInvisibleValues", tab: "data" },
+        { name: "textUpdateMode", tab: "data" },
         { name: "sendResultOnPageNext", tab: "data" },
         { name: "storeOthersAsComment", tab: "data" },
 

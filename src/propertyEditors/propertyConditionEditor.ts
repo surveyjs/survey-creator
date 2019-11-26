@@ -23,6 +23,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   koHasConditionAppliedValue: any;
   koDummy: any;
   koIsTextConditionValid: any;
+  koIsCompactMode: any;
   private addConditionQuestionsHash = {};
   private static emptySurvey = undefined;
   constructor(
@@ -40,6 +41,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       if (!!this.koTextValue()) return this.getConditionDisplayText();
       return this.getLocString("pe.expressionIsEmpty");
     }, this);
+    this.koIsCompactMode = ko.observable(true);
     this.koConditionQuestions = ko.observableArray();
     this.koConditionQuestion = ko.observable("");
     this.koConditionOperator = ko.observable("");
@@ -129,6 +131,16 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koConditionQuestion("");
     this.addConditionQuestionsHash = {};
     this.koConditionQuestions(this.allConditionQuestions);
+  }
+  protected beforeShowModal() {
+    super.beforeShowModal();
+    this.koIsCompactMode(false);
+  }
+  public get isCompactMode(): boolean {
+    return this.koIsCompactMode();
+  }
+  public set isCompactMode(val: boolean) {
+    this.koIsCompactMode(val);
   }
   public get editorType(): string {
     return this._type;
@@ -309,7 +321,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private setValueFromBuilder(val: string) {
     this.koTextValue(val);
-    if (!this.koIsShowingModal()) {
+    if (this.koIsCompactMode()) {
       this.koValue(val);
     }
   }

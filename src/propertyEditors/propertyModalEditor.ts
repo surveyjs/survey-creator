@@ -2,7 +2,6 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { editorLocalization } from "../editorLocalization";
 import { focusFirstControl } from "../utils/utils";
 import RModal from "rmodal";
@@ -101,7 +100,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     };
     self.onShowModal = function() {
       self.beforeShow();
-      self.koIsShowingModal(true);
+      self.beforeCloseModal();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
         bodyClass: "",
         closeTimeout: 100,
@@ -144,7 +143,10 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.isBeforeShowCalledValue = true;
     this.updateValue();
   }
-  public beforeCloseModal() {
+  protected beforeShowModal() {
+    this.koIsShowingModal(true);
+  }
+  protected beforeCloseModal() {
     this.isBeforeShowCalledValue = false;
   }
   protected onOptionsChanged() {

@@ -225,6 +225,7 @@ export class SurveyPropertyTrigger {
     this.conditionEditor = new SurveyPropertyConditionEditor(
       expressionProperty
     );
+    this.conditionEditor.isCompactMode = false;
     this.conditionEditor.options = options;
     this.conditionEditor.showHelpText = false;
     if (!this.trigger.expression) {

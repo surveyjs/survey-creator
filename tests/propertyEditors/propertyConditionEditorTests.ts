@@ -848,7 +848,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    editor.koIsShowingModal(true);
+    editor.isCompactMode = false;
     editor.koConditionQuestion("q2");
     editor.conditionValue = "abc";
     assert.equal(editor.koValue(), "", "value is not set");
