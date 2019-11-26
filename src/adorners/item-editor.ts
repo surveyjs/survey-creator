@@ -291,12 +291,38 @@ export var itemDraggableAdorner = {
         }
       )
     );
+    var raiseChangingEvent = (target: any, propertyName: string, newValue: any) => {
+      var options = {
+        propertyName: propertyName,
+        obj: target,
+        value: newValue,
+        newValue: null,
+        doValidation: false
+      };
+      editor.onValueChangingCallback(options);
+      newValue = options.newValue === null ? options.value : options.newValue;
+      return newValue;
+    };
+    var raiseChangedEvent = (target: any, propertyName: string, newValue: any) => {
+      if(typeof target.getType === "function") {
+        var property = Survey.Serializer.findProperty(
+          target.getType(),
+          propertyName
+        );
+        editor.onPropertyValueChanged(property, target, newValue);
+      }
+    }
     itemsRoot[0].appendChild(addNew);
     if (editor.canShowObjectProperty(model, "hasOther")) {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addOther"),
-          () => (model.hasOther = !model.hasOther)
+          () => {
+            var newValue = !model.hasOther;
+            newValue = raiseChangingEvent(model, "hasOther", newValue);
+            model.hasOther = newValue;
+            raiseChangedEvent(model, "hasOther", newValue);
+          }
         )
       );
     }
@@ -307,7 +333,12 @@ export var itemDraggableAdorner = {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
-          () => (model.hasSelectAll = !model.hasSelectAll)
+          () => {
+            var newValue = !model.hasSelectAll;
+            newValue = raiseChangingEvent(model, "hasSelectAll", newValue);
+            model.hasSelectAll = newValue;
+            raiseChangedEvent(model, "hasSelectAll", newValue);
+          }
         )
       );
     }
@@ -318,7 +349,12 @@ export var itemDraggableAdorner = {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addNone"),
-          () => (model.hasNone = !model.hasNone)
+          () => {
+            var newValue = !model.hasNone;
+            newValue = raiseChangingEvent(model, "hasNone", newValue);
+            model.hasNone = newValue;
+            raiseChangedEvent(model, "hasNone", newValue);
+          }
         )
       );
     }

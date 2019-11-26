@@ -23,6 +23,27 @@ ko.components.register("select-items-editor", {
       //   params.question.getType(),
       //   "choices"
       // );
+      var raiseChangingEvent = (target: any, propertyName: string, newValue: any) => {
+        var options = {
+          propertyName: propertyName,
+          obj: target,
+          value: newValue,
+          newValue: null,
+          doValidation: false
+        };
+        params.editor.onValueChangingCallback(options);
+        newValue = options.newValue === null ? options.value : options.newValue;
+        return newValue;
+      };
+      var raiseChangedEvent = (target: any, propertyName: string, newValue: any) => {
+        if(typeof target.getType === "function") {
+          var property = Survey.Serializer.findProperty(
+            target.getType(),
+            propertyName
+          );
+          params.editor.onPropertyValueChanged(property, target, newValue);
+        }
+      }
       return {
         choices: choices,
         valueName: params.valueName,
@@ -30,7 +51,12 @@ ko.components.register("select-items-editor", {
         editor: params.editor,
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
-        addOther: () => (params.question.hasOther = !params.question.hasOther),
+        addOther: () => {
+          var newValue = !params.question.hasOther;
+          newValue = raiseChangingEvent(params.question, "hasOther", newValue);
+          params.question.hasOther = newValue;
+          raiseChangedEvent(params.question, "hasOther", newValue);
+        },
         addItem: createAddItemHandler(
           params.question,
           itemValue => {
