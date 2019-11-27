@@ -22,6 +22,9 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   public get editorType(): string {
     return "textitems";
   }
+  public get editorTypeTemplate(): string {
+    return "nesteditems";
+  }
   protected getEditorName(): string {
     if (!this.koEditItem()) return "";
     return this.koEditItem().text;

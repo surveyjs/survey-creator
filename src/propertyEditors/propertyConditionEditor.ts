@@ -545,6 +545,9 @@ SurveyPropertyEditorFactory.registerEditor("expression", function(
   );
 });
 
+SurveyPropertyEditorFactory.registerTypeForCellEditing("expression", "string");
+SurveyPropertyEditorFactory.registerTypeForCellEditing("condition", "string");
+
 var operations = [
   {
     value: "and",

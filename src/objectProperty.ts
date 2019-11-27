@@ -31,7 +31,8 @@ export class SurveyObjectProperty {
   constructor(
     public property: Survey.JsonObjectProperty,
     onPropertyChanged: SurveyOnPropertyChangedCallback = null,
-    propertyEditorOptions: ISurveyObjectEditorOptions = null
+    propertyEditorOptions: ISurveyObjectEditorOptions = null,
+    isCellEditor: boolean = false
   ) {
     this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
@@ -42,7 +43,8 @@ export class SurveyObjectProperty {
     };
     this.editor = SurveyPropertyEditorFactory.createEditor(
       property,
-      onItemChanged
+      onItemChanged,
+      isCellEditor
     );
     this.editor.onGetLocale = this.doOnGetLocale;
     this.editor.options = propertyEditorOptions;

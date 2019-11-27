@@ -230,7 +230,8 @@ export class SurveyNestedPropertyEditorEditorCell {
     this.objectPropertyValue = new SurveyObjectProperty(
       this.property,
       propEvent,
-      this.options
+      this.options,
+      true
     );
     this.objectPropertyValue.editor.isInplaceProperty = true;
     this.objectProperty.object = obj;

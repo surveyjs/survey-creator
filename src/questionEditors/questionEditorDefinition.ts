@@ -357,6 +357,12 @@ export class SurveyQuestionEditorDefinition {
     "multipletext@items": {
       properties: ["isRequired", "name", "title"]
     },
+    calculatedvalue: {
+      properties: ["name", "expression", "includeIntoResult"]
+    },
+    "calculatedvalue@items": {
+      properties: ["name", "expression"]
+    },
     paneldynamic: {
       properties: [
         "renderMode",

@@ -10,6 +10,7 @@ export class SurveyPropertyEditorFactory {
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
+  private static cellTypes = {};
   public static getOperators(): Array<any> {
     var operators = [
       { name: "empty", types: [] },
@@ -54,6 +55,12 @@ export class SurveyPropertyEditorFactory {
     }
     return result;
   }
+  public static registerTypeForCellEditing(
+    typeName: string,
+    cellTypeName: string
+  ) {
+    SurveyPropertyEditorFactory.cellTypes[typeName] = cellTypeName;
+  }
   public static registerEditor(
     name: string,
     creator: (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase,
@@ -71,9 +78,13 @@ export class SurveyPropertyEditorFactory {
   }
   public static createEditor(
     property: Survey.JsonObjectProperty,
-    func: (newValue: any) => any
+    func: (newValue: any) => any,
+    isCellEditor: boolean = false
   ): SurveyPropertyEditorBase {
     var editorType = property.type;
+    if (isCellEditor && !!SurveyPropertyEditorFactory.cellTypes[editorType]) {
+      editorType = SurveyPropertyEditorFactory.cellTypes[editorType];
+    }
     if (
       SurveyPropertyEditorFactory.isDropdownEditor(property) &&
       (!editorType || editorType == SurveyPropertyEditorFactory.defaultEditor)

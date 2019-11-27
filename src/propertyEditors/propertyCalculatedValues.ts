@@ -1,15 +1,18 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import {
-  SurveyPropertyOneSelectedEditor,
-  SurveyPropertyOneSelectedItem
-} from "./propertyOneSelectedEditor";
-
-import { SurveyPropertyEditorBase } from "./propertyEditorBase";
+  SurveyNestedPropertyEditor,
+  SurveyNestedPropertyEditorItem,
+  SurveyNestedPropertyEditorColumn
+} from "./propertyNestedPropertyEditor";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyHelper } from "../surveyHelper";
 
-export class SurveyPropertyCalculatedValueEditor extends SurveyPropertyOneSelectedEditor {
+export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEditor {
   public static ValueBaseName = "var";
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
@@ -17,96 +20,62 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyPropertyOneSelect
   public get editorType(): string {
     return "calculatedvalues";
   }
-  protected getObjClassName() {
-    return "calculatedvalue";
+  public get editorTypeTemplate(): string {
+    return "nesteditems";
+  }
+  protected getEditorName(): string {
+    if (!this.koEditItem()) return "";
+    return this.koEditItem().name;
   }
   protected createNewEditorItem(): any {
-    var res = super.createNewEditorItem();
-    res.obj.name = SurveyHelper.getNewName(this.getObjs(), this.itemBaseName);
-    return res;
-  }
-  protected createOneSelectedItem(obj: any): SurveyPropertyOneSelectedItem {
+    var newItem = new Survey.CalculatedValue(this.getNewName());
+    newItem["object"] = this.object;
     return new SurveyPropertyCalculatedValueItem(
-      obj,
-      (name: string, obj: Survey.Base, oldName: string) => {
-        return this.correctName(name, obj, oldName);
-      }
+      newItem,
+      () => this.columns,
+      this.options
     );
   }
-  private correctName(
-    name: string,
-    obj: Survey.Base,
-    oldName: string
-  ): boolean {
-    var res = this.isNameCorrect(name, obj);
-    if (!res && !!oldName) {
-      this.changeProperty("name", oldName);
-    }
-    return res;
-  }
-  private changeProperty(propertyName: string, value: any) {
-    if (!this.selectedObjectEditor()) return;
-    var propEditor = this.selectedObjectEditor().getPropertyEditorByName(
-      propertyName
+  protected createEditorItem(item: any) {
+    return new SurveyPropertyCalculatedValueItem(
+      item,
+      () => this.columns,
+      this.options
     );
-    if (!propEditor || !propEditor.editor) return;
-    propEditor.editor.koValue(value);
   }
-  private isNameCorrect(name: string, obj: Survey.Base): boolean {
-    if (!name || !name.replace(" ", "")) return false;
-
-    var items = this.getObjs();
-    for (var i = 0; i < items.length; i++) {
-      if (items[i] == obj) continue;
-      if (items[i].name == name) return false;
-    }
-    return true;
+  protected createItemFromEditorItem(editorItem: any) {
+    var newItem = new Survey.MultipleTextItem();
+    var json = new Survey.JsonObject().toJsonObject(editorItem.item);
+    new Survey.JsonObject().toObject(json, newItem);
+    return newItem;
   }
-  private get itemBaseName(): string {
-    return SurveyPropertyCalculatedValueEditor.ValueBaseName;
+  protected getProperties(): Array<Survey.JsonObjectProperty> {
+    var names = this.getPropertiesNames("calculatedvalue@items", []);
+    return this.getPropertiesByNames("calculatedvalue", names);
   }
-  private getObjs(): Array<any> {
-    var res = [];
+  private getNewName(): string {
+    var objs = [];
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      if (!items[i] || !items[i].obj) continue;
-      res.push(items[i].obj);
+      var item = items[i].item;
+      if (!!item) {
+        objs.push({ name: item.name });
+      }
     }
-    return res;
+    return SurveyHelper.getNewName(
+      objs,
+      SurveyPropertyCalculatedValueEditor.ValueBaseName
+    );
   }
 }
 
-export class SurveyPropertyCalculatedValueItem extends SurveyPropertyOneSelectedItem {
+export class SurveyPropertyCalculatedValueItem extends SurveyNestedPropertyEditorItem {
   constructor(
-    public obj: Survey.Base,
-    protected correctName: (
-      name: string,
-      obj: Survey.Base,
-      oldName: string
-    ) => boolean
+    public item: Survey.CalculatedValue,
+    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
+    options: ISurveyObjectEditorOptions
   ) {
-    super(obj);
-    obj["oldName"] = obj["name"];
-    var self = this;
-    obj.registerFunctionOnPropertyValueChanged("expression", function() {
-      self.objectChanged();
-    });
-    obj.registerFunctionOnPropertyValueChanged("name", function() {
-      self.nameChanged();
-    });
-  }
-  protected nameChanged() {
-    var name = this.obj["name"];
-    if (this.obj["oldName"] == name) return;
-    if (
-      this.correctName &&
-      !this.correctName(name, this.obj, this.obj["oldName"])
-    ) {
-      this.obj["name"] = this.obj["oldName"];
-      return;
-    }
-    this.obj["oldName"] = name;
-    this.objectChanged();
+    super(item, getColumns, options);
   }
   public getText() {
     var expression = this.obj["expression"];

@@ -32,6 +32,7 @@ import {
   SurveyPropertyValidatorItem
 } from "../../src/propertyEditors/propertyValidatorsEditor";
 import { SurveyPropertyCustomEditor } from "../../src/propertyEditors/propertyCustomEditor";
+import { SurveyPropertyCalculatedValueEditor } from "../../src/propertyEditors/propertyCalculatedValues";
 import { Extentions } from "../../src/extentions";
 import {
   SurveyPropertyEditorFactory,
@@ -46,6 +47,41 @@ class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEdi
   constructor() {
     super(Survey.Serializer.findProperty("selectbase", "choices"));
   }
+}
+
+function createSurvey(): Survey.Survey {
+  return new Survey.Survey({
+    pages: [
+      {
+        name: "page1",
+        questions: [
+          { type: "text", name: "question1" },
+          {
+            name: "question2",
+            choices: [
+              "one",
+              { value: "two", text: "second value" },
+              { value: 3, text: "third value" }
+            ],
+            type: "checkbox"
+          }
+        ]
+      },
+      { name: "page2", questions: [{ name: "question3", type: "comment" }] },
+      {
+        name: "page3",
+        questions: [
+          {
+            name: "question4",
+            columns: ["Column 1", "Column 2", "Column 3"],
+            rows: ["Row 1", "Row 2"],
+            type: "matrix"
+          },
+          { name: "question5", type: "rating" }
+        ]
+      }
+    ]
+  });
 }
 
 QUnit.test("Create correct property editor", function(assert) {
@@ -1406,37 +1442,69 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
   );
 });
 
-function createSurvey(): Survey.Survey {
-  return new Survey.Survey({
-    pages: [
-      {
-        name: "page1",
-        questions: [
-          { type: "text", name: "question1" },
-          {
-            name: "question2",
-            choices: [
-              "one",
-              { value: "two", text: "second value" },
-              { value: 3, text: "third value" }
-            ],
-            type: "checkbox"
-          }
-        ]
-      },
-      { name: "page2", questions: [{ name: "question3", type: "comment" }] },
-      {
-        name: "page3",
-        questions: [
-          {
-            name: "question4",
-            columns: ["Column 1", "Column 2", "Column 3"],
-            rows: ["Row 1", "Row 2"],
-            type: "matrix"
-          },
-          { name: "question5", type: "rating" }
-        ]
-      }
-    ]
-  });
-}
+QUnit.test(
+  "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
+  function(assert) {
+    var expressionProperty = Survey.Serializer.findProperty(
+      "expression",
+      "expression"
+    );
+    assert.equal(
+      SurveyPropertyEditorFactory.createEditor(expressionProperty, null)
+        .editorType,
+      "expression",
+      "By default create expression"
+    );
+    assert.equal(
+      SurveyPropertyEditorFactory.createEditor(expressionProperty, null, true)
+        .editorType,
+      "string",
+      "For cell editor create string, not expression"
+    );
+    var conditionProperty = Survey.Serializer.findProperty(
+      "question",
+      "visibleIf"
+    );
+    assert.equal(
+      SurveyPropertyEditorFactory.createEditor(conditionProperty, null)
+        .editorType,
+      "condition",
+      "By default create condition"
+    );
+    assert.equal(
+      SurveyPropertyEditorFactory.createEditor(conditionProperty, null, true)
+        .editorType,
+      "string",
+      "For cell editor create string, not condition"
+    );
+  }
+);
+
+QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
+  assert
+) {
+  var survey = new Survey.Survey();
+  var property = Survey.Serializer.findProperty("survey", "calculatedValues");
+  var propEditor = <SurveyPropertyCalculatedValueEditor>(
+    SurveyPropertyEditorFactory.createEditor(property, function(newValue) {
+      survey.calculatedValues = newValue;
+    })
+  );
+  propEditor.beforeShow();
+  propEditor.object = survey;
+  propEditor.onAddClick();
+  assert.equal(
+    propEditor.koItems()[0].cells[0].koValue(),
+    "var1",
+    "The value created correctly"
+  );
+  assert.ok(
+    propEditor.koItems()[0].cells[1].editor,
+    "Editor for expression is created"
+  );
+  assert.equal(
+    propEditor.koItems()[0].cells[1].editor.editorType,
+    "string",
+    "Use the string editor"
+  );
+});

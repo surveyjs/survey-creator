@@ -21,6 +21,9 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   public get editorType(): string {
     return "matrixdropdowncolumns";
   }
+  public get editorTypeTemplate(): string {
+    return "nesteditems";
+  }
   protected getEditorName(): string {
     if (!this.koEditItem()) return "";
     return editorLocalization
@@ -114,8 +117,7 @@ export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropert
     var base: string = "matrixdropdowncolumn@";
     if (!this.column["object"] || this.obj.cellType !== "default") {
       return base + this.obj.cellType;
-    }
-    else {
+    } else {
       return base + this.column["object"].cellType;
     }
   }
