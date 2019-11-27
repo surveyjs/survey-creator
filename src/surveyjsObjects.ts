@@ -219,7 +219,9 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
         if (childs[i].style) childs[i].style.pointerEvents = "none";
       }
     }
-
+    if (creator.readOnly && surveyElement.getType() == "dropdown") {
+      addAdorner(domElement, surveyElement);
+    }
     if(creator.readOnly) return;
 
     surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);

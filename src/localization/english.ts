@@ -191,6 +191,7 @@ export var enStrings = {
     saveAndBack: "Save and return",
     itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
+    showChoices: "Show Choices",
     move: "Move",
     empty: "<empty>",
     notEmpty: "<edit value>",

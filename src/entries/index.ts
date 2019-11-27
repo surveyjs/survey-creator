@@ -153,7 +153,9 @@ export { titleAdorner } from "../adorners/title-editor";
 export { itemAdorner } from "../adorners/item-editor";
 export { labelAdorner } from "../adorners/label-editor";
 export { questionActionsAdorner } from "../adorners/question-actions";
-export { selectItemsEditorAdorner } from "../adorners/select-items-editor";
+export { selectItemsAdorner } from "../adorners/select-items";
+
+// export 
 export { ratingItemAdorner } from "../adorners/rating-item-editor";
 export { imageItemsAdorner } from "../adorners/image-items";
 export { flowpanelActionsAdorner } from "../adorners/flowpanel-actions";
