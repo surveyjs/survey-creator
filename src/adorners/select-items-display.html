@@ -1,0 +1,25 @@
+<div class="svda-select-items-display">
+    <div class="svda-select-items-title" data-bind="click: toggle">
+      <span
+        class="svd-main-color"
+        data-bind="text: getLocString('pe.showChoices')"
+      ></span>
+    </div>
+    <div
+      class="svda-select-items-content svd-dark-border-color svd-light-bg-color"
+      data-bind="visible: isExpanded"
+    >
+      <div class="svda-select-items-collection">
+        <!-- ko foreach: { data: choices } -->
+        <div>  
+            <span data-bind="text: text"></span>
+        </div>  
+        <!-- /ko -->
+      </div>
+      <!-- ko if: question.hasOther -->
+      <div class="item_editable">
+        <span data-bind="text: otherText"></span>
+        </div>
+      <!-- /ko -->
+  </div>
+  

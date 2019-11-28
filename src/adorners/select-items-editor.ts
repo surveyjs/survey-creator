@@ -4,7 +4,7 @@ import Sortable from "sortablejs";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { createAddItemHandler, itemAdorner } from "./item-editor";
-
+import  { selectItemsAdorner } from "./select-items";
 import "./select-items-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./select-items-editor.html");
@@ -12,7 +12,7 @@ var templateHtml = require("html-loader?interpolate!val-loader!./select-items-ed
 ko.components.register("select-items-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var isExpanded = ko.observable(selectItemsEditorAdorner.isExpanded);
+      var isExpanded = ko.observable(selectItemsAdorner.isExpanded);
       var choices = ko.observableArray(params.question.choices);
       var otherText = ko.observable(params.question.otherText);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
@@ -23,6 +23,27 @@ ko.components.register("select-items-editor", {
       //   params.question.getType(),
       //   "choices"
       // );
+      var raiseChangingEvent = (target: any, propertyName: string, newValue: any) => {
+        var options = {
+          propertyName: propertyName,
+          obj: target,
+          value: newValue,
+          newValue: null,
+          doValidation: false
+        };
+        params.editor.onValueChangingCallback(options);
+        newValue = options.newValue === null ? options.value : options.newValue;
+        return newValue;
+      };
+      var raiseChangedEvent = (target: any, propertyName: string, newValue: any) => {
+        if(typeof target.getType === "function") {
+          var property = Survey.Serializer.findProperty(
+            target.getType(),
+            propertyName
+          );
+          params.editor.onPropertyValueChanged(property, target, newValue);
+        }
+      }
       return {
         choices: choices,
         valueName: params.valueName,
@@ -30,7 +51,12 @@ ko.components.register("select-items-editor", {
         editor: params.editor,
         isExpanded: isExpanded,
         toggle: () => isExpanded(!isExpanded()),
-        addOther: () => (params.question.hasOther = !params.question.hasOther),
+        addOther: () => {
+          var newValue = !params.question.hasOther;
+          newValue = raiseChangingEvent(params.question, "hasOther", newValue);
+          params.question.hasOther = newValue;
+          raiseChangedEvent(params.question, "hasOther", newValue);
+        },
         addItem: createAddItemHandler(
           params.question,
           itemValue => {
@@ -99,12 +125,7 @@ ko.components.register("select-items-editor", {
   template: templateHtml
 });
 
-export var selectItemsEditorAdorner = {
-  getMarkerClass: model => {
-    return !!model.parent && !!model.choices ? "select_items_editor" : "";
-  },
-  getElementName: model => "selectWrapper",
-  afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
+export var selectItemsEditorAfterRender = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     elements[0].onclick = e => e.preventDefault();
     var decoration = document.createElement("div");
     decoration.innerHTML =
@@ -121,8 +142,5 @@ export var selectItemsEditorAdorner = {
     );
     ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "select-choices", decoration);
-  },
-  isExpanded: true
 };
 
-registerAdorner("select-choices", selectItemsEditorAdorner);
