@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEditorBase";
 import {
   SurveyQuestionEditor,
+  SurveyElementEditorContent,
   SurveyQuestionEditorTab
 } from "../../src/questionEditors/questionEditor";
 import {
@@ -1480,9 +1481,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
-  assert
-) {
+QUnit.test("SurveyPropertyCalculatedValueEditor", function(assert) {
   var survey = new Survey.Survey();
   var property = Survey.Serializer.findProperty("survey", "calculatedValues");
   var propEditor = <SurveyPropertyCalculatedValueEditor>(
@@ -1507,4 +1506,25 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
     "string",
     "Use the string editor"
   );
+  propEditor.onEditItemClick(propEditor.koItems()[0]);
+  var itemEditor = <SurveyElementEditorContent>(
+    propEditor.koEditItem().itemEditor
+  );
+  assert.ok(itemEditor, "Item editor is created");
+  var nameEditor = itemEditor.getPropertyEditorByName("name");
+  var expressionEditor = itemEditor.getPropertyEditorByName("expression");
+  assert.equal(nameEditor.editor.koValue(), "var1", "name set correctly");
+  /* TODO waiting for global refactoring with koValue
+  nameEditor.editor.koValue("var11");
+  expressionEditor.editor.koValue("{q1} = 1");
+  assert.equal(
+    propEditor.koItems()[0].cells[0].koValue(),
+    "var11",
+    "cell name editor is updated"
+  );
+  assert.equal(
+    propEditor.koItems()[0].cells[1].koValue(),
+    "{q1} = 1",
+    "cell expression editor is updated"
+  );*/
 });

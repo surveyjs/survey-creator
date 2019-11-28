@@ -7,11 +7,11 @@ import {
 } from "./propertyEditorBase";
 import {
   SurveyQuestionEditor,
+  SurveyElementEditorContent,
   SurveyQuestionProperties
 } from "../questionEditors/questionEditor";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
-import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koEditItem: any;
@@ -116,13 +116,6 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     }
     return super.checkForErrors() || result;
   }
-  protected onBeforeApply() {
-    var internalItems = this.koItems();
-    for (var i = 0; i < internalItems.length; i++) {
-      internalItems[i].apply();
-    }
-    super.onBeforeApply();
-  }
 }
 
 export class SurveyNestedPropertyEditorItem {
@@ -131,7 +124,7 @@ export class SurveyNestedPropertyEditorItem {
   private koCellsValue = ko.observableArray<
     SurveyNestedPropertyEditorEditorCell
   >();
-  private itemEditorValue: SurveyQuestionEditor;
+  private itemEditorValue: SurveyElementEditorContent;
   constructor(
     public obj: any,
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
@@ -170,7 +163,7 @@ export class SurveyNestedPropertyEditorItem {
     );
     this.koHasDetails(properties.getTabs().length > 0);
   }
-  public get itemEditor(): SurveyQuestionEditor {
+  public get itemEditor(): SurveyElementEditorContent {
     if (!this.itemEditorValue)
       this.itemEditorValue = this.createSurveyQuestionEditor();
     return this.itemEditorValue;
@@ -190,14 +183,12 @@ export class SurveyNestedPropertyEditorItem {
     this.itemEditorValue = null;
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyQuestionEditor(
+    return new SurveyElementEditorContent(
       this.obj,
       this.getClassName(),
-      this.options
+      this.options,
+      true
     );
-  }
-  public apply() {
-    if (this.itemEditorValue) this.itemEditorValue.apply();
   }
 }
 
