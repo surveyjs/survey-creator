@@ -81,16 +81,17 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     this.setValueCore(items);
   }
   protected createEditorItemCore(item: any = null) {
-    var editorItem = !!item
-      ? this.createEditorItem(item)
-      : this.createNewEditorItem();
+    if (!item) {
+      item = this.createNewItem();
+    }
+    var editorItem = this.createEditorItem(item);
     if (!!editorItem.onCreated) {
       editorItem.onCreated();
     }
     return editorItem;
   }
-  protected createNewEditorItem(): any {
-    throw "Override 'createNewEditorItem' method";
+  protected createNewItem(): any {
+    throw "Override 'createNewItem' method";
   }
   protected createEditorItem(item: any) {
     return item;

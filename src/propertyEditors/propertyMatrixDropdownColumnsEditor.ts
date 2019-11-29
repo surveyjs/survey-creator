@@ -28,14 +28,22 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     if (!this.koEditItem()) return "";
     return editorLocalization
       .getString("pe.columnEdit")
-      ["format"](this.koEditItem().column.name);
+      ["format"](this.koEditItem().obj.name);
   }
-  protected createNewEditorItem(): any {
+  protected getItemClassName(item: any): string {
+    var base: string = "matrixdropdowncolumn@";
+    if (!item["object"] || item.cellType !== "default") {
+      return base + item.cellType;
+    } else {
+      return base + item["object"].cellType;
+    }
+  }
+  protected createNewItem(): any {
     var newColumn = this.createEditorColumnItemCore(null);
     newColumn.name = getNextValue("", this.getColumnNames());
     var columns = [];
     for (var i = 0; i < this.koItems().length; i++) {
-      columns.push(this.koItems()[i].column);
+      columns.push(this.koItems()[i].obj);
     }
     columns.push(newColumn);
     if (this.options) {
@@ -45,23 +53,20 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
         columns
       );
     }
-    return new SurveyPropertyMatrixDropdownColumnsItem(
-      newColumn,
-      () => this.columns,
-      this.options
-    );
+    return newColumn;
   }
   protected createEditorItem(item: any) {
     var newColumn = this.createEditorColumnItemCore(item);
-    return new SurveyPropertyMatrixDropdownColumnsItem(
+    return new SurveyNestedPropertyEditorItem(
       newColumn,
       () => this.columns,
-      this.options
+      this.options,
+      this.getItemClassName(newColumn)
     );
   }
   protected createItemFromEditorItem(editorItem: any) {
     var newColumn = new Survey.MatrixDropdownColumn("");
-    var json = new Survey.JsonObject().toJsonObject(editorItem.column);
+    var json = new Survey.JsonObject().toJsonObject(editorItem.obj);
     new Survey.JsonObject().toObject(json, newColumn);
     return newColumn;
   }
@@ -88,38 +93,12 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     var res = [];
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      var name = items[i].column.name;
+      var name = items[i].obj.name;
       if (!!name) {
         res.push(name);
       }
     }
     return res;
-  }
-}
-
-export class SurveyPropertyMatrixDropdownColumnsItem extends SurveyNestedPropertyEditorItem {
-  constructor(
-    public column: Survey.MatrixDropdownColumn,
-    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
-    options: ISurveyObjectEditorOptions = null
-  ) {
-    super(column, getColumns, options);
-    var self = this;
-    column.registerFunctionOnPropertyValueChanged(
-      "cellType",
-      function() {
-        self.resetSurveyQuestionEditor();
-      },
-      "colEdit"
-    );
-  }
-  protected getClassName(): string {
-    var base: string = "matrixdropdowncolumn@";
-    if (!this.column["object"] || this.obj.cellType !== "default") {
-      return base + this.obj.cellType;
-    } else {
-      return base + this.column["object"].cellType;
-    }
   }
 }
 

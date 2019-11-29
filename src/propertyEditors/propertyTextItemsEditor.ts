@@ -1,18 +1,12 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
 import {
   SurveyPropertyEditorBase,
   ISurveyObjectEditorOptions
 } from "./propertyEditorBase";
 import { SurveyHelper } from "../surveyHelper";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
-import {
-  SurveyNestedPropertyEditor,
-  SurveyNestedPropertyEditorItem,
-  SurveyNestedPropertyEditorColumn
-} from "./propertyNestedPropertyEditor";
+import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 
 export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
@@ -29,26 +23,17 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     if (!this.koEditItem()) return "";
     return this.koEditItem().text;
   }
-  protected createNewEditorItem(): any {
+  protected createNewItem(): any {
     var newItem = new Survey.MultipleTextItem(this.getNewName());
     newItem["object"] = this.object;
-    //newColumn.colOwner = TODO set colOwner.
-    return new SurveyPropertyTextItemsItem(
-      newItem,
-      () => this.columns,
-      this.options
-    );
+    return newItem;
   }
-  protected createEditorItem(item: any) {
-    return new SurveyPropertyTextItemsItem(
-      item,
-      () => this.columns,
-      this.options
-    );
+  protected getItemClassName(item: any): string {
+    return "multipletextitem";
   }
   protected createItemFromEditorItem(editorItem: any) {
     var newItem = new Survey.MultipleTextItem();
-    var json = new Survey.JsonObject().toJsonObject(editorItem.item);
+    var json = new Survey.JsonObject().toJsonObject(editorItem.obj);
     new Survey.JsonObject().toObject(json, newItem);
     return newItem;
   }
@@ -60,7 +45,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     var objs = [];
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      var item = items[i].item;
+      var item = items[i].obj;
       if (!!item) {
         objs.push({ name: item.name });
       }
@@ -69,24 +54,6 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
       objs,
       editorLocalization.getString("ed.newTextItemName")
     );
-  }
-}
-
-export class SurveyPropertyTextItemsItem extends SurveyNestedPropertyEditorItem {
-  constructor(
-    public item: Survey.MultipleTextItem,
-    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
-    options: ISurveyObjectEditorOptions
-  ) {
-    super(item, getColumns, options);
-  }
-  protected getClassName(): string {
-    return "multipletextitem";
-  }
-  public get text(): string {
-    return editorLocalization
-      .getString("pe.columnEdit")
-      ["format"](this.item.name);
   }
 }
 

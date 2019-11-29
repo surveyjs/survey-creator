@@ -18,7 +18,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koIsList: any;
   koActiveView: any;
   onEditItemClick: any;
-  onCancelEditItemClick: any;
+  onReturnToListClick: any;
   koEditorName: any;
   private koColumnsValue = ko.observable<
     Array<SurveyNestedPropertyEditorColumn>
@@ -36,9 +36,10 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     this.onEditItemClick = function(item) {
       self.koEditItem(item);
     };
-    this.onCancelEditItemClick = function() {
+    this.onReturnToListClick = function() {
       var editItem = self.koEditItem();
       if (editItem.itemEditor && editItem.itemEditor.hasError()) return;
+      editItem.hideItemEditor();
       self.koEditItem(null);
     };
     this.koEditorName = ko.computed(function() {
@@ -104,9 +105,19 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     }
     return res;
   }
-
   protected getEditorName(): string {
     return "";
+  }
+  protected getItemClassName(item: any): string {
+    return "";
+  }
+  protected createEditorItem(item: any) {
+    return new SurveyNestedPropertyEditorItem(
+      item,
+      () => this.columns,
+      this.options,
+      this.getItemClassName(item)
+    );
   }
   protected onListDetailViewChanged() {}
   protected checkForErrors(): boolean {
@@ -128,7 +139,8 @@ export class SurveyNestedPropertyEditorItem {
   constructor(
     public obj: any,
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
-    options: ISurveyObjectEditorOptions
+    options: ISurveyObjectEditorOptions,
+    private className: string = ""
   ) {
     this.options = options;
     this.koHasDetails = ko.observable(true);
@@ -147,7 +159,7 @@ export class SurveyNestedPropertyEditorItem {
     });
   }
   protected getClassName(): string {
-    return "";
+    return this.className;
   }
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.getColumns();
@@ -162,6 +174,9 @@ export class SurveyNestedPropertyEditorItem {
       this.getClassName()
     );
     this.koHasDetails(properties.getTabs().length > 0);
+  }
+  public hideItemEditor() {
+    this.itemEditorValue = null;
   }
   public get itemEditor(): SurveyElementEditorContent {
     if (!this.itemEditorValue)
@@ -178,9 +193,6 @@ export class SurveyNestedPropertyEditorItem {
       res = this.cells[i].hasError || res;
     }
     return res;
-  }
-  protected resetSurveyQuestionEditor() {
-    this.itemEditorValue = null;
   }
   protected createSurveyQuestionEditor() {
     return new SurveyElementEditorContent(

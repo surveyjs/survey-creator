@@ -1,10 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import {
-  SurveyNestedPropertyEditor,
-  SurveyNestedPropertyEditorItem,
-  SurveyNestedPropertyEditorColumn
-} from "./propertyNestedPropertyEditor";
+import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
 import {
   SurveyPropertyEditorBase,
   ISurveyObjectEditorOptions
@@ -27,21 +23,10 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
     if (!this.koEditItem()) return "";
     return this.koEditItem().name;
   }
-  protected createNewEditorItem(): any {
+  protected createNewItem(): any {
     var newItem = new Survey.CalculatedValue(this.getNewName());
     newItem["object"] = this.object;
-    return new SurveyPropertyCalculatedValueItem(
-      newItem,
-      () => this.columns,
-      this.options
-    );
-  }
-  protected createEditorItem(item: any) {
-    return new SurveyPropertyCalculatedValueItem(
-      item,
-      () => this.columns,
-      this.options
-    );
+    return newItem;
   }
   protected createItemFromEditorItem(editorItem: any) {
     var newItem = new Survey.MultipleTextItem();
@@ -66,21 +51,6 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
       objs,
       SurveyPropertyCalculatedValueEditor.ValueBaseName
     );
-  }
-}
-
-export class SurveyPropertyCalculatedValueItem extends SurveyNestedPropertyEditorItem {
-  constructor(
-    public item: Survey.CalculatedValue,
-    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
-    options: ISurveyObjectEditorOptions
-  ) {
-    super(item, getColumns, options);
-  }
-  public getText() {
-    var expression = this.obj["expression"];
-    var name = this.obj["name"];
-    return name + " = " + (!!expression ? expression : "?");
   }
 }
 

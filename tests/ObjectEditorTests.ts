@@ -4,10 +4,8 @@ import { SurveyObjectEditor } from "../src/objectEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
 import { BigCar, Truck, TruckDefaultValue } from "./ObjectEditorTestedClasses";
 import { EditorOptionsTests } from "./editorOptionsTests";
-import {
-  SurveyPropertyItemValuesEditor,
-  SurveyPropertyItemValuesEditorItem
-} from "../src/propertyEditors/propertyItemValuesEditor";
+import { SurveyPropertyItemValuesEditor } from "../src/propertyEditors/propertyItemValuesEditor";
+import { SurveyNestedPropertyEditorItem } from "../src/propertyEditors/propertyNestedPropertyEditor";
 import { SurveyPropertyDropdownColumnsEditor } from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { defaultStrings } from "../src/editorLocalization";
 import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
@@ -365,9 +363,7 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
   var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
   var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
   itemValuesEditor.beforeShow();
-  var firstItem = <SurveyPropertyItemValuesEditorItem>(
-    itemValuesEditor.koItems()[0]
-  );
+  var firstItem = <SurveyNestedPropertyEditorItem>itemValuesEditor.koItems()[0];
   itemValuesEditor.koEditItem(firstItem);
   assert.equal(firstItem.itemEditor.koTabs().length, 2, "There are two tabs");
   assert.equal(
@@ -380,7 +376,7 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
     "enableIf",
     "It is enableIf tab"
   );
-  firstItem.item["visibleIf"] = "{cars} contains {item}";
+  firstItem.obj["visibleIf"] = "{cars} contains {item}";
   itemValuesEditor.koEditItem(null);
   assert.equal(
     itemValuesEditor.koShowTextView(),

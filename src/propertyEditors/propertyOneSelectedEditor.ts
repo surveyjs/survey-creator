@@ -69,10 +69,8 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     this.setItemProperties(newItem);
     return this.createOneSelectedItem(newItem);
   }
-  protected createNewEditorItem(): any {
-    return this.createEditorItem(
-      Survey.Serializer.createClass(this.getObjClassName())
-    );
+  protected createNewItem(): any {
+    return Survey.Serializer.createClass(this.getObjClassName());
   }
   protected createItemFromEditorItem(editorItem: any) {
     var item = <SurveyPropertyOneSelectedItem>editorItem;

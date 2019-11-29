@@ -1,6 +1,5 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
 import {
   SurveyPropertyEditorBase,
   ISurveyObjectEditorOptions
@@ -68,10 +67,10 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return this.property ? this.editorType + "@" + this.property.name : "";
   }
   protected getEditorName(): string {
-    if (!this.koEditItem() || !this.koEditItem().item) return "";
+    if (!this.koEditItem() || !this.koEditItem().obj) return "";
     return editorLocalization
       .getString("pe.itemEdit")
-      ["format"](this.koEditItem().item.value);
+      ["format"](this.koEditItem().obj.value);
   }
   public beforeShow() {
     super.beforeShow();
@@ -122,10 +121,10 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     this.updateShowTextViewVisibility();
     this.koActiveView(editorOptions.itemsEntryType || "form");
   }
-  protected createNewEditorItem(): any {
+  protected createNewItem(): any {
     var nextValue = null;
     var values = this.koItems().map(function(item) {
-      return item.item.itemValue;
+      return item.obj.itemValue;
     });
     var itemText = this.property.getBaseValue();
     if (!itemText) {
@@ -142,21 +141,20 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
         values
       );
     }
-    return new SurveyPropertyItemValuesEditorItem(
-      itemValue,
-      () => this.columns,
-      this.options,
-      this.getItemValueClassName()
-    );
+    return itemValue;
+  }
+  protected getItemClassName(item: any): string {
+    var className = this.getItemValueClassName();
+    return !!className ? className : item.getType();
   }
   protected createEditorItem(item: any): any {
     var itemValue = this.createEditorItemValueCore(null);
     itemValue.setData(item);
-    return new SurveyPropertyItemValuesEditorItem(
+    return new SurveyNestedPropertyEditorItem(
       itemValue,
       () => this.columns,
       this.options,
-      this.getItemValueClassName()
+      this.getItemClassName(itemValue)
     );
   }
   private createEditorItemValueCore(item: any) {
@@ -171,7 +169,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return itemValue;
   }
   protected createItemFromEditorItem(editorItem: any) {
-    var item = editorItem.item;
+    var item = editorItem.obj;
     var alwaySaveTextInPropertyEditors =
       this.options && this.options.alwaySaveTextInPropertyEditors;
     if (
@@ -253,7 +251,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private hasMultipleLanguage(): boolean {
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      if (items[i].item.locText.hasNonDefaultText()) return true;
+      if (items[i].obj.locText.hasNonDefaultText()) return true;
     }
     return false;
   }
@@ -264,26 +262,12 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private hasVisibleIfOrEnableIf(): boolean {
     var items = this.koItems();
     for (var i = 0; i < items.length; i++) {
-      if (!!items[i].item.visibleIf || items[i].item.enableIf) return true;
+      if (!!items[i].obj.visibleIf || items[i].obj.enableIf) return true;
     }
     return false;
   }
   private hasDetailsProperties(): boolean {
     return true;
-  }
-}
-
-export class SurveyPropertyItemValuesEditorItem extends SurveyNestedPropertyEditorItem {
-  constructor(
-    public item: Survey.ItemValue,
-    getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
-    options: ISurveyObjectEditorOptions,
-    private className: string = ""
-  ) {
-    super(item, getColumns, options);
-  }
-  protected getClassName(): string {
-    return !!this.className ? this.className : this.obj.getType();
   }
 }
 
