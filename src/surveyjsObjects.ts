@@ -219,10 +219,11 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
         if (childs[i].style) childs[i].style.pointerEvents = "none";
       }
     }
-    if (creator.readOnly && surveyElement.getType() == "dropdown") {
+    
+    if(creator.readOnly) {
       addAdorner(domElement, surveyElement);
+      return;
     }
-    if(creator.readOnly) return;
 
     surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
     domElement.tabindex = "0";
@@ -341,7 +342,11 @@ function addAdorner(node, model) {
           elements = [node];
         }
         if (elements.length > 0) {
-          adorner.afterRender(elements, model, getSurvey(model).getEditor());
+          var editor =  getSurvey(model).getEditor();
+          if(editor.readOnly)
+            adorner.renderReadOnly && adorner.renderReadOnly(elements, model, editor);
+          else
+            adorner.afterRender(elements, model, editor);
         }
       }
     });

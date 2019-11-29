@@ -26,7 +26,7 @@ ko.components.register("select-items-display", {
   template: templateHtml
 });
 
-export var selectItemsDisplayAfterRender = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
+export var renderDisplayMode = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     elements[0].onclick = e => e.preventDefault();
     var decoration = document.createElement("div");
     decoration.innerHTML =
