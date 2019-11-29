@@ -1,4 +1,4 @@
-﻿<div class="svd_container svd-light-bg-color" data-bind="css: themeCss">
+﻿<div class="svd_container svd-light-bg-color" data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : '')">
   <!-- ko ifnot: haveCommercialLicense -->
   <div class="svd_commercial_container">
     <a
