@@ -6,7 +6,7 @@ const title = `adorners`;
 const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   var editorOptions = {};
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+  window.editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 });
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
@@ -117,7 +117,7 @@ test(`checkbox work with other/select all/none`, async t => {
   //.wait(3000);
 });
 test(`dropdown readonly`, async t => {
-  const init = ClientFunction(() => {
+  const makeEditorReadOnly = ClientFunction(() => {
     editor.readOnly = true;
     editor.text = `{
       "pages": [
@@ -138,15 +138,16 @@ test(`dropdown readonly`, async t => {
         }
       ]
       }`
-  });
-  init();
+    return 'dummy';
+  });  
+  await makeEditorReadOnly();
   await t
-    .expect(Selector("svda-select-items-collection div:nth-child(1) span").innerText)
+    .expect(Selector(".svda-select-items-collection div:nth-child(1) span").innerText)
     .eql("item1")
-    .expect(Selector("svda-select-items-collection div:nth-child(2) span").innerText)
+    .expect(Selector(".svda-select-items-collection div:nth-child(2) span").innerText)
     .eql("item2")
-    .expect(Selector("svda-select-items-collection div:nth-child(3) span").innerText)
+    .expect(Selector(".svda-select-items-collection div:nth-child(3) span").innerText)
     .eql("item3")
-    .expect(Selector("svda-select-items-collection + div span").innerText)
+    .expect(Selector(".svda-select-items-collection + div span").innerText)
     .eql("Other (describe)")
 });

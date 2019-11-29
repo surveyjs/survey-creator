@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import Sortable from "sortablejs";
-import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { createAddItemHandler, itemAdorner } from "./item-editor";
 import  { selectItemsAdorner } from "./select-items";
