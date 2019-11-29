@@ -1,45 +1,30 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import {
-  SurveyPropertyOneSelectedEditor,
-  SurveyPropertyOneSelectedItem
-} from "./propertyOneSelectedEditor";
+import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
 
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
-import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { editorLocalization } from "../entries";
 
-export class SurveyPropertyHtmlConditionEditor extends SurveyPropertyOneSelectedEditor {
+export class SurveyPropertyHtmlConditionEditor extends SurveyNestedPropertyEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
   }
   public get editorType(): string {
     return "htmlconditions";
   }
-  protected getObjClassName() {
-    return "htmlconditionitem";
+  public get editorTypeTemplate(): string {
+    return "nesteditems";
   }
-  protected createOneSelectedItem(obj: any): SurveyPropertyOneSelectedItem {
-    return new SurveyPropertyHtmlConditionItem(obj);
+  protected createNewItem(): any {
+    var newItem = new Survey.HtmlConditionItem();
+    newItem["object"] = this.object;
+    return newItem;
   }
-}
-
-export class SurveyPropertyHtmlConditionItem extends SurveyPropertyOneSelectedItem {
-  constructor(public obj: Survey.Base) {
-    super(obj);
-    var self = this;
-    obj.registerFunctionOnPropertyValueChanged("expression", function() {
-      self.objectChanged();
-    });
-  }
-  public getText() {
-    var expression = this.obj["expression"];
-    return (
-      editorLocalization.getString("ed.completedHtmlOnConditionItemText") +
-      " " +
-      (!!expression ? expression : "?")
-    );
+  protected getProperties(): Array<Survey.JsonObjectProperty> {
+    return this.getPropertiesByNames("htmlconditionitem", [
+      "expression",
+      "html"
+    ]);
   }
 }
 
