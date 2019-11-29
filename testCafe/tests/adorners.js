@@ -116,3 +116,37 @@ test(`checkbox work with other/select all/none`, async t => {
   //.debug()
   //.wait(3000);
 });
+test(`dropdown readonly`, async t => {
+  const init = ClientFunction(() => {
+    editor.readOnly = true;
+    editor.text = `{
+      "pages": [
+        {
+        "name": "page1",
+        "elements": [
+          {
+          "type": "dropdown",
+          "name": "question1", 
+          "hasOther": "true",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
+          }
+        ]
+        }
+      ]
+      }`
+  });
+  init();
+  await t
+    .expect(Selector("svda-select-items-collection div:nth-child(1) span").innerText)
+    .eql("item1")
+    .expect(Selector("svda-select-items-collection div:nth-child(2) span").innerText)
+    .eql("item2")
+    .expect(Selector("svda-select-items-collection div:nth-child(3) span").innerText)
+    .eql("item3")
+    .expect(Selector("svda-select-items-collection + div span").innerText)
+    .eql("Other (describe)")
+});
