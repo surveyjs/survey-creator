@@ -13,10 +13,9 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
     this.koSelected.subscribe(function(newValue) {
-      var editor =
-        newValue != null
-          ? new SurveyElementEditorContent(newValue, null, self.options)
-          : null;
+      var editor = !!newValue
+        ? new SurveyElementEditorContent(newValue, null, self.options)
+        : null;
       self.selectedObjectEditor(editor);
     });
     this.onDeleteClick = function() {
@@ -59,7 +58,10 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
         index = this.origionalValue.length - 1;
       }
     }
-    this.koSelected(index > -1 ? this.origionalValue[index] : null);
+    var val = index > -1 ? this.origionalValue[index] : null;
+    if (val != this.koSelected()) {
+      this.koSelected(val);
+    }
   }
   protected createEditorItem(item: Survey.Base) {
     return item;
