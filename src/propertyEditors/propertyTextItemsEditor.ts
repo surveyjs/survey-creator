@@ -24,18 +24,10 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     return this.koEditItem().text;
   }
   protected createNewItem(): any {
-    var newItem = new Survey.MultipleTextItem(this.getNewName());
-    newItem["object"] = this.object;
-    return newItem;
+    return new Survey.MultipleTextItem(this.getNewName());
   }
   protected getItemClassName(item: any): string {
     return "multipletextitem";
-  }
-  protected createItemFromEditorItem(editorItem: any) {
-    var newItem = new Survey.MultipleTextItem();
-    var json = new Survey.JsonObject().toJsonObject(editorItem.obj);
-    new Survey.JsonObject().toObject(json, newItem);
-    return newItem;
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("multipletext@items", []);
@@ -43,9 +35,9 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   }
   private getNewName(): string {
     var objs = [];
-    var items = this.koItems();
+    var items = this.origionalValue;
     for (var i = 0; i < items.length; i++) {
-      var item = items[i].obj;
+      var item = items[i];
       if (!!item) {
         objs.push({ name: item.name });
       }

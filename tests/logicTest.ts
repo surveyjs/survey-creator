@@ -2,6 +2,7 @@ import * as Survey from "survey-knockout";
 import { SurveyLogic, SurveyLogicOperation } from "../src/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { SurveyCreator } from "../src/editor";
+import { SurveyElementEditorContent } from "../src/questionEditors/questionEditor";
 
 export default QUnit.module("LogicTabTests");
 
@@ -689,7 +690,8 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   var op = logic.editableItem.operations[0];
   assert.ok(op.templateObject, "Template object is created");
   logic.expressionEditor.editingValue = "{q1} = 10";
-  op.templateObject.kosetToName("q3");
+  var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
   logic.saveEditableItem();
   assert.equal(
     logic.items[0].operations[0].text,
@@ -960,7 +962,8 @@ QUnit.test("Logic editing errors", function(assert) {
   op = logic.addNewOperation(logic.getTypeByName("trigger_setvalue"));
   assert.equal(logic.saveEditableItem(), false, "setToName is empty");
   assert.equal(op.hasError(), true, "setToName is empty");
-  op.templateObject.setToNameSelector.koValue("q2");
+  var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q2");
   assert.equal(logic.saveEditableItem(), true, "setToName is correct");
   assert.equal(op.hasError(), false, "setToName  is correct");
 });
@@ -988,7 +991,10 @@ QUnit.test("Return without saving", function(assert) {
   var item = logic.items[0];
   item.edit();
   logic.expressionEditor.koTextValue("{q1} = 2");
-  item.operations[1].templateObject.gotoNameSelector.koValue("q3");
+  var triggerEditor = <SurveyElementEditorContent>(
+    item.operations[1].templateObject
+  );
+  triggerEditor.getPropertyEditorByName("gotoName").editor.koValue("q3");
   item.addOperation(logic.getTypeByName("question_visibility"));
   assert.equal(item.operations.length, 3, "There three operations");
   assert.equal(logic.saveEditableItem(), false, "Can't save");
@@ -997,11 +1003,13 @@ QUnit.test("Return without saving", function(assert) {
   item = logic.items[0];
   assert.equal(item.operations.length, 2, "The last operation was not saved");
   assert.equal(item.expression, "{q1} = 1", "Item expression is not changed");
+  /* TODO refactor
   assert.equal(
     item.operations[1].element["gotoName"],
     "q2",
     "operation gotoName is not changed"
   );
+  */
   assert.notOk(logic.koErrorText(), "The error is cleared");
 });
 

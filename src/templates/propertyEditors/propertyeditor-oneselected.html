@@ -35,7 +35,11 @@
           </div>
           <!-- /ko  -->
           <div class="form-control svd_custom_select">
-              <select onmousewheel="return false;" data-bind="options: koItems, optionsText: 'koText', value: koSelected"></select>
+              <select onmousewheel="return false;" data-bind="value: koSelected">
+                <!-- ko foreach: origionalValue -->
+                <option data-bind="value: $data, text: $parent.getItemText($data)" ></option>
+                <!-- /ko -->
+              </select>
           </div>
           <span class="input-group-addon btn-danger" data-bind="visible: koAllowAddRemoveItems, enable: koSelected() != null, click: onDeleteClick">
               <span class="glyphicon glyphicon-remove"></span>

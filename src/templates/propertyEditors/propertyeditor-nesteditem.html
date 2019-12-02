@@ -1,0 +1,32 @@
+<tr>
+  <td class="svd-itemvalue-actions-container">
+    <div class="svd-drag-handle svd-itemvalue-action">
+      ☰
+    </div>
+    <button
+      type="button"
+      class="btn btn-default btn-secondary svd-textitems-edit svd-itemvalue-action"
+      data-bind="visible: $data.koHasDetails, click: editor.onEditItemClick"
+    >
+      <span
+        class="glyphicon glyphicon-edit"
+        data-bind="text: $root.getLocString('pe.edit')"
+      ></span>
+    </button>
+  </td>
+  <!-- ko foreach: cells -->
+  <td class="form-group">
+    <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
+    <!-- /ko -->
+  </td>
+  <!-- /ko -->
+  <td class="svd-textitems-column">
+    <button
+      type="button"
+      class="btn btn-sm btn-danger"
+      data-bind="visible: editor.koAllowAddRemoveItems, click: editor.onDeleteClick"
+    >
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </button>
+  </td>
+</tr>

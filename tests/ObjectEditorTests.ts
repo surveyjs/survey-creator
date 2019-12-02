@@ -344,26 +344,17 @@ QUnit.test("SurveyPropertyItemValuesEditor, show 'Visible If' button", function(
 });
 
 QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
-  var visibleIfProperty = Survey.Serializer.findProperty(
-    "itemvalue",
-    "visibleIf"
-  );
-  if (!visibleIfProperty) {
-    Survey.Serializer.addProperty("itemvalue", {
-      name: "visibleIf:condition",
-      visible: false
-    });
-  }
   var options = new EditorOptionsTests();
   var editor = new SurveyObjectEditor(options);
   var qChoices = new Survey.QuestionDropdown("q1");
   qChoices.choices = [1, 2, 3];
-
   editor.selectedObject = qChoices;
   var property = <SurveyObjectProperty>editor.getPropertyEditor("choices");
   var itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
   itemValuesEditor.beforeShow();
-  var firstItem = <SurveyNestedPropertyEditorItem>itemValuesEditor.koItems()[0];
+  var firstItem = <SurveyNestedPropertyEditorItem>(
+    itemValuesEditor.createItemViewModel(qChoices.choices[0])
+  );
   itemValuesEditor.koEditItem(firstItem);
   assert.equal(firstItem.itemEditor.koTabs().length, 2, "There are two tabs");
   assert.equal(
@@ -383,9 +374,6 @@ QUnit.test("SurveyPropertyItemValuesEditor, Detail tabs", function(assert) {
     false,
     "visibleIf will be lost in text editing"
   );
-  if (!visibleIfProperty) {
-    Survey.Serializer.removeProperty("itemvalue", "visibleIf");
-  }
 });
 
 QUnit.test("DependedOn properties, koVisible", function(assert) {

@@ -5,7 +5,6 @@ import { SurveyPropertyModalEditor } from "./propertyModalEditor";
 import { editorLocalization } from "../editorLocalization";
 
 export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
-  public koItems: any;
   public onDeleteClick: any;
   public onAddClick: any;
   public onClearClick: any;
@@ -13,18 +12,17 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
 
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-    this.koItems = ko.observableArray();
     this.editingValue = [];
     this.koAllowAddRemoveItems = ko.observable(true);
     var self = this;
     self.onDeleteClick = function(item) {
-      self.koItems.remove(item);
+      self.deleteItem(item.obj);
     };
     self.onClearClick = function(item) {
-      self.koItems.removeAll();
+      self.origionalValue.splice(0, self.origionalValue.length);
     };
     self.onAddClick = function() {
-      self.AddItem();
+      self.addItem();
     };
   }
   public getValueText(value: any): string {
@@ -45,44 +43,39 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     handle: ".svd-drag-handle",
     animation: 150
   };
-  protected AddItem() {
-    this.koItems.push(this.createEditorItemCore());
+  protected addItem() {
+    this.createEditorItemCore();
   }
-
-  protected setupItems() {
-    this.koItems(this.getItemsFromValue(this.editingValue));
-  }
-  protected onValueChanged() {
-    if (this.isBeforeShowCalled) {
-      this.setupItems();
+  protected deleteItem(obj: any) {
+    if (this.readOnly()) return;
+    var index = this.origionalValue.indexOf(obj);
+    if (index > -1) {
+      this.origionalValue.splice(index, 1);
     }
   }
   public setup() {
     super.setup();
     this.updateValue();
   }
-  protected getItemsFromValue(value: any = null): Array<any> {
-    var items = [];
-    if (!value) value = this.editingValue;
-    for (var i = 0; i < value.length; i++) {
-      items.push(this.createEditorItemCore(value[i]));
-    }
-    return items;
+  public createItemViewModel(item: any): any {
+    return this.createEditorItem(item);
   }
   protected get isCurrentValueEmpty() {
-    return this.koItems().length == 0;
+    return this.origionalValue.length == 0;
   }
-  protected onBeforeApply() {
-    var items = [];
-    var internalItems = this.koItems();
-    for (var i = 0; i < internalItems.length; i++) {
-      items.push(this.createItemFromEditorItem(internalItems[i]));
+  protected updateArrayValue(items: any) {
+    if (!this.origionalValue) return;
+    //TODO
+    this.origionalValue.splice(0, this.origionalValue.length);
+    if (!Array.isArray(items)) return;
+    for (var i = 0; i < items.length; i++) {
+      this.origionalValue.push(items[i]);
     }
-    this.setValueCore(items);
   }
   protected createEditorItemCore(item: any = null) {
     if (!item) {
       item = this.createNewItem();
+      this.origionalValue.push(item);
     }
     var editorItem = this.createEditorItem(item);
     if (!!editorItem.onCreated) {
@@ -95,8 +88,5 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   }
   protected createEditorItem(item: any) {
     return item;
-  }
-  protected createItemFromEditorItem(editorItem: any) {
-    return editorItem;
   }
 }

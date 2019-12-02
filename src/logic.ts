@@ -1,11 +1,11 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditionEditor";
-import { SurveyPropertyTriggersEditor } from "./propertyEditors/propertyTriggersEditor";
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
 import { ExpressionToDisplayText } from "./expressionToDisplayText";
+import { SurveyElementEditorContent } from "./questionEditors/questionEditor";
 
 export interface ISurveyLogicType {
   name: string;
@@ -184,7 +184,6 @@ export class SurveyLogicType {
   }
   private saveTriggerElement(op: SurveyLogicOperation) {
     var trigger = <Survey.SurveyTrigger>op.element;
-    op.templateObject.applyProperties(trigger);
     var survey = this.survey;
     if (
       !!survey &&
@@ -195,11 +194,7 @@ export class SurveyLogicType {
     }
   }
   private createTriggerTemplateObject(element: Survey.Base) {
-    return SurveyPropertyTriggersEditor.createTriggerEditor(
-      this.survey,
-      <Survey.SurveyTrigger>element,
-      this.options
-    );
+    return new SurveyElementEditorContent(element, "", this.options);
   }
 }
 

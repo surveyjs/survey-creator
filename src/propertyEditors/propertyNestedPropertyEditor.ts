@@ -13,6 +13,8 @@ import {
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 
+var templateHtml = require("html-loader?interpolate!val-loader!../templates/propertyEditors/propertyeditor-nesteditem.html");
+
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koEditItem: any;
   koIsList: any;
@@ -120,13 +122,6 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     );
   }
   protected onListDetailViewChanged() {}
-  protected checkForErrors(): boolean {
-    var result = false;
-    for (var i = 0; i < this.koItems().length; i++) {
-      result = result || this.koItems()[i].hasError();
-    }
-    return super.checkForErrors() || result;
-  }
 }
 
 export class SurveyNestedPropertyEditorItem {
@@ -143,7 +138,7 @@ export class SurveyNestedPropertyEditorItem {
     private className: string = ""
   ) {
     this.options = options;
-    this.koHasDetails = ko.observable(true);
+    this.koHasDetails = ko.observable(this.hasDetailsProperties());
     ko.computed(() => {
       var columns = this.getColumns();
       this.koCellsValue([]);
@@ -164,16 +159,13 @@ export class SurveyNestedPropertyEditorItem {
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.getColumns();
   }
-  public onCreated() {
-    this.updateDetailButton();
-  }
-  private updateDetailButton() {
+  protected hasDetailsProperties(): boolean {
     var properties = new SurveyQuestionProperties(
       this.obj,
       this.options,
       this.getClassName()
     );
-    this.koHasDetails(properties.getTabs().length > 0);
+    return properties.getTabs().length > 0;
   }
   public hideItemEditor() {
     this.itemEditorValue = null;
@@ -258,3 +250,14 @@ export class SurveyNestedPropertyEditorEditorCell {
     return this.editor.hasError();
   }
 }
+
+ko.components.register("comp-propertyeditor-nesteditem", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      var model = params.editor.createItemViewModel(params.item);
+      model.editor = params.editor;
+      return model;
+    }
+  },
+  template: templateHtml
+});

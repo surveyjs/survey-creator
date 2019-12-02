@@ -242,25 +242,26 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     matrixdropdowncolumn: {
+      properties: ["isRequired", "cellType", "name", "title"]
+    },
+    "matrixdropdowncolumn@default": {
       properties: [
-        "isRequired",
-        "cellType",
         "name",
         "title",
+        "isRequired",
+        "width",
+        { name: "visibleIf", tab: "logic" },
+        { name: "enableIf", tab: "logic" },
+        { name: "requiredIf", tab: "logic" },
         { name: "totalType", tab: "totals" },
         { name: "totalDisplayStyle", tab: "totals" },
         { name: "totalCurrency", tab: "totals" },
         { name: "totalFormat", tab: "totals" },
         { name: "totalExpression", tab: "totals" }
-      ]
-    },
-    "matrixdropdowncolumn@default": {
-      properties: ["width"],
+      ],
       tabs: [
-        { name: "general", visible: false },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "general", index: 5 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -275,9 +276,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -292,9 +291,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -309,9 +306,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "choices", index: 10 },
         { name: "choicesByUrl", index: 11 },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -319,9 +314,7 @@ export class SurveyQuestionEditorDefinition {
       properties: ["inputType", "placeHolder", "maxLength", "width"],
       tabs: [
         { name: "validators", index: 10 },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -329,18 +322,14 @@ export class SurveyQuestionEditorDefinition {
       properties: ["rows", "placeHolder", "maxLength", "width"],
       tabs: [
         { name: "validators", index: 10 },
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
     "matrixdropdowncolumn@boolean": {
       properties: ["defaultValue", "width"],
       tabs: [
-        { name: "visibleIf", index: 12 },
-        { name: "enableIf", index: 20 },
-        { name: "requiredIf", index: 30 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },
@@ -348,6 +337,7 @@ export class SurveyQuestionEditorDefinition {
       properties: ["name", "displayStyle", "currency", "width"],
       tabs: [
         { name: "expression", index: 10 },
+        { name: "logic", index: 20 },
         { name: "totals", index: 40 }
       ]
     },

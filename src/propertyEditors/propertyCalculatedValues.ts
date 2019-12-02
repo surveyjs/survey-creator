@@ -24,15 +24,7 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
     return this.koEditItem().name;
   }
   protected createNewItem(): any {
-    var newItem = new Survey.CalculatedValue(this.getNewName());
-    newItem["object"] = this.object;
-    return newItem;
-  }
-  protected createItemFromEditorItem(editorItem: any) {
-    var newItem = new Survey.MultipleTextItem();
-    var json = new Survey.JsonObject().toJsonObject(editorItem.item);
-    new Survey.JsonObject().toObject(json, newItem);
-    return newItem;
+    return new Survey.CalculatedValue(this.getNewName());
   }
   protected getProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("calculatedvalue@items", []);
@@ -40,7 +32,7 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
   }
   private getNewName(): string {
     var objs = [];
-    var items = this.koItems();
+    var items = this.origionalValue;
     for (var i = 0; i < items.length; i++) {
       var item = items[i].item;
       if (!!item) {

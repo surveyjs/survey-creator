@@ -1,9 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import {
-  SurveyPropertyOneSelectedEditor,
-  SurveyPropertyOneSelectedItem
-} from "./propertyOneSelectedEditor";
+import { SurveyPropertyOneSelectedEditor } from "./propertyOneSelectedEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
@@ -15,8 +12,8 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyOneSelectedEdi
   public get editorType(): string {
     return "validators";
   }
-  protected createOneSelectedItem(obj: any): SurveyPropertyOneSelectedItem {
-    return new SurveyPropertyValidatorItem(obj);
+  public getItemText(item: any): any {
+    return editorLocalization.getValidatorName(item.getType());
   }
   protected getAvailableClasses(): Array<any> {
     var classes = Survey.Serializer.getChildrenClasses("surveyvalidator", true);
@@ -29,15 +26,6 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyOneSelectedEdi
       });
     }
     return res;
-  }
-}
-
-export class SurveyPropertyValidatorItem extends SurveyPropertyOneSelectedItem {
-  constructor(public obj: Survey.Base) {
-    super(obj);
-  }
-  public getText() {
-    return editorLocalization.getValidatorName(this.obj.getType());
   }
 }
 

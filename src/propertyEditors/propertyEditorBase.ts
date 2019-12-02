@@ -90,10 +90,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private _displayNameValue = ko.observable<string>();
   private get displayNameValue() {
     return this._displayNameValue();
-  };
+  }
   private set displayNameValue(val) {
     this._displayNameValue(val);
-  };
+  }
   public koValue: any;
   public koText: any;
   public koIsDefault: any;
@@ -217,6 +217,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public set object(value: any) {
     this.setObjectCore(value);
+  }
+  public get origionalValue(): any {
+    return !!this.objectValue ? this.objectValue[this.property.name] : null;
   }
   protected setObjectCore(value: any) {
     this.objectValue = value;

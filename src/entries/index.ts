@@ -131,7 +131,4 @@ export {
 
 export { SplitterComponentViewModel } from "../utils/splitter";
 
-export {
-  SurveyPropertyOneSelectedEditor,
-  SurveyPropertyOneSelectedItem
-} from "../propertyEditors/propertyOneSelectedEditor";
+export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";

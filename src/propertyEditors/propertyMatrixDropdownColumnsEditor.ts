@@ -39,11 +39,14 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     }
   }
   protected createNewItem(): any {
-    var newColumn = this.createEditorColumnItemCore(null);
+    var newColumn = new Survey.MatrixDropdownColumn("");
     newColumn.name = getNextValue("", this.getColumnNames());
     var columns = [];
-    for (var i = 0; i < this.koItems().length; i++) {
-      columns.push(this.koItems()[i].obj);
+    var orgColumns = this.origionalValue;
+    if (Array.isArray(orgColumns)) {
+      for (var i = 0; i < orgColumns.length; i++) {
+        columns.push(orgColumns[i]);
+      }
     }
     columns.push(newColumn);
     if (this.options) {
@@ -52,31 +55,6 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
         newColumn,
         columns
       );
-    }
-    return newColumn;
-  }
-  protected createEditorItem(item: any) {
-    var newColumn = this.createEditorColumnItemCore(item);
-    return new SurveyNestedPropertyEditorItem(
-      newColumn,
-      () => this.columns,
-      this.options,
-      this.getItemClassName(newColumn)
-    );
-  }
-  protected createItemFromEditorItem(editorItem: any) {
-    var newColumn = new Survey.MatrixDropdownColumn("");
-    var json = new Survey.JsonObject().toJsonObject(editorItem.obj);
-    new Survey.JsonObject().toObject(json, newColumn);
-    return newColumn;
-  }
-  protected createEditorColumnItemCore(item: any): Survey.MatrixDropdownColumn {
-    var newColumn = new Survey.MatrixDropdownColumn("");
-    newColumn["object"] = this.object;
-    newColumn.colOwner = this.object;
-    if (item) {
-      var json = new Survey.JsonObject().toJsonObject(item);
-      new Survey.JsonObject().toObject(json, newColumn);
     }
     return newColumn;
   }
@@ -91,9 +69,10 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   private getColumnNames(): Array<string> {
     var res = [];
-    var items = this.koItems();
+    var items = this.origionalValue;
+    if (!Array.isArray(items)) return;
     for (var i = 0; i < items.length; i++) {
-      var name = items[i].obj.name;
+      var name = items[i].name;
       if (!!name) {
         res.push(name);
       }
