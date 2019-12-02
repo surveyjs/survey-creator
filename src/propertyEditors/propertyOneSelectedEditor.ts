@@ -13,10 +13,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
     this.koSelected.subscribe(function(newValue) {
-      var editor = !!newValue
-        ? new SurveyElementEditorContent(newValue, null, self.options)
-        : null;
-      self.selectedObjectEditor(editor);
+      self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
     });
     this.onDeleteClick = function() {
       self.deleteItem(self.koSelected());
@@ -49,6 +46,13 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     super.onValueChanged();
     this.selectNewItem(false);
   }
+  private createSelectedObjEditor(item: any): SurveyElementEditorContent {
+    if (!item) return null;
+    var editor = new SurveyElementEditorContent(item, null, this.options);
+    this.onCreateEditor(editor);
+    return editor;
+  }
+  protected onCreateEditor(editor: SurveyElementEditorContent) {}
   private selectNewItem(isNew: boolean) {
     if (!this.koSelected || !Array.isArray(this.origionalValue)) return;
     var index = this.origionalValue.length - 1;

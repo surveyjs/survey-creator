@@ -5,6 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
+import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
 
 export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEditor {
   constructor(property: Survey.JsonObjectProperty) {
@@ -34,6 +35,12 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
       });
     }
     return res;
+  }
+  protected onCreateEditor(editor: SurveyElementEditorContent) {
+    var expressionEditor = editor.getPropertyEditorByName("expression");
+    if (!!expressionEditor && expressionEditor.editor) {
+      expressionEditor.editor["isCompactMode"] = false;
+    }
   }
   private getSurvey(): Survey.SurveyModel {
     return !!this.object ? this.object : this.editingObject;

@@ -32,6 +32,7 @@ import {
   SurveyStringPropertyEditor
 } from "../../src/propertyEditors/propertyEditorFactory";
 import { defaultStrings } from "../../src/editorLocalization";
+import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -1076,6 +1077,20 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     "question1",
     "Property set correctly"
   );
+  var expressionEditor = <SurveyPropertyConditionEditor>(
+    trigerEditor.getPropertyEditorByName("expression").editor
+  );
+  assert.equal(
+    expressionEditor.isCompactMode,
+    false,
+    "The expression is not in compact mode"
+  );
+  assert.equal(
+    expressionEditor.availableQuestions.length,
+    survey.getAllQuestions().length,
+    "All questions are here"
+  );
+
   /* TODO refactor - setValue is depends on setToName
   saveTriggerEditor.kosetValue("val2");
   saveTriggerEditor.kosetToName("question2");
@@ -1143,6 +1158,12 @@ QUnit.test("Validators property editor", function(assert) {
   assert.equal(question.validators.length, 3, "3 validators");
   propEditor.onDeleteClick();
   assert.equal(question.validators.length, 2, "Two validators are saved");
+  propEditor.onDeleteClick();
+  propEditor.onDeleteClick();
+  assert.notOk(
+    propEditor.selectedObjectEditor(),
+    "There is no validators, nothing to show"
+  );
 });
 
 QUnit.test(

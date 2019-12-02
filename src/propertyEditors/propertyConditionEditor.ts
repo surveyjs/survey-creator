@@ -174,8 +174,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       !!this.object.colOwner
     )
       return this.object.colOwner["survey"];
-    if (!!this.object && !!this.object.survey)
-      return this.getOrigionalSurvey(this.object.survey);
+    if (!!this.object) {
+      if (!!this.object.survey)
+        return this.getOrigionalSurvey(this.object.survey);
+      if (!!this.object.owner)
+        return this.getOrigionalSurvey(this.object.owner);
+    }
     return null;
   }
   private getOrigionalSurvey(survey: Survey.SurveyModel): Survey.SurveyModel {
