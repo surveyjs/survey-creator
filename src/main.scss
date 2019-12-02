@@ -760,7 +760,11 @@
   .svd-logic-header-item-text {
   }
 }
-
+.svd_container_disabled {
+  .item_editable {
+    pointer-events: none;
+  }
+}
 @media all and (-ms-high-contrast: none) {
   *::-ms-backdrop,
   .svd_container use {

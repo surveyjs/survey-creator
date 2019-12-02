@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import Sortable from "sortablejs";
-import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { createAddItemHandler, itemAdorner } from "./item-editor";
 import  { selectItemsAdorner } from "./select-items";
@@ -125,7 +124,7 @@ ko.components.register("select-items-editor", {
   template: templateHtml
 });
 
-export var selectItemsEditorAfterRender = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
+export var renderEditableItems = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     elements[0].onclick = e => e.preventDefault();
     var decoration = document.createElement("div");
     decoration.innerHTML =
