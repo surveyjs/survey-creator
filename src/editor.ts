@@ -1954,9 +1954,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.initSurvey(this.getDefaultSurveyJson());
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(<HTMLElement>(
-      this.renderedElement.querySelector("#surveyjsJSONEditor")
-    ));
+    this.jsonEditor.init(
+      <HTMLElement>this.renderedElement.querySelector("#surveyjsJSONEditor")
+    );
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
         width: "100%"
@@ -1994,9 +1994,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(<SurveyForDesigner>(
-      this.createSurvey({}, "designer", SurveyForDesigner)
-    ));
+    this.surveyValue(
+      <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
+    );
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
@@ -2224,6 +2224,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
     this.pages(this.survey.pages);
+    this.surveyObjects.selectObject(this.surveyValue());
     this.surveyValue().onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
         self.surveyObjects.selectObject(sender["selectedElement"]);
