@@ -34,6 +34,13 @@ export class EditableObject {
   public reset() {
     this.assignProperties(this.editableObj);
   }
+  public applyAll(excludedProps: Array<string> = []) {
+    var json = this.getObjJson(this.editableObj);
+    for (var i = 0; i < excludedProps.length; i++) {
+      delete json[excludedProps[i]];
+    }
+    new Survey.JsonObject().toObject(json, this.obj);
+  }
   protected createEditableObj(): Survey.Base {
     var type = this.obj.getType();
     var res = <Survey.Base>Survey.Serializer.createClass(type);
@@ -63,9 +70,10 @@ export class EditableObject {
   private assignProperties(obj: any) {
     new Survey.JsonObject().toObject(this.getObjJson(), obj);
   }
-  protected getObjJson(): any {
+  protected getObjJson(obj: any = null): any {
+    if (!obj) obj = this.obj;
     var jsonObj = new Survey.JsonObject();
     jsonObj.lightSerializing = true;
-    return jsonObj.toJsonObject(this.obj);
+    return jsonObj.toJsonObject(obj);
   }
 }

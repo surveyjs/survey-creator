@@ -1003,13 +1003,11 @@ QUnit.test("Return without saving", function(assert) {
   item = logic.items[0];
   assert.equal(item.operations.length, 2, "The last operation was not saved");
   assert.equal(item.expression, "{q1} = 1", "Item expression is not changed");
-  /* TODO refactor
   assert.equal(
     item.operations[1].element["gotoName"],
     "q2",
     "operation gotoName is not changed"
   );
-  */
   assert.notOk(logic.koErrorText(), "The error is cleared");
 });
 

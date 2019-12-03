@@ -5,7 +5,10 @@ import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
 import { ExpressionToDisplayText } from "./expressionToDisplayText";
-import { SurveyElementEditorContent } from "./questionEditors/questionEditor";
+import {
+  SurveyElementEditorContent,
+  SurveyQuestionEditor
+} from "./questionEditors/questionEditor";
 
 export interface ISurveyLogicType {
   name: string;
@@ -62,7 +65,7 @@ export class SurveyLogicType {
     return this.logicType.propertyName;
   }
   public get templateName(): string {
-    if (this.isTrigger) return "propertyeditorcontent-trigger-content";
+    if (this.isTrigger) return "questioneditor-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
       : "elementselector";
@@ -183,18 +186,26 @@ export class SurveyLogicType {
     return res;
   }
   private saveTriggerElement(op: SurveyLogicOperation) {
-    var trigger = <Survey.SurveyTrigger>op.element;
-    var survey = this.survey;
-    if (
-      !!survey &&
-      survey.triggers.indexOf(trigger) < 0 &&
-      !!trigger.expression
-    ) {
-      survey.triggers.push(trigger);
+    if (!!op.templateObject.editableObject) {
+      var edObj = op.templateObject.editableObject;
+      edObj.applyAll(["expression"]);
+    } else {
+      var trigger = <Survey.SurveyTrigger>op.element;
+      var survey = this.survey;
+      if (this.isNewTrigger(trigger) && !!trigger.expression) {
+        survey.triggers.push(trigger);
+      }
     }
   }
   private createTriggerTemplateObject(element: Survey.Base) {
-    return new SurveyElementEditorContent(element, "", this.options);
+    if (this.isNewTrigger(element))
+      return new SurveyElementEditorContent(element, "", this.options);
+    return new SurveyQuestionEditor(element, "", this.options);
+  }
+  private isNewTrigger(element: Survey.Base): boolean {
+    var trigger = <Survey.SurveyTrigger>element;
+    var survey = this.survey;
+    return !!survey && survey.triggers.indexOf(trigger) < 0;
   }
 }
 
