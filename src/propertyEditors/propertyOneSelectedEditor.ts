@@ -13,6 +13,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
     this.koSelected.subscribe(function(newValue) {
+      if (newValue === "") return;
       self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
     });
     this.onDeleteClick = function() {
@@ -58,8 +59,8 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var index = this.origionalValue.length - 1;
     if (!isNew) {
       var index = this.origionalValue.indexOf(this.koSelected());
-      if (index < 0) {
-        index = this.origionalValue.length - 1;
+      if (index < 0 && this.origionalValue.length > 0) {
+        index = 0;
       }
     }
     var val = index > -1 ? this.origionalValue[index] : null;

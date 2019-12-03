@@ -325,9 +325,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   private setValueFromBuilder(val: string) {
     this.koTextValue(val);
-    if (this.koIsCompactMode()) {
-      this.koValue(val);
-    }
+    this.koValue(val);
   }
   private deleteConditionProperties(json: any) {
     delete json["visible"];
@@ -426,6 +424,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   }
   public replaceCondition() {
     this.addConditionCore("");
+  }
+  public addAndCondition() {
+    this.addCondition();
+  }
+  public addOrCondition() {
+    this.addCondition("or");
   }
   public addCondition(conType: string = "and") {
     this.addConditionCore(conType);

@@ -8,7 +8,7 @@
     <div data-bind="visible: koBuildType() != 'text'">
         <div data-bind="visible: koIsCompactMode">
             <span  data-bind="text:koConditionDisplayText"></span>
-            <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="visible: koHasConditionAppliedValue(), click: $data.clearCondition(), value: $data.conditionButtonClear"/>
+            <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="visible: koHasConditionAppliedValue(), click: $data.clearConditio, value: $data.conditionButtonClear"/>
             <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="visible: koBuildType() == 'view', click: $data.doBuildClick, value: $data.buttonBuildText"/>
             <input type="button" class="btn btn-primary btn-sm style="width:80px;height:15px" data-bind="click: $data.doEditClick, value: $data.buttonEditText"/>
         </div>
@@ -30,9 +30,9 @@
                 <survey-widget params="survey: koValueSurvey"></survey-widget>
             </div>
             <div class="form-inline form-group">
-                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), click: $data.replaceCondition(), value: koButtonReplaceText"/>
-                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addCondition(), value: $data.conditionButtonAddAsAnd"/>
-                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addCondition('or'), value: $data.conditionButtonAddAsOr"/>
+                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), click: $data.replaceCondition, value: koButtonReplaceText"/>
+                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addAndCondition, value: $data.conditionButtonAddAsAnd"/>
+                <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addOrCondition, value: $data.conditionButtonAddAsOr"/>
             </div>
         </div>
     </div>
