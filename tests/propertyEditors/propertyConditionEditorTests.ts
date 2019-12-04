@@ -855,7 +855,7 @@ QUnit.test(
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");
-    var question2 = <Survey.Question>page.addNewQuestion("text", "q2");
+    page.addNewQuestion("text", "q2");
     var editor = new SurveyPropertyConditionEditor(property);
     editor.onChanged = function(newValue) {
       question.visibleIf = newValue;

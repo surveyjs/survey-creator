@@ -166,9 +166,12 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.koIsShowingModal(true);
   }
   protected beforeCloseModal() {
-    this.modalEditableObject = null;
     this.isBeforeShowCalledValue = false;
     this.koIsShowingModal(false);
+    if (!!this.modalEditableObject) {
+      this.modalEditableObject.reset();
+    }
+    this.modalEditableObject = null;
   }
   protected onOptionsChanged() {
     this.koShowApplyButton = ko.observable(
