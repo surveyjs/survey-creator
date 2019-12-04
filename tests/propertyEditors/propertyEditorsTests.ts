@@ -40,6 +40,13 @@ class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEdi
   constructor() {
     super(Survey.Serializer.findProperty("selectbase", "choices"));
   }
+  public doShowModal() {
+    this.beforeShowModal();
+    this.beforeShow();
+  }
+  public doCloseModal() {
+    this.beforeCloseModal();
+  }
 }
 
 function createSurvey(): Survey.Survey {
@@ -401,6 +408,26 @@ QUnit.test(
       true,
       "item.value is visible and editable"
     );
+  }
+);
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - do not change value on adding in modal window and set it after apply only",
+  function(assert) {
+    var question = new Survey.QuestionCheckbox("q1");
+    question.choices = [1, 2];
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.object = question;
+    editor.doShowModal();
+    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    itemViewModel.cells[0].koValue(5);
+    assert.equal(question.choices[0].value, 1, "We do not apply the changes");
+    editor.doCloseModal();
+    editor.doShowModal();
+    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    itemViewModel.cells[0].koValue(7);
+    assert.equal(question.choices[0].value, 1, "We do not apply the changes#2");
+    editor.onApplyClick();
+    assert.equal(question.choices[0].value, 7, "We applied on changes");
   }
 );
 

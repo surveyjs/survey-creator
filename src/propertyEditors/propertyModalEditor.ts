@@ -5,6 +5,7 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { editorLocalization } from "../editorLocalization";
 import { focusFirstControl } from "../utils/utils";
 import RModal from "rmodal";
+import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
@@ -52,6 +53,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   }
   private isBeforeShowCalledValue: boolean = false;
   private elements: HTMLElement[];
+  private modalEditableObject: EditableObject;
   public editingObject: any;
   public onApplyClick: any;
   public onOkClick: any;
@@ -143,11 +145,30 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.isBeforeShowCalledValue = true;
     this.updateValue();
   }
+  protected getOrigionalValue(): any {
+    if (!!this.modalEditableObject) {
+      return this.modalEditableObject.editableObj[this.property.name];
+    }
+    return super.getOrigionalValue();
+  }
+  protected performApply() {
+    if (!!this.modalEditableObject) {
+      this.modalEditableObject.apply(this.property.name);
+    } else {
+      super.performApply();
+    }
+  }
   protected beforeShowModal() {
+    this.modalEditableObject = null;
+    if (!!this.origionalValue) {
+      this.modalEditableObject = new EditableObject(this.object);
+    }
     this.koIsShowingModal(true);
   }
   protected beforeCloseModal() {
+    this.modalEditableObject = null;
     this.isBeforeShowCalledValue = false;
+    this.koIsShowingModal(false);
   }
   protected onOptionsChanged() {
     this.koShowApplyButton = ko.observable(

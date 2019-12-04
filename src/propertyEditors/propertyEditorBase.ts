@@ -219,6 +219,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.setObjectCore(value);
   }
   public get origionalValue(): any {
+    return this.getOrigionalValue();
+  }
+  protected getOrigionalValue(): any {
     return !!this.objectValue ? this.objectValue[this.property.name] : null;
   }
   protected setObjectCore(value: any) {
@@ -322,9 +325,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.onBeforeApply();
     if (this.hasError()) return false;
     this.isApplyinNewValue = true;
-    this.koValue(this.editingValue);
+    this.performApply();
     this.isApplyinNewValue = false;
     return true;
+  }
+  protected performApply() {
+    this.koValue(this.editingValue);
   }
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
