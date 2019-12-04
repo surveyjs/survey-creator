@@ -99,8 +99,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       self.onHideModal();
     };
     self.onShowModal = function() {
+      self.beforeShowModal();
       self.beforeShow();
-      self.beforeCloseModal();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
         bodyClass: "",
         closeTimeout: 100,

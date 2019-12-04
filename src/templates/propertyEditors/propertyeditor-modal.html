@@ -15,6 +15,7 @@
   </div>
 
   <div data-bind="attr: {id : modalName}" class="modal" role="dialog">
+      <!--ko if: koIsShowingModal -->
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -37,5 +38,6 @@
               </div>
           </div>
       </div>
+      <!-- /ko -->
   </div>
 </script>
