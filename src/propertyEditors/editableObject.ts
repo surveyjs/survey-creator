@@ -1,6 +1,20 @@
 import * as Survey from "survey-knockout";
 
 export class EditableObject {
+  public static getSurvey(object: any): Survey.SurveyModel {
+    if (object instanceof Survey.SurveyModel) {
+      return EditableObject.getOrigionalSurvey(object);
+    }
+    if (object instanceof Survey.MatrixDropdownColumn && !!object.colOwner)
+      return object.colOwner["survey"];
+    if (!!object) {
+      if (!!object.survey)
+        return EditableObject.getOrigionalSurvey(object.survey);
+      if (!!object.owner)
+        return EditableObject.getOrigionalSurvey(object.owner);
+    }
+    return null;
+  }
   public static getOrigionalSurvey(
     survey: Survey.SurveyModel
   ): Survey.SurveyModel {

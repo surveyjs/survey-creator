@@ -1086,6 +1086,8 @@ QUnit.test("Triggers property editor", function(assert) {
   );
 });
 QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
+  Survey.Serializer.findProperty("setvaluetrigger", "setToName").type =
+    "question";
   var survey = createSurvey();
   var trigger = new Survey.SurveyTriggerSetValue();
   trigger.expression = "{question1} != 'val1'";
@@ -1098,7 +1100,14 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   var trigerEditor = <SurveyElementEditorContent>(
     propEditor.selectedObjectEditor()
   );
-  trigerEditor.getPropertyEditorByName("setToName").editor.koValue("question1");
+  var setToNameEditor = trigerEditor.getPropertyEditorByName("setToName")
+    .editor;
+  assert.equal(
+    setToNameEditor["koChoices"]().length,
+    survey.getAllQuestions().length,
+    "Create the correct editor and set choices to it"
+  );
+  setToNameEditor.koValue("question1");
   assert.equal(
     survey.triggers[0]["setToName"],
     "question1",

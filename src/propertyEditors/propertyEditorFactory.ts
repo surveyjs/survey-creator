@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyCustomEditor } from "./propertyCustomEditor";
 import { editorLocalization } from "../editorLocalization";
-import { JsonObjectProperty } from "survey-knockout";
+import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyEditorFactory {
   public static defaultEditor: string = "string";
@@ -218,8 +218,8 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     }
     return res;
   }
-  private getPropertyChoices(): Array<any> {
-    if (!this.property) return null;
+  protected getPropertyChoices(): Array<any> {
+    if (!this.property) return [];
     if (!!this.object) {
       var obj = this.object;
       this.object["getEditingPropertyValue"] = function(name: string) {
@@ -236,6 +236,27 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     });
   }
 }
+
+export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
+  public get editorType(): string {
+    return "question";
+  }
+  public get editorTypeTemplate(): string {
+    return "dropdown";
+  }
+  protected getPropertyChoices(): Array<any> {
+    var survey = EditableObject.getSurvey(this.object);
+    if (!survey) return [];
+    var questions = survey.getAllQuestions();
+    if (!questions) questions = [];
+    var showTitles = !!this.options && this.options.showTitlesInExpressions;
+    return questions.map(q => {
+      let text = showTitles ? (<any>q).locTitle.renderedHtml : "";
+      return new Survey.ItemValue(q.name, text);
+    });
+  }
+}
+
 export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
@@ -279,6 +300,11 @@ SurveyPropertyEditorFactory.registerEditor("dropdown", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyDropdownPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("question", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyQuestionPropertyEditor(property);
 });
 SurveyPropertyEditorFactory.registerEditor("boolean", function(
   property: Survey.JsonObjectProperty
