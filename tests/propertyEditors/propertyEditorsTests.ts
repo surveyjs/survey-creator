@@ -33,6 +33,7 @@ import {
 } from "../../src/propertyEditors/propertyEditorFactory";
 import { defaultStrings } from "../../src/editorLocalization";
 import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
+import { SurveyPropertyDefaultValueEditor } from "../../src/propertyEditors/propertyDefaultValueEditor";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -1086,8 +1087,20 @@ QUnit.test("Triggers property editor", function(assert) {
   );
 });
 QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
-  Survey.Serializer.findProperty("setvaluetrigger", "setToName").type =
-    "question";
+  var propSetToName = Survey.Serializer.findProperty(
+    "setvaluetrigger",
+    "setToName"
+  );
+  propSetToName.type = "question";
+  propSetToName.addDependedProperty("setValue");
+  var propSetValue = Survey.Serializer.findProperty(
+    "setvaluetrigger",
+    "setValue"
+  );
+  propSetValue.type = "triggervalue";
+  propSetValue.visibleIf = function(obj) {
+    return !!obj && !!obj["setToName"];
+  };
   var survey = createSurvey();
   var trigger = new Survey.SurveyTriggerSetValue();
   trigger.expression = "{question1} != 'val1'";
@@ -1104,8 +1117,13 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     .editor;
   assert.equal(
     setToNameEditor["koChoices"]().length,
-    survey.getAllQuestions().length,
-    "Create the correct editor and set choices to it"
+    survey.getAllQuestions().length + 1,
+    "Create the correct editor and set choices to it, questions + option"
+  );
+  assert.equal(
+    setToNameEditor["koChoices"]()[0].text,
+    "Select question...",
+    "Options text"
   );
   setToNameEditor.koValue("question1");
   assert.equal(
@@ -1125,6 +1143,44 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     expressionEditor.availableQuestions.length,
     survey.getAllQuestions().length,
     "All questions are here"
+  );
+
+  var setValueEditor = <SurveyPropertyDefaultValueEditor>(
+    trigerEditor.getPropertyEditorByName("setValue").editor
+  );
+  assert.equal(
+    setValueEditor.editorType,
+    "value",
+    "has correct editor type for setValue property"
+  );
+  /*
+  setToNameEditor.koValue("");
+  assert.equal(setValueEditor.koV, "radiogroup", "question is radiogroup");
+  */
+
+  setToNameEditor.koValue("question2");
+  assert.equal(
+    trigerEditor.getPropertyEditorByName("setValue").objectProperty.koVisible(),
+    true,
+    "SetToName is not empty"
+  );
+  assert.ok(setValueEditor.survey, "Survey is created");
+  assert.equal(
+    setValueEditor.survey.getAllQuestions()[0].getType(),
+    "checkbox",
+    "question is checkbox"
+  );
+  setValueEditor.survey.setValue("question", ["one", "two"]);
+  assert.deepEqual(
+    survey.triggers[0]["setValue"],
+    ["one", "two"],
+    "Set value is set"
+  );
+  setToNameEditor.koValue("");
+  assert.equal(
+    trigerEditor.getPropertyEditorByName("setValue").objectProperty.koVisible(),
+    false,
+    "SetToName is empty"
   );
 
   /* TODO refactor - setValue is depends on setToName

@@ -210,6 +210,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     var res = new Array<Survey.ItemValue>();
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
+      if (!!res[i].text) continue;
       var value = res[i].value;
       var text = this.getValueText(value);
       if (text != value) {
@@ -245,15 +246,24 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
     return "dropdown";
   }
   protected getPropertyChoices(): Array<any> {
+    var opt = new Survey.ItemValue(
+      "",
+      this.getLocString("pe.conditionSelectQuestion")
+    );
     var survey = EditableObject.getSurvey(this.object);
-    if (!survey) return [];
+    if (!survey) return [opt];
     var questions = survey.getAllQuestions();
     if (!questions) questions = [];
     var showTitles = !!this.options && this.options.showTitlesInExpressions;
-    return questions.map(q => {
-      let text = showTitles ? (<any>q).locTitle.renderedHtml : "";
+    var qItems = questions.map(q => {
+      let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
       return new Survey.ItemValue(q.name, text);
     });
+    qItems.sort((el1, el2) => {
+      return el1.text.localeCompare(el2.text);
+    });
+    qItems.unshift(opt);
+    return qItems;
   }
 }
 
