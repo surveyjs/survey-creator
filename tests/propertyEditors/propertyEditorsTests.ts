@@ -1182,40 +1182,6 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     false,
     "SetToName is empty"
   );
-
-  /* TODO refactor - setValue is depends on setToName
-  saveTriggerEditor.kosetValue("val2");
-  saveTriggerEditor.kosetToName("question2");
-  assert.notOk(saveTriggerEditor.kosetValue(), "value is empty");
-  assert.equal(
-    saveTriggerEditor
-      .koSurvey()
-      .getQuestionByName("question")
-      .getType(),
-    "checkbox",
-    "We have a checkbox question"
-  );
-  saveTriggerEditor.valueSurvey.setValue("question", ["one", "two"]);
-  assert.deepEqual(
-    saveTriggerEditor.kosetValue(),
-    ["one", "two"],
-    "value is set from survey"
-  );
-  saveTriggerEditor.koisVariable(true);
-  assert.equal(
-    saveTriggerEditor.koHasSurvey(),
-    false,
-    "survey is not visible again"
-  );
-  assert.notOk(
-    saveTriggerEditor.kosetToName(),
-    "question is empty, isVariable is true"
-  );
-  assert.notOk(
-    saveTriggerEditor.kosetValue(),
-    "value is empty, isVariable is true"
-  );
-  */
 });
 
 QUnit.test("Validators property editor", function(assert) {
