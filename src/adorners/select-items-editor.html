@@ -42,11 +42,13 @@
         params="iconName: 'icon-inplaceplus', size: 12"
       ></svg-icon>
     </div>
+    <!-- ko ifnot: question.hasOther -->
     <div
       class="sv_technical svda-add-new-item svda-add-custom-item"
       data-bind="click: addOther, attr: { title: getLocString('pe.addOther') }"
     >
       <span data-bind="text: getLocString('pe.addOther')"></span>
     </div>
+    <!-- /ko -->
   </div>
 </div>

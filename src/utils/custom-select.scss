@@ -31,7 +31,7 @@
   }
 }
 
-.svd_custom_select {
+.svd_container .svd_content .svd_custom_select, .svd_container .modal-dialog .svd_custom_select {
   width: 100%;
   position: relative;
   display: inline-block;
