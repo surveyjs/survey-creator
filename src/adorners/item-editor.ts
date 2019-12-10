@@ -313,7 +313,7 @@ export var itemDraggableAdorner = {
       }
     }
     itemsRoot[0].appendChild(addNew);
-    if (editor.canShowObjectProperty(model, "hasOther")) {
+    if (editor.canShowObjectProperty(model, "hasOther") && model.hasOther !== true) {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addOther"),
@@ -327,7 +327,7 @@ export var itemDraggableAdorner = {
       );
     }
     if (
-      model.hasSelectAll !== undefined &&
+      model.hasSelectAll !== undefined && model.hasSelectAll !== true &&
       editor.canShowObjectProperty(model, "hasSelectAll")
     ) {
       itemsRoot[0].appendChild(
@@ -343,7 +343,7 @@ export var itemDraggableAdorner = {
       );
     }
     if (
-      model.hasNone !== undefined &&
+      model.hasNone !== undefined && model.hasNone !== true &&
       editor.canShowObjectProperty(model, "hasNone")
     ) {
       itemsRoot[0].appendChild(
