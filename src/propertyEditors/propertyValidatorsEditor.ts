@@ -12,7 +12,7 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyOneSelectedEdi
   public get editorType(): string {
     return "validators";
   }
-  public getItemText(item: any): any {
+  public getItemText(item: any, counter: any = null): any {
     return editorLocalization.getValidatorName(item.getType());
   }
   protected getAvailableClasses(): Array<any> {

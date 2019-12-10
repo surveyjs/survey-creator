@@ -37,7 +37,7 @@
           <div class="form-control svd_custom_select">
               <select onmousewheel="return false;" data-bind="value: koSelected">
                 <!-- ko foreach: origionalValue -->
-                <option data-bind="value: $data, text: $parent.getItemText($data)" ></option>
+                <option data-bind="value: $data, text: $parent.getItemText($data, $parent.koChangeCounter())" ></option>
                 <!-- /ko -->
               </select>
           </div>

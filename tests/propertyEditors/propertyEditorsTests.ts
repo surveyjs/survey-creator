@@ -1085,6 +1085,11 @@ QUnit.test("Triggers property editor", function(assert) {
     "completetrigger",
     "Complete trigger is created"
   );
+  propEditor.onDeleteClick();
+  propEditor.onDeleteClick();
+  propEditor.onDeleteClick();
+  assert.equal(survey.triggers.length, 0, "Delete all triggers");
+  assert.notOk(propEditor.selectedObjectEditor(), "Nothing to select");
 });
 QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   var propSetToName = Survey.Serializer.findProperty(
@@ -1532,5 +1537,27 @@ QUnit.test(
     propEditor.object = survey;
     propEditor.onAddClick();
     assert.equal(survey.calculatedValues.length, 1, "There is one item now");
+  }
+);
+
+QUnit.test(
+  "SurveyElementEditorContent.onPropertyChanging do not allow empty or number question.name",
+  function(assert) {
+    var question = new Survey.QuestionText("q1");
+    var propEditor = new SurveyElementEditorContent(question);
+    propEditor.onPropertyChanging = function(
+      prop: Survey.JsonObjectProperty,
+      newValue: any
+    ): boolean {
+      if (prop.name !== "name") return true;
+      return !!newValue && newValue !== "_";
+    };
+    var edName = propEditor.getPropertyEditorByName("name");
+    edName.editor.koValue("");
+    assert.equal(question.name, "q1", "The value is not changed");
+    edName.editor.koValue("q2");
+    assert.equal(question.name, "q2", "The value is changed");
+    edName.editor.koValue("_");
+    assert.equal(question.name, "q2", "The value is not changed again");
   }
 );

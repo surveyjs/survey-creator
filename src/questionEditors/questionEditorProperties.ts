@@ -10,8 +10,11 @@ import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyQuestionEditorProperty {
   private objectPropertyValue: SurveyObjectProperty;
-
-  koValue: any;
+  public onChanging: (
+    propEditor: SurveyQuestionEditorProperty,
+    newValue: any
+  ) => boolean;
+  public onChanged: (propEditor: SurveyQuestionEditorProperty) => void;
   constructor(
     public obj: Survey.Base,
     public property: Survey.JsonObjectProperty,
@@ -77,7 +80,9 @@ export class SurveyQuestionEditorProperty {
     this.objectProperty.updateDynamicProperties();
   }
   protected onPropertyChanged(property: SurveyObjectProperty, newValue: any) {
+    if (this.onChanging && !this.onChanging(this, newValue)) return;
     this.obj[this.property.name] = newValue;
+    if (this.onChanged) this.onChanged(this);
   }
   private updateDependedProperty(propertyName: string) {
     if (!this.getEditorPropertyByName) return;
@@ -184,7 +189,7 @@ export class SurveyQuestionEditorProperties {
       func(props[i]);
     }
   }
-  private getAllProperties(): Array<SurveyQuestionEditorProperty> {
+  public getAllProperties(): Array<SurveyQuestionEditorProperty> {
     var res = [];
     for (var i = 0; i < this.rows.length; i++) {
       for (var j = 0; j < this.rows[i].properties.length; j++) {

@@ -16,7 +16,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
   public get editorType(): string {
     return "triggers";
   }
-  public getItemText(item: any): any {
+  public getItemText(item: any, counter: any = null): any {
     if (!item.expression)
       return editorLocalization.getString("pe.triggerNotSet");
     var res = item.expression;

@@ -6,6 +6,7 @@ import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
 export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   public selectedObjectEditor = ko.observable<SurveyElementEditorContent>(null);
   public koSelected = ko.observable(null);
+  public koChangeCounter = ko.observable(0);
   public koAvailableClasses: any;
   private currentObjClassName: string;
   constructor(property: Survey.JsonObjectProperty) {
@@ -13,7 +14,16 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
     this.koSelected.subscribe(function(newValue) {
-      if (newValue === "") return;
+      if (!newValue) {
+        newValue = null;
+      } else {
+        if (
+          Array.isArray(self.origionalValue) &&
+          self.origionalValue.indexOf(newValue) < 0
+        ) {
+          newValue = null;
+        }
+      }
       self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
     });
     this.onDeleteClick = function() {
@@ -29,7 +39,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   public get editorType(): string {
     return "oneselected";
   }
-  public getItemText(item: any): any {
+  public getItemText(item: any, counter: any = null): any {
     return item.getType();
   }
   protected getObjClassName() {
@@ -50,6 +60,9 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   private createSelectedObjEditor(item: any): SurveyElementEditorContent {
     if (!item) return null;
     var editor = new SurveyElementEditorContent(item, null, this.options);
+    editor.onPropertyChanged = (prop: any) => {
+      this.koChangeCounter(this.koChangeCounter() + 1);
+    };
     this.onCreateEditor(editor);
     return editor;
   }

@@ -264,6 +264,11 @@ export class SurveyElementEditorContent {
   protected properties: SurveyQuestionProperties;
   koTabs: any;
   koActiveTab = ko.observable<string>();
+  public onPropertyChanging: (
+    prop: Survey.JsonObjectProperty,
+    newValue: any
+  ) => boolean;
+  public onPropertyChanged: (prop: Survey.JsonObjectProperty) => void;
   constructor(
     obj: any,
     public className: string = null,
@@ -281,6 +286,7 @@ export class SurveyElementEditorContent {
     );
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
+    this.assignEvents();
     tabs.forEach(tab => tab.beforeShow());
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
@@ -318,10 +324,38 @@ export class SurveyElementEditorContent {
     }
     return res;
   }
+  private getAllEditorProperties(): Array<SurveyQuestionEditorProperty> {
+    var res = [];
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      var tab = <SurveyQuestionEditorTab>tabs[i];
+      var props = tab.properties.getAllProperties();
+      for (var j = 0; j < props.length; j++) {
+        res.push(props[j]);
+      }
+    }
+    return res;
+  }
   private buildTabs(): Array<SurveyQuestionEditorTab> {
     var tabs = [];
     this.addPropertiesTabs(tabs);
     return tabs;
+  }
+  private assignEvents() {
+    var props = this.getAllEditorProperties();
+    for (var i = 0; i < props.length; i++) {
+      props[i].onChanging = (
+        propEditor: SurveyQuestionEditorProperty,
+        newValue: any
+      ): boolean => {
+        if (!this.onPropertyChanging) return true;
+        return this.onPropertyChanging(propEditor.property, newValue);
+      };
+      props[i].onChanged = (propEditor: SurveyQuestionEditorProperty): void => {
+        if (!!this.onPropertyChanged)
+          this.onPropertyChanged(propEditor.property);
+      };
+    }
   }
   private addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var self = this;
