@@ -100,7 +100,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public koHasError: any;
   public koErrorText: any;
   public koDisplayError: any;
-  public isTabProperty: boolean = false;
   public isInplaceProperty: boolean = false;
   public readOnly: any;
   public koMaxLength: any;
@@ -182,10 +181,14 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public get isDiplayNameVisible() {
     return (
-      (!this.isTabProperty || !this.isModal) &&
+      !this.isShowingModal() &&
       !this.isInplaceProperty &&
-      this.displayName !== "."
+      this.displayName !== "." &&
+      !!this.displayName
     );
+  }
+  protected isShowingModal(): boolean {
+    return false;
   }
   public get displayName(): string {
     return this.displayNameValue;
@@ -209,7 +212,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     }
     return res;
   }
-  public get isModal(): boolean {
+  protected get isModal(): boolean {
     return false;
   }
   public get object(): any {

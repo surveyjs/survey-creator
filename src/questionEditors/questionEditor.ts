@@ -64,6 +64,7 @@ export class SurveyQuestionEditorPropertyDefinition {
   public property: Survey.JsonObjectProperty;
   public title: string;
   public category: string;
+  public createdFromTabName: boolean;
   public get name(): string {
     return this.property.name;
   }
@@ -180,6 +181,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
+    propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
     tab.properties.push(propertyDefinition);
   }
@@ -378,6 +380,10 @@ export class SurveyElementEditorContent {
           tabItem.name
         );
         propertyTab.title = tabItem.title;
+        if (tabItem.properties[0].createdFromTabName) {
+          var firstEditor = propertyTab.getPropertyEditorByName(tabItem.name);
+          if (!!firstEditor) firstEditor.editor.displayName = "";
+        }
         tabs.push(propertyTab);
       }
     }

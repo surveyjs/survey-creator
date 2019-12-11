@@ -4,7 +4,8 @@ import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEdit
 import {
   SurveyQuestionEditor,
   SurveyElementEditorContent,
-  SurveyQuestionEditorTab
+  SurveyQuestionEditorTab,
+  SurveyQuestionProperties
 } from "../../src/questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "../../src/propertyEditors/propertyItemValuesEditor";
 import {
@@ -987,6 +988,34 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     }
   }
 });
+
+QUnit.test(
+  "Check showDisplayNameOnTop for different property editors",
+  function(assert) {
+    var question = new Survey.QuestionCheckbox("q1");
+    var editor = new SurveyQuestionEditor(question);
+    assert.equal(
+      editor.getPropertyEditorByName("name").editor.showDisplayNameOnTop,
+      true,
+      "Show title on top for name"
+    );
+    assert.equal(
+      editor.getPropertyEditorByName("choices").editor.showDisplayNameOnTop,
+      false,
+      "Hide title on top for choices"
+    );
+    assert.equal(
+      editor.getPropertyEditorByName("visible").editor.showDisplayNameOnTop,
+      false,
+      "Hide title on top for visible"
+    );
+    assert.equal(
+      editor.getPropertyEditorByName("visibleIf").editor.showDisplayNameOnTop,
+      true,
+      "Show title on top for visibleIf"
+    );
+  }
+);
 
 QUnit.test("Text property test - two way binding", function(assert) {
   var property = new Survey.JsonObjectProperty("text");

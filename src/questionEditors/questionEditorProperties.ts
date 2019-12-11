@@ -20,7 +20,6 @@ export class SurveyQuestionEditorProperty {
     public property: Survey.JsonObjectProperty,
     displayName: string,
     options: ISurveyObjectEditorOptions = null,
-    isTabProperty: boolean = false,
     private getEditorPropertyByName: (
       name: string
     ) => SurveyQuestionEditorProperty = null
@@ -33,7 +32,6 @@ export class SurveyQuestionEditorProperty {
       },
       options
     );
-    this.editor.isTabProperty = isTabProperty;
     if (!displayName) {
       displayName = editorLocalization.getPropertyInEditor(this.property.name);
     }
@@ -105,8 +103,7 @@ export class SurveyQuestionEditorRow {
   public addProperty(
     property: any,
     displayName: string,
-    options: ISurveyObjectEditorOptions,
-    isTabProperty: boolean
+    options: ISurveyObjectEditorOptions
   ) {
     this.properties.push(
       new SurveyQuestionEditorProperty(
@@ -114,7 +111,6 @@ export class SurveyQuestionEditorRow {
         property,
         displayName,
         options,
-        isTabProperty,
         this.getEditorPropertyByName
       )
     );
@@ -129,7 +125,6 @@ export class SurveyQuestionEditorRow {
 }
 
 export class SurveyQuestionEditorProperties {
-  public isTabProperty: boolean = false;
   private properties: Array<Survey.JsonObjectProperty>;
   public rows: Array<SurveyQuestionEditorRow> = [];
   constructor(
@@ -141,7 +136,6 @@ export class SurveyQuestionEditorProperties {
       name: string
     ) => SurveyQuestionEditorProperty = null
   ) {
-    this.isTabProperty = !!tab;
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildRows(properties);
   }
@@ -158,13 +152,6 @@ export class SurveyQuestionEditorProperties {
   }
   public beforeShow() {
     this.performForAllProperties(p => p.beforeShow());
-    if (
-      this.getAllProperties().length === 1 &&
-      this.isTabProperty &&
-      this.tab.visible !== undefined
-    ) {
-      this.getAllProperties()[0].objectProperty.koVisible(this.tab.visible);
-    }
   }
   public hasError(): boolean {
     var isError = false;
@@ -212,12 +199,7 @@ export class SurveyQuestionEditorProperties {
         if (properties[i].category) row.category = properties[i].category;
         this.rows.push(row);
       }
-      row.addProperty(
-        jsonProperty,
-        properties[i].title,
-        this.options,
-        properties.length === 1 && this.isTabProperty
-      );
+      row.addProperty(jsonProperty, properties[i].title, this.options);
     }
   }
   private getName(prop: any): string {

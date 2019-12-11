@@ -135,7 +135,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     super.setup();
     this.beforeShow();
   }
-  public get isModal(): boolean {
+  protected get isModal(): boolean {
     return true;
   }
   public get isBeforeShowCalled(): boolean {
@@ -164,6 +164,9 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.modalEditableObject = new EditableObject(this.object);
     }
     this.koIsShowingModal(true);
+  }
+  protected isShowingModal(): boolean {
+    return this.koIsShowingModal();
   }
   protected beforeCloseModal() {
     this.isBeforeShowCalledValue = false;

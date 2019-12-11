@@ -48,9 +48,6 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       return self.getEditorName();
     });
   }
-  public get canShowDisplayNameOnTop(): boolean {
-    return false;
-  }
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.koColumnsValue();
   }
