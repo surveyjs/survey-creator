@@ -34,7 +34,7 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
     var objs = [];
     var items = this.origionalValue;
     for (var i = 0; i < items.length; i++) {
-      var item = items[i].item;
+      var item = items[i];
       if (!!item) {
         objs.push({ name: item.name });
       }

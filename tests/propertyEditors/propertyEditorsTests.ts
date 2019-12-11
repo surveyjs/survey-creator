@@ -1566,6 +1566,18 @@ QUnit.test(
     propEditor.object = survey;
     propEditor.onAddClick();
     assert.equal(survey.calculatedValues.length, 1, "There is one item now");
+    assert.equal(
+      survey.calculatedValues[0].name,
+      "var1",
+      "Name for first item generated correctly"
+    );
+    propEditor.onAddClick();
+    assert.equal(survey.calculatedValues.length, 2, "There are two items");
+    assert.equal(
+      survey.calculatedValues[1].name,
+      "var2",
+      "Name for second item generated correctly"
+    );
   }
 );
 
