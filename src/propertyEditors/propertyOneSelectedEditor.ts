@@ -24,6 +24,14 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
           newValue = null;
         }
       }
+      if (
+        newValue == null &&
+        Array.isArray(self.origionalValue) &&
+        self.origionalValue.length > 0
+      ) {
+        self.koSelected(self.origionalValue[0]);
+        return;
+      }
       self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
     });
     this.onDeleteClick = function() {
