@@ -1151,13 +1151,13 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     .editor;
   assert.equal(
     setToNameEditor["koChoices"]().length,
-    survey.getAllQuestions().length + 1,
-    "Create the correct editor and set choices to it, questions + option"
+    survey.getAllQuestions().length,
+    "Create the correct editor and set choices to it, questions, no option since setToName is requried"
   );
   assert.equal(
     setToNameEditor["koChoices"]()[0].text,
-    "Select question...",
-    "Options text"
+    "question1",
+    "No option"
   );
   setToNameEditor.koValue("question1");
   assert.equal(
@@ -1187,11 +1187,6 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     "value",
     "has correct editor type for setValue property"
   );
-  /*
-  setToNameEditor.koValue("");
-  assert.equal(setValueEditor.koV, "radiogroup", "question is radiogroup");
-  */
-
   setToNameEditor.koValue("question2");
   assert.equal(
     trigerEditor.getPropertyEditorByName("setValue").objectProperty.koVisible(),
@@ -1212,9 +1207,9 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
   setToNameEditor.koValue("");
   assert.equal(
-    trigerEditor.getPropertyEditorByName("setValue").objectProperty.koVisible(),
-    false,
-    "SetToName is empty"
+    survey.triggers[0]["setToName"],
+    "question2",
+    "Property could not be changed"
   );
 });
 

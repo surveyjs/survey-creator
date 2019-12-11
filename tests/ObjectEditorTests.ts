@@ -465,5 +465,5 @@ QUnit.test("Property Editor - property.isRequired = true", function(assert) {
   assert.equal(question.name, "q2", "Set correctly");
   nameEditor.koValue("");
   assert.equal(question.name, "q2", "We can't set nullable value");
-  assert.equal(nameEditor.koValue(), "q2", "Return the value to correct state");
+  assert.equal(nameEditor.koHasError(), true, "It shows error");
 });

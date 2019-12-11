@@ -420,12 +420,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       };
       this.updateEditingProperties(newValue);
       this.options.onValueChangingCallback(options);
-      if (!this.isValueEmpty(options.newValue)) {
+      if (
+        !this.isValueEmpty(options.newValue) &&
+        !Survey.Helpers.isTwoValueEquals(newValue, options.newValue)
+      ) {
         newValue = options.newValue;
         this.koValue(newValue);
-      }
-      if (options.doValidation) {
-        this.hasError();
       }
     }
     this.updateEditingProperties(newValue);
@@ -433,6 +433,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.editingValue = newValue;
     }
     this.iskoValueChanging = false;
+    if (this.hasError()) return;
 
     if (this.property && this.object && this.getValue() == newValue) return;
     if (this.onChanged != null) this.onChanged(newValue);
