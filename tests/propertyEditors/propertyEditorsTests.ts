@@ -1017,25 +1017,6 @@ QUnit.test(
   }
 );
 
-QUnit.test("Text property test - two way binding", function(assert) {
-  var property = new Survey.JsonObjectProperty("text");
-  property.type = "text";
-  var propertyEditor = new SurveyObjectProperty(property);
-  var editor = <SurveyPropertyTextEditor>propertyEditor.editor;
-  editor.koTextValue("1");
-  editor.onApplyClick();
-  assert.equal(
-    propertyEditor.editor.koValue(),
-    "1",
-    "the value is set correctly from the editor"
-  );
-  propertyEditor.editor.koValue("2");
-  assert.equal(
-    editor.koTextValue(),
-    "2",
-    "the value is set correctly from text input"
-  );
-});
 QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
   var editor = new SurveyPropertyResultfullEditor(null);
   editor.editingValue = new Survey.ChoicesRestfull();

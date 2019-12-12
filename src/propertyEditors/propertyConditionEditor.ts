@@ -9,6 +9,7 @@ import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public showHelpText: boolean = true;
+  public koTextValue: any;
   koIsConditionValid: any;
   koConditionQuestions: any;
   koConditionQuestion: any;
@@ -32,6 +33,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     public syntaxCheckMethodName: string = "createCondition"
   ) {
     super(property);
+    this.koTextValue = ko.observable();
     if (!SurveyPropertyConditionEditor.emptySurvey) {
       SurveyPropertyConditionEditor.emptySurvey =
         !!this.options && this.options.createSurvey({}, "conditionEditor");
@@ -54,6 +56,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     );
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
+    this.koTextValue.subscribe(function(newValue) {
+      self.onkoTextValueChanged(newValue);
+    });
     this.koConditionQuestion.subscribe(function(newValue) {
       self.onQuestionOrOperatorChanged(
         newValue,
@@ -180,6 +185,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     if (!text) return false;
     var runner = new Survey.ConditionRunner(text);
     return runner.canRun();
+  }
+  protected onValueChanged() {
+    this.koTextValue(this.editingValue);
   }
   private getConditionQuetions(): any[] {
     if (!this.object) return [];
@@ -456,12 +464,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       text += " " + this.getAddConditionValue();
     }
     return text;
-  }
-  protected onBeforeApply() {
-    if (!this.koTextValue() && this.koIsConditionValid()) {
-      this.replaceCondition();
-    }
-    super.onBeforeApply();
   }
   private getAddConditionOperator(operator: string = null): string {
     var op = !!operator ? operator : this.koConditionOperator();

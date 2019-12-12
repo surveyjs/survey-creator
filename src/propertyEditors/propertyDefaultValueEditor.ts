@@ -79,10 +79,6 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     super.beforeShow();
     this.createSurvey();
   }
-  protected onBeforeApply() {
-    if (!this.survey) return;
-    this.setValueCore(this.getSurveyResult());
-  }
   public get editorType(): string {
     return "value";
   }
