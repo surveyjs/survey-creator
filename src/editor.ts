@@ -1711,11 +1711,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
     //TODO add a flag to a property, may change other properties
     if (
-      property.name == "locale" ||
       property.name == "hasComment" ||
-      property.name == "hasSelectAll" ||
       property.name == "hasNone" ||
-      property.name == "hasOther"
+      property.name == "hasOther" ||
+      property.name == "hasSelectAll" ||
+      property.name == "locale"
     ) {
       this.selectedObjectEditorValue.objectChanged();
     }
