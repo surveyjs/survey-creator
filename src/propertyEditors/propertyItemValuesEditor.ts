@@ -15,6 +15,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   koShowTextView: any;
   changeToTextViewClick: any;
   changeToFormViewClick: any;
+  private koItemsTextDelayed: any;
+  private isUpdatingItemText: boolean = false;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koShowTextView = ko.observable(true);
@@ -24,9 +26,16 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
         SurveyQuestionEditorDefinition.definition[this.getItemValueClassName()];
     }
     this.koItemsText = ko.observable("");
+    this.koItemsTextDelayed = ko
+      .pureComputed(this.koItemsText)
+      .extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });
+    this.koItemsTextDelayed.subscribe(function(newValue) {
+      self.updateItemsTextOnTyping(newValue);
+    });
+
     this.koActiveView.subscribe(function(newValue) {
       if (newValue == "form") self.updateItems(self.koItemsText());
-      else self.koItemsText(self.getItemsText());
+      else self.updateItemsText();
     });
     this.changeToTextViewClick = function() {
       self.koActiveView("text");
@@ -154,16 +163,23 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     super.onValueChanged();
     if (this.isBeforeShowCalled) {
       if (this.koActiveView() !== "form") {
-        this.koItemsText(this.getItemsText());
+        this.updateItemsText();
       }
     }
     this.updateShowTextViewVisibility();
   }
-  protected onBeforeApply() {
-    if (this.koActiveView() !== "form") {
-      this.updateItems(this.koItemsText());
-    }
-    super.onBeforeApply();
+  private isUpdatingOnTyping: boolean = false;
+  private updateItemsTextOnTyping(newValue: any) {
+    if (this.isUpdatingItemText) return;
+    this.isUpdatingOnTyping = true;
+    this.updateItems(newValue);
+    this.isUpdatingOnTyping = false;
+  }
+  private updateItemsText() {
+    if (this.isUpdatingOnTyping) return;
+    this.isUpdatingItemText = true;
+    this.koItemsText(this.getItemsText());
+    this.isUpdatingItemText = false;
   }
   protected onListDetailViewChanged() {
     super.onListDetailViewChanged();

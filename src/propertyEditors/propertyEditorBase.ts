@@ -323,9 +323,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
   }
-  protected onBeforeApply() {}
   public apply(): boolean {
-    this.onBeforeApply();
     if (this.hasError()) return false;
     this.isApplyinNewValue = true;
     this.performApply();
