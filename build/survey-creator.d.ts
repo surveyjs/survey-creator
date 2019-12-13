@@ -30,6 +30,7 @@ import "../localization/traditional-chinese";
 import "../localization/norwegian";
 import "../localization/hungarian";
 import "../localization/russian";
+import "../localization/tajik";
 
 export declare var enStrings: {
     survey: {
@@ -3971,4 +3972,5 @@ import "../localization/traditional-chinese";
 import "../localization/norwegian";
 import "../localization/hungarian";
 import "../localization/russian";
+import "../localization/tajik";
 
