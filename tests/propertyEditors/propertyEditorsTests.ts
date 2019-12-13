@@ -1018,22 +1018,29 @@ QUnit.test(
 );
 
 QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
-  var editor = new SurveyPropertyResultfullEditor(null);
-  editor.editingValue = new Survey.ChoicesRestfull();
-  assert.equal(editor.koItems().length, 4, "There are 4 items, 4 properties");
-  editor.koItems()[1].koValue("path1");
-  editor.koItems()[2].koValue("name2");
-  editor.koItems()[3].koValue("title3");
-  assert.equal(editor.question.choicesByUrl.path, "path1", "test path is set");
-  assert.equal(
-    editor.question.choicesByUrl.valueName,
-    "name2",
-    "test name is set"
+  var question = new Survey.QuestionCheckbox("q1");
+  question.choicesByUrl.url = "url1";
+  var editor = new SurveyPropertyResultfullEditor(
+    Survey.Serializer.findProperty("selectbase", "choicesByUrl")
   );
+  editor.object = question;
+  editor.beforeShow();
+  var testQuestion = <Survey.QuestionDropdown>(
+    editor.survey.getAllQuestions()[0]
+  );
+  assert.ok(testQuestion, "test question created correctly");
   assert.equal(
-    editor.question.choicesByUrl.titleName,
-    "title3",
-    "test title is set"
+    testQuestion.choicesByUrl.url,
+    "url1",
+    "url1 is set to test question"
+  );
+  assert.ok(editor.contentEditor, "Content Editor is created");
+  editor.contentEditor.getPropertyEditorByName("path").editor.koValue("path1");
+  assert.equal(question.choicesByUrl.path, "path1", "path set correctly");
+  assert.equal(
+    testQuestion.choicesByUrl.path,
+    "path1",
+    "path is set to test question"
   );
 });
 QUnit.test("Triggers property editor", function(assert) {
