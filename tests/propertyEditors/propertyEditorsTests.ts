@@ -35,6 +35,7 @@ import {
 import { defaultStrings } from "../../src/editorLocalization";
 import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "../../src/propertyEditors/propertyDefaultValueEditor";
+import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -1583,5 +1584,54 @@ QUnit.test(
     assert.equal(question.name, "q2", "The value is changed");
     edName.editor.koValue("_");
     assert.equal(question.name, "q2", "The value is not changed again");
+  }
+);
+
+QUnit.test(
+  "Update matrix.cells immediately with updated property editor",
+  function(assert) {
+    var question = new Survey.QuestionMatrix("q1");
+    question.columns = ["col1", "col2"];
+    question.rows = ["row1", "row2"];
+    question.setDefaultCellText("col1", "defCol1");
+    question.setCellText(0, "col2", "row1_col2");
+    var property = Survey.Serializer.findProperty("matrix", "cells");
+    var propEditor = new SurveyPropertyCellsEditor(property);
+    propEditor.object = question;
+    propEditor.beforeShow();
+    assert.equal(
+      propEditor
+        .koRows()[0]
+        .koCells()[0]
+        .text(),
+      "defCol1",
+      "define value set correctly"
+    );
+    assert.equal(
+      propEditor
+        .koRows()[1]
+        .koCells()[1]
+        .text(),
+      "row1_col2",
+      "row1_col2 value set correctly"
+    );
+    propEditor
+      .koRows()[0]
+      .koCells()[0]
+      .text("defCol1_Updated");
+    propEditor
+      .koRows()[1]
+      .koCells()[1]
+      .text("row1_col2_Updated");
+    assert.equal(
+      question.getDefaultCellText("col1"),
+      "defCol1_Updated",
+      "Set default cell into matrix succesfull"
+    );
+    assert.equal(
+      question.getCellText(0, "col2"),
+      "row1_col2_Updated",
+      "Set cell into matrix succesfull"
+    );
   }
 );

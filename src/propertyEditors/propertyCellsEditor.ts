@@ -23,31 +23,6 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     super.beforeShow();
     this.setupCells();
   }
-  protected onBeforeApply() {
-    if (!this.canEdit) return;
-    var matrix = new Survey.QuestionMatrix("");
-    matrix.setSurveyImpl(this.object.survey);
-    matrix.rows = this.rows;
-    matrix.columns = this.columns;
-    matrix.cells = this.object.cells;
-    var rows = this.koRows();
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      var cells = row.koCells();
-      for (var j = 0; j < matrix.columns.length; j++) {
-        if (row.rowIndex < 0) {
-          (<any>matrix).setDefaultCellText(j, cells[j].text());
-        } else {
-          matrix.setCellText(rows[i].rowIndex, j, cells[j].text());
-        }
-      }
-    }
-    if (!matrix.cells.isEmpty) {
-      this.koValue(matrix.cells);
-    } else {
-      this.koValue(null);
-    }
-  }
   public get editorType(): string {
     return "cells";
   }
@@ -96,10 +71,20 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     };
     var cells = [];
     for (var i = 0; i < this.columns.length; i++) {
-      cells.push({ text: ko.observable(this.getCellText(rowIndex, i)) });
+      cells.push({ text: this.createCellText(rowIndex, i) });
     }
     row.koCells(cells);
     return row;
+  }
+  private createCellText(rowIndex: number, colIndex: number): any {
+    var self = this;
+    var text = ko.observable(this.getCellText(rowIndex, colIndex));
+    var colValue = this.columns[colIndex].value;
+    text.subscribe(function(val) {
+      if (rowIndex < 0) self.origionalValue.setDefaultCellText(colValue, val);
+      else self.origionalValue.setCellText(rowIndex, colValue, val);
+    });
+    return text;
   }
 }
 SurveyPropertyEditorFactory.registerEditor("cells", function(
