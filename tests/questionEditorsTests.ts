@@ -37,17 +37,17 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
     "create correct property editor"
   );
   assert.equal(
-    tab.properties.rows[0].properties[0].editor.editingValue.length,
+    tab.properties.rows[0].properties[0].editor.koValue().length,
     1,
     "set value to property editor correctly (length)"
   );
   assert.equal(
-    tab.properties.rows[0].properties[0].editor.editingValue[0].value,
+    tab.properties.rows[0].properties[0].editor.koValue()[0].value,
     "item1",
     "set value to property editor correctly (value)"
   );
   assert.equal(
-    tab.properties.rows[0].properties[0].editor.editingValue[0].text,
+    tab.properties.rows[0].properties[0].editor.koValue()[0].text,
     "item1",
     "set value to property editor correctly (text)"
   );
@@ -59,7 +59,7 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
     "general"
   );
   assert.equal(
-    tab.properties.rows[0].properties[0].editor.editingValue,
+    tab.properties.rows[0].properties[0].editor.koValue(),
     dropdownQuestion.visibleIf,
     "set value of 'visibleIf' to property editor correctly"
   );

@@ -137,7 +137,7 @@ QUnit.test("Create custom property editor", function(assert) {
   var propertyValue = null;
   var widgetJSON = {
     render: function(editor, el) {
-      propertyValue = propertyEditor.editingValue;
+      propertyValue = propertyEditor.koValue();
       editor.onValueChangedCallback = function(newValue) {
         propertyValue = newValue;
       };
@@ -154,7 +154,7 @@ QUnit.test("Create custom property editor", function(assert) {
     "widgetJSON set correctly"
   );
   widgetJSON.render(propertyEditor, null);
-  propertyEditor.editingValue = 3;
+  propertyEditor.koValue(3);
   assert.equal(propertyValue, 3, "value has been set to 3 as well");
   Extentions.unregisterCustomPropertyEditor("customBool");
 });
@@ -601,7 +601,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
     Survey.Serializer.findProperty("radiogroup", "choices")
   );
   propertyEditor.object = qRadio;
-  propertyEditor.editingValue = qRadio.choices;
+  propertyEditor.koValue(qRadio.choices);
   propertyEditor.beforeShow();
   assert.equal(
     propertyEditor.columns.length,
@@ -617,7 +617,7 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
     Survey.Serializer.findProperty("checkbox", "choices")
   );
   propertyEditor.object = qCheck;
-  propertyEditor.editingValue = qCheck.choices;
+  propertyEditor.koValue(qCheck.choices);
   propertyEditor.beforeShow();
   assert.equal(
     propertyEditor.columns.length,

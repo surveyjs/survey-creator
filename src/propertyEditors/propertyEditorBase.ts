@@ -78,8 +78,6 @@ export interface ISurveyObjectEditorOptions {
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
-  private editingValue_: any = null;
-  private isApplyinNewValue: boolean = false;
   private objectValue: any;
   private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
@@ -253,14 +251,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public getValueText(value: any): string {
     return value;
   }
-  public get editingValue(): any {
-    return this.editingValue_;
-  }
-  public set editingValue(value: any) {
-    value = this.getCorrectedValue(value);
-    this.setValueCore(value);
-    this.onValueChanged();
-  }
   public hasError(): boolean {
     this.koHasError(this.checkForErrors());
     return this.koHasError();
@@ -291,7 +281,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
         this.object,
-        this.editingValue
+        this.koValue()
       );
     }
     this.koErrorText(errorText);
@@ -325,14 +315,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public apply(): boolean {
     if (this.hasError()) return false;
-    this.isApplyinNewValue = true;
     this.performApply();
-    this.isApplyinNewValue = false;
     return true;
   }
-  protected performApply() {
-    this.koValue(this.editingValue);
-  }
+  protected performApply() {}
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
     return "";
@@ -354,9 +340,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.onOptionsChanged();
   }
   protected onOptionsChanged() {}
-  protected setValueCore(value: any) {
-    this.editingValue_ = value;
-  }
   public setObject(value: any) {
     if (this.options) {
       var editorOptions = this.createEditorOptions();
@@ -394,8 +377,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected updateValue() {
     this.beginValueUpdating();
     this.koValue(this.getValue());
-    this.editingValue = this.koValue.peek();
-    if (this.onValueUpdated) this.onValueUpdated(this.editingValue);
+    this.onValueChanged();
+    if (this.onValueUpdated) this.onValueUpdated(this.koValue());
     this.endValueUpdating();
   }
   protected getValue(): any {
@@ -427,9 +410,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       }
     }
     this.updateEditingProperties(newValue);
-    if (!this.isApplyinNewValue) {
-      this.editingValue = newValue;
-    }
+    this.onValueChanged();
     this.iskoValueChanging = false;
     if (this.hasError()) return;
 

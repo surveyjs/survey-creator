@@ -115,7 +115,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     return this.object;
   }
   protected getSurveyInitialValue(): any {
-    return this.editingValue;
+    return this.koValue();
   }
   protected getSurveyResult(): any {
     return this.survey.getValue(
@@ -167,7 +167,7 @@ export class SurveyPropertyDefaultRowValueEditorBase extends SurveyPropertyDefau
     return "triggervalue";
   }
   protected getSurveyInitialValue(): any {
-    var res = this.editingValue;
+    var res = this.koValue();
     if (!res) return res;
     if (!Array.isArray(res)) {
       res = [res];
@@ -228,7 +228,7 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
     return "value";
   }
   protected getSurveyInitialValue(): any {
-    var res = this.editingValue;
+    var res = this.koValue();
     if (!res) return res;
     if (!Array.isArray(res)) {
       res = [res];

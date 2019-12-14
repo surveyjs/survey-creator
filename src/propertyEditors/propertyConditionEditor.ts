@@ -187,7 +187,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return runner.canRun();
   }
   protected onValueChanged() {
-    this.koTextValue(this.editingValue);
+    this.koTextValue(this.koValue());
   }
   private getConditionQuetions(): any[] {
     if (!this.object) return [];

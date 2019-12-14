@@ -117,11 +117,7 @@ QUnit.test("Add new item", function(assert) {
   assert.equal(logic.mode, "new", "change to the select type mode");
   assert.ok(logic.editableItem, "Editable item is created");
   assert.ok(logic.expressionEditor, "expression editor is created");
-  assert.equal(
-    logic.expressionEditor.editingValue,
-    "",
-    "the expression is empty"
-  );
+  assert.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
   assert.equal(
     logic.expressionEditor.koConditionQuestions().length,
     3,
@@ -159,7 +155,7 @@ QUnit.test("Add new item", function(assert) {
   );
   logic.addNewOperation(logic.getTypeByName("question_visibility"));
   logic.editableItem.operations[0].itemSelector.koValue("q3");
-  logic.expressionEditor.editingValue = "{q1} = 2";
+  logic.expressionEditor.koValue("{q1} = 2");
   assert.equal(
     logic.editableItem.operations[0].element["name"],
     "q3",
@@ -198,7 +194,7 @@ QUnit.test("Edit existing item", function(assert) {
   logic.editItem(logic.items[0]);
   assert.ok(logic.editableItem, "Editable item is set");
   assert.equal(
-    logic.expressionEditor.editingValue,
+    logic.expressionEditor.koValue(),
     "{q3}=1",
     "Expression is set for editing"
   );
@@ -618,11 +614,7 @@ QUnit.test("Add new item with two triggers", function(assert) {
   assert.equal(logic.mode, "new", "There is no items");
   assert.ok(logic.editableItem, "Editable item is created");
   assert.ok(logic.expressionEditor, "expression editor is created");
-  assert.equal(
-    logic.expressionEditor.editingValue,
-    "",
-    "the expression is empty"
-  );
+  assert.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
   var lt = logic.getTypeByName("trigger_complete");
   var op = logic.addNewOperation(lt);
   assert.equal(lt.visible, false, "Trigger logic type is not visible");
@@ -639,7 +631,7 @@ QUnit.test("Add new item with two triggers", function(assert) {
   );
   assert.equal(lt.visible, true, "Trigger logic type is visible again");
   op = logic.addNewOperation(lt);
-  logic.expressionEditor.editingValue = "{q1} = 2";
+  logic.expressionEditor.koValue("{q1} = 2");
   assert.equal(survey.triggers.length, 0, "There is no triggers yet");
   logic.saveEditableItem();
   assert.equal(survey.triggers.length, 1, "There is one trigger now");
@@ -678,7 +670,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   logic.editItem(logic.items[0]);
   assert.ok(logic.editableItem, "Editable item is created");
   assert.equal(
-    logic.expressionEditor.editingValue,
+    logic.expressionEditor.koValue(),
     "{q1} = 1",
     "the expression set correctly"
   );
@@ -689,7 +681,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   );
   var op = logic.editableItem.operations[0];
   assert.ok(op.templateObject, "Template object is created");
-  logic.expressionEditor.editingValue = "{q1} = 10";
+  logic.expressionEditor.koValue("{q1} = 10");
   var triggerEditor = <SurveyElementEditorContent>op.templateObject;
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
   logic.saveEditableItem();
@@ -722,7 +714,7 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
   logic.addNew();
   logic.addNewOperation(logic.getTypeByName("completedHtmlOnCondition"));
   var op = logic.editableItem.operations[0];
-  logic.expressionEditor.editingValue = "{q1} = 10";
+  logic.expressionEditor.koValue("{q1} = 10");
   op.templateObject.koValue("Some text");
   logic.saveEditableItem();
   assert.equal(survey.completedHtmlOnCondition.length, 1, "There is one item");
@@ -742,8 +734,7 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     1,
     "There is one operation here"
   );
-  logic.expressionEditor.editingValue =
-    logic.expressionEditor.editingValue + "0";
+  logic.expressionEditor.koValue(logic.expressionEditor.koValue() + "0");
   op.templateObject.koValue(op.templateObject.koValue() + " 2");
   logic.saveEditableItem();
   assert.equal(

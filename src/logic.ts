@@ -780,7 +780,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public saveEditableItem(): boolean {
     if (!this.editableItem || this.hasError()) return false;
     this.expressionEditor.apply();
-    this.editableItem.apply(this.expressionEditor.editingValue);
+    this.editableItem.apply(this.expressionEditor.koValue());
     var isNew = this.koItems.indexOf(this.editableItem) < 0;
     if (isNew) {
       this.koItems.push(this.editableItem);
@@ -862,12 +862,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   public addNew() {
     this.koEditableItem(new SurveyLogicItem(this));
-    this.expressionEditor.editingValue = "";
+    this.expressionEditor.koValue("");
     this.mode = "new";
   }
   public editItem(item: SurveyLogicItem) {
     this.koEditableItem(item);
-    this.expressionEditor.editingValue = item.expression;
+    this.expressionEditor.koValue(item.expression);
     this.mode = "edit";
   }
   public removeItem(item: SurveyLogicItem) {
