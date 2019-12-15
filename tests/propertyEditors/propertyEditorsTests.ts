@@ -962,7 +962,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   var itemViewModel = columnsEditor.createItemViewModel(question.columns[1]);
   itemViewModel.obj.cellType = "dropdown";
   columnsEditor.koEditItem(itemViewModel);
-  var colDetailEditor = <SurveyQuestionEditor>(
+  var colDetailEditor = <SurveyElementEditorContent>(
     columnsEditor.koEditItem().itemEditor
   );
   assert.notEqual(
@@ -989,6 +989,44 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     }
   }
 });
+
+QUnit.test(
+  "SurveyPropertyMatrixDropdownColumns change cell koValue on changing value in detail form ",
+  function(assert) {
+    var survey = new Survey.Survey();
+    survey.addNewPage("p");
+    var question = new Survey.QuestionMatrixDropdown("q1");
+    question.addColumn("column 1");
+    question.addColumn("column 2");
+    survey.pages[0].addElement(question);
+    var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+      Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+    );
+    columnsEditor.object = question;
+    columnsEditor.beforeShow();
+    var itemViewModel = <SurveyNestedPropertyEditorItem>(
+      columnsEditor.createItemViewModel(question.columns[0])
+    );
+    itemViewModel.obj.cellType = "dropdown";
+    columnsEditor.onEditItemClick(itemViewModel);
+    var colDetailEditor = <SurveyElementEditorContent>(
+      columnsEditor.koEditItem().itemEditor
+    );
+    var titleEditor = colDetailEditor.getPropertyEditorByName("title").editor;
+    titleEditor.koValue("Title 1");
+    assert.equal(
+      question.columns[0].title,
+      "Title 1",
+      "The object value is changed"
+    );
+    columnsEditor.onReturnToListClick();
+    assert.equal(
+      itemViewModel.cells[itemViewModel.columns.length - 1].koValue(),
+      "Title 1",
+      "Value in cell is updated"
+    );
+  }
+);
 
 QUnit.test(
   "Check showDisplayNameOnTop for different property editors",

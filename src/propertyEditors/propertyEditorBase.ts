@@ -374,7 +374,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.valueUpdatingCounter--;
     }
   }
-  protected updateValue() {
+  public updateValue() {
     this.beginValueUpdating();
     this.koValue(this.getValue());
     this.onValueChanged();

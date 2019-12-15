@@ -44,7 +44,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     this.updateChoices();
     this.setEditingValue();
   }
-  protected updateValue() {
+  public updateValue() {
     super.updateValue();
     this.setEditingValue();
   }

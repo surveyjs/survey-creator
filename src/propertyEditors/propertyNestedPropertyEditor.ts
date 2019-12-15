@@ -166,6 +166,7 @@ export class SurveyNestedPropertyEditorItem {
   }
   public hideItemEditor() {
     this.itemEditorValue = null;
+    this.updateValues();
   }
   public get itemEditor(): SurveyElementEditorContent {
     if (!this.itemEditorValue)
@@ -182,6 +183,11 @@ export class SurveyNestedPropertyEditorItem {
       res = this.cells[i].hasError || res;
     }
     return res;
+  }
+  protected updateValues() {
+    for (var i = 0; i < this.cells.length; i++) {
+      this.cells[i].updateValue();
+    }
   }
   protected createSurveyQuestionEditor() {
     return new SurveyElementEditorContent(
@@ -245,6 +251,9 @@ export class SurveyNestedPropertyEditorEditorCell {
   }
   public get hasError(): boolean {
     return this.editor.hasError();
+  }
+  public updateValue() {
+    this.editor.updateValue();
   }
 }
 
