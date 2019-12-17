@@ -151,6 +151,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
       let text = editorLocalization.getString("qt." + value);
       if (text) return text;
     }
+    if (value === null) return null;
     return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
@@ -181,10 +182,6 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
       var value = res[i].value;
-      if (value === null) {
-        res[i].text = res[i].text || "";
-        continue;
-      } 
       var text = this.getValueText(value);
       if (text != value) {
         res[i].text = text;
