@@ -44,7 +44,7 @@ steps:
     npm run build_prod
     npm run test_ci
     npm run testcafe_ci
-    displayName: 'run build and run tests'
+  displayName: 'run build and run tests'
 
 - task: CopyFiles@2
   inputs:
