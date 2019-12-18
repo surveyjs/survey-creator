@@ -181,6 +181,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
       let text = editorLocalization.getString("qt." + value);
       if (text) return text;
     }
+    if (value === null) return null;
     return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
