@@ -6,32 +6,35 @@
 trigger:
   tags:
     include:
-    - v*.*.*
+      - v*.*.*
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: "Ubuntu-16.04"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "10.x"
+    displayName: "install Node.js"
 
-- script: |
-    npm install
-    npm run build_prod
-    npm run test_ci
-    npm run testcafe_ci
-  displayName: 'npm install and build'
+  - script: |
+      npm install
+      npm run build_prod
+      npm run testsingle
+      npm run testcafe_ci
+    displayName: "npm install and build"
 
-- script: |
-    npm run doc_gen
-  displayName: 'generate docs'
+  - script: |
+      npm run doc_gen
+    displayName: "generate docs"
 
-- script: |
-    chmod +x ./deploy_npm.sh && ./deploy_npm.sh
-  displayName: 'npm publish'
+  - task: Npm@1
+    inputs:
+      command: "publish"
+      workingDir: "package"
+      publishEndpoint: "NPM Registry"
+      verbose: true
 
-- script: |
-    npm run doc_update
-  displayName: 'update docs'
+  - script: |
+      npm run doc_update
+    displayName: "update docs"
