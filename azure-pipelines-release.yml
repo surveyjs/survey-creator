@@ -31,7 +31,7 @@ steps:
   - task: Npm@1
     inputs:
       command: "publish"
-      workingDir: "package"
+      workingDir: "build"
       publishEndpoint: "NPM Registry"
       verbose: true
 
