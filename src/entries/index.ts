@@ -54,7 +54,6 @@ export { SurveyObjects } from "../surveyObjects";
 
 export {
   SurveyQuestionEditorProperties,
-  SurveyQuestionEditorRow,
   SurveyQuestionEditorProperty
 } from "../questionEditors/questionEditorProperties";
 export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";

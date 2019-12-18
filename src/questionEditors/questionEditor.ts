@@ -14,6 +14,7 @@ import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
 import { focusFirstControl } from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
+import { SurveyObjectProperty } from "../objectProperty";
 
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
@@ -262,15 +263,21 @@ export class SurveyQuestionProperties {
 }
 
 export class SurveyElementEditorContent {
-  private origionalObjValue: any;
-  protected properties: SurveyQuestionProperties;
-  koTabs: any;
-  koActiveTab = ko.observable<string>();
   public onPropertyChanging: (
     prop: Survey.JsonObjectProperty,
     newValue: any
   ) => boolean;
   public onPropertyChanged: (prop: Survey.JsonObjectProperty) => void;
+  public onAfterRenderCallback: (
+    object: any,
+    htmlElement: HTMLElement,
+    property: SurveyObjectProperty
+  ) => any;
+  koAfterRender: any;
+  koTabs: any;
+  koActiveTab = ko.observable<string>();
+  protected properties: SurveyQuestionProperties;
+  private origionalObjValue: any;
   constructor(
     obj: any,
     public className: string = null,
@@ -293,6 +300,10 @@ export class SurveyElementEditorContent {
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
+    var self = this;
+    this.koAfterRender = function(el, con) {
+      self.afterRender(el, con);
+    };
   }
   protected setOrigionalObjValue(obj: any) {
     this.origionalObjValue = obj;
@@ -407,6 +418,15 @@ export class SurveyElementEditorContent {
       this.koTabs().length > 1
     );
   }
+  protected afterRender(elements, prop) {
+    if (!this.onAfterRenderCallback) return;
+    var el = Survey.SurveyElement.GetFirstNonTextElement(elements);
+    var tEl = elements[0];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    tEl = elements[elements.length - 1];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    this.onAfterRenderCallback(this.origionalObj, el, prop);
+  }
 }
 
 export class SurveyQuestionEditor extends SurveyElementEditorContent {
@@ -423,10 +443,9 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
   constructor(
     obj: any,
     public className: string = null,
-    public options: ISurveyObjectEditorOptions = null,
-    protected useAsPropertyGrid: boolean = false
+    public options: ISurveyObjectEditorOptions = null
   ) {
-    super(obj, className, options, useAsPropertyGrid);
+    super(obj, className, options, false);
     var self = this;
     self.onApplyClick = function() {
       self.apply();

@@ -976,17 +976,15 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     "itemEditor edit the second item"
   );
   var generalTab = <SurveyQuestionEditorTab>colDetailEditor.koTabs()[0];
-  var rows = generalTab.properties.rows;
-  for (var i = 0; i < rows.length; i++) {
-    for (var j = 0; j < rows[i].properties.length; j++) {
-      var prop = rows[i].properties[j];
-      if (prop.editor.editorType == "boolean") continue;
-      assert.equal(
-        prop.editor.showDisplayNameOnTop,
-        true,
-        "It should be shown on top"
-      );
-    }
+  var props = generalTab.properties.editorProperties;
+  for (var i = 0; i < props.length; i++) {
+    var prop = props[i];
+    if (prop.editor.editorType == "boolean") continue;
+    assert.equal(
+      prop.editor.showDisplayNameOnTop,
+      true,
+      "It should be shown on top"
+    );
   }
 });
 

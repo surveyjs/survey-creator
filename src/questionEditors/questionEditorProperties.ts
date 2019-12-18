@@ -91,42 +91,9 @@ export class SurveyQuestionEditorProperty {
   }
 }
 
-export class SurveyQuestionEditorRow {
-  public category: string;
-  public properties: Array<SurveyQuestionEditorProperty> = [];
-  constructor(
-    public obj: Survey.Base,
-    private getEditorPropertyByName: (
-      name: string
-    ) => SurveyQuestionEditorProperty = null
-  ) {}
-  public addProperty(
-    property: any,
-    displayName: string,
-    options: ISurveyObjectEditorOptions
-  ) {
-    this.properties.push(
-      new SurveyQuestionEditorProperty(
-        this.obj,
-        property,
-        displayName,
-        options,
-        this.getEditorPropertyByName
-      )
-    );
-  }
-  public hasError(): boolean {
-    var isError = false;
-    for (var i = 0; i < this.properties.length; i++) {
-      isError = this.properties[i].hasError() || isError;
-    }
-    return isError;
-  }
-}
-
 export class SurveyQuestionEditorProperties {
   private properties: Array<Survey.JsonObjectProperty>;
-  public rows: Array<SurveyQuestionEditorRow> = [];
+  public editorProperties: Array<SurveyQuestionEditorProperty> = [];
   constructor(
     public obj: Survey.Base,
     properties: Array<any>,
@@ -137,7 +104,7 @@ export class SurveyQuestionEditorProperties {
     ) => SurveyQuestionEditorProperty = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
-    this.buildRows(properties);
+    this.buildEditorProperties(properties);
   }
   public apply() {
     var res = true;
@@ -155,8 +122,8 @@ export class SurveyQuestionEditorProperties {
   }
   public hasError(): boolean {
     var isError = false;
-    for (var i = 0; i < this.rows.length; i++) {
-      isError = this.rows[i].hasError() || isError;
+    for (var i = 0; i < this.editorProperties.length; i++) {
+      isError = this.editorProperties[i].hasError() || isError;
     }
     return isError;
   }
@@ -177,42 +144,31 @@ export class SurveyQuestionEditorProperties {
     }
   }
   public getAllProperties(): Array<SurveyQuestionEditorProperty> {
-    var res = [];
-    for (var i = 0; i < this.rows.length; i++) {
-      for (var j = 0; j < this.rows[i].properties.length; j++) {
-        res.push(this.rows[i].properties[j]);
-      }
-    }
-    return res;
+    return this.editorProperties;
   }
-  protected buildRows(properties) {
+  protected buildEditorProperties(properties) {
     for (var i = 0; i < properties.length; i++) {
       var name = this.getName(properties[i]);
       var jsonProperty = this.getProperty(name);
       if (!jsonProperty) continue;
-      var row = this.getRowByCategory(properties[i].category);
-      if (!row) {
-        row = new SurveyQuestionEditorRow(
-          this.obj,
-          this.getEditorPropertyByName
-        );
-        if (properties[i].category) row.category = properties[i].category;
-        this.rows.push(row);
-      }
-      row.addProperty(jsonProperty, properties[i].title, this.options);
+      this.addProperty(jsonProperty, properties[i].title);
     }
+  }
+  public addProperty(property: any, displayName: string) {
+    this.editorProperties.push(
+      new SurveyQuestionEditorProperty(
+        this.obj,
+        property,
+        displayName,
+        this.options,
+        this.getEditorPropertyByName
+      )
+    );
   }
   private getName(prop: any): string {
     if (!prop) return null;
     if (typeof prop === "string") return prop;
     if (prop.name) return prop.name;
-    return null;
-  }
-  private getRowByCategory(category: string) {
-    if (!category) return null;
-    for (var i = 0; i < this.rows.length; i++) {
-      if (this.rows[i].category == category) return this.rows[i];
-    }
     return null;
   }
   private getProperty(propertyName: string): Survey.JsonObjectProperty {

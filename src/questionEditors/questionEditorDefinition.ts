@@ -2,9 +2,7 @@ import * as Survey from "survey-knockout";
 
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<
-    string | { name: string; title?: string; category?: string; tab?: string }
-  >;
+  properties?: Array<string | { name: string; title?: string; tab?: string }>;
   tabs?: Array<{
     name: string;
     index?: number;
@@ -22,9 +20,9 @@ export class SurveyQuestionEditorDefinition {
         "name",
         "title",
         "description",
-        { name: "visible", category: "checks" },
-        { name: "isRequired", category: "checks" },
-        { name: "readOnly", category: "checks" },
+        { name: "visible" },
+        { name: "isRequired" },
+        { name: "readOnly" },
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
@@ -61,8 +59,8 @@ export class SurveyQuestionEditorDefinition {
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",
-        { name: "showPreview", category: "imageChecks" },
-        { name: "storeDataAsText", category: "imageChecks" },
+        { name: "showPreview" },
+        { name: "storeDataAsText" },
         "maxSize",
         "imageHeight",
         "imageWidth",
@@ -360,8 +358,8 @@ export class SurveyQuestionEditorDefinition {
         "minPanelCount",
         "maxPanelCount",
         "panelsState",
-        { name: "allowAddPanel", category: "render" },
-        { name: "allowRemovePanel", category: "render" },
+        { name: "allowAddPanel" },
+        { name: "allowRemovePanel" },
         "panelAddText",
         "panelRemoveText",
         "templateTitle",
@@ -424,8 +422,8 @@ export class SurveyQuestionEditorDefinition {
         "locale",
         "mode",
         "cookieName",
-        { name: "showPageTitles", category: "page" },
-        { name: "showPageNumbers", category: "page" },
+        { name: "showPageTitles" },
+        { name: "showPageNumbers" },
 
         { name: "pagePrevText", tab: "navigation" },
         { name: "pageNextText", tab: "navigation" },
@@ -433,13 +431,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",
-          tab: "navigation",
-          category: "navbuttons"
+          tab: "navigation"
         },
-        { name: "showPrevButton", tab: "navigation", category: "navbuttons" },
-        { name: "firstPageIsStarted", tab: "navigation", category: "navpages" },
-        { name: "goNextPageAutomatic", tab: "navigation", category: "navopt" },
-        { name: "showProgressBar", tab: "navigation", category: "navopt" },
+        { name: "showPrevButton", tab: "navigation" },
+        { name: "firstPageIsStarted", tab: "navigation" },
+        { name: "goNextPageAutomatic", tab: "navigation" },
+        { name: "showProgressBar", tab: "navigation" },
         { name: "progressBarType", tab: "navigation" },
         { name: "isSinglePage", tab: "navigation" },
 
@@ -477,8 +474,8 @@ export class SurveyQuestionEditorDefinition {
 
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },
-        { name: "showTimerPanel", tab: "timer", category: "check" },
-        { name: "showTimerPanelMode", tab: "timer", category: "check" }
+        { name: "showTimerPanel", tab: "timer" },
+        { name: "showTimerPanelMode", tab: "timer" }
       ],
       tabs: [
         { name: "navigation", index: 100 },
