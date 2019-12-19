@@ -874,6 +874,20 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       };
       self.onPropertyAfterRender.fire(self, options);
     };
+    this.elementPropertyGridValue.onAfterRenderCallback = function(
+      obj,
+      htmlElement,
+      prop
+    ) {
+      if (self.onPropertyAfterRender.isEmpty) return;
+      var options = {
+        obj: obj,
+        htmlElement: htmlElement,
+        property: prop.property,
+        propertyEditor: prop.editor
+      };
+      self.onPropertyAfterRender.fire(self, options);
+    };
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyLive = new SurveyLiveTester(this);
     this.surveyEmbeding = new SurveyEmbedingWindow();

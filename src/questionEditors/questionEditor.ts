@@ -273,7 +273,6 @@ export class SurveyElementEditorContent {
     htmlElement: HTMLElement,
     property: SurveyObjectProperty
   ) => any;
-  koAfterRender: any;
   koTabs: any;
   koActiveTab = ko.observable<string>();
   protected properties: SurveyQuestionProperties;
@@ -300,10 +299,6 @@ export class SurveyElementEditorContent {
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
-    var self = this;
-    this.koAfterRender = function(el, con) {
-      self.afterRender(el, con);
-    };
   }
   protected setOrigionalObjValue(obj: any) {
     this.origionalObjValue = obj;
@@ -395,6 +390,10 @@ export class SurveyElementEditorContent {
           var firstEditor = propertyTab.getPropertyEditorByName(tabItem.name);
           if (!!firstEditor) firstEditor.editor.displayName = "";
         }
+        propertyTab.onAfterRenderCallback = (htmlElement, property) => {
+          if (!this.onAfterRenderCallback) return;
+          this.onAfterRenderCallback(this.origionalObj, htmlElement, property);
+        };
         tabs.push(propertyTab);
       }
     }
@@ -417,15 +416,6 @@ export class SurveyElementEditorContent {
       this.options.useTabsInElementEditor &&
       this.koTabs().length > 1
     );
-  }
-  protected afterRender(elements, prop) {
-    if (!this.onAfterRenderCallback) return;
-    var el = Survey.SurveyElement.GetFirstNonTextElement(elements);
-    var tEl = elements[0];
-    if (tEl.nodeName === "#text") tEl.data = "";
-    tEl = elements[elements.length - 1];
-    if (tEl.nodeName === "#text") tEl.data = "";
-    this.onAfterRenderCallback(this.origionalObj, el, prop);
   }
 }
 
@@ -543,6 +533,11 @@ export class SurveyElementPropertyGrid {
   private selectedObjectValue: any = null;
   public koElementEditor = ko.observable(null);
   public koHasObject = ko.observable(false);
+  public onAfterRenderCallback: (
+    object: any,
+    htmlElement: HTMLElement,
+    property: SurveyObjectProperty
+  ) => any;
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
@@ -555,14 +550,14 @@ export class SurveyElementPropertyGrid {
     this.selectedObjectValue = value;
     this.koHasObject(false);
     if (!!value) {
-      this.koElementEditor(
-        new SurveyElementEditorContent(
-          value,
-          "",
-          this.propertyEditorOptions,
-          true
-        )
+      var elementEditor = new SurveyElementEditorContent(
+        value,
+        "",
+        this.propertyEditorOptions,
+        true
       );
+      elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
+      this.koElementEditor(elementEditor);
     } else {
       this.koElementEditor(null);
     }
@@ -573,11 +568,21 @@ export class SurveyElementPropertyGrid {
 export class SurveyQuestionEditorTab {
   private titleValue: string;
   public onExpand: () => void;
+  public onAfterRenderCallback: (
+    htmlElement: HTMLElement,
+    property: SurveyObjectProperty
+  ) => any;
+  koAfterRenderProperty: any;
   constructor(
     public obj: any,
     public properties: SurveyQuestionEditorProperties = null,
     private _name
-  ) {}
+  ) {
+    var self = this;
+    this.koAfterRenderProperty = function(el, con) {
+      self.afterRenderProperty(el, con);
+    };
+  }
   public expand() {
     if (!!this.onExpand) this.onExpand();
   }
@@ -624,5 +629,14 @@ export class SurveyQuestionEditorTab {
   public doCloseWindow() {}
   protected getValue(property: Survey.JsonObjectProperty): any {
     return property.getPropertyValue(this.obj);
+  }
+  protected afterRenderProperty(elements, prop) {
+    if (!this.onAfterRenderCallback) return;
+    var el = Survey.SurveyElement.GetFirstNonTextElement(elements);
+    var tEl = elements[0];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    tEl = elements[elements.length - 1];
+    if (tEl.nodeName === "#text") tEl.data = "";
+    this.onAfterRenderCallback(el, prop);
   }
 }
