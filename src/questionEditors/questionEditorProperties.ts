@@ -2,10 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-knockout";
 import { SurveyObjectProperty } from "../objectProperty";
-import {
-  SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
-} from "../propertyEditors/propertyEditorBase";
+import { ISurveyObjectEditorOptions } from "../propertyEditors/propertyEditorBase";
 import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyQuestionEditorProperties {

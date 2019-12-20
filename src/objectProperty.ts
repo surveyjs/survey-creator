@@ -38,7 +38,7 @@ export class SurveyObjectProperty {
   ) {
     this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
-    this.disabled = property["readOnly"];
+    this.disabled = property.readOnly;
     var self = this;
     var onItemChanged = function(newValue) {
       self.onEditorValueChanged(newValue);
@@ -53,10 +53,6 @@ export class SurveyObjectProperty {
     this.editorType = this.editor.editorType;
     this.editorTypeTemplate = this.editor.editorTypeTemplate;
     this.koVisible = ko.observable(this.isVisible());
-  }
-  //TODO remove after refactoring
-  public get objectProperty1(): SurveyObjectProperty {
-    return this;
   }
   public get displayName(): string {
     return this.editor.displayName;
