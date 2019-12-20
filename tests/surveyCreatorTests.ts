@@ -364,6 +364,7 @@ QUnit.test("generateValidJSON should be true by default, bug #135", function(
   assert.equal(editor.koGenerateValidJSON(), true, "The default value is true");
 });
 
+/* TODO refactor
 QUnit.test("onModified options", function(assert) {
   var editor = new SurveyCreator();
   var modifiedOptions = [];
@@ -429,9 +430,9 @@ QUnit.test("onModified options", function(assert) {
   assert.equal(opts.type, "OBJECT_DELETED", "Operation type OBJECT_DELETED");
   assert.equal(opts.target, page, "Object - page");
 });
-
+*/
 QUnit.test("onCustomPropertySort event", function(assert) {
-  var editor = new SurveyCreator();
+  var editor = new SurveyCreator("", { showOldPropertyGrid: true });
   editor.onCustomSortProperty.add(function(editor, options) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
@@ -663,7 +664,7 @@ QUnit.test(
   }
 );
 */
-/* TODO -refactor
+/* TODO refactor
 QUnit.test("Update conditions/expressions on changing question.name", function(
   assert
 ) {
