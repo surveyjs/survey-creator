@@ -34,9 +34,7 @@ export class SurveyObjectEditor {
   constructor(public propertyEditorOptions: ISurveyObjectEditorOptions = null) {
     this.koActiveProperty.subscribe(newValue => {
       if (this.oldActiveProperty === newValue) return;
-      if (this.oldActiveProperty) this.oldActiveProperty.isActive = false;
       this.oldActiveProperty = newValue;
-      if (newValue) newValue.isActive = true;
     });
     var self = this;
     this.koAfterRender = function(el, con) {

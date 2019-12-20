@@ -90,39 +90,26 @@ QUnit.test("isDefault property value", function(assert) {
   car.isNew = true;
   assert.equal(property.koIsDefault(), false, "the value is not default");
 });
-QUnit.test("Active property", function(assert) {
-  var editor = new SurveyObjectEditor();
-  assert.equal(editor.koActiveProperty(), null, "no properties");
-  editor.selectedObject = new TruckDefaultValue();
-  assert.equal(
-    editor.koActiveProperty().name,
-    "name",
-    "name property is active by default"
-  );
-});
 QUnit.test("On property changed", function(assert) {
-  var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
   car.name = "myName";
-  var callCounter = 0;
-  editor.onPropertyValueChanged.add((sender, options) => {
-    car.name = options.newValue;
-    callCounter++;
-  });
-  editor.selectedObject = car;
-  editor.koActiveProperty().koValue("newName");
+  var editor = new SurveyElementEditorContentNoCategries(car);
+  var propertyEditor = editor.getPropertyEditorByName("name");
+  propertyEditor.editor.koValue("newName");
   assert.equal(car.name, "newName", "on property changed event is working");
-  assert.equal(callCounter, 1, "It should be called only one time");
 });
 QUnit.test("Use metadata getPropertyValue function", function(assert) {
-  var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
   car.truckTitle = "test";
-  editor.selectedObject = car;
-  var property = editor.getPropertyEditor("truckTitle");
+  var editor = new SurveyElementEditorContentNoCategries(car);
+  var propertyEditor = editor.getPropertyEditorByName("truckTitle");
 
-  editor.koActiveProperty().koValue("newName");
-  assert.equal(property.koText(), "test", "use the real value to get value");
+  propertyEditor.editor.koValue("newName");
+  assert.equal(
+    propertyEditor.objectProperty.koText(),
+    "newName",
+    "The text value has been changed"
+  );
 });
 QUnit.test(
   "Fix the bug with title property, https://github.com/surveyjs/editor/issues/33",

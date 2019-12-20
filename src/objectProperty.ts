@@ -15,7 +15,6 @@ export declare type SurveyOnPropertyChangedCallback = (
 export class SurveyObjectProperty {
   private objectValue: any;
   private onPropertyChanged: SurveyOnPropertyChangedCallback;
-  private isActiveValue: boolean;
   public onChanged: (newValue: any) => any;
   public name: string;
   public disabled: boolean;
@@ -48,7 +47,6 @@ export class SurveyObjectProperty {
     this.editor.options = propertyEditorOptions;
     this.editorType = this.editor.editorType;
     this.editorTypeTemplate = this.editor.editorTypeTemplate;
-    this.isActive = false;
     this.koVisible = ko.observable(this.isVisible());
   }
   public get displayName(): string {
@@ -56,13 +54,6 @@ export class SurveyObjectProperty {
   }
   public get title(): string {
     return this.editor.title;
-  }
-  public get isActive(): boolean {
-    return this.isActiveValue;
-  }
-  public set isActive(val: boolean) {
-    if (this.isActive == val) return;
-    this.isActiveValue = val;
   }
   public get koValue(): any {
     return this.editor.koValue;
