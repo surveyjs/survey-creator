@@ -764,7 +764,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koGenerateValidJSON: any;
   koShowOptions: any;
   koShowPropertyGrid = ko.observable(true);
-  koShowOldPropertyGrid = ko.observable(false);
+  koShowCategoriesInPropertyGrid = ko.observable(false);
   koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
@@ -840,9 +840,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedo = new SurveyUndoRedo();
 
     this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
-    this.elementPropertyGridValue.hasCategories = !this.showOldPropertyGrid;
-    this.koShowOldPropertyGrid.subscribe(function(newValue) {
-      self.elementPropertyGridValue.hasCategories = !newValue;
+    this.elementPropertyGridValue.hasCategories = this.showCategoriesInPropertyGrid;
+    this.koShowCategoriesInPropertyGrid.subscribe(function(newValue) {
+      self.elementPropertyGridValue.hasCategories = newValue;
     });
 
     this.elementPropertyGridValue.onAfterRenderCallback = function(
@@ -1213,10 +1213,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
-    this.showOldPropertyGrid =
-      typeof options.showOldPropertyGrid !== "undefined"
-        ? options.showOldPropertyGrid
-        : false;
+    this.showCategoriesInPropertyGrid =
+      typeof options.showCategoriesInPropertyGrid !== "undefined"
+        ? options.showCategoriesInPropertyGrid
+        : true;
     this.showToolbox =
       typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
@@ -1507,11 +1507,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Set this property to true to show the old style property grid on the right.
    */
-  public get showOldPropertyGrid() {
-    return this.koShowOldPropertyGrid();
+  public get showCategoriesInPropertyGrid() {
+    return this.koShowCategoriesInPropertyGrid();
   }
-  public set showOldPropertyGrid(value: boolean) {
-    this.koShowOldPropertyGrid(value);
+  public set showCategoriesInPropertyGrid(value: boolean) {
+    this.koShowCategoriesInPropertyGrid(value);
   }
   /**
    * Set it to false to  hide the question toolbox on the left.
