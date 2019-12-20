@@ -264,7 +264,7 @@ export class SurveyElementEditorContent {
     prop: Survey.JsonObjectProperty,
     newValue: any
   ) => boolean;
-  public onPropertyChanged: (prop: Survey.JsonObjectProperty) => void;
+  public onPropertyChanged: (prop: Survey.JsonObjectProperty, oldValue: any) => void;
   public onAfterRenderCallback: (
     object: any,
     htmlElement: HTMLElement,
@@ -354,9 +354,9 @@ export class SurveyElementEditorContent {
         if (!this.onPropertyChanging) return true;
         return this.onPropertyChanging(propEditor.property, newValue);
       };
-      props[i].onChanged = (propEditor: SurveyObjectProperty): void => {
+      props[i].onChanged = (propEditor: SurveyObjectProperty, oldValue: any): void => {
         if (!!this.onPropertyChanged)
-          this.onPropertyChanged(propEditor.property);
+          this.onPropertyChanged(propEditor.property, oldValue);
       };
       props[i].getObjectPropertyByName = (
         propertyName: string
@@ -600,6 +600,7 @@ export class SurveyElementPropertyGrid {
     property1: Survey.JsonObjectProperty,
     property2: Survey.JsonObjectProperty
   ) => number;
+  public onPropertyChanged: (obj: any, prop: Survey.JsonObjectProperty, oldValue: any) => void;
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
@@ -619,6 +620,10 @@ export class SurveyElementPropertyGrid {
     if (!!value) {
       var elementEditor = this.createSurveyElementEditor(value);
       elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
+      elementEditor.onPropertyChanged = (prop: Survey.JsonObjectProperty, oldValue: any) => {
+        if (this.onPropertyChanged)
+          this.onPropertyChanged(this.selectedObjectValue, prop, oldValue);
+      };
       this.koElementEditor(elementEditor);
     } else {
       this.koElementEditor(null);

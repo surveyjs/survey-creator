@@ -664,7 +664,7 @@ QUnit.test(
   }
 );
 */
-/* TODO refactor
+
 QUnit.test("Update conditions/expressions on changing question.name", function(
   assert
 ) {
@@ -686,7 +686,7 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
     "Update the condition accordingly"
   );
 });
-*/
+
 QUnit.test(
   "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
   function(assert) {

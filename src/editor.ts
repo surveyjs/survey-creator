@@ -866,6 +866,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ): number {
       return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
     };
+    this.elementPropertyGridValue.onPropertyChanged = function(obj: any, prop: Survey.JsonObjectProperty, oldValue: any) {
+      self.onPropertyChanged(obj, prop, oldValue);
+    };
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyLive = new SurveyLiveTester(this);
@@ -1686,6 +1689,26 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
+  private onPropertyChanged(obj: any, property: Survey.JsonObjectProperty, oldValue: any) {
+    var value = obj[property.name];
+    if (property.name == "name") {
+      this.updateConditions(oldValue, value);
+      this.onElementNameChanged.fire(this, {
+        obj: obj,
+        oldName: oldValue,
+        newName: value
+      });
+    }
+    if (property.name == "name" || property.name == "title") {
+      this.surveyObjects.nameChanged(obj);
+    }
+    if (property.name === "name") {
+      this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
+    } else if (property.name === "page") {
+      this.selectPage(value);
+      this.surveyObjects.selectObject(obj);
+    }
+  }
   public onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
@@ -1698,27 +1721,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj[property.name] = newValue;
     }
 
-    if (property.name == "name") {
-      var newName = this.generateUniqueName(obj, newValue);
-      this.updateConditions(oldValue, newName);
-      this.onElementNameChanged.fire(this, {
-        obj: obj,
-        oldName: oldValue,
-        newName: newName
-      });
-      if (newName != newValue) {
-        return newName;
-      }
-    }
-    if (property.name == "name" || property.name == "title") {
-      this.surveyObjects.nameChanged(obj);
-    }
-    if (property.name === "name") {
-      this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
-    } else if (property.name === "page") {
-      this.selectPage(newValue);
-      this.surveyObjects.selectObject(obj);
-    }
     this.setModified({
       type: "PROPERTY_CHANGED",
       name: property.name,

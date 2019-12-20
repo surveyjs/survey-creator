@@ -19,7 +19,7 @@ export class SurveyObjectProperty {
     propEditor: SurveyObjectProperty,
     newValue: any
   ) => boolean;
-  public onChanged: (propEditor: SurveyObjectProperty) => void;
+  public onChanged: (propEditor: SurveyObjectProperty, oldValue: any) => void;
   public name: string;
   public disabled: boolean;
   public editor: SurveyPropertyEditorBase;
@@ -129,11 +129,12 @@ export class SurveyObjectProperty {
   }
   protected onEditorValueChanged(newValue) {
     if (this.object) {
+      var oldValue = this.object[this.property.name];
       if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
       if (!this.onChanging || this.onChanging(this, newValue)) {
         this.object[this.property.name] = newValue;
       }
-      if (this.onChanged) this.onChanged(this);
+      if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();
   }
