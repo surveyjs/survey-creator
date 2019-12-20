@@ -8,100 +8,14 @@ import {
 } from "../propertyEditors/propertyEditorBase";
 import { SurveyHelper } from "../surveyHelper";
 
-export class SurveyQuestionEditorProperty {
-  private objectPropertyValue: SurveyObjectProperty;
-  public onChanging: (
-    propEditor: SurveyQuestionEditorProperty,
-    newValue: any
-  ) => boolean;
-  public onChanged: (propEditor: SurveyQuestionEditorProperty) => void;
-  constructor(
-    public obj: Survey.Base,
-    public property: Survey.JsonObjectProperty,
-    displayName: string,
-    options: ISurveyObjectEditorOptions = null,
-    private getEditorPropertyByName: (
-      name: string
-    ) => SurveyQuestionEditorProperty = null
-  ) {
-    var self = this;
-    this.objectPropertyValue = new SurveyObjectProperty(
-      this.property,
-      function(property, newValue) {
-        self.onPropertyChanged(property, newValue);
-      },
-      options
-    );
-    if (!displayName) {
-      displayName = editorLocalization.getPropertyInEditor(this.property.name);
-    }
-    if (displayName) this.editor.displayName = displayName;
-    this.objectProperty.onDependedPropertyUpdateCallback = function(
-      propertyName: string
-    ) {
-      self.updateDependedProperty(propertyName);
-    };
-    this.objectProperty.object = obj;
-    this.editor.setup();
-  }
-  public get objectProperty(): SurveyObjectProperty {
-    return this.objectPropertyValue;
-  }
-  public get editor(): SurveyPropertyEditorBase {
-    return this.objectProperty.editor;
-  }
-  public hasError(): boolean {
-    return this.editor.hasError();
-  }
-  public apply(): boolean {
-    if (this.editor.apply()) {
-      this.obj[this.property.name] = this.editor.koValue();
-      return true;
-    }
-    return false;
-  }
-  public applyToObj(obj: Survey.Base) {
-    if (
-      Survey.Helpers.isTwoValueEquals(
-        obj[this.property.name],
-        this.obj[this.property.name]
-      )
-    )
-      return;
-    obj[this.property.name] = this.obj[this.property.name];
-  }
-  public reset() {
-    this.editor.koValue(this.property.getPropertyValue(this.obj));
-  }
-  public beforeShow() {
-    this.editor.beforeShow();
-    this.objectProperty.updateDynamicProperties();
-  }
-  protected onPropertyChanged(property: SurveyObjectProperty, newValue: any) {
-    if (this.onChanging && !this.onChanging(this, newValue)) return;
-    this.obj[this.property.name] = newValue;
-    if (this.onChanged) this.onChanged(this);
-  }
-  private updateDependedProperty(propertyName: string) {
-    if (!this.getEditorPropertyByName) return;
-    var prop = this.getEditorPropertyByName(propertyName);
-    if (!!prop) {
-      prop.objectProperty.updateDynamicProperties();
-    }
-  }
-}
-
 export class SurveyQuestionEditorProperties {
   private properties: Array<Survey.JsonObjectProperty>;
-  public editorProperties: Array<SurveyQuestionEditorProperty> = [];
+  public editorProperties: Array<SurveyObjectProperty> = [];
   constructor(
     public obj: Survey.Base,
     properties: Array<any>,
     public options: ISurveyObjectEditorOptions = null,
-    private tab: any = null,
-    private getEditorPropertyByName: (
-      name: string
-    ) => SurveyQuestionEditorProperty = null
+    private tab: any = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildEditorProperties(properties);
@@ -127,23 +41,19 @@ export class SurveyQuestionEditorProperties {
     }
     return isError;
   }
-  public getPropertyEditorByName(
-    propertyName: string
-  ): SurveyQuestionEditorProperty {
+  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     var props = this.getAllProperties();
     for (var i = 0; i < props.length; i++) {
       if (props[i].property.name == propertyName) return props[i];
     }
   }
-  private performForAllProperties(
-    func: (p: SurveyQuestionEditorProperty) => void
-  ) {
+  private performForAllProperties(func: (p: SurveyObjectProperty) => void) {
     var props = this.getAllProperties();
     for (var i = 0; i < props.length; i++) {
       func(props[i]);
     }
   }
-  public getAllProperties(): Array<SurveyQuestionEditorProperty> {
+  public getAllProperties(): Array<SurveyObjectProperty> {
     return this.editorProperties;
   }
   protected buildEditorProperties(properties) {
@@ -155,15 +65,15 @@ export class SurveyQuestionEditorProperties {
     }
   }
   public addProperty(property: any, displayName: string) {
-    this.editorProperties.push(
-      new SurveyQuestionEditorProperty(
-        this.obj,
-        property,
-        displayName,
-        this.options,
-        this.getEditorPropertyByName
-      )
-    );
+    if (!displayName) {
+      displayName = editorLocalization.getPropertyInEditor(property.name);
+    }
+    var objectProperty = new SurveyObjectProperty(property, null, this.options);
+    objectProperty.object = this.obj;
+    if (!!displayName) {
+      objectProperty.editor.displayName = displayName;
+    }
+    this.editorProperties.push(objectProperty);
   }
   private getName(prop: any): string {
     if (!prop) return null;

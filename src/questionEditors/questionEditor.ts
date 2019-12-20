@@ -1,10 +1,7 @@
 import * as ko from "knockout";
 import { ISurveyObjectEditorOptions } from "../propertyEditors/propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
-import {
-  SurveyQuestionEditorProperty,
-  SurveyQuestionEditorProperties
-} from "./questionEditorProperties";
+import { SurveyQuestionEditorProperties } from "./questionEditorProperties";
 import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition
@@ -322,16 +319,14 @@ export class SurveyElementEditorContent {
     }
     return false;
   }
-  public getPropertyEditorByName(
-    propertyName: string
-  ): SurveyQuestionEditorProperty {
+  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
       if (props[i].property.name == propertyName) return props[i];
     }
     return null;
   }
-  private getAllEditorProperties(): Array<SurveyQuestionEditorProperty> {
+  private getAllEditorProperties(): Array<SurveyObjectProperty> {
     var res = [];
     if (!this.koTabs) return res;
     var tabs = this.koTabs();
@@ -353,15 +348,20 @@ export class SurveyElementEditorContent {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
       props[i].onChanging = (
-        propEditor: SurveyQuestionEditorProperty,
+        propEditor: SurveyObjectProperty,
         newValue: any
       ): boolean => {
         if (!this.onPropertyChanging) return true;
         return this.onPropertyChanging(propEditor.property, newValue);
       };
-      props[i].onChanged = (propEditor: SurveyQuestionEditorProperty): void => {
+      props[i].onChanged = (propEditor: SurveyObjectProperty): void => {
         if (!!this.onPropertyChanged)
           this.onPropertyChanged(propEditor.property);
+      };
+      props[i].getObjectPropertyByName = (
+        propertyName: string
+      ): SurveyObjectProperty => {
+        return this.getPropertyEditorByName(propertyName);
       };
     }
   }
@@ -386,10 +386,7 @@ export class SurveyElementEditorContent {
         this.editableObj,
         properties,
         this.options,
-        tabItem,
-        function(propName: string) {
-          return self.getPropertyEditorByName(propName);
-        }
+        tabItem
       ),
       tabItem.name
     );
@@ -442,7 +439,7 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     var res = [];
     var props = this.koTab().properties.editorProperties;
     for (var i = 0; i < props.length; i++) {
-      res.push(props[i].objectProperty);
+      res.push(props[i]);
     }
     var self = this;
     var sortEvent = function(
@@ -628,9 +625,7 @@ export class SurveyElementPropertyGrid {
     }
     this.koHasObject(!!value);
   }
-  public getPropertyEditorByName(
-    propertyName: string
-  ): SurveyQuestionEditorProperty {
+  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     if (!this.koElementEditor()) return null;
     return this.koElementEditor().getPropertyEditorByName(propertyName);
   }
@@ -708,9 +703,7 @@ export class SurveyQuestionEditorTab {
   public applyToObj(obj: Survey.Base) {
     return this.properties.applyToObj(obj);
   }
-  public getPropertyEditorByName(
-    propertyName: string
-  ): SurveyQuestionEditorProperty {
+  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     return this.properties.getPropertyEditorByName(propertyName);
   }
   public doCloseWindow() {}

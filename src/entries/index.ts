@@ -52,10 +52,7 @@ export { SurveyPropertyValidatorsEditor } from "../propertyEditors/propertyValid
 export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
 export { SurveyObjects } from "../surveyObjects";
 
-export {
-  SurveyQuestionEditorProperties,
-  SurveyQuestionEditorProperty
-} from "../questionEditors/questionEditorProperties";
+export { SurveyQuestionEditorProperties } from "../questionEditors/questionEditorProperties";
 export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 export {
   SurveyPropertyEditorShowWindow,

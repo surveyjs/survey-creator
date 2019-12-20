@@ -3,8 +3,8 @@
       <div class="col-sm-12">
             <!-- ko foreach: properties.editorProperties -->
             <div class="form-group">
-                <div data-bind="visible: objectProperty.koVisible, event: { keydown: objectProperty.editor.keyDownHandler }, attr: { 'data-property': property.name }">
-                <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor, afterRender: $parent.koAfterRenderProperty } --><!-- /ko -->
+                <div data-bind="visible: koVisible, event: { keydown: editor.keyDownHandler }, attr: { 'data-property': property.name }">
+                <!-- ko template: { name: 'propertyeditor', data: editor, afterRender: $parent.koAfterRenderProperty } --><!-- /ko -->
                 </div>
             </div>
             <!-- /ko  -->
