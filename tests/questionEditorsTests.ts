@@ -279,17 +279,17 @@ QUnit.test("General properties, editor type", function(assert) {
     "title"
   ]);
   assert.equal(
-    properties.editorProperties[0].objectProperty.editorType,
+    properties.editorProperties[0].editorType,
     "string",
     "Name property has text edit type"
   );
   assert.equal(
-    properties.editorProperties[1].objectProperty.editorType,
+    properties.editorProperties[1].editorType,
     "boolean",
     "visible property has check edit type"
   );
   assert.equal(
-    properties.editorProperties[2].objectProperty.editorType,
+    properties.editorProperties[2].editorType,
     "text",
     "title property has textarea edit type"
   );
@@ -686,24 +686,12 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
   var prop1 = tab.getPropertyEditorByName("inputType");
   var prop2 = tab.getPropertyEditorByName("customProp1");
 
-  assert.equal(
-    prop2.objectProperty.name,
-    "customProp1",
-    "The property name is correct"
-  );
-  assert.equal(
-    prop2.objectProperty.koVisible(),
-    false,
-    "It is invisible by default"
-  );
-  prop1.objectProperty.koValue("date");
-  assert.equal(prop2.objectProperty.koVisible(), true, "It visible now");
-  prop1.objectProperty.koValue("range");
-  assert.equal(
-    prop2.objectProperty.koVisible(),
-    false,
-    "It is invisible again"
-  );
+  assert.equal(prop2.name, "customProp1", "The property name is correct");
+  assert.equal(prop2.koVisible(), false, "It is invisible by default");
+  prop1.koValue("date");
+  assert.equal(prop2.koVisible(), true, "It visible now");
+  prop1.koValue("range");
+  assert.equal(prop2.koVisible(), false, "It is invisible again");
 
   SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
   Survey.Serializer.removeProperty("text", "customProp1");
@@ -741,7 +729,7 @@ QUnit.test("DependedOn properties, dynamic choices", function(assert) {
   var fieldPropEditor = <SurveyDropdownPropertyEditor>fieldProp.editor;
 
   assert.equal(fieldPropEditor.koChoices().length, 0, "It is empty by default");
-  entityProp.objectProperty.koValue("Account");
+  entityProp.koValue("Account");
   assert.equal(
     fieldPropEditor.koChoices().length,
     3,
@@ -787,7 +775,7 @@ QUnit.test("DependedOn properties + multiple, dynamic choices", function(
   var fieldPropEditor = <SurveyPropertyMultipleValuesEditor>fieldProp.editor;
 
   assert.equal(fieldPropEditor.items.length, 0, "It is empty by default");
-  entityProp.objectProperty.koValue("Account");
+  entityProp.koValue("Account");
   assert.equal(fieldPropEditor.items.length, 3, "Choices updated immediately");
 
   SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);

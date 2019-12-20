@@ -1,6 +1,6 @@
 export * from "../json5tests";
 export * from "../localizationTests";
-export * from "../ObjectEditorTests";
+export * from "../elementEditorContentNoCategriesTests";
 export * from "../propertyEditors/propertyEditorsTests";
 export * from "../propertyEditors/propertyConditionEditorTests";
 export * from "../questionEditorsTests";

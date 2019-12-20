@@ -15,14 +15,19 @@ export declare type SurveyOnPropertyChangedCallback = (
 export class SurveyObjectProperty {
   private objectValue: any;
   private onPropertyChanged: SurveyOnPropertyChangedCallback;
-  public onChanged: (newValue: any) => any;
+  public onChanging: (
+    propEditor: SurveyObjectProperty,
+    newValue: any
+  ) => boolean;
+  public onChanged: (propEditor: SurveyObjectProperty, oldValue: any) => void;
   public name: string;
   public disabled: boolean;
   public editor: SurveyPropertyEditorBase;
   public editorType: string;
   public editorTypeTemplate: string;
   public baseEditorType: string;
-  public onDependedPropertyUpdateCallback: (propertyName: string) => void;
+  public getObjectPropertyByName: (name: string) => SurveyObjectProperty = null;
+
   public koVisible: any;
 
   constructor(
@@ -33,7 +38,7 @@ export class SurveyObjectProperty {
   ) {
     this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
-    this.disabled = property["readOnly"];
+    this.disabled = property.readOnly;
     var self = this;
     var onItemChanged = function(newValue) {
       self.onEditorValueChanged(newValue);
@@ -74,8 +79,39 @@ export class SurveyObjectProperty {
   public set object(value: any) {
     this.objectValue = value;
     this.editor.object = value;
+    this.editor.setup();
     this.updateDependedProperties();
     this.updateDynamicProperties();
+  }
+  public beforeShow() {
+    this.editor.beforeShow();
+    this.updateDynamicProperties();
+  }
+  public hasError(): boolean {
+    return this.editor.hasError();
+  }
+  public apply(): boolean {
+    if (!this.object) return false;
+    if (this.editor.apply()) {
+      this.object[this.property.name] = this.editor.koValue();
+      return true;
+    }
+    return false;
+  }
+  public applyToObj(obj: Survey.Base) {
+    if (
+      !!this.object &&
+      Survey.Helpers.isTwoValueEquals(
+        obj[this.property.name],
+        this.object[this.property.name]
+      )
+    )
+      return;
+    obj[this.property.name] = this.object[this.property.name];
+  }
+  public reset() {
+    if (!this.object) return;
+    this.editor.koValue(this.property.getPropertyValue(this.object));
   }
   public updateDynamicProperties() {
     this.koVisible(this.isVisible());
@@ -93,18 +129,24 @@ export class SurveyObjectProperty {
   }
   protected onEditorValueChanged(newValue) {
     if (this.object) {
+      var oldValue = this.object[this.property.name];
       if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
-      if (!!this.onChanged) this.onChanged(newValue);
+      if (!this.onChanging || this.onChanging(this, newValue)) {
+        this.object[this.property.name] = newValue;
+      }
+      if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();
   }
   private updateDependedProperties() {
-    if (!this.object || !this.onDependedPropertyUpdateCallback) return;
-    if (!this.property["getDependedProperties"]) return;
-    var props = this.property["getDependedProperties"]();
+    if (!this.object || !this.getObjectPropertyByName) return;
+    var props = this.property.getDependedProperties();
     if (!props) return;
     for (var i = 0; i < props.length; i++) {
-      this.onDependedPropertyUpdateCallback(props[i]);
+      var prop = this.getObjectPropertyByName(props[i]);
+      if (!!prop) {
+        prop.updateDynamicProperties();
+      }
     }
   }
 }

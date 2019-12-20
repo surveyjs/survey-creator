@@ -1214,7 +1214,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
   setToNameEditor.koValue("question2");
   assert.equal(
-    trigerEditor.getPropertyEditorByName("setValue").objectProperty.koVisible(),
+    trigerEditor.getPropertyEditorByName("setValue").koVisible(),
     true,
     "SetToName is not empty"
   );
