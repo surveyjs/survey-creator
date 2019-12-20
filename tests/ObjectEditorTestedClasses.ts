@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 
-export class Car {
+export class Car extends Survey.Base {
   public name: string;
   private titleValue: string;
   public getType(): string {
@@ -38,7 +38,6 @@ export class Truck extends BigCar {
 }
 export class TruckDefaultValue extends Truck {
   private truckTitleValue: string;
-  public isNew: boolean;
   public getType(): string {
     return "truckDefault";
   }
@@ -47,6 +46,12 @@ export class TruckDefaultValue extends Truck {
   }
   public set truckTitle(value: string) {
     this.truckTitleValue = value;
+  }
+  public get isNew(): boolean {
+    return this.getPropertyValue("isNew");
+  }
+  public set isNew(val: boolean) {
+    this.setPropertyValue("isNew", val);
   }
 }
 

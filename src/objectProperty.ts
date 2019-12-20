@@ -26,8 +26,6 @@ export class SurveyObjectProperty {
   public onDependedPropertyUpdateCallback: (propertyName: string) => void;
   public koVisible: any;
 
-  koIsShowEditor = ko.observable(false);
-
   constructor(
     public property: Survey.JsonObjectProperty,
     onPropertyChanged: SurveyOnPropertyChangedCallback = null,
@@ -65,9 +63,6 @@ export class SurveyObjectProperty {
   public set isActive(val: boolean) {
     if (this.isActive == val) return;
     this.isActiveValue = val;
-    this.koIsShowEditor(
-      !this.disabled && (this.editor.alwaysShowEditor || this.isActive)
-    );
   }
   public get koValue(): any {
     return this.editor.koValue;

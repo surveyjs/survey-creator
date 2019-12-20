@@ -277,9 +277,6 @@ export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
   public get editorType(): string {
     return "boolean";
   }
-  public get alwaysShowEditor(): boolean {
-    return true;
-  }
   public get canShowDisplayNameOnTop(): boolean {
     return false;
   }

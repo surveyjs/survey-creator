@@ -41,22 +41,22 @@ QUnit.test("Created properties on set selected Object", function(assert) {
   delete defaultStrings.p["maxWeight"];
 });
 QUnit.test("Custom sort properties", function(assert) {
-  var editor = new SurveyObjectEditor();
-  editor.onSortPropertyCallback = function(obj, a, b) {
-    if (a.name == "name") return -1;
-    if (b.name == "name") return 1;
-    return 0;
-  };
-  editor.selectedObject = new Truck();
-
+  var editor = new SurveyElementEditorContentNoCategries(
+    new Truck(),
+    "",
+    null,
+    function(obj, a, b) {
+      if (a.name == "name") return -1;
+      if (b.name == "name") return 1;
+      return 0;
+    }
+  );
   assert.equal(editor.koProperties().length, 3, "Two property object");
   assert.equal(editor.koProperties()[0].name, "name", "name property");
 });
 QUnit.test("Sort by displayName by default", function(assert) {
   defaultStrings.p["maxWeight"] = "zzz maximum weight";
-  var editor = new SurveyObjectEditor();
-  editor.selectedObject = new Truck();
-
+  var editor = new SurveyElementEditorContentNoCategries(new Truck());
   assert.equal(editor.koProperties().length, 3, "Three properties object");
   assert.equal(
     editor.koProperties()[2].name,
@@ -66,11 +66,10 @@ QUnit.test("Sort by displayName by default", function(assert) {
   delete defaultStrings.p["maxWeight"];
 });
 QUnit.test("Get Property Value", function(assert) {
-  var editor = new SurveyObjectEditor();
   var car = new Truck();
   car.name = "truckCar";
   car.maxWeight = 20000;
-  editor.selectedObject = car;
+  var editor = new SurveyElementEditorContentNoCategries(car);
   assert.equal(
     editor.koProperties()[1].koValue(),
     "truckCar",
@@ -83,14 +82,12 @@ QUnit.test("Get Property Value", function(assert) {
   );
 });
 QUnit.test("isDefault property value", function(assert) {
-  var editor = new SurveyObjectEditor();
   var car = new TruckDefaultValue();
-  editor.selectedObject = car;
-  var property = editor.getPropertyEditor("isNew");
+  var editor = new SurveyElementEditorContentNoCategries(car);
+  var property = editor.getPropertyEditorByName("isNew").objectProperty;
   assert.equal(property.koIsDefault(), true, "the value is default");
   assert.equal(property.editorType, "boolean", "It is a boolean editor");
   car.isNew = true;
-  editor.objectChanged();
   assert.equal(property.koIsDefault(), false, "the value is not default");
 });
 QUnit.test("Active property", function(assert) {
@@ -101,40 +98,6 @@ QUnit.test("Active property", function(assert) {
     editor.koActiveProperty().name,
     "name",
     "name property is active by default"
-  );
-});
-QUnit.test("Is show property", function(assert) {
-  var editor = new SurveyObjectEditor();
-  editor.selectedObject = new TruckDefaultValue();
-  var nameProperty = editor.getPropertyEditor("name");
-  var maxWeightProperty = editor.getPropertyEditor("maxWeight");
-  var isNewProperty = editor.getPropertyEditor("isNew");
-  assert.equal(
-    nameProperty.koIsShowEditor(),
-    true,
-    "name property is active by default"
-  );
-  assert.equal(
-    maxWeightProperty.koIsShowEditor(),
-    false,
-    "name property is not active"
-  );
-  editor.koActiveProperty(maxWeightProperty);
-  assert.equal(
-    nameProperty.koIsShowEditor(),
-    false,
-    "name property is inactive now"
-  );
-  assert.equal(
-    maxWeightProperty.koIsShowEditor(),
-    true,
-    "maxWeight property is active"
-  );
-
-  assert.equal(
-    isNewProperty.koIsShowEditor(),
-    true,
-    "isNewProperty property always show Editor"
   );
 });
 QUnit.test("On property changed", function(assert) {

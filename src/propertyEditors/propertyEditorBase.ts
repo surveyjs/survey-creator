@@ -171,9 +171,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     }
     return res;
   }
-  public get alwaysShowEditor(): boolean {
-    return false;
-  }
   public get title(): string {
     return this.titleValue;
   }
