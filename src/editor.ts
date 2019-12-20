@@ -892,6 +892,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       };
       self.onPropertyAfterRender.fire(self, options);
     };
+    this.elementPropertyGridValue.onSortPropertyCallback = function(
+      obj: any,
+      property1: Survey.JsonObjectProperty,
+      property2: Survey.JsonObjectProperty
+    ): number {
+      return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
+    };
+
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyLive = new SurveyLiveTester(this);
     this.surveyEmbeding = new SurveyEmbedingWindow();

@@ -417,6 +417,11 @@ export class SurveyElementEditorContent {
 }
 
 export class SurveyElementEditorContentNoCategries extends SurveyElementEditorContent {
+  public onSortPropertyCallback: (
+    object: any,
+    property1: Survey.JsonObjectProperty,
+    property2: Survey.JsonObjectProperty
+  ) => number;
   public koProperties = ko.observableArray<SurveyObjectProperty>();
   public koTab: any;
   constructor(
@@ -439,6 +444,25 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     for (var i = 0; i < props.length; i++) {
       res.push(props[i].objectProperty);
     }
+    var self = this;
+    var sortEvent = function(
+      a: SurveyObjectProperty,
+      b: SurveyObjectProperty
+    ): number {
+      var res = 0;
+      if (self.onSortPropertyCallback) {
+        res = self.onSortPropertyCallback(
+          self.origionalObj,
+          a.property,
+          b.property
+        );
+      }
+      if (res) return res;
+      if (a.displayName == b.displayName) return 0;
+      if (a.displayName > b.displayName) return 1;
+      return -1;
+    };
+    res = res.sort(sortEvent);
     return res;
   }
   private getProperties(): Array<Survey.JsonObjectProperty> {
@@ -574,6 +598,11 @@ export class SurveyElementPropertyGrid {
     htmlElement: HTMLElement,
     property: SurveyObjectProperty
   ) => any;
+  public onSortPropertyCallback: (
+    object: any,
+    property1: Survey.JsonObjectProperty,
+    property2: Survey.JsonObjectProperty
+  ) => number;
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
@@ -607,11 +636,13 @@ export class SurveyElementPropertyGrid {
         this.propertyEditorOptions,
         true
       );
-    return new SurveyElementEditorContentNoCategries(
+    var res = new SurveyElementEditorContentNoCategries(
       value,
       "",
       this.propertyEditorOptions
     );
+    res.onSortPropertyCallback = this.onSortPropertyCallback;
+    return res;
   }
 }
 

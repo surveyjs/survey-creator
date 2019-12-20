@@ -9,18 +9,13 @@ import { SurveyNestedPropertyEditorItem } from "../src/propertyEditors/propertyN
 import { SurveyPropertyDropdownColumnsEditor } from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { defaultStrings } from "../src/editorLocalization";
 import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
+import { SurveyElementEditorContentNoCategries } from "../src/questionEditors/questionEditor";
 
 export default QUnit.module("objectEditorTests");
 
 QUnit.test("Created properties on set selected Object", function(assert) {
-  var editor = new SurveyObjectEditor();
-  assert.equal(
-    editor.koProperties().length,
-    0,
-    "No properties for null object"
-  );
+  var editor = new SurveyElementEditorContentNoCategries(new BigCar());
 
-  editor.selectedObject = new BigCar();
   assert.equal(editor.koProperties().length, 2, "One property object");
   assert.equal(editor.koProperties()[0].name, "name", "name property");
   assert.equal(
@@ -30,7 +25,7 @@ QUnit.test("Created properties on set selected Object", function(assert) {
   );
 
   defaultStrings.p["maxWeight"] = "Maximum weight";
-  editor.selectedObject = new Truck();
+  editor = new SurveyElementEditorContentNoCategries(new Truck());
   assert.equal(editor.koProperties().length, 3, "Two property object");
   assert.equal(
     editor.koProperties()[0].name,
