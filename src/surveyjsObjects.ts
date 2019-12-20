@@ -91,6 +91,17 @@ export class SurveyForDesigner extends Survey.Survey {
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
   }
+  public onPropertyValueChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any
+  ) {
+    var ignoredProperties = ["currentPageValue", "visibleIndex"];
+
+    if (ignoredProperties.indexOf(name) !== -1) return;
+
+    console.log("changed!");
+  }
 }
 
 function getSurvey(el: any): any {
@@ -172,7 +183,10 @@ function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
   return res;
 }
 
-export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner) {
+export function createAfterRenderHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
   return function elementOnAfterRendering(
     domElement: any,
     surveyElement: any,
@@ -185,7 +199,7 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
       surveyElement.renderedElement.classList.add("svd-dark-bg-color");
     }
     surveyElement.renderedElement.classList.add("svd_q_design_border");
-  
+
     var isRowLayout =
       !surveyElement.getLayoutType || surveyElement.getLayoutType() == "row";
     var opt = surveyElement.allowingOptions;
@@ -194,7 +208,7 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
     opt.allowChangeType = opt.allowChangeType && isRowLayout;
     opt.allowShowHideTitle = opt.allowShowHideTitle && isRowLayout;
     opt.allowChangeRequired = opt.allowChangeRequired && isRowLayout;
-  
+
     getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
     if (surveyElement.koIsSelected()) {
       surveyElement.renderedElement.classList.add(
@@ -219,8 +233,8 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
         if (childs[i].style) childs[i].style.pointerEvents = "none";
       }
     }
-    
-    if(creator.readOnly) {
+
+    if (creator.readOnly) {
       addAdorner(domElement, surveyElement);
       return;
     }
@@ -257,9 +271,9 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
         setTabIndex(elements[i]);
       }
     });
-  
+
     addAdorner(domElement, surveyElement);
-  }
+  };
 }
 
 var adornersConfig: { [index: string]: any[] } = {};
@@ -342,11 +356,11 @@ function addAdorner(node, model) {
           elements = [node];
         }
         if (elements.length > 0) {
-          var editor =  getSurvey(model).getEditor();
-          if(editor.readOnly)
-            adorner.renderReadOnly && adorner.renderReadOnly(elements, model, editor);
-          else
-            adorner.afterRender(elements, model, editor);
+          var editor = getSurvey(model).getEditor();
+          if (editor.readOnly)
+            adorner.renderReadOnly &&
+              adorner.renderReadOnly(elements, model, editor);
+          else adorner.afterRender(elements, model, editor);
         }
       }
     });

@@ -1020,8 +1020,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.render(renderedElement);
     }
 
-    this.text = "";
-
     this.addToolbarItems();
   }
 
