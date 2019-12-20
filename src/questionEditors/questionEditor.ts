@@ -628,6 +628,12 @@ export class SurveyElementPropertyGrid {
     }
     this.koHasObject(!!value);
   }
+  public getPropertyEditorByName(
+    propertyName: string
+  ): SurveyQuestionEditorProperty {
+    if (!this.koElementEditor()) return null;
+    return this.koElementEditor().getPropertyEditorByName(propertyName);
+  }
   protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
     if (this.hasCategories)
       return new SurveyElementEditorContent(

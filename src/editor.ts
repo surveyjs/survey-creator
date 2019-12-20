@@ -1,6 +1,5 @@
 import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
-import { SurveyObjectEditor } from "./objectEditor";
 import {
   ISurveyObjectEditorOptions,
   SurveyPropertyEditorBase
@@ -81,7 +80,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private surveyjs: HTMLElement;
 
   private jsonEditor: SurveyJSONEditor;
-  private selectedObjectEditorValue: SurveyObjectEditor;
   private elementPropertyGridValue: SurveyElementPropertyGrid;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
@@ -841,43 +839,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.undoRedo = new SurveyUndoRedo();
 
-    this.selectedObjectEditorValue = new SurveyObjectEditor(this);
     this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
     this.elementPropertyGridValue.hasCategories = !this.showOldPropertyGrid;
     this.koShowOldPropertyGrid.subscribe(function(newValue) {
       self.elementPropertyGridValue.hasCategories = !newValue;
     });
 
-    this.selectedObjectEditorValue.onSortPropertyCallback = function(
-      obj: any,
-      property1: Survey.JsonObjectProperty,
-      property2: Survey.JsonObjectProperty
-    ): number {
-      return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
-    };
-    this.selectedObjectEditorValue.onPropertyValueChanged.add(
-      (sender, options) => {
-        options.updatedValue = self.onPropertyValueChanged(
-          options.property,
-          options.object,
-          options.newValue
-        );
-      }
-    );
-    this.selectedObjectEditorValue.onAfterRenderCallback = function(
-      obj,
-      htmlElement,
-      prop
-    ) {
-      if (self.onPropertyAfterRender.isEmpty) return;
-      var options = {
-        obj: obj,
-        htmlElement: htmlElement,
-        property: prop.property,
-        propertyEditor: prop.editor
-      };
-      self.onPropertyAfterRender.fire(self, options);
-    };
     this.elementPropertyGridValue.onAfterRenderCallback = function(
       obj,
       htmlElement,
@@ -1297,9 +1264,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get survey(): SurveyForDesigner {
     return this.surveyValue();
-  }
-  public get selectedObjectEditor(): SurveyObjectEditor {
-    return this.selectedObjectEditorValue;
   }
   public get selectedElementPropertyGrid(): SurveyElementPropertyGrid {
     return this.elementPropertyGridValue;
@@ -1776,12 +1740,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private doPropertyGridChanged() {
     if (!this.showPropertyGrid) return;
-    this.selectedObjectEditorValue.objectChanged();
     this.elementPropertyGridValue.objectChanged();
   }
   private setNewObjToPropertyGrid(newObj: any) {
     if (!this.showPropertyGrid) return;
-    this.selectedObjectEditorValue.selectedObject = newObj;
     this.elementPropertyGridValue.selectedObject = newObj;
   }
   private doUndoRedo(item: UndoRedoItem) {
