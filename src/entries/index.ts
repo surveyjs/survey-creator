@@ -65,7 +65,6 @@ export {
 
 export { QuestionToolbox } from "../questionToolbox";
 export { SurveyObjectProperty } from "../objectProperty";
-export { SurveyObjectEditor } from "../objectEditor";
 export { PagesEditor } from "../pagesEditor";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
