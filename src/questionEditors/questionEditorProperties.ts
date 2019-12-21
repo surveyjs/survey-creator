@@ -65,7 +65,7 @@ export class SurveyQuestionEditorProperties {
     if (!displayName) {
       displayName = editorLocalization.getPropertyInEditor(property.name);
     }
-    var objectProperty = new SurveyObjectProperty(property, null, this.options);
+    var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;
     if (!!displayName) {
       objectProperty.editor.displayName = displayName;

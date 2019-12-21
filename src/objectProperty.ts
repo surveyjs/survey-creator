@@ -14,7 +14,6 @@ export declare type SurveyOnPropertyChangedCallback = (
 
 export class SurveyObjectProperty {
   private objectValue: any;
-  private onPropertyChanged: SurveyOnPropertyChangedCallback;
   public onChanging: (
     propEditor: SurveyObjectProperty,
     newValue: any
@@ -32,11 +31,9 @@ export class SurveyObjectProperty {
 
   constructor(
     public property: Survey.JsonObjectProperty,
-    onPropertyChanged: SurveyOnPropertyChangedCallback = null,
     propertyEditorOptions: ISurveyObjectEditorOptions = null,
     isCellEditor: boolean = false
   ) {
-    this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
     this.disabled = property.readOnly;
     var self = this;
@@ -130,7 +127,6 @@ export class SurveyObjectProperty {
   protected onEditorValueChanged(newValue) {
     if (this.object) {
       var oldValue = this.object[this.property.name];
-      if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
       if (!this.onChanging || this.onChanging(this, newValue)) {
         this.object[this.property.name] = newValue;
       }

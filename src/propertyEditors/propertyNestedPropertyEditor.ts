@@ -221,13 +221,8 @@ export class SurveyNestedPropertyEditorEditorCell {
     options: ISurveyObjectEditorOptions = null
   ) {
     this.options = options;
-    var self = this;
-    var propEvent = (property: SurveyObjectProperty, newValue: any) => {
-      self.value = newValue;
-    };
     this.objectPropertyValue = new SurveyObjectProperty(
       this.property,
-      propEvent,
       this.options,
       true
     );
@@ -244,10 +239,10 @@ export class SurveyNestedPropertyEditorEditorCell {
     return this.objectProperty.editor.koValue;
   }
   public get value() {
-    return this.property.getValue(this.obj);
+    return this.koValue();
   }
   public set value(val: any) {
-    this.obj[this.property.name] = val;
+    this.koValue(val);
   }
   public get hasError(): boolean {
     return this.editor.hasError();
