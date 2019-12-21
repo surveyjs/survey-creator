@@ -222,18 +222,8 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
   }
   protected getPropertyChoices(): Array<any> {
     if (!this.property) return [];
-    if (!!this.object) {
-      var obj = this.object;
-      this.object["getEditingPropertyValue"] = function(name: string) {
-        if (!!obj.editingProperties && obj.editingProperties[name] != undefined)
-          return obj.editingProperties[name];
-        return obj[name];
-      };
-    }
     var self = this;
-    return (<any>this.property["getChoices"])(this.object, function(
-      choices: any
-    ) {
+    return (<any>this.property.getChoices)(this.object, function(choices: any) {
       self.setChoices(choices);
     });
   }

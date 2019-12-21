@@ -7,11 +7,6 @@ import {
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFactory";
 
-export declare type SurveyOnPropertyChangedCallback = (
-  property: SurveyObjectProperty,
-  newValue: any
-) => void;
-
 export class SurveyObjectProperty {
   private objectValue: any;
   public onChanging: (
