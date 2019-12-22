@@ -90,7 +90,7 @@ function createSurvey(): Survey.Survey {
 QUnit.test("Create correct property editor", function(assert) {
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "unknown";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propertyEditor.editorType,
     "string",
@@ -115,7 +115,7 @@ QUnit.test("Create correct property editor", function(assert) {
   for (var i = 0; i < propertyTypes.length; i++) {
     var propType = propertyTypes[i];
     property.type = propType;
-    propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+    propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
     assert.equal(
       propertyEditor.editorType,
       propType,
@@ -126,7 +126,7 @@ QUnit.test("Create correct property editor", function(assert) {
 QUnit.test("propertyEditor.displayName", function(assert) {
   var property = Survey.Serializer.findProperty("question", "enableIf");
   defaultStrings.p["enableIf"] = "It is enableIf";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propertyEditor.displayName,
     "It is enableIf",
@@ -146,7 +146,7 @@ QUnit.test("Create custom property editor", function(assert) {
   Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "customBool";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
   assert.deepEqual(
     (<SurveyPropertyCustomEditor>propertyEditor).widgetJSON,
@@ -172,7 +172,7 @@ QUnit.test(
     var property = new Survey.JsonObjectProperty("testname");
     property.type = "customBool";
     var propertyEditor = <SurveyPropertyCustomEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     assert.equal(renderCount, 0, "Initial counter");
     assert.equal(propertyEditor.object, undefined, "Object is not assigned");
@@ -195,7 +195,7 @@ QUnit.test("Custom property editor - validation", function(assert) {
   Extentions.registerCustomPropertyEditor("customVal", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "customVal";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
   assert.deepEqual(
     (<SurveyPropertyCustomEditor>propertyEditor).widgetJSON,
@@ -641,7 +641,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   );
   var property = new Survey.JsonObjectProperty("test");
   property.type = "itemvalues_ex[]";
-  var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propEditor.editorType,
     "itemvalue[]",
@@ -674,7 +674,7 @@ QUnit.test(
     var property = Survey.Serializer.findProperty("checkbox", "test");
     property.type = "itemvalues_ex[]";
     var propertyEditor = <SurveyPropertyItemValuesEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     var question = new Survey.QuestionCheckbox("q1");
     propertyEditor.object = question;
@@ -726,7 +726,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   survey.locale = "de";
   var property = Survey.Serializer.findProperty("selectbase", "choices");
   var propEditor = <SurveyPropertyItemValuesEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.onGetLocale = function() {
     return survey.locale;
@@ -766,7 +766,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
     "columns"
   );
   var propEditor = <SurveyPropertyDropdownColumnsEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.onGetLocale = function() {
     return survey.locale;
@@ -1458,7 +1458,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
 
   var property = Survey.Serializer.findProperty("selectbase", "choices");
   var propEditor = <SurveyPropertyItemValuesEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.object = q;
   propEditor.beforeShow();
@@ -1498,13 +1498,12 @@ QUnit.test(
       "expression"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(expressionProperty, null)
-        .editorType,
+      SurveyPropertyEditorFactory.createEditor(expressionProperty).editorType,
       "expression",
       "By default create expression"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(expressionProperty, null, true)
+      SurveyPropertyEditorFactory.createEditor(expressionProperty, true)
         .editorType,
       "string",
       "For cell editor create string, not expression"
@@ -1514,13 +1513,12 @@ QUnit.test(
       "visibleIf"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(conditionProperty, null)
-        .editorType,
+      SurveyPropertyEditorFactory.createEditor(conditionProperty).editorType,
       "condition",
       "By default create condition"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(conditionProperty, null, true)
+      SurveyPropertyEditorFactory.createEditor(conditionProperty, true)
         .editorType,
       "string",
       "For cell editor create string, not condition"
@@ -1532,7 +1530,7 @@ QUnit.test("SurveyPropertyCalculatedValueEditor", function(assert) {
   var survey = new Survey.Survey();
   var property = Survey.Serializer.findProperty("survey", "calculatedValues");
   var propEditor = <SurveyPropertyCalculatedValueEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.beforeShow();
   propEditor.object = survey;
@@ -1580,7 +1578,7 @@ QUnit.test(
     var survey = new Survey.Survey();
     var property = Survey.Serializer.findProperty("survey", "calculatedValues");
     var propEditor = <SurveyPropertyCalculatedValueEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     propEditor.beforeShow();
     propEditor.object = survey;

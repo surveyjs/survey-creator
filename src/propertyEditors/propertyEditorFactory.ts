@@ -78,7 +78,6 @@ export class SurveyPropertyEditorFactory {
   }
   public static createEditor(
     property: Survey.JsonObjectProperty,
-    func: (newValue: any) => any,
     isCellEditor: boolean = false
   ): SurveyPropertyEditorBase {
     var editorType = property.type;
@@ -112,7 +111,6 @@ export class SurveyPropertyEditorFactory {
       creator = SurveyPropertyEditorFactory.findParentCreator(editorType);
       propertyEditor = creator(property);
     }
-    propertyEditor.onChanged = func;
     return propertyEditor;
   }
   private static isDropdownEditor(

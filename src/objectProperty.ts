@@ -37,9 +37,9 @@ export class SurveyObjectProperty {
     };
     this.editor = SurveyPropertyEditorFactory.createEditor(
       property,
-      onItemChanged,
       isCellEditor
     );
+    this.editor.onChanged = onItemChanged;
     this.editor.onGetLocale = this.doOnGetLocale;
     this.editor.options = propertyEditorOptions;
     this.editorType = this.editor.editorType;
