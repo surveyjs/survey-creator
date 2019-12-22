@@ -1600,24 +1600,15 @@ QUnit.test(
 );
 
 QUnit.test(
-  "SurveyElementEditorContent.onPropertyChanging do not allow empty or number question.name",
+  "SurveyElementEditorContent do not allow empty value for a unique property",
   function(assert) {
     var question = new Survey.QuestionText("q1");
     var propEditor = new SurveyElementEditorContent(question);
-    propEditor.onPropertyChanging = function(
-      prop: Survey.JsonObjectProperty,
-      newValue: any
-    ): boolean {
-      if (prop.name !== "name") return true;
-      return !!newValue && newValue !== "_";
-    };
     var edName = propEditor.getPropertyEditorByName("name");
     edName.editor.koValue("");
     assert.equal(question.name, "q1", "The value is not changed");
     edName.editor.koValue("q2");
     assert.equal(question.name, "q2", "The value is changed");
-    edName.editor.koValue("_");
-    assert.equal(question.name, "q2", "The value is not changed again");
   }
 );
 

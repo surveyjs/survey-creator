@@ -9,7 +9,7 @@ import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFac
 
 export class SurveyObjectProperty {
   private objectValue: any;
-  public onChanging: (
+  public onCorrectValueBeforeSet: (
     propEditor: SurveyObjectProperty,
     newValue: any
   ) => boolean;
@@ -122,9 +122,10 @@ export class SurveyObjectProperty {
   protected onEditorValueChanged(newValue) {
     if (this.object) {
       var oldValue = this.object[this.property.name];
-      if (!this.onChanging || this.onChanging(this, newValue)) {
-        this.object[this.property.name] = newValue;
+      if (!!this.onCorrectValueBeforeSet) {
+        newValue = this.onCorrectValueBeforeSet(this, newValue);
       }
+      this.object[this.property.name] = newValue;
       if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();

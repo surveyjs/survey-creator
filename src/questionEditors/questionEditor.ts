@@ -260,11 +260,14 @@ export class SurveyQuestionProperties {
 }
 
 export class SurveyElementEditorContent {
-  public onPropertyChanging: (
+  public onCorrectValueBeforeSet: (
     prop: Survey.JsonObjectProperty,
     newValue: any
-  ) => boolean;
-  public onPropertyChanged: (prop: Survey.JsonObjectProperty, oldValue: any) => void;
+  ) => any;
+  public onPropertyChanged: (
+    prop: Survey.JsonObjectProperty,
+    oldValue: any
+  ) => void;
   public onAfterRenderCallback: (
     object: any,
     htmlElement: HTMLElement,
@@ -347,14 +350,17 @@ export class SurveyElementEditorContent {
   private assignEvents() {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
-      props[i].onChanging = (
+      props[i].onCorrectValueBeforeSet = (
         propEditor: SurveyObjectProperty,
         newValue: any
-      ): boolean => {
-        if (!this.onPropertyChanging) return true;
-        return this.onPropertyChanging(propEditor.property, newValue);
+      ): any => {
+        if (!this.onCorrectValueBeforeSet) return newValue;
+        return this.onCorrectValueBeforeSet(propEditor.property, newValue);
       };
-      props[i].onChanged = (propEditor: SurveyObjectProperty, oldValue: any): void => {
+      props[i].onChanged = (
+        propEditor: SurveyObjectProperty,
+        oldValue: any
+      ): void => {
         if (!!this.onPropertyChanged)
           this.onPropertyChanged(propEditor.property, oldValue);
       };
@@ -600,7 +606,16 @@ export class SurveyElementPropertyGrid {
     property1: Survey.JsonObjectProperty,
     property2: Survey.JsonObjectProperty
   ) => number;
-  public onPropertyChanged: (obj: any, prop: Survey.JsonObjectProperty, oldValue: any) => void;
+  public onPropertyChanged: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    oldValue: any
+  ) => void;
+  public onCorrectValueBeforeSet: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    newValue: any
+  ) => any;
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
@@ -620,9 +635,23 @@ export class SurveyElementPropertyGrid {
     if (!!value) {
       var elementEditor = this.createSurveyElementEditor(value);
       elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
-      elementEditor.onPropertyChanged = (prop: Survey.JsonObjectProperty, oldValue: any) => {
+      elementEditor.onPropertyChanged = (
+        prop: Survey.JsonObjectProperty,
+        oldValue: any
+      ) => {
         if (this.onPropertyChanged)
           this.onPropertyChanged(this.selectedObjectValue, prop, oldValue);
+      };
+      elementEditor.onCorrectValueBeforeSet = (
+        prop: Survey.JsonObjectProperty,
+        newValue: any
+      ): any => {
+        if (!this.onCorrectValueBeforeSet) return newValue;
+        return this.onCorrectValueBeforeSet(
+          this.selectedObjectValue,
+          prop,
+          newValue
+        );
       };
       this.koElementEditor(elementEditor);
     } else {

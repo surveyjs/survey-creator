@@ -873,6 +873,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ) {
       self.onPropertyChanged(obj, prop, oldValue);
     };
+    this.elementPropertyGridValue.onCorrectValueBeforeSet = function(
+      obj: any,
+      prop: Survey.JsonObjectProperty,
+      newValue: any
+    ): any {
+      return self.onPropertyCorrectValueBeforeSet(obj, prop, newValue);
+    };
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyLive = new SurveyLiveTester(this);
@@ -1728,18 +1735,23 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.surveyObjects.selectObject(obj);
     }
   }
+
+  private onPropertyCorrectValueBeforeSet(
+    obj: any,
+    property: Survey.JsonObjectProperty,
+    newValue: any
+  ) {
+    if (property.name === "page" && typeof newValue === "string") {
+      return obj.survey.getPageByName(newValue);
+    }
+    return newValue;
+  }
   public onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any
   ) {
     var oldValue = obj[property.name];
-    if (property.name === "page" && typeof newValue === "string") {
-      obj[property.name] = obj.survey.getPageByName(newValue);
-    } else {
-      obj[property.name] = newValue;
-    }
-
     this.setModified({
       type: "PROPERTY_CHANGED",
       name: property.name,

@@ -773,6 +773,32 @@ QUnit.test("Do not allow to select page object", function(assert) {
   assert.equal(creator.selectedElement.getType(), "survey");
 });
 
+QUnit.test("Change elemenent page", function(assert) {
+  var editor = new SurveyCreator();
+  editor.JSON = getSurveyJson();
+  editor.selectedElement = editor.survey.getQuestionByName("question1");
+  assert.equal(
+    editor.selectedElement.name,
+    "question1",
+    "question1 is selected"
+  );
+  assert.equal(editor.survey.currentPage.name, "page1", "page1 is current");
+  var objEditor = editor.selectedElementPropertyGrid.koElementEditor();
+  var propertyEditor = objEditor.getPropertyEditorByName("page");
+  propertyEditor.editor.koValue("page2");
+  assert.equal(
+    editor.selectedElement.name,
+    "question1",
+    "question1 is still selected"
+  );
+  assert.equal(
+    editor.selectedElement.page.name,
+    "page2",
+    "question1 has page2 now"
+  );
+  assert.equal(editor.survey.currentPage.name, "page2", "page2 is current");
+});
+
 function getSurveyJson(): any {
   return {
     pages: [
