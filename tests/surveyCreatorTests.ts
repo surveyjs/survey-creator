@@ -635,7 +635,6 @@ QUnit.test("PagesEditor change question's page", function(assert) {
   assert.equal(pagesEditor.selectedPage, editor["pages"]()[1]);
 });
 
-/* TODO - refactor
 QUnit.test(
   "Element name should be unique - property grid + Question Editor",
   function(assert) {
@@ -650,20 +649,27 @@ QUnit.test(
     namePropertyEditor.koValue("question2");
     assert.equal(
       namePropertyEditor.koValue(),
-      "question3",
-      "The name should be unique"
+      "question2",
+      "The name is changed in editor"
     );
-    question.name = "question";
-    editor.onQuestionEditorChanged(question);
-    assert.equal(question.name, "question", "the name is correct");
-    question.name = "question2";
-    editor.onQuestionEditorChanged(question);
-    assert.equal(question.name, "question3", "the name is corrected");
-    //should not have an error
-    editor.onQuestionEditorChanged(<any>editor.survey);
+    assert.equal(namePropertyEditor.hasError(), true, "It shows errror");
+    assert.equal(question.name, "question", "the name is not changed");
+    namePropertyEditor.koValue("question");
+    assert.equal(namePropertyEditor.hasError(), false, "There is no error now");
+    assert.equal(question.name, "question", "the name is still question");
+    namePropertyEditor.koValue("question4");
+    assert.equal(
+      namePropertyEditor.hasError(),
+      false,
+      "There is no error again"
+    );
+    assert.equal(
+      question.name,
+      "question4",
+      "the name is changed to question4"
+    );
   }
 );
-*/
 
 QUnit.test("Update conditions/expressions on changing question.name", function(
   assert

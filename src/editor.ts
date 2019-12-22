@@ -866,7 +866,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ): number {
       return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
     };
-    this.elementPropertyGridValue.onPropertyChanged = function(obj: any, prop: Survey.JsonObjectProperty, oldValue: any) {
+    this.elementPropertyGridValue.onPropertyChanged = function(
+      obj: any,
+      prop: Survey.JsonObjectProperty,
+      oldValue: any
+    ) {
       self.onPropertyChanged(obj, prop, oldValue);
     };
 
@@ -1689,7 +1693,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
-  private onPropertyChanged(obj: any, property: Survey.JsonObjectProperty, oldValue: any) {
+  private getErrorOnPropertyChanging(
+    obj: Survey.Base,
+    propertyName: string,
+    value: any
+  ): string {
+    if (propertyName !== "name") return null;
+    var newName = this.generateUniqueName(obj, value);
+    if (newName !== value)
+      return this.getLocString("pe.propertyNameIsNotUnique");
+    return null;
+  }
+  private onPropertyChanged(
+    obj: any,
+    property: Survey.JsonObjectProperty,
+    oldValue: any
+  ) {
     var value = obj[property.name];
     if (property.name == "name") {
       this.updateConditions(oldValue, value);
@@ -2743,6 +2762,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     value: any
   ): string {
+    var error = this.getErrorOnPropertyChanging(obj, propertyName, value);
+    if (!!error) return error;
     var options = {
       propertyName: propertyName,
       obj: obj,

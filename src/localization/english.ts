@@ -222,6 +222,7 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
+    propertyNameIsNotUnique: "Please enter a unique name",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",
