@@ -88,7 +88,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   editor.getPropertyEditorByName("name").editor.koValue("newName");
   editor.getPropertyEditorByName("title").editor.koValue("new title");
   editor.getPropertyEditorByName("visibleIf").editor.koValue("false");
-  editor.apply();
+  assert.ok(editor.apply(), "Applied correctly");
   assert.equal(changeCounter, 1, "changed one time");
   assert.equal(dropdownQuestion.name, "newName", "name assign correct");
   assert.equal(dropdownQuestion.title, "new title", "title assign correct");

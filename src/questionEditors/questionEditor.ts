@@ -549,10 +549,6 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
       appliedSuccesfull = this.apply();
     }
     if (isCancel || appliedSuccesfull) {
-      var tabs = this.koTabs();
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].doCloseWindow();
-      }
       if (this.onHideWindow) this.onHideWindow();
     }
   }
@@ -568,21 +564,19 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
     var isFirstError = false;
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
-      var tabRes = tabs[i].apply();
-      if (!tabRes) {
+      var tabRes = tabs[i].hasError();
+      if (tabRes) {
         tabs[i].expand();
         if (!isFirstError) {
           this.koActiveTab(tabs[i].name);
           isFirstError = true;
         }
       }
-      res = tabRes && res;
+      res = !tabRes && res;
     }
 
     if (res) {
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].applyToObj(this.obj);
-      }
+      this.editableObject.applyAll();
       if (this.onChanged) {
         this.onChanged(this.obj);
       }
@@ -740,7 +734,6 @@ export class SurveyQuestionEditorTab {
   public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     return this.properties.getPropertyEditorByName(propertyName);
   }
-  public doCloseWindow() {}
   protected getValue(property: Survey.JsonObjectProperty): any {
     return property.getPropertyValue(this.obj);
   }
