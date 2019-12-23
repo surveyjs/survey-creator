@@ -93,8 +93,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       self.apply();
     };
     self.onOkClick = function() {
-      self.apply();
-      if (!self.koHasError()) self.onHideModal();
+      var res = self.apply();
+      if (res) self.onHideModal();
     };
     self.onResetClick = function() {
       self.updateValue();

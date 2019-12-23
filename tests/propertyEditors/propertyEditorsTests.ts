@@ -448,6 +448,27 @@ QUnit.test(
 );
 
 QUnit.test(
+  "SurveyPropertyItemValuesEditor - returns error on empty value",
+  function(assert) {
+    var question = new Survey.QuestionCheckbox("q1");
+    question.choices = ["1|item1", "item2"];
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.object = question;
+    editor.beforeShow();
+    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    assert.equal(editor.hasError(), false, "There is no errors");
+    itemViewModel.cells[0].koValue("");
+    assert.equal(editor.hasError(), true, "There is an error");
+    editor.onDeleteClick(itemViewModel);
+    assert.equal(
+      editor.hasError(),
+      false,
+      "The item with empty value is deleted"
+    );
+  }
+);
+
+QUnit.test(
   "SurveyPropertyTextEditor - do not change value on adding in modal window and set it after apply only",
   function(assert) {
     SurveyPropertyEditorFactory.registerEditor("text", function(
