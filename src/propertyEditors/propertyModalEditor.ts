@@ -145,6 +145,13 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.isBeforeShowCalledValue = true;
     this.updateValue();
   }
+  public updatePropertyValue(newValue: any) {
+    var obj = this.object;
+    if (!!this.modalEditableObject) {
+      obj = this.modalEditableObject.editableObj;
+    }
+    obj[this.property.name] = newValue;
+  }
   protected getOrigionalValue(): any {
     if (!!this.modalEditableObject) {
       return this.modalEditableObject.editableObj[this.property.name];
@@ -159,10 +166,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     }
   }
   protected beforeShowModal() {
-    this.modalEditableObject = null;
-    if (!!this.origionalValue) {
-      this.modalEditableObject = new EditableObject(this.object);
-    }
+    this.modalEditableObject = new EditableObject(this.object);
     this.koIsShowingModal(true);
   }
   protected isShowingModal(): boolean {

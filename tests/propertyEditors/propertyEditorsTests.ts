@@ -52,6 +52,19 @@ class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEdi
   }
 }
 
+class SurveyPropertyTextEditorForTests extends SurveyPropertyTextEditor {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public doShowModal() {
+    this.beforeShowModal();
+    this.beforeShow();
+  }
+  public doCloseModal() {
+    this.beforeCloseModal();
+  }
+}
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [
@@ -431,6 +444,44 @@ QUnit.test(
     assert.equal(question.choices[0].value, 1, "We do not apply the changes#2");
     editor.onApplyClick();
     assert.equal(question.choices[0].value, 7, "We applied on changes");
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyTextEditor - do not change value on adding in modal window and set it after apply only",
+  function(assert) {
+    SurveyPropertyEditorFactory.registerEditor("text", function(
+      property: Survey.JsonObjectProperty
+    ): SurveyPropertyEditorBase {
+      return new SurveyPropertyTextEditorForTests(property);
+    });
+
+    var question = new Survey.QuestionCheckbox("q1");
+    var objProperty = new SurveyObjectProperty(
+      Survey.Serializer.findProperty("question", "description")
+    );
+    objProperty.object = question;
+    var editor = <SurveyPropertyTextEditorForTests>objProperty.editor;
+    editor.doShowModal();
+    editor.koValue("New description");
+    assert.notOk(question.description, "It is empty");
+    editor.doCloseModal();
+    assert.notOk(question.description, "It is empty");
+    editor.doShowModal();
+    editor.koValue("desc1");
+    assert.notOk(question.description, "It is empty");
+    editor.onApplyClick();
+    assert.equal(
+      question.description,
+      "desc1",
+      "Set the value from modal window"
+    );
+    editor.doCloseModal();
+    SurveyPropertyEditorFactory.registerEditor("text", function(
+      property: Survey.JsonObjectProperty
+    ): SurveyPropertyEditorBase {
+      return new SurveyPropertyTextEditor(property);
+    });
   }
 );
 

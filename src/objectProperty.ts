@@ -125,7 +125,7 @@ export class SurveyObjectProperty {
       if (!!this.onCorrectValueBeforeSet) {
         newValue = this.onCorrectValueBeforeSet(this, newValue);
       }
-      this.object[this.property.name] = newValue;
+      this.editor.updatePropertyValue(newValue);
       if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();
