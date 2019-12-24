@@ -76,6 +76,12 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     return editor;
   }
   protected onCreateEditor(editor: SurveyElementEditorContent) {}
+  protected onItemDeleted(obj: any, index: number) {
+    if (index >= this.origionalValue.length) {
+      index = this.origionalValue.length - 1;
+    }
+    this.koSelected(index > -1 ? this.origionalValue[index] : null);
+  }
   private selectNewItem(isNew: boolean) {
     if (!this.koSelected || !Array.isArray(this.origionalValue)) return;
     var index = this.origionalValue.length - 1;

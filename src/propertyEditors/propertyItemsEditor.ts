@@ -51,9 +51,11 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     var index = this.origionalValue.indexOf(obj);
     if (index > -1) {
       this.origionalValue.splice(index, 1);
+      this.onItemDeleted(obj, index);
     }
     this.deleteViewItemIndex(obj);
   }
+  protected onItemDeleted(obj: any, index: number) {}
   public hasError(): boolean {
     for (var i = 0; i < this.viewItems.length; i++) {
       var item = this.viewItems[i];
