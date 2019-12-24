@@ -63,6 +63,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   protected onValueChanged() {
     super.onValueChanged();
+    this.koAvailableClasses(this.getAvailableClasses());
     this.selectNewItem(false);
   }
   private createSelectedObjEditor(item: any): SurveyElementEditorContent {
