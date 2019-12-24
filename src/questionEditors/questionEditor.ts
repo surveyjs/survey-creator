@@ -728,9 +728,6 @@ export class SurveyQuestionEditorTab {
   public reset() {
     this.properties.reset();
   }
-  public apply(): boolean {
-    return this.properties.apply();
-  }
   public applyToObj(obj: Survey.Base) {
     return this.properties.applyToObj(obj);
   }

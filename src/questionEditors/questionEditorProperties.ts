@@ -17,11 +17,6 @@ export class SurveyQuestionEditorProperties {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildEditorProperties(properties);
   }
-  public apply() {
-    var res = true;
-    this.performForAllProperties(p => (res = p.apply() && res));
-    return res;
-  }
   public applyToObj(obj: Survey.Base) {
     this.performForAllProperties(p => p.applyToObj(obj));
   }

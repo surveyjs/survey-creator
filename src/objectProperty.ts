@@ -82,14 +82,6 @@ export class SurveyObjectProperty {
   public hasError(): boolean {
     return this.editor.hasError();
   }
-  public apply(): boolean {
-    if (!this.object) return false;
-    if (this.editor.apply()) {
-      this.object[this.property.name] = this.editor.koValue();
-      return true;
-    }
-    return false;
-  }
   public applyToObj(obj: Survey.Base) {
     if (
       !!this.object &&
