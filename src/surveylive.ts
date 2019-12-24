@@ -191,29 +191,32 @@ export class SurveyLiveTester {
     this.koActiveLanguage(this.survey.locale);
     this.koIsRunning(true);
   }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
+  }
   public get testSurveyAgainText() {
-    return editorLocalization.getString("ed.testSurveyAgain");
+    return this.getLocString("ed.testSurveyAgain");
   }
   public get surveyResultsText() {
-    return editorLocalization.getString("ed.surveyResults");
+    return this.getLocString("ed.surveyResults");
   }
   public get resultsTitle() {
-    return editorLocalization.getString("ed.resultsTitle");
+    return this.getLocString("ed.resultsTitle");
   }
   public get resultsName() {
-    return editorLocalization.getString("ed.resultsName");
+    return this.getLocString("ed.resultsName");
   }
   public get resultsValue() {
-    return editorLocalization.getString("ed.resultsValue");
+    return this.getLocString("ed.resultsValue");
   }
   public get resultsDisplayValue() {
-    return editorLocalization.getString("ed.resultsDisplayValue");
+    return this.getLocString("ed.resultsDisplayValue");
   }
   public get selectPageText() {
-    return editorLocalization.getString("ts.selectPage");
+    return this.getLocString("ts.selectPage");
   }
   public get showInvisibleElementsText() {
-    return editorLocalization.getString("ts.showInvisibleElements");
+    return this.getLocString("ts.showInvisibleElements");
   }
   public selectTableClick(model: SurveyLiveTester) {
     model.koResultViewType("table");
@@ -222,13 +225,13 @@ export class SurveyLiveTester {
     model.koResultViewType("text");
   }
   public get localeText() {
-    return editorLocalization.getString("pe.locale");
+    return this.getLocString("pe.locale");
   }
   public get simulatorText() {
-    return editorLocalization.getString("pe.simulator");
+    return this.getLocString("pe.simulator");
   }
   public get landscapeOrientationText() {
-    return editorLocalization.getString("pe.landscapeOrientation");
+    return this.getLocString("pe.landscapeOrientation");
   }
   private testAgain() {
     this.setJSON(this.json);
@@ -267,7 +270,7 @@ export class SurveyLiveTester {
         : Survey.surveyLocalization.getLocales();
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
-      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
+      res.push({ value: loc, text: this.getLocString(loc) });
     }
     return res;
   }

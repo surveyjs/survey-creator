@@ -1,6 +1,6 @@
 <script type="text/html" id="surveylogic">
   <div data-bind="visible: koMode() == 'view'">
-    <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $root.getLocString('pe.addNew')" />
+    <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew')" />
     <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
       <div class="svd-logic-item-header">
           <span class="svd-logic-header-item-icon svd-main-color" data-bind="visible: !$data.isReadOnly, key2click, clickNoFocus: $data.edit, attr: {title: $data.editText }">
@@ -25,9 +25,9 @@
   </div>
   <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
     <div>
-      <input type="button" class="btn btn-primary" data-bind="click:$data.koSaveAndShowView, value: $root.getLocString('pe.saveAndBack')" />
-      <input type="button" class="btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $root.getLocString('pe.save')"/>
-      <input type="button" class="btn btn-primary" data-bind="click: $data.koShowView, value: $root.getLocString('pe.back')"/>
+      <input type="button" class="btn btn-primary" data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack')" />
+      <input type="button" class="btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save')"/>
+      <input type="button" class="btn btn-primary" data-bind="click: $data.koShowView, value: $data.getLocString('pe.back')"/>
   </div>
     <div>
       <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->

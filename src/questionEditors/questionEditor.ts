@@ -300,6 +300,9 @@ export class SurveyElementEditorContent {
       this.koActiveTab(tabs[0].name);
     }
   }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
+  }
   protected setOrigionalObjValue(obj: any) {
     this.origionalObjValue = obj;
   }

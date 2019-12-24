@@ -49,7 +49,7 @@
       <!-- ko if: !toolbox.koHasCategories() -->
       <div
         class="svd_toolbox_title hidden-sm hidden-xs"
-        data-bind="text: $root.getLocString('ed.toolbox')"
+        data-bind="text: $data.getLocString('ed.toolbox')"
       ></div>
       <!-- ko foreach: toolbox.koItems -->
         <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
@@ -102,7 +102,7 @@
     >
       <div class="svd-property-grid__header">
         <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-        <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: $root.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
+        <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: $data.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
       </div>
       <div class="svd_object_selector svd-light-border-color">
         <div class="svd_custom_select">
@@ -114,7 +114,7 @@
           ></select>
         </div>
         <span
-          data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}"
+          data-bind="click: editCurrentObject, attr: { title: $data.getLocString('ed.editSelObject')}"
         >
           <svg-icon
             class="svd-primary-icon icon-edit"
@@ -141,13 +141,13 @@
     <div class="svd-survey-placeholder">
       <!-- ko if: showExternalHelpLink -->
       <div class="svd-survey-gallery">
-        <a data-bind="attr: { href: $root.getLocString('survey.externalHelpLinkUrl') }">
+        <a data-bind="attr: { href: $data.getLocString('survey.externalHelpLinkUrl') }">
           <img src="../images/YouTube.png"/>
-          <span data-bind="text: $root.getLocString('survey.externalHelpLink')"></span>
+          <span data-bind="text: $data.getLocString('survey.externalHelpLink')"></span>
         </a>
       </div>
       <!-- /ko -->
-      <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
+      <div class="empty-message" data-bind="text: $data.getLocString('survey.dropQuestion')"></div>
     </div>
   </div>
 </script>
