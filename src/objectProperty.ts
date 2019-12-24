@@ -93,6 +93,12 @@ export class SurveyObjectProperty {
       return;
     obj[this.property.name] = this.object[this.property.name];
   }
+  public get isInPropertyGrid(): boolean {
+    return this.editor.isInPropertyGrid;
+  }
+  public set isInPropertyGrid(val: boolean) {
+    this.editor.isInPropertyGrid = val;
+  }
   public reset() {
     if (!this.object) return;
     this.editor.koValue(this.property.getPropertyValue(this.object));

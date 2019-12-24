@@ -294,7 +294,7 @@ export class SurveyElementEditorContent {
     );
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
-    this.assignEvents();
+    this.assignPropertiesToEditors();
     tabs.forEach(tab => tab.beforeShow());
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
@@ -350,29 +350,32 @@ export class SurveyElementEditorContent {
     this.addPropertiesTabs(tabs);
     return tabs;
   }
-  private assignEvents() {
+  private assignPropertiesToEditors() {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
-      props[i].onCorrectValueBeforeSet = (
-        propEditor: SurveyObjectProperty,
-        newValue: any
-      ): any => {
-        if (!this.onCorrectValueBeforeSet) return newValue;
-        return this.onCorrectValueBeforeSet(propEditor.property, newValue);
-      };
-      props[i].onChanged = (
-        propEditor: SurveyObjectProperty,
-        oldValue: any
-      ): void => {
-        if (!!this.onPropertyChanged)
-          this.onPropertyChanged(propEditor.property, oldValue);
-      };
-      props[i].getObjectPropertyByName = (
-        propertyName: string
-      ): SurveyObjectProperty => {
-        return this.getPropertyEditorByName(propertyName);
-      };
+      this.assignPropertiesToEditor(props[i]);
     }
+  }
+  protected assignPropertiesToEditor(propEditor: SurveyObjectProperty) {
+    propEditor.onCorrectValueBeforeSet = (
+      propEditor: SurveyObjectProperty,
+      newValue: any
+    ): any => {
+      if (!this.onCorrectValueBeforeSet) return newValue;
+      return this.onCorrectValueBeforeSet(propEditor.property, newValue);
+    };
+    propEditor.onChanged = (
+      propEditor: SurveyObjectProperty,
+      oldValue: any
+    ): void => {
+      if (!!this.onPropertyChanged)
+        this.onPropertyChanged(propEditor.property, oldValue);
+    };
+    propEditor.getObjectPropertyByName = (
+      propertyName: string
+    ): SurveyObjectProperty => {
+      return this.getPropertyEditorByName(propertyName);
+    };
   }
   protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var tabItems = this.properties.getTabs();
@@ -443,6 +446,10 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     var properties = this.getProperties();
     var tabItem = new SurveyQuestionEditorTabDefinition();
     tabs.push(this.createNewTab(tabItem, properties));
+  }
+  protected assignPropertiesToEditor(propEditor: SurveyObjectProperty) {
+    super.assignPropertiesToEditor(propEditor);
+    propEditor.isInPropertyGrid = true;
   }
   private getObjectProperties(): Array<SurveyObjectProperty> {
     var res = [];

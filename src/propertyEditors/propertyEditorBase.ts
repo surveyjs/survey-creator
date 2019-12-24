@@ -174,10 +174,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get title(): string {
     return this.titleValue;
   }
-  public isPropertyGrid: boolean = false;
+  public isInPropertyGrid: boolean = false;
   public get isDiplayNameVisible() {
     return (
-      !this.isPropertyGrid &&
+      !this.isInPropertyGrid &&
       !this.isShowingModal() &&
       !this.isInplaceProperty &&
       this.displayName !== "." &&
