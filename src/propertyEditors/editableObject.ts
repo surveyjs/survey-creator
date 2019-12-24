@@ -10,8 +10,9 @@ export class EditableObject {
     if (!!object) {
       if (!!object.survey)
         return EditableObject.getOrigionalSurvey(object.survey);
-      if (!!object.owner)
-        return EditableObject.getOrigionalSurvey(object.owner);
+      if (!!object.owner) return EditableObject.getSurvey(object.owner);
+      if (!!object.errorOwner)
+        return EditableObject.getSurvey(object.errorOwner);
     }
     return null;
   }

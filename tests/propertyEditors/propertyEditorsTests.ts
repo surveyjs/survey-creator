@@ -1732,3 +1732,35 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test(
+  "expression editor in question expression validator should has access to survey",
+  function(assert) {
+    var survey = new Survey.SurveyModel();
+    survey.addNewPage("p");
+    var question = <Survey.QuestionTextModel>(
+      survey.pages[0].addNewQuestion("text", "q1")
+    );
+    survey.pages[0].addNewQuestion("text", "q2");
+    survey.pages[0].addNewQuestion("text", "q3");
+    var validatorsProp = new SurveyObjectProperty(
+      Survey.Serializer.findProperty("question", "validators")
+    );
+    validatorsProp.object = question;
+    var validatorsEditor = <SurveyPropertyValidatorsEditor>(
+      validatorsProp.editor
+    );
+    validatorsEditor.onAddClick({ value: "expressionvalidator" });
+    assert.equal(question.validators.length, 1, "There is one validator now");
+    var conditionProp = validatorsEditor
+      .selectedObjectEditor()
+      .getPropertyEditorByName("expression");
+    assert.ok(conditionProp, "Condition editor is here");
+    var conditionEditor = <SurveyPropertyConditionEditor>conditionProp.editor;
+    assert.equal(
+      conditionEditor.koConditionQuestions().length,
+      3,
+      "There are 3 questions in the survey"
+    );
+  }
+);

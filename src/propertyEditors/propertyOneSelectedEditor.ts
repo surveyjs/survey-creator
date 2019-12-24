@@ -96,9 +96,6 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
       this.koSelected(val);
     }
   }
-  protected createEditorItem(item: Survey.Base) {
-    return item;
-  }
   protected createNewItem(): any {
     return Survey.Serializer.createClass(this.getObjClassName());
   }
