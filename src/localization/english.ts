@@ -223,6 +223,7 @@ export var enStrings = {
 
     propertyIsEmpty: "Please enter a value",
     propertyNameIsNotUnique: "Please enter a unique name",
+    listIsEmpty: "Add a new item",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",

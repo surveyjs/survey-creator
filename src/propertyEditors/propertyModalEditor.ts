@@ -266,3 +266,5 @@ SurveyPropertyEditorFactory.registerEditor("html", function(
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyHtmlEditor(property);
 });
+SurveyPropertyEditorFactory.registerTypeForCellEditing("text", "string");
+SurveyPropertyEditorFactory.registerTypeForCellEditing("html", "string");
