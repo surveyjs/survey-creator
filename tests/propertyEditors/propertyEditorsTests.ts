@@ -52,6 +52,19 @@ class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEdi
   }
 }
 
+class SurveyPropertyTextEditorForTests extends SurveyPropertyTextEditor {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public doShowModal() {
+    this.beforeShowModal();
+    this.beforeShow();
+  }
+  public doCloseModal() {
+    this.beforeCloseModal();
+  }
+}
+
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
     pages: [
@@ -90,7 +103,7 @@ function createSurvey(): Survey.Survey {
 QUnit.test("Create correct property editor", function(assert) {
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "unknown";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propertyEditor.editorType,
     "string",
@@ -115,7 +128,7 @@ QUnit.test("Create correct property editor", function(assert) {
   for (var i = 0; i < propertyTypes.length; i++) {
     var propType = propertyTypes[i];
     property.type = propType;
-    propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+    propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
     assert.equal(
       propertyEditor.editorType,
       propType,
@@ -126,7 +139,7 @@ QUnit.test("Create correct property editor", function(assert) {
 QUnit.test("propertyEditor.displayName", function(assert) {
   var property = Survey.Serializer.findProperty("question", "enableIf");
   defaultStrings.p["enableIf"] = "It is enableIf";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propertyEditor.displayName,
     "It is enableIf",
@@ -146,7 +159,7 @@ QUnit.test("Create custom property editor", function(assert) {
   Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "customBool";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
   assert.deepEqual(
     (<SurveyPropertyCustomEditor>propertyEditor).widgetJSON,
@@ -172,7 +185,7 @@ QUnit.test(
     var property = new Survey.JsonObjectProperty("testname");
     property.type = "customBool";
     var propertyEditor = <SurveyPropertyCustomEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     assert.equal(renderCount, 0, "Initial counter");
     assert.equal(propertyEditor.object, undefined, "Object is not assigned");
@@ -195,7 +208,7 @@ QUnit.test("Custom property editor - validation", function(assert) {
   Extentions.registerCustomPropertyEditor("customVal", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
   property.type = "customVal";
-  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
   assert.deepEqual(
     (<SurveyPropertyCustomEditor>propertyEditor).widgetJSON,
@@ -434,6 +447,65 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - returns error on empty value",
+  function(assert) {
+    var question = new Survey.QuestionCheckbox("q1");
+    question.choices = ["1|item1", "item2"];
+    var editor = new SurveyPropertyItemValuesEditorForTests();
+    editor.object = question;
+    editor.beforeShow();
+    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    assert.equal(editor.hasError(), false, "There is no errors");
+    itemViewModel.cells[0].koValue("");
+    assert.equal(editor.hasError(), true, "There is an error");
+    editor.onDeleteClick(itemViewModel);
+    assert.equal(
+      editor.hasError(),
+      false,
+      "The item with empty value is deleted"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyTextEditor - do not change value on adding in modal window and set it after apply only",
+  function(assert) {
+    SurveyPropertyEditorFactory.registerEditor("text", function(
+      property: Survey.JsonObjectProperty
+    ): SurveyPropertyEditorBase {
+      return new SurveyPropertyTextEditorForTests(property);
+    });
+
+    var question = new Survey.QuestionCheckbox("q1");
+    var objProperty = new SurveyObjectProperty(
+      Survey.Serializer.findProperty("question", "description")
+    );
+    objProperty.object = question;
+    var editor = <SurveyPropertyTextEditorForTests>objProperty.editor;
+    editor.doShowModal();
+    editor.koValue("New description");
+    assert.notOk(question.description, "It is empty");
+    editor.doCloseModal();
+    assert.notOk(question.description, "It is empty");
+    editor.doShowModal();
+    editor.koValue("desc1");
+    assert.notOk(question.description, "It is empty");
+    editor.onApplyClick();
+    assert.equal(
+      question.description,
+      "desc1",
+      "Set the value from modal window"
+    );
+    editor.doCloseModal();
+    SurveyPropertyEditorFactory.registerEditor("text", function(
+      property: Survey.JsonObjectProperty
+    ): SurveyPropertyEditorBase {
+      return new SurveyPropertyTextEditor(property);
+    });
+  }
+);
+
 /* TODO after refactor
 QUnit.test("SurveyPropertyItemValue: Value and Text are same", function(
   assert
@@ -641,7 +713,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   );
   var property = new Survey.JsonObjectProperty("test");
   property.type = "itemvalues_ex[]";
-  var propEditor = SurveyPropertyEditorFactory.createEditor(property, null);
+  var propEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
     propEditor.editorType,
     "itemvalue[]",
@@ -674,7 +746,7 @@ QUnit.test(
     var property = Survey.Serializer.findProperty("checkbox", "test");
     property.type = "itemvalues_ex[]";
     var propertyEditor = <SurveyPropertyItemValuesEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     var question = new Survey.QuestionCheckbox("q1");
     propertyEditor.object = question;
@@ -726,7 +798,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + locale", function(assert) {
   survey.locale = "de";
   var property = Survey.Serializer.findProperty("selectbase", "choices");
   var propEditor = <SurveyPropertyItemValuesEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.onGetLocale = function() {
     return survey.locale;
@@ -766,7 +838,7 @@ QUnit.test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", function(
     "columns"
   );
   var propEditor = <SurveyPropertyDropdownColumnsEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.onGetLocale = function() {
     return survey.locale;
@@ -1458,7 +1530,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
 
   var property = Survey.Serializer.findProperty("selectbase", "choices");
   var propEditor = <SurveyPropertyItemValuesEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.object = q;
   propEditor.beforeShow();
@@ -1498,13 +1570,12 @@ QUnit.test(
       "expression"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(expressionProperty, null)
-        .editorType,
+      SurveyPropertyEditorFactory.createEditor(expressionProperty).editorType,
       "expression",
       "By default create expression"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(expressionProperty, null, true)
+      SurveyPropertyEditorFactory.createEditor(expressionProperty, true)
         .editorType,
       "string",
       "For cell editor create string, not expression"
@@ -1514,13 +1585,12 @@ QUnit.test(
       "visibleIf"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(conditionProperty, null)
-        .editorType,
+      SurveyPropertyEditorFactory.createEditor(conditionProperty).editorType,
       "condition",
       "By default create condition"
     );
     assert.equal(
-      SurveyPropertyEditorFactory.createEditor(conditionProperty, null, true)
+      SurveyPropertyEditorFactory.createEditor(conditionProperty, true)
         .editorType,
       "string",
       "For cell editor create string, not condition"
@@ -1532,7 +1602,7 @@ QUnit.test("SurveyPropertyCalculatedValueEditor", function(assert) {
   var survey = new Survey.Survey();
   var property = Survey.Serializer.findProperty("survey", "calculatedValues");
   var propEditor = <SurveyPropertyCalculatedValueEditor>(
-    SurveyPropertyEditorFactory.createEditor(property, null)
+    SurveyPropertyEditorFactory.createEditor(property)
   );
   propEditor.beforeShow();
   propEditor.object = survey;
@@ -1580,7 +1650,7 @@ QUnit.test(
     var survey = new Survey.Survey();
     var property = Survey.Serializer.findProperty("survey", "calculatedValues");
     var propEditor = <SurveyPropertyCalculatedValueEditor>(
-      SurveyPropertyEditorFactory.createEditor(property, null)
+      SurveyPropertyEditorFactory.createEditor(property)
     );
     propEditor.beforeShow();
     propEditor.object = survey;
@@ -1602,24 +1672,15 @@ QUnit.test(
 );
 
 QUnit.test(
-  "SurveyElementEditorContent.onPropertyChanging do not allow empty or number question.name",
+  "SurveyElementEditorContent do not allow empty value for a unique property",
   function(assert) {
     var question = new Survey.QuestionText("q1");
     var propEditor = new SurveyElementEditorContent(question);
-    propEditor.onPropertyChanging = function(
-      prop: Survey.JsonObjectProperty,
-      newValue: any
-    ): boolean {
-      if (prop.name !== "name") return true;
-      return !!newValue && newValue !== "_";
-    };
     var edName = propEditor.getPropertyEditorByName("name");
     edName.editor.koValue("");
     assert.equal(question.name, "q1", "The value is not changed");
     edName.editor.koValue("q2");
     assert.equal(question.name, "q2", "The value is changed");
-    edName.editor.koValue("_");
-    assert.equal(question.name, "q2", "The value is not changed again");
   }
 );
 
@@ -1668,6 +1729,38 @@ QUnit.test(
       question.getCellText(0, "col2"),
       "row1_col2_Updated",
       "Set cell into matrix succesfull"
+    );
+  }
+);
+
+QUnit.test(
+  "expression editor in question expression validator should has access to survey",
+  function(assert) {
+    var survey = new Survey.SurveyModel();
+    survey.addNewPage("p");
+    var question = <Survey.QuestionTextModel>(
+      survey.pages[0].addNewQuestion("text", "q1")
+    );
+    survey.pages[0].addNewQuestion("text", "q2");
+    survey.pages[0].addNewQuestion("text", "q3");
+    var validatorsProp = new SurveyObjectProperty(
+      Survey.Serializer.findProperty("question", "validators")
+    );
+    validatorsProp.object = question;
+    var validatorsEditor = <SurveyPropertyValidatorsEditor>(
+      validatorsProp.editor
+    );
+    validatorsEditor.onAddClick({ value: "expressionvalidator" });
+    assert.equal(question.validators.length, 1, "There is one validator now");
+    var conditionProp = validatorsEditor
+      .selectedObjectEditor()
+      .getPropertyEditorByName("expression");
+    assert.ok(conditionProp, "Condition editor is here");
+    var conditionEditor = <SurveyPropertyConditionEditor>conditionProp.editor;
+    assert.equal(
+      conditionEditor.koConditionQuestions().length,
+      3,
+      "There are 3 questions in the survey"
     );
   }
 );

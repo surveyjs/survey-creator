@@ -69,6 +69,8 @@ export interface IToolbarItem {
   items?: ko.ObservableArray<IToolbarItem>;
 }
 
+type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
+
 /**
  * Survey Creator is WYSIWYG editor.
  */
@@ -763,13 +765,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koShowSaveButton: any;
   koGenerateValidJSON: any;
   koShowOptions: any;
-  koShowPropertyGrid = ko.observable(true);
+  koShowPropertyGrid = ko.observable<ContainerLocation>(true);
+  koShowToolbox = ko.observable<ContainerLocation>(true);
   koShowCategoriesInPropertyGrid = ko.observable(false);
-  koShowToolbox = ko.observable(true);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
   koDesignerHeight: any;
-  koShowPagesToolbox: any;
+  koShowPagesToolbox = ko.observable<ContainerLocation>(true);
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -795,7 +797,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koShowOptions = ko.observable();
     this.koGenerateValidJSON = ko.observable(true);
     this.koDesignerHeight = ko.observable();
-    this.koShowPagesToolbox = ko.observable(true);
     this.setOptions(options);
     this.koCanDeleteObject = ko.observable(false);
 
@@ -871,6 +872,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       oldValue: any
     ) {
       self.onPropertyChanged(obj, prop, oldValue);
+    };
+    this.elementPropertyGridValue.onCorrectValueBeforeSet = function(
+      obj: any,
+      prop: Survey.JsonObjectProperty,
+      newValue: any
+    ): any {
+      return self.onPropertyCorrectValueBeforeSet(obj, prop, newValue);
     };
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
@@ -1503,15 +1511,39 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Set it to false to completely hide the Property Grid on the right. It allows to edit the properties of the selected object (question/panel/page/survey).
    */
   public get showPropertyGrid() {
-    return this.koShowPropertyGrid();
+    return (
+      this.koShowPropertyGrid() !== false &&
+      this.koShowPropertyGrid() !== "none"
+    );
   }
-  public set showPropertyGrid(value: boolean) {
-    if (this.showPropertyGrid == value) return;
-    if (value) {
-      this.setNewObjToPropertyGrid(this.koSelectedObject());
+  public set showPropertyGrid(value: ContainerLocation) {
+    if (this.koShowPropertyGrid() != value) {
+      this._leftContainer.remove("property-grid");
+      this._rightContainer.remove("property-grid");
+      if (value === "right" || value === true) {
+        this._rightContainer.push("property-grid");
+      }
+      if (value === "left") {
+        this._leftContainer.push("property-grid");
+      }
+      if (value !== false && value !== "none") {
+        this.setNewObjToPropertyGrid(this.koSelectedObject());
+      }
+      this.koShowPropertyGrid(value);
+      this.koHideAdvancedSettings(!this.showPropertyGrid);
     }
-    this.koShowPropertyGrid(value);
-    this.koHideAdvancedSettings(!value);
+  }
+  /**
+   * Set it to false to  hide the pages toolbox on the top.
+   */
+  public get showPagesToolbox() {
+    return (
+      this.koShowPagesToolbox() !== false &&
+      this.koShowPagesToolbox() !== "none"
+    );
+  }
+  public set showPagesToolbox(value: ContainerLocation) {
+    this.koShowPagesToolbox(value);
   }
   /**
    * Set this property to true to show the old style property grid on the right.
@@ -1526,10 +1558,20 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Set it to false to  hide the question toolbox on the left.
    */
   public get showToolbox() {
-    return this.koShowToolbox();
+    return this.koShowToolbox() !== false && this.koShowToolbox() !== "none";
   }
-  public set showToolbox(value: boolean) {
-    this.koShowToolbox(value);
+  public set showToolbox(value: ContainerLocation) {
+    if (this.koShowToolbox() != value) {
+      this._leftContainer.remove("toolbox");
+      this._rightContainer.remove("toolbox");
+      if (value === "left" || value === true) {
+        this._leftContainer.push("toolbox");
+      }
+      if (value === "right") {
+        this._rightContainer.push("toolbox");
+      }
+      this.koShowToolbox(value);
+    }
   }
   /**
    * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
@@ -1594,6 +1636,31 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
+  }
+  private _leftContainer = ko.observableArray<string>(["toolbox"]);
+  public get leftContainer() {
+    return this._leftContainer();
+  }
+  private _rightContainer = ko.observableArray<string>(["property-grid"]);
+  public get rightContainer() {
+    if (!this._koRightContainerTab() && this._rightContainer().length > 1) {
+      this._koRightContainerTab(this._rightContainer()[0]);
+    }
+    return this._rightContainer();
+  }
+  private _koRightContainerTab = ko.observable<string>();
+  public get rightContainerTab() {
+    return this._koRightContainerTab();
+  }
+  public set rightContainerTab(value) {
+    this._koRightContainerTab(value);
+  }
+  private _topContainer = ko.observableArray<string>([
+    "toolbar",
+    "pages-editor"
+  ]);
+  public get topContainer() {
+    return this._topContainer();
   }
   public canShowObjectProperty(object: any, propertyName: string) {
     if (!object || !object.getType) {
@@ -1695,6 +1762,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
+  private getErrorOnPropertyChanging(
+    obj: Survey.Base,
+    propertyName: string,
+    value: any
+  ): string {
+    if (propertyName !== "name") return null;
+    var newName = this.generateUniqueName(obj, value);
+    if (newName !== value)
+      return this.getLocString("pe.propertyNameIsNotUnique");
+    return null;
+  }
   private onPropertyChanged(
     obj: any,
     property: Survey.JsonObjectProperty,
@@ -1719,18 +1797,23 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.surveyObjects.selectObject(obj);
     }
   }
+
+  private onPropertyCorrectValueBeforeSet(
+    obj: any,
+    property: Survey.JsonObjectProperty,
+    newValue: any
+  ) {
+    if (property.name === "page" && typeof newValue === "string") {
+      return obj.survey.getPageByName(newValue);
+    }
+    return newValue;
+  }
   public onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any
   ) {
     var oldValue = obj[property.name];
-    if (property.name === "page" && typeof newValue === "string") {
-      obj[property.name] = obj.survey.getPageByName(newValue);
-    } else {
-      obj[property.name] = newValue;
-    }
-
     this.setModified({
       type: "PROPERTY_CHANGED",
       name: property.name,
@@ -2754,6 +2837,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     value: any
   ): string {
+    var error = this.getErrorOnPropertyChanging(obj, propertyName, value);
+    if (!!error) return error;
     var options = {
       propertyName: propertyName,
       obj: obj,

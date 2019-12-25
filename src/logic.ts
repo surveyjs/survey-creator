@@ -742,6 +742,9 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koEditableItem = ko.observable(null);
     this.update();
   }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
+  }
   public getTypeByName(name: string): SurveyLogicType {
     for (var i = 0; i < this.logicTypes.length; i++) {
       if (this.logicTypes[i].name == name) return this.logicTypes[i];

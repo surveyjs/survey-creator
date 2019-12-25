@@ -17,11 +17,6 @@ export class SurveyQuestionEditorProperties {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildEditorProperties(properties);
   }
-  public apply() {
-    var res = true;
-    this.performForAllProperties(p => (res = p.apply() && res));
-    return res;
-  }
   public applyToObj(obj: Survey.Base) {
     this.performForAllProperties(p => p.applyToObj(obj));
   }
@@ -65,7 +60,7 @@ export class SurveyQuestionEditorProperties {
     if (!displayName) {
       displayName = editorLocalization.getPropertyInEditor(property.name);
     }
-    var objectProperty = new SurveyObjectProperty(property, null, this.options);
+    var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;
     if (!!displayName) {
       objectProperty.editor.displayName = displayName;

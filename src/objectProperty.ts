@@ -7,15 +7,9 @@ import {
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFactory";
 
-export declare type SurveyOnPropertyChangedCallback = (
-  property: SurveyObjectProperty,
-  newValue: any
-) => void;
-
 export class SurveyObjectProperty {
   private objectValue: any;
-  private onPropertyChanged: SurveyOnPropertyChangedCallback;
-  public onChanging: (
+  public onCorrectValueBeforeSet: (
     propEditor: SurveyObjectProperty,
     newValue: any
   ) => boolean;
@@ -32,11 +26,9 @@ export class SurveyObjectProperty {
 
   constructor(
     public property: Survey.JsonObjectProperty,
-    onPropertyChanged: SurveyOnPropertyChangedCallback = null,
     propertyEditorOptions: ISurveyObjectEditorOptions = null,
     isCellEditor: boolean = false
   ) {
-    this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
     this.disabled = property.readOnly;
     var self = this;
@@ -45,9 +37,9 @@ export class SurveyObjectProperty {
     };
     this.editor = SurveyPropertyEditorFactory.createEditor(
       property,
-      onItemChanged,
       isCellEditor
     );
+    this.editor.onChanged = onItemChanged;
     this.editor.onGetLocale = this.doOnGetLocale;
     this.editor.options = propertyEditorOptions;
     this.editorType = this.editor.editorType;
@@ -90,14 +82,6 @@ export class SurveyObjectProperty {
   public hasError(): boolean {
     return this.editor.hasError();
   }
-  public apply(): boolean {
-    if (!this.object) return false;
-    if (this.editor.apply()) {
-      this.object[this.property.name] = this.editor.koValue();
-      return true;
-    }
-    return false;
-  }
   public applyToObj(obj: Survey.Base) {
     if (
       !!this.object &&
@@ -108,6 +92,12 @@ export class SurveyObjectProperty {
     )
       return;
     obj[this.property.name] = this.object[this.property.name];
+  }
+  public get isInPropertyGrid(): boolean {
+    return this.editor.isInPropertyGrid;
+  }
+  public set isInPropertyGrid(val: boolean) {
+    this.editor.isInPropertyGrid = val;
   }
   public reset() {
     if (!this.object) return;
@@ -130,10 +120,10 @@ export class SurveyObjectProperty {
   protected onEditorValueChanged(newValue) {
     if (this.object) {
       var oldValue = this.object[this.property.name];
-      if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
-      if (!this.onChanging || this.onChanging(this, newValue)) {
-        this.object[this.property.name] = newValue;
+      if (!!this.onCorrectValueBeforeSet) {
+        newValue = this.onCorrectValueBeforeSet(this, newValue);
       }
+      this.editor.updatePropertyValue(newValue);
       if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();

@@ -2,7 +2,8 @@ import * as Survey from "survey-knockout";
 import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTab
+  SurveyQuestionEditorTab,
+  SurveyElementEditorContentNoCategries
 } from "../src/questionEditors/questionEditor";
 import { SurveyQuestionEditorProperties } from "../src/questionEditors/questionEditorProperties";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
@@ -87,7 +88,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   editor.getPropertyEditorByName("name").editor.koValue("newName");
   editor.getPropertyEditorByName("title").editor.koValue("new title");
   editor.getPropertyEditorByName("visibleIf").editor.koValue("false");
-  editor.apply();
+  assert.ok(editor.apply(), "Applied correctly");
   assert.equal(changeCounter, 1, "changed one time");
   assert.equal(dropdownQuestion.name, "newName", "name assign correct");
   assert.equal(dropdownQuestion.title, "new title", "title assign correct");
@@ -533,33 +534,17 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
   Survey.Serializer.addProperty("question", { name: "targetEntity" });
   Survey.Serializer.addProperty("question", {
     name: "targetField",
+    dependsOn: ["targetEntity"],
     choices: function(obj: any) {
-      var entity = !!obj ? obj.getEditingPropertyValue("targetEntity") : null;
+      var entity = !!obj ? obj["targetEntity"] : null;
       if (!entity) return [];
       return [entity + " 1", entity + " 2"];
     }
   });
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyCreator();
-  editor.onPropertyEditorObjectAssign.add(function(editor, options) {
-    if (options.propertyName != "targetField") return;
-    if (options.obj) {
-      options.obj.targetFieldEditor = options.editor;
-    }
-  });
-  editor.onPropertyValueChanging.add(function(editor, options) {
-    if (options.propertyName != "targetEntity") return;
-    if (options.obj && options.obj.targetFieldEditor) {
-      options.obj.targetFieldEditor.updateChoices();
-    }
-  });
-  var properties = new SurveyQuestionEditorProperties(
-    question,
-    ["targetEntity", "targetField"],
-    editor
-  );
-  var entityEditor = properties.editorProperties[0].editor;
-  var targetEditor = properties.editorProperties[1].editor;
+  var editor = new SurveyElementEditorContentNoCategries(question);
+  var entityEditor = editor.getPropertyEditorByName("targetEntity").editor;
+  var targetEditor = editor.getPropertyEditorByName("targetField").editor;
 
   assert.deepEqual(targetEditor["koChoices"](), [], "The choices is empty");
   entityEditor.koValue("item");

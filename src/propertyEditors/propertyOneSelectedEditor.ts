@@ -63,6 +63,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   protected onValueChanged() {
     super.onValueChanged();
+    this.koAvailableClasses(this.getAvailableClasses());
     this.selectNewItem(false);
   }
   private createSelectedObjEditor(item: any): SurveyElementEditorContent {
@@ -75,6 +76,12 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     return editor;
   }
   protected onCreateEditor(editor: SurveyElementEditorContent) {}
+  protected onItemDeleted(obj: any, index: number) {
+    if (index >= this.origionalValue.length) {
+      index = this.origionalValue.length - 1;
+    }
+    this.koSelected(index > -1 ? this.origionalValue[index] : null);
+  }
   private selectNewItem(isNew: boolean) {
     if (!this.koSelected || !Array.isArray(this.origionalValue)) return;
     var index = this.origionalValue.length - 1;
@@ -88,9 +95,6 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     if (val != this.koSelected()) {
       this.koSelected(val);
     }
-  }
-  protected createEditorItem(item: Survey.Base) {
-    return item;
   }
   protected createNewItem(): any {
     return Survey.Serializer.createClass(this.getObjClassName());

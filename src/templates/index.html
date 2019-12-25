@@ -21,18 +21,15 @@
     </a>
   </div>
   <!-- /ko  -->
-  <ul
-    class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color"
-  >
+  <!-- ko if: tabs().length > 1 -->
+  <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color">
     <!-- ko foreach: tabs -->
-    <li
-      class="nav-item"
-      data-bind="css: {active: $parent.koViewType() == name}"
-    >
+    <li class="nav-item" data-bind="css: {active: $parent.koViewType() == name}">
       <a class="nav-link" href="#" data-bind="click: action, text: title"></a>
     </li>
     <!-- /ko -->
   </ul>
+  <!-- /ko -->
   <div class="panel card svd_content svd-dark-bg-color">
     <!-- ko foreach: tabs -->
     <div data-bind="visible: $parent.koViewType() == name">

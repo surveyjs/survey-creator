@@ -72,6 +72,7 @@ export var enStrings = {
     generateValidJSON: "Generate Valid JSON",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
+    "property-grid": "Properties",
     toolboxGeneralCategory: "General",
     delSelObject: "Delete selected object",
     editSelObject: "Edit selected object",
@@ -222,6 +223,8 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
+    propertyNameIsNotUnique: "Please enter a unique name",
+    listIsEmpty: "Add a new item",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",

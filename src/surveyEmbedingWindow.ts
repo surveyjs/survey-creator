@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyJSON5 } from "./json5";
+import { editorLocalization } from "./editorLocalization";
 
 export class SurveyEmbedingWindow {
   private jsonValue: any;
@@ -101,6 +102,9 @@ export class SurveyEmbedingWindow {
       self.setJavaTest();
     });
     this.surveyEmbedingHead = null;
+  }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
   }
   public get json(): any {
     return this.jsonValue;

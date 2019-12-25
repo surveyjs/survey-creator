@@ -4,13 +4,13 @@
           <span data-bind="text: koText"></span>
       </a>
       <div class="input-group-addon">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $data.getLocString('pe.edit')"></span>
       </div>
   </div>
   <div class="input-group form-group" data-bind="visible:$data.isEditable">
       <input class="form-control svd_editor_control" type="text" data-bind="value: koValue, disable: readOnly" />
       <div class="input-group-addon">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $root.getLocString('pe.edit')"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $data.getLocString('pe.edit')"></span>
       </div>
   </div>
 
@@ -29,11 +29,11 @@
                   <!-- /ko -->
               </div>
               <div class="modal-footer">
-                  <input type="button" class="btn btn-primary" data-bind="visible: $data.koShowApplyButton, disable: readOnly, click: $data.onApplyClick, value: $root.getLocString('pe.apply')"
+                  <input type="button" class="btn btn-primary" data-bind="visible: $data.koShowApplyButton, disable: readOnly, click: $data.onApplyClick, value: $data.getLocString('pe.apply')"
                       style="width:100px" />
-                  <input type="button" class="btn btn-default btn-secondary" data-bind="click: $data.onOkClick, disable: readOnly, value: $root.getLocString('pe.ok')"
+                  <input type="button" class="btn btn-default btn-secondary" data-bind="click: $data.onOkClick, disable: readOnly, value: $data.getLocString('pe.ok')"
                       style="width:100px" />
-                  <input type="button" class="btn btn-primary" data-bind="click: $data.onResetClick, value: $root.getLocString('pe.cancel')"
+                  <input type="button" class="btn btn-primary" data-bind="click: $data.onResetClick, value: $data.getLocString('pe.cancel')"
                       style="width:100px" />
               </div>
           </div>

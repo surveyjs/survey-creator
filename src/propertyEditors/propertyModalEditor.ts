@@ -93,8 +93,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       self.apply();
     };
     self.onOkClick = function() {
-      self.apply();
-      if (!self.koHasError()) self.onHideModal();
+      var res = self.apply();
+      if (res) self.onHideModal();
     };
     self.onResetClick = function() {
       self.updateValue();
@@ -145,6 +145,13 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.isBeforeShowCalledValue = true;
     this.updateValue();
   }
+  public updatePropertyValue(newValue: any) {
+    var obj = this.object;
+    if (!!this.modalEditableObject) {
+      obj = this.modalEditableObject.editableObj;
+    }
+    obj[this.property.name] = newValue;
+  }
   protected getOrigionalValue(): any {
     if (!!this.modalEditableObject) {
       return this.modalEditableObject.editableObj[this.property.name];
@@ -159,10 +166,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     }
   }
   protected beforeShowModal() {
-    this.modalEditableObject = null;
-    if (!!this.origionalValue) {
-      this.modalEditableObject = new EditableObject(this.object);
-    }
+    this.modalEditableObject = new EditableObject(this.object);
     this.koIsShowingModal(true);
   }
   protected isShowingModal(): boolean {
@@ -262,3 +266,5 @@ SurveyPropertyEditorFactory.registerEditor("html", function(
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyHtmlEditor(property);
 });
+SurveyPropertyEditorFactory.registerTypeForCellEditing("text", "string");
+SurveyPropertyEditorFactory.registerTypeForCellEditing("html", "string");

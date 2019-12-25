@@ -260,11 +260,14 @@ export class SurveyQuestionProperties {
 }
 
 export class SurveyElementEditorContent {
-  public onPropertyChanging: (
+  public onCorrectValueBeforeSet: (
     prop: Survey.JsonObjectProperty,
     newValue: any
-  ) => boolean;
-  public onPropertyChanged: (prop: Survey.JsonObjectProperty, oldValue: any) => void;
+  ) => any;
+  public onPropertyChanged: (
+    prop: Survey.JsonObjectProperty,
+    oldValue: any
+  ) => void;
   public onAfterRenderCallback: (
     object: any,
     htmlElement: HTMLElement,
@@ -291,11 +294,14 @@ export class SurveyElementEditorContent {
     );
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
-    this.assignEvents();
+    this.assignPropertiesToEditors();
     tabs.forEach(tab => tab.beforeShow());
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
+  }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
   }
   protected setOrigionalObjValue(obj: any) {
     this.origionalObjValue = obj;
@@ -344,26 +350,32 @@ export class SurveyElementEditorContent {
     this.addPropertiesTabs(tabs);
     return tabs;
   }
-  private assignEvents() {
+  private assignPropertiesToEditors() {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
-      props[i].onChanging = (
-        propEditor: SurveyObjectProperty,
-        newValue: any
-      ): boolean => {
-        if (!this.onPropertyChanging) return true;
-        return this.onPropertyChanging(propEditor.property, newValue);
-      };
-      props[i].onChanged = (propEditor: SurveyObjectProperty, oldValue: any): void => {
-        if (!!this.onPropertyChanged)
-          this.onPropertyChanged(propEditor.property, oldValue);
-      };
-      props[i].getObjectPropertyByName = (
-        propertyName: string
-      ): SurveyObjectProperty => {
-        return this.getPropertyEditorByName(propertyName);
-      };
+      this.assignPropertiesToEditor(props[i]);
     }
+  }
+  protected assignPropertiesToEditor(propEditor: SurveyObjectProperty) {
+    propEditor.onCorrectValueBeforeSet = (
+      propEditor: SurveyObjectProperty,
+      newValue: any
+    ): any => {
+      if (!this.onCorrectValueBeforeSet) return newValue;
+      return this.onCorrectValueBeforeSet(propEditor.property, newValue);
+    };
+    propEditor.onChanged = (
+      propEditor: SurveyObjectProperty,
+      oldValue: any
+    ): void => {
+      if (!!this.onPropertyChanged)
+        this.onPropertyChanged(propEditor.property, oldValue);
+    };
+    propEditor.getObjectPropertyByName = (
+      propertyName: string
+    ): SurveyObjectProperty => {
+      return this.getPropertyEditorByName(propertyName);
+    };
   }
   protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var tabItems = this.properties.getTabs();
@@ -434,6 +446,10 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     var properties = this.getProperties();
     var tabItem = new SurveyQuestionEditorTabDefinition();
     tabs.push(this.createNewTab(tabItem, properties));
+  }
+  protected assignPropertiesToEditor(propEditor: SurveyObjectProperty) {
+    super.assignPropertiesToEditor(propEditor);
+    propEditor.isInPropertyGrid = true;
   }
   private getObjectProperties(): Array<SurveyObjectProperty> {
     var res = [];
@@ -543,10 +559,6 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
       appliedSuccesfull = this.apply();
     }
     if (isCancel || appliedSuccesfull) {
-      var tabs = this.koTabs();
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].doCloseWindow();
-      }
       if (this.onHideWindow) this.onHideWindow();
     }
   }
@@ -562,21 +574,19 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
     var isFirstError = false;
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
-      var tabRes = tabs[i].apply();
-      if (!tabRes) {
+      var tabRes = tabs[i].hasError();
+      if (tabRes) {
         tabs[i].expand();
         if (!isFirstError) {
           this.koActiveTab(tabs[i].name);
           isFirstError = true;
         }
       }
-      res = tabRes && res;
+      res = !tabRes && res;
     }
 
     if (res) {
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].applyToObj(this.obj);
-      }
+      this.editableObject.applyAll();
       if (this.onChanged) {
         this.onChanged(this.obj);
       }
@@ -600,7 +610,16 @@ export class SurveyElementPropertyGrid {
     property1: Survey.JsonObjectProperty,
     property2: Survey.JsonObjectProperty
   ) => number;
-  public onPropertyChanged: (obj: any, prop: Survey.JsonObjectProperty, oldValue: any) => void;
+  public onPropertyChanged: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    oldValue: any
+  ) => void;
+  public onCorrectValueBeforeSet: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    newValue: any
+  ) => any;
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
@@ -620,9 +639,23 @@ export class SurveyElementPropertyGrid {
     if (!!value) {
       var elementEditor = this.createSurveyElementEditor(value);
       elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
-      elementEditor.onPropertyChanged = (prop: Survey.JsonObjectProperty, oldValue: any) => {
+      elementEditor.onPropertyChanged = (
+        prop: Survey.JsonObjectProperty,
+        oldValue: any
+      ) => {
         if (this.onPropertyChanged)
           this.onPropertyChanged(this.selectedObjectValue, prop, oldValue);
+      };
+      elementEditor.onCorrectValueBeforeSet = (
+        prop: Survey.JsonObjectProperty,
+        newValue: any
+      ): any => {
+        if (!this.onCorrectValueBeforeSet) return newValue;
+        return this.onCorrectValueBeforeSet(
+          this.selectedObjectValue,
+          prop,
+          newValue
+        );
       };
       this.koElementEditor(elementEditor);
     } else {
@@ -702,16 +735,12 @@ export class SurveyQuestionEditorTab {
   public reset() {
     this.properties.reset();
   }
-  public apply(): boolean {
-    return this.properties.apply();
-  }
   public applyToObj(obj: Survey.Base) {
     return this.properties.applyToObj(obj);
   }
   public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     return this.properties.getPropertyEditorByName(propertyName);
   }
-  public doCloseWindow() {}
   protected getValue(property: Survey.JsonObjectProperty): any {
     return property.getPropertyValue(this.obj);
   }
