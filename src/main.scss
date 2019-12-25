@@ -8,6 +8,7 @@
 @import "toolbar";
 @import "pages-editor";
 @import "templates/translation";
+@import "templates/design-surface";
 @import "properties";
 @import "bootstrap-material";
 
@@ -201,6 +202,8 @@
     border: none;
     .svd_survey_designer {
       position: relative;
+      display: table;
+      width: 100%;
 
       .svd_editors {
         .svd_questions_editor {
@@ -556,21 +559,12 @@
       border-bottom-color: transparent;
     }
   }
-  .svd_toolbox {
-    float: left;
-    width: 15%;
-  }
   .svd_editors {
-    display: inline-block;
-    width: 60%;
+    display: table-cell;
+    vertical-align: top;
     padding: 0 15px;
-    &.svd_wide {
-      width: 85%;
-    }
   }
   .svd_properties {
-    float: right;
-    width: 25%;
     table {
       width: 100%;
     }
