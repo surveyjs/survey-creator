@@ -52,9 +52,9 @@ export class TitleInplaceEditor {
     }
   }
 
-  constructor(name: string, protected rootElement) {
-    this.editingName(name);
-    this.prevName(name);
+  constructor(protected target: any, protected name: string, protected rootElement) {
+    this.editingName(target[name]);
+    this.prevName(target[name]);
     this.forNeibours(
       element =>
         (element.onclick = e => {
@@ -70,6 +70,11 @@ export class TitleInplaceEditor {
     return editorLocalization.getString(str);
   }
 
+  protected updatePrevName() {
+    this.prevName(this.target[this.name]);
+  }
+
+
   hideEditor = () => {
     this.isEditing(false);
     this.forNeibours(element => {
@@ -77,6 +82,7 @@ export class TitleInplaceEditor {
     });
   };
   startEdit = (model, event) => {
+    this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
     this.forNeibours(element => {
@@ -112,7 +118,8 @@ ko.components.register("title-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new TitleInplaceEditor(
-        params.model[params.name],
+        params.model,
+        params.name,
         componentInfo.element
       );
       ko.computed(() => {

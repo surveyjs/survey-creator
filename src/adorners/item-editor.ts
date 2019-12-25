@@ -13,13 +13,14 @@ var templateHtml = require("html-loader?interpolate!val-loader!./item-editor.htm
 
 class ItemInplaceEditor extends TitleInplaceEditor {
   constructor(
+    target: any,
     name: string,
     private question: QuestionSelectBase,
     private item,
     rootElement,
     private editor: SurveyCreator
   ) {
-    super(name, rootElement);
+    super(target, name, rootElement);
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
@@ -53,7 +54,8 @@ ko.components.register("item-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new ItemInplaceEditor(
-        params.target[params.name],
+        params.target,
+        params.name,
         params.question,
         params.item,
         componentInfo.element,

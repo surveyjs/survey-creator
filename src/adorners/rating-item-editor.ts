@@ -12,13 +12,14 @@ var templateHtml = require("html-loader?interpolate!val-loader!./rating-item-edi
 
 class RatingItemEditor extends TitleInplaceEditor {
   constructor(
+    target: any,
     name: string,
     private question: Survey.QuestionRating,
     private item,
     rootElement,
     private editor: SurveyCreator
   ) {
-    super(name, rootElement);
+    super(target, name, rootElement);
   }
 
   deleteItem(model: RatingItemEditor, event) {
@@ -50,7 +51,8 @@ ko.components.register("rating-item-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new RatingItemEditor(
-        params.target[params.name],
+        params.target,
+        params.name,
         params.question,
         params.item,
         componentInfo.element,
