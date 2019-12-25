@@ -14,7 +14,7 @@ import {
 } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
-import { SurveyUndoRedo, UndoRedoItem } from "./undoredo";
+import { UndoRedo } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "./questionToolbox";
@@ -92,7 +92,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
-  private undoRedo: SurveyUndoRedo;
+  private undoRedo: UndoRedo;
   private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
@@ -837,7 +837,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.selectPage = (page: Survey.PageModel) => {
       this.surveyObjects.selectObject(page);
     };
-    this.undoRedo = new SurveyUndoRedo();
 
     this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
     this.elementPropertyGridValue.hasCategories = this.showCategoriesInPropertyGrid;
@@ -866,7 +865,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ): number {
       return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
     };
-    this.elementPropertyGridValue.onPropertyChanged = function(obj: any, prop: Survey.JsonObjectProperty, oldValue: any) {
+    this.elementPropertyGridValue.onPropertyChanged = function(
+      obj: any,
+      prop: Survey.JsonObjectProperty,
+      oldValue: any
+    ) {
       self.onPropertyChanged(obj, prop, oldValue);
     };
 
@@ -939,24 +942,25 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.dragDropHelper.end();
     };
 
-    this.doUndoClick = function() {
-      var options = { canUndo: true };
-      self.onBeforeUndo.fire(self, options);
-      if (options.canUndo) {
-        var item = self.undoRedo.undo();
-        self.doUndoRedo(item);
-        self.onAfterUndo.fire(self, { state: item });
-      }
-    };
-    this.doRedoClick = function() {
-      var options = { canRedo: true };
-      self.onBeforeRedo.fire(self, options);
-      if (options.canRedo) {
-        var item = self.undoRedo.redo();
-        self.doUndoRedo(item);
-        self.onAfterRedo.fire(self, { state: item });
-      }
-    };
+    // TODO undoredo
+    // this.doUndoClick = function() {
+    //   var options = { canUndo: true };
+    //   self.onBeforeUndo.fire(self, options);
+    //   if (options.canUndo) {
+    //     var item = self.undoRedo.undo();
+    //     self.doUndoRedo(item);
+    //     self.onAfterUndo.fire(self, { state: item });
+    //   }
+    // };
+    // this.doRedoClick = function() {
+    //   var options = { canRedo: true };
+    //   self.onBeforeRedo.fire(self, options);
+    //   if (options.canRedo) {
+    //     var item = self.undoRedo.redo();
+    //     self.doUndoRedo(item);
+    //     self.onAfterRedo.fire(self, { state: item });
+    //   }
+    // };
 
     this.jsonEditor = new SurveyJSONEditor();
     ko.computed(() => {
@@ -1019,11 +1023,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
     });
 
+    this.text = "";
+
     if (renderedElement) {
       this.render(renderedElement);
     }
 
     this.addToolbarItems();
+
+    this.undoRedo = new UndoRedo(this.survey);
   }
 
   tabs = ko.observableArray();
@@ -1041,7 +1049,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-undo",
       icon: "icon-actionundo",
       visible: this.koIsShowDesigner,
-      enabled: this.undoRedo.koCanUndo,
+      // enabled: this.undoRedo.koCanUndo, TODO undoredo
       action: this.doUndoClick,
       title: this.getLocString("ed.undo")
     });
@@ -1049,7 +1057,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-redo",
       icon: "icon-actionredo",
       visible: this.koIsShowDesigner,
-      enabled: this.undoRedo.koCanRedo,
+      // enabled: this.undoRedo.koCanRedo, TODO undoredo
       action: this.doRedoClick,
       title: this.getLocString("ed.redo")
     });
@@ -1452,24 +1460,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Undo the latest user operation. Returns true if it performes successful.
    */
   public undo(): boolean {
-    if (!this.undoRedo.koCanUndo()) return false;
-    this.doUndoRedo(this.undoRedo.undo());
+    // if (!this.undoRedo.koCanUndo()) return false; TODO undoredo
+    // this.doUndoRedo(this.undoRedo.undo());
     return true;
   }
   /**
    * Redo the latest undo operation. Returns true if it performes successful.
    */
   public redo(): boolean {
-    if (!this.undoRedo.koCanRedo()) return false;
-    this.doUndoRedo(this.undoRedo.redo());
+    // if (!this.undoRedo.koCanRedo()) return false; TODO undoredo
+    // this.doUndoRedo(this.undoRedo.redo());
     return true;
   }
   private setUndoRedoCurrentState(clearState: boolean = false) {
-    if (clearState) {
-      this.undoRedo.clear();
-    }
-    var selObj = this.koSelectedObject() ? this.koSelectedObject().value : null;
-    this.undoRedo.setCurrent(this.surveyValue(), selObj ? selObj.name : null);
+    // if (clearState) { TODO undoredo
+    //   this.undoRedo.clear();
+    // }
+    // var selObj = this.koSelectedObject() ? this.koSelectedObject().value : null;
+    // this.undoRedo.setCurrent(this.surveyValue(), selObj ? selObj.name : null);
   }
   /**
    * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
@@ -1687,7 +1695,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
   }
-  private onPropertyChanged(obj: any, property: Survey.JsonObjectProperty, oldValue: any) {
+  private onPropertyChanged(
+    obj: any,
+    property: Survey.JsonObjectProperty,
+    oldValue: any
+  ) {
     var value = obj[property.name];
     if (property.name == "name") {
       this.updateConditions(oldValue, value);
@@ -1746,17 +1758,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!this.showPropertyGrid) return;
     this.elementPropertyGridValue.selectedObject = newObj;
   }
-  private doUndoRedo(item: UndoRedoItem) {
-    this.initSurvey(item.surveyJSON);
-    if (item.selectedObjName) {
-      var selObj = this.findObjByName(item.selectedObjName);
-      if (selObj) {
-        this.surveyObjects.selectObject(selObj);
-      }
-    }
-    this.setState("modified");
-    this.isAutoSave && this.doSave();
-  }
+  // TODO undoredo
+  // private doUndoRedo(item: UndoRedoItem) {
+  //   this.initSurvey(item.surveyJSON);
+  //   if (item.selectedObjName) {
+  //     var selObj = this.findObjByName(item.selectedObjName);
+  //     if (selObj) {
+  //       this.surveyObjects.selectObject(selObj);
+  //     }
+  //   }
+  //   this.setState("modified");
+  //   this.isAutoSave && this.doSave();
+  // }
   private findObjByName(name: string): Survey.Base {
     var page = this.survey.getPageByName(name);
     if (page) return page;

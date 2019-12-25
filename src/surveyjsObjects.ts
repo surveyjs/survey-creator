@@ -91,17 +91,6 @@ export class SurveyForDesigner extends Survey.Survey {
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
   }
-  public onPropertyValueChangedCallback(
-    name: string,
-    oldValue: any,
-    newValue: any
-  ) {
-    var ignoredProperties = ["currentPageValue", "visibleIndex"];
-
-    if (ignoredProperties.indexOf(name) !== -1) return;
-
-    console.log("changed!");
-  }
 }
 
 function getSurvey(el: any): any {
