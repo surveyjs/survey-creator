@@ -12,3 +12,27 @@
     vertical-align: top;
     width: 25%;
 }
+
+.svd-designer-tabbed-container__tab-header {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.17em;
+    text-transform: uppercase;
+    padding: 5px 10px 10px 10px;
+    border-bottom: 4px solid transpereant;
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.svd-designer-tabbed-container__tab-header-active {
+    border-bottom: 4px solid $primary-color;
+}
+
+.svd-designer-tabbed-container__tab-content {
+    display: none;
+    &.svd-designer-tabbed-container__tab-content-active {
+        display: block;
+    }
+}
+

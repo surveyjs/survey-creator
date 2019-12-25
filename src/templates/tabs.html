@@ -3,6 +3,8 @@
     <!-- ko if: leftContainer.length > 0 -->
     <div class="svd-designer-container svd-designer-container--left-side">
       <!-- ko foreach: { data: leftContainer, as: 'content', noChildContext: true } -->
+        <!-- ko template: 'se-component-' + content + '-header' -->
+        <!-- /ko -->
         <!-- ko template: 'se-component-' + content -->
         <!-- /ko -->
       <!-- /ko -->
@@ -34,8 +36,24 @@
     <!-- ko if: rightContainer.length > 0 && !koHideAdvancedSettings() -->
     <svd-splitter params="minLeft: 600, minRight: 150"></svd-splitter>
     <div class="svd-designer-container svd-designer-container--right-side">
-      <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
-        <!-- ko template: 'se-component-' + content -->
+      <!-- ko if: rightContainer.length > 1 -->
+        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
+          <div class="svd-designer-tabbed-container__tab-header" data-bind="text: getLocString('ed.' + content), click: function() { rightContainerTab = content; }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === rightContainerTab }">
+          </div>
+        <!-- /ko -->
+        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
+          <div class="svd-designer-tabbed-container__tab-content" data-bind="css: { 'svd-designer-tabbed-container__tab-content-active' : content === rightContainerTab }">
+          <!-- ko template: 'se-component-' + content -->
+          <!-- /ko -->
+          </div>
+        <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: rightContainer.length === 1 -->
+        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
+          <!-- ko template: 'se-component-' + content + '-header' -->
+          <!-- /ko -->
+          <!-- ko template: 'se-component-' + content -->
+          <!-- /ko -->
         <!-- /ko -->
       <!-- /ko -->
     </div>

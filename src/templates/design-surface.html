@@ -1,3 +1,9 @@
+<script type="text/html" id="se-component-toolbox-header">
+    <!-- ko if: !toolbox.koHasCategories() -->
+    <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: $root.getLocString('ed.toolbox')" ></div>
+    <!-- /ko  -->
+</script>
+
 <script type="text/html" id="se-component-toolbox">
 <div data-bind="visible: showToolbox" class="svd_toolbox svd-dark-bg-color">
     <!-- ko if: toolbox.koHasCategories -->
@@ -42,10 +48,6 @@
     </div>
     <!-- /ko  -->
     <!-- ko if: !toolbox.koHasCategories() -->
-    <div
-    class="svd_toolbox_title hidden-sm hidden-xs"
-    data-bind="text: $root.getLocString('ed.toolbox')"
-    ></div>
     <!-- ko foreach: toolbox.koItems -->
     <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
     <!-- /ko  -->
@@ -53,12 +55,14 @@
 </div>
 </script>
 
+<script type="text/html" id="se-component-property-grid-header">
+    <div class="svd-property-grid__header">
+        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+        <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: $root.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
+    </div>
+</script>
 <script type="text/html" id="se-component-property-grid">
 <div class="svd_properties svd-light-border-color svd-dark-bg-color">
-    <div class="svd-property-grid__header">
-    <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-    <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: $root.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
-    </div>
     <div class="svd_object_selector svd-light-border-color">
     <div class="svd_custom_select">
         <select
@@ -89,13 +93,13 @@
 </script>
 
 <script type="text/html" id="se-component-toolbar">
+    <!-- ko if: showPropertyGrid && koHideAdvancedSettings()  -->
+    <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
+        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+        <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
+    </div>
+    <!-- /ko -->
     <div class="svd_toolbar">
-        <!-- ko if: showPropertyGrid && koHideAdvancedSettings()  -->
-        <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
-            <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-            <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
-        </div>
-        <!-- /ko -->
         <!-- ko foreach: toolbarItems -->
         <span
         tabindex="0"
