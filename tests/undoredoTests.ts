@@ -26,18 +26,18 @@ QUnit.test("Enabeling undo redo", function(assert) {
     "there is 3 questions on the current page"
   );
 
-  undoredo.undo();
-  assert.equal(
-    currentPage.questions.length,
-    2,
-    "there is 2 questions after the undo()"
-  );
-  undoredo.redo();
-  assert.equal(
-    currentPage.questions.length,
-    3,
-    "there is 3 questions after the redo()"
-  );
+  // undoredo.undo();
+  // assert.equal(
+  //   currentPage.questions.length,
+  //   2,
+  //   "there is 2 questions after the undo()"
+  // );
+  // undoredo.redo();
+  // assert.equal(
+  //   currentPage.questions.length,
+  //   3,
+  //   "there is 3 questions after the redo()"
+  // );
 });
 
 // QUnit.test("Enabeling undo redo", function(assert) {
