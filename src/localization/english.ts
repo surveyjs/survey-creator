@@ -72,6 +72,7 @@ export var enStrings = {
     generateValidJSON: "Generate Valid JSON",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
+    "property-grid": "Properties",
     toolboxGeneralCategory: "General",
     delSelObject: "Delete selected object",
     editSelObject: "Edit selected object",

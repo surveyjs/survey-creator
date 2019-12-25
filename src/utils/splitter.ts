@@ -42,6 +42,7 @@ export class SplitterComponentViewModel {
         rightElement.style.maxWidth = rightWidth;
         rightElement.style.flexBasis = rightWidth;
       }
+      onresize();
     };
     var onmouseup = () => {
       splitterElement.className = splitterElement.className.replace(
@@ -51,6 +52,7 @@ export class SplitterComponentViewModel {
       document.removeEventListener("mousemove", onmousemove);
       document.removeEventListener("mouseleave", onmouseup);
       document.removeEventListener("mouseup", onmouseup);
+      window.dispatchEvent(new Event('resize'));
     };
 
     splitterElement.onmousedown = () => {
