@@ -85,15 +85,6 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   protected get isCurrentValueEmpty() {
     return this.origionalValue.length == 0;
   }
-  protected updateArrayValue(items: any) {
-    if (!this.origionalValue) return;
-    //TODO
-    this.origionalValue.splice(0, this.origionalValue.length);
-    if (!Array.isArray(items)) return;
-    for (var i = 0; i < items.length; i++) {
-      this.origionalValue.push(items[i]);
-    }
-  }
   protected createEditorItemCore(item: any = null) {
     if (!item) {
       item = this.createNewItem();
