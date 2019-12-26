@@ -1,14 +1,7 @@
 ﻿<script type="text/html" id="se-tab-designer">
   <div class="row svd_survey_designer">
     <!-- ko if: leftContainer.length > 0 -->
-    <div class="svd-designer-container svd-designer-container--left-side">
-      <!-- ko foreach: { data: leftContainer, as: 'content', noChildContext: true } -->
-        <!-- ko template: 'se-component-' + content + '-header' -->
-        <!-- /ko -->
-        <!-- ko template: 'se-component-' + content -->
-        <!-- /ko -->
-      <!-- /ko -->
-    </div>
+    <svd-designer-container params="tabs: leftContainer, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
     <svd-splitter params="minLeft: 100, minRight: 600"></svd-splitter>
     <!-- /ko  -->
     <div class="svd_editors">
@@ -35,28 +28,7 @@
     </div>
     <!-- ko if: rightContainer.length > 0 && !koHideAdvancedSettings() -->
     <svd-splitter params="minLeft: 600, minRight: 150"></svd-splitter>
-    <div class="svd-designer-container svd-designer-container--right-side">
-      <!-- ko if: rightContainer.length > 1 -->
-        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
-          <div class="svd-designer-tabbed-container__tab-header" data-bind="text: getLocString('ed.' + content), click: function() { rightContainerTab = content; }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === rightContainerTab }">
-          </div>
-        <!-- /ko -->
-        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
-          <div class="svd-designer-tabbed-container__tab-content" data-bind="css: { 'svd-designer-tabbed-container__tab-content-active' : content === rightContainerTab }">
-          <!-- ko template: 'se-component-' + content -->
-          <!-- /ko -->
-          </div>
-        <!-- /ko -->
-      <!-- /ko -->
-      <!-- ko if: rightContainer.length === 1 -->
-        <!-- ko foreach: { data: rightContainer, as: 'content', noChildContext: true } -->
-          <!-- ko template: 'se-component-' + content + '-header' -->
-          <!-- /ko -->
-          <!-- ko template: 'se-component-' + content -->
-          <!-- /ko -->
-        <!-- /ko -->
-      <!-- /ko -->
-    </div>
+    <svd-designer-container params="tabs: rightContainer, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
     <!-- /ko -->
   </div>
 </script>
@@ -69,33 +41,17 @@
 
 <script type="text/html" id="se-empty-placeholder">
   <div class="svd-survey-placeholder-root">
-    <div class="svd-survey-placeholder">
+      <div class="svd-survey-placeholder">
       <!-- ko if: showExternalHelpLink -->
       <div class="svd-survey-gallery">
-        <a data-bind="attr: { href: $root.getLocString('survey.externalHelpLinkUrl') }">
+          <a data-bind="attr: { href: getLocString('survey.externalHelpLinkUrl') }">
           <img src="../images/YouTube.png"/>
-          <span data-bind="text: $root.getLocString('survey.externalHelpLink')"></span>
-        </a>
+          <span data-bind="text: getLocString('survey.externalHelpLink')"></span>
+          </a>
       </div>
       <!-- /ko -->
-      <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
-    </div>
+      <div class="empty-message" data-bind="text: getLocString('survey.dropQuestion')"></div>
+      </div>
   </div>
 </script>
-
-<script type="text/html" id="se-tab-designer-item">
-    <div
-    tabindex="0"
-    draggable="true"
-    class="svd_toolbox_item svd-light-border-color"
-    data-bind="attr: {title:  tooltip}, css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
-  >
-    <span>
-      <svg-icon params="iconName: iconName"></svg-icon>
-    </span>
-    <span
-      class="svd_toolbox_item_text hidden-sm hidden-xs"
-      data-bind="text:title"
-    ></span>
-  </div>
-</script>
+  
