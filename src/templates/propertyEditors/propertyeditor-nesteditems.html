@@ -18,7 +18,7 @@
                   <th></th>
               </tr>
           </thead>
-          <tbody data-bind="sortable: { foreach: origionalValue, options: { handle: '.svd-drag-handle', animation: 150 } }">
+          <tbody data-bind="sortable: { foreach: origionalValue, options: sortableOptions }">
             <!-- ko component: { name:"comp-propertyeditor-nesteditem", params: { item: $data, editor: $parent } } --><!-- /ko -->
           </tbody>
       </table>

@@ -41,7 +41,13 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   }
   public sortableOptions = {
     handle: ".svd-drag-handle",
-    animation: 150
+    animation: 150,
+    onUpdate: (evt, itemV) => {
+      this.moveItem(itemV.obj, evt.newIndex);
+      // Remove sortables "unbound" element
+      evt.item.parentNode.removeChild(evt.item);
+      return true;
+    }
   };
   protected addItem() {
     this.createEditorItemCore();
@@ -82,17 +88,16 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       }
     }
   }
+  private moveItem(obj: any, newIndex: number) {
+    if (!this.origionalValue) return;
+    if (newIndex < 0 || newIndex >= this.origionalValue.length) return;
+    var oldIndex = this.origionalValue.indexOf(obj);
+    if (oldIndex < 0 || oldIndex == newIndex) return;
+    this.origionalValue.splice(oldIndex, 1);
+    this.origionalValue.splice(newIndex, 0, obj);
+  }
   protected get isCurrentValueEmpty() {
     return this.origionalValue.length == 0;
-  }
-  protected updateArrayValue(items: any) {
-    if (!this.origionalValue) return;
-    //TODO
-    this.origionalValue.splice(0, this.origionalValue.length);
-    if (!Array.isArray(items)) return;
-    for (var i = 0; i < items.length; i++) {
-      this.origionalValue.push(items[i]);
-    }
   }
   protected createEditorItemCore(item: any = null) {
     if (!item) {
