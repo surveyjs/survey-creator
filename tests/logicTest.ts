@@ -955,6 +955,7 @@ QUnit.test("Logic editing errors", function(assert) {
   assert.equal(op.hasError(), true, "setToName is empty");
   var triggerEditor = <SurveyElementEditorContent>op.templateObject;
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q2");
+  triggerEditor.getPropertyEditorByName("setValue").editor.koValue("newValue");
   assert.equal(logic.saveEditableItem(), true, "setToName is correct");
   assert.equal(op.hasError(), false, "setToName  is correct");
 });
