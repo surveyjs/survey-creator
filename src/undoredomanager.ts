@@ -29,6 +29,9 @@ export class UndoRedoManager {
   private _currentTransactionIndex: number = -1;
 
   private addTransaction(transaction: Transaction) {
+    if (this._currentTransactionIndex + 1 !== this._transactions.length) {
+      this._transactions.length = this._currentTransactionIndex + 1; // remove next transactions after the current while adding a new one
+    }
     this._transactions.push(transaction);
     this._currentTransactionIndex++;
   }
