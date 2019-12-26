@@ -68,7 +68,26 @@ QUnit.test("UndoRedoManager Transaction Class", function(assert) {
   );
 });
 
-// QUnit.test("Enabeling undo redo", function(assert) {
+QUnit.test("Undo/redo survey title", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var oldTitle = survey.title;
+  var newTitle = "New Title";
+
+  survey.title = newTitle;
+
+  assert.equal(survey.title, newTitle, "new title applied");
+
+  undoRedoManager.undo();
+
+  assert.equal(survey.title, oldTitle, "undo to old title");
+
+  undoRedoManager.redo();
+
+  assert.equal(survey.title, newTitle, "redo to new title");
+});
+
+// QUnit.test("Undo/redo add element", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());
 //   var undoRedoManager = new UndoRedoManager(survey);
 //   var currentPage = survey.currentPage;
@@ -184,6 +203,7 @@ QUnit.test("UndoRedoManager Transaction Class", function(assert) {
 
 function getSurveyJson(): any {
   return {
+    title: "old title",
     pages: [
       {
         name: "page1",
