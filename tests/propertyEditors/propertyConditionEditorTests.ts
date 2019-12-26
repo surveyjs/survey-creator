@@ -649,7 +649,6 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    editor.doBuildClick();
     editor.koConditionQuestion("q3");
     editor.conditionValue = "val1";
     assert.equal(
@@ -698,7 +697,6 @@ QUnit.test(
 
     editor.object = survey.getQuestionByName("q3");
     editor.beforeShow();
-    editor.doBuildClick();
     assert.equal(
       editor.koTextValue(),
       "{q2} = 1",
@@ -736,7 +734,6 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    editor.doBuildClick();
     editor.koConditionQuestion("q1");
     editor.koConditionOperator("empty");
     assert.equal(
@@ -773,7 +770,6 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    editor.doBuildClick();
     assert.equal(
       editor.koHasConditionAppliedValue(),
       false,
@@ -815,26 +811,19 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    assert.equal(editor.koBuildType(), "view", "View type by default");
-    editor.doEditClick();
-    assert.equal(editor.koBuildType(), "text", "Edit type by now");
     editor.koTextValue("{q1} = ");
     assert.equal(
       editor.koIsTextConditionValid(),
       false,
       "Condition is not valid"
     );
-    editor.doFromTextToViewClick();
     assert.equal(editor.koValue(), "", "Invalid condition, value is empty");
     assert.equal(
-      editor.koTextValue(),
-      "",
-      "Invalid condition, text value is empty"
+      editor.koConditionDisplayText(),
+      editor.getLocString("pe.expressionIsEmpty"),
+      "Invalid condition, display text is empty"
     );
-    assert.equal(editor.koBuildType(), "view", "View type again");
-    editor.doEditClick();
     editor.koTextValue("{q1} = '1'");
-    editor.doFromTextToViewClick();
     assert.equal(
       editor.koValue(),
       "{q1} = '1'",
@@ -845,7 +834,6 @@ QUnit.test(
       "{q1} = '1'",
       "Condition is valid, text value is set"
     );
-    assert.equal(editor.koBuildType(), "view", "View type again # 2");
   }
 );
 QUnit.test(
