@@ -28,10 +28,13 @@ export class UndoRedoManager {
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  private _addTransaction(transaction: Transaction) {
+  private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
-      this._transactions.length = this._currentTransactionIndex + 1; // remove next transactions after the current while adding a new one
+      this._transactions.length = this._currentTransactionIndex + 1;
     }
+  }
+  private _addTransaction(transaction: Transaction) {
+    this._cutOffTail();
     this._transactions.push(transaction);
     this._currentTransactionIndex++;
   }
