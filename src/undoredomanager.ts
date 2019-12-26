@@ -15,7 +15,7 @@ export class UndoRedoManager {
       if (!transaction) {
         transaction = new Transaction(name);
         transaction.addAction(new Action(name, oldValue, newValue, sender));
-        this.addTransaction(transaction);
+        this._addTransaction(transaction);
         return;
       }
 
@@ -28,27 +28,38 @@ export class UndoRedoManager {
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  private addTransaction(transaction: Transaction) {
+  private _addTransaction(transaction: Transaction) {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1; // remove next transactions after the current while adding a new one
     }
     this._transactions.push(transaction);
     this._currentTransactionIndex++;
   }
+  private _getCurrentTransaction() {
+    const index = this._currentTransactionIndex;
+    const currentTransaction = this._transactions[index];
+    return currentTransaction;
+  }
+  private _getNextTransaction() {
+    const index = this._currentTransactionIndex;
+    const nextTransaction = this._transactions[index + 1];
+    return nextTransaction;
+  }
 
-  public startTransaction(name: string) {
+  startTransaction(name: string) {
     if (this._preparingTransaction) return;
     this._preparingTransaction = new Transaction(name);
   }
-  public stopTransaction() {
-    this.addTransaction(this._preparingTransaction);
+  stopTransaction() {
+    this._addTransaction(this._preparingTransaction);
     this._preparingTransaction = null;
   }
-  public undo() {
-    const index = this._currentTransactionIndex;
-    const currentTransaction = this._transactions[index];
-
-    if (!currentTransaction) return;
+  canUndo() {
+    return !!this._getCurrentTransaction();
+  }
+  undo() {
+    const currentTransaction = this._getCurrentTransaction();
+    if (!this.canUndo()) return;
 
     this._keepSilense = true;
     currentTransaction.rollback();
@@ -56,11 +67,12 @@ export class UndoRedoManager {
 
     this._currentTransactionIndex--;
   }
-  public redo() {
-    const index = this._currentTransactionIndex;
-    const nextTransaction = this._transactions[index + 1];
-
-    if (!nextTransaction) return;
+  canRedo() {
+    return !!this._getNextTransaction();
+  }
+  redo() {
+    const nextTransaction = this._getNextTransaction();
+    if (!this.canRedo()) return;
 
     this._keepSilense = true;
     nextTransaction.apply();

@@ -87,6 +87,29 @@ QUnit.test("Undo/redo survey title", function(assert) {
   assert.equal(survey.title, newTitle, "redo to new title");
 });
 
+QUnit.test("Undo/redo canUndo canRedo", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var oldTitle = survey.title;
+  var newTitle = "New Title";
+
+  survey.title = newTitle;
+
+  assert.equal(survey.title, newTitle, "new title applied");
+
+  assert.equal(undoRedoManager.canRedo(), false, "can't redo");
+  assert.equal(undoRedoManager.canUndo(), true, "can undo");
+  undoRedoManager.undo();
+
+  assert.equal(survey.title, oldTitle, "undo to old title");
+
+  assert.equal(undoRedoManager.canUndo(), false, "can't undo");
+  assert.equal(undoRedoManager.canRedo(), true, "can redo");
+  undoRedoManager.redo();
+
+  assert.equal(survey.title, newTitle, "redo to new title");
+});
+
 // QUnit.test("Undo/redo add element", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());
 //   var undoRedoManager = new UndoRedoManager(survey);
