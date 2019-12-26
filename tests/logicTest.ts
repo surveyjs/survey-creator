@@ -930,13 +930,15 @@ QUnit.test("Logic editing errors", function(assert) {
   assert.equal(logic.saveEditableItem(), false, "Expression is empty");
   assert.equal(
     logic.koErrorText(),
-    "The logic expression is empty or invalid. Please correct it."
+    "The logic expression is empty or invalid. Please correct it.",
+    "Check 1"
   );
   logic.expressionEditor.koValue("ww++++2");
   assert.equal(logic.saveEditableItem(), false, "Expression is invalid");
   assert.equal(
     logic.koErrorText(),
-    "The logic expression is empty or invalid. Please correct it."
+    "The logic expression is empty or invalid. Please correct it.",
+    "Check 2"
   );
   logic.expressionEditor.koValue("{q1} = 1");
   assert.equal(logic.saveEditableItem(), false, "There is no operations");
