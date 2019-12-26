@@ -14,7 +14,7 @@ import {
 } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
-import { UndoRedo } from "./undoredomanager";
+import { UndoRedoManager } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "./questionToolbox";
@@ -94,7 +94,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
-  private undoRedo: UndoRedo;
+  private undoRedoManager: UndoRedoManager;
   private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
@@ -1039,7 +1039,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.addToolbarItems();
 
-    this.undoRedo = new UndoRedo(this.survey);
+    this.undoRedoManager = new UndoRedoManager(this.survey);
   }
 
   tabs = ko.observableArray();
@@ -1643,22 +1643,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private _rightContainer = ko.observableArray<string>(["property-grid"]);
   public get rightContainer() {
-    if (!this._koRightContainerTab() && this._rightContainer().length > 1) {
-      this._koRightContainerTab(this._rightContainer()[0]);
-    }
     return this._rightContainer();
   }
-  private _koRightContainerTab = ko.observable<string>();
-  public get rightContainerTab() {
-    return this._koRightContainerTab();
-  }
-  public set rightContainerTab(value) {
-    this._koRightContainerTab(value);
-  }
-  private _topContainer = ko.observableArray<string>([
-    "toolbar",
-    "pages-editor"
-  ]);
+  private _topContainer = ko.observableArray<string>(["toolbar", "pages-editor"]);
   public get topContainer() {
     return this._topContainer();
   }
