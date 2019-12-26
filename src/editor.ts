@@ -14,7 +14,7 @@ import {
 } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
-import { UndoRedo } from "./undoredomanager";
+import { UndoRedoManager } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "./questionToolbox";
@@ -94,7 +94,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
-  private undoRedo: UndoRedo;
+  private undoRedoManager: UndoRedoManager;
   private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
@@ -1039,7 +1039,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.addToolbarItems();
 
-    this.undoRedo = new UndoRedo(this.survey);
+    this.undoRedoManager = new UndoRedoManager(this.survey);
   }
 
   tabs = ko.observableArray();

@@ -1,116 +1,111 @@
 import * as Survey from "survey-knockout";
-import { throws } from "assert";
 
-export class UndoRedo {
-  private survey: Survey.Survey;
-
-  constructor(survey: Survey.Survey) {
-    this.survey = survey;
-
-    this.survey.onPropertyValueChangedCallback = (
+export class UndoRedoManager {
+  constructor(private _survey: Survey.Survey) {
+    this._survey.onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
-      newValue: any
+      newValue: any,
+      sender: Survey.Base
     ) => {
-      const actions = this._actions;
-      const transaction = this._transaction;
+      if (this._keepSilense) return;
+
+      let transaction = this._preparingTransaction;
 
       if (!transaction) {
-        const action = new Action(name);
-        action.addSurveyChange(name, oldValue, newValue, survey);
-        this.addAction(action);
+        transaction = new Transaction(name);
+        transaction.addAction(new Action(name, oldValue, newValue, sender));
+        this.addTransaction(transaction);
         return;
       }
 
-      transaction.addSurveyChange(name, oldValue, newValue, survey);
-
-      console.log(
-        `changed!!! name: ${name} oldValue: ${oldValue} newValue: ${newValue}`
-      );
+      transaction.addAction(new Action(name, oldValue, newValue, sender));
     };
   }
 
-  private _transaction: Action = null;
-  private _actions: Action[] = [];
-  private _currentActionIndex: number = -1;
+  private _keepSilense = false;
+  private _preparingTransaction: Transaction = null;
+  private _transactions: Transaction[] = [];
+  private _currentTransactionIndex: number = -1;
 
-  private addAction(action: Action) {
-    this._actions.push(action);
-    this._currentActionIndex++;
+  private addTransaction(transaction: Transaction) {
+    this._transactions.push(transaction);
+    this._currentTransactionIndex++;
   }
 
   public startTransaction(name: string) {
-    if (this._transaction) return;
-    this._transaction = new Action(name);
+    if (this._preparingTransaction) return;
+    this._preparingTransaction = new Transaction(name);
   }
   public stopTransaction() {
-    this.addAction(this._transaction);
-    this._transaction = null;
+    this.addTransaction(this._preparingTransaction);
+    this._preparingTransaction = null;
   }
   public undo() {
-    const index = this._currentActionIndex;
-    const currentAction = this._actions[index];
+    const index = this._currentTransactionIndex;
+    const currentTransaction = this._transactions[index];
 
-    if (!currentAction) return;
+    if (!currentTransaction) return;
 
-    currentAction.rollback();
-    this._currentActionIndex--;
+    this._keepSilense = true;
+    currentTransaction.rollback();
+    this._keepSilense = false;
+
+    this._currentTransactionIndex--;
   }
   public redo() {
-    const index = this._currentActionIndex;
-    const nextAction = this._actions[index + 1];
+    const index = this._currentTransactionIndex;
+    const nextTransaction = this._transactions[index + 1];
 
-    if (!nextAction) return;
+    if (!nextTransaction) return;
 
-    nextAction.apply();
-    this._currentActionIndex++;
+    this._keepSilense = true;
+    nextTransaction.apply();
+    this._keepSilense = false;
+
+    this._currentTransactionIndex++;
+  }
+}
+
+export class Transaction {
+  constructor(private _name: string) {}
+
+  private _actions: Action[] = [];
+
+  apply() {
+    const actions = this._actions;
+    for (let index = 0; index < actions.length; index++) {
+      const action = actions[index];
+      action.apply();
+    }
+  }
+
+  rollback() {
+    const actions = this._actions;
+    for (let index = actions.length - 1; index >= 0; index--) {
+      const action = actions[index];
+      action.rollback();
+    }
+  }
+
+  addAction(action: Action) {
+    this._actions.push(action);
   }
 }
 
 export class Action {
-  constructor(name: string) {
-    this._name = name;
-  }
-
-  private _name: string;
-  private _surveyChanges: SurveyChange[] = [];
+  constructor(
+    private _propertyName: string,
+    private _oldValue: any,
+    private _newValue: any,
+    private _sender: Survey.Base
+  ) {}
 
   apply() {
-    const changes = this._surveyChanges;
-    for (let index = 0; index < changes.length; index++) {
-      const surveyChange = changes[index];
-    }
+    this._sender[this._propertyName] = this._newValue;
   }
 
-  rollback() {}
-
-  addSurveyChange(
-    name: string,
-    oldValue: any,
-    newValue: any,
-    survey: Survey.Survey
-  ) {
-    this._surveyChanges.push(
-      new SurveyChange(name, oldValue, newValue, survey)
-    );
-  }
-}
-
-export class SurveyChange {
-  private _name: string;
-  private _oldValue: any;
-  private _newValue: any;
-  private _survey: Survey.Survey;
-
-  constructor(
-    name: string,
-    oldValue: any,
-    newValue: any,
-    survey: Survey.Survey
-  ) {
-    this._name = name;
-    this._newValue = newValue;
-    this._oldValue = oldValue;
-    this._survey = survey;
+  rollback() {
+    this._sender[this._propertyName] = this._oldValue;
   }
 }

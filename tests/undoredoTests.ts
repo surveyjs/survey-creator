@@ -1,44 +1,106 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-// import { SurveyUndoRedo } from "../src/undoredo";
-import { UndoRedo } from "../src/undoredomanager";
+// import { SurveyUndoRedo } from "../src/undoRedoManager";
+import { UndoRedoManager, Transaction, Action } from "../src/undoredomanager";
 import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("UndoRedoTests");
 
-QUnit.test("Enabeling undo redo", function(assert) {
-  var survey = new Survey.Survey(getSurveyJson());
-  var undoredo = new UndoRedo(survey);
-  var currentPage = survey.currentPage;
-  var newElement = new Survey.QuestionRadiogroupModel("newElement");
+QUnit.test("UndoRedoManager Action Class", function(assert) {
+  var element = new Survey.QuestionRadiogroupModel("element");
+  var propertyName = "title";
+  var oldValue = "Old Title";
+  var newValue = "New Title";
 
-  assert.equal(
-    currentPage.questions.length,
-    2,
-    "there is 2 questions on the current page"
-  );
-  undoredo.startTransaction("add element");
-  currentPage.addElement(newElement);
-  undoredo.stopTransaction();
-  assert.equal(
-    currentPage.questions.length,
-    3,
-    "there is 3 questions on the current page"
+  var elementTitleAction = new Action(
+    propertyName,
+    oldValue,
+    newValue,
+    element
   );
 
-  // undoredo.undo();
-  // assert.equal(
-  //   currentPage.questions.length,
-  //   2,
-  //   "there is 2 questions after the undo()"
-  // );
-  // undoredo.redo();
-  // assert.equal(
-  //   currentPage.questions.length,
-  //   3,
-  //   "there is 3 questions after the redo()"
-  // );
+  element.title = oldValue;
+
+  assert.equal(element.title, oldValue, "old title exists");
+
+  element.title = newValue;
+
+  assert.equal(element.title, newValue, "new title exists");
+
+  elementTitleAction.rollback();
+  assert.equal(
+    element.title,
+    oldValue,
+    "action rollback test old title (same as name)"
+  );
+
+  elementTitleAction.apply();
+  assert.equal(element.title, newValue, "action apply test new title");
 });
+
+QUnit.test("UndoRedoManager Transaction Class", function(assert) {
+  var transaction = new Transaction("transaction1");
+  var element = new Survey.QuestionRadiogroupModel("element");
+  var propertyName = "title";
+
+  element.title = "title1";
+  var elementTitleAction = new Action(
+    propertyName,
+    "title1",
+    "title2",
+    element
+  );
+  element.title = "title2";
+  transaction.addAction(elementTitleAction);
+
+  elementTitleAction = new Action(propertyName, "title2", "title3", element);
+  element.title = "title3";
+  transaction.addAction(elementTitleAction);
+
+  transaction.rollback();
+  assert.equal(element.title, "title1", "first title");
+
+  transaction.apply();
+  assert.equal(
+    element.title,
+    "title3",
+    "third title, miss title2 because of transaction"
+  );
+});
+
+// QUnit.test("Enabeling undo redo", function(assert) {
+//   var survey = new Survey.Survey(getSurveyJson());
+//   var undoRedoManager = new UndoRedoManager(survey);
+//   var currentPage = survey.currentPage;
+//   var newElement = new Survey.QuestionRadiogroupModel("newElement");
+
+//   assert.equal(
+//     currentPage.questions.length,
+//     2,
+//     "there is 2 questions on the current page"
+//   );
+//   undoRedoManager.startTransaction("add element");
+//   currentPage.addElement(newElement);
+//   undoRedoManager.stopTransaction();
+//   assert.equal(
+//     currentPage.questions.length,
+//     3,
+//     "there is 3 questions on the current page"
+//   );
+
+//   undoRedoManager.undo();
+//   assert.equal(
+//     currentPage.questions.length,
+//     2,
+//     "there is 2 questions after the undo()"
+//   );
+//   undoRedoManager.redo();
+//   assert.equal(
+//     currentPage.questions.length,
+//     3,
+//     "there is 3 questions after the redo()"
+//   );
+// });
 
 // QUnit.test("Enabeling undo redo", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());
