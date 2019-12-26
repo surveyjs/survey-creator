@@ -2,6 +2,10 @@
     waiting for approve pullrequests:
      * https://github.com/SortableJS/knockout-sortablejs/pull/9)
      * https://github.com/SortableJS/knockout-sortablejs/pull/1/files
+  Change line:
+  if (handler) handler(e, itemVM, parentVM, collection, bindings);
+  to:
+  if (handler && handler(e, itemVM, parentVM, collection, bindings)) return;
 */
 
 /*global ko*/
@@ -107,7 +111,8 @@
               collection =
                 bindingHandlerBinding.collection ||
                 bindingHandlerBinding.foreach;
-            if (handler) handler(e, itemVM, parentVM, collection, bindings);
+            if (handler && handler(e, itemVM, parentVM, collection, bindings))
+              return;
             if (eventHandlers[eventType])
               eventHandlers[eventType](
                 e,

@@ -202,6 +202,14 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     this.updateArrayValue(items);
   }
+  private updateArrayValue(items: any) {
+    if (!this.origionalValue) return;
+    this.origionalValue.splice(0, this.origionalValue.length);
+    if (!Array.isArray(items)) return;
+    for (var i = 0; i < items.length; i++) {
+      this.origionalValue.push(items[i]);
+    }
+  }
   protected getItemsText(): string {
     var items = [];
     for (var i = 0; i < this.origionalValue.length; i++) {
