@@ -20,16 +20,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     }
     qjson.titleLocation = "hidden";
     //qjson.showClearButton = true;
-    qjson.storeOthersAsComment = false;
     qjson.readOnly = readOnly;
-    SurveyPropertyDefaultValueEditor.deleteConditionProperties(qjson);
-    if (!!qjson.choices) {
-      for (var i = 0; i < qjson.choices.length; i++) {
-        SurveyPropertyDefaultValueEditor.deleteConditionProperties(
-          qjson.choices[i]
-        );
-      }
-    }
     return qjson;
   }
   private static deleteConditionProperties(json: any) {
@@ -41,17 +32,35 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   }
   public static createSurveyFromJsonQuestion(
     questionJson: any,
-    options: ISurveyObjectEditorOptions
+    options: ISurveyObjectEditorOptions,
+    surveyName: string
   ): Survey.Survey {
     var json = {
       questions: [],
       showNavigationButtons: false,
-      showQuestionNumbers: "off"
+      showQuestionNumbers: "off",
+      textUpdateMode: "onTyping"
     };
+    questionJson.storeOthersAsComment = false;
+    SurveyPropertyDefaultValueEditor.deleteConditionProperties(questionJson);
+    if (!!questionJson.choices) {
+      for (var i = 0; i < questionJson.choices.length; i++) {
+        SurveyPropertyDefaultValueEditor.deleteConditionProperties(
+          questionJson.choices[i]
+        );
+      }
+    }
     json.questions.push(questionJson);
-    return !!options
-      ? options.createSurvey(json, "defaultValueEditor")
+    var survey = !!options
+      ? options.createSurvey(json, surveyName)
       : new Survey.Survey(json);
+    if (!!survey.css.body) survey.css.body = ""; //TODO it will modify css.body for all surveys
+    survey.onUpdateQuestionCssClasses.add(function(sender, options) {
+      if (!!options.cssClasses.mainRoot) {
+        options.cssClasses.mainRoot += " svd-survey-nopadding";
+      }
+    });
+    return survey;
   }
   public survey: Survey.Survey;
   koSurvey: any;
@@ -87,7 +96,8 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     if (!!json) {
       this.survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
         json,
-        this.options
+        this.options,
+        "defaultValueEditor"
       );
 
       this.survey.setValue(

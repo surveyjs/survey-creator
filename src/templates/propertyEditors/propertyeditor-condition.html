@@ -5,19 +5,19 @@
 
 <script type="text/html" id="propertyeditorcontent-condition">
   <div class="propertyeditor-condition">
-    <div class="svd-toolbox-category-header" data-bind="visible: koIsCompactMode, click: koShowHideEditor">
+    <div class="svd-expression-header" data-bind="visible: koIsCompactMode, click: koShowHideEditor">
         <span
             data-bind="text: koConditionDisplayText"
         ></span>
         <!-- ko ifnot: koIsEditorShowing -->
         <svg-icon
-            class="icon-toolbox-arrow"
+            class="icon-expression-arrow svd-primary-icon"
             params="iconName: 'icon-arrow_down_10x10', size: 10"
         ></svg-icon>
         <!-- /ko -->
         <!-- ko if: koIsEditorShowing -->
         <svg-icon
-            class="icon-toolbox-arrow svd-primary-icon"
+            class="icon-expression-arrow svd-primary-icon"
             params="iconName: 'icon-arrow_up_10x10', size: 10"
         ></svg-icon>
         </span>

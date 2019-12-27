@@ -763,3 +763,18 @@
     pointer-events: none;
   }
 }
+.svd-expression-header {
+  background-color: #f0f0f0;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  cursor: pointer;
+
+  .icon-expression-arrow {
+    float: right;
+    margin-top: -2px;
+  }
+}
+.svd-survey-nopadding {
+  padding: 0 !important;
+  margin: 0 0 1em 1em !important;
+}
