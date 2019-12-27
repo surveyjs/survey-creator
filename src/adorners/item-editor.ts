@@ -271,8 +271,10 @@ export var itemDraggableAdorner = {
             oldIndex = choices.indexOf(choice);
             newIndex = choices.indexOf(itemBefore);
           }
+          editor.undoRedoManager.startTransaction("move choice items");
           choices.splice(oldIndex, 1);
           choices.splice(newIndex, 0, choice);
+          editor.undoRedoManager.stopTransaction();
           editor.onQuestionEditorChanged(model);
         }
       })
@@ -293,7 +295,11 @@ export var itemDraggableAdorner = {
         }
       )
     );
-    var raiseChangingEvent = (target: any, propertyName: string, newValue: any) => {
+    var raiseChangingEvent = (
+      target: any,
+      propertyName: string,
+      newValue: any
+    ) => {
       var options = {
         propertyName: propertyName,
         obj: target,
@@ -305,31 +311,36 @@ export var itemDraggableAdorner = {
       newValue = options.newValue === null ? options.value : options.newValue;
       return newValue;
     };
-    var raiseChangedEvent = (target: any, propertyName: string, newValue: any) => {
-      if(typeof target.getType === "function") {
+    var raiseChangedEvent = (
+      target: any,
+      propertyName: string,
+      newValue: any
+    ) => {
+      if (typeof target.getType === "function") {
         var property = Survey.Serializer.findProperty(
           target.getType(),
           propertyName
         );
         editor.onPropertyValueChanged(property, target, newValue);
       }
-    }
+    };
     itemsRoot[0].appendChild(addNew);
-    if (editor.canShowObjectProperty(model, "hasOther") && model.hasOther !== true) {
+    if (
+      editor.canShowObjectProperty(model, "hasOther") &&
+      model.hasOther !== true
+    ) {
       itemsRoot[0].appendChild(
-        createCustomElement(
-          editorLocalization.getString("pe.addOther"),
-          () => {
-            var newValue = !model.hasOther;
-            newValue = raiseChangingEvent(model, "hasOther", newValue);
-            model.hasOther = newValue;
-            raiseChangedEvent(model, "hasOther", newValue);
-          }
-        )
+        createCustomElement(editorLocalization.getString("pe.addOther"), () => {
+          var newValue = !model.hasOther;
+          newValue = raiseChangingEvent(model, "hasOther", newValue);
+          model.hasOther = newValue;
+          raiseChangedEvent(model, "hasOther", newValue);
+        })
       );
     }
     if (
-      model.hasSelectAll !== undefined && model.hasSelectAll !== true &&
+      model.hasSelectAll !== undefined &&
+      model.hasSelectAll !== true &&
       editor.canShowObjectProperty(model, "hasSelectAll")
     ) {
       itemsRoot[0].appendChild(
@@ -345,19 +356,17 @@ export var itemDraggableAdorner = {
       );
     }
     if (
-      model.hasNone !== undefined && model.hasNone !== true &&
+      model.hasNone !== undefined &&
+      model.hasNone !== true &&
       editor.canShowObjectProperty(model, "hasNone")
     ) {
       itemsRoot[0].appendChild(
-        createCustomElement(
-          editorLocalization.getString("pe.addNone"),
-          () => {
-            var newValue = !model.hasNone;
-            newValue = raiseChangingEvent(model, "hasNone", newValue);
-            model.hasNone = newValue;
-            raiseChangedEvent(model, "hasNone", newValue);
-          }
-        )
+        createCustomElement(editorLocalization.getString("pe.addNone"), () => {
+          var newValue = !model.hasNone;
+          newValue = raiseChangingEvent(model, "hasNone", newValue);
+          model.hasNone = newValue;
+          raiseChangedEvent(model, "hasNone", newValue);
+        })
       );
     }
   }

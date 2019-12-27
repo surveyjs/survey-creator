@@ -94,7 +94,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
-  private undoRedoManager: UndoRedoManager;
+  public undoRedoManager: UndoRedoManager;
   private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
