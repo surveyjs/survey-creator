@@ -144,6 +144,44 @@ QUnit.test("Undo/redo add element", function(assert) {
   );
 });
 
+QUnit.test("Undo/redo add element with transaction", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var currentPage = survey.currentPage;
+  var newElement = new Survey.QuestionRadiogroupModel("newElement");
+  var newElement2 = new Survey.QuestionRadiogroupModel("newElement2");
+
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions on the current page"
+  );
+
+  undoRedoManager.startTransaction("add elements");
+  currentPage.addElement(newElement);
+  currentPage.addElement(newElement2);
+  undoRedoManager.stopTransaction();
+
+  assert.equal(
+    currentPage.questions.length,
+    4,
+    "there is 4 questions on the current page"
+  );
+
+  undoRedoManager.undo();
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions after the undo()"
+  );
+  undoRedoManager.redo();
+  assert.equal(
+    currentPage.questions.length,
+    4,
+    "there is 4 questions after the redo()"
+  );
+});
+
 // QUnit.test("Enabeling undo redo", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());
 //   var undo = new SurveyUndoRedo();
