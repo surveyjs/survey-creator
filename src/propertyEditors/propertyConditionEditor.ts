@@ -5,6 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { EditableObject } from "./editableObject";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
+import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 import * as editorLocalization from "../editorLocalization";
 
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
@@ -305,34 +306,16 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koTextValue(val);
     this.koValue(val);
   }
-  private deleteConditionProperties(json: any) {
-    delete json["visible"];
-    delete json["visibleIf"];
-    delete json["enable"];
-    delete json["enableIf"];
-    delete json["valueName"];
-  }
   private createValueSurvey(qjson: any, questionName: string): Survey.Survey {
     qjson.name = "question";
     qjson.title = editorLocalization.editorLocalization.getString(
       "pe.conditionValueQuestionTitle"
     );
-    this.deleteConditionProperties(qjson);
-    if (!!qjson.choices) {
-      for (var i = 0; i < qjson.choices.length; i++) {
-        this.deleteConditionProperties(qjson.choices[i]);
-      }
-    }
-    var json = {
-      questions: [],
-      showNavigationButtons: false,
-      showQuestionNumbers: "off",
-      textUpdateMode: "onTyping"
-    };
-    json.questions.push(qjson);
-    var survey = !!this.options
-      ? this.options.createSurvey(json, "conditionEditor")
-      : new Survey.Survey(json);
+    var survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
+      qjson,
+      this.options,
+      "conditionEditor"
+    );
     var self = this;
     survey.onValueChanged.add(function(survey, options) {
       self.koDummy(self.koDummy() + 1);
