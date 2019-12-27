@@ -46,6 +46,14 @@ export class SurveyPropertyEditorShowWindow {
     });
     modal.open();
 
+    var fadeElement = document.getElementById("surveyquestioneditorwindow");
+    var outOfModalClickHandler = function(evt) {
+      if ((<any>evt.target).className === "modal") {
+        editor.onResetClick();
+      }
+    };
+    fadeElement.addEventListener("click", outOfModalClickHandler);
+
     document.addEventListener(
       "keydown",
       function(ev) {
@@ -55,6 +63,7 @@ export class SurveyPropertyEditorShowWindow {
     );
 
     editor.onHideWindow = function() {
+      fadeElement.removeEventListener("click", outOfModalClickHandler);
       modal.close();
     };
   }
