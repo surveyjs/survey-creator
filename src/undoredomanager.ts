@@ -163,6 +163,7 @@ export class ArrayAction {
     this._index = arrayChanges.index;
     this._deleteCount = arrayChanges.deleteCount;
     this._itemsToAdd = arrayChanges.itemsToAdd;
+    this._deletedItems = arrayChanges.deletedItems;
   }
 
   apply() {

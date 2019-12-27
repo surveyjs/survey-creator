@@ -144,6 +144,51 @@ QUnit.test("Undo/redo add element", function(assert) {
   );
 });
 
+QUnit.test("Undo/redo remove element", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var currentPage = survey.currentPage;
+  var newElement = new Survey.QuestionRadiogroupModel("newElement");
+
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions on the current page"
+  );
+
+  currentPage.addElement(newElement);
+
+  assert.equal(
+    currentPage.questions.length,
+    3,
+    "there is 3 questions on the current page"
+  );
+
+  currentPage.removeElement(newElement);
+
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions on the current page"
+  );
+
+  undoRedoManager.undo();
+
+  assert.equal(
+    currentPage.questions.length,
+    3,
+    "there is 3 questions on the current page after the undo"
+  );
+
+  undoRedoManager.redo();
+
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions on the current page after the redo"
+  );
+});
+
 QUnit.test("Undo/redo add element with transaction", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
   var undoRedoManager = new UndoRedoManager(survey);
