@@ -110,39 +110,39 @@ QUnit.test("Undo/redo canUndo canRedo", function(assert) {
   assert.equal(survey.title, newTitle, "redo to new title");
 });
 
-// QUnit.test("Undo/redo add element", function(assert) {
-//   var survey = new Survey.Survey(getSurveyJson());
-//   var undoRedoManager = new UndoRedoManager(survey);
-//   var currentPage = survey.currentPage;
-//   var newElement = new Survey.QuestionRadiogroupModel("newElement");
+QUnit.test("Undo/redo add element", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var currentPage = survey.currentPage;
+  var newElement = new Survey.QuestionRadiogroupModel("newElement");
 
-//   assert.equal(
-//     currentPage.questions.length,
-//     2,
-//     "there is 2 questions on the current page"
-//   );
-//   undoRedoManager.startTransaction("add element");
-//   currentPage.addElement(newElement);
-//   undoRedoManager.stopTransaction();
-//   assert.equal(
-//     currentPage.questions.length,
-//     3,
-//     "there is 3 questions on the current page"
-//   );
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions on the current page"
+  );
 
-//   undoRedoManager.undo();
-//   assert.equal(
-//     currentPage.questions.length,
-//     2,
-//     "there is 2 questions after the undo()"
-//   );
-//   undoRedoManager.redo();
-//   assert.equal(
-//     currentPage.questions.length,
-//     3,
-//     "there is 3 questions after the redo()"
-//   );
-// });
+  currentPage.addElement(newElement);
+
+  assert.equal(
+    currentPage.questions.length,
+    3,
+    "there is 3 questions on the current page"
+  );
+
+  undoRedoManager.undo();
+  assert.equal(
+    currentPage.questions.length,
+    2,
+    "there is 2 questions after the undo()"
+  );
+  undoRedoManager.redo();
+  assert.equal(
+    currentPage.questions.length,
+    3,
+    "there is 3 questions after the redo()"
+  );
+});
 
 // QUnit.test("Enabeling undo redo", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());

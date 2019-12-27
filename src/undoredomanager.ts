@@ -1,3 +1,4 @@
+import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 
 export class UndoRedoManager {
@@ -6,20 +7,24 @@ export class UndoRedoManager {
       name: string,
       oldValue: any,
       newValue: any,
-      sender: Survey.Base
+      sender: Survey.Base,
+      arrayChanges: Survey.ArrayChanges
     ) => {
       if (this._keepSilense) return;
 
       let transaction = this._preparingTransaction;
+      let action = arrayChanges
+        ? new ArrayAction(name, sender, arrayChanges)
+        : new Action(name, oldValue, newValue, sender);
 
       if (!transaction) {
         transaction = new Transaction(name);
-        transaction.addAction(new Action(name, oldValue, newValue, sender));
+        transaction.addAction(action);
         this._addTransaction(transaction);
         return;
       }
 
-      transaction.addAction(new Action(name, oldValue, newValue, sender));
+      transaction.addAction(action);
     };
   }
 
@@ -88,7 +93,7 @@ export class UndoRedoManager {
 export class Transaction {
   constructor(private _name: string) {}
 
-  private _actions: Action[] = [];
+  private _actions: any[] = [];
 
   apply() {
     const actions = this._actions;
@@ -106,7 +111,7 @@ export class Transaction {
     }
   }
 
-  addAction(action: Action) {
+  addAction(action: any) {
     this._actions.push(action);
   }
 }
@@ -125,5 +130,52 @@ export class Action {
 
   rollback() {
     this._sender[this._propertyName] = this._oldValue;
+  }
+}
+
+export class ArrayAction {
+  private _index: number = 0;
+  private _deleteCount: number = 0;
+  private _itemsToAdd: any[] = [];
+  private _deletedItems: any[] = [];
+
+  constructor(
+    private _propertyName: string,
+    private _sender: Survey.Base,
+    arrayChanges: Survey.ArrayChanges
+  ) {
+    this._index = arrayChanges.index;
+    this._deleteCount = arrayChanges.deleteCount;
+    this._itemsToAdd = arrayChanges.itemsToAdd;
+  }
+
+  apply() {
+    const array = this._sender[this._propertyName];
+    const index = this._index;
+    const deleteCount = this._deleteCount;
+    const itemsToAdd = this._itemsToAdd;
+
+    this.doSplice(array, index, deleteCount, itemsToAdd);
+  }
+
+  rollback() {
+    const array = this._sender[this._propertyName];
+    const index = this._index;
+    const deleteCount = this._itemsToAdd.length;
+    const itemsToAdd = this._deletedItems;
+
+    this.doSplice(array, index, deleteCount, itemsToAdd);
+  }
+
+  doSplice(
+    array: any[],
+    index: number,
+    deleteCount: number,
+    itemsToAdd: any[]
+  ) {
+    this._deletedItems = array.splice.apply(
+      array,
+      [index, deleteCount].concat(itemsToAdd)
+    );
   }
 }
