@@ -10,6 +10,7 @@ export class UndoRedoManager {
       sender: Survey.Base,
       arrayChanges: Survey.ArrayChanges
     ) => {
+      if (!this.hasPropertyInSerializer(sender, name)) return;
       if (this._keepSilense) return;
 
       let transaction = this._preparingTransaction;
@@ -33,6 +34,9 @@ export class UndoRedoManager {
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
+  private hasPropertyInSerializer(sender: Survey.Base, propertyName: string) {
+    return !!Survey.Serializer.findProperty(sender.getType(), propertyName);
+  }
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
