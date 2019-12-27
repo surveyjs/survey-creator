@@ -2,7 +2,12 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 
 export class UndoRedoManager {
+  public koCanUndo: any;
+  public koCanRedo: any;
   constructor(private _survey: Survey.Survey) {
+    this.koCanUndo = ko.observable(false);
+    this.koCanRedo = ko.observable(false);
+
     this._survey.onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
@@ -46,6 +51,7 @@ export class UndoRedoManager {
     this._cutOffTail();
     this._transactions.push(transaction);
     this._currentTransactionIndex++;
+    this.updateKoCanUndoRedo();
   }
   private _getCurrentTransaction() {
     const index = this._currentTransactionIndex;
@@ -56,6 +62,10 @@ export class UndoRedoManager {
     const index = this._currentTransactionIndex;
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
+  }
+  private updateKoCanUndoRedo() {
+    this.koCanUndo(this.canUndo());
+    this.koCanRedo(this.canRedo());
   }
 
   startTransaction(name: string) {
@@ -78,6 +88,7 @@ export class UndoRedoManager {
     this._keepSilense = false;
 
     this._currentTransactionIndex--;
+    this.updateKoCanUndoRedo();
   }
   canRedo() {
     return !!this._getNextTransaction();
@@ -91,6 +102,7 @@ export class UndoRedoManager {
     this._keepSilense = false;
 
     this._currentTransactionIndex++;
+    this.updateKoCanUndoRedo();
   }
 }
 

@@ -1036,9 +1036,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.render(renderedElement);
     }
 
-    this.addToolbarItems();
-
     this.undoRedoManager = new UndoRedoManager(this.survey);
+
+    this.addToolbarItems();
   }
 
   tabs = ko.observableArray();
@@ -1056,7 +1056,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-undo",
       icon: "icon-actionundo",
       visible: this.koIsShowDesigner,
-      // enabled: this.undoRedoManager.koCanUndo, TODO undoredo
+      enabled: this.undoRedoManager.koCanUndo,
       action: this.doUndoClick,
       title: this.getLocString("ed.undo")
     });
@@ -1064,7 +1064,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-redo",
       icon: "icon-actionredo",
       visible: this.koIsShowDesigner,
-      // enabled: this.undoRedoManager.koCanRedo, TODO undoredo
+      enabled: this.undoRedoManager.koCanRedo,
       action: this.doRedoClick,
       title: this.getLocString("ed.redo")
     });
