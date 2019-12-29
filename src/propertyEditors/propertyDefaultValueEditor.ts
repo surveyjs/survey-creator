@@ -54,12 +54,10 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     var survey = !!options
       ? options.createSurvey(json, surveyName)
       : new Survey.Survey(json);
-    if (!!survey.css.body) survey.css.body = ""; //TODO it will modify css.body for all surveys
-    survey.onUpdateQuestionCssClasses.add(function(sender, options) {
-      if (!!options.cssClasses.mainRoot) {
-        options.cssClasses.mainRoot += " svd-survey-nopadding";
-      }
-    });
+    survey.css.body = "";
+    if (!!survey.css.question) {
+      survey.css.question.mainRoot += " svd-survey-nopadding";
+    }
     return survey;
   }
   public survey: Survey.Survey;
