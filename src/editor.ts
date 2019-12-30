@@ -1648,6 +1648,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     "toolbar",
     "pages-editor"
   ]);
+
   public get topContainer() {
     return this._topContainer();
   }
