@@ -275,7 +275,6 @@ export class SurveyLiveTester {
     return res;
   }
   public koEventAfterRender(element: any, survey: any) {
-    survey.onRendered.fire(self, {});
     survey["afterRenderSurvey"](element);
   }
 

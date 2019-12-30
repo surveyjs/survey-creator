@@ -15,6 +15,10 @@ export class UndoRedoManager {
       sender: Survey.Base,
       arrayChanges: Survey.ArrayChanges
     ) => {
+    //   console.dir(
+    //     `name: ${name} oldValue: ${oldValue} newValue: ${newValue} sender: ${sender} arrayChanges: ${arrayChanges}`
+    //   );
+
       if (!this.hasPropertyInSerializer(sender, name)) return;
       if (this._keepSilense) return;
 
