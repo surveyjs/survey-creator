@@ -205,6 +205,10 @@
       width: 100%;
 
       .svd_editors {
+        display: table-cell;
+        vertical-align: top;
+        padding: 0 15px;
+
         .svd_questions_editor {
           height: $editor-height;
           overflow-y: scroll;

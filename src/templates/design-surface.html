@@ -1,132 +1,128 @@
 <script type="text/html" id="se-component-toolbox-header">
-    <!-- ko if: !toolbox.koHasCategories() -->
-    <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: getLocString('ed.toolbox')" ></div>
-    <!-- /ko  -->
+  <!-- ko if: !toolbox.koHasCategories() -->
+  <div class="svd_toolbox_title hidden-sm hidden-xs" data-bind="text: getLocString('ed.toolbox')" ></div>
+  <!-- /ko  -->
 </script>
 
 <script type="text/html" id="se-component-toolbox">
 
-<div data-bind="visible: showToolbox" class="svd_toolbox svd-dark-bg-color">
-    <!-- ko if: toolbox.koHasCategories -->
-    <div
-    class="panel-group"
-    role="tablist"
-    data-bind="foreach: toolbox.koCategories"
-    >
-    <div class="panel panel-info">
-        <div
-        class="svd-toolbox-category-header"
-        role="tab"
-        data-bind="click: expand"
-        >
-        <span
-            data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"
-        ></span>
-        <!--ko if: $parent.koCanCollapseCategories -->
-        <!-- ko if: koCollapsed -->
-        <svg-icon
-            class="icon-toolbox-arrow"
-            params="iconName: 'icon-arrow_down_10x10', size: 10"
-        ></svg-icon>
-        <!-- /ko -->
-        <!-- ko ifnot: koCollapsed -->
-        <svg-icon
-            class="icon-toolbox-arrow svd-primary-icon"
-            params="iconName: 'icon-arrow_up_10x10', size: 10"
-        ></svg-icon>
-        <!-- /ko -->
-        <!-- /ko -->
-        </div>
-        <div
-        role="tabpanel"
-        data-bind="css: { 'panel-collapse collapse': koCollapsed}"
-        >
-        <!-- ko foreach: items -->
-            <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parent } } --><!-- /ko -->
-        <!-- /ko  -->
-        </div>
-    </div>
-    </div>
-    <!-- /ko  -->
-    <!-- ko if: !toolbox.koHasCategories() -->
-    <!-- ko foreach: toolbox.koItems -->
-    <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parent } } --><!-- /ko -->
-    <!-- /ko  -->
-    <!-- /ko  -->
-</div>
+  <div data-bind="visible: showToolbox" class="svd_toolbox svd-dark-bg-color">
+      <!-- ko if: toolbox.koHasCategories -->
+      <div
+      class="panel-group"
+      role="tablist"
+      data-bind="foreach: toolbox.koCategories"
+      >
+      <div class="panel panel-info">
+          <div
+          class="svd-toolbox-category-header"
+          role="tab"
+          data-bind="click: expand"
+          >
+          <span
+              data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"
+          ></span>
+          <!--ko if: $parent.koCanCollapseCategories -->
+          <!-- ko if: koCollapsed -->
+          <svg-icon
+              class="icon-toolbox-arrow"
+              params="iconName: 'icon-arrow_down_10x10', size: 10"
+          ></svg-icon>
+          <!-- /ko -->
+          <!-- ko ifnot: koCollapsed -->
+          <svg-icon
+              class="icon-toolbox-arrow svd-primary-icon"
+              params="iconName: 'icon-arrow_up_10x10', size: 10"
+          ></svg-icon>
+          <!-- /ko -->
+          <!-- /ko -->
+          </div>
+          <div
+          role="tabpanel"
+          data-bind="css: { 'panel-collapse collapse': koCollapsed}"
+          >
+          <!-- ko foreach: items -->
+              <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parent } } --><!-- /ko -->
+          <!-- /ko  -->
+          </div>
+      </div>
+      </div>
+      <!-- /ko  -->
+      <!-- ko if: !toolbox.koHasCategories() -->
+      <!-- ko foreach: toolbox.koItems -->
+      <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parent } } --><!-- /ko -->
+      <!-- /ko  -->
+      <!-- /ko  -->
+  </div>
 </script>
 
 <script type="text/html" id="se-tab-designer-item">
-    <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color"
-    data-bind="attr: {title: item.tooltip}, css: 'svd_toolbox_item_' + item.iconName, key2click, clickNoFocus: function() { editor.clickToolboxItem(item); }, event:{dragstart: function(el, e) { editor.draggingToolboxItem(item, e); return true;}, dragend: function(el, e) { editor.dragEnd(); }}"
-    >
-        <span>
-        <svg-icon params="iconName: item.iconName"></svg-icon>
-        </span>
-        <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text: item.title"></span>
-    </div>
+  <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color"
+  data-bind="attr: {title: item.tooltip}, css: 'svd_toolbox_item_' + item.iconName, key2click, clickNoFocus: function() { editor.clickToolboxItem(item); }, event:{dragstart: function(el, e) { editor.draggingToolboxItem(item, e); return true;}, dragend: function(el, e) { editor.dragEnd(); }}"
+  >
+      <span>
+      <svg-icon params="iconName: item.iconName"></svg-icon>
+      </span>
+      <span class="svd_toolbox_item_text hidden-sm hidden-xs" data-bind="text: item.title"></span>
+  </div>
 </script>
- 
+
 <script type="text/html" id="se-component-property-grid-header">
-    <div class="svd-property-grid__header">
-        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-        <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
-    </div>
+  <div class="svd-property-grid__header">
+      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+      <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
+  </div>
 </script>
 <script type="text/html" id="se-component-property-grid">
-<div class="svd_properties svd-light-border-color svd-dark-bg-color">
-    <div class="svd_object_selector svd-light-border-color">
-        <div class="svd_custom_select">
-            <select
-            onmousewheel="return false;"
-            id="objectSelector"
-            class="form-control"
-            data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
-            ></select>
-        </div>
-        <span
-            data-bind="click: editCurrentObject, attr: { title: getLocString('ed.editSelObject')}"
-        >
-            <svg-icon
-            class="svd-primary-icon icon-edit"
-            params="iconName: 'icon-edit', size:24"
-            ></svg-icon>
-        </span>
-    </div>
-    
-    <!-- <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
-        <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
-    </div> -->
+  <div class="svd_properties svd-light-border-color svd-dark-bg-color">
+      <div class="svd_object_selector svd-light-border-color">
+          <div class="svd_custom_select">
+              <select
+              onmousewheel="return false;"
+              id="objectSelector"
+              class="form-control"
+              data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
+              ></select>
+          </div>
+          <span
+              data-bind="click: editCurrentObject, attr: { title: getLocString('ed.editSelObject')}"
+          >
+              <svg-icon
+              class="svd-primary-icon icon-edit"
+              params="iconName: 'icon-edit', size:24"
+              ></svg-icon>
+          </span>
+      </div>
 
-    <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
-        <div data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"></div>
-    </div>
-    
-</div>
+      <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
+          <div data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"></div>
+      </div>
+
+  </div>
 </script>
 
 <script type="text/html" id="se-component-toolbar">
-    <!-- ko if: showPropertyGrid && koHideAdvancedSettings()  -->
-    <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
-        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-        <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
-    </div>
-    <!-- /ko -->
-    <div class="svd_toolbar">
-        <!-- ko foreach: toolbarItems -->
-        <span
-        tabindex="0"
-        class="svd_action"
-        data-bind="css: $data.css, visible: visible, attr: { id: id }"
-        >
-        <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
-        <!-- /ko -->
-        </span>
-        <!-- /ko -->
-    </div>
+  <!-- ko if: showPropertyGrid && koHideAdvancedSettings()  -->
+  <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
+      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+      <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
+  </div>
+  <!-- /ko -->
+  <div class="svd_toolbar">
+      <!-- ko foreach: toolbarItems -->
+      <span
+      tabindex="0"
+      class="svd_action"
+      data-bind="css: $data.css, visible: visible, attr: { id: id }"
+      >
+      <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+      <!-- /ko -->
+      </span>
+      <!-- /ko -->
+  </div>
 </script>
 
 <script type="text/html" id="se-component-pages-editor">
-    <pages-editor params="editor:$data" data-bind="visible: koShowPagesToolbox">
-    </pages-editor>
+  <pages-editor params="editor:$data" data-bind="visible: koShowPagesToolbox">
+  </pages-editor>
 </script>
