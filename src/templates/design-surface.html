@@ -68,11 +68,12 @@
 </script>
 
 <script type="text/html" id="se-component-property-grid-header">
-  <div class="svd-property-grid__header">
+  <div class="svd-property-grid__header" data-bind="click: function(m, e) { var surfaceEl = document.getElementsByClassName('svd_editors')[0]; koHideAdvancedSettings(true); surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = ''; }">
       <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-      <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
+      <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="attr: { title: getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
   </div>
 </script>
+
 <script type="text/html" id="se-component-property-grid">
   <div class="svd_properties svd-light-border-color svd-dark-bg-color">
       <div class="svd_object_selector svd-light-border-color">
