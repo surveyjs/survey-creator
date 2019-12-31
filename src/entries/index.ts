@@ -70,7 +70,7 @@ export {
 export { QuestionToolbox } from "../questionToolbox";
 export { SurveyObjectProperty } from "../objectProperty";
 export { SurveyObjectEditor } from "../objectEditor";
-export { PagesEditor } from "../pagesEditor";
+export { PagesEditor } from "../pages-editor";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../surveylive";

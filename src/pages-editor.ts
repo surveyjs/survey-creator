@@ -5,6 +5,9 @@ import { editorLocalization } from "./editorLocalization";
 import { SurveyCreator } from "./editor";
 import "../vendor/knockout-sortable.js";
 
+import "./pages-editor.scss";
+var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
+
 export class PagesEditor {
   private isNeedAutoScroll = true;
   private isDraggingPage = ko.observable(false);
@@ -212,6 +215,7 @@ export class PagesEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
+  public get;
 }
 
 ko.components.register("pages-editor", {
@@ -220,5 +224,5 @@ ko.components.register("pages-editor", {
       return new PagesEditor(params.editor, componentInfo.element);
     }
   },
-  template: { element: "svd-page-selector-template" }
+  template: template
 });
