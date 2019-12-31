@@ -13,7 +13,7 @@ export class PagesEditor {
   private isDraggingPage = ko.observable(false);
   private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
-  private updateScroller;
+  private updateScroller = undefined;
   pagesSelection: ko.Computed<any>;
   private selectionSubscription: ko.Subscription;
 
@@ -54,7 +54,9 @@ export class PagesEditor {
       var pagesElement: HTMLDivElement = this.element.querySelector(
         ".svd-pages"
       );
-      this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
+      if (!!pagesElement) {
+        this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
+      }
     }, 500);
   }
 
@@ -228,8 +230,10 @@ export class PagesEditor {
   public hasScroller = ko.observable(true);
 
   dispose() {
-    clearInterval(this.updateScroller);
-    this.updateScroller = undefined;
+    if (!!this.updateScroller) {
+      clearInterval(this.updateScroller);
+      this.updateScroller = undefined;
+    }
     this.selectionSubscription.dispose();
     this.selectionSubscription = undefined;
     this.pagesSelection.dispose();
