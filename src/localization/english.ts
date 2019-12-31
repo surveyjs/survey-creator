@@ -8,7 +8,7 @@ export var enStrings = {
     externalHelpLink: "Watch and learn how to create surveys",
     externalHelpLinkUrl:
       "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    dropQuestion: "Please drop a question here from the Toolbox on the left.",
+    dropQuestion: "Please drop a question here from the Toolbox.",
     copy: "Copy",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
@@ -60,6 +60,7 @@ export var enStrings = {
     testSurvey: "Test Survey",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
+    navigateToMsg: "You had to navigate to:",
     logic: "Survey Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",

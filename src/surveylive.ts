@@ -135,6 +135,15 @@ export class SurveyLiveTester {
       plainData = addCollapsed(plainData);
       self.koResultData(plainData);
     });
+    if (!!this.survey["onNavigateToUrl"]) {
+      this.survey["onNavigateToUrl"].add(function(sender, options) {
+        var url = options.url;
+        options.url = "";
+        if (!!url) {
+          alert(self.getLocString("ed.navigateToMsg") + " '" + url + "'.");
+        }
+      });
+    }
     this.survey.onStarted.add((sender: Survey.Survey) => {
       self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
     });

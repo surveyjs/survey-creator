@@ -13,6 +13,7 @@ export class EditableObject {
       if (!!object.owner) return EditableObject.getSurvey(object.owner);
       if (!!object.errorOwner)
         return EditableObject.getSurvey(object.errorOwner);
+      if (!!object.locOwner) return EditableObject.getSurvey(object.locOwner);
     }
     return null;
   }

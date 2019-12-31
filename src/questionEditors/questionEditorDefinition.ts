@@ -466,8 +466,10 @@ export class SurveyQuestionEditorDefinition {
         { name: "focusOnFirstError", tab: "validation" },
         { name: "checkErrorsMode", tab: "validation" },
 
+        { name: "navigateToUrl", tab: "showOnCompleted" },
         { name: "showCompletedPage", tab: "showOnCompleted" },
         { name: "completedHtml", tab: "showOnCompleted" },
+        { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },
         { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
         { name: "loadingHtml", tab: "showOnCompleted" },
         { name: "completedBeforeHtml", tab: "showOnCompleted" },

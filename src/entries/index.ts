@@ -47,6 +47,7 @@ export {
 } from "../propertyEditors/propertyDefaultValueEditor";
 export { SurveyPropertyTriggersEditor } from "../propertyEditors/propertyTriggersEditor";
 export { SurveyPropertyHtmlConditionEditor } from "../propertyEditors/propertyHtmlConditionEditor";
+export { SurveyPropertyUrlConditionEditor } from "../propertyEditors/propertyUrlConditionEditor";
 export { SurveyPropertyCalculatedValueEditor } from "../propertyEditors/propertyCalculatedValues";
 export { SurveyPropertyValidatorsEditor } from "../propertyEditors/propertyValidatorsEditor";
 export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
