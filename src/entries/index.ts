@@ -125,9 +125,6 @@ export {
 } from "../utils/accordion";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
-
-export {
-  DesignerContainerModel
-} from "../utils/designer-container";
+export { DesignerContainerModel } from "../utils/designer-container";
 
 export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";

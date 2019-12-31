@@ -1,10 +1,11 @@
 .svd-property-grid__header {
+  cursor: pointer;
   padding: 0.4em 1.5em 0.75em 1.5em;
   height: 1.5em;
   margin-bottom: 3em;
   margin-top: 0.35em;
   float: right;
-  
+
   .svd-property-grid__header-title {
     float: left;
     font-size: 14px;
@@ -15,7 +16,6 @@
   }
   .svd-property-grid__header-hide-button {
     float: right;
-    cursor: pointer;
   }
 }
 

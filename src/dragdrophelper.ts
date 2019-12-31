@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import { UndoRedoManager } from "./undoredomanager";
 import { SurveyHelper } from "./surveyHelper";
 
 if (!!ko.options) {
@@ -11,7 +12,8 @@ export class DragDropTargetElement {
     public page: Survey.Page,
     public target: any,
     public source: any,
-    nestedPanelDepth: number = -1
+    nestedPanelDepth: number = -1,
+    private undoRedoManager: UndoRedoManager
   ) {
     page.dragDropStart(source, target, nestedPanelDepth);
   }
@@ -24,8 +26,12 @@ export class DragDropTargetElement {
     return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
+    var result;
     this.clearCore();
-    return this.page.dragDropFinish();
+    this.undoRedoManager.startTransaction("drag drop");
+    result = this.page.dragDropFinish();
+    this.undoRedoManager.stopTransaction();
+    return result;
   }
   public clear() {
     this.clearCore();
@@ -53,7 +59,8 @@ export class DragDropHelper {
   constructor(
     public data: Survey.ISurvey,
     onModifiedCallback: (options?: any) => any,
-    parent: HTMLElement = null
+    parent: HTMLElement = null,
+    private undoRedoManager: UndoRedoManager
   ) {
     this.onModifiedCallback = onModifiedCallback;
     this.scrollableElement =
@@ -428,7 +435,8 @@ export class DragDropHelper {
       <Survey.Page>this.survey.currentPage,
       targetElement,
       source,
-      DragDropHelper.nestedPanelDepth
+      DragDropHelper.nestedPanelDepth,
+      this.undoRedoManager
     );
   }
   private setData(event: DragEvent, text: string) {

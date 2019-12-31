@@ -1036,8 +1036,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.render(renderedElement);
     }
 
-    this.undoRedoManager = new UndoRedoManager(this.survey);
-
     this.addToolbarItems();
   }
 
@@ -1650,6 +1648,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     "toolbar",
     "pages-editor"
   ]);
+
   public get topContainer() {
     return this._topContainer();
   }
@@ -2027,6 +2026,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
 
     this.initSurvey(this.getDefaultSurveyJson());
+
     this.setUndoRedoCurrentState(true);
 
     this.jsonEditor.init(
@@ -2072,12 +2072,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.surveyValue(
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
+    this.undoRedoManager = new UndoRedoManager(this.surveyValue());
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
         self.setModified(options);
       },
-      this.renderedElement
+      this.renderedElement,
+      this.undoRedoManager
     );
     this.dragDropHelper.readOnly = this.readOnly;
     this.surveyValue().getEditor = () => self;
@@ -2375,6 +2377,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.getRows(this.surveyValue().koCurrentPage()).length === 0
   );
   public dragOverQuestionsEditor(data, e) {
+    this.undoRedoManager.startTransaction("drag drop toolbox item");
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
     return false;
   }
