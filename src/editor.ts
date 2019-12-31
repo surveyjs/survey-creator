@@ -767,7 +767,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koShowOptions: any;
   koShowPropertyGrid = ko.observable<ContainerLocation>(true);
   koShowToolbox = ko.observable<ContainerLocation>(true);
-  koShowCategoriesInPropertyGrid = ko.observable(false);
+  koShowElementEditorAsPropertyGrid = ko.observable(false);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
   koDesignerHeight: any;
@@ -791,7 +791,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor,
    * showPropertyGrid, showToolbox, allowModifyPages
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
-   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -840,8 +840,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
 
     this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
-    this.elementPropertyGridValue.hasCategories = this.showCategoriesInPropertyGrid;
-    this.koShowCategoriesInPropertyGrid.subscribe(function(newValue) {
+    this.elementPropertyGridValue.hasCategories = this.showElementEditorAsPropertyGrid;
+    this.koShowElementEditorAsPropertyGrid.subscribe(function(newValue) {
       self.elementPropertyGridValue.hasCategories = newValue;
     });
 
@@ -1227,9 +1227,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
-    this.showCategoriesInPropertyGrid =
-      typeof options.showCategoriesInPropertyGrid !== "undefined"
-        ? options.showCategoriesInPropertyGrid
+    this.showElementEditorAsPropertyGrid =
+      typeof options.showElementEditorAsPropertyGrid !== "undefined"
+        ? options.showElementEditorAsPropertyGrid
         : true;
     this.showToolbox =
       typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
@@ -1526,7 +1526,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this._leftContainer.push("property-grid");
       }
       if (value !== false && value !== "none") {
-        this.setNewObjToPropertyGrid(this.koSelectedObject());
+        if (!!this.koSelectedObject) {
+          this.setNewObjToPropertyGrid(this.koSelectedObject());
+        }
       }
       this.koShowPropertyGrid(value);
       this.koHideAdvancedSettings(!this.showPropertyGrid);
@@ -1547,11 +1549,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Set this property to true to show the old style property grid on the right.
    */
-  public get showCategoriesInPropertyGrid() {
-    return this.koShowCategoriesInPropertyGrid();
+  public get showElementEditorAsPropertyGrid() {
+    return this.koShowElementEditorAsPropertyGrid();
   }
-  public set showCategoriesInPropertyGrid(value: boolean) {
-    this.koShowCategoriesInPropertyGrid(value);
+  public set showElementEditorAsPropertyGrid(value: boolean) {
+    this.koShowElementEditorAsPropertyGrid(value);
   }
   /**
    * Set it to false to  hide the question toolbox on the left.
@@ -2548,6 +2550,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
   ) => {
+    if (this.koShowElementEditorAsPropertyGrid && this.showPropertyGrid) {
+      this.hideAdvancedSettings = false;
+      this.setNewObjToPropertyGrid(element);
+      return;
+    }
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(

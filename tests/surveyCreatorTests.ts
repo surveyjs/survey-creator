@@ -432,7 +432,7 @@ QUnit.test("onModified options", function(assert) {
 });
 */
 QUnit.test("onCustomPropertySort event", function(assert) {
-  var editor = new SurveyCreator("", { showCategoriesInPropertyGrid: false });
+  var editor = new SurveyCreator("", { showElementEditorAsPropertyGrid: false });
   editor.onCustomSortProperty.add(function(editor, options) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
