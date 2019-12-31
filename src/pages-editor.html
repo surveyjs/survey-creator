@@ -9,7 +9,7 @@
 <div
   tabindex="0"
   class="svd-page-scroller-arrow"
-  data-bind="key2click, clickNoFocus: moveLeft, attr: {title: getLocString('ed.moveLeft')}"
+  data-bind="key2click, clickNoFocus: moveLeft, attr: {title: getLocString('ed.moveLeft')}, visible: hasScroller"
 >
   <span>
     <svg-icon
@@ -89,7 +89,7 @@
 <div
   tabindex="0"
   class="svd-page-scroller-arrow"
-  data-bind="key2click, clickNoFocus: moveRight, attr: {title: getLocString('ed.moveRight')}"
+  data-bind="key2click, clickNoFocus: moveRight, attr: {title: getLocString('ed.moveRight')}, visible: hasScroller"
 >
   <span>
     <svg-icon

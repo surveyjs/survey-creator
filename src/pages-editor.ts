@@ -13,7 +13,9 @@ export class PagesEditor {
   private isDraggingPage = ko.observable(false);
   private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
-  pagesSelection: any;
+  private updateScroller;
+  pagesSelection: ko.Computed<any>;
+  private selectionSubscription: ko.Subscription;
 
   constructor(private editor: SurveyCreator, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
@@ -28,24 +30,32 @@ export class PagesEditor {
       return this.prevPagesForSelector;
     });
     this._selectedPage(this.editor.pages()[0]);
-    this.editor.koSelectedObject.subscribe(newVal => {
-      if (!this.isActive()) {
-        if (
-          !!editor.survey.currentPage &&
-          editor.survey.currentPage != this._selectedPage()
-        ) {
-          this._selectedPage(editor.survey.currentPage);
+    this.selectionSubscription = this.editor.koSelectedObject.subscribe(
+      newVal => {
+        if (!this.isActive()) {
+          if (
+            !!editor.survey.currentPage &&
+            editor.survey.currentPage != this._selectedPage()
+          ) {
+            this._selectedPage(editor.survey.currentPage);
+          }
+          return;
         }
-        return;
-      }
-      this._selectedPage(newVal.value);
+        this._selectedPage(newVal.value);
 
-      if (this.isNeedAutoScroll) {
-        this.scrollToSelectedPage();
-      } else {
-        this.isNeedAutoScroll = true;
+        if (this.isNeedAutoScroll) {
+          this.scrollToSelectedPage();
+        } else {
+          this.isNeedAutoScroll = true;
+        }
       }
-    });
+    );
+    this.updateScroller = setInterval(() => {
+      var pagesElement: HTMLDivElement = this.element.querySelector(
+        ".svd-pages"
+      );
+      this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
+    }, 500);
   }
 
   getDisplayText = (page: Survey.PageModel) => {
@@ -215,7 +225,15 @@ export class PagesEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
-  public get;
+  public hasScroller = ko.observable(true);
+
+  dispose() {
+    clearInterval(this.updateScroller);
+    this.updateScroller = undefined;
+    this.selectionSubscription.dispose();
+    this.selectionSubscription = undefined;
+    this.pagesSelection.dispose();
+  }
 }
 
 ko.components.register("pages-editor", {
