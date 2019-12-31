@@ -7,10 +7,10 @@
     <div class="svd_editors">
       <!-- ko if: topContainer.length > 0 -->
       <div class="svd-designer-container svd-designer-container--top">
-        <!-- ko foreach: { data: topContainer, as: 'content', noChildContext: true } -->
-          <!-- ko template: 'se-component-' + content -->
+          <!-- ko template: 'se-component-toolbar' -->
           <!-- /ko -->
-        <!-- /ko -->
+          <!-- ko template: 'se-component-pages-editor' -->
+          <!-- /ko -->
       </div>
       <!-- /ko  -->
 
@@ -54,4 +54,3 @@
       </div>
   </div>
 </script>
-  
