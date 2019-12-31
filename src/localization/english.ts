@@ -381,7 +381,7 @@ export var enStrings = {
       data: "Data",
       validation: "Validation",
       cells: "Cells",
-      htmlContent: "Html Content",
+      showOnCompleted: "Show on Completed",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",

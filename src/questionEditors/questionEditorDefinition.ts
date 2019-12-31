@@ -466,11 +466,11 @@ export class SurveyQuestionEditorDefinition {
         { name: "focusOnFirstError", tab: "validation" },
         { name: "checkErrorsMode", tab: "validation" },
 
-        { name: "showCompletedPage", tab: "htmlContent" },
-        { name: "completedHtml", tab: "htmlContent" },
-        { name: "completedHtmlOnCondition", tab: "htmlContent" },
-        { name: "loadingHtml", tab: "htmlContent" },
-        { name: "completedBeforeHtml", tab: "htmlContent" },
+        { name: "showCompletedPage", tab: "showOnCompleted" },
+        { name: "completedHtml", tab: "showOnCompleted" },
+        { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
+        { name: "loadingHtml", tab: "showOnCompleted" },
+        { name: "completedBeforeHtml", tab: "showOnCompleted" },
 
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },
@@ -483,7 +483,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "logic", index: 300 },
         { name: "data", index: 400 },
         { name: "validation", index: 400 },
-        { name: "htmlContent", index: 600 },
+        { name: "showOnCompleted", index: 600 },
         { name: "timer", index: 700 }
       ]
     }
