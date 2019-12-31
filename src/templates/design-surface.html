@@ -85,16 +85,7 @@
               data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
               ></select>
           </div>
-          <span
-              data-bind="click: editCurrentObject, attr: { title: getLocString('ed.editSelObject')}"
-          >
-              <svg-icon
-              class="svd-primary-icon icon-edit"
-              params="iconName: 'icon-edit', size:24"
-              ></svg-icon>
-          </span>
       </div>
-
       <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
         <div data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"></div>
       </div>
