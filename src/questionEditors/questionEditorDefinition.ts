@@ -438,7 +438,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "goNextPageAutomatic", tab: "navigation" },
         { name: "showProgressBar", tab: "navigation" },
         { name: "progressBarType", tab: "navigation" },
-        { name: "isSinglePage", tab: "navigation" },
+        { name: "questionsOnPageMode", tab: "navigation" },
 
         { name: "questionTitleLocation", tab: "question" },
         { name: "questionDescriptionLocation", tab: "question" },
