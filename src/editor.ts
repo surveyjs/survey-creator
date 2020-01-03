@@ -1353,10 +1353,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public changeText(value: string, clearState = false) {
     var textWorker = new SurveyTextWorker(value);
+    this.setTextValue(value);
     if (textWorker.isJsonCorrect) {
       this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
-      this.setTextValue(value);
       this.koViewType("editor");
     }
   }
