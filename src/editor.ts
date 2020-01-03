@@ -1335,10 +1335,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public changeText(value: string, clearState = false) {
     var textWorker = new SurveyTextWorker(value);
+    this.setTextValue(value);
     if (textWorker.isJsonCorrect) {
       this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
-      this.setTextValue(value);
       this.koViewType("editor");
     }
   }
@@ -1917,9 +1917,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.initSurvey(this.getDefaultSurveyJson());
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(<HTMLElement>(
-      this.renderedElement.querySelector("#surveyjsJSONEditor")
-    ));
+    this.jsonEditor.init(
+      <HTMLElement>this.renderedElement.querySelector("#surveyjsJSONEditor")
+    );
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
         width: "100%"
@@ -1957,9 +1957,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(<SurveyForDesigner>(
-      this.createSurvey({}, "designer", SurveyForDesigner)
-    ));
+    this.surveyValue(
+      <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
+    );
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
