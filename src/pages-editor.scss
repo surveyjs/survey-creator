@@ -1,3 +1,5 @@
+@import "colors";
+
 .svd_container {
   .svda_action_separator {
     display: inline-block;
@@ -11,6 +13,7 @@
   pages-editor {
     display: block;
     width: 100%;
+    white-space: nowrap;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

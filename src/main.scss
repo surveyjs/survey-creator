@@ -6,7 +6,6 @@
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
-@import "pages-editor";
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
@@ -201,8 +200,14 @@
     border: none;
     .svd_survey_designer {
       position: relative;
+      display: table;
+      width: 100%;
 
       .svd_editors {
+        display: table-cell;
+        vertical-align: top;
+        padding: 0 15px;
+
         .svd_questions_editor {
           height: $editor-height;
           overflow-y: scroll;
@@ -419,7 +424,7 @@
 
 .svd_container {
   .svd_commercial_container {
-    padding: 1em 0 0 2em;
+    padding: 1em 0 0.5em 2em;
     .svd_commercial_text {
       font-weight: bold;
       text-decoration: none;
@@ -556,21 +561,12 @@
       border-bottom-color: transparent;
     }
   }
-  .svd_toolbox {
-    float: left;
-    width: 15%;
-  }
   .svd_editors {
-    display: inline-block;
-    width: 60%;
+    display: table-cell;
+    vertical-align: top;
     padding: 0 15px;
-    &.svd_wide {
-      width: 85%;
-    }
   }
   .svd_properties {
-    float: right;
-    width: 25%;
     table {
       width: 100%;
     }
