@@ -50,14 +50,16 @@ export class PagesEditor {
         }
       }
     );
-    this.updateScroller = setInterval(() => {
-      var pagesElement: HTMLDivElement = this.element.querySelector(
-        ".svd-pages"
-      );
-      if (!!pagesElement) {
-        this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
-      }
-    }, 500);
+    if (!!this.element && typeof this.element.querySelector === "function") {
+      this.updateScroller = setInterval(() => {
+        var pagesElement: HTMLDivElement = this.element.querySelector(
+          ".svd-pages"
+        );
+        if (!!pagesElement) {
+          this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
+        }
+      }, 500);
+    }
   }
 
   getDisplayText = (page: Survey.PageModel) => {
