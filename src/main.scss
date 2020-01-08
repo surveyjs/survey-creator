@@ -201,12 +201,14 @@
     .svd_survey_designer {
       position: relative;
       display: table;
+      table-layout: fixed;
       width: 100%;
 
       .svd_editors {
         display: table-cell;
         vertical-align: top;
         padding: 0 15px;
+        width: 100%;
 
         .svd_questions_editor {
           height: $editor-height;
