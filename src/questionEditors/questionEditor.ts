@@ -122,7 +122,7 @@ export class SurveyQuestionEditor {
   public onOkClick: any;
   public onApplyClick: any;
   public onResetClick: any;
-  koTabs: any;
+  koTabs: ko.ObservableArray<SurveyQuestionEditorTab>;
   koActiveTab = ko.observable<string>();
   koTitle = ko.observable<string>();
   koShowApplyButton: any;
