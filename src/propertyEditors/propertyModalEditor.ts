@@ -245,6 +245,14 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
     }
     return str;
   }
+  public onFocus() {
+    this.options["undoRedoManager"].startTransaction(
+      "textarea property editor transaction"
+    );
+  }
+  public onBlur() {
+    this.options["undoRedoManager"].stopTransaction();
+  }
 }
 
 export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
