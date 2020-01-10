@@ -135,6 +135,7 @@ export {
 export { SplitterComponentViewModel } from "../utils/splitter";
 
 export { DesignerContainerModel } from "../utils/designer-container";
+export { DesignerHContainerModel } from "../utils/designer-h-container";
 
 export {
   SurveyPropertyOneSelectedEditor,
