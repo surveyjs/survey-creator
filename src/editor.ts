@@ -2564,9 +2564,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
   ) => {
-    if (this.koShowElementEditorAsPropertyGrid && this.showPropertyGrid) {
+    if (this.showElementEditorAsPropertyGrid && this.showPropertyGrid) {
       this.hideAdvancedSettings = false;
       this.setNewObjToPropertyGrid(element);
+      this.leftContainerActiveItem("property-grid");
+      this.rightContainerActiveItem("property-grid");
       return;
     }
     var self = this;
