@@ -256,6 +256,17 @@ QUnit.test("Undo/redo koCanUndo koCanRedo canUndo canRedo", function(assert) {
   assert.equal(undoRedoManager.koCanUndo(), false, "initial koCanUndo false");
 });
 
+QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+
+  undoRedoManager.startTransaction("add elements");
+  undoRedoManager.stopTransaction();
+
+  assert.equal(undoRedoManager.canRedo(), false, "canRedo false");
+  assert.equal(undoRedoManager.canUndo(), false, "canUndo false");
+});
+
 // QUnit.test("Enabeling undo redo", function(assert) {
 //   var survey = new Survey.Survey(getSurveyJson());
 //   var undo = new SurveyUndoRedo();

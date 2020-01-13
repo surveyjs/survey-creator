@@ -15,10 +15,6 @@ export class UndoRedoManager {
       sender: Survey.Base,
       arrayChanges: Survey.ArrayChanges
     ) => {
-    //   console.dir(
-    //     `name: ${name} oldValue: ${oldValue} newValue: ${newValue} sender: ${sender} arrayChanges: ${arrayChanges}`
-    //   );
-
       if (!this.hasPropertyInSerializer(sender, name)) return;
       if (this._keepSilense) return;
 
@@ -52,6 +48,8 @@ export class UndoRedoManager {
     }
   }
   private _addTransaction(transaction: Transaction) {
+    if (transaction.isEmpty()) return;
+
     this._cutOffTail();
     this._transactions.push(transaction);
     this._currentTransactionIndex++;
@@ -133,6 +131,10 @@ export class Transaction {
 
   addAction(action: any) {
     this._actions.push(action);
+  }
+
+  isEmpty() {
+    return this._actions.length === 0;
   }
 }
 
