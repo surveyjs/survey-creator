@@ -1651,15 +1651,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get leftContainer() {
     return this._leftContainer();
   }
+  public leftContainerActiveItem = ko.observable<string>("toolbox");
   private _rightContainer = ko.observableArray<string>(["property-grid"]);
   public get rightContainer() {
     return this._rightContainer();
   }
+  public rightContainerActiveItem = ko.observable<string>("property-grid");
   private _topContainer = ko.observableArray<string>([
     "toolbar",
     "pages-editor"
   ]);
-
   public get topContainer() {
     return this._topContainer();
   }

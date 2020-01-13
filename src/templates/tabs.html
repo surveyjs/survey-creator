@@ -1,7 +1,7 @@
 ﻿<script type="text/html" id="se-tab-designer">
   <div class="row svd_survey_designer">
     <!-- ko if: leftContainer.length > 0 -->
-    <svd-designer-container params="tabs: leftContainer, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
+    <svd-designer-container params="tabs: leftContainer, activeTab: leftContainerActiveItem, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
     <svd-splitter params="minLeft: 100, minRight: 600"></svd-splitter>
     <!-- /ko  -->
     <div class="svd_editors">
@@ -23,7 +23,7 @@
     </div>
     <!-- ko if: rightContainer.length > 0 && !koHideAdvancedSettings() -->
     <svd-splitter params="minLeft: 600, minRight: 150"></svd-splitter>
-    <svd-designer-container params="tabs: rightContainer, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
+    <svd-designer-container params="tabs: rightContainer, activeTab: rightContainerActiveItem, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
     <!-- /ko -->
   </div>
 </script>
