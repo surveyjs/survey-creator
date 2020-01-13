@@ -240,20 +240,37 @@ QUnit.test("Undo/redo koCanUndo koCanRedo canUndo canRedo", function(assert) {
   );
   assert.equal(undoRedoManager.canRedo(), false, "initial canRedo false");
   assert.equal(undoRedoManager.canUndo(), false, "initial canUndo false");
-  assert.equal(undoRedoManager.koCanRedo(), false, "initial koCanRedo false");
-  assert.equal(undoRedoManager.koCanUndo(), false, "initial koCanUndo false");
 
   currentPage.addElement(newElement);
   assert.equal(undoRedoManager.canRedo(), false, "initial canRedo false");
   assert.equal(undoRedoManager.canUndo(), true, "initial canUndo false");
-  assert.equal(undoRedoManager.koCanRedo(), false, "initial koCanRedo false");
-  assert.equal(undoRedoManager.koCanUndo(), true, "initial koCanUndo false");
 
   undoRedoManager.undo();
   assert.equal(undoRedoManager.canRedo(), true, "initial canRedo false");
   assert.equal(undoRedoManager.canUndo(), false, "initial canUndo false");
-  assert.equal(undoRedoManager.koCanRedo(), true, "initial koCanRedo false");
-  assert.equal(undoRedoManager.koCanUndo(), false, "initial koCanUndo false");
+});
+
+QUnit.test("Undo/redo canUndoRedoCallback", function(assert) {
+  var counter = 0;
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManager(survey);
+  var currentPage = survey.currentPage;
+  var newElement = new Survey.QuestionRadiogroupModel("newElement");
+
+  undoRedoManager.canUndoRedoCallback = () => {
+    counter++;
+  };
+
+  assert.equal(counter, 0, "initial");
+
+  currentPage.addElement(newElement);
+  assert.equal(counter, 1, "call after add transaction");
+
+  undoRedoManager.undo();
+  assert.equal(counter, 2, "call after the undo");
+
+  undoRedoManager.redo();
+  assert.equal(counter, 3, "call after the redo");
 });
 
 QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {

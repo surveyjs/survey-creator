@@ -756,6 +756,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set readOnly(newVal) {
     this.koReadOnly(newVal);
   }
+  public koCanUndo: any;
+  public koCanRedo: any;
 
   koIsShowDesigner: any;
   koViewType: any;
@@ -799,6 +801,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koDesignerHeight = ko.observable();
     this.setOptions(options);
     this.koCanDeleteObject = ko.observable(false);
+    this.koCanUndo = ko.observable(false);
+    this.koCanRedo = ko.observable(false);
 
     var self = this;
 
@@ -1049,12 +1053,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       : "sv_" + StylesManager.currentTheme() + "_css";
   });
 
+  private updateKoCanUndoRedo() {
+    this.koCanUndo(this.undoRedoManager.canUndo());
+    this.koCanRedo(this.undoRedoManager.canRedo());
+  }
+
   protected addToolbarItems() {
     this.toolbarItems.push({
       id: "svd-undo",
       icon: "icon-actionundo",
       visible: this.koIsShowDesigner,
-      enabled: this.undoRedoManager.koCanUndo,
+      enabled: this.koCanUndo,
       action: this.doUndoClick,
       title: this.getLocString("ed.undo")
     });
@@ -1062,7 +1071,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-redo",
       icon: "icon-actionredo",
       visible: this.koIsShowDesigner,
-      enabled: this.undoRedoManager.koCanRedo,
+      enabled: this.koCanRedo,
       action: this.doRedoClick,
       title: this.getLocString("ed.redo")
     });
@@ -2075,6 +2084,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
     this.undoRedoManager = new UndoRedoManager(this.surveyValue());
+    this.undoRedoManager.canUndoRedoCallback = () => {
+      this.updateKoCanUndoRedo();
+    };
+    this.updateKoCanUndoRedo();
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
       function(options) {
