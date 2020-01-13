@@ -1491,16 +1491,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Set it to false to completely hide the Property Grid on the right. It allows to edit the properties of the selected object (question/panel/page/survey).
    */
   public get showPropertyGrid() {
-    return this.koShowPropertyGrid() !== false && this.koShowPropertyGrid() !== "none";
+    return (
+      this.koShowPropertyGrid() !== false &&
+      this.koShowPropertyGrid() !== "none"
+    );
   }
   public set showPropertyGrid(value: ContainerLocation) {
-    if(this.koShowPropertyGrid() != value) {
+    if (this.koShowPropertyGrid() != value) {
       this._leftContainer.remove("property-grid");
       this._rightContainer.remove("property-grid");
-      if(value === "right" || value === true) {
+      if (value === "right" || value === true) {
         this._rightContainer.push("property-grid");
       }
-      if(value === "left") {
+      if (value === "left") {
         this._leftContainer.push("property-grid");
       }
       this.koShowPropertyGrid(value);
@@ -1511,7 +1514,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Set it to false to  hide the pages toolbox on the top.
    */
   public get showPagesToolbox() {
-    return this.koShowPagesToolbox() !== false && this.koShowPagesToolbox() !== "none";
+    return (
+      this.koShowPagesToolbox() !== false &&
+      this.koShowPagesToolbox() !== "none"
+    );
   }
   public set showPagesToolbox(value: ContainerLocation) {
     this.koShowPagesToolbox(value);
@@ -1523,13 +1529,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koShowToolbox() !== false && this.koShowToolbox() !== "none";
   }
   public set showToolbox(value: ContainerLocation) {
-    if(this.koShowToolbox() != value) {
+    if (this.koShowToolbox() != value) {
       this._leftContainer.remove("toolbox");
       this._rightContainer.remove("toolbox");
-      if(value === "left" || value === true) {
+      if (value === "left" || value === true) {
         this._leftContainer.push("toolbox");
       }
-      if(value === "right") {
+      if (value === "right") {
         this._rightContainer.push("toolbox");
       }
       this.koShowToolbox(value);
@@ -1603,11 +1609,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get leftContainer() {
     return this._leftContainer();
   }
+  public leftContainerActiveItem = ko.observable<string>("toolbox");
   private _rightContainer = ko.observableArray<string>(["property-grid"]);
   public get rightContainer() {
     return this._rightContainer();
   }
-  private _topContainer = ko.observableArray<string>(["toolbar", "pages-editor"]);
+  public rightContainerActiveItem = ko.observable<string>("property-grid");
+  private _topContainer = ko.observableArray<string>([
+    "toolbar",
+    "pages-editor"
+  ]);
   public get topContainer() {
     return this._topContainer();
   }
