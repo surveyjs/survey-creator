@@ -5,12 +5,17 @@ import { editorLocalization } from "./editorLocalization";
 import { SurveyCreator } from "./editor";
 import "../vendor/knockout-sortable.js";
 
+import "./pages-editor.scss";
+var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
+
 export class PagesEditor {
   private isNeedAutoScroll = true;
   private isDraggingPage = ko.observable(false);
   private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
-  pagesSelection: any;
+  private updateScroller = undefined;
+  pagesSelection: ko.Computed<any>;
+  private selectionSubscription: ko.Subscription;
 
   constructor(private editor: SurveyCreator, private element: any) {
     this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
@@ -25,24 +30,36 @@ export class PagesEditor {
       return this.prevPagesForSelector;
     });
     this._selectedPage(this.editor.pages()[0]);
-    this.editor.koSelectedObject.subscribe(newVal => {
-      if (!this.isActive()) {
-        if (
-          !!editor.survey.currentPage &&
-          editor.survey.currentPage != this._selectedPage()
-        ) {
-          this._selectedPage(editor.survey.currentPage);
+    this.selectionSubscription = this.editor.koSelectedObject.subscribe(
+      newVal => {
+        if (!this.isActive()) {
+          if (
+            !!editor.survey.currentPage &&
+            editor.survey.currentPage != this._selectedPage()
+          ) {
+            this._selectedPage(editor.survey.currentPage);
+          }
+          return;
         }
-        return;
-      }
-      this._selectedPage(newVal.value);
+        this._selectedPage(newVal.value);
 
-      if (this.isNeedAutoScroll) {
-        this.scrollToSelectedPage();
-      } else {
-        this.isNeedAutoScroll = true;
+        if (this.isNeedAutoScroll) {
+          this.scrollToSelectedPage();
+        } else {
+          this.isNeedAutoScroll = true;
+        }
       }
-    });
+    );
+    if (!!this.element && typeof this.element.querySelector === "function") {
+      this.updateScroller = setInterval(() => {
+        var pagesElement: HTMLDivElement = this.element.querySelector(
+          ".svd-pages"
+        );
+        if (!!pagesElement) {
+          this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
+        }
+      }, 500);
+    }
   }
 
   getDisplayText = (page: Survey.PageModel) => {
@@ -212,6 +229,17 @@ export class PagesEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
+  public hasScroller = ko.observable(true);
+
+  dispose() {
+    if (!!this.updateScroller) {
+      clearInterval(this.updateScroller);
+      this.updateScroller = undefined;
+    }
+    this.selectionSubscription.dispose();
+    this.selectionSubscription = undefined;
+    this.pagesSelection.dispose();
+  }
 }
 
 ko.components.register("pages-editor", {
@@ -220,5 +248,5 @@ ko.components.register("pages-editor", {
       return new PagesEditor(params.editor, componentInfo.element);
     }
   },
-  template: { element: "svd-page-selector-template" }
+  template: template
 });

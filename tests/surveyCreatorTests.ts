@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../src/editor";
-import { PagesEditor } from "../src/pagesEditor";
+import { PagesEditor } from "../src/pages-editor";
 
 export default QUnit.module("surveyEditorTests");
 

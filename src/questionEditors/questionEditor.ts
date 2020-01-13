@@ -506,6 +506,8 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
   public onOkClick: any;
   public onApplyClick: any;
   public onResetClick: any;
+  koTabs: ko.ObservableArray<SurveyQuestionEditorTab>;
+  koActiveTab = ko.observable<string>();
   koTitle = ko.observable<string>();
   koShowApplyButton: any;
   onTabClick: any;

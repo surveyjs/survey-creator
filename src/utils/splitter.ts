@@ -3,6 +3,8 @@ import * as ko from "knockout";
 import "./splitter.scss";
 
 export class SplitterComponentViewModel {
+  private onresize;
+
   constructor(params: { minLeft: number; minRight: number }, componentInfo) {
     var splitterElement = componentInfo.element;
     var container = componentInfo.element.parentElement;
@@ -16,7 +18,7 @@ export class SplitterComponentViewModel {
     var leftElement = siblings[splitterElementIndex - 1];
     var rightElement = siblings[splitterElementIndex + 1];
 
-    var onresize = () => {
+    this.onresize = () => {
       splitterElement.style.left =
         siblings
           .slice(0, splitterElementIndex)
@@ -25,7 +27,7 @@ export class SplitterComponentViewModel {
         "px";
     };
     window.addEventListener("resize", onresize);
-    onresize();
+    setTimeout(this.onresize, 10);
 
     var onmousemove = event => {
       var newLeft = leftElement.offsetWidth + event.movementX;
@@ -42,7 +44,7 @@ export class SplitterComponentViewModel {
         rightElement.style.maxWidth = rightWidth;
         rightElement.style.flexBasis = rightWidth;
       }
-      onresize();
+      this.onresize();
     };
     var onmouseup = () => {
       splitterElement.className = splitterElement.className.replace(
@@ -52,7 +54,7 @@ export class SplitterComponentViewModel {
       document.removeEventListener("mousemove", onmousemove);
       document.removeEventListener("mouseleave", onmouseup);
       document.removeEventListener("mouseup", onmouseup);
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
     };
 
     splitterElement.onmousedown = () => {
@@ -61,6 +63,10 @@ export class SplitterComponentViewModel {
       document.addEventListener("mouseleave", onmouseup);
       document.addEventListener("mouseup", onmouseup);
     };
+  }
+  dispose() {
+    window.removeEventListener("resize", this.onresize);
+    this.onresize = undefined;
   }
 }
 

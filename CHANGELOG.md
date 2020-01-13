@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.31"></a>
+## [1.1.31](https://github.com/surveyjs/survey-creator/compare/v1.1.30...v1.1.31) (2020-01-09)
+
+
+
+<a name="1.1.30"></a>
+## [1.1.30](https://github.com/surveyjs/survey-creator/compare/v1.1.29...v1.1.30) (2020-01-09)
+
+
+
+<a name="1.1.29"></a>
+## [1.1.29](https://github.com/surveyjs/survey-creator/compare/v1.1.28...v1.1.29) (2019-12-30)
+
+
+
+<a name="1.1.28"></a>
+## [1.1.28](https://github.com/surveyjs/survey-creator/compare/v1.1.27...v1.1.28) (2019-12-30)
+
+
+
 <a name="1.1.27"></a>
 ## [1.1.27](https://github.com/surveyjs/survey-creator/compare/v1.1.26...v1.1.27) (2019-12-30)
 

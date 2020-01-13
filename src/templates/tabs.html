@@ -6,12 +6,7 @@
     <!-- /ko  -->
     <div class="svd_editors">
       <!-- ko if: topContainer.length > 0 -->
-      <div class="svd-designer-container svd-designer-container--top">
-          <!-- ko template: 'se-component-toolbar' -->
-          <!-- /ko -->
-          <!-- ko template: 'se-component-pages-editor' -->
-          <!-- /ko -->
-      </div>
+      <svd-designer-h-container params="items: topContainer, context: $data, className: 'svd-designer-container--top'"></svd-designer-h-container>
       <!-- /ko  -->
 
       <div

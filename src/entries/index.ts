@@ -63,7 +63,7 @@ export {
 
 export { QuestionToolbox } from "../questionToolbox";
 export { SurveyObjectProperty } from "../objectProperty";
-export { PagesEditor } from "../pagesEditor";
+export { PagesEditor } from "../pages-editor";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../surveylive";
@@ -127,5 +127,6 @@ export {
 
 export { SplitterComponentViewModel } from "../utils/splitter";
 export { DesignerContainerModel } from "../utils/designer-container";
+export { DesignerHContainerModel } from "../utils/designer-h-container";
 
 export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";
