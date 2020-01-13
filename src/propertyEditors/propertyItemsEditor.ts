@@ -42,6 +42,14 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   public sortableOptions = {
     handle: ".svd-drag-handle",
     animation: 150,
+    onStart: () => {
+      this.options["undoRedoManager"].startTransaction(
+        "property items editor drag drop transaction"
+      );
+    },
+    onEnd: () => {
+      this.options["undoRedoManager"].stopTransaction();
+    },
     onUpdate: (evt, itemV) => {
       this.moveItem(itemV.obj, evt.newIndex);
       // Remove sortables "unbound" element
