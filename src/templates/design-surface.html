@@ -42,7 +42,7 @@
           data-bind="css: { 'panel-collapse collapse': koCollapsed}"
           >
           <!-- ko foreach: items -->
-              <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parent } } --><!-- /ko -->
+              <!-- ko template: { name: 'se-tab-designer-item', data: { item: $data, editor: $parents[1] } } --><!-- /ko -->
           <!-- /ko  -->
           </div>
       </div>
