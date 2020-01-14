@@ -58,7 +58,7 @@ export class PagesEditor {
         if (!!pagesElement) {
           this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
         }
-      }, 500);
+      }, 100);
     }
   }
 
