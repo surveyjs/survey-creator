@@ -1535,8 +1535,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this._leftContainer.push("property-grid");
       }
       if (value !== false && value !== "none") {
-        if (!!this.koSelectedObject) {
-          this.setNewObjToPropertyGrid(this.koSelectedObject());
+        if (!!this.selectedElement) {
+          this.setNewObjToPropertyGrid(this.selectedElement);
         }
       }
       this.koShowPropertyGrid(value);
