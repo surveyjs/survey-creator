@@ -17,12 +17,15 @@ export class EditableObject {
     }
     return null;
   }
+  public static getOrigionaObject(object: any): any {
+    return !!object && !!object["origionalObj"]
+      ? object["origionalObj"]
+      : object;
+  }
   public static getOrigionalSurvey(
     survey: Survey.SurveyModel
   ): Survey.SurveyModel {
-    return !!survey && !!survey["origionalObj"]
-      ? survey["origionalObj"]
-      : survey;
+    return EditableObject.getOrigionaObject(survey);
   }
 
   private objValue: Survey.Base;

@@ -95,6 +95,14 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   assert.equal(dropdownQuestion.visibleIf, "false", "visibleIf assign correct");
 });
 
+QUnit.test("Question Editor name is not changed", function(assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  var question = creator.survey.getQuestionByName("q1");
+  var editor = new SurveyQuestionEditor(question, null, creator);
+  assert.ok(editor.apply(), "Applied correctly, nothing was changed");
+});
+
 QUnit.test("Question Editor preserve title on tab changed", function(assert) {
   var dropdownQuestion = new Survey.QuestionDropdown("q1");
   var editor = new SurveyQuestionEditor(dropdownQuestion);
