@@ -8,6 +8,8 @@ export class SurveyJSONEditor {
   private isProcessingImmediately: boolean = false;
   private aceEditor: AceAjax.Editor;
   private textWorker: SurveyTextWorker;
+  public isJSONChanged: boolean = false;
+  public isInitialJSON: boolean = false;
   koText: any;
   koErrors: any;
 
@@ -27,9 +29,30 @@ export class SurveyJSONEditor {
     //TODO add event to change ace theme and mode
     //this.aceEditor.setTheme("ace/theme/monokai");
     //this.aceEditor.session.setMode("ace/mode/json");
-    this.aceEditor.setShowPrintMargin(false);
-    this.aceEditor.getSession().on("change", function() {
+    self.aceEditor.setShowPrintMargin(false);
+    self.aceEditor.getSession().on("change", function() {
       self.onJsonEditorChanged();
+    });
+    self.aceEditor.on("input", function() {
+      if (self.isInitialJSON) {
+        self.isInitialJSON = false;
+        self.aceEditor
+          .getSession()
+          .getUndoManager()
+          .markClean();
+        return;
+      }
+
+      if (
+        self.aceEditor
+          .getSession()
+          .getUndoManager()
+          .isClean()
+      ) {
+        self.isJSONChanged = false;
+        return;
+      }
+      self.isJSONChanged = true;
     });
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
@@ -56,6 +79,7 @@ export class SurveyJSONEditor {
     if (this.aceEditor) {
       this.aceEditor.focus();
     }
+    this.isJSONChanged = false;
   }
   public get isJsonCorrect(): boolean {
     this.textWorker = new SurveyTextWorker(this.text);

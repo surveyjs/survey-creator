@@ -1697,6 +1697,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
 
   private setTextValue(value: string) {
+    this.jsonEditor.isInitialJSON = true;
     this.jsonEditor.text = value;
   }
   /**
@@ -1863,7 +1864,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private canSwitchViewType(newType: string): boolean {
     if (newType && this.koViewType() == newType) return false;
     if (this.koViewType() == "designer") {
-      this.jsonEditor.text = this.getSurveyTextFromDesigner();
+      this.setTextValue(this.getSurveyTextFromDesigner());
     }
     if (
       (this.koViewType() == "translation" || this.koViewType() == "logic") &&
@@ -1876,10 +1877,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       alert(this.getLocString("ed.correctJSON"));
       return false;
     }
-    if (!this.readOnly) {
+    if (!this.readOnly && this.jsonEditor.isJSONChanged) {
       this.initSurvey(
         new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
       );
+
       this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
     }
     return true;
