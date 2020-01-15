@@ -1,4 +1,5 @@
 import * as Survey from "survey-knockout";
+import { EditableObject } from "./propertyEditors/editableObject";
 
 export class UndoRedoManager {
   constructor(private _survey: Survey.Survey) {
@@ -10,6 +11,7 @@ export class UndoRedoManager {
       arrayChanges: Survey.ArrayChanges
     ) => {
       if (!this.hasPropertyInSerializer(sender, name)) return;
+      if (EditableObject.isCopyObject(sender)) return;
       if (this._keepSilense) return;
 
       let transaction = this._preparingTransaction;
@@ -36,6 +38,7 @@ export class UndoRedoManager {
   private hasPropertyInSerializer(sender: Survey.Base, propertyName: string) {
     return !!Survey.Serializer.findProperty(sender.getType(), propertyName);
   }
+  public isCopyObject(sender: Survey.Base) {}
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
@@ -69,6 +72,11 @@ export class UndoRedoManager {
   stopTransaction() {
     this._addTransaction(this._preparingTransaction);
     this._preparingTransaction = null;
+  }
+  addJSONTransaction(obj: Survey.Base, newJSON: any, oldJSON: any) {
+    var transaction = new Transaction("Edit object");
+    transaction.addAction(new JSONAction(oldJSON, newJSON, obj));
+    this._addTransaction(transaction);
   }
   canUndo() {
     return !!this._getCurrentTransaction();
@@ -192,5 +200,24 @@ export class ArrayAction {
       array,
       [index, deleteCount].concat(itemsToAdd)
     );
+  }
+}
+
+export class JSONAction {
+  constructor(
+    private _oldValue: any,
+    private _newValue: any,
+    private _sender: Survey.Base
+  ) {}
+
+  apply() {
+    this._applyToObj(this._newValue);
+  }
+
+  rollback() {
+    this._applyToObj(this._oldValue);
+  }
+  private _applyToObj(json: any) {
+    new Survey.JsonObject().toObject(json, this._sender);
   }
 }

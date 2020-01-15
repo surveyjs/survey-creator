@@ -283,6 +283,23 @@ QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {
   assert.equal(undoRedoManager.canUndo(), false, "canUndo false");
 });
 
+QUnit.test("JSONTransaction", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var question = survey.getQuestionByName("question1");
+  question.name = "q1";
+  question.title = "new Title";
+  var undoRedoManager = new UndoRedoManager(survey);
+  undoRedoManager.addJSONTransaction(
+    question,
+    { name: "q1", title: "new Title" },
+    { name: "question1", title: "" }
+  );
+  assert.equal(undoRedoManager.canUndo(), true, "There is a transaction");
+  undoRedoManager.undo();
+  assert.equal(question.name, "question1", "Redo name");
+  assert.equal(question.title, "question1", "Redo title");
+});
+
 function getSurveyJson(): any {
   return {
     title: "old title",

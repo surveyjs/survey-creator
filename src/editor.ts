@@ -2938,6 +2938,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.onConditionQuestionsGetList.fire(this, options);
   }
+  onApplyJSONToObj(obj: Survey.Base, newJSON: any, oldJSON: any) {
+    this.undoRedoManager.addJSONTransaction(obj, newJSON, oldJSON);
+  }
   onAdornerRenderedCallback(
     question: Survey.Question,
     adorner: string,

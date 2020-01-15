@@ -101,6 +101,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     list: any[]
   ) {}
+  onApplyJSONToObj(obj: Survey.Base, newJSON: any, oldJSON: any) {}
   public createSurvey(
     json: any = {},
     reason: string = "designer",

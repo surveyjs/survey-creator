@@ -602,6 +602,15 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
     }
 
     if (res) {
+      if (!!this.options) {
+        this.editableObject.onApplyJSONToObj = (
+          obj,
+          newJSON,
+          oldJSON
+        ): void => {
+          this.options.onApplyJSONToObj(obj, newJSON, oldJSON);
+        };
+      }
       this.editableObject.applyAll();
       if (this.onChanged) {
         this.onChanged(this.obj);

@@ -71,6 +71,8 @@ export interface ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     list: any[]
   );
+  onApplyJSONToObj(obj: Survey.Base, newJSON: any, oldJSON: any);
+
   createSurvey(
     json: any,
     reason: string,
