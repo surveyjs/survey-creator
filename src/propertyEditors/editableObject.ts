@@ -33,11 +33,6 @@ export class EditableObject {
 
   private objValue: Survey.Base;
   private editableObjValue: Survey.Base;
-  public onApplyJSONToObj: (
-    obj: Survey.Base,
-    newJSON: any,
-    oldJSON: any
-  ) => void;
   public constructor(obj: Survey.Base) {
     this.objValue = obj;
     this.editableObjValue = this.createEditableObj();
@@ -62,14 +57,24 @@ export class EditableObject {
     this.assignProperties(this.editableObj);
   }
   public applyAll(excludedProps: Array<string> = []) {
-    var json = this.getObjJson(this.editableObj);
-    for (var i = 0; i < excludedProps.length; i++) {
-      delete json[excludedProps[i]];
+    var props = this.getProperties(excludedProps);
+    for (var i = 0; i < props.length; i++) {
+      this.apply(props[i]);
     }
-    if (this.onApplyJSONToObj) {
-      this.onApplyJSONToObj(this.obj, json, this.getObjJsonWithDefault(json));
+  }
+  private getProperties(excludedProps: Array<string>): Array<string> {
+    var props = [];
+    var newJSON = this.getObjJson(this.editableObj);
+    var oldJSON = this.getObjJson(this.obj);
+    for (var key in newJSON) {
+      if (excludedProps.indexOf(key) > -1) continue;
+      props.push(key);
     }
-    new Survey.JsonObject().toObject(json, this.obj);
+    for (var key in oldJSON) {
+      if (excludedProps.indexOf(key) > -1 || props.indexOf(key) > -1) continue;
+      props.push(key);
+    }
+    return props;
   }
   protected createEditableObj(): Survey.Base {
     var type = this.obj.getType();
@@ -105,15 +110,5 @@ export class EditableObject {
     var jsonObj = new Survey.JsonObject();
     jsonObj.lightSerializing = true;
     return jsonObj.toJsonObject(obj);
-  }
-  private getObjJsonWithDefault(newJSON: any): any {
-    var oldJSON = this.getObjJson();
-    if (!newJSON) return oldJSON;
-    for (var key in newJSON) {
-      if (!oldJSON[key]) {
-        oldJSON[key] = this.obj[key];
-      }
-    }
-    return oldJSON;
   }
 }

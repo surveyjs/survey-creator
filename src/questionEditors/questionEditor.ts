@@ -603,17 +603,14 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
 
     if (res) {
       if (!!this.options) {
-        this.editableObject.onApplyJSONToObj = (
-          obj,
-          newJSON,
-          oldJSON
-        ): void => {
-          this.options.onApplyJSONToObj(obj, newJSON, oldJSON);
-        };
+        this.options.startUndoRedoTransaction();
       }
       this.editableObject.applyAll();
       if (this.onChanged) {
         this.onChanged(this.obj);
+      }
+      if (!!this.options) {
+        this.options.stopUndoRedoTransaction();
       }
     }
     return res;
