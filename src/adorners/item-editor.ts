@@ -173,7 +173,7 @@ export var createAddItemHandler = (
     }
   };
   !!onItemAdding && onItemAdding(itemValue);
-  question.choices = question.choices.concat([itemValue]);
+  question.choices.push(itemValue);
   itemValue = question.choices.filter(
     choiceItem => choiceItem.value === itemValue.value
   )[0];
