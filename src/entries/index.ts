@@ -69,7 +69,6 @@ export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../surveylive";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
-export { SurveyUndoRedo, UndoRedoItem } from "../undoredo";
 export { SurveyLogic } from "../logic";
 export {
   SurveyForDesigner,
