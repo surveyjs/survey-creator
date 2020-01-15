@@ -341,6 +341,11 @@ export class SurveyElementEditorContent {
     }
     return null;
   }
+  public focusEditor() {
+    if (!!this.koTabs() && this.koTabs().length > 0) {
+      this.koTabs()[0].focusEditor();
+    }
+  }
   private getAllEditorProperties(): Array<SurveyObjectProperty> {
     var res = [];
     if (!this.koTabs) return res;
@@ -678,6 +683,11 @@ export class SurveyElementPropertyGrid {
     if (!this.koElementEditor()) return null;
     return this.koElementEditor().getPropertyEditorByName(propertyName);
   }
+  public focusEditor() {
+    if (!!this.koElementEditor()) {
+      this.koElementEditor().focusEditor();
+    }
+  }
   protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
     if (this.hasCategories)
       return new SurveyElementEditorContent(
@@ -698,12 +708,14 @@ export class SurveyElementPropertyGrid {
 
 export class SurveyQuestionEditorTab {
   private titleValue: string;
+  private htmlElements = null;
   public onExpand: () => void;
   public onAfterRenderCallback: (
     htmlElement: HTMLElement,
     property: SurveyObjectProperty
   ) => any;
   koAfterRenderProperty: any;
+  koAfterRender: any;
   constructor(
     public obj: any,
     public properties: SurveyQuestionEditorProperties = null,
@@ -713,12 +725,21 @@ export class SurveyQuestionEditorTab {
     this.koAfterRenderProperty = function(el, con) {
       self.afterRenderProperty(el, con);
     };
+    this.koAfterRender = function(el, con) {
+      self.afterRender(el, con);
+    };
   }
   public expand() {
     if (!!this.onExpand) this.onExpand();
   }
-  public koAfterRender(elements: HTMLElement[], context) {
-    focusFirstControl(elements);
+  private afterRender(elements: HTMLElement[], context) {
+    this.htmlElements = elements;
+    this.focusEditor();
+  }
+  public focusEditor() {
+    if (!!this.htmlElements) {
+      focusFirstControl(this.htmlElements);
+    }
   }
   public get name(): string {
     return this._name;

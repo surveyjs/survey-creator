@@ -432,7 +432,9 @@ QUnit.test("onModified options", function(assert) {
 });
 */
 QUnit.test("onCustomPropertySort event", function(assert) {
-  var editor = new SurveyCreator("", { showElementEditorAsPropertyGrid: false });
+  var editor = new SurveyCreator("", {
+    showElementEditorAsPropertyGrid: false
+  });
   editor.onCustomSortProperty.add(function(editor, options) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
@@ -797,6 +799,31 @@ QUnit.test("Change elemenent page", function(assert) {
     "question1 has page2 now"
   );
   assert.equal(editor.survey.currentPage.name, "page2", "page2 is current");
+});
+
+QUnit.test("show property grid on Edit", function(assert) {
+  var editor = new SurveyCreator();
+  editor.JSON = getSurveyJson();
+  editor.showToolbox = "right";
+  editor.rightContainerActiveItem("toolbox");
+  editor.hideAdvancedSettings = true;
+  editor.selectedElement = editor.survey.getQuestionByName("question1");
+  assert.equal(
+    editor.selectedElement.name,
+    "question1",
+    "question1 is selected"
+  );
+  editor.showQuestionEditor(editor.selectedElement);
+  assert.equal(
+    editor.rightContainerActiveItem(),
+    "property-grid",
+    "Property grid is selected"
+  );
+  assert.equal(
+    editor.hideAdvancedSettings,
+    false,
+    "Make sure that property grid is shown"
+  );
 });
 
 function getSurveyJson(): any {

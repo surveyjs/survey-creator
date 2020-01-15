@@ -1534,13 +1534,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       if (value === "left") {
         this._leftContainer.push("property-grid");
       }
-      if (value !== false && value !== "none") {
-        if (!!this.koSelectedObject) {
-          this.setNewObjToPropertyGrid(this.koSelectedObject());
-        }
-      }
       this.koShowPropertyGrid(value);
       this.koHideAdvancedSettings(!this.showPropertyGrid);
+      if (value !== false && value !== "none" && !!this.selectedElement) {
+        this.setNewObjToPropertyGrid(this.selectedElement);
+      }
     }
   }
   /**
@@ -2566,9 +2564,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
   ) => {
-    if (this.koShowElementEditorAsPropertyGrid && this.showPropertyGrid) {
+    if (this.showElementEditorAsPropertyGrid && this.showPropertyGrid) {
       this.hideAdvancedSettings = false;
       this.setNewObjToPropertyGrid(element);
+      this.leftContainerActiveItem("property-grid");
+      this.rightContainerActiveItem("property-grid");
+      this.elementPropertyGridValue.focusEditor();
       return;
     }
     var self = this;

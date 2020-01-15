@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
+import { EditableObject } from "./editableObject";
 
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -212,6 +213,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected get isModal(): boolean {
     return false;
   }
+  public get origionalObject(): any {
+    return EditableObject.getOrigionaObject(this.object);
+  }
   public get object(): any {
     return this.objectValue;
   }
@@ -279,7 +283,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     ) {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
-        this.object,
+        this.origionalObject,
         this.koValue()
       );
     }
