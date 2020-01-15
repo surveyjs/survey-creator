@@ -1,6 +1,9 @@
 import * as Survey from "survey-knockout";
 
 export class EditableObject {
+  public static isCopyObject(obj: any): boolean {
+    return !!obj && obj["isCopy"];
+  }
   public static getSurvey(object: any): Survey.SurveyModel {
     if (object instanceof Survey.SurveyModel) {
       return EditableObject.getOrigionalSurvey(object);
@@ -30,6 +33,11 @@ export class EditableObject {
 
   private objValue: Survey.Base;
   private editableObjValue: Survey.Base;
+  public onApplyJSONToObj: (
+    obj: Survey.Base,
+    newJSON: any,
+    oldJSON: any
+  ) => void;
   public constructor(obj: Survey.Base) {
     this.objValue = obj;
     this.editableObjValue = this.createEditableObj();
@@ -57,6 +65,9 @@ export class EditableObject {
     var json = this.getObjJson(this.editableObj);
     for (var i = 0; i < excludedProps.length; i++) {
       delete json[excludedProps[i]];
+    }
+    if (this.onApplyJSONToObj) {
+      this.onApplyJSONToObj(this.obj, json, this.getObjJsonWithDefault(json));
     }
     new Survey.JsonObject().toObject(json, this.obj);
   }
@@ -89,10 +100,20 @@ export class EditableObject {
   private assignProperties(obj: any) {
     new Survey.JsonObject().toObject(this.getObjJson(), obj);
   }
-  protected getObjJson(obj: any = null): any {
+  private getObjJson(obj: any = null): any {
     if (!obj) obj = this.obj;
     var jsonObj = new Survey.JsonObject();
     jsonObj.lightSerializing = true;
     return jsonObj.toJsonObject(obj);
+  }
+  private getObjJsonWithDefault(newJSON: any): any {
+    var oldJSON = this.getObjJson();
+    if (!newJSON) return oldJSON;
+    for (var key in newJSON) {
+      if (!oldJSON[key]) {
+        oldJSON[key] = this.obj[key];
+      }
+    }
+    return oldJSON;
   }
 }

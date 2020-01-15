@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../src/editor";
 import { PagesEditor } from "../src/pages-editor";
+import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -824,6 +825,29 @@ QUnit.test("show property grid on Edit", function(assert) {
     false,
     "Make sure that property grid is shown"
   );
+});
+
+QUnit.test("Undo-redo on showing modal window", function(assert) {
+  var creator = new SurveyCreator();
+  creator.showElementEditorAsPropertyGrid = false;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  var question = creator.survey.getQuestionByName("q1");
+  assert.equal(creator.koCanUndo(), false, "There is nothing to undo");
+  var editor = new SurveyQuestionEditor(question, null, creator);
+  editor.getPropertyEditorByName("name").editor.koValue("question1");
+  editor.getPropertyEditorByName("title").editor.koValue("new title");
+  assert.equal(creator.koCanUndo(), false, "We do not apply yet");
+  editor.onOkClick();
+  assert.equal(question.name, "question1", "new name is applied");
+  assert.equal(question.title, "new title", "new title is applied");
+  assert.equal(creator.koCanUndo(), true, "We have something to undo");
+  creator.undo();
+  assert.equal(creator.koCanUndo(), false, "There is nothing to apply again");
+  assert.equal(question.name, "q1", "undo name");
+  assert.equal(question.title, "q1", "undo title");
+  creator.redo();
+  assert.equal(question.name, "question1", "redo name");
+  assert.equal(question.title, "new title", "redo title");
 });
 
 function getSurveyJson(): any {
