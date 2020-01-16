@@ -2298,7 +2298,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           text: this.getLocString("ed.property-grid"),
           template: "sca-show-property-grid",
           hasTitle: true,
-          onClick: question => this.showProperties()
+          onClick: question => this.showQuestionEditor(question)
         });
       }
 
@@ -2561,15 +2561,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey).renameQuestion(oldName, newName);
   }
-  public showProperties = () => {
-    this.koHideAdvancedSettings(false);
-    if (this.koShowPropertyGrid() === "right") {
-      this.rightContainerActiveItem("property-grid");
-    }
-    if (this.koShowPropertyGrid() === "left") {
-      this.leftContainerActiveItem("property-grid");
-    }
-  };
   public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
