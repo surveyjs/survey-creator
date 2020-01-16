@@ -1236,10 +1236,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showPropertyGrid !== "undefined"
         ? options.showPropertyGrid
         : true;
-    this.showElementEditorAsPropertyGrid =
+    this.koShowElementEditorAsPropertyGrid(
       typeof options.showElementEditorAsPropertyGrid !== "undefined"
         ? options.showElementEditorAsPropertyGrid
-        : true;
+        : true
+    );
     this.showToolbox =
       typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
     this.koGenerateValidJSON(this.options.generateValidJSON);
@@ -1554,13 +1555,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koShowPagesToolbox(value);
   }
   /**
-   * Set this property to true to show the old style property grid on the right.
+   * You have to set this property to false via options on creating SurveyJS Creator to use popup editor and old property grid.
    */
   public get showElementEditorAsPropertyGrid() {
     return this.koShowElementEditorAsPropertyGrid();
-  }
-  public set showElementEditorAsPropertyGrid(value: boolean) {
-    this.koShowElementEditorAsPropertyGrid(value);
   }
   /**
    * Set it to false to  hide the question toolbox on the left.
@@ -2165,6 +2163,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
+      if (!this.showElementEditorAsPropertyGrid && opts.allowEdit) {
+        options.items.push({
+          name: "editelement",
+          text: this.getLocString("survey.edit"),
+          hasTitle: true,
+          onClick: question => this.showQuestionEditor(question)
+        });
+      }
+
       if (opts.allowDelete) {
         var deleteLocaleName = options.obj.isPanel
           ? "survey.deletePanel"
@@ -2292,7 +2299,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         });
       }
 
-      if (opts.allowEdit) {
+      if (this.showElementEditorAsPropertyGrid && opts.allowEdit) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("ed.property-grid"),

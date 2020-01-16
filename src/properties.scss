@@ -72,12 +72,18 @@
         }
       }
 
-      .sv_main .sv_custom_header {
-        background: transparent;
-      }
-      .svd-survey-nopadding {
-        padding: 0;
-        margin: 0 0 1em 0;
+      survey-widget {
+        display: block;
+        margin-bottom: 1em;
+
+        .sv_main .sv_custom_header {
+          background: transparent;
+        }
+
+        .svd-survey-nopadding {
+          padding: 0;
+          margin: 0;
+        }
       }
     }
   }
