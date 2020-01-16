@@ -152,7 +152,6 @@ export class Action {
 
 export class ArrayAction {
   private _index: number = 0;
-  private _deleteCount: number = 0;
   private _itemsToAdd: any[] = [];
   private _deletedItems: any[] = [];
 
@@ -162,38 +161,22 @@ export class ArrayAction {
     arrayChanges: Survey.ArrayChanges
   ) {
     this._index = arrayChanges.index;
-    this._deleteCount = arrayChanges.deleteCount;
     this._itemsToAdd = arrayChanges.itemsToAdd;
     this._deletedItems = arrayChanges.deletedItems;
   }
-
   apply() {
-    const array = this._sender[this._propertyName];
-    const index = this._index;
-    const deleteCount = this._deleteCount;
-    const itemsToAdd = this._itemsToAdd;
-
-    this.doSplice(array, index, deleteCount, itemsToAdd);
+    this.rollback();
   }
-
   rollback() {
     const array = this._sender[this._propertyName];
     const index = this._index;
     const deleteCount = this._itemsToAdd.length;
-    const itemsToAdd = this._deletedItems;
+    const itemsToAdd = [].concat(this._deletedItems);
 
-    this.doSplice(array, index, deleteCount, itemsToAdd);
-  }
-
-  doSplice(
-    array: any[],
-    index: number,
-    deleteCount: number,
-    itemsToAdd: any[]
-  ) {
     this._deletedItems = array.splice.apply(
       array,
       [index, deleteCount].concat(itemsToAdd)
     );
+    this._itemsToAdd = [].concat(itemsToAdd);
   }
 }

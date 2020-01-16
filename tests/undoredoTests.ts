@@ -283,6 +283,55 @@ QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {
   assert.equal(undoRedoManager.canUndo(), false, "canUndo false");
 });
 
+QUnit.test("Undo/redo set array property", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var question = <Survey.QuestionCheckbox>survey.getQuestionByName("question2");
+  var undoRedoManager = new UndoRedoManager(survey);
+  question.choices.splice(
+    0,
+    question.choices.length,
+    new Survey.ItemValue(1),
+    new Survey.ItemValue(2),
+    new Survey.ItemValue(3),
+    new Survey.ItemValue(4),
+    new Survey.ItemValue(5)
+  );
+  assert.equal(question.choices.length, 5, "after assign 5 elements");
+  assert.equal(
+    question.choices[1].value,
+    2,
+    "after assign the second element is correct"
+  );
+  undoRedoManager.undo();
+  assert.equal(question.choices.length, 3, "Undo to 3 elements");
+  assert.equal(
+    question.choices[1].value,
+    "two",
+    "Undo the second element correctly"
+  );
+  undoRedoManager.redo();
+  assert.equal(question.choices.length, 5, "Redo to 5 elements");
+  assert.equal(
+    question.choices[1].value,
+    2,
+    "Redo the second element correctly"
+  );
+  undoRedoManager.undo();
+  assert.equal(question.choices.length, 3, "Undo2 to 3 elements");
+  assert.equal(
+    question.choices[1].value,
+    "two",
+    "Undo2 the second element correctly"
+  );
+  undoRedoManager.redo();
+  assert.equal(question.choices.length, 5, "Redo2 to 5 elements");
+  assert.equal(
+    question.choices[1].value,
+    2,
+    "Redo2 the second element correctly"
+  );
+});
+
 function getSurveyJson(): any {
   return {
     title: "old title",
