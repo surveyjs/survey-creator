@@ -829,7 +829,7 @@ QUnit.test("show property grid on Edit", function(assert) {
 
 QUnit.test("Undo-redo on showing modal window", function(assert) {
   var creator = new SurveyCreator();
-  creator.showElementEditorAsPropertyGrid = false;
+  creator.koShowElementEditorAsPropertyGrid(false);
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   var question = creator.survey.getQuestionByName("q1");
   assert.equal(creator.koCanUndo(), false, "There is nothing to undo");
