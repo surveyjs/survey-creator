@@ -229,7 +229,7 @@ export class PagesEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
-  public hasScroller = ko.observable(true);
+  public hasScroller = ko.observable(false);
 
   dispose() {
     if (!!this.updateScroller) {
