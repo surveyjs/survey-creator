@@ -265,79 +265,54 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@checkbox": {
       properties: [
-        "hasOther",
-        "otherText",
-        "choicesOrder",
-        "colCount",
-        "width"
+        { name: "hasOther", tab: "choices" },
+        { name: "otherText", tab: "choices" },
+        { name: "choicesOrder", tab: "choices" },
+        { name: "colCount", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
+        { name: "choicesByUrl", index: 11 }
       ]
     },
     "matrixdropdowncolumn@radiogroup": {
       properties: [
-        "hasOther",
-        "otherText",
-        "choicesOrder",
-        "colCount",
-        "width"
+        { name: "hasOther", tab: "choices" },
+        { name: "otherText", tab: "choices" },
+        { name: "choicesOrder", tab: "choices" },
+        { name: "colCount", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
+        { name: "choicesByUrl", index: 11 }
       ]
     },
     "matrixdropdowncolumn@dropdown": {
       properties: [
-        "hasOther",
-        "otherText",
-        "choicesOrder",
-        "optionsCaption",
-        "width"
+        { name: "hasOther", tab: "choices" },
+        { name: "otherText", tab: "choices" },
+        { name: "choicesOrder", tab: "choices" },
+        { name: "optionsCaption", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
+        { name: "choicesByUrl", index: 11 }
       ]
     },
     "matrixdropdowncolumn@text": {
-      properties: ["inputType", "placeHolder", "maxLength", "width"],
-      tabs: [
-        { name: "validators", index: 10 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
-      ]
+      properties: ["inputType", "placeHolder", "maxLength"],
+      tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["rows", "placeHolder", "maxLength", "width"],
-      tabs: [
-        { name: "validators", index: 10 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
-      ]
+      properties: ["rows", "placeHolder", "maxLength"],
+      tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@boolean": {
-      properties: ["defaultValue", "width"],
-      tabs: [
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
-      ]
+      properties: ["defaultValue"]
     },
     "matrixdropdowncolumn@expression": {
-      properties: ["name", "displayStyle", "currency", "width"],
-      tabs: [
-        { name: "expression", index: 10 },
-        { name: "logic", index: 20 },
-        { name: "totals", index: 40 }
-      ]
+      properties: ["displayStyle", "currency"],
+      tabs: [{ name: "expression", index: 10 }]
     },
     multipletextitem: {
       properties: ["inputType", "maxLength", "placeHolder", "requiredErrorText"]

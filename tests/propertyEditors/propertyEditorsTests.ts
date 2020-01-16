@@ -1099,6 +1099,40 @@ QUnit.test(
 );
 
 QUnit.test(
+  "SurveyPropertyMatrixDropdownColumns change nested property content on changing column type",
+  function(assert) {
+    var survey = new Survey.Survey();
+    survey.addNewPage("p");
+    var question = new Survey.QuestionMatrixDropdown("q1");
+    question.addColumn("column 1");
+    question.addColumn("column 2");
+    survey.pages[0].addElement(question);
+    var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+      Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+    );
+    columnsEditor.object = question;
+    columnsEditor.beforeShow();
+    var itemViewModel = <SurveyNestedPropertyEditorItem>(
+      columnsEditor.createItemViewModel(question.columns[0])
+    );
+    itemViewModel.obj.cellType = "dropdown";
+    columnsEditor.onEditItemClick(itemViewModel);
+    var colDetailEditor = <SurveyElementEditorContent>(
+      columnsEditor.koEditItem().itemEditor
+    );
+    assert.ok(colDetailEditor.getPropertyEditorByName("choices"));
+    columnsEditor.onReturnToListClick();
+
+    itemViewModel.obj.cellType = "default";
+    columnsEditor.onEditItemClick(itemViewModel);
+    colDetailEditor = <SurveyElementEditorContent>(
+      columnsEditor.koEditItem().itemEditor
+    );
+    assert.notOk(colDetailEditor.getPropertyEditorByName("choices"));
+  }
+);
+
+QUnit.test(
   "Check showDisplayNameOnTop for different property editors",
   function(assert) {
     var question = new Survey.QuestionCheckbox("q1");

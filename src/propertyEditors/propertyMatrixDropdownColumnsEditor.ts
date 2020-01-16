@@ -6,11 +6,7 @@ import {
 } from "./propertyEditorBase";
 import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
 import { editorLocalization } from "../editorLocalization";
-import {
-  SurveyNestedPropertyEditor,
-  SurveyNestedPropertyEditorItem,
-  SurveyNestedPropertyEditorColumn
-} from "./propertyNestedPropertyEditor";
+import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { getNextValue } from "../utils/utils";
 

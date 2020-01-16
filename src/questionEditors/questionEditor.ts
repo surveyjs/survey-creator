@@ -213,6 +213,11 @@ export class SurveyQuestionProperties {
       className.indexOf("@") > -1 &&
       SurveyQuestionEditorDefinition.definition[className]
     ) {
+      var defaultName =
+        className.substring(0, className.indexOf("@") + 1) + "default";
+      if (!!SurveyQuestionEditorDefinition.definition[defaultName]) {
+        result.push(SurveyQuestionEditorDefinition.definition[defaultName]);
+      }
       result.push(SurveyQuestionEditorDefinition.definition[className]);
       return result;
     }
