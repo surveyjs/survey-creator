@@ -2165,15 +2165,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
-      if (opts.allowEdit) {
-        options.items.push({
-          name: "editelement",
-          text: this.getLocString("survey.edit"),
-          hasTitle: true,
-          onClick: question => this.showQuestionEditor(question)
-        });
-      }
-
       if (opts.allowDelete) {
         var deleteLocaleName = options.obj.isPanel
           ? "survey.deletePanel"
@@ -2298,6 +2289,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
             var newType = event.target.value;
             this.convertCurrentObject(options.obj, newType);
           }
+        });
+      }
+
+      if (opts.allowEdit) {
+        options.items.push({
+          name: "editelement",
+          text: this.getLocString("ed.property-grid"),
+          template: "sca-show-property-grid",
+          hasTitle: true,
+          onClick: question => this.showProperties()
         });
       }
 
@@ -2560,6 +2561,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey).renameQuestion(oldName, newName);
   }
+  public showProperties = () => {
+    this.koHideAdvancedSettings(false);
+    if (this.koShowPropertyGrid() === "right") {
+      this.rightContainerActiveItem("property-grid");
+    }
+    if (this.koShowPropertyGrid() === "left") {
+      this.leftContainerActiveItem("property-grid");
+    }
+  };
   public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null

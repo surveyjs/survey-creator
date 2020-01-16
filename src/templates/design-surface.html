@@ -69,7 +69,7 @@
 
 <script type="text/html" id="se-component-property-grid-header">
   <div class="svd-property-grid__header" data-bind="click: function(m, e) { var surfaceEl = document.getElementsByClassName('svd_editors')[0]; koHideAdvancedSettings(true); surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = ''; }">
-      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.property-grid')"></span>
       <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="attr: { title: getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
   </div>
 </script>
@@ -95,7 +95,7 @@
 <script type="text/html" id="se-component-toolbar">
   <!-- ko if: showPropertyGrid && koHideAdvancedSettings()  -->
   <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
-      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
+      <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.property-grid')"></span>
       <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
   </div>
   <!-- /ko -->

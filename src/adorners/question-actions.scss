@@ -31,6 +31,9 @@ question-actions {
     cursor: pointer;
     margin-left: 1em;
   }
+  .svda_question_action--separated {
+    padding-left: 3em;
+  }
 }
 .svd_q_selected > .svda-question-actions {
   question-actions {
