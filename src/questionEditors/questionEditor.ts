@@ -215,7 +215,10 @@ export class SurveyQuestionProperties {
     ) {
       var defaultName =
         className.substring(0, className.indexOf("@") + 1) + "default";
-      if (!!SurveyQuestionEditorDefinition.definition[defaultName]) {
+      if (
+        defaultName != className &&
+        !!SurveyQuestionEditorDefinition.definition[defaultName]
+      ) {
         result.push(SurveyQuestionEditorDefinition.definition[defaultName]);
       }
       result.push(SurveyQuestionEditorDefinition.definition[className]);

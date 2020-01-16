@@ -417,10 +417,6 @@
         }
       }
     }
-    .svd_property_editor_dropdown {
-      min-width: 140px;
-      display: block;
-    }
   }
   .svd_items_table {
     width: 100%;
@@ -434,6 +430,10 @@
       }
     }
   }
+}
+.svd_property_editor_dropdown {
+  min-width: 120px;
+  display: block;
 }
 
 .svd_container {
