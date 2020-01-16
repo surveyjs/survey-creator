@@ -45,6 +45,13 @@
       margin-top: 1.22em;
     }
 
+    .svd-page-scroller-arrow {
+      visibility: hidden;
+    }
+    .svd-page-scroller-arrow--visible {
+      visibility: visible;
+    }
+
     .svd-page {
       overflow: hidden;
       vertical-align: bottom;
