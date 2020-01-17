@@ -332,6 +332,43 @@ QUnit.test("Undo/redo set array property", function(assert) {
   );
 });
 
+QUnit.test(
+  "Undo/redo change expression on question.name change and put it in one transaction",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2", visibleIf: "{q1} = 2" },
+        { type: "text", name: "q3", visibleIf: "{q1} = 3" }
+      ]
+    });
+    var undoRedoManager = new UndoRedoManager(survey);
+    var q1 = survey.getQuestionByName("q1");
+    var q2 = survey.getQuestionByName("q2");
+    var q3 = survey.getQuestionByName("q3");
+    undoRedoManager.onQuestionNameChangedCallback = (
+      obj: Survey.Base,
+      oldName: string
+    ) => {
+      q2.visibleIf = q2.visibleIf.replace(oldName, obj["name"]);
+      q3.visibleIf = q3.visibleIf.replace(oldName, obj["name"]);
+    };
+
+    q1.name = "question1";
+    assert.equal(q1.name, "question1", "q1 name is changed");
+    assert.equal(q2.visibleIf, "{question1} = 2", "q2 visibleIf is changed");
+    assert.equal(q3.visibleIf, "{question1} = 3", "q3 visibleIf is changed");
+    undoRedoManager.undo();
+    assert.equal(q1.name, "q1", "undo q1 name");
+    assert.equal(q2.visibleIf, "{q1} = 2", "undo q2 visibleIf");
+    assert.equal(q3.visibleIf, "{q1} = 3", "undo q3 visibleIf");
+    undoRedoManager.redo();
+    assert.equal(q1.name, "question1", "redo q1 name");
+    assert.equal(q2.visibleIf, "{question1} = 2", "redo q2 visibleIf");
+    assert.equal(q3.visibleIf, "{question1} = 3", "redo q3 visibleIf");
+  }
+);
+
 function getSurveyJson(): any {
   return {
     title: "old title",

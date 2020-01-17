@@ -850,6 +850,38 @@ QUnit.test("Undo-redo on showing modal window", function(assert) {
   assert.equal(question.title, "new title", "redo title");
 });
 
+QUnit.test(
+  "Undo-redo on showing modal window and updating the expressions",
+  function(assert) {
+    var creator = new SurveyCreator();
+    creator.koShowElementEditorAsPropertyGrid(false);
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2", visibleIf: "{q1} = 2" },
+        { type: "text", name: "q3", visibleIf: "{q1} = 3" }
+      ]
+    };
+    var q1 = creator.survey.getQuestionByName("q1");
+    var q2 = creator.survey.getQuestionByName("q2");
+    var q3 = creator.survey.getQuestionByName("q3");
+    var editor = new SurveyQuestionEditor(q1, null, creator);
+    editor.getPropertyEditorByName("name").editor.koValue("question1");
+    editor.onOkClick();
+    assert.equal(q1.name, "question1", "q1 name is changed");
+    assert.equal(q2.visibleIf, "{question1} = 2", "q2 visibleIf is changed");
+    assert.equal(q3.visibleIf, "{question1} = 3", "q3 visibleIf is changed");
+    creator.undo();
+    assert.equal(q1.name, "q1", "undo q1 name");
+    assert.equal(q2.visibleIf, "{q1} = 2", "undo q2 visibleIf");
+    assert.equal(q3.visibleIf, "{q1} = 3", "undo q3 visibleIf");
+    creator.redo();
+    assert.equal(q1.name, "question1", "redo q1 name");
+    assert.equal(q2.visibleIf, "{question1} = 2", "redo q2 visibleIf");
+    assert.equal(q3.visibleIf, "{question1} = 3", "redo q3 visibleIf");
+  }
+);
+
 function getSurveyJson(): any {
   return {
     pages: [

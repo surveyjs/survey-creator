@@ -1779,7 +1779,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ) {
     var value = obj[property.name];
     if (property.name == "name") {
-      this.updateConditions(oldValue, value);
       this.onElementNameChanged.fire(this, {
         obj: obj,
         oldName: oldValue,
@@ -2083,6 +2082,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
     this.undoRedoManager = new UndoRedoManager(this.surveyValue());
+    this.undoRedoManager.onQuestionNameChangedCallback = (
+      obj: Survey.Base,
+      oldName: string
+    ) => {
+      this.updateConditions(oldName, obj["name"]);
+    };
     this.undoRedoManager.canUndoRedoCallback = () => {
       this.updateKoCanUndoRedo();
     };
@@ -2564,7 +2569,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ) {
     this.showQuestionEditor(element, onClose);
   }
-  private showEditorOldName: string;
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey).renameQuestion(oldName, newName);
   }
@@ -2587,7 +2591,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         )
       : null;
     var isCanceled = true;
-    this.showEditorOldName = element["name"];
     this.questionEditorWindow.show(
       element,
       elWindow,
@@ -2608,14 +2611,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public onQuestionEditorChanged(question: Survey.Question) {
     if (!!question.name && !this.isNameUnique(question, question.name)) {
       question.name = this.generateUniqueName(question, question.name);
-    }
-    if (
-      !!this.showEditorOldName &&
-      !!question.name &&
-      this.showEditorOldName != question.name
-    ) {
-      this.updateConditions(this.showEditorOldName, question.name);
-      this.showEditorOldName = "";
     }
     this.surveyObjects.nameChanged(question);
     this.doPropertyGridChanged();

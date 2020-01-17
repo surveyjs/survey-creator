@@ -2,6 +2,10 @@ import * as Survey from "survey-knockout";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 export class UndoRedoManager {
+  public onQuestionNameChangedCallback: (
+    obj: Survey.Base,
+    oldName: string
+  ) => any;
   constructor(private _survey: Survey.Survey) {
     this._survey.onPropertyValueChangedCallback = (
       name: string,
@@ -22,11 +26,15 @@ export class UndoRedoManager {
       if (!transaction) {
         transaction = new Transaction(name);
         transaction.addAction(action);
+        this._preparingTransaction = transaction;
+        this.onAfterAddingAction(name, oldValue, newValue, sender);
+        this._preparingTransaction = null;
         this._addTransaction(transaction);
         return;
       }
 
       transaction.addAction(action);
+      this.onAfterAddingAction(name, oldValue, newValue, sender);
     };
   }
 
@@ -61,6 +69,26 @@ export class UndoRedoManager {
     const index = this._currentTransactionIndex;
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
+  }
+  private onAfterAddingAction(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Survey.Base
+  ) {
+    if (name !== "name" && !!this.isObjQuestion(sender)) return;
+    if (!!this.onQuestionNameChangedCallback) {
+      this.onQuestionNameChangedCallback(sender, oldValue);
+    }
+  }
+  private isObjQuestion(obj: Survey.Base) {
+    var classInfo = Survey.Serializer.findClass(obj.getType());
+
+    while (!!classInfo && !!classInfo.parentName) {
+      if (classInfo.name === "question") return true;
+      classInfo = Survey.Serializer.findClass(classInfo.parentName);
+    }
+    return false;
   }
 
   canUndoRedoCallback() {}
