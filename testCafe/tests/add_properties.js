@@ -25,5 +25,10 @@ test(`check the new prop exists`, async t => {
   const getPosition = ClientFunction(() =>
     document.documentElement.innerHTML.indexOf("Custom Property")
   );
+
+  const OthersTab = Selector(".svd_object_editor span").withText("Others");
+
+  await t.click(OthersTab);
+
   assert.notEqual(await getPosition(), -1);
 });

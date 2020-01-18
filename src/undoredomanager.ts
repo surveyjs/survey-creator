@@ -98,6 +98,7 @@ export class UndoRedoManager {
     this._preparingTransaction = new Transaction(name);
   }
   stopTransaction() {
+    if (!this._preparingTransaction) return;
     this._addTransaction(this._preparingTransaction);
     this._preparingTransaction = null;
   }
