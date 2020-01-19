@@ -882,6 +882,24 @@ QUnit.test(
   }
 );
 
+QUnit.test("Undo-redo creator add/remove page", function(assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 2" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 3" }
+    ]
+  };
+  assert.equal(creator.pages().length, 1, "There is one page");
+  creator.addPage();
+  assert.equal(creator.pages().length, 2, "There are two pages");
+  creator.undo();
+  assert.equal(creator.pages().length, 1, "Undo new page");
+  creator.redo();
+  assert.equal(creator.pages().length, 2, "Redo new page");
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

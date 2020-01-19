@@ -58,7 +58,7 @@ export class SurveyQuestionEditorProperties {
   }
   public addProperty(property: any, displayName: string) {
     if (!displayName) {
-      displayName = editorLocalization.getPropertyInEditor(property.name);
+      displayName = editorLocalization.getPropertyNameInEditor(property.name);
     }
     var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;

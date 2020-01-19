@@ -11,7 +11,7 @@ import { SurveyCreator } from "../src/editor";
 import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
 import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/propertyMultipleValuesEditor";
 import { EditorOptionsTests } from "./editorOptionsTests";
-import { SurveyPropertyTriggersEditor } from "../src/entries";
+import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -564,6 +564,47 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
   Survey.Serializer.removeProperty("question", "targetEntity");
   Survey.Serializer.removeProperty("question", "targetField");
 });
+
+QUnit.test(
+  "Support old property grid: show localized display text from p.propertyName.title",
+  function(assert) {
+    Survey.Serializer.addProperty("question", "customProp");
+    defaultStrings.p["customProp"] = {
+      name: "MyCustomProp",
+      title: "Custom Prop Ttile"
+    };
+    assert.equal(
+      editorLocalization.getPropertyName("customProp"),
+      "MyCustomProp",
+      "Get correct display Name localization"
+    );
+    assert.equal(
+      editorLocalization.getPropertyTitle("customProp"),
+      "Custom Prop Ttile",
+      "Get correct title localization"
+    );
+    assert.equal(
+      editorLocalization.getPropertyNameInEditor("customProp"),
+      "MyCustomProp",
+      "Custom Prop Name in Editor"
+    );
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyElementEditorContentNoCategries(question);
+    var customProp = editor.getPropertyEditorByName("customProp");
+    assert.equal(
+      customProp.displayName,
+      "MyCustomProp",
+      "Use localized property name"
+    );
+    assert.equal(
+      customProp.title,
+      "Custom Prop Ttile",
+      "Use localized property title"
+    );
+    Survey.Serializer.removeProperty("question", "customProp");
+  }
+);
+
 QUnit.test("Question editor: change editor.readOnly", function(assert) {
   var question = new Survey.QuestionText("q2");
   var editor = new SurveyCreator();
