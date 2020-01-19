@@ -90,6 +90,9 @@ export class SurveyJSONEditor {
   }
   private timeoutId: number = -1;
   private onJsonEditorChanged(): any {
+    if (!this.hasAceEditor) {
+      this.isJSONChanged = true;
+    }
     if (this.timeoutId > -1) {
       clearTimeout(this.timeoutId);
     }
