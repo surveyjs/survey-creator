@@ -369,6 +369,24 @@ QUnit.test(
   }
 );
 
+QUnit.test("UndoRedoManager stopTransaction withot startTransaction doesn't fail (blur/focus case)", function(assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 2" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 3" }
+    ]
+  });
+  var count = 0;
+  var undoRedoManager = new UndoRedoManager(survey);
+  try {
+    undoRedoManager.stopTransaction();
+  } catch {
+    count++;
+  }
+  assert.equal(count, 0, "no errors");
+});
+
 function getSurveyJson(): any {
   return {
     title: "old title",
