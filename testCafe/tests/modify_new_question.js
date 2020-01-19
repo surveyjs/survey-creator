@@ -61,12 +61,24 @@ test(`check a guid in the tag`, async t => {
   const getGuidFromUi = ClientFunction(
     () =>
       document
-        .querySelectorAll("[title=MyTag]")[0]
-        .parentNode.nextElementSibling.querySelector("input").value
+        .querySelectorAll("div[data-property='tag']")[0]
+        .querySelector("input").value
   );
   const getGuid = ClientFunction(() => window.qguid);
 
-  await t.click(`[title~=Radiogroup]`);
+  const OthersTab = Selector(".svd_object_editor span").withText("Others");
+
+  await t.click(`[title~=Radiogroup]`).click(OthersTab);
 
   assert.equal(await getGuidFromUi(), await getGuid());
+});
+
+test(`check custom localization exists`, async t => {
+  const OthersTab = Selector(".svd_object_editor span").withText("Others");
+  const NewProp = Selector(".svd_object_editor label").withText("Tag");
+
+  await t
+    .click(`[title~=Radiogroup]`)
+    .click(OthersTab)
+    .click(NewProp);
 });
