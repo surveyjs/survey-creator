@@ -1702,7 +1702,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Add a new page into the editing survey.
    */
   public addPage = () => {
-    var name = SurveyHelper.getNewPageName(this.pages());
+    var name = SurveyHelper.getNewPageName(this.survey.pages);
     var page = <Survey.Page>this.survey.addNewPage(name);
     this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
     this.addPageToUI(page);
@@ -1720,7 +1720,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return editorLocalization.getString(str);
   }
   public movePage = (indexFrom: number, indexTo: number) => {
-    var page = <Survey.Page>this.pages()[indexTo];
+    var page = <Survey.Page>this.survey.pages[indexTo];
     this.surveyObjects.survey = null; // TODO may be we don't need this hack
     this.surveyObjects.survey = this.survey;
     this.surveyObjects.selectObject(page);
@@ -1987,7 +1987,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
       this.survey.currentPage = <Survey.Page>obj;
-      canDeleteObject = this.pages().length > 1;
+      canDeleteObject = this.survey.pages.length > 1;
     }
     if (objType == ObjType.Question || objType == ObjType.Panel) {
       this.survey.selectedElement = obj;
@@ -2464,7 +2464,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return true;
   }
   private getNewName(type: string): string {
-    if (type == "page") return SurveyHelper.getNewPageName(this.pages());
+    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     return type == "panel" || type == "flowpanel"
       ? this.getNewPanelName()
       : this.getNewQuestionName();
@@ -2477,8 +2477,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private getAllQuestions(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.pages().length; i++) {
-      this.addElements(this.pages()[i].elements, false, result);
+    for (var i = 0; i < this.survey.pages.length; i++) {
+      this.addElements(this.survey.pages[i].elements, false, result);
     }
     this.addElements(this.newPanels, false, result);
     this.addElements(this.newQuestions, false, result);
@@ -2486,8 +2486,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private getAllPanels(): Array<any> {
     var result = [];
-    for (var i = 0; i < this.pages().length; i++) {
-      this.addElements(this.pages()[i].elements, true, result);
+    for (var i = 0; i < this.survey.pages.length; i++) {
+      this.addElements(this.survey.pages[i].elements, true, result);
     }
     this.addElements(this.newPanels, true, result);
     this.addElements(this.newQuestions, true, result);
