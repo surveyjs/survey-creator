@@ -5,6 +5,27 @@ import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("UndoRedoTests");
 
+export class UndoRedoManagerTester extends UndoRedoManager {
+  constructor(survey: Survey.Survey) {
+    super();
+    survey.onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Survey.Base,
+      arrayChanges: Survey.ArrayChanges
+    ) => {
+      this.onPropertyValueChanged(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+    };
+  }
+}
+
 QUnit.test("UndoRedoManager Action Class", function(assert) {
   var element = new Survey.QuestionRadiogroupModel("element");
   var propertyName = "title";
@@ -69,7 +90,7 @@ QUnit.test("UndoRedoManager Transaction Class", function(assert) {
 
 QUnit.test("Undo/redo survey title", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var oldTitle = survey.title;
   var newTitle = "New Title";
 
@@ -88,7 +109,7 @@ QUnit.test("Undo/redo survey title", function(assert) {
 
 QUnit.test("Undo/redo canUndo canRedo", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var oldTitle = survey.title;
   var newTitle = "New Title";
 
@@ -111,7 +132,7 @@ QUnit.test("Undo/redo canUndo canRedo", function(assert) {
 
 QUnit.test("Undo/redo add element", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var currentPage = survey.currentPage;
   var newElement = new Survey.QuestionRadiogroupModel("newElement");
 
@@ -145,7 +166,7 @@ QUnit.test("Undo/redo add element", function(assert) {
 
 QUnit.test("Undo/redo remove element", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var currentPage = survey.currentPage;
   var newElement = new Survey.QuestionRadiogroupModel("newElement");
 
@@ -190,7 +211,7 @@ QUnit.test("Undo/redo remove element", function(assert) {
 
 QUnit.test("Undo/redo add element with transaction", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var currentPage = survey.currentPage;
   var newElement = new Survey.QuestionRadiogroupModel("newElement");
   var newElement2 = new Survey.QuestionRadiogroupModel("newElement2");
@@ -228,7 +249,7 @@ QUnit.test("Undo/redo add element with transaction", function(assert) {
 
 QUnit.test("Undo/redo koCanUndo koCanRedo canUndo canRedo", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var currentPage = survey.currentPage;
   var newElement = new Survey.QuestionRadiogroupModel("newElement");
 
@@ -252,7 +273,7 @@ QUnit.test("Undo/redo koCanUndo koCanRedo canUndo canRedo", function(assert) {
 QUnit.test("Undo/redo canUndoRedoCallback", function(assert) {
   var counter = 0;
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   var currentPage = survey.currentPage;
   var newElement = new Survey.QuestionRadiogroupModel("newElement");
 
@@ -274,7 +295,7 @@ QUnit.test("Undo/redo canUndoRedoCallback", function(assert) {
 
 QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
 
   undoRedoManager.startTransaction("add elements");
   undoRedoManager.stopTransaction();
@@ -286,7 +307,7 @@ QUnit.test("Undo/redo doesn't add empty transaction", function(assert) {
 QUnit.test("Undo/redo set array property", function(assert) {
   var survey = new Survey.Survey(getSurveyJson());
   var question = <Survey.QuestionCheckbox>survey.getQuestionByName("question2");
-  var undoRedoManager = new UndoRedoManager(survey);
+  var undoRedoManager = new UndoRedoManagerTester(survey);
   question.choices.splice(
     0,
     question.choices.length,
@@ -333,7 +354,7 @@ QUnit.test("Undo/redo set array property", function(assert) {
 });
 
 QUnit.test(
-  "Undo/redo change expression on question.name change and put it in one transaction",
+  "UndoRedoManager stopTransaction withot startTransaction doesn't fail (blur/focus case)",
   function(assert) {
     var survey = new Survey.Survey({
       elements: [
@@ -342,50 +363,16 @@ QUnit.test(
         { type: "text", name: "q3", visibleIf: "{q1} = 3" }
       ]
     });
-    var undoRedoManager = new UndoRedoManager(survey);
-    var q1 = survey.getQuestionByName("q1");
-    var q2 = survey.getQuestionByName("q2");
-    var q3 = survey.getQuestionByName("q3");
-    undoRedoManager.onQuestionNameChangedCallback = (
-      obj: Survey.Base,
-      oldName: string
-    ) => {
-      q2.visibleIf = q2.visibleIf.replace(oldName, obj["name"]);
-      q3.visibleIf = q3.visibleIf.replace(oldName, obj["name"]);
-    };
-
-    q1.name = "question1";
-    assert.equal(q1.name, "question1", "q1 name is changed");
-    assert.equal(q2.visibleIf, "{question1} = 2", "q2 visibleIf is changed");
-    assert.equal(q3.visibleIf, "{question1} = 3", "q3 visibleIf is changed");
-    undoRedoManager.undo();
-    assert.equal(q1.name, "q1", "undo q1 name");
-    assert.equal(q2.visibleIf, "{q1} = 2", "undo q2 visibleIf");
-    assert.equal(q3.visibleIf, "{q1} = 3", "undo q3 visibleIf");
-    undoRedoManager.redo();
-    assert.equal(q1.name, "question1", "redo q1 name");
-    assert.equal(q2.visibleIf, "{question1} = 2", "redo q2 visibleIf");
-    assert.equal(q3.visibleIf, "{question1} = 3", "redo q3 visibleIf");
+    var count = 0;
+    var undoRedoManager = new UndoRedoManagerTester(survey);
+    try {
+      undoRedoManager.stopTransaction();
+    } catch {
+      count++;
+    }
+    assert.equal(count, 0, "no errors");
   }
 );
-
-QUnit.test("UndoRedoManager stopTransaction withot startTransaction doesn't fail (blur/focus case)", function(assert) {
-  var survey = new Survey.Survey({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2", visibleIf: "{q1} = 2" },
-      { type: "text", name: "q3", visibleIf: "{q1} = 3" }
-    ]
-  });
-  var count = 0;
-  var undoRedoManager = new UndoRedoManager(survey);
-  try {
-    undoRedoManager.stopTransaction();
-  } catch {
-    count++;
-  }
-  assert.equal(count, 0, "no errors");
-});
 
 function getSurveyJson(): any {
   return {

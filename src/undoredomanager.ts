@@ -6,36 +6,31 @@ export class UndoRedoManager {
     obj: Survey.Base,
     oldName: string
   ) => any;
-  constructor(private _survey: Survey.Survey) {
-    this._survey.onPropertyValueChangedCallback = (
-      name: string,
-      oldValue: any,
-      newValue: any,
-      sender: Survey.Base,
-      arrayChanges: Survey.ArrayChanges
-    ) => {
-      if (!this.hasPropertyInSerializer(sender, name)) return;
-      if (EditableObject.isCopyObject(sender)) return;
-      if (this._keepSilense) return;
+  constructor() {}
+  public onPropertyValueChanged(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Survey.Base,
+    arrayChanges: Survey.ArrayChanges
+  ) {
+    if (!this.hasPropertyInSerializer(sender, name)) return;
+    if (EditableObject.isCopyObject(sender)) return;
+    if (this._keepSilense) return;
 
-      let transaction = this._preparingTransaction;
-      let action = arrayChanges
-        ? new ArrayAction(name, sender, arrayChanges)
-        : new Action(name, oldValue, newValue, sender);
+    let transaction = this._preparingTransaction;
+    let action = arrayChanges
+      ? new ArrayAction(name, sender, arrayChanges)
+      : new Action(name, oldValue, newValue, sender);
 
-      if (!transaction) {
-        transaction = new Transaction(name);
-        transaction.addAction(action);
-        this._preparingTransaction = transaction;
-        this.onAfterAddingAction(name, oldValue, newValue, sender);
-        this._preparingTransaction = null;
-        this._addTransaction(transaction);
-        return;
-      }
-
+    if (!transaction) {
+      transaction = new Transaction(name);
       transaction.addAction(action);
-      this.onAfterAddingAction(name, oldValue, newValue, sender);
-    };
+      this._addTransaction(transaction);
+      return;
+    }
+
+    transaction.addAction(action);
   }
 
   private _keepSilense = false;
@@ -70,35 +65,18 @@ export class UndoRedoManager {
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
   }
-  private onAfterAddingAction(
-    name: string,
-    oldValue: any,
-    newValue: any,
-    sender: Survey.Base
-  ) {
-    if (name !== "name" && !!this.isObjQuestion(sender)) return;
-    if (!!this.onQuestionNameChangedCallback) {
-      this.onQuestionNameChangedCallback(sender, oldValue);
-    }
-  }
-  private isObjQuestion(obj: Survey.Base) {
-    var classInfo = Survey.Serializer.findClass(obj.getType());
-
-    while (!!classInfo && !!classInfo.parentName) {
-      if (classInfo.name === "question") return true;
-      classInfo = Survey.Serializer.findClass(classInfo.parentName);
-    }
-    return false;
-  }
-
   canUndoRedoCallback() {}
-
+  private transactionCounter = 0;
   startTransaction(name: string) {
+    this.transactionCounter++;
     if (this._preparingTransaction) return;
     this._preparingTransaction = new Transaction(name);
   }
   stopTransaction() {
-    if (!this._preparingTransaction) return;
+    if (this.transactionCounter > 0) {
+      this.transactionCounter--;
+    }
+    if (!this._preparingTransaction || this.transactionCounter > 0) return;
     this._addTransaction(this._preparingTransaction);
     this._preparingTransaction = null;
   }

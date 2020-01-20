@@ -2071,17 +2071,55 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
   }
+  private onSurveyPropertyValueChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Survey.Base,
+    arrayChanges: Survey.ArrayChanges
+  ) {
+    this.undoRedoManager.startTransaction(name + " changed");
+    this.undoRedoManager.onPropertyValueChanged(
+      name,
+      oldValue,
+      newValue,
+      sender,
+      arrayChanges
+    );
+    if (name === "name" && this.isObjQuestion(sender)) {
+      this.updateConditions(oldValue, sender["name"]);
+    }
+    this.undoRedoManager.stopTransaction();
+  }
+  private isObjQuestion(obj: Survey.Base) {
+    var classInfo = Survey.Serializer.findClass(obj.getType());
+
+    while (!!classInfo && !!classInfo.parentName) {
+      if (classInfo.name === "question") return true;
+      classInfo = Survey.Serializer.findClass(classInfo.parentName);
+    }
+    return !!classInfo && classInfo.name === "question";
+  }
   private initSurvey(json: any) {
     var self = this;
     this.surveyValue(
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
-    this.undoRedoManager = new UndoRedoManager(this.surveyValue());
-    this.undoRedoManager.onQuestionNameChangedCallback = (
-      obj: Survey.Base,
-      oldName: string
+    this.undoRedoManager = new UndoRedoManager();
+    this.surveyValue().onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Survey.Base,
+      arrayChanges: Survey.ArrayChanges
     ) => {
-      this.updateConditions(oldName, obj["name"]);
+      this.onSurveyPropertyValueChangedCallback(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
     };
     this.undoRedoManager.canUndoRedoCallback = () => {
       this.updateKoCanUndoRedo();
