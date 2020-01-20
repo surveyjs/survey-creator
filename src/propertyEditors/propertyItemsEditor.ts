@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import Sortable from "sortablejs";
 import { SurveyPropertyModalEditor } from "./propertyModalEditor";
 import { editorLocalization } from "../editorLocalization";
+import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   public onDeleteClick: any;
@@ -51,9 +52,16 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       this.options["undoRedoManager"].stopTransaction();
     },
     onUpdate: (evt, itemV) => {
-      this.moveItem(itemV.obj, evt.newIndex);
-      // Remove sortables "unbound" element
-      evt.item.parentNode.removeChild(evt.item);
+      if (
+        SurveyHelper.moveItemInArray(
+          this.origionalValue,
+          itemV.obj,
+          evt.newIndex
+        )
+      ) {
+        // Remove sortables "unbound" element
+        evt.item.parentNode.removeChild(evt.item);
+      }
       return true;
     }
   };
@@ -95,14 +103,6 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         return;
       }
     }
-  }
-  private moveItem(obj: any, newIndex: number) {
-    if (!this.origionalValue) return;
-    if (newIndex < 0 || newIndex >= this.origionalValue.length) return;
-    var oldIndex = this.origionalValue.indexOf(obj);
-    if (oldIndex < 0 || oldIndex == newIndex) return;
-    this.origionalValue.splice(oldIndex, 1);
-    this.origionalValue.splice(newIndex, 0, obj);
   }
   protected get isCurrentValueEmpty() {
     return this.origionalValue.length == 0;

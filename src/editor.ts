@@ -85,7 +85,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private elementPropertyGridValue: SurveyElementPropertyGrid;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
-  public pages: ko.ObservableArray<Survey.PageModel>;
   public selectPage: Function;
 
   private surveyLive: SurveyLiveTester;
@@ -807,8 +806,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
 
     StylesManager.applyTheme(StylesManager.currentTheme());
-
-    this.pages = ko.observableArray<Survey.Page>();
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
@@ -1704,13 +1701,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public addPage = () => {
     var name = SurveyHelper.getNewPageName(this.survey.pages);
     var page = <Survey.Page>this.survey.addNewPage(name);
-    this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
   };
   public deletePage = () => {
     this.deleteCurrentObject();
-    this.pages.valueHasMutated(); //TODO why this is need ? (ko problem)
   };
   /**
    * Returns the localized string by it's id
@@ -2329,7 +2324,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue() });
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
-    this.pages(this.survey.pages);
     this.surveyObjects.selectObject(this.surveyValue());
     this.surveyValue().onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
@@ -2633,7 +2627,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
       return;
     }
-    this.pages.notifySubscribers();
     this.surveyObjects.selectObject(selectedObject);
   };
 
@@ -2665,11 +2658,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public copyPage = (page: Survey.PageModel): Survey.PageModel => {
     var newPage = <Survey.Page>(<any>this.copyElement(page));
-    var index = this.pages.indexOf(page);
+    var index = this.survey.pages.indexOf(page);
     if (index > -1) {
-      this.pages.splice(index + 1, 0, newPage);
+      this.survey.pages.splice(index + 1, 0, newPage);
     } else {
-      this.pages.push(newPage);
+      this.survey.pages.push(newPage);
     }
     this.addPageToUI(newPage);
     this.setModified({ type: "PAGE_ADDED", newValue: newPage });
