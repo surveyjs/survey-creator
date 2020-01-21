@@ -4,6 +4,8 @@ import "../utils/custom-select.scss";
 import "../utils/ddmenu.scss";
 import "../main.scss";
 
+import "../../vendor/knockout-sortable.js";
+
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
