@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import { SurveyObjectProperty } from "../src/objectProperty";
 import { UndoRedoManager, Transaction, Action } from "../src/undoredomanager";
 import { SurveyCreator } from "../src/editor";
 
@@ -373,6 +374,47 @@ QUnit.test(
     assert.equal(count, 0, "no errors");
   }
 );
+
+QUnit.test("UndoRedoManager undo page change by one action", function(assert) {
+  var survey = new Survey.Survey(getSurveyJson());
+  var undoRedoManager = new UndoRedoManagerTester(survey);
+  var property = Survey.Serializer.findProperty("question", "page");
+  var propertyEditor = new SurveyObjectProperty(property, <any>{
+    onSetPropertyEditorOptionsCallback: () => {},
+    onPropertyEditorObjectSetCallback: () => {},
+    onIsEditorReadOnlyCallback: () => {},
+    onValueChangingCallback: () => {},
+    startUndoRedoTransaction: () => undoRedoManager.startTransaction(""),
+    stopUndoRedoTransaction: () => undoRedoManager.stopTransaction()
+  });
+  propertyEditor.object = survey.getQuestionByName("question1");
+  var editor = propertyEditor.editor;
+
+  assert.equal(survey.pages[0].elements.length, 2);
+  assert.equal(survey.pages[1].elements.length, 1);
+  assert.notOk(undoRedoManager.canUndo(), "empty undo buffer");
+  assert.notOk(undoRedoManager.canRedo(), "empty undo buffer");
+
+  editor.koValue(survey.pages[1]);
+  assert.ok(undoRedoManager.canUndo(), "can undo");
+  assert.notOk(undoRedoManager.canRedo(), "cant redo");
+  assert.equal(survey.pages[0].elements.length, 1);
+  assert.equal(survey.pages[1].elements.length, 2);
+
+  undoRedoManager.undo();
+  assert.notOk(undoRedoManager.canUndo(), "cant undo - should be one action");
+  assert.ok(undoRedoManager.canRedo(), "can redo");
+  assert.equal(
+    survey.pages[0].elements.length,
+    2,
+    "2 elements on first page returned"
+  );
+  assert.equal(
+    survey.pages[1].elements.length,
+    1,
+    "1 element on second page returned"
+  );
+});
 
 function getSurveyJson(): any {
   return {
