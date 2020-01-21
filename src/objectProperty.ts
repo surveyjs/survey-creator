@@ -26,7 +26,7 @@ export class SurveyObjectProperty {
 
   constructor(
     public property: Survey.JsonObjectProperty,
-    propertyEditorOptions: ISurveyObjectEditorOptions = null,
+    private propertyEditorOptions: ISurveyObjectEditorOptions = null,
     isCellEditor: boolean = false
   ) {
     this.name = this.property.name;
@@ -118,6 +118,8 @@ export class SurveyObjectProperty {
     return true;
   }
   protected onEditorValueChanged(newValue) {
+    this.propertyEditorOptions &&
+      this.propertyEditorOptions.startUndoRedoTransaction();
     if (this.object) {
       var oldValue = this.object[this.property.name];
       if (!!this.onCorrectValueBeforeSet) {
@@ -127,6 +129,8 @@ export class SurveyObjectProperty {
       if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();
+    this.propertyEditorOptions &&
+      this.propertyEditorOptions.stopUndoRedoTransaction();
   }
   private updateDependedProperties() {
     if (!this.object || !this.getObjectPropertyByName) return;
