@@ -1097,6 +1097,42 @@ QUnit.test(
     );
   }
 );
+QUnit.test(
+  "SurveyPropertyItemValuesEditor check if there are visibleIf and enableIf properties in detail form",
+  function(assert) {
+    var question = new Survey.QuestionCheckbox("q1");
+    question.choices = [{ value: 1, text: "item1" }];
+    var itemValueEditor = new SurveyPropertyItemValuesEditorForTests();
+    itemValueEditor.object = question;
+    itemValueEditor.beforeShow();
+
+    var itemViewModel = <SurveyNestedPropertyEditorItem>(
+      itemValueEditor.createItemViewModel(question.choices[0])
+    );
+    itemValueEditor.onEditItemClick(itemViewModel);
+    var colDetailEditor = <SurveyElementEditorContent>(
+      itemValueEditor.koEditItem().itemEditor
+    );
+    assert.ok(
+      colDetailEditor.getPropertyEditorByName("visibleIf"),
+      "visibleIf property is in the choices detail form"
+    );
+    assert.equal(
+      colDetailEditor.getPropertyEditorByName("visibleIf").koVisible(),
+      true,
+      "visibleIf property is visible"
+    );
+    assert.ok(
+      colDetailEditor.getPropertyEditorByName("enableIf"),
+      "enableIf property is in the choices detail form"
+    );
+    assert.equal(
+      colDetailEditor.getPropertyEditorByName("enableIf").koVisible(),
+      true,
+      "enableIf property is visible"
+    );
+  }
+);
 
 QUnit.test(
   "SurveyPropertyMatrixDropdownColumns change nested property content on changing column type",

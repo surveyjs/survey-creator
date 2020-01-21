@@ -7,6 +7,7 @@ import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyQuestionEditorProperties {
   private properties: Array<Survey.JsonObjectProperty>;
+  private alwaysVisibleProperties: any = {};
   public editorProperties: Array<SurveyObjectProperty> = [];
   constructor(
     public obj: Survey.Base,
@@ -15,6 +16,7 @@ export class SurveyQuestionEditorProperties {
     private tab: any = null
   ) {
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    this.buildAlwaysVisibleProperties();
     this.buildEditorProperties(properties);
   }
   public applyToObj(obj: Survey.Base) {
@@ -62,6 +64,8 @@ export class SurveyQuestionEditorProperties {
     }
     var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;
+    objectProperty.alwaysVisible =
+      this.alwaysVisibleProperties[property.name] === true;
     if (!!displayName) {
       objectProperty.editor.displayName = displayName;
     }
@@ -90,8 +94,18 @@ export class SurveyQuestionEditorProperties {
     )
       return property;
 
-    return SurveyHelper.isPropertyVisible(this.obj, property, this.options)
+    return this.alwaysVisibleProperties[propertyName] ||
+      SurveyHelper.isPropertyVisible(this.obj, property, this.options)
       ? property
       : null;
+  }
+  private buildAlwaysVisibleProperties() {
+    if (!this.tab || !Array.isArray(this.tab.properties)) return;
+    var props = this.tab.properties;
+    for (var i = 0; i < props.length; i++) {
+      if (props[i].alwaysVisible) {
+        this.alwaysVisibleProperties[props[i].name] = true;
+      }
+    }
   }
 }

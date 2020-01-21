@@ -71,6 +71,7 @@ export class SurveyQuestionEditorPropertyDefinition {
   public property: Survey.JsonObjectProperty;
   public title: string;
   public category: string;
+  public alwaysVisible: boolean;
   public createdFromTabName: boolean;
   public get name(): string {
     return this.property.name;
@@ -186,6 +187,7 @@ export class SurveyQuestionProperties {
     propertyDefinition.property = propRes.property;
     propertyDefinition.category =
       !isString && !!defProperty.category ? defProperty.category : "";
+    propertyDefinition.alwaysVisible = defProperty.visible === true;
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
     propertyDefinition.createdFromTabName = isTab;
@@ -413,7 +415,6 @@ export class SurveyElementEditorContent {
     tabItem: SurveyQuestionEditorTabDefinition,
     properties: Array<Survey.JsonObjectProperty>
   ): SurveyQuestionEditorTab {
-    var self = this;
     var propertyTab = new SurveyQuestionEditorTab(
       this.editableObj,
       new SurveyQuestionEditorProperties(
