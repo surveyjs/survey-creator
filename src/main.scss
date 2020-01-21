@@ -123,6 +123,9 @@
 
     .svd_custom_select {
       width: auto;
+      select:disabled {
+        background-color: $secondary-bg-color;
+      }
     }
   }
   .propertyeditor-validators {
