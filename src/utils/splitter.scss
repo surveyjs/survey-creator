@@ -3,29 +3,37 @@ svd-splitter {
   min-width: 4px;
   width: 4px;
   max-width: 4px;
-  top: 45px;
-  bottom: 0;
   cursor: ew-resize;
-  background-color: lightgray;
   position: relative;
+
+  div.svd-splitter {
+    background-color: lightgray;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
   &:hover,
   &.svd-active-splitter {
-    background-color: gray;
-    & > div.svd-splitter.svd-splitter.svd-splitter > div.icon-split {
-      & > svg.svd-svg-icon {
-        fill: gray;
+    & > div.svd-splitter.svd-splitter.svd-splitter {
+      background-color: gray;
+      & > div.icon-split {
+        & > svg.svd-svg-icon {
+          fill: gray;
+        }
       }
     }
   }
 
   & > div.svd-splitter.svd-splitter.svd-splitter > div.icon-split {
     position: absolute;
-    width: 16px;
     top: 50%;
     left: -6px;
     & > svg.svd-svg-icon {
       width: 16px;
+      height: 16px;
       fill: lightgray;
     }
   }
