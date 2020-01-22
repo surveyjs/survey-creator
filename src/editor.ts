@@ -111,7 +111,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
-  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off"; 
+  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -1645,7 +1645,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.isRTLValue = value;
   }
   /**
-   * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup. 
+   * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup.
    * If "apply" is set, then changes will be saved, otherwise not. By default value is "off"
    */
   public get closeModalOutside() {
@@ -2215,7 +2215,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
-      if (!this.showElementEditorAsPropertyGrid && opts.allowEdit) {
+      if (this.showModalOnElementEditing && opts.allowEdit) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("survey.edit"),
@@ -2351,7 +2351,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         });
       }
 
-      if (this.showElementEditorAsPropertyGrid && opts.allowEdit) {
+      if (!this.showModalOnElementEditing && opts.allowEdit) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("ed.property-grid"),
@@ -2618,11 +2618,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey).renameQuestion(oldName, newName);
   }
+  public get showModalOnElementEditing(): boolean {
+    return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;
+  }
   public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
   ) => {
-    if (this.showElementEditorAsPropertyGrid && this.showPropertyGrid) {
+    if (!this.showModalOnElementEditing) {
       this.hideAdvancedSettings = false;
       this.setNewObjToPropertyGrid(element);
       this.leftContainerActiveItem("property-grid");
