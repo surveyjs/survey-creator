@@ -11,12 +11,16 @@ svd-designer-container {
   display: table-cell;
   vertical-align: top;
   width: 15%;
+  max-width: 15%;
+  flex-basis: 15%;
 }
 
 .svd-designer-container--right-side {
   display: table-cell;
   vertical-align: top;
   width: 35%;
+  max-width: 35%;
+  flex-basis: 35%;
 }
 
 .svd-designer-tabbed-container__tab-header {
