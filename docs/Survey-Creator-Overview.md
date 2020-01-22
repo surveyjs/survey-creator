@@ -85,6 +85,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showLogicTab: true,_|Set this option to true to show the Logic Tab. This tab is hidden by default. It allows to view and edit the survey logic (expressions) in one place.|
 |_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
+|_showElementEditorAsPropertyGrid_: true,_|Set this option to true to show the old property grid, before v1.5. It shows all properties, sorted by property name by default and shows property title and editor in one row.|
 |_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
 |_isAutoSave: true,_|Set this options to true and Survey Creator will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
 |_isRTL: true,_|Set this options to true for Right-to-Left web sites.|

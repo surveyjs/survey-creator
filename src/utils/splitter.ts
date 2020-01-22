@@ -3,7 +3,13 @@ import * as ko from "knockout";
 import "./splitter.scss";
 
 export class SplitterComponentViewModel {
-  private onresize;
+  private updateSplitter;
+
+  private updateWidth(el: any, value: any) {
+    el.style.width = value;
+    el.style.maxWidth = value;
+    el.style.flexBasis = value;
+  }
 
   constructor(params: { minLeft: number; minRight: number }, componentInfo) {
     var splitterElement = componentInfo.element;
@@ -18,33 +24,25 @@ export class SplitterComponentViewModel {
     var leftElement = siblings[splitterElementIndex - 1];
     var rightElement = siblings[splitterElementIndex + 1];
 
-    this.onresize = () => {
-      splitterElement.style.left =
-        siblings
-          .slice(0, splitterElementIndex)
-          .reduce((w, s) => w + s.offsetWidth, 0) -
-        splitterElement.offsetWidth +
-        "px";
-    };
-    window.addEventListener("resize", onresize);
-    setTimeout(this.onresize, 10);
-
-    var onmousemove = event => {
-      var newLeft = leftElement.offsetWidth + event.movementX;
-      var newRight = rightElement.offsetWidth - event.movementX;
-      if (newLeft > minLeft && newRight > minRight) {
-        splitterElement.style.left =
-          splitterElement.offsetLeft + event.movementX + "px";
-        var leftWidth = (newLeft / container.offsetWidth) * 100 + "%";
-        var rightWidth = (newRight / container.offsetWidth) * 100 + "%";
-        leftElement.style.width = leftWidth;
-        leftElement.style.maxWidth = leftWidth;
-        leftElement.style.flexBasis = leftWidth;
-        rightElement.style.width = rightWidth;
-        rightElement.style.maxWidth = rightWidth;
-        rightElement.style.flexBasis = rightWidth;
+    var isInChangeWidth = false;
+    var update = (delta: any) => {
+      if (isInChangeWidth) return;
+      isInChangeWidth = true;
+      try {
+        var newLeft = leftElement.offsetWidth + delta + 1;
+        var newRight = rightElement.offsetWidth - delta + 1;
+        if (newLeft > minLeft && newRight > minRight) {
+          var leftWidth = (newLeft / container.clientWidth) * 100 + "%";
+          var rightWidth = (newRight / container.clientWidth) * 100 + "%";
+          this.updateWidth(leftElement, leftWidth);
+          this.updateWidth(rightElement, rightWidth);
+        }
+      } finally {
+        isInChangeWidth = false;
       }
-      this.onresize();
+    };
+    var onmousemove = event => {
+      update(event.movementX);
     };
     var onmouseup = () => {
       splitterElement.className = splitterElement.className.replace(
@@ -54,7 +52,6 @@ export class SplitterComponentViewModel {
       document.removeEventListener("mousemove", onmousemove);
       document.removeEventListener("mouseleave", onmouseup);
       document.removeEventListener("mouseup", onmouseup);
-      window.dispatchEvent(new Event("resize"));
     };
 
     splitterElement.onmousedown = () => {
@@ -63,10 +60,14 @@ export class SplitterComponentViewModel {
       document.addEventListener("mouseleave", onmouseup);
       document.addEventListener("mouseup", onmouseup);
     };
+
+    setTimeout(() => update(0), 10);
   }
   dispose() {
-    window.removeEventListener("resize", this.onresize);
-    this.onresize = undefined;
+    if (!!this.updateSplitter) {
+      clearInterval(this.updateSplitter);
+      this.updateSplitter = undefined;
+    }
   }
 }
 
@@ -76,5 +77,6 @@ ko.components.register("svd-splitter", {
       return new SplitterComponentViewModel(params, componentInfo);
     }
   },
-  template: '<div class="svd-splitter"></div>'
+  template:
+    '<div class="svd-splitter"><div class="icon icon-split"><svg class="svd-svg-icon"><use xlink:href="#icon-split_16x16"></use></svg></div></div>'
 });
