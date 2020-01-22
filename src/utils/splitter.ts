@@ -25,21 +25,24 @@ export class SplitterComponentViewModel {
     var rightElement = siblings[splitterElementIndex + 1];
 
     var isInChangeWidth = false;
-    var onmousemove = event => {
+    var update = (delta: any) => {
       if (isInChangeWidth) return;
       isInChangeWidth = true;
       try {
-        var newLeft = leftElement.offsetWidth + event.movementX + 1;
-        var newRight = rightElement.offsetWidth - event.movementX + 1;
+        var newLeft = leftElement.offsetWidth + delta + 1;
+        var newRight = rightElement.offsetWidth - delta + 1;
         if (newLeft > minLeft && newRight > minRight) {
-          var leftWidth = (newLeft / container.offsetWidth) * 100 + "%";
-          var rightWidth = (newRight / container.offsetWidth) * 100 + "%";
+          var leftWidth = (newLeft / container.clientWidth) * 100 + "%";
+          var rightWidth = (newRight / container.clientWidth) * 100 + "%";
           this.updateWidth(leftElement, leftWidth);
           this.updateWidth(rightElement, rightWidth);
         }
       } finally {
         isInChangeWidth = false;
       }
+    };
+    var onmousemove = event => {
+      update(event.movementX);
     };
     var onmouseup = () => {
       splitterElement.className = splitterElement.className.replace(
@@ -57,6 +60,8 @@ export class SplitterComponentViewModel {
       document.addEventListener("mouseleave", onmouseup);
       document.addEventListener("mouseup", onmouseup);
     };
+
+    setTimeout(() => update(0), 10);
   }
   dispose() {
     if (!!this.updateSplitter) {
