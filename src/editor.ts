@@ -111,6 +111,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
+  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off"; 
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -1279,6 +1280,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
     }
+    if (typeof options.closeModalOutside !== "undefined") {
+      this.closeModalOutsideValue = options.closeModalOutside;
+    }
   }
   /**
    * The editing survey object (Survey.Survey)
@@ -1639,6 +1643,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
+  }
+  /**
+   * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup. 
+   * If "apply" is set, then changes will be saved, otherwise not. By default value is "off"
+   */
+  public get closeModalOutside() {
+    return this.closeModalOutsideValue;
+  }
+  public set closeModalOutside(value: "off" | "cancel" | "apply") {
+    this.closeModalOutsideValue = value;
   }
   private _leftContainer = ko.observableArray<string>(["toolbox"]);
   public get leftContainer() {

@@ -44,13 +44,20 @@ export class SurveyPropertyEditorShowWindow {
     });
     modal.open();
 
-    var fadeElement = document.getElementById("surveyquestioneditorwindow");
-    var outOfModalClickHandler = function(evt) {
-      if ((<any>evt.target).className === "modal") {
-        editor.onResetClick();
-      }
-    };
-    fadeElement.addEventListener("click", outOfModalClickHandler);
+    if ((<any>options).closeModalOutside !== "off") {
+      var fadeElement = document.getElementById("surveyquestioneditorwindow");
+      var outOfModalClickHandler = function(evt) {
+        if ((<any>evt.target).className === "modal") {
+          if ((<any>options).closeModalOutside === "apply") {
+            editor.onOkClick();
+          }
+          else {
+            editor.onResetClick();
+          }
+        }
+      };
+      fadeElement.addEventListener("mousedown", outOfModalClickHandler);
+    }
 
     document.addEventListener(
       "keydown",
@@ -61,7 +68,9 @@ export class SurveyPropertyEditorShowWindow {
     );
 
     editor.onHideWindow = function() {
-      fadeElement.removeEventListener("click", outOfModalClickHandler);
+      if ((<any>options).closeModalOutside !== "off") {
+        fadeElement.removeEventListener("mousedown", outOfModalClickHandler);
+      }
       modal.close();
     };
   }
