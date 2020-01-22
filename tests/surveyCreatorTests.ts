@@ -825,6 +825,20 @@ QUnit.test("show property grid on Edit", function(assert) {
   );
 });
 
+QUnit.test("Show toolbox in right container and hide property grid", function(
+  assert
+) {
+  var creator = new SurveyCreator();
+  creator.showPropertyGrid = false;
+  creator.showToolbox = "right";
+  assert.deepEqual(creator.leftContainer, [], "left container is empty");
+  assert.deepEqual(
+    creator.rightContainer,
+    ["toolbox"],
+    "right container contains toolbox"
+  );
+});
+
 QUnit.test("Undo-redo on showing modal window", function(assert) {
   var creator = new SurveyCreator();
   creator.koShowElementEditorAsPropertyGrid(false);
