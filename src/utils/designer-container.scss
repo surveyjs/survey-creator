@@ -5,6 +5,7 @@ svd-designer-container {
 }
 
 .svd-designer-container {
+  overflow: hidden;
 }
 
 .svd-designer-container--left-side {
@@ -13,6 +14,22 @@ svd-designer-container {
   width: 15%;
   max-width: 15%;
   flex-basis: 15%;
+  .svd-designer-container__header {
+    text-align: left;
+  }
+  .svd-icon-container--left-open,
+  .svd-icon-container--left-close {
+    display: block;
+    float: right;
+  }
+
+  // TODO: remove
+  .svd_properties {
+    margin-right: 1em;
+    .svd_object_selector {
+      padding-right: 0;
+    }
+  }
 }
 
 .svd-designer-container--right-side {
@@ -21,6 +38,16 @@ svd-designer-container {
   width: 35%;
   max-width: 35%;
   flex-basis: 35%;
+  .svd-designer-container__header {
+    text-align: right;
+  }
+  .svd-icon-container--right-open,
+  .svd-icon-container--right-close {
+    display: block;
+    float: left;
+  }
+
+  // TODO: remove
   .svd_toolbox {
     margin-left: 1em;
   }
@@ -50,5 +77,34 @@ svd-designer-container {
   display: none;
   &.svd-designer-tabbed-container__tab-content-active {
     display: block;
+  }
+}
+
+.svd-designer-container__header {
+  padding: 0 1em;
+  height: 1.5em;
+  margin-bottom: 3em;
+  margin-top: 0.35em;
+  user-select: none;
+}
+
+.svd-designer-container__header-title {
+  font-size: 1.17em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.svd-icon-container {
+  display: none;
+  cursor: pointer;
+}
+.svd-icon-container.svd-icon-container.svd-icon-container {
+  & > svg.svd-svg-icon {
+    width: 14px;
+    height: 24px;
+    fill: lightgray;
+    &:hover {
+      fill: gray;
+    }
   }
 }

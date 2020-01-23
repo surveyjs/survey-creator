@@ -111,7 +111,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
-  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off"; 
+  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -1581,6 +1581,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   /**
+   * Obsolete from v1.5.1
    * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
    */
   public get hideAdvancedSettings() {
@@ -1588,6 +1589,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set hideAdvancedSettings(value: boolean) {
     this.koHideAdvancedSettings(value);
+    if (
+      this._rightContainer().length === 1 &&
+      (this.koShowPropertyGrid() === "right" ||
+        this.koShowPropertyGrid() === true)
+    ) {
+      this.rightContainerVisible(!value);
+    }
+    if (
+      this._leftContainer().length === 1 &&
+      this.koShowPropertyGrid() === "left"
+    ) {
+      this.leftContainerVisible(!value);
+    }
   }
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
@@ -1645,7 +1659,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.isRTLValue = value;
   }
   /**
-   * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup. 
+   * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup.
    * If "apply" is set, then changes will be saved, otherwise not. By default value is "off"
    */
   public get closeModalOutside() {
@@ -1658,11 +1672,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get leftContainer() {
     return this._leftContainer();
   }
+  public leftContainerVisible = ko.observable(true);
   public leftContainerActiveItem = ko.observable<string>("toolbox");
   private _rightContainer = ko.observableArray<string>(["property-grid"]);
   public get rightContainer() {
     return this._rightContainer();
   }
+  public rightContainerVisible = ko.observable(true);
   public rightContainerActiveItem = ko.observable<string>("property-grid");
   private _topContainer = ko.observableArray<string>([
     "toolbar",

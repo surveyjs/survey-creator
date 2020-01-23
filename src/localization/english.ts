@@ -46,6 +46,8 @@ export var enStrings = {
     opjectPropertiesHeader: "Advanced",
     showObjectProperties: "Show Object Properties",
     hideObjectProperties: "Hide Object Properties",
+    showPanel: "Show Panel",
+    hidePanel: "Hide Panel",
     editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     moveRight: "Scroll to the Right",
