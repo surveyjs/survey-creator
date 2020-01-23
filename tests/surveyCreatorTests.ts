@@ -825,6 +825,20 @@ QUnit.test("show property grid on Edit", function(assert) {
   );
 });
 
+QUnit.test("Show toolbox in right container and hide property grid", function(
+  assert
+) {
+  var creator = new SurveyCreator();
+  creator.showPropertyGrid = false;
+  creator.showToolbox = "right";
+  assert.deepEqual(creator.leftContainer, [], "left container is empty");
+  assert.deepEqual(
+    creator.rightContainer,
+    ["toolbox"],
+    "right container contains toolbox"
+  );
+});
+
 QUnit.test("Undo-redo on showing modal window", function(assert) {
   var creator = new SurveyCreator();
   creator.koShowElementEditorAsPropertyGrid(false);
@@ -896,6 +910,33 @@ QUnit.test("Undo-redo creator add/remove page", function(assert) {
   assert.equal(creator.survey.pages.length, 1, "Undo new page");
   creator.redo();
   assert.equal(creator.survey.pages.length, 2, "Redo new page");
+});
+
+QUnit.test("showModalOnElementEditing property", function(assert) {
+  var creator = new SurveyCreator();
+  assert.equal(
+    creator.showModalOnElementEditing,
+    false,
+    "Show new property grid by default"
+  );
+  creator.showPropertyGrid = false;
+  assert.equal(
+    creator.showModalOnElementEditing,
+    true,
+    "There is no property grid, show modal"
+  );
+  creator.showPropertyGrid = true;
+  assert.equal(
+    creator.showModalOnElementEditing,
+    false,
+    "Show new property grid, showPropertyGrid is show again"
+  );
+  creator = new SurveyCreator(null, { showElementEditorAsPropertyGrid: false });
+  assert.equal(
+    creator.showModalOnElementEditing,
+    true,
+    "Show old property grid"
+  );
 });
 
 function getSurveyJson(): any {

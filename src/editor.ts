@@ -2231,7 +2231,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
-      if (!this.showElementEditorAsPropertyGrid && opts.allowEdit) {
+      if (this.showModalOnElementEditing && opts.allowEdit) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("survey.edit"),
@@ -2367,7 +2367,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         });
       }
 
-      if (this.showElementEditorAsPropertyGrid && opts.allowEdit) {
+      if (!this.showModalOnElementEditing && opts.allowEdit) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("ed.property-grid"),
@@ -2468,7 +2468,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.getRows(this.surveyValue().koCurrentPage()).length === 0
   );
   public dragOverQuestionsEditor(data, e) {
-    this.undoRedoManager.startTransaction("drag drop toolbox item");
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
     return false;
   }
@@ -2634,11 +2633,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey).renameQuestion(oldName, newName);
   }
+  public get showModalOnElementEditing(): boolean {
+    return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;
+  }
   public showQuestionEditor = (
     element: Survey.Base,
     onClose: (isCanceled: boolean) => any = null
   ) => {
-    if (this.showElementEditorAsPropertyGrid && this.showPropertyGrid) {
+    if (!this.showModalOnElementEditing) {
       this.hideAdvancedSettings = false;
       this.setNewObjToPropertyGrid(element);
       this.leftContainerActiveItem("property-grid");
