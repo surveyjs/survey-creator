@@ -2452,7 +2452,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.getRows(this.surveyValue().koCurrentPage()).length === 0
   );
   public dragOverQuestionsEditor(data, e) {
-    this.undoRedoManager.startTransaction("drag drop toolbox item");
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
     return false;
   }
