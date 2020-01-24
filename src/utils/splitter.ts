@@ -32,16 +32,23 @@ export class SplitterComponentViewModel {
     var leftElement = siblings[splitterElementIndex - 1];
     var rightElement = siblings[splitterElementIndex + 1];
 
+    var startX = 0;
     var isInChangeWidth = false;
     var update = (delta: any) => {
       if (isInChangeWidth) return;
       isInChangeWidth = true;
       try {
-        var newLeft = leftElement.offsetWidth + delta + 1;
-        var newRight = rightElement.offsetWidth - delta + 1;
+        var totalWidth = leftElement.offsetWidth + rightElement.offsetWidth;
+        var newLeft = leftElement.offsetWidth + delta;
+        var newRight = totalWidth - newLeft;
         if (newLeft > minLeft && newRight > minRight) {
-          var leftWidth = (newLeft / container.clientWidth) * 100 + "%";
-          var rightWidth = (newRight / container.clientWidth) * 100 + "%";
+          startX += delta;
+          var leftWidth =
+            Math.ceil(((newLeft + 1) / container.clientWidth) * 10000) / 100 +
+            "%";
+          var rightWidth =
+            Math.ceil(((newRight + 1) / container.clientWidth) * 10000) / 100 +
+            "%";
           this.updateWidth(leftElement, leftWidth);
           this.updateWidth(rightElement, rightWidth);
           onChange(onChange() + 1);
@@ -50,10 +57,13 @@ export class SplitterComponentViewModel {
         isInChangeWidth = false;
       }
     };
+
     var onmousemove = event => {
-      update(event.movementX);
+      update(event.screenX - startX);
     };
-    var onmouseup = () => {
+
+    var onmouseup = event => {
+      startX = 0;
       splitterElement.className = splitterElement.className.replace(
         /\ssvd-active-splitter/g,
         ""
@@ -63,7 +73,8 @@ export class SplitterComponentViewModel {
       document.removeEventListener("mouseup", onmouseup);
     };
 
-    splitterElement.onmousedown = () => {
+    splitterElement.onmousedown = event => {
+      startX = event.screenX;
       splitterElement.className += " svd-active-splitter";
       document.addEventListener("mousemove", onmousemove);
       document.addEventListener("mouseleave", onmouseup);
