@@ -102,6 +102,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private options: any;
   private stateValue: string = "";
   private dragDropHelper: DragDropHelper = null;
+  private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
   private showEmbededSurveyTabValue = ko.observable<boolean>(false);
@@ -789,7 +790,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
-   * @param options survey creator options. The following options are available: showJSONEditorTab,
+   * @param options survey creator options. The following options are available: showDesignerTab, showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, inplaceEditForValues, useTabsInElementEditor,
    * showPropertyGrid, showToolbox, allowModifyPages
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
@@ -978,13 +979,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     ko.computed(() => {
       this.tabs([]);
-      this.tabs.push({
-        name: "designer",
-        title: this.getLocString("ed.designer"),
-        template: "se-tab-designer",
-        data: this,
-        action: () => this.showDesigner()
-      });
+      if (this.showDesignerTab) {
+        this.tabs.push({
+          name: "designer",
+          title: this.getLocString("ed.designer"),
+          template: "se-tab-designer",
+          data: this,
+          action: () => this.showDesigner()
+        });
+      }
       if (this.showTestSurveyTab) {
         this.tabs.push({
           name: "test",
@@ -1029,6 +1032,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           data: this.translation,
           action: () => this.showTranslationEditor()
         });
+      }
+      if (this.tabs().length > 0) {
+        this.koViewType(this.tabs()[0].name);
       }
     });
 
@@ -1179,6 +1185,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
     this.options = options;
+    this.showDesignerTabValue(
+      typeof options.showDesignerTab !== "undefined"
+        ? options.showDesignerTab
+        : true
+    );
     this.showLogicTabValue(
       typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
     );
@@ -1373,7 +1384,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private initSurveyWithJSON(json: any, clearState: boolean) {
     this.initSurvey(json);
-    this.showDesigner();
+    if (this.showDesignerTab) {
+      this.showDesigner();
+    }
     this.setUndoRedoCurrentState(clearState);
   }
   /**
@@ -1608,6 +1621,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.leftContainerVisible(!value);
       }
     }
+  }
+  /**
+   * Set it to true to show "JSON Editor" tab and to false to hide the tab
+   */
+  public get showDesignerTab() {
+    return this.showDesignerTabValue();
+  }
+  public set showDesignerTab(value: boolean) {
+    this.showDesignerTabValue(value);
   }
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
