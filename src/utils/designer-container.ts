@@ -5,7 +5,11 @@ import { editorLocalization } from "../editorLocalization";
 var template = require("html-loader?interpolate!val-loader!./designer-container.html");
 
 export class DesignerContainerModel {
+  private _prevWidth: any;
+  private _prevSurfaceWidth: any;
+  private _element: HTMLDivElement;
   constructor(params, componentInfo) {
+    this._element = componentInfo.element;
     this.tabs = ko.unwrap(params.tabs);
     this.context = params.context;
     var changed = params.changed || ko.observable();
@@ -38,8 +42,15 @@ export class DesignerContainerModel {
     var surfaceEl: HTMLDivElement = <any>(
       document.getElementsByClassName("svd_editors")[0]
     );
-    surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis =
-      "";
+    if (this.visible()) {
+      this._prevWidth = this._element.style.width;
+      this._prevSurfaceWidth = surfaceEl.style.width;
+      surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis =
+        "";
+    } else {
+      this._element.style.width = this._element.style.maxWidth = this._element.style.flexBasis = this._prevWidth;
+      surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = this._prevSurfaceWidth;
+    }
     this.visible(!this.visible());
   };
   activeTab = ko.observable<string>();
