@@ -1690,6 +1690,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     "toolbar",
     "pages-editor"
   ]);
+  public layoutChangedIndicator = ko.observable(0);
   public get topContainer() {
     return this._topContainer();
   }

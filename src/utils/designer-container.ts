@@ -8,6 +8,7 @@ export class DesignerContainerModel {
   constructor(params, componentInfo) {
     this.tabs = ko.unwrap(params.tabs);
     this.context = params.context;
+    var changed = params.changed || ko.observable();
     componentInfo.element.className += " " + params.className;
     if (ko.isWritableObservable(params.visible)) {
       this.visible = params.visible;
@@ -19,20 +20,34 @@ export class DesignerContainerModel {
       this.activeTab(this.tabs[0]);
     }
     this.size = ko.computed(() => {
-      if (this.visible()) {
-        return "";
-      }
-      return 0;
+      var isVisible = this.visible();
+      this.isOpen(isVisible);
+      return isVisible ? "" : 0;
     });
     ko.computed(() => {
-      componentInfo.element.style.width = this.size();
+      if (!this.visible() || componentInfo.element.offsetWidth == 0) {
+        componentInfo.element.style.width = this.size();
+      }
+    });
+    changed.subscribe(() => {
+      this.isOpen(componentInfo.element.offsetWidth > 25);
+      this.visible(this.isOpen());
     });
   }
+  toggle = () => {
+    var surfaceEl: HTMLDivElement = <any>(
+      document.getElementsByClassName("svd_editors")[0]
+    );
+    surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis =
+      "";
+    this.visible(!this.visible());
+  };
   activeTab = ko.observable<string>();
   tabs: any;
   context: any;
   className = "svd-designer-container";
   visible = ko.observable(true);
+  isOpen = ko.observable(true);
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }

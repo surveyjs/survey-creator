@@ -1,8 +1,8 @@
 ﻿<script type="text/html" id="se-tab-designer">
   <div class="row svd_survey_designer">
     <!-- ko if: leftContainer.length > 0 -->
-    <svd-designer-container params="tabs: leftContainer, activeTab: leftContainerActiveItem, visible: leftContainerVisible, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
-    <svd-splitter params="minLeft: 0, minRight: 600"></svd-splitter>
+    <svd-designer-container params="tabs: leftContainer, activeTab: leftContainerActiveItem, visible: leftContainerVisible, changed: layoutChangedIndicator, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
+    <svd-splitter params="minLeft: 0, minRight: 600, onChange: layoutChangedIndicator"></svd-splitter>
     <!-- /ko  -->
     <div class="svd_editors">
       <!-- ko if: topContainer.length > 0 -->
@@ -22,8 +22,8 @@
       </div>
     </div>
     <!-- ko if: rightContainer.length > 0 -->
-    <svd-splitter params="minLeft: 600, minRight: 0"></svd-splitter>
-    <svd-designer-container params="tabs: rightContainer, activeTab: rightContainerActiveItem, visible: rightContainerVisible, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
+    <svd-splitter params="minLeft: 600, minRight: 0, onChange: layoutChangedIndicator"></svd-splitter>
+    <svd-designer-container params="tabs: rightContainer, activeTab: rightContainerActiveItem, visible: rightContainerVisible, changed: layoutChangedIndicator, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
     <!-- /ko -->
   </div>
 </script>

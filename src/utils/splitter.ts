@@ -11,9 +11,17 @@ export class SplitterComponentViewModel {
     el.style.flexBasis = value;
   }
 
-  constructor(params: { minLeft: number; minRight: number }, componentInfo) {
+  constructor(
+    params: {
+      minLeft: number;
+      minRight: number;
+      onChange?: any;
+    },
+    componentInfo
+  ) {
     var splitterElement = componentInfo.element;
     var container = componentInfo.element.parentElement;
+    var onChange = params.onChange || ko.observable(0);
     var siblings = [];
     var minLeft = params.minLeft || 10;
     var minRight = params.minRight || 10;
@@ -36,6 +44,7 @@ export class SplitterComponentViewModel {
           var rightWidth = (newRight / container.clientWidth) * 100 + "%";
           this.updateWidth(leftElement, leftWidth);
           this.updateWidth(rightElement, rightWidth);
+          onChange(onChange() + 1);
         }
       } finally {
         isInChangeWidth = false;
