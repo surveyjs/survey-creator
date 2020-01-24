@@ -1590,17 +1590,23 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set hideAdvancedSettings(value: boolean) {
     this.koHideAdvancedSettings(value);
     if (
-      this._rightContainer().length === 1 &&
-      (this.koShowPropertyGrid() === "right" ||
-        this.koShowPropertyGrid() === true)
+      this.koShowPropertyGrid() === "right" ||
+      this.koShowPropertyGrid() === true
     ) {
-      this.rightContainerVisible(!value);
+      if (
+        this._rightContainer().length === 1 ||
+        (this._rightContainer().length > 1 && !value)
+      ) {
+        this.rightContainerVisible(!value);
+      }
     }
-    if (
-      this._leftContainer().length === 1 &&
-      this.koShowPropertyGrid() === "left"
-    ) {
-      this.leftContainerVisible(!value);
+    if (this.koShowPropertyGrid() === "left") {
+      if (
+        this._leftContainer().length === 1 ||
+        (this._leftContainer().length > 1 && !value)
+      ) {
+        this.leftContainerVisible(!value);
+      }
     }
   }
   /**
