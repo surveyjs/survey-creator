@@ -1,5 +1,5 @@
 <div
-  data-bind="click: function() { visible(!visible()); var surfaceEl = document.getElementsByClassName('svd_editors')[0]; surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = '';}, attr: { title: getLocString(visible() ? 'ed.hidePanel':'ed.showPanel') }"
+  data-bind="click: function() { var surfaceEl = document.getElementsByClassName('svd_editors')[0]; surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = ''; visible(!visible()); }, attr: { title: getLocString(visible() ? 'ed.hidePanel':'ed.showPanel') }"
 >
   <div
     class="icon svd-icon-container svd-icon-container--left-open"

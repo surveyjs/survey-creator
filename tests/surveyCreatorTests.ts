@@ -806,6 +806,7 @@ QUnit.test("show property grid on Edit", function(assert) {
   editor.showToolbox = "right";
   editor.rightContainerActiveItem("toolbox");
   editor.hideAdvancedSettings = true;
+  editor.rightContainerVisible(false);
   editor.selectedElement = editor.survey.getQuestionByName("question1");
   assert.equal(
     editor.selectedElement.name,
@@ -822,6 +823,112 @@ QUnit.test("show property grid on Edit", function(assert) {
     editor.hideAdvancedSettings,
     false,
     "Make sure that property grid is shown"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+});
+
+QUnit.test("hideAdvancedSettings and designer containers visibility", function(
+  assert
+) {
+  var editor = new SurveyCreator();
+
+  // editor.showToolbox = "left";
+  // editor.showPropertyGrid = "right";
+  // editor.hideAdvancedSettings = false;
+  assert.equal(
+    editor.hideAdvancedSettings,
+    false,
+    "Make sure that property grid is shown default"
+  );
+  assert.equal(
+    editor.leftContainerVisible(),
+    true,
+    "Make sure right container is visible default"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    true,
+    "Make sure right container is visible default"
+  );
+
+  // editor.showToolbox = "left";
+  // editor.showPropertyGrid = "right";
+  editor.hideAdvancedSettings = true;
+  assert.equal(
+    editor.hideAdvancedSettings,
+    true,
+    "Make sure that property grid is hidden"
+  );
+  assert.equal(
+    editor.leftContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    false,
+    "Make sure right container is hidden"
+  );
+
+  // editor.showToolbox = "left";
+  // editor.showPropertyGrid = "right";
+  editor.hideAdvancedSettings = false;
+  assert.equal(
+    editor.hideAdvancedSettings,
+    false,
+    "Make sure that property grid is shown"
+  );
+  assert.equal(
+    editor.leftContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+
+  editor.showToolbox = "right";
+  // editor.showPropertyGrid = "right";
+  // editor.hideAdvancedSettings = false;
+  assert.equal(
+    editor.hideAdvancedSettings,
+    false,
+    "Make sure that property grid is shown"
+  );
+  assert.equal(
+    editor.leftContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+
+  // editor.showToolbox = "right";
+  // editor.showPropertyGrid = "right";
+  editor.hideAdvancedSettings = true;
+  assert.equal(
+    editor.hideAdvancedSettings,
+    true,
+    "Make sure that property grid is hidden"
+  );
+  assert.equal(
+    editor.leftContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+  assert.equal(
+    editor.rightContainerVisible(),
+    true,
+    "Make sure right container is visible"
   );
 });
 
