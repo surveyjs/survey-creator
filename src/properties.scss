@@ -44,6 +44,7 @@
           vertical-align: middle;
           &:nth-child(1) {
             font-weight: 600;
+            user-select: none;
           }
           .modal-content {
             line-height: initial;
