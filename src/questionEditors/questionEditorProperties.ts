@@ -6,18 +6,16 @@ import { ISurveyObjectEditorOptions } from "../propertyEditors/propertyEditorBas
 import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyQuestionEditorProperties {
-  private properties: Array<Survey.JsonObjectProperty>;
   private alwaysVisibleProperties: any = {};
   public editorProperties: Array<SurveyObjectProperty> = [];
   constructor(
     public obj: Survey.Base,
-    properties: Array<any>,
+    private properties: Array<Survey.JsonObjectProperty>,
     public options: ISurveyObjectEditorOptions = null,
     private tab: any = null
   ) {
-    this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
     this.buildAlwaysVisibleProperties();
-    this.buildEditorProperties(properties);
+    this.buildEditorProperties();
   }
   public applyToObj(obj: Survey.Base) {
     this.performForAllProperties(p => p.applyToObj(obj));
@@ -50,15 +48,14 @@ export class SurveyQuestionEditorProperties {
   public getAllProperties(): Array<SurveyObjectProperty> {
     return this.editorProperties;
   }
-  protected buildEditorProperties(properties) {
-    for (var i = 0; i < properties.length; i++) {
-      var name = this.getName(properties[i]);
-      var jsonProperty = this.getProperty(name);
-      if (!jsonProperty) continue;
-      this.addProperty(jsonProperty, properties[i].title);
+  protected buildEditorProperties() {
+    for (var i = 0; i < this.properties.length; i++) {
+      var prop = this.properties[i];
+      if (!this.isPropertyVisible(prop)) continue;
+      this.createEditor(prop, prop.title);
     }
   }
-  public addProperty(property: any, displayName: string) {
+  public createEditor(property: any, displayName: string) {
     if (!displayName) {
       displayName = editorLocalization.getPropertyNameInEditor(property.name);
     }
@@ -71,33 +68,18 @@ export class SurveyQuestionEditorProperties {
     }
     this.editorProperties.push(objectProperty);
   }
-  private getName(prop: any): string {
-    if (!prop) return null;
-    if (typeof prop === "string") return prop;
-    if (prop.name) return prop.name;
-    return null;
-  }
-  private getProperty(propertyName: string): Survey.JsonObjectProperty {
-    if (!propertyName) return null;
-    var property = null;
-    for (var i = 0; i < this.properties.length; i++) {
-      if (this.properties[i].name == propertyName) {
-        property = this.properties[i];
-        break;
-      }
-    }
-    if (!property) return null;
+  private isPropertyVisible(property: Survey.JsonObjectProperty): boolean {
     if (
       !!this.tab &&
       property.name == this.tab.name &&
       this.tab.visible === true
     )
-      return property;
+      return true;
 
-    return this.alwaysVisibleProperties[propertyName] ||
+    return (
+      this.alwaysVisibleProperties[property.name] ||
       SurveyHelper.isPropertyVisible(this.obj, property, this.options)
-      ? property
-      : null;
+    );
   }
   private buildAlwaysVisibleProperties() {
     if (!this.tab || !Array.isArray(this.tab.properties)) return;

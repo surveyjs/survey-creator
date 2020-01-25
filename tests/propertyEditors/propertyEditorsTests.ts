@@ -1048,7 +1048,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     "itemEditor edit the second item"
   );
   var generalTab = <SurveyQuestionEditorTab>colDetailEditor.koTabs()[0];
-  var props = generalTab.properties.editorProperties;
+  var props = generalTab.editorProperties;
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
     if (prop.editor.editorType == "boolean") continue;

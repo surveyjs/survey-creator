@@ -50,8 +50,7 @@ export class SurveyPropertyEditorShowWindow {
         if ((<any>evt.target).className === "modal") {
           if ((<any>options).closeModalOutside === "apply") {
             editor.onOkClick();
-          }
-          else {
+          } else {
             editor.onResetClick();
           }
         }
@@ -371,7 +370,7 @@ export class SurveyElementEditorContent {
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
       var tab = <SurveyQuestionEditorTab>tabs[i];
-      var props = tab.properties.getAllProperties();
+      var props = tab.editorProperties;
       for (var j = 0; j < props.length; j++) {
         res.push(props[j]);
       }
@@ -742,7 +741,7 @@ export class SurveyQuestionEditorTab {
   koAfterRender: any;
   constructor(
     public obj: any,
-    public properties: SurveyQuestionEditorProperties = null,
+    protected properties: SurveyQuestionEditorProperties = null,
     private _name
   ) {
     var self = this;
@@ -775,6 +774,9 @@ export class SurveyQuestionEditorTab {
   }
   public set title(value: string) {
     this.titleValue = value;
+  }
+  public get editorProperties(): Array<SurveyObjectProperty> {
+    return this.properties.editorProperties;
   }
   public get htmlTemplate(): string {
     return "questioneditortab";
