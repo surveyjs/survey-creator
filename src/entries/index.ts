@@ -109,10 +109,10 @@ export {
 } from "../translation";
 
 //adorners
-export { titleAdorner } from "../adorners/title-editor";
-export { itemAdorner } from "../adorners/item-editor";
+export { titleAdorner, itemTitleAdorner } from "../adorners/title-editor";
+export { itemAdorner, itemDraggableAdorner } from "../adorners/item-editor";
 export { labelAdorner } from "../adorners/label-editor";
-export { questionActionsAdorner } from "../adorners/question-actions";
+export { questionActionsAdorner, panelActionsAdorner } from "../adorners/question-actions";
 export { selectItemsAdorner } from "../adorners/select-items";
 
 // export
