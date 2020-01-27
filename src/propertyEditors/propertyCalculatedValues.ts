@@ -26,7 +26,7 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
   protected createNewItem(): any {
     return new Survey.CalculatedValue(this.getNewName());
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("calculatedvalue@items", []);
     return this.getPropertiesByNames("calculatedvalue", names);
   }

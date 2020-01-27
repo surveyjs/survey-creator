@@ -18,7 +18,7 @@ export class SurveyPropertyUrlConditionEditor extends SurveyNestedPropertyEditor
   protected createNewItem(): any {
     return Survey.Serializer.createClass("urlconditionitem");
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     return this.getPropertiesByNames("urlconditionitem", ["expression", "url"]);
   }
 }

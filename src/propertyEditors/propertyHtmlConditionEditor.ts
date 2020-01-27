@@ -18,7 +18,7 @@ export class SurveyPropertyHtmlConditionEditor extends SurveyNestedPropertyEdito
   protected createNewItem(): any {
     return new Survey.HtmlConditionItem();
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     return this.getPropertiesByNames("htmlconditionitem", [
       "expression",
       "html"

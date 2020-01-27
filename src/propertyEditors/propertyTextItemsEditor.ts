@@ -29,7 +29,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   protected getItemClassName(item: any): string {
     return "multipletextitem";
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("multipletext@items", []);
     return this.getPropertiesByNames("multipletextitem", names);
   }

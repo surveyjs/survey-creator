@@ -69,13 +69,6 @@ export class SurveyQuestionEditorProperties {
     this.editorProperties.push(objectProperty);
   }
   private isPropertyVisible(property: Survey.JsonObjectProperty): boolean {
-    if (
-      !!this.tab &&
-      property.name == this.tab.name &&
-      this.tab.visible === true
-    )
-      return true;
-
     return (
       this.alwaysVisibleProperties[property.name] ||
       SurveyHelper.isPropertyVisible(this.obj, property, this.options)

@@ -39,6 +39,11 @@ import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCel
 
 export default QUnit.module("PropertyEditorsTests");
 
+Survey.Serializer.findProperty("itemvalue", "visibleIf").showMode = "form";
+Survey.Serializer.findProperty("itemvalue", "enableIf").showMode = "form";
+Survey.Serializer.findProperty("itemvalue", "visibleIf").visible = true;
+Survey.Serializer.findProperty("itemvalue", "enableIf").visible = true;
+
 class SurveyPropertyItemValuesEditorForTests extends SurveyPropertyItemValuesEditor {
   constructor() {
     super(Survey.Serializer.findProperty("selectbase", "choices"));

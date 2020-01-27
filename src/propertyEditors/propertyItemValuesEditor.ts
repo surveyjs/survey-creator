@@ -75,10 +75,10 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     }
     this.updateShowTextViewVisibility();
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     var props = this.getDefinedProperties();
     if (!!props && props.length > 0) return props;
-    return this.getDefaultProperties();
+    return this.getDefaultListProperties();
   }
   protected getDefinedProperties(): Array<any> {
     if (!this.property || !this.object || !this.object.getType) return [];
@@ -87,16 +87,9 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
     var res = [];
     for (var i = 0; i < properties.length; i++) {
-      res.push(properties[i].property);
-    }
-    return res;
-  }
-  protected getDefaultProperties(): Array<Survey.JsonObjectProperty> {
-    var properties = Survey.Serializer.getProperties(this.property.className);
-    var res = [];
-    for (var i = 0; i < properties.length; i++) {
-      if (!properties[i].visible) continue;
-      res.push(properties[i]);
+      if (this.isPropertyShownInList(properties[i].property)) {
+        res.push(properties[i].property);
+      }
     }
     return res;
   }
@@ -148,12 +141,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private createEditorItemValueCore(item: any) {
     var itemValue = Survey.Serializer.createClass(this.property.className);
     itemValue.setData(item);
-
-    if (this.object) {
-      //itemValue["survey"] = this.object.survey;
-      //itemValue["object"] = this.object;
-    }
-    //itemValue.locOwner = this;
     return itemValue;
   }
   private isTextLocalized(item) {
@@ -188,7 +175,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   protected updateItems(text: string) {
     var items = [];
     if (text) {
-      var properties = this.getProperties();
+      var properties = this.getColumnsProperties();
       var texts = text.split("\n");
       for (var i = 0; i < texts.length; i++) {
         if (!texts[i]) continue;

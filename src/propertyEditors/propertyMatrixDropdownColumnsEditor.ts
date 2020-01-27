@@ -54,7 +54,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     }
     return newColumn;
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("matrixdropdowncolumn", [
       "isRequired",
       "cellType",

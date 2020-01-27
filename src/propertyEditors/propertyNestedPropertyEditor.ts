@@ -58,14 +58,28 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   }
   protected createColumns() {
     var result = [];
-    var properties = this.getProperties();
+    var properties = this.getColumnsProperties();
     for (var i = 0; i < properties.length; i++) {
       result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
     }
     this.koColumnsValue(result);
   }
-  protected getProperties(): Array<Survey.JsonObjectProperty> {
+  protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     return [];
+  }
+  protected getDefaultListProperties(): Array<Survey.JsonObjectProperty> {
+    var properties = Survey.Serializer.getProperties(this.property.className);
+    var res = [];
+    for (var i = 0; i < properties.length; i++) {
+      if (!this.isPropertyShownInList(properties[i])) continue;
+      res.push(properties[i]);
+    }
+    return res;
+  }
+  protected isPropertyShownInList(
+    property: Survey.JsonObjectProperty
+  ): boolean {
+    return property.visible && property.showMode !== "form";
   }
   protected getPropertiesNames(
     className: string,
