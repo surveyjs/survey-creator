@@ -1046,6 +1046,24 @@ QUnit.test("showModalOnElementEditing property", function(assert) {
   );
 });
 
+QUnit.test("pageEditMode property", function(assert) {
+  var options = {
+    pageEditMode: "single"
+  }
+  var creator = new SurveyCreator(undefined, options);
+  assert.equal(
+    creator.topContainer.indexOf("pages-editor"),
+    -1,
+    "Pages editor shouldn't be shown"
+  );
+  creator = new SurveyCreator();
+  assert.equal(
+    creator.topContainer.indexOf("pages-editor"),
+    1,
+    "Pages editor should be shown"
+  );
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

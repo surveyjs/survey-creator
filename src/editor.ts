@@ -113,6 +113,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
+  private pageEditModeValue: "standard" | "single" = "standard";
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -794,7 +795,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor,
    * showPropertyGrid, showToolbox, allowModifyPages
    * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
-   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, closeModalOutside, pageEditingMode
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -1294,6 +1295,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (typeof options.closeModalOutside !== "undefined") {
       this.closeModalOutsideValue = options.closeModalOutside;
     }
+    if (typeof options.pageEditMode !== "undefined") {
+      this.pageEditModeValue = options.pageEditMode;
+      if (this.pageEditModeValue === "single") {
+        this._topContainer.remove("pages-editor");
+        Survey.Serializer.findProperty("question", "page").visible = false;
+        Survey.Serializer.findProperty("panel", "page").visible = false;
+      }
+    }
   }
   /**
    * The editing survey object (Survey.Survey)
@@ -1695,6 +1704,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set closeModalOutside(value: "off" | "cancel" | "apply") {
     this.closeModalOutsideValue = value;
+  }
+  /**
+   * Set it to "single" to design surface in single page mode. By default value is "standard"
+   */
+  public get pageEditMode() {
+    return this.pageEditModeValue;
   }
   private _leftContainer = ko.observableArray<string>(["toolbox"]);
   public get leftContainer() {
