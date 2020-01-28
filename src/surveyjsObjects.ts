@@ -160,24 +160,17 @@ function elementOnCreating(surveyElement: any) {
   });
 }
 
-function pageOnCreating(surveyElement: any) {
-  surveyElement.renderedElement = null;
-  surveyElement.koIsSelected = ko.observable(false);
-  surveyElement.koIsSelected.subscribe(function(newValue) {
-    if (surveyElement.renderedElement) {
-      if (newValue) {
-        surveyElement.renderedElement.classList.add(
-          "svd_page_selected",
-          "svd-main-border-color"
-        );
-      } else {
-        surveyElement.renderedElement.classList.remove(
-          "svd_page_selected",
-          "svd-main-border-color"
-        );
-      }
-    }
-  });
+function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
+  var res = <HTMLLIElement>document.createElement("li");
+  var btn = document.createElement("button");
+  btn.innerText = item.text;
+  var onClick = item.onClick;
+  btn.onclick = function() {
+    onClick(obj, item);
+  };
+  btn.className = "btn btn-primary btn-sm btn-xs";
+  res.appendChild(btn);
+  return res;
 }
 
 export function createAfterRenderHandler(
@@ -371,7 +364,7 @@ function addAdorner(node, model) {
           elements.unshift(node);
         }
         if (model.getType() !== "page") {
-          elements = filterNestedQuestions(node, elements);
+        elements = filterNestedQuestions(node, elements);
         }
         if (
           elements.length === 0 &&
@@ -421,16 +414,7 @@ Survey.Panel.prototype["onCreating"] = function() {
   elementOnCreating(this);
 };
 
-Survey.Page.prototype["onCreating"] = function() {
-  pageOnCreating(this);
-};
-
 Survey.Panel.prototype["onSelectedElementChanged"] = function() {
-  if (getSurvey(this) == null) return;
-  this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
-};
-
-Survey.Page.prototype["onSelectedElementChanged"] = function() {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };

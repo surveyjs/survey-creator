@@ -2067,8 +2067,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         let el = <HTMLElement>this.renderedElement.querySelector("#" + id);
         SurveyHelper.scrollIntoViewIfNeeded(el);
       }
-    } else if (objType == ObjType.Page) {
-      this.survey.selectedElement = obj;
     } else {
       this.survey.selectedElement = null;
     }
