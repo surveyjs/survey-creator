@@ -67,20 +67,6 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     return [];
   }
-  protected getDefaultListProperties(): Array<Survey.JsonObjectProperty> {
-    var properties = Survey.Serializer.getProperties(this.property.className);
-    var res = [];
-    for (var i = 0; i < properties.length; i++) {
-      if (!this.isPropertyShownInList(properties[i])) continue;
-      res.push(properties[i]);
-    }
-    return res;
-  }
-  protected isPropertyShownInList(
-    property: Survey.JsonObjectProperty
-  ): boolean {
-    return property.visible && property.showMode !== "form";
-  }
   protected getPropertiesNames(
     className: string,
     defaultNames: Array<string>
@@ -99,9 +85,28 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     if (!this.property) return [];
     var obj = Survey.Serializer.createClass(this.property.className);
     if (!obj) return [];
-    var props = new SurveyQuestionProperties(obj, this.options, className);
+    var props = new SurveyQuestionProperties(
+      obj,
+      this.options,
+      className,
+      "list"
+    );
     if (props.getTabs().length == 0) return [];
     return props.getTabs()[0].properties;
+  }
+  protected getDefaultListProperties(): Array<Survey.JsonObjectProperty> {
+    var properties = Survey.Serializer.getProperties(this.property.className);
+    var res = [];
+    for (var i = 0; i < properties.length; i++) {
+      if (!this.isPropertyShownInList(properties[i])) continue;
+      res.push(properties[i]);
+    }
+    return res;
+  }
+  protected isPropertyShownInList(
+    property: Survey.JsonObjectProperty
+  ): boolean {
+    return property.visible && property.showMode !== "form";
   }
   protected getPropertiesByNames(
     className: string,

@@ -69,10 +69,6 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   public beforeShow() {
     super.beforeShow();
-    var props = this.getDefinedProperties();
-    if (!!props && props.length > 0) {
-      this.createColumns();
-    }
     this.updateShowTextViewVisibility();
   }
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
@@ -87,9 +83,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
     var res = [];
     for (var i = 0; i < properties.length; i++) {
-      if (this.isPropertyShownInList(properties[i].property)) {
-        res.push(properties[i].property);
-      }
+      res.push(properties[i].property);
     }
     return res;
   }

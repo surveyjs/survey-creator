@@ -54,8 +54,6 @@ export { SurveyPropertyCalculatedValueEditor } from "../propertyEditors/property
 export { SurveyPropertyValidatorsEditor } from "../propertyEditors/propertyValidatorsEditor";
 export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
 export { SurveyObjects } from "../surveyObjects";
-
-export { SurveyQuestionEditorProperties } from "../questionEditors/questionEditorProperties";
 export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 export {
   SurveyPropertyEditorShowWindow,
@@ -112,7 +110,10 @@ export {
 export { titleAdorner, itemTitleAdorner } from "../adorners/title-editor";
 export { itemAdorner, itemDraggableAdorner } from "../adorners/item-editor";
 export { labelAdorner } from "../adorners/label-editor";
-export { questionActionsAdorner, panelActionsAdorner } from "../adorners/question-actions";
+export {
+  questionActionsAdorner,
+  panelActionsAdorner
+} from "../adorners/question-actions";
 export { selectItemsAdorner } from "../adorners/select-items";
 
 // export

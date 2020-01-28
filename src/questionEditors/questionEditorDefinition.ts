@@ -2,9 +2,7 @@ import * as Survey from "survey-knockout";
 
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<
-    string | { name: string; title?: string; tab?: string; visible?: boolean }
-  >;
+  properties?: Array<string | { name: string; title?: string; tab?: string }>;
   tabs?: Array<{
     name: string;
     index?: number;
@@ -191,18 +189,15 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "itemvalue[]@choices": {
-      properties: [
-        { name: "visibleIf", visible: true },
-        { name: "enableIf", visible: true }
-      ],
+      properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@rows": {
-      properties: [{ name: "visibleIf", visible: true }],
+      properties: [{ name: "visibleIf" }],
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@columns": {
-      properties: [{ name: "visibleIf", visible: true }],
+      properties: [{ name: "visibleIf" }],
       tabs: [{ name: "general" }]
     },
     text: {
