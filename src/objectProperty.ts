@@ -21,7 +21,6 @@ export class SurveyObjectProperty {
   public editorTypeTemplate: string;
   public baseEditorType: string;
   public getObjectPropertyByName: (name: string) => SurveyObjectProperty = null;
-  public alwaysVisible: boolean = false;
 
   public koVisible: any;
 
@@ -109,7 +108,7 @@ export class SurveyObjectProperty {
     this.editor.updateDynamicProperties();
   }
   protected isVisible(): boolean {
-    if (!this.object || this.alwaysVisible) return true;
+    if (!this.object) return true;
     var layout = !!this.object.getLayoutType ? this.object.getLayoutType() : "";
     if (
       !!this.property.isVisible &&

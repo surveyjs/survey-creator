@@ -1,7 +1,7 @@
 ﻿<script type="text/html" id="questioneditortab">
   <div class="row" data-bind="css: 'svd-popup-editor-tab-' + name, attr: {id: 'editor_tab_id_' + name}">
       <div class="col-sm-12">
-            <!-- ko foreach: properties.editorProperties -->
+            <!-- ko foreach: editorProperties -->
             <div class="form-group">
                 <div data-bind="visible: koVisible, event: { keydown: editor.keyDownHandler }, attr: { 'data-property': property.name }">
                 <!-- ko template: { name: 'propertyeditor', data: editor, afterRender: $parent.koAfterRenderProperty } --><!-- /ko -->

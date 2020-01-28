@@ -92,9 +92,12 @@ export class SurveyHelper {
   public static isPropertyVisible(
     obj: any,
     property: Survey.JsonObjectProperty,
-    options: ISurveyObjectEditorOptions = null
+    options: ISurveyObjectEditorOptions = null,
+    showMode: string = null
   ): boolean {
     if (!property || !property.visible) return false;
+    if (!!showMode && !!property.showMode && showMode !== property.showMode)
+      return false;
     if (
       !!property.isVisible &&
       !!obj.getLayoutType &&
