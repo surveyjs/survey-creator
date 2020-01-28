@@ -21,7 +21,7 @@ import { QuestionToolbox } from "./questionToolbox";
 import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
-import { SurveyForDesigner, createAfterRenderHandler } from "./surveyjsObjects";
+import { SurveyForDesigner, createAfterRenderHandler, createAfterRenderPageHandler } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
@@ -2222,6 +2222,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this,
       this.surveyValue()
     );
+    var afterRenderElementPageHandler = createAfterRenderPageHandler(
+      this,
+      this.surveyValue()
+    );
+    this.surveyValue().onAfterRenderPage.add((sender, options) => {
+      afterRenderElementPageHandler(options.htmlElement, options.page);
+    });    
     this.surveyValue().onAfterRenderQuestion.add((sender, options) => {
       afterRenderElementHandler(
         options.htmlElement,

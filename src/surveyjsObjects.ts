@@ -49,6 +49,7 @@ export class SurveyForDesigner extends Survey.Survey {
     };
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
     this.onUpdatePanelCssClasses.add(onUpdateQuestionCssClasses);
+    this.onUpdatePageCssClasses.add(onUpdateQuestionCssClasses);
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -265,6 +266,31 @@ export function createAfterRenderHandler(
   };
 }
 
+export function createAfterRenderPageHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
+  return function elementOnAfterRendering(
+    domElement: any,
+    page: any
+  ) {
+    page.renderedElement = domElement;
+    domElement.classList.add("svd_page");
+    domElement.onclick = function(e) {
+      if (!e["markEvent"]) {
+        e["markEvent"] = true;
+        getSurvey(page)["selectedElement"] = page;
+      }
+    };
+
+    domElement.ondblclick = function(e) {
+      getSurvey(page).doElementDoubleClick(page);
+    };
+
+    addAdorner(domElement, page);
+  };
+}
+
 var adornersConfig: { [index: string]: any[] } = {};
 
 export function registerAdorner(name, adorner) {
@@ -283,15 +309,15 @@ export function removeAdorners(names: string[] = undefined) {
 
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
+  classes = options.page ? options.cssClasses.page : classes;
   Object.keys(adornersConfig).forEach(element => {
     adornersConfig[element].forEach(adorner => {
       var classesElementName = adorner.getElementName(
-        options.question || options.panel
+        options.question || options.panel || options.page
       );
       var adornerMarkerClass = adorner.getMarkerClass(
-        options.question || options.panel
+        options.question || options.panel || options.page
       );
-
       classes[classesElementName] = applyAdornerClass(
         classes[classesElementName],
         adornerMarkerClass
@@ -337,7 +363,9 @@ function addAdorner(node, model) {
         if (node.className.split(" ").indexOf(elementClass) !== -1) {
           elements.unshift(node);
         }
+        if (model.getType() !== "page") {
         elements = filterNestedQuestions(node, elements);
+        }
         if (
           elements.length === 0 &&
           node.className.indexOf(elementClass) !== -1
