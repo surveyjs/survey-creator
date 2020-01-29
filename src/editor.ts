@@ -1301,6 +1301,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this._topContainer.remove("pages-editor");
         Survey.Serializer.findProperty("question", "page").visible = false;
         Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.showJSONEditorTab = false;
       }
     }
   }

@@ -6,7 +6,7 @@ const title = `adorners`;
 const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   var editorOptions = {};
-  window.editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+  window.editor = new SurveyCreator.SurveyCreator("editorElement", editorOptions);
 });
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
@@ -28,6 +28,7 @@ test(`dropdown change item values`, async t => {
     .withText("Has other item");
 
   await t
+    .maximizeWindow()
     .click(choicesTab)
     .click(hasOtherCheckbox)
     .expect(
@@ -69,6 +70,32 @@ test(`text change title`, async t => {
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.title_editable > span:nth-child(3)`).innerText)
     .eql("question1puppies");
+});
+
+test(`change page title`, async t => {
+  const pageTitle = Selector(".svd_page")
+    .find("span")
+    .withText("Input title here");
+  await t
+    .click(`[title~=Dropdown]`)
+    .click(pageTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(Selector(`.title_editable > span:nth-child(1)`).innerText)
+    .eql("puppies");
+});
+
+test(`change page description`, async t => {
+  const pageTitle = Selector(".svd_page")
+    .find("span")
+    .withText("Enter a description");
+  await t
+    .click(`[title~=Dropdown]`)
+    .click(pageTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(Selector(`.description_editable > span:nth-child(1)`).innerText)
+    .eql("puppies");
 });
 
 test(`dropdown work with other`, async t => {
