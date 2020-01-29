@@ -90,8 +90,8 @@ export class TitleInplaceEditor {
       element.style.display = "none";
     });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
-    inputElem.focus();
     resizeInput(inputElem);
+    setTimeout(function() { inputElem.focus(); }, 10);
   };
   postEdit = () => {
     if (this.prevName() !== this.editingName()) {

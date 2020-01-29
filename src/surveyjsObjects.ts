@@ -160,19 +160,6 @@ function elementOnCreating(surveyElement: any) {
   });
 }
 
-function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
-  var res = <HTMLLIElement>document.createElement("li");
-  var btn = document.createElement("button");
-  btn.innerText = item.text;
-  var onClick = item.onClick;
-  btn.onclick = function() {
-    onClick(obj, item);
-  };
-  btn.className = "btn btn-primary btn-sm btn-xs";
-  res.appendChild(btn);
-  return res;
-}
-
 export function createAfterRenderHandler(
   creator: any,
   survey: SurveyForDesigner
