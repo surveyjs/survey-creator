@@ -1,4 +1,4 @@
-.title_editable {
+.title_editable, .description_editable {
   pointer-events: all;
   cursor: text;
   .svda-title-editor-start {
@@ -12,7 +12,7 @@
   }
 }
 
-.svd_page>.title_editable {
+.svd_page>.title_editable, .svd_page>.description_editable {
   .svda-title-editor-start {
     visibility: visible;
     .svda-title-editor-placeholder {
@@ -32,6 +32,9 @@
   }
 }
 
+.svd_page>.description_editable {
+  margin-bottom: 2em;
+}
 
 title-editor {
   display: inline-block;

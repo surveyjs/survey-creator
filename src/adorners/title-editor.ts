@@ -165,7 +165,6 @@ export var titleAdorner = {
     editor.onAdornerRenderedCallback(model, "title", decoration);
   }
 };
-
 registerAdorner("title", titleAdorner);
 
 export var itemTitleAdorner = {
@@ -194,5 +193,22 @@ export var itemTitleAdorner = {
     }
   }
 };
-
 registerAdorner("item-title", itemTitleAdorner);
+
+export var descriptionAdorner = {
+  getMarkerClass: model => {
+    return "description_editable";
+  },
+  getElementName: model => "description",
+  afterRender: (elements: HTMLElement[], model, editor) => {
+    var placeholder = model.getType() === "page" ? editorLocalization.getString("pe.descriptionPlaceholder") : "";
+    var decoration = document.createElement("span");
+    decoration.innerHTML =
+      `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    elements[0].appendChild(decoration);
+    ko.applyBindings({ model: model, editor: editor }, decoration);
+    ko.tasks.runEarly();
+    editor.onAdornerRenderedCallback(model, "description", decoration);
+  }
+};
+registerAdorner("description", descriptionAdorner);
