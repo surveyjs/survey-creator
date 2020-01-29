@@ -10,7 +10,7 @@ export class DesignerContainerModel {
   private _element: HTMLDivElement;
   constructor(params, componentInfo) {
     this._element = componentInfo.element;
-    this.tabs = ko.unwrap(params.tabs);
+    this.tabs = params.tabs;
     this.context = params.context;
     var changed = params.changed || ko.observable();
     componentInfo.element.className += " " + params.className;
