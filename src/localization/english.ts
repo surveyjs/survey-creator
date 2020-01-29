@@ -240,6 +240,8 @@ export var enStrings = {
     path: "Path",
     valueName: "Value name",
     titleName: "Title name",
+    titlePlaceholder: "Input title here",
+    descriptionPlaceholder: "Enter a description",
 
     hasOther: "Has other item",
     otherText: "Other item text",

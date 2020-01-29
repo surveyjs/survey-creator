@@ -12,6 +12,27 @@
   }
 }
 
+.svd_page>.title_editable {
+  .svda-title-editor-start {
+    visibility: visible;
+    .svda-title-editor-placeholder {
+      cursor: text;
+      opacity: 0.5;
+    }
+    .svda-title-editor-start-button {
+      visibility: hidden;
+    }
+  }
+  &:hover {
+    .svda-title-editor-start {
+      .svda-title-editor-start-button {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+
 title-editor {
   display: inline-block;
   max-width: 90%;

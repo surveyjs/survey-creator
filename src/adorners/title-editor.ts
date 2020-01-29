@@ -36,7 +36,6 @@ export class TitleInplaceEditor {
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
-
   protected forNeibours(func: (el: HTMLElement) => void) {
     if (
       !this.rootElement.parentElement ||
@@ -52,7 +51,8 @@ export class TitleInplaceEditor {
     }
   }
 
-  constructor(protected target: any, protected name: string, protected rootElement) {
+  constructor(protected target: any, protected name: string,
+    protected rootElement, public placeholder: string = "") {
     this.editingName(target[name]);
     this.prevName(target[name]);
     this.forNeibours(
@@ -120,7 +120,8 @@ ko.components.register("title-editor", {
       var model = new TitleInplaceEditor(
         params.model,
         params.name,
-        componentInfo.element
+        componentInfo.element,
+        params.placeholder
       );
       ko.computed(() => {
         model.prevName(ko.unwrap(params.model[params.name]));
@@ -154,9 +155,10 @@ export var titleAdorner = {
   },
   getElementName: model => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
+    var placeholder = model.getType() === "page" ? editorLocalization.getString("pe.titlePlaceholder") : "";
     var decoration = document.createElement("span");
     decoration.innerHTML =
-      "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
+      `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
