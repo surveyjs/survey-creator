@@ -37,15 +37,23 @@
 <script type="text/html" id="se-empty-placeholder">
   <div class="svd-survey-placeholder-root">
       <div class="svd-survey-placeholder">
-      <!-- ko if: showExternalHelpLink -->
-      <div class="svd-survey-gallery">
-          <a data-bind="attr: { href: getLocString('survey.externalHelpLinkUrl') }">
-          <img src="../images/YouTube.png"/>
-          <span data-bind="text: getLocString('survey.externalHelpLink')"></span>
-          </a>
-      </div>
+      <!-- ko if: placeholderHtml -->
+        <div data-bind="html: placeholderHtml"></div>
       <!-- /ko -->
-      <div class="empty-message" data-bind="text: getLocString('survey.dropQuestion')"></div>
+      <!-- ko ifnot: placeholderHtml -->
+          <!-- ko if: showExternalHelpLink -->
+          <div class="svd-survey-gallery">
+            <a data-bind="attr: { href: getLocString('survey.externalHelpLinkUrl') }">
+            <img src="../images/YouTube.png"/>
+            <span data-bind="text: getLocString('survey.externalHelpLink')"></span>
+            </a>
+        </div>
+        <!-- /ko -->
+        <div class="svd-empty-message-container">
+          <div class="svd-empty-message" data-bind="text: getLocString('survey.dropQuestion')"></div>
+          <img src="../images/start-designing-form.svg" style="width: 300px;"/>
+        </div>
+        <!-- /ko -->
       </div>
   </div>
 </script>

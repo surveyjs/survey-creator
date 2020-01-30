@@ -182,7 +182,14 @@ export class StylesManager {
     ".svd_container .question_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
     ".svd_container .panel_actions.svd_question:hover":
-      "border-top: 1px solid $primary-color;"
+      "border-top: 1px solid $primary-color;",
+
+    ".svd_container .svd-designer-tabbed-container__tab-header-active": 
+      "border-color: $primary-color;",
+    ".svd_container .svd-designer-tabbed-container__tab-header:hover":
+        "color: $primary-color;",
+    ".svd_container .svda-add-custom-item":
+        "color: $primary-color;"
   };
 
   public static bootstrapThemeCss: { [key: string]: string } = {

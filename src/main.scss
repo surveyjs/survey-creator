@@ -249,14 +249,19 @@
                   }
                 }
               }
-              .empty-message {
-                text-align: center;
-                font-size: 22px;
+              .svd-empty-message-container {
                 position: absolute;
-                left: 50%;
                 top: 50%;
+                left: 50%;
                 transform: translate(-50%, -50%);
-                user-select: none;
+                text-align: center;
+                pointer-events: none;
+                .svd-empty-message {
+                  margin-bottom: 1em;
+                  text-align: center;
+                  font-size: 22px;
+                  color: $primary-color;
+                }
               }
             }
           }
