@@ -796,3 +796,80 @@ QUnit.test(
     assert.equal(survey["maxTimeToFinish"], 0, "survey is not set");
   }
 );
+
+QUnit.test("Add property into existing cagetory", function(assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "name2",
+    category: "general",
+    visibleIndex: 1
+  });
+  Survey.Serializer.addProperty("question", {
+    name: "visibleIf2",
+    category: "logic",
+    visibleIndex: 10
+  });
+  Survey.Serializer.addProperty("question", {
+    name: "enableIf2",
+    category: "logic"
+  });
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  var editor = new SurveyQuestionEditor(question);
+  var generalTab = editor.getTabByName("general");
+  assert.ok(
+    generalTab.getPropertyEditorByName("name2"),
+    "property editor for name2 is here"
+  );
+  assert.equal(
+    generalTab.editorProperties[1].name,
+    "name2",
+    "Property inserted into general correctly"
+  );
+  var logicTab = editor.getTabByName("logic");
+  var logicPropCount = logicTab.editorProperties.length;
+  assert.equal(
+    logicTab.editorProperties[logicPropCount - 2].name,
+    "enableIf2",
+    "Property inserted into logic correctly"
+  );
+  assert.equal(
+    logicTab.editorProperties[logicPropCount - 1].name,
+    "visibleIf2",
+    "Property added into logic correctly"
+  );
+  Survey.Serializer.removeProperty("question", "name2");
+  Survey.Serializer.removeProperty("question", "visibleIf2");
+  Survey.Serializer.removeProperty("question", "enableIf2");
+});
+
+QUnit.test("Add property into new cagetory", function(assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "name2",
+    category: "newcategory"
+  });
+  Survey.Serializer.addProperty("question", {
+    name: "name3",
+    category: "newcategory"
+  });
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  var editor = new SurveyQuestionEditor(question);
+  var newTab = editor.getTabByName("newcategory");
+  assert.ok(newTab, "newcategory is here");
+  assert.ok(
+    newTab.getPropertyEditorByName("name2"),
+    "property editor for name2 is here"
+  );
+  assert.equal(
+    newTab.editorProperties[0].name,
+    "name2",
+    "First property added into newcategory correctly"
+  );
+  assert.equal(
+    newTab.editorProperties[1].name,
+    "name3",
+    "Second property added into newcategory correctly"
+  );
+  Survey.Serializer.removeProperty("question", "name2");
+  Survey.Serializer.removeProperty("question", "name3");
+});

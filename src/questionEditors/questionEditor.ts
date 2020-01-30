@@ -167,6 +167,8 @@ export class SurveyQuestionProperties {
     for (var i = this.tabs.length - 1; i >= 0; i--) {
       if (!this.tabs[i].visible) {
         this.tabs.splice(i, 1);
+      } else {
+        this.sortProperties(this.tabs[i].properties);
       }
     }
     this.tabs.sort(function(a, b) {
@@ -244,7 +246,7 @@ export class SurveyQuestionProperties {
     }
     var curClassName = className;
     var usedProperties = [];
-    var hasOthersTab = false;
+    var hasNonTabProperties = false;
     while (curClassName) {
       let metaClass = <Survey.JsonMetadataClass>(
         Survey.Serializer.findClass(curClassName)
@@ -260,7 +262,8 @@ export class SurveyQuestionProperties {
         }
         if (classRes.tabs) {
           for (var i = 0; i < classRes.tabs.length; i++) {
-            hasOthersTab = hasOthersTab || classRes.tabs[i].name == "others";
+            hasNonTabProperties =
+              hasNonTabProperties || classRes.tabs[i].name == "others";
             usedProperties.push(classRes.tabs[i].name);
           }
         }
@@ -269,28 +272,66 @@ export class SurveyQuestionProperties {
       curClassName = metaClass.parentName;
     }
 
-    if (!hasOthersTab) {
-      let classRes: any = { properties: [] };
-      if (result.length > 0) {
-        classRes.tabs = [{ name: "others", index: 1000 }];
-      }
-      let tabName = result.length == 0 ? "general" : "others";
-      for (var i = 0; i < this.properties.length; i++) {
-        if (
-          this.isJSONPropertyVisible(this.properties[i]) &&
-          usedProperties.indexOf(this.properties[i].name) < 0
-        ) {
-          classRes.properties.push({
-            name: this.properties[i].name,
-            tab: tabName
-          });
-        }
-      }
-      if (classRes.properties.length > 0) {
-        result.push(classRes);
-      }
+    if (!hasNonTabProperties) {
+      this.addNonTabProperties(result, usedProperties);
     }
     return result;
+  }
+  private addNonTabProperties(
+    tabs: Array<ISurveyQuestionEditorDefinition>,
+    usedProperties: Array<string>
+  ) {
+    let classRes: any = { properties: [] };
+    let tabNames = [];
+    for (var i = 0; i < this.properties.length; i++) {
+      let prop = this.properties[i];
+      if (
+        !this.isJSONPropertyVisible(prop) ||
+        usedProperties.indexOf(prop.name) > -1
+      )
+        continue;
+      let tabName =
+        tabs.length == 0
+          ? "general"
+          : !!prop.category
+          ? prop.category
+          : "others";
+      if (tabNames.indexOf(tabName) < -1 && tabName != "general") {
+        tabNames.push(tabName);
+        classRes.tabs.push({
+          name: tabNames,
+          index: tabName != "others" ? tabNames.length + 1 : 1000
+        });
+      }
+      classRes.properties.push({
+        name: this.properties[i].name,
+        tab: tabName
+      });
+    }
+    if (classRes.properties.length > 0) {
+      tabs.push(classRes);
+    }
+  }
+  private sortProperties(
+    properties: Array<SurveyQuestionEditorPropertyDefinition>
+  ) {
+    if (!Array.isArray(properties)) return;
+    var props: Array<SurveyQuestionEditorPropertyDefinition> = [].concat(
+      properties
+    );
+    for (var i = 0; i < props.length; i++) {
+      var index = props[i].property.visibleIndex;
+      if (index < 0) continue;
+      var curIndex = properties.indexOf(props[i]);
+      if (curIndex > -1) {
+        properties.splice(curIndex, 1);
+      }
+      if (index < properties.length) {
+        properties.splice(index, 0, props[i]);
+      } else {
+        properties.push(props[i]);
+      }
+    }
   }
 }
 
@@ -364,6 +405,13 @@ export class SurveyElementEditorContent {
     var props = this.getAllEditorProperties();
     for (var i = 0; i < props.length; i++) {
       if (props[i].property.name == propertyName) return props[i];
+    }
+    return null;
+  }
+  public getTabByName(tabName: string): SurveyQuestionEditorTab {
+    var tabs = this.koTabs();
+    for (var i = 0; i < tabs.length; i++) {
+      if (tabs[i].name == tabName) return tabs[i];
     }
     return null;
   }
