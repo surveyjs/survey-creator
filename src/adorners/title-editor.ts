@@ -129,7 +129,8 @@ ko.components.register("title-editor", {
       );
       ko.computed(() => {
         //TO REVIEW THIS CRUTCH
-        if (property.serializationProperty !== property.name) {
+        if (property.serializationProperty !== property.name 
+          && !!params.model[property.serializationProperty]) {
           ko.unwrap(params.model[property.serializationProperty].koRenderedHtml);
         }
         model.prevName(ko.unwrap(params.model[params.name]));
