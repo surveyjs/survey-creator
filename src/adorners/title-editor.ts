@@ -123,13 +123,18 @@ ko.components.register("title-editor", {
         componentInfo.element,
         params.placeholder
       );
-      ko.computed(() => {
-        model.prevName(ko.unwrap(params.model[params.name]));
-      });
       var property = Survey.Serializer.findProperty(
         params.model.getType(),
         params.name
       );
+      ko.computed(() => {
+        //TO REVIEW THIS CRUTCH
+        if (property.serializationProperty !== property.name) {
+          ko.unwrap(params.model[property.serializationProperty].koRenderedHtml);
+        }
+        model.prevName(ko.unwrap(params.model[params.name]));
+        model.editingName(ko.unwrap(params.model[params.name]));
+      });
       model.valueChanged = newValue => {
         var options = {
           propertyName: property.name,
