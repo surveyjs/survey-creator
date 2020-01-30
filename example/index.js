@@ -68,11 +68,12 @@ if (!window["%hammerhead%"]) {
   editor.toolbarItems.splice(2, 5);
   editor.placeholderHtml = `
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-      <img src="./drag-image.png"/>
+      <img src="./drag-image.svg"/>
       <div style="font-size: 16px; max-width: 210px;">
         Drag and drop a question to start designing your form
       </div>
     </div>`;
+
   // SurveyEditor.StylesManager.applyTheme("orange");
   //editor.surveyId = '5af48e08-a0a5-44a5-83f4-1c90e8e98de1';
   //editor.surveyPostId = '3ce10f8b-2d8a-4ca2-a110-2994b9e697a1';
