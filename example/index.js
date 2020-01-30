@@ -57,6 +57,8 @@ if (!window["%hammerhead%"]) {
   //
 
   var options = {
+    questionTypes: ["text", "checkbox", "radiogroup", "dropdown", "comment",
+      "rating", "imagepicker", "boolean", "html", "file", "expression"],
     pageEditMode: "single"
   };
   // SurveyEditor.editorLocalization.getLocale("en").survey.dropQuestion =
