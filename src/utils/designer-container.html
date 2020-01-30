@@ -27,7 +27,7 @@
   </div>
 </div>
 <div data-bind="css: className">
-  <!-- ko if: tabs.length > 1 -->
+  <!-- ko if: tabs().length > 1 -->
   <div class="svd-designer-tabbed-container__tab-header-container">
     <!-- ko foreach: { data: tabs, as: 'content' } -->
     <div
@@ -46,7 +46,7 @@
   </div>
   <!-- /ko -->
   <!-- /ko -->
-  <!-- ko if: tabs.length === 1 -->
+  <!-- ko if: tabs().length === 1 -->
   <!-- ko foreach: { data: tabs, as: 'content' } -->
   <!-- ko template: { name: 'se-component-' + content + '-header', data: $parent.context } -->
   <!-- /ko -->

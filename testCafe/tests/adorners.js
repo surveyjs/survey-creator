@@ -6,7 +6,7 @@ const title = `adorners`;
 const init = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   var editorOptions = {};
-  window.editor = new SurveyCreator.SurveyCreator("editorElement", editorOptions);
+  window.editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 });
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
