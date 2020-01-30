@@ -291,7 +291,14 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .question_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
     ".svd_container.sv_bootstrap_css .panel_actions.svd_question:hover":
-      "border-top: 1px solid $primary-color;"
+      "border-top: 1px solid $primary-color;",
+
+      ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header-active": 
+      "border-color: $primary-color;",
+      ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header:hover":
+          "color: $primary-color;",
+      ".svd_container.sv_bootstrap_css .svda-add-custom-item":
+          "color: $primary-color;"
   };
 
   public static bootstrapmaterialThemeCss: { [key: string]: string } = {
@@ -400,7 +407,14 @@ export class StylesManager {
     ".svd_container.sv_bootstrapmaterial_css .question_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
     ".svd_container.sv_bootstrapmaterial_css .panel_actions.svd_question:hover":
-      "border-top: 1px solid $primary-color;"
+      "border-top: 1px solid $primary-color;",
+
+      ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header-active": 
+      "border-color: $primary-color;",
+      ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header:hover":
+          "color: $primary-color;",
+      ".svd_container.sv_bootstrapmaterial_css .svda-add-custom-item":
+          "color: $primary-color;"
   };
 
   private sheet: CSSStyleSheet = null;

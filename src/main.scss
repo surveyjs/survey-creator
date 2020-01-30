@@ -127,6 +127,10 @@
         background-color: $secondary-bg-color;
       }
     }
+
+    .form-inline {
+      white-space: nowrap;
+    }
   }
   .propertyeditor-validators {
     .first-addon {
@@ -511,7 +515,7 @@
     &.svd_custom_select {
       padding: 0;
       select {
-        height: 32px;
+        height: 34px;
       }
     }
   }
