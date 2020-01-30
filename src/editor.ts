@@ -1675,12 +1675,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   set showExternalHelpLink(value) {
     this._showExternalHelpLink(value);
   }
-  private _placeholderTemplate = ko.observable("se-empty-placeholder-content");
-  get placeholderTemplate() {
-    return this._placeholderTemplate();
+  private _placeholderHtml = ko.observable("");
+  get placeholderHtml() {
+    return this._placeholderHtml();
   }
-  set placeholderTemplate(value) {
-    this._placeholderTemplate(value);
+  set placeholderHtml(value) {
+    this._placeholderHtml(value);
   }
   /**
    * Set it to true to show "Translation" tab and to false to hide the tab

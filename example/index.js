@@ -20,6 +20,42 @@ if (!window["%hammerhead%"]) {
   // Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   // SurveyEditor.editorLocalization.currentLocale = "hu";
   // SurveyEditor.StylesManager.applyTheme("winter");
+
+  //color customization
+  var mainColor = "#0065FF";
+  var mainHoverColor = "#60C5FB";
+  var textColor = "#4a4a4a";
+  var headerColor = "#7ff07f";
+  var headerBackgroundColor = "#4a4a4a";
+  var bodyContainerBackgroundColor = "#f8f8f8";
+
+  var defaultThemeColorsSurvey = Survey
+      .StylesManager
+      .ThemeColors["default"];
+  defaultThemeColorsSurvey["$main-color"] = mainColor;
+  defaultThemeColorsSurvey["$main-hover-color"] = mainHoverColor;
+  defaultThemeColorsSurvey["$text-color"] = textColor;
+  defaultThemeColorsSurvey["$header-color"] = headerColor;
+  defaultThemeColorsSurvey["$header-background-color"] = headerBackgroundColor;
+  defaultThemeColorsSurvey["$body-container-background-color"] = bodyContainerBackgroundColor;
+
+  var defaultThemeColorsEditor = SurveyEditor
+      .StylesManager
+      .ThemeColors["default"];
+  defaultThemeColorsEditor["$primary-color"] = mainColor;
+  defaultThemeColorsEditor["$secondary-color"] = mainColor;
+  defaultThemeColorsEditor["$primary-hover-color"] = mainHoverColor;
+  defaultThemeColorsEditor["$primary-text-color"] = textColor;
+  defaultThemeColorsEditor["$selection-border-color"] = mainColor;
+
+  Survey
+      .StylesManager
+      .applyTheme();
+  SurveyEditor
+      .StylesManager
+      .applyTheme();
+  //
+
   var options = {
     pageEditMode: "single"
   };
@@ -30,7 +66,13 @@ if (!window["%hammerhead%"]) {
   editor.showPropertyGrid = "right";
   editor.rightContainerActiveItem("toolbox");
   editor.toolbarItems.splice(2, 5);
-  editor.placeholderTemplate = "se-custom-placeholder";
+  editor.placeholderHtml = `
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+      <img src="./drag-image.png"/>
+      <div style="font-size: 16px; max-width: 210px;">
+        Drag and drop a question to start designing your form
+      </div>
+    </div>`;
   // SurveyEditor.StylesManager.applyTheme("orange");
   //editor.surveyId = '5af48e08-a0a5-44a5-83f4-1c90e8e98de1';
   //editor.surveyPostId = '3ce10f8b-2d8a-4ca2-a110-2994b9e697a1';
