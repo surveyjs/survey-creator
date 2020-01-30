@@ -849,7 +849,8 @@ QUnit.test("Add property into new cagetory", function(assert) {
   });
   Survey.Serializer.addProperty("question", {
     name: "name3",
-    category: "newcategory"
+    category: "newcategory",
+    categoryIndex: 150
   });
   var creator = new SurveyCreator();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
@@ -869,6 +870,11 @@ QUnit.test("Add property into new cagetory", function(assert) {
     newTab.editorProperties[1].name,
     "name3",
     "Second property added into newcategory correctly"
+  );
+  assert.equal(
+    editor.koTabs()[2].name,
+    "newcategory",
+    "Insert category as first"
   );
   Survey.Serializer.removeProperty("question", "name2");
   Survey.Serializer.removeProperty("question", "name3");
