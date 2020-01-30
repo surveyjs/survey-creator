@@ -281,7 +281,7 @@ export class SurveyQuestionProperties {
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: Array<string>
   ) {
-    let classRes: any = { properties: [] };
+    let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {
       let prop = this.properties[i];
@@ -296,12 +296,19 @@ export class SurveyQuestionProperties {
           : !!prop.category
           ? prop.category
           : "others";
-      if (tabNames.indexOf(tabName) < -1 && tabName != "general") {
+      if (tabNames.indexOf(tabName) < 0 && tabName != "general") {
         tabNames.push(tabName);
         classRes.tabs.push({
-          name: tabNames,
-          index: tabName != "others" ? tabNames.length + 1 : 1000
+          name: tabName,
+          index: tabName == "others" ? 1000 : tabNames.length * 10
         });
+      }
+      if (prop.categoryIndex > -1 && tabNames.indexOf(tabName) > -1) {
+        for (var j = 0; j < classRes.tabs.length; j++) {
+          if (classRes.tabs[j].name == tabName) {
+            classRes.tabs[j].index = prop.categoryIndex;
+          }
+        }
       }
       classRes.properties.push({
         name: this.properties[i].name,
