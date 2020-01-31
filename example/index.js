@@ -25,7 +25,7 @@ if (!window["%hammerhead%"]) {
   var mainColor = "#0065FF";
   var mainHoverColor = "#60C5FB";
   var textColor = "#4a4a4a";
-  var headerColor = "#7ff07f";
+  var headerColor = "#4a4a4a";
   var headerBackgroundColor = "#4a4a4a";
   var bodyContainerBackgroundColor = "#f8f8f8";
 
@@ -61,8 +61,6 @@ if (!window["%hammerhead%"]) {
       "rating", "imagepicker", "boolean", "html", "file", "expression"],
     pageEditMode: "single"
   };
-  // SurveyEditor.editorLocalization.getLocale("en").survey.dropQuestion =
-  //   "Drag and drop a question to start designing your form";
   var editor = new SurveyEditor.SurveyEditor("editorElement", options);
   editor.showToolbox = "right";
   editor.showPropertyGrid = "right";
