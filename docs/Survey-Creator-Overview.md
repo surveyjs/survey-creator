@@ -510,17 +510,20 @@ Let’s review several examples
 ```javascript
 //add a property to the base question class and as result to all questions
 //It has name: "tag", type "number" and the default value is 0
-Survey.Serializer.addProperty("question", { name: "tag:number", default: 0 });
-//Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0 });
+//Add it as the last property into "general" (first) category
+Survey.Serializer.addProperty("question", { name: "tag:number", default: 0, category: "general" });
+//Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0, category: "general" });
 //you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
 //It means that html property editor is used to set its value in the Survey Creator
-Survey.Serializer.addProperty("survey", "description:html");
+//We will add it into general category as the third property, visibleIndex is 2 (first is 0)
+Survey.Serializer.addProperty("survey", {name: "description:html", category: "general", visibleIndex: 2});
 //Add a colour string property into page.
 //The user will be able to select only predefined values from the dropdown
 //The default property type is "string", we may not set it.
 //The default value is not set and it is undefined by default.
-Survey.Serializer.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
+//We are adding it into new created "Appearance" category and make this category the second, categoryIndex is 1
+Survey.Serializer.addProperty("survey", {name: "color", choices: ["blue", "red", "green"], category: "Appearance", categoryIndex: 1});
 ```
 
 Here is the available attributes and callback functions in the property definition
@@ -618,6 +621,16 @@ Survey.Serializer.addProperty("text", {
 });
 ```
 ---
+**visibleIndex**
+
+Available since v1.5.4. An optional numeric property. By default, it is -1. Set it to 0 or bigger number to change the the property order inside the category in Element Editor.
+
+```javascript
+//Add description property into survey object and show it in general category as third property editor.
+Survey.Serializer.addProperty("survey", {name: "description:html", category: "general", visibleIndex: 2});
+```
+
+---
 **readOnly**
 
 An optional Boolean property. By default, it is false. Set it to true, if you want to make this property disabled in the Survey Creator inputs. 
@@ -625,6 +638,18 @@ An optional Boolean property. By default, it is false. Set it to true, if you wa
 The following code makes the choices and matrix rows/columns value property read-only.
 ```javascript
 Survey.Serializer.findProperty('itemvalue', "value").readOnly = true;
+```
+---
+**category**
+
+Available since v1.5.4. An optional string property. By default, it is empty. Set category for a new created property, otherwise it will be located in "other" category by default, the last category in the list. If this category doesn't exist then a new category will be created. You can control new category order by using **categoryIndex** property. Please note, you can't put it before "general" category that has **categoryIndex** equals ``-1``. 
+
+The following code creates new property and new category "Entity" and make this category next to "general".
+```javascript
+Survey.Serializer.addProperty("question", {
+  name: "targetEntity", category: "Entity", categoryIndex: 1
+  choices: ["", "Account", "Developement"]
+});
 ```
 ---
 **maxLength**
