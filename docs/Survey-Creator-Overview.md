@@ -511,19 +511,26 @@ Let’s review several examples
 //add a property to the base question class and as result to all questions
 //It has name: "tag", type "number" and the default value is 0
 //Add it as the last property into "general" (first) category
-Survey.Serializer.addProperty("question", { name: "tag:number", default: 0, category: "general" });
+Survey.Serializer.addProperty("question", 
+  { name: "tag:number", default: 0, category: "general" }
+);
 //Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0, category: "general" });
 //you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
 //It means that html property editor is used to set its value in the Survey Creator
 //We will add it into general category as the third property, visibleIndex is 2 (first is 0)
-Survey.Serializer.addProperty("survey", {name: "description:html", category: "general", visibleIndex: 2});
+Survey.Serializer.addProperty("survey", 
+  { name: "description:html", category: "general", visibleIndex: 2}
+);
 //Add a colour string property into page.
 //The user will be able to select only predefined values from the dropdown
 //The default property type is "string", we may not set it.
 //The default value is not set and it is undefined by default.
 //We are adding it into new created "Appearance" category and make this category the second, categoryIndex is 1
-Survey.Serializer.addProperty("survey", {name: "color", choices: ["blue", "red", "green"], category: "Appearance", categoryIndex: 1});
+Survey.Serializer.addProperty("survey", 
+  { name: "color", choices: ["blue", "red", "green"], 
+    category: "Appearance", categoryIndex: 1}
+);
 ```
 
 Here is the available attributes and callback functions in the property definition
@@ -536,7 +543,7 @@ The property name. It is the only required property
 ---
 **type**
 
-The property type. The list of avaiable property types you may in the next table.
+The property type. The list of avaiable property types you may in the next .
 
 ---
 **default**
@@ -558,32 +565,33 @@ It is an optional attribute. It makes sense for string and numeric property type
 From v1.0.94, you can get the choices from the web. Here is the example of adding the "country" getting its values from web service.
 ```javascript
 //It uses rest full service and choicesCallback function to tell property editor that choices are loaded from the web
-Survey.Serializer.addProperty("survey", { name: "country", choices: function(obj, choicesCallback) {
-    //We are going to use choicesCallback here
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://restcountries.eu/rest/v2/all");
-    xhr.setRequestHeader(
-    "Content-Type",
-    "application/x-www-form-urlencoded"
-    );
-    //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
-    xhr.onload = function() {
-    if (xhr.status === 200) {
-        var serverRes = JSON.parse(xhr.response);
-        var res = [];
-        //We will use ItemValue array here, since we want to have value different from display text
-        //If your value equals to display text, then you may simply return the array of strings.
-        res.push({ value: null });
-        for (var i = 0; i < serverRes.length; i++) {
-        var item = serverRes[i];
-        res.push({ value: item.alpha2Code, text: item.name });
+Survey.Serializer.addProperty("survey", { name: "country", category: "general", 
+    choices: function(obj, choicesCallback) {
+      //We are going to use choicesCallback here
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://restcountries.eu/rest/v2/all");
+      xhr.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+      );
+      //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+            var serverRes = JSON.parse(xhr.response);
+            var res = [];
+            //We will use ItemValue array here, since we want to have value different from display text
+            //If your value equals to display text, then you may simply return the array of strings.
+            res.push({ value: null });
+            for (var i = 0; i < serverRes.length; i++) {
+            var item = serverRes[i];
+            res.push({ value: item.alpha2Code, text: item.name });
+            }
+            //return the result into Survey Creator property editor
+            choicesCallback(res);
         }
-        //return the result into Survey Creator property editor
-        choicesCallback(res);
-    }
-    };
-  xhr.send();
-}
+      };
+    xhr.send();
+  }
 });
 ```
 ---
@@ -610,6 +618,8 @@ Available since v1.0.94. It is a function that has an obj parameter, the editing
 //It is visible if inputFormat property equals to "date*" values
 Survey.Serializer.addProperty("text", {
   name: "dateFormat",
+  category: "general",
+  visibleIndex: 7,
   dependsOn: ["inputType"],
   visibleIf: function(obj) {
     return (
@@ -627,7 +637,9 @@ Available since v1.5.4. An optional numeric property. By default, it is -1. Set 
 
 ```javascript
 //Add description property into survey object and show it in general category as third property editor.
-Survey.Serializer.addProperty("survey", {name: "description:html", category: "general", visibleIndex: 2});
+Survey.Serializer.addProperty("survey", {
+    name: "description:html", category: "general", visibleIndex: 2
+});
 ```
 
 ---
@@ -651,6 +663,34 @@ Survey.Serializer.addProperty("question", {
   choices: ["", "Account", "Developement"]
 });
 ```
+
+Available categories:
+
+| Category name | Apply to | visibleIndex |
+|---|---|---|
+| general | question, panel, page, survey | -1 |
+| logic | question, panel, page, survey | 100 |
+| layout | question, panel, page | 200 |
+| data | question | 300 |
+| validation | question, panel, page | 400 |
+| navigation | survey | 100 |
+| question | survey | 200 |
+| logic | survey | 300 |
+| data | survey | 400 |
+| validation | survey | 500 |
+| showOnCompleted | survey | 600 |
+| timer | survey | 700 |
+| columns | matrixdropdownbase (matrixdropdown, matrixdynamic) | 10 |
+| rows | matrixdropdownbase (matrixdropdown, matrixdynamic) | 11 |
+| choices | matrixdropdownbase (matrixdropdown, matrixdynamic) | 12 |
+| columns | matrix | 10 |
+| rows | matrix | 11 |
+| cells | matrix | 12 |
+| items | multipletext | 10 |
+| rateValues | rating | 10 |
+| choices | selectbase (dropdown, checkbox, radiogroup) | 10 |
+| choicesByUrl | selectbase (dropdown, checkbox, radiogroup) | 11 |
+
 ---
 **maxLength**
 
@@ -670,6 +710,7 @@ The following code add a custom property into question and limits the value of t
 ```javascript
 Survey.Serializer.addProperty("question", {
       name: "cost:number",
+      category: "general",
       default: 5,
       minValue: 0,
       maxValue: 100
@@ -682,16 +723,20 @@ Survey.Serializer.addProperty("question", {
 Available since v1.0.94. An optional array of strings. It contains properties names. You may use it together with visibleIf and choices attributes, where choices is a function and not a static array. If any property from this list is changed, then property editor calls visibleIf and choices functions to check if they return other values.
 
 The following code creates two new properties. The choices of the second property fully depends on property value of the first property.
+We will create a new "Entity" category and place two properties into it.
 ```javascript
 Survey.Serializer.addProperty("question", {
   name: "targetEntity",
-  choices: ["", "Account", "Developement"]
+  choices: ["", "Account", "Developement"],
+  category: "Entity",
+  categoryIndex: 1
 });
 //This property depends from targetEntity property.
 //If targetEntity property is empty then choices for targetField are empty as well.
 Survey.Serializer.addProperty("question", {
   name: "targetField",
   dependsOn: "targetEntity",
+  category: "Entity",
   choices: function(obj) {
     var choices = [];
     var entity = !!obj ? obj.targetEntity : null;
@@ -706,17 +751,20 @@ Survey.Serializer.addProperty("question", {
   }
 });
 ```
-This example is more complicated, since the second property retrieves its choices from a web service. And again, the second property choices depends on property value of the first proeprty.
+This example is more complicated, since the second property retrieves its choices from a web service. And again, the second property choices depends on property value of the first proeprty. We will create a new "Region" category and place two properties into it.
 ```javascript
 Survey.Serializer.addProperty("survey", {
   name: "region",
-  choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+  category: "Region",
+  categoryIndex: 1,
+  choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
 });
 //This property country depends on the selected region.
 //It allows to select all countries if region is empty or if it is not empty, only countries from this region
 //It uses rest full service and choicesCallback function to tell property editor that loading choices from the web service is completed
 Survey.Serializer.addProperty("survey", {
   name: "country",
+  category: "Region",
   dependsOn: "region",
   choices: function(obj, choicesCallback) {
     //We are going to use choicesCallback here
