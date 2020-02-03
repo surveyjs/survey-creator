@@ -1088,6 +1088,12 @@ QUnit.test("The onModified event is called on property changed", function(
   editor.koValue("some title");
   assert.equal(counter, 1, "1 modification - title changed");
 
+  creator.undoRedoManager.undo();
+  assert.equal(counter, 2, "2 modification un-done");
+
+  creator.undoRedoManager.redo();
+  assert.equal(counter, 3, "3 modification re-done");
+
   property = Survey.Serializer.findProperty("selectbase", "choices");
   propertyEditor = new SurveyObjectProperty(property, creator);
   propertyEditor.object = question;
@@ -1096,10 +1102,15 @@ QUnit.test("The onModified event is called on property changed", function(
   counter = 0;
   editor.onAddClick();
   assert.equal(counter, 1, "1 modification - after add");
+
+  creator.undoRedoManager.undo();
+  assert.equal(counter, 2, "2 modification un-done");
+
   editor.onDeleteClick(editor.origionalValue[0]);
-  assert.equal(counter, 2, "2 modification - after delete");
+  assert.equal(counter, 3, "3 modification - after delete");
+
   editor.onClearClick();
-  assert.equal(counter, 3, "3 modification - after clear");
+  assert.equal(counter, 4, "4 modification - after clear");
 });
 
 function getSurveyJson(): any {

@@ -131,14 +131,6 @@ export class SurveyObjectProperty {
     this.updateDependedProperties();
     this.propertyEditorOptions &&
       this.propertyEditorOptions.stopUndoRedoTransaction();
-    if (this.object) {
-      this.propertyEditorOptions &&
-        this.propertyEditorOptions.onPropertyValueChanged(
-          this.property,
-          this.object,
-          newValue
-        );
-    }
   }
 
   private updateDependedProperties() {

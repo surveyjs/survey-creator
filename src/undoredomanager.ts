@@ -1,6 +1,13 @@
 import * as Survey from "survey-knockout";
 import { EditableObject } from "./propertyEditors/editableObject";
 
+export interface IUndoRedoChange {
+  object: any;
+  propertyName: string;
+  oldValue: any;
+  newValue: any;
+}
+
 export class UndoRedoManager {
   public onQuestionNameChangedCallback: (
     obj: Survey.Base,
@@ -16,7 +23,7 @@ export class UndoRedoManager {
   ) {
     if (!this.hasPropertyInSerializer(sender, name)) return;
     if (EditableObject.isCopyObject(sender)) return;
-    if (this._keepSilense) return;
+    if (this._ignoreChanges) return;
 
     let transaction = this._preparingTransaction;
     let action = arrayChanges
@@ -33,7 +40,7 @@ export class UndoRedoManager {
     transaction.addAction(action);
   }
 
-  private _keepSilense = false;
+  private _ignoreChanges = false;
   private _preparingTransaction: Transaction = null;
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
@@ -65,6 +72,12 @@ export class UndoRedoManager {
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
   }
+  private notifyChangesFinished(transaction: Transaction) {
+    if (transaction.actions.length > 0 && transaction.actions[0]) {
+      !!this.changesFinishedCallback &&
+        this.changesFinishedCallback(transaction.actions[0].changes);
+    }
+  }
   canUndoRedoCallback() {}
   private transactionCounter = 0;
   startTransaction(name: string) {
@@ -78,6 +91,9 @@ export class UndoRedoManager {
     }
     if (!this._preparingTransaction || this.transactionCounter > 0) return;
     this._addTransaction(this._preparingTransaction);
+    if (this.transactionCounter === 0) {
+      this.notifyChangesFinished(this._preparingTransaction);
+    }
     this._preparingTransaction = null;
   }
   canUndo() {
@@ -87,12 +103,13 @@ export class UndoRedoManager {
     const currentTransaction = this._getCurrentTransaction();
     if (!this.canUndo()) return;
 
-    this._keepSilense = true;
+    this._ignoreChanges = true;
     currentTransaction.rollback();
-    this._keepSilense = false;
+    this._ignoreChanges = false;
 
     this._currentTransactionIndex--;
     this.canUndoRedoCallback();
+    this.notifyChangesFinished(currentTransaction);
   }
   canRedo() {
     return !!this._getNextTransaction();
@@ -101,19 +118,21 @@ export class UndoRedoManager {
     const nextTransaction = this._getNextTransaction();
     if (!this.canRedo()) return;
 
-    this._keepSilense = true;
+    this._ignoreChanges = true;
     nextTransaction.apply();
-    this._keepSilense = false;
+    this._ignoreChanges = false;
 
     this._currentTransactionIndex++;
     this.canUndoRedoCallback();
+    this.notifyChangesFinished(nextTransaction);
   }
+  public changesFinishedCallback: (changes: IUndoRedoChange) => void;
 }
 
 export class Transaction {
   constructor(private _name: string) {}
 
-  private _actions: any[] = [];
+  private _actions: UndoRedoAction[] = [];
 
   apply() {
     const actions = this._actions;
@@ -138,6 +157,18 @@ export class Transaction {
   isEmpty() {
     return this._actions.length === 0;
   }
+
+  get actions() {
+    return this._actions;
+  }
+}
+
+export class UndoRedoAction {
+  apply() {}
+  rollback() {}
+  get changes(): IUndoRedoChange {
+    return <any>{};
+  }
 }
 
 export class Action {
@@ -154,6 +185,15 @@ export class Action {
 
   rollback() {
     this._sender[this._propertyName] = this._oldValue;
+  }
+
+  get changes(): IUndoRedoChange {
+    return {
+      object: this._sender,
+      propertyName: this._propertyName,
+      oldValue: this._oldValue,
+      newValue: this._newValue
+    };
   }
 }
 
@@ -185,5 +225,13 @@ export class ArrayAction {
       [index, deleteCount].concat(itemsToAdd)
     );
     this._itemsToAdd = [].concat(itemsToAdd);
+  }
+  get changes(): IUndoRedoChange {
+    return {
+      object: this._sender,
+      propertyName: this._propertyName,
+      oldValue: this._deletedItems,
+      newValue: this._itemsToAdd
+    };
   }
 }

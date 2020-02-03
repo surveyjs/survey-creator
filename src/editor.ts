@@ -14,14 +14,18 @@ import {
 } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
-import { UndoRedoManager } from "./undoredomanager";
+import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "./questionToolbox";
 import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
-import { SurveyForDesigner, createAfterRenderHandler, createAfterRenderPageHandler } from "./surveyjsObjects";
+import {
+  SurveyForDesigner,
+  createAfterRenderHandler,
+  createAfterRenderPageHandler
+} from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
@@ -457,10 +461,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
    * <br/>
    * <br/> options.type: "TRANSLATIONS_CHANGED"
-   * <br/>
-   * <br/> options.type: "LOGIC_CHANGED"
-   * <br/> options.item: the survey logic item. It has expression and operations (list of operations) properties
-   * <br/> options.changeType: There are three possible values: "new", "modify" and "delete"
    */
   public onModified: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
@@ -912,13 +912,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       });
     };
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"));
-    this.logic.onChangedCallback = (item, changeType) => {
-      this.setModified({
-        type: "LOGIC_CHANGED",
-        item: item,
-        changeType: changeType
-      });
-    };
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -2212,6 +2205,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.undoRedoManager.canUndoRedoCallback = () => {
       this.updateKoCanUndoRedo();
     };
+    this.undoRedoManager.changesFinishedCallback = (
+      changes: IUndoRedoChange
+    ) => {
+      this.setModified({
+        type: "PROPERTY_CHANGED",
+        name: changes.propertyName,
+        target: changes.object,
+        oldValue: changes.oldValue,
+        newValue: changes.newValue
+      });
+    };
     this.updateKoCanUndoRedo();
     this.dragDropHelper = new DragDropHelper(
       <Survey.ISurvey>this.survey,
@@ -2242,7 +2246,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
     this.surveyValue().onAfterRenderPage.add((sender, options) => {
       afterRenderElementPageHandler(options.htmlElement, options.page);
-    });    
+    });
     this.surveyValue().onAfterRenderQuestion.add((sender, options) => {
       afterRenderElementHandler(
         options.htmlElement,

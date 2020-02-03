@@ -21,7 +21,6 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     };
     self.onClearClick = function(item) {
       self.origionalValue.splice(0, self.origionalValue.length);
-      this._notifyPropertyValueChanged();
     };
     self.onAddClick = function() {
       self.addItem();
@@ -126,7 +125,6 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     if (!!editorItem.onCreated) {
       editorItem.onCreated();
     }
-    this._notifyPropertyValueChanged();
     return editorItem;
   }
   protected createNewItem(): any {

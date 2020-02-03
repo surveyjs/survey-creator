@@ -782,6 +782,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   public saveEditableItem(): boolean {
     if (!this.editableItem || this.hasError()) return false;
+    !!this.options && this.options.startUndoRedoTransaction();
     this.expressionEditor.apply();
     this.editableItem.apply(this.expressionEditor.koValue());
     var isNew = this.koItems.indexOf(this.editableItem) < 0;
@@ -789,6 +790,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       this.koItems.push(this.editableItem);
     }
     this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
+    !!this.options && this.options.stopUndoRedoTransaction();
     return true;
   }
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
@@ -864,22 +866,28 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koMode(val);
   }
   public addNew() {
+    !!this.options && this.options.startUndoRedoTransaction();
     this.koEditableItem(new SurveyLogicItem(this));
     this.expressionEditor.koValue("");
     this.mode = "new";
+    !!this.options && this.options.stopUndoRedoTransaction();
   }
   public editItem(item: SurveyLogicItem) {
+    !!this.options && this.options.startUndoRedoTransaction();
     this.koEditableItem(item);
     this.expressionEditor.koValue(item.expression);
     this.mode = "edit";
+    !!this.options && this.options.stopUndoRedoTransaction();
   }
   public removeItem(item: SurveyLogicItem) {
+    !!this.options && this.options.startUndoRedoTransaction();
     item.apply("");
     var index = this.koItems.indexOf(item);
     if (index > -1) {
       this.koItems.splice(index, 1);
     }
     this.onItemChanged(item, "delete");
+    !!this.options && this.options.stopUndoRedoTransaction();
   }
   public addNewOperation(logicType: SurveyLogicType): SurveyLogicOperation {
     var element = logicType.createNewElement(this.survey);
