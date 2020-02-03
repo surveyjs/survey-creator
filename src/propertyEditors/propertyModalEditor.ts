@@ -152,11 +152,11 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     }
     obj[this.property.name] = newValue;
   }
-  protected getOrigionalValue(): any {
+  protected getOriginalValue(): any {
     if (!!this.modalEditableObject) {
       return this.modalEditableObject.editableObj[this.property.name];
     }
-    return super.getOrigionalValue();
+    return super.getOriginalValue();
   }
   protected performApply() {
     if (!!this.modalEditableObject) {

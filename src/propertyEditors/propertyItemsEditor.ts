@@ -21,10 +21,19 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     };
     self.onClearClick = function(item) {
       self.origionalValue.splice(0, self.origionalValue.length);
+      this._notifyPropertyValueChanged();
     };
     self.onAddClick = function() {
       self.addItem();
     };
+  }
+  private _notifyPropertyValueChanged() {
+    this.options &&
+      this.options.onPropertyValueChanged(
+        this.property,
+        this.object,
+        this.origionalValue
+      );
   }
   public getValueText(value: any): string {
     var len = value ? value.length : 0;
@@ -76,6 +85,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       this.onItemDeleted(obj, index);
     }
     this.deleteViewItemIndex(obj);
+    this._notifyPropertyValueChanged();
   }
   protected onItemDeleted(obj: any, index: number) {}
   public hasError(): boolean {
@@ -116,6 +126,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     if (!!editorItem.onCreated) {
       editorItem.onCreated();
     }
+    this._notifyPropertyValueChanged();
     return editorItem;
   }
   protected createNewItem(): any {

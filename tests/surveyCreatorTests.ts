@@ -3,6 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../src/editor";
 import { PagesEditor } from "../src/pages-editor";
 import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
+import { SurveyObjectProperty } from "../src/objectProperty";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -1049,7 +1050,7 @@ QUnit.test("showModalOnElementEditing property", function(assert) {
 QUnit.test("pageEditMode property", function(assert) {
   var options = {
     pageEditMode: "single"
-  }
+  };
   var creator = new SurveyCreator(undefined, options);
   assert.equal(
     creator.topContainer.indexOf("pages-editor"),
@@ -1062,6 +1063,43 @@ QUnit.test("pageEditMode property", function(assert) {
     1,
     "Pages editor should be shown"
   );
+});
+
+QUnit.test("The onModified event is called on property changed", function(
+  assert
+) {
+  var creator = new SurveyCreator(undefined);
+  var counter;
+  creator.onModified.add(() => {
+    counter++;
+  });
+  var survey = creator.survey;
+
+  survey.addNewPage("p");
+  var question = <Survey.QuestionRadiogroupModel>(
+    survey.pages[0].addNewQuestion("radiogroup", "q1")
+  );
+  var property = Survey.Serializer.findProperty("question", "title");
+  var propertyEditor = new SurveyObjectProperty(property, creator);
+  propertyEditor.object = question;
+  var editor: any = propertyEditor.editor;
+
+  counter = 0;
+  editor.koValue("some title");
+  assert.equal(counter, 1, "1 modification - title changed");
+
+  property = Survey.Serializer.findProperty("selectbase", "choices");
+  propertyEditor = new SurveyObjectProperty(property, creator);
+  propertyEditor.object = question;
+  editor = propertyEditor.editor;
+
+  counter = 0;
+  editor.onAddClick();
+  assert.equal(counter, 1, "1 modification - after add");
+  editor.onDeleteClick(editor.origionalValue[0]);
+  assert.equal(counter, 2, "2 modification - after delete");
+  editor.onClearClick();
+  assert.equal(counter, 3, "3 modification - after clear");
 });
 
 function getSurveyJson(): any {

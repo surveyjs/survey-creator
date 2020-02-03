@@ -384,6 +384,7 @@ QUnit.test("UndoRedoManager undo page change by one action", function(assert) {
     onPropertyEditorObjectSetCallback: () => {},
     onIsEditorReadOnlyCallback: () => {},
     onValueChangingCallback: () => {},
+    onPropertyValueChanged: () => {},
     startUndoRedoTransaction: () => undoRedoManager.startTransaction(""),
     stopUndoRedoTransaction: () => undoRedoManager.stopTransaction()
   });
