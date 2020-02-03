@@ -42,6 +42,11 @@ export interface ISurveyObjectEditorOptions {
     value: any
   ): string;
   onValueChangingCallback(options: any);
+  onPropertyValueChanged(
+    property: Survey.JsonObjectProperty,
+    obj: any,
+    newValue: any
+  );
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -225,9 +230,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.setObjectCore(value);
   }
   public get origionalValue(): any {
-    return this.getOrigionalValue();
+    return this.getOriginalValue();
   }
-  protected getOrigionalValue(): any {
+  protected getOriginalValue(): any {
     return !!this.objectValue ? this.objectValue[this.property.name] : null;
   }
   protected setObjectCore(value: any) {
