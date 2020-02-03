@@ -449,7 +449,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "question", index: 200 },
         { name: "logic", index: 300 },
         { name: "data", index: 400 },
-        { name: "validation", index: 400 },
+        { name: "validation", index: 500 },
         { name: "showOnCompleted", index: 600 },
         { name: "timer", index: 700 }
       ]
