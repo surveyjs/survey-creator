@@ -1,10 +1,6 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
-import {
-  SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
-} from "./propertyEditorBase";
+import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyHelper } from "../surveyHelper";
 
