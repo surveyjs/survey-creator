@@ -1113,6 +1113,18 @@ QUnit.test("The onModified event is called on property changed", function(
   assert.equal(counter, 4, "4 modification - after clear");
 });
 
+QUnit.test(
+  "Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657",
+  function(assert) {
+    try {
+      var creator = new SurveyCreator(undefined, { showPropertyGrid: "left" });
+      assert.ok(!!creator);
+    } catch {
+      assert.ok(false, "Exception has occured in constructor");
+    }
+  }
+);
+
 function getSurveyJson(): any {
   return {
     pages: [
