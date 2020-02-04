@@ -209,7 +209,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     var res = new Array<Survey.ItemValue>();
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
-      if (!!res[i].text) continue;
+      if (!!res[i].text && res[i].text !== res[i].value) continue;
       var value = res[i].value;
       var text = this.getValueText(value);
       if (text != value) {
