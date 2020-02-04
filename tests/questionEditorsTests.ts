@@ -639,6 +639,23 @@ QUnit.test("Question editor: change copied object", function(assert) {
     "Locale set into editable survey"
   );
 });
+QUnit.test("Use localized text for dropdown property editor", function(assert) {
+  var survey = new Survey.Survey();
+  var propLocale = new SurveyDropdownPropertyEditor(
+    Survey.Serializer.findProperty("survey", "locale")
+  );
+  propLocale.object = survey;
+  var choices = propLocale.koChoices();
+  var item = null;
+  for (var i = 0; i < choices.length; i++) {
+    if (choices[i].value == "en") {
+      item = choices[i];
+      break;
+    }
+  }
+  assert.ok(item, "English locale is found");
+  assert.equal(item.text, "english", "Use text");
+});
 QUnit.test(
   "Question editor: copied object should have parent property, bug: https://surveyjs.answerdesk.io/ticket/details/T2531",
   function(assert) {
