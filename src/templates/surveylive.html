@@ -13,7 +13,11 @@
         <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
             <label  for="testSurveyLocale" data-bind="text: localeText"></label>
             <span id="testSurveyLocale">
-                <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
+                <select
+                    onmousewheel="return false;"
+                    class="form-control"
+                    data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value', attr: { 'aria-label': localeText }">
+                </select>
             </span>
         </span>
         <label id="testShowInvisibleElements" data-bind="visible: koShowInvisibleElementsInTestSurveyTab">

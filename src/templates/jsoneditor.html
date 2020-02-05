@@ -1,6 +1,9 @@
 ﻿<script type="text/html" id="jsoneditor">
     <div data-bind="visible: !hasAceEditor">
-        <textarea class="svd_json_editor_area" data-bind="textInput:koText, disable: readOnly"></textarea>
+        <textarea
+            class="svd_json_editor_area"
+            data-bind="textInput:koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
+        </textarea>
         <!-- ko foreach: koErrors -->
         <div>
             <span>Error: </span><span data-bind="text: text"></span>
