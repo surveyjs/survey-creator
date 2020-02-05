@@ -3,7 +3,11 @@
         <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
             <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
             <span id="testSurveyPageChanged">
-                <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+                <select
+                    onmousewheel="return false;"
+                    class="form-control"
+                    data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable, attr: { 'aria-label': selectPageText }">
+                </select>
             </span>
         </span>
         <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
