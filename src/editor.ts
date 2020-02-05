@@ -801,6 +801,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koShowOptions = ko.observable();
     this.koGenerateValidJSON = ko.observable(true);
     this.koDesignerHeight = ko.observable();
+    this.koSelectedObject = ko.observable();
     this.setOptions(options);
     this.koCanDeleteObject = ko.observable(false);
     this.koCanUndo = ko.observable(false);
@@ -817,7 +818,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.koObjects = ko.observableArray();
     window["sel"] = this.koSelectedObject;
-    this.koSelectedObject = ko.observable();
     this.koSelectedObject.subscribe(function(newValue) {
       self.selectedObjectChanged(!!newValue ? newValue.value : null);
     });
