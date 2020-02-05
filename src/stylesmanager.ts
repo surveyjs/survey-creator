@@ -2,7 +2,7 @@ import * as Survey from "survey-knockout";
 import * as ko from "knockout";
 
 export class StylesManager {
-  private static SurveyJSStylesSheetId = "surveyjs";
+  private static SurveyJSStylesSheetId = "surveyjscreator";
 
   public static Styles: { [key: string]: string } = {};
 
