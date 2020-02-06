@@ -32,7 +32,8 @@
     <!-- ko foreach: { data: tabs, as: 'content' } -->
     <div
       class="svd-designer-tabbed-container__tab-header"
-      data-bind="text: $parent.context.getLocString('ed.' + content), click: function() { $parent.activeTab(content); }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === $parent.activeTab() }"
+      data-bind="text: $parent.context.getLocString('ed.' + content), click: function() { $parent.activeTab(content); }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === $parent.activeTab() }, key2click"
+      tabindex="0"
     ></div>
     <!-- /ko -->
   </div>
