@@ -51,8 +51,12 @@ export class TitleInplaceEditor {
     }
   }
 
-  constructor(protected target: any, protected name: string,
-    protected rootElement, public placeholder: string = "") {
+  constructor(
+    protected target: any,
+    protected name: string,
+    protected rootElement,
+    public placeholder: string = ""
+  ) {
     this.editingName(target[name]);
     this.prevName(target[name]);
     this.forNeibours(
@@ -74,7 +78,6 @@ export class TitleInplaceEditor {
     this.prevName(this.target[this.name]);
   }
 
-
   hideEditor = () => {
     this.isEditing(false);
     this.forNeibours(element => {
@@ -91,7 +94,9 @@ export class TitleInplaceEditor {
     });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
     resizeInput(inputElem);
-    setTimeout(function() { inputElem.focus(); }, 10);
+    setTimeout(function() {
+      inputElem.focus();
+    }, 10);
   };
   postEdit = () => {
     if (this.prevName() !== this.editingName()) {
@@ -129,9 +134,13 @@ ko.components.register("title-editor", {
       );
       ko.computed(() => {
         //TO REVIEW THIS CRUTCH
-        if (property.serializationProperty !== property.name 
-          && !!params.model[property.serializationProperty]) {
-          ko.unwrap(params.model[property.serializationProperty].koRenderedHtml);
+        if (
+          property.serializationProperty !== property.name &&
+          !!params.model[property.serializationProperty]
+        ) {
+          ko.unwrap(
+            params.model[property.serializationProperty].koRenderedHtml
+          );
         }
         model.prevName(ko.unwrap(params.model[params.name]));
         model.editingName(ko.unwrap(params.model[params.name]));
@@ -156,15 +165,25 @@ ko.components.register("title-editor", {
 });
 
 export var titleAdorner = {
+  pageTitleEditable: true,
   getMarkerClass: model => {
+    if (
+      typeof model.getType === "function" &&
+      model.getType() === "page" &&
+      !titleAdorner.pageTitleEditable
+    ) {
+      return "";
+    }
     return "title_editable";
   },
   getElementName: model => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
-    var placeholder = model.getType() === "page" ? editorLocalization.getString("pe.titlePlaceholder") : "";
+    var placeholder =
+      model.getType() === "page"
+        ? editorLocalization.getString("pe.titlePlaceholder")
+        : "";
     var decoration = document.createElement("span");
-    decoration.innerHTML =
-      `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
@@ -207,10 +226,12 @@ export var descriptionAdorner = {
   },
   getElementName: model => "description",
   afterRender: (elements: HTMLElement[], model, editor) => {
-    var placeholder = model.getType() === "page" ? editorLocalization.getString("pe.descriptionPlaceholder") : "";
+    var placeholder =
+      model.getType() === "page"
+        ? editorLocalization.getString("pe.descriptionPlaceholder")
+        : "";
     var decoration = document.createElement("span");
-    decoration.innerHTML =
-      `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();

@@ -107,7 +107,11 @@ export {
 } from "../translation";
 
 //adorners
-export { titleAdorner, itemTitleAdorner } from "../adorners/title-editor";
+export {
+  titleAdorner,
+  itemTitleAdorner,
+  descriptionAdorner
+} from "../adorners/title-editor";
 export { itemAdorner, itemDraggableAdorner } from "../adorners/item-editor";
 export { labelAdorner } from "../adorners/label-editor";
 export {

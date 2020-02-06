@@ -69,3 +69,21 @@ QUnit.test(
     });
   }
 );
+
+QUnit.test("titleAdorner.pageTitleEditable", function(assert) {
+  var pageMock = {
+    getType: () => "page"
+  };
+  assert.ok(titleAdorner.pageTitleEditable);
+  assert.equal(
+    titleAdorner.getMarkerClass(pageMock),
+    "title_editable",
+    "Allow to edit page title"
+  );
+  titleAdorner.pageTitleEditable = false;
+  assert.equal(
+    titleAdorner.getMarkerClass(pageMock),
+    "",
+    "Disable edit page title"
+  );
+});
