@@ -155,7 +155,9 @@ ko.components.register("title-editor", {
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
+        var oldValue = params.model[params.name];
         params.model[params.name] = newValue;
+        params.editor.onPropertyChanged(params.model, property, oldValue);
         params.editor.onPropertyValueChanged(property, params.model, newValue);
       };
       return model;
