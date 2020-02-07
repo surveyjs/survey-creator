@@ -71,11 +71,14 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   onValueChangingCallback(options: any) {
     if (!!this.doValueChangingCallback) this.doValueChangingCallback(options);
   }
+  public lastPropertyValueChangedName;
   onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any
-  ) {}
+  ) {
+    this.lastPropertyValueChangedName = property.name;
+  }
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,

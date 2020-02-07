@@ -29,6 +29,11 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     );
     contentEditor.onPropertyChanged = (prop: Survey.JsonObjectProperty) => {
       this.changeChoicesByUrlProp(prop.name);
+      this.options.onPropertyValueChanged(
+        this.property,
+        this.object,
+        this.object[prop.name]
+      );
     };
     this.koContentEditor(contentEditor);
   }

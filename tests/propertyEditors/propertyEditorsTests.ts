@@ -1208,6 +1208,7 @@ QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
     Survey.Serializer.findProperty("selectbase", "choicesByUrl")
   );
   editor.object = question;
+  editor.options = new EditorOptionsTests();
   editor.beforeShow();
   var testQuestion = <Survey.QuestionDropdown>(
     editor.survey.getAllQuestions()[0]
@@ -1225,6 +1226,11 @@ QUnit.test("SurveyPropertyResultfullEditor test", function(assert) {
     testQuestion.choicesByUrl.path,
     "path1",
     "path is set to test question"
+  );
+  assert.equal(
+    editor.options["lastPropertyValueChangedName"],
+    "choicesByUrl",
+    "onPropertyValueChanged has been called"
   );
 });
 QUnit.test("Triggers property editor", function(assert) {
