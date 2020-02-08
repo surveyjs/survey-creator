@@ -84,6 +84,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_showEmbededSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showLogicTab: true,_|Set this option to true to show the Logic Tab. This tab is hidden by default. It allows to view and edit the survey logic (expressions) in one place.|
+|_showElementEditorAsPropertyGrid: true_|Set this property to false to show property grid in old style, without categories, and allow to show Element Editor as modal window.|
 |_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
 |_showElementEditorAsPropertyGrid_: true,_|Set this option to true to show the old property grid, before v1.5. It shows all properties, sorted by property name by default and shows property title and editor in one row.|
 |_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
