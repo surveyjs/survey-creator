@@ -7,7 +7,6 @@ import {
 import { editorLocalization } from "../editorLocalization";
 import "./question-actions.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./question-actions.html");
-import { QuestionConverter } from "../questionconverter";
 
 export class QuestionActionsAdorner {
   constructor(public question, private editor) {
@@ -41,7 +40,7 @@ ko.components.register("question-actions", {
 
 export var questionActionsAdorner = {
   getMarkerClass: model => {
-    return !model.isPanel ? "question_actions" : "";
+    return !model.isPanel && !model.isPage ? "question_actions" : "";
   },
   getElementName: model => "mainRoot",
   afterRender: (elements: HTMLElement[], model, editor) => {
@@ -60,7 +59,10 @@ registerAdorner("question-actions", questionActionsAdorner);
 
 export var panelActionsAdorner = {
   getMarkerClass: model => {
-    return !!model.isPanel && !!model.parent && model.getType() !== "flowpanel"
+    return !!model.isPanel &&
+      !!model.parent &&
+      model.getType() !== "flowpanel" &&
+      model.getType() !== "page"
       ? "panel_actions"
       : "";
   },

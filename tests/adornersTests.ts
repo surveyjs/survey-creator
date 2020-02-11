@@ -3,6 +3,10 @@ import * as Survey from "survey-knockout";
 import { applyAdornerClass } from "../src/surveyjsObjects";
 import { titleAdorner } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
+import {
+  questionActionsAdorner,
+  panelActionsAdorner
+} from "../src/adorners/question-actions";
 import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("Adorners Tests");
@@ -87,3 +91,68 @@ QUnit.test("titleAdorner.pageTitleEditable", function(assert) {
     "Disable edit page title"
   );
 });
+
+QUnit.test(
+  "panelActionsAdorner.getMarkerClass - T3379 - Custom adorner rendering bug",
+  function(assert) {
+    var pageMock = {
+      parent: true,
+      isPanel: true,
+      getType: () => "page"
+    };
+    var panelMock = {
+      parent: true,
+      isPanel: true,
+      getType: () => "panel"
+    };
+    assert.equal(
+      panelActionsAdorner.getMarkerClass(pageMock),
+      "",
+      "Don't inject into page"
+    );
+    assert.equal(
+      panelActionsAdorner.getMarkerClass(panelMock),
+      "panel_actions",
+      "Inject into panel"
+    );
+  }
+);
+
+QUnit.test(
+  "questionActionsAdorner.getMarkerClass - T3379 - Custom adorner rendering bug",
+  function(assert) {
+    var pageMock = {
+      parent: true,
+      isPanel: false,
+      isPage: true,
+      getType: () => "page"
+    };
+    var panelMock = {
+      parent: true,
+      isPanel: true,
+      isPage: false,
+      getType: () => "panel"
+    };
+    var questionMock = {
+      parent: true,
+      isPanel: false,
+      isPage: false,
+      getType: () => "question"
+    };
+    assert.equal(
+      questionActionsAdorner.getMarkerClass(pageMock),
+      "",
+      "Don't inject into page"
+    );
+    assert.equal(
+      questionActionsAdorner.getMarkerClass(panelMock),
+      "",
+      "Don't inject into panel"
+    );
+    assert.equal(
+      questionActionsAdorner.getMarkerClass(questionMock),
+      "question_actions",
+      "Inject into question"
+    );
+  }
+);
