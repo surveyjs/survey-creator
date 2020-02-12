@@ -27,7 +27,7 @@
     <div data-bind="visible: koIsEditorShowing() || !koIsCompactMode()">
         <div class="form-inline form-group">
             <div class="form-control svd_custom_select" style="width: 60%;max-width:300px">
-                <select onmousewheel="return false;" data-bind="if: true, value: koConditionQuestion">
+                <select onmousewheel="return false;" data-bind="if: true, value: koConditionQuestion, attr: { 'aria-label': addConditionQuestionOptions }">
                     <option value="" data-bind="text: addConditionQuestionOptions, attr: {title: addConditionQuestionOptions}" ></option>
                     <!-- ko foreach: koConditionQuestions -->
                     <option data-bind="value: name, text: (text || '').substring(0, 80), attr: {title: text}" ></option>
@@ -35,7 +35,10 @@
                 </select>
             </div>
             <div class="form-control svd_custom_select" style="width: 39%;max-width:200px">
-                <select onmousewheel="return false;" data-bind="options:koVisibleOperators, optionsValue: 'name', optionsText: 'text', value:koConditionOperator, enable: !!koConditionQuestion()"></select>
+                <select
+                    onmousewheel="return false;"
+                    data-bind="options:koVisibleOperators, optionsValue: 'name', optionsText: 'text', value:koConditionOperator, enable: !!koConditionQuestion(), attr: { 'aria-label': 'Condition selector' }">
+                </select>
             </div>
         </div>
         <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
