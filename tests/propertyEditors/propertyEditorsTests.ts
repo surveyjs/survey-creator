@@ -151,6 +151,20 @@ QUnit.test("propertyEditor.displayName", function(assert) {
     "The displayName was set correctly"
   );
 });
+QUnit.test("propertyEditor.editingValue - SurveyPropertyModalEditor", function(
+  assert
+) {
+  var property = Survey.Serializer.findProperty("question", "title");
+  var propertyEditor = new SurveyPropertyTextEditor(property);
+  propertyEditor.setObject({});
+  assert.equal(propertyEditor.editingValue, undefined, "Initial value");
+  propertyEditor.editingValue = "Test";
+  assert.equal(propertyEditor.editingValue, "Test", "Entered value");
+  assert.equal(propertyEditor.koValue(), "Test", "Entered ko value");
+  propertyEditor.koValue("Test1");
+  assert.equal(propertyEditor.koValue(), "Test1", "Entered ko value 1");
+  assert.equal(propertyEditor.editingValue, "Test1", "Entered value 1");
+});
 QUnit.test("Create custom property editor", function(assert) {
   var propertyValue = null;
   var widgetJSON = {
