@@ -1657,6 +1657,35 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
   );
 });
 
+QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function(assert) {
+  var survey = new Survey.Survey();
+  var p = survey.addNewPage();
+  var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+  q.choices = [1, 2, 3];
+  survey.locale = "en";
+  q.choices[0].text = "English 1";
+
+  var property = Survey.Serializer.findProperty("selectbase", "choices");
+  var propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property)
+  );
+  propEditor.object = q;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.koShowHeader(),
+    true,
+    "There are several editable columns, we are rendering header"
+  );
+  Survey.Serializer.findProperty("itemvalue", "text").visible = false;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.koShowHeader(),
+    false,
+    "There are several editable columns, we are not rendering header"
+  );
+  Survey.Serializer.findProperty("itemvalue", "text").visible = true;
+});
+
 QUnit.test(
   "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
   function(assert) {

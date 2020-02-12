@@ -9,7 +9,7 @@
       <!-- /ko -->
       <!--ko if: origionalValue.length > 0 -->
       <table class="svd_items_table">
-          <thead>
+          <thead data-bind="visible: koShowHeader">
               <tr>
                   <th></th>
                   <!-- ko foreach: columns -->

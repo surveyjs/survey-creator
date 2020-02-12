@@ -22,12 +22,14 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   onEditItemClick: any;
   onReturnToListClick: any;
   koEditorName: any;
+  koShowHeader: any;
   private koColumnsValue = ko.observable<
     Array<SurveyNestedPropertyEditorColumn>
   >([]);
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     var self = this;
+    this.koShowHeader = ko.observable(true);
     this.koEditItem = ko.observable(null);
     this.koIsList = ko.observable(true);
     this.koActiveView = ko.observable("form");
@@ -54,6 +56,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   public beforeShow() {
     super.beforeShow();
     this.createColumns();
+    this.koShowHeader(this.canShowHeader());
     this.koEditItem(null);
   }
   protected createColumns() {
@@ -63,6 +66,9 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       result.push(new SurveyNestedPropertyEditorColumn(properties[i]));
     }
     this.koColumnsValue(result);
+  }
+  private canShowHeader(): boolean {
+    return this.koColumnsValue().length > 1;
   }
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     return [];
