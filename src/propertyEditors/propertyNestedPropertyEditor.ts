@@ -188,7 +188,7 @@ export class SurveyNestedPropertyEditorItem {
       this.options,
       this.getClassName()
     );
-    return properties.getTabs().length > 0;
+    return !properties.isEmpty;
   }
   public hideItemEditor() {
     this.itemEditorValue = null;

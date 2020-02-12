@@ -1657,6 +1657,35 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
   );
 });
 
+QUnit.test(
+  "SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible",
+  function(assert) {
+    var survey = new Survey.Survey();
+    var p = survey.addNewPage();
+    var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+    q.choices = [1, 2, 3];
+    survey.locale = "en";
+    q.choices[0].text = "English 1";
+    Survey.Serializer.findProperty("itemvalue", "visibleIf").visible = false;
+    Survey.Serializer.findProperty("itemvalue", "enableIf").visible = false;
+
+    var property = Survey.Serializer.findProperty("selectbase", "choices");
+    var propEditor = <SurveyPropertyItemValuesEditor>(
+      SurveyPropertyEditorFactory.createEditor(property)
+    );
+    propEditor.object = q;
+    propEditor.beforeShow();
+    var itemViewModel = propEditor.createItemViewModel(q.choices[0]);
+    assert.equal(
+      itemViewModel.koHasDetails(),
+      false,
+      "Detail buttons are hidden"
+    );
+    Survey.Serializer.findProperty("itemvalue", "visibleIf").visible = true;
+    Survey.Serializer.findProperty("itemvalue", "enableIf").visible = true;
+  }
+);
+
 QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function(assert) {
   var survey = new Survey.Survey();
   var p = survey.addNewPage();
