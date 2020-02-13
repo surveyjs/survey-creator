@@ -5,6 +5,8 @@ import {
   SurveyPropertyConditionEditor
 } from "../../src/propertyEditors/propertyConditionEditor";
 import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
+import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
+import { SurveyElementEditorContent } from "../../src/questionEditors/questionEditor";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
@@ -562,6 +564,54 @@ QUnit.test(
       editor.koHasValueSurvey(),
       true,
       "Value Survey exists for all question types"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, could not edit value for row.column1 on editing column, Bug# T3376 (customer marked it private)",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        {
+          name: "question1",
+          type: "matrixdynamic",
+          columns: [{ name: "Column1" }, { name: "Column2" }],
+          choices: [1, 2, 3, 4, 5]
+        }
+      ]
+    });
+    var question = <Survey.QuestionMatrixDynamic>(
+      survey.getQuestionByName("question1")
+    );
+    var property = Survey.Serializer.findProperty(
+      "matrixdropdownbase",
+      "columns"
+    );
+    var columnsEditor = new SurveyPropertyDropdownColumnsEditor(property);
+    columnsEditor.object = question;
+    columnsEditor.beforeShow();
+    var itemViewModel = columnsEditor.createItemViewModel(question.columns[0]);
+    columnsEditor.onEditItemClick(itemViewModel);
+    var colDetailEditor = <SurveyElementEditorContent>(
+      columnsEditor.koEditItem().itemEditor
+    );
+    var visEditor = <SurveyPropertyConditionEditor>(
+      colDetailEditor.getPropertyEditorByName("visibleIf").editor
+    );
+    assert.ok(visEditor, "visibleIf editor is here");
+    assert.equal(
+      visEditor.koHasValueSurvey(),
+      false,
+      "Value Survey is not ready"
+    );
+    visEditor.koConditionQuestion("row.Column2");
+    assert.equal(visEditor.koHasValueSurvey(), true, "Value Survey is ready");
+    var valSurvey = visEditor.koValueSurvey();
+    assert.equal(
+      valSurvey.getAllQuestions()[0].getType(),
+      "dropdown",
+      "value question is dropdown"
     );
   }
 );

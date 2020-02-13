@@ -354,7 +354,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     var path = "";
     var question = this.getQuestionByName(questionName);
     if (!question) return null;
-    var path = questionName.substr(question.name.length);
+    if (questionName.indexOf(question.name) == 0) {
+      path = questionName.substr(question.name.length);
+    }
+    if (questionName.indexOf("row.") == 0) {
+      path = questionName.substr("row.".length);
+    }
     if (!!path && path[0] == ".") {
       path = path.substr(1);
     }
