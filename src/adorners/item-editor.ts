@@ -369,6 +369,13 @@ export var itemDraggableAdorner = {
         })
       );
     }
+
+    editor.onAdornerRenderedCallback(
+      model,
+      "choices-draggable",
+      itemsRoot[0],
+      itemsRoot
+    );
   }
 };
 
