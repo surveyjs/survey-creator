@@ -5,6 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 var template = require("html-loader?interpolate!val-loader!./designer-container.html");
 
 export class DesignerContainerModel {
+  private _changedSubscription: ko.Subscription;
   private _prevWidth: any;
   private _prevSurfaceWidth: any;
   private _element: HTMLDivElement;
@@ -33,7 +34,7 @@ export class DesignerContainerModel {
         componentInfo.element.style.width = this.size();
       }
     });
-    changed.subscribe(() => {
+    this._changedSubscription = changed.subscribe(() => {
       this.isOpen(componentInfo.element.offsetWidth > 25);
       this.visible(this.isOpen());
     });
@@ -63,6 +64,9 @@ export class DesignerContainerModel {
     return editorLocalization.getString(str);
   }
   size: any;
+  dispose() {
+    this._changedSubscription.dispose();
+  }
 }
 
 ko.components.register("svd-designer-container", {
