@@ -367,6 +367,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
       question && question.getConditionJson
         ? question.getConditionJson(operator, path)
         : null;
+    if (!!json && json.type == "radiogroup") {
+      json.type = "dropdown";
+    }
     if (!!json && operator == "anyof" && convertOnAnyOf) {
       if (!this.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";

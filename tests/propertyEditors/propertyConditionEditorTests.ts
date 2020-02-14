@@ -390,6 +390,32 @@ QUnit.test(
 );
 
 QUnit.test(
+  "SurveyPropertyConditionEditor, use dropdown question instead of readiogroup for editing values",
+  function(assert) {
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var survey = new Survey.Survey();
+    var page = survey.addNewPage("p");
+    var question = <Survey.QuestionDropdown>page.addNewQuestion("text", "q1");
+    var question2 = <Survey.QuestionRadiogroup>(
+      page.addNewQuestion("radiogroup", "q2")
+    );
+    question2.choices = [1, 2, 3, 4];
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+
+    editor.koConditionQuestion("q2");
+    assert.equal(editor.koHasValueSurvey(), true, "There is value survey");
+    var valueSurvey = editor.koValueSurvey();
+    assert.equal(
+      valueSurvey.getAllQuestions()[0].getType(),
+      "dropdown",
+      "Use dropdown instead of radiogroup"
+    );
+  }
+);
+
+QUnit.test(
   "SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button",
   function(assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1093,7 +1119,7 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
   var survey = new Survey.Survey({
     elements: [
       { name: "q1", type: "text" },
-      { name: "question1", type: "radiogroup", choices: ["item1", "item2"] }
+      { name: "question1", type: "dropdown", choices: ["item1", "item2"] }
     ]
   });
   var question = survey.getQuestionByName("q1");
@@ -1107,8 +1133,8 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
       .koValueSurvey()
       .getAllQuestions()[0]
       .getType(),
-    "radiogroup",
-    "It is radiogroup by default"
+    "dropdown",
+    "It is dropdown by default"
   );
   editor.koConditionOperator("anyof");
   assert.equal(
@@ -1125,8 +1151,8 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
       .koValueSurvey()
       .getAllQuestions()[0]
       .getType(),
-    "radiogroup",
-    "It is radiogroup again"
+    "dropdown",
+    "It is dropdown again"
   );
 });
 QUnit.test(
