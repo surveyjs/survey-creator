@@ -8,9 +8,67 @@ import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 import * as editorLocalization from "../editorLocalization";
 
+export class ConditionEditorItem {
+  koQuestion: any;
+  koOperator: any;
+  koVisibleOperators: any;
+  koValue: any;
+  koValueSurvey: any;
+  koConjunction: any;
+  constructor() {
+    this.koQuestion = ko.observable("");
+    this.koOperator = ko.observable("");
+    this.koValue = ko.observable(null);
+    this.koConjunction = ko.observable("and");
+    this.koValueSurvey = ko.observable(null);
+    this.koVisibleOperators = ko.observableArray();
+  }
+  public get conjunction(): string {
+    return this.koConjunction();
+  }
+  public set conjunction(val: string) {
+    this.koConjunction(val);
+  }
+  public get questionName(): string {
+    return this.koQuestion();
+  }
+  public set questionName(val: string) {
+    this.koQuestion(val);
+  }
+  public get operator(): string {
+    return this.koOperator();
+  }
+  public set operator(val: string) {
+    this.koOperator(val);
+  }
+  public get value() {
+    return this.koValue();
+  }
+  public set value(val: any) {
+    this.koValue(val);
+  }
+  public toString(): string {
+    return "";
+    /*
+    if (!this.canAddCondition(questionName, operator)) return "";
+    var text =
+      "{" +
+      this.getQuestionValueByName(questionName) +
+      "} " +
+      this.getAddConditionOperator(operator);
+    if (this.canShowValueByOperator(operator)) {
+      text += " " + this.getAddConditionValue();
+    }
+    return text;
+    */
+  }
+}
+
 export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   public showHelpText: boolean = true;
   public koTextValue: any;
+  koEditorItems: any;
+  koCanParseExpression: any;
   koIsConditionValid: any;
   koConditionQuestions: any;
   koConditionQuestion: any;
@@ -36,6 +94,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
   ) {
     super(property);
     this.koTextValue = ko.observable();
+    this.koEditorItems = ko.observableArray([]);
+    this.koCanParseExpression = ko.observable(true);
     if (!SurveyPropertyConditionEditor.emptySurvey) {
       SurveyPropertyConditionEditor.emptySurvey =
         !!this.options && this.options.createSurvey({}, "conditionEditor");
@@ -127,6 +187,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     this.koConditionQuestion("");
     this.addConditionQuestionsHash = {};
     this.koConditionQuestions(this.allConditionQuestions);
+    this.onkoTextValueChanged(this.koValue());
   }
   protected beforeShowModal() {
     super.beforeShowModal();
@@ -477,15 +538,154 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor {
     return ch == "'" || ch == '"';
   }
   protected onkoTextValueChanged(newValue) {
+    if (!this.isBeforeShowCalled) return false;
     var isValid = true;
     if (!!newValue) {
-      var conditionParser: any = new Survey.ConditionsParser();
-      isValid = !!conditionParser.parseExpression(newValue);
+      var conditionParser = new Survey.ConditionsParser();
+      var operand = conditionParser.parseExpression(newValue);
+      isValid = !!operand;
+      if (!isValid) {
+        this.koEditorItems([]);
+      } else {
+        this.koEditorItems(this.buildEditorItems(operand));
+      }
+      this.koCanParseExpression(this.koEditorItems().length > 0);
+    } else {
+      this.koEditorItems([]);
+      this.koCanParseExpression(true);
     }
     this.koIsTextConditionValid(isValid);
     if (isValid) {
       this.koValue(newValue);
     }
+  }
+  private buildEditorItems(
+    operand: Survey.Operand
+  ): Array<ConditionEditorItem> {
+    var res = [];
+    if (!this.buildEditorItemsCore(operand, res, "")) {
+      res = [];
+    }
+    return res;
+  }
+  private buildEditorItemsCore(
+    operand: Survey.Operand,
+    res: Array<ConditionEditorItem>,
+    parentConjunction: string
+  ): boolean {
+    if (operand.getType() == "unary")
+      return this.buildEditorItemsAddUnaryOperand(
+        <Survey.UnaryOperand>operand,
+        res
+      );
+    if (operand.getType() !== "binary") return false;
+    var op = <Survey.BinaryOperand>operand;
+    if (op.isArithmetic && !op.isConjunction) return false;
+    if (op.isConjunction)
+      return this.buildEditorItemsAddConjunction(op, res, parentConjunction);
+    return this.buildEditorItemsAddBinaryOperand(op, res);
+  }
+  private buildEditorItemsAddConjunction(
+    op: Survey.BinaryOperand,
+    res: Array<ConditionEditorItem>,
+    parentConjunction: string
+  ): boolean {
+    var conjunction = op.conjunction;
+    if (
+      conjunction == "or" &&
+      !!parentConjunction &&
+      parentConjunction != conjunction
+    )
+      return false;
+    if (!this.buildEditorItemsCore(op.leftOperand, res, conjunction))
+      return false;
+    var conjunctionIndex = res.length;
+    if (!this.buildEditorItemsCore(op.rightOperand, res, conjunction))
+      return false;
+    res[conjunctionIndex].conjunction = op.conjunction;
+    return true;
+  }
+  private buildEditorItemsAddBinaryOperand(
+    op: Survey.BinaryOperand,
+    res: Array<ConditionEditorItem>
+  ): boolean {
+    var variableOperand = <Survey.Variable>(
+      this.getOperandByType(op, "variable")
+    );
+    var constOperand = <Survey.Const>this.getOperandByType(op, "const");
+    if (
+      !variableOperand ||
+      (!constOperand && this.canShowValueByOperator(op.operator))
+    )
+      return false;
+    if (!this.getQuestionByName(variableOperand.variable)) return false;
+    var item = new ConditionEditorItem();
+    item.questionName = variableOperand.variable;
+    item.operator =
+      op.leftOperand !== variableOperand
+        ? this.getOppositeOperator(op.operator)
+        : op.operator;
+    if (!!constOperand) {
+      item.value = constOperand.correctValue;
+    }
+    res.push(item);
+    return true;
+  }
+  private buildEditorItemsAddUnaryOperand(
+    op: Survey.UnaryOperand,
+    res: Array<ConditionEditorItem>
+  ): boolean {
+    var operator = this.getUnaryOperandOperator(op);
+    if (operator !== "empty" && operator != "notempty") return false;
+    var operand = this.getUnaryOperandOperand(op);
+    if (operand == null || operand.getType() != "variable") return false;
+    var questionName = (<Survey.Variable>operand).variable;
+    if (!this.getQuestionByName(questionName)) return false;
+    var item = new ConditionEditorItem();
+    item.questionName = questionName;
+    item.operator = operator;
+    res.push(item);
+    return true;
+  }
+  private getOppositeOperator(operator: string): string {
+    if (operator == "less") return "greater";
+    if (operator == "greater") return "less";
+    if (operator == "lessorequal") return "greaterorequal";
+    if (operator == "greaterorequal") return "lessorequal";
+    return operator;
+  }
+  private getOperandByType(
+    op: Survey.BinaryOperand,
+    opType: string
+  ): Survey.Operand {
+    if (
+      op.leftOperand.getType() !== opType &&
+      op.rightOperand.getType() !== opType
+    )
+      return null;
+    if (
+      op.leftOperand.getType() == opType &&
+      op.rightOperand.getType() == opType
+    )
+      return null;
+    return op.leftOperand.getType() == opType
+      ? op.leftOperand
+      : op.rightOperand;
+  }
+  //TODO remove
+  private getUnaryOperandOperator(op: Survey.UnaryOperand): string {
+    if (op.toString().indexOf("notempty") > -1) return "notempty";
+    if (op.toString().indexOf("empty") > -1) return "empty";
+    return "negate";
+  }
+  //TODO remove
+  private getUnaryOperandOperand(op: Survey.UnaryOperand): Survey.Operand {
+    var st = this.getUnaryOperandOperator(op);
+    st = op.toString().substr(st.length + 1);
+    if (!st) return null;
+    if (st[0] != "{") return null;
+    if (st[st.length - 1] != "}") return null;
+    return new Survey.Variable(st.substr(1, st.length - 2));
   }
   private resetConditionBuilder() {
     this.koConditionQuestion("");

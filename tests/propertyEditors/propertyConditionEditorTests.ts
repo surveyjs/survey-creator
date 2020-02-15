@@ -1197,3 +1197,69 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
+    ]
+  });
+  var question = survey.getQuestionByName("q4");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  assert.equal(editor.koCanParseExpression(), true, "We can parse expression");
+  assert.equal(editor.koEditorItems().length, 2, "There are two conditions");
+  editor.koValue("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
+  assert.equal(editor.koCanParseExpression(), true, "We can parse expression");
+  assert.equal(editor.koEditorItems().length, 3, "There are three conditions");
+  editor.koValue("{q1} = 'abc' and ({q2} = 1 or {q2} = 2)");
+  assert.equal(
+    editor.koCanParseExpression(),
+    false,
+    "It is a tree and not a flat conditions"
+  );
+  editor.koValue("{q1} empty");
+  assert.equal(editor.koCanParseExpression(), true, "No const");
+  assert.equal(
+    editor.koEditorItems()[0].questionName,
+    "q1",
+    "question name parsed correctly"
+  );
+  assert.equal(
+    editor.koEditorItems()[0].operator,
+    "empty",
+    "operator parsed correctly"
+  );
+  editor.koValue("1 < {q1}");
+  assert.equal(editor.koCanParseExpression(), true, "Const on right");
+  assert.equal(editor.koEditorItems()[0].value, 1, "Value parse correctly");
+  assert.equal(
+    editor.koEditorItems()[0].questionName,
+    "q1",
+    "Field Name parse correctly"
+  );
+  assert.equal(
+    editor.koEditorItems()[0].operator,
+    "greater",
+    "Make the opposite value"
+  );
+  editor.koValue("1 < {q11}");
+  assert.equal(
+    editor.koCanParseExpression(),
+    false,
+    "There is no question like this, binary operand"
+  );
+  editor.koValue("{q11} empty");
+  assert.equal(
+    editor.koCanParseExpression(),
+    false,
+    "There is no question like this, unary operand"
+  );
+});
