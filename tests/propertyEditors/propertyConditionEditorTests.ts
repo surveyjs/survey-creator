@@ -1263,3 +1263,124 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
     "There is no question like this, unary operand"
   );
 });
+QUnit.test(
+  "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" }
+      ]
+    });
+    var question = survey.getQuestionByName("q4");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(editor.koEditorItems().length, 1, "There is one item");
+    var editorItem = editor.koEditorItems()[0];
+    assert.equal(editorItem.value, "abc", "Value set correctly");
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "text",
+      "question value type is correct"
+    );
+    editorItem.questionName = "q2";
+    assert.notOk(editorItem.value, "Value is empty on changing the value");
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "dropdown",
+      "question value type is dropdown for editing radiogroup"
+    );
+    editorItem.questionName = "q3";
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "checkbox",
+      "question value type is checkbox for editing checkbox"
+    );
+    editorItem.questionName = "q2";
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "dropdown",
+      "question value type is dropdown for editing radiogroup, #2"
+    );
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").choices.length,
+      3,
+      "There are 3 choices"
+    );
+    editorItem.operator = "anyof";
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "checkbox",
+      "question value type is checkbox for editing radiogroup, operator anyof"
+    );
+    editorItem.operator = "equal";
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").getType(),
+      "dropdown",
+      "question value type is dropdown for editing radiogroup, #3"
+    );
+  }
+);
+QUnit.test(
+  "SurveyPropertyConditionEditor, create expression from scratch",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q4", type: "text" }
+      ]
+    });
+    var question = survey.getQuestionByName("q4");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(editor.koValue(), "", "The value is empty");
+    assert.equal(
+      editor.koEditorItems().length,
+      1,
+      "We have one item for editing"
+    );
+    var editorItem = editor.koEditorItems()[0];
+    assert.equal(
+      editorItem.survey.getQuestionByName("questionValue").isReadOnly,
+      true,
+      "It is readOnly when there is no questionName"
+    );
+    editorItem.questionName = "q1";
+    editorItem.value = "abc";
+    assert.equal(
+      editorItem.toString(),
+      "{q1} = 'abc'",
+      "editorItem.toString() works correctly"
+    );
+    assert.equal(editor.koValue(), "{q1} = 'abc'", "Value set correctly");
+    editor.addConditionEditorItem();
+    editorItem = editor.koEditorItems()[1];
+    assert.equal(editor.koValue(), "{q1} = 'abc'", "Second item is empty");
+    editorItem.questionName = "q2";
+    assert.equal(
+      editor.koValue(),
+      "{q1} = 'abc'",
+      "Second item value is empty"
+    );
+    editorItem.value = 2;
+    assert.equal(
+      editor.koValue(),
+      "{q1} = 'abc' and {q2} = 2",
+      "Second item is here"
+    );
+    editorItem.operator = "empty";
+    assert.equal(
+      editor.koValue(),
+      "{q1} = 'abc' and {q2} empty",
+      "Second item has no value"
+    );
+  }
+);

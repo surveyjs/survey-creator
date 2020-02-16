@@ -25,38 +25,14 @@
         </span>
     </div>
     <div data-bind="visible: koIsEditorShowing() || !koIsCompactMode()">
-        <div class="form-inline form-group">
-            <div class="form-control svd_custom_select" style="width: 60%;max-width:300px">
-                <select onmousewheel="return false;" data-bind="if: true, value: koConditionQuestion, attr: { 'aria-label': addConditionQuestionOptions }">
-                    <option value="" data-bind="text: addConditionQuestionOptions, attr: {title: addConditionQuestionOptions}" ></option>
-                    <!-- ko foreach: koConditionQuestions -->
-                    <option data-bind="value: name, text: (text || '').substring(0, 80), attr: {title: text}" ></option>
-                    <!-- /ko -->
-                </select>
-            </div>
-            <div class="form-control svd_custom_select" style="width: 39%;max-width:200px">
-                <select
-                    onmousewheel="return false;"
-                    data-bind="options:koVisibleOperators, optionsValue: 'name', optionsText: 'text', value:koConditionOperator, enable: !!koConditionQuestion(), attr: { 'aria-label': 'Condition selector' }">
-                </select>
-            </div>
+        <!-- ko foreach: koEditorItems -->
+        <div class="svd_wrap_elements">
+            <survey-widget params="survey: $data.survey"></survey-widget>
         </div>
-        <div class="svd_wrap_elements" data-bind="visible:koHasValueSurvey">
-            <survey-widget params="survey: koValueSurvey"></survey-widget>
-        </div>
-        <div class="form-inline form-group">
-            <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), click: $data.replaceCondition, value: koButtonReplaceText"/>
-            <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addAndCondition, value: $data.conditionButtonAddAsAnd"/>
-            <input type="button" class="form-control btn btn-primary" data-bind="enable: koIsConditionValid() && !readOnly(), visible: koHasConditionAppliedValue(), click: $data.addOrCondition, value: $data.conditionButtonAddAsOr"/>
-        </div>
-        <!-- ko if: $parent.hasAceEditor -->
-        <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
-        <div id="expression-ace-editor" style="height: 150px; width: 100%;" data-bind="textInput:koTextValue, aceEditor:{questions: $parent.availableQuestions, question: $data.editingObject, editor: $parent}"></div>
         <!-- /ko -->
-
-        <!-- ko if: !$parent.hasAceEditor -->
-        <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly" rows="3" autofocus="autofocus"></textarea>
-        <!-- /ko -->
+        <div class="form-inline form-group">
+            <input type="button" class="form-control btn btn-primary" data-bind="!readOnly(), click: $data.addConditionEditorItem, value: addConditionEditorItemText"/>
+        </div>
     </div>
   </div>
 </script>
