@@ -12,7 +12,7 @@ export interface IConditionEditorItemOwner {
   allConditionQuestions: any[];
   getQuestionValueJSON(questionName: string, operator: string): any;
   getQuestionByName(questionName): Survey.Question;
-  onConditionItemChanged(item: ConditionEditorItem);
+  onConditionItemChanged();
 }
 
 export class ConditionEditorItem {
@@ -22,14 +22,14 @@ export class ConditionEditorItem {
       showNavigationButtons: false,
       showQuestionNumbers: "off",
       textUpdateMode: "onTyping",
-      requiredText: " ",
+      requiredText: "",
       questions: [
         {
           name: "conjunction",
           type: "dropdown",
           titleLocation: "hidden",
+          showOptionsCaption: false,
           visible: false,
-          defaultValue: "and",
           choices: ["and", "or"]
         },
         {
@@ -46,19 +46,19 @@ export class ConditionEditorItem {
           startWithNewLine: false,
           showOptionsCaption: false,
           isRequired: true,
-          enableIf: "{questionName} notempty",
-          defaultValue: "equal"
+          enableIf: "{questionName} notempty"
         }
       ]
     });
     this.survey.onValueChanged.add((sender, options) => {
       if (options.name == "questionName") {
         this.rebuildQuestionValue();
+        this.setOperator();
       }
       if (options.name == "operator") {
         this.rebuildQuestionValueOnOperandChanging();
       }
-      this.owner.onConditionItemChanged(this);
+      this.owner.onConditionItemChanged();
     });
     this.setupSurvey();
   }
@@ -85,6 +85,12 @@ export class ConditionEditorItem {
   }
   public set value(val: any) {
     this.setSurveyValue("questionValue", val);
+  }
+  public get isFirst(): boolean {
+    return !this.survey.getQuestionByName("conjunction").isVisible;
+  }
+  public set isFirst(val: boolean) {
+    this.survey.getQuestionByName("conjunction").visible = !val;
   }
   public toString(): string {
     var requireValue = !this.survey.getQuestionByName("questionValue")
@@ -113,6 +119,7 @@ export class ConditionEditorItem {
     );
     SurveyPropertyDefaultValueEditor.updateSurveyStyle(this.survey);
     this.rebuildQuestionValue();
+    this.survey.data = { operator: "equal", conjunction: "and" };
   }
   private getSurveyValue(name: string): any {
     return this.survey.getValue(name);
@@ -160,6 +167,9 @@ export class ConditionEditorItem {
     var question = this.survey.getQuestionByName("questionValue");
     if (!question || (!!json && json.type == question.getType())) return;
     this.rebuildQuestionValue();
+  }
+  private setOperator() {
+    this.operator = "equal";
   }
   private getChoices(arr: any[]): Array<Survey.ItemValue> {
     var res = [];
@@ -213,6 +223,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   implements IConditionEditorItemOwner {
   public showHelpText: boolean = true;
   public koTextValue: any;
+  public onRemoveEditorItemClick: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
   koCanParseExpression: any;
   koIsConditionValid: any;
@@ -267,6 +278,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     );
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
+    self.onRemoveEditorItemClick = function(item) {
+      self.removeConditionEditorItem(item);
+    };
     this.koTextValue.subscribe(function(newValue) {
       self.onkoTextValueChanged(newValue);
     });
@@ -317,9 +331,21 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   }
   public addConditionEditorItem() {
     this.koEditorItems.push(new ConditionEditorItem(this));
+    this.updateEditorItemsVisibilities();
+  }
+  public removeConditionEditorItem(item: ConditionEditorItem) {
+    this.koEditorItems.remove(item);
+    if (this.koEditorItems().length == 0) {
+      this.addConditionEditorItem();
+    }
+    this.updateEditorItemsVisibilities();
+    this.onConditionItemChanged();
   }
   public get addConditionEditorItemText(): string {
     return "Add Condition"; //TODO
+  }
+  public get removeConditionEditorItemText(): string {
+    return "Remove"; //TODO
   }
   public get buttonBuildText(): string {
     return this.getLocString("pe.buildExpression");
@@ -698,7 +724,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     return ch == "'" || ch == '"';
   }
   protected onkoTextValueChanged(newValue) {
-    if (!this.isBeforeShowCalled) return false;
+    if (!this.isBeforeShowCalled || this.isConditionItemsBuilding) return;
     var isValid = true;
     var operand = null;
     if (!!newValue) {
@@ -713,7 +739,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.rebuildEditorItems(operand);
   }
   private isConditionItemsBuilding: boolean = false;
-  public onConditionItemChanged(item: ConditionEditorItem) {
+  public onConditionItemChanged() {
     if (this.isConditionItemsBuilding) return;
     var text = "";
     var items = this.koEditorItems();
@@ -726,7 +752,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       text += itemText;
     }
     this.isConditionItemsBuilding = true;
-    this.koTextValue(text);
+    this.koValue(text);
     this.isConditionItemsBuilding = false;
   }
   private rebuildEditorItems(operand: Survey.Operand) {
@@ -742,6 +768,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.koCanParseExpression(this.koEditorItems().length > 0 || !operand);
     if (this.koEditorItems().length == 0 && !operand) {
       this.koEditorItems([new ConditionEditorItem(this)]);
+    }
+    this.updateEditorItemsVisibilities();
+  }
+  private updateEditorItemsVisibilities() {
+    var items = this.koEditorItems();
+    for (var i = 0; i < items.length; i++) {
+      items[i].isFirst = i == 0;
     }
   }
   private buildEditorItems(

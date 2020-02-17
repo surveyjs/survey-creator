@@ -29,9 +29,13 @@
         <div class="svd_wrap_elements">
             <survey-widget params="survey: $data.survey"></survey-widget>
         </div>
+        <div class="form-inline form-group" data-bind="visible: $parent.koEditorItems().length > 1">
+            <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveEditorItemClick, value: $parent.removeConditionEditorItemText"/>
+        </div>
+        <hr>
         <!-- /ko -->
         <div class="form-inline form-group">
-            <input type="button" class="form-control btn btn-primary" data-bind="!readOnly(), click: $data.addConditionEditorItem, value: addConditionEditorItemText"/>
+            <input type="button" class="form-control btn btn-primary" data-bind="visible:!readOnly(), click: $data.addConditionEditorItem, value: addConditionEditorItemText"/>
         </div>
     </div>
   </div>

@@ -1360,17 +1360,34 @@ QUnit.test(
       "{q1} = 'abc'",
       "editorItem.toString() works correctly"
     );
-    assert.equal(editor.koValue(), "{q1} = 'abc'", "Value set correctly");
+    assert.equal(editor.koValue(), "{q1} = 'abc'", "koValue set correctly");
+    assert.equal(
+      editor.koTextValue(),
+      "{q1} = 'abc'",
+      "koTextValue set correctly"
+    );
+    assert.equal(
+      editorItem.survey.getQuestionByName("conjunction").isVisible,
+      false,
+      "Conjuction is invisible for the first item"
+    );
     editor.addConditionEditorItem();
     editorItem = editor.koEditorItems()[1];
+    assert.equal(
+      editorItem.survey.getQuestionByName("conjunction").isVisible,
+      true,
+      "Conjuction is invisible for the second item"
+    );
     assert.equal(editor.koValue(), "{q1} = 'abc'", "Second item is empty");
     editorItem.questionName = "q2";
+    assert.notOk(editorItem.toString(), "string is empty - no value");
     assert.equal(
       editor.koValue(),
       "{q1} = 'abc'",
       "Second item value is empty"
     );
     editorItem.value = 2;
+    assert.equal(editorItem.toString(), "{q2} = 2", "string returns condition");
     assert.equal(
       editor.koValue(),
       "{q1} = 'abc' and {q2} = 2",
@@ -1382,5 +1399,15 @@ QUnit.test(
       "{q1} = 'abc' and {q2} empty",
       "Second item has no value"
     );
+    editorItem.conjunction = "or";
+    assert.equal(
+      editor.koValue(),
+      "{q1} = 'abc' or {q2} empty",
+      "Change the conjunction"
+    );
+    assert.equal(editorItem.isFirst, false, "It is second");
+    editor.removeConditionEditorItem(editor.koEditorItems()[0]);
+    assert.equal(editorItem.isFirst, true, "It is first now");
+    assert.equal(editor.koValue(), "{q2} empty", "Remove the item");
   }
 );
