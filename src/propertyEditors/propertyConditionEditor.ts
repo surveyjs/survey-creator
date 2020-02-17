@@ -52,6 +52,7 @@ export class ConditionEditorItem {
     });
     this.survey.onValueChanged.add((sender, options) => {
       if (options.name == "questionName") {
+        this.updateOperatorEnables();
         this.rebuildQuestionValue();
         this.setOperator();
       }
@@ -225,6 +226,61 @@ export class ConditionEditorItem {
     if (op == "greaterorequal") return ">=";
     if (op == "lessorequal") return "<=";
     return op;
+  }
+  private updateOperatorEnables() {
+    var res = [];
+    if (!this.questionName) return res;
+    var json = this.owner.getQuestionValueJSON(this.questionName, "equal");
+    var qType = !!json ? json.type : null;
+    var questionOperator = this.survey.getQuestionByName("operator");
+    if (!questionOperator) return;
+    var choices = questionOperator.choices;
+    for (var i = 0; i < choices.length; i++) {
+      choices[i].setIsEnabled(
+        this.isOperatorVisible(qType, this.getOperatorType(choices[i].value))
+      );
+    }
+  }
+  private getOperatorType(operator: string): Array<string> {
+    var operators = SurveyPropertyEditorFactory.getOperators();
+    for (var i = 0; i < operators.length; i++) {
+      if (operators[i].name == operator) return operators[i].types;
+    }
+    return [];
+  }
+
+  private isOperatorVisible(
+    qType: string,
+    operatorTypes: Array<string>
+  ): boolean {
+    if (!qType) return true;
+    if (!operatorTypes || operatorTypes.length == 0) return true;
+    var contains = [];
+    var notContains = [];
+    for (var i = 0; i < operatorTypes.length; i++) {
+      let name = operatorTypes[i];
+      if (name[0] == "!") {
+        notContains.push(name.substr(1));
+      } else {
+        contains.push(name);
+      }
+    }
+    return this.isClassContains(qType, contains, notContains);
+  }
+  private isClassContains(
+    qType: string,
+    contains: Array<string>,
+    notContains: Array<string>
+  ): boolean {
+    var classInfo = Survey.Serializer.findClass(qType);
+    while (!!classInfo) {
+      if (contains.indexOf(classInfo.name) > -1) return true;
+      if (notContains.indexOf(classInfo.name) > -1) return false;
+      classInfo = !!classInfo.parentName
+        ? Survey.Serializer.findClass(classInfo.parentName)
+        : null;
+    }
+    return contains.length == 0;
   }
 }
 

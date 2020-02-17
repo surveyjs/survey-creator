@@ -854,7 +854,7 @@ QUnit.test(
     );
   }
 );
-QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
+QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
   assert
 ) {
   var survey = new Survey.Survey({
@@ -900,26 +900,24 @@ QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
   editor.object = question;
   editor.beforeShow();
   var checkFun = function(questionName: string, operatorNames: Array<string>) {
-    editor.koConditionQuestion(questionName);
-    var ops = editor.koVisibleOperators();
-    var names = [];
-    for (var i = 0; i < ops.length; i++) {
-      names.push(ops[i].name);
-    }
-    assert.equal(
-      editor.koVisibleOperators().length,
-      operatorNames.length,
-      "Operators lentgh is correct for question: '" +
-        questionName +
-        "', " +
-        JSON.stringify(names)
-    );
-    for (var i = 0; i < operatorNames.length; i++) {
-      assert.ok(
-        names.indexOf(operatorNames[i]) > -1,
+    var editorItem = editor.koEditorItems()[0];
+    editorItem.questionName = questionName;
+    var choices = editorItem.survey.getQuestionByName("operator").choices;
+    for (var i = 0; i < choices.length; i++) {
+      var isItemEnabled = choices[i].isEnabled;
+      var operatorName = choices[i].value;
+      assert.notOk(
+        isItemEnabled && operatorNames.indexOf(operatorName) < 0,
         "Operator: '" +
-          operatorNames[i] +
-          "' is here for question: " +
+          operatorName +
+          " should not be for question: " +
+          questionName
+      );
+      assert.notOk(
+        !isItemEnabled && operatorNames.indexOf(operatorName) > -1,
+        "Operator: '" +
+          operatorName +
+          " should be for question: " +
           questionName
       );
     }
@@ -932,11 +930,6 @@ QUnit.test("SurveyPropertyConditionEditor, koVisibleOperators", function(
       checkFun(questionNames[i], operatorNames);
     }
   };
-  assert.equal(
-    editor.koVisibleOperators().length,
-    SurveyPropertyEditorFactory.getOperators().length,
-    "Show all operators when question is not set"
-  );
   checkFunMultiple(
     [
       "qText",
