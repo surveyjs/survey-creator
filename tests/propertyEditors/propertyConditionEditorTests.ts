@@ -1327,3 +1327,49 @@ QUnit.test(
     assert.equal(editor.koValue(), "{q2} empty", "Remove the item");
   }
 );
+QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text" }
+    ]
+  });
+  var question = survey.getQuestionByName("q4");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.isWideMode = true;
+  editor.object = question;
+  editor.beforeShow();
+  var editorItem = editor.koEditorItems()[0];
+  var questionValue = editorItem.survey.getQuestionByName("questionValue");
+  assert.equal(questionValue.titleLocation, "hidden", "Hide question title");
+  assert.equal(questionValue.startWithNewLine, false, "Keep on the same line");
+  editorItem.questionName = "q3";
+  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  assert.notEqual(
+    questionValue.titleLocation,
+    "hidden",
+    "Show question title - checkbox"
+  );
+  assert.equal(
+    questionValue.startWithNewLine,
+    true,
+    "Show on the next line - checkbox"
+  );
+  editorItem.questionName = "q2";
+  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  assert.equal(
+    questionValue.titleLocation,
+    "hidden",
+    "Hide question title - radiogroup/dropdown"
+  );
+  assert.equal(
+    questionValue.startWithNewLine,
+    false,
+    "Keep on the same line - radiogroup/dropdown"
+  );
+});

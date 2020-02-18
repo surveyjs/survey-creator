@@ -1037,6 +1037,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       this.getExpressionProperty()
     );
     this.expressionEditor.isCompactMode = false;
+    this.expressionEditor.isWideMode = true;
     this.expressionEditor.object = this.survey;
   }
 }

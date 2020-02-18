@@ -18,6 +18,7 @@ export interface IConditionEditorItemOwner {
     contains: Array<string>,
     notContains: Array<string>
   ): boolean;
+  isWideMode: boolean;
 }
 
 export class ConditionEditorItem {
@@ -168,7 +169,19 @@ export class ConditionEditorItem {
     newQuestion.title = editorLocalization.editorLocalization.getString(
       "pe.conditionValueQuestionTitle"
     );
+    if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
+      newQuestion.titleLocation = "hidden";
+      newQuestion.startWithNewLine = false;
+    }
     this.survey.pages[0].addElement(newQuestion);
+  }
+  private isKeepQuestonValueOnSameLine(questionType: string): boolean {
+    if (!this.owner.isWideMode) return false;
+    return this.owner.isClassContains(
+      questionType,
+      ["text", "dropdown", "rating", "boolean"],
+      []
+    );
   }
   private rebuildQuestionValueOnOperandChanging() {
     if (!this.questionName) return;
@@ -280,15 +293,16 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public koTextValue: any;
   public onRemoveConditionClick: any;
   public onChangeViewClick: any;
+  public onShowHideEditor: any;
   public koShowTabs: any;
   public koActiveView: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
   koCanParseExpression: any;
   koIsEditorShowing: any;
-  koShowHideEditor: any;
   koConditionDisplayText: any;
   koIsTextConditionValid: any;
   koIsCompactMode: any;
+  koIsWideMode: any;
   private addConditionQuestionsHash = {};
   constructor(
     property: Survey.JsonObjectProperty,
@@ -306,8 +320,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       return this.getLocString("pe.expressionIsEmpty");
     }, this);
     this.koIsCompactMode = ko.observable(true);
+    this.koIsWideMode = ko.observable(false);
     this.koIsEditorShowing = ko.observable(false);
-    this.koShowHideEditor = () => {
+    this.onShowHideEditor = () => {
       this.koIsEditorShowing(!this.koIsEditorShowing());
     };
     this.koIsTextConditionValid = ko.observable(true);
@@ -361,6 +376,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   }
   public set isCompactMode(val: boolean) {
     this.koIsCompactMode(val);
+  }
+  public get isWideMode(): boolean {
+    return this.koIsWideMode();
+  }
+  public set isWideMode(val: boolean) {
+    this.koIsWideMode(val);
   }
   public get editorType(): string {
     return this._type;
