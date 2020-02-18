@@ -842,7 +842,6 @@ QUnit.test(
     };
     editor.object = question;
     editor.beforeShow();
-    editor.isCompactMode = false;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     editorItem.value = "abc";

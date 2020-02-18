@@ -5,17 +5,17 @@
 
 <script type="text/html" id="propertyeditorcontent-condition">
   <div class="propertyeditor-condition">
-    <div class="svd-expression-header" data-bind="visible: koIsCompactMode, click: onShowHideEditor">
+    <div class="svd-expression-header" data-bind="click: onShowHideEditor">
         <span
             data-bind="text: koConditionDisplayText"
         ></span>
-        <!-- ko ifnot: koIsEditorShowing -->
+        <!-- ko if: !koIsEditorShowing() && !koIsEditorHidingDisabled() -->
         <svg-icon
             class="icon-expression-arrow svd-primary-icon"
             params="iconName: 'icon-arrow_down_10x10', size: 10"
         ></svg-icon>
         <!-- /ko -->
-        <!-- ko if: koIsEditorShowing -->
+        <!-- ko if: koIsEditorShowing && !koIsEditorHidingDisabled() -->
         <svg-icon
             class="icon-expression-arrow svd-primary-icon"
             params="iconName: 'icon-arrow_up_10x10', size: 10"
@@ -24,7 +24,7 @@
         <!-- /ko -->
         </span>
     </div>
-    <div data-bind="visible: koIsEditorShowing() || !koIsCompactMode()">
+    <div data-bind="visible: koIsEditorShowing()">
         <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
             <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.buildExpression')"></button>
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.editExpression')"></button>

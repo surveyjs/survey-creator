@@ -41,7 +41,7 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
   protected onCreateEditor(editor: SurveyElementEditorContent) {
     var expressionEditor = editor.getPropertyEditorByName("expression");
     if (!!expressionEditor && expressionEditor.editor) {
-      expressionEditor.editor["isCompactMode"] = false;
+      expressionEditor.editor["isEditorShowing"] = true;
     }
   }
   private getSurvey(): Survey.SurveyModel {

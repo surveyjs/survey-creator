@@ -1361,9 +1361,9 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     trigerEditor.getPropertyEditorByName("expression").editor
   );
   assert.equal(
-    expressionEditor.isCompactMode,
-    false,
-    "The expression is not in compact mode"
+    expressionEditor.isEditorShowing,
+    true,
+    "The expression editing is showing by default"
   );
   assert.equal(
     expressionEditor.availableQuestions.length,
