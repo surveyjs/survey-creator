@@ -1113,19 +1113,23 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  assert.equal(editor.koActiveView(), "form", "Show Builder initial");
   assert.equal(editor.koCanParseExpression(), true, "We can parse expression");
   assert.equal(editor.koEditorItems().length, 2, "There are two conditions");
   editor.koValue("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
   assert.equal(editor.koCanParseExpression(), true, "We can parse expression");
   assert.equal(editor.koEditorItems().length, 3, "There are three conditions");
+  assert.equal(editor.koActiveView(), "form", "Show Builder 1");
   editor.koValue("{q1} = 'abc' and ({q2} = 1 or {q2} = 2)");
   assert.equal(
     editor.koCanParseExpression(),
     false,
     "It is a tree and not a flat conditions"
   );
+  assert.equal(editor.koActiveView(), "text", "Show Text 1");
   editor.koValue("{q1} empty");
   assert.equal(editor.koCanParseExpression(), true, "No const");
+  editor.koActiveView("form");
   assert.equal(
     editor.koEditorItems()[0].questionName,
     "q1",
@@ -1149,17 +1153,30 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
     "greater",
     "Make the opposite value"
   );
+  assert.equal(editor.koActiveView(), "form", "Show Builder 2");
   editor.koValue("1 < {q11}");
   assert.equal(
     editor.koCanParseExpression(),
     false,
     "There is no question like this, binary operand"
   );
+  assert.equal(editor.koActiveView(), "text", "Show Text 2");
   editor.koValue("{q11} empty");
   assert.equal(
     editor.koCanParseExpression(),
     false,
     "There is no question like this, unary operand"
+  );
+  editor.koTextValue("not t");
+  assert.equal(
+    editor.koIsTextConditionValid(),
+    false,
+    "The expression is not valid"
+  );
+  assert.equal(
+    editor.koCanParseExpression(),
+    false,
+    "We can't parse invalid expression"
   );
 });
 QUnit.test(

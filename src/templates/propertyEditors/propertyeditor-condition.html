@@ -25,17 +25,33 @@
         </span>
     </div>
     <div data-bind="visible: koIsEditorShowing() || !koIsCompactMode()">
-        <!-- ko foreach: koEditorItems -->
-        <div class="svd_wrap_elements">
-            <survey-widget params="survey: $data.survey"></survey-widget>
+        <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
+            <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.buildExpression')"></button>
+            <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.editExpression')"></button>
         </div>
-        <div class="form-inline form-group" data-bind="visible: $parent.koEditorItems().length > 1">
-            <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveEditorItemClick, value: $parent.removeConditionEditorItemText"/>
+        <div data-bind="visible: koActiveView() == 'form'">
+            <!-- ko foreach: koEditorItems -->
+            <div class="svd_wrap_elements">
+                <survey-widget params="survey: $data.survey"></survey-widget>
+            </div>
+            <div class="form-inline form-group" data-bind="visible: $parent.koEditorItems().length > 1">
+                <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveConditionClick, value: $parent.removeConditionText"/>
+            </div>
+            <hr>
+            <!-- /ko -->
+            <div class="form-inline form-group">
+                <input type="button" class="form-control btn btn-primary" data-bind="visible:!readOnly(), click: $data.addCondition, value: addConditionText"/>
+            </div>
         </div>
-        <hr>
-        <!-- /ko -->
-        <div class="form-inline form-group">
-            <input type="button" class="form-control btn btn-primary" data-bind="visible:!readOnly(), click: $data.addConditionEditorItem, value: addConditionEditorItemText"/>
+        <div data-bind="visible:koActiveView() != 'form'">
+            <!-- ko if: hasAceEditor -->
+            <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
+            <div id="expression-ace-editor" style="overflow-y: auto; overflow-x:hidden; max-height:300px; min-height:200px; width: 100%;" data-bind="textInput:koTextValue, aceEditor:{questions: availableQuestions, question: $data.editingObject, editor: $data}"></div>
+            <!-- /ko -->
+
+            <!-- ko if: !hasAceEditor -->
+            <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly" style="overflow-y: auto; overflow-x:hidden; max-height:300px; min-height:200px; width: 100%;" autofocus="autofocus"></textarea>
+            <!-- /ko -->
         </div>
     </div>
   </div>

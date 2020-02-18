@@ -278,7 +278,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   implements IConditionEditorItemOwner {
   public showHelpText: boolean = true;
   public koTextValue: any;
-  public onRemoveEditorItemClick: any;
+  public onRemoveConditionClick: any;
+  public onChangeViewClick: any;
+  public koShowTabs: any;
+  public koActiveView: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
   koCanParseExpression: any;
   koIsEditorShowing: any;
@@ -293,6 +296,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     public syntaxCheckMethodName: string = "createCondition"
   ) {
     super(property);
+    this.koShowTabs = ko.observable(true);
+    this.koActiveView = ko.observable("form");
     this.koTextValue = ko.observable();
     this.koEditorItems = ko.observableArray<ConditionEditorItem>([]);
     this.koCanParseExpression = ko.observable(true);
@@ -307,8 +312,17 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     };
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
-    self.onRemoveEditorItemClick = function(item) {
+    this.koCanParseExpression.subscribe(function(newValue) {
+      if (newValue === false) {
+        self.koActiveView("text");
+      }
+    });
+    self.onRemoveConditionClick = function(item) {
       self.removeCondition(item);
+    };
+    self.onChangeViewClick = function() {
+      var newView = self.koActiveView() == "form" ? "text" : "form";
+      self.koActiveView(newView);
     };
     this.koTextValue.subscribe(function(newValue) {
       self.onkoTextValueChanged(newValue);
@@ -326,17 +340,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.updateEditorItemsVisibilities();
     this.onConditionItemChanged();
   }
-  public get addConditionEditorItemText(): string {
+  public get addConditionText(): string {
     return "Add Condition"; //TODO
   }
-  public get removeConditionEditorItemText(): string {
+  public get removeConditionText(): string {
+    //this.getLocString("pe.buildExpression");
     return "Remove"; //TODO
-  }
-  public get buttonBuildText(): string {
-    return this.getLocString("pe.buildExpression");
-  }
-  public get buttonEditText(): string {
-    return this.getLocString("pe.editExpression");
   }
   public beforeShow() {
     super.beforeShow();
@@ -494,7 +503,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     if (isValid) {
       this.koValue(newValue);
     }
-    this.rebuildEditorItems(operand);
+    this.rebuildEditorItems(operand, isValid);
   }
   private isConditionItemsBuilding: boolean = false;
   public onConditionItemChanged() {
@@ -513,8 +522,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.koValue(text);
     this.isConditionItemsBuilding = false;
   }
-  private rebuildEditorItems(operand: Survey.Operand) {
+  private rebuildEditorItems(operand: Survey.Operand, isValid: boolean) {
     if (this.isConditionItemsBuilding) return;
+    if (!isValid) {
+      this.koEditorItems([]);
+      this.koCanParseExpression(false);
+      return;
+    }
     if (!operand) {
       this.koEditorItems([]);
     } else {
