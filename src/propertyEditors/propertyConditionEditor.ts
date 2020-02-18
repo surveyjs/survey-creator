@@ -370,6 +370,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     super.beforeShow();
     this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
+    if (!!this.options) {
+      this.koShowTabs(this.options.allowEditExpressionsInTextEditor);
+    }
   }
   protected beforeShowModal() {
     super.beforeShowModal();

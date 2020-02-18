@@ -285,8 +285,8 @@ export var enStrings = {
 
     maxLength: "Maximum length",
 
-    buildExpression: "Build Expression",
-    editExpression: "Edit Expression",
+    buildExpression: "Build",
+    editExpression: "Edit",
     and: "And",
     or: "Or",
     remove: "Remove",
