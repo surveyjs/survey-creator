@@ -207,11 +207,6 @@ export var enStrings = {
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    conditionButtonApply: "Apply",
-    conditionButtonReplace: "Replace",
-    conditionButtonAddAsAnd: "Add as 'and'",
-    conditionButtonAddAsOr: "Add as 'or'",
-    conditionButtonClear: "Clear",
     conditionHelp:
       "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
@@ -290,10 +285,12 @@ export var enStrings = {
 
     maxLength: "Maximum length",
 
-    buildExpression: "Build",
-    editExpression: "Edit",
-    expressionTextApply: "Apply",
-    expressionTextReset: "Reset",
+    buildExpression: "Build Expression",
+    editExpression: "Edit Expression",
+    and: "And",
+    or: "Or",
+    remove: "Remove",
+    addCondition: "Add condition",
 
     //survey
     showTitle: "Show/hide title",

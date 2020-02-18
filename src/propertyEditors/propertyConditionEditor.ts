@@ -121,10 +121,16 @@ export class ConditionEditorItem {
     var question = this.survey.getQuestionByName("questionValue");
     return !!question && !question.isReadOnly;
   }
+  private getLocString(name: string): string {
+    return editorLocalization.editorLocalization.getString(name);
+  }
   private setupSurvey() {
+    var questionConjunction = this.survey.getQuestionByName("conjunction");
+    questionConjunction.choices[0].text = this.getLocString("pe.and");
+    questionConjunction.choices[1].text = this.getLocString("pe.or");
     var questionName = this.survey.getQuestionByName("questionName");
     questionName.choices = this.getChoices(this.owner.allConditionQuestions);
-    questionName.optionsCaption = editorLocalization.editorLocalization.getString(
+    questionName.optionsCaption = this.getLocString(
       "pe.conditionSelectQuestion"
     );
     this.survey.getQuestionByName("operator").choices = this.getChoices(
@@ -166,9 +172,7 @@ export class ConditionEditorItem {
       this.survey.pages[0].removeElement(oldQuestion);
     }
     newQuestion.name = "questionValue";
-    newQuestion.title = editorLocalization.editorLocalization.getString(
-      "pe.conditionValueQuestionTitle"
-    );
+    newQuestion.title = this.getLocString("pe.conditionValueQuestionTitle");
     if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
       newQuestion.titleLocation = "hidden";
       newQuestion.startWithNewLine = false;
@@ -357,11 +361,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.onConditionItemChanged();
   }
   public get addConditionText(): string {
-    return "Add Condition"; //TODO
+    return this.getLocString("pe.addCondition");
   }
   public get removeConditionText(): string {
-    //this.getLocString("pe.buildExpression");
-    return "Remove"; //TODO
+    return this.getLocString("pe.remove");
   }
   public beforeShow() {
     super.beforeShow();
