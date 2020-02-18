@@ -1,7 +1,12 @@
 <tr>
   <td class="svd-itemvalue-actions-container">
     <div class="svd-drag-handle svd-itemvalue-action">
-      ☰
+      <span>
+        <svg-icon
+          class="svd-primary-icon"
+          params="iconName: dragIcon, size: 20"
+        ></svg-icon>
+      </span>
     </div>
     <button
       type="button"
@@ -21,12 +26,15 @@
   </td>
   <!-- /ko -->
   <td class="svd-textitems-column">
-    <button
-      type="button"
-      class="btn btn-sm btn-danger"
+    <div class="svd-itemvalue-action"
       data-bind="visible: editor.koAllowAddRemoveItems, click: editor.onDeleteClick"
     >
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <span>
+        <svg-icon
+          class="svd-primary-icon"
+          params="iconName: deleteIcon, size: 20"
+        ></svg-icon>
+      </span>
     </button>
   </td>
 </tr>
