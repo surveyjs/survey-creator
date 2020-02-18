@@ -13,6 +13,11 @@ export interface IConditionEditorItemOwner {
   getQuestionValueJSON(questionName: string, operator: string): any;
   getQuestionByName(questionName): Survey.Question;
   onConditionItemChanged();
+  isClassContains(
+    qType: string,
+    contains: Array<string>,
+    notContains: Array<string>
+  ): boolean;
 }
 
 export class ConditionEditorItem {
@@ -265,22 +270,7 @@ export class ConditionEditorItem {
         contains.push(name);
       }
     }
-    return this.isClassContains(qType, contains, notContains);
-  }
-  private isClassContains(
-    qType: string,
-    contains: Array<string>,
-    notContains: Array<string>
-  ): boolean {
-    var classInfo = Survey.Serializer.findClass(qType);
-    while (!!classInfo) {
-      if (contains.indexOf(classInfo.name) > -1) return true;
-      if (notContains.indexOf(classInfo.name) > -1) return false;
-      classInfo = !!classInfo.parentName
-        ? Survey.Serializer.findClass(classInfo.parentName)
-        : null;
-    }
-    return contains.length == 0;
+    return this.owner.isClassContains(qType, contains, notContains);
   }
 }
 
@@ -291,23 +281,12 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public onRemoveEditorItemClick: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
   koCanParseExpression: any;
-  koConditionQuestions: any;
-  koConditionQuestion: any;
-  koVisibleOperators: any;
-  koConditionOperator: any;
-  koButtonReplaceText: any;
-  koRequireConditionValue: any;
-  koHasValueSurvey: any;
-  koValueSurvey: any;
   koIsEditorShowing: any;
   koShowHideEditor: any;
   koConditionDisplayText: any;
-  koHasConditionAppliedValue: any;
-  koDummy: any;
   koIsTextConditionValid: any;
   koIsCompactMode: any;
   private addConditionQuestionsHash = {};
-  private static emptySurvey = undefined;
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -317,10 +296,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.koTextValue = ko.observable();
     this.koEditorItems = ko.observableArray<ConditionEditorItem>([]);
     this.koCanParseExpression = ko.observable(true);
-    if (!SurveyPropertyConditionEditor.emptySurvey) {
-      SurveyPropertyConditionEditor.emptySurvey =
-        !!this.options && this.options.createSurvey({}, "conditionEditor");
-    }
     this.koConditionDisplayText = ko.computed(function() {
       if (!!this.koValue()) return this.getConditionDisplayText();
       return this.getLocString("pe.expressionIsEmpty");
@@ -330,70 +305,23 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.koShowHideEditor = () => {
       this.koIsEditorShowing(!this.koIsEditorShowing());
     };
-    this.koConditionQuestions = ko.observableArray();
-    this.koConditionQuestion = ko.observable("");
-    this.koConditionOperator = ko.observable("");
-    this.koVisibleOperators = ko.computed(function() {
-      return this.getVisibleOperators(this.koConditionQuestion());
-    }, this);
-    this.koHasValueSurvey = ko.observable(false);
-    this.koValueSurvey = ko.observable(
-      SurveyPropertyConditionEditor.emptySurvey
-    );
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
     self.onRemoveEditorItemClick = function(item) {
-      self.removeConditionEditorItem(item);
+      self.removeCondition(item);
     };
     this.koTextValue.subscribe(function(newValue) {
       self.onkoTextValueChanged(newValue);
     });
-    this.koConditionQuestion.subscribe(function(newValue) {
-      self.onQuestionOrOperatorChanged(
-        newValue,
-        self.koConditionOperator(),
-        false
-      );
-    });
-    this.koConditionOperator.subscribe(function(newValue) {
-      self.onQuestionOrOperatorChanged(
-        self.koConditionQuestion(),
-        newValue,
-        true
-      );
-    });
-    this.koDummy = ko.observable(0);
-    this.koHasConditionAppliedValue = ko.observable(false);
-    this.koButtonReplaceText = ko.computed(function() {
-      var name = this.koHasConditionAppliedValue()
-        ? "pe.conditionButtonReplace"
-        : "pe.conditionButtonApply";
-      return this.getLocString(name);
-    }, this);
-    this.koRequireConditionValue = ko.computed(function() {
-      return self.canShowValueByOperator(self.koConditionOperator());
-    }, this);
-    this.resetConditionBuilder();
   }
-  private get canUpdateAutomatically(): boolean {
-    return !this.koHasConditionAppliedValue();
-  }
-  public doApplyText(): boolean {
-    if (!this.koIsTextConditionValid()) return false;
-    this.koValue(this.koTextValue());
-    return true;
-  }
-  public doResetText() {
-    this.koTextValue(this.koValue());
-  }
-  public addConditionEditorItem() {
+  public addCondition() {
     this.koEditorItems.push(new ConditionEditorItem(this));
     this.updateEditorItemsVisibilities();
   }
-  public removeConditionEditorItem(item: ConditionEditorItem) {
+  public removeCondition(item: ConditionEditorItem) {
     this.koEditorItems.remove(item);
     if (this.koEditorItems().length == 0) {
-      this.addConditionEditorItem();
+      this.addCondition();
     }
     this.updateEditorItemsVisibilities();
     this.onConditionItemChanged();
@@ -410,19 +338,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public get buttonEditText(): string {
     return this.getLocString("pe.editExpression");
   }
-  public get buttonTextApplyText(): string {
-    return this.getLocString("pe.expressionTextApply");
-  }
-  public get buttonTextResetText(): string {
-    return this.getLocString("pe.expressionTextReset");
-  }
   public beforeShow() {
     super.beforeShow();
-    this.koHasConditionAppliedValue(!!this.koValue());
-    this.koConditionQuestion("");
-    this.addConditionQuestionsHash = {};
-    this.allConditionQuestionsValue = null;
-    this.koConditionQuestions(this.allConditionQuestions);
+    this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
   }
   protected beforeShowModal() {
@@ -442,33 +360,21 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var survey = this.getSurvey();
     return !!survey ? survey.getAllQuestions() : [];
   }
-  public get isAddConditionValueEmpty() {
-    return (
-      !this.koValueSurvey() ||
-      this.koValueSurvey()
-        .getAllQuestions()[0]
-        .isEmpty()
-    );
-  }
-  public get conditionValue(): any {
-    if (!this.koValueSurvey()) return null;
-    return this.koValueSurvey().getValue("question");
-  }
-  public set conditionValue(val: any) {
-    if (!this.koValueSurvey()) return;
-    this.koValueSurvey().setValue("question", val);
-  }
   protected getSurvey(): Survey.SurveyModel {
     return EditableObject.getSurvey(this.object);
   }
   private allConditionQuestionsValue: any[];
-  public get allConditionQuestions(): any[] {
-    if (!!this.allConditionQuestionsValue)
-      return this.allConditionQuestionsValue;
-    this.allConditionQuestionsValue = this.getConditionQuetions();
+  private resetAllConditionQuestions() {
+    this.addConditionQuestionsHash = {};
+    this.allConditionQuestionsValue = this.getConditionQuestions();
     this.allConditionQuestionsValue.sort(function(a, b) {
       return a.text.localeCompare(b.text);
     });
+  }
+  public get allConditionQuestions(): any[] {
+    if (!!this.allConditionQuestionsValue)
+      return this.allConditionQuestionsValue;
+    this.resetAllConditionQuestions();
     return this.allConditionQuestionsValue;
   }
   public get isExpressionValid(): boolean {
@@ -477,7 +383,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   protected onValueChanged() {
     this.koTextValue(this.koValue());
   }
-  private getConditionQuetions(): any[] {
+  private getConditionQuestions(): any[] {
     if (!this.object) return [];
     var res = [];
     var questions = this.availableQuestions;
@@ -504,37 +410,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       );
     return res;
   }
-  private getVisibleOperators(questionName: string): Array<any> {
-    var res = [];
-    var json = this.getQuestionConditionJson(questionName, "equal");
-    var qType = !!json ? json.type : null;
-    var operators = SurveyPropertyEditorFactory.getOperators();
-    for (var i = 0; i < operators.length; i++) {
-      if (this.isOperatorVisible(qType, operators[i].types)) {
-        res.push(operators[i]);
-      }
-    }
-    return res;
-  }
-  private isOperatorVisible(
-    qType: string,
-    operatorTypes: Array<string>
-  ): boolean {
-    if (!qType) return true;
-    if (!operatorTypes || operatorTypes.length == 0) return true;
-    var contains = [];
-    var notContains = [];
-    for (var i = 0; i < operatorTypes.length; i++) {
-      let name = operatorTypes[i];
-      if (name[0] == "!") {
-        notContains.push(name.substr(1));
-      } else {
-        contains.push(name);
-      }
-    }
-    return this.isClassContains(qType, contains, notContains);
-  }
-  private isClassContains(
+  public isClassContains(
     qType: string,
     contains: Array<string>,
     notContains: Array<string>
@@ -549,14 +425,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     }
     return contains.length == 0;
   }
-  private canAddCondition(questionName: string, operator: string): boolean {
-    return (
-      questionName != "" &&
-      questionName != undefined &&
-      operator != "" &&
-      (!this.canShowValueByOperator(operator) || !this.isAddConditionValueEmpty)
-    );
-  }
   private addCalculatedValues(res: Array<any>) {
     var survey = this.getSurvey();
     if (!survey) return;
@@ -566,85 +434,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       res.push({ name: name, text: name, question: null });
     }
   }
-  private onQuestionOrOperatorChanged(
-    questionName: string,
-    operator: string,
-    isOperatorChanged: boolean
-  ) {
-    if (
-      !this.canShowValueByOperator(operator) ||
-      !questionName ||
-      !this.getSurvey()
-    ) {
-      this.conditionValue = null;
-      this.koHasValueSurvey(false);
-      this.updateValueAutomatically(questionName, operator);
-      return;
-    }
-    var json = this.getQuestionConditionJson(questionName, operator, true);
-    this.koHasValueSurvey(!!json && !!json.type);
-    var useOldValueSurvey =
-      isOperatorChanged &&
-      this.koHasValueSurvey() &&
-      !!this.koValueSurvey() &&
-      this.koValueSurvey()
-        .getQuestionByName("question")
-        .getType() == json.type;
-    if (!useOldValueSurvey && this.koHasValueSurvey()) {
-      this.koValueSurvey(this.createValueSurvey(json, questionName));
-    }
-    this.updateValueAutomatically(questionName, operator);
-    if (!isOperatorChanged) {
-      this.koConditionOperator("equal");
-    }
-  }
-  private updateValueAutomatically(questionName: string, operator: string) {
-    if (!this.canUpdateAutomatically) return;
-    this.setValueFromBuilder(this.builtConditionText(questionName, operator));
-  }
-  private setValueFromBuilder(val: string) {
-    this.koTextValue(val);
-    this.koValue(val);
-  }
-  private createValueSurvey(qjson: any, questionName: string): Survey.Survey {
-    qjson.name = "question";
-    qjson.title = editorLocalization.editorLocalization.getString(
-      "pe.conditionValueQuestionTitle"
-    );
-    var survey = SurveyPropertyDefaultValueEditor.createSurveyFromJsonQuestion(
-      qjson,
-      this.options,
-      "conditionEditor"
-    );
-    var self = this;
-    survey.onValueChanged.add(function(survey, options) {
-      self.koDummy(self.koDummy() + 1);
-      self.updateValueAutomatically(
-        self.koConditionQuestion(),
-        self.koConditionOperator()
-      );
-    });
-    if (this.options) {
-      var propName = !!this.property ? this.property.name : "";
-      this.options.onConditionValueSurveyCreatedCallBack(
-        questionName,
-        propName,
-        this.object,
-        this,
-        survey
-      );
-    }
-    return survey;
-  }
   public getQuestionByName(questionName: string): Survey.Question {
     if (!this.getSurvey()) return null;
     return this.addConditionQuestionsHash[questionName];
-  }
-  private getQuestionValueByName(questionName: string): string {
-    var question = this.getQuestionByName(questionName);
-    if (question && question.name != question.getValueName())
-      return questionName.replace(question.name, question.getValueName());
-    return questionName;
   }
   public getQuestionValueJSON(questionName: string, operator: string): any {
     return this.getQuestionConditionJson(questionName, operator, true);
@@ -688,96 +480,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       typeof ace !== "undefined" &&
       typeof ace.require("ace/ext/language_tools") !== "undefined"
     );
-  }
-  public get addConditionQuestionOptions(): string {
-    return editorLocalization.editorLocalization.getString(
-      "pe.conditionSelectQuestion"
-    );
-  }
-  public replaceCondition() {
-    this.addConditionCore("");
-  }
-  public addAndCondition() {
-    this.addCondition();
-  }
-  public addOrCondition() {
-    this.addCondition("or");
-  }
-  public addCondition(conType: string = "and") {
-    this.addConditionCore(conType);
-  }
-  public clearCondition() {
-    this.setValueFromBuilder("");
-    this.resetConditionBuilder();
-    this.koHasConditionAppliedValue(false);
-  }
-  public get conditionButtonAddAsAnd(): string {
-    return this.getLocString("pe.conditionButtonAddAsAnd");
-  }
-  public get conditionButtonAddAsOr(): string {
-    return this.getLocString("pe.conditionButtonAddAsOr");
-  }
-  public get conditionButtonClear(): string {
-    return this.getLocString("pe.conditionButtonClear");
-  }
-  private addConditionCore(conditionType: string) {
-    this.koHasConditionAppliedValue(true);
-    var text = "";
-    if (!!conditionType && !!this.koTextValue()) {
-      text = this.koTextValue() + " " + conditionType + " ";
-    }
-    text += this.builtConditionText(
-      this.koConditionQuestion(),
-      this.koConditionOperator()
-    );
-    this.setValueFromBuilder(text);
-    this.resetConditionBuilder();
-  }
-  private builtConditionText(questionName: string, operator: string): string {
-    if (!this.canAddCondition(questionName, operator)) return "";
-    var text =
-      "{" +
-      this.getQuestionValueByName(questionName) +
-      "} " +
-      this.getAddConditionOperator(operator);
-    if (this.canShowValueByOperator(operator)) {
-      text += " " + this.getAddConditionValue();
-    }
-    return text;
-  }
-  private getAddConditionOperator(operator: string = null): string {
-    var op = !!operator ? operator : this.koConditionOperator();
-    if (op == "equal") return "=";
-    if (op == "notequal") return "<>";
-    if (op == "greater") return ">";
-    if (op == "less") return "<";
-    if (op == "greaterorequal") return ">=";
-    if (op == "lessorequal") return "<=";
-    return op;
-  }
-  //TODO remove
-  private getAddConditionValue(): string {
-    var val = this.conditionValue;
-    if (!val) return val;
-    if (!Array.isArray(val)) return this.valToText(val);
-    var res = "[";
-    for (var i = 0; i < val.length; i++) {
-      res += this.valToText(val[i]);
-      if (i < val.length - 1) res += ", ";
-    }
-    res += "]";
-    return res;
-  }
-  private valToText(val: any): string {
-    if (val == "true" || val == "false") return val;
-    if (!isNaN(val)) return val;
-    if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
-    if (!this.isQuote(val[0])) val = "'" + val;
-    if (!this.isQuote(val[val.length - 1])) val = val + "'";
-    return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
-  }
-  private isQuote(ch: string): boolean {
-    return ch == "'" || ch == '"';
   }
   protected onkoTextValueChanged(newValue) {
     if (!this.isBeforeShowCalled || this.isConditionItemsBuilding) return;
@@ -960,11 +662,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     if (st[0] != "{") return null;
     if (st[st.length - 1] != "}") return null;
     return new Survey.Variable(st.substr(1, st.length - 2));
-  }
-  private resetConditionBuilder() {
-    this.koConditionQuestion("");
-    this.koConditionOperator("equal");
-    this.conditionValue = null;
   }
   private getConditionDisplayText(): string {
     var value = this.koIsTextConditionValid()

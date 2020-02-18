@@ -1911,7 +1911,7 @@ QUnit.test(
     assert.ok(conditionProp, "Condition editor is here");
     var conditionEditor = <SurveyPropertyConditionEditor>conditionProp.editor;
     assert.equal(
-      conditionEditor.koConditionQuestions().length,
+      conditionEditor.allConditionQuestions.length,
       3,
       "There are 3 questions in the survey"
     );

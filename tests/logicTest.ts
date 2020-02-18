@@ -119,7 +119,7 @@ QUnit.test("Add new item", function(assert) {
   assert.ok(logic.expressionEditor, "expression editor is created");
   assert.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
   assert.equal(
-    logic.expressionEditor.koConditionQuestions().length,
+    logic.expressionEditor.allConditionQuestions.length,
     3,
     "We have 3 questions here"
   );

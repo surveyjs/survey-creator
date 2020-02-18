@@ -170,7 +170,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
-  editor.addConditionEditorItem();
+  editor.addCondition();
   var editorItem = editor.koEditorItems()[1];
   assert.equal(editorItem.isReady, false, "We can't add condition");
   editorItem.questionName = "q2";
@@ -281,7 +281,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
-    editor.addConditionEditorItem();
+    editor.addCondition();
     var editorItem = editor.koEditorItems()[1];
     editorItem.questionName = "panel.q2";
     editorItem.value = "2";
@@ -1270,7 +1270,7 @@ QUnit.test(
       false,
       "Conjuction is invisible for the first item"
     );
-    editor.addConditionEditorItem();
+    editor.addCondition();
     editorItem = editor.koEditorItems()[1];
     assert.equal(
       editorItem.survey.getQuestionByName("conjunction").isVisible,
@@ -1305,7 +1305,7 @@ QUnit.test(
       "Change the conjunction"
     );
     assert.equal(editorItem.isFirst, false, "It is second");
-    editor.removeConditionEditorItem(editor.koEditorItems()[0]);
+    editor.removeCondition(editor.koEditorItems()[0]);
     assert.equal(editorItem.isFirst, true, "It is first now");
     assert.equal(editor.koValue(), "{q2} empty", "Remove the item");
   }
