@@ -1,9 +1,12 @@
-﻿<div class="svd_container svd-light-bg-color" data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : '')">
+﻿<div
+  class="svd_container svd-light-bg-color"
+  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : '')"
+>
   <!-- ko ifnot: haveCommercialLicense -->
   <div class="svd_commercial_container">
     <a
       class="svd_commercial_text"
-      href="https://surveyjs.io/Licenses#BuildSurvey"
+      href="https://www.surveyjs.io/Buy"
       target="_blank"
     >
       <span>
@@ -13,18 +16,22 @@
         ></svg-icon>
       </span>
       <span class="svd_commercial_product svd-main-color"
-        >SurveyJS Creator</span
+        >Please purchase a SurveyJS Creator developer license to use it in your
+        app.</span
       >
-      <span class="svd_noncommercial_use svd-light-text-color"
-        >for non-commercial use only</span
-      >
+      <span class="svd_noncommercial_use svd-light-text-color"></span>
     </a>
   </div>
   <!-- /ko  -->
   <!-- ko if: tabs().length > 1 -->
-  <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color">
+  <ul
+    class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color"
+  >
     <!-- ko foreach: tabs -->
-    <li class="nav-item" data-bind="css: {active: $parent.koViewType() == name}">
+    <li
+      class="nav-item"
+      data-bind="css: {active: $parent.koViewType() == name}"
+    >
       <a class="nav-link" href="#" data-bind="click: action, text: title"></a>
     </li>
     <!-- /ko -->

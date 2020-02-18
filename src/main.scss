@@ -58,6 +58,8 @@
   .svd-textitems-column {
     width: 100%;
     display: inline-block;
+    line-height: 28px;
+
     .btn-danger {
       min-width: 2em;
       padding: 0.78em 1em;
@@ -85,7 +87,11 @@
   }
   .svd-itemvalue-action {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: baseline;
+  }
+  .svd-itemvalue-action {
+    display: inline-block;
+    vertical-align: baseline;
   }
   .form-control {
     border-radius: 2px;

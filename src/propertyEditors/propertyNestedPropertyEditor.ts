@@ -147,6 +147,14 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
 }
 
 export class SurveyNestedPropertyEditorItem {
+  public static dragIconName = "icon-drag-item";
+  public static deleteIconName = "icon-delete-cross";
+  get dragIcon() {
+    return SurveyNestedPropertyEditorItem.dragIconName;
+  }
+  get deleteIcon() {
+    return SurveyNestedPropertyEditorItem.deleteIconName;
+  }
   public koHasDetails: any;
   protected options: ISurveyObjectEditorOptions;
   private koCellsValue = ko.observableArray<
