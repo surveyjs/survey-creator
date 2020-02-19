@@ -947,13 +947,10 @@ QUnit.test("Logic editing errors", function(assert) {
   );
   logic.expressionEditor.koValue("{q1} = 1");
   assert.equal(logic.saveEditableItem(), false, "There is no operations");
-  assert.equal(logic.koErrorText(), "Please, add at least one operation.");
+  assert.equal(logic.koErrorText(), "Please, add at least one action.");
   var op = logic.addNewOperation(logic.getTypeByName("question_visibility"));
   assert.equal(logic.saveEditableItem(), false, "Operation is incorret");
-  assert.equal(
-    logic.koErrorText(),
-    "Please, fix problems in your operation(s)."
-  );
+  assert.equal(logic.koErrorText(), "Please, fix problems in your action(s).");
   op.itemSelector.koValue("q2");
   assert.equal(logic.saveEditableItem(), true, "Operation is corret now");
 
