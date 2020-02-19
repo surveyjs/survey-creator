@@ -10,6 +10,7 @@ export interface ISurveyObjectEditorOptions {
   readOnly: boolean;
   getObjectDisplayName(obj: Survey.Base): string;
   showTitlesInExpressions: boolean;
+  allowEditExpressionsInTextEditor: boolean;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty
