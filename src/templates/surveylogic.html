@@ -67,10 +67,10 @@
       <div>
         <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
       </div>
-      <div>
-        <input type="button" class="btn btn-primary" data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack')" />
-        <input type="button" class="btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save')"/>
-        <input type="button" class="btn btn-primary" data-bind="click: $data.koShowView, value: $data.getLocString('pe.back')"/>
+      <div class="form-inline form-group">
+        <input type="button" class="form-control btn btn-primary" data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack')" />
+        <input type="button" class="form-control btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save')"/>
+        <input type="button" class="form-control btn btn-primary" data-bind="click: $data.koShowView, value: $data.getLocString('pe.back')"/>
       </div>
     </p>
   </div>

@@ -221,6 +221,7 @@ export class ConditionEditorItem {
   }
   private updateQuestionsWidth() {
     var isWide = this.owner.isWideMode;
+    var paddingRight = "5px";
     var isValueSameLine =
       !!this.valueQuestion && !this.valueQuestion.startWithNewLine;
     if (!!this.conjunctionQuestion) {
@@ -229,6 +230,7 @@ export class ConditionEditorItem {
         : isWide
         ? "15%"
         : "25%";
+      this.conjunctionQuestion.paddingRight = paddingRight;
     }
     this.nameQuestion.width = isWide
       ? this.isFirst
@@ -237,13 +239,16 @@ export class ConditionEditorItem {
       : this.isFirst
       ? "70%"
       : "45%";
+    this.nameQuestion.paddingRight = paddingRight;
     this.operatorQuestion.width = isWide
       ? isValueSameLine
         ? "25%"
         : "60%"
       : "30%";
+    this.operatorQuestion.paddingRight = paddingRight;
     if (!!this.valueQuestion) {
       this.valueQuestion.width = isValueSameLine ? "35%" : "";
+      this.valueQuestion.paddingRight = paddingRight;
     }
   }
   private setOperator() {

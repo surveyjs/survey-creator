@@ -50,8 +50,8 @@
                                     <survey-widget params="survey: $data.survey"></survey-widget>
                                 </div>
                             </td>
-                            <td>
-                                <div class="form-inline form-group" data-bind="visible: $parent.koEditorItems().length > 1">
+                            <td width="100px">
+                                <div data-bind="visible: $parent.koEditorItems().length > 1">
                                     <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveConditionClick, value: $parent.removeConditionText"/>
                                 </div>
                             </td>
