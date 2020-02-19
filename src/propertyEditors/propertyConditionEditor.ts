@@ -94,16 +94,33 @@ export class ConditionEditorItem {
     this.setSurveyValue("questionValue", val);
   }
   public get isFirst(): boolean {
-    return !this.survey.getQuestionByName("conjunction").isVisible;
+    return !this.conjunctionQuestion.isVisible;
   }
   public set isFirst(val: boolean) {
-    this.survey.getQuestionByName("conjunction").visible = !val;
+    this.conjunctionQuestion.visible = !val;
+    this.updateQuestionsWidth();
   }
   public get isReady(): boolean {
     return (
       !!this.questionName &&
       (!this.isValueRequried || !this.survey.isValueEmpty(this.value))
     );
+  }
+  public get conjunctionQuestion(): Survey.QuestionDropdown {
+    return <Survey.QuestionDropdown>(
+      this.survey.getQuestionByName("conjunction")
+    );
+  }
+  public get nameQuestion(): Survey.QuestionDropdown {
+    return <Survey.QuestionDropdown>(
+      this.survey.getQuestionByName("questionName")
+    );
+  }
+  public get operatorQuestion(): Survey.QuestionDropdown {
+    return <Survey.QuestionDropdown>this.survey.getQuestionByName("operator");
+  }
+  public get valueQuestion(): Survey.Question {
+    return this.survey.getQuestionByName("questionValue");
   }
   public toString(): string {
     if (!this.isReady) return "";
@@ -118,27 +135,28 @@ export class ConditionEditorItem {
     return text;
   }
   private get isValueRequried() {
-    var question = this.survey.getQuestionByName("questionValue");
+    var question = this.valueQuestion;
     return !!question && !question.isReadOnly;
   }
   private getLocString(name: string): string {
     return editorLocalization.editorLocalization.getString(name);
   }
   private setupSurvey() {
-    var questionConjunction = this.survey.getQuestionByName("conjunction");
+    var questionConjunction = this.conjunctionQuestion;
     questionConjunction.choices[0].text = this.getLocString("pe.and");
     questionConjunction.choices[1].text = this.getLocString("pe.or");
-    var questionName = this.survey.getQuestionByName("questionName");
+    var questionName = this.nameQuestion;
     questionName.choices = this.getChoices(this.owner.allConditionQuestions);
     questionName.optionsCaption = this.getLocString(
       "pe.conditionSelectQuestion"
     );
-    this.survey.getQuestionByName("operator").choices = this.getChoices(
+    this.operatorQuestion.choices = this.getChoices(
       SurveyPropertyEditorFactory.getOperators()
     );
     SurveyPropertyDefaultValueEditor.updateSurveyStyle(this.survey);
     this.rebuildQuestionValue();
     this.survey.data = { operator: "equal", conjunction: "and" };
+    this.updateQuestionsWidth();
   }
   private getSurveyValue(name: string): any {
     return this.survey.getValue(name);
@@ -167,7 +185,7 @@ export class ConditionEditorItem {
     if (!newQuestion) {
       newQuestion = Survey.Serializer.createClass("text", json);
     }
-    var oldQuestion = this.survey.getQuestionByName("questionValue");
+    var oldQuestion = this.valueQuestion;
     if (!!oldQuestion) {
       this.survey.pages[0].removeElement(oldQuestion);
     }
@@ -178,6 +196,7 @@ export class ConditionEditorItem {
       newQuestion.startWithNewLine = false;
     }
     this.survey.pages[0].addElement(newQuestion);
+    this.updateQuestionsWidth();
   }
   private isKeepQuestonValueOnSameLine(questionType: string): boolean {
     if (!this.owner.isWideMode) return false;
@@ -193,12 +212,39 @@ export class ConditionEditorItem {
       this.questionName,
       this.operator
     );
-    var question = this.survey.getQuestionByName("questionValue");
+    var question = this.valueQuestion;
     if (!!question && question.isReadOnly) {
       this.value = null;
     }
     if (!question || (!!json && json.type == question.getType())) return;
     this.rebuildQuestionValue();
+  }
+  private updateQuestionsWidth() {
+    var isWide = this.owner.isWideMode;
+    var isValueSameLine =
+      !!this.valueQuestion && !this.valueQuestion.startWithNewLine;
+    if (!!this.conjunctionQuestion) {
+      this.conjunctionQuestion.width = this.isFirst
+        ? ""
+        : isWide
+        ? "15%"
+        : "25%";
+    }
+    this.nameQuestion.width = isWide
+      ? this.isFirst
+        ? "40%"
+        : "25%"
+      : this.isFirst
+      ? "70%"
+      : "45%";
+    this.operatorQuestion.width = isWide
+      ? isValueSameLine
+        ? "25%"
+        : "60%"
+      : "30%";
+    if (!!this.valueQuestion) {
+      this.valueQuestion.width = isValueSameLine ? "35%" : "";
+    }
   }
   private setOperator() {
     this.operator = "equal";
@@ -254,7 +300,7 @@ export class ConditionEditorItem {
     if (!this.questionName) return res;
     var json = this.owner.getQuestionValueJSON(this.questionName, "equal");
     var qType = !!json ? json.type : null;
-    var questionOperator = this.survey.getQuestionByName("operator");
+    var questionOperator = this.operatorQuestion;
     if (!questionOperator) return;
     var choices = questionOperator.choices;
     for (var i = 0; i < choices.length; i++) {
@@ -660,9 +706,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     op: Survey.UnaryOperand,
     res: Array<ConditionEditorItem>
   ): boolean {
-    var operator = this.getUnaryOperandOperator(op);
+    var operator = op.operator;
     if (operator !== "empty" && operator != "notempty") return false;
-    var operand = this.getUnaryOperandOperand(op);
+    var operand = op.expression;
     if (operand == null || operand.getType() != "variable") return false;
     var questionName = (<Survey.Variable>operand).variable;
     if (!this.getQuestionByName(questionName)) return false;
@@ -696,21 +742,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     return op.leftOperand.getType() == opType
       ? op.leftOperand
       : op.rightOperand;
-  }
-  //TODO remove
-  private getUnaryOperandOperator(op: Survey.UnaryOperand): string {
-    if (op.toString().indexOf("notempty") > -1) return "notempty";
-    if (op.toString().indexOf("empty") > -1) return "empty";
-    return "negate";
-  }
-  //TODO remove
-  private getUnaryOperandOperand(op: Survey.UnaryOperand): Survey.Operand {
-    var st = this.getUnaryOperandOperator(op);
-    st = op.toString().substr(st.length + 1);
-    if (!st) return null;
-    if (st[0] != "{") return null;
-    if (st[st.length - 1] != "}") return null;
-    return new Survey.Variable(st.substr(1, st.length - 2));
   }
   private getConditionDisplayText(): string {
     var value = this.koIsTextConditionValid()

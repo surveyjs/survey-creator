@@ -214,10 +214,7 @@ QUnit.test(
     editor.beforeShow();
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
-    assert.ok(
-      editorItem.survey.getQuestionByName("questionName"),
-      "question value is created"
-    );
+    assert.ok(editorItem.nameQuestion, "question value is created");
     editorItem.value = JSON.stringify(["item1's"]);
     assert.equal(
       editor.koTextValue(),
@@ -357,7 +354,7 @@ QUnit.test(
     editor.beforeShow();
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2.";
-    var valueQuestion = editorItem.survey.getQuestionByName("questionValue");
+    var valueQuestion = editorItem.valueQuestion;
     assert.ok(valueQuestion, "Value question created correctly");
     assert.equal(
       valueQuestion.choices.length,
@@ -366,7 +363,7 @@ QUnit.test(
     );
 
     editorItem.questionName = "matrix.row1.column1";
-    valueQuestion = editorItem.survey.getQuestionByName("questionValue");
+    valueQuestion = editorItem.valueQuestion;
     assert.ok(
       valueQuestion,
       "Value question for matrix column created correctly"
@@ -395,7 +392,7 @@ QUnit.test(
     editor.beforeShow();
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
-    var questionValue = editorItem.survey.getQuestionByName("questionValue");
+    var questionValue = editorItem.valueQuestion;
     assert.ok(questionValue, "There question value");
     assert.equal(
       questionValue.getType(),
@@ -545,7 +542,7 @@ QUnit.test(
     );
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
-    var vQuestion = editorItem.survey.getQuestionByName("questionValue");
+    var vQuestion = editorItem.valueQuestion;
     assert.equal(vQuestion.visibleChoices.length, 2, "Show all choices");
   }
 );
@@ -568,7 +565,7 @@ QUnit.test(
     editor.beforeShow();
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q1";
-    editorItem.survey.getQuestionByName("questionValue").value = 1;
+    editorItem.valueQuestion.value = 1;
     assert.equal(
       editor.koTextValue(),
       "{q1} = [1]",
@@ -613,7 +610,7 @@ QUnit.test(
     assert.ok(visEditor, "visibleIf editor is here");
     var editorItem = visEditor.koEditorItems()[0];
     editorItem.questionName = "row.Column2";
-    var questionValue = editorItem.survey.getQuestionByName("questionValue");
+    var questionValue = editorItem.valueQuestion;
     assert.equal(
       questionValue.getType(),
       "dropdown",
@@ -901,7 +898,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
   var checkFun = function(questionName: string, operatorNames: Array<string>) {
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = questionName;
-    var choices = editorItem.survey.getQuestionByName("operator").choices;
+    var choices = editorItem.operatorQuestion.choices;
     for (var i = 0; i < choices.length; i++) {
       var isItemEnabled = choices[i].isEnabled;
       var operatorName = choices[i].value;
@@ -1039,17 +1036,17 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
   editor.beforeShow();
   var editorItem = editor.koEditorItems()[0];
   editorItem.questionName = "question1";
-  var questionValue = editorItem.survey.getQuestionByName("questionValue");
+  var questionValue = editorItem.valueQuestion;
   assert.equal(
     questionValue.getType(),
     "dropdown",
     "It is dropdown by default"
   );
   editorItem.operator = "anyof";
-  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  questionValue = editorItem.valueQuestion;
   assert.equal(questionValue.getType(), "checkbox", "It is checkbox for anyof");
   editorItem.operator = "equal";
-  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  questionValue = editorItem.valueQuestion;
   assert.equal(questionValue.getType(), "dropdown", "It is dropdown again");
 });
 QUnit.test(
@@ -1198,43 +1195,43 @@ QUnit.test(
     var editorItem = editor.koEditorItems()[0];
     assert.equal(editorItem.value, "abc", "Value set correctly");
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "text",
       "question value type is correct"
     );
     editorItem.questionName = "q2";
     assert.notOk(editorItem.value, "Value is empty on changing the value");
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "dropdown",
       "question value type is dropdown for editing radiogroup"
     );
     editorItem.questionName = "q3";
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "checkbox",
       "question value type is checkbox for editing checkbox"
     );
     editorItem.questionName = "q2";
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "dropdown",
       "question value type is dropdown for editing radiogroup, #2"
     );
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").choices.length,
+      editorItem.valueQuestion.choices.length,
       3,
       "There are 3 choices"
     );
     editorItem.operator = "anyof";
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "checkbox",
       "question value type is checkbox for editing radiogroup, operator anyof"
     );
     editorItem.operator = "equal";
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").getType(),
+      editorItem.valueQuestion.getType(),
       "dropdown",
       "question value type is dropdown for editing radiogroup, #3"
     );
@@ -1264,7 +1261,7 @@ QUnit.test(
     );
     var editorItem = editor.koEditorItems()[0];
     assert.equal(
-      editorItem.survey.getQuestionByName("questionValue").isReadOnly,
+      editorItem.valueQuestion.isReadOnly,
       true,
       "It is readOnly when there is no questionName"
     );
@@ -1282,14 +1279,14 @@ QUnit.test(
       "koTextValue set correctly"
     );
     assert.equal(
-      editorItem.survey.getQuestionByName("conjunction").isVisible,
+      editorItem.conjunctionQuestion.isVisible,
       false,
       "Conjuction is invisible for the first item"
     );
     editor.addCondition();
     editorItem = editor.koEditorItems()[1];
     assert.equal(
-      editorItem.survey.getQuestionByName("conjunction").isVisible,
+      editorItem.conjunctionQuestion.isVisible,
       true,
       "Conjuction is invisible for the second item"
     );
@@ -1344,11 +1341,11 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
   editor.object = question;
   editor.beforeShow();
   var editorItem = editor.koEditorItems()[0];
-  var questionValue = editorItem.survey.getQuestionByName("questionValue");
+  var questionValue = editorItem.valueQuestion;
   assert.equal(questionValue.titleLocation, "hidden", "Hide question title");
   assert.equal(questionValue.startWithNewLine, false, "Keep on the same line");
   editorItem.questionName = "q3";
-  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  questionValue = editorItem.valueQuestion;
   assert.notEqual(
     questionValue.titleLocation,
     "hidden",
@@ -1360,7 +1357,7 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
     "Show on the next line - checkbox"
   );
   editorItem.questionName = "q2";
-  questionValue = editorItem.survey.getQuestionByName("questionValue");
+  questionValue = editorItem.valueQuestion;
   assert.equal(
     questionValue.titleLocation,
     "hidden",
@@ -1372,3 +1369,156 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
     "Keep on the same line - radiogroup/dropdown"
   );
 });
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, editorItem question width, isWideMode = false",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q4", type: "text" }
+      ]
+    });
+    var question = survey.getQuestionByName("q4");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    var editorItem = editor.koEditorItems()[0];
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "70%",
+      "name question for first item"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "30%",
+      "operator question for first item"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "",
+      "value question for first item"
+    );
+    editor.addCondition();
+    editorItem = editor.koEditorItems()[1];
+    assert.equal(
+      editorItem.conjunctionQuestion.width,
+      "25%",
+      "conjunction question for second item"
+    );
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "45%",
+      "name question for second item"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "30%",
+      "operator question for second item"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "",
+      "value question for second item"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, editorItem question width, isWideMode = true",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q4", type: "text" }
+      ]
+    });
+    var question = survey.getQuestionByName("q4");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.isWideMode = true;
+    editor.beforeShow();
+    var editorItem = editor.koEditorItems()[0];
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "40%",
+      "name question for first item"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "25%",
+      "operator question for first item"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "35%",
+      "value question for first item"
+    );
+    editorItem.questionName = "q3";
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "40%",
+      "name question for first item + checkbox"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "60%",
+      "operator question for first item + checkbox"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "",
+      "value question for first item + checkbox"
+    );
+
+    editor.addCondition();
+    editorItem = editor.koEditorItems()[1];
+    assert.equal(
+      editorItem.conjunctionQuestion.width,
+      "15%",
+      "conjunction question for second item"
+    );
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "25%",
+      "name question for first item"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "25%",
+      "operator question for second item"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "35%",
+      "name question for second item"
+    );
+    editorItem.questionName = "q3";
+    assert.equal(
+      editorItem.conjunctionQuestion.width,
+      "15%",
+      "conjunction question for second item + checkbox"
+    );
+    assert.equal(
+      editorItem.nameQuestion.width,
+      "25%",
+      "name question for first item + checkbox"
+    );
+    assert.equal(
+      editorItem.operatorQuestion.width,
+      "60%",
+      "operator question for second item + checkbox"
+    );
+    assert.equal(
+      editorItem.valueQuestion.width,
+      "",
+      "name question for second item + checkbox"
+    );
+  }
+);
