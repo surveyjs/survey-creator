@@ -159,15 +159,17 @@ export var enStrings = {
       completedHtmlOnConditionText:
         "Show custom text for the 'Thank you page'.",
 
-      expressionEditorTitle: "Setup the logic expression",
+      expressionEditorTitle: "Define condition(s)",
+      actionsEditorTitle: "Define action(s)",
 
-      deleteOperation: "Delete operation",
-      addNewOperation: "Add New Operation(s)",
+      deleteOperation: "Delete action",
+      addNewOperation: "Add new action",
+      selectedOperationCaption: "Select an action to add...",
 
       expressionInvalid:
         "The logic expression is empty or invalid. Please correct it.",
-      noOperationError: "Please, add at least one operation.",
-      operationInvalid: "Please, fix problems in your operation(s)."
+      noOperationError: "Please, add at least one action.",
+      operationInvalid: "Please, fix problems in your action(s)."
     }
   },
   //Property names in table headers

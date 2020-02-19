@@ -683,6 +683,11 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   assert.ok(op.templateObject, "Template object is created");
   logic.expressionEditor.koValue("{q1} = 10");
   var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  assert.equal(
+    triggerEditor.getPropertyEditorByName("expression").koVisible(),
+    false,
+    "Do not show expression editor here"
+  );
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
   logic.saveEditableItem();
   assert.equal(

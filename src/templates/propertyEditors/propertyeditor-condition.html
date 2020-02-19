@@ -66,11 +66,11 @@
         <div data-bind="visible:koActiveView() != 'form'">
             <!-- ko if: hasAceEditor -->
             <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
-            <div id="expression-ace-editor" style="overflow-y: auto; overflow-x:hidden; max-height:300px; min-height:200px; width: 100%;" data-bind="textInput:koTextValue, aceEditor:{questions: availableQuestions, question: $data.editingObject, editor: $data}"></div>
+            <div id="expression-ace-editor" style="overflow-y: auto; overflow-x:hidden; max-height:250px; min-height:150px; width: 100%;" data-bind="textInput:koTextValue, aceEditor:{questions: availableQuestions, question: $data.editingObject, editor: $data}"></div>
             <!-- /ko -->
 
             <!-- ko if: !hasAceEditor -->
-            <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly" style="overflow-y: auto; overflow-x:hidden; max-height:300px; min-height:200px; width: 100%;" autofocus="autofocus"></textarea>
+            <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly" style="overflow-y: auto; overflow-x:hidden; max-height:250px; min-height:150px; width: 100%;" autofocus="autofocus"></textarea>
             <!-- /ko -->
         </div>
     </div>
