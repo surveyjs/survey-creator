@@ -105,59 +105,59 @@ export var enStrings = {
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
-      // page_visibilityName: "Page visibility",
-      // panel_visibilityName: "Panel visibility",
-      // panel_enableName: "Panel enable/disable",
-      // question_visibilityName: "Question visibility",
-      // question_enableName: "Question enable/disable",
-      // question_requireName: "Question optional required",
-      // trigger_completeName: "Complete survey",
-      // trigger_setvalueName: "Set question value",
-      // trigger_copyvalueName: "Copy question value",
-      // trigger_skipName: "Skip to question",
-      // trigger_runExpressionName: "Run custom expression",
-      // completedHtmlOnConditionName: "Custom 'Thank you page' text",
+      page_visibilityName: "Page visibility",
+      panel_visibilityName: "Panel visibility",
+      panel_enableName: "Panel enable/disable",
+      question_visibilityName: "Question visibility",
+      question_enableName: "Question enable/disable",
+      question_requireName: "Question optional required",
+      trigger_completeName: "Complete survey",
+      trigger_setvalueName: "Set question value",
+      trigger_copyvalueName: "Copy question value",
+      trigger_skipName: "Skip to question",
+      trigger_runExpressionName: "Run custom expression",
+      completedHtmlOnConditionName: "Custom 'Thank you page' text",
 
-      // page_visibilityDescription:
-      //   "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
-      // panel_visibilityDescription:
-      //   "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
-      // panel_enableDescription:
-      //   "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
-      // question_visibilityDescription:
-      //   "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
-      // question_enableDescription:
-      //   "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
-      // question_requireDescription:
-      //   "Question becomes required when the logic expression returns true.",
-      // trigger_completeDescription:
-      //   "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
-      // trigger_setvalueDescription:
-      //   "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
-      // trigger_copyvalueDescription:
-      //   "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
-      // trigger_skipDescription:
-      //   "When the logic expression returns true then the survey skip to / focus the selected question.",
-      // trigger_runExpressionDescription:
-      //   "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
-      // completedHtmlOnConditionDescription:
-      //   "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
+      page_visibilityDescription:
+        "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_visibilityDescription:
+        "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_enableDescription:
+        "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
+      question_visibilityDescription:
+        "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
+      question_enableDescription:
+        "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
+      question_requireDescription:
+        "Question becomes required when the logic expression returns true.",
+      trigger_completeDescription:
+        "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
+      trigger_setvalueDescription:
+        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
+      trigger_copyvalueDescription:
+        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
+      trigger_skipDescription:
+        "When the logic expression returns true then the survey skip to / focus the selected question.",
+      trigger_runExpressionDescription:
+        "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
+      completedHtmlOnConditionDescription:
+        "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
 
       itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
-      // page_visibilityText: "Make page {0} visible", //{0} page name
-      // panel_visibilityText: "Make panel {0} visible", //{0} panel name
-      // panel_enableText: "Make panel {0} enable", //{0} panel name
-      // question_visibilityText: "Make question {0} visible", //{0} question name
-      // question_enableText: "Make question {0} enable", //{0} question name
-      // question_requireText: "Make question {0} required", //{0} question name
-      // trigger_completeText: "Survey becomes completed",
-      // trigger_setvalueText: "Set into question: {0} value {1}", //{0} question name, {1} setValue
-      // trigger_copyvalueText: "Copy into question: {0} value from question {1}", //{0} and {1} question names
-      // trigger_skipText: "Survey skip to the question {0}", //{0} question name
-      // trigger_runExpressionText1: "Run expression: '{0}'", //{0} the expression
-      // trigger_runExpressionText2: " and set it's result into question: {0}", //{0} question name
-      // completedHtmlOnConditionText:
-      //   "Show custom text for the 'Thank you page'.",
+      page_visibilityText: "Make page {0} visible", //{0} page name
+      panel_visibilityText: "Make panel {0} visible", //{0} panel name
+      panel_enableText: "Make panel {0} enable", //{0} panel name
+      question_visibilityText: "Make question {0} visible", //{0} question name
+      question_enableText: "Make question {0} enable", //{0} question name
+      question_requireText: "Make question {0} required", //{0} question name
+      trigger_completeText: "Survey becomes completed",
+      trigger_setvalueText: "Set into question: {0} value {1}", //{0} question name, {1} setValue
+      trigger_copyvalueText: "Copy into question: {0} value from question {1}", //{0} and {1} question names
+      trigger_skipText: "Survey skip to the question {0}", //{0} question name
+      trigger_runExpressionText1: "Run expression: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " and set it's result into question: {0}", //{0} question name
+      completedHtmlOnConditionText:
+        "Show custom text for the 'Thank you page'.",
 
       conditions: "Condition(s)",
       actions: "Action(s)",
