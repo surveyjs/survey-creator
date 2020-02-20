@@ -43,12 +43,12 @@ export var enStrings = {
     defaultLocale: "Default ({0})",
     survey: "Survey",
     settings: "Survey Settings",
-    opjectPropertiesHeader: "Advanced",
-    showObjectProperties: "Show Object Properties",
-    hideObjectProperties: "Hide Object Properties",
+    //opjectPropertiesHeader: "Advanced",
+    //showObjectProperties: "Show Object Properties",
+    //hideObjectProperties: "Hide Object Properties",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
-    editSurvey: "Edit Survey",
+    //editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     moveRight: "Scroll to the Right",
     moveLeft: "Scroll to the Left",
@@ -77,8 +77,8 @@ export var enStrings = {
     toolbox: "Toolbox",
     "property-grid": "Properties",
     toolboxGeneralCategory: "General",
-    delSelObject: "Delete selected object",
-    editSelObject: "Edit selected object",
+    //delSelObject: "Delete selected object",
+    //editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Result: ",
     surveyResultsTable: "As Table",
@@ -102,7 +102,7 @@ export var enStrings = {
     italic: "Italic",
     underline: "Underline",
     fpAddQuestion: "Add question...",
-    completedHtmlOnConditionItemText: "Show if:",
+    //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
       page_visibilityName: "Page visibility",
@@ -175,9 +175,9 @@ export var enStrings = {
     }
   },
   //Property names in table headers
-  pel: {
-    isRequired: "Required?"
-  },
+  // pel: {
+  //   isRequired: "Required?"
+  // },
   //Property Editors
   pe: {
     apply: "Apply",
@@ -185,7 +185,7 @@ export var enStrings = {
     save: "Save",
     cancel: "Cancel",
     reset: "Reset",
-    close: "Close",
+    // close: "Close",
     delete: "Delete",
     add: "Add",
     addNew: "Add New",
@@ -197,12 +197,12 @@ export var enStrings = {
     edit: "Edit",
     back: "Return without saving",
     saveAndBack: "Save and return",
-    itemValueEdit: "Visible If",
+    // itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     showChoices: "Show Choices",
     move: "Move",
     empty: "<empty>",
-    notEmpty: "<edit value>",
+    // notEmpty: "<edit value>",
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -211,16 +211,16 @@ export var enStrings = {
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    conditionHelp:
-      "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+    // conditionHelp:
+    //   "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
-    conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
+    // conditionShowMoreUrl:
+    //   "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "Available questions:",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
