@@ -54,6 +54,10 @@ export class SurveyObjects {
     this.koSelected(item);
   }
   public selectObject(obj: Survey.Base) {
+    if (obj === null) {
+      this.koSelected(null);
+      return;
+    }
     var objs = this.koObjects();
     for (var i = 0; i < objs.length; i++) {
       if (objs[i].value == obj) {

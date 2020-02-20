@@ -760,7 +760,7 @@ QUnit.test(
 
 QUnit.test("Do not allow to select page object", function(assert) {
   var creator = new SurveyCreator();
-  creator.text = JSON.stringify(getSurveyJson());
+  creator.JSON = getSurveyJson();
   creator.selectedElement = creator.survey.getQuestionByName("question1");
   assert.equal(creator.selectedElement.name, "question1");
   creator.onSelectedElementChanging.add(function(c, options) {
@@ -772,7 +772,39 @@ QUnit.test("Do not allow to select page object", function(assert) {
     }
   });
   creator.selectedElement = creator.survey.pages[0];
-  assert.equal(creator.selectedElement.getType(), "survey");
+  assert.ok(creator.selectedElement, "There is the selected object");
+  assert.equal(
+    creator.selectedElement.getType(),
+    "survey",
+    "The selected object is survey"
+  );
+});
+
+QUnit.test("Do not allow to select page/survey objects", function(assert) {
+  var creator = new SurveyCreator();
+  creator.onSelectedElementChanging.add(function(c, options) {
+    var el = options.newSelectedElement;
+    if (el != null && (el.getType() == "page" || el.getType() == "survey")) {
+      options.newSelectedElement =
+        creator.survey.getAllQuestions().length > 0
+          ? creator.survey.getAllQuestions()[0]
+          : null;
+    }
+  });
+  creator.selectedElement = null;
+  assert.notOk(
+    creator.selectedElement,
+    "There is no selected element, do not select survey"
+  );
+  creator.JSON = getSurveyJson();
+  creator.selectedElement = creator.survey.getQuestionByName("question1");
+  assert.equal(creator.selectedElement.name, "question1");
+  creator.selectedElement = creator.survey.pages[0];
+  assert.equal(
+    creator.selectedElement.getType(),
+    "text",
+    "Do not select page or survey"
+  );
 });
 
 QUnit.test("Change elemenent page", function(assert) {

@@ -845,7 +845,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return options.text;
     };
     this.selectPage = (page: Survey.PageModel) => {
-      this.surveyObjects.selectObject(page);
+      this.selectedElement = page;
     };
 
     this.elementPropertyGridValue = new SurveyElementPropertyGrid(this);
@@ -1086,7 +1086,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       visible: this.koIsShowDesigner,
       enabled: false,
       action: () => {
-        this.surveyObjects.selectObject(this.survey);
+        this.selectedElement = this.survey;
         this.showQuestionEditor(this.survey);
       },
       title: this.getLocString("ed.settings")
@@ -1810,7 +1810,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var page = <Survey.Page>this.survey.pages[indexTo];
     this.surveyObjects.survey = null; // TODO may be we don't need this hack
     this.surveyObjects.survey = this.survey;
-    this.surveyObjects.selectObject(page);
+    this.selectedElement = page;
     this.setModified({
       type: "PAGE_MOVED",
       page: page,
@@ -1879,7 +1879,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     } else if (property.name === "page") {
       this.selectPage(value);
-      this.surveyObjects.selectObject(obj);
+      this.selectedElement = obj;
     }
   }
 
@@ -1925,25 +1925,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private setNewObjToPropertyGrid(newObj: any) {
     if (!this.showPropertyGrid) return;
     this.elementPropertyGridValue.selectedObject = newObj;
-  }
-  // TODO undoredo
-  // private doUndoRedo(item: UndoRedoItem) {
-  //   this.initSurvey(item.surveyJSON);
-  //   if (item.selectedObjName) {
-  //     var selObj = this.findObjByName(item.selectedObjName);
-  //     if (selObj) {
-  //       this.surveyObjects.selectObject(selObj);
-  //     }
-  //   }
-  //   this.setState("modified");
-  //   this.isAutoSave && this.doSave();
-  // }
-  private findObjByName(name: string): Survey.Base {
-    var page = this.survey.getPageByName(name);
-    if (page) return page;
-    var question = <Survey.Question>this.survey.getQuestionByName(name);
-    if (question) return question;
-    return null;
   }
   private canSwitchViewType(newType: string): boolean {
     if (newType && this.koViewType() == newType) return false;
@@ -2066,7 +2047,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = { newSelectedElement: obj };
     this.onSelectedElementChanging.fire(this, options);
     if (obj != options.newSelectedElement) {
-      this.surveyObjects.selectObject(options.newSelectedElement);
+      this.selectedElement = options.newSelectedElement;
       return;
     }
     var canDeleteObject = false;
@@ -2086,7 +2067,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         SurveyHelper.scrollIntoViewIfNeeded(el);
       }
     } else {
+      this.disableSurveySelectedElementChanging = true;
       this.survey.selectedElement = null;
+      this.disableSurveySelectedElementChanging = false;
     }
     this.koCanDeleteObject(canDeleteObject);
     //Select2 work-around
@@ -2192,6 +2175,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     return !!classInfo && classInfo.name === "question";
   }
+  private disableSurveySelectedElementChanging: boolean = false;
   private initSurvey(json: any) {
     var self = this;
     this.surveyValue(
@@ -2472,14 +2456,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue() });
     this.survey.render(this.surveyjs);
     this.surveyObjects.survey = this.survey;
-    this.surveyObjects.selectObject(this.surveyValue());
+    this.selectedElement = this.surveyValue();
     this.surveyValue().onSelectedElementChanged.add(
       (sender: Survey.Survey, options) => {
-        self.surveyObjects.selectObject(sender["selectedElement"]);
+        if (self.disableSurveySelectedElementChanging) return;
+        self.selectedElement = sender["selectedElement"];
       }
     );
     this.surveyValue().onEditButtonClick.add((sender: Survey.Survey) => {
-      self.showQuestionEditor(self.koSelectedObject().value);
+      self.showQuestionEditor(self.selectedElement);
     });
     this.surveyValue().onElementDoubleClick.add(
       (sender: Survey.Survey, options) => {
@@ -2679,17 +2664,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   private getSelectedObjAsQuestion(): Survey.Question {
-    var obj = this.koSelectedObject().value;
+    var obj = this.selectedElement;
     if (!obj) return null;
     return SurveyHelper.getObjectType(obj) == ObjType.Question
       ? <Survey.Question>obj
       : null;
   }
   public deleteCurrentObject() {
-    this.deleteObject(this.koSelectedObject().value);
-  }
-  private editCurrentObject() {
-    this.showQuestionEditor(this.koSelectedObject().value);
+    this.deleteObject(this.selectedElement);
   }
   private convertCurrentObject(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
@@ -2767,7 +2749,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   //TODO why this is need ? (ko problem)
   private dirtyPageUpdate = () => {
-    var selectedObject = this.koSelectedObject().value;
+    var selectedObject = this.selectedElement;
+    if (!selectedObject) return;
     if (SurveyHelper.getObjectType(selectedObject) !== ObjType.Page) {
       if (
         SurveyHelper.getObjectType(selectedObject) === ObjType.Question &&
@@ -2777,7 +2760,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
       return;
     }
-    this.surveyObjects.selectObject(selectedObject);
+    this.selectedElement = selectedObject;
   };
 
   /**
@@ -2840,7 +2823,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     } else {
       this.survey.currentPage.removeElement(obj);
       this.survey.selectedElement = null;
-      this.surveyObjects.selectObject(this.survey.currentPage);
+      this.selectedElement = this.survey.currentPage;
     }
     this.setModified({
       type: "OBJECT_DELETED",
