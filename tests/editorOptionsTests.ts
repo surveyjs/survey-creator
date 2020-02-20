@@ -15,6 +15,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
     return obj["name"];
   }
   showTitlesInExpressions: boolean;
+  allowEditExpressionsInTextEditor: boolean = true;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty

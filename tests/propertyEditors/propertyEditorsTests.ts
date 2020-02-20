@@ -1361,9 +1361,9 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     trigerEditor.getPropertyEditorByName("expression").editor
   );
   assert.equal(
-    expressionEditor.isCompactMode,
-    false,
-    "The expression is not in compact mode"
+    expressionEditor.isEditorShowing,
+    true,
+    "The expression editing is showing by default"
   );
   assert.equal(
     expressionEditor.availableQuestions.length,
@@ -1911,7 +1911,7 @@ QUnit.test(
     assert.ok(conditionProp, "Condition editor is here");
     var conditionEditor = <SurveyPropertyConditionEditor>conditionProp.editor;
     assert.equal(
-      conditionEditor.koConditionQuestions().length,
+      conditionEditor.allConditionQuestions.length,
       3,
       "There are 3 questions in the survey"
     );
