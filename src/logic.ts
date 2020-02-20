@@ -198,9 +198,17 @@ export class SurveyLogicType {
     }
   }
   private createTriggerTemplateObject(element: Survey.Base) {
-    if (this.isNewTrigger(element))
-      return new SurveyElementEditorContent(element, "", this.options);
-    return new SurveyQuestionEditor(element, "", this.options);
+    var res: SurveyElementEditorContent = null;
+    if (this.isNewTrigger(element)) {
+      res = new SurveyElementEditorContent(element, "", this.options);
+    } else {
+      res = new SurveyQuestionEditor(element, "", this.options);
+    }
+    var expressionEditor = res.getPropertyEditorByName("expression");
+    if (!!expressionEditor) {
+      expressionEditor.isHidden = true;
+    }
+    return res;
   }
   private isNewTrigger(element: Survey.Base): boolean {
     var trigger = <Survey.SurveyTrigger>element;
@@ -691,6 +699,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koSaveAndShowView: any;
   public koSaveEditableItem: any;
   public koAddNewOperation: any;
+  public koSelectedOperation: any;
   public koRemoveOperation: any;
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
@@ -733,8 +742,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koSaveEditableItem = function() {
       self.saveEditableItem();
     };
-    this.koAddNewOperation = function(logicType: SurveyLogicType) {
+    this.koSelectedOperation = ko.observable(null);
+    this.koAddNewOperation = function() {
+      if (!self.koSelectedOperation()) return;
+      var logicType = <SurveyLogicType>self.koSelectedOperation();
       self.addNewOperation(logicType);
+      self.koSelectedOperation(null);
     };
     this.koRemoveOperation = function(op: SurveyLogicOperation) {
       self.removeOperation(op);
@@ -768,7 +781,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.mode = "view";
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
-    this.expressionEditor.displayName = getLogicString("expressionEditorTitle");
+    this.expressionEditor.showDisplayNameOnTop;
+    this.expressionEditor.displayName = "";
     this.expressionEditor.showHelpText = false;
     this.expressionEditor.beforeShow();
   }
@@ -833,6 +847,9 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   public get addNewOperationText(): string {
     return getLogicString("addNewOperation");
+  }
+  public get selectedOperationCaption(): string {
+    return getLogicString("selectedOperationCaption");
   }
   private get isExpressionValid(): boolean {
     return this.expressionEditor.isExpressionValid;
@@ -1036,7 +1053,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor = new SurveyPropertyConditionEditor(
       this.getExpressionProperty()
     );
-    this.expressionEditor.isCompactMode = false;
+    this.expressionEditor.isEditorShowing = true;
+    this.expressionEditor.isWideMode = true;
     this.expressionEditor.object = this.survey;
   }
 }

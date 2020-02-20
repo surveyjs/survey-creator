@@ -10,6 +10,7 @@ export interface ISurveyObjectEditorOptions {
   readOnly: boolean;
   getObjectDisplayName(obj: Survey.Base): string;
   showTitlesInExpressions: boolean;
+  allowEditExpressionsInTextEditor: boolean;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty
@@ -100,7 +101,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private set displayNameValue(val) {
     this._displayNameValue(val);
   }
-  public koValue: any;
+  public koValue = ko.observable<any>();
   public koText: any;
   public koIsDefault: any;
   public koHasError: any;
@@ -119,7 +120,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
-    this.koValue = ko.observable();
     this.koValue.subscribe(function(newValue) {
       self.onkoValueChanged(newValue);
     });
@@ -156,6 +156,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.setIsRequired();
     this.setTitleAndDisplayName();
     this.readOnly = ko.observable(this.getReadOnly());
+  }
+  public get editingValue() {
+    return this.koValue();
+  }
+  public set editingValue(newValue) {
+    this.koValue(newValue);
   }
   public get editorType(): string {
     throw "editorType is not defined";

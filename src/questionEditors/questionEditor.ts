@@ -115,6 +115,13 @@ export class SurveyQuestionProperties {
   public get showMode(): string {
     return !!this.showModeValue ? this.showModeValue : "form";
   }
+  public get isEmpty(): boolean {
+    for (var i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].visible && this.tabs[i].properties.length > 0)
+        return false;
+    }
+    return true;
+  }
   private fillPropertiesHash() {
     this.propertiesHash = {};
     for (var i = 0; i < this.properties.length; i++) {

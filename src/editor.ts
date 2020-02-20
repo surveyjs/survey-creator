@@ -163,6 +163,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * You need to set this property to true if you want to show titles instead of names in expression editor.
    */
   public showTitlesInExpressions = false;
+  /**
+   * You need to set this property to false to allow your users build expressions visually only, without editing them in text editor.
+   */
+  public allowEditExpressionsInTextEditor = true;
 
   /**
    * Set this property to false to hide the pages selector in the Test Survey Tab
@@ -794,7 +798,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * @param options survey creator options. The following options are available: showDesignerTab, showJSONEditorTab,
    * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor,
    * showPropertyGrid, showToolbox, allowModifyPages
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles, showTitlesInExpressions,
+   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles,
+   * showTitlesInExpressions, allowEditExpressionsInTextEditor,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, closeModalOutside, pageEditingMode
    */
   constructor(renderedElement: any = null, options: any = null) {
@@ -938,7 +943,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.deleteCurrentObject();
     };
     this.draggingToolboxItem = function(item, e) {
-      self.doDraggingToolboxItem(item.json, e);
+      if (!this.readOnly) {
+        self.doDraggingToolboxItem(item.json, e);
+      }
     };
     this.clickToolboxItem = function(item) {
       self.doClickToolboxItem(item.json);
@@ -1226,6 +1233,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.showTitlesInExpressions !== "undefined"
         ? options.showTitlesInExpressions
         : false;
+    this.allowEditExpressionsInTextEditor =
+      typeof options.allowEditExpressionsInTextEditor !== "undefined"
+        ? options.allowEditExpressionsInTextEditor
+        : true;
     this.useTabsInElementEditor =
       typeof options.useTabsInElementEditor !== "undefined"
         ? options.useTabsInElementEditor

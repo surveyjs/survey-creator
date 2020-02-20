@@ -151,6 +151,20 @@ QUnit.test("propertyEditor.displayName", function(assert) {
     "The displayName was set correctly"
   );
 });
+QUnit.test("propertyEditor.editingValue - SurveyPropertyModalEditor", function(
+  assert
+) {
+  var property = Survey.Serializer.findProperty("question", "title");
+  var propertyEditor = new SurveyPropertyTextEditor(property);
+  propertyEditor.setObject({});
+  assert.equal(propertyEditor.editingValue, undefined, "Initial value");
+  propertyEditor.editingValue = "Test";
+  assert.equal(propertyEditor.editingValue, "Test", "Entered value");
+  assert.equal(propertyEditor.koValue(), "Test", "Entered ko value");
+  propertyEditor.koValue("Test1");
+  assert.equal(propertyEditor.koValue(), "Test1", "Entered ko value 1");
+  assert.equal(propertyEditor.editingValue, "Test1", "Entered value 1");
+});
 QUnit.test("Create custom property editor", function(assert) {
   var propertyValue = null;
   var widgetJSON = {
@@ -1347,9 +1361,9 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     trigerEditor.getPropertyEditorByName("expression").editor
   );
   assert.equal(
-    expressionEditor.isCompactMode,
-    false,
-    "The expression is not in compact mode"
+    expressionEditor.isEditorShowing,
+    true,
+    "The expression editing is showing by default"
   );
   assert.equal(
     expressionEditor.availableQuestions.length,
@@ -1644,6 +1658,64 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
 });
 
 QUnit.test(
+  "SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible",
+  function(assert) {
+    var survey = new Survey.Survey();
+    var p = survey.addNewPage();
+    var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+    q.choices = [1, 2, 3];
+    survey.locale = "en";
+    q.choices[0].text = "English 1";
+    Survey.Serializer.findProperty("itemvalue", "visibleIf").visible = false;
+    Survey.Serializer.findProperty("itemvalue", "enableIf").visible = false;
+
+    var property = Survey.Serializer.findProperty("selectbase", "choices");
+    var propEditor = <SurveyPropertyItemValuesEditor>(
+      SurveyPropertyEditorFactory.createEditor(property)
+    );
+    propEditor.object = q;
+    propEditor.beforeShow();
+    var itemViewModel = propEditor.createItemViewModel(q.choices[0]);
+    assert.equal(
+      itemViewModel.koHasDetails(),
+      false,
+      "Detail buttons are hidden"
+    );
+    Survey.Serializer.findProperty("itemvalue", "visibleIf").visible = true;
+    Survey.Serializer.findProperty("itemvalue", "enableIf").visible = true;
+  }
+);
+
+QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function(assert) {
+  var survey = new Survey.Survey();
+  var p = survey.addNewPage();
+  var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+  q.choices = [1, 2, 3];
+  survey.locale = "en";
+  q.choices[0].text = "English 1";
+
+  var property = Survey.Serializer.findProperty("selectbase", "choices");
+  var propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property)
+  );
+  propEditor.object = q;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.koShowHeader(),
+    true,
+    "There are several editable columns, we are rendering header"
+  );
+  Survey.Serializer.findProperty("itemvalue", "text").visible = false;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.koShowHeader(),
+    false,
+    "There are several editable columns, we are not rendering header"
+  );
+  Survey.Serializer.findProperty("itemvalue", "text").visible = true;
+});
+
+QUnit.test(
   "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
   function(assert) {
     var expressionProperty = Survey.Serializer.findProperty(
@@ -1839,7 +1911,7 @@ QUnit.test(
     assert.ok(conditionProp, "Condition editor is here");
     var conditionEditor = <SurveyPropertyConditionEditor>conditionProp.editor;
     assert.equal(
-      conditionEditor.koConditionQuestions().length,
+      conditionEditor.allConditionQuestions.length,
       3,
       "There are 3 questions in the survey"
     );

@@ -119,7 +119,7 @@ QUnit.test("Add new item", function(assert) {
   assert.ok(logic.expressionEditor, "expression editor is created");
   assert.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
   assert.equal(
-    logic.expressionEditor.koConditionQuestions().length,
+    logic.expressionEditor.allConditionQuestions.length,
     3,
     "We have 3 questions here"
   );
@@ -683,6 +683,11 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   assert.ok(op.templateObject, "Template object is created");
   logic.expressionEditor.koValue("{q1} = 10");
   var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  assert.equal(
+    triggerEditor.getPropertyEditorByName("expression").koVisible(),
+    false,
+    "Do not show expression editor here"
+  );
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
   logic.saveEditableItem();
   assert.equal(
@@ -942,13 +947,10 @@ QUnit.test("Logic editing errors", function(assert) {
   );
   logic.expressionEditor.koValue("{q1} = 1");
   assert.equal(logic.saveEditableItem(), false, "There is no operations");
-  assert.equal(logic.koErrorText(), "Please, add at least one operation.");
+  assert.equal(logic.koErrorText(), "Please, add at least one action.");
   var op = logic.addNewOperation(logic.getTypeByName("question_visibility"));
   assert.equal(logic.saveEditableItem(), false, "Operation is incorret");
-  assert.equal(
-    logic.koErrorText(),
-    "Please, fix problems in your operation(s)."
-  );
+  assert.equal(logic.koErrorText(), "Please, fix problems in your action(s).");
   op.itemSelector.koValue("q2");
   assert.equal(logic.saveEditableItem(), true, "Operation is corret now");
 

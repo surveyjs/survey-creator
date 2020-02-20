@@ -21,6 +21,7 @@ export class SurveyObjectProperty {
   public editorTypeTemplate: string;
   public baseEditorType: string;
   public getObjectPropertyByName: (name: string) => SurveyObjectProperty = null;
+  private isHiddenValue: boolean = false;
 
   public koVisible: any;
 
@@ -107,8 +108,16 @@ export class SurveyObjectProperty {
     this.koVisible(this.isVisible());
     this.editor.updateDynamicProperties();
   }
+  public get isHidden(): boolean {
+    return this.isHiddenValue;
+  }
+  public set isHidden(val: boolean) {
+    this.isHiddenValue = val;
+    this.koVisible(this.isVisible());
+  }
   protected isVisible(): boolean {
     if (!this.object) return true;
+    if (this.isHidden) return false;
     var layout = !!this.object.getLayoutType ? this.object.getLayoutType() : "";
     if (
       !!this.property.isVisible &&

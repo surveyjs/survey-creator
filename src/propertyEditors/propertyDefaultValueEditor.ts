@@ -30,6 +30,17 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     delete json["enableIf"];
     delete json["valueName"];
   }
+  public static updateQuestionJson(questionJson: any) {
+    questionJson.storeOthersAsComment = false;
+    SurveyPropertyDefaultValueEditor.deleteConditionProperties(questionJson);
+    if (!!questionJson.choices) {
+      for (var i = 0; i < questionJson.choices.length; i++) {
+        SurveyPropertyDefaultValueEditor.deleteConditionProperties(
+          questionJson.choices[i]
+        );
+      }
+    }
+  }
   public static createSurveyFromJsonQuestion(
     questionJson: any,
     options: ISurveyObjectEditorOptions,
@@ -41,24 +52,19 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
       showQuestionNumbers: "off",
       textUpdateMode: "onTyping"
     };
-    questionJson.storeOthersAsComment = false;
-    SurveyPropertyDefaultValueEditor.deleteConditionProperties(questionJson);
-    if (!!questionJson.choices) {
-      for (var i = 0; i < questionJson.choices.length; i++) {
-        SurveyPropertyDefaultValueEditor.deleteConditionProperties(
-          questionJson.choices[i]
-        );
-      }
-    }
+    this.updateQuestionJson(questionJson);
     json.questions.push(questionJson);
     var survey = !!options
       ? options.createSurvey(json, surveyName)
       : new Survey.Survey(json);
+    SurveyPropertyDefaultValueEditor.updateSurveyStyle(survey);
+    return survey;
+  }
+  public static updateSurveyStyle(survey: Survey.Survey) {
     survey.css.body = "";
     if (!!survey.css.question) {
       survey.css.question.mainRoot += " svd-survey-nopadding";
     }
-    return survey;
   }
   public survey: Survey.Survey;
   koSurvey: any;
