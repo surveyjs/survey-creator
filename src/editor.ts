@@ -938,7 +938,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.deleteCurrentObject();
     };
     this.draggingToolboxItem = function(item, e) {
-      self.doDraggingToolboxItem(item.json, e);
+      if (!this.readOnly) {
+        self.doDraggingToolboxItem(item.json, e);
+      }
     };
     this.clickToolboxItem = function(item) {
       self.doClickToolboxItem(item.json);
