@@ -391,8 +391,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     self.onRemoveConditionClick = function(item) {
       self.removeCondition(item);
     };
-    self.onChangeViewClick = function() {
-      var newView = self.koActiveView() == "form" ? "text" : "form";
+    self.onChangeViewClick = function(newView) {
       self.koActiveView(newView);
     };
     this.koTextValue.subscribe(function(newValue) {

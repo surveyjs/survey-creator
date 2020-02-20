@@ -26,8 +26,8 @@
     </div>
     <div data-bind="visible: koIsEditorShowing()">
         <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
-            <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.buildExpression')"></button>
-            <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick, text: $data.getLocString('pe.editExpression')"></button>
+            <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click: onChangeViewClick.bind($data, 'form'), text: $data.getLocString('pe.buildExpression')"></button>
+            <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick.bind($data, 'text'), text: $data.getLocString('pe.editExpression')"></button>
         </div>
         <div data-bind="visible: koActiveView() == 'form'">
             <!-- ko if: !koIsWideMode() -->
