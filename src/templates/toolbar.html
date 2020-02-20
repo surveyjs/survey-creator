@@ -1,5 +1,5 @@
 ﻿<script type="text/html" id="svd-toolbar-button">
-    <button type="button" class="btn btn-primary" data-bind="enable: $data.enabled || true, click: action, css: $data.innerCss">
+    <div tabindex="0" class="btn btn-primary" data-bind="attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), 'aria-disabled': $data.enabled !== undefined && !ko.unwrap($data.enabled) }, css: $data.innerCss, key2click, click: action" role="button">
         <!-- ko if: $data.icon -->
         <div class="svd-toolbar-button__image">
             <svg-icon class="svd-svg-icon icon-white" params="iconName: icon, size: 12"></svg-icon>
@@ -10,7 +10,7 @@
             <span data-bind="text: title"></span>
         </div>
         <!-- /ko -->
-    </button>
+    </div>
 </script>
 <script type="text/html" id="svd-toolbar-options">
     <div class="ddmenu-container toolbar-options btn-group inline">
