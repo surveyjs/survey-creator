@@ -159,6 +159,8 @@ export var enStrings = {
       completedHtmlOnConditionText:
         "Show custom text for the 'Thank you page'.",
 
+      conditions: "Condition(s)",
+      actions: "Action(s)",
       expressionEditorTitle: "Define condition(s)",
       actionsEditorTitle: "Define action(s)",
 
