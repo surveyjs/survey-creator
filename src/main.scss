@@ -9,6 +9,7 @@
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
+@import "templates/propertyEditors/propertyeditor-switch.scss";
 
 .svd_flowpanel[contenteditable="true"]:empty:before {
   content: attr(placeholder);

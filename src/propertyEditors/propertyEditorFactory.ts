@@ -272,6 +272,20 @@ export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
     return editorLocalization.getPropertyValue(value);
   }
 }
+export class SurveySwitchPropertyEditor extends SurveyPropertyEditorBase {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public get editorType(): string {
+    return "switch";
+  }
+  public get canShowDisplayNameOnTop(): boolean {
+    return false;
+  }
+  public getValueText(value: any): string {
+    return editorLocalization.getPropertyValue(value);
+  }
+}
 export class SurveyNumberPropertyEditor extends SurveyPropertyEditorBase {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
@@ -308,6 +322,11 @@ SurveyPropertyEditorFactory.registerEditor("boolean", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyBooleanPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("switch", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveySwitchPropertyEditor(property);
 });
 SurveyPropertyEditorFactory.registerEditor("number", function(
   property: Survey.JsonObjectProperty
