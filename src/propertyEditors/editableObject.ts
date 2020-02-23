@@ -44,6 +44,7 @@ export class EditableObject {
     return this.editableObjValue;
   }
   public isPropertyChanged(propertyName: string): boolean {
+    if (propertyName == "pages") return false; //TODO could not find a better way yet
     return !Survey.Helpers.isTwoValueEquals(
       this.obj[propertyName],
       this.editableObj[propertyName]

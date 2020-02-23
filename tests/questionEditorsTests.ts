@@ -96,6 +96,31 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   assert.equal(dropdownQuestion.visibleIf, "false", "visibleIf assign correct");
 });
 
+QUnit.test("Survey Editor, modal apply, Bug #674", function(assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        name: "page2",
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  var editor = new SurveyQuestionEditor(creator.survey);
+  editor.getPropertyEditorByName("title").editor.koValue("Survey Title");
+  assert.notEqual(
+    creator.survey.title,
+    "Survey Title",
+    "title is not assigned yet"
+  );
+  editor.apply();
+  assert.equal(creator.survey.title, "Survey Title", "title assigned correct");
+});
+
 QUnit.test("Question Editor name is not changed", function(assert) {
   var creator = new SurveyCreator();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
