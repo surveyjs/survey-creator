@@ -44,10 +44,10 @@ export class SplitterComponentViewModel {
         if (newLeft > minLeft && newRight > minRight) {
           startX += delta;
           var leftWidth =
-            Math.ceil(((newLeft + 1) / container.clientWidth) * 10000) / 100 +
+            Math.ceil((newLeft / container.clientWidth) * 10000) / 100 +
             "%";
           var rightWidth =
-            Math.ceil(((newRight + 1) / container.clientWidth) * 10000) / 100 +
+            Math.ceil((newRight / container.clientWidth) * 10000) / 100 +
             "%";
           this.updateWidth(leftElement, leftWidth);
           this.updateWidth(rightElement, rightWidth);
