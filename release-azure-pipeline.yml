@@ -1,0 +1,7 @@
+#SurveyJS release pipeline (survey-creator)
+
+#trigger only "by hand"
+trigger: none
+
+steps:
+  - 
