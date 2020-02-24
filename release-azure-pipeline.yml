@@ -37,12 +37,45 @@ steps:
     versionSpec: '10.x'
   displayName: 'install Node.js'
 
+- powershell: |
+    echo $(git --version)
+    git config --global user.email "kurmanov.work@gmail.com"
+    git config --global user.name "dmitrykurmanov"
+    git checkout master
+    git pull origin master
+    git fetch --tags --force
+    npm run release -- --release-as $(SurveyJSVersion)
+    git push --follow-tags origin master;
+  displayName: 'npm run release with SurveyJSVersion'
 
+- powershell: |
+    git push --follow-tags origin master;
+  displayName: 'push release commit to github'
 
+- script: |
+    npm install
+    npm run build_prod
+    npm run testsingle
+    npm run testcafe_ci
+  displayName: "npm install and build"
 
+- script: |
+    npm run doc_gen
+  displayName: "generate docs"
 
+- task: Npm@1
+  inputs:
+    command: "publish"
+    workingDir: "build"
+    publishEndpoint: "NPM Registry"
+    verbose: true
+  displayName: 'npm publish survey-creator'
 
+- script: |
+    npm run doc_update
+  displayName: "update docs"
 
+#trigger next build via the artifact file 'version.txt'
 - task: CopyFiles@2
   inputs:
     contents: 'version.txt'
