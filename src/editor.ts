@@ -1084,7 +1084,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       id: "svd-survey-settings",
       icon: "icon-actionsettings",
       visible: this.koIsShowDesigner,
-      enabled: false,
+      enabled: true,
       action: () => {
         this.selectedElement = this.survey;
         this.showQuestionEditor(this.survey);
