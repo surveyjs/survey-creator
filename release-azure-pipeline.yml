@@ -3,5 +3,55 @@
 #trigger only "by hand"
 trigger: none
 
+pool:
+  vmImage: 'Ubuntu-16.04'
+
 steps:
-  - 
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: '9434af9c-19e5-4e5d-8bd7-2d9129d3fed4'
+    pipeline: '30'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSVersionFile'
+    downloadPath: '$(System.ArtifactsDirectory)'
+  displayName: 'Download Build Artifact - SurveyJSVersionFile'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSVersionFile/'
+    Contents: 'version.txt'
+    TargetFolder: '$(Build.Repository.LocalPath)/'
+    OverWrite: true
+  displayName: 'Copy Build Artifact - SurveyJSVersionFile'
+
+- powershell: |
+    $version = Get-Content $(Build.Repository.LocalPath)/version.txt
+    Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+  displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'install Node.js'
+
+
+
+
+
+
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'version.txt'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: 'copy version file to Build.ArtifactStagingDirectory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'SurveyJSVersionFile'
+    publishLocation: 'Container'
+  displayName: 'Publish Build Artifact - SurveyJSVersionFile'
