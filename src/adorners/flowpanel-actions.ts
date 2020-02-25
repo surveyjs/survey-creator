@@ -1,8 +1,7 @@
 import * as ko from "knockout";
 import {
   registerAdorner,
-  SurveyForDesigner,
-  ISurveyObjectMenuItem
+  SurveyForDesigner
 } from "../surveyjsObjects";
 import "./flowpanel-actions.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./flowpanel-actions.html");

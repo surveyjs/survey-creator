@@ -2346,7 +2346,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
               }
             }
             isShowTitle(question.titleLocation !== "hidden");
-            this.onQuestionEditorChanged(question);
           }
         });
       }
@@ -2367,7 +2366,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
-            this.onQuestionEditorChanged(question);
           }
         });
       }
