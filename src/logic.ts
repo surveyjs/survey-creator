@@ -755,6 +755,15 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koEditableItem = ko.observable(null);
     this.update();
   }
+
+  private _placeholderHtml = ko.observable("");
+  get placeholderHtml() {
+    return this._placeholderHtml();
+  }
+  set placeholderHtml(value) {
+    this._placeholderHtml(value);
+  }
+
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }

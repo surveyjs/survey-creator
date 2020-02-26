@@ -1,0 +1,36 @@
+.svd-logic-tab {
+  height: 75vh;
+  position: relative;
+}
+
+.svd-logic-item-header {
+  background-color: #e0e0e0;
+  min-height: 32px;
+  line-height: 32px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 14px;
+  padding: 0 1em;
+
+  .svd-logic-header-item-icon {
+    display: inline-block;
+    cursor: pointer;
+    padding-right: 10px;
+
+    svg-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+
+      svg {
+        display: block;
+        margin-top: 3px;
+      }
+    }
+
+    .svd-logic-header-icon-text {
+    }
+  }
+  .svd-logic-header-item-text {
+  }
+}
