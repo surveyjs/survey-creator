@@ -107,10 +107,6 @@ ko.bindingHandlers["clickNoFocus"] = {
   init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
     element.onclick = ev => {
       valueAccessor().call(viewModel, viewModel, ev);
-      setTimeout(() => {
-        element.blur();
-      }, 1);
-      return true;
     };
   }
 };
