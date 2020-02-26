@@ -193,7 +193,17 @@ export function createAfterRenderHandler(
         "svd-main-border-color"
       );
     }
-
+    domElement.setAttribute(
+      "aria-label",
+      surveyElement.title + " " + surveyElement.getType()
+    );
+    domElement.tabIndex = "0";
+    domElement.addEventListener("keyup", function(ev) {
+      var char = ev.which || ev.keyCode;
+      if (char === 13 || char === 27) {
+        domElement.click();
+      }
+    });
     domElement.onclick = function(e) {
       if (!e["markEvent"]) {
         e["markEvent"] = true;
@@ -257,10 +267,7 @@ export function createAfterRenderPageHandler(
   creator: any,
   survey: SurveyForDesigner
 ) {
-  return function elementOnAfterRendering(
-    domElement: any,
-    page: any
-  ) {
+  return function elementOnAfterRendering(domElement: any, page: any) {
     page.renderedElement = domElement;
     domElement.classList.add("svd_page");
     domElement.onclick = function(e) {
@@ -351,7 +358,7 @@ function addAdorner(node, model) {
           elements.unshift(node);
         }
         if (model.getType() !== "page") {
-        elements = filterNestedQuestions(node, elements);
+          elements = filterNestedQuestions(node, elements);
         }
         if (
           elements.length === 0 &&
