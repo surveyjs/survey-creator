@@ -1002,7 +1002,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.tabs.push({
           name: "logic",
           title: this.getLocString("ed.logic"),
-          template: "surveylogic",
+          template: "se-tab-logic",
           data: this.logic,
           action: () => this.showLogicEditor()
         });

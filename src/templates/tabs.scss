@@ -1,0 +1,58 @@
+.svd-survey-placeholder-root {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .svd-survey-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .svd-survey-gallery {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background-color: $secondary-bg-color;
+      margin: 6px;
+      a {
+        color: $primary-text-color;
+        margin-top: 50px;
+        font-size: 14px;
+        text-decoration: underline;
+        img {
+          margin-top: -5px;
+          margin-right: 1em;
+        }
+      }
+    }
+    .svd-empty-message-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      .svd-empty-message {
+        margin-bottom: 1em;
+        text-align: center;
+        font-size: 22px;
+        color: $primary-color;
+        pointer-events: none;
+      }
+      .svd-empty-image {
+        width: 300px;
+        pointer-events: none;
+        display: block;
+      }
+      .svd-empty-action {
+        margin-bottom: 30px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.svd_survey_designer {
+  .svd-survey-placeholder-root {
+    background-color: $primary-bg-color;
+  }
+}

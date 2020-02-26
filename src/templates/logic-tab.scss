@@ -1,0 +1,65 @@
+.svd-logic-tab {
+  height: 75vh;
+  position: relative;
+}
+
+.svd-logic-tab__rules-list {
+  width: 100%;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  color: #404040;
+  border-collapse: collapse;
+}
+
+.svd-logic-tab__rules-list__header {
+  font-weight: bold;
+}
+
+.svd-logic-tab__rules-list__row {
+  border-bottom: solid 1px #ededed;
+  th,
+  td {
+    padding: 10px;
+  }
+}
+
+.svd-logic-tab__rules-list__action-cell {
+  text-align: center;
+  & > * {
+    cursor: pointer;
+  }
+}
+
+.svd-logic-item-header {
+  background-color: #e0e0e0;
+  min-height: 32px;
+  line-height: 32px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 14px;
+  padding: 0 1em;
+
+  .svd-logic-header-item-icon {
+    display: inline-block;
+    cursor: pointer;
+    padding-right: 10px;
+
+    svg-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+
+      svg {
+        display: block;
+        margin-top: 3px;
+      }
+    }
+
+    .svd-logic-header-icon-text {
+    }
+  }
+  .svd-logic-header-item-text {
+  }
+}
