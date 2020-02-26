@@ -46,8 +46,8 @@
         <!-- ko ifnot: placeholderHtml -->
           <div class="svd-empty-message-container">
             <div class="svd-empty-message" data-bind="text: getLocString('survey.addLogicItem')"></div>
-            <img class="svd-empty-image" src="../images/start-designing-form.svg" data-bind="attr: { alt: getLocString('survey.addLogicItem') }"/>
             <input class="svd-empty-action btn btn-primary" type="button" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew')" />
+            <img class="svd-empty-image" src="../images/start-designing-form.svg" data-bind="attr: { alt: getLocString('survey.addLogicItem') }"/>
           </div>
           <!-- /ko -->
         </div>
