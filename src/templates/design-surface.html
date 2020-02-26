@@ -60,7 +60,7 @@
 
 <script type="text/html" id="se-tab-designer-item">
   <div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color"
-  data-bind="attr: {title: item.tooltip}, css: 'svd_toolbox_item_' + item.iconName, key2click, clickNoFocus: function() { editor.clickToolboxItem(item); }, event:{dragstart: function(el, e) { editor.draggingToolboxItem(item, e); return true;}, dragend: function(el, e) { editor.dragEnd(); }}"
+  data-bind="attr: {title: item.tooltip, 'aria-label': item.tooltip + ' ' + editor.getLocString('toolbox') + ' item'}, css: 'svd_toolbox_item_' + item.iconName, key2click, clickNoFocus: function() { editor.clickToolboxItem(item); }, event:{dragstart: function(el, e) { editor.draggingToolboxItem(item, e); return true;}, dragend: function(el, e) { editor.dragEnd(); }}"
   >
       <span>
       <svg-icon params="iconName: item.iconName"></svg-icon>
