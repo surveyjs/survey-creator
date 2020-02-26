@@ -2,11 +2,11 @@
   <div class="svd-logic-tab">
     <div data-bind="visible: koMode() == 'view'">
       <div data-bind="visible: $data.koItems().length > 0" >
-        <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew')" />
+        <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew'), attr: {title: $data.getLocString('pe.addNew') }" />
         <p />
-        <table>
+        <table class="svd-logic-tab__rules-list">
           <thead>
-              <tr class="svd-light-background-color">
+              <tr class="svd-logic-tab__rules-list__header svd-logic-tab__rules-list__row">
                   <th data-bind="visible:!$data.isReadOnly"  width="100px"></th>
                   <th class="svd-dark-border-color" data-bind="text: $data.getLocString('ed.lg.conditions')"></th>
                   <th class="svd-dark-border-color" data-bind="text: $data.getLocString('ed.lg.actions')"></th>
@@ -15,9 +15,11 @@
           </thead>
           <tbody>
               <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
-              <tr>
-                <td data-bind="visible:!$parent.isReadOnly">
-                  <input type="button" class="btn btn-primary" data-bind="click: $data.edit, attr: {title: $data.editText }, value: $data.editText"/>
+              <tr class="svd-logic-tab__rules-list__row">
+                <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
+                  <span data-bind="click: $data.edit, attr: {title: $data.editText }">
+                    <svg-icon class="svd-primary-icon icon-actioneditelement" params="iconName: 'icon-actioneditelement'"></svg-icon>
+                  </span>
                 </td>
                 <td>
                   <span data-bind="text: item.title"></span>
@@ -29,8 +31,10 @@
                   </div>
                   <!-- /ko -->
                 </td>
-                <td data-bind="visible:!$parent.isReadOnly">
-                  <input type="button" class="btn btn-danger" data-bind="click: $data.remove, attr: {title: $data.deleteText }, value: $data.deleteText"/>
+                <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
+                  <span data-bind="click: $data.remove, attr: {title: $data.deleteText }">
+                    <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
+                  </span>
                 </td>
               </tr>
               <!-- /ko -->

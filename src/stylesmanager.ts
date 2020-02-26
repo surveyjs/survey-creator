@@ -19,7 +19,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     orange: {
       "$primary-color": "#f78119",
@@ -33,7 +34,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     darkblue: {
       "$primary-color": "#3c4f6d",
@@ -47,7 +49,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     darkrose: {
       "$primary-color": "#68656e",
@@ -61,7 +64,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     stone: {
       "$primary-color": "#0f0f33",
@@ -75,7 +79,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     winter: {
       "$primary-color": "#5ac8fa",
@@ -89,7 +94,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     },
     winterstone: {
       "$primary-color": "#3c3b40",
@@ -103,7 +109,8 @@ export class StylesManager {
       "$primary-bg-color": "#fff",
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
-      "$secondary-border-color": "#ddd"
+      "$secondary-border-color": "#ddd",
+      "$error-color": "#ed5565"
     }
   };
   public static ThemeCss: { [key: string]: string } = {
@@ -129,6 +136,7 @@ export class StylesManager {
       "color: $primary-text-color; background-color: $secondary-bg-color; border-color: $secondary-bg-color;",
 
     ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
+    ".svd_container .svd-danger-icon .svd-svg-icon": "fill: $error-color;",
     ".svd_container .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
     ".svd_container .svd-primary-icon .svd-svg-icon": "fill: $primary-color;",
     ".svd_container .svd-secondary-icon .svd-svg-icon":
@@ -184,12 +192,11 @@ export class StylesManager {
     ".svd_container .panel_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
 
-    ".svd_container .svd-designer-tabbed-container__tab-header-active": 
+    ".svd_container .svd-designer-tabbed-container__tab-header-active":
       "border-color: $primary-color;",
     ".svd_container .svd-designer-tabbed-container__tab-header:hover":
-        "color: $primary-color;",
-    ".svd_container .svda-add-custom-item":
-        "color: $primary-color;"
+      "color: $primary-color;",
+    ".svd_container .svda-add-custom-item": "color: $primary-color;"
   };
 
   public static bootstrapThemeCss: { [key: string]: string } = {
@@ -293,12 +300,12 @@ export class StylesManager {
     ".svd_container.sv_bootstrap_css .panel_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
 
-      ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header-active": 
+    ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header-active":
       "border-color: $primary-color;",
-      ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header:hover":
-          "color: $primary-color;",
-      ".svd_container.sv_bootstrap_css .svda-add-custom-item":
-          "color: $primary-color;"
+    ".svd_container.sv_bootstrap_css .svd-designer-tabbed-container__tab-header:hover":
+      "color: $primary-color;",
+    ".svd_container.sv_bootstrap_css .svda-add-custom-item":
+      "color: $primary-color;"
   };
 
   public static bootstrapmaterialThemeCss: { [key: string]: string } = {
@@ -409,12 +416,12 @@ export class StylesManager {
     ".svd_container.sv_bootstrapmaterial_css .panel_actions.svd_question:hover":
       "border-top: 1px solid $primary-color;",
 
-      ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header-active": 
+    ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header-active":
       "border-color: $primary-color;",
-      ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header:hover":
-          "color: $primary-color;",
-      ".svd_container.sv_bootstrapmaterial_css .svda-add-custom-item":
-          "color: $primary-color;"
+    ".svd_container.sv_bootstrapmaterial_css .svd-designer-tabbed-container__tab-header:hover":
+      "color: $primary-color;",
+    ".svd_container.sv_bootstrapmaterial_css .svda-add-custom-item":
+      "color: $primary-color;"
   };
 
   private sheet: CSSStyleSheet = null;
@@ -484,7 +491,9 @@ export class StylesManager {
   }
 
   public static applySurveyTheme(themeName) {
-    if (["bootstrap", "bootstrapmaterial", "modern"].indexOf(themeName) !== -1) {
+    if (
+      ["bootstrap", "bootstrapmaterial", "modern"].indexOf(themeName) !== -1
+    ) {
       Survey.Survey.cssType = themeName;
     } else {
       Survey.Survey.cssType = "default";

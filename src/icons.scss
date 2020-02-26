@@ -9,6 +9,11 @@
       fill: $primary-color;
     }
   }
+  .svd-danger-icon {
+    .svd-svg-icon {
+      fill: $error-color;
+    }
+  }
   .svd-secondary-icon {
     .svd-svg-icon {
       fill: $secondary-color;
