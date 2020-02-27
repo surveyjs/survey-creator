@@ -53,16 +53,16 @@ steps:
     npm run release -- --release-as $(SurveyJSVersion)
   displayName: 'npm run release with SurveyJSVersion'
 
-- powershell: |
-    git push --follow-tags origin master;
-  displayName: 'push release commit to github'
-
 - script: |
     npm install
     npm run build_prod
     npm run testsingle
     npm run testcafe_ci
   displayName: "npm install and build"
+
+- powershell: |
+    git push --follow-tags origin master;
+  displayName: 'push release commit to github'
 
 - script: |
     npm run doc_gen
