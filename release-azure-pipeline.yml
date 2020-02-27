@@ -43,6 +43,10 @@ steps:
     versionSpec: '10.x'
   displayName: 'install Node.js'
 
+- script: |
+    npm install
+  displayName: 'npm install'
+
 - powershell: |
     echo $(git --version)
     git config --global user.email "kurmanov.work@gmail.com"
@@ -54,11 +58,10 @@ steps:
   displayName: 'npm run release with SurveyJSVersion'
 
 - script: |
-    npm install
     npm run build_prod
     npm run testsingle
     npm run testcafe_ci
-  displayName: "npm install and build"
+  displayName: "npm build and test"
 
 - powershell: |
     git push --follow-tags origin master;
