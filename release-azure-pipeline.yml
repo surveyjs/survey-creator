@@ -51,7 +51,6 @@ steps:
     git pull origin master
     git fetch --tags --force
     npm run release -- --release-as $(SurveyJSVersion)
-    git push --follow-tags origin master;
   displayName: 'npm run release with SurveyJSVersion'
 
 - powershell: |
