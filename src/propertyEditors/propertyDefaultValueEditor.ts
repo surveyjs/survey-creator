@@ -61,7 +61,8 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     return survey;
   }
   public static updateSurveyStyle(survey: Survey.Survey) {
-    survey.css.body = "";
+    survey.css.body += " svd-property-editor-survey";
+    survey.css.page.root += " svd-property-editor-survey-page";
     if (!!survey.css.question) {
       survey.css.question.mainRoot += " svd-survey-nopadding";
     }

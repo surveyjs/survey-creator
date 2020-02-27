@@ -1,5 +1,7 @@
+$logic-space: 20px;
+
 .svd-logic-tab {
-  height: 75vh;
+  min-height: 75vh;
   position: relative;
 }
 
@@ -18,10 +20,10 @@
 }
 
 .svd-logic-tab__rules-list__row {
-  border-bottom: solid 1px #ededed;
+  border-bottom: solid 1px $secondary-border-color;
   th,
   td {
-    padding: 10px;
+    padding: $logic-space / 2;
   }
 }
 
@@ -32,7 +34,33 @@
   }
 }
 
-.svd-logic-item-header {
+.svd-logic-tab__rule-editor__title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #404040;
+}
+
+.svd-logic-tab__item {
+  border: solid 1px $secondary-border-color;
+  padding: $logic-space;
+  margin-bottom: $logic-space;
+}
+
+.svd-logic-tab__item-header {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: $logic-space;
+  color: #404040;
+  line-height: 34px;
+}
+
+.svd-logic-tab__item-header-icon {
+  float: right;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.svd-logic-tab-item-header {
   background-color: #e0e0e0;
   min-height: 32px;
   line-height: 32px;
@@ -42,7 +70,7 @@
   padding: 0 1em;
 
   .svd-logic-header-item-icon {
-    display: inline-block;
+    float: right;
     cursor: pointer;
     padding-right: 10px;
 
@@ -61,5 +89,36 @@
     }
   }
   .svd-logic-header-item-text {
+  }
+}
+
+.svd-expression-header {
+  background-color: #f0f0f0;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  cursor: pointer;
+
+  .icon-expression-arrow {
+    float: right;
+    margin-top: -2px;
+    margin-right: 7px;
+  }
+}
+
+.svd-logic-tab {
+  .svd-expression-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: #404040;
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .icon-expression-arrow {
+    margin-right: $logic-space / 2;
+  }
+  .svd-propertyeditor-condition {
+    border: solid 1px $secondary-border-color;
+    padding: $logic-space;
   }
 }

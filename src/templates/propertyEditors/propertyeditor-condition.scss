@@ -1,0 +1,70 @@
+﻿.svd-propertyeditor-condition,
+.propertyeditor-expression {
+  width: 100%;
+  textarea {
+    // max-width: calc(100% - 200px);
+    // min-width: calc(100% - 200px);
+    max-width: calc(100%);
+    min-width: calc(100%);
+  }
+  .assistant {
+    padding-left: 1em;
+    width: 200px;
+    float: right;
+    .assistant-title {
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    .assistant-content {
+      overflow-y: auto;
+      height: 125px;
+      .assistant-item {
+        margin-bottom: 0.5em;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .svd_custom_select {
+    width: auto;
+    select:disabled {
+      background-color: $secondary-bg-color;
+    }
+  }
+
+  .form-inline {
+    white-space: nowrap;
+  }
+}
+
+.svd_container survey-widget .sv_main {
+  .sv_custom_header {
+    display: none;
+  }
+  .sv_body.svd-property-editor-survey,
+  .svd-property-editor-survey {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    .sv_p_root,
+    .svd-property-editor-survey-page {
+      .sv_page_title {
+        display: none;
+      }
+      & > .sv_row {
+        background-color: transparent;
+        border: none;
+        .sv_q,
+        .sv_qstn {
+          padding: 0;
+
+          input,
+          select {
+            height: 34px;
+            line-height: 34px;
+          }
+        }
+      }
+    }
+  }
+}

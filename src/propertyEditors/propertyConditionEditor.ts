@@ -1,7 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyTextEditor } from "./propertyModalEditor";
-import { SurveyPropertyEditorBase } from "./propertyEditorBase";
+import {
+  SurveyPropertyEditorBase,
+  ISurveyObjectEditorOptions
+} from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { EditableObject } from "./editableObject";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
@@ -19,12 +22,13 @@ export interface IConditionEditorItemOwner {
     notContains: Array<string>
   ): boolean;
   isWideMode: boolean;
+  options: ISurveyObjectEditorOptions;
 }
 
 export class ConditionEditorItem {
   survey: Survey.Survey;
   constructor(private owner: IConditionEditorItemOwner) {
-    this.survey = new Survey.Survey({
+    var json = {
       showNavigationButtons: false,
       showQuestionNumbers: "off",
       textUpdateMode: "onTyping",
@@ -55,7 +59,10 @@ export class ConditionEditorItem {
           enableIf: "{questionName} notempty"
         }
       ]
-    });
+    };
+    this.survey = !!owner.options
+      ? owner.options.createSurvey(json, "conditionEditor")
+      : new Survey.Survey(json);
     this.survey.onValueChanged.add((sender, options) => {
       if (options.name == "questionName") {
         this.updateOperatorEnables();

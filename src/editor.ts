@@ -916,7 +916,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         context
       });
     };
-    this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"));
+    this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -2691,7 +2691,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.showQuestionEditor(element, onClose);
   }
   private updateConditions(oldName: string, newName: string) {
-    new SurveyLogic(this.survey).renameQuestion(oldName, newName);
+    new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
   }
   public get showModalOnElementEditing(): boolean {
     return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;

@@ -59,47 +59,42 @@
 
     </div>
     <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
-      <h4 data-bind="text: $data.getLocString('ed.lg.expressionEditorTitle')"></h4>
+      <h4 class="svd-logic-tab__rule-editor__title" data-bind="text: $data.getLocString('ed.lg.expressionEditorTitle')"></h4>
       <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
       <!--ko if: $data.koEditableItem() != null -->
-        <h4 data-bind="text: $data.getLocString('ed.lg.actionsEditorTitle')"></h4>
+        <h4 class="svd-logic-tab__rule-editor__title" data-bind="text: $data.getLocString('ed.lg.actionsEditorTitle')"></h4>
         <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
-        <div data-bind="visible: op.templateObject !== null">
-            <div class="svd-logic-item-header">
-              <span class="svd-logic-header-item-icon svd-main-color" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
-                <span>
-                    <svg-icon class="svd-primary-icon" params="iconName: 'icon-actiondelete'"></svg-icon>
-                </span>
-              </span>
-              <span class="svda_action_separator svd-dark-border-color"></span>
+        <div class="svd-logic-tab__item" data-bind="visible: op.templateObject !== null">
+            <div class="svd-logic-tab__item-header">
               <span data-bind="text: op.name"></span>
+              <span class="svd-logic-tab__item-header-icon" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
+                <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
+              </span>
             </div>
             <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
-            <!-- ko if: $index() === ($parent.koEditableItem().koOperations().length - 1) -->
-            <hr/>
-             <!-- /ko -->
         </div>
         <!-- /ko -->
         <p>
-          <div class="form-inline form-group">
-            <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
-                <select onmousewheel="return false;" data-bind="if: true, value:koSelectedOperation, attr: { 'aria-label': selectedOperationCaption }">
-                  <option data-bind="text:selectedOperationCaption, value: null"></option>
-                  <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
-                  <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
-                  <!-- /ko -->
-                </select>
+          <div class="svd-logic-tab__item">
+            <div class="form-inline form-group">
+              <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
+                  <select onmousewheel="return false;" data-bind="if: true, value:koSelectedOperation, attr: { 'aria-label': selectedOperationCaption }">
+                    <option data-bind="text:selectedOperationCaption, value: null"></option>
+                    <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
+                    <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
+                    <!-- /ko -->
+                  </select>
+              </div>
+              <div style="width: 50%;max-width:200px;display:inline-block">
+                <input type="button" class="form-control btn btn-primary" data-bind="enable: koSelectedOperation() != null, click:koAddNewOperation, value: addNewOperationText" />
+              </div>
             </div>
-            <div style="width: 50%;max-width:200px;display:inline-block">
-              <input type="button" class="form-control btn btn-primary" data-bind="enable: koSelectedOperation() != null, click:koAddNewOperation, value: addNewOperationText" />
-            </div>
+            <!--ko if: $data.koSelectedOperation() != null -->
+            <div data-bind="text:koSelectedOperation().description"></div>
+            <!-- /ko -->
           </div>
-          <!--ko if: $data.koSelectedOperation() != null -->
-          <div data-bind="text:koSelectedOperation().description"></div>
-          <!-- /ko -->
         </p>
         <p>
-          <hr/>
           <div>
             <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
           </div>
