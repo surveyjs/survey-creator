@@ -9,7 +9,7 @@ export var enStrings = {
     externalHelpLinkUrl:
       "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Please drop a question here from the Toolbox.",
-    addLogicItem: "Please add a logic rule.",
+    addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",

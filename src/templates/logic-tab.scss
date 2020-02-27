@@ -98,7 +98,7 @@ $logic-space: 20px;
   }
 }
 
-.svd_content .svd-logic-tab {
+.svd_container .svd_content .svd-logic-tab {
   .svd-expression-header {
     font-size: 16px;
     font-weight: bold;
@@ -119,5 +119,11 @@ $logic-space: 20px;
   }
   .form-group {
     margin-bottom: 0;
+  }
+  .btn {
+    height: 34px;
+  }
+  .btn-link {
+    border: solid 1px $secondary-border-color;
   }
 }

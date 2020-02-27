@@ -37,6 +37,7 @@
         font-size: 22px;
         color: $primary-color;
         pointer-events: none;
+        max-width: 300px;
       }
       .svd-empty-image {
         width: 300px;
@@ -44,7 +45,7 @@
         display: block;
       }
       .svd-empty-action {
-        margin-bottom: 30px;
+        margin-top: 30px;
         cursor: pointer;
       }
     }
