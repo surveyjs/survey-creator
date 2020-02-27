@@ -1,12 +1,14 @@
 ﻿.svd-propertyeditor-condition,
 .propertyeditor-expression {
   width: 100%;
+
   textarea {
     // max-width: calc(100% - 200px);
     // min-width: calc(100% - 200px);
     max-width: calc(100%);
     min-width: calc(100%);
   }
+
   .assistant {
     padding-left: 1em;
     width: 200px;
@@ -35,6 +37,25 @@
   .form-inline {
     white-space: nowrap;
   }
+
+  .svd-propertyeditor-condition-wide-table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    margin: 10px 0;
+    td {
+      padding: 10px 0;
+    }
+    td:last-child {
+      width: 20px;
+      padding: 5px;
+    }
+
+    .svd-propertyeditor-condition-item-delete-icon {
+      float: right;
+      cursor: pointer;
+    }
+  }
 }
 
 .svd_container survey-widget .sv_main {
@@ -59,12 +80,26 @@
           padding: 0;
 
           input,
-          select {
+          select,
+          input:not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="image"]):not([type="checkbox"]):not([type="radio"]) {
             height: 34px;
             line-height: 34px;
           }
         }
       }
     }
+  }
+}
+
+.svd-expression-header {
+  background-color: #f0f0f0;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  cursor: pointer;
+
+  .icon-expression-arrow {
+    float: right;
+    margin-top: -2px;
+    margin-right: 7px;
   }
 }

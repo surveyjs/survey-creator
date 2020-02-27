@@ -44,14 +44,20 @@ $logic-space: 20px;
   border: solid 1px $secondary-border-color;
   padding: $logic-space;
   margin-bottom: $logic-space;
+  // div:nth-child(2) {
+  //   padding-top: $logic-space / 2;
+  // }
 }
 
 .svd-logic-tab__item-header {
   font-size: 16px;
   font-weight: bold;
-  padding-bottom: $logic-space;
   color: #404040;
   line-height: 34px;
+}
+
+.svd-logic-tab__item-comtent {
+  padding-top: $logic-space;
 }
 
 .svd-logic-tab__item-header-icon {
@@ -92,20 +98,7 @@ $logic-space: 20px;
   }
 }
 
-.svd-expression-header {
-  background-color: #f0f0f0;
-  margin-bottom: 1em;
-  padding: 0.5em;
-  cursor: pointer;
-
-  .icon-expression-arrow {
-    float: right;
-    margin-top: -2px;
-    margin-right: 7px;
-  }
-}
-
-.svd-logic-tab {
+.svd_content .svd-logic-tab {
   .svd-expression-header {
     font-size: 16px;
     font-weight: bold;
@@ -120,5 +113,11 @@ $logic-space: 20px;
   .svd-propertyeditor-condition {
     border: solid 1px $secondary-border-color;
     padding: $logic-space;
+  }
+  .svd-expression-content {
+    margin-top: $logic-space;
+  }
+  .form-group {
+    margin-bottom: 0;
   }
 }

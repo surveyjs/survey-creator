@@ -228,7 +228,7 @@ export class ConditionEditorItem {
   }
   private updateQuestionsWidth() {
     var isWide = this.owner.isWideMode;
-    var paddingRight = "5px";
+    var paddingRight = isWide ? "20px" : "5px";
     var isValueSameLine =
       !!this.valueQuestion && !this.valueQuestion.startWithNewLine;
     if (!!this.conjunctionQuestion) {

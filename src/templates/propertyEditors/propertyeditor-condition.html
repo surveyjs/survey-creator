@@ -24,7 +24,7 @@
         <!-- /ko -->
         </span>
     </div>
-    <div data-bind="visible: koIsEditorShowing()">
+    <div class="svd-expression-content" data-bind="visible: koIsEditorShowing()">
         <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
             <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click: onChangeViewClick.bind($data, 'form'), text: $data.getLocString('pe.buildExpression')"></button>
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick.bind($data, 'text'), text: $data.getLocString('pe.editExpression')"></button>
@@ -42,7 +42,7 @@
                 <!-- /ko -->
             <!-- /ko -->
             <!-- ko if: koIsWideMode() -->
-                <table style="width:100%">
+                <table class="svd-propertyeditor-condition-wide-table">
                     <tbody  data-bind="foreach: koEditorItems">
                         <tr>
                             <td>
@@ -50,10 +50,10 @@
                                     <survey-widget params="survey: $data.survey"></survey-widget>
                                 </div>
                             </td>
-                            <td width="100px">
-                                <div data-bind="visible: $parent.koEditorItems().length > 1">
-                                    <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveConditionClick, value: $parent.removeConditionText"/>
-                                </div>
+                            <td>
+                                <span class="svd-propertyeditor-condition-item-delete-icon" data-bind="visible: $parent.koEditorItems().length > 1, key2click, clickNoFocus: $parent.onRemoveConditionClick, attr: {title: $parent.removeConditionText }">
+                                    <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
+                                </span>
                             </td>
                         </tr>
                     </tbody>
