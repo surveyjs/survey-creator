@@ -316,7 +316,7 @@ QUnit.test("General properties, editor type", function(assert) {
   );
   assert.equal(
     tab.editorProperties[1].editorType,
-    "boolean",
+    "switch",
     "visible property has check edit type"
   );
   assert.equal(
