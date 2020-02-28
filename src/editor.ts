@@ -1757,10 +1757,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       object.getType(),
       propertyName
     );
-    if (!property) {
-      return false;
-    }
-    return this.onCanShowObjectProperty(object, property);
+    return SurveyHelper.isPropertyVisible(object, property, this);
   }
   protected onCanShowObjectProperty(
     object: any,
