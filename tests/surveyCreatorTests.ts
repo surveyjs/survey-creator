@@ -1157,6 +1157,15 @@ QUnit.test(
   }
 );
 
+QUnit.test("Can show unexisting property", function(assert) {
+  var creator = new SurveyCreator(undefined);
+  var question = new Survey.QuestionCheckbox("q1");
+  creator.onCanShowProperty.add((sender, options) => {
+    options.canShow = options.property.name !== "someth";
+  });
+  assert.notOk(creator.canShowObjectProperty(question, "someth"));
+});
+
 function getSurveyJson(): any {
   return {
     pages: [

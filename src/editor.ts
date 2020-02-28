@@ -1757,6 +1757,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       object.getType(),
       propertyName
     );
+    if (!property) {
+      return false;
+    }
     return this.onCanShowObjectProperty(object, property);
   }
   protected onCanShowObjectProperty(
