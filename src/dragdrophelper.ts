@@ -163,6 +163,7 @@ export class DragDropHelper {
         if (
           !!target &&
           !!target.contains &&
+          target !== document.activeElement &&
           target.contains(document.activeElement)
         ) {
           e.preventDefault();
