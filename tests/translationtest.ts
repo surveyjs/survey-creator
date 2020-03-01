@@ -56,7 +56,6 @@ QUnit.test("Survey child groups", function(assert) {
 });
 QUnit.test("Survey child groups", function(assert) {
   var survey = new Survey.Survey();
-  var group = new TranslationGroup("root", survey);
   survey.addNewPage("p1");
   var question = <Survey.QuestionText>(
     survey.pages[0].addNewQuestion("text", "q1")
@@ -492,4 +491,44 @@ QUnit.test("Merging a locale with default", function(assert) {
     true,
     "Locale can be merged again"
   );
+});
+QUnit.test("Custom localizable property in question", function(assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "customProp",
+    isLocalizable: true
+  });
+  var question = new Survey.QuestionText("q1");
+  question["customProp"] = "some text";
+  var group = new TranslationGroup(question.name, question, <any>{});
+  var titleItem = <TranslationItem>group.getItemByName("title");
+  var customPropItem = <TranslationItem>group.getItemByName("customProp");
+  assert.ok(titleItem, "Title Item is here");
+  assert.ok(customPropItem, "customPropItem Item is here");
+  assert.equal(customPropItem.name, "customProp", "name is correct");
+  Survey.Serializer.removeProperty("question", "customProp");
+});
+
+QUnit.test("Custom localizable property in itemvalue", function(assert) {
+  Survey.Serializer.addProperty("itemvalue", {
+    name: "customProp",
+    isLocalizable: true
+  });
+  var question = new Survey.QuestionCheckbox("q1");
+  question.choices = ["1", "2"];
+  question.choices[0].text = "text";
+  question.choices[1].text = "text 2";
+  question.choices[1].customProp = "some text";
+  var group = new TranslationGroup(question.name, question, <any>{});
+  var choicesGroup = <TranslationGroup>group.getItemByName("choices");
+  assert.ok(choicesGroup, "Choices is here");
+  assert.equal(choicesGroup.isGroup, true, "It is a group");
+  assert.equal(choicesGroup.items.length, 3, "There are three items");
+  assert.equal(choicesGroup.items[0].name, "1", "The first item is text");
+  assert.equal(choicesGroup.items[1].name, "2", "The second item is text");
+  assert.equal(
+    choicesGroup.items[2].name,
+    "2.customProp",
+    "The third item is customProp"
+  );
+  Survey.Serializer.removeProperty("itemvalue", "customProp");
 });

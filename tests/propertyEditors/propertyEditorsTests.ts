@@ -719,6 +719,55 @@ QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   delete SurveyQuestionEditorDefinition.definition["radiogroup@choices"];
   Survey.Serializer.removeProperty("itemvalue", "description");
 });
+QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
+  Survey.Serializer.addProperty("itemvalue", { name: "imageLink" });
+
+  var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    3,
+    "There are three columns value + text + link"
+  );
+  assert.equal(
+    propertyEditor.koShowTextView(),
+    true,
+    "Allow to show text view with custom properties"
+  );
+
+  Survey.Serializer.removeProperty("itemvalue", "imageLink");
+});
+
+QUnit.test("SurveyPropertyItemValue columns new localizable property", function(
+  assert
+) {
+  Survey.Serializer.addProperty("itemvalue", {
+    name: "description",
+    isLocalizable: true
+  });
+  var qRadio = new Survey.QuestionRadiogroup("q1");
+  qRadio.choices = ["item1", "item2"];
+  var propertyEditor = new SurveyPropertyItemValuesEditor(
+    Survey.Serializer.findProperty("radiogroup", "choices")
+  );
+  propertyEditor.object = qRadio;
+  propertyEditor.koValue(qRadio.choices);
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    3,
+    "There are three columns value + text + description"
+  );
+  var itemViewModel = propertyEditor.createItemViewModel(qRadio.choices[0]);
+  itemViewModel.cells[2].value = "new description";
+  assert.equal(
+    qRadio.choices[0].description,
+    "new description",
+    "Set the new property value correctly"
+  );
+  Survey.Serializer.removeProperty("itemvalue", "description");
+});
+
 QUnit.test("extended SurveyPropertyItemValue + custom property", function(
   assert
 ) {

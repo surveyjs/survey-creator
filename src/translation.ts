@@ -13,6 +13,7 @@ export class TranslationItemBase {
 
 export class TranslationItem extends TranslationItemBase {
   private values: Survey.HashTable<any>;
+  public customText: string;
   constructor(
     public name: string,
     public locString: Survey.LocalizableString,
@@ -24,6 +25,9 @@ export class TranslationItem extends TranslationItemBase {
     this.values = {};
   }
   public get text() {
+    return !!this.customText ? this.customText : this.localizableName;
+  }
+  public get localizableName(): string {
     return editorLocalization.getPropertyName(this.name);
   }
   public koValue(loc: string): any {
@@ -101,6 +105,12 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
+  public getItemByName(name: string): TranslationItemBase {
+    for (var i = 0; i < this.itemValues.length; i++) {
+      if (this.itemValues[i].name == name) return this.itemValues[i];
+    }
+    return null;
+  }
   public get groups(): Array<TranslationGroup> {
     var res = [];
     for (var i = 0; i < this.items.length; i++) {
@@ -166,45 +176,30 @@ export class TranslationGroup extends TranslationItemBase {
       return;
     }
     if (!this.obj || !this.obj.getType) return;
-    var properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    var properties = this.getLocalizedProperties(this.obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if (!property.isSerializable && !property.isLocalizable) continue;
-      if (property.isLocalizable) {
-        if (!property.readOnly && property.visible) {
-          var defaultValue = this.getDefaultValue(property);
-          var locStr = <Survey.LocalizableString>(
-            this.obj[property.serializationProperty]
-          );
-          if (!locStr) continue;
-          if (!this.showAllStrings && !defaultValue && locStr.isEmpty) continue;
-          this.itemValues.push(
-            new TranslationItem(
-              property.name,
-              locStr,
-              defaultValue,
-              this.translation,
-              this.obj
-            )
-          );
+      var item = this.createTranslationItem(this.obj, properties[i]);
+      if (!!item) {
+        this.itemValues.push(item);
+      }
+    }
+    properties = this.getArrayProperties(this.obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      var value = this.obj[property.name];
+      //If ItemValue array?
+      if (this.isItemValueArray(value)) {
+        var group = new TranslationGroup(
+          property.name,
+          value,
+          this.translation
+        );
+        if (group.hasItems) {
+          this.itemValues.push(group);
         }
       } else {
-        var value = this.obj[property.name];
-        if (!!value && Array.isArray(value) && value.length > 0) {
-          //If ItemValue array?
-          if (this.isItemValueArray(value)) {
-            var group = new TranslationGroup(
-              property.name,
-              value,
-              this.translation
-            );
-            if (group.hasItems) {
-              this.itemValues.push(group);
-            }
-          } else {
-            this.createGroups(value, property);
-          }
-        }
+        this.createGroups(value, property);
       }
     }
     this.itemValues.sort(function(
@@ -216,21 +211,63 @@ export class TranslationGroup extends TranslationItemBase {
       return a.name.localeCompare(b.name);
     });
   }
-  private getDefaultValue(property: Survey.JsonObjectProperty): string {
+  private getLocalizedProperties(obj: any): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      if (!property.isSerializable || !property.isLocalizable) continue;
+      if (property.readOnly || !property.visible) continue;
+      res.push(property);
+    }
+    return res;
+  }
+  private getArrayProperties(obj: any): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      var value = obj[property.name];
+      if (!!value && Array.isArray(value) && value.length > 0) {
+        res.push(property);
+      }
+    }
+    return res;
+  }
+  private createTranslationItem(
+    obj: any,
+    property: Survey.JsonObjectProperty
+  ): TranslationItem {
+    var defaultValue = this.getDefaultValue(obj, property);
+    var locStr = <Survey.LocalizableString>obj[property.serializationProperty];
+    if (!locStr) return null;
+    if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    return new TranslationItem(
+      property.name,
+      locStr,
+      defaultValue,
+      this.translation,
+      obj
+    );
+  }
+  private getDefaultValue(
+    obj: any,
+    property: Survey.JsonObjectProperty
+  ): string {
     if (
       property.name == "title" &&
       property.isLocalizable &&
       !!property.serializationProperty
     ) {
       var locStr = <Survey.LocalizableString>(
-        this.obj[property.serializationProperty]
+        obj[property.serializationProperty]
       );
       if (
         !!locStr &&
-        this.obj.getType() != "page" &&
+        obj.getType() != "page" &&
         (!!locStr.onGetTextCallback || locStr["onRenderedHtmlCallback"])
       )
-        return this.obj["name"];
+        return obj["name"];
     }
     return "";
   }
@@ -265,16 +302,30 @@ export class TranslationGroup extends TranslationItemBase {
       var val = this.obj[i];
       var canAdd =
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
-      if (canAdd) {
-        this.itemValues.push(
-          new TranslationItem(
-            val.value,
-            val.locText,
-            val.value,
-            this.translation,
-            val
-          )
-        );
+      if (!canAdd) continue;
+      var item = new TranslationItem(
+        val.value,
+        val.locText,
+        val.value,
+        this.translation,
+        val
+      );
+      this.itemValues.push(item);
+      this.addCustomPropertiesForItemValue(this.obj[i], item);
+    }
+  }
+  private addCustomPropertiesForItemValue(
+    itemValue: any,
+    textItem: TranslationItem
+  ) {
+    var locProperties = this.getLocalizedProperties(itemValue);
+    for (var i = 0; i < locProperties.length; i++) {
+      if (locProperties[i].name == "text") continue;
+      var item = this.createTranslationItem(itemValue, locProperties[i]);
+      if (!!item) {
+        item.customText = textItem.text + " (" + item.localizableName + ")";
+        item.name = itemValue.value + "." + item.name;
+        this.itemValues.push(item);
       }
     }
   }
