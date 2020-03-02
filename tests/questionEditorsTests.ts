@@ -476,6 +476,31 @@ QUnit.test("Question editor: custom errors on unique itemvalues", function(
   assert.equal(tab.hasError(), false, "error message should not be triggered");
 });
 
+QUnit.test("Question editor: clear errors on setting values outside", function(
+  assert
+) {
+  var question = new Survey.QuestionText("question");
+  var creator = new SurveyCreator();
+  creator.onPropertyValidationCustomError.add(function(editor, options) {
+    if (options.propertyName !== "defaultValue") return;
+    if (!options.value) return;
+    if (options.value.length < 5) {
+      options.error = "Error";
+    }
+  });
+
+  var tab = createSurveyQuestionEditorTab(question, ["defaultValue"], creator);
+  var propEditor = tab.getPropertyEditorByName("defaultValue");
+  propEditor.editor.koValue("abc");
+  assert.ok(propEditor.editor.koErrorText(), "There is error");
+  question.defaultValue = "abcdef";
+  assert.equal(propEditor.editor.koValue(), "abcdef", "Value is updated");
+  assert.notOk(
+    propEditor.editor.koErrorText(),
+    "Value is set outside and there is no error"
+  );
+});
+
 QUnit.test("Question editor: required field errors", function(assert) {
   var question = new Survey.QuestionText("name");
   var editor = new SurveyCreator();

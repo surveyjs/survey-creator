@@ -393,6 +393,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public updateValue() {
     this.beginValueUpdating();
     this.koValue(this.getValue());
+    this.koErrorText("");
     this.onValueChanged();
     if (this.onValueUpdated) this.onValueUpdated(this.koValue());
     this.endValueUpdating();
