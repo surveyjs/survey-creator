@@ -1563,6 +1563,30 @@ QUnit.test(
   }
 );
 
+QUnit.test("minValue doesn't work when it is 0, Bug #687", function(assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "decimalPlaces:number",
+    default: 0,
+    minValue: 0,
+    maxValue: 5,
+    category: "validation",
+    visibleIndex: 0
+  });
+
+  var question = new Survey.QuestionText("q1");
+  var propEditor = new SurveyPropertyTextEditor(
+    Survey.Serializer.findProperty("question", "decimalPlaces")
+  );
+  propEditor.object = question;
+  propEditor.koValue(-5);
+  assert.equal(propEditor.koValue(), 0, "The minimum value is 0");
+  propEditor.koValue(2);
+  assert.equal(propEditor.koValue(), 2, "value 2 is correct");
+  propEditor.koValue(6);
+  assert.equal(propEditor.koValue(), 5, "The maximum value is 5");
+  Survey.Serializer.removeProperty("question", "decimalPlaces");
+});
+
 QUnit.test(
   "automicatilly create name for new item in SurveyPropertyTextItemsEditor",
   function(assert) {

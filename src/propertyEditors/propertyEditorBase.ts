@@ -144,13 +144,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         : 524288;
     });
     this.koMaxValue = ko.computed(function() {
-      return !!self.property && !!self.property["maxValue"]
-        ? self.property["maxValue"]
+      return !!self.property && !self.isValueEmpty(self.property.maxValue)
+        ? self.property.maxValue
         : "";
     });
     this.koMinValue = ko.computed(function() {
-      return !!self.property && !!self.property["minValue"]
-        ? self.property["minValue"]
+      return !!self.property && !self.isValueEmpty(self.property.minValue)
+        ? self.property.minValue
         : "";
     });
     this.setIsRequired();
@@ -374,11 +374,11 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
     if (!this.property) return value;
-    if (!Survey.Helpers.isValueEmpty(this.property["minValue"])) {
-      if (value < this.property["minValue"]) return this.property["minValue"];
+    if (!this.isValueEmpty(this.property.minValue)) {
+      if (value < this.property.minValue) return this.property.minValue;
     }
-    if (!Survey.Helpers.isValueEmpty(this.property["maxValue"])) {
-      if (value > this.property["maxValue"]) return this.property["maxValue"];
+    if (!this.isValueEmpty(this.property.maxValue)) {
+      if (value > this.property.maxValue) return this.property.maxValue;
     }
     return value;
   }
@@ -410,6 +410,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private onkoValueChanged(newValue: any) {
     if (this.valueUpdatingCounter > 0 || this.iskoValueChanging) return;
     this.iskoValueChanging = true;
+    var copiedValue = Survey.Helpers.getUnbindValue(newValue);
     newValue = this.getCorrectedValue(newValue);
     if (this.options && this.property && this.object) {
       var options = {
@@ -420,13 +421,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         doValidation: false
       };
       this.options.onValueChangingCallback(options);
-      if (
-        !this.isValueEmpty(options.newValue) &&
-        !Survey.Helpers.isTwoValueEquals(newValue, options.newValue)
-      ) {
-        newValue = options.newValue;
-        this.koValue(newValue);
-      }
+      newValue = options.newValue;
+    }
+    if (
+      !this.isValueEmpty(newValue) &&
+      !Survey.Helpers.isTwoValueEquals(newValue, copiedValue)
+    ) {
+      this.koValue(newValue);
     }
     this.onValueChanged();
     this.iskoValueChanging = false;
@@ -435,7 +436,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     if (this.property && this.object && this.getValue() == newValue) return;
     if (this.onChanged != null) this.onChanged(newValue);
   }
-  private isValueEmpty(val): boolean {
+  protected isValueEmpty(val): boolean {
     return Survey.Helpers.isValueEmpty(val);
   }
   public updateDynamicProperties() {}
