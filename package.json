@@ -48,7 +48,7 @@
     "generate-json-webpack-plugin": "0.2.1",
     "github-api": "3.0.0",
     "html-loader": "0.4.4",
-    "http-server": "0.10.0",
+    "http-server": "0.12.1",
     "husky": "^1.2.1",
     "jquery": "^3.4.1",
     "karma": "^2.0.0",
