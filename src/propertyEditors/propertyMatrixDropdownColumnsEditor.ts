@@ -38,7 +38,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     var newColumn = new Survey.MatrixDropdownColumn("");
     newColumn.name = getNextValue("", this.getColumnNames());
     var columns = [];
-    var orgColumns = this.origionalValue;
+    var orgColumns = this.originalValue;
     if (Array.isArray(orgColumns)) {
       for (var i = 0; i < orgColumns.length; i++) {
         columns.push(orgColumns[i]);
@@ -65,7 +65,7 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
   }
   private getColumnNames(): Array<string> {
     var res = [];
-    var items = this.origionalValue;
+    var items = this.originalValue;
     if (!Array.isArray(items)) return;
     for (var i = 0; i < items.length; i++) {
       var name = items[i].name;

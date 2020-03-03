@@ -6,13 +6,13 @@ export class EditableObject {
   }
   public static getSurvey(object: any): Survey.SurveyModel {
     if (object instanceof Survey.SurveyModel) {
-      return EditableObject.getOrigionalSurvey(object);
+      return EditableObject.getOriginalSurvey(object);
     }
     if (object instanceof Survey.MatrixDropdownColumn && !!object.colOwner)
       return object.colOwner["survey"];
     if (!!object) {
       if (!!object.survey)
-        return EditableObject.getOrigionalSurvey(object.survey);
+        return EditableObject.getOriginalSurvey(object.survey);
       if (!!object.owner) return EditableObject.getSurvey(object.owner);
       if (!!object.errorOwner)
         return EditableObject.getSurvey(object.errorOwner);
@@ -20,15 +20,13 @@ export class EditableObject {
     }
     return null;
   }
-  public static getOrigionaObject(object: any): any {
-    return !!object && !!object["origionalObj"]
-      ? object["origionalObj"]
-      : object;
+  public static getOriginalObject(object: any): any {
+    return !!object && !!object["originalObj"] ? object["originalObj"] : object;
   }
-  public static getOrigionalSurvey(
+  public static getOriginalSurvey(
     survey: Survey.SurveyModel
   ): Survey.SurveyModel {
-    return EditableObject.getOrigionaObject(survey);
+    return EditableObject.getOriginalObject(survey);
   }
 
   private objValue: Survey.Base;
@@ -100,7 +98,7 @@ export class EditableObject {
       res["parent"] = this.obj["parent"];
     }
     res["isCopy"] = true;
-    res["origionalObj"] = this.obj;
+    res["originalObj"] = this.obj;
     return res;
   }
   private assignProperties(obj: any) {

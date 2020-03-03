@@ -1138,7 +1138,7 @@ QUnit.test("The onModified event is called on property changed", function(
   creator.undoRedoManager.undo();
   assert.equal(counter, 2, "2 modification un-done");
 
-  editor.onDeleteClick(editor.origionalValue[0]);
+  editor.onDeleteClick(editor.originalValue[0]);
   assert.equal(counter, 3, "3 modification - after delete");
 
   editor.onClearClick();

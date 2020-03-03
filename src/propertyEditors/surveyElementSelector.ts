@@ -28,7 +28,7 @@ export class SurveyElementSelector {
     showTitle: boolean = false,
     optionsCaptionName: string = ""
   ) {
-    this.survey = EditableObject.getOrigionalSurvey(this.survey);
+    this.survey = EditableObject.getOriginalSurvey(this.survey);
     this.showTitle = showTitle;
     this.optionsCaptionValue = this.getOptionsText(
       optionsCaptionName,

@@ -4,10 +4,10 @@
 </script>
 <script type="text/html" id="propertyeditorcontent-nesteditems">
   <div data-bind="visible: koIsList"  style="overflow-y: auto; overflow-x:hidden; max-height:400px">
-      <!--ko if: origionalValue.length == 0 -->
+      <!--ko if: originalValue.length == 0 -->
       <div data-bind="text: $data.getLocString('pe.listIsEmpty')"></div>
       <!-- /ko -->
-      <!--ko if: origionalValue.length > 0 -->
+      <!--ko if: originalValue.length > 0 -->
       <table class="svd_items_table">
           <thead data-bind="visible: koShowHeader">
               <tr>
@@ -18,14 +18,14 @@
                   <th></th>
               </tr>
           </thead>
-          <tbody data-bind="sortable: { foreach: origionalValue, options: sortableOptions }">
+          <tbody data-bind="sortable: { foreach: originalValue, options: sortableOptions }">
             <!-- ko component: { name:"comp-propertyeditor-nesteditem", params: { item: $data, editor: $parent } } --><!-- /ko -->
           </tbody>
       </table>
       <!-- /ko -->
       <div class="svd-items-control-footer" data-bind="visible: koAllowAddRemoveItems">
           <input type="button" class="btn btn-primary" data-bind="click: onAddClick, value: $data.getLocString('pe.addNew')" />
-          <input type="button" class="btn btn-danger" data-bind="click: onClearClick, visible: origionalValue.length > 0, value: $data.getLocString('pe.removeAll')" />
+          <input type="button" class="btn btn-danger" data-bind="click: onClearClick, visible: originalValue.length > 0, value: $data.getLocString('pe.removeAll')" />
       </div>
   </div>
   <!-- ko if: !koIsList() -->

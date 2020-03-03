@@ -106,12 +106,15 @@ QUnit.test("Test reset", function(assert) {
 });
 QUnit.test("Copy questions", function(assert) {
   var survey = new Survey.Survey({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }]
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
   });
   var editableObj = new EditableObject(survey);
   assert.equal(
     (<Survey.SurveyModel>(
-      editableObj.editableObj["origionalObj"]
+      editableObj.editableObj["originalObj"]
     )).getAllQuestions().length,
     2,
     "Two questions are here"

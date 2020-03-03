@@ -105,7 +105,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   protected createNewItem(): any {
     var nextValue = null;
     var values = [];
-    var items = this.origionalValue;
+    var items = this.originalValue;
     if (Array.isArray(items)) {
       values = items.map(function(item) {
         return item.itemValue;
@@ -184,17 +184,17 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     this.updateArrayValue(items);
   }
   private updateArrayValue(items: any) {
-    if (!this.origionalValue) return;
-    this.origionalValue.splice(0, this.origionalValue.length);
+    if (!this.originalValue) return;
+    this.originalValue.splice(0, this.originalValue.length);
     if (!Array.isArray(items)) return;
     for (var i = 0; i < items.length; i++) {
-      this.origionalValue.push(items[i]);
+      this.originalValue.push(items[i]);
     }
   }
   protected getItemsText(): string {
     var items = [];
-    for (var i = 0; i < this.origionalValue.length; i++) {
-      items.push(this.createItemViewModel(this.origionalValue[i]));
+    for (var i = 0; i < this.originalValue.length; i++) {
+      items.push(this.createItemViewModel(this.originalValue[i]));
     }
     return items
       .filter(item => !item.cells[0].hasError)
@@ -220,7 +220,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     );
   }
   private hasMultipleLanguage(): boolean {
-    var items = this.origionalValue;
+    var items = this.originalValue;
     if (!items || !Array.isArray(items)) return false;
     for (var i = 0; i < items.length; i++) {
       if (items[i].locText.hasNonDefaultText()) return true;
@@ -232,7 +232,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return !!valueProp && valueProp.visible && !valueProp.readOnly;
   }
   private hasVisibleIfOrEnableIf(): boolean {
-    var items = this.origionalValue;
+    var items = this.originalValue;
     if (!items || !Array.isArray(items)) return false;
     for (var i = 0; i < items.length; i++) {
       if (!!items[i].visibleIf || items[i].enableIf) return true;

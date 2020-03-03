@@ -81,8 +81,8 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     var text = ko.observable(this.getCellText(rowIndex, colIndex));
     var colValue = this.columns[colIndex].value;
     text.subscribe(function(val) {
-      if (rowIndex < 0) self.origionalValue.setDefaultCellText(colValue, val);
-      else self.origionalValue.setCellText(rowIndex, colValue, val);
+      if (rowIndex < 0) self.originalValue.setDefaultCellText(colValue, val);
+      else self.originalValue.setCellText(rowIndex, colValue, val);
     });
     return text;
   }
