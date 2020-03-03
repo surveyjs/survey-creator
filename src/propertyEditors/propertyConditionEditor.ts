@@ -395,6 +395,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
         self.koActiveView("text");
       }
     });
+    this.koIsEditorShowing.subscribe(function(newValue) {
+      if (newValue === true) {
+        self.buildEditorsItemsOnShowing();
+      }
+    });
     self.onRemoveConditionClick = function(item) {
       self.removeCondition(item);
     };
@@ -597,6 +602,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     }
     this.rebuildEditorItems(operand, isValid);
   }
+  private buildEditorsItemsOnShowing() {
+    var operand = null;
+    var conditionText = this.koValue();
+    if (!!conditionText) {
+      var conditionParser = new Survey.ConditionsParser();
+      operand = conditionParser.parseExpression(conditionText);
+    }
+    this.rebuildEditorItems(operand, true);
+  }
   private isConditionItemsBuilding: boolean = false;
   public onConditionItemChanged() {
     if (this.isConditionItemsBuilding) return;
@@ -615,6 +629,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.isConditionItemsBuilding = false;
   }
   private rebuildEditorItems(operand: Survey.Operand, isValid: boolean) {
+    if (!this.isEditorShowing) return;
     if (this.isConditionItemsBuilding) return;
     if (!isValid) {
       this.koEditorItems([]);
