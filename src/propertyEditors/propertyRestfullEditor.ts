@@ -23,7 +23,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     super.beforeShow();
     this.setTestQuestionProperties();
     var contentEditor = new SurveyElementEditorContent(
-      this.origionalValue,
+      this.originalValue,
       "",
       this.options
     );
@@ -49,13 +49,13 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     return str;
   }
   private changeChoicesByUrlProp(propName: string) {
-    if (!this.question || !this.origionalValue) return;
-    this.question.choicesByUrl[propName] = this.origionalValue[propName];
+    if (!this.question || !this.originalValue) return;
+    this.question.choicesByUrl[propName] = this.originalValue[propName];
     this.question.choicesByUrl.run();
   }
   private setTestQuestionProperties() {
-    if (!this.question || !this.origionalValue) return;
-    var json = this.origionalValue.toJSON();
+    if (!this.question || !this.originalValue) return;
+    var json = this.originalValue.toJSON();
     new Survey.JsonObject().toObject(json, this.question.choicesByUrl);
   }
   private createSurvey() {

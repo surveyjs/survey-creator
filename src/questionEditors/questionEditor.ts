@@ -375,16 +375,16 @@ export class SurveyElementEditorContent {
   koTabs: any;
   koActiveTab = ko.observable<string>();
   protected properties: SurveyQuestionProperties;
-  private origionalObjValue: any;
+  private originalObjValue: any;
   constructor(
     obj: any,
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null,
     protected useAsPropertyGrid: boolean = false
   ) {
-    this.setOrigionalObjValue(obj);
-    if (!this.className && this.origionalObj.getType) {
-      this.className = this.origionalObj.getType();
+    this.setOriginalObjValue(obj);
+    if (!this.className && this.originalObj.getType) {
+      this.className = this.originalObj.getType();
     }
     this.properties = new SurveyQuestionProperties(
       this.editableObj,
@@ -402,17 +402,17 @@ export class SurveyElementEditorContent {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
-  protected setOrigionalObjValue(obj: any) {
-    this.origionalObjValue = obj;
+  protected setOriginalObjValue(obj: any) {
+    this.originalObjValue = obj;
   }
-  protected get origionalObj() {
-    return this.origionalObjValue;
+  protected get originalObj() {
+    return this.originalObjValue;
   }
   public get obj(): any {
-    return this.origionalObjValue;
+    return this.originalObjValue;
   }
   public get editableObj(): any {
-    return this.origionalObjValue;
+    return this.originalObjValue;
   }
   public hasError(): boolean {
     var tabs = this.koTabs();
@@ -517,7 +517,7 @@ export class SurveyElementEditorContent {
     }
     propertyTab.onAfterRenderCallback = (htmlElement, property) => {
       if (!this.onAfterRenderCallback) return;
-      this.onAfterRenderCallback(this.origionalObj, htmlElement, property);
+      this.onAfterRenderCallback(this.originalObj, htmlElement, property);
     };
     return propertyTab;
   }
@@ -571,7 +571,7 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
       var res = 0;
       if (self.onSortPropertyCallback) {
         res = self.onSortPropertyCallback(
-          self.origionalObj,
+          self.originalObj,
           a.property,
           b.property
         );
@@ -634,8 +634,8 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
     );
     this.koTitle(this.getTitle());
   }
-  protected setOrigionalObjValue(obj: any) {
-    super.setOrigionalObjValue(obj);
+  protected setOriginalObjValue(obj: any) {
+    super.setOriginalObjValue(obj);
     this.editableObject = new EditableObject(obj);
   }
   public get obj(): any {

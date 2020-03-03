@@ -226,8 +226,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected get isModal(): boolean {
     return false;
   }
-  public get origionalObject(): any {
-    return EditableObject.getOrigionaObject(this.object);
+  public get originalObject(): any {
+    return EditableObject.getOriginalObject(this.object);
   }
   public get object(): any {
     return this.objectValue;
@@ -235,7 +235,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public set object(value: any) {
     this.setObjectCore(value);
   }
-  public get origionalValue(): any {
+  public get originalValue(): any {
     return this.getOriginalValue();
   }
   protected getOriginalValue(): any {
@@ -296,7 +296,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     ) {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
-        this.origionalObject,
+        this.originalObject,
         this.koValue()
       );
     }

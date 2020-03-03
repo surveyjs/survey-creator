@@ -62,7 +62,7 @@ export class SurveyPropertySelectItemsEditor extends SurveyPropertyEditorBase {
     this.koDummy = ko.observable(0);
     this.koItems = ko.computed(() => {
       this.koDummy();
-      return this.origionalValue;
+      return this.originalValue;
     });
   }
   public get editorTypeTemplate(): string {
@@ -76,8 +76,8 @@ export class SurveyPropertySelectItemsEditor extends SurveyPropertyEditorBase {
     this.resetItems();
   }
   public addItem() {
-    if (this.origionalValue.indexOf(this.itemSelectorValue.value) > -1) return;
-    this.origionalValue.push(this.itemSelectorValue.value);
+    if (this.originalValue.indexOf(this.itemSelectorValue.value) > -1) return;
+    this.originalValue.push(this.itemSelectorValue.value);
     this.itemSelectorValue.value = "";
     this.resetItems();
   }
@@ -96,10 +96,10 @@ export class SurveyPropertySelectItemsEditor extends SurveyPropertyEditorBase {
     return "question";
   }
   private deleteItem(item: string) {
-    if (!Array.isArray(this.origionalValue)) return;
-    var index = this.origionalValue.indexOf(item);
+    if (!Array.isArray(this.originalValue)) return;
+    var index = this.originalValue.indexOf(item);
     if (index >= 0) {
-      this.origionalValue.splice(index, 1);
+      this.originalValue.splice(index, 1);
     }
   }
   private resetItems() {

@@ -453,12 +453,12 @@ QUnit.test(
     var editor = new SurveyPropertyItemValuesEditorForTests();
     editor.object = question;
     editor.doShowModal();
-    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    var itemViewModel = editor.createItemViewModel(editor.originalValue[0]);
     itemViewModel.cells[0].koValue(5);
     assert.equal(question.choices[0].value, 1, "We do not apply the changes");
     editor.doCloseModal();
     editor.doShowModal();
-    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    var itemViewModel = editor.createItemViewModel(editor.originalValue[0]);
     itemViewModel.cells[0].koValue(7);
     assert.equal(question.choices[0].value, 1, "We do not apply the changes#2");
     editor.onApplyClick();
@@ -474,7 +474,7 @@ QUnit.test(
     var editor = new SurveyPropertyItemValuesEditorForTests();
     editor.object = question;
     editor.beforeShow();
-    var itemViewModel = editor.createItemViewModel(editor.origionalValue[0]);
+    var itemViewModel = editor.createItemViewModel(editor.originalValue[0]);
     assert.equal(editor.hasError(), false, "There is no errors");
     itemViewModel.cells[0].koValue("");
     assert.equal(editor.hasError(), true, "There is an error");

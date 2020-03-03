@@ -30,6 +30,7 @@ export class ConditionEditorItem {
   constructor(private owner: IConditionEditorItemOwner) {
     var json = {
       showNavigationButtons: false,
+      showPageTitles: false,
       showQuestionNumbers: "off",
       textUpdateMode: "onTyping",
       requiredText: "",
