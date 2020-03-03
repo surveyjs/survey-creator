@@ -263,6 +263,85 @@ QUnit.test("Get tabs", function(assert) {
   assert.equal(tabs[2].title, "Title 2", "Tab 2 Title");
 });
 
+QUnit.test(
+  "Duplicated propertiues in one tab - https://github.com/surveyjs/survey-creator/issues/689 - Dynamic properties sometimes duplicated original ones",
+  function(assert) {
+    SurveyQuestionEditorDefinition.definition[
+      "matrixdropdowncolumn@signaturepad"
+    ] = {
+      properties: [
+        { name: "height", tab: "general" },
+        { name: "width", tab: "general" },
+        { name: "allowClear", tab: "general" }
+      ]
+    };
+
+    var tabs = new SurveyQuestionProperties(
+      new Survey.QuestionEmpty("q1"),
+      null,
+      "matrixdropdowncolumn@signaturepad"
+    ).getTabs();
+    assert.equal(tabs[0].name, "general", "The first tab is 'general'");
+    var generalProperties = tabs[0].properties;
+    var widthProperties = generalProperties.filter(p => p.name === "width");
+    assert.equal(
+      widthProperties.length,
+      1,
+      "The only one width property in 'general' tab"
+    );
+  }
+);
+
+QUnit.test(
+  "Duplicated propertiues in different tabs - https://github.com/surveyjs/survey-creator/issues/689 - Dynamic properties sometimes duplicated original ones",
+  function(assert) {
+    SurveyQuestionEditorDefinition.definition[
+      "matrixdropdowncolumn@signaturepad"
+    ] = {
+      properties: [
+        { name: "height", tab: "layout" },
+        { name: "width", tab: "layout" },
+        { name: "allowClear", tab: "layout" }
+      ]
+    };
+
+    var tabs = new SurveyQuestionProperties(
+      new Survey.QuestionEmpty("q1"),
+      null,
+      "matrixdropdowncolumn@signaturepad"
+    ).getTabs();
+    assert.equal(tabs[0].name, "layout", "The first tab is 'layout'");
+    assert.equal(tabs[1].name, "general", "The second tab is 'general'");
+    var generalProperties = tabs[1].properties;
+    var widthPropertiesGen = generalProperties.filter(p => p.name === "width");
+    assert.equal(
+      widthPropertiesGen.length,
+      0,
+      "No width property in 'general' tab"
+    );
+    var layoutProperties = tabs[0].properties;
+    var widthPropertiesLay = layoutProperties.filter(p => p.name === "width");
+    assert.equal(
+      widthPropertiesLay.length,
+      1,
+      "The only one width property in 'layout' tab"
+    );
+  }
+);
+
+QUnit.test("Check properties order for tab properties", function(assert) {
+  var question = new Survey.QuestionCheckbox("q1");
+  var properties = new SurveyQuestionProperties(question, null, "checkbox");
+
+  var choicesTab = properties.getTabs()[1];
+  assert.equal(choicesTab.name, "choices", "The second tab is 'choices'");
+  assert.equal(
+    choicesTab.properties[0].name,
+    "choices",
+    "The first property is 'choices'"
+  );
+});
+
 QUnit.test("Dynamically generated tabs", function(assert) {
   SurveyQuestionEditorDefinition.definition["@testClass"] = {
     properties: [

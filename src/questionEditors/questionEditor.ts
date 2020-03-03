@@ -157,18 +157,24 @@ export class SurveyQuestionProperties {
     if (!className) {
       className = this.obj.getType();
     }
-    var definition = this.getAllDefinitionsByClass(className);
-    for (var i = 0; i < definition.length; i++) {
-      var defItem = definition[i];
-      for (var j = 0; !!defItem.tabs && j < defItem.tabs.length; j++) {
+    var definitions = this.getAllDefinitionsByClass(className);
+    var addedProperties = [];
+    for (var i = definitions.length - 1; i >= 0; i--) {
+      var defItem = definitions[i];
+      for (var j = !!defItem.tabs ? defItem.tabs.length - 1 : -1; j >= 0; j--) {
         this.addPropertyIntoTab(defItem.tabs[j], true);
       }
       for (
-        var j = 0;
-        !!defItem.properties && j < defItem.properties.length;
-        j++
+        var j = !!defItem.properties ? defItem.properties.length - 1 : -1;
+        j >= 0;
+        j--
       ) {
-        this.addPropertyIntoTab(defItem.properties[j]);
+        var propertyName =
+          defItem.properties[j]["name"] || defItem.properties[j];
+        if (addedProperties.indexOf(propertyName) === -1) {
+          addedProperties.push(propertyName);
+          this.addPropertyIntoTab(defItem.properties[j]);
+        }
       }
     }
     for (var i = this.tabs.length - 1; i >= 0; i--) {
@@ -217,7 +223,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.title ? defProperty.title : "";
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
-    tab.properties.push(propertyDefinition);
+    tab.properties.unshift(propertyDefinition);
   }
   private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
     for (var i = 0; i < this.tabs.length; i++) {
@@ -229,7 +235,7 @@ export class SurveyQuestionProperties {
     if (tabName == "general") {
       res.index = -1;
     }
-    this.tabs.push(res);
+    this.tabs.unshift(res);
     return res;
   }
   private getAllDefinitionsByClass(
@@ -335,6 +341,9 @@ export class SurveyQuestionProperties {
     );
     for (var i = 0; i < props.length; i++) {
       var index = props[i].property.visibleIndex;
+      if (props[i].createdFromTabName) {
+        index = 0;
+      }
       if (index < 0) continue;
       var curIndex = properties.indexOf(props[i]);
       if (curIndex > -1) {
