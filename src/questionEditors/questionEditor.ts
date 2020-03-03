@@ -157,18 +157,24 @@ export class SurveyQuestionProperties {
     if (!className) {
       className = this.obj.getType();
     }
-    var definition = this.getAllDefinitionsByClass(className);
-    for (var i = 0; i < definition.length; i++) {
-      var defItem = definition[i];
-      for (var j = 0; !!defItem.tabs && j < defItem.tabs.length; j++) {
+    var definitions = this.getAllDefinitionsByClass(className);
+    var addedProperties = [];
+    for (var i = definitions.length - 1; i >= 0; i--) {
+      var defItem = definitions[i];
+      for (var j = !!defItem.tabs ? defItem.tabs.length - 1 : -1; j >= 0; j--) {
         this.addPropertyIntoTab(defItem.tabs[j], true);
       }
       for (
-        var j = 0;
-        !!defItem.properties && j < defItem.properties.length;
-        j++
+        var j = !!defItem.properties ? defItem.properties.length - 1 : -1;
+        j >= 0;
+        j--
       ) {
-        this.addPropertyIntoTab(defItem.properties[j]);
+        var propertyName =
+          defItem.properties[j]["name"] || defItem.properties[j];
+        if (addedProperties.indexOf(propertyName) === -1) {
+          addedProperties.push(propertyName);
+          this.addPropertyIntoTab(defItem.properties[j]);
+        }
       }
     }
     for (var i = this.tabs.length - 1; i >= 0; i--) {
@@ -217,7 +223,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.title ? defProperty.title : "";
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
-    tab.properties.push(propertyDefinition);
+    tab.properties.unshift(propertyDefinition);
   }
   private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
     for (var i = 0; i < this.tabs.length; i++) {
@@ -229,7 +235,7 @@ export class SurveyQuestionProperties {
     if (tabName == "general") {
       res.index = -1;
     }
-    this.tabs.push(res);
+    this.tabs.unshift(res);
     return res;
   }
   private getAllDefinitionsByClass(
@@ -335,6 +341,9 @@ export class SurveyQuestionProperties {
     );
     for (var i = 0; i < props.length; i++) {
       var index = props[i].property.visibleIndex;
+      if (props[i].createdFromTabName) {
+        index = 0;
+      }
       if (index < 0) continue;
       var curIndex = properties.indexOf(props[i]);
       if (curIndex > -1) {
@@ -366,16 +375,16 @@ export class SurveyElementEditorContent {
   koTabs: any;
   koActiveTab = ko.observable<string>();
   protected properties: SurveyQuestionProperties;
-  private origionalObjValue: any;
+  private originalObjValue: any;
   constructor(
     obj: any,
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null,
     protected useAsPropertyGrid: boolean = false
   ) {
-    this.setOrigionalObjValue(obj);
-    if (!this.className && this.origionalObj.getType) {
-      this.className = this.origionalObj.getType();
+    this.setOriginalObjValue(obj);
+    if (!this.className && this.originalObj.getType) {
+      this.className = this.originalObj.getType();
     }
     this.properties = new SurveyQuestionProperties(
       this.editableObj,
@@ -393,17 +402,17 @@ export class SurveyElementEditorContent {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
-  protected setOrigionalObjValue(obj: any) {
-    this.origionalObjValue = obj;
+  protected setOriginalObjValue(obj: any) {
+    this.originalObjValue = obj;
   }
-  protected get origionalObj() {
-    return this.origionalObjValue;
+  protected get originalObj() {
+    return this.originalObjValue;
   }
   public get obj(): any {
-    return this.origionalObjValue;
+    return this.originalObjValue;
   }
   public get editableObj(): any {
-    return this.origionalObjValue;
+    return this.originalObjValue;
   }
   public hasError(): boolean {
     var tabs = this.koTabs();
@@ -508,7 +517,7 @@ export class SurveyElementEditorContent {
     }
     propertyTab.onAfterRenderCallback = (htmlElement, property) => {
       if (!this.onAfterRenderCallback) return;
-      this.onAfterRenderCallback(this.origionalObj, htmlElement, property);
+      this.onAfterRenderCallback(this.originalObj, htmlElement, property);
     };
     return propertyTab;
   }
@@ -562,7 +571,7 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
       var res = 0;
       if (self.onSortPropertyCallback) {
         res = self.onSortPropertyCallback(
-          self.origionalObj,
+          self.originalObj,
           a.property,
           b.property
         );
@@ -625,8 +634,8 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
     );
     this.koTitle(this.getTitle());
   }
-  protected setOrigionalObjValue(obj: any) {
-    super.setOrigionalObjValue(obj);
+  protected setOriginalObjValue(obj: any) {
+    super.setOriginalObjValue(obj);
     this.editableObject = new EditableObject(obj);
   }
   public get obj(): any {

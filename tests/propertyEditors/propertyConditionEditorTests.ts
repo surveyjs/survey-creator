@@ -170,6 +170,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   editor.addCondition();
   var editorItem = editor.koEditorItems()[1];
   assert.equal(editorItem.isReady, false, "We can't add condition");
@@ -212,6 +213,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     assert.ok(editorItem.nameQuestion, "question value is created");
@@ -238,6 +240,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     editorItem.value = "d'2";
@@ -278,6 +281,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     editor.addCondition();
     var editorItem = editor.koEditorItems()[1];
     editorItem.questionName = "panel.q2";
@@ -310,6 +314,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     editorItem.value = "abc";
@@ -352,6 +357,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2.";
     var valueQuestion = editorItem.valueQuestion;
@@ -390,6 +396,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     var questionValue = editorItem.valueQuestion;
@@ -414,6 +421,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     editorItem.value = "abc";
@@ -530,6 +538,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     assert.equal(
       editor.allConditionQuestions.length,
       1,
@@ -563,6 +572,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q1";
     editorItem.valueQuestion.value = 1;
@@ -608,6 +618,7 @@ QUnit.test(
       colDetailEditor.getPropertyEditorByName("visibleIf").editor
     );
     assert.ok(visEditor, "visibleIf editor is here");
+    visEditor.isEditorShowing = true;
     var editorItem = visEditor.koEditorItems()[0];
     editorItem.questionName = "row.Column2";
     var questionValue = editorItem.valueQuestion;
@@ -633,6 +644,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     assert.equal(editorItem.isReady, false, "There is no question set");
     assert.notOk(editorItem.value, "It is empty by default");
@@ -695,6 +707,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q3";
     editorItem.value = "val1";
@@ -741,6 +754,7 @@ QUnit.test(
 
     editor.object = survey.getQuestionByName("q3");
     editor.beforeShow();
+    editor.isEditorShowing = true;
     editorItem = editor.koEditorItems()[0];
     assert.equal(
       editor.koTextValue(),
@@ -775,6 +789,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q1";
     editorItem.operator = "empty";
@@ -801,6 +816,7 @@ QUnit.test("SurveyPropertyConditionEditor, clearCondition", function(assert) {
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   editor.koTextValue("{q1} = ");
   assert.equal(
     editor.koIsTextConditionValid(),
@@ -839,6 +855,7 @@ QUnit.test(
     };
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
     editorItem.value = "abc";
@@ -895,6 +912,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   var checkFun = function(questionName: string, operatorNames: Array<string>) {
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = questionName;
@@ -1011,6 +1029,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "question1";
     editorItem.value = "item1";
@@ -1034,6 +1053,7 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   var editorItem = editor.koEditorItems()[0];
   editorItem.questionName = "question1";
   var questionValue = editorItem.valueQuestion;
@@ -1064,6 +1084,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "question1";
     editorItem.value = "item1";
@@ -1109,6 +1130,7 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
   var editor = new SurveyPropertyConditionEditor(property);
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   assert.equal(editor.koActiveView(), "form", "Show Builder initial");
   assert.equal(editor.koCanParseExpression(), true, "We can parse expression");
   assert.equal(editor.koEditorItems().length, 2, "There are two conditions");
@@ -1191,6 +1213,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     assert.equal(editor.koEditorItems().length, 1, "There is one item");
     var editorItem = editor.koEditorItems()[0];
     assert.equal(editorItem.value, "abc", "Value set correctly");
@@ -1253,6 +1276,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     assert.equal(editor.koValue(), "", "The value is empty");
     assert.equal(
       editor.koEditorItems().length,
@@ -1340,6 +1364,7 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
   editor.isWideMode = true;
   editor.object = question;
   editor.beforeShow();
+  editor.isEditorShowing = true;
   var editorItem = editor.koEditorItems()[0];
   var questionValue = editorItem.valueQuestion;
   assert.equal(questionValue.titleLocation, "hidden", "Hide question title");
@@ -1386,6 +1411,7 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     assert.equal(
       editorItem.nameQuestion.width,
@@ -1444,6 +1470,7 @@ QUnit.test(
     editor.object = question;
     editor.isWideMode = true;
     editor.beforeShow();
+    editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     assert.equal(
       editorItem.nameQuestion.width,

@@ -20,7 +20,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       self.deleteItem(item.obj);
     };
     self.onClearClick = function(item) {
-      self.origionalValue.splice(0, self.origionalValue.length);
+      self.originalValue.splice(0, self.originalValue.length);
     };
     self.onAddClick = function() {
       self.addItem();
@@ -31,7 +31,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       this.options.onPropertyValueChanged(
         this.property,
         this.object,
-        this.origionalValue
+        this.originalValue
       );
   }
   public getValueText(value: any): string {
@@ -62,7 +62,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     onUpdate: (evt, itemV) => {
       if (
         SurveyHelper.moveItemInArray(
-          this.origionalValue,
+          this.originalValue,
           itemV.obj,
           evt.newIndex
         )
@@ -78,9 +78,9 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   }
   protected deleteItem(obj: any) {
     if (this.readOnly()) return;
-    var index = this.origionalValue.indexOf(obj);
+    var index = this.originalValue.indexOf(obj);
     if (index > -1) {
-      this.origionalValue.splice(index, 1);
+      this.originalValue.splice(index, 1);
       this.onItemDeleted(obj, index);
     }
     this.deleteViewItemIndex(obj);
@@ -114,12 +114,12 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     }
   }
   protected get isCurrentValueEmpty() {
-    return this.origionalValue.length == 0;
+    return this.originalValue.length == 0;
   }
   protected createEditorItemCore(item: any = null) {
     if (!item) {
       item = this.createNewItem();
-      this.origionalValue.push(item);
+      this.originalValue.push(item);
     }
     var editorItem = this.createEditorItem(item);
     if (!!editorItem.onCreated) {

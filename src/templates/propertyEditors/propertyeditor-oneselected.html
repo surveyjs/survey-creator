@@ -37,10 +37,10 @@
           <div data-bind="text: "></div>
           <div class="form-control svd_custom_select">
               <select onmousewheel="return false;" data-bind="value: koSelected, optionsCaption: $data.getLocString('pe.listIsEmpty')">
-                <!--ko if: origionalValue.length == 0 -->
+                <!--ko if: originalValue.length == 0 -->
                 <option data-bind="value: '', text: $data.getLocString('pe.listIsEmpty')" ></option>
                 <!-- /ko -->
-                <!-- ko foreach: origionalValue -->
+                <!-- ko foreach: originalValue -->
                 <option data-bind="value: $data, text: $parent.getItemText($data, $parent.koChangeCounter())" ></option>
                 <!-- /ko -->
               </select>

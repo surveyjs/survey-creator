@@ -18,18 +18,18 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
         newValue = null;
       } else {
         if (
-          Array.isArray(self.origionalValue) &&
-          self.origionalValue.indexOf(newValue) < 0
+          Array.isArray(self.originalValue) &&
+          self.originalValue.indexOf(newValue) < 0
         ) {
           newValue = null;
         }
       }
       if (
         newValue == null &&
-        Array.isArray(self.origionalValue) &&
-        self.origionalValue.length > 0
+        Array.isArray(self.originalValue) &&
+        self.originalValue.length > 0
       ) {
-        self.koSelected(self.origionalValue[0]);
+        self.koSelected(self.originalValue[0]);
         return;
       }
       self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
@@ -77,21 +77,21 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   protected onCreateEditor(editor: SurveyElementEditorContent) {}
   protected onItemDeleted(obj: any, index: number) {
-    if (index >= this.origionalValue.length) {
-      index = this.origionalValue.length - 1;
+    if (index >= this.originalValue.length) {
+      index = this.originalValue.length - 1;
     }
-    this.koSelected(index > -1 ? this.origionalValue[index] : null);
+    this.koSelected(index > -1 ? this.originalValue[index] : null);
   }
   private selectNewItem(isNew: boolean) {
-    if (!this.koSelected || !Array.isArray(this.origionalValue)) return;
-    var index = this.origionalValue.length - 1;
+    if (!this.koSelected || !Array.isArray(this.originalValue)) return;
+    var index = this.originalValue.length - 1;
     if (!isNew) {
-      var index = this.origionalValue.indexOf(this.koSelected());
-      if (index < 0 && this.origionalValue.length > 0) {
+      var index = this.originalValue.indexOf(this.koSelected());
+      if (index < 0 && this.originalValue.length > 0) {
         index = 0;
       }
     }
-    var val = index > -1 ? this.origionalValue[index] : null;
+    var val = index > -1 ? this.originalValue[index] : null;
     if (val != this.koSelected()) {
       this.koSelected(val);
     }

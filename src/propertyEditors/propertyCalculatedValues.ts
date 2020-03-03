@@ -28,7 +28,7 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
   }
   private getNewName(): string {
     var objs = [];
-    var items = this.origionalValue;
+    var items = this.originalValue;
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       if (!!item) {

@@ -1,5 +1,7 @@
 <script type="text/html" id="propertyeditor">
-    <label data-bind="text:displayName, visible: showDisplayNameOnTop"></label>
+    <!-- ko if: showDisplayNameOnTop -->
+    <label data-bind="text:displayName"></label>
+    <!-- /ko -->
     <!-- ko template: {name: 'propertyeditor-error', data: $data} -->
     <!-- /ko -->
     <!-- ko template: {name: $data.contentTemplateName, data: $data} -->
