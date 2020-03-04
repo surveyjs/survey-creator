@@ -152,6 +152,15 @@ export class StylesManager {
     ".svd_container .sjs-cb-container:hover input:checked ~ .checkmark":
       "background-color: $primary-hover-color",
 
+    ".svd_container .sjs-cb-switch input:checked + .sjs-cb-switch_control":
+      "background-color: $primary-color; border-color: $primary-color;",
+    ".svd_container input:checked + .sjs-cb-switch_control .sjs-cb-switch__button":
+      "background-color: $secondary-bg-color; border-color: $primary-color;",
+    ".svd_container .sjs-cb-switch_control":
+      "background-color: $secondary-bg-color; border: 1px solid $dd-menu-border;",
+    ".svd_container .sjs-cb-switch__button":
+      "background-color: $secondary-border-color; border-color: $secondary-bg-color;",
+
     ".svd_container .svd_custom_select:before":
       "background-color: $primary-color;",
     ".svd_container .form-control:focus": "border-color: $primary-color;",
@@ -242,6 +251,15 @@ export class StylesManager {
       "background-color: $dd-menu-border",
     ".svd_container.sv_bootstrap_css .sjs-cb-container:hover input:checked ~ .checkmark":
       "background-color: $primary-hover-color",
+
+    ".svd_container.sv_bootstrap_css .sjs-cb-switch input:checked + .sjs-cb-switch_control":
+      "background-color: $primary-color; border-color: $primary-color;",
+    ".svd_container.sv_bootstrap_css input:checked + .sjs-cb-switch_control .sjs-cb-switch__button":
+      "background-color: $secondary-bg-color; border-color: $primary-color;",
+    ".svd_container.sv_bootstrap_css .sjs-cb-switch_control":
+      "background-color: $secondary-bg-color; border: 1px solid $dd-menu-border;",
+    ".svd_container.sv_bootstrap_css .sjs-cb-switch__button":
+      "background-color: $secondary-border-color; border-color: $secondary-bg-color;",
 
     ".svd_container.sv_bootstrap_css .svd_custom_select:before":
       "background-color: $primary-color;",
@@ -353,6 +371,15 @@ export class StylesManager {
       "background-color: $dd-menu-border",
     ".svd_container.sv_bootstrapmaterial_css .sjs-cb-container:hover input:checked ~ .checkmark":
       "background-color: $primary-hover-color",
+
+    ".svd_container.sv_bootstrapmaterial_css .sjs-cb-switch input:checked + .sjs-cb-switch_control":
+      "background-color: $primary-color; border-color: $primary-color;",
+    ".svd_container.sv_bootstrapmaterial_css input:checked + .sjs-cb-switch_control .sjs-cb-switch__button":
+      "background-color: $secondary-bg-color; border-color: $primary-color;",
+    ".svd_container.sv_bootstrapmaterial_css .sjs-cb-switch_control":
+      "background-color: $secondary-bg-color; border: 1px solid $dd-menu-border;",
+    ".svd_container.sv_bootstrapmaterial_css .sjs-cb-switch__button":
+      "background-color: $secondary-border-color; border-color: $secondary-bg-color;",
 
     ".svd_container.sv_bootstrapmaterial_css .svd_custom_select:before":
       "background-color: $primary-color;",

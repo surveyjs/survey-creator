@@ -6,11 +6,11 @@ import "./title-editor.scss";
 import * as Survey from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
-const FRIENDLY_PADDING = 36;
+const FRIENDLY_PADDING = 42;
 function resizeInput(target) {
   let computedStyle = window.getComputedStyle(target);
   target.style.width =
-    getTextWidth(target.value, computedStyle.font) + FRIENDLY_PADDING + "px";
+    getTextWidth(target.value, computedStyle.fontSize + " " + computedStyle.fontFamily) + FRIENDLY_PADDING + "px";
 }
 
 /**
