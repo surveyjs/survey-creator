@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { applyAdornerClass } from "../src/surveyjsObjects";
-import { titleAdorner } from "../src/adorners/title-editor";
+import { titleAdorner, TitleInplaceEditor } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
 import {
   questionActionsAdorner,
@@ -156,3 +156,18 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("TitleInplaceEditor error property", function(assert) {
+  var model = new TitleInplaceEditor({}, "test", null, "");
+  model.valueChanged = newValue => (newValue === "test1" ? "error" : "");
+  assert.equal(model.error(), "", "No errors initial");
+  model.editingName("test");
+  model.postEdit();
+  assert.equal(model.error(), "", "No errors first change");
+  model.editingName("test1");
+  model.postEdit();
+  assert.equal(model.error(), "error", "Errors");
+  model.editingName("test");
+  model.postEdit();
+  assert.equal(model.error(), "", "No errors revert back");
+});

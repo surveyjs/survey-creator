@@ -82,6 +82,7 @@ ko.components.register("item-editor", {
         params.editor.onPropertyValueChanged(property, params.target, newValue);
         !!params.valueChanged &&
           params.valueChanged(params.target, property.name, newValue);
+        return "";
       };
       return model;
     }
