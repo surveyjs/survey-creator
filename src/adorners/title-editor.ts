@@ -10,7 +10,12 @@ const FRIENDLY_PADDING = 42;
 function resizeInput(target) {
   let computedStyle = window.getComputedStyle(target);
   target.style.width =
-    getTextWidth(target.value, computedStyle.fontSize + " " + computedStyle.fontFamily) + FRIENDLY_PADDING + "px";
+    getTextWidth(
+      target.value,
+      computedStyle.fontSize + " " + computedStyle.fontFamily
+    ) +
+    FRIENDLY_PADDING +
+    "px";
 }
 
 /**
@@ -38,6 +43,7 @@ export class TitleInplaceEditor {
   isEditing = ko.observable<boolean>(false);
   protected forNeibours(func: (el: HTMLElement) => void) {
     if (
+      !this.rootElement ||
       !this.rootElement.parentElement ||
       !this.rootElement.parentElement.parentElement
     )
@@ -68,7 +74,7 @@ export class TitleInplaceEditor {
     );
   }
 
-  valueChanged: (newVal: any) => void;
+  valueChanged: (newVal: any) => string;
 
   public getLocString(str: string) {
     return editorLocalization.getString(str);
@@ -77,6 +83,8 @@ export class TitleInplaceEditor {
   protected updatePrevName() {
     this.prevName(this.target[this.name]);
   }
+
+  error = ko.observable("");
 
   hideEditor = () => {
     this.isEditing(false);
@@ -99,9 +107,15 @@ export class TitleInplaceEditor {
     }, 10);
   };
   postEdit = () => {
+    this.error("");
     if (this.prevName() !== this.editingName()) {
+      if (!!this.valueChanged) {
+        this.error(this.valueChanged(this.editingName()));
+        if (!!this.error()) {
+          return;
+        }
+      }
       this.prevName(this.editingName());
-      !!this.valueChanged && this.valueChanged(this.editingName());
     }
     this.hideEditor();
   };
@@ -146,6 +160,20 @@ ko.components.register("title-editor", {
         model.editingName(ko.unwrap(params.model[params.name]));
       });
       model.valueChanged = newValue => {
+        var errorText = "";
+        if (property.isRequired && !newValue) {
+          errorText = editorLocalization.getString("pe.propertyIsEmpty");
+        }
+        if (!errorText) {
+          errorText = params.editor.onGetErrorTextOnValidationCallback(
+            property.name,
+            params.model,
+            newValue
+          );
+        }
+        if (!!errorText) {
+          return errorText;
+        }
         var options = {
           propertyName: property.name,
           obj: params.model,
@@ -159,6 +187,7 @@ ko.components.register("title-editor", {
         params.model[params.name] = newValue;
         params.editor.onPropertyChanged(params.model, property, oldValue);
         params.editor.onPropertyValueChanged(property, params.model, newValue);
+        return "";
       };
       return model;
     }

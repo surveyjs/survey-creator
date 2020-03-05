@@ -74,6 +74,7 @@ ko.components.register("rating-item-editor", {
         }
         params.target[params.name] = newValue;
         params.editor.onQuestionEditorChanged(question);
+        return "";
       };
       return model;
     }
