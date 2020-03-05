@@ -39,6 +39,7 @@
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-preset-latest": "6.22.0",
+    "concurrently": "^5.1.0",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.26.1",
     "dotenv": "4.0.0",
