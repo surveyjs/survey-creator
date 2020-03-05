@@ -35,7 +35,7 @@
                     <div class="svd_wrap_elements">
                         <survey-widget params="survey: $data.survey"></survey-widget>
                     </div>
-                    <div class="form-inline form-group" data-bind="visible: $parent.koEditorItems().length > 1">
+                    <div class="form-inline form-group">
                         <input type="button" class="form-control btn  btn-danger" data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveConditionClick, value: $parent.removeConditionText"/>
                     </div>
                     <hr>
@@ -51,7 +51,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="svd-propertyeditor-condition-item-delete-icon" data-bind="visible: $parent.koEditorItems().length > 1, key2click, clickNoFocus: $parent.onRemoveConditionClick, attr: {title: $parent.removeConditionText }">
+                                <span class="svd-propertyeditor-condition-item-delete-icon" data-bind="key2click, clickNoFocus: $parent.onRemoveConditionClick, attr: {title: $parent.removeConditionText }">
                                     <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
                                 </span>
                             </td>
