@@ -237,12 +237,9 @@ export class SurveyNestedPropertyEditorColumn {
   constructor(public property: Survey.JsonObjectProperty) {}
   public get text(): string {
     var text = editorLocalization.hasString("pel." + this.property.name)
-      ? this.getLocText("pel.")
-      : this.getLocText("pe.");
+      ? editorLocalization.getString("pel." + this.property.name)
+      : editorLocalization.getPropertyNameInEditor(this.property.name);
     return text ? text : this.property.name;
-  }
-  private getLocText(prefix: string) {
-    return editorLocalization.getString(prefix + this.property.name);
   }
 }
 

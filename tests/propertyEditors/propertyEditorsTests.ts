@@ -660,7 +660,7 @@ QUnit.test("SurveyPropertyItemValue columns generation", function(assert) {
   );
 });
 QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
-  Survey.Serializer.addProperty("itemvalue", { name: "imageLink" });
+  Survey.Serializer.addProperty("itemvalue", { name: "myImageLink" });
 
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();
   propertyEditor.beforeShow();
@@ -670,13 +670,19 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
     "There are three columns value + text + link"
   );
   assert.equal(
+    propertyEditor.columns[2].text,
+    "My Image Link",
+    "Set the correct column title"
+  );
+  assert.equal(
     propertyEditor.koShowTextView(),
     true,
     "Allow to show text view with custom properties"
   );
 
-  Survey.Serializer.removeProperty("itemvalue", "imageLink");
+  Survey.Serializer.removeProperty("itemvalue", "myImageLink");
 });
+
 QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   assert
 ) {
