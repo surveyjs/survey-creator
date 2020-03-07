@@ -3,7 +3,7 @@
   <div
     class="svd-accordion-tab-header"
     role="tab"
-    data-bind="click: toggle, visible: $parent.showHeader"
+    data-bind="click: toggle, visible: $parent.showHeader, attr: { 'data-title': title }"
   >
     <span
       data-bind="css: { 'svd-main-color': !collapsed() }, text: title"
