@@ -710,10 +710,13 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var variableOperand = <Survey.Variable>(
       this.getOperandByType(op, "variable")
     );
-    var constOperand = <Survey.Const>this.getOperandByType(op, "const");
+    var arrayValue = this.getArrayValueFromOperand(op);
+    var constOperand = !arrayValue
+      ? <Survey.Const>this.getOperandByType(op, "const")
+      : null;
     if (
       !variableOperand ||
-      (!constOperand && this.canShowValueByOperator(op.operator))
+      (!constOperand && !arrayValue && this.canShowValueByOperator(op.operator))
     )
       return false;
     if (!this.getQuestionByName(variableOperand.variable)) return false;
@@ -723,11 +726,30 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       op.leftOperand !== variableOperand
         ? this.getOppositeOperator(op.operator)
         : op.operator;
+    if (!!arrayValue) {
+      item.value = arrayValue;
+    }
     if (!!constOperand) {
       item.value = constOperand.correctValue;
     }
     res.push(item);
     return true;
+  }
+  private getArrayValueFromOperand(op: Survey.BinaryOperand): Array<any> {
+    var arrayOperand = <Survey.ArrayOperand>this.getOperandByType(op, "array");
+    //TODO
+    if (!arrayOperand || !arrayOperand["values"]) return null;
+    var valuesOperand = arrayOperand["values"];
+    if (!Array.isArray(valuesOperand) || valuesOperand.length == 0) return null;
+    var res = [];
+    for (var i = 0; i < valuesOperand.length; i++) {
+      var opConst = valuesOperand[i];
+      if (!opConst) continue;
+      if (opConst.getType() != "const") return null;
+      res.push((<Survey.Const>opConst).correctValue);
+    }
+    if (res.length == 0) return null;
+    return res;
   }
   private buildEditorItemsAddUnaryOperand(
     op: Survey.UnaryOperand,

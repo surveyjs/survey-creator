@@ -1196,6 +1196,17 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
     false,
     "We can't parse invalid expression"
   );
+  editor.koTextValue("{q3} = [1, 2]");
+  assert.equal(
+    editor.koIsTextConditionValid(),
+    true,
+    "The expression is valid: {q3} = [1, 2]"
+  );
+  assert.equal(
+    editor.koCanParseExpression(),
+    true,
+    "We can parse valid expression: {q3} = [1, 2]"
+  );
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
@@ -1546,6 +1557,30 @@ QUnit.test(
       editorItem.valueQuestion.width,
       "",
       "name question for second item + checkbox"
+    );
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, editorItem valueQuestion set correct value for array, Bug #700",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text", visibleIf: "{q2} = ['item1', 'item3']" },
+        { name: "q2", type: "checkbox", choices: ["item1", "item2", "item3"] }
+      ]
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    assert.deepEqual(
+      editorItem.valueQuestion.value,
+      ["item1", "item3"],
+      "set valueQuestion value correctly to array"
     );
   }
 );

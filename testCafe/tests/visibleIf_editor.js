@@ -16,10 +16,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
 });
 
-const getDesignerSurvey = ClientFunction(() => window.creator.survey);
-
 const questions = Selector(".svd_question");
-const propertyGrid = Selector(".svd_object_editor");
 const tooglePropertyCategory = function(categoryName) {
   return Selector(".svd-accordion-tab-header")
     .child("span")
@@ -48,13 +45,29 @@ test(`Set visibleIf property`, async t => {
     .click(questionValue)
     .click(questionValue.find("option").withText("item1"));
 
-  await t
-    .expect(
-      Selector(".svd-expression-header")
-        .nth(0)
-        .child(0).innerText
-    )
-    .eql("{question1} = 'item1'");
+  const expressionText = Selector(".svd-expression-header")
+    .nth(0)
+    .child(0).innerText;
+  await t.expect(expressionText).eql("{question1} = 'item1'");
 
-  //await t.wait(2000);
+  await t
+    .click(`input[value="Remove"]`)
+    .expect(expressionText)
+    .eql("Expression is empty");
+
+  await t
+    .click(Selector(`button`).withText("Edit"))
+    .typeText(
+      Selector(`textarea`),
+      "{question1} = 'item2' and {question2} = ['item1', 'item2']"
+    )
+    .expect(expressionText)
+    .eql("{question1} = 'item2' and {question2} = ['item1', 'item2']");
+
+  await t
+    .click(Selector(`button`).withText("Build"))
+    .expect(Selector(`div[name="questionName"]`).count)
+    .eql(2);
+
+  await t.wait(2000);
 });
