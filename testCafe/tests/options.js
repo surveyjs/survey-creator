@@ -15,7 +15,7 @@ test(`showJSONEditorTab`, async t => {
     let editorOptions = {
       showJSONEditorTab: false
     };
-    editor.render(null, editorOptions);
+    creator.render(null, editorOptions);
   });
 
   assert.notEqual(await isTabExists(), -1);
@@ -33,7 +33,7 @@ test(`showTestSurveyTab`, async t => {
     let editorOptions = {
       showTestSurveyTab: false
     };
-    editor.render(null, editorOptions);
+    creator.render(null, editorOptions);
   });
 
   assert.notEqual(await isTabExists(), -1);
@@ -51,7 +51,7 @@ test(`showEmbededSurveyTab`, async t => {
     let editorOptions = {
       showEmbededSurveyTab: true
     };
-    editor.render(null, editorOptions);
+    creator.render(null, editorOptions);
   });
 
   assert.equal(await isTabExists(), -1);

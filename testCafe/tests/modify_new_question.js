@@ -1,9 +1,9 @@
-import { url } from "../settings";
+import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `modify new question`;
 
-const init = ClientFunction(() => {
+const initProperties = ClientFunction(() => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   //Add a tag property
@@ -11,14 +11,15 @@ const init = ClientFunction(() => {
   //Make name and tag properties read-only
   Survey.Serializer.findProperty("question", "name").readOnly = true;
   Survey.Serializer.findProperty("question", "tag").readOnly = true;
-  SurveyEditor.defaultStrings.p.tag = { name: "tag", title: "MyTag" };
-  var editorOptions = {};
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+});
+const initCreatorEvents = ClientFunction(() => {
+  SurveyCreator.defaultStrings.p.tag = { name: "tag", title: "MyTag" };
+  var creator = window.creator;
 
   var questionCounter = 1;
   //Set the name property different from the default value
   //and set the tag property to a generated GUID value.
-  editor.onQuestionAdded.add(function(sender, options) {
+  creator.onQuestionAdded.add(function(sender, options) {
     var q = options.question;
     var t = q.getType();
     q.name = "Question" + t[0].toUpperCase() + t.substring(1) + questionCounter;
@@ -54,7 +55,9 @@ const init = ClientFunction(() => {
 });
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+  await initProperties();
   await init();
+  await initCreatorEvents();
 });
 
 test(`check a guid in the tag`, async t => {

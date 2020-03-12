@@ -1,15 +1,12 @@
-import { url } from "../settings";
+import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `customize question editor`;
 
-const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-  //Add a tag property to all questions
+const initCreatorDefinitions = ClientFunction(() => {
   Survey.Serializer.addProperty("question", "tag");
   // Change the order of name and title properties, remove the startWithNewLine property and add a tag property
-  SurveyEditor.SurveyQuestionEditorDefinition.definition[
+  SurveyCreator.SurveyQuestionEditorDefinition.definition[
     "question"
   ].properties = [
     "title",
@@ -19,15 +16,13 @@ const init = ClientFunction(() => {
     { name: "isRequired", category: "checks" }
   ];
   // make visibleIf tab the second after general for all questions
-  SurveyEditor.SurveyQuestionEditorDefinition.definition["question"].tabs = [
+  SurveyCreator.SurveyQuestionEditorDefinition.definition["question"].tabs = [
     { name: "visibleIf", index: 1 }
   ];
-
-  var editorOptions = {};
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
 });
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+  await initCreatorDefinitions();
   await init();
 });
 

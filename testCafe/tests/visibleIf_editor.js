@@ -1,40 +1,25 @@
-import { url } from "../settings";
+import { url, init } from "../settings";
+import page from "../page-model";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `visibleIf_editor`;
-
-const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  var editorOptions = {};
-  window.creator = new SurveyEditor.SurveyEditor(
-    "editorElement",
-    editorOptions
-  );
-});
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
 });
 
-const questions = Selector(".svd_question");
-const tooglePropertyCategory = function(categoryName) {
-  return Selector(".svd-accordion-tab-header")
-    .child("span")
-    .withText(categoryName);
-};
-
 test(`Set visibleIf property`, async t => {
   await t
-    .click(`[title~=Dropdown]`)
-    .click(`[title~=Checkbox]`)
-    .click(`[title~=Text]`)
-    .click(`[title~=Text]`);
+    .click(page.toolBarQuestion("Dropdown"))
+    .click(page.toolBarQuestion("Checkbox"))
+    .click(page.toolBarQuestion("Single Input"))
+    .click(page.toolBarQuestion("Single Input"));
 
-  await t.expect(questions.count).eql(4);
-  await t.click(questions.nth(-1).find(".icon-actioneditelement"));
+  await t.expect(page.questions.count).eql(4);
+  await t.click(page.selectElementInPropertyGrid(page.questions.nth(-1)));
   await t
-    .click(tooglePropertyCategory("General"))
-    .click(tooglePropertyCategory("Logic"))
+    .click(page.propertyGridCategory("General"))
+    .click(page.propertyGridCategory("Logic"))
     .click(Selector(".svd-expression-header").nth(0));
   const questionSelect = Selector(`div[name="questionName"]`).find("select");
   await t
@@ -68,6 +53,4 @@ test(`Set visibleIf property`, async t => {
     .click(Selector(`button`).withText("Build"))
     .expect(Selector(`div[name="questionName"]`).count)
     .eql(2);
-
-  await t.wait(2000);
 });

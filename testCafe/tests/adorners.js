@@ -1,13 +1,7 @@
-import { url } from "../settings";
+import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `adorners`;
-
-const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  var editorOptions = {};
-  window.editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
-});
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
@@ -181,8 +175,8 @@ test(`checkbox work with other/select all/none`, async t => {
 });
 test(`dropdown readonly`, async t => {
   const makeEditorReadOnly = ClientFunction(() => {
-    editor.readOnly = true;
-    editor.text = `{
+    creator.readOnly = true;
+    creator.text = `{
       "pages": [
         {
         "name": "page1",

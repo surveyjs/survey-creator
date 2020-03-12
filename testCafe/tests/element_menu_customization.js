@@ -1,18 +1,14 @@
+import { init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `element menu customization`;
 
 const url = "http://127.0.0.1:7777/example/elementMenuCustomization.html";
 
-const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-
-  var editorOptions = {};
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
-
+const initCreatorEvents = ClientFunction(() => {
+  var creator = window.creator;
   // Add a new item into element menu
-  editor.onDefineElementMenuItems.add(function(editor, options) {
+  creator.onDefineElementMenuItems.add(function(sender, options) {
     options.items.unshift({
       text: "Add Into Shared Repository",
       onClick: function(obj) {
@@ -22,7 +18,7 @@ const init = ClientFunction(() => {
   });
 
   // Add a button to the toolbar
-  editor.toolbarItems.push({
+  creator.toolbarItems.push({
     id: "toolboxCustomization",
     visible: true,
     title: "Toolbox Customization",
@@ -71,7 +67,7 @@ const init = ClientFunction(() => {
   };
 
   window.isItemUsed = function(name) {
-    return editor.toolbox.indexOf(name) > -1;
+    return creator.toolbox.indexOf(name) > -1;
   };
 
   window.addToolBoxItemIntoList = function(container, item) {
@@ -122,7 +118,7 @@ const init = ClientFunction(() => {
     return {
       name: typeName,
       iconName: "icon-" + typeName,
-      title: SurveyEditor.editorLocalization.getString("qt." + typeName),
+      title: SurveyCreator.editorLocalization.getString("qt." + typeName),
       json: json,
       isCopied: false,
       isUsed: isItemUsed(typeName),
@@ -153,11 +149,11 @@ const init = ClientFunction(() => {
   };
 
   window.applyToolboxItems = function() {
-    editor.toolbox.clearItems();
+    creator.toolbox.clearItems();
     var newItems = [];
     for (var i = 0; i < allToolboxItems.length; i++) {
       if (allToolboxItems[i].isUsed) {
-        editor.toolbox.addItem(allToolboxItems[i]);
+        creator.toolbox.addItem(allToolboxItems[i]);
       }
     }
   };
@@ -170,17 +166,22 @@ const init = ClientFunction(() => {
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
+  await initCreatorEvents();
 });
 
 test(`check element menu customization`, async t => {
   const getToolboxItemsCount = ClientFunction(
-    () => document.querySelectorAll(".svd_toolbox div>.btn").length
+    () => document.querySelectorAll(".svd_toolbox_item").length
   );
 
   const count = await getToolboxItemsCount();
 
   await t
-    .click(`.svd_toolbar li:not([style~=none]):last-child button`)
+    .click(
+      Selector(".svd-toolbar-button__title")
+        .child(0)
+        .withText("Toolbox Customization")
+    )
     .click(`#toolboxCustomization #standardItems #toobaritem_matrixdynamic`)
     .click(`#toolboxCustomization .modal-footer input[value=OK]`);
 
