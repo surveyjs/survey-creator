@@ -8,6 +8,9 @@ trigger:
   branches:
     include:
     - master
+  tags:
+    exclude:
+      - v*.*.*
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -38,6 +41,24 @@ steps:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
     Contents: '**'
     TargetFolder: '$(Build.Repository.LocalPath)/node_modules/survey-knockout'
+    OverWrite: true
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+    pipeline: '41'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSWidgetsBuild'
+    downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSWidgetsBuild/packages/survey-widgets'
+    Contents: '**'
+    TargetFolder: '$(Build.Repository.LocalPath)/node_modules/surveyjs-widgets'
     OverWrite: true
 
 - script: |
