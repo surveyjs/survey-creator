@@ -225,6 +225,7 @@ export class DragDropHelper {
       var lastEl = element.elements[element.elements.length - 1];
       if (!this.isBottomThanElement(event, lastEl)) return;
       element = lastEl;
+      isEdge = true;
       bottomInfo.isEdge = true;
       bottomInfo.isBottom = true;
     }

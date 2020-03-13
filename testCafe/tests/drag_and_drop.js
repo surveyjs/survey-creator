@@ -222,7 +222,7 @@ test("check move question from panel to up", async t => {
   assert.deepEqual(await getQuestionsInPanel(), []);
 });
 
-test.skip("check move question from panel to bottom", async t => {
+test("check move question from panel to bottom", async t => {
   await t.click("[title=Panel]");
   await t.dragToElement(
     "[title=Boolean]",
