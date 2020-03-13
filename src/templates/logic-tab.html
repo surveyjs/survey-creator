@@ -13,8 +13,7 @@
                   <td data-bind="visible:!$data.isReadOnly" width="100px"></td>
               </tr>
           </thead>
-          <tbody>
-              <!-- ko foreach: {data: $data.koItems, as: 'item' } -->
+          <tbody data-bind="foreach: $data.koItems">
               <tr class="svd-logic-tab__rules-list__row">
                 <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
                   <span data-bind="click: $data.edit, attr: {title: $data.editText }">
@@ -22,14 +21,12 @@
                   </span>
                 </td>
                 <td>
-                  <span data-bind="text: item.title"></span>
+                  <span data-bind="text: $data.title"></span>
                 </td>
                 <td>
-                  <!-- ko foreach: {data: $data.koOperations, as: 'op' } -->
-                  <div>
-                    <span data-bind="text: op.text"></span>
+                  <div data-bind="foreach: $data.koOperations">
+                    <span data-bind="text: $data.text"></span>
                   </div>
-                  <!-- /ko -->
                 </td>
                 <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
                   <span data-bind="click: $data.remove, attr: {title: $data.deleteText }">
@@ -37,7 +34,6 @@
                   </span>
                 </td>
               </tr>
-              <!-- /ko -->
           </tbody>
         </table>
       </div>

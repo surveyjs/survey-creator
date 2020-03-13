@@ -10,16 +10,16 @@ if (!window["%hammerhead%"]) {
   //     }
   //   };
 
-  //   SurveyEditor.registerAdorner("title", titleAdorner);
+  //   SurveyCreator.registerAdorner("title", titleAdorner);
 
-  // SurveyEditor.editorLocalization.currentLocale = "fr";
+  // SurveyCreator.editorLocalization.currentLocale = "fr";
 
-  // SurveyEditor.removeAdorners(["mainRoot"]);
+  // SurveyCreator.removeAdorners(["mainRoot"]);
 
   // Survey.Survey.cssType = "bootstrap";
   // Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-  // SurveyEditor.editorLocalization.currentLocale = "hu";
-  // SurveyEditor.StylesManager.applyTheme("winter");
+  // SurveyCreator.editorLocalization.currentLocale = "hu";
+  // SurveyCreator.StylesManager.applyTheme("winter");
 
   //color customization
   var mainColor = "#0065FF";
@@ -40,7 +40,7 @@ if (!window["%hammerhead%"]) {
   ] = bodyContainerBackgroundColor;
 
   var defaultThemeColorsEditor =
-    SurveyEditor.StylesManager.ThemeColors["default"];
+    SurveyCreator.StylesManager.ThemeColors["default"];
   defaultThemeColorsEditor["$primary-color"] = mainColor;
   defaultThemeColorsEditor["$secondary-color"] = mainColor;
   defaultThemeColorsEditor["$primary-hover-color"] = mainHoverColor;

@@ -18,6 +18,11 @@ class Page {
       .child("span")
       .withText(categoryName);
   }
+  buttonByValue(valueName) {
+    return Selector(`input[type="button"]`)
+      .withAttribute("value", valueName)
+      .nth(-1);
+  }
 }
 
 export default new Page();
