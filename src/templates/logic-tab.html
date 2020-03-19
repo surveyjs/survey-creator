@@ -2,8 +2,9 @@
   <div class="svd-logic-tab">
     <div data-bind="visible: koMode() == 'view'">
       <div data-bind="visible: $data.koItems().length > 0" >
+        <p>
         <input type="button" class="btn btn-primary" data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew'), attr: {title: $data.getLocString('pe.addNew') }" />
-        <p />
+        </p>
         <table class="svd-logic-tab__rules-list">
           <thead>
               <tr class="svd-logic-tab__rules-list__header svd-logic-tab__rules-list__row">
