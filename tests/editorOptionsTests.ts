@@ -54,6 +54,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ) {
     if (propertyName == "choices" && obj["name"] == "hideAddRemove") {
       editorOptions.allowAddRemoveItems = false;
+      editorOptions.allowRemoveAllItems = false;
     }
   }
   onPropertyEditorKeyDownCallback(

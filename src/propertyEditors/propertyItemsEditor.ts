@@ -9,12 +9,12 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   public onDeleteClick: any;
   public onAddClick: any;
   public onClearClick: any;
-  koAllowAddRemoveItems: any;
+  koAllowAddRemoveItems = ko.observable(true);
+  koAllowRemoveAllItems = ko.observable(true);
   private viewItems: Array<any> = [];
 
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-    this.koAllowAddRemoveItems = ko.observable(true);
     var self = this;
     self.onDeleteClick = function(item) {
       self.deleteItem(item.obj);
@@ -43,10 +43,11 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     return super.getCorrectedValue(value);
   }
   protected createEditorOptions(): any {
-    return { allowAddRemoveItems: true };
+    return { allowAddRemoveItems: true, allowRemoveAllItems: true };
   }
   protected onSetEditorOptions(editorOptions: any) {
     this.koAllowAddRemoveItems(editorOptions.allowAddRemoveItems);
+    this.koAllowRemoveAllItems(editorOptions.allowRemoveAllItems);
   }
   public sortableOptions = {
     handle: ".svd-drag-handle",

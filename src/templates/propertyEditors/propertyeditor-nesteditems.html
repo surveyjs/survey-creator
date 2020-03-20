@@ -25,7 +25,7 @@
       <!-- /ko -->
       <div class="svd-items-control-footer" data-bind="visible: koAllowAddRemoveItems">
           <input type="button" class="btn btn-primary" data-bind="click: onAddClick, value: $data.getLocString('pe.addNew')" />
-          <input type="button" class="btn btn-danger" data-bind="click: onClearClick, visible: originalValue.length > 0, value: $data.getLocString('pe.removeAll')" />
+          <input type="button" class="btn btn-danger" data-bind="click: onClearClick, visible: originalValue.length > 0 && koAllowRemoveAllItems(), value: $data.getLocString('pe.removeAll')" />
       </div>
   </div>
   <!-- ko if: !koIsList() -->
