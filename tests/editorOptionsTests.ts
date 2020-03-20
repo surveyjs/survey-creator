@@ -22,6 +22,9 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): boolean {
     return true;
   }
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
+    return true;
+  }
 
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,

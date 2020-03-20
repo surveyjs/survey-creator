@@ -26,8 +26,9 @@
   </td>
   <!-- /ko -->
   <td class="svd-textitems-column">
-    <div class="svd-itemvalue-action"
-      data-bind="visible: editor.koAllowAddRemoveItems, click: editor.onDeleteClick"
+    <div
+      class="svd-itemvalue-action"
+      data-bind="visible: editor.koAllowAddRemoveItems() && koCanDeleteItem(), click: editor.onDeleteClick"
     >
       <span>
         <svg-icon
@@ -35,6 +36,6 @@
           params="iconName: deleteIcon, size: 20"
         ></svg-icon>
       </span>
-    </button>
+    </div>
   </td>
 </tr>
