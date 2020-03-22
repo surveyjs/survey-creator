@@ -407,10 +407,10 @@ export class SurveyQuestionEditorDefinition {
 
         { name: "questionTitleLocation", tab: "question" },
         { name: "questionDescriptionLocation", tab: "question" },
+        { name: "showQuestionNumbers", tab: "question" },
+        { name: "questionTitlePattern", tab: "question" },
         { name: "requiredText", tab: "question" },
         { name: "questionStartIndex", tab: "question" },
-        { name: "showQuestionNumbers", tab: "question" },
-        { name: "questionTitleTemplate", tab: "question" },
         { name: "questionErrorLocation", tab: "question" },
         {
           name: "focusFirstQuestionAutomatic",
