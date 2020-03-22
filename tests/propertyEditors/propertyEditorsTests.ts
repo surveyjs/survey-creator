@@ -32,7 +32,10 @@ import {
   SurveyDropdownPropertyEditor,
   SurveyStringPropertyEditor
 } from "../../src/propertyEditors/propertyEditorFactory";
-import { defaultStrings } from "../../src/editorLocalization";
+import {
+  defaultStrings,
+  editorLocalization
+} from "../../src/editorLocalization";
 import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "../../src/propertyEditors/propertyDefaultValueEditor";
 import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
@@ -1241,6 +1244,33 @@ QUnit.test(
     assert.notOk(colDetailEditor.getPropertyEditorByName("choices"));
   }
 );
+
+QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function(assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("p");
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.addColumn("column 1");
+  question.addColumn("column 2");
+  survey.pages[0].addElement(question);
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  var itemViewModel = <SurveyNestedPropertyEditorItem>(
+    columnsEditor.createItemViewModel(question.columns[0])
+  );
+
+  assert.ok(itemViewModel.koCanDeleteItem(), "Allow delete item");
+
+  (<any>itemViewModel).options = new EditorOptionsTests();
+  (<any>itemViewModel).options.onCanDeleteItemCallback = (
+    object: any,
+    item: Survey.ItemValue
+  ) => false;
+  (<any>columnsEditor).koColumnsValue.notifySubscribers();
+  assert.notOk(itemViewModel.koCanDeleteItem(), "Forbid delete item");
+});
 
 QUnit.test(
   "Check showDisplayNameOnTop for different property editors",

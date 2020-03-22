@@ -15,6 +15,7 @@ export interface ISurveyObjectEditorOptions {
     object: any,
     property: Survey.JsonObjectProperty
   ): boolean;
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean;
 
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,

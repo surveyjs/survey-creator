@@ -279,6 +279,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = this.onShowingProperty;
   /**
+   * The event is called before rendering a delete button in the Property Grid or in Question Editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey Question
+   * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+   * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
+   */
+  public onCanDeleteItem: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The event is called when creator tab has been rendered.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.tabName the name of the rendered tab
@@ -516,6 +527,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editorOptions  options that can be changed.
    * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
+   * <br/> options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
    * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
    * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
    */
@@ -1767,6 +1779,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
   }
+  protected canDeleteItem(object: any, item: Survey.ItemValue): boolean {
+    var options = { obj: object, item: item, canDelete: true };
+    this.onCanDeleteItem.fire(this, options);
+    return options.canDelete;
+  }
   protected onCustomSortPropertyObjectProperty(
     object: any,
     property1: Survey.JsonObjectProperty,
@@ -2926,6 +2943,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     property: Survey.JsonObjectProperty
   ): boolean {
     return this.onCanShowObjectProperty(object, property);
+  }
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
+    return this.canDeleteItem(object, item);
   }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,

@@ -22,6 +22,9 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): boolean {
     return true;
   }
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
+    return true;
+  }
 
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
@@ -54,6 +57,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ) {
     if (propertyName == "choices" && obj["name"] == "hideAddRemove") {
       editorOptions.allowAddRemoveItems = false;
+      editorOptions.allowRemoveAllItems = false;
     }
   }
   onPropertyEditorKeyDownCallback(

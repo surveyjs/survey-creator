@@ -140,7 +140,8 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       item,
       () => this.columns,
       this.options,
-      item => this.getItemClassName(item)
+      item => this.getItemClassName(item),
+      this.object
     );
   }
   protected onListDetailViewChanged() {}
@@ -160,12 +161,14 @@ export class SurveyNestedPropertyEditorItem {
   private koCellsValue = ko.observableArray<
     SurveyNestedPropertyEditorEditorCell
   >();
+  koCanDeleteItem = ko.observable(true);
   private itemEditorValue: SurveyElementEditorContent;
   constructor(
     public obj: any,
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
     options: ISurveyObjectEditorOptions,
-    private getItemClassName: (item: any) => string = null
+    private getItemClassName: (item: any) => string = null,
+    private object: any = undefined
   ) {
     this.options = options;
     this.koHasDetails = ko.observable(this.hasDetailsProperties());
@@ -181,6 +184,10 @@ export class SurveyNestedPropertyEditorItem {
           )
         );
       }
+      this.koCanDeleteItem(
+        !this.options ||
+          this.options.onCanDeleteItemCallback(this.object, this.obj)
+      );
     });
   }
   protected getClassName(): string {

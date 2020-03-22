@@ -206,12 +206,22 @@ QUnit.test("hideAddRemoveButtons", function(assert) {
     true,
     "Show buttons for the first question"
   );
+  assert.equal(
+    itemValuesEditor.koAllowRemoveAllItems(),
+    true,
+    "Show buttons for the first question"
+  );
 
   editor = new SurveyElementEditorContentNoCategries(question2, "", options);
   property = <SurveyObjectProperty>editor.getPropertyEditorByName("choices");
   itemValuesEditor = <SurveyPropertyItemValuesEditor>property.editor;
   assert.equal(
     itemValuesEditor.koAllowAddRemoveItems(),
+    false,
+    "Hide buttons for the second question"
+  );
+  assert.equal(
+    itemValuesEditor.koAllowRemoveAllItems(),
     false,
     "Hide buttons for the second question"
   );
