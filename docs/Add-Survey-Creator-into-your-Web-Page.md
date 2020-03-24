@@ -29,7 +29,7 @@ Link to the SurveyJS Library knockout version and Survey Creator library.
 ## Step 3. Use boostrap or use our Themes
 
 You may use bootstrap
-```
+```javascript
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 ```
 
