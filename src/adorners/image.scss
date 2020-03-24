@@ -1,0 +1,37 @@
+.image_editable {
+  position: relative;
+}
+
+.svd_q_selected .image_editable {
+  image-editor {
+    display: block;
+  }
+  .svda-choose-file {
+    pointer-events: all;
+  }
+}
+
+.svda-image-editor {
+  overflow: hidden;
+}
+
+image-editor {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 0 1em;
+  border-radius: 0.5em;
+  background-color: white;
+  opacity: 0.75;
+
+  .svda-content {
+    position: relative;
+    pointer-events: all;
+
+    .edit-image-item {
+      cursor: pointer;
+    }
+  }
+}

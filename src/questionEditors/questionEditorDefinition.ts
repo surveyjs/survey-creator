@@ -188,6 +188,15 @@ export class SurveyQuestionEditorDefinition {
         "imageWidth"
       ]
     },
+    image: {
+      properties: [
+        "imageLink",
+        "contentMode",
+        "imageFit",
+        "imageHeight",
+        "imageWidth"
+      ]
+    },
     "itemvalue[]@choices": {
       properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]

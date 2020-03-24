@@ -49,6 +49,7 @@ export class QuestionToolbox {
     "rating",
     "imagepicker",
     "boolean",
+    "image",
     "html"
   ];
 
@@ -77,6 +78,12 @@ export class QuestionToolbox {
               "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
           }
         ]
+      };
+    },
+    image: () => {
+      return {
+        imageLink:
+          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
       };
     }
   };
