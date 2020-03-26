@@ -1,5 +1,6 @@
 ﻿<div
   class="svd-page-selector svd_custom_select svd-light-bg-color svd-light-border-color"
+  data-bind="visible: hasDropdownSelector"
 >
   <select
     onmousewheel="return false;"
@@ -22,7 +23,7 @@
 
 <div
   class="svd-pages"
-  data-bind="sortable: {foreach: koSurvey().pages, options: sortableOptions}, event: {wheel: onWheel}"
+  data-bind="sortable: {foreach: koSurvey().pages, options: sortableOptions}, event: {wheel: onWheel}, css: {'svd-pages--no-dropdown-selector': !hasDropdownSelector() }"
 >
   <div
     tabindex="0"
@@ -102,9 +103,13 @@
 <!-- ko ifnot: readOnly -->
 <div
   tabindex="0"
-  class="svd-page-add"
+  class="svd-page svd-light-border-color svd-page-add"
   data-bind="key2click, clickNoFocus: addPage, attr: {title: getLocString('ed.addNewPage')}"
 >
+  <span
+    class="svd-page-name"
+    data-bind="text: getLocString('ed.addNewPage')"
+  ></span>
   <span>
     <svg-icon
       class="svd-secondary-icon"

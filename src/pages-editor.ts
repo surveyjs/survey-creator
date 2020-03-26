@@ -18,6 +18,7 @@ export class PagesEditor {
   public koSurvey: ko.Observable<Survey.Survey>;
 
   constructor(private creator: SurveyCreator, private element: any) {
+    this.hasDropdownSelector(creator.showDropdownPageSelector);
     this.koSurvey = ko.observable<Survey.Survey>(creator.survey);
     creator.onDesignerSurveyCreated.add((sender, options) => {
       this.koSurvey(options.survey);
@@ -252,6 +253,7 @@ export class PagesEditor {
     this._readOnly(newVal);
   }
   public hasScroller = ko.observable(false);
+  public hasDropdownSelector = ko.observable(true);
 
   dispose() {
     if (!!this.updateScroller) {

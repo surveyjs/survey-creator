@@ -118,6 +118,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private isRTLValue: boolean = false;
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   private pageEditModeValue: "standard" | "single" = "standard";
+  private showDropdownPageSelectorValue: boolean = true;
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -1329,6 +1330,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.showJSONEditorTab = false;
       }
     }
+    if (typeof options.showDropdownPageSelector !== "undefined") {
+      this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
+    }
   }
   /**
    * The editing survey object (Survey.Survey)
@@ -1760,6 +1764,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get pageEditMode() {
     return this.pageEditModeValue;
+  }
+  /**
+   * Set it to false hide the dropdown page selector in the page editor above the design surface
+   */
+  public get showDropdownPageSelector() {
+    return this.showDropdownPageSelectorValue;
   }
   private _leftContainer = ko.observableArray<string>(["toolbox"]);
   public get leftContainer() {
