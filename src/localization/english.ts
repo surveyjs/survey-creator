@@ -23,6 +23,7 @@ export var enStrings = {
     checkbox: "Checkbox",
     comment: "Comment",
     imagepicker: "Image picker",
+    image: "Image",
     dropdown: "Dropdown",
     file: "File",
     html: "Html",

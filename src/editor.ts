@@ -207,6 +207,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
   /**
+   * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
+   * In case of any subscriptions to this event all notifications will be redirected into the event handler.
+   * <br/> options.message is a message to show.
+   */
+  public onNotify: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The event is called before undo happens.
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
@@ -1461,6 +1470,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koState(this.state);
   }
   /**
+   * This function triggers user notification (via the alert() function if no onNotify event handler added).
+   * @see onNotify
+   */
+  public notify(msg: string) {
+    if (this.onNotify.isEmpty) {
+      alert(msg);
+    } else {
+      this.onNotify.fire(this, { message: msg });
+    }
+  }
+  /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
    * @see isAutoSave
@@ -1497,7 +1517,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
             self.setState("saved");
           } else {
             if (self.showErrorOnFailedSave) {
-              alert(self.getLocString("ed.saveError"));
+              this.notify(self.getLocString("ed.saveError"));
             }
             self.setState("modified");
           }
@@ -1956,7 +1976,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     if (this.koViewType() != "editor") return true;
     if (!this.jsonEditor.isJsonCorrect) {
-      alert(this.getLocString("ed.correctJSON"));
+      this.notify(this.getLocString("ed.correctJSON"));
       return false;
     }
     if (!this.readOnly && this.jsonEditor.isJSONChanged) {
@@ -2108,7 +2128,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ko.cleanNode(this.renderedElement);
     ko.applyBindings(this, this.renderedElement);
     this.surveyjs = <HTMLElement>(
-      this.renderedElement.querySelector("#surveyjs")
+      this.renderedElement.querySelector(".svd_surveyjs_designer_container")
     );
     if (this.surveyjs) {
       var self = this;

@@ -140,7 +140,13 @@ export class SurveyLiveTester {
         var url = options.url;
         options.url = "";
         if (!!url) {
-          alert(self.getLocString("ed.navigateToMsg") + " '" + url + "'.");
+          var message =
+            self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
+          if (!!this.surveyProvider) {
+            this.surveyProvider.notify(message);
+          } else {
+            alert(message);
+          }
         }
       });
     }

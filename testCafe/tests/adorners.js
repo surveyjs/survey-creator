@@ -62,7 +62,7 @@ test(`text change title`, async t => {
     .click(`.title_editable > span:nth-child(3)`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.title_editable > span:nth-child(3)`).innerText)
+    .expect(Selector(`h5.title_editable > span:nth-child(2)`).innerText)
     .eql("question1puppies");
 });
 
