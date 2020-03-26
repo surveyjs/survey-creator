@@ -18,6 +18,9 @@ export class EditableObject {
         return EditableObject.getSurvey(object.errorOwner);
       if (!!object.locOwner) return EditableObject.getSurvey(object.locOwner);
     }
+    var original = EditableObject.getOriginalObject(object);
+    if (!!original && original !== object)
+      return EditableObject.getSurvey(original);
     return null;
   }
   public static getOriginalObject(object: any): any {
