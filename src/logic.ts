@@ -342,9 +342,12 @@ export class SurveyLogicItem {
     element: Survey.Base = null
   ): SurveyLogicOperation {
     var op = new SurveyLogicOperation(lt, element);
-    this.koOperations.push(op);
-    lt.update(this.operations);
+    this.addNewOperation(op);
     return op;
+  }
+  public addNewOperation(op: SurveyLogicOperation) {
+    this.koOperations.push(op);
+    op.logicType.update(this.operations);
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.removedOperations.push(op);
@@ -699,7 +702,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koSaveAndShowView: any;
   public koSaveEditableItem: any;
   public koAddNewOperation: any;
-  public koSelectedOperation: any;
+  public koSelectedOperation: ko.Observable<SurveyLogicType>;
+  public koNewOperation: ko.Observable<SurveyLogicOperation>;
   public koRemoveOperation: any;
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
@@ -743,11 +747,18 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       self.saveEditableItem();
     };
     this.koSelectedOperation = ko.observable(null);
+    this.koSelectedOperation.subscribe(function(newValue) {
+      var op = null;
+      if (!!newValue) {
+        var lt = <SurveyLogicType>newValue;
+        var element = lt.createNewElement(self.survey);
+        op = new SurveyLogicOperation(lt, element);
+      }
+      self.koNewOperation(op);
+    });
+    this.koNewOperation = ko.observable(null);
     this.koAddNewOperation = function() {
-      if (!self.koSelectedOperation()) return;
-      var logicType = <SurveyLogicType>self.koSelectedOperation();
-      self.addNewOperation(logicType);
-      self.koSelectedOperation(null);
+      self.addNewOperation();
     };
     this.koRemoveOperation = function(op: SurveyLogicOperation) {
       self.removeOperation(op);
@@ -915,9 +926,13 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.onItemChanged(item, "delete");
     !!this.options && this.options.stopUndoRedoTransaction();
   }
-  public addNewOperation(logicType: SurveyLogicType): SurveyLogicOperation {
-    var element = logicType.createNewElement(this.survey);
-    return this.editableItem.addOperation(logicType, element);
+  public addNewOperation(): SurveyLogicOperation {
+    if (!this.koNewOperation()) return null;
+    var op = this.koNewOperation();
+    if (op.hasError()) return null;
+    this.editableItem.addNewOperation(op);
+    this.koSelectedOperation(null);
+    return op;
   }
   public removeOperation(op: SurveyLogicOperation) {
     this.editableItem.removeOperation(op);

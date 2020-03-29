@@ -56,10 +56,14 @@ test(`Create logic: question visibility`, async t => {
     .click(actionSelect.find("option").withText("Question visibility"))
     .click(page.buttonByValue("Add new action"));
 
-  var visibilitySelect = Selector(".svd-logic-tab__item").find("select");
+  var visibilitySelect = Selector(".svd-logic-tab__item")
+    .find("select")
+    .nth(1);
   await t
     .click(visibilitySelect)
-    .click(visibilitySelect.find("option").withText("question4"));
+    .click(visibilitySelect.find("option").withText("question4"))
+    .click(page.buttonByValue("Add new action"));
+
   await t.click(page.buttonByValue("Save and return"));
   await t
     .expect(Selector("span").withText("{question1} = 'item1'").exists)

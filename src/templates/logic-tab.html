@@ -73,7 +73,7 @@
         <!-- /ko -->
         <p>
           <div class="svd-logic-tab__item">
-            <div class="form-inline form-group">
+            <div class="form-inline form-group" style="padding-bottom:10px">
               <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
                   <select onmousewheel="return false;" data-bind="if: true, value:koSelectedOperation, attr: { 'aria-label': selectedOperationCaption }">
                     <option data-bind="text:selectedOperationCaption, value: null"></option>
@@ -82,13 +82,20 @@
                     <!-- /ko -->
                   </select>
               </div>
-              <div style="width: 50%;max-width:200px;display:inline-block">
-                <input type="button" class="form-control btn btn-primary" data-bind="enable: koSelectedOperation() != null, click:koAddNewOperation, value: addNewOperationText" />
+              <div style="display:inline-block">
+                <!--ko if: $data.koSelectedOperation() != null -->
+                <span data-bind="text:koSelectedOperation().description"></span>
+                <!-- /ko -->
               </div>
             </div>
-            <!--ko if: $data.koSelectedOperation() != null -->
-            <div data-bind="text:koSelectedOperation().description"></div>
+            <!--ko if: $data.koNewOperation() != null -->
+              <div style="padding-bottom:10px">
+              <!-- ko template: { name: $data.koNewOperation().template, data: $data.koNewOperation().templateObject } --><!-- /ko -->
+              </div>
             <!-- /ko -->
+            <div style="width:200px">
+              <input type="button" class="form-control btn btn-primary" data-bind="enable: koSelectedOperation() != null, click:koAddNewOperation, value: addNewOperationText" />
+            </div>
           </div>
         </p>
         <p>
