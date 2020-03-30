@@ -27,7 +27,7 @@
     <span
       class="svda-title-editor-placeholder"
       tabindex="0"
-      data-bind="click: startEdit, text: placeholder, visible: !editingName() && placeholder, key2click"
+      data-bind="click: startEdit, text: placeholder, visible: !editingName() && placeholder, key2click, attr: {role: 'textbox', 'aria-readonly': 'false'}"
     ></span>
     <span
       class="svda-title-editor-start-button edit-survey-name"
