@@ -8,6 +8,7 @@ export interface IAccordionItemData {
   name: string | any;
   title: string | any;
   onExpand: () => void;
+  doOnExpanded(): any;
 }
 
 export class AccordionItemModel {
@@ -22,6 +23,9 @@ export class AccordionItemModel {
     this.collapsed(!this.collapsed());
     if (!this.collapsed() && !!document) {
       var el = document.getElementById("editor_tab_id_" + this.data.name);
+      if (!!this.data.doOnExpanded) {
+        this.data.doOnExpanded();
+      }
       if (!!el) {
         el.scrollIntoView(false);
       }

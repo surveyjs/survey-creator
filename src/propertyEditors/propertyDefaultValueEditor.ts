@@ -80,17 +80,23 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   public resetText(): string {
     return editorLocalization.getString("pe.reset");
   }
+  public refreshText(): string {
+    return editorLocalization.getString("pe.refresh");
+  }
   public resetValue(model: SurveyPropertyDefaultValueEditor) {
     model
       .koSurvey()
       .clearValue(SurveyPropertyDefaultValueEditor.defaultQuestionName);
   }
+  public refreshSurvey(model: SurveyPropertyDefaultValueEditor) {
+    model.createSurvey();
+  }
   public getValueText(value: any): string {
     if (!value) return editorLocalization.getString("pe.empty");
     return JSON.stringify(value);
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.createSurvey();
   }
   public get editorType(): string {

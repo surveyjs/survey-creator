@@ -53,8 +53,8 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.koColumnsValue();
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.createColumns();
     this.koShowHeader(this.canShowHeader());
     this.koEditItem(null);

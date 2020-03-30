@@ -394,7 +394,14 @@ export class SurveyElementEditorContent {
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
     this.assignPropertiesToEditors();
-    tabs.forEach(tab => tab.beforeShow());
+    var self = this;
+    this.koActiveTab.subscribe(function(val) {
+      if (!val) return;
+      var tab = self.getTabByName(val);
+      if (!!tab) {
+        tab.expand();
+      }
+    });
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
@@ -547,6 +554,7 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     super(obj, className, options, true);
     this.koTab = ko.observable(this.koTabs()[0]);
     this.koProperties(this.getObjectProperties());
+    this.koTab().expand();
   }
   protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var properties = this.getProperties();
@@ -831,7 +839,11 @@ export class SurveyQuestionEditorTab {
     };
   }
   public expand() {
+    this.doOnExpanded();
     if (!!this.onExpand) this.onExpand();
+  }
+  public doOnExpanded() {
+    this.beforeShow();
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;

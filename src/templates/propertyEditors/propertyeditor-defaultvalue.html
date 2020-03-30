@@ -1,13 +1,14 @@
 <script type="text/html" id="propertyeditor-value">
-    <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
-    <!-- /ko -->
+  <!-- ko template: { name: 'propertyeditor-modal', data: $data } -->
+  <!-- /ko -->
 </script>
 
 <script type="text/html" id="propertyeditorcontent-value">
-    <form>
-        <div class="svd_wrap_elements">
-            <survey-widget params="survey: koSurvey"></survey-widget>
-        </div>
-    </form>
-    <button type="button" class="btn btn-sm btn-danger" data-bind="click: resetValue, text: resetText()"></button>
+  <form>
+      <div class="svd_wrap_elements">
+          <survey-widget params="survey: koSurvey"></survey-widget>
+      </div>
+  </form>
+  <button type="button" class="btn btn-sm btn-danger" data-bind="click: resetValue, text: resetText()"></button>
+  <button type="button" class="btn btn-sm" data-bind="click: refreshSurvey, text: refreshText()"></button>
 </script>
