@@ -1208,6 +1208,35 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
     "We can parse valid expression: {q3} = [1, 2]"
   );
 });
+/* TODO bug fixed in Library v1.5.18
+QUnit.test(
+  "SurveyPropertyConditionEditor, parse koEditorItems() question.valueName",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text", valueName: "val1" },
+        { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+        { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+        { name: "q4", type: "text", visibleIf: "{val1} = 'abc' and {q2} = 1" }
+      ]
+    });
+    var question = survey.getQuestionByName("q4");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    assert.equal(editor.koActiveView(), "form", "Show Builder initial");
+    assert.equal(
+      editor.koCanParseExpression(),
+      true,
+      "We can parse expression"
+    );
+    assert.equal(editor.koEditorItems().length, 2, "There are two conditions");
+    editor.koValue("{val1} = 'abc' or {q2} = 1 and {q2} = 2");
+  }
+);
+*/
 QUnit.test(
   "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
   function(assert) {
