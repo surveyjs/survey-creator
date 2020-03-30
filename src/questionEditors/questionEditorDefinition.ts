@@ -313,6 +313,10 @@ export class SurveyQuestionEditorDefinition {
       properties: ["displayStyle", "currency"],
       tabs: [{ name: "expression", index: 10 }]
     },
+    "matrixdropdowncolumn@rating": {
+      properties: ["rateValues"]
+    },
+
     multipletextitem: {
       properties: ["inputType", "maxLength", "placeHolder", "requiredErrorText"]
     },
