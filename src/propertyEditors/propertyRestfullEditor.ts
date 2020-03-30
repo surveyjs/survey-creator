@@ -19,8 +19,8 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
   public get editorType(): string {
     return "restfull";
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.setTestQuestionProperties();
     var contentEditor = new SurveyElementEditorContent(
       this.originalValue,

@@ -67,8 +67,8 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       .getString("pe.itemEdit")
       ["format"](this.koEditItem().obj.value);
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.updateShowTextViewVisibility();
   }
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {

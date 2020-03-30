@@ -131,10 +131,6 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       return self.afterRender(el, con);
     };
   }
-  public setup() {
-    super.setup();
-    this.beforeShow();
-  }
   protected get isModal(): boolean {
     return true;
   }
@@ -142,7 +138,11 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     return this.isBeforeShowCalledValue;
   }
   public beforeShow() {
+    if (this.isBeforeShowCalledValue === true) return;
     this.isBeforeShowCalledValue = true;
+    this.beforeShowCore();
+  }
+  protected beforeShowCore() {
     this.updateValue();
   }
   public updatePropertyValue(newValue: any) {
@@ -186,6 +186,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     );
   }
   public setObject(value: any) {
+    this.isBeforeShowCalledValue = false;
     this.editingObject = value;
     super.setObject(value);
     if (this.options && this.property) {

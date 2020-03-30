@@ -429,8 +429,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public get removeConditionText(): string {
     return this.getLocString("pe.remove");
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
     if (!!this.options) {

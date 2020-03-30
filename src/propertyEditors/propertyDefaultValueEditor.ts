@@ -95,8 +95,8 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     if (!value) return editorLocalization.getString("pe.empty");
     return JSON.stringify(value);
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.createSurvey();
   }
   public get editorType(): string {

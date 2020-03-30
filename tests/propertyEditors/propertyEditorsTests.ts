@@ -1815,6 +1815,9 @@ QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function(assert) {
     "There are several editable columns, we are rendering header"
   );
   Survey.Serializer.findProperty("itemvalue", "text").visible = false;
+  propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property)
+  );
   propEditor.beforeShow();
   assert.equal(
     propEditor.koShowHeader(),
