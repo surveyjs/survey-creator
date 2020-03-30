@@ -685,15 +685,64 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
   editor.selectedElementPropertyGrid.selectedObject = q1;
   var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
     "name"
-  );
-  namePropertyEditor.editor.koValue("myUpdatedQuestion1");
-  editor.onQuestionEditorChanged(q1);
+  ).editor;
+  namePropertyEditor.koValue("myUpdatedQuestion1");
   assert.equal(
     q2.visibleIf,
     "{myUpdatedQuestion1} = 1",
     "Update the condition accordingly"
   );
 });
+
+QUnit.test(
+  "Update conditions/expressions on changing question.valueName",
+  function(assert) {
+    var editor = new SurveyCreator();
+    editor.survey.currentPage.addNewQuestion("text", "question1");
+    editor.survey.currentPage.addNewQuestion("text", "question2");
+    var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
+    var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
+    q2.visibleIf = "{question1} = 1";
+    editor.selectedElementPropertyGrid.selectedObject = q1;
+    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+      "name"
+    ).editor;
+    var valuePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+      "valueName"
+    ).editor;
+    valuePropertyEditor.koValue("valueName1");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName1} = 1",
+      "valueName from empty to valueName1"
+    );
+    valuePropertyEditor.koValue("valueName2");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName2} = 1",
+      "valueName from valueName1 to valueName2"
+    );
+    valuePropertyEditor.koValue("");
+    assert.equal(
+      q2.visibleIf,
+      "{question1} = 1",
+      "valueName from valueName2 to empty"
+    );
+    valuePropertyEditor.koValue("valueName3");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName3} = 1",
+      "valueName from empty to valueName3"
+    );
+    namePropertyEditor.koValue("valueName3");
+    namePropertyEditor.koValue("question11");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName3} = 1",
+      "ignore changing name if valueName is not empty"
+    );
+  }
+);
 
 QUnit.test(
   "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",

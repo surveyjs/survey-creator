@@ -2208,8 +2208,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       sender,
       arrayChanges
     );
-    if (name === "name" && this.isObjQuestion(sender)) {
+    if (name === "name" && this.isObjQuestion(sender) && !sender["valueName"]) {
       this.updateConditions(oldValue, sender["name"]);
+    }
+    if (name === "valueName" && this.isObjQuestion(sender)) {
+      var oldName = !!oldValue ? oldValue : sender["name"];
+      var newName = !!sender["valueName"]
+        ? sender["valueName"]
+        : sender["name"];
+      this.updateConditions(oldName, newName);
     }
     this.undoRedoManager.stopTransaction();
   }
