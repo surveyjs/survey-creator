@@ -187,6 +187,7 @@ export var enStrings = {
     save: "Save",
     cancel: "Cancel",
     reset: "Reset",
+    refresh: "Refresh",
     // close: "Close",
     delete: "Delete",
     add: "Add",
