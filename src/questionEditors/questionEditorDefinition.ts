@@ -246,6 +246,7 @@ export class SurveyQuestionEditorDefinition {
         "name",
         "title",
         "isRequired",
+        "showInMultipleColumns",
         "width",
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
