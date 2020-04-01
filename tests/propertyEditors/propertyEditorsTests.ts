@@ -37,7 +37,10 @@ import {
   editorLocalization
 } from "../../src/editorLocalization";
 import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
-import { SurveyPropertyDefaultValueEditor } from "../../src/propertyEditors/propertyDefaultValueEditor";
+import {
+  SurveyPropertyDefaultValueEditor,
+  SurveyPropertySetEditor
+} from "../../src/propertyEditors/propertyDefaultValueEditor";
 import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
 
 export default QUnit.module("PropertyEditorsTests");
@@ -1488,6 +1491,48 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
     "question2",
     "Property could not be changed"
   );
+});
+
+QUnit.test("'set' property editor", function(assert) {
+  Survey.Serializer.addProperty("survey", {
+    name: "region:set",
+    choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+  });
+  var survey = createSurvey();
+  var setValueEditor = new SurveyPropertySetEditor(
+    Survey.Serializer.findProperty("survey", "region")
+  );
+  setValueEditor.object = survey;
+  setValueEditor.beforeShow();
+  var question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 5, "There are 5 choices");
+  Survey.Serializer.removeProperty("survey", "region");
+});
+
+QUnit.test("'set' property editor, get choices on callback, Bug#720", function(
+  assert
+) {
+  var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+  var callback = null;
+  Survey.Serializer.addProperty("survey", {
+    name: "region:set",
+    choices: function(obj, choicesCallback) {
+      callback = choicesCallback;
+      return [];
+    }
+  });
+  var survey = createSurvey();
+  var setValueEditor = new SurveyPropertySetEditor(
+    Survey.Serializer.findProperty("survey", "region")
+  );
+  setValueEditor.object = survey;
+  setValueEditor.beforeShow();
+  var question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 0, "There is no choices yet");
+  callback(choices);
+  question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 5, "There are 5 choices now");
+  Survey.Serializer.removeProperty("survey", "region");
 });
 
 QUnit.test("Validators property editor", function(assert) {

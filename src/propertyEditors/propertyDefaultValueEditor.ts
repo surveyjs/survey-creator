@@ -261,7 +261,7 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
     var hasTagbox = !!Survey.Serializer.findClass("tagbox");
     question.hasSelectAll = !hasTagbox;
     if (!!this.property) {
-      question.choices = this.property.getChoices(this.object);
+      question.choices = this.getPropertyChoices();
     }
     var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
       question,
@@ -271,6 +271,18 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
       json.type = "tagbox";
     }
     return json;
+  }
+  private setChoices(choices: Array<any>) {
+    var survey = this.koSurvey();
+    if (!survey || survey.getAllQuestions().length > 1) return;
+    survey.getAllQuestions()[0].choices = choices;
+  }
+  private getPropertyChoices(): Array<any> {
+    if (!this.property) return [];
+    var self = this;
+    return this.property.getChoices(this.object, function(choices: any) {
+      self.setChoices(choices);
+    });
   }
 }
 
