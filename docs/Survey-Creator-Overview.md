@@ -4,6 +4,8 @@ This paper will explain how to use, customize and get the maximum from Survey Cr
 
 If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Survey-Creator/?id=Add-Survey-Builder-into-your-Web-Page).
 
+Please visit our [what's new page](https://surveyjs.io/WhatsNew) to see what we have added recently or what is coming soon.
+
 If you want to get the most from our Survey Creator, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
 * [Supported Platforms and Examples](#platforms)
