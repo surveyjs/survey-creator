@@ -43,7 +43,8 @@ test(`Create logic: question visibility`, async t => {
   await t
     .click(page.buttonByValue("Save and return"))
     .expect(
-      Selector("span").withText("Please, add at least one action.").exists
+      Selector("span").withText("Please, fix problems in your action(s).")
+        .exists
     )
     .ok();
 
@@ -53,16 +54,14 @@ test(`Create logic: question visibility`, async t => {
   );
   await t
     .click(actionSelect)
-    .click(actionSelect.find("option").withText("Question visibility"))
-    .click(page.buttonByValue("Add new action"));
+    .click(actionSelect.find("option").withText("Question visibility"));
 
   var visibilitySelect = Selector(".svd-logic-tab__item")
     .find("select")
     .nth(1);
   await t
     .click(visibilitySelect)
-    .click(visibilitySelect.find("option").withText("question4"))
-    .click(page.buttonByValue("Add new action"));
+    .click(visibilitySelect.find("option").withText("question4"));
 
   await t.click(page.buttonByValue("Save and return"));
   await t
