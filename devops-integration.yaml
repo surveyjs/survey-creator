@@ -77,9 +77,17 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator
     npm run build_prod
+  displayName: 'build_prod'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator
     npm run test_ci
+  displayName: 'unit tests'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator
     npm run testcafe_ci
-  displayName: 'run build and run tests'
+  displayName: 'functional tests'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator
