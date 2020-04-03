@@ -316,7 +316,7 @@ QUnit.test(
     editor.beforeShow();
     editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
-    editorItem.questionName = "q2";
+    editorItem.questionName = "val2";
     editorItem.value = "abc";
     assert.equal(
       editor.koTextValue(),
@@ -324,7 +324,12 @@ QUnit.test(
       "valueName property is used"
     );
 
-    editorItem.questionName = "matrix.row1.column1";
+    editorItem.questionName = "val3.row1.column1";
+    assert.equal(
+      editorItem.valueQuestion.getType(),
+      "dropdown",
+      "Value question for matrix column created correctly"
+    );
     editorItem.value = "1";
     assert.equal(
       editor.koTextValue(),
@@ -359,7 +364,7 @@ QUnit.test(
     editor.beforeShow();
     editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
-    editorItem.questionName = "q2.";
+    editorItem.questionName = "val2";
     var valueQuestion = editorItem.valueQuestion;
     assert.ok(valueQuestion, "Value question created correctly");
     assert.equal(
@@ -423,7 +428,7 @@ QUnit.test(
     editor.beforeShow();
     editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
-    editorItem.questionName = "q2";
+    editorItem.questionName = "val2";
     editorItem.value = "abc";
     assert.equal(
       editor.koTextValue(),
@@ -1208,7 +1213,6 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
     "We can parse valid expression: {q3} = [1, 2]"
   );
 });
-/* TODO bug fixed in Library v1.5.18
 QUnit.test(
   "SurveyPropertyConditionEditor, parse koEditorItems() question.valueName",
   function(assert) {
@@ -1236,7 +1240,6 @@ QUnit.test(
     editor.koValue("{val1} = 'abc' or {q2} = 1 and {q2} = 2");
   }
 );
-*/
 QUnit.test(
   "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
   function(assert) {

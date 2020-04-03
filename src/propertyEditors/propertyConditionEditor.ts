@@ -556,8 +556,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var path = "";
     var question = this.getQuestionByName(questionName);
     if (!question) return null;
-    if (questionName.indexOf(question.name) == 0) {
-      path = questionName.substr(question.name.length);
+    if (questionName.indexOf(question.getValueName()) == 0) {
+      path = questionName.substr(question.getValueName().length);
     }
     if (questionName.indexOf("row.") == 0) {
       path = questionName.substr("row.".length);
