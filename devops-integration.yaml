@@ -114,6 +114,7 @@ steps:
     git fetch --tags --force
     git add surveyjs.io/App_Data/DocsEditor
     git commit -m "[skip ci] Updated survey-creator docs"
+    git pull origin master
     git push origin master
   displayName: 'git surveyjs/service push updated docs'
 
