@@ -1241,6 +1241,49 @@ QUnit.test(
   }
 );
 QUnit.test(
+  "SurveyPropertyConditionEditor, parse koEditorItems() with calcaluted values, Bug #727",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [{ name: "q1", type: "text" }],
+      calculatedValues: [
+        {
+          name: "var1",
+          expression: "1"
+        }
+      ]
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    editor.koValue("{var1} = '1'");
+    assert.equal(
+      editor.koCanParseExpression(),
+      true,
+      "We can parse calculated value"
+    );
+    editor.koActiveView("form");
+    assert.equal(editor.koActiveView(), "form", "Show form");
+    assert.equal(
+      editor.koEditorItems()[0].questionName,
+      "var1",
+      "question name parsed correctly"
+    );
+    assert.equal(
+      editor.koEditorItems()[0].valueQuestion.getType(),
+      "text",
+      "text question for editing"
+    );
+    assert.equal(
+      editor.koEditorItems()[0].value,
+      "1",
+      "value in text question set correctly"
+    );
+  }
+);
+QUnit.test(
   "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
   function(assert) {
     var survey = new Survey.Survey({

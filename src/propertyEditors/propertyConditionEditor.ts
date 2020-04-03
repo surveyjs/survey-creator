@@ -367,6 +367,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   koIsWideMode: any;
   koIsEditorHidingDisabled: any;
   private addConditionQuestionsHash = {};
+  private addConditionCalculatedValuesHash = {};
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -473,6 +474,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   private allConditionQuestionsValue: any[];
   private resetAllConditionQuestions() {
     this.addConditionQuestionsHash = {};
+    this.addConditionCalculatedValuesHash = {};
     this.allConditionQuestionsValue = this.getConditionQuestions();
     this.allConditionQuestionsValue.sort(function(a, b) {
       return a.text.localeCompare(b.text);
@@ -500,6 +502,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
         questions[i].addConditionObjectsByContext(res, this.object);
       }
       this.addConditionQuestionsHash = {};
+      this.addConditionCalculatedValuesHash = {};
       for (var i = 0; i < res.length; i++) {
         if (!this.options || !this.options.showTitlesInExpressions) {
           res[i].text = res[i].name;
@@ -538,6 +541,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var values = survey.calculatedValues;
     for (var i = 0; i < values.length; i++) {
       var name = values[i].name;
+      this.addConditionCalculatedValuesHash[name] = values[i];
       res.push({ name: name, text: name, question: null });
     }
   }
@@ -719,7 +723,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       (!constOperand && !arrayValue && this.canShowValueByOperator(op.operator))
     )
       return false;
-    if (!this.getQuestionByName(variableOperand.variable)) return false;
+    if (!this.isVariableInSurvey(variableOperand.variable)) return false;
     var item = new ConditionEditorItem(this);
     item.questionName = variableOperand.variable;
     item.operator =
@@ -735,11 +739,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     res.push(item);
     return true;
   }
+  private isVariableInSurvey(variable: string): boolean {
+    if (!this.getSurvey()) return false;
+    if (this.getQuestionByName(variable)) return true;
+    return !!this.addConditionCalculatedValuesHash[variable];
+  }
   private getArrayValueFromOperand(op: Survey.BinaryOperand): Array<any> {
     var arrayOperand = <Survey.ArrayOperand>this.getOperandByType(op, "array");
-    //TODO
-    if (!arrayOperand || !arrayOperand["values"]) return null;
-    var valuesOperand = arrayOperand["values"];
+    if (!arrayOperand || !arrayOperand.values) return null;
+    var valuesOperand = arrayOperand.values;
     if (!Array.isArray(valuesOperand) || valuesOperand.length == 0) return null;
     var res = [];
     for (var i = 0; i < valuesOperand.length; i++) {
