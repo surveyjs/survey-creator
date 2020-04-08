@@ -838,7 +838,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     StylesManager.applyTheme(StylesManager.currentTheme());
 
-    self.onTitleEditorInputFocusCallback = null;
+    self.onTitleInplaceEditorStartEdit = null;
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
@@ -3036,7 +3036,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
-  onTitleEditorInputFocusCallback(inputElem: HTMLInputElement): void {}
+  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
 
   onGetErrorTextOnValidationCallback(
     propertyName: string,

@@ -158,11 +158,17 @@ QUnit.test(
 );
 
 QUnit.test("TitleInplaceEditor error property", function(assert) {
-  const onTitleEditorInputFocusCallback = function(inputElem) {
+  const onTitleInplaceEditorStartEdit = function(inputElem) {
     inputElem.value = null;
   };
 
-  var model = new TitleInplaceEditor({}, "test", null, "", onTitleEditorInputFocusCallback);
+  var model = new TitleInplaceEditor(
+    {},
+    "test",
+    null,
+    "",
+    onTitleInplaceEditorStartEdit
+  );
   model.valueChanged = (newValue) => (newValue === "test1" ? "error" : "");
   assert.equal(model.error(), "", "No errors initial");
   model.editingName("test");

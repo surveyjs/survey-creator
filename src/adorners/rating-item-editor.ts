@@ -58,7 +58,7 @@ ko.components.register("rating-item-editor", {
         params.item,
         componentInfo.element,
         params.editor,
-        params.editor.onTitleEditorInputFocusCallback
+        params.editor.onTitleInplaceEditorStartEdit
       );
       var question: Survey.QuestionRating = params.question;
 

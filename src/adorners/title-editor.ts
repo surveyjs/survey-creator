@@ -152,7 +152,7 @@ ko.components.register("title-editor", {
         params.name,
         componentInfo.element,
         params.placeholder,
-        params.editor.onTitleEditorInputFocusCallback
+        params.editor.onTitleInplaceEditorStartEdit
       );
       var property = Survey.Serializer.findProperty(
         params.model.getType(),
