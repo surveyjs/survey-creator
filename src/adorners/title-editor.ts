@@ -61,13 +61,14 @@ export class TitleInplaceEditor {
     protected target: any,
     protected name: string,
     protected rootElement,
-    public placeholder: string = ""
+    public placeholder: string = "",
+    public inputFocusCallback
   ) {
     this.editingName(target[name]);
     this.prevName(target[name]);
     this.forNeibours(
-      element =>
-        (element.onclick = e => {
+      (element) =>
+        (element.onclick = (e) => {
           this.startEdit(this, e);
           e.preventDefault();
         })
@@ -88,7 +89,7 @@ export class TitleInplaceEditor {
 
   hideEditor = () => {
     this.isEditing(false);
-    this.forNeibours(element => {
+    this.forNeibours((element) => {
       element.style.display = element.dataset["sjsOldDisplay"];
     });
   };
@@ -96,13 +97,23 @@ export class TitleInplaceEditor {
     this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
-    this.forNeibours(element => {
+    this.forNeibours((element) => {
       element.dataset["sjsOldDisplay"] = element.style.display;
       element.style.display = "none";
     });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
+    inputElem.onfocus = function () {
+      const callback = model.inputFocusCallback;
+
+      if (callback) {
+        callback(inputElem);
+        return;
+      }
+
+      this.select();
+    };
     resizeInput(inputElem);
-    setTimeout(function() {
+    setTimeout(function () {
       inputElem.focus();
     }, 10);
   };
@@ -140,7 +151,8 @@ ko.components.register("title-editor", {
         params.model,
         params.name,
         componentInfo.element,
-        params.placeholder
+        params.placeholder,
+        params.editor.onTitleEditorInputFocusCallback
       );
       var property = Survey.Serializer.findProperty(
         params.model.getType(),
@@ -159,7 +171,7 @@ ko.components.register("title-editor", {
         model.prevName(ko.unwrap(params.model[params.name]));
         model.editingName(ko.unwrap(params.model[params.name]));
       });
-      model.valueChanged = newValue => {
+      model.valueChanged = (newValue) => {
         var errorText = "";
         if (property.isRequired && !newValue) {
           errorText = editorLocalization.getString("pe.propertyIsEmpty");
@@ -179,7 +191,7 @@ ko.components.register("title-editor", {
           obj: params.model,
           value: newValue,
           newValue: null,
-          doValidation: false
+          doValidation: false,
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
@@ -190,14 +202,14 @@ ko.components.register("title-editor", {
         return "";
       };
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 export var titleAdorner = {
   pageTitleEditable: true,
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     if (
       typeof model.getType === "function" &&
       model.getType() === "page" &&
@@ -207,7 +219,7 @@ export var titleAdorner = {
     }
     return "title_editable";
   },
-  getElementName: model => "title",
+  getElementName: (model) => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var placeholder =
       model.getType() === "page"
@@ -219,15 +231,15 @@ export var titleAdorner = {
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "title", decoration);
-  }
+  },
 };
 registerAdorner("title", titleAdorner);
 
 export var itemTitleAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.items ? "item_title_editable title_editable" : "";
   },
-  getElementName: model => "itemTitle",
+  getElementName: (model) => "itemTitle",
   afterRender: (
     elements: HTMLElement[],
     model: Survey.QuestionMultipleText,
@@ -247,15 +259,15 @@ export var itemTitleAdorner = {
         model.items[i]
       );
     }
-  }
+  },
 };
 registerAdorner("item-title", itemTitleAdorner);
 
 export var descriptionAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return "description_editable";
   },
-  getElementName: model => "description",
+  getElementName: (model) => "description",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var placeholder =
       model.getType() === "page"
@@ -267,6 +279,6 @@ export var descriptionAdorner = {
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "description", decoration);
-  }
+  },
 };
 registerAdorner("description", descriptionAdorner);

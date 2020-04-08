@@ -18,9 +18,10 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     private question: QuestionSelectBase,
     private item,
     rootElement,
-    private editor: SurveyCreator
+    private editor: SurveyCreator,
+    public inputFocusCallback
   ) {
-    super(target, name, rootElement);
+    super(target, name, rootElement, null, inputFocusCallback);
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
@@ -59,7 +60,8 @@ ko.components.register("item-editor", {
         params.question,
         params.item,
         componentInfo.element,
-        params.editor
+        params.editor,
+        params.editor.onTitleEditorInputFocusCallback
       );
       var property = Survey.Serializer.findProperty(
         params.target.getType(),

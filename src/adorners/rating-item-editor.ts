@@ -17,15 +17,16 @@ class RatingItemEditor extends TitleInplaceEditor {
     private question: Survey.QuestionRating,
     private item,
     rootElement,
-    private editor: SurveyCreator
+    private editor: SurveyCreator,
+    public inputFocusCallback
   ) {
-    super(target, name, rootElement);
+    super(target, name, rootElement, null, inputFocusCallback);
   }
 
   deleteItem(model: RatingItemEditor, event) {
     var question = model.question;
     var index = question.visibleRateValues
-      .map(item => item.value)
+      .map((item) => item.value)
       .indexOf(model.item.value);
 
     if (
@@ -56,7 +57,8 @@ ko.components.register("rating-item-editor", {
         params.question,
         params.item,
         componentInfo.element,
-        params.editor
+        params.editor,
+        params.editor.onTitleEditorInputFocusCallback
       );
       var question: Survey.QuestionRating = params.question;
 
@@ -64,11 +66,11 @@ ko.components.register("rating-item-editor", {
         params.target.getType(),
         params.name
       );
-      model.valueChanged = newValue => {
+      model.valueChanged = (newValue) => {
         if (question.rateValues.length === 0) {
           question.rateValues = question.visibleRateValues;
           var index = question.rateValues
-            .map(item => item.value)
+            .map((item) => item.value)
             .indexOf(params.item.value);
           question.rateValues[index] = params.target;
         }
@@ -77,9 +79,9 @@ ko.components.register("rating-item-editor", {
         return "";
       };
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 var createAddItemHandler = (
@@ -109,7 +111,7 @@ var createAddItemHandler = (
       },
       getProcessedText: (text: string) => {
         return text;
-      }
+      },
     };
     question.rateValues = question.rateValues.concat([itemValue]);
   }
@@ -117,17 +119,17 @@ var createAddItemHandler = (
 };
 
 export var ratingItemAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.visibleRateValues ? "item_editable" : "";
   },
-  getElementName: model => "itemText",
+  getElementName: (model) => "itemText",
   afterRender: (
     elements: HTMLElement[],
     model: Survey.QuestionRating,
     editor
   ) => {
     for (var i = 0; i < elements.length; i++) {
-      elements[i].onclick = e => e.preventDefault();
+      elements[i].onclick = (e) => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.innerHTML =
         "<rating-item-editor params='name: \"text\", target: target, item: item, question: question, editor: editor'></rating-item-editor>";
@@ -138,7 +140,7 @@ export var ratingItemAdorner = {
           item: item,
           question: model,
           target: item,
-          editor: editor
+          editor: editor,
         },
         decoration
       );
@@ -152,7 +154,7 @@ export var ratingItemAdorner = {
       "svda-add-new-rating-item icon-inplace-add-item svd-primary-icon";
     addNew.onclick = createAddItemHandler(
       model,
-      itemValue => {
+      (itemValue) => {
         editor.onQuestionEditorChanged(model);
         editor.onItemValueAddedCallback(
           model,
@@ -161,7 +163,7 @@ export var ratingItemAdorner = {
           model.visibleRateValues
         );
       },
-      itemValue => {
+      (itemValue) => {
         editor.onItemValueAddedCallback(
           model,
           "rateValues",
@@ -191,7 +193,7 @@ export var ratingItemAdorner = {
 
     var parent = elements[0].parentElement.parentElement;
     parent.appendChild(addNew);
-  }
+  },
 };
 
 registerAdorner("rating-item", ratingItemAdorner);
