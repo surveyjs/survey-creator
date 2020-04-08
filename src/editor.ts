@@ -24,7 +24,8 @@ import * as Survey from "survey-knockout";
 import {
   SurveyForDesigner,
   createAfterRenderHandler,
-  createAfterRenderPageHandler
+  createAfterRenderPageHandler,
+  createAfterRenderHeaderHandler,
 } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
@@ -2293,6 +2294,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this,
       this.surveyValue()
     );
+    var afterRenderHeaderHandler = createAfterRenderHeaderHandler(
+      this,
+      this.surveyValue()
+    );
     this.surveyValue().onAfterRenderPage.add((sender, options) => {
       afterRenderElementPageHandler(options.htmlElement, options.page);
     });
@@ -2336,6 +2341,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           options.panel.koIsDragging()
         );
       }
+    });
+    this.surveyValue().onAfterRenderHeader.add((sender, options) => {
+      afterRenderHeaderHandler(options.htmlElement, sender);
     });
     this.surveyValue().onDragDropAllow.add(function(sender, options) {
       options.survey = sender;

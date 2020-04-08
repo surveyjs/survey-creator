@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { registerAdorner } from "../surveyjsObjects";
+import { registerAdorner, SurveyForDesigner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyCreator } from "../editor";
 
@@ -9,7 +9,7 @@ import { QuestionImageModel } from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./image.html");
 
 class ImageInplaceEditor {
-  constructor(private input) {}
+  constructor(private input, public allowDelete = false) {}
 
   chooseImage(model, event) {
     model.input.value = "";
@@ -17,7 +17,11 @@ class ImageInplaceEditor {
     model.input.click();
   }
 
-  imageChoosen = event => {
+  deleteImage(model, event) {
+    model.valueChanged && model.valueChanged(undefined);
+  }
+
+  imageChoosen = (event) => {
     if (!window["FileReader"]) return;
     if (!this.input || !this.input.files || this.input.files.length < 1) return;
     let files = [];
@@ -37,45 +41,50 @@ class ImageInplaceEditor {
 ko.components.register("image-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = new ImageInplaceEditor(params.input);
+      var model = new ImageInplaceEditor(params.input, params.allowDelete);
       var property = Survey.Serializer.findProperty(
-        "image", //params.target.getType(),
+        params.target.getType(),
         params.name
       );
-      model.valueChanged = files => {
+      var setValue = (link) => {
+        var options = {
+          propertyName: property.name,
+          obj: params.item,
+          value: link,
+          newValue: null,
+          doValidation: false,
+        };
+        params.editor.onValueChangingCallback(options);
+        link = options.newValue === null ? options.value : options.newValue;
+        params.target[params.name] = link;
+        params.editor.onPropertyValueChanged(property, params.target, link);
+        params.editor.onQuestionEditorChanged(params.question);
+      };
+      model.valueChanged = (files) => {
+        if (files === undefined) {
+          setValue(undefined);
+          return;
+        }
         if (!files[0]) return;
-        params.editor.uploadFiles(files, (_, link) => {
-          var options = {
-            propertyName: property.name,
-            obj: params.item,
-            value: link,
-            newValue: null,
-            doValidation: false
-          };
-          params.editor.onValueChangingCallback(options);
-          link = options.newValue === null ? options.value : options.newValue;
-          params.target[params.name] = link;
-          params.editor.onPropertyValueChanged(property, params.target, link);
-          params.editor.onQuestionEditorChanged(params.question);
-        });
+        params.editor.uploadFiles(files, (_, link) => setValue(link));
       };
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 export var imageAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return typeof model.getType === "function" && model.getType() === "image"
       ? "image_editable"
       : "";
   },
-  getElementName: model => "root",
+  getElementName: (model) => "root",
   afterRender: (elements: HTMLElement[], model: QuestionImageModel, editor) => {
     var itemsRoot = elements[0];
     for (var i = 0; i < elements.length; i++) {
-      elements[i].onclick = e => e.preventDefault();
+      elements[i].onclick = (e) => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       decoration.innerHTML =
@@ -95,14 +104,56 @@ export var imageAdorner = {
           question: model,
           target: model,
           editor: editor,
-          input: input
+          input: input,
         },
         decoration
       );
       ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(model, "image", decoration, model);
     }
-  }
+  },
 };
 
 registerAdorner("image", imageAdorner);
+
+export var titleImageAdorner = {
+  getMarkerClass: (model) => {
+    return typeof model.getType === "function" && model.getType() === "survey"
+      ? "image_editable"
+      : "";
+  },
+  getElementName: (model) => "logo",
+  afterRender: (elements: HTMLElement[], model: SurveyForDesigner, editor) => {
+    var itemsRoot = elements[0];
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].onclick = (e) => e.preventDefault();
+      var decoration = document.createElement("span");
+      decoration.className = "svda-adorner-root";
+      decoration.innerHTML =
+        "<image-editor params='name: \"logo\", target: target, question: question, editor: editor, input: input, allowDelete: true'></image-editor>";
+      elements[i].appendChild(decoration);
+
+      var input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.className = "svda-choose-file";
+      input.style.position = "absolute";
+      input.style.opacity = "0";
+      itemsRoot.parentElement.appendChild(input);
+
+      ko.applyBindings(
+        {
+          question: model,
+          target: model,
+          editor: editor,
+          input: input,
+        },
+        decoration
+      );
+      ko.tasks.runEarly();
+      editor.onAdornerRenderedCallback(model, "title-image", decoration, model);
+    }
+  },
+};
+
+registerAdorner("title-image", titleImageAdorner);

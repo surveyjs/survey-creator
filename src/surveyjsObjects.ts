@@ -50,6 +50,9 @@ export class SurveyForDesigner extends Survey.Survey {
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
     this.onUpdatePanelCssClasses.add(onUpdateQuestionCssClasses);
     this.onUpdatePageCssClasses.add(onUpdateQuestionCssClasses);
+    var surveyCss = this.css;
+    addAdornerMarkerClasses(surveyCss, this);
+    this.css = surveyCss;
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -92,10 +95,16 @@ export class SurveyForDesigner extends Survey.Survey {
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
   }
+  public get hasLogo() {
+    return true;
+  }
 }
 
 function getSurvey(el: any): any {
   if (!el) return null;
+  if (typeof el.getType === "function" && el.getType() === "survey") {
+    return el;
+  }
   var res = el["survey"];
   if (res) return res;
   return el["data"];
@@ -288,6 +297,16 @@ export function createAfterRenderPageHandler(
   };
 }
 
+export function createAfterRenderHeaderHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
+  return function elementOnAfterRendering(domElement: any, survey: any) {
+    domElement.classList.add("svd_survey_header");
+    addAdorner(domElement, survey);
+  };
+}
+
 var adornersConfig: { [index: string]: any[] } = {};
 
 export function registerAdorner(name, adorner) {
@@ -307,14 +326,15 @@ export function removeAdorners(names: string[] = undefined) {
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
   classes = options.page ? options.cssClasses.page : classes;
+  var surveyElement = options.question || options.panel || options.page;
+  addAdornerMarkerClasses(classes, surveyElement);
+}
+
+export function addAdornerMarkerClasses(classes: any, surveyElement: any) {
   Object.keys(adornersConfig).forEach((element) => {
     adornersConfig[element].forEach((adorner) => {
-      var classesElementName = adorner.getElementName(
-        options.question || options.panel || options.page
-      );
-      var adornerMarkerClass = adorner.getMarkerClass(
-        options.question || options.panel || options.page
-      );
+      var classesElementName = adorner.getElementName(surveyElement);
+      var adornerMarkerClass = adorner.getMarkerClass(surveyElement);
       classes[classesElementName] = applyAdornerClass(
         classes[classesElementName],
         adornerMarkerClass
@@ -360,7 +380,7 @@ function addAdorner(node, model) {
         if (node.className.split(" ").indexOf(elementClass) !== -1) {
           elements.unshift(node);
         }
-        if (model.getType() !== "page") {
+        if (model.getType() !== "page" && model.getType() !== "survey") {
           elements = filterNestedQuestions(node, elements);
         }
         if (

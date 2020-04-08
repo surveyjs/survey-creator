@@ -456,7 +456,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTimeToFinish", tab: "timer" },
         { name: "maxTimeToFinishPage", tab: "timer" },
         { name: "showTimerPanel", tab: "timer" },
-        { name: "showTimerPanelMode", tab: "timer" }
+        { name: "showTimerPanelMode", tab: "timer" },
+        { name: "logo", tab: "logo" },
+        { name: "logoPosition", tab: "logo" },
+        { name: "logoWidth", tab: "logo" },
+        { name: "logoHeight", tab: "logo" },
+        { name: "logoFit", tab: "logo" },
       ],
       tabs: [
         { name: "navigation", index: 100 },

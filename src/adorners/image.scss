@@ -2,7 +2,8 @@
   position: relative;
 }
 
-.svd_q_selected .image_editable {
+.svd_q_selected .image_editable,
+.svd_survey_header .image_editable:hover {
   image-editor {
     display: block;
   }
@@ -32,6 +33,9 @@ image-editor {
 
     .edit-image-item {
       cursor: pointer;
+    }
+    .svda-delete-item {
+      visibility: visible;
     }
   }
 }

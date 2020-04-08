@@ -392,7 +392,8 @@ export var enStrings = {
       validation: "Validation",
       cells: "Cells",
       showOnCompleted: "Show on Completed",
-      others: "Others"
+      logo: "Logo in Survey Title",
+      others: "Others",
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
