@@ -7,6 +7,8 @@ import { StylesManager } from "./stylesmanager";
 export interface ISurveyObjectMenuItem {
   name: string;
   text: string;
+  title?: string;
+  visible?: boolean | any;
   onClick: (obj: Survey.Base) => any;
   icon?: string | (() => string);
   hasTitle?: boolean;
@@ -98,6 +100,13 @@ export class SurveyForDesigner extends Survey.Survey {
   public get hasLogo() {
     return true;
   }
+  public get isLogoBefore() {
+    return true;
+  }
+  public get isLogoAfter() {
+    return true;
+  }
+  public koShowHeader = ko.observable(true);
 }
 
 function getSurvey(el: any): any {

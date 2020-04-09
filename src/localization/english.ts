@@ -360,6 +360,17 @@ export var enStrings = {
     totalCurrency: "Total currency",
     totalFormat: "Total format",
 
+    // Header  adorner
+    logoPosition: "Logo position",
+    chooseLogo: "Choose logo...",
+    logo: {
+      none: "No logo",
+      left: "Logo on the left",
+      right: "Logo on the right",
+      top: "Logo on the top",
+      bottom: "Logo in the bottom",
+    },
+
     tabs: {
       general: "General",
       fileOptions: "Options",

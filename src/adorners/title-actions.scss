@@ -1,0 +1,24 @@
+@import "../colors.scss";
+
+.svda-title-actions {
+  display: inline-block;
+  position: absolute;
+  max-width: 90%;
+  top: 0;
+  right: 0;
+}
+
+title-actions {
+  display: inline-block;
+  background-color: $secondary-bg-color;
+}
+
+.svd_survey_header--hidden {
+  height: 0;
+  title-actions {
+    background-color: transparent;
+  }
+}
+.svd_survey_header--hidden > *:not(.svda-title-actions) {
+  display: none !important;
+}
