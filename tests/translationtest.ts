@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import {
   TranslationGroup,
   TranslationItem,
-  Translation
+  Translation,
 } from "../src/translation";
 import { SurveyCreator } from "../src/editor";
 
@@ -43,16 +43,39 @@ QUnit.test("Text question choices localization", function(assert) {
 });
 QUnit.test("Survey child groups", function(assert) {
   var survey = new Survey.Survey();
-  var group = new TranslationGroup("root", survey);
-  assert.equal(group.groups.length, 0, "There is no any group yet");
+  var translation = new Translation(survey);
+  var root = new TranslationGroup("root", survey, translation);
+  assert.equal(root.groups.length, 0, "There is no any group yet");
   survey.addNewPage("p1");
-  group.reset();
-  assert.equal(group.groups.length, 1, "one page is added");
-  assert.equal(group.groups[0].groups.length, 0, "no questions");
-  survey.pages[0].addNewQuestion("text", "q1");
-  group.reset();
-  assert.equal(group.groups.length, 1, "questions should not be there");
-  assert.equal(group.groups[0].groups.length, 1, "page has one question");
+  var q = survey.pages[0].addNewQuestion("text", "q1");
+  q.title = "some value";
+  root.reset();
+  assert.equal(root.groups.length, 1, "one page is added, one group");
+  assert.equal(root.items.length, 1, "one page is added, one item");
+  assert.equal(root.groups[0].obj.getType(), "page", "The group is page");
+  assert.equal(
+    root.groups[0].koExpanded(),
+    true,
+    "The only item in root, page, should be expanded by default"
+  );
+  assert.equal(
+    root.groups[0].koShowHeader(),
+    false,
+    "We can hide header for the only page"
+  );
+  root.reset();
+  assert.equal(root.groups.length, 1, "questions should not be there");
+  assert.equal(root.groups[0].groups.length, 1, "page has one question");
+  assert.equal(
+    root.groups[0].groups[0].koExpanded(),
+    true,
+    "The only item in root, question, should be expanded by default"
+  );
+  assert.equal(
+    root.groups[0].groups[0].koShowHeader(),
+    true,
+    "We can hide header for page only"
+  );
 });
 QUnit.test("Survey child groups", function(assert) {
   var survey = new Survey.Survey();
@@ -72,7 +95,7 @@ QUnit.test("Survey child groups", function(assert) {
 QUnit.test("get locales", function(assert) {
   var survey = new Survey.Survey({
     title: { default: "t1", de: "dfdfdf" },
-    description: "text1"
+    description: "text1",
   });
   var translation = new Translation(survey, true);
   assert.equal(
@@ -205,13 +228,13 @@ QUnit.test("disable locales", function(assert) {
               default: "question 1",
               fr: "quéstion 1",
               it: "quéstion 1",
-              es: "quéstion 1"
+              es: "quéstion 1",
             },
-            choices: ["item1", "item2", "item3"]
-          }
-        ]
-      }
-    ]
+            choices: ["item1", "item2", "item3"],
+          },
+        ],
+      },
+    ],
   });
   Survey.surveyLocalization.supportedLocales = ["", "fr"];
   var translation = new Translation(survey);
@@ -232,9 +255,9 @@ QUnit.test(
         {
           type: "text",
           name: "q1",
-          title: { default: "t", de: "de_t", fr: "fr_t", it: "it_d" }
-        }
-      ]
+          title: { default: "t", de: "de_t", fr: "fr_t", it: "it_d" },
+        },
+      ],
     };
     creator.translation.setSelectedLocales(["de", "it"]);
     assert.deepEqual(
@@ -361,7 +384,7 @@ QUnit.test("Export to csv", function(assert) {
             name: "col1",
             title: {
               default: "col1 en",
-              de: "col1 de"
+              de: "col1 de",
             },
             cellType: "dropdown",
             isRequired: true,
@@ -370,17 +393,17 @@ QUnit.test("Export to csv", function(assert) {
                 value: "item1",
                 text: {
                   default: "item en",
-                  de: "item de"
-                }
-              }
-            ]
+                  de: "item de",
+                },
+              },
+            ],
           },
           {
-            name: "col2"
+            name: "col2",
           },
           {
-            name: "col3"
-          }
+            name: "col3",
+          },
         ],
         choices: [1, 2, 3, 4, 5],
         rows: [
@@ -388,12 +411,12 @@ QUnit.test("Export to csv", function(assert) {
             value: "item1",
             text: {
               default: "Row 1",
-              de: "Row 1-de"
-            }
-          }
-        ]
-      }
-    ]
+              de: "Row 1-de",
+            },
+          },
+        ],
+      },
+    ],
   });
   var translation = new Translation(survey);
   var str = translation.exportToCSV();
@@ -439,8 +462,8 @@ QUnit.test("Merging a locale with default", function(assert) {
         name: "question1",
         title: {
           de: "title de",
-          fr: "title fr"
-        }
+          fr: "title fr",
+        },
       },
       {
         type: "text",
@@ -448,18 +471,18 @@ QUnit.test("Merging a locale with default", function(assert) {
         title: {
           default: "title default",
           de: "title de",
-          fr: "title fr"
-        }
+          fr: "title fr",
+        },
       },
       {
         type: "text",
         name: "question3",
         title: {
           default: "title default",
-          fr: "title fr"
-        }
-      }
-    ]
+          fr: "title fr",
+        },
+      },
+    ],
   });
   var translation = new Translation(survey);
   assert.equal(translation.locales.length, 3, "There are 3 locales");
@@ -495,7 +518,7 @@ QUnit.test("Merging a locale with default", function(assert) {
 QUnit.test("Custom localizable property in question", function(assert) {
   Survey.Serializer.addProperty("question", {
     name: "customProp",
-    isLocalizable: true
+    isLocalizable: true,
   });
   var question = new Survey.QuestionText("q1");
   question["customProp"] = "some text";
@@ -511,7 +534,7 @@ QUnit.test("Custom localizable property in question", function(assert) {
 QUnit.test("Custom localizable property in itemvalue", function(assert) {
   Survey.Serializer.addProperty("itemvalue", {
     name: "customProp",
-    isLocalizable: true
+    isLocalizable: true,
   });
   var question = new Survey.QuestionCheckbox("q1");
   question.choices = ["1", "2"];

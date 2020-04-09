@@ -83,6 +83,7 @@ export interface ITranslationLocales {
 
 export class TranslationGroup extends TranslationItemBase {
   koExpanded: any;
+  koShowHeader: any;
   private itemValues: Array<TranslationItemBase>;
   constructor(
     public name,
@@ -91,6 +92,7 @@ export class TranslationGroup extends TranslationItemBase {
   ) {
     super(name);
     this.koExpanded = ko.observable(false);
+    this.koShowHeader = ko.observable(true);
     this.reset();
   }
   public get items(): Array<TranslationItemBase> {
@@ -210,6 +212,13 @@ export class TranslationGroup extends TranslationItemBase {
       if (!b.name) return 1;
       return a.name.localeCompare(b.name);
     });
+    if (this.items.length == 1 && this.groups.length == 1) {
+      var gr = this.groups[0];
+      gr.koExpanded(true);
+      if (gr.obj.getType() == "page") {
+        gr.koShowHeader(false);
+      }
+    }
   }
   private getLocalizedProperties(obj: any): Array<Survey.JsonObjectProperty> {
     var res = [];
@@ -362,8 +371,8 @@ export class Translation implements ITranslationLocales {
       {
         locale: "",
         koVisible: ko.observable(true),
-        koEnabled: ko.observable(true)
-      }
+        koEnabled: ko.observable(true),
+      },
     ]);
     this.koRoot = ko.observable(null);
     this.koShowAllStrings = ko.observable(showAllStrings);
@@ -382,8 +391,8 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPages = ko.observableArray([
       {
         value: null,
-        text: this.showAllPagesText
-      }
+        text: this.showAllPagesText,
+      },
     ]);
     var self = this;
     this.koSelectedLanguageToAdd.subscribe(function(newValue) {
@@ -596,8 +605,8 @@ export class Translation implements ITranslationLocales {
       {
         locale: "",
         koVisible: ko.observable(true),
-        koEnabled: ko.observable(true)
-      }
+        koEnabled: ko.observable(true),
+      },
     ]);
     this.reset();
   }
@@ -659,7 +668,7 @@ export class Translation implements ITranslationLocales {
       locales.push({
         locale: loc,
         koVisible: ko.observable(enabled),
-        koEnabled: ko.observable(enabled)
+        koEnabled: ko.observable(enabled),
       });
     }
     this.koLocales(locales);
