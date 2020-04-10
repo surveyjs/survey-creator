@@ -2153,6 +2153,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       };
     }
 
+    const container = self.renderedElement.querySelector(".svd_container");
+    function KeyPress(e) {
+      var evtobj = window.event ? event : e;
+      if (evtobj.keyCode == 90 && evtobj.ctrlKey) self.undo();
+      if (evtobj.keyCode == 89 && evtobj.ctrlKey) self.redo();
+    }
+    container["onkeydown"] = KeyPress;
+
     this.initSurvey(this.getDefaultSurveyJson());
 
     this.setUndoRedoCurrentState(true);
