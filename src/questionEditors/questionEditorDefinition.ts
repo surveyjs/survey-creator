@@ -213,6 +213,9 @@ export class SurveyQuestionEditorDefinition {
     text: {
       properties: [
         "inputType",
+        "min",
+        "max",
+        "step",
         "placeHolder",
         { name: "size", tab: "layout" },
         { name: "maxLength", tab: "validation" },
