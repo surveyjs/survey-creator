@@ -2237,6 +2237,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
     this.undoRedoManager = new UndoRedoManager();
+    this.surveyValue().emptyPageTemplate = "se-empty-placeholder";
+    this.surveyValue().emptyPageTemplateData = this;
     this.surveyValue().onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
@@ -2583,15 +2585,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     json.type = element.getType();
     return this.createNewElement(json);
   }
-  private getRows(pnl: Survey.PanelModelBase): Array<any> {
-    return !!pnl["koRows"] ? pnl["koRows"]() : pnl.rows;
-  }
-  public isCurrentPageEmpty = ko.computed(
-    () =>
-      !!this.surveyValue() &&
-      !!this.surveyValue().koCurrentPage() &&
-      this.getRows(this.surveyValue().koCurrentPage()).length === 0
-  );
   public dragOverQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
     return false;
