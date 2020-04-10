@@ -362,13 +362,14 @@ export var enStrings = {
 
     // Header  adorner
     logoPosition: "Logo position",
-    chooseLogo: "Choose logo...",
+    addLogo: "Add logo...",
+    changeLogo: "Change logo...",
     logo: {
-      none: "No logo",
-      left: "Logo on the left",
-      right: "Logo on the right",
-      top: "Logo on the top",
-      bottom: "Logo in the bottom",
+      none: "Remove logo",
+      left: "Left",
+      right: "Right",
+      top: "On the top",
+      bottom: "In the bottom",
     },
 
     tabs: {

@@ -19,7 +19,11 @@ export class TitleActionsViewModel {
     this.actions.push({
       name: "editelement",
       visible: ko.computed(() => survey.koShowHeader()),
-      text: this.getLocString("pe.chooseLogo"),
+      text: ko.computed(() =>
+        this.getLocString(
+          survey.isLogoImageChoosen ? "pe.changeLogo" : "pe.addLogo"
+        )
+      ),
       hasTitle: true,
       onClick: (model: SurveyForDesigner) => {
         if (!window["FileReader"]) return;
@@ -34,6 +38,9 @@ export class TitleActionsViewModel {
           if (!files[0]) return;
           survey.getEditor().uploadFiles(files, (_, link) => {
             survey.logo = link;
+            if (survey.logoPosition === "none") {
+              survey.logoPosition = "left";
+            }
           });
         };
         this.input.click();
@@ -42,8 +49,10 @@ export class TitleActionsViewModel {
     this.actions.push(<any>{
       name: "setLogoPosition",
       text: this.getLocString("pe.logoPosition"),
-      visible: ko.computed(() => survey.koShowHeader()),
-      value: survey.logoPosition,
+      visible: ko.computed(
+        () => survey.koShowHeader() && survey.isLogoImageChoosen
+      ),
+      value: ko.computed(() => survey.logoPosition),
       template: "choice-action",
       choices: [
         { value: "none", text: this.getLocString("pe.logo.none") },
@@ -55,6 +64,9 @@ export class TitleActionsViewModel {
       onClick: (data, event) => {
         var newValue = event.target.value;
         survey.logoPosition = newValue;
+        if (newValue === "none") {
+          survey.logo = undefined;
+        }
       },
     });
     this.actions.push(<any>{

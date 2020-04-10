@@ -42,7 +42,7 @@ export var titleImageAdorner = {
       var position = model.logoPosition;
       elements[0].style.display = "none";
       elements[1].style.display = "none";
-      if (position === "none") return;
+      if (!model.isLogoImageChoosen || position === "none") return;
       if (position === "left" || position === "top") {
         elements[0].style.display = "";
       } else {

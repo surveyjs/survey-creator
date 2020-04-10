@@ -6,9 +6,9 @@ import { StylesManager } from "./stylesmanager";
 
 export interface ISurveyObjectMenuItem {
   name: string;
-  text: string;
+  text: string | (() => string);
   title?: string;
-  visible?: boolean | any;
+  visible?: boolean | (() => boolean);
   onClick: (obj: Survey.Base) => any;
   icon?: string | (() => string);
   hasTitle?: boolean;
@@ -105,6 +105,9 @@ export class SurveyForDesigner extends Survey.Survey {
   }
   public get isLogoAfter() {
     return true;
+  }
+  public get isLogoImageChoosen() {
+    return this.locLogo["koRenderedHtml"]();
   }
   public koShowHeader = ko.observable(true);
 }
