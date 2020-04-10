@@ -364,7 +364,7 @@ export var enStrings = {
     logoPosition: "Logo position",
     addLogo: "Add logo...",
     changeLogo: "Change logo...",
-    logo: {
+    logoPositions: {
       none: "Remove logo",
       left: "Left",
       right: "Right",

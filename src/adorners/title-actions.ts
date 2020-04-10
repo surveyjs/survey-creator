@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import {
   registerAdorner,
   SurveyForDesigner,
-  ISurveyObjectMenuItem,
+  ISurveyObjectMenuItem
 } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-knockout";
@@ -44,7 +44,7 @@ export class TitleActionsViewModel {
           });
         };
         this.input.click();
-      },
+      }
     });
     this.actions.push(<any>{
       name: "setLogoPosition",
@@ -55,11 +55,11 @@ export class TitleActionsViewModel {
       value: ko.computed(() => survey.logoPosition),
       template: "choice-action",
       choices: [
-        { value: "none", text: this.getLocString("pe.logo.none") },
-        { value: "left", text: this.getLocString("pe.logo.left") },
-        { value: "right", text: this.getLocString("pe.logo.right") },
-        { value: "top", text: this.getLocString("pe.logo.top") },
-        { value: "bottom", text: this.getLocString("pe.logo.bottom") },
+        { value: "none", text: this.getLocString("pe.logoPositions.none") },
+        { value: "left", text: this.getLocString("pe.logoPositions.left") },
+        { value: "right", text: this.getLocString("pe.logoPositions.right") },
+        { value: "top", text: this.getLocString("pe.logoPositions.top") },
+        { value: "bottom", text: this.getLocString("pe.logoPositions.bottom") }
       ],
       onClick: (data, event) => {
         var newValue = event.target.value;
@@ -67,26 +67,28 @@ export class TitleActionsViewModel {
         if (newValue === "none") {
           survey.logo = undefined;
         }
-      },
+      }
     });
-    this.actions.push(<any>{
-      visible: ko.computed(() => survey.koShowHeader()),
-      template: "action-separator",
-    });
-    this.actions.push({
-      name: "showSurveyTitle",
-      visible: true,
-      text: this.getLocString("pe.showTitle"),
-      icon: ko.computed(() => {
-        if (!survey.koShowHeader()) {
-          return "icon-actionshowtitle";
+    if (survey.getEditor().allowControlSurveyTitleVisibility) {
+      this.actions.push(<any>{
+        visible: ko.computed(() => survey.koShowHeader()),
+        template: "action-separator"
+      });
+      this.actions.push({
+        name: "showSurveyTitle",
+        visible: true,
+        text: this.getLocString("pe.showTitle"),
+        icon: ko.computed(() => {
+          if (!survey.koShowHeader()) {
+            return "icon-actionshowtitle";
+          }
+          return "icon-actionhidetitle";
+        }),
+        onClick: (survey: SurveyForDesigner) => {
+          survey.koShowHeader(!survey.koShowHeader());
         }
-        return "icon-actionhidetitle";
-      }),
-      onClick: (survey: SurveyForDesigner) => {
-        survey.koShowHeader(!survey.koShowHeader());
-      },
-    });
+      });
+    }
     ko.computed(() => {
       var headerContainer: HTMLDivElement = this.rootElement.parentElement
         .parentElement;
@@ -121,7 +123,7 @@ ko.components.register("title-actions", {
         componentInfo.element
       );
       return model;
-    },
+    }
   },
-  template: templateHtml,
+  template: templateHtml
 });

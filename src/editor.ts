@@ -120,6 +120,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   private pageEditModeValue: "standard" | "single" = "standard";
   private showDropdownPageSelectorValue: boolean = true;
+  private koShowSurveyTitle = ko.observable<"ifentered" | "always" | "never">(
+    "ifentered"
+  );
+  private koAllowControlSurveyTitleVisibility = ko.observable(true);
+
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -818,12 +823,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
-   * @param options survey creator options. The following options are available: showDesignerTab, showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor,
-   * showPropertyGrid, showToolbox, allowModifyPages
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles,
-   * showTitlesInExpressions, allowEditExpressionsInTextEditor,
-   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, closeModalOutside, pageEditingMode
+   * @param options survey creator options. The following options are available:
+   * showDesignerTab, showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab,
+   * showOptions, showPropertyGrid, showToolbox,
+   * allowModifyPages, pageEditingMode, showDropdownPageSelector, readOnly,
+   * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
+   * showObjectTitles, inplaceEditForValues, showTitlesInExpressions, allowEditExpressionsInTextEditor,
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
+   * showSurveyTitle, allowControlSurveyTitleVisibility
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -1336,6 +1343,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (typeof options.showDropdownPageSelector !== "undefined") {
       this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
     }
+    if (typeof options.showSurveyTitle === "string") {
+      this.showSurveyTitle = options.showSurveyTitle;
+    }
+    if (typeof options.allowControlSurveyTitleVisibility !== "undefined") {
+      this.allowControlSurveyTitleVisibility = !!options.allowControlSurveyTitleVisibility;
+    }
   }
   /**
    * The editing survey object (Survey.Survey)
@@ -1608,6 +1621,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.setNewObjToPropertyGrid(this.selectedElement);
       }
     }
+  }
+  /**
+   * Set it to "always", "never" or "ifentered". The "ifentered" is the default value means show survey title only in case of user entered it.
+   */
+  public get showSurveyTitle() {
+    return this.koShowSurveyTitle();
+  }
+  public set showSurveyTitle(value) {
+    this.koShowSurveyTitle(value);
+  }
+  /**
+   * Set it to false if you want to deny user to hide/show survey title.
+   */
+  public get allowControlSurveyTitleVisibility() {
+    return this.koAllowControlSurveyTitleVisibility();
+  }
+  public set allowControlSurveyTitleVisibility(value) {
+    this.koAllowControlSurveyTitleVisibility(value);
   }
   /**
    * Set it to false to  hide the pages toolbox on the top.
@@ -2239,6 +2270,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
     this.undoRedoManager = new UndoRedoManager();
+    this.surveyValue().getEditor = () => self;
+    ko.computed(() => {
+      var optionValue = this.showSurveyTitle;
+      var showValue = optionValue !== "never";
+      if (showValue) {
+        showValue =
+          optionValue === "always" ||
+          (optionValue === "ifentered" &&
+            !!this.surveyValue().locTitle["koRenderedHtml"]()) ||
+          !!this.surveyValue().locLogo["koRenderedHtml"]();
+      }
+      self.surveyValue().koShowHeader(showValue);
+    });
     this.surveyValue().emptyPageTemplate = "se-empty-placeholder";
     this.surveyValue().emptyPageTemplateData = this;
     this.surveyValue().onPropertyValueChangedCallback = (
@@ -2280,7 +2324,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.undoRedoManager
     );
     this.dragDropHelper.readOnly = this.readOnly;
-    this.surveyValue().getEditor = () => self;
     this.surveyValue().setJsonObject(json);
     if (this.surveyValue().isEmpty) {
       this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
