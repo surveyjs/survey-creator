@@ -25,7 +25,7 @@ import {
   SurveyForDesigner,
   createAfterRenderHandler,
   createAfterRenderPageHandler,
-  createAfterRenderHeaderHandler,
+  createAfterRenderHeaderHandler
 } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
@@ -838,6 +838,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
 
     StylesManager.applyTheme(StylesManager.currentTheme());
+
+    self.onTitleInplaceEditorStartEdit = null;
 
     this.koShowSaveButton = ko.observable(false);
     this.koTestSurveyWidth = ko.observable("100%");
@@ -3035,6 +3037,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
+  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
+
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Survey.Base,

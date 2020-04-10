@@ -61,7 +61,8 @@ export class TitleInplaceEditor {
     protected target: any,
     protected name: string,
     protected rootElement,
-    public placeholder: string = ""
+    public placeholder: string = "",
+    public inputFocusCallback
   ) {
     this.editingName(target[name]);
     this.prevName(target[name]);
@@ -101,8 +102,18 @@ export class TitleInplaceEditor {
       element.style.display = "none";
     });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
+    inputElem.onfocus = function () {
+      const callback = model.inputFocusCallback;
+
+      if (callback) {
+        callback(inputElem);
+        return;
+      }
+
+      this.select();
+    };
     resizeInput(inputElem);
-    setTimeout(function() {
+    setTimeout(function () {
       inputElem.focus();
     }, 10);
   };
@@ -140,7 +151,8 @@ ko.components.register("title-editor", {
         params.model,
         params.name,
         componentInfo.element,
-        params.placeholder
+        params.placeholder,
+        params.editor.onTitleInplaceEditorStartEdit
       );
       var property = Survey.Serializer.findProperty(
         params.model.getType(),

@@ -28,6 +28,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "requiredIf", tab: "logic" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
+        { name: "hideNumber", tab: "layout" },
         { name: "titleLocation", tab: "layout" },
         { name: "descriptionLocation", tab: "layout" },
         { name: "indent", tab: "layout" },
@@ -212,6 +213,9 @@ export class SurveyQuestionEditorDefinition {
     text: {
       properties: [
         "inputType",
+        "min",
+        "max",
+        "step",
         "placeHolder",
         { name: "size", tab: "layout" },
         { name: "maxLength", tab: "validation" }
@@ -382,9 +386,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "indent", tab: "layout" },
-        { name: "innerIndent", tab: "layout" }
+        { name: "innerIndent", tab: "layout" },
+        { name: "showNumber", tab: "numbering" },
+        { name: "showQuestionNumbers", tab: "numbering" },
+        { name: "questionStartIndex", tab: "numbering" }
       ],
-      tabs: [{ name: "validation", index: 400 }]
+      tabs: [{ name: "numbering", index: 350 }]
     },
     page: {
       properties: [
@@ -457,11 +464,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTimeToFinishPage", tab: "timer" },
         { name: "showTimerPanel", tab: "timer" },
         { name: "showTimerPanelMode", tab: "timer" },
+
         { name: "logo", tab: "logo" },
         { name: "logoPosition", tab: "logo" },
         { name: "logoWidth", tab: "logo" },
         { name: "logoHeight", tab: "logo" },
-        { name: "logoFit", tab: "logo" },
+        { name: "logoFit", tab: "logo" }
       ],
       tabs: [
         { name: "navigation", index: 100 },

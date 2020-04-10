@@ -369,7 +369,7 @@ export var enStrings = {
       left: "Left",
       right: "Right",
       top: "On the top",
-      bottom: "In the bottom",
+      bottom: "In the bottom"
     },
 
     tabs: {
@@ -387,6 +387,7 @@ export var enStrings = {
       choicesByUrl: "Choices from Web",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
+      numbering: "Numbering",
       validators: "Validators",
       navigation: "Navigation",
       question: "Question",
@@ -405,7 +406,7 @@ export var enStrings = {
       cells: "Cells",
       showOnCompleted: "Show on Completed",
       logo: "Logo in Survey Title",
-      others: "Others",
+      others: "Others"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
