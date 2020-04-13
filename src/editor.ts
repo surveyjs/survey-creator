@@ -2153,6 +2153,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       };
     }
 
+    const container = self.renderedElement.querySelector(".svd_container");
+    container["onkeydown"] = function(e) {
+      self.onKeyDownHandler(e, self);
+    };
+
     this.initSurvey(this.getDefaultSurveyJson());
 
     this.setUndoRedoCurrentState(true);
@@ -2194,6 +2199,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var survey = new surveyType(json);
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
+  }
+  /**
+   * Use this method to create keyboard shortcuts
+   * @param e keydown event
+   * @param creator creator instance
+   */
+  public onKeyDownHandler(e, creator) {
+    var evtobj = window.event ? event : e;
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) creator.undo();
+    if (evtobj.keyCode == 89 && evtobj.ctrlKey) creator.redo();
   }
   private onSurveyPropertyValueChangedCallback(
     name: string,
