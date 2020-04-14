@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import {
   doGetCompletions,
-  SurveyPropertyConditionEditor
+  SurveyPropertyConditionEditor,
 } from "../../src/propertyEditors/propertyConditionEditor";
 import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
 import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
@@ -19,7 +19,7 @@ QUnit.test("Autocomplete without prefix test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   //TODO uncomment after releasing v1.0.88
@@ -29,7 +29,7 @@ QUnit.test("Autocomplete without prefix test", function(assert) {
   prefix = null;
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   //TODO uncomment after releasing v1.0.88
@@ -42,14 +42,14 @@ QUnit.test("Autocomplete with prefix test", function(assert) {
   var currentQuestion = new Survey.QuestionDropdown("dropdown");
   var usableQuestions = [
     new Survey.QuestionExpression("expression"),
-    new Survey.QuestionDropdown("dropdown2")
+    new Survey.QuestionDropdown("dropdown2"),
   ];
   var completions = null;
   var prefix = "dr";
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 1, "filtered completions");
@@ -59,7 +59,7 @@ QUnit.test("Autocomplete with prefix test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 4, "filtered completions");
@@ -80,7 +80,7 @@ QUnit.test("Autocomplete with matrix test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 1, "row completions");
@@ -91,7 +91,7 @@ QUnit.test("Autocomplete with matrix test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 1, "row completions");
@@ -113,7 +113,7 @@ QUnit.test("Autocomplete with panel test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 1, "panel completions");
@@ -124,7 +124,7 @@ QUnit.test("Autocomplete with panel test", function(assert) {
 
   completions = doGetCompletions(prevIdentifier, prefix, {
     question: currentQuestion,
-    questions: usableQuestions
+    questions: usableQuestions,
   });
 
   assert.equal(completions.length, 1, "panel completions");
@@ -161,8 +161,8 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
     questions: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
-      { type: "text", name: "q2" }
-    ]
+      { type: "text", name: "q2" },
+    ],
   });
   var question = survey.getQuestionByName("q1");
   question.visibleIf = "{q} = 1";
@@ -205,8 +205,8 @@ QUnit.test(
     var survey = new Survey.SurveyModel({
       questions: [
         { type: "text", name: "q1" },
-        { type: "dropdown", name: "q2" }
-      ]
+        { type: "dropdown", name: "q2" },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -230,10 +230,7 @@ QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
   function(assert) {
     var survey = new Survey.SurveyModel({
-      questions: [
-        { type: "text", name: "q1" },
-        { type: "text", name: "q2" }
-      ]
+      questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -264,15 +261,15 @@ QUnit.test(
             {
               name: "q1",
               type: "text",
-              visibleIf: "{panel.q2} = 1"
+              visibleIf: "{panel.q2} = 1",
             },
             {
               name: "q2",
-              type: "text"
-            }
-          ]
-        }
-      ]
+              type: "text",
+            },
+          ],
+        },
+      ],
     });
     survey.setDesignMode(true);
     var panel = <Survey.QuestionPanelDynamic>survey.getQuestionByName("dp");
@@ -456,10 +453,7 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   }
   assert.deepEqual(
     res,
-    [
-      { name: "q2", text: "q2" },
-      { name: "q3", text: "q3" }
-    ],
+    [{ name: "q2", text: "q2" }, { name: "q3", text: "q3" }],
     "returns questions correctly"
   );
 });
@@ -483,13 +477,13 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = column;
     assert.equal(
-      editor.allConditionQuestions.filter(e => e.name === "row.col1").length >
+      editor.allConditionQuestions.filter((e) => e.name === "row.col1").length >
         0,
       true,
       "row.col1 is here"
     );
     assert.equal(
-      editor.allConditionQuestions.filter(e => e.name === "row.col2").length >
+      editor.allConditionQuestions.filter((e) => e.name === "row.col2").length >
         0,
       false,
       "row.col2 is not here"
@@ -514,13 +508,13 @@ QUnit.test(
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = panelQuestion;
     assert.equal(
-      editor.allConditionQuestions.filter(e => e.name === "panel.q1").length >
+      editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length >
         0,
       true,
       "panel.q1 is here"
     );
     assert.equal(
-      editor.allConditionQuestions.filter(e => e.name === "panel.q2").length >
+      editor.allConditionQuestions.filter((e) => e.name === "panel.q2").length >
         0,
       false,
       "panel.q2 is not here"
@@ -538,7 +532,7 @@ QUnit.test(
     var radioQuestion = page.addNewQuestion("dropdown", "q2");
     radioQuestion.choices = [
       { value: 1, visibleIf: "{a} = 1" },
-      { value: 1, enabledIf: "{b} = 1" }
+      { value: 1, enabledIf: "{b} = 1" },
     ];
     var editor = new SurveyPropertyConditionEditor(property);
     editor.object = question;
@@ -569,8 +563,8 @@ QUnit.test(
         { name: "q1", type: "checkbox", choices: [1, 2, 3] },
         { name: "q2", type: "checkbox", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: ["a", "b"] },
-        { name: "q4", type: "text" }
-      ]
+        { name: "q4", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -600,9 +594,9 @@ QUnit.test(
           name: "question1",
           type: "matrixdynamic",
           columns: [{ name: "Column1" }, { name: "Column2" }],
-          choices: [1, 2, 3, 4, 5]
-        }
-      ]
+          choices: [1, 2, 3, 4, 5],
+        },
+      ],
     });
     var question = <Survey.QuestionMatrixDynamic>(
       survey.getQuestionByName("question1")
@@ -641,8 +635,8 @@ QUnit.test(
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "radiogroup", choices: [1, 2, 3], defaultValue: 1 },
-        { name: "q2", type: "text" }
-      ]
+        { name: "q2", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -670,11 +664,11 @@ QUnit.test(
           choices: [
             { value: 1, text: "Item 1" },
             { value: 2, text: "Item 2" },
-            { value: 3, text: "Item 3" }
-          ]
+            { value: 3, text: "Item 3" },
+          ],
         },
-        { name: "q2", type: "text", visibleIf: "{q1} = 1" }
-      ]
+        { name: "q2", type: "text", visibleIf: "{q1} = 1" },
+      ],
     });
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -700,12 +694,12 @@ QUnit.test(
           choices: [
             { value: 1, text: "Item 1" },
             { value: 2, text: "Item 2" },
-            { value: 3, text: "Item 3" }
-          ]
+            { value: 3, text: "Item 3" },
+          ],
         },
         { name: "q2", type: "text" },
-        { name: "q3", type: "text", visibleIf: "{q2} = 1" }
-      ]
+        { name: "q3", type: "text", visibleIf: "{q2} = 1" },
+      ],
     });
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -783,11 +777,11 @@ QUnit.test(
           choices: [
             { value: 1, text: "Item 1" },
             { value: 2, text: "Item 2" },
-            { value: 3, text: "Item 3" }
-          ]
+            { value: 3, text: "Item 3" },
+          ],
         },
-        { name: "q2", type: "text" }
-      ]
+        { name: "q2", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -811,10 +805,7 @@ QUnit.test(
 
 QUnit.test("SurveyPropertyConditionEditor, clearCondition", function(assert) {
   var survey = new Survey.Survey({
-    elements: [
-      { name: "q1", type: "text" },
-      { name: "q2", type: "text" }
-    ]
+    elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }],
   });
   var question = survey.getQuestionByName("q2");
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -896,8 +887,8 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
         columns: [
           { cellType: "text", name: "col1" },
           { cellType: "radiogroup", name: "col2" },
-          { cellType: "checkbox", name: "col3" }
-        ]
+          { cellType: "checkbox", name: "col3" },
+        ],
       },
       {
         name: "qMatrixdynamic",
@@ -906,11 +897,11 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
         columns: [
           { cellType: "text", name: "col1" },
           { cellType: "radiogroup", name: "col2" },
-          { cellType: "checkbox", name: "col3" }
-        ]
+          { cellType: "checkbox", name: "col3" },
+        ],
       },
-      { name: "qMultipletext", type: "multipletext" }
-    ]
+      { name: "qMultipletext", type: "multipletext" },
+    ],
   });
   var question = survey.getQuestionByName("q1");
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -954,7 +945,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "qText",
       "qComment",
       "qMatrixdropdown.row1.col1",
-      "qMatrixdynamic[0].col1"
+      "qMatrixdynamic[0].col1",
     ],
     [
       "empty",
@@ -966,7 +957,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal"
+      "lessorequal",
     ]
   );
   checkFunMultiple(
@@ -975,7 +966,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "qDropdown",
       "qMatrix.row1",
       "qMatrixdropdown.row1.col2",
-      "qMatrixdynamic[0].col2"
+      "qMatrixdynamic[0].col2",
     ],
     [
       "empty",
@@ -986,7 +977,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal"
+      "lessorequal",
     ]
   );
   checkFunMultiple(
@@ -999,7 +990,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "contains",
       "notcontains",
       "anyof",
-      "allof"
+      "allof",
     ]
   );
   checkFun("qBoolean", ["empty", "notempty", "equal", "notequal"]);
@@ -1013,7 +1004,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal"
+      "lessorequal",
     ]
   );
   checkFun("qFile", ["empty", "notempty"]);
@@ -1026,8 +1017,8 @@ QUnit.test(
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
-        { name: "question1", type: "radiogroup", choices: ["item1", "item2"] }
-      ]
+        { name: "question1", type: "radiogroup", choices: ["item1", "item2"] },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1050,8 +1041,8 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
   var survey = new Survey.Survey({
     elements: [
       { name: "q1", type: "text" },
-      { name: "question1", type: "dropdown", choices: ["item1", "item2"] }
-    ]
+      { name: "question1", type: "dropdown", choices: ["item1", "item2"] },
+    ],
   });
   var question = survey.getQuestionByName("q1");
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1081,8 +1072,8 @@ QUnit.test(
       elements: [
         { name: "q1", type: "text" },
         { name: "question1", type: "radiogroup", choices: ["item1", 1] },
-        { name: "question2", type: "checkbox", choices: ["item1", 1] }
-      ]
+        { name: "question2", type: "checkbox", choices: ["item1", 1] },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1127,8 +1118,8 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
-    ]
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" },
+    ],
   });
   var question = survey.getQuestionByName("q4");
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1221,8 +1212,8 @@ QUnit.test(
         { name: "q1", type: "text", valueName: "val1" },
         { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-        { name: "q4", type: "text", visibleIf: "{val1} = 'abc' and {q2} = 1" }
-      ]
+        { name: "q4", type: "text", visibleIf: "{val1} = 'abc' and {q2} = 1" },
+      ],
     });
     var question = survey.getQuestionByName("q4");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1241,16 +1232,16 @@ QUnit.test(
   }
 );
 QUnit.test(
-  "SurveyPropertyConditionEditor, parse koEditorItems() with calcaluted values, Bug #727",
+  "SurveyPropertyConditionEditor, parse koEditorItems() with calcaluted values, Bug #727 and Bug #740",
   function(assert) {
     var survey = new Survey.Survey({
       elements: [{ name: "q1", type: "text" }],
       calculatedValues: [
         {
           name: "var1",
-          expression: "1"
-        }
-      ]
+          expression: "1",
+        },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1281,6 +1272,19 @@ QUnit.test(
       "1",
       "value in text question set correctly"
     );
+    editor.koValue("{var1} notempty");
+    assert.equal(
+      editor.koCanParseExpression(),
+      true,
+      "We can parse calculated value without parameters"
+    );
+    editor.koActiveView("form");
+    assert.equal(editor.koActiveView(), "form", "Show form");
+    assert.equal(
+      editor.koEditorItems()[0].questionName,
+      "var1",
+      "question name without parameters parsed correctly"
+    );
   }
 );
 QUnit.test(
@@ -1291,8 +1295,8 @@ QUnit.test(
         { name: "q1", type: "text" },
         { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-        { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" }
-      ]
+        { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" },
+      ],
     });
     var question = survey.getQuestionByName("q4");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1354,8 +1358,8 @@ QUnit.test(
         { name: "q1", type: "text" },
         { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-        { name: "q4", type: "text" }
-      ]
+        { name: "q4", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q4");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1441,8 +1445,8 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text" }
-    ]
+      { name: "q4", type: "text" },
+    ],
   });
   var question = survey.getQuestionByName("q4");
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1489,8 +1493,8 @@ QUnit.test(
         { name: "q1", type: "text" },
         { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-        { name: "q4", type: "text" }
-      ]
+        { name: "q4", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q4");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1547,8 +1551,8 @@ QUnit.test(
         { name: "q1", type: "text" },
         { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
         { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-        { name: "q4", type: "text" }
-      ]
+        { name: "q4", type: "text" },
+      ],
     });
     var question = survey.getQuestionByName("q4");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -1642,8 +1646,8 @@ QUnit.test(
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text", visibleIf: "{q2} = ['item1', 'item3']" },
-        { name: "q2", type: "checkbox", choices: ["item1", "item2", "item3"] }
-      ]
+        { name: "q2", type: "checkbox", choices: ["item1", "item2", "item3"] },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");

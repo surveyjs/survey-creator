@@ -491,7 +491,7 @@ export class QuestionToolbox {
       this.itemsValue.push(item);
     }
     this.registerCustomWidgets();
-    this.registerCustomQuestions();
+    this.registerComponentQuestions();
     this.onItemsChanged();
   }
   private registerCustomWidgets() {
@@ -505,12 +505,20 @@ export class QuestionToolbox {
       this.addItemFromJSON(widgetJson);
     }
   }
-  private registerCustomQuestions() {
-    var items = Survey.CustomQuestionCollection.Instance["items"];
-    if (!items) return;
+  private registerComponentQuestions() {
+    var items = this.getComponentItems();
     for (var i = 0; i < items.length; i++) {
       this.addItemFromJSON(items[i].json);
     }
+  }
+  private getComponentItems(): Array<any> {
+    var instanceOwner = Survey["CustomQuestionCollection"];
+    if (!instanceOwner) {
+      instanceOwner = Survey["ComponentCollection"];
+    }
+    if (!instanceOwner) return [];
+    var items = instanceOwner.Instance["items"];
+    return !!items ? items : [];
   }
   private addItemFromJSON(json: any) {
     var iconName = json.iconName ? json.iconName : "icon-default";
