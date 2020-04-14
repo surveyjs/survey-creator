@@ -97,9 +97,9 @@ The minimum JSON for this question will be the same as for "country" question:
 }
 ```
 
-### Full name with optional middle name. Add a property into our component
+### Add a property into composite component
 
-Consider, that in some surveys we require to show an optional middle name in the “fullname” component. End-user will decide is there a need in the middle name or not in this particular survey. He will be able to show/hide middle name for his survey by setting one property: “showMiddleName”.
+Consider, that in some surveys we require to show an optional middle name in the “fullname” component. End-user will decide is there a need in the middle name or not in the particular survey. He will be able to show/hide middle name for his survey by setting one property: “showMiddleName”.
 
 ```javascript
 Survey.ComponentCollection.Instance.add({
@@ -162,9 +162,9 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-In this example we are using three functions that SurveyJS calls, “onInit”, “onloaded” and “onPropertyChanged”.
+In this example we are using three functions that SurveyJS calls, “onInit”, “onLoaded” and “onPropertyChanged”.
 
-We use “onInit” function to add a new property into “fullname” class. SurveyJS creates a new class, using the new component name and then calls “onInit” function where you can add new additional classes and properties.
+We use “onInit” function to add a new property into “fullname” class. SurveyJS creates a new class, using the component name and then calls “onInit” function where you can add new additional classes and properties.
 
 SurveyJS calls “onLoaded” function after loading JSON into a survey. We need to change the middle name question visibility, in case the end-user changed it from the default.
 
