@@ -38,22 +38,22 @@ export class SurveyQuestionEditorDefinition {
         { name: "correctAnswer", tab: "data" },
         { name: "useDisplayValuesInTitle", tab: "data" },
         { name: "requiredErrorText", tab: "validation" },
-        { name: "validators", tab: "validation" },
+        { name: "validators", tab: "validation" }
       ],
       tabs: [
         { name: "logic", index: 100 },
         { name: "layout", index: 200 },
         { name: "data", index: 300 },
-        { name: "validation", index: 400 },
-      ],
+        { name: "validation", index: 400 }
+      ]
     },
     comment: {
       properties: [
         { name: "rows", tab: "layout" },
         { name: "cols", tab: "layout" },
         "placeHolder",
-        { name: "maxLength", tab: "validation" },
-      ],
+        { name: "maxLength", tab: "validation" }
+      ]
     },
     file: {
       properties: [
@@ -65,11 +65,11 @@ export class SurveyQuestionEditorDefinition {
         "maxSize",
         "imageHeight",
         "imageWidth",
-        "waitForUpload",
-      ],
+        "waitForUpload"
+      ]
     },
     html: {
-      properties: ["html"],
+      properties: ["html"]
     },
     matrixdropdownbase: {
       properties: [
@@ -80,13 +80,13 @@ export class SurveyQuestionEditorDefinition {
         { name: "columnLayout", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
         { name: "columnColCount", tab: "layout" },
-        { name: "columnMinWidth", tab: "layout" },
+        { name: "columnMinWidth", tab: "layout" }
       ],
       tabs: [
         { name: "columns", index: 10 },
         { name: "rows", index: 11 },
-        { name: "choices", index: 12 },
-      ],
+        { name: "choices", index: 12 }
+      ]
     },
     matrixdynamic: {
       properties: [
@@ -101,11 +101,11 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultRowValue", tab: "data" },
         { name: "defaultValueFromLastRow", tab: "data" },
         { name: "keyName", tab: "validation" },
-        { name: "keyDuplicationError", tab: "validation" },
-      ],
+        { name: "keyDuplicationError", tab: "validation" }
+      ]
     },
     matrixdropdown: {
-      properties: ["totalText", { name: "rowsVisibleIf", tab: "logic" }],
+      properties: ["totalText", { name: "rowsVisibleIf", tab: "logic" }]
     },
     matrix: {
       properties: [
@@ -113,20 +113,20 @@ export class SurveyQuestionEditorDefinition {
         { name: "showHeader", tab: "layout" },
         { name: "rowsOrder", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },
-        { name: "rowsVisibleIf", tab: "logic" },
+        { name: "rowsVisibleIf", tab: "logic" }
       ],
       tabs: [
         { name: "columns", index: 10 },
         { name: "rows", index: 11 },
-        { name: "cells", index: 500 },
-      ],
+        { name: "cells", index: 500 }
+      ]
     },
     multipletext: {
       properties: [
         { name: "colCount", tab: "layout" },
-        { name: "itemSize", tab: "layout" },
+        { name: "itemSize", tab: "layout" }
       ],
-      tabs: [{ name: "items", index: 10 }],
+      tabs: [{ name: "items", index: 10 }]
     },
     rating: {
       properties: [
@@ -136,9 +136,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
-        { name: "maxRateDescription", tab: "rateValues" },
+        { name: "maxRateDescription", tab: "rateValues" }
       ],
-      tabs: [{ name: "rateValues", index: 10 }],
+      tabs: [{ name: "rateValues", index: 10 }]
     },
     selectbase: {
       properties: [
@@ -152,23 +152,23 @@ export class SurveyQuestionEditorDefinition {
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
-        { name: "otherErrorText", tab: "validation" },
+        { name: "otherErrorText", tab: "validation" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-      ],
+        { name: "choicesByUrl", index: 11 }
+      ]
     },
     checkbox: {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
         { name: "hasNone", tab: "choices" },
-        { name: "noneText", tab: "choices" },
-      ],
+        { name: "noneText", tab: "choices" }
+      ]
     },
     radiogroup: {
-      properties: [{ name: "showClearButton", tab: "choices" }],
+      properties: [{ name: "showClearButton", tab: "choices" }]
     },
     dropdown: {
       properties: [
@@ -176,8 +176,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "showOptionsCaption", tab: "choices" },
-      ],
+        { name: "showOptionsCaption", tab: "choices" }
+      ]
     },
     imagepicker: {
       properties: [
@@ -186,8 +186,8 @@ export class SurveyQuestionEditorDefinition {
         "contentMode",
         "imageFit",
         "imageHeight",
-        "imageWidth",
-      ],
+        "imageWidth"
+      ]
     },
     image: {
       properties: [
@@ -195,20 +195,20 @@ export class SurveyQuestionEditorDefinition {
         "contentMode",
         "imageFit",
         "imageHeight",
-        "imageWidth",
-      ],
+        "imageWidth"
+      ]
     },
     "itemvalue[]@choices": {
       properties: [{ name: "visibleIf" }, { name: "enableIf" }],
-      tabs: [{ name: "general" }],
+      tabs: [{ name: "general" }]
     },
     "itemvalue[]@rows": {
       properties: [{ name: "visibleIf" }],
-      tabs: [{ name: "general" }],
+      tabs: [{ name: "general" }]
     },
     "itemvalue[]@columns": {
       properties: [{ name: "visibleIf" }],
-      tabs: [{ name: "general" }],
+      tabs: [{ name: "general" }]
     },
     text: {
       properties: [
@@ -218,8 +218,8 @@ export class SurveyQuestionEditorDefinition {
         "step",
         "placeHolder",
         { name: "size", tab: "layout" },
-        { name: "maxLength", tab: "validation" },
-      ],
+        { name: "maxLength", tab: "validation" }
+      ]
     },
     boolean: {
       properties: [
@@ -228,8 +228,8 @@ export class SurveyQuestionEditorDefinition {
         "labelFalse",
         "showTitle",
         { name: "valueTrue", tab: "data" },
-        { name: "valueFalse", tab: "data" },
-      ],
+        { name: "valueFalse", tab: "data" }
+      ]
     },
     expression: {
       properties: [
@@ -239,11 +239,11 @@ export class SurveyQuestionEditorDefinition {
         "format",
         "maximumFractionDigits",
         "minimumFractionDigits",
-        "useGrouping",
-      ],
+        "useGrouping"
+      ]
     },
     matrixdropdowncolumn: {
-      properties: ["isRequired", "cellType", "name", "title"],
+      properties: ["isRequired", "cellType", "name", "title"]
     },
     "matrixdropdowncolumn@default": {
       properties: [
@@ -259,85 +259,80 @@ export class SurveyQuestionEditorDefinition {
         { name: "totalDisplayStyle", tab: "totals" },
         { name: "totalCurrency", tab: "totals" },
         { name: "totalFormat", tab: "totals" },
-        { name: "totalExpression", tab: "totals" },
+        { name: "totalExpression", tab: "totals" }
       ],
       tabs: [
         { name: "general", index: 5 },
         { name: "logic", index: 20 },
-        { name: "totals", index: 40 },
-      ],
+        { name: "totals", index: 40 }
+      ]
     },
     "matrixdropdowncolumn@checkbox": {
       properties: [
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
-        { name: "colCount", tab: "choices" },
+        { name: "colCount", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-      ],
+        { name: "choicesByUrl", index: 11 }
+      ]
     },
     "matrixdropdowncolumn@radiogroup": {
       properties: [
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
-        { name: "colCount", tab: "choices" },
+        { name: "colCount", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-      ],
+        { name: "choicesByUrl", index: 11 }
+      ]
     },
     "matrixdropdowncolumn@dropdown": {
       properties: [
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
-        { name: "optionsCaption", tab: "choices" },
+        { name: "optionsCaption", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },
-        { name: "choicesByUrl", index: 11 },
-      ],
+        { name: "choicesByUrl", index: 11 }
+      ]
     },
     "matrixdropdowncolumn@text": {
       properties: ["inputType", "placeHolder", "maxLength"],
-      tabs: [{ name: "validators", index: 10 }],
+      tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@comment": {
       properties: ["rows", "placeHolder", "maxLength"],
-      tabs: [{ name: "validators", index: 10 }],
+      tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@boolean": {
-      properties: ["defaultValue"],
+      properties: ["defaultValue"]
     },
     "matrixdropdowncolumn@expression": {
       properties: ["displayStyle", "currency"],
-      tabs: [{ name: "expression", index: 10 }],
+      tabs: [{ name: "expression", index: 10 }]
     },
     "matrixdropdowncolumn@rating": {
-      properties: ["rateValues"],
+      properties: ["rateValues"]
     },
 
     multipletextitem: {
-      properties: [
-        "inputType",
-        "maxLength",
-        "placeHolder",
-        "requiredErrorText",
-      ],
+      properties: ["inputType", "maxLength", "placeHolder", "requiredErrorText"]
     },
     "multipletext@items": {
-      properties: ["isRequired", "name", "title"],
+      properties: ["isRequired", "name", "title"]
     },
     calculatedvalue: {
-      properties: ["name", "expression", "includeIntoResult"],
+      properties: ["name", "expression", "includeIntoResult"]
     },
     "calculatedvalue@items": {
-      properties: ["name", "expression"],
+      properties: ["name", "expression"]
     },
     paneldynamic: {
       properties: [
@@ -362,8 +357,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultValueFromLastPanel", tab: "data" },
         { name: "templateTitleLocation", tab: "layout" },
         { name: "keyName", tab: "validation" },
-        { name: "keyDuplicationError", tab: "validation" },
-      ],
+        { name: "keyDuplicationError", tab: "validation" }
+      ]
     },
     panelbase: {
       properties: [
@@ -374,14 +369,14 @@ export class SurveyQuestionEditorDefinition {
         "readOnly",
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
-        { name: "questionTitleLocation", tab: "layout" },
+        { name: "questionTitleLocation", tab: "layout" }
       ],
       tabs: [
         { name: "logic", index: 100 },
         { name: "layout", index: 200 },
         { name: "data", index: 300 },
-        { name: "validation", index: 400 },
-      ],
+        { name: "validation", index: 400 }
+      ]
     },
     panel: {
       properties: [
@@ -394,16 +389,16 @@ export class SurveyQuestionEditorDefinition {
         { name: "innerIndent", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
-        { name: "questionStartIndex", tab: "numbering" },
+        { name: "questionStartIndex", tab: "numbering" }
       ],
-      tabs: [{ name: "numbering", index: 350 }],
+      tabs: [{ name: "numbering", index: 350 }]
     },
     page: {
       properties: [
         "maxTimeToFinish",
         { name: "questionsOrder", tab: "layout" },
-        { name: "navigationButtonsVisibility", tab: "layout" },
-      ],
+        { name: "navigationButtonsVisibility", tab: "layout" }
+      ]
     },
     survey: {
       properties: [
@@ -422,7 +417,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",
-          tab: "navigation",
+          tab: "navigation"
         },
         { name: "showPrevButton", tab: "navigation" },
         { name: "firstPageIsStarted", tab: "navigation" },
@@ -440,7 +435,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionErrorLocation", tab: "question" },
         {
           name: "focusFirstQuestionAutomatic",
-          tab: "question",
+          tab: "question"
         },
         { name: "questionsOrder", tab: "question" },
         { name: "maxTextLength", tab: "question" },
@@ -469,6 +464,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTimeToFinishPage", tab: "timer" },
         { name: "showTimerPanel", tab: "timer" },
         { name: "showTimerPanelMode", tab: "timer" },
+
+        { name: "logo", tab: "logo" },
+        { name: "logoPosition", tab: "logo" },
+        { name: "logoWidth", tab: "logo" },
+        { name: "logoHeight", tab: "logo" },
+        { name: "logoFit", tab: "logo" }
       ],
       tabs: [
         { name: "navigation", index: 100 },
@@ -477,8 +478,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "data", index: 400 },
         { name: "validation", index: 500 },
         { name: "showOnCompleted", index: 600 },
-        { name: "timer", index: 700 },
-      ],
-    },
+        { name: "timer", index: 700 }
+      ]
+    }
   };
 }

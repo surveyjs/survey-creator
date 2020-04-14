@@ -125,6 +125,8 @@ export { ratingItemAdorner } from "../adorners/rating-item-editor";
 export { imageItemsAdorner } from "../adorners/image-items";
 export { flowpanelActionsAdorner } from "../adorners/flowpanel-actions";
 export { imageAdorner } from "../adorners/image";
+export { titleImageAdorner } from "../adorners/title-image";
+export { TitleActionsViewModel } from "../adorners/title-actions";
 
 export {
   IAccordionItemData,

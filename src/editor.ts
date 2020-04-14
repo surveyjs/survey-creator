@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import {
   ISurveyObjectEditorOptions,
-  SurveyPropertyEditorBase,
+  SurveyPropertyEditorBase
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyLiveTester } from "./surveylive";
 import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
@@ -10,7 +10,7 @@ import { SurveyObjects } from "./surveyObjects";
 import { QuestionConverter } from "./questionconverter";
 import {
   SurveyElementPropertyGrid,
-  SurveyPropertyEditorShowWindow,
+  SurveyPropertyEditorShowWindow
 } from "./questionEditors/questionEditor";
 import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
@@ -25,6 +25,7 @@ import {
   SurveyForDesigner,
   createAfterRenderHandler,
   createAfterRenderPageHandler,
+  createAfterRenderHeaderHandler
 } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
@@ -119,6 +120,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   private pageEditModeValue: "standard" | "single" = "standard";
   private showDropdownPageSelectorValue: boolean = true;
+  private koShowSurveyTitle = ko.observable<"ifentered" | "always" | "never">(
+    "ifentered"
+  );
+  private koAllowControlSurveyTitleVisibility = ko.observable(true);
+
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
@@ -817,12 +823,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
-   * @param options survey creator options. The following options are available: showDesignerTab, showJSONEditorTab,
-   * showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab, inplaceEditForValues, useTabsInElementEditor,
-   * showPropertyGrid, showToolbox, allowModifyPages
-   * questionTypes, showOptions, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, showObjectTitles,
-   * showTitlesInExpressions, allowEditExpressionsInTextEditor,
-   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, closeModalOutside, pageEditingMode
+   * @param options survey creator options. The following options are available:
+   * showDesignerTab, showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab,
+   * showOptions, showPropertyGrid, showToolbox,
+   * allowModifyPages, pageEditingMode, showDropdownPageSelector, readOnly,
+   * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
+   * showObjectTitles, inplaceEditForValues, showTitlesInExpressions, allowEditExpressionsInTextEditor,
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
+   * showSurveyTitle, allowControlSurveyTitleVisibility
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -888,7 +896,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         obj: obj,
         htmlElement: htmlElement,
         property: prop.property,
-        propertyEditor: prop.editor,
+        propertyEditor: prop.editor
       };
       self.onPropertyAfterRender.fire(self, options);
     };
@@ -937,7 +945,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         locale,
         name,
         value,
-        context,
+        context
       });
     };
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
@@ -1010,7 +1018,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.designer"),
           template: "se-tab-designer",
           data: this,
-          action: () => this.showDesigner(),
+          action: () => this.showDesigner()
         });
       }
       if (this.showTestSurveyTab) {
@@ -1019,7 +1027,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.testSurvey"),
           template: "se-tab-test",
           data: this,
-          action: () => this.showTestSurvey(),
+          action: () => this.showTestSurvey()
         });
       }
       if (this.showLogicTab) {
@@ -1028,7 +1036,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.logic"),
           template: "se-tab-logic",
           data: this.logic,
-          action: () => this.showLogicEditor(),
+          action: () => this.showLogicEditor()
         });
       }
       if (this.showJSONEditorTab) {
@@ -1037,7 +1045,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.jsonEditor"),
           template: "jsoneditor",
           data: this.jsonEditor,
-          action: () => this.showJsonEditor(),
+          action: () => this.showJsonEditor()
         });
       }
       if (this.showEmbededSurveyTab) {
@@ -1046,7 +1054,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.embedSurvey"),
           template: "surveyembeding",
           data: this.surveyEmbeding,
-          action: () => this.showEmbedEditor(),
+          action: () => this.showEmbedEditor()
         });
       }
       if (this.showTranslationTab) {
@@ -1055,7 +1063,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           title: this.getLocString("ed.translation"),
           template: "translation",
           data: this.translation,
-          action: () => this.showTranslationEditor(),
+          action: () => this.showTranslationEditor()
         });
       }
       if (this.tabs().length > 0) {
@@ -1094,7 +1102,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       visible: this.koIsShowDesigner,
       enabled: this.koCanUndo,
       action: this.doUndoClick,
-      title: this.getLocString("ed.undo"),
+      title: this.getLocString("ed.undo")
     });
     this.toolbarItems.push({
       id: "svd-redo",
@@ -1102,7 +1110,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       visible: this.koIsShowDesigner,
       enabled: this.koCanRedo,
       action: this.doRedoClick,
-      title: this.getLocString("ed.redo"),
+      title: this.getLocString("ed.redo")
     });
     this.toolbarItems.push({
       id: "svd-survey-settings",
@@ -1113,7 +1121,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.selectedElement = this.survey;
         this.showQuestionEditor(this.survey);
       },
-      title: this.getLocString("ed.settings"),
+      title: this.getLocString("ed.settings")
     });
     this.toolbarItems.push({
       id: "svd-options",
@@ -1128,16 +1136,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           visible: true,
           css: ko.computed(() => (this.koGenerateValidJSON() ? "active" : "")),
           action: this.generateValidJSONClick,
-          title: this.getLocString("ed.generateValidJSON"),
+          title: this.getLocString("ed.generateValidJSON")
         },
         {
           id: "svd-readable-json",
           visible: true,
           css: ko.computed(() => (!this.koGenerateValidJSON() ? "active" : "")),
           action: this.generateReadableJSONClick,
-          title: this.getLocString("ed.generateReadableJSON"),
-        },
-      ]),
+          title: this.getLocString("ed.generateReadableJSON")
+        }
+      ])
     });
     this.toolbarItems.push({
       id: "svd-test",
@@ -1154,46 +1162,46 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           id: "svd-100-json",
           visible: true,
           action: () => this.koTestSurveyWidth("100%"),
-          title: "100%",
+          title: "100%"
         },
         {
           id: "svd-1200px-json",
           visible: true,
           action: () => this.koTestSurveyWidth("1200px"),
-          title: "1200px",
+          title: "1200px"
         },
         {
           id: "svd-1000px-json",
           visible: true,
           action: () => this.koTestSurveyWidth("1000px"),
-          title: "1000px",
+          title: "1000px"
         },
         {
           id: "svd-800px-json",
           visible: true,
           action: () => this.koTestSurveyWidth("800px"),
-          title: "800px",
+          title: "800px"
         },
         {
           id: "svd-600px-json",
           visible: true,
           action: () => this.koTestSurveyWidth("600px"),
-          title: "600px",
+          title: "600px"
         },
         {
           id: "svd-400px-json",
           visible: true,
           action: () => this.koTestSurveyWidth("400px"),
-          title: "400px",
-        },
-      ]),
+          title: "400px"
+        }
+      ])
     });
     this.toolbarItems.push({
       id: "svd-save",
       visible: this.koShowSaveButton,
       action: this.saveButtonClick,
       innerCss: "svd_save_btn",
-      title: this.getLocString("ed.saveSurvey"),
+      title: this.getLocString("ed.saveSurvey")
     });
     this.toolbarItems.push({
       id: "svd-state",
@@ -1201,7 +1209,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       css: "svd_state",
       innerCss: ko.computed(() => "icon-" + this.koState()),
       title: ko.computed(() => this.getLocString("ed." + this.koState())),
-      template: "svd-toolbar-state",
+      template: "svd-toolbar-state"
     });
   }
 
@@ -1334,6 +1342,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     if (typeof options.showDropdownPageSelector !== "undefined") {
       this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
+    }
+    if (typeof options.showSurveyTitle === "string") {
+      this.showSurveyTitle = options.showSurveyTitle;
+    }
+    if (typeof options.allowControlSurveyTitleVisibility !== "undefined") {
+      this.allowControlSurveyTitleVisibility = !!options.allowControlSurveyTitleVisibility;
     }
   }
   /**
@@ -1609,6 +1623,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   /**
+   * Set it to "always", "never" or "ifentered". The "ifentered" is the default value means show survey title only in case of user entered it.
+   */
+  public get showSurveyTitle() {
+    return this.koShowSurveyTitle();
+  }
+  public set showSurveyTitle(value) {
+    this.koShowSurveyTitle(value);
+  }
+  /**
+   * Set it to false if you want to deny user to hide/show survey title.
+   */
+  public get allowControlSurveyTitleVisibility() {
+    return this.koAllowControlSurveyTitleVisibility();
+  }
+  public set allowControlSurveyTitleVisibility(value) {
+    this.koAllowControlSurveyTitleVisibility(value);
+  }
+  /**
    * Set it to false to  hide the pages toolbox on the top.
    */
   public get showPagesToolbox() {
@@ -1787,7 +1819,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public rightContainerActiveItem = ko.observable<string>("property-grid");
   private _topContainer = ko.observableArray<string>([
     "toolbar",
-    "pages-editor",
+    "pages-editor"
   ]);
   public layoutChangedIndicator = ko.observable(0);
   public get topContainer() {
@@ -1826,7 +1858,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj: object,
       property1: property1,
       property2: property2,
-      result: 0,
+      result: 0
     };
     this.onCustomSortProperty.fire(this, options);
     return options.result;
@@ -1864,7 +1896,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       type: "PAGE_MOVED",
       page: page,
       indexFrom: indexFrom,
-      indexTo: indexTo,
+      indexTo: indexTo
     });
   };
   public addPageToUI(page: Survey.Page) {
@@ -1918,7 +1950,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.onElementNameChanged.fire(this, {
         obj: obj,
         oldName: oldValue,
-        newName: value,
+        newName: value
       });
     }
     if (property.name == "name" || property.name == "title") {
@@ -1953,7 +1985,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       name: property.name,
       target: obj,
       oldValue: oldValue,
-      newValue: newValue,
+      newValue: newValue
     });
     //TODO add a flag to a property, may change other properties
     if (
@@ -2167,7 +2199,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     );
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
-        width: "100%",
+        width: "100%"
       };
       if (this.isRTLValue) {
         options.dir = "rtl";
@@ -2253,6 +2285,21 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
     );
     this.undoRedoManager = new UndoRedoManager();
+    this.surveyValue().getEditor = () => self;
+    ko.computed(() => {
+      var optionValue = this.showSurveyTitle;
+      var showValue = optionValue !== "never";
+      if (showValue) {
+        showValue =
+          optionValue === "always" ||
+          (optionValue === "ifentered" &&
+            !!this.surveyValue().locTitle["koRenderedHtml"]()) ||
+          !!this.surveyValue().locLogo["koRenderedHtml"]();
+      }
+      self.surveyValue().koShowHeader(showValue);
+    });
+    this.surveyValue().emptyPageTemplate = "se-empty-placeholder";
+    this.surveyValue().emptyPageTemplateData = this;
     this.surveyValue().onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
@@ -2279,7 +2326,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         name: changes.propertyName,
         target: changes.object,
         oldValue: changes.oldValue,
-        newValue: changes.newValue,
+        newValue: changes.newValue
       });
     };
     this.updateKoCanUndoRedo();
@@ -2292,7 +2339,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.undoRedoManager
     );
     this.dragDropHelper.readOnly = this.readOnly;
-    this.surveyValue().getEditor = () => self;
     this.surveyValue().setJsonObject(json);
     if (this.surveyValue().isEmpty) {
       this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
@@ -2307,6 +2353,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.surveyValue()
     );
     var afterRenderElementPageHandler = createAfterRenderPageHandler(
+      this,
+      this.surveyValue()
+    );
+    var afterRenderHeaderHandler = createAfterRenderHeaderHandler(
       this,
       this.surveyValue()
     );
@@ -2354,6 +2404,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         );
       }
     });
+    this.surveyValue().onAfterRenderHeader.add((sender, options) => {
+      afterRenderHeaderHandler(options.htmlElement, sender);
+    });
     this.surveyValue().onDragDropAllow.add(function(sender, options) {
       options.survey = sender;
       self.onDragDropAllow.fire(self, options);
@@ -2371,7 +2424,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "editelement",
           text: this.getLocString("survey.edit"),
           hasTitle: true,
-          onClick: (question) => this.showQuestionEditor(question),
+          onClick: question => this.showQuestionEditor(question)
         });
       }
 
@@ -2384,7 +2437,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           text: self.getLocString(deleteLocaleName),
           onClick: function(selObj) {
             self.deleteObject(selObj);
-          },
+          }
         });
       }
 
@@ -2417,7 +2470,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
               }
             }
             isShowTitle(question.titleLocation !== "hidden");
-          },
+          }
         });
       }
 
@@ -2437,7 +2490,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           }),
           onClick: (question: Survey.Question) => {
             question.isRequired = !question.isRequired;
-          },
+          }
         });
       }
 
@@ -2451,7 +2504,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           text: self.getLocString("survey.copy"),
           onClick: function(selObj) {
             self.fastCopyQuestion(selObj);
-          },
+          }
         });
       }
 
@@ -2461,7 +2514,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           text: self.getLocString("survey.addToToolbox"),
           onClick: function(selObj) {
             self.addCustomToolboxQuestion(selObj);
-          },
+          }
         });
       }
 
@@ -2475,10 +2528,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           this.toolbox.itemNames
         );
         var allowChangeType = convertClasses.length > 0;
-        var createTypeByClass = (className) => {
+        var createTypeByClass = className => {
           return {
             name: this.getLocString("qt." + className),
-            value: className,
+            value: className
           };
         };
         var availableTypes = [createTypeByClass(currentType)];
@@ -2496,7 +2549,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           onConvertType: (data, event) => {
             var newType = event.target.value;
             this.convertCurrentObject(options.obj, newType);
-          },
+          }
         });
       }
 
@@ -2506,7 +2559,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           text: this.getLocString("ed.property-grid"),
           template: "sca-show-property-grid",
           hasTitle: true,
-          onClick: (question) => this.showQuestionEditor(question),
+          onClick: question => this.showQuestionEditor(question)
         });
       }
 
@@ -2515,7 +2568,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function(selObj) {},
+          onClick: function(selObj) {}
         });
       }
 
@@ -2592,15 +2645,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     json.type = element.getType();
     return this.createNewElement(json);
   }
-  private getRows(pnl: Survey.PanelModelBase): Array<any> {
-    return !!pnl["koRows"] ? pnl["koRows"]() : pnl.rows;
-  }
-  public isCurrentPageEmpty = ko.computed(
-    () =>
-      !!this.surveyValue() &&
-      !!this.surveyValue().koCurrentPage() &&
-      this.getRows(this.surveyValue().koCurrentPage()).length === 0
-  );
   public dragOverQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
     return false;
@@ -2748,7 +2792,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       type: "QUESTION_CONVERTED",
       className: className,
       oldValue: obj,
-      newValue: newQuestion,
+      newValue: newQuestion
     });
   }
   /**
@@ -2798,7 +2842,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         if (onClose) onClose(isCanceled);
         self.onElementEditorClosed.fire(self, {
           isCanceled: isCanceled,
-          element: element,
+          element: element
         });
       }
     );
@@ -2812,7 +2856,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.dirtyPageUpdate(); //TODO why this is need ? (ko problem)
     this.setModified({
       type: "QUESTION_CHANGED_BY_EDITOR",
-      question: question,
+      question: question
     });
   }
 
@@ -2841,7 +2885,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = {};
     this.onCustomElementAddingIntoToolbox.fire(this, {
       element: question,
-      itemOptions: options,
+      itemOptions: options
     });
     this.toolbox.addCopiedItem(question, options);
     this.onCustomElementAddedIntoToolbox.fire(this, { element: question });
@@ -2881,7 +2925,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = {
       element: obj,
       elementType: SurveyHelper.getObjectType(obj),
-      allowing: true,
+      allowing: true
     };
     this.onElementDeleting.fire(this, options);
     if (!options.allowing) return;
@@ -2896,7 +2940,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     this.setModified({
       type: "OBJECT_DELETED",
-      target: obj,
+      target: obj
     });
   }
   public get surveyLiveTester(): SurveyLiveTester {
@@ -2913,7 +2957,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       showDefaultLanguageInTestSurveyTab: this
         .showDefaultLanguageInTestSurveyTab,
       showInvisibleElementsInTestSurveyTab: this
-        .showInvisibleElementsInTestSurveyTab,
+        .showInvisibleElementsInTestSurveyTab
     };
     this.surveyLive.onGetObjectDisplayName = function(obj): string {
       return self.getObjectDisplayName(obj);
@@ -2954,7 +2998,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         row: error.position.start.row,
         column: error.position.start.column,
         text: error.text,
-        type: "error",
+        type: "error"
       };
       annotations.push(annotation);
     }
@@ -2989,7 +3033,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       tabName,
       elements,
       model,
-      tabData,
+      tabData
     });
   };
   onCanShowPropertyCallback(
@@ -3012,7 +3056,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj: obj,
       property: editor.property,
       readOnly: proposedValue,
-      propertyName: editor.property.name,
+      propertyName: editor.property.name
     };
     this.onGetPropertyReadOnly.fire(this, options);
     return options.readOnly;
@@ -3027,7 +3071,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj: obj,
       propertyName: propertyName,
       newItem: itemValue,
-      itemValues: itemValues,
+      itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
   }
@@ -3047,7 +3091,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var options = {
       propertyName: propertyName,
       obj: obj,
-      editorOptions: editorOptions,
+      editorOptions: editorOptions
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
@@ -3064,7 +3108,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       propertyName: propertyName,
       obj: obj,
       value: value,
-      error: "",
+      error: ""
     };
     this.onPropertyValidationCustomError.fire(this, options);
     return options.error;
@@ -3082,7 +3126,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
-      event: event,
+      event: event
     };
     this.onPropertyEditorKeyDown.fire(this, options);
   }
@@ -3102,7 +3146,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj: obj,
       propertyName: propertyName,
       htmlTop: "",
-      htmlBottom: "",
+      htmlBottom: ""
     };
     this.onShowPropertyModalEditorDescription.fire(this, options);
     var res = { top: options.htmlTop, bottom: options.htmlBottom };
@@ -3123,7 +3167,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
-      survey: survey,
+      survey: survey
     };
     this.onConditionValueSurveyCreated.fire(this, options);
   }
@@ -3137,7 +3181,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
-      list: list,
+      list: list
     };
     this.onConditionQuestionsGetList.fire(this, options);
   }
@@ -3158,7 +3202,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       question: question,
       adorner: adorner,
       element: element,
-      context: context,
+      context: context
     };
     this.onAdornerRendered.fire(this, options);
   }
@@ -3173,14 +3217,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ) {
     if (this.onUploadFile.isEmpty) {
       let fileReader = new FileReader();
-      fileReader.onload = (e) => {
+      fileReader.onload = e => {
         uploadingCallback("success", fileReader.result);
       };
       fileReader.readAsDataURL(files[0]);
     } else {
       this.onUploadFile.fire(this, {
         files: files || [],
-        callback: uploadingCallback,
+        callback: uploadingCallback
       });
     }
   }
@@ -3191,7 +3235,7 @@ ko.components.register("survey-widget", {
     this.survey = params.survey;
   },
   template:
-    "<!-- ko if: $data.survey --><!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko --><!-- /ko -->",
+    "<!-- ko if: $data.survey --><!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko --><!-- /ko -->"
 });
 
 ko.components.register("svg-icon", {
@@ -3209,9 +3253,9 @@ ko.components.register("svg-icon", {
           "#" + ko.unwrap(params.iconName)
         );
       });
-    },
+    }
   },
-  template: "<svg class='svd-svg-icon'><use></use></svg>",
+  template: "<svg class='svd-svg-icon'><use></use></svg>"
 });
 
 export class SurveyEditor extends SurveyCreator {
