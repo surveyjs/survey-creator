@@ -3,6 +3,18 @@
 
 Please note, this functionality comes with [v1.7.1](https://surveyjs.io/WhatsNew#v1.7.1).
 
+- [Simplicity vs Functionality](#simplicity)
+- [Build Component Questions (examples)](#examples)
+  - [Country example, simple custom question](#countryexamples)
+  - [Full name, simple composite question](#fullname-example)
+  - [Add a property into composite component](#add-property-example)
+  - [Expressions and handling a question value change in composite question](#expression-example)
+  - [Override base question properties in component/root question](#override-properties-example)
+  - [Create order table component using matrix dropdown](#order-table-example)
+  - [Create order grid component using matrix dynamic](#order-grid-example)
+
+<div id="simplicity"></div>
+
 ## Simplicity vs Functionality.
 
 Commonly, what ever product we are working on, we must choose weather simplicity or rich functionality. The more functionality and richer API a library/platform has, the longer learning curve for this new library/platform. As software developers, we used to deal with it. We learned and knows how to use many programming languages, libraries, frameworks and so on. As a software developer, I doubt, that many of us has a problem to build a survey/create a form using SurveyJS project. We can write some code to get the functionality we missed, if it doesn’t exist out of the box. However, what about end-users? Should they deeply learn SurveyJS functionality, is there a way, to provide them with even richer functionality, but hide the complexity?
@@ -11,11 +23,16 @@ We spoke and exchanged e-mails with many of our customers. From one side, you co
 
 Unfortunately, since your, our customers, come from different industries and have different needs, we can’t create what you exactly need. We are building a platform for a general purpose. In most cases, your end-users, requires some specific functionality, question types. Let’s see how by using our component model, you can create your own Survey Creator / Form Builder, that will be easy to use for your end-users since it does exactly, they need and in the way the need and understand.
 
+<div id="examples"></div>
+
 ## Build Component Questions (examples).
 
 We will start with the simple examples and finish with complex.
 
-### Country Example
+
+<div id="country-examples"></div>
+
+### Country example, simple custom question
 So, let’s say, you need to allow user to select countries. The right solution is to use the dropdown and to set weather choices property (set all countries you need) or use a web service to get the countries from the web. In case with restful web service, question JSON will look like:
 ```javascript
 {
@@ -62,6 +79,8 @@ By writing almost the same code as you do for register a new toolbox item, as in
 }
 ```
 
+<div id="fullname-example"></div>
+
 ### Full name, simple composite question
 
 In example with country question we shown how to create a wrapper component, inside the question there is another question to which end-user has no access.
@@ -96,6 +115,8 @@ The minimum JSON for this question will be the same as for "country" question:
     name: "question1"
 }
 ```
+
+<div id="add-property-example"></div>
 
 ### Add a property into composite component
 
@@ -179,6 +200,7 @@ The JSON for this question adds one additional "showMiddleName" property, if the
 }
 ```
 
+<div id="expression-example"></div>
 
 ### Expressions and handling a question value change in composite question
 
@@ -289,6 +311,7 @@ Now, all an end-user needs is to drop the "Shipping Address" component from the 
     name: "question1"
 }
 ```
+<div id="override-properties-example"></div>
 
 ### Override base question properties in component/root question
 
@@ -405,10 +428,11 @@ Survey.ComponentCollection.Instance.add({
     };
   },
 });
-
 ```
 
-### Create order component using matrix dropdown
+<div id="order-table-example"></div>
+
+### Create order table component using matrix dropdown
 
 Consider we need to create an order form using matrix dropdown question.
 
@@ -459,9 +483,10 @@ End-user can build it in SurveyJS Creator and he will get the following JSON:
 }
 ```
 
-Again, it requires relative deep knowledge of SurveyJS for building this survey. End-user must know about expression question and cell type, be able to create an expression ``{row.qty} * {row.price}``, know about total row in matrix and finally understand that he needs to use ``defaultValue`` property to define the price column.
-In other words, it requires knowledge and time to convert matrix dropdown into order question.
-Everything, that end-user needs, is to define the list of items to sell, their names and price and nothing more. The component question allows to bring this functionality into SurveyJS Creator.
+Again, it requires relative deep knowledge of SurveyJS for building this survey. End-user must know about expression question and cell type, be able to create an expression ``{row.qty} * {row.price}``, know about total row in matrix and finally understand that he needs to use ``defaultValue`` property to define the price column value.
+In other words, it requires knowledge and time to convert matrix dropdown into order table widget.
+
+Everything, that end-user needs, is to define the list of items, their names and price, and nothing more. The component question allows to bring this functionality into SurveyJS Creator.
 
 ```javascript
 Survey.ComponentCollection.Instance.add({
@@ -525,6 +550,30 @@ Survey.ComponentCollection.Instance.add({
     //Create rows and default values on first loading
     this.updateRowsAndValues(question);
   },
+  //Calls on property changed in component/root question
+  onPropertyChanged(question, propertyName, newValue) {
+    if (propertyName == "orderItems") {
+      //Calls when orderItems array is changed: 
+      //new item is added or existing removed or elements order changed
+      //We need to rebuild rows and defaultValues
+      this.updateRowsAndValues(question);
+    }
+  },
+  //Calls when a property of ItemValue element is changed.
+  onItemValuePropertyChanged(question, options) {
+    //If the propertyName of the array is "orderItems"
+    if (options.propertyName == "orderItems") {
+      //If property name of ItemValue element is "value" then rebuild rows and defualtValues
+      if (options.name == "value") {
+        this.updateRowsAndValues(question);
+      }
+      //If property name of ItemValue element is "price" then rebuild defaultValues
+      if (options.name == "price") {
+        this.setDefaultValues(question);
+      }
+    }
+  },
+  //Internal functions: buildRows, setDefaultValues and updateRowsAndValues
   //Create matrix rows using orderItems property
   buildRows(question) {
     var rows = [];
@@ -550,29 +599,6 @@ Survey.ComponentCollection.Instance.add({
   updateRowsAndValues(question) {
     this.buildRows(question);
     this.setDefaultValues(question);
-  },
-  //Calls on property changed in component/root question
-  onPropertyChanged(question, propertyName, newValue) {
-    if (propertyName == "orderItems") {
-      //Calls when orderItems array is changed: 
-      //new item is added or existing removed or elements order changed
-      //We need to rebuild rows and defaultValues
-      this.updateRowsAndValues(question);
-    }
-  },
-  //Calls when a property of ItemValue element is changed.
-  onItemValuePropertyChanged(question, options) {
-    //If the propertyName of the array is "orderItems"
-    if (options.propertyName == "orderItems") {
-      //If property name of ItemValue element is "value" then rebuild rows and defualtValues
-      if (options.name == "value") {
-        this.updateRowsAndValues(question);
-      }
-      //If property name of ItemValue element is "price" then rebuild defaultValues
-      if (options.name == "price") {
-        this.setDefaultValues(question);
-      }
-    }
   },
 });
 ```
@@ -610,3 +636,187 @@ The question JSON becomes readable and clean:
     ]
 }
 ```
+
+<div id="order-grid-example"></div>
+
+### Create order grid component using matrix dynamic
+
+We can solve the previous task by using matrix dynamic question. End-user will have to add/remove rows to add/remove order items.
+
+Unfortunately, end-user could not build this type of survey in SurveyJS Creator. It requries to write JavaScript code and handle several events. The working example you can find [here](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-totals).
+
+
+```JavaScript
+Survey.ComponentCollection.Instance.add({
+    name: "ordergrid",
+    title: "Order Grid",
+    questionJSON: {
+        type: "matrixdynamic",
+        defaultRowValue: { qty: 1 },
+        rowCount: 1,
+        addRowText: "Add Item",
+        columns: [
+        {
+            name: "id",
+            title: "Id",
+            cellType: "expression",
+            expression: "{rowIndex}",
+        },
+        {
+            name: "item",
+            title: "Item Name",
+            cellType: "dropdown",
+            isRequired: true,
+            totalType: "count",
+            totalFormat: "Items count: {0}",
+        },
+        {
+            name: "price",
+            title: "Price",
+            cellType: "expression",
+            displayStyle: "currency",
+        },
+        {
+            name: "qty",
+            title: "Qty",
+            cellType: "text",
+            inputType: "number",
+        },
+        {
+            name: "total",
+            title: "Total",
+            cellType: "expression",
+            displayStyle: "currency",
+            expression: "{row.qty} * {row.price}",
+            totalType: "sum",
+            totalDisplayStyle: "currency",
+        },
+        ],
+    },
+    onInit() {
+        //Add "price" property to base "itemvalue" class
+        //It will allow us to set our order items into dropdown choices
+        //without loosing the price property value
+        Survey.Serializer.addProperty("itemvalue", {
+        name: "price:number",
+        visible: false,
+        isSerializable: false,
+        });
+        //Create a new class derived from Survey.ItemValue
+        //It hides text, visibleIf and enableIf properties
+        //and makes price property visible for "ordergriditem" class only.
+        Survey.Serializer.addClass(
+        "ordergriditem",
+        [
+            {
+            name: "price:number",
+            default: 0,
+            visible: true,
+            isSerializable: true,
+            },
+            { name: "text", visible: false },
+            { name: "visibleIf", visible: false },
+            { name: "enableIf", visible: false },
+        ],
+        //We create a standard Survey.ItemValue instance.
+        //The third parameter said that the actual type is "ordergriditem"
+        //SurveyJS will use properties definition from "ordergriditem" class
+        //and it will define "price" property for every new instance
+        function () {
+            return new Survey.ItemValue(null, null, "ordergriditem");
+        },
+        "itemvalue"
+        );
+        //Add orderItems properties. It is an array of ordergriditem elements
+        Survey.Serializer.addProperty("ordergrid", {
+        name: "orderItems:ordergriditem[]",
+        category: "general",
+        });
+    },
+    onLoaded(question) {
+        //Set choices to the 'item' column on first loading
+        this.updateItemsColumn(question);
+        //It has options as survey.onMatrixCellValueChanged event
+        //We need to set price on changing the item
+        question.contentQuestion.onCellValueChangedCallback = function (
+        options
+        ) {
+        //If cell in column 'item' is changed
+        if (options.columnName == "item") {
+            //get price question in this row
+            var priceQuestion = options.row.getQuestionByColumnName("price");
+            //get item question in this row
+            var itemQuestion = options.row.getQuestionByColumnName("item");
+            if (!!priceQuestion && !!itemQuestion) {
+            //Set price to the price question value
+            priceQuestion.value =
+                itemQuestion.selectedItem != null
+                ? itemQuestion.selectedItem.price
+                : 0;
+            }
+        }
+        };
+        //It has options as survey.onMatrixCellCreated event
+        //We need to set min/max properties for qty number question
+        question.contentQuestion.onCellCreatedCallback = function (options) {
+        if (options.columnName == "qty") {
+            options.cellQuestion.min = 1;
+            options.cellQuestion.max = 20;
+        }
+        };
+    },
+    //Calls on property changed in component/root question
+    onPropertyChanged(question, propertyName, newValue) {
+        if (propertyName == "orderItems") {
+        //Calls when orderItems array is changed:
+        //new item is added or existing removed or elements order changed
+        this.updateItemsColumn(question);
+        }
+    },
+    //Calls when a property of ItemValue element is changed.
+    onItemValuePropertyChanged(question, options) {
+        //If the propertyName of the array is "orderItems"
+        if (options.propertyName == "orderItems") {
+        this.updateItemsColumn(question);
+        }
+    },
+    //Set choices to the 'item' column
+    updateItemsColumn(question) {
+        question.contentQuestion.getColumnByName("item").choices =
+        question.orderItems;
+    },
+});
+```
+As result, or SurveyJS Creator user will get the same experience with this "ordergrid" component like with "ordertable" component. The same JSON:
+
+```JavaScript
+{
+    "type": "ordergrid",
+    "name": "q1",
+    "orderItems": [
+        {
+            "value": "Steak",
+            "price": 27
+        },
+        {
+            "value": "Salmon",
+            "price": 22
+        },
+        {
+            "value": "Beer",
+            "price": 5
+        }
+    ]
+}
+```
+
+However, End-user of the survey will see and experience the different UI.
+
+<p align="center">
+
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dynamic.png?raw=true)
+
+_Matrix dynamic question as order grid_
+</p>
+
+
