@@ -170,3 +170,240 @@ SurveyJS calls “onLoaded” function after loading JSON into a survey. We need
 
 The same story about “onPropertyChanged” function. SurveyJS calls it after end-user click on “showMiddleName” checkbox in the property grid and we need to show/hide middle name question inside the container to react on this change.
 
+The JSON for this question adds one additional "showMiddleName" property, if the property is ``true``:
+```javascript
+{
+    type: "fullname",
+    name: "question1",
+    showMiddleName: true
+}
+```
+
+
+### Expressions and handling a question value change in composite question
+
+Let’s review the survey where a user should fill business and shipping address. This survey contains with two comment questions (text area inputs) and one checkbox between them. Two comments are business address and shipping address. The checkbox is checked by default and its title: “Shipping address same as business address”. When it checked, the shipping address question is disabled and the data from business address are copied into shipping address. When the checkbox is unchecked, shipping address becomes enabled and the its data is cleared.  This is a typical task and this survey could be done by end-user without any coding using expressions and triggers. Here is the survey JSON:
+
+```javascript
+{
+   "elements": [
+    {
+     "type": "comment",
+     "name": "businessAddress",
+     "title": "Business Address",
+     "isRequired": true
+    },
+    {
+     "type": "boolean",
+     "name": "shippingSameAsBusiness",
+     "title": "Shipping address same as business address",
+     "defaultValue": "true"
+    },
+    {
+     "type": "comment",
+     "name": "shippingAddress",
+     "title": "Shipping Address",
+     "enableIf": "{shippingSameAsBusiness} <> true",
+     "isRequired": true
+  }
+ ],
+ "triggers": [
+  {
+   "type": "copyvalue",
+   "expression": "{shippingSameAsBusiness} = true and {businessAddress} notempty",
+   "setToName": "shippingAddress",
+   "fromName": "businessAddress"
+  },
+  {
+   "type": "setvalue",
+   "expression": "{shippingSameAsBusiness} = false",
+   "setToName": "shippingAddress"
+  }
+ ]
+}
+```
+End-user must know and understand SurveyJS expressions and triggers to build the survey. It is not hard to build it using SurveyJS Creator, but still some job is required even if you know what you are doing.
+Let’s create the shipping address component.
+
+```javascript
+Survey.ComponentCollection.Instance.add({
+  name: "shippingaddress",
+  title: "ShippingAddress",
+  elementsJSON: [
+    {
+      type: "comment",
+      name: "businessAddress",
+      title: "Business Address",
+      isRequired: true,
+    },
+    {
+      type: "boolean",
+      name: "shippingSameAsBusiness",
+      title: "Shipping address same as business address",
+      defaultValue: "true",
+    },
+    {
+      type: "comment",
+      name: "shippingAddress",
+      title: "Shipping Address",
+      //Use composite. prefix to get the "shippingSameAsBusiness" question inside the contentPanel
+      enableIf: "{composite.shippingSameAsBusiness} <> true",
+      isRequired: true,
+    },
+  ],
+  onLoaded(question) {
+    var businessAddress = question.contentPanel.getQuestionByName(
+      "businessAddress"
+    );
+    var shippingAddress = question.contentPanel.getQuestionByName(
+      "shippingAddress"
+    );
+    var shippingSameAsBusiness = question.contentPanel.getQuestionByName(
+      "shippingSameAsBusiness"
+    );
+    //On changing business address value
+    businessAddress.valueChangedCallback = function () {
+      //If shipping address same as business is choosen then
+      if (shippingSameAsBusiness.value == true) {
+        shippingAddress.value = businessAddress.value;
+      }
+    };
+    //On changing address same as business
+    shippingSameAsBusiness.valueChangedCallback = function () {
+      // //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      shippingAddress.value =
+        shippingSameAsBusiness.value == true ? businessAddress.value : "";
+    };
+  },
+});
+```
+We changed ``enableIf`` expression for "shippingAddress" by replacing ``{shippingSameAsBusiness}`` with ``{composite.shippingSameAsBusiness}``. ``{shippingSameAsBusiness}`` is a root question in a survey, in our case we need to find the hidden question inside the contentPanel and prefix ``composite.`` tells SurveyJS that we are looking for a question inside the contentPanel of the component.
+
+The bigger change is removing triggers and replacing them with the code in ``onLoaded`` function. We can’t access survey triggers from our component. In fact, we can, but it is a bad practice, since we would break the encapsulation rule, the basic rule of a component world. The right approach is to write the code inside the ``onLoaded`` function. In this function we handle value changed callbacks for our “business address” and “shipping address same as business” and modify “shipping address” accordingly to our logic.
+
+Now, all an end-user needs is to drop the "Shipping Address" component from the toolbox and the job is done. The question JSON turns into two lines:
+
+```javascript
+{
+    type: "shippingaddress",
+    name: "question1"
+}
+```
+
+### Override base question properties in component/root question
+
+Let’s continue with “shipping address” component. We do not need a root title and it is better to have numbers on our content questions as they are part of survey end-to-end numbering. To deal with it, we must hide the question title for the component/root question and set a property for ``contentPanel``, so the questions inside the panel have numbers. We must add the following code into ``onLoaded`` function.
+
+```javascript
+//Hide the title for component/root location
+question.titleLocation = "hidden";
+//Change the property value from "off" to "default" to get end-to-end numbering behavior
+question.contentPanel.showQuestionNumbers = "default";
+```
+We could leave our component with this change. However, there are some properties now, that it is better to hide from the end-user and additionally change the default value for ``titleLocation`` property from “default” to “hidden” to avoid unnecessary line in our question JSON. We can use ``onInit`` function to implement this functionality. We will use ``Survey.Serializer.addProperty`` function. We can’t use ``Survey.Serializer.findProperty`` function to change the property attributes, because in this case we will change attributes for the basic question properties and it will be impact all questions. We need to change properties for our “shippingaddress” class only. That is why we need to override or define these properties one more time with new attributes.
+
+```javascript
+onInit() {
+  //Override titleLocation property attributes for "shippingaddress" class by making it invisible in property grid and change its default value
+  Survey.Serializer.addProperty("shippingaddress", {
+    name: "titleLocation",
+    visible: false,
+    default: "hidden",
+  });
+  Survey.Serializer.addProperty("shippingaddress", {
+    name: "title",
+    visible: false,
+  });
+  Survey.Serializer.addProperty("shippingaddress", {
+    name: "description",
+    visible: false,
+  });
+  Survey.Serializer.addProperty("shippingaddress", {
+    name: "hidenumber",
+    visible: false,
+  });
+}
+```
+
+This code ``onInit`` function removes four unneeded properties from the property grid and will not serialize ``titleLocation`` property that we changed in the code.
+
+Finally, the component the code for component registration becomes the following:
+
+```javascript
+Survey.ComponentCollection.Instance.add({
+  name: "shippingaddress",
+  title: "ShippingAddress",
+  elementsJSON: [
+    {
+      type: "comment",
+      name: "businessAddress",
+      title: "Business Address",
+      isRequired: true,
+    },
+    {
+      type: "boolean",
+      name: "shippingSameAsBusiness",
+      title: "Shipping address same as business address",
+      defaultValue: "true",
+    },
+    {
+      type: "comment",
+      name: "shippingAddress",
+      title: "Shipping Address",
+      //Use composite. prefix to get the "shippingSameAsBusiness" question inside the contentPanel
+      enableIf: "{composite.shippingSameAsBusiness} <> true",
+      isRequired: true,
+    },
+  ],
+  onInit() {
+    //Override titleLocation property attributes for "shippingaddress" class by making it invisible in property grid and change its default value
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "titleLocation",
+      visible: false,
+      default: "hidden",
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "title",
+      visible: false,
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "description",
+      visible: false,
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "hidenumber",
+      visible: false,
+    });
+  },
+  onLoaded(question) {
+    //Hide the title for component/root location
+    question.titleLocation = "hidden";
+    //Change the property value from "off" to "default" to get end-to-end numbering behavior
+    question.contentPanel.showQuestionNumbers = "default";
+    
+    var businessAddress = question.contentPanel.getQuestionByName(
+      "businessAddress"
+    );
+    var shippingAddress = question.contentPanel.getQuestionByName(
+      "shippingAddress"
+    );
+    var shippingSameAsBusiness = question.contentPanel.getQuestionByName(
+      "shippingSameAsBusiness"
+    );
+    //On changing business address value
+    businessAddress.valueChangedCallback = function () {
+      //If shipping address same as business is choosen then
+      if (shippingSameAsBusiness.value == true) {
+        shippingAddress.value = businessAddress.value;
+      }
+    };
+    //On changing address same as business
+    shippingSameAsBusiness.valueChangedCallback = function () {
+      // //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      shippingAddress.value =
+        shippingSameAsBusiness.value == true ? businessAddress.value : "";
+    };
+  },
+});
+
+```
