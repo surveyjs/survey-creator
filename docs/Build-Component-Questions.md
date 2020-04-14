@@ -414,7 +414,7 @@ Consider we need to create an order form using matrix dropdown question.
 
 <p align="center">
 
-![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-marix-dropdown.png?raw=true)
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dropdown.png?raw=true)
 
 _Matrix dropdown question as order table_
 </p>
