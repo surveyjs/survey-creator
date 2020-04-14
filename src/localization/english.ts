@@ -15,7 +15,7 @@ export var enStrings = {
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element",
+    drag: "Drag element"
   },
   //questionTypes
   qt: {
@@ -38,7 +38,7 @@ export var enStrings = {
     text: "Single Input",
     boolean: "Boolean",
     expression: "Expression (read-only)",
-    flowpanel: "Flow Panel",
+    flowpanel: "Flow Panel"
   },
   //Strings in Editor
   ed: {
@@ -173,8 +173,8 @@ export var enStrings = {
       expressionInvalid:
         "The logic expression is empty or invalid. Please correct it.",
       noOperationError: "Please, add at least one action.",
-      operationInvalid: "Please, fix problems in your action(s).",
-    },
+      operationInvalid: "Please, fix problems in your action(s)."
+    }
   },
   //Property names in table headers
   // pel: {
@@ -360,6 +360,18 @@ export var enStrings = {
     totalCurrency: "Total currency",
     totalFormat: "Total format",
 
+    // Header  adorner
+    logoPosition: "Logo position",
+    addLogo: "Add logo...",
+    changeLogo: "Change logo...",
+    logoPositions: {
+      none: "Remove logo",
+      left: "Left",
+      right: "Right",
+      top: "On the top",
+      bottom: "In the bottom"
+    },
+
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -393,7 +405,8 @@ export var enStrings = {
       validation: "Validation",
       cells: "Cells",
       showOnCompleted: "Show on Completed",
-      others: "Others",
+      logo: "Logo in Survey Title",
+      others: "Others"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -413,7 +426,7 @@ export var enStrings = {
     triggerSetValue: "to: ",
     triggerGotoName: "Go to the question:",
     triggerIsVariable: "Do not put the variable into the survey result.",
-    triggerRunExpressionEmpty: "Please enter a valid expression",
+    triggerRunExpressionEmpty: "Please enter a valid expression"
   },
   //Property values
   pv: {
@@ -473,7 +486,7 @@ export var enStrings = {
     page: "page",
     survey: "survey",
     onNextPage: "onNextPage",
-    onValueChanged: "onValueChanged",
+    onValueChanged: "onValueChanged"
   },
   //Operators
   op: {
@@ -488,7 +501,7 @@ export var enStrings = {
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",
-    lessorequal: "less or equals",
+    lessorequal: "less or equals"
   },
   //Embed window
   ew: {
@@ -504,12 +517,12 @@ export var enStrings = {
     loadFromServer: "Load Survey JSON from server",
     titleScript: "Scripts and styles",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript",
+    titleJavaScript: "JavaScript"
   },
   //Test Survey
   ts: {
     selectPage: "Select the page to test it:",
-    showInvisibleElements: "Show invisible elements",
+    showInvisibleElements: "Show invisible elements"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -517,7 +530,7 @@ export var enStrings = {
     expressionvalidator: "expression",
     numericvalidator: "numeric",
     regexvalidator: "regex",
-    textvalidator: "text",
+    textvalidator: "text"
   },
   triggers: {
     completetrigger: "complete survey",
@@ -525,14 +538,14 @@ export var enStrings = {
     copyvaluetrigger: "copy value",
     skiptrigger: "skip to question",
     runexpressiontrigger: "run expression",
-    visibletrigger: "change visibility (deprecated)",
+    visibletrigger: "change visibility (deprecated)"
   },
   //Properties
   p: {
     name: "name",
     title: {
       name: "title",
-      title: "Leave it empty, if it is the same as 'Name'",
+      title: "Leave it empty, if it is the same as 'Name'"
     },
 
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -687,8 +700,8 @@ export var enStrings = {
     hasNone: "hasNone",
     noneText: "noneText",
 
-    text: "text",
-  },
+    text: "text"
+  }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
 //editorLocalization.locales["en"] = enStrings;

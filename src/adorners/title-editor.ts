@@ -217,12 +217,13 @@ ko.components.register("title-editor", {
 });
 
 export var titleAdorner = {
+  surveyTitleEditable: true,
   pageTitleEditable: true,
   getMarkerClass: model => {
     if (
       typeof model.getType === "function" &&
-      model.getType() === "page" &&
-      !titleAdorner.pageTitleEditable
+      ((model.getType() === "page" && !titleAdorner.pageTitleEditable) ||
+        (model.getType() === "survey" && !titleAdorner.surveyTitleEditable))
     ) {
       return "";
     }
@@ -231,7 +232,7 @@ export var titleAdorner = {
   getElementName: model => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var placeholder =
-      model.getType() === "page"
+      model.getType() === "page" || model.getType() === "survey"
         ? editorLocalization.getString("pe.titlePlaceholder")
         : "";
     var decoration = document.createElement("span");
@@ -279,7 +280,7 @@ export var descriptionAdorner = {
   getElementName: model => "description",
   afterRender: (elements: HTMLElement[], model, editor) => {
     var placeholder =
-      model.getType() === "page"
+      model.getType() === "page" || model.getType() === "survey"
         ? editorLocalization.getString("pe.descriptionPlaceholder")
         : "";
     var decoration = document.createElement("span");
