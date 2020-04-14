@@ -407,3 +407,206 @@ Survey.ComponentCollection.Instance.add({
 });
 
 ```
+
+### Create order component using matrix dropdown
+
+Consider we need to create an order form using matrix dropdown question.
+
+<p align="center">
+
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-marix-dropdown.png?raw=true)
+
+_Matrix dropdown question as order table_
+</p>
+
+End-user can build it in SurveyJS Creator and he will get the following JSON:
+
+```javascript
+{
+    type: 'matrixdropdown',
+    name: 'food',
+    title: 'Please select items',
+    columns: [
+        {
+            name: 'price',
+            title: 'Price',
+            cellType: 'expression',
+            displayStyle: 'currency'
+        },
+        {
+            name: 'qty',
+            title: 'Qty',
+            cellType: 'dropdown',
+            optionsCaption: '0',
+            choices: [1, 2, 3, 4, 5]
+        },
+        {
+            name: 'total',
+            title: 'Total',
+            cellType: 'expression',
+            displayStyle: 'currency',
+            expression: '{row.qty} * {row.price}',
+            totalType: 'sum',
+            totalDisplayStyle: 'currency'
+        },
+    ],
+    rows: ['Steak', 'Salmon', 'Beer'],
+    defaultValue: {
+        Steak: { price: 23 },
+        Salmon: { price: 19 },
+        Beer: { price: 5 }
+    }
+}
+```
+
+Again, it requires relative deep knowledge of SurveyJS for building this survey. End-user must know about expression question and cell type, be able to create an expression ``{row.qty} * {row.price}``, know about total row in matrix and finally understand that he needs to use ``defaultValue`` property to define the price column.
+In other words, it requires knowledge and time to convert matrix dropdown into order question.
+Everything, that end-user needs, is to define the list of items to sell, their names and price and nothing more. The component question allows to bring this functionality into SurveyJS Creator.
+
+```javascript
+Survey.ComponentCollection.Instance.add({
+  name: "ordertable",
+  title: "Order Table",
+  questionJSON: {
+    type: "matrixdropdown",
+    columns: [
+      {
+        name: "price",
+        title: "Price",
+        cellType: "expression",
+        displayStyle: "currency",
+      },
+      {
+        name: "qty",
+        title: "Qty",
+        cellType: "dropdown",
+        optionsCaption: "0",
+        choices: [1, 2, 3, 4, 5],
+      },
+      {
+        name: "total",
+        title: "Total",
+        cellType: "expression",
+        displayStyle: "currency",
+        expression: "{row.qty} * {row.price}",
+        totalType: "sum",
+        totalDisplayStyle: "currency",
+      },
+    ],
+  },
+  onInit() {
+    //Create a new class derived from Survey.ItemValue
+    //It hides text, visibleIf and enableIf properties
+    //and it adds a new price number property.
+    Survey.Serializer.addClass(
+      "ordertableitem",
+      [
+        { name: "price:number", default: 0 },
+        { name: "text", visible: false },
+        { name: "visibleIf", visible: false },
+        { name: "enableIf", visible: false },
+      ],
+      //We create a standard Survey.ItemValue instance.
+      //The third parameter said that the actual type is "ordertableitem"
+      //SurveyJS will use properties definition from "ordertableitem" class
+      //and it will define "price" property for every new instance
+      function () {
+        return new Survey.ItemValue(null, null, "ordertableitem");
+      },
+      "itemvalue"
+    );
+    //Add orderItems properties. It is an array of ordertableitem elements
+    Survey.Serializer.addProperty("ordertable", {
+      name: "orderItems:ordertableitem[]",
+      category: "general",
+    });
+  },
+  onLoaded(question) {
+    //Create rows and default values on first loading
+    this.updateRowsAndValues(question);
+  },
+  //Create matrix rows using orderItems property
+  buildRows(question) {
+    var rows = [];
+    for (var i = 0; i < question.orderItems.length; i++) {
+      var item = question.orderItems[i];
+      if (!!item.value) {
+        rows.push(item.value);
+      }
+    }
+    question.contentQuestion.rows = rows;
+  },
+  //Build matrix default value using orderItems property
+  setDefaultValues(question) {
+    var defaultValue = {};
+    for (var i = 0; i < question.orderItems.length; i++) {
+      var item = question.orderItems[i];
+      if (!!item.value && !!item.price) {
+        defaultValue[item.value] = { price: item.price };
+      }
+    }
+    question.contentQuestion.defaultValue = defaultValue;
+  },
+  updateRowsAndValues(question) {
+    this.buildRows(question);
+    this.setDefaultValues(question);
+  },
+  //Calls on property changed in component/root question
+  onPropertyChanged(question, propertyName, newValue) {
+    if (propertyName == "orderItems") {
+      //Calls when orderItems array is changed: 
+      //new item is added or existing removed or elements order changed
+      //We need to rebuild rows and defaultValues
+      this.updateRowsAndValues(question);
+    }
+  },
+  //Calls when a property of ItemValue element is changed.
+  onItemValuePropertyChanged(question, options) {
+    //If the propertyName of the array is "orderItems"
+    if (options.propertyName == "orderItems") {
+      //If property name of ItemValue element is "value" then rebuild rows and defualtValues
+      if (options.name == "value") {
+        this.updateRowsAndValues(question);
+      }
+      //If property name of ItemValue element is "price" then rebuild defaultValues
+      if (options.name == "price") {
+        this.setDefaultValues(question);
+      }
+    }
+  },
+});
+```
+
+Now, end-user needs to define “orderItems” property only.
+
+<p align="center">
+
+![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-table-items.png?raw=true)
+
+_Order Items property_
+</p>
+
+
+
+The question JSON becomes readable and clean:
+
+```JavaScript
+{
+    "type": "ordertable",
+    "name": "q1",
+    "orderItems": [
+        {
+            "value": "Steak",
+            "price": 27
+        },
+        {
+            "value": "Salmon",
+            "price": 22
+        },
+        {
+            "value": "Beer",
+            "price": 5
+        }
+    ]
+}
+```
