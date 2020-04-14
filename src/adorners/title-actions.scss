@@ -4,13 +4,22 @@
   display: inline-block;
   position: absolute;
   max-width: 90%;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 10px;
+}
+
+.svda-title-action__show-hide {
+  vertical-align: top;
 }
 
 title-actions {
   display: inline-block;
   background-color: $secondary-bg-color;
+
+  .svda_action_separator.svda_action_separator {
+    margin-right: 10px;
+    border: none;
+  }
 }
 
 .svd_survey_header--hidden {

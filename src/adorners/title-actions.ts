@@ -74,15 +74,16 @@ export class TitleActionsViewModel {
         visible: ko.computed(() => survey.koShowHeader()),
         template: "action-separator"
       });
-      this.actions.push({
+      this.actions.push(<any>{
         name: "showSurveyTitle",
         visible: true,
         text: this.getLocString("pe.showTitle"),
+        className: "svda-title-action__show-hide",
         icon: ko.computed(() => {
           if (!survey.koShowHeader()) {
-            return "icon-actionshowtitle";
+            return "icon-arrow_down_10x10";
           }
-          return "icon-actionhidetitle";
+          return "icon-arrow_up_10x10";
         }),
         onClick: (survey: SurveyForDesigner) => {
           survey.koShowHeader(!survey.koShowHeader());
@@ -105,6 +106,10 @@ export class TitleActionsViewModel {
   }
 
   public getStyle(model: ISurveyObjectMenuItem) {
+    return ko.unwrap((<any>model).className) || "";
+  }
+
+  public getIcon(model: ISurveyObjectMenuItem) {
     if (!!model.icon) {
       return ko.unwrap(<any>model.icon);
     }
