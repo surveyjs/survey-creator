@@ -529,6 +529,7 @@ export class QuestionToolbox {
     if (!elementJson.type) {
       elementJson.type = json.name;
     }
+    var category = json.category ? json.category : "";
     var item = {
       name: json.name,
       iconName: iconName,
@@ -536,7 +537,7 @@ export class QuestionToolbox {
       tooltip: title,
       json: elementJson,
       isCopied: false,
-      category: "",
+      category: category,
     };
     this.itemsValue.push(item);
   }

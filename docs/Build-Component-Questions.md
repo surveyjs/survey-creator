@@ -12,6 +12,7 @@ Please note, this functionality comes with [v1.7.1](https://surveyjs.io/WhatsNew
   - [Override base question properties in component/root question](#override-properties-example)
   - [Create order table component using matrix dropdown](#order-table-example)
   - [Create order grid component using matrix dynamic](#order-grid-example)
+- [Component registration API](#api)
 
 <div id="simplicity"></div>
 
@@ -273,7 +274,7 @@ Survey.ComponentCollection.Instance.add({
       isRequired: true,
     },
   ],
-  onLoaded(question) {
+  onCreated(question) {
     var businessAddress = question.contentPanel.getQuestionByName(
       "businessAddress"
     );
@@ -292,16 +293,16 @@ Survey.ComponentCollection.Instance.add({
     };
     //On changing address same as business
     shippingSameAsBusiness.valueChangedCallback = function () {
-      // //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
       shippingAddress.value =
         shippingSameAsBusiness.value == true ? businessAddress.value : "";
     };
-  },
+  }
 });
 ```
 We changed ``enableIf`` expression for "shippingAddress" by replacing ``{shippingSameAsBusiness}`` with ``{composite.shippingSameAsBusiness}``. ``{shippingSameAsBusiness}`` is a root question in a survey, in our case we need to find the hidden question inside the contentPanel and prefix ``composite.`` tells SurveyJS that we are looking for a question inside the contentPanel of the component.
 
-The bigger change is removing triggers and replacing them with the code in ``onLoaded`` function. We can’t access survey triggers from our component. In fact, we can, but it is a bad practice, since we would break the encapsulation rule, the basic rule of a component world. The right approach is to write the code inside the ``onLoaded`` function. In this function we handle value changed callbacks for our “business address” and “shipping address same as business” and modify “shipping address” accordingly to our logic.
+The bigger change is removing triggers and replacing them with the code in ``onCreated`` function. We can’t access survey triggers from our component. In fact, we can, but it is a bad practice, since we would break the encapsulation rule, the basic rule of a component world. The right approach is to write the code inside the ``onCreated`` function. In this function we handle value changed callbacks for our “business address” and “shipping address same as business” and modify “shipping address” accordingly to our logic.
 
 Now, all an end-user needs is to drop the "Shipping Address" component from the toolbox and the job is done. The question JSON turns into two lines:
 
@@ -315,7 +316,7 @@ Now, all an end-user needs is to drop the "Shipping Address" component from the 
 
 ### Override base question properties in component/root question
 
-Let’s continue with “shipping address” component. We do not need a root title and it is better to have numbers on our content questions as they are part of survey end-to-end numbering. To deal with it, we must hide the question title for the component/root question and set a property for ``contentPanel``, so the questions inside the panel have numbers. We must add the following code into ``onLoaded`` function.
+Let’s continue with “shipping address” component. We do not need a root title and it is better to have numbers on our content questions as they are part of survey end-to-end numbering. To deal with it, we must hide the question title for the component/root question and set a property for ``contentPanel``, so the questions inside the panel have numbers. We must add the following code into ``onCreated`` function.
 
 ```javascript
 //Hide the title for component/root location
@@ -398,7 +399,7 @@ Survey.ComponentCollection.Instance.add({
       visible: false,
     });
   },
-  onLoaded(question) {
+  onCreated(question) {
     //Hide the title for component/root location
     question.titleLocation = "hidden";
     //Change the property value from "off" to "default" to get end-to-end numbering behavior
@@ -733,9 +734,7 @@ Survey.ComponentCollection.Instance.add({
         category: "general",
         });
     },
-    onLoaded(question) {
-        //Set choices to the 'item' column on first loading
-        this.updateItemsColumn(question);
+    onCreated(question) {
         //It has options as survey.onMatrixCellValueChanged event
         //We need to set price on changing the item
         question.contentQuestion.onCellValueChangedCallback = function (
@@ -763,7 +762,11 @@ Survey.ComponentCollection.Instance.add({
             options.cellQuestion.min = 1;
             options.cellQuestion.max = 20;
         }
-        };
+      };
+    },
+    onLoaded(question) {
+        //Set choices to the 'item' column on first loading
+        this.updateItemsColumn(question);
     },
     //Calls on property changed in component/root question
     onPropertyChanged(question, propertyName, newValue) {
@@ -810,7 +813,7 @@ As result, or SurveyJS Creator user will get the same experience with this "orde
 }
 ```
 
-However, End-user of the survey will see and experience the different UI.
+However, the survey UI and experience will be different.
 
 <p align="center">
 
@@ -819,4 +822,155 @@ However, End-user of the survey will see and experience the different UI.
 _Matrix dynamic question as order grid_
 </p>
 
+<div id="api"></div>
 
+## Component registration API
+
+To register a new component, you have to add to into ``Survey.ComponentCollection.Instance`` singleton a json with at least two attributes:
+* name - unique name accross all SurveyJS classes.
+* questionJSON or elementsJSON - a wrapper question JSON or the JSON list of elements (questions and panels).
+
+### The full list of parameters
+```JavaScript
+Survey.ComponentCollection.Instance.add({
+  /**
+   * Required attribute. Unique name in lower case.
+   */ 
+  name: "yourcomponentname",
+  /**
+   * Optional attribute. Toolbox use this value to display it as a text in toolbox item.
+   * If it is empty, then name is used.
+   */ 
+  title: title,
+  /**
+   * Optional attribute. If Toolbox has several categories then 
+   * this attribute defines in which category this component belongs.
+   */ 
+  category: category,
+  /**
+   * Optional attribute. Toolbox use it to show the icon in toolbox item.
+   * If it is empty, then Creator uses "icon-default" value.
+   */ 
+  iconName: iconName,
+  /**
+   * This attribute or elementsJSON or createQuestion()/createElements() function should not be empty. 
+   * Please note, only one of these two attributes and two functions is requried and expected.
+   * You need to use this attribute if you need just one question and you want to set-up it in JSON.
+   * This JSON creates dropdown with choices from 2020 till 1970.
+   */
+  questionJSON: {
+    type: "dropdown",
+    choicesMin: 1970,
+    choicesMax: 2020        
+    choicesOrder: "desc",
+  },
+  /**
+   * Use this attribute if you need several elements in your question and you want to set up them via JSON
+   * Please note, the array of elements is expected.
+   * This JSON creates two required questions, first and last names, on the same line.
+   */  
+  elementsJSON: [
+    { type: "text", name: "firstName", title: "First Name", isRequired: true },
+    { type: "text", name: "lastName", title: "Last Name", isRequired: true, startWithNewLine: false }
+  ],
+  /**
+   * The alternative to questionJSON, in case you want to create the question in code.
+   * This function creates dropdown with choices from 2020 till 1970.
+   */
+  createQuestion: function () {
+    let res = new Survey.QuestionDropdown("question");
+    res.choicesMin = 1970;
+    res.choicesMax = 2020;
+    res.choicesOrder = "desc";
+    return res;
+  },
+  /**
+   * The alternative to elementsJSON, in case you want to create elements in code.
+   * This function creates two required questions, first and last names, on the same line.
+   */
+  createElements: function (panel) {
+    let q = panel.addNewQuestion("text", "firstName");
+    q.title = "First Name";
+    q.isRequired = true;
+    q = panel.addNewQuestion("text", "lastName");
+    q.title = "First Name";
+    q.isRequired = true;
+    q.startWithNewLine = false;
+  },
+  /**
+   * SurveyJS calls this function one time on registing the component, after creating a new class.
+   * This example adds a new property into your component class.
+   */ 
+  onInit() {
+    Survey.Serializer.addProperty("yourcomponentname", {
+      name: "showMiddleName:boolean",
+      default: false,
+      category: "general",
+    });
+  },
+  /**
+   * You can use this function to set some properties or handle elements callbacks.
+   * SurveyJS calls onCreated right after the content question/panel has been created and added into the elements tree.
+   * The code in this examples copies value from "business address" into "shipping address" if "shipping same as business" is true.
+   */ 
+  onCreated: function (question) {
+    var businessAddress = question.contentPanel.getQuestionByName("businessAddress");
+    var shippingAddress = question.contentPanel.getQuestionByName("shippingAddress");
+    var shippingSameAsBusiness = question.contentPanel.getQuestionByName("shippingSameAsBusiness");
+    //On changing business address value
+    businessAddress.valueChangedCallback = function () {
+      //If shipping address same as business is choosen then
+      if (shippingSameAsBusiness.value == true) {
+        shippingAddress.value = businessAddress.value;
+      }
+    };
+    //On changing address same as business
+    shippingSameAsBusiness.valueChangedCallback = function () {
+      //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      shippingAddress.value =
+        shippingSameAsBusiness.value == true ? businessAddress.value : "";
+    };
+  },
+  /**
+   * You can use this function to setup some properties of your content question/elements based on properties of the component/root question.
+   * SurveyJS calls this function after the question is loaded from survey json.
+   */ 
+  onLoaded: function (question) {
+    //get middle question from the content panel
+    let middle = question.contentPanel.getQuestionByName("middleName");
+    if (!!middle) {
+      //Set visible property based on component/root question showMiddleName property
+      middle.visible = question.showMiddleName === true;
+    }
+  }
+  /**
+   * SurveyJS calls this function on a property change in the component/root question.
+   * This code reacts on changing "showMiddleName" property of the component and based on the value, show/hide the middle name question.
+   */ 
+  //
+  onPropertyChanged(question, propertyName, newValue) {
+    if (propertyName == "showMiddleName") {
+      //get middle question from the content panel
+      let middle = question.contentPanel.getQuestionByName("middleName");
+      if (!!middle) {
+        //Set visible property based on component/root question showMiddleName property
+        middle.visible = question.showMiddleName === true;
+      }
+    }
+  },
+  /**
+   * SurveyJS calls this function when a property of ItemValue element is changed.
+   */  
+  onItemValuePropertyChanged(question, options) {
+    //If the propertyName of the array is "orderItems"
+    if (options.propertyName == "orderItems") {
+      if (options.name == "value") {
+        //do something on value property change
+      }
+      if (options.name == "text") {
+        //do something on text property change
+      }
+    }
+
+});
+```
