@@ -244,7 +244,11 @@ export var enStrings = {
     valueName: "Value name",
     titleName: "Title name",
     titlePlaceholder: "Input title here",
+    surveyTitlePlaceholder: "Input survey title here",
+    pageTitlePlaceholder: "Input page title here",
     descriptionPlaceholder: "Enter a description",
+    surveyDescriptionPlaceholder: "Enter a survey description",
+    pageDescriptionPlaceholder: "Enter a page description",
 
     hasOther: "Has other item",
     otherText: "Other item text",
