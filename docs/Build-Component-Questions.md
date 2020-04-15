@@ -1,5 +1,4 @@
-# Draft document
-# Componets: Simplify and Enrich the functionality of your Survey Creator
+# Componets: Simplify and Enrich SurveyJS Creator functionality
 
 Please note, this functionality comes with [v1.7.1](https://surveyjs.io/WhatsNew#v1.7.1).
 
@@ -830,6 +829,7 @@ To register a new component, you have to add to into _Survey.ComponentCollection
 * questionJSON or elementsJSON - a wrapper question JSON or the JSON list of elements (questions and panels).
 
 ### The full list of parameters
+
 ```JavaScript
 Survey.ComponentCollection.Instance.add({
   /**
