@@ -829,6 +829,7 @@ To register a new component, you have to add to into _Survey.ComponentCollection
 * questionJSON or elementsJSON - a wrapper question JSON or the JSON list of elements (questions and panels).
 
 ### The full list of parameters
+
 ```JavaScript
 Survey.ComponentCollection.Instance.add({
   /**
