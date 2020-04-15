@@ -1,4 +1,3 @@
-# Draft document
 # Componets: Simplify and Enrich the functionality of your Survey Creator
 
 Please note, this functionality comes with [v1.7.1](https://surveyjs.io/WhatsNew#v1.7.1).
