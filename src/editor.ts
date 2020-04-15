@@ -31,6 +31,7 @@ import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./translation";
 import { SurveyLogic } from "./logic";
+import { Commands } from "./commands";
 
 /**
  * The toolbar item description.
@@ -793,6 +794,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public koCanUndo: any;
   public koCanRedo: any;
 
+  public commands: any;
+
   koIsShowDesigner: any;
   koViewType: any;
   koCanDeleteObject: any;
@@ -1077,6 +1080,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.render(renderedElement);
     }
 
+    const commands = new Commands(self);
+    self.commands = commands.getCommands();
     this.addToolbarItems();
   }
 
@@ -1096,120 +1101,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
 
   protected addToolbarItems() {
-    this.toolbarItems.push({
-      id: "svd-undo",
-      icon: "icon-actionundo",
-      visible: this.koIsShowDesigner,
-      enabled: this.koCanUndo,
-      action: this.doUndoClick,
-      title: this.getLocString("ed.undo"),
-    });
-    this.toolbarItems.push({
-      id: "svd-redo",
-      icon: "icon-actionredo",
-      visible: this.koIsShowDesigner,
-      enabled: this.koCanRedo,
-      action: this.doRedoClick,
-      title: this.getLocString("ed.redo"),
-    });
-    this.toolbarItems.push({
-      id: "svd-survey-settings",
-      icon: "icon-actionsettings",
-      visible: this.koIsShowDesigner,
-      enabled: true,
-      action: () => {
-        this.selectedElement = this.survey;
-        this.showQuestionEditor(this.survey);
-      },
-      title: this.getLocString("ed.settings"),
-    });
-    this.toolbarItems.push({
-      id: "svd-options",
-      visible: ko.computed(
-        () => this.koIsShowDesigner() && this.koShowOptions()
-      ),
-      title: this.getLocString("ed.options"),
-      template: "svd-toolbar-options",
-      items: ko.observableArray([
-        {
-          id: "svd-valid-json",
-          visible: true,
-          css: ko.computed(() => (this.koGenerateValidJSON() ? "active" : "")),
-          action: this.generateValidJSONClick,
-          title: this.getLocString("ed.generateValidJSON"),
-        },
-        {
-          id: "svd-readable-json",
-          visible: true,
-          css: ko.computed(() => (!this.koGenerateValidJSON() ? "active" : "")),
-          action: this.generateReadableJSONClick,
-          title: this.getLocString("ed.generateReadableJSON"),
-        },
-      ]),
-    });
-    this.toolbarItems.push({
-      id: "svd-test",
-      visible: ko.computed(() => this.koViewType() === "test"),
-      title: ko.computed(
-        () =>
-          this.getLocString("ed.testSurveyWidth") +
-          " " +
-          this.koTestSurveyWidth()
-      ),
-      template: "svd-toolbar-options",
-      items: ko.observableArray([
-        {
-          id: "svd-100-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("100%"),
-          title: "100%",
-        },
-        {
-          id: "svd-1200px-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("1200px"),
-          title: "1200px",
-        },
-        {
-          id: "svd-1000px-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("1000px"),
-          title: "1000px",
-        },
-        {
-          id: "svd-800px-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("800px"),
-          title: "800px",
-        },
-        {
-          id: "svd-600px-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("600px"),
-          title: "600px",
-        },
-        {
-          id: "svd-400px-json",
-          visible: true,
-          action: () => this.koTestSurveyWidth("400px"),
-          title: "400px",
-        },
-      ]),
-    });
-    this.toolbarItems.push({
-      id: "svd-save",
-      visible: this.koShowSaveButton,
-      action: this.saveButtonClick,
-      innerCss: "svd_save_btn",
-      title: this.getLocString("ed.saveSurvey"),
-    });
-    this.toolbarItems.push({
-      id: "svd-state",
-      visible: this.koShowState,
-      css: "svd_state",
-      innerCss: ko.computed(() => "icon-" + this.koState()),
-      title: ko.computed(() => this.getLocString("ed." + this.koState())),
-      template: "svd-toolbar-state",
+    const commands = this.commands;
+    Object.keys(commands).forEach((key) => {
+      let command = commands[key];
+      let toolbarItem = command.toolbar;
+      if (!toolbarItem) return;
+
+      if (!toolbarItem.action) {
+        toolbarItem.action = () => {
+          this.execute(command);
+        };
+      }
+
+      this.toolbarItems.push(toolbarItem);
     });
   }
 
@@ -1554,21 +1458,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Undo the latest user operation. Returns true if it performes successful.
    */
-  public undo(): boolean {
-    // if (!this.undoRedoManager.koCanUndo()) return false; TODO undoredo
-    // this.doUndoRedo(this.undoRedoManager.undo());
-    this.undoRedoManager.undo();
-    return true;
-  }
+  public undo = () => {
+    this.doUndoClick();
+  };
   /**
    * Redo the latest undo operation. Returns true if it performes successful.
    */
-  public redo(): boolean {
-    // if (!this.undoRedoManager.koCanRedo()) return false; TODO undoredo
-    // this.doUndoRedo(this.undoRedoManager.redo());
-    this.undoRedoManager.redo();
-    return true;
-  }
+  public redo = () => {
+    this.doRedoClick();
+  };
   private setUndoRedoCurrentState(clearState: boolean = false) {
     // if (clearState) { TODO undoredo
     //   this.undoRedoManager.clear();
@@ -2243,9 +2141,25 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * @param creator creator instance
    */
   public onKeyDownHandler(e, creator) {
-    var evtobj = window.event ? event : e;
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) creator.undo();
-    if (evtobj.keyCode == 89 && evtobj.ctrlKey) creator.redo();
+    const evtobj = window.event ? event : e;
+    const commands = creator.commands;
+    let command, hotKey;
+    Object.keys(creator.commands).forEach((key) => {
+      command = commands[key];
+      hotKey = command.hotKey;
+      if (!hotKey) return;
+      if (hotKey.ctrlKey !== evtobj.ctrlKey) return;
+      if (hotKey.keyCode !== evtobj.keyCode) return;
+
+      creator.execute(command);
+    });
+  }
+
+  public execute(command) {
+    const name = command.name;
+    if (!command || !name || !this[name] || typeof this[name] !== "function")
+      return;
+    return this[name].apply(this, [].slice.call(arguments, 1));
   }
   private onSurveyPropertyValueChangedCallback(
     name: string,
