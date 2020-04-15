@@ -232,7 +232,9 @@ export function createAfterRenderHandler(
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         if (surveyElement.parent) {
+          surveyElement.selectedOnClick = true;
           getSurvey(surveyElement)["selectedElement"] = surveyElement;
+          surveyElement.selectedOnClick = false;
         }
       }
     };
