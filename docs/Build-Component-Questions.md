@@ -81,6 +81,8 @@ By writing almost the same code as you do for register a new toolbox item, you w
 }
 ```
 
+Go to live [country component](https://surveyjs.io/Examples/Survey-Creator?id=component-country) example.
+
 <div id="fullname-example"></div>
 
 ### Full name, simple composite question
@@ -201,6 +203,7 @@ The JSON for this question adds one additional "showMiddleName" property, if the
     showMiddleName: true
 }
 ```
+Go to live [fullname component](https://surveyjs.io/Examples/Survey-Creator?id=component-fullname) example.
 
 <div id="expression-example"></div>
 
@@ -252,7 +255,7 @@ Let’s create the shipping address component.
 ```javascript
 Survey.ComponentCollection.Instance.add({
   name: "shippingaddress",
-  title: "ShippingAddress",
+  title: "Shipping Address",
   elementsJSON: [
     {
       type: "comment",
@@ -358,7 +361,7 @@ Finally, the component the code for component registration becomes the following
 ```javascript
 Survey.ComponentCollection.Instance.add({
   name: "shippingaddress",
-  title: "ShippingAddress",
+  title: "Shipping Address",
   elementsJSON: [
     {
       type: "comment",
@@ -432,6 +435,8 @@ Survey.ComponentCollection.Instance.add({
   },
 });
 ```
+Go to live [shippingaddress component](https://surveyjs.io/Examples/Survey-Creator?id=component-fullname) example.
+
 
 <div id="order-table-example"></div>
 
@@ -441,7 +446,7 @@ Consider we need to create an order form using matrix dropdown question.
 
 <p align="center">
 
-![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dropdown.png?raw=true)
+![Matrix dropdown question as order table](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dropdown.png?raw=true)
 
 _Matrix dropdown question as order table_
 </p>
@@ -610,7 +615,7 @@ Now, end-user needs to define “orderItems” property only.
 
 <p align="center">
 
-![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-table-items.png?raw=true)
+![Order Items property](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-table-items.png?raw=true)
 
 _Order Items property_
 </p>
@@ -637,6 +642,9 @@ The question JSON becomes readable and clean:
     ]
 }
 ```
+
+Go to live [ordertable component](https://surveyjs.io/Examples/Survey-Creator?id=component-ordertable) example.
+
 
 <div id="order-grid-example"></div>
 
@@ -710,10 +718,10 @@ Survey.ComponentCollection.Instance.add({
           "ordergriditem",
           [
               {
-              name: "price:number",
-              default: 0,
-              visible: true,
-              isSerializable: true,
+                name: "price:number",
+                default: 0,
+                visible: true,
+                isSerializable: true,
               },
               { name: "text", visible: false },
               { name: "visibleIf", visible: false },
@@ -732,33 +740,34 @@ Survey.ComponentCollection.Instance.add({
         Survey.Serializer.addProperty("ordergrid", {
           name: "orderItems:ordergriditem[]",
           category: "general",
+          visibleIndex: 3
         });
     },
     onCreated(question) {
-        //The options parameter of this callback function is same as options property survey.onMatrixCellValueChanged event
-        //We need to set price on changing the item
-        question.contentQuestion.onCellValueChangedCallback = function (options) {
-          //If cell in column 'item' is changed
-          if (options.columnName == "item") {
-              //get price question in this row
-              var priceQuestion = options.row.getQuestionByColumnName("price");
-              //get item question in this row
-              var itemQuestion = options.row.getQuestionByColumnName("item");
-              if (!!priceQuestion && !!itemQuestion) {
-                //Set price to the price question value
-                priceQuestion.value =
-                    itemQuestion.selectedItem != null
-                    ? itemQuestion.selectedItem.price
-                    : 0;
-              }
-          }
-        };
       //The options parameter of this callback function is same as options property survey.onMatrixCellCreated event
       //We need to set min/max properties for qty number question
       question.contentQuestion.onCellCreatedCallback = function (options) {
         if (options.columnName == "qty") {
             options.cellQuestion.min = 1;
             options.cellQuestion.max = 20;
+        }
+      };
+      //The options parameter of this callback function is same as options property survey.onMatrixCellValueChanged event
+      //We need to set price on changing the item
+      question.contentQuestion.onCellValueChangedCallback = function (options) {
+        //If cell in column 'item' is changed
+        if (options.columnName == "item") {
+            //get price question in this row
+            var priceQuestion = options.row.getQuestionByColumnName("price");
+            //get item question in this row
+            var itemQuestion = options.row.getQuestionByColumnName("item");
+            if (!!priceQuestion && !!itemQuestion) {
+              //Set price to the price question value
+              priceQuestion.value =
+                  itemQuestion.selectedItem != null
+                  ? itemQuestion.selectedItem.price
+                  : 0;
+            }
         }
       };
     },
@@ -815,10 +824,13 @@ However, the survey UI and experience will be different.
 
 <p align="center">
 
-![Survey Creator Adorners](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dynamic.png?raw=true)
+![Matrix dynamic question as order grid](https://github.com/surveyjs/survey-creator/blob/master/docs/images/order-matrix-dynamic.png?raw=true)
 
 _Matrix dynamic question as order grid_
 </p>
+
+Go to live [ordergrid component](https://surveyjs.io/Examples/Survey-Creator?id=component-ordergrid) example.
+
 
 <div id="api"></div>
 
@@ -905,6 +917,7 @@ Survey.ComponentCollection.Instance.add({
       name: "showMiddleName:boolean",
       default: false,
       category: "general",
+      visibleIndex: 3
     });
   },
   /**
