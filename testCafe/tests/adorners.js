@@ -69,26 +69,28 @@ test(`text change title`, async (t) => {
 test(`change page title`, async (t) => {
   const pageTitle = Selector(".svd_page")
     .find("span")
-    .withText("Input title here");
+    .withText("Input page title here");
   await t
     .click(`[title~=Dropdown]`)
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.title_editable > span:nth-child(1)`).innerText)
+    .expect(Selector(`.svd_page .title_editable > span:nth-child(1)`).innerText)
     .eql("puppies");
 });
 
 test(`change page description`, async (t) => {
   const pageTitle = Selector(".svd_page")
     .find("span")
-    .withText("Enter a description");
+    .withText("Enter a page description");
   await t
     .click(`[title~=Dropdown]`)
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.description_editable > span:nth-child(1)`).innerText)
+    .expect(
+      Selector(`.svd_page .description_editable > span:nth-child(1)`).innerText
+    )
     .eql("puppies");
 });
 
