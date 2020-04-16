@@ -58,18 +58,15 @@ QUnit.test("Add existing visible Items", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
-      { type: "text", name: "q2", visibleIf: "{q1}=1" }
-    ]
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
 QUnit.test("Add new operation immediately", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2" }
-    ]
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "Default is mode is view");
@@ -92,8 +89,8 @@ QUnit.test("Do not add expression question into visible Items", function(
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "expression", name: "q2", expression: "{q1}+1" }
-    ]
+      { type: "expression", name: "q2", expression: "{q1}+1" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 0, "There is not visible items");
@@ -108,8 +105,8 @@ QUnit.test("Add new item", function(assert) {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3" }
-    ]
+      { type: "text", name: "q3" },
+    ],
   });
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
@@ -170,8 +167,8 @@ QUnit.test("Edit existing item", function(assert) {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3} =1" },
-      { type: "text", name: "q3" }
-    ]
+      { type: "text", name: "q3" },
+    ],
   });
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
@@ -204,8 +201,8 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3}=1" },
       { type: "text", name: "q3", visibleIf: "{q2}=1" },
-      { type: "text", name: "q4" }
-    ]
+      { type: "text", name: "q4" },
+    ],
   });
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
@@ -257,8 +254,8 @@ QUnit.test("Remove same operations on save", function(assert) {
   survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2" }
-    ]
+      { type: "text", name: "q2" },
+    ],
   });
   logic = new SurveyLogic(survey);
   logic.editItem(logic.items[0]);
@@ -286,8 +283,8 @@ QUnit.test("Remove existing operation", function(assert) {
   survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2", visibleIf: "{q3}=1" }
-    ]
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+    ],
   });
   logic = new SurveyLogic(survey);
   logic.editItem(logic.items[0]);
@@ -303,8 +300,8 @@ QUnit.test("Remove existing item", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2", visibleIf: "{q3}=1" }
-    ]
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   logic.removeItem(logic.items[0]);
@@ -327,12 +324,12 @@ QUnit.test("Rename the name", function(assert) {
       {
         name: "page1",
         visibleIf: "{q2} != 2",
-        elements: [{ type: "text", name: "q1", enableIf: "{q2} > 2" }]
+        elements: [{ type: "text", name: "q1", enableIf: "{q2} > 2" }],
       },
       {
         name: "page2",
         visibleIf: "{Q1} != 1 and {q1} < 1",
-        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }]
+        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }],
       },
       {
         name: "page3",
@@ -347,18 +344,18 @@ QUnit.test("Rename the name", function(assert) {
                 type: "text",
                 name: "q3",
                 validators: [
-                  { type: "expressionvalidator", expression: "{q1} > 1" }
-                ]
-              }
-            ]
-          }
-        ]
+                  { type: "expressionvalidator", expression: "{q1} > 1" },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         name: "page4",
         elements: [
-          { type: "expression", name: "q4", expression: "{q1} + {q2}" }
-        ]
+          { type: "expression", name: "q4", expression: "{q1} + {q2}" },
+        ],
       },
       {
         name: "page5",
@@ -372,11 +369,11 @@ QUnit.test("Rename the name", function(assert) {
                 visibleIf: "{q1} = 1",
                 enableIf: "{q2} = 2",
                 requiredIf: "{q1} = 1",
-                totalExpression: "{q1} + {q2}"
-              }
-            ]
-          }
-        ]
+                totalExpression: "{q1} + {q2}",
+              },
+            ],
+          },
+        ],
       },
       {
         name: "page6",
@@ -384,15 +381,15 @@ QUnit.test("Rename the name", function(assert) {
           {
             type: "matrixdropdown",
             name: "q6",
-            rowsVisibleIf: "{item} = {q1}"
+            rowsVisibleIf: "{item} = {q1}",
           },
           {
             type: "matrix",
             name: "q7",
             rowsVisibleIf: "{item} = {q1}",
-            columnsVisibleIf: "{item} = {q2}"
-          }
-        ]
+            columnsVisibleIf: "{item} = {q2}",
+          },
+        ],
       },
       {
         name: "page7",
@@ -402,40 +399,42 @@ QUnit.test("Rename the name", function(assert) {
             name: "q8",
             choicesVisibleIf: "{item} = {q1}",
             choicesEnableIf: "{item} = {q2}",
-            choices: [{ value: 1, visibleIf: "{q1} = 1", enableIf: "{q2} = 2" }]
-          }
-        ]
-      }
+            choices: [
+              { value: 1, visibleIf: "{q1} = 1", enableIf: "{q2} = 2" },
+            ],
+          },
+        ],
+      },
     ],
     triggers: [
       {
         type: "runexpression",
         expression: "{q1} = 1",
-        runExpression: "{q2} + 1"
+        runExpression: "{q2} + 1",
       },
       {
         type: "complete",
-        expression: "{q1} = 1"
+        expression: "{q1} = 1",
       },
       {
         type: "copyvalue",
         expression: "{q1} = 1",
         setToName: "q1",
-        fromName: "q2"
-      }
+        fromName: "q2",
+      },
     ],
     completedHtmlOnCondition: [
       {
         expression: "{q1} = 1",
-        html: "text"
-      }
+        html: "text",
+      },
     ],
     calculatedValues: [
       {
         name: "var1",
-        expression: "{q1} = 1"
-      }
-    ]
+        expression: "{q1} = 1",
+      },
+    ],
   });
   var logic = new SurveyLogic(survey);
   var q1 = <Survey.Question>survey.getQuestionByName("q1");
@@ -587,7 +586,7 @@ QUnit.test("Rename the name", function(assert) {
 
 QUnit.test("Add new item with two triggers", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }]
+    elements: [{ type: "text", name: "q1" }],
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -607,11 +606,12 @@ QUnit.test("Add new item with two triggers", function(assert) {
   logic.removeOperation(op);
   assert.equal(
     logic.editableItem.operations.length,
-    0,
-    "There no operations in new item"
+    1,
+    "We are removing action and creatin a new one"
   );
+  op = logic.editableItem.operations[0];
+  assert.notOk(op.logicType, "There is no logic type");
   assert.equal(lt.visible, true, "Trigger logic type is visible again");
-  op = logic.addNewOperation();
   op.logicType = lt;
   logic.expressionEditor.koValue("{q1} = 2");
   assert.equal(survey.triggers.length, 0, "There is no triggers yet");
@@ -634,16 +634,16 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
       { type: "text", name: "q2", title: "Question 2" },
-      { type: "text", name: "q3", title: "Question 3" }
+      { type: "text", name: "q3", title: "Question 3" },
     ],
     triggers: [
       {
         type: "runexpression",
         expression: "{q1} = 1",
         runExpression: "{q2} + 1",
-        setToName: "q2"
-      }
-    ]
+        setToName: "q2",
+      },
+    ],
   });
   var options = new EditorOptionsTests();
   options.showTitlesInExpressions = true;
@@ -694,8 +694,8 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" }
-    ]
+      { type: "text", name: "q3" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -746,8 +746,8 @@ QUnit.test("Use survey creator options", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
-      { type: "text", name: "q2", title: "Question 2" }
-    ]
+      { type: "text", name: "q2", title: "Question 2" },
+    ],
   });
   var logic = new SurveyLogic(survey, options);
   logic.addNew();
@@ -768,10 +768,7 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   var options = new EditorOptionsTests();
   options.readOnly = true;
   var survey = new Survey.SurveyModel({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2" }
-    ]
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
   var logic = new SurveyLogic(survey, options);
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
@@ -796,48 +793,48 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
             elements: [
               {
                 type: "text",
-                name: "q5"
-              }
-            ]
-          }
-        ]
-      }
+                name: "q5",
+              },
+            ],
+          },
+        ],
+      },
     ],
     triggers: [
       {
         type: "complete",
-        expression: "{q1} = 1"
+        expression: "{q1} = 1",
       },
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2"
+        gotoName: "q2",
       },
       {
         type: "runexpression",
         expression: "{q1} = 1",
         runExpression: "{q2} + 1",
-        setToName: "q3"
+        setToName: "q3",
       },
       {
         type: "copyvalue",
         expression: "{q1} = 1",
         setToName: "q1",
-        fromName: "q2"
+        fromName: "q2",
       },
       {
         type: "setvalue",
         expression: "{q1} = 1",
         setToName: "q2",
-        setValue: "q2Value"
-      }
+        setValue: "q2Value",
+      },
     ],
     completedHtmlOnCondition: [
       {
         expression: "{q1} = 1",
-        html: "text"
-      }
-    ]
+        html: "text",
+      },
+    ],
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 1, "We have one item");
@@ -854,7 +851,7 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
     "trigger_copyvalue",
     "trigger_skip",
     "trigger_runExpression",
-    "completedHtmlOnCondition"
+    "completedHtmlOnCondition",
   ];
   assert.equal(
     ops.length,
@@ -908,10 +905,7 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
 
 QUnit.test("Logic editing errors", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2" }
-    ]
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -962,17 +956,17 @@ QUnit.test("Return without saving", function(assert) {
         elements: [
           { type: "text", name: "q1" },
           { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-          { type: "text", name: "q3" }
-        ]
-      }
+          { type: "text", name: "q3" },
+        ],
+      },
     ],
     triggers: [
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2"
-      }
-    ]
+        gotoName: "q2",
+      },
+    ],
   });
   var logic = new SurveyLogic(survey);
   var item = logic.items[0];
@@ -1006,17 +1000,17 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
         elements: [
           { type: "text", name: "q1" },
           { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-          { type: "text", name: "q3" }
-        ]
-      }
+          { type: "text", name: "q3" },
+        ],
+      },
     ],
     triggers: [
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2"
-      }
-    ]
+        gotoName: "q2",
+      },
+    ],
   };
   creator.showLogicEditor();
   var modifiedCounter = 0;
@@ -1041,8 +1035,8 @@ QUnit.test("Add existing visible Items", function(assert) {
     elements: [
       { type: "text", name: "q1", title: "My Question 1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3", visibleIf: "{q1}=1" }
-    ]
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+    ],
   });
   var options = new EditorOptionsTests();
   options.showTitlesInExpressions = true;
@@ -1059,8 +1053,8 @@ QUnit.test("Allow logic type to be null and change it", function(assert) {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3" }
-    ]
+      { type: "text", name: "q3" },
+    ],
   });
   var options = new EditorOptionsTests();
   var logic = new SurveyLogic(survey, options);
@@ -1084,8 +1078,8 @@ QUnit.test("One operation exists in new item", function(assert) {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" }
-    ]
+      { type: "text", name: "q3" },
+    ],
   });
   var options = new EditorOptionsTests();
   var logic = new SurveyLogic(survey, options);

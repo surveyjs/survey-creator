@@ -7,7 +7,7 @@ import { editorLocalization } from "./editorLocalization";
 import { ExpressionToDisplayText } from "./expressionToDisplayText";
 import {
   SurveyElementEditorContent,
-  SurveyQuestionEditor
+  SurveyQuestionEditor,
 } from "./questionEditors/questionEditor";
 
 export interface ISurveyLogicType {
@@ -495,7 +495,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           survey.pages.length > 1 &&
           SurveyLogic.hasNeededElements(survey.pages, "visibleIf")
         );
-      }
+      },
     },
     {
       name: "panel_visibility",
@@ -506,7 +506,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           survey.getAllPanels(),
           "visibleIf"
         );
-      }
+      },
     },
     {
       name: "panel_enable",
@@ -514,7 +514,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       propertyName: "enableIf",
       showIf: function(survey: Survey.SurveyModel) {
         return SurveyLogic.hasNeededElements(survey.getAllPanels(), "enableIf");
-      }
+      },
     },
     {
       name: "question_visibility",
@@ -525,7 +525,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           survey.getAllQuestions(),
           "visibleIf"
         );
-      }
+      },
     },
     {
       name: "question_enable",
@@ -536,7 +536,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           survey.getAllQuestions(),
           "enableIf"
         );
-      }
+      },
     },
     {
       name: "question_require",
@@ -547,43 +547,43 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           survey.getAllQuestions(),
           "requiredIf"
         );
-      }
+      },
     },
     {
       name: "expression_expression",
       baseClass: "expression",
       propertyName: "expression",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrixdropdowncolumn_visibleIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrixdropdowncolumn_enableIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "enableIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrixdropdowncolumn_requiredIf",
       baseClass: "matrixdropdowncolumn",
       propertyName: "requiredIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrixdropdowncolumn_totalExpression",
       baseClass: "matrixdropdowncolumn",
       propertyName: "totalExpression",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "trigger_complete",
       baseClass: "completetrigger",
       propertyName: "expression",
-      isUniqueItem: true
+      isUniqueItem: true,
     },
     {
       name: "trigger_setvalue",
@@ -599,7 +599,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           lt.formatElName(element["setToName"]),
           element["setValue"]
         );
-      }
+      },
     },
     {
       name: "trigger_copyvalue",
@@ -615,7 +615,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           lt.formatElName(element["setToName"]),
           lt.formatElName(element["fromName"])
         );
-      }
+      },
     },
     {
       name: "trigger_skip",
@@ -625,7 +625,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       isUniqueItem: true,
       getDisplayTextName: function(element: Survey.Base): string {
         return element["gotoName"];
-      }
+      },
     },
     {
       name: "trigger_runExpression",
@@ -645,7 +645,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           res += str["format"](lt.formatElName(element["setToName"]));
         }
         return res;
-      }
+      },
     },
     {
       name: "completedHtmlOnCondition",
@@ -669,68 +669,68 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
         if (survey.completedHtmlOnCondition.indexOf(item) < 0) {
           survey.completedHtmlOnCondition.push(item);
         }
-      }
+      },
     },
     {
       name: "trigger_runExpression_Expression",
       baseClass: "runexpressiontrigger",
       propertyName: "runExpression",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "question_expressionValidator",
       baseClass: "expressionvalidator",
       propertyName: "expression",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrix_rowsVisibleIf",
       baseClass: "matrix",
       propertyName: "rowsVisibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrix_columnsVisibleIf",
       baseClass: "matrix",
       propertyName: "columnsVisibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "matrixdropdown_rowsVisibleIf",
       baseClass: "matrixdropdown",
       propertyName: "rowsVisibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "select_choicesVisibleIf",
       baseClass: "selectbase",
       propertyName: "choicesVisibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "select_choicesEnableIf",
       baseClass: "selectbase",
       propertyName: "choicesEnableIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "itemvalue_visibleIf",
       baseClass: "itemvalue",
       propertyName: "visibleIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "itemvalue_enableIf",
       baseClass: "itemvalue",
       propertyName: "enableIf",
-      showInUI: false
+      showInUI: false,
     },
     {
       name: "calculatedValue",
       baseClass: "calculatedvalue",
       propertyName: "expression",
-      showInUI: false
-    }
+      showInUI: false,
+    },
   ];
   public koItems: any;
   public invisibleItems: Array<SurveyLogicItem> = [];
@@ -979,7 +979,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     return op;
   }
   public removeOperation(op: SurveyLogicOperation) {
+    if (!this.editableItem) return;
     this.editableItem.removeOperation(op);
+    if (this.editableItem.operations.length == 0) {
+      this.addNewOperation();
+    }
   }
   public getExpressionAsDisplayText(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
@@ -1114,7 +1118,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     Survey.Serializer.addProperty("survey", {
       name: "hiddenLogic:condition",
       visible: false,
-      isSerializable: false
+      isSerializable: false,
     });
     return Survey.Serializer.findProperty("survey", "hiddenLogic");
   }
