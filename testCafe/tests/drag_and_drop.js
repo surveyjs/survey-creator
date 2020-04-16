@@ -3,11 +3,12 @@ import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `drag and drop`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+  await ctx.resizeWindow(1920, 1080);
   await init();
 });
 
-test(`check d&d all toolbox elements`, async t => {
+test(`check d&d all toolbox elements`, async (t) => {
   const getQuestionsAddedCount = ClientFunction(
     () => document.querySelectorAll(".svd_container .svd_question ").length
   );
@@ -115,7 +116,7 @@ test(`check d&d all toolbox elements`, async t => {
   assert.equal(await getQuestionsAddedCount(), 17 + 1); //panel dynamic adds two questions that's why 17+1
 });
 
-test(`check drop to the bottom`, async t => {
+test(`check drop to the bottom`, async (t) => {
   const getQuestionsAddedCount = ClientFunction(
     () => document.querySelectorAll(".svd_container .svd_question ").length
   );
@@ -144,26 +145,25 @@ test(`check drop to the bottom`, async t => {
 
 const dragToTopConfig = {
   offsetY: 10,
-  destinationOffsetY: 100
+  destinationOffsetY: 30,
 };
 const dragToBottomConfig = {
   offsetY: -10,
-  destinationOffsetY: -50
+  destinationOffsetY: -30,
 };
 
-test("check change order of questions", async t => {
+test("check change order of questions", async (t) => {
   const getQuestionsOrder = ClientFunction(() => {
     var names = [];
     document
       .querySelectorAll(".svd_questions_editor .svd_question")
-      .forEach(questionTemplate => {
+      .forEach((questionTemplate) => {
         names.push(questionTemplate.getAttribute("name"));
       });
     return names;
   });
 
   await t.doubleClick(`[title~=Checkbox]`);
-
   await t.dragToElement(
     ".svd_questions_editor [name='question1']",
     ".svd_questions_editor",
@@ -182,7 +182,7 @@ const getQuestionsInPanel = ClientFunction(() => {
   return names;
 });
 
-test("check drop question from toolbox in panel", async t => {
+test("check drop question from toolbox in panel", async (t) => {
   await t.click(`[title=Panel]`);
   await t.dragToElement(
     `[title=Boolean]`,
@@ -192,7 +192,7 @@ test("check drop question from toolbox in panel", async t => {
   assert.deepEqual(await getQuestionsInPanel(), ["question1"]);
 });
 
-test("check drop question from toolbox to the bottom of panel", async t => {
+test("check drop question from toolbox to the bottom of panel", async (t) => {
   await t.click(`[title=Panel]`);
   await t.dragToElement(
     `[title=Boolean]`,
@@ -206,7 +206,7 @@ test("check drop question from toolbox to the bottom of panel", async t => {
   assert.equal((await getQuestionsInPanel()).length, 2);
 });
 
-test("check move question from panel to up", async t => {
+test("check move question from panel to up", async (t) => {
   await t.click("[title=Panel]");
   await t.dragToElement(
     "[title=Boolean]",
@@ -222,7 +222,7 @@ test("check move question from panel to up", async t => {
   assert.deepEqual(await getQuestionsInPanel(), []);
 });
 
-test("check move question from panel to bottom", async t => {
+test("check move question from panel to bottom", async (t) => {
   await t.click("[title=Panel]");
   await t.dragToElement(
     "[title=Boolean]",
@@ -238,7 +238,7 @@ test("check move question from panel to bottom", async t => {
   assert.deepEqual(await getQuestionsInPanel(), []);
 });
 
-test("check move question from survey to panel", async t => {
+test("check move question from survey to panel", async (t) => {
   await t.click("[title=Panel]");
   await t.click("[title=Checkbox]");
   await t.dragToElement(
@@ -249,7 +249,7 @@ test("check move question from survey to panel", async t => {
   assert.deepEqual(await getQuestionsInPanel(), ["question1"]);
 });
 
-test("check change order of questions in panel", async t => {
+test("check change order of questions in panel", async (t) => {
   await t.click("[title=Panel]");
   await t.dragToElement(
     `[title=Boolean]`,
@@ -258,13 +258,13 @@ test("check change order of questions in panel", async t => {
   await t.dragToElement(
     `[title=Boolean]`,
     ".svd_questions_editor .panel_actions",
-    dragToTopConfig
+    dragToBottomConfig
   );
   await t.dragToElement(
     ".svd_questions_editor [name=question1]",
     ".svd_questions_editor .panel_actions",
-    dragToTopConfig
+    dragToBottomConfig
   );
 
-  assert.deepEqual(await getQuestionsInPanel(), ["question1", "question2"]);
+  assert.deepEqual(await getQuestionsInPanel(), ["question2", "question1"]);
 });
