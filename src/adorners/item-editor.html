@@ -6,7 +6,7 @@
   >
     <input
       data-svd-info="adorner"
-      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }"
+      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }, attr: { maxLength: maxLength, 'aria-label': name }"
       style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
     />
     <span
@@ -19,6 +19,12 @@
       ></svg-icon>
     </span>
     <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
+  </span>
+  <span
+    class="svda-focusable"
+    tabindex="0"
+    data-bind="attr: { 'aria-label': getLocString('pe.keyboardAdornerTip') }"
+  >
   </span>
   <span
     class="svda-title-editor-content svda-title-editor-start"

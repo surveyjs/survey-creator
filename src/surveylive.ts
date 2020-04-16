@@ -45,16 +45,16 @@ export class SurveyLiveTester {
     device: "desktop",
     orientation: "l",
     // scale: 1,
-    considerDPI: true
+    considerDPI: true,
   };
   koActiveDevice = ko.observable("desktop");
   koDevices = ko.observableArray(
     Object.keys(simulatorDevices)
-      .filter(key => !!simulatorDevices[key].title)
-      .map(key => {
+      .filter((key) => !!simulatorDevices[key].title)
+      .map((key) => {
         return {
           text: simulatorDevices[key].title,
-          value: key
+          value: key,
         };
       })
   );
@@ -94,13 +94,13 @@ export class SurveyLiveTester {
       self.koSurvey(self.survey);
     });
     this.koSurvey = ko.observable(this.survey);
-    this.koActiveDevice.subscribe(newValue => {
+    this.koActiveDevice.subscribe((newValue) => {
       if (!!this.simulator) {
         this.simulatorOptions.device = newValue || "desktop";
         this.simulator.options(this.simulatorOptions);
       }
     });
-    this.koLandscapeOrientation.subscribe(newValue => {
+    this.koLandscapeOrientation.subscribe((newValue) => {
       if (!!this.simulator) {
         this.simulatorOptions.orientation = newValue ? "l" : "p";
         this.simulator.options(this.simulatorOptions);
@@ -129,7 +129,7 @@ export class SurveyLiveTester {
             item.data = addCollapsed(item.data || []);
           }
         });
-        return items.filter(item => !!item);
+        return items.filter((item) => !!item);
       };
       var plainData = self.survey.getPlainData({ includeEmpty: false });
       plainData = addCollapsed(plainData);
@@ -182,7 +182,7 @@ export class SurveyLiveTester {
         koDisabled: ko.observable(!page.isVisible),
         koActive: ko.observable(
           this.survey.state == "running" && page === this.survey.currentPage
-        )
+        ),
       });
     }
     if (!!options && options.showPagesInTestSurveyTab != undefined) {
@@ -203,7 +203,9 @@ export class SurveyLiveTester {
     this.koPages(pages);
     this.koSurvey(this.survey);
     this.koActivePage(this.survey.currentPage);
-    this.koActiveLanguage(this.survey.locale);
+    this.koActiveLanguage(
+      this.survey.locale || Survey.surveyLocalization.defaultLocale
+    );
     this.koIsRunning(true);
   }
   public getLocString(name: string) {
@@ -321,7 +323,7 @@ export class SurveyLiveTester {
       frameWidth: width * 1.33,
       frameHeight: height * 1.34,
       frameX: width * offsetRatioX,
-      frameY: height * offsetRatioY
+      frameY: height * offsetRatioY,
     };
   });
 }
@@ -330,7 +332,7 @@ export var DEFAULT_MONITOR_DPI = 102.69;
 export var simulatorDevices = {
   desktop: {
     deviceType: "desktop",
-    title: "Desktop"
+    title: "Desktop",
   },
   // desktop_1280x720: {
   //   cssPixelRatio: 1,
@@ -362,7 +364,7 @@ export var simulatorDevices = {
     width: 640,
     height: 960,
     deviceType: "phone",
-    title: "iPhone"
+    title: "iPhone",
   },
   iPhone5: {
     cssPixelRatio: 2,
@@ -370,7 +372,7 @@ export var simulatorDevices = {
     width: 640,
     height: 1136,
     deviceType: "phone",
-    title: "iPhone 5"
+    title: "iPhone 5",
   },
   iPhone6: {
     cssPixelRatio: 2,
@@ -378,7 +380,7 @@ export var simulatorDevices = {
     width: 750,
     height: 1334,
     deviceType: "phone",
-    title: "iPhone 6"
+    title: "iPhone 6",
   },
   iPhone6plus: {
     cssPixelRatio: 2,
@@ -386,7 +388,7 @@ export var simulatorDevices = {
     width: 1080,
     height: 1920,
     deviceType: "phone",
-    title: "iPhone 6 Plus"
+    title: "iPhone 6 Plus",
   },
   iPhone8: {
     cssPixelRatio: 2,
@@ -394,7 +396,7 @@ export var simulatorDevices = {
     width: 750,
     height: 1334,
     deviceType: "phone",
-    title: "iPhone 8"
+    title: "iPhone 8",
   },
   iPhone8plus: {
     cssPixelRatio: 2,
@@ -402,7 +404,7 @@ export var simulatorDevices = {
     width: 1080,
     height: 1920,
     deviceType: "phone",
-    title: "iPhone 8 Plus"
+    title: "iPhone 8 Plus",
   },
   iPhoneX: {
     cssPixelRatio: 2,
@@ -410,7 +412,7 @@ export var simulatorDevices = {
     width: 1125,
     height: 2436,
     deviceType: "phone",
-    title: "iPhone X"
+    title: "iPhone X",
   },
   iPhoneXmax: {
     cssPixelRatio: 2,
@@ -418,7 +420,7 @@ export var simulatorDevices = {
     width: 1242,
     height: 2688,
     deviceType: "phone",
-    title: "iPhone X Max"
+    title: "iPhone X Max",
   },
   iPad: {
     cssPixelRatio: 2,
@@ -426,7 +428,7 @@ export var simulatorDevices = {
     width: 1536,
     height: 2048,
     deviceType: "tablet",
-    title: "iPad"
+    title: "iPad",
   },
   iPadMini: {
     cssPixelRatio: 1,
@@ -434,7 +436,7 @@ export var simulatorDevices = {
     width: 768,
     height: 1024,
     deviceType: "tablet",
-    title: "iPad Mini"
+    title: "iPad Mini",
   },
   iPadPro: {
     cssPixelRatio: 1,
@@ -442,7 +444,7 @@ export var simulatorDevices = {
     width: 1688,
     height: 2388,
     deviceType: "tablet",
-    title: 'iPad Pro 11"'
+    title: 'iPad Pro 11"',
   },
   iPadPro13: {
     cssPixelRatio: 1,
@@ -450,7 +452,7 @@ export var simulatorDevices = {
     width: 2048,
     height: 2732,
     deviceType: "tablet",
-    title: 'iPad Pro 12,9"'
+    title: 'iPad Pro 12,9"',
   },
   androidPhone: {
     cssPixelRatio: 2,
@@ -458,7 +460,7 @@ export var simulatorDevices = {
     width: 720,
     height: 1280,
     deviceType: "phone",
-    title: "Android Phone"
+    title: "Android Phone",
   },
   androidTablet: {
     cssPixelRatio: 1.5,
@@ -466,7 +468,7 @@ export var simulatorDevices = {
     width: 800,
     height: 1280,
     deviceType: "tablet",
-    title: "Android Tablet"
+    title: "Android Tablet",
   },
   win10Phone: {
     cssPixelRatio: 1,
@@ -474,7 +476,7 @@ export var simulatorDevices = {
     width: 330,
     height: 568,
     deviceType: "phone",
-    title: "Windows 10 Phone"
+    title: "Windows 10 Phone",
   },
   msSurface: {
     cssPixelRatio: 1,
@@ -482,11 +484,11 @@ export var simulatorDevices = {
     width: 768,
     height: 1366,
     deviceType: "tablet",
-    title: "MS Surface"
+    title: "MS Surface",
   },
   genericPhone: {
     cssPixelRatio: 1,
     deviceType: "phone",
-    title: ""
-  }
+    title: "",
+  },
 };

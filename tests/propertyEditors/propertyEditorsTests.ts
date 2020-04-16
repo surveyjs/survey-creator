@@ -5,13 +5,13 @@ import {
   SurveyQuestionEditor,
   SurveyElementEditorContent,
   SurveyQuestionEditorTab,
-  SurveyQuestionProperties
+  SurveyQuestionProperties,
 } from "../../src/questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "../../src/propertyEditors/propertyItemValuesEditor";
 import {
   SurveyNestedPropertyEditorEditorCell,
   SurveyNestedPropertyEditorItem,
-  SurveyNestedPropertyEditorColumn
+  SurveyNestedPropertyEditorColumn,
 } from "../../src/propertyEditors/propertyNestedPropertyEditor";
 import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
 
@@ -30,14 +30,17 @@ import { Extentions } from "../../src/extentions";
 import {
   SurveyPropertyEditorFactory,
   SurveyDropdownPropertyEditor,
-  SurveyStringPropertyEditor
+  SurveyStringPropertyEditor,
 } from "../../src/propertyEditors/propertyEditorFactory";
 import {
   defaultStrings,
-  editorLocalization
+  editorLocalization,
 } from "../../src/editorLocalization";
 import { SurveyPropertyConditionEditor } from "../../src/propertyEditors/propertyConditionEditor";
-import { SurveyPropertyDefaultValueEditor } from "../../src/propertyEditors/propertyDefaultValueEditor";
+import {
+  SurveyPropertyDefaultValueEditor,
+  SurveyPropertySetEditor,
+} from "../../src/propertyEditors/propertyDefaultValueEditor";
 import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
 
 export default QUnit.module("PropertyEditorsTests");
@@ -85,11 +88,11 @@ function createSurvey(): Survey.Survey {
             choices: [
               "one",
               { value: "two", text: "second value" },
-              { value: 3, text: "third value" }
+              { value: 3, text: "third value" },
             ],
-            type: "checkbox"
-          }
-        ]
+            type: "checkbox",
+          },
+        ],
       },
       { name: "page2", questions: [{ name: "question3", type: "comment" }] },
       {
@@ -99,12 +102,12 @@ function createSurvey(): Survey.Survey {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
             rows: ["Row 1", "Row 2"],
-            type: "matrix"
+            type: "matrix",
           },
-          { name: "question5", type: "rating" }
-        ]
-      }
-    ]
+          { name: "question5", type: "rating" },
+        ],
+      },
+    ],
   });
 }
 
@@ -130,7 +133,7 @@ QUnit.test("Create correct property editor", function(assert) {
     "textitems",
     "triggers",
     "validators",
-    "restfull"
+    "restfull",
   ];
   var property = new Survey.JsonObjectProperty("testname");
   for (var i = 0; i < propertyTypes.length; i++) {
@@ -176,7 +179,7 @@ QUnit.test("Create custom property editor", function(assert) {
       editor.onValueChangedCallback = function(newValue) {
         propertyValue = newValue;
       };
-    }
+    },
   };
   Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
@@ -201,7 +204,7 @@ QUnit.test(
     var widgetJSON = {
       render: function(editor, el) {
         renderCount++;
-      }
+      },
     };
     Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
     var property = new Survey.JsonObjectProperty("testname");
@@ -225,7 +228,7 @@ QUnit.test("Custom property editor - validation", function(assert) {
       if (newValue.length < 2) return "Length is less than 2";
       if (newValue.length > 5) return "Length is more than 5";
       return null;
-    }
+    },
   };
   Extentions.registerCustomPropertyEditor("customVal", widgetJSON);
   var property = new Survey.JsonObjectProperty("testname");
@@ -301,7 +304,7 @@ QUnit.test("SurveyPropertyItemValue", function(assert) {
   question.choices = [
     { value: 1, text: "item1" },
     { value: 2, text: "item2" },
-    { value: 3, text: "item3" }
+    { value: 3, text: "item3" },
   ];
   var itemValueProperty = new SurveyPropertyItemValuesEditorForTests();
   itemValueProperty.object = question;
@@ -563,9 +566,9 @@ QUnit.test(
         {
           type: "checkbox",
           name: "q1",
-          choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }]
-        }
-      ]
+          choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }],
+        },
+      ],
     });
     survey.locale = "de";
     var q = <Survey.QuestionCheckbox>survey.getQuestionByName("q1");
@@ -686,12 +689,75 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
   Survey.Serializer.removeProperty("itemvalue", "myImageLink");
 });
 
+/* TODO should be fixed in library
+QUnit.test("SurveyPropertyItemValue override properties", function(assert) {
+  Survey.Serializer.addProperty("itemvalue", {
+    name: "price:number",
+    visible: false,
+    isSerializable: false,
+  });
+  Survey.Serializer.addClass(
+    "ordergriditem",
+    [
+      {
+        name: "price:number",
+        default: 0,
+        isSerializable: true,
+      },
+      { name: "text", visible: false },
+      { name: "visibleIf", visible: false },
+      { name: "enableIf", visible: false },
+    ],
+    function() {
+      return new Survey.ItemValue(null, null, "ordergriditem");
+    },
+    "itemvalue"
+  );
+  Survey.Serializer.addProperty("text", "orderItems:ordergriditem[]");
+  var question = new Survey.QuestionText("q1");
+  var item = new Survey.ItemValue("item1", null, "ordergriditem");
+  item.price = 20;
+  question.orderItems.push(item);
+
+  var propertyEditor: SurveyPropertyItemValuesEditor = new SurveyPropertyItemValuesEditorForTests();
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    2,
+    "There are two columns value + text"
+  );
+  assert.equal(
+    propertyEditor.columns[1].text,
+    "Text",
+    "Set the correct text title"
+  );
+  propertyEditor = new SurveyPropertyItemValuesEditor(
+    Survey.Serializer.findProperty("text", "orderItems")
+  );
+  propertyEditor.object = question;
+  propertyEditor.beforeShow();
+  assert.equal(
+    propertyEditor.columns.length,
+    2,
+    "There are two columns value + price"
+  );
+  assert.equal(
+    propertyEditor.columns[1].text,
+    "Price",
+    "Set the correct price title"
+  );
+
+  Survey.Serializer.removeProperty("text", "orderItems");
+  Survey.Serializer.removeClass("ordergriditem");
+  Survey.Serializer.removeProperty("itemvalue", "price");
+});
+*/
 QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   assert
 ) {
   Survey.Serializer.addProperty("itemvalue", "description");
   SurveyQuestionEditorDefinition.definition["checkbox@choices"] = {
-    properties: ["value", "text"]
+    properties: ["value", "text"],
   };
 
   var qRadio = new Survey.QuestionRadiogroup("q1");
@@ -752,7 +818,7 @@ QUnit.test("SurveyPropertyItemValue columns new localizable property", function(
 ) {
   Survey.Serializer.addProperty("itemvalue", {
     name: "description",
-    isLocalizable: true
+    isLocalizable: true,
   });
   var qRadio = new Survey.QuestionRadiogroup("q1");
   qRadio.choices = ["item1", "item2"];
@@ -1009,8 +1075,8 @@ QUnit.test("SurveyPropertyMultipleValuesEditor", function(assert) {
     choices: [
       { value: 1, text: "Item 1" },
       { value: 2, text: "Item 2" },
-      { value: 3, text: "Item 3" }
-    ]
+      { value: 3, text: "Item 3" },
+    ],
   });
   var property = Survey.Serializer.findProperty("question", "multiple");
   var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
@@ -1073,7 +1139,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns change columns", function(
   SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = [
     "cellType",
     "name",
-    "readOnly"
+    "readOnly",
   ];
 
   var columns: Array<Survey.MatrixDropdownColumn> = [];
@@ -1490,6 +1556,48 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
 });
 
+QUnit.test("'set' property editor", function(assert) {
+  Survey.Serializer.addProperty("survey", {
+    name: "region:set",
+    choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
+  });
+  var survey = createSurvey();
+  var setValueEditor = new SurveyPropertySetEditor(
+    Survey.Serializer.findProperty("survey", "region")
+  );
+  setValueEditor.object = survey;
+  setValueEditor.beforeShow();
+  var question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 5, "There are 5 choices");
+  Survey.Serializer.removeProperty("survey", "region");
+});
+
+QUnit.test("'set' property editor, get choices on callback, Bug#720", function(
+  assert
+) {
+  var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+  var callback = null;
+  Survey.Serializer.addProperty("survey", {
+    name: "region:set",
+    choices: function(obj, choicesCallback) {
+      callback = choicesCallback;
+      return [];
+    },
+  });
+  var survey = createSurvey();
+  var setValueEditor = new SurveyPropertySetEditor(
+    Survey.Serializer.findProperty("survey", "region")
+  );
+  setValueEditor.object = survey;
+  setValueEditor.beforeShow();
+  var question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 0, "There is no choices yet");
+  callback(choices);
+  question = setValueEditor.koSurvey().getAllQuestions()[0];
+  assert.deepEqual(question.choices.length, 5, "There are 5 choices now");
+  Survey.Serializer.removeProperty("survey", "region");
+});
+
 QUnit.test("Validators property editor", function(assert) {
   var survey = createSurvey();
   var validator = new Survey.NumericValidator(10, 100);
@@ -1606,7 +1714,7 @@ QUnit.test("minValue doesn't work when it is 0, Bug #687", function(assert) {
     minValue: 0,
     maxValue: 5,
     category: "validation",
-    visibleIndex: 0
+    visibleIndex: 0,
   });
 
   var question = new Survey.QuestionText("q1");
@@ -1688,9 +1796,9 @@ QUnit.test("SurveyPropertyMultipleValuesEditor - categories ", function(
         { value: 6, text: "item 6", category: "category 2" },
         { value: 1, text: "item 1" },
         { value: 3, text: "item 3", category: "category 1" },
-        { value: 2, text: "item 2" }
+        { value: 2, text: "item 2" },
       ];
-    }
+    },
   });
   var property = Survey.Serializer.findProperty("question", "multiple");
 
@@ -1747,7 +1855,7 @@ QUnit.test("SurveyPropertyItemValuesEditor + item.koShowDetails", function(
   var tabs =
     SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
-    { name: "general", visible: false }
+    { name: "general", visible: false },
   ];
   propEditor.beforeShow();
   itemViewModel = propEditor.createItemViewModel(q.choices[0]);
@@ -1815,6 +1923,9 @@ QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function(assert) {
     "There are several editable columns, we are rendering header"
   );
   Survey.Serializer.findProperty("itemvalue", "text").visible = false;
+  propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property)
+  );
   propEditor.beforeShow();
   assert.equal(
     propEditor.koShowHeader(),

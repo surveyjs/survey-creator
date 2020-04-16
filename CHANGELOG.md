@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/surveyjs/survey-creator/compare/v1.5.19...v1.7.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* Condition Editor could not parse expression with calculated values and unary operator [#740](https://github.com/surveyjs/survey-creator/issues/740) ([d2ef8a9](https://github.com/surveyjs/survey-creator/commit/d2ef8a9be2e1d5a6417b8dbd53a7a0d5bd4e6645))
+
+### [1.5.19](https://github.com/surveyjs/survey-creator/compare/v1.5.18...v1.5.19) (2020-04-07)
+
+
+### Bug Fixes
+
+* "set" property editor doesn't support ajax request for getting choices [#720](https://github.com/surveyjs/survey-creator/issues/720) ([7deab97](https://github.com/surveyjs/survey-creator/commit/7deab9738f89fd27eec3d8c02030aae317d28320))
+
+### [1.5.18](https://github.com/surveyjs/survey-creator/compare/v1.5.17...v1.5.18) (2020-03-31)
+
 ### [1.5.17](https://github.com/surveyjs/survey-creator/compare/v1.5.16...v1.5.17) (2020-03-25)
 
 ### [1.5.16](https://github.com/surveyjs/survey-creator/compare/v1.5.15...v1.5.16) (2020-03-18)

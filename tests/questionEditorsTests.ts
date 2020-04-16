@@ -3,6 +3,7 @@ import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
   SurveyQuestionEditorTab,
+  SurveyElementEditorContent,
   SurveyElementEditorContentNoCategries
 } from "../src/questionEditors/questionEditor";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
@@ -11,6 +12,7 @@ import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEdi
 import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/propertyMultipleValuesEditor";
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
+import { SurveyPropertyDefaultValueEditor } from "../src/propertyEditors/propertyDefaultValueEditor";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -1000,7 +1002,7 @@ QUnit.test("Add property into new cagetory", function(assert) {
   });
   var creator = new SurveyCreator();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
-  var editor = new SurveyQuestionEditor(question);
+  var editor = new SurveyElementEditorContent(question);
   var newTab = editor.getTabByName("newcategory");
   assert.ok(newTab, "newcategory is here");
   assert.ok(
@@ -1025,3 +1027,43 @@ QUnit.test("Add property into new cagetory", function(assert) {
   Survey.Serializer.removeProperty("question", "name2");
   Survey.Serializer.removeProperty("question", "name3");
 });
+
+QUnit.test("Modal property, showBefore call on demand", function(assert) {
+  var options = new EditorOptionsTests();
+  var question = new Survey.QuestionText("q1");
+  var editor = new SurveyElementEditorContent(question, "", options);
+  var defaulValueEditor = <SurveyPropertyDefaultValueEditor>(
+    editor.getPropertyEditorByName("defaultValue").editor
+  );
+  assert.equal(
+    defaulValueEditor.isBeforeShowCalled,
+    false,
+    "Before show is not called if it was not shown yet"
+  );
+  editor.getTabByName("data").expand();
+  assert.equal(
+    defaulValueEditor.isBeforeShowCalled,
+    true,
+    "Property is show, beforeShow should be called"
+  );
+});
+QUnit.test(
+  "Modal property, showBefore call on demand, No categories demands immediately",
+  function(assert) {
+    var options = new EditorOptionsTests();
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyElementEditorContentNoCategries(
+      question,
+      "",
+      options
+    );
+    var defaulValueEditor = <SurveyPropertyDefaultValueEditor>(
+      editor.getPropertyEditorByName("defaultValue").editor
+    );
+    assert.equal(
+      defaulValueEditor.isBeforeShowCalled,
+      true,
+      "Before show was called"
+    );
+  }
+);

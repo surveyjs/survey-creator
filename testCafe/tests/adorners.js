@@ -3,18 +3,18 @@ import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `adorners`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 
-test(`dropdown change item values`, async t => {
+test(`dropdown change item values`, async (t) => {
   await t
     .click(`[title~=Dropdown]`)
     .click(`.item_editable.item_draggable>span`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.item_editable.item_draggable>span`).innerText)
-    .eql("item1puppies");
+    .eql("puppies");
 
   const choicesTab = Selector(".svd_object_editor span").withText("Choices");
   const hasOtherCheckbox = Selector(".svd_object_editor")
@@ -41,7 +41,7 @@ test(`dropdown change item values`, async t => {
         `.svda-select-items-editor .svda-select-items-collection+.item_editable > span:first-child`
       ).innerText
     )
-    .eql("Other (describe)puppiesOther");
+    .eql("puppiesOther");
   //.debug()
   //.wait(3000);
 });
@@ -53,46 +53,48 @@ test(`dropdown change item values`, async t => {
 //     .typeText(`input:focus`, `puppies`)
 //     .click(`input:focus+span.svda-edit-button`)
 //     .expect(Selector(`.label_editable > span`).innerText)
-//     .eql("question1puppies");
+//     .eql("puppies");
 // });
 
-test(`text change title`, async t => {
+test(`text change title`, async (t) => {
   await t
     .click(`[title="Single Input"]`)
     .click(`.title_editable > span:nth-child(3)`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`h5.title_editable > span:nth-child(2)`).innerText)
-    .eql("question1puppies");
+    .eql("puppies");
 });
 
-test(`change page title`, async t => {
+test(`change page title`, async (t) => {
   const pageTitle = Selector(".svd_page")
     .find("span")
-    .withText("Input title here");
+    .withText("Input page title here");
   await t
     .click(`[title~=Dropdown]`)
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.title_editable > span:nth-child(1)`).innerText)
+    .expect(Selector(`.svd_page .title_editable > span:nth-child(1)`).innerText)
     .eql("puppies");
 });
 
-test(`change page description`, async t => {
+test(`change page description`, async (t) => {
   const pageTitle = Selector(".svd_page")
     .find("span")
-    .withText("Enter a description");
+    .withText("Enter a page description");
   await t
     .click(`[title~=Dropdown]`)
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.description_editable > span:nth-child(1)`).innerText)
+    .expect(
+      Selector(`.svd_page .description_editable > span:nth-child(1)`).innerText
+    )
     .eql("puppies");
 });
 
-test(`dropdown work with other`, async t => {
+test(`dropdown work with other`, async (t) => {
   await t
     .click(`[title~=Dropdown]`)
     .click(`.svda-add-new-item.svda-add-custom-item`)
@@ -101,7 +103,7 @@ test(`dropdown work with other`, async t => {
     .typeText(`input:focus`, `other puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.item_editable:not(.item_draggable)>span`).innerText)
-    .eql("Other (describe)other puppies")
+    .eql("other puppies")
     .click(`.item_editable:not(.item_draggable) .svda-delete-item`)
     .expect(Selector(`.item_editable:not(.item_draggable)>span`).exists)
     .notOk();
@@ -109,7 +111,7 @@ test(`dropdown work with other`, async t => {
   //.wait(3000);
 });
 
-test(`checkbox work with other/select all/none`, async t => {
+test(`checkbox work with other/select all/none`, async (t) => {
   await t
     .click(`[title~=Checkbox]`)
     .expect(
@@ -173,7 +175,7 @@ test(`checkbox work with other/select all/none`, async t => {
   // .debug()
   // .wait(3000);
 });
-test(`dropdown readonly`, async t => {
+test(`dropdown readonly`, async (t) => {
   const makeEditorReadOnly = ClientFunction(() => {
     creator.readOnly = true;
     creator.text = `{

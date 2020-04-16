@@ -80,17 +80,23 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   public resetText(): string {
     return editorLocalization.getString("pe.reset");
   }
+  public refreshText(): string {
+    return editorLocalization.getString("pe.refresh");
+  }
   public resetValue(model: SurveyPropertyDefaultValueEditor) {
     model
       .koSurvey()
       .clearValue(SurveyPropertyDefaultValueEditor.defaultQuestionName);
   }
+  public refreshSurvey(model: SurveyPropertyDefaultValueEditor) {
+    model.createSurvey();
+  }
   public getValueText(value: any): string {
     if (!value) return editorLocalization.getString("pe.empty");
     return JSON.stringify(value);
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.createSurvey();
   }
   public get editorType(): string {
@@ -255,7 +261,7 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
     var hasTagbox = !!Survey.Serializer.findClass("tagbox");
     question.hasSelectAll = !hasTagbox;
     if (!!this.property) {
-      question.choices = this.property.getChoices(this.object);
+      question.choices = this.getPropertyChoices();
     }
     var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
       question,
@@ -265,6 +271,18 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
       json.type = "tagbox";
     }
     return json;
+  }
+  private setChoices(choices: Array<any>) {
+    var survey = this.koSurvey();
+    if (!survey || survey.getAllQuestions().length > 1) return;
+    survey.getAllQuestions()[0].choices = choices;
+  }
+  private getPropertyChoices(): Array<any> {
+    if (!this.property) return [];
+    var self = this;
+    return this.property.getChoices(this.object, function(choices: any) {
+      self.setChoices(choices);
+    });
   }
 }
 

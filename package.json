@@ -1,5 +1,5 @@
 {
-  "version": "1.5.17",
+  "version": "1.7.1",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#BuildSurvey",
@@ -20,14 +20,14 @@
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build_dev": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType dev",
     "build_prod": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType prod --env.libraryName SurveyCreator && webpack --env.buildType dev && webpack --env.buildType prod",
-    "watch_dev": "webpack --env.buildType dev --watch"
+    "watch_dev": "webpack --env.buildType dev --env.libraryName SurveyCreator --watch"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "knockout": "^3.5.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.5.17"
+    "survey-knockout": "^1.7.1"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
@@ -51,7 +51,7 @@
     "html-loader": "0.4.4",
     "http-server": "0.12.1",
     "husky": "^1.2.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-junit-reporter": "1.0.0",

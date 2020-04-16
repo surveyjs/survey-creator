@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyTextEditor } from "./propertyModalEditor";
 import {
   SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
+  ISurveyObjectEditorOptions,
 } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { EditableObject } from "./editableObject";
@@ -41,14 +41,14 @@ export class ConditionEditorItem {
           titleLocation: "hidden",
           showOptionsCaption: false,
           visible: false,
-          choices: ["and", "or"]
+          choices: ["and", "or"],
         },
         {
           name: "questionName",
           type: "dropdown",
           titleLocation: "hidden",
           startWithNewLine: false,
-          isRequired: true
+          isRequired: true,
         },
         {
           name: "operator",
@@ -57,9 +57,9 @@ export class ConditionEditorItem {
           startWithNewLine: false,
           showOptionsCaption: false,
           isRequired: true,
-          enableIf: "{questionName} notempty"
-        }
-      ]
+          enableIf: "{questionName} notempty",
+        },
+      ],
     };
     this.survey = !!owner.options
       ? owner.options.createSurvey(json, "conditionEditor")
@@ -180,7 +180,7 @@ export class ConditionEditorItem {
     );
     if (!json) {
       json = {
-        type: "text"
+        type: "text",
       };
     }
     json.isRequired = true;
@@ -367,6 +367,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   koIsWideMode: any;
   koIsEditorHidingDisabled: any;
   private addConditionQuestionsHash = {};
+  private addConditionCalculatedValuesHash = {};
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -429,8 +430,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public get removeConditionText(): string {
     return this.getLocString("pe.remove");
   }
-  public beforeShow() {
-    super.beforeShow();
+  public beforeShowCore() {
+    super.beforeShowCore();
     this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
     if (!!this.options) {
@@ -473,6 +474,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   private allConditionQuestionsValue: any[];
   private resetAllConditionQuestions() {
     this.addConditionQuestionsHash = {};
+    this.addConditionCalculatedValuesHash = {};
     this.allConditionQuestionsValue = this.getConditionQuestions();
     this.allConditionQuestionsValue.sort(function(a, b) {
       return a.text.localeCompare(b.text);
@@ -500,6 +502,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
         questions[i].addConditionObjectsByContext(res, this.object);
       }
       this.addConditionQuestionsHash = {};
+      this.addConditionCalculatedValuesHash = {};
       for (var i = 0; i < res.length; i++) {
         if (!this.options || !this.options.showTitlesInExpressions) {
           res[i].text = res[i].name;
@@ -538,6 +541,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var values = survey.calculatedValues;
     for (var i = 0; i < values.length; i++) {
       var name = values[i].name;
+      this.addConditionCalculatedValuesHash[name] = values[i];
       res.push({ name: name, text: name, question: null });
     }
   }
@@ -556,8 +560,8 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var path = "";
     var question = this.getQuestionByName(questionName);
     if (!question) return null;
-    if (questionName.indexOf(question.name) == 0) {
-      path = questionName.substr(question.name.length);
+    if (questionName.indexOf(question.getValueName()) == 0) {
+      path = questionName.substr(question.getValueName().length);
     }
     if (questionName.indexOf("row.") == 0) {
       path = questionName.substr("row.".length);
@@ -719,7 +723,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       (!constOperand && !arrayValue && this.canShowValueByOperator(op.operator))
     )
       return false;
-    if (!this.getQuestionByName(variableOperand.variable)) return false;
+    if (!this.isVariableInSurvey(variableOperand.variable)) return false;
     var item = new ConditionEditorItem(this);
     item.questionName = variableOperand.variable;
     item.operator =
@@ -735,11 +739,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     res.push(item);
     return true;
   }
+  private isVariableInSurvey(variable: string): boolean {
+    if (!this.getSurvey()) return false;
+    if (this.getQuestionByName(variable)) return true;
+    return !!this.addConditionCalculatedValuesHash[variable];
+  }
   private getArrayValueFromOperand(op: Survey.BinaryOperand): Array<any> {
     var arrayOperand = <Survey.ArrayOperand>this.getOperandByType(op, "array");
-    //TODO
-    if (!arrayOperand || !arrayOperand["values"]) return null;
-    var valuesOperand = arrayOperand["values"];
+    if (!arrayOperand || !arrayOperand.values) return null;
+    var valuesOperand = arrayOperand.values;
     if (!Array.isArray(valuesOperand) || valuesOperand.length == 0) return null;
     var res = [];
     for (var i = 0; i < valuesOperand.length; i++) {
@@ -760,7 +768,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var operand = op.expression;
     if (operand == null || operand.getType() != "variable") return false;
     var questionName = (<Survey.Variable>operand).variable;
-    if (!this.getQuestionByName(questionName)) return false;
+    if (!this.isVariableInSurvey(questionName)) return false;
     var item = new ConditionEditorItem(this);
     item.questionName = questionName;
     item.operator = operator;
@@ -828,119 +836,119 @@ SurveyPropertyEditorFactory.registerTypeForCellEditing("condition", "string");
 var operations = [
   {
     value: "and",
-    title: "logical 'and' operator"
+    title: "logical 'and' operator",
   },
   {
     value: "&&",
-    title: "logical 'and' operator"
+    title: "logical 'and' operator",
   },
   {
     value: "or",
-    title: "logical 'or' operator"
+    title: "logical 'or' operator",
   },
   {
     value: "||",
-    title: "logical 'or' operator"
+    title: "logical 'or' operator",
   },
   {
     value: "empty",
-    title: "returns true if the left operand is empty	{questionName} empty"
+    title: "returns true if the left operand is empty	{questionName} empty",
   },
   {
     value: "notempty",
     title:
-      "returns true if the left operand is not empty	{questionName} notempty"
+      "returns true if the left operand is not empty	{questionName} notempty",
   },
   {
     value: "=",
     title:
-      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124",
   },
   {
     value: "==",
     title:
-      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124",
   },
   {
     value: "equal",
     title:
-      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124"
+      "returns true if two values are equal	{questionName} = 5, {questionName} == 'abc', {questionName} equal 124",
   },
   {
     value: "<>",
     title:
-      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124",
   },
   {
     value: "!=",
     title:
-      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124",
   },
   {
     value: "notequal",
     title:
-      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124"
+      "returns true if two values are not equal	{questionName} <> 5, {questionName} != 'abc', {questionName} notequal 124",
   },
   {
     value: ">",
     title:
-      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'"
+      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'",
   },
   {
     value: "greater",
     title:
-      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'"
+      "returns true if the left operand greater then the second operand	{questionName} > 2, {questionName} greater 'a'",
   },
   {
     value: "<",
     title:
-      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'"
+      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'",
   },
   {
     value: "less",
     title:
-      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'"
+      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'",
   },
   {
     value: ">=",
     title:
-      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'"
+      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'",
   },
   {
     value: "greaterorequal",
     title:
-      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'"
+      "returns true if the left operand equal or greater then the second operand	{questionName} >= 2, {questionName} greaterorequal 'a'",
   },
   {
     value: "<=",
     title:
-      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'"
+      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
   },
   {
     value: "lessorequal",
     title:
-      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'"
+      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
   },
   {
     value: "contains",
     title:
-      "return true if the left operand is an array and it contains a value of the second operand	{questionName} contains 'a'"
+      "return true if the left operand is an array and it contains a value of the second operand	{questionName} contains 'a'",
   },
   {
     value: "notcontains",
     title:
-      "return true if the left operand is an array and it does not contain a value of the second operand"
+      "return true if the left operand is an array and it does not contain a value of the second operand",
   },
   {
     value: "anyof",
     title:
-      "return true if the left operand is an array and it contains any value of the second array operand"
+      "return true if the left operand is an array and it contains any value of the second array operand",
   },
   {
     value: "allof",
     title:
-      "return true if the left operand is an array and it contains all values of the second array operand"
-  }
+      "return true if the left operand is an array and it contains all values of the second array operand",
+  },
 ];
 
 const createAnnotations = (
@@ -958,7 +966,7 @@ const createAnnotations = (
       row: condition.match(/\n/g) ? condition.match(/\n/g).length : 0,
       column: column,
       text: conditionParser.error.code + " (" + column + ")",
-      type: "error"
+      type: "error",
     };
     annotations.push(annotation);
   }
@@ -976,7 +984,7 @@ export function doGetCompletions(
   var completions = [];
   var currentQuestion: Survey.Question = config.question;
   var usableQuestions = (config.questions || []).filter(
-    q => q !== currentQuestion
+    (q) => q !== currentQuestion
   );
   if (
     !!usableQuestions ||
@@ -988,14 +996,14 @@ export function doGetCompletions(
       currentQuestion instanceof Survey.MatrixDropdownColumn
     ) {
       completions = currentQuestion.colOwner["columns"]
-        .filter(e => e.name !== currentQuestion.name)
-        .map(column => {
+        .filter((e) => e.name !== currentQuestion.name)
+        .map((column) => {
           return {
             name: "",
             value: "{row." + column.name + "}",
             some: "",
             meta: column.title,
-            identifierRegex: ID_REGEXP
+            identifierRegex: ID_REGEXP,
           };
         });
     } else if (
@@ -1004,22 +1012,22 @@ export function doGetCompletions(
     ) {
       var panel: Survey.PanelModel = currentQuestion.data.panel;
       completions = panel.elements
-        .filter(e => e.name !== currentQuestion.name)
-        .map(element => {
+        .filter((e) => e.name !== currentQuestion.name)
+        .map((element) => {
           return {
             name: "",
             value: "{panel." + element.name + "}",
             some: "",
             meta: element.name,
-            identifierRegex: ID_REGEXP
+            identifierRegex: ID_REGEXP,
           };
         });
     } else {
       var operationsFiltered = operations.filter(
-        op => !prefix || op.value.indexOf(prefix) !== -1
+        (op) => !prefix || op.value.indexOf(prefix) !== -1
       );
       var questionsFiltered = usableQuestions.filter(
-        op => !prefix || op.name.indexOf(prefix) !== -1
+        (op) => !prefix || op.name.indexOf(prefix) !== -1
       );
       if (currentQuestion instanceof Survey.MatrixDropdownColumn) {
         completions.push({
@@ -1029,7 +1037,7 @@ export function doGetCompletions(
           meta: editorLocalization.editorLocalization.getString(
             editorLocalization.defaultStrings.pe.aceEditorRowTitle
           ),
-          identifierRegex: ID_REGEXP
+          identifierRegex: ID_REGEXP,
         });
       } else if (
         !!currentQuestion &&
@@ -1042,30 +1050,30 @@ export function doGetCompletions(
           meta: editorLocalization.editorLocalization.getString(
             editorLocalization.defaultStrings.pe.aceEditorPanelTitle
           ),
-          identifierRegex: ID_REGEXP
+          identifierRegex: ID_REGEXP,
         });
       }
       completions = completions
         .concat(
-          questionsFiltered.map(q => {
+          questionsFiltered.map((q) => {
             return {
               completer: completer,
               name: "",
               value: "{" + q.name + "}",
               some: "",
               meta: q.title,
-              identifierRegex: ID_REGEXP
+              identifierRegex: ID_REGEXP,
             };
           })
         )
         .concat(
-          operationsFiltered.map(op => {
+          operationsFiltered.map((op) => {
             return {
               name: "",
               value: op.value,
               some: "",
               meta: op.title,
-              identifierRegex: ID_REGEXP
+              identifierRegex: ID_REGEXP,
             };
           })
         );
@@ -1154,12 +1162,12 @@ ko.bindingHandlers.aceEditor = {
           "<div style='max-width: 300px; white-space: normal;'>" +
           item.meta +
           "</div>";
-      }
+      },
     };
     langTools.setCompleters([completer]);
     editor.setOptions({
       enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true
+      enableLiveAutocompletion: true,
     });
 
     ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
@@ -1168,5 +1176,5 @@ ko.bindingHandlers.aceEditor = {
     });
 
     editor.focus();
-  }
+  },
 };

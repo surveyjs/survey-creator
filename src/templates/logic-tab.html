@@ -61,41 +61,36 @@
       <!--ko if: $data.koEditableItem() != null -->
         <h4 class="svd-logic-tab__rule-editor__title" data-bind="text: $data.getLocString('ed.lg.actionsEditorTitle')"></h4>
         <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
-        <div class="svd-logic-tab__item" data-bind="visible: op.templateObject !== null">
-            <div class="svd-logic-tab__item-header">
-              <span data-bind="text: op.name"></span>
-              <span class="svd-logic-tab__item-header-icon" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
+        <div class="svd-logic-tab__item">
+          <div class="form-inline form-group" style="padding-bottom:10px">
+            <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
+            <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
+              <select onmousewheel="return false;" data-bind="if: true, value:op.koLogicType, attr: { 'aria-label': $parent.selectedOperationCaption }">
+                <option data-bind="text:$parent.selectedOperationCaption, value: null"></option>
+                <!-- ko foreach: {data: $parent.koLogicTypes, as: 'item' } -->
+                <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
+                <!-- /ko -->
+              </select>
+            </div>
+            <div style="display:inline-block">
+              <!--ko if: op.koLogicType() != null -->
+              <span style="padding-left:20px" data-bind="text:op.koLogicType().description"></span>
+              <!-- /ko -->
+              <span class="svd-logic-tab__item-header-icon" style="padding-left: 20px" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
                 <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
               </span>
             </div>
-            <!-- ko template: { name: op.template, data: op.templateObject } --><!-- /ko -->
+          </div>
+          <div style="max-width:800px">
+          <!--ko if: op.koTemplateObject() != null && !!op.koTemplate() -->
+            <!-- ko template: { name: op.template, data: op.koTemplateObject() } --><!-- /ko -->
+          <!-- /ko -->
+          </div>
         </div>
         <!-- /ko -->
         <p>
-          <div class="svd-logic-tab__item">
-            <div class="form-inline form-group" style="padding-bottom:10px">
-              <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
-                  <select onmousewheel="return false;" data-bind="if: true, value:koSelectedOperation, attr: { 'aria-label': selectedOperationCaption }">
-                    <option data-bind="text:selectedOperationCaption, value: null"></option>
-                    <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
-                    <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
-                    <!-- /ko -->
-                  </select>
-              </div>
-              <div style="display:inline-block">
-                <!--ko if: $data.koSelectedOperation() != null -->
-                <span data-bind="text:koSelectedOperation().description"></span>
-                <!-- /ko -->
-              </div>
-            </div>
-            <!--ko if: $data.koNewOperation() != null -->
-              <div style="padding-bottom:10px">
-              <!-- ko template: { name: $data.koNewOperation().template, data: $data.koNewOperation().templateObject } --><!-- /ko -->
-              </div>
-            <!-- /ko -->
-            <div style="width:200px">
-              <input type="button" class="form-control btn btn-primary" data-bind="enable: koSelectedOperation() != null, click:koAddNewOperation, value: addNewOperationText" />
-            </div>
+          <div style="width:200px;padding-bottom:20px">
+            <input type="button" class="form-control btn btn-primary" data-bind="click:koAddNewOperation, value: addNewOperationText" />
           </div>
         </p>
         <p>

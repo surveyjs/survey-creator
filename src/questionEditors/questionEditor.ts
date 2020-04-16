@@ -3,7 +3,7 @@ import { ISurveyObjectEditorOptions } from "../propertyEditors/propertyEditorBas
 import { editorLocalization } from "../editorLocalization";
 import {
   SurveyQuestionEditorDefinition,
-  ISurveyQuestionEditorDefinition
+  ISurveyQuestionEditorDefinition,
 } from "./questionEditorDefinition";
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
@@ -39,7 +39,7 @@ export class SurveyPropertyEditorShowWindow {
       focus: false,
       afterClose: function() {
         if (onClosed) onClosed();
-      }
+      },
     });
     modal.open();
 
@@ -133,7 +133,7 @@ export class SurveyQuestionProperties {
           prop,
           this.options,
           this.showMode
-        )
+        ),
       };
     }
   }
@@ -313,7 +313,7 @@ export class SurveyQuestionProperties {
         tabNames.push(tabName);
         classRes.tabs.push({
           name: tabName,
-          index: tabName == "others" ? 1000 : tabNames.length * 10
+          index: tabName == "others" ? 1000 : tabNames.length * 10,
         });
       }
       if (prop.categoryIndex > -1 && tabNames.indexOf(tabName) > -1) {
@@ -325,7 +325,7 @@ export class SurveyQuestionProperties {
       }
       classRes.properties.push({
         name: this.properties[i].name,
-        tab: tabName
+        tab: tabName,
       });
     }
     if (classRes.properties.length > 0) {
@@ -394,7 +394,14 @@ export class SurveyElementEditorContent {
     var tabs = this.buildTabs();
     this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
     this.assignPropertiesToEditors();
-    tabs.forEach(tab => tab.beforeShow());
+    var self = this;
+    this.koActiveTab.subscribe(function(val) {
+      if (!val) return;
+      var tab = self.getTabByName(val);
+      if (!!tab) {
+        tab.expand();
+      }
+    });
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
@@ -547,6 +554,7 @@ export class SurveyElementEditorContentNoCategries extends SurveyElementEditorCo
     super(obj, className, options, true);
     this.koTab = ko.observable(this.koTabs()[0]);
     this.koProperties(this.getObjectProperties());
+    this.koTab().expand();
   }
   protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
     var properties = this.getProperties();
@@ -711,7 +719,7 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
 
 export class SurveyElementPropertyGrid {
   private selectedObjectValue: any = null;
-  public koElementEditor = ko.observable(null);
+  public koElementEditor = ko.observable<SurveyElementEditorContent>(null);
   public koHasObject = ko.observable(false);
   public hasCategories: boolean = true;
   public onAfterRenderCallback: (
@@ -786,6 +794,10 @@ export class SurveyElementPropertyGrid {
       this.koElementEditor().focusEditor();
     }
   }
+  public hasErrors(): boolean {
+    if (!this.koElementEditor()) return false;
+    return this.koElementEditor().hasError();
+  }
   protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
     if (this.hasCategories)
       return new SurveyElementEditorContent(
@@ -831,7 +843,11 @@ export class SurveyQuestionEditorTab {
     };
   }
   public expand() {
+    this.doOnExpanded();
     if (!!this.onExpand) this.onExpand();
+  }
+  public doOnExpanded() {
+    this.beforeShow();
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;
@@ -870,13 +886,13 @@ export class SurveyQuestionEditorTab {
     return isError;
   }
   public beforeShow() {
-    this.performForAllProperties(p => p.beforeShow());
+    this.performForAllProperties((p) => p.beforeShow());
   }
   public reset() {
-    this.performForAllProperties(p => p.reset());
+    this.performForAllProperties((p) => p.reset());
   }
   public applyToObj(obj: Survey.Base) {
-    this.performForAllProperties(p => p.applyToObj(obj));
+    this.performForAllProperties((p) => p.applyToObj(obj));
   }
   public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
     var props = this.editorProperties;

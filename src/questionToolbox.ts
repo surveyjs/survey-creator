@@ -50,7 +50,7 @@ export class QuestionToolbox {
     "imagepicker",
     "boolean",
     "image",
-    "html"
+    "html",
   ];
 
   private _questionDefaultSettings = {
@@ -60,32 +60,32 @@ export class QuestionToolbox {
           {
             value: "lion",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
           },
           {
             value: "giraffe",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg",
           },
           {
             value: "panda",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg",
           },
           {
             value: "camel",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-          }
-        ]
+              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg",
+          },
+        ],
       };
     },
     image: () => {
       return {
         imageLink:
-          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
       };
-    }
+    },
   };
 
   /**
@@ -203,7 +203,7 @@ export class QuestionToolbox {
       isCopied: options.isCopied !== false,
       iconName: !!options.iconName ? options.iconName : "icon-default",
       json: !!options.json ? options.json : this.getQuestionJSON(question),
-      category: !!options.category ? options.category : ""
+      category: !!options.category ? options.category : "",
     };
     if (this.replaceItem(item)) return;
     var copied = this.copiedItems;
@@ -431,7 +431,7 @@ export class QuestionToolbox {
           koCollapsed: ko.observable(categoryName !== prevActiveCategory),
           expand: function() {
             self.doCategoryClick(this.name);
-          }
+          },
         };
         categoriesHash[categoryName] = category;
         categories.push(category);
@@ -486,11 +486,12 @@ export class QuestionToolbox {
         tooltip: title,
         json: json,
         isCopied: false,
-        category: ""
+        category: "",
       };
       this.itemsValue.push(item);
     }
     this.registerCustomWidgets();
+    this.registerComponentQuestions();
     this.onItemsChanged();
   }
   private registerCustomWidgets() {
@@ -501,25 +502,44 @@ export class QuestionToolbox {
       if (inst.getActivatedBy(widgets[i].name) != "customtype") continue;
       var widgetJson = widgets[i].widgetJson;
       if (!widgetJson.widgetIsLoaded || !widgetJson.widgetIsLoaded()) continue;
-      var iconName = widgetJson.iconName ? widgetJson.iconName : "icon-default";
-      var title = editorLocalization.getString("qt." + widgetJson.name);
-      if (!title || title == widgetJson.name) title = widgetJson.title;
-      if (!title) title = widgetJson.name;
-      var json = widgetJson.defaultJSON ? widgetJson.defaultJSON : {};
-      if (!json.type) {
-        json.type = widgetJson.name;
-      }
-      var item = {
-        name: widgetJson.name,
-        iconName: iconName,
-        title: title,
-        tooltip: title,
-        json: json,
-        isCopied: false,
-        category: ""
-      };
-      this.itemsValue.push(item);
+      this.addItemFromJSON(widgetJson);
     }
+  }
+  private registerComponentQuestions() {
+    var items = this.getComponentItems();
+    for (var i = 0; i < items.length; i++) {
+      this.addItemFromJSON(items[i].json);
+    }
+  }
+  private getComponentItems(): Array<any> {
+    var instanceOwner = Survey["CustomQuestionCollection"];
+    if (!instanceOwner) {
+      instanceOwner = Survey["ComponentCollection"];
+    }
+    if (!instanceOwner) return [];
+    var items = instanceOwner.Instance["items"];
+    return !!items ? items : [];
+  }
+  private addItemFromJSON(json: any) {
+    var iconName = json.iconName ? json.iconName : "icon-default";
+    var title = editorLocalization.getString("qt." + json.name);
+    if (!title || title == json.name) title = json.title;
+    if (!title) title = json.name;
+    var elementJson = json.defaultJSON ? json.defaultJSON : {};
+    if (!elementJson.type) {
+      elementJson.type = json.name;
+    }
+    var category = json.category ? json.category : "";
+    var item = {
+      name: json.name,
+      iconName: iconName,
+      title: title,
+      tooltip: title,
+      json: elementJson,
+      isCopied: false,
+      category: category,
+    };
+    this.itemsValue.push(item);
   }
   private getQuestionJSON(question: any): any {
     var json = new Survey.JsonObject().toJsonObject(question);

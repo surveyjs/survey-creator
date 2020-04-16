@@ -28,10 +28,10 @@ QUnit.test("Set Text property", function(assert) {
           "BMW",
           "Peugeot",
           "Toyota",
-          "Citroen"
-        ]
-      }
-    ]
+          "Citroen",
+        ],
+      },
+    ],
   };
   var jsonText = JSON.stringify(json);
   editor.text = jsonText;
@@ -59,11 +59,11 @@ QUnit.test("Escape HTML question string", function(assert) {
           {
             type: "html",
             name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>'
-          }
-        ]
-      }
-    ]
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+    ],
   });
   //var jsonText = '{\"pages\":[{\"name\":\"page1\",\"elements\":[{\"type\":\"html\",\"name\":\"question3\",\"html\":\"<img src=\\\"https://placehold.it/300x100\\\" alt=\\\"test\\\"/>\"}]}]}';
   var editor = new SurveyCreator();
@@ -100,7 +100,7 @@ QUnit.test("options.questionTypes", function(assert) {
     "All types are accepted"
   );
   editor = new SurveyCreator(null, {
-    questionTypes: ["text", "dropdown", "unknown"]
+    questionTypes: ["text", "dropdown", "unknown"],
   });
   assert.equal(
     editor.toolbox.items.length,
@@ -435,7 +435,7 @@ QUnit.test("onModified options", function(assert) {
 */
 QUnit.test("onCustomPropertySort event", function(assert) {
   var editor = new SurveyCreator("", {
-    showElementEditorAsPropertyGrid: false
+    showElementEditorAsPropertyGrid: false,
   });
   editor.onCustomSortProperty.add(function(editor, options) {
     if (options.property1.name == "name") options.result = -1;
@@ -443,7 +443,9 @@ QUnit.test("onCustomPropertySort event", function(assert) {
   });
   editor.selectedElementPropertyGrid.selectedObject = editor.survey.pages[0];
   assert.equal(
-    editor.selectedElementPropertyGrid.koElementEditor().koProperties()[0].name,
+    (<any>(
+      editor.selectedElementPropertyGrid.koElementEditor()
+    )).koProperties()[0].name,
     "name",
     "The name property is now the first"
   );
@@ -458,11 +460,11 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
           {
             type: "html",
             name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>'
-          }
-        ]
-      }
-    ]
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+    ],
   });
   var creator = new SurveyCreator();
   var pagesEditor = new PagesEditor(creator, document.createElement("div"));
@@ -500,7 +502,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
     pages: [
       {
         name: "page1",
-        elements: []
+        elements: [],
       },
       {
         name: "page2",
@@ -508,11 +510,11 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
           {
             type: "html",
             name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>'
-          }
-        ]
-      }
-    ]
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+    ],
   });
   var creator = new SurveyCreator();
   var pagesEditor = new PagesEditor(creator, document.createElement("div"));
@@ -542,9 +544,9 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
     pages: [
       {
         name: "page1",
-        elements: []
-      }
-    ]
+        elements: [],
+      },
+    ],
   });
   var creator = new SurveyCreator();
   creator.text = jsonText;
@@ -611,15 +613,15 @@ QUnit.test("PagesEditor change question's page", function(assert) {
           {
             type: "html",
             name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>'
-          }
-        ]
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
       },
       {
         name: "page2",
-        elements: []
-      }
-    ]
+        elements: [],
+      },
+    ],
   });
   var creator = new SurveyCreator();
   creator.text = jsonText;
@@ -673,6 +675,32 @@ QUnit.test(
   }
 );
 
+QUnit.test("Validate Selected Element Errors", function(assert) {
+  var titleProp = Survey.Serializer.findProperty("question", "title");
+  var oldIsRequired = titleProp.isRequired;
+  titleProp.isRequired = true;
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  creator.selectedElement = question;
+  creator.validateSelectedElement();
+  var titlePropertyEditor = creator.selectedElementPropertyGrid.getPropertyEditorByName(
+    "title"
+  ).editor;
+  assert.equal(
+    titlePropertyEditor.koHasError(),
+    true,
+    "There is error in title editor"
+  );
+  question.title = "My title";
+  creator.validateSelectedElement();
+  assert.equal(
+    titlePropertyEditor.koHasError(),
+    false,
+    "There is no errors in title editor"
+  );
+  titleProp.isRequired = oldIsRequired;
+});
+
 QUnit.test("Update conditions/expressions on changing question.name", function(
   assert
 ) {
@@ -685,15 +713,64 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
   editor.selectedElementPropertyGrid.selectedObject = q1;
   var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
     "name"
-  );
-  namePropertyEditor.editor.koValue("myUpdatedQuestion1");
-  editor.onQuestionEditorChanged(q1);
+  ).editor;
+  namePropertyEditor.koValue("myUpdatedQuestion1");
   assert.equal(
     q2.visibleIf,
     "{myUpdatedQuestion1} = 1",
     "Update the condition accordingly"
   );
 });
+
+QUnit.test(
+  "Update conditions/expressions on changing question.valueName",
+  function(assert) {
+    var editor = new SurveyCreator();
+    editor.survey.currentPage.addNewQuestion("text", "question1");
+    editor.survey.currentPage.addNewQuestion("text", "question2");
+    var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
+    var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
+    q2.visibleIf = "{question1} = 1";
+    editor.selectedElementPropertyGrid.selectedObject = q1;
+    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+      "name"
+    ).editor;
+    var valuePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+      "valueName"
+    ).editor;
+    valuePropertyEditor.koValue("valueName1");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName1} = 1",
+      "valueName from empty to valueName1"
+    );
+    valuePropertyEditor.koValue("valueName2");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName2} = 1",
+      "valueName from valueName1 to valueName2"
+    );
+    valuePropertyEditor.koValue("");
+    assert.equal(
+      q2.visibleIf,
+      "{question1} = 1",
+      "valueName from valueName2 to empty"
+    );
+    valuePropertyEditor.koValue("valueName3");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName3} = 1",
+      "valueName from empty to valueName3"
+    );
+    namePropertyEditor.koValue("valueName3");
+    namePropertyEditor.koValue("question11");
+    assert.equal(
+      q2.visibleIf,
+      "{valueName3} = 1",
+      "ignore changing name if valueName is not empty"
+    );
+  }
+);
 
 QUnit.test(
   "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
@@ -1011,8 +1088,8 @@ QUnit.test(
       elements: [
         { type: "text", name: "q1" },
         { type: "text", name: "q2", visibleIf: "{q1} = 2" },
-        { type: "text", name: "q3", visibleIf: "{q1} = 3" }
-      ]
+        { type: "text", name: "q3", visibleIf: "{q1} = 3" },
+      ],
     };
     var q1 = creator.survey.getQuestionByName("q1");
     var q2 = creator.survey.getQuestionByName("q2");
@@ -1040,8 +1117,8 @@ QUnit.test("Undo-redo creator add/remove page", function(assert) {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2", visibleIf: "{q1} = 2" },
-      { type: "text", name: "q3", visibleIf: "{q1} = 3" }
-    ]
+      { type: "text", name: "q3", visibleIf: "{q1} = 3" },
+    ],
   };
   assert.equal(creator.survey.pages.length, 1, "There is one page");
   creator.addPage();
@@ -1081,7 +1158,7 @@ QUnit.test("showModalOnElementEditing property", function(assert) {
 
 QUnit.test("pageEditMode property", function(assert) {
   var options = {
-    pageEditMode: "single"
+    pageEditMode: "single",
   };
   var creator = new SurveyCreator(undefined, options);
   assert.equal(
@@ -1179,11 +1256,11 @@ function getSurveyJson(): any {
             choices: [
               "one",
               { value: "two", text: "second value" },
-              { value: 3, text: "third value" }
+              { value: 3, text: "third value" },
             ],
-            type: "checkbox"
-          }
-        ]
+            type: "checkbox",
+          },
+        ],
       },
       { name: "page2", questions: [{ name: "question3", type: "comment" }] },
       {
@@ -1193,11 +1270,11 @@ function getSurveyJson(): any {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
             rows: ["Row 1", "Row 2"],
-            type: "matrix"
+            type: "matrix",
           },
-          { name: "question5", type: "rating" }
-        ]
-      }
-    ]
+          { name: "question5", type: "rating" },
+        ],
+      },
+    ],
   };
 }

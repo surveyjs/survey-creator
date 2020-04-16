@@ -5,7 +5,8 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue, findParentNode } from "../utils/utils";
+import { getNextValue } from "../utils/utils";
+import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -18,9 +19,41 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     private question: QuestionSelectBase,
     private item,
     rootElement,
-    private editor: SurveyCreator
+    private editor: SurveyCreator,
+    public inputFocusCallback
   ) {
-    super(target, name, rootElement);
+    super(target, name, rootElement, null, inputFocusCallback);
+    rootElement.addEventListener("keydown", event => {
+      if (event.keyCode == 38 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) - 1 +
+            this.question.choices.length) % this.question.choices.length 
+        );
+        event.stopPropagation();
+        return false;
+      }
+      if (event.keyCode == 40 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) + 1) % this.question.choices.length 
+        );
+        event.stopPropagation();
+        return false;
+      }
+    });
+    rootElement.addEventListener("keyup", event => {
+      if (event.keyCode === 13) {
+        this.startEdit(this, event);
+        return;
+      }
+      if (event.keyCode === 46 && question.choices.length != 1) {
+        this.deleteItem(this, event);
+        return;
+      }
+    });
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
@@ -59,19 +92,20 @@ ko.components.register("item-editor", {
         params.question,
         params.item,
         componentInfo.element,
-        params.editor
+        params.editor,
+        params.editor.onTitleInplaceEditorStartEdit
       );
       var property = Survey.Serializer.findProperty(
         params.target.getType(),
         params.name
       );
-      model.valueChanged = newValue => {
+      model.valueChanged = (newValue) => {
         var options = {
           propertyName: property.name,
           obj: params.item,
           value: newValue,
           newValue: null,
-          doValidation: false
+          doValidation: false,
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
@@ -85,14 +119,14 @@ ko.components.register("item-editor", {
         return "";
       };
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 export var itemAdorner = {
   inplaceEditForValues: false,
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
@@ -100,10 +134,10 @@ export var itemAdorner = {
       ? "item_editable"
       : "";
   },
-  getElementName: model => "controlLabel",
+  getElementName: (model) => "controlLabel",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     for (var i = 0; i < elements.length; i++) {
-      elements[i].onclick = e => e.preventDefault();
+      elements[i].onclick = (e) => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
@@ -131,7 +165,7 @@ export var itemAdorner = {
           item: itemValue,
           question: model,
           target: target,
-          editor: editor
+          editor: editor,
         },
         decoration
       );
@@ -143,7 +177,7 @@ export var itemAdorner = {
         itemValue
       );
     }
-  }
+  },
 };
 
 registerAdorner("choices-label", itemAdorner);
@@ -171,17 +205,17 @@ export var createAddItemHandler = (
     },
     getProcessedText: (text: string) => {
       return text;
-    }
+    },
   };
   !!onItemAdding && onItemAdding(itemValue);
   question.choices.push(itemValue);
   itemValue = question.choices.filter(
-    choiceItem => choiceItem.value === itemValue.value
+    (choiceItem) => choiceItem.value === itemValue.value
   )[0];
   !!onItemAdded && onItemAdded(itemValue);
 };
 
-export var createAddItemElement = handler => {
+export var createAddItemElement = (handler) => {
   var addNew = document.createElement("div");
   addNew.title = editorLocalization.getString("pe.addItem");
   addNew.className =
@@ -224,7 +258,7 @@ export var createCustomElement = (title, handler) => {
 };
 
 export var itemDraggableAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
@@ -232,7 +266,7 @@ export var itemDraggableAdorner = {
       ? "item_draggable"
       : "";
   },
-  getElementName: model => "item",
+  getElementName: (model) => "item",
   afterRender: (
     elements: HTMLElement[],
     model: QuestionSelectBase,
@@ -254,13 +288,13 @@ export var itemDraggableAdorner = {
         elements[i].classList.remove("item_draggable");
       }
     }
-    itemsRoot.forEach(itemRoot =>
+    itemsRoot.forEach((itemRoot) =>
       Sortable.create(itemRoot, {
         handle: ".svda-drag-handle",
         group: model.id,
         draggable: ".item_draggable",
         animation: 150,
-        onEnd: evt => {
+        onEnd: (evt) => {
           var oldIndex = evt.oldIndex;
           var newIndex = evt.newIndex;
           var choices = model.choices;
@@ -277,16 +311,16 @@ export var itemDraggableAdorner = {
           choices.splice(newIndex, 0, choice);
           editor.undoRedoManager.stopTransaction();
           editor.onQuestionEditorChanged(model);
-        }
+        },
       })
     );
     var addNew = createAddItemElement(
       createAddItemHandler(
         model,
-        itemValue => {
+        (itemValue) => {
           editor.onQuestionEditorChanged(model);
         },
-        itemValue => {
+        (itemValue) => {
           editor.onItemValueAddedCallback(
             model,
             "choices",
@@ -306,7 +340,7 @@ export var itemDraggableAdorner = {
         obj: target,
         value: newValue,
         newValue: null,
-        doValidation: false
+        doValidation: false,
       };
       editor.onValueChangingCallback(options);
       newValue = options.newValue === null ? options.value : options.newValue;
@@ -377,7 +411,7 @@ export var itemDraggableAdorner = {
       itemsRoot[0],
       itemsRoot
     );
-  }
+  },
 };
 
 registerAdorner("choices-draggable", itemDraggableAdorner);

@@ -15,10 +15,6 @@
         data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }"
       >
         <div class="svd_surveyjs_designer_container"></div>
-        <!-- ko if: isCurrentPageEmpty -->
-        <!-- ko template: "se-empty-placeholder" -->
-        <!-- /ko -->
-        <!-- /ko -->
       </div>
     </div>
     <!-- ko if: rightContainer.length > 0 -->
@@ -51,7 +47,7 @@
         <!-- /ko -->
         <div class="svd-empty-message-container">
           <div class="svd-empty-message" data-bind="text: getLocString('survey.dropQuestion')"></div>
-          <img src="../images/start-designing-form.svg" alt="Drop questions here" style="width: 300px;"/>
+          <img src="../images/start-designing-form.svg" alt="Drop questions here" style="width: 300px; height: 300px"/>
         </div>
         <!-- /ko -->
       </div>

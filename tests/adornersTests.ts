@@ -5,7 +5,7 @@ import { titleAdorner, TitleInplaceEditor } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
 import {
   questionActionsAdorner,
-  panelActionsAdorner
+  panelActionsAdorner,
 } from "../src/adorners/question-actions";
 import { SurveyCreator } from "../src/editor";
 
@@ -30,14 +30,14 @@ QUnit.test(
     var question = new Survey.QuestionCheckboxModel("q1");
     var addItemHandler = createAddItemHandler(
       question,
-      itemValue => (itemValue["guid"] = "some guid")
+      (itemValue) => (itemValue["guid"] = "some guid")
     );
 
     addItemHandler();
     var jsonObj = new Survey.JsonObject();
     var originalJson = {
       name: "q1",
-      choices: [{ value: "item1", guid: "some guid" }]
+      choices: [{ value: "item1", guid: "some guid" }],
     };
     var json = jsonObj.toJsonObject(question);
     assert.deepEqual(
@@ -76,7 +76,7 @@ QUnit.test(
 
 QUnit.test("titleAdorner.pageTitleEditable", function(assert) {
   var pageMock = {
-    getType: () => "page"
+    getType: () => "page",
   };
   assert.ok(titleAdorner.pageTitleEditable);
   assert.equal(
@@ -98,12 +98,12 @@ QUnit.test(
     var pageMock = {
       parent: true,
       isPanel: true,
-      getType: () => "page"
+      getType: () => "page",
     };
     var panelMock = {
       parent: true,
       isPanel: true,
-      getType: () => "panel"
+      getType: () => "panel",
     };
     assert.equal(
       panelActionsAdorner.getMarkerClass(pageMock),
@@ -125,19 +125,19 @@ QUnit.test(
       parent: true,
       isPanel: false,
       isPage: true,
-      getType: () => "page"
+      getType: () => "page",
     };
     var panelMock = {
       parent: true,
       isPanel: true,
       isPage: false,
-      getType: () => "panel"
+      getType: () => "panel",
     };
     var questionMock = {
       parent: true,
       isPanel: false,
       isPage: false,
-      getType: () => "question"
+      getType: () => "question",
     };
     assert.equal(
       questionActionsAdorner.getMarkerClass(pageMock),
@@ -158,8 +158,18 @@ QUnit.test(
 );
 
 QUnit.test("TitleInplaceEditor error property", function(assert) {
-  var model = new TitleInplaceEditor({}, "test", null, "");
-  model.valueChanged = newValue => (newValue === "test1" ? "error" : "");
+  const onTitleInplaceEditorStartEdit = function(inputElem) {
+    inputElem.value = null;
+  };
+
+  var model = new TitleInplaceEditor(
+    {},
+    "test",
+    null,
+    "",
+    onTitleInplaceEditorStartEdit
+  );
+  model.valueChanged = (newValue) => (newValue === "test1" ? "error" : "");
   assert.equal(model.error(), "", "No errors initial");
   model.editingName("test");
   model.postEdit();

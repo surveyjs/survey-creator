@@ -77,9 +77,17 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator
     npm run build_prod
+  displayName: 'build_prod'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator
     npm run test_ci
+  displayName: 'unit tests'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator
     npm run testcafe_ci
-  displayName: 'run build and run tests'
+  displayName: 'functional tests'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator
@@ -106,6 +114,7 @@ steps:
     git fetch --tags --force
     git add surveyjs.io/App_Data/DocsEditor
     git commit -m "[skip ci] Updated survey-creator docs"
+    git pull origin master
     git push origin master
   displayName: 'git surveyjs/service push updated docs'
 
