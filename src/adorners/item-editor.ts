@@ -5,7 +5,8 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue, findParentNode } from "../utils/utils";
+import { getNextValue } from "../utils/utils";
+import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -22,6 +23,37 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     public inputFocusCallback
   ) {
     super(target, name, rootElement, null, inputFocusCallback);
+    rootElement.addEventListener("keydown", event => {
+      if (event.keyCode == 38 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) - 1 +
+            this.question.choices.length) % this.question.choices.length 
+        );
+        event.stopPropagation();
+        return false;
+      }
+      if (event.keyCode == 40 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) + 1) % this.question.choices.length 
+        );
+        event.stopPropagation();
+        return false;
+      }
+    });
+    rootElement.addEventListener("keyup", event => {
+      if (event.keyCode === 13) {
+        this.startEdit(this, event);
+        return;
+      }
+      if (event.keyCode === 46 && question.choices.length != 1) {
+        this.deleteItem(this, event);
+        return;
+      }
+    });
   }
 
   deleteItem(model: ItemInplaceEditor, event) {

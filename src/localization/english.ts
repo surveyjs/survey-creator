@@ -418,6 +418,7 @@ export var enStrings = {
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
+    keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press control plus arrow up or arrow down to move item",
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible:",
     triggerMakeQuestionsVisible: "Make elements visible:",
