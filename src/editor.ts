@@ -2022,6 +2022,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public set selectedElement(val: any) {
     this.surveyObjects.selectObject(val);
   }
+  /**
+   * Check for errors in property grid and adorners of the selected elements.
+   * Returns true if selected element is null or there is no errors.
+   */
+  public validateSelectedElement(): boolean {
+    if (!this.selectedElement) return true;
+    if (!!this.elementPropertyGridValue) {
+      return !this.elementPropertyGridValue.hasErrors();
+    }
+    return true;
+  }
   private selectedObjectChanged(obj: Survey.Base) {
     var options = { newSelectedElement: obj };
     this.onSelectedElementChanging.fire(this, options);
