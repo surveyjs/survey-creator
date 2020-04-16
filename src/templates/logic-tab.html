@@ -90,7 +90,7 @@
         <!-- /ko -->
         <p>
           <div style="width:200px;padding-bottom:20px">
-            <input type="button" class="form-control btn btn-primary" data-bind="click:koAddNewOperation, value: addNewOperationText" />
+            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-add-new-operation-button" data-bind="click:koAddNewOperation, value: addNewOperationText" />
           </div>
         </p>
         <p>
@@ -98,9 +98,9 @@
             <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
           </div>
           <div class="form-inline form-group">
-            <input type="button" class="form-control btn btn-primary" data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack')" />
-            <input type="button" class="form-control btn btn-primary" data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save')"/>
-            <input type="button" class="form-control btn btn-primary" data-bind="click: $data.koShowView, value: $data.getLocString('pe.back')"/>
+            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-save-and-back-button" data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack')" />
+            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-save-button" data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save')"/>
+            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-back-button" data-bind="click: $data.koShowView, value: $data.getLocString('pe.back')"/>
           </div>
         </p>
       <!-- /ko -->
