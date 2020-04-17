@@ -17,10 +17,9 @@ class RatingItemEditor extends TitleInplaceEditor {
     private question: Survey.QuestionRating,
     private item,
     rootElement,
-    private editor: SurveyCreator,
-    public inputFocusCallback
+    editor: SurveyCreator
   ) {
-    super(target, name, rootElement, null, inputFocusCallback);
+    super(target, name, rootElement, null, editor);
   }
 
   deleteItem(model: RatingItemEditor, event) {
@@ -57,8 +56,7 @@ ko.components.register("rating-item-editor", {
         params.question,
         params.item,
         componentInfo.element,
-        params.editor,
-        params.editor.onTitleInplaceEditorStartEdit
+        params.editor
       );
       var question: Survey.QuestionRating = params.question;
 

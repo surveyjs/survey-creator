@@ -157,19 +157,22 @@ QUnit.test(
   }
 );
 
-QUnit.test("TitleInplaceEditor error property", function(assert) {
-  const onTitleInplaceEditorStartEdit = function(inputElem) {
-    inputElem.value = null;
-  };
+QUnit.test("TitleInplaceEditor valueChanged", function(assert) {
+  var target = new Survey.QuestionTextModel("q1");
+  var model = new TitleInplaceEditor(target, "title", null, "", null);
+  var lastChanged;
+  model.valueChanged = (newValue) => (lastChanged = newValue);
+  model.editingName("test");
+  model.postEdit();
+  assert.equal(lastChanged, "test", "New value has been passed");
+});
 
-  var model = new TitleInplaceEditor(
-    {},
-    "test",
-    null,
-    "",
-    onTitleInplaceEditorStartEdit
-  );
-  model.valueChanged = (newValue) => (newValue === "test1" ? "error" : "");
+QUnit.test("TitleInplaceEditor hasError/error", function(assert) {
+  var target = new Survey.QuestionTextModel("q1");
+  var model = new TitleInplaceEditor(target, "title", null, "", <any>{
+    onGetErrorTextOnValidationCallback: (_, __, newValue) =>
+      newValue === "test1" ? "error" : "",
+  });
   assert.equal(model.error(), "", "No errors initial");
   model.editingName("test");
   model.postEdit();
@@ -180,4 +183,24 @@ QUnit.test("TitleInplaceEditor error property", function(assert) {
   model.editingName("test");
   model.postEdit();
   assert.equal(model.error(), "", "No errors revert back");
+});
+
+QUnit.test("TitleInplaceEditor start edit callback", function(assert) {
+  var callCount = 0;
+  const onTitleInplaceEditorStartEdit = function(inputElem) {
+    callCount++;
+  };
+
+  var target = new Survey.QuestionTextModel("q1");
+  var inputElement = {
+    focus: () => inputElement["onfocus"](),
+  };
+  var model = new TitleInplaceEditor(target, "title", {}, "", <any>{
+    onTitleInplaceEditorStartEdit,
+  });
+  model.getInputElement = () => inputElement;
+  model.postEdit();
+  model.startEdit(model, null);
+  inputElement.focus();
+  assert.equal(callCount, 1, "onTitleInplaceEditorStartEdit has been called");
 });

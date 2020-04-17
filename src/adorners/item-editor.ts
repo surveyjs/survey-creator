@@ -19,17 +19,18 @@ class ItemInplaceEditor extends TitleInplaceEditor {
     private question: QuestionSelectBase,
     private item,
     rootElement,
-    private editor: SurveyCreator,
-    public inputFocusCallback
+    editor: SurveyCreator
   ) {
-    super(target, name, rootElement, null, inputFocusCallback);
-    rootElement.addEventListener("keydown", event => {
+    super(target, name, rootElement, null, editor);
+    rootElement.addEventListener("keydown", (event) => {
       if (event.keyCode == 38 && event.ctrlKey) {
         SurveyHelper.moveItemInArray(
           this.question.choices,
           this.item,
-          (this.question.choices.indexOf(this.item) - 1 +
-            this.question.choices.length) % this.question.choices.length 
+          (this.question.choices.indexOf(this.item) -
+            1 +
+            this.question.choices.length) %
+            this.question.choices.length
         );
         event.stopPropagation();
         return false;
@@ -38,13 +39,14 @@ class ItemInplaceEditor extends TitleInplaceEditor {
         SurveyHelper.moveItemInArray(
           this.question.choices,
           this.item,
-          (this.question.choices.indexOf(this.item) + 1) % this.question.choices.length 
+          (this.question.choices.indexOf(this.item) + 1) %
+            this.question.choices.length
         );
         event.stopPropagation();
         return false;
       }
     });
-    rootElement.addEventListener("keyup", event => {
+    rootElement.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         this.startEdit(this, event);
         return;
@@ -92,8 +94,7 @@ ko.components.register("item-editor", {
         params.question,
         params.item,
         componentInfo.element,
-        params.editor,
-        params.editor.onTitleInplaceEditorStartEdit
+        params.editor
       );
       var property = Survey.Serializer.findProperty(
         params.target.getType(),
