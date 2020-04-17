@@ -20,6 +20,12 @@
     visibility: visible;
   }
 }
+.svd_q_selected .item_editable item-editor {
+  .svda-focusable:focus + .svda-title-editor-start {
+    visibility: visible;
+    outline: 1px dotted $primary-color;
+  }
+}
 
 .svda-drag-handle {
   cursor: move;
@@ -66,7 +72,7 @@
 }
 
 item-editor {
-  display: inline-block;
+  display: none;
   max-width: 90%;
 
   .svda-content {
@@ -84,4 +90,9 @@ item-editor {
       cursor: pointer;
     }
   }
+}
+
+.svd_q_selected item-editor {
+  display: inline-block;
+  outline: none;
 }

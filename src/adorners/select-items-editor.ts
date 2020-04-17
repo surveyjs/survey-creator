@@ -12,7 +12,8 @@ ko.components.register("select-items-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var isExpanded = ko.observable(selectItemsAdorner.isExpanded);
-      var choices = ko.observableArray(params.question.choices);
+      var choices = ko.observableArray();
+      ko.computed(() => { choices(params.question.choices); });
       var otherText = ko.observable(params.question.otherText);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
         "svda-select-items-collection"
@@ -80,7 +81,7 @@ ko.components.register("select-items-editor", {
             //   doValidation: false
             // };
             // params.editor.onValueChangingCallback(options);
-            choices(params.question.choices);
+            //choices(params.question.choices);
           },
           itemValue => {
             params.editor.onItemValueAddedCallback(
@@ -112,7 +113,7 @@ ko.components.register("select-items-editor", {
               newChoices.splice(evt.oldIndex, 1);
               newChoices.splice(evt.newIndex, 0, choice);
               params.question.choices = newChoices;
-              choices(newChoices);
+              //choices(newChoices);
             }
           });
         },

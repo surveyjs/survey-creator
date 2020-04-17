@@ -147,6 +147,8 @@ export class TitleInplaceEditor {
     resizeInput(event.target);
     if (event.keyCode === 13) {
       this.postEdit();
+      event.stopPropagation();
+      return false;
     } else if (event.keyCode === 27) {
       this.cancelEdit();
     }
