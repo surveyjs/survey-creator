@@ -9,6 +9,7 @@ var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.ht
 
 const FRIENDLY_PADDING = 42;
 function resizeInput(target) {
+  if (!target.style) return;
   let computedStyle = window.getComputedStyle(target);
   target.style.width =
     getTextWidth(
@@ -39,11 +40,12 @@ function getTextWidth(text, font) {
 }
 
 export class TitleInplaceEditor {
-  private property: Survey.JsonObjectProperty;
-
+  private _valueSubscription: ko.Computed;
+  property: Survey.JsonObjectProperty;
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
+
   protected forNeibours(func: (el: HTMLElement) => void) {
     if (
       !this.rootElement ||
@@ -60,6 +62,10 @@ export class TitleInplaceEditor {
     }
   }
 
+  getInputElement() {
+    return this.rootElement.getElementsByTagName("input")[0];
+  }
+
   constructor(
     protected target: any,
     protected name: string,
@@ -67,8 +73,22 @@ export class TitleInplaceEditor {
     public placeholder: string = "",
     public editor: SurveyCreator
   ) {
-    this.editingName(target[name]);
-    this.prevName(target[name]);
+    if (typeof target.getType === "function") {
+      this.property = Survey.Serializer.findProperty(target.getType(), name);
+    }
+
+    this._valueSubscription = ko.computed(() => {
+      //TO REVIEW THIS CRUTCH
+      if (
+        this.property.serializationProperty !== this.property.name &&
+        !!target[this.property.serializationProperty]
+      ) {
+        ko.unwrap(target[this.property.serializationProperty].koRenderedHtml);
+      }
+      this.prevName(ko.unwrap(target[name]));
+      this.editingName(ko.unwrap(target[name]));
+    });
+
     this.forNeibours(
       (element) =>
         (element.onclick = (e) => {
@@ -76,9 +96,6 @@ export class TitleInplaceEditor {
           e.preventDefault();
         })
     );
-    if (typeof target.getType === "function") {
-      this.property = Survey.Serializer.findProperty(target.getType(), name);
-    }
   }
 
   get maxLength() {
@@ -96,6 +113,26 @@ export class TitleInplaceEditor {
   }
 
   error = ko.observable("");
+  public hasErrors(): boolean {
+    var errorText = "";
+    var newValue = this.editingName();
+    if (this.property.isRequired && !newValue) {
+      errorText = editorLocalization.getString("pe.propertyIsEmpty");
+    }
+    if (
+      !errorText &&
+      !!this.editor &&
+      !!this.editor.onGetErrorTextOnValidationCallback
+    ) {
+      errorText = this.editor.onGetErrorTextOnValidationCallback(
+        this.property.name,
+        this.target,
+        newValue
+      );
+    }
+    this.error(errorText);
+    return !!errorText;
+  }
 
   hideEditor = () => {
     this.isEditing(false);
@@ -111,28 +148,28 @@ export class TitleInplaceEditor {
       element.dataset["sjsOldDisplay"] = element.style.display;
       element.style.display = "none";
     });
-    var inputElem = this.rootElement.getElementsByTagName("input")[0];
-    inputElem.onfocus = function() {
+    var inputElement = this.getInputElement();
+    inputElement.onfocus = function() {
       const callback = model.editor.onTitleInplaceEditorStartEdit;
       if (!!callback) {
-        callback(inputElem);
+        callback(inputElement);
         return;
       }
       this.select();
     };
-    resizeInput(inputElem);
+    resizeInput(inputElement);
     setTimeout(function() {
-      inputElem.focus();
+      inputElement.focus();
     }, 10);
   };
   postEdit = () => {
     this.error("");
     if (this.prevName() !== this.editingName()) {
+      if (this.hasErrors()) {
+        return;
+      }
       if (!!this.valueChanged) {
-        this.error(this.valueChanged(this.editingName()));
-        if (!!this.error()) {
-          return;
-        }
+        this.valueChanged(this.editingName());
       }
       this.prevName(this.editingName());
     }
@@ -152,6 +189,10 @@ export class TitleInplaceEditor {
       this.cancelEdit();
     }
   };
+
+  destroy() {
+    this._valueSubscription.dispose();
+  }
 }
 
 ko.components.register("title-editor", {
@@ -164,40 +205,9 @@ ko.components.register("title-editor", {
         params.placeholder,
         params.editor
       );
-      var property = Survey.Serializer.findProperty(
-        params.model.getType(),
-        params.name
-      );
-      ko.computed(() => {
-        //TO REVIEW THIS CRUTCH
-        if (
-          property.serializationProperty !== property.name &&
-          !!params.model[property.serializationProperty]
-        ) {
-          ko.unwrap(
-            params.model[property.serializationProperty].koRenderedHtml
-          );
-        }
-        model.prevName(ko.unwrap(params.model[params.name]));
-        model.editingName(ko.unwrap(params.model[params.name]));
-      });
       model.valueChanged = (newValue) => {
-        var errorText = "";
-        if (property.isRequired && !newValue) {
-          errorText = editorLocalization.getString("pe.propertyIsEmpty");
-        }
-        if (!errorText) {
-          errorText = params.editor.onGetErrorTextOnValidationCallback(
-            property.name,
-            params.model,
-            newValue
-          );
-        }
-        if (!!errorText) {
-          return errorText;
-        }
         var options = {
-          propertyName: property.name,
+          propertyName: model.property.name,
           obj: params.model,
           value: newValue,
           newValue: null,
@@ -207,10 +217,20 @@ ko.components.register("title-editor", {
         newValue = options.newValue === null ? options.value : options.newValue;
         var oldValue = params.model[params.name];
         params.model[params.name] = newValue;
-        params.editor.onPropertyChanged(params.model, property, oldValue);
-        params.editor.onPropertyValueChanged(property, params.model, newValue);
+        params.editor.onPropertyChanged(params.model, model.property, oldValue);
+        params.editor.onPropertyValueChanged(
+          model.property,
+          params.model,
+          newValue
+        );
         return "";
       };
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.valueChanged = undefined;
+        model.destroy();
+      });
+
       return model;
     },
   },
