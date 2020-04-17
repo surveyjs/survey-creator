@@ -4,6 +4,7 @@ import { editorLocalization } from "../editorLocalization";
 
 import "./title-editor.scss";
 import * as Survey from "survey-knockout";
+import { SurveyCreator } from "../editor";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 const FRIENDLY_PADDING = 42;
@@ -64,7 +65,7 @@ export class TitleInplaceEditor {
     protected name: string,
     protected rootElement,
     public placeholder: string = "",
-    public inputFocusCallback
+    public editor: SurveyCreator
   ) {
     this.editingName(target[name]);
     this.prevName(target[name]);
@@ -102,7 +103,7 @@ export class TitleInplaceEditor {
       element.style.display = element.dataset["sjsOldDisplay"];
     });
   };
-  startEdit = (model, event) => {
+  startEdit = (model: TitleInplaceEditor, event) => {
     this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
@@ -112,13 +113,11 @@ export class TitleInplaceEditor {
     });
     var inputElem = this.rootElement.getElementsByTagName("input")[0];
     inputElem.onfocus = function() {
-      const callback = model.inputFocusCallback;
-
-      if (callback) {
+      const callback = model.editor.onTitleInplaceEditorStartEdit;
+      if (!!callback) {
         callback(inputElem);
         return;
       }
-
       this.select();
     };
     resizeInput(inputElem);
@@ -163,7 +162,7 @@ ko.components.register("title-editor", {
         params.name,
         componentInfo.element,
         params.placeholder,
-        params.editor.onTitleInplaceEditorStartEdit
+        params.editor
       );
       var property = Survey.Serializer.findProperty(
         params.model.getType(),

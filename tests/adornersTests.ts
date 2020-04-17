@@ -162,13 +162,9 @@ QUnit.test("TitleInplaceEditor error property", function(assert) {
     inputElem.value = null;
   };
 
-  var model = new TitleInplaceEditor(
-    {},
-    "test",
-    null,
-    "",
-    onTitleInplaceEditorStartEdit
-  );
+  var model = new TitleInplaceEditor({}, "test", null, "", <any>{
+    onTitleInplaceEditorStartEdit,
+  });
   model.valueChanged = (newValue) => (newValue === "test1" ? "error" : "");
   assert.equal(model.error(), "", "No errors initial");
   model.editingName("test");
