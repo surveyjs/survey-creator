@@ -472,6 +472,7 @@ export class SurveyLogicItem {
 }
 
 export class SurveyLogic implements ISurveyLogicItemOwner {
+  public static visibleActions = [];
   private static hasNeededElements(
     elements: Array<any>,
     propName: string
@@ -1105,7 +1106,13 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   }
   protected createLogicTypes(): Array<SurveyLogicType> {
     var res = [];
+    var visActions = SurveyLogic.visibleActions;
     for (var i = 0; i < SurveyLogic.types.length; i++) {
+      if (
+        visActions.length > 0 &&
+        visActions.indexOf(SurveyLogic.types[i].name) < 0
+      )
+        continue;
       res.push(
         new SurveyLogicType(SurveyLogic.types[i], this.survey, this.options)
       );

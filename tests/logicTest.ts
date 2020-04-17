@@ -1098,3 +1098,32 @@ QUnit.test("One operation exists in new item", function(assert) {
   op.itemSelector.element = survey.currentPage;
   assert.ok(logic.saveEditableItem(), "Operation is good");
 });
+QUnit.test("Limit the number of action types.", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var options = new EditorOptionsTests();
+  SurveyLogic.visibleActions = [
+    "question_visibility",
+    "question_require",
+    "trigger_skip",
+    "trigger_complete",
+  ];
+  var logic = new SurveyLogic(survey, options);
+  assert.equal(
+    logic.koLogicTypes().length,
+    4,
+    "There are four visible action types"
+  );
+  SurveyLogic.visibleActions = [];
+  logic = new SurveyLogic(survey, options);
+  assert.notEqual(
+    logic.koLogicTypes().length,
+    4,
+    "There are more than four visible action types"
+  );
+});
