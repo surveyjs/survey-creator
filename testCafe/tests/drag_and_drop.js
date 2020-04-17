@@ -146,10 +146,12 @@ test(`check drop to the bottom`, async (t) => {
 const dragToTopConfig = {
   offsetY: 10,
   destinationOffsetY: 30,
+  speed: 0.9
 };
 const dragToBottomConfig = {
   offsetY: -10,
   destinationOffsetY: -30,
+  speed: 0.9
 };
 
 test("check change order of questions", async (t) => {
