@@ -43,6 +43,7 @@ So, let’s say, you need to allow users to select a country. The right solution
     optionsCaption: "Select a country...",
     choicesByUrl: {
         url: "https://restcountries.eu/rest/v2/all"
+    }
 }
 ```
 There is nothing extraordinary for a software developer. It is a little bit difficult for a non-technical user. You could use our [Toolbox customization functionality](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox) in SurveyJS Creator and add this item into toolbox, as shown in [this example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization).
