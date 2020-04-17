@@ -18,7 +18,7 @@ export interface ISurveyLogicType {
   showInUI?: boolean;
   showIf?: (survey: Survey.SurveyModel) => boolean;
   createNewElement?: (survey: Survey.SurveyModel) => Survey.Base;
-  saveElement?: (survey: Survey.SurveyModel, op: SurveyLogicOperation) => void;
+  saveElement?: (survey: Survey.SurveyModel, action: SurveyLogicAction) => void;
   createTemplateObject?: (element: Survey.Base) => any;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
@@ -70,8 +70,8 @@ export class SurveyLogicType {
       ? this.logicType.templateName
       : "elementselector";
   }
-  public update(operations: Array<SurveyLogicOperation> = null) {
-    this.hasUniqueItem = this.isUniqueItem && this.hasThisOperation(operations);
+  public update(actions: Array<SurveyLogicAction> = null) {
+    this.hasUniqueItem = this.isUniqueItem && this.hasThisAction(actions);
     this.koVisible(this.visible);
   }
   public get visible(): boolean {
@@ -111,12 +111,12 @@ export class SurveyLogicType {
     if (this.isTrigger) return this.createTriggerElement(survey);
     return null;
   }
-  public saveElement(op: SurveyLogicOperation): void {
+  public saveElement(action: SurveyLogicAction): void {
     if (!!this.logicType.saveElement) {
-      this.logicType.saveElement(this.survey, op);
+      this.logicType.saveElement(this.survey, action);
     }
     if (this.isTrigger) {
-      this.saveTriggerElement(op);
+      this.saveTriggerElement(action);
     }
   }
   public createTemplateObject(element: Survey.Base): any {
@@ -170,10 +170,10 @@ export class SurveyLogicType {
       expression
     );
   }
-  private hasThisOperation(operations: Array<SurveyLogicOperation>): boolean {
-    if (!operations) return false;
-    for (var i = 0; i < operations.length; i++) {
-      if (operations[i].logicType == this) return true;
+  private hasThisAction(actions: Array<SurveyLogicAction>): boolean {
+    if (!actions) return false;
+    for (var i = 0; i < actions.length; i++) {
+      if (actions[i].logicType == this) return true;
     }
     return false;
   }
@@ -185,12 +185,12 @@ export class SurveyLogicType {
     res.setOwner(survey);
     return res;
   }
-  private saveTriggerElement(op: SurveyLogicOperation) {
-    if (!!op.templateObject.editableObject) {
-      var edObj = op.templateObject.editableObject;
+  private saveTriggerElement(action: SurveyLogicAction) {
+    if (!!action.templateObject.editableObject) {
+      var edObj = action.templateObject.editableObject;
       edObj.applyAll(["expression"]);
     } else {
-      var trigger = <Survey.SurveyTrigger>op.element;
+      var trigger = <Survey.SurveyTrigger>action.element;
       var survey = this.survey;
       if (this.isNewTrigger(trigger) && !!trigger.expression) {
         survey.triggers.push(trigger);
@@ -217,7 +217,7 @@ export class SurveyLogicType {
   }
 }
 
-export class SurveyLogicOperation {
+export class SurveyLogicAction {
   public koElement: any;
   public koLogicType: any;
   public koDisplayError: any;
@@ -290,8 +290,10 @@ export class SurveyLogicOperation {
       }
     }
   }
-  public equals(op: SurveyLogicOperation): boolean {
-    return this.logicType === op.logicType && this.element === op.element;
+  public equals(action: SurveyLogicAction): boolean {
+    return (
+      this.logicType === action.logicType && this.element === action.element
+    );
   }
   public get name(): string {
     return !!this.logicType ? this.logicType.displayName : null;
@@ -299,8 +301,8 @@ export class SurveyLogicOperation {
   public get text(): string {
     return !!this.logicType ? this.logicType.getDisplayText(this.element) : "";
   }
-  public get deleteOperationText(): string {
-    return getLogicString("deleteOperation");
+  public get deleteActionText(): string {
+    return getLogicString("deleteAction");
   }
   public hasError(): boolean {
     if (!this.logicType) {
@@ -347,16 +349,16 @@ export interface ISurveyLogicItemOwner {
 }
 
 export class SurveyLogicItem {
-  public koOperations: any;
+  public koActions: any;
   private static counter = 0;
   private id = ++SurveyLogicItem.counter;
-  private removedOperations: Array<SurveyLogicOperation>;
+  private removedActions: Array<SurveyLogicAction>;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
   ) {
-    this.removedOperations = [];
-    this.koOperations = ko.observableArray();
+    this.removedActions = [];
+    this.koActions = ko.observableArray();
   }
   public get name() {
     return "logicItem" + this.id;
@@ -381,37 +383,37 @@ export class SurveyLogicItem {
   public get isReadOnly() {
     return !!this.owner && this.owner.readOnly;
   }
-  public get operations(): Array<SurveyLogicOperation> {
-    return this.koOperations();
+  public get actions(): Array<SurveyLogicAction> {
+    return this.koActions();
   }
-  public addNewOperation(op: SurveyLogicOperation) {
-    this.koOperations.push(op);
-    if (!!op.logicType) {
-      op.logicType.update(this.operations);
+  public addNewAction(action: SurveyLogicAction) {
+    this.koActions.push(action);
+    if (!!action.logicType) {
+      action.logicType.update(this.actions);
     }
   }
-  public removeOperation(op: SurveyLogicOperation) {
-    this.removedOperations.push(op);
-    var index = this.koOperations().indexOf(op);
+  public removeAction(action: SurveyLogicAction) {
+    this.removedActions.push(action);
+    var index = this.koActions().indexOf(action);
     if (index > -1) {
-      this.koOperations.splice(index, 1);
-      if (!!op.logicType) {
-        op.logicType.update(this.operations);
+      this.koActions.splice(index, 1);
+      if (!!action.logicType) {
+        action.logicType.update(this.actions);
       }
     }
   }
   public apply(expression: string) {
-    this.removeSameOperations();
-    for (var i = 0; i < this.removedOperations.length; i++) {
-      this.removedOperations[i].apply("");
+    this.removeSameActions();
+    for (var i = 0; i < this.removedActions.length; i++) {
+      this.removedActions[i].apply("");
     }
-    this.removedOperations = [];
+    this.removedActions = [];
     this.applyExpression(expression, false);
   }
   public renameQuestion(oldName: string, newName: string) {
     if (!oldName || !newName) return;
     this.renameQuestionInExpression(oldName, newName);
-    var ops = this.operations;
+    var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);
     }
@@ -453,17 +455,17 @@ export class SurveyLogicItem {
   }
   private applyExpression(expression: string, isRenaming: boolean) {
     this.expression = expression;
-    var ops = this.operations;
+    var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].apply(expression, isRenaming);
     }
   }
-  private removeSameOperations() {
-    var ops = this.operations;
+  private removeSameActions() {
+    var ops = this.actions;
     for (var i = ops.length - 1; i >= 0; i--) {
       for (var j = i - 1; j >= 0; j--) {
         if (ops[i].equals(ops[j])) {
-          this.removeOperation(ops[i]);
+          this.removeAction(ops[i]);
           break;
         }
       }
@@ -663,10 +665,10 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       },
       saveElement: function(
         survey: Survey.SurveyModel,
-        op: SurveyLogicOperation
+        action: SurveyLogicAction
       ) {
-        var item = <Survey.HtmlConditionItem>op.element;
-        item.html = op.templateObject.koValue();
+        var item = <Survey.HtmlConditionItem>action.element;
+        item.html = action.templateObject.koValue();
         if (survey.completedHtmlOnCondition.indexOf(item) < 0) {
           survey.completedHtmlOnCondition.push(item);
         }
@@ -743,8 +745,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koShowView: any;
   public koSaveAndShowView: any;
   public koSaveEditableItem: any;
-  public koAddNewOperation: any;
-  public koRemoveOperation: any;
+  public koAddNewAction: any;
+  public koRemoveAction: any;
   public koEditableItem: any;
   public expressionEditor: SurveyPropertyConditionEditor;
   public koReadOnly: any;
@@ -786,11 +788,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koSaveEditableItem = function() {
       self.saveEditableItem();
     };
-    this.koAddNewOperation = function() {
-      self.addNewOperation();
+    this.koAddNewAction = function() {
+      self.addNewAction();
     };
-    this.koRemoveOperation = function(op: SurveyLogicOperation) {
-      self.removeOperation(op);
+    this.koRemoveAction = function(action: SurveyLogicAction) {
+      self.removeAction(action);
     };
     this.koEditableItem = ko.observable(null);
     this.update();
@@ -880,25 +882,25 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     if (!this.isExpressionValid) {
       text = getLogicString("expressionInvalid");
     }
-    var ops = this.editableItem.operations;
+    var ops = this.editableItem.actions;
     if (!text && ops.length == 0) {
-      text = getLogicString("noOperationError");
+      text = getLogicString("noActionError");
     }
     if (!text) {
       for (var i = 0; i < ops.length; i++) {
         if (ops[i].hasError()) {
-          text = getLogicString("operationInvalid");
+          text = getLogicString("actionInvalid");
         }
       }
     }
     this.koErrorText(text);
     return !!text;
   }
-  public get addNewOperationText(): string {
-    return getLogicString("addNewOperation");
+  public get addNewActionText(): string {
+    return getLogicString("addNewAction");
   }
-  public get selectedOperationCaption(): string {
-    return getLogicString("selectedOperationCaption");
+  public get selectedActionCaption(): string {
+    return getLogicString("selectedActionCaption");
   }
   private get isExpressionValid(): boolean {
     return this.expressionEditor.isExpressionValid;
@@ -935,7 +937,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     !!this.options && this.options.startUndoRedoTransaction();
     var logicItem = new SurveyLogicItem(this);
     this.koEditableItem(logicItem);
-    logicItem.addNewOperation(this.createNewOperation(null, null));
+    logicItem.addNewAction(this.createNewAction(null, null));
     this.expressionEditor.koValue("");
     this.mode = "new";
     !!this.options && this.options.stopUndoRedoTransaction();
@@ -957,33 +959,33 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.onItemChanged(item, "delete");
     !!this.options && this.options.stopUndoRedoTransaction();
   }
-  public addOperation(
+  public addAction(
     lt: SurveyLogicType,
     element: Survey.Base = null
-  ): SurveyLogicOperation {
-    var op = this.createNewOperation(lt, element);
-    this.editableItem.addNewOperation(op);
-    return op;
+  ): SurveyLogicAction {
+    var action = this.createNewAction(lt, element);
+    this.editableItem.addNewAction(action);
+    return action;
   }
-  public addNewOperation(): SurveyLogicOperation {
-    return this.addOperation(null, null);
+  public addNewAction(): SurveyLogicAction {
+    return this.addAction(null, null);
   }
-  private createNewOperation(
+  private createNewAction(
     lt: SurveyLogicType,
     element: Survey.Base
-  ): SurveyLogicOperation {
-    var op = new SurveyLogicOperation(lt, element, this.survey);
-    op.onLogicTypeChanged = () => {
-      if (!!op.logicType && !!this.editableItem)
-        op.logicType.update(this.editableItem.operations);
+  ): SurveyLogicAction {
+    var action = new SurveyLogicAction(lt, element, this.survey);
+    action.onLogicTypeChanged = () => {
+      if (!!action.logicType && !!this.editableItem)
+        action.logicType.update(this.editableItem.actions);
     };
-    return op;
+    return action;
   }
-  public removeOperation(op: SurveyLogicOperation) {
+  public removeAction(action: SurveyLogicAction) {
     if (!this.editableItem) return;
-    this.editableItem.removeOperation(op);
-    if (this.editableItem.operations.length == 0) {
-      this.addNewOperation();
+    this.editableItem.removeAction(action);
+    if (this.editableItem.actions.length == 0) {
+      this.addNewAction();
     }
   }
   public getExpressionAsDisplayText(expression: string): string {
@@ -1082,8 +1084,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
           hash[key] = item;
           dest.push(item);
         }
-        var op = this.createNewOperation(lt, element);
-        item.addNewOperation(op);
+        var action = this.createNewAction(lt, element);
+        item.addNewAction(action);
       }
     }
   }

@@ -25,7 +25,7 @@
                   <span data-bind="text: $data.title"></span>
                 </td>
                 <td>
-                  <div data-bind="foreach: $data.koOperations">
+                  <div data-bind="foreach: $data.koActions">
                     <span data-bind="text: $data.text"></span>
                   </div>
                 </td>
@@ -60,37 +60,37 @@
       <!-- ko template: { name: 'propertyeditor', data: $data.expressionEditor } --><!-- /ko -->
       <!--ko if: $data.koEditableItem() != null -->
         <h4 class="svd-logic-tab__rule-editor__title" data-bind="text: $data.getLocString('ed.lg.actionsEditorTitle')"></h4>
-        <!-- ko foreach: {data: $data.koEditableItem().koOperations, as: 'op' } -->
+        <!-- ko foreach: {data: $data.koEditableItem().koActions, as: 'action' } -->
         <div class="svd-logic-tab__item">
           <div class="form-inline form-group" style="padding-bottom:10px">
             <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
             <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
-              <select onmousewheel="return false;" data-bind="if: true, value:op.koLogicType, attr: { 'aria-label': $parent.selectedOperationCaption }">
-                <option data-bind="text:$parent.selectedOperationCaption, value: null"></option>
+              <select onmousewheel="return false;" data-bind="if: true, value:action.koLogicType, attr: { 'aria-label': $parent.selectedActionCaption }">
+                <option data-bind="text:$parent.selectedActionCaption, value: null"></option>
                 <!-- ko foreach: {data: $parent.koLogicTypes, as: 'item' } -->
                 <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
                 <!-- /ko -->
               </select>
             </div>
             <div style="display:inline-block">
-              <!--ko if: op.koLogicType() != null -->
-              <span style="padding-left:20px" data-bind="text:op.koLogicType().description"></span>
+              <!--ko if: action.koLogicType() != null -->
+              <span style="padding-left:20px" data-bind="text:action.koLogicType().description"></span>
               <!-- /ko -->
-              <span class="svd-logic-tab__item-header-icon" style="padding-left: 20px" data-bind="key2click, clickNoFocus: $parent.koRemoveOperation, attr: {title: $data.deleteOperationText }">
+              <span class="svd-logic-tab__item-header-icon" style="padding-left: 20px" data-bind="key2click, clickNoFocus: $parent.koRemoveAction, attr: {title: $data.deleteActionText }">
                 <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
               </span>
             </div>
           </div>
           <div style="max-width:800px">
-          <!--ko if: op.koTemplateObject() != null && !!op.koTemplate() -->
-            <!-- ko template: { name: op.template, data: op.koTemplateObject() } --><!-- /ko -->
+          <!--ko if: action.koTemplateObject() != null && !!action.koTemplate() -->
+            <!-- ko template: { name: action.template, data: action.koTemplateObject() } --><!-- /ko -->
           <!-- /ko -->
           </div>
         </div>
         <!-- /ko -->
         <p>
           <div style="width:200px;padding-bottom:20px">
-            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-add-new-operation-button" data-bind="click:koAddNewOperation, value: addNewOperationText" />
+            <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-add-new-action-button" data-bind="click:koAddNewAction, value: addNewActionText" />
           </div>
         </p>
         <p>

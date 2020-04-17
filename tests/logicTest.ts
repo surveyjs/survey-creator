@@ -1,5 +1,5 @@
 import * as Survey from "survey-knockout";
-import { SurveyLogic, SurveyLogicOperation } from "../src/logic";
+import { SurveyLogic, SurveyLogicAction } from "../src/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { SurveyCreator } from "../src/editor";
 import { SurveyElementEditorContent } from "../src/questionEditors/questionEditor";
@@ -64,7 +64,7 @@ QUnit.test("Add existing visible Items", function(assert) {
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
-QUnit.test("Add new operation immediately", function(assert) {
+QUnit.test("Add new action immediately", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
@@ -72,9 +72,9 @@ QUnit.test("Add new operation immediately", function(assert) {
   assert.equal(logic.mode, "view", "Default is mode is view");
   logic.addNew();
   assert.equal(logic.mode, "new", "Add new item");
-  var op = logic.editableItem.operations[0];
-  op.logicType = logic.getTypeByName("question_visibility");
-  op.itemSelector.koValue("q1");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
+  action.itemSelector.koValue("q1");
   logic.expressionEditor.koValue("{q2} = 1");
   logic.saveEditableItem();
   assert.equal(
@@ -121,14 +121,10 @@ QUnit.test("Add new item", function(assert) {
     3,
     "We have 3 questions here"
   );
-  assert.equal(
-    logic.editableItem.operations.length,
-    1,
-    "There is one operation"
-  );
-  var op = logic.editableItem.operations[0];
-  op.logicType = logic.getTypeByName("question_visibility");
-  var itemSelector = op.itemSelector;
+  assert.equal(logic.editableItem.actions.length, 1, "There is one action");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
+  var itemSelector = action.itemSelector;
   assert.equal(
     itemSelector.koElements().length,
     3,
@@ -152,7 +148,7 @@ QUnit.test("Add new item", function(assert) {
   );
   itemSelector.koValue("q3");
   logic.expressionEditor.koValue("{q1} = 2");
-  assert.equal(op.element["name"], "q3", "Question set correctly");
+  assert.equal(action.element["name"], "q3", "Question set correctly");
   assert.equal(logic.saveEditableItem(), true, "Save correctly");
   var q3 = <Survey.Question>survey.getQuestionByName("q3");
   assert.equal(q3.visibleIf, "{q1} = 2");
@@ -173,15 +169,11 @@ QUnit.test("Edit existing item", function(assert) {
   logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "There are items");
   assert.equal(logic.items.length, 1, "There is one item");
+  assert.equal(logic.items[0].actions.length, 2, "The item has two actions");
   assert.equal(
-    logic.items[0].operations.length,
-    2,
-    "The item has two operations"
-  );
-  assert.equal(
-    logic.items[0].operations[0].element["name"],
+    logic.items[0].actions[0].element["name"],
     "q1",
-    "Element in the first operation set correctly"
+    "Element in the first action set correctly"
   );
   logic.editItem(logic.items[0]);
   assert.ok(logic.editableItem, "Editable item is set");
@@ -208,7 +200,7 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
   assert.equal(logic.mode, "view", "There are items");
   assert.equal(logic.items.length, 2, "There are two items");
   logic.editItem(logic.items[0]);
-  var itemSelector = logic.editableItem.operations[0].itemSelector;
+  var itemSelector = logic.editableItem.actions[0].itemSelector;
   itemSelector.updateItems();
   assert.ok(itemSelector, "itemSelector has been created");
   assert.equal(
@@ -226,14 +218,14 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
     true,
     "The q3 is disabled, op0"
   );
-  logic.addNewOperation;
-  var op = logic.addOperation(logic.getTypeByName("question_visibility"));
-  op.itemSelector.koValue("q4");
-  assert.equal(op.element["name"], "q4", "Eleement set correctly");
+  logic.addNewAction;
+  var action = logic.addAction(logic.getTypeByName("question_visibility"));
+  action.itemSelector.koValue("q4");
+  assert.equal(action.element["name"], "q4", "Eleement set correctly");
   logic.saveEditableItem();
   logic.mode = "view";
   logic.editItem(logic.items[1]);
-  itemSelector = logic.editableItem.operations[0].itemSelector;
+  itemSelector = logic.editableItem.actions[0].itemSelector;
   itemSelector.updateItems();
   assert.equal(
     itemSelector.koElements().length,
@@ -246,7 +238,7 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
     "The q1 is disabled"
   );
 });
-QUnit.test("Remove same operations on save", function(assert) {
+QUnit.test("Remove same actions on save", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -260,22 +252,18 @@ QUnit.test("Remove same operations on save", function(assert) {
   logic = new SurveyLogic(survey);
   logic.editItem(logic.items[0]);
   var lt = logic.getTypeByName("question_visibility");
-  logic.addOperation(lt, <Survey.Question>survey.getQuestionByName("q1"));
-  logic.addOperation(lt, <Survey.Question>survey.getQuestionByName("q2"));
-  logic.addOperation(lt, <Survey.Question>survey.getQuestionByName("q2"));
-  assert.equal(
-    logic.editableItem.operations.length,
-    4,
-    "There are 4 operations"
-  );
+  logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q1"));
+  logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q2"));
+  logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q2"));
+  assert.equal(logic.editableItem.actions.length, 4, "There are 4 actions");
   logic.saveEditableItem();
   assert.equal(
-    logic.editableItem.operations.length,
+    logic.editableItem.actions.length,
     2,
-    "There are 2 operations left"
+    "There are 2 actions left"
   );
 });
-QUnit.test("Remove existing operation", function(assert) {
+QUnit.test("Remove existing action", function(assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -288,7 +276,7 @@ QUnit.test("Remove existing operation", function(assert) {
   });
   logic = new SurveyLogic(survey);
   logic.editItem(logic.items[0]);
-  logic.editableItem.removeOperation(logic.items[0].operations[1]);
+  logic.editableItem.removeAction(logic.items[0].actions[1]);
   logic.saveEditableItem();
   assert.equal(
     (<Survey.Question>survey.getQuestionByName("q2")).visibleIf,
@@ -595,24 +583,24 @@ QUnit.test("Add new item with two triggers", function(assert) {
   assert.ok(logic.expressionEditor, "expression editor is created");
   assert.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
   var lt = logic.getTypeByName("trigger_complete");
-  var op = logic.editableItem.operations[0];
-  op.logicType = lt;
+  var action = logic.editableItem.actions[0];
+  action.logicType = lt;
   assert.equal(lt.visible, false, "Trigger logic type is not visible");
   assert.equal(
-    logic.editableItem.operations.length,
+    logic.editableItem.actions.length,
     1,
-    "There is one operation in new item"
+    "There is one action in new item"
   );
-  logic.removeOperation(op);
+  logic.removeAction(action);
   assert.equal(
-    logic.editableItem.operations.length,
+    logic.editableItem.actions.length,
     1,
     "We are removing action and creatin a new one"
   );
-  op = logic.editableItem.operations[0];
-  assert.notOk(op.logicType, "There is no logic type");
+  action = logic.editableItem.actions[0];
+  assert.notOk(action.logicType, "There is no logic type");
   assert.equal(lt.visible, true, "Trigger logic type is visible again");
-  op.logicType = lt;
+  action.logicType = lt;
   logic.expressionEditor.koValue("{q1} = 2");
   assert.equal(survey.triggers.length, 0, "There is no triggers yet");
   logic.saveEditableItem();
@@ -656,15 +644,11 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
     "{q1} = 1",
     "the expression set correctly"
   );
-  assert.equal(
-    logic.editableItem.operations.length,
-    1,
-    "There is one operation"
-  );
-  var op = logic.editableItem.operations[0];
-  assert.ok(op.templateObject, "Template object is created");
+  assert.equal(logic.editableItem.actions.length, 1, "There is one action");
+  var action = logic.editableItem.actions[0];
+  assert.ok(action.templateObject, "Template object is created");
   logic.expressionEditor.koValue("{q1} = 10");
-  var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  var triggerEditor = <SurveyElementEditorContent>action.templateObject;
   assert.equal(
     triggerEditor.getPropertyEditorByName("expression").koVisible(),
     false,
@@ -673,7 +657,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
   logic.saveEditableItem();
   assert.equal(
-    logic.items[0].operations[0].text,
+    logic.items[0].actions[0].text,
     "Run expression: '({Question 2} + 1)' and set it's result into question: {Question 3}",
     "use showTitlesInExpressions option"
   );
@@ -699,9 +683,9 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();
-  var op = logic.editableItem.operations[0];
-  op.logicType = logic.getTypeByName("completedHtmlOnCondition");
-  op.templateObject.koValue("Some text");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("completedHtmlOnCondition");
+  action.templateObject.koValue("Some text");
   logic.expressionEditor.koValue("{q1} = 10");
   logic.saveEditableItem();
   assert.equal(survey.completedHtmlOnCondition.length, 1, "There is one item");
@@ -716,13 +700,9 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     "html set correctly"
   );
   logic.editItem(logic.items[0]);
-  assert.equal(
-    logic.items[0].operations.length,
-    1,
-    "There is one operation here"
-  );
+  assert.equal(logic.items[0].actions.length, 1, "There is one action here");
   logic.expressionEditor.koValue(logic.expressionEditor.koValue() + "0");
-  op.templateObject.koValue(op.templateObject.koValue() + " 2");
+  action.templateObject.koValue(action.templateObject.koValue() + " 2");
   logic.saveEditableItem();
   assert.equal(
     survey.completedHtmlOnCondition.length,
@@ -751,15 +731,15 @@ QUnit.test("Use survey creator options", function(assert) {
   });
   var logic = new SurveyLogic(survey, options);
   logic.addNew();
-  var op = logic.editableItem.operations[0];
-  op.logicType = logic.getTypeByName("question_visibility");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
   assert.equal(
     logic.expressionEditor.options.showTitlesInExpressions,
     true,
     "Use correct options in expression editor"
   );
   assert.equal(
-    op.itemSelector.koElements()[0].text,
+    action.itemSelector.koElements()[0].text,
     "Question 1",
     "Use showTitlesInExpression"
   );
@@ -774,7 +754,7 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
   assert.equal(logic.koReadOnly(), true, "It is readOnly");
 });
-QUnit.test("Displaying correct text for logic operation", function(assert) {
+QUnit.test("Displaying correct text for logic action", function(assert) {
   var survey = new Survey.SurveyModel({
     pages: [
       {
@@ -838,7 +818,7 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 1, "We have one item");
-  var ops = logic.items[0].operations;
+  var ops = logic.items[0].actions;
   var logicTypes = [
     "page_visibility",
     "panel_visibility",
@@ -856,9 +836,9 @@ QUnit.test("Displaying correct text for logic operation", function(assert) {
   assert.equal(
     ops.length,
     logicTypes.length,
-    "There are 11 operations: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
+    "There are 11 actions: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
   );
-  var findOp = function(name: string): SurveyLogicOperation {
+  var findOp = function(name: string): SurveyLogicAction {
     for (var i = 0; i < ops.length; i++) {
       if (ops[i].logicType.name == name) return ops[i];
     }
@@ -923,26 +903,26 @@ QUnit.test("Logic editing errors", function(assert) {
     "Check 2"
   );
   logic.expressionEditor.koValue("{q1} = 1");
-  assert.equal(logic.saveEditableItem(), false, "There is no operations");
+  assert.equal(logic.saveEditableItem(), false, "There is no actions");
   assert.ok(logic.koErrorText());
-  var op = logic.editableItem.operations[0];
-  op.logicType = logic.getTypeByName("question_visibility");
-  op.itemSelector.koValue("q1");
-  op.itemSelector.koValue("");
-  assert.equal(logic.saveEditableItem(), false, "Operation is incorret");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
+  action.itemSelector.koValue("q1");
+  action.itemSelector.koValue("");
+  assert.equal(logic.saveEditableItem(), false, "Action is incorret");
   assert.equal(logic.koErrorText(), "Please, fix problems in your action(s).");
-  op.itemSelector.koValue("q2");
-  assert.equal(logic.saveEditableItem(), true, "Operation is corret now");
-  op = logic.addNewOperation();
-  op.logicType = logic.getTypeByName("trigger_setvalue");
-  assert.equal(logic.editableItem.operations.length, 2, "There two actions");
-  assert.equal(op.hasError(), true, "setToName is empty");
-  var triggerEditor = <SurveyElementEditorContent>op.templateObject;
+  action.itemSelector.koValue("q2");
+  assert.equal(logic.saveEditableItem(), true, "Action is corret now");
+  action = logic.addNewAction();
+  action.logicType = logic.getTypeByName("trigger_setvalue");
+  assert.equal(logic.editableItem.actions.length, 2, "There two actions");
+  assert.equal(action.hasError(), true, "setToName is empty");
+  var triggerEditor = <SurveyElementEditorContent>action.templateObject;
   triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q2");
   triggerEditor.getPropertyEditorByName("setValue").editor.koValue("newValue");
-  assert.equal(op.hasError(), false, "setToName  is correct");
+  assert.equal(action.hasError(), false, "setToName  is correct");
   assert.equal(
-    logic.editableItem.operations.length,
+    logic.editableItem.actions.length,
     2,
     "trigger set correctly now"
   );
@@ -973,21 +953,21 @@ QUnit.test("Return without saving", function(assert) {
   item.edit();
   logic.expressionEditor.koTextValue("{q1} = 2");
   var triggerEditor = <SurveyElementEditorContent>(
-    item.operations[1].templateObject
+    item.actions[1].templateObject
   );
   triggerEditor.getPropertyEditorByName("gotoName").editor.koValue("q3");
-  logic.addOperation(logic.getTypeByName("question_visibility"));
-  assert.equal(item.operations.length, 3, "There three operations");
+  logic.addAction(logic.getTypeByName("question_visibility"));
+  assert.equal(item.actions.length, 3, "There three actions");
   assert.equal(logic.saveEditableItem(), false, "Can't save");
   assert.ok(logic.koErrorText(), "There is an error in the text");
   logic.koShowView();
   item = logic.items[0];
-  assert.equal(item.operations.length, 2, "The last operation was not saved");
+  assert.equal(item.actions.length, 2, "The last action was not saved");
   assert.equal(item.expression, "{q1} = 1", "Item expression is not changed");
   assert.equal(
-    item.operations[1].element["gotoName"],
+    item.actions[1].element["gotoName"],
     "q2",
-    "operation gotoName is not changed"
+    "action gotoName is not changed"
   );
   assert.notOk(logic.koErrorText(), "The error is cleared");
 });
@@ -1021,8 +1001,8 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
   var item = logic.items[0];
   item.edit();
   logic.expressionEditor.koTextValue("{q1} = 2");
-  logic.addOperation(logic.getTypeByName("question_visibility"));
-  item.operations[2].itemSelector.koValue("q3");
+  logic.addAction(logic.getTypeByName("question_visibility"));
+  item.actions[2].itemSelector.koValue("q3");
   assert.equal(modifiedCounter, 0, "Has not changed yet");
   logic.saveEditableItem();
   assert.equal(modifiedCounter, 1, "It was changed one time");
@@ -1061,19 +1041,19 @@ QUnit.test("Allow logic type to be null and change it", function(assert) {
   var item = logic.items[0];
   item.edit();
   assert.ok(logic.editableItem, "Editable item is created");
-  var op = logic.editableItem.operations[0];
-  assert.equal(op.logicType.name, "question_visibility");
-  op.logicType = null;
-  assert.notOk(op.logicType, "Logic type is empty");
+  var action = logic.editableItem.actions[0];
+  assert.equal(action.logicType.name, "question_visibility");
+  action.logicType = null;
+  assert.notOk(action.logicType, "Logic type is empty");
   assert.notOk(logic.saveEditableItem(), "Can't save there is no logic type");
-  assert.ok(op.koErrorText(), "There is an error text");
-  op.logicType = logic.getTypeByName("page_visibility");
-  assert.notOk(op.koErrorText(), "There is no error text");
-  assert.notOk(logic.saveEditableItem(), "Operation is not set");
-  op.itemSelector.element = survey.currentPage;
-  assert.ok(logic.saveEditableItem(), "Operation is good");
+  assert.ok(action.koErrorText(), "There is an error text");
+  action.logicType = logic.getTypeByName("page_visibility");
+  assert.notOk(action.koErrorText(), "There is no error text");
+  assert.notOk(logic.saveEditableItem(), "Action is not set");
+  action.itemSelector.element = survey.currentPage;
+  assert.ok(logic.saveEditableItem(), "Action is good");
 });
-QUnit.test("One operation exists in new item", function(assert) {
+QUnit.test("One action exists in new item", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -1087,16 +1067,16 @@ QUnit.test("One operation exists in new item", function(assert) {
   var item = logic.editableItem;
   logic.expressionEditor.koValue("{q1} = 1");
   assert.ok(item, "Editable item is created");
-  assert.equal(item.operations.length, 1, "There is one operation in it");
-  var op = item.operations[0];
-  assert.notOk(op.logicType, "logic type is emtpy");
+  assert.equal(item.actions.length, 1, "There is one action in it");
+  var action = item.actions[0];
+  assert.notOk(action.logicType, "logic type is emtpy");
   assert.notOk(logic.saveEditableItem(), "Can't save there is no logic type");
-  assert.ok(op.koErrorText(), "There is an error text");
-  op.logicType = logic.getTypeByName("page_visibility");
-  assert.notOk(op.koErrorText(), "There is no error text");
-  assert.notOk(logic.saveEditableItem(), "Operation is not set");
-  op.itemSelector.element = survey.currentPage;
-  assert.ok(logic.saveEditableItem(), "Operation is good");
+  assert.ok(action.koErrorText(), "There is an error text");
+  action.logicType = logic.getTypeByName("page_visibility");
+  assert.notOk(action.koErrorText(), "There is no error text");
+  assert.notOk(logic.saveEditableItem(), "Action is not set");
+  action.itemSelector.element = survey.currentPage;
+  assert.ok(logic.saveEditableItem(), "Action is good");
 });
 QUnit.test("Limit the number of action types.", function(assert) {
   var survey = new Survey.SurveyModel({
