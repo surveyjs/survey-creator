@@ -566,6 +566,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * Use this event to show a check and custom error in property grid and adorners of the selected elements.
+   * Returns true if selected element is null or there is no errors.
+   * <br/> options.errors an array of error messages if any.
+   */
+  public onValidateSelectedElement: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj  the survey object which property is edited in the Property Editor.
@@ -2027,11 +2036,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Returns true if selected element is null or there is no errors.
    */
   public validateSelectedElement(): boolean {
-    if (!this.selectedElement) return true;
+    var isValid = true;
+    if (!this.selectedElement) return isValid;
     if (!!this.elementPropertyGridValue) {
-      return !this.elementPropertyGridValue.hasErrors();
+      isValid = !this.elementPropertyGridValue.hasErrors();
     }
-    return true;
+    var options = { errors: [] };
+    this.onValidateSelectedElement.fire(this, options);
+    return isValid && options.errors.length == 0;
   }
   private selectedObjectChanged(obj: Survey.Base) {
     var options = { newSelectedElement: obj };
@@ -2108,9 +2120,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(<HTMLElement>(
-      this.renderedElement.querySelector("#surveyjsJSONEditor")
-    ));
+    this.jsonEditor.init(
+      <HTMLElement>this.renderedElement.querySelector("#surveyjsJSONEditor")
+    );
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
         width: "100%",
@@ -2211,9 +2223,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private disableSurveySelectedElementChanging: boolean = false;
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(<SurveyForDesigner>(
-      this.createSurvey({}, "designer", SurveyForDesigner)
-    ));
+    this.surveyValue(
+      <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
+    );
     this.undoRedoManager = new UndoRedoManager();
     this.surveyValue().getEditor = () => self;
     ko.computed(() => {

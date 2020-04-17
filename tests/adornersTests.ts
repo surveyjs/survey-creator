@@ -204,3 +204,35 @@ QUnit.test("TitleInplaceEditor start edit callback", function(assert) {
   inputElement.focus();
   assert.equal(callCount, 1, "onTitleInplaceEditorStartEdit has been called");
 });
+
+QUnit.test("TitleInplaceEditor validateSelectedElement", function(assert) {
+  var creator = new SurveyCreator();
+  var target = new Survey.QuestionTextModel("q1");
+  var adornerModel = new TitleInplaceEditor(target, "title", null, "", creator);
+  creator.onPropertyValidationCustomError.add((_, options) => {
+    options.error = options.value === "test1" ? "error" : "";
+  });
+  creator.selectedElement = target;
+
+  var result = creator.validateSelectedElement();
+  assert.equal(adornerModel.error(), "", "No errors initial");
+
+  adornerModel.editingName("test");
+  adornerModel.postEdit();
+  result = creator.validateSelectedElement();
+  assert.ok(result, "No errors first change");
+  assert.equal(adornerModel.error(), "", "No errors first change");
+
+  adornerModel.editingName("test1");
+  adornerModel.postEdit();
+  result = creator.validateSelectedElement();
+  assert.notOk(result, "Error in adorner");
+  assert.equal(adornerModel.error(), "error", "Error in adorner");
+
+  assert.notOk(creator.onValidateSelectedElement.isEmpty, "Has subscriptions");
+  adornerModel.dispose();
+  assert.ok(
+    creator.onValidateSelectedElement.isEmpty,
+    "Subscriptions removed on destroy"
+  );
+});

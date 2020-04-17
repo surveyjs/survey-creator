@@ -62,6 +62,12 @@ export class TitleInplaceEditor {
     }
   }
 
+  private onValidateSelectedElement = (creator, options) => {
+    if (this.hasErrors()) {
+      options.errors.push(this.error());
+    }
+  };
+
   getInputElement() {
     return this.rootElement.getElementsByTagName("input")[0];
   }
@@ -88,6 +94,10 @@ export class TitleInplaceEditor {
       this.prevName(ko.unwrap(target[name]));
       this.editingName(ko.unwrap(target[name]));
     });
+
+    if (!!editor && !!editor.onValidateSelectedElement) {
+      editor.onValidateSelectedElement.add(this.onValidateSelectedElement);
+    }
 
     this.forNeibours(
       (element) =>
@@ -190,8 +200,13 @@ export class TitleInplaceEditor {
     }
   };
 
-  destroy() {
+  dispose() {
     this._valueSubscription.dispose();
+    if (!!this.editor && !!this.editor.onValidateSelectedElement) {
+      this.editor.onValidateSelectedElement.remove(
+        this.onValidateSelectedElement
+      );
+    }
   }
 }
 
@@ -228,7 +243,7 @@ ko.components.register("title-editor", {
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         model.valueChanged = undefined;
-        model.destroy();
+        model.dispose();
       });
 
       return model;
