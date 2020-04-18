@@ -332,34 +332,34 @@ question.contentPanel.showQuestionNumbers = "default";
 ```
 We could leave our component with this change. However, there are some properties now, that it is better to hide from SurveyJS Creator user and additionally change the default value for _titleLocation_ property from “default” to “hidden” to avoid unnecessary line in our question JSON. We can use _onInit_ function to implement this functionality. We will use _Survey.Serializer.addProperty_ function. We can’t use _Survey.Serializer.findProperty_ function to change the property attributes, because in this case we will change attributes for the basic question properties and it will be impact all questions. We need to change properties for our “shippingaddress” class only. That is why we need to override or define these properties one more time with new attributes.
 
-```javascript
-onInit() {
-  //Override titleLocation property attributes for "shippingaddress" class by making it invisible in property grid and change its default value
-  Survey.Serializer.addProperty("shippingaddress", {
-    name: "titleLocation",
-    visible: false,
-    default: "hidden",
-  });
-  Survey.Serializer.addProperty("shippingaddress", {
-    name: "title",
-    visible: false,
-  });
-  Survey.Serializer.addProperty("shippingaddress", {
-    name: "description",
-    visible: false,
-  });
-  Survey.Serializer.addProperty("shippingaddress", {
-    name: "hidenumber",
-    visible: false,
-  });
-}
+```JavaScript
+  onInit() {
+    //Override titleLocation property attributes for "shippingaddress" class by making it invisible in property grid and change its default value
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "titleLocation",
+      visible: false,
+      default: "hidden",
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "title",
+      visible: false,
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "description",
+      visible: false,
+    });
+    Survey.Serializer.addProperty("shippingaddress", {
+      name: "hidenumber",
+      visible: false,
+    });
+  }
 ```
 
 This code _onInit_ function removes four unneeded properties from the property grid and will not serialize _titleLocation_ property that we changed in the code.
 
 Finally, the component the code for component registration becomes the following:
 
-```javascript
+```JavaScript
 Survey.ComponentCollection.Instance.add({
   name: "shippingaddress",
   title: "Shipping Address",
@@ -798,6 +798,7 @@ Survey.ComponentCollection.Instance.add({
     },
 });
 ```
+
 SurveyJS Creator user will get the same experience with this "ordergrid" component like with "ordertable" component. The JSON is the same:
 
 ```JavaScript
