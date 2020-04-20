@@ -436,7 +436,7 @@ Survey.ComponentCollection.Instance.add({
   },
 });
 ```
-Go to live [shippingaddress component](https://surveyjs.io/Examples/Survey-Creator?id=component-fullname) example.
+Go to live [shippingaddress component](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress) example.
 
 
 <div id="order-table-example"></div>
