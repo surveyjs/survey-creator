@@ -1,6 +1,9 @@
 <tr>
   <td class="svd-itemvalue-actions-container">
-    <div class="svd-drag-handle svd-itemvalue-action">
+    <div
+      class="svd-drag-handle svd-itemvalue-action"
+      data-bind="visible: !$data.editor.readOnly()"
+    >
       <span>
         <svg-icon
           class="svd-primary-icon"
@@ -28,7 +31,7 @@
   <td class="svd-textitems-column">
     <div
       class="svd-itemvalue-action"
-      data-bind="visible: editor.koAllowAddRemoveItems() && koCanDeleteItem(), click: editor.onDeleteClick"
+      data-bind="visible: editor.koAllowAddRemoveItems() && koCanDeleteItem() && !editor.readOnly(), click: editor.onDeleteClick"
     >
       <span>
         <svg-icon

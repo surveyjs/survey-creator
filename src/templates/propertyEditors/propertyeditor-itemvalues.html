@@ -12,6 +12,6 @@
       <!-- /ko -->
   </div>
   <div data-bind="visible:koIsList() && koActiveView() != 'form'">
-      <textarea class="form-control" data-bind="textInput: koItemsText" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
+      <textarea class="form-control" data-bind="textInput: koItemsText, disable: $data.readOnly" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>
   </div>
 </script>
