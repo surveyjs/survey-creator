@@ -51,6 +51,7 @@ export class QuestionToolbox {
     "boolean",
     "image",
     "html",
+    "signaturepad",
   ];
 
   private _questionDefaultSettings = {

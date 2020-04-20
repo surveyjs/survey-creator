@@ -38,6 +38,7 @@ export var enStrings = {
     text: "Single Input",
     boolean: "Boolean",
     expression: "Expression (read-only)",
+    signaturepad: "Signature pad",
     flowpanel: "Flow Panel",
   },
   //Strings in Editor
