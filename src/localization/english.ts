@@ -467,6 +467,7 @@ export var enStrings = {
     top: "top",
     bottom: "bottom",
     topBottom: "top and bottom",
+    both: "both",
     left: "left",
     color: "color",
     date: "date",
