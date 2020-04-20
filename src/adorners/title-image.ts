@@ -9,6 +9,9 @@ export var titleImageAdorner = {
   },
   getElementName: (model) => "logo",
   afterRender: (elements: HTMLElement[], model: SurveyForDesigner, editor) => {
+    if (editor.readOnly) {
+      return;
+    }
     var itemsRoot = elements[0];
     var input = document.createElement("input");
     input.type = "file";
