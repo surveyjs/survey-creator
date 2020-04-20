@@ -71,7 +71,8 @@ test(`change page title`, async (t) => {
     .find("span")
     .withText("Input page title here");
   await t
-    .click(`[title~=Dropdown]`)
+    .expect(pageTitle.visible)
+    .ok()
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
@@ -84,7 +85,8 @@ test(`change page description`, async (t) => {
     .find("span")
     .withText("Enter a page description");
   await t
-    .click(`[title~=Dropdown]`)
+    .expect(pageTitle.visible)
+    .ok()
     .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
@@ -92,6 +94,64 @@ test(`change page description`, async (t) => {
       Selector(`.svd_page .description_editable > span:nth-child(1)`).innerText
     )
     .eql("puppies");
+});
+
+test(`change survey title`, async (t) => {
+  const surveyTitle = Selector(".sv_header__text")
+    .find("span")
+    .withText("Input survey title here");
+  await t
+    .expect(surveyTitle.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .click(surveyTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(
+      Selector(`.sv_header__text .title_editable > span:nth-child(1)`).innerText
+    )
+    .eql("puppies");
+});
+
+test(`change survey description`, async (t) => {
+  const surveyTitle = Selector(".sv_header__text")
+    .find("span")
+    .withText("Enter a survey description");
+  await t
+    .expect(surveyTitle.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .click(surveyTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(
+      Selector(`.sv_header__text .description_editable > span:nth-child(1)`)
+        .innerText
+    )
+    .eql("puppies");
+});
+
+test(`set survey logo`, async (t) => {
+  const surveyLogo = Selector(".sv_logo");
+  const callChooseImage = ClientFunction(() => {
+    var el = document.querySelectorAll(
+      "title-actions .svda_question_action"
+    )[0];
+    var model = ko.contextFor(el).$parents[0];
+    model.uploadFiles();
+  });
+
+  await t
+    .expect(surveyLogo.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .expect(surveyLogo.visible)
+    .notOk()
+    .setFilesToUpload(".svd_survey_header .svda-choose-file", ["./image.jpg"]);
+
+  await callChooseImage();
+
+  await t.expect(surveyLogo.visible).ok();
 });
 
 test(`dropdown work with other`, async (t) => {
@@ -175,6 +235,7 @@ test(`checkbox work with other/select all/none`, async (t) => {
   // .debug()
   // .wait(3000);
 });
+
 test(`dropdown readonly`, async (t) => {
   const makeEditorReadOnly = ClientFunction(() => {
     creator.readOnly = true;

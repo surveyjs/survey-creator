@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import {
   registerAdorner,
   SurveyForDesigner,
-  ISurveyObjectMenuItem
+  ISurveyObjectMenuItem,
 } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-knockout";
@@ -25,26 +25,14 @@ export class TitleActionsViewModel {
         )
       ),
       hasTitle: true,
-      onClick: (model: SurveyForDesigner) => {
+      onClick: () => {
         if (!window["FileReader"]) return;
         this.input.value = "";
         this.input.onchange = () => {
-          if (!this.input || !this.input.files || this.input.files.length < 1)
-            return;
-          let files = [];
-          for (let i = 0; i < this.input.files.length; i++) {
-            files.push(this.input.files[i]);
-          }
-          if (!files[0]) return;
-          survey.getEditor().uploadFiles(files, (_, link) => {
-            survey.logo = link;
-            if (survey.logoPosition === "none") {
-              survey.logoPosition = "left";
-            }
-          });
+          this.uploadFiles();
         };
         this.input.click();
-      }
+      },
     });
     this.actions.push(<any>{
       name: "setLogoPosition",
@@ -59,7 +47,7 @@ export class TitleActionsViewModel {
         { value: "left", text: this.getLocString("pe.logoPositions.left") },
         { value: "right", text: this.getLocString("pe.logoPositions.right") },
         { value: "top", text: this.getLocString("pe.logoPositions.top") },
-        { value: "bottom", text: this.getLocString("pe.logoPositions.bottom") }
+        { value: "bottom", text: this.getLocString("pe.logoPositions.bottom") },
       ],
       onClick: (data, event) => {
         var newValue = event.target.value;
@@ -67,12 +55,12 @@ export class TitleActionsViewModel {
         if (newValue === "none") {
           survey.logo = undefined;
         }
-      }
+      },
     });
     if (survey.getEditor().allowControlSurveyTitleVisibility) {
       this.actions.push(<any>{
         visible: ko.computed(() => survey.koShowHeader()),
-        template: "action-separator"
+        template: "action-separator",
       });
       this.actions.push(<any>{
         name: "showSurveyTitle",
@@ -87,7 +75,7 @@ export class TitleActionsViewModel {
         }),
         onClick: (survey: SurveyForDesigner) => {
           survey.koShowHeader(!survey.koShowHeader());
-        }
+        },
       });
     }
     ko.computed(() => {
@@ -97,6 +85,21 @@ export class TitleActionsViewModel {
         headerContainer.classList.remove("svd_survey_header--hidden");
       } else {
         headerContainer.classList.add("svd_survey_header--hidden");
+      }
+    });
+  }
+
+  uploadFiles() {
+    if (!this.input || !this.input.files || this.input.files.length < 1) return;
+    let files = [];
+    for (let i = 0; i < this.input.files.length; i++) {
+      files.push(this.input.files[i]);
+    }
+    if (!files[0]) return;
+    this.survey.getEditor().uploadFiles(files, (_, link) => {
+      this.survey.logo = link;
+      if (this.survey.logoPosition === "none") {
+        this.survey.logoPosition = "left";
       }
     });
   }
@@ -128,7 +131,7 @@ ko.components.register("title-actions", {
         componentInfo.element
       );
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
