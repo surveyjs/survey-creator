@@ -1131,6 +1131,16 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     });
     return Survey.Serializer.findProperty("survey", "hiddenLogic");
   }
+  public get hideExpressionHeader(): boolean {
+    return (
+      !!this.expressionEditor && this.expressionEditor.koShowExpressionHeader()
+    );
+  }
+  public set hideExpressionHeader(val: boolean) {
+    if (!!this.expressionEditor) {
+      this.expressionEditor.koShowExpressionHeader(val);
+    }
+  }
   private createExpressionPropertyEditor() {
     this.expressionEditor = new SurveyPropertyConditionEditor(
       this.getExpressionProperty()

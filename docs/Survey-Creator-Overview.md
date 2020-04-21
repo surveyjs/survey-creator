@@ -99,6 +99,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showDefaultLanguageInTestSurveyTab: "auto",_|Before v1.1.3 the default value was _true_. The language selector was visible by default and allows to select all available languages. You could set this property to _false_ to hide it. Since v1.1.3 the behavior has been changed. The default value is _"auto"_ and the selector is visible when there are more than one language in at least one localizable string in the survey. If you set it to _true_ or _"all"_ it will be shown always. Setting it to _"all"_ will display all available languages (30+) in the selector, while _"auto"_ and _true_ only languages that are used in the current survey. Set it to _false_ to hide the language selector.|
 |_showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
+|_hideExpressionHeaderInLogicTab: true_|Set this property to true to hide the expression header text and expand/collapse button in editing item in logic tab.|
 |_};_||
 
 <div id="loadsavesurvey"></div>
@@ -559,15 +560,19 @@ It is an optional attribute. The library do not serialize the default value into
 **choices**
 
 It is an optional attribute. It makes sense for string and numeric property types only. If the choices attribute is set, the property editor for the property becomes dropdown. You may assign the array of values to this attribute or a function that will return the array of strings or numbers.
+
 ```javascript
 { name: "showProgressBar", default: "off", choices: ["off", "top", "bottom"] }
 //returns the supported languages in the surveyjs library.
 { name: "locale", choices: function() { return Survey.surveyLocalization.getLocales(); } }
 ```
+
 From v1.0.94, you can get the choices from the web. Here is the example of adding the "country" getting its values from web service.
+
 ```javascript
 //It uses rest full service and choicesCallback function to tell property editor that choices are loaded from the web
-Survey.Serializer.addProperty("survey", { name: "country", category: "general", 
+Survey.Serializer.addProperty("survey",
+  { name: "country", category: "general", 
     choices: function(obj, choicesCallback) {
       //We are going to use choicesCallback here
       var xhr = new XMLHttpRequest();
@@ -615,6 +620,7 @@ An optional Boolean property. By default, it is true. Set it to false, if you wa
 **visibleIf**
 
 Available since v1.0.94. It is a function that has an obj parameter, the editing object. It should return the boolean value: true to show the property and false to hide the property. If the property depends on another property value, then use **dependsOn**. On changing any property from the **dependsOn** array, the visibleIf function will be called to check, if it returns other value then before. Here is the example:
+
 ```javascript
 //This property depends on date format property of text question
 //It is visible if inputFormat property equals to "date*" values
@@ -632,6 +638,7 @@ Survey.Serializer.addProperty("text", {
   }
 });
 ```
+
 ---
 **visibleIndex**
 

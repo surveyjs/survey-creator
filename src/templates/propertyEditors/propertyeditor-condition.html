@@ -5,7 +5,7 @@
 
 <script type="text/html" id="propertyeditorcontent-condition">
   <div class="svd-propertyeditor-condition">
-    <div class="svd-expression-header" data-bind="click: onShowHideEditor">
+    <div class="svd-expression-header" data-bind="visible: koShowExpressionHeader, click: onShowHideEditor">
         <span
             data-bind="text: koConditionDisplayText"
         ></span>
@@ -24,7 +24,7 @@
         <!-- /ko -->
         </span>
     </div>
-    <div class="svd-expression-content" data-bind="visible: koIsEditorShowing()">
+    <div class="svd-expression-content" data-bind="visible: koIsEditorShowing() || !koShowExpressionHeader()">
         <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
             <button class="btn btn-sm btn-xs" data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click: onChangeViewClick.bind($data, 'form'), text: $data.getLocString('pe.buildExpression')"></button>
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick.bind($data, 'text'), text: $data.getLocString('pe.editExpression')"></button>

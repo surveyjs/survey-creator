@@ -842,7 +842,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
    * showObjectTitles, inplaceEditForValues, showTitlesInExpressions, allowEditExpressionsInTextEditor,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
-   * showSurveyTitle, allowControlSurveyTitleVisibility
+   * showSurveyTitle, allowControlSurveyTitleVisibility, hideExpressionHeaderInLogicTab
    */
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
@@ -961,6 +961,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       });
     };
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
+    this.logic.hideExpressionHeader =
+      !!options && options.hideExpressionHeader === true;
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -2120,9 +2122,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(
-      <HTMLElement>this.renderedElement.querySelector("#surveyjsJSONEditor")
-    );
+    this.jsonEditor.init(<HTMLElement>(
+      this.renderedElement.querySelector("#surveyjsJSONEditor")
+    ));
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
         width: "100%",
@@ -2223,9 +2225,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private disableSurveySelectedElementChanging: boolean = false;
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(
-      <SurveyForDesigner>this.createSurvey({}, "designer", SurveyForDesigner)
-    );
+    this.surveyValue(<SurveyForDesigner>(
+      this.createSurvey({}, "designer", SurveyForDesigner)
+    ));
     this.undoRedoManager = new UndoRedoManager();
     this.surveyValue().getEditor = () => self;
     ko.computed(() => {

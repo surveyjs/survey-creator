@@ -1010,6 +1010,42 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
   assert.equal(modifiedCounter, 2, "It was changed two times");
 });
 
+QUnit.test(
+  "Hide Expression Header in Condition Property Editor in Logic tab",
+  function(assert) {
+    var creator = new SurveyCreator(null, {
+      hideExpressionHeaderInLogicTab: true,
+    });
+    creator.JSON = {
+      pages: [
+        {
+          elements: [
+            { type: "text", name: "q1" },
+            { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+            { type: "text", name: "q3" },
+          ],
+        },
+      ],
+      triggers: [
+        {
+          type: "skip",
+          expression: "{q1} = 1",
+          gotoName: "q2",
+        },
+      ],
+    };
+    creator.showLogicEditor();
+    var logic = creator.logic;
+    var item = logic.items[0];
+    item.edit();
+    assert.equal(
+      logic.expressionEditor.koShowExpressionHeader(),
+      false,
+      "Do not show expression header"
+    );
+  }
+);
+
 QUnit.test("Add existing visible Items", function(assert) {
   var survey = new Survey.SurveyModel({
     elements: [
