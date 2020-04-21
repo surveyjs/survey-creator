@@ -73,7 +73,7 @@ export class TitleActionsViewModel {
           }
           return "icon-arrow_up_10x10";
         }),
-        onClick: (survey: SurveyForDesigner) => {
+        onClick: () => {
           survey.koShowHeader(!survey.koShowHeader());
         },
       });
