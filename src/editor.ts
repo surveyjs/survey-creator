@@ -1107,8 +1107,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   });
 
   private updateKoCanUndoRedo() {
-    this.koCanUndo(this.undoRedoManager.canUndo());
-    this.koCanRedo(this.undoRedoManager.canRedo());
+    this.koCanUndo(!this.readOnly && this.undoRedoManager.canUndo());
+    this.koCanRedo(!this.readOnly && this.undoRedoManager.canRedo());
   }
 
   protected addToolbarItems() {
@@ -1120,6 +1120,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
       if (!toolbarItem.action) {
         toolbarItem.action = () => {
+          if (this.readOnly) return;
           this.execute(command);
         };
       }
