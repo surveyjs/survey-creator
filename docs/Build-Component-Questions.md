@@ -332,7 +332,7 @@ question.contentPanel.showQuestionNumbers = "default";
 ```
 We could leave our component with this change. However, there are some properties now, that it is better to hide from SurveyJS Creator user and additionally change the default value for _titleLocation_ property from “default” to “hidden” to avoid unnecessary line in our question JSON. We can use _onInit_ function to implement this functionality. We will use _Survey.Serializer.addProperty_ function. We can’t use _Survey.Serializer.findProperty_ function to change the property attributes, because in this case we will change attributes for the basic question properties and it will be impact all questions. We need to change properties for our “shippingaddress” class only. That is why we need to override or define these properties one more time with new attributes.
 
-```JavaScript
+```javascript
   onInit() {
     //Override titleLocation property attributes for "shippingaddress" class by making it invisible in property grid and change its default value
     Survey.Serializer.addProperty("shippingaddress", {
@@ -359,7 +359,7 @@ This code _onInit_ function removes four unneeded properties from the property g
 
 Finally, the component the code for component registration becomes the following:
 
-```JavaScript
+```javascript
 Survey.ComponentCollection.Instance.add({
   name: "shippingaddress",
   title: "Shipping Address",
@@ -623,7 +623,7 @@ _Order Items property_
 
 The question JSON becomes readable and clean:
 
-```JavaScript
+```javascript
 {
     "type": "ordertable",
     "name": "q1",
@@ -656,7 +656,7 @@ We can solve the previous task by using matrix dynamic question. End-user will h
 Unfortunately, end-user could not build this type of survey in SurveyJS Creator. It requries to write JavaScript code and handle several events. The working example you can find [here](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-totals).
 
 
-```JavaScript
+```javascript
 Survey.ComponentCollection.Instance.add({
     name: "ordergrid",
     title: "Order Grid",
@@ -801,7 +801,7 @@ Survey.ComponentCollection.Instance.add({
 
 SurveyJS Creator user will get the same experience with this "ordergrid" component like with "ordertable" component. The JSON is the same:
 
-```JavaScript
+```javascript
 {
     "type": "ordergrid",
     "name": "q1",
@@ -844,7 +844,7 @@ To register a new component, you have to add to into _Survey.ComponentCollection
 
 ### The full list of parameters
 
-```JavaScript
+```javascript
 Survey.ComponentCollection.Instance.add({
   /**
    * Required attribute. Unique name in lower case.
