@@ -2105,6 +2105,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.surveyjs) {
       var self = this;
       this.surveyjs.onkeydown = function(e) {
+        if (self.readOnly) return;
         if (!e) return;
         // if (e.keyCode == 46) self.deleteQuestion();
         if (e.keyCode == 38 || e.keyCode == 40) {
