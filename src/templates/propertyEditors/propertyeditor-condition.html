@@ -30,7 +30,7 @@
             <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick.bind($data, 'text'), text: $data.getLocString('pe.editExpression')"></button>
         </div>
         <div data-bind="visible: koActiveView() == 'form'">
-            <div class="svd-expression-setuptext" data-bind="visible:$data.koSetupText(), text: $data.koSetupText"></div>
+            <div class="svd-expression-setup" data-bind="visible:$data.koSetupText(), text: $data.koSetupText"></div>
             <!-- ko if: !koIsWideMode() -->
                 <!-- ko foreach: koEditorItems -->
                     <div class="svd_wrap_elements">
