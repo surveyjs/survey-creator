@@ -358,6 +358,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   public onChangeViewClick: any;
   public onShowHideEditor: any;
   public koShowExpressionHeader: any;
+  public koSetupText: any;
   public koShowTabs: any;
   public koActiveView: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
@@ -377,6 +378,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     super(property);
     this.koShowTabs = ko.observable(true);
     this.koShowExpressionHeader = ko.observable(true);
+    this.koSetupText = ko.observable("");
     this.koActiveView = ko.observable("form");
     this.koTextValue = ko.observable();
     this.koEditorItems = ko.observableArray<ConditionEditorItem>([]);

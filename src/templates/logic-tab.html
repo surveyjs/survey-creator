@@ -63,6 +63,7 @@
         <!-- ko foreach: {data: $data.koEditableItem().koActions, as: 'action' } -->
         <div class="svd-logic-tab__item">
           <div class="form-inline form-group" style="padding-bottom:10px">
+            <div class="svd-logic-tab__actions-setuptext" data-bind="visible:$index() == 0 && $parent.actionsSetupText, text: $parent.actionsSetupText"></div>
             <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
             <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
               <select onmousewheel="return false;" data-bind="if: true, value:action.koLogicType, attr: { 'aria-label': $parent.selectedActionCaption }">

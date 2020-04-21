@@ -175,6 +175,8 @@ export var enStrings = {
         "The logic expression is empty or invalid. Please correct it.",
       noActionError: "Please, add at least one action.",
       actionInvalid: "Please, fix problems in your action(s).",
+      expressionSetup: "",
+      actionsSetup: "",
     },
   },
   //Property names in table headers

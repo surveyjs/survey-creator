@@ -902,6 +902,12 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public get selectedActionCaption(): string {
     return getLogicString("selectedActionCaption");
   }
+  public get expressionSetupText(): string {
+    return getLogicString("expressionSetup");
+  }
+  public get actionsSetupText(): string {
+    return getLogicString("actionsSetup");
+  }
   private get isExpressionValid(): boolean {
     return this.expressionEditor.isExpressionValid;
   }
@@ -1149,5 +1155,6 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.isWideMode = true;
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
+    this.expressionEditor.koSetupText(this.expressionSetupText);
   }
 }
