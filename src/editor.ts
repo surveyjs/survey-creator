@@ -2225,9 +2225,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private disableSurveySelectedElementChanging: boolean = false;
   private initSurvey(json: any) {
     var self = this;
-    this.surveyValue(<SurveyForDesigner>(
+    var newSurvey = <SurveyForDesigner>(
       this.createSurvey({}, "designer", SurveyForDesigner)
-    ));
+    );
+    this.surveyValue(newSurvey);
     this.undoRedoManager = new UndoRedoManager();
     this.surveyValue().getEditor = () => self;
     ko.computed(() => {
@@ -2237,10 +2238,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         showValue =
           optionValue === "always" ||
           (optionValue === "ifentered" &&
-            !!this.surveyValue().locTitle["koRenderedHtml"]()) ||
-          !!this.surveyValue().locLogo["koRenderedHtml"]();
+            newSurvey.locTitle["koRenderedHtml"]()) ||
+          newSurvey.locLogo["koRenderedHtml"]();
       }
-      self.surveyValue().koShowHeader(showValue);
+      newSurvey.koShowHeader(showValue);
+    });
+    ko.computed(() => {
+      newSurvey.isReadOnly(this.readOnly);
     });
     this.surveyValue().emptyPageTemplate = "se-empty-placeholder";
     this.surveyValue().emptyPageTemplateData = this;

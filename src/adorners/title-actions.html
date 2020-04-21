@@ -3,7 +3,7 @@
   <!-- ko if: !$data.template -->
   <span
     class="svda_question_action svd-main-color"
-    data-bind="visible: visible, key2click, clickNoFocus: function() { onClick($parent.survey); }, attr: {title: text, 'aria-label': text, role: 'button', tabindex: $data.needFocus === undefined || !!$data.needFocus ? 0 : undefined }"
+    data-bind="visible: visible, key2click, clickNoFocus: onClick, attr: {title: text, 'aria-label': text, role: 'button', tabindex: $data.needFocus === undefined || !!$data.needFocus ? 0 : undefined }"
   >
     <span>
       <svg-icon

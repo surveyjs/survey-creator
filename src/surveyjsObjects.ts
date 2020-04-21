@@ -97,19 +97,35 @@ export class SurveyForDesigner extends Survey.Survey {
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
   }
+  private get _hasLogo() {
+    return !!this.logo && this.logoPosition !== "none";
+  }
+  public get _isLogoBefore() {
+    return (
+      this._hasLogo &&
+      (this.logoPosition === "left" || this.logoPosition === "top")
+    );
+  }
+  public get _isLogoAfter() {
+    return (
+      this._hasLogo &&
+      (this.logoPosition === "right" || this.logoPosition === "bottom")
+    );
+  }
   public get hasLogo() {
-    return true;
+    return (this.isReadOnly() && this._hasLogo) || !this.isReadOnly();
   }
   public get isLogoBefore() {
-    return true;
+    return (this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly();
   }
   public get isLogoAfter() {
-    return true;
+    return (this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly();
   }
   public get isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
   }
   public koShowHeader = ko.observable(true);
+  public isReadOnly = ko.observable(false);
 }
 
 function getSurvey(el: any): any {

@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { applyAdornerClass } from "../src/surveyjsObjects";
+import { applyAdornerClass, SurveyForDesigner } from "../src/surveyjsObjects";
 import { titleAdorner, TitleInplaceEditor } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
 import {
@@ -235,4 +235,26 @@ QUnit.test("TitleInplaceEditor validateSelectedElement", function(assert) {
     creator.onValidateSelectedElement.isEmpty,
     "Subscriptions removed on destroy"
   );
+});
+
+QUnit.test("Title image read only mode", function(assert) {
+  var survey = new SurveyForDesigner();
+  survey.isReadOnly(true);
+
+  assert.notOk(survey.logo, "No logo");
+  assert.equal(survey.logoPosition, "left", "Logo on the left");
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
+
+  survey.logo = "Logo image link";
+  assert.ok(survey.isLogoBefore, "Logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
+
+  survey.logoPosition = "right";
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.ok(survey.isLogoAfter, "Logo after");
+
+  survey.logoPosition = "none";
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
 });
