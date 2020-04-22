@@ -394,6 +394,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "startWithNewLine", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "innerIndent", tab: "layout" },
+        { name: "width", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
         { name: "questionStartIndex", tab: "numbering" },
