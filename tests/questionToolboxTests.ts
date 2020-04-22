@@ -117,16 +117,15 @@ QUnit.test("toolbox change categories", function(assert) {
   assert.equal(toolbox.koCategories().length, 4, "There are 4 categories now");
 });
 
-/* TODO there is no enough API in custom/composite questions
 QUnit.test("toolbox load custom/composite questions", function(assert) {
-  Survey.CustomQuestionCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add({
     name: "newquestion",
     questionJSON: {
       type: "dropdown",
       choices: [1, 2, 3, 4, 5],
     },
   });
-  Survey.CustomQuestionCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add({
     name: "customerinfo",
     elementsJSON: [
       { type: "text", name: "firstName" },
@@ -145,9 +144,9 @@ QUnit.test("toolbox load custom/composite questions", function(assert) {
     3 + 2,
     "There are 3 standard + one custom and one composite questions"
   );
-  Survey.CustomQuestionCollection.Instance.clear();
+  Survey.ComponentCollection.Instance.clear();
 });
-*/
+
 QUnit.test(
   "toolbox categories + allowExpandMultipleCategories property",
   function(assert) {

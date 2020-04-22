@@ -424,7 +424,7 @@ export class QuestionToolbox {
       var item = this.itemsValue[i];
       var categoryName = item.category
         ? item.category
-        : editorLocalization.getString("ed.toolboxGeneralCategory"); //TODO
+        : editorLocalization.getString("ed.toolboxGeneralCategory");
       if (!categoriesHash[categoryName]) {
         var category = {
           name: categoryName,
