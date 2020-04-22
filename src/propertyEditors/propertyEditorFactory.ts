@@ -19,30 +19,30 @@ export class SurveyPropertyEditorFactory {
       { name: "notequal", types: ["!file"] },
       {
         name: "contains",
-        types: ["checkbox", "text", "comment"]
+        types: ["checkbox", "text", "comment"],
       },
       {
         name: "notcontains",
-        types: ["checkbox", "text", "comment"]
+        types: ["checkbox", "text", "comment"],
       },
       { name: "anyof", types: ["selectbase"] },
       { name: "allof", types: ["checkbox"] },
       {
         name: "greater",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
       },
       {
         name: "less",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
       },
       {
         name: "greaterorequal",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
       },
       {
         name: "lessorequal",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"]
-      }
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+      },
     ];
     var result = [];
     for (var i = 0; i < operators.length; i++) {
@@ -50,7 +50,7 @@ export class SurveyPropertyEditorFactory {
       result.push({
         name: name,
         text: editorLocalization.getString("op." + name),
-        types: operators[i].types
+        types: operators[i].types,
       });
     }
     return result;
@@ -198,6 +198,9 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     var choices = this.getPropertyChoices();
     this.setChoices(choices);
   }
+  public get optionsCaption(): string {
+    return undefined;
+  }
   private setChoices(choices: Array<Survey.ItemValue>) {
     choices = this.makeChoicesLocalizable(choices);
     if (!!choices && Array.isArray(choices)) {
@@ -234,17 +237,17 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
   public get editorTypeTemplate(): string {
     return "dropdown";
   }
+  public get optionsCaption(): string {
+    return this.getLocString("pe.conditionSelectQuestion");
+  }
   protected getPropertyChoices(): Array<any> {
-    var opt = new Survey.ItemValue(
-      "",
-      this.getLocString("pe.conditionSelectQuestion")
-    );
+    var opt = new Survey.ItemValue("", this.optionsCaption);
     var survey = EditableObject.getSurvey(this.object);
     if (!survey) return [opt];
     var questions = survey.getAllQuestions();
     if (!questions) questions = [];
     var showTitles = !!this.options && this.options.showTitlesInExpressions;
-    var qItems = questions.map(q => {
+    var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
       return new Survey.ItemValue(q.name, text);
     });
