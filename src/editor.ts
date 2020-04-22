@@ -2098,13 +2098,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private applyBinding() {
     if (this.renderedElement == null) return;
+    var self = this;
     ko.cleanNode(this.renderedElement);
     ko.applyBindings(this, this.renderedElement);
     this.surveyjs = <HTMLElement>(
       this.renderedElement.querySelector(".svd_surveyjs_designer_container")
     );
     if (this.surveyjs) {
-      var self = this;
       this.surveyjs.onkeydown = function(e) {
         if (self.readOnly) return;
         if (!e) return;
