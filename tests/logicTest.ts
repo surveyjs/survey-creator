@@ -1174,3 +1174,36 @@ QUnit.test("Logic onLogicItemSaved event", function(assert) {
   logic.saveEditableItem();
   assert.equal(callCount, 1, "Event has been called");
 });
+
+QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function(
+  assert
+) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  var removingCallCount = 0;
+  logic.onLogicItemRemoving.add((_, options) => {
+    options.allowRemove = removingCallCount;
+    removingCallCount++;
+  });
+  var removedCallCount = 0;
+  logic.onLogicItemRemoved.add((_, options) => {
+    removedCallCount++;
+  });
+  assert.equal(removingCallCount, 0, "Event has not been called yet");
+  assert.equal(removedCallCount, 0, "Event has not been called yet");
+
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 1, "There is no more items");
+  assert.equal(removingCallCount, 1, "Event has been called");
+  assert.equal(removedCallCount, 0, "Event has been called");
+
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 0, "There is no more items");
+  assert.equal(removingCallCount, 2, "Event has been called");
+  assert.equal(removedCallCount, 1, "Event has been called");
+});
