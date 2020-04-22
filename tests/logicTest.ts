@@ -66,7 +66,10 @@ QUnit.test("Add existing visible Items", function(assert) {
 });
 QUnit.test("Add new action immediately", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   assert.equal(logic.mode, "view", "Default is mode is view");
@@ -748,7 +751,10 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   var options = new EditorOptionsTests();
   options.readOnly = true;
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
   });
   var logic = new SurveyLogic(survey, options);
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
@@ -885,7 +891,10 @@ QUnit.test("Displaying correct text for logic action", function(assert) {
 
 QUnit.test("Logic editing errors", function(assert) {
   var survey = new Survey.SurveyModel({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
   });
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -1142,4 +1151,59 @@ QUnit.test("Limit the number of action types.", function(assert) {
     4,
     "There are more than four visible action types"
   );
+});
+
+QUnit.test("Logic onLogicItemSaved event", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  var callCount = 0;
+  logic.onLogicItemSaved.add((_, options) => {
+    callCount++;
+  });
+  logic.addNew();
+  logic.expressionEditor.koValue("{q1} = 1");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
+  action.itemSelector.koValue("q2");
+  assert.equal(callCount, 0, "Event has not been called yet");
+  logic.saveEditableItem();
+  assert.equal(callCount, 1, "Event has been called");
+});
+
+QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function(
+  assert
+) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  var removingCallCount = 0;
+  logic.onLogicItemRemoving.add((_, options) => {
+    options.allowRemove = removingCallCount;
+    removingCallCount++;
+  });
+  var removedCallCount = 0;
+  logic.onLogicItemRemoved.add((_, options) => {
+    removedCallCount++;
+  });
+  assert.equal(removingCallCount, 0, "Event has not been called yet");
+  assert.equal(removedCallCount, 0, "Event has not been called yet");
+
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 1, "There is no more items");
+  assert.equal(removingCallCount, 1, "Event has been called");
+  assert.equal(removedCallCount, 0, "Event has been called");
+
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 0, "There is no more items");
+  assert.equal(removingCallCount, 2, "Event has been called");
+  assert.equal(removedCallCount, 1, "Event has been called");
 });

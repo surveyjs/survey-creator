@@ -754,6 +754,32 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koDisplayError: any;
   public onChangedCallback: (item: SurveyLogicItem, changeType: string) => void;
 
+  /**
+   * The event is called when logic item is saved.
+   * <br/> options.item is the saved logic item.
+   */
+  public onLogicItemSaved: Survey.Event<
+    (sender: SurveyLogic, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  /**
+   * The event is called before logic item is being removed.
+   * <br/> options.allowRemove is the option you can set to false and prevent removing.
+   * <br/> options.item is the logic item to remove.
+   */
+  public onLogicItemRemoving: Survey.Event<
+    (sender: SurveyLogic, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  /**
+   * The event is called when logic item is removed.
+   * <br/> options.item is the removed logic item.
+   */
+  public onLogicItemRemoved: Survey.Event<
+    (sender: SurveyLogic, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+
   constructor(
     public survey: Survey.SurveyModel,
     public options: ISurveyObjectEditorOptions = null
@@ -856,6 +882,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     }
     this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
     !!this.options && this.options.stopUndoRedoTransaction();
+    this.onLogicItemSaved.fire(this, { item: this.editableItem });
     return true;
   }
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
@@ -956,6 +983,10 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   public removeItem(item: SurveyLogicItem) {
+    var eventOptions = { item: item, allowRemove: true };
+    this.onLogicItemRemoving.fire(this, eventOptions);
+    if (!eventOptions.allowRemove) return;
+
     !!this.options && this.options.startUndoRedoTransaction();
     item.apply("");
     var index = this.koItems.indexOf(item);
@@ -964,6 +995,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     }
     this.onItemChanged(item, "delete");
     !!this.options && this.options.stopUndoRedoTransaction();
+    this.onLogicItemRemoved.fire(this, { item: item });
   }
   public addAction(
     lt: SurveyLogicType,

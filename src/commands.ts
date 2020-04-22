@@ -3,7 +3,13 @@ import * as ko from "knockout";
 export class Commands {
   constructor(private creator) {}
 
-  private commands = {
+  private commands: {
+    [index: string]: {
+      name?: string;
+      hotKey?: { ctrlKey: boolean; keyCode: number };
+      toolbar?: any;
+    };
+  } = {
     undo: {
       name: "undo",
       hotKey: {
@@ -16,6 +22,7 @@ export class Commands {
         visible: this.creator.koIsShowDesigner,
         enabled: this.creator.koCanUndo,
         title: this.creator.getLocString("ed.undo"),
+        tooltip: this.creator.getLocString("ed.undoTooltip"),
       },
     },
     redo: {
@@ -30,6 +37,7 @@ export class Commands {
         visible: this.creator.koIsShowDesigner,
         enabled: this.creator.koCanRedo,
         title: this.creator.getLocString("ed.redo"),
+        tooltip: this.creator.getLocString("ed.redoTooltip"),
       },
     },
     surveySettings: {
@@ -43,6 +51,7 @@ export class Commands {
           this.creator.showQuestionEditor(this.creator.survey);
         },
         title: this.creator.getLocString("ed.settings"),
+        tooltip: this.creator.getLocString("ed.settingsTooltip"),
       },
     },
     toolbarOptions: {
@@ -133,14 +142,17 @@ export class Commands {
         action: this.creator.saveButtonClick,
         innerCss: "svd_save_btn",
         title: this.creator.getLocString("ed.saveSurvey"),
+        tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
       },
     },
-    state: {
+    state: <any>{
       id: "svd-state",
       visible: this.creator.koShowState,
       css: "svd_state",
       innerCss: ko.computed(() => "icon-" + this.creator.koState()),
-      title: ko.computed(() => this.creator.getLocString("ed." + this.creator.koState())),
+      title: ko.computed(() =>
+        this.creator.getLocString("ed." + this.creator.koState())
+      ),
       template: "svd-toolbar-state",
     },
   };
