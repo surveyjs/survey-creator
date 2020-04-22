@@ -754,6 +754,15 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   public koDisplayError: any;
   public onChangedCallback: (item: SurveyLogicItem, changeType: string) => void;
 
+  /**
+   * The event is called when logic item is saved.
+   * <br/> options.item is the saved logic item.
+   */
+  public onLogicItemSaved: Survey.Event<
+    (sender: SurveyLogic, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+
   constructor(
     public survey: Survey.SurveyModel,
     public options: ISurveyObjectEditorOptions = null
@@ -856,6 +865,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     }
     this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
     !!this.options && this.options.stopUndoRedoTransaction();
+    this.onLogicItemSaved.fire(this, { item: this.editableItem });
     return true;
   }
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
