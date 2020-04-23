@@ -1066,6 +1066,37 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
   assert.equal(questionValue.getType(), "dropdown", "It is dropdown again");
 });
 QUnit.test(
+  "SurveyPropertyConditionEditor, Do not show question description",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        {
+          name: "question1",
+          type: "dropdown",
+          choices: ["item1", "item2"],
+          description: "Some text",
+        },
+      ],
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    editorItem.questionName = "question1";
+    var questionValue = editorItem.valueQuestion;
+    assert.equal(
+      questionValue.getType(),
+      "dropdown",
+      "It is dropdown by default"
+    );
+    assert.equal(questionValue.description, "", "There is no description");
+  }
+);
+QUnit.test(
   "SurveyPropertyConditionEditor, add apostrophes to string value",
   function(assert) {
     var survey = new Survey.Survey({
