@@ -2896,7 +2896,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       target: obj,
     });
     if (objType == ObjType.Question) {
-      this.updateConditionsOnRemove(obj.name);
+      this.updateConditionsOnRemove(obj.getValueName());
     }
   }
   public get surveyLiveTester(): SurveyLiveTester {
