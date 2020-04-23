@@ -1259,6 +1259,11 @@ QUnit.test(
       "We can parse expression"
     );
     assert.equal(editor.koEditorItems().length, 2, "There are two conditions");
+    assert.equal(
+      editor.koEditorItems()[0].nameQuestion.choices[0].text,
+      "q1",
+      "Show the question.name not the valueName"
+    );
     editor.koValue("{val1} = 'abc' or {q2} = 1 and {q2} = 2");
   }
 );
