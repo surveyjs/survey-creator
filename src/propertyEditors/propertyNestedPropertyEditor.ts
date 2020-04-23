@@ -3,12 +3,12 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
 import {
   SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
+  ISurveyObjectEditorOptions,
 } from "./propertyEditorBase";
 import {
   SurveyQuestionEditor,
   SurveyElementEditorContent,
-  SurveyQuestionProperties
+  SurveyQuestionProperties,
 } from "../questionEditors/questionEditor";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
@@ -140,7 +140,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       item,
       () => this.columns,
       this.options,
-      item => this.getItemClassName(item),
+      (item) => this.getItemClassName(item),
       this.object
     );
   }
@@ -245,7 +245,10 @@ export class SurveyNestedPropertyEditorColumn {
   public get text(): string {
     var text = editorLocalization.hasString("pel." + this.property.name)
       ? editorLocalization.getString("pel." + this.property.name)
-      : editorLocalization.getPropertyNameInEditor(this.property.name);
+      : editorLocalization.getPropertyNameInEditor(
+          this.property.name,
+          this.property.displayName
+        );
     return text ? text : this.property.name;
   }
 }
@@ -296,7 +299,7 @@ ko.components.register("comp-propertyeditor-nesteditem", {
       var model = params.editor.createItemViewModel(params.item);
       model.editor = params.editor;
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });

@@ -4,7 +4,7 @@ import {
   SurveyQuestionEditor,
   SurveyQuestionEditorTab,
   SurveyElementEditorContent,
-  SurveyElementEditorContentNoCategries
+  SurveyElementEditorContentNoCategries,
 } from "../src/questionEditors/questionEditor";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
 import { SurveyCreator } from "../src/editor";
@@ -104,13 +104,13 @@ QUnit.test("Survey Editor, modal apply, Bug #674", function(assert) {
     pages: [
       {
         name: "page1",
-        elements: [{ type: "text", name: "question1" }]
+        elements: [{ type: "text", name: "question1" }],
       },
       {
         name: "page2",
-        elements: [{ type: "text", name: "question2" }]
-      }
-    ]
+        elements: [{ type: "text", name: "question2" }],
+      },
+    ],
   };
   var editor = new SurveyQuestionEditor(creator.survey);
   editor.getPropertyEditorByName("title").editor.koValue("Survey Title");
@@ -167,8 +167,8 @@ QUnit.test("Hide a tab if it's visible attribute set to false", function(
     tabs: [
       { name: "general", visible: false },
       { name: "logic", visible: false },
-      { name: "others", visible: false }
-    ]
+      { name: "others", visible: false },
+    ],
   };
   var htmlQuestion = new Survey.QuestionHtml("q1");
   var editor = new SurveyQuestionEditor(htmlQuestion);
@@ -225,7 +225,7 @@ QUnit.test("Create  general properties", function(assert) {
   var tab = createSurveyQuestionEditorTab(question, [
     "name",
     "visible",
-    "dummy"
+    "dummy",
   ]);
   assert.equal(tab.editorProperties.length, 2, "There are two properties");
   assert.equal(
@@ -246,12 +246,12 @@ QUnit.test("Get tabs", function(assert) {
       "name",
       "title",
       { name: "titleLocation", tab: "tab1" },
-      { name: "visibleIf", tab: "tab2" }
+      { name: "visibleIf", tab: "tab2" },
     ],
     tabs: [
       { name: "tab1", title: "Title 1" },
-      { name: "tab2", title: "Title 2" }
-    ]
+      { name: "tab2", title: "Title 2" },
+    ],
   };
 
   var tabs = new SurveyQuestionProperties(
@@ -274,8 +274,8 @@ QUnit.test(
       properties: [
         { name: "height", tab: "general" },
         { name: "width", tab: "general" },
-        { name: "allowClear", tab: "general" }
-      ]
+        { name: "allowClear", tab: "general" },
+      ],
     };
 
     var tabs = new SurveyQuestionProperties(
@@ -285,7 +285,7 @@ QUnit.test(
     ).getTabs();
     assert.equal(tabs[0].name, "general", "The first tab is 'general'");
     var generalProperties = tabs[0].properties;
-    var widthProperties = generalProperties.filter(p => p.name === "width");
+    var widthProperties = generalProperties.filter((p) => p.name === "width");
     assert.equal(
       widthProperties.length,
       1,
@@ -303,8 +303,8 @@ QUnit.test(
       properties: [
         { name: "height", tab: "layout" },
         { name: "width", tab: "layout" },
-        { name: "allowClear", tab: "layout" }
-      ]
+        { name: "allowClear", tab: "layout" },
+      ],
     };
 
     var tabs = new SurveyQuestionProperties(
@@ -315,14 +315,16 @@ QUnit.test(
     assert.equal(tabs[0].name, "layout", "The first tab is 'layout'");
     assert.equal(tabs[1].name, "general", "The second tab is 'general'");
     var generalProperties = tabs[1].properties;
-    var widthPropertiesGen = generalProperties.filter(p => p.name === "width");
+    var widthPropertiesGen = generalProperties.filter(
+      (p) => p.name === "width"
+    );
     assert.equal(
       widthPropertiesGen.length,
       0,
       "No width property in 'general' tab"
     );
     var layoutProperties = tabs[0].properties;
-    var widthPropertiesLay = layoutProperties.filter(p => p.name === "width");
+    var widthPropertiesLay = layoutProperties.filter((p) => p.name === "width");
     assert.equal(
       widthPropertiesLay.length,
       1,
@@ -352,12 +354,12 @@ QUnit.test("Dynamically generated tabs", function(assert) {
       { name: "prop1", tab: "tab1" },
       { name: "prop2", tab: "tab2" },
       { name: "prop11", tab: "tab1" },
-      { name: "prop21", tab: "tab2" }
+      { name: "prop21", tab: "tab2" },
     ],
     tabs: [
       { name: "tab1", title: "Title 1" },
-      { name: "tab2", title: "Title 2" }
-    ]
+      { name: "tab2", title: "Title 2" },
+    ],
   };
   Survey.Serializer.addClass(
     "@testClass",
@@ -388,7 +390,7 @@ QUnit.test("General properties, editor type", function(assert) {
   var tab = createSurveyQuestionEditorTab(question, [
     "name",
     "visible",
-    "title"
+    "title",
   ]);
   assert.equal(
     tab.editorProperties[0].editorType,
@@ -412,7 +414,7 @@ QUnit.test("General properties, work without apply", function(assert) {
   var tab = createSurveyQuestionEditorTab(question, [
     "name",
     "visible",
-    "title"
+    "title",
   ]);
   assert.equal(
     tab.editorProperties[0].editor.koValue(),
@@ -428,7 +430,7 @@ QUnit.test("General properties, has errors", function(assert) {
   var tab = createSurveyQuestionEditorTab(question, [
     "name",
     "visible",
-    "dummy"
+    "dummy",
   ]);
   var prop = tab.editorProperties[0];
   assert.equal(prop.hasError(), false, "There is no error");
@@ -600,7 +602,7 @@ QUnit.test("Question editor: on property value changing", function(assert) {
   Survey.Serializer.addProperty("question", { name: "targetEntity" });
   Survey.Serializer.addProperty("question", {
     name: "targetField",
-    choices: []
+    choices: [],
   });
   var question = new Survey.QuestionText("q1");
   var editor = new SurveyCreator();
@@ -647,7 +649,7 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
       var entity = !!obj ? obj["targetEntity"] : null;
       if (!entity) return [];
       return [entity + " 1", entity + " 2"];
-    }
+    },
   });
   var question = new Survey.QuestionText("q1");
   var editor = new SurveyElementEditorContentNoCategries(question);
@@ -671,7 +673,7 @@ QUnit.test(
     Survey.Serializer.addProperty("question", "customProp");
     defaultStrings.p["customProp"] = {
       name: "MyCustomProp",
-      title: "Custom Prop Ttile"
+      title: "Custom Prop Ttile",
     };
     assert.equal(
       editorLocalization.getPropertyName("customProp"),
@@ -701,7 +703,27 @@ QUnit.test(
       "Custom Prop Ttile",
       "Use localized property title"
     );
+    defaultStrings.p["customProp"] = null;
+    delete defaultStrings.p["customProp"];
     Survey.Serializer.removeProperty("question", "customProp");
+  }
+);
+
+QUnit.test(
+  "Support old property grid: get display text from property displayName attribute",
+  function(assert) {
+    Survey.Serializer.addProperty("question", "customProp1");
+    Survey.Serializer.findProperty("question", "customProp1").displayName =
+      "Custom Prop Title 1";
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyElementEditorContentNoCategries(question);
+    var customProp = editor.getPropertyEditorByName("customProp1");
+    assert.equal(
+      customProp.displayName,
+      "Custom Prop Title 1",
+      "Use property title attribute"
+    );
+    Survey.Serializer.removeProperty("question", "customProp1");
   }
 );
 
@@ -815,7 +837,7 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
     dependsOn: ["inputType"],
     visibleIf: function(obj) {
       return obj.inputType == "date";
-    }
+    },
   });
   var savedDefinition = JSON.stringify(
     SurveyQuestionEditorDefinition.definition.text
@@ -847,7 +869,7 @@ QUnit.test("DependedOn properties, dynamic choices", function(assert) {
     dependsOn: "targetEntity",
     choices: function(obj) {
       return getChoicesByEntity(obj);
-    }
+    },
   });
   function getChoicesByEntity(obj: any): Array<any> {
     var entity = !!obj ? obj["targetEntity"] : null;
@@ -893,7 +915,7 @@ QUnit.test("DependedOn properties + multiple, dynamic choices", function(
     dependsOn: "targetEntity",
     choices: function(obj) {
       return getChoicesByEntity(obj);
-    }
+    },
   });
   function getChoicesByEntity(obj: any): Array<any> {
     var entity = !!obj ? obj["targetEntity"] : null;
@@ -949,16 +971,16 @@ QUnit.test("Add property into existing cagetory", function(assert) {
   Survey.Serializer.addProperty("question", {
     name: "name2",
     category: "general",
-    visibleIndex: 1
+    visibleIndex: 1,
   });
   Survey.Serializer.addProperty("question", {
     name: "visibleIf2",
     category: "logic",
-    visibleIndex: 10
+    visibleIndex: 10,
   });
   Survey.Serializer.addProperty("question", {
     name: "enableIf2",
-    category: "logic"
+    category: "logic",
   });
   var creator = new SurveyCreator();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
@@ -993,12 +1015,12 @@ QUnit.test("Add property into existing cagetory", function(assert) {
 QUnit.test("Add property into new cagetory", function(assert) {
   Survey.Serializer.addProperty("question", {
     name: "name2",
-    category: "newcategory"
+    category: "newcategory",
   });
   Survey.Serializer.addProperty("question", {
     name: "name3",
     category: "newcategory",
-    categoryIndex: 150
+    categoryIndex: 150,
   });
   var creator = new SurveyCreator();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");

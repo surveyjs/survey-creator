@@ -77,7 +77,12 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.koTitleCaption(
         editorLocalization
           .getString("pe.editProperty")
-          ["format"](editorLocalization.getPropertyName(this.property.name))
+          ["format"](
+            editorLocalization.getPropertyName(
+              this.property.name,
+              this.property.displayName
+            )
+          )
       );
     }
     this.modalName =
@@ -107,7 +112,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         bodyClass: "",
         closeTimeout: 100,
         dialogOpenClass: "animated fadeInDown",
-        focus: false
+        focus: false,
       });
       modal.open();
 

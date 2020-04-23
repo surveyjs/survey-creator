@@ -920,7 +920,10 @@ export class SurveyQuestionEditorTab {
   }
   private createEditor(property: any, displayName: string) {
     if (!displayName) {
-      displayName = editorLocalization.getPropertyNameInEditor(property.name);
+      displayName = editorLocalization.getPropertyNameInEditor(
+        property.name,
+        property.displayName
+      );
     }
     var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;

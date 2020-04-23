@@ -326,7 +326,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.titleValue = "";
     if (!this.property) return;
     var locName = this.property.name;
-    this.displayNameValue = editorLocalization.getPropertyName(locName);
+    this.displayNameValue = editorLocalization.getPropertyName(
+      locName,
+      this.property.displayName
+    );
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
   }
@@ -419,7 +422,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         obj: this.object,
         value: this.getValue(),
         newValue: newValue,
-        doValidation: false
+        doValidation: false,
       };
       this.options.onValueChangingCallback(options);
       newValue = options.newValue;

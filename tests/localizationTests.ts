@@ -54,6 +54,11 @@ QUnit.test("getProperty fnction breaks on word automatically", function(
     "Title",
     "make it up"
   );
+  assert.equal(
+    editorLocalization.getPropertyName("title", "My title"),
+    "My title",
+    "use the default value"
+  );
   editorLocalization.camelCaseBreaking = false;
   assert.equal(
     editorLocalization.getProperty("aGoodProperty"),
@@ -65,8 +70,8 @@ QUnit.test("getProperty fnction breaks on word automatically", function(
 QUnit.test("add de localization", function(assert) {
   var deutschStrings = {
     p: {
-      isRequired: "Wird benötigt"
-    }
+      isRequired: "Wird benötigt",
+    },
   };
 
   editorLocalization.locales["de"] = deutschStrings;

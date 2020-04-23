@@ -67,7 +67,7 @@ export class SurveyPropertyCellsEditor extends SurveyPropertyModalEditor {
     var row = {
       rowIndex: rowIndex,
       rowText: rowText,
-      koCells: ko.observableArray()
+      koCells: ko.observableArray(),
     };
     var cells = [];
     for (var i = 0; i < this.columns.length; i++) {
