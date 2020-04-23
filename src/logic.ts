@@ -4,7 +4,10 @@ import { SurveyPropertyConditionEditor } from "./propertyEditors/propertyConditi
 import { SurveyElementSelector } from "./propertyEditors/surveyElementSelector";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { editorLocalization } from "./editorLocalization";
-import { ExpressionToDisplayText } from "./expressionToDisplayText";
+import {
+  ExpressionToDisplayText,
+  ExpressionRemoveVariable,
+} from "./expressionToDisplayText";
 import {
   SurveyElementEditorContent,
   SurveyQuestionEditor,
@@ -418,6 +421,9 @@ export class SurveyLogicItem {
       ops[i].renameQuestion(oldName, newName);
     }
   }
+  public removeQuestion(name: string) {
+    this.removeQuestionInExpression(name);
+  }
   public get expressionText(): string {
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
@@ -449,6 +455,14 @@ export class SurveyLogicItem {
       expression = expression.substring(0, index);
       index = expression.lastIndexOf(oldName, expression.length);
     }
+    if (newExpression != this.expression) {
+      this.applyExpression(newExpression, true);
+    }
+  }
+  private removeQuestionInExpression(name: string) {
+    if (!this.expression) return;
+    var expR = new ExpressionRemoveVariable();
+    var newExpression = expR.remove(this.expression, name);
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
@@ -903,6 +917,10 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.renameQuestionCore(oldName, newName, this.items);
     this.renameQuestionCore(oldName, newName, this.invisibleItems);
   }
+  public removeQuestion(name: string) {
+    this.removeQuestionCore(name, this.items);
+    this.removeQuestionCore(name, this.invisibleItems);
+  }
   public hasError(): boolean {
     if (!this.editableItem) return false;
     var text = "";
@@ -945,6 +963,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   ) {
     for (var i = 0; i < items.length; i++) {
       items[i].renameQuestion(oldName, newName);
+    }
+  }
+  private removeQuestionCore(name: string, items: Array<SurveyLogicItem>) {
+    for (var i = 0; i < items.length; i++) {
+      items[i].removeQuestion(name);
     }
   }
 

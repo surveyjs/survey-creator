@@ -2758,6 +2758,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
   }
+  private updateConditionsOnRemove(name: string) {
+    new SurveyLogic(this.survey, this).removeQuestion(name);
+  }
   public get showModalOnElementEditing(): boolean {
     return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;
   }
@@ -2892,6 +2895,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       type: "OBJECT_DELETED",
       target: obj,
     });
+    if (objType == ObjType.Question) {
+      this.updateConditionsOnRemove(obj.name);
+    }
   }
   public get surveyLiveTester(): SurveyLiveTester {
     return this.surveyLive;
