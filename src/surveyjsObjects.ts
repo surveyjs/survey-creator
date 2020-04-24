@@ -393,6 +393,16 @@ function filterNestedQuestions(rootQuestionNode, elements) {
   }
   return targetElements;
 }
+function filterPageElements(elements) {
+  var targetElements = [];
+  for (var i = 0; i < elements.length; i++) {
+    var questionElement = findParentNode("svd_question", elements[i]);
+    if (questionElement === null) {
+      targetElements.push(elements[i]);
+    }
+  }
+  return targetElements;
+}
 
 function addAdorner(node, model) {
   Object.keys(adornersConfig).forEach((element) => {
@@ -412,6 +422,9 @@ function addAdorner(node, model) {
         }
         if (model.getType() !== "page" && model.getType() !== "survey") {
           elements = filterNestedQuestions(node, elements);
+        }
+        if (model.getType() === "page") {
+          elements = filterPageElements(elements);
         }
         if (
           elements.length === 0 &&
