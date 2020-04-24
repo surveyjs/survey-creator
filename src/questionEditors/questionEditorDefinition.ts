@@ -275,6 +275,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "choices" },
+        { name: "hasSelectAll", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
