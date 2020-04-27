@@ -8,15 +8,15 @@
         <table class="svd-logic-tab__rules-list">
           <thead>
               <tr class="svd-logic-tab__rules-list__header svd-logic-tab__rules-list__row">
-                  <td data-bind="visible:!$data.isReadOnly" width="100px"></td>
+                  <td data-bind="visible:!$data.koReadOnly()" width="100px"></td>
                   <th class="svd-dark-border-color" data-bind="text: $data.getLocString('ed.lg.conditions')"></th>
                   <th class="svd-dark-border-color" data-bind="text: $data.getLocString('ed.lg.actions')"></th>
-                  <td data-bind="visible:!$data.isReadOnly" width="100px"></td>
+                  <td data-bind="visible:!$data.koReadOnly()" width="100px"></td>
               </tr>
           </thead>
           <tbody data-bind="foreach: $data.koItems">
               <tr class="svd-logic-tab__rules-list__row">
-                <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
+                <td data-bind="visible:!$parent.koReadOnly()" class="svd-logic-tab__rules-list__action-cell">
                   <span data-bind="click: $data.edit, attr: {title: $data.editText }">
                     <svg-icon class="svd-primary-icon icon-actioneditelement" params="iconName: 'icon-actioneditelement'"></svg-icon>
                   </span>
@@ -29,7 +29,7 @@
                     <span data-bind="text: $data.text"></span>
                   </div>
                 </td>
-                <td data-bind="visible:!$parent.isReadOnly" class="svd-logic-tab__rules-list__action-cell">
+                <td data-bind="visible:!$parent.koReadOnly()" class="svd-logic-tab__rules-list__action-cell">
                   <span data-bind="click: $data.remove, attr: {title: $data.deleteText }">
                     <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
                   </span>
