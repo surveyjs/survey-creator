@@ -2171,7 +2171,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     const evtobj = window.event ? event : e;
     const commands = creator.commands;
     let command, hotKey;
-    Object.keys(creator.commands).forEach((key) => {
+    Object.keys(creator.commands || {}).forEach((key) => {
       command = commands[key];
       hotKey = command.hotKey;
       if (!hotKey) return;
