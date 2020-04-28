@@ -208,7 +208,7 @@ test("check drop question from toolbox to the bottom of panel", async (t) => {
   assert.equal((await getQuestionsInPanel()).length, 2);
 });
 
-test("check move question from panel to up", async (t) => {
+test.skip("check move question from panel to up", async (t) => {
   await t.click("[title=Panel]");
   await t.dragToElement(
     "[title=Boolean]",
