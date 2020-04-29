@@ -541,12 +541,12 @@ Here is the available attributes and callback functions in the property definiti
 ---
 **name**
 
-The property name. It is the only required property
+The property name. It is the only required property.
 
 ---
 **type**
 
-The property type. The list of avaiable property types you may in the next .
+The property type. The list of avaiable property types you may in the next.
 
 ---
 **default**
@@ -555,6 +555,17 @@ It is an optional attribute. The library do not serialize the default value into
 ```javascript
 { name: "mode", default: "edit"}
 { name: "showTitle:boolean", default: true }
+```
+---
+**displayName**
+
+Property Editor uses this property for displaying it as a caption. By default property editor tries to find the string for the caption in localization strings. If it could not find it, then it uses _displayName_ property and finally use the property _name_.
+
+```javascript
+//Add new property into question.
+Survey.Serializer.addProperty("survey", {
+    name: "tag", displayName: "Custom Data",  category: "data"
+});
 ```
 ---
 **choices**
