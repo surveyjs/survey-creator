@@ -14,9 +14,9 @@
 
 There are two main scenarios when you want to create a new Custom Widget. You want to modify, extend the behavior of the existing question(s), or you want to create a new question, typically using an existing third-party JavaScript widget/library.
 
-If you want to change the standard question UI, then it is better to modify [CSS classes](https://surveyjs.io/Examples/Library?id=survey-cssclasses) or use SurveyJS events, like [survey.onAfterRenderQuestion](https://surveyjs.io/Examples/Library?id=survey-afterrender).
+If you want to change the standard question UI, then it is better to modify [CSS classes](https://surveyjs.io/Examples/Library?id=survey-cssclasses) or use SurveyJS events, for example [survey.onAfterRenderQuestion](https://surveyjs.io/Examples/Library?id=survey-afterrender) event.
 
-We have several [built-in custom widgets](https://surveyjs.io/Examples/Library?id=custom-widget-select2-tagbox), that we have created for you. Please note, we can’t fix bugs or extends their functionality in third-party libraries we are using. If there is a bug or you need a new functionality from a third-party library, that we use in our custom widget, then please contact authors of these libraries.
+We have several [built-in custom widgets](https://surveyjs.io/Examples/Library?id=custom-widget-select2-tagbox), that we have created for you. Please note, we are using third-party libraries. If there is a bug or you need a new functionality from a third-party library, that we use in our custom widget, then please contact authors of these libraries.
 
 
 <div id="simplewidget"></div>
@@ -31,19 +31,17 @@ Let us create a very simple custom widget that will add additional functionality
 
 ```javascript
 var searchStringWidget = {
-    //the widget name. It should be unique and written in lowcase.
+    //the widget name. It should be unique and written in lowercase.
     name: "searchstring",
     //SurveyJS library calls this function for every question to check 
-    //if it this widget should appy to the question in the parameter.
+    //if this widget should appy to the particular question.
     isFit: function (question) {
-        //We are going to apply this widget for comment question (textarea)
+        //We are going to apply this widget for comment questions (textarea)
         return question.getType() == "comment";
     },
-    //We do not want to change the default rendering.
     //We will change the default rendering, but do not override it completely
     isDefaultRender: true,
-    //The main function, rendering and two-way binding
-    //question is the question we apply our widget and el is HTML textarea in our case
+    //"question" parameter is the question we are working with and "el" parameter is HTML textarea in our case
     afterRender: function (question, el) {
         //Create a div with an input text and a button inside
         var mainDiv = document.createElement("div");
@@ -53,7 +51,7 @@ var searchStringWidget = {
         btnEl.innerText = "Search";
         btnEl.style.width = "120px";
         var searchIndex = 0;
-        //Start from the start on changing the search text
+        //Start searching from the beginning on changing the search text
         searchEl.onchange = function () {
             searchIndex = 0;
         };
@@ -64,15 +62,15 @@ var searchStringWidget = {
             //Do nothing if search text or textarea is empty
             if (!searchText || !text) return;
             var index = text.indexOf(searchText, searchIndex + 1);
-            //If nothing found, but started not from beginning then start from the beginning
+            //If nothing found, but started not from the beginning then start from the beginning
             if (index < 0 && searchIndex > -1) {
-            index = text.indexOf(searchText, 0);
+                index = text.indexOf(searchText, 0);
             }
             searchIndex = index;
             //If found the text then focus the textarea and select the search text.
             if (index > -1) {
-            el.focus();
-            el.setSelectionRange(index, index + searchText.length);
+                el.focus();
+                el.setSelectionRange(index, index + searchText.length);
             }
         };
         mainDiv.appendChild(searchEl);
@@ -92,9 +90,10 @@ The first property is _name_. This custom widget does not create a new item in t
 
 The second property is _isDefaultRender_. It is an optional property, you have to set it to _true_, if you want the default question input rendering. We do not want to render html “textarea” element by ourselves and we don’t want to setup question value binding, so we set this property to “true”.
 
-The first function is _isFit()_. It has a question as a parameter, and it should return true if we want to use this question. We are returning true for comment questions. The code is obvious.
+The first function is _isFit()_. It has a question as a parameter, and it should return true if we want to apply our widget for this question. We are returning true for comment questions. 
+**Please note**: SurveyJS allows to apply only one custom widget for a question. If there is several custom widgets that can apply to the same question then the first custom widget in the custom widget collection wins. 
 
-The second and main function is _afterRender()_. It has two parameters: a question and its input DOM element. In our case the input DOM element is text area. You can see there are some code inside this function. We are dynamically adding input text and search button under the text area and writing the code on button click that does the actual search.
+The second and main function is _afterRender()_. It has two parameters: a question and its input DOM element. In our case the input DOM element is text area. We are dynamically adding input text and search button under the text area and writing the code on button click that does the actual search.
 
 <div id="addnewproperty"></div>
 
@@ -103,15 +102,15 @@ The second and main function is _afterRender()_. It has two parameters: a questi
 In the previous example we added the search functionality into Comment question. It applies to all comment question. Now, let us add a boolean property “hasSearch” that will turn this functionality on and off.
 
 ```javascript
-//Add new classes and properties inside this function.
 //SurveyJS calls it right after adding a new widget into custom widget collection.
+//You can add here new classes and properties or modify/delete the existing.
 init() {
   //Add a boolean property hasSearch into comment question.
-  //Use switch property editor for it, you can have a simple boolean by changing ":switch" to ":boolean"
+  //Use switch property editor for it, you can have a simple check property editor by changing ":switch" to ":boolean"
   //Add it to general category
   Survey.Serializer.addProperty("comment", {
     name: "hasSearch:switch",
-    //default: true, //uncomment this line to make this property true by default.
+    //default: true, //uncomment this line to make this property true, search functionality is on, by default.
     category: "general",
   });
 },
@@ -124,7 +123,7 @@ afterRender: function (question, el) {
 ```
 You have to use _init()_ function for adding new classes and properties. Additionally you have to modify _afterRender()_ function and do nothing if hasSearch property is not true.
 
-The following code works perfect in general. The only problem, if change this property in run-time or in designer, the end-user will not see changes in UI. To make the better users experience in SurveyJS Creator, we must render our DOM elements all the time but hide/show them on changing the property. 
+The following code works perfect in general. The only problem, if this property is changed in run-time or in designer, the end-user will not see changes in UI. To make the better users experience in SurveyJS Creator, we must render our search panel all the time but hide/show it on changing the property. 
 
 We must change _afterRender()_ function only. Remove the check on hasSearch property in the beginning and add the following code at the end:
 ```javascript
@@ -134,7 +133,7 @@ afterRender: function (question, el) {
     ...
     //Hide the search panel/div if hasSearch is not true
     mainDiv.style.display = !question.hasSearch ? "none" : "";
-    //On every change hasSearch property call the anonym function
+    //On every hasSearch property changing call the anonym function
     question.registerFunctionOnPropertyValueChanged("hasSearch",
         function () {
             mainDiv.style.display = !question.hasSearch ? "none" : "";
@@ -213,11 +212,11 @@ Survey.CustomWidgetCollection.Instance.add(
 
 ### Add new question using custom widget.
 
-Here we will create a very simple rich editor, based on content editablet functionality. We can use a third-party rich editor here, but for simplicity we will use a simple div element and several toolbar items.
+Here we will create a very simple rich editor, using on content editable feature. We can use a third-party rich editor here, but for simplicity we will use a simple div element and several buttons as toolbar items.
 
 ```javascript
 var richEditWidget = {
-  //the widget name. It should be unique and written in lowcase.
+  //the widget name. It should be unique and written in lowercase.
   name: "richedit",
   //This title will be displayed on SurveyJS Creator toolbox
   title: "Rich Editor",
@@ -230,7 +229,7 @@ var richEditWidget = {
     return true; //We do not have external scripts
     //return typeof $ == "function"; //example of checking on loading jQuery
   },
-  //Check for our own type
+  //Applies for a question that has our own type
   isFit: function (question) {
     return question.getType() == "richedit";
   },
@@ -255,14 +254,14 @@ var richEditWidget = {
 };
 
 //Register our widget in singleton custom widget collection
-//Tells that, it is a new "customtype"
+//Tells that, it is a new "customtype". We require this parameter if we want to show our item in SurveyJS Creator toolbox
 Survey.CustomWidgetCollection.Instance.add(
   richEditWidget,
   "customtype"
 );
 ```
 
-It works at the first look, but unfortunately, the value an end-user enters will not be in the survey result. We did not bind our editor value into question value.
+It works at the first look, but unfortunately, the after end-user enters the value, it is not shown in the survey result. We did not bind our editor value into question value.
 We will need to modify the _afterRender()_ function code.
 
 ```javascript
@@ -302,9 +301,7 @@ afterRender: function (question, el) {
   };
 },
 ```
-
-The last step is to react on changing the enable/disable question state. We must add this code into _afterRender()_ function as well. 
-If we do not use document _execCommand_ function, then we could use div onBlur event. Commonly the code is simpler. 
+The code looks a litle overcomplicated. If we do not use document _execCommand_ function, then we could use div onBlur event. Commonly the code is simpler. 
 
 Here is the example for CK_Editor custom widget.
 
@@ -325,7 +322,7 @@ question.valueChangedCallback = updateValueHandler;
 updateValueHandler();
 ...
 ```
-
+The last step is to react on changing the enable/disable question state. We must add this code into _afterRender()_ function as well.
 We will have to enable/disable toolbar items and change the property contenteditable from true to false and back.
 
 ```javascript
@@ -342,6 +339,7 @@ afterRender: function (question, el) {
       buttons[i].disabled = !enabled;
     }
   };
+  //Set initial read-only state
   updateReadOnly();
   //Update editor read-only state on changing question readOnly property
   question.readOnlyChangedCallback = function () {
@@ -435,10 +433,11 @@ Survey.CustomWidgetCollection.Instance.add(
 ### Totally replace the existing question input by custom widget.
 
 Here we will use the code from rich edit custom widget, slightly modify it and show how to replace the existing question input with your own.
+In this example, we will replace the text area html element for comment question with our own html elements.
 
 ```javascript
 var richCommentWidget = {
-  //the widget name. It should be unique and written in lowcase.
+  //the widget name. It should be unique and written in lowercase.
   name: "richcomment",
   //It will apply for all comment question type
   isFit: function (question) {
@@ -494,13 +493,13 @@ var customWidgetJSON = {
    * It should return true, when all needed resources (javascript and css files) are loaded
    */
   widgetIsLoaded: function () {
-    return true; 
-   //return typeof $ == "function"; //example of checking on loading jQuery
+   return typeof $ == "function"; //example of checking on loading jQuery
   },
   /**
    * This function returns true when we decided to apply our widget to the question.
    * This function is requried.
-   * If there are several custom widgets that can be applied to the same question, then the first custom wiget in the custom widget collection wins.
+   * SurveyJS Library allows to apply only one custom widget to a question.
+   * If there are several custom widgets that can be applied to the same question, then the first custom widget in the custom widget collection wins.
    */ 
   isFit: function (question) {
      return question.getType() == "richedit";
@@ -513,7 +512,7 @@ var customWidgetJSON = {
       //Add/modify/remove classes and properties
   },
   /**
-   * If you want to have the default rendering for existing question, then set this property to true.
+   * If you want to have the default input rendering for the existing question, then set this property to true.
    */  
   isDefaultRender: true,
   /**
