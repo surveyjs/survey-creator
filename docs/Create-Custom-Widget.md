@@ -106,7 +106,8 @@ In the previous example we added the search functionality into Comment question.
 //You can add here new classes and properties or modify/delete the existing.
 init() {
   //Add a boolean property hasSearch into comment question.
-  //Use switch property editor for it, you can have a simple check property editor by changing ":switch" to ":boolean"
+  //Use switch property editor for it.
+  //you can have a simple check property editor by changing ":switch" to ":boolean"
   //Add it to general category
   Survey.Serializer.addProperty("comment", {
     name: "hasSearch:switch",
@@ -253,8 +254,8 @@ var richEditWidget = {
   afterRender: function (question, el) {},
 };
 
-//Register our widget in singleton custom widget collection
-//Tells that, it is a new "customtype". We require this parameter if we want to show our item in SurveyJS Creator toolbox
+//Register our widget in singleton custom widget collection and tells that, it is a new "customtype". 
+//We require this parameter if we want to show our item in SurveyJS Creator toolbox
 Survey.CustomWidgetCollection.Instance.add(
   richEditWidget,
   "customtype"
@@ -489,7 +490,8 @@ var customWidgetJSON = {
    */ 
   iconName: iconName,
   /**
-   * This function is requried if you are going to introduce a new question type and register it on SurveyJS Creator toolbox.
+   * This function is requried if you are going to introduce a new question type
+   * and register it on SurveyJS Creator toolbox.
    * It should return true, when all needed resources (javascript and css files) are loaded
    */
   widgetIsLoaded: function () {
@@ -499,7 +501,8 @@ var customWidgetJSON = {
    * This function returns true when we decided to apply our widget to the question.
    * This function is requried.
    * SurveyJS Library allows to apply only one custom widget to a question.
-   * If there are several custom widgets that can be applied to the same question, then the first custom widget in the custom widget collection wins.
+   * If there are several custom widgets that can be applied to the same question,
+   * then the first custom widget in the custom widget collection wins.
    */ 
   isFit: function (question) {
      return question.getType() == "richedit";
@@ -521,7 +524,8 @@ var customWidgetJSON = {
   htmlTemplate: "<input class='custom_class' />",
   /**
    * You have to put here code to modify the DOM, using the html element as a root element.
-   * In case of creating your own question type, you have to create data binding between your widget and question value.
+   * In case of creating your own question type, 
+   * you have to create data binding between your widget and question value.
    * If needed, react on changing read-only question state.
    */
   afterRender: function(question, element) {
