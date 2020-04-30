@@ -1221,3 +1221,23 @@ QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function(
   assert.equal(removingCallCount, 2, "Event has been called");
   assert.equal(removedCallCount, 1, "Event has been called");
 });
+
+QUnit.test("SurveyCreator with logictab only, set cretor json", function(
+  assert
+) {
+  var options = {
+    showLogicTab: true,
+    showDesignerTab: false,
+    showTestSurveyTab: false,
+    showJSONEditorTab: false,
+  };
+  var creator = new SurveyCreator(null, options);
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+      { type: "text", name: "q3" },
+    ],
+  };
+  assert.equal(creator.logic.items.length, 1, "We have one item here");
+});

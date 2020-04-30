@@ -1358,6 +1358,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.showDesignerTab) {
       this.showDesigner();
     }
+    if (this.koViewType() == "logic") {
+      this.logic.update(this.survey, this);
+    }
     this.setUndoRedoCurrentState(clearState);
   }
   /**
