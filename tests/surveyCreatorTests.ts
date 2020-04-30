@@ -1278,3 +1278,19 @@ function getSurveyJson(): any {
     ],
   };
 }
+
+QUnit.test(
+  "Default toolbar items",
+  function(assert) {
+    var creator = new SurveyCreator(undefined);
+    assert.equal(creator.toolbarItems().length, 7, "Necessary items are present");
+    assert.equal(creator.toolbarItems()[0].id, "svd-undo", "svd-undo");
+    assert.equal(creator.toolbarItems()[1].id, "svd-redo", "svd-redo");
+    assert.equal(creator.toolbarItems()[2].id, "svd-survey-settings", "svd-survey-settings");
+    assert.equal(creator.toolbarItems()[3].id, "svd-options", "svd-options");
+    assert.equal(creator.toolbarItems()[4].id, "svd-test", "svd-test");
+    assert.equal(creator.toolbarItems()[5].id, "svd-save", "svd-save");
+    assert.equal(creator.toolbarItems()[6].id, "svd-state", "svd-state");
+  }
+);
+
