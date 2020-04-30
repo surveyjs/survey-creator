@@ -131,7 +131,7 @@ surveyCreator.saveSurveyFunc = function (saveNo, callback) {
         url: "UrlToYourWebService",
         type: "POST",
         data: {
-            surveyId: yourEditUniqueSurveyI,
+            surveyId: yourEditUniqueSurveyId,
             surveyText : surveyCreator.text
         },
         success: function (data) {
