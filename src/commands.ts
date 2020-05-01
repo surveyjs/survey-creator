@@ -146,15 +146,17 @@ export class Commands {
       },
     },
     state: <any>{
-      id: "svd-state",
-      visible: this.creator.koShowState,
-      css: "svd_state",
-      innerCss: ko.computed(() => "icon-" + this.creator.koState()),
-      title: ko.computed(() =>
-        this.creator.getLocString("ed." + this.creator.koState())
-      ),
-      template: "svd-toolbar-state",
-    },
+      toolbar: {
+        id: "svd-state",
+        visible: this.creator.koShowState,
+        css: "svd_state",
+        innerCss: ko.computed(() => "icon-" + this.creator.koState()),
+        title: ko.computed(() =>
+          this.creator.getLocString("ed." + this.creator.koState())
+        ),
+        template: "svd-toolbar-state",
+      }
+    }
   };
 
   public getCommands() {
