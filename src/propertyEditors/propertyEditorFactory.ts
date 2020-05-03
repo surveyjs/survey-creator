@@ -249,7 +249,7 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
     var showTitles = !!this.options && this.options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
-      return new Survey.ItemValue(q.name, text);
+      return new Survey.ItemValue(this.getItemValue(q), text);
     });
     qItems.sort((el1, el2) => {
       return el1.text.localeCompare(el2.text);
@@ -258,6 +258,18 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
       qItems.unshift(opt);
     }
     return qItems;
+  }
+  protected getItemValue(question: Survey.IQuestion): string {
+    return question.name;
+  }
+}
+
+export class SurveyQuestionValuePropertyEditor extends SurveyQuestionPropertyEditor {
+  public get editorType(): string {
+    return "questionvalue";
+  }
+  protected getItemValue(question: Survey.IQuestion): string {
+    return (<Survey.Question>question).getValueName();
   }
 }
 
@@ -320,6 +332,11 @@ SurveyPropertyEditorFactory.registerEditor("question", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyQuestionPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("questionvalue", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyQuestionValuePropertyEditor(property);
 });
 SurveyPropertyEditorFactory.registerEditor("boolean", function(
   property: Survey.JsonObjectProperty

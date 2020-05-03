@@ -299,6 +299,56 @@ QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function(
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, "Item 1", "Use text property");
 });
+QUnit.test("SurveyQuestionPropertyEditor - choices", function(assert) {
+  Survey.Serializer.addProperty("survey", "question_test:question");
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" },
+    ],
+  });
+  var propertyEditor = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("survey", "question_test")
+  );
+  propertyEditor.object = survey;
+  var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  assert.equal(
+    propertyEditor.editorType,
+    "question",
+    "Question editor should be created"
+  );
+  assert.equal(editor.koChoices().length, 4, "There are 3 items");
+  assert.equal(editor.koChoices()[1].value, "question1", "The first value");
+  assert.equal(editor.koChoices()[1].text, "question1", "The first text");
+  Survey.Serializer.removeProperty("survey", "question_test");
+});
+QUnit.test("SurveyQuestionValuePropertyEditor - choices", function(assert) {
+  Survey.Serializer.addProperty("survey", "question_test:questionvalue");
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" },
+    ],
+  });
+  var propertyEditor = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("survey", "question_test")
+  );
+  propertyEditor.object = survey;
+  var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  assert.equal(
+    propertyEditor.editorType,
+    "questionvalue",
+    "Question editor should be created"
+  );
+  assert.equal(editor.koChoices().length, 4, "There are 3 items");
+  assert.equal(editor.koChoices()[1].value, "value1", "The first value");
+  assert.equal(editor.koChoices()[1].text, "question1", "The first text");
+  assert.equal(editor.koChoices()[2].value, "question2", "The second value");
+  assert.equal(editor.koChoices()[2].text, "question2", "The second text");
+  Survey.Serializer.removeProperty("survey", "question_test");
+});
 QUnit.test("SurveyPropertyItemValue", function(assert) {
   var question = new Survey.QuestionCheckbox("q1");
   question.choices = [
