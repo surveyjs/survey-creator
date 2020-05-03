@@ -37,6 +37,25 @@ QUnit.test("Autocomplete without prefix test", function(assert) {
   assert.equal(completions[0].value, "{expression}", "questions first");
 });
 
+QUnit.test("Autocomplete without prefix test, using valueName", function(
+  assert
+) {
+  var prevIdentifier = "";
+  var currentQuestion = new Survey.QuestionDropdown("dropdown");
+  var textQuestion = new Survey.QuestionText("question1");
+  textQuestion.valueName = "value1";
+  var usableQuestions = [textQuestion];
+  var completions = null;
+  var prefix = "";
+
+  completions = doGetCompletions(prevIdentifier, prefix, {
+    question: currentQuestion,
+    questions: usableQuestions,
+  });
+
+  assert.equal(completions[0].value, "{value1}", "questions first, valueName");
+});
+
 QUnit.test("Autocomplete with prefix test", function(assert) {
   var prevIdentifier = "";
   var currentQuestion = new Survey.QuestionDropdown("dropdown");

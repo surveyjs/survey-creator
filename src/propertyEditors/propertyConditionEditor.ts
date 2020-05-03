@@ -1070,7 +1070,7 @@ export function doGetCompletions(
             return {
               completer: completer,
               name: "",
-              value: "{" + q.name + "}",
+              value: "{" + q.getValueName() + "}",
               some: "",
               meta: q.title,
               identifierRegex: ID_REGEXP,
