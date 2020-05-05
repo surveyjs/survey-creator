@@ -436,7 +436,7 @@ QUnit.test("Export to csv", function(assert) {
     "|default|de\n" +
     "survey.page1.question1.title|question1_1|\n" +
     "survey.page1.question1.col1.title|col1 en1|col1 de1";
-  translation.importFromCSV(translatedStr);
+  translation.importFromNestedArray(translatedStr);
   var question = <Survey.QuestionMatrixDropdown>(
     survey.getQuestionByName("question1")
   );

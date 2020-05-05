@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
+import { unparse, parse } from "papaparse";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -351,8 +352,8 @@ export class Translation implements ITranslationLocales {
   public koFilteredPage: any;
   public koFilteredPages: any;
   public koIsEmpty: any;
-  public koExportToSCVFile: any;
-  public koImportFromSCVFile: any;
+  public koExportToCSVFile: any;
+  public koImportFromCSVFile: any;
   public koCanMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefaultText: any;
@@ -406,12 +407,12 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPage.subscribe(function(newValue) {
       self.reset();
     });
-    this.koExportToSCVFile = function() {
+    this.koExportToCSVFile = function() {
       self.exportToSCVFile("survey_translation.csv");
     };
-    this.koImportFromSCVFile = function(el) {
+    this.koImportFromCSVFile = function(el) {
       if (el.files.length < 1) return;
-      self.importFromSCVFile(el.files[0]);
+      self.importFromCSVFile(el.files[0]);
       el.value = "";
     };
     this.koMergeLocaleWithDefault = function() {
@@ -532,50 +533,54 @@ export class Translation implements ITranslationLocales {
   }
   public exportToCSV(): string {
     var res = [];
-    var title = "";
+    let headerRow = [];
     var visLocales = this.getVisibleLocales();
+    headerRow.push('description ↓ - language →');
     for (var i = 0; i < visLocales.length; i++) {
-      title +=
-        Translation.csvDelimiter +
-        (!!visLocales[i] ? visLocales[i] : "default");
+      headerRow.push(!!visLocales[i] ? visLocales[i] : "default");
     }
-    res.push(title);
+    res.push(headerRow);
     var itemsHash = {};
     this.fillItemsHash("", this.root, itemsHash);
     for (var key in itemsHash) {
-      var line = key;
+      let row = [key];
       var item = <TranslationItem>itemsHash[key];
-      for (var i = 0; i < visLocales.length; i++) {
-        var val = item.locString.getLocaleText(visLocales[i]);
+      for (let i = 0; i < visLocales.length; i++) {
+        let val = item.locString.getLocaleText(visLocales[i]);
         if (!val && i == 0) {
           val = item.defaultValue;
         }
-        line += Translation.csvDelimiter + val;
+        row.push(val);
       }
-      res.push(line);
+      res.push(row);
     }
-    return res.join(Translation.newLineDelimiter);
+    return unparse(res, {
+      quotes: true,
+      quoteChar: '"',
+      escapeChar: '"',
+      delimiter: Translation.csvDelimiter,
+      header: true,
+      newline: Translation.newLineDelimiter,
+      skipEmptyLines: false, //or 'greedy',
+      columns: null //or array of strings
+    });
   }
-  public importFromCSV(str: string) {
-    if (!str) return;
-    var lines = str.split(Translation.newLineDelimiter);
-    if (lines.length < 2) return;
-    var locales = this.readLocales(lines[0]);
-    var translation = new Translation(this.survey, true);
-    var itemsHash = [];
+  public importFromNestedArray(rows: any) {
+    let locales = rows[0].slice(1);
+    let translation = new Translation(this.survey, true);
+    let itemsHash = [];
     this.fillItemsHash("", translation.root, itemsHash);
-    for (var i = 1; i < lines.length; i++) {
-      if (!lines[i]) continue;
-      var vals = lines[i].split(Translation.csvDelimiter);
-      var name = vals[0].trim();
+    for (let i = 1; i < rows.length; i++) {
+      let name = rows[i][0].trim();
       if (!name) continue;
-      var item = itemsHash[name];
+      let item = itemsHash[name];
       if (!item) continue;
-      this.updateItemWithStrings(item, vals, locales);
+      this.updateItemWithStrings(item, rows[i].slice(1), locales);
     }
     this.reset();
     if (this.importFinishedCallback) this.importFinishedCallback();
   }
+
   public exportToSCVFile(fileName: string) {
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
@@ -590,13 +595,12 @@ export class Translation implements ITranslationLocales {
       document.body.removeChild(elem);
     }
   }
-  public importFromSCVFile(file: File) {
-    var fileReader = new FileReader();
-    var self = this;
-    fileReader.onload = function(e) {
-      self.importFromCSV(<string>fileReader.result);
-    };
-    fileReader.readAsText(file);
+  public importFromCSVFile(file: File) {
+    parse(file, {
+        "complete": function(results, file) {
+
+        }
+    });
   }
   public mergeLocaleWithDefault() {
     if (!this.hasLocale(this.defaultLocale)) return;
@@ -610,17 +614,23 @@ export class Translation implements ITranslationLocales {
     ]);
     this.reset();
   }
+
+  /**
+   * Update a translation item with given values
+   */
   private updateItemWithStrings(
     item: TranslationItem,
     values: Array<string>,
     locales: Array<string>
   ) {
-    for (var i = 0; i < values.length - 1 && i < locales.length; i++) {
-      var val = values[i + 1].trim();
-      if (!val) continue;
-      item.koValue(locales[i])(val);
+    for (let i = 0; i < values.length - 1 && i < locales.length; i++) {
+      let val = values[i].trim();
+      let locale = locales[i];
+      if (!val || !locale) continue;
+      item.koValue(locale)(val);
     }
   }
+
   private getVisibleLocales(): Array<string> {
     var res = [];
     var locales = this.koLocales();
