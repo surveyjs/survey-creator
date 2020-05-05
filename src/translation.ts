@@ -525,7 +525,7 @@ export class Translation implements ITranslationLocales {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
   public exportToCSV(): string {
-    var res = [];
+    let res = [];
     let headerRow = [];
     let visibleLocales = this.getVisibleLocales();
     headerRow.push('description ↓ - language →');
@@ -626,7 +626,9 @@ export class Translation implements ITranslationLocales {
   }
 
   private getVisibleLocales(): Array<string> {
-    return this.koLocales().filter((locale) => locale.koVisible());
+    return this.koLocales()
+        .filter(locale => locale.koVisible())
+        .map(locale => locale.locale);
   }
 
   private fillItemsHash(
