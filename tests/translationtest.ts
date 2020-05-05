@@ -6,6 +6,7 @@ import {
   Translation,
 } from "../src/translation";
 import { SurveyCreator } from "../src/editor";
+import { unparse, parse } from "papaparse";
 
 export default QUnit.module("TranslatonTests");
 
@@ -373,7 +374,75 @@ QUnit.test("MultipleText question", function(assert) {
   assert.equal(qGroup.groups.length, 2, "There are 2 groups");
   assert.equal(qGroup.groups[0].items[0].name, "title", "It is item title");
 });
-QUnit.test("Export to csv", function(assert) {
+QUnit.test("Import from array", function(assert) {
+  let survey = new Survey.Survey({
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "question1",
+        columns: [
+          {
+            name: "col1",
+            title: {
+              default: "col1 en",
+              de: "col1 de",
+            },
+            cellType: "dropdown",
+            isRequired: true,
+            choices: [
+              {
+                value: "item1",
+                text: {
+                  default: "item en",
+                  de: "item de",
+                },
+              },
+            ],
+          },
+          {
+            name: "col2",
+          },
+          {
+            name: "col3",
+          },
+        ],
+        choices: [1, 2, 3, 4, 5],
+        rows: [
+          {
+            value: "item1",
+            text: {
+              default: "Row 1",
+              de: "Row 1-de",
+            },
+          },
+        ],
+      },
+    ],
+  });
+  let translation = new Translation(survey);
+
+  translation.importFromNestedArray([
+      ['description ↓ - language →', 'default', 'de'],
+      ['survey.page1.question1.title', 'question1_1', ''],
+      ['survey.page1.question1.col1.title', 'col1 en1', 'col1 de1']
+  ]);
+  let question = <Survey.QuestionMatrixDropdown>(survey.getQuestionByName("question1"));
+  let column = <Survey.MatrixDropdownColumn>question.columns[0];
+  assert.equal(question.title, "question1_1", "title has been changed");
+  assert.equal(column.title, 'col1 en1');
+  assert.equal(
+      column.locTitle.getLocaleText(""),
+    "col1 en1",
+    "default text in column title has been changed"
+  );
+  assert.equal(
+      column.locTitle.getLocaleText("de"),
+    "col1 de1",
+    "de text in column title has been changed"
+  );
+});
+
+QUnit.test("Export to array", function(assert) {
   var survey = new Survey.Survey({
     elements: [
       {
@@ -419,40 +488,15 @@ QUnit.test("Export to csv", function(assert) {
     ],
   });
   var translation = new Translation(survey);
-  var str = translation.exportToCSV();
-  var strs = str.split("\n");
-  assert.equal(
-    strs.length,
-    7,
-    "locales+question.title+3 column+column choice+ one row"
-  );
-  assert.equal(strs[0], "|default|de", "check locale line");
-  assert.equal(
-    strs[1],
-    "survey.page1.question1.title|question1|",
-    "use default value"
-  );
-  var translatedStr =
-    "|default|de\n" +
-    "survey.page1.question1.title|question1_1|\n" +
-    "survey.page1.question1.col1.title|col1 en1|col1 de1";
-  translation.importFromNestedArray(translatedStr);
-  var question = <Survey.QuestionMatrixDropdown>(
-    survey.getQuestionByName("question1")
-  );
-  assert.equal(question.title, "question1_1", "title has been changed");
-  assert.equal(
-    question.columns[0].locTitle.getLocaleText(""),
-    "col1 en1",
-    "default text in column title has been changed"
-  );
-  assert.equal(
-    question.columns[0].locTitle.getLocaleText("de"),
-    "col1 de1",
-    "de text in column title has been changed"
-  );
-});
+  let exported;
+  parse(translation.exportToCSV(), {
+    "complete": function(results, file) { exported = results.data; }
+  });
 
+  assert.equal(exported.length, 7, "locales+question.title+3 column+column choice+ one row");
+  assert.deepEqual(exported[0], ["description ↓ - language →", "default", "de"], "check locale line");
+  assert.deepEqual(exported[1], ["survey.page1.question1.title", "question1", ""], "use default value");
+});
 QUnit.test("Merging a locale with default", function(assert) {
   var survey = new Survey.Survey({
     locale: "de",

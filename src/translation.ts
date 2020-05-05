@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { unparse, parse } from "papaparse";
+import {Observable} from "knockout";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -13,7 +14,7 @@ export class TranslationItemBase {
 }
 
 export class TranslationItem extends TranslationItemBase {
-  private values: Survey.HashTable<any>;
+  private values: Survey.HashTable<Observable<string>>;
   public customText: string;
   constructor(
     public name: string,
@@ -31,23 +32,26 @@ export class TranslationItem extends TranslationItemBase {
   public get localizableName(): string {
     return editorLocalization.getPropertyName(this.name);
   }
-  public koValue(loc: string): any {
-    if (!!this.values[loc]) return this.values[loc];
-    var val = ko.observable(this.locString.getLocaleText(loc));
-    var self = this;
-    val.subscribe(function(newValue) {
-      self.locString.setLocaleText(loc, newValue);
-      !!self.translation.tranlationChangedCallback &&
+
+  public koValue(loc: string): Observable<string> {
+    if (!this.values[loc]) {
+      var val = ko.observable(this.locString.getLocaleText(loc));
+      var self = this;
+      val.subscribe((newValue) => {
+        self.locString.setLocaleText(loc, newValue);
+        !!self.translation.tranlationChangedCallback &&
         self.translation.tranlationChangedCallback(
-          loc,
-          self.name,
-          newValue,
-          self.context
+            loc,
+            self.name,
+            newValue,
+            self.context
         );
-    });
-    this.values[loc] = val;
-    return val;
+      });
+      this.values[loc] = val;
+    }
+    return this.values[loc];
   }
+
   public fillLocales(locales: Array<string>) {
     var json = this.locString.getJson();
     if (!json || typeof json === "string") return;
@@ -100,14 +104,9 @@ export class TranslationGroup extends TranslationItemBase {
     return this.itemValues;
   }
   public get locItems(): Array<TranslationItem> {
-    var res = [];
-    for (var i = 0; i < this.items.length; i++) {
-      if (!this.items[i].isGroup) {
-        res.push(this.items[i]);
-      }
-    }
-    return res;
+    return this.itemValues.filter((item) => item instanceof TranslationItem) as Array<TranslationItem>;
   }
+
   public getItemByName(name: string): TranslationItemBase {
     for (var i = 0; i < this.itemValues.length; i++) {
       if (this.itemValues[i].name == name) return this.itemValues[i];
@@ -115,14 +114,9 @@ export class TranslationGroup extends TranslationItemBase {
     return null;
   }
   public get groups(): Array<TranslationGroup> {
-    var res = [];
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].isGroup) {
-        res.push(this.items[i]);
-      }
-    }
-    return res;
+    return this.itemValues.filter((item) => item instanceof TranslationGroup) as Array<TranslationGroup>;
   }
+
   public get isGroup() {
     return true;
   }
@@ -169,10 +163,9 @@ export class TranslationGroup extends TranslationItemBase {
     return false;
   }
   public mergeLocaleWithDefault(loc: string) {
-    for (var i = 0; i < this.itemValues.length; i++) {
-      this.itemValues[i].mergeLocaleWithDefault(loc);
-    }
+    this.itemValues.forEach((item) => item.mergeLocaleWithDefault(loc));
   }
+
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValues();
@@ -534,23 +527,20 @@ export class Translation implements ITranslationLocales {
   public exportToCSV(): string {
     var res = [];
     let headerRow = [];
-    var visLocales = this.getVisibleLocales();
+    let visibleLocales = this.getVisibleLocales();
     headerRow.push('description ↓ - language →');
-    for (var i = 0; i < visLocales.length; i++) {
-      headerRow.push(!!visLocales[i] ? visLocales[i] : "default");
+    for (let i = 0; i < visibleLocales.length; i++) {
+      headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
     res.push(headerRow);
-    var itemsHash = {};
+    let itemsHash = <Survey.HashTable<TranslationItem>>{};
     this.fillItemsHash("", this.root, itemsHash);
-    for (var key in itemsHash) {
+    for (let key in itemsHash) {
       let row = [key];
-      var item = <TranslationItem>itemsHash[key];
-      for (let i = 0; i < visLocales.length; i++) {
-        let val = item.locString.getLocaleText(visLocales[i]);
-        if (!val && i == 0) {
-          val = item.defaultValue;
-        }
-        row.push(val);
+      let item = itemsHash[key];
+      for (let i = 0; i < visibleLocales.length; i++) {
+        let val = item.locString.getLocaleText(visibleLocales[i]);
+        row.push(!val && i == 0 ? item.defaultValue : val);
       }
       res.push(row);
     }
@@ -565,18 +555,23 @@ export class Translation implements ITranslationLocales {
       columns: null //or array of strings
     });
   }
-  public importFromNestedArray(rows: any) {
-    let locales = rows[0].slice(1);
-    let translation = new Translation(this.survey, true);
-    let itemsHash = [];
-    this.fillItemsHash("", translation.root, itemsHash);
-    for (let i = 1; i < rows.length; i++) {
-      let name = rows[i][0].trim();
-      if (!name) continue;
-      let item = itemsHash[name];
-      if (!item) continue;
-      this.updateItemWithStrings(item, rows[i].slice(1), locales);
+
+  public importFromNestedArray(rows: string[][]) {
+    var self = this;
+    let locales = rows.shift().slice(1);
+    if (locales[0] === 'default') {
+      locales[0] = "";
     }
+    let translation = new Translation(this.survey, true);
+    let itemsHash = <Survey.HashTable<TranslationItem>>{};
+    this.fillItemsHash("", translation.root, itemsHash);
+    rows.forEach((row) => {
+      let name = row.shift().trim();
+      if (!name) return;
+      let item = itemsHash[name];
+      if (!item) return;
+      self.updateItemWithStrings(item, row, locales);
+    });
     this.reset();
     if (this.importFinishedCallback) this.importFinishedCallback();
   }
@@ -598,7 +593,7 @@ export class Translation implements ITranslationLocales {
   public importFromCSVFile(file: File) {
     parse(file, {
         "complete": function(results, file) {
-
+          this.importFromNestedArray(results.data);
         }
     });
   }
@@ -623,51 +618,25 @@ export class Translation implements ITranslationLocales {
     values: Array<string>,
     locales: Array<string>
   ) {
-    for (let i = 0; i < values.length - 1 && i < locales.length; i++) {
+    for (let i = 0; i < values.length && i < locales.length; i++) {
       let val = values[i].trim();
-      let locale = locales[i];
-      if (!val || !locale) continue;
-      item.koValue(locale)(val);
+      if (!val) continue;
+      item.koValue(locales[i])(val);
     }
   }
 
   private getVisibleLocales(): Array<string> {
-    var res = [];
-    var locales = this.koLocales();
-    for (var i = 0; i < locales.length; i++) {
-      if (locales[i].koVisible()) {
-        res.push(locales[i].locale);
-      }
-    }
-    return res;
+    return this.koLocales().filter((locale) => locale.koVisible());
   }
-  private readLocales(str: string): Array<string> {
-    var res = [];
-    if (!str) return res;
-    var locs = str.split(Translation.csvDelimiter);
-    for (var i = 1; i < locs.length; i++) {
-      var loc = locs[i].trim();
-      if (loc == "default") loc = "";
-      res.push(loc);
-    }
-    return res;
-  }
+
   private fillItemsHash(
     parentName: string,
     group: TranslationGroup,
-    itemsHash: any
+    itemsHash: Survey.HashTable<TranslationItem>
   ) {
-    var name = parentName;
-    if (!!name) name += ".";
-    name += group.name;
-    var items = group.locItems;
-    for (var i = 0; i < items.length; i++) {
-      itemsHash[name + "." + items[i].name] = items[i];
-    }
-    var groups = group.groups;
-    for (var i = 0; i < groups.length; i++) {
-      this.fillItemsHash(name, groups[i], itemsHash);
-    }
+    let name = parentName ? parentName + '.' + group.name : group.name;
+    group.locItems.forEach((item) => {itemsHash[name + "." + item.name] = item});
+    group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();
