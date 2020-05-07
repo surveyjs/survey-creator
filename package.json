@@ -25,6 +25,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "knockout": "^3.5.0",
+    "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
     "survey-knockout": "^1.7.1"
@@ -34,6 +35,7 @@
     "@types/bootstrap": "3.3.32",
     "@types/node": "7.0.4",
     "@types/qunit": "2.0.31",
+    "@types/papaparse": "^5.0.3",
     "ace-builds": "1.2.2",
     "ajv": "4.11.2",
     "babel-core": "6.22.1",
