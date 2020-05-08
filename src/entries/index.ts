@@ -66,7 +66,7 @@ export { SurveyObjectProperty } from "../objectProperty";
 export { PagesEditor } from "../pages-editor";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
-export { SurveyLiveTester } from "../surveylive";
+export { SurveyLiveTester } from "../tabs/test";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
 export { SurveyLogic } from "../logic";

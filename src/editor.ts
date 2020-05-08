@@ -4,7 +4,6 @@ import {
   ISurveyObjectEditorOptions,
   SurveyPropertyEditorBase,
 } from "./propertyEditors/propertyEditorBase";
-import { SurveyLiveTester } from "./surveylive";
 import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
 import { SurveyObjects } from "./surveyObjects";
 import { QuestionConverter } from "./questionconverter";
@@ -93,7 +92,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   public selectPage: Function;
 
-  private surveyLive: SurveyLiveTester;
   private surveyEmbeding: SurveyEmbedingWindow;
   private translationValue: Translation;
   private logicValue: SurveyLogic;
@@ -826,7 +824,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   doRedoClick: any;
   deleteObjectClick: any;
   koState = ko.observable("");
-  runSurveyClick: any;
 
   saveButtonClick: any;
   draggingToolboxItem: any;
@@ -935,7 +932,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
-    this.surveyLive = new SurveyLiveTester(this);
     this.surveyEmbeding = new SurveyEmbedingWindow();
     this.translationValue = new Translation(
       this.createSurvey({}, "translation")
@@ -981,9 +977,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.generateReadableJSONClick = function() {
       self.koGenerateValidJSON(false);
-    };
-    this.runSurveyClick = function() {
-      self.showLiveSurvey();
     };
     this.deleteObjectClick = function() {
       self.deleteCurrentObject();
@@ -1967,9 +1960,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (viewName == "editor") {
       this.jsonEditor.show(this.getSurveyTextFromDesigner());
     }
-    if (viewName == "test") {
-      this.showLiveSurvey();
-    }
     if (viewName == "embed") {
       this.showSurveyEmbeding();
     }
@@ -2901,27 +2891,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (objType == ObjType.Question) {
       this.updateConditionsOnRemove(obj.getValueName());
     }
-  }
-  public get surveyLiveTester(): SurveyLiveTester {
-    return this.surveyLive;
-  }
-  private showLiveSurvey() {
-    var self = this;
-    this.surveyLive.onSurveyCreatedCallback = function(survey: Survey.Survey) {
-      self.onTestSurveyCreated.fire(self, { survey: survey });
-    };
-    this.surveyLive.setJSON(this.getSurveyJSON());
-    var options = {
-      showPagesInTestSurveyTab: this.showPagesInTestSurveyTab,
-      showDefaultLanguageInTestSurveyTab: this
-        .showDefaultLanguageInTestSurveyTab,
-      showInvisibleElementsInTestSurveyTab: this
-        .showInvisibleElementsInTestSurveyTab,
-    };
-    this.surveyLive.onGetObjectDisplayName = function(obj): string {
-      return self.getObjectDisplayName(obj);
-    };
-    this.surveyLive.show(options);
   }
   private showSurveyEmbeding() {
     var json = this.getSurveyJSON();

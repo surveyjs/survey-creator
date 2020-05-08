@@ -1,0 +1,54 @@
+<div data-bind="visible: koIsRunning()">
+    <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
+        <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
+        <span id="testSurveyPageChanged">
+            <select onmousewheel="return false;" class="form-control"
+                data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable, attr: { 'aria-label': selectPageText }">
+            </select>
+        </span>
+    </span>
+    <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
+        <label for="testSurveyLocale" data-bind="text: localeText"></label>
+        <span id="testSurveyLocale">
+            <select onmousewheel="return false;" class="form-control"
+                data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value', attr: { 'aria-label': localeText }">
+            </select>
+        </span>
+    </span>
+    <label id="testShowInvisibleElements" data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
+        <div class="sjs-cb-container">
+            <input class="svd_editor_control" type="checkbox" data-bind="checked: koShowInvisibleElements">
+            <span class="checkmark"
+                data-bind="css: { 'svd-main-background-color': koShowInvisibleElements(), 'svd-light-background-color': !koShowInvisibleElements() }"></span>
+            <span class="sjs-cb-label" data-bind="text: showInvisibleElementsText"></span>
+        </div>
+    </label>
+    <!-- ko if: simulatorEnabled -->
+    <span>
+        <label for="testDeviceSelector" data-bind="text: simulatorText"></label>
+        <span id="testDeviceSelector">
+            <select onmousewheel="return false;" class="form-control"
+                data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"
+                aria-label="Device selector"></select>
+        </span>
+    </span>
+    <!-- /ko -->
+    <!-- ko if: koHasFrame -->
+    <label for="testDeviceOrientation">
+        <div class="sjs-cb-container">
+            <input id="testDeviceOrientation" class="svd_editor_control" type="checkbox"
+                data-bind="checked: koLandscapeOrientation">
+            <span class="checkmark"
+                data-bind="css: { 'svd-main-background-color': koLandscapeOrientation(), 'svd-light-background-color': !koLandscapeOrientation() }"></span>
+            <span class="sjs-cb-label" data-bind="text: landscapeOrientationText"></span>
+        </div>
+    </label>
+    <!-- /ko -->
+</div>
+<survey-simulator params="model: $data"></survey-simulator>
+<!-- ko ifnot: koIsRunning -->
+<div class="svd_test_results">
+    <button class="btn btn-primary" data-bind="click: selectTestClick, text: testSurveyAgainText"></button>
+</div>
+<survey-results params="survey: survey"></survey-results>
+<!-- /ko -->

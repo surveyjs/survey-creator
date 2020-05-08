@@ -1,18 +1,19 @@
 import * as ko from "knockout";
-import { SurveyHelper, ObjType } from "./surveyHelper";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-knockout";
+import { SurveyCreator } from '../editor';
 
-import "./simulator.scss";
+import "./test.scss";
+var templateHtml = require("html-loader?interpolate!val-loader!./test.html");
+
+export { SurveySimulatorComponent } from "./simulator";
+export { SurveyResultsModel } from "./results";
 
 export class SurveyLiveTester {
   private json: any;
   koIsRunning = ko.observable(true);
   selectTestClick: any;
   selectPageClick: any;
-  koResultText = ko.observable("");
-  koResultData = ko.observableArray();
-  koResultViewType = ko.observable("table");
   survey: Survey.Survey;
   koSurvey: any;
   koPages = ko.observableArray([]);
@@ -121,19 +122,6 @@ export class SurveyLiveTester {
     var self = this;
     this.survey.onComplete.add((sender: Survey.Survey) => {
       self.koIsRunning(false);
-      self.koResultText(JSON.stringify(self.survey.data, null, 4));
-      var addCollapsed = (items: any[]) => {
-        items.forEach((item: any) => {
-          if (!!item && item.isNode) {
-            item.collapsed = ko.observable(true);
-            item.data = addCollapsed(item.data || []);
-          }
-        });
-        return items.filter((item) => !!item);
-      };
-      var plainData = self.survey.getPlainData({ includeEmpty: false });
-      plainData = addCollapsed(plainData);
-      self.koResultData(plainData);
     });
     if (!!this.survey["onNavigateToUrl"]) {
       this.survey["onNavigateToUrl"].add(function(sender, options) {
@@ -214,32 +202,11 @@ export class SurveyLiveTester {
   public get testSurveyAgainText() {
     return this.getLocString("ed.testSurveyAgain");
   }
-  public get surveyResultsText() {
-    return this.getLocString("ed.surveyResults");
-  }
-  public get resultsTitle() {
-    return this.getLocString("ed.resultsTitle");
-  }
-  public get resultsName() {
-    return this.getLocString("ed.resultsName");
-  }
-  public get resultsValue() {
-    return this.getLocString("ed.resultsValue");
-  }
-  public get resultsDisplayValue() {
-    return this.getLocString("ed.resultsDisplayValue");
-  }
   public get selectPageText() {
     return this.getLocString("ts.selectPage");
   }
   public get showInvisibleElementsText() {
     return this.getLocString("ts.showInvisibleElements");
-  }
-  public selectTableClick(model: SurveyLiveTester) {
-    model.koResultViewType("table");
-  }
-  public selectJsonClick(model: SurveyLiveTester) {
-    model.koResultViewType("text");
   }
   public get localeText() {
     return this.getLocString("pe.locale");
@@ -326,6 +293,10 @@ export class SurveyLiveTester {
       frameY: height * offsetRatioY,
     };
   });
+
+  dispose() {
+
+  }
 }
 
 export var DEFAULT_MONITOR_DPI = 102.69;
@@ -492,3 +463,39 @@ export var simulatorDevices = {
     title: "",
   },
 };
+
+ko.components.register("survey-tester", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      var creator: SurveyCreator = params.creator;
+      var model = new SurveyLiveTester(creator);
+
+      model.onSurveyCreatedCallback = survey => {
+        creator.onTestSurveyCreated.fire(self, { survey: survey });
+      };
+      model.onGetObjectDisplayName = obj => {
+        return creator.getObjectDisplayName(obj);
+      };
+
+      var subscr = creator.koViewType.subscribe(viewType => {
+        if(viewType === "test") {
+          var options = {
+            showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
+            showDefaultLanguageInTestSurveyTab: creator.showDefaultLanguageInTestSurveyTab,
+            showInvisibleElementsInTestSurveyTab: creator.showInvisibleElementsInTestSurveyTab,
+          };
+          model.setJSON(creator.JSON);
+          model.show(options);
+        }
+      });
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscr.dispose();
+        model.dispose();
+      });
+
+      return model;
+    }
+  },
+  template: templateHtml,
+});
