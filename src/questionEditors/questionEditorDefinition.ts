@@ -107,7 +107,11 @@ export class SurveyQuestionEditorDefinition {
       ],
     },
     matrixdropdown: {
-      properties: ["totalText", { name: "rowsVisibleIf", tab: "logic" }],
+      properties: [
+        "totalText",
+        { name: "rowsVisibleIf", tab: "logic" },
+        { name: "rowTitleWidth", tab: "layout" },
+      ],
     },
     matrix: {
       properties: [
