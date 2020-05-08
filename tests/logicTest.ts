@@ -1,5 +1,10 @@
 import * as Survey from "survey-knockout";
-import { SurveyLogic, SurveyLogicAction } from "../src/logic";
+import {
+  SurveyLogic,
+  SurveyLogicAction,
+  ISurveyLogicType,
+  SurveyLogicType,
+} from "../src/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { SurveyCreator } from "../src/editor";
 import { SurveyElementEditorContent } from "../src/questionEditors/questionEditor";
@@ -611,7 +616,7 @@ QUnit.test("Add new item with two triggers", function(assert) {
   var lt = logic.getTypeByName("trigger_complete");
   var action = logic.editableItem.actions[0];
   action.logicType = lt;
-  assert.equal(lt.visible, false, "Trigger logic type is not visible");
+  assert.equal(lt.visible, true, "Trigger logic type is visible");
   assert.equal(
     logic.editableItem.actions.length,
     1,
@@ -1157,14 +1162,14 @@ QUnit.test("Limit the number of action types.", function(assert) {
   ];
   var logic = new SurveyLogic(survey, options);
   assert.equal(
-    logic.koLogicTypes().length,
+    logic.logicTypes.length,
     4,
     "There are four visible action types"
   );
   SurveyLogic.visibleActions = [];
   logic = new SurveyLogic(survey, options);
   assert.notEqual(
-    logic.koLogicTypes().length,
+    logic.logicTypes.length,
     4,
     "There are more than four visible action types"
   );
@@ -1240,4 +1245,104 @@ QUnit.test("SurveyCreator with logictab only, set cretor json", function(
     ],
   };
   assert.equal(creator.logic.items.length, 1, "We have one item here");
+});
+QUnit.test("Hide/show logic types in actions", function(assert) {
+  var findLogicTypeInAction = function(
+    action: SurveyLogicAction,
+    lt: SurveyLogicType
+  ): any {
+    for (var i = 0; action.koLogicTypes().length; i++) {
+      if (action.koLogicTypes()[i].logicType == lt)
+        return action.koLogicTypes()[i];
+    }
+    return null;
+  };
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  logic.addNew();
+  var action1 = logic.editableItem.actions[0];
+  var lt1Skip = findLogicTypeInAction(
+    action1,
+    logic.getTypeByName("trigger_skip")
+  );
+  var lt1Complete = findLogicTypeInAction(
+    action1,
+    logic.getTypeByName("trigger_complete")
+  );
+
+  var action2 = logic.addNewAction();
+  var lt2Skip = findLogicTypeInAction(
+    action2,
+    logic.getTypeByName("trigger_skip")
+  );
+  var lt2Complete = findLogicTypeInAction(
+    action2,
+    logic.getTypeByName("trigger_complete")
+  );
+  assert.ok(lt1Skip, "lt1Skip is here");
+  assert.equal(lt1Skip.koVisible(), true, "initial, lt1Skip");
+  assert.equal(lt1Complete.koVisible(), true, "initial, lt1Complete");
+  assert.equal(lt2Skip.koVisible(), true, "initial, lt2Skip");
+  assert.equal(lt2Complete.koVisible(), true, "initial, lt2Complete");
+
+  action1.logicType = logic.getTypeByName("trigger_complete");
+  assert.equal(lt1Skip.koVisible(), true, "action1 set complete, lt1Skip");
+  assert.equal(
+    lt1Complete.koVisible(),
+    true,
+    "action1 set complete, lt1Complete"
+  );
+  assert.equal(lt2Skip.koVisible(), true, "action1 set complete, lt2Skip");
+  assert.equal(
+    lt2Complete.koVisible(),
+    false,
+    "action1 set complete, lt2Complete"
+  );
+
+  action2.logicType = logic.getTypeByName("trigger_skip");
+  assert.equal(lt1Skip.koVisible(), false, "action2 set skip, lt1Skip");
+  assert.equal(lt1Complete.koVisible(), true, "action2 set skip, lt1Complete");
+  assert.equal(lt2Skip.koVisible(), true, "action2 set skip, lt2Skip");
+  assert.equal(lt2Complete.koVisible(), false, "action2 set skip, lt2Complete");
+
+  action1.logicType = null;
+  assert.equal(lt1Skip.koVisible(), false, "action1 set null, lt1Skip");
+  assert.equal(lt1Complete.koVisible(), true, "action1 set null, lt1Complete");
+  assert.equal(lt2Skip.koVisible(), true, "action1 set null, lt2Skip");
+  assert.equal(lt2Complete.koVisible(), true, "action1 set null, lt2Complete");
+
+  var action3 = logic.addNewAction();
+  action3.logicType = logic.getTypeByName("trigger_complete");
+  assert.equal(lt1Skip.koVisible(), false, "action3 set complete, lt1Skip");
+  assert.equal(
+    lt1Complete.koVisible(),
+    false,
+    "action3 set complete, lt1Complete"
+  );
+  assert.equal(lt2Skip.koVisible(), true, "action3 set complete, lt2Skip");
+  assert.equal(
+    lt2Complete.koVisible(),
+    false,
+    "action3 set complete, lt2Complete"
+  );
+
+  logic.removeAction(action3);
+  assert.equal(lt1Skip.koVisible(), false, "action3 is removed, lt1Skip");
+  assert.equal(
+    lt1Complete.koVisible(),
+    true,
+    "action3 is removed, lt1Complete"
+  );
+  assert.equal(lt2Skip.koVisible(), true, "action3 is removed, lt2Skip");
+  assert.equal(
+    lt2Complete.koVisible(),
+    true,
+    "action3 is removed, lt2Complete"
+  );
 });

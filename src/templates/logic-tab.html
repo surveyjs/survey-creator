@@ -68,8 +68,8 @@
             <div class="form-control svd_custom_select" style="width: 50%;max-width:300px">
               <select onmousewheel="return false;" data-bind="if: true, value:action.koLogicType, attr: { 'aria-label': $parent.selectedActionCaption }">
                 <option data-bind="text:$parent.selectedActionCaption, value: null"></option>
-                <!-- ko foreach: {data: $parent.koLogicTypes, as: 'item' } -->
-                <option data-bind="visible: item.koVisible, value: item, text: item.displayName"></option>
+                <!-- ko foreach: {data: $data.koLogicTypes, as: 'item' } -->
+                <option data-bind="visible: item.koVisible, value: item.logicType, text: item.logicType.displayName"></option>
                 <!-- /ko -->
               </select>
             </div>
