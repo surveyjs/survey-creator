@@ -31,11 +31,13 @@
   }
 }
 
-.svd_custom_select {
+.svd_container .svd_content .svd_custom_select,
+.svd_container .modal-dialog .svd_custom_select {
   width: 100%;
   position: relative;
   display: inline-block;
   background-color: $primary-bg-color;
+  box-sizing: content-box;
 
   select {
     width: 100%;

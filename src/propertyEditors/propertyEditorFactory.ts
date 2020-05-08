@@ -3,37 +3,63 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyCustomEditor } from "./propertyCustomEditor";
 import { editorLocalization } from "../editorLocalization";
-import { JsonObjectProperty } from "survey-knockout";
+import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyEditorFactory {
   public static defaultEditor: string = "string";
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
+  private static cellTypes = {};
   public static getOperators(): Array<any> {
     var operators = [
-      "empty",
-      "notempty",
-      "equal",
-      "notequal",
-      "contains",
-      "notcontains",
-      "anyof",
-      "allof",
-      "greater",
-      "less",
-      "greaterorequal",
-      "lessorequal"
+      { name: "empty", types: [] },
+      { name: "notempty", types: [] },
+      { name: "equal", types: ["!file"] },
+      { name: "notequal", types: ["!file"] },
+      {
+        name: "contains",
+        types: ["checkbox", "text", "comment"],
+      },
+      {
+        name: "notcontains",
+        types: ["checkbox", "text", "comment"],
+      },
+      { name: "anyof", types: ["selectbase"] },
+      { name: "allof", types: ["checkbox"] },
+      {
+        name: "greater",
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+      },
+      {
+        name: "less",
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+      },
+      {
+        name: "greaterorequal",
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+      },
+      {
+        name: "lessorequal",
+        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+      },
     ];
     var result = [];
     for (var i = 0; i < operators.length; i++) {
-      var name = operators[i];
+      var name = operators[i].name;
       result.push({
         name: name,
-        text: editorLocalization.getString("op." + name)
+        text: editorLocalization.getString("op." + name),
+        types: operators[i].types,
       });
     }
     return result;
+  }
+  public static registerTypeForCellEditing(
+    typeName: string,
+    cellTypeName: string
+  ) {
+    SurveyPropertyEditorFactory.cellTypes[typeName] = cellTypeName;
   }
   public static registerEditor(
     name: string,
@@ -52,9 +78,12 @@ export class SurveyPropertyEditorFactory {
   }
   public static createEditor(
     property: Survey.JsonObjectProperty,
-    func: (newValue: any) => any
+    isCellEditor: boolean = false
   ): SurveyPropertyEditorBase {
     var editorType = property.type;
+    if (isCellEditor && !!SurveyPropertyEditorFactory.cellTypes[editorType]) {
+      editorType = SurveyPropertyEditorFactory.cellTypes[editorType];
+    }
     if (
       SurveyPropertyEditorFactory.isDropdownEditor(property) &&
       (!editorType || editorType == SurveyPropertyEditorFactory.defaultEditor)
@@ -82,7 +111,6 @@ export class SurveyPropertyEditorFactory {
       creator = SurveyPropertyEditorFactory.findParentCreator(editorType);
       propertyEditor = creator(property);
     }
-    propertyEditor.onChanged = func;
     return propertyEditor;
   }
   private static isDropdownEditor(
@@ -151,6 +179,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
       let text = editorLocalization.getString("qt." + value);
       if (text) return text;
     }
+    if (value === null) return null;
     return editorLocalization.getPropertyValue(value);
   }
   public setObject(value: any) {
@@ -169,6 +198,9 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     var choices = this.getPropertyChoices();
     this.setChoices(choices);
   }
+  public get optionsCaption(): string {
+    return undefined;
+  }
   private setChoices(choices: Array<Survey.ItemValue>) {
     choices = this.makeChoicesLocalizable(choices);
     if (!!choices && Array.isArray(choices)) {
@@ -180,6 +212,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     var res = new Array<Survey.ItemValue>();
     Survey.ItemValue.setData(res, choices);
     for (var i = 0; i < res.length; i++) {
+      if (!!res[i].text && res[i].text !== res[i].value) continue;
       var value = res[i].value;
       var text = this.getValueText(value);
       if (text != value) {
@@ -188,24 +221,58 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     }
     return res;
   }
-  private getPropertyChoices(): Array<any> {
-    if (!this.property) return null;
-    if (!!this.object) {
-      var obj = this.object;
-      this.object["getEditingPropertyValue"] = function(name: string) {
-        if (!!obj.editingProperties && obj.editingProperties[name] != undefined)
-          return obj.editingProperties[name];
-        return obj[name];
-      };
-    }
+  protected getPropertyChoices(): Array<any> {
+    if (!this.property) return [];
     var self = this;
-    return (<any>this.property["getChoices"])(this.object, function(
-      choices: any
-    ) {
+    return this.property.getChoices(this.object, function(choices: any) {
       self.setChoices(choices);
     });
   }
 }
+
+export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
+  public get editorType(): string {
+    return "question";
+  }
+  public get editorTypeTemplate(): string {
+    return "dropdown";
+  }
+  public get optionsCaption(): string {
+    return this.getLocString("pe.conditionSelectQuestion");
+  }
+  protected getPropertyChoices(): Array<any> {
+    var opt = new Survey.ItemValue("", this.optionsCaption);
+    var survey = EditableObject.getSurvey(this.object);
+    if (!survey) return [opt];
+    var questions = survey.getAllQuestions();
+    if (!questions) questions = [];
+    var showTitles = !!this.options && this.options.showTitlesInExpressions;
+    var qItems = questions.map((q) => {
+      let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
+      return new Survey.ItemValue(this.getItemValue(q), text);
+    });
+    qItems.sort((el1, el2) => {
+      return el1.text.localeCompare(el2.text);
+    });
+    if (!this.property.isRequired) {
+      qItems.unshift(opt);
+    }
+    return qItems;
+  }
+  protected getItemValue(question: Survey.IQuestion): string {
+    return question.name;
+  }
+}
+
+export class SurveyQuestionValuePropertyEditor extends SurveyQuestionPropertyEditor {
+  public get editorType(): string {
+    return "questionvalue";
+  }
+  protected getItemValue(question: Survey.IQuestion): string {
+    return (<Survey.Question>question).getValueName();
+  }
+}
+
 export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
@@ -213,8 +280,19 @@ export class SurveyBooleanPropertyEditor extends SurveyPropertyEditorBase {
   public get editorType(): string {
     return "boolean";
   }
-  public get alwaysShowEditor(): boolean {
-    return true;
+  public get canShowDisplayNameOnTop(): boolean {
+    return false;
+  }
+  public getValueText(value: any): string {
+    return editorLocalization.getPropertyValue(value);
+  }
+}
+export class SurveySwitchPropertyEditor extends SurveyPropertyEditorBase {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public get editorType(): string {
+    return "switch";
   }
   public get canShowDisplayNameOnTop(): boolean {
     return false;
@@ -250,10 +328,25 @@ SurveyPropertyEditorFactory.registerEditor("dropdown", function(
 ): SurveyPropertyEditorBase {
   return new SurveyDropdownPropertyEditor(property);
 });
+SurveyPropertyEditorFactory.registerEditor("question", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyQuestionPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("questionvalue", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyQuestionValuePropertyEditor(property);
+});
 SurveyPropertyEditorFactory.registerEditor("boolean", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyBooleanPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("switch", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveySwitchPropertyEditor(property);
 });
 SurveyPropertyEditorFactory.registerEditor("number", function(
   property: Survey.JsonObjectProperty

@@ -1,0 +1,58 @@
+<div
+  data-bind="click: toggle, attr: { title: getLocString(visible() ? 'ed.hidePanel':'ed.showPanel') }"
+>
+  <div
+    class="icon svd-icon-container svd-icon-container--left-open"
+    data-bind="visible: !isOpen()"
+  >
+    <svg class="svd-svg-icon"><use xlink:href="#icon-left-open"></use></svg>
+  </div>
+  <div
+    class="icon svd-icon-container svd-icon-container--left-close"
+    data-bind="visible: isOpen"
+  >
+    <svg class="svd-svg-icon"><use xlink:href="#icon-left-close"></use></svg>
+  </div>
+  <div
+    class="icon svd-icon-container svd-icon-container--right-open"
+    data-bind="visible: !isOpen()"
+  >
+    <svg class="svd-svg-icon"><use xlink:href="#icon-right-open"></use></svg>
+  </div>
+  <div
+    class="icon svd-icon-container svd-icon-container--right-close"
+    data-bind="visible: isOpen"
+  >
+    <svg class="svd-svg-icon"><use xlink:href="#icon-right-close"></use></svg>
+  </div>
+</div>
+<div data-bind="css: className">
+  <!-- ko if: tabs().length > 1 -->
+  <div class="svd-designer-tabbed-container__tab-header-container">
+    <!-- ko foreach: { data: tabs, as: 'content' } -->
+    <div
+      class="svd-designer-tabbed-container__tab-header"
+      data-bind="text: $parent.context.getLocString('ed.' + content), click: function() { $parent.activeTab(content); }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === $parent.activeTab() }, key2click, attr: { 'aria-label': content, role: 'button' }"
+      tabindex="0"
+    ></div>
+    <!-- /ko -->
+  </div>
+  <!-- ko foreach: { data: tabs, as: 'content' } -->
+  <div
+    class="svd-designer-tabbed-container__tab-content"
+    data-bind="css: { 'svd-designer-tabbed-container__tab-content-active' : content === $parent.activeTab() }"
+  >
+    <!-- ko template: { name: 'se-component-' + content, data: $parent.context } -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if: tabs().length === 1 -->
+  <!-- ko foreach: { data: tabs, as: 'content' } -->
+  <!-- ko template: { name: 'se-component-' + content + '-header', data: $parent.context } -->
+  <!-- /ko -->
+  <!-- ko template: { name: 'se-component-' + content, data: $parent.context } -->
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

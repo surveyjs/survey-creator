@@ -11,8 +11,18 @@
   </span>
 </script>
 
+<script type="text/html" id="choice-action">
+  <!-- ko if: ko.unwrap($data.visible) === undefined || !!ko.unwrap($data.visible) -->
+  <span class="svda_question_action">
+      <select onmousewheel="return false;" class="svda_current_type svd-main-color svd-light-bg-color" data-bind="foreach: choices, event: { change: onClick }, attr: {title: text, value: value}">
+          <option class="svd-light-bg-color" data-bind="text: $data.text || $data.value || $data, value: $data.value, attr:{selected: $data.value === ko.unwrap($parent.value) ? 'selected': null}"></option>
+      </select>
+  </span>
+  <!-- /ko -->
+</script>
+
 <script type="text/html" id="action-separator">
-  <span class="svda_action_separator svd-dark-border-color">
+  <span class="svda_action_separator svd-dark-border-color" data-bind="visible: ko.unwrap($data.visible) === undefined || !!ko.unwrap($data.visible)">
   </span>
 </script>
 
@@ -24,5 +34,17 @@
           <option class="svd-light-bg-color" data-bind="text: $data.name || $data, value: $data.value || $data"></option>
         <!-- /ko -->
     </select>
+  </span>
+</script>
+
+<script type="text/html" id="sca-show-property-grid">
+      <span class="svda_question_action svda_question_action--separated svd-main-color" data-bind="key2click, clickNoFocus: function() { onClick($parent.question); }, attr: {title: text, tabindex: $data.needFocus === undefined || !!$data.needFocus ? 0 : undefined }">
+        <span>
+            <svg-icon class="svd-primary-icon" data-bind="css: $parent.getStyle($data)" params="iconName: $parent.getStyle($data)"></svg-icon>
+        </span>
+        <span data-bind="text: $data.hasTitle ? text: ''"></span>
+        <span>
+          <svg-icon class="svd-primary-icon" data-bind="css: $parent.getStyle($data)" params="iconName: 'icon-right'"></svg-icon>
+      </span>
   </span>
 </script>

@@ -1,9 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import {
-  SurveyPropertyOneSelectedEditor,
-  SurveyPropertyOneSelectedItem
-} from "./propertyOneSelectedEditor";
+import { SurveyPropertyOneSelectedEditor } from "./propertyOneSelectedEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
@@ -15,29 +12,34 @@ export class SurveyPropertyValidatorsEditor extends SurveyPropertyOneSelectedEdi
   public get editorType(): string {
     return "validators";
   }
-  protected createOneSelectedItem(obj: any): SurveyPropertyOneSelectedItem {
-    return new SurveyPropertyValidatorItem(obj);
+  public getItemText(item: any, counter: any = null): any {
+    return editorLocalization.getValidatorName(item.getType());
   }
   protected getAvailableClasses(): Array<any> {
-    var classes = Survey.Serializer.getChildrenClasses("surveyvalidator", true);
+    var names = this.getValidatorTypes();
     var res = [];
-    for (var i = 0; i < classes.length; i++) {
-      var name = classes[i].name;
+    for (var i = 0; i < names.length; i++) {
       res.push({
-        value: name,
-        text: editorLocalization.getValidatorName(name)
+        value: names[i],
+        text: editorLocalization.getValidatorName(names[i])
       });
     }
     return res;
   }
-}
-
-export class SurveyPropertyValidatorItem extends SurveyPropertyOneSelectedItem {
-  constructor(public obj: Survey.Base) {
-    super(obj);
-  }
-  public getText() {
-    return editorLocalization.getValidatorName(this.obj.getType());
+  private getValidatorTypes(): Array<string> {
+    var res = [];
+    if (!!this.object && !!this.object.getSupportedValidators) {
+      res = this.object.getSupportedValidators();
+      for (var i = 0; i < res.length; i++) {
+        res[i] = res[i] + "validator";
+      }
+      return res;
+    }
+    var classes = Survey.Serializer.getChildrenClasses("surveyvalidator", true);
+    for (var i = 0; i < classes.length; i++) {
+      res.push(classes[i].name);
+    }
+    return res;
   }
 }
 

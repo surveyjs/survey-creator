@@ -1,5 +1,10 @@
 ﻿<script type="text/html" id="propertyeditor-dropdown">
   <div class="svd_custom_select svd_property_editor_dropdown">
-      <select onmousewheel="return false;" class="form-control svd_editor_control" data-bind="value: koValue, disable: readOnly, options: koChoices,  optionsValue: 'value',  optionsText: 'text', valueAllowUnset: true,  hasFocus: koHasFocus"  style="width:100%"></select>
+      <select
+        onmousewheel="return false;"
+        class="form-control svd_editor_control"
+        data-bind="value: koValue, disable: readOnly, optionsCaption: optionsCaption, options: koChoices,  optionsValue: 'value',  optionsText: 'text', valueAllowUnset: true,  hasFocus: koHasFocus, attr: { 'aria-label': displayName }"
+        style="width:100%">
+      </select>
   </div>
 </script>

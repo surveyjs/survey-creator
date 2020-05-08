@@ -6,15 +6,14 @@ var persianStrings = {
     edit: "ویرایش",
     externalHelpLink: "Watch and learn how to create surveys",
     externalHelpLinkUrl:
-        "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "لطفا از جعبه ابزار سوالی در اینجا قرار دهید",
     copy: "کپی",
     addToToolbox: "افزودن به جعبه ابزار",
     deletePanel: "حذف پنل",
     deleteQuestion: "حذف سوال",
     convertTo: "تبدیل به",
-    drag: "Drag element"
-
+    drag: "Drag element",
   },
   //questionTypes
   qt: {
@@ -36,7 +35,7 @@ var persianStrings = {
     text: "متن تک خطی",
     boolean: "صحیح و غلط",
     expression: "توصیفی",
-    flowpanel: "Flow Panel"
+    flowpanel: "Flow Panel",
   },
   //Strings in Editor
   ed: {
@@ -115,29 +114,29 @@ var persianStrings = {
       completedHtmlOnConditionName: "متن سفارشی صفحه 'تشکر' ",
 
       page_visibilityDescription:
-          "زمانی که عبارت منطقی مقدار صحیح برمی گرداند صفحه را قابل مشاهده کنید، در غیراینصورت آن را غیرقابل مشاهده نگه دارید.",
+        "زمانی که عبارت منطقی مقدار صحیح برمی گرداند صفحه را قابل مشاهده کنید، در غیراینصورت آن را غیرقابل مشاهده نگه دارید.",
       panel_visibilityDescription:
-          "اگر عبارت منطقی مقدار صحیح بر میگرداند، پنل را فعال کنید، در غیر اینصورت آن را غیرقابل مشاهده نگه دارید.",
+        "اگر عبارت منطقی مقدار صحیح بر میگرداند، پنل را فعال کنید، در غیر اینصورت آن را غیرقابل مشاهده نگه دارید.",
       panel_enableDescription:
-          "یک پنل ایجاد کنید و همه المان های داخل آن را در صورتی که عبارت منطقی مقدار صحیح بر می گرداند را فعال کنید، در غیر اینصورت آن ها را غیرفعال نگه دارید.",
+        "یک پنل ایجاد کنید و همه المان های داخل آن را در صورتی که عبارت منطقی مقدار صحیح بر می گرداند را فعال کنید، در غیر اینصورت آن ها را غیرفعال نگه دارید.",
       question_visibilityDescription:
-          "زمانی که عبارت منطقی مقدار صحیح را برمی گرداند، سوال را قابل مشاهده کنید، در غیر اینصورت آن را غیرمشاهده نگه دارید.",
+        "زمانی که عبارت منطقی مقدار صحیح را برمی گرداند، سوال را قابل مشاهده کنید، در غیر اینصورت آن را غیرمشاهده نگه دارید.",
       question_enableDescription:
-          "زمانی که عبارت منطقی مقدار صحیح برمی گرداند، سوال را فعال کنید، در غیر اینصورت آن را غیرفعال نگه دارید.",
+        "زمانی که عبارت منطقی مقدار صحیح برمی گرداند، سوال را فعال کنید، در غیر اینصورت آن را غیرفعال نگه دارید.",
       question_requireDescription:
-          "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، سوال اجبار ی می شود.",
+        "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، سوال اجبار ی می شود.",
       trigger_completeDescription:
-          "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، و بررسی تکمیل می شود،کاربر نهایی صفحه 'تشکر' را مشاهده می کند.",
+        "زمانی که عبارت منطقی مقدار صحیح را بر می گرداند، و بررسی تکمیل می شود،کاربر نهایی صفحه 'تشکر' را مشاهده می کند.",
       trigger_setvalueDescription:
-          "زمانی که مقدار سوالی که در عبارت منطقی استفاده شده است تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، آنگاه مقدار برای سوال انتخاب شده تنظیم می شود.",
+        "زمانی که مقدار سوالی که در عبارت منطقی استفاده شده است تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، آنگاه مقدار برای سوال انتخاب شده تنظیم می شود.",
       trigger_copyvalueDescription:
-          "زمانی که مقدارهای سوال که در عبارت منطقی استفاده شده اند، تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، سپس مقدار یکی از سوال های انتخاب شده در سوال دیگر انتخاب شده کپی می شود.",
+        "زمانی که مقدارهای سوال که در عبارت منطقی استفاده شده اند، تغییر می یابد و عبارت منطقی مقدار صحیح را بر می گرداند، سپس مقدار یکی از سوال های انتخاب شده در سوال دیگر انتخاب شده کپی می شود.",
       trigger_skipDescription:
-          "When the logic expression returns true then the survey skip to / focus the selected question.",
+        "When the logic expression returns true then the survey skip to / focus the selected question.",
       trigger_runExpressionDescription:
-          "اگر عبارت منطقی مقدار صحیح برگرداند، آنگاه عبارت سفارشی اجرا می شود. شما ممکن است به طور اختیاری این نتیجه را به سوال انتخاب شده تبدیل کنید.",
+        "اگر عبارت منطقی مقدار صحیح برگرداند، آنگاه عبارت سفارشی اجرا می شود. شما ممکن است به طور اختیاری این نتیجه را به سوال انتخاب شده تبدیل کنید.",
       completedHtmlOnConditionDescription:
-          " اگر عبارت منطقی مقدار صحیح برگرداند متن صفحه 'تشکر' به متن داده شده تغییر می یابد.",
+        " اگر عبارت منطقی مقدار صحیح برگرداند متن صفحه 'تشکر' به متن داده شده تغییر می یابد.",
 
       itemExpressionText: "زمانی که عبارت {0} مقدار صحیح بر می گرداند", //{0} - the expression
       page_visibilityText: "صفحه {0} را قابل مشاهده کنید.", //{0} page name
@@ -152,23 +151,22 @@ var persianStrings = {
       trigger_skipText: "رد کردن نظرسنجی برای سوال {0}", //{0} question name
       trigger_runExpressionText1: "اجرای عبارت '{0}' ", //{0} the expression
       trigger_runExpressionText2: "و نتیجه آن را داخل سوال {0} ذخیره کنید", //{0} question name
-      completedHtmlOnConditionText:
-          "نمایش متن سفارشی برای صفحه 'تشکر'",
+      completedHtmlOnConditionText: "نمایش متن سفارشی برای صفحه 'تشکر'",
 
       expressionEditorTitle: "عبارت منطقی را تنظیم کنید",
 
-      deleteOperation: "حذف عملکرد",
-      addNewOperation: "اضافه کردن سوال (های) جدید",
+      deleteAction: "حذف عملکرد",
+      addNewAction: "اضافه کردن سوال (های) جدید",
 
       expressionInvalid:
-          "عبارت منطقی خالی یا نادرست است. لطفا آن را تضحیح کنید",
-      noOperationError: "لطفا حداقل یک عملکرد را اضافه نمایید",
-      operationInvalid: "لطفا مشکلات مربوط به عملکرد(های) خود را برطرف نمایید."
-    }
+        "عبارت منطقی خالی یا نادرست است. لطفا آن را تضحیح کنید",
+      noActionError: "لطفا حداقل یک عملکرد را اضافه نمایید",
+      actionInvalid: "لطفا مشکلات مربوط به عملکرد(های) خود را برطرف نمایید.",
+    },
   },
   //Property names in table headers
   pel: {
-    isRequired: "اجباری؟"
+    isRequired: "اجباری؟",
   },
   //Property Editors
   pe: {
@@ -213,7 +211,7 @@ var persianStrings = {
     aceEditorPanelTitle: "پنل فعلی",
     showMore: "برای اطلاعات بیشتر لطفا سند راهنما را مطالعه کنید",
     conditionShowMoreUrl:
-        "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
+      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "سوالات موجود:",
     cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
 
@@ -361,7 +359,7 @@ var persianStrings = {
       calculatedValues: "مقادیر محاسبه شد",
       triggers: "اجرا کننده",
       templateTitle: "عنوان قالب",
-      totals: "جمع کل"
+      totals: "جمع کل",
     },
     editProperty: "ویرایش خصوصیت '{0}'",
     items: "[ آیتم ها: {0} ]",
@@ -380,7 +378,7 @@ var persianStrings = {
     triggerRunExpression: "اجرای این عبارت",
     triggerSetValue: "به: ",
     triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه",
-    triggerRunExpressionEmpty: "لطفا عبارت معتبری وارد نمایید"
+    triggerRunExpressionEmpty: "لطفا عبارت معتبری وارد نمایید",
   },
   //Property values
   pv: {
@@ -440,7 +438,7 @@ var persianStrings = {
     page: "صفحه",
     survey: "نظرسنجی",
     onNextPage: "به محض صفحه بعدی",
-    onValueChanged: "به محض تغییر مقدار"
+    onValueChanged: "به محض تغییر مقدار",
   },
   //Operators
   op: {
@@ -455,7 +453,7 @@ var persianStrings = {
     greater: "بزرگتر",
     less: "کوچکتر",
     greaterorequal: "بزرگتر یا مساوی",
-    lessorequal: "کوچکتر یا مساوی"
+    lessorequal: "کوچکتر یا مساوی",
   },
   //Embed window
   ew: {
@@ -471,19 +469,19 @@ var persianStrings = {
     loadFromServer: "بارگزاری JSON از سرور",
     titleScript: "اسکریپت و شیوه نمایش",
     titleHtml: "HTML",
-    titleJavaScript: "جاوااسکریپت"
+    titleJavaScript: "جاوااسکریپت",
   },
   //Test Survey
   ts: {
     selectPage: "صفحه ای را برای آزمایش انتخاب کنید:",
-    showInvisibleElements: "نمایش المان های مخفی"
+    showInvisibleElements: "نمایش المان های مخفی",
   },
   validators: {
     answercountvalidator: "تعداد پاسخ",
     emailvalidator: "ایمیل",
     numericvalidator: "عدد",
     regexvalidator: "regex",
-    textvalidator: "متن"
+    textvalidator: "متن",
   },
   triggers: {
     completetrigger: "تکمیل نظرسنجی",
@@ -491,7 +489,7 @@ var persianStrings = {
     copyvaluetrigger: "کپی مقدار",
     skiptrigger: "رد کردن سوال ",
     runexpressiontrigger: "اجرای عبارت",
-    visibletrigger: "تغییر وضعیت دیده شدن"
+    visibletrigger: "تغییر وضعیت دیده شدن",
   },
   //Properties
   p: {
@@ -499,7 +497,6 @@ var persianStrings = {
     title: { name: "عنوان", title: "اگر خالی باشد مانند نام درج می شود" },
     survey_title: { name: "عنوان", title: "در تمام صفحات دیده می شود" },
     page_title: { name: "عنوان", title: "عنوان صفحه" },
-
 
     navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
     questionsOrder: "ترتیب سوالات",
@@ -661,8 +658,8 @@ var persianStrings = {
     allowDigits: "اجازه عدد",
     minCount: "حداقل تعداد",
     maxCount: "حداکثر تعداد",
-    regex: "regular expression"
-  }
+    regex: "regular expression",
+  },
 };
 
 editorLocalization.locales["fa"] = persianStrings;

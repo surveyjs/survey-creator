@@ -1,6 +1,152 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.7.5](https://github.com/surveyjs/survey-creator/compare/v1.7.4...v1.7.5) (2020-05-07)
+
+### [1.7.4](https://github.com/surveyjs/survey-creator/compare/v1.7.3...v1.7.4) (2020-04-29)
+
+### [1.7.3](https://github.com/surveyjs/survey-creator/compare/v1.7.2...v1.7.3) (2020-04-21)
+
+### [1.7.2](https://github.com/surveyjs/survey-creator/compare/v1.7.1...v1.7.2) (2020-04-17)
+
+### [1.7.1](https://github.com/surveyjs/survey-creator/compare/v1.5.19...v1.7.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* Condition Editor could not parse expression with calculated values and unary operator [#740](https://github.com/surveyjs/survey-creator/issues/740) ([d2ef8a9](https://github.com/surveyjs/survey-creator/commit/d2ef8a9be2e1d5a6417b8dbd53a7a0d5bd4e6645))
+
+### [1.5.19](https://github.com/surveyjs/survey-creator/compare/v1.5.18...v1.5.19) (2020-04-07)
+
+
+### Bug Fixes
+
+* "set" property editor doesn't support ajax request for getting choices [#720](https://github.com/surveyjs/survey-creator/issues/720) ([7deab97](https://github.com/surveyjs/survey-creator/commit/7deab9738f89fd27eec3d8c02030aae317d28320))
+
+### [1.5.18](https://github.com/surveyjs/survey-creator/compare/v1.5.17...v1.5.18) (2020-03-31)
+
+### [1.5.17](https://github.com/surveyjs/survey-creator/compare/v1.5.16...v1.5.17) (2020-03-25)
+
+### [1.5.16](https://github.com/surveyjs/survey-creator/compare/v1.5.15...v1.5.16) (2020-03-18)
+
+### [1.5.15](https://github.com/surveyjs/survey-creator/compare/v1.5.13...v1.5.15) (2020-03-12)
+
+### [1.5.13](https://github.com/surveyjs/survey-creator/compare/v1.5.12...v1.5.13) (2020-03-04)
+
+### [1.5.12](https://github.com/surveyjs/survey-creator/compare/v1.5.11...v1.5.12) (2020-02-28)
+
+### [1.5.11](https://github.com/surveyjs/survey-creator/compare/v1.5.10...v1.5.11) (2020-02-28)
+
+<a name="1.5.10"></a>
+## [1.5.10](https://github.com/surveyjs/survey-creator/compare/v1.5.9...v1.5.10) (2020-02-18)
+
+
+
+<a name="1.5.9"></a>
+## [1.5.9](https://github.com/surveyjs/survey-creator/compare/v1.5.8...v1.5.9) (2020-02-14)
+
+
+
+<a name="1.5.8"></a>
+## [1.5.8](https://github.com/surveyjs/survey-creator/compare/v1.5.7...v1.5.8) (2020-02-12)
+
+
+
+<a name="1.5.7"></a>
+## [1.5.7](https://github.com/surveyjs/survey-creator/compare/v1.5.6...v1.5.7) (2020-02-11)
+
+
+
+<a name="1.5.6"></a>
+## [1.5.6](https://github.com/surveyjs/survey-creator/compare/v1.5.5...v1.5.6) (2020-02-07)
+
+
+
+<a name="1.5.5"></a>
+## [1.5.5](https://github.com/surveyjs/survey-creator/compare/v1.5.4...v1.5.5) (2020-02-03)
+
+
+
+<a name="1.5.4"></a>
+## [1.5.4](https://github.com/surveyjs/survey-creator/compare/v1.5.3...v1.5.4) (2020-01-31)
+
+
+
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/surveyjs/survey-creator/compare/v1.5.0...v1.5.1) (2020-01-24)
+
+
+
+<a name="1.1.32"></a>
+## [1.1.32](https://github.com/surveyjs/survey-creator/compare/v1.1.31...v1.1.32) (2020-01-14)
+
+
+
+<a name="1.1.31"></a>
+## [1.1.31](https://github.com/surveyjs/survey-creator/compare/v1.1.30...v1.1.31) (2020-01-09)
+
+
+
+<a name="1.1.30"></a>
+## [1.1.30](https://github.com/surveyjs/survey-creator/compare/v1.1.29...v1.1.30) (2020-01-09)
+
+
+
+<a name="1.1.29"></a>
+## [1.1.29](https://github.com/surveyjs/survey-creator/compare/v1.1.28...v1.1.29) (2019-12-30)
+
+
+
+<a name="1.1.28"></a>
+## [1.1.28](https://github.com/surveyjs/survey-creator/compare/v1.1.27...v1.1.28) (2019-12-30)
+
+
+
+<a name="1.1.27"></a>
+## [1.1.27](https://github.com/surveyjs/survey-creator/compare/v1.1.26...v1.1.27) (2019-12-30)
+
+
+
+<a name="1.1.26"></a>
+## [1.1.26](https://github.com/surveyjs/survey-creator/compare/v1.1.25...v1.1.26) (2019-12-24)
+
+
+
+<a name="1.1.25"></a>
+## [1.1.25](https://github.com/surveyjs/survey-creator/compare/v1.1.24...v1.1.25) (2019-12-18)
+
+
+
+<a name="1.1.24"></a>
+## [1.1.24](https://github.com/surveyjs/survey-creator/compare/v1.1.23...v1.1.24) (2019-12-10)
+
+
+
+<a name="1.1.23"></a>
+## [1.1.23](https://github.com/surveyjs/survey-creator/compare/v1.1.22...v1.1.23) (2019-12-03)
+
+
+
+<a name="1.1.22"></a>
+## [1.1.22](https://github.com/surveyjs/survey-creator/compare/v1.1.21...v1.1.22) (2019-11-26)
+
+
+
+<a name="1.1.21"></a>
+## [1.1.21](https://github.com/surveyjs/survey-creator/compare/v1.1.20...v1.1.21) (2019-11-19)
+
+
+
+<a name="1.1.20"></a>
+## [1.1.20](https://github.com/surveyjs/survey-creator/compare/v1.1.19...v1.1.20) (2019-11-12)
+
+
+
+<a name="1.1.19"></a>
+## [1.1.19](https://github.com/surveyjs/survey-creator/compare/v1.1.18...v1.1.19) (2019-11-06)
+
+
 
 <a name="1.1.18"></a>
 ## [1.1.18](https://github.com/surveyjs/survey-creator/compare/v1.1.17...v1.1.18) (2019-10-30)

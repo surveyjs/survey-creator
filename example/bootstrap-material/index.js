@@ -37,15 +37,17 @@ if (!window["%hammerhead%"]) {
     choices: kpiList
   });
   // Add KPI tab to question editor modal
-  SurveyEditor.SurveyQuestionEditorDefinition.definition["question"].tabs.push({
-    name: "kpis"
-  });
+  SurveyCreator.SurveyQuestionEditorDefinition.definition["question"].tabs.push(
+    {
+      name: "kpis"
+    }
+  );
 
   $.material.init();
 
-  SurveyEditor.StylesManager.applyTheme("bootstrapmaterial");
-  var editor = new SurveyEditor.SurveyEditor("editorElement", {
+  SurveyCreator.StylesManager.applyTheme("bootstrapmaterial");
+  var creator = new SurveyCreator.SurveyCreator("editorElement", {
     useTabsInElementEditor: true
   });
-  window.editor = editor;
+  window.creator = creator;
 }

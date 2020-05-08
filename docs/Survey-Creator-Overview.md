@@ -4,6 +4,8 @@ This paper will explain how to use, customize and get the maximum from Survey Cr
 
 If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Survey-Creator/?id=Add-Survey-Builder-into-your-Web-Page).
 
+Please visit our [what's new page](https://surveyjs.io/WhatsNew) to see what we have added recently or what is coming soon.
+
 If you want to get the most from our Survey Creator, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
 * [Supported Platforms and Examples](#platforms)
@@ -84,6 +86,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_showEmbededSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showLogicTab: true,_|Set this option to true to show the Logic Tab. This tab is hidden by default. It allows to view and edit the survey logic (expressions) in one place.|
+|_showElementEditorAsPropertyGrid: true_|Set this property to false to show property grid in old style, without categories, and allow to show Element Editor as modal window.|
 |_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
 |_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
 |_isAutoSave: true,_|Set this options to true and Survey Creator will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
@@ -96,6 +99,8 @@ There are several options that you may set to change the Survey Creator behavior
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showDefaultLanguageInTestSurveyTab: "auto",_|Before v1.1.3 the default value was _true_. The language selector was visible by default and allows to select all available languages. You could set this property to _false_ to hide it. Since v1.1.3 the behavior has been changed. The default value is _"auto"_ and the selector is visible when there are more than one language in at least one localizable string in the survey. If you set it to _true_ or _"all"_ it will be shown always. Setting it to _"all"_ will display all available languages (30+) in the selector, while _"auto"_ and _true_ only languages that are used in the current survey. Set it to _false_ to hide the language selector.|
 |_showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
+|_showTitlesInExpressions: false_|Set this property to true if you want to show titles instead of names in expression editor.|
+|_hideExpressionHeaderInLogicTab: true_|Set this property to true to hide the expression header text and expand/collapse button in editing item in logic tab.|
 |_};_||
 
 <div id="loadsavesurvey"></div>
@@ -127,7 +132,7 @@ surveyCreator.saveSurveyFunc = function (saveNo, callback) {
         url: "UrlToYourWebService",
         type: "POST",
         data: {
-            surveyId: yourEditUniqueSurveyI,
+            surveyId: yourEditUniqueSurveyId,
             surveyText : surveyCreator.text
         },
         success: function (data) {
@@ -509,17 +514,27 @@ Let’s review several examples
 ```javascript
 //add a property to the base question class and as result to all questions
 //It has name: "tag", type "number" and the default value is 0
-Survey.Serializer.addProperty("question", { name: "tag:number", default: 0 });
-//Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0 });
+//Add it as the last property into "general" (first) category
+Survey.Serializer.addProperty("question", 
+  { name: "tag:number", default: 0, category: "general" }
+);
+//Survey.Serializer.addProperty("question", { name: "tag", type: "number" default: 0, category: "general" });
 //you may set the type using this decrlaration as well
 //The following code adds a description property to the survey. The property type is html.
 //It means that html property editor is used to set its value in the Survey Creator
-Survey.Serializer.addProperty("survey", "description:html");
+//We will add it into general category as the third property, visibleIndex is 2 (first is 0)
+Survey.Serializer.addProperty("survey", 
+  { name: "description:html", category: "general", visibleIndex: 2}
+);
 //Add a colour string property into page.
 //The user will be able to select only predefined values from the dropdown
 //The default property type is "string", we may not set it.
 //The default value is not set and it is undefined by default.
-Survey.Serializer.addProperty("survey", {name: "color", choices: ["blue", "red", "green"] });
+//We are adding it into new created "Appearance" category and make this category the second, categoryIndex is 1
+Survey.Serializer.addProperty("survey", 
+  { name: "color", choices: ["blue", "red", "green"], 
+    category: "Appearance", categoryIndex: 1}
+);
 ```
 
 Here is the available attributes and callback functions in the property definition
@@ -527,12 +542,12 @@ Here is the available attributes and callback functions in the property definiti
 ---
 **name**
 
-The property name. It is the only required property
+The property name. It is the only required property.
 
 ---
 **type**
 
-The property type. The list of avaiable property types you may in the next table.
+The property type. The list of avaiable property types you may in the next.
 
 ---
 **default**
@@ -543,43 +558,59 @@ It is an optional attribute. The library do not serialize the default value into
 { name: "showTitle:boolean", default: true }
 ```
 ---
+**displayName**
+
+Property Editor uses this property for displaying it as a caption. By default property editor tries to find the string for the caption in localization strings. If it could not find it, then it uses _displayName_ property and finally use the property _name_.
+
+```javascript
+//Add new property into question.
+Survey.Serializer.addProperty("survey", {
+    name: "tag", displayName: "Custom Data",  category: "data"
+});
+```
+---
 **choices**
 
 It is an optional attribute. It makes sense for string and numeric property types only. If the choices attribute is set, the property editor for the property becomes dropdown. You may assign the array of values to this attribute or a function that will return the array of strings or numbers.
+
 ```javascript
 { name: "showProgressBar", default: "off", choices: ["off", "top", "bottom"] }
 //returns the supported languages in the surveyjs library.
 { name: "locale", choices: function() { return Survey.surveyLocalization.getLocales(); } }
 ```
+
 From v1.0.94, you can get the choices from the web. Here is the example of adding the "country" getting its values from web service.
+
 ```javascript
 //It uses rest full service and choicesCallback function to tell property editor that choices are loaded from the web
-Survey.Serializer.addProperty("survey", { name: "country", choices: function(obj, choicesCallback) {
-    //We are going to use choicesCallback here
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://restcountries.eu/rest/v2/all");
-    xhr.setRequestHeader(
-    "Content-Type",
-    "application/x-www-form-urlencoded"
-    );
-    //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
-    xhr.onload = function() {
-    if (xhr.status === 200) {
-        var serverRes = JSON.parse(xhr.response);
-        var res = [];
-        //We will use ItemValue array here, since we want to have value different from display text
-        //If your value equals to display text, then you may simply return the array of strings.
-        res.push({ value: null });
-        for (var i = 0; i < serverRes.length; i++) {
-        var item = serverRes[i];
-        res.push({ value: item.alpha2Code, text: item.name });
+Survey.Serializer.addProperty("survey",
+  { name: "country", category: "general", 
+    choices: function(obj, choicesCallback) {
+      //We are going to use choicesCallback here
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://restcountries.eu/rest/v2/all");
+      xhr.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+      );
+      //on load event set results into array of ItemValue and tell the Survey Creator that choices are loaded.
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+            var serverRes = JSON.parse(xhr.response);
+            var res = [];
+            //We will use ItemValue array here, since we want to have value different from display text
+            //If your value equals to display text, then you may simply return the array of strings.
+            res.push({ value: null });
+            for (var i = 0; i < serverRes.length; i++) {
+            var item = serverRes[i];
+            res.push({ value: item.alpha2Code, text: item.name });
+            }
+            //return the result into Survey Creator property editor
+            choicesCallback(res);
         }
-        //return the result into Survey Creator property editor
-        choicesCallback(res);
-    }
-    };
-  xhr.send();
-}
+      };
+    xhr.send();
+  }
 });
 ```
 ---
@@ -601,11 +632,14 @@ An optional Boolean property. By default, it is true. Set it to false, if you wa
 **visibleIf**
 
 Available since v1.0.94. It is a function that has an obj parameter, the editing object. It should return the boolean value: true to show the property and false to hide the property. If the property depends on another property value, then use **dependsOn**. On changing any property from the **dependsOn** array, the visibleIf function will be called to check, if it returns other value then before. Here is the example:
+
 ```javascript
 //This property depends on date format property of text question
 //It is visible if inputFormat property equals to "date*" values
 Survey.Serializer.addProperty("text", {
   name: "dateFormat",
+  category: "general",
+  visibleIndex: 7,
   dependsOn: ["inputType"],
   visibleIf: function(obj) {
     return (
@@ -616,6 +650,19 @@ Survey.Serializer.addProperty("text", {
   }
 });
 ```
+
+---
+**visibleIndex**
+
+Available since v1.5.4. An optional numeric property. By default, it is -1. Set it to 0 or bigger number to change the the property order inside the category in Element Editor.
+
+```javascript
+//Add description property into survey object and show it in general category as third property editor.
+Survey.Serializer.addProperty("survey", {
+    name: "description:html", category: "general", visibleIndex: 2
+});
+```
+
 ---
 **readOnly**
 
@@ -625,6 +672,46 @@ The following code makes the choices and matrix rows/columns value property read
 ```javascript
 Survey.Serializer.findProperty('itemvalue', "value").readOnly = true;
 ```
+---
+**category**
+
+Available since v1.5.4. An optional string property. By default, it is empty. Set category for a new created property, otherwise it will be located in "other" category by default, the last category in the list. If this category doesn't exist then a new category will be created. You can control new category order by using **categoryIndex** property. Please note, you can't put it before "general" category that has **categoryIndex** equals ``-1``. 
+
+The following code creates new property and new category "Entity" and make this category next to "general".
+```javascript
+Survey.Serializer.addProperty("question", {
+  name: "targetEntity", category: "Entity", categoryIndex: 1
+  choices: ["", "Account", "Developement"]
+});
+```
+
+Available categories:
+
+| Category name | Apply to | visibleIndex |
+|---|---|---|
+| general | question, panel, page, survey | -1 |
+| logic | question, panel, page, survey | 100 |
+| layout | question, panel, page | 200 |
+| data | question | 300 |
+| validation | question, panel, page | 400 |
+| navigation | survey | 100 |
+| question | survey | 200 |
+| logic | survey | 300 |
+| data | survey | 400 |
+| validation | survey | 500 |
+| showOnCompleted | survey | 600 |
+| timer | survey | 700 |
+| columns | matrixdropdownbase (matrixdropdown, matrixdynamic) | 10 |
+| rows | matrixdropdownbase (matrixdropdown, matrixdynamic) | 11 |
+| choices | matrixdropdownbase (matrixdropdown, matrixdynamic) | 12 |
+| columns | matrix | 10 |
+| rows | matrix | 11 |
+| cells | matrix | 12 |
+| items | multipletext | 10 |
+| rateValues | rating | 10 |
+| choices | selectbase (dropdown, checkbox, radiogroup) | 10 |
+| choicesByUrl | selectbase (dropdown, checkbox, radiogroup) | 11 |
+
 ---
 **maxLength**
 
@@ -644,6 +731,7 @@ The following code add a custom property into question and limits the value of t
 ```javascript
 Survey.Serializer.addProperty("question", {
       name: "cost:number",
+      category: "general",
       default: 5,
       minValue: 0,
       maxValue: 100
@@ -656,16 +744,20 @@ Survey.Serializer.addProperty("question", {
 Available since v1.0.94. An optional array of strings. It contains properties names. You may use it together with visibleIf and choices attributes, where choices is a function and not a static array. If any property from this list is changed, then property editor calls visibleIf and choices functions to check if they return other values.
 
 The following code creates two new properties. The choices of the second property fully depends on property value of the first property.
+We will create a new "Entity" category and place two properties into it.
 ```javascript
 Survey.Serializer.addProperty("question", {
   name: "targetEntity",
-  choices: ["", "Account", "Developement"]
+  choices: ["", "Account", "Developement"],
+  category: "Entity",
+  categoryIndex: 1
 });
 //This property depends from targetEntity property.
 //If targetEntity property is empty then choices for targetField are empty as well.
 Survey.Serializer.addProperty("question", {
   name: "targetField",
   dependsOn: "targetEntity",
+  category: "Entity",
   choices: function(obj) {
     var choices = [];
     var entity = !!obj ? obj.targetEntity : null;
@@ -680,17 +772,20 @@ Survey.Serializer.addProperty("question", {
   }
 });
 ```
-This example is more complicated, since the second property retrieves its choices from a web service. And again, the second property choices depends on property value of the first proeprty.
+This example is more complicated, since the second property retrieves its choices from a web service. And again, the second property choices depends on property value of the first proeprty. We will create a new "Region" category and place two properties into it.
 ```javascript
 Survey.Serializer.addProperty("survey", {
   name: "region",
-  choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+  category: "Region",
+  categoryIndex: 1,
+  choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
 });
 //This property country depends on the selected region.
 //It allows to select all countries if region is empty or if it is not empty, only countries from this region
 //It uses rest full service and choicesCallback function to tell property editor that loading choices from the web service is completed
 Survey.Serializer.addProperty("survey", {
   name: "country",
+  category: "Region",
   dependsOn: "region",
   choices: function(obj, choicesCallback) {
     //We are going to use choicesCallback here

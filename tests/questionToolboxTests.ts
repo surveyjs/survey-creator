@@ -101,7 +101,7 @@ QUnit.test("toolbox change categories", function(assert) {
     "checkbox",
     "radiogroup",
     "comment",
-    "matrix"
+    "matrix",
   ]);
   assert.equal(
     toolbox.koCategories().length,
@@ -110,12 +110,43 @@ QUnit.test("toolbox change categories", function(assert) {
   );
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
-    { name: "matrix", category: "matrix" }
+    { name: "matrix", category: "matrix" },
   ]);
   assert.equal(toolbox.koCategories().length, 3, "There are 3 categories now");
   toolbox.changeCategory("radiogroup", "radio");
   assert.equal(toolbox.koCategories().length, 4, "There are 4 categories now");
 });
+
+QUnit.test("toolbox load custom/composite questions", function(assert) {
+  Survey.ComponentCollection.Instance.add({
+    name: "newquestion",
+    questionJSON: {
+      type: "dropdown",
+      choices: [1, 2, 3, 4, 5],
+    },
+  });
+  Survey.ComponentCollection.Instance.add({
+    name: "customerinfo",
+    elementsJSON: [
+      { type: "text", name: "firstName" },
+      { type: "text", name: "lastName" },
+    ],
+  });
+
+  var toolbox = new QuestionToolbox(["text", "dropdown", "checkbox"]);
+  assert.equal(
+    toolbox.koCategories().length,
+    1,
+    "There is one category by default"
+  );
+  assert.equal(
+    toolbox.koItems().length,
+    3 + 2,
+    "There are 3 standard + one custom and one composite questions"
+  );
+  Survey.ComponentCollection.Instance.clear();
+});
+
 QUnit.test(
   "toolbox categories + allowExpandMultipleCategories property",
   function(assert) {
@@ -125,11 +156,11 @@ QUnit.test(
       "checkbox",
       "radiogroup",
       "comment",
-      "matrix"
+      "matrix",
     ]);
     toolbox.changeCategories([
       { name: "comment", category: "comment" },
-      { name: "matrix", category: "matrix" }
+      { name: "matrix", category: "matrix" },
     ]);
     assert.equal(
       toolbox.activeCategory,
@@ -189,11 +220,11 @@ QUnit.test("toolbox categories + keepAllCategoriesExpanded property", function(
     "checkbox",
     "radiogroup",
     "comment",
-    "matrix"
+    "matrix",
   ]);
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
-    { name: "matrix", category: "matrix" }
+    { name: "matrix", category: "matrix" },
   ]);
   assert.equal(
     toolbox.activeCategory,

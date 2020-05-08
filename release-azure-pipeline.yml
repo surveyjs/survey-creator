@@ -1,0 +1,104 @@
+#SurveyJS release pipeline (survey-creator)
+
+#trigger only "by hand"
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+
+- checkout: self
+  persistCredentials: true
+  clean: true
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: '9434af9c-19e5-4e5d-8bd7-2d9129d3fed4'
+    pipeline: '30'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSVersionFile'
+    downloadPath: '$(System.ArtifactsDirectory)'
+  displayName: 'Download Build Artifact - SurveyJSVersionFile'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSVersionFile/'
+    Contents: 'version.txt'
+    TargetFolder: '$(Build.Repository.LocalPath)/'
+    OverWrite: true
+  displayName: 'Copy Build Artifact - SurveyJSVersionFile'
+
+- powershell: |
+    $version = Get-Content $(Build.Repository.LocalPath)/version.txt
+    Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+  displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'install Node.js'
+
+- script: |
+    npm install
+  displayName: 'npm install'
+
+- powershell: |
+    echo $(git --version)
+    git config --global user.email "kurmanov.work@gmail.com"
+    git config --global user.name "dmitrykurmanov"
+    git checkout master
+    git pull origin master
+    git fetch --tags --force
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'npm run release with SurveyJSVersion'
+
+- script: |
+    npm run build_prod
+  displayName: "build"
+
+- script: |
+    npm run testsingle
+  displayName: "unit tests"
+
+- script: |
+    npm run testcafe_ci
+  displayName: "functional tests"
+
+- powershell: |
+    git push --follow-tags origin master;
+  displayName: 'push release commit to github'
+
+- script: |
+    npm run doc_gen
+  displayName: "generate docs"
+
+- task: Npm@1
+  inputs:
+    command: "publish"
+    workingDir: "build"
+    publishEndpoint: "NPM Registry"
+    verbose: true
+  displayName: 'npm publish survey-creator'
+
+- script: |
+    npm run doc_update
+  displayName: "update docs"
+
+#trigger next build via the artifact file 'version.txt'
+- task: CopyFiles@2
+  inputs:
+    contents: 'version.txt'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: 'copy version file to Build.ArtifactStagingDirectory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'SurveyJSVersionFile'
+    publishLocation: 'Container'
+  displayName: 'Publish Build Artifact - SurveyJSVersionFile'

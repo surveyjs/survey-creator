@@ -1,4 +1,7 @@
-.title_editable {
+@import "../colors.scss";
+
+.title_editable,
+.description_editable {
   pointer-events: all;
   cursor: text;
   .svda-title-editor-start {
@@ -10,6 +13,33 @@
   .svda-title-editor-start {
     visibility: visible;
   }
+}
+
+.svd_survey_header .title_editable,
+.svd_survey_header .description_editable,
+.svd_page > .title_editable,
+.svd_page > .description_editable {
+  .svda-title-editor-start {
+    visibility: visible;
+    .svda-title-editor-placeholder {
+      cursor: text;
+      opacity: 0.5;
+    }
+    .svda-title-editor-start-button {
+      visibility: hidden;
+    }
+  }
+  &:hover {
+    .svda-title-editor-start {
+      .svda-title-editor-start-button {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.svd_page > .description_editable {
+  margin-bottom: 2em;
 }
 
 title-editor {
@@ -24,6 +54,12 @@ title-editor {
       white-space: nowrap;
       & > input {
         max-width: 100%;
+      }
+      .svda-title-editor-error {
+        outline: 1px dotted $error-color !important;
+        &::placeholder {
+          color: $error-color;
+        }
       }
     }
     .svda-edit-button {

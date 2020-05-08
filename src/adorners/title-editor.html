@@ -6,7 +6,7 @@
   >
     <input
       data-svd-info="adorner"
-      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }"
+      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }, attr: { maxLength: maxLength, 'aria-label': name, 'title': error, 'placeholder': error }, css: { 'svda-title-editor-error': error }, style: { 'min-width': error() ? '150px' : '' }"
       style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
     />
     <span
@@ -24,9 +24,13 @@
     class="svda-title-editor-content svda-title-editor-start"
     data-bind="visible: !isEditing()"
   >
-    <span style="display: none;" data-bind="text: editingName"></span>
     <span
-      class="edit-survey-name"
+      class="svda-title-editor-placeholder"
+      tabindex="0"
+      data-bind="click: startEdit, text: placeholder, visible: !editingName() && placeholder, key2click, attr: { 'aria-label': name, role: 'textbox', 'aria-readonly': 'false' }"
+    ></span>
+    <span
+      class="svda-title-editor-start-button edit-survey-name"
       data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }"
     >
       <svg-icon

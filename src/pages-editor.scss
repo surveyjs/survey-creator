@@ -1,3 +1,5 @@
+@import "colors";
+
 .svd_container {
   .svda_action_separator {
     display: inline-block;
@@ -11,6 +13,7 @@
   pages-editor {
     display: block;
     width: 100%;
+    white-space: nowrap;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -20,10 +23,13 @@
 
     .svd-pages {
       white-space: nowrap;
-      width: calc(100% - 400px);
+      max-width: calc(100% - 480px);
       letter-spacing: -3px;
       overflow: hidden;
       vertical-align: bottom;
+    }
+    .svd-pages.svd-pages--no-dropdown-selector {
+      max-width: calc(100% - 230px);
     }
 
     .svd-page-selector,
@@ -38,8 +44,20 @@
     .svd-page-add {
       cursor: pointer;
       padding: 0 1em;
-      vertical-align: top;
-      margin-top: 1.22em;
+      svg {
+        vertical-align: top;
+      }
+    }
+
+    .svd-page-scroller-arrow {
+      display: none;
+      line-height: 4em;
+      height: 4em;
+      padding-top: 1.2em;
+      vertical-align: bottom;
+    }
+    .svd-page-scroller-arrow--visible {
+      display: inline-block;
     }
 
     .svd-page {

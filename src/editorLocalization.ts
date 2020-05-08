@@ -40,35 +40,40 @@ export var editorLocalization = {
           .getString("ed.defaultLocale")
           ["format"](localeNames[defaultLocale]);
   },
-  getPropertyName: function(strName: string, locale: string = null) {
-    var obj = this.getProperty(strName, locale);
+  getPropertyName: function(strName: string, defaultName: string = null) {
+    var obj = this.getProperty(strName, defaultName);
     var name = obj["name"];
     if (!!name) {
-      return name != strName ? name : this.getAutoPropertyName(name);
+      if (name != strName) return name;
+      return this.getAutoPropertyName(name, defaultName);
     }
     return obj;
   },
-  getPropertyTitle: function(strName: string, locale: string = null) {
-    var obj = this.getProperty(strName, locale);
+  getPropertyTitle: function(strName: string) {
+    var obj = this.getProperty(strName);
     if (obj["title"]) return obj["title"];
     return "";
   },
-  getPropertyInEditor: function(strName: string, locale: string = null) {
-    var obj = this.getString("pe." + strName, locale);
+  getPropertyNameInEditor: function(
+    strName: string,
+    defaultName: string = null
+  ) {
+    var obj = this.getString("pe." + strName);
     if (obj !== strName) return obj;
-    return this.getProperty(strName);
+    return this.getPropertyName(strName, defaultName);
   },
-  getProperty: function(strName: string, locale: string = null) {
-    var obj = this.getString("p." + strName, locale);
+  getProperty: function(strName: string, defaultName: string = null) {
+    var obj = this.getString("p." + strName);
     if (obj !== strName) return obj;
     var pos = strName.indexOf("_");
-    if (pos < -1) return this.getAutoPropertyName(obj);
+    if (pos < -1) return this.getAutoPropertyName(obj, defaultName);
     strName = strName.substr(pos + 1);
-    obj = this.getString("p." + strName, locale);
+    obj = this.getString("p." + strName);
     if (obj !== strName) return obj;
-    return this.getAutoPropertyName(obj);
+    return this.getAutoPropertyName(obj, defaultName);
   },
-  getAutoPropertyName: function(propName: string) {
+  getAutoPropertyName: function(propName: string, defaultName: string = null) {
+    if (!!defaultName) return defaultName;
     if (!propName || !this.camelCaseBreaking) return propName;
     var res = propName[0].toUpperCase();
     for (var i = 1; i < propName.length; i++) {
@@ -109,7 +114,7 @@ export var editorLocalization = {
       res.push(key);
     }
     return res;
-  }
+  },
 };
 
 export var defaultStrings = enStrings;

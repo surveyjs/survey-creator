@@ -1,171 +1,55 @@
 ﻿<script type="text/html" id="se-tab-designer">
-    <div
-    class="row svd_survey_designer"
-  >
-    <div data-bind="visible: koShowToolbox"
-      class="col-lg-2 col-md-2 col-sm-1 col-xs-1 svd_toolbox svd-dark-bg-color"
-    >
-      <!-- ko if: toolbox.koHasCategories -->
-      <div
-        class="panel-group"
-        role="tablist"
-        data-bind="foreach: toolbox.koCategories"
-      >
-        <div class="panel panel-info">
-          <div
-            class="svd-toolbox-category-header"
-            role="tab"
-            data-bind="click: expand"
-          >
-            <span
-              data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"
-            ></span>
-            <!--ko if: $parent.koCanCollapseCategories -->
-            <!-- ko if: koCollapsed -->
-            <svg-icon
-              class="icon-toolbox-arrow"
-              params="iconName: 'icon-arrow_down_10x10', size: 10"
-            ></svg-icon>
-            <!-- /ko -->
-            <!-- ko ifnot: koCollapsed -->
-            <svg-icon
-              class="icon-toolbox-arrow svd-primary-icon"
-              params="iconName: 'icon-arrow_up_10x10', size: 10"
-            ></svg-icon>
-            <!-- /ko -->
-            <!-- /ko -->
-          </div>
-          <div
-            role="tabpanel"
-            data-bind="css: { 'panel-collapse collapse': koCollapsed}"
-          >
-            <!-- ko foreach: items -->
-              <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
-            <!-- /ko  -->
-          </div>
-        </div>
-      </div>
-      <!-- /ko  -->
-      <!-- ko if: !toolbox.koHasCategories() -->
-      <div
-        class="svd_toolbox_title hidden-sm hidden-xs"
-        data-bind="text: $root.getLocString('ed.toolbox')"
-      ></div>
-      <!-- ko foreach: toolbox.koItems -->
-        <!-- ko template: { name: 'se-tab-designer-item', data: $data } --><!-- /ko -->
-      <!-- /ko  -->
-      <!-- /ko  -->
-    </div>
-    <!-- ko if: koShowToolbox -->
-    <svd-splitter params="minLeft: 100, minRight: 600"></svd-splitter>
+  <div class="row svd_survey_designer">
+    <!-- ko if: leftContainer.length > 0 -->
+    <svd-designer-container params="tabs: leftContainer, activeTab: leftContainerActiveItem, visible: leftContainerVisible, changed: layoutChangedIndicator, context: $data, className: 'svd-designer-container--left-side'"></svd-designer-container>
+    <svd-splitter params="minLeft: 0, minRight: 600, onChange: layoutChangedIndicator"></svd-splitter>
     <!-- /ko  -->
-    <div
-      class="col-xs-11 svd_editors"
-      data-bind="css: {'col-lg-7 col-md-7 col-sm-8 col-xs-8': !koHideAdvancedSettings() && koShowToolbox(), 'col-lg-9 col-md-9 col-sm-9 col-xs-9': !koHideAdvancedSettings() && !koShowToolbox(), 'col-lg-10 col-md-10 col-sm-11 col-xs-11': koHideAdvancedSettings() && koShowToolbox(), 'col-lg-12 col-md-12 col-sm-12 col-xs-12': koHideAdvancedSettings() && !koShowToolbox(), 'svd_wide': koHideAdvancedSettings}"
-    >
-      <div class="svd_toolbar">
-        <!-- ko if: koShowPropertyGrid() && koHideAdvancedSettings()  -->
-        <div class="svd-property-grid__header" data-bind="click: function() { koHideAdvancedSettings(false); }, attr: { title: getLocString('ed.showObjectProperties') }">
-            <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-            <span class="svd-property-grid__header-hide-button svd-header-show-button"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-left'"></svg-icon></span>
-        </div>
-        <!-- /ko -->
-        <!-- ko foreach: toolbarItems -->
-        <span
-          tabindex="0"
-          class="svd_action"
-          data-bind="css: $data.css, visible: visible, attr: { id: id }"
-        >
-          <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
-          <!-- /ko -->
-        </span>
-        <!-- /ko -->
-      </div>
-      <pages-editor params="editor:$data" data-bind="visible: koShowPagesToolbox">
-      </pages-editor>
+    <div class="svd_editors">
+      <!-- ko if: topContainer.length > 0 -->
+      <svd-designer-h-container params="items: topContainer, context: $data, className: 'svd-designer-container--top'"></svd-designer-h-container>
+      <!-- /ko  -->
+
       <div
         class="svd_questions_editor svd-light-bg-color"
         id="scrollableDiv"
         data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }"
       >
-        <div id="surveyjs"></div>
-        <!-- ko if: isCurrentPageEmpty -->
-        <!-- ko template: "se-empty-placeholder" -->
-        <!-- /ko -->
-        <!-- /ko -->
+        <div class="svd_surveyjs_designer_container"></div>
       </div>
     </div>
-    <svd-splitter params="minLeft: 600, minRight: 150"></svd-splitter>
-    <div
-      class="col-lg-3 col-md-3 col-sm-3 hidden-xs svd_properties svd-light-border-color svd-dark-bg-color"
-      data-bind="visible: !koHideAdvancedSettings()"
-    >
-      <div class="svd-property-grid__header">
-        <span class="svd-property-grid__header-title" data-bind="text: getLocString('ed.opjectPropertiesHeader')"></span>
-        <span class="svd-property-grid__header-hide-button svd-header-hide-button" data-bind="click: function() { koHideAdvancedSettings(true); }, attr: { title: $root.getLocString('ed.hideObjectProperties') }"><svg-icon class="svd-secondary-icon" params="iconName: 'icon-right'"></svg-icon></span>
-      </div>
-      <div class="svd_object_selector svd-light-border-color">
-        <div class="svd_custom_select">
-          <select
-            onmousewheel="return false;"
-            id="objectSelector"
-            class="form-control"
-            data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
-          ></select>
-        </div>
-        <span
-          data-bind="click: editCurrentObject, attr: { title: $root.getLocString('ed.editSelObject')}"
-        >
-          <svg-icon
-            class="svd-primary-icon icon-edit"
-            params="iconName: 'icon-edit', size:24"
-          ></svg-icon>
-        </span>
-      </div>
-      <div
-        class="svd_object_editor"
-        data-bind="style: {height: koDesignerHeight}"
-      >
-        <div
-          data-bind="template: { name: 'objecteditor', data: selectedObjectEditor }"
-        ></div>
-      </div>
-    </div>
+    <!-- ko if: rightContainer.length > 0 -->
+    <svd-splitter params="minLeft: 600, minRight: 0, onChange: layoutChangedIndicator"></svd-splitter>
+    <svd-designer-container params="tabs: rightContainer, activeTab: rightContainerActiveItem, visible: rightContainerVisible, changed: layoutChangedIndicator, context: $data, className: 'svd-designer-container--right-side'"></svd-designer-container>
+    <!-- /ko -->
   </div>
 </script>
+
 <script type="text/html" id="se-tab-test">
   <div data-bind="style: {width: koTestSurveyWidth}">
     <div id="surveyjsExample" data-bind="template: { name: 'surveylive', data: surveyLive }"></div>
   </div>
 </script>
+
 <script type="text/html" id="se-empty-placeholder">
   <div class="svd-survey-placeholder-root">
-    <div class="svd-survey-placeholder">
-      <!-- ko if: showExternalHelpLink -->
-      <div class="svd-survey-gallery">
-        <a data-bind="attr: { href: $root.getLocString('survey.externalHelpLinkUrl') }">
-          <img src="../images/YouTube.png"/>
-          <span data-bind="text: $root.getLocString('survey.externalHelpLink')"></span>
-        </a>
-      </div>
+      <div class="svd-survey-placeholder">
+      <!-- ko if: placeholderHtml -->
+        <div data-bind="html: placeholderHtml"></div>
       <!-- /ko -->
-      <div class="empty-message" data-bind="text: $root.getLocString('survey.dropQuestion')"></div>
-    </div>
-  </div>
-</script>
-<script type="text/html" id="se-tab-designer-item">
-    <div
-    tabindex="0"
-    draggable="true"
-    class="svd_toolbox_item svd-light-border-color"
-    data-bind="attr: {title:  tooltip}, css: 'svd_toolbox_item_' + iconName, key2click, clickNoFocus: $root.clickToolboxItem, event:{dragstart: function(el, e) { $root.draggingToolboxItem($data, e); return true;}, dragend: function(el, e) { $root.dragEnd(); }}"
-  >
-    <span>
-      <svg-icon params="iconName: iconName"></svg-icon>
-    </span>
-    <span
-      class="svd_toolbox_item_text hidden-sm hidden-xs"
-      data-bind="text:title"
-    ></span>
+      <!-- ko ifnot: placeholderHtml -->
+          <!-- ko if: showExternalHelpLink -->
+          <div class="svd-survey-gallery">
+            <a data-bind="attr: { href: getLocString('survey.externalHelpLinkUrl') }">
+            <img src="../images/YouTube.png" alt="YouTube tutorials"/>
+            <span data-bind="text: getLocString('survey.externalHelpLink')"></span>
+            </a>
+        </div>
+        <!-- /ko -->
+        <div class="svd-empty-message-container">
+          <div class="svd-empty-message" data-bind="text: getLocString('survey.dropQuestion')"></div>
+          <img src="../images/start-designing-form.svg" alt="Drop questions here" style="width: 300px; height: 300px"/>
+        </div>
+        <!-- /ko -->
+      </div>
   </div>
 </script>

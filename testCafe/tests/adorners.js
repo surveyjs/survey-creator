@@ -1,27 +1,30 @@
-import { url } from "../settings";
+import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `adorners`;
 
-const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  var editorOptions = {};
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
-});
-
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 
-test(`dropdown change item values`, async t => {
+test(`dropdown change item values`, async (t) => {
   await t
     .click(`[title~=Dropdown]`)
     .click(`.item_editable.item_draggable>span`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.item_editable.item_draggable>span`).innerText)
-    .eql("item1puppies")
-    .click(`.svd_properties_grid tr:nth-child(16) input[type='checkbox']`)
+    .eql("puppies");
+
+  const choicesTab = Selector(".svd_object_editor span").withText("Choices");
+  const hasOtherCheckbox = Selector(".svd_object_editor")
+    .find("span")
+    .withText("Has other item");
+
+  await t
+    .maximizeWindow()
+    .click(choicesTab)
+    .click(hasOtherCheckbox)
     .expect(
       Selector(
         `.svda-select-items-editor .svda-select-items-collection+.item_editable > span:first-child`
@@ -38,7 +41,7 @@ test(`dropdown change item values`, async t => {
         `.svda-select-items-editor .svda-select-items-collection+.item_editable > span:first-child`
       ).innerText
     )
-    .eql("Other (describe)puppiesOther");
+    .eql("puppiesOther");
   //.debug()
   //.wait(3000);
 });
@@ -50,20 +53,108 @@ test(`dropdown change item values`, async t => {
 //     .typeText(`input:focus`, `puppies`)
 //     .click(`input:focus+span.svda-edit-button`)
 //     .expect(Selector(`.label_editable > span`).innerText)
-//     .eql("question1puppies");
+//     .eql("puppies");
 // });
 
-test(`text change title`, async t => {
+test(`text change title`, async (t) => {
   await t
     .click(`[title="Single Input"]`)
     .click(`.title_editable > span:nth-child(3)`)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
-    .expect(Selector(`.title_editable > span:nth-child(3)`).innerText)
-    .eql("question1puppies");
+    .expect(Selector(`h5.title_editable > span:nth-child(2)`).innerText)
+    .eql("puppies");
 });
 
-test(`dropdown work with other`, async t => {
+test(`change page title`, async (t) => {
+  const pageTitle = Selector(".svd_page")
+    .find("span")
+    .withText("Input page title here");
+  await t
+    .expect(pageTitle.visible)
+    .ok()
+    .click(pageTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(Selector(`.svd_page .title_editable > span:nth-child(1)`).innerText)
+    .eql("puppies");
+});
+
+test(`change page description`, async (t) => {
+  const pageTitle = Selector(".svd_page")
+    .find("span")
+    .withText("Enter a page description");
+  await t
+    .expect(pageTitle.visible)
+    .ok()
+    .click(pageTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(
+      Selector(`.svd_page .description_editable > span:nth-child(1)`).innerText
+    )
+    .eql("puppies");
+});
+
+test(`change survey title`, async (t) => {
+  const surveyTitle = Selector(".sv_header__text")
+    .find("span")
+    .withText("Input survey title here");
+  await t
+    .expect(surveyTitle.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .click(surveyTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(
+      Selector(`.sv_header__text .title_editable > span:nth-child(1)`).innerText
+    )
+    .eql("puppies");
+});
+
+test(`change survey description`, async (t) => {
+  const surveyTitle = Selector(".sv_header__text")
+    .find("span")
+    .withText("Enter a survey description");
+  await t
+    .expect(surveyTitle.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .click(surveyTitle)
+    .typeText(`input:focus`, `puppies`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(
+      Selector(`.sv_header__text .description_editable > span:nth-child(1)`)
+        .innerText
+    )
+    .eql("puppies");
+});
+
+test(`set survey logo`, async (t) => {
+  const surveyLogo = Selector(".sv_logo");
+  const callChooseImage = ClientFunction(() => {
+    var el = document.querySelectorAll(
+      "title-actions .svda_question_action"
+    )[0];
+    var model = ko.contextFor(el).$parents[0];
+    model.uploadFiles();
+  });
+
+  await t
+    .expect(surveyLogo.visible)
+    .notOk()
+    .click(`[title="Show/hide title"]`)
+    .expect(surveyLogo.visible)
+    .notOk()
+    .setFilesToUpload(".svd_survey_header .svda-choose-file", ["./image.jpg"]);
+
+  await callChooseImage();
+
+  await t.expect(surveyLogo.visible).ok();
+});
+
+test(`dropdown work with other`, async (t) => {
   await t
     .click(`[title~=Dropdown]`)
     .click(`.svda-add-new-item.svda-add-custom-item`)
@@ -72,47 +163,117 @@ test(`dropdown work with other`, async t => {
     .typeText(`input:focus`, `other puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.item_editable:not(.item_draggable)>span`).innerText)
-    .eql("Other (describe)other puppies")
+    .eql("other puppies")
     .click(`.item_editable:not(.item_draggable) .svda-delete-item`)
     .expect(Selector(`.item_editable:not(.item_draggable)>span`).exists)
-    .notOk()
+    .notOk();
   //.debug()
   //.wait(3000);
 });
 
-test(`checkbox work with other/select all/none`, async t => {
+test(`checkbox work with other/select all/none`, async (t) => {
   await t
     .click(`[title~=Checkbox]`)
-    .expect(Selector(`.svda-add-custom-item+.svda-add-custom-item>span`).innerText)
+    .expect(
+      Selector(`.svda-add-custom-item+.svda-add-custom-item>span`).innerText
+    )
     .eql("Other")
-    .expect(Selector(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`).innerText)
+    .expect(
+      Selector(
+        `.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`
+      ).innerText
+    )
     .eql("Select All")
-    .expect(Selector(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`).innerText)
+    .expect(
+      Selector(
+        `.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`
+      ).innerText
+    )
     .eql("None")
     .click(`.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
-    .expect(Selector(`.sv_qcbx div:nth-child(2) label .item_editable > span`).innerText)
+    .click(`.svda-add-custom-item+.svda-add-custom-item`)
+    .click(`.svda-add-custom-item+.svda-add-custom-item`)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(2) label .item_editable > span`)
+        .innerText
+    )
     .eql("Select All")
-    .expect(Selector(`.sv_qcbx div:nth-child(3) label .item_editable > span`).innerText)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(3) label .item_editable > span`)
+        .innerText
+    )
     .eql("item1")
-    .expect(Selector(`.sv_qcbx div:nth-child(4) label .item_editable > span`).innerText)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(4) label .item_editable > span`)
+        .innerText
+    )
     .eql("item2")
-    .expect(Selector(`.sv_qcbx div:nth-child(5) label .item_editable > span`).innerText)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(5) label .item_editable > span`)
+        .innerText
+    )
     .eql("item3")
-    .expect(Selector(`.sv_qcbx div:nth-child(6) label .item_editable > span`).innerText)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(6) label .item_editable > span`)
+        .innerText
+    )
     .eql("Other (describe)")
-    .expect(Selector(`.sv_qcbx div:nth-child(7) label .item_editable > span`).innerText)
-    .eql("None")
-    .click(`.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
-    .expect(Selector(`.sv_qcbx div:nth-child(2) label .item_editable > span`).innerText)
+    .expect(
+      Selector(`.sv_qcbx div:nth-child(7) label .item_editable > span`)
+        .innerText
+    )
+    .eql("None");
+  // .click(`.svda-add-custom-item+.svda-add-custom-item`)
+  // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
+  // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
+  // .expect(Selector(`.sv_qcbx div:nth-child(2) label .item_editable > span`).innerText)
+  // .eql("item1")
+  // .expect(Selector(`.sv_qcbx div:nth-child(3) label .item_editable > span`).innerText)
+  // .eql("item2")
+  // .expect(Selector(`.sv_qcbx div:nth-child(4) label .item_editable > span`).innerText)
+  // .eql("item3")
+  // .debug()
+  // .wait(3000);
+});
+
+test(`dropdown readonly`, async (t) => {
+  const makeEditorReadOnly = ClientFunction(() => {
+    creator.readOnly = true;
+    creator.text = `{
+      "pages": [
+        {
+        "name": "page1",
+        "elements": [
+          {
+          "type": "dropdown",
+          "name": "question1", 
+          "hasOther": "true",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
+          }
+        ]
+        }
+      ]
+      }`;
+    return "dummy";
+  });
+  await makeEditorReadOnly();
+  await t
+    .expect(
+      Selector(".svda-select-items-collection div:nth-child(1) span").innerText
+    )
     .eql("item1")
-    .expect(Selector(`.sv_qcbx div:nth-child(3) label .item_editable > span`).innerText)
+    .expect(
+      Selector(".svda-select-items-collection div:nth-child(2) span").innerText
+    )
     .eql("item2")
-    .expect(Selector(`.sv_qcbx div:nth-child(4) label .item_editable > span`).innerText)
+    .expect(
+      Selector(".svda-select-items-collection div:nth-child(3) span").innerText
+    )
     .eql("item3")
-  //.debug()
-  //.wait(3000);
+    .expect(Selector(".svda-select-items-collection + div span").innerText)
+    .eql("Other (describe)");
 });

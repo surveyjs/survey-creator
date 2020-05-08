@@ -3,13 +3,21 @@
         <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
             <label  for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
             <span id="testSurveyPageChanged">
-                <select onmousewheel="return false;" class="form-control" data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable"></select>
+                <select
+                    onmousewheel="return false;"
+                    class="form-control"
+                    data-bind="options: koPages, optionsText: 'title', optionsValue: 'page', value: koActivePage, optionsAfterRender: setPageDisable, attr: { 'aria-label': selectPageText }">
+                </select>
             </span>
         </span>
         <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
             <label  for="testSurveyLocale" data-bind="text: localeText"></label>
             <span id="testSurveyLocale">
-                <select onmousewheel="return false;" class="form-control" data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value'"></select>
+                <select
+                    onmousewheel="return false;"
+                    class="form-control"
+                    data-bind="options: koLanguages, value: koActiveLanguage, optionsText:'text', optionsValue: 'value', attr: { 'aria-label': localeText }">
+                </select>
             </span>
         </span>
         <label id="testShowInvisibleElements" data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
@@ -23,7 +31,7 @@
         <span>
           <label for="testDeviceSelector" data-bind="text: simulatorText"></label>
           <span id="testDeviceSelector">
-              <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'"></select>
+              <select onmousewheel="return false;" class="form-control" data-bind="options: koDevices, value: koActiveDevice, optionsText:'text', optionsValue: 'value'" aria-label="Device selector"></select>
           </span>
         </span>
         <!-- /ko -->
@@ -47,10 +55,10 @@
         </div>
         <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
             <li class="nav-item active" data-bind="css: {active: koResultViewType() === 'table'}">
-                <a class="nav-link" href="#" data-bind="click: selectTableClick, text: $root.getLocString('ed.surveyResultsTable')"></a>
+                <a class="nav-link" href="#" data-bind="click: selectTableClick, text: $data.getLocString('ed.surveyResultsTable')"></a>
             </li>
             <li class="nav-item" data-bind="css: {active: koResultViewType() === 'text'}">
-                <a class="nav-link" href="#" data-bind="click: selectJsonClick, text: $root.getLocString('ed.surveyResultsJson')"></a>
+                <a class="nav-link" href="#" data-bind="click: selectJsonClick, text: $data.getLocString('ed.surveyResultsJson')"></a>
             </li>
         </ul>
         <div class="svd_results_text svd-light-bg-color" data-bind="visible: koResultViewType() === 'text'">
@@ -100,8 +108,8 @@
     <div class="svd-simulator-main">
       <!-- ko if: koHasFrame -->
       <div class="svd-simulator-wrapper" data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
-        <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg"/>
-        <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg"/>
+        <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()" src="../images/simulator/device-p.svg" alt="Virtual device frame portrait"/>
+        <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation" src="../images/simulator/device-l.svg" alt="Virtual device frame landscape"/>
         <div class="svd-simulator" data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px', transform: 'scale(' + koSimulatorFrame().scale + ')' }">
           <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
         </div>

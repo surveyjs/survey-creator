@@ -92,9 +92,12 @@ export class SurveyHelper {
   public static isPropertyVisible(
     obj: any,
     property: Survey.JsonObjectProperty,
-    options: ISurveyObjectEditorOptions = null
+    options: ISurveyObjectEditorOptions = null,
+    showMode: string = null
   ): boolean {
     if (!property || !property.visible) return false;
+    if (!!showMode && !!property.showMode && showMode !== property.showMode)
+      return false;
     if (
       !!property.isVisible &&
       !!obj.getLayoutType &&
@@ -131,5 +134,18 @@ export class SurveyHelper {
       el = <HTMLElement>el.offsetParent;
     }
     return null;
+  }
+  public static moveItemInArray(
+    list: Array<any>,
+    obj: any,
+    newIndex: number
+  ): boolean {
+    if (!list) return false;
+    if (newIndex < 0 || newIndex >= list.length) return false;
+    var oldIndex = list.indexOf(obj);
+    if (oldIndex < 0 || oldIndex == newIndex) return false;
+    list.splice(oldIndex, 1);
+    list.splice(newIndex, 0, obj);
+    return true;
   }
 }

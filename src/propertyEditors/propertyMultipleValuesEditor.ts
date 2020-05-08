@@ -15,9 +15,15 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
   public items: Array<Survey.ItemValue> = [];
   koCategories: any;
   koEditingValue: any;
+  private isEditingValueSetting: boolean = false;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koEditingValue = ko.observableArray();
+    var self = this;
+    this.koEditingValue.subscribe(function(newValue) {
+      if (self.isEditingValueSetting) return;
+      self.koValue([].concat(self.koEditingValue()));
+    });
     this.koCategories = ko.observableArray();
     this.koCategories = ko.observableArray();
     this.updateChoices();
@@ -38,12 +44,9 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     this.updateChoices();
     this.setEditingValue();
   }
-  protected updateValue() {
+  public updateValue() {
     super.updateValue();
     this.setEditingValue();
-  }
-  protected onBeforeApply() {
-    this.koValue([].concat(this.koEditingValue()));
   }
   public get editorType(): string {
     return "multiplevalues";
@@ -90,10 +93,12 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     return val;
   }
   private setEditingValue() {
+    this.isEditingValueSetting = true;
     var val = this.koValue();
     if (val == null || val == undefined) val = [];
     if (!Array.isArray(val)) val = [val];
     this.koEditingValue(val);
+    this.isEditingValueSetting = false;
   }
   private setCategories(choices: Array<Survey.ItemValue>) {
     for (var i = 0; i < this.items.length; i++) {

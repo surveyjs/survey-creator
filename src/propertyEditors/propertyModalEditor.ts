@@ -2,10 +2,10 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { SurveyPropertyConditionEditor } from "./propertyConditionEditor";
 import { editorLocalization } from "../editorLocalization";
 import { focusFirstControl } from "../utils/utils";
 import RModal from "rmodal";
+import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
@@ -51,8 +51,9 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     if (!SurveyPropertyModalEditor.customWidgets) return null;
     return SurveyPropertyModalEditor.customWidgets[editorType];
   }
-  private isShowingModalValue: boolean = false;
+  private isBeforeShowCalledValue: boolean = false;
   private elements: HTMLElement[];
+  private modalEditableObject: EditableObject;
   public editingObject: any;
   public onApplyClick: any;
   public onOkClick: any;
@@ -66,6 +67,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   koAfterRender: any;
   koHtmlTop: any;
   koHtmlBottom: any;
+  koIsShowingModal: any;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     this.koTitleCaption = ko.observable("");
@@ -75,7 +77,12 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.koTitleCaption(
         editorLocalization
           .getString("pe.editProperty")
-          ["format"](editorLocalization.getPropertyName(this.property.name))
+          ["format"](
+            editorLocalization.getPropertyName(
+              this.property.name,
+              this.property.displayName
+            )
+          )
       );
     }
     this.modalName =
@@ -84,26 +91,28 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.modalNameTarget = "#" + this.modalName;
     var self = this;
     this.koShowApplyButton = ko.observable(true);
+    this.koIsShowingModal = ko.observable(false);
 
     self.onHideModal = function() {};
     self.onApplyClick = function() {
       self.apply();
     };
     self.onOkClick = function() {
-      self.apply();
-      if (!self.koHasError()) self.onHideModal();
+      var res = self.apply();
+      if (res) self.onHideModal();
     };
     self.onResetClick = function() {
       self.updateValue();
       self.onHideModal();
     };
     self.onShowModal = function() {
+      self.beforeShowModal();
       self.beforeShow();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
         bodyClass: "",
         closeTimeout: 100,
         dialogOpenClass: "animated fadeInDown",
-        focus: false
+        focus: false,
       });
       modal.open();
 
@@ -127,22 +136,54 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       return self.afterRender(el, con);
     };
   }
-  public setup() {
-    super.setup();
-    this.beforeShow();
-  }
-  public get isModal(): boolean {
+  protected get isModal(): boolean {
     return true;
   }
-  public get isShowingModal(): boolean {
-    return this.isShowingModalValue;
+  public get isBeforeShowCalled(): boolean {
+    return this.isBeforeShowCalledValue;
   }
   public beforeShow() {
-    this.isShowingModalValue = true;
+    if (this.isBeforeShowCalledValue === true) return;
+    this.isBeforeShowCalledValue = true;
+    this.beforeShowCore();
+  }
+  protected beforeShowCore() {
     this.updateValue();
   }
-  public beforeCloseModal() {
-    this.isShowingModalValue = false;
+  public updatePropertyValue(newValue: any) {
+    var obj = this.object;
+    if (!!this.modalEditableObject) {
+      obj = this.modalEditableObject.editableObj;
+    }
+    obj[this.property.name] = newValue;
+  }
+  protected getOriginalValue(): any {
+    if (!!this.modalEditableObject) {
+      return this.modalEditableObject.editableObj[this.property.name];
+    }
+    return super.getOriginalValue();
+  }
+  protected performApply() {
+    if (!!this.modalEditableObject) {
+      this.modalEditableObject.apply(this.property.name);
+    } else {
+      super.performApply();
+    }
+  }
+  protected beforeShowModal() {
+    this.modalEditableObject = new EditableObject(this.object);
+    this.koIsShowingModal(true);
+  }
+  protected isShowingModal(): boolean {
+    return this.koIsShowingModal();
+  }
+  protected beforeCloseModal() {
+    this.isBeforeShowCalledValue = false;
+    this.koIsShowingModal(false);
+    if (!!this.modalEditableObject) {
+      this.modalEditableObject.reset();
+    }
+    this.modalEditableObject = null;
   }
   protected onOptionsChanged() {
     this.koShowApplyButton = ko.observable(
@@ -150,6 +191,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     );
   }
   public setObject(value: any) {
+    this.isBeforeShowCalledValue = false;
     this.editingObject = value;
     super.setObject(value);
     if (this.options && this.property) {
@@ -192,15 +234,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
 }
 
 export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
-  public koTextValue: any;
-
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
-    this.koTextValue = ko.observable();
-    var self = this;
-    this.koTextValue.subscribe(function(newValue) {
-      self.onkoTextValueChanged(newValue);
-    });
   }
   public get editorType(): string {
     return "text";
@@ -216,12 +251,13 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
     }
     return str;
   }
-  protected onkoTextValueChanged(newValue) {}
-  protected onValueChanged() {
-    this.koTextValue(this.editingValue);
+  public onFocus() {
+    this.options["undoRedoManager"].startTransaction(
+      "textarea property editor transaction"
+    );
   }
-  protected onBeforeApply() {
-    this.setValueCore(this.koTextValue());
+  public onBlur() {
+    this.options["undoRedoManager"].stopTransaction();
   }
 }
 
@@ -244,3 +280,5 @@ SurveyPropertyEditorFactory.registerEditor("html", function(
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyHtmlEditor(property);
 });
+SurveyPropertyEditorFactory.registerTypeForCellEditing("text", "string");
+SurveyPropertyEditorFactory.registerTypeForCellEditing("html", "string");

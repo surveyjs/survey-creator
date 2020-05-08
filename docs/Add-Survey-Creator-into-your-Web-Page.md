@@ -5,7 +5,7 @@ The easiest way to add the survey creator into your web page, is to go to [one o
 If you do not want to use our Azure CDN, you may download our script files from GitHub: [Survey Creator](https://github.com/surveyjs/survey-creator/releases) and [SurveyJS library](https://github.com/surveyjs/survey-library/releases), or go to our [cdn repo](https://github.com/surveyjs/builds). It contains all versions since 0.12.0 (early 2017).
 
 Finally you may install our npm package:
-```npm install surveyjs-creator```
+```npm install survey-creator```
 
 ## Step 1. Add links to [knockout](http://knockoutjs.com).
 
@@ -29,7 +29,7 @@ Link to the SurveyJS Library knockout version and Survey Creator library.
 ## Step 3. Use boostrap or use our Themes
 
 You may use bootstrap
-```
+```javascript
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 ```
 

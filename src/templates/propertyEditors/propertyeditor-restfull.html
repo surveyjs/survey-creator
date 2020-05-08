@@ -5,15 +5,12 @@
 
 <script type="text/html" id="propertyeditorcontent-restfull">
   <form>
-      <div class="form-group" data-bind="foreach: koItems">
-          <div class="form-group">
-              <label data-bind="attr: {for: name}, text: $root.getLocString('pe.'+name)"></label>
-              <input type="text" data-bind="attr: {id: name}, value:koValue" class="form-control"></input>
-          </div>
-      </div>
+    <!-- ko if: koContentEditor() != null -->
+    <!-- ko template: { name: "questioneditor-content", data: koContentEditor() } --><!-- /ko -->
+    <!-- /ko -->
       <div class="form-group">
           <label for="titleName">
-              <span data-bind="text:$root.getLocString('pe.testService')"></span>
+              <span data-bind="text:$data.getLocString('pe.testService')"></span>
           </label>
           <div class="form-control svd_custom_select" style="display: block;">
               <select onmousewheel="return false;" data-bind="options: question.visibleChoices, optionsText: 'text', optionsValue: 'value', optionsCaption: question.optionsCaption"></select>

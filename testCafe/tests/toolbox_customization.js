@@ -20,7 +20,7 @@ test(`showJSONEditorTab`, async t => {
       }
     };
 
-    editor.toolbox.addItem(itemAsJson);
+    creator.toolbox.addItem(itemAsJson);
   });
   const getTestTab = Selector(
     () => document.querySelectorAll(".svd_container ul li:nth-child(2)")[0]

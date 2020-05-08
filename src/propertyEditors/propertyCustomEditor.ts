@@ -24,7 +24,7 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
     this.isValueChanging = true;
     super.onValueChanged();
     if (this.onValueChangedCallback)
-      this.onValueChangedCallback(this.editingValue);
+      this.onValueChangedCallback(this.koValue());
     this.isValueChanging = false;
   }
   protected checkForErrors(): boolean {

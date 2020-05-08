@@ -2,7 +2,10 @@
   <div class="form-group svd-translation-tab">
       <div class="form-group svd-language-select">
       <div class="svd_custom_select svd-light-bg-color svd-light-border-color">
-          <select onmousewheel="return false;" data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption"></select>
+          <select
+            onmousewheel="return false;"
+            data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption, attr: { 'aria-label': selectLanguageOptionsCaption }">
+        </select>
       </div>
       <div class="svd-translation-tab-show-all-strings-container">
       <!-- ko template: { name: 'propertyeditor-boolean', data: {  koValue: koShowAllStrings, displayName: $data.showAllStringsText, isDiplayNameVisible: true } } -->
@@ -38,7 +41,7 @@
   </div>
 </script>
 <script type="text/html" id="translation-group">
-  <div class="svd-translation-strings svd-light-border-color svd-light-bg-color">
+  <div class="svd-light-border-color svd-light-bg-color" data-bind="css:{'svd-translation-strings': $data.koShowHeader()}">
       <table class="svd_items_table" data-bind="visible: $data.locItems.length > 0">
           <thead>
               <tr>
@@ -61,7 +64,7 @@
       </table>
 
       <div class="svd-translation-panel-strings" data-bind="foreach: {data: $data.groups, as: 'group' }">
-          <div class="svd-toolbox-category-header" role="tab" data-bind="click: function(){ group.koExpanded(!group.koExpanded())}">
+          <div class="svd-toolbox-category-header" role="tab" data-bind="visible: koShowHeader, click: function(){ group.koExpanded(!group.koExpanded())}">
               <span class="svd-translation-panel-strings-title"data-bind="css: { 'svd-main-color': group.koExpanded() }, text: group.name"></span>
               <!-- ko ifnot: koExpanded -->
               <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>

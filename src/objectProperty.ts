@@ -7,48 +7,44 @@ import {
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFactory";
 
-export declare type SurveyOnPropertyChangedCallback = (
-  property: SurveyObjectProperty,
-  newValue: any
-) => void;
-
 export class SurveyObjectProperty {
   private objectValue: any;
-  private onPropertyChanged: SurveyOnPropertyChangedCallback;
-  private isActiveValue: boolean;
-  public onChanged: (newValue: any) => any;
+  public onCorrectValueBeforeSet: (
+    propEditor: SurveyObjectProperty,
+    newValue: any
+  ) => boolean;
+  public onChanged: (propEditor: SurveyObjectProperty, oldValue: any) => void;
   public name: string;
   public disabled: boolean;
   public editor: SurveyPropertyEditorBase;
   public editorType: string;
   public editorTypeTemplate: string;
   public baseEditorType: string;
-  public onDependedPropertyUpdateCallback: (propertyName: string) => void;
-  public koVisible: any;
+  public getObjectPropertyByName: (name: string) => SurveyObjectProperty = null;
+  private isHiddenValue: boolean = false;
 
-  koIsShowEditor = ko.observable(false);
+  public koVisible: any;
 
   constructor(
     public property: Survey.JsonObjectProperty,
-    onPropertyChanged: SurveyOnPropertyChangedCallback = null,
-    propertyEditorOptions: ISurveyObjectEditorOptions = null
+    private propertyEditorOptions: ISurveyObjectEditorOptions = null,
+    isCellEditor: boolean = false
   ) {
-    this.onPropertyChanged = onPropertyChanged;
     this.name = this.property.name;
-    this.disabled = property["readOnly"];
+    this.disabled = property.readOnly;
     var self = this;
     var onItemChanged = function(newValue) {
       self.onEditorValueChanged(newValue);
     };
     this.editor = SurveyPropertyEditorFactory.createEditor(
       property,
-      onItemChanged
+      isCellEditor
     );
+    this.editor.onChanged = onItemChanged;
     this.editor.onGetLocale = this.doOnGetLocale;
     this.editor.options = propertyEditorOptions;
     this.editorType = this.editor.editorType;
     this.editorTypeTemplate = this.editor.editorTypeTemplate;
-    this.isActive = false;
     this.koVisible = ko.observable(this.isVisible());
   }
   public get displayName(): string {
@@ -56,16 +52,6 @@ export class SurveyObjectProperty {
   }
   public get title(): string {
     return this.editor.title;
-  }
-  public get isActive(): boolean {
-    return this.isActiveValue;
-  }
-  public set isActive(val: boolean) {
-    if (this.isActive == val) return;
-    this.isActiveValue = val;
-    this.koIsShowEditor(
-      !this.disabled && (this.editor.alwaysShowEditor || this.isActive)
-    );
   }
   public get koValue(): any {
     return this.editor.koValue;
@@ -86,15 +72,52 @@ export class SurveyObjectProperty {
   public set object(value: any) {
     this.objectValue = value;
     this.editor.object = value;
+    this.editor.setup();
     this.updateDependedProperties();
     this.updateDynamicProperties();
+  }
+  public beforeShow() {
+    this.editor.beforeShow();
+    this.updateDynamicProperties();
+  }
+  public hasError(): boolean {
+    return this.editor.hasError();
+  }
+  public applyToObj(obj: Survey.Base) {
+    if (
+      !!this.object &&
+      Survey.Helpers.isTwoValueEquals(
+        obj[this.property.name],
+        this.object[this.property.name]
+      )
+    )
+      return;
+    obj[this.property.name] = this.object[this.property.name];
+  }
+  public get isInPropertyGrid(): boolean {
+    return this.editor.isInPropertyGrid;
+  }
+  public set isInPropertyGrid(val: boolean) {
+    this.editor.isInPropertyGrid = val;
+  }
+  public reset() {
+    if (!this.object) return;
+    this.editor.koValue(this.property.getPropertyValue(this.object));
   }
   public updateDynamicProperties() {
     this.koVisible(this.isVisible());
     this.editor.updateDynamicProperties();
   }
+  public get isHidden(): boolean {
+    return this.isHiddenValue;
+  }
+  public set isHidden(val: boolean) {
+    this.isHiddenValue = val;
+    this.koVisible(this.isVisible());
+  }
   protected isVisible(): boolean {
     if (!this.object) return true;
+    if (this.isHidden) return false;
     var layout = !!this.object.getLayoutType ? this.object.getLayoutType() : "";
     if (
       !!this.property.isVisible &&
@@ -104,19 +127,30 @@ export class SurveyObjectProperty {
     return true;
   }
   protected onEditorValueChanged(newValue) {
+    this.propertyEditorOptions &&
+      this.propertyEditorOptions.startUndoRedoTransaction();
     if (this.object) {
-      if (!!this.onPropertyChanged) this.onPropertyChanged(this, newValue);
-      if (!!this.onChanged) this.onChanged(newValue);
+      var oldValue = this.object[this.property.name];
+      if (!!this.onCorrectValueBeforeSet) {
+        newValue = this.onCorrectValueBeforeSet(this, newValue);
+      }
+      this.editor.updatePropertyValue(newValue);
+      if (this.onChanged) this.onChanged(this, oldValue);
     }
     this.updateDependedProperties();
+    this.propertyEditorOptions &&
+      this.propertyEditorOptions.stopUndoRedoTransaction();
   }
+
   private updateDependedProperties() {
-    if (!this.object || !this.onDependedPropertyUpdateCallback) return;
-    if (!this.property["getDependedProperties"]) return;
-    var props = this.property["getDependedProperties"]();
+    if (!this.object || !this.getObjectPropertyByName) return;
+    var props = this.property.getDependedProperties();
     if (!props) return;
     for (var i = 0; i < props.length; i++) {
-      this.onDependedPropertyUpdateCallback(props[i]);
+      var prop = this.getObjectPropertyByName(props[i]);
+      if (!!prop) {
+        prop.updateDynamicProperties();
+      }
     }
   }
 }

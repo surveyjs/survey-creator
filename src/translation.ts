@@ -1,6 +1,8 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
+import { unparse, parse } from "papaparse";
+import {Observable} from "knockout";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -12,7 +14,8 @@ export class TranslationItemBase {
 }
 
 export class TranslationItem extends TranslationItemBase {
-  private values: Survey.HashTable<any>;
+  private values: Survey.HashTable<Observable<string>>;
+  public customText: string;
   constructor(
     public name: string,
     public locString: Survey.LocalizableString,
@@ -24,25 +27,31 @@ export class TranslationItem extends TranslationItemBase {
     this.values = {};
   }
   public get text() {
+    return !!this.customText ? this.customText : this.localizableName;
+  }
+  public get localizableName(): string {
     return editorLocalization.getPropertyName(this.name);
   }
-  public koValue(loc: string): any {
-    if (!!this.values[loc]) return this.values[loc];
-    var val = ko.observable(this.locString.getLocaleText(loc));
-    var self = this;
-    val.subscribe(function(newValue) {
-      self.locString.setLocaleText(loc, newValue);
-      !!self.translation.tranlationChangedCallback &&
+
+  public koValue(loc: string): Observable<string> {
+    if (!this.values[loc]) {
+      var val = ko.observable(this.locString.getLocaleText(loc));
+      var self = this;
+      val.subscribe((newValue) => {
+        self.locString.setLocaleText(loc, newValue);
+        !!self.translation.tranlationChangedCallback &&
         self.translation.tranlationChangedCallback(
-          loc,
-          self.name,
-          newValue,
-          self.context
+            loc,
+            self.name,
+            newValue,
+            self.context
         );
-    });
-    this.values[loc] = val;
-    return val;
+      });
+      this.values[loc] = val;
+    }
+    return this.values[loc];
   }
+
   public fillLocales(locales: Array<string>) {
     var json = this.locString.getJson();
     if (!json || typeof json === "string") return;
@@ -79,6 +88,7 @@ export interface ITranslationLocales {
 
 export class TranslationGroup extends TranslationItemBase {
   koExpanded: any;
+  koShowHeader: any;
   private itemValues: Array<TranslationItemBase>;
   constructor(
     public name,
@@ -87,29 +97,26 @@ export class TranslationGroup extends TranslationItemBase {
   ) {
     super(name);
     this.koExpanded = ko.observable(false);
+    this.koShowHeader = ko.observable(true);
     this.reset();
   }
   public get items(): Array<TranslationItemBase> {
     return this.itemValues;
   }
   public get locItems(): Array<TranslationItem> {
-    var res = [];
-    for (var i = 0; i < this.items.length; i++) {
-      if (!this.items[i].isGroup) {
-        res.push(this.items[i]);
-      }
+    return this.itemValues.filter((item) => item instanceof TranslationItem) as Array<TranslationItem>;
+  }
+
+  public getItemByName(name: string): TranslationItemBase {
+    for (var i = 0; i < this.itemValues.length; i++) {
+      if (this.itemValues[i].name == name) return this.itemValues[i];
     }
-    return res;
+    return null;
   }
   public get groups(): Array<TranslationGroup> {
-    var res = [];
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].isGroup) {
-        res.push(this.items[i]);
-      }
-    }
-    return res;
+    return this.itemValues.filter((item) => item instanceof TranslationGroup) as Array<TranslationGroup>;
   }
+
   public get isGroup() {
     return true;
   }
@@ -156,55 +163,39 @@ export class TranslationGroup extends TranslationItemBase {
     return false;
   }
   public mergeLocaleWithDefault(loc: string) {
-    for (var i = 0; i < this.itemValues.length; i++) {
-      this.itemValues[i].mergeLocaleWithDefault(loc);
-    }
+    this.itemValues.forEach((item) => item.mergeLocaleWithDefault(loc));
   }
+
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValues();
       return;
     }
     if (!this.obj || !this.obj.getType) return;
-    var properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    var properties = this.getLocalizedProperties(this.obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if (!property.isSerializable && !property.isLocalizable) continue;
-      if (property.isLocalizable) {
-        if (!property.readOnly && property.visible) {
-          var defaultValue = this.getDefaultValue(property);
-          var locStr = <Survey.LocalizableString>(
-            this.obj[property.serializationProperty]
-          );
-          if (!locStr) continue;
-          if (!this.showAllStrings && !defaultValue && locStr.isEmpty) continue;
-          this.itemValues.push(
-            new TranslationItem(
-              property.name,
-              locStr,
-              defaultValue,
-              this.translation,
-              this.obj
-            )
-          );
+      var item = this.createTranslationItem(this.obj, properties[i]);
+      if (!!item) {
+        this.itemValues.push(item);
+      }
+    }
+    properties = this.getArrayProperties(this.obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      var value = this.obj[property.name];
+      //If ItemValue array?
+      if (this.isItemValueArray(value)) {
+        var group = new TranslationGroup(
+          property.name,
+          value,
+          this.translation
+        );
+        if (group.hasItems) {
+          this.itemValues.push(group);
         }
       } else {
-        var value = this.obj[property.name];
-        if (!!value && Array.isArray(value) && value.length > 0) {
-          //If ItemValue array?
-          if (this.isItemValueArray(value)) {
-            var group = new TranslationGroup(
-              property.name,
-              value,
-              this.translation
-            );
-            if (group.hasItems) {
-              this.itemValues.push(group);
-            }
-          } else {
-            this.createGroups(value, property);
-          }
-        }
+        this.createGroups(value, property);
       }
     }
     this.itemValues.sort(function(
@@ -215,22 +206,71 @@ export class TranslationGroup extends TranslationItemBase {
       if (!b.name) return 1;
       return a.name.localeCompare(b.name);
     });
+    if (this.items.length == 1 && this.groups.length == 1) {
+      var gr = this.groups[0];
+      gr.koExpanded(true);
+      if (gr.obj.getType() == "page") {
+        gr.koShowHeader(false);
+      }
+    }
   }
-  private getDefaultValue(property: Survey.JsonObjectProperty): string {
+  private getLocalizedProperties(obj: any): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      if (!property.isSerializable || !property.isLocalizable) continue;
+      if (property.readOnly || !property.visible) continue;
+      res.push(property);
+    }
+    return res;
+  }
+  private getArrayProperties(obj: any): Array<Survey.JsonObjectProperty> {
+    var res = [];
+    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    for (var i = 0; i < properties.length; i++) {
+      var property = properties[i];
+      var value = obj[property.name];
+      if (!!value && Array.isArray(value) && value.length > 0) {
+        res.push(property);
+      }
+    }
+    return res;
+  }
+  private createTranslationItem(
+    obj: any,
+    property: Survey.JsonObjectProperty
+  ): TranslationItem {
+    var defaultValue = this.getDefaultValue(obj, property);
+    var locStr = <Survey.LocalizableString>obj[property.serializationProperty];
+    if (!locStr) return null;
+    if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    return new TranslationItem(
+      property.name,
+      locStr,
+      defaultValue,
+      this.translation,
+      obj
+    );
+  }
+  private getDefaultValue(
+    obj: any,
+    property: Survey.JsonObjectProperty
+  ): string {
     if (
       property.name == "title" &&
       property.isLocalizable &&
       !!property.serializationProperty
     ) {
       var locStr = <Survey.LocalizableString>(
-        this.obj[property.serializationProperty]
+        obj[property.serializationProperty]
       );
       if (
         !!locStr &&
-        this.obj.getType() != "page" &&
+        obj.getType() != "page" &&
         (!!locStr.onGetTextCallback || locStr["onRenderedHtmlCallback"])
       )
-        return this.obj["name"];
+        return obj["name"];
     }
     return "";
   }
@@ -265,16 +305,30 @@ export class TranslationGroup extends TranslationItemBase {
       var val = this.obj[i];
       var canAdd =
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
-      if (canAdd) {
-        this.itemValues.push(
-          new TranslationItem(
-            val.value,
-            val.locText,
-            val.value,
-            this.translation,
-            val
-          )
-        );
+      if (!canAdd) continue;
+      var item = new TranslationItem(
+        val.value,
+        val.locText,
+        val.value,
+        this.translation,
+        val
+      );
+      this.itemValues.push(item);
+      this.addCustomPropertiesForItemValue(this.obj[i], item);
+    }
+  }
+  private addCustomPropertiesForItemValue(
+    itemValue: any,
+    textItem: TranslationItem
+  ) {
+    var locProperties = this.getLocalizedProperties(itemValue);
+    for (var i = 0; i < locProperties.length; i++) {
+      if (locProperties[i].name == "text") continue;
+      var item = this.createTranslationItem(itemValue, locProperties[i]);
+      if (!!item) {
+        item.customText = textItem.text + " (" + item.localizableName + ")";
+        item.name = itemValue.value + "." + item.name;
+        this.itemValues.push(item);
       }
     }
   }
@@ -291,8 +345,8 @@ export class Translation implements ITranslationLocales {
   public koFilteredPage: any;
   public koFilteredPages: any;
   public koIsEmpty: any;
-  public koExportToSCVFile: any;
-  public koImportFromSCVFile: any;
+  public koExportToCSVFile: any;
+  public koImportFromCSVFile: any;
   public koCanMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefaultText: any;
@@ -311,8 +365,8 @@ export class Translation implements ITranslationLocales {
       {
         locale: "",
         koVisible: ko.observable(true),
-        koEnabled: ko.observable(true)
-      }
+        koEnabled: ko.observable(true),
+      },
     ]);
     this.koRoot = ko.observable(null);
     this.koShowAllStrings = ko.observable(showAllStrings);
@@ -331,8 +385,8 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPages = ko.observableArray([
       {
         value: null,
-        text: this.showAllPagesText
-      }
+        text: this.showAllPagesText,
+      },
     ]);
     var self = this;
     this.koSelectedLanguageToAdd.subscribe(function(newValue) {
@@ -346,12 +400,12 @@ export class Translation implements ITranslationLocales {
     this.koFilteredPage.subscribe(function(newValue) {
       self.reset();
     });
-    this.koExportToSCVFile = function() {
+    this.koExportToCSVFile = function() {
       self.exportToSCVFile("survey_translation.csv");
     };
-    this.koImportFromSCVFile = function(el) {
+    this.koImportFromCSVFile = function(el) {
       if (el.files.length < 1) return;
-      self.importFromSCVFile(el.files[0]);
+      self.importFromCSVFile(el.files[0]);
       el.value = "";
     };
     this.koMergeLocaleWithDefault = function() {
@@ -471,51 +525,57 @@ export class Translation implements ITranslationLocales {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
   public exportToCSV(): string {
-    var res = [];
-    var title = "";
-    var visLocales = this.getVisibleLocales();
-    for (var i = 0; i < visLocales.length; i++) {
-      title +=
-        Translation.csvDelimiter +
-        (!!visLocales[i] ? visLocales[i] : "default");
+    let res = [];
+    let headerRow = [];
+    let visibleLocales = this.getVisibleLocales();
+    headerRow.push('description ↓ - language →');
+    for (let i = 0; i < visibleLocales.length; i++) {
+      headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
-    res.push(title);
-    var itemsHash = {};
+    res.push(headerRow);
+    let itemsHash = <Survey.HashTable<TranslationItem>>{};
     this.fillItemsHash("", this.root, itemsHash);
-    for (var key in itemsHash) {
-      var line = key;
-      var item = <TranslationItem>itemsHash[key];
-      for (var i = 0; i < visLocales.length; i++) {
-        var val = item.locString.getLocaleText(visLocales[i]);
-        if (!val && i == 0) {
-          val = item.defaultValue;
-        }
-        line += Translation.csvDelimiter + val;
+    for (let key in itemsHash) {
+      let row = [key];
+      let item = itemsHash[key];
+      for (let i = 0; i < visibleLocales.length; i++) {
+        let val = item.locString.getLocaleText(visibleLocales[i]);
+        row.push(!val && i == 0 ? item.defaultValue : val);
       }
-      res.push(line);
+      res.push(row);
     }
-    return res.join(Translation.newLineDelimiter);
+    return unparse(res, {
+      quotes: true,
+      quoteChar: '"',
+      escapeChar: '"',
+      delimiter: Translation.csvDelimiter,
+      header: true,
+      newline: Translation.newLineDelimiter,
+      skipEmptyLines: false, //or 'greedy',
+      columns: null //or array of strings
+    });
   }
-  public importFromCSV(str: string) {
-    if (!str) return;
-    var lines = str.split(Translation.newLineDelimiter);
-    if (lines.length < 2) return;
-    var locales = this.readLocales(lines[0]);
-    var translation = new Translation(this.survey, true);
-    var itemsHash = [];
-    this.fillItemsHash("", translation.root, itemsHash);
-    for (var i = 1; i < lines.length; i++) {
-      if (!lines[i]) continue;
-      var vals = lines[i].split(Translation.csvDelimiter);
-      var name = vals[0].trim();
-      if (!name) continue;
-      var item = itemsHash[name];
-      if (!item) continue;
-      this.updateItemWithStrings(item, vals, locales);
+
+  public importFromNestedArray(rows: string[][]) {
+    var self = this;
+    let locales = rows.shift().slice(1);
+    if (locales[0] === 'default') {
+      locales[0] = "";
     }
+    let translation = new Translation(this.survey, true);
+    let itemsHash = <Survey.HashTable<TranslationItem>>{};
+    this.fillItemsHash("", translation.root, itemsHash);
+    rows.forEach((row) => {
+      let name = row.shift().trim();
+      if (!name) return;
+      let item = itemsHash[name];
+      if (!item) return;
+      self.updateItemWithStrings(item, row, locales);
+    });
     this.reset();
     if (this.importFinishedCallback) this.importFinishedCallback();
   }
+
   public exportToSCVFile(fileName: string) {
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
@@ -530,13 +590,12 @@ export class Translation implements ITranslationLocales {
       document.body.removeChild(elem);
     }
   }
-  public importFromSCVFile(file: File) {
-    var fileReader = new FileReader();
-    var self = this;
-    fileReader.onload = function(e) {
-      self.importFromCSV(<string>fileReader.result);
-    };
-    fileReader.readAsText(file);
+  public importFromCSVFile(file: File) {
+    parse(file, {
+        "complete": function(results, file) {
+          this.importFromNestedArray(results.data);
+        }
+    });
   }
   public mergeLocaleWithDefault() {
     if (!this.hasLocale(this.defaultLocale)) return;
@@ -545,59 +604,41 @@ export class Translation implements ITranslationLocales {
       {
         locale: "",
         koVisible: ko.observable(true),
-        koEnabled: ko.observable(true)
-      }
+        koEnabled: ko.observable(true),
+      },
     ]);
     this.reset();
   }
+
+  /**
+   * Update a translation item with given values
+   */
   private updateItemWithStrings(
     item: TranslationItem,
     values: Array<string>,
     locales: Array<string>
   ) {
-    for (var i = 0; i < values.length - 1 && i < locales.length; i++) {
-      var val = values[i + 1].trim();
+    for (let i = 0; i < values.length && i < locales.length; i++) {
+      let val = values[i].trim();
       if (!val) continue;
       item.koValue(locales[i])(val);
     }
   }
+
   private getVisibleLocales(): Array<string> {
-    var res = [];
-    var locales = this.koLocales();
-    for (var i = 0; i < locales.length; i++) {
-      if (locales[i].koVisible()) {
-        res.push(locales[i].locale);
-      }
-    }
-    return res;
+    return this.koLocales()
+        .filter(locale => locale.koVisible())
+        .map(locale => locale.locale);
   }
-  private readLocales(str: string): Array<string> {
-    var res = [];
-    if (!str) return res;
-    var locs = str.split(Translation.csvDelimiter);
-    for (var i = 1; i < locs.length; i++) {
-      var loc = locs[i].trim();
-      if (loc == "default") loc = "";
-      res.push(loc);
-    }
-    return res;
-  }
+
   private fillItemsHash(
     parentName: string,
     group: TranslationGroup,
-    itemsHash: any
+    itemsHash: Survey.HashTable<TranslationItem>
   ) {
-    var name = parentName;
-    if (!!name) name += ".";
-    name += group.name;
-    var items = group.locItems;
-    for (var i = 0; i < items.length; i++) {
-      itemsHash[name + "." + items[i].name] = items[i];
-    }
-    var groups = group.groups;
-    for (var i = 0; i < groups.length; i++) {
-      this.fillItemsHash(name, groups[i], itemsHash);
-    }
+    let name = parentName ? parentName + '.' + group.name : group.name;
+    group.locItems.forEach((item) => {itemsHash[name + "." + item.name] = item});
+    group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();
@@ -608,7 +649,7 @@ export class Translation implements ITranslationLocales {
       locales.push({
         locale: loc,
         koVisible: ko.observable(enabled),
-        koEnabled: ko.observable(enabled)
+        koEnabled: ko.observable(enabled),
       });
     }
     this.koLocales(locales);

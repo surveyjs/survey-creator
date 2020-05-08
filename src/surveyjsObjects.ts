@@ -6,7 +6,9 @@ import { StylesManager } from "./stylesmanager";
 
 export interface ISurveyObjectMenuItem {
   name: string;
-  text: string;
+  text: string | (() => string);
+  title?: string;
+  visible?: boolean | (() => boolean);
   onClick: (obj: Survey.Base) => any;
   icon?: string | (() => string);
   hasTitle?: boolean;
@@ -49,6 +51,10 @@ export class SurveyForDesigner extends Survey.Survey {
     };
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
     this.onUpdatePanelCssClasses.add(onUpdateQuestionCssClasses);
+    this.onUpdatePageCssClasses.add(onUpdateQuestionCssClasses);
+    var surveyCss = this.css;
+    addAdornerMarkerClasses(surveyCss, this);
+    this.css = surveyCss;
   }
   public updateElementAllowingOptions(obj: Survey.Base) {
     if (this.onUpdateElementAllowingOptions && obj["allowingOptions"]) {
@@ -82,7 +88,7 @@ export class SurveyForDesigner extends Survey.Survey {
     }
     this.onSelectedElementChanged.fire(this, {
       oldElement: oldValue,
-      newElement: value
+      newElement: value,
     });
   }
   public doElementDoubleClick(obj: Survey.Base) {
@@ -91,16 +97,49 @@ export class SurveyForDesigner extends Survey.Survey {
   public getEditorLocString(value: string): string {
     return editorLocalization.getString(value);
   }
+  private get _hasLogo() {
+    return !!this.logo && this.logoPosition !== "none";
+  }
+  public get _isLogoBefore() {
+    return (
+      this._hasLogo &&
+      (this.logoPosition === "left" || this.logoPosition === "top")
+    );
+  }
+  public get _isLogoAfter() {
+    return (
+      this._hasLogo &&
+      (this.logoPosition === "right" || this.logoPosition === "bottom")
+    );
+  }
+  public get hasLogo() {
+    return (this.isReadOnly() && this._hasLogo) || !this.isReadOnly();
+  }
+  public get isLogoBefore() {
+    return (this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly();
+  }
+  public get isLogoAfter() {
+    return (this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly();
+  }
+  public get isLogoImageChoosen() {
+    return this.locLogo["koRenderedHtml"]();
+  }
+  public koShowHeader = ko.observable(true);
+  public isReadOnly = ko.observable(false);
 }
 
 function getSurvey(el: any): any {
   if (!el) return null;
+  if (typeof el.getType === "function" && el.getType() === "survey") {
+    return el;
+  }
   var res = el["survey"];
   if (res) return res;
   return el["data"];
 }
 
 function panelBaseOnCreating(self: any) {
+  if (self.disableDesignActions === true) return;
   self.dragEnterCounter = 0;
   self.emptyElement = null;
   self.rowCount = ko.computed(function() {
@@ -115,6 +154,7 @@ function panelBaseOnCreating(self: any) {
 }
 
 function elementOnCreating(surveyElement: any) {
+  if (surveyElement.disableDesignActions === true) return;
   surveyElement.allowingOptions = {
     allowDelete: true,
     allowEdit: true,
@@ -123,7 +163,7 @@ function elementOnCreating(surveyElement: any) {
     allowDragging: true,
     allowChangeType: true,
     allowShowHideTitle: true,
-    allowChangeRequired: true
+    allowChangeRequired: true,
   };
   surveyElement.dragDropHelperValue = null;
   surveyElement.dragDropHelper = function() {
@@ -159,33 +199,24 @@ function elementOnCreating(surveyElement: any) {
   });
 }
 
-function createQuestionDesignItem(obj: any, item: any): HTMLLIElement {
-  var res = <HTMLLIElement>document.createElement("li");
-  var btn = document.createElement("button");
-  btn.innerText = item.text;
-  var onClick = item.onClick;
-  btn.onclick = function() {
-    onClick(obj, item);
-  };
-  btn.className = "btn btn-primary btn-sm btn-xs";
-  res.appendChild(btn);
-  return res;
-}
-
-export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner) {
+export function createAfterRenderHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
   return function elementOnAfterRendering(
     domElement: any,
     surveyElement: any,
     isPanel: boolean,
     disable: boolean
   ) {
+    if (surveyElement.disableDesignActions === true) return;
     surveyElement.renderedElement = domElement;
     surveyElement.renderedElement.classList.add("svd_question");
     if (StylesManager.currentTheme() === "bootstrap") {
       surveyElement.renderedElement.classList.add("svd-dark-bg-color");
     }
     surveyElement.renderedElement.classList.add("svd_q_design_border");
-  
+
     var isRowLayout =
       !surveyElement.getLayoutType || surveyElement.getLayoutType() == "row";
     var opt = surveyElement.allowingOptions;
@@ -194,7 +225,7 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
     opt.allowChangeType = opt.allowChangeType && isRowLayout;
     opt.allowShowHideTitle = opt.allowShowHideTitle && isRowLayout;
     opt.allowChangeRequired = opt.allowChangeRequired && isRowLayout;
-  
+
     getSurvey(surveyElement).updateElementAllowingOptions(surveyElement);
     if (surveyElement.koIsSelected()) {
       surveyElement.renderedElement.classList.add(
@@ -202,12 +233,24 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
         "svd-main-border-color"
       );
     }
-
+    domElement.setAttribute(
+      "aria-label",
+      surveyElement.title + " " + surveyElement.getType()
+    );
+    domElement.tabIndex = "0";
+    domElement.addEventListener("keyup", function(ev) {
+      var char = ev.which || ev.keyCode;
+      if (char === 13 || char === 27) {
+        domElement.click();
+      }
+    });
     domElement.onclick = function(e) {
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         if (surveyElement.parent) {
+          surveyElement.selectedOnClick = true;
           getSurvey(surveyElement)["selectedElement"] = surveyElement;
+          surveyElement.selectedOnClick = false;
         }
       }
     };
@@ -220,7 +263,10 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
       }
     }
 
-    if(creator.readOnly) return;
+    if (creator.readOnly) {
+      addAdorner(domElement, surveyElement);
+      return;
+    }
 
     surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
     domElement.tabindex = "0";
@@ -245,18 +291,50 @@ export function createAfterRenderHandler(creator: any, survey: SurveyForDesigner
     domElement.ondblclick = function(e) {
       getSurvey(surveyElement).doElementDoubleClick(surveyElement);
     };
-    var setTabIndex = element => {
+    var setTabIndex = (element) => {
       element.tabIndex = -1;
     };
-    ["input", "select", "textarea"].forEach(sel => {
+    ["input", "select", "textarea"].forEach((sel) => {
       var elements = domElement.querySelectorAll(sel);
       for (var i = 0; i < elements.length; i++) {
         setTabIndex(elements[i]);
       }
     });
-  
+
     addAdorner(domElement, surveyElement);
-  }
+  };
+}
+
+export function createAfterRenderPageHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
+  return function elementOnAfterRendering(domElement: any, page: any) {
+    page.renderedElement = domElement;
+    domElement.classList.add("svd_page");
+    domElement.onclick = function(e) {
+      if (!e["markEvent"]) {
+        e["markEvent"] = true;
+        getSurvey(page)["selectedElement"] = page;
+      }
+    };
+
+    domElement.ondblclick = function(e) {
+      getSurvey(page).doElementDoubleClick(page);
+    };
+
+    addAdorner(domElement, page);
+  };
+}
+
+export function createAfterRenderHeaderHandler(
+  creator: any,
+  survey: SurveyForDesigner
+) {
+  return function elementOnAfterRendering(domElement: any, survey: any) {
+    domElement.classList.add("svd_survey_header");
+    addAdorner(domElement, survey);
+  };
 }
 
 var adornersConfig: { [index: string]: any[] } = {};
@@ -269,7 +347,7 @@ export function registerAdorner(name, adorner) {
 }
 export function removeAdorners(names: string[] = undefined) {
   if (names !== undefined) {
-    (names || []).forEach(name => delete adornersConfig[name]);
+    (names || []).forEach((name) => delete adornersConfig[name]);
   } else {
     adornersConfig = {};
   }
@@ -277,15 +355,16 @@ export function removeAdorners(names: string[] = undefined) {
 
 function onUpdateQuestionCssClasses(survey, options) {
   var classes = options.panel ? options.cssClasses.panel : options.cssClasses;
-  Object.keys(adornersConfig).forEach(element => {
-    adornersConfig[element].forEach(adorner => {
-      var classesElementName = adorner.getElementName(
-        options.question || options.panel
-      );
-      var adornerMarkerClass = adorner.getMarkerClass(
-        options.question || options.panel
-      );
+  classes = options.page ? options.cssClasses.page : classes;
+  var surveyElement = options.question || options.panel || options.page;
+  addAdornerMarkerClasses(classes, surveyElement);
+}
 
+export function addAdornerMarkerClasses(classes: any, surveyElement: any) {
+  Object.keys(adornersConfig).forEach((element) => {
+    adornersConfig[element].forEach((adorner) => {
+      var classesElementName = adorner.getElementName(surveyElement);
+      var adornerMarkerClass = adorner.getMarkerClass(surveyElement);
       classes[classesElementName] = applyAdornerClass(
         classes[classesElementName],
         adornerMarkerClass
@@ -314,10 +393,20 @@ function filterNestedQuestions(rootQuestionNode, elements) {
   }
   return targetElements;
 }
+function filterPageElements(elements) {
+  var targetElements = [];
+  for (var i = 0; i < elements.length; i++) {
+    var questionElement = findParentNode("svd_question", elements[i]);
+    if (questionElement === null) {
+      targetElements.push(elements[i]);
+    }
+  }
+  return targetElements;
+}
 
 function addAdorner(node, model) {
-  Object.keys(adornersConfig).forEach(element => {
-    adornersConfig[element].forEach(adorner => {
+  Object.keys(adornersConfig).forEach((element) => {
+    adornersConfig[element].forEach((adorner) => {
       var elementClass = adorner.getMarkerClass(model);
       if (!!elementClass) {
         var elements = node.querySelectorAll(
@@ -331,7 +420,12 @@ function addAdorner(node, model) {
         if (node.className.split(" ").indexOf(elementClass) !== -1) {
           elements.unshift(node);
         }
-        elements = filterNestedQuestions(node, elements);
+        if (model.getType() !== "page" && model.getType() !== "survey") {
+          elements = filterNestedQuestions(node, elements);
+        }
+        if (model.getType() === "page") {
+          elements = filterPageElements(elements);
+        }
         if (
           elements.length === 0 &&
           node.className.indexOf(elementClass) !== -1
@@ -339,7 +433,11 @@ function addAdorner(node, model) {
           elements = [node];
         }
         if (elements.length > 0) {
-          adorner.afterRender(elements, model, getSurvey(model).getEditor());
+          var editor = getSurvey(model).getEditor();
+          if (editor.readOnly)
+            adorner.renderReadOnly &&
+              adorner.renderReadOnly(elements, model, editor);
+          else adorner.afterRender(elements, model, editor);
         }
       }
     });
@@ -417,8 +515,8 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function() {
     "hasComment",
     "hasNone",
     "hasSelectAll",
-    "colCount"
-  ].forEach(propertyName =>
+    "colCount",
+  ].forEach((propertyName) =>
     this.question.registerFunctionOnPropertyValueChanged(
       propertyName,
       updateTriggerFunction

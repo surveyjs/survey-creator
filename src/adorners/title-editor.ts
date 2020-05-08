@@ -4,13 +4,20 @@ import { editorLocalization } from "../editorLocalization";
 
 import "./title-editor.scss";
 import * as Survey from "survey-knockout";
+import { SurveyCreator } from "../editor";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
-const FRIENDLY_PADDING = 36;
+const FRIENDLY_PADDING = 42;
 function resizeInput(target) {
+  if (!target.style) return;
   let computedStyle = window.getComputedStyle(target);
   target.style.width =
-    getTextWidth(target.value, computedStyle.font) + FRIENDLY_PADDING + "px";
+    getTextWidth(
+      target.value,
+      computedStyle.fontSize + " " + computedStyle.fontFamily
+    ) +
+    FRIENDLY_PADDING +
+    "px";
 }
 
 /**
@@ -33,12 +40,15 @@ function getTextWidth(text, font) {
 }
 
 export class TitleInplaceEditor {
+  private _valueSubscription: ko.Computed;
+  property: Survey.JsonObjectProperty;
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
   protected forNeibours(func: (el: HTMLElement) => void) {
     if (
+      !this.rootElement ||
       !this.rootElement.parentElement ||
       !this.rootElement.parentElement.parentElement
     )
@@ -52,45 +62,126 @@ export class TitleInplaceEditor {
     }
   }
 
-  constructor(name: string, protected rootElement) {
-    this.editingName(name);
-    this.prevName(name);
+  private onValidateSelectedElement = (creator, options) => {
+    if (this.hasErrors()) {
+      options.errors.push(this.error());
+    }
+  };
+
+  getInputElement() {
+    return this.rootElement.getElementsByTagName("input")[0];
+  }
+
+  constructor(
+    protected target: any,
+    protected name: string,
+    protected rootElement,
+    public placeholder: string = "",
+    public editor: SurveyCreator
+  ) {
+    if (typeof target.getType === "function") {
+      this.property = Survey.Serializer.findProperty(target.getType(), name);
+    }
+
+    this._valueSubscription = ko.computed(() => {
+      //TO REVIEW THIS CRUTCH
+      if (
+        this.property.serializationProperty !== this.property.name &&
+        !!target[this.property.serializationProperty]
+      ) {
+        ko.unwrap(target[this.property.serializationProperty].koRenderedHtml);
+      }
+      this.prevName(ko.unwrap(target[name]));
+      this.editingName(ko.unwrap(target[name]));
+    });
+
+    if (!!editor && !!editor.onValidateSelectedElement) {
+      editor.onValidateSelectedElement.add(this.onValidateSelectedElement);
+    }
+
     this.forNeibours(
-      element =>
-        (element.onclick = e => {
+      (element) =>
+        (element.onclick = (e) => {
           this.startEdit(this, e);
           e.preventDefault();
         })
     );
   }
 
-  valueChanged: (newVal: any) => void;
+  get maxLength() {
+    return (!!this.property && this.property.maxLength) || "";
+  }
+
+  valueChanged: (newVal: any) => string;
 
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }
 
+  protected updatePrevName() {
+    this.prevName(this.target[this.name]);
+  }
+
+  error = ko.observable("");
+  public hasErrors(): boolean {
+    var errorText = "";
+    var newValue = this.editingName();
+    if (this.property.isRequired && !newValue) {
+      errorText = editorLocalization.getString("pe.propertyIsEmpty");
+    }
+    if (
+      !errorText &&
+      !!this.editor &&
+      !!this.editor.onGetErrorTextOnValidationCallback
+    ) {
+      errorText = this.editor.onGetErrorTextOnValidationCallback(
+        this.property.name,
+        this.target,
+        newValue
+      );
+    }
+    this.error(errorText);
+    return !!errorText;
+  }
+
   hideEditor = () => {
     this.isEditing(false);
-    this.forNeibours(element => {
+    this.forNeibours((element) => {
       element.style.display = element.dataset["sjsOldDisplay"];
     });
   };
-  startEdit = (model, event) => {
+  startEdit = (model: TitleInplaceEditor, event) => {
+    this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
-    this.forNeibours(element => {
+    this.forNeibours((element) => {
       element.dataset["sjsOldDisplay"] = element.style.display;
       element.style.display = "none";
     });
-    var inputElem = this.rootElement.getElementsByTagName("input")[0];
-    inputElem.focus();
-    resizeInput(inputElem);
+    var inputElement = this.getInputElement();
+    inputElement.onfocus = function() {
+      const callback = model.editor.onTitleInplaceEditorStartEdit;
+      if (!!callback) {
+        callback(inputElement);
+        return;
+      }
+      this.select();
+    };
+    resizeInput(inputElement);
+    setTimeout(function() {
+      inputElement.focus();
+    }, 10);
   };
   postEdit = () => {
+    this.error("");
     if (this.prevName() !== this.editingName()) {
+      if (this.hasErrors()) {
+        return;
+      }
+      if (!!this.valueChanged) {
+        this.valueChanged(this.editingName());
+      }
       this.prevName(this.editingName());
-      !!this.valueChanged && this.valueChanged(this.editingName());
     }
     this.hideEditor();
   };
@@ -102,68 +193,102 @@ export class TitleInplaceEditor {
     resizeInput(event.target);
     if (event.keyCode === 13) {
       this.postEdit();
+      event.stopPropagation();
+      return false;
     } else if (event.keyCode === 27) {
       this.cancelEdit();
     }
   };
+
+  dispose() {
+    this._valueSubscription.dispose();
+    if (!!this.editor && !!this.editor.onValidateSelectedElement) {
+      this.editor.onValidateSelectedElement.remove(
+        this.onValidateSelectedElement
+      );
+    }
+  }
 }
 
 ko.components.register("title-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new TitleInplaceEditor(
-        params.model[params.name],
-        componentInfo.element
+        params.model,
+        params.name,
+        componentInfo.element,
+        params.placeholder,
+        params.editor
       );
-      ko.computed(() => {
-        model.prevName(ko.unwrap(params.model[params.name]));
-      });
-      var property = Survey.Serializer.findProperty(
-        params.model.getType(),
-        params.name
-      );
-      model.valueChanged = newValue => {
+      model.valueChanged = (newValue) => {
         var options = {
-          propertyName: property.name,
+          propertyName: model.property.name,
           obj: params.model,
           value: newValue,
           newValue: null,
-          doValidation: false
+          doValidation: false,
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
+        var oldValue = params.model[params.name];
         params.model[params.name] = newValue;
-        params.editor.onPropertyValueChanged(property, params.model, newValue);
+        params.editor.onPropertyChanged(params.model, model.property, oldValue);
+        params.editor.onPropertyValueChanged(
+          model.property,
+          params.model,
+          newValue
+        );
+        return "";
       };
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.valueChanged = undefined;
+        model.dispose();
+      });
+
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 export var titleAdorner = {
-  getMarkerClass: model => {
+  surveyTitleEditable: true,
+  pageTitleEditable: true,
+  getMarkerClass: (model) => {
+    if (
+      typeof model.getType === "function" &&
+      ((model.getType() === "page" && !titleAdorner.pageTitleEditable) ||
+        (model.getType() === "survey" && !titleAdorner.surveyTitleEditable))
+    ) {
+      return "";
+    }
     return "title_editable";
   },
-  getElementName: model => "title",
+  getElementName: (model) => "title",
   afterRender: (elements: HTMLElement[], model, editor) => {
+    var placeholder = "";
+    if (model.getType() === "survey") {
+      placeholder = editorLocalization.getString("pe.surveyTitlePlaceholder");
+    }
+    if (model.getType() === "page") {
+      placeholder = editorLocalization.getString("pe.pageTitlePlaceholder");
+    }
     var decoration = document.createElement("span");
-    decoration.innerHTML =
-      "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
+    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "title", decoration);
-  }
+  },
 };
-
 registerAdorner("title", titleAdorner);
 
 export var itemTitleAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.items ? "item_title_editable title_editable" : "";
   },
-  getElementName: model => "itemTitle",
+  getElementName: (model) => "itemTitle",
   afterRender: (
     elements: HTMLElement[],
     model: Survey.QuestionMultipleText,
@@ -183,7 +308,33 @@ export var itemTitleAdorner = {
         model.items[i]
       );
     }
-  }
+  },
 };
-
 registerAdorner("item-title", itemTitleAdorner);
+
+export var descriptionAdorner = {
+  getMarkerClass: (model) => {
+    return "description_editable";
+  },
+  getElementName: (model) => "description",
+  afterRender: (elements: HTMLElement[], model, editor) => {
+    var placeholder = "";
+    if (model.getType() === "survey") {
+      placeholder = editorLocalization.getString(
+        "pe.surveyDescriptionPlaceholder"
+      );
+    }
+    if (model.getType() === "page") {
+      placeholder = editorLocalization.getString(
+        "pe.pageDescriptionPlaceholder"
+      );
+    }
+    var decoration = document.createElement("span");
+    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    elements[0].appendChild(decoration);
+    ko.applyBindings({ model: model, editor: editor }, decoration);
+    ko.tasks.runEarly();
+    editor.onAdornerRenderedCallback(model, "description", decoration);
+  },
+};
+registerAdorner("description", descriptionAdorner);

@@ -76,7 +76,7 @@ export function focusFirstControl(renderedElements: HTMLElement[]) {
       if (elements.length > 0) {
         var element = elements[0];
         if (element.tagName.toLowerCase() !== "a") {
-          setTimeout(() => element.focus({ preventScroll: true }), 10);
+          element.focus({ preventScroll: true });
           break;
         }
       }
@@ -107,10 +107,6 @@ ko.bindingHandlers["clickNoFocus"] = {
   init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
     element.onclick = ev => {
       valueAccessor().call(viewModel, viewModel, ev);
-      setTimeout(() => {
-        element.blur();
-      }, 1);
-      return true;
     };
   }
 };

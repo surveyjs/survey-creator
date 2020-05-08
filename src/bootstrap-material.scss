@@ -47,7 +47,7 @@ $primary-border-color-m: #e7eaec;
     margin-bottom: 10px;
   }
 
-  .propertyeditor-condition {
+  .svd-propertyeditor-condition {
     .btn-primary {
       margin-bottom: 20px;
     }
@@ -90,16 +90,6 @@ $primary-border-color-m: #e7eaec;
       }
     }
   }
-  .propertyeditor-triggers {
-    .form-control {
-      height: initial;
-
-      &.svd_custom_select:before {
-        top: 0px;
-      }
-    }
-  }
-
   .modal-content {
     @media (min-width: 768px) {
       .form-inline .checkbox input[type="checkbox"],

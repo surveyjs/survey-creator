@@ -8,13 +8,14 @@ export var enStrings = {
     externalHelpLink: "Watch and learn how to create surveys",
     externalHelpLinkUrl:
       "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    dropQuestion: "Please drop a question here from the Toolbox on the left.",
+    dropQuestion: "Please drop a question here from the Toolbox.",
+    addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element"
+    drag: "Drag element",
   },
   //questionTypes
   qt: {
@@ -22,6 +23,7 @@ export var enStrings = {
     checkbox: "Checkbox",
     comment: "Comment",
     imagepicker: "Image picker",
+    image: "Image",
     dropdown: "Dropdown",
     file: "File",
     html: "Html",
@@ -36,17 +38,21 @@ export var enStrings = {
     text: "Single Input",
     boolean: "Boolean",
     expression: "Expression (read-only)",
-    flowpanel: "Flow Panel"
+    signaturepad: "Signature pad",
+    flowpanel: "Flow Panel",
   },
   //Strings in Editor
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Survey",
     settings: "Survey Settings",
-    opjectPropertiesHeader: "Advanced",
-    showObjectProperties: "Show Object Properties",
-    hideObjectProperties: "Hide Object Properties",
-    editSurvey: "Edit Survey",
+    settingsTooltip: "Open survey settings",
+    //opjectPropertiesHeader: "Advanced",
+    //showObjectProperties: "Show Object Properties",
+    //hideObjectProperties: "Hide Object Properties",
+    showPanel: "Show Panel",
+    hidePanel: "Hide Panel",
+    //editSurvey: "Edit Survey",
     addNewPage: "Add New Page",
     moveRight: "Scroll to the Right",
     moveLeft: "Scroll to the Left",
@@ -60,21 +66,26 @@ export var enStrings = {
     testSurvey: "Test Survey",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
+    navigateToMsg: "You had to navigate to:",
     logic: "Survey Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
     saveSurvey: "Save Survey",
+    saveSurveyTooltip: "Save Survey",
     designer: "Survey Designer",
     jsonEditor: "JSON Editor",
     undo: "Undo",
     redo: "Redo",
+    undoTooltip: "Undo last change",
+    redoTooltip: "Redo the change",
     options: "Options",
     generateValidJSON: "Generate Valid JSON",
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
+    "property-grid": "Properties",
     toolboxGeneralCategory: "General",
-    delSelObject: "Delete selected object",
-    editSelObject: "Edit selected object",
+    //delSelObject: "Delete selected object",
+    //editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Result: ",
     surveyResultsTable: "As Table",
@@ -98,7 +109,7 @@ export var enStrings = {
     italic: "Italic",
     underline: "Underline",
     fpAddQuestion: "Add question...",
-    completedHtmlOnConditionItemText: "Show if:",
+    //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
       page_visibilityName: "Page visibility",
@@ -155,21 +166,27 @@ export var enStrings = {
       completedHtmlOnConditionText:
         "Show custom text for the 'Thank you page'.",
 
-      expressionEditorTitle: "Setup the logic expression",
+      conditions: "Condition(s)",
+      actions: "Action(s)",
+      expressionEditorTitle: "Define condition(s)",
+      actionsEditorTitle: "Define action(s)",
 
-      deleteOperation: "Delete operation",
-      addNewOperation: "Add New Operation(s)",
+      deleteAction: "Delete action",
+      addNewAction: "Add new action",
+      selectedActionCaption: "Select an action to add...",
 
       expressionInvalid:
         "The logic expression is empty or invalid. Please correct it.",
-      noOperationError: "Please, add at least one operation.",
-      operationInvalid: "Please, fix problems in your operation(s)."
-    }
+      noActionError: "Please, add at least one action.",
+      actionInvalid: "Please, fix problems in your action(s).",
+      expressionSetup: "",
+      actionsSetup: "",
+    },
   },
   //Property names in table headers
-  pel: {
-    isRequired: "Required?"
-  },
+  // pel: {
+  //   isRequired: "Required?"
+  // },
   //Property Editors
   pe: {
     apply: "Apply",
@@ -177,7 +194,8 @@ export var enStrings = {
     save: "Save",
     cancel: "Cancel",
     reset: "Reset",
-    close: "Close",
+    refresh: "Refresh",
+    // close: "Close",
     delete: "Delete",
     add: "Add",
     addNew: "Add New",
@@ -189,35 +207,38 @@ export var enStrings = {
     edit: "Edit",
     back: "Return without saving",
     saveAndBack: "Save and return",
-    itemValueEdit: "Visible If",
+    // itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
+    showChoices: "Show Choices",
     move: "Move",
     empty: "<empty>",
-    notEmpty: "<edit value>",
+    // notEmpty: "<edit value>",
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",
+    conditionActionEmpty: "Please select the action",
     conditionSelectQuestion: "Select question...",
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    conditionButtonAdd: "Add",
-    conditionButtonReplace: "Replace",
-    conditionHelp:
-      "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+    // conditionHelp:
+    //   "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
-    conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
+    // conditionShowMoreUrl:
+    //   "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "Available questions:",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
+    propertyNameIsNotUnique: "Please enter a unique name",
+    listIsEmpty: "Add a new item",
+    expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",
     rowid: "Row ID",
@@ -229,6 +250,12 @@ export var enStrings = {
     path: "Path",
     valueName: "Value name",
     titleName: "Title name",
+    titlePlaceholder: "Input title here",
+    surveyTitlePlaceholder: "Input survey title here",
+    pageTitlePlaceholder: "Input page title here",
+    descriptionPlaceholder: "Enter a description",
+    surveyDescriptionPlaceholder: "Enter a survey description",
+    pageDescriptionPlaceholder: "Enter a page description",
 
     hasOther: "Has other item",
     otherText: "Other item text",
@@ -250,6 +277,7 @@ export var enStrings = {
     requiredErrorText: "Required error text",
     startWithNewLine: "Is start with new line?",
     rows: "Row count",
+    cols: "Column count",
     placeHolder: "Input place holder",
     showPreview: "Is image preview shown?",
     storeDataAsText: "Store file content in JSON result as text",
@@ -275,6 +303,13 @@ export var enStrings = {
     qEditorTitle: "Edit: {0}",
 
     maxLength: "Maximum length",
+
+    buildExpression: "Build",
+    editExpression: "Edit",
+    and: "And",
+    or: "Or",
+    remove: "Remove",
+    addCondition: "Add condition",
 
     //survey
     showTitle: "Show/hide title",
@@ -336,6 +371,18 @@ export var enStrings = {
     totalCurrency: "Total currency",
     totalFormat: "Total format",
 
+    // Header  adorner
+    logoPosition: "Logo position",
+    addLogo: "Add logo...",
+    changeLogo: "Change logo...",
+    logoPositions: {
+      none: "Remove logo",
+      left: "Left",
+      right: "Right",
+      top: "On the top",
+      bottom: "In the bottom",
+    },
+
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -351,6 +398,7 @@ export var enStrings = {
       choicesByUrl: "Choices from Web",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
+      numbering: "Numbering",
       validators: "Validators",
       navigation: "Navigation",
       question: "Question",
@@ -361,7 +409,15 @@ export var enStrings = {
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
       templateTitle: "Template title",
-      totals: "Totals"
+      totals: "Totals",
+      logic: "Logic",
+      layout: "Layout",
+      data: "Data",
+      validation: "Validation",
+      cells: "Cells",
+      showOnCompleted: "Show on Completed",
+      logo: "Logo in Survey Title",
+      others: "Others",
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -369,6 +425,8 @@ export var enStrings = {
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
+    keyboardAdornerTip:
+      "Press enter button to edit item, press delete button to delete item, press control plus arrow up or arrow down to move item",
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible:",
     triggerMakeQuestionsVisible: "Make elements visible:",
@@ -381,7 +439,7 @@ export var enStrings = {
     triggerSetValue: "to: ",
     triggerGotoName: "Go to the question:",
     triggerIsVariable: "Do not put the variable into the survey result.",
-    triggerRunExpressionEmpty: "Please enter a valid expression"
+    triggerRunExpressionEmpty: "Please enter a valid expression",
   },
   //Property values
   pv: {
@@ -415,6 +473,7 @@ export var enStrings = {
     top: "top",
     bottom: "bottom",
     topBottom: "top and bottom",
+    both: "both",
     left: "left",
     color: "color",
     date: "date",
@@ -441,7 +500,7 @@ export var enStrings = {
     page: "page",
     survey: "survey",
     onNextPage: "onNextPage",
-    onValueChanged: "onValueChanged"
+    onValueChanged: "onValueChanged",
   },
   //Operators
   op: {
@@ -456,7 +515,7 @@ export var enStrings = {
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",
-    lessorequal: "less or equals"
+    lessorequal: "less or equals",
   },
   //Embed window
   ew: {
@@ -472,12 +531,12 @@ export var enStrings = {
     loadFromServer: "Load Survey JSON from server",
     titleScript: "Scripts and styles",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript"
+    titleJavaScript: "JavaScript",
   },
   //Test Survey
   ts: {
     selectPage: "Select the page to test it:",
-    showInvisibleElements: "Show invisible elements"
+    showInvisibleElements: "Show invisible elements",
   },
   validators: {
     answercountvalidator: "answer count",
@@ -485,7 +544,7 @@ export var enStrings = {
     expressionvalidator: "expression",
     numericvalidator: "numeric",
     regexvalidator: "regex",
-    textvalidator: "text"
+    textvalidator: "text",
   },
   triggers: {
     completetrigger: "complete survey",
@@ -493,14 +552,14 @@ export var enStrings = {
     copyvaluetrigger: "copy value",
     skiptrigger: "skip to question",
     runexpressiontrigger: "run expression",
-    visibletrigger: "change visibility (deprecated)"
+    visibletrigger: "change visibility (deprecated)",
   },
   //Properties
   p: {
     name: "name",
     title: {
       name: "title",
-      title: "Leave it empty, if it is the same as 'Name'"
+      title: "Leave it empty, if it is the same as 'Name'",
     },
 
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -655,8 +714,8 @@ export var enStrings = {
     hasNone: "hasNone",
     noneText: "noneText",
 
-    text: "text"
-  }
+    text: "text",
+  },
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
 //editorLocalization.locales["en"] = enStrings;

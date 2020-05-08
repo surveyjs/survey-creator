@@ -9,6 +9,14 @@
       "Title": "Add Survey Creator into you Web Page"
     },
     {
+      "Name": "Build-Component-Questions",
+      "Title": "Componets: Simplify and Enrich SurveyJS Creator functionality"
+    },
+    {
+      "Name": "Create-Custom-Widget",
+      "Title": "Create custom widget"
+    },
+    {
       "Name": "BuilderOverview",
       "Title": "Overview",
       "IsHidden": true

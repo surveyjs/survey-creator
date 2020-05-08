@@ -2,12 +2,8 @@
   .svd_toolbox {
     border: none;
     font-size: 1.17em;
-    .svd_toolbox_title {
-      text-transform: uppercase;
-      font-weight: 600;
-      padding-top: 5px;
-      padding-bottom: 10px;
-    }
+    margin-top: 10px;
+
     .svd_toolbox_item {
       padding: 8px;
       border-width: 0;
@@ -17,6 +13,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-right: 5px;
+
       cursor: pointer;
       &:hover {
         background-color: $primary-border-color;

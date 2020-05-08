@@ -1,0 +1,24 @@
+<div class="svda-content">
+  <span class="svda-image-editor">
+    <span
+      class="edit-image-item"
+      data-bind="click: chooseImage, clickBubble: false, attr: { title: getLocString('pe.edit') }"
+    >
+      <svg-icon
+        class="svd-primary-icon"
+        params="iconName: 'icon-inplaceedit', size: 12"
+      ></svg-icon>
+    </span>
+  </span>
+  <!-- ko if: allowDelete -->
+  <span
+    class="svda-delete-item"
+    data-bind="click: deleteImage, attr: { title: getLocString('pe.delete') }"
+  >
+    <svg-icon
+      class="svd-primary-icon"
+      params="iconName: 'icon-inplacedelete', size: 12"
+    ></svg-icon>
+  </span>
+  <!-- /ko -->
+</div>

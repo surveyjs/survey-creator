@@ -1,7 +1,7 @@
-select-items-editor {
+select-items-editor, select-items-display {
   display: none;
 
-  .svda-select-items-editor {
+  .svda-select-items-editor, .svda-select-items-display {
     position: relative;
     pointer-events: all;
 
@@ -27,6 +27,8 @@ select-items-editor {
   }
 }
 
-.svd_q_selected select-items-editor {
-  display: block;
+.svd_q_selected  {
+  select-items-editor, select-items-display {
+    display: block;
+  }
 }

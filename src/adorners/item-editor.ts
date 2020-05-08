@@ -5,7 +5,8 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue, findParentNode } from "../utils/utils";
+import { getNextValue } from "../utils/utils";
+import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
@@ -13,13 +14,48 @@ var templateHtml = require("html-loader?interpolate!val-loader!./item-editor.htm
 
 class ItemInplaceEditor extends TitleInplaceEditor {
   constructor(
+    target: any,
     name: string,
     private question: QuestionSelectBase,
     private item,
     rootElement,
-    private editor: SurveyCreator
+    editor: SurveyCreator
   ) {
-    super(name, rootElement);
+    super(target, name, rootElement, null, editor);
+    rootElement.addEventListener("keydown", (event) => {
+      if (event.keyCode == 38 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) -
+            1 +
+            this.question.choices.length) %
+            this.question.choices.length
+        );
+        event.stopPropagation();
+        return false;
+      }
+      if (event.keyCode == 40 && event.ctrlKey) {
+        SurveyHelper.moveItemInArray(
+          this.question.choices,
+          this.item,
+          (this.question.choices.indexOf(this.item) + 1) %
+            this.question.choices.length
+        );
+        event.stopPropagation();
+        return false;
+      }
+    });
+    rootElement.addEventListener("keyup", (event) => {
+      if (event.keyCode === 13) {
+        this.startEdit(this, event);
+        return;
+      }
+      if (event.keyCode === 46 && question.choices.length != 1) {
+        this.deleteItem(this, event);
+        return;
+      }
+    });
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
@@ -53,7 +89,8 @@ ko.components.register("item-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var model = new ItemInplaceEditor(
-        params.target[params.name],
+        params.target,
+        params.name,
         params.question,
         params.item,
         componentInfo.element,
@@ -63,13 +100,13 @@ ko.components.register("item-editor", {
         params.target.getType(),
         params.name
       );
-      model.valueChanged = newValue => {
+      model.valueChanged = (newValue) => {
         var options = {
           propertyName: property.name,
           obj: params.item,
           value: newValue,
           newValue: null,
-          doValidation: false
+          doValidation: false,
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
@@ -80,16 +117,17 @@ ko.components.register("item-editor", {
         params.editor.onPropertyValueChanged(property, params.target, newValue);
         !!params.valueChanged &&
           params.valueChanged(params.target, property.name, newValue);
+        return "";
       };
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 export var itemAdorner = {
   inplaceEditForValues: false,
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
@@ -97,10 +135,10 @@ export var itemAdorner = {
       ? "item_editable"
       : "";
   },
-  getElementName: model => "controlLabel",
+  getElementName: (model) => "controlLabel",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
     for (var i = 0; i < elements.length; i++) {
-      elements[i].onclick = e => e.preventDefault();
+      elements[i].onclick = (e) => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
@@ -128,7 +166,7 @@ export var itemAdorner = {
           item: itemValue,
           question: model,
           target: target,
-          editor: editor
+          editor: editor,
         },
         decoration
       );
@@ -140,7 +178,7 @@ export var itemAdorner = {
         itemValue
       );
     }
-  }
+  },
 };
 
 registerAdorner("choices-label", itemAdorner);
@@ -168,17 +206,17 @@ export var createAddItemHandler = (
     },
     getProcessedText: (text: string) => {
       return text;
-    }
+    },
   };
   !!onItemAdding && onItemAdding(itemValue);
-  question.choices = question.choices.concat([itemValue]);
+  question.choices.push(itemValue);
   itemValue = question.choices.filter(
-    choiceItem => choiceItem.value === itemValue.value
+    (choiceItem) => choiceItem.value === itemValue.value
   )[0];
   !!onItemAdded && onItemAdded(itemValue);
 };
 
-export var createAddItemElement = handler => {
+export var createAddItemElement = (handler) => {
   var addNew = document.createElement("div");
   addNew.title = editorLocalization.getString("pe.addItem");
   addNew.className =
@@ -221,7 +259,7 @@ export var createCustomElement = (title, handler) => {
 };
 
 export var itemDraggableAdorner = {
-  getMarkerClass: model => {
+  getMarkerClass: (model) => {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
@@ -229,7 +267,7 @@ export var itemDraggableAdorner = {
       ? "item_draggable"
       : "";
   },
-  getElementName: model => "item",
+  getElementName: (model) => "item",
   afterRender: (
     elements: HTMLElement[],
     model: QuestionSelectBase,
@@ -251,13 +289,13 @@ export var itemDraggableAdorner = {
         elements[i].classList.remove("item_draggable");
       }
     }
-    itemsRoot.forEach(itemRoot =>
+    itemsRoot.forEach((itemRoot) =>
       Sortable.create(itemRoot, {
         handle: ".svda-drag-handle",
         group: model.id,
         draggable: ".item_draggable",
         animation: 150,
-        onEnd: evt => {
+        onEnd: (evt) => {
           var oldIndex = evt.oldIndex;
           var newIndex = evt.newIndex;
           var choices = model.choices;
@@ -269,19 +307,21 @@ export var itemDraggableAdorner = {
             oldIndex = choices.indexOf(choice);
             newIndex = choices.indexOf(itemBefore);
           }
+          editor.undoRedoManager.startTransaction("move choice items");
           choices.splice(oldIndex, 1);
           choices.splice(newIndex, 0, choice);
+          editor.undoRedoManager.stopTransaction();
           editor.onQuestionEditorChanged(model);
-        }
+        },
       })
     );
     var addNew = createAddItemElement(
       createAddItemHandler(
         model,
-        itemValue => {
+        (itemValue) => {
           editor.onQuestionEditorChanged(model);
         },
-        itemValue => {
+        (itemValue) => {
           editor.onItemValueAddedCallback(
             model,
             "choices",
@@ -291,38 +331,88 @@ export var itemDraggableAdorner = {
         }
       )
     );
+    var raiseChangingEvent = (
+      target: any,
+      propertyName: string,
+      newValue: any
+    ) => {
+      var options = {
+        propertyName: propertyName,
+        obj: target,
+        value: newValue,
+        newValue: null,
+        doValidation: false,
+      };
+      editor.onValueChangingCallback(options);
+      newValue = options.newValue === null ? options.value : options.newValue;
+      return newValue;
+    };
+    var raiseChangedEvent = (
+      target: any,
+      propertyName: string,
+      newValue: any
+    ) => {
+      if (typeof target.getType === "function") {
+        var property = Survey.Serializer.findProperty(
+          target.getType(),
+          propertyName
+        );
+        editor.onPropertyValueChanged(property, target, newValue);
+      }
+    };
     itemsRoot[0].appendChild(addNew);
-    if (editor.canShowObjectProperty(model, "hasOther")) {
+    if (
+      editor.canShowObjectProperty(model, "hasOther") &&
+      model.hasOther !== true
+    ) {
       itemsRoot[0].appendChild(
-        createCustomElement(
-          editorLocalization.getString("pe.addOther"),
-          () => (model.hasOther = !model.hasOther)
-        )
+        createCustomElement(editorLocalization.getString("pe.addOther"), () => {
+          var newValue = !model.hasOther;
+          newValue = raiseChangingEvent(model, "hasOther", newValue);
+          model.hasOther = newValue;
+          raiseChangedEvent(model, "hasOther", newValue);
+        })
       );
     }
     if (
       model.hasSelectAll !== undefined &&
+      model.hasSelectAll !== true &&
       editor.canShowObjectProperty(model, "hasSelectAll")
     ) {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
-          () => (model.hasSelectAll = !model.hasSelectAll)
+          () => {
+            var newValue = !model.hasSelectAll;
+            newValue = raiseChangingEvent(model, "hasSelectAll", newValue);
+            model.hasSelectAll = newValue;
+            raiseChangedEvent(model, "hasSelectAll", newValue);
+          }
         )
       );
     }
     if (
       model.hasNone !== undefined &&
+      model.hasNone !== true &&
       editor.canShowObjectProperty(model, "hasNone")
     ) {
       itemsRoot[0].appendChild(
-        createCustomElement(
-          editorLocalization.getString("pe.addNone"),
-          () => (model.hasNone = !model.hasNone)
-        )
+        createCustomElement(editorLocalization.getString("pe.addNone"), () => {
+          var newValue = !model.hasNone;
+          newValue = raiseChangingEvent(model, "hasNone", newValue);
+          model.hasNone = newValue;
+          raiseChangedEvent(model, "hasNone", newValue);
+        })
       );
     }
-  }
+
+    editor.onAdornerRenderedCallback(
+      model,
+      "choices-draggable",
+      itemsRoot[0],
+      itemsRoot
+    );
+  },
 };
 
 registerAdorner("choices-draggable", itemDraggableAdorner);

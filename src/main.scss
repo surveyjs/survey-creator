@@ -6,10 +6,10 @@
 @import "editor-tabs";
 @import "toolbox";
 @import "toolbar";
-@import "pages-editor";
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
+@import "templates/propertyEditors/propertyeditor-switch.scss";
 
 .svd_flowpanel[contenteditable="true"]:empty:before {
   content: attr(placeholder);
@@ -45,12 +45,13 @@
     margin-bottom: 3px;
     margin-right: 7px;
   }
-  #surveyjs {
+  .svd_questions_editor {
     .svd_question {
       overflow: visible;
+      border: 1px solid transparent;
     }
   }
-  #surveyjs,
+  .svd_surveyjs_designer_container.svd_surveyjs_designer_container,
   #surveyjsExample {
     .sv_main .sv_custom_header {
       background-color: transparent;
@@ -59,6 +60,8 @@
   .svd-textitems-column {
     width: 100%;
     display: inline-block;
+    line-height: 28px;
+
     .btn-danger {
       min-width: 2em;
       padding: 0.78em 1em;
@@ -86,7 +89,11 @@
   }
   .svd-itemvalue-action {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: baseline;
+  }
+  .svd-itemvalue-action {
+    display: inline-block;
+    vertical-align: baseline;
   }
   .form-control {
     border-radius: 2px;
@@ -95,36 +102,7 @@
     outline: 0;
     box-shadow: none;
   }
-  .propertyeditor-condition,
-  .propertyeditor-expression {
-    width: 100%;
-    textarea {
-      // max-width: calc(100% - 200px);
-      // min-width: calc(100% - 200px);
-      max-width: calc(100%);
-      min-width: calc(100%);
-    }
-    .assistant {
-      padding-left: 1em;
-      width: 200px;
-      float: right;
-      .assistant-title {
-        margin-bottom: 0.5em;
-        font-weight: bold;
-      }
-      .assistant-content {
-        overflow-y: auto;
-        height: 125px;
-        .assistant-item {
-          margin-bottom: 0.5em;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-  .propertyeditor-triggers,
   .propertyeditor-validators {
-    min-height: 200px;
     .first-addon {
       padding: 0;
     }
@@ -201,51 +179,22 @@
     border: none;
     .svd_survey_designer {
       position: relative;
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      margin: 0;
 
       .svd_editors {
+        display: table-cell;
+        vertical-align: top;
+        padding: 0 15px;
+        width: 100%;
+
         .svd_questions_editor {
           height: $editor-height;
           overflow-y: scroll;
           padding-top: 18px;
           position: relative;
-          .svd-survey-placeholder-root {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: $primary-bg-color;
-            .svd-survey-placeholder {
-              position: relative;
-              width: 100%;
-              height: 100%;
-              .svd-survey-gallery {
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                background-color: $secondary-bg-color;
-                margin: 6px;
-                a {
-                  color: $primary-text-color;
-                  margin-top: 50px;
-                  font-size: 14px;
-                  text-decoration: underline;
-                  img {
-                    margin-top: -5px;
-                    margin-right: 1em;
-                  }
-                }
-              }
-              .empty-message {
-                text-align: center;
-                font-size: 22px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-              }
-            }
-          }
           .panel-body,
           .card-block {
             .svd_question {
@@ -394,13 +343,19 @@
       max-height: 75vh;
       overflow: auto;
 
-      .sv_main .sv_custom_header {
-        background: transparent;
+      survey-widget {
+        display: block;
+        margin-bottom: 1em;
+
+        .sv_main .sv_custom_header {
+          background: transparent;
+        }
+
+        .svd-survey-nopadding {
+          padding: 0;
+          margin: 0;
+        }
       }
-    }
-    .svd_property_editor_dropdown {
-      min-width: 140px;
-      display: block;
     }
   }
   .svd_items_table {
@@ -416,10 +371,14 @@
     }
   }
 }
+.svd_property_editor_dropdown {
+  min-width: 120px;
+  display: block;
+}
 
 .svd_container {
   .svd_commercial_container {
-    padding: 1em 0 0 2em;
+    padding: 1em 0 0.5em 2em;
     .svd_commercial_text {
       font-weight: bold;
       text-decoration: none;
@@ -482,7 +441,7 @@
     &.svd_custom_select {
       padding: 0;
       select {
-        height: 32px;
+        height: 34px;
       }
     }
   }
@@ -556,26 +515,17 @@
       border-bottom-color: transparent;
     }
   }
-  .svd_toolbox {
-    float: left;
-    width: 15%;
-  }
   .svd_editors {
-    display: inline-block;
-    width: 60%;
+    display: table-cell;
+    vertical-align: top;
     padding: 0 15px;
-    &.svd_wide {
-      width: 85%;
-    }
   }
   .svd_properties {
-    float: right;
-    width: 25%;
     table {
       width: 100%;
     }
   }
-  #surveyjs {
+  .svd_surveyjs_designer_container.svd_surveyjs_designer_container {
     .sv_row {
       .svd_question {
         margin-top: 30px;
@@ -729,38 +679,11 @@
   }
 }
 
-.svd-logic-item-header {
-  background-color: #e0e0e0;
-  min-height: 32px;
-  line-height: 32px;
-  margin-top: 2em;
-  margin-bottom: 1em;
-  font-size: 14px;
-  padding: 0 1em;
-
-  .svd-logic-header-item-icon {
-    display: inline-block;
-    cursor: pointer;
-    padding-right: 10px;
-
-    svg-icon {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-
-      svg {
-        display: block;
-        margin-top: 3px;
-      }
-    }
-
-    .svd-logic-header-icon-text {
-    }
-  }
-  .svd-logic-header-item-text {
+.svd_container_disabled {
+  .item_editable {
+    pointer-events: none;
   }
 }
-
 @media all and (-ms-high-contrast: none) {
   *::-ms-backdrop,
   .svd_container use {
@@ -768,3 +691,7 @@
     pointer-events: none;
   }
 }
+
+@import "templates/propertyEditors/propertyeditor-condition.scss";
+@import "templates/tabs.scss";
+@import "templates/logic-tab.scss";

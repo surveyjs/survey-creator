@@ -1,15 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <title>survey.js Editor Test </title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <title>survey.js Creator Test</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
 
     <!-- <script src="https://unpkg.com/jquery"></script>
@@ -17,16 +35,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
 
     <script src="https://unpkg.com/survey-knockout/survey.ko.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/survey-knockout/survey.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/survey-knockout/survey.css"
+    />
 
-    <script src="../package/surveyeditor.js"></script>
-    <link rel="stylesheet" href="../package/surveyeditor.css" />
-</head>
+    <script src="../build/survey-creator.js"></script>
+    <link rel="stylesheet" href="../build/survey-creator.css" />
+    <style>
+      .svd_questions_editor {
+        -webkit-box-shadow: 0px 0px 10px 4px rgba(235, 235, 235, 1);
+        -moz-box-shadow: 0px 0px 10px 4px rgba(235, 235, 235, 1);
+        box-shadow: 0px 0px 10px 4px rgba(235, 235, 235, 1);
+      }
+      .svd_container.svd_container.svd_container .btn-primary {
+        color: gray;
+        background-color: transparent;
+        border-color: transparent;
+      }
+      .svd_container.svd_container.svd_container
+        .svd_toolbar
+        .icon-white
+        .svd-svg-icon {
+        fill: gray;
+      }
+      .svd_container .svd_toolbar {
+        text-align: right;
+      }
+      /* .svd_container {
+            font-family: "Georgia";
+            font-size: 16px;
+        }
+        .sv_main {
+            font-family: "Georgia";
+            font-size: 16px;
+        } */
+      .svd_container.svd_container .nav-tabs > li.active > a[class="nav-link"] {
+        color: rgb(74, 74, 74);
+        border-bottom: 4px solid #0065ff;
+      }
+      .svd_container.svd_container .nav-tabs a[class="nav-link"] {
+        color: rgb(167, 167, 167);
+        padding: 0;
+        padding-bottom: 8px;
+      }
+      .svd_container.svd_container .nav-tabs .nav-item {
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
     <div id="manage" data-bind="template: 'surveys-manage'"></div>
     <div id="editorElement"></div>
-</body>
-<script src="index.js"></script>
-
+  </body>
+  <script src="index.js"></script>
 </html>

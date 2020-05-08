@@ -15,10 +15,14 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
     return obj["name"];
   }
   showTitlesInExpressions: boolean;
+  allowEditExpressionsInTextEditor: boolean = true;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty
   ): boolean {
+    return true;
+  }
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
     return true;
   }
 
@@ -53,6 +57,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ) {
     if (propertyName == "choices" && obj["name"] == "hideAddRemove") {
       editorOptions.allowAddRemoveItems = false;
+      editorOptions.allowRemoveAllItems = false;
     }
   }
   onPropertyEditorKeyDownCallback(
@@ -70,6 +75,14 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   }
   onValueChangingCallback(options: any) {
     if (!!this.doValueChangingCallback) this.doValueChangingCallback(options);
+  }
+  public lastPropertyValueChangedName;
+  onPropertyValueChanged(
+    property: Survey.JsonObjectProperty,
+    obj: any,
+    newValue: any
+  ) {
+    this.lastPropertyValueChangedName = property.name;
   }
   onPropertyEditorObjectSetCallback(
     propertyName: string,
@@ -101,6 +114,8 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     list: any[]
   ) {}
+  startUndoRedoTransaction() {}
+  stopUndoRedoTransaction() {}
   public createSurvey(
     json: any = {},
     reason: string = "designer",

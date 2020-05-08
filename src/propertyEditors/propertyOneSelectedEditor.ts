@@ -1,11 +1,12 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyQuestionEditor } from "../questionEditors/questionEditor";
+import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
 
 export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
-  public selectedObjectEditor = ko.observable<SurveyQuestionEditor>(null);
+  public selectedObjectEditor = ko.observable<SurveyElementEditorContent>(null);
   public koSelected = ko.observable(null);
+  public koChangeCounter = ko.observable(0);
   public koAvailableClasses: any;
   private currentObjClassName: string;
   constructor(property: Survey.JsonObjectProperty) {
@@ -13,28 +14,32 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     var self = this;
     this.koAvailableClasses = ko.observableArray(this.getAvailableClasses());
     this.koSelected.subscribe(function(newValue) {
-      if (!!self.selectedObjectEditor()) {
-        self.selectedObjectEditor().apply();
+      if (!newValue) {
+        newValue = null;
+      } else {
+        if (
+          Array.isArray(self.originalValue) &&
+          self.originalValue.indexOf(newValue) < 0
+        ) {
+          newValue = null;
+        }
       }
-      var editor =
-        newValue != null
-          ? new SurveyQuestionEditor(newValue.obj, null, self.options)
-          : null;
-      self.selectedObjectEditor(editor);
+      if (
+        newValue == null &&
+        Array.isArray(self.originalValue) &&
+        self.originalValue.length > 0
+      ) {
+        self.koSelected(self.originalValue[0]);
+        return;
+      }
+      self.selectedObjectEditor(self.createSelectedObjEditor(newValue));
     });
     this.onDeleteClick = function() {
-      if (self.readOnly()) return;
-      self.koItems.remove(self.koSelected());
+      self.deleteItem(self.koSelected());
     };
     this.onAddClick = function(item: any) {
       self.addNewItem(!!item ? item.value : null);
     };
-  }
-  protected onBeforeApply() {
-    if (!!this.selectedObjectEditor()) {
-      this.selectedObjectEditor().apply();
-    }
-    super.onBeforeApply();
   }
   public get editorTypeTemplate(): string {
     return "oneselected";
@@ -42,8 +47,8 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   public get editorType(): string {
     return "oneselected";
   }
-  protected createOneSelectedItem(obj: any): SurveyPropertyOneSelectedItem {
-    return new SurveyPropertyOneSelectedItem(obj);
+  public getItemText(item: any, counter: any = null): any {
+    return item.getType();
   }
   protected getObjClassName() {
     return this.currentObjClassName;
@@ -53,50 +58,45 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
   }
   protected addNewItem(className: string) {
     this.currentObjClassName = className;
-    this.AddItem();
-    this.koSelected(this.koItems()[this.koItems().length - 1]);
+    this.addItem();
+    this.selectNewItem(true);
   }
   protected onValueChanged() {
     super.onValueChanged();
-    if (this.koSelected) {
-      this.koSelected(this.koItems().length > 0 ? this.koItems()[0] : null);
+    this.koAvailableClasses(this.getAvailableClasses());
+    this.selectNewItem(false);
+  }
+  private createSelectedObjEditor(item: any): SurveyElementEditorContent {
+    if (!item) return null;
+    var editor = new SurveyElementEditorContent(item, null, this.options);
+    editor.onPropertyChanged = (prop: any) => {
+      this.koChangeCounter(this.koChangeCounter() + 1);
+    };
+    this.onCreateEditor(editor);
+    return editor;
+  }
+  protected onCreateEditor(editor: SurveyElementEditorContent) {}
+  protected onItemDeleted(obj: any, index: number) {
+    if (index >= this.originalValue.length) {
+      index = this.originalValue.length - 1;
+    }
+    this.koSelected(index > -1 ? this.originalValue[index] : null);
+  }
+  private selectNewItem(isNew: boolean) {
+    if (!this.koSelected || !Array.isArray(this.originalValue)) return;
+    var index = this.originalValue.length - 1;
+    if (!isNew) {
+      var index = this.originalValue.indexOf(this.koSelected());
+      if (index < 0 && this.originalValue.length > 0) {
+        index = 0;
+      }
+    }
+    var val = index > -1 ? this.originalValue[index] : null;
+    if (val != this.koSelected()) {
+      this.koSelected(val);
     }
   }
-  protected createEditorItem(item: Survey.Base) {
-    var jsonObj = new Survey.JsonObject();
-    var newItem = Survey.Serializer.createClass(item.getType());
-    jsonObj.toObject(item.toJSON(), newItem);
-    this.setItemProperties(newItem);
-    return this.createOneSelectedItem(newItem);
-  }
-  protected createNewEditorItem(): any {
-    return this.createEditorItem(
-      Survey.Serializer.createClass(this.getObjClassName())
-    );
-  }
-  protected createItemFromEditorItem(editorItem: any) {
-    var item = <SurveyPropertyOneSelectedItem>editorItem;
-    delete item.obj["survey"];
-    return item.obj;
-  }
-  private setItemProperties(obj: any) {
-    if (this.object) {
-      obj["survey"] =
-        this.object.getType() == "survey" ? this.object : this.object.survey;
-    }
-    obj.locOwner = this;
-  }
-}
-
-export class SurveyPropertyOneSelectedItem {
-  public koText: any;
-  constructor(public obj: Survey.Base) {
-    this.koText = ko.observable(this.getText());
-  }
-  public getText() {
-    return "";
-  }
-  public objectChanged() {
-    this.koText(this.getText());
+  protected createNewItem(): any {
+    return Survey.Serializer.createClass(this.getObjClassName());
   }
 }

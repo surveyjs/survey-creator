@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
+import { EditableObject } from "./editableObject";
 
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -9,10 +10,12 @@ export interface ISurveyObjectEditorOptions {
   readOnly: boolean;
   getObjectDisplayName(obj: Survey.Base): string;
   showTitlesInExpressions: boolean;
+  allowEditExpressionsInTextEditor: boolean;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty
   ): boolean;
+  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean;
 
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
@@ -41,6 +44,11 @@ export interface ISurveyObjectEditorOptions {
     value: any
   ): string;
   onValueChangingCallback(options: any);
+  onPropertyValueChanged(
+    property: Survey.JsonObjectProperty,
+    obj: any,
+    newValue: any
+  );
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -70,6 +78,8 @@ export interface ISurveyObjectEditorOptions {
     editor: SurveyPropertyEditorBase,
     list: any[]
   );
+  startUndoRedoTransaction();
+  stopUndoRedoTransaction();
   createSurvey(
     json: any,
     reason: string,
@@ -78,8 +88,6 @@ export interface ISurveyObjectEditorOptions {
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
-  private editingValue_: any = null;
-  private isApplyinNewValue: boolean = false;
   private objectValue: any;
   private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
@@ -90,17 +98,16 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private _displayNameValue = ko.observable<string>();
   private get displayNameValue() {
     return this._displayNameValue();
-  };
+  }
   private set displayNameValue(val) {
     this._displayNameValue(val);
-  };
-  public koValue: any;
+  }
+  public koValue = ko.observable<any>();
   public koText: any;
   public koIsDefault: any;
   public koHasError: any;
   public koErrorText: any;
   public koDisplayError: any;
-  public isTabProperty: boolean = false;
   public isInplaceProperty: boolean = false;
   public readOnly: any;
   public koMaxLength: any;
@@ -114,7 +121,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
-    this.koValue = ko.observable();
     this.koValue.subscribe(function(newValue) {
       self.onkoValueChanged(newValue);
     });
@@ -139,18 +145,24 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         : 524288;
     });
     this.koMaxValue = ko.computed(function() {
-      return !!self.property && !!self.property["maxValue"]
-        ? self.property["maxValue"]
+      return !!self.property && !self.isValueEmpty(self.property.maxValue)
+        ? self.property.maxValue
         : "";
     });
     this.koMinValue = ko.computed(function() {
-      return !!self.property && !!self.property["minValue"]
-        ? self.property["minValue"]
+      return !!self.property && !self.isValueEmpty(self.property.minValue)
+        ? self.property.minValue
         : "";
     });
     this.setIsRequired();
     this.setTitleAndDisplayName();
     this.readOnly = ko.observable(this.getReadOnly());
+  }
+  public get editingValue() {
+    return this.koValue();
+  }
+  public set editingValue(newValue) {
+    this.koValue(newValue);
   }
   public get editorType(): string {
     throw "editorType is not defined";
@@ -174,18 +186,21 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     }
     return res;
   }
-  public get alwaysShowEditor(): boolean {
-    return false;
-  }
   public get title(): string {
     return this.titleValue;
   }
+  public isInPropertyGrid: boolean = false;
   public get isDiplayNameVisible() {
     return (
-      (!this.isTabProperty || !this.isModal) &&
+      !this.isInPropertyGrid &&
+      !this.isShowingModal() &&
       !this.isInplaceProperty &&
-      this.displayName !== "."
+      this.displayName !== "." &&
+      !!this.displayName
     );
+  }
+  protected isShowingModal(): boolean {
+    return false;
   }
   public get displayName(): string {
     return this.displayNameValue;
@@ -209,14 +224,23 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     }
     return res;
   }
-  public get isModal(): boolean {
+  protected get isModal(): boolean {
     return false;
+  }
+  public get originalObject(): any {
+    return EditableObject.getOriginalObject(this.object);
   }
   public get object(): any {
     return this.objectValue;
   }
   public set object(value: any) {
     this.setObjectCore(value);
+  }
+  public get originalValue(): any {
+    return this.getOriginalValue();
+  }
+  protected getOriginalValue(): any {
+    return !!this.objectValue ? this.objectValue[this.property.name] : null;
   }
   protected setObjectCore(value: any) {
     this.objectValue = value;
@@ -243,14 +267,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
 
   public getValueText(value: any): string {
     return value;
-  }
-  public get editingValue(): any {
-    return this.editingValue_;
-  }
-  public set editingValue(value: any) {
-    value = this.getCorrectedValue(value);
-    this.setValueCore(value);
-    this.onValueChanged();
   }
   public hasError(): boolean {
     this.koHasError(this.checkForErrors());
@@ -281,8 +297,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     ) {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
-        this.object,
-        this.editingValue
+        this.originalObject,
+        this.koValue()
       );
     }
     this.koErrorText(errorText);
@@ -310,19 +326,19 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.titleValue = "";
     if (!this.property) return;
     var locName = this.property.name;
-    this.displayNameValue = editorLocalization.getPropertyName(locName);
+    this.displayNameValue = editorLocalization.getPropertyName(
+      locName,
+      this.property.displayName
+    );
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
   }
-  protected onBeforeApply() {}
   public apply(): boolean {
-    this.onBeforeApply();
     if (this.hasError()) return false;
-    this.isApplyinNewValue = true;
-    this.koValue(this.editingValue);
-    this.isApplyinNewValue = false;
+    this.performApply();
     return true;
   }
+  protected performApply() {}
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
     return "";
@@ -344,9 +360,6 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.onOptionsChanged();
   }
   protected onOptionsChanged() {}
-  protected setValueCore(value: any) {
-    this.editingValue_ = value;
-  }
   public setObject(value: any) {
     if (this.options) {
       var editorOptions = this.createEditorOptions();
@@ -365,11 +378,11 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
     if (!this.property) return value;
-    if (!Survey.Helpers.isValueEmpty(this.property["minValue"])) {
-      if (value < this.property["minValue"]) return this.property["minValue"];
+    if (!this.isValueEmpty(this.property.minValue)) {
+      if (value < this.property.minValue) return this.property.minValue;
     }
-    if (!Survey.Helpers.isValueEmpty(this.property["maxValue"])) {
-      if (value > this.property["maxValue"]) return this.property["maxValue"];
+    if (!this.isValueEmpty(this.property.maxValue)) {
+      if (value > this.property.maxValue) return this.property.maxValue;
     }
     return value;
   }
@@ -381,12 +394,16 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.valueUpdatingCounter--;
     }
   }
-  protected updateValue() {
+  public updateValue() {
     this.beginValueUpdating();
     this.koValue(this.getValue());
-    this.editingValue = this.koValue.peek();
-    if (this.onValueUpdated) this.onValueUpdated(this.editingValue);
+    this.koErrorText("");
+    this.onValueChanged();
+    if (this.onValueUpdated) this.onValueUpdated(this.koValue());
     this.endValueUpdating();
+  }
+  public updatePropertyValue(newValue: any) {
+    this.object[this.property.name] = newValue;
   }
   protected getValue(): any {
     return this.property && this.object
@@ -397,6 +414,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private onkoValueChanged(newValue: any) {
     if (this.valueUpdatingCounter > 0 || this.iskoValueChanging) return;
     this.iskoValueChanging = true;
+    var copiedValue = Survey.Helpers.getUnbindValue(newValue);
     newValue = this.getCorrectedValue(newValue);
     if (this.options && this.property && this.object) {
       var options = {
@@ -404,36 +422,25 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         obj: this.object,
         value: this.getValue(),
         newValue: newValue,
-        doValidation: false
+        doValidation: false,
       };
-      this.updateEditingProperties(newValue);
       this.options.onValueChangingCallback(options);
-      if (!this.isValueEmpty(options.newValue)) {
-        newValue = options.newValue;
-        this.koValue(newValue);
-      }
-      if (options.doValidation) {
-        this.hasError();
-      }
+      newValue = options.newValue;
     }
-    this.updateEditingProperties(newValue);
-    if (!this.isApplyinNewValue) {
-      this.editingValue = newValue;
+    if (
+      !this.isValueEmpty(newValue) &&
+      !Survey.Helpers.isTwoValueEquals(newValue, copiedValue)
+    ) {
+      this.koValue(newValue);
     }
+    this.onValueChanged();
     this.iskoValueChanging = false;
+    if (this.hasError()) return;
 
     if (this.property && this.object && this.getValue() == newValue) return;
     if (this.onChanged != null) this.onChanged(newValue);
   }
-  private updateEditingProperties(newValue: any) {
-    if (!this.isModal && !!this.object) {
-      if (!this.object.editingProperties) {
-        this.object.editingProperties = {};
-      }
-      this.object.editingProperties[this.property.name] = newValue;
-    }
-  }
-  private isValueEmpty(val): boolean {
+  protected isValueEmpty(val): boolean {
     return Survey.Helpers.isValueEmpty(val);
   }
   public updateDynamicProperties() {}

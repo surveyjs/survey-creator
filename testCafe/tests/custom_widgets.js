@@ -1,25 +1,16 @@
+import { init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `custom widgets`;
 
 const url = "http://127.0.0.1:7777/example/customWidget.html";
 
-export const init = ClientFunction(() => {
-  Survey.Survey.cssType = "bootstrap";
-  Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-
-  //Hide json tab and allow to drop only three questions
-  var editorOptions = {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+  var creatorOptions = {
     questionTypes: ["text", "radiogroup", "dropdown"],
     showJSONEditorTab: false
   };
-  var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
-
-  window.editor = editor;
-});
-
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
-  await init();
+  await init(creatorOptions);
 });
 
 test(`check widgets`, async t => {
