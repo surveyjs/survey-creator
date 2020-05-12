@@ -312,7 +312,14 @@ export class SurveyQuestionEditorDefinition {
       ],
     },
     "matrixdropdowncolumn@text": {
-      properties: ["inputType", "placeHolder", "maxLength"],
+      properties: [
+        "inputType",
+        "min",
+        "max",
+        "step",
+        "placeHolder",
+        "maxLength",
+      ],
       tabs: [{ name: "validators", index: 10 }],
     },
     "matrixdropdowncolumn@comment": {
