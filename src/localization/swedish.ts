@@ -112,11 +112,11 @@ export let svStrings = {
     formEntry: "Ifyllning i enkäten",
     testService: "Testa tjänsten",
     conditionSelectQuestion: "Välj fråga...",
-    conditionValueQuestionTitle: "Vänligen skriv in/väj värdet",
+    conditionValueQuestionTitle: "Vänligen skriv in/välj värdet",
     conditionButtonAdd: "Lägg till",
     conditionButtonReplace: "Ersätt",
     conditionHelp:
-      "Skriv in ett boolsk uttryck. Det bör returnera SANT för att göra frågan/sidan synlig. For eksempel: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+      "Skriv in ett boolsk uttryck. Det bör returnera SANT för att göra frågan/sidan synlig. Till exempel: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
       "Var vänligen skriv in ett uttryck.  Du kan använda måsvingar för att få tillgång till det sparade värdet: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
     aceEditorHelp: "Tryck ctrl+mellanslag för att få en ledtråd",
@@ -226,8 +226,8 @@ export let svStrings = {
       choices: "Välj",
       items: "Element",
       visibleIf: "Synlig",
-      enableIf: "Tillgänlig hvis",
-      rateValues: "Ornda värden",
+      enableIf: "Tillgänlig",
+      rateValues: "Ordna värden",
       choicesByUrl: "Välj från webben",
       matrixChoices: "Standard val",
       multipleTextItems: "Text indata",
@@ -362,10 +362,10 @@ export let svStrings = {
   },
   triggers: {
     completetrigger: "Enkät slutförd",
-    setvaluetrigger: "sätt värde",
-    copyvaluetrigger: "kopiera värde",
+    setvaluetrigger: "Sätt värde",
+    copyvaluetrigger: "Kopiera värde",
     runexpressiontrigger: "Kör uttryck",
-    visibletrigger: "ändra synlighet",
+    visibletrigger: "Ändra synlighet",
   },
   //Properties
   p: {
