@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue } from "../utils/utils";
+import { getNextValue, createKey2click } from "../utils/utils";
 import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
@@ -222,6 +222,8 @@ export var createAddItemElement = (handler) => {
   addNew.className =
     "sv_technical svda-add-new-item svd-primary-icon svda-add-custom-item";
   addNew.onclick = handler;
+  addNew.onkeyup = createKey2click(addNew);
+  addNew.tabIndex = 0;
 
   var svgElem: any = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -252,6 +254,8 @@ export var createCustomElement = (title, handler) => {
   element.title = title;
   element.className = "sv_technical svda-add-new-item svda-add-custom-item";
   element.onclick = handler;
+  element.onkeyup = createKey2click(element);
+  element.tabIndex = 0;
   var titleEl = document.createElement("span");
   titleEl.innerHTML = element.title;
   element.appendChild(titleEl);

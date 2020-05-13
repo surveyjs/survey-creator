@@ -90,16 +90,20 @@ ko.bindingHandlers["trueclick"] = {
   }
 };
 
+export function createKey2click(element: HTMLElement) {
+  return (ev: KeyboardEvent) => {
+    var char = ev.which || ev.keyCode;
+    if (char === 13 || char === 32) {
+      element.click();
+    } else if (char === 27) {
+      element.blur();
+    };
+  }
+}
+
 ko.bindingHandlers["key2click"] = {
   init: function(element, valueAccessor, allBindingsAccessor) {
-    element.onkeyup = ev => {
-      var char = ev.which || ev.keyCode;
-      if (char === 13 || char === 32) {
-        element.click();
-      } else if (char === 27) {
-        element.blur();
-      }
-    };
+    element.onkeyup = createKey2click(element);
   }
 };
 

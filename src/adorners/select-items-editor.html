@@ -1,22 +1,15 @@
 <div class="svda-select-items-editor">
   <div class="svda-select-items-title" data-bind="click: toggle">
-    <span
-      class="svd-main-color"
-      data-bind="text: getLocString('pe.editChoices')"
-    ></span>
+    <span class="svd-main-color" data-bind="text: getLocString('pe.editChoices')"></span>
   </div>
-  <div
-    class="svda-select-items-content svd-dark-border-color svd-light-bg-color"
-    data-bind="visible: isExpanded"
-  >
+  <div class="svda-select-items-content svd-dark-border-color svd-light-bg-color" data-bind="visible: isExpanded">
     <div class="svda-select-items-collection">
       <!-- ko foreach: { data: choices, afterRender: choicesRendered } -->
       <div class="item_editable item_draggable">
         <span data-bind="text: locText.koRenderedHtml"></span>
         <span>
           <item-editor
-            params="name: $parent.valueName, valueChanged: $parent.valueChanged, target: $data, model: $data, item: $data, question: $parent.question, editor: $parent.editor"
-          >
+            params="name: $parent.valueName, valueChanged: $parent.valueChanged, target: $data, model: $data, item: $data, question: $parent.question, editor: $parent.editor">
           </item-editor>
         </span>
       </div>
@@ -27,26 +20,18 @@
       <span data-bind="text: otherText"></span>
       <span>
         <item-editor
-          params='name: \"otherText\", target: question, model: question, valueChanged: otherValueChanged, item: question.otherItem, question: question, editor: editor'
-        >
+          params='name: \"otherText\", target: question, model: question, valueChanged: otherValueChanged, item: question.otherItem, question: question, editor: editor'>
         </item-editor>
       </span>
     </div>
     <!-- /ko -->
-    <div
-      class="sv_technical svda-add-new-item"
-      data-bind="click: addItem, attr: { title: getLocString('pe.addItem') }"
-    >
-      <svg-icon
-        class="svd-primary-icon"
-        params="iconName: 'icon-inplaceplus', size: 12"
-      ></svg-icon>
+    <div class="sv_technical svda-add-new-item" tabindex="0"
+      data-bind="key2click, click: addItem, attr: { title: getLocString('pe.addItem') }">
+      <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplaceplus', size: 12"></svg-icon>
     </div>
     <!-- ko if: showOther -->
-    <div
-      class="sv_technical svda-add-new-item svda-add-custom-item"
-      data-bind="click: addOther, attr: { title: getLocString('pe.addOther') }"
-    >
+    <div class="sv_technical svda-add-new-item svda-add-custom-item" tabindex="0"
+      data-bind="key2click, click: addOther, attr: { title: getLocString('pe.addOther') }">
       <span data-bind="text: getLocString('pe.addOther')"></span>
     </div>
     <!-- /ko -->
