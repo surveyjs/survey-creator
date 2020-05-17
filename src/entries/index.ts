@@ -135,6 +135,7 @@ import "../localization/simplified-chinese";
 import "../localization/spanish";
 import "../localization/swedish";
 import "../localization/traditional-chinese";
+import "../localization/turkish";
 import "../localization/norwegian";
 import "../localization/hungarian";
 
