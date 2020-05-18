@@ -501,6 +501,12 @@ export var enStrings = {
     survey: "survey",
     onNextPage: "onNextPage",
     onValueChanged: "onValueChanged",
+    singlePage: "singlePage",
+    standard: "standard",
+    questionPerPage: "questionPerPage",
+    noPreview: "noPreview",
+    showAllQuestions: "showAllQuestions",
+    showAnsweredQuestions: "showAnsweredQuestions",
   },
   //Operators
   op: {
