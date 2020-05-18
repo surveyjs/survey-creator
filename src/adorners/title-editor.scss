@@ -38,6 +38,19 @@
   }
 }
 
+.svda-title-editor-focusable {
+  visibility: hidden;
+}
+.svd_q_selected .svda-title-editor-focusable {
+  visibility: visible;
+}
+.svd_q_selected title-editor {
+  .svda-title-editor-focusable:focus + .svda-title-editor-start {
+    visibility: visible;
+    outline: 1px dotted $primary-color;
+  }
+}
+
 .svd_page > .description_editable {
   margin-bottom: 2em;
 }

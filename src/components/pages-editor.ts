@@ -1,8 +1,10 @@
 import * as ko from "knockout";
-import { SurveyHelper, ObjType } from "./surveyHelper";
+
 import * as Survey from "survey-knockout";
-import { editorLocalization } from "./editorLocalization";
-import { SurveyCreator } from "./editor";
+
+import { SurveyHelper, ObjType } from "../surveyHelper";
+import { SurveyCreator } from "../editor";
+import { editorLocalization } from "../editorLocalization";
 
 import "./pages-editor.scss";
 var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
