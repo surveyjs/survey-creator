@@ -39,7 +39,7 @@ export class ExpressionToDisplayText {
     return node.toString(strFunc);
   }
   private getQuestionText(op: Survey.Variable): string {
-    var question = this.survey.getQuestionByName(op.variable);
+    var question = this.getQuestionByName(op.variable);
     if (!question || !question.title) return undefined;
     return "{" + question.title + "}";
   }
@@ -70,7 +70,7 @@ export class ExpressionToDisplayText {
     var op2Type = op2.getType();
     if (op2Type != "const" && op2Type != "function" && op2Type != "array")
       return null;
-    return this.survey.getQuestionByName((<Survey.Variable>op1).variable);
+    return this.getQuestionByName((<Survey.Variable>op1).variable);
   }
   private replaceVariables(
     expression: string,
@@ -82,9 +82,12 @@ export class ExpressionToDisplayText {
     return expression;
   }
   private replaceVariable(expression: string, variable: string): string {
-    var question = this.survey.getQuestionByName(variable);
+    var question = this.getQuestionByName(variable);
     if (!question || !question.title) return expression;
     return expression.replace("{" + variable + "}", "{" + question.title + "}");
+  }
+  private getQuestionByName(name: string): Survey.Question {
+    return <Survey.Question>this.survey.getQuestionByValueName(name);
   }
 }
 

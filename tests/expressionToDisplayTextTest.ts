@@ -26,6 +26,26 @@ QUnit.test("Replace question titles test", function(assert) {
   );
 });
 
+QUnit.test("Replace question titles using valueName test", function(assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1", valueName: "val1", title: "My Question 1" },
+      { type: "text", name: "q2", valueName: "val2" },
+    ],
+  });
+  var expressionToText = new ExpressionToDisplayText(survey);
+  assert.equal(
+    expressionToText.toDisplayText("{val1} = 1"),
+    "({My Question 1} == 1)",
+    "Replace the value name with title"
+  );
+  assert.equal(
+    expressionToText.toDisplayText("{val2} = 2"),
+    "({q2} == 2)",
+    "There is no title"
+  );
+});
+
 QUnit.test("Delete question from expression", function(assert) {
   var removeVariable = new ExpressionRemoveVariable();
   assert.equal(
