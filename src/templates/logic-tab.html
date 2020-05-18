@@ -22,11 +22,11 @@
                   </span>
                 </td>
                 <td>
-                  <span data-bind="text: $data.title"></span>
+                  <span data-bind="text: $data.title, attr: {title: $data.title }"></span>
                 </td>
                 <td>
                   <div data-bind="foreach: $data.koActions">
-                    <span data-bind="text: $data.text"></span>
+                    <span data-bind="text: $data.text, attr: {title: $data.text }"></span>
                   </div>
                 </td>
                 <td data-bind="visible:!$parent.koReadOnly()" class="svd-logic-tab__rules-list__action-cell">
