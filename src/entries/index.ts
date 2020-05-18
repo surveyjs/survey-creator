@@ -101,7 +101,8 @@ export {
 
 export { QuestionToolbox } from "../questionToolbox";
 export { SurveyObjectProperty } from "../objectProperty";
-export { PagesEditor } from "../pages-editor";
+export { PagesEditor } from "../components/pages-editor";
+export { Toolbar } from "../components/toolbar";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../surveylive";

@@ -95,17 +95,7 @@
 </script>
 
 <script type="text/html" id="se-component-toolbar">
-  <div class="svd_toolbar">
-      <!-- ko foreach: toolbarItems -->
-      <span
-      class="svd_action"
-      data-bind="css: $data.css, visible: visible, attr: { id: id }"
-      >
-      <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
-      <!-- /ko -->
-      </span>
-      <!-- /ko -->
-  </div>
+  <svd-toolbar params="items: toolbarItems"></svd-toolbar>
 </script>
 
 <script type="text/html" id="se-component-pages-editor">

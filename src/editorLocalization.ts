@@ -117,4 +117,8 @@ export var editorLocalization = {
   },
 };
 
+export function getLocString(strName: string, locale: string = null) {
+  return editorLocalization.getString(strName, locale);
+}
+
 export var defaultStrings = enStrings;
