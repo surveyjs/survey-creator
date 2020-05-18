@@ -1,0 +1,9 @@
+<div data-bind="if: hasItems" class="svd_toolbar">
+  <!-- ko foreach: items -->
+  <span class="svd_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: id }">
+    <!-- ko template: { name: $data.template || 'svd-toolbar-button', data: $data.data || $data } -->
+    <!-- /ko -->
+  </span>
+  <!-- /ko -->
+</div>

@@ -1,9 +1,13 @@
 import * as ko from "knockout";
 import { SurveyTextWorker } from "./textWorker";
 import * as Survey from "survey-knockout";
+import { getLocString } from "./editorLocalization";
+
+import { IToolbarItem } from './components/toolbar';
 
 export class SurveyJSONEditor {
   public static updateTextTimeout: number = 1000;
+  public static showToolbar = true;
 
   private isProcessingImmediately: boolean = false;
   private aceEditor: AceAjax.Editor;
@@ -13,14 +17,81 @@ export class SurveyJSONEditor {
   koText: any;
   koErrors: any;
 
+  /**
+   * The list of toolbar items. You may add/remove/replace them.
+   * @see IToolbarItem
+   */
+  public toolbarItems = ko.observableArray<IToolbarItem>();
+
   constructor() {
     this.koText = ko.observable("");
     this.koErrors = ko.observableArray();
     var self = this;
-    this.koText.subscribe(function(newValue) {
+    this.koText.subscribe(function (newValue) {
       self.onJsonEditorChanged();
     });
   }
+
+  protected addToolbarItems() {
+    if (!this.hasAceEditor) return;
+    if (!SurveyJSONEditor.showToolbar) return;
+    let items: Array<IToolbarItem> = [];
+    items.push({
+      id: "svd-undo",
+      icon: "icon-actionundo",
+      title: getLocString("ed.undo"),
+      tooltip: getLocString("ed.undoTooltip"),
+      action: () => {
+        this.aceEditor.execCommand("undo");
+      }
+    });
+    items.push({
+      id: "svd-redo",
+      icon: "icon-actionredo",
+      title: getLocString("ed.redo"),
+      tooltip: getLocString("ed.redoTooltip"),
+      action: () => {
+        this.aceEditor.execCommand("redo");
+      }
+    });
+    if (window["navigator"]) {
+      items.push({
+        id: "svd-copy",
+        icon: "icon-actioncopy",
+        title: getLocString("ed.copy"),
+        tooltip: getLocString("ed.copyTooltip"),
+        action: () => {
+          var text = this.aceEditor.getCopyText();
+          this.aceEditor.execCommand("copy");
+          navigator.clipboard.writeText(text);
+        }
+      });
+      items.push({
+        id: "svd-cut",
+        icon: "icon-actioncopy",
+        title: getLocString("ed.cut"),
+        tooltip: getLocString("ed.cutTooltip"),
+        action: () => {
+          var text = this.aceEditor.getCopyText();
+          this.aceEditor.execCommand("cut");
+          navigator.clipboard.writeText(text);
+        }
+      });
+      items.push({
+        id: "svd-paste",
+        icon: "icon-actioncopy",
+        title: getLocString("ed.paste"),
+        tooltip: getLocString("ed.pasteTooltip"),
+        action: () => {
+          navigator.clipboard.readText().then((text: string) => {
+            this.aceEditor.execCommand("paste", text);
+          });
+        }
+      });
+    }
+    this.toolbarItems(items);
+  }
+
   public init(editorElement: HTMLElement) {
     if (!this.hasAceEditor) return;
     this.aceEditor = ace.edit(editorElement);
@@ -30,10 +101,10 @@ export class SurveyJSONEditor {
     //this.aceEditor.setTheme("ace/theme/monokai");
     //this.aceEditor.session.setMode("ace/mode/json");
     self.aceEditor.setShowPrintMargin(false);
-    self.aceEditor.getSession().on("change", function() {
+    self.aceEditor.getSession().on("change", function () {
       self.onJsonEditorChanged();
     });
-    self.aceEditor.on("input", function() {
+    self.aceEditor.on("input", function () {
       if (self.isInitialJSON) {
         self.isInitialJSON = false;
         self.aceEditor
@@ -56,7 +127,9 @@ export class SurveyJSONEditor {
     });
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+    this.addToolbarItems();
   }
+
   public get hasAceEditor(): boolean {
     return typeof ace !== "undefined";
   }
@@ -100,7 +173,7 @@ export class SurveyJSONEditor {
       this.timeoutId = -1;
     } else {
       var self = this;
-      this.timeoutId = window.setTimeout(function() {
+      this.timeoutId = window.setTimeout(function () {
         self.timeoutId = -1;
         self.processJson(self.text);
       }, SurveyJSONEditor.updateTextTimeout);
