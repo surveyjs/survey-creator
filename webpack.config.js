@@ -65,7 +65,7 @@ var packagePlatformJson = {
   peerDependencies: {
     bootstrap: "^3.3.6",
     jquery: "^3.1.1",
-    "ace-builds": "^1.2.2"
+    "ace-builds": "^1.4.10"
   },
   dependencies: {
     "survey-knockout": "^" + packageJson.version,
