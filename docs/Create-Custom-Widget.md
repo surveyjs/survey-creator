@@ -221,7 +221,7 @@ var richEditWidget = {
   name: "richedit",
   //This title will be displayed on SurveyJS Creator toolbox
   title: "Rich Editor",
-  //Icon that displays  on SurveyJS Creator toolbox
+  //Icon that displays on SurveyJS Creator toolbox
   //You can leave this property empty to show the default icon
   iconName: "icon-editor",
   //It is a required function for a custom type widget, that user can see on toolbox
@@ -251,7 +251,7 @@ var richEditWidget = {
   </div>',
   //Our element will be rendered base on template.
   //We do not need to do anything here
-  afterRender: function (question, el) {},
+  afterRender: function (question, el) {}
 };
 
 //Register our widget in singleton custom widget collection and tells that, it is a new "customtype". 
