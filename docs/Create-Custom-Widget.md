@@ -2,7 +2,7 @@
 
 - [When do you need a custom widget?](#needs)
 - [Create simple custom widget](#simplewidget)
-  - [Add functionality into existing question)](#addfunctionality)
+  - [Add functionality into existing question](#addfunctionality)
   - [Add a new property into existing question](#addnewproperty)
   - [Add new question using custom widget](#newquestion)
   - [Totally replace the existing question input by custom widget](#replacequestion)
