@@ -169,11 +169,15 @@ export { imageAdorner } from "../adorners/image";
 export { titleImageAdorner } from "../adorners/title-image";
 export { TitleActionsViewModel } from "../adorners/title-actions";
 
+// ui components
 export {
   IAccordionItemData,
   AccordionItemModel,
   AccordionModel,
 } from "../utils/accordion";
+export { ButtonViewModel } from "../utils/button";
+export { DropdownViewModel } from "../utils/dropdown";
+export { BooleanViewModel } from "../utils/boolean";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
 export { DesignerContainerModel } from "../utils/designer-container";

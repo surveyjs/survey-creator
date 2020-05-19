@@ -39,13 +39,29 @@ export interface IToolbarItem {
    * Toolbar item css class
    */
   css?: ko.Computed<string> | string;
+  /**
+   * Toolbar inner element css class
+   */
   innerCss?: ko.Computed<string> | string;
+  /**
+   * Toolbar item data object. Used as data for custom template rendering
+   */
   data?: any;
+  /**
+   * Toolbar item template name
+   */
   template?: string;
+  /**
+   * Toolbar item component name
+   */
+  component?: ko.Computed<string> | string;
   /**
    * Toolbar item icon name
    */
   icon?: string;
+  /**
+   * Toolbar item child items. Can be used as contianer for options
+   */
   items?: ko.ObservableArray<IToolbarItem>;
 }
 

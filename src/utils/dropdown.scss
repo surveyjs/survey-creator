@@ -1,0 +1,15 @@
+﻿.svd-toolbar-dropdown {
+  line-height: 34px;
+  margin-right: 1em;
+  
+  .svd-toolbar-dropdown__label {
+    display: inline-block;
+  }
+  .svd-toolbar-dropdown__select {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    height: 34px;
+    min-width: 200px;
+  }
+}

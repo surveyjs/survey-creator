@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from '../editor';
+import { IToolbarItem } from '../components/toolbar';
 
 import "./test.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./test.html");
@@ -26,6 +27,12 @@ export class SurveyLiveTester {
   koShowPagesInTestSurveyTab = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
+
+  /**
+   * The list of toolbar items. You may add/remove/replace them.
+   * @see IToolbarItem
+   */
+  public toolbarItems = ko.observableArray<IToolbarItem>();
 
   private _simulatorEnabled = ko.observable<boolean>(true);
   public get simulatorEnabled() {
@@ -65,10 +72,10 @@ export class SurveyLiveTester {
   constructor(private surveyProvider: any) {
     var self = this;
     this.survey = this.surveyProvider.createSurvey({}, "test");
-    this.selectTestClick = function() {
+    this.selectTestClick = function () {
       self.testAgain();
     };
-    this.selectPageClick = function(pageItem) {
+    this.selectPageClick = function (pageItem) {
       if (self.survey) {
         if (self.survey.state == "starting") {
           self.survey.start();
@@ -76,20 +83,20 @@ export class SurveyLiveTester {
         self.survey.currentPage = pageItem.page;
       }
     };
-    this.koActivePage.subscribe(function(newValue) {
+    this.koActivePage.subscribe(function (newValue) {
       if (!!newValue) {
         self.survey.currentPage = newValue;
       }
     });
-    this.koShowInvisibleElements.subscribe(function(newValue) {
+    this.koShowInvisibleElements.subscribe(function (newValue) {
       self.survey.showInvisibleElements = newValue;
     });
-    this.setPageDisable = function(option, item) {
+    this.setPageDisable = function (option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
-    this.koActiveLanguage.subscribe(function(newValue) {
+    this.koActiveLanguage.subscribe(function (newValue) {
       if (self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
@@ -106,6 +113,66 @@ export class SurveyLiveTester {
         this.simulatorOptions.orientation = newValue ? "l" : "p";
         this.simulator.options(this.simulatorOptions);
       }
+    });
+
+    this.toolbarItems.push(<any>{
+      id: "svd-test-page-selector",
+      title: this.selectPageText,
+      visible: ko.computed(() => this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()),
+      tooltip: this.selectPageText,
+      component: "svd-dropdown",
+      action: ko.computed({
+        read: () => this.koActivePage(),
+        write: (val: any) => this.koActivePage(val)
+      }),
+      afterRender: this.setPageDisable,
+      items: <any>ko.computed(() => this.koPages().map(page => { return { text: page.title, value: page.page }; }))
+    });
+    this.toolbarItems.push({
+      id: "svd-test-locale-selector",
+      title: this.localeText,
+      visible: this.koShowDefaultLanguageInTestSurveyTab,
+      tooltip: this.localeText,
+      component: "svd-dropdown",
+      action: ko.computed({
+        read: () => this.koActiveLanguage(),
+        write: (val: any) => this.koActiveLanguage(val)
+      }),
+      items: <any>this.koLanguages
+    });
+    this.toolbarItems.push({
+      id: "svd-test-show-invisible",
+      title: this.showInvisibleElementsText,
+      visible: this.koShowInvisibleElementsInTestSurveyTab,
+      tooltip: this.showInvisibleElementsText,
+      component: "svd-boolean",
+      action: ko.computed({
+        read: () => this.koShowInvisibleElements(),
+        write: (val: any) => this.koShowInvisibleElements(val)
+      })
+    });
+    this.toolbarItems.push({
+      id: "svd-test-simulator",
+      title: this.simulatorText,
+      visible: this.simulatorEnabled,
+      tooltip: this.simulatorText,
+      component: "svd-dropdown",
+      action: ko.computed({
+        read: () => this.koActiveDevice(),
+        write: (val: any) => this.koActiveDevice(val)
+      }),
+      items: <any>this.koDevices
+    });
+    this.toolbarItems.push({
+      id: "svd-test-simulator-orientation",
+      title: this.landscapeOrientationText,
+      visible: this.koHasFrame,
+      tooltip: this.landscapeOrientationText,
+      component: "svd-boolean",
+      action: ko.computed({
+        read: () => this.koLandscapeOrientation(),
+        write: (val: any) => this.koLandscapeOrientation(val)
+      })
     });
   }
   public setJSON(json: any) {
@@ -124,7 +191,7 @@ export class SurveyLiveTester {
       self.koIsRunning(false);
     });
     if (!!this.survey["onNavigateToUrl"]) {
-      this.survey["onNavigateToUrl"].add(function(sender, options) {
+      this.survey["onNavigateToUrl"].add(function (sender, options) {
         var url = options.url;
         options.url = "";
         if (!!url) {
@@ -478,7 +545,7 @@ ko.components.register("survey-tester", {
       };
 
       var subscr = creator.koViewType.subscribe(viewType => {
-        if(viewType === "test") {
+        if (viewType === "test") {
           var options = {
             showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
             showDefaultLanguageInTestSurveyTab: creator.showDefaultLanguageInTestSurveyTab,

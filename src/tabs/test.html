@@ -1,5 +1,6 @@
-<div data-bind="visible: koIsRunning()">
-    <span data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
+<svd-toolbar params="items: toolbarItems" data-bind="visible: koIsRunning()"></svd-toolbar>
+<div class="svd_toolbar" data-bind="visible: koIsRunning()">
+    <span class="svd_action" data-bind="visible: koPages().length > 1 && koShowPagesInTestSurveyTab()">
         <label for="testSurveyPageChanged" data-bind="text: selectPageText"></label>
         <span id="testSurveyPageChanged">
             <select onmousewheel="return false;" class="form-control"
@@ -7,7 +8,7 @@
             </select>
         </span>
     </span>
-    <span data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
+    <span class="svd_action" data-bind="visible: koShowDefaultLanguageInTestSurveyTab">
         <label for="testSurveyLocale" data-bind="text: localeText"></label>
         <span id="testSurveyLocale">
             <select onmousewheel="return false;" class="form-control"
@@ -15,7 +16,8 @@
             </select>
         </span>
     </span>
-    <label id="testShowInvisibleElements" data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
+    <label class="svd_action" id="testShowInvisibleElements"
+        data-bind="visible: koShowInvisibleElementsInTestSurveyTab">
         <div class="sjs-cb-container">
             <input class="svd_editor_control" type="checkbox" data-bind="checked: koShowInvisibleElements">
             <span class="checkmark"
@@ -24,7 +26,7 @@
         </div>
     </label>
     <!-- ko if: simulatorEnabled -->
-    <span>
+    <span class="svd_action">
         <label for="testDeviceSelector" data-bind="text: simulatorText"></label>
         <span id="testDeviceSelector">
             <select onmousewheel="return false;" class="form-control"
@@ -34,7 +36,7 @@
     </span>
     <!-- /ko -->
     <!-- ko if: koHasFrame -->
-    <label for="testDeviceOrientation">
+    <label class="svd_action" for="testDeviceOrientation">
         <div class="sjs-cb-container">
             <input id="testDeviceOrientation" class="svd_editor_control" type="checkbox"
                 data-bind="checked: koLandscapeOrientation">
