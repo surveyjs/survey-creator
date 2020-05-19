@@ -8,6 +8,7 @@ import { IToolbarItem } from './components/toolbar';
 export class SurveyJSONEditor {
   public static updateTextTimeout: number = 1000;
   public static showToolbar = true;
+  public static aceBasePath = "";
 
   private isProcessingImmediately: boolean = false;
   private aceEditor: AceAjax.Editor;
@@ -105,9 +106,15 @@ export class SurveyJSONEditor {
     this.aceEditor = ace.edit(editorElement);
     this.aceEditor.setReadOnly(this.readOnly);
     var self = this;
-    //TODO add event to change ace theme and mode
-    //this.aceEditor.setTheme("ace/theme/monokai");
-    //this.aceEditor.session.setMode("ace/mode/json");
+    if (SurveyJSONEditor.aceBasePath) {
+      try {
+        ace["config"].set('basePath', SurveyJSONEditor.aceBasePath);
+        // TODO add event to change ace theme and mode
+        // this.aceEditor.setTheme("ace/theme/monokai");
+        // this.aceEditor.session.setMode("ace/mode/json");
+        this.aceEditor.session.setMode("ace/mode/json");
+      } catch { }
+    }
     self.aceEditor.setShowPrintMargin(false);
     self.aceEditor.getSession().on("change", function () {
       self.onJsonEditorChanged();

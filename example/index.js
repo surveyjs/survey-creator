@@ -50,6 +50,9 @@ if (!window["%hammerhead%"]) {
   Survey.StylesManager.applyTheme();
   SurveyCreator.StylesManager.applyTheme();
   //
+  
+  SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
+
 
   var options = {
     questionTypes: [

@@ -108,6 +108,7 @@ export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../tabs/test";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
+export { SurveyJSONEditor } from "../surveyJSONEditor";
 export { SurveyLogic } from "../logic";
 export {
   SurveyForDesigner,
