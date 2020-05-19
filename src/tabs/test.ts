@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization, getLocString } from "../editorLocalization";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from '../editor';
 import { IToolbarItem } from '../components/toolbar';
@@ -117,9 +117,9 @@ export class SurveyLiveTester {
 
     this.toolbarItems.push(<any>{
       id: "svd-test-page-selector",
-      title: this.selectPageText,
+      title: getLocString("ts.selectPage"),
       visible: ko.computed(() => this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()),
-      tooltip: this.selectPageText,
+      tooltip: getLocString("ts.selectPage"),
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koActivePage(),
@@ -142,9 +142,9 @@ export class SurveyLiveTester {
     });
     this.toolbarItems.push({
       id: "svd-test-show-invisible",
-      title: this.showInvisibleElementsText,
+      title: getLocString("ts.showInvisibleElements"),
       visible: this.koShowInvisibleElementsInTestSurveyTab,
-      tooltip: this.showInvisibleElementsText,
+      tooltip: getLocString("ts.showInvisibleElements"),
       component: "svd-boolean",
       action: ko.computed({
         read: () => this.koShowInvisibleElements(),
@@ -153,9 +153,9 @@ export class SurveyLiveTester {
     });
     this.toolbarItems.push({
       id: "svd-test-simulator",
-      title: this.simulatorText,
+      title: getLocString("pe.simulator"),
       visible: this.simulatorEnabled,
-      tooltip: this.simulatorText,
+      tooltip: getLocString("pe.simulator"),
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koActiveDevice(),
@@ -165,9 +165,9 @@ export class SurveyLiveTester {
     });
     this.toolbarItems.push({
       id: "svd-test-simulator-orientation",
-      title: this.landscapeOrientationText,
+      title: getLocString("pe.landscapeOrientation"),
       visible: this.koHasFrame,
-      tooltip: this.landscapeOrientationText,
+      tooltip: getLocString("pe.landscapeOrientation"),
       component: "svd-boolean",
       action: ko.computed({
         read: () => this.koLandscapeOrientation(),
@@ -269,20 +269,8 @@ export class SurveyLiveTester {
   public get testSurveyAgainText() {
     return this.getLocString("ed.testSurveyAgain");
   }
-  public get selectPageText() {
-    return this.getLocString("ts.selectPage");
-  }
-  public get showInvisibleElementsText() {
-    return this.getLocString("ts.showInvisibleElements");
-  }
   public get localeText() {
     return this.getLocString("pe.locale");
-  }
-  public get simulatorText() {
-    return this.getLocString("pe.simulator");
-  }
-  public get landscapeOrientationText() {
-    return this.getLocString("pe.landscapeOrientation");
   }
   private testAgain() {
     this.setJSON(this.json);
