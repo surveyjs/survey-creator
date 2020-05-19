@@ -35,6 +35,7 @@ export class SurveyJSONEditor {
   protected addToolbarItems() {
     if (!this.hasAceEditor) return;
     if (!SurveyJSONEditor.showToolbar) return;
+    let focusEditor = () => setTimeout(() => this.aceEditor.focus(), 1);
     let items: Array<IToolbarItem> = [];
     items.push({
       id: "svd-undo",
@@ -43,6 +44,7 @@ export class SurveyJSONEditor {
       tooltip: getLocString("ed.undoTooltip"),
       action: () => {
         this.aceEditor.execCommand("undo");
+        focusEditor();
       }
     });
     items.push({
@@ -52,6 +54,7 @@ export class SurveyJSONEditor {
       tooltip: getLocString("ed.redoTooltip"),
       action: () => {
         this.aceEditor.execCommand("redo");
+        focusEditor();
       }
     });
     if (window["navigator"]) {
@@ -59,28 +62,33 @@ export class SurveyJSONEditor {
         id: "svd-copy",
         icon: "icon-actioncopy",
         title: getLocString("ed.copy"),
+        showTitle: false,
         tooltip: getLocString("ed.copyTooltip"),
         action: () => {
           var text = this.aceEditor.getCopyText();
           this.aceEditor.execCommand("copy");
           navigator.clipboard.writeText(text);
+          focusEditor();
         }
       });
       items.push({
         id: "svd-cut",
-        icon: "icon-actioncopy",
+        icon: "icon-actioncut",
         title: getLocString("ed.cut"),
+        showTitle: false,
         tooltip: getLocString("ed.cutTooltip"),
         action: () => {
           var text = this.aceEditor.getCopyText();
           this.aceEditor.execCommand("cut");
           navigator.clipboard.writeText(text);
+          focusEditor();
         }
       });
       items.push({
         id: "svd-paste",
-        icon: "icon-actioncopy",
+        icon: "icon-actionpaste",
         title: getLocString("ed.paste"),
+        showTitle: false,
         tooltip: getLocString("ed.pasteTooltip"),
         action: () => {
           navigator.clipboard.readText().then((text: string) => {

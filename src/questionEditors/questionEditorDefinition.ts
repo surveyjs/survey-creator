@@ -432,9 +432,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "showPageTitles" },
         { name: "showPageNumbers" },
 
+        { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },
         { name: "pageNextText", tab: "navigation" },
         { name: "completeText", tab: "navigation" },
+        { name: "previewText", tab: "navigation" },
+        { name: "editText", tab: "navigation" },
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",
