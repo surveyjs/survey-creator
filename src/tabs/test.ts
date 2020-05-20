@@ -336,8 +336,8 @@ export class SurveyLiveTester {
       ((this.koLandscapeOrientation() ? device.width : device.height) /
         device.cssPixelRatio) *
       scale;
-    var offsetRatioX = this.koLandscapeOrientation() ? 0.15 : 0.165;
-    var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.155;
+    var offsetRatioX = this.koLandscapeOrientation() ? 0.17 : 0.165;
+    var offsetRatioY = this.koLandscapeOrientation() ? 0.17 : 0.165;
     return {
       scale: this.simulatorScaleEnabled ? scale * 2 : 1,
       width: width,
@@ -346,6 +346,9 @@ export class SurveyLiveTester {
       frameHeight: height * 1.34,
       frameX: width * offsetRatioX,
       frameY: height * offsetRatioY,
+      cssClass: ko.computed(() => {
+        return device.cssClass + (this.koLandscapeOrientation() ? " svd-simulator-frame-landscape" : "");
+      })
     };
   });
 
@@ -391,6 +394,7 @@ export var simulatorDevices = {
     height: 960,
     deviceType: "phone",
     title: "iPhone",
+    cssClass: "svd-simulator-iphone4"
   },
   iPhone5: {
     cssPixelRatio: 2,
@@ -399,6 +403,7 @@ export var simulatorDevices = {
     height: 1136,
     deviceType: "phone",
     title: "iPhone 5",
+    cssClass: "svd-simulator-iphone5"
   },
   iPhone6: {
     cssPixelRatio: 2,
@@ -407,6 +412,7 @@ export var simulatorDevices = {
     height: 1334,
     deviceType: "phone",
     title: "iPhone 6",
+    cssClass: "svd-simulator-iphone6"
   },
   iPhone6plus: {
     cssPixelRatio: 2,
@@ -415,6 +421,7 @@ export var simulatorDevices = {
     height: 1920,
     deviceType: "phone",
     title: "iPhone 6 Plus",
+    cssClass: "svd-simulator-iphone6plus"
   },
   iPhone8: {
     cssPixelRatio: 2,
@@ -423,6 +430,7 @@ export var simulatorDevices = {
     height: 1334,
     deviceType: "phone",
     title: "iPhone 8",
+    cssClass: "svd-simulator-iphone8"
   },
   iPhone8plus: {
     cssPixelRatio: 2,
@@ -431,6 +439,7 @@ export var simulatorDevices = {
     height: 1920,
     deviceType: "phone",
     title: "iPhone 8 Plus",
+    cssClass: "svd-simulator-iphone8plus"
   },
   iPhoneX: {
     cssPixelRatio: 2,
@@ -439,6 +448,7 @@ export var simulatorDevices = {
     height: 2436,
     deviceType: "phone",
     title: "iPhone X",
+    cssClass: "svd-simulator-iphonex"
   },
   iPhoneXmax: {
     cssPixelRatio: 2,
@@ -447,6 +457,7 @@ export var simulatorDevices = {
     height: 2688,
     deviceType: "phone",
     title: "iPhone X Max",
+    cssClass: "svd-simulator-iphonexmax"
   },
   iPad: {
     cssPixelRatio: 2,
@@ -455,6 +466,7 @@ export var simulatorDevices = {
     height: 2048,
     deviceType: "tablet",
     title: "iPad",
+    cssClass: "svd-simulator-ipad"
   },
   iPadMini: {
     cssPixelRatio: 1,
@@ -463,6 +475,7 @@ export var simulatorDevices = {
     height: 1024,
     deviceType: "tablet",
     title: "iPad Mini",
+    cssClass: "svd-simulator-ipadmini"
   },
   iPadPro: {
     cssPixelRatio: 1,
@@ -471,6 +484,7 @@ export var simulatorDevices = {
     height: 2388,
     deviceType: "tablet",
     title: 'iPad Pro 11"',
+    cssClass: "svd-simulator-ipadpro"
   },
   iPadPro13: {
     cssPixelRatio: 1,
@@ -479,6 +493,7 @@ export var simulatorDevices = {
     height: 2732,
     deviceType: "tablet",
     title: 'iPad Pro 12,9"',
+    cssClass: "svd-simulator-ipadpro13"
   },
   androidPhone: {
     cssPixelRatio: 2,
@@ -487,6 +502,7 @@ export var simulatorDevices = {
     height: 1280,
     deviceType: "phone",
     title: "Android Phone",
+    cssClass: "svd-simulator-androidphone"
   },
   androidTablet: {
     cssPixelRatio: 1.5,
@@ -495,6 +511,7 @@ export var simulatorDevices = {
     height: 1280,
     deviceType: "tablet",
     title: "Android Tablet",
+    cssClass: "svd-simulator-androidtablet"
   },
   win10Phone: {
     cssPixelRatio: 1,
@@ -503,6 +520,7 @@ export var simulatorDevices = {
     height: 568,
     deviceType: "phone",
     title: "Windows 10 Phone",
+    cssClass: "svd-simulator-win10phone"
   },
   msSurface: {
     cssPixelRatio: 1,
@@ -511,11 +529,13 @@ export var simulatorDevices = {
     height: 1366,
     deviceType: "tablet",
     title: "MS Surface",
+    cssClass: "svd-simulator-mssurface"
   },
   genericPhone: {
     cssPixelRatio: 1,
     deviceType: "phone",
     title: "",
+    cssClass: "svd-simulator-genphone"
   },
 };
 
