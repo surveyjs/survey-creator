@@ -7,11 +7,11 @@
         </div>
         <div class="svd-simulator"
             data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px', transform: 'scale(' + koSimulatorFrame().scale + ')' }">
-            <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+            <survey-widget class="svd-simulator-content" params="survey: survey"></survey-widget>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko ifnot: koHasFrame -->
-    <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+    <survey-widget class="svd-simulator-content" params="survey: survey"></survey-widget>
     <!-- /ko -->
 </div>
