@@ -8,7 +8,8 @@
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
-@import "templates/propertyEditors/propertyeditor-switch.scss";
+@import "./templates/propertyEditors/propertyeditor-switch";
+@import "./utils/vertical-container";
 
 .svd_flowpanel[contenteditable="true"]:empty:before {
   content: attr(placeholder);
@@ -23,6 +24,9 @@
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
     "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
+  width: 100%;
+  height: 100%;
+
   .svd_questions_editor {
     .svd_question {
       overflow: visible;
@@ -155,6 +159,12 @@
     padding: 30px;
     margin: 0;
     border: none;
+    height: 100%;
+
+    &>* {
+      height: 100%;
+    }
+
     .svd_survey_designer {
       position: relative;
       display: table;
@@ -193,10 +203,10 @@
       }
     }
     .svd_json_editor {
-      height: $editor-height;
+      height: 100%;
     }
     .svd_json_editor_area {
-      height: $editor-height;
+      height: 100%;
       width: 100%;
     }
   }
