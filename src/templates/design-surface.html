@@ -1,9 +1,9 @@
 <script type="text/html" id="se-component-toolbox-header">
   <!-- ko if: !toolbox.koHasCategories() -->
-  <div class="svd-designer-container__header">
-    <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.toolbox')"></span>
-  </div>
-  <!-- /ko  -->
+<div class="svd-designer-container__header">
+  <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.toolbox')"></span>
+</div>
+<!-- /ko  -->
 </script>
 
 <script type="text/html" id="se-component-toolbox">
@@ -77,20 +77,34 @@
 
 <script type="text/html" id="se-component-property-grid">
   <div class="svd_properties svd-light-border-color svd-dark-bg-color">
-      <div class="svd_object_selector svd-light-border-color">
-          <div class="svd_custom_select">
-              <select
-              onmousewheel="return false;"
-              id="objectSelector"
-              class="form-control"
-              data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
-              aria-label="Survey elements selector"
-              ></select>
+    <div class="svd-vertical-container">
+      <div class="svd-vertical-container__row">
+          <div class="svd-vertical-container__cell">
+            <div class="svd_object_selector svd-light-border-color">
+              <div class="svd_custom_select">
+                  <select
+                  onmousewheel="return false;"
+                  id="objectSelector"
+                  class="form-control"
+                  data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
+                  aria-label="Survey elements selector"
+                  ></select>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="svd-vertical-container__row">
+          <div class="svd-vertical-container__cell">
+            <div class="svd-vertical-container__cell-content-holder">
+              <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
+                <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
+                  <div data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"></div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
-      <div class="svd_object_editor" data-bind="style: {height: koDesignerHeight}">
-        <div data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"></div>
-      </div>
+    </div>
   </div>
 </script>
 
