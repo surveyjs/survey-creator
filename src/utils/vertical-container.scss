@@ -36,3 +36,9 @@
 .svd-vertical-container__cell-content--scrollable {
     overflow: auto;
 }
+
+.svd_editors {
+    .svd-vertical-container {
+        table-layout: fixed;
+    }
+}
