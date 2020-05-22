@@ -30,6 +30,10 @@
     height: 100%;
     overflow: auto;
 
+    .row {
+      margin: 0;
+    }
+
     &> * {
       width: 100%;
     }
