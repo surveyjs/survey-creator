@@ -1,3 +1,4 @@
+//Uncomment this line on creating a translation file
 import { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export var tgStrings = {
@@ -217,6 +218,9 @@ export var tgStrings = {
     cellsEmptyRowsColumns: "Бояд ақалан як сатр ё сутун бошад",
 
     propertyIsEmpty: "Илтимос, қимматро ворид кунед",
+	  propertyNameIsNotUnique: "Лутфан як номи беҳамто ворид кунед",
+    listIsEmpty: "Ҳолати нав илова кунед",
+	  expressionIsEmpty: "Ибораи холӣ аст",
     value: "Қиммат",
     text: "Матн",
     rowid: "ID-и сатр",
@@ -228,6 +232,12 @@ export var tgStrings = {
     path: "Роҳ",
     valueName: "Номи нуқта",
     titleName: "Сарлавҳаи нуқта",
+	  titlePlaceholder: "Сарлавҳа ворид кунед",
+    surveyTitlePlaceholder: "Сарлавҳаи пурсишро ворид кунед",
+    pageTitlePlaceholder: "Сарлавҳаи саҳифаро ворид кунед",
+    descriptionPlaceholder: "Тавсифро ворид кунед",
+    surveyDescriptionPlaceholder: "Тавсифи пурсишро ворид кунед",
+    pageDescriptionPlaceholder: "Тавсифи саҳифаро ворид кунед",
   
     hasOther: "Нуқтаи 'Дигар' вуҷуд аст",
     otherText: "Манти нуқтаи 'Дигар'",
@@ -274,6 +284,12 @@ export var tgStrings = {
     qEditorTitle: "Тағйир додани: {0}",
   
     maxLength: "Шумораи максималӣ",
+	  buildExpression: "Сохтан",
+    editExpression: "Таҳрир кунед",
+    and: "ВА",
+    or: "Ё",
+    remove: "Ҷойивазкунӣ",
+    addCondition: "шарт илова кунед",
   
     //survey
     showTitle: "Нишон/пинҳон кардани сарлавҳа",
@@ -332,7 +348,18 @@ export var tgStrings = {
     totalDisplayStyle: "Услуби намоиши умумӣ",
     totalCurrency: "Асъори умумӣ",
     totalFormat: "Намуди умумӣ",
-  
+	// Header  adorner
+    logoPosition: "Ҷойгиршавии логотип",
+    addLogo: "Иловаи логотип...",
+    changeLogo: "Тағйир додани логотип...",
+    logoPositions: {
+      none: "Разместить логотип",
+      left: "Аз чап",
+      right: "Дар тарафи рост",
+      top: "Аз боло",
+      bottom: "Аз поён"
+    },
+
     tabs: {
       general: "Умумӣ",
       fileOptions: "Танзимотҳо",
@@ -358,7 +385,15 @@ export var tgStrings = {
       calculatedValues: "Қимматҳои ҳисобкунӣ",
       triggers: "Триггерҳо",
       templateTitle: "Номи намуна",
-      totals: "Натиҷаҳо"
+      totals: "Натиҷаҳо",
+	    logic: "Мантиқ",
+      layout: "Тарҳ",
+      data: "Маълумот",
+      validation: "Санҷед",
+      cells: "Ҳуҷайраҳо",
+      showOnCompleted: "Дар охир нишон диҳед",
+      logo: "Логитип дар сарлавҳаи саволнома",
+      others: "Дигар"
     },
     editProperty: "Тағйири хосияти '{0}'",
     items: "[Элементҳо: {0}]",

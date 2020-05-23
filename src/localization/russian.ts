@@ -87,7 +87,7 @@ export var ruStrings = {
     saving: "Сохранение",
     saved: "Сохраненный",
     saveError: "Ошибка! Содержание редактора не сохранено.",
-    translationAddLanguage: "Выбор языка для перевода",
+    translationAddLanguage: "Выберите дополнительный язык опросника",
     translationShowAllStrings: "Показывать все строки",
     translationShowAllPages: "Показывать все страницы",
     translationNoStrings: "Нет строк для перевода. Пожалуйста, измените фильтр.",
@@ -180,7 +180,7 @@ export var ruStrings = {
     close: "Закрыть",
     delete: "Удалить",
     add: "Добавить",
-    Addnew: "Добавить новый",
+    addNew: "Добавить новый",
     addItem: "Нажмите, чтобы добавить элемент...",
     addOther: "Другое",
     addSelectAll: "Выбрать все пункты",
@@ -218,7 +218,10 @@ export var ruStrings = {
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
 
     propertyIsEmpty: "Пожалуйста, введите значение",
-    value: "Значение",
+	  propertyNameIsNotUnique: "Пожалуйста, введите уникальное имя",
+    listIsEmpty: "Добавьте новое условие",
+	  expressionIsEmpty: "Выражение - пустое",
+	  value: "Значение",
     text: "Текст",
     rowid: "ID строки",
     imageLink: "Ссылка на изображение",
@@ -229,6 +232,12 @@ export var ruStrings = {
     path: "Путь",
     valueName: "Название пункта",
     titleName: "Заголовок пункта",
+	  titlePlaceholder: "Введите заголовок",
+    surveyTitlePlaceholder: "Введите заголовок опроса",
+    pageTitlePlaceholder: "Введите заголовок страницы",
+    descriptionPlaceholder: "Введите описание",
+    surveyDescriptionPlaceholder: "Введите описание опроса",
+    pageDescriptionPlaceholder: "Введите описание страницы",
   
     hasOther: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
@@ -275,7 +284,13 @@ export var ruStrings = {
     qEditorTitle: "Изменить: {0}",
   
     maxLength: "Максимальная длина",
-  
+	  buildExpression: "Собрать",
+    editExpression: "Редактировать",
+    and: "И",
+    or: "ИЛИ",
+    remove: "Переместить",
+    addCondition: "добавить условие",
+
     //survey
     showTitle: "Показать/скрыть заголовок",
     locale: "Язык по умолчанию",
@@ -333,7 +348,18 @@ export var ruStrings = {
     totalDisplayStyle: "Общий стиль отображения",
     totalCurrency: "Общая валюта",
     totalFormat: "Общий формат",
-  
+	  // Header  adorner
+    logoPosition: "Местоположение логотипа",
+    addLogo: "Добавить логотип...",
+    changeLogo: "Изменить логотип...",
+    logoPositions: {
+      none: "Разместить логотип",
+      left: "Слева",
+      right: "Справа",
+      top: "Сверху",
+      bottom: "Снизу",
+    },
+
     tabs: {
       general: "Общие",
       fileOptions: "Параметры",
@@ -359,7 +385,15 @@ export var ruStrings = {
       calculatedValues: "Расчетные значения",
       triggers: "Триггеры",
       templateTitle: "Название шаблона",
-      totals: "Итоги"
+      totals: "Итоги",
+	    logic: "Логика",
+      layout: "Планировка",
+      data: "Данные",
+      validation: "Проверка",
+      cells: "Ячейки",
+      showOnCompleted: "Показать по завершению",
+      logo: "Логотип в заголовке опросника",
+      others: "Другие",
     },
     editProperty: "Редактировать свойство '{0}'",
     items: "[Элементы: {0}]",
@@ -643,7 +677,7 @@ export var ruStrings = {
     questionTitleTemplate: "Шаблон названия опроса, по умолчанию: {не} {требует} {текста}.",
     firstPageIsStarted: "Первая страница опросника является стартовой страницей.",
     isSinglePage: "Показывать все элементы на одной странице",
-    maxTimeToFinishPage: "Максимальное время в секундах, чтобы заполнить страницу опросника",
+    maxTimeToFinishPage: "Максимальное время (секунды), чтобы заполнить страницу опросника",
     showTimerPanel: "Показывать панель таймера",
     showTimerPanelMode: "Показывать режим панели таймера",
 

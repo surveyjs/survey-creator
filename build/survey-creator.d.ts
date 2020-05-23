@@ -1,4 +1,4 @@
-/*Type definitions for SurveyJS Creator JavaScript library v1.7.5
+/*Type definitions for SurveyJS Creator JavaScript library v1.7.7
 (c) 2015-2020 Devsoft Baltic OÜ - http://surveyjs.io/
 Github: https://github.com/surveyjs/survey-creator
 License: https://surveyjs.io/Licenses#BuildSurvey
@@ -28,7 +28,9 @@ import "../localization/polish";
 import "../localization/portuguese";
 import "../localization/simplified-chinese";
 import "../localization/spanish";
+import "../localization/swedish";
 import "../localization/traditional-chinese";
+import "../localization/turkish";
 import "../localization/norwegian";
 import "../localization/hungarian";
 import "../localization/russian";
@@ -103,6 +105,12 @@ export declare var enStrings: {
         redo: string;
         undoTooltip: string;
         redoTooltip: string;
+        copy: string;
+        cut: string;
+        paste: string;
+        copyTooltip: string;
+        cutTooltip: string;
+        pasteTooltip: string;
         options: string;
         generateValidJSON: string;
         generateReadableJSON: string;
@@ -307,6 +315,8 @@ export declare var enStrings: {
         pagePrevText: string;
         pageNextText: string;
         completeText: string;
+        previewText: string;
+        editText: string;
         startSurveyText: string;
         showNavigationButtons: string;
         showPrevButton: string;
@@ -472,6 +482,12 @@ export declare var enStrings: {
         survey: string;
         onNextPage: string;
         onValueChanged: string;
+        singlePage: string;
+        standard: string;
+        questionPerPage: string;
+        noPreview: string;
+        showAllQuestions: string;
+        showAnsweredQuestions: string;
     };
     op: {
         empty: string;
@@ -683,6 +699,7 @@ export declare var editorLocalization: {
     getValueInternal(value: any, prefix: string, locale?: string): any;
     getLocales: () => string[];
 };
+export declare function getLocString(strName: string, locale?: string): any;
 export declare var defaultStrings: {
     survey: {
         edit: string;
@@ -752,6 +769,12 @@ export declare var defaultStrings: {
         redo: string;
         undoTooltip: string;
         redoTooltip: string;
+        copy: string;
+        cut: string;
+        paste: string;
+        copyTooltip: string;
+        cutTooltip: string;
+        pasteTooltip: string;
         options: string;
         generateValidJSON: string;
         generateReadableJSON: string;
@@ -956,6 +979,8 @@ export declare var defaultStrings: {
         pagePrevText: string;
         pageNextText: string;
         completeText: string;
+        previewText: string;
+        editText: string;
         startSurveyText: string;
         showNavigationButtons: string;
         showPrevButton: string;
@@ -1121,6 +1146,12 @@ export declare var defaultStrings: {
         survey: string;
         onNextPage: string;
         onValueChanged: string;
+        singlePage: string;
+        standard: string;
+        questionPerPage: string;
+        noPreview: string;
+        showAllQuestions: string;
+        showAnsweredQuestions: string;
     };
     op: {
         empty: string;
@@ -2375,6 +2406,74 @@ export declare class PagesEditor {
     dispose(): void;
 }
 
+import "./toolbar.scss";
+/**
+    * The toolbar item description.
+    */
+export interface IToolbarItem {
+        /**
+            * Unique string id
+            */
+        id: string;
+        /**
+            * Set this property to false to make the toolbar item invisible.
+            */
+        visible?: ko.Computed<boolean> | ko.Observable<boolean> | boolean;
+        /**
+            * Toolbar item title
+            */
+        title: ko.Computed<string> | string;
+        /**
+            * Toolbar item tooltip
+            */
+        tooltip?: ko.Computed<string> | string;
+        /**
+            * Set this property to false to disable the toolbar item.
+            */
+        enabled?: ko.Computed<boolean> | boolean;
+        /**
+            * Set this property to false to hide the toolbar item title.
+            */
+        showTitle?: ko.Computed<boolean> | boolean;
+        /**
+            * A callback that calls on toolbar item click.
+            */
+        action?: () => void;
+        /**
+            * Toolbar item css class
+            */
+        css?: ko.Computed<string> | string;
+        /**
+            * Toolbar inner element css class
+            */
+        innerCss?: ko.Computed<string> | string;
+        /**
+            * Toolbar item data object. Used as data for custom template rendering
+            */
+        data?: any;
+        /**
+            * Toolbar item template name
+            */
+        template?: string;
+        /**
+            * Toolbar item component name
+            */
+        component?: ko.Computed<string> | string;
+        /**
+            * Toolbar item icon name
+            */
+        icon?: string;
+        /**
+            * Toolbar item child items. Can be used as contianer for options
+            */
+        items?: ko.ObservableArray<IToolbarItem>;
+}
+export declare class Toolbar {
+        items: ko.ObservableArray<IToolbarItem> | Array<IToolbarItem>;
+        constructor(items: ko.ObservableArray<IToolbarItem> | Array<IToolbarItem>);
+        readonly hasItems: boolean;
+}
+
 export declare class SurveyTextWorker {
     text: string;
     static newLineChar: string;
@@ -2408,14 +2507,11 @@ export declare class SurveyHelper {
     static moveItemInArray(list: Array<any>, obj: any, newIndex: number): boolean;
 }
 
-import "./simulator.scss";
+import "./test.scss";
 export declare class SurveyLiveTester {
     koIsRunning: ko.Observable<boolean>;
     selectTestClick: any;
     selectPageClick: any;
-    koResultText: ko.Observable<string>;
-    koResultData: ko.ObservableArray<any>;
-    koResultViewType: ko.Observable<string>;
     survey: Survey.Survey;
     koSurvey: any;
     koPages: ko.ObservableArray<any>;
@@ -2428,189 +2524,21 @@ export declare class SurveyLiveTester {
     koShowPagesInTestSurveyTab: ko.Observable<boolean>;
     koShowDefaultLanguageInTestSurveyTab: ko.Observable<boolean>;
     koShowInvisibleElementsInTestSurveyTab: ko.Observable<boolean>;
-    simulatorEnabled: boolean;
-    simulatorScaleEnabled: boolean;
-    simulatorOptions: {
-        device: string;
-        orientation: string;
-        considerDPI: boolean;
-    };
-    koActiveDevice: ko.Observable<string>;
-    koDevices: ko.ObservableArray<{
-        text: any;
-        value: string;
-    }>;
-    koLandscapeOrientation: ko.Observable<boolean>;
+    /**
+      * The list of toolbar items. You may add/remove/replace them.
+      * @see IToolbarItem
+      */
+    toolbarItems: ko.ObservableArray<IToolbarItem>;
     onSurveyCreatedCallback: (survey: Survey.Survey) => any;
     constructor(surveyProvider: any);
     setJSON(json: any): void;
     show(options?: any): void;
     getLocString(name: string): any;
     readonly testSurveyAgainText: any;
-    readonly surveyResultsText: any;
-    readonly resultsTitle: any;
-    readonly resultsName: any;
-    readonly resultsValue: any;
-    readonly resultsDisplayValue: any;
-    readonly selectPageText: any;
-    readonly showInvisibleElementsText: any;
-    selectTableClick(model: SurveyLiveTester): void;
-    selectJsonClick(model: SurveyLiveTester): void;
     readonly localeText: any;
-    readonly simulatorText: any;
-    readonly landscapeOrientationText: any;
     koEventAfterRender(element: any, survey: any): void;
-    koHasFrame: ko.Computed<boolean>;
-    koSimulatorFrame: ko.Computed<{
-        scale: number;
-        width: number;
-        height: number;
-        frameWidth: number;
-        frameHeight: number;
-        frameX: number;
-        frameY: number;
-    }>;
+    dispose(): void;
 }
-export declare var DEFAULT_MONITOR_DPI: number;
-export declare var simulatorDevices: {
-    desktop: {
-        deviceType: string;
-        title: string;
-    };
-    iPhone: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhone5: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhone6: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhone6plus: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhone8: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhone8plus: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhoneX: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPhoneXmax: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPad: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPadMini: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPadPro: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    iPadPro13: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    androidPhone: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    androidTablet: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    win10Phone: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    msSurface: {
-        cssPixelRatio: number;
-        ppi: number;
-        width: number;
-        height: number;
-        deviceType: string;
-        title: string;
-    };
-    genericPhone: {
-        cssPixelRatio: number;
-        deviceType: string;
-        title: string;
-    };
-};
 
 export declare class SurveyEmbedingWindow {
     koHeadText: any;
@@ -2639,6 +2567,33 @@ export declare class QuestionConverter {
     static addConvertInfo(className: string, convertToClassName: string): void;
     static getConvertToClasses(className: string, availableTypes?: Array<string>): Array<string>;
     static convertObject(obj: Survey.Question, convertToClass: string): Survey.Question;
+}
+
+export declare class SurveyJSONEditor {
+        static updateTextTimeout: number;
+        static showToolbar: boolean;
+        static aceBasePath: string;
+        isJSONChanged: boolean;
+        isInitialJSON: boolean;
+        koText: any;
+        koErrors: any;
+        /**
+            * The list of toolbar items. You may add/remove/replace them.
+            * @see IToolbarItem
+            */
+        toolbarItems: ko.ObservableArray<IToolbarItem>;
+        constructor();
+        protected addToolbarItems(): void;
+        init(editorElement: HTMLElement): void;
+        readonly hasAceEditor: boolean;
+        text: string;
+        show(value: string): void;
+        readonly isJsonCorrect: boolean;
+        readonly survey: Survey.Survey;
+        /**
+            * A boolean property, false by default. Set it to true to deny editing.
+            */
+        readOnly: boolean;
 }
 
 export interface ISurveyLogicType {
@@ -2936,47 +2891,6 @@ export declare class Extentions {
     static registerPropertyEditor(name: string, creator: (property: Survey.JsonObjectProperty) => SurveyPropertyEditorBase): void;
 }
 
-/**
-    * The toolbar item description.
-    */
-export interface IToolbarItem {
-        /**
-            * Unique string id
-            */
-        id: string;
-        /**
-            * Set this property to false to make the toolbar item invisible.
-            */
-        visible: ko.Computed<boolean> | ko.Observable<boolean> | boolean;
-        /**
-            * Toolbar item title
-            */
-        title: ko.Computed<string> | string;
-        /**
-            * Set this property to false to disable the toolbar item.
-            */
-        enabled?: ko.Computed<boolean> | boolean;
-        /**
-            * Set this property to false to hide the toolbar item title.
-            */
-        showTitle?: ko.Computed<boolean> | boolean;
-        /**
-            * A callback that calls on toolbar item click.
-            */
-        action?: () => void;
-        /**
-            * Toolbar item css class
-            */
-        css?: ko.Computed<string> | string;
-        innerCss?: ko.Computed<string> | string;
-        data?: any;
-        template?: string;
-        /**
-            * Toolbar item icon name
-            */
-        icon?: string;
-        items?: ko.ObservableArray<IToolbarItem>;
-}
 declare type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 /**
     * Survey Creator is WYSIWYG editor.
@@ -3498,7 +3412,7 @@ export declare class SurveyCreator implements ISurveyObjectEditorOptions {
         koShowElementEditorAsPropertyGrid: ko.Observable<boolean>;
         koHideAdvancedSettings: ko.Observable<boolean>;
         koTestSurveyWidth: any;
-        koDesignerHeight: any;
+        koDesignerHeight: ko.Observable<any>;
         koShowPagesToolbox: ko.Observable<ContainerLocation>;
         generateValidJSONClick: any;
         generateReadableJSONClick: any;
@@ -3506,7 +3420,6 @@ export declare class SurveyCreator implements ISurveyObjectEditorOptions {
         doRedoClick: any;
         deleteObjectClick: any;
         koState: ko.Observable<string>;
-        runSurveyClick: any;
         saveButtonClick: any;
         draggingToolboxItem: any;
         clickToolboxItem: any;
@@ -3810,7 +3723,6 @@ export declare class SurveyCreator implements ISurveyObjectEditorOptions {
             * @param element a survey element.
             */
         deleteElement(element: Survey.Base): void;
-        readonly surveyLiveTester: SurveyLiveTester;
         getObjectDisplayName(obj: Survey.Base): string;
         alwaySaveTextInPropertyEditors: boolean;
         showApplyButtonInEditors: boolean;
@@ -4138,7 +4050,7 @@ export declare var imageAdorner: {
 export declare var titleImageAdorner: {
     getMarkerClass: (model: any) => "" | "image_editable";
     getElementName: (model: any) => string;
-    afterRender: (elements: HTMLElement[], model: SurveyForDesigner, editor: any) => void;
+    afterRender: (elements: HTMLElement[], model: SurveyForDesigner, editor: SurveyCreator) => void;
 };
 
 import "./title-actions.scss";
@@ -4146,7 +4058,7 @@ export declare class TitleActionsViewModel {
     survey: SurveyForDesigner;
     protected input: HTMLInputElement;
     protected rootElement: any;
-    constructor(survey: SurveyForDesigner, input: HTMLInputElement, rootElement: any);
+    constructor(survey: SurveyForDesigner, input: HTMLInputElement, rootElement: any, allowImageChooser?: boolean);
     uploadFiles(): void;
     getLocString(str: string): any;
     getStyle(model: ISurveyObjectMenuItem): any;
@@ -4174,6 +4086,15 @@ export declare class AccordionModel {
     tabs: any;
     showHeader: any;
 }
+
+import "./button.scss";
+export declare var ButtonViewModel: any;
+
+import "./dropdown.scss";
+export declare var DropdownViewModel: any;
+
+import "./boolean.scss";
+export declare var BooleanViewModel: any;
 
 import "./splitter.scss";
 export declare class SplitterComponentViewModel {
@@ -4270,5 +4191,227 @@ export declare class ArrayAction {
     apply(): void;
     rollback(): void;
     readonly changes: IUndoRedoChange;
+}
+
+import "./simulator.scss";
+export declare class SurveySimulatorComponent {
+    simulatorOptions: {
+        device: string;
+        orientation: string;
+        considerDPI: boolean;
+    };
+    constructor(_toolbarHolder: any);
+    readonly survey: any;
+    simulatorEnabled: boolean;
+    simulatorScaleEnabled: boolean;
+    koActiveDevice: ko.Observable<string>;
+    koDevices: ko.ObservableArray<{
+        text: any;
+        value: string;
+    }>;
+    koLandscapeOrientation: ko.Observable<boolean>;
+    koHasFrame: ko.Computed<boolean>;
+    koSimulatorFrame: ko.Computed<{
+        scale: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        cssClass: ko.Computed<string>;
+    }>;
+}
+export declare var DEFAULT_MONITOR_DPI: number;
+export declare var simulatorDevices: {
+    desktop: {
+        deviceType: string;
+        title: string;
+    };
+    iPhone5: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhone6: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhone6plus: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhone8: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhone8plus: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhoneX: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPhoneXmax: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPad: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPadMini: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPadPro: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    iPadPro13: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    androidPhone: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    androidTablet: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    win10Phone: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    msSurface: {
+        cssPixelRatio: number;
+        ppi: number;
+        width: number;
+        height: number;
+        frameWidth: number;
+        frameHeight: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+    genericPhone: {
+        cssPixelRatio: number;
+        deviceType: string;
+        title: string;
+        cssClass: string;
+    };
+};
+
+import "./results.scss";
+export declare class SurveyResultsModel {
+    constructor(survey: Survey.SurveyModel);
+    koResultViewType: ko.Observable<string>;
+    koResultText: ko.Observable<string>;
+    koResultData: ko.ObservableArray<any>;
+    getLocString(name: string): any;
+    readonly surveyResultsText: any;
+    readonly resultsTitle: any;
+    readonly resultsName: any;
+    readonly resultsValue: any;
+    readonly resultsDisplayValue: any;
+    selectTableClick(model: SurveyResultsModel): void;
+    selectJsonClick(model: SurveyResultsModel): void;
 }
 
