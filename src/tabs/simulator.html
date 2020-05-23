@@ -2,17 +2,16 @@
     <!-- ko if: koHasFrame -->
     <div class="svd-simulator-wrapper"
         data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
-        <img class="svd-simulator-frame" data-bind="visible: !koLandscapeOrientation()"
-            src="../images/simulator/device-p.svg" alt="Virtual device frame portrait" />
-        <img class="svd-simulator-frame" data-bind="visible: koLandscapeOrientation"
-            src="../images/simulator/device-l.svg" alt="Virtual device frame landscape" />
+        <div class="svd-simulator-frame"
+            data-bind="style: { width: (koLandscapeOrientation() ? koSimulatorFrame().frameHeight: koSimulatorFrame().frameWidth) + 'px', height: (koLandscapeOrientation() ? koSimulatorFrame().frameWidth : koSimulatorFrame().frameHeight) + 'px' }, css: koSimulatorFrame().cssClass">
+        </div>
         <div class="svd-simulator"
-            data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', top: koSimulatorFrame().frameY + 'px', left: koSimulatorFrame().frameX + 'px', transform: 'scale(' + koSimulatorFrame().scale + ')' }">
-            <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+            data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', transform: 'scale(' + koSimulatorFrame().scale + ') translate(-50%, -50%)' }">
+            <survey-widget class="svd-simulator-content" params="survey: survey"></survey-widget>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko ifnot: koHasFrame -->
-    <survey-widget class="svd-simulator-content" params="survey: koSurvey"></survey-widget>
+    <survey-widget class="svd-simulator-content" params="survey: survey"></survey-widget>
     <!-- /ko -->
 </div>

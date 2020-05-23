@@ -1,4 +1,7 @@
 .svd-translation-tab {
+  height: 100%;
+  overflow: auto;
+  
   .svd-language-select {
     & > div {
       display: inline-block;

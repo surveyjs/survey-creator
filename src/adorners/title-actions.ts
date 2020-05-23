@@ -14,54 +14,59 @@ export class TitleActionsViewModel {
   constructor(
     public survey: SurveyForDesigner,
     protected input: HTMLInputElement,
-    protected rootElement
+    protected rootElement,
+    allowImageChooser = true
   ) {
-    this.actions.push({
-      name: "editelement",
-      visible: ko.computed(() => survey.koShowHeader()),
-      text: ko.computed(() =>
-        this.getLocString(
-          survey.isLogoImageChoosen ? "pe.changeLogo" : "pe.addLogo"
-        )
-      ),
-      hasTitle: true,
-      onClick: () => {
-        if (!window["FileReader"]) return;
-        this.input.value = "";
-        this.input.onchange = () => {
-          this.uploadFiles();
-        };
-        this.input.click();
-      },
-    });
-    this.actions.push(<any>{
-      name: "setLogoPosition",
-      text: this.getLocString("pe.logoPosition"),
-      visible: ko.computed(
-        () => survey.koShowHeader() && survey.isLogoImageChoosen
-      ),
-      value: ko.computed(() => survey.logoPosition),
-      template: "choice-action",
-      choices: [
-        { value: "none", text: this.getLocString("pe.logoPositions.none") },
-        { value: "left", text: this.getLocString("pe.logoPositions.left") },
-        { value: "right", text: this.getLocString("pe.logoPositions.right") },
-        { value: "top", text: this.getLocString("pe.logoPositions.top") },
-        { value: "bottom", text: this.getLocString("pe.logoPositions.bottom") },
-      ],
-      onClick: (data, event) => {
-        var newValue = event.target.value;
-        survey.logoPosition = newValue;
-        if (newValue === "none") {
-          survey.logo = undefined;
-        }
-      },
-    });
-    if (survey.getEditor().allowControlSurveyTitleVisibility) {
-      this.actions.push(<any>{
+    if (allowImageChooser) {
+      this.actions.push({
+        name: "editelement",
         visible: ko.computed(() => survey.koShowHeader()),
-        template: "action-separator",
+        text: ko.computed(() =>
+          this.getLocString(
+            survey.isLogoImageChoosen ? "pe.changeLogo" : "pe.addLogo"
+          )
+        ),
+        hasTitle: true,
+        onClick: () => {
+          if (!window["FileReader"]) return;
+          this.input.value = "";
+          this.input.onchange = () => {
+            this.uploadFiles();
+          };
+          this.input.click();
+        },
       });
+      this.actions.push(<any>{
+        name: "setLogoPosition",
+        text: this.getLocString("pe.logoPosition"),
+        visible: ko.computed(
+          () => survey.koShowHeader() && survey.isLogoImageChoosen
+        ),
+        value: ko.computed(() => survey.logoPosition),
+        template: "choice-action",
+        choices: [
+          { value: "none", text: this.getLocString("pe.logoPositions.none") },
+          { value: "left", text: this.getLocString("pe.logoPositions.left") },
+          { value: "right", text: this.getLocString("pe.logoPositions.right") },
+          { value: "top", text: this.getLocString("pe.logoPositions.top") },
+          { value: "bottom", text: this.getLocString("pe.logoPositions.bottom") },
+        ],
+        onClick: (data, event) => {
+          var newValue = event.target.value;
+          survey.logoPosition = newValue;
+          if (newValue === "none") {
+            survey.logo = undefined;
+          }
+        },
+      });
+    }
+    if (survey.getEditor().allowControlSurveyTitleVisibility) {
+      if (allowImageChooser) {
+        this.actions.push(<any>{
+          visible: ko.computed(() => survey.koShowHeader()),
+          template: "action-separator",
+        });
+      }
       this.actions.push(<any>{
         name: "showSurveyTitle",
         visible: true,
@@ -128,7 +133,8 @@ ko.components.register("title-actions", {
       var model = new TitleActionsViewModel(
         params.survey,
         params.input,
-        componentInfo.element
+        componentInfo.element,
+        params.allowImageChooser
       );
       return model;
     },

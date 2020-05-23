@@ -5,16 +5,29 @@
     <svd-splitter params="minLeft: 0, minRight: 600, onChange: layoutChangedIndicator"></svd-splitter>
     <!-- /ko  -->
     <div class="svd_editors">
-      <!-- ko if: topContainer.length > 0 -->
-      <svd-designer-h-container params="items: topContainer, context: $data, className: 'svd-designer-container--top'"></svd-designer-h-container>
-      <!-- /ko  -->
-
-      <div
-        class="svd_questions_editor svd-light-bg-color"
-        id="scrollableDiv"
-        data-bind="style: { height: koDesignerHeight }, event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }"
-      >
-        <div class="svd_surveyjs_designer_container"></div>
+      <div class="svd-vertical-container">
+        <div class="svd-vertical-container__row" data-bind="visible: topContainer.length > 0">
+            <div class="svd-vertical-container__cell">
+              <!-- ko if: topContainer.length > 0 -->
+              <svd-designer-h-container params="items: topContainer, context: $data, className: 'svd-designer-container--top'"></svd-designer-h-container>
+              <!-- /ko  -->
+            </div>
+        </div>
+        <div class="svd-vertical-container__row">
+            <div class="svd-vertical-container__cell">
+                <div class="svd-vertical-container__cell-content-holder">
+                    <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
+                      <div
+                      class="svd_questions_editor svd-light-bg-color"
+                      id="scrollableDiv"
+                      data-bind="event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }"
+                    >
+                      <div class="svd_surveyjs_designer_container"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
     <!-- ko if: rightContainer.length > 0 -->
@@ -25,9 +38,7 @@
 </script>
 
 <script type="text/html" id="se-tab-test">
-  <div data-bind="style: {width: koTestSurveyWidth}">
-    <survey-tester id="surveyjsExample" params="creator: $data"></survey-tester>
-  </div>
+  <survey-tester id="surveyjsExample" params="creator: $data" data-bind="style: {width: koTestSurveyWidth}"></survey-tester>
 </script>
 
 <script type="text/html" id="se-empty-placeholder">

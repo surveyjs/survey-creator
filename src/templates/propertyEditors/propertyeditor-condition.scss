@@ -87,6 +87,18 @@
   }
 }
 
+.svd_container
+  survey-widget
+  .sv_main
+  .svd-property-editor-survey
+  .svd-property-editor-survey-page
+  > .sv_row
+  .sv_qstn
+  .sv_q_matrix
+  input {
+  height: initial;
+}
+
 .svd-expression-header {
   background-color: #f0f0f0;
   margin-bottom: 1em;

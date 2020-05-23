@@ -776,7 +776,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   koShowElementEditorAsPropertyGrid = ko.observable(false);
   koHideAdvancedSettings = ko.observable(false);
   koTestSurveyWidth: any;
-  koDesignerHeight: any;
+  koDesignerHeight = ko.observable<any>("1000px");
   koShowPagesToolbox = ko.observable<ContainerLocation>(true);
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
@@ -804,7 +804,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   constructor(renderedElement: any = null, options: any = null) {
     this.koShowOptions = ko.observable();
     this.koGenerateValidJSON = ko.observable(true);
-    this.koDesignerHeight = ko.observable();
     this.koSelectedObject = ko.observable();
     this.setOptions(options);
     this.koCanDeleteObject = ko.observable(false);

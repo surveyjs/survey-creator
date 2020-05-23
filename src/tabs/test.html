@@ -1,8 +1,34 @@
-<svd-toolbar params="items: toolbarItems" data-bind="visible: koIsRunning()"></svd-toolbar>
-<survey-simulator params="model: $data"></survey-simulator>
-<!-- ko ifnot: koIsRunning -->
-<div class="svd_test_results">
-    <button class="btn btn-primary" data-bind="click: selectTestClick, text: testSurveyAgainText"></button>
+<!-- <div class="svd-vertical-container">
+    <div class="svd-vertical-container__row">
+        <div class="svd-vertical-container__cell">
+        </div>
+    </div>
+    <div class="svd-vertical-container__row">
+        <div class="svd-vertical-container__cell">
+        </div>
+    </div>
+</div> -->
+
+<div class="svd-vertical-container">
+    <div class="svd-vertical-container__row" data-bind="visible: koIsRunning()">
+        <div class="svd-vertical-container__cell">
+            <svd-toolbar params="items: toolbarItems" data-bind="visible: koIsRunning()"></svd-toolbar>
+        </div>
+    </div>
+    <div class="svd-vertical-container__row">
+        <div class="svd-vertical-container__cell">
+            <div class="svd-vertical-container__cell-content-holder">
+                <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
+                    <survey-simulator params="model: $data"></survey-simulator>
+                    <!-- ko ifnot: koIsRunning -->
+                    <div class="svd_test_results">
+                        <button class="btn btn-primary"
+                            data-bind="click: selectTestClick, text: testSurveyAgainText"></button>
+                    </div>
+                    <survey-results params="survey: survey"></survey-results>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<survey-results params="survey: survey"></survey-results>
-<!-- /ko -->
