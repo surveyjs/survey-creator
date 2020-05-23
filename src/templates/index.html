@@ -1,52 +1,51 @@
-﻿<div
-  tabindex="-1"
-  class="svd_container svd-light-bg-color"
-  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : '')"
->
-  <!-- ko ifnot: haveCommercialLicense -->
-  <div class="svd_commercial_container">
-    <a
-      class="svd_commercial_text"
-      href="https://www.surveyjs.io/Buy"
-      target="_blank"
-    >
-      <span>
-        <svg-icon
-          class="svd-primary-icon"
-          params="iconName: 'icon-noncommercial', size: 20"
-        ></svg-icon>
-      </span>
-      <span class="svd_commercial_product svd-main-color"
-        >Please purchase a SurveyJS Creator developer license to use it in your
-        app.</span
-      >
-      <span class="svd_noncommercial_use svd-light-text-color"></span>
-    </a>
-  </div>
-  <!-- /ko  -->
-  <!-- ko if: tabs().length > 1 -->
-  <ul
-    class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color"
-  >
-    <!-- ko foreach: tabs -->
-    <li
-      class="nav-item"
-      data-bind="css: {active: $parent.koViewType() == name}"
-    >
-      <a class="nav-link" href="#" data-bind="click: action, text: title"></a>
-    </li>
-    <!-- /ko -->
-  </ul>
-  <!-- /ko -->
-  <div class="panel card svd_content svd-dark-bg-color">
-    <!-- ko foreach: tabs -->
-    <div data-bind="visible: $parent.koViewType() == name">
-      <!-- ko template: { name: template, data: data, afterRender: function(element, model) { $parent.onEditorTabRenderedCallback(name, element, model, $data); } } -->
-      <!-- /ko -->
+﻿<div tabindex="-1" class="svd_container svd-light-bg-color"
+  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : ', '), style: { height: koDesignerHeight }">
+  <div class="svd-vertical-container">
+    <div class="svd-vertical-container__row">
+      <div class="svd-vertical-container__cell">
+        <div>
+          <!-- ko ifnot: haveCommercialLicense -->
+          <div class="svd_commercial_container">
+            <a class="svd_commercial_text" href="https://www.surveyjs.io/Buy" target="_blank">
+              <span>
+                <svg-icon class="svd-primary-icon" params="iconName: 'icon-noncommercial', size: 20"></svg-icon>
+              </span>
+              <span class="svd_commercial_product svd-main-color">Please purchase a SurveyJS Creator developer license
+                to
+                use it in your
+                app.</span>
+              <span class="svd_noncommercial_use svd-light-text-color"></span>
+            </a>
+          </div>
+          <!-- /ko  -->
+          <!-- ko if: tabs().length > 1 -->
+          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color">
+            <!-- ko foreach: tabs -->
+            <li class="nav-item" data-bind="css: {active: $parent.koViewType() == name}">
+              <a class="nav-link" href="#" data-bind="click: action, text: title"></a>
+            </li>
+            <!-- /ko -->
+          </ul>
+          <!-- /ko -->
+        </div>
+      </div>
     </div>
-    <!-- /ko -->
+    <div class="svd-vertical-container__row">
+      <div class="svd-vertical-container__cell">
+        <div class="svd-vertical-container__cell-content-holder">
+          <div class="svd-vertical-container__cell-content">
+            <div class="panel card svd_content svd-dark-bg-color">
+              <!-- ko foreach: tabs -->
+              <div data-bind="visible: $parent.koViewType() == name">
+                <!-- ko template: { name: template, data: data, afterRender: function(element, model) { $parent.onEditorTabRenderedCallback(name, element, model, $data); } } -->
+                <!-- /ko -->
+              </div>
+              <!-- /ko -->
+            </div>
+            <div data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div
-    data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"
-  ></div>
 </div>

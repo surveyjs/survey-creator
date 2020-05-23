@@ -1,8 +1,10 @@
 $logic-space: 20px;
 
 .svd-logic-tab {
-  min-height: 75vh;
   position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 .svd-logic-tab__rules-list {

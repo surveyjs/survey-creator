@@ -1,5 +1,6 @@
 .svd_container {
   .svd_properties {
+    height: 100%;
     border: none;
     padding: 0;
     margin-left: -0.5px;
@@ -24,8 +25,7 @@
     }
     .svd_object_editor {
       padding: 1.4em;
-      height: $editor-height;
-      overflow-y: scroll;
+
       .form-control {
         border-radius: 0;
       }

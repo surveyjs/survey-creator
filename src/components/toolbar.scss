@@ -1,3 +1,5 @@
+@import "../colors";
+
 .svd_container {
   .svd_toolbar {
     margin-bottom: 1.17em;
@@ -6,20 +8,10 @@
       margin-right: 0.5em;
       margin-top: 0.5em;
       display: inline-block;
-
-      .svd-toolbar-button__image {
-        line-height: 1em;
-        display: inline-block;
-        .svd-svg-icon {
-          margin-top: -0.25em;
-          margin-right: 0.25em;
-        }
-      }
-      .svd-toolbar-button__title {
-        line-height: 1em;
-        display: inline-block;
-      }
     }
+    // .svd_action:not(:first-child) {
+    //   margin-left: 1em;
+    // }
     .svd_state {
       float: right;
       line-height: 2.2em;

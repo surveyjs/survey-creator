@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyLiveTester } from "../src/surveylive";
+import { SurveyLiveTester } from "../src/tabs/test";
 import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("surveyLiveTests");
@@ -141,7 +141,12 @@ QUnit.test("Use title for pages", function(assert) {
     if (options.obj.name == "p2") options.displayName = "My Second Page";
   });
   creator.showTestSurvey();
-  var test = creator.surveyLiveTester;
+  var test = new SurveyLiveTester(creator);
+  test.onGetObjectDisplayName = obj => {
+    return creator.getObjectDisplayName(obj);
+  };
+  test.setJSON(creator.JSON);
+  test.show(creator);
   assert.equal(
     test.survey.pages.length,
     2,
@@ -153,8 +158,10 @@ QUnit.test("Use title for pages", function(assert) {
 });
 function getLiveSurveyByCreator(creator: SurveyCreator): SurveyLiveTester {
   creator.showDesigner();
-  creator.showTestSurvey();
-  return creator.surveyLiveTester;
+  var surveyTester = new SurveyLiveTester(creator);
+  surveyTester.setJSON(creator.JSON);
+  surveyTester.show(creator);
+  return surveyTester;
 }
 QUnit.test(
   "showDefaultLanguageInTestSurveyTab: auto, true, false, all",

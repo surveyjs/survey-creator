@@ -312,7 +312,14 @@ export class SurveyQuestionEditorDefinition {
       ],
     },
     "matrixdropdowncolumn@text": {
-      properties: ["inputType", "placeHolder", "maxLength"],
+      properties: [
+        "inputType",
+        "min",
+        "max",
+        "step",
+        "placeHolder",
+        "maxLength",
+      ],
       tabs: [{ name: "validators", index: 10 }],
     },
     "matrixdropdowncolumn@comment": {
@@ -425,9 +432,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "showPageTitles" },
         { name: "showPageNumbers" },
 
+        { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },
         { name: "pageNextText", tab: "navigation" },
         { name: "completeText", tab: "navigation" },
+        { name: "previewText", tab: "navigation" },
+        { name: "editText", tab: "navigation" },
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",

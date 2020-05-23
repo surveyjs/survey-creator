@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 2360 3300" style="enable-background:new 0 0 2360 3300;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#404040;stroke-width:6;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#404040;stroke-width:4;stroke-miterlimit:10;}
+	.st2{fill:transparent;}
+	.st3{fill:#404040;}
+</style>
+<g>
+	<path class="st0" d="M2219.2,3269.2H139.5c-60.5,0-110-49.5-110-110v-3024c0-60.5,49.5-110,110-110h2079.8c60.5,0,110,49.5,110,110
+		v3024C2329.2,3219.7,2279.7,3269.2,2219.2,3269.2z"/>
+	<path class="st1" d="M2208.5,3250.4H150.2c-57.8,0-105-47.3-105-105V145.7c0-57.7,47.3-105,105-105h2058.3c57.8,0,105,47.3,105,105
+		v2999.7C2313.5,3203.1,2266.2,3250.4,2208.5,3250.4z"/>
+	<circle class="st1" cx="1179.3" cy="163.7" r="16.5"/>
+	<circle class="st0" cx="1179.3" cy="3133.4" r="53.5"/>
+	<path class="st1" d="M1194.8,3153.9h-31c-2.8,0-5-2.3-5-5v-31c0-2.8,2.3-5,5-5h31c2.8,0,5,2.3,5,5v31
+		C1199.8,3151.8,1197.6,3153.9,1194.8,3153.9z"/>
+	<g>
+		<rect x="155.8" y="285.7" class="st2" width="2047" height="2731"/>
+		<path class="st3" d="M2202.3,286.2v2730h-2046v-2730L2202.3,286.2 M2203.3,285.2h-2048v2732h2048V285.2L2203.3,285.2z"/>
+	</g>
+</g>
+</svg>

@@ -1,15 +1,13 @@
-﻿$editor-height: 75vh;
-
-@import "colors";
+﻿@import "colors";
 @import "icons";
 @import "manage";
-@import "editor-tabs";
+@import "./tabs/editor-tabs";
 @import "toolbox";
-@import "toolbar";
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
-@import "templates/propertyEditors/propertyeditor-switch.scss";
+@import "./templates/propertyEditors/propertyeditor-switch";
+@import "./utils/vertical-container";
 
 .svd_flowpanel[contenteditable="true"]:empty:before {
   content: attr(placeholder);
@@ -24,27 +22,32 @@
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
     "Helvetica Neue", Arial, sans-serif;
   font-size: 12px;
-  #testSurveyPageChanged {
-    width: 300px;
-    display: inline-block;
-    margin-bottom: 3px;
-    margin-right: 7px;
+  width: 100%;
+  height: 100%;
+
+  .svd-embed-survey-tab {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    .row {
+      margin: 0;
+    }
+
+    &> * {
+      width: 100%;
+    }
+
+    .form-control.svd_custom_select.svd_embed_tab {
+      display: inline-block;
+      width: 250px;
+      margin-bottom: 1em;
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+    }
   }
-  #testSurveyLocale {
-    width: 200px;
-    display: inline-block;
-    margin-bottom: 3px;
-    margin-right: 7px;
-  }
-  #testShowInvisibleElements {
-    margin-right: 20px;
-  }
-  #testDeviceSelector {
-    width: 200px;
-    display: inline-block;
-    margin-bottom: 3px;
-    margin-right: 7px;
-  }
+
   .svd_questions_editor {
     .svd_question {
       overflow: visible;
@@ -177,11 +180,18 @@
     padding: 30px;
     margin: 0;
     border: none;
+    height: 100%;
+
+    &>* {
+      height: 100%;
+    }
+
     .svd_survey_designer {
       position: relative;
       display: table;
       table-layout: fixed;
       width: 100%;
+      height: 100%;
       margin: 0;
 
       .svd_editors {
@@ -191,10 +201,9 @@
         width: 100%;
 
         .svd_questions_editor {
-          height: $editor-height;
-          overflow-y: scroll;
-          padding-top: 18px;
           position: relative;
+          padding-top: 18px;
+
           .panel-body,
           .card-block {
             .svd_question {
@@ -215,10 +224,10 @@
       }
     }
     .svd_json_editor {
-      height: $editor-height;
+      height: 100%;
     }
     .svd_json_editor_area {
-      height: $editor-height;
+      height: 100%;
       width: 100%;
     }
   }
@@ -604,75 +613,6 @@
           padding: 15px;
           text-align: right;
           border-top: 1px solid #e5e5e5;
-        }
-      }
-    }
-  }
-}
-
-.svd_container {
-  .svd_test_results {
-    padding: 1em;
-    .svd_results_header {
-    }
-    .svd_results_text {
-      padding: 1em;
-      white-space: pre-wrap;
-      width: 100%;
-      overflow: auto;
-    }
-    .svd_results_table {
-      padding: 1em;
-      width: 100%;
-      overflow: auto;
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-
-        .survey-result-marker {
-          position: absolute;
-          left: 1em;
-          top: 0.5em;
-          transition: transform 0.2s ease-in-out;
-
-          &.survey-result-marker--expanded {
-            transform: rotate(90deg);
-          }
-        }
-
-        .survey-result-value {
-          word-break: break-all;
-        }
-
-        tr {
-          vertical-align: top;
-        }
-
-        th,
-        td {
-          border: 1px solid;
-          padding: 0.5em 1em;
-          max-width: 400px;
-          overflow: auto;
-
-          &:nth-child(1) {
-            position: relative;
-            width: 30%;
-            font-weight: 500;
-            padding-left: 2em;
-          }
-          &:nth-child(2) {
-            width: 20%;
-          }
-          &:nth-child(3) {
-            width: 20%;
-          }
-
-          &:nth-child(4) {
-            width: 30%;
-            font-weight: 500;
-          }
         }
       }
     }

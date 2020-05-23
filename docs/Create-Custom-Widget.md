@@ -2,7 +2,7 @@
 
 - [When do you need a custom widget?](#needs)
 - [Create simple custom widget](#simplewidget)
-  - [Add functionality into existing question)](#addfunctionality)
+  - [Add functionality into existing question](#addfunctionality)
   - [Add a new property into existing question](#addnewproperty)
   - [Add new question using custom widget](#newquestion)
   - [Totally replace the existing question input by custom widget](#replacequestion)
@@ -86,7 +86,7 @@ Survey.CustomWidgetCollection.Instance.add(searchStringWidget);
 
 As you can see in the code, we are setting just two properties and two functions.
 
-The first property is _name_. This custom widget does not create a new item in the SurveyJS Toolbox. This property should be unique and in lowercase.
+The first property is _name_. This property should be unique and in lowercase.
 
 The second property is _isDefaultRender_. It is an optional property, you have to set it to _true_, if you want the default question input rendering. We do not want to render html “textarea” element by ourselves and we don’t want to setup question value binding, so we set this property to “true”.
 
@@ -221,7 +221,7 @@ var richEditWidget = {
   name: "richedit",
   //This title will be displayed on SurveyJS Creator toolbox
   title: "Rich Editor",
-  //Icon that displays  on SurveyJS Creator toolbox
+  //Icon that displays on SurveyJS Creator toolbox
   //You can leave this property empty to show the default icon
   iconName: "icon-editor",
   //It is a required function for a custom type widget, that user can see on toolbox
@@ -251,11 +251,11 @@ var richEditWidget = {
   </div>',
   //Our element will be rendered base on template.
   //We do not need to do anything here
-  afterRender: function (question, el) {},
+  afterRender: function (question, el) {}
 };
 
 //Register our widget in singleton custom widget collection and tells that, it is a new "customtype". 
-//We require this parameter if we want to show our item in SurveyJS Creator toolbox
+//We require this value for the second parameter if we want to show our custom widget as q new question in SurveyJS Creator toolbox
 Survey.CustomWidgetCollection.Instance.add(
   richEditWidget,
   "customtype"

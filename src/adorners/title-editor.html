@@ -21,6 +21,11 @@
     <!-- <span class="svda-edit-button" data-bind="click: cancelEdit">✕</span> -->
   </span>
   <span
+    class="svda-title-editor-focusable"
+    tabindex="0"
+    data-bind="click: startEdit, key2click, attr: { 'aria-label': getLocString('pe.edit') + ' ' + name }"
+  ></span>
+  <span
     class="svda-title-editor-content svda-title-editor-start"
     data-bind="visible: !isEditing()"
   >
