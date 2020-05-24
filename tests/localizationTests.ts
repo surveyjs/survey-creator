@@ -41,7 +41,7 @@ QUnit.test("Get property name and title", function(assert) {
     "find the title for Title property"
   );
 });
-QUnit.test("getProperty fnction breaks on word automatically", function(
+QUnit.test("getProperty function breaks on word automatically", function(
   assert
 ) {
   assert.equal(
@@ -131,5 +131,21 @@ QUnit.test("getPropertyNameInEditor", function(assert) {
     editorLocalization.getPropertyNameInEditor("title"),
     "Title",
     "make it up"
+  );
+});
+
+QUnit.test("getPropertyNameInEditor, go to p, if pe is emtpy", function(
+  assert
+) {
+  var enStrings = defaultStrings;
+  enStrings.p["isRequired2"] = "some new text";
+
+  editorLocalization.locales["en"] = enStrings;
+  editorLocalization.currentLocale = "en";
+
+  assert.equal(
+    editorLocalization.getPropertyNameInEditor("isRequired2"),
+    "some new text",
+    "get from p"
   );
 });
