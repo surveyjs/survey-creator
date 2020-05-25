@@ -1170,7 +1170,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       typeof options.scrollToNewElement !== "undefined"
         ? options.scrollToNewElement
         : true;
-    if (options.designerHeight) {
+    if (options.designerHeight !== undefined) {
       this.koDesignerHeight(options.designerHeight);
     }
     if (options.objectsIntend) {
