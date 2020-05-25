@@ -1718,3 +1718,33 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test(
+  "SurveyPropertyConditionEditor, anyof/allof is enabled on editing, Bug #",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        {
+          name: "q2",
+          type: "checkbox",
+          choices: ["item1", "item2", "item3"],
+          visibleIf: "{q1} = 'a'",
+        },
+      ],
+    });
+    var question = survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    var itemValue = Survey.ItemValue.getItemByValue(
+      editorItem.operatorQuestion.choices,
+      "anyof"
+    );
+    assert.ok(itemValue, "anyof is here");
+    assert.equal(itemValue.isEnabled, false, "anyof is disabled");
+  }
+);
