@@ -34,7 +34,7 @@ var searchStringWidget = {
     //the widget name. It should be unique and written in lowercase.
     name: "searchstring",
     //SurveyJS library calls this function for every question to check 
-    //if this widget should appy to the particular question.
+    //if this widget should apply to the particular question.
     isFit: function (question) {
         //We are going to apply this widget for comment questions (textarea)
         return question.getType() == "comment";

@@ -38,7 +38,7 @@
 }
 
 .svd_editors {
-    .svd-vertical-container {
+    &>.svd-vertical-container {
         table-layout: fixed;
     }
 }
