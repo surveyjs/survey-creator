@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { unparse, parse } from "papaparse";
-import {Observable} from "knockout";
+import { Observable } from "knockout";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -40,12 +40,12 @@ export class TranslationItem extends TranslationItemBase {
       val.subscribe((newValue) => {
         self.locString.setLocaleText(loc, newValue);
         !!self.translation.tranlationChangedCallback &&
-        self.translation.tranlationChangedCallback(
+          self.translation.tranlationChangedCallback(
             loc,
             self.name,
             newValue,
             self.context
-        );
+          );
       });
       this.values[loc] = val;
     }
@@ -104,7 +104,9 @@ export class TranslationGroup extends TranslationItemBase {
     return this.itemValues;
   }
   public get locItems(): Array<TranslationItem> {
-    return this.itemValues.filter((item) => item instanceof TranslationItem) as Array<TranslationItem>;
+    return this.itemValues.filter(
+      (item) => item instanceof TranslationItem
+    ) as Array<TranslationItem>;
   }
 
   public getItemByName(name: string): TranslationItemBase {
@@ -114,7 +116,9 @@ export class TranslationGroup extends TranslationItemBase {
     return null;
   }
   public get groups(): Array<TranslationGroup> {
-    return this.itemValues.filter((item) => item instanceof TranslationGroup) as Array<TranslationGroup>;
+    return this.itemValues.filter(
+      (item) => item instanceof TranslationGroup
+    ) as Array<TranslationGroup>;
   }
 
   public get isGroup() {
@@ -528,7 +532,7 @@ export class Translation implements ITranslationLocales {
     let res = [];
     let headerRow = [];
     let visibleLocales = this.getVisibleLocales();
-    headerRow.push('description ↓ - language →');
+    headerRow.push("description ↓ - language →");
     for (let i = 0; i < visibleLocales.length; i++) {
       headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
@@ -552,14 +556,14 @@ export class Translation implements ITranslationLocales {
       header: true,
       newline: Translation.newLineDelimiter,
       skipEmptyLines: false, //or 'greedy',
-      columns: null //or array of strings
+      columns: null, //or array of strings
     });
   }
 
   public importFromNestedArray(rows: string[][]) {
     var self = this;
     let locales = rows.shift().slice(1);
-    if (locales[0] === 'default') {
+    if (locales[0] === "default") {
       locales[0] = "";
     }
     let translation = new Translation(this.survey, true);
@@ -591,10 +595,11 @@ export class Translation implements ITranslationLocales {
     }
   }
   public importFromCSVFile(file: File) {
+    var self = this;
     parse(file, {
-        "complete": function(results, file) {
-          this.importFromNestedArray(results.data);
-        }
+      complete: function(results, file) {
+        self.importFromNestedArray(results.data);
+      },
     });
   }
   public mergeLocaleWithDefault() {
@@ -627,8 +632,8 @@ export class Translation implements ITranslationLocales {
 
   private getVisibleLocales(): Array<string> {
     return this.koLocales()
-        .filter(locale => locale.koVisible())
-        .map(locale => locale.locale);
+      .filter((locale) => locale.koVisible())
+      .map((locale) => locale.locale);
   }
 
   private fillItemsHash(
@@ -636,8 +641,10 @@ export class Translation implements ITranslationLocales {
     group: TranslationGroup,
     itemsHash: Survey.HashTable<TranslationItem>
   ) {
-    let name = parentName ? parentName + '.' + group.name : group.name;
-    group.locItems.forEach((item) => {itemsHash[name + "." + item.name] = item});
+    let name = parentName ? parentName + "." + group.name : group.name;
+    group.locItems.forEach((item) => {
+      itemsHash[name + "." + item.name] = item;
+    });
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   private setLocales(locs: Array<string>) {
