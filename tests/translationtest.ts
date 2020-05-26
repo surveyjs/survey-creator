@@ -10,7 +10,7 @@ import { unparse, parse } from "papaparse";
 
 export default QUnit.module("TranslatonTests");
 
-QUnit.test("Text question localization properties", function(assert) {
+QUnit.test("Text question localization properties", function (assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question);
   assert.ok(
@@ -18,7 +18,7 @@ QUnit.test("Text question localization properties", function(assert) {
     "There are four or more localization strings"
   );
 });
-QUnit.test("Text question choices localization", function(assert) {
+QUnit.test("Text question choices localization", function (assert) {
   var question = new Survey.QuestionCheckbox("q1");
   question.choices = ["item1", { value: "item2", text: "text 2" }];
   var group = new TranslationGroup(question.name, question);
@@ -42,7 +42,7 @@ QUnit.test("Text question choices localization", function(assert) {
     "Value is set correctly for item 2"
   );
 });
-QUnit.test("Survey child groups", function(assert) {
+QUnit.test("Survey child groups", function (assert) {
   var survey = new Survey.Survey();
   var translation = new Translation(survey);
   var root = new TranslationGroup("root", survey, translation);
@@ -78,7 +78,7 @@ QUnit.test("Survey child groups", function(assert) {
     "We can hide header for page only"
   );
 });
-QUnit.test("Survey child groups", function(assert) {
+QUnit.test("Survey child groups", function (assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("p1");
   var question = <Survey.QuestionText>(
@@ -93,7 +93,7 @@ QUnit.test("Survey child groups", function(assert) {
   translation.addLocale("de");
   assert.equal(translation.locales.length, 3, "There are three locales now");
 });
-QUnit.test("get locales", function(assert) {
+QUnit.test("get locales", function (assert) {
   var survey = new Survey.Survey({
     title: { default: "t1", de: "dfdfdf" },
     description: "text1",
@@ -105,7 +105,7 @@ QUnit.test("get locales", function(assert) {
     "There are two locales only, 'default'/empty and 'de'"
   );
 });
-QUnit.test("Localization strings editing", function(assert) {
+QUnit.test("Localization strings editing", function (assert) {
   var question = new Survey.QuestionText("q1");
   var group = new TranslationGroup(question.name, question, <any>{});
   var item = <TranslationItem>group.items[0];
@@ -127,21 +127,21 @@ QUnit.test("Localization strings editing", function(assert) {
     "The french value has been updated"
   );
 });
-QUnit.test("Translation for adding", function(assert) {
+QUnit.test("Translation for adding", function (assert) {
   var translation = new Translation(new Survey.Survey(), true);
   var locales = Survey.surveyLocalization.locales;
   var count = 0;
   for (var key in locales) count++;
   assert.equal(
     translation.koAvailableLanguages().length,
-    count - 1,
-    "All locales - 1"
+    count,
+    "All locales"
   );
   translation.addLocale("de");
   assert.equal(
     translation.koAvailableLanguages().length,
-    count - 2,
-    "All locales - 2"
+    count - 1,
+    "All locales - 1"
   );
   assert.equal(translation.locales.length, 2, "There are two locales");
   assert.equal(
@@ -149,7 +149,7 @@ QUnit.test("Translation for adding", function(assert) {
     null,
     "No language selected"
   );
-  translation.koSelectedLanguageToAdd({ value: "fr", text: "French" });
+  translation.koSelectedLanguageToAdd("fr");
   assert.equal(translation.locales.length, 3, "There are three locales");
   assert.equal(translation.locales[2], "fr", "The last added locale is 'fr'");
   assert.equal(
@@ -158,7 +158,7 @@ QUnit.test("Translation for adding", function(assert) {
     "No language selected again"
   );
 });
-QUnit.test("Do not reset locales on reset", function(assert) {
+QUnit.test("Do not reset locales on reset", function (assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("page1");
   survey.pages[0].addNewQuestion("checkbox", "question1");
@@ -173,7 +173,7 @@ QUnit.test("Do not reset locales on reset", function(assert) {
     "There are still 3 locations"
   );
 });
-QUnit.test("get/set the selected locales", function(assert) {
+QUnit.test("get/set the selected locales", function (assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("page1");
   survey.pages[0].addNewQuestion("checkbox", "question1");
@@ -216,7 +216,7 @@ QUnit.test("get/set the selected locales", function(assert) {
     "'it' is selected"
   );
 });
-QUnit.test("disable locales", function(assert) {
+QUnit.test("disable locales", function (assert) {
   var survey = new Survey.Survey({
     pages: [
       {
@@ -249,7 +249,7 @@ QUnit.test("disable locales", function(assert) {
 });
 QUnit.test(
   "get/set the selected locales with inactive translation tab",
-  function(assert) {
+  function (assert) {
     var creator = new SurveyCreator();
     creator.JSON = {
       questions: [
@@ -268,7 +268,7 @@ QUnit.test(
     );
   }
 );
-QUnit.test("Translation show All strings", function(assert) {
+QUnit.test("Translation show All strings", function (assert) {
   var survey = new Survey.Survey();
   survey.completedHtml = "Test";
   survey.addNewPage("page1");
@@ -288,7 +288,7 @@ QUnit.test("Translation show All strings", function(assert) {
   assert.equal(questionGroup.groups.length, 1, "There is one group - choices");
   assert.equal(questionGroup.locItems.length, 1, "There is one item - title");
 });
-QUnit.test("Do not add group if there is no items in it.", function(assert) {
+QUnit.test("Do not add group if there is no items in it.", function (assert) {
   var survey = new Survey.Survey();
   survey.triggers.push(new Survey.SurveyTriggerComplete());
   var translation = new Translation(survey);
@@ -298,7 +298,7 @@ QUnit.test("Do not add group if there is no items in it.", function(assert) {
     "There should not be groups in this empty survey"
   );
 });
-QUnit.test("Question validators name", function(assert) {
+QUnit.test("Question validators name", function (assert) {
   var question = new Survey.QuestionText("q1");
   question.validators.push(new Survey.RegexValidator(""));
   var group = new TranslationGroup(question.name, question);
@@ -308,7 +308,7 @@ QUnit.test("Question validators name", function(assert) {
     "use property name + indexes"
   );
 });
-QUnit.test("Default locale name", function(assert) {
+QUnit.test("Default locale name", function (assert) {
   var survey = new Survey.Survey();
   var translation = new Translation(survey);
   assert.equal(
@@ -325,7 +325,7 @@ QUnit.test("Default locale name", function(assert) {
     "Default is deutsch now"
   );
 });
-QUnit.test("Add properties for columns", function(assert) {
+QUnit.test("Add properties for columns", function (assert) {
   var question = new Survey.QuestionMatrixDropdown("q1");
   question.addColumn("col1");
   question.columns[0]["choices"] = ["1", "2"];
@@ -333,14 +333,14 @@ QUnit.test("Add properties for columns", function(assert) {
   var column0Group = group.groups[0];
   assert.equal(column0Group.groups.length, 1, "choices should be here");
 });
-QUnit.test("Do not allow translate choices with numbers", function(assert) {
+QUnit.test("Do not allow translate choices with numbers", function (assert) {
   var question = new Survey.QuestionMatrixDropdown("q1");
   question.choices = [1, 2, 3];
   var translation = new Translation(new Survey.Survey());
   var group = new TranslationGroup(question.name, question, translation);
   assert.equal(group.groups.length, 0, "There is no groups in empty question");
 });
-QUnit.test("Filter by Page", function(assert) {
+QUnit.test("Filter by Page", function (assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("Page 1");
   survey.pages[0].title = "title1";
@@ -360,7 +360,7 @@ QUnit.test("Filter by Page", function(assert) {
     "There are two pages - survey is the root"
   );
 });
-QUnit.test("MultipleText question", function(assert) {
+QUnit.test("MultipleText question", function (assert) {
   var survey = new Survey.Survey();
   survey.addNewPage("Page 1");
   var question = new Survey.QuestionMultipleText("q1");
@@ -374,7 +374,7 @@ QUnit.test("MultipleText question", function(assert) {
   assert.equal(qGroup.groups.length, 2, "There are 2 groups");
   assert.equal(qGroup.groups[0].items[0].name, "title", "It is item title");
 });
-QUnit.test("Import from array", function(assert) {
+QUnit.test("Import from array", function (assert) {
   let survey = new Survey.Survey({
     elements: [
       {
@@ -422,27 +422,27 @@ QUnit.test("Import from array", function(assert) {
   let translation = new Translation(survey);
 
   translation.importFromNestedArray([
-      ['description ↓ - language →', 'default', 'de'],
-      ['survey.page1.question1.title', 'question1_1', ''],
-      ['survey.page1.question1.col1.title', 'col1 en1', 'col1 de1']
+    ['description ↓ - language →', 'default', 'de'],
+    ['survey.page1.question1.title', 'question1_1', ''],
+    ['survey.page1.question1.col1.title', 'col1 en1', 'col1 de1']
   ]);
   let question = <Survey.QuestionMatrixDropdown>(survey.getQuestionByName("question1"));
   let column = <Survey.MatrixDropdownColumn>question.columns[0];
   assert.equal(question.title, "question1_1", "title has been changed");
   assert.equal(column.title, 'col1 en1');
   assert.equal(
-      column.locTitle.getLocaleText(""),
+    column.locTitle.getLocaleText(""),
     "col1 en1",
     "default text in column title has been changed"
   );
   assert.equal(
-      column.locTitle.getLocaleText("de"),
+    column.locTitle.getLocaleText("de"),
     "col1 de1",
     "de text in column title has been changed"
   );
 });
 
-QUnit.test("Export to array", function(assert) {
+QUnit.test("Export to array", function (assert) {
   var survey = new Survey.Survey({
     elements: [
       {
@@ -490,14 +490,14 @@ QUnit.test("Export to array", function(assert) {
   var translation = new Translation(survey);
   let exported;
   parse(translation.exportToCSV(), {
-    "complete": function(results, file) { exported = results.data; }
+    "complete": function (results, file) { exported = results.data; }
   });
 
   assert.equal(exported.length, 7, "locales+question.title+3 column+column choice+ one row");
   assert.deepEqual(exported[0], ["description ↓ - language →", "default", "de"], "check locale line");
   assert.deepEqual(exported[1], ["survey.page1.question1.title", "question1", ""], "use default value");
 });
-QUnit.test("Merging a locale with default", function(assert) {
+QUnit.test("Merging a locale with default", function (assert) {
   var survey = new Survey.Survey({
     locale: "de",
     elements: [
@@ -559,7 +559,7 @@ QUnit.test("Merging a locale with default", function(assert) {
     "Locale can be merged again"
   );
 });
-QUnit.test("Custom localizable property in question", function(assert) {
+QUnit.test("Custom localizable property in question", function (assert) {
   Survey.Serializer.addProperty("question", {
     name: "customProp",
     isLocalizable: true,
@@ -575,7 +575,7 @@ QUnit.test("Custom localizable property in question", function(assert) {
   Survey.Serializer.removeProperty("question", "customProp");
 });
 
-QUnit.test("Custom localizable property in itemvalue", function(assert) {
+QUnit.test("Custom localizable property in itemvalue", function (assert) {
   Survey.Serializer.addProperty("itemvalue", {
     name: "customProp",
     isLocalizable: true,
