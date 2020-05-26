@@ -1,6 +1,8 @@
 <label class="svd-toolbar-dropdown">
     <span data-bind="text: title" class="svd-toolbar-dropdown__label"></span>
-    <select onmousewheel="return false;" class="svd-toolbar-dropdown__select"
-        data-bind="options: items, optionsText: 'text', optionsValue: 'value', value: action, optionsAfterRender: $data.afterRender, attr: { 'aria-label': title }">
-    </select>
+    <div class="svd_custom_select">
+        <select onmousewheel="return false;" class="svd-toolbar-dropdown__select"
+            data-bind="options: items, optionsText: 'text', optionsValue: 'value', value: action, optionsAfterRender: $data.afterRender, attr: { 'aria-label': title }">
+        </select>
+    </div>
 </label>

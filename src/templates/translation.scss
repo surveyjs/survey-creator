@@ -2,15 +2,6 @@
   height: 100%;
   overflow: auto;
   
-  .svd-language-select {
-    & > div {
-      display: inline-block;
-      min-width: 200px;
-      &:nth-child(2) {
-        margin-left: 100px;
-      }
-    }
-  }
   .form-group {
     margin-top: 1em;
   }
@@ -23,21 +14,6 @@
     font-size: 40px;
   }
 
-  .svd_custom_select {
-    max-width: 250px;
-    line-height: 2.44em;
-    height: 2.44em;
-    border-width: 0;
-    border-bottom-width: 1px;
-    border-style: solid;
-    font-size: 14px;
-    margin-bottom: 7px;
-    select {
-      padding-left: 20px;
-      min-width: 100px;
-      border: none;
-    }
-  }
   .svd-translation-strings {
     border-top-style: solid;
     border-top-width: 1px;
@@ -59,11 +35,6 @@
   }
   .svd-toolbox-category-header {
     margin-top: 20px;
-  }
-  .sjs-cb-wrapper {
-    margin-right: 5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
   }
 }
 
