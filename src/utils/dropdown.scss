@@ -1,9 +1,11 @@
 ﻿.svd-toolbar-dropdown {
   line-height: 34px;
   margin-right: 1em;
-  
+  white-space: nowrap;
+
   .svd-toolbar-dropdown__label {
     display: inline-block;
+    vertical-align: top;
   }
   .svd-toolbar-dropdown__select {
     display: inline-block;
@@ -11,5 +13,19 @@
     border: 1px solid #ccc;
     height: 34px;
     min-width: 200px;
+  }
+}
+
+
+.svd_container .svd_content .svd-toolbar-dropdown {
+  .svd_custom_select {
+    vertical-align: top;
+    width: auto;
+    .svd-toolbar-dropdown__select {
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 12px;
+      padding-right: 40px;
+    }
   }
 }

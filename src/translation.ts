@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { unparse, parse } from "papaparse";
-import { Observable } from "knockout";
+import { IToolbarItem } from "./components/toolbar";
 
 export class TranslationItemBase {
   constructor(public name: string) {}
@@ -14,7 +14,7 @@ export class TranslationItemBase {
 }
 
 export class TranslationItem extends TranslationItemBase {
-  private values: Survey.HashTable<Observable<string>>;
+  private values: Survey.HashTable<ko.Observable<string>>;
   public customText: string;
   constructor(
     public name: string,
@@ -33,7 +33,7 @@ export class TranslationItem extends TranslationItemBase {
     return editorLocalization.getPropertyName(this.name);
   }
 
-  public koValue(loc: string): Observable<string> {
+  public koValue(loc: string): ko.Observable<string> {
     if (!this.values[loc]) {
       var val = ko.observable(this.locString.getLocaleText(loc));
       var self = this;
@@ -364,6 +364,13 @@ export class Translation implements ITranslationLocales {
   ) => void;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
+
+  /**
+   * The list of toolbar items. You may add/remove/replace them.
+   * @see IToolbarItem
+   */
+  public toolbarItems = ko.observableArray<IToolbarItem>();
+
   constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
     this.koLocales = ko.observableArray([
       {
@@ -395,7 +402,7 @@ export class Translation implements ITranslationLocales {
     var self = this;
     this.koSelectedLanguageToAdd.subscribe(function(newValue) {
       if (!!newValue) {
-        self.addLocale(newValue.value);
+        self.addLocale(newValue);
       }
     });
     this.koShowAllStrings.subscribe(function(newValue) {
@@ -416,6 +423,42 @@ export class Translation implements ITranslationLocales {
       self.mergeLocaleWithDefault();
     };
     this.survey = survey;
+
+    let items: Array<IToolbarItem> = [];
+    items.push({
+      id: "svd-translation-language-selector",
+      title: "",
+      tooltip: this.selectLanguageOptionsCaption,
+      component: "svd-dropdown",
+      action: ko.computed({
+        read: () => this.koSelectedLanguageToAdd(),
+        write: (val: any) => this.koSelectedLanguageToAdd(val),
+      }),
+      items: <any>this.koAvailableLanguages,
+    });
+    items.push({
+      id: "svd-translation-show-all-strings",
+      title: this.showAllStringsText,
+      tooltip: this.showAllStringsText,
+      component: "svd-boolean",
+      action: ko.computed({
+        read: () => this.koShowAllStrings(),
+        write: (val: any) => this.koShowAllStrings(val),
+      }),
+    });
+    items.push({
+      id: "svd-translation-language-selector",
+      title: "",
+      tooltip: "",
+      component: "svd-dropdown",
+      action: ko.computed({
+        read: () => this.koFilteredPage(),
+        write: (val: any) => this.koFilteredPage(val),
+      }),
+      items: <any>this.koFilteredPages,
+    });
+
+    this.toolbarItems(items);
   }
   public get survey(): Survey.Survey {
     return this.surveyValue;
@@ -680,6 +723,7 @@ export class Translation implements ITranslationLocales {
       res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
     }
     this.koSelectedLanguageToAdd(null);
+    res.unshift({ value: null, text: this.selectLanguageOptionsCaption });
     this.koAvailableLanguages(res);
     !!this.availableTranlationsChangedCallback &&
       this.availableTranlationsChangedCallback();
