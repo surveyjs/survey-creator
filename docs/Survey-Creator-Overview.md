@@ -624,6 +624,17 @@ An optional Boolean property. The default value is false. Set it to true, if you
 An optional Boolean property. If you do not want to serialize this property into JSON then set its value to false. It is true by default.
 
 ---
+**isLocalizable**
+
+An optional Boolean property. If you do not want to make this property localizable, this property can be translated on several languages and available in "translation" tab then set its value to true. It is false by default. The property type should be "string" (default type) or "text" (multiple lines).
+
+```javascript
+//It is visible if inputFormat property equals to "date*" values
+Survey.Serializer.addProperty("question", 
+  { name: "popupDescription:text", isLocalizable: true, category: "general", visibleIndex: 3 });
+```
+
+---
 **visible**
 
 An optional Boolean property. By default, it is true. Set it to false, if you want to hide this property from the Survey Creator
