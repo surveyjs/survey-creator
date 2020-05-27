@@ -15,84 +15,46 @@ export { editorLocalization as localization } from "../editorLocalization";
 
 export { DragDropHelper } from "../dragdrophelper";
 export { EditableObject } from "../propertyEditors/editableObject";
-export {
-  SurveyElementSelector,
-} from "../propertyEditors/surveyElementSelector";
-export {
-  SurveyPropertyEditorBase,
-} from "../propertyEditors/propertyEditorBase";
-export {
-  SurveyPropertyCustomEditor,
-} from "../propertyEditors/propertyCustomEditor";
-export {
-  SurveyPropertyEditorFactory,
-} from "../propertyEditors/propertyEditorFactory";
+export { SurveyElementSelector } from "../propertyEditors/surveyElementSelector";
+export { SurveyPropertyEditorBase } from "../propertyEditors/propertyEditorBase";
+export { SurveyPropertyCustomEditor } from "../propertyEditors/propertyCustomEditor";
+export { SurveyPropertyEditorFactory } from "../propertyEditors/propertyEditorFactory";
 export {
   SurveyStringPropertyEditor,
   SurveyDropdownPropertyEditor,
   SurveyBooleanPropertyEditor,
   SurveyNumberPropertyEditor,
 } from "../propertyEditors/propertyEditorFactory";
-export {
-  SurveyPropertyTextItemsEditor,
-} from "../propertyEditors/propertyTextItemsEditor";
-export {
-  SurveyPropertyItemsEditor,
-} from "../propertyEditors/propertyItemsEditor";
-export {
-  SurveyPropertyItemValuesEditor,
-} from "../propertyEditors/propertyItemValuesEditor";
-export {
-  SurveyPropertyMultipleValuesEditor,
-} from "../propertyEditors/propertyMultipleValuesEditor";
+export { SurveyPropertyTextItemsEditor } from "../propertyEditors/propertyTextItemsEditor";
+export { SurveyPropertyItemsEditor } from "../propertyEditors/propertyItemsEditor";
+export { SurveyPropertyItemValuesEditor } from "../propertyEditors/propertyItemValuesEditor";
+export { SurveyPropertyMultipleValuesEditor } from "../propertyEditors/propertyMultipleValuesEditor";
 export {
   SurveyNestedPropertyEditor,
   SurveyNestedPropertyEditorItem,
 } from "../propertyEditors/propertyNestedPropertyEditor";
-export {
-  SurveyPropertyDropdownColumnsEditor,
-} from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
-export {
-  SurveyPropertyModalEditor,
-} from "../propertyEditors/propertyModalEditor";
+export { SurveyPropertyDropdownColumnsEditor } from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
+export { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
 export {
   SurveyPropertyTextEditor,
   SurveyPropertyHtmlEditor,
 } from "../propertyEditors/propertyModalEditor";
-export {
-  SurveyPropertyConditionEditor,
-} from "../propertyEditors/propertyConditionEditor";
-export {
-  SurveyPropertyResultfullEditor,
-} from "../propertyEditors/propertyRestfullEditor";
+export { SurveyPropertyConditionEditor } from "../propertyEditors/propertyConditionEditor";
+export { SurveyPropertyResultfullEditor } from "../propertyEditors/propertyRestfullEditor";
 export {
   SurveyPropertyDefaultValueEditor,
   SurveyPropertyDefaultRowValueEditor,
   SurveyPropertyDefaultPanelValueEditor,
   SurveyPropertySetEditor,
 } from "../propertyEditors/propertyDefaultValueEditor";
-export {
-  SurveyPropertyTriggersEditor,
-} from "../propertyEditors/propertyTriggersEditor";
-export {
-  SurveyPropertyHtmlConditionEditor,
-} from "../propertyEditors/propertyHtmlConditionEditor";
-export {
-  SurveyPropertyUrlConditionEditor,
-} from "../propertyEditors/propertyUrlConditionEditor";
-export {
-  SurveyPropertyCalculatedValueEditor,
-} from "../propertyEditors/propertyCalculatedValues";
-export {
-  SurveyPropertyValidatorsEditor,
-} from "../propertyEditors/propertyValidatorsEditor";
-export {
-  SurveyPropertyCellsEditor,
-} from "../propertyEditors/propertyCellsEditor";
+export { SurveyPropertyTriggersEditor } from "../propertyEditors/propertyTriggersEditor";
+export { SurveyPropertyHtmlConditionEditor } from "../propertyEditors/propertyHtmlConditionEditor";
+export { SurveyPropertyUrlConditionEditor } from "../propertyEditors/propertyUrlConditionEditor";
+export { SurveyPropertyCalculatedValueEditor } from "../propertyEditors/propertyCalculatedValues";
+export { SurveyPropertyValidatorsEditor } from "../propertyEditors/propertyValidatorsEditor";
+export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
 export { SurveyObjects } from "../surveyObjects";
-export {
-  SurveyQuestionEditorDefinition,
-} from "../questionEditors/questionEditorDefinition";
+export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
@@ -184,6 +146,7 @@ export { SplitterComponentViewModel } from "../utils/splitter";
 export { DesignerContainerModel } from "../utils/designer-container";
 export { DesignerHContainerModel } from "../utils/designer-h-container";
 
-export {
-  SurveyPropertyOneSelectedEditor,
-} from "../propertyEditors/propertyOneSelectedEditor";
+export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";
+
+// property grid
+export { PropertyGridViewModel } from "../propertyGrid/property-grid";
