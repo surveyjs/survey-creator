@@ -203,6 +203,8 @@
         .svd_questions_editor {
           position: relative;
           padding-top: 18px;
+          padding-bottom: 18px;
+          min-height: 100%;
 
           .panel-body,
           .card-block {

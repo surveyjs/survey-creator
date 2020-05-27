@@ -8,7 +8,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 
-test(`check d&d all toolbox elements`, async (t) => {
+test.skip(`check d&d all toolbox elements`, async (t) => {
   const getQuestionsAddedCount = ClientFunction(
     () => document.querySelectorAll(".svd_container .svd_question ").length
   );

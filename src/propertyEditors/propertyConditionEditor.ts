@@ -66,7 +66,6 @@ export class ConditionEditorItem {
       : new Survey.Survey(json);
     this.survey.onValueChanged.add((sender, options) => {
       if (options.name == "questionName") {
-        this.updateOperatorEnables();
         this.rebuildQuestionValue();
         this.setOperator();
       }
@@ -74,6 +73,7 @@ export class ConditionEditorItem {
         this.rebuildQuestionValueOnOperandChanging();
       }
       this.owner.onConditionItemChanged();
+      this.updateOperatorEnables();
     });
     this.setupSurvey();
   }

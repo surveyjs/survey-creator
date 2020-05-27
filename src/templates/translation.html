@@ -1,43 +1,43 @@
 <script type="text/html" id="translation">
   <div class="form-group svd-translation-tab">
-      <div class="form-group svd-language-select">
-      <div class="svd_custom_select svd-light-bg-color svd-light-border-color">
-          <select
-            onmousewheel="return false;"
-            data-bind="options: koAvailableLanguages, value: koSelectedLanguageToAdd, optionsText:'text', optionsCaption: $data.selectLanguageOptionsCaption, attr: { 'aria-label': selectLanguageOptionsCaption }">
-        </select>
-      </div>
-      <div class="svd-translation-tab-show-all-strings-container">
-      <!-- ko template: { name: 'propertyeditor-boolean', data: {  koValue: koShowAllStrings, displayName: $data.showAllStringsText, isDiplayNameVisible: true } } -->
-      <!-- /ko -->
-      </div>
-      <div class="svd_custom_select svd-light-bg-color svd-light-border-color">
-          <select onmousewheel="return false;" data-bind="options: koFilteredPages, value: koFilteredPage, optionsValue: 'value', optionsText:'text'"></select>
-      </div>
-      </div>
-      <div>
-      <!-- ko foreach: {data: $data.koLocales, as: 'item' } -->
-      <label data-bind="visible: !!item.locale && item.koEnabled()">
-      <!-- ko template: { name: 'propertyeditor-boolean', data: {  koValue: item.koVisible, displayName: $parent.getLocaleName($data.locale), isDiplayNameVisible: true } } -->
-      <!-- /ko -->
-      </label>
-      <!-- /ko -->
-      </div>
-      <div class="form-group">
-          <button class="btn btn-primary"  type="button" data-bind="visible:$data.koCanMergeLocaleWithDefault, text:$data.koMergeLocaleWithDefaultText, click:$data.koMergeLocaleWithDefault"></button>
-          <button class="btn btn-primary"  type="button" data-bind="text:$data.exportToCSVText, click:$data.koExportToSCVFile"></button>
-          <button class="btn btn-primary"  type="button" onclick="this.getElementsByTagName('input')[0].click();">
-          <input type="file" style="display:none;" accept=".csv" data-bind="event: { change: function() { $data.koImportFromSCVFile($element) } }" />
-          <span data-bind="text:$data.importFromCSVText"></span>
-          </button>
-      </div>
-      <div class="svd-translation-no-strings svd-light-text-color" data-bind="visible:$data.koIsEmpty">
-          <span data-bind="text:$data.noStringsText"></span>
-      </div>
-      <!-- ko ifnot: $data.koIsEmpty -->
-      <!-- ko template: { name: "translation-group", data: $data.koRoot } -->
-      <!-- /ko -->
-      <!-- /ko -->
+    <div class="svd-vertical-container">
+        <div class="svd-vertical-container__row">
+            <div class="svd-vertical-container__cell">
+                <svd-toolbar params="items: toolbarItems"></svd-toolbar>
+                <div>
+                  <!-- ko foreach: {data: $data.koLocales, as: 'item' } -->
+                  <label data-bind="visible: !!item.locale && item.koEnabled()">
+                  <!-- ko template: { name: 'propertyeditor-boolean', data: {  koValue: item.koVisible, displayName: $parent.getLocaleName($data.locale), isDiplayNameVisible: true } } -->
+                  <!-- /ko -->
+                  </label>
+                  <!-- /ko -->
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary"  type="button" data-bind="visible:$data.koCanMergeLocaleWithDefault, text:$data.koMergeLocaleWithDefaultText, click:$data.koMergeLocaleWithDefault"></button>
+                    <button class="btn btn-primary"  type="button" data-bind="text:$data.exportToCSVText, click:$data.koExportToCSVFile"></button>
+                    <button class="btn btn-primary"  type="button" onclick="this.getElementsByTagName('input')[0].click();">
+                    <input type="file" style="display:none;" accept=".csv" data-bind="event: { change: function() { $data.koImportFromCSVFile($element) } }" />
+                    <span data-bind="text:$data.importFromCSVText"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="svd-vertical-container__row">
+            <div class="svd-vertical-container__cell">
+                <div class="svd-vertical-container__cell-content-holder">
+                    <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
+                        <div class="svd-translation-no-strings svd-light-text-color" data-bind="visible:$data.koIsEmpty">
+                            <span data-bind="text:$data.noStringsText"></span>
+                        </div>
+                        <!-- ko ifnot: $data.koIsEmpty -->
+                        <!-- ko template: { name: "translation-group", data: $data.koRoot } -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </script>
 <script type="text/html" id="translation-group">
