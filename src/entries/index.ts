@@ -80,9 +80,6 @@ export {
 export { Extentions } from "../extentions";
 export { SurveyEditor } from "../editor";
 export { SurveyCreator } from "../editor";
-
-export { SurveysManager } from "../manage";
-
 export { StylesManager } from "../stylesmanager";
 
 //localization
