@@ -1,3 +1,16 @@
+.svd_container {
+  .editor-tabs {
+    padding: 19px 15px 0 30px;
+    > li > a {
+      border: 1px solid transparent;
+      border-radius: 0;
+      padding: 0.5em 1em;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}
+
 .svd-survey-placeholder-root {
   .svd-survey-placeholder {
     position: relative;
