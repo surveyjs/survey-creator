@@ -37,10 +37,9 @@
           <!-- /ko -->
 
           <!-- ko if: tabs().length === 1 -->
-          <!-- ko foreach: { data: tabs, as: 'content' } -->
-          <!-- ko template: { name: 'se-component-' + content + '-header', data: $parent.context } -->
-          <!-- /ko -->
-          <!-- /ko -->
+          <div class="svd-designer-container__header">
+            <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.' + tabs()[0])"></span>
+          </div>
           <!-- /ko -->
         </div>
       </div>

@@ -16,7 +16,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
-import { QuestionToolbox } from "./questionToolbox";
+import { QuestionToolbox } from "./components/toolbox";
 import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
@@ -918,11 +918,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
     this.logic.hideExpressionHeader =
       !!options && options.hideExpressionHeader === true;
-    this.toolboxValue = new QuestionToolbox(
-      this.options && this.options.questionTypes
-        ? this.options.questionTypes
-        : null
-    );
 
     this.koViewType = ko.observable("designer");
     this.koViewType.subscribe(function(newValue) {
@@ -1046,6 +1041,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     const commands = new Commands(self);
     self.commands = commands.getCommands();
     this.addToolbarItems();
+  }
+
+  get toolboxItems() {
+    return this.options && this.options.questionTypes
+      ? this.options.questionTypes
+      : null;
   }
 
   tabs = ko.observableArray();
@@ -1321,6 +1322,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get toolbox(): QuestionToolbox {
     return this.toolboxValue;
+  }
+  public set toolbox(newValue: QuestionToolbox) {
+    this.toolboxValue = newValue;
   }
   /**
    * Return the translation mode object.

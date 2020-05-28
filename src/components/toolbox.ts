@@ -1,6 +1,11 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization } from "../editorLocalization";
+export { ToolboxItemViewModel } from "./toolbox-item";
+import { SurveyCreator } from '../editor';
+
+import "./toolbox.scss";
+var template = require("html-loader?interpolate!val-loader!./toolbox.html");
 
 /**
  * The Toolbox item description.
@@ -113,10 +118,10 @@ export class QuestionToolbox {
   koHasCategories = ko.observable(false);
   koCanCollapseCategories = ko.observable(true);
 
-  constructor(private supportedQuestions: Array<string> = null) {
+  constructor(supportedQuestions: Array<string> = null, public creator: SurveyCreator = null) {
     this.createDefaultItems(supportedQuestions);
     var self = this;
-    this.koActiveCategory.subscribe(function(newValue) {
+    this.koActiveCategory.subscribe(function (newValue) {
       for (var i = 0; i < self.koCategories().length; i++) {
         var category = self.koCategories()[i];
         (<any>category).koCollapsed((<any>category).name !== newValue);
@@ -430,7 +435,7 @@ export class QuestionToolbox {
           name: categoryName,
           items: [],
           koCollapsed: ko.observable(categoryName !== prevActiveCategory),
-          expand: function() {
+          expand: function () {
             self.doCategoryClick(this.name);
           },
         };
@@ -573,4 +578,23 @@ export class QuestionToolbox {
     }
     return questions;
   }
+
+  public dispose() {
+  }
 }
+
+ko.components.register("svd-toolbox", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      let creator = params.itemsProvider;
+      let toolbox = new QuestionToolbox(creator.toolboxItems, creator);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        creator.toolbox.dispose();
+        creator.toolbox = undefined;
+      });
+      creator.toolbox = toolbox;
+      return toolbox;
+    }
+  },
+  template: template
+});

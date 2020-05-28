@@ -1,28 +1,11 @@
+@import "../colors";
+
 .svd_container {
   .svd_toolbox {
     border: none;
     font-size: 1.17em;
     margin-top: 10px;
 
-    .svd_toolbox_item {
-      padding: 8px;
-      border-width: 0;
-      border-bottom-width: 1px;
-      border-style: solid;
-      line-height: 1.2em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-right: 5px;
-
-      cursor: pointer;
-      &:hover {
-        background-color: $primary-border-color;
-      }
-      .svd_toolbox_item_text {
-        margin-left: 1em;
-      }
-    }
     .panel-info {
       border: none;
       &.panel {

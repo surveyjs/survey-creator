@@ -1,0 +1,30 @@
+<div class="svd_toolbox svd-dark-bg-color">
+    <!-- ko if: koHasCategories -->
+    <div class="panel-group" role="tablist" data-bind="foreach: koCategories">
+        <div class="panel panel-info">
+            <div class="svd-toolbox-category-header" role="tab" data-bind="click: expand">
+                <span data-bind="css: { 'svd-main-color': !koCollapsed() }, text: name"></span>
+                <!--ko if: $parent.koCanCollapseCategories -->
+                <!-- ko if: koCollapsed -->
+                <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
+                <!-- /ko -->
+                <!-- ko ifnot: koCollapsed -->
+                <svg-icon class="icon-toolbox-arrow svd-primary-icon"
+                    params="iconName: 'icon-arrow_up_10x10', size: 10"></svg-icon>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <div role="tabpanel" data-bind="css: { 'panel-collapse collapse': koCollapsed}">
+                <!-- ko foreach: items -->
+                <svd-toolbox-item params="item: $data, creator: $parents[1].creator"></svd-toolbox-item>
+                <!-- /ko  -->
+            </div>
+        </div>
+    </div>
+    <!-- /ko  -->
+    <!-- ko if: !koHasCategories() -->
+    <!-- ko foreach: koItems -->
+    <svd-toolbox-item params="item: $data, creator: $parent.creator"></svd-toolbox-item>
+    <!-- /ko  -->
+    <!-- /ko  -->
+</div>
