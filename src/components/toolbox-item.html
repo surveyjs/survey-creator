@@ -1,0 +1,7 @@
+<div tabindex="0" draggable="true" class="svd_toolbox_item svd-light-border-color"
+    data-bind="attr: {title: item.tooltip, role: 'button', 'aria-label': ariaLabel}, css: 'svd_toolbox_item_' + item.iconName, key2click, clickNoFocus: click, event:{dragstart: dragstart, dragend: dragend}">
+    <span>
+        <svg-icon params="iconName: item.iconName"></svg-icon>
+    </span>
+    <span class="svd_toolbox_item_text" data-bind="text: item.title"></span>
+</div>

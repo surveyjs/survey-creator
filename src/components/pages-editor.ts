@@ -268,7 +268,7 @@ export class PagesEditor {
   }
 }
 
-ko.components.register("pages-editor", {
+ko.components.register("svd-pages-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       return new PagesEditor(params.editor, componentInfo.element);

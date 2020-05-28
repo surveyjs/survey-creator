@@ -1,10 +1,10 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { QuestionToolbox } from "../src/questionToolbox";
+import { QuestionToolbox } from "../src/components/toolbox";
 
 export default QUnit.module("questionToolboxTests");
 
-QUnit.test("toolbox support options", function(assert) {
+QUnit.test("toolbox support options", function (assert) {
   var allTypes = Survey.ElementFactory.Instance.getAllTypes();
   var toolbox = new QuestionToolbox();
   assert.equal(toolbox.items.length, allTypes.length, "All types are accepted");
@@ -26,7 +26,7 @@ QUnit.test("toolbox support options", function(assert) {
   );
 });
 
-QUnit.test("toolbox reorder items", function(assert) {
+QUnit.test("toolbox reorder items", function (assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.items[0].name, "text");
   assert.equal(toolbox.items[1].name, "dropdown");
@@ -46,7 +46,7 @@ QUnit.test("toolbox reorder items", function(assert) {
   assert.equal(toolbox.items[2].name, "text");
 });
 
-QUnit.test("toolbox several categories", function(assert) {
+QUnit.test("toolbox several categories", function (assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.koHasCategories(), false, "There is only one category");
   toolbox.addItem(<any>{ name: "countries", category: "additional" });
@@ -94,7 +94,7 @@ QUnit.test("toolbox several categories", function(assert) {
   );
 });
 
-QUnit.test("toolbox change categories", function(assert) {
+QUnit.test("toolbox change categories", function (assert) {
   var toolbox = new QuestionToolbox([
     "text",
     "dropdown",
@@ -117,7 +117,7 @@ QUnit.test("toolbox change categories", function(assert) {
   assert.equal(toolbox.koCategories().length, 4, "There are 4 categories now");
 });
 
-QUnit.test("toolbox load custom/composite questions", function(assert) {
+QUnit.test("toolbox load custom/composite questions", function (assert) {
   Survey.ComponentCollection.Instance.add({
     name: "newquestion",
     questionJSON: {
@@ -149,7 +149,7 @@ QUnit.test("toolbox load custom/composite questions", function(assert) {
 
 QUnit.test(
   "toolbox categories + allowExpandMultipleCategories property",
-  function(assert) {
+  function (assert) {
     var toolbox = new QuestionToolbox([
       "text",
       "dropdown",
@@ -211,7 +211,7 @@ QUnit.test(
     );
   }
 );
-QUnit.test("toolbox categories + keepAllCategoriesExpanded property", function(
+QUnit.test("toolbox categories + keepAllCategoriesExpanded property", function (
   assert
 ) {
   var toolbox = new QuestionToolbox([
@@ -266,7 +266,7 @@ QUnit.test("toolbox categories + keepAllCategoriesExpanded property", function(
   );
 });
 
-QUnit.test("toolbox copied questions", function(assert) {
+QUnit.test("toolbox copied questions", function (assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.copiedItems.length, 0, "There is no copied questions");
   toolbox.addCopiedItem(new Survey.QuestionCheckbox("q1"));
@@ -291,7 +291,7 @@ QUnit.test("toolbox copied questions", function(assert) {
   assert.equal(toolbox.copiedItems.length, 0, "clear all copied items");
   assert.equal(toolbox.items.length, 2, "There are 2 items total");
 });
-QUnit.test("Save/Load all toolbox items", function(assert) {
+QUnit.test("Save/Load all toolbox items", function (assert) {
   var allTypes = Survey.ElementFactory.Instance.getAllTypes();
   var toolbox1 = new QuestionToolbox();
   assert.equal(toolbox1.items.length, allTypes.length, "All types are here");
@@ -299,7 +299,7 @@ QUnit.test("Save/Load all toolbox items", function(assert) {
   toolbox1.jsonText = toolbox2.jsonText;
   assert.equal(toolbox1.items.length, 2, "Only two types are here");
 });
-QUnit.test("Save/Load copied toolbox items", function(assert) {
+QUnit.test("Save/Load copied toolbox items", function (assert) {
   var toolbox1 = new QuestionToolbox();
   toolbox1.addCopiedItem(new Survey.QuestionCheckbox("q1"));
   toolbox1.addCopiedItem(new Survey.QuestionText("q2"));

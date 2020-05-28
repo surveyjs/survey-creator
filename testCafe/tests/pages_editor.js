@@ -13,7 +13,7 @@ test(`checking pagesEditor elements exists`, async t => {
   );
 
   await t
-    .hover("pages-editor")
+    .hover("svd-pages-editor")
     .hover(".svd-page-selector")
     .hover(".svd-pages")
     .hover(`[title="Add New Page"]`);
