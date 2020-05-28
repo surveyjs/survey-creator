@@ -149,4 +149,4 @@ export { DesignerHContainerModel } from "../utils/designer-h-container";
 export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";
 
 // property grid
-export { PropertyGrid } from "../propertyGrid/property-grid";
+export { PropertyGrid } from "../property-grid/property-grid";

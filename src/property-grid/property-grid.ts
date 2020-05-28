@@ -13,7 +13,7 @@ export class PropertyGrid {
   ) {}
 }
 
-ko.components.register("property-grid", {
+ko.components.register("svd-property-grid", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       return new PropertyGrid(
