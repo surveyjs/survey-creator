@@ -7,8 +7,8 @@ import { IToolbarItem } from '../components/toolbar';
 import "./test.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./test.html");
 
-export { SurveySimulatorComponent } from "./simulator";
-export { SurveyResultsModel } from "./results";
+export { SurveySimulatorComponent } from "../components/simulator";
+export { SurveyResultsModel } from "../components/results";
 
 export class SurveyLiveTester {
   private json: any;

@@ -1,16 +1,21 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { editorLocalization } from "./editorLocalization";
 import { unparse, parse } from "papaparse";
-import { IToolbarItem } from "./components/toolbar";
+import { editorLocalization } from "../editorLocalization";
+import { SurveyCreator } from '../editor';
+import { IToolbarItem } from "../components/toolbar";
+
+import "./translation.scss";
+var templateHtml = require("html-loader?interpolate!val-loader!./translation.html");
+var groupTemplateHtml = require("html-loader?interpolate!val-loader!./translation-group.html");
 
 export class TranslationItemBase {
-  constructor(public name: string) {}
+  constructor(public name: string) { }
   public get isGroup() {
     return false;
   }
-  public fillLocales(locales: Array<string>) {}
-  public mergeLocaleWithDefault(loc: string) {}
+  public fillLocales(locales: Array<string>) { }
+  public mergeLocaleWithDefault(loc: string) { }
 }
 
 export class TranslationItem extends TranslationItemBase {
@@ -202,7 +207,7 @@ export class TranslationGroup extends TranslationItemBase {
         this.createGroups(value, property);
       }
     }
-    this.itemValues.sort(function(
+    this.itemValues.sort(function (
       a: TranslationItemBase,
       b: TranslationItemBase
     ) {
@@ -386,12 +391,12 @@ export class Translation implements ITranslationLocales {
     this.koSelectedLanguageToAdd = ko.observable(null);
     this.koFilteredPage = ko.observable();
     this.koCanMergeLocaleWithDefault = ko.observable(false);
-    this.koMergeLocaleWithDefaultText = ko.computed(function() {
+    this.koMergeLocaleWithDefaultText = ko.computed(function () {
       if (!this.koCanMergeLocaleWithDefault()) return "";
       var locText = this.getLocaleName(this.defaultLocale);
       return editorLocalization
         .getString("ed.translationMergeLocaleWithDefault")
-        ["format"](locText);
+      ["format"](locText);
     }, this);
     this.koFilteredPages = ko.observableArray([
       {
@@ -400,26 +405,26 @@ export class Translation implements ITranslationLocales {
       },
     ]);
     var self = this;
-    this.koSelectedLanguageToAdd.subscribe(function(newValue) {
+    this.koSelectedLanguageToAdd.subscribe(function (newValue) {
       if (!!newValue) {
         self.addLocale(newValue);
       }
     });
-    this.koShowAllStrings.subscribe(function(newValue) {
+    this.koShowAllStrings.subscribe(function (newValue) {
       self.reset();
     });
-    this.koFilteredPage.subscribe(function(newValue) {
+    this.koFilteredPage.subscribe(function (newValue) {
       self.reset();
     });
-    this.koExportToCSVFile = function() {
+    this.koExportToCSVFile = function () {
       self.exportToSCVFile("survey_translation.csv");
     };
-    this.koImportFromCSVFile = function(el) {
+    this.koImportFromCSVFile = function (el) {
       if (el.files.length < 1) return;
       self.importFromCSVFile(el.files[0]);
       el.value = "";
     };
-    this.koMergeLocaleWithDefault = function() {
+    this.koMergeLocaleWithDefault = function () {
       self.mergeLocaleWithDefault();
     };
     this.survey = survey;
@@ -640,7 +645,7 @@ export class Translation implements ITranslationLocales {
   public importFromCSVFile(file: File) {
     var self = this;
     parse(file, {
-      complete: function(results, file) {
+      complete: function (results, file) {
         self.importFromNestedArray(results.data);
       },
     });
@@ -736,4 +741,60 @@ export class Translation implements ITranslationLocales {
     }
     this.koFilteredPages(res);
   }
+  dispose() {
+    this.importFinishedCallback = undefined;
+    this.availableTranlationsChangedCallback = undefined;
+    this.tranlationChangedCallback = undefined;
+  }
 }
+
+ko.components.register("survey-translation", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      let creator: SurveyCreator = params.creator;
+
+      let model = new Translation(
+        creator.createSurvey({}, "translation")
+      );
+      model.importFinishedCallback = function () {
+        creator.onTranslationImported.fire(self, {});
+      };
+      model.availableTranlationsChangedCallback = () => {
+        creator.setModified({ type: "TRANSLATIONS_CHANGED" });
+      };
+      model.tranlationChangedCallback = (
+        locale: string,
+        name: string,
+        value: string,
+        context: any
+      ) => {
+        creator.setModified({
+          type: "TRANSLATIONS_CHANGED",
+          locale,
+          name,
+          value,
+          context,
+        });
+      };
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        creator.translation.dispose();
+        creator.translation = undefined;
+      });
+
+      creator.translation = model;
+      return model;
+    }
+  },
+  template: templateHtml
+});
+
+ko.components.register("svd-translation-group", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      var model = params.model;
+      return model;
+    }
+  },
+  template: groupTemplateHtml
+});
