@@ -11,7 +11,6 @@ import {
   SurveyElementPropertyGrid,
   SurveyPropertyEditorShowWindow,
 } from "./questionEditors/questionEditor";
-import { SurveyJSONEditor } from "./surveyJSONEditor";
 import { SurveyTextWorker } from "./textWorker";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
@@ -46,7 +45,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private renderedElement: HTMLElement;
   private surveyjs: HTMLElement;
 
-  private jsonEditor: SurveyJSONEditor;
   private elementPropertyGridValue: SurveyElementPropertyGrid;
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
@@ -172,6 +170,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * This callback is called on changing "Generate Valid JSON" option.
    */
   public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
+  /**
+   * This callback is used internally for providing survey JSON text.
+   */
+  public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
+  /**
+   * This callback is used internally for setting survey JSON text.
+   */
+  public setSurveyJSONTextCallback: (text: string) => void;
   /**
    * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
    * In case of any subscriptions to this event all notifications will be redirected into the event handler.
@@ -943,11 +949,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
     };
 
-    this.jsonEditor = new SurveyJSONEditor();
-    ko.computed(() => {
-      this.jsonEditor.readOnly = this.readOnly;
-    });
-
     ko.computed(() => {
       this.tabs([]);
       if (this.showDesignerTab) {
@@ -981,8 +982,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.tabs.push({
           name: "editor",
           title: this.getLocString("ed.jsonEditor"),
-          template: "jsoneditor",
-          data: this.jsonEditor,
+          template: "se-tab-json-editor",
+          data: this,
           action: () => this.showJsonEditor(),
         });
       }
@@ -1249,7 +1250,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * @see JSON
    */
   public get text(): string {
-    if (this.koViewType() == "editor") return this.jsonEditor.text;
+    if (!!this.getSurveyJSONTextCallback) {
+      return this.getSurveyJSONTextCallback().text;
+    }
     return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
@@ -1714,8 +1717,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
 
   private setTextValue(value: string) {
-    this.jsonEditor.isInitialJSON = true;
-    this.jsonEditor.text = value;
+    if (!!this.setSurveyJSONTextCallback) {
+      this.setSurveyJSONTextCallback(value);
+    }
   }
   /**
    * Add a new page into the editing survey.
@@ -1858,9 +1862,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private canSwitchViewType(newType: string): boolean {
     if (newType && this.koViewType() == newType) return false;
-    if (this.koViewType() == "designer") {
-      this.setTextValue(this.getSurveyTextFromDesigner());
-    }
     if (
       (this.koViewType() == "translation" || this.koViewType() == "logic") &&
       newType == "designer"
@@ -1868,15 +1869,13 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.survey.render();
     }
     if (this.koViewType() != "editor") return true;
-    if (!this.jsonEditor.isJsonCorrect) {
+    var textWorker = new SurveyTextWorker(this.text);
+    if (!textWorker.isJsonCorrect) {
       this.notify(this.getLocString("ed.correctJSON"));
       return false;
     }
-    if (!this.readOnly && this.jsonEditor.isJSONChanged) {
-      this.initSurvey(
-        new Survey.JsonObject().toJsonObject(this.jsonEditor.survey)
-      );
-
+    if (!this.readOnly && !!this.getSurveyJSONTextCallback && this.getSurveyJSONTextCallback().isModified) {
+      this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
       this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
     }
     return true;
@@ -1900,9 +1899,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public makeNewViewActive(viewName: string): boolean {
     if (!this.canSwitchViewType(viewName)) return false;
-    if (viewName == "editor") {
-      this.jsonEditor.show(this.getSurveyTextFromDesigner());
-    }
     if (viewName == "embed") {
       this.showSurveyEmbeding();
     }
@@ -1952,8 +1948,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private getSurveyTextFromDesigner() {
     var json = this.survey.toJSON();
-    if (this.options && this.options.generateValidJSON)
+    if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, 1);
+    }
     return new SurveyJSON5().stringify(json, null, 1);
   }
   private getPageByElement(obj: Survey.Base): Survey.Page {
@@ -2060,9 +2057,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.setUndoRedoCurrentState(true);
 
-    this.jsonEditor.init(<HTMLElement>(
-      this.renderedElement.querySelector("#surveyjsJSONEditor")
-    ));
     if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
       var options: any = {
         width: "100%",
@@ -2851,14 +2845,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.logic.update(this.survey, this);
   }
   private getSurveyJSON(): any {
-    if (
-      this.koIsShowDesigner() ||
-      this.koViewType() == "translation" ||
-      this.koViewType() == "logic"
-    )
+    if (this.koViewType() != "editor") {
       return new Survey.JsonObject().toJsonObject(this.survey);
-    if (this.jsonEditor.isJsonCorrect)
-      return new Survey.JsonObject().toJsonObject(this.jsonEditor.survey);
+    }
+    var surveyJsonText = this.text;
+    var textWorker = new SurveyTextWorker(surveyJsonText);
+    if (textWorker.isJsonCorrect) {
+      return new Survey.JsonObject().toJsonObject(textWorker.survey);
+    }
     return null;
   }
   private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {

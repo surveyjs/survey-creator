@@ -1,9 +1,12 @@
 import * as ko from "knockout";
-import { SurveyTextWorker } from "./textWorker";
 import * as Survey from "survey-knockout";
-import { getLocString } from "./editorLocalization";
+import { SurveyTextWorker } from "../textWorker";
+import { getLocString } from "../editorLocalization";
+import { IToolbarItem } from '../components/toolbar';
+import { SurveyCreator } from '../editor';
 
-import { IToolbarItem } from './components/toolbar';
+import "./json-editor.scss";
+var templateHtml = require("html-loader?interpolate!val-loader!./json-editor.html");
 
 export class SurveyJSONEditor {
   public static updateTextTimeout: number = 1000;
@@ -228,4 +231,50 @@ export class SurveyJSONEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
+  dispose() {
+
+  }
 }
+
+ko.components.register("survey-json-editor", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      var creator: SurveyCreator = params.creator;
+      var model = new SurveyJSONEditor();
+
+      creator.setSurveyJSONTextCallback = text => {
+        model.isInitialJSON = true;
+        model.text = text;
+      }
+
+      var subscrViewType = creator.koViewType.subscribe(viewType => {
+        if (viewType === "editor") {
+          model.isInitialJSON = true;
+          model.show(creator.text);
+          creator.getSurveyJSONTextCallback = () => { return { text: model.text, isModified: model.isJSONChanged }; };
+        } else {
+          creator.getSurveyJSONTextCallback = undefined;
+        }
+      });
+
+      var subscrReadOnly = ko.computed(() => {
+        model.readOnly = creator.readOnly;
+      });
+
+      model.init(<HTMLElement>(
+        componentInfo.element.querySelector(".svd-json-editor")
+      ));
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        creator.setSurveyJSONTextCallback = undefined;
+        creator.getSurveyJSONTextCallback = undefined;
+        subscrReadOnly.dispose();
+        subscrViewType.dispose();
+        model.dispose();
+      });
+
+      return model;
+    }
+  },
+  template: templateHtml,
+});
