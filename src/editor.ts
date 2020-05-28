@@ -4,7 +4,6 @@ import {
   ISurveyObjectEditorOptions,
   SurveyPropertyEditorBase,
 } from "./propertyEditors/propertyEditorBase";
-import { SurveyEmbedingWindow } from "./surveyEmbedingWindow";
 import { SurveyObjects } from "./surveyObjects";
 import { QuestionConverter } from "./questionconverter";
 import {
@@ -50,7 +49,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   public selectPage: Function;
 
-  private surveyEmbeding: SurveyEmbedingWindow;
   private translationValue: Translation;
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
@@ -898,7 +896,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
-    this.surveyEmbeding = new SurveyEmbedingWindow();
 
     this.koViewType.subscribe(function(newValue) {
       self.onActiveTabChanged.fire(self, { tabName: newValue });
@@ -988,8 +985,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.tabs.push({
           name: "embed",
           title: this.getLocString("ed.embedSurvey"),
-          template: "surveyembeding",
-          data: this.surveyEmbeding,
+          template: "se-tab-embed",
+          data: this,
           action: () => this.showEmbedEditor(),
         });
       }
@@ -1055,6 +1052,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
       this.toolbarItems.push(toolbarItem);
     });
+  }
+
+  public getOptions() {
+    return this.options || {};
   }
 
   protected setOptions(options: any) {
@@ -1900,12 +1901,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public makeNewViewActive(viewName: string): boolean {
     if (!this.canSwitchViewType(viewName)) return false;
-    if (viewName == "embed") {
-      this.showSurveyEmbeding();
-    }
-    if (viewName == "translation") {
-      this.showSurveyTranslation();
-    }
     this.koViewType(viewName);
     return true;
   }
@@ -2829,19 +2824,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.updateConditionsOnRemove(obj.getValueName());
     }
   }
-  private showSurveyEmbeding() {
-    var json = this.getSurveyJSON();
-    this.surveyEmbeding.json = json;
-    this.surveyEmbeding.surveyId = this.surveyId;
-    this.surveyEmbeding.surveyPostId = this.surveyPostId;
-    this.surveyEmbeding.generateValidJSON =
-      this.options && this.options.generateValidJSON;
-    this.surveyEmbeding.show();
-  }
-  private showSurveyTranslation() {
-    this.translation.survey = this.survey;
-  }
-  private getSurveyJSON(): any {
+  public getSurveyJSON(): any {
     if (this.koViewType() != "editor") {
       return new Survey.JsonObject().toJsonObject(this.survey);
     }
@@ -2851,20 +2834,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return new Survey.JsonObject().toJsonObject(textWorker.survey);
     }
     return null;
-  }
-  private createAnnotations(text: string, errors: any[]): AceAjax.Annotation[] {
-    var annotations = new Array<AceAjax.Annotation>();
-    for (var i = 0; i < errors.length; i++) {
-      var error = errors[i];
-      var annotation: AceAjax.Annotation = {
-        row: error.position.start.row,
-        column: error.position.start.column,
-        text: error.text,
-        type: "error",
-      };
-      annotations.push(annotation);
-    }
-    return annotations;
   }
   public getObjectDisplayName(obj: Survey.Base): string {
     var displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
