@@ -5,7 +5,7 @@ import * as Survey from "survey-knockout";
 import "./results.scss";
 
 var templateHtml = require("./results.html");
-var rowRemplateHtml = require("./results-table-row.html");
+var rowTemplateHtml = require("./results-table-row.html");
 
 export class SurveyResultsModel {
 
@@ -65,7 +65,7 @@ ko.components.register("survey-results", {
   },
   template: templateHtml,
 });
-  
+
 ko.components.register("survey-results-table-row", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
@@ -73,5 +73,5 @@ ko.components.register("survey-results-table-row", {
       return model;
     }
   },
-  template: rowRemplateHtml,
+  template: rowTemplateHtml,
 });

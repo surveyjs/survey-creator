@@ -105,7 +105,7 @@ export {
   TranslationGroup,
   TranslationItem,
   TranslationItemBase,
-} from "../translation";
+} from "../tabs/translation";
 
 //adorners
 export {

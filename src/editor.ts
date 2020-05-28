@@ -28,7 +28,7 @@ import {
 } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
-import { Translation } from "./translation";
+import { Translation } from "./tabs/translation";
 import { SurveyLogic } from "./logic";
 import { Commands } from "./commands";
 
@@ -892,29 +892,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyEmbeding = new SurveyEmbedingWindow();
-    this.translationValue = new Translation(
-      this.createSurvey({}, "translation")
-    );
-    this.translation.importFinishedCallback = function() {
-      self.onTranslationImported.fire(self, {});
-    };
-    this.translation.availableTranlationsChangedCallback = () => {
-      this.setModified({ type: "TRANSLATIONS_CHANGED" });
-    };
-    this.translation.tranlationChangedCallback = (
-      locale: string,
-      name: string,
-      value: string,
-      context: any
-    ) => {
-      this.setModified({
-        type: "TRANSLATIONS_CHANGED",
-        locale,
-        name,
-        value,
-        context,
-      });
-    };
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
     this.logic.hideExpressionHeader =
       !!options && options.hideExpressionHeader === true;
@@ -1022,8 +999,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         this.tabs.push({
           name: "translation",
           title: this.getLocString("ed.translation"),
-          template: "translation",
-          data: this.translation,
+          template: "se-tab-translation",
+          data: this,
           action: () => this.showTranslationEditor(),
         });
       }
@@ -1332,6 +1309,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get translation(): Translation {
     return this.translationValue;
+  }
+  public set translation(newValue: Translation) {
+    this.translationValue = newValue;
   }
   /**
    * Return the logic mode object.

@@ -4,7 +4,7 @@ import {
   TranslationGroup,
   TranslationItem,
   Translation,
-} from "../src/translation";
+} from "../src/tabs/translation";
 import { SurveyCreator } from "../src/editor";
 import { unparse, parse } from "papaparse";
 
@@ -260,6 +260,7 @@ QUnit.test(
         },
       ],
     };
+    creator.translation = new Translation(creator.survey);
     creator.translation.setSelectedLocales(["de", "it"]);
     assert.deepEqual(
       creator.translation.getSelectedLocales(),
