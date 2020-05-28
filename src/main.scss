@@ -1,7 +1,7 @@
 ﻿@import "colors";
 @import "icons";
 @import "manage";
-@import "./tabs/editor-tabs";
+@import "./tabs/tabs";
 @import "templates/translation";
 @import "properties";
 @import "bootstrap-material";
@@ -634,5 +634,4 @@
 }
 
 @import "templates/propertyEditors/propertyeditor-condition.scss";
-@import "templates/tabs.scss";
 @import "templates/logic-tab.scss";
