@@ -14,9 +14,9 @@
             class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
           >
             <div class="svd_object_editor">
-              <div
-                data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"
-              ></div>
+              <svd-object-editor
+                params="selectedElementPropertyGrid: selectedElementPropertyGrid"
+              ></svd-object-editor>
             </div>
           </div>
         </div>
