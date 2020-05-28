@@ -71,12 +71,7 @@
               class="svd-designer-tabbed-container__tab-content"
               data-bind="css: { 'svd-designer-tabbed-container__tab-content-active' : content === $parent.activeTab() }"
             >
-              <!-- ko if: content !== "property-grid" -->
               <!-- ko template: { name: 'se-component-' + content, data: $parent.context } -->
-              <!-- /ko -->
-              <!-- /ko -->
-              <!-- ko if: content === "property-grid" -->
-              <property-grid params="data: $parent.context"></property-grid>
               <!-- /ko -->
             </div>
             <!-- /ko -->
@@ -84,12 +79,7 @@
             <!-- ko if: tabs().length === 1 -->
             <!-- ko foreach: { data: tabs, as: 'content' } -->
 
-            <!-- ko if: content !== "property-grid" -->
             <!-- ko template: { name: 'se-component-' + content, data: $parent.context } -->
-            <!-- /ko -->
-            <!-- /ko -->
-            <!-- ko if: content === "property-grid" -->
-            <property-grid params="data: $parent.context"></property-grid>
             <!-- /ko -->
 
             <!-- /ko -->

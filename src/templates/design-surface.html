@@ -1,9 +1,9 @@
 <script type="text/html" id="se-component-toolbox-header">
-  <!-- ko if: !toolbox.koHasCategories() -->
-<div class="svd-designer-container__header">
-  <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.toolbox')"></span>
-</div>
-<!-- /ko  -->
+    <!-- ko if: !toolbox.koHasCategories() -->
+  <div class="svd-designer-container__header">
+    <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.toolbox')"></span>
+  </div>
+  <!-- /ko  -->
 </script>
 
 <script type="text/html" id="se-component-toolbox">
@@ -73,6 +73,10 @@
   <div class="svd-designer-container__header">
     <span class="svd-designer-container__header-title" data-bind="text: getLocString('ed.property-grid')"></span>
   </div>
+</script>
+
+<script type="text/html" id="se-component-property-grid">
+  <property-grid params="koObjects: koObjects, koSelectedObject: koSelectedObject, selectedElementPropertyGrid: selectedElementPropertyGrid"></property-grid>
 </script>
 
 <script type="text/html" id="se-component-toolbar">
