@@ -71,7 +71,7 @@ export { SurveyLiveTester } from "../tabs/test";
 export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
 export { QuestionConverter } from "../questionconverter";
 export { SurveyJSONEditor } from "../tabs/json-editor";
-export { SurveyLogic } from "../logic";
+export { SurveyLogic } from "../tabs/logic";
 export {
   SurveyForDesigner,
   registerAdorner,

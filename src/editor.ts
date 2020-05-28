@@ -28,7 +28,7 @@ import {
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
 import { Translation } from "./tabs/translation";
-import { SurveyLogic } from "./logic";
+import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
 
 import { IToolbarItem } from './components/toolbar';
@@ -70,6 +70,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showEmbededSurveyTabValue = ko.observable<boolean>(false);
   private showTranslationTabValue = ko.observable<boolean>(false);
   private showLogicTabValue = ko.observable<boolean>(false);
+  private hideExpressionHeaderValue = ko.observable<boolean>(false);
   private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
@@ -770,7 +771,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public commands: any;
 
   koIsShowDesigner: any;
-  koViewType: any;
+  koViewType = ko.observable("designer");
   koCanDeleteObject: any;
   koObjects: any;
   koSelectedObject: ko.Observable<any>;
@@ -898,11 +899,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.questionEditorWindow = new SurveyPropertyEditorShowWindow();
     this.surveyEmbeding = new SurveyEmbedingWindow();
-    this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
-    this.logic.hideExpressionHeader =
-      !!options && options.hideExpressionHeader === true;
 
-    this.koViewType = ko.observable("designer");
     this.koViewType.subscribe(function(newValue) {
       self.onActiveTabChanged.fire(self, { tabName: newValue });
     });
@@ -974,7 +971,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "logic",
           title: this.getLocString("ed.logic"),
           template: "se-tab-logic",
-          data: this.logic,
+          data: this,
           action: () => this.showLogicEditor(),
         });
       }
@@ -1096,6 +1093,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.showLogicTabValue(
       typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
     );
+    this.hideExpressionHeaderValue(options.hideExpressionHeader === true);
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
         ? options.haveCommercialLicense
@@ -1291,9 +1289,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.showDesignerTab) {
       this.showDesigner();
     }
-    if (this.koViewType() == "logic") {
-      this.logic.update(this.survey, this);
-    }
     this.setUndoRedoCurrentState(clearState);
   }
   /**
@@ -1322,6 +1317,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public get logic(): SurveyLogic {
     return this.logicValue;
+  }
+  public set logic(logic: SurveyLogic) {
+    this.logicValue = logic;
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -1625,6 +1623,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public set showLogicTab(value: boolean) {
     this.showLogicTabValue(value);
+  }
+  public get hideExpressionHeader() {
+    return this.hideExpressionHeaderValue();
   }
   /**
    * Set it to true to activate RTL support
@@ -1943,7 +1944,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    */
   public showLogicEditor() {
     if (!this.canSwitchViewType("logic")) return;
-    this.showSurveyLogic();
     this.koViewType("logic");
   }
   private getSurveyTextFromDesigner() {
@@ -2840,9 +2840,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private showSurveyTranslation() {
     this.translation.survey = this.survey;
-  }
-  private showSurveyLogic() {
-    this.logic.update(this.survey, this);
   }
   private getSurveyJSON(): any {
     if (this.koViewType() != "editor") {
