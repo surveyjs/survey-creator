@@ -1,7 +1,11 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { SurveyJSON5 } from "./json5";
-import { editorLocalization } from "./editorLocalization";
+import { SurveyJSON5 } from "../json5";
+import { editorLocalization } from "../editorLocalization";
+import { SurveyCreator } from '../editor';
+
+import "./embed.scss";
+var templateHtml = require("./embed.html");
 
 export class SurveyEmbedingWindow {
   private jsonValue: any;
@@ -79,26 +83,26 @@ export class SurveyEmbedingWindow {
     this.koJavaText = ko.observable("");
     this.koBodyText = ko.observable("");
 
-    this.koVisibleHtml = ko.computed(function() {
+    this.koVisibleHtml = ko.computed(function () {
       return (
         self.koShowAsWindow() == "page" ||
         self.platformHtmlonWindow[self.koLibraryVersion()] != ""
       );
     });
-    this.koLibraryVersion.subscribe(function(newValue) {
+    this.koLibraryVersion.subscribe(function (newValue) {
       self.setHeadText();
       self.setJavaTest();
       self.setBodyText();
     });
-    this.koShowAsWindow.subscribe(function(newValue) {
+    this.koShowAsWindow.subscribe(function (newValue) {
       self.setJavaTest();
       self.setBodyText();
     });
-    this.koScriptUsing.subscribe(function(newValue) {
+    this.koScriptUsing.subscribe(function (newValue) {
       self.setHeadText();
       self.setJavaTest();
     });
-    this.koLoadSurvey.subscribe(function(newValue) {
+    this.koLoadSurvey.subscribe(function (newValue) {
       self.setJavaTest();
     });
     this.surveyEmbedingHead = null;
@@ -204,4 +208,34 @@ export class SurveyEmbedingWindow {
     if (editor) editor.setValue(text);
     if (koText) koText(text);
   }
+  dispose() {
+  }
 }
+
+ko.components.register("survey-embed", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      var creator: SurveyCreator = params.creator;
+      var model = new SurveyEmbedingWindow();
+
+      var subscrViewType = creator.koViewType.subscribe(viewType => {
+        if (viewType === "embed") {
+          var json = creator.getSurveyJSON();
+          model.json = json;
+          model.surveyId = creator.surveyId;
+          model.surveyPostId = creator.surveyPostId;
+          model.generateValidJSON = creator.getOptions().generateValidJSON;
+          model.show();
+        }
+      });
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscrViewType.dispose();
+        model.dispose();
+      });
+
+      return model;
+    }
+  },
+  template: templateHtml,
+});

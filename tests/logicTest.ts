@@ -4,14 +4,14 @@ import {
   SurveyLogicAction,
   ISurveyLogicType,
   SurveyLogicType,
-} from "../src/logic";
+} from "../src/tabs/logic";
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { SurveyCreator } from "../src/editor";
 import { SurveyElementEditorContent } from "../src/questionEditors/questionEditor";
 
 export default QUnit.module("LogicTabTests");
 
-QUnit.test("Page visibility logic", function(assert) {
+QUnit.test("Page visibility logic", function (assert) {
   var survey = new Survey.SurveyModel({});
   var logic = new SurveyLogic(survey);
   var pageVis = logic.getTypeByName("page_visibility");
@@ -26,7 +26,7 @@ QUnit.test("Page visibility logic", function(assert) {
   pageVis = logic.getTypeByName("page_visibility");
   assert.equal(pageVis.visible, true, "There are two pages");
 });
-QUnit.test("Question visibility logic", function(assert) {
+QUnit.test("Question visibility logic", function (assert) {
   var survey = new Survey.SurveyModel({});
   survey.addNewPage("p1");
   var logic = new SurveyLogic(survey);
@@ -39,7 +39,7 @@ QUnit.test("Question visibility logic", function(assert) {
   questionVis = logic.getTypeByName("question_visibility");
   assert.equal(questionVis.visible, true, "There is a question");
 });
-QUnit.test("Panel visibility logic", function(assert) {
+QUnit.test("Panel visibility logic", function (assert) {
   var survey = new Survey.SurveyModel({});
   survey.addNewPage("p1");
   var logic = new SurveyLogic(survey);
@@ -52,14 +52,14 @@ QUnit.test("Panel visibility logic", function(assert) {
   panelVis = logic.getTypeByName("panel_visibility");
   assert.equal(panelVis.visible, true, "There is a panel");
 });
-QUnit.test("Do not show ShowInUI=false visibility logic", function(assert) {
+QUnit.test("Do not show ShowInUI=false visibility logic", function (assert) {
   var survey = new Survey.SurveyModel({});
   var logic = new SurveyLogic(survey);
   var validatorLogic = logic.getTypeByName("question_expressionValidator");
   assert.ok(validatorLogic);
   assert.equal(validatorLogic.visible, false, "showInUI returns false");
 });
-QUnit.test("Add existing visible Items", function(assert) {
+QUnit.test("Add existing visible Items", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
@@ -69,7 +69,7 @@ QUnit.test("Add existing visible Items", function(assert) {
   var logic = new SurveyLogic(survey);
   assert.equal(logic.items.length, 2, "There are two items");
 });
-QUnit.test("Add new action immediately", function(assert) {
+QUnit.test("Add new action immediately", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
@@ -88,7 +88,7 @@ QUnit.test("Add new action immediately", function(assert) {
     "Set q1.visibleIf correctly"
   );
 });
-QUnit.test("Do not add expression question into visible Items", function(
+QUnit.test("Do not add expression question into visible Items", function (
   assert
 ) {
   var survey = new Survey.SurveyModel({
@@ -101,7 +101,7 @@ QUnit.test("Do not add expression question into visible Items", function(
   assert.equal(logic.items.length, 0, "There is not visible items");
   assert.equal(logic.invisibleItems.length, 1, "There is one invisible item");
 });
-QUnit.test("Add new item", function(assert) {
+QUnit.test("Add new item", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -159,7 +159,7 @@ QUnit.test("Add new item", function(assert) {
   assert.equal(q3.visibleIf, "{q1} = 2");
   assert.equal(logic.items.length, 3, "There are 3 items now");
 });
-QUnit.test("Edit existing item", function(assert) {
+QUnit.test("Edit existing item", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -188,7 +188,7 @@ QUnit.test("Edit existing item", function(assert) {
     "Expression is set for editing"
   );
 });
-QUnit.test("Use SurveyItemSelector for editing", function(assert) {
+QUnit.test("Use SurveyItemSelector for editing", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -243,7 +243,7 @@ QUnit.test("Use SurveyItemSelector for editing", function(assert) {
     "The q1 is disabled"
   );
 });
-QUnit.test("Remove same actions on save", function(assert) {
+QUnit.test("Remove same actions on save", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -268,7 +268,7 @@ QUnit.test("Remove same actions on save", function(assert) {
     "There are 2 actions left"
   );
 });
-QUnit.test("Remove existing action", function(assert) {
+QUnit.test("Remove existing action", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
   logic.addNew();
@@ -289,7 +289,7 @@ QUnit.test("Remove existing action", function(assert) {
     "Remove the visibleIf"
   );
 });
-QUnit.test("Remove existing item", function(assert) {
+QUnit.test("Remove existing item", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
@@ -311,7 +311,7 @@ QUnit.test("Remove existing item", function(assert) {
   );
 });
 
-QUnit.test("Rename the name", function(assert) {
+QUnit.test("Rename the name", function (assert) {
   var survey = new Survey.SurveyModel({
     pages: [
       {
@@ -577,7 +577,7 @@ QUnit.test("Rename the name", function(assert) {
   );
 });
 
-QUnit.test("Delete the question", function(assert) {
+QUnit.test("Delete the question", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3} > 2" },
@@ -603,7 +603,7 @@ QUnit.test("Delete the question", function(assert) {
   );
 });
 
-QUnit.test("Add new item with two triggers", function(assert) {
+QUnit.test("Add new item with two triggers", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }],
   });
@@ -648,7 +648,7 @@ QUnit.test("Add new item with two triggers", function(assert) {
   );
 });
 
-QUnit.test("Edit triggers via trigger editor", function(assert) {
+QUnit.test("Edit triggers via trigger editor", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
@@ -704,7 +704,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   );
 });
 
-QUnit.test("Edit condition complete via its editor", function(assert) {
+QUnit.test("Edit condition complete via its editor", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
@@ -751,7 +751,7 @@ QUnit.test("Edit condition complete via its editor", function(assert) {
     "html is changed correctly"
   );
 });
-QUnit.test("Use survey creator options", function(assert) {
+QUnit.test("Use survey creator options", function (assert) {
   var options = new EditorOptionsTests();
   options.showTitlesInExpressions = true;
   var survey = new Survey.SurveyModel({
@@ -775,7 +775,7 @@ QUnit.test("Use survey creator options", function(assert) {
     "Use showTitlesInExpression"
   );
 });
-QUnit.test("Disable editing for readOnly", function(assert) {
+QUnit.test("Disable editing for readOnly", function (assert) {
   var options = new EditorOptionsTests();
   options.readOnly = true;
   var survey = new Survey.SurveyModel({
@@ -785,7 +785,7 @@ QUnit.test("Disable editing for readOnly", function(assert) {
   assert.equal(logic.mode, "view", "Can't insert, it is readOnly");
   assert.equal(logic.koReadOnly(), true, "It is readOnly");
 });
-QUnit.test("Displaying correct text for logic action", function(assert) {
+QUnit.test("Displaying correct text for logic action", function (assert) {
   var survey = new Survey.SurveyModel({
     pages: [
       {
@@ -869,7 +869,7 @@ QUnit.test("Displaying correct text for logic action", function(assert) {
     logicTypes.length,
     "There are 11 actions: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
   );
-  var findOp = function(name: string): SurveyLogicAction {
+  var findOp = function (name: string): SurveyLogicAction {
     for (var i = 0; i < ops.length; i++) {
       if (ops[i].logicType.name == name) return ops[i];
     }
@@ -914,7 +914,7 @@ QUnit.test("Displaying correct text for logic action", function(assert) {
   assert.equal(findOp("page_visibility").name, "Page visibility");
 });
 
-QUnit.test("Logic editing errors", function(assert) {
+QUnit.test("Logic editing errors", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
@@ -960,7 +960,7 @@ QUnit.test("Logic editing errors", function(assert) {
   assert.equal(logic.saveEditableItem(), true, "setToName is correct");
 });
 
-QUnit.test("Return without saving", function(assert) {
+QUnit.test("Return without saving", function (assert) {
   var survey = new Survey.SurveyModel({
     pages: [
       {
@@ -1003,7 +1003,7 @@ QUnit.test("Return without saving", function(assert) {
   assert.notOk(logic.koErrorText(), "The error is cleared");
 });
 
-QUnit.test("Make Survey Creator modified on changes", function(assert) {
+QUnit.test("Make Survey Creator modified on changes", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = {
     pages: [
@@ -1023,12 +1023,12 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
       },
     ],
   };
+  var logic = new SurveyLogic(creator.survey, creator);
   creator.showLogicEditor();
   var modifiedCounter = 0;
-  creator.onModified.add(function() {
+  creator.onModified.add(function () {
     modifiedCounter++;
   });
-  var logic = creator.logic;
   var item = logic.items[0];
   item.edit();
   logic.expressionEditor.koTextValue("{q1} = 2");
@@ -1043,7 +1043,7 @@ QUnit.test("Make Survey Creator modified on changes", function(assert) {
 
 QUnit.test(
   "Hide Expression Header in Condition Property Editor in Logic tab",
-  function(assert) {
+  function (assert) {
     var creator = new SurveyCreator(null, {
       hideExpressionHeaderInLogicTab: true,
     });
@@ -1065,8 +1065,7 @@ QUnit.test(
         },
       ],
     };
-    creator.showLogicEditor();
-    var logic = creator.logic;
+    var logic = new SurveyLogic(creator.survey, creator);
     var item = logic.items[0];
     item.edit();
     assert.equal(
@@ -1077,7 +1076,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Add existing visible Items", function(assert) {
+QUnit.test("Add existing visible Items", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "My Question 1" },
@@ -1095,7 +1094,7 @@ QUnit.test("Add existing visible Items", function(assert) {
   );
 });
 
-QUnit.test("Allow logic type to be null and change it", function(assert) {
+QUnit.test("Allow logic type to be null and change it", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -1120,7 +1119,7 @@ QUnit.test("Allow logic type to be null and change it", function(assert) {
   action.itemSelector.element = survey.currentPage;
   assert.ok(logic.saveEditableItem(), "Action is good");
 });
-QUnit.test("One action exists in new item", function(assert) {
+QUnit.test("One action exists in new item", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -1145,7 +1144,7 @@ QUnit.test("One action exists in new item", function(assert) {
   action.itemSelector.element = survey.currentPage;
   assert.ok(logic.saveEditableItem(), "Action is good");
 });
-QUnit.test("Limit the number of action types.", function(assert) {
+QUnit.test("Limit the number of action types.", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -1175,7 +1174,7 @@ QUnit.test("Limit the number of action types.", function(assert) {
   );
 });
 
-QUnit.test("Logic onLogicItemSaved event", function(assert) {
+QUnit.test("Logic onLogicItemSaved event", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
   });
@@ -1194,7 +1193,7 @@ QUnit.test("Logic onLogicItemSaved event", function(assert) {
   assert.equal(callCount, 1, "Event has been called");
 });
 
-QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function(
+QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function (
   assert
 ) {
   var survey = new Survey.SurveyModel({
@@ -1227,7 +1226,7 @@ QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function(
   assert.equal(removedCallCount, 1, "Event has been called");
 });
 
-QUnit.test("SurveyCreator with logictab only, set cretor json", function(
+QUnit.test("SurveyCreator with logictab only, set creator json", function (
   assert
 ) {
   var options = {
@@ -1244,10 +1243,11 @@ QUnit.test("SurveyCreator with logictab only, set cretor json", function(
       { type: "text", name: "q3" },
     ],
   };
-  assert.equal(creator.logic.items.length, 1, "We have one item here");
+  var logic = new SurveyLogic(creator.survey, creator);
+  assert.equal(logic.items.length, 1, "We have one item here");
 });
-QUnit.test("Hide/show logic types in actions", function(assert) {
-  var findLogicTypeInAction = function(
+QUnit.test("Hide/show logic types in actions", function (assert) {
+  var findLogicTypeInAction = function (
     action: SurveyLogicAction,
     lt: SurveyLogicType
   ): any {

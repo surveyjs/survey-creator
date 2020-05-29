@@ -22,29 +22,6 @@
   width: 100%;
   height: 100%;
 
-  .svd-embed-survey-tab {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-
-    .row {
-      margin: 0;
-    }
-
-    &> * {
-      width: 100%;
-    }
-
-    .form-control.svd_custom_select.svd_embed_tab {
-      display: inline-block;
-      width: 250px;
-      margin-bottom: 1em;
-      &:not(:last-child) {
-        margin-right: 1em;
-      }
-    }
-  }
-
   .svd_questions_editor {
     .svd_question {
       overflow: visible;
@@ -221,13 +198,6 @@
           }
         }
       }
-    }
-    .svd_json_editor {
-      height: 100%;
-    }
-    .svd_json_editor_area {
-      height: 100%;
-      width: 100%;
     }
   }
 }
@@ -632,4 +602,3 @@
 }
 
 @import "templates/propertyEditors/propertyeditor-condition.scss";
-@import "templates/logic-tab.scss";

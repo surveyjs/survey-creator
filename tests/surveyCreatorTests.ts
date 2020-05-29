@@ -95,18 +95,18 @@ QUnit.test("At least one page should be available", function (assert) {
 QUnit.test("options.questionTypes", function (assert) {
   var allTypes = Survey.ElementFactory.Instance.getAllTypes();
   var editor = new SurveyCreator(null, null);
-  var toolbox = new QuestionToolbox(editor.toolboxItems, editor);
+  // var toolbox = new QuestionToolbox(editor.toolboxItems, editor);
   assert.equal(
-    toolbox.items.length,
+    editor.toolbox.items.length,
     allTypes.length,
     "All types are accepted"
   );
   editor = new SurveyCreator(null, {
     questionTypes: ["text", "dropdown", "unknown"],
   });
-  toolbox = new QuestionToolbox(editor.toolboxItems, editor);
+  // toolbox = new QuestionToolbox(editor.toolboxItems, editor);
   assert.equal(
-    toolbox.items.length,
+    editor.toolbox.items.length,
     2,
     "Only two types from three are accepted"
   );

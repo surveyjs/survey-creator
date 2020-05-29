@@ -68,10 +68,10 @@ export { Toolbar } from "../components/toolbar";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
 export { SurveyLiveTester } from "../tabs/test";
-export { SurveyEmbedingWindow } from "../surveyEmbedingWindow";
+export { SurveyEmbedingWindow } from "../tabs/embed";
 export { QuestionConverter } from "../questionconverter";
-export { SurveyJSONEditor } from "../surveyJSONEditor";
-export { SurveyLogic } from "../logic";
+export { SurveyJSONEditor } from "../tabs/json-editor";
+export { SurveyLogic } from "../tabs/logic";
 export {
   SurveyForDesigner,
   registerAdorner,

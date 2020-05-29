@@ -1,5 +1,4 @@
-﻿<script type="text/html" id="jsoneditor">
-<div class="svd-vertical-container">
+﻿<div class="svd-vertical-container">
     <div class="svd-vertical-container__row">
         <div class="svd-vertical-container__cell">
             <svd-toolbar params="items: toolbarItems"></svd-toolbar>
@@ -10,8 +9,7 @@
             <div class="svd-vertical-container__cell-content-holder">
                 <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
                     <div data-bind="visible: !hasAceEditor">
-                        <textarea
-                            class="svd_json_editor_area"
+                        <textarea class="svd-json-editor-area"
                             data-bind="textInput:koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
                         </textarea>
                         <!-- ko foreach: koErrors -->
@@ -20,10 +18,9 @@
                         </div>
                         <!-- /ko  -->
                     </div>
-                    <div id="surveyjsJSONEditor" class="svd_json_editor"></div>
+                    <div class="svd-json-editor"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</script>

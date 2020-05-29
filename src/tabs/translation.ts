@@ -777,7 +777,14 @@ ko.components.register("survey-translation", {
         });
       };
 
+      var subscrViewType = creator.koViewType.subscribe(viewType => {
+        if (viewType === "translation") {
+          model.survey = creator.survey;
+        }
+      });
+
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscrViewType.dispose();
         creator.translation.dispose();
         creator.translation = undefined;
       });
