@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
-export { ToolboxItemViewModel } from "./toolbox-item";
 import { SurveyCreator } from '../editor';
+export { ToolboxItemViewModel } from "./toolbox-item";
 
 import "./toolbox.scss";
 var template = require("html-loader?interpolate!val-loader!./toolbox.html");
@@ -586,14 +586,15 @@ export class QuestionToolbox {
 ko.components.register("svd-toolbox", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      let creator = params.itemsProvider;
-      let toolbox = new QuestionToolbox(creator.toolboxItems, creator);
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        creator.toolbox.dispose();
-        creator.toolbox = undefined;
-      });
-      creator.toolbox = toolbox;
-      return toolbox;
+      let creator: SurveyCreator = params.itemsProvider;
+      // let toolbox = new QuestionToolbox(creator.toolboxItems, creator);
+      // ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+      //   creator.toolbox.dispose();
+      //   creator.toolbox = undefined;
+      // });
+      // creator.toolbox = toolbox;
+      // return toolbox;
+      return creator.toolbox;
     }
   },
   template: template

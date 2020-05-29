@@ -815,6 +815,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
 
+    this.toolboxValue = new QuestionToolbox(this.options && this.options.questionTypes
+      ? this.options.questionTypes
+      : null, this);
     var self = this;
 
     StylesManager.applyTheme(StylesManager.currentTheme());
@@ -1015,11 +1018,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.addToolbarItems();
   }
 
-  get toolboxItems() {
-    return this.options && this.options.questionTypes
-      ? this.options.questionTypes
-      : null;
-  }
+  // get toolboxItems() {
+  //   return this.options && this.options.questionTypes
+  //     ? this.options.questionTypes
+  //     : null;
+  // }
 
   tabs = ko.observableArray();
 
@@ -1299,9 +1302,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get toolbox(): QuestionToolbox {
     return this.toolboxValue;
   }
-  public set toolbox(newValue: QuestionToolbox) {
-    this.toolboxValue = newValue;
-  }
+  // public set toolbox(newValue: QuestionToolbox) {
+  //   this.toolboxValue = newValue;
+  // }
   /**
    * Return the translation mode object.
    * @see showTranslationTab
