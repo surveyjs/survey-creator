@@ -380,7 +380,7 @@ export class SurveyElementEditorContent {
     obj: any,
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null,
-    protected useAsPropertyGridVal: boolean = false
+    protected useAsPropertyGrid: boolean = false
   ) {
     this.setOriginalObjValue(obj);
     if (!this.className && this.originalObj.getType) {
@@ -405,12 +405,6 @@ export class SurveyElementEditorContent {
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
-  }
-  public get useAsPropertyGrid() {
-    return this.useAsPropertyGridVal;
-  }
-  public set useAsPropertyGrid(value) {
-    this.useAsPropertyGridVal = value;
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
@@ -751,12 +745,6 @@ export class SurveyElementPropertyGrid {
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
-
-  public get contentHtmlTemplate(): string {
-    return this.hasCategories
-      ? "questioneditor-content"
-      : "questioneditor-propertygridcontent";
-  }
   public objectChanged() {}
   public get selectedObject(): any {
     return this.selectedObjectValue;

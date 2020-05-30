@@ -11,7 +11,7 @@ import {
 export class ObjectEditor {
   constructor(
     public koHasObject: any,
-    public contentHtmlTemplate: string,
+    public hasCategories: boolean,
     public koElementEditorContent: ko.Observable<SurveyElementEditorContent>
   ) {}
 }
@@ -23,7 +23,7 @@ ko.components.register("svd-object-editor", {
         params.selectedElementPropertyGrid;
       return new ObjectEditor(
         selectedElementPropertyGrid.koHasObject,
-        selectedElementPropertyGrid.contentHtmlTemplate,
+        selectedElementPropertyGrid.hasCategories,
         selectedElementPropertyGrid.koElementEditor
       );
     },
