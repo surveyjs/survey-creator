@@ -14,9 +14,11 @@
             class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
           >
             <div class="svd_object_editor">
+              <!-- ko if: selectedElementPropertyGrid.koHasObject -->
               <svd-object-editor
-                params="selectedElementPropertyGrid: selectedElementPropertyGrid"
+                params="surveyElementPropertyGrid: selectedElementPropertyGrid"
               ></svd-object-editor>
+              <!-- /ko -->
             </div>
           </div>
         </div>

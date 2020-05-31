@@ -10,7 +10,6 @@ import {
 
 export class ObjectEditor {
   constructor(
-    public koHasObject: any,
     public hasCategories: boolean,
     public koElementEditorContent: ko.Observable<SurveyElementEditorContent>
   ) {}
@@ -19,12 +18,11 @@ export class ObjectEditor {
 ko.components.register("svd-object-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const selectedElementPropertyGrid: SurveyElementPropertyGrid =
-        params.selectedElementPropertyGrid;
+      const surveyElementPropertyGrid: SurveyElementPropertyGrid =
+        params.surveyElementPropertyGrid;
       return new ObjectEditor(
-        selectedElementPropertyGrid.koHasObject,
-        selectedElementPropertyGrid.hasCategories,
-        selectedElementPropertyGrid.koElementEditor
+        surveyElementPropertyGrid.hasCategories,
+        surveyElementPropertyGrid.koElementEditor
       );
     },
   },
