@@ -197,15 +197,17 @@ export class ConditionEditorItem {
     if (!!oldQuestion) {
       this.survey.pages[0].removeElement(oldQuestion);
     }
-    newQuestion.name = "questionValue";
-    newQuestion.title = this.getLocString("pe.conditionValueQuestionTitle");
-    newQuestion.description = "";
-    newQuestion.titleLocation = "default";
-    if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
-      newQuestion.titleLocation = "hidden";
-      newQuestion.startWithNewLine = false;
+    if (this.canShowQuestionValue()) {
+      newQuestion.name = "questionValue";
+      newQuestion.title = this.getLocString("pe.conditionValueQuestionTitle");
+      newQuestion.description = "";
+      newQuestion.titleLocation = "default";
+      if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
+        newQuestion.titleLocation = "hidden";
+        newQuestion.startWithNewLine = false;
+      }
+      this.survey.pages[0].addElement(newQuestion);
     }
-    this.survey.pages[0].addElement(newQuestion);
     this.updateQuestionsWidth();
   }
   private isKeepQuestonValueOnSameLine(questionType: string): boolean {
@@ -312,17 +314,45 @@ export class ConditionEditorItem {
   }
   private updateOperatorEnables() {
     var res = [];
-    if (!this.questionName) return res;
+    if (!this.questionName) return;
     var json = this.owner.getQuestionValueJSON(this.questionName, "equal");
     var qType = !!json ? json.type : null;
     var questionOperator = this.operatorQuestion;
     if (!questionOperator) return;
     var choices = questionOperator.choices;
+    var isCurrentOperatorEnabled = true;
+    var op = this.operator;
     for (var i = 0; i < choices.length; i++) {
       choices[i].setIsEnabled(
-        this.isOperatorVisible(qType, this.getOperatorType(choices[i].value))
+        this.isOperatorEnabled(qType, this.getOperatorType(choices[i].value))
       );
+      if (choices[i].value == op) {
+        isCurrentOperatorEnabled = choices[i].isEnabled;
+      }
     }
+    if (!isCurrentOperatorEnabled) {
+      this.operator = this.getFirstEnabledOperator(choices);
+    }
+  }
+  private getFirstEnabledOperator(choices: Array<Survey.ItemValue>): string {
+    for (var i = 0; i < choices.length; i++) {
+      if (choices[i].isEnabled) {
+        return choices[i].value;
+      }
+    }
+    return "equal";
+  }
+  private canShowQuestionValue(): boolean {
+    var questionOperator = this.operatorQuestion;
+    if (!questionOperator) return false;
+    this.updateOperatorEnables();
+    var choices = questionOperator.choices;
+    for (var i = 0; i < choices.length; i++) {
+      if (!choices[i].isEnabled) continue;
+      var val = choices[i].value;
+      if (val !== "empty" && val != "notempty") return true;
+    }
+    return false;
   }
   private getOperatorType(operator: string): Array<string> {
     var operators = SurveyPropertyEditorFactory.getOperators();
@@ -332,7 +362,7 @@ export class ConditionEditorItem {
     return [];
   }
 
-  private isOperatorVisible(
+  private isOperatorEnabled(
     qType: string,
     operatorTypes: Array<string>
   ): boolean {

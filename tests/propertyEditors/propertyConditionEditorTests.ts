@@ -1720,7 +1720,7 @@ QUnit.test(
 );
 
 QUnit.test(
-  "SurveyPropertyConditionEditor, anyof/allof is enabled on editing, Bug #",
+  "SurveyPropertyConditionEditor, anyof/allof is enabled on editing, Bug #804",
   function(assert) {
     var survey = new Survey.Survey({
       elements: [
@@ -1746,5 +1746,47 @@ QUnit.test(
     );
     assert.ok(itemValue, "anyof is here");
     assert.equal(itemValue.isEnabled, false, "anyof is disabled");
+  }
+);
+QUnit.test(
+  "SurveyPropertyConditionEditor, file question type should not set operator to 'equal', Bug #",
+  function(assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        {
+          name: "q2",
+          type: "file",
+        },
+        { name: "q3", type: "text" },
+      ],
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    editorItem.questionName = "q2";
+    assert.equal(
+      editorItem.operator,
+      "empty",
+      "Operator can't be equal for file type"
+    );
+    assert.notOk(
+      editorItem.valueQuestion,
+      "We do not need to show question value for file type"
+    );
+    editorItem.questionName = "q3";
+    assert.equal(
+      editorItem.operator,
+      "equal",
+      "Operator must be equal for text type"
+    );
+    assert.ok(
+      editorItem.valueQuestion,
+      "We must show question value for text type"
+    );
   }
 );
