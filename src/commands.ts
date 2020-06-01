@@ -10,6 +10,15 @@ export class Commands {
       toolbar?: any;
     };
   } = {
+    pageSelector: {
+      toolbar: {
+        id: "toolbar-page-selector",
+        component: "svd-page-selector",
+        visible: true,
+        enabled: true,
+        data: this.creator,
+      },
+    },
     undo: {
       name: "undo",
       hotKey: {
@@ -155,8 +164,8 @@ export class Commands {
           this.creator.getLocString("ed." + this.creator.koState())
         ),
         template: "svd-toolbar-state",
-      }
-    }
+      },
+    },
   };
 
   public getCommands() {
