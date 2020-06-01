@@ -12,7 +12,7 @@ export class Commands {
   } = {
     pageSelector: {
       toolbar: {
-        id: "toolbar-page-selector",
+        id: "svd-toolbar-page-selector",
         component: "svd-page-selector",
         visible: true,
         enabled: true,
