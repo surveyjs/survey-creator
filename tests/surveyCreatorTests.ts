@@ -1302,3 +1302,20 @@ QUnit.test("Default toolbar items", function(assert) {
   assert.equal(creator.toolbarItems()[6].id, "svd-save", "svd-save");
   assert.equal(creator.toolbarItems()[7].id, "svd-state", "svd-state");
 });
+
+QUnit.test("showPageSelectorInToolbar property", function(assert) {
+  var creator = new SurveyCreator(undefined);
+  assert.equal(
+    creator.toolbarItems()[0].visible,
+    false,
+    "page selector in toolbar invisible by default"
+  );
+
+  creator = new SurveyCreator(undefined, { showPageSelectorInToolbar: true });
+
+  assert.equal(
+    creator.toolbarItems()[0].visible,
+    true,
+    "page selector is visible with showPageSelectorInToolbar property"
+  );
+});

@@ -14,7 +14,7 @@ export class Commands {
       toolbar: {
         id: "svd-toolbar-page-selector",
         component: "svd-page-selector",
-        visible: true,
+        visible: this.creator.showPageSelectorInToolbar,
         enabled: true,
         data: this.creator,
       },
