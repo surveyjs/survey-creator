@@ -739,7 +739,6 @@ QUnit.test("SurveyPropertyItemValue custom property", function(assert) {
   Survey.Serializer.removeProperty("itemvalue", "myImageLink");
 });
 
-/* TODO should be fixed in library
 QUnit.test("SurveyPropertyItemValue override properties", function(assert) {
   Survey.Serializer.addProperty("itemvalue", {
     name: "price:number",
@@ -752,6 +751,7 @@ QUnit.test("SurveyPropertyItemValue override properties", function(assert) {
       {
         name: "price:number",
         default: 0,
+        visible: true,
         isSerializable: true,
       },
       { name: "text", visible: false },
@@ -801,7 +801,7 @@ QUnit.test("SurveyPropertyItemValue override properties", function(assert) {
   Survey.Serializer.removeClass("ordergriditem");
   Survey.Serializer.removeProperty("itemvalue", "price");
 });
-*/
+
 QUnit.test("SurveyPropertyItemValue columns define in definition", function(
   assert
 ) {
