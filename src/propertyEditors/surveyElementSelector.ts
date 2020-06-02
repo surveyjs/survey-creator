@@ -102,11 +102,12 @@ export class SurveyElementSelector {
     }
   }
   public hasError(): boolean {
-    var text = !this.element
-      ? editorLocalization.getString("pe.itemSelectorEmpty")
-      : "";
+    var text = !this.element ? this.getLocString("pe.itemSelectorEmpty") : "";
     this.koErrorText(text);
     return !!text;
+  }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
   }
   private buildElements(elementType: string): Array<SurveyElementSelectorItem> {
     var elements = [];
@@ -131,7 +132,7 @@ export class SurveyElementSelector {
         name: el.name,
         text: text,
         element: el,
-        koDisabled: ko.observable(false)
+        koDisabled: ko.observable(false),
       });
     }
     return res;
@@ -148,6 +149,6 @@ export class SurveyElementSelector {
           ? "pe.conditionSelectPanel"
           : "pe.conditionSelectQuestion";
     }
-    return editorLocalization.getString(optionsCaptionName);
+    return this.getLocString(optionsCaptionName);
   }
 }

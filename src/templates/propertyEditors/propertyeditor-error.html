@@ -1,7 +1,7 @@
 <script type="text/html" id="propertyeditor-error">
-    <div class="alert alert-danger" role="alert" data-bind="visible:koDisplayError">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        <span data-bind="text:koErrorText"></span>
-    </div>
+  <div class="alert alert-danger" role="alert" data-bind="visible:koDisplayError">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only" data-bind="text:$data.getLocString('ed.propertyEditorError')"></span>
+      <span data-bind="text:koErrorText"></span>
+  </div>
 </script>

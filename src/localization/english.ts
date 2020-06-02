@@ -103,6 +103,7 @@ export var enStrings = {
     modified: "Modified",
     saving: "Saving",
     saved: "Saved",
+    propertyEditorError: "Error:",
     saveError: "Error! Editor content is not saved.",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "Show all strings",
