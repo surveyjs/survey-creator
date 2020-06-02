@@ -12,7 +12,7 @@ import {
   SurveyElementEditorContent,
   SurveyQuestionEditor,
 } from "../questionEditors/questionEditor";
-import { SurveyCreator } from '../editor';
+import { SurveyCreator } from "../editor";
 
 import "./logic.scss";
 var templateHtml = require("./logic.html");
@@ -56,7 +56,7 @@ export class SurveyLogicType {
     private logicType: ISurveyLogicType,
     public survey: Survey.SurveyModel,
     public options: ISurveyObjectEditorOptions = null
-  ) { }
+  ) {}
   public get name(): string {
     return this.logicType.name;
   }
@@ -236,10 +236,10 @@ export class SurveyLogicAction {
     this.koTemplateObject = ko.observable(null);
     this.koLogicTypes = ko.observableArray();
     var self = this;
-    this.koDisplayError = ko.computed(function () {
+    this.koDisplayError = ko.computed(function() {
       return !!self.koErrorText();
     });
-    this.koLogicType.subscribe(function (value) {
+    this.koLogicType.subscribe(function(value) {
       self.element = !!self.logicType
         ? self.logicType.createNewElement(self.survey)
         : null;
@@ -314,6 +314,9 @@ export class SurveyLogicAction {
       return this.templateObject.hasError();
     return false;
   }
+  public getLocString(name: string) {
+    return editorLocalization.getString(name);
+  }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
@@ -326,7 +329,7 @@ export class SurveyLogicAction {
     if (this.itemSelector) {
       var self = this;
       this.itemSelector.element = this.element;
-      this.itemSelector.onValueChangedCallback = function (newValue: string) {
+      this.itemSelector.onValueChangedCallback = function(newValue: string) {
         self.element = self.itemSelector.element;
       };
     }
@@ -420,7 +423,7 @@ export class SurveyLogicItem {
   public get expressionText(): string {
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-    ["format"](this.getExpressionAsDisplayText());
+      ["format"](this.getExpressionAsDisplayText());
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
@@ -487,7 +490,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.pages.length > 1;
       },
     },
@@ -495,7 +498,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -503,7 +506,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -511,7 +514,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_visibility",
       baseClass: "question",
       propertyName: "visibleIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -519,7 +522,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -527,7 +530,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_require",
       baseClass: "question",
       propertyName: "requiredIf",
-      showIf: function (survey: Survey.SurveyModel) {
+      showIf: function(survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -572,7 +575,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "setvaluetrigger",
       propertyName: "expression",
       questionNames: ["setToName"],
-      getDisplayText: function (
+      getDisplayText: function(
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -588,7 +591,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "copyvaluetrigger",
       propertyName: "expression",
       questionNames: ["setToName", "fromName"],
-      getDisplayText: function (
+      getDisplayText: function(
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -605,7 +608,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       propertyName: "expression",
       questionNames: ["gotoName"],
       isUniqueItem: true,
-      getDisplayTextName: function (element: Survey.Base): string {
+      getDisplayTextName: function(element: Survey.Base): string {
         return element["gotoName"];
       },
     },
@@ -614,7 +617,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "runexpressiontrigger",
       propertyName: "expression",
       questionNames: ["setToName"],
-      getDisplayText: function (
+      getDisplayText: function(
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -635,14 +638,14 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       propertyName: "expression",
       isUniqueItem: true,
       templateName: "propertyeditorcontent-html",
-      createNewElement: function (survey: Survey.SurveyModel) {
+      createNewElement: function(survey: Survey.SurveyModel) {
         return new Survey.HtmlConditionItem();
       },
-      createTemplateObject: function (element: Survey.Base) {
+      createTemplateObject: function(element: Survey.Base) {
         var item = <Survey.HtmlConditionItem>element;
         return { koValue: ko.observable(item.html), readOnly: false };
       },
-      saveElement: function (
+      saveElement: function(
         survey: Survey.SurveyModel,
         action: SurveyLogicAction
       ) {
@@ -771,33 +774,33 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koReadOnly = ko.observable(this.readOnly);
     this.koErrorText = ko.observable("");
     var self = this;
-    this.koDisplayError = ko.computed(function () {
+    this.koDisplayError = ko.computed(function() {
       return !!self.koErrorText();
     });
-    this.koAddNew = function () {
+    this.koAddNew = function() {
       self.addNew();
     };
-    this.koEditItem = function (item: SurveyLogicItem) {
+    this.koEditItem = function(item: SurveyLogicItem) {
       self.editItem(item);
     };
-    this.koRemoveItem = function (item: SurveyLogicItem) {
+    this.koRemoveItem = function(item: SurveyLogicItem) {
       self.removeItem(item);
     };
-    this.koShowView = function () {
+    this.koShowView = function() {
       self.mode = "view";
     };
-    this.koSaveAndShowView = function () {
+    this.koSaveAndShowView = function() {
       if (self.saveEditableItem()) {
         self.mode = "view";
       }
     };
-    this.koSaveEditableItem = function () {
+    this.koSaveEditableItem = function() {
       self.saveEditableItem();
     };
-    this.koAddNewAction = function () {
+    this.koAddNewAction = function() {
       self.addNewAction();
     };
-    this.koRemoveAction = function (action: SurveyLogicAction) {
+    this.koRemoveAction = function(action: SurveyLogicAction) {
       self.removeAction(action);
     };
     this.koEditableItem = ko.observable(null);
@@ -1212,9 +1215,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.options = this.options;
     this.expressionEditor.koSetupText(this.expressionSetupText);
   }
-  dispose() {
-
-  }
+  dispose() {}
 }
 
 ko.components.register("survey-logic", {
@@ -1224,7 +1225,7 @@ ko.components.register("survey-logic", {
       var model = new SurveyLogic(creator.survey, creator);
       // model.update(creator.survey, creator);
 
-      var subscrViewType = creator.koViewType.subscribe(viewType => {
+      var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "logic") {
           model.update(creator.survey, creator);
         }
@@ -1236,7 +1237,7 @@ ko.components.register("survey-logic", {
       });
 
       return model;
-    }
+    },
   },
   template: templateHtml,
 });

@@ -1,0 +1,11 @@
+<div role="tablist">
+  <!-- ko if: hasCategories -->
+  <!-- ko template: { name: "questioneditor-content", data: koElementEditorContent() } -->
+  <!-- /ko -->
+  <!-- /ko -->
+
+  <!-- ko if: !hasCategories -->
+  <!-- ko template: { name: "questioneditor-propertygridcontent", data: koElementEditorContent() } -->
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

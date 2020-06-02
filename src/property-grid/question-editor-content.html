@@ -1,0 +1,30 @@
+<!-- ko if: useTabsInElementEditor -->
+<ul class="nav nav-tabs modal-tabs" data-bind="foreach: koTabs">
+  <li
+    class="nav-item"
+    role="presentation"
+    data-bind="css: {active: $parent.koActiveTab() == name}, click: $parent.onTabClick"
+  >
+    <a
+      class="nav-link"
+      data-bind="css: {active: $parent.koActiveTab() == name}"
+    >
+      <span data-bind="text:title"></span>
+    </a>
+  </li>
+</ul>
+<!-- ko foreach: koTabs -->
+<div
+  data-bind="if: $parent.koActiveTab() === name"
+  style="margin-top:5px"
+>
+  <!-- ko template: { name: htmlTemplate, data: templateObject, afterRender: $data.koAfterRender } -->
+  <!-- /ko -->
+</div>
+<!-- /ko  -->
+<!-- /ko  -->
+<!-- ko ifnot: useTabsInElementEditor -->
+<svd-accordion
+  params="tabs: koTabs, template: 'svd-editor-tab-template'"
+></svd-accordion>
+<!-- /ko  -->

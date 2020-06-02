@@ -745,11 +745,6 @@ export class SurveyElementPropertyGrid {
   constructor(
     public propertyEditorOptions: ISurveyObjectEditorOptions = null
   ) {}
-  public get contentHtmlTemplate(): string {
-    return this.hasCategories
-      ? "questioneditor-content"
-      : "questioneditor-propertygridcontent";
-  }
   public objectChanged() {}
   public get selectedObject(): any {
     return this.selectedObjectValue;

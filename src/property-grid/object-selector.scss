@@ -1,0 +1,13 @@
+.svd_object_selector {
+  padding: 1.4em;
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-style: solid;
+  .svd_custom_select {
+    display: inline-block;
+  }
+  .icon-edit {
+    cursor: pointer;
+    margin-left: 1em;
+  }
+}

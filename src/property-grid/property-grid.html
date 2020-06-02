@@ -2,17 +2,9 @@
   <div class="svd-vertical-container">
     <div class="svd-vertical-container__row">
       <div class="svd-vertical-container__cell">
-        <div class="svd_object_selector svd-light-border-color">
-          <div class="svd_custom_select">
-            <select
-              onmousewheel="return false;"
-              id="objectSelector"
-              class="form-control"
-              data-bind="options: koObjects, optionsText: 'text', value: koSelectedObject"
-              aria-label="Survey elements selector"
-            ></select>
-          </div>
-        </div>
+        <svd-object-selector
+          params="koObjects: koObjects, koSelectedObject: koSelectedObject"
+        ></svd-object-selector>
       </div>
     </div>
     <div class="svd-vertical-container__row">
@@ -22,9 +14,11 @@
             class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
           >
             <div class="svd_object_editor">
-              <div
-                data-bind="template: { name: 'questioneditor-propertygrid', data: selectedElementPropertyGrid }"
-              ></div>
+              <!-- ko if: selectedElementPropertyGrid.koHasObject -->
+              <svd-object-editor
+                params="surveyElementPropertyGrid: selectedElementPropertyGrid"
+              ></svd-object-editor>
+              <!-- /ko -->
             </div>
           </div>
         </div>
