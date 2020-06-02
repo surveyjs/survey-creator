@@ -1,0 +1,21 @@
+﻿.svd-page-selector.svd_custom_select {
+  max-width: 250px;
+  line-height: 2.44em;
+  height: 2.44em;
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-style: solid;
+  font-size: 14px;
+  margin-bottom: 7px;
+  select {
+    padding-left: 20px;
+    min-width: 100px;
+    border: none;
+  }
+}
+
+#svd-toolbar-page-selector .svd-page-selector.svd_custom_select {
+  position: absolute;
+  left: 0;
+  top: 5px;
+}

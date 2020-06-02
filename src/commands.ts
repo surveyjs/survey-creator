@@ -155,8 +155,8 @@ export class Commands {
           this.creator.getLocString("ed." + this.creator.koState())
         ),
         template: "svd-toolbar-state",
-      }
-    }
+      },
+    },
   };
 
   public getCommands() {

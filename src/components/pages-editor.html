@@ -1,17 +1,11 @@
-﻿<div
-  class="svd-page-selector svd_custom_select svd-light-bg-color svd-light-border-color"
-  data-bind="visible: hasDropdownSelector"
->
-  <select
-    onmousewheel="return false;"
-    data-bind="options: pagesSelection, value: pageSelection, optionsText: getDisplayText"
-    aria-label="Page selector"
-  ></select>
-</div>
+﻿<svd-page-selector
+  params="model: model"
+  data-bind="visible: model.hasDropdownSelector"
+></svd-page-selector>
 <div
   tabindex="0"
   class="svd-page-scroller-arrow"
-  data-bind="key2click, clickNoFocus: moveLeft, attr: {title: getLocString('ed.moveLeft')}, css: {'svd-page-scroller-arrow--visible': hasScroller }"
+  data-bind="key2click, clickNoFocus: moveLeft, attr: {title: model.getLocString('ed.moveLeft')}, css: {'svd-page-scroller-arrow--visible': model.hasScroller }"
 >
   <span>
     <svg-icon
@@ -23,31 +17,31 @@
 
 <div
   class="svd-pages"
-  data-bind="sortable: {foreach: koSurvey().pages, options: sortableOptions}, event: {wheel: onWheel}, css: {'svd-pages--no-dropdown-selector': !hasDropdownSelector() }"
+  data-bind="sortable: {foreach: model.koSurvey().pages, options: model.sortableOptions}, event: {wheel: onWheel}, css: {'svd-pages--no-dropdown-selector': !model.hasDropdownSelector() }"
 >
   <div
     tabindex="0"
     class="svd-page svd-light-border-color"
-    data-bind="key2click, css: $parent.getPageClass($data), clickNoFocus: $parent.onPageClick"
+    data-bind="key2click, css: $parent.model.getPageClass($data), clickNoFocus: $parent.onPageClick"
   >
     <span
       class="svd-page-name"
-      data-bind="text: $parent.getDisplayText($data)"
+      data-bind="text: $parent.model.getDisplayText($data)"
     ></span>
     <span class="svd-page-actions-container">
       <svg-icon
-        data-bind="css: $parent.getPageMenuIconClass($data)"
-        params="iconName: $parent.getPageMenuIconClass($data), size: 12"
+        data-bind="css: $parent.model.getPageMenuIconClass($data)"
+        params="iconName: $parent.model.getPageMenuIconClass($data), size: 12"
       ></svg-icon>
-      <!-- ko ifnot: $parent.readOnly -->
+      <!-- ko ifnot: $parent.model.readOnly -->
       <div style="position: static">
         <div
           class="svd-page-actions svd-dark-border-color svd-light-bg-color"
-          data-bind="visible: $parent.showActions($data)"
+          data-bind="visible: $parent.model.showActions($data)"
         >
           <span
             class="svd-page-action"
-            data-bind="click: function(model, event) {$parent.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.editPage')}"
+            data-bind="click: function(model, event) {$parent.model.showPageSettings($data); event.stopPropagation();}, attr: {title: $parent.model.getLocString('ed.editPage')}"
           >
             <span>
               <svg-icon
@@ -57,12 +51,12 @@
             </span>
             <span
               class="svd-main-color"
-              data-bind="text: $parent.getLocString('ed.edit')"
+              data-bind="text: $parent.model.getLocString('ed.edit')"
             ></span>
           </span>
           <span
             class="svd-page-action"
-            data-bind="click: function(model, event) {$parent.deletePage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('ed.deletePage')}, visible: !$parent.isLastPage()"
+            data-bind="click: function(model, event) {$parent.model.deletePage($data); event.stopPropagation();}, attr: {title: $parent.model.getLocString('ed.deletePage')}, visible: !$parent.model.isLastPage()"
           >
             <svg-icon
               class="svd-primary-icon"
@@ -71,11 +65,11 @@
           </span>
           <span
             class="svda_action_separator svd-dark-border-color"
-            data-bind="visible: !$parent.isLastPage()"
+            data-bind="visible: !$parent.model.isLastPage()"
           ></span>
           <span
             class="svd-page-action"
-            data-bind="click: function(model, event) {$parent.copyPage($data); event.stopPropagation();}, attr: {title: $parent.getLocString('survey.Copy')}"
+            data-bind="click: function(model, event) {$parent.model.copyPage($data); event.stopPropagation();}, attr: {title: $parent.model.getLocString('survey.Copy')}"
           >
             <svg-icon
               class="svd-primary-icon"
@@ -91,7 +85,7 @@
 <div
   tabindex="0"
   class="svd-page-scroller-arrow"
-  data-bind="key2click, clickNoFocus: moveRight, attr: {title: getLocString('ed.moveRight')}, css: {'svd-page-scroller-arrow--visible': hasScroller }"
+  data-bind="key2click, clickNoFocus: moveRight, attr: {title: model.getLocString('ed.moveRight')}, css: {'svd-page-scroller-arrow--visible': model.hasScroller }"
 >
   <span>
     <svg-icon
@@ -100,15 +94,15 @@
     ></svg-icon>
   </span>
 </div>
-<!-- ko ifnot: readOnly -->
+<!-- ko ifnot: model.readOnly -->
 <div
   tabindex="0"
   class="svd-page svd-light-border-color svd-page-add"
-  data-bind="key2click, clickNoFocus: addPage, attr: {title: getLocString('ed.addNewPage')}"
+  data-bind="key2click, clickNoFocus: model.addPage, attr: {title: model.getLocString('ed.addNewPage')}"
 >
   <span
     class="svd-page-name"
-    data-bind="text: getLocString('ed.addNewPage')"
+    data-bind="text: model.getLocString('ed.addNewPage')"
   ></span>
   <span>
     <svg-icon
