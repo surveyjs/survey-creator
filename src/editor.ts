@@ -31,6 +31,7 @@ import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
 
 import { IToolbarItem } from "./components/toolbar";
+import { PagesEditorModel } from './pages-editor-model';
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -773,6 +774,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   public commands: any;
 
+  public pagesEditorModel: PagesEditorModel;
+
   koIsShowDesigner: any;
   koViewType = ko.observable("designer");
   koCanDeleteObject: any;
@@ -1016,6 +1019,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
 
     this.text = "";
+
+    this.pagesEditorModel = new PagesEditorModel(this);
 
     if (renderedElement) {
       this.render(renderedElement);

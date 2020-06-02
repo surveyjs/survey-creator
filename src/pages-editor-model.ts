@@ -7,16 +7,16 @@ import { SurveyCreator } from "./editor";
 import { editorLocalization } from "./editorLocalization";
 
 export class PagesEditorModel {
-  protected isNeedAutoScroll = true;
-  protected isDraggingPage = ko.observable(false);
-  protected prevPagesForSelector: any[] = [];
-  protected _selectedPage = ko.observable<Survey.PageModel>();
-  protected updateScroller = undefined;
+  public isNeedAutoScroll = true;
+  public isDraggingPage = ko.observable(false);
+  public prevPagesForSelector: any[] = [];
+  public _selectedPage = ko.observable<Survey.PageModel>();
+  public updateScroller = undefined;
   pagesSelection: ko.Computed<any>;
-  protected selectionSubscription: ko.Subscription;
+  public selectionSubscription: ko.Subscription;
   public koSurvey: ko.Observable<Survey.Survey>;
 
-  constructor(protected creator: SurveyCreator) {
+  constructor(public creator: SurveyCreator) {
     this.hasDropdownSelector(creator.showDropdownPageSelector);
     this.koSurvey = ko.observable<Survey.Survey>(creator.survey);
     creator.onDesignerSurveyCreated.add((sender, options) => {
@@ -54,15 +54,16 @@ export class PagesEditorModel {
         }
       }
     );
+    this.addPageSelectorIntoToolbar();
   }
-  protected get pages() {
+  public get pages() {
     return this.koSurvey().pages;
   }
   getDisplayText = (page: Survey.PageModel) => {
     return this.creator.getObjectDisplayName(page);
   };
 
-  protected scrollToSelectedPage() {}
+  public scrollToSelectedPage() {}
 
   pageSelection = ko.computed<Survey.PageModel>({
     read: () => this._selectedPage(),
@@ -77,15 +78,27 @@ export class PagesEditorModel {
     },
   });
 
-  addPage() {
-    this.creator.addPage();
+  addPageSelectorIntoToolbar() {
+    const item = {
+      id: "svd-toolbar-page-selector",
+      component: "svd-page-selector",
+      visible: this.creator.showPageSelectorInToolbar,
+      enabled: true,
+      data: this,
+      title: "",
+    };
+    this.creator.toolbarItems.unshift(item);
   }
 
-  copyPage(page: Survey.PageModel) {
+  addPage = () => {
+    this.creator.addPage();
+  };
+
+  copyPage = (page: Survey.PageModel) => {
     this.creator.copyPage(page);
   }
 
-  deletePage() {
+  deletePage = () => {
     this.creator.deletePage();
   }
 
@@ -93,8 +106,7 @@ export class PagesEditorModel {
     this.creator.showQuestionEditor(page);
   }
 
-
-  protected movingPage = null;
+  public movingPage = null;
   get sortableOptions() {
     return {
       handle: ".svd-page-name",
@@ -111,7 +123,7 @@ export class PagesEditorModel {
         this.isDraggingPage(false);
         this.creator.undoRedoManager.stopTransaction();
         if (!!this.movingPage) {
-          this.creator.selectPage(this.movingPage);
+          this.selectPage(this.movingPage);
         }
       },
       onUpdate: (evt, itemV) => {
@@ -128,7 +140,10 @@ export class PagesEditorModel {
     return this._selectedPage();
   }
   set selectedPage(newPage) {
-    this.creator.selectPage(newPage);
+    this.selectPage(newPage);
+  }
+  selectPage = (page) => {
+    this.creator.selectPage(page);
   }
   getPageClass = (page) => {
     var result =
@@ -159,7 +174,7 @@ export class PagesEditorModel {
     if (!selectedObject) return;
     return SurveyHelper.getObjectType(selectedObject.value) === ObjType.Page;
   }
-  protected _readOnly = ko.observable(false);
+  public _readOnly = ko.observable(false);
   /**
    * A boolean property, false by default. Set it to true to deny pages editing.
    */

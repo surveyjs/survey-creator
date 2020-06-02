@@ -10,15 +10,6 @@ export class Commands {
       toolbar?: any;
     };
   } = {
-    pageSelector: {
-      toolbar: {
-        id: "svd-toolbar-page-selector",
-        component: "svd-page-selector",
-        visible: this.creator.showPageSelectorInToolbar,
-        enabled: true,
-        data: this.creator,
-      },
-    },
     undo: {
       name: "undo",
       hotKey: {
