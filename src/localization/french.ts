@@ -96,44 +96,44 @@ var frenchTranslation = {
   },
   lg: {
     //Logic tab strings
-    page_visibilityName: "VisibilitГ© de la page",
-    panel_visibilityName: "VisibilitГ© du panneau",
-    panel_enableName: "Activer/dГ©sactiver le panneau",
-    question_visibilityName: "VisibilitГ© de la question",
-    question_enableName: "Activer/dГ©sactiver la question",
+    page_visibilityName: "Visibilité de la page",
+    panel_visibilityName: "Visibilité du panneau",
+    panel_enableName: "Activer/désactiver le panneau",
+    question_visibilityName: "Visibilité de la question",
+    question_enableName: "Activer/désactiver la question",
     question_requireName: "Question facultative requise",
-    trigger_completeName: "ComplГ©ter le questionnaire",
-    trigger_setvalueName: "DГ©finir la valeur de la question",
+    trigger_completeName: "Compléter le questionnaire",
+    trigger_setvalueName: "Définir la valeur de la question",
     trigger_copyvalueName: "Copier la valeur de la question",
-    trigger_skipName: "Passer Г  la question",
-    trigger_runExpressionName: "ExГ©cuter une expression personnalisГ©e",
+    trigger_skipName: "Passer à la question",
+    trigger_runExpressionName: "Exécuter une expression personnalisée",
     completedHtmlOnConditionName:
       "Personnaliser le texte de la page de remerciements",
 
     page_visibilityDescription:
-      "Rendre la page visible lorsque l'expression logique renvoie 'vrai'.  Sinon, la rendre invisible.",
+      "Rendre la page visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
     panel_visibilityDescription:
       "Rendre le panneau visible lorsque l'expression logique renvoie 'vrai'. Sinon, le rendre invisible.",
     panel_enableDescription:
-      "Activez le panneau et tous les Г©lГ©ments qu'il contient lorsque l'expression logique renvoie 'vrai'. Sinon, le laisser dГ©sactivГ©.",
+      "Activez le panneau et tous les éléments qu'il contient lorsque l'expression logique renvoie 'vrai'. Sinon, le laisser désactivé.",
     question_visibilityDescription:
       "Rendez la question visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
     question_enableDescription:
-      "Activez la question lorsque l'expression logique renvoie 'vrai'. Sinon, la laisser dГ©sactivГ©e.",
+      "Activez la question lorsque l'expression logique renvoie 'vrai'. Sinon, la laisser désactivée.",
     question_requireDescription:
       "La question devient requise lorsque l'expression logique renvoie 'vrai'.",
     trigger_completeDescription:
-      "Lorsque l'expression logique renvoie 'vrai', l'enquГЄte est alors terminГ©e et un utilisateur voit la page de remerciements.",
+      "Lorsque l'expression logique renvoie 'vrai', l'enquête est alors terminée et un utilisateur voit la page de remerciements.",
     trigger_setvalueDescription:
       "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
     trigger_copyvalueDescription:
-      "Lorsque les valeurs de question, qui sont utilisГ©es dans l'expression logique, sont modifiГ©es et que l'expression logique renvoie 'vrai', la valeur d'une question sГ©lectionnГ©e est copiГ©e dans une autre question sГ©lectionnГ©e.",
+      "Lorsque les valeurs de question, qui sont utilisées dans l'expression logique, sont modifiées et que l'expression logique renvoie 'vrai', la valeur d'une question sélectionnée est copiée dans une autre question sélectionnée.",
     trigger_skipDescription:
-      "Lorsque l'expression logique renvoie 'vrai', l'enquГЄte passe Г  la question sГ©lectionnГ©e.",
+      "Lorsque l'expression logique renvoie 'vrai', l'enquête passe à la question sélectionnée.",
     trigger_runExpressionDescription:
-      "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisГ©e est exГ©cutГ©e. Vous pouvez Г©ventuellement dГ©finir ce rГ©sultat d'expression dans la question sГ©lectionnГ©e.",
+      "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat d'expression dans la question sélectionnée.",
     completedHtmlOnConditionDescription:
-      "Si l'expression logique renvoie 'vrai', le texte par dГ©faut de la page de remerciements est remplacГ© par celui que vous avez dГ©fini.",
+      "Si l'expression logique renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
 
     itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':", //{0} - the expression
     page_visibilityText: "Rendre la page {0} visible", //{0} page name
@@ -142,30 +142,30 @@ var frenchTranslation = {
     question_visibilityText: "Rendre la question {0} visible", //{0} question name
     question_enableText: "Activer la question {0}", //{0} question name
     question_requireText: "Rendre la question {0} obligatoire", //{0} question name
-    trigger_completeText: "Le questionnaire devient complГ©tГ©.",
-    trigger_setvalueText: "DГ©finir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
+    trigger_completeText: "Le questionnaire devient complété.",
+    trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
     trigger_copyvalueText:
       "Copier dans la question: {0} valeur de la question {1}", //{0} and {1} question names
-    trigger_skipText: "Dans le questionnaire, passez Г  la question {0}", //{0} question name
-    trigger_runExpressionText1: "ExГ©cuter l'expression: '{0}'", //{0} the expression
+    trigger_skipText: "Dans le questionnaire, passez à la question {0}", //{0} question name
+    trigger_runExpressionText1: "Exécuter l'expression: '{0}'", //{0} the expression
     trigger_runExpressionText2:
-      " et dГ©finissez son rГ©sultat dans la question: {0}", //{0} question name
+      " et définissez son résultat dans la question: {0}", //{0} question name
     completedHtmlOnConditionText:
-      "Affichez un texte personnalisГ© pour la page de remerciements.",
+      "Affichez un texte personnalisé pour la page de remerciements.",
 
     conditions: "Condition(s)",
     actions: "Action(s)",
-    expressionEditorTitle: "DГ©finissez le(s) condition(s)",
-    actionsEditorTitle: "DГ©finissez le(s) action(s)",
+    expressionEditorTitle: "Définissez le(s) condition(s)",
+    actionsEditorTitle: "Définissez le(s) action(s)",
 
-    deleteAction: "DГ©truire l'action",
+    deleteAction: "Détruire l'action",
     addNewAction: "Ajouter une nouvelle action",
-    selectedActionCaption: "SГ©lectionnez une action Г  ajouter ...",
+    selectedActionCaption: "Sélectionnez une action à ajouter …",
 
     expressionInvalid:
-      "L'expression logique est vide ou non valide. Corrigez s'il-vous-plaГ®t.",
+      "L'expression logique est vide ou non valide. Corrigez s'il-vous-plaît.",
     noActionError: "Veuillez ajouter au moins une action.",
-    actionInvalid: "Veuillez corriger les problГЁmes dans vos actions.",
+    actionInvalid: "Veuillez corriger les problèmes dans vos actions.",
     expressionSetup: "",
     actionsSetup: "",
   },
