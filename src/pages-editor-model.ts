@@ -48,7 +48,7 @@ export class PagesEditorModel {
         this._selectedPage(newVal.value);
 
         if (this.isNeedAutoScroll) {
-          this.scrollToSelectedPage();
+          this.scrollToSelectedPageCallback();
         } else {
           this.isNeedAutoScroll = true;
         }
@@ -63,7 +63,7 @@ export class PagesEditorModel {
     return this.creator.getObjectDisplayName(page);
   };
 
-  public scrollToSelectedPage() {}
+  public scrollToSelectedPageCallback() {}
 
   pageSelection = ko.computed<Survey.PageModel>({
     read: () => this._selectedPage(),
@@ -96,11 +96,11 @@ export class PagesEditorModel {
 
   copyPage = (page: Survey.PageModel) => {
     this.creator.copyPage(page);
-  }
+  };
 
   deletePage = () => {
     this.creator.deletePage();
-  }
+  };
 
   showPageSettings(page: Survey.PageModel) {
     this.creator.showQuestionEditor(page);
@@ -144,7 +144,7 @@ export class PagesEditorModel {
   }
   selectPage = (page) => {
     this.creator.selectPage(page);
-  }
+  };
   getPageClass = (page) => {
     var result =
       page === this.selectedPage ? "svd_selected_page svd-light-bg-color" : "";

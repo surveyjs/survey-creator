@@ -18,6 +18,7 @@ export class PagesEditor {
         }
       }, 100);
     }
+    this.model.scrollToSelectedPageCallback = this.scrollToSelectedPage;
   }
 
   moveLeft(model, event) {
@@ -30,7 +31,7 @@ export class PagesEditor {
     pagesElement.scrollLeft += 50;
     this.updateMenuPosition();
   }
-  scrollToSelectedPage() {
+  scrollToSelectedPage = () => {
     var pagesElement: any = this.element.querySelector(".svd-pages");
     if (!pagesElement) return;
     var index = this.model.pages.indexOf(this.model.selectedPage);
