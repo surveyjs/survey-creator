@@ -289,7 +289,7 @@ export var enStrings = {
     rows: "Row count",
     cols: "Column count",
     placeHolder: "Input place holder",
-    showPreview: "Is image preview shown?",
+    showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size in bytes",
     imageHeight: "Image height",

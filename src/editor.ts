@@ -30,7 +30,8 @@ import { Translation } from "./tabs/translation";
 import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
 
-import { IToolbarItem } from './components/toolbar';
+import { IToolbarItem } from "./components/toolbar";
+import { PagesEditorModel } from './pages-editor-model';
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -156,6 +157,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public showInvisibleElementsInTestSurveyTab = true;
 
   /**
+   * Set this property to true if you want to show "page selector" in the toolabar instead of "pages editor"
+   */
+  public showPageSelectorInToolbar = false;
+
+  /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
    * @see showEmbededSurveyTab
    */
@@ -172,7 +178,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * This callback is used internally for providing survey JSON text.
    */
-  public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
+  public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
   /**
    * This callback is used internally for setting survey JSON text.
    */
@@ -768,6 +774,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   public commands: any;
 
+  public pagesEditorModel: PagesEditorModel;
+
   koIsShowDesigner: any;
   koViewType = ko.observable("designer");
   koCanDeleteObject: any;
@@ -815,9 +823,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
 
-    this.toolboxValue = new QuestionToolbox(this.options && this.options.questionTypes
-      ? this.options.questionTypes
-      : null, this);
+    this.toolboxValue = new QuestionToolbox(
+      this.options && this.options.questionTypes
+        ? this.options.questionTypes
+        : null,
+      this
+    );
     var self = this;
 
     StylesManager.applyTheme(StylesManager.currentTheme());
@@ -1009,6 +1020,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.text = "";
 
+    this.pagesEditorModel = new PagesEditorModel(this);
+
     if (renderedElement) {
       this.render(renderedElement);
     }
@@ -1188,6 +1201,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         Survey.Serializer.findProperty("panel", "page").visible = false;
         this.showJSONEditorTab = false;
       }
+    }
+    if (this.options.showPageSelectorInToolbar) {
+      this.showPageSelectorInToolbar = true;
+      this.showDropdownPageSelectorValue = false;
     }
     if (typeof options.showDropdownPageSelector !== "undefined") {
       this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
@@ -1879,7 +1896,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.notify(this.getLocString("ed.correctJSON"));
       return false;
     }
-    if (!this.readOnly && !!this.getSurveyJSONTextCallback && this.getSurveyJSONTextCallback().isModified) {
+    if (
+      !this.readOnly &&
+      !!this.getSurveyJSONTextCallback &&
+      this.getSurveyJSONTextCallback().isModified
+    ) {
       this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
       this.setModified({ type: "VIEW_TYPE_CHANGED", newType: newType });
     }

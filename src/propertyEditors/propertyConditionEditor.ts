@@ -1157,30 +1157,39 @@ ko.bindingHandlers.aceEditor = {
 
     editor.setOption("useWorker", false);
 
-    editor.getSession().on("change", function() {
+    editor.getSession().on("change", function () {
       var errors = createAnnotations(
         editor.getValue(),
         objectEditor.syntaxCheckMethodName
       );
-      isUpdating = true;
-      objectEditor.koTextValue(editor.getValue());
-      isUpdating = false;
+      if (!isUpdating) {
+        isUpdating = true;
+        objectEditor.koTextValue(editor.getValue());
+        isUpdating = false;
+      }
       //   objectEditor.koHasError(errors.length > 0);
       //   if (errors.length > 0) {
       //     objectEditor.koErrorText(errors[0].text);
       //   }
       editor.getSession().setAnnotations(errors);
     });
-    editor.on("focus", function() {
+    editor.on("focus", function () {
       editor.setReadOnly(objectEditor.readOnly());
     });
     var updateCallback = () => {
       if (!isUpdating) {
+        isUpdating = true;
         editor.setValue(objectEditor.koTextValue() || "");
+        isUpdating = false;
       }
     };
     var valueSubscription = objectEditor.koTextValue.subscribe(updateCallback);
     updateCallback();
+    var visibilitySubscription = objectEditor.koActiveView.subscribe(newView => {
+      if (newView !== "form") {
+        editor.resize();
+      }
+    });
 
     var completer = {
       identifierRegexps: [ID_REGEXP],
@@ -1211,9 +1220,10 @@ ko.bindingHandlers.aceEditor = {
       enableLiveAutocompletion: true,
     });
 
-    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-      editor.destroy();
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
       valueSubscription.dispose();
+      visibilitySubscription.dispose();
+      editor.destroy();
     });
 
     editor.focus();
