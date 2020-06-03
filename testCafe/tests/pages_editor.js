@@ -3,25 +3,25 @@ import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `drag and drop`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 
-test(`checking pagesEditor elements exists`, async t => {
+test(`checking pagesEditor elements exists`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
 
   await t
     .hover("svd-pages-editor")
-    .hover(".svd-page-selector")
+    .hover("svd-pages-editor .svd-page-selector")
     .hover(".svd-pages")
     .hover(`[title="Add New Page"]`);
 
   assert.equal(await getPagesCount(), 1);
 });
 
-test(`checking add page`, async t => {
+test(`checking add page`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
@@ -41,7 +41,7 @@ test(`checking add page`, async t => {
   await t.hover(page1).hover(page2);
 });
 
-test(`checking remove page`, async t => {
+test(`checking remove page`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
@@ -55,6 +55,21 @@ test(`checking remove page`, async t => {
     .withText("page2");
 
   await t.click(page2).hover(page2);
+
+  await t.debug();
+
+  await t.hover(page2);
+  await t.debug();
+
+  await t.hover(page2.find(".svd-page-actions"));
+  await t.debug();
+
+  
+  await t.hover(page2.find(".svd-page-actions").find(".svd-page-action"));
+  await t.debug();
+
+  await t.hover(page2.find(".svd-page-actions").find(".svd-page-action").nth(1));
+  await t.debug();
 
   await t.click(
     page2
@@ -75,7 +90,7 @@ test(`checking remove page`, async t => {
   await t.hover(page1).hover(page3);
 });
 
-test(`check that removeBtn doesn't exist whwen only one page has`, async t => {
+test(`check that removeBtn doesn't exist whwen only one page has`, async (t) => {
   const getStyleAttr = ClientFunction(() =>
     document
       .querySelectorAll(
@@ -86,7 +101,7 @@ test(`check that removeBtn doesn't exist whwen only one page has`, async t => {
   assert.equal(await getStyleAttr(), "display: none;");
 });
 
-test(`checking copy page`, async t => {
+test(`checking copy page`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
@@ -108,14 +123,14 @@ test(`checking copy page`, async t => {
   assert.equal(await getPagesCount(), 2);
 });
 
-test(`checking page selector`, async t => {
+test(`checking page selector`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
 
   assert.equal(await getPagesCount(), 1);
 
-  const select = Selector(".svd-page-selector");
+  const select = Selector("svd-pages-editor .svd-page-selector");
   const option = select.find("option");
 
   await t.click(select).click(option.withText("Add New Page"));
@@ -134,7 +149,7 @@ test(`checking page selector`, async t => {
   await t.hover(gearactivePage1);
 });
 
-test(`checking scroll to left/right arrows`, async t => {
+test(`checking scroll to left/right arrows`, async (t) => {
   const getPagesCount = ClientFunction(
     () => document.querySelectorAll(".svd-pages .svd-page").length
   );
