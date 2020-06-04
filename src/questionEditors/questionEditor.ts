@@ -12,6 +12,107 @@ import { focusFirstControl } from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
 
+export class PropertyGridObjectModel {
+  private selectedObjectValue: any = null;
+  public koElementEditor = ko.observable<SurveyElementEditorContent>(null);
+  public koHasObject = ko.observable(false);
+  public onAfterRenderCallback: (
+    object: any,
+    htmlElement: HTMLElement,
+    property: SurveyObjectProperty
+  ) => any;
+  public onSortPropertyCallback: (
+    object: any,
+    property1: Survey.JsonObjectProperty,
+    property2: Survey.JsonObjectProperty
+  ) => number;
+  public onPropertyChanged: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    oldValue: any
+  ) => void;
+  public onCorrectValueBeforeSet: (
+    obj: any,
+    prop: Survey.JsonObjectProperty,
+    newValue: any
+  ) => any;
+
+  // "tabs", "table", "accordition"
+  public koAppearanceType = ko.observable("accordition");
+
+  constructor(
+    public propertyEditorOptions: ISurveyObjectEditorOptions = null
+  ) {}
+
+  public objectChanged() {}
+  public get selectedObject(): any {
+    return this.selectedObjectValue;
+  }
+  public set selectedObject(value: any) {
+    if (this.selectedObjectValue == value) return;
+    this.selectedObjectValue = value;
+    this.koHasObject(false);
+    if (!!value) {
+      var elementEditor = this.createSurveyElementEditor(value);
+      elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
+      elementEditor.onPropertyChanged = (
+        prop: Survey.JsonObjectProperty,
+        oldValue: any
+      ) => {
+        if (this.onPropertyChanged)
+          this.onPropertyChanged(this.selectedObjectValue, prop, oldValue);
+      };
+      elementEditor.onCorrectValueBeforeSet = (
+        prop: Survey.JsonObjectProperty,
+        newValue: any
+      ): any => {
+        if (!this.onCorrectValueBeforeSet) return newValue;
+        return this.onCorrectValueBeforeSet(
+          this.selectedObjectValue,
+          prop,
+          newValue
+        );
+      };
+      this.koElementEditor(elementEditor);
+    } else {
+      this.koElementEditor(null);
+    }
+    this.koHasObject(!!value);
+  }
+  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
+    if (!this.koElementEditor()) return null;
+    return this.koElementEditor().getPropertyEditorByName(propertyName);
+  }
+  public focusEditor() {
+    if (!!this.koElementEditor()) {
+      this.koElementEditor().focusEditor();
+    }
+  }
+  public hasErrors(): boolean {
+    if (!this.koElementEditor()) return false;
+    return this.koElementEditor().hasError();
+  }
+  protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
+    let elementEditor;
+    if (this.koAppearanceType() === "table") {
+      elementEditor = new SurveyElementEditorContentNoCategries(
+        value,
+        "",
+        this.propertyEditorOptions,
+        this.onSortPropertyCallback
+      );
+    } else {
+      elementEditor = new SurveyElementEditorContent(
+        value,
+        "",
+        this.propertyEditorOptions,
+        true
+      );
+    }
+    return elementEditor;
+  }
+}
+
 export class SurveyPropertyEditorShowWindow {
   koVisible: any;
   koEditor: any;
@@ -528,6 +629,7 @@ export class SurveyElementEditorContent {
     };
     return propertyTab;
   }
+  //this.options = creator
   get useTabsInElementEditor() {
     return (
       !this.useAsPropertyGrid &&
@@ -713,100 +815,6 @@ export class SurveyQuestionEditor extends SurveyElementEditorContent {
         this.options.stopUndoRedoTransaction();
       }
     }
-    return res;
-  }
-}
-
-export class SurveyElementPropertyGrid {
-  private selectedObjectValue: any = null;
-  public koElementEditor = ko.observable<SurveyElementEditorContent>(null);
-  public koHasObject = ko.observable(false);
-  public hasCategories: boolean = true;
-  public onAfterRenderCallback: (
-    object: any,
-    htmlElement: HTMLElement,
-    property: SurveyObjectProperty
-  ) => any;
-  public onSortPropertyCallback: (
-    object: any,
-    property1: Survey.JsonObjectProperty,
-    property2: Survey.JsonObjectProperty
-  ) => number;
-  public onPropertyChanged: (
-    obj: any,
-    prop: Survey.JsonObjectProperty,
-    oldValue: any
-  ) => void;
-  public onCorrectValueBeforeSet: (
-    obj: any,
-    prop: Survey.JsonObjectProperty,
-    newValue: any
-  ) => any;
-  constructor(
-    public propertyEditorOptions: ISurveyObjectEditorOptions = null
-  ) {}
-  public objectChanged() {}
-  public get selectedObject(): any {
-    return this.selectedObjectValue;
-  }
-  public set selectedObject(value: any) {
-    if (this.selectedObjectValue == value) return;
-    this.selectedObjectValue = value;
-    this.koHasObject(false);
-    if (!!value) {
-      var elementEditor = this.createSurveyElementEditor(value);
-      elementEditor.onAfterRenderCallback = this.onAfterRenderCallback;
-      elementEditor.onPropertyChanged = (
-        prop: Survey.JsonObjectProperty,
-        oldValue: any
-      ) => {
-        if (this.onPropertyChanged)
-          this.onPropertyChanged(this.selectedObjectValue, prop, oldValue);
-      };
-      elementEditor.onCorrectValueBeforeSet = (
-        prop: Survey.JsonObjectProperty,
-        newValue: any
-      ): any => {
-        if (!this.onCorrectValueBeforeSet) return newValue;
-        return this.onCorrectValueBeforeSet(
-          this.selectedObjectValue,
-          prop,
-          newValue
-        );
-      };
-      this.koElementEditor(elementEditor);
-    } else {
-      this.koElementEditor(null);
-    }
-    this.koHasObject(!!value);
-  }
-  public getPropertyEditorByName(propertyName: string): SurveyObjectProperty {
-    if (!this.koElementEditor()) return null;
-    return this.koElementEditor().getPropertyEditorByName(propertyName);
-  }
-  public focusEditor() {
-    if (!!this.koElementEditor()) {
-      this.koElementEditor().focusEditor();
-    }
-  }
-  public hasErrors(): boolean {
-    if (!this.koElementEditor()) return false;
-    return this.koElementEditor().hasError();
-  }
-  protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
-    if (this.hasCategories)
-      return new SurveyElementEditorContent(
-        value,
-        "",
-        this.propertyEditorOptions,
-        true
-      );
-    var res = new SurveyElementEditorContentNoCategries(
-      value,
-      "",
-      this.propertyEditorOptions,
-      this.onSortPropertyCallback
-    );
     return res;
   }
 }

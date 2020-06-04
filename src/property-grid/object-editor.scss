@@ -1,2 +1,50 @@
 .svd_object_editor {
+  padding: 1.4em;
+
+  .form-control {
+    border-radius: 0;
+  }
+  input[type="checkbox"].form-control {
+    width: 25px;
+  }
+  .table.svd_properties_grid {
+    .form-group {
+      margin-bottom: 0;
+    }
+    > tbody > tr > td {
+      border: none;
+      padding: 0;
+      line-height: 3.25em;
+      background-color: transparent;
+      vertical-align: middle;
+      &:nth-child(1) {
+        font-weight: 600;
+        user-select: none;
+      }
+      .modal-content {
+        line-height: initial;
+      }
+    }
+  }
+
+  survey-widget {
+    display: block;
+    margin-bottom: 1em;
+
+    .sv_main .sv_custom_header {
+      background: transparent;
+    }
+
+    .sv_row {
+      min-width: auto;
+    }
+    .sv_main .sv_container .sv_body .sv_row .sv_q {
+      min-width: auto;
+    }
+
+    .svd-survey-nopadding {
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
