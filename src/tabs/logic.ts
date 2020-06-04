@@ -1215,15 +1215,16 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.options = this.options;
     this.expressionEditor.koSetupText(this.expressionSetupText);
   }
-  dispose() {}
+  dispose() { }
 }
 
 ko.components.register("survey-logic", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var creator: SurveyCreator = params.creator;
-      var model = new SurveyLogic(creator.survey, creator);
+      // var model = new SurveyLogic(creator.survey, creator);
       // model.update(creator.survey, creator);
+      var model = creator.logic;
 
       var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "logic") {
@@ -1233,7 +1234,7 @@ ko.components.register("survey-logic", {
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         subscrViewType.dispose();
-        model.dispose();
+        // model.dispose();
       });
 
       return model;
