@@ -258,3 +258,15 @@ QUnit.test("Title image read only mode", function(assert) {
   assert.notOk(survey.isLogoBefore, "No logo before");
   assert.notOk(survey.isLogoAfter, "No logo after");
 });
+
+QUnit.test("Title editor read only mode", function (assert) {
+  var survey = new SurveyForDesigner();
+  var titleModel = new TitleInplaceEditor(survey, "title", null, "", null);
+  var descriptionModel = new TitleInplaceEditor(survey, "description", null, "", null);
+  Survey.Serializer.findProperty("survey", "title").readOnly = true;
+  assert.ok(titleModel.readOnly, "title is read only");
+  assert.notOk(descriptionModel.readOnly, "description is not read only");
+  Survey.Serializer.findProperty("survey", "title").readOnly = false;
+  assert.notOk(titleModel.readOnly, "title is not read only");
+  assert.notOk(descriptionModel.readOnly, "description is not read only");
+});
