@@ -985,6 +985,22 @@ Survey.ComponentCollection.Instance.add({
         //do something on text property change
       }
     }
-
+  /**
+   * SurveyJS calls this function after rendering the content element.
+   * This function is similar to survey.onAfterRenderQuestion event.
+   * It allows you do not handle the event on survey level and put all needed code inside the component code
+   */  
+  onAfterRenderContentElement(question, element, htmlElement) {
+    //For example, add new elements to htmlElement based on some logic
+    //question is the component question and element is a content element (question or panel)
+  }
+  /**
+   * SurveyJS calls this function after rendering the component.
+   * This function is similar to onAfterRenderContentElement.
+   * The main difference, htmlElement is a root html element for a component. 
+   * You can get change the rendering of component title, errors and so on
+   */  
+  onAfterRender(question, htmlElement) {
+  }
 });
 ```
