@@ -411,8 +411,8 @@ QUnit.test("onModified options", function(assert) {
   assert.equal(opts.newValue.getType(), "page", "New page");
   var page = opts.newValue;
 
-  editor.selectedElementPropertyGrid.selectedObject = question;
-  var titleEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+  editor.propertyGridObjectModel.selectedObject = question;
+  var titleEditor = editor.propertyGridObjectModel.getPropertyEditorByName(
     "title"
   ).editor;
   titleEditor.koValue("Some text");
@@ -444,10 +444,10 @@ QUnit.test("onCustomPropertySort event", function(assert) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
   });
-  editor.selectedElementPropertyGrid.selectedObject = editor.survey.pages[0];
+  editor.propertyGridObjectModel.selectedObject = editor.survey.pages[0];
   assert.equal(
     (<any>(
-      editor.selectedElementPropertyGrid.koElementEditor()
+      editor.propertyGridObjectModel.koElementEditor()
     )).koProperties()[0].name,
     "name",
     "The name property is now the first"
@@ -675,8 +675,8 @@ QUnit.test(
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
     var question = editor.survey.currentPage.addNewQuestion("text", "question");
-    editor.selectedElementPropertyGrid.selectedObject = question;
-    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    editor.propertyGridObjectModel.selectedObject = question;
+    var namePropertyEditor = editor.propertyGridObjectModel.getPropertyEditorByName(
       "name"
     ).editor;
     namePropertyEditor.koValue("question2");
@@ -712,7 +712,7 @@ QUnit.test("Validate Selected Element Errors", function(assert) {
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
   creator.validateSelectedElement();
-  var titlePropertyEditor = creator.selectedElementPropertyGrid.getPropertyEditorByName(
+  var titlePropertyEditor = creator.propertyGridObjectModel.getPropertyEditorByName(
     "title"
   ).editor;
   assert.equal(
@@ -739,8 +739,8 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
   var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
   var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
-  editor.selectedElementPropertyGrid.selectedObject = q1;
-  var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+  editor.propertyGridObjectModel.selectedObject = q1;
+  var namePropertyEditor = editor.propertyGridObjectModel.getPropertyEditorByName(
     "name"
   ).editor;
   namePropertyEditor.koValue("myUpdatedQuestion1");
@@ -760,11 +760,11 @@ QUnit.test(
     var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
     var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
     q2.visibleIf = "{question1} = 1";
-    editor.selectedElementPropertyGrid.selectedObject = q1;
-    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    editor.propertyGridObjectModel.selectedObject = q1;
+    var namePropertyEditor = editor.propertyGridObjectModel.getPropertyEditorByName(
       "name"
     ).editor;
-    var valuePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    var valuePropertyEditor = editor.propertyGridObjectModel.getPropertyEditorByName(
       "valueName"
     ).editor;
     valuePropertyEditor.koValue("valueName1");
@@ -929,7 +929,7 @@ QUnit.test("Change elemenent page", function(assert) {
     "question1 is selected"
   );
   assert.equal(editor.survey.currentPage.name, "page1", "page1 is current");
-  var objEditor = editor.selectedElementPropertyGrid.koElementEditor();
+  var objEditor = editor.propertyGridObjectModel.koElementEditor();
   var propertyEditor = objEditor.getPropertyEditorByName("page");
   propertyEditor.editor.koValue("page2");
   assert.equal(
