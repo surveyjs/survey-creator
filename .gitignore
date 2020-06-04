@@ -36,3 +36,8 @@ docs/classes.json
 *.env
 svgbundle.html
 package-lock.json
+node_modules
+tmp
+packages/survey-creator/package/
+packages/survey-creator/build/
+packages/survey-creator-v2/build/
