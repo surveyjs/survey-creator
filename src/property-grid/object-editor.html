@@ -1,12 +1,12 @@
 <div class="svd_object_editor">
   <!-- ko if: koHasObject -->
   <div role="tablist">
-    <!-- ko if: koAppearanceType() === "accordition" ||  koAppearanceType() === "tabs" -->
+    <!-- ko ifnot: koIsOldTableAppearance() -->
     <!-- ko template: { name: "questioneditor-content", data: koElementEditorContent() } -->
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: koAppearanceType() === "table" -->
+    <!-- ko if: koIsOldTableAppearance() -->
     <!-- ko template: { name: "questioneditor-propertygridcontent", data: koElementEditorContent() } -->
     <!-- /ko -->
     <!-- /ko -->

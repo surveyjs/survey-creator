@@ -3,14 +3,14 @@ import * as ko from "knockout";
 import "./property-grid.scss";
 const templateHtml = require("./property-grid.html");
 
-import { PropertyGridObjectModel } from "../questionEditors/questionEditor";
+import { PropertyGridObjectEditorModel } from "../questionEditors/questionEditor";
 import { SurveyCreator } from "../editor";
 
 export class PropertyGrid {
   constructor(
     public koObjects: any,
     public koSelectedObject: any,
-    public propertyGridObjectModel: PropertyGridObjectModel
+    public propertyGridObjectEditorModel: PropertyGridObjectEditorModel
   ) {}
 }
 
@@ -21,7 +21,7 @@ ko.components.register("svd-property-grid", {
       return new PropertyGrid(
         creator.koObjects,
         creator.koSelectedObject,
-        creator.propertyGridObjectModel
+        creator.propertyGridObjectEditorModel
       );
     },
   },

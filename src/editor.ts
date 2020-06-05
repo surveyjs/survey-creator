@@ -7,7 +7,7 @@ import {
 import { SurveyObjects } from "./surveyObjects";
 import { QuestionConverter } from "./questionconverter";
 import {
-  PropertyGridObjectModel,
+  PropertyGridObjectEditorModel,
   SurveyPropertyEditorShowWindow,
 } from "./questionEditors/questionEditor";
 import { SurveyTextWorker } from "./textWorker";
@@ -774,7 +774,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public commands: any;
 
   // models from MVVM
-  public propertyGridObjectModel: PropertyGridObjectModel;
+  public propertyGridObjectEditorModel: PropertyGridObjectEditorModel;
   public pagesEditorModel: PagesEditorModel;
   // EO models from MVVM
 
@@ -869,23 +869,25 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.selectedElement = page;
     };
 
-    this.propertyGridObjectModel = new PropertyGridObjectModel(this);
+    this.propertyGridObjectEditorModel = new PropertyGridObjectEditorModel(
+      this
+    );
 
     if (this.showElementEditorAsPropertyGrid) {
-      this.propertyGridObjectModel.koAppearanceType("accordition");
+      this.propertyGridObjectEditorModel.koIsOldTableAppearance(false);
     } else {
-      self.propertyGridObjectModel.koAppearanceType("table");
+      self.propertyGridObjectEditorModel.koIsOldTableAppearance(true);
     }
 
     this.koShowElementEditorAsPropertyGrid.subscribe(function(newValue) {
       if (newValue) {
-        self.propertyGridObjectModel.koAppearanceType("accordition");
+        self.propertyGridObjectEditorModel.koIsOldTableAppearance(false);
       } else {
-        self.propertyGridObjectModel.koAppearanceType("table");
+        self.propertyGridObjectEditorModel.koIsOldTableAppearance(true);
       }
     });
 
-    this.propertyGridObjectModel.onAfterRenderCallback = function(
+    this.propertyGridObjectEditorModel.onAfterRenderCallback = function(
       obj,
       htmlElement,
       prop
@@ -899,21 +901,21 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       };
       self.onPropertyAfterRender.fire(self, options);
     };
-    this.propertyGridObjectModel.onSortPropertyCallback = function(
+    this.propertyGridObjectEditorModel.onSortPropertyCallback = function(
       obj: any,
       property1: Survey.JsonObjectProperty,
       property2: Survey.JsonObjectProperty
     ): number {
       return self.onCustomSortPropertyObjectProperty(obj, property1, property2);
     };
-    this.propertyGridObjectModel.onPropertyChanged = function(
+    this.propertyGridObjectEditorModel.onPropertyChanged = function(
       obj: any,
       prop: Survey.JsonObjectProperty,
       oldValue: any
     ) {
       self.onPropertyChanged(obj, prop, oldValue);
     };
-    this.propertyGridObjectModel["onCorrectValueBeforeSet"] = function(
+    this.propertyGridObjectEditorModel["onCorrectValueBeforeSet"] = function(
       obj: any,
       prop: Survey.JsonObjectProperty,
       newValue: any
@@ -1885,11 +1887,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private doPropertyGridChanged() {
     if (!this.showPropertyGrid) return;
-    this.propertyGridObjectModel.objectChanged();
+    this.propertyGridObjectEditorModel.objectChanged();
   }
   private setNewObjToPropertyGrid(newObj: any) {
     if (!this.showPropertyGrid) return;
-    this.propertyGridObjectModel.selectedObject = newObj;
+    this.propertyGridObjectEditorModel.selectedObject = newObj;
   }
   private canSwitchViewType(newType: string): boolean {
     if (newType && this.koViewType() == newType) return false;
@@ -2002,8 +2004,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public validateSelectedElement(): boolean {
     var isValid = true;
     if (!this.selectedElement) return isValid;
-    if (!!this.propertyGridObjectModel) {
-      isValid = !this.propertyGridObjectModel.hasErrors();
+    if (!!this.propertyGridObjectEditorModel) {
+      isValid = !this.propertyGridObjectEditorModel.hasErrors();
     }
     var options = { errors: [] };
     this.onValidateSelectedElement.fire(this, options);
@@ -2731,7 +2733,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.setNewObjToPropertyGrid(element);
       this.leftContainerActiveItem("property-grid");
       this.rightContainerActiveItem("property-grid");
-      this.propertyGridObjectModel.focusEditor();
+      this.propertyGridObjectEditorModel.focusEditor();
       return;
     }
     var self = this;
