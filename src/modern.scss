@@ -1,0 +1,12 @@
+.svd_container.sv_modern_css {
+    .sv-btn {
+        line-height: 34px;
+        height: 34px;
+        border-radius: 17px;
+        font-size: 14px;
+        padding: 0 1.5em;
+        &>* {
+            line-height: 34px;
+        }
+    }
+}

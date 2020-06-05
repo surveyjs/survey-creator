@@ -22,6 +22,10 @@
   width: 100%;
   height: 100%;
 
+  &:focus {
+    outline: none;
+  }
+
   .svd_questions_editor {
     .svd_question {
       overflow: visible;
@@ -142,13 +146,15 @@
   a.nav-link {
     cursor: pointer;
   }
-  .btn {
-    border-radius: 2px;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    line-height: 1em;
-    min-width: 6em;
-    font-weight: bold;
+  &::not(.sv_modern_css) {
+    .btn {
+      border-radius: 2px;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      line-height: 1em;
+      min-width: 6em;
+      font-weight: bold;
+    }
   }
   .svd_content {
     padding: 30px;
@@ -602,3 +608,5 @@
 }
 
 @import "templates/propertyEditors/propertyeditor-condition.scss";
+
+@import "./modern.scss";

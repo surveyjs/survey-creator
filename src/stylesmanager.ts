@@ -451,6 +451,101 @@ export class StylesManager {
       "color: $primary-color;"
   };
 
+  public static modernThemeCss: { [key: string]: string } = {
+    ".svd_container": "color: $primary-text-color;",
+    ".svd_container a:focus, .svd_container select:focus, .svd_container span:focus, .svd_container div:focus, .svd_container tr:focus, .svd_container input[type='checkbox']:focus + span.checkmark":
+      "outline-color: $primary-color;",
+    ".svd_container .svd_toolbar button:focus":
+      "outline-color: $primary-text-color;",
+
+    ".svd_container a": "color: $primary-color;",
+    ".svd_container a:hover": "color: $primary-hover-color;",
+    ".svd_container .svd-main-color": "color: $primary-color;",
+    ".svd_container .svd-main-border-color":
+      "border-color: $selection-border-color;",
+    ".svd_container .svd-main-background-color":
+      "background-color: $primary-color;",
+    ".svd_container .svd-light-background-color":
+      "background-color: $primary-border-color;",
+
+    ".svd_container .btn-primary":
+      "color: $inverted-text-color; background-color: $secondary-color; border-color: $secondary-color;",
+    ".svd_container .btn-link":
+      "color: $primary-text-color; background-color: $secondary-bg-color; border-color: $secondary-bg-color;",
+
+    ".svd_container .svd-svg-icon": "fill: $primary-icon-color;",
+    ".svd_container .svd-danger-icon .svd-svg-icon": "fill: $error-color;",
+    ".svd_container .icon-white .svd-svg-icon": "fill: $primary-bg-color;",
+    ".svd_container .svd-primary-icon .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .svd-secondary-icon .svd-svg-icon":
+      "fill: $secondary-color;",
+    ".svd_container .icon-gearactive .svd-svg-icon": "fill: $primary-color;",
+    ".svd_container .nav-tabs a": "color: $primary-text-color",
+    ".svd_container .nav-tabs > li.active > a": "color: $primary-color",
+    ".svd_container .nav-item.active .nav-link":
+      "background-color: $primary-bg-color;",
+
+    ".svd_container .sjs-cb-container:hover input ~ .checkmark":
+      "background-color: $dd-menu-border",
+    ".svd_container .sjs-cb-container:hover input:checked ~ .checkmark":
+      "background-color: $primary-hover-color",
+
+    ".svd_container .sjs-cb-switch input:checked + .sjs-cb-switch_control":
+      "background-color: $primary-color; border-color: $primary-color;",
+    ".svd_container input:checked + .sjs-cb-switch_control .sjs-cb-switch__button":
+      "background-color: $secondary-bg-color; border-color: $primary-color;",
+    ".svd_container .sjs-cb-switch_control":
+      "background-color: $secondary-bg-color; border: 1px solid $dd-menu-border;",
+    ".svd_container .sjs-cb-switch__button":
+      "background-color: $secondary-border-color; border-color: $secondary-bg-color;",
+
+    ".svd_container .svd_custom_select:before":
+      "background-color: $primary-color;",
+    ".svd_container .form-control:focus": "border-color: $primary-color;",
+
+    ".svd_container .svd-light-text-color": "color: $secondary-text-color;",
+
+    ".svd-light-bg-color": "background-color: $primary-bg-color;",
+    ".svd_container .svd-light-bg-color":
+      "background-color: $primary-bg-color;",
+
+    ".svd_container .svd_toolbar li.active a":
+      "background-color: $primary-color; color: $primary-bg-color;",
+
+    ".svd_container .svd_selected_page":
+      "border-bottom: 1px solid $primary-bg-color;",
+
+    ".svd_container .editor-tabs > li > a:hover":
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color;",
+    ".svd_container .editor-tabs > li > a:focus":
+      "background-color: $secondary-bg-color; border-bottom: 1px solid $secondary-bg-color;",
+    ".svd_container .editor-tabs > li.active > a":
+      "color: $primary-color; background-color: $secondary-bg-color; border: 1px solid $primary-border-color; border-bottom-color: $secondary-bg-color;",
+
+    ".svd_container .svd-light-border-color":
+      "border-color: $primary-border-color",
+
+    ".svd_container .svd-dark-border-color":
+      "border-color: $secondary-border-color",
+
+    ".svd_container .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow":
+      "background:  $primary-color;",
+    ".svd_container .select2-container .select2-selection--single .select2-selection__arrow":
+      "background:  $primary-color;",
+    ".svd_container .svd_custom_select": "background-color: $primary-bg-color;",
+
+    ".svd_container .question_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;",
+    ".svd_container .panel_actions.svd_question:hover":
+      "border-top: 1px solid $primary-color;",
+
+    ".svd_container .svd-designer-tabbed-container__tab-header-active":
+      "border-color: $primary-color;",
+    ".svd_container .svd-designer-tabbed-container__tab-header:hover":
+      "color: $primary-color;",
+    ".svd_container .svda-add-custom-item": "color: $primary-color;"
+  };
+
   private sheet: CSSStyleSheet = null;
 
   static findSheet(styleSheetId: string) {
@@ -494,7 +589,7 @@ export class StylesManager {
         StylesManager.ThemeColors["default"];
 
       let ThemeCss;
-      if (["bootstrap", "bootstrapmaterial"].indexOf(themeName) !== -1) {
+      if (["bootstrap", "bootstrapmaterial", "modern"].indexOf(themeName) !== -1) {
         ThemeCss = StylesManager[themeName + "ThemeCss"];
       } else {
         ThemeCss = StylesManager.ThemeCss;

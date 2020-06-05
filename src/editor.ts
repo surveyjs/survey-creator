@@ -1041,7 +1041,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   tabs = ko.observableArray();
 
   themeCss = ko.computed(() => {
-    return ["bootstrap", "bootstrapmaterial"].indexOf(
+    return ["bootstrap", "bootstrapmaterial", "modern"].indexOf(
       StylesManager.currentTheme()
     ) === -1
       ? "sv_default_css"

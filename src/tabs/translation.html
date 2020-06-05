@@ -12,11 +12,11 @@
                     <!-- /ko -->
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="button"
+                    <button class="btn sv-btn btn-primary" type="button"
                         data-bind="visible:$data.koCanMergeLocaleWithDefault, text:$data.koMergeLocaleWithDefaultText, click:$data.koMergeLocaleWithDefault"></button>
-                    <button class="btn btn-primary" type="button"
+                    <button class="btn sv-btn btn-primary" type="button"
                         data-bind="text:$data.exportToCSVText, click:$data.koExportToCSVFile"></button>
-                    <button class="btn btn-primary" type="button"
+                    <button class="btn sv-btn btn-primary" type="button"
                         onclick="this.getElementsByTagName('input')[0].click();">
                         <input type="file" style="display:none;" accept=".csv"
                             data-bind="event: { change: function() { $data.koImportFromCSVFile($element) } }" />

@@ -2,7 +2,7 @@
   <div data-bind="visible: koMode() == 'view'">
     <div data-bind="visible: $data.koItems().length > 0">
       <p>
-        <input type="button" class="btn btn-primary"
+        <input type="button" class="btn sv-btn btn-primary"
           data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew'), attr: {title: $data.getLocString('pe.addNew') }" />
       </p>
       <table class="svd-logic-tab__rules-list">
@@ -50,7 +50,7 @@
           <div class="svd-empty-message" data-bind="text: getLocString('survey.addLogicItem')"></div>
           <img class="svd-empty-image" src="../images/start-designing-form.svg"
             data-bind="attr: { alt: getLocString('survey.addLogicItem') }" />
-          <input class="svd-empty-action btn btn-primary" type="button"
+          <input class="svd-empty-action btn sv-btn btn-primary" type="button"
             data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew')" />
         </div>
         <!-- /ko -->
@@ -102,7 +102,7 @@
     <!-- /ko -->
     <p>
     <div style="width:200px;padding-bottom:20px">
-      <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-add-new-action-button"
+      <input type="button" class="form-control sv-btn btn btn-primary svd-logic-button svd-logic-add-new-action-button"
         data-bind="click:koAddNewAction, value: addNewActionText" />
     </div>
     </p>
@@ -112,11 +112,11 @@
       <!-- /ko -->
     </div>
     <div class="form-inline form-group">
-      <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-save-and-back-button"
+      <input type="button" class="form-control btn sv-btn btn-primary svd-logic-button svd-logic-save-and-back-button"
         data-bind="click:$data.koSaveAndShowView, value: $data.getLocString('pe.saveAndBack'), attr: { title : $data.getLocString('pe.saveAndBackTooltip') }" />
-      <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-save-button"
+      <input type="button" class="form-control btn sv-btn btn-primary svd-logic-button svd-logic-save-button"
         data-bind="click: $data.koSaveEditableItem, value: $data.getLocString('pe.save'), attr: { title : $data.getLocString('pe.saveTooltip') }" />
-      <input type="button" class="form-control btn btn-primary svd-logic-button svd-logic-back-button"
+      <input type="button" class="form-control btn sv-btn btn-primary svd-logic-button svd-logic-back-button"
         data-bind="click: $data.koShowView, value: $data.getLocString('pe.back'), attr: { title : $data.getLocString('pe.backTooltip') }" />
     </div>
     </p>
