@@ -30,11 +30,14 @@ export class SurveySimulatorComponent {
         this.simulator.options(this.simulatorOptions);
       }
     });
+    ko.computed(() => {
+      this.simulatorEnabled = _toolbarHolder.showSimulator();
+    });
 
     _toolbarHolder.toolbarItems.push({
       id: "svd-test-simulator",
       title: getLocString("pe.simulator"),
-      visible: this.simulatorEnabled,
+      visible: ko.computed(() => this.simulatorEnabled),
       tooltip: getLocString("pe.simulator"),
       component: "svd-dropdown",
       action: ko.computed({
