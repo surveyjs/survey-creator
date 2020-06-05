@@ -18,7 +18,7 @@ var banner = [
   "SurveyJS Creator v" + packageJson.version,
   "(c) 2015-2020 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#BuildSurvey"
+  "License: https://surveyjs.io/Licenses#SurveyCreator"
 ].join("\n");
 
 var dts_banner = [
@@ -26,7 +26,7 @@ var dts_banner = [
     packageJson.version,
   "(c) 2015-2020 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#BuildSurvey",
+  "License: https://surveyjs.io/Licenses#SurveyCreator",
   ""
 ].join("\n");
 
@@ -45,7 +45,7 @@ var packagePlatformJson = {
     "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
-  license: "https://surveyjs.io/Licenses#BuildSurvey",
+  license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
     "surveyeditor.css",
     "surveyeditor.min.css",
@@ -89,7 +89,7 @@ var buildPlatformJson = {
     "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
-  license: "https://surveyjs.io/Licenses#BuildSurvey",
+  license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
     "survey-creator.css",
     "survey-creator.min.css",
@@ -123,10 +123,10 @@ module.exports = function(options) {
   var buildPath = "./build/";
   var extractCSS = new ExtractTextPlugin({
     filename:
-      packagePath +
+      buildPath +
       (options.buildType === "prod"
-        ? "surveyeditor.min.css"
-        : "surveyeditor.css")
+        ? "survey-creator.min.css"
+        : "survey-creator.css")
   });
 
   function createSVGBundle() {
@@ -156,15 +156,15 @@ module.exports = function(options) {
     } else if (1 == percentage) {
       if (options.buildType === "prod") {
         dts.bundle({
-          name: "../../surveyeditor",
-          main: packagePath + "typings/entries/index.d.ts",
+          name: "../../survey-creator",
+          main: buildPath + "typings/entries/index.d.ts",
           outputAsModuleFolder: true,
           headerText: dts_banner
         });
 
         replace.sync(
           {
-            files: packagePath + "surveyeditor.d.ts",
+            files: buildPath + "survey-creator.d.ts",
             from: /export let\s+\w+:\s+\w+;/,
             to: ""
           },
@@ -172,42 +172,42 @@ module.exports = function(options) {
             if (error) {
               return console.error("Error occurred:", error);
             }
-            console.log("check me :     " + packagePath + "surveyeditor.d.ts");
+            console.log("check me :     " + buildPath + "survey-creator.d.ts");
             console.log("Modified files:", changes.join(", "));
           }
         );
 
-        rimraf.sync(packagePath + "typings");
+        rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
-          fs.createWriteStream(packagePath + "README.md")
+          fs.createWriteStream(buildPath + "README.md")
         );
       }
 
-      if (options.libraryName === "SurveyCreator") {
-        if (!fs.existsSync(buildPath)) {
-          fs.mkdirSync(buildPath);
+      if (options.libraryName === "SurveyEditor") {
+        if (!fs.existsSync(packagePath)) {
+          fs.mkdirSync(packagePath);
         }
         function copyToBuild(oldFile, newFile) {
-          fs.createReadStream(packagePath + oldFile).pipe(
-            fs.createWriteStream(buildPath + newFile)
+          fs.createReadStream(buildPath + oldFile).pipe(
+            fs.createWriteStream(packagePath + newFile)
           );
         }
 
         if (options.buildType === "prod") {
-          copyToBuild("surveyeditor.min.js", "survey-creator.min.js");
-          copyToBuild("surveyeditor.min.css", "survey-creator.min.css");
-          copyToBuild("surveyeditor.d.ts", "survey-creator.d.ts");
+          copyToBuild("survey-creator.min.js", "surveyeditor.min.js");
+          copyToBuild("survey-creator.min.css", "surveyeditor.min.css");
+          copyToBuild("survey-creator.d.ts", "surveyeditor.d.ts");
           fs.createReadStream("./README.md").pipe(
-            fs.createWriteStream(buildPath + "README.md")
+            fs.createWriteStream(packagePath + "README.md")
           );
           fs.writeFileSync(
-            buildPath + "package.json",
-            JSON.stringify(buildPlatformJson, null, 2),
+            packagePath + "package.json",
+            JSON.stringify(packagePlatformJson, null, 2),
             "utf8"
           );
         } else {
-          copyToBuild("surveyeditor.js", "survey-creator.js");
-          copyToBuild("surveyeditor.css", "survey-creator.css");
+          copyToBuild("survey-creator.js", "surveyeditor.js");
+          copyToBuild("survey-creator.css", "surveyeditor.css");
         }
       }
     }
@@ -215,7 +215,7 @@ module.exports = function(options) {
 
   var config = {
     entry: {
-      surveyeditor: path.resolve(__dirname, "./src/entries/index.ts")
+      "survey-creator": path.resolve(__dirname, "./src/entries/index.ts")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -231,7 +231,7 @@ module.exports = function(options) {
           options: {
             compilerOptions: {
               declaration: options.buildType === "prod",
-              outDir: packagePath + "typings/"
+              outDir: buildPath + "typings/"
             }
           }
         },
@@ -267,11 +267,11 @@ module.exports = function(options) {
     },
     output: {
       filename:
-        packagePath +
+        buildPath +
         "[name]" +
         (options.buildType === "prod" ? ".min" : "") +
         ".js",
-      library: options.libraryName || "SurveyEditor",
+      library: options.libraryName || "SurveyCreator",
       libraryTarget: "umd",
       umdNamedDefine: true
     },
@@ -309,8 +309,8 @@ module.exports = function(options) {
     config.plugins = config.plugins.concat([
       new webpack.optimize.UglifyJsPlugin(),
       new GenerateJsonPlugin(
-        packagePath + "package.json",
-        packagePlatformJson,
+        buildPath + "package.json",
+        buildPlatformJson,
         undefined,
         2
       )
