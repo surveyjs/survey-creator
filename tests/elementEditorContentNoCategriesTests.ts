@@ -7,7 +7,10 @@ import { SurveyPropertyItemValuesEditor } from "../src/propertyEditors/propertyI
 import { SurveyNestedPropertyEditorItem } from "../src/propertyEditors/propertyNestedPropertyEditor";
 import { SurveyPropertyDropdownColumnsEditor } from "../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { defaultStrings } from "../src/editorLocalization";
-import { SurveyDropdownPropertyEditor } from "../src/propertyEditors/propertyEditorFactory";
+import {
+  SurveyDropdownPropertyEditor,
+  SurveyStringPropertyEditor,
+} from "../src/propertyEditors/propertyEditorFactory";
 import { SurveyElementEditorContentNoCategries } from "../src/questionEditors/questionEditor";
 
 export default QUnit.module("objectEditorTests");
@@ -330,7 +333,7 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
     dependsOn: ["inputType"],
     visibleIf: function(obj) {
       return obj.inputType == "date";
-    }
+    },
   });
   var options = new EditorOptionsTests();
   var question = new Survey.QuestionText("q1");
@@ -354,7 +357,7 @@ QUnit.test("DependedOn properties, koVisible", function(assert) {
     dependsOn: "targetEntity",
     choices: function(obj) {
       return getChoicesByEntity(obj);
-    }
+    },
   });
   function getChoicesByEntity(obj: any): Array<any> {
     var entity = !!obj ? obj["targetEntity"] : null;
@@ -400,4 +403,28 @@ QUnit.test("Property Editor - property.isRequired = true", function(assert) {
   nameEditor.koValue("");
   assert.equal(question.name, "q2", "We can't set nullable value");
   assert.equal(nameEditor.koHasError(), true, "It shows error");
+});
+QUnit.test("SurveyPropertyEditor - onPropertyEditorUpdate", function(assert) {
+  Survey.Serializer.addProperty("text", {
+    name: "testInputType",
+    dependsOn: "inputType",
+  });
+  var prop = Survey.Serializer.findProperty("text", "testInputType");
+  prop.visibleIf = function(obj: any) {
+    return true;
+  };
+  prop.onPropertyEditorUpdate = function(obj: any, editor: any) {
+    editor.inputType = obj.inputType;
+  };
+  var question = new Survey.QuestionText("q1");
+  question.inputType = "date";
+  var editor = new SurveyElementEditorContentNoCategries(question, "", null);
+  var newPropEditor = <SurveyStringPropertyEditor>(
+    editor.getPropertyEditorByName("testInputType").editor
+  );
+  var inputTypePropEditor = editor.getPropertyEditorByName("inputType");
+  assert.equal(newPropEditor.inputType, "date", "It is date now");
+  inputTypePropEditor.koValue("number");
+  assert.equal(newPropEditor.inputType, "number", "It is number now");
+  Survey.Serializer.removeProperty("text", "testInputType");
 });
