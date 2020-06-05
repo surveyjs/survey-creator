@@ -31,7 +31,7 @@ import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
 
 import { IToolbarItem } from "./components/toolbar";
-import { PagesEditorModel } from "./pages-editor-model";
+import { PagesEditor } from "./pages-editor";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -775,7 +775,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   // models from MVVM
   public propertyGridObjectEditorModel: PropertyGridObjectEditorModel;
-  public pagesEditorModel: PagesEditorModel;
+  public pagesEditorModel: PagesEditor;
   // EO models from MVVM
 
   koIsShowDesigner: any;
@@ -1035,7 +1035,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
     this.text = "";
 
-    this.pagesEditorModel = new PagesEditorModel(this);
+    this.pagesEditorModel = new PagesEditor(this);
 
     if (renderedElement) {
       this.render(renderedElement);
@@ -2479,7 +2479,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function(selObj) {},
+          onClick: function(selObj) { },
         });
       }
 
@@ -2740,8 +2740,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
-          this.renderedElement.querySelector("#surveyquestioneditorwindow")
-        )
+        this.renderedElement.querySelector("#surveyquestioneditorwindow")
+      )
       : null;
     var isCanceled = true;
     this.questionEditorWindow.show(
@@ -2962,7 +2962,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
-  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
+  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void { }
 
   onGetErrorTextOnValidationCallback(
     propertyName: string,
