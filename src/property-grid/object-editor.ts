@@ -5,13 +5,15 @@ const templateHtml = require("./object-editor.html");
 
 import {
   PropertyGridObjectEditorModel,
-  SurveyElementEditorContent,
+  SurveyElementEditorContentModel,
 } from "../questionEditors/questionEditor";
 
 export class ObjectEditor {
   constructor(
     public koIsOldTableAppearance: ko.Observable<boolean>,
-    public koElementEditorContent: ko.Observable<SurveyElementEditorContent>,
+    public koElementEditorContent: ko.Observable<
+      SurveyElementEditorContentModel
+    >,
     public koHasObject: ko.Observable<boolean>
   ) {}
 }

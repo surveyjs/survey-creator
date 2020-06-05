@@ -14,7 +14,7 @@ import { SurveyObjectProperty } from "../objectProperty";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;
-  public koElementEditor = ko.observable<SurveyElementEditorContent>(null);
+  public koElementEditor = ko.observable<SurveyElementEditorContentModel>(null);
   public koHasObject = ko.observable(false);
   public onAfterRenderCallback: (
     object: any,
@@ -93,17 +93,19 @@ export class PropertyGridObjectEditorModel {
     if (!this.koElementEditor()) return false;
     return this.koElementEditor().hasError();
   }
-  protected createSurveyElementEditor(value: any): SurveyElementEditorContent {
+  protected createSurveyElementEditor(
+    value: any
+  ): SurveyElementEditorContentModel {
     let elementEditor;
     if (this.koIsOldTableAppearance()) {
-      elementEditor = new SurveyElementEditorContentNoCategries(
+      elementEditor = new SurveyElementEditorOldTableContentModel(
         value,
         "",
         this.propertyEditorOptions,
         this.onSortPropertyCallback
       );
     } else {
-      elementEditor = new SurveyElementEditorContent(
+      elementEditor = new SurveyElementEditorContentModel(
         value,
         "",
         this.propertyEditorOptions,
@@ -113,7 +115,7 @@ export class PropertyGridObjectEditorModel {
     return elementEditor;
   }
 }
-export class SurveyElementEditorContent {
+export class SurveyElementEditorContentModel {
   public onCorrectValueBeforeSet: (
     prop: Survey.JsonObjectProperty,
     newValue: any
@@ -294,7 +296,7 @@ export class SurveyElementEditorContent {
   }
 }
 
-export class SurveyElementEditorContentNoCategries extends SurveyElementEditorContent {
+export class SurveyElementEditorOldTableContentModel extends SurveyElementEditorContentModel {
   public koProperties = ko.observableArray<SurveyObjectProperty>();
   public koTab: any;
   constructor(
@@ -830,7 +832,7 @@ export class SurveyQuestionProperties {
   }
 }
 
-export class SurveyQuestionEditor extends SurveyElementEditorContent {
+export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
   public onChanged: (obj: Survey.Base) => any;
   public onHideWindow: () => any;
   public onOkClick: any;

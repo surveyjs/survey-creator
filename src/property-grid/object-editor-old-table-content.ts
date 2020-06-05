@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 
 import "./object-editor-old-table-content.scss";
-import { SurveyElementEditorContentNoCategries } from "../questionEditors/questionEditor";
+import { SurveyElementEditorOldTableContentModel } from "../questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../objectProperty";
 const templateHtml = require("./object-editor-old-table-content.html");
 
@@ -15,7 +15,7 @@ export class ObjectEditorOldTableContent {
 ko.components.register("svd-object-editor-old-table-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const model: SurveyElementEditorContentNoCategries =
+      const model: SurveyElementEditorOldTableContentModel =
         params.elementEditorContent;
       return new ObjectEditorOldTableContent(model.koProperties, model.koTab);
     },

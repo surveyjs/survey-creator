@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 
 import "./object-editor-content.scss";
-import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
+import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 const templateHtml = require("./object-editor-content.html");
 
 export class ObjectEditorContent {
@@ -16,12 +16,13 @@ export class ObjectEditorContent {
 ko.components.register("svd-object-editor-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const elementEditorContent: SurveyElementEditorContent = params.elementEditorContent;
+      const model: SurveyElementEditorContentModel =
+        params.elementEditorContent;
       return new ObjectEditorContent(
-        elementEditorContent.useTabsInElementEditor,
-        elementEditorContent.koTabs,
-        elementEditorContent.koActiveTab, 
-        elementEditorContent["onTabClick"]//TODO the property doesn't exist in SurveyElementEditorContent but exists in SurveyQuestionEditor
+        model.useTabsInElementEditor,
+        model.koTabs,
+        model.koActiveTab,
+        model["onTabClick"] //TODO the property doesn't exist in SurveyElementEditorContentModel but exists in SurveyQuestionEditor
       );
     },
   },

@@ -9,7 +9,7 @@ import {
   ExpressionRemoveVariable,
 } from "../expressionToDisplayText";
 import {
-  SurveyElementEditorContent,
+  SurveyElementEditorContentModel,
   SurveyQuestionEditor,
 } from "../questionEditors/questionEditor";
 import { SurveyCreator } from "../editor";
@@ -195,9 +195,9 @@ export class SurveyLogicType {
     }
   }
   private createTriggerTemplateObject(element: Survey.Base) {
-    var res: SurveyElementEditorContent = null;
+    var res: SurveyElementEditorContentModel = null;
     if (this.isNewTrigger(element)) {
-      res = new SurveyElementEditorContent(element, "", this.options);
+      res = new SurveyElementEditorContentModel(element, "", this.options);
     } else {
       res = new SurveyQuestionEditor(element, "", this.options);
     }
