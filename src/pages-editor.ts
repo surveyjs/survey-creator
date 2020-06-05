@@ -7,7 +7,7 @@ import { SurveyCreator } from "./editor";
 import { getLocString } from "./editorLocalization";
 
 export class PagesEditor {
-  private prevPagesForSelector: Survey.PageModel[] = [];
+  private prevPagesForSelector: any[] = [];
   private _selectedPage = ko.observable<Survey.PageModel>();
   private selectionSubscription: ko.Subscription;
   private _readOnly = ko.observable(false);
@@ -19,12 +19,12 @@ export class PagesEditor {
     creator.onDesignerSurveyCreated.add((sender, options) => {
       this.koSurvey(options.survey);
     });
-    this.pagesSelection = ko.computed<Survey.PageModel[]>(() => {
+    this.pagesSelection = ko.computed<any>(() => {
       if (!this.blockPagesRebuilt()) {
-        this.prevPagesForSelector = this.pages;
+        this.prevPagesForSelector = this.pages.map(p => { return { value: p, text: this.getDisplayText(p) } });
         if (!this.readOnly) {
           this.prevPagesForSelector = this.prevPagesForSelector.concat([
-            <any>{ name: getLocString("ed.addNewPage") },
+            <any>{ value: null, text: getLocString("ed.addNewPage") },
           ]);
         }
       }
@@ -56,7 +56,7 @@ export class PagesEditor {
 
   public blockPagesRebuilt = ko.observable(false);
 
-  public pagesSelection: ko.Computed<Survey.PageModel[]>;
+  public pagesSelection: ko.Computed<any[]>;
   public pageSelection = ko.computed<Survey.PageModel>({
     read: () => this._selectedPage(),
     write: (newVal) => {
@@ -73,13 +73,15 @@ export class PagesEditor {
   addPageSelectorIntoToolbar() {
     const item = {
       id: "svd-toolbar-page-selector",
-      component: "svd-page-selector",
+      component: "svd-dropdown",
       visible: this.creator.showPageSelectorInToolbar,
       enabled: true,
       data: this,
       title: "",
+      items: this.pagesSelection,
+      action: this.pageSelection
     };
-    this.creator.toolbarItems.unshift(item);
+    this.creator.toolbarItems.unshift(<any>item);
   }
 
   addPage = () => {

@@ -1,5 +1,6 @@
 ﻿<!-- ko if: model.hasDropdownSelector -->
-<svd-page-selector params="model: model"></svd-page-selector>
+<svd-dropdown class="svd-page-selector"
+  params="item: { items: model.pagesSelection, action: model.pageSelection, title: '' }"></svd-dropdown>
 <!-- /ko -->
 <div tabindex="0" class="svd-page-scroller-arrow"
   data-bind="key2click, clickNoFocus: moveLeft, attr: {title: getLocString('ed.moveLeft')}, css: {'svd-page-scroller-arrow--visible': hasScroller }">
