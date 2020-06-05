@@ -2,12 +2,12 @@
   <!-- ko if: koHasObject -->
   <div role="tablist">
     <!-- ko ifnot: koIsOldTableAppearance() -->
-    <!-- ko template: { name: "questioneditor-content", data: koElementEditorContent() } -->
+    <!-- ko template: { name: "object-editor-content", data: koElementEditorContent() } -->
     <!-- /ko -->
     <!-- /ko -->
 
     <!-- ko if: koIsOldTableAppearance() -->
-    <!-- ko template: { name: "questioneditor-propertygridcontent", data: koElementEditorContent() } -->
+    <!-- ko template: { name: "object-editor-old-table-content", data: koElementEditorContent() } -->
     <!-- /ko -->
     <!-- /ko -->
   </div>

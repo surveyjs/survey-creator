@@ -37,7 +37,8 @@ export class PropertyGridObjectEditorModel {
     newValue: any
   ) => any;
 
-  // old - table(old property grid), new - accordition or tabs
+  // Old - table(old property grid) creator.options.showElementEditorAsPropertyGrid: false;
+  // New - accordition or oldest tabs
   public koIsOldTableAppearance = ko.observable(false);
 
   constructor(

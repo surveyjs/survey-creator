@@ -67,7 +67,7 @@ export class SurveyLogicType {
     return this.logicType.propertyName;
   }
   public get templateName(): string {
-    if (this.isTrigger) return "questioneditor-content";
+    if (this.isTrigger) return "object-editor-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
       : "elementselector";
@@ -1215,7 +1215,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.options = this.options;
     this.expressionEditor.koSetupText(this.expressionSetupText);
   }
-  dispose() { }
+  dispose() {}
 }
 
 ko.components.register("survey-logic", {

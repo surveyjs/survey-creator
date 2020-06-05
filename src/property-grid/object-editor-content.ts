@@ -1,10 +1,10 @@
 import * as ko from "knockout";
 
-import "./question-editor-content.scss";
+import "./object-editor-content.scss";
 import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
-const templateHtml = require("./question-editor-content.html");
+const templateHtml = require("./object-editor-content.html");
 
-export class QuestionEditorContent {
+export class ObjectEditorContent {
   constructor(
     public useTabsInElementEditor: any,
     public koTabs: any,
@@ -13,11 +13,11 @@ export class QuestionEditorContent {
   ) {}
 }
 
-ko.components.register("svd-question-editor-content", {
+ko.components.register("svd-object-editor-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const elementEditorContent: SurveyElementEditorContent = params.elementEditorContent;
-      return new QuestionEditorContent(
+      return new ObjectEditorContent(
         elementEditorContent.useTabsInElementEditor,
         elementEditorContent.koTabs,
         elementEditorContent.koActiveTab, 
