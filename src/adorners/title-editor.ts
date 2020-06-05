@@ -112,6 +112,10 @@ export class TitleInplaceEditor {
     return (!!this.property && this.property.maxLength) || "";
   }
 
+  get readOnly() {
+    return !!this.property && this.property.readOnly;
+  }
+
   valueChanged: (newVal: any) => string;
 
   public getLocString(str: string) {
@@ -151,6 +155,9 @@ export class TitleInplaceEditor {
     });
   };
   startEdit = (model: TitleInplaceEditor, event) => {
+    if (this.readOnly) {
+      return;
+    }
     this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
@@ -174,6 +181,10 @@ export class TitleInplaceEditor {
   };
   postEdit = () => {
     this.error("");
+    if (this.readOnly) {
+      this.cancelEdit();
+      return;
+    }
     if (this.prevName() !== this.editingName()) {
       if (this.hasErrors()) {
         return;

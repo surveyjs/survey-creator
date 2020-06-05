@@ -831,6 +831,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         : null,
       this
     );
+    this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
     var self = this;
 
     StylesManager.applyTheme(StylesManager.currentTheme());
@@ -1350,9 +1351,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get logic(): SurveyLogic {
     return this.logicValue;
   }
-  public set logic(logic: SurveyLogic) {
-    this.logicValue = logic;
-  }
+  // public set logic(logic: SurveyLogic) {
+  //   this.logicValue = logic;
+  // }
   /**
    * The list of toolbar items. You may add/remove/replace them.
    * @see IToolbarItem

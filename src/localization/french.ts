@@ -9,7 +9,7 @@ var frenchTranslation = {
     addToToolbox: "Ajouter à la boîte à outils",
     deletePanel: "Supprimer le panneau",
     deleteQuestion: "Supprimer la question",
-    convertTo: "Convertir en"
+    convertTo: "Convertir en",
   },
   //questionTypes
   qt: {
@@ -30,7 +30,7 @@ var frenchTranslation = {
     rating: "Évaluation",
     text: "Champ texte",
     boolean: "Booléen",
-    expression: "Expression"
+    expression: "Expression",
   },
   //Strings in Editor
   ed: {
@@ -83,7 +83,8 @@ var frenchTranslation = {
     translationAddLanguage: "Choisir langue à traduire",
     translationShowAllStrings: "Afficher tous les termes",
     translationShowAllPages: "Afficher toutes les pages",
-    translationNoStrings: "Aucun terme à traduire. Veuillez modifier le filtre.",
+    translationNoStrings:
+      "Aucun terme à traduire. Veuillez modifier le filtre.",
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
@@ -93,9 +94,84 @@ var frenchTranslation = {
     fpAddQuestion: "Ajouter question...",
     completedHtmlOnConditionItemText: "Afficher si :",
   },
+  lg: {
+    //Logic tab strings
+    page_visibilityName: "Visibilité de la page",
+    panel_visibilityName: "Visibilité du panneau",
+    panel_enableName: "Activer/désactiver le panneau",
+    question_visibilityName: "Visibilité de la question",
+    question_enableName: "Activer/désactiver la question",
+    question_requireName: "Question facultative requise",
+    trigger_completeName: "Compléter le questionnaire",
+    trigger_setvalueName: "Définir la valeur de la question",
+    trigger_copyvalueName: "Copier la valeur de la question",
+    trigger_skipName: "Passer à la question",
+    trigger_runExpressionName: "Exécuter une expression personnalisée",
+    completedHtmlOnConditionName:
+      "Personnaliser le texte de la page de remerciements",
+
+    page_visibilityDescription:
+      "Rendre la page visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
+    panel_visibilityDescription:
+      "Rendre le panneau visible lorsque l'expression logique renvoie 'vrai'. Sinon, le rendre invisible.",
+    panel_enableDescription:
+      "Activez le panneau et tous les éléments qu'il contient lorsque l'expression logique renvoie 'vrai'. Sinon, le laisser désactivé.",
+    question_visibilityDescription:
+      "Rendez la question visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
+    question_enableDescription:
+      "Activez la question lorsque l'expression logique renvoie 'vrai'. Sinon, la laisser désactivée.",
+    question_requireDescription:
+      "La question devient requise lorsque l'expression logique renvoie 'vrai'.",
+    trigger_completeDescription:
+      "Lorsque l'expression logique renvoie 'vrai', l'enquête est alors terminée et un utilisateur voit la page de remerciements.",
+    trigger_setvalueDescription:
+      "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
+    trigger_copyvalueDescription:
+      "Lorsque les valeurs de question, qui sont utilisées dans l'expression logique, sont modifiées et que l'expression logique renvoie 'vrai', la valeur d'une question sélectionnée est copiée dans une autre question sélectionnée.",
+    trigger_skipDescription:
+      "Lorsque l'expression logique renvoie 'vrai', l'enquête passe à la question sélectionnée.",
+    trigger_runExpressionDescription:
+      "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat d'expression dans la question sélectionnée.",
+    completedHtmlOnConditionDescription:
+      "Si l'expression logique renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
+
+    itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':", //{0} - the expression
+    page_visibilityText: "Rendre la page {0} visible", //{0} page name
+    panel_visibilityText: "Rendre le panneau {0} visible", //{0} panel name
+    panel_enableText: "Activer le panneau {0}", //{0} panel name
+    question_visibilityText: "Rendre la question {0} visible", //{0} question name
+    question_enableText: "Activer la question {0}", //{0} question name
+    question_requireText: "Rendre la question {0} obligatoire", //{0} question name
+    trigger_completeText: "Le questionnaire devient complété.",
+    trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
+    trigger_copyvalueText:
+      "Copier dans la question: {0} valeur de la question {1}", //{0} and {1} question names
+    trigger_skipText: "Dans le questionnaire, passez à la question {0}", //{0} question name
+    trigger_runExpressionText1: "Exécuter l'expression: '{0}'", //{0} the expression
+    trigger_runExpressionText2:
+      " et définissez son résultat dans la question: {0}", //{0} question name
+    completedHtmlOnConditionText:
+      "Affichez un texte personnalisé pour la page de remerciements.",
+
+    conditions: "Condition(s)",
+    actions: "Action(s)",
+    expressionEditorTitle: "Définissez le(s) condition(s)",
+    actionsEditorTitle: "Définissez le(s) action(s)",
+
+    deleteAction: "Détruire l'action",
+    addNewAction: "Ajouter une nouvelle action",
+    selectedActionCaption: "Sélectionnez une action à ajouter …",
+
+    expressionInvalid:
+      "L'expression logique est vide ou non valide. Corrigez s'il-vous-plaît.",
+    noActionError: "Veuillez ajouter au moins une action.",
+    actionInvalid: "Veuillez corriger les problèmes dans vos actions.",
+    expressionSetup: "",
+    actionsSetup: "",
+  },
   //Property names in table headers
   pel: {
-    isRequired: "Obligatoire ?"
+    isRequired: "Obligatoire ?",
   },
   //Property Editors
   pe: {
@@ -154,12 +230,12 @@ var frenchTranslation = {
     pageTitlePlaceholder: "Saisissez le titre de la page",
     pageDescriptionPlaceholder: "Entrer une description pour la page",
     surveyDescriptionPlaceholder: "Entrer une description pour l&apos;enquête",
-    hasOther: "Contient un item \"Autre\"",
-    otherText: "Texte item \"Autre\"",
-    hasNone: "Contient un item \"Aucun\"",
-    noneText: "Texte item \"Aucun\"",
-    hasSelectAll: "Contient un item \"Tout sélectionner\"",
-    selectAllText: "Texte item \"Tout sélectionner\"",
+    hasOther: 'Contient un item "Autre"',
+    otherText: 'Texte item "Autre"',
+    hasNone: 'Contient un item "Aucun"',
+    noneText: 'Texte item "Aucun"',
+    hasSelectAll: 'Contient un item "Tout sélectionner"',
+    selectAllText: 'Texte item "Tout sélectionner"',
     choicesMin: "Valeur minimum pour les items générés automatiquement",
     choicesMax: "Valeur maximum pour les items générés automatiquement",
     choicesStep: "Différence entre items générés automatiquement",
@@ -331,7 +407,7 @@ var frenchTranslation = {
     triggerGotoName: "Aller à la question :",
     triggerIsVariable:
       "Ne placez pas la variable dans le résultat du questionnaire.",
-    triggerRunExpressionEmpty: "Veuillez entrer une expression valide"
+    triggerRunExpressionEmpty: "Veuillez entrer une expression valide",
   },
   //Property values
   pv: {
@@ -388,7 +464,7 @@ var frenchTranslation = {
     onHidden: "Quand caché",
     all: "tous",
     page: "page",
-    survey: "questionnaire"
+    survey: "questionnaire",
   },
   //Operators
   op: {
@@ -403,7 +479,7 @@ var frenchTranslation = {
     greater: "supérieur",
     less: "inférieur",
     greaterorequal: "supérieur ou égal",
-    lessorequal: "inférieur ou égal"
+    lessorequal: "inférieur ou égal",
   },
   //Embed window
   ew: {
@@ -419,12 +495,12 @@ var frenchTranslation = {
     loadFromServer: "Charger le JSON du questionnaire depuis un serveur",
     titleScript: "Scripts et styles",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript"
+    titleJavaScript: "JavaScript",
   },
   //Test Survey
   ts: {
     selectPage: "Sélectionner une page pour la tester",
-    showInvisibleElements: "Afficher les éléments invisibles"
+    showInvisibleElements: "Afficher les éléments invisibles",
   },
   //Validators
   validators: {
@@ -432,7 +508,7 @@ var frenchTranslation = {
     emailvalidator: "e-mail",
     numericvalidator: "numérique",
     regexvalidator: "regex",
-    textvalidator: "texte"
+    textvalidator: "texte",
   },
   //Triggers
   triggers: {
@@ -441,14 +517,14 @@ var frenchTranslation = {
     copyvaluetrigger: "copier la valeur",
     skiptrigger: "sauter à la question",
     runexpressiontrigger: "exécuter expression",
-    visibletrigger: "modifier la visibilité"
+    visibletrigger: "modifier la visibilité",
   },
   //Properties
   p: {
     name: "Nom",
     title: {
       name: "Titre",
-      title: 'Laissez vide, si même texte que le "Nom"'
+      title: 'Laissez vide, si même texte que le "Nom"',
     },
     navigationButtonsVisibility: "Visibilité des boutons de navigation",
     questionsOrder: "Ordre des questions",
@@ -573,8 +649,8 @@ var frenchTranslation = {
     showTimerPanelMode: "Mode d'affichage du panneau chronomètre",
     indent: "Indentation",
     isAllRowRequired: "Toutes les lignes sont-elle obligatoires ?",
-    locale: "Langue"
-  }
+    locale: "Langue",
+  },
 };
 
 editorLocalization.locales["fr"] = frenchTranslation;

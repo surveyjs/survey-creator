@@ -2,7 +2,7 @@
   "version": "1.7.10",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
-  "license": "https://surveyjs.io/Licenses#BuildSurvey",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
@@ -18,9 +18,9 @@
     "testcafe_ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
     "testcafe_file": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/adorners.js\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
-    "build_dev": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType dev",
-    "build_prod": "webpack --env.buildType dev --env.libraryName SurveyCreator && webpack --env.buildType prod --env.libraryName SurveyCreator && webpack --env.buildType dev && webpack --env.buildType prod",
-    "watch_dev": "webpack --env.buildType dev --env.libraryName SurveyCreator --watch"
+    "build_dev": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType dev",
+    "build_prod": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType prod --env.libraryName SurveyEditor && webpack --env.buildType dev && webpack --env.buildType prod",
+    "watch_dev": "webpack --env.buildType dev --watch"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
