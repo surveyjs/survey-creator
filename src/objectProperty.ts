@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 
 import {
   SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
+  ISurveyObjectEditorOptions,
 } from "./propertyEditors/propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditors/propertyEditorFactory";
 

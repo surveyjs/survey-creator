@@ -137,6 +137,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public showPagesInTestSurveyTab = true;
 
   /**
+   * Set this property to false to hide the device simulator in the Test Survey Tab
+   */
+  public showSimulatorInTestSurveyTab = true;
+
+  /**
    * Set this property to false to disable pages adding, editing and deleting
    */
   public allowModifyPages = true;
@@ -813,7 +818,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * allowModifyPages, pageEditingMode, showDropdownPageSelector, readOnly,
    * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
    * showObjectTitles, inplaceEditForValues, showTitlesInExpressions, allowEditExpressionsInTextEditor,
-   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab,
+   * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, showSimulatorInTestSurveyTab,
    * showSurveyTitle, allowControlSurveyTitleVisibility, hideExpressionHeaderInLogicTab
    */
   constructor(renderedElement: any = null, options: any = null) {
@@ -1193,6 +1198,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
     if (typeof options.showPagesInTestSurveyTab !== "undefined") {
       this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+    }
+    if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
+      this.showSimulatorInTestSurveyTab = options.showSimulatorInTestSurveyTab;
     }
     if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
       this.showDefaultLanguageInTestSurveyTab =

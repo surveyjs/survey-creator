@@ -443,7 +443,15 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected isValueEmpty(val): boolean {
     return Survey.Helpers.isValueEmpty(val);
   }
-  public updateDynamicProperties() {}
+  public updateDynamicProperties() {
+    if (
+      !this.property ||
+      !this.object ||
+      !this.property["onPropertyEditorUpdate"]
+    )
+      return;
+    this.property["onPropertyEditorUpdate"](this.object, this);
+  }
   public keyDownHandler(property, event) {
     var surveyEditor: ISurveyObjectEditorOptions = property.editor.options;
     if (!!surveyEditor) {

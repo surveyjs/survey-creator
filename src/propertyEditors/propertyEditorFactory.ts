@@ -145,8 +145,15 @@ export class SurveyPropertyEditorFactory {
 }
 
 export class SurveyStringPropertyEditor extends SurveyPropertyEditorBase {
+  public koInputType: any = ko.observable("text");
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
+  }
+  public get inputType(): string {
+    return this.koInputType();
+  }
+  public set inputType(val: string) {
+    this.koInputType(val);
   }
   public get editorType(): string {
     return "string";
