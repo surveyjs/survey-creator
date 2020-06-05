@@ -63,8 +63,8 @@ export {
 
 export { QuestionToolbox } from "../components/toolbox";
 export { SurveyObjectProperty } from "../objectProperty";
-export { PageSelector } from "../components/page-selector";
-export { PagesEditor } from "../components/pages-editor";
+export { PagesEditorViewModel } from "../components/pages-editor";
+export { PageSelectorComponent } from "../components/page-selector";
 export { Toolbar } from "../components/toolbar";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";

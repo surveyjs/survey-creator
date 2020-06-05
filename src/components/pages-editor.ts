@@ -1,24 +1,36 @@
 import * as ko from "knockout";
+import { SurveyHelper, editorLocalization } from '../entries';
 import "./pages-editor.scss";
-import { PagesEditorModel } from "../pages-editor-model";
+import { PagesEditor } from "../pages-editor";
 
 var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
 
-export class PagesEditor {
-  constructor(public model: PagesEditorModel, private element: any) {
+export class PagesEditorViewModel {
+  private pageSelectionChanged: ko.Subscription;
+  private updateScroller = undefined;
+  private isNeedAutoScroll = true;
+
+  constructor(public model: PagesEditor, private element: any) {
     if (!!this.element && typeof this.element.querySelector === "function") {
-      this.model.updateScroller = setInterval(() => {
+      this.updateScroller = setInterval(() => {
         var pagesElement: HTMLDivElement = this.element.querySelector(
           ".svd-pages"
         );
         if (!!pagesElement) {
-          this.model.hasScroller(
+          this.hasScroller(
             pagesElement.scrollWidth > pagesElement.offsetWidth
           );
         }
       }, 100);
+
+      this.pageSelectionChanged = model.pageSelection.subscribe(newVal => {
+        if (this.isNeedAutoScroll) {
+          this.scrollToSelectedPage();
+        } else {
+          this.isNeedAutoScroll = true;
+        }
+      });
     }
-    this.model.scrollToSelectedPageCallback = this.scrollToSelectedPage;
   }
 
   moveLeft(model, event) {
@@ -55,6 +67,7 @@ export class PagesEditor {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.updateMenuPosition();
   }
+
   updateMenuPosition() {
     var pagesElement = this.element.querySelector(".svd-pages");
     var menuElements = pagesElement.getElementsByClassName("svd-page-actions");
@@ -66,20 +79,87 @@ export class PagesEditor {
     }
   }
 
+  public getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
+
+  getPageClass = (page) => {
+    var result =
+      page === this.model.selectedPage ? "svd_selected_page svd-light-bg-color" : "";
+
+    if (this.model.pages.indexOf(page) !== this.model.pages.length - 1) {
+      result += " svd-border-right-none";
+    }
+
+    return result;
+  };
+
+  getPageMenuIconClass = (page) => {
+    return page === this.model.selectedPage && this.model.isActive()
+      ? "icon-gearactive"
+      : "icon-gear";
+  };
+
   onPageClick = (model, event) => {
-    this.model.isNeedAutoScroll = false;
+    this.isNeedAutoScroll = false;
     this.model.selectPage(model);
     event.stopPropagation();
     this.updateMenuPosition();
   };
+
+  public movingPage = null;
+  get sortableOptions() {
+    return {
+      handle: ".svd-page-name",
+      animation: 150,
+      onStart: () => {
+        this.movingPage = null;
+        this.model.creator.undoRedoManager.startTransaction(
+          "pages drag drop transaction"
+        );
+        this.model.blockPagesRebuilt(true);
+      },
+      onEnd: (evt) => {
+        this.isNeedAutoScroll = false;
+        this.model.blockPagesRebuilt(false);
+        this.model.creator.undoRedoManager.stopTransaction();
+        if (!!this.movingPage) {
+          this.model.selectPage(this.movingPage);
+        }
+      },
+      onUpdate: (evt, itemV) => {
+        this.movingPage = itemV;
+        if (SurveyHelper.moveItemInArray(this.model.pages, itemV, evt.newIndex)) {
+          // Remove sortables "unbound" element
+          evt.item.parentNode.removeChild(evt.item);
+        }
+        return true;
+      },
+    };
+  }
+
+  public hasScroller = ko.observable(false);
+
+  public dispose() {
+    this.pageSelectionChanged.dispose();
+    if (!!this.updateScroller) {
+      clearInterval(this.updateScroller);
+      this.updateScroller = undefined;
+    }
+  }
 }
 
 ko.components.register("svd-pages-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const model: PagesEditorModel =
+      const model: PagesEditor =
         params.editor.pagesEditorModel || params.item.data;
-      return new PagesEditor(model, componentInfo.element);
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.dispose();
+      });
+
+      return new PagesEditorViewModel(model, componentInfo.element);
     },
   },
   template: template,
