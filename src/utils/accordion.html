@@ -27,7 +27,7 @@
     role="tab"
     data-bind="ifnot: collapsed"
   >
-    <!-- ko template: { name: template, data: data } -->
+    <!-- ko template: { name: data.htmlTemplate, data: data.templateObject, afterRender: data.koAfterRender } -->
     <!-- /ko -->
   </div>
   <!-- /ko -->

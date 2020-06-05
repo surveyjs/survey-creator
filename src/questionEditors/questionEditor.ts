@@ -295,7 +295,6 @@ export class SurveyElementEditorContentModel {
     );
   }
 }
-
 export class SurveyElementEditorOldTableContentModel extends SurveyElementEditorContentModel {
   public koProperties = ko.observableArray<SurveyObjectProperty>();
   public koTab: any;

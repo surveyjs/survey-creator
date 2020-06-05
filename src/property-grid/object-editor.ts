@@ -11,7 +11,7 @@ import {
 export class ObjectEditor {
   constructor(
     public koIsOldTableAppearance: ko.Observable<boolean>,
-    public koElementEditorContent: ko.Observable<
+    public koElementEditor: ko.Observable<
       SurveyElementEditorContentModel
     >,
     public koHasObject: ko.Observable<boolean>
