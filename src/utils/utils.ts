@@ -22,21 +22,28 @@ const opositeValues = {
   YES: "NO",
   no: "yes",
   No: "Yes",
-  NO: "YES"
+  NO: "YES",
 };
 function getOpositValue(str: string): string {
   if (!!opositeValues[str]) return opositeValues[str];
   return null;
 }
-
-export function getNextValue(prefix: string, values: string[]) {
+function hasValueInArray(values: any[], search: any): boolean {
+  for (var i = 0; i < values.length; i++) {
+    if (!values[i]) continue;
+    if (values[i].toString() === search) return true;
+  }
+  return false;
+}
+export function getNextValue(prefix: string, values: any[]) {
   if (values.length > 0)
     var oposite = getOpositValue(values[values.length - 1]);
   if (oposite && values.indexOf(oposite) < 0) return oposite;
   var numStr = "";
   var baseStr = "";
   for (var i = values.length - 1; i >= 0; i--) {
-    var str = values[i];
+    if (!values[i]) continue;
+    var str = values[i].toString();
     numStr = getNumericFromString(str);
     if (!!numStr) {
       baseStr = str.substr(0, str.length - numStr.length);
@@ -45,7 +52,7 @@ export function getNextValue(prefix: string, values: string[]) {
   }
   if (!!numStr) {
     var num = parseInt(numStr);
-    while (values.indexOf(baseStr + num) > -1) {
+    while (hasValueInArray(values, baseStr + num)) {
       num++;
     }
     return baseStr + num;
@@ -87,7 +94,7 @@ export function focusFirstControl(renderedElements: HTMLElement[]) {
 ko.bindingHandlers["trueclick"] = {
   init: function(element, valueAccessor, allBindingsAccessor) {
     element.onclick = () => true;
-  }
+  },
 };
 
 export function createKey2click(element: HTMLElement) {
@@ -97,20 +104,20 @@ export function createKey2click(element: HTMLElement) {
       element.click();
     } else if (char === 27) {
       element.blur();
-    };
-  }
+    }
+  };
 }
 
 ko.bindingHandlers["key2click"] = {
   init: function(element, valueAccessor, allBindingsAccessor) {
     element.onkeyup = createKey2click(element);
-  }
+  },
 };
 
 ko.bindingHandlers["clickNoFocus"] = {
   init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
-    element.onclick = ev => {
+    element.onclick = (ev) => {
       valueAccessor().call(viewModel, viewModel, ev);
     };
-  }
+  },
 };
