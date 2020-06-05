@@ -4,7 +4,7 @@ import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEdit
 import {
   SurveyQuestionEditor,
   SurveyElementEditorContentModel,
-  SurveyQuestionEditorTab,
+  SurveyElementEditorTabModel,
   SurveyQuestionProperties,
 } from "../../src/questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "../../src/propertyEditors/propertyItemValuesEditor";
@@ -1240,7 +1240,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     "matrixdropdowncolumn",
     "itemEditor edit the second item"
   );
-  var generalTab = <SurveyQuestionEditorTab>colDetailEditor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>colDetailEditor.koTabs()[0];
   var props = generalTab.editorProperties;
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];

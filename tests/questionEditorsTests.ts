@@ -2,7 +2,7 @@ import * as Survey from "survey-knockout";
 import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTab,
+  SurveyElementEditorTabModel,
   SurveyElementEditorContentModel,
   SurveyElementEditorOldTableContentModel,
 } from "../src/questionEditors/questionEditor";
@@ -20,7 +20,7 @@ function createSurveyQuestionEditorTab(
   obj: any,
   properties: Array<string>,
   options: any = null
-): SurveyQuestionEditorTab {
+): SurveyElementEditorTabModel {
   var props = Survey.Serializer.getPropertiesByObj(obj);
   var jsonProperties = [];
   for (var i = 0; i < props.length; i++) {
@@ -28,7 +28,7 @@ function createSurveyQuestionEditorTab(
       jsonProperties.push(props[i]);
     }
   }
-  return new SurveyQuestionEditorTab(obj, jsonProperties, "", options);
+  return new SurveyElementEditorTabModel(obj, jsonProperties, "", options);
 }
 
 QUnit.test("Create correct question editor property tab ", function(assert) {
@@ -77,7 +77,7 @@ QUnit.test("Question Editor apply/reset/onChanged", function(assert) {
   editor.onChanged = function() {
     changeCounter++;
   };
-  var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>editor.koTabs()[0];
   assert.equal(
     generalTab.editorProperties[0].editor.koValue(),
     "q1",
@@ -134,7 +134,7 @@ QUnit.test("Question Editor name is not changed", function(assert) {
 QUnit.test("Question Editor preserve title on tab changed", function(assert) {
   var dropdownQuestion = new Survey.QuestionDropdown("q1");
   var editor = new SurveyQuestionEditor(dropdownQuestion);
-  var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>editor.koTabs()[0];
   generalTab.editorProperties[1].editor.koValue("new title");
   editor.koActiveTab("choices");
   editor.koActiveTab("general");
@@ -208,7 +208,7 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function(assert) {
     "logic",
     "The name of the second tab is 'logic'"
   );
-  var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>editor.koTabs()[0];
   var hasFound = false;
   var props = generalTab.editorProperties;
   for (var i = 0; i < props.length; i++) {
@@ -372,7 +372,7 @@ QUnit.test("Dynamically generated tabs", function(assert) {
   var question = { getType: () => "@testClass" };
   var editor = new SurveyQuestionEditor(<any>question);
 
-  var generalTab = <SurveyQuestionEditorTab>editor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>editor.koTabs()[0];
   assert.equal(editor.koTabs().length, 3, "There are three tabs");
   assert.equal(generalTab.title, "General", "General Title");
   assert.equal(editor.koTabs()[1].title, "Title 1", "Tab 2 Title");

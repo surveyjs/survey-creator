@@ -149,7 +149,7 @@ export class SurveyElementEditorContentModel {
       this.className
     );
     var tabs = this.buildTabs();
-    this.koTabs = ko.observableArray<SurveyQuestionEditorTab>(tabs);
+    this.koTabs = ko.observableArray<SurveyElementEditorTabModel>(tabs);
     this.assignPropertiesToEditors();
     var self = this;
     this.koActiveTab.subscribe(function(val) {
@@ -195,7 +195,7 @@ export class SurveyElementEditorContentModel {
     }
     return null;
   }
-  public getTabByName(tabName: string): SurveyQuestionEditorTab {
+  public getTabByName(tabName: string): SurveyElementEditorTabModel {
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
       if (tabs[i].name == tabName) return tabs[i];
@@ -212,7 +212,7 @@ export class SurveyElementEditorContentModel {
     if (!this.koTabs) return res;
     var tabs = this.koTabs();
     for (var i = 0; i < tabs.length; i++) {
-      var tab = <SurveyQuestionEditorTab>tabs[i];
+      var tab = <SurveyElementEditorTabModel>tabs[i];
       var props = tab.editorProperties;
       for (var j = 0; j < props.length; j++) {
         res.push(props[j]);
@@ -220,7 +220,7 @@ export class SurveyElementEditorContentModel {
     }
     return res;
   }
-  private buildTabs(): Array<SurveyQuestionEditorTab> {
+  private buildTabs(): Array<SurveyElementEditorTabModel> {
     var tabs = [];
     this.addPropertiesTabs(tabs);
     return tabs;
@@ -252,7 +252,7 @@ export class SurveyElementEditorContentModel {
       return this.getPropertyEditorByName(propertyName);
     };
   }
-  protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
+  protected addPropertiesTabs(tabs: Array<SurveyElementEditorTabModel>) {
     var tabItems = this.properties.getTabs();
     for (var i = 0; i < tabItems.length; i++) {
       var tabItem = tabItems[i];
@@ -265,8 +265,8 @@ export class SurveyElementEditorContentModel {
   protected createNewTab(
     tabItem: SurveyQuestionEditorTabDefinition,
     properties: Array<Survey.JsonObjectProperty>
-  ): SurveyQuestionEditorTab {
-    var propertyTab = new SurveyQuestionEditorTab(
+  ): SurveyElementEditorTabModel {
+    var propertyTab = new SurveyElementEditorTabModel(
       this.editableObj,
       properties,
       tabItem.name,
@@ -313,7 +313,7 @@ export class SurveyElementEditorOldTableContentModel extends SurveyElementEditor
     this.koProperties(this.getObjectProperties());
     this.koTab().expand();
   }
-  protected addPropertiesTabs(tabs: Array<SurveyQuestionEditorTab>) {
+  protected addPropertiesTabs(tabs: Array<SurveyElementEditorTabModel>) {
     var properties = this.getProperties();
     var tabItem = new SurveyQuestionEditorTabDefinition();
     tabs.push(this.createNewTab(tabItem, properties));
@@ -362,7 +362,7 @@ export class SurveyElementEditorOldTableContentModel extends SurveyElementEditor
   }
 }
 
-export class SurveyQuestionEditorTab {
+export class SurveyElementEditorTabModel {
   private editorPropertiesValue: Array<SurveyObjectProperty> = [];
   private titleValue: string;
   private htmlElements = null;
@@ -837,7 +837,7 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
   public onOkClick: any;
   public onApplyClick: any;
   public onResetClick: any;
-  koTabs: ko.ObservableArray<SurveyQuestionEditorTab>;
+  koTabs: ko.ObservableArray<SurveyElementEditorTabModel>;
   koActiveTab = ko.observable<string>();
   koTitle = ko.observable<string>();
   koShowApplyButton: any;

@@ -58,7 +58,7 @@ export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEdito
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTab,
+  SurveyElementEditorTabModel,
 } from "../questionEditors/questionEditor";
 
 export { QuestionToolbox } from "../components/toolbox";
