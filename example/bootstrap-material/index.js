@@ -17,7 +17,7 @@ if (!window["%hammerhead%"]) {
   ] = bodyContainerBackgroundColor;
 
   var defaultThemeColorsEditor =
-    SurveyEditor.StylesManager.ThemeColors["default"];
+    SurveyCreator.StylesManager.ThemeColors["default"];
   defaultThemeColorsEditor["$primary-color"] = mainColor;
   defaultThemeColorsEditor["$secondary-color"] = mainColor;
   defaultThemeColorsEditor["$primary-hover-color"] = mainHoverColor;
