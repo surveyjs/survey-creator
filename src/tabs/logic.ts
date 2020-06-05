@@ -9,7 +9,7 @@ import {
   ExpressionRemoveVariable,
 } from "../expressionToDisplayText";
 import {
-  SurveyElementEditorContent,
+  SurveyElementEditorContentModel,
   SurveyQuestionEditor,
 } from "../questionEditors/questionEditor";
 import { SurveyCreator } from "../editor";
@@ -67,7 +67,7 @@ export class SurveyLogicType {
     return this.logicType.propertyName;
   }
   public get templateName(): string {
-    if (this.isTrigger) return "questioneditor-content";
+    if (this.isTrigger) return "object-editor-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
       : "elementselector";
@@ -195,9 +195,9 @@ export class SurveyLogicType {
     }
   }
   private createTriggerTemplateObject(element: Survey.Base) {
-    var res: SurveyElementEditorContent = null;
+    var res: SurveyElementEditorContentModel = null;
     if (this.isNewTrigger(element)) {
-      res = new SurveyElementEditorContent(element, "", this.options);
+      res = new SurveyElementEditorContentModel(element, "", this.options);
     } else {
       res = new SurveyQuestionEditor(element, "", this.options);
     }
@@ -1215,7 +1215,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.options = this.options;
     this.expressionEditor.koSetupText(this.expressionSetupText);
   }
-  dispose() { }
+  dispose() {}
 }
 
 ko.components.register("survey-logic", {

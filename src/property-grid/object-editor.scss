@@ -7,25 +7,6 @@
   input[type="checkbox"].form-control {
     width: 25px;
   }
-  .table.svd_properties_grid {
-    .form-group {
-      margin-bottom: 0;
-    }
-    > tbody > tr > td {
-      border: none;
-      padding: 0;
-      line-height: 3.25em;
-      background-color: transparent;
-      vertical-align: middle;
-      &:nth-child(1) {
-        font-weight: 600;
-        user-select: none;
-      }
-      .modal-content {
-        line-height: initial;
-      }
-    }
-  }
 
   survey-widget {
     display: block;

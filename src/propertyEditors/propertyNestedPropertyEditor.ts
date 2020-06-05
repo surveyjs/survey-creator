@@ -7,7 +7,7 @@ import {
 } from "./propertyEditorBase";
 import {
   SurveyQuestionEditor,
-  SurveyElementEditorContent,
+  SurveyElementEditorContentModel,
   SurveyQuestionProperties,
 } from "../questionEditors/questionEditor";
 import { editorLocalization } from "../editorLocalization";
@@ -162,7 +162,7 @@ export class SurveyNestedPropertyEditorItem {
     SurveyNestedPropertyEditorEditorCell
   >();
   koCanDeleteItem = ko.observable(true);
-  private itemEditorValue: SurveyElementEditorContent;
+  private itemEditorValue: SurveyElementEditorContentModel;
   constructor(
     public obj: any,
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
@@ -209,7 +209,7 @@ export class SurveyNestedPropertyEditorItem {
     this.itemEditorValue = null;
     this.updateValues();
   }
-  public get itemEditor(): SurveyElementEditorContent {
+  public get itemEditor(): SurveyElementEditorContentModel {
     if (!this.itemEditorValue)
       this.itemEditorValue = this.createSurveyQuestionEditor();
     return this.itemEditorValue;
@@ -231,7 +231,7 @@ export class SurveyNestedPropertyEditorItem {
     }
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyElementEditorContent(
+    return new SurveyElementEditorContentModel(
       this.obj,
       this.getClassName(),
       this.options,

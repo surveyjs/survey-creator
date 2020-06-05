@@ -3,8 +3,8 @@ import {
   SurveyQuestionProperties,
   SurveyQuestionEditor,
   SurveyQuestionEditorTab,
-  SurveyElementEditorContent,
-  SurveyElementEditorContentNoCategries,
+  SurveyElementEditorContentModel,
+  SurveyElementEditorOldTableContentModel,
 } from "../src/questionEditors/questionEditor";
 import { SurveyQuestionEditorDefinition } from "../src/questionEditors/questionEditorDefinition";
 import { SurveyCreator } from "../src/editor";
@@ -652,7 +652,7 @@ QUnit.test("Question editor: depended property, choices", function(assert) {
     },
   });
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyElementEditorContentNoCategries(question);
+  var editor = new SurveyElementEditorOldTableContentModel(question);
   var entityEditor = editor.getPropertyEditorByName("targetEntity").editor;
   var targetEditor = editor.getPropertyEditorByName("targetField").editor;
 
@@ -691,7 +691,7 @@ QUnit.test(
       "Custom Prop Name in Editor"
     );
     var question = new Survey.QuestionText("q1");
-    var editor = new SurveyElementEditorContentNoCategries(question);
+    var editor = new SurveyElementEditorOldTableContentModel(question);
     var customProp = editor.getPropertyEditorByName("customProp");
     assert.equal(
       customProp.displayName,
@@ -716,7 +716,7 @@ QUnit.test(
     Survey.Serializer.findProperty("question", "customProp1").displayName =
       "Custom Prop Title 1";
     var question = new Survey.QuestionText("q1");
-    var editor = new SurveyElementEditorContentNoCategries(question);
+    var editor = new SurveyElementEditorOldTableContentModel(question);
     var customProp = editor.getPropertyEditorByName("customProp1");
     assert.equal(
       customProp.displayName,
@@ -1024,7 +1024,7 @@ QUnit.test("Add property into new cagetory", function(assert) {
   });
   var creator = new SurveyCreator();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
-  var editor = new SurveyElementEditorContent(question);
+  var editor = new SurveyElementEditorContentModel(question);
   var newTab = editor.getTabByName("newcategory");
   assert.ok(newTab, "newcategory is here");
   assert.ok(
@@ -1053,7 +1053,7 @@ QUnit.test("Add property into new cagetory", function(assert) {
 QUnit.test("Modal property, showBefore call on demand", function(assert) {
   var options = new EditorOptionsTests();
   var question = new Survey.QuestionText("q1");
-  var editor = new SurveyElementEditorContent(question, "", options);
+  var editor = new SurveyElementEditorContentModel(question, "", options);
   var defaulValueEditor = <SurveyPropertyDefaultValueEditor>(
     editor.getPropertyEditorByName("defaultValue").editor
   );
@@ -1074,7 +1074,7 @@ QUnit.test(
   function(assert) {
     var options = new EditorOptionsTests();
     var question = new Survey.QuestionText("q1");
-    var editor = new SurveyElementEditorContentNoCategries(
+    var editor = new SurveyElementEditorOldTableContentModel(
       question,
       "",
       options

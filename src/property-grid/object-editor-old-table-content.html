@@ -1,0 +1,17 @@
+<table class="table svd_table-nowrap svd_properties_grid">
+  <tbody data-bind="foreach: koProperties">
+    <tr data-bind="visible: koVisible, attr: { 'data-property': name }">
+      <td width="50%">
+        <span
+          data-bind="text: displayName, attr: {title: title || displayName}"
+        ></span>
+      </td>
+      <td class="svd-light-text-color form-group" width="50%">
+        <div data-bind="event: { keydown: $data.editor.keyDownHandler }">
+          <!-- ko template: { name: 'propertyeditor-' + editorTypeTemplate, data: $data.editor, afterRender: $parent.koTab().koAfterRender } -->
+          <!-- /ko -->
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
