@@ -8,6 +8,15 @@
     margin-left: -0.5px;
     font-size: 1.17em;
 
+    .svd_object_selector {
+      .svd-toolbar-dropdown {
+        display: block;
+      }
+      .svd_custom_select {
+        width: 100%;
+      }
+    }
+
     .modal {
       font-size: 0.857em;
       color: $primary-text-color;

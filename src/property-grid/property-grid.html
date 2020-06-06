@@ -2,9 +2,10 @@
   <div class="svd-vertical-container">
     <div class="svd-vertical-container__row">
       <div class="svd-vertical-container__cell">
-        <svd-object-selector
-          params="koObjects: koObjects, koSelectedObject: koSelectedObject"
-        ></svd-object-selector>
+        <svd-dropdown
+          class="svd_object_selector svd-light-border-color"
+          params="item: { items: koObjects, action: koSelectedObject, title: '', optionsValue: null }"
+        ></svd-dropdown>
       </div>
     </div>
     <div class="svd-vertical-container__row">
