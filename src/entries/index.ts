@@ -149,4 +149,5 @@ export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneS
 export { PropertyGrid } from "../property-grid/property-grid";
 export { ObjectEditor } from "../property-grid/object-editor";
 export { ObjectEditorContent } from "../property-grid/object-editor-content";
+export { ObjectEditorTab } from "../property-grid/object-editor-tab";
 export { ObjectEditorOldTableContent } from "../property-grid/object-editor-old-table-content";
