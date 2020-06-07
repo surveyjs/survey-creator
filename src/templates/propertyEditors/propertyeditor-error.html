@@ -1,7 +1,3 @@
 <script type="text/html" id="propertyeditor-error">
-  <div class="alert alert-danger" role="alert" data-bind="visible:koDisplayError">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only" data-bind="text:$data.getLocString('ed.propertyEditorError')"></span>
-      <span data-bind="text:koErrorText"></span>
-  </div>
+  <svd-property-editor-error params="model:$data"></svd-property-editor-error>
 </script>
