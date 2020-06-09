@@ -3,14 +3,14 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { editorLocalization } from "../editorLocalization";
-import { focusFirstControl } from "../utils/utils";
+import { focusFirstControl, getFirstNonTextElement } from "../utils/utils";
 import RModal from "rmodal";
 import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
   private static customWidgetName = "modalEditorCustomWidget";
-  constructor(public json: any) {}
+  constructor(public json: any) { }
   public afterRender(editor: SurveyPropertyModalEditor, el: HTMLElement) {
     if (this.json && this.json.afterRender) {
       if (!el.id) {
@@ -77,12 +77,12 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.koTitleCaption(
         editorLocalization
           .getString("pe.editProperty")
-          ["format"](
-            editorLocalization.getPropertyName(
-              this.property.name,
-              this.property.displayName
-            )
+        ["format"](
+          editorLocalization.getPropertyName(
+            this.property.name,
+            this.property.displayName
           )
+        )
       );
     }
     this.modalName =
@@ -93,7 +93,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.koShowApplyButton = ko.observable(true);
     this.koIsShowingModal = ko.observable(false);
 
-    self.onHideModal = function() {};
+    self.onHideModal = function() { };
     self.onApplyClick = function() {
       self.apply();
     };
@@ -214,7 +214,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.editorType
     );
     if (!!customWidget) {
-      var el = this.GetFirstNonTextElement(elements);
+      var el = getFirstNonTextElement(elements);
       var tEl = elements[0];
       if (tEl.nodeName == "#text") tEl.data = "";
       tEl = elements[elements.length - 1];
@@ -222,14 +222,6 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       customWidget.afterRender(this, el);
     }
     focusFirstControl(elements);
-  }
-  private GetFirstNonTextElement(elements: any) {
-    if (!elements || !elements.length) return;
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].nodeName != "#text" && elements[i].nodeName != "#comment")
-        return elements[i];
-    }
-    return null;
   }
 }
 

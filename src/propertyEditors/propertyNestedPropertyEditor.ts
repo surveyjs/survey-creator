@@ -144,7 +144,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       this.object
     );
   }
-  protected onListDetailViewChanged() {}
+  protected onListDetailViewChanged() { }
 }
 
 export class SurveyNestedPropertyEditorItem {
@@ -186,7 +186,7 @@ export class SurveyNestedPropertyEditorItem {
       }
       this.koCanDeleteItem(
         !this.options ||
-          this.options.onCanDeleteItemCallback(this.object, this.obj)
+        this.options.onCanDeleteItemCallback(this.object, this.obj)
       );
     });
   }
@@ -238,17 +238,23 @@ export class SurveyNestedPropertyEditorItem {
       true
     );
   }
+  focus() {
+    setTimeout(() => {
+      var firstCell = this.cells[0];
+      firstCell && firstCell.editor.focus();
+    }, 10);
+  }
 }
 
 export class SurveyNestedPropertyEditorColumn {
-  constructor(public property: Survey.JsonObjectProperty) {}
+  constructor(public property: Survey.JsonObjectProperty) { }
   public get text(): string {
     var text = editorLocalization.hasString("pel." + this.property.name)
       ? editorLocalization.getString("pel." + this.property.name)
       : editorLocalization.getPropertyNameInEditor(
-          this.property.name,
-          this.property.displayName
-        );
+        this.property.name,
+        this.property.displayName
+      );
     return text ? text : this.property.name;
   }
 }

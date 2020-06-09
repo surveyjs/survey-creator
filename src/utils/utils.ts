@@ -91,6 +91,16 @@ export function focusFirstControl(renderedElements: HTMLElement[]) {
   }
 }
 
+export function getFirstNonTextElement(elements: any) {
+  if (!elements || !elements.length) return;
+  for (var i = 0; i < elements.length; i++) {
+    if (elements[i].nodeName != "#text" && elements[i].nodeName != "#comment")
+      return elements[i];
+  }
+  return null;
+}
+
+
 ko.bindingHandlers["trueclick"] = {
   init: function(element, valueAccessor, allBindingsAccessor) {
     element.onclick = () => true;
