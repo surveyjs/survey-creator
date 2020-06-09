@@ -1,11 +1,13 @@
 <script type="text/html" id="elementselector">
-      <!-- ko template: {name: 'propertyeditor-error', data: $data} --><!-- /ko -->
-      <div class="form-control svd_custom_select">
-      <select onmousewheel="return false;" data-bind="if: true, value: koValue, optionsCaption: optionsCaption, valueAllowUnset: true, hasFocus: koHasFocus">
-        <option value="" data-bind="text: optionsCaption"></option>
-        <!-- ko foreach: koElements -->
-        <option data-bind="attr: { disabled: koDisabled, value: name }, text:text"></option>
-        <!-- /ko -->
-      </select>
-  </div>
+<!-- ko template: {name: 'propertyeditor-error', data: $data} -->
+<!-- /ko -->
+<div class="form-control svd_custom_select">
+  <select onmousewheel="return false;"
+    data-bind="if: true, value: koValue, optionsCaption: optionsCaption, valueAllowUnset: true, hasFocus: koHasFocus, attr: { 'aria-label': optionsCaption }">
+    <option value="" data-bind="text: optionsCaption"></option>
+    <!-- ko foreach: koElements -->
+    <option data-bind="attr: { disabled: koDisabled, value: name }, text:text"></option>
+    <!-- /ko -->
+  </select>
+</div>
 </script>

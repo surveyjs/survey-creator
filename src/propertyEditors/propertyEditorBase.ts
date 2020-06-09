@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "./editableObject";
+import { getFirstNonTextElement } from '../utils/utils';
 
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -116,8 +117,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
-  public setup() {}
-  public beforeShow() {}
+  public setup() { }
+  public beforeShow() { }
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
@@ -338,7 +339,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.performApply();
     return true;
   }
-  protected performApply() {}
+  protected performApply() { }
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
     return "";
@@ -359,7 +360,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.optionsValue = value;
     this.onOptionsChanged();
   }
-  protected onOptionsChanged() {}
+  protected onOptionsChanged() { }
   public setObject(value: any) {
     if (this.options) {
       var editorOptions = this.createEditorOptions();
@@ -374,8 +375,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected createEditorOptions(): any {
     return {};
   }
-  protected onSetEditorOptions(editorOptions: any) {}
-  protected onValueChanged() {}
+  protected onSetEditorOptions(editorOptions: any) { }
+  protected onValueChanged() { }
   protected getCorrectedValue(value: any): any {
     if (!this.property) return value;
     if (!this.isValueEmpty(this.property.minValue)) {
@@ -463,5 +464,20 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       );
     }
     return true;
+  }
+  private element = undefined;
+  koAfterRender = (elements: HTMLElement[], context: any) => {
+    this.element = getFirstNonTextElement(elements);
+    if (!!this.element) {
+      ko.utils.domNodeDisposal.addDisposeCallback(this.element, () => {
+        this.element = undefined;
+      });
+    }
+  }
+  focus() {
+    if (this.element && typeof this.element.focus === "function") {
+      // var focusable = this.element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      this.element.focus();
+    }
   }
 }
