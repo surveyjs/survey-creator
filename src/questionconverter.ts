@@ -35,13 +35,9 @@ export class QuestionConverter {
     convertToClass: string
   ): Survey.Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
-    var newQuestion = Survey.QuestionFactory.Instance.createQuestion(
-      convertToClass,
-      obj.name
-    );
-    var jsonObj = new Survey.JsonObject();
-    var json = jsonObj.toJsonObject(obj);
-    jsonObj.toObject(json, newQuestion);
+    var newQuestion = Survey.Serializer.createClass(convertToClass);
+    newQuestion.name = obj.name;
+    newQuestion.fromJSON(obj.toJSON());
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
     panel.removeElement(obj);
