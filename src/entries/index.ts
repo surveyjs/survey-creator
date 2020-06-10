@@ -155,4 +155,5 @@ export { ObjectEditorOldTableContent } from "../property-grid/object-editor-old-
 // property editors
 export { PropertyEditor } from "../property-editors/property-editor";
 export { PropertyEditorError } from "../property-editors/property-editor-error";
+export { PropertyEditorString } from "../property-editors/property-editor-string";
 export { PropertyEditorDropdown } from "../property-editors/property-editor-dropdown";
