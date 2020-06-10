@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.11](https://github.com/surveyjs/survey-creator/compare/v1.7.10...v1.7.11) (2020-06-10)
+
+
+### Bug Fixes
+
+* SelectBase has wrong ItemValue instances in markup after question converted to other type [#834](https://github.com/surveyjs/survey-creator/issues/834) ([86e024f](https://github.com/surveyjs/survey-creator/commit/86e024f0bf6faa74bc6a4d54bd7d36262e436ef1))
+
 ### [1.7.10](https://github.com/surveyjs/survey-creator/compare/v1.7.9...v1.7.10) (2020-06-03)
 
 ### [1.7.9](https://github.com/surveyjs/survey-creator/compare/v1.7.8...v1.7.9) (2020-05-27)
