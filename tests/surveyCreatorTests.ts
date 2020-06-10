@@ -477,9 +477,7 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
   creator.text = jsonText;
 
   creator.selectPage(creator.survey.pages[0]);
-  var pageClass = pagesEditor.getPageMenuIconClass(
-    creator.survey.pages[0]
-  );
+  var pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, creator.survey.pages[0]);
   assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
@@ -854,7 +852,9 @@ QUnit.test(
     editor.showObjectTitles = true;
     editor.text = JSON.stringify(getSurveyJson());
     assert.equal(
-      editor.pagesEditorModel.getDisplayText(editor.pagesEditorModel.pagesSelection()[0].value),
+      editor.pagesEditorModel.getDisplayText(
+        editor.pagesEditorModel.pagesSelection()[0].value
+      ),
       "Page 1",
       "page1 title"
     );
@@ -1351,4 +1351,22 @@ QUnit.test("showPageSelectorInToolbar property", function(assert) {
     true,
     "page selector is visible with showPageSelectorInToolbar property"
   );
+});
+
+QUnit.test("deleteElement function", function(assert) {
+  var editor = new SurveyCreator();
+  var page = editor.survey.pages[0];
+  var q1 = page.addNewQuestion("text", "q1");
+  var q2 = page.addNewQuestion("text", "q2");
+  var q3 = page.addNewQuestion("text", "q3");
+
+  editor.selectedElement = q2;
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "q3", "select next question after delete the previous one");
+
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "q1", "select prev question after delete the lastest one");
+
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "page1", "select page after delete the last question");
 });

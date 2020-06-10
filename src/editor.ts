@@ -2487,7 +2487,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function(selObj) { },
+          onClick: function(selObj) {},
         });
       }
 
@@ -2748,8 +2748,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
-        this.renderedElement.querySelector("#surveyquestioneditorwindow")
-      )
+          this.renderedElement.querySelector("#surveyquestioneditorwindow")
+        )
       : null;
     var isCanceled = true;
     this.questionEditorWindow.show(
@@ -2856,9 +2856,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (objType == ObjType.Page) {
       this.survey.removePage(obj);
     } else {
-      this.survey.currentPage.removeElement(obj);
-      this.survey.selectedElement = null;
-      this.selectedElement = this.survey.currentPage;
+      this.deleteElementFromCurrentPage(obj, objType);
     }
     this.setModified({
       type: "OBJECT_DELETED",
@@ -2867,6 +2865,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (objType == ObjType.Question) {
       this.updateConditionsOnRemove(obj.getValueName());
     }
+  }
+  private deleteElementFromCurrentPage(obj: Element, objType: ObjType): void {
+    const page = this.survey.currentPage;
+    let newSelectedElement = page;
+    if (objType == ObjType.Question && page.questions.length > 1) {
+      const objIndex = page.indexOf(obj);
+      newSelectedElement =
+        page.questions[objIndex + 1] || page.questions[objIndex - 1];
+    }
+    this.survey.currentPage.removeElement(obj);
+    this.survey.selectedElement = null;
+    this.selectedElement = newSelectedElement;
   }
   public getSurveyJSON(): any {
     if (this.koViewType() != "editor") {
@@ -2970,7 +2980,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
-  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void { }
+  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
 
   onGetErrorTextOnValidationCallback(
     propertyName: string,
