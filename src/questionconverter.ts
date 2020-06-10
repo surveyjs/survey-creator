@@ -46,6 +46,7 @@ export class QuestionConverter {
     var index = panel.elements.indexOf(obj);
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
+    newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
   }
 }
