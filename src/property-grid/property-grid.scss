@@ -1,21 +1,25 @@
 @import "../colors.scss";
 
 .svd_container {
+  .svd_object_selector {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    padding-right: 0;
+    .svd-toolbar-dropdown {
+      width: 100%;
+      .svd_custom_select {
+        width: 100%;
+      }
+    }
+  }
+
   .svd_properties {
     height: 100%;
     border: none;
     padding: 0;
     margin-left: -0.5px;
     font-size: 1.17em;
-
-    .svd_object_selector {
-      .svd-toolbar-dropdown {
-        display: block;
-      }
-      .svd_custom_select {
-        width: 100%;
-      }
-    }
 
     .modal {
       font-size: 0.857em;
