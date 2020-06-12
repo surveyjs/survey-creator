@@ -158,3 +158,4 @@ export { PropertyEditorError } from "../property-editors/property-editor-error";
 export { PropertyEditorString } from "../property-editors/property-editor-string";
 export { PropertyEditorDropdown } from "../property-editors/property-editor-dropdown";
 export { PropertyEditorBoolean } from "../property-editors/property-editor-boolean";
+export { PropertyEditorSwitch } from "../property-editors/property-editor-switch";
