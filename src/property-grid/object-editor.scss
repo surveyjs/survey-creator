@@ -1,2 +1,31 @@
 .svd_object_editor {
+  padding: 1.4em;
+
+  .form-control {
+    border-radius: 0;
+  }
+  input[type="checkbox"].form-control {
+    width: 25px;
+  }
+
+  survey-widget {
+    display: block;
+    margin-bottom: 1em;
+
+    .sv_main .sv_custom_header {
+      background: transparent;
+    }
+
+    .sv_row {
+      min-width: auto;
+    }
+    .sv_main .sv_container .sv_body .sv_row .sv_q {
+      min-width: auto;
+    }
+
+    .svd-survey-nopadding {
+      padding: 0;
+      margin: 0;
+    }
+  }
 }

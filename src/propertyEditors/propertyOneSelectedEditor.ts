@@ -1,10 +1,12 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyPropertyItemsEditor } from "./propertyItemsEditor";
-import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
+import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 
 export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
-  public selectedObjectEditor = ko.observable<SurveyElementEditorContent>(null);
+  public selectedObjectEditor = ko.observable<SurveyElementEditorContentModel>(
+    null
+  );
   public koSelected = ko.observable(null);
   public koChangeCounter = ko.observable(0);
   public koAvailableClasses: any;
@@ -66,16 +68,16 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     this.koAvailableClasses(this.getAvailableClasses());
     this.selectNewItem(false);
   }
-  private createSelectedObjEditor(item: any): SurveyElementEditorContent {
+  private createSelectedObjEditor(item: any): SurveyElementEditorContentModel {
     if (!item) return null;
-    var editor = new SurveyElementEditorContent(item, null, this.options);
+    var editor = new SurveyElementEditorContentModel(item, null, this.options);
     editor.onPropertyChanged = (prop: any) => {
       this.koChangeCounter(this.koChangeCounter() + 1);
     };
     this.onCreateEditor(editor);
     return editor;
   }
-  protected onCreateEditor(editor: SurveyElementEditorContent) {}
+  protected onCreateEditor(editor: SurveyElementEditorContentModel) {}
   protected onItemDeleted(obj: any, index: number) {
     if (index >= this.originalValue.length) {
       index = this.originalValue.length - 1;

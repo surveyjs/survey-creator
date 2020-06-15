@@ -646,7 +646,7 @@ export class Translation implements ITranslationLocales {
     var self = this;
     parse(file, {
       complete: function (results, file) {
-        self.importFromNestedArray(results.data);
+        self.importFromNestedArray(<string[][]>results.data);
       },
     });
   }

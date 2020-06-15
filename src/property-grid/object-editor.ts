@@ -4,25 +4,28 @@ import "./object-editor.scss";
 const templateHtml = require("./object-editor.html");
 
 import {
-  SurveyElementPropertyGrid,
-  SurveyElementEditorContent,
+  PropertyGridObjectEditorModel,
+  SurveyElementEditorContentModel,
 } from "../questionEditors/questionEditor";
 
 export class ObjectEditor {
   constructor(
-    public hasCategories: boolean,
-    public koElementEditorContent: ko.Observable<SurveyElementEditorContent>
+    public koIsOldTableAppearance: ko.Observable<boolean>,
+    public koElementEditor: ko.Observable<
+      SurveyElementEditorContentModel
+    >,
+    public koHasObject: ko.Observable<boolean>
   ) {}
 }
 
 ko.components.register("svd-object-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const surveyElementPropertyGrid: SurveyElementPropertyGrid =
-        params.surveyElementPropertyGrid;
+      const model: PropertyGridObjectEditorModel = params.model;
       return new ObjectEditor(
-        surveyElementPropertyGrid.hasCategories,
-        surveyElementPropertyGrid.koElementEditor
+        model.koIsOldTableAppearance,
+        model.koElementEditor,
+        model.koHasObject
       );
     },
   },

@@ -7,7 +7,7 @@ import {
 } from "./propertyEditorBase";
 import {
   SurveyQuestionEditor,
-  SurveyElementEditorContent,
+  SurveyElementEditorContentModel,
   SurveyQuestionProperties,
 } from "../questionEditors/questionEditor";
 import { editorLocalization } from "../editorLocalization";
@@ -144,7 +144,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       this.object
     );
   }
-  protected onListDetailViewChanged() {}
+  protected onListDetailViewChanged() { }
 }
 
 export class SurveyNestedPropertyEditorItem {
@@ -162,7 +162,7 @@ export class SurveyNestedPropertyEditorItem {
     SurveyNestedPropertyEditorEditorCell
   >();
   koCanDeleteItem = ko.observable(true);
-  private itemEditorValue: SurveyElementEditorContent;
+  private itemEditorValue: SurveyElementEditorContentModel;
   constructor(
     public obj: any,
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
@@ -186,7 +186,7 @@ export class SurveyNestedPropertyEditorItem {
       }
       this.koCanDeleteItem(
         !this.options ||
-          this.options.onCanDeleteItemCallback(this.object, this.obj)
+        this.options.onCanDeleteItemCallback(this.object, this.obj)
       );
     });
   }
@@ -209,7 +209,7 @@ export class SurveyNestedPropertyEditorItem {
     this.itemEditorValue = null;
     this.updateValues();
   }
-  public get itemEditor(): SurveyElementEditorContent {
+  public get itemEditor(): SurveyElementEditorContentModel {
     if (!this.itemEditorValue)
       this.itemEditorValue = this.createSurveyQuestionEditor();
     return this.itemEditorValue;
@@ -231,24 +231,30 @@ export class SurveyNestedPropertyEditorItem {
     }
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyElementEditorContent(
+    return new SurveyElementEditorContentModel(
       this.obj,
       this.getClassName(),
       this.options,
       true
     );
   }
+  focus() {
+    setTimeout(() => {
+      var firstCell = this.cells[0];
+      firstCell && firstCell.editor.focus();
+    }, 10);
+  }
 }
 
 export class SurveyNestedPropertyEditorColumn {
-  constructor(public property: Survey.JsonObjectProperty) {}
+  constructor(public property: Survey.JsonObjectProperty) { }
   public get text(): string {
     var text = editorLocalization.hasString("pel." + this.property.name)
       ? editorLocalization.getString("pel." + this.property.name)
       : editorLocalization.getPropertyNameInEditor(
-          this.property.name,
-          this.property.displayName
-        );
+        this.property.name,
+        this.property.displayName
+      );
     return text ? text : this.property.name;
   }
 }

@@ -14,17 +14,12 @@
   </li>
 </ul>
 <!-- ko foreach: koTabs -->
-<div
-  data-bind="if: $parent.koActiveTab() === name"
-  style="margin-top:5px"
->
+<div data-bind="if: $parent.koActiveTab() === name" style="margin-top:5px">
   <!-- ko template: { name: htmlTemplate, data: templateObject, afterRender: $data.koAfterRender } -->
   <!-- /ko -->
 </div>
 <!-- /ko  -->
 <!-- /ko  -->
 <!-- ko ifnot: useTabsInElementEditor -->
-<svd-accordion
-  params="tabs: koTabs, template: 'svd-editor-tab-template'"
-></svd-accordion>
+<svd-accordion role="tablist" params="tabs: koTabs"></svd-accordion>
 <!-- /ko  -->

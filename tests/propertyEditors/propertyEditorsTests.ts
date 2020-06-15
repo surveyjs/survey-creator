@@ -3,8 +3,8 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "../../src/propertyEditors/propertyEditorBase";
 import {
   SurveyQuestionEditor,
-  SurveyElementEditorContent,
-  SurveyQuestionEditorTab,
+  SurveyElementEditorContentModel,
+  SurveyElementEditorTabModel,
   SurveyQuestionProperties,
 } from "../../src/questionEditors/questionEditor";
 import { SurveyPropertyItemValuesEditor } from "../../src/propertyEditors/propertyItemValuesEditor";
@@ -1227,7 +1227,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
   var itemViewModel = columnsEditor.createItemViewModel(question.columns[1]);
   itemViewModel.obj.cellType = "dropdown";
   columnsEditor.koEditItem(itemViewModel);
-  var colDetailEditor = <SurveyElementEditorContent>(
+  var colDetailEditor = <SurveyElementEditorContentModel>(
     columnsEditor.koEditItem().itemEditor
   );
   assert.notEqual(
@@ -1240,7 +1240,7 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns use question editor", function(
     "matrixdropdowncolumn",
     "itemEditor edit the second item"
   );
-  var generalTab = <SurveyQuestionEditorTab>colDetailEditor.koTabs()[0];
+  var generalTab = <SurveyElementEditorTabModel>colDetailEditor.koTabs()[0];
   var props = generalTab.editorProperties;
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
@@ -1272,7 +1272,7 @@ QUnit.test(
     );
     itemViewModel.obj.cellType = "dropdown";
     columnsEditor.onEditItemClick(itemViewModel);
-    var colDetailEditor = <SurveyElementEditorContent>(
+    var colDetailEditor = <SurveyElementEditorContentModel>(
       columnsEditor.koEditItem().itemEditor
     );
     var titleEditor = colDetailEditor.getPropertyEditorByName("title").editor;
@@ -1303,7 +1303,7 @@ QUnit.test(
       itemValueEditor.createItemViewModel(question.choices[0])
     );
     itemValueEditor.onEditItemClick(itemViewModel);
-    var colDetailEditor = <SurveyElementEditorContent>(
+    var colDetailEditor = <SurveyElementEditorContentModel>(
       itemValueEditor.koEditItem().itemEditor
     );
     assert.ok(
@@ -1346,7 +1346,7 @@ QUnit.test(
     );
     itemViewModel.obj.cellType = "dropdown";
     columnsEditor.onEditItemClick(itemViewModel);
-    var colDetailEditor = <SurveyElementEditorContent>(
+    var colDetailEditor = <SurveyElementEditorContentModel>(
       columnsEditor.koEditItem().itemEditor
     );
     assert.ok(colDetailEditor.getPropertyEditorByName("choices"));
@@ -1354,7 +1354,7 @@ QUnit.test(
 
     itemViewModel.obj.cellType = "default";
     columnsEditor.onEditItemClick(itemViewModel);
-    colDetailEditor = <SurveyElementEditorContent>(
+    colDetailEditor = <SurveyElementEditorContentModel>(
       columnsEditor.koEditItem().itemEditor
     );
     assert.notOk(colDetailEditor.getPropertyEditorByName("choices"));
@@ -1476,7 +1476,7 @@ QUnit.test("Triggers property editor", function(assert) {
   propEditor.onAddClick({ value: "skiptrigger" });
   assert.equal(survey.triggers.length, 2, "There are two triggers now");
 
-  var trigerEditor = <SurveyElementEditorContent>(
+  var trigerEditor = <SurveyElementEditorContentModel>(
     propEditor.selectedObjectEditor()
   );
   trigerEditor
@@ -1499,7 +1499,9 @@ QUnit.test("Triggers property editor", function(assert) {
   propEditor.onDeleteClick();
   assert.equal(survey.triggers.length, 2, "There are again two triggers");
   propEditor.onAddClick({ value: "completetrigger" });
-  trigerEditor = <SurveyElementEditorContent>propEditor.selectedObjectEditor();
+  trigerEditor = <SurveyElementEditorContentModel>(
+    propEditor.selectedObjectEditor()
+  );
   assert.equal(survey.triggers[1].expression, "{question2} notempty");
   assert.equal(survey.triggers.length, 3, "There are 3 triggers");
   assert.equal(
@@ -1537,7 +1539,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
   propEditor.beforeShow();
   propEditor.object = survey;
-  var trigerEditor = <SurveyElementEditorContent>(
+  var trigerEditor = <SurveyElementEditorContentModel>(
     propEditor.selectedObjectEditor()
   );
   var setToNameEditor = trigerEditor.getPropertyEditorByName("setToName")
@@ -2046,7 +2048,7 @@ QUnit.test("SurveyPropertyCalculatedValueEditor", function(assert) {
     "Use the string editor"
   );
   propEditor.onEditItemClick(itemViewModel);
-  var itemEditor = <SurveyElementEditorContent>(
+  var itemEditor = <SurveyElementEditorContentModel>(
     propEditor.koEditItem().itemEditor
   );
   assert.ok(itemEditor, "Item editor is created");
@@ -2095,10 +2097,10 @@ QUnit.test(
 );
 
 QUnit.test(
-  "SurveyElementEditorContent do not allow empty value for a unique property",
+  "SurveyElementEditorContentModel do not allow empty value for a unique property",
   function(assert) {
     var question = new Survey.QuestionText("q1");
-    var propEditor = new SurveyElementEditorContent(question);
+    var propEditor = new SurveyElementEditorContentModel(question);
     var edName = propEditor.getPropertyEditorByName("name");
     edName.editor.koValue("");
     assert.equal(question.name, "q1", "The value is not changed");

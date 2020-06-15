@@ -87,7 +87,7 @@
           <span style="padding-left:20px" data-bind="text:action.koLogicType().description"></span>
           <!-- /ko -->
           <span class="svd-logic-tab__item-header-icon" style="padding-left: 20px"
-            data-bind="key2click, clickNoFocus: $parent.koRemoveAction, attr: {title: $data.deleteActionText }">
+            data-bind="key2click, clickNoFocus: $parent.koRemoveAction, attr: { title: $data.deleteActionText, tabindex: 0 }">
             <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
           </span>
         </div>

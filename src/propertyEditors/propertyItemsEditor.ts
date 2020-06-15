@@ -86,7 +86,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     this.deleteViewItemIndex(obj);
     this._notifyPropertyValueChanged();
   }
-  protected onItemDeleted(obj: any, index: number) {}
+  protected onItemDeleted(obj: any, index: number) { }
   public hasError(): boolean {
     for (var i = 0; i < this.viewItems.length; i++) {
       var item = this.viewItems[i];
@@ -106,10 +106,20 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     return res;
   }
   private deleteViewItemIndex(obj: any) {
+    let index = -1;
     for (var i = 0; i < this.viewItems.length; i++) {
       if (this.viewItems[i].obj == obj) {
-        this.viewItems.splice(i, 1);
-        return;
+        index = i;
+        break;
+      }
+    }
+    if (index !== -1) {
+      this.viewItems.splice(index, 1);
+      if (this.viewItems.length > 0) {
+        if (index === this.viewItems.length) {
+          index--;
+        }
+        this.viewItems[i] && this.viewItems[i].focus && this.viewItems[i].focus();
       }
     }
   }

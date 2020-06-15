@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../src/editor";
-import { PagesEditor } from "../src/components/pages-editor";
+import { PagesEditorViewModel } from "../src/components/pages-editor";
 import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
 import { QuestionToolbox } from "../src/components/toolbox";
@@ -411,8 +411,8 @@ QUnit.test("onModified options", function(assert) {
   assert.equal(opts.newValue.getType(), "page", "New page");
   var page = opts.newValue;
 
-  editor.selectedElementPropertyGrid.selectedObject = question;
-  var titleEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+  editor.propertyGridObjectEditorModel.selectedObject = question;
+  var titleEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
     "title"
   ).editor;
   titleEditor.koValue("Some text");
@@ -444,10 +444,10 @@ QUnit.test("onCustomPropertySort event", function(assert) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
   });
-  editor.selectedElementPropertyGrid.selectedObject = editor.survey.pages[0];
+  editor.propertyGridObjectEditorModel.selectedObject = editor.survey.pages[0];
   assert.equal(
     (<any>(
-      editor.selectedElementPropertyGrid.koElementEditor()
+      editor.propertyGridObjectEditorModel.koElementEditor()
     )).koProperties()[0].name,
     "name",
     "The name property is now the first"
@@ -470,16 +470,14 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
     ],
   });
   var creator = new SurveyCreator();
-  var pagesEditor = new PagesEditor(
+  var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
   creator.text = jsonText;
 
   creator.selectPage(creator.survey.pages[0]);
-  var pageClass = pagesEditor.model.getPageMenuIconClass(
-    creator.survey.pages[0]
-  );
+  var pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, creator.survey.pages[0]);
   assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
@@ -489,17 +487,17 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
     creator.koSelectedObject().value,
     creator.survey.pages[0].elements[0]
   );
-  pageClass = pagesEditor.model.getPageMenuIconClass(creator.survey.pages[0]);
+  pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gear");
   assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
 
   creator.onQuestionEditorChanged(<any>creator.survey.pages[0].elements[0]);
-  pageClass = pagesEditor.model.getPageMenuIconClass(creator.survey.pages[0]);
+  pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gear");
   assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
 
   creator.selectPage(creator.survey.pages[0]);
-  pageClass = pagesEditor.model.getPageMenuIconClass(creator.survey.pages[0]);
+  pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, creator.survey.pages[0]);
   assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
@@ -525,7 +523,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
     ],
   });
   var creator = new SurveyCreator();
-  var pagesEditor = new PagesEditor(
+  var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -535,7 +533,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
 
   creator.selectPage(currentPage);
 
-  var pageClass = pagesEditor.model.getPageMenuIconClass(currentPage);
+  var pageClass = pagesEditor.getPageMenuIconClass(currentPage);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, currentPage);
   assert.equal(pagesEditor.model.selectedPage, currentPage);
@@ -545,7 +543,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
     creator.koSelectedObject().value,
     creator.survey.pages[1].elements[0]
   );
-  pageClass = pagesEditor.model.getPageMenuIconClass(currentPage);
+  pageClass = pagesEditor.getPageMenuIconClass(currentPage);
   assert.equal(pageClass, "icon-gear");
   assert.equal(pagesEditor.model.selectedPage, currentPage);
 });
@@ -562,7 +560,7 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
   var creator = new SurveyCreator();
   creator.text = jsonText;
 
-  var pagesEditor = new PagesEditor(
+  var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -580,7 +578,7 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
 
 QUnit.test("pagesEditor.readOnly", function(assert) {
   var creator = new SurveyCreator();
-  var pagesEditor = new PagesEditor(
+  var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -591,7 +589,7 @@ QUnit.test("pagesEditor.readOnly", function(assert) {
   );
 
   creator.readOnly = true;
-  pagesEditor = new PagesEditor(
+  pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -602,7 +600,7 @@ QUnit.test("pagesEditor.readOnly", function(assert) {
   );
 
   creator.readOnly = false;
-  pagesEditor = new PagesEditor(
+  pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -619,7 +617,7 @@ QUnit.test("pagesEditor.readOnly", function(assert) {
   );
   var creator = new SurveyCreator(null, { allowModifyPages: false });
   assert.equal(creator.allowModifyPages, false, "The parameter set correctly");
-  pagesEditor = new PagesEditor(
+  pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -651,7 +649,7 @@ QUnit.test("PagesEditor change question's page", function(assert) {
   });
   var creator = new SurveyCreator();
   creator.text = jsonText;
-  var pagesEditor = new PagesEditor(
+  var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
     document.createElement("div")
   );
@@ -675,8 +673,8 @@ QUnit.test(
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
     var question = editor.survey.currentPage.addNewQuestion("text", "question");
-    editor.selectedElementPropertyGrid.selectedObject = question;
-    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    editor.propertyGridObjectEditorModel.selectedObject = question;
+    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
       "name"
     ).editor;
     namePropertyEditor.koValue("question2");
@@ -712,7 +710,7 @@ QUnit.test("Validate Selected Element Errors", function(assert) {
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
   creator.validateSelectedElement();
-  var titlePropertyEditor = creator.selectedElementPropertyGrid.getPropertyEditorByName(
+  var titlePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
     "title"
   ).editor;
   assert.equal(
@@ -739,8 +737,8 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
   var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
   var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
-  editor.selectedElementPropertyGrid.selectedObject = q1;
-  var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+  editor.propertyGridObjectEditorModel.selectedObject = q1;
+  var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
     "name"
   ).editor;
   namePropertyEditor.koValue("myUpdatedQuestion1");
@@ -760,11 +758,11 @@ QUnit.test(
     var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
     var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
     q2.visibleIf = "{question1} = 1";
-    editor.selectedElementPropertyGrid.selectedObject = q1;
-    var namePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    editor.propertyGridObjectEditorModel.selectedObject = q1;
+    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
       "name"
     ).editor;
-    var valuePropertyEditor = editor.selectedElementPropertyGrid.getPropertyEditorByName(
+    var valuePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
       "valueName"
     ).editor;
     valuePropertyEditor.koValue("valueName1");
@@ -824,7 +822,7 @@ QUnit.test(
   function(assert) {
     var editor = new SurveyCreator();
     editor.text = JSON.stringify(getSurveyJson());
-    var pagesEditor = new PagesEditor(
+    var pagesEditor = new PagesEditorViewModel(
       editor.pagesEditorModel,
       editor.survey.pages[0]
     );
@@ -853,17 +851,20 @@ QUnit.test(
     var editor = new SurveyCreator();
     editor.showObjectTitles = true;
     editor.text = JSON.stringify(getSurveyJson());
-    var pagesEditor = new PagesEditor(
-      editor.pagesEditorModel,
-      editor.survey.pages[0]
-    );
     assert.equal(
-      pagesEditor.model.getDisplayText(pagesEditor.model.pagesSelection()[0]),
+      editor.pagesEditorModel.getDisplayText(
+        editor.pagesEditorModel.pagesSelection()[0].value
+      ),
       "Page 1",
       "page1 title"
     );
     assert.equal(
-      pagesEditor.model.getDisplayText(editor.survey.pages[0]),
+      editor.pagesEditorModel.pagesSelection()[0].text,
+      "Page 1",
+      "page1 title"
+    );
+    assert.equal(
+      editor.pagesEditorModel.getDisplayText(editor.survey.pages[0]),
       "Page 1",
       "page1 title"
     );
@@ -929,7 +930,7 @@ QUnit.test("Change elemenent page", function(assert) {
     "question1 is selected"
   );
   assert.equal(editor.survey.currentPage.name, "page1", "page1 is current");
-  var objEditor = editor.selectedElementPropertyGrid.koElementEditor();
+  var objEditor = editor.propertyGridObjectEditorModel.koElementEditor();
   var propertyEditor = objEditor.getPropertyEditorByName("page");
   propertyEditor.editor.koValue("page2");
   assert.equal(
@@ -1350,4 +1351,22 @@ QUnit.test("showPageSelectorInToolbar property", function(assert) {
     true,
     "page selector is visible with showPageSelectorInToolbar property"
   );
+});
+
+QUnit.test("deleteElement function", function(assert) {
+  var editor = new SurveyCreator();
+  var page = editor.survey.pages[0];
+  var q1 = page.addNewQuestion("text", "q1");
+  var q2 = page.addNewQuestion("text", "q2");
+  var q3 = page.addNewQuestion("text", "q3");
+
+  editor.selectedElement = q2;
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "q3", "select next question after delete the previous one");
+
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "q1", "select prev question after delete the lastest one");
+
+  editor.deleteElement(editor.selectedElement);
+  assert.equal(editor.selectedElement.name, "page1", "select page after delete the last question");
 });

@@ -2,9 +2,10 @@
   <div class="svd-vertical-container">
     <div class="svd-vertical-container__row">
       <div class="svd-vertical-container__cell">
-        <svd-object-selector
-          params="koObjects: koObjects, koSelectedObject: koSelectedObject"
-        ></svd-object-selector>
+        <svd-dropdown
+          class="svd_object_selector svd-light-border-color"
+          params="item: { items: koObjects, action: koSelectedObject, title: '', optionsValue: null }"
+        ></svd-dropdown>
       </div>
     </div>
     <div class="svd-vertical-container__row">
@@ -13,13 +14,9 @@
           <div
             class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
           >
-            <div class="svd_object_editor">
-              <!-- ko if: selectedElementPropertyGrid.koHasObject -->
-              <svd-object-editor
-                params="surveyElementPropertyGrid: selectedElementPropertyGrid"
-              ></svd-object-editor>
-              <!-- /ko -->
-            </div>
+            <svd-object-editor
+              params="model: propertyGridObjectEditorModel"
+            ></svd-object-editor>
           </div>
         </div>
       </div>

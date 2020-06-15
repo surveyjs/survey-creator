@@ -93,81 +93,81 @@ var frenchTranslation = {
     underline: "Souligné",
     fpAddQuestion: "Ajouter question...",
     completedHtmlOnConditionItemText: "Afficher si :",
-  },
-  lg: {
-    //Logic tab strings
-    page_visibilityName: "Visibilité de la page",
-    panel_visibilityName: "Visibilité du panneau",
-    panel_enableName: "Activer/désactiver le panneau",
-    question_visibilityName: "Visibilité de la question",
-    question_enableName: "Activer/désactiver la question",
-    question_requireName: "Question facultative requise",
-    trigger_completeName: "Compléter le questionnaire",
-    trigger_setvalueName: "Définir la valeur de la question",
-    trigger_copyvalueName: "Copier la valeur de la question",
-    trigger_skipName: "Passer à la question",
-    trigger_runExpressionName: "Exécuter une expression personnalisée",
-    completedHtmlOnConditionName:
-      "Personnaliser le texte de la page de remerciements",
+    lg: {
+      //Logic tab strings
+      page_visibilityName: "Visibilité de la page",
+      panel_visibilityName: "Visibilité du panneau",
+      panel_enableName: "Activer/désactiver le panneau",
+      question_visibilityName: "Visibilité de la question",
+      question_enableName: "Activer/désactiver la question",
+      question_requireName: "Question facultative requise",
+      trigger_completeName: "Compléter le questionnaire",
+      trigger_setvalueName: "Définir la valeur de la question",
+      trigger_copyvalueName: "Copier la valeur de la question",
+      trigger_skipName: "Passer à la question",
+      trigger_runExpressionName: "Exécuter une expression personnalisée",
+      completedHtmlOnConditionName:
+        "Personnaliser le texte de la page de remerciements",
 
-    page_visibilityDescription:
-      "Rendre la page visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
-    panel_visibilityDescription:
-      "Rendre le panneau visible lorsque l'expression logique renvoie 'vrai'. Sinon, le rendre invisible.",
-    panel_enableDescription:
-      "Activez le panneau et tous les éléments qu'il contient lorsque l'expression logique renvoie 'vrai'. Sinon, le laisser désactivé.",
-    question_visibilityDescription:
-      "Rendez la question visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
-    question_enableDescription:
-      "Activez la question lorsque l'expression logique renvoie 'vrai'. Sinon, la laisser désactivée.",
-    question_requireDescription:
-      "La question devient requise lorsque l'expression logique renvoie 'vrai'.",
-    trigger_completeDescription:
-      "Lorsque l'expression logique renvoie 'vrai', l'enquête est alors terminée et un utilisateur voit la page de remerciements.",
-    trigger_setvalueDescription:
-      "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
-    trigger_copyvalueDescription:
-      "Lorsque les valeurs de question, qui sont utilisées dans l'expression logique, sont modifiées et que l'expression logique renvoie 'vrai', la valeur d'une question sélectionnée est copiée dans une autre question sélectionnée.",
-    trigger_skipDescription:
-      "Lorsque l'expression logique renvoie 'vrai', l'enquête passe à la question sélectionnée.",
-    trigger_runExpressionDescription:
-      "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat d'expression dans la question sélectionnée.",
-    completedHtmlOnConditionDescription:
-      "Si l'expression logique renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
+      page_visibilityDescription:
+        "Rendre la page visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
+      panel_visibilityDescription:
+        "Rendre le panneau visible lorsque l'expression logique renvoie 'vrai'. Sinon, le rendre invisible.",
+      panel_enableDescription:
+        "Activez le panneau et tous les éléments qu'il contient lorsque l'expression logique renvoie 'vrai'. Sinon, le laisser désactivé.",
+      question_visibilityDescription:
+        "Rendez la question visible lorsque l'expression logique renvoie 'vrai'. Sinon, la rendre invisible.",
+      question_enableDescription:
+        "Activez la question lorsque l'expression logique renvoie 'vrai'. Sinon, la laisser désactivée.",
+      question_requireDescription:
+        "La question devient requise lorsque l'expression logique renvoie 'vrai'.",
+      trigger_completeDescription:
+        "Lorsque l'expression logique renvoie 'vrai', l'enquête est alors terminée et un utilisateur voit la page de remerciements.",
+      trigger_setvalueDescription:
+        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
+      trigger_copyvalueDescription:
+        "Lorsque les valeurs de question, qui sont utilisées dans l'expression logique, sont modifiées et que l'expression logique renvoie 'vrai', la valeur d'une question sélectionnée est copiée dans une autre question sélectionnée.",
+      trigger_skipDescription:
+        "Lorsque l'expression logique renvoie 'vrai', l'enquête passe à la question sélectionnée.",
+      trigger_runExpressionDescription:
+        "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat d'expression dans la question sélectionnée.",
+      completedHtmlOnConditionDescription:
+        "Si l'expression logique renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
 
-    itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':", //{0} - the expression
-    page_visibilityText: "Rendre la page {0} visible", //{0} page name
-    panel_visibilityText: "Rendre le panneau {0} visible", //{0} panel name
-    panel_enableText: "Activer le panneau {0}", //{0} panel name
-    question_visibilityText: "Rendre la question {0} visible", //{0} question name
-    question_enableText: "Activer la question {0}", //{0} question name
-    question_requireText: "Rendre la question {0} obligatoire", //{0} question name
-    trigger_completeText: "Le questionnaire devient complété.",
-    trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
-    trigger_copyvalueText:
-      "Copier dans la question: {0} valeur de la question {1}", //{0} and {1} question names
-    trigger_skipText: "Dans le questionnaire, passez à la question {0}", //{0} question name
-    trigger_runExpressionText1: "Exécuter l'expression: '{0}'", //{0} the expression
-    trigger_runExpressionText2:
-      " et définissez son résultat dans la question: {0}", //{0} question name
-    completedHtmlOnConditionText:
-      "Affichez un texte personnalisé pour la page de remerciements.",
+      itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':", //{0} - the expression
+      page_visibilityText: "Rendre la page {0} visible", //{0} page name
+      panel_visibilityText: "Rendre le panneau {0} visible", //{0} panel name
+      panel_enableText: "Activer le panneau {0}", //{0} panel name
+      question_visibilityText: "Rendre la question {0} visible", //{0} question name
+      question_enableText: "Activer la question {0}", //{0} question name
+      question_requireText: "Rendre la question {0} obligatoire", //{0} question name
+      trigger_completeText: "Le questionnaire devient complété.",
+      trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
+      trigger_copyvalueText:
+        "Copier dans la question: {0} valeur de la question {1}", //{0} and {1} question names
+      trigger_skipText: "Dans le questionnaire, passez à la question {0}", //{0} question name
+      trigger_runExpressionText1: "Exécuter l'expression: '{0}'", //{0} the expression
+      trigger_runExpressionText2:
+        " et définissez son résultat dans la question: {0}", //{0} question name
+      completedHtmlOnConditionText:
+        "Affichez un texte personnalisé pour la page de remerciements.",
 
-    conditions: "Condition(s)",
-    actions: "Action(s)",
-    expressionEditorTitle: "Définissez le(s) condition(s)",
-    actionsEditorTitle: "Définissez le(s) action(s)",
+      conditions: "Condition(s)",
+      actions: "Action(s)",
+      expressionEditorTitle: "Définissez le(s) condition(s)",
+      actionsEditorTitle: "Définissez le(s) action(s)",
 
-    deleteAction: "Détruire l'action",
-    addNewAction: "Ajouter une nouvelle action",
-    selectedActionCaption: "Sélectionnez une action à ajouter …",
+      deleteAction: "Détruire l'action",
+      addNewAction: "Ajouter une nouvelle action",
+      selectedActionCaption: "Sélectionnez une action à ajouter …",
 
-    expressionInvalid:
-      "L'expression logique est vide ou non valide. Corrigez s'il-vous-plaît.",
-    noActionError: "Veuillez ajouter au moins une action.",
-    actionInvalid: "Veuillez corriger les problèmes dans vos actions.",
-    expressionSetup: "",
-    actionsSetup: "",
+      expressionInvalid:
+        "L'expression logique est vide ou non valide. Corrigez s'il-vous-plaît.",
+      noActionError: "Veuillez ajouter au moins une action.",
+      actionInvalid: "Veuillez corriger les problèmes dans vos actions.",
+      expressionSetup: "",
+      actionsSetup: "",
+    },
   },
   //Property names in table headers
   pel: {
@@ -177,6 +177,7 @@ var frenchTranslation = {
   pe: {
     apply: "Appliquer",
     ok: "OK",
+    save: "Enregistrer",
     cancel: "Annuler",
     reset: "Réinitialiser",
     close: "Fermer",
@@ -188,6 +189,10 @@ var frenchTranslation = {
     addNone: "Aucun",
     removeAll: "Tout supprimer",
     edit: "Éditer",
+    back: "Retourner sans enregistrer",
+    backTooltip: "Retourner sans enregistrer",
+    saveAndBack: "Enregistrer et retourner",
+    saveAndBackTooltip: "Enregistrer et retourner",
     move: "Déplacer",
     empty: "<vide>",
     notEmpty: "<éditer la valeur>",

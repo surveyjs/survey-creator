@@ -58,13 +58,12 @@ export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEdito
 export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
-  SurveyQuestionEditorTab,
+  SurveyElementEditorTabModel,
 } from "../questionEditors/questionEditor";
 
 export { QuestionToolbox } from "../components/toolbox";
 export { SurveyObjectProperty } from "../objectProperty";
-export { PageSelector } from "../components/page-selector";
-export { PagesEditor } from "../components/pages-editor";
+export { PagesEditorViewModel } from "../components/pages-editor";
 export { Toolbar } from "../components/toolbar";
 export { SurveyTextWorker } from "../textWorker";
 export { ObjType, SurveyHelper } from "../surveyHelper";
@@ -148,6 +147,12 @@ export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneS
 
 // property grid
 export { PropertyGrid } from "../property-grid/property-grid";
-export { ObjectSelector } from "../property-grid/object-selector";
 export { ObjectEditor } from "../property-grid/object-editor";
-export { QuestionEditorContent } from "../property-grid/question-editor-content";
+export { ObjectEditorContent } from "../property-grid/object-editor-content";
+export { ObjectEditorTab } from "../property-grid/object-editor-tab";
+export { ObjectEditorOldTableContent } from "../property-grid/object-editor-old-table-content";
+
+// property editors
+export { PropertyEditor } from "../property-editors/property-editor";
+export { PropertyEditorError } from "../property-editors/property-editor-error";
+export { PropertyEditorDropdown } from "../property-editors/property-editor-dropdown";

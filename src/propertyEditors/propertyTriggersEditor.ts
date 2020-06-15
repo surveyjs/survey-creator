@@ -5,7 +5,7 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
-import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
+import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 import { SurveyElementSelector } from "./surveyElementSelector";
 import { EditableObject } from "./editableObject";
 
@@ -33,12 +33,12 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
       if (name == "visibletrigger") continue;
       res.push({
         value: name,
-        text: editorLocalization.getTriggerName(name)
+        text: editorLocalization.getTriggerName(name),
       });
     }
     return res;
   }
-  protected onCreateEditor(editor: SurveyElementEditorContent) {
+  protected onCreateEditor(editor: SurveyElementEditorContentModel) {
     var expressionEditor = editor.getPropertyEditorByName("expression");
     if (!!expressionEditor && expressionEditor.editor) {
       expressionEditor.editor["isEditorShowing"] = true;

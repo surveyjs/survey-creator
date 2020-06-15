@@ -9,10 +9,13 @@ export interface IAccordionItemData {
   title: string | any;
   onExpand: () => void;
   doOnExpanded(): any;
+  htmlTemplate: string;
+  templateObject: any;
+  koAfterRender?: () => void;
 }
 
 export class AccordionItemModel {
-  constructor(public data: IAccordionItemData, public template: string) {
+  constructor(public data: IAccordionItemData) {
     var self = this;
     data.onExpand = function() {
       self.collapsed(false);
@@ -41,9 +44,7 @@ export class AccordionModel {
     this.tabs = ko.computed<AccordionItemModel>(() => {
       var res = ko
         .unwrap(params.tabs)
-        .map(
-          tabData => new AccordionItemModel(tabData, ko.unwrap(params.template))
-        );
+        .map((tabData) => new AccordionItemModel(tabData));
       if (res.length > 0) {
         res[0].collapsed(false);
       }
@@ -59,5 +60,5 @@ export class AccordionModel {
 
 ko.components.register("svd-accordion", {
   viewModel: AccordionModel,
-  template: template
+  template: template,
 });

@@ -25,6 +25,7 @@ export class SurveyLiveTester {
   koShowInvisibleElements = ko.observable(false);
   public onGetObjectDisplayName: (obj: Survey.Base) => string = null;
   koShowPagesInTestSurveyTab = ko.observable(true);
+  showSimulator = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
   koShowInvisibleElementsInTestSurveyTab = ko.observable(true);
 
@@ -38,10 +39,10 @@ export class SurveyLiveTester {
   constructor(private surveyProvider: any) {
     var self = this;
     this.survey = this.surveyProvider.createSurvey({}, "test");
-    this.selectTestClick = function () {
+    this.selectTestClick = function() {
       self.testAgain();
     };
-    this.selectPageClick = function (pageItem) {
+    this.selectPageClick = function(pageItem) {
       if (self.survey) {
         if (self.survey.state == "starting") {
           self.survey.start();
@@ -49,20 +50,20 @@ export class SurveyLiveTester {
         self.survey.currentPage = pageItem.page;
       }
     };
-    this.koActivePage.subscribe(function (newValue) {
+    this.koActivePage.subscribe(function(newValue) {
       if (!!newValue) {
         self.survey.currentPage = newValue;
       }
     });
-    this.koShowInvisibleElements.subscribe(function (newValue) {
+    this.koShowInvisibleElements.subscribe(function(newValue) {
       self.survey.showInvisibleElements = newValue;
     });
-    this.setPageDisable = function (option, item) {
+    this.setPageDisable = function(option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
-    this.koActiveLanguage.subscribe(function (newValue) {
+    this.koActiveLanguage.subscribe(function(newValue) {
       if (self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
@@ -123,7 +124,7 @@ export class SurveyLiveTester {
       self.koIsRunning(false);
     });
     if (!!this.survey["onNavigateToUrl"]) {
-      this.survey["onNavigateToUrl"].add(function (sender, options) {
+      this.survey["onNavigateToUrl"].add(function(sender, options) {
         var url = options.url;
         options.url = "";
         if (!!url) {
@@ -171,6 +172,9 @@ export class SurveyLiveTester {
           this.survey.state == "running" && page === this.survey.currentPage
         ),
       });
+    }
+    if (!!options && options.showSimulatorInTestSurveyTab != undefined) {
+      this.showSimulator(options.showSimulatorInTestSurveyTab);
     }
     if (!!options && options.showPagesInTestSurveyTab != undefined) {
       this.koShowPagesInTestSurveyTab(options.showPagesInTestSurveyTab);
@@ -273,6 +277,7 @@ ko.components.register("survey-tester", {
             showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
             showDefaultLanguageInTestSurveyTab: creator.showDefaultLanguageInTestSurveyTab,
             showInvisibleElementsInTestSurveyTab: creator.showInvisibleElementsInTestSurveyTab,
+            showSimulatorInTestSurveyTab: creator.showSimulatorInTestSurveyTab
           };
           model.setJSON(creator.JSON);
           model.show(options);

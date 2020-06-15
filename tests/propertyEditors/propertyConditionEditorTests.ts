@@ -6,7 +6,7 @@ import {
 } from "../../src/propertyEditors/propertyConditionEditor";
 import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
 import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
-import { SurveyElementEditorContent } from "../../src/questionEditors/questionEditor";
+import { SurveyElementEditorContentModel } from "../../src/questionEditors/questionEditor";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
@@ -249,7 +249,10 @@ QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
   function(assert) {
     var survey = new Survey.SurveyModel({
-      questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+      questions: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2" },
+      ],
     });
     var question = survey.getQuestionByName("q1");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -472,7 +475,10 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
   }
   assert.deepEqual(
     res,
-    [{ name: "q2", text: "q2" }, { name: "q3", text: "q3" }],
+    [
+      { name: "q2", text: "q2" },
+      { name: "q3", text: "q3" },
+    ],
     "returns questions correctly"
   );
 });
@@ -629,7 +635,7 @@ QUnit.test(
     columnsEditor.beforeShow();
     var itemViewModel = columnsEditor.createItemViewModel(question.columns[0]);
     columnsEditor.onEditItemClick(itemViewModel);
-    var colDetailEditor = <SurveyElementEditorContent>(
+    var colDetailEditor = <SurveyElementEditorContentModel>(
       columnsEditor.koEditItem().itemEditor
     );
     var visEditor = <SurveyPropertyConditionEditor>(
@@ -824,7 +830,10 @@ QUnit.test(
 
 QUnit.test("SurveyPropertyConditionEditor, clearCondition", function(assert) {
   var survey = new Survey.Survey({
-    elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }],
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" },
+    ],
   });
   var question = survey.getQuestionByName("q2");
   var property = Survey.Serializer.findProperty("question", "visibleIf");

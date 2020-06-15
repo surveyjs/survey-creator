@@ -4,7 +4,7 @@ import { SurveyPropertyModalEditor } from "./propertyModalEditor";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
-import { SurveyElementEditorContent } from "../questionEditors/questionEditor";
+import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
   koContentEditor: any;
@@ -22,7 +22,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
   public beforeShowCore() {
     super.beforeShowCore();
     this.setTestQuestionProperties();
-    var contentEditor = new SurveyElementEditorContent(
+    var contentEditor = new SurveyElementEditorContentModel(
       this.originalValue,
       "",
       this.options
@@ -37,7 +37,7 @@ export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
     };
     this.koContentEditor(contentEditor);
   }
-  public get contentEditor(): SurveyElementEditorContent {
+  public get contentEditor(): SurveyElementEditorContentModel {
     return this.koContentEditor();
   }
   public getValueText(value: any): string {
