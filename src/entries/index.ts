@@ -160,3 +160,4 @@ export { PropertyEditorDropdown } from "../property-editors/dropdown";
 export { PropertyEditorBoolean } from "../property-editors/boolean";
 export { PropertyEditorSwitch } from "../property-editors/switch";
 export { PropertyEditorNumber } from "../property-editors/number";
+export { PropertyEditorModal } from "../property-editors/modal";
