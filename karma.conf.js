@@ -1,13 +1,13 @@
 ﻿var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpackConfigCreator = require("./webpack.config");
 var webpackConfig = webpackConfigCreator({ buildType: "dev" });
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var path = require('path');
 
-webpackConfig.module.rules.push({
+webpackConfig.module.rules.unshift({
   test: /entry\.html$/,
   use: [{
-    loader: path.resolve(__dirname, 'mock-loader.js')
+    loader: path.resolve(__dirname, 'tests/mock-loader.js')
   }]
 });
 
@@ -31,17 +31,19 @@ module.exports = function(config) {
     },
     browserNoActivityTimeout: 100000,
     webpack: {
+      mode: "development",
       module: webpackConfig.module,
       resolve: webpackConfig.resolve,
       plugins: [
+        new MiniCssExtractPlugin({
+          filename: "[name].css"
+        }),
         new webpack.SourceMapDevToolPlugin({
           filename: null, // if no value is provided the sourcemap is inlined
           test: /\.(ts|js)($|\?)/i // process .js and .ts files only
-        }),
-        new ExtractTextPlugin({
-          filename: "./package/surveyeditor.css"
         })
-      ]
+      ],
+      devtool: 'source-map'
     },
     reporters: ["progress", "dots", "junit"],
     browsers: ["ChromeHeadless"],
