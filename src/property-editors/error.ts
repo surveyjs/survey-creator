@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-error.scss";
+import "./error.scss";
 import { SurveyPropertyEditorBase } from "../propertyEditors/propertyEditorBase";
-const templateHtml = require("./property-editor-error.html");
+const templateHtml = require("./error.html");
 
 export class PropertyEditorError {
   constructor(

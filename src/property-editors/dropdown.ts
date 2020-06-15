@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-dropdown.scss";
+import "./dropdown.scss";
 import { SurveyDropdownPropertyEditor } from "../propertyEditors/propertyEditorFactory";
-const templateHtml = require("./property-editor-dropdown.html");
+const templateHtml = require("./dropdown.html");
 
 export class PropertyEditorDropdown {
   constructor(

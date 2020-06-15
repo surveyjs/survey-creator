@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-switch.scss";
+import "./switch.scss";
 import { SurveySwitchPropertyEditor } from "../propertyEditors/propertyEditorFactory";
-const templateHtml = require("./property-editor-switch.html");
+const templateHtml = require("./switch.html");
 
 export class PropertyEditorSwitch {
   constructor(

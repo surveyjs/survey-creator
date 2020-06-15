@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-string.scss";
+import "./string.scss";
 import { SurveyStringPropertyEditor } from "../propertyEditors/propertyEditorFactory";
-const templateHtml = require("./property-editor-string.html");
+const templateHtml = require("./string.html");
 
 export class PropertyEditorString {
   constructor(

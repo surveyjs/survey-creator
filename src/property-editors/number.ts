@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-number.scss";
+import "./number.scss";
 import { SurveyNumberPropertyEditor } from "../propertyEditors/propertyEditorFactory";
-const templateHtml = require("./property-editor-number.html");
+const templateHtml = require("./number.html");
 
 export class PropertyEditorNumber {
   constructor(

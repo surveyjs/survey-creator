@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 
-import "./property-editor-boolean.scss";
+import "./boolean.scss";
 import { SurveyBooleanPropertyEditor } from "../propertyEditors/propertyEditorFactory";
-const templateHtml = require("./property-editor-boolean.html");
+const templateHtml = require("./boolean.html");
 
 export class PropertyEditorBoolean {
   constructor(
