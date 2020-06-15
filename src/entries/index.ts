@@ -166,3 +166,4 @@ export { PropertyEditorText } from "../property-editors/text";
 export { PropertyEditorCondition } from "../property-editors/condition";
 export { PropertyEditorCells } from "../property-editors/cells";
 export { PropertyEditorExpression } from "../property-editors/expression";
+export { PropertyEditorHTML } from "../property-editors/html-pe";
