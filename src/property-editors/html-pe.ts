@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 
 import "./html-pe.scss";
-import { SurveyNumberPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 import { SurveyPropertyHtmlEditor } from "../propertyEditors/propertyModalEditor";
 const templateHtml = require("./html-pe.html");
 
