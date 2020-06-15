@@ -119,7 +119,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         if (index === this.viewItems.length) {
           index--;
         }
-        this.viewItems[i].focus && this.viewItems[i].focus();
+        this.viewItems[i] && this.viewItems[i].focus && this.viewItems[i].focus();
       }
     }
   }
