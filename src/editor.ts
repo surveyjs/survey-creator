@@ -1764,13 +1764,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   /**
-   * Add a new page into the editing survey.
+   * Add a new page into the editing survey. Returns the new created page instance
    */
-  public addPage = () => {
+  public addPage = (): Survey.Page => {
     var name = SurveyHelper.getNewPageName(this.survey.pages);
     var page = <Survey.Page>this.survey.addNewPage(name);
     this.addPageToUI(page);
     this.setModified({ type: "PAGE_ADDED", newValue: page });
+    return page;
   };
   public deletePage = () => {
     this.deleteCurrentObject();
