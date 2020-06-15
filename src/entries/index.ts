@@ -164,3 +164,4 @@ export { PropertyEditorModal } from "../property-editors/modal";
 export { PropertyEditorModalContent } from "../property-editors/modal-content";
 export { PropertyEditorText } from "../property-editors/text";
 export { PropertyEditorCondition } from "../property-editors/condition";
+export { PropertyEditorCells } from "../property-editors/cells";
