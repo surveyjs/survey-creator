@@ -9,7 +9,10 @@ export class PropertyEditorText {
     public koValue: any,
     public readOnly: boolean,
     public isDiplayNameVisible: boolean,
-    public displayName: string
+    public koMaxLength: any,
+    public displayName: string,
+    public onBlur: any,
+    public onFocus: any
   ) {}
 }
 
@@ -21,7 +24,10 @@ ko.components.register("svd-property-editor-text", {
         model.koValue,
         model.readOnly,
         model.isDiplayNameVisible,
-        model.displayName
+        model.koMaxLength,
+        model.displayName,
+        model.onBlur,
+        model.onFocus
       );
     },
   },
