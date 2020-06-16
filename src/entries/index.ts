@@ -170,3 +170,4 @@ export { PropertyEditorHTML } from "../property-editors/html-pe";
 export { PropertyEditorItemValues } from "../property-editors/item-values";
 export { PropertyEditorValue } from "../property-editors/default-value";
 export { PropertyEditorOneSelected } from "../property-editors/one-selected";
+export { PropertyEditorRestfull } from "../property-editors/restfull";
