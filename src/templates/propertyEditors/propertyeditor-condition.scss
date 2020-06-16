@@ -31,6 +31,7 @@
     width: auto;
     select:disabled {
       background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
     }
   }
 

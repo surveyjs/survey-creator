@@ -27,6 +27,7 @@
       &.toolbar-options {
         ul {
           border: 1px solid $dd-menu-border;
+          border-color: var(--dd-menu-border, $dd-menu-border);
           border-radius: 2px;
           padding: 0;
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);

@@ -25,6 +25,7 @@ $logic-space: 20px;
 
 .svd-logic-tab__rules-list__row {
   border-bottom: solid 1px $secondary-border-color;
+  border-bottom-color: var(--secondary-border-color, $secondary-border-color);
   th,
   td {
     padding: $logic-space / 2;
@@ -46,6 +47,7 @@ $logic-space: 20px;
 
 .svd-logic-tab__item {
   border: solid 1px $secondary-border-color;
+  border-color: var(--secondary-border-color, $secondary-border-color);
   padding: $logic-space;
   margin-bottom: $logic-space;
   // div:nth-child(2) {
@@ -116,6 +118,7 @@ $logic-space: 20px;
   }
   .svd-propertyeditor-condition {
     border: solid 1px $secondary-border-color;
+    border-color: var(--secondary-border-color, $secondary-border-color);
     padding: $logic-space;
   }
   .svd-expression-content {
@@ -129,6 +132,7 @@ $logic-space: 20px;
   }
   .btn-link {
     border: solid 1px $secondary-border-color;
+    border-color: var(--secondary-border-color, $secondary-border-color);
   }
 
   .alert-danger {
@@ -145,5 +149,6 @@ $logic-space: 20px;
 
   .svd-danger-icon .svd-svg-icon {
     fill: $error-color;
+    fill: var(--error-color, $error-color);
   }
 }

@@ -15,8 +15,10 @@
     position: relative;
     cursor: pointer;
     background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
     height: $switch-size;
     border: 1px solid $dd-menu-border;
+    border-color: var(--dd-menu-border, $dd-menu-border);
     border-radius: 100px;
     transition: background-color 0.25s ease-out, border-color 0.25s ease-out;
   }
@@ -34,17 +36,23 @@
     height: 100%;
     width: 55%;
     background-color: $secondary-border-color;
+    background-color: var(--secondary-border-color, $secondary-border-color);
     border-radius: 50%;
     border: 3px solid $secondary-bg-color;
+    border-color: var(--secondary-bg-color, $secondary-bg-color);
   }
 
   input:checked + .sjs-cb-switch_control {
     background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
     border-color: $primary-color;
+    border-color: var(--primary-color, $primary-color);
 
     .sjs-cb-switch__button {
       background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
       border-color: $primary-color;
+      border-color: var(--primary-color, $primary-color);
       right: 0;
     }
   }
@@ -52,11 +60,15 @@
   input:disabled + .sjs-cb-switch_control {
     cursor: not-allowed;
     background-color: $secondary-border-color;
+    background-color: var(--secondary-border-color, $secondary-border-color);
     border-color: $dd-menu-border;
+    border-color: var(--dd-menu-border, $dd-menu-border);
 
     .sjs-cb-switch__button {
       background-color: $dd-menu-border;
+      background-color: var(--dd-menu-border, $dd-menu-border);
       border-color: $secondary-border-color;
+      border-color: var(--secondary-border-color, $secondary-border-color);
     }
   }
 }

@@ -6,6 +6,177 @@
 @import "./templates/propertyEditors/propertyeditor-switch";
 @import "./utils/vertical-container";
 
+.svd_container {
+  color: $primary-text-color;
+  color: var(--primary-text-color, $primary-text-color);
+
+  a {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+  }
+  a:hover {
+    color: $primary-hover-color;
+    color: var(--primary-hover-color, $primary-hover-color);
+  }
+
+  .btn-primary {
+    color: $inverted-text-color;
+    color: var(--inverted-text-color, $inverted-text-color);
+    background-color: $secondary-color;
+    background-color: var(--secondary-color, $secondary-color);
+    border-color: $secondary-color;
+    border-color: var(--secondary-color, $secondary-color);
+  }
+
+  .btn-link {
+    color: $primary-text-color;
+    color: var(--primary-text-color, $primary-text-color);
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+    border-color: $secondary-bg-color;
+    border-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  .sjs-cb-container:hover input ~ .checkmark {
+    background-color: $dd-menu-border;
+    background-color: var(--dd-menu-border, $dd-menu-border);
+  }
+
+  .sjs-cb-container:hover input:checked ~ .checkmark {
+    background-color: $primary-hover-color;
+    background-color: var(--primary-hover-color, $primary-hover-color);
+  }
+
+  .svd_selected_page {
+    border-bottom: 1px solid $primary-bg-color;
+    border-bottom-color: var(--primary-bg-color, $primary-bg-color);
+  }
+
+  .svd_toolbar li.active a {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+    color: $primary-bg-color;
+    color: var(--primary-bg-color, $primary-bg-color);
+  }
+
+  .svd_toolbar li a {
+    color: $dd-menu-link-color;
+    color: var(--dd-menu-link-color, $dd-menu-link-color);
+  }
+
+  .nav-tabs a {
+    color: $primary-text-color;
+    color: var(--primary-text-color, $primary-text-color);
+  }
+  .nav-tabs > li.active > a {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+  }
+  .nav-link {
+    background-color: transparent;
+    &:hover {
+      background-color: $secondary-border-color;
+      background-color: var(--secondary-border-color, $secondary-border-color);
+    }
+  }
+  .nav-item.active .nav-link {
+    background-color: $primary-bg-color;
+    background-color: var(--primary-bg-color, $primary-bg-color);
+  }
+
+  .editor-tabs > li > a {
+    &:hover,
+    &:focus {
+      background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
+      border-bottom: 1px solid $secondary-bg-color;
+      border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
+    }
+  }
+  .editor-tabs > li.active > a {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+    border: 1px solid $primary-border-color;
+    border-color: var(--primary-border-color, $primary-border-color);
+    border-bottom-color: $secondary-bg-color;
+    border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  .svd_custom_select:before {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+  }
+  .form-control:focus {
+    border-color: $primary-color;
+    border-color: var(--primary-color, $primary-color);
+  }
+  a:focus,
+  div:focus,
+  span:focus,
+  select:focus,
+  tr:focus,
+  input[type="checkbox"]:focus + span.checkmark {
+    outline-color: $primary-color;
+    outline-color: var(--primary-color, $primary-color);
+    outline-style: dotted;
+    outline-width: 0.5px;
+    outline-offset: -1px;
+  }
+  .svd_toolbar button:focus {
+    outline-color: $primary-text-color;
+  }
+
+  .svd-main-color {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+  }
+  .svd-main-background-color {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+  }
+  .svd-main-border-color {
+    border-color: $selection-border-color;
+    border-color: var(--selection-border-color, $selection-border-color);
+  }
+
+  .svd-light-text-color {
+    color: $secondary-text-color;
+    color: var(--secondary-text-color, $secondary-text-color);
+  }
+  .svd-light-background-color {
+    background-color: $primary-border-color;
+    background-color: var(--primary-border-color, $primary-border-color);
+  }
+  .svd-light-border-color {
+    border-color: $primary-border-color;
+    border-color: var(--primary-border-color, $primary-border-color);
+  }
+  .svd-dark-border-color {
+    border-color: $secondary-border-color;
+    border-color: var(--secondary-border-color, $secondary-border-color);
+  }
+  .svd-light-bg-color {
+    background-color: $primary-bg-color;
+    background-color: var(--primary-bg-color, $primary-bg-color);
+  }
+  .svd-dark-bg-color {
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  // .svd-svd-svg-icon-color {
+  //   color: #3d4d5d;
+  // }
+  // .svd-icon-gear-color {
+  //   color: #d0d0d0;
+  // }
+  // .svd-icon-status-color {
+  //   color: #9d9fa1;
+  // }
+}
+
 .svd_flowpanel[contenteditable="true"]:empty:before {
   content: attr(placeholder);
 }
@@ -93,6 +264,7 @@
       }
       ul {
         border: 1px solid $dd-menu-border;
+        border-color: var(--dd-menu-border, $dd-menu-border);
         border-radius: 2px;
         padding: 0;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -107,11 +279,13 @@
           a {
             padding: 3px 20px;
             color: $dd-menu-link-color;
+            color: var(--dd-menu-link-color, $dd-menu-link-color);
             width: 100%;
             font-weight: 400;
             display: block;
             &:hover {
               background-color: $secondary-bg-color;
+              background-color: var(--secondary-bg-color, $secondary-bg-color);
               text-decoration: none;
             }
           }
@@ -124,9 +298,11 @@
     .select2-selection--single {
       border-radius: 0;
       border: 1px solid $dd-menu-border;
+      border-color: var(--dd-menu-border, $dd-menu-border);
       height: 34px;
       .select2-selection__arrow {
         background: $primary-color;
+        background: var(--primary-color, $primary-color);
         height: 34px;
         top: 0px;
         right: 0px;
@@ -146,7 +322,7 @@
   a.nav-link {
     cursor: pointer;
   }
-  &::not(.sv_modern_css) {
+  &:not(.sv_modern_css) {
     .btn {
       border-radius: 2px;
       padding: 0.5em 1em;
@@ -419,6 +595,7 @@
     padding: 6px 12px;
     line-height: 1.5em;
     border: 1px solid $dd-menu-border;
+    border-color: var(--dd-menu-border, $dd-menu-border);
     display: block;
     width: 100%;
     height: 34px;
@@ -448,7 +625,9 @@
       line-height: 1;
       text-align: center;
       background-color: $primary-border-color;
+      background-color: var(--primary-border-color, $primary-border-color);
       border: 1px solid $secondary-border-color;
+      border-color: var(--secondary-border-color, $secondary-border-color);
       border-radius: 2px;
       width: 1%;
       white-space: nowrap;
@@ -496,6 +675,7 @@
     text-align: center;
     &.active {
       border: 1px solid $secondary-border-color;
+      border-color: var(--secondary-border-color, $secondary-border-color);
       border-bottom-color: transparent;
     }
   }

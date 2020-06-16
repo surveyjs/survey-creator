@@ -24,6 +24,7 @@
   .svda-focusable:focus + .svda-title-editor-start {
     visibility: visible;
     outline: 1px dotted $primary-color;
+    outline-color: var(--primary-color, $primary-color);
   }
 }
 
@@ -62,6 +63,7 @@
 }
 .svda-add-custom-item {
   color: $primary-color;
+  color: var(--primary-color, $primary-color);
   & > span {
     vertical-align: middle;
     display: inline-block;

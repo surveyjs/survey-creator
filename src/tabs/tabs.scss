@@ -21,9 +21,11 @@
       line-height: 40px;
       text-align: center;
       background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
       margin: 6px;
       a {
         color: $primary-text-color;
+        color: var(--primary-text-color, $primary-text-color);
         margin-top: 50px;
         font-size: 14px;
         text-decoration: underline;
@@ -44,6 +46,7 @@
         text-align: center;
         font-size: 22px;
         color: $primary-color;
+        color: var(--primary-color, $primary-color);
         pointer-events: none;
         max-width: 300px;
       }
@@ -62,5 +65,6 @@
 .svd_survey_designer {
   .svd-survey-placeholder-root {
     background-color: $primary-bg-color;
+    background-color: var(--primary-bg-color, $primary-bg-color);
   }
 }

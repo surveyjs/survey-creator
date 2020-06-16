@@ -15,6 +15,7 @@
 title-actions {
   display: inline-block;
   background-color: $secondary-bg-color;
+  background-color: var(--secondary-bg-color, $secondary-bg-color);
 
   .svda_action_separator.svda_action_separator {
     margin-right: 10px;

@@ -24,6 +24,7 @@
     .modal {
       font-size: 0.857em;
       color: $primary-text-color;
+      color: var(--primary-text-color, $primary-text-color);
     }
   }
 }
