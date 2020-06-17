@@ -4,11 +4,5 @@
 </script>
 
 <script type="text/html" id="propertyeditorcontent-value">
-  <form>
-      <div class="svd_wrap_elements">
-          <survey-widget params="survey: koSurvey"></survey-widget>
-      </div>
-  </form>
-  <button type="button" class="btn sv-btn btn-sm btn-danger" data-bind="click: resetValue, text: resetText()"></button>
-  <button type="button" class="btn sv-btn btn-sm" data-bind="click: refreshSurvey, text: refreshText()"></button>
+  <svd-property-editor-default-value params="model: $data"></svd-property-editor-default-value>
 </script>

@@ -99,6 +99,8 @@ import "../localization/traditional-chinese";
 import "../localization/turkish";
 import "../localization/norwegian";
 import "../localization/hungarian";
+import "../localization/russian";
+import "../localization/tajik";
 
 export {
   Translation,
@@ -154,5 +156,21 @@ export { ObjectEditorOldTableContent } from "../property-grid/object-editor-old-
 
 // property editors
 export { PropertyEditor } from "../property-editors/property-editor";
-export { PropertyEditorError } from "../property-editors/property-editor-error";
-export { PropertyEditorDropdown } from "../property-editors/property-editor-dropdown";
+export { PropertyEditorError } from "../property-editors/error";
+export { PropertyEditorString } from "../property-editors/string";
+export { PropertyEditorDropdown } from "../property-editors/dropdown";
+export { PropertyEditorBoolean } from "../property-editors/boolean";
+export { PropertyEditorSwitch } from "../property-editors/switch";
+export { PropertyEditorNumber } from "../property-editors/number";
+export { PropertyEditorModal } from "../property-editors/modal";
+export { PropertyEditorModalContent } from "../property-editors/modal-content";
+export { PropertyEditorText } from "../property-editors/text";
+export { PropertyEditorCondition } from "../property-editors/condition";
+export { PropertyEditorCells } from "../property-editors/cells";
+export { PropertyEditorExpression } from "../property-editors/expression";
+export { PropertyEditorHTML } from "../property-editors/html-pe";
+export { PropertyEditorItemValues } from "../property-editors/item-values";
+export { PropertyEditorValue } from "../property-editors/default-value";
+export { PropertyEditorOneSelected } from "../property-editors/one-selected";
+export { PropertyEditorRestfull } from "../property-editors/restfull";
+export { PropertyEditorMultipleValues } from "../property-editors/multiple-values";

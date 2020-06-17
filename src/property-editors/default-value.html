@@ -1,0 +1,9 @@
+<form>
+  <div class="svd_wrap_elements">
+    <survey-widget params="survey: koSurvey"></survey-widget>
+  </div>
+</form>
+<button type="button" class="btn sv-btn btn-sm btn-danger"
+  data-bind="click: function(){resetValue(model)}, text: resetText()"></button>
+<button type="button" class="btn sv-btn tn-sm"
+  data-bind="click: function(){refreshSurvey(model)}, text: refreshText()"></button>

@@ -3,7 +3,6 @@
 @import "./tabs/tabs";
 @import "properties";
 @import "bootstrap-material";
-@import "./templates/propertyEditors/propertyeditor-switch";
 @import "./utils/vertical-container";
 
 .svd_container {
@@ -746,7 +745,5 @@
     pointer-events: none;
   }
 }
-
-@import "templates/propertyEditors/propertyeditor-condition.scss";
 
 @import "./modern.scss";

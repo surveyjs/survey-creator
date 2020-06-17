@@ -10,7 +10,7 @@ import { EditableObject } from "./editableObject";
 export class SurveyPropertyModalEditorCustomWidget {
   private static customWidgetId = 1;
   private static customWidgetName = "modalEditorCustomWidget";
-  constructor(public json: any) { }
+  constructor(public json: any) {}
   public afterRender(editor: SurveyPropertyModalEditor, el: HTMLElement) {
     if (this.json && this.json.afterRender) {
       if (!el.id) {
@@ -77,12 +77,12 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       this.koTitleCaption(
         editorLocalization
           .getString("pe.editProperty")
-        ["format"](
-          editorLocalization.getPropertyName(
-            this.property.name,
-            this.property.displayName
+          ["format"](
+            editorLocalization.getPropertyName(
+              this.property.name,
+              this.property.displayName
+            )
           )
-        )
       );
     }
     this.modalName =
@@ -93,7 +93,7 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.koShowApplyButton = ko.observable(true);
     this.koIsShowingModal = ko.observable(false);
 
-    self.onHideModal = function() { };
+    self.onHideModal = function() {};
     self.onApplyClick = function() {
       self.apply();
     };
@@ -243,12 +243,12 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
     }
     return str;
   }
-  public onFocus() {
+  public onFocus = () => {
     this.options["undoRedoManager"].startTransaction(
       "textarea property editor transaction"
     );
-  }
-  public onBlur() {
+  };
+  public onBlur = () => {
     this.options["undoRedoManager"].stopTransaction();
   }
 }

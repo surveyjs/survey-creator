@@ -1,0 +1,17 @@
+<div class="propertyeditor-expression">
+  <!-- ko if: hasAceEditor -->
+  <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
+  <div id="expression-ace-editor" style="height: 150px; width: 100%;" data-bind="value:koValue, aceEditor: {questions: availableQuestions, question: $data.editingObject, editor: model}"></div>
+  <!-- /ko -->
+
+  <!-- ko if: !hasAceEditor -->
+  <textarea class="svd-dark-border-color" data-bind="value:koTextValue" rows="3" autofocus="autofocus"></textarea>
+  <!-- /ko -->
+
+  <!-- ko if: showHelpText -->
+      <span data-bind="text:$data.getLocString('pe.expressionHelp')" style="white-space:normal"></span>
+      <!-- <div>
+          <a data-bind="text:$data.getLocString('pe.showMore')" target="_blank" href="https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf"></a>
+      </div> -->
+  <!-- /ko -->
+</div>

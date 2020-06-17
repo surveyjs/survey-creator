@@ -1,0 +1,48 @@
+<div class="input-group form-group" data-bind="visible:!$data.isEditable">
+  <a tabindex="0" class="form-control"
+    data-bind="key2click, click: $data.onShowModal, attr: {'data-target' : modalNameTarget}">
+    <span data-bind="text: koText"></span>
+  </a>
+  <div class="input-group-addon">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"
+      data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $data.getLocString('pe.edit')"></span>
+  </div>
+</div>
+<div class="input-group form-group" data-bind="visible:$data.isEditable">
+  <input class="form-control svd_editor_control" type="text" data-bind="value: koValue, disable: readOnly" />
+  <div class="input-group-addon">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"
+      data-bind="click: $data.onShowModal, attr: {'data-target' : modalNameTarget}, text: $data.getLocString('pe.edit')"></span>
+  </div>
+</div>
+
+<div data-bind="attr: {id : modalName}" class="modal" role="dialog">
+  <!--ko if: koIsShowingModal -->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-bind="click: onResetClick">
+          &times;
+        </button>
+        <h4 class="modal-title" data-bind="text:$data.koTitleCaption"></h4>
+      </div>
+      <div class="modal-body svd_notopbottompaddings" style="min-height:200px">
+        <!-- ko template: {name: 'propertyeditor-error', data: $data.model} -->
+        <!-- /ko -->
+        <!-- ko template: { name: 'propertyeditor-modalcontent', data: $data.model } -->
+        <!-- /ko -->
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn sv-btn btn-primary"
+          data-bind="visible: $data.koShowApplyButton, disable: readOnly, click: $data.onApplyClick, value: $data.getLocString('pe.apply')"
+          style="width:100px" />
+        <input type="button" class="btn sv-btn btn-default btn-secondary"
+          data-bind="click: $data.onOkClick, disable: readOnly, value: $data.getLocString('pe.ok')"
+          style="width:100px" />
+        <input type="button" class="btn sv-btn btn-primary"
+          data-bind="click: $data.onResetClick, value: $data.getLocString('pe.cancel')" style="width:100px" />
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>

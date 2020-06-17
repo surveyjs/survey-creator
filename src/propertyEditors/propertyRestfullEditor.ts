@@ -9,7 +9,7 @@ import { SurveyElementEditorContentModel } from "../questionEditors/questionEdit
 export class SurveyPropertyResultfullEditor extends SurveyPropertyModalEditor {
   koContentEditor: any;
   public survey: Survey.Survey;
-  private question: Survey.QuestionDropdown;
+  public question: Survey.QuestionDropdown;
 
   constructor(property: Survey.JsonObjectProperty) {
     super(property);

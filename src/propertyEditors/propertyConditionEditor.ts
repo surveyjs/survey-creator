@@ -448,37 +448,37 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       self.onkoTextValueChanged(newValue);
     });
   }
-  public addCondition() {
+  public addCondition = () => {
     this.koEditorItems.push(new ConditionEditorItem(this));
     this.updateEditorItemsVisibilities();
-  }
-  public removeCondition(item: ConditionEditorItem) {
+  };
+  public removeCondition = (item: ConditionEditorItem) => {
     this.koEditorItems.remove(item);
     if (this.koEditorItems().length == 0) {
       this.addCondition();
     }
     this.updateEditorItemsVisibilities();
     this.onConditionItemChanged();
-  }
+  };
   public get addConditionText(): string {
     return this.getLocString("pe.addCondition");
   }
   public get removeConditionText(): string {
     return this.getLocString("pe.remove");
   }
-  public beforeShowCore() {
+  public beforeShowCore = () => {
     super.beforeShowCore();
     this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
     if (!!this.options) {
       this.koShowTabs(this.options.allowEditExpressionsInTextEditor);
     }
-  }
-  protected beforeShowModal() {
+  };
+  protected beforeShowModal = () => {
     super.beforeShowModal();
     this.isEditorShowing = true;
     this.isEditorHidingDisabled = true;
-  }
+  };
   public get isEditorShowing(): boolean {
     return this.koIsEditorShowing();
   }
@@ -504,11 +504,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     var survey = this.getSurvey();
     return !!survey ? survey.getAllQuestions() : [];
   }
-  protected getSurvey(): Survey.SurveyModel {
+  protected getSurvey = (): Survey.SurveyModel => {
     return EditableObject.getSurvey(this.object);
-  }
+  };
   private allConditionQuestionsValue: any[];
-  private resetAllConditionQuestions() {
+  private resetAllConditionQuestions = () => {
     this.addConditionQuestionsHash = {};
     this.addConditionCalculatedValuesHash = {};
     this.allConditionQuestionsValue = this.getConditionQuestions();
@@ -1157,7 +1157,7 @@ ko.bindingHandlers.aceEditor = {
 
     editor.setOption("useWorker", false);
 
-    editor.getSession().on("change", function () {
+    editor.getSession().on("change", function() {
       var errors = createAnnotations(
         editor.getValue(),
         objectEditor.syntaxCheckMethodName
@@ -1173,7 +1173,7 @@ ko.bindingHandlers.aceEditor = {
       //   }
       editor.getSession().setAnnotations(errors);
     });
-    editor.on("focus", function () {
+    editor.on("focus", function() {
       editor.setReadOnly(objectEditor.readOnly());
     });
     var updateCallback = () => {
@@ -1185,11 +1185,13 @@ ko.bindingHandlers.aceEditor = {
     };
     var valueSubscription = objectEditor.koTextValue.subscribe(updateCallback);
     updateCallback();
-    var visibilitySubscription = objectEditor.koActiveView.subscribe(newView => {
-      if (newView !== "form") {
-        editor.resize();
+    var visibilitySubscription = objectEditor.koActiveView.subscribe(
+      (newView) => {
+        if (newView !== "form") {
+          editor.resize();
+        }
       }
-    });
+    );
 
     var completer = {
       identifierRegexps: [ID_REGEXP],
@@ -1220,7 +1222,7 @@ ko.bindingHandlers.aceEditor = {
       enableLiveAutocompletion: true,
     });
 
-    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
       valueSubscription.dispose();
       visibilitySubscription.dispose();
       editor.destroy();
