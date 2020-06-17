@@ -64,46 +64,6 @@
     color: var(--dd-menu-link-color, $dd-menu-link-color);
   }
 
-  .nav-tabs a {
-    color: $primary-text-color;
-    color: var(--primary-text-color, $primary-text-color);
-  }
-  .nav-tabs > li.active > a {
-    color: $primary-color;
-    color: var(--primary-color, $primary-color);
-  }
-  .nav-link {
-    background-color: transparent;
-    &:hover {
-      background-color: $secondary-border-color;
-      background-color: var(--secondary-border-color, $secondary-border-color);
-    }
-  }
-  .nav-item.active .nav-link {
-    background-color: $primary-bg-color;
-    background-color: var(--primary-bg-color, $primary-bg-color);
-  }
-
-  .editor-tabs > li > a {
-    &:hover,
-    &:focus {
-      background-color: $secondary-bg-color;
-      background-color: var(--secondary-bg-color, $secondary-bg-color);
-      border-bottom: 1px solid $secondary-bg-color;
-      border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
-    }
-  }
-  .editor-tabs > li.active > a {
-    color: $primary-color;
-    color: var(--primary-color, $primary-color);
-    background-color: $secondary-bg-color;
-    background-color: var(--secondary-bg-color, $secondary-bg-color);
-    border: 1px solid $primary-border-color;
-    border-color: var(--primary-border-color, $primary-border-color);
-    border-bottom-color: $secondary-bg-color;
-    border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
-  }
-
   .svd_custom_select:before {
     background-color: $primary-color;
     background-color: var(--primary-color, $primary-color);

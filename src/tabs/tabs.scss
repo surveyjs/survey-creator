@@ -1,14 +1,38 @@
 .svd_container {
-  .editor-tabs {
+  .svd-tabs {
     padding: 19px 15px 0 30px;
-    > li > a {
-      border: 1px solid transparent;
-      border-radius: 0;
-      padding: 0.5em 1em;
-      text-align: center;
-      font-weight: bold;
+  }
+
+  .svd-tab.active > .svd-tab-text {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+    border: 1px solid $primary-border-color;
+    border-color: var(--primary-border-color, $primary-border-color);
+    border-bottom-color: $secondary-bg-color;
+    border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  .svd-tab-text {
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-weight: bold;
+    
+    color: $primary-text-color;
+    color: var(--primary-text-color, $primary-text-color);
+    background-color: transparent;
+    &:hover,
+    &:focus {
+      background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
+      border-bottom: 1px solid $secondary-bg-color;
+      border-bottom-color: var(--secondary-bg-color, $secondary-bg-color);
     }
   }
+
 }
 
 .svd-survey-placeholder-root {

@@ -1,4 +1,5 @@
 .svd_container.sv_modern_css {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     .sv-btn {
         line-height: 34px;
         height: 34px;
@@ -9,4 +10,25 @@
             line-height: 34px;
         }
     }
+
+    .svd-tabs {
+        padding: 0;
+        margin: 0;
+    }
+    .svd-tab {
+        list-style: none;
+        display: inline-block;
+        margin: 0;
+        &:not(:first-child) {
+            margin-left: -4px;
+        }
+    }
+    .svd-tab-text {
+        display: inline-block;
+        padding: 1em 2em;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
 }
