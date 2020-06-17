@@ -144,7 +144,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       this.object
     );
   }
-  protected onListDetailViewChanged() { }
+  protected onListDetailViewChanged() {}
 }
 
 export class SurveyNestedPropertyEditorItem {
@@ -186,7 +186,7 @@ export class SurveyNestedPropertyEditorItem {
       }
       this.koCanDeleteItem(
         !this.options ||
-        this.options.onCanDeleteItemCallback(this.object, this.obj)
+          this.options.onCanDeleteItemCallback(this.object, this.obj)
       );
     });
   }
@@ -247,14 +247,14 @@ export class SurveyNestedPropertyEditorItem {
 }
 
 export class SurveyNestedPropertyEditorColumn {
-  constructor(public property: Survey.JsonObjectProperty) { }
+  constructor(public property: Survey.JsonObjectProperty) {}
   public get text(): string {
     var text = editorLocalization.hasString("pel." + this.property.name)
       ? editorLocalization.getString("pel." + this.property.name)
       : editorLocalization.getPropertyNameInEditor(
-        this.property.name,
-        this.property.displayName
-      );
+          this.property.name,
+          this.property.displayName
+        );
     return text ? text : this.property.name;
   }
 }
@@ -302,8 +302,13 @@ export class SurveyNestedPropertyEditorEditorCell {
 ko.components.register("comp-propertyeditor-nesteditem", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = params.editor.createItemViewModel(params.item);
-      model.editor = params.editor;
+      const editor = params.editor;
+      let model;
+
+      if (editor.columns.length === 0) editor.createColumns(); //TODO hot fix
+
+      model = editor.createItemViewModel(params.item);
+      model.editor = editor;
       return model;
     },
   },

@@ -11,6 +11,14 @@ export class ObjectEditorContent {
     public koActiveTab: any,
     public onTabClick: any
   ) {}
+
+  public get activeTab() {
+    const tab = this.koActiveTab();
+    if (typeof tab === "undefined") {
+      return this.koTabs()[0].name;
+    }
+    return tab;
+  }
 }
 
 ko.components.register("svd-object-editor-content", {

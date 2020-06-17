@@ -3,23 +3,24 @@
   <li
     class="nav-item"
     role="presentation"
-    data-bind="css: {active: $parent.koActiveTab() == name}, click: $parent.onTabClick"
+    data-bind="css: {active: $parent.activeTab == name}, click: $parent.onTabClick"
   >
     <a
       class="nav-link"
-      data-bind="css: {active: $parent.koActiveTab() == name}"
+      data-bind="css: {active: $parent.activeTab == name}"
     >
       <span data-bind="text:title"></span>
     </a>
   </li>
 </ul>
 <!-- ko foreach: koTabs -->
-<div data-bind="if: $parent.koActiveTab() === name" style="margin-top:5px">
+<div data-bind="if: $parent.activeTab === name" style="margin-top:5px">
   <!-- ko template: { name: htmlTemplate, data: templateObject, afterRender: $data.koAfterRender } -->
   <!-- /ko -->
 </div>
 <!-- /ko  -->
 <!-- /ko  -->
+
 <!-- ko ifnot: useTabsInElementEditor -->
 <svd-accordion role="tablist" params="tabs: koTabs"></svd-accordion>
 <!-- /ko  -->
