@@ -2,10 +2,9 @@
 
 var webpack = require("webpack");
 var path = require("path");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
-var GenerateJsonPlugin = require("generate-json-webpack-plugin");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
@@ -119,15 +118,9 @@ var buildPlatformJson = {
 };
 
 module.exports = function(options) {
-  var packagePath = "./package/";
-  var buildPath = "./build/";
-  var extractCSS = new ExtractTextPlugin({
-    filename:
-      buildPath +
-      (options.buildType === "prod"
-        ? "survey-creator.min.css"
-        : "survey-creator.css")
-  });
+  var packagePath =  __dirname + "/package/";
+  var buildPath = __dirname + "/build/";
+  var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
     var options = {
@@ -154,7 +147,7 @@ module.exports = function(options) {
       console.log("Build started... good luck!");
       createSVGBundle();
     } else if (1 == percentage) {
-      if (options.buildType === "prod") {
+      if (isProductionBuild) {
         dts.bundle({
           name: "../../survey-creator",
           main: buildPath + "typings/entries/index.d.ts",
@@ -193,7 +186,7 @@ module.exports = function(options) {
           );
         }
 
-        if (options.buildType === "prod") {
+        if (isProductionBuild) {
           copyToBuild("survey-creator.min.js", "surveyeditor.min.js");
           copyToBuild("survey-creator.min.css", "surveyeditor.min.css");
           copyToBuild("survey-creator.d.ts", "surveyeditor.d.ts");
@@ -209,11 +202,20 @@ module.exports = function(options) {
           copyToBuild("survey-creator.js", "surveyeditor.js");
           copyToBuild("survey-creator.css", "surveyeditor.css");
         }
+      } else {
+          if (isProductionBuild) {
+            fs.writeFileSync(
+            buildPath + "package.json",
+            JSON.stringify(buildPlatformJson, null, 2),
+            "utf8"
+          );
+        }
       }
     }
   };
 
   var config = {
+    mode: isProductionBuild ? "production" : "development",
     entry: {
       "survey-creator": path.resolve(__dirname, "./src/entries/index.ts")
     },
@@ -223,6 +225,9 @@ module.exports = function(options) {
         tslib: path.join(__dirname, "./src/entries/helpers.ts")
       }
     },
+    optimization: {
+      minimize: isProductionBuild,
+    },    
     module: {
       rules: [
         {
@@ -230,27 +235,28 @@ module.exports = function(options) {
           loader: "ts-loader",
           options: {
             compilerOptions: {
-              declaration: options.buildType === "prod",
+              declaration: isProductionBuild,
               outDir: buildPath + "typings/"
             }
           }
         },
         {
           test: /\.scss$/,
-          loader: extractCSS.extract({
-            fallbackLoader: "style-loader",
-            use: [
-              {
-                loader: "css-loader",
-                options: {
-                  minimize: options.buildType === "prod"
-                }
-              },
-              {
-                loader: "sass-loader"
+          loader: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: options.buildType !== "prod"
               }
-            ]
-          })
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: options.buildType !== "prod"
+              }
+            }
+          ]
         },
         {
           test: /\.html$/,
@@ -266,11 +272,8 @@ module.exports = function(options) {
       ]
     },
     output: {
-      filename:
-        buildPath +
-        "[name]" +
-        (options.buildType === "prod" ? ".min" : "") +
-        ".js",
+      path: buildPath,
+      filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: options.libraryName || "SurveyCreator",
       libraryTarget: "umd",
       umdNamedDefine: true
@@ -290,34 +293,26 @@ module.exports = function(options) {
       }
     },
     plugins: [
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version)
       }),
+      new MiniCssExtractPlugin({
+        filename: isProductionBuild ? "[name].min.css" : "[name].css"
+      }),
+      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({
         banner: banner
-      }),
-      extractCSS
+      })
     ],
-    devtool: "inline-source-map"
   };
 
-  if (options.buildType === "prod") {
-    config.devtool = false;
-    config.plugins = config.plugins.concat([
-      new webpack.optimize.UglifyJsPlugin(),
-      new GenerateJsonPlugin(
-        buildPath + "package.json",
-        buildPlatformJson,
-        undefined,
-        2
-      )
+  if (isProductionBuild) {
+    config.plugins.push = config.plugins.concat([
     ]);
-  }
-
-  if (options.buildType === "dev") {
+  } else {
+    config.devtool = "inline-source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true })
     ]);

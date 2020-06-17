@@ -9,12 +9,13 @@ build/*
 tmp/*
 /src/*.js
 /tests/*.js
+!/tests/mock-loader.js
 _site/
 .sass-cache
 .vscode/
 docs/pmes.json
 docs/classes.json
-/dist/css
+/dist/
 /shippable
 /Properties
 /src/templateEditor.ko.html.ts
