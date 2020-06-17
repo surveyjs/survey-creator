@@ -1,6 +1,7 @@
 .svd_container.sv_modern_css {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     $control-height: 34px;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
 
     .sv-btn {
         line-height: $control-height;
@@ -33,6 +34,17 @@
         text-decoration: none;
     }
 
+    .svd-designer-tabbed-container__tab-header {
+        font-family: Raleway;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: unset;
+    }
+
+    .svd_toolbox_item_text {
+        font-size: 16px;
+    }    
+
     svd-property-editor {
         display: block;
         margin-bottom: 1em;
@@ -43,7 +55,17 @@
         border-radius: 2px;
         border: solid 1px #d4d4d4;
         background-color: #ffffff;
-        margin-top: 6px;
         padding: 0 12px;
+    }
+    .svd-control-label {
+        display: inline-block;
+        // font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .sjs-cb-container .checkmark:after {
+        left: 6px;
+        top: 2px;
     }
 }
