@@ -1,9 +1,11 @@
 .svd_container.sv_modern_css {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    $control-height: 34px;
+
     .sv-btn {
-        line-height: 34px;
-        height: 34px;
-        border-radius: 17px;
+        line-height: $control-height;
+        height: $control-height;
+        border-radius: $control-height / 2;
         font-size: 14px;
         padding: 0 1.5em;
         &>* {
@@ -31,4 +33,17 @@
         text-decoration: none;
     }
 
+    svd-property-editor {
+        display: block;
+        margin-bottom: 1em;
+    }
+
+    .svd-control {
+        height: $control-height;
+        border-radius: 2px;
+        border: solid 1px #d4d4d4;
+        background-color: #ffffff;
+        margin-top: 6px;
+        padding: 0 12px;
+    }
 }
