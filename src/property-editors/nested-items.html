@@ -1,0 +1,45 @@
+<div data-bind="visible: koIsList">
+  <!--ko if: originalValue.length == 0 -->
+  <div data-bind="text: $data.getLocString('pe.listIsEmpty')"></div>
+  <!-- /ko -->
+  <div
+    style="overflow-y: auto; overflow-x:hidden; max-height:400px"
+    data-bind="visible:originalValue.length > 0"
+  >
+    <table class="svd_items_table">
+      <thead data-bind="visible: koShowHeader">
+        <tr>
+          <th></th>
+          <!-- ko foreach: columns -->
+          <th data-bind="text: text"></th>
+          <!-- /ko -->
+          <th></th>
+        </tr>
+      </thead>
+      <tbody
+        data-bind="sortable: { foreach: originalValue, options: sortableOptions }"
+      >
+        <!-- ko component: { name:"comp-propertyeditor-nesteditem", params: { item: $data, editor: $parent.model } } --><!-- /ko -->
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="svd-items-control-footer"
+    data-bind="visible: koAllowAddRemoveItems && !$data.readOnly()"
+  >
+    <input
+      type="button"
+      class="btn btn-primary"
+      data-bind="click: onAddClick, value: $data.getLocString('pe.addNew')"
+    />
+    <input
+      type="button"
+      class="btn btn-danger"
+      data-bind="click: onClearClick, visible: originalValue.length > 0 && koAllowRemoveAllItems(), value: $data.getLocString('pe.removeAll')"
+    />
+  </div>
+</div>
+<!-- ko if: !koIsList() -->
+<!-- ko template: { name: "propertyeditorcontent-nested", data: model } -->
+<!-- /ko -->
+<!-- /ko -->

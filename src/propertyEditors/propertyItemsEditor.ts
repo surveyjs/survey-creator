@@ -71,12 +71,12 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         evt.item.parentNode.removeChild(evt.item);
       }
       return true;
-    }
+    },
   };
-  protected addItem() {
+  protected addItem = () => {
     this.createEditorItemCore();
-  }
-  protected deleteItem(obj: any) {
+  };
+  protected deleteItem = (obj: any) => {
     if (this.readOnly()) return;
     var index = this.originalValue.indexOf(obj);
     if (index > -1) {
@@ -85,8 +85,8 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     }
     this.deleteViewItemIndex(obj);
     this._notifyPropertyValueChanged();
-  }
-  protected onItemDeleted(obj: any, index: number) { }
+  };
+  protected onItemDeleted(obj: any, index: number) {}
   public hasError(): boolean {
     for (var i = 0; i < this.viewItems.length; i++) {
       var item = this.viewItems[i];
@@ -119,7 +119,9 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
         if (index === this.viewItems.length) {
           index--;
         }
-        this.viewItems[i] && this.viewItems[i].focus && this.viewItems[i].focus();
+        this.viewItems[i] &&
+          this.viewItems[i].focus &&
+          this.viewItems[i].focus();
       }
     }
   }

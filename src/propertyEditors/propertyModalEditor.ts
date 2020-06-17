@@ -250,7 +250,7 @@ export class SurveyPropertyTextEditor extends SurveyPropertyModalEditor {
   };
   public onBlur = () => {
     this.options["undoRedoManager"].stopTransaction();
-  }
+  };
 }
 
 export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
