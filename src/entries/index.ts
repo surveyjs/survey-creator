@@ -31,6 +31,7 @@ export { SurveyPropertyItemValuesEditor } from "../propertyEditors/propertyItemV
 export { SurveyPropertyMultipleValuesEditor } from "../propertyEditors/propertyMultipleValuesEditor";
 export {
   SurveyNestedPropertyEditor,
+  SurveyNestedPropertyEditorItem,
 } from "../propertyEditors/propertyNestedPropertyEditor";
 export { SurveyPropertyDropdownColumnsEditor } from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
@@ -174,4 +175,4 @@ export { PropertyEditorOneSelected } from "../property-editors/one-selected";
 export { PropertyEditorRestfull } from "../property-editors/restfull";
 export { PropertyEditorMultipleValues } from "../property-editors/multiple-values";
 export { PropertyEditorNestedItems } from "../property-editors/nested-items";
-export { SurveyNestedPropertyEditorItem, PropertyEditorNestedItem } from "../property-editors/nested-item";
+export { PropertyEditorNestedItem } from "../property-editors/nested-item";
