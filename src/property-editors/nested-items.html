@@ -3,7 +3,7 @@
   <div data-bind="text: $data.getLocString('pe.listIsEmpty')"></div>
   <!-- /ko -->
   <div
-    style="overflow-y: auto; overflow-x:hidden; max-height:400px"
+    style="overflow-y: auto; overflow-x: hidden; max-height: 400px;"
     data-bind="visible:originalValue.length > 0"
   >
     <table class="svd_items_table">
@@ -19,7 +19,7 @@
       <tbody
         data-bind="sortable: { foreach: originalValue, options: sortableOptions }"
       >
-        <!-- ko component: { name:"comp-propertyeditor-nesteditem", params: { item: $data, editor: $parent.model } } --><!-- /ko -->
+        <!-- ko component: { name:"svd-property-editor-nested-item", params: { item: $data, editor: $parent.model } } --><!-- /ko -->
       </tbody>
     </table>
   </div>
