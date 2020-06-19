@@ -2072,6 +2072,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var self = this;
     ko.cleanNode(this.renderedElement);
     ko.applyBindings(this, this.renderedElement);
+    ko.tasks.runEarly();
     this.surveyjs = <HTMLElement>(
       this.renderedElement.querySelector(".svd_surveyjs_designer_container")
     );
