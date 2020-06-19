@@ -1226,14 +1226,20 @@ ko.components.register("survey-logic", {
       // model.update(creator.survey, creator);
       var model = creator.logic;
 
-      var subscrViewType = creator.koViewType.subscribe((viewType) => {
+      var subscribeViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "logic") {
           model.update(creator.survey, creator);
         }
       });
 
+      var surveyCreatedHandler = (creator, options) => {
+        model.update(options.survey, creator);
+      };
+      creator.onDesignerSurveyCreated.add(surveyCreatedHandler);
+
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscrViewType.dispose();
+        subscribeViewType.dispose();
+        creator.onDesignerSurveyCreated.remove(surveyCreatedHandler);
         // model.dispose();
       });
 
