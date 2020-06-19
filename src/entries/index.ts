@@ -176,3 +176,4 @@ export { PropertyEditorRestfull } from "../property-editors/restfull";
 export { PropertyEditorMultipleValues } from "../property-editors/multiple-values";
 export { PropertyEditorNestedItems } from "../property-editors/nested-items";
 export { PropertyEditorNestedItem } from "../property-editors/nested-item";
+export { PropertyEditorNested } from "../property-editors/nested";
