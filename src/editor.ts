@@ -1769,6 +1769,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public addPage = (): Survey.Page => {
     var name = SurveyHelper.getNewPageName(this.survey.pages);
     var page = <Survey.Page>this.survey.addNewPage(name);
+    this.selectPage(page);
     return page;
   };
   public deletePage = () => {
