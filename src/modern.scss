@@ -80,9 +80,25 @@
         margin: 12px;
     }
 
-    .svd-page-selector {
-        float: right;
-        margin-top: 8px;
+    svd-pages-editor {
+        .svd-page {
+            font-family: Raleway;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            color: rgba(64, 64, 64, 0.5);
+            &:hover, &.svd_selected_page, &.svd-page-add {
+                color: $primary-text-color;
+                color: var(--primary-text-color, $primary-text-color);
+            }        
+        }
+        .svd-page.svd_selected_page {
+            background-color: transparent;
+        }        
+        .svd-page-selector {
+            float: right;
+            margin-top: 8px;
+        }
     }
 
     svd-property-grid {
