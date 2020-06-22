@@ -51,6 +51,15 @@
     .svd-designer-tabbed-container__tab-content {
         overflow: unset;
     }
+    
+    .svd-accordion-tab-header {
+        font-family: Raleway;
+        font-size: 14px;
+        font-weight: bold;
+        // color: #404040;
+        min-height: 47px;
+        line-height: 47px;
+    }
 
     .svd_toolbox_item_text {
         font-size: 16px;
@@ -122,12 +131,10 @@
         margin-left: 15px;
     }
 
-    .svd-accordion-tab-header {
-        font-family: Raleway;
-        font-size: 14px;
-        font-weight: bold;
-        // color: #404040;
-        min-height: 47px;
-        line-height: 47px;
+    .svd_items_table {
+        svd-property-editor {
+            margin-bottom: 0;
+        }
     }
+
 }
