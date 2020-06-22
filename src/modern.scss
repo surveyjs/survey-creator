@@ -3,6 +3,10 @@
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
 
+    .sv-row:not(:last-child) {
+        padding-bottom: 0.5em;
+    }
+        
     .sv-btn {
         line-height: $control-height;
         height: $control-height;
