@@ -6,7 +6,7 @@
     .sv-row:not(:last-child) {
         padding-bottom: 0.5em;
     }
-        
+
     .sv-btn {
         line-height: $control-height;
         height: $control-height;
@@ -48,6 +48,9 @@
         font-weight: bold;
         text-transform: unset;
     }
+    .svd-designer-tabbed-container__tab-content {
+        overflow: unset;
+    }
 
     .svd_toolbox_item_text {
         font-size: 16px;
@@ -76,6 +79,9 @@
         left: 6px;
         top: 2px;
     }
+    .checkmark {
+        top: 5px;
+    }    
 
     .svd_custom_select:before {
         background-color: transparent;
