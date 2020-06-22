@@ -476,11 +476,11 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
   );
   creator.text = jsonText;
 
-  creator.selectPage(creator.survey.pages[0]);
+  creator.selectedElement = creator.survey.pages[0];
   var pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, creator.survey.pages[0]);
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 
   creator.survey.selectedElement = <any>creator.survey.pages[0].elements[0];
   assert.equal(
@@ -489,18 +489,18 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
   );
   pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gear");
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 
   creator.onQuestionEditorChanged(<any>creator.survey.pages[0].elements[0]);
   pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gear");
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 
-  creator.selectPage(creator.survey.pages[0]);
+  creator.selectedElement = creator.survey.pages[0];
   pageClass = pagesEditor.getPageMenuIconClass(creator.survey.pages[0]);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, creator.survey.pages[0]);
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 });
 
 QUnit.test("pagesEditor activePage when question selected", function(assert) {
@@ -531,12 +531,12 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
 
   var currentPage = creator.survey.pages[1];
 
-  creator.selectPage(currentPage);
+  creator.selectedElement = currentPage;
 
   var pageClass = pagesEditor.getPageMenuIconClass(currentPage);
   assert.equal(pageClass, "icon-gearactive");
   assert.equal(creator.koSelectedObject().value, currentPage);
-  assert.equal(pagesEditor.model.selectedPage, currentPage);
+  assert.equal(pagesEditor.model.selectedPage(), currentPage);
 
   creator.survey.selectedElement = <any>creator.survey.pages[1].elements[0];
   assert.equal(
@@ -545,7 +545,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
   );
   pageClass = pagesEditor.getPageMenuIconClass(currentPage);
   assert.equal(pageClass, "icon-gear");
-  assert.equal(pagesEditor.model.selectedPage, currentPage);
+  assert.equal(pagesEditor.model.selectedPage(), currentPage);
 });
 
 QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
@@ -567,13 +567,13 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
 
   assert.equal(1, creator.survey.pages.length);
 
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
-  assert.equal(pagesEditor.model.pagesSelection().length, 2);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.pagesForSelection().length, 2);
 
-  pagesEditor.model.pageSelection(pagesEditor.model.pagesSelection()[1]);
+  pagesEditor.model.selectedPage(pagesEditor.model.pagesForSelection()[1].value);
 
-  assert.equal(pagesEditor.model.pagesSelection().length, 3);
-  assert.equal(creator.survey.pages[1], pagesEditor.model.selectedPage);
+  assert.equal(pagesEditor.model.pagesForSelection().length, 3);
+  assert.equal(creator.survey.pages[1], pagesEditor.model.selectedPage());
 });
 
 QUnit.test("pagesEditor.readOnly", function(assert) {
@@ -654,7 +654,7 @@ QUnit.test("PagesEditor change question's page", function(assert) {
     document.createElement("div")
   );
 
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 
   var question = <Survey.Question>creator.survey.pages[0].elements[0];
   question.page = creator.survey.pages[1];
@@ -663,7 +663,7 @@ QUnit.test("PagesEditor change question's page", function(assert) {
     question,
     creator.survey.pages[1]
   );
-  assert.equal(pagesEditor.model.selectedPage, creator.survey.pages[1]);
+  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[1]);
 });
 
 QUnit.test(
@@ -830,7 +830,7 @@ QUnit.test(
       "question4"
     );
     assert.equal(
-      pagesEditor.model.pageSelection().name,
+      pagesEditor.model.selectedPage().name,
       "page3",
       "Page 3 is selected"
     );
@@ -838,7 +838,7 @@ QUnit.test(
       "question3"
     );
     assert.equal(
-      pagesEditor.model.pageSelection().name,
+      pagesEditor.model.selectedPage().name,
       "page2",
       "Page 2 is selected"
     );
@@ -853,13 +853,13 @@ QUnit.test(
     editor.text = JSON.stringify(getSurveyJson());
     assert.equal(
       editor.pagesEditorModel.getDisplayText(
-        editor.pagesEditorModel.pagesSelection()[0].value
+        editor.pagesEditorModel.pagesForSelection()[0].value
       ),
       "Page 1",
       "page1 title"
     );
     assert.equal(
-      editor.pagesEditorModel.pagesSelection()[0].text,
+      editor.pagesEditorModel.pagesForSelection()[0].text,
       "Page 1",
       "page1 title"
     );

@@ -6,7 +6,7 @@ import { PagesEditor } from "../pages-editor";
 var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
 
 export class PagesEditorViewModel {
-  private pageSelectionChanged: ko.Subscription;
+  private pageSelectionChanged = undefined;
   private updateScroller = undefined;
   private isNeedAutoScroll = true;
 
@@ -23,8 +23,8 @@ export class PagesEditorViewModel {
         }
       }, 100);
 
-      this.pageSelectionChanged = model.pageSelection.subscribe(newVal => {
-        if (this.isNeedAutoScroll) {
+      this.pageSelectionChanged = ko.computed(() => {
+        if (model.selectedPage() && this.isNeedAutoScroll) {
           this.scrollToSelectedPage();
         } else {
           this.isNeedAutoScroll = true;
@@ -46,7 +46,7 @@ export class PagesEditorViewModel {
   scrollToSelectedPage = () => {
     var pagesElement: any = this.element.querySelector(".svd-pages");
     if (!pagesElement) return;
-    var index = this.model.pages.indexOf(this.model.selectedPage);
+    var index = this.model.pages.indexOf(this.model.selectedPage());
     var pageElement = pagesElement.children[index];
     if (!pageElement) return;
     pagesElement.scrollLeft =
@@ -85,7 +85,7 @@ export class PagesEditorViewModel {
 
   getPageClass = (page) => {
     var result =
-      page === this.model.selectedPage ? "svd_selected_page svd-light-bg-color" : "";
+      page === this.model.selectedPage() ? "svd_selected_page svd-light-bg-color" : "";
 
     if (this.model.pages.indexOf(page) !== this.model.pages.length - 1) {
       result += " svd-border-right-none";
@@ -95,14 +95,14 @@ export class PagesEditorViewModel {
   };
 
   getPageMenuIconClass = (page) => {
-    return page === this.model.selectedPage && this.model.isActive()
+    return page === this.model.selectedPage() && this.model.isActive()
       ? "icon-gearactive"
       : "icon-gear";
   };
 
-  onPageClick = (model, event) => {
+  onPageClick = (pageModel, event) => {
     this.isNeedAutoScroll = false;
-    this.model.selectPage(model);
+    this.model.selectedPage(pageModel);
     event.stopPropagation();
     this.updateMenuPosition();
   };
@@ -124,7 +124,7 @@ export class PagesEditorViewModel {
         this.model.blockPagesRebuilt(false);
         this.model.creator.undoRedoManager.stopTransaction();
         if (!!this.movingPage) {
-          this.model.selectPage(this.movingPage);
+          this.model.selectedPage(this.movingPage);
         }
       },
       onUpdate: (evt, itemV) => {
