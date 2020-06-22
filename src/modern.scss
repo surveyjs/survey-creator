@@ -137,4 +137,18 @@
         }
     }
 
+    .propertyeditor-validators {
+        .input-group {
+            display: table;
+            table-layout: fixed;
+        }
+        .input-group-addon, .form-control {
+            display: table-cell;
+            &.btn-danger {
+                min-width: 34px;
+                text-align: center;
+            }
+        }
+    }
+
 }
