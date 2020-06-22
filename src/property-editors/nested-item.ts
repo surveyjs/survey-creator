@@ -28,12 +28,12 @@ ko.components.register("svd-property-editor-nested-item", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const editor = params.editor;
-      let model;
+      let model: SurveyNestedPropertyEditorItem;
 
       if (editor.columns.length === 0) editor.createColumns(); //TODO hot fix
 
       model = editor.createItemViewModel(params.item);
-      model.editor = editor;
+      model["editor"] = editor;
 
       return new PropertyEditorNestedItem(
         editor,
