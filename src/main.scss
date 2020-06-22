@@ -21,10 +21,28 @@
   .btn-primary {
     color: $inverted-text-color;
     color: var(--inverted-text-color, $inverted-text-color);
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+    border-color: $primary-color;
+    border-color: var(--primary-color, $primary-color);
+  }
+
+  .btn-secondary {
+    color: $inverted-text-color;
+    color: var(--inverted-text-color, $inverted-text-color);
     background-color: $secondary-color;
     background-color: var(--secondary-color, $secondary-color);
     border-color: $secondary-color;
     border-color: var(--secondary-color, $secondary-color);
+  }
+
+  .btn-danger {
+    color: $inverted-text-color;
+    color: var(--inverted-text-color, $inverted-text-color);
+    background-color: $error-color;
+    background-color: var(--error-color, $error-color);
+    border-color: $error-color;
+    border-color: var(--error-color, $error-color);
   }
 
   .btn-link {

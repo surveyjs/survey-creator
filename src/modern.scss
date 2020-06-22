@@ -68,4 +68,36 @@
         left: 6px;
         top: 2px;
     }
+
+    .svd_custom_select:before {
+        background-color: transparent;
+        background-image: url("./images/Arrow_down_10x10.svg");
+        padding: 5px;
+        margin: 12px;
+    }
+
+    .svd-page-selector {
+        float: right;
+        margin-top: 8px;
+    }
+
+    svd-property-grid {
+        .svd-vertical-container__cell-content--scrollable {
+            overflow-y: scroll;
+        }
+    }
+
+    .svd_object_editor {
+        padding: 0;
+        margin-left: 15px;
+    }
+
+    .svd-accordion-tab-header {
+        font-family: Raleway;
+        font-size: 14px;
+        font-weight: bold;
+        // color: #404040;
+        min-height: 47px;
+        line-height: 47px;
+    }
 }
