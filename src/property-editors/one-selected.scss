@@ -1,0 +1,36 @@
+@import "../colors.scss";
+
+.propertyeditor-validators {
+  .first-addon {
+    padding: 0;
+  }
+  .svd-available-classes-container {
+    border: 1px solid $dd-menu-border;
+    border-radius: 2px;
+    padding: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    margin-top: -16px;
+    font-size: 1.17em;
+    display: none;
+    background-color: $primary-bg-color;
+    li {
+      margin: 5px 0;
+      width: 100%;
+      a {
+        padding: 3px 20px;
+        color: $dd-menu-link-color;
+        width: 100%;
+        font-weight: 400;
+        display: block;
+        &:hover {
+          background-color: $secondary-bg-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .svd-available-classes-container--active {
+    display: block;
+  }
+}
