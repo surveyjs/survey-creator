@@ -68,6 +68,13 @@
     svd-property-editor {
         display: block;
         margin-bottom: 1em;
+
+        .sv-body__page {
+            margin: 0;
+        }
+        .sv-title {
+            font-size: 14px;
+        }
     }
 
     .svd-control {
