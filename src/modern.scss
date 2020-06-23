@@ -88,9 +88,6 @@
         left: 6px;
         top: 2px;
     }
-    .checkmark {
-        top: 5px;
-    }    
 
     .svd_custom_select:before {
         background-color: transparent;
@@ -124,6 +121,9 @@
         .svd-vertical-container__cell-content--scrollable {
             overflow-y: scroll;
         }
+        .checkmark {
+            top: 5px;
+        }    
     }
 
     .svd_object_editor {
@@ -148,6 +148,12 @@
                 min-width: 34px;
                 text-align: center;
             }
+        }
+    }
+
+    .svd-vertical-container__cell-content {
+        svd-translation-group {
+            margin-top: 1em;
         }
     }
 
