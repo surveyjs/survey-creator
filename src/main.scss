@@ -764,4 +764,8 @@
   }
 }
 
+.sv_select_wrapper:before {
+  z-index: 1;
+}
+
 @import "./modern.scss";

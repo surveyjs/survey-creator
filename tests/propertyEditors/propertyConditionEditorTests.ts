@@ -503,13 +503,13 @@ QUnit.test(
     editor.object = column;
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "row.col1").length >
-        0,
+      0,
       true,
       "row.col1 is here"
     );
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "row.col2").length >
-        0,
+      0,
       false,
       "row.col2 is not here"
     );
@@ -534,13 +534,13 @@ QUnit.test(
     editor.object = panelQuestion;
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length >
-        0,
+      0,
       true,
       "panel.q1 is here"
     );
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "panel.q2").length >
-        0,
+      0,
       false,
       "panel.q2 is not here"
     );
@@ -947,16 +947,16 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       assert.notOk(
         isItemEnabled && operatorNames.indexOf(operatorName) < 0,
         "Operator: '" +
-          operatorName +
-          " should not be for question: " +
-          questionName
+        operatorName +
+        " should not be for question: " +
+        questionName
       );
       assert.notOk(
         !isItemEnabled && operatorNames.indexOf(operatorName) > -1,
         "Operator: '" +
-          operatorName +
-          " should be for question: " +
-          questionName
+        operatorName +
+        " should be for question: " +
+        questionName
       );
     }
   };
@@ -1586,7 +1586,7 @@ QUnit.test(
     editorItem = editor.koEditorItems()[1];
     assert.equal(
       editorItem.conjunctionQuestion.width,
-      "25%",
+      "100px",
       "conjunction question for second item"
     );
     assert.equal(
@@ -1662,7 +1662,7 @@ QUnit.test(
     editorItem = editor.koEditorItems()[1];
     assert.equal(
       editorItem.conjunctionQuestion.width,
-      "15%",
+      "100px",
       "conjunction question for second item"
     );
     assert.equal(
@@ -1683,7 +1683,7 @@ QUnit.test(
     editorItem.questionName = "q3";
     assert.equal(
       editorItem.conjunctionQuestion.width,
-      "15%",
+      "100px",
       "conjunction question for second item + checkbox"
     );
     assert.equal(

@@ -14,7 +14,7 @@
         font-size: 14px;
         padding: 0 1.5em;
         &>* {
-            line-height: 34px;
+            line-height: $control-height;
         }
         &[disabled] {
             opacity: 0.5;
@@ -152,11 +152,17 @@
         .input-group-addon, .form-control {
             display: table-cell;
             &.btn-danger {
-                min-width: 34px;
+                min-width: $control-height;
                 text-align: center;
             }
         }
     }
+
+    .svd-propertyeditor-condition-wide-table {
+        td:last-child {
+          line-height: $control-height;
+        }
+    }    
 
     .svd-vertical-container__cell-content {
         svd-translation-group {
