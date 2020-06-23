@@ -78,6 +78,8 @@
       }
       .svd-page-actions-container {
         display: inline-block;
+        margin-left: 0.25em;
+
         .svd-page-actions {
           box-shadow: 5px 5px 5px -5px $dd-menu-link-color;
           // box-shadow-color: var(--dd-menu-link-color, $dd-menu-link-color);

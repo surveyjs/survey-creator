@@ -23,13 +23,13 @@
       fill: var(--secondary-color, $secondary-color);
     }
   }
-  .icon-gearactive {
+  .icon-gearactive, .icon-dotsactive {
     .svd-svg-icon {
       fill: $primary-color;
       fill: var(--primary-color, $primary-color);
     }
   }
-  .icon-gear {
+  .icon-gear, .icon-dots {
     .svd-svg-icon {
       fill: $icon-gear-color;
       fill: var(--icon-gear-color, $icon-gear-color);

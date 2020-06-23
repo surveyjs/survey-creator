@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { SurveyHelper, editorLocalization } from '../entries';
 import "./pages-editor.scss";
 import { PagesEditor } from "../pages-editor";
+import { StylesManager } from "../stylesmanager";
 
 var template = require("html-loader?interpolate!val-loader!./pages-editor.html");
 
@@ -95,9 +96,10 @@ export class PagesEditorViewModel {
   };
 
   getPageMenuIconClass = (page) => {
+    var baseIconName = StylesManager.currentTheme() === "modern" ? "dots" : "gear";
     return page === this.model.selectedPage() && this.model.isActive()
-      ? "icon-gearactive"
-      : "icon-gear";
+      ? "icon-" + baseIconName + "active"
+      : "icon-" + baseIconName;
   };
 
   onPageClick = (pageModel, event) => {
