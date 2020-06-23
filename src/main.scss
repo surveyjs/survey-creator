@@ -103,6 +103,7 @@
   }
   .svd_toolbar button:focus {
     outline-color: $primary-text-color;
+    outline-color: var(--primary-text-color, $primary-text-color);
   }
 
   .svd-main-color {
@@ -146,7 +147,7 @@
   // .svd-svd-svg-icon-color {
   //   color: #3d4d5d;
   // }
-  // .svd-icon-gear-color {
+  // .svd-light-control-color {
   //   color: #d0d0d0;
   // }
   // .svd-icon-status-color {
