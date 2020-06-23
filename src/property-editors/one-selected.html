@@ -7,7 +7,7 @@
     >
       <span
         class="glyphicon glyphicon-plus"
-        data-bind="click: function() { $element.parentElement.focus(); }"
+        data-bind="click: toggleClassesContainer"
       ></span>
     </span>
     <!-- /ko  -->
@@ -16,32 +16,10 @@
       class="input-group-addon first-addon"
       data-bind="visible: koAllowAddRemoveItems() && !readOnly()"
     >
-      <div class="ddmenu-container">
-        <div
-          style="-webkit-tap-highlight-color:rgba(0,0,0,0)"
-          data-bind="trueclick"
-        ></div>
-
-        <div class="ddmenu">
-          <span tabindex="0">
-            <span
-              class="glyphicon glyphicon-plus svd-main-color"
-              data-bind="click: function() { $element.parentElement.focus(); }"
-            ></span>
-          </span>
-
-          <div tabindex="0" data-bind="trueclick"></div>
-          <ul class="svd-light-bg-color">
-            <!-- ko foreach: koAvailableClasses -->
-            <li>
-              <a href="#" data-bind="click: $parent.onAddClick">
-                <span data-bind="text:$data.text"></span>
-              </a>
-            </li>
-            <!-- /ko  -->
-          </ul>
-        </div>
-      </div>
+      <span
+        class="glyphicon glyphicon-plus svd-main-color"
+        data-bind="click: toggleClassesContainer"
+      ></span>
     </div>
     <!-- /ko  -->
     <div data-bind="text: "></div>
@@ -69,6 +47,15 @@
       <span class="glyphicon glyphicon-remove"></span>
     </span>
   </div>
+  <ul class="svd-available-classes-container svd-light-bg-color" tabindex="0">
+    <!-- ko foreach: koAvailableClasses -->
+    <li>
+      <a href="#" data-bind="click: function() {$parent.onAddClick($data); $parent.toggleClassesContainer();}">
+        <span data-bind="text:$data.text"></span>
+      </a>
+    </li>
+    <!-- /ko  -->
+  </ul>
   <!-- ko if: selectedObjectEditor() != null -->
   <!-- ko template: { name: "object-editor-content", data: selectedObjectEditor() } --><!-- /ko -->
   <!-- /ko -->
