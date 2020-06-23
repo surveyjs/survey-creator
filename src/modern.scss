@@ -76,8 +76,10 @@
     .svd-control {
         height: $control-height;
         border-radius: 2px;
-        border: solid 1px #d4d4d4;
-        background-color: #ffffff;
+        border: solid 1px $light-control-color;
+        border-color: var(--light-control-color, $light-control-color);
+        background-color: $primary-bg-color;
+        background-color: var(--primary-bg-color, $primary-bg-color);
         padding: 0 12px;
     }
     .svd-control-label {
@@ -105,7 +107,9 @@
             font-size: 14px;
             font-weight: bold;
             border: none;
-            color: rgba(64, 64, 64, 0.5);
+            // color: rgba(64, 64, 64, 0.5);
+            color: solid 1px $secondary-text-color;
+            color: var(--secondary-text-color, $secondary-text-color);
             &:hover, &.svd_selected_page, &.svd-page-add {
                 color: $primary-text-color;
                 color: var(--primary-text-color, $primary-text-color);

@@ -13,6 +13,7 @@
     font-size: 1.17em;
     display: none;
     background-color: $primary-bg-color;
+    background-color: var(--primary-bg-color, $primary-bg-color);
     li {
       margin: 5px 0;
       width: 100%;

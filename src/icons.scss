@@ -31,8 +31,8 @@
   }
   .icon-gear, .icon-dots {
     .svd-svg-icon {
-      fill: $icon-gear-color;
-      fill: var(--icon-gear-color, $icon-gear-color);
+      fill: $light-control-color;
+      fill: var(--light-control-color, $light-control-color);
     }
   }
   .icon-white {
