@@ -231,45 +231,7 @@
     outline: 0;
     box-shadow: none;
   }
-  .propertyeditor-validators {
-    .first-addon {
-      padding: 0;
-    }
-    .ddmenu-container {
-      .ddmenu > span {
-        padding: 6px 12px;
-      }
-      ul {
-        border: 1px solid $dd-menu-border;
-        border-color: var(--dd-menu-border, $dd-menu-border);
-        border-radius: 2px;
-        padding: 0;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        min-width: 160px;
-        left: 0;
-        z-index: 2000;
-        margin-top: 3px;
-        font-size: 1.17em;
-        li {
-          margin: 5px 0;
-          width: 100%;
-          a {
-            padding: 3px 20px;
-            color: $dd-menu-link-color;
-            color: var(--dd-menu-link-color, $dd-menu-link-color);
-            width: 100%;
-            font-weight: 400;
-            display: block;
-            &:hover {
-              background-color: $secondary-bg-color;
-              background-color: var(--secondary-bg-color, $secondary-bg-color);
-              text-decoration: none;
-            }
-          }
-        }
-      }
-    }
-  }
+
   .select2-container,
   .select2-container--default.select2-container--open {
     .select2-selection--single {
@@ -766,6 +728,7 @@
 
 .sv_select_wrapper:before {
   z-index: 1;
+  bottom: 2px;
 }
 
 @import "./modern.scss";
