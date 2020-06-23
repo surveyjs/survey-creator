@@ -13,8 +13,6 @@ import {
 import { editorLocalization } from "../editorLocalization";
 import { SurveyObjectProperty } from "../objectProperty";
 
-var templateHtml = require("html-loader?interpolate!val-loader!../templates/propertyEditors/propertyeditor-nesteditem.html");
-
 export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   koEditItem: any;
   koIsList: any;
@@ -50,6 +48,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       return self.getEditorName();
     });
   }
+  
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.koColumnsValue();
   }
@@ -59,7 +58,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     this.koShowHeader(this.canShowHeader());
     this.koEditItem(null);
   }
-  protected createColumns() {
+  public createColumns() {
     var result = [];
     var properties = this.getColumnsProperties();
     for (var i = 0; i < properties.length; i++) {
@@ -298,19 +297,3 @@ export class SurveyNestedPropertyEditorEditorCell {
     this.editor.updateValue();
   }
 }
-
-ko.components.register("comp-propertyeditor-nesteditem", {
-  viewModel: {
-    createViewModel: (params, componentInfo) => {
-      const editor = params.editor;
-      let model;
-
-      if (editor.columns.length === 0) editor.createColumns(); //TODO hot fix
-
-      model = editor.createItemViewModel(params.item);
-      model.editor = editor;
-      return model;
-    },
-  },
-  template: templateHtml,
-});

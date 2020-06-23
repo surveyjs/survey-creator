@@ -12,6 +12,7 @@ export class PagesEditor {
   private selectionSubscription: ko.Subscription;
   private _readOnly = ko.observable(false);
   private koSurvey: ko.Observable<Survey.Survey>;
+  private isSelectingPage = false;
 
   constructor(public creator: SurveyCreator) {
     this.hasDropdownSelector(creator.showDropdownPageSelector);
@@ -19,7 +20,7 @@ export class PagesEditor {
     creator.onDesignerSurveyCreated.add((sender, options) => {
       this.koSurvey(options.survey);
     });
-    this.pagesSelection = ko.computed<any>(() => {
+    this.pagesForSelection = ko.computed<any>(() => {
       if (!this.blockPagesRebuilt()) {
         this.prevPagesForSelector = this.pages.map(p => { return { value: p, text: this.getDisplayText(p) } });
         if (!this.readOnly) {
@@ -27,10 +28,13 @@ export class PagesEditor {
             <any>{ value: null, text: getLocString("ed.addNewPage") },
           ]);
         }
+        setTimeout(() => this.selectedPage.notifySubscribers(), 1);
       }
       return this.prevPagesForSelector;
     });
-    this._selectedPage(this.pages[0]);
+    if (this.pages.length > 0) {
+      this._selectedPage(this.pages[0]);
+    }
     this.selectionSubscription = this.creator.koSelectedObject.subscribe(
       (newVal) => {
         if (!this.isActive()) {
@@ -56,19 +60,7 @@ export class PagesEditor {
 
   public blockPagesRebuilt = ko.observable(false);
 
-  public pagesSelection: ko.Computed<any[]>;
-  public pageSelection = ko.computed<Survey.PageModel>({
-    read: () => this._selectedPage(),
-    write: (newVal) => {
-      if (!!newVal && typeof newVal.getType === "function") {
-        this.selectedPage = newVal;
-      } else {
-        if (this.pages.length > 0) {
-          this.addPage();
-        }
-      }
-    },
-  });
+  public pagesForSelection: ko.Computed<any[]>;
 
   addPageSelectorIntoToolbar() {
     const item = {
@@ -76,16 +68,15 @@ export class PagesEditor {
       component: "svd-dropdown",
       visible: this.creator.showPageSelectorInToolbar,
       enabled: true,
-      data: this,
       title: "",
-      items: this.pagesSelection,
-      action: this.pageSelection
+      items: this.pagesForSelection,
+      action: this.selectedPage
     };
     this.creator.toolbarItems.unshift(<any>item);
   }
 
   addPage = () => {
-    this.creator.addPage();
+    return this.creator.addPage();
   };
 
   copyPage = (page: Survey.PageModel) => {
@@ -100,17 +91,26 @@ export class PagesEditor {
     this.creator.showQuestionEditor(page);
   }
 
-  get selectedPage() {
-    return this._selectedPage();
-  }
-  set selectedPage(newPage) {
-    this.selectPage(newPage);
-  }
-  selectPage = (page) => {
-    this.creator.selectPage(page);
-  };
+  selectedPage = ko.computed({
+    read: () => this._selectedPage(),
+    write: (newPage: Survey.PageModel) => {
+      if (this.isSelectingPage) return;
+      try {
+        this.isSelectingPage = true;
+        if (newPage === null) {
+          newPage = this.addPage();
+        }
+        this._selectedPage(newPage);
+        this.creator.selectedElement = newPage;
+      }
+      finally {
+        this.isSelectingPage = false;
+      }
+    }
+  });
+
   showActions = (page) => {
-    return page === this.selectedPage && this.isActive();
+    return page === this.selectedPage() && this.isActive();
   };
   isLastPage() {
     return this.pages.length === 1;
@@ -138,6 +138,6 @@ export class PagesEditor {
   dispose() {
     this.selectionSubscription.dispose();
     this.selectionSubscription = undefined;
-    this.pagesSelection.dispose();
+    this.pagesForSelection.dispose();
   }
 }

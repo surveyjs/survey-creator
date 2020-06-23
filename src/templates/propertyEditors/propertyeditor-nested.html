@@ -1,10 +1,3 @@
 <script type="text/html" id="propertyeditorcontent-nested">
-    <div style="padding-left: 10px;">
-        <button type="button" class="btn sv-btn btn-sm btn-secondary" data-bind="click: onReturnToListClick">
-            <span class="glyphicon glyphicon-list-alt"></span>
-        </button>
-        <span data-bind="text: koEditorName"></span>
-      <!-- ko template: { name: "object-editor-content", data: koEditItem().itemEditor } -->
-      <!-- /ko -->
-  </div>
+  <svd-property-editor-nested params="model:$data"></svd-property-editor-nested>
 </script>
