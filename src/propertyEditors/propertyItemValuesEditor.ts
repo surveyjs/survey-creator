@@ -53,7 +53,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     return "itemvalue[]";
   }
   public get editorTypeTemplate(): string {
-    return "itemvalues";
+    return "item-values";
   }
   public get hasDetailButton(): boolean {
     return !!this.detailDefinition;

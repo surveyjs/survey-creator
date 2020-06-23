@@ -9,8 +9,12 @@ export class PropertyEditorRestfull {
   constructor(
     public koContentEditor: any,
     public getLocString: any,
-    public question: QuestionDropdown
-  ) {}
+    public question: QuestionDropdown,
+    public componentInfo: any,
+    public koAfterRender: any
+  ) {
+    koAfterRender(componentInfo.element); //TODO working check
+  }
 }
 
 ko.components.register("svd-property-editor-restfull", {
@@ -20,7 +24,9 @@ ko.components.register("svd-property-editor-restfull", {
       return new PropertyEditorRestfull(
         model.koContentEditor,
         model.getLocString,
-        model.question
+        model.question,
+        componentInfo,
+        model.koAfterRender
       );
     },
   },

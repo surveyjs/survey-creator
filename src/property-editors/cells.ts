@@ -9,8 +9,12 @@ export class PropertyEditorCells {
     public koCanEdit: any,
     public getLocString: (name: string) => any,
     public koColumns: any,
-    public koRows: any
-  ) {}
+    public koRows: any,
+    public componentInfo: any,
+    public koAfterRender: any
+  ) {
+    koAfterRender(componentInfo.element); //TODO working check
+  }
 }
 
 ko.components.register("svd-property-editor-cells", {
@@ -21,7 +25,9 @@ ko.components.register("svd-property-editor-cells", {
         model.koCanEdit,
         model.getLocString,
         model.koColumns,
-        model.koRows
+        model.koRows,
+        componentInfo,
+        model.koAfterRender
       );
     },
   },

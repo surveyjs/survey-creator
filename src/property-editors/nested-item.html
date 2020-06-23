@@ -12,8 +12,7 @@
   </td>
   <!-- ko foreach: cells -->
   <td class="form-group">
-    <!-- ko template: { name: 'propertyeditor', data: objectProperty.editor } -->
-    <!-- /ko -->
+    <svd-property-editor params="model: objectProperty.editor"></svd-property-editor>
   </td>
   <!-- /ko -->
   <td class="svd-textitems-column">

@@ -419,7 +419,7 @@ export class SurveyElementEditorTabModel {
     return this.editorPropertiesValue;
   }
   public get htmlTemplate(): string {
-    return "questioneditortab";
+    return "svd-object-editor-tab";
   }
   public get templateObject(): any {
     return this;

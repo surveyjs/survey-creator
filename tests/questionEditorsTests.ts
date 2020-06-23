@@ -38,7 +38,7 @@ QUnit.test("Create correct question editor property tab ", function(assert) {
   var tab = createSurveyQuestionEditorTab(dropdownQuestion, ["choices"]);
   assert.equal(
     tab.htmlTemplate,
-    "questioneditortab",
+    "svd-object-editor-tab",
     "itemvalues template should be created"
   );
   assert.equal(

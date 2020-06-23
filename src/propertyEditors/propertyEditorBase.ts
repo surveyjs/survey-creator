@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "./editableObject";
-import { getFirstNonTextElement } from '../utils/utils';
+import { getFirstNonTextElement } from "../utils/utils";
 
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -117,40 +117,40 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
-  public setup() { }
-  public beforeShow() { }
+  public setup() {}
+  public beforeShow() {}
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
-    this.koValue.subscribe(function(newValue) {
+    this.koValue.subscribe(function (newValue) {
       self.onkoValueChanged(newValue);
     });
     this.koText = ko.computed(() => {
       return self.getValueText(self.koValue());
     });
-    this.koIsDefault = ko.computed(function() {
+    this.koIsDefault = ko.computed(function () {
       return self.property
         ? self.property.isDefaultValue(self.koValue())
         : false;
     });
     this.koHasError = ko.observable(false);
     this.koErrorText = ko.observable("");
-    this.koDisplayError = ko.computed(function() {
+    this.koDisplayError = ko.computed(function () {
       return self.koHasError() && !!self.koErrorText();
     });
-    this.koMaxLength = ko.computed(function() {
+    this.koMaxLength = ko.computed(function () {
       return !!self.property &&
         !!self.property["maxLength"] &&
         self.property["maxLength"] > 0
         ? self.property["maxLength"]
         : 524288;
     });
-    this.koMaxValue = ko.computed(function() {
+    this.koMaxValue = ko.computed(function () {
       return !!self.property && !self.isValueEmpty(self.property.maxValue)
         ? self.property.maxValue
         : "";
     });
-    this.koMinValue = ko.computed(function() {
+    this.koMinValue = ko.computed(function () {
       return !!self.property && !self.isValueEmpty(self.property.minValue)
         ? self.property.minValue
         : "";
@@ -217,13 +217,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return true;
   }
   public get contentTemplateName(): string {
-    var res = "propertyeditor";
-    if (this.isModal) {
-      res += "-modalcontent";
-    } else {
-      res += "-" + this.editorTypeTemplate;
-    }
-    return res;
+    const editorType = this.isModal ? "modal-content" : this.editorTypeTemplate;
+    return "svd-property-editor-" + editorType;
   }
   protected get isModal(): boolean {
     return false;
@@ -339,7 +334,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.performApply();
     return true;
   }
-  protected performApply() { }
+  protected performApply() {}
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
     return "";
@@ -360,7 +355,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.optionsValue = value;
     this.onOptionsChanged();
   }
-  protected onOptionsChanged() { }
+  protected onOptionsChanged() {}
   public setObject(value: any) {
     if (this.options) {
       var editorOptions = this.createEditorOptions();
@@ -375,8 +370,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected createEditorOptions(): any {
     return {};
   }
-  protected onSetEditorOptions(editorOptions: any) { }
-  protected onValueChanged() { }
+  protected onSetEditorOptions(editorOptions: any) {}
+  protected onValueChanged() {}
   protected getCorrectedValue(value: any): any {
     if (!this.property) return value;
     if (!this.isValueEmpty(this.property.minValue)) {
@@ -473,7 +468,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         this.element = undefined;
       });
     }
-  }
+  };
   focus() {
     if (this.element && typeof this.element.focus === "function") {
       // var focusable = this.element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');

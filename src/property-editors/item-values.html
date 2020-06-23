@@ -3,8 +3,7 @@
     <button class="btn btn-sm btn-xs" data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:changeToTextViewClick, text: $data.getLocString('pe.fastEntry'), attr: { 'aria-label': $data.getLocString('pe.fastEntry') }"></button>
 </div>
 <div data-bind="visible: koActiveView() == 'form'">
-    <!-- ko template: { name: 'propertyeditorcontent-nesteditems', data: model } -->
-    <!-- /ko -->
+    <svd-property-editor-nested-items params="model: model"></svd-property-editor-nested-items>
 </div>
 <div data-bind="visible:koIsList() && koActiveView() != 'form'">
     <textarea class="form-control" data-bind="textInput: koItemsText, disable: $data.readOnly" style="overflow-y: auto; overflow-x:hidden; max-height:400px; min-height:250px; width:100%"></textarea>

@@ -2,13 +2,15 @@
   <!-- ko if: koHasObject -->
   <div role="tablist">
     <!-- ko ifnot: koIsOldTableAppearance() -->
-    <!-- ko template: { name: "object-editor-content", data: koElementEditor() } -->
-    <!-- /ko -->
+    <svd-object-editor-content
+      params="elementEditorContent: koElementEditor()"
+    ></svd-object-editor-content>
     <!-- /ko -->
 
     <!-- ko if: koIsOldTableAppearance() -->
-    <!-- ko template: { name: "object-editor-old-table-content", data: koElementEditor() } -->
-    <!-- /ko -->
+    <svd-object-editor-old-table-content
+      params="elementEditorContent: koElementEditor()"
+    ></svd-object-editor-old-table-content>
     <!-- /ko -->
   </div>
   <!-- /ko -->

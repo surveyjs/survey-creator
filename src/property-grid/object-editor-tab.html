@@ -8,7 +8,9 @@
       <div
         data-bind="visible: koVisible, event: { keydown: editor.keyDownHandler }, attr: { 'data-property': property.name }"
       >
-        <!-- ko template: { name: 'propertyeditor', data: editor, afterRender: $parent.koAfterRenderProperty } --><!-- /ko -->
+        <svd-property-editor
+          params="{model: editor, afterRender: $parent.koAfterRenderProperty}"
+        ></svd-property-editor>
       </div>
     </div>
     <!-- /ko  -->

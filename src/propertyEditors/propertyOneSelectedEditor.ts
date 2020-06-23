@@ -44,7 +44,7 @@ export class SurveyPropertyOneSelectedEditor extends SurveyPropertyItemsEditor {
     };
   }
   public get editorTypeTemplate(): string {
-    return "oneselected";
+    return "one-selected";
   }
   public get editorType(): string {
     return "oneselected";

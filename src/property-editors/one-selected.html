@@ -50,13 +50,17 @@
   <ul class="svd-available-classes-container svd-light-bg-color" tabindex="0">
     <!-- ko foreach: koAvailableClasses -->
     <li>
-      <a href="#" data-bind="click: function() {$parent.onAddClick($data); $parent.toggleClassesContainer();}">
+      <a
+        href="#"
+        data-bind="click: function() {$parent.onAddClick($data); $parent.toggleClassesContainer();}"
+      >
         <span data-bind="text:$data.text"></span>
       </a>
     </li>
     <!-- /ko  -->
   </ul>
   <!-- ko if: selectedObjectEditor() != null -->
-  <!-- ko template: { name: "object-editor-content", data: selectedObjectEditor() } --><!-- /ko -->
-  <!-- /ko -->
+  <svd-object-editor-content
+    params="elementEditorContent: selectedObjectEditor()"
+  ></svd-object-editor-content>
 </div>

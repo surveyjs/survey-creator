@@ -13,7 +13,7 @@ export class SurveyPropertyUrlConditionEditor extends SurveyNestedPropertyEditor
     return "urlconditions";
   }
   public get editorTypeTemplate(): string {
-    return "nesteditems";
+    return "nested-items";
   }
   protected createNewItem(): any {
     return Survey.Serializer.createClass("urlconditionitem");

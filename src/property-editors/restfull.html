@@ -1,7 +1,8 @@
 <form>
   <!-- ko if: koContentEditor() != null -->
-  <!-- ko template: { name: "object-editor-content", data: koContentEditor() } --><!-- /ko -->
-  <!-- /ko -->
+  <svd-object-editor-content
+    params="elementEditorContent: koContentEditor()"
+  ></svd-object-editor-content>
   <div class="form-group">
     <label for="titleName">
       <span data-bind="text:$data.getLocString('pe.testService')"></span>

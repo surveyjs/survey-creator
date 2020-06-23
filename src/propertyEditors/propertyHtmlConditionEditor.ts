@@ -13,7 +13,7 @@ export class SurveyPropertyHtmlConditionEditor extends SurveyNestedPropertyEdito
     return "htmlconditions";
   }
   public get editorTypeTemplate(): string {
-    return "nesteditems";
+    return "nested-items";
   }
   protected createNewItem(): any {
     return new Survey.HtmlConditionItem();

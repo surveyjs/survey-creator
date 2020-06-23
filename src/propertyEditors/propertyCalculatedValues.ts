@@ -10,10 +10,10 @@ export class SurveyPropertyCalculatedValueEditor extends SurveyNestedPropertyEdi
     super(property);
   }
   public get editorType(): string {
-    return "calculatedvalues";
+    return "calculated-values";
   }
   public get editorTypeTemplate(): string {
-    return "nesteditems";
+    return "nested-items";
   }
   protected getEditorName(): string {
     if (!this.koEditItem()) return "";

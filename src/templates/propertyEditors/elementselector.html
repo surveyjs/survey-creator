@@ -1,6 +1,5 @@
 <script type="text/html" id="elementselector">
-<!-- ko template: {name: 'propertyeditor-error', data: $data} -->
-<!-- /ko -->
+<svd-property-editor-error params="model:$data"></svd-property-editor-error>
 <div class="form-control svd_custom_select">
   <select onmousewheel="return false;"
     data-bind="if: true, value: koValue, optionsCaption: optionsCaption, valueAllowUnset: true, hasFocus: koHasFocus, attr: { 'aria-label': optionsCaption }">

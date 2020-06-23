@@ -1,4 +1,3 @@
 <div data-bind="html: $data.koHtmlTop"></div>
-<!-- ko template: { name: 'propertyeditorcontent-' + editorTypeTemplate, data: model, afterRender: $data.koAfterRender } -->
-<!-- /ko -->
+<!-- ko component: { name: "svd-property-editor-" + editorTypeTemplate, params: { model: model } } --><!-- /ko -->
 <div data-bind="html: $data.koHtmlBottom"></div>

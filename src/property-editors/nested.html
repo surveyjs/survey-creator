@@ -1,8 +1,13 @@
 <div style="padding-left: 10px;">
-  <button type="button" class="btn btn-sm btn-secondary" data-bind="click: onReturnToListClick">
-      <span class="glyphicon glyphicon-list-alt"></span>
+  <button
+    type="button"
+    class="btn btn-sm btn-secondary"
+    data-bind="click: onReturnToListClick"
+  >
+    <span class="glyphicon glyphicon-list-alt"></span>
   </button>
   <span data-bind="text: koEditorName"></span>
-<!-- ko template: { name: "object-editor-content", data: koEditItem().itemEditor } -->
-<!-- /ko -->
+  <svd-object-editor-content
+    params="elementEditorContent: koEditItem().itemEditor"
+  ></svd-object-editor-content>
 </div>

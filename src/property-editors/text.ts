@@ -12,14 +12,21 @@ export class PropertyEditorText {
     public koMaxLength: any,
     public displayName: string,
     public onBlur: any,
-    public onFocus: any
+    public onFocus: any,
+    public componentInfo: any,
+    public koAfterRender: any
   ) {}
+
+  public afterRender = (node: Node) => {
+    this.koAfterRender(node);
+  };
 }
 
 ko.components.register("svd-property-editor-text", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyTextEditor = params.model;
+
       return new PropertyEditorText(
         model.koValue,
         model.readOnly,
@@ -27,7 +34,9 @@ ko.components.register("svd-property-editor-text", {
         model.koMaxLength,
         model.displayName,
         model.onBlur,
-        model.onFocus
+        model.onFocus,
+        componentInfo,
+        model.koAfterRender
       );
     },
   },

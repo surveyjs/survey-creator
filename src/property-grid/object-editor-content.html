@@ -5,18 +5,14 @@
     role="presentation"
     data-bind="css: {active: $parent.activeTab == name}, click: $parent.onTabClick"
   >
-    <a
-      class="nav-link"
-      data-bind="css: {active: $parent.activeTab == name}"
-    >
+    <a class="nav-link" data-bind="css: {active: $parent.activeTab == name}">
       <span data-bind="text:title"></span>
     </a>
   </li>
 </ul>
 <!-- ko foreach: koTabs -->
-<div data-bind="if: $parent.activeTab === name" style="margin-top:5px">
-  <!-- ko template: { name: htmlTemplate, data: templateObject, afterRender: $data.koAfterRender } -->
-  <!-- /ko -->
+<div data-bind="if: $parent.activeTab === name" style="margin-top: 5px;">
+  <!-- ko component: { name: htmlTemplate, params: { model: templateObject, afterRender: $data.koAfterRender} } --><!-- /ko -->
 </div>
 <!-- /ko  -->
 <!-- /ko  -->
