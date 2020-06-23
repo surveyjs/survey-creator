@@ -99,6 +99,8 @@ There are several options that you may set to change the Survey Creator behavior
 |_showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
 |_showTitlesInExpressions: false_|Set this property to true if you want to show titles instead of names in expression editor.|
 |_hideExpressionHeaderInLogicTab: true_|Set this property to true to hide the expression header text and expand/collapse button in editing item in logic tab.|
+|_allowControlSurveyTitleVisibility: false_|Set this property to false if you want to hide the expand/collapse button for showing survey logo/title.|
+|_showSurveyTitle: "never"_|Set this property to "never" to hide survey title and logo from designer and to "always" to show it all the time and to "ifentered" to show when the logo or title is not empty.|
 |_};_||
 
 <div id="loadsavesurvey"></div>
