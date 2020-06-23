@@ -8,7 +8,8 @@
         <div class="svd-vertical-container__cell">
             <div class="svd-vertical-container__cell-content-holder">
                 <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
-                    <div data-bind="visible: !hasAceEditor">
+                    <div class="svd-json-editor">
+                        <!-- ko if: !hasAceEditor -->
                         <textarea class="svd-json-editor-area"
                             data-bind="textInput:koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
                         </textarea>
@@ -17,8 +18,8 @@
                             <span>Error: </span><span data-bind="text: text"></span>
                         </div>
                         <!-- /ko  -->
+                        <!-- /ko  -->
                     </div>
-                    <div class="svd-json-editor"></div>
                 </div>
             </div>
         </div>
