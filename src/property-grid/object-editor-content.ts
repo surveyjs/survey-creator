@@ -24,7 +24,7 @@ export class ObjectEditorContent {
 ko.components.register("svd-object-editor-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const model: SurveyElementEditorContentModel = params.elementEditorContent();
+      const model: SurveyElementEditorContentModel = params.model || params.elementEditorContent();
       return new ObjectEditorContent(
         model.useTabsInElementEditor,
         model.koTabs,

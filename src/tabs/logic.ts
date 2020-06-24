@@ -645,7 +645,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       },
       createTemplateObject: function (element: Survey.Base) {
         var item = <Survey.HtmlConditionItem>element;
-        return { koValue: ko.observable(item.html), readOnly: false };
+        return { koValue: ko.observable(item.html), readOnly: false, koAfterRender: function(){} };
       },
       saveElement: function (
         survey: Survey.SurveyModel,
