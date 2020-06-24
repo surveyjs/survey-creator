@@ -639,7 +639,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "htmlconditionitem",
       propertyName: "expression",
       isUniqueItem: true,
-      templateName: "propertyeditorcontent-html",
+      templateName: "svd-property-editor-html",
       createNewElement: function (survey: Survey.SurveyModel) {
         return new Survey.HtmlConditionItem();
       },
