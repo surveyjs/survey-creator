@@ -56,20 +56,13 @@ test(`checking remove page`, async (t) => {
 
   await t.click(page2).hover(page2);
 
-  await t.debug();
-
   await t.hover(page2);
-  await t.debug();
 
   await t.hover(page2.find(".svd-page-actions"));
-  await t.debug();
 
-  
   await t.hover(page2.find(".svd-page-actions").find(".svd-page-action"));
-  await t.debug();
 
   await t.hover(page2.find(".svd-page-actions").find(".svd-page-action").nth(1));
-  await t.debug();
 
   await t.click(
     page2

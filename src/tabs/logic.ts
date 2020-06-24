@@ -67,7 +67,7 @@ export class SurveyLogicType {
     return this.logicType.propertyName;
   }
   public get templateName(): string {
-    if (this.isTrigger) return "object-editor-content";
+    if (this.isTrigger) return "svd-object-editor-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
       : "elementselector";

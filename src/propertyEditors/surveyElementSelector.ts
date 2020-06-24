@@ -22,6 +22,7 @@ export class SurveyElementSelector {
   public koDisplayError: any;
   public onValueChangedCallback: (val: string) => void;
   public disabledPropertyName: string;
+  koAfterRender: any;
   constructor(
     public survey: Survey.SurveyModel,
     elementType: string = "question",
@@ -51,6 +52,7 @@ export class SurveyElementSelector {
     this.koDisplayError = ko.computed(function() {
       return !!self.koErrorText();
     });
+    this.koAfterRender = function () {};
   }
   public get value(): string {
     return this.koValue();
