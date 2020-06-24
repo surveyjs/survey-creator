@@ -33,6 +33,7 @@
     width: auto;
     select:disabled {
       background-color: $secondary-bg-color;
+      background-color: var(--secondary-bg-color, $secondary-bg-color);
     }
   }
 
@@ -46,7 +47,8 @@
     }
     td:last-child {
       width: 20px;
-      padding: 5px;
+      line-height: 28px;
+      vertical-align: top;
     }
 
     .svd-propertyeditor-condition-item-delete-icon {

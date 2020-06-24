@@ -19,7 +19,8 @@
       <tbody
         data-bind="sortable: { foreach: originalValue, options: sortableOptions }"
       >
-        <!-- ko component: { name:"svd-property-editor-nested-item", params: { item: $data, editor: $parent.model } } --><!-- /ko -->
+        <!-- ko component: { name:"svd-property-editor-nested-item", params: { item: $data, editor: $parent.model } } -->
+        <!-- /ko -->
       </tbody>
     </table>
   </div>
@@ -29,12 +30,12 @@
   >
     <input
       type="button"
-      class="btn btn-primary"
+      class="btn sv-btn btn-primary"
       data-bind="click: onAddClick, value: $data.getLocString('pe.addNew')"
     />
     <input
       type="button"
-      class="btn btn-danger"
+      class="btn sv-btn btn-danger"
       data-bind="click: onClearClick, visible: originalValue.length > 0 && koAllowRemoveAllItems(), value: $data.getLocString('pe.removeAll')"
     />
   </div>

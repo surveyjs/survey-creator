@@ -1,0 +1,173 @@
+.svd_container.sv_modern_css {
+    $control-height: 34px;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+
+    .sv-btn {
+        line-height: $control-height;
+        height: $control-height;
+        border-radius: $control-height / 2;
+        font-size: 14px;
+        padding: 0 1.5em;
+        &>* {
+            line-height: $control-height;
+        }
+        &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .svd-tabs {
+        padding: 0;
+        margin: 0;
+    }
+    .svd-tab {
+        list-style: none;
+        display: inline-block;
+        margin: 0;
+        &:not(:first-child) {
+            margin-left: -4px;
+        }
+    }
+    .svd-tab-text {
+        display: inline-block;
+        padding: 1em 2em;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .svd-designer-tabbed-container__tab-header {
+        font-family: Raleway;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: unset;
+    }
+    .svd-designer-tabbed-container__tab-content {
+        overflow: unset;
+    }
+    
+    .svd-accordion-tab-header {
+        font-family: Raleway;
+        font-size: 14px;
+        font-weight: bold;
+        // color: #404040;
+        min-height: 47px;
+        line-height: 47px;
+    }
+
+    .svd_toolbox_item_text {
+        font-size: 16px;
+    }    
+
+    svd-property-editor {
+        display: block;
+        margin-bottom: 1em;
+
+        .sv-body__page {
+            margin: 0;
+        }
+        .sv-title {
+            font-size: 14px;
+        }
+    }
+
+    .svd-control {
+        height: $control-height;
+        border-radius: 2px;
+        border: solid 1px $light-control-color;
+        border-color: var(--light-control-color, $light-control-color);
+        background-color: $primary-bg-color;
+        background-color: var(--primary-bg-color, $primary-bg-color);
+        padding: 0 12px;
+    }
+    .svd-control-label {
+        display: inline-block;
+        // font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .sjs-cb-container .checkmark:after {
+        left: 6px;
+        top: 2px;
+    }
+
+    .svd_custom_select:before {
+        background-color: transparent;
+        background-image: url("./images/Arrow_down_10x10.svg");
+        padding: 5px;
+        margin: 12px;
+    }
+
+    svd-pages-editor {
+        .svd-page {
+            font-family: Raleway;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            // color: rgba(64, 64, 64, 0.5);
+            color: solid 1px $secondary-text-color;
+            color: var(--secondary-text-color, $secondary-text-color);
+            &:hover, &.svd_selected_page, &.svd-page-add {
+                color: $primary-text-color;
+                color: var(--primary-text-color, $primary-text-color);
+            }        
+        }
+        .svd-page.svd_selected_page {
+            background-color: transparent;
+        }        
+        .svd-page-selector {
+            float: right;
+            margin-top: 8px;
+        }
+    }
+
+    svd-property-grid {
+        .svd-vertical-container__cell-content--scrollable {
+            overflow-y: scroll;
+        }
+        .checkmark {
+            top: 5px;
+        }    
+    }
+
+    .svd_object_editor {
+        padding: 0;
+        margin-left: 15px;
+    }
+
+    .svd_items_table {
+        svd-property-editor {
+            margin-bottom: 0;
+        }
+    }
+
+    .propertyeditor-validators {
+        .input-group {
+            display: table;
+            table-layout: fixed;
+        }
+        .input-group-addon, .form-control {
+            display: table-cell;
+            &.btn-danger {
+                min-width: $control-height;
+                text-align: center;
+            }
+        }
+    }
+
+    .svd-propertyeditor-condition-wide-table {
+        td:last-child {
+          line-height: $control-height;
+        }
+    }    
+
+    .svd-vertical-container__cell-content {
+        svd-translation-group {
+            margin-top: 1em;
+        }
+    }
+
+}

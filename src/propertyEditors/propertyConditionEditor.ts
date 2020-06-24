@@ -236,29 +236,35 @@ export class ConditionEditorItem {
     var paddingRight = isWide ? "20px" : "5px";
     var isValueSameLine =
       !!this.valueQuestion && !this.valueQuestion.startWithNewLine;
+
     if (!!this.conjunctionQuestion) {
+      this.conjunctionQuestion.minWidth = "50px";
       this.conjunctionQuestion.width = this.isFirst
         ? ""
-        : isWide
-        ? "15%"
-        : "25%";
+        : "100px";
       this.conjunctionQuestion.paddingRight = paddingRight;
     }
+
+    this.nameQuestion.minWidth = "50px";
     this.nameQuestion.width = isWide
       ? this.isFirst
         ? "40%"
         : "25%"
       : this.isFirst
-      ? "70%"
-      : "45%";
+        ? "70%"
+        : "45%";
     this.nameQuestion.paddingRight = paddingRight;
+
+    this.operatorQuestion.minWidth = "50px";
     this.operatorQuestion.width = isWide
       ? isValueSameLine
         ? "25%"
         : "60%"
       : "30%";
     this.operatorQuestion.paddingRight = paddingRight;
+
     if (!!this.valueQuestion) {
+      this.valueQuestion.minWidth = "50px";
       this.valueQuestion.width = isValueSameLine ? "35%" : "";
       this.valueQuestion.paddingRight = paddingRight;
     }

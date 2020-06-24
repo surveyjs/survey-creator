@@ -19,10 +19,10 @@
           </div>
           <!-- /ko  -->
           <!-- ko if: tabs().length > 1 -->
-          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-light-bg-color">
+          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color">
             <!-- ko foreach: tabs -->
-            <li class="nav-item" data-bind="css: {active: $parent.koViewType() == name}">
-              <a class="nav-link" href="#" data-bind="click: action, text: title"></a>
+            <li class="nav-item svd-tab" data-bind="css: {active: $parent.koViewType() == name}">
+              <a class="nav-link svd-tab-text" href="#" data-bind="click: action, text: title"></a>
             </li>
             <!-- /ko -->
           </ul>

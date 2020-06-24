@@ -3,40 +3,48 @@
     display: inline-block;
     vertical-align: middle;
     fill: $primary-icon-color;
+    fill: var(--primary-icon-color, $primary-icon-color);
   }
   .svd-primary-icon {
     .svd-svg-icon {
       fill: $primary-color;
+      fill: var(--primary-color, $primary-color);
     }
   }
   .svd-danger-icon {
     .svd-svg-icon {
       fill: $error-color;
+      fill: var(--error-color, $error-color);
     }
   }
   .svd-secondary-icon {
     .svd-svg-icon {
       fill: $secondary-color;
+      fill: var(--secondary-color, $secondary-color);
     }
   }
-  .icon-gearactive {
+  .icon-gearactive, .icon-dotsactive {
     .svd-svg-icon {
       fill: $primary-color;
+      fill: var(--primary-color, $primary-color);
     }
   }
-  .icon-gear {
+  .icon-gear, .icon-dots {
     .svd-svg-icon {
-      fill: $icon-gear-color;
+      fill: $light-control-color;
+      fill: var(--light-control-color, $light-control-color);
     }
   }
   .icon-white {
     .svd-svg-icon {
       fill: $primary-bg-color;
+      fill: var(--primary-bg-color, $primary-bg-color);
     }
   }
   .icon-status {
     .svd-svg-icon {
       fill: $icon-status-color;
+      fill: var(--icon-status-color, $icon-status-color);
       margin-bottom: 0.3em;
     }
   }

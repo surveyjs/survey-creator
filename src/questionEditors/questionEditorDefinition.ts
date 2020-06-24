@@ -57,6 +57,8 @@ export class SurveyQuestionEditorDefinition {
     },
     file: {
       properties: [
+        "hasComment",
+        "commentText",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",

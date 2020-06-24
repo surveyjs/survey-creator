@@ -59,17 +59,20 @@ svd-designer-container {
   border-bottom: 4px solid transpereant;
   &:hover {
     color: $primary-color;
+    color: var(--primary-color, $primary-color);
   }
 }
 
 .svd-designer-tabbed-container__tab-header-active {
   border-bottom: 4px solid $primary-color;
+  border-bottom-color: var(--primary-color, $primary-color);
 }
 
 .svd-designer-tabbed-container__tab-content {
   display: none;
   height: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &.svd-designer-tabbed-container__tab-content-active {
     display: block;

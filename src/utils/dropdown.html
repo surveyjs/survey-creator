@@ -1,5 +1,5 @@
 <label class="svd-toolbar-dropdown">
-    <span data-bind="text: title" class="svd-toolbar-dropdown__label"></span>
+    <span data-bind="text: title, visible: title" class="svd-toolbar-dropdown__label"></span>
     <div class="svd_custom_select">
         <select onmousewheel="return false;" class="svd-toolbar-dropdown__select"
             data-bind="options: items, optionsText: 'text', optionsValue: optionsValue, value: action, optionsAfterRender: afterRender, optionsCaption: optionsCaption,  disable: disable, valueAllowUnset: valueAllowUnset, hasFocus: hasFocus, attr: { 'aria-label': ariaLabel }">

@@ -48,6 +48,7 @@
   .svda-title-editor-focusable:focus + .svda-title-editor-start {
     visibility: visible;
     outline: 1px dotted $primary-color;
+    outline-color: var(--primary-color, $primary-color);
   }
 }
 
@@ -67,11 +68,15 @@ title-editor {
       white-space: nowrap;
       & > input {
         max-width: 100%;
+        font-size: inherit;
+        color: inherit;
       }
       .svda-title-editor-error {
         outline: 1px dotted $error-color !important;
+        outline-color: var(--error-color, $error-color);
         &::placeholder {
           color: $error-color;
+          color: var(--error-color, $error-color);
         }
       }
     }
