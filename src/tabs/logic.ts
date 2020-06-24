@@ -70,7 +70,7 @@ export class SurveyLogicType {
     if (this.isTrigger) return "svd-object-editor-content";
     return !!this.logicType.templateName
       ? this.logicType.templateName
-      : "elementselector";
+      : "svd-element-selector";
   }
   public get visible(): boolean {
     if (!this.showInUI) return false;

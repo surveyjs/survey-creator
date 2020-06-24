@@ -94,8 +94,7 @@
       </div>
       <div style="max-width:800px">
         <!--ko if: action.koTemplateObject() != null && !!action.koTemplate() -->
-        <!-- ko template: { name: action.template, data: action.koTemplateObject() } -->
-        <!-- /ko -->
+        <!-- ko component: { name: action.template, params: { model:action.koTemplateObject() } } --><!-- /ko -->
         <!-- /ko -->
       </div>
     </div>

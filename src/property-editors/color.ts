@@ -9,19 +9,26 @@ export class PropertyEditorColor {
     public koValue: any,
     public readOnly: boolean,
     public koMaxValue: any,
-    public koMinValue: any
-  ) { }
+    public koMinValue: any,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-color", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyColorPropertyEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorColor(
         model.koValue,
         model.readOnly,
         model.koMaxValue,
-        model.koMinValue
+        model.koMinValue,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },
