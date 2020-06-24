@@ -14,14 +14,18 @@ export class PropertyEditorItemValues {
     public getLocString: any,
     public koItemsText: any,
     public readOnly: any,
-    public model: SurveyPropertyItemValuesEditor
-  ) {}
+    public model: SurveyPropertyItemValuesEditor,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-item-values", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyItemValuesEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorItemValues(
         model.koIsList,
         model.koShowTextView,
@@ -31,7 +35,10 @@ ko.components.register("svd-property-editor-item-values", {
         model.getLocString,
         model.koItemsText,
         model.readOnly,
-        model //TODO break on props
+        model, //TODO break on props
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

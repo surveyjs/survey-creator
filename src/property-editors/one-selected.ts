@@ -21,8 +21,10 @@ export class PropertyEditorOneSelected {
     public model: SurveyPropertyOneSelectedEditor,
     public onDeleteClick: any,
     public selectedObjectEditor: ko.Observable<SurveyElementEditorContentModel>,
-    public componentInfo: any
+    public componentInfo: any,
+    public afterRender: any
   ) {
+    afterRender();
     this.setupAvailableClassesContainer(componentInfo.element);
   }
 
@@ -68,6 +70,7 @@ ko.components.register("svd-property-editor-one-selected", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyOneSelectedEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorOneSelected(
         model.koAvailableClasses,
         model.koAllowAddRemoveItems,
@@ -81,7 +84,10 @@ ko.components.register("svd-property-editor-one-selected", {
         model, //TODO break on props
         model.onDeleteClick,
         model.selectedObjectEditor,
-        componentInfo
+        componentInfo,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

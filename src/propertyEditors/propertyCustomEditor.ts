@@ -8,8 +8,8 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
     super(property);
     this.widgetJSONValue = widgetJSON;
     var self = this;
-    this["koAfterRender"] = function(el, con) {
-      self.doAfterRender(el, con);
+    this["koAfterRender"] = function(el) {
+      self.doAfterRender(el);
     };
   }
   public get editorType(): string {
@@ -45,7 +45,7 @@ export class SurveyPropertyCustomEditor extends SurveyPropertyEditorBase {
     }
     return null;
   }
-  protected doAfterRender(elements, con) {
+  protected doAfterRender(elements) {
     var el = elements[0];
     if (!!el && this.widgetRender) this.widgetRender(this, el);
   }

@@ -11,9 +11,10 @@ export class PropertyEditorRestfull {
     public getLocString: any,
     public question: QuestionDropdown,
     public componentInfo: any,
-    public koAfterRender: any
+    public koAfterRender: any,
+    public afterRender: any
   ) {
-    koAfterRender(componentInfo.element); //TODO working check
+    afterRender();
   }
 }
 
@@ -21,12 +22,16 @@ ko.components.register("svd-property-editor-restfull", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyResultfullEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorRestfull(
         model.koContentEditor,
         model.getLocString,
         model.question,
         componentInfo,
-        model.koAfterRender
+        model.koAfterRender,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

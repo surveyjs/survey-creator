@@ -10,10 +10,9 @@ export class PropertyEditorCells {
     public getLocString: (name: string) => any,
     public koColumns: any,
     public koRows: any,
-    public componentInfo: any,
-    public koAfterRender: any
+    public afterRender: any
   ) {
-    koAfterRender(componentInfo.element); //TODO working check
+    afterRender();
   }
 }
 
@@ -21,13 +20,15 @@ ko.components.register("svd-property-editor-cells", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyCellsEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorCells(
         model.koCanEdit,
         model.getLocString,
         model.koColumns,
         model.koRows,
-        componentInfo,
-        model.koAfterRender
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

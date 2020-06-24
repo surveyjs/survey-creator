@@ -20,14 +20,18 @@ export class PropertyEditorModal {
     public koShowApplyButton: any,
     public onApplyClick: any,
     public onOkClick: any,
-    public model: SurveyPropertyModalEditor
-  ) {}
+    public model: SurveyPropertyModalEditor,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-modal", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyModalEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorModal(
         model.isEditable,
         model.onShowModal,
@@ -43,7 +47,10 @@ ko.components.register("svd-property-editor-modal", {
         model.koShowApplyButton,
         model.onApplyClick,
         model.onOkClick,
-        model //TODO need to break on props
+        model, //TODO need to break on props,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

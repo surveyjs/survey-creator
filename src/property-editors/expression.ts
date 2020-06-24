@@ -13,14 +13,18 @@ export class PropertyEditorExpression {
     public editingObject: any,
     public model: SurveyPropertyConditionEditor,
     public koTextValue: any,
-    public showHelpText:any
-  ) {}
+    public showHelpText: any,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-expression", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyConditionEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorExpression(
         model.hasAceEditor,
         model.getLocString,
@@ -29,7 +33,10 @@ ko.components.register("svd-property-editor-expression", {
         model.editingObject,
         model,
         model.koTextValue,
-        model.showHelpText
+        model.showHelpText,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

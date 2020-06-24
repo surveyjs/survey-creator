@@ -2,7 +2,10 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "./editableObject";
-import { getFirstNonTextElement } from "../utils/utils";
+import {
+  getFirstNonTextElement,
+  getNodesFromKoComponentInfo,
+} from "../utils/utils";
 
 export interface ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -461,7 +464,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return true;
   }
   private element = undefined;
-  koAfterRender = (elements: HTMLElement[], context: any) => {
+  koAfterRender = (componentInfo: any) => {
+    const elements = getNodesFromKoComponentInfo(componentInfo);
     this.element = getFirstNonTextElement(elements);
     if (!!this.element) {
       ko.utils.domNodeDisposal.addDisposeCallback(this.element, () => {

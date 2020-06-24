@@ -8,7 +8,7 @@ import {
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
-import { focusFirstControl } from "../utils/utils";
+import { focusFirstControl, getNodesFromKoComponentInfo, getFirstNonTextElement } from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
 
@@ -449,9 +449,10 @@ export class SurveyElementEditorTabModel {
   protected getValue(property: Survey.JsonObjectProperty): any {
     return property.getPropertyValue(this.obj);
   }
-  private afterRenderProperty(elements, prop) {
+  private afterRenderProperty(componentInfo:any, prop) {
+    const elements = getNodesFromKoComponentInfo(componentInfo);
     if (!this.onAfterRenderCallback) return;
-    var el = Survey.SurveyElement.GetFirstNonTextElement(elements);
+    var el = getFirstNonTextElement(elements);
     var tEl = elements[0];
     if (tEl.nodeName === "#text") tEl.data = "";
     tEl = elements[elements.length - 1];

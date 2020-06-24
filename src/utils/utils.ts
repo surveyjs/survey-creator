@@ -100,9 +100,27 @@ export function getFirstNonTextElement(elements: any) {
   return null;
 }
 
+// about compoentInfo: https://knockoutjs.com/documentation/component-registration.html
+export function getNodesFromKoComponentInfo(componentInfo) {
+  // elem.nodeType === 3 // text node
+  // elem.nodeType === 8 // comment node
+
+  let element = componentInfo.element;
+  const siblings = [];
+
+  if (element.nodeType !== 8) {
+    return element.childNodes;
+  }
+
+  while ((element = element.nextSibling)) {
+    if (element.nodeType === 3) continue;
+    siblings.push(element);
+  }
+  return siblings;
+}
 
 ko.bindingHandlers["trueclick"] = {
-  init: function(element, valueAccessor, allBindingsAccessor) {
+  init: function (element, valueAccessor, allBindingsAccessor) {
     element.onclick = () => true;
   },
 };
@@ -119,13 +137,13 @@ export function createKey2click(element: HTMLElement) {
 }
 
 ko.bindingHandlers["key2click"] = {
-  init: function(element, valueAccessor, allBindingsAccessor) {
+  init: function (element, valueAccessor, allBindingsAccessor) {
     element.onkeyup = createKey2click(element);
   },
 };
 
 ko.bindingHandlers["clickNoFocus"] = {
-  init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+  init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
     element.onclick = (ev) => {
       valueAccessor().call(viewModel, viewModel, ev);
     };

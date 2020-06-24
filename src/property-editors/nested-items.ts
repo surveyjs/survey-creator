@@ -19,9 +19,12 @@ export class PropertyEditorNestedItems {
     public readOnly: any,
     public onAddClick: any,
     public onClearClick: any,
-    public koAllowRemoveAllItems: ko.Observable<boolean>
-  ) {}
-  public get originalValue(){
+    public koAllowRemoveAllItems: ko.Observable<boolean>,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
+  public get originalValue() {
     return this.model.originalValue;
   }
 }
@@ -30,6 +33,7 @@ ko.components.register("svd-property-editor-nested-items", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyNestedPropertyEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorNestedItems(
         model.koIsList,
         model.getLocString,
@@ -41,7 +45,10 @@ ko.components.register("svd-property-editor-nested-items", {
         model.readOnly,
         model.onAddClick,
         model.onClearClick,
-        model.koAllowRemoveAllItems
+        model.koAllowRemoveAllItems,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

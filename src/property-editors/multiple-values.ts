@@ -8,9 +8,10 @@ export class PropertyEditorMultipleValues {
   constructor(
     public koCategories: any,
     public componentInfo: any,
-    public koAfterRender: any
+    public koAfterRender: any,
+    public afterRender: any
   ) {
-    koAfterRender(componentInfo.element); //TODO working check
+    afterRender();
   }
 }
 
@@ -18,10 +19,14 @@ ko.components.register("svd-property-editor-multiple-values", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyMultipleValuesEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorMultipleValues(
         model.koCategories,
         componentInfo,
-        model.koAfterRender
+        model.koAfterRender,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

@@ -14,9 +14,10 @@ export class PropertyEditorValue {
     public refreshText: () => string,
     public model: SurveyPropertyDefaultValueEditor,
     public componentInfo: any,
-    public koAfterRender: any
+    public koAfterRender: any,
+    public afterRender: any
   ) {
-    koAfterRender(componentInfo.element); //TODO working check
+    afterRender();
   }
 }
 
@@ -24,6 +25,7 @@ ko.components.register("svd-property-editor-default-value", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyDefaultValueEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorValue(
         model.koSurvey,
         model.resetValue,
@@ -32,7 +34,10 @@ ko.components.register("svd-property-editor-default-value", {
         model.refreshText,
         model, //TODO break on props
         componentInfo,
-        model.koAfterRender
+        model.koAfterRender,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

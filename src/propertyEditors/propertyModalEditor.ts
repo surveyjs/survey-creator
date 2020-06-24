@@ -3,7 +3,7 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { editorLocalization } from "../editorLocalization";
-import { focusFirstControl, getFirstNonTextElement } from "../utils/utils";
+import { focusFirstControl, getFirstNonTextElement, getNodesFromKoComponentInfo } from "../utils/utils";
 import RModal from "rmodal";
 import { EditableObject } from "./editableObject";
 
@@ -132,8 +132,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         focusFirstControl(this.elements);
       }
     };
-    self.koAfterRender = function(el, con) {
-      return self.afterRender(el, con);
+    self.koAfterRender = function(el) {
+      return self.afterRender(el);
     };
   }
   protected get isModal(): boolean {
@@ -208,7 +208,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   public get isEditable(): boolean {
     return false;
   }
-  protected afterRender(elements, con) {
+  protected afterRender(componentInfo:any) {
+    const elements = getNodesFromKoComponentInfo(componentInfo);
     this.elements = elements;
     var customWidget = SurveyPropertyModalEditor.getCustomWidget(
       this.editorType

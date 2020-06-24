@@ -9,19 +9,26 @@ export class PropertyEditorBoolean {
     public koValue: any,
     public readOnly: boolean,
     public isDiplayNameVisible: boolean,
-    public displayName: string
-  ) {}
+    public displayName: string,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-boolean", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyBooleanPropertyEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorBoolean(
         model.koValue,
         model.readOnly,
         model.isDiplayNameVisible,
-        model.displayName
+        model.displayName,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },

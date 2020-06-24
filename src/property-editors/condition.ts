@@ -28,14 +28,18 @@ export class PropertyEditorCondition {
     public koTextValue: any,
     public availableQuestions: any[],
     public editingObject: any,
-    public model: SurveyPropertyConditionEditor
-  ) {}
+    public model: SurveyPropertyConditionEditor,
+    public afterRender: any
+  ) {
+    afterRender();
+  }
 }
 
 ko.components.register("svd-property-editor-condition", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyConditionEditor = params.model;
+      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorCondition(
         model.koShowExpressionHeader,
         model.onShowHideEditor,
@@ -59,7 +63,10 @@ ko.components.register("svd-property-editor-condition", {
         model.koTextValue,
         model.availableQuestions,
         model.editingObject,
-        model
+        model,
+        () => {
+          afterRender.call(model, componentInfo);
+        }
       );
     },
   },
