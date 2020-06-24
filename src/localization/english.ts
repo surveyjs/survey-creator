@@ -116,6 +116,7 @@ export var enStrings = {
     italic: "Italic",
     underline: "Underline",
     fpAddQuestion: "Add question...",
+    selectPage: "Select page...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
