@@ -85,6 +85,8 @@ item-editor {
       white-space: nowrap;
       & > input {
         max-width: 100%;
+        font-size: inherit;
+        color: inherit;
       }
     }
     .svda-edit-button {

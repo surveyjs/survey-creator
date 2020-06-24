@@ -68,6 +68,8 @@ title-editor {
       white-space: nowrap;
       & > input {
         max-width: 100%;
+        font-size: inherit;
+        color: inherit;
       }
       .svda-title-editor-error {
         outline: 1px dotted $error-color !important;
