@@ -162,6 +162,7 @@ export { PropertyEditorDropdown } from "../property-editors/dropdown";
 export { PropertyEditorBoolean } from "../property-editors/boolean";
 export { PropertyEditorSwitch } from "../property-editors/switch";
 export { PropertyEditorNumber } from "../property-editors/number";
+export { PropertyEditorColor } from "../property-editors/color";
 export { PropertyEditorModal } from "../property-editors/modal";
 export { PropertyEditorModalContent } from "../property-editors/modal-content";
 export { PropertyEditorText } from "../property-editors/text";

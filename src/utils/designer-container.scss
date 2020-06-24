@@ -71,7 +71,8 @@ svd-designer-container {
 .svd-designer-tabbed-container__tab-content {
   display: none;
   height: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &.svd-designer-tabbed-container__tab-content-active {
     display: block;

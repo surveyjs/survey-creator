@@ -325,6 +325,15 @@ export class SurveyNumberPropertyEditor extends SurveyPropertyEditorBase {
   }
 }
 
+export class SurveyColorPropertyEditor extends SurveyPropertyEditorBase {
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+  }
+  public get editorType(): string {
+    return "color";
+  }
+}
+
 SurveyPropertyEditorFactory.registerEditor("string", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
@@ -359,4 +368,9 @@ SurveyPropertyEditorFactory.registerEditor("number", function(
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyNumberPropertyEditor(property);
+});
+SurveyPropertyEditorFactory.registerEditor("color", function(
+  property: Survey.JsonObjectProperty
+): SurveyPropertyEditorBase {
+  return new SurveyColorPropertyEditor(property);
 });
