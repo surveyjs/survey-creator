@@ -224,6 +224,7 @@ export class SurveyLogicAction {
   public koLogicTypes: any;
   public onLogicTypeChanged: () => void;
   private itemSelectorValue: SurveyElementSelector = null;
+  koAfterRender: any;
   constructor(
     logicType: SurveyLogicType,
     element: Survey.Base,
@@ -236,10 +237,10 @@ export class SurveyLogicAction {
     this.koTemplateObject = ko.observable(null);
     this.koLogicTypes = ko.observableArray();
     var self = this;
-    this.koDisplayError = ko.computed(function() {
+    this.koDisplayError = ko.computed(function () {
       return !!self.koErrorText();
     });
-    this.koLogicType.subscribe(function(value) {
+    this.koLogicType.subscribe(function (value) {
       self.element = !!self.logicType
         ? self.logicType.createNewElement(self.survey)
         : null;
@@ -247,6 +248,7 @@ export class SurveyLogicAction {
       self.doLogicTypeChanged();
     });
     this.doLogicTypeChanged();
+    this.koAfterRender = function () {};
   }
   public get logicType(): SurveyLogicType {
     return this.koLogicType();
@@ -329,7 +331,7 @@ export class SurveyLogicAction {
     if (this.itemSelector) {
       var self = this;
       this.itemSelector.element = this.element;
-      this.itemSelector.onValueChangedCallback = function(newValue: string) {
+      this.itemSelector.onValueChangedCallback = function (newValue: string) {
         self.element = self.itemSelector.element;
       };
     }
@@ -490,7 +492,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.pages.length > 1;
       },
     },
@@ -498,7 +500,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -506,7 +508,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -514,7 +516,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_visibility",
       baseClass: "question",
       propertyName: "visibleIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -522,7 +524,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -530,7 +532,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "question_require",
       baseClass: "question",
       propertyName: "requiredIf",
-      showIf: function(survey: Survey.SurveyModel) {
+      showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -575,7 +577,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "setvaluetrigger",
       propertyName: "expression",
       questionNames: ["setToName"],
-      getDisplayText: function(
+      getDisplayText: function (
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -591,7 +593,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "copyvaluetrigger",
       propertyName: "expression",
       questionNames: ["setToName", "fromName"],
-      getDisplayText: function(
+      getDisplayText: function (
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -608,7 +610,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       propertyName: "expression",
       questionNames: ["gotoName"],
       isUniqueItem: true,
-      getDisplayTextName: function(element: Survey.Base): string {
+      getDisplayTextName: function (element: Survey.Base): string {
         return element["gotoName"];
       },
     },
@@ -617,7 +619,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       baseClass: "runexpressiontrigger",
       propertyName: "expression",
       questionNames: ["setToName"],
-      getDisplayText: function(
+      getDisplayText: function (
         element: Survey.Base,
         formatStr: string,
         lt: SurveyLogicType
@@ -638,14 +640,14 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       propertyName: "expression",
       isUniqueItem: true,
       templateName: "propertyeditorcontent-html",
-      createNewElement: function(survey: Survey.SurveyModel) {
+      createNewElement: function (survey: Survey.SurveyModel) {
         return new Survey.HtmlConditionItem();
       },
-      createTemplateObject: function(element: Survey.Base) {
+      createTemplateObject: function (element: Survey.Base) {
         var item = <Survey.HtmlConditionItem>element;
         return { koValue: ko.observable(item.html), readOnly: false };
       },
-      saveElement: function(
+      saveElement: function (
         survey: Survey.SurveyModel,
         action: SurveyLogicAction
       ) {
@@ -762,6 +764,8 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     any
   > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
 
+  koAfterRender: any;
+
   constructor(
     public survey: Survey.SurveyModel,
     public options: ISurveyObjectEditorOptions = null
@@ -774,37 +778,38 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.koReadOnly = ko.observable(this.readOnly);
     this.koErrorText = ko.observable("");
     var self = this;
-    this.koDisplayError = ko.computed(function() {
+    this.koDisplayError = ko.computed(function () {
       return !!self.koErrorText();
     });
-    this.koAddNew = function() {
+    this.koAddNew = function () {
       self.addNew();
     };
-    this.koEditItem = function(item: SurveyLogicItem) {
+    this.koEditItem = function (item: SurveyLogicItem) {
       self.editItem(item);
     };
-    this.koRemoveItem = function(item: SurveyLogicItem) {
+    this.koRemoveItem = function (item: SurveyLogicItem) {
       self.removeItem(item);
     };
-    this.koShowView = function() {
+    this.koShowView = function () {
       self.mode = "view";
     };
-    this.koSaveAndShowView = function() {
+    this.koSaveAndShowView = function () {
       if (self.saveEditableItem()) {
         self.mode = "view";
       }
     };
-    this.koSaveEditableItem = function() {
+    this.koSaveEditableItem = function () {
       self.saveEditableItem();
     };
-    this.koAddNewAction = function() {
+    this.koAddNewAction = function () {
       self.addNewAction();
     };
-    this.koRemoveAction = function(action: SurveyLogicAction) {
+    this.koRemoveAction = function (action: SurveyLogicAction) {
       self.removeAction(action);
     };
     this.koEditableItem = ko.observable(null);
     this.update();
+    this.koAfterRender = function () {};
   }
 
   private _placeholderHtml = ko.observable("");

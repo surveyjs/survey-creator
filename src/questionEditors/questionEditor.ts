@@ -381,11 +381,11 @@ export class SurveyElementEditorTabModel {
   ) {
     this.buildEditorProperties();
     var self = this;
-    this.koAfterRenderProperty = function(el, con) {
-      self.afterRenderProperty(el, con);
+    this.koAfterRenderProperty = function(componentInfo:any, con) {
+      self.afterRenderProperty(componentInfo, con);
     };
-    this.koAfterRender = function(el, con) {
-      self.afterRender(el, con);
+    this.koAfterRender = function(componentInfo:any, con) {
+      self.afterRender(componentInfo, con);
     };
   }
   public expand() {
