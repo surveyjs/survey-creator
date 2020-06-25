@@ -16,7 +16,8 @@ export class PropertyEditorNestedItem {
     public koCanDeleteItem: ko.Observable<boolean>,
     public dragIcon: string,
     public deleteIcon: string,
-    public obj: any
+    public obj: any,
+    public koHasDetails: any
   ) {}
 
   public get cells(): SurveyNestedPropertyEditorEditorCell[] {
@@ -41,7 +42,8 @@ ko.components.register("svd-property-editor-nested-item", {
         model.koCanDeleteItem,
         model.dragIcon,
         model.deleteIcon,
-        model.obj
+        model.obj,
+        model.koHasDetails
       );
     },
   },
