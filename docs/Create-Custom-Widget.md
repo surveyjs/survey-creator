@@ -490,7 +490,7 @@ var customWidgetJSON = {
    */ 
   iconName: iconName,
   /**
-   * This function is requried if you are going to introduce a new question type
+   * This function is required if you are going to introduce a new question type
    * and register it on SurveyJS Creator toolbox.
    * It should return true, when all needed resources (javascript and css files) are loaded
    */
@@ -499,7 +499,7 @@ var customWidgetJSON = {
   },
   /**
    * This function returns true when we decided to apply our widget to the question.
-   * This function is requried.
+   * This function is required.
    * SurveyJS Library allows to apply only one custom widget to a question.
    * If there are several custom widgets that can be applied to the same question,
    * then the first custom widget in the custom widget collection wins.

@@ -38,11 +38,11 @@ class ImageItemInplaceEditor {
       "svda-choose-file"
     )[0];
     fileInput.value = "";
-    fileInput.onchange = this.imageChoosen;
+    fileInput.onchange = this.imageChosen;
     fileInput.click();
   }
 
-  imageChoosen = event => {
+  imageChosen = event => {
     var input = this.itemsRoot.getElementsByClassName("svda-choose-file")[0];
     if (!window["FileReader"]) return;
     if (!input || !input.files || input.files.length < 1) return;

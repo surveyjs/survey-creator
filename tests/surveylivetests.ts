@@ -178,7 +178,7 @@ QUnit.test(
     assert.equal(
       creator.showDefaultLanguageInTestSurveyTab,
       "auto",
-      "Show if there are more then one language"
+      "Show if there are more than one language"
     );
     var test = getLiveSurveyByCreator(creator);
     assert.equal(

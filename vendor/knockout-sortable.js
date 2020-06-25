@@ -81,7 +81,7 @@
     ) {
       var options = buildOptions(valueAccessor, sortableOptions);
 
-      // It's seems that we cannot update the eventhandlers after we've created
+      // Its seems that we cannot update the eventhandlers after we've created
       // the sortable, so define them in init instead of update
       [
         "onStart",
@@ -126,7 +126,7 @@
 
       var sortableElement = Sortable.create(element, options);
 
-      // Destroy the sortable if knockout disposes the element it's connected to
+      // Destroy the sortable if knockout disposes the element its connected to
       ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
         sortableElement.destroy();
       });
@@ -177,7 +177,7 @@
             moveOperations.push(currentOperation);
           } else {
             // We're finishing the operation and already have a handle on
-            // the operation item meaning that it's safe to remove it
+            // the operation item meaning that its safe to remove it
             moveOperations.splice(moveOperations.indexOf(existingOperation), 1);
 
             var removeOperation =
@@ -199,12 +199,12 @@
           }
         },
         // Moves an item from the "from" collection to the "to" collection, these
-        // can be references to the same collection which means it's a sort.
+        // can be references to the same collection which means its a sort.
         // clone indicates if we should move or copy the item into the new collection
         moveItem = function(itemVM, from, to, clone, e) {
           // Unwrapping this allows us to manipulate the actual array
           var fromArray = from(),
-            // It's not certain that the items actual index is the same
+            // Its not certain that the items actual index is the same
             // as the index reported by sortable due to filtering etc.
             originalIndex = fromArray.indexOf(itemVM),
             newIndex = e.newIndex;

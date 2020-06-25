@@ -692,7 +692,7 @@ QUnit.test("Edit triggers via trigger editor", function(assert) {
   logic.saveEditableItem();
   assert.equal(
     logic.items[0].actions[0].text,
-    "Run expression: '({Question 2} + 1)' and set it's result into question: {Question 3}",
+    "Run expression: '({Question 2} + 1)' and set its result into question: {Question 3}",
     "use showTitlesInExpressions option"
   );
   assert.equal(
@@ -910,7 +910,7 @@ QUnit.test("Displaying correct text for logic action", function(assert) {
   assert.equal(findOp("trigger_skip").text, "Survey skip to the question {q2}");
   assert.equal(
     findOp("trigger_runExpression").text,
-    "Run expression: '{q2} + 1' and set it's result into question: {q3}"
+    "Run expression: '{q2} + 1' and set its result into question: {q3}"
   );
   assert.equal(
     findOp("completedHtmlOnCondition").text,

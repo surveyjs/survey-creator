@@ -159,7 +159,7 @@ QUnit.test("Create correct Question Editor by question type", function (
   );
 });
 
-QUnit.test("Hide a tab if it's visible attribute set to false", function (
+QUnit.test("Hide a tab if its visible attribute set to false", function (
   assert
 ) {
   var savedDefinition = JSON.stringify(
@@ -510,7 +510,7 @@ QUnit.test("Question editor definition: getTabs", function (assert) {
   var ratingQuestion = new Survey.QuestionRatingModel("q1");
   var properties = new SurveyQuestionProperties(ratingQuestion, null);
   var tabs = properties.getTabs();
-  assert.ok(tabs.length > 4, "Rating has more then 4 tabs");
+  assert.ok(tabs.length > 4, "Rating has more than 4 tabs");
   assert.equal(tabs[0].name, "general", "The first tab");
   assert.equal(tabs[0].index, -1, "The general tab index");
   assert.equal(tabs[1].name, "rateValues", "The second tab");

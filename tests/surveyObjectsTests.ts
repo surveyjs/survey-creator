@@ -242,7 +242,7 @@ QUnit.test("removeObject method - remove Page", function(assert) {
   assert.equal(
     objects.koObjects().length,
     elementsCount - 1 - 2,
-    "page and two it's questions are removed"
+    "page and two its questions are removed"
   );
 });
 QUnit.test("selectNextQuestion method", function(assert) {

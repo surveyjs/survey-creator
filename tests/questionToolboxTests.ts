@@ -178,7 +178,7 @@ QUnit.test(
     assert.equal(
       (<any>toolbox.koCategories()[0]).koCollapsed(),
       false,
-      "The first category is expaneded"
+      "The first category is expanded"
     );
     assert.equal(
       (<any>toolbox.koCategories()[1]).name,
@@ -189,7 +189,7 @@ QUnit.test(
     assert.equal(
       (<any>toolbox.koCategories()[1]).koCollapsed(),
       false,
-      "The second category is expaneded"
+      "The second category is expanded"
     );
     toolbox.collapseCategory("comment");
     assert.equal(

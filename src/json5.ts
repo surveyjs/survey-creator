@@ -561,7 +561,7 @@ export class SurveyJSON5 {
       value = value.toJSON();
     }
 
-    // If the user-supplied replacer if a function, call it. If it's an array, check objects' string keys for
+    // If the user-supplied replacer if a function, call it. If its an array, check objects' string keys for
     // presence in the array (removing the key/value pair from the resulting JSON if the key is missing).
     if (typeof this.replacer === "function") {
       return this.replacer.call(holder, key, value);

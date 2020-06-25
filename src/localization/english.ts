@@ -170,7 +170,7 @@ export var enStrings = {
       trigger_copyvalueText: "Copy into question: {0} value from question {1}", //{0} and {1} question names
       trigger_skipText: "Survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "Run expression: '{0}'", //{0} the expression
-      trigger_runExpressionText2: " and set it's result into question: {0}", //{0} question name
+      trigger_runExpressionText2: " and set its result into question: {0}", //{0} question name
       completedHtmlOnConditionText:
         "Show custom text for the 'Thank you page'.",
 

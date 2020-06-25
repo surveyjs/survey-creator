@@ -12,7 +12,7 @@ var template = require("html-loader?interpolate!val-loader!./toolbox.html");
  */
 export interface IQuestionToolboxItem {
   /**
-   * An unique name
+   * A unique name
    */
   name: string;
   /**
@@ -20,7 +20,7 @@ export interface IQuestionToolboxItem {
    */
   iconName: string;
   /**
-   * The JSON that used to create a new question/panel. The 'type' attribute is requried.
+   * The JSON that used to create a new question/panel. The 'type' attribute is required.
    */
   json: any;
   /**
@@ -245,7 +245,7 @@ export class QuestionToolbox {
     return true;
   }
   /**
-   * Remove a toolbox item by it's name
+   * Remove a toolbox item by its name
    * @param name toolbox item name
    * @see IQuestionToolboxItem
    */

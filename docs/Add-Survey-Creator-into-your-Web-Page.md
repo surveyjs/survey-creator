@@ -73,7 +73,7 @@ Load Survey from SurveyJS Service
 
 ```javascript
 var options = {
- // show the embeded survey tab. It is hidden by default
+ // show the embedded survey tab. It is hidden by default
  showEmbededSurveyTab : true,
  // hide the test survey tab. It is shown by default
  showTestSurveyTab : false,

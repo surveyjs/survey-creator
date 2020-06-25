@@ -164,7 +164,7 @@ Survey.ComponentCollection.Instance.add({
       category: "general",
     });
   },
-  //SurveyJS calls this function after creating new question and loading it's properties from JSON
+  //SurveyJS calls this function after creating new question and loading it properties from JSON
   //It calls in runtime and at design-time (after loading from JSON) and pass the current component/root question as parameter
   onLoaded(question) {
     this.changeMiddleVisibility(question);
@@ -292,14 +292,14 @@ Survey.ComponentCollection.Instance.add({
     );
     //On changing business address value
     businessAddress.valueChangedCallback = function () {
-      //If shipping address same as business is choosen then
+      //If shipping address same as business is chosen then
       if (shippingSameAsBusiness.value == true) {
         shippingAddress.value = businessAddress.value;
       }
     };
     //On changing address same as business
     shippingSameAsBusiness.valueChangedCallback = function () {
-      //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      //If shipping address same as business is chosen then copy value from business address, otherwise clear the value
       shippingAddress.value =
         shippingSameAsBusiness.value == true ? businessAddress.value : "";
     };
@@ -422,14 +422,14 @@ Survey.ComponentCollection.Instance.add({
     );
     //On changing business address value
     businessAddress.valueChangedCallback = function () {
-      //If shipping address same as business is choosen then
+      //If shipping address same as business is chosen then
       if (shippingSameAsBusiness.value == true) {
         shippingAddress.value = businessAddress.value;
       }
     };
     //On changing address same as business
     shippingSameAsBusiness.valueChangedCallback = function () {
-      // //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      // //If shipping address same as business is chosen then copy value from business address, otherwise clear the value
       shippingAddress.value =
         shippingSameAsBusiness.value == true ? businessAddress.value : "";
     };
@@ -653,7 +653,7 @@ Go to live [ordertable component](https://surveyjs.io/Examples/Survey-Creator?id
 
 We can solve the previous task by using matrix dynamic question. End-user will have to add/remove rows to add/remove order items.
 
-Unfortunately, end-user could not build this type of survey in SurveyJS Creator. It requries to write JavaScript code and handle several events. The working example you can find [here](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-totals).
+Unfortunately, end-user could not build this type of survey in SurveyJS Creator. It requires to write JavaScript code and handle several events. The working example you can find [here](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-totals).
 
 
 ```javascript
@@ -839,8 +839,8 @@ Go to live [ordergrid component](https://surveyjs.io/Examples/Survey-Creator?id=
 ## Component registration API
 
 To register a new component, you have to add to into _Survey.ComponentCollection.Instance_ singleton a json with at least two attributes:
-* name - unique name accross all SurveyJS classes.
-* questionJSON or elementsJSON - a wrapper question JSON or the JSON list of elements (questions and panels).
+* name ― unique name across all SurveyJS classes.
+* questionJSON or elementsJSON ― a wrapper question JSON or the JSON list of elements (questions and panels).
 
 ### The full list of parameters
 
@@ -867,7 +867,7 @@ Survey.ComponentCollection.Instance.add({
   iconName: iconName,
   /**
    * This attribute or elementsJSON or createQuestion()/createElements() function should not be empty. 
-   * Please note, only one of these two attributes and two functions is requried and expected.
+   * Please note, only one of these two attributes and two functions is required and expected.
    * You need to use this attribute if you need just one question and you want to set-up it in JSON.
    * This JSON creates dropdown with choices from 2020 till 1970.
    */
@@ -933,14 +933,14 @@ Survey.ComponentCollection.Instance.add({
     var shippingSameAsBusiness = question.contentPanel.getQuestionByName("shippingSameAsBusiness");
     //On changing business address value
     businessAddress.valueChangedCallback = function () {
-      //If shipping address same as business is choosen then
+      //If shipping address same as business is chosen then
       if (shippingSameAsBusiness.value == true) {
         shippingAddress.value = businessAddress.value;
       }
     };
     //On changing address same as business
     shippingSameAsBusiness.valueChangedCallback = function () {
-      //If shipping address same as business is choosen then copy value from business address, otherwise clear the value
+      //If shipping address same as business is chosen then copy value from business address, otherwise clear the value
       shippingAddress.value =
         shippingSameAsBusiness.value == true ? businessAddress.value : "";
     };

@@ -241,9 +241,9 @@ QUnit.test("Custom property editor - validation", function(assert) {
     "widgetJSON set correctly"
   );
   propertyEditor.koValue("1");
-  assert.equal(propertyEditor.hasError(), true, "value length less then 2");
+  assert.equal(propertyEditor.hasError(), true, "value length less than 2");
   propertyEditor.koValue("123456");
-  assert.equal(propertyEditor.hasError(), true, "value length more then 5");
+  assert.equal(propertyEditor.hasError(), true, "value length more than 5");
   assert.equal(
     propertyEditor.koErrorText(),
     "Length is more than 5",
@@ -1547,7 +1547,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   assert.equal(
     setToNameEditor["koChoices"]().length,
     survey.getAllQuestions().length,
-    "Create the correct editor and set choices to it, questions, no option since setToName is requried"
+    "Create the correct editor and set choices to it, questions, no option since setToName is required"
   );
   assert.equal(
     setToNameEditor["koChoices"]()[0].text,

@@ -1,8 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { registerAdorner, SurveyForDesigner } from "../surveyjsObjects";
+import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from "../editor";
 
 import "./image.scss";
 import { QuestionImageModel } from "survey-knockout";
@@ -13,7 +12,7 @@ class ImageInplaceEditor {
 
   chooseImage(model, event) {
     model.input.value = "";
-    model.input.onchange = model.imageChoosen;
+    model.input.onchange = model.imageChosen;
     model.input.click();
   }
 
@@ -21,7 +20,7 @@ class ImageInplaceEditor {
     model.valueChanged && model.valueChanged(undefined);
   }
 
-  imageChoosen = (event) => {
+  imageChosen = (event) => {
     if (!window["FileReader"]) return;
     if (!this.input || !this.input.files || this.input.files.length < 1) return;
     let files = [];

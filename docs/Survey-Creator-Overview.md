@@ -18,7 +18,7 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 * [Customize SurveyJS Elements Editor](#elementseditor)
 * [Modify new created objects (Questions, Panels, Pages, Columns and Items)](#modifynewobjects)
 * [Accessing Surveys instance: designer and test surveys](#accesssurveys)
-* [Adorners - change element properties on it's designer surface](#adorners)
+* [Adorners ― change element properties on its designer surface](#adorners)
 
 
 <div id="platforms"></div>
@@ -107,7 +107,7 @@ There are several options that you may set to change the Survey Creator behavior
 
 ## Load and Save Survey
 
-To load the Survey Definition into the Survey Creator you have to simply set it's text property. The next line load the Survey Definition from the local storage:
+To load the Survey Definition into the Survey Creator you have to simply set its text property. The next line load the Survey Definition from the local storage:
 ```javascript
 //Load the survey definition from a local storage
 surveyCreator.text = window.localStorage.getItem("YourStorageName") || "";
@@ -121,9 +121,9 @@ surveyCreator.saveSurveyFunc = function(saveNo, callback) {
 };
 ```
 
-The first line in this callback function is obvious. The second one tells Survey Creator that the saving operation **#saveNo** was successfully execuated. Set the last parameter of the callback function to **false**, if an error during saving was happend.
+The first line in this callback function is obvious. The second one tells Survey Creator that the saving operation **#saveNo** was successfully execuated. Set the last parameter of the callback function to **false**, if an error during saving was happened.
 
-The reason it is done as a callback function and we have a **saveNo** parameter (the numeric parameter that increase with every saving operation, starting from 1), because in a real world application, you will likely save the Survey definition into your Storage/Database. You will make an asyn call of your web service. It means that if two saving operations are happened almost at the same time, the last operation may be processed by your server code faster than the previous one. In this case you will have to ignore all saving operations that has the **saveNo** parameter less than you have already proccessed.
+The reason it is done as a callback function and we have a **saveNo** parameter (the numeric parameter that increase with every saving operation, starting from 1), because in a real world application, you will likely save the Survey definition into your Storage/Database. You will make an asyn call of your web service. It means that if two saving operations are happened almost at the same time, the last operation may be processed by your server code faster than the previous one. In this case you will have to ignore all saving operations that has the **saveNo** parameter less than you have already processed.
 
 Here is the example of **saveSurveyFunc** callback implementation (with help of jQuery magic).
 ```javascript
@@ -251,7 +251,7 @@ Here is the list of available default question types.
 |matrixdynamic|Matrix dymanic question. You may use a dropdown, checkbox, radiogroup, text and comment questions as a cell editors. An end-user may dynamically add/remove rows, unlike in matrix dropdown question|
 |multipletext|Multiple text question. Several text inputs in one question can be placed in one or several columns|
 |panel|Container element. It may contain questions and other panels.|
-|paneldynamic|Panel dymanic question. You setup the template panel, but adding elements (any question or a panel) and assign a text to it's title, and this panel will be used as a template on creating dynamic panels. The number of panels is defined by panelCount property. An end-user may dynamically add/remove panels, unless you forbidden this.|
+|paneldynamic|Panel dymanic question. You setup the template panel, but adding elements (any question or a panel) and assign a text to its title, and this panel will be used as a template on creating dynamic panels. The number of panels is defined by panelCount property. An end-user may dynamically add/remove panels, unless you forbidden this.|
 |radiogroup|Radiogroup question. A single choice question.|
 |rating|Rating question|
 |text|Input text question|
@@ -322,7 +322,7 @@ You may change the name of the default (General) category as any other localizab
 SurveyCreator.defaultStrings.ed.toolboxGeneralCategory = "Common";
 ```
 
-To allow expaned more then one category, set the property **allowExpandMultipleCategories** to true.
+To allow expand more than one category, set the property **allowExpandMultipleCategories** to true.
 If you want to keep all your categories always expanded, then set the following property **keepAllCategoriesExpanded** property to true.
 ```javascript
 creator.toolbox.allowExpandMultipleCategories = true;
@@ -547,7 +547,7 @@ The property name. It is the only required property.
 ---
 **type**
 
-The property type. The list of avaiable property types you may in the next.
+The property type. The list of available property types you may in the next.
 
 ---
 **default**
@@ -665,7 +665,7 @@ Survey.Serializer.addProperty("text", {
 ---
 **visibleIndex**
 
-Available since v1.5.4. An optional numeric property. By default, it is -1. Set it to 0 or bigger number to change the the property order inside the category in Element Editor.
+Available since v1.5.4. An optional numeric property. By default, it is -1. Set it to 0 or bigger number to change the property order inside the category in Element Editor.
 
 ```javascript
 //Add description property into survey object and show it in general category as third property editor.
@@ -692,7 +692,7 @@ The following code creates new property and new category "Entity" and make this 
 ```javascript
 Survey.Serializer.addProperty("question", {
   name: "targetEntity", category: "Entity", categoryIndex: 1
-  choices: ["", "Account", "Developement"]
+  choices: ["", "Account", "Development"]
 });
 ```
 
@@ -759,7 +759,7 @@ We will create a new "Entity" category and place two properties into it.
 ```javascript
 Survey.Serializer.addProperty("question", {
   name: "targetEntity",
-  choices: ["", "Account", "Developement"],
+  choices: ["", "Account", "Development"],
   category: "Entity",
   categoryIndex: 1
 });
@@ -857,11 +857,11 @@ It is an optional attribute. You may assign a function to set a different object
 ```
 ---
 
-Avaliable property types. Every property type has a correspondet Property Editor.
+Available property types. Every property type has a correspondet Property Editor.
 
 |Name|Description|
 |---|---|
-|string|It is the default value type. Property editor is a text input. "myProperty" and "myProperty:string" - give the same result.|
+|string|It is the default value type. Property editor is a text input. "myProperty" and "myProperty:string" ― give the same result.|
 |boolean|Boolean type. Property editor is a checkbox.|
 |condition|It shows property editor that helps to build a boolean expression for properties like **visibleIf** and **enabledIf**|
 |expression|It shows property editor that helps to build the expression|
@@ -924,7 +924,7 @@ editorDefinition.tabs = editorDefinition.tabs.filter(function (tab) {
 });
 ```
 
-If you want to hide the the same tab for dropdown question Editor only, then you have to add this tab with visible attribute equals to false. The reason you must to do it in this way, beacause the definition for every element type is merging with all its parent types.
+If you want to hide the same tab for dropdown question Editor only, then you have to add this tab with visible attribute equals to false. The reason you must to do it in this way, beacause the definition for every element type is merging with all its parent types.
 ```javascript
 var editorDefinition = SurveyCreator.SurveyQuestionEditorDefinition.definition["dropdown"];
 // The tabs and properties may be empty for an element type.
@@ -1051,7 +1051,7 @@ surveyCreator.onTestSurveyCreated.add(function(sender, options) {
 
 <div id="adorners"></div>
 
-## Adorners - change element properties on it's designer surface
+## Adorners ― change element properties on its designer surface
 
 Working on end-user usability issues, we have introduced adorners concepts in spring 2018. End-users were trying to modify SurveyJS elements (questions and panels) directly in designer surface and do not use Property Grid or Question/Panel Editors.
 
@@ -1083,7 +1083,7 @@ _Dropdown question standard adorners_
 |panel-actions|panel|It has several actions as: showing Panel Editor, delete panel, copy panel and others|
 |rating-item|rating question|It allows to add a new rating item, delete the existing and change rating item text|
 |select-choices|dropdown question|a link that show/hide the choices, so a end-user is able to edit them|
-|item-title|multiple text question|In-place editing a mutliple text item title|
+|item-title|multiple text question|In-place editing a multiple text item title|
 |label|boolean question|In-place editing of boolean question label|
 
 There are a lot of actions in "question-actions" and "panel-actions" adorners. You may additionally control them by removing the functionality for all of them or for an element by using **onElementAllowOperations** event.

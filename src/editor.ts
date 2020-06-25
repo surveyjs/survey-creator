@@ -63,7 +63,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
-  private showEmbededSurveyTabValue = ko.observable<boolean>(false);
+  private showEmbeddedSurveyTabValue = ko.observable<boolean>(false);
   private showTranslationTabValue = ko.observable<boolean>(false);
   private showLogicTabValue = ko.observable<boolean>(false);
   private hideExpressionHeaderValue = ko.observable<boolean>(false);
@@ -335,10 +335,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event allows you modify DOM element for a property in the Property Grid. For example, you may change it's styles.
+   * The event allows you modify DOM element for a property in the Property Grid. For example, you may change its styles.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and it's editor.
+   * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and its editor.
    * <br/> options.property object property (Survey.JsonObjectProperty object).
    * <br/> options.propertyEditor the property Editor.
    */
@@ -511,7 +511,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to control Property Editors UI.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editorOptions  options that can be changed.
    * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
@@ -526,7 +526,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.value the property value.
    * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
@@ -548,7 +548,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.value the property value.
    * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
@@ -562,7 +562,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
    * @see onPropertyValueChanging
@@ -574,7 +574,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to modify the survey that used on setting value for condition/expression properties, like visibleIf, enableIf and so on.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
    * <br/> options.valueQuestionName the name of the question that shows in the survey for choosing the value
@@ -587,10 +587,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to modify the list (name and titles) od the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
-   * <br/> options.list the the list of the questions available for condition
+   * <br/> options.list the list of the questions available for condition
    */
   public onConditionQuestionsGetList: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
@@ -599,7 +599,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to process key down event in a property editor
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.editor the instance of Property Editor.
    * <br/> options.event the instance of mouse event.
@@ -611,7 +611,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to disable some operations for an element (question/panel).
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object question/panel
+   * <br/> options.obj the survey object question/panel
    * <br/> options.allowDelete set it to false to disable deleting the object
    * <br/> options.allowEdit set it to false to disable calling the modal Editor
    * <br/> options.allowCopy set it to false to disable copying the object
@@ -626,8 +626,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to add/remove/modify the element (question/panel) menu items.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
-   * <br/> options.items the list of menu items. It has two requried fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.items the list of menu items. It has two required fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
    * @see onElementAllowOperations
    */
   public onDefineElementMenuItems: Survey.Event<
@@ -637,7 +637,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to show the description on the top or/and bottom of the property modal editor.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object which property is edited in the Property Editor.
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName the property name
    * <br/> options.htmlTop the html  that you want to see on the top of the modal window
    * <br/> options.htmlBottom the html that you want to see on the bottom of the modal window
@@ -649,7 +649,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   /**
    * Use this event to change the text showing in the dropdown of the property grid.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj  the survey object.
+   * <br/> options.obj the survey object.
    * <br/> options.text the current object text, commonly it is a name. You must change this attribute
    */
   public onGetObjectTextInPropertyGrid: Survey.Event<
@@ -1112,7 +1112,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         ? options.showTestSurveyTab
         : true
     );
-    this.showEmbededSurveyTabValue(
+    this.showEmbeddedSurveyTabValue(
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
         : false
@@ -1623,10 +1623,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * Set it to true to show "Embed Survey" tab and to false to hide the tab
    */
   public get showEmbededSurveyTab() {
-    return this.showEmbededSurveyTabValue();
+    return this.showEmbeddedSurveyTabValue();
   }
   public set showEmbededSurveyTab(value: boolean) {
-    this.showEmbededSurveyTabValue(value);
+    this.showEmbeddedSurveyTabValue(value);
   }
   private _showExternalHelpLink = ko.observable(false);
   get showExternalHelpLink() {
@@ -1771,7 +1771,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.deleteCurrentObject();
   };
   /**
-   * Returns the localized string by it's id
+   * Returns the localized string by its id
    * @param str the string id.
    */
   public getLocString(str: string) {

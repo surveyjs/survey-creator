@@ -96,7 +96,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
   private property_: Survey.JsonObjectProperty;
-  private isRequriedValue: boolean = false;
+  private isRequiredValue: boolean = false;
   private titleValue: string;
   private isCustomDisplayName: boolean = false;
   private _displayNameValue = ko.observable<string>();
@@ -314,10 +314,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     );
   }
   public get isRequired(): boolean {
-    return this.isRequriedValue;
+    return this.isRequiredValue;
   }
   protected setIsRequired() {
-    this.isRequriedValue = !!this.property ? this.property.isRequired : false;
+    this.isRequiredValue = !!this.property ? this.property.isRequired : false;
   }
   protected setTitleAndDisplayName() {
     if (this.isCustomDisplayName) return;

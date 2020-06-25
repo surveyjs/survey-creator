@@ -111,7 +111,7 @@ export class ConditionEditorItem {
   public get isReady(): boolean {
     return (
       !!this.questionName &&
-      (!this.isValueRequried || !this.survey.isValueEmpty(this.value))
+      (!this.isValueRequired || !this.survey.isValueEmpty(this.value))
     );
   }
   public get conjunctionQuestion(): Survey.QuestionDropdown {
@@ -137,12 +137,12 @@ export class ConditionEditorItem {
       this.getQuestionValueByName(this.questionName) +
       "} " +
       this.getOperatorText();
-    if (this.isValueRequried) {
+    if (this.isValueRequired) {
       text += " " + this.getValueText();
     }
     return text;
   }
-  private get isValueRequried() {
+  private get isValueRequired() {
     var question = this.valueQuestion;
     return !!question && !question.isReadOnly;
   }
@@ -949,12 +949,12 @@ var operations = [
   {
     value: "<",
     title:
-      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'",
+      "returns true if the left operand less than the second operand	{questionName} < 2, {questionName} less 'a'",
   },
   {
     value: "less",
     title:
-      "returns true if the left operand less then the second operand	{questionName} < 2, {questionName} less 'a'",
+      "returns true if the left operand less than the second operand	{questionName} < 2, {questionName} less 'a'",
   },
   {
     value: ">=",
@@ -969,12 +969,12 @@ var operations = [
   {
     value: "<=",
     title:
-      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
+      "returns true if the left operand equal or less than the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
   },
   {
     value: "lessorequal",
     title:
-      "returns true if the left operand equal or less then the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
+      "returns true if the left operand equal or less than the second operand	{questionName} <= 2, {questionName} lessorequal 'a'",
   },
   {
     value: "contains",

@@ -352,7 +352,7 @@ QUnit.test(
     assert.equal(
       editor.survey.selectedElement.name,
       newQuestion.name,
-      "The embeded question is selected"
+      "The embedded question is selected"
     );
     assert.equal(
       editor.survey.currentPage.name,
