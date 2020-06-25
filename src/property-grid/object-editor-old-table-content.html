@@ -9,9 +9,7 @@
       <td class="svd-light-text-color form-group" width="50%">
         <div data-bind="event: { keydown: $data.editor.keyDownHandler }">
           <!-- ko if: $data.editor.isModal -->
-          <svd-property-editor-modal
-            params="{model:$data.editor, afterRender: $parent.koTab().koAfterRender}"
-          ></svd-property-editor-modal>
+          <!-- ko component: { name: "svd-property-editor-modal", params: { model: $data.editor, afterRender: $parent.koTab().koAfterRender } } --><!-- /ko -->
           <!-- /ko -->
 
           <!-- ko ifnot: $data.editor.isModal -->

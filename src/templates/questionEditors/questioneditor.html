@@ -7,7 +7,7 @@
                   <h4 class="modal-title" data-bind="text:koTitle"></h4>
               </div>
               <div class="modal-body svd_notopbottompaddings">
-                  <svd-object-editor-content params="elementEditorContent: $data"></svd-object-editor-content>
+                  <svd-object-editor-content params="elementEditorContent: $data, para: 1"></svd-object-editor-content>
               </div>
               <div class="modal-footer">
                   <input type="button" class="btn sv-btn btn-primary" data-bind="visible: koShowApplyButton, disable: readOnly, click: onApplyClick, value: $data.getLocString('pe.apply')"
