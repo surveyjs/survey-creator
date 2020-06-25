@@ -279,7 +279,7 @@
     border: none;
     height: 100%;
 
-    &>* {
+    & > * {
       height: 100%;
     }
 
@@ -582,6 +582,10 @@
         border-left: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+      }
+      &.btn-danger {
+        background-color: $error-color;
+        background-color: var(--error-color, $error-color);
       }
     }
   }
