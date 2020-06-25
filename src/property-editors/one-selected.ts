@@ -25,7 +25,7 @@ export class PropertyEditorOneSelected {
     public afterRender: any
   ) {
     afterRender();
-    this.setupAvailableClassesContainer(componentInfo.element);
+    this.setupAvailableClassesContainer(componentInfo.element.nextSibling);
   }
 
   public setupAvailableClassesContainer = (rootElement: HTMLElement) => {

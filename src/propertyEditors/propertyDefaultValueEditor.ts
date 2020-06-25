@@ -100,7 +100,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     this.createSurvey();
   }
   public get editorType(): string {
-    return "value";
+    return "default-value";
   }
   protected createSurvey() {
     var json = this.buildQuestionJson();
@@ -150,7 +150,7 @@ export class SurveyPropertyTriggerValueEditor extends SurveyPropertyDefaultValue
     super(property);
   }
   public get editorTypeTemplate(): string {
-    return "value";
+    return "default-value";
   }
   public updateDynamicProperties() {
     super.updateDynamicProperties();
@@ -182,7 +182,7 @@ export class SurveyPropertyDefaultRowValueEditorBase extends SurveyPropertyDefau
     super(property);
   }
   public get editorTypeTemplate(): string {
-    return "value";
+    return "default-value";
   }
   public get editorType(): string {
     return "triggervalue";
@@ -246,7 +246,7 @@ export class SurveyPropertySetEditor extends SurveyPropertyDefaultValueEditor {
     return "set";
   }
   public get editorTypeTemplate(): string {
-    return "value";
+    return "default-value";
   }
   protected getSurveyInitialValue(): any {
     var res = this.koValue();
