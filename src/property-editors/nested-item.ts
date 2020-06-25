@@ -23,6 +23,10 @@ export class PropertyEditorNestedItem {
   public get cells(): SurveyNestedPropertyEditorEditorCell[] {
     return this.model.cells;
   }
+
+  public onEditItemClick() {
+    this.editor.onEditItemClick(this.model);
+  }
 }
 
 ko.components.register("svd-property-editor-nested-item", {

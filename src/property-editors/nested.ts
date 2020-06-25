@@ -7,12 +7,17 @@ const templateHtml = require("./nested.html");
 
 export class PropertyEditorNested {
   constructor(
-    public onReturnToListClick: any,
+    public _onReturnToListClick: any,
     public koEditorName: any,
     public koEditItem: any,
+    public model: SurveyNestedPropertyEditor,
     public afterRender: any
   ) {
     afterRender();
+  }
+
+  public onReturnToListClick() {
+    this._onReturnToListClick(this.model);
   }
 }
 
@@ -25,6 +30,7 @@ ko.components.register("svd-property-editor-nested", {
         model.onReturnToListClick,
         model.koEditorName,
         model.koEditItem,
+        model,
         () => {
           afterRender.call(model, componentInfo);
         }

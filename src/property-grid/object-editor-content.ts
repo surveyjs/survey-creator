@@ -24,8 +24,14 @@ export class ObjectEditorContent {
 ko.components.register("svd-object-editor-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      //TODO When templates/questioneditor.html will transform to component it ko.unwrap might be unneded
-      const model: SurveyElementEditorContentModel = params.model || ko.unwrap(params.elementEditorContent); 
+      let model: SurveyElementEditorContentModel = params.model;
+
+      if (!model && typeof params.elementEditorContent === "function") {
+        model = params.elementEditorContent();
+      } else {
+        model = params.elementEditorContent;
+      }
+
       return new ObjectEditorContent(
         model.useTabsInElementEditor,
         model.koTabs,
