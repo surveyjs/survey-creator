@@ -8,9 +8,14 @@ import {
 import * as Survey from "survey-knockout";
 import RModal from "rmodal";
 import { SurveyHelper } from "../surveyHelper";
-import { focusFirstControl, getNodesFromKoComponentInfo, getFirstNonTextElement } from "../utils/utils";
+import {
+  focusFirstControl,
+  getNodesFromKoComponentInfo,
+  getFirstNonTextElement,
+} from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
+import { Hash } from "crypto";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;
@@ -152,7 +157,7 @@ export class SurveyElementEditorContentModel {
     this.koTabs = ko.observableArray<SurveyElementEditorTabModel>(tabs);
     this.assignPropertiesToEditors();
     var self = this;
-    this.koActiveTab.subscribe(function(val) {
+    this.koActiveTab.subscribe(function (val) {
       if (!val) return;
       var tab = self.getTabByName(val);
       if (!!tab) {
@@ -329,7 +334,7 @@ export class SurveyElementEditorOldTableContentModel extends SurveyElementEditor
       res.push(props[i]);
     }
     var self = this;
-    var sortEvent = function(
+    var sortEvent = function (
       a: SurveyObjectProperty,
       b: SurveyObjectProperty
     ): number {
@@ -381,10 +386,10 @@ export class SurveyElementEditorTabModel {
   ) {
     this.buildEditorProperties();
     var self = this;
-    this.koAfterRenderProperty = function(componentInfo:any, con) {
+    this.koAfterRenderProperty = function (componentInfo: any, con) {
       self.afterRenderProperty(componentInfo, con);
     };
-    this.koAfterRender = function(componentInfo:any, con) {
+    this.koAfterRender = function (componentInfo: any, con) {
       self.afterRender(componentInfo, con);
     };
   }
@@ -449,7 +454,7 @@ export class SurveyElementEditorTabModel {
   protected getValue(property: Survey.JsonObjectProperty): any {
     return property.getPropertyValue(this.obj);
   }
-  private afterRenderProperty(componentInfo:any, prop) {
+  private afterRenderProperty(componentInfo: any, prop) {
     const elements = getNodesFromKoComponentInfo(componentInfo);
     if (!this.onAfterRenderCallback) return;
     var el = getFirstNonTextElement(elements);
@@ -511,7 +516,7 @@ export class SurveyPropertyEditorShowWindow {
       closeTimeout: 100,
       dialogOpenClass: "animated fadeIn",
       focus: false,
-      afterClose: function() {
+      afterClose: function () {
         if (onClosed) onClosed();
       },
     });
@@ -519,7 +524,7 @@ export class SurveyPropertyEditorShowWindow {
 
     if ((<any>options).closeModalOutside !== "off") {
       var fadeElement = document.getElementById("surveyquestioneditorwindow");
-      var outOfModalClickHandler = function(evt) {
+      var outOfModalClickHandler = function (evt) {
         if ((<any>evt.target).className === "modal") {
           if ((<any>options).closeModalOutside === "apply") {
             editor.onOkClick();
@@ -533,13 +538,13 @@ export class SurveyPropertyEditorShowWindow {
 
     document.addEventListener(
       "keydown",
-      function(ev) {
+      function (ev) {
         modal.keydown(ev);
       },
       false
     );
 
-    editor.onHideWindow = function() {
+    editor.onHideWindow = function () {
       if ((<any>options).closeModalOutside !== "off") {
         fadeElement.removeEventListener("mousedown", outOfModalClickHandler);
       }
@@ -615,6 +620,12 @@ export class SurveyQuestionProperties {
     var res = this.propertiesHash[property.name];
     return !!res && res.visible;
   }
+  public getTabByName(tabName: string): SurveyQuestionEditorTabDefinition {
+    for (var i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].name == tabName) return this.tabs[i];
+    }
+    return null;
+  }
   public getTabs(): Array<SurveyQuestionEditorTabDefinition> {
     return this.tabs;
   }
@@ -658,7 +669,7 @@ export class SurveyQuestionProperties {
         this.sortProperties(this.tabs[i].properties);
       }
     }
-    this.tabs.sort(function(a, b) {
+    this.tabs.sort(function (a, b) {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
   }
@@ -732,7 +743,7 @@ export class SurveyQuestionProperties {
       return result;
     }
     var curClassName = className;
-    var usedProperties = [];
+    var usedProperties = {};
     var hasNonTabProperties = false;
     while (curClassName) {
       let metaClass = <Survey.JsonMetadataClass>(
@@ -742,16 +753,34 @@ export class SurveyQuestionProperties {
       let classRes = SurveyQuestionEditorDefinition.definition[metaClass.name];
       if (classRes) {
         if (classRes.properties) {
-          for (var i = 0; i < classRes.properties.length; i++) {
+          var i = 0;
+          while (i < classRes.properties.length) {
             var prop = classRes.properties[i];
-            usedProperties.push(typeof prop == "string" ? prop : prop.name);
+            var propName = typeof prop == "string" ? prop : prop.name;
+            var tabName = "general";
+            if (typeof prop !== "string" && !!prop.tab) {
+              tabName = prop.tab;
+            }
+            var jsonProperty = !!this.propertiesHash[propName]
+              ? this.propertiesHash[propName].property
+              : null;
+            if (
+              !!jsonProperty &&
+              !!jsonProperty.category &&
+              jsonProperty.category !== tabName
+            ) {
+              classRes.properties.splice(i, 1);
+            } else {
+              usedProperties[propName] = true;
+              i++;
+            }
           }
         }
         if (classRes.tabs) {
           for (var i = 0; i < classRes.tabs.length; i++) {
             hasNonTabProperties =
               hasNonTabProperties || classRes.tabs[i].name == "others";
-            usedProperties.push(classRes.tabs[i].name);
+            usedProperties[classRes.tabs[i].name] = true;
           }
         }
         result.unshift(classRes);
@@ -766,23 +795,19 @@ export class SurveyQuestionProperties {
   }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
-    usedProperties: Array<string>
+    usedProperties: any
   ) {
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {
       let prop = this.properties[i];
-      if (
-        !this.isJSONPropertyVisible(prop) ||
-        usedProperties.indexOf(prop.name) > -1
-      )
+      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name])
         continue;
-      let tabName =
-        tabs.length == 0
-          ? "general"
-          : !!prop.category
-          ? prop.category
-          : "others";
+      let tabName = !!prop.category
+        ? prop.category
+        : tabs.length == 0
+        ? "general"
+        : "others";
       if (tabNames.indexOf(tabName) < 0 && tabName != "general") {
         tabNames.push(tabName);
         classRes.tabs.push({
@@ -852,16 +877,16 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
   ) {
     super(obj, className, options, false);
     var self = this;
-    self.onApplyClick = function() {
+    self.onApplyClick = function () {
       self.apply();
     };
-    self.onOkClick = function() {
+    self.onOkClick = function () {
       self.doCloseWindow(false);
     };
-    self.onResetClick = function() {
+    self.onResetClick = function () {
       self.doCloseWindow(true);
     };
-    this.onTabClick = function(tab) {
+    this.onTabClick = function (tab) {
       self.koActiveTab(tab.name);
     };
     this.koShowApplyButton = ko.observable(
