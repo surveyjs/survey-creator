@@ -214,7 +214,7 @@ QUnit.test(
     );
     assert.equal(renderCount, 0, "Initial counter");
     assert.equal(propertyEditor.object, undefined, "Object is not assigned");
-    propertyEditor["doAfterRender"]([{}], null);
+    propertyEditor["doAfterRender"]([{}]);
     assert.equal(propertyEditor.object, undefined, "Object is not assigned");
     assert.equal(renderCount, 1, "Render has been called");
     Extentions.unregisterCustomPropertyEditor("customBool");
@@ -1579,7 +1579,7 @@ QUnit.test("Triggers property editor and setvalue trigger", function(assert) {
   );
   assert.equal(
     setValueEditor.editorType,
-    "value",
+    "default-value",
     "has correct editor type for setValue property"
   );
   setToNameEditor.koValue("question2");
