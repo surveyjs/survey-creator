@@ -47,7 +47,7 @@ export class PropertyEditorOneSelected {
       ) {
         this.toggleClassesContainer();
       } else {
-        event.relatedTarget["focus"]();
+        event.relatedTarget && event.relatedTarget["focus"]();
       }
     };
   };
