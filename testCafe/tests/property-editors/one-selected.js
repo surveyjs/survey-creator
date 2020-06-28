@@ -1,22 +1,13 @@
 import { url, init } from "../../settings";
 import { Selector, ClientFunction } from "testcafe";
-const assert = require("assert");
-const title = `add properties`;
+const title = `one-selected`;
 
-const addProperty = ClientFunction(() => {
-  //add a property to the survey object
-  Survey.Serializer.addProperty("survey", {
-    name: "customProperty:number",
-    default: 123456,
-  });
-});
 
 fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
-  await addProperty();
   await init();
 });
 
-test(`triggers property editor`, async (t) => {
+test(`survey logic (triggers property editor)`, async (t) => {
   const logicAccorditionTab = Selector(
     ".svd-accordion-tab-header[data-title='Logic']"
   ).withText("Logic");
@@ -79,7 +70,7 @@ test(`triggers property editor`, async (t) => {
   await t.click(removeBtn);
 });
 
-test(`validators property editor`, async (t) => {
+test(`element validators property editor`, async (t) => {
   const validationAccorditionTab = Selector(
     ".svd-accordion-tab-header[data-title='Validation']"
   ).withText("Validation");
