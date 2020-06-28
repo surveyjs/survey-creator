@@ -28,7 +28,7 @@ ko.components.register("svd-object-editor-content", {
 
       if (!model && typeof params.elementEditorContent === "function") {
         model = params.elementEditorContent();
-      } else {
+      } else if (!model) {
         model = params.elementEditorContent;
       }
 
