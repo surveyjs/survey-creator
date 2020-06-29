@@ -166,7 +166,7 @@ export class TitleInplaceEditor {
       element.style.display = "none";
     });
     var inputElement = this.getInputElement();
-    inputElement.onfocus = function() {
+    inputElement.onfocus = function () {
       const callback = model.editor.onTitleInplaceEditorStartEdit;
       if (!!callback) {
         callback(inputElement);
@@ -175,7 +175,7 @@ export class TitleInplaceEditor {
       this.select();
     };
     resizeInput(inputElement);
-    setTimeout(function() {
+    setTimeout(function () {
       inputElement.focus();
     }, 10);
   };
@@ -202,12 +202,16 @@ export class TitleInplaceEditor {
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
-    if (event.keyCode === 13) {
-      this.postEdit();
-      event.stopPropagation();
-      return false;
-    } else if (event.keyCode === 27) {
-      this.cancelEdit();
+    switch (event.keyCode) {
+      case 13:
+        this.postEdit();
+        event.stopPropagation();
+        return false;
+      case 27:
+        this.cancelEdit();
+        break;
+      case 46:
+        event.stopPropagation();
     }
   };
 
