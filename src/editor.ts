@@ -338,7 +338,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * The event allows you modify DOM element for a property in the Property Grid. For example, you may change its styles.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and its editor.
+   * <br/> options.htmlElement the html element that renders the property display name and its editor.
    * <br/> options.property object property (Survey.JsonObjectProperty object).
    * <br/> options.propertyEditor the property Editor.
    */
