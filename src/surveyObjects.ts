@@ -27,6 +27,9 @@ export class SurveyObjects {
     this.surveyValue = value;
     this.rebuild();
   }
+  public hasObject(obj: Survey.Base): boolean {
+    return this.getItemIndex(obj) > -1;
+  }
   public addPage(page: Survey.PageModel) {
     this.addElement(page, null);
   }
@@ -51,7 +54,9 @@ export class SurveyObjects {
     for (var i = 0; i < objs.length; i++) {
       this.koObjects.splice(newIndex + 1 + i, 0, objs[i]);
     }
-    this.koSelected(item);
+    if (SurveyHelper.canSelectObj(element)) {
+      this.koSelected(item);
+    }
   }
   public selectObject(obj: Survey.Base) {
     if (obj === null) {

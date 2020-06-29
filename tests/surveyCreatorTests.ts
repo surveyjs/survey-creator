@@ -8,7 +8,7 @@ import { QuestionToolbox } from "../src/components/toolbox";
 
 export default QUnit.module("surveyEditorTests");
 
-QUnit.test("Set Text property", function(assert) {
+QUnit.test("Set Text property", function (assert) {
   var editor = new SurveyCreator();
   var json = {
     questions: [
@@ -51,7 +51,7 @@ QUnit.test("Set Text property", function(assert) {
   editor.text = jsonText;
   assert.equal(editor.koIsShowDesigner(), false);
 });
-QUnit.test("Escape HTML question string", function(assert) {
+QUnit.test("Escape HTML question string", function (assert) {
   var jsonText = JSON.stringify({
     pages: [
       {
@@ -81,7 +81,7 @@ QUnit.test("Escape HTML question string", function(assert) {
     jsonText.replace(/\s+|\t+|\n+/g, "")
   );
 });
-QUnit.test("At least one page should be available", function(assert) {
+QUnit.test("At least one page should be available", function (assert) {
   var editor = new SurveyCreator();
   editor.text = JSON.stringify(getSurveyJson());
   editor.text = null;
@@ -92,7 +92,7 @@ QUnit.test("At least one page should be available", function(assert) {
   );
   assert.ok(editor.survey["dragDropHelper"], "dragDropHelper was created");
 });
-QUnit.test("options.questionTypes", function(assert) {
+QUnit.test("options.questionTypes", function (assert) {
   var allTypes = Survey.ElementFactory.Instance.getAllTypes();
   var editor = new SurveyCreator(null, null);
   // var toolbox = new QuestionToolbox(editor.toolboxItems, editor);
@@ -111,11 +111,11 @@ QUnit.test("options.questionTypes", function(assert) {
     "Only two types from three are accepted"
   );
 });
-QUnit.test("Editor state property", function(assert) {
+QUnit.test("Editor state property", function (assert) {
   var editor = new SurveyCreator();
   editor.showErrorOnFailedSave = false;
   var success = true;
-  editor.saveSurveyFunc = function(
+  editor.saveSurveyFunc = function (
     no: number,
     doSaveCallback: (no: number, isSuccess: boolean) => void
   ) {
@@ -141,7 +141,7 @@ QUnit.test("Editor state property", function(assert) {
      assert.equal(editor.state, "modified");
      */
 });
-QUnit.test("Do not reload surey on 'Designer' tab click", function(assert) {
+QUnit.test("Do not reload surey on 'Designer' tab click", function (assert) {
   var editor = new SurveyCreator();
   editor.text = JSON.stringify(getSurveyJson());
   var pageCount = editor.survey.PageCount;
@@ -161,7 +161,7 @@ QUnit.test("Do not reload surey on 'Designer' tab click", function(assert) {
   );
 });
 
-QUnit.test("SurveyJSON always return correct data, bug #53", function(assert) {
+QUnit.test("SurveyJSON always return correct data, bug #53", function (assert) {
   var editor = new SurveyCreator();
   editor.survey.pages[0].addNewQuestion("text", "q1");
   editor.showTestSurvey();
@@ -172,10 +172,10 @@ QUnit.test("SurveyJSON always return correct data, bug #53", function(assert) {
   );
 });
 
-QUnit.test("onQuestionAdded event", function(assert) {
+QUnit.test("onQuestionAdded event", function (assert) {
   var editor = new SurveyCreator();
   var counter = 0;
-  editor.onQuestionAdded.add(function() {
+  editor.onQuestionAdded.add(function () {
     counter++;
   });
   assert.equal(counter, 0, "No question was added");
@@ -185,11 +185,11 @@ QUnit.test("onQuestionAdded event", function(assert) {
   assert.equal(counter, 1, "One question was added");
 });
 
-QUnit.test("onElementDeleting event", function(assert) {
+QUnit.test("onElementDeleting event", function (assert) {
   var editor = new SurveyCreator();
   var counter = 0;
   var canRemove = true;
-  editor.onElementDeleting.add(function(editor, options) {
+  editor.onElementDeleting.add(function (editor, options) {
     options.allowing = canRemove;
     counter++;
   });
@@ -215,7 +215,7 @@ QUnit.test("onElementDeleting event", function(assert) {
   assert.equal(counter, 3, "onElementRemoving called one time");
 });
 
-QUnit.test("fast copy tests, copy a question", function(assert) {
+QUnit.test("fast copy tests, copy a question", function (assert) {
   var editor = new SurveyCreator();
   var q1 = <Survey.QuestionText>(
     editor.survey.pages[0].addNewQuestion("text", "question1")
@@ -234,7 +234,7 @@ QUnit.test("fast copy tests, copy a question", function(assert) {
 
 QUnit.test(
   "fast copy tests, copy a panel with questions and a nested panel",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     var survey = editor.survey;
     var p1 = survey.pages[0].addNewPanel("panel1");
@@ -274,7 +274,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Copy a page", function(assert) {
+QUnit.test("Copy a page", function (assert) {
   var editor = new SurveyCreator();
   var survey = editor.survey;
   var p1 = survey.pages[0].addNewPanel("panel1");
@@ -311,7 +311,7 @@ QUnit.test("Copy a page", function(assert) {
   );
 });
 
-QUnit.test("fast copy tests, set the correct parent", function(assert) {
+QUnit.test("fast copy tests, set the correct parent", function (assert) {
   var creator = new SurveyCreator();
   var survey = creator.survey;
   var p1 = creator.survey.pages[0].addNewPanel("panel1");
@@ -335,7 +335,7 @@ QUnit.test("fast copy tests, set the correct parent", function(assert) {
 
 QUnit.test(
   "addQuestion into the QuestionPanelDynamic into second page",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     var survey = editor.survey;
     survey.addNewPage("p1");
@@ -362,7 +362,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("generateValidJSON should be true by default, bug #135", function(
+QUnit.test("generateValidJSON should be true by default, bug #135", function (
   assert
 ) {
   var editor = new SurveyCreator(null, {});
@@ -436,11 +436,11 @@ QUnit.test("onModified options", function(assert) {
   assert.equal(opts.target, page, "Object - page");
 });
 */
-QUnit.test("onCustomPropertySort event", function(assert) {
+QUnit.test("onCustomPropertySort event", function (assert) {
   var editor = new SurveyCreator("", {
     showElementEditorAsPropertyGrid: false,
   });
-  editor.onCustomSortProperty.add(function(editor, options) {
+  editor.onCustomSortProperty.add(function (editor, options) {
     if (options.property1.name == "name") options.result = -1;
     if (options.property2.name == "name") options.result = 1;
   });
@@ -454,7 +454,7 @@ QUnit.test("onCustomPropertySort event", function(assert) {
   );
 });
 
-QUnit.test("onQuestionEditorChanged method", function(assert) {
+QUnit.test("onQuestionEditorChanged method", function (assert) {
   var jsonText = JSON.stringify({
     pages: [
       {
@@ -503,7 +503,7 @@ QUnit.test("onQuestionEditorChanged method", function(assert) {
   assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
 });
 
-QUnit.test("pagesEditor activePage when question selected", function(assert) {
+QUnit.test("pagesEditor activePage when question selected", function (assert) {
   var jsonText = JSON.stringify({
     pages: [
       {
@@ -548,7 +548,7 @@ QUnit.test("pagesEditor activePage when question selected", function(assert) {
   assert.equal(pagesEditor.model.selectedPage(), currentPage);
 });
 
-QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
+QUnit.test("pagesEditor addNewPage in the dropdown", function (assert) {
   var jsonText = JSON.stringify({
     pages: [
       {
@@ -570,13 +570,15 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function(assert) {
   assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
   assert.equal(pagesEditor.model.pagesForSelection().length, 2);
 
-  pagesEditor.model.selectedPage(pagesEditor.model.pagesForSelection()[1].value);
+  pagesEditor.model.selectedPage(
+    pagesEditor.model.pagesForSelection()[1].value
+  );
 
   assert.equal(pagesEditor.model.pagesForSelection().length, 3);
   assert.equal(creator.survey.pages[1], pagesEditor.model.selectedPage());
 });
 
-QUnit.test("pagesEditor.readOnly", function(assert) {
+QUnit.test("pagesEditor.readOnly", function (assert) {
   var creator = new SurveyCreator();
   var pagesEditor = new PagesEditorViewModel(
     creator.pagesEditorModel,
@@ -628,7 +630,7 @@ QUnit.test("pagesEditor.readOnly", function(assert) {
   );
 });
 
-QUnit.test("PagesEditor change question's page", function(assert) {
+QUnit.test("PagesEditor change question's page", function (assert) {
   var jsonText = JSON.stringify({
     pages: [
       {
@@ -668,7 +670,7 @@ QUnit.test("PagesEditor change question's page", function(assert) {
 
 QUnit.test(
   "Element name should be unique - property grid + Question Editor",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
@@ -702,7 +704,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Validate Selected Element Errors", function(assert) {
+QUnit.test("Validate Selected Element Errors", function (assert) {
   var titleProp = Survey.Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
@@ -728,7 +730,7 @@ QUnit.test("Validate Selected Element Errors", function(assert) {
   titleProp.isRequired = oldIsRequired;
 });
 
-QUnit.test("Update conditions/expressions on changing question.name", function(
+QUnit.test("Update conditions/expressions on changing question.name", function (
   assert
 ) {
   var editor = new SurveyCreator();
@@ -751,7 +753,7 @@ QUnit.test("Update conditions/expressions on changing question.name", function(
 
 QUnit.test(
   "Update conditions/expressions on changing question.valueName",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
@@ -801,9 +803,9 @@ QUnit.test(
 
 QUnit.test(
   "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
-    editor.onPanelAdded.add(function(sender, options) {
+    editor.onPanelAdded.add(function (sender, options) {
       let parent = options.panel.parent;
       parent.removeElement(options.panel);
     });
@@ -819,7 +821,7 @@ QUnit.test(
 
 QUnit.test(
   "Change page on changing survey.selectedElement if needed, Bug#424",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     editor.text = JSON.stringify(getSurveyJson());
     var pagesEditor = new PagesEditorViewModel(
@@ -847,7 +849,7 @@ QUnit.test(
 
 QUnit.test(
   "getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380",
-  function(assert) {
+  function (assert) {
     var editor = new SurveyCreator();
     editor.showObjectTitles = true;
     editor.text = JSON.stringify(getSurveyJson());
@@ -871,12 +873,12 @@ QUnit.test(
   }
 );
 
-QUnit.test("Do not allow to select page object", function(assert) {
+QUnit.test("Do not allow to select page object", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = getSurveyJson();
   creator.selectedElement = creator.survey.getQuestionByName("question1");
   assert.equal(creator.selectedElement.name, "question1");
-  creator.onSelectedElementChanging.add(function(c, options) {
+  creator.onSelectedElementChanging.add(function (c, options) {
     if (
       options.newSelectedElement != null &&
       options.newSelectedElement.getType() == "page"
@@ -893,9 +895,9 @@ QUnit.test("Do not allow to select page object", function(assert) {
   );
 });
 
-QUnit.test("Do not allow to select page/survey objects", function(assert) {
+QUnit.test("Do not allow to select page/survey objects", function (assert) {
   var creator = new SurveyCreator();
-  creator.onSelectedElementChanging.add(function(c, options) {
+  creator.onSelectedElementChanging.add(function (c, options) {
     var el = options.newSelectedElement;
     if (el != null && (el.getType() == "page" || el.getType() == "survey")) {
       options.newSelectedElement =
@@ -920,7 +922,7 @@ QUnit.test("Do not allow to select page/survey objects", function(assert) {
   );
 });
 
-QUnit.test("Change elemenent page", function(assert) {
+QUnit.test("Change elemenent page", function (assert) {
   var editor = new SurveyCreator();
   editor.JSON = getSurveyJson();
   editor.selectedElement = editor.survey.getQuestionByName("question1");
@@ -946,7 +948,7 @@ QUnit.test("Change elemenent page", function(assert) {
   assert.equal(editor.survey.currentPage.name, "page2", "page2 is current");
 });
 
-QUnit.test("show property grid on Edit", function(assert) {
+QUnit.test("show property grid on Edit", function (assert) {
   var editor = new SurveyCreator();
   editor.JSON = getSurveyJson();
   editor.showToolbox = "right";
@@ -977,7 +979,7 @@ QUnit.test("show property grid on Edit", function(assert) {
   );
 });
 
-QUnit.test("hideAdvancedSettings and designer containers visibility", function(
+QUnit.test("hideAdvancedSettings and designer containers visibility", function (
   assert
 ) {
   var editor = new SurveyCreator();
@@ -1078,7 +1080,7 @@ QUnit.test("hideAdvancedSettings and designer containers visibility", function(
   );
 });
 
-QUnit.test("Show toolbox in right container and hide property grid", function(
+QUnit.test("Show toolbox in right container and hide property grid", function (
   assert
 ) {
   var creator = new SurveyCreator();
@@ -1092,7 +1094,7 @@ QUnit.test("Show toolbox in right container and hide property grid", function(
   );
 });
 
-QUnit.test("Undo-redo on showing modal window", function(assert) {
+QUnit.test("Undo-redo on showing modal window", function (assert) {
   var creator = new SurveyCreator();
   creator.koShowElementEditorAsPropertyGrid(false);
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
@@ -1117,7 +1119,7 @@ QUnit.test("Undo-redo on showing modal window", function(assert) {
 
 QUnit.test(
   "Undo-redo on showing modal window and updating the expressions",
-  function(assert) {
+  function (assert) {
     var creator = new SurveyCreator();
     creator.koShowElementEditorAsPropertyGrid(false);
     creator.JSON = {
@@ -1147,7 +1149,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Undo-redo creator add/remove page", function(assert) {
+QUnit.test("Undo-redo creator add/remove page", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = {
     elements: [
@@ -1165,7 +1167,7 @@ QUnit.test("Undo-redo creator add/remove page", function(assert) {
   assert.equal(creator.survey.pages.length, 2, "Redo new page");
 });
 
-QUnit.test("showModalOnElementEditing property", function(assert) {
+QUnit.test("showModalOnElementEditing property", function (assert) {
   var creator = new SurveyCreator();
   assert.equal(
     creator.showModalOnElementEditing,
@@ -1192,7 +1194,7 @@ QUnit.test("showModalOnElementEditing property", function(assert) {
   );
 });
 
-QUnit.test("pageEditMode property", function(assert) {
+QUnit.test("pageEditMode property", function (assert) {
   var options = {
     pageEditMode: "single",
   };
@@ -1210,7 +1212,7 @@ QUnit.test("pageEditMode property", function(assert) {
   );
 });
 
-QUnit.test("The onModified event is called on property changed", function(
+QUnit.test("The onModified event is called on property changed", function (
   assert
 ) {
   var creator = new SurveyCreator(undefined);
@@ -1260,7 +1262,7 @@ QUnit.test("The onModified event is called on property changed", function(
 
 QUnit.test(
   "Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657",
-  function(assert) {
+  function (assert) {
     try {
       var creator = new SurveyCreator(undefined, { showPropertyGrid: "left" });
       assert.ok(!!creator);
@@ -1270,7 +1272,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Can show unexisting property", function(assert) {
+QUnit.test("Can show unexisting property", function (assert) {
   var creator = new SurveyCreator(undefined);
   var question = new Survey.QuestionCheckbox("q1");
   creator.onCanShowProperty.add((sender, options) => {
@@ -1315,7 +1317,7 @@ function getSurveyJson(): any {
   };
 }
 
-QUnit.test("Default toolbar items", function(assert) {
+QUnit.test("Default toolbar items", function (assert) {
   var creator = new SurveyCreator(undefined);
   assert.equal(creator.toolbarItems().length, 8, "Necessary items are present");
   assert.equal(
@@ -1336,7 +1338,7 @@ QUnit.test("Default toolbar items", function(assert) {
   assert.equal(creator.toolbarItems()[7].id, "svd-state", "svd-state");
 });
 
-QUnit.test("showPageSelectorInToolbar property", function(assert) {
+QUnit.test("showPageSelectorInToolbar property", function (assert) {
   var creator = new SurveyCreator(undefined);
   assert.equal(
     creator.toolbarItems()[0].visible,
@@ -1353,7 +1355,7 @@ QUnit.test("showPageSelectorInToolbar property", function(assert) {
   );
 });
 
-QUnit.test("deleteElement function", function(assert) {
+QUnit.test("deleteElement function", function (assert) {
   var editor = new SurveyCreator();
   var page = editor.survey.pages[0];
   var q1 = page.addNewQuestion("text", "q1");
@@ -1362,11 +1364,42 @@ QUnit.test("deleteElement function", function(assert) {
 
   editor.selectedElement = q2;
   editor.deleteElement(editor.selectedElement);
-  assert.equal(editor.selectedElement.name, "q3", "select next question after delete the previous one");
+  assert.equal(
+    editor.selectedElement.name,
+    "q3",
+    "select next question after delete the previous one"
+  );
 
   editor.deleteElement(editor.selectedElement);
-  assert.equal(editor.selectedElement.name, "q1", "select prev question after delete the lastest one");
+  assert.equal(
+    editor.selectedElement.name,
+    "q1",
+    "select prev question after delete the lastest one"
+  );
 
   editor.deleteElement(editor.selectedElement);
-  assert.equal(editor.selectedElement.name, "page1", "select page after delete the last question");
+  assert.equal(
+    editor.selectedElement.name,
+    "page1",
+    "select page after delete the last question"
+  );
+});
+QUnit.test("Do not call onPageAdded on pages move", function (assert) {
+  var editor = new SurveyCreator();
+  var counter = 0;
+  editor.onPageAdded.add(function (sender, options) {
+    counter++;
+  });
+  editor.survey.addNewPage("page2");
+  editor.survey.addNewPage("page3");
+  assert.equal(counter, 2, "We added two pages");
+  var page2 = editor.survey.pages[1];
+  editor.survey.pages.splice(1, 1);
+  editor.survey.pages.splice(0, 0, page2);
+  assert.equal(
+    editor.survey.pages[0].name,
+    "page2",
+    "page2 inserted correctly"
+  );
+  assert.equal(counter, 2, "We do not added new page");
 });

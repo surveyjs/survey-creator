@@ -33,6 +33,7 @@ export {
   SurveyNestedPropertyEditor,
   SurveyNestedPropertyEditorItem,
 } from "../propertyEditors/propertyNestedPropertyEditor";
+export { SurveyPropertyPagesEditor } from "../propertyEditors/propertyPagesEditor";
 export { SurveyPropertyDropdownColumnsEditor } from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
 export {
