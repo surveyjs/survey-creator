@@ -46,6 +46,7 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
     res.koCanDeleteItem = ko.computed(function () {
       return (
         self.originalValue.length > 1 &&
+        self.object.currentPage !== item &&
         (!self.options ||
           self.options.onCanDeleteItemCallback(self.object, item))
       );
