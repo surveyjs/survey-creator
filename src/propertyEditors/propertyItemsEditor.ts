@@ -15,13 +15,13 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
     var self = this;
-    self.onDeleteClick = function(item) {
+    self.onDeleteClick = function (item) {
       self.deleteItem(item.obj);
     };
-    self.onClearClick = function(item) {
+    self.onClearClick = function (item) {
       self.originalValue.splice(0, self.originalValue.length);
     };
-    self.onAddClick = function() {
+    self.onAddClick = function () {
       self.addItem();
     };
   }
@@ -131,7 +131,9 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   protected createEditorItemCore(item: any = null) {
     if (!item) {
       item = this.createNewItem();
+      SurveyHelper.disableSelectingObj(item);
       this.originalValue.push(item);
+      SurveyHelper.enableSelectingObj(item);
     }
     var editorItem = this.createEditorItem(item);
     if (!!editorItem.onCreated) {

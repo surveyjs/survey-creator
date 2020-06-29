@@ -415,6 +415,7 @@ export var enStrings = {
       validators: "Validators",
       navigation: "Navigation",
       question: "Question",
+      pages: "Pages",
       completedHtml: "Completed Html",
       completedHtmlOnCondition: "Completed Html on Condition",
       loadingHtml: "Loading Html",

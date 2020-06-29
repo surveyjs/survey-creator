@@ -1,7 +1,7 @@
 import * as Survey from "survey-knockout";
 import {
   SurveyPropertyEditorBase,
-  ISurveyObjectEditorOptions
+  ISurveyObjectEditorOptions,
 } from "../src/propertyEditors/propertyEditorBase";
 
 export class EditorOptionsTests implements ISurveyObjectEditorOptions {
@@ -22,7 +22,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): boolean {
     return true;
   }
-  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
+  onCanDeleteItemCallback(object: any, item: Survey.Base): boolean {
     return true;
   }
 
