@@ -31,7 +31,7 @@ ko.components.register("svd-property-editor-modal", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyModalEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+     
       return new PropertyEditorModal(
         model.isEditable,
         model.onShowModal,
@@ -49,7 +49,11 @@ ko.components.register("svd-property-editor-modal", {
         model.onOkClick,
         model, //TODO need to break on props,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+          params.afterRender.call(model, componentInfo);
+
+        typeof model.koAfterRender === "function" &&
+          model.koAfterRender.call(model, componentInfo);
         }
       );
     },

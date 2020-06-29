@@ -22,7 +22,7 @@ ko.components.register("svd-property-editor-restfull", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyResultfullEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorRestfull(
         model.koContentEditor,
         model.getLocString,
@@ -30,7 +30,11 @@ ko.components.register("svd-property-editor-restfull", {
         componentInfo,
         model.koAfterRender,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },
