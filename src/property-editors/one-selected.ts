@@ -5,7 +5,7 @@ import { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneS
 import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 const templateHtml = require("./one-selected.html");
 
-export class PropertyEditorOneSelected {
+export class PropertyEditorOneSelectedViewModel {
   public availableClassesContainer: HTMLElement;
 
   constructor(
@@ -70,8 +70,8 @@ ko.components.register("svd-property-editor-one-selected", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyOneSelectedEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorOneSelected(
+
+      return new PropertyEditorOneSelectedViewModel(
         model.koAvailableClasses,
         model.koAllowAddRemoveItems,
         model.readOnly,
@@ -86,7 +86,11 @@ ko.components.register("svd-property-editor-one-selected", {
         model.selectedObjectEditor,
         componentInfo,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

@@ -5,6 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import "./title-editor.scss";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../editor";
+import { createKey2click } from '../utils/utils';
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 const FRIENDLY_PADDING = 42;
@@ -46,7 +47,7 @@ export class TitleInplaceEditor {
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
-  protected forNeibours(func: (el: HTMLElement) => void) {
+  protected forNeibours(func: (el: HTMLElement, index?: number) => void) {
     if (
       !this.rootElement ||
       !this.rootElement.parentElement ||
@@ -57,7 +58,7 @@ export class TitleInplaceEditor {
     for (var i = 0; i < holder.children.length - 1; i++) {
       var element = holder.children[i];
       if (element.className.indexOf("svda-custom-content") === -1) {
-        func(element);
+        func(element, i);
       }
     }
   }
@@ -100,11 +101,16 @@ export class TitleInplaceEditor {
     }
 
     this.forNeibours(
-      (element) =>
-        (element.onclick = (e) => {
-          this.startEdit(this, e);
-          e.preventDefault();
-        })
+      (element, index) =>
+        {
+          element.tabIndex = 0;
+          element.onkeyup = createKey2click(element);
+          element['aria-label'] = this.getLocString('pe.titleKeyboardAdornerTip');
+          element.onclick = (e) => {
+            this.startEdit(this, e);
+            e.preventDefault();
+          }
+        }
     );
   }
 
@@ -150,7 +156,10 @@ export class TitleInplaceEditor {
 
   hideEditor = () => {
     this.isEditing(false);
-    this.forNeibours((element) => {
+    this.forNeibours((element, index) => {
+      if(index === 0 && typeof element.focus === "function") {
+        element.focus();
+      }
       element.style.display = element.dataset["sjsOldDisplay"];
     });
   };
@@ -221,6 +230,10 @@ export class TitleInplaceEditor {
     return true;
   };
   dispose() {
+    this.forNeibours((element) => {
+      element.onclick = undefined;
+      element.onkeyup = undefined;
+    });
     this._valueSubscription.dispose();
     if (!!this.editor && !!this.editor.onValidateSelectedElement) {
       this.editor.onValidateSelectedElement.remove(

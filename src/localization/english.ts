@@ -117,6 +117,7 @@ export var enStrings = {
     underline: "Underline",
     fpAddQuestion: "Add question...",
     selectPage: "Select page...",
+    chooseElement: "Choose element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings
@@ -415,6 +416,7 @@ export var enStrings = {
       validators: "Validators",
       navigation: "Navigation",
       question: "Question",
+      pages: "Pages",
       completedHtml: "Completed Html",
       completedHtmlOnCondition: "Completed Html on Condition",
       loadingHtml: "Loading Html",
@@ -438,6 +440,8 @@ export var enStrings = {
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
+    titleKeyboardAdornerTip:
+      "Press enter button to edit title",
     keyboardAdornerTip:
       "Press enter button to edit item, press delete button to delete item, press control plus arrow up or arrow down to move item",
     triggerOn: "On ",

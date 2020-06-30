@@ -338,7 +338,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * The event allows you modify DOM element for a property in the Property Grid. For example, you may change its styles.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.htmlElement the html element (html table row in our case) that renders the property display name and its editor.
+   * <br/> options.htmlElement the html element that renders the property display name and its editor.
    * <br/> options.property object property (Survey.JsonObjectProperty object).
    * <br/> options.propertyEditor the property Editor.
    */
@@ -1732,7 +1732,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
   }
-  protected canDeleteItem(object: any, item: Survey.ItemValue): boolean {
+  protected canDeleteItem(object: any, item: Survey.Base): boolean {
     var options = { obj: object, item: item, canDelete: true };
     this.onCanDeleteItem.fire(this, options);
     return options.canDelete;
@@ -2527,14 +2527,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.surveyValue().onPanelRemoved.add((sender: Survey.Survey, options) => {
       self.doOnElementRemoved(options.panel);
     });
-    var pAdded = <any>this.surveyValue()["onPageAdded"];
-    if (pAdded && pAdded.add) {
-      pAdded.add((sender: Survey.Survey, options) => {
-        self.doOnPageAdded(options.page);
-        self.addPageToUI(options.page);
-        self.setModified({ type: "PAGE_ADDED", newValue: options.page });
-      });
-    }
+    this.surveyValue().onPageAdded.add((sender: Survey.Survey, options) => {
+      if (self.surveyObjects.hasObject(options.page)) return;
+      self.doOnPageAdded(options.page);
+      self.addPageToUI(options.page);
+      self.setModified({ type: "PAGE_ADDED", newValue: options.page });
+    });
   }
   private processHtml(html: string): string {
     if (!html) return html;
@@ -2927,7 +2925,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ): boolean {
     return this.onCanShowObjectProperty(object, property);
   }
-  onCanDeleteItemCallback(object: any, item: Survey.ItemValue): boolean {
+  onCanDeleteItemCallback(object: any, item: Survey.Base): boolean {
     return this.canDeleteItem(object, item);
   }
   onIsEditorReadOnlyCallback(

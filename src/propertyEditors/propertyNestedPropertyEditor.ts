@@ -31,24 +31,24 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
     this.koEditItem = ko.observable(null);
     this.koIsList = ko.observable(true);
     this.koActiveView = ko.observable("form");
-    this.koEditItem.subscribe(function(newValue) {
+    this.koEditItem.subscribe(function (newValue) {
       self.koIsList(self.koEditItem() == null);
       self.onListDetailViewChanged();
     });
-    this.onEditItemClick = function(item) {
+    this.onEditItemClick = function (item) {
       self.koEditItem(item);
     };
-    this.onReturnToListClick = function() {
+    this.onReturnToListClick = function () {
       var editItem = self.koEditItem();
       if (editItem.itemEditor && editItem.itemEditor.hasError()) return;
       editItem.hideItemEditor();
       self.koEditItem(null);
     };
-    this.koEditorName = ko.computed(function() {
+    this.koEditorName = ko.computed(function () {
       return self.getEditorName();
     });
   }
-  
+
   public get columns(): Array<SurveyNestedPropertyEditorColumn> {
     return this.koColumnsValue();
   }
@@ -134,7 +134,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
   protected getItemClassName(item: any): string {
     return "";
   }
-  protected createEditorItem(item: any) {
+  protected createEditorItem(item: any): SurveyNestedPropertyEditorItem {
     return new SurveyNestedPropertyEditorItem(
       item,
       () => this.columns,
@@ -156,11 +156,11 @@ export class SurveyNestedPropertyEditorItem {
     return SurveyNestedPropertyEditorItem.deleteIconName;
   }
   public koHasDetails: any;
+  koCanDeleteItem: any;
   protected options: ISurveyObjectEditorOptions;
   private koCellsValue = ko.observableArray<
     SurveyNestedPropertyEditorEditorCell
   >();
-  koCanDeleteItem = ko.observable(true);
   private itemEditorValue: SurveyElementEditorContentModel;
   constructor(
     public obj: any,
@@ -169,8 +169,10 @@ export class SurveyNestedPropertyEditorItem {
     private getItemClassName: (item: any) => string = null,
     private object: any = undefined
   ) {
+    this.koCanDeleteItem = ko.observable(true);
     this.options = options;
     this.koHasDetails = ko.observable(this.hasDetailsProperties());
+    this.koCanDeleteItem = ko.observable(true);
     ko.computed(() => {
       var columns = this.getColumns();
       this.koCellsValue([]);
@@ -183,11 +185,11 @@ export class SurveyNestedPropertyEditorItem {
           )
         );
       }
-      this.koCanDeleteItem(
-        !this.options ||
-          this.options.onCanDeleteItemCallback(this.object, this.obj)
-      );
     });
+    this.koCanDeleteItem(
+      !this.options ||
+        this.options.onCanDeleteItemCallback(this.object, this.obj)
+    );
   }
   protected getClassName(): string {
     if (!this.getItemClassName) return "";

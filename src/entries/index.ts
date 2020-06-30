@@ -33,6 +33,7 @@ export {
   SurveyNestedPropertyEditor,
   SurveyNestedPropertyEditorItem,
 } from "../propertyEditors/propertyNestedPropertyEditor";
+export { SurveyPropertyPagesEditor } from "../propertyEditors/propertyPagesEditor";
 export { SurveyPropertyDropdownColumnsEditor } from "../propertyEditors/propertyMatrixDropdownColumnsEditor";
 export { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
 export {
@@ -136,46 +137,46 @@ export { TitleActionsViewModel } from "../adorners/title-actions";
 export {
   IAccordionItemData,
   AccordionItemModel,
-  AccordionModel,
+  AccordionViewModel,
 } from "../utils/accordion";
 export { ButtonViewModel } from "../utils/button";
 export { DropdownViewModel } from "../utils/dropdown";
 export { BooleanViewModel } from "../utils/boolean";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
-export { DesignerContainerModel } from "../utils/designer-container";
-export { DesignerHContainerModel } from "../utils/designer-h-container";
+export { DesignerContainerViewModel } from "../utils/designer-container";
+export { DesignerHContainerViewModel} from "../utils/designer-h-container";
 
 export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";
 
 // property grid
-export { PropertyGrid } from "../property-grid/property-grid";
-export { ObjectEditor } from "../property-grid/object-editor";
-export { ObjectEditorContent } from "../property-grid/object-editor-content";
-export { ObjectEditorTab } from "../property-grid/object-editor-tab";
-export { ObjectEditorOldTableContent } from "../property-grid/object-editor-old-table-content";
+export { PropertyGridViewModel } from "../property-grid/property-grid";
+export { ObjectEditorViewModel } from "../property-grid/object-editor";
+export { ObjectEditorContentViewModel } from "../property-grid/object-editor-content";
+export { ObjectEditorTabViewModel } from "../property-grid/object-editor-tab";
+export { ObjectEditorOldTableContentViewModel } from "../property-grid/object-editor-old-table-content";
 
 // property editors
-export { PropertyEditor } from "../property-editors/property-editor";
-export { PropertyEditorError } from "../property-editors/error";
-export { PropertyEditorString } from "../property-editors/string";
-export { PropertyEditorDropdown } from "../property-editors/dropdown";
-export { PropertyEditorBoolean } from "../property-editors/boolean";
-export { PropertyEditorSwitch } from "../property-editors/switch";
-export { PropertyEditorNumber } from "../property-editors/number";
-export { PropertyEditorColor } from "../property-editors/color";
-export { PropertyEditorModal } from "../property-editors/modal";
+export { PropertyEditorViewModel } from "../property-editors/property-editor";
+export { PropertyEditorErrorViewModel } from "../property-editors/error";
+export { PropertyEditorStringViewModel } from "../property-editors/string";
+export { PropertyEditorDropdownViewModel } from "../property-editors/dropdown";
+export { PropertyEditorBooleanViewModel } from "../property-editors/boolean";
+export { PropertyEditorSwitchViewModel } from "../property-editors/switch";
+export { PropertyEditorNumberViewModel } from "../property-editors/number";
+export { PropertyEditorColorViewModel } from "../property-editors/color";
+export { PropertyEditorModalViewModel } from "../property-editors/modal";
 export { PropertyEditorModalContent } from "../property-editors/modal-content";
-export { PropertyEditorText } from "../property-editors/text";
-export { PropertyEditorCondition } from "../property-editors/condition";
-export { PropertyEditorCells } from "../property-editors/cells";
-export { PropertyEditorExpression } from "../property-editors/expression";
-export { PropertyEditorHTML } from "../property-editors/html-pe";
-export { PropertyEditorItemValues } from "../property-editors/item-values";
-export { PropertyEditorValue } from "../property-editors/default-value";
-export { PropertyEditorOneSelected } from "../property-editors/one-selected";
-export { PropertyEditorRestfull } from "../property-editors/restfull";
-export { PropertyEditorMultipleValues } from "../property-editors/multiple-values";
-export { PropertyEditorNestedItems } from "../property-editors/nested-items";
-export { PropertyEditorNestedItem } from "../property-editors/nested-item";
-export { PropertyEditorNested } from "../property-editors/nested";
+export { PropertyEditorTextViewModel } from "../property-editors/text";
+export { PropertyEditorConditionViewModel } from "../property-editors/condition";
+export { PropertyEditorCellsViewModel } from "../property-editors/cells";
+export { PropertyEditorExpressionViewModel } from "../property-editors/expression";
+export { PropertyEditorHTMLViewModel } from "../property-editors/html-pe";
+export { PropertyEditorItemValuesViewModel } from "../property-editors/item-values";
+export { PropertyEditorValueViewModel } from "../property-editors/default-value";
+export { PropertyEditorOneSelectedViewModel } from "../property-editors/one-selected";
+export { PropertyEditorRestfullViewModel } from "../property-editors/restfull";
+export { PropertyEditorMultipleValuesViewModel } from "../property-editors/multiple-values";
+export { PropertyEditorNestedItemsViewModel } from "../property-editors/nested-items";
+export { PropertyEditorNestedItemViewModel } from "../property-editors/nested-item";
+export { PropertyEditorNestedViewModel } from "../property-editors/nested";

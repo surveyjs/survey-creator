@@ -1,25 +1,45 @@
 <tr>
   <td class="svd-itemvalue-actions-container">
-    <div class="svd-drag-handle svd-itemvalue-action" data-bind="visible: !$data.editor.readOnly()">
+    <div
+      class="svd-drag-handle svd-itemvalue-action"
+      data-bind="visible: !$data.editor.readOnly()"
+    >
       <span>
-        <svg-icon class="svd-primary-icon" params="iconName: dragIcon, size: 20"></svg-icon>
+        <svg-icon
+          class="svd-primary-icon"
+          params="iconName: dragIcon, size: 20"
+        ></svg-icon>
       </span>
     </div>
-    <button type="button" class="btn sv-btn btn-default btn-secondary svd-textitems-edit svd-itemvalue-action"
-      data-bind="visible: $data.koHasDetails, click: onEditItemClick">
-      <span class="glyphicon glyphicon-edit" data-bind="text: editor.getLocString('pe.edit')"></span>
+    <button
+      type="button"
+      class="btn sv-btn btn-default btn-secondary svd-textitems-edit svd-itemvalue-action"
+      data-bind="visible: $data.koHasDetails, click: onEditItemClick"
+    >
+      <span
+        class="glyphicon glyphicon-edit"
+        data-bind="text: editor.getLocString('pe.edit')"
+      ></span>
     </button>
   </td>
   <!-- ko foreach: cells -->
   <td class="form-group">
-    <svd-property-editor params="model: objectProperty.editor"></svd-property-editor>
+    <svd-property-editor
+      params="model: objectProperty.editor"
+    ></svd-property-editor>
   </td>
   <!-- /ko -->
   <td class="svd-textitems-column">
-    <div class="svd-itemvalue-action" tabindex="0"
-      data-bind="key2click, visible: editor.koAllowAddRemoveItems() && koCanDeleteItem() && !editor.readOnly(), click: editor.onDeleteClick">
+    <div
+      class="svd-itemvalue-action"
+      tabindex="0"
+      data-bind="key2click, visible: editor.koAllowAddRemoveItems() && koCanDeleteItem() && !editor.readOnly(), click: editor.onDeleteClick, attr: {'aria-label': editor.getLocString('pe.delete')}"
+    >
       <span>
-        <svg-icon class="svd-primary-icon" params="iconName: deleteIcon, size: 20"></svg-icon>
+        <svg-icon
+          class="svd-primary-icon"
+          params="iconName: deleteIcon, size: 20"
+        ></svg-icon>
       </span>
     </div>
   </td>

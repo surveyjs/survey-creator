@@ -5,7 +5,7 @@ import { SurveyNestedPropertyEditor } from "../propertyEditors/propertyNestedPro
 
 const templateHtml = require("./nested.html");
 
-export class PropertyEditorNested {
+export class PropertyEditorNestedViewModel {
   constructor(
     public _onReturnToListClick: any,
     public koEditorName: any,
@@ -25,14 +25,18 @@ ko.components.register("svd-property-editor-nested", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyNestedPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorNested(
+
+      return new PropertyEditorNestedViewModel(
         model.onReturnToListClick,
         model.koEditorName,
         model.koEditItem,
         model,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

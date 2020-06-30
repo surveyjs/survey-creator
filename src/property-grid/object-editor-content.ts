@@ -4,7 +4,7 @@ import "./object-editor-content.scss";
 import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 const templateHtml = require("./object-editor-content.html");
 
-export class ObjectEditorContent {
+export class ObjectEditorContentViewModel {
   constructor(
     public useTabsInElementEditor: any,
     public koTabs: any,
@@ -32,7 +32,7 @@ ko.components.register("svd-object-editor-content", {
         model = params.elementEditorContent;
       }
 
-      return new ObjectEditorContent(
+      return new ObjectEditorContentViewModel(
         model.useTabsInElementEditor,
         model.koTabs,
         model.koActiveTab,

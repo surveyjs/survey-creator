@@ -4,7 +4,7 @@ import "./modal.scss";
 import { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
 const templateHtml = require("./modal.html");
 
-export class PropertyEditorModal {
+export class PropertyEditorModalViewModel {
   constructor(
     public isEditable: boolean,
     public onShowModal: any,
@@ -31,8 +31,8 @@ ko.components.register("svd-property-editor-modal", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyModalEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorModal(
+     
+      return new PropertyEditorModalViewModel(
         model.isEditable,
         model.onShowModal,
         model.modalNameTarget,
@@ -49,7 +49,11 @@ ko.components.register("svd-property-editor-modal", {
         model.onOkClick,
         model, //TODO need to break on props,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+          params.afterRender.call(model, componentInfo);
+
+        typeof model.koAfterRender === "function" &&
+          model.koAfterRender.call(model, componentInfo);
         }
       );
     },

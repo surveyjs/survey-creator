@@ -8,7 +8,7 @@ import {
 import { SurveyObjectProperty } from "../objectProperty";
 const templateHtml = require("./object-editor-old-table-content.html");
 
-export class ObjectEditorOldTableContent {
+export class ObjectEditorOldTableContentViewModel {
   constructor(
     public koProperties: ko.ObservableArray<SurveyObjectProperty>,
     public koTab: ko.Observable<SurveyElementEditorTabModel>,
@@ -20,7 +20,7 @@ ko.components.register("svd-object-editor-old-table-content", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyElementEditorOldTableContentModel = params.elementEditorContent();
-      return new ObjectEditorOldTableContent(
+      return new ObjectEditorOldTableContentViewModel(
         model.koProperties,
         model.koTab,
         componentInfo

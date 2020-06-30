@@ -462,7 +462,7 @@ export class SurveyElementEditorTabModel {
     if (tEl.nodeName === "#text") tEl.data = "";
     tEl = elements[elements.length - 1];
     if (tEl.nodeName === "#text") tEl.data = "";
-    this.onAfterRenderCallback(el, prop);
+    this.onAfterRenderCallback(el.parentElement, prop);
   }
   private buildEditorProperties() {
     for (var i = 0; i < this.properties.length; i++) {

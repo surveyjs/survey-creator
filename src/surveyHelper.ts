@@ -7,7 +7,7 @@ export enum ObjType {
   Survey,
   Page,
   Panel,
-  Question
+  Question,
 }
 export class SurveyHelper {
   public static getNewPageName(objs: Array<any>) {
@@ -145,7 +145,18 @@ export class SurveyHelper {
     var oldIndex = list.indexOf(obj);
     if (oldIndex < 0 || oldIndex == newIndex) return false;
     list.splice(oldIndex, 1);
+    //Object.getPrototypeOf(list).splice.call(list, oldIndex, 1);
     list.splice(newIndex, 0, obj);
+    //Object.getPrototypeOf(list).splice.call(list, newIndex, 0, obj);
     return true;
+  }
+  public static disableSelectingObj(obj: Survey.Base) {
+    obj["disableSelecting"] = true;
+  }
+  public static enableSelectingObj(obj: Survey.Base) {
+    delete obj["disableSelecting"];
+  }
+  public static canSelectObj(obj: Survey.Base) {
+    return obj["disableSelecting"] !== true;
   }
 }

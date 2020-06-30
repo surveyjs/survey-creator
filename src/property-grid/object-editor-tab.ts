@@ -5,7 +5,7 @@ import { SurveyElementEditorTabModel } from "../questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../objectProperty";
 const templateHtml = require("./object-editor-tab.html");
 
-export class ObjectEditorTab {
+export class ObjectEditorTabViewModel {
   constructor(
     public name: string,
     public editorProperties: Array<SurveyObjectProperty>,
@@ -17,7 +17,7 @@ ko.components.register("svd-object-editor-tab", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyElementEditorTabModel = params.model;
-      return new ObjectEditorTab(
+      return new ObjectEditorTabViewModel(
         model.name,
         model.editorProperties,
         model.koAfterRenderProperty

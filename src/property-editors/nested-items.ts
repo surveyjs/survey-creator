@@ -7,7 +7,7 @@ import {
 } from "../propertyEditors/propertyNestedPropertyEditor";
 const templateHtml = require("./nested-items.html");
 
-export class PropertyEditorNestedItems {
+export class PropertyEditorNestedItemsViewModel {
   constructor(
     public koIsList: any,
     public getLocString: any,
@@ -33,8 +33,8 @@ ko.components.register("svd-property-editor-nested-items", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyNestedPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorNestedItems(
+
+      return new PropertyEditorNestedItemsViewModel(
         model.koIsList,
         model.getLocString,
         model.koShowHeader,
@@ -47,7 +47,11 @@ ko.components.register("svd-property-editor-nested-items", {
         model.onClearClick,
         model.koAllowRemoveAllItems,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

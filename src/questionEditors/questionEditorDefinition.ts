@@ -431,8 +431,6 @@ export class SurveyQuestionEditorDefinition {
         "locale",
         "mode",
         "cookieName",
-        { name: "showPageTitles" },
-        { name: "showPageNumbers" },
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },
@@ -467,6 +465,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
 
+        { name: "showPageTitles", tab: "pages" },
+        { name: "showPageNumbers", tab: "pages" },
+
         { name: "calculatedValues", tab: "logic" },
         { name: "triggers", tab: "logic" },
 
@@ -500,6 +501,7 @@ export class SurveyQuestionEditorDefinition {
       tabs: [
         { name: "navigation", index: 100 },
         { name: "question", index: 200 },
+        { name: "pages", index: 250 },
         { name: "logic", index: 300 },
         { name: "data", index: 400 },
         { name: "validation", index: 500 },

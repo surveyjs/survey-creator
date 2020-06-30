@@ -4,7 +4,7 @@ import "./dropdown.scss";
 import { SurveyDropdownPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./dropdown.html");
 
-export class PropertyEditorDropdown {
+export class PropertyEditorDropdownViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -22,8 +22,8 @@ ko.components.register("svd-property-editor-dropdown", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyDropdownPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorDropdown(
+
+      return new PropertyEditorDropdownViewModel(
         model.koValue,
         model.readOnly,
         model.optionsCaption,
@@ -31,7 +31,11 @@ ko.components.register("svd-property-editor-dropdown", {
         model.koHasFocus,
         model.displayName,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

@@ -4,7 +4,7 @@ import "./item-values.scss";
 import { SurveyPropertyItemValuesEditor } from "../propertyEditors/propertyItemValuesEditor";
 const templateHtml = require("./item-values.html");
 
-export class PropertyEditorItemValues {
+export class PropertyEditorItemValuesViewModel {
   constructor(
     public koIsList: any,
     public koShowTextView: any,
@@ -25,8 +25,8 @@ ko.components.register("svd-property-editor-item-values", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyItemValuesEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditorItemValues(
+
+      return new PropertyEditorItemValuesViewModel(
         model.koIsList,
         model.koShowTextView,
         model.koActiveView,
@@ -37,7 +37,11 @@ ko.components.register("svd-property-editor-item-values", {
         model.readOnly,
         model, //TODO break on props
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

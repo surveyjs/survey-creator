@@ -1,5 +1,5 @@
 import { getNextValue } from "../src/utils/utils";
-import { DesignerContainerModel } from "../src/utils/designer-container";
+import { DesignerContainerViewModel } from "../src/utils/designer-container";
 import ko from "knockout";
 
 export default QUnit.module("UtilsTests");
@@ -30,7 +30,7 @@ QUnit.test("getNextValue", function(assert) {
 
 QUnit.test("changed unsubscribe", function(assert) {
   var changed = ko.observable(0);
-  var dcm = new DesignerContainerModel(
+  var dcm = new DesignerContainerViewModel(
     { changed: changed, tabs: ko.observableArray() },
     { element: { offsetWidth: 0, style: {} } }
   );
