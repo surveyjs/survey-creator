@@ -1,7 +1,7 @@
 <div class="svda-content" data-bind="ifnot: readOnly">
   <span class="svda-title-editor-content" data-bind="visible: isEditing" style="display: none;">
     <input data-svd-info="adorner"
-      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }, attr: { maxLength: maxLength, 'aria-label': name, 'title': error, 'placeholder': error }, css: { 'svda-title-editor-error': error }, style: { 'min-width': error() ? '150px' : '' }"
+      data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, keydown: nameEditorKeydown, blur: postEdit }, attr: { maxLength: maxLength, 'aria-label': name, 'title': error, 'placeholder': error }, css: { 'svda-title-editor-error': error }, style: { 'min-width': error() ? '150px' : '' }"
       style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;" />
     <span class="svda-edit-button" data-bind="click: postEdit, enable: editingName() != ''">
       <svg-icon class="svd-primary-icon" params="iconName: 'icon-inplacecheck', size: 12"></svg-icon>

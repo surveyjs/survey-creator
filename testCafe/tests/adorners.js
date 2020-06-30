@@ -284,9 +284,19 @@ test("delete button click when editing text of item - T4545", async (t) => {
     .click(".item_editable span:first-child")
     .pressKey("delete")
     .pressKey("esc")
-    .debug()
     .expect(
       Selector(".svda-select-items-collection div:nth-child(1) span").innerText
     )
     .eql("item1");
+});
+
+test("ctrl+Z click when editing title - #855", async (t) => {
+  await t
+    .doubleClick("[title~=Dropdown]")
+    .click(".svd_survey_designer .sv_row .title_editable span:nth-child(2)")
+    .pressKey("ctrl+z")
+    .expect(
+      Selector(".svd_survey_designer .sv_row").count
+    )
+    .eql(2);
 });
