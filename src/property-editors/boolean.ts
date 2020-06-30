@@ -20,14 +20,17 @@ ko.components.register("svd-property-editor-boolean", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyBooleanPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorBoolean(
         model.koValue,
         model.readOnly,
         model.isDiplayNameVisible,
         model.displayName,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

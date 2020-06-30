@@ -246,7 +246,7 @@ test(`dropdown readonly`, async (t) => {
         "elements": [
           {
           "type": "dropdown",
-          "name": "question1", 
+          "name": "question1",
           "hasOther": "true",
           "choices": [
             "item1",
@@ -276,4 +276,17 @@ test(`dropdown readonly`, async (t) => {
     .eql("item3")
     .expect(Selector(".svda-select-items-collection + div span").innerText)
     .eql("Other (describe)");
+});
+
+test("delete button click when editing text of item - T4545", async (t) => {
+  await t
+    .click(`[title~=Dropdown]`)
+    .click(".item_editable span:first-child")
+    .pressKey("delete")
+    .pressKey("esc")
+    .debug()
+    .expect(
+      Selector(".svda-select-items-collection div:nth-child(1) span").innerText
+    )
+    .eql("item1");
 });

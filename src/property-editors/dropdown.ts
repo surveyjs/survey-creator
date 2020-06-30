@@ -22,7 +22,7 @@ ko.components.register("svd-property-editor-dropdown", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyDropdownPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorDropdown(
         model.koValue,
         model.readOnly,
@@ -31,7 +31,11 @@ ko.components.register("svd-property-editor-dropdown", {
         model.koHasFocus,
         model.displayName,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

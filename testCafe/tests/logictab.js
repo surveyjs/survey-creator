@@ -1,15 +1,14 @@
 import { url, init } from "../settings";
 import page from "../page-model";
-import { Selector, ClientFunction } from "testcafe";
-const assert = require("assert");
+import { Selector } from "testcafe";
 const title = `logictab_editor`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   var creatorOptions = { showLogicTab: true };
   await init(creatorOptions);
 });
 
-test(`Create logic: question visibility`, async t => {
+test(`Create logic: question visibility`, async (t) => {
   await t
     .click(page.toolBarQuestion("Dropdown"))
     .click(page.toolBarQuestion("Checkbox"))
@@ -56,9 +55,7 @@ test(`Create logic: question visibility`, async t => {
     .click(actionSelect)
     .click(actionSelect.find("option").withText("Question visibility"));
 
-  var visibilitySelect = Selector(".svd-logic-tab__item")
-    .find("select")
-    .nth(1);
+  var visibilitySelect = Selector(".svd-logic-tab__item").find("select").nth(1);
   await t
     .click(visibilitySelect)
     .click(visibilitySelect.find("option").withText("question4"));
@@ -72,4 +69,41 @@ test(`Create logic: question visibility`, async t => {
       Selector("span").withText("Make question {question4} visible").exists
     )
     .ok();
+});
+
+test(`Check all actions`, async (t) => {
+  await t
+    .click(page.toolBarQuestion("Dropdown"))
+    .click(page.toolBarQuestion("Checkbox"))
+    .click(page.toolBarQuestion("Single Input"))
+    .click(page.toolBarQuestion("Single Input"))
+    .expect(page.questions.count)
+    .eql(4);
+
+  await t
+    .click(page.creatorTab("Survey Logic"))
+    .click(page.buttonByValue("Add New"));
+
+  const actionSelect = Selector("[aria-label='Select an action to add...']");
+  await t
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Question visibility"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Question enable/disable"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Question optional required"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Complete survey"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Set question value"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Copy question value"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Skip to question"))
+    .click(actionSelect)
+    .click(actionSelect.find("option").withText("Run custom expression"))
+    .click(actionSelect)
+    .click(
+      actionSelect.find("option").withText("Custom 'Thank you page' text")
+    );
 });

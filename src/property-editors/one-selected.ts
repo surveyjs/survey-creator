@@ -47,7 +47,7 @@ export class PropertyEditorOneSelected {
       ) {
         this.toggleClassesContainer();
       } else {
-        event.relatedTarget["focus"]();
+        event.relatedTarget && event.relatedTarget["focus"]();
       }
     };
   };
@@ -70,7 +70,7 @@ ko.components.register("svd-property-editor-one-selected", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyOneSelectedEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorOneSelected(
         model.koAvailableClasses,
         model.koAllowAddRemoveItems,
@@ -86,7 +86,11 @@ ko.components.register("svd-property-editor-one-selected", {
         model.selectedObjectEditor,
         componentInfo,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

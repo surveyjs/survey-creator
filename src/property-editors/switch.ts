@@ -19,13 +19,17 @@ ko.components.register("svd-property-editor-switch", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveySwitchPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorSwitch(
         model.koValue,
         model.readOnly,
         model.displayName,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

@@ -22,7 +22,6 @@ ko.components.register("svd-property-editor-string", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyStringPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
 
       return new PropertyEditorString(
         model.koValue,
@@ -32,7 +31,11 @@ ko.components.register("svd-property-editor-string", {
         model.koMaxLength,
         model.displayName,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

@@ -12,7 +12,6 @@ export class PropertyEditor {
     public model: SurveyPropertyEditorBase,
     public afterRender: any
   ) {
-    afterRender();
   }
 }
 
@@ -27,7 +26,10 @@ ko.components.register("svd-property-editor", {
         model.contentTemplateName,
         model, //TODO should transform to separate params
         () => {
-          afterRender.call(model, componentInfo);
+          afterRender.call(model, componentInfo, {
+            property: model.property,
+            editor: model,
+          });
         }
       );
     },

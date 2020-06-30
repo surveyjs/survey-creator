@@ -20,14 +20,17 @@ ko.components.register("svd-property-editor-color", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyColorPropertyEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
       return new PropertyEditorColor(
         model.koValue,
         model.readOnly,
         model.koMaxValue,
         model.koMinValue,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

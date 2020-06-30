@@ -25,7 +25,7 @@ ko.components.register("svd-property-editor-item-values", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyItemValuesEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorItemValues(
         model.koIsList,
         model.koShowTextView,
@@ -37,7 +37,11 @@ ko.components.register("svd-property-editor-item-values", {
         model.readOnly,
         model, //TODO break on props
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },

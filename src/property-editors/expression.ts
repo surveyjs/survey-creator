@@ -24,7 +24,7 @@ ko.components.register("svd-property-editor-expression", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyConditionEditor = params.model;
-      const afterRender = params.afterRender || model.koAfterRender;
+
       return new PropertyEditorExpression(
         model.hasAceEditor,
         model.getLocString,
@@ -35,7 +35,11 @@ ko.components.register("svd-property-editor-expression", {
         model.koTextValue,
         model.showHelpText,
         () => {
-          afterRender.call(model, componentInfo);
+          typeof params.afterRender === "function" &&
+            params.afterRender.call(model, componentInfo);
+
+          typeof model.koAfterRender === "function" &&
+            model.koAfterRender.call(model, componentInfo);
         }
       );
     },
