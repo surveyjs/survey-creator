@@ -5,6 +5,7 @@ const templateHtml = require("./property-grid.html");
 
 import { PropertyGridObjectEditorModel } from "../questionEditors/questionEditor";
 import { SurveyCreator } from "../editor";
+import { editorLocalization } from '../editorLocalization';
 
 export class PropertyGrid {
   constructor(
@@ -12,6 +13,9 @@ export class PropertyGrid {
     public koSelectedObject: any,
     public propertyGridObjectEditorModel: PropertyGridObjectEditorModel
   ) {}
+  public getLocString(str: string) {
+    return editorLocalization.getString(str);
+  }
 }
 
 ko.components.register("svd-property-grid", {
