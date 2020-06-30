@@ -455,8 +455,11 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     });
   }
   public addCondition = () => {
-    this.koEditorItems.push(new ConditionEditorItem(this));
+    var conditionEditorItem = new ConditionEditorItem(this);
+    this.koEditorItems.push(conditionEditorItem);
     this.updateEditorItemsVisibilities();
+    ko.tasks.runEarly();
+    conditionEditorItem.conjunctionQuestion.focus();
   };
   public removeCondition = (item: ConditionEditorItem) => {
     this.koEditorItems.remove(item);
