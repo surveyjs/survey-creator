@@ -4,7 +4,7 @@ import "./text.scss";
 import { SurveyPropertyTextEditor } from "../propertyEditors/propertyModalEditor";
 const templateHtml = require("./text.html");
 
-export class PropertyEditorText {
+export class PropertyEditorTextViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -24,7 +24,7 @@ ko.components.register("svd-property-editor-text", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyTextEditor = params.model;
 
-      return new PropertyEditorText(
+      return new PropertyEditorTextViewModel(
         model.koValue,
         model.readOnly,
         model.isDiplayNameVisible,

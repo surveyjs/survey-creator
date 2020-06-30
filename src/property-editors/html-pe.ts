@@ -4,7 +4,7 @@ import "./html-pe.scss";
 import { SurveyPropertyHtmlEditor } from "../propertyEditors/propertyModalEditor";
 const templateHtml = require("./html-pe.html");
 
-export class PropertyEditorHTML {
+export class PropertyEditorHTMLViewModel {
   constructor(
     public koValue: ko.Observable<any>,
     public readOnly: boolean,
@@ -19,7 +19,7 @@ ko.components.register("svd-property-editor-html", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyHtmlEditor = params.model;
 
-      return new PropertyEditorHTML(model.koValue, model.readOnly, () => {
+      return new PropertyEditorHTMLViewModel(model.koValue, model.readOnly, () => {
         typeof params.afterRender === "function" &&
           params.afterRender.call(model, componentInfo);
 

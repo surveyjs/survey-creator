@@ -7,7 +7,7 @@ import {
 } from "../propertyEditors/propertyNestedPropertyEditor";
 const templateHtml = require("./nested-items.html");
 
-export class PropertyEditorNestedItems {
+export class PropertyEditorNestedItemsViewModel {
   constructor(
     public koIsList: any,
     public getLocString: any,
@@ -34,7 +34,7 @@ ko.components.register("svd-property-editor-nested-items", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyNestedPropertyEditor = params.model;
 
-      return new PropertyEditorNestedItems(
+      return new PropertyEditorNestedItemsViewModel(
         model.koIsList,
         model.getLocString,
         model.koShowHeader,

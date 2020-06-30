@@ -5,7 +5,7 @@ import { SurveyPropertyResultfullEditor } from "../propertyEditors/propertyRestf
 import { QuestionDropdown } from "survey-knockout";
 const templateHtml = require("./restfull.html");
 
-export class PropertyEditorRestfull {
+export class PropertyEditorRestfullViewModel {
   constructor(
     public koContentEditor: any,
     public getLocString: any,
@@ -23,7 +23,7 @@ ko.components.register("svd-property-editor-restfull", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyResultfullEditor = params.model;
 
-      return new PropertyEditorRestfull(
+      return new PropertyEditorRestfullViewModel(
         model.koContentEditor,
         model.getLocString,
         model.question,

@@ -9,7 +9,7 @@ import {
 
 const templateHtml = require("./nested-item.html");
 
-export class PropertyEditorNestedItem {
+export class PropertyEditorNestedItemViewModel {
   constructor(
     public editor: any,
     public model: SurveyNestedPropertyEditorItem,
@@ -40,7 +40,7 @@ ko.components.register("svd-property-editor-nested-item", {
       model = editor.createItemViewModel(params.item);
       model["editor"] = editor;
 
-      return new PropertyEditorNestedItem(
+      return new PropertyEditorNestedItemViewModel(
         editor,
         model,
         model.koCanDeleteItem,

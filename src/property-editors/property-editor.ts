@@ -4,7 +4,7 @@ import "./property-editor.scss";
 import { SurveyPropertyEditorBase } from "../propertyEditors/propertyEditorBase";
 const templateHtml = require("./property-editor.html");
 
-export class PropertyEditor {
+export class PropertyEditorViewModel {
   constructor(
     public showDisplayNameOnTop: boolean,
     public displayName: string,
@@ -20,7 +20,7 @@ ko.components.register("svd-property-editor", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyEditorBase = params.model;
       const afterRender = params.afterRender || model.koAfterRender;
-      return new PropertyEditor(
+      return new PropertyEditorViewModel(
         model.showDisplayNameOnTop,
         model.displayName,
         model.contentTemplateName,

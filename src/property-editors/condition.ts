@@ -4,7 +4,7 @@ import "./condition.scss";
 import { SurveyPropertyConditionEditor } from "../propertyEditors/propertyConditionEditor";
 const templateHtml = require("./condition.html");
 
-export class PropertyEditorCondition {
+export class PropertyEditorConditionViewModel {
   constructor(
     public koShowExpressionHeader: any,
     public onShowHideEditor: any,
@@ -39,7 +39,7 @@ ko.components.register("svd-property-editor-condition", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyConditionEditor = params.model;
-      return new PropertyEditorCondition(
+      return new PropertyEditorConditionViewModel(
         model.koShowExpressionHeader,
         model.onShowHideEditor,
         model.koConditionDisplayText,

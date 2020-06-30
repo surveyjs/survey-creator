@@ -4,7 +4,7 @@ import "./cells.scss";
 import { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
 const templateHtml = require("./cells.html");
 
-export class PropertyEditorCells {
+export class PropertyEditorCellsViewModel {
   constructor(
     public koCanEdit: any,
     public getLocString: (name: string) => any,
@@ -20,7 +20,7 @@ ko.components.register("svd-property-editor-cells", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyCellsEditor = params.model;
-      return new PropertyEditorCells(
+      return new PropertyEditorCellsViewModel(
         model.koCanEdit,
         model.getLocString,
         model.koColumns,

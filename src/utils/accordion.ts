@@ -39,7 +39,7 @@ export class AccordionItemModel {
   }
 }
 
-export class AccordionModel {
+export class AccordionViewModel {
   constructor(params) {
     this.tabs = ko.computed<AccordionItemModel>(() => {
       var res = ko
@@ -59,6 +59,6 @@ export class AccordionModel {
 }
 
 ko.components.register("svd-accordion", {
-  viewModel: AccordionModel,
+  viewModel: AccordionViewModel,
   template: template,
 });

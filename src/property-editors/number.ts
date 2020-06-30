@@ -4,7 +4,7 @@ import "./number.scss";
 import { SurveyNumberPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./number.html");
 
-export class PropertyEditorNumber {
+export class PropertyEditorNumberViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -21,7 +21,7 @@ ko.components.register("svd-property-editor-number", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyNumberPropertyEditor = params.model;
 
-      return new PropertyEditorNumber(
+      return new PropertyEditorNumberViewModel(
         model.koValue,
         model.readOnly,
         model.koMaxValue,

@@ -4,7 +4,7 @@ import "./modal.scss";
 import { SurveyPropertyModalEditor } from "../propertyEditors/propertyModalEditor";
 const templateHtml = require("./modal.html");
 
-export class PropertyEditorModal {
+export class PropertyEditorModalViewModel {
   constructor(
     public isEditable: boolean,
     public onShowModal: any,
@@ -32,7 +32,7 @@ ko.components.register("svd-property-editor-modal", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyModalEditor = params.model;
      
-      return new PropertyEditorModal(
+      return new PropertyEditorModalViewModel(
         model.isEditable,
         model.onShowModal,
         model.modalNameTarget,

@@ -5,7 +5,7 @@ import { SurveyPropertyConditionEditor } from "../propertyEditors/propertyCondit
 import { SurveyPropertyDefaultValueEditor } from "../propertyEditors/propertyDefaultValueEditor";
 const templateHtml = require("./default-value.html");
 
-export class PropertyEditorValue {
+export class PropertyEditorValueViewModel {
   constructor(
     public koSurvey: any,
     public resetValue: (model: SurveyPropertyDefaultValueEditor) => void,
@@ -25,7 +25,7 @@ ko.components.register("svd-property-editor-default-value", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyDefaultValueEditor = params.model;
-      return new PropertyEditorValue(
+      return new PropertyEditorValueViewModel(
         model.koSurvey,
         model.resetValue,
         model.resetText,

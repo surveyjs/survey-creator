@@ -4,7 +4,7 @@ import "./designer-container.scss";
 import { editorLocalization } from "../editorLocalization";
 var template = require("html-loader?interpolate!val-loader!./designer-container.html");
 
-export class DesignerContainerModel {
+export class DesignerContainerViewModel {
   private _changedSubscription: ko.Subscription;
   private _prevWidth: any;
   private _prevSurfaceWidth: any;
@@ -72,7 +72,7 @@ export class DesignerContainerModel {
 ko.components.register("svd-designer-container", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      return new DesignerContainerModel(params, componentInfo);
+      return new DesignerContainerViewModel(params, componentInfo);
     }
   },
   template: template

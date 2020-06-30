@@ -4,7 +4,7 @@ import "./expression.scss";
 import { SurveyPropertyConditionEditor } from "../propertyEditors/propertyConditionEditor";
 const templateHtml = require("./expression.html");
 
-export class PropertyEditorExpression {
+export class PropertyEditorExpressionViewModel {
   constructor(
     public hasAceEditor: boolean,
     public getLocString: (name: string) => any,
@@ -25,7 +25,7 @@ ko.components.register("svd-property-editor-expression", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyConditionEditor = params.model;
 
-      return new PropertyEditorExpression(
+      return new PropertyEditorExpressionViewModel(
         model.hasAceEditor,
         model.getLocString,
         model.koValue,

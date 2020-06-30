@@ -4,7 +4,7 @@ import "./dropdown.scss";
 import { SurveyDropdownPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./dropdown.html");
 
-export class PropertyEditorDropdown {
+export class PropertyEditorDropdownViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -23,7 +23,7 @@ ko.components.register("svd-property-editor-dropdown", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyDropdownPropertyEditor = params.model;
 
-      return new PropertyEditorDropdown(
+      return new PropertyEditorDropdownViewModel(
         model.koValue,
         model.readOnly,
         model.optionsCaption,

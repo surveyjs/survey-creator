@@ -4,7 +4,7 @@ import "./color.scss";
 import { SurveyColorPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./color.html");
 
-export class PropertyEditorColor {
+export class PropertyEditorColorViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -20,7 +20,7 @@ ko.components.register("svd-property-editor-color", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyColorPropertyEditor = params.model;
-      return new PropertyEditorColor(
+      return new PropertyEditorColorViewModel(
         model.koValue,
         model.readOnly,
         model.koMaxValue,

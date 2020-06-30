@@ -8,7 +8,7 @@ import {
   SurveyElementEditorContentModel,
 } from "../questionEditors/questionEditor";
 
-export class ObjectEditor {
+export class ObjectEditorViewModel {
   constructor(
     public koIsOldTableAppearance: ko.Observable<boolean>,
     public koElementEditor: ko.Observable<
@@ -22,7 +22,7 @@ ko.components.register("svd-object-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: PropertyGridObjectEditorModel = params.model;
-      return new ObjectEditor(
+      return new ObjectEditorViewModel(
         model.koIsOldTableAppearance,
         model.koElementEditor,
         model.koHasObject

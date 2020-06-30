@@ -4,7 +4,7 @@ import "./boolean.scss";
 import { SurveyBooleanPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./boolean.html");
 
-export class PropertyEditorBoolean {
+export class PropertyEditorBooleanViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -20,7 +20,7 @@ ko.components.register("svd-property-editor-boolean", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       const model: SurveyBooleanPropertyEditor = params.model;
-      return new PropertyEditorBoolean(
+      return new PropertyEditorBooleanViewModel(
         model.koValue,
         model.readOnly,
         model.isDiplayNameVisible,

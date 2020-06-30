@@ -4,7 +4,7 @@ import "./switch.scss";
 import { SurveySwitchPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./switch.html");
 
-export class PropertyEditorSwitch {
+export class PropertyEditorSwitchViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -20,7 +20,7 @@ ko.components.register("svd-property-editor-switch", {
     createViewModel: (params, componentInfo) => {
       const model: SurveySwitchPropertyEditor = params.model;
 
-      return new PropertyEditorSwitch(
+      return new PropertyEditorSwitchViewModel(
         model.koValue,
         model.readOnly,
         model.displayName,

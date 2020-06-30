@@ -4,7 +4,7 @@ import "./string.scss";
 import { SurveyStringPropertyEditor } from "../propertyEditors/propertyEditorFactory";
 const templateHtml = require("./string.html");
 
-export class PropertyEditorString {
+export class PropertyEditorStringViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
@@ -23,7 +23,7 @@ ko.components.register("svd-property-editor-string", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyStringPropertyEditor = params.model;
 
-      return new PropertyEditorString(
+      return new PropertyEditorStringViewModel(
         model.koValue,
         model.readOnly,
         model.koInputType,

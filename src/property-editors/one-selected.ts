@@ -5,7 +5,7 @@ import { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneS
 import { SurveyElementEditorContentModel } from "../questionEditors/questionEditor";
 const templateHtml = require("./one-selected.html");
 
-export class PropertyEditorOneSelected {
+export class PropertyEditorOneSelectedViewModel {
   public availableClassesContainer: HTMLElement;
 
   constructor(
@@ -71,7 +71,7 @@ ko.components.register("svd-property-editor-one-selected", {
     createViewModel: (params, componentInfo) => {
       const model: SurveyPropertyOneSelectedEditor = params.model;
 
-      return new PropertyEditorOneSelected(
+      return new PropertyEditorOneSelectedViewModel(
         model.koAvailableClasses,
         model.koAllowAddRemoveItems,
         model.readOnly,
