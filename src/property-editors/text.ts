@@ -13,6 +13,7 @@ export class PropertyEditorTextViewModel {
     public displayName: string,
     public onBlur: any,
     public onFocus: any,
+    public onKeydown: any,
     public afterRender: any
   ) {
     afterRender();
@@ -32,6 +33,7 @@ ko.components.register("svd-property-editor-text", {
         model.displayName,
         model.onBlur,
         model.onFocus,
+        model.onInputKeydown,
         () => {
           typeof params.afterRender === "function" &&
             params.afterRender.call(model, componentInfo);

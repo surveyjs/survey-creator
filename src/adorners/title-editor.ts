@@ -223,7 +223,12 @@ export class TitleInplaceEditor {
         event.stopPropagation();
     }
   };
-
+  nameEditorKeydown = (model, event) => {
+    if (event.ctrlKey && (event.keyCode == 90 || event.keyCode == 89)) {
+      event.stopPropagation();
+    }
+    return true;
+  };
   dispose() {
     this.forNeibours((element) => {
       element.onclick = undefined;

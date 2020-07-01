@@ -479,4 +479,10 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       this.element.focus();
     }
   }
+  public onInputKeydown(model, event) {
+    if (event.ctrlKey && (event.keyCode == 90 || event.keyCode == 89)) {
+      event.stopPropagation();
+    }
+    return true;
+  }
 }
