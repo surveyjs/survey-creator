@@ -93,3 +93,24 @@ test(`element validators property editor`, async (t) => {
   await t.hover(validationContent);
   await t.click(removeBtn);
 });
+
+// https://github.com/surveyjs/survey-creator/issues/873
+test(`email validator from json`, async (t) => {
+  const setCreatorText = ClientFunction(() => {
+    window.creator.text =
+      '{"pages":[{"name":"page1","elements":[{"type":"text","name":"q1","validators":[{"type":"email"}]}]}]}';
+  });
+
+  const validationAccorditionTab = Selector(
+    ".svd-accordion-tab-header[data-title='Validation']"
+  ).withText("Validation");
+
+  await setCreatorText();
+
+  const select = Selector(".svd_object_selector");
+  const option = select.find("option").withText("..q1");
+
+  await t.click(select).click(option).click(validationAccorditionTab);
+
+  await t.click(".propertyeditor-validators .svd_custom_select select");
+});
