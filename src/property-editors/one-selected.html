@@ -35,7 +35,7 @@
         <!-- /ko -->
         <!-- ko foreach: originalValue -->
         <option
-          data-bind="value: model, text: $parent.getItemText(model, $parent.koChangeCounter())"
+          data-bind="value: $data, text: $parent.getItemText($data, $parent.koChangeCounter())"
         ></option>
         <!-- /ko -->
       </select>
