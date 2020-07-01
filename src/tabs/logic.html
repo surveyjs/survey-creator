@@ -17,7 +17,7 @@
         <tbody data-bind="foreach: $data.koItems">
           <tr class="svd-logic-tab__rules-list__row">
             <td data-bind="visible:!$parent.koReadOnly()" class="svd-logic-tab__rules-list__action-cell">
-              <span data-bind="click: $data.edit, attr: {title: $data.editText }">
+              <span data-bind="click: $data.edit, attr: { title: $data.editText, tabindex: 0 }, key2click">
                 <svg-icon class="svd-primary-icon icon-actioneditelement" params="iconName: 'icon-actioneditelement'">
                 </svg-icon>
               </span>
@@ -31,7 +31,7 @@
               </div>
             </td>
             <td data-bind="visible:!$parent.koReadOnly()" class="svd-logic-tab__rules-list__action-cell">
-              <span data-bind="click: $data.remove, attr: {title: $data.deleteText }">
+              <span data-bind="click: $data.remove, attr: { title: $data.deleteText, tabindex: 0 }, key2click">
                 <svg-icon class="svd-danger-icon icon-actiondelete" params="iconName: 'icon-actiondelete'"></svg-icon>
               </span>
             </td>
