@@ -12,6 +12,7 @@ import {
 } from "./propertyNestedPropertyEditor";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { SurveyHelper } from "../surveyHelper";
+import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
   constructor(property: Survey.JsonObjectProperty) {
@@ -43,12 +44,12 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
     var res = super.createEditorItem(item);
     res.koHasDetails(false);
     var self = this;
+    var survey = EditableObject.getSurvey(self.object);
     res.koCanDeleteItem = ko.computed(function () {
       return (
         self.originalValue.length > 1 &&
-        self.object.currentPage !== item &&
-        (!self.options ||
-          self.options.onCanDeleteItemCallback(self.object, item))
+        survey.currentPage !== item &&
+        (!self.options || self.options.onCanDeleteItemCallback(survey, item))
       );
     });
     return res;
