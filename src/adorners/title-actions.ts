@@ -70,7 +70,7 @@ export class TitleActionsViewModel {
       this.actions.push(<any>{
         name: "showSurveyTitle",
         visible: true,
-        text: this.getLocString("pe.showTitle"),
+        text: this.getLocString("pe.expandCollapseTitle"),
         className: "svda-title-action__show-hide",
         icon: ko.computed(() => {
           if (!survey.koShowHeader()) {
