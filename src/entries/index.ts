@@ -180,3 +180,4 @@ export { PropertyEditorMultipleValuesViewModel } from "../property-editors/multi
 export { PropertyEditorNestedItemsViewModel } from "../property-editors/nested-items";
 export { PropertyEditorNestedItemViewModel } from "../property-editors/nested-item";
 export { PropertyEditorNestedViewModel } from "../property-editors/nested";
+export { PropertyEditorCustomViewModel } from "../property-editors/custom";

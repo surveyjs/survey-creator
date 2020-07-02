@@ -167,7 +167,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
     this.koChoices = ko.observableArray([]);
     this.koHasFocus = ko.observable(false);
     var self = this;
-    this.koHasFocus.subscribe(function(newValue) {
+    this.koHasFocus.subscribe(function (newValue) {
       //TODO isDynamicChoices obsolete, use dependsOn attribute
       if (newValue && self.property["isDynamicChoices"]) {
         self.updateChoices();
@@ -231,7 +231,7 @@ export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
   protected getPropertyChoices(): Array<any> {
     if (!this.property) return [];
     var self = this;
-    return this.property.getChoices(this.object, function(choices: any) {
+    return this.property.getChoices(this.object, function (choices: any) {
       self.setChoices(choices);
     });
   }
@@ -334,42 +334,42 @@ export class SurveyColorPropertyEditor extends SurveyPropertyEditorBase {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("string", function(
+SurveyPropertyEditorFactory.registerEditor("string", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyStringPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("dropdown", function(
+SurveyPropertyEditorFactory.registerEditor("dropdown", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyDropdownPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("question", function(
+SurveyPropertyEditorFactory.registerEditor("question", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyQuestionPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("questionvalue", function(
+SurveyPropertyEditorFactory.registerEditor("questionvalue", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyQuestionValuePropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("boolean", function(
+SurveyPropertyEditorFactory.registerEditor("boolean", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyBooleanPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("switch", function(
+SurveyPropertyEditorFactory.registerEditor("switch", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveySwitchPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("number", function(
+SurveyPropertyEditorFactory.registerEditor("number", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyNumberPropertyEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("color", function(
+SurveyPropertyEditorFactory.registerEditor("color", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyColorPropertyEditor(property);
