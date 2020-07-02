@@ -103,7 +103,7 @@ test(`change survey title`, async (t) => {
   await t
     .expect(surveyTitle.visible)
     .notOk()
-    .click(`[title="Show/hide title"]`)
+    .click(`[title="Expand/collapse title"]`)
     .click(surveyTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
@@ -120,7 +120,7 @@ test(`change survey description`, async (t) => {
   await t
     .expect(surveyTitle.visible)
     .notOk()
-    .click(`[title="Show/hide title"]`)
+    .click(`[title="Expand/collapse title"]`)
     .click(surveyTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
@@ -144,7 +144,7 @@ test(`set survey logo`, async (t) => {
   await t
     .expect(surveyLogo.visible)
     .notOk()
-    .click(`[title="Show/hide title"]`)
+    .click(`[title="Expand/collapse title"]`)
     .expect(surveyLogo.visible)
     .notOk()
     .setFilesToUpload(".svd_survey_header .svda-choose-file", ["./image.jpg"]);
