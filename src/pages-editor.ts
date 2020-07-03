@@ -22,7 +22,9 @@ export class PagesEditor {
     });
     this.pagesForSelection = ko.computed<any>(() => {
       if (!this.blockPagesRebuilt()) {
-        this.prevPagesForSelector = this.pages.map(p => { return { value: p, text: this.getDisplayText(p) } });
+        this.prevPagesForSelector = this.pages.map((p) => {
+          return { value: p, text: this.getDisplayText(p) };
+        });
         if (!this.readOnly) {
           this.prevPagesForSelector = this.prevPagesForSelector.concat([
             <any>{ value: null, text: getLocString("ed.addNewPage") },
@@ -70,7 +72,7 @@ export class PagesEditor {
       enabled: true,
       title: "",
       items: this.pagesForSelection,
-      action: this.selectedPage
+      action: this.selectedPage,
     };
     this.creator.toolbarItems.unshift(<any>item);
   }
@@ -94,7 +96,7 @@ export class PagesEditor {
   selectedPage = ko.computed({
     read: () => this._selectedPage(),
     write: (newPage: Survey.PageModel) => {
-      if (this.isSelectingPage) return;
+      if (this.isSelectingPage || !SurveyHelper.canSelectObj(newPage)) return;
       try {
         this.isSelectingPage = true;
         if (newPage === null) {
@@ -102,11 +104,10 @@ export class PagesEditor {
         }
         this._selectedPage(newPage);
         this.creator.selectedElement = newPage;
-      }
-      finally {
+      } finally {
         this.isSelectingPage = false;
       }
-    }
+    },
   });
 
   showActions = (page) => {

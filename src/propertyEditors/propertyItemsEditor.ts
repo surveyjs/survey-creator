@@ -48,6 +48,8 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     this.koAllowAddRemoveItems(editorOptions.allowAddRemoveItems);
     this.koAllowRemoveAllItems(editorOptions.allowRemoveAllItems);
   }
+  protected startDragItem() {}
+  protected endDragItem() {}
   public sortableOptions = {
     handle: ".svd-drag-handle",
     animation: 150,
@@ -55,9 +57,11 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       this.options["undoRedoManager"].startTransaction(
         "property items editor drag drop transaction"
       );
+      this.startDragItem();
     },
     onEnd: () => {
       this.options["undoRedoManager"].stopTransaction();
+      this.endDragItem();
     },
     onUpdate: (evt, itemV) => {
       if (

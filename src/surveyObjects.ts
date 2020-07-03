@@ -59,6 +59,7 @@ export class SurveyObjects {
     }
   }
   public selectObject(obj: Survey.Base) {
+    if (!!obj && !SurveyHelper.canSelectObj(obj)) return;
     if (obj === null) {
       this.koSelected(null);
       return;

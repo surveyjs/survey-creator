@@ -54,6 +54,20 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
     });
     return res;
   }
+  protected startDragItem() {
+    var survey = EditableObject.getSurvey(this.object);
+    if (!!survey) {
+      survey.onContainsPageCallback = function () {
+        return true;
+      };
+    }
+  }
+  protected endDragItem() {
+    var survey = EditableObject.getSurvey(this.object);
+    if (!!survey) {
+      survey.onContainsPageCallback = null;
+    }
+  }
 }
 
 SurveyPropertyEditorFactory.registerEditor("surveypages", function (

@@ -140,14 +140,18 @@ export class SurveyHelper {
     obj: any,
     newIndex: number
   ): boolean {
-    if (!list) return false;
+    if (!list || list.length < 2) return false;
     if (newIndex < 0 || newIndex >= list.length) return false;
     var oldIndex = list.indexOf(obj);
     if (oldIndex < 0 || oldIndex == newIndex) return false;
+    for (var i = 0; i < list.length; i++) {
+      SurveyHelper.disableSelectingObj(list[i]);
+    }
     list.splice(oldIndex, 1);
-    //Object.getPrototypeOf(list).splice.call(list, oldIndex, 1);
     list.splice(newIndex, 0, obj);
-    //Object.getPrototypeOf(list).splice.call(list, newIndex, 0, obj);
+    for (var i = 0; i < list.length; i++) {
+      SurveyHelper.enableSelectingObj(list[i]);
+    }
     return true;
   }
   public static disableSelectingObj(obj: Survey.Base) {
@@ -157,6 +161,6 @@ export class SurveyHelper {
     delete obj["disableSelecting"];
   }
   public static canSelectObj(obj: Survey.Base) {
-    return obj["disableSelecting"] !== true;
+    return !obj || obj["disableSelecting"] !== true;
   }
 }
