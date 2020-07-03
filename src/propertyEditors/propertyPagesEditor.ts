@@ -54,6 +54,9 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
     });
     return res;
   }
+  protected createEditorOptions(): any {
+    return { allowAddRemoveItems: true, allowRemoveAllItems: false };
+  }
   protected startDragItem() {
     var survey = EditableObject.getSurvey(this.object);
     if (!!survey) {
