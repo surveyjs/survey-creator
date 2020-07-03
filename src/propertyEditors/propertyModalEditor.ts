@@ -3,7 +3,11 @@ import * as Survey from "survey-knockout";
 import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { editorLocalization } from "../editorLocalization";
-import { focusFirstControl, getFirstNonTextElement, getNodesFromKoComponentInfo } from "../utils/utils";
+import {
+  focusFirstControl,
+  getFirstNonTextElement,
+  getNodesFromKoComponentInfo,
+} from "../utils/utils";
 import RModal from "rmodal";
 import { EditableObject } from "./editableObject";
 
@@ -22,7 +26,7 @@ export class SurveyPropertyModalEditorCustomWidget {
       this.json.afterRender(editor, el);
       if (this.json.destroy) {
         var self = this;
-        ko.utils.domNodeDisposal.addDisposeCallback(el, function() {
+        ko.utils.domNodeDisposal.addDisposeCallback(el, function () {
           self.destroy(editor, el);
         });
       }
@@ -93,19 +97,19 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
     this.koShowApplyButton = ko.observable(true);
     this.koIsShowingModal = ko.observable(false);
 
-    self.onHideModal = function() {};
-    self.onApplyClick = function() {
+    self.onHideModal = function () {};
+    self.onApplyClick = function () {
       self.apply();
     };
-    self.onOkClick = function() {
+    self.onOkClick = function () {
       var res = self.apply();
       if (res) self.onHideModal();
     };
-    self.onResetClick = function() {
+    self.onResetClick = function () {
       self.updateValue();
       self.onHideModal();
     };
-    self.onShowModal = function() {
+    self.onShowModal = function () {
       self.beforeShowModal();
       self.beforeShow();
       var modal = new RModal(document.querySelector(self.modalNameTarget), {
@@ -118,13 +122,13 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
 
       document.addEventListener(
         "keydown",
-        function(ev) {
+        function (ev) {
           modal.keydown(ev);
         },
         false
       );
 
-      self.onHideModal = function() {
+      self.onHideModal = function () {
         self.beforeCloseModal();
         modal.close();
       };
@@ -132,8 +136,8 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
         focusFirstControl(this.elements);
       }
     };
-    self.koAfterRender = function(el) {
-      return self.afterRender(el);
+    self.koAfterRender = function (el) {
+      return self.afterRender(el, self);
     };
   }
   protected get isModal(): boolean {
@@ -208,7 +212,10 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
   public get isEditable(): boolean {
     return false;
   }
-  protected afterRender(componentInfo:any) {
+  protected afterRender(
+    componentInfo: any,
+    modalEditor: SurveyPropertyModalEditor
+  ) {
     const elements = getNodesFromKoComponentInfo(componentInfo);
     this.elements = elements;
     var customWidget = SurveyPropertyModalEditor.getCustomWidget(
@@ -222,7 +229,9 @@ export class SurveyPropertyModalEditor extends SurveyPropertyEditorBase {
       if (tEl.nodeName == "#text") tEl.data = "";
       customWidget.afterRender(this, el);
     }
-    focusFirstControl(elements);
+    if (modalEditor.isShowingModal()) {
+      focusFirstControl(elements);
+    }
   }
 }
 
@@ -263,12 +272,12 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("text", function(
+SurveyPropertyEditorFactory.registerEditor("text", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyTextEditor(property);
 });
-SurveyPropertyEditorFactory.registerEditor("html", function(
+SurveyPropertyEditorFactory.registerEditor("html", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyHtmlEditor(property);
