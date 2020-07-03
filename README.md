@@ -39,7 +39,7 @@ To find out more about the library concepts and the you may customize it, please
 
 ## See survey creator in action
 
-See the survey cretor in [action](http://surveyjs.io/Survey/Builder/).
+See the survey creator in [action](http://surveyjs.io/Survey/Builder/).
 
 ## Building Survey Creator from sources
 
