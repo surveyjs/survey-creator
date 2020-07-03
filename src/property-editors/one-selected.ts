@@ -15,17 +15,25 @@ export class PropertyEditorOneSelectedViewModel {
     public onAddClick: any,
     public koSelected: ko.Observable<any>,
     public getLocString: any,
-    public originalValue: any,
     public getItemText: (item: any, counter?: any) => any,
     public koChangeCounter: ko.Observable<number>,
     public model: SurveyPropertyOneSelectedEditor,
     public onDeleteClick: any,
-    public selectedObjectEditor: ko.Observable<SurveyElementEditorContentModel>,
     public componentInfo: any,
     public afterRender: any
   ) {
     afterRender();
     this.setupAvailableClassesContainer(componentInfo.element.nextSibling);
+  }
+
+  public get originalValue(): any {
+    return this.model.originalValue;
+  }
+
+  public get selectedObjectEditor(): ko.Observable<
+    SurveyElementEditorContentModel
+  > {
+    return this.model.selectedObjectEditor;
   }
 
   public setupAvailableClassesContainer = (rootElement: HTMLElement) => {
@@ -78,12 +86,10 @@ ko.components.register("svd-property-editor-one-selected", {
         model.onAddClick,
         model.koSelected,
         model.getLocString,
-        model.originalValue,
         model.getItemText,
         model.koChangeCounter,
         model, //TODO break on props
         model.onDeleteClick,
-        model.selectedObjectEditor,
         componentInfo,
         () => {
           typeof params.afterRender === "function" &&

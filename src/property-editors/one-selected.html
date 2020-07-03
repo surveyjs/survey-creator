@@ -47,6 +47,7 @@
       <span class="glyphicon glyphicon-remove"></span>
     </span>
   </div>
+
   <ul class="svd-available-classes-container svd-light-bg-color" tabindex="0">
     <!-- ko foreach: koAvailableClasses -->
     <li>
@@ -59,9 +60,8 @@
     </li>
     <!-- /ko  -->
   </ul>
+
   <!-- ko if: selectedObjectEditor() != null -->
-  <svd-object-editor-content
-    params="elementEditorContent: selectedObjectEditor()"
-  ></svd-object-editor-content>
+  <!-- ko component: { name: "svd-object-editor-content", params: { elementEditorContent: selectedObjectEditor() } } --><!-- /ko -->
   <!-- /ko  -->
 </div>
