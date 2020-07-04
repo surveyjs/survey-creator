@@ -38,7 +38,14 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
     return new Survey.Page(newName);
   }
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
-    return this.getPropertiesByNames("page", ["name", "title"]);
+    var propertyNames = ["name", "title"];
+    if (!!this.object) {
+      propertyNames = this.getPropertiesNames("page@" + this.object.getType(), [
+        "name",
+        "title",
+      ]);
+    }
+    return this.getPropertiesByNames("page", propertyNames);
   }
   protected createEditorItem(item: any): SurveyNestedPropertyEditorItem {
     var res = super.createEditorItem(item);

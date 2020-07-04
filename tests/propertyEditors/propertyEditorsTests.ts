@@ -1460,6 +1460,64 @@ QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
     "Can delete the page. There are two pages"
   );
 });
+QUnit.test(
+  "SurveyPropertyPagesEditor show Pages Editor for Page object",
+  function (assert) {
+    Survey.Serializer.addProperty("page", {
+      name: "pages:surveypages",
+      className: "page",
+      category: "general",
+      displayName: "Page order",
+      onGetValue: function (obj) {
+        return !!obj && !!obj.survey ? obj.survey.pages : [];
+      },
+      onSetValue: function (obj) {
+        //Do nothing
+      },
+      isSerializable: false,
+    });
+    SurveyQuestionEditorDefinition.definition["page@page"] = {
+      properties: ["name"],
+    };
+    var survey = new Survey.Survey();
+    survey.addNewPage("page1");
+    survey.addNewPage("page2");
+    survey.addNewPage("page3");
+    survey.currentPage = survey.pages[0];
+    var pagesProperty = Survey.Serializer.findProperty("page", "pages");
+    assert.ok(pagesProperty, "page.pages property is here");
+    var pagesEditor = new SurveyPropertyPagesEditor(pagesProperty);
+    pagesEditor.object = survey.pages[0];
+    pagesEditor.beforeShow();
+    assert.equal(pagesEditor.columns.length, 1, "There is only one column");
+    assert.equal(
+      pagesEditor.columns[0].property.name,
+      "name",
+      "the only column name is 'name'"
+    );
+    /* TODO uncomment after releasing v1.7.18
+    assert.equal(pagesEditor.originalValue.length, 3, "There are 3 pages");
+    survey.addNewPage("page4");
+    assert.equal(pagesEditor.originalValue.length, 4, "There are 4 pages");
+    pagesEditor.onAddClick();
+    assert.equal(survey.pages.length, 5, "There are 5 pages");
+    assert.equal(
+      survey.pages[4].name,
+      "page5",
+      "the last page name is correct"
+    );
+
+    var itemViewModel = <SurveyNestedPropertyEditorItem>(
+      pagesEditor.createItemViewModel(survey.pages[0])
+    );
+    assert.notOk(
+      itemViewModel.koCanDeleteItem(),
+      "Can't delete the current page"
+    );
+    */
+    Survey.Serializer.removeProperty("page", "pages");
+  }
+);
 
 QUnit.test(
   "Check showDisplayNameOnTop for different property editors",
