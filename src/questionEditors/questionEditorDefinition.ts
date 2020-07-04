@@ -509,5 +509,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "timer", index: 700 },
       ],
     },
+    "page@survey": {
+      properties: ["name", "title"],
+    },
   };
 }
