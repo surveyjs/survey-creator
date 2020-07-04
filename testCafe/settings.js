@@ -18,5 +18,4 @@ export const init = ClientFunction(creatorOptions => {
   creator.showState = true;
 
   window.creator = creator;
-  window.creator = creator;
 });
