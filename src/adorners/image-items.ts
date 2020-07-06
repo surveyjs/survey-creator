@@ -37,19 +37,10 @@ class ImageItemInplaceEditor {
     var fileInput = this.itemsRoot.getElementsByClassName(
       "svda-choose-file"
     )[0];
-    fileInput.value = "";
-    fileInput.onchange = this.imageChosen;
-    fileInput.click();
+    this.editor.chooseFiles(fileInput, this.imageChosen);
   }
 
-  imageChosen = event => {
-    var input = this.itemsRoot.getElementsByClassName("svda-choose-file")[0];
-    if (!window["FileReader"]) return;
-    if (!input || !input.files || input.files.length < 1) return;
-    let files = [];
-    for (let i = 0; i < input.files.length; i++) {
-      files.push(input.files[i]);
-    }
+  imageChosen = (files: File[]) => {
     this.valueChanged && this.valueChanged(files);
   };
 
@@ -173,15 +164,7 @@ export var addImageItemAdorner = {
       var fileInput = <HTMLInputElement>(
         itemsRoot.getElementsByClassName("svda-choose-file")[0]
       );
-      fileInput.value = "";
-      fileInput.onchange = event => {
-        if (!fileInput || !fileInput.files || fileInput.files.length < 1)
-          return;
-        let files = [];
-        for (let i = 0; i < fileInput.files.length; i++) {
-          files.push(fileInput.files[i]);
-        }
-
+      editor.chooseFiles(fileInput, (files: File[]) => {
         var itemText = Survey.surveyLocalization.getString("choices_Item");
         var nextValue = getNextValue(
           itemText,
@@ -232,8 +215,7 @@ export var addImageItemAdorner = {
           editor.onPropertyValueChanged(property, itemValue, link);
           editor.onQuestionEditorChanged(model);
         });
-      };
-      fileInput.click();
+      });
     });
     addItemElement.style.width = (model["imageWidth"] || 200) + 10 + "px";
     addItemElement.style.height = (model["imageHeight"] || 150) + 10 + "px";

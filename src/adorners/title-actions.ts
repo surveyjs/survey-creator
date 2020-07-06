@@ -28,12 +28,7 @@ export class TitleActionsViewModel {
         ),
         hasTitle: true,
         onClick: () => {
-          if (!window["FileReader"]) return;
-          this.input.value = "";
-          this.input.onchange = () => {
-            this.uploadFiles();
-          };
-          this.input.click();
+          this.survey.getEditor().chooseFiles(this.input, this.uploadFiles);
         },
       });
       this.actions.push(<any>{
@@ -94,12 +89,7 @@ export class TitleActionsViewModel {
     });
   }
 
-  uploadFiles() {
-    if (!this.input || !this.input.files || this.input.files.length < 1) return;
-    let files = [];
-    for (let i = 0; i < this.input.files.length; i++) {
-      files.push(this.input.files[i]);
-    }
+  uploadFiles = (files: File[]) => {
     if (!files[0]) return;
     this.survey.getEditor().uploadFiles(files, (_, link) => {
       this.survey.logo = link;

@@ -692,6 +692,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The event is fired then one need to choose files.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> input file input HTML element
+   * <br/> callback need to be called after files has been chosen
+   * @see uploadFile
+   */
+  public onOpenFileChooser: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The method is called when the translation from csv file is imported.
    * @see translation
    * @see showTranslationTab
@@ -3108,6 +3119,35 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.onUploadFile.fire(this, {
         files: files || [],
         callback: uploadingCallback,
+      });
+    }
+  }
+  /**
+   * Open file chooser dialog
+   * @param input file input element
+   * @param onFilesChosen a call back function to process chosen files
+   */
+  public chooseFiles(
+    input: HTMLInputElement,
+    onFilesChosen: (files: File[]) => void
+  ) {
+    if (this.onOpenFileChooser.isEmpty) {
+      if (!window["FileReader"]) return;
+      input.value = "";
+      input.onchange = event => {
+        if (!window["FileReader"]) return;
+        if (!input || !input.files || input.files.length < 1) return;
+        let files = [];
+        for (let i = 0; i < input.files.length; i++) {
+          files.push(input.files[i]);
+        }
+        onFilesChosen(files);
+      };
+      input.click();
+    } else {
+      this.onOpenFileChooser.fire(this, {
+        input: input,
+        callback: onFilesChosen,
       });
     }
   }

@@ -8,25 +8,17 @@ import { QuestionImageModel } from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./image.html");
 
 class ImageInplaceEditor {
-  constructor(private input, public allowDelete = false) {}
+  constructor(private input, public allowDelete = false, private editor) {}
 
   chooseImage(model, event) {
-    model.input.value = "";
-    model.input.onchange = model.imageChosen;
-    model.input.click();
+    this.editor.chooseFiles(model.input, model.imageChosen);
   }
 
   deleteImage(model, event) {
     model.valueChanged && model.valueChanged(undefined);
   }
 
-  imageChosen = (event) => {
-    if (!window["FileReader"]) return;
-    if (!this.input || !this.input.files || this.input.files.length < 1) return;
-    let files = [];
-    for (let i = 0; i < this.input.files.length; i++) {
-      files.push(this.input.files[i]);
-    }
+  imageChosen = (files: File[]) => {
     this.valueChanged && this.valueChanged(files);
   };
 
@@ -40,7 +32,7 @@ class ImageInplaceEditor {
 ko.components.register("image-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = new ImageInplaceEditor(params.input, params.allowDelete);
+      var model = new ImageInplaceEditor(params.input, params.allowDelete, params.editor);
       var property = Survey.Serializer.findProperty(
         params.target.getType(),
         params.name
