@@ -16,6 +16,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     super(property);
     var self = this;
     self.onDeleteClick = function (item) {
+      if (!self.onDeletingItem(item.obj)) return;
       self.deleteItem(item.obj);
     };
     self.onClearClick = function (item) {
@@ -80,6 +81,15 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   protected addItem = () => {
     this.createEditorItemCore();
   };
+  protected onDeletingItem(obj: any): boolean {
+    if (!this.options) return true;
+    return this.options.onCollectionItemDeletingCallback(
+      this.object,
+      this.property,
+      this.originalValue,
+      obj
+    );
+  }
   protected deleteItem = (obj: any) => {
     if (this.readOnly()) return;
     var index = this.originalValue.indexOf(obj);

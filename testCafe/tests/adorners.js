@@ -138,7 +138,10 @@ test(`set survey logo`, async (t) => {
       "title-actions .svda_question_action"
     )[0];
     var model = ko.contextFor(el).$parents[0];
-    model.uploadFiles();
+    var fileInputEl = document.querySelectorAll(
+      ".svd_survey_header .svda-choose-file"
+    )[0];
+    model.uploadFiles([fileInputEl.files[0]]);
   });
 
   await t

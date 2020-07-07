@@ -284,10 +284,10 @@ By default, a user may add only 3 elements from the designer. If there are alrea
 ```javascript
 surveyCreator.toolbox.copiedItemMaxCount = 10;
 ```
-To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOptions** event. Here is the example:
+To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOperations** event. Here is the example:
 
 ```javascript
-surveyCreator.onElementAllowOptions.add(function(sender, options){
+surveyCreator.onElementAllowOperations.add(function(sender, options){
     options.allowAddToToolbox = false;
 });
 ```
