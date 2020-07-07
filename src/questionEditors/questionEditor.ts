@@ -372,6 +372,7 @@ export class SurveyElementEditorTabModel {
   private titleValue: string;
   private htmlElements = null;
   public onExpand: () => void;
+  public onCollapse: () => void;
   public onAfterRenderCallback: (
     htmlElement: HTMLElement,
     property: SurveyObjectProperty
@@ -396,6 +397,9 @@ export class SurveyElementEditorTabModel {
   public expand() {
     this.doOnExpanded();
     if (!!this.onExpand) this.onExpand();
+  }
+  public collapse() {
+    if (!!this.onCollapse) this.onCollapse();
   }
   public doOnExpanded() {
     this.beforeShow();

@@ -8,6 +8,7 @@ export interface IAccordionItemData {
   name: string | any;
   title: string | any;
   onExpand: () => void;
+  onCollapse: () => void;
   doOnExpanded(): any;
   htmlTemplate: string;
   templateObject: any;
@@ -19,6 +20,9 @@ export class AccordionItemModel {
     var self = this;
     data.onExpand = function() {
       self.collapsed(false);
+    };
+    data.onCollapse = function() {
+      self.collapsed(true);
     };
   }
   collapsed = ko.observable(true);

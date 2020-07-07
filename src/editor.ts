@@ -9,6 +9,7 @@ import { QuestionConverter } from "./questionconverter";
 import {
   PropertyGridObjectEditorModel,
   SurveyPropertyEditorShowWindow,
+  SurveyElementEditorTabModel,
 } from "./questionEditors/questionEditor";
 import { SurveyTextWorker } from "./textWorker";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
@@ -3134,7 +3135,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.onOpenFileChooser.isEmpty) {
       if (!window["FileReader"]) return;
       input.value = "";
-      input.onchange = event => {
+      input.onchange = (event) => {
         if (!window["FileReader"]) return;
         if (!input || !input.files || input.files.length < 1) return;
         let files = [];
@@ -3150,6 +3151,45 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         callback: onFilesChosen,
       });
     }
+  }
+
+  private getAccordionTabs(): SurveyElementEditorTabModel[] {
+    let aTabs;
+
+    if (this.showElementEditorAsPropertyGrid) {
+      aTabs = this.propertyGridObjectEditorModel.koElementEditor().koTabs();
+    } else if (this.useTabsInElementEditor) {
+      aTabs = [];
+    } else {
+      aTabs = this.questionEditorWindow.koEditor().koTabs();
+    }
+
+    return aTabs;
+  }
+
+  public collapseAllPropertyEditorsAccordions(): void {
+    this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
+      tab.collapse();
+    });
+  }
+
+  public expandAllPropertyEditorsAccordions(): void {
+    this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
+      tab.expand();
+    });
+  }
+
+  public expandPropertyEditorsAccordion(name: string): void {
+    this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
+      if (tab.name !== name) return;
+      tab.expand();
+    });
+  }
+
+  public collapsePropertyEditorsAccordion(name: string): void {
+    this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
+      if (tab.name === name) tab.collapse();
+    });
   }
 }
 
