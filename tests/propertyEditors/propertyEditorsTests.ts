@@ -1392,6 +1392,35 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
   );
   assert.notOk(itemViewModel.koCanDeleteItem(), "Forbid delete item");
 });
+QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("p");
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.addColumn("column 1");
+  question.addColumn("column 2");
+  survey.pages[0].addElement(question);
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.options = new EditorOptionsTests();
+  var allowDelete = true;
+  columnsEditor.options.onCanDeleteItemCallback = (
+    object: any,
+    item: Survey.Base
+  ) => allowDelete;
+
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  var itemViewModel = <SurveyNestedPropertyEditorItem>(
+    columnsEditor.createItemViewModel(question.columns[0])
+  );
+  assert.ok(itemViewModel.koCanDeleteItem(), "Allow delete item");
+  allowDelete = false;
+  itemViewModel = <SurveyNestedPropertyEditorItem>(
+    columnsEditor.createItemViewModel(question.columns[0])
+  );
+  assert.notOk(itemViewModel.koCanDeleteItem(), "Forbid delete item");
+});
 
 QUnit.test("SurveyPropertyPagesEditor two columns and no editing", function (
   assert
@@ -1459,6 +1488,40 @@ QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
     itemViewModel.koCanDeleteItem(),
     "Can delete the page. There are two pages"
   );
+});
+QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
+  assert
+) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  var options = new EditorOptionsTests();
+  options.onCollectionItemDeletingCallback = (
+    obj: Survey.Base,
+    property: Survey.JsonObjectProperty,
+    collection: Array<Survey.Base>,
+    item: Survey.Base
+  ): boolean => {
+    //check all properties
+    return (
+      item["name"] == "page3" &&
+      property.name == "pages" &&
+      collection.length == 3 &&
+      obj.getType() == "survey"
+    );
+  };
+  var pagesEditor = new SurveyPropertyPagesEditor(
+    Survey.Serializer.findProperty("survey", "pages")
+  );
+  pagesEditor.options = options;
+  pagesEditor.object = survey;
+  pagesEditor.beforeShow();
+  survey.currentPage = survey.pages[0];
+  pagesEditor.onDeleteClick(pagesEditor.createItemViewModel(survey.pages[1]));
+  assert.equal(survey.pages.length, 3, "We allow to delete 'page3' only");
+  pagesEditor.onDeleteClick(pagesEditor.createItemViewModel(survey.pages[2]));
+  assert.equal(survey.pages.length, 2, "We allow to delete the 'page3'");
 });
 QUnit.test(
   "SurveyPropertyPagesEditor show Pages Editor for Page object",

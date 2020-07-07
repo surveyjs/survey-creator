@@ -278,6 +278,20 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object: Question, Panel, Page or Survey
+   * <br/> options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+   * <br/> options.propertyName the collection property name
+   * <br/> options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
+   * <br/> options.item the collection item that we are going to delete
+   * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
+   */
+  public onCollectionItemDeleting: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The event is called when creator tab has been rendered.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.tabName the name of the rendered tab
@@ -2939,6 +2953,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   onCanDeleteItemCallback(object: any, item: Survey.Base): boolean {
     return this.canDeleteItem(object, item);
   }
+  onCollectionItemDeletingCallback(
+    obj: Survey.Base,
+    property: Survey.JsonObjectProperty,
+    collection: Array<Survey.Base>,
+    item: Survey.Base
+  ): boolean {
+    if (this.onCollectionItemDeleting.isEmpty) return true;
+    var options = {
+      obj: obj,
+      property: property,
+      propertyName: property.name,
+      coleection: collection,
+      item: item,
+      allowDelete: true,
+    };
+    this.onCollectionItemDeleting.fire(this, options);
+    return options.allowDelete;
+  }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
@@ -3134,7 +3166,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.onOpenFileChooser.isEmpty) {
       if (!window["FileReader"]) return;
       input.value = "";
-      input.onchange = event => {
+      input.onchange = (event) => {
         if (!window["FileReader"]) return;
         if (!input || !input.files || input.files.length < 1) return;
         let files = [];
