@@ -645,7 +645,11 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       },
       createTemplateObject: function (element: Survey.Base) {
         var item = <Survey.HtmlConditionItem>element;
-        return { koValue: ko.observable(item.html), readOnly: false, koAfterRender: function(){} };
+        return {
+          koValue: ko.observable(item.html),
+          readOnly: false,
+          koAfterRender: function () {},
+        };
       },
       saveElement: function (
         survey: Survey.SurveyModel,
@@ -819,7 +823,6 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
   set placeholderHtml(value) {
     this._placeholderHtml(value);
   }
-
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
@@ -959,6 +962,10 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       this.updateVisibleItems();
     }
     this.koMode(val);
+  }
+  public get addNewText(): string {
+    var lgAddNewItem = this.getLocString("ed.lg.addNewItem");
+    return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
   }
   public addNew() {
     !!this.options && this.options.startUndoRedoTransaction();

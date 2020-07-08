@@ -3,7 +3,7 @@
     <div data-bind="visible: $data.koItems().length > 0">
       <p>
         <input type="button" class="btn sv-btn btn-primary"
-          data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.getLocString('pe.addNew'), attr: {title: $data.getLocString('pe.addNew') }" />
+          data-bind="visible: !koReadOnly(), click: $data.koAddNew, value: $data.addNewText, attr: {title: $data.addNewText }" />
       </p>
       <table class="svd-logic-tab__rules-list">
         <thead>

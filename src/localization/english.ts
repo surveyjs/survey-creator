@@ -120,6 +120,7 @@ export var enStrings = {
     chooseElement: "Choose element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
+      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Page visibility",
       panel_visibilityName: "Panel visibility",
@@ -441,8 +442,7 @@ export var enStrings = {
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
-    titleKeyboardAdornerTip:
-      "Press enter button to edit title",
+    titleKeyboardAdornerTip: "Press enter button to edit title",
     keyboardAdornerTip:
       "Press enter button to edit item, press delete button to delete item, press control plus arrow up or arrow down to move item",
     triggerOn: "On ",
