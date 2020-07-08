@@ -33,6 +33,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "descriptionLocation", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "width", tab: "layout" },
+        { name: "minWidth", tab: "layout" },
+        { name: "maxWidth", tab: "layout" },
         { name: "valueName", tab: "data" },
         { name: "defaultValue", tab: "data" },
         { name: "correctAnswer", tab: "data" },
