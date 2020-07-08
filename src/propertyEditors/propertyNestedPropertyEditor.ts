@@ -172,7 +172,6 @@ export class SurveyNestedPropertyEditorItem {
     this.koCanDeleteItem = ko.observable(true);
     this.options = options;
     this.koHasDetails = ko.observable(this.hasDetailsProperties());
-    this.koCanDeleteItem = ko.observable(true);
     ko.computed(() => {
       var columns = this.getColumns();
       this.koCellsValue([]);

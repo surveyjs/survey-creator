@@ -38,6 +38,12 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     var len = value ? value.length : 0;
     return editorLocalization.getString("pe.items")["format"](len);
   }
+  public get addItemText(): string {
+    var customLocStrName = "pe.addNew@" + this.property.name;
+    if (editorLocalization.hasString(customLocStrName))
+      return this.getLocString(customLocStrName);
+    return this.getLocString("pe.addNew");
+  }
   protected getCorrectedValue(value: any): any {
     if (value == null || !Array.isArray(value)) value = [];
     return super.getCorrectedValue(value);

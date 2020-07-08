@@ -1524,6 +1524,28 @@ QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
   assert.equal(survey.pages.length, 2, "We allow to delete the 'page3'");
 });
 QUnit.test(
+  "SurveyPropertyPagesEditor custom loc item for 'add item'.",
+  function (assert) {
+    var survey = new Survey.Survey();
+    survey.addNewPage("page1");
+    survey.addNewPage("page2");
+    var pagesEditor = new SurveyPropertyPagesEditor(
+      Survey.Serializer.findProperty("survey", "pages")
+    );
+    pagesEditor.object = survey;
+    pagesEditor.beforeShow();
+    assert.equal(pagesEditor.addItemText, "Add New", "Use default string");
+    defaultStrings.pe["addNew@pages"] = "Add New Page";
+    assert.equal(pagesEditor.addItemText, "Add New Page", "Use custom string");
+    delete defaultStrings.pe["addNew@pages"];
+    assert.equal(
+      pagesEditor.addItemText,
+      "Add New",
+      "Use default string again"
+    );
+  }
+);
+QUnit.test(
   "SurveyPropertyPagesEditor show Pages Editor for Page object",
   function (assert) {
     Survey.Serializer.addProperty("page", {
@@ -1558,7 +1580,6 @@ QUnit.test(
       "name",
       "the only column name is 'name'"
     );
-    /* TODO uncomment after releasing v1.7.18
     assert.equal(pagesEditor.originalValue.length, 3, "There are 3 pages");
     survey.addNewPage("page4");
     assert.equal(pagesEditor.originalValue.length, 4, "There are 4 pages");
@@ -1569,15 +1590,6 @@ QUnit.test(
       "page5",
       "the last page name is correct"
     );
-
-    var itemViewModel = <SurveyNestedPropertyEditorItem>(
-      pagesEditor.createItemViewModel(survey.pages[0])
-    );
-    assert.notOk(
-      itemViewModel.koCanDeleteItem(),
-      "Can't delete the current page"
-    );
-    */
     Survey.Serializer.removeProperty("page", "pages");
   }
 );

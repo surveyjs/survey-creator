@@ -20,6 +20,7 @@ export class PropertyEditorNestedItemsViewModel {
     public onAddClick: any,
     public onClearClick: any,
     public koAllowRemoveAllItems: ko.Observable<boolean>,
+    public addItemText: any,
     public afterRender: any
   ) {
     afterRender();
@@ -46,6 +47,7 @@ ko.components.register("svd-property-editor-nested-items", {
         model.onAddClick,
         model.onClearClick,
         model.koAllowRemoveAllItems,
+        model.addItemText,
         () => {
           typeof params.afterRender === "function" &&
             params.afterRender.call(model, componentInfo);
