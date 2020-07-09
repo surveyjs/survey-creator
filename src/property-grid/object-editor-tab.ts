@@ -9,7 +9,8 @@ export class ObjectEditorTabViewModel {
   constructor(
     public name: string,
     public editorProperties: Array<SurveyObjectProperty>,
-    public koAfterRenderProperty: any
+    public koAfterRenderProperty: any,
+    public afterRender
   ) {}
 }
 
@@ -20,7 +21,8 @@ ko.components.register("svd-object-editor-tab", {
       return new ObjectEditorTabViewModel(
         model.name,
         model.editorProperties,
-        model.koAfterRenderProperty
+        model.koAfterRenderProperty,
+        model.koAfterRender
       );
     },
   },

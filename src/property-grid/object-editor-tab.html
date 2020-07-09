@@ -3,7 +3,7 @@
   data-bind="css: 'svd-popup-editor-tab-' + name, attr: {id: 'editor_tab_id_' + name}"
 >
   <div class="col-sm-12">
-    <!-- ko foreach: editorProperties -->
+    <!-- ko foreach: { data: editorProperties } -->
     <div class="form-group">
       <div
         data-bind="visible: koVisible, event: { keydown: editor.keyDownHandler }, attr: { 'data-property': property.name }"
@@ -15,4 +15,5 @@
     </div>
     <!-- /ko  -->
   </div>
+  <div data-bind="afterRenderParent: $data.afterRender"></div>
 </div>

@@ -72,11 +72,11 @@ export function focusFirstControl(renderedElements: HTMLElement[]) {
   for (var i = 0; i < renderedElements.length; i++) {
     if (typeof renderedElements[i].getElementsByClassName === "function") {
       var elements = <HTMLCollectionOf<HTMLElement>>(
-        renderedElements[i].getElementsByClassName("form-control")
+        renderedElements[i].getElementsByClassName("svd-focusable")
       );
       if (
         elements.length === 0 &&
-        renderedElements[i].className.indexOf("form-control") !== -1
+        renderedElements[i].className.indexOf("svd-focusable") !== -1
       ) {
         elements = <any>[renderedElements[i]];
       }
@@ -147,5 +147,12 @@ ko.bindingHandlers["clickNoFocus"] = {
     element.onclick = (ev) => {
       valueAccessor().call(viewModel, viewModel, ev);
     };
+  },
+};
+
+ko.bindingHandlers["afterRenderParent"] = {
+  init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+    element.style.display = "none";
+    valueAccessor() && valueAccessor()([element.parentElement]);
   },
 };

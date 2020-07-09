@@ -395,14 +395,16 @@ export class SurveyElementEditorTabModel {
     };
   }
   public expand() {
-    this.doOnExpanded();
     if (!!this.onExpand) this.onExpand();
+    this.doOnExpanded();
   }
   public collapse() {
     if (!!this.onCollapse) this.onCollapse();
   }
   public doOnExpanded() {
     this.beforeShow();
+    ko.tasks.runEarly();
+    this.focusEditor();
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;
