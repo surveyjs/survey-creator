@@ -5,6 +5,7 @@ import { PagesEditorViewModel } from "../src/components/pages-editor";
 import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
 import { QuestionToolbox } from "../src/components/toolbox";
+import { AccordionViewModel } from "../src/utils/accordion";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -1403,3 +1404,32 @@ QUnit.test("Do not call onPageAdded on pages move", function (assert) {
   );
   assert.equal(counter, 2, "We do not added new page");
 });
+
+QUnit.test(
+  "creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab",
+  function (assert) {
+    const creator = new SurveyCreator(undefined);
+    const tabs = creator.propertyGridObjectEditorModel.koElementEditor().koTabs;
+    const vm = new AccordionViewModel({ tabs });
+
+    assert.equal(vm.tabs().length, 10, "tabs count");
+    assert.equal(vm.tabs()[0].collapsed(), false, "general tab expanded");
+    assert.equal(vm.tabs()[5].collapsed(), true, "logic tab expanded");
+
+    creator.collapsePropertyTab("general");
+    assert.equal(vm.tabs()[0].collapsed(), true, "general tab collapsed");
+
+    creator.expandPropertyTab("logic");
+    assert.equal(vm.tabs()[5].collapsed(), false, "logic tab expanded");
+
+    creator.collapseAllPropertyTabs();
+    vm.tabs().forEach((tab) => {
+      assert.equal(tab.collapsed(), true, tab.name + " tab collapsed");
+    });
+
+    creator.expandAllPropertyTabs();
+    vm.tabs().forEach((tab) => {
+      assert.equal(tab.collapsed(), false, tab.name + " tab expanded");
+    });
+  }
+);
