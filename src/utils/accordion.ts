@@ -18,10 +18,10 @@ export interface IAccordionItemData {
 export class AccordionItemModel {
   constructor(public data: IAccordionItemData) {
     var self = this;
-    data.onExpand = function() {
+    data.onExpand = function () {
       self.collapsed(false);
     };
-    data.onCollapse = function() {
+    data.onCollapse = function () {
       self.collapsed(true);
     };
   }
