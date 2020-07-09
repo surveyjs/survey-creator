@@ -22,7 +22,11 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): boolean {
     return true;
   }
-  onCanDeleteItemCallback(object: any, item: Survey.Base): boolean {
+  onCanDeleteItemCallback(
+    object: any,
+    item: Survey.Base,
+    allowDelete: boolean
+  ): boolean {
     return true;
   }
   onCollectionItemDeletingCallback(

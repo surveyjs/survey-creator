@@ -1374,11 +1374,12 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
     Survey.Serializer.findProperty("matrixdropdownbase", "columns")
   );
   columnsEditor.options = new EditorOptionsTests();
-  var allowDelete = true;
+  var allowDeleteItem = true;
   columnsEditor.options.onCanDeleteItemCallback = (
     object: any,
-    item: Survey.Base
-  ) => allowDelete;
+    item: Survey.Base,
+    allowDelete: boolean
+  ) => allowDeleteItem;
 
   columnsEditor.object = question;
   columnsEditor.beforeShow();
@@ -1386,7 +1387,7 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
     columnsEditor.createItemViewModel(question.columns[0])
   );
   assert.ok(itemViewModel.koCanDeleteItem(), "Allow delete item");
-  allowDelete = false;
+  allowDeleteItem = false;
   itemViewModel = <SurveyNestedPropertyEditorItem>(
     columnsEditor.createItemViewModel(question.columns[0])
   );
@@ -1403,11 +1404,12 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
     Survey.Serializer.findProperty("matrixdropdownbase", "columns")
   );
   columnsEditor.options = new EditorOptionsTests();
-  var allowDelete = true;
+  var allowDeleteItem = true;
   columnsEditor.options.onCanDeleteItemCallback = (
     object: any,
-    item: Survey.Base
-  ) => allowDelete;
+    item: Survey.Base,
+    allowDelete: boolean
+  ) => allowDeleteItem;
 
   columnsEditor.object = question;
   columnsEditor.beforeShow();
@@ -1415,7 +1417,7 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
     columnsEditor.createItemViewModel(question.columns[0])
   );
   assert.ok(itemViewModel.koCanDeleteItem(), "Allow delete item");
-  allowDelete = false;
+  allowDeleteItem = false;
   itemViewModel = <SurveyNestedPropertyEditorItem>(
     columnsEditor.createItemViewModel(question.columns[0])
   );
@@ -1457,13 +1459,18 @@ QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
   assert
 ) {
   var survey = new Survey.Survey();
+  survey.setDesignMode(true);
   survey.addNewPage("page1");
   var options = new EditorOptionsTests();
+  var allowDeleteAll = false;
   options.onCanDeleteItemCallback = (
     object: any,
-    item: Survey.Base
+    item: Survey.Base,
+    allowDelete: boolean
   ): boolean => {
-    return item["name"] !== "page1";
+    if (item.getType() !== "page") return allowDelete;
+    if (allowDeleteAll) return true;
+    return allowDelete;
   };
   var pagesEditor = new SurveyPropertyPagesEditor(
     Survey.Serializer.findProperty("survey", "pages")
@@ -1477,16 +1484,28 @@ QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (
   );
   assert.notOk(itemViewModel.koCanDeleteItem(), "Can't delete the only page");
   survey.addNewPage("page2");
-  assert.notOk(
-    itemViewModel.koCanDeleteItem(),
-    "Can't delete the selected page"
-  );
+  survey.currentPage = survey.pages[0];
   itemViewModel = <SurveyNestedPropertyEditorItem>(
     pagesEditor.createItemViewModel(survey.pages[1])
   );
   assert.ok(
     itemViewModel.koCanDeleteItem(),
     "Can delete the page. There are two pages"
+  );
+  itemViewModel = <SurveyNestedPropertyEditorItem>(
+    pagesEditor.createItemViewModel(survey.pages[0])
+  );
+  assert.notOk(
+    itemViewModel.koCanDeleteItem(),
+    "Can't delete the selected page"
+  );
+  allowDeleteAll = true;
+  itemViewModel = <SurveyNestedPropertyEditorItem>(
+    pagesEditor.createItemViewModel(survey.pages[0])
+  );
+  assert.ok(
+    itemViewModel.koCanDeleteItem(),
+    "Allow to delete the selected page"
   );
 });
 QUnit.test("SurveyPropertyPagesEditor koCanDeleteItem + options.", function (

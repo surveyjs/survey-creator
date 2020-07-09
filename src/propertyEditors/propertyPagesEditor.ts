@@ -50,16 +50,19 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
   protected createEditorItem(item: any): SurveyNestedPropertyEditorItem {
     var res = super.createEditorItem(item);
     res.koHasDetails(false);
-    var self = this;
-    var survey = EditableObject.getSurvey(self.object);
-    res.koCanDeleteItem = ko.computed(function () {
-      return (
-        self.originalValue.length > 1 &&
-        survey.currentPage !== item &&
-        (!self.options || self.options.onCanDeleteItemCallback(survey, item))
-      );
-    });
     return res;
+  }
+  protected canDeleteItem(item: any): boolean {
+    var survey = EditableObject.getSurvey(this.object);
+    if (!survey) return true;
+    return (
+      !this.options ||
+      this.options.onCanDeleteItemCallback(
+        this.object,
+        item,
+        survey.currentPage !== item
+      )
+    );
   }
   protected createEditorOptions(): any {
     return { allowAddRemoveItems: true, allowRemoveAllItems: false };

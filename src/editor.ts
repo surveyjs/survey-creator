@@ -1758,8 +1758,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
   }
-  protected canDeleteItem(object: any, item: Survey.Base): boolean {
-    var options = { obj: object, item: item, canDelete: true };
+  protected canDeleteItem(
+    object: any,
+    item: Survey.Base,
+    allowDelete: boolean
+  ): boolean {
+    var options = { obj: object, item: item, canDelete: allowDelete };
     this.onCanDeleteItem.fire(this, options);
     return options.canDelete;
   }
@@ -2951,8 +2955,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   ): boolean {
     return this.onCanShowObjectProperty(object, property);
   }
-  onCanDeleteItemCallback(object: any, item: Survey.Base): boolean {
-    return this.canDeleteItem(object, item);
+  onCanDeleteItemCallback(
+    object: any,
+    item: Survey.Base,
+    allowDelete: boolean
+  ): boolean {
+    return this.canDeleteItem(object, item, allowDelete);
   }
   onCollectionItemDeletingCallback(
     obj: Survey.Base,
