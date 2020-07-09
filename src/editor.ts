@@ -3199,26 +3199,40 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return aTabs;
   }
 
-  public collapseAllPropertyEditorsAccordions(): void {
+  /**
+   * Collapse all property editor tabs (accordions) in properties panel
+   */
+  public collapseAllPropertyTabs(): void {
     this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
       tab.collapse();
     });
   }
 
-  public expandAllPropertyEditorsAccordions(): void {
+  /**
+   * Expand all property editor tabs (accordions) in properties panel
+   */
+  public expandAllPropertyTabs(): void {
     this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
       tab.expand();
     });
   }
 
-  public expandPropertyEditorsAccordion(name: string): void {
+  /**
+   * Expand certain property editor tab (accordion) in properties panel
+   * name - tab category name
+   */
+  public expandPropertyTab(name: string): void {
     this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
       if (tab.name !== name) return;
       tab.expand();
     });
   }
 
-  public collapsePropertyEditorsAccordion(name: string): void {
+  /**
+   * Collapse certain property editor tab (accordion) in properties panel
+   * name - tab category name
+   */
+  public collapsePropertyTab(name: string): void {
     this.getAccordionTabs().forEach((tab: SurveyElementEditorTabModel) => {
       if (tab.name === name) tab.collapse();
     });
