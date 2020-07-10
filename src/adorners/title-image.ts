@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { registerAdorner, SurveyForDesigner } from "../surveyjsObjects";
-import { SurveyCreator } from '../editor';
-import { Survey } from 'survey-knockout';
+import { SurveyCreator } from "../editor";
+import { Survey } from "survey-knockout";
 
 export var titleImageAdorner = {
   getMarkerClass: (model) => {
@@ -10,7 +10,11 @@ export var titleImageAdorner = {
       : "";
   },
   getElementName: (model) => "logo",
-  afterRender: (elements: HTMLElement[], model: SurveyForDesigner, editor: SurveyCreator) => {
+  afterRender: (
+    elements: HTMLElement[],
+    model: SurveyForDesigner,
+    editor: SurveyCreator
+  ) => {
     if (editor.readOnly) {
       return;
     }
@@ -23,6 +27,9 @@ export var titleImageAdorner = {
       input.className = "svda-choose-file";
       input.style.position = "absolute";
       input.style.opacity = "0";
+      input.style.width = "1px";
+      input.style.height = "1px";
+      input.style.overflow = "hidden";
       itemsRoot.parentElement.appendChild(input);
       for (var i = 0; i < elements.length; i++) {
         elements[i].onclick = (e) => e.preventDefault();
@@ -42,7 +49,12 @@ export var titleImageAdorner = {
           decoration
         );
         ko.tasks.runEarly();
-        editor.onAdornerRenderedCallback(<any>model, "title-image", decoration, model);
+        editor.onAdornerRenderedCallback(
+          <any>model,
+          "title-image",
+          decoration,
+          model
+        );
       }
       ko.computed(() => {
         if (elements.length !== 2) return;
@@ -66,9 +78,17 @@ export var titleImageAdorner = {
     decoration.innerHTML =
       "<title-actions params='survey: model, input: input, allowImageChooser: allowImageChooser'></title-actions>";
     elements[0].parentElement.appendChild(decoration);
-    ko.applyBindings({ model: model, input: input, allowImageChooser: allowImageChooser }, decoration);
+    ko.applyBindings(
+      { model: model, input: input, allowImageChooser: allowImageChooser },
+      decoration
+    );
     ko.tasks.runEarly();
-    editor.onAdornerRenderedCallback(<any>model, "title-actions", decoration, model);
+    editor.onAdornerRenderedCallback(
+      <any>model,
+      "title-actions",
+      decoration,
+      model
+    );
   },
 };
 
