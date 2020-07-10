@@ -32,7 +32,11 @@ class ImageInplaceEditor {
 ko.components.register("image-editor", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var model = new ImageInplaceEditor(params.input, params.allowDelete, params.editor);
+      var model = new ImageInplaceEditor(
+        params.input,
+        params.allowDelete,
+        params.editor
+      );
       var property = Survey.Serializer.findProperty(
         params.target.getType(),
         params.name
@@ -88,6 +92,9 @@ export var imageAdorner = {
       input.className = "svda-choose-file";
       input.style.position = "absolute";
       input.style.opacity = "0";
+      input.style.width = "1px";
+      input.style.height = "1px";
+      input.style.overflow = "hidden";
       itemsRoot.parentElement.appendChild(input);
 
       ko.applyBindings(

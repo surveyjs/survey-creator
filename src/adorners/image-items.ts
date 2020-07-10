@@ -144,6 +144,9 @@ export var imageItemsAdorner = {
     input.className = "svda-choose-file";
     input.style.position = "absolute";
     input.style.opacity = "0";
+    input.style.width = "1px";
+    input.style.height = "1px";
+    input.style.overflow = "hidden";
     itemsRoot.appendChild(input);
   }
 };
@@ -228,6 +231,9 @@ export var addImageItemAdorner = {
     input.className = "svda-choose-file";
     input.style.position = "absolute";
     input.style.opacity = "0";
+    input.style.width = "1px";
+    input.style.height = "1px";
+    input.style.overflow = "hidden";
     itemsRoot.appendChild(input);
   }
 };
