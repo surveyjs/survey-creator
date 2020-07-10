@@ -57,6 +57,10 @@ export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEdito
 export { SurveyObjects } from "../surveyObjects";
 export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 export {
+  SurveyCreatorProperties,
+  creatorProperties,
+} from "../questionEditors/properties";
+export {
   SurveyPropertyEditorShowWindow,
   SurveyQuestionEditor,
   SurveyElementEditorTabModel,
@@ -145,7 +149,7 @@ export { BooleanViewModel } from "../utils/boolean";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
 export { DesignerContainerViewModel } from "../utils/designer-container";
-export { DesignerHContainerViewModel} from "../utils/designer-h-container";
+export { DesignerHContainerViewModel } from "../utils/designer-h-container";
 
 export { SurveyPropertyOneSelectedEditor } from "../propertyEditors/propertyOneSelectedEditor";
 

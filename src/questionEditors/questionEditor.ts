@@ -15,7 +15,6 @@ import {
 } from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
-import { Hash } from "crypto";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;

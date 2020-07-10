@@ -5,6 +5,7 @@ export * from "../propertyEditors/propertyEditorsTests";
 export * from "../propertyEditors/propertyConditionEditorTests";
 export * from "../questionEditorsTests";
 export * from "../questionToolboxTests";
+export * from "../creatorPropertiesTests";
 export * from "../surveyCreatorTests";
 export * from "../surveyObjectsTests";
 export * from "../undoredoTests";
