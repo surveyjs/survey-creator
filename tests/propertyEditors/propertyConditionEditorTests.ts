@@ -4,13 +4,13 @@ import {
   doGetCompletions,
   SurveyPropertyConditionEditor,
 } from "../../src/propertyEditors/propertyConditionEditor";
-import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
+import { EditorOptionsTests } from "../editorOptionsTests";
 import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { SurveyElementEditorContentModel } from "../../src/questionEditors/questionEditor";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
-QUnit.test("Autocomplete without prefix test", function(assert) {
+QUnit.test("Autocomplete without prefix test", function (assert) {
   var prevIdentifier = "";
   var currentQuestion = new Survey.QuestionDropdown("dropdown");
   var usableQuestions = [new Survey.QuestionExpression("expression")];
@@ -37,7 +37,7 @@ QUnit.test("Autocomplete without prefix test", function(assert) {
   assert.equal(completions[0].value, "{expression}", "questions first");
 });
 
-QUnit.test("Autocomplete without prefix test, using valueName", function(
+QUnit.test("Autocomplete without prefix test, using valueName", function (
   assert
 ) {
   var prevIdentifier = "";
@@ -56,7 +56,7 @@ QUnit.test("Autocomplete without prefix test, using valueName", function(
   assert.equal(completions[0].value, "{value1}", "questions first, valueName");
 });
 
-QUnit.test("Autocomplete with prefix test", function(assert) {
+QUnit.test("Autocomplete with prefix test", function (assert) {
   var prevIdentifier = "";
   var currentQuestion = new Survey.QuestionDropdown("dropdown");
   var usableQuestions = [
@@ -85,7 +85,7 @@ QUnit.test("Autocomplete with prefix test", function(assert) {
   assert.equal(completions[0].value, "equal", "equal");
 });
 
-QUnit.test("Autocomplete with matrix test", function(assert) {
+QUnit.test("Autocomplete with matrix test", function (assert) {
   var prevIdentifier = "";
   var question = new Survey.QuestionMatrixDynamic("matrixdynamic");
 
@@ -117,7 +117,7 @@ QUnit.test("Autocomplete with matrix test", function(assert) {
   assert.equal(completions[0].value, "{row.c2}", "second row");
 });
 
-QUnit.test("Autocomplete with panel test", function(assert) {
+QUnit.test("Autocomplete with panel test", function (assert) {
   var prevIdentifier = "";
   var question = new Survey.QuestionPanelDynamic("paneldynamic");
 
@@ -150,7 +150,7 @@ QUnit.test("Autocomplete with panel test", function(assert) {
   assert.equal(completions[0].value, "{panel.q2}", "second panel");
 });
 
-QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
+QUnit.test("SurveyPropertyConditionEditor.isValid", function (assert) {
   var question = new Survey.QuestionText("q1");
   question.visibleIf = "ddd";
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -175,7 +175,7 @@ QUnit.test("SurveyPropertyConditionEditor.isValid", function(assert) {
   );
 });
 
-QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
+QUnit.test("SurveyPropertyConditionEditor.addCondition", function (assert) {
   var survey = new Survey.SurveyModel({
     questions: [
       { type: "text", name: "q1" },
@@ -220,7 +220,7 @@ QUnit.test("SurveyPropertyConditionEditor.addCondition", function(assert) {
 
 QUnit.test(
   "SurveyPropertyConditionEditor.addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.SurveyModel({
       questions: [
         { type: "text", name: "q1" },
@@ -247,7 +247,7 @@ QUnit.test(
 
 QUnit.test(
   "Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.SurveyModel({
       questions: [
         { type: "text", name: "q1" },
@@ -273,7 +273,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor add question for dynamic panel",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         {
@@ -315,7 +315,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #353",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -360,7 +360,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, use question.valueName, bug: #367",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -408,7 +408,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, use dropdown question instead of readiogroup for editing values",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -435,7 +435,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -457,7 +457,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
+QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function (
   assert
 ) {
   var property = Survey.Serializer.findProperty("question", "visibleIf");
@@ -485,7 +485,7 @@ QUnit.test("SurveyPropertyConditionEditor.allConditionQuestions", function(
 
 QUnit.test(
   "SurveyPropertyConditionEditor.allCondtionQuestions for matrix column",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty(
       "matrixdropdowncolumn",
       "visibleIf"
@@ -503,13 +503,13 @@ QUnit.test(
     editor.object = column;
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "row.col1").length >
-      0,
+        0,
       true,
       "row.col1 is here"
     );
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "row.col2").length >
-      0,
+        0,
       false,
       "row.col2 is not here"
     );
@@ -518,7 +518,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor.allCondtionQuestions for panel dynamic",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -534,13 +534,13 @@ QUnit.test(
     editor.object = panelQuestion;
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length >
-      0,
+        0,
       true,
       "panel.q1 is here"
     );
     assert.equal(
       editor.allConditionQuestions.filter((e) => e.name === "panel.q2").length >
-      0,
+        0,
       false,
       "panel.q2 is not here"
     );
@@ -549,7 +549,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
@@ -582,7 +582,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, error in value input, Bug# T2598 (customer marked it private)",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "checkbox", choices: [1, 2, 3] },
@@ -612,7 +612,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, could not edit value for row.column1 on editing column, Bug# T3376 (customer marked it private)",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         {
@@ -656,7 +656,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, question has defaultValue and user could not add condition with it, Bug# T2778 (customer marked it private)",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "radiogroup", choices: [1, 2, 3], defaultValue: 1 },
@@ -679,7 +679,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, test koConditionDisplayText property",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         {
@@ -698,18 +698,20 @@ QUnit.test(
     var question = survey.getQuestionByName("q2");
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var editor = new SurveyPropertyConditionEditor(property);
+    editor.options = new EditorOptionsTests();
+    editor.options.showTitlesInExpressions = true;
     editor.object = question;
     editor.beforeShow();
-    assert.equal(editor.koConditionDisplayText(), "({Question 1} == Item 1)");
+    assert.equal(editor.koConditionDisplayText(), "{Question 1} == Item 1");
     editor.koValue("");
     assert.equal(editor.koConditionDisplayText(), "Expression is empty");
     editor.koValue("{q1} < 2");
-    assert.equal(editor.koConditionDisplayText(), "({Question 1} < Item 2)");
+    assert.equal(editor.koConditionDisplayText(), "{Question 1} < Item 2");
   }
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, automatically modify koTextValue/koValue without apply",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         {
@@ -792,7 +794,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, automatically modify koTextValue/koValue with empty/non empty",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         {
@@ -828,7 +830,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyConditionEditor, clearCondition", function(assert) {
+QUnit.test("SurveyPropertyConditionEditor, clearCondition", function (assert) {
   var survey = new Survey.Survey({
     elements: [
       { name: "q1", type: "text" },
@@ -867,14 +869,14 @@ QUnit.test("SurveyPropertyConditionEditor, clearCondition", function(assert) {
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, modify koValue for editor in Modal Window",
-  function(assert) {
+  function (assert) {
     var property = Survey.Serializer.findProperty("question", "visibleIf");
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");
     page.addNewQuestion("text", "q2");
     var editor = new SurveyPropertyConditionEditor(property);
-    editor.onChanged = function(newValue) {
+    editor.onChanged = function (newValue) {
       question.visibleIf = newValue;
     };
     editor.object = question;
@@ -891,7 +893,7 @@ QUnit.test(
     );
   }
 );
-QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
+QUnit.test("SurveyPropertyConditionEditor, enabled operators", function (
   assert
 ) {
   var survey = new Survey.Survey({
@@ -937,7 +939,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
   editor.object = question;
   editor.beforeShow();
   editor.isEditorShowing = true;
-  var checkFun = function(questionName: string, operatorNames: Array<string>) {
+  var checkFun = function (questionName: string, operatorNames: Array<string>) {
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = questionName;
     var choices = editorItem.operatorQuestion.choices;
@@ -947,20 +949,20 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
       assert.notOk(
         isItemEnabled && operatorNames.indexOf(operatorName) < 0,
         "Operator: '" +
-        operatorName +
-        " should not be for question: " +
-        questionName
+          operatorName +
+          " should not be for question: " +
+          questionName
       );
       assert.notOk(
         !isItemEnabled && operatorNames.indexOf(operatorName) > -1,
         "Operator: '" +
-        operatorName +
-        " should be for question: " +
-        questionName
+          operatorName +
+          " should be for question: " +
+          questionName
       );
     }
   };
-  var checkFunMultiple = function(
+  var checkFunMultiple = function (
     questionNames: Array<string>,
     operatorNames: Array<string>
   ) {
@@ -1041,7 +1043,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function(
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, keep condition value on changing operation when it possible",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1063,7 +1065,7 @@ QUnit.test(
     assert.notOk(editorItem.value, "Reset the value");
   }
 );
-QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
+QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function (
   assert
 ) {
   var survey = new Survey.Survey({
@@ -1095,7 +1097,7 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function(
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, Do not show question description",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1126,7 +1128,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, add apostrophes to string value",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1169,7 +1171,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
+QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function (
   assert
 ) {
   var survey = new Survey.Survey({
@@ -1265,7 +1267,7 @@ QUnit.test("SurveyPropertyConditionEditor, parse koEditorItems()", function(
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, parse koEditorItems() question.valueName",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text", valueName: "val1" },
@@ -1297,7 +1299,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, parse koEditorItems() with calcaluted values, Bug #727 and Bug #740",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [{ name: "q1", type: "text" }],
       calculatedValues: [
@@ -1353,7 +1355,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, change questionName in ConditionEditorItem",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1416,7 +1418,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, create expression from scratch",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1501,7 +1503,7 @@ QUnit.test(
     assert.equal(editor.koValue(), "{q2} empty", "Remove the item");
   }
 );
-QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
+QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function (
   assert
 ) {
   var survey = new Survey.Survey({
@@ -1551,7 +1553,7 @@ QUnit.test("SurveyPropertyConditionEditor, isWideMode = true", function(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, editorItem question width, isWideMode = false",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1609,7 +1611,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, editorItem question width, isWideMode = true",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1706,7 +1708,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, editorItem valueQuestion set correct value for array, Bug #700",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text", visibleIf: "{q2} = ['item1', 'item3']" },
@@ -1730,7 +1732,7 @@ QUnit.test(
 
 QUnit.test(
   "SurveyPropertyConditionEditor, anyof/allof is enabled on editing, Bug #804",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },
@@ -1759,7 +1761,7 @@ QUnit.test(
 );
 QUnit.test(
   "SurveyPropertyConditionEditor, file question type should not set operator to 'equal', Bug #",
-  function(assert) {
+  function (assert) {
     var survey = new Survey.Survey({
       elements: [
         { name: "q1", type: "text" },

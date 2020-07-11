@@ -19,10 +19,10 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
   public getItemText(item: any, counter: any = null): any {
     if (!item.expression)
       return editorLocalization.getString("pe.triggerNotSet");
-    var res = item.expression;
-    if (!!this.options && this.options.showTitlesInExpressions) {
-      res = new ExpressionToDisplayText(this.getSurvey()).toDisplayText(res);
-    }
+    var res = new ExpressionToDisplayText(
+      this.getSurvey(),
+      this.options
+    ).toDisplayText(item.expression);
     return editorLocalization.getString("pe.triggerRunIf") + ": " + res;
   }
   protected getAvailableClasses(): Array<any> {
@@ -122,19 +122,19 @@ export class SurveyPropertySelectQuestionsEditor extends SurveyPropertySelectIte
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("triggers", function(
+SurveyPropertyEditorFactory.registerEditor("triggers", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyTriggersEditor(property);
 });
 
-SurveyPropertyEditorFactory.registerEditor("pages", function(
+SurveyPropertyEditorFactory.registerEditor("pages", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertySelectPagesEditor(property);
 });
 
-SurveyPropertyEditorFactory.registerEditor("questions", function(
+SurveyPropertyEditorFactory.registerEditor("questions", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertySelectQuestionsEditor(property);

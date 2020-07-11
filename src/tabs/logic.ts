@@ -47,7 +47,6 @@ export class SurveyLogicType {
     options: ISurveyObjectEditorOptions,
     expression: string
   ): string {
-    if (!options || !options.showTitlesInExpressions) return expression;
     return new ExpressionToDisplayText(survey, options).toDisplayText(
       expression
     );

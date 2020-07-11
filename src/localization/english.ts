@@ -540,6 +540,8 @@ export var enStrings = {
     less: "less",
     greaterorequal: "greater or equals",
     lessorequal: "less or equals",
+    and: "and",
+    or: "or",
   },
   //Embed window
   ew: {

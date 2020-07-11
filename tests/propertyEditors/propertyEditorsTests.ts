@@ -1694,7 +1694,7 @@ QUnit.test("Triggers property editor", function (assert) {
   );
   assert.equal(
     propEditor.getItemText(propEditor.koSelected()),
-    "Run if: ({Question1 title} != val1)",
+    "Run if: {Question1 title} != val1",
     "display text shows correctly"
   );
 
@@ -1709,7 +1709,7 @@ QUnit.test("Triggers property editor", function (assert) {
     .editor.koValue("{question2} notempty");
   assert.equal(
     propEditor.getItemText(propEditor.koSelected()),
-    "Run if: notempty {question2}",
+    "Run if: {question2} is not empty",
     "text for valid trigger"
   );
   trigerEditor.getPropertyEditorByName("gotoName").editor.koValue("question3");

@@ -693,7 +693,7 @@ QUnit.test("Edit triggers via trigger editor", function (assert) {
   logic.saveEditableItem();
   assert.equal(
     logic.items[0].actions[0].text,
-    "Run expression: '({Question 2} + 1)' and set its result into question: {Question 3}",
+    "Run expression: '{Question 2} + 1' and set its result into question: {Question 3}",
     "use showTitlesInExpressions option"
   );
   assert.equal(
@@ -887,7 +887,7 @@ QUnit.test("Displaying correct text for logic action", function (assert) {
   }
   assert.equal(
     logic.items[0].expressionText,
-    "When expression: '{q1} = 1' returns true:",
+    "When expression: '{q1} == 1' returns true:",
     "Item expressionText"
   );
   assert.equal(findOp("page_visibility").text, "Make page {page1} visible");
@@ -1100,7 +1100,7 @@ QUnit.test("Add existing visible Items", function (assert) {
   assert.equal(logic.items.length, 1, "There one item");
   assert.equal(
     logic.items[0].expressionText,
-    "When expression: '({My Question 1} == 1)' returns true:"
+    "When expression: '{My Question 1} == 1' returns true:"
   );
 });
 
