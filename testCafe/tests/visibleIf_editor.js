@@ -4,11 +4,11 @@ import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `visibleIf_editor`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 
-test(`Set visibleIf property`, async t => {
+test(`Set visibleIf property`, async (t) => {
   await t
     .click(page.toolBarQuestion("Dropdown"))
     .click(page.toolBarQuestion("Checkbox"))
@@ -30,10 +30,9 @@ test(`Set visibleIf property`, async t => {
     .click(questionValue)
     .click(questionValue.find("option").withText("item1"));
 
-  const expressionText = Selector(".svd-expression-header")
-    .nth(0)
-    .child(0).innerText;
-  await t.expect(expressionText).eql("{question1} = 'item1'");
+  const expressionText = Selector(".svd-expression-header").nth(0).child(0)
+    .innerText;
+  await t.expect(expressionText).eql("{question1} == item1");
 
   await t
     .click(`input[value="Remove"]`)
@@ -47,7 +46,7 @@ test(`Set visibleIf property`, async t => {
       "{question1} = 'item2' and {question2} = ['item1', 'item2']"
     )
     .expect(expressionText)
-    .eql("{question1} = 'item2' and {question2} = ['item1', 'item2']");
+    .eql("({question1} == item2) and ({question2} == [item1, item2])");
 
   await t
     .click(Selector(`button`).withText("Build"))
