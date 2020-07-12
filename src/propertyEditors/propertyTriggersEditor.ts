@@ -19,10 +19,13 @@ export class SurveyPropertyTriggersEditor extends SurveyPropertyOneSelectedEdito
   public getItemText(item: any, counter: any = null): any {
     if (!item.expression)
       return editorLocalization.getString("pe.triggerNotSet");
-    var res = new ExpressionToDisplayText(
-      this.getSurvey(),
-      this.options
-    ).toDisplayText(item.expression);
+    var survey = !!this.getSurvey ? this.getSurvey() : null;
+    var res = item.expression;
+    if (!!survey) {
+      res = new ExpressionToDisplayText(survey, this.options).toDisplayText(
+        item.expression
+      );
+    }
     return editorLocalization.getString("pe.triggerRunIf") + ": " + res;
   }
   protected getAvailableClasses(): Array<any> {
