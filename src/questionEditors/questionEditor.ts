@@ -585,7 +585,9 @@ export class SurveyQuestionProperties {
     public obj: any,
     public options: ISurveyObjectEditorOptions = null,
     className: string = null,
-    showMode: string = null
+    showMode: string = null,
+    private parentObj: any = null,
+    private parentProperty: Survey.JsonObjectProperty = null
   ) {
     this.showModeValue = showMode;
     this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
@@ -616,7 +618,9 @@ export class SurveyQuestionProperties {
           this.obj,
           prop,
           this.options,
-          this.showMode
+          this.showMode,
+          this.parentObj,
+          this.parentProperty
         ),
       };
     }

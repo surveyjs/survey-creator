@@ -17,7 +17,10 @@ export interface ISurveyObjectEditorOptions {
   allowEditExpressionsInTextEditor: boolean;
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty
+    property: Survey.JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
   ): boolean;
   onCanDeleteItemCallback(
     object: any,

@@ -93,7 +93,9 @@ export class SurveyHelper {
     obj: any,
     property: Survey.JsonObjectProperty,
     options: ISurveyObjectEditorOptions = null,
-    showMode: string = null
+    showMode: string = null,
+    parentObj: any = null,
+    parentProperty: Survey.JsonObjectProperty = null
   ): boolean {
     if (!property || !property.visible) return false;
     if (!!showMode && !!property.showMode && showMode !== property.showMode)
@@ -106,7 +108,13 @@ export class SurveyHelper {
       return false;
     var canShow = !!options
       ? (object: any, property: Survey.JsonObjectProperty) => {
-          return options.onCanShowPropertyCallback(object, property);
+          return options.onCanShowPropertyCallback(
+            object,
+            property,
+            showMode,
+            parentObj,
+            parentProperty
+          );
         }
       : null;
     if (!!canShow && !canShow(obj, property)) return false;

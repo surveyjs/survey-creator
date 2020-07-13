@@ -803,6 +803,55 @@ QUnit.test("SurveyPropertyItemValue override properties", function (assert) {
   Survey.Serializer.removeProperty("itemvalue", "price");
 });
 
+QUnit.test(
+  "SurveyPropertyItemValueEditor override grid columns using canShowProperty callback",
+  function (assert) {
+    Survey.Serializer.addProperty("itemvalue", {
+      name: "price:number",
+    });
+    var dropdownQuestion = new Survey.QuestionDropdown("q1");
+    dropdownQuestion.choices = [1, 2];
+    var radiogroupQuestion = new Survey.QuestionRadiogroup("q2");
+    radiogroupQuestion.choices = [1, 2];
+    var propertyEditor = new SurveyPropertyItemValuesEditor(
+      Survey.Serializer.findProperty("selectbase", "choices")
+    );
+    propertyEditor.options = new EditorOptionsTests();
+    propertyEditor.options.onCanShowPropertyCallback = function (
+      object,
+      property,
+      showMode: string,
+      parentObj: any,
+      parentProperty: Survey.JsonObjectProperty
+    ): boolean {
+      if (!!parentObj && parentObj.getType() == "dropdown") return true;
+      return property.name == "value";
+    };
+    propertyEditor.object = dropdownQuestion;
+    propertyEditor.beforeShow();
+    assert.equal(propertyEditor.columns.length, 3, "There are 3 columns");
+    assert.equal(
+      propertyEditor.columns[2].text,
+      "Price",
+      "The last column is Price"
+    );
+
+    propertyEditor.object = radiogroupQuestion;
+    propertyEditor.beforeShow();
+    assert.equal(
+      propertyEditor.columns.length,
+      1,
+      "There is one column, value"
+    );
+    assert.equal(
+      propertyEditor.columns[0].text,
+      "Value",
+      "The only column is Value"
+    );
+    Survey.Serializer.removeProperty("itemvalue", "price");
+  }
+);
+
 QUnit.test("SurveyPropertyItemValue columns define in definition", function (
   assert
 ) {

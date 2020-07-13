@@ -94,7 +94,9 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       obj,
       this.options,
       className,
-      "list"
+      "list",
+      this.object,
+      this.property
     );
     if (props.getTabs().length == 0) return [];
     return props.getTabs()[0].properties;

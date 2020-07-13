@@ -261,7 +261,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid or in Question Editor
-   * @see onShowingProperty
+   * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
+   * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
   public onCanShowProperty: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
@@ -1752,9 +1753,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   protected onCanShowObjectProperty(
     object: any,
-    property: Survey.JsonObjectProperty
+    property: Survey.JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
   ): boolean {
-    var options = { obj: object, property: property, canShow: true };
+    var options = {
+      obj: object,
+      property: property,
+      canShow: true,
+      showMode: showMode,
+      parentObj: parentObj,
+      parentProperty: parentProperty,
+    };
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
   }
@@ -2951,9 +2962,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   };
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty
+    property: Survey.JsonObjectProperty,
+    showMode: string = null,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
   ): boolean {
-    return this.onCanShowObjectProperty(object, property);
+    return this.onCanShowObjectProperty(
+      object,
+      property,
+      showMode,
+      parentObj,
+      parentProperty
+    );
   }
   onCanDeleteItemCallback(
     object: any,

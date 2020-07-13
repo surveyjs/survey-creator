@@ -18,7 +18,10 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   allowEditExpressionsInTextEditor: boolean = true;
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty
+    property: Survey.JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
   ): boolean {
     return true;
   }

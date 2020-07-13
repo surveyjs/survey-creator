@@ -187,7 +187,10 @@ QUnit.test("Hide visibleIf tab and startWithNewLine", function (assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
   var onCanShowPropertyCallback = function (
     object: any,
-    property: Survey.JsonObjectProperty
+    property: Survey.JsonObjectProperty,
+    showMode: string = null,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
   ) {
     return property.name != "visibleIf" && property.name != "startWithNewLine";
   };
