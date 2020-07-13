@@ -6,6 +6,7 @@ import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
 import { QuestionToolbox } from "../src/components/toolbox";
 import { AccordionViewModel } from "../src/utils/accordion";
+import { isPropertyVisible } from "../src/utils/utils";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -1431,5 +1432,21 @@ QUnit.test(
     vm.tabs().forEach((tab) => {
       assert.equal(tab.collapsed(), false, tab.name + " tab expanded");
     });
+  }
+);
+
+QUnit.test(
+  "creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897",
+  function (assert) {
+    const creator = new SurveyCreator(undefined);
+    const question = new Survey.QuestionImage("qi");
+    var menuItems = creator.survey.getMenuItems(question);
+    assert.deepEqual(menuItems.filter(i => ["showtitle", "isrequired"].indexOf(i.name) !== -1), [], "No 'showtitle' or 'isrequired' in the menu items");
+    assert.notOk(isPropertyVisible(question, "title"), "The title property is hidden for the image question");
+    assert.notOk(isPropertyVisible(question, "isRequired"), "The isRequired property is hidden for the image question");
+
+    const questionText = new Survey.QuestionText("qt");
+    menuItems = creator.survey.getMenuItems(questionText);
+    assert.equal(menuItems.filter(i => ["showtitle", "isrequired"].indexOf(i.name) !== -1).length, 2, "The 'showtitle' or 'isrequired' are in the menu items");
   }
 );
