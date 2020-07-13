@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import { Serializer } from 'survey-knockout';
 
 function getNumericFromString(str: string): string {
   if (!str) return "";
@@ -156,3 +157,12 @@ ko.bindingHandlers["afterRenderParent"] = {
     valueAccessor() && valueAccessor()([element.parentElement]);
   },
 };
+
+export function isPropertyVisible(obj: any, propertyName: string) {
+  let result = true;
+  if(!!obj && typeof obj.getType === "function") {
+    const property = Serializer.findProperty(obj.getType(), propertyName);
+    result = !property || property.visible;
+  }
+  return result;
+}

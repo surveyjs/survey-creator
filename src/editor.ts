@@ -33,6 +33,7 @@ import { Commands } from "./commands";
 
 import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
+import { isPropertyVisible } from './utils/utils';
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -2390,7 +2391,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
       if (
         opts.allowShowHideTitle &&
-        typeof options.obj.titleLocation !== "undefined"
+        typeof options.obj.titleLocation !== "undefined" &&
+        isPropertyVisible(options.obj, "title")
       ) {
         var isShowTitle = ko.observable<boolean>(
           options.obj.titleLocation !== "hidden"
@@ -2423,7 +2425,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
       if (
         opts.allowChangeRequired &&
-        typeof options.obj.isRequired !== "undefined"
+        typeof options.obj.isRequired !== "undefined" &&
+        isPropertyVisible(options.obj, "isRequired")
       ) {
         var isRequired = ko.computed(() => options.obj.isRequired);
         options.items.push({
