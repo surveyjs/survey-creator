@@ -292,7 +292,8 @@ export var titleAdorner = {
     if (
       typeof model.getType === "function" &&
       ((model.getType() === "page" && !titleAdorner.pageTitleEditable) ||
-        (model.getType() === "survey" && !titleAdorner.surveyTitleEditable))
+        (model.getType() === "survey" && !titleAdorner.surveyTitleEditable) ||
+        !Survey.Serializer.findProperty(model.getType(), "title"))
     ) {
       return "";
     }
@@ -347,6 +348,9 @@ registerAdorner("item-title", itemTitleAdorner);
 
 export var descriptionAdorner = {
   getMarkerClass: (model) => {
+    if (typeof model.getType === "function" && !Survey.Serializer.findProperty(model.getType(), "description")) {
+      return "";
+    }
     return "description_editable";
   },
   getElementName: (model) => "description",
