@@ -113,7 +113,7 @@ function createSurvey(): Survey.Survey {
 }
 
 QUnit.test("Create correct property editor", function (assert) {
-  var property = new Survey.JsonObjectProperty("testname");
+  var property = Survey.Serializer.addProperty("question", "testname");
   property.type = "unknown";
   var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
@@ -121,7 +121,7 @@ QUnit.test("Create correct property editor", function (assert) {
     "string",
     "The default property editor is 'string'"
   );
-
+  Survey.Serializer.removeProperty("question", "testname");
   var propertyTypes = [
     "string",
     "boolean",
@@ -136,8 +136,11 @@ QUnit.test("Create correct property editor", function (assert) {
     "validators",
     "restfull",
   ];
-  var property = new Survey.JsonObjectProperty("testname");
   for (var i = 0; i < propertyTypes.length; i++) {
+    property = Survey.Serializer.addProperty(
+      "question",
+      "testname" + i.toString()
+    );
     var propType = propertyTypes[i];
     property.type = propType;
     propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
@@ -146,6 +149,7 @@ QUnit.test("Create correct property editor", function (assert) {
       propType,
       "Create '" + propType + "' property editor"
     );
+    Survey.Serializer.removeProperty("question", "testname" + i.toString());
   }
 });
 QUnit.test("propertyEditor.displayName", function (assert) {
@@ -183,7 +187,7 @@ QUnit.test("Create custom property editor", function (assert) {
     },
   };
   Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
-  var property = new Survey.JsonObjectProperty("testname");
+  var property = Survey.Serializer.addProperty("question", "testname");
   property.type = "customBool";
   var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
@@ -196,6 +200,7 @@ QUnit.test("Create custom property editor", function (assert) {
   propertyEditor.koValue(3);
   assert.equal(propertyValue, 3, "value has been set to 3 as well");
   Extentions.unregisterCustomPropertyEditor("customBool");
+  Survey.Serializer.removeProperty("question", "testname");
 });
 
 QUnit.test(
@@ -208,7 +213,7 @@ QUnit.test(
       },
     };
     Extentions.registerCustomPropertyEditor("customBool", widgetJSON);
-    var property = new Survey.JsonObjectProperty("testname");
+    var property = Survey.Serializer.addProperty("question", "testname");
     property.type = "customBool";
     var propertyEditor = <SurveyPropertyCustomEditor>(
       SurveyPropertyEditorFactory.createEditor(property)
@@ -219,6 +224,7 @@ QUnit.test(
     assert.equal(propertyEditor.object, undefined, "Object is not assigned");
     assert.equal(renderCount, 1, "Render has been called");
     Extentions.unregisterCustomPropertyEditor("customBool");
+    Survey.Serializer.removeProperty("question", "testname");
   }
 );
 
@@ -232,7 +238,7 @@ QUnit.test("Custom property editor - validation", function (assert) {
     },
   };
   Extentions.registerCustomPropertyEditor("customVal", widgetJSON);
-  var property = new Survey.JsonObjectProperty("testname");
+  var property = Survey.Serializer.addProperty("question", "testname");
   property.type = "customVal";
   var propertyEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(propertyEditor.editorType, "custom", "It is a custom editor'");
@@ -253,6 +259,7 @@ QUnit.test("Custom property editor - validation", function (assert) {
   propertyEditor.koValue("123");
   assert.equal(propertyEditor.hasError(), false, "there is no errors");
   Extentions.unregisterCustomPropertyEditor("customVal");
+  Survey.Serializer.removeProperty("question", "testname");
 });
 
 QUnit.test("PropertyEditor and hasError - required", function (assert) {
@@ -269,7 +276,7 @@ QUnit.test("PropertyEditor and hasError - required", function (assert) {
   assert.notEqual(editor.koErrorText(), "", "The error is not empty");
 });
 QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
-  var property = new Survey.JsonObjectProperty("dropdown");
+  var property = Survey.Serializer.addProperty("question", "dropdown");
   property.setChoices([1, 2, 3], null);
   var propertyEditor = new SurveyObjectProperty(property);
   var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
@@ -282,11 +289,12 @@ QUnit.test("SurveyPropertyDropdown - choices", function (assert) {
   assert.equal(editor.koChoices().length, 3, "There are 3 items");
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, 1, "The first text");
+  Survey.Serializer.removeProperty("question", "dropdown");
 });
 QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function (
   assert
 ) {
-  var property = new Survey.JsonObjectProperty("dropdown");
+  var property = Survey.Serializer.addProperty("question", "dropdown");
   property.setChoices([{ value: 1, text: "Item 1" }, 2, 3], null);
   var propertyEditor = new SurveyObjectProperty(property);
   var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
@@ -299,6 +307,7 @@ QUnit.test("SurveyPropertyDropdown - choices, support ItemValue", function (
   assert.equal(editor.koChoices().length, 3, "There are 3 items");
   assert.equal(editor.koChoices()[0].value, 1, "The first value");
   assert.equal(editor.koChoices()[0].text, "Item 1", "Use text property");
+  Survey.Serializer.removeProperty("question", "dropdown");
 });
 QUnit.test("SurveyQuestionPropertyEditor - choices", function (assert) {
   Survey.Serializer.addProperty("survey", "question_test:question");
@@ -955,7 +964,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function (
     },
     "itemvalue"
   );
-  var property = new Survey.JsonObjectProperty("test");
+  var property = Survey.Serializer.addProperty("question", "test");
   property.type = "itemvalues_ex[]";
   var propEditor = SurveyPropertyEditorFactory.createEditor(property);
   assert.equal(
@@ -976,6 +985,7 @@ QUnit.test("extended SurveyPropertyItemValue + custom property", function (
     "Allow to show text view with custom properties"
   );
   Survey.Serializer.removeProperty("itemvalue_ex", "imageLink");
+  Survey.Serializer.removeProperty("question", "test");
 });
 QUnit.test(
   "extended SurveyPropertyItemValue + custom property - process items with custom properties",
@@ -1138,7 +1148,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell", function (assert) {
 QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function (
   assert
 ) {
-  var property = new Survey.JsonObjectProperty("testBoolean");
+  var property = Survey.Serializer.addProperty("question", "testBoolean");
   property.type = "boolean";
   var column = new SurveyNestedPropertyEditorColumn(property);
   var itemValue = new Survey.ItemValue(1);
@@ -1154,6 +1164,7 @@ QUnit.test("SurveyNestedPropertyEditorEditorCell + property editor", function (
     "boolean",
     "create boolean editor type"
   );
+  Survey.Serializer.removeProperty("question", "testBoolean");
 });
 QUnit.test("SurveyNestedPropertyEditorItem", function (assert) {
   var propertyEditor = new SurveyPropertyItemValuesEditorForTests();

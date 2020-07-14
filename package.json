@@ -28,7 +28,7 @@
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.7.18"
+    "survey-knockout": "^1.7.19"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
