@@ -1,5 +1,5 @@
 {
-  "version": "1.7.19",
+  "version": "1.7.20",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -65,7 +65,7 @@
     "replace-in-file": "^3.4.3",
     "rimraf": "2.5.4",
     "sass-loader": "^8.0.2",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "style-loader": "^1.2.1",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
     "testcafe": "^1.8.8",

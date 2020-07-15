@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { applyAdornerClass, SurveyForDesigner } from "../src/surveyjsObjects";
-import { titleAdorner, TitleInplaceEditor } from "../src/adorners/title-editor";
+import { titleAdorner, TitleInplaceEditor, descriptionAdorner } from "../src/adorners/title-editor";
 import { createAddItemHandler } from "../src/adorners/item-editor";
 import {
   questionActionsAdorner,
@@ -269,4 +269,18 @@ QUnit.test("Title editor read only mode", function (assert) {
   Survey.Serializer.findProperty("survey", "title").readOnly = false;
   assert.notOk(titleModel.readOnly, "title is not read only");
   assert.notOk(descriptionModel.readOnly, "description is not read only");
+});
+
+QUnit.test("title/description adorner for removed properties - https://surveyjs.answerdesk.io/internal/ticket/details/T4683", function (assert) {
+  Survey.Serializer.addClass("a_test", [ "title", "description" ]);
+  var obj = { getType: () => "a_test" };
+  
+  assert.equal(titleAdorner.getMarkerClass(obj), "title_editable", "Has title, allows editing");
+  assert.equal(descriptionAdorner.getMarkerClass(obj), "description_editable", "Has description, allows editing");
+
+  Survey.Serializer.removeProperty("a_test", "title");
+  assert.equal(titleAdorner.getMarkerClass(obj), "", "Has no title, no editing");
+
+  Survey.Serializer.removeProperty("a_test", "description");
+  assert.equal(descriptionAdorner.getMarkerClass(obj), "", "Has no description, no editing");
 });
