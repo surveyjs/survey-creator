@@ -6,7 +6,7 @@ import { SurveyPropertyEditorFactory } from "./propertyEditorFactory";
 import { getNextValue } from "../utils/utils";
 import { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 import { SurveyNestedPropertyEditor } from "./propertyNestedPropertyEditor";
-import { SurveyPropertyModalEditor } from "../entries";
+import { SurveyPropertyModalEditor, SurveyHelper } from "../entries";
 
 export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private detailDefinition: any;
@@ -29,18 +29,18 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     this.koItemsTextDelayed = ko
       .pureComputed(this.koItemsText)
       .extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 400 } });
-    this.koItemsTextDelayed.subscribe(function(newValue) {
+    this.koItemsTextDelayed.subscribe(function (newValue) {
       self.updateItemsTextOnTyping(newValue);
     });
 
-    this.koActiveView.subscribe(function(newValue) {
+    this.koActiveView.subscribe(function (newValue) {
       if (newValue == "form") self.updateItems(self.koItemsText());
       else self.updateItemsText();
     });
-    this.changeToTextViewClick = function() {
+    this.changeToTextViewClick = function () {
       self.koActiveView("text");
     };
-    this.changeToFormViewClick = function() {
+    this.changeToFormViewClick = function () {
       self.koActiveView("form");
     };
 
@@ -107,7 +107,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var values = [];
     var items = this.originalValue;
     if (Array.isArray(items)) {
-      values = items.map(function(item) {
+      values = items.map(function (item) {
         return item.itemValue;
       });
     }
@@ -185,11 +185,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   private updateArrayValue(items: any) {
     if (!this.originalValue) return;
-    this.originalValue.splice(0, this.originalValue.length);
-    if (!Array.isArray(items)) return;
-    for (var i = 0; i < items.length; i++) {
-      this.originalValue.push(items[i]);
-    }
+    SurveyHelper.applyItemValueArray(this.originalValue, items);
   }
   protected getItemsText(): string {
     var items = [];
@@ -197,10 +193,10 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
       items.push(this.createItemViewModel(this.originalValue[i]));
     }
     return items
-      .filter(item => !item.cells[0].hasError)
-      .map(item =>
+      .filter((item) => !item.cells[0].hasError)
+      .map((item) =>
         item.cells
-          .map(cell => cell.value || "")
+          .map((cell) => cell.value || "")
           .join(Survey.ItemValue.Separator)
           .replace(/\|$/, "")
       )
@@ -246,7 +242,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
 
 SurveyPropertyEditorFactory.registerEditor(
   "itemvalue[]",
-  function(property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
     return new SurveyPropertyItemValuesEditor(property);
   },
   "itemvalue"

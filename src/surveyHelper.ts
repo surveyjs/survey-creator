@@ -162,6 +162,47 @@ export class SurveyHelper {
     }
     return true;
   }
+  public static applyItemValueArray(
+    dest: Array<Survey.ItemValue>,
+    src: Array<Survey.ItemValue>
+  ) {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    var destHash = SurveyHelper.applyItemValueArrayCreateHash(dest);
+    var srcHash = SurveyHelper.applyItemValueArrayCreateHash(src);
+    for (var i = 0; i < dest.length; i++) {
+      var ind = srcHash[dest[i].value];
+      dest[i].srcIndex = ind === undefined ? -1 : ind;
+    }
+    var insertIndex = 0;
+    for (var i = 0; i < src.length; i++) {
+      var ind = destHash[src[i].value];
+      if (ind === undefined) {
+        dest.splice(insertIndex, 0, src[i]);
+        insertIndex++;
+      } else {
+        insertIndex = ind + 1;
+      }
+    }
+    for (var i = dest.length - 1; i >= 0; i--) {
+      if (dest[i].srcIndex === -1) {
+        dest.splice(i, 1);
+      } else {
+        if (dest[i].srcIndex > -1 && src[dest[i].srcIndex].hasText) {
+          dest[i].text = src[dest[i].srcIndex].text;
+        }
+      }
+    }
+  }
+  private static applyItemValueArrayCreateHash(arr: Array<Survey.ItemValue>) {
+    var res = {};
+    for (var i = 0; i < arr.length; i++) {
+      res[arr[i].value] = i;
+    }
+    return res;
+  }
   public static disableSelectingObj(obj: Survey.Base) {
     obj["disableSelecting"] = true;
   }

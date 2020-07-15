@@ -43,6 +43,7 @@ import {
   SurveyPropertySetEditor,
 } from "../../src/propertyEditors/propertyDefaultValueEditor";
 import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
+import { SurveyHelper } from "../../src/surveyHelper";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -2462,3 +2463,32 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("SurveyHelper.applyItemValueArray", function (assert) {
+  var q1 = new Survey.QuestionDropdown("q1");
+  var q2 = new Survey.QuestionDropdown("q1");
+  q1.choices = [1];
+  SurveyHelper.applyItemValueArray(q1.choices, null);
+  assert.equal(q1.choices.length, 0, "array is empty, #1");
+  q1.choices = [1];
+  q2.choices = [];
+  SurveyHelper.applyItemValueArray(q1.choices, q2.choices);
+  assert.equal(q1.choices.length, 0, "array is empty, #2");
+  var testSetFunc = function (val1: Array<any>, val2: Array<any>, num: number) {
+    q1.choices = val1;
+    q2.choices = val2;
+    SurveyHelper.applyItemValueArray(q1.choices, q2.choices);
+    assert.deepEqual(q1.toJSON(), q2.toJSON(), "set, #" + num.toString());
+  };
+  testSetFunc([1, 2, 3], [1, 2, 4], 1);
+  testSetFunc([1, 2, 3], [1, 2, 4, 5], 2);
+  testSetFunc([1, 2, 3], [0, 1, 2, 3], 3);
+  testSetFunc([1, 2, 3], [1, 4, 3], 4);
+  testSetFunc([1, 2, 3], [1, 2, 3, 4, 5, 6], 5);
+  testSetFunc([1, 2, 3, 4, 5, 6], [1, 2, 3], 6);
+  testSetFunc(
+    [1, 2, 3],
+    [1, { value: 2, text: "item 2" }, { value: 4, text: "item 4" }],
+    7
+  );
+});
