@@ -47,6 +47,8 @@ export class TitleInplaceEditor {
   prevName = ko.observable<string>();
   isEditing = ko.observable<boolean>(false);
 
+  private _needSelectTargetOnStartEdit = false;
+
   protected forNeibours(func: (el: HTMLElement, index?: number) => void) {
     if (
       !this.rootElement ||
@@ -82,6 +84,7 @@ export class TitleInplaceEditor {
   ) {
     if (typeof target.getType === "function") {
       this.property = Survey.Serializer.findProperty(target.getType(), name);
+      this._needSelectTargetOnStartEdit = target.getType() === "survey";
     }
 
     this._valueSubscription = ko.computed(() => {
@@ -166,6 +169,9 @@ export class TitleInplaceEditor {
   startEdit = (model: TitleInplaceEditor, event) => {
     if (this.readOnly) {
       return;
+    }
+    if(this._needSelectTargetOnStartEdit) {
+      this.editor.selectedElement = this.target;
     }
     this.updatePrevName();
     this.editingName(this.prevName());
