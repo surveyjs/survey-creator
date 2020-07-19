@@ -2493,11 +2493,9 @@ QUnit.test("SurveyHelper.applyItemValueArray", function (assert) {
   );
   testSetFunc([1, 2, 2, 3, 4, 5, 6], [1, 2, 2, 3], 8);
   testSetFunc([1, 2, 3, 4, 2, 5, 6], [1, 2, 3, 2], 9);
-  console.log(q2.toJSON());
   testSetFunc(
     [1, 2, 13, 14, 5, 6],
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
     10
   );
-  console.log(q2.toJSON());
 });

@@ -1101,6 +1101,77 @@ QUnit.test("Add property into new cagetory", function (assert) {
   Survey.Serializer.removeProperty("question", "name3");
 });
 
+QUnit.test("Insert property: nextToProperty", function (assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "test1",
+    nextToProperty: "name",
+  });
+  Survey.Serializer.addProperty("question", {
+    name: "test2",
+    nextToProperty: "visibleIf",
+  });
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  var editor = new SurveyElementEditorContentModel(question);
+  var generalTab = editor.getTabByName("general");
+  assert.ok(
+    generalTab.getPropertyEditorByName("test1"),
+    "property editor for test1 is here"
+  );
+  assert.equal(
+    generalTab.editorProperties[1].name,
+    "test1",
+    "Property inserted into general correctly"
+  );
+  var logicTab = editor.getTabByName("logic");
+  assert.ok(
+    logicTab.getPropertyEditorByName("test2"),
+    "property editor for test2 is here"
+  );
+  assert.equal(
+    logicTab.editorProperties[1].name,
+    "test2",
+    "Property inserted into logicTab correctly"
+  );
+  assert.notOk(editor.getTabByName("others"));
+  Survey.Serializer.removeProperty("question", "test1");
+  Survey.Serializer.removeProperty("question", "test2");
+});
+QUnit.test("Insert property: nextToProperty, two times", function (assert) {
+  Survey.Serializer.addProperty("question", {
+    name: "test1",
+    nextToProperty: "name",
+  });
+  Survey.Serializer.addProperty("question", {
+    name: "test2",
+    nextToProperty: "test1",
+  });
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  var editor = new SurveyElementEditorContentModel(question);
+  var generalTab = editor.getTabByName("general");
+  assert.ok(
+    generalTab.getPropertyEditorByName("test1"),
+    "property editor for test1 is here"
+  );
+  assert.equal(
+    generalTab.editorProperties[1].name,
+    "test1",
+    "Property inserted into general correctly"
+  );
+  assert.ok(
+    generalTab.getPropertyEditorByName("test2"),
+    "property editor for test2 is here"
+  );
+  assert.equal(
+    generalTab.editorProperties[2].name,
+    "test2",
+    "Property inserted into general correctly"
+  );
+  Survey.Serializer.removeProperty("question", "test1");
+  Survey.Serializer.removeProperty("question", "test2");
+});
+
 QUnit.test("Modal property, showBefore call on demand", function (assert) {
   var options = new EditorOptionsTests();
   var question = new Survey.QuestionText("q1");

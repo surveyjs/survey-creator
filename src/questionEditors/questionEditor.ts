@@ -564,7 +564,7 @@ export class SurveyQuestionEditorPropertyDefinition {
   public category: string;
   public createdFromTabName: boolean;
   public get name(): string {
-    return this.property.name;
+    return !!this.property ? this.property.name : "";
   }
 }
 
@@ -672,6 +672,7 @@ export class SurveyQuestionProperties {
       }
     }
     for (var i = this.tabs.length - 1; i >= 0; i--) {
+      this.movePropertiesToNextProperties(this.tabs[i].properties);
       if (!this.tabs[i].visible) {
         this.tabs.splice(i, 1);
       } else {
@@ -718,6 +719,43 @@ export class SurveyQuestionProperties {
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
     tab.properties.unshift(propertyDefinition);
+  }
+  private movePropertiesToNextProperties(
+    properties: Array<SurveyQuestionEditorPropertyDefinition>
+  ) {
+    var props = [].concat(properties);
+    for (var i = 0; i < props.length; i++) {
+      var newTab = this.getTabByPropertyName(props[i].property.nextToProperty);
+      if (!!newTab) {
+        var prop = this.getPropertyByNameInTab(
+          newTab,
+          props[i].property.nextToProperty
+        );
+        var index = newTab.properties.indexOf(prop);
+        newTab.properties.splice(index + 1, 0, props[i]);
+        properties.splice(properties.indexOf(props[i]), 1);
+      }
+    }
+  }
+  private getTabByPropertyName(
+    propName: string
+  ): SurveyQuestionEditorTabDefinition {
+    if (!propName) return null;
+    for (var i = 0; i < this.tabs.length; i++) {
+      if (!!this.getPropertyByNameInTab(this.tabs[i], propName))
+        return this.tabs[i];
+    }
+    return null;
+  }
+  private getPropertyByNameInTab(
+    tab: SurveyQuestionEditorTabDefinition,
+    propName: string
+  ): SurveyQuestionEditorPropertyDefinition {
+    var props = tab.properties;
+    for (var i = 0; i < props.length; i++) {
+      if (props[i].name == propName) return props[i];
+    }
+    return null;
   }
   private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
     for (var i = 0; i < this.tabs.length; i++) {
@@ -770,14 +808,11 @@ export class SurveyQuestionProperties {
             if (typeof prop !== "string" && !!prop.tab) {
               tabName = prop.tab;
             }
-            var jsonProperty = !!this.propertiesHash[propName]
+            var jsonProp = !!this.propertiesHash[propName]
               ? this.propertiesHash[propName].property
               : null;
-            if (
-              !!jsonProperty &&
-              !!jsonProperty.category &&
-              jsonProperty.category !== tabName
-            ) {
+            var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
+            if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
               classRes.properties.splice(i, 1);
             } else {
               usedProperties[propName] = true;
@@ -802,6 +837,13 @@ export class SurveyQuestionProperties {
     }
     return result;
   }
+  private getJsonPropertyCategory(
+    jsonProperty: Survey.JsonObjectProperty
+  ): string {
+    if (!jsonProperty) return null;
+    if (!!jsonProperty.category) return jsonProperty.category;
+    return null;
+  }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any
@@ -812,8 +854,9 @@ export class SurveyQuestionProperties {
       let prop = this.properties[i];
       if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name])
         continue;
-      let tabName = !!prop.category
-        ? prop.category
+      let propCategory = this.getJsonPropertyCategory(prop);
+      let tabName = !!propCategory
+        ? propCategory
         : tabs.length == 0
         ? "general"
         : "others";
