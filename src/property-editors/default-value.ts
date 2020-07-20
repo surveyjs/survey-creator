@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 
 import "./default-value.scss";
-import { SurveyPropertyConditionEditor } from "../propertyEditors/propertyConditionEditor";
 import { SurveyPropertyDefaultValueEditor } from "../propertyEditors/propertyDefaultValueEditor";
 const templateHtml = require("./default-value.html");
 
