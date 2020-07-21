@@ -119,7 +119,10 @@ export class TitleInplaceEditor {
   }
 
   get maxLength() {
-    return (!!this.property && this.property.maxLength) || "";
+    if (!!this.property && this.property.maxLength && this.property.maxLength >= 0) {
+      return this.property.maxLength;
+    }
+    return "";
   }
 
   get readOnly() {
