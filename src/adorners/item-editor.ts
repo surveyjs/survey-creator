@@ -251,6 +251,7 @@ export var createAddItemElement = (handler) => {
   addNew.onclick = handler;
   addNew.onkeyup = createKey2click(addNew);
   addNew.tabIndex = 0;
+  addNew.setAttribute("role", "button");
 
   var svgElem: any = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -283,6 +284,7 @@ export var createCustomElement = (title, handler) => {
   element.onclick = handler;
   element.onkeyup = createKey2click(element);
   element.tabIndex = 0;
+  element.setAttribute("role", "button");
   var titleEl = document.createElement("span");
   titleEl.innerHTML = element.title;
   element.appendChild(titleEl);
