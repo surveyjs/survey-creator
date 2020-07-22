@@ -40,7 +40,7 @@ class ItemInplaceEditor extends TitleInplaceEditor {
   ) {
     super(target, name, rootElement, null, editor);
     rootElement.addEventListener("keydown", (event) => {
-      if(event.keyCode == 38 && event.ctrlKey) {
+      if (event.keyCode == 38 && event.altKey) {
         SurveyHelper.moveItemInArray(
           this.question.choices,
           this.item,
@@ -52,7 +52,7 @@ class ItemInplaceEditor extends TitleInplaceEditor {
         event.stopPropagation();
         return false;
       }
-      if(event.keyCode == 40 && event.ctrlKey) {
+      if (event.keyCode == 40 && event.altKey) {
         SurveyHelper.moveItemInArray(
           this.question.choices,
           this.item,
@@ -64,11 +64,11 @@ class ItemInplaceEditor extends TitleInplaceEditor {
       }
     });
     rootElement.addEventListener("keyup", (event) => {
-      if(event.keyCode === 13) {
+      if (event.keyCode === 13) {
         this.startEdit(this, event);
         return;
       }
-      if(event.keyCode === 46 && question.choices.length != 1) {
+      if (event.keyCode === 46 && question.choices.length != 1) {
         this.deleteItem(this, event);
         return;
       }
@@ -78,13 +78,13 @@ class ItemInplaceEditor extends TitleInplaceEditor {
   deleteItem(model: ItemInplaceEditor, event) {
     var index = -2;
     var needRemove = false;
-    if(this.question.otherItem === this.item) {
+    if (this.question.otherItem === this.item) {
       this.question.hasOther = false;
       index = model.question.choices.length;
-    } else if(this.question["selectAllItem"] === this.item) {
+    } else if (this.question["selectAllItem"] === this.item) {
       this.question["hasSelectAll"] = false;
       index = 0;
-    } else if(this.question["noneItem"] === this.item) {
+    } else if (this.question["noneItem"] === this.item) {
       this.question["hasNone"] = false;
       index = model.question.choices.length;
     } else {
@@ -163,22 +163,22 @@ export var itemAdorner = {
   },
   getElementName: (model) => "controlLabel",
   afterRender: (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
-    for(var i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
       elements[i].onclick = (e) => e.preventDefault();
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
       var propertyName = itemAdorner.inplaceEditForValues ? "value" : "text";
       var target = itemValue;
-      if(itemValue === model["selectAllItem"]) {
+      if (itemValue === model["selectAllItem"]) {
         target = model;
         propertyName = "selectAllText";
       }
-      if(itemValue === model["noneItemValue"]) {
+      if (itemValue === model["noneItemValue"]) {
         target = model;
         propertyName = "noneText";
       }
-      if(itemValue === model["otherItemValue"]) {
+      if (itemValue === model["otherItemValue"]) {
         target = model;
         propertyName = "otherText";
       }
@@ -224,7 +224,7 @@ export var createAddItemHandler = (
   var itemValue = new Survey.ItemValue(nextValue);
   itemValue.locOwner = <any>{
     getLocale: () => {
-      if(!!question["getLocale"]) return question.getLocale();
+      if (!!question["getLocale"]) return question.getLocale();
       return "";
     },
     getMarkdownHtml: (text: string) => {
@@ -307,14 +307,14 @@ export var itemDraggableAdorner = {
     editor: SurveyCreator
   ) => {
     var itemsRoot = [];
-    for(var i = 0; i < elements.length; i++) {
-      if(itemsRoot.indexOf(elements[i].parentElement) === -1) {
+    for (var i = 0; i < elements.length; i++) {
+      if (itemsRoot.indexOf(elements[i].parentElement) === -1) {
         itemsRoot.push(elements[i].parentElement);
       }
     }
-    for(var i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
       var itemValue = ko.dataFor(elements[i]);
-      if(
+      if (
         itemValue === model["selectAllItemValue"] ||
         itemValue === model["noneItemValue"] ||
         itemValue === model["otherItemValue"]
@@ -333,7 +333,7 @@ export var itemDraggableAdorner = {
           var newIndex = evt.newIndex;
           var choices = model.choices;
           var choice = choices[evt.oldIndex];
-          if(model.hasColumns) {
+          if (model.hasColumns) {
             choice = ko.dataFor(evt.item);
             var columnContent = ko.dataFor(evt.item.parentElement);
             var itemBefore = columnContent && columnContent[newIndex];
@@ -385,7 +385,7 @@ export var itemDraggableAdorner = {
       propertyName: string,
       newValue: any
     ) => {
-      if(typeof target.getType === "function") {
+      if (typeof target.getType === "function") {
         var property = Survey.Serializer.findProperty(
           target.getType(),
           propertyName
@@ -394,7 +394,7 @@ export var itemDraggableAdorner = {
       }
     };
     itemsRoot[0].appendChild(addNew);
-    if(
+    if (
       editor.canShowObjectProperty(model, "hasOther") &&
       model.hasOther !== true
     ) {
@@ -408,7 +408,7 @@ export var itemDraggableAdorner = {
         })
       );
     }
-    if(
+    if (
       model.hasSelectAll !== undefined &&
       model.hasSelectAll !== true &&
       editor.canShowObjectProperty(model, "hasSelectAll")
@@ -426,7 +426,7 @@ export var itemDraggableAdorner = {
         )
       );
     }
-    if(
+    if (
       model.hasNone !== undefined &&
       model.hasNone !== true &&
       editor.canShowObjectProperty(model, "hasNone")
