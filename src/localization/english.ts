@@ -444,7 +444,7 @@ export var enStrings = {
     createtrigger: "Please create a trigger",
     titleKeyboardAdornerTip: "Press enter button to edit",
     keyboardAdornerTip:
-      "Press enter button to edit item, press delete button to delete item, press control plus arrow up or arrow down to move item",
+      "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible:",
     triggerMakeQuestionsVisible: "Make elements visible:",
