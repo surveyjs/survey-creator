@@ -108,7 +108,8 @@ export class TitleInplaceEditor {
         {
           element.tabIndex = 0;
           element.onkeyup = createKey2click(element);
-          element['aria-label'] = this.getLocString('pe.titleKeyboardAdornerTip');
+          element.setAttribute('aria-label', this.getLocString('pe.titleKeyboardAdornerTip'));
+          element.setAttribute('role', 'textbox');
           element.onclick = (e) => {
             this.startEdit(this, e);
             e.preventDefault();
@@ -118,7 +119,10 @@ export class TitleInplaceEditor {
   }
 
   get maxLength() {
-    return (!!this.property && this.property.maxLength) || "";
+    if (!!this.property && this.property.maxLength && this.property.maxLength >= 0) {
+      return this.property.maxLength;
+    }
+    return "";
   }
 
   get readOnly() {

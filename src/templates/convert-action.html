@@ -38,7 +38,7 @@
 </script>
 
 <script type="text/html" id="sca-show-property-grid">
-      <span class="svda_question_action svda_question_action--separated svd-main-color" data-bind="key2click, clickNoFocus: function() { onClick($parent.question); }, attr: {title: text, tabindex: $data.needFocus === undefined || !!$data.needFocus ? 0 : undefined }">
+      <span class="svda_question_action svda_question_action--separated svd-main-color" data-bind="key2click, clickNoFocus: function() { onClick($parent.question); }, attr: {title: text, tabindex: $data.needFocus === undefined || !!$data.needFocus ? 0 : undefined, role: 'button' }">
         <span>
             <svg-icon class="svd-primary-icon" data-bind="css: $parent.getStyle($data)" params="iconName: $parent.getStyle($data)"></svg-icon>
         </span>

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.23](https://github.com/surveyjs/survey-creator/compare/v1.7.22...v1.7.23) (2020-07-22)
+
+### [1.7.22](https://github.com/surveyjs/survey-creator/compare/v1.7.21...v1.7.22) (2020-07-22)
+
+### [1.7.21](https://github.com/surveyjs/survey-creator/compare/v1.7.20...v1.7.21) (2020-07-22)
+
+
+### Bug Fixes
+
+* ItemValue Property Editor, Fast Entry works slow for several hunderds items [#903](https://github.com/surveyjs/survey-creator/issues/903) ([a1fd2e0](https://github.com/surveyjs/survey-creator/commit/a1fd2e098e16be6f7c659c30ac6a2efd455603e6))
+
 ### [1.7.20](https://github.com/surveyjs/survey-creator/compare/v1.7.19...v1.7.20) (2020-07-15)
 
 ### [1.7.19](https://github.com/surveyjs/survey-creator/compare/v1.7.18...v1.7.19) (2020-07-09)

@@ -284,3 +284,16 @@ QUnit.test("title/description adorner for removed properties - https://surveyjs.
   Survey.Serializer.removeProperty("a_test", "description");
   assert.equal(descriptionAdorner.getMarkerClass(obj), "", "Has no description, no editing");
 });
+
+QUnit.test("title and item editor maxLength doesn't work in IE - https://surveyjs.answerdesk.io/internal/ticket/details/T4734", function (assert) {
+  var creator = new SurveyCreator();
+  var target = new Survey.QuestionTextModel("q1");
+  var adornerModel = new TitleInplaceEditor(target, "title", null, "", creator);
+  assert.equal(adornerModel.maxLength, "");
+
+  var property = Survey.Serializer.findProperty("question", "title");
+  var oldValue = property.maxLength; 
+  property.maxLength = 3;
+  assert.equal(adornerModel.maxLength, 3);
+  property.maxLength = oldValue;
+}); 
