@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from '../editor';
+import { SurveyCreator } from "../editor";
 import { IToolbarItem } from "../components/toolbar";
 
 import "./translation.scss";
@@ -10,12 +10,12 @@ var templateHtml = require("html-loader?interpolate!val-loader!./translation.htm
 var groupTemplateHtml = require("html-loader?interpolate!val-loader!./translation-group.html");
 
 export class TranslationItemBase {
-  constructor(public name: string) { }
+  constructor(public name: string) {}
   public get isGroup() {
     return false;
   }
-  public fillLocales(locales: Array<string>) { }
-  public mergeLocaleWithDefault(loc: string) { }
+  public fillLocales(locales: Array<string>) {}
+  public mergeLocaleWithDefault(loc: string) {}
 }
 
 export class TranslationItem extends TranslationItemBase {
@@ -344,7 +344,7 @@ export class TranslationGroup extends TranslationItemBase {
 }
 
 export class Translation implements ITranslationLocales {
-  public static csvDelimiter = "|";
+  public static csvDelimiter = ",";
   public static newLineDelimiter = "\n";
   public koLocales: any;
   public koRoot: any;
@@ -396,7 +396,7 @@ export class Translation implements ITranslationLocales {
       var locText = this.getLocaleName(this.defaultLocale);
       return editorLocalization
         .getString("ed.translationMergeLocaleWithDefault")
-      ["format"](locText);
+        ["format"](locText);
     }, this);
     this.koFilteredPages = ko.observableArray([
       {
@@ -597,7 +597,6 @@ export class Translation implements ITranslationLocales {
       res.push(row);
     }
     return unparse(res, {
-      quotes: true,
       quoteChar: '"',
       escapeChar: '"',
       delimiter: Translation.csvDelimiter,
@@ -753,9 +752,7 @@ ko.components.register("survey-translation", {
     createViewModel: (params, componentInfo) => {
       let creator: SurveyCreator = params.creator;
 
-      let model = new Translation(
-        creator.createSurvey({}, "translation")
-      );
+      let model = new Translation(creator.createSurvey({}, "translation"));
       model.importFinishedCallback = function () {
         creator.onTranslationImported.fire(self, {});
       };
@@ -777,7 +774,7 @@ ko.components.register("survey-translation", {
         });
       };
 
-      var subscrViewType = creator.koViewType.subscribe(viewType => {
+      var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "translation") {
           model.survey = creator.survey;
         }
@@ -791,9 +788,9 @@ ko.components.register("survey-translation", {
 
       creator.translation = model;
       return model;
-    }
+    },
   },
-  template: templateHtml
+  template: templateHtml,
 });
 
 ko.components.register("svd-translation-group", {
@@ -801,7 +798,7 @@ ko.components.register("svd-translation-group", {
     createViewModel: (params, componentInfo) => {
       var model = params.model;
       return model;
-    }
+    },
   },
-  template: groupTemplateHtml
+  template: groupTemplateHtml,
 });
