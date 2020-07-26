@@ -55,6 +55,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "cols", tab: "layout" },
         "placeHolder",
         { name: "maxLength", tab: "validation" },
+        { name: "textUpdateMode", tab: "data" },
       ],
     },
     file: {
@@ -229,6 +230,7 @@ export class SurveyQuestionEditorDefinition {
         "placeHolder",
         { name: "size", tab: "layout" },
         { name: "maxLength", tab: "validation" },
+        { name: "textUpdateMode", tab: "data" },
       ],
     },
     boolean: {
