@@ -5,6 +5,11 @@ import { editorLocalization } from "../editorLocalization";
 var template = require("html-loader?interpolate!val-loader!./designer-container.html");
 
 export class DesignerContainerViewModel {
+  static iconRightOpenName = "icon-right-open";
+  static iconRightCloseName = "icon-right-close";
+  static iconLeftOpenName = "icon-left-open";
+  static iconLeftCloseName = "icon-left-close";
+
   private _changedSubscription: ko.Subscription;
   private _prevWidth: any;
   private _prevSurfaceWidth: any;
@@ -66,6 +71,18 @@ export class DesignerContainerViewModel {
   size: any;
   dispose() {
     this._changedSubscription.dispose();
+  }
+  get iconRightOpen() {
+    return DesignerContainerViewModel.iconRightOpenName;
+  }
+  get iconRightClose() {
+    return DesignerContainerViewModel.iconRightCloseName;
+  }
+  get iconLeftOpen() {
+    return DesignerContainerViewModel.iconLeftOpenName;
+  }
+  get iconLeftClose() {
+    return DesignerContainerViewModel.iconLeftCloseName;
   }
 }
 

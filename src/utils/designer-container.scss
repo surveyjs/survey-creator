@@ -98,7 +98,7 @@ svd-designer-container {
   cursor: pointer;
 }
 .svd-icon-container.svd-icon-container.svd-icon-container {
-  & > svg.svd-svg-icon {
+  & > svg.svd-svg-icon, & > svg-icon > svg.svd-svg-icon {
     width: 14px;
     height: 24px;
     fill: lightgray;

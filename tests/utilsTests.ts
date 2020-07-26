@@ -28,7 +28,7 @@ QUnit.test("getNextValue", function(assert) {
   assert.equal(getNextValue(prefix, ["TRUE"]), "FALSE");
 });
 
-QUnit.test("changed unsubscribe", function(assert) {
+QUnit.test("DesignerContainerViewModel changed unsubscribe", function(assert) {
   var changed = ko.observable(0);
   var dcm = new DesignerContainerViewModel(
     { changed: changed, tabs: ko.observableArray() },
@@ -38,4 +38,15 @@ QUnit.test("changed unsubscribe", function(assert) {
   dcm.dispose();
   changed(1);
   assert.ok(dcm.isOpen(), "still open");
+});
+
+QUnit.test("DesignerContainerViewModel default icons", function(assert) {
+  var dcm = new DesignerContainerViewModel(
+    { tabs: ko.observableArray() },
+    { element: { offsetWidth: 0, style: {} } }
+  );
+  assert.ok(dcm.iconLeftOpen, "icon-left-open");
+  assert.ok(dcm.iconLeftClose, "icon-left-close");
+  assert.ok(dcm.iconRightOpen, "icon-right-open");
+  assert.ok(dcm.iconRightClose, "icon-right-close");
 });

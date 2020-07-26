@@ -3282,10 +3282,12 @@ ko.components.register("svg-icon", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       ko.computed(() => {
-        var size = (ko.unwrap(params.size) || 16) + "px";
+        var size = ko.unwrap(params.size);
+        var width = ko.unwrap(params.width);
+        var height = ko.unwrap(params.height);
         var svgElem: any = componentInfo.element.childNodes[0];
-        svgElem.style.width = size;
-        svgElem.style.height = size;
+        svgElem.style.width = (size || width || 16) + "px";
+        svgElem.style.height = (size || height || 16) + "px";
         var node: any = svgElem.childNodes[0];
         node.setAttributeNS(
           "http://www.w3.org/1999/xlink",
