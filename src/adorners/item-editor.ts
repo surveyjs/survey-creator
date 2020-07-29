@@ -29,7 +29,7 @@ function focusAfterChange(question: QuestionSelectBase, index = 0) {
   }, 10);
 }
 
-class ItemInplaceEditor extends TitleInplaceEditor {
+export class ItemInplaceEditor extends TitleInplaceEditor {
   constructor(
     target: any,
     name: string,
@@ -76,26 +76,38 @@ class ItemInplaceEditor extends TitleInplaceEditor {
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
-    var index = -2;
-    var needRemove = false;
-    if (this.question.otherItem === this.item) {
-      this.question.hasOther = false;
-      index = model.question.choices.length;
-    } else if (this.question["selectAllItem"] === this.item) {
-      this.question["hasSelectAll"] = false;
-      index = 0;
-    } else if (this.question["noneItem"] === this.item) {
-      this.question["hasNone"] = false;
-      index = model.question.choices.length;
-    } else {
-      needRemove = true;
-      index = model.question.choices.indexOf(model.item);
+    var property = Survey.Serializer.findProperty(
+      model.question.getType(),
+      "choices"
+    );
+    var allowDelete = this.editor.onCollectionItemDeletingCallback(
+      model.question,
+      property,
+      model.question.choices,
+      model.item
+    );
+    if (allowDelete) {
+      var index = -2;
+      var needRemove = false;
+      if (this.question.otherItem === this.item) {
+        this.question.hasOther = false;
+        index = model.question.choices.length;
+      } else if (this.question["selectAllItem"] === this.item) {
+        this.question["hasSelectAll"] = false;
+        index = 0;
+      } else if (this.question["noneItem"] === this.item) {
+        this.question["hasNone"] = false;
+        index = model.question.choices.length;
+      } else {
+        needRemove = true;
+        index = model.question.choices.indexOf(model.item);
+      }
+      focusAfterChange(this.question, index);
+      if (needRemove) {
+        model.question.choices.splice(index, 1);
+      }
+      this.editor.onQuestionEditorChanged(this.question);
     }
-    focusAfterChange(this.question, index);
-    if(needRemove) {
-      model.question.choices.splice(index, 1);
-    }
-    this.editor.onQuestionEditorChanged(this.question);
   }
 
   get isDraggable() {

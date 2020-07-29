@@ -19,13 +19,25 @@ class ImageItemInplaceEditor {
     private rootElement,
     private editor: SurveyCreator,
     private itemsRoot
-  ) { }
+  ) {}
 
   deleteItem(model: ImageItemInplaceEditor, event) {
     if (model.question.choices.length > 1) {
-      var index = model.question.choices.indexOf(model.item);
-      model.question.choices.splice(index, 1);
-      this.editor.onQuestionEditorChanged(this.question);
+      var property = Survey.Serializer.findProperty(
+        model.question.getType(),
+        "choices"
+      );
+      var allowDelete = this.editor.onCollectionItemDeletingCallback(
+        model.question,
+        property,
+        model.question.choices,
+        model.item
+      );
+      if (allowDelete) {
+        var index = model.question.choices.indexOf(model.item);
+        model.question.choices.splice(index, 1);
+        this.editor.onQuestionEditorChanged(this.question);
+      }
     }
   }
 
