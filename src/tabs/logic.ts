@@ -848,8 +848,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.mode = "view";
     this.expressionEditor.object = this.survey;
     this.expressionEditor.options = this.options;
-    this.expressionEditor.showDisplayNameOnTop;
-    this.expressionEditor.displayName = "";
+    this.expressionEditor.showDisplayName = false;
     this.expressionEditor.showHelpText = false;
     this.expressionEditor.beforeShow();
   }

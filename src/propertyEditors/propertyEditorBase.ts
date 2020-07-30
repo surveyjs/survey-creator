@@ -111,7 +111,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private property_: Survey.JsonObjectProperty;
   private isRequiredValue: boolean = false;
   private titleValue: string;
-  private isCustomDisplayName: boolean = false;
+  private showDisplayNameValue: boolean = true;
   private _displayNameValue = ko.observable<string>();
   private get displayNameValue() {
     return this._displayNameValue();
@@ -206,9 +206,18 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get title(): string {
     return this.titleValue;
   }
-  public isInPropertyGrid: boolean = false;
+  private isInPropertyGridValue: boolean = false;
+  public get isInPropertyGrid(): boolean {
+    return this.isInPropertyGridValue;
+  }
+  public set isInPropertyGrid(val: boolean) {
+    if (val === this.isInPropertyGridValue) return;
+    this.isInPropertyGridValue = val;
+    this.setTitleAndDisplayName();
+  }
   public get isDiplayNameVisible() {
     return (
+      this.showDisplayName &&
       !this.isInPropertyGrid &&
       !this.isShowingModal() &&
       !this.isInplaceProperty &&
@@ -222,9 +231,11 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get displayName(): string {
     return this.displayNameValue;
   }
-  public set displayName(val: string) {
-    this.isCustomDisplayName = true;
-    this.displayNameValue = val;
+  public get showDisplayName(): boolean {
+    return this.showDisplayNameValue;
+  }
+  public set showDisplayName(val: boolean) {
+    this.showDisplayNameValue = val;
   }
   public get showDisplayNameOnTop(): boolean {
     return this.isDiplayNameVisible && this.canShowDisplayNameOnTop;
@@ -333,15 +344,17 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.isRequiredValue = !!this.property ? this.property.isRequired : false;
   }
   protected setTitleAndDisplayName() {
-    if (this.isCustomDisplayName) return;
     this.displayNameValue = this.property ? this.property.name : "";
     this.titleValue = "";
     if (!this.property) return;
     var locName = this.property.name;
-    this.displayNameValue = editorLocalization.getPropertyName(
-      locName,
-      this.property.displayName
-    );
+    if (!!this.property.displayName) {
+      this.displayNameValue = this.property.displayName;
+    } else {
+      this.displayNameValue = this.isInPropertyGridValue
+        ? editorLocalization.getPropertyName(locName)
+        : editorLocalization.getPropertyNameInEditor(locName);
+    }
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
   }

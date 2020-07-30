@@ -281,7 +281,9 @@ export class SurveyElementEditorContentModel {
       tabItem.properties.length > 0 ? tabItem.properties[0] : null;
     if (!!firstProperty && firstProperty.createdFromTabName) {
       var firstEditor = propertyTab.getPropertyEditorByName(tabItem.name);
-      if (!!firstEditor) firstEditor.editor.displayName = "";
+      if (!!firstEditor) {
+        firstEditor.editor.showDisplayName = false;
+      }
     }
     propertyTab.onAfterRenderCallback = (htmlElement, property) => {
       if (!this.onAfterRenderCallback) return;
@@ -472,21 +474,12 @@ export class SurveyElementEditorTabModel {
   private buildEditorProperties() {
     for (var i = 0; i < this.properties.length; i++) {
       var prop = this.properties[i];
-      this.createEditor(prop, prop.title);
+      this.createEditor(prop);
     }
   }
-  private createEditor(property: any, displayName: string) {
-    if (!displayName) {
-      displayName = editorLocalization.getPropertyNameInEditor(
-        property.name,
-        property.displayName
-      );
-    }
+  private createEditor(property: any) {
     var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;
-    if (!!displayName) {
-      objectProperty.editor.displayName = displayName;
-    }
     this.editorPropertiesValue.push(objectProperty);
   }
   private performForAllProperties(func: (p: SurveyObjectProperty) => void) {

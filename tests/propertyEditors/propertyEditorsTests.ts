@@ -1673,6 +1673,27 @@ QUnit.test(
     Survey.Serializer.removeProperty("page", "pages");
   }
 );
+QUnit.test(
+  "Change displayName for existing property. It should have higher priority than localization",
+  function (assert) {
+    var prop = Survey.Serializer.findProperty("question", "visible");
+    prop.displayName = "My is visible?";
+    var question = new Survey.QuestionText("q1");
+    var editor = new SurveyPropertyTextEditor(prop);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(
+      editor.displayName,
+      "My is visible?",
+      "Take from property.displayName"
+    );
+    prop.displayName = null;
+    editor = new SurveyPropertyTextEditor(prop);
+    editor.object = question;
+    editor.beforeShow();
+    assert.equal(editor.displayName, "Is visible?", "Take from localization");
+  }
+);
 
 QUnit.test(
   "Check showDisplayNameOnTop for different property editors",
