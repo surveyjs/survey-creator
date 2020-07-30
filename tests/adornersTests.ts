@@ -1,8 +1,15 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { applyAdornerClass, SurveyForDesigner } from "../src/surveyjsObjects";
-import { titleAdorner, TitleInplaceEditor, descriptionAdorner } from "../src/adorners/title-editor";
-import { createAddItemHandler } from "../src/adorners/item-editor";
+import {
+  titleAdorner,
+  TitleInplaceEditor,
+  descriptionAdorner,
+} from "../src/adorners/title-editor";
+import {
+  createAddItemHandler,
+  ItemInplaceEditor,
+} from "../src/adorners/item-editor";
 import {
   questionActionsAdorner,
   panelActionsAdorner,
@@ -271,29 +278,83 @@ QUnit.test("Title editor read only mode", function (assert) {
   assert.notOk(descriptionModel.readOnly, "description is not read only");
 });
 
-QUnit.test("title/description adorner for removed properties - https://surveyjs.answerdesk.io/internal/ticket/details/T4683", function (assert) {
-  Survey.Serializer.addClass("a_test", [ "title", "description" ]);
-  var obj = { getType: () => "a_test" };
-  
-  assert.equal(titleAdorner.getMarkerClass(obj), "title_editable", "Has title, allows editing");
-  assert.equal(descriptionAdorner.getMarkerClass(obj), "description_editable", "Has description, allows editing");
+QUnit.test(
+  "title/description adorner for removed properties - https://surveyjs.answerdesk.io/internal/ticket/details/T4683",
+  function (assert) {
+    Survey.Serializer.addClass("a_test", ["title", "description"]);
+    var obj = { getType: () => "a_test" };
 
-  Survey.Serializer.removeProperty("a_test", "title");
-  assert.equal(titleAdorner.getMarkerClass(obj), "", "Has no title, no editing");
+    assert.equal(
+      titleAdorner.getMarkerClass(obj),
+      "title_editable",
+      "Has title, allows editing"
+    );
+    assert.equal(
+      descriptionAdorner.getMarkerClass(obj),
+      "description_editable",
+      "Has description, allows editing"
+    );
 
-  Survey.Serializer.removeProperty("a_test", "description");
-  assert.equal(descriptionAdorner.getMarkerClass(obj), "", "Has no description, no editing");
-});
+    Survey.Serializer.removeProperty("a_test", "title");
+    assert.equal(
+      titleAdorner.getMarkerClass(obj),
+      "",
+      "Has no title, no editing"
+    );
 
-QUnit.test("title and item editor maxLength doesn't work in IE - https://surveyjs.answerdesk.io/internal/ticket/details/T4734", function (assert) {
+    Survey.Serializer.removeProperty("a_test", "description");
+    assert.equal(
+      descriptionAdorner.getMarkerClass(obj),
+      "",
+      "Has no description, no editing"
+    );
+  }
+);
+
+QUnit.test(
+  "title and item editor maxLength doesn't work in IE - https://surveyjs.answerdesk.io/internal/ticket/details/T4734",
+  function (assert) {
+    var creator = new SurveyCreator();
+    var target = new Survey.QuestionTextModel("q1");
+    var adornerModel = new TitleInplaceEditor(
+      target,
+      "title",
+      null,
+      "",
+      creator
+    );
+    assert.equal(adornerModel.maxLength, "");
+
+    var property = Survey.Serializer.findProperty("question", "title");
+    var oldValue = property.maxLength;
+    property.maxLength = 3;
+    assert.equal(adornerModel.maxLength, 3);
+    property.maxLength = oldValue;
+  }
+);
+
+QUnit.test("item editor raises the onCollectionItemDeleting event", function (
+  assert
+) {
   var creator = new SurveyCreator();
-  var target = new Survey.QuestionTextModel("q1");
-  var adornerModel = new TitleInplaceEditor(target, "title", null, "", creator);
-  assert.equal(adornerModel.maxLength, "");
+  var question = new Survey.QuestionCheckboxModel("q1");
+  question.choices = ["1", "2"];
+  var adornerModel = new ItemInplaceEditor(
+    question.choices[0],
+    "value",
+    question,
+    question.choices[0],
+    { addEventListener: () => {} },
+    creator
+  );
+  var callCount = 0;
+  creator.onCollectionItemDeleting.add(function (sender, options) {
+    callCount++;
+    assert.equal(options.propertyName, "choices");
+    assert.equal(options.obj, question);
+    assert.equal(options.item, question.choices[0]);
+  });
 
-  var property = Survey.Serializer.findProperty("question", "title");
-  var oldValue = property.maxLength; 
-  property.maxLength = 3;
-  assert.equal(adornerModel.maxLength, 3);
-  property.maxLength = oldValue;
-}); 
+  adornerModel.deleteItem(adornerModel, {});
+  assert.equal(callCount, 1);
+});

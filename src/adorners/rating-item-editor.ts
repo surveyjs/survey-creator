@@ -23,23 +23,35 @@ class RatingItemEditor extends TitleInplaceEditor {
   }
 
   deleteItem(model: RatingItemEditor, event) {
-    var question = model.question;
-    var index = question.visibleRateValues
-      .map((item) => item.value)
-      .indexOf(model.item.value);
+    var property = Survey.Serializer.findProperty(
+      model.question.getType(),
+      "rateValues"
+    );
+    var allowDelete = this.editor.onCollectionItemDeletingCallback(
+      model.question,
+      property,
+      model.question.rateValues,
+      model.item
+    );
+    if (allowDelete) {
+      var question = model.question;
+      var index = question.visibleRateValues
+        .map(item => item.value)
+        .indexOf(model.item.value);
 
-    if (
-      question.rateValues.length === 0 &&
-      index === question.visibleRateValues.length - 1
-    ) {
-      question.rateMax -= question.rateStep;
-    } else {
-      if (question.rateValues.length === 0) {
-        question.rateValues = question.visibleRateValues;
+      if (
+        question.rateValues.length === 0 &&
+        index === question.visibleRateValues.length - 1
+      ) {
+        question.rateMax -= question.rateStep;
+      } else {
+        if (question.rateValues.length === 0) {
+          question.rateValues = question.visibleRateValues;
+        }
+        question.rateValues.splice(index, 1);
       }
-      question.rateValues.splice(index, 1);
+      model.editor.onQuestionEditorChanged(question);
     }
-    model.editor.onQuestionEditorChanged(question);
   }
 
   get isLastItem() {

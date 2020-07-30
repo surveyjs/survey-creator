@@ -15,23 +15,36 @@ export class PropertyEditorMultipleValuesViewModel {
   }
 }
 
+function createviewModel(params, componentInfo) {
+  const model: SurveyPropertyMultipleValuesEditor = params.model;
+
+  return new PropertyEditorMultipleValuesViewModel(
+    model.koCategories,
+    componentInfo,
+    model.koAfterRender,
+    () => {
+      typeof params.afterRender === "function" &&
+        params.afterRender.call(model, componentInfo);
+
+      typeof model.koAfterRender === "function" &&
+        model.koAfterRender.call(model, componentInfo);
+    }
+  );
+}
+
 ko.components.register("svd-property-editor-multiple-values", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const model: SurveyPropertyMultipleValuesEditor = params.model;
+      return createviewModel(params, componentInfo);
+    },
+  },
+  template: templateHtml,
+});
 
-      return new PropertyEditorMultipleValuesViewModel(
-        model.koCategories,
-        componentInfo,
-        model.koAfterRender,
-        () => {
-          typeof params.afterRender === "function" &&
-            params.afterRender.call(model, componentInfo);
-
-          typeof model.koAfterRender === "function" &&
-            model.koAfterRender.call(model, componentInfo);
-        }
-      );
+ko.components.register("svd-property-editor-multiplevalues", {
+  viewModel: {
+    createViewModel: (params, componentInfo) => {
+      return createviewModel(params, componentInfo);
     },
   },
   template: templateHtml,
