@@ -33,6 +33,7 @@
     <div
       class="svd-itemvalue-action"
       tabindex="0"
+      role="button"
       data-bind="key2click, visible: editor.koAllowAddRemoveItems() && koCanDeleteItem() && !editor.readOnly(), click: editor.onDeleteClick, attr: {'aria-label': editor.getLocString('pe.delete')}"
     >
       <span>
