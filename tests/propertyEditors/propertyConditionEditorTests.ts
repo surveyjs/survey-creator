@@ -974,6 +974,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function (
     [
       "qText",
       "qComment",
+      "qExpression",
       "qMatrixdropdown.row1.col1",
       "qMatrixdynamic[0].col1",
     ],
@@ -1025,7 +1026,7 @@ QUnit.test("SurveyPropertyConditionEditor, enabled operators", function (
   );
   checkFun("qBoolean", ["empty", "notempty", "equal", "notequal"]);
   checkFunMultiple(
-    ["qExpression", "qRating"],
+    ["qRating"],
     [
       "empty",
       "notempty",
@@ -1094,6 +1095,28 @@ QUnit.test("SurveyPropertyConditionEditor, selectbase + anyof", function (
   editorItem.operator = "equal";
   questionValue = editorItem.valueQuestion;
   assert.equal(questionValue.getType(), "dropdown", "It is dropdown again");
+});
+QUnit.test("SurveyPropertyConditionEditor, expression", function (assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "expression" },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  editor.isEditorShowing = true;
+  var editorItem = editor.koEditorItems()[0];
+  editorItem.questionName = "question1";
+  var questionValue = editorItem.valueQuestion;
+  assert.equal(
+    questionValue.getType(),
+    "text",
+    "We have text question for expression"
+  );
 });
 QUnit.test(
   "SurveyPropertyConditionEditor, Do not show question description",

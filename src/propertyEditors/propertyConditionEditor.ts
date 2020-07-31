@@ -239,9 +239,7 @@ export class ConditionEditorItem {
 
     if (!!this.conjunctionQuestion) {
       this.conjunctionQuestion.minWidth = "50px";
-      this.conjunctionQuestion.width = this.isFirst
-        ? ""
-        : "100px";
+      this.conjunctionQuestion.width = this.isFirst ? "" : "100px";
       this.conjunctionQuestion.paddingRight = paddingRight;
     }
 
@@ -251,8 +249,8 @@ export class ConditionEditorItem {
         ? "40%"
         : "25%"
       : this.isFirst
-        ? "70%"
-        : "45%";
+      ? "70%"
+      : "45%";
     this.nameQuestion.paddingRight = paddingRight;
 
     this.operatorQuestion.minWidth = "50px";
@@ -421,7 +419,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.koTextValue = ko.observable();
     this.koEditorItems = ko.observableArray<ConditionEditorItem>([]);
     this.koCanParseExpression = ko.observable(true);
-    this.koConditionDisplayText = ko.computed(function() {
+    this.koConditionDisplayText = ko.computed(function () {
       if (!!this.koValue()) return this.getConditionDisplayText();
       return this.getLocString("pe.expressionIsEmpty");
     }, this);
@@ -434,23 +432,23 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     };
     this.koIsTextConditionValid = ko.observable(true);
     var self = this;
-    this.koCanParseExpression.subscribe(function(newValue) {
+    this.koCanParseExpression.subscribe(function (newValue) {
       if (newValue === false) {
         self.koActiveView("text");
       }
     });
-    this.koIsEditorShowing.subscribe(function(newValue) {
+    this.koIsEditorShowing.subscribe(function (newValue) {
       if (newValue === true) {
         self.buildEditorsItemsOnShowing();
       }
     });
-    self.onRemoveConditionClick = function(item) {
+    self.onRemoveConditionClick = function (item) {
       self.removeCondition(item);
     };
-    self.onChangeViewClick = function(newView) {
+    self.onChangeViewClick = function (newView) {
       self.koActiveView(newView);
     };
-    this.koTextValue.subscribe(function(newValue) {
+    this.koTextValue.subscribe(function (newValue) {
       self.onkoTextValueChanged(newValue);
     });
   }
@@ -521,10 +519,10 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     this.addConditionQuestionsHash = {};
     this.addConditionCalculatedValuesHash = {};
     this.allConditionQuestionsValue = this.getConditionQuestions();
-    this.allConditionQuestionsValue.sort(function(a, b) {
+    this.allConditionQuestionsValue.sort(function (a, b) {
       return a.text.localeCompare(b.text);
     });
-  }
+  };
   public get allConditionQuestions(): any[] {
     if (!!this.allConditionQuestionsValue)
       return this.allConditionQuestionsValue;
@@ -625,6 +623,9 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
         : null;
     if (!!json && json.type == "radiogroup") {
       json.type = "dropdown";
+    }
+    if (!!json && json.type == "expression") {
+      json.type = "text";
     }
     if (!!json && operator == "anyof" && convertOnAnyOf) {
       if (!this.isClassContains(json.type, ["checkbox"], [])) {
@@ -861,7 +862,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("condition", function(
+SurveyPropertyEditorFactory.registerEditor("condition", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyConditionEditor(
@@ -870,7 +871,7 @@ SurveyPropertyEditorFactory.registerEditor("condition", function(
     "createCondition"
   );
 });
-SurveyPropertyEditorFactory.registerEditor("expression", function(
+SurveyPropertyEditorFactory.registerEditor("expression", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyConditionEditor(
@@ -1156,7 +1157,7 @@ export function insertMatch(editor, data) {
 }
 
 ko.bindingHandlers.aceEditor = {
-  init: function(element, options) {
+  init: function (element, options) {
     var configs = options();
     var langTools = ace.require("ace/ext/language_tools");
     var langUtils = ace.require("ace/autocomplete/util");
@@ -1166,7 +1167,7 @@ ko.bindingHandlers.aceEditor = {
 
     editor.setOption("useWorker", false);
 
-    editor.getSession().on("change", function() {
+    editor.getSession().on("change", function () {
       var errors = createAnnotations(
         editor.getValue(),
         objectEditor.syntaxCheckMethodName
@@ -1182,7 +1183,7 @@ ko.bindingHandlers.aceEditor = {
       //   }
       editor.getSession().setAnnotations(errors);
     });
-    editor.on("focus", function() {
+    editor.on("focus", function () {
       editor.setReadOnly(objectEditor.readOnly());
     });
     var updateCallback = () => {
@@ -1218,7 +1219,7 @@ ko.bindingHandlers.aceEditor = {
         );
         callback(null, completions);
       },
-      getDocTooltip: function(item) {
+      getDocTooltip: function (item) {
         item.docHTML =
           "<div style='max-width: 300px; white-space: normal;'>" +
           item.meta +
@@ -1231,7 +1232,7 @@ ko.bindingHandlers.aceEditor = {
       enableLiveAutocompletion: true,
     });
 
-    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
       valueSubscription.dispose();
       visibilitySubscription.dispose();
       editor.destroy();
