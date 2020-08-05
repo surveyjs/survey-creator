@@ -455,7 +455,6 @@
   }
 }
 
-
 .svd_container {
   .svd_commercial_container {
     padding: 1em 0 0.5em 2em;
@@ -629,7 +628,8 @@
         }
         .svda-select-items-title {
           top: -1.8em;
-          right: 2.5em;
+          right: 0;
+          padding-right: 2.5em;
         }
       }
     }
