@@ -429,6 +429,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public updatePropertyValue(newValue: any) {
     this.object[this.property.name] = newValue;
+    if (newValue != this.object[this.property.name]) {
+      this.updateValue();
+    }
   }
   protected getValue(): any {
     return this.property && this.object
