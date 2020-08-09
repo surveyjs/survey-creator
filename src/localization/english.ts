@@ -434,6 +434,7 @@ export var enStrings = {
       cells: "Cells",
       showOnCompleted: "Show on Completed",
       logo: "Logo in Survey Title",
+      slider: "Slider",
       others: "Others",
     },
     editProperty: "Edit property '{0}'",
