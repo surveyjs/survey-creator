@@ -217,6 +217,73 @@ QUnit.test("onElementDeleting event", function (assert) {
   assert.equal(counter, 3, "onElementRemoving called one time");
 });
 
+QUnit.test("Delete object and selectedElement property", function (assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2" },
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [
+              { type: "text", name: "panel1_q1" },
+              { type: "text", name: "panel1_q2" },
+              { type: "text", name: "panel1_q3" },
+              { type: "text", name: "panel1_q4" },
+            ],
+          },
+          { type: "text", name: "q3" },
+        ],
+      },
+    ],
+  };
+  creator.selectedElement = creator.survey.getQuestionByName("panel1_q3");
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "panel1_q4",
+    "The next element in panel is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "panel1_q2",
+    "The previous element in panel is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "panel1_q1",
+    "The first element in panel is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(creator.selectedElement.name, "panel1", "The panel is selected");
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "q3",
+    "The last question is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "q2",
+    "The second question is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(
+    creator.selectedElement.name,
+    "q1",
+    "The first question is selected"
+  );
+  creator.deleteCurrentObject();
+  assert.equal(creator.selectedElement.name, "page1", "The page is selected");
+});
+
 QUnit.test("fast copy tests, copy a question", function (assert) {
   var editor = new SurveyCreator();
   var q1 = <Survey.QuestionText>(
@@ -1441,12 +1508,30 @@ QUnit.test(
     const creator = new SurveyCreator(undefined);
     const question = new Survey.QuestionImage("qi");
     var menuItems = creator.survey.getMenuItems(question);
-    assert.deepEqual(menuItems.filter(i => ["showtitle", "isrequired"].indexOf(i.name) !== -1), [], "No 'showtitle' or 'isrequired' in the menu items");
-    assert.notOk(isPropertyVisible(question, "title"), "The title property is hidden for the image question");
-    assert.notOk(isPropertyVisible(question, "isRequired"), "The isRequired property is hidden for the image question");
+    assert.deepEqual(
+      menuItems.filter(
+        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
+      ),
+      [],
+      "No 'showtitle' or 'isrequired' in the menu items"
+    );
+    assert.notOk(
+      isPropertyVisible(question, "title"),
+      "The title property is hidden for the image question"
+    );
+    assert.notOk(
+      isPropertyVisible(question, "isRequired"),
+      "The isRequired property is hidden for the image question"
+    );
 
     const questionText = new Survey.QuestionText("qt");
     menuItems = creator.survey.getMenuItems(questionText);
-    assert.equal(menuItems.filter(i => ["showtitle", "isrequired"].indexOf(i.name) !== -1).length, 2, "The 'showtitle' or 'isrequired' are in the menu items");
+    assert.equal(
+      menuItems.filter(
+        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
+      ).length,
+      2,
+      "The 'showtitle' or 'isrequired' are in the menu items"
+    );
   }
 );

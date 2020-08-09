@@ -33,7 +33,7 @@ import { Commands } from "./commands";
 
 import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
-import { isPropertyVisible } from './utils/utils';
+import { isPropertyVisible } from "./utils/utils";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -2898,7 +2898,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (objType == ObjType.Page) {
       this.survey.removePage(obj);
     } else {
-      this.deleteElementFromCurrentPage(obj, objType);
+      this.deletePanelOrQuestion(obj, objType);
     }
     this.setModified({
       type: "OBJECT_DELETED",
@@ -2908,17 +2908,15 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.updateConditionsOnRemove(obj.getValueName());
     }
   }
-  private deleteElementFromCurrentPage(obj: Element, objType: ObjType): void {
-    const page = this.survey.currentPage;
-    let newSelectedElement = page;
-    if (objType == ObjType.Question && page.questions.length > 1) {
-      const objIndex = page.indexOf(obj);
-      newSelectedElement =
-        page.questions[objIndex + 1] || page.questions[objIndex - 1];
+  private deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
+    var parent = obj["parent"];
+    var elements = parent.elements;
+    var objIndex = elements.indexOf(obj);
+    if (objIndex == elements.length - 1) {
+      objIndex--;
     }
-    this.survey.currentPage.removeElement(obj);
-    this.survey.selectedElement = null;
-    this.selectedElement = newSelectedElement;
+    obj["delete"]();
+    this.selectedElement = objIndex > -1 ? elements[objIndex] : parent;
   }
   public getSurveyJSON(): any {
     if (this.koViewType() != "editor") {
