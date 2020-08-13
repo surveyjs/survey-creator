@@ -12,6 +12,9 @@ export class PropertyEditorStringViewModel {
     public defaultValue: any,
     public koMaxLength: any,
     public displayName: string,
+    public koDisplayError: any,
+    public getLocString: any,
+    public koErrorText: any,
     public onKeydown: any,
     public afterRender: () => void
   ) {
@@ -31,6 +34,9 @@ ko.components.register("svd-property-editor-string", {
         model.defaultValue,
         model.koMaxLength,
         model.displayName,
+        model.koDisplayError,
+        model.getLocString,
+        model.koErrorText,
         model.onInputKeydown,
         () => {
           typeof params.afterRender === "function" &&
