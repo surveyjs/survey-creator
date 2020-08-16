@@ -329,9 +329,9 @@ QUnit.test("SurveyQuestionPropertyEditor - choices", function (assert) {
     "question",
     "Question editor should be created"
   );
-  assert.equal(editor.koChoices().length, 4, "There are 3 items");
-  assert.equal(editor.koChoices()[1].value, "question1", "The first value");
-  assert.equal(editor.koChoices()[1].text, "question1", "The first text");
+  assert.equal(editor.koChoices().length, 3, "There are 3 items");
+  assert.equal(editor.koChoices()[0].value, "question1", "The first value");
+  assert.equal(editor.koChoices()[0].text, "question1", "The first text");
   Survey.Serializer.removeProperty("survey", "question_test");
 });
 QUnit.test("SurveyQuestionValuePropertyEditor - choices", function (assert) {
@@ -353,11 +353,11 @@ QUnit.test("SurveyQuestionValuePropertyEditor - choices", function (assert) {
     "questionvalue",
     "Question editor should be created"
   );
-  assert.equal(editor.koChoices().length, 4, "There are 3 items");
-  assert.equal(editor.koChoices()[1].value, "value1", "The first value");
-  assert.equal(editor.koChoices()[1].text, "question1", "The first text");
-  assert.equal(editor.koChoices()[2].value, "question2", "The second value");
-  assert.equal(editor.koChoices()[2].text, "question2", "The second text");
+  assert.equal(editor.koChoices().length, 3, "There are 3 items");
+  assert.equal(editor.koChoices()[0].value, "value1", "The first value");
+  assert.equal(editor.koChoices()[0].text, "question1", "The first text");
+  assert.equal(editor.koChoices()[1].value, "question2", "The second value");
+  assert.equal(editor.koChoices()[1].text, "question2", "The second text");
   Survey.Serializer.removeProperty("survey", "question_test");
 });
 QUnit.test("SurveyPropertyItemValue", function (assert) {

@@ -261,9 +261,7 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
     qItems.sort((el1, el2) => {
       return el1.text.localeCompare(el2.text);
     });
-    if (!this.property.isRequired) {
-      qItems.unshift(opt);
-    }
+
     return qItems;
   }
   protected getItemValue(question: Survey.IQuestion): string {
