@@ -837,6 +837,7 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
     op: Survey.BinaryOperand,
     opType: string
   ): Survey.Operand {
+    if (!op.rightOperand) return null;
     if (
       op.leftOperand.getType() !== opType &&
       op.rightOperand.getType() !== opType
