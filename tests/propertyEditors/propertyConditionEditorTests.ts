@@ -1824,3 +1824,34 @@ QUnit.test(
     );
   }
 );
+QUnit.test(
+  "SurveyPropertyConditionEditor, onConditionQuestionsGetListCallback",
+  function (assert) {
+    var survey = new Survey.Survey({
+      elements: [{ name: "q1", type: "text" }],
+    });
+    var survey2 = new Survey.Survey({
+      elements: [
+        { name: "question1", type: "dropdown", choices: ["item1", "item2"] },
+      ],
+    });
+    var question = survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    var options = new EditorOptionsTests();
+    options.additionalConditionQuestions = [survey2.getAllQuestions()[0]];
+    editor.options = options;
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    assert.ok(editorItem, "Editor item is created");
+    editorItem.questionName = "question1";
+    var questionValue = editorItem.valueQuestion;
+    assert.equal(
+      questionValue.getType(),
+      "dropdown",
+      "It is dropdown, get question from another survey"
+    );
+  }
+);

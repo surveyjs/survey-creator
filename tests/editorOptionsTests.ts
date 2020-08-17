@@ -5,6 +5,7 @@ import {
 } from "../src/propertyEditors/propertyEditorBase";
 
 export class EditorOptionsTests implements ISurveyObjectEditorOptions {
+  additionalConditionQuestions: Array<any>;
   doValueChangingCallback: (options: any) => any;
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
@@ -128,7 +129,12 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     list: any[]
-  ) {}
+  ) {
+    if (!this.additionalConditionQuestions) return;
+    for (var i = 0; i < this.additionalConditionQuestions.length; i++) {
+      list.push(this.additionalConditionQuestions[i]);
+    }
+  }
   startUndoRedoTransaction() {}
   stopUndoRedoTransaction() {}
   public createSurvey(

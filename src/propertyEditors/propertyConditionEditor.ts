@@ -509,7 +509,15 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
   }
   public get availableQuestions(): any[] {
     var survey = this.getSurvey();
-    return !!survey ? survey.getAllQuestions() : [];
+    var result = !!survey ? survey.getAllQuestions() : [];
+    !!this.options &&
+      this.options.onConditionQuestionsGetListCallback(
+        this.editablePropertyName,
+        this.object,
+        this,
+        result
+      );
+    return result;
   }
   protected getSurvey = (): Survey.SurveyModel => {
     return EditableObject.getSurvey(this.object);
@@ -559,13 +567,6 @@ export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
       }
     }
     this.addCalculatedValues(res);
-    !!this.options &&
-      this.options.onConditionQuestionsGetListCallback(
-        this.editablePropertyName,
-        this.object,
-        this,
-        res
-      );
     return res;
   }
   public isClassContains(

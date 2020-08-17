@@ -613,7 +613,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * Use this event to modify the list (name and titles) od the questions available in a condition editor.
+   * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
    * <br/> options.propertyName  the name of the edited property.
@@ -3185,9 +3185,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       context: context,
     };
     this.onAdornerRendered.fire(this, options);
-  }
-  getAvailableQuestionsForCondition(questions: Array<any>) {
-    //TODO
   }
   /**
    * Upload the files on a server
