@@ -385,6 +385,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The event is called on generation a new name for a new created element.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.element a new created survey element. It can be question, panel or page
+   * <br/> options.name a new suggested name, that is unique for the current survey. You can suggest your own name. If it is unique, creator will assign it to the element.
+   * <br/> options.isUnique a boolean property, set this property to false, if you want to ask Creator to generate another name
+   */
+  public onGenerateNewName: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * The event is called when an end-user double click on an element (question/panel).
    * <br/> sender the survey creator object that fires the event
    * <br/> options.element an instance of the element
@@ -1836,6 +1847,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private doOnQuestionAdded(question: Survey.Question, parentPanel: any) {
     if (!this.dragDropHelper.isMoving) {
+      question.name = this.generateUniqueName(question, question.name);
       var page = this.getPageByElement(question);
       var options = { question: question, page: page };
       this.onQuestionAdded.fire(this, options);
@@ -2640,10 +2652,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     }
   }
   private generateUniqueName(el: Survey.Base, newName: string): string {
-    while (!this.isNameUnique(el, newName)) {
-      newName = SurveyHelper.generateNewName(newName);
-    }
-    return newName;
+    var options = { element: el, name: newName, isUnique: true };
+    do {
+      if (!options.isUnique) {
+        options.name = SurveyHelper.generateNewName(options.name);
+      }
+      while (!this.isNameUnique(el, options.name)) {
+        options.name = SurveyHelper.generateNewName(options.name);
+      }
+      options.isUnique = true;
+      var oldName = options.name;
+      this.onGenerateNewName.fire(this, options);
+      if (oldName != options.name) {
+        options.isUnique = this.isNameUnique(el, options.name);
+      }
+    } while (!options.isUnique);
+    return options.name;
   }
   private isNameUnique(el: Survey.Base, newName: string): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
@@ -3161,6 +3185,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       context: context,
     };
     this.onAdornerRendered.fire(this, options);
+  }
+  getAvailableQuestionsForCondition(questions: Array<any>) {
+    //TODO
   }
   /**
    * Upload the files on a server

@@ -1535,3 +1535,67 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test(
+  "addQuestion into the QuestionPanelDynamic into second page",
+  function (assert) {
+    var editor = new SurveyCreator();
+    var survey = editor.survey;
+    survey.addNewPage("p1");
+    var page = survey.addNewPage("p2");
+    var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
+    var newQuestion = pnlQuestion["template"].addNewQuestion(
+      "text",
+      "question1"
+    );
+    //TODO rebuld items
+    editor["surveyObjects"].survey = null;
+    editor["surveyObjects"].survey = survey;
+    survey.selectedElement = newQuestion;
+    assert.equal(
+      editor.survey.selectedElement.name,
+      newQuestion.name,
+      "The embedded question is selected"
+    );
+    assert.equal(
+      editor.survey.currentPage.name,
+      "p2",
+      "The second page is selected"
+    );
+  }
+);
+QUnit.test("generate element name based on another survey", function (assert) {
+  var creator = new SurveyCreator();
+  creator.onGenerateNewName.add(function (sender, options) {
+    if (options.name == "question3") {
+      options.isUnique = false;
+    }
+    if (options.name == "question5") {
+      options.name = "question9";
+    }
+  });
+  var survey = creator.survey;
+  var page = survey.addNewPage("p1");
+  page.addNewQuestion("text");
+  assert.equal(page.questions[0].name, "question1", "Generate question1 name");
+  page.addNewQuestion("text");
+  assert.equal(page.questions[1].name, "question2", "Generate question2 name");
+  page.addNewQuestion("text");
+  assert.equal(
+    page.questions[2].name,
+    "question4",
+    "Generate question4 name, question3 is used already"
+  );
+  page.addNewQuestion("text");
+  assert.equal(
+    page.questions[3].name,
+    "question9",
+    "Generate question9 name, suggest by setting the name"
+  );
+  page.addNewQuestion("text");
+  assert.equal(
+    page.questions[4].name,
+    "question10",
+    "Generate question10 name, next after question10"
+  );
+});
