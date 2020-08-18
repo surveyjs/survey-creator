@@ -22,7 +22,9 @@
                       id="scrollableDiv"
                       data-bind="event: { dragover: dragOverQuestionsEditor, drop: dropOnQuestionsEditor }"
                     >
-                      <div class="svd_surveyjs_designer_container"></div>
+                      <div class="svd_surveyjs_designer_container">
+                        <survey-widget params="survey: survey"></survey-widget>
+                      </div>
                     </div>
                   </div>
                 </div>
