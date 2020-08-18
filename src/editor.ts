@@ -2304,7 +2304,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.updateKoCanUndoRedo();
     this.dragDropHelper = new DragDropHelper(
-      <Survey.ISurvey>this.survey,
+      <Survey.ISurvey>newSurvey,
       function (options) {
         self.setModified(options);
       },
