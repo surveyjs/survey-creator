@@ -202,6 +202,7 @@ export class ConditionEditorItem {
       newQuestion.title = this.getLocString("pe.conditionValueQuestionTitle");
       newQuestion.description = "";
       newQuestion.titleLocation = "default";
+      newQuestion.hasComment = false;
       if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
         newQuestion.titleLocation = "hidden";
         newQuestion.startWithNewLine = false;
