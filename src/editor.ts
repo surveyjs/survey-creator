@@ -807,7 +807,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koReadOnly();
   }
   public set readOnly(newVal) {
+    const text = this.text;
     this.koReadOnly(newVal);
+    this.render(null, this.options);
+    this.text = text;
   }
   public koCanUndo: any;
   public koCanRedo: any;
