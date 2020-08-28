@@ -4,6 +4,7 @@ import { SurveyCreator } from "../editor";
 import { Survey } from "survey-knockout";
 
 export var titleImageAdorner = {
+  ignoreHiddenLogoProperty: false,
   getMarkerClass: (model) => {
     return typeof model.getType === "function" && model.getType() === "survey"
       ? "image_editable"
@@ -18,7 +19,9 @@ export var titleImageAdorner = {
     if (editor.readOnly) {
       return;
     }
-    var allowImageChooser = editor.canShowObjectProperty(model, "logo");
+    var allowImageChooser =
+      titleImageAdorner.ignoreHiddenLogoProperty ||
+      editor.canShowObjectProperty(model, "logo");
     if (allowImageChooser) {
       var itemsRoot = elements[0];
       var input = document.createElement("input");
