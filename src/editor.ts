@@ -707,10 +707,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is fired on uploading the file. There are two properties in options: options.name options.callback.
+   * The event is fired on clearing the files.
    * <br/> sender the survey creator object that fires the event
-   * <br/>  name: name, file: file, accept: accept
-   * <br/> file the Javascript File object
+   * <br/> There are following properties in options:
+   * <br/> files - value to clear (it can be a byte array or an URI of a resource)
+   * <br/> callback - called on clear complete
+   * @see clearFiles
+   */
+  public onClearFile: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is fired on uploading the files.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> There are two properties in options:
+   * <br/> files the Javascript File objects array
    * <br/> callback called on upload complete
    * @see uploadFile
    */
@@ -3183,6 +3195,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       context: context,
     };
     this.onAdornerRendered.fire(this, options);
+  }
+  /**
+   * Clear the files on a server
+   * @param files files data (byte array or URI) to clear
+   * @param clearCallback a call back function to get the status on removed the files
+   */
+  public clearFiles(
+    files: any[],
+    clearCallback: (status: string, data: any) => any
+  ) {
+    if (this.onClearFile.isEmpty) {
+      clearCallback("success", null);
+    } else {
+      this.onClearFile.fire(this, {
+        files: files || [],
+        callback: clearCallback,
+      });
+    }
   }
   /**
    * Upload the files on a server

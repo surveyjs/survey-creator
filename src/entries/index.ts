@@ -185,3 +185,5 @@ export { PropertyEditorNestedItemsViewModel } from "../property-editors/nested-i
 export { PropertyEditorNestedItemViewModel } from "../property-editors/nested-item";
 export { PropertyEditorNestedViewModel } from "../property-editors/nested";
 export { PropertyEditorCustomViewModel } from "../property-editors/custom";
+
+export { SurveyFilePropertyEditor } from "../property-editors/file";

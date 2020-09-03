@@ -1,0 +1,25 @@
+<div class="form-control svd-control svd-focusable svd-property-editor-file">
+  <!-- ko ifnot: readOnly -->
+  <input type="file" class="svd-choose-file-control" />
+  <span
+    class="edit-image-item"
+    data-bind="click: chooseFile, clickBubble: false, attr: { title: getLocString('pe.edit') }"
+  >
+    <svg-icon
+      class="svd-primary-icon"
+      params="iconName: 'icon-inplaceedit', size: 12"
+    ></svg-icon>
+  </span>
+  <span
+    class="svda-delete-item"
+    data-bind="click: deleteFile, attr: { title: getLocString('pe.delete') }, visible: koValue"
+  >
+    <svg-icon
+      class="svd-primary-icon"
+      params="iconName: 'icon-inplacedelete', size: 12"
+    ></svg-icon>
+  </span>
+  <!-- /ko -->
+  <span class="svd-property-editor-file-content" data-bind="text: fileContent">
+  </span>
+</div>
