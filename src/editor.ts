@@ -740,6 +740,19 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * The method is called on after render translation item. You can modify the html element using this event
+   * <br/> options.item - translation item
+   * <br/> options.htmlElement - text area for editing
+   * <br/> options.locale - the name of the editing locale
+   * <br/> options.onDestroyCallback - a function callback that is called on remove htmlElement from DOM.
+   * @see translation
+   * @see showTranslationTab
+   */
+  public onTranslateItemAfterRender: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
    * Use this event to control drag&drop operations.
    * <br/> sender the survey creator object that fires the event.
    * <br/> options.survey the editing survey object.

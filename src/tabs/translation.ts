@@ -21,6 +21,7 @@ export class TranslationItemBase {
 export class TranslationItem extends TranslationItemBase {
   private values: Survey.HashTable<ko.Observable<string>>;
   public customText: string;
+  public afterRender: any;
   constructor(
     public name: string,
     public locString: Survey.LocalizableString,
@@ -30,6 +31,12 @@ export class TranslationItem extends TranslationItemBase {
   ) {
     super(name);
     this.values = {};
+    var self = this;
+    this.afterRender = function (el: any, data: any) {
+      if (!!self.translation) {
+        self.translation.translateItemAfterRender(self, el, data.locale);
+      }
+    };
   }
   public get text() {
     return !!this.customText ? this.customText : this.localizableName;
@@ -37,20 +44,25 @@ export class TranslationItem extends TranslationItemBase {
   public get localizableName(): string {
     return editorLocalization.getPropertyName(this.name);
   }
-
+  public getLocText(loc: string): string {
+    return this.locString.getLocaleText(loc);
+  }
+  public setLocText(loc: string, newValue: string) {
+    this.locString.setLocaleText(loc, newValue);
+    !!this.translation.tranlationChangedCallback &&
+      this.translation.tranlationChangedCallback(
+        loc,
+        this.name,
+        newValue,
+        this.context
+      );
+  }
   public koValue(loc: string): ko.Observable<string> {
     if (!this.values[loc]) {
-      var val = ko.observable(this.locString.getLocaleText(loc));
+      var val = ko.observable(this.getLocText(loc));
       var self = this;
       val.subscribe((newValue) => {
-        self.locString.setLocaleText(loc, newValue);
-        !!self.translation.tranlationChangedCallback &&
-          self.translation.tranlationChangedCallback(
-            loc,
-            self.name,
-            newValue,
-            self.context
-          );
+        self.setLocText(loc, newValue);
       });
       this.values[loc] = val;
     }
@@ -89,6 +101,7 @@ export interface ITranslationLocales {
     value: string,
     context: any
   ) => void;
+  translateItemAfterRender(item: TranslationItem, el: any, locale: string);
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -174,7 +187,6 @@ export class TranslationGroup extends TranslationItemBase {
   public mergeLocaleWithDefault(loc: string) {
     this.itemValues.forEach((item) => item.mergeLocaleWithDefault(loc));
   }
-
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValues();
@@ -360,6 +372,11 @@ export class Translation implements ITranslationLocales {
   public koMergeLocaleWithDefault: any;
   public koMergeLocaleWithDefaultText: any;
   public importFinishedCallback: () => void;
+  public translateItemAfterRenderCallback: (
+    item: TranslationItem,
+    el: any,
+    locale: string
+  ) => void;
   public availableTranlationsChangedCallback: () => void;
   public tranlationChangedCallback: (
     locale: string,
@@ -661,7 +678,18 @@ export class Translation implements ITranslationLocales {
     ]);
     this.reset();
   }
-
+  translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
+    if (!this.translateItemAfterRenderCallback) return;
+    if (Array.isArray(el)) {
+      for (var i = 0; i < el.length; i++) {
+        if (el[i].tagName == "TEXTAREA") {
+          el = el[i];
+          break;
+        }
+      }
+    }
+    this.translateItemAfterRenderCallback(item, el, locale);
+  }
   /**
    * Update a translation item with given values
    */
@@ -755,6 +783,25 @@ ko.components.register("survey-translation", {
       let model = new Translation(creator.createSurvey({}, "translation"));
       model.importFinishedCallback = function () {
         creator.onTranslationImported.fire(self, {});
+      };
+      model.translateItemAfterRenderCallback = function (
+        item: TranslationItem,
+        el: any,
+        locale: string
+      ) {
+        if (creator.onTranslateItemAfterRender.isEmpty) return;
+        var options = {
+          item: item,
+          htmlElement: el,
+          locale: locale,
+          onDestroyCallback: undefined,
+        };
+        ko.utils.domNodeDisposal.addDisposeCallback(el, () => {
+          if (!!options.onDestroyCallback) {
+            options.onDestroyCallback();
+          }
+        });
+        creator.onTranslateItemAfterRender.fire(creator, options);
       };
       model.availableTranlationsChangedCallback = () => {
         creator.setModified({ type: "TRANSLATIONS_CHANGED" });
