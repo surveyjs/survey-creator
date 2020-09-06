@@ -712,8 +712,11 @@
 }
 
 .sv_select_wrapper:before {
-  z-index: 1;
   bottom: 2px;
+}
+
+.svd_surveyjs_designer_container .sv_select_wrapper:before {
+  height: 2em;
 }
 
 @import "./modern.scss";

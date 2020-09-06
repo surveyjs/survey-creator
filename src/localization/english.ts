@@ -459,6 +459,8 @@ export var enStrings = {
     triggerGotoName: "Go to the question:",
     triggerIsVariable: "Do not put the variable into the survey result.",
     triggerRunExpressionEmpty: "Please enter a valid expression",
+
+    noFile: "No file choosen",
   },
   //Property values
   pv: {

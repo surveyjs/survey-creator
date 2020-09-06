@@ -1,5 +1,5 @@
 {
-  "version": "1.7.26",
+  "version": "1.8.0",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -68,7 +68,7 @@
     "standard-version": "^8.0.1",
     "style-loader": "^1.2.1",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
-    "testcafe": "^1.8.8",
+    "testcafe": "1.9.1",
     "ts-loader": "^7.0.5",
     "ts-node": "3.3.0",
     "typescript": "3.6.2",

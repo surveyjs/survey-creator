@@ -1,0 +1,23 @@
+.svd-property-editor-file {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  .svda-delete-item {
+    visibility: initial;
+  }
+}
+
+.svd-choose-file-control {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.svd-property-editor-file-content {
+  color: lightgray;
+  padding-left: 20px;
+}

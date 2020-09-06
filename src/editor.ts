@@ -45,7 +45,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private _haveCommercialLicense = ko.observable(false);
   private renderedElement: HTMLElement;
-  private surveyjs: HTMLElement;
 
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
@@ -708,10 +707,22 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is fired on uploading the file. There are two properties in options: options.name options.callback.
+   * The event is fired on clearing the files.
    * <br/> sender the survey creator object that fires the event
-   * <br/>  name: name, file: file, accept: accept
-   * <br/> file the Javascript File object
+   * <br/> There are following properties in options:
+   * <br/> files - value to clear (it can be a byte array or an URI of a resource)
+   * <br/> callback - called on clear complete
+   * @see clearFiles
+   */
+  public onClearFile: Survey.Event<
+    (sender: SurveyCreator, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  /**
+   * The event is fired on uploading the files.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> There are two properties in options:
+   * <br/> files the Javascript File objects array
    * <br/> callback called on upload complete
    * @see uploadFile
    */
@@ -821,7 +832,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     return this.koReadOnly();
   }
   public set readOnly(newVal) {
+    const text = this.text;
     this.koReadOnly(newVal);
+    this.render(null, this.options);
+    this.text = text;
   }
   public koCanUndo: any;
   public koCanRedo: any;
@@ -2136,13 +2150,17 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (this.renderedElement == null) return;
     var self = this;
     ko.cleanNode(this.renderedElement);
-    ko.applyBindings(this, this.renderedElement);
+    ko.applyBindings(
+      this,
+      this.renderedElement,
+      (context: any) => (context.$creator = this)
+    );
     ko.tasks.runEarly();
-    this.surveyjs = <HTMLElement>(
+    var surveyjs = <HTMLElement>(
       this.renderedElement.querySelector(".svd_surveyjs_designer_container")
     );
-    if (this.surveyjs) {
-      this.surveyjs.onkeydown = function (e) {
+    if (surveyjs) {
+      surveyjs.onkeydown = function (e) {
         if (self.readOnly) return;
         if (!e) return;
         // if (e.keyCode == 46) self.deleteQuestion();
@@ -2264,9 +2282,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     var newSurvey = <SurveyForDesigner>(
       this.createSurvey({}, "designer", SurveyForDesigner)
     );
-    this.surveyValue(newSurvey);
     this.undoRedoManager = new UndoRedoManager();
-    this.surveyValue().getEditor = () => self;
+    newSurvey.getEditor = () => self;
     ko.computed(() => {
       var optionValue = this.showSurveyTitle;
       var showValue = optionValue !== "never";
@@ -2282,9 +2299,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     ko.computed(() => {
       newSurvey.isReadOnly(this.readOnly);
     });
-    this.surveyValue().emptyPageTemplate = "se-empty-placeholder";
-    this.surveyValue().emptyPageTemplateData = this;
-    this.surveyValue().onPropertyValueChangedCallback = (
+    newSurvey.emptyPageTemplate = "se-empty-placeholder";
+    newSurvey.emptyPageTemplateData = this;
+    newSurvey.onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
       newValue: any,
@@ -2315,7 +2332,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     };
     this.updateKoCanUndoRedo();
     this.dragDropHelper = new DragDropHelper(
-      <Survey.ISurvey>this.survey,
+      <Survey.ISurvey>newSurvey,
       function (options) {
         self.setModified(options);
       },
@@ -2323,31 +2340,28 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.undoRedoManager
     );
     this.dragDropHelper.readOnly = this.readOnly;
-    this.surveyValue().setJsonObject(json);
-    if (this.surveyValue().isEmpty) {
-      this.surveyValue().setJsonObject(this.getDefaultSurveyJson());
+    newSurvey.setJsonObject(json);
+    if (newSurvey.isEmpty) {
+      newSurvey.setJsonObject(this.getDefaultSurveyJson());
     }
-    Survey.surveyLocalization.currentLocale = this.surveyValue()["locale"];
-    this.surveyValue().dragDropHelper = this.dragDropHelper;
-    this.surveyValue().onUpdateElementAllowingOptions = function (options) {
+    Survey.surveyLocalization.currentLocale = newSurvey["locale"];
+    newSurvey.dragDropHelper = this.dragDropHelper;
+    newSurvey.onUpdateElementAllowingOptions = function (options) {
       self.onElementAllowOperations.fire(self, options);
     };
-    var afterRenderElementHandler = createAfterRenderHandler(
-      this,
-      this.surveyValue()
-    );
+    var afterRenderElementHandler = createAfterRenderHandler(this, newSurvey);
     var afterRenderElementPageHandler = createAfterRenderPageHandler(
       this,
-      this.surveyValue()
+      newSurvey
     );
     var afterRenderHeaderHandler = createAfterRenderHeaderHandler(
       this,
-      this.surveyValue()
+      newSurvey
     );
-    this.surveyValue().onAfterRenderPage.add((sender, options) => {
+    newSurvey.onAfterRenderPage.add((sender, options) => {
       afterRenderElementPageHandler(options.htmlElement, options.page);
     });
-    this.surveyValue().onAfterRenderQuestion.add((sender, options) => {
+    newSurvey.onAfterRenderQuestion.add((sender, options) => {
       afterRenderElementHandler(
         options.htmlElement,
         options.question,
@@ -2355,7 +2369,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         true
       );
     });
-    this.surveyValue().onAfterRenderPanel.add((sender, options) => {
+    newSurvey.onAfterRenderPanel.add((sender, options) => {
       if (options.panel.getType() === "flowpanel") {
         afterRenderElementHandler(
           options.htmlElement,
@@ -2374,7 +2388,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       } else {
         if (options.panel.elements.length == 0) {
           options.panel.emptyElement = addEmptyPanelElement(
-            this.surveyValue(),
+            newSurvey,
             options.htmlElement,
             options.panel.dragDropHelper(),
             options.panel
@@ -2388,14 +2402,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         );
       }
     });
-    this.surveyValue().onAfterRenderHeader.add((sender, options) => {
+    newSurvey.onAfterRenderHeader.add((sender, options) => {
       afterRenderHeaderHandler(options.htmlElement, sender);
     });
-    this.surveyValue().onDragDropAllow.add(function (sender, options) {
+    newSurvey.onDragDropAllow.add(function (sender, options) {
       options.survey = sender;
       self.onDragDropAllow.fire(self, options);
     });
-    this.surveyValue().onGetMenuItems.add((sender, options) => {
+    newSurvey.onGetMenuItems.add((sender, options) => {
       if (this.readOnly) {
         return;
       }
@@ -2561,47 +2575,43 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       self.onDefineElementMenuItems.fire(self, options);
     });
 
-    this.onDesignerSurveyCreated.fire(this, { survey: this.surveyValue() });
-    this.survey.render(this.surveyjs);
-    this.surveyObjects.survey = this.survey;
-    this.selectedElement = this.surveyValue();
-    this.surveyValue().onSelectedElementChanged.add(
-      (sender: Survey.Survey, options) => {
-        if (self.disableSurveySelectedElementChanging) return;
-        self.selectedElement = sender["selectedElement"];
-      }
-    );
-    this.surveyValue().onEditButtonClick.add((sender: Survey.Survey) => {
+    this.onDesignerSurveyCreated.fire(this, { survey: newSurvey });
+    // this.survey.render(this.surveyjs);
+    newSurvey.onSelectedElementChanged.add((sender: Survey.Survey, options) => {
+      if (self.disableSurveySelectedElementChanging) return;
+      self.selectedElement = sender["selectedElement"];
+    });
+    newSurvey.onEditButtonClick.add((sender: Survey.Survey) => {
       self.showQuestionEditor(self.selectedElement);
     });
-    this.surveyValue().onElementDoubleClick.add(
-      (sender: Survey.Survey, options) => {
-        self.onElementDoubleClick.fire(self, options);
-      }
-    );
-    this.surveyValue().onProcessHtml.add((sender: Survey.Survey, options) => {
+    newSurvey.onElementDoubleClick.add((sender: Survey.Survey, options) => {
+      self.onElementDoubleClick.fire(self, options);
+    });
+    newSurvey.onProcessHtml.add((sender: Survey.Survey, options) => {
       options.html = self.processHtml(options.html);
     });
-    this.surveyValue().onQuestionAdded.add((sender: Survey.Survey, options) => {
+    newSurvey.onQuestionAdded.add((sender: Survey.Survey, options) => {
       self.doOnQuestionAdded(options.question, options.parentPanel);
     });
-    this.surveyValue().onQuestionRemoved.add(
-      (sender: Survey.Survey, options) => {
-        self.doOnElementRemoved(options.question);
-      }
-    );
-    this.surveyValue().onPanelAdded.add((sender: Survey.Survey, options) => {
+    newSurvey.onQuestionRemoved.add((sender: Survey.Survey, options) => {
+      self.doOnElementRemoved(options.question);
+    });
+    newSurvey.onPanelAdded.add((sender: Survey.Survey, options) => {
       self.doOnPanelAdded(options.panel, options.parentPanel);
     });
-    this.surveyValue().onPanelRemoved.add((sender: Survey.Survey, options) => {
+    newSurvey.onPanelRemoved.add((sender: Survey.Survey, options) => {
       self.doOnElementRemoved(options.panel);
     });
-    this.surveyValue().onPageAdded.add((sender: Survey.Survey, options) => {
+    newSurvey.onPageAdded.add((sender: Survey.Survey, options) => {
       if (self.surveyObjects.hasObject(options.page)) return;
       self.doOnPageAdded(options.page);
       self.addPageToUI(options.page);
       self.setModified({ type: "PAGE_ADDED", newValue: options.page });
     });
+
+    this.surveyValue(newSurvey);
+    this.surveyObjects.survey = newSurvey;
+    this.selectedElement = newSurvey;
   }
   private processHtml(html: string): string {
     if (!html) return html;
@@ -3198,6 +3208,24 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       context: context,
     };
     this.onAdornerRendered.fire(this, options);
+  }
+  /**
+   * Clear the files on a server
+   * @param files files data (byte array or URI) to clear
+   * @param clearCallback a call back function to get the status on removed the files
+   */
+  public clearFiles(
+    files: any[],
+    clearCallback: (status: string, data: any) => any
+  ) {
+    if (this.onClearFile.isEmpty) {
+      clearCallback("success", null);
+    } else {
+      this.onClearFile.fire(this, {
+        files: files || [],
+        callback: clearCallback,
+      });
+    }
   }
   /**
    * Upload the files on a server

@@ -19,10 +19,10 @@
           </div>
           <!-- /ko  -->
           <!-- ko if: tabs().length > 1 -->
-          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color">
+          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color" role="tablist">
             <!-- ko foreach: tabs -->
-            <li class="nav-item svd-tab" data-bind="css: {active: $parent.koViewType() == name}">
-              <a class="nav-link svd-tab-text" href="#" data-bind="click: action, text: title"></a>
+            <li class="nav-item svd-tab" data-bind="css: { active: $parent.koViewType() == name }">
+              <a class="nav-link svd-tab-text" href="#" data-bind="click: action, text: title, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }" role="tab"></a>
             </li>
             <!-- /ko -->
           </ul>
@@ -36,7 +36,7 @@
           <div class="svd-vertical-container__cell-content">
             <div class="panel card svd_content svd-dark-bg-color">
               <!-- ko foreach: tabs -->
-              <div data-bind="visible: $parent.koViewType() == name">
+              <div data-bind="visible: $parent.koViewType() == name" tabindex="0" role="tabpanel">
                 <!-- ko template: { name: template, data: data, afterRender: function(element, model) { $parent.onEditorTabRenderedCallback(name, element, model, $data); } } -->
                 <!-- /ko -->
               </div>
