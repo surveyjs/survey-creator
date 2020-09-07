@@ -68,7 +68,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private showTranslationTabValue = ko.observable<boolean>(false);
   private showLogicTabValue = ko.observable<boolean>(false);
   private hideExpressionHeaderValue = ko.observable<boolean>(false);
-  private select2: any = null;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private showApplyButtonValue: boolean = true;
   private isRTLValue: boolean = false;
@@ -2132,18 +2131,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.disableSurveySelectedElementChanging = false;
     }
     this.koCanDeleteObject(canDeleteObject);
-    //Select2 work-around
-    if (this.renderedElement && this.select2) {
-      var el = <HTMLElement>(
-        this.renderedElement.querySelector("#select2-objectSelector-container")
-      ); //TODO
-      if (el) {
-        var item = this.surveyObjects.koSelected();
-        if (item && item.text) {
-          el.innerText = item.text();
-        }
-      }
-    }
     this.onSelectedElementChanged.fire(this, options);
   }
   private applyBinding() {
@@ -2178,20 +2165,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.initSurvey(this.getDefaultSurveyJson());
 
     this.setUndoRedoCurrentState(true);
-
-    if (typeof jQuery !== "undefined" && jQuery()["select2"]) {
-      var options: any = {
-        width: "100%",
-      };
-      if (this.isRTLValue) {
-        options.dir = "rtl";
-      }
-      var $objectSelector = jQuery("#objectSelector");
-      this.select2 = $objectSelector["select2"](options);
-      $objectSelector.on("select2:select", (sel_evt: any) => {
-        this.koSelectedObject(sel_evt.target.value);
-      });
-    }
   }
   private getDefaultSurveyJson(): any {
     var json = new SurveyJSON5().parse(SurveyCreator.defaultNewSurveyText);
@@ -3386,3 +3359,4 @@ function addEmptyPanelElement(
   root.appendChild(eDiv);
   return eDiv;
 }
+
