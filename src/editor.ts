@@ -1856,11 +1856,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }
-  public movePage = (indexFrom: number, indexTo: number) => {
-    var page = <Survey.Page>this.survey.pages[indexTo];
-    this.surveyObjects.survey = null; // TODO may be we don't need this hack
-    this.surveyObjects.survey = this.survey;
-    this.selectedElement = page;
+  public movePage = (page: Survey.PageModel, indexFrom: number) => {
+    var indexTo = this.survey.pages.indexOf(page);
     this.setModified({
       type: "PAGE_MOVED",
       page: page,
@@ -2895,7 +2892,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.survey.pages.push(newPage);
     }
     this.addPageToUI(newPage);
-    this.setModified({ type: "PAGE_ADDED", newValue: newPage });
     return newPage;
   };
   /**
