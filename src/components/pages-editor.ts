@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyHelper, editorLocalization } from '../entries';
+import { SurveyHelper, editorLocalization } from "../entries";
 import "./pages-editor.scss";
 import { PagesEditor } from "../pages-editor";
 import { StylesManager } from "../stylesmanager";
@@ -18,9 +18,7 @@ export class PagesEditorViewModel {
           ".svd-pages"
         );
         if (!!pagesElement) {
-          this.hasScroller(
-            pagesElement.scrollWidth > pagesElement.offsetWidth
-          );
+          this.hasScroller(pagesElement.scrollWidth > pagesElement.offsetWidth);
         }
       }, 100);
 
@@ -55,7 +53,7 @@ export class PagesEditorViewModel {
       pagesElement.offsetLeft -
       pagesElement.offsetWidth / 2;
     this.updateMenuPosition();
-  }
+  };
 
   onWheel(model, event) {
     var pagesElement = model.element.querySelector(".svd-pages");
@@ -86,7 +84,9 @@ export class PagesEditorViewModel {
 
   getPageClass = (page) => {
     var result =
-      page === this.model.selectedPage() ? "svd_selected_page svd-light-bg-color" : "";
+      page === this.model.selectedPage()
+        ? "svd_selected_page svd-light-bg-color"
+        : "";
 
     if (this.model.pages.indexOf(page) !== this.model.pages.length - 1) {
       result += " svd-border-right-none";
@@ -96,7 +96,8 @@ export class PagesEditorViewModel {
   };
 
   getPageMenuIconClass = (page) => {
-    var baseIconName = StylesManager.currentTheme() === "modern" ? "dots" : "gear";
+    var baseIconName =
+      StylesManager.currentTheme() === "modern" ? "dots" : "gear";
     return page === this.model.selectedPage() && this.model.isActive()
       ? "icon-" + baseIconName + "active"
       : "icon-" + baseIconName;
@@ -110,12 +111,14 @@ export class PagesEditorViewModel {
   };
 
   public movingPage = null;
+  private movedFrom: number = -1;
   get sortableOptions() {
     return {
       handle: ".svd-page-name",
       animation: 150,
       onStart: () => {
         this.movingPage = null;
+        this.movedFrom = -1;
         this.model.creator.undoRedoManager.startTransaction(
           "pages drag drop transaction"
         );
@@ -126,12 +129,17 @@ export class PagesEditorViewModel {
         this.model.blockPagesRebuilt(false);
         this.model.creator.undoRedoManager.stopTransaction();
         if (!!this.movingPage) {
-          this.model.selectedPage(this.movingPage);
+          this.model.movePage(this.movingPage, this.movedFrom);
         }
       },
       onUpdate: (evt, itemV) => {
         this.movingPage = itemV;
-        if (SurveyHelper.moveItemInArray(this.model.pages, itemV, evt.newIndex)) {
+        if (this.movedFrom < 0) {
+          this.movedFrom = this.model.pages.indexOf(this.movingPage);
+        }
+        if (
+          SurveyHelper.moveItemInArray(this.model.pages, itemV, evt.newIndex)
+        ) {
           // Remove sortables "unbound" element
           evt.item.parentNode.removeChild(evt.item);
         }

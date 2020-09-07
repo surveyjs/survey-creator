@@ -89,6 +89,11 @@ export class PagesEditor {
     this.creator.deletePage();
   };
 
+  movePage = (page: Survey.PageModel, indexFrom: number) => {
+    this.selectedPage(page);
+    this.creator.movePage(page, indexFrom);
+  };
+
   showPageSettings(page: Survey.PageModel) {
     this.creator.showQuestionEditor(page);
   }
