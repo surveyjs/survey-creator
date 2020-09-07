@@ -2919,7 +2919,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.survey.pages.push(newPage);
     }
     this.addPageToUI(newPage);
-    this.setModified({ type: "PAGE_ADDED", newValue: newPage });
     return newPage;
   };
   /**
