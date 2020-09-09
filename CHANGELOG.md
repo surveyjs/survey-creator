@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/surveyjs/survey-creator/compare/v1.8.0...v1.8.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* Fire PAGE_ADDED one time on copying page, [#943](https://github.com/surveyjs/survey-creator/issues/943) ([445b224](https://github.com/surveyjs/survey-creator/commit/445b2243d137a968868c718fd09a6816e607ce7a))
+* when page moved , the setModified of type "PAGE_MOVED" has not excute [#943](https://github.com/surveyjs/survey-creator/issues/943) ([972ecfd](https://github.com/surveyjs/survey-creator/commit/972ecfdb1a274ad18cabdd63ddfcfb71d311a286))
+
 ## [1.8.0](https://github.com/surveyjs/survey-creator/compare/v1.7.28...v1.8.0) (2020-09-02)
 
 ### [1.7.28](https://github.com/surveyjs/survey-creator/compare/v1.7.27...v1.7.28) (2020-08-25)
