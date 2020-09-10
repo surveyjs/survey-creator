@@ -1,28 +1,49 @@
-﻿<div tabindex="-1" class="svd_container svd-light-bg-color"
-  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : ''), style: { height: koDesignerHeight }">
+﻿<div
+  tabindex="-1"
+  class="svd_container svd-light-bg-color"
+  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : ''), style: { height: koDesignerHeight }"
+>
   <div class="svd-vertical-container">
     <div class="svd-vertical-container__row">
       <div class="svd-vertical-container__cell">
         <div>
           <!-- ko ifnot: haveCommercialLicense -->
           <div class="svd_commercial_container">
-            <a class="svd_commercial_text" href="https://www.surveyjs.io/Buy" target="_blank">
+            <a
+              class="svd_commercial_text"
+              href="https://www.surveyjs.io/Buy"
+              target="_blank"
+            >
               <span>
-                <svg-icon class="svd-primary-icon" params="iconName: 'icon-noncommercial', size: 20"></svg-icon>
+                <svg-icon
+                  class="svd-primary-icon"
+                  params="iconName: 'icon-noncommercial', size: 20"
+                ></svg-icon>
               </span>
-              <span class="svd_commercial_product svd-main-color">Please purchase a SurveyJS Creator developer license
-                to
-                use it in your
-                app.</span>
+              <span class="svd_commercial_product svd-main-color"
+                >Please purchase a SurveyJS Creator developer license to use it
+                in your app.</span
+              >
               <span class="svd_noncommercial_use svd-light-text-color"></span>
             </a>
           </div>
           <!-- /ko  -->
           <!-- ko if: tabs().length > 1 -->
-          <ul class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color" role="tablist">
+          <ul
+            class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color"
+            role="tablist"
+          >
             <!-- ko foreach: tabs -->
-            <li class="nav-item svd-tab" data-bind="css: { active: $parent.koViewType() == name }">
-              <a class="nav-link svd-tab-text" href="#" data-bind="click: action, text: title, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }" role="tab"></a>
+            <li
+              class="nav-item svd-tab"
+              data-bind="css: { active: $parent.koViewType() == name }"
+            >
+              <a
+                class="nav-link svd-tab-text"
+                href="#"
+                data-bind="click: action, text: title, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }"
+                role="tab"
+              ></a>
             </li>
             <!-- /ko -->
           </ul>
@@ -36,13 +57,20 @@
           <div class="svd-vertical-container__cell-content">
             <div class="panel card svd_content svd-dark-bg-color">
               <!-- ko foreach: tabs -->
-              <div data-bind="visible: $parent.koViewType() == name" tabindex="0" role="tabpanel">
+              <div
+                data-bind="visible: $parent.koViewType() == name"
+                tabindex="0"
+                role="tabpanel"
+                class="svd-no-outline"
+              >
                 <!-- ko template: { name: template, data: data, afterRender: function(element, model) { $parent.onEditorTabRenderedCallback(name, element, model, $data); } } -->
                 <!-- /ko -->
               </div>
               <!-- /ko -->
             </div>
-            <div data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"></div>
+            <div
+              data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"
+            ></div>
           </div>
         </div>
       </div>

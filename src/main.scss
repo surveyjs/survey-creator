@@ -71,6 +71,7 @@
     border-color: $primary-color;
     border-color: var(--primary-color, $primary-color);
   }
+
   a:focus,
   div:focus,
   span:focus,
@@ -82,6 +83,9 @@
     outline-style: dotted;
     outline-width: 0.5px;
     outline-offset: -1px;
+  }
+  .svd-no-outline:focus {
+    outline: none;
   }
   .svd_toolbar button:focus {
     outline-color: $primary-text-color;
