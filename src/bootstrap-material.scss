@@ -1,15 +1,29 @@
-$primary-color-m: #1ab394;
-$primary-text-color-m: #676a6c;
-$secondary-bg-color-m: #f4f4f4;
-$primary-border-color-m: #e7eaec;
-
 .svd_container.sv_bootstrapmaterial_css {
   .panel.card {
     box-shadow: none;
   }
   .form-group {
     margin-top: 0;
+
+    .form-control {
+      background-image: linear-gradient(
+          0deg,
+          var(--primary-color, $primary-color) 2px,
+          rgba(213, 0, 0, 0) 0
+        ),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.26) 1px, transparent 0);
+    }
   }
+  .form-group {
+    margin-top: 0;
+
+    &.is-focused {
+      label {
+        color: var(--primary-color, $primary-color);
+      }
+    }
+  }
+
   .svd_custom_select .form-group,
   .svd_properties_grid .form-group {
     margin-top: 0;
@@ -22,7 +36,7 @@ $primary-border-color-m: #e7eaec;
   .svd_properties_grid {
     .glyphicon-edit {
       border-radius: 0;
-      background-color: $primary-color-m;
+      background-color: var(--primary-color, $primary-color);
       color: white;
       text-transform: uppercase;
       padding: 5px;
@@ -49,7 +63,7 @@ $primary-border-color-m: #e7eaec;
 
   .svd-propertyeditor-condition {
     .btn-primary {
-      margin-bottom: 20px;
+      margin-right: 0.5em;
     }
 
     .svd_custom_select {
@@ -57,8 +71,12 @@ $primary-border-color-m: #e7eaec;
     }
 
     textarea {
-      color: $primary-text-color-m;
+      color: var(--primary-text-color, $primary-text-color);
     }
+  }
+
+  .svd-logic-button {
+    margin-right: 0.5em;
   }
 
   select.svda_current_type {
@@ -68,7 +86,7 @@ $primary-border-color-m: #e7eaec;
   }
 
   .svd_question {
-    border: 1px solid $primary-border-color-m;
+    border: 1px solid var(--primary-border-color, $primary-border-color);
   }
 
   .modal-content {
@@ -84,7 +102,7 @@ $primary-border-color-m: #e7eaec;
 
     .btn-danger {
       background-color: #f44336;
-      color: $secondary-bg-color-m;
+      color: var(--secondary-bg-color, $secondary-bg-color);
       &:hover {
         opacity: 0.7;
       }
@@ -108,6 +126,102 @@ $primary-border-color-m: #e7eaec;
         padding-left: 45px;
         margin-bottom: 10px;
       }
+    }
+  }
+
+  .btn-primary {
+    color: var(--inverted-text-color, $inverted-text-color);
+    background-color: var(--secondary-color, $secondary-color);
+    border-color: var(--secondary-color, $secondary-color);
+  }
+
+  .btn-secondary {
+    background-color: var(--primary-border-color, $primary-border-color);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .btn-link {
+    color: var(--primary-text-color, $primary-text-color);
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+    border-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  .checkbox label,
+  .radio label,
+  label {
+    color: var(--primary-text-color, $primary-text-color);
+  }
+
+  .editor-tabs {
+    > li {
+      a:hover,
+      a:focus {
+        background-color: var(
+          --secondary-bg-color,
+          $secondary-bg-color
+        ) !important;
+        border-bottom: 1px solid var(--secondary-bg-color, $secondary-bg-color) !important;
+      }
+
+      &.active a {
+        color: var(--primary-color, $primary-color) !important;
+        background-color: var(
+          --secondary-bg-color,
+          $secondary-bg-color
+        ) !important;
+        border: 1px solid var(--primary-border-color, $primary-border-color) !important;
+        border-bottom-color: var(
+          --secondary-bg-color,
+          $secondary-bg-color
+        ) !important;
+      }
+    }
+  }
+
+  .nav-tabs {
+    a {
+      color: var(--primary-text-color, $primary-text-color) !important;
+    }
+
+    > li.active > a {
+      color: var(--primary-color, $primary-color) !important;
+    }
+  }
+
+  .nav-item.active .nav-link {
+    background-color: var(--primary-bg-color, $primary-bg-color) !important;
+  }
+
+  .modal-tabs {
+    background: transparent;
+    padding-bottom: 10px;
+
+    > li > a {
+      color: var(--primary-text-color, $primary-text-color) !important;
+      border: 1px solid transparent !important;
+
+      &:hover {
+        color: var(--primary-color, $primary-color) !important;
+        border-bottom: 1px solid
+          var(--inverted-text-color, $inverted-text-color) !important;
+      }
+
+      &:focus {
+        color: var(--primary-color, $primary-color) !important;
+        border-bottom: 1px solid
+          var(--inverted-text-color, $inverted-text-color) !important;
+      }
+    }
+
+    > li.active > a {
+      color: var(--primary-color, $primary-color) !important;
+      border: 1px solid var(--primary-border-color, $primary-border-color) !important;
+      border-bottom-color: var(
+        --inverted-text-color,
+        $inverted-text-color
+      ) !important;
     }
   }
 }
