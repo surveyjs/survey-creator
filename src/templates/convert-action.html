@@ -1,5 +1,5 @@
 <script type="text/html" id="convert-action">
-  <span class="svda_question_action svd_custom_select">
+  <span class="svda_question_action">
     <!-- ko if: allowChangeType -->
     <select
       onmousewheel="return false;"
@@ -21,7 +21,7 @@
 
 <script type="text/html" id="choice-action">
   <!-- ko if: ko.unwrap($data.visible) === undefined || !!ko.unwrap($data.visible) -->
-  <span class="svda_question_action svd_custom_select">
+  <span class="svda_question_action">
     <select
       onmousewheel="return false;"
       class="svda_current_type svd-main-color svd-light-bg-color"
@@ -45,7 +45,7 @@
 </script>
 
 <script type="text/html" id="fp-add-question">
-  <span class="svda_question_action svd_custom_select">
+  <span class="svda_question_action">
     <select
       onmousewheel="return false;"
       class="svda_current_type svd-main-color svd-light-bg-color"
