@@ -723,4 +723,11 @@
   height: 2em;
 }
 
+.svd_surveyjs_designer_container fieldset {
+  &.sv_qcbc,
+  &.sv_qcbx {
+    min-width: 0;
+  }
+}
+
 @import "./modern.scss";
