@@ -7,7 +7,8 @@ if (!window["%hammerhead%"]) {
     var headerBackgroundColor = "#4a4a4a";
     var bodyContainerBackgroundColor = "#f8f8f8";
 
-    var defaultThemeColorsSurvey = Survey.StylesManager.ThemeColors["default"];
+    var defaultThemeColorsSurvey =
+      Survey.StylesManager.ThemeColors["bootstrapmaterial"];
     defaultThemeColorsSurvey["$main-color"] = mainColor;
     defaultThemeColorsSurvey["$main-hover-color"] = mainHoverColor;
     defaultThemeColorsSurvey["$text-color"] = textColor;
@@ -19,13 +20,13 @@ if (!window["%hammerhead%"]) {
       "$body-container-background-color"
     ] = bodyContainerBackgroundColor;
 
-    var defaultThemeColorsEditor =
+    var defaultThemeColorsCreator =
       SurveyCreator.StylesManager.ThemeColors["default"];
-    defaultThemeColorsEditor["$primary-color"] = mainColor;
-    defaultThemeColorsEditor["$secondary-color"] = mainColor;
-    defaultThemeColorsEditor["$primary-hover-color"] = mainHoverColor;
-    defaultThemeColorsEditor["$primary-text-color"] = textColor;
-    defaultThemeColorsEditor["$selection-border-color"] = mainColor;
+    defaultThemeColorsCreator["$primary-color"] = mainColor;
+    defaultThemeColorsCreator["$secondary-color"] = mainColor;
+    defaultThemeColorsCreator["$primary-hover-color"] = mainHoverColor;
+    defaultThemeColorsCreator["$primary-text-color"] = textColor;
+    defaultThemeColorsCreator["$selection-border-color"] = mainColor;
 
     let kpiList = [
       { value: 1, text: "Item 1" },

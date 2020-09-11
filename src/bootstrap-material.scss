@@ -125,6 +125,22 @@
     }
   }
 
+  .sv_select_wrapper .form-control {
+    line-height: 3em;
+    height: 3em;
+  }
+
+  survey-widget
+    .sv_bootstrapmaterial_css
+    .svd-property-editor-survey
+    .svd-property-editor-survey-page
+    > .sv_row
+    .sv_qstn
+    select {
+    line-height: 3em;
+    height: 3em;
+  }
+
   .btn-primary {
     color: var(--inverted-text-color, $inverted-text-color);
     background-color: var(--secondary-color, $secondary-color);
