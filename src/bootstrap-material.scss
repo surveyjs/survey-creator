@@ -129,6 +129,10 @@
     color: var(--inverted-text-color, $inverted-text-color);
     background-color: var(--secondary-color, $secondary-color);
     border-color: var(--secondary-color, $secondary-color);
+
+    &:active:focus {
+      color: var(--primary-color, $primary-color);
+    }
   }
 
   .btn-secondary {
