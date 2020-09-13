@@ -1855,3 +1855,31 @@ QUnit.test(
     );
   }
 );
+QUnit.test(
+  "SurveyPropertyConditionEditor, valueName with ':', Bug #953",
+  function (assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text", valueName: "profile:q1" },
+        {
+          name: "q2",
+          type: "text",
+        },
+      ],
+    });
+    var question = survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    editorItem.questionName = "profile:q1";
+    editorItem.value = "1";
+    assert.equal(
+      editorItem.toString(),
+      "{profile:q1} = 1",
+      "Condition sets correctly"
+    );
+  }
+);

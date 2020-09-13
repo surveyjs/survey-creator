@@ -280,8 +280,13 @@ export class ConditionEditorItem {
   }
   private getQuestionValueByName(questionName: string): string {
     var question = this.owner.getQuestionByName(questionName);
-    if (question && question.name != question.getValueName())
+    if (
+      question &&
+      question.name != question.getValueName() &&
+      questionName != question.getValueName()
+    ) {
       return questionName.replace(question.name, question.getValueName());
+    }
     return questionName;
   }
   private getValueText(): string {
@@ -387,7 +392,8 @@ export class ConditionEditorItem {
   }
 }
 
-export class SurveyPropertyConditionEditor extends SurveyPropertyTextEditor
+export class SurveyPropertyConditionEditor
+  extends SurveyPropertyTextEditor
   implements IConditionEditorItemOwner {
   public showHelpText: boolean = true;
   public koTextValue: any;
