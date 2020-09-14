@@ -4,9 +4,9 @@ import { SurveyCreator } from "../src/editor";
 import { PagesEditorViewModel } from "../src/components/pages-editor";
 import { SurveyQuestionEditor } from "../src/questionEditors/questionEditor";
 import { SurveyObjectProperty } from "../src/objectProperty";
-import { QuestionToolbox } from "../src/components/toolbox";
 import { AccordionViewModel } from "../src/utils/accordion";
 import { isPropertyVisible } from "../src/utils/utils";
+import { SurveyPropertyConditionEditor } from "../src/propertyEditors/propertyConditionEditor";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -1598,4 +1598,31 @@ QUnit.test("generate element name based on another survey", function (assert) {
     "question10",
     "Generate question10 name, next after question10"
   );
+});
+QUnit.test("creator.onConditionQuestionsGetList, Bug#957", function (assert) {
+  var creator = new SurveyCreator();
+  creator.onConditionQuestionsGetList.add(function (sender, options) {
+    options.list = options.list.filter(
+      (question) => question.getType() === "text"
+    );
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" },
+      { name: "q3", type: "dropdown" },
+      { name: "q4", type: "checkbox" },
+      { name: "q5", type: "radiogroup" },
+    ],
+  };
+  var question = creator.survey.getQuestionByName("q1");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.options = creator;
+  editor.object = question;
+  editor.beforeShow();
+  editor.isEditorShowing = true;
+  var editorItem = editor.koEditorItems()[0];
+  assert.ok(editorItem, "Editor item is created");
+  assert.equal(editorItem.nameQuestion.choices.length, 1, "One text question");
 });

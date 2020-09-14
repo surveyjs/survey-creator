@@ -3156,6 +3156,12 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       list: list,
     };
     this.onConditionQuestionsGetList.fire(this, options);
+    if (options.list !== list) {
+      list.splice(0, list.length);
+      for (var i = 0; i < options.list.length; i++) {
+        list.push(options.list[i]);
+      }
+    }
   }
   startUndoRedoTransaction() {
     this.undoRedoManager.startTransaction("Edit Element in Modal Window");
@@ -3355,4 +3361,3 @@ function addEmptyPanelElement(
   root.appendChild(eDiv);
   return eDiv;
 }
-
