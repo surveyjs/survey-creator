@@ -4,7 +4,7 @@ import ko from "knockout";
 
 export default QUnit.module("UtilsTests");
 
-QUnit.test("getNextValue", function(assert) {
+QUnit.test("getNextValue", function (assert) {
   var prefix = "item";
   assert.equal(getNextValue(prefix, ["item4", "item5", "item3"]), "item6");
   assert.equal(
@@ -26,9 +26,17 @@ QUnit.test("getNextValue", function(assert) {
   assert.equal(getNextValue(prefix, ["yes"]), "no");
   assert.equal(getNextValue(prefix, ["No"]), "Yes");
   assert.equal(getNextValue(prefix, ["TRUE"]), "FALSE");
+  assert.equal(
+    getNextValue(prefix, [
+      "12345671234567890",
+      "12345671234567891",
+      "12345671234567892",
+    ]),
+    "12345671234567893"
+  );
 });
 
-QUnit.test("DesignerContainerViewModel changed unsubscribe", function(assert) {
+QUnit.test("DesignerContainerViewModel changed unsubscribe", function (assert) {
   var changed = ko.observable(0);
   var dcm = new DesignerContainerViewModel(
     { changed: changed, tabs: ko.observableArray() },
@@ -40,7 +48,7 @@ QUnit.test("DesignerContainerViewModel changed unsubscribe", function(assert) {
   assert.ok(dcm.isOpen(), "still open");
 });
 
-QUnit.test("DesignerContainerViewModel default icons", function(assert) {
+QUnit.test("DesignerContainerViewModel default icons", function (assert) {
   var dcm = new DesignerContainerViewModel(
     { tabs: ko.observableArray() },
     { element: { offsetWidth: 0, style: {} } }
