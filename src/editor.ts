@@ -27,6 +27,7 @@ import {
 } from "./surveyjsObjects";
 import { StylesManager } from "./stylesmanager";
 import { itemAdorner } from "./adorners/item-editor";
+import { SurveyLiveTester } from "./tabs/test";
 import { Translation } from "./tabs/translation";
 import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
@@ -48,6 +49,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
 
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
 
+  private surveyLive: SurveyLiveTester;
   private translationValue: Translation;
   private logicValue: SurveyLogic;
   private surveyObjects: SurveyObjects;
@@ -899,6 +901,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         : null,
       this
     );
+    this.surveyLive = new SurveyLiveTester(this);
     this.logicValue = new SurveyLogic(this.createSurvey({}, "logic"), this);
     var self = this;
 
@@ -1391,6 +1394,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.showDesigner();
     }
     this.setUndoRedoCurrentState(clearState);
+  }
+  public get surveyLiveTester(): SurveyLiveTester {
+    return this.surveyLive;
   }
   /**
    * Toolbox object. Contains information about Question toolbox items.

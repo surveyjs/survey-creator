@@ -1,7 +1,5 @@
 import * as ko from "knockout";
 import { getLocString } from "../editorLocalization";
-import * as Survey from "survey-knockout";
-import { SurveyCreator } from '../editor';
 
 import "./simulator.scss";
 
@@ -14,7 +12,7 @@ export class SurveySimulatorComponent {
     device: "desktop",
     orientation: "l",
     // scale: 1,
-    considerDPI: true,
+    considerDPI: true
   };
 
   constructor(private _toolbarHolder: any) {

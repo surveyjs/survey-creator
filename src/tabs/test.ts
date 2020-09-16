@@ -262,7 +262,7 @@ ko.components.register("survey-tester", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var creator: SurveyCreator = params.creator;
-      var model = new SurveyLiveTester(creator);
+      var model = creator.surveyLiveTester;
 
       model.onSurveyCreatedCallback = survey => {
         creator.onTestSurveyCreated.fire(self, { survey: survey });

@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyLiveTester } from "../src/tabs/test";
 import { SurveyCreator } from "../src/editor";

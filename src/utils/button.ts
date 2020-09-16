@@ -1,7 +1,4 @@
 import * as ko from "knockout";
-import { editorLocalization } from "../editorLocalization";
-import * as Survey from "survey-knockout";
-import { SurveyCreator } from '../editor';
 
 import "./button.scss";
 
