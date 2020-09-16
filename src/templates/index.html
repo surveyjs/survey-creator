@@ -1,8 +1,8 @@
-﻿<div tabindex="-1" class="svd_container svd-light-bg-color"
+<div tabindex="-1" class="svd_container svd-light-bg-color"
   data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : ''), style: { height: koDesignerHeight }">
-  <div class="svd-vertical-container">
-    <div class="svd-vertical-container__row">
-      <div class="svd-vertical-container__cell">
+  <div class="svd-vertical-container" role="presentation">
+    <div class="svd-vertical-container__row" role="presentation">
+      <div class="svd-vertical-container__cell" role="presentation">
         <div>
           <!-- ko ifnot: haveCommercialLicense -->
           <div class="svd_commercial_container">
@@ -30,8 +30,8 @@
         </div>
       </div>
     </div>
-    <div class="svd-vertical-container__row">
-      <div class="svd-vertical-container__cell">
+    <div class="svd-vertical-container__row" role="presentation">
+      <div class="svd-vertical-container__cell" role="presentation">
         <div class="svd-vertical-container__cell-content-holder">
           <div class="svd-vertical-container__cell-content">
             <div class="panel card svd_content svd-dark-bg-color">

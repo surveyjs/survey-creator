@@ -5,16 +5,16 @@
     <svd-splitter params="minLeft: 0, minRight: 600, onChange: layoutChangedIndicator"></svd-splitter>
     <!-- /ko  -->
     <div class="svd_editors">
-      <div class="svd-vertical-container">
-        <div class="svd-vertical-container__row" data-bind="visible: topContainer.length > 0">
-            <div class="svd-vertical-container__cell">
+      <div class="svd-vertical-container" role="presentation">
+        <div class="svd-vertical-container__row" role="presentation" data-bind="visible: topContainer.length > 0">
+            <div class="svd-vertical-container__cell" role="presentation">
               <!-- ko if: topContainer.length > 0 -->
               <svd-designer-h-container params="items: topContainer, context: $data, className: 'svd-designer-container--top'"></svd-designer-h-container>
               <!-- /ko  -->
             </div>
         </div>
-        <div class="svd-vertical-container__row">
-            <div class="svd-vertical-container__cell">
+        <div class="svd-vertical-container__row" role="presentation">
+            <div class="svd-vertical-container__cell" role="presentation">
                 <div class="svd-vertical-container__cell-content-holder">
                     <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
                       <div
