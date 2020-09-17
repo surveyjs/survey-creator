@@ -2,15 +2,23 @@
   <span
     class="svda-title-editor-content"
     data-bind="visible: isEditing"
-    style="display: none;"
+    style="display: none"
   >
     <input
       data-svd-info="adorner"
       data-bind="textInput: editingName, event: { keyup: nameEditorKeypress, blur: postEdit }, attr: { maxLength: maxLength, 'aria-label': name }"
-      style="border-top: none; border-left: none; border-right: none; outline: none; background-color: transparent; display: inline-block;"
+      style="
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+        background-color: transparent;
+        display: inline-block;
+      "
     />
     <span
       class="svda-edit-button"
+      role="button"
       data-bind="click: postEdit, enable: editingName() != ''"
     >
       <svg-icon
@@ -30,10 +38,11 @@
     class="svda-title-editor-content svda-title-editor-start"
     data-bind="visible: !isEditing()"
   >
-    <span style="display: none;" data-bind="text: editingName"></span>
+    <span style="display: none" data-bind="text: editingName"></span>
     <span
       class="edit-survey-name"
-      data-bind="click: startEdit, attr: { title: getLocString('pe.edit') }"
+      role="button"
+      data-bind="click: startEdit, attr: { title: getLocString('pe.edit'), 'aria-label': getLocString('pe.edit') }"
     >
       <svg-icon
         class="svd-primary-icon"
@@ -44,7 +53,8 @@
   <!-- ko if: isDraggable -->
   <span
     class="svda-drag-handle"
-    data-bind="attr: { title: getLocString('pe.move') }, visible: !isEditing()"
+    role="button"
+    data-bind="attr: { title: getLocString('pe.move'), 'aria-label': getLocString('pe.move') }, visible: !isEditing()"
   >
     <svg-icon
       class="svd-primary-icon"
@@ -55,7 +65,8 @@
   <!--ko ifnot: isLastItem -->
   <span
     class="svda-delete-item"
-    data-bind="click: deleteItem, attr: { title: getLocString('pe.delete') }, visible: !isEditing()"
+    role="button"
+    data-bind="click: deleteItem, attr: { title: getLocString('pe.delete'), 'aria-label': getLocString('pe.delete') }, visible: !isEditing()"
   >
     <svg-icon
       class="svd-primary-icon"
