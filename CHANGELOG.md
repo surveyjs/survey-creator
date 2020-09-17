@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.3](https://github.com/surveyjs/survey-creator/compare/v1.8.2...v1.8.3) (2020-09-16)
+
+
+### Bug Fixes
+
+* Changing of options.list from onConditionQuestionsGetList is ignored for T5191 ([eb43fbd](https://github.com/surveyjs/survey-creator/commit/eb43fbdcadc357eccfbe827afc3d5f5e01e7426e)), closes [#957](https://github.com/surveyjs/survey-creator/issues/957)
+* On adding new item in radio group if there is a large number in choices it hangs the browser [#958](https://github.com/surveyjs/survey-creator/issues/958) ([f3054d9](https://github.com/surveyjs/survey-creator/commit/f3054d9b862a1b7066b067aed861782b758e0772))
+
 ### [1.8.2](https://github.com/surveyjs/survey-creator/compare/v1.8.1...v1.8.2) (2020-09-10)
 
 ### [1.8.1](https://github.com/surveyjs/survey-creator/compare/v1.8.0...v1.8.1) (2020-09-09)

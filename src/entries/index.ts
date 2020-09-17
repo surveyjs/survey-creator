@@ -187,3 +187,4 @@ export { PropertyEditorNestedViewModel } from "../property-editors/nested";
 export { PropertyEditorCustomViewModel } from "../property-editors/custom";
 
 export { SurveyFilePropertyEditor } from "../property-editors/file";
+export { simulatorDevices } from "../components/simulator";
