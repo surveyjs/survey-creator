@@ -36,13 +36,13 @@
             <!-- ko foreach: tabs -->
             <li
               class="nav-item svd-tab"
-              data-bind="css: { active: $parent.koViewType() == name }"
+              role="tab"
+              data-bind="click: action, css: { active: $parent.koViewType() == name }, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }"
             >
               <a
                 class="nav-link svd-tab-text"
                 href="#"
-                data-bind="click: action, text: title, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }"
-                role="tab"
+                data-bind="text: title"
               ></a>
             </li>
             <!-- /ko -->
