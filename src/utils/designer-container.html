@@ -27,7 +27,7 @@
       <div class="svd-vertical-container__cell" role="presentation">
         <div>
           <!-- ko if: tabs().length > 1 -->
-          <div class="svd-designer-tabbed-container__tab-header-container">
+          <div class="svd-designer-tabbed-container__tab-header-container" role="tablist">
             <!-- ko foreach: { data: tabs, as: 'content' } -->
             <div class="svd-designer-tabbed-container__tab-header"
               data-bind="text: $parent.context.getLocString('ed.' + content), click: function() { $parent.activeTab(content); }, css: { 'svd-designer-tabbed-container__tab-header-active' : content === $parent.activeTab() }, key2click, attr: { 'aria-label': $parent.context.getLocString('ed.' + content), role: 'tab' }"
