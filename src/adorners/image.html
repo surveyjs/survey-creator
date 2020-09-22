@@ -2,7 +2,8 @@
   <span class="svda-image-editor">
     <span
       class="edit-image-item"
-      data-bind="click: chooseImage, clickBubble: false, attr: { title: getLocString('pe.edit') }"
+      role="button"
+      data-bind="click: chooseImage, clickBubble: false, attr: { title: getLocString('pe.edit'), 'aria-label': getLocString('pe.edit') }"
     >
       <svg-icon
         class="svd-primary-icon"
@@ -13,7 +14,7 @@
   <!-- ko if: allowDelete -->
   <span
     class="svda-delete-item"
-    data-bind="click: deleteImage, attr: { title: getLocString('pe.delete') }"
+    data-bind="click: deleteImage, attr: { title: getLocString('pe.delete'), 'aria-label': getLocString('pe.delete') }"
   >
     <svg-icon
       class="svd-primary-icon"
