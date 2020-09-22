@@ -7,50 +7,32 @@ import { EditableObject } from "./editableObject";
 
 export class SurveyPropertyEditorFactory {
   public static defaultEditor: string = "string";
+  public static operators = {
+    empty: [],
+    notempty: [],
+    equal: ["!file"],
+    notequal: ["!file"],
+    contains: ["checkbox", "text", "comment"],
+    notcontains: ["checkbox", "text", "comment"],
+    anyof: ["selectbase"],
+    allof: ["checkbox"],
+    greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+  };
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
   private static cellTypes = {};
   public static getOperators(): Array<any> {
-    var operators = [
-      { name: "empty", types: [] },
-      { name: "notempty", types: [] },
-      { name: "equal", types: ["!file"] },
-      { name: "notequal", types: ["!file"] },
-      {
-        name: "contains",
-        types: ["checkbox", "text", "comment"],
-      },
-      {
-        name: "notcontains",
-        types: ["checkbox", "text", "comment"],
-      },
-      { name: "anyof", types: ["selectbase"] },
-      { name: "allof", types: ["checkbox"] },
-      {
-        name: "greater",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-      },
-      {
-        name: "less",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-      },
-      {
-        name: "greaterorequal",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-      },
-      {
-        name: "lessorequal",
-        types: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-      },
-    ];
     var result = [];
-    for (var i = 0; i < operators.length; i++) {
-      var name = operators[i].name;
+    var ops = SurveyPropertyEditorFactory.operators;
+    for (var name in ops) {
       result.push({
         name: name,
         text: editorLocalization.getString("op." + name),
-        types: operators[i].types,
+        types: ops[name],
       });
     }
     return result;

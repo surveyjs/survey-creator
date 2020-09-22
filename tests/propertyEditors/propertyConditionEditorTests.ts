@@ -7,6 +7,7 @@ import {
 import { EditorOptionsTests } from "../editorOptionsTests";
 import { SurveyPropertyDropdownColumnsEditor } from "../../src/propertyEditors/propertyMatrixDropdownColumnsEditor";
 import { SurveyElementEditorContentModel } from "../../src/questionEditors/questionEditor";
+import { SurveyPropertyEditorFactory } from "../../src/propertyEditors/propertyEditorFactory";
 
 export default QUnit.module("SurveyPropertyConditionEditor");
 
@@ -1782,6 +1783,55 @@ QUnit.test(
     assert.equal(itemValue.isEnabled, false, "anyof is disabled");
   }
 );
+QUnit.test("SurveyPropertyConditionEditor, remove operators", function (
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "checkbox",
+        choices: ["item1", "item2", "item3"],
+        visibleIf: "{q1} = 'a'",
+      },
+    ],
+  });
+  var containsValue = SurveyPropertyEditorFactory.operators.contains;
+  var anyofValue = SurveyPropertyEditorFactory.operators.anyof;
+  delete SurveyPropertyEditorFactory.operators.contains;
+  delete SurveyPropertyEditorFactory.operators.anyof;
+  var question = survey.getQuestionByName("q2");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  editor.isEditorShowing = true;
+  var editorItem = editor.koEditorItems()[0];
+  assert.notOk(
+    Survey.ItemValue.getItemByValue(
+      editorItem.operatorQuestion.choices,
+      "anyof"
+    ),
+    "anyof is not here"
+  );
+  assert.notOk(
+    Survey.ItemValue.getItemByValue(
+      editorItem.operatorQuestion.choices,
+      "contains"
+    ),
+    "contains is not here"
+  );
+  assert.ok(
+    Survey.ItemValue.getItemByValue(
+      editorItem.operatorQuestion.choices,
+      "equal"
+    ),
+    "equal is here"
+  );
+  SurveyPropertyEditorFactory.operators.contains = containsValue;
+  SurveyPropertyEditorFactory.operators.anyof = anyofValue;
+});
 QUnit.test(
   "SurveyPropertyConditionEditor, file question type should not set operator to 'equal', Bug #",
   function (assert) {
