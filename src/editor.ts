@@ -2780,8 +2780,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
   }
   /**
-   * Show the creator dialog. The element can be a question, panel, page or survey
+   * Show the creator dialog. The element can be a question, panel, page or survey. If property grid is used instead of dialog window (default behavior), then focus goes into the property grid.
    * @param element The survey element
+   * @see showModalElementEditor
    */
   public showElementEditor(
     element: Survey.Base,
@@ -2810,6 +2811,18 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       this.propertyGridObjectEditorModel.focusEditor();
       return;
     }
+    this.showModalElementEditor(element, onClose);
+  };
+  /**
+   * Show the creator dialog. The element can be a question, panel, page or survey.
+   * @param element The survey element
+   * @param onClose Callback function on closing dialog window. It has isCanceled boolean paratemer. It is true if a user cancel changes.
+   * @see onElementEditorClosed
+   */
+  public showModalElementEditor(
+    element: Survey.Base,
+    onClose: (isCanceled: boolean) => any = null
+  ) {
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
@@ -2833,7 +2846,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         });
       }
     );
-  };
+  }
   public onQuestionEditorChanged(question: Survey.Question) {
     if (!!question.name && !this.isNameUnique(question, question.name)) {
       question.name = this.generateUniqueName(question, question.name);
