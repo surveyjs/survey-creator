@@ -1,50 +1,135 @@
 ﻿<div class="svd-embed-survey-tab">
-    <div class="row">
-        <div class="form-control svd_custom_select svd_embed_tab">
-            <select onmousewheel="return false;" data-bind="if: true, value:koLibraryVersion">
-                <option value="angular" data-bind="text: $data.getLocString('ew.angular')"></option>
-                <option value="jquery" data-bind="text: $data.getLocString('ew.jquery')"></option>
-                <option value="knockout" data-bind="text: $data.getLocString('ew.knockout')"></option>
-                <option value="react" data-bind="text: $data.getLocString('ew.react')"></option>
-                <option value="vue" data-bind="text: $data.getLocString('ew.vue')"></option>
-            </select>
-        </div>
-        <div class="form-control svd_custom_select svd_embed_tab">
-            <select onmousewheel="return false;" data-bind="if: true, value:koScriptUsing">
-                <option value="bootstrap" data-bind="text: $data.getLocString('ew.bootstrap')"></option>
-                <option value="standard" data-bind="text: $data.getLocString('ew.standard')"></option>
-            </select>
-        </div>
-        <div class="form-control svd_custom_select svd_embed_tab">
-            <select onmousewheel="return false;" data-bind="if: true, value:koShowAsWindow">
-                <option value="page" data-bind="text: $data.getLocString('ew.showOnPage')"></option>
-                <option value="window" data-bind="text: $data.getLocString('ew.showInWindow')"></option>
-            </select>
-        </div>
-        <label class="checkbox-inline form-check-label" data-bind="visible:koHasIds">
-            <input type="checkbox" data-bind="checked:koLoadSurvey" />
-            <span data-bind="text: $data.getLocString('ew.loadFromServer')"></span>
-        </label>
+  <div class="row">
+    <div class="form-control svd_custom_select svd_embed_tab">
+      <select
+        onmousewheel="return false;"
+        data-bind="if: true, value:koLibraryVersion"
+      >
+        <option
+          value="angular"
+          data-bind="text: $data.getLocString('ew.angular')"
+        ></option>
+        <option
+          value="jquery"
+          data-bind="text: $data.getLocString('ew.jquery')"
+        ></option>
+        <option
+          value="knockout"
+          data-bind="text: $data.getLocString('ew.knockout')"
+        ></option>
+        <option
+          value="react"
+          data-bind="text: $data.getLocString('ew.react')"
+        ></option>
+        <option
+          value="vue"
+          data-bind="text: $data.getLocString('ew.vue')"
+        ></option>
+      </select>
     </div>
-    <div class="panel card">
-        <div class="panel-heading card-header" data-bind="text: $data.getLocString('ew.titleScript')"></div>
-        <div data-bind="visible:hasAceEditor">
-            <div id="surveyEmbedingHead" style="height:70px;width:100%"></div>
-        </div>
-        <textarea data-bind="visible:!hasAceEditor, text: koHeadText" style="height:70px;width:100%"></textarea>
+    <div class="form-control svd_custom_select svd_embed_tab">
+      <select
+        onmousewheel="return false;"
+        data-bind="if: true, value:koThemeName"
+      >
+        <option
+          value="modern"
+          data-bind="text: $data.getLocString('ew.modern')"
+        ></option>
+        <option
+          value="default"
+          data-bind="text: $data.getLocString('ew.default')"
+        ></option>
+        <option
+          value="orange"
+          data-bind="text: $data.getLocString('ew.orange')"
+        ></option>
+        <option
+          value="darkblue"
+          data-bind="text: $data.getLocString('ew.darkblue')"
+        ></option>
+        <option
+          value="darkrose"
+          data-bind="text: $data.getLocString('ew.darkrose')"
+        ></option>
+        <option
+          value="stone"
+          data-bind="text: $data.getLocString('ew.stone')"
+        ></option>
+        <option
+          value="winter"
+          data-bind="text: $data.getLocString('ew.winter')"
+        ></option>
+        <option
+          value="winterstone"
+          data-bind="text: $data.getLocString('ew.winterstone')"
+        ></option>
+        <option
+          value="bootstrap"
+          data-bind="text: $data.getLocString('ew.bootstrap')"
+        ></option>
+      </select>
     </div>
-    <div class="panel card" data-bind="visible: koVisibleHtml">
-        <div class="panel-heading card-header" data-bind="text: $data.getLocString('ew.titleHtml')"></div>
-        <div data-bind="visible:hasAceEditor">
-            <div id="surveyEmbedingBody" style="height:30px;width:100%"></div>
-        </div>
-        <textarea data-bind="visible:!hasAceEditor, text: koBodyText" style="height:30px;width:100%"></textarea>
+    <div class="form-control svd_custom_select svd_embed_tab">
+      <select
+        onmousewheel="return false;"
+        data-bind="if: true, value:koShowAsWindow"
+      >
+        <option
+          value="page"
+          data-bind="text: $data.getLocString('ew.showOnPage')"
+        ></option>
+        <option
+          value="window"
+          data-bind="text: $data.getLocString('ew.showInWindow')"
+        ></option>
+      </select>
     </div>
-    <div class="panel card">
-        <div class="panel-heading card-header" data-bind="text: $data.getLocString('ew.titleJavaScript')"></div>
-        <div data-bind="visible:hasAceEditor">
-            <div id="surveyEmbedingJava" style="height:300px;width:100%"></div>
-        </div>
-        <textarea data-bind="visible:!hasAceEditor, text: koJavaText" style="height:300px;width:100%"></textarea>
+    <label
+      class="checkbox-inline form-check-label"
+      data-bind="visible:koHasIds"
+    >
+      <input type="checkbox" data-bind="checked:koLoadSurvey" />
+      <span data-bind="text: $data.getLocString('ew.loadFromServer')"></span>
+    </label>
+  </div>
+  <div class="panel card">
+    <div
+      class="panel-heading card-header"
+      data-bind="text: $data.getLocString('ew.titleScript')"
+    ></div>
+    <div data-bind="visible:hasAceEditor">
+      <div id="surveyEmbedingHead" style="height: 70px; width: 100%"></div>
     </div>
+    <textarea
+      data-bind="visible:!hasAceEditor, text: koHeadText"
+      style="height: 70px; width: 100%"
+    ></textarea>
+  </div>
+  <div class="panel card" data-bind="visible: koVisibleHtml">
+    <div
+      class="panel-heading card-header"
+      data-bind="text: $data.getLocString('ew.titleHtml')"
+    ></div>
+    <div data-bind="visible:hasAceEditor">
+      <div id="surveyEmbedingBody" style="height: 30px; width: 100%"></div>
+    </div>
+    <textarea
+      data-bind="visible:!hasAceEditor, text: koBodyText"
+      style="height: 30px; width: 100%"
+    ></textarea>
+  </div>
+  <div class="panel card">
+    <div
+      class="panel-heading card-header"
+      data-bind="text: $data.getLocString('ew.titleJavaScript')"
+    ></div>
+    <div data-bind="visible:hasAceEditor">
+      <div id="surveyEmbedingJava" style="height: 300px; width: 100%"></div>
+    </div>
+    <textarea
+      data-bind="visible:!hasAceEditor, text: koJavaText"
+      style="height: 300px; width: 100%"
+    ></textarea>
+  </div>
 </div>

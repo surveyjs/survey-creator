@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyJSON5 } from "../json5";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from '../editor';
+import { SurveyCreator } from "../editor";
 
 import "./embed.scss";
 var templateHtml = require("./embed.html");
@@ -21,7 +21,7 @@ export class SurveyEmbedingWindow {
   public surveyJSVersion: string = Survey.Version;
   public surveyCDNPath: string = "https://surveyjs.azureedge.net/";
   koShowAsWindow: any;
-  koScriptUsing: any;
+  koThemeName: any;
   koHasIds: any;
   koLoadSurvey: any;
   koLibraryVersion: any;
@@ -31,7 +31,7 @@ export class SurveyEmbedingWindow {
     jquery: "jquery",
     knockout: "ko",
     react: "react",
-    vue: "vue"
+    vue: "vue",
   };
   private platformJSonPage = {
     angular:
@@ -43,7 +43,7 @@ export class SurveyEmbedingWindow {
     react:
       'ReactDOM.render(\n    <Survey.Survey json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));',
     vue:
-      "var survey = new Survey.Model(surveyJSON);\nnew Vue({ el: '#surveyContainer', data: { survey: survey } });"
+      "var survey = new Survey.Model(surveyJSON);\nnew Vue({ el: '#surveyContainer', data: { survey: survey } });",
   };
   private platformJSonWindow = {
     angular:
@@ -54,14 +54,14 @@ export class SurveyEmbedingWindow {
       "var survey = new Survey.Model(surveyJSON);\nsurveyWindow.show();\nsurvey.onComplete.add(sendDataToServer);",
     react:
       'ReactDOM.render(\n    <Survey.SurveyWindow json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));',
-    vue: ""
+    vue: "",
   };
   private platformHtmlonPage = {
     angular: "<ng-app></ng-app>",
     jquery: '<div id="surveyContainer"></div>',
     knockout: '<div id="surveyContainer"></div>',
     react: '<div id="surveyContainer"></div>',
-    vue: '<div id="surveyContainer"><survey :survey="survey"></survey></div>'
+    vue: '<div id="surveyContainer"><survey :survey="survey"></survey></div>',
   };
   private platformHtmlonWindow = {
     angular: "<ng-app></ng-app>",
@@ -69,13 +69,13 @@ export class SurveyEmbedingWindow {
     knockout: "",
     react: '<div id="surveyContainer"></div>',
     vue:
-      "<div id='surveyContainer'><survey-window :survey='survey'></survey-window></div>"
+      "<div id='surveyContainer'><survey-window :survey='survey'></survey-window></div>",
   };
   constructor() {
     var self = this;
     this.koLibraryVersion = ko.observable("jquery");
     this.koShowAsWindow = ko.observable("page");
-    this.koScriptUsing = ko.observable("bootstrap");
+    this.koThemeName = ko.observable("modern");
     this.koHasIds = ko.observable(false);
     this.koLoadSurvey = ko.observable(false);
 
@@ -98,7 +98,7 @@ export class SurveyEmbedingWindow {
       self.setJavaTest();
       self.setBodyText();
     });
-    this.koScriptUsing.subscribe(function (newValue) {
+    this.koThemeName.subscribe(function (newValue) {
       self.setHeadText();
       self.setJavaTest();
     });
@@ -143,11 +143,13 @@ export class SurveyEmbedingWindow {
   private setHeadText() {
     var str =
       "<!-- Your platform (" + this.koLibraryVersion() + ") scripts. -->\n";
-    if (this.koScriptUsing() != "bootstrap") {
+    if (this.koThemeName() != "bootstrap") {
+      var cssFileName = this.koThemeName() == "modern" ? "modern" : "survey";
       str +=
         '\n<link href="' +
         this.getCDNPath +
-        'survey.css" type="text/css" rel="stylesheet" />';
+        cssFileName +
+        '.css" type="text/css" rel="stylesheet" />';
     }
     str +=
       '\n<script src="' +
@@ -184,8 +186,7 @@ export class SurveyEmbedingWindow {
     return this.getSetCss() + "\n" + jsonText + str;
   }
   private getSetCss(): string {
-    if (this.koScriptUsing() != "bootstrap") return "";
-    return "Survey.StylesManager.applyTheme(\"bootstrap\");\n";
+    return 'Survey.StylesManager.applyTheme("' + this.koThemeName() + '");\n';
   }
   private getSaveFunc() {
     return (
@@ -195,7 +196,7 @@ export class SurveyEmbedingWindow {
   private getSaveFuncCode() {
     if (this.koHasIds())
       return "    survey.sendResult('" + this.surveyPostId + "');";
-    return "    //send Ajax request to your web server.\n    alert(\"The results are:\" + JSON.stringify(survey.data));";
+    return '    //send Ajax request to your web server.\n    alert("The results are:" + JSON.stringify(survey.data));';
   }
   private getJsonText(): string {
     if (this.koHasIds() && this.koLoadSurvey()) {
@@ -208,8 +209,7 @@ export class SurveyEmbedingWindow {
     if (editor) editor.setValue(text);
     if (koText) koText(text);
   }
-  dispose() {
-  }
+  dispose() {}
 }
 
 ko.components.register("survey-embed", {
@@ -218,7 +218,7 @@ ko.components.register("survey-embed", {
       var creator: SurveyCreator = params.creator;
       var model = new SurveyEmbedingWindow();
 
-      var subscrViewType = creator.koViewType.subscribe(viewType => {
+      var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "embed") {
           var json = creator.getSurveyJSON();
           model.json = json;
@@ -235,7 +235,7 @@ ko.components.register("survey-embed", {
       });
 
       return model;
-    }
+    },
   },
   template: templateHtml,
 });
