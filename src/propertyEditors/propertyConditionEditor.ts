@@ -459,6 +459,11 @@ export class SurveyPropertyConditionEditor
       self.onkoTextValueChanged(newValue);
     });
   }
+  public get propertyHelpText(): string {
+    return this.showHelpText && this.editorType == "expression"
+      ? this.getLocString("pe.expressionHelp")
+      : "";
+  }
   public addCondition = () => {
     var conditionEditorItem = new ConditionEditorItem(this);
     this.koEditorItems.push(conditionEditorItem);
@@ -1175,6 +1180,8 @@ ko.bindingHandlers.aceEditor = {
     var isUpdating = false;
 
     editor.setOption("useWorker", false);
+    editor.renderer.setShowGutter(false);
+    editor.setHighlightActiveLine(false);
 
     editor.getSession().on("change", function () {
       var errors = createAnnotations(

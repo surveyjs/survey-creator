@@ -243,6 +243,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get canShowDisplayNameOnTop(): boolean {
     return true;
   }
+  public get propertyHelpText(): string {
+    return "";
+  }
   public get contentTemplateName(): string {
     const editorType = this.isModal ? "modal-content" : this.editorTypeTemplate;
     return "svd-property-editor-" + editorType;

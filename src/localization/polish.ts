@@ -9,7 +9,7 @@ var polishStrings = {
     addToToolbox: "Dodaj do palety",
     deletePanel: "Usuń panel",
     deleteQuestion: "Usuń pytanie",
-    convertTo: "Konwertuj na"
+    convertTo: "Konwertuj na",
   },
   //questionTypes
   qt: {
@@ -28,7 +28,7 @@ var polishStrings = {
     rating: "Ocena",
     text: "Pojedyncza odpowiedź",
     boolean: "Prawda/Fałsz",
-    expression: "Wyrażenie"
+    expression: "Wyrażenie",
   },
   //Strings in Editor
   ed: {
@@ -59,11 +59,11 @@ var polishStrings = {
     surveyResults: "Wynik ankiety: ",
     modified: "Zmodyfikowana",
     saving: "Trwa zapis",
-    saved: "Zapisano"
+    saved: "Zapisano",
   },
   //Property names in table headers
   pel: {
-    isRequired: "Wymagane?"
+    isRequired: "Wymagane?",
   },
   //Property Editors
   pe: {
@@ -82,8 +82,6 @@ var polishStrings = {
     testService: "Testuj usługę",
     conditionHelp:
       "Podaj wyrażenie, które zwróci wartość prawda/fałsz. Jeśli chcesz, aby sekcja lub pytanie pozostały widoczne - powinno zwrócić prawdę. Przykład: {pytanie1} = 'wartość1' or ({pytanie2} * {pytanie4}  > 20 and {pytanie3} < 5)",
-    expressionHelp:
-      "Please enter an expression. You may use curly brackets to get access to the question values: '{question1} + {question2}', '({price}*{quantity}) * (100 - {discount})'",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
@@ -191,7 +189,7 @@ var polishStrings = {
       loadingHtml: "Loading Html",
       timer: "Timer/Quiz",
       triggers: "Triggers",
-      templateTitle: "Template title"
+      templateTitle: "Template title",
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -207,12 +205,12 @@ var polishStrings = {
     triggerRunIf: "Run if",
     triggerSetToName: "Change value of: ",
     triggerSetValue: "to: ",
-    triggerIsVariable: "Do not put the variable into the survey result."
+    triggerIsVariable: "Do not put the variable into the survey result.",
   },
   //Property values
   pv: {
     true: "prawda",
-    false: "fałsz"
+    false: "fałsz",
   },
   //Operators
   op: {
@@ -225,7 +223,7 @@ var polishStrings = {
     greater: "greater",
     less: "less",
     greaterorequal: "greater or equals",
-    lessorequal: "Less or Equals"
+    lessorequal: "Less or Equals",
   },
   //Embed window
   ew: {
@@ -241,33 +239,33 @@ var polishStrings = {
     loadFromServer: "Load Survey JSON from server",
     titleScript: "Scripts and styles",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript"
+    titleJavaScript: "JavaScript",
   },
   //Test Survey
   ts: {
-    selectPage: "Wybierz stronę, aby ją przetestować:"
+    selectPage: "Wybierz stronę, aby ją przetestować:",
   },
   validators: {
     answercountvalidator: "answer count",
     emailvalidator: "e-mail",
     numericvalidator: "numeric",
     regexvalidator: "regex",
-    textvalidator: "text"
+    textvalidator: "text",
   },
   triggers: {
     completetrigger: "complete survey",
     setvaluetrigger: "set value",
-    visibletrigger: "change visibility"
+    visibletrigger: "change visibility",
   },
   //Properties
   p: {
     name: "nazwa",
     title: {
       name: "tytuł",
-      title: "Pozostaw pusty, jeśli ma być taki sam, jak 'Nazwa'"
+      title: "Pozostaw pusty, jeśli ma być taki sam, jak 'Nazwa'",
     },
-    page_title: { name: "tytuł", title: "Tytuł sekcji" }
-  }
+    page_title: { name: "tytuł", title: "Tytuł sekcji" },
+  },
 };
 
 editorLocalization.locales["pl"] = polishStrings;

@@ -1,5 +1,14 @@
 <!-- ko if: showDisplayNameOnTop -->
 <label class="svd-control-label" data-bind="text:displayName"></label>
+<!-- ko if: helpText -->
+<a class="svd-control-label" data-bind="click:toggleShowHelpText"
+  ><label style="cursor: help">(?)</label></a
+>
+<div
+  style="font-size: smaller; margin: 0 6px 6px 6px"
+  data-bind="visible:showHelpText, text:helpText"
+></div>
+<!-- /ko -->
 <!-- /ko -->
 
 <svd-property-editor-error params="model:model"></svd-property-editor-error>
