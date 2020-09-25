@@ -1019,6 +1019,11 @@ QUnit.test(
 );
 
 QUnit.test("Add property into existing cagetory", function (assert) {
+  var defaultValueExpressionProp = Survey.Serializer.findProperty(
+    "question",
+    "defaultValueExpression"
+  );
+  if (!!defaultValueExpressionProp) defaultValueExpressionProp.visible = false;
   Survey.Serializer.addProperty("question", {
     name: "name2",
     category: "general",
@@ -1058,6 +1063,7 @@ QUnit.test("Add property into existing cagetory", function (assert) {
     "visibleIf2",
     "Property added into logic correctly"
   );
+  if (!!defaultValueExpressionProp) defaultValueExpressionProp.visible = true;
   Survey.Serializer.removeProperty("question", "name2");
   Survey.Serializer.removeProperty("question", "visibleIf2");
   Survey.Serializer.removeProperty("question", "enableIf2");
