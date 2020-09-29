@@ -2,8 +2,8 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyTextWorker } from "../textWorker";
 import { getLocString } from "../editorLocalization";
-import { IToolbarItem } from '../components/toolbar';
-import { SurveyCreator } from '../editor';
+import { IToolbarItem } from "../components/toolbar";
+import { SurveyCreator } from "../editor";
 
 import "./json-editor.scss";
 var templateHtml = require("html-loader?interpolate!val-loader!./json-editor.html");
@@ -16,6 +16,8 @@ export class SurveyJSONEditor {
   private isProcessingImmediately: boolean = false;
   private aceEditor: AceAjax.Editor;
   private textWorker: SurveyTextWorker;
+  private aceCanUndo = ko.observable(false);
+  private aceCanRedo = ko.observable(false);
   public isJSONChanged: boolean = false;
   public isInitialJSON: boolean = false;
   koText: any;
@@ -45,21 +47,25 @@ export class SurveyJSONEditor {
       id: "svd-undo",
       icon: "icon-actionundo",
       title: getLocString("ed.undo"),
+      enabled: this.aceCanUndo,
       tooltip: getLocString("ed.undoTooltip"),
       action: () => {
         this.aceEditor.execCommand("undo");
+        this.updateUndoRedoState();
         focusEditor();
-      }
+      },
     });
     items.push({
       id: "svd-redo",
       icon: "icon-actionredo",
+      enabled: this.aceCanRedo,
       title: getLocString("ed.redo"),
       tooltip: getLocString("ed.redoTooltip"),
       action: () => {
         this.aceEditor.execCommand("redo");
+        this.updateUndoRedoState();
         focusEditor();
-      }
+      },
     });
     if (window["navigator"]) {
       items.push({
@@ -73,7 +79,7 @@ export class SurveyJSONEditor {
           this.aceEditor.execCommand("copy");
           navigator.clipboard.writeText(text);
           focusEditor();
-        }
+        },
       });
       items.push({
         id: "svd-cut",
@@ -85,8 +91,9 @@ export class SurveyJSONEditor {
           var text = this.aceEditor.getCopyText();
           this.aceEditor.execCommand("cut");
           navigator.clipboard.writeText(text);
+          this.updateUndoRedoState();
           focusEditor();
-        }
+        },
       });
       items.push({
         id: "svd-paste",
@@ -98,7 +105,8 @@ export class SurveyJSONEditor {
           navigator.clipboard.readText().then((text: string) => {
             this.aceEditor.execCommand("paste", text);
           });
-        }
+          this.updateUndoRedoState();
+        },
       });
     }
     this.toolbarItems(items);
@@ -111,12 +119,12 @@ export class SurveyJSONEditor {
     var self = this;
     if (SurveyJSONEditor.aceBasePath) {
       try {
-        ace["config"].set('basePath', SurveyJSONEditor.aceBasePath);
+        ace["config"].set("basePath", SurveyJSONEditor.aceBasePath);
         // TODO add event to change ace theme and mode
         // this.aceEditor.setTheme("ace/theme/monokai");
         // this.aceEditor.session.setMode("ace/mode/json");
         this.aceEditor.session.setMode("ace/mode/json");
-      } catch { }
+      } catch {}
     }
     self.aceEditor.setShowPrintMargin(false);
     self.aceEditor.getSession().on("change", function () {
@@ -125,19 +133,11 @@ export class SurveyJSONEditor {
     self.aceEditor.on("input", function () {
       if (self.isInitialJSON) {
         self.isInitialJSON = false;
-        self.aceEditor
-          .getSession()
-          .getUndoManager()
-          .markClean();
+        self.aceEditor.getSession().getUndoManager().markClean();
+        self.updateUndoRedoState();
         return;
       }
-
-      if (
-        self.aceEditor
-          .getSession()
-          .getUndoManager()
-          .isClean()
-      ) {
+      if (self.aceEditor.getSession().getUndoManager().isClean()) {
         self.isJSONChanged = false;
         return;
       }
@@ -161,6 +161,7 @@ export class SurveyJSONEditor {
     if (this.aceEditor) {
       this.aceEditor.setValue(value);
       this.aceEditor.renderer.updateFull(true);
+      this.aceEditor.getSession().getUndoManager().reset();
     }
     this.processJson(value);
     this.isProcessingImmediately = false;
@@ -180,10 +181,18 @@ export class SurveyJSONEditor {
     return this.textWorker.survey;
   }
   private timeoutId: number = -1;
+  private updateUndoRedoState() {
+    if (this.hasAceEditor) {
+      let undoManager = this.aceEditor.getSession().getUndoManager();
+      this.aceCanUndo(undoManager.hasUndo());
+      this.aceCanRedo(undoManager.hasRedo());
+    }
+  }
   private onJsonEditorChanged(): any {
     if (!this.hasAceEditor) {
       this.isJSONChanged = true;
     }
+    this.updateUndoRedoState();
     if (this.timeoutId > -1) {
       clearTimeout(this.timeoutId);
     }
@@ -215,7 +224,7 @@ export class SurveyJSONEditor {
         row: error.position.start.row,
         column: error.position.start.column,
         text: error.text,
-        type: "error"
+        type: "error",
       };
       annotations.push(annotation);
     }
@@ -231,9 +240,7 @@ export class SurveyJSONEditor {
   public set readOnly(newVal) {
     this._readOnly(newVal);
   }
-  dispose() {
-
-  }
+  dispose() {}
 }
 
 ko.components.register("survey-json-editor", {
@@ -242,16 +249,18 @@ ko.components.register("survey-json-editor", {
       var creator: SurveyCreator = params.creator;
       var model = new SurveyJSONEditor();
 
-      creator.setSurveyJSONTextCallback = text => {
+      creator.setSurveyJSONTextCallback = (text) => {
         model.isInitialJSON = true;
         model.text = text;
-      }
+      };
 
-      var subscrViewType = creator.koViewType.subscribe(viewType => {
+      var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "editor") {
           model.isInitialJSON = true;
           model.show(creator.text);
-          creator.getSurveyJSONTextCallback = () => { return { text: model.text, isModified: model.isJSONChanged }; };
+          creator.getSurveyJSONTextCallback = () => {
+            return { text: model.text, isModified: model.isJSONChanged };
+          };
         } else {
           creator.getSurveyJSONTextCallback = undefined;
         }
@@ -261,9 +270,9 @@ ko.components.register("survey-json-editor", {
         model.readOnly = creator.readOnly;
       });
 
-      model.init(<HTMLElement>(
-        componentInfo.element.querySelector(".svd-json-editor")
-      ));
+      model.init(
+        <HTMLElement>componentInfo.element.querySelector(".svd-json-editor")
+      );
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         creator.setSurveyJSONTextCallback = undefined;
@@ -274,7 +283,7 @@ ko.components.register("survey-json-editor", {
       });
 
       return model;
-    }
+    },
   },
   template: templateHtml,
 });
