@@ -1626,3 +1626,58 @@ QUnit.test("creator.onConditionQuestionsGetList, Bug#957", function (assert) {
   assert.ok(editorItem, "Editor item is created");
   assert.equal(editorItem.nameQuestion.choices.length, 1, "One text question");
 });
+
+QUnit.test("creator.onAddQuestion and undo-redo manager, Bug#972", function (
+  assert
+) {
+  var creator = new SurveyCreator();
+  creator.onQuestionAdded.add(function (sender, options) {
+    options.question.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.currentPage.addNewQuestion("text", "q1");
+  creator.survey.currentPage.addNewQuestion("text", "q2");
+  creator.undo();
+  creator.undo();
+  assert.equal(
+    creator.survey.getAllQuestions().length,
+    0,
+    "We added two questions and then undo adding two questions"
+  );
+});
+QUnit.test("creator.onAddPage and undo-redo manager, Bug#972", function (
+  assert
+) {
+  var creator = new SurveyCreator();
+  creator.onPageAdded.add(function (sender, options) {
+    options.page.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.addNewPage("p2");
+  creator.survey.addNewPage("p3");
+  creator.undo();
+  creator.undo();
+  assert.equal(
+    creator.survey.pages.length,
+    1,
+    "We added two pages and then undo adding two pages"
+  );
+});
+QUnit.test("creator.onAddPanel and undo-redo manager, Bug#972", function (
+  assert
+) {
+  var creator = new SurveyCreator();
+  creator.onPanelAdded.add(function (sender, options) {
+    options.panel.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.currentPage.addNewPanel("panel1");
+  creator.survey.currentPage.addNewPanel("panel2");
+  creator.undo();
+  creator.undo();
+  assert.equal(
+    creator.survey.getAllPanels().length,
+    0,
+    "We added two panels and then undo adding two panels"
+  );
+});

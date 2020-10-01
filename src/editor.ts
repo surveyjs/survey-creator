@@ -1879,7 +1879,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       question.name = this.generateUniqueName(question, question.name);
       var page = this.getPageByElement(question);
       var options = { question: question, page: page };
+      this.addingObject = question;
       this.onQuestionAdded.fire(this, options);
+      this.addingObject = null;
     }
     if (parentPanel.elements.indexOf(question) !== -1) {
       this.surveyObjects.addElement(question, parentPanel);
@@ -1892,7 +1894,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!this.dragDropHelper.isMoving) {
       var page = this.getPageByElement(panel);
       var options = { panel: panel, page: page };
+      this.addingObject = panel;
       this.onPanelAdded.fire(this, options);
+      this.addingObject = null;
     }
     if (parentPanel.elements.indexOf(panel) !== -1) {
       this.surveyObjects.addElement(panel, parentPanel);
@@ -1900,7 +1904,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   private doOnPageAdded(page: Survey.Page) {
     var options = { page: page };
+    this.addingObject = page;
     this.onPageAdded.fire(this, options);
+    this.addingObject = null;
   }
   private getErrorOnPropertyChanging(
     obj: Survey.Base,
@@ -2216,6 +2222,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return;
     return this[name].apply(this, [].slice.call(arguments, 1));
   }
+  private addingObject: Survey.Base;
   private onSurveyPropertyValueChangedCallback(
     name: string,
     oldValue: any,
@@ -2223,6 +2230,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     sender: Survey.Base,
     arrayChanges: Survey.ArrayChanges
   ) {
+    if (this.addingObject == sender) return;
     this.undoRedoManager.startTransaction(name + " changed");
     this.undoRedoManager.onPropertyValueChanged(
       name,
