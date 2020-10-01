@@ -52,7 +52,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   private surveyLive: SurveyLiveTester;
   private translationValue: Translation;
   private logicValue: SurveyLogic;
-  private surveyObjects: SurveyObjects;
+  protected surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   public undoRedoManager: UndoRedoManager;
   private surveyValue = ko.observable<SurveyForDesigner>();
@@ -1932,7 +1932,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
         newName: value,
       });
     }
-    if (property.name == "name" || property.name == "title") {
+    if (
+      property.name == "name" ||
+      property.name == "title" ||
+      !this.onGetObjectTextInPropertyGrid.isEmpty
+    ) {
       this.surveyObjects.nameChanged(obj);
     }
     if (property.name === "name") {

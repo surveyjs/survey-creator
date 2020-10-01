@@ -96,7 +96,8 @@ export class SurveyObjects {
   public nameChanged(obj: Survey.Base) {
     var index = this.getItemIndex(obj);
     if (index < 0) return;
-    this.koObjects()[index].text(this.getText(this.koObjects()[index]));
+    var item = this.koObjects()[index];
+    item.text(this.getText(item));
   }
   public selectNextQuestion(isUp: boolean) {
     var question = this.getSelectedQuestion();

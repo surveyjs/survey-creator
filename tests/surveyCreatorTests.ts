@@ -7,8 +7,18 @@ import { SurveyObjectProperty } from "../src/objectProperty";
 import { AccordionViewModel } from "../src/utils/accordion";
 import { isPropertyVisible } from "../src/utils/utils";
 import { SurveyPropertyConditionEditor } from "../src/propertyEditors/propertyConditionEditor";
+import { SurveyObjects } from "../src/surveyObjects";
 
 export default QUnit.module("surveyEditorTests");
+
+class SurveyCreatorTester extends SurveyCreator {
+  constructor() {
+    super();
+  }
+  public getSurveyObjects(): SurveyObjects {
+    return this.surveyObjects;
+  }
+}
 
 QUnit.test("Set Text property", function (assert) {
   var editor = new SurveyCreator();
@@ -1681,3 +1691,39 @@ QUnit.test("creator.onAddPanel and undo-redo manager, Bug#972", function (
     "We added two panels and then undo adding two panels"
   );
 });
+
+QUnit.test(
+  "creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  function (assert) {
+    var creator = new SurveyCreatorTester();
+    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
+      if (!!options.obj.title) {
+        options.text = options.obj.title;
+      }
+      if (!!options.obj.description) {
+        options.text = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [{ type: "text", name: "q1", title: "question1" }],
+    };
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..question1",
+      "Default value is correct"
+    );
+    var question = creator.survey.getAllQuestions()[0];
+    creator.selectedElement = question;
+    question.description = "New Title";
+    creator.propertyGridObjectEditorModel.onPropertyChanged(
+      question,
+      Survey.Serializer.findProperty("question", "description"),
+      ""
+    );
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
