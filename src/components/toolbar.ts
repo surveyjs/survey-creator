@@ -26,7 +26,7 @@ export interface IToolbarItem {
   /**
    * Set this property to false to disable the toolbar item.
    */
-  enabled?: ko.Computed<boolean> | boolean;
+  enabled?: ko.Computed<boolean> | ko.Observable<boolean> | boolean;
   /**
    * Set this property to false to hide the toolbar item title.
    */

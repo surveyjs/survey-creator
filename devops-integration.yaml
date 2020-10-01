@@ -60,7 +60,7 @@ steps:
   inputs:
     buildType: 'specific'
     project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-    pipeline: '41'
+    pipeline: '42'
     specificBuildWithTriggering: true
     buildVersionToDownload: 'latest'
     downloadType: 'single'
