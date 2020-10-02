@@ -1919,6 +1919,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       return this.getLocString("pe.propertyNameIsNotUnique");
     return null;
   }
+  public updateObjectTextInPropertyGrid(obj: Survey.Base) {
+    if (!!this.surveyObjects) {
+      this.surveyObjects.nameChanged(obj);
+    }
+  }
   private onPropertyChanged(
     obj: any,
     property: Survey.JsonObjectProperty,

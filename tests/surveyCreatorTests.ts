@@ -1727,3 +1727,38 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test(
+  "update element TextInPropertyGrid for non selected element",
+  function (assert) {
+    var creator = new SurveyCreatorTester();
+    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
+      if (!!options.obj.description) {
+        options.text = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2" },
+      ],
+    };
+    var q1 = creator.survey.getAllQuestions()[0];
+    var q2 = creator.survey.getAllQuestions()[1];
+    creator.selectedElement = q1;
+    q2.name = "q2_new";
+    creator.updateObjectTextInPropertyGrid(q2);
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[3].text(),
+      "..q2_new",
+      "React on chaning the current object property"
+    );
+    q2.description = "New Title";
+    creator.updateObjectTextInPropertyGrid(q2);
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[3].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
