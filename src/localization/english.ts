@@ -590,6 +590,9 @@ export var enStrings = {
     runexpressiontrigger: "run expression",
     visibletrigger: "change visibility (deprecated)",
   },
+  pehelp: {
+    //expression:
+  },
   //Properties
   p: {
     name: "name",

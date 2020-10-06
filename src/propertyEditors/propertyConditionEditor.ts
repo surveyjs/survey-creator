@@ -395,7 +395,6 @@ export class ConditionEditorItem {
 export class SurveyPropertyConditionEditor
   extends SurveyPropertyTextEditor
   implements IConditionEditorItemOwner {
-  public showHelpText: boolean = true;
   public koTextValue: any;
   public onRemoveConditionClick: any;
   public onChangeViewClick: any;
@@ -459,10 +458,12 @@ export class SurveyPropertyConditionEditor
       self.onkoTextValueChanged(newValue);
     });
   }
-  public get propertyHelpText(): string {
-    return this.showHelpText && this.editorType == "expression"
-      ? this.getLocString("pe.expressionHelp")
-      : "";
+  protected getPropertyHelpLocName(): string {
+    var locName = super.getPropertyHelpLocName();
+    if (!locName && this.editorType == "expression") {
+      locName = "pe.expressionHelp";
+    }
+    return locName;
   }
   public addCondition = () => {
     var conditionEditorItem = new ConditionEditorItem(this);

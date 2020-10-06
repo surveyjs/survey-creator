@@ -2520,3 +2520,61 @@ QUnit.test("SurveyHelper.applyItemValueArray", function (assert) {
     10
   );
 });
+QUnit.test("property editor propertyHelpText", function (assert) {
+  var survey = new Survey.SurveyModel();
+  survey.addNewPage("p");
+  var question = survey.pages[0].addNewQuestion("text", "q1");
+  var curStrings = editorLocalization.getLocale("");
+  curStrings.pehelp.title = "Common Title";
+  curStrings.pehelp.survey_title = "Survey Title";
+  curStrings.pehelp.page_title = "Page Title";
+  curStrings.pehelp.question_title = "Question Title";
+
+  var questionTitleProp = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("question", "title")
+  );
+  questionTitleProp.object = question;
+  assert.equal(
+    questionTitleProp.editor.propertyHelpText,
+    "Question Title",
+    "Get from question property"
+  );
+  var pageTitleProp = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("page", "title")
+  );
+  pageTitleProp.object = survey.pages[0];
+  assert.equal(
+    pageTitleProp.editor.propertyHelpText,
+    "Page Title",
+    "Get from page property"
+  );
+
+  var surveyTitleProp = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("survey", "title")
+  );
+  surveyTitleProp.object = survey;
+  assert.equal(
+    surveyTitleProp.editor.propertyHelpText,
+    "Survey Title",
+    "Get from survey property"
+  );
+
+  delete curStrings.pehelp["page_title"];
+  assert.equal(
+    pageTitleProp.editor.propertyHelpText,
+    "Common Title",
+    "Get from common title property"
+  );
+  if (!!Survey.Serializer.findProperty("question", "defaultValueExpression")) {
+    var questionExpessionProp = new SurveyObjectProperty(
+      Survey.Serializer.findProperty("question", "defaultValueExpression")
+    );
+    questionExpessionProp.object = question;
+    assert.ok(
+      questionExpessionProp.editor.propertyHelpText.indexOf(
+        "You can use curly brackets"
+      ) > -1,
+      "Use correct value for expression"
+    );
+  }
+});

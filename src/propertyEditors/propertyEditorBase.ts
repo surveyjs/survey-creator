@@ -119,6 +119,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private set displayNameValue(val) {
     this._displayNameValue(val);
   }
+  public showHelpText: boolean = true;
   public koValue = ko.observable<any>();
   public koText: any;
   public koIsDefault: any;
@@ -243,8 +244,31 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public get canShowDisplayNameOnTop(): boolean {
     return true;
   }
+  protected getPropertyHelpLocName(): string {
+    var classNames = this.getHelpPropertyClassNames();
+    for (var i = 0; i < classNames.length; i++) {
+      let locName = "pehelp." + classNames[i] + "_" + this.property.name;
+      if (this.hasLocString(locName)) return locName;
+    }
+    let locName = "pehelp." + this.property.name;
+    return this.hasLocString(locName) ? locName : "";
+  }
+  private getHelpPropertyClassNames(): Array<string> {
+    if (!this.object) return [];
+    var type = this.object.getType();
+    var res = [];
+    var typeInfo = Survey.Serializer.findClass(type);
+    while (!!typeInfo) {
+      res.push(typeInfo.name);
+      if (typeInfo.find(this.property.name)) return res;
+      typeInfo = Survey.Serializer.findClass(typeInfo.parentName);
+    }
+    return res;
+  }
   public get propertyHelpText(): string {
-    return "";
+    if (!this.showHelpText) return "";
+    var locName = this.getPropertyHelpLocName();
+    return this.hasLocString(locName) ? this.getLocString(locName) : "";
   }
   public get contentTemplateName(): string {
     const editorType = this.isModal ? "modal-content" : this.editorTypeTemplate;
