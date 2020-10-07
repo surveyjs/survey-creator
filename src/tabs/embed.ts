@@ -33,27 +33,34 @@ export class SurveyEmbedingWindow {
     react: "react",
     vue: "vue",
   };
+  private platformCompleteCode = {
+    angular: "        survey.onComplete.add(sendDataToServer);\n",
+    jquery: "\n    onComplete: sendDataToServer",
+    knockout: "\nsurvey.onComplete.add(sendDataToServer);",
+    react: " onComplete={ sendDataToServer }",
+    vue: "\nsurvey.onComplete.add(sendDataToServer);",
+  };
   private platformJSonPage = {
     angular:
-      "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n       Survey.SurveyNG.render(\"surveyElement\", { model: survey });\n    }\n}",
+      "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n#complete#       Survey.SurveyNG.render(\"surveyElement\", { model: survey });\n    }\n}",
     jquery:
-      'var survey = new Survey.Model(surveyJSON);\n$("#surveyContainer").Survey({\n    model: survey,\n    onComplete: sendDataToServer\n});',
+      'var survey = new Survey.Model(surveyJSON);\n$("#surveyContainer").Survey({\n    model: survey,#complete#\n});',
     knockout:
-      'var survey = new Survey.Model(surveyJSON, "surveyContainer");\nsurvey.onComplete.add(sendDataToServer);',
+      'var survey = new Survey.Model(surveyJSON, "surveyContainer");#complete#',
     react:
-      'ReactDOM.render(\n    <Survey.Survey json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));',
+      'ReactDOM.render(\n    <Survey.Survey json={ surveyJSON }#complete# />, document.getElementById("surveyContainer"));',
     vue:
-      "var survey = new Survey.Model(surveyJSON);\nnew Vue({ el: '#surveyContainer', data: { survey: survey } });",
+      "var survey = new Survey.Model(surveyJSON);#complete#\nnew Vue({ el: '#surveyContainer', data: { survey: survey } });",
   };
   private platformJSonWindow = {
     angular:
-      "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n       Survey.SurveyWindowNG.render(\"surveyElement\", { model: survey });\n    }\n}",
+      "@Component({\n  selector: 'ng-app',\n        template: \n        <div id='surveyElement'></div>\",\n})\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);#complete#\n       Survey.SurveyWindowNG.render(\"surveyElement\", { model: survey });\n    }\n}",
     jquery:
-      'var survey = new Survey.Model(surveyJSON);\n$("#surveyContainer").SurveyWindow({\n    model: survey,\n    onComplete: sendDataToServer\n});',
+      'var survey = new Survey.Model(surveyJSON);\n$("#surveyContainer").SurveyWindow({\n    model: survey,#complete#\n});',
     knockout:
-      "var survey = new Survey.Model(surveyJSON);\nsurveyWindow.show();\nsurvey.onComplete.add(sendDataToServer);",
+      "var survey = new Survey.Model(surveyJSON);\nsurveyWindow.show();#complete#",
     react:
-      'ReactDOM.render(\n    <Survey.SurveyWindow json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));',
+      'ReactDOM.render(\n    <Survey.SurveyWindow json={ surveyJSON } #complete# />, document.getElementById("surveyContainer"));',
     vue: "",
   };
   private platformHtmlonPage = {
@@ -178,10 +185,15 @@ export class SurveyEmbedingWindow {
   }
   private getJavaText(): string {
     var isOnPage = this.koShowAsWindow() == "page";
-    var str = this.getSaveFunc() + "\n\n";
-    str += isOnPage
+    var str = !this.koLoadSurvey() ? this.getSaveFunc() + "\n\n" : "";
+    var strCode = isOnPage
       ? this.platformJSonPage[this.koLibraryVersion()]
       : this.platformJSonWindow[this.koLibraryVersion()];
+    var replacedCompleteCode = !this.koLoadSurvey()
+      ? this.platformCompleteCode[this.koLibraryVersion()]
+      : "";
+    strCode = strCode.replace("#complete#", replacedCompleteCode);
+    str += strCode;
     var jsonText = "var surveyJSON = " + this.getJsonText() + "\n\n";
     return this.getSetCss() + "\n" + jsonText + str;
   }
@@ -199,8 +211,14 @@ export class SurveyEmbedingWindow {
     return '    //send Ajax request to your web server.\n    alert("The results are:" + JSON.stringify(survey.data));';
   }
   private getJsonText(): string {
-    if (this.koHasIds() && this.koLoadSurvey()) {
-      return "{ surveyId: '" + this.surveyId + "'}";
+    if (this.koLoadSurvey()) {
+      return (
+        "{ surveyId: '" +
+        this.surveyId +
+        "', surveyPostId: '" +
+        this.surveyPostId +
+        "'}"
+      );
     }
     if (this.generateValidJSON) return JSON.stringify(this.json);
     return new SurveyJSON5().stringify(this.json);
