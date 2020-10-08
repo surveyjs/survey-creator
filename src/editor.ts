@@ -35,6 +35,7 @@ import { Commands } from "./commands";
 import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
+import { localization } from "./entries";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -2204,6 +2205,9 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     surveyType = Survey.Survey
   ) {
     var survey = new surveyType(json);
+    if (reason != "designer" && reason != "test") {
+      survey.locale = editorLocalization.currentLocale;
+    }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
   }

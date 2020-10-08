@@ -8,6 +8,7 @@ import { AccordionViewModel } from "../src/utils/accordion";
 import { isPropertyVisible } from "../src/utils/utils";
 import { SurveyPropertyConditionEditor } from "../src/propertyEditors/propertyConditionEditor";
 import { SurveyObjects } from "../src/surveyObjects";
+import { editorLocalization } from "../src/editorLocalization";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -1759,6 +1760,51 @@ QUnit.test(
       creator.getSurveyObjects().koObjects()[3].text(),
       "..New Title",
       "React on chaning the current object property"
+    );
+  }
+);
+QUnit.test(
+  "SurveyPropertyConditionEditor, set correct locale into internal survey, Bug #953",
+  function (assert) {
+    editorLocalization.currentLocale = "de";
+    var creator = new SurveyCreatorTester();
+    creator.JSON = {
+      elements: [
+        { name: "q1", type: "text", valueName: "profile:q1" },
+        {
+          name: "q2",
+          type: "text",
+        },
+      ],
+    };
+    assert.equal(
+      creator.survey.locale,
+      "",
+      "We do not set the designer survey locale"
+    );
+    var question = creator.survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.options = creator;
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    assert.equal(
+      editor.koEditorItems()[0].survey.locale,
+      "de",
+      "Get locale from Creator"
+    );
+
+    editorLocalization.currentLocale = "";
+    editor = new SurveyPropertyConditionEditor(property);
+    editor.options = creator;
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    assert.equal(
+      editor.koEditorItems()[0].survey.locale,
+      "",
+      "locale in Creator is empty"
     );
   }
 );
