@@ -261,7 +261,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     while (!!typeInfo) {
       res.push(typeInfo.name);
       if (typeInfo.find(this.property.name)) return res;
-      typeInfo = Survey.Serializer.findClass(typeInfo.parentName);
+      typeInfo = !!typeInfo.parentName
+        ? Survey.Serializer.findClass(typeInfo.parentName)
+        : null;
     }
     return res;
   }
