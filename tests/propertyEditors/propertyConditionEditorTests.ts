@@ -1933,3 +1933,58 @@ QUnit.test(
     );
   }
 );
+QUnit.test("SurveyPropertyConditionEditor, convert 000 into '000'", function (
+  assert
+) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "text",
+      },
+    ],
+  });
+  var question = survey.getQuestionByName("q2");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  editor.isEditorShowing = true;
+  var editorItem = editor.koEditorItems()[0];
+  editorItem.questionName = "q1";
+  editorItem.value = "000";
+  assert.equal(editorItem.toString(), "{q1} = '000'", "Put 000 into brackets");
+});
+/* TODO - uncomment it for v1.8.8
+QUnit.test(
+  "SurveyPropertyConditionEditor, do not convert '000' into 0",
+  function (assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        { name: "q1", type: "text" },
+        {
+          name: "q2",
+          type: "text",
+          visibleIf: "{q1} = '000'",
+        },
+      ],
+    });
+    var question = survey.getQuestionByName("q2");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    assert.strictEqual(editorItem.value, "000", "Value is 000 and not 0");
+    editorItem.value = "00000";
+    assert.strictEqual(editorItem.value, "00000", "Value is 00000 now");
+    assert.equal(
+      editorItem.toString(),
+      "{q1} = '00000'",
+      "Put 00000 into brackets"
+    );
+  }
+);
+*/

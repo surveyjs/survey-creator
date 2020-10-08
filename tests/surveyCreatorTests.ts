@@ -1770,7 +1770,7 @@ QUnit.test(
     var creator = new SurveyCreatorTester();
     creator.JSON = {
       elements: [
-        { name: "q1", type: "text", valueName: "profile:q1" },
+        { name: "q1", type: "text" },
         {
           name: "q2",
           type: "text",

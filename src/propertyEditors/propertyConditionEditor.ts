@@ -303,11 +303,21 @@ export class ConditionEditorItem {
   }
   private valToText(val: any): string {
     if (val == "true" || val == "false") return val;
-    if (!isNaN(val)) return val;
+    if (this.isNumeric(val)) return val;
     if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
     if (!this.isQuote(val[0])) val = "'" + val;
     if (!this.isQuote(val[val.length - 1])) val = val + "'";
     return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
+  }
+  private isNumeric(val: any): boolean {
+    if (
+      typeof val === "string" &&
+      val.length > 1 &&
+      val[0] === "0" &&
+      val[1] !== "x"
+    )
+      return false;
+    return !isNaN(val);
   }
   private isQuote(ch: string): boolean {
     return ch == "'" || ch == '"';
