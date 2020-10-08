@@ -646,6 +646,8 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * <br/> options.allowAddToToolbox set it to false to disable adding element to Toolbox
    * <br/> options.allowDragging set it to false to disable adding element to Toolbox
    * <br/> options.allowChangeType set it to false to disable changing element type
+   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   * <br/> options.allowShowHideTitle set it to false to disable changing titleLocation property to hidden/default
    */
   public onElementAllowOperations: Survey.Event<
     (sender: SurveyCreator, options: any) => any,

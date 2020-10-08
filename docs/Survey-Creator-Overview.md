@@ -1107,9 +1107,17 @@ surveyCreator.onElementAllowOperations.add(function (sender, options) {
         //disable changing type
         options.allowChangeType = false;
     }
+    
     //Show/hide "Edit" button for showing modal Question/Panel Editor Window
-    //options.allowEdit
+    //options.allowEdit = false;
+    
     //Enable/disable element drag&drop
-    //options.allowDragging
+    //options.allowDragging = false;
+    
+    //Enable/disable element changing isRequired property
+    //options.allowChangeRequired = false
+
+    //Enable/disable element changing titleLocation property to hidden/default
+    //options.allowShowHideTitle = false
 });
 ```
