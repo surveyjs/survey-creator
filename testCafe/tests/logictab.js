@@ -61,7 +61,9 @@ test(`Create logic: question visibility`, async (t) => {
     .click(visibilitySelect.find("option").withText("question4"));
 
   await t.click(page.buttonByValue("Save and return"));
-  await t.expect(Selector("span").withText("{question1} == item1").exists).ok();
+  await t
+    .expect(Selector("span").withText("{question1} == 'item1'").exists)
+    .ok();
   await t
     .expect(
       Selector("span").withText("Make question {question4} visible").exists

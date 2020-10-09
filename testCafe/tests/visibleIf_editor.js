@@ -32,7 +32,7 @@ test(`Set visibleIf property`, async (t) => {
 
   const expressionText = Selector(".svd-expression-header").nth(0).child(0)
     .innerText;
-  await t.expect(expressionText).eql("{question1} == item1");
+  await t.expect(expressionText).eql("{question1} == 'item1'");
 
   await t
     .click(`input[value="Remove"]`)
@@ -46,7 +46,7 @@ test(`Set visibleIf property`, async (t) => {
       "{question1} = 'item2' and {question2} = ['item1', 'item2']"
     )
     .expect(expressionText)
-    .eql("({question1} == item2) and ({question2} == [item1, item2])");
+    .eql("({question1} == 'item2') and ({question2} == ['item1', 'item2'])");
 
   await t
     .click(Selector(`button`).withText("Build"))
