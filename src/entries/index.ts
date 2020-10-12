@@ -54,6 +54,7 @@ export { SurveyPropertyUrlConditionEditor } from "../propertyEditors/propertyUrl
 export { SurveyPropertyCalculatedValueEditor } from "../propertyEditors/propertyCalculatedValues";
 export { SurveyPropertyValidatorsEditor } from "../propertyEditors/propertyValidatorsEditor";
 export { SurveyPropertyCellsEditor } from "../propertyEditors/propertyCellsEditor";
+export { SurveyPropertyBindingsEditor } from "../propertyEditors/propertyBindingsEditor";
 export { SurveyObjects } from "../surveyObjects";
 export { SurveyQuestionEditorDefinition } from "../questionEditors/questionEditorDefinition";
 export {
@@ -185,6 +186,7 @@ export { PropertyEditorNestedItemsViewModel } from "../property-editors/nested-i
 export { PropertyEditorNestedItemViewModel } from "../property-editors/nested-item";
 export { PropertyEditorNestedViewModel } from "../property-editors/nested";
 export { PropertyEditorCustomViewModel } from "../property-editors/custom";
+export { PropertyEditorBindingsViewModel } from "../property-editors/bindings";
 
 export { SurveyFilePropertyEditor } from "../property-editors/file";
 export { simulatorDevices } from "../components/simulator";

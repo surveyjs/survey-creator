@@ -44,6 +44,7 @@ import {
 } from "../../src/propertyEditors/propertyDefaultValueEditor";
 import { SurveyPropertyCellsEditor } from "../../src/propertyEditors/propertyCellsEditor";
 import { SurveyHelper } from "../../src/surveyHelper";
+import { SurveyPropertyBindingsEditor } from "../../src/propertyEditors/propertyBindingsEditor";
 
 export default QUnit.module("PropertyEditorsTests");
 
@@ -77,6 +78,57 @@ class SurveyPropertyTextEditorForTests extends SurveyPropertyTextEditor {
     this.beforeCloseModal();
   }
 }
+
+class BindingsTester extends Survey.Base {
+  private survey: Survey.SurveyModel;
+  constructor() {
+    super();
+    this.survey = new Survey.SurveyModel({
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2" },
+      ],
+    });
+  }
+  public getType() {
+    return "bindingstester";
+  }
+  public getSurvey(): Survey.SurveyModel {
+    return this.survey;
+  }
+  public get property1(): string {
+    return this.getPropertyValue("property1", "");
+  }
+  public set property1(val: string) {
+    this.setPropertyValue("property1", val);
+  }
+  public get property2(): string {
+    return this.getPropertyValue("property2", "");
+  }
+  public set property2(val: string) {
+    this.setPropertyValue("property2", val);
+  }
+  public get property3(): number {
+    return this.getPropertyValue("property3", 0);
+  }
+  public set property3(val: number) {
+    this.setPropertyValue("property3", val);
+  }
+}
+
+Survey.Serializer.addClass(
+  "bindingstester",
+  [
+    { name: "property1", isBindable: true },
+    "proeprty2",
+    { name: "property3:number", isBindable: true },
+    { name: "bindings:bindings", serializationProperty: "bindings" },
+  ],
+  function (json: any) {
+    return new BindingsTester();
+  },
+  "base"
+);
 
 function createSurvey(): Survey.Survey {
   return new Survey.Survey({
@@ -2577,4 +2629,34 @@ QUnit.test("property editor propertyHelpText", function (assert) {
       "Use correct value for expression"
     );
   }
+});
+QUnit.test("property editor propertyHelpText", function (assert) {
+  var tester = new BindingsTester();
+  tester.bindings.setBinding("property1", "q1");
+  var property = Survey.Serializer.findProperty("bindingstester", "bindings");
+  var propEditor = new SurveyPropertyBindingsEditor(property);
+  propEditor.object = tester;
+  propEditor.beforeShow();
+  assert.equal(
+    propEditor.items.length,
+    2,
+    "There are two bindings properties in the object"
+  );
+  assert.equal(propEditor.items[0].value, "q1", "Bindings set correctly");
+  assert.equal(
+    propEditor.items[0].elementSelector.koElements().length,
+    2,
+    "There are two elements"
+  );
+  assert.equal(
+    propEditor.items[0].displayName,
+    "Property 1",
+    "displayName set correctly"
+  );
+  propEditor.items[0].value = "q2";
+  assert.equal(
+    tester.bindings.getValueNameByPropertyName("property1"),
+    "q2",
+    "Bindings two-way works correctly"
+  );
 });

@@ -26,6 +26,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
+        { name: "bindings", tab: "logic" },
         { name: "defaultValueExpression", tab: "logic" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },

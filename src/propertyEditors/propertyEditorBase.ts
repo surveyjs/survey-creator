@@ -377,15 +377,16 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.titleValue = "";
     if (!this.property) return;
     var locName = this.property.name;
-    if (!!this.property.displayName) {
-      this.displayNameValue = this.property.displayName;
-    } else {
-      this.displayNameValue = this.isInPropertyGridValue
-        ? editorLocalization.getPropertyName(locName)
-        : editorLocalization.getPropertyNameInEditor(locName);
-    }
+    this.displayNameValue = this.getPropertyDisplayName(this.property);
     var title = editorLocalization.getPropertyTitle(locName);
     this.titleValue = title;
+  }
+  protected getPropertyDisplayName(prop: Survey.JsonObjectProperty): string {
+    if (!!prop.displayName) return prop.displayName;
+    var locName = prop.name;
+    return this.isInPropertyGridValue
+      ? editorLocalization.getPropertyName(locName)
+      : editorLocalization.getPropertyNameInEditor(locName);
   }
   public apply(): boolean {
     if (this.hasError()) return false;
