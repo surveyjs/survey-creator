@@ -23,8 +23,6 @@ QUnit.test("Autocomplete without prefix test", function (assert) {
     questions: usableQuestions,
   });
 
-  //TODO uncomment after releasing v1.0.88
-  //assert.equal(completions.length, 22 + 1, "all completions");
   assert.equal(completions[0].value, "{expression}", "questions first");
 
   prefix = null;
@@ -33,8 +31,6 @@ QUnit.test("Autocomplete without prefix test", function (assert) {
     questions: usableQuestions,
   });
 
-  //TODO uncomment after releasing v1.0.88
-  //assert.equal(completions.length, 22 + 1, "all completions");
   assert.equal(completions[0].value, "{expression}", "questions first");
 });
 
@@ -1956,7 +1952,7 @@ QUnit.test("SurveyPropertyConditionEditor, convert 000 into '000'", function (
   editorItem.value = "000";
   assert.equal(editorItem.toString(), "{q1} = '000'", "Put 000 into brackets");
 });
-/* TODO - uncomment it for v1.8.8
+
 QUnit.test(
   "SurveyPropertyConditionEditor, do not convert '000' into 0",
   function (assert) {
@@ -1987,4 +1983,3 @@ QUnit.test(
     );
   }
 );
-*/
