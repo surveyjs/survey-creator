@@ -63,6 +63,7 @@ export var ruStrings = {
     logic: "Логика опросника",
     embedSurvey: "Вставить опросник",
     translation: "Перевод",
+    "property-grid": "Свойства",
     saveSurvey: "Сохранить опросник",
     designer: "Обзор конструктора",
     jsonEditor: "JSON редактор",
