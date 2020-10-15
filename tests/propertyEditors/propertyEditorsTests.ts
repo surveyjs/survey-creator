@@ -2660,3 +2660,12 @@ QUnit.test("property editor propertyHelpText", function (assert) {
     "Bindings two-way works correctly"
   );
 });
+QUnit.test("property text editor dataList attribute", function (assert) {
+  var tester = new Survey.QuestionText("q1");
+  var property = Survey.Serializer.findProperty("question", "name");
+  property.dataList = ["item1", "item2"];
+  var propEditor = new SurveyStringPropertyEditor(property);
+  propEditor.object = tester;
+  assert.ok(propEditor.listName, "list name exists");
+  property.dataList = null;
+});

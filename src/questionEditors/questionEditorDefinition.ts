@@ -230,6 +230,7 @@ export class SurveyQuestionEditorDefinition {
         "max",
         "step",
         "placeHolder",
+        "autoComplete",
         { name: "minValueExpression", tab: "logic" },
         { name: "maxValueExpression", tab: "logic" },
         { name: "size", tab: "layout" },

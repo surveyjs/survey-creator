@@ -128,8 +128,11 @@ export class SurveyPropertyEditorFactory {
 
 export class SurveyStringPropertyEditor extends SurveyPropertyEditorBase {
   public koInputType: any = ko.observable("text");
+  private listNameValue: string;
+  private static dataListNumber = 0;
   constructor(property: Survey.JsonObjectProperty) {
     super(property);
+    this.listNameValue = this.getListName();
   }
   public get inputType(): string {
     return this.koInputType();
@@ -139,6 +142,21 @@ export class SurveyStringPropertyEditor extends SurveyPropertyEditorBase {
   }
   public get editorType(): string {
     return "string";
+  }
+  public get listName(): string {
+    return this.listNameValue;
+  }
+  private getListName(): string {
+    if (
+      !this.property ||
+      !Array.isArray(this.property.dataList) ||
+      this.property.dataList.length == 0
+    )
+      return "";
+    return (
+      "propertyEditorDataList" +
+      (SurveyStringPropertyEditor.dataListNumber++).toString()
+    );
   }
 }
 export class SurveyDropdownPropertyEditor extends SurveyPropertyEditorBase {
