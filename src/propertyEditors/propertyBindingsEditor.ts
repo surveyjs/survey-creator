@@ -28,11 +28,11 @@ export class SurveyPropertyBindingsItem {
       "question",
       showTitle
     );
-    this.value = this.obj.bindings.getValueNameByPropertyName(
+    this.value = this.obj["bindings"].getValueNameByPropertyName(
       this.property.name
     );
     this.elementSelectorValue.onValueChangedCallback = (val) => {
-      this.obj.bindings.setBinding(this.property.name, val);
+      this.obj["bindings"].setBinding(this.property.name, val);
     };
   }
   public get elementSelector(): SurveyElementSelector {
