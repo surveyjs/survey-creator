@@ -246,6 +246,7 @@ QUnit.test("TitleInplaceEditor validateSelectedElement", function(assert) {
 
 QUnit.test("Title image read only mode", function(assert) {
   var survey = new SurveyForDesigner();
+  SurveyForDesigner.isTitleLogoEditable(true);
   survey.isReadOnly(true);
 
   assert.notOk(survey.logo, "No logo");
@@ -264,6 +265,50 @@ QUnit.test("Title image read only mode", function(assert) {
   survey.logoPosition = "none";
   assert.notOk(survey.isLogoBefore, "No logo before");
   assert.notOk(survey.isLogoAfter, "No logo after");
+});
+
+QUnit.test("Title has logo and logo position without adorner", function(assert) {
+  var survey = new SurveyForDesigner();
+  SurveyForDesigner.isTitleLogoEditable(false);
+
+  assert.notOk(survey.logo, "No logo");
+  assert.equal(survey.logoPosition, "left", "Logo on the left");
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
+
+  survey.logo = "Logo image link";
+  assert.ok(survey.isLogoBefore, "Logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
+
+  survey.logoPosition = "right";
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.ok(survey.isLogoAfter, "Logo after");
+
+  survey.logoPosition = "none";
+  assert.notOk(survey.isLogoBefore, "No logo before");
+  assert.notOk(survey.isLogoAfter, "No logo after");
+});
+
+QUnit.test("Title has logo and logo position with adorner", function(assert) {
+  var survey = new SurveyForDesigner();
+  SurveyForDesigner.isTitleLogoEditable(true);
+
+  assert.notOk(survey.logo, "No logo");
+  assert.equal(survey.logoPosition, "left", "Logo on the left");
+  assert.ok(survey.isLogoBefore, "No logo before");
+  assert.ok(survey.isLogoAfter, "No logo after");
+
+  survey.logo = "Logo image link";
+  assert.ok(survey.isLogoBefore, "Logo before");
+  assert.ok(survey.isLogoAfter, "No logo after");
+
+  survey.logoPosition = "right";
+  assert.ok(survey.isLogoBefore, "No logo before");
+  assert.ok(survey.isLogoAfter, "Logo after");
+
+  survey.logoPosition = "none";
+  assert.ok(survey.isLogoBefore, "No logo before");
+  assert.ok(survey.isLogoAfter, "No logo after");
 });
 
 QUnit.test("Title editor read only mode", function (assert) {

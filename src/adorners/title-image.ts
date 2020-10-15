@@ -5,6 +5,12 @@ import { Survey } from "survey-knockout";
 
 export var titleImageAdorner = {
   ignoreHiddenLogoProperty: false,
+  onRegister: () => {
+    SurveyForDesigner.isTitleLogoEditable(true);
+  },
+  onUnregister: () => {
+    SurveyForDesigner.isTitleLogoEditable(false);
+  },
   getMarkerClass: (model) => {
     return typeof model.getType === "function" && model.getType() === "survey"
       ? "image_editable"

@@ -98,7 +98,7 @@ export class SurveyForDesigner extends Survey.Survey {
     return editorLocalization.getString(value);
   }
   private get _hasLogo() {
-    return !!this.logo && this.logoPosition !== "none";
+    return !!this.isLogoImageChoosen && this.logoPosition !== "none";
   }
   public get _isLogoBefore() {
     return (
@@ -112,14 +112,15 @@ export class SurveyForDesigner extends Survey.Survey {
       (this.logoPosition === "right" || this.logoPosition === "bottom")
     );
   }
+  public static isTitleLogoEditable = ko.observable(false);
   public get hasLogo() {
-    return (this.isReadOnly() && this._hasLogo) || !this.isReadOnly();
+    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._hasLogo) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._hasLogo;
   }
   public get isLogoBefore() {
-    return (this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly();
+    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._isLogoBefore;
   }
   public get isLogoAfter() {
-    return (this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly();
+    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter;
   }
   public get isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
@@ -344,13 +345,23 @@ export function registerAdorner(name, adorner) {
     adornersConfig[name] = [];
   }
   adornersConfig[name].push(adorner);
+  if(typeof adorner.onRegister === "function") {
+    adorner.onRegister();
+  }
 }
 export function removeAdorners(names: string[] = undefined) {
-  if (names !== undefined) {
-    (names || []).forEach((name) => delete adornersConfig[name]);
-  } else {
-    adornersConfig = {};
+  if (names === undefined) {
+    names = Object.keys(adornersConfig);
   }
+  (names || []).forEach((name) => {
+    var adorners: any = adornersConfig[name];
+    (adorners || []).forEach((adorner) => {
+      if(typeof adorner.onUnregister === "function") {
+        adorner.onUnregister();
+      }
+    });
+    delete adornersConfig[name]; 
+  });
 }
 
 function onUpdateQuestionCssClasses(survey, options) {
