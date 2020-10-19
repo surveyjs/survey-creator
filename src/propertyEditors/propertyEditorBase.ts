@@ -106,6 +106,7 @@ export interface ISurveyObjectEditorOptions {
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private objectValue: any;
+  private parentListValue: Array<Survey.Base>;
   private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
   private property_: Survey.JsonObjectProperty;
@@ -248,6 +249,12 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public set object(value: any) {
     this.setObjectCore(value);
   }
+  public get parentList(): Array<Survey.Base> {
+    return this.parentListValue;
+  }
+  public set parentList(val: Array<Survey.Base>) {
+    this.parentListValue = val;
+  }
   public get originalValue(): any {
     return this.getOriginalValue();
   }
@@ -301,6 +308,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         errorText = this.getLocString("pe.propertyIsEmpty");
       }
     }
+    if(this.checkErrorOnUnique()) {
+      errorText = this.getLocString("pe.propertyIsNoUnique");
+    }
     if (
       !errorText &&
       this.property &&
@@ -315,6 +325,14 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     }
     this.koErrorText(errorText);
     return errorText !== "";
+  }
+  private checkErrorOnUnique(): boolean {
+    if(!this.property || !this.property.isUnique || !Array.isArray(this.parentList)) return false;
+    for(var i = 0; i < this.parentList.length; i ++) {
+      if(this.parentList[i] === this.object) continue;
+      if(this.parentList[i][this.property.name] == this.koValue()) return true;
+    }
+    return false;
   }
   private checkForItemValue() {
     //TODO Problem is in 882ca3ac commit. ItemValue without value should be invalid. Need to better fix for the problem.
