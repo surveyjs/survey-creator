@@ -148,7 +148,8 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       () => this.columns,
       this.options,
       (item) => this.getItemClassName(item),
-      this.canDeleteItem(item)
+      this.canDeleteItem(item),
+      this.originalValue
     );
   }
   protected onListDetailViewChanged() {}
@@ -175,7 +176,8 @@ export class SurveyNestedPropertyEditorItem {
     private getColumns: () => Array<SurveyNestedPropertyEditorColumn>,
     options: ISurveyObjectEditorOptions,
     private getItemClassName: (item: any) => string = null,
-    canDeleteItem: boolean = true
+    canDeleteItem: boolean = true,
+    private parentList: Array<Survey.Base> = null
   ) {
     this.koCanDeleteItem = ko.observable(canDeleteItem);
     this.options = options;
@@ -188,7 +190,8 @@ export class SurveyNestedPropertyEditorItem {
           new SurveyNestedPropertyEditorEditorCell(
             obj,
             columns[i].property,
-            this.options
+            this.options,
+            this.parentList
           )
         );
       }
@@ -235,12 +238,14 @@ export class SurveyNestedPropertyEditorItem {
     }
   }
   protected createSurveyQuestionEditor() {
-    return new SurveyElementEditorContentModel(
+    var res = new SurveyElementEditorContentModel(
       this.obj,
       this.getClassName(),
       this.options,
       true
     );
+    res.setParentList(this.parentList);
+    return res;
   }
   focus() {
     setTimeout(() => {
@@ -269,7 +274,8 @@ export class SurveyNestedPropertyEditorEditorCell {
   constructor(
     public obj: any,
     public property: Survey.JsonObjectProperty,
-    options: ISurveyObjectEditorOptions = null
+    options: ISurveyObjectEditorOptions = null,
+    private listObj: Array<Survey.Base> = null
   ) {
     this.options = options;
     this.objectPropertyValue = new SurveyObjectProperty(
@@ -279,6 +285,7 @@ export class SurveyNestedPropertyEditorEditorCell {
     );
     this.objectPropertyValue.editor.isInplaceProperty = true;
     this.objectProperty.object = obj;
+    this.objectPropertyValue.editor.parentList = listObj;
   }
   public get objectProperty(): SurveyObjectProperty {
     return this.objectPropertyValue;

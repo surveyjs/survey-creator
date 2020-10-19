@@ -249,6 +249,7 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
 
     propertyIsEmpty: "Please enter a value",
+    propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
     listIsEmpty: "Add a new item",
     expressionIsEmpty: "Expression is empty",

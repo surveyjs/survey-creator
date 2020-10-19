@@ -1405,6 +1405,94 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("SurveyPropertyMatrixDropdownColumns show error on setting same column name", function (
+  assert
+) {
+  Survey.Serializer.findProperty("matrixdropdowncolumn", "name").isUnique = true;
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.columns.push(new Survey.MatrixDropdownColumn("column1"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column2"));
+  assert.equal(question.columns.length, 2, "There are two columns");
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  var itemViewModel = <SurveyNestedPropertyEditorItem>columnsEditor.createItemViewModel(question.columns[1]);
+  assert.equal(
+    itemViewModel.cells[2].value,
+    "column2",
+    "the last column name"
+  );
+  columnsEditor.onAddClick();
+  assert.equal(question.columns.length, 3, "There are 3 columns now");
+  itemViewModel = <SurveyNestedPropertyEditorItem>columnsEditor.createItemViewModel(question.columns[2]);
+  assert.equal(
+    itemViewModel.cells[2].koValue(),
+    "column3",
+    "set default column name"
+  );
+  itemViewModel.cells[2].koValue("column2");
+  assert.equal(itemViewModel.hasError(), true, "There is an error");
+  assert.equal(question.columns[2].name, "column3", "column name doesn't changed");
+  columnsEditor.onEditItemClick(itemViewModel);
+  var colDetailEditor = <SurveyElementEditorContentModel>(
+    columnsEditor.koEditItem().itemEditor
+  );
+  var nameEditor = colDetailEditor.getPropertyEditorByName("name");
+  nameEditor.koValue("column1");
+  assert.equal(nameEditor.hasError(), true, "There is an error in detail editor");
+  assert.equal(question.columns[2].name, "column3", "column name doesn't changed in detail editor");
+});
+
+QUnit.test("editor base check for unique property value", function (
+  assert
+) {
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.columns.push(new Survey.MatrixDropdownColumn("column1"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column2"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column3"));
+  var property = Survey.Serializer.findProperty("matrixdropdowncolumn", "name");
+  property.isUnique = true;
+  var textEditor = new SurveyPropertyTextEditor(property);
+  textEditor.object = question.columns[1];
+  textEditor.parentList = question.columns;
+  assert.equal(textEditor.hasError(), false, "name is unique");
+  textEditor.koValue("column1");
+  assert.equal(textEditor.hasError(), true, "name is not unique");
+  textEditor.koValue("column3");
+  assert.equal(textEditor.hasError(), true, "name is not unique #2");
+  textEditor.koValue("column2");
+  assert.equal(textEditor.hasError(), false, "name is unique #2");
+  textEditor.koValue("column4");
+  assert.equal(textEditor.hasError(), false, "name is unique #3");
+});
+
+QUnit.test("SurveyElementEditorContentModel check for unique property value", function (
+  assert
+) {
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.columns.push(new Survey.MatrixDropdownColumn("column1"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column2"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column3"));
+  var property = Survey.Serializer.findProperty("matrixdropdowncolumn", "name");
+  property.isUnique = true;
+  var editor = new SurveyElementEditorContentModel(question.columns[1], "matrixdropdowncolumn");
+  editor.setParentList(question.columns);
+  var textEditor = editor.getPropertyEditorByName("name");
+  assert.equal(textEditor.hasError(), false, "name is unique");
+  textEditor.koValue("column1");
+  assert.equal(textEditor.hasError(), true, "name is not unique");
+  textEditor.koValue("column3");
+  assert.equal(textEditor.hasError(), true, "name is not unique #2");
+  textEditor.koValue("column2");
+  assert.equal(textEditor.hasError(), false, "name is unique #2");
+  textEditor.koValue("column4");
+  assert.equal(textEditor.hasError(), false, "name is unique #3");
+});
+
+
 QUnit.test(
   "SurveyPropertyItemValuesEditor check if there are visibleIf and enableIf properties in detail form",
   function (assert) {

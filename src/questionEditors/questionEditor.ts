@@ -170,6 +170,12 @@ export class SurveyElementEditorContentModel {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
+  public setParentList(parentList: Array<Survey.Base>) {
+    var edProperties = this.getAllEditorProperties();
+    for(var i = 0; i < edProperties.length; i ++) {
+      edProperties[i].editor.parentList = parentList;
+    }
+  }
   protected setOriginalObjValue(obj: any) {
     this.originalObjValue = obj;
   }
