@@ -177,7 +177,14 @@ QUnit.test("TitleInplaceEditor valueChanged", function(assert) {
 QUnit.test("TitleInplaceEditor hasError/error", function(assert) {
   var target = new Survey.QuestionTextModel("q1");
   var model = new TitleInplaceEditor(target, "title", null, "", <any>{
-    onGetErrorTextOnValidationCallback: (_, __, newValue) =>
+      onIsPropertyReadOnlyCallback: (
+        obj: Survey.Base,
+        property: Survey.JsonObjectProperty,
+        readOnly: boolean
+      ): boolean => {
+        return property.readOnly;
+      },
+      onGetErrorTextOnValidationCallback: (_, __, newValue) =>
       newValue === "test1" ? "error" : "",
   });
   assert.equal(model.error(), "", "No errors initial");
@@ -203,6 +210,13 @@ QUnit.test("TitleInplaceEditor start edit callback", function(assert) {
     focus: () => inputElement["onfocus"](),
   };
   var model = new TitleInplaceEditor(target, "title", {}, "", <any>{
+    onIsPropertyReadOnlyCallback: (
+      obj: Survey.Base,
+      property: Survey.JsonObjectProperty,
+      readOnly: boolean
+    ): boolean => {
+      return property.readOnly;
+    },
     onTitleInplaceEditorStartEdit,
   });
   model.getInputElement = () => inputElement;
@@ -313,8 +327,17 @@ QUnit.test("Title has logo and logo position with adorner", function(assert) {
 
 QUnit.test("Title editor read only mode", function (assert) {
   var survey = new SurveyForDesigner();
-  var titleModel = new TitleInplaceEditor(survey, "title", null, "", null);
-  var descriptionModel = new TitleInplaceEditor(survey, "description", null, "", null);
+  var creatorStub = {
+    onIsPropertyReadOnlyCallback: (
+      obj: Survey.Base,
+      property: Survey.JsonObjectProperty,
+      readOnly: boolean
+    ): boolean => {
+      return property.readOnly && readOnly;
+    }
+  }
+  var titleModel = new TitleInplaceEditor(survey, "title", null, "", <any>creatorStub);
+  var descriptionModel = new TitleInplaceEditor(survey, "description", null, "", <any>creatorStub);
   Survey.Serializer.findProperty("survey", "title").readOnly = true;
   assert.ok(titleModel.readOnly, "title is read only");
   assert.notOk(descriptionModel.readOnly, "description is not read only");

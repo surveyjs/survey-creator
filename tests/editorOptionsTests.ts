@@ -41,7 +41,13 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   ): boolean {
     return true;
   }
-
+  onIsPropertyReadOnlyCallback(
+    obj: Survey.Base,
+    property: Survey.JsonObjectProperty,
+    readOnly: boolean
+  ): boolean {
+    return false;
+  }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,

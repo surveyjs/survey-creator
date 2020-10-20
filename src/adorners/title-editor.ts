@@ -126,7 +126,10 @@ export class TitleInplaceEditor {
   }
 
   get readOnly() {
-    return !!this.property && this.property.readOnly;
+    if(!!this.property && !!this.editor) {
+      return this.editor.onIsPropertyReadOnlyCallback(this.target, this.property, this.property.readOnly);
+    }
+    return false;
   }
 
   valueChanged: (newVal: any) => string;

@@ -3059,21 +3059,28 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.onCollectionItemDeleting.fire(this, options);
     return options.allowDelete;
   }
-  onIsEditorReadOnlyCallback(
+  onIsPropertyReadOnlyCallback(
     obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
+    property: Survey.JsonObjectProperty,
     readOnly: boolean
   ): boolean {
     var proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
     var options = {
       obj: obj,
-      property: editor.property,
+      property: property,
       readOnly: proposedValue,
-      propertyName: editor.property.name,
+      propertyName: property.name,
     };
     this.onGetPropertyReadOnly.fire(this, options);
     return options.readOnly;
+  }
+  onIsEditorReadOnlyCallback(
+    obj: Survey.Base,
+    editor: SurveyPropertyEditorBase,
+    readOnly: boolean
+  ): boolean {
+    return this.onIsPropertyReadOnlyCallback(obj, editor.property, readOnly);
   }
   onItemValueAddedCallback(
     obj: Survey.Base,
