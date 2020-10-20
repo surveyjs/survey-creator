@@ -30,6 +30,7 @@ function focusAfterChange(question: QuestionSelectBase, index = 0) {
 }
 
 export class ItemInplaceEditor extends TitleInplaceEditor {
+  private _allowAddRemoveItems = true;
   constructor(
     target: any,
     name: string,
@@ -73,6 +74,12 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
         return;
       }
     });
+    var editorOptions = {
+      allowAddRemoveItems: true,
+      allowRemoveAllItems: true
+    };
+    this.editor.onSetPropertyEditorOptionsCallback("choices", this.question, editorOptions);
+    this._allowAddRemoveItems = editorOptions.allowAddRemoveItems;
   }
 
   deleteItem(model: ItemInplaceEditor, event) {
@@ -120,6 +127,10 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
 
   get isLastItem() {
     return this.question.choices.length === 1;
+  }
+
+  get allowAddRemoveItems() {
+    return this._allowAddRemoveItems;
   }
 }
 
@@ -360,22 +371,30 @@ export var itemDraggableAdorner = {
         },
       })
     );
-    var addNew = createAddItemElement(
-      createAddItemHandler(
-        model,
-        (itemValue) => {
-          editor.onQuestionEditorChanged(model);
-        },
-        (itemValue) => {
-          editor.onItemValueAddedCallback(
-            model,
-            "choices",
-            itemValue,
-            model.choices
-          );
-        }
-      )
-    );
+    var editorOptions = {
+      allowAddRemoveItems: true,
+      allowRemoveAllItems: true
+    };
+    editor.onSetPropertyEditorOptionsCallback("choices", model, editorOptions);
+    if(editorOptions.allowAddRemoveItems) {
+      var addNew = createAddItemElement(
+        createAddItemHandler(
+          model,
+          (itemValue) => {
+            editor.onQuestionEditorChanged(model);
+          },
+          (itemValue) => {
+            editor.onItemValueAddedCallback(
+              model,
+              "choices",
+              itemValue,
+              model.choices
+            );
+          }
+        )
+      );
+      itemsRoot[0].appendChild(addNew);
+    }
     var raiseChangingEvent = (
       target: any,
       propertyName: string,
@@ -405,7 +424,6 @@ export var itemDraggableAdorner = {
         editor.onPropertyValueChanged(property, target, newValue);
       }
     };
-    itemsRoot[0].appendChild(addNew);
     if (
       editor.canShowObjectProperty(model, "hasOther") &&
       model.hasOther !== true
