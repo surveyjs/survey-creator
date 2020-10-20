@@ -416,6 +416,10 @@ function filterPageElements(elements) {
 }
 
 function addAdorner(node, model) {
+  const allowEdit = !!model && (!!model.allowingOptions && !!model.allowingOptions.allowEdit || model.allowingOptions === undefined);
+  const survey = getSurvey(model);
+  const editor = !!survey && survey.getEditor && survey.getEditor();
+  const isReadOnly = !allowEdit || !!editor && editor.readOnly;
   Object.keys(adornersConfig).forEach((element) => {
     adornersConfig[element].forEach((adorner) => {
       var elementClass = adorner.getMarkerClass(model);
@@ -426,6 +430,12 @@ function addAdorner(node, model) {
         var temp = [];
         for (var i = 0; i < elements.length; i++) {
           temp.push(elements[i]);
+          if(isReadOnly && !adorner.renderReadOnly && elements[i].classList) {
+            elements[i].classList.remove(elementClass);
+          }
+        }
+        if(isReadOnly && !adorner.renderReadOnly) {
+          return;
         }
         elements = temp;
         if (node.className.split(" ").indexOf(elementClass) !== -1) {
@@ -444,10 +454,10 @@ function addAdorner(node, model) {
           elements = [node];
         }
         if (elements.length > 0) {
-          var editor = getSurvey(model).getEditor();
-          if (editor.readOnly)
+          if (isReadOnly) {
             adorner.renderReadOnly &&
               adorner.renderReadOnly(elements, model, editor);
+          }
           else adorner.afterRender(elements, model, editor);
         }
       }
