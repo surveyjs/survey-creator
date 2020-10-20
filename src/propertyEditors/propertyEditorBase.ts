@@ -107,6 +107,7 @@ export interface ISurveyObjectEditorOptions {
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   private objectValue: any;
   private parentListValue: Array<Survey.Base>;
+  private parentReadOnlyValue: boolean = false;
   private valueUpdatingCounter: number = 0;
   private optionsValue: ISurveyObjectEditorOptions = null;
   private property_: Survey.JsonObjectProperty;
@@ -199,6 +200,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return this.property ? this.property.name : "";
   }
   private getReadOnly(): boolean {
+    if(this.parentReadOnly) return true;
     var res = this.property ? this.property.readOnly : false;
     if (!!this.options && !!this.property && !!this.object) {
       res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
@@ -294,6 +296,14 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   }
   public set parentList(val: Array<Survey.Base>) {
     this.parentListValue = val;
+  }
+  public get parentReadOnly(): boolean {
+    return this.parentReadOnlyValue;
+  }
+  public set parentReadOnly(val: boolean) {
+    if(val == this.parentReadOnly) return;
+    this.parentReadOnlyValue = val;
+    this.readOnly(this.getReadOnly());
   }
   public get originalValue(): any {
     return this.getOriginalValue();

@@ -1446,6 +1446,28 @@ QUnit.test("SurveyPropertyMatrixDropdownColumns show error on setting same colum
   assert.equal(question.columns[2].name, "column3", "column name doesn't changed in detail editor");
 });
 
+QUnit.test("SurveyPropertyMatrixDropdownColumns property editors in the cell should be readonly if parent property is readOnly", function (
+  assert
+) {
+  var property = Survey.Serializer.findProperty("matrixdropdownbase", "columns");
+  property.readOnly = true;
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.columns.push(new Survey.MatrixDropdownColumn("column1"));
+  question.columns.push(new Survey.MatrixDropdownColumn("column2"));
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    property
+  );
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  var itemViewModel = <SurveyNestedPropertyEditorItem>columnsEditor.createItemViewModel(question.columns[1]);
+  assert.equal(
+    itemViewModel.cells[2].editor.readOnly(),
+    true,
+    "The property is readOnly, because columns property is readOnly"
+  );
+  property.readOnly = false;
+});
+
 QUnit.test("editor base check for unique property value", function (
   assert
 ) {

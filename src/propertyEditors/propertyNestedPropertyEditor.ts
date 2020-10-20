@@ -149,7 +149,7 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       this.options,
       (item) => this.getItemClassName(item),
       this.canDeleteItem(item),
-      this.originalValue
+      this.originalValue, this.readOnly()
     );
   }
   protected onListDetailViewChanged() {}
@@ -177,7 +177,8 @@ export class SurveyNestedPropertyEditorItem {
     options: ISurveyObjectEditorOptions,
     private getItemClassName: (item: any) => string = null,
     canDeleteItem: boolean = true,
-    private parentList: Array<Survey.Base> = null
+    private parentList: Array<Survey.Base> = null,
+    private isReadOnly: boolean = false
   ) {
     this.koCanDeleteItem = ko.observable(canDeleteItem);
     this.options = options;
@@ -191,7 +192,7 @@ export class SurveyNestedPropertyEditorItem {
             obj,
             columns[i].property,
             this.options,
-            this.parentList
+            this.parentList, this.isReadOnly
           )
         );
       }
@@ -275,7 +276,8 @@ export class SurveyNestedPropertyEditorEditorCell {
     public obj: any,
     public property: Survey.JsonObjectProperty,
     options: ISurveyObjectEditorOptions = null,
-    private listObj: Array<Survey.Base> = null
+    listObj: Array<Survey.Base> = null,
+    parentReadOnly: boolean = false
   ) {
     this.options = options;
     this.objectPropertyValue = new SurveyObjectProperty(
@@ -286,6 +288,7 @@ export class SurveyNestedPropertyEditorEditorCell {
     this.objectPropertyValue.editor.isInplaceProperty = true;
     this.objectProperty.object = obj;
     this.objectPropertyValue.editor.parentList = listObj;
+    this.objectPropertyValue.editor.parentReadOnly = parentReadOnly;
   }
   public get objectProperty(): SurveyObjectProperty {
     return this.objectPropertyValue;
