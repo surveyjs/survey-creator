@@ -601,7 +601,7 @@ QUnit.test("Custom localizable property in itemvalue", function (assert) {
   Survey.Serializer.removeProperty("itemvalue", "customProp");
 });
 
-QUnit.test("Add pages as a custom property, it should not produce the error", function (assert) {
+QUnit.test("Add pages as a custom property, it should not produce the error, Bug#991", function (assert) {
   Survey.Serializer.addProperty("page", {
     name: "pages:surveypages",
     className: "page",
