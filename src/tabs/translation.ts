@@ -251,6 +251,7 @@ export class TranslationGroup extends TranslationItemBase {
     var properties = Survey.Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
+      if(property.isSerializable === false) continue;
       var value = obj[property.name];
       if (!!value && Array.isArray(value) && value.length > 0) {
         res.push(property);

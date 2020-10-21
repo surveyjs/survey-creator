@@ -600,3 +600,52 @@ QUnit.test("Custom localizable property in itemvalue", function (assert) {
   );
   Survey.Serializer.removeProperty("itemvalue", "customProp");
 });
+
+QUnit.test("Add pages as a custom property, it should not produce the error", function (assert) {
+  Survey.Serializer.addProperty("page", {
+    name: "pages:surveypages",
+    className: "page",
+    category: "general",
+    displayName: "Page order",
+    onGetValue: function (obj) {
+      return !!obj && !!obj.survey ? obj.survey.pages : [];
+    },
+    onSetValue: function (obj) {
+      //Do nothing
+    },
+    isSerializable: false,
+  });
+  var survey = new Survey.Survey({
+    locale: "de",
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          de: "title de",
+          fr: "title fr",
+        },
+      },
+      {
+        type: "text",
+        name: "question2",
+        title: {
+          default: "title default",
+          de: "title de",
+          fr: "title fr",
+        },
+      },
+      {
+        type: "text",
+        name: "question3",
+        title: {
+          default: "title default",
+          fr: "title fr",
+        },
+      },
+    ],
+  });
+  var translation = new Translation(survey);
+  assert.equal(translation.locales.length, 3, "There are 3 locales");
+  Survey.Serializer.removeProperty("page", "pages");
+});
