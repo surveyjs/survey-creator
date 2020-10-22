@@ -413,6 +413,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "isRequired",
         "state",
+        { name: "requiredIf", tab: "logic" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
