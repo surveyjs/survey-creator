@@ -166,6 +166,11 @@
     .svd_question {
       overflow: visible;
       border: 1px solid transparent;
+
+      &:hover {
+        border-color: $selection-border-color;
+        border-color: var(--selection-border-color, $selection-border-color);
+      }
     }
   }
   .svd_surveyjs_designer_container.svd_surveyjs_designer_container,
