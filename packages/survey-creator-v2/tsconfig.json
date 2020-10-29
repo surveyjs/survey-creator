@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@survey/creator/*": ["../survey-creator/src/*"]
+     }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "stories",
+    "examples",
+    ".storybook",
+    "**/node_modules",
+    "**/tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": ["src/**/*.ts"]
+}

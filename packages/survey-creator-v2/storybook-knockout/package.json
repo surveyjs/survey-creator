@@ -1,0 +1,61 @@
+{
+  "name": "@storybook/knockout",
+  "version": "6.0.21",
+  "description": "Storybook for KnockoutJS: View framework components in isolation with hot reloading.",
+  "keywords": [
+    "storybook",
+    "KnockoutJS"
+  ],
+  "homepage": "https://github.com/storybookjs/framework/app/knockout",
+  "bugs": {
+    "url": "https://github.com/storybookjs/knockout/issues"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "app/knockout"
+  },
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "main": "dist/client/index.js",
+  "typings": "dist/client/index.d.ts",
+  "bin": {
+    "build-storybook": "./bin/build.js",
+    "start-storybook": "./bin/index.js",
+    "storybook-server": "./bin/index.js"
+  },
+  "scripts": {
+    "prepare": "node ../../scripts/prepare.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@storybook/addons": "6.0.21",
+    "@storybook/client-api": "6.0.21",
+    "@storybook/core": "6.0.21",
+    "@storybook/core-events": "6.0.21",
+    "@storybook/source-loader": "6.0.21",
+    "@types/webpack": "^4.41.3",
+    "@types/webpack-env": "^1.15.0",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.0.1",
+    "global": "^4.3.2",
+    "html-loader": "^0.5.5",
+    "knockout": "^3.5.1",
+    "npmlog": "^4.1.2",
+    "regenerator-runtime": "^0.13.3",
+    "ts-dedent": "^1.1.0",
+    "typescript": "^3.7.5"
+  },
+  "peerDependencies": {
+    "babel-loader": "^7.0.0 || ^8.0.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

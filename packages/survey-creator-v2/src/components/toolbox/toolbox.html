@@ -1,0 +1,14 @@
+<div class="svc-toolbox">
+  <!-- ko foreach: categories -->
+  <div class="svc-toolbox__category">
+    <!-- ko if: $index() > 0 -->
+    <div class="svc-toolbox__category-separator"></div>
+    <!-- /ko -->
+
+    <!-- ko foreach: $data.items -->
+    <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+</div>

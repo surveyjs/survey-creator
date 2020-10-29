@@ -1,0 +1,20 @@
+@import "../../../variables.scss";
+
+.svc-button-group__label {
+  display: block;
+  width: 100%;
+  line-height: calcSize(3);
+  font-size: calcSize(2);
+  font-family: "Open Sans";
+  color: $foreground-light;
+  margin-bottom: calcSize(1);
+}
+
+.svc-button-group__container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-family: $font-family;
+  font-size: calcSize(2);
+  height: calcSize(6);
+}

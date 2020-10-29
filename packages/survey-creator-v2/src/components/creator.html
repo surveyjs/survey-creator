@@ -1,0 +1,23 @@
+<div class="svc-flex-column">
+  <div class="svc-top-bar">
+    <svc-tabbed-menu params="items: creator.tabs"></svc-tabbed-menu>
+    <svc-action-bar params="items: creator.toolbarItems"></svc-action-bar>
+  </div>
+  <div class="svc-flex-row">
+    <!-- ko component: { name: 'svc-toolbox', params: {categories: creator.toolboxCategories(), creator: creator} } -->
+    <!-- /ko -->
+    <div class="svc-flex-column">
+      <svc-content
+        params="creator: creator, survey: creator.survey"
+      ></svc-content>
+    </div>
+  </div>
+</div>
+<div
+  class="svc-flex-column"
+  style="width: auto; border-left: 1px solid lightgray;"
+>
+  <svc-property-panel
+    params="title: 'Question Properties',survey: creator.propertyGrid.koSurvey()"
+  ></svc-property-panel>
+</div>

@@ -1,0 +1,6104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Action Bar Action Bar Item 1`] = `
+<svc-action-bar-item
+  params="item: item"
+>
+  <button
+    class="svc-action-bar-item"
+    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    title="Menu Button"
+  >
+    
+  
+    <!-- ko if: $data.icon -->
+    
+  
+    <svc-svg-icon
+      class="svc-action-bar-item__icon"
+      params="iconName: icon, size: 24"
+    >
+      <svg
+        class="svc-svg-icon"
+        style="width: 24px; height: 24px;"
+      >
+        <use
+          xlink:href="#icon-preview"
+        />
+      </svg>
+      
+
+    </svc-svg-icon>
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    
+  
+    <span
+      class="svc-action-bar-item__title"
+      data-bind="text: title"
+    >
+      Menu Button
+    </span>
+    
+  
+    <!-- /ko -->
+    
+
+  </button>
+  
+
+</svc-action-bar-item>
+`;
+
+exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
+<svc-action-bar-item
+  params="item: item"
+>
+  <button
+    class="svc-action-bar-item"
+    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    title="Menu Button"
+  >
+    
+  
+    <!-- ko if: $data.icon -->
+    
+  
+    <svc-svg-icon
+      class="svc-action-bar-item__icon"
+      params="iconName: icon, size: 24"
+    >
+      <svg
+        class="svc-svg-icon"
+        style="width: 24px; height: 24px;"
+      >
+        <use
+          xlink:href="#icon-preview"
+        />
+      </svg>
+      
+
+    </svc-svg-icon>
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    <!-- /ko -->
+    
+
+  </button>
+  
+
+</svc-action-bar-item>
+`;
+
+exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
+<svc-action-bar-item
+  params="item: item"
+>
+  <button
+    class="svc-action-bar-item svc-action-bar-item--active"
+    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    title="Menu Button Active"
+  >
+    
+  
+    <!-- ko if: $data.icon -->
+    
+  
+    <svc-svg-icon
+      class="svc-action-bar-item__icon"
+      params="iconName: icon, size: 24"
+    >
+      <svg
+        class="svc-svg-icon"
+        style="width: 24px; height: 24px;"
+      >
+        <use
+          xlink:href="#icon-preview"
+        />
+      </svg>
+      
+
+    </svc-svg-icon>
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    
+  
+    <span
+      class="svc-action-bar-item__title"
+      data-bind="text: title"
+    >
+      Menu Button Active
+    </span>
+    
+  
+    <!-- /ko -->
+    
+
+  </button>
+  
+
+</svc-action-bar-item>
+`;
+
+exports[`Storyshots Action Bar Desktop 1`] = `
+<svc-action-bar
+  params="items: items"
+>
+  <!-- ko if: hasItems-->
+  
+
+  <!-- ko foreach: items-->
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Undo"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-undo"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Redo"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-redo"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <div
+      class="svc-action-bar-separator"
+      data-bind="css: $data.css"
+    />
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Settings"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-settings"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Clear"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-clear"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Search"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-search"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <div
+      class="svc-action-bar-separator"
+      data-bind="css: $data.css"
+    />
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  
+
+  <span
+    class="svc_action"
+    data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+  >
+    
+  
+    <!-- ko ifnot: $data.template-->
+    
+  
+    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <button
+      class="svc-action-bar-item svc-action-bar-item--secondary"
+      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      title="Preview"
+    >
+      
+  
+      <!-- ko if: $data.icon -->
+      
+  
+      <svc-svg-icon
+        class="svc-action-bar-item__icon"
+        params="iconName: icon, size: 24"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 24px; height: 24px;"
+        >
+          <use
+            xlink:href="#icon-preview"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+  
+      <!-- /ko -->
+      
+  
+      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      
+  
+      <span
+        class="svc-action-bar-item__title"
+        data-bind="text: title"
+      >
+        Preview
+      </span>
+      
+  
+      <!-- /ko -->
+      
+
+    </button>
+    
+
+    <!-- /ko -->
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.template  -->
+    <!-- /ko -->
+    
+
+  </span>
+  
+
+  <!--/ko-->
+  
+
+  <!--/ko-->
+</svc-action-bar>
+`;
+
+exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
+<svc-action-bar-item
+  params="item: item"
+>
+  <button
+    class="svc-action-bar-item"
+    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    disabled="true"
+    title="Menu Button Disabled"
+  >
+    
+  
+    <!-- ko if: $data.icon -->
+    
+  
+    <svc-svg-icon
+      class="svc-action-bar-item__icon"
+      params="iconName: icon, size: 24"
+    >
+      <svg
+        class="svc-svg-icon"
+        style="width: 24px; height: 24px;"
+      >
+        <use
+          xlink:href="#icon-preview"
+        />
+      </svg>
+      
+
+    </svc-svg-icon>
+    
+  
+    <!-- /ko -->
+    
+  
+    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    
+  
+    <span
+      class="svc-action-bar-item__title"
+      data-bind="text: title"
+    >
+      Menu Button Disabled
+    </span>
+    
+  
+    <!-- /ko -->
+    
+
+  </button>
+  
+
+</svc-action-bar-item>
+`;
+
+exports[`Storyshots Button Action Button 1`] = `
+<svc-button
+  params="action: action, title: title, css: css"
+>
+  <button
+    class="svc-button svc-button--action"
+    data-bind="click: action, css: css, disable: disabled"
+  >
+    
+  
+    <span
+      class="svc-button__text"
+      data-bind="text: title"
+    >
+      Add a Question
+    </span>
+    
+
+  </button>
+  
+
+</svc-button>
+`;
+
+exports[`Storyshots Button Disabled 1`] = `
+<svc-button
+  params="action: action, title: title, disabled: disabled"
+>
+  <button
+    class="svc-button"
+    data-bind="click: action, css: css, disable: disabled"
+    disabled=""
+  >
+    
+  
+    <span
+      class="svc-button__text"
+      data-bind="text: title"
+    >
+      Button
+    </span>
+    
+
+  </button>
+  
+
+</svc-button>
+`;
+
+exports[`Storyshots Button Disabled Action Button 1`] = `
+<svc-button
+  params="action: action, title: title, disabled: disabled, css: css"
+>
+  <button
+    class="svc-button svc-button--action"
+    data-bind="click: action, css: css, disable: disabled"
+    disabled=""
+  >
+    
+  
+    <span
+      class="svc-button__text"
+      data-bind="text: title"
+    >
+      Add a Question
+    </span>
+    
+
+  </button>
+  
+
+</svc-button>
+`;
+
+exports[`Storyshots Button Group Disabled Item 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Left
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+          disabled=""
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Right
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group Four Buttons 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            None
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item svc-button-group__item--selected"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Contain
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Cover
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Fill
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group Selected Item 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Left
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item svc-button-group__item--selected"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Right
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group Three Buttons 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Left
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Center
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item svc-button-group__item--selected"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Right
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group Two Buttons 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Left
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Right
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group With Icons 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-radiogroup"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-rating"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-image"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-comment"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-radiogroup"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+          disabled=""
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-rating"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-image"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-comment"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group With Icons Selected Item 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-radiogroup"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item svc-button-group__item--selected"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-rating"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-image"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          
+  
+          <svc-svg-icon
+            class="svc-button-group__item-icon"
+            params="iconName: iconName, size: iconSize || 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-comment"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Group With Label 1`] = `
+<div
+  style="width:480px"
+>
+  <svc-button-group
+    params="model: model"
+  >
+    <!--ko if: !!title-->
+    <!--/ko-->
+    
+
+    <div
+      class="svc-button-group__container"
+    >
+      
+  
+      <!-- ko foreach: choices -->
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            None
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item svc-button-group__item--selected"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Contain
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Cover
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      
+  
+      <svc-button-group-item
+        params="model: $data, selected: value == ko.unwrap($parent.model.value), onItemSelected: $parent.onItemSelected"
+      >
+        <button
+          class="svc-button-group__item"
+          data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
+        >
+          
+  
+          <!-- ko if: !!iconName-->
+          <!-- /ko -->
+          
+  
+          <!-- ko ifnot: !!iconName -->
+          
+  
+          <span
+            class="svc-button-group__item-title"
+            data-bind="text: !!title ? title : value"
+          >
+            Fill
+          </span>
+          
+  
+          <!-- /ko -->
+          
+
+        </button>
+        
+
+      </svc-button-group-item>
+      
+  
+      <!-- /ko -->
+      
+
+    </div>
+    
+
+  </svc-button-group>
+</div>
+`;
+
+exports[`Storyshots Button Ordinary 1`] = `
+<svc-button
+  params="action: action, title: title"
+>
+  <button
+    class="svc-button"
+    data-bind="click: action, css: css, disable: disabled"
+  >
+    
+  
+    <span
+      class="svc-button__text"
+      data-bind="text: title"
+    >
+      Button
+    </span>
+    
+
+  </button>
+  
+
+</svc-button>
+`;
+
+exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
+<survey-creator
+  params="creator: creator"
+>
+  <div
+    class="svc-flex-column"
+  >
+    
+  
+    <div
+      class="svc-top-bar"
+    >
+      
+    
+      <svc-tabbed-menu
+        params="items: creator.tabs"
+      >
+        <!-- ko foreach: items -->
+        
+
+        <svc-tabbed-menu-item
+          params="item: $data"
+        >
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal"
+              data-bind="text: text, css: { 'svc-text--bold': selected }"
+            >
+              Designer
+            </span>
+            
+
+          </div>
+          
+
+        </svc-tabbed-menu-item>
+        
+
+        
+
+        <svc-tabbed-menu-item
+          params="item: $data"
+        >
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal"
+              data-bind="text: text, css: { 'svc-text--bold': selected }"
+            >
+              Survey Logic
+            </span>
+            
+
+          </div>
+          
+
+        </svc-tabbed-menu-item>
+        
+
+        
+
+        <svc-tabbed-menu-item
+          params="item: $data"
+        >
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal"
+              data-bind="text: text, css: { 'svc-text--bold': selected }"
+            >
+              JSON Editor
+            </span>
+            
+
+          </div>
+          
+
+        </svc-tabbed-menu-item>
+        
+
+        
+
+        <svc-tabbed-menu-item
+          params="item: $data"
+        >
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal"
+              data-bind="text: text, css: { 'svc-text--bold': selected }"
+            >
+              Embed Survey
+            </span>
+            
+
+          </div>
+          
+
+        </svc-tabbed-menu-item>
+        
+
+        
+
+        <svc-tabbed-menu-item
+          params="item: $data"
+        >
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal"
+              data-bind="text: text, css: { 'svc-text--bold': selected }"
+            >
+              Translation
+            </span>
+            
+
+          </div>
+          
+
+        </svc-tabbed-menu-item>
+        
+
+        <!-- /ko -->
+        
+
+      </svc-tabbed-menu>
+      
+    
+      <svc-action-bar
+        params="items: creator.toolbarItems"
+      >
+        <!-- ko if: hasItems-->
+        
+
+        <!-- ko foreach: items-->
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Undo"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-undo"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Redo"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-redo"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <div
+            class="svc-action-bar-separator"
+            data-bind="css: $data.css"
+          />
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Settings"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-settings"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Clear"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-clear"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Search"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-search"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <div
+            class="svc-action-bar-separator"
+            data-bind="css: $data.css"
+          />
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        
+
+        <span
+          class="svc_action"
+          data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
+        >
+          
+  
+          <!-- ko ifnot: $data.template-->
+          
+  
+          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <button
+            class="svc-action-bar-item svc-action-bar-item--secondary"
+            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            title="Preview"
+          >
+            
+  
+            <!-- ko if: $data.icon -->
+            
+  
+            <svc-svg-icon
+              class="svc-action-bar-item__icon"
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-preview"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+  
+            <!-- /ko -->
+            
+  
+            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            
+  
+            <span
+              class="svc-action-bar-item__title"
+              data-bind="text: title"
+            >
+              Preview
+            </span>
+            
+  
+            <!-- /ko -->
+            
+
+          </button>
+          
+
+          <!-- /ko -->
+          
+  
+          <!-- /ko -->
+          
+  
+          <!-- ko if: $data.template  -->
+          <!-- /ko -->
+          
+
+        </span>
+        
+
+        <!--/ko-->
+        
+
+        <!--/ko-->
+      </svc-action-bar>
+      
+  
+    </div>
+    
+  
+    <div
+      class="svc-flex-row"
+    >
+      
+    
+      <!-- ko component: { name: 'svc-toolbox', params: {categories: creator.toolboxCategories(), creator: creator} } -->
+      <div
+        class="svc-toolbox"
+      >
+        
+  
+        <!-- ko foreach: categories -->
+        
+  
+        <div
+          class="svc-toolbox__category"
+        >
+          
+    
+          <!-- ko if: $index() &gt; 0 -->
+          <!-- /ko -->
+          
+
+    
+          <!-- ko foreach: $data.items -->
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Single Input toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-text"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Single Input"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-text"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Single Input
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Checkbox toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-checkbox"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Checkbox"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-checkbox"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Checkbox
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Radiogroup toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-radiogroup"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Radiogroup"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-radiogroup"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Radiogroup
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Dropdown toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-dropdown"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Dropdown"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-dropdown"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Dropdown
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Comment toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-comment"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Comment"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-comment"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Comment
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Rating toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-rating"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Rating"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-rating"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Rating
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Image picker toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-imagepicker"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Image picker"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-imagepicker"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Image picker
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Boolean toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-boolean"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Boolean"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-boolean"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Boolean
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Image toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-image"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Image"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-image"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Image
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Html toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-html"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Html"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-html"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Html
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Signature pad toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-signaturepad"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Signature pad"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-signaturepad"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Signature pad
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Expression (read-only) toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-expression"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Expression (read-only)"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-expression"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Expression (read-only)
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="File toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-file"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="File"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-file"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                File
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Matrix (single choice) toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-matrix"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Matrix (single choice)"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-matrix"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Matrix (single choice)
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Matrix (multiple choice) toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-matrixdropdown"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Matrix (multiple choice)"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-matrixdropdown"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Matrix (multiple choice)
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Matrix (dynamic rows) toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-matrixdynamic"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Matrix (dynamic rows)"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-matrixdynamic"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Matrix (dynamic rows)
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Multiple Text toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-multipletext"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Multiple Text"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-multipletext"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Multiple Text
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Panel toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-panel"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Panel"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-panel"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Panel
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          
+    
+          <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
+            class="svc-toolbox__item"
+          >
+            
+  
+            <div
+              aria-label="Panel (dynamic panels) toolbox item"
+              class="svc-toolbox__item-content svc-toolbox__item--icon-paneldynamic"
+              data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+              draggable="true"
+              role="button"
+              tabindex="0"
+              title="Panel (dynamic panels)"
+            >
+              
+    
+              <svc-svg-icon
+                params="iconName: icon, size: 24"
+              >
+                <svg
+                  class="svc-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-paneldynamic"
+                  />
+                </svg>
+                
+
+              </svc-svg-icon>
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Panel (dynamic panels)
+              </span>
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+          <!-- /ko -->
+          
+  
+        </div>
+        
+  
+        <!-- /ko -->
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      <div
+        class="svc-flex-column"
+      >
+        
+      
+        <svc-content
+          params="creator: creator, survey: creator.survey"
+        >
+          <div
+            class="sv-root-modern"
+            data-bind="css: survey.css.root"
+          >
+            
+  
+            <div
+              class="sv-container-modern"
+              data-bind="css: survey.css.container"
+            >
+              
+    
+              <!-- ko foreach: survey.pages -->
+              <!-- /ko -->
+              
+  
+            </div>
+            
+
+          </div>
+          
+
+        </svc-content>
+        
+    
+      </div>
+      
+  
+    </div>
+    
+
+  </div>
+  
+
+  <div
+    class="svc-flex-column"
+    style="width: auto; border-left: 1px solid lightgray;"
+  >
+    
+  
+    <svc-property-panel
+      params="title: 'Question Properties',survey: creator.propertyGrid.koSurvey()"
+    >
+      <div
+        class="svc-property-panel__header"
+        data-bind="text: title"
+      >
+        Question Properties
+      </div>
+      
+
+      <div
+        class="svc-property-panel__expander"
+      >
+        
+  
+        <!-- ko template: { name: 'survey-content', data: survey  } -->
+        
+
+  
+        <div
+          class="sv-root-modern"
+          data-bind="css: css.root, afterRender: koEventAfterRender"
+        >
+          
+      
+          <form
+            onsubmit="return false;"
+          >
+            
+          
+            <div
+              class="sv_custom_header"
+              data-bind="visible: !hasLogo"
+            />
+            
+          
+            <div
+              class="sv-container-modern"
+              data-bind="css: css.container"
+            >
+              
+              
+              <!-- ko template: { name: koTitleTemplate, afterRender: koAfterRenderHeader } -->
+              
+  
+              <!-- ko if: (locTitle.koRenderedHtml().length &gt; 0) && showTitle || hasLogo -->
+              <!-- /ko -->
+              
+
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "starting" -->
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "running" || koState() == "preview" -->
+              
+              
+              <div
+                class="sv-body"
+                data-bind="css: css.body"
+              >
+                
+                  
+                <!-- ko if: isTimerPanelShowingOnTop -->
+                <!-- /ko -->
+                
+
+                  
+                <!-- ko if: isShowProgressBarOnTop -->
+                <!-- /ko -->
+                
+                  
+                <!-- ko if: isNavigationButtonsShowing === 'top' || isNavigationButtonsShowing === 'both' -->
+                <!-- /ko -->
+                
+                  
+                <!-- ko if: koCurrentPage -->
+                
+                    
+                <div
+                  data-bind="attr: { id: koCurrentPage().id }, template: { name: 'survey-page', data: koCurrentPage, afterRender: koAfterRenderPage }"
+                  id="sp_106"
+                >
+                  
+  
+                  <div
+                    class="sv-page sv-body__page"
+                    data-bind="css: cssClasses.page.root"
+                  >
+                    
+      
+                    <!-- ko if: _showTitle -->
+                    <!-- /ko -->
+                    
+      
+                    <!-- ko if: _showDescription-->
+                    <!-- /ko -->
+                    
+      
+                    <!-- ko template: { name: 'survey-rows', data: $data} -->
+                    
+  
+                    <!-- ko foreach: { data: rows, as: 'row'} -->
+                    
+  
+                    <!-- ko if: row.visible -->
+                    
+  
+                    <div
+                      class="sv-row sv-clearfix"
+                      data-bind="css: panel.cssClasses.row"
+                    >
+                      
+    
+                      <!-- ko template: { name: "survey-row-content", afterRender: rowAfterRender } -->
+                      
+  
+                      <!-- ko if: row.isNeedRender -->
+                      <!-- /ko -->
+                      
+
+                      <!-- /ko -->
+                      
+  
+                    </div>
+                    
+  
+                    <!-- /ko -->
+                    
+  
+                    <!-- /ko -->
+                    
+
+                    <!-- /ko -->
+                    
+  
+                  </div>
+                  
+
+                </div>
+                
+                    
+                <!-- ko if: isCurrentPageEmpty() && $data.emptyPageTemplate -->
+                <!-- /ko -->
+                
+                  
+                <!-- /ko -->
+                
+
+                  
+                <!-- ko if: isShowProgressBarOnBottom -->
+                <!-- /ko -->
+                
+
+                  
+                <!-- ko if: isTimerPanelShowingOnBottom -->
+                <!-- /ko -->
+                
+                  
+                <!-- ko if: isNavigationButtonsShowing === 'bottom' || isNavigationButtonsShowing === 'both' -->
+                <!-- /ko -->
+                
+              
+              </div>
+              
+              
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "completed" && showCompletedPage -->
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "completedbefore" -->
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "loading" -->
+              <!-- /ko -->
+              
+              
+              <!-- ko if: koState() == "empty" -->
+              <!-- /ko -->
+              
+          
+            </div>
+            
+      
+          </form>
+          
+  
+        </div>
+        
+
+        <!-- /ko -->
+        
+
+      </div>
+      
+
+    </svc-property-panel>
+    
+
+  </div>
+  
+
+</survey-creator>
+`;
+
+exports[`Storyshots Creator design surface content Default 1`] = `
+<svc-content
+  params="creator: creator, survey: creator.survey"
+>
+  <div
+    class="sv-root-modern"
+    data-bind="css: survey.css.root"
+  >
+    
+  
+    <div
+      class="sv-container-modern"
+      data-bind="css: survey.css.container"
+    >
+      
+    
+      <!-- ko foreach: survey.pages -->
+      <!-- /ko -->
+      
+  
+    </div>
+    
+
+  </div>
+  
+
+</svc-content>
+`;
+
+exports[`Storyshots Dropdown Editor Disabled 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form svc-dropdown-editor__form--disabled"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            Question 1
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+            disabled=""
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--selected"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Dropdown Editor Empty 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            class="svc-dropdown-editor__placeholder"
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Dropdown Editor Filled 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            Question 1
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--selected"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Dropdown Editor With Disabled Item 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            class="svc-dropdown-editor__placeholder"
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--disabled"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Dropdown Editor With Label 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      
+  
+      <label
+        class="svc-dropdown-editor__label"
+        data-bind="text: displayName"
+      >
+        Question
+      </label>
+      
+  
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            class="svc-dropdown-editor__placeholder"
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Dropdown Editor With Placeholder 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  >
+    <div
+      class="svc-dropdown-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <div
+        class="svc-dropdown-editor__container"
+      >
+        
+    
+        <div
+          class="svc-dropdown-editor__form"
+          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+        >
+          
+      
+          <span
+            class="svc-dropdown-editor__placeholder"
+            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+          >
+            Placeholder Text
+          </span>
+          
+      
+          <button
+            class="svc-dropdown-editor__button"
+            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+          >
+            
+        
+            <svc-svg-icon
+              class="svc-dropdown-editor__button-icon"
+              params="iconName: 'icon-dropdownarrow', size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdownarrow"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+          </button>
+          
+    
+        </div>
+        
+
+    
+        <ul
+          class="svc-dropdown-editor__list"
+          data-bind="visible: isExpanded"
+          style="display: none;"
+        >
+          
+      
+          <!--ko foreach: choices-->
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 1
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 2
+          </li>
+          
+      
+          
+      
+          <li
+            class="svc-dropdown-editor__list-item"
+            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+          >
+            Question 3
+          </li>
+          
+      
+          <!-- /ko -->
+          
+    
+        </ul>
+        
+  
+      </div>
+      
+
+    </div>
+    
+
+  </svc-dropdown-editor>
+</div>
+`;
+
+exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
+<svc-tabbed-menu
+  params="items: items"
+>
+  <!-- ko foreach: items -->
+  
+
+  <svc-tabbed-menu-item
+    params="item: $data"
+  >
+    <div
+      class="svc-tabbed-menu-item"
+      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+    >
+      
+  
+      <span
+        class="svc-text svc-text--normal"
+        data-bind="text: text, css: { 'svc-text--bold': selected }"
+      >
+        Menu Item 1
+      </span>
+      
+
+    </div>
+    
+
+  </svc-tabbed-menu-item>
+  
+
+  
+
+  <svc-tabbed-menu-item
+    params="item: $data"
+  >
+    <div
+      class="svc-tabbed-menu-item"
+      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+    >
+      
+  
+      <span
+        class="svc-text svc-text--normal"
+        data-bind="text: text, css: { 'svc-text--bold': selected }"
+      >
+        Menu Item 2
+      </span>
+      
+
+    </div>
+    
+
+  </svc-tabbed-menu-item>
+  
+
+  <!-- /ko -->
+  
+
+</svc-tabbed-menu>
+`;
+
+exports[`Storyshots Tabbed Menu Tabbed Menu Item 1`] = `
+<svc-tabbed-menu-item
+  params="item: item"
+>
+  <div
+    class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+  >
+    
+  
+    <span
+      class="svc-text svc-text--normal svc-text--bold"
+      data-bind="text: text, css: { 'svc-text--bold': selected }"
+    >
+      Menu Item
+    </span>
+    
+
+  </div>
+  
+
+</svc-tabbed-menu-item>
+`;
+
+exports[`Storyshots Tabbed Menu Tabbed Menu Item Disabled 1`] = `
+<svc-tabbed-menu-item
+  params="item: item"
+>
+  <div
+    class="svc-tabbed-menu-item svc-tabbed-menu-item--disabled"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+  >
+    
+  
+    <span
+      class="svc-text svc-text--normal"
+      data-bind="text: text, css: { 'svc-text--bold': selected }"
+    >
+      Disabled Menu Item
+    </span>
+    
+
+  </div>
+  
+
+</svc-tabbed-menu-item>
+`;
+
+exports[`Storyshots Tabbed Menu Tabbed Menu Item Selected 1`] = `
+<svc-tabbed-menu-item
+  params="item: item"
+>
+  <div
+    class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+  >
+    
+  
+    <span
+      class="svc-text svc-text--normal svc-text--bold"
+      data-bind="text: text, css: { 'svc-text--bold': selected }"
+    >
+      Menu Item
+    </span>
+    
+
+  </div>
+  
+
+</svc-tabbed-menu-item>
+`;
+
+exports[`Storyshots Text Editor Disabled 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-text-editor
+    params="model: model"
+  >
+    <div
+      class="svc-text-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <input
+        aria-label="undefined"
+        class="svc-text-editor__input"
+        data-bind="value: koValue, disable: readOnly, attr: { type: koInputType, placeholder: defaultValue, maxLength: koMaxLength, 'aria-label': (koDisplayError() ? getLocString('ed.propertyEditorError') + ' ' + koErrorText() : '') + displayName }, event: { keydown:onKeydown }"
+        disabled=""
+      />
+      
+
+    </div>
+    
+
+  </svc-text-editor>
+</div>
+`;
+
+exports[`Storyshots Text Editor Empty 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-text-editor
+    params="model: model"
+  >
+    <div
+      class="svc-text-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <input
+        aria-label="undefined"
+        class="svc-text-editor__input"
+        data-bind="value: koValue, disable: readOnly, attr: { type: koInputType, placeholder: defaultValue, maxLength: koMaxLength, 'aria-label': (koDisplayError() ? getLocString('ed.propertyEditorError') + ' ' + koErrorText() : '') + displayName }, event: { keydown:onKeydown }"
+      />
+      
+
+    </div>
+    
+
+  </svc-text-editor>
+</div>
+`;
+
+exports[`Storyshots Text Editor Filled 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-text-editor
+    params="model: model"
+  >
+    <div
+      class="svc-text-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <input
+        aria-label="undefined"
+        class="svc-text-editor__input"
+        data-bind="value: koValue, disable: readOnly, attr: { type: koInputType, placeholder: defaultValue, maxLength: koMaxLength, 'aria-label': (koDisplayError() ? getLocString('ed.propertyEditorError') + ' ' + koErrorText() : '') + displayName }, event: { keydown:onKeydown }"
+      />
+      
+
+    </div>
+    
+
+  </svc-text-editor>
+</div>
+`;
+
+exports[`Storyshots Text Editor With Label 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-text-editor
+    params="model: model"
+  >
+    <div
+      class="svc-text-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      
+  
+      <label
+        class="svc-text-editor__label"
+        data-bind="text: displayName"
+      >
+        Question Title
+      </label>
+      
+  
+      <!--/ko-->
+      
+  
+      <input
+        aria-label="Question Title"
+        class="svc-text-editor__input"
+        data-bind="value: koValue, disable: readOnly, attr: { type: koInputType, placeholder: defaultValue, maxLength: koMaxLength, 'aria-label': (koDisplayError() ? getLocString('ed.propertyEditorError') + ' ' + koErrorText() : '') + displayName }, event: { keydown:onKeydown }"
+      />
+      
+
+    </div>
+    
+
+  </svc-text-editor>
+</div>
+`;
+
+exports[`Storyshots Text Editor With Placeholder Text 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-text-editor
+    params="model: model"
+  >
+    <div
+      class="svc-text-editor"
+    >
+      
+  
+      <!--ko if: showLabel-->
+      <!--/ko-->
+      
+  
+      <input
+        aria-label="undefined"
+        class="svc-text-editor__input"
+        data-bind="value: koValue, disable: readOnly, attr: { type: koInputType, placeholder: defaultValue, maxLength: koMaxLength, 'aria-label': (koDisplayError() ? getLocString('ed.propertyEditorError') + ' ' + koErrorText() : '') + displayName }, event: { keydown:onKeydown }"
+        placeholder="Question Title"
+      />
+      
+
+    </div>
+    
+
+  </svc-text-editor>
+</div>
+`;
+
+exports[`Storyshots Toolbox Toolbox 1`] = `
+<svc-toolbox
+  params="categories: toolboxCategories"
+>
+  <div
+    class="svc-toolbox"
+  >
+    
+  
+    <!-- ko foreach: categories -->
+    
+  
+    <div
+      class="svc-toolbox__category"
+    >
+      
+    
+      <!-- ko if: $index() &gt; 0 -->
+      <!-- /ko -->
+      
+
+    
+      <!-- ko foreach: $data.items -->
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--radiogroup"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-radiogroup"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Radiogroup
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--checkbox"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-checkbox"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Checkbox
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--dropdown"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-dropdown"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Dropdown
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--text"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-text"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Single Input
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--rating"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-rating"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Rating
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--imagepicker"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-imagepicker"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Image Picker
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+  
+    </div>
+    
+  
+    
+  
+    <div
+      class="svc-toolbox__category"
+    >
+      
+    
+      <!-- ko if: $index() &gt; 0 -->
+      
+    
+      <div
+        class="svc-toolbox__category-separator"
+      />
+      
+    
+      <!-- /ko -->
+      
+
+    
+      <!-- ko foreach: $data.items -->
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--boolean"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-boolean"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Boolean
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--comment"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-comment"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Comment
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--multipletext"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-multipletext"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Multiple Text
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--matrix"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrix"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Matrix
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--file"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-file"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            File
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--signaturepad"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-signaturepad"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Signature
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+  
+    </div>
+    
+  
+    
+  
+    <div
+      class="svc-toolbox__category"
+    >
+      
+    
+      <!-- ko if: $index() &gt; 0 -->
+      
+    
+      <div
+        class="svc-toolbox__category-separator"
+      />
+      
+    
+      <!-- /ko -->
+      
+
+    
+      <!-- ko foreach: $data.items -->
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--html"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-html"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            HTML
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--expression"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-expression"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Expression
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--matrixdropdown"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrixdropdown"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Multiple Matrix
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--matrixdynamic"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrixdynamic"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Dynamic Matrix
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+  
+    </div>
+    
+  
+    
+  
+    <div
+      class="svc-toolbox__category"
+    >
+      
+    
+      <!-- ko if: $index() &gt; 0 -->
+      
+    
+      <div
+        class="svc-toolbox__category-separator"
+      />
+      
+    
+      <!-- /ko -->
+      
+
+    
+      <!-- ko foreach: $data.items -->
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--image"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-image"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Image
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      
+    
+      <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      <div
+        class="svc-toolbox__item"
+      >
+        
+  
+        <div
+          aria-label="undefined toolbox item"
+          class="svc-toolbox__item-content svc-toolbox__item--panel"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+        >
+          
+    
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-panel"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+    
+          <span
+            class="svc-toolbox__item-title"
+            data-bind="text: title"
+          >
+            Panel
+          </span>
+          
+  
+        </div>
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+  
+    </div>
+    
+  
+    <!-- /ko -->
+    
+
+  </div>
+  
+
+</svc-toolbox>
+`;

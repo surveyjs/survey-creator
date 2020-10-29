@@ -1,0 +1,10 @@
+@import "../../variables.scss";
+
+.svc-action-bar-separator {
+  display: inline-block;
+  width: 1px;
+  height: calcSize(4);
+  vertical-align: middle;
+  margin-right: calcSize(2);
+  background-color: $border;
+}

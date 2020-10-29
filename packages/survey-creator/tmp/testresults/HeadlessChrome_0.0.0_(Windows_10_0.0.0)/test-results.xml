@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 0.0.0 (Windows 10 0.0.0)" package="" timestamp="2020-10-29T08:30:41" id="0" hostname="TITOV-NB-X" tests="413" errors="0" failures="0" time="6.643">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/78.0.3882.0 Safari/537.36"/>
+  </properties>
+  <testcase name="JSON5Tests Simple test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests parse only part of the string" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests Full information about positions" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests Full information about positions - several properties" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests Full information about positions - array" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests Empty Json test" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="JSON5Tests One property Json test" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).JSON5Tests"/>
+  <testcase name="LocalizationTests Get nested property" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests Get property name and title" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests getProperty function breaks on word automatically" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests add de localization" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests change default ('en') locale" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests change string to empty string" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests getPropertyNameInEditor" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="LocalizationTests getPropertyNameInEditor, go to p, if pe is emtpy" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LocalizationTests"/>
+  <testcase name="objectEditorTests Created properties on set selected Object" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Custom sort properties" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Sort by displayName by default" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Get Property Value" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests isDefault property value" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests On property changed" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Use metadata getPropertyValue function" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Fix the bug with title property, https://github.com/surveyjs/editor/issues/33" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Use onCanShowPropertyCallback" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests On new ItemValue added" time="0.045" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests On new Matrix Column added" time="0.026" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests hideAddRemoveButtons" time="0.038" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests show top/bottom description" time="0.052" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests SurveyPropertyItemValuesEditor, show 'Visible If' button" time="0.026" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests SurveyPropertyItemValuesEditor, Detail tabs" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests DependedOn properties, koVisible" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests DependedOn properties, koVisible " time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests Property Editor - property.isRequired = true" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="objectEditorTests SurveyPropertyEditor - onPropertyEditorUpdate" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).objectEditorTests"/>
+  <testcase name="PropertyEditorsTests Create correct property editor" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests propertyEditor.displayName" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests propertyEditor.editingValue - SurveyPropertyModalEditor" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Create custom property editor" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Сustom property editor should be rendered regardless the editor.object value - https://surveyjs.answerdesk.io/ticket/details/t2550/file-upload-property-not-working-in-the-1-1-6-version" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Custom property editor - validation" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests PropertyEditor and hasError - required" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyDropdown - choices" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyDropdown - choices, support ItemValue" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyQuestionPropertyEditor - choices" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyQuestionValuePropertyEditor - choices" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue different view type" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor - do not change value on adding in modal window and set it after apply only" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor - returns error on empty value" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyTextEditor - do not change value on adding in modal window and set it after apply only" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue disable viewtext for multiple languages" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue_PureValue" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue columns generation" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue custom property" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue override properties" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValueEditor override grid columns using canShowProperty callback" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue columns define in definition" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue custom property " time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValue columns new localizable property" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests extended SurveyPropertyItemValue + custom property" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests extended SurveyPropertyItemValue + custom property - process items with custom properties" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor + locale" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyDropdownColumnsEditor + locale, bug#1285" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyNestedPropertyEditorEditorCell" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyNestedPropertyEditorEditorCell + property editor" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyNestedPropertyEditorItem" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMultipleValuesEditor" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns set properties" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns change columns" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns use question editor" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns change cell koValue on changing value in detail form " time="0.012" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns show error on setting same column name" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns property editors in the cell should be readonly if parent property is readOnly" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests editor base check for unique property value" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyElementEditorContentModel check for unique property value" time="0.015" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor check if there are visibleIf and enableIf properties in detail form" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMatrixDropdownColumns change nested property content on changing column type" time="0.023" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyNestedPropertyEditorItem koCanDeleteItem" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyNestedPropertyEditorItem koCanDeleteItem " time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor two columns and no editing" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor add page" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor koCanDeleteItem + options." time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor koCanDeleteItem + options. " time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor custom loc item for 'add item'." time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyPagesEditor show Pages Editor for Page object" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Change displayName for existing property. It should have higher priority than localization" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Check showDisplayNameOnTop for different property editors" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyResultfullEditor test" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Triggers property editor" time="0.154" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Triggers property editor and setvalue trigger" time="0.019" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests 'set' property editor" time="0.009" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests 'set' property editor, get choices on callback, Bug#720" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Validators property editor" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Validators property editor - custom property, Bug: https://surveyjs.answerdesk.io/ticket/details/T2537" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Validators property editor update existing validator property - https://surveyjs.answerdesk.io/ticket/details/T2058" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests minValue doesn't work when it is 0, Bug #687" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests automicatilly create name for new item in SurveyPropertyTextItemsEditor" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests be able to modify empty items, bug#428" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests onPropertyValueChanging callback, Bug #438" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyMultipleValuesEditor - categories " time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor + item.koShowDetails" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyItemValuesEditor + koShowHeader" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyCalculatedValueEditor" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyPropertyCalculatedValueEditor as propertyItemsEditor, syncronize it with the real object" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyElementEditorContentModel do not allow empty value for a unique property" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests Update matrix.cells immediately with updated property editor" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests expression editor in question expression validator should has access to survey" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests SurveyHelper.applyItemValueArray" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests property editor propertyHelpText" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests property editor propertyHelpText " time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="PropertyEditorsTests property text editor dataList attribute" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).PropertyEditorsTests"/>
+  <testcase name="SurveyPropertyConditionEditor Autocomplete without prefix test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor Autocomplete without prefix test, using valueName" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor Autocomplete with prefix test" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor Autocomplete with matrix test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor Autocomplete with panel test" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.isValid" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.addCondition" time="0.033" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor add question for dynamic panel" time="0.019" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, use question.valueName, bug: #353" time="0.02" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, use question.valueName, bug: #367" time="0.018" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, use dropdown question instead of readiogroup for editing values" time="0.012" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, add condition from wizard on apply, without pressing 'Add' button" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.allConditionQuestions" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.allCondtionQuestions for matrix column" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor.allCondtionQuestions for panel dynamic" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921" time="0.012" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, error in value input, Bug# T2598 (customer marked it private)" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, could not edit value for row.column1 on editing column, Bug# T3376 (customer marked it private)" time="0.019" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, question has defaultValue and user could not add condition with it, Bug# T2778 (customer marked it private)" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, test koConditionDisplayText property" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, automatically modify koTextValue/koValue without apply" time="0.027" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, automatically modify koTextValue/koValue with empty/non empty" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, clearCondition" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, modify koValue for editor in Modal Window" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, enabled operators" time="0.092" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, keep condition value on changing operation when it possible" time="0.042" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, selectbase + anyof" time="0.026" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, expression" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, Do not show question description" time="0.015" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, add apostrophes to string value" time="0.033" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, parse koEditorItems()" time="0.099" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, parse koEditorItems() question.valueName" time="0.053" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, parse koEditorItems() with calcaluted values, Bug #727 and Bug #740" time="0.023" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, change questionName in ConditionEditorItem" time="0.022" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, create expression from scratch" time="0.031" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, isWideMode = true" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, editorItem question width, isWideMode = false" time="0.018" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, editorItem question width, isWideMode = true" time="0.021" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, editorItem valueQuestion set correct value for array, Bug #700" time="0.009" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, anyof/allof is enabled on editing, Bug #804" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, remove operators" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, file question type should not set operator to 'equal', Bug #" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, onConditionQuestionsGetListCallback" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, valueName with ':', Bug #953" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, convert 000 into '000'" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="SurveyPropertyConditionEditor SurveyPropertyConditionEditor, do not convert '000' into 0" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyPropertyConditionEditor"/>
+  <testcase name="QuestionEditorsTests Create correct question editor property tab " time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question Editor apply/reset/onChanged" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Survey Editor, modal apply, Bug #674" time="0.072" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question Editor name is not changed" time="0.042" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question Editor preserve title on tab changed" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Create correct Question Editor by question type" time="0.011" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Hide a tab if its visible attribute set to false" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Hide visibleIf tab and startWithNewLine" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Create  general properties" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Get tabs" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Duplicated propertiues in one tab - https://github.com/surveyjs/survey-creator/issues/689 - Dynamic properties sometimes duplicated original ones" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Duplicated propertiues in different tabs - https://github.com/surveyjs/survey-creator/issues/689 - Dynamic properties sometimes duplicated original ones" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Check properties order for tab properties" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Modify property.category in code" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Add a property into new category" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Dynamically generated tabs" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests General properties, editor type" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests General properties, work without apply" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests General properties, has errors" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor definition: getProperties" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor definition: getTabs" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: custom errors" time="0.03" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: custom errors on required field" time="0.032" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: custom errors on unique itemvalues" time="0.027" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: clear errors on setting values outside" time="0.035" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: required field errors" time="0.028" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: on property value changing" time="0.036" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: depended property, choices" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Support old property grid: show localized display text from p.propertyName.title" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Support old property grid: get display text from property displayName attribute" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: change editor.readOnly" time="0.028" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: build properties on fly" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: change copied object" time="0.012" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Use localized text for dropdown property editor" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Question editor: copied object should have parent property, bug: https://surveyjs.answerdesk.io/ticket/details/T2531" time="0.011" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests DependedOn properties, koVisible" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests DependedOn properties, dynamic choices" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests DependedOn properties + multiple, dynamic choices" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Survey Editor cancel, Bug#T2809 (customer marked it as private)" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Add property into existing cagetory" time="0.045" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Add property into new cagetory" time="0.061" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Insert property: nextToProperty" time="0.06" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Insert property: nextToProperty, two times" time="0.073" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Modal property, showBefore call on demand" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="QuestionEditorsTests Modal property, showBefore call on demand, No categories demands immediately" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).QuestionEditorsTests"/>
+  <testcase name="questionToolboxTests toolbox support options" time="0.011" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox reorder items" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox several categories" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox change categories" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox load custom/composite questions" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox categories + allowExpandMultipleCategories property" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox categories + keepAllCategoriesExpanded property" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests toolbox copied questions" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests Save/Load all toolbox items" time="0.02" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="questionToolboxTests Save/Load copied toolbox items" time="0.02" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionToolboxTests"/>
+  <testcase name="creatorPropertiesTests Hide/show property" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).creatorPropertiesTests"/>
+  <testcase name="creatorPropertiesTests Hide category" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).creatorPropertiesTests"/>
+  <testcase name="surveyEditorTests Set Text property" time="0.045" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Escape HTML question string" time="0.038" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests At least one page should be available" time="0.054" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests options.questionTypes" time="0.054" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Editor state property" time="0.047" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Do not reload surey on 'Designer' tab click" time="0.042" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests SurveyJSON always return correct data, bug #53" time="0.036" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests onQuestionAdded event" time="0.052" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests onElementDeleting event" time="0.094" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Delete object and selectedElement property" time="0.147" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests fast copy tests, copy a question" time="0.038" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests fast copy tests, copy a panel with questions and a nested panel" time="0.051" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Copy a page" time="0.054" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests fast copy tests, set the correct parent" time="0.061" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests addQuestion into the QuestionPanelDynamic into second page" time="0.098" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests generateValidJSON should be true by default, bug #135" time="0.044" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests onCustomPropertySort event" time="0.03" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests onQuestionEditorChanged method" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests pagesEditor activePage when question selected" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests pagesEditor addNewPage in the dropdown" time="0.043" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests pagesEditor.readOnly" time="0.067" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests PagesEditor change question's page" time="0.033" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Element name should be unique - property grid + Question Editor" time="0.047" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Validate Selected Element Errors" time="0.031" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Update conditions/expressions on changing question.name" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Update conditions/expressions on changing question.valueName" time="0.067" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106" time="0.022" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Change page on changing survey.selectedElement if needed, Bug#424" time="0.047" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380" time="0.049" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Do not allow to select page object" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Do not allow to select page/survey objects" time="0.029" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Change elemenent page" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests show property grid on Edit" time="0.045" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests hideAdvancedSettings and designer containers visibility" time="0.024" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Show toolbox in right container and hide property grid" time="0.03" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Undo-redo on showing modal window" time="0.092" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Undo-redo on showing modal window and updating the expressions" time="0.102" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Undo-redo creator add/remove page" time="0.039" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests showModalOnElementEditing property" time="0.055" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests pageEditMode property" time="0.052" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests The onModified event is called on property changed" time="0.029" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657" time="0.029" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Can show unexisting property" time="0.025" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Default toolbar items" time="0.028" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests showPageSelectorInToolbar property" time="0.053" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests deleteElement function" time="0.072" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests Do not call onPageAdded on pages move" time="0.024" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab" time="0.031" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897" time="0.024" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests addQuestion into the QuestionPanelDynamic into second page " time="0.049" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests generate element name based on another survey" time="0.126" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator.onConditionQuestionsGetList, Bug#957" time="0.041" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator.onAddQuestion and undo-redo manager, Bug#972" time="0.034" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator.onAddPage and undo-redo manager, Bug#972" time="0.04" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator.onAddPanel and undo-redo manager, Bug#972" time="0.062" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests creator.onGetObjectTextInPropertyGrid event, update on property changing" time="0.081" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests update element TextInPropertyGrid for non selected element" time="0.07" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyEditorTests SurveyPropertyConditionEditor, set correct locale into internal survey, Bug #953" time="0.055" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyEditorTests"/>
+  <testcase name="surveyObjects Initial objects building" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects Initial objects building, panel support" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects No name pages" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects selectObject method" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects addPage method" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects addPage method - insert" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects addQuestion method" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects addQuestion to the first page" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects addQuestion into the QuestionPanelDynamic" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects removeObject method - remove Question" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects removeObject method - remove Page" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects selectNextQuestion method" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects object changed name" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects Large test on adding/remove objects with Panel" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects PanelDynamic test" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects getItemTextCallback" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="surveyObjects Initial objects building with titles - https://surveyjs.answerdesk.io/ticket/details/T1380" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyObjects"/>
+  <testcase name="UndoRedoTests UndoRedoManager Action Class" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests UndoRedoManager Transaction Class" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo survey title" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo canUndo canRedo" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo add element" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo remove element" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo add element with transaction" time="0.013" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo koCanUndo koCanRedo canUndo canRedo" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo canUndoRedoCallback" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo doesn't add empty transaction" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests Undo/redo set array property" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests UndoRedoManager stopTransaction withot startTransaction doesn't fail (blur/focus case)" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="UndoRedoTests UndoRedoManager undo page change by one action" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UndoRedoTests"/>
+  <testcase name="surveyLiveTests Create survey" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="surveyLiveTests koPages, koActive" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="surveyLiveTests koPages, visibility" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="surveyLiveTests Reset options on show, Bug# https://surveyjs.answerdesk.io/ticket/details/T2147" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="surveyLiveTests Use title for pages" time="0.039" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="surveyLiveTests showDefaultLanguageInTestSurveyTab: auto, true, false, all" time="0.051" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).surveyLiveTests"/>
+  <testcase name="questionconverter get converted classes" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionconverter"/>
+  <testcase name="questionconverter get converted classes based on available types" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionconverter"/>
+  <testcase name="questionconverter Convert question" time="0.006" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).questionconverter"/>
+  <testcase name="UtilsTests getNextValue" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UtilsTests"/>
+  <testcase name="UtilsTests DesignerContainerViewModel changed unsubscribe" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UtilsTests"/>
+  <testcase name="UtilsTests DesignerContainerViewModel default icons" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).UtilsTests"/>
+  <testcase name="Adorners Tests adorners getMarkerClass test" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests Serialize custom properties - https://surveyjs.answerdesk.io/ticket/details/T875" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests On property changing event for adorners - https://surveyjs.answerdesk.io/ticket/details/T1245 - Adjusting property value in event onPropertyValueChanging" time="0.039" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests titleAdorner.pageTitleEditable" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests panelActionsAdorner.getMarkerClass - T3379 - Custom adorner rendering bug" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests questionActionsAdorner.getMarkerClass - T3379 - Custom adorner rendering bug" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests TitleInplaceEditor valueChanged" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests TitleInplaceEditor hasError/error" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests TitleInplaceEditor start edit callback" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests TitleInplaceEditor validateSelectedElement" time="0.045" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests Title image read only mode" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests Title has logo and logo position without adorner" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests Title has logo and logo position with adorner" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests Title editor read only mode" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests title/description adorner for removed properties - https://surveyjs.answerdesk.io/internal/ticket/details/T4683" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests title and item editor maxLength doesn't work in IE - https://surveyjs.answerdesk.io/internal/ticket/details/T4734" time="0.048" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="Adorners Tests item editor raises the onCollectionItemDeleting event" time="0.037" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Adorners Tests"/>
+  <testcase name="SurveyTextWorker Tests text worker leaves artifacts in the created survey - https://surveyjs.answerdesk.io/ticket/details/T941" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyTextWorker Tests"/>
+  <testcase name="TranslatonTests Text question localization properties" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Text question choices localization" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Survey child groups" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Survey child groups " time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests get locales" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Localization strings editing" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Translation for adding" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Do not reset locales on reset" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests get/set the selected locales" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests disable locales" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests get/set the selected locales with inactive translation tab" time="0.039" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Translation show All strings" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Do not add group if there is no items in it." time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Question validators name" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Default locale name" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Add properties for columns" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Do not allow translate choices with numbers" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Filter by Page" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests MultipleText question" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Import from array" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Export to array" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Merging a locale with default" time="0.008" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Custom localizable property in question" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Custom localizable property in itemvalue" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="TranslatonTests Add pages as a custom property, it should not produce the error, Bug#991" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).TranslatonTests"/>
+  <testcase name="Editable Object Tests correctly create editable object test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Editable Object Tests"/>
+  <testcase name="Editable Object Tests editable object, apply function test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Editable Object Tests"/>
+  <testcase name="Editable Object Tests Copy question with correct locale" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Editable Object Tests"/>
+  <testcase name="Editable Object Tests Test reset" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Editable Object Tests"/>
+  <testcase name="Editable Object Tests Copy questions" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).Editable Object Tests"/>
+  <testcase name="LogicTabTests Page visibility logic" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Question visibility logic" time="0.012" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Panel visibility logic" time="0.018" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Do not show ShowInUI=false visibility logic" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Add existing visible Items" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Add new action immediately" time="0.019" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Do not add expression question into visible Items" time="0.011" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Add new item" time="0.043" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Edit existing item" time="0.025" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Use SurveyItemSelector for editing" time="0.038" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Remove same actions on save" time="0.031" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Remove existing action" time="0.021" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Remove existing item" time="0.009" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Rename the name" time="0.029" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Delete the question" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Add new item with two triggers" time="0.021" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Edit triggers via trigger editor" time="0.026" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Edit condition complete via its editor" time="0.025" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Use survey creator options" time="0.018" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Disable editing for readOnly" time="0.009" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Displaying correct text for logic action" time="0.021" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Logic editing errors" time="0.021" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Return without saving" time="0.025" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Make Survey Creator modified on changes" time="0.083" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Hide Expression Header in Condition Property Editor in Logic tab" time="0.054" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Add existing visible Items " time="0.015" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Allow logic type to be null and change it" time="0.016" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests One action exists in new item" time="0.02" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Limit the number of action types." time="0.018" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Logic onLogicItemSaved event" time="0.019" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Logic onLogicItemRemoving/onLogicItemRemoved events" time="0.014" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests SurveyCreator with logictab only, set creator json" time="0.04" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Hide/show logic types in actions" time="0.036" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="LogicTabTests Logic addNewText" time="0.01" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).LogicTabTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector get/set value" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector diffrent types" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector showTitle = true" time="0.004" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector item.koDisabled()" time="0.007" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector validation" time="0.005" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="SurveyElementSelectorTests SurveyElementSelector + editableObject" time="0.003" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).SurveyElementSelectorTests"/>
+  <testcase name="ExpressionToDisplayText Tests Replace question titles test" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).ExpressionToDisplayText Tests"/>
+  <testcase name="ExpressionToDisplayText Tests Replace question titles using valueName test" time="0.001" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).ExpressionToDisplayText Tests"/>
+  <testcase name="ExpressionToDisplayText Tests Delete question from expression" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).ExpressionToDisplayText Tests"/>
+  <testcase name="ExpressionToDisplayText Tests Display text for operator" time="0" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).ExpressionToDisplayText Tests"/>
+  <testcase name="ExpressionToDisplayText Tests Display text in 'de' locale" time="0.002" classname="HeadlessChrome_0_0_0_(Windows_10_0_0_0).ExpressionToDisplayText Tests"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
