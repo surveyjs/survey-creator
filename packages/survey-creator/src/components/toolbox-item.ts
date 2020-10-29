@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { IQuestionToolboxItem } from './toolbox';
+import { IQuestionToolboxItem } from '../toolbox';
 import { getLocString } from "../editorLocalization";
 import { SurveyCreator } from '../editor';
 

@@ -2,8 +2,7 @@ import * as ko from "knockout";
 import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
 import { IActionBarItem } from "./components/action-bar/action-bar";
 import { DragDropHelper } from "./dragdrophelper";
-import { PropertyGridObjectEditorModel } from "./questionEditors/questionEditor";
-import { QuestionToolbox } from "./toolbox";
+import { QuestionToolbox } from "@survey/creator/toolbox";
 
 export interface ICreatorOptions {
   [index: string]: any;

@@ -67,7 +67,8 @@ export {
   SurveyElementEditorTabModel,
 } from "../questionEditors/questionEditor";
 
-export { QuestionToolbox } from "../components/toolbox";
+export * from "../components/toolbox";
+export { QuestionToolbox } from "../toolbox";
 export { SurveyObjectProperty } from "../objectProperty";
 export { PagesEditorViewModel } from "../components/pages-editor";
 export { ElementSelectorViewModel } from "../components/element-selector";

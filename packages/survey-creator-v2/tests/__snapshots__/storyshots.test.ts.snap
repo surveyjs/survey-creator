@@ -3894,7 +3894,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     
                 <div
                   data-bind="attr: { id: koCurrentPage().id }, template: { name: 'survey-page', data: koCurrentPage, afterRender: koAfterRenderPage }"
-                  id="sp_106"
+                  id="sp_102"
                 >
                   
   

@@ -15,7 +15,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { DragDropHelper } from "./dragdrophelper";
-import { QuestionToolbox } from "./components/toolbox";
+import { QuestionToolbox } from "./toolbox";
 import { SurveyJSON5 } from "./json5";
 var templateEditorHtml = require("html-loader?interpolate!val-loader!./templates/entry.html");
 import * as Survey from "survey-knockout";
