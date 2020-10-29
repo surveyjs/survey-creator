@@ -1,6 +1,18 @@
 {
-  "name": "@survey",
+  "name": "survey-creator",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
   "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "bootstrap": "lerna run bootstrap",
+    "build": "lerna run build:prod",
+    "test": "lerna run test"
+  },
   "devDependencies": {
     "lerna": "^3.22.1"
   }

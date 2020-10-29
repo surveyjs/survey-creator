@@ -20,6 +20,7 @@
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build_dev": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType dev",
     "build_prod": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType prod --env.libraryName SurveyEditor && webpack --env.buildType dev && webpack --env.buildType prod",
+    "build:prod": "npm run build_prod",
     "watch_dev": "webpack --env.buildType dev --watch"
   },
   "dependencies": {
