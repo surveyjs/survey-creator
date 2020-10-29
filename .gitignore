@@ -40,3 +40,4 @@ doc_generator/*.json
 node_modules
 build
 package
+tmp
