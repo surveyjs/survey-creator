@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyElementEditorTabModel } from "../../questionEditors/questionEditor";
+import { SurveyElementEditorTabModel } from "@survey/creator/questionEditors/questionEditor";
 import "./property-panel.scss";
 const template = require("./property-panel.html");
 
