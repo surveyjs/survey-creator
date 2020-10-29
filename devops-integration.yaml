@@ -34,7 +34,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
   displayName: 'npm install'
 
@@ -53,7 +53,7 @@ steps:
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
     Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/node_modules/survey-knockout'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
 
 - task: DownloadBuildArtifacts@0
@@ -71,32 +71,32 @@ steps:
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSWidgetsBuild/packages/survey-widgets'
     Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/node_modules/surveyjs-widgets'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
     OverWrite: true
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run build_prod
   displayName: 'build_prod'
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run test_ci
   displayName: 'unit tests'
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run testcafe_ci
   displayName: 'functional tests'
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run doc_gen
   displayName: 'generate docs'
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs'
     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
     CleanTargetFolder: true
   displayName: 'copy generated docs to the local surveyjs/service repo'
@@ -120,7 +120,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/build'
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/build'
     targetFolder: $(Build.ArtifactStagingDirectory)/build
 
 - task: PublishBuildArtifacts@1
