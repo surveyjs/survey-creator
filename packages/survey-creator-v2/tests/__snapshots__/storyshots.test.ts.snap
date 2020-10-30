@@ -3831,7 +3831,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
   
         <div
-          class="sv-root-modern"
+          class="svc-survey-root-modern"
           data-bind="css: css.root, afterRender: koEventAfterRender"
         >
           
@@ -3848,7 +3848,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
           
             <div
-              class="sv-container-modern"
+              class="svc-survey-container-modern"
               data-bind="css: css.container"
             >
               
@@ -3871,7 +3871,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               
               
               <div
-                class="sv-body"
+                class="svc-survey-body"
                 data-bind="css: css.body"
               >
                 
@@ -3899,7 +3899,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   
   
                   <div
-                    class="sv-page sv-body__page"
+                    class="svc-survey-page svc-survey-body__page"
                     data-bind="css: cssClasses.page.root"
                   >
                     
@@ -3922,7 +3922,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     
   
                     <div
-                      class="sv-row sv-clearfix"
+                      class="svc-survey-row svc-survey-clearfix"
                       data-bind="css: panel.cssClasses.row"
                     >
                       
