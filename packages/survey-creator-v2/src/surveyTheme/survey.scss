@@ -1,0 +1,10 @@
+@import "../variables.scss";
+
+@import "blocks/svc-survey-question.scss";
+@import "blocks/svc-survey-text.scss";
+@import "blocks/svc-survey-comment.scss";
+@import "blocks/svc-survey-panel.scss";
+
+.svc-survey-root-modern {
+  width: 100%;
+}

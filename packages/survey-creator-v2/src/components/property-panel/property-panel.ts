@@ -1,6 +1,8 @@
 import * as ko from "knockout";
-import { SurveyElementEditorTabModel } from "@survey/creator/questionEditors/questionEditor";
+import { Survey } from "survey-knockout";
+import { creatorCss } from "../../surveyTheme/creator-css";
 import "./property-panel.scss";
+import "../../surveyTheme/survey.scss";
 const template = require("./property-panel.html");
 
 // export class PropertyPanelTabViewModel {
@@ -50,10 +52,24 @@ const template = require("./property-panel.html");
 //   showHeader: ko.Computed<boolean>;
 // }
 
+export class PropertyPanelViewModel {
+  setupSurvey: ko.Computed<any>;
+  constructor(public title: string, public survey: ko.Observable<Survey>) {
+    //todo
+    this.setupSurvey = ko.computed(() => {
+      survey().showQuestionNumbers = "off";
+      survey().css = creatorCss;
+    });
+  }
+  public dispose() {
+    this.setupSurvey.dispose();
+  }
+}
+
 ko.components.register("svc-property-panel", {
   viewModel: {
     createViewModel: (params: any) => {
-      return { title: params.title, survey: params.survey };
+      return new PropertyPanelViewModel(params.title, params.survey);
     },
   },
   template: template,
