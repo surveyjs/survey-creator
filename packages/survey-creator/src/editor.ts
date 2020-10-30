@@ -3052,7 +3052,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       obj: obj,
       property: property,
       propertyName: property.name,
-      coleection: collection,
+      collection: collection,
       item: item,
       allowDelete: true,
     };
