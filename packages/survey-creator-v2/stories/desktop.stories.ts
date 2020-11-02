@@ -80,16 +80,6 @@ export const Default = () => {
     ])
   );
 
-  creator.tabs.push(
-    ...(<any>[
-      { title: "Designer" },
-      { title: "Survey Logic" },
-      { title: "JSON Editor" },
-      { title: "Embed Survey" },
-      { title: "Translation" },
-    ])
-  );
-
   return {
     template: '<survey-creator params="creator: creator"></survey-creator>',
     context: {

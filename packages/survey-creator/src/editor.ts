@@ -36,6 +36,7 @@ import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
 import { localization } from "./entries";
+import { CreatorBase } from "./creator-base";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -43,9 +44,10 @@ type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
  * Survey Creator is WYSIWYG editor.
  */
 
-export class SurveyCreator implements ISurveyObjectEditorOptions {
+export class SurveyCreator
+  extends CreatorBase
+  implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
-  private _haveCommercialLicense = ko.observable(false);
   private renderedElement: HTMLElement;
 
   private questionEditorWindow: SurveyPropertyEditorShowWindow;
@@ -61,110 +63,23 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     no: number,
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
-  private options: any;
   private stateValue: string = "";
   private dragDropHelper: DragDropHelper = null;
-  private showDesignerTabValue = ko.observable<boolean>(false);
-  private showJSONEditorTabValue = ko.observable<boolean>(false);
-  private showTestSurveyTabValue = ko.observable<boolean>(false);
-  private showEmbeddedSurveyTabValue = ko.observable<boolean>(false);
-  private showTranslationTabValue = ko.observable<boolean>(false);
-  private showLogicTabValue = ko.observable<boolean>(false);
-  private hideExpressionHeaderValue = ko.observable<boolean>(false);
-  private alwaySaveTextInPropertyEditorsValue: boolean = false;
-  private showApplyButtonValue: boolean = true;
-  private isRTLValue: boolean = false;
-  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
-  private pageEditModeValue: "standard" | "single" = "standard";
-  private showDropdownPageSelectorValue: boolean = true;
   private koShowSurveyTitle = ko.observable<"ifentered" | "always" | "never">(
     "ifentered"
   );
   private koAllowControlSurveyTitleVisibility = ko.observable(true);
+  private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
+  private pageEditModeValue: "standard" | "single" = "standard";
+  private showDropdownPageSelectorValue: boolean = true;
+  private alwaySaveTextInPropertyEditorsValue: boolean = false;
+  private showApplyButtonValue: boolean = true;
+  private hideExpressionHeaderValue: ko.Observable<boolean>;
 
   /**
    * If set to true (default value) the creator scrolls to a new element. A new element can be added from Toolbox or by copying.
    */
   public scrollToNewElement: boolean = true;
-
-  /**
-   * You have right to set this property to true if you have bought the commercial licence only.
-   * It will remove the text about non-commerical usage on the top of the widget.
-   * Setting this property true without having a commercial licence is illegal.
-   * @see haveCommercialLicense
-   */
-  public get haveCommercialLicense() {
-    return this._haveCommercialLicense();
-  }
-  public set haveCommercialLicense(val) {
-    this._haveCommercialLicense(val);
-  }
-
-  /**
-   * You need to set this property to true if you want to inplace edit item values instead of texts.
-   * @see inplaceEditForValues
-   */
-  public get inplaceEditForValues() {
-    return itemAdorner.inplaceEditForValues;
-  }
-  public set inplaceEditForValues(val) {
-    itemAdorner.inplaceEditForValues = val;
-  }
-
-  /**
-   * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
-   * @see useTabsInElementEditor
-   */
-  public useTabsInElementEditor = false;
-
-  /**
-   * You need to set this property to true if you want to show titles instead of names in pages editor and object selector.
-   * @see onShowObjectDisplayName
-   */
-  public showObjectTitles = false;
-
-  /**
-   * You need to set this property to true if you want to show titles instead of names in expression editor.
-   */
-  public showTitlesInExpressions = false;
-  /**
-   * You need to set this property to false to allow your users build expressions visually only, without editing them in text editor.
-   */
-  public allowEditExpressionsInTextEditor = true;
-
-  /**
-   * Set this property to false to hide the pages selector in the Test Survey Tab
-   */
-  public showPagesInTestSurveyTab = true;
-
-  /**
-   * Set this property to false to hide the device simulator in the Test Survey Tab
-   */
-  public showSimulatorInTestSurveyTab = true;
-
-  /**
-   * Set this property to false to disable pages adding, editing and deleting
-   */
-  public allowModifyPages = true;
-
-  /**
-   * The default value is _"auto"_. It shows the language selector if there are more than two languages are using in the survey.
-   * It shows only used languages in the survey.
-   * Set this property to _false_ to hide the default language selector in the Test Survey Tab.
-   * Set it to _true_ to show this selector even if there is only one language in the survey
-   * Set it to _all_ to show the selector with all available languages (30+)
-   */
-  public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
-
-  /**
-   * Set this property to false to hide the show invisible element checkbox in the Test Survey Tab
-   */
-  public showInvisibleElementsInTestSurveyTab = true;
-
-  /**
-   * Set this property to true if you want to show "page selector" in the toolabar instead of "pages editor"
-   */
-  public showPageSelectorInToolbar = false;
 
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
@@ -687,7 +602,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  koAutoSave = ko.observable(false);
+
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
    * It calls before adding the element into toolbox and it allows to change the toolbox item attributes using options.itemOptions parameter
@@ -806,29 +721,16 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
 
   /**
-   * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
+   * You need to set this property to true if you want to inplace edit item values instead of texts.
+   * @see inplaceEditForValues
    */
-  public get isAutoSave() {
-    return this.koAutoSave();
+  public get inplaceEditForValues() {
+    return itemAdorner.inplaceEditForValues;
   }
-  public set isAutoSave(newVal) {
-    this.koAutoSave(newVal);
+  public set inplaceEditForValues(val) {
+    itemAdorner.inplaceEditForValues = val;
   }
-  /**
-   * Set it to false to suppress an alert message about error on saving the survey into database.
-   */
-  public showErrorOnFailedSave: boolean = true;
-  koShowState = ko.observable(false);
-  /**
-   * A boolean property, false by default. Set it to true to show the state in the toolbar (saving/saved).
-   */
-  public get showState() {
-    return this.koShowState();
-  }
-  public set showState(newVal) {
-    this.koShowState(newVal);
-  }
-  koReadOnly = ko.observable(false);
+
   /**
    * A boolean property, false by default. Set it to true to deny editing.
    */
@@ -852,17 +754,14 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   // EO models from MVVM
 
   koIsShowDesigner: any;
-  koViewType = ko.observable("designer");
   koCanDeleteObject: any;
   koObjects: any;
   koSelectedObject: ko.Observable<any>;
   koShowSaveButton: any;
-  koGenerateValidJSON: any;
-  koShowOptions: any;
-  koShowPropertyGrid = ko.observable<ContainerLocation>(true);
-  koShowToolbox = ko.observable<ContainerLocation>(true);
-  koShowElementEditorAsPropertyGrid = ko.observable(false);
-  koHideAdvancedSettings = ko.observable(false);
+  koShowPropertyGrid: ko.Observable<ContainerLocation>;
+  koShowToolbox: ko.Observable<ContainerLocation>;
+  koShowElementEditorAsPropertyGrid: ko.Observable<boolean>;
+  koHideAdvancedSettings: ko.Observable<boolean>;
   koTestSurveyWidth: any;
   koDesignerHeight = ko.observable<any>("1000px");
   koShowPagesToolbox = ko.observable<ContainerLocation>(true);
@@ -889,11 +788,10 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, showSimulatorInTestSurveyTab,
    * showSurveyTitle, allowControlSurveyTitleVisibility, hideExpressionHeaderInLogicTab
    */
+
   constructor(renderedElement: any = null, options: any = null) {
-    this.koShowOptions = ko.observable();
-    this.koGenerateValidJSON = ko.observable(true);
+    super(options);
     this.koSelectedObject = ko.observable();
-    this.setOptions(options);
     this.koCanDeleteObject = ko.observable(false);
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
@@ -1043,67 +941,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
     };
 
-    ko.computed(() => {
-      this.tabs([]);
-      if (this.showDesignerTab) {
-        this.tabs.push({
-          name: "designer",
-          title: this.getLocString("ed.designer"),
-          template: "se-tab-designer",
-          data: this,
-          action: () => this.showDesigner(),
-        });
-      }
-      if (this.showTestSurveyTab) {
-        this.tabs.push({
-          name: "test",
-          title: this.getLocString("ed.testSurvey"),
-          template: "se-tab-test",
-          data: this,
-          action: () => this.showTestSurvey(),
-        });
-      }
-      if (this.showLogicTab) {
-        this.tabs.push({
-          name: "logic",
-          title: this.getLocString("ed.logic"),
-          template: "se-tab-logic",
-          data: this,
-          action: () => this.showLogicEditor(),
-        });
-      }
-      if (this.showJSONEditorTab) {
-        this.tabs.push({
-          name: "editor",
-          title: this.getLocString("ed.jsonEditor"),
-          template: "se-tab-json-editor",
-          data: this,
-          action: () => this.showJsonEditor(),
-        });
-      }
-      if (this.showEmbededSurveyTab) {
-        this.tabs.push({
-          name: "embed",
-          title: this.getLocString("ed.embedSurvey"),
-          template: "se-tab-embed",
-          data: this,
-          action: () => this.showEmbedEditor(),
-        });
-      }
-      if (this.showTranslationTab) {
-        this.tabs.push({
-          name: "translation",
-          title: this.getLocString("ed.translation"),
-          template: "se-tab-translation",
-          data: this,
-          action: () => this.showTranslationEditor(),
-        });
-      }
-      if (this.tabs().length > 0) {
-        this.koViewType(this.tabs()[0].name);
-      }
-    });
-
     this.text = "";
 
     this.pagesEditorModel = new PagesEditor(this);
@@ -1117,13 +954,89 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     this.addToolbarItems();
   }
 
+  setOptions(options) {
+    this.koShowPropertyGrid = ko.observable<ContainerLocation>(true);
+    this.koShowElementEditorAsPropertyGrid = ko.observable(false);
+    this.koHideAdvancedSettings = ko.observable(false);
+    this._topContainer = ko.observableArray<string>([
+      "toolbar",
+      "pages-editor",
+    ]);
+    this.hideExpressionHeaderValue = ko.observable<boolean>(false);
+    this.koShowToolbox = ko.observable<ContainerLocation>(true);
+
+    super.setOptions(options);
+
+    this.inplaceEditForValues =
+      typeof options.inplaceEditForValues !== "undefined"
+        ? options.inplaceEditForValues
+        : false;
+
+    this.showPropertyGrid =
+      typeof options.showPropertyGrid !== "undefined"
+        ? options.showPropertyGrid
+        : true;
+
+    this.koShowElementEditorAsPropertyGrid(
+      typeof options.showElementEditorAsPropertyGrid !== "undefined"
+        ? options.showElementEditorAsPropertyGrid
+        : true
+    );
+
+    this.scrollToNewElement =
+      typeof options.scrollToNewElement !== "undefined"
+        ? options.scrollToNewElement
+        : true;
+    if (options.designerHeight !== undefined) {
+      this.koDesignerHeight(options.designerHeight);
+    }
+    if (options.objectsIntend) {
+      SurveyObjects.intend = options.objectsIntend;
+    }
+
+    if (typeof options.closeModalOutside !== "undefined") {
+      this.closeModalOutsideValue = options.closeModalOutside;
+    }
+
+    if (typeof options.pageEditMode !== "undefined") {
+      this.pageEditModeValue = options.pageEditMode;
+      if (this.pageEditModeValue === "single") {
+        this._topContainer.remove("pages-editor");
+        Survey.Serializer.findProperty("question", "page").visible = false;
+        Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.showJSONEditorTab = false;
+      }
+    }
+    if (this.options.showPageSelectorInToolbar) {
+      this.showPageSelectorInToolbar = true;
+      this.showDropdownPageSelectorValue = false;
+    }
+    if (typeof options.showDropdownPageSelector !== "undefined") {
+      this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
+    }
+
+    this.hideExpressionHeaderValue(options.hideExpressionHeader === true);
+
+    this.showToolbox =
+      typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
+
+    if (typeof options.showPagesToolbox !== "undefined") {
+      this.koShowPagesToolbox(options.showPagesToolbox);
+    }
+
+    if (typeof options.showSurveyTitle === "string") {
+      this.showSurveyTitle = options.showSurveyTitle;
+    }
+    if (typeof options.allowControlSurveyTitleVisibility !== "undefined") {
+      this.allowControlSurveyTitleVisibility = !!options.allowControlSurveyTitleVisibility;
+    }
+  }
+
   // get toolboxItems() {
   //   return this.options && this.options.questionTypes
   //     ? this.options.questionTypes
   //     : null;
   // }
-
-  tabs = ko.observableArray();
 
   themeCss = ko.computed(() => {
     return ["bootstrap", "bootstrapmaterial", "modern"].indexOf(
@@ -1156,155 +1069,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     });
   }
 
-  public getOptions() {
-    return this.options || {};
-  }
-
-  protected setOptions(options: any) {
-    if (!options) options = {};
-    if (!options.hasOwnProperty("generateValidJSON"))
-      options.generateValidJSON = true;
-    this.options = options;
-    this.showDesignerTabValue(
-      typeof options.showDesignerTab !== "undefined"
-        ? options.showDesignerTab
-        : true
-    );
-    this.showLogicTabValue(
-      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
-    );
-    this.showJSONEditorTabValue(
-      typeof options.showJSONEditorTab !== "undefined"
-        ? options.showJSONEditorTab
-        : true
-    );
-    this.showTestSurveyTabValue(
-      typeof options.showTestSurveyTab !== "undefined"
-        ? options.showTestSurveyTab
-        : true
-    );
-    this.showEmbeddedSurveyTabValue(
-      typeof options.showEmbededSurveyTab !== "undefined"
-        ? options.showEmbededSurveyTab
-        : false
-    );
-    this.showTranslationTabValue(
-      typeof options.showTranslationTab !== "undefined"
-        ? options.showTranslationTab
-        : false
-    );
-    this.showLogicTabValue(
-      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
-    );
-    this.hideExpressionHeaderValue(options.hideExpressionHeader === true);
-    this.haveCommercialLicense =
-      typeof options.haveCommercialLicense !== "undefined"
-        ? options.haveCommercialLicense
-        : false;
-    this.inplaceEditForValues =
-      typeof options.inplaceEditForValues !== "undefined"
-        ? options.inplaceEditForValues
-        : false;
-    this.showObjectTitles =
-      typeof options.showObjectTitles !== "undefined"
-        ? options.showObjectTitles
-        : false;
-    this.showTitlesInExpressions =
-      typeof options.showTitlesInExpressions !== "undefined"
-        ? options.showTitlesInExpressions
-        : false;
-    this.allowEditExpressionsInTextEditor =
-      typeof options.allowEditExpressionsInTextEditor !== "undefined"
-        ? options.allowEditExpressionsInTextEditor
-        : true;
-    this.useTabsInElementEditor =
-      typeof options.useTabsInElementEditor !== "undefined"
-        ? options.useTabsInElementEditor
-        : false;
-    this.showState =
-      typeof options.showState !== "undefined" ? options.showState : false;
-    this.koShowOptions(
-      typeof options.showOptions !== "undefined" ? options.showOptions : false
-    );
-    this.showPropertyGrid =
-      typeof options.showPropertyGrid !== "undefined"
-        ? options.showPropertyGrid
-        : true;
-    this.koShowElementEditorAsPropertyGrid(
-      typeof options.showElementEditorAsPropertyGrid !== "undefined"
-        ? options.showElementEditorAsPropertyGrid
-        : true
-    );
-    this.showToolbox =
-      typeof options.showToolbox !== "undefined" ? options.showToolbox : true;
-    this.koGenerateValidJSON(this.options.generateValidJSON);
-    this.isAutoSave =
-      typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
-    this.showErrorOnFailedSave =
-      typeof options.showErrorOnFailedSave !== "undefined"
-        ? options.showErrorOnFailedSave
-        : true;
-    this.isRTLValue =
-      typeof options.isRTL !== "undefined" ? options.isRTL : false;
-    this.scrollToNewElement =
-      typeof options.scrollToNewElement !== "undefined"
-        ? options.scrollToNewElement
-        : true;
-    if (options.designerHeight !== undefined) {
-      this.koDesignerHeight(options.designerHeight);
-    }
-    if (options.objectsIntend) {
-      SurveyObjects.intend = options.objectsIntend;
-    }
-    if (typeof options.showPagesToolbox !== "undefined") {
-      this.koShowPagesToolbox(options.showPagesToolbox);
-    }
-    if (typeof options.readOnly !== "undefined") {
-      this.koReadOnly(options.readOnly);
-    }
-    if (typeof options.showPagesInTestSurveyTab !== "undefined") {
-      this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
-    }
-    if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
-      this.showSimulatorInTestSurveyTab = options.showSimulatorInTestSurveyTab;
-    }
-    if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
-      this.showDefaultLanguageInTestSurveyTab =
-        options.showDefaultLanguageInTestSurveyTab;
-    }
-    if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
-      this.showInvisibleElementsInTestSurveyTab =
-        options.showInvisibleElementsInTestSurveyTab;
-    }
-    if (typeof options.allowModifyPages !== "undefined") {
-      this.allowModifyPages = options.allowModifyPages;
-    }
-    if (typeof options.closeModalOutside !== "undefined") {
-      this.closeModalOutsideValue = options.closeModalOutside;
-    }
-    if (typeof options.pageEditMode !== "undefined") {
-      this.pageEditModeValue = options.pageEditMode;
-      if (this.pageEditModeValue === "single") {
-        this._topContainer.remove("pages-editor");
-        Survey.Serializer.findProperty("question", "page").visible = false;
-        Survey.Serializer.findProperty("panel", "page").visible = false;
-        this.showJSONEditorTab = false;
-      }
-    }
-    if (this.options.showPageSelectorInToolbar) {
-      this.showPageSelectorInToolbar = true;
-      this.showDropdownPageSelectorValue = false;
-    }
-    if (typeof options.showDropdownPageSelector !== "undefined") {
-      this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
-    }
-    if (typeof options.showSurveyTitle === "string") {
-      this.showSurveyTitle = options.showSurveyTitle;
-    }
-    if (typeof options.allowControlSurveyTitleVisibility !== "undefined") {
-      this.allowControlSurveyTitleVisibility = !!options.allowControlSurveyTitleVisibility;
-    }
-  }
   /**
    * The editing survey object (Survey.Survey)
    */
@@ -1666,42 +1430,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
       }
     }
   }
-  /**
-   * Set it to true to show "JSON Editor" tab and to false to hide the tab
-   */
-  public get showDesignerTab() {
-    return this.showDesignerTabValue();
-  }
-  public set showDesignerTab(value: boolean) {
-    this.showDesignerTabValue(value);
-  }
-  /**
-   * Set it to true to show "JSON Editor" tab and to false to hide the tab
-   */
-  public get showJSONEditorTab() {
-    return this.showJSONEditorTabValue();
-  }
-  public set showJSONEditorTab(value: boolean) {
-    this.showJSONEditorTabValue(value);
-  }
-  /**
-   * Set it to true to show "Test Survey" tab and to false to hide the tab
-   */
-  public get showTestSurveyTab() {
-    return this.showTestSurveyTabValue();
-  }
-  public set showTestSurveyTab(value: boolean) {
-    this.showTestSurveyTabValue(value);
-  }
-  /**
-   * Set it to true to show "Embed Survey" tab and to false to hide the tab
-   */
-  public get showEmbededSurveyTab() {
-    return this.showEmbeddedSurveyTabValue();
-  }
-  public set showEmbededSurveyTab(value: boolean) {
-    this.showEmbeddedSurveyTabValue(value);
-  }
   private _showExternalHelpLink = ko.observable(false);
   get showExternalHelpLink() {
     return this._showExternalHelpLink();
@@ -1716,36 +1444,11 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   set placeholderHtml(value) {
     this._placeholderHtml(value);
   }
-  /**
-   * Set it to true to show "Translation" tab and to false to hide the tab
-   */
-  public get showTranslationTab() {
-    return this.showTranslationTabValue();
-  }
-  public set showTranslationTab(value: boolean) {
-    this.showTranslationTabValue(value);
-  }
-  /**
-   * Set it to true to show "Logic" tab and to false to hide the tab
-   */
-  public get showLogicTab() {
-    return this.showLogicTabValue();
-  }
-  public set showLogicTab(value: boolean) {
-    this.showLogicTabValue(value);
-  }
+
   public get hideExpressionHeader() {
     return this.hideExpressionHeaderValue();
   }
-  /**
-   * Set it to true to activate RTL support
-   */
-  public get isRTL() {
-    return this.isRTLValue;
-  }
-  public set isRTL(value: boolean) {
-    this.isRTLValue = value;
-  }
+
   /**
    * Set it to "cancel" or "apply" to enable closing modal windows by clicking outside popup.
    * If "apply" is set, then changes will be saved, otherwise not. By default value is "off"
@@ -1780,10 +1483,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   }
   public rightContainerVisible = ko.observable(true);
   public rightContainerActiveItem = ko.observable<string>("property-grid");
-  private _topContainer = ko.observableArray<string>([
-    "toolbar",
-    "pages-editor",
-  ]);
+  private _topContainer: ko.ObservableArray<string>;
   public layoutChangedIndicator = ko.observable(0);
   public get topContainer() {
     return this._topContainer();
@@ -1858,13 +1558,6 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public deletePage = () => {
     this.deleteCurrentObject();
   };
-  /**
-   * Returns the localized string by its id
-   * @param str the string id.
-   */
-  public getLocString(str: string) {
-    return editorLocalization.getString(str);
-  }
   public movePage = (page: Survey.PageModel, indexFrom: number) => {
     var indexTo = this.survey.pages.indexOf(page);
     this.setModified({
@@ -1998,7 +1691,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
     if (!this.showPropertyGrid) return;
     this.propertyGridObjectEditorModel.selectedObject = newObj;
   }
-  private canSwitchViewType(newType: string): boolean {
+  protected canSwitchViewType(newType: string): boolean {
     if (newType && this.koViewType() == newType) return false;
     if (
       (this.koViewType() == "translation" || this.koViewType() == "logic") &&
@@ -2035,15 +1728,7 @@ export class SurveyCreator implements ISurveyObjectEditorOptions {
   public get showingViewName(): string {
     return this.koViewType();
   }
-  /**
-   * Change the active view/tab. It will return false if it can't change the current tab.
-   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
-   */
-  public makeNewViewActive(viewName: string): boolean {
-    if (!this.canSwitchViewType(viewName)) return false;
-    this.koViewType(viewName);
-    return true;
-  }
+
   /**
    * Make a "Survey Designer" tab active.
    */

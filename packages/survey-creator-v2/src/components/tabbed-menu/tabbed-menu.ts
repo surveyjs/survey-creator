@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { ITabItem } from "../../creator";
+import { ITabItem } from "./tabbed-menu-item";
 
 import "./tabbed-menu.scss";
 const template = require("./tabbed-menu.html");

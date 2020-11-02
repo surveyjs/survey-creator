@@ -1,26 +1,13 @@
 import * as ko from "knockout";
 import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
-import { IActionBarItem } from "./components/action-bar/action-bar";
+import {IToolbarItem} from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
+import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 
-export interface ICreatorOptions {
-  [index: string]: any;
-}
-
-export interface ITabItem {
-  name: string;
-  title: string;
-  template: string;
-  data: any;
-  visible: boolean;
-  selected?: boolean | ko.Computed<boolean>;
-  disabled?: ko.MaybeObservable<boolean>;
-  action: () => void;
-}
-
-export class SurveyCreator {
-  constructor(private options: ICreatorOptions) {
+export class SurveyCreator extends CreatorBase {
+  constructor(options: ICreatorOptions) {
+    super(options);
     this._survey(this.createSurvey());
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -33,8 +20,7 @@ export class SurveyCreator {
 
   toolbox: QuestionToolbox;
 
-  tabs = ko.observableArray<ITabItem>();
-  toolbarItems = ko.observableArray<IActionBarItem>();
+  toolbarItems = ko.observableArray<IToolbarItem>();
 
   toolboxCategories = ko.observableArray<object>();
 
