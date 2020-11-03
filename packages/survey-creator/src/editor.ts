@@ -65,10 +65,8 @@ export class SurveyCreator
   ) => void;
   private stateValue: string = "";
   private dragDropHelper: DragDropHelper = null;
-  private koShowSurveyTitle = ko.observable<"ifentered" | "always" | "never">(
-    "ifentered"
-  );
-  private koAllowControlSurveyTitleVisibility = ko.observable(true);
+  private koShowSurveyTitle: ko.Observable<"ifentered" | "always" | "never">;
+  private koAllowControlSurveyTitleVisibility: ko.Observable<boolean>;
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   private pageEditModeValue: "standard" | "single" = "standard";
   private showDropdownPageSelectorValue: boolean = true;
@@ -763,7 +761,7 @@ export class SurveyCreator
   koShowElementEditorAsPropertyGrid: ko.Observable<boolean>;
   koHideAdvancedSettings: ko.Observable<boolean>;
   koTestSurveyWidth: any;
-  koDesignerHeight = ko.observable<any>("1000px");
+  koDesignerHeight: ko.Observable<any>;
   koShowPagesToolbox = ko.observable<ContainerLocation>(true);
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
@@ -794,6 +792,7 @@ export class SurveyCreator
     this.koCanDeleteObject = ko.observable(false);
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
+    this.koShowSurveyTitle = ko.observable("ifentered");
 
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -966,6 +965,8 @@ export class SurveyCreator
     this._leftContainer = ko.observableArray<string>(["toolbox"]);
     this._rightContainer = ko.observableArray<string>(["property-grid"]);
     this.koSelectedObject = ko.observable();
+    this.koAllowControlSurveyTitleVisibility = ko.observable(true);
+    this.koDesignerHeight = ko.observable<any>("1000px");
 
     super.setOptions(options);
     options = this.options;
