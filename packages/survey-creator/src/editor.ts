@@ -792,7 +792,6 @@ export class SurveyCreator
     this.koCanDeleteObject = ko.observable(false);
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
-    this.koShowSurveyTitle = ko.observable("ifentered");
 
     this.toolboxValue = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -967,6 +966,7 @@ export class SurveyCreator
     this.koSelectedObject = ko.observable();
     this.koAllowControlSurveyTitleVisibility = ko.observable(true);
     this.koDesignerHeight = ko.observable<any>("1000px");
+    this.koShowSurveyTitle = ko.observable("ifentered");
 
     super.setOptions(options);
     options = this.options;
