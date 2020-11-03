@@ -208,14 +208,14 @@ export class CreatorBase {
     this.initTabs();
   }
 
-  private initTabs() {
+  protected initTabs() {
     ko.computed(() => {
       this.tabs([]);
       if (this.showDesignerTab) {
         this.tabs.push({
           name: "designer",
           title: this.getLocString("ed.designer"),
-          template: "tab-designer",
+          template: "se-tab-designer",
           data: this,
           action: () => this.makeNewViewActive("designer"),
         });
@@ -224,7 +224,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "test",
           title: this.getLocString("ed.testSurvey"),
-          template: "tab-test",
+          template: "se-tab-test",
           data: this,
           action: () => this.makeNewViewActive("test"),
         });
@@ -233,7 +233,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "logic",
           title: this.getLocString("ed.logic"),
-          template: "tab-logic",
+          template: "se-tab-logic",
           data: this,
           action: () => this.makeNewViewActive("logic"),
         });
@@ -242,7 +242,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "editor",
           title: this.getLocString("ed.jsonEditor"),
-          template: "tab-json-editor",
+          template: "se-tab-json-editor",
           data: this,
           action: () => this.makeNewViewActive("editor"),
         });
@@ -251,7 +251,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "embed",
           title: this.getLocString("ed.embedSurvey"),
-          template: "tab-embed",
+          template: "se-tab-embed",
           data: this,
           action: () => this.makeNewViewActive("embed"),
         });
@@ -260,7 +260,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "translation",
           title: this.getLocString("ed.translation"),
-          template: "tab-translation",
+          template: "se-tab-translation",
           data: this,
           action: () => this.makeNewViewActive("translation"),
         });

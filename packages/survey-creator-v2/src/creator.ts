@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
-import {IToolbarItem} from "@survey/creator/components/toolbar";
+import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
@@ -8,6 +8,7 @@ import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions) {
     super(options);
+
     this._survey(this.createSurvey());
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -67,4 +68,67 @@ export class SurveyCreator extends CreatorBase {
   }
 
   readOnly = false;
+
+  protected initTabs() {
+    ko.computed(() => {
+      this.tabs([]);
+      if (this.showDesignerTab) {
+        this.tabs.push({
+          name: "designer",
+          title: this.getLocString("ed.designer"),
+          template: "svc-tab-designer",
+          data: this,
+          action: () => this.makeNewViewActive("designer"),
+        });
+      }
+      if (this.showTestSurveyTab) {
+        this.tabs.push({
+          name: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "svc-tab-test",
+          data: this,
+          action: () => this.makeNewViewActive("test"),
+        });
+      }
+      if (this.showLogicTab) {
+        this.tabs.push({
+          name: "logic",
+          title: this.getLocString("ed.logic"),
+          template: "svc-tab-logic",
+          data: this,
+          action: () => this.makeNewViewActive("logic"),
+        });
+      }
+      if (this.showJSONEditorTab) {
+        this.tabs.push({
+          name: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "svc-tab-json-editor",
+          data: this,
+          action: () => this.makeNewViewActive("editor"),
+        });
+      }
+      if (this.showEmbededSurveyTab) {
+        this.tabs.push({
+          name: "embed",
+          title: this.getLocString("ed.embedSurvey"),
+          template: "svc-tab-embed",
+          data: this,
+          action: () => this.makeNewViewActive("embed"),
+        });
+      }
+      if (this.showTranslationTab) {
+        this.tabs.push({
+          name: "translation",
+          title: this.getLocString("ed.translation"),
+          template: "svc-tab-translation",
+          data: this,
+          action: () => this.makeNewViewActive("translation"),
+        });
+      }
+      if (this.tabs().length > 0) {
+        this.koViewType(this.tabs()[0].name);
+      }
+    });
+  }
 }
