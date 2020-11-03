@@ -791,7 +791,6 @@ export class SurveyCreator
 
   constructor(renderedElement: any = null, options: any = null) {
     super(options);
-    this.koSelectedObject = ko.observable();
     this.koCanDeleteObject = ko.observable(false);
     this.koCanUndo = ko.observable(false);
     this.koCanRedo = ko.observable(false);
@@ -964,8 +963,12 @@ export class SurveyCreator
     ]);
     this.hideExpressionHeaderValue = ko.observable<boolean>(false);
     this.koShowToolbox = ko.observable<ContainerLocation>(true);
+    this._leftContainer = ko.observableArray<string>(["toolbox"]);
+    this._rightContainer = ko.observableArray<string>(["property-grid"]);
+    this.koSelectedObject = ko.observable();
 
     super.setOptions(options);
+    options = this.options;
 
     this.inplaceEditForValues =
       typeof options.inplaceEditForValues !== "undefined"
@@ -1471,13 +1474,13 @@ export class SurveyCreator
   public get showDropdownPageSelector() {
     return this.showDropdownPageSelectorValue;
   }
-  private _leftContainer = ko.observableArray<string>(["toolbox"]);
+  private _leftContainer: ko.ObservableArray<string>;
   public get leftContainer() {
     return this._leftContainer();
   }
   public leftContainerVisible = ko.observable(true);
   public leftContainerActiveItem = ko.observable<string>("toolbox");
-  private _rightContainer = ko.observableArray<string>(["property-grid"]);
+  private _rightContainer: ko.ObservableArray<string>;
   public get rightContainer() {
     return this._rightContainer();
   }
