@@ -22,4 +22,6 @@ export const parameters = {
   },
 };
 
+window.ko = ko;
+
 // export const decorators = [withTests({ results })];

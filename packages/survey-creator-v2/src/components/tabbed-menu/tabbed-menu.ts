@@ -19,7 +19,11 @@ ko.components.register("svc-tabbed-menu", {
       return new TabbedMenuViewModel(
         ko.computed(() =>
           ko.unwrap(params.items).map((item: ITabItem) => {
-            item.selected = ko.computed(() => item === selectedItem());
+            item.selected = ko.computed(
+              () =>
+                item === selectedItem() ||
+                ko.unwrap(params.viewType) === item.name
+            );
             let __originalAction = item.action || (() => {});
             item.action = () => {
               selectedItem(item);

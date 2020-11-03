@@ -4,7 +4,11 @@ Version = `${process.env.VERSION}`;
 export * from "../components/creator";
 export * from "../components/button";
 export * from "../components/svg-icon";
-export * from "../components/content";
+
+export * from "../components/tabs/tab-designer";
+export * from "../components/tabs/tab-test";
+export * from "../components/tabs/tab-json-editor";
+
 export * from "../components/page";
 export * from "../components/question";
 export * from "../components/property-panel/property-panel";

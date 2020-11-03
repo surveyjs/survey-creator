@@ -215,7 +215,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "designer",
           title: this.getLocString("ed.designer"),
-          template: "se-tab-designer",
+          template: "tab-designer",
           data: this,
           action: () => this.makeNewViewActive("designer"),
         });
@@ -224,7 +224,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "test",
           title: this.getLocString("ed.testSurvey"),
-          template: "se-tab-test",
+          template: "tab-test",
           data: this,
           action: () => this.makeNewViewActive("test"),
         });
@@ -233,7 +233,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "logic",
           title: this.getLocString("ed.logic"),
-          template: "se-tab-logic",
+          template: "tab-logic",
           data: this,
           action: () => this.makeNewViewActive("logic"),
         });
@@ -242,7 +242,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "editor",
           title: this.getLocString("ed.jsonEditor"),
-          template: "se-tab-json-editor",
+          template: "tab-json-editor",
           data: this,
           action: () => this.makeNewViewActive("editor"),
         });
@@ -251,7 +251,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "embed",
           title: this.getLocString("ed.embedSurvey"),
-          template: "se-tab-embed",
+          template: "tab-embed",
           data: this,
           action: () => this.makeNewViewActive("embed"),
         });
@@ -260,7 +260,7 @@ export class CreatorBase {
         this.tabs.push({
           name: "translation",
           title: this.getLocString("ed.translation"),
-          template: "se-tab-translation",
+          template: "tab-translation",
           data: this,
           action: () => this.makeNewViewActive("translation"),
         });
