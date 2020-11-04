@@ -1808,3 +1808,11 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("Set Text property", function (assert) {
+  var editor = new SurveyCreator();
+  assert.equal(editor.tabs().length, 3);
+  assert.equal(editor.tabs()[0].template, "se-tab-designer");
+  assert.equal(editor.tabs()[1].template, "se-tab-test");
+  assert.equal(editor.tabs()[2].template, "se-tab-json-editor");
+});
