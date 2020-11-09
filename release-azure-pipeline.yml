@@ -66,7 +66,7 @@ steps:
 
 - script: |
     cd packages/survey-creator
-    npm run testsingle
+    npm run test
   displayName: "unit tests"
 
 - script: |
