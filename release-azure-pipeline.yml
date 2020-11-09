@@ -49,6 +49,7 @@ steps:
   displayName: 'npm install'
 
 - powershell: |
+    cd packages/survey-creator
     echo $(git --version)
     git config --global user.email "kurmanov.work@gmail.com"
     git config --global user.name "dmitrykurmanov"
