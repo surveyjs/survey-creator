@@ -15,7 +15,7 @@ test(`boolean question data`, async (t) => {
 
     let defaultValue = await getDefaultValue();
 
-    await t.expect(defaultValue).eql('indeterminate');
+    await t.expect(typeof defaultValue).eql('undefined');
 
     const dataAccorditionTabHeader = Selector(
         ".svd-accordion-tab-header[data-title='Data']"
