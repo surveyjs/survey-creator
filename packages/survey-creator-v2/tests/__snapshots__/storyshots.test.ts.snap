@@ -2332,7 +2332,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
+            class="svc-action-bar-item svc-action-bar-item--active"
             data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Settings"
           >
@@ -3725,7 +3725,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <svc-page-navigator
-    params="items: survey.pages, creator: creator"
+    params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"
   >
     <!-- ko foreach: items -->
     <!-- /ko -->

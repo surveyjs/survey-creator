@@ -7,18 +7,20 @@ const template = require("./page-navigator.html");
 
 export class PageNavigatorViewModel {
   private _itemsSubscription: ko.Computed;
+  private _selectionSubscription: ko.Computed;
   private selectedItem = ko.observable<ITabItem>();
-  constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>, creator: any, onSelect = (item: ITabItem) => {}) {
+  constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>, creator: any, selection?: () => ITabItem, onSelect = (item: ITabItem) => {}) {
+    this._selectionSubscription = ko.computed(() => this.selectedItem(selection && selection()));
     this._itemsSubscription = ko.computed(() =>
       this.items(ko.unwrap(_items).map((_item: ITabItem) => {
           let item: ITabItem = <any>{
             name: _item.name,
             title: creator ? creator.getObjectTitle(_item) : _item.title
           };
-          item.selected = _item.selected || ko.computed(() => item === this.selectedItem());
+          item.selected = _item.selected || ko.computed(() => _item === this.selectedItem());
           item.action = () => {
-            this.selectedItem(item);
-            onSelect && onSelect(item);
+            this.selectedItem(_item);
+            onSelect && onSelect(_item);
             _item.action && _item.action();
           };
           return item;
@@ -28,6 +30,7 @@ export class PageNavigatorViewModel {
   }
   public items = ko.observableArray<ITabItem>();
   dispose() {
+    this._selectionSubscription.dispose();
     this._itemsSubscription.dispose();
   }
 }
@@ -35,11 +38,16 @@ export class PageNavigatorViewModel {
 ko.components.register("svc-page-navigator", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new PageNavigatorViewModel(
+      const model = new PageNavigatorViewModel(
         params.items,
         params.creator,
+        params.selection,
         params.onSelect
       );
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.dispose();
+      });
+      return model;
     },
   },
   template: template,

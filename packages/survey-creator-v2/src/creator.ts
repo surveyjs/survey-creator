@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
+import { Survey, SurveyElement, PropertyGrid, Base, Page } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -17,6 +17,69 @@ export class SurveyCreator extends CreatorBase {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey);
+
+    this.toolbarItems.push(
+      ...(<any>[
+        {
+          icon: "icon-undo",
+          action: () => {},
+          title: "Undo",
+          showTitle: false,
+        },
+        {
+          icon: "icon-redo",
+          action: () => {},
+          title: "Redo",
+          showTitle: false,
+        },
+        { component: "svc-action-bar-separator" },
+        {
+          icon: "icon-settings",
+          action: () => this.selectElement(this.survey),
+          isActive: ko.computed(() => this.isElementSelected(this.survey)),
+          title: "Settings",
+          showTitle: false,
+        },
+        {
+          icon: "icon-clear",
+          action: function () {
+            alert("clear pressed");
+          },
+          isActive: false,
+          title: "Clear",
+          showTitle: false,
+        },
+        {
+          icon: "icon-search",
+          action: () => {
+            this.showSearch = !this.showSearch;
+          },
+          isActive: ko.computed(() => this.showSearch),
+          title: "Search",
+          showTitle: false,
+        },
+        {
+          component: "svc-action-bar-separator",
+        },
+        {
+          icon: "icon-preview",
+          action: function () {
+            alert("preview pressed");
+          },
+          isActive: ko.observable(false),
+          title: "Preview",
+          innerCss: "svc-action-bar-item--secondary",
+        },
+      ])
+    );
+  }
+
+  private _showSearch = ko.observable<boolean>(false);
+  get showSearch() {
+    return this._showSearch();
+  }
+  set showSearch(val: boolean) {
+    this._showSearch(val);
   }
 
   toolbox: QuestionToolbox;
@@ -36,17 +99,33 @@ export class SurveyCreator extends CreatorBase {
   set survey(survey: Survey) {
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this._survey(survey);
+    this.selectElement(survey);
   }
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement(element: SurveyElement) {
+  selectElement = (element: Base) => {
     this.selection(element);
     this.propertyGrid.obj = element;
+    if(typeof element.getType === "function" && element.getType() === "page") {
+      this.currentPage = <Page>element;
+    } else if(!!element["page"]) {
+      this.currentPage = element["page"];
+    } else {
+      this.currentPage = undefined;
+    }
   }
 
-  isElementSelected(element: SurveyElement) {
+  isElementSelected(element: Base) {
     return element === this.selection();
+  }
+
+  private _currentPage = ko.observable<Page>();
+  get currentPage() {
+    return this._currentPage();
+  }
+  set currentPage(page: Page) {
+    this._currentPage(page);
   }
 
   dragDropHelper: DragDropHelper;

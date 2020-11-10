@@ -40,9 +40,13 @@ svc-page-navigator-item {
   position: absolute;
   top: 0;
   right: calcSize(0.5);
-  display: none;
+  max-width: 0;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  transition: max-width 0.2s ease-in-out;
+  transition: padding 0.2s ease-in-out;
   white-space: nowrap;
-  padding: 0 calcSize(3);
   height: 100%;
   line-height: 36px;
   background: $background;
@@ -73,7 +77,8 @@ svc-page-navigator-item {
 
 .svc-page-navigator-item:hover {
   .svc-page-navigator-item__banner {
-    display: block;
+    padding: 0 calcSize(3);
+    max-width: 200px;
   }
 }
 
