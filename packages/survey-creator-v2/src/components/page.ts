@@ -31,12 +31,16 @@ ko.components.register("svc-page", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const creator = params.creator;
-      ko.computed(() => {
+      const scrollSubscription = ko.computed(() => {
         if(creator.isElementSelected(params.page)) {
           componentInfo.element.scrollIntoView();
         }
       });
-      return new PageViewModel(creator, params.page);
+      const model = new PageViewModel(creator, params.page);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        scrollSubscription.dispose();
+      });
+      return model;
     },
   },
   template: template,

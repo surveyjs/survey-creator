@@ -38,12 +38,16 @@ export class PageNavigatorViewModel {
 ko.components.register("svc-page-navigator", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new PageNavigatorViewModel(
+      const model = new PageNavigatorViewModel(
         params.items,
         params.creator,
         params.selection,
         params.onSelect
       );
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.dispose();
+      });
+      return model;
     },
   },
   template: template,

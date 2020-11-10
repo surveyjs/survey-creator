@@ -21,7 +21,11 @@ export class ToolboxViewModel {
 ko.components.register("svc-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new ToolboxViewModel(params.categories, params.creator);
+      const model = new ToolboxViewModel(params.categories, params.creator);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.dispose();
+      });
+      return model;
     },
   },
   template: template,

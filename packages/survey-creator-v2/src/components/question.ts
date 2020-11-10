@@ -85,12 +85,17 @@ ko.components.register("svc-question", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const creator = params.creator;
-      ko.computed(() => {
+      const scrollSubscription = ko.computed(() => {
         if(creator.isElementSelected(params.page)) {
           componentInfo.element.scrollIntoView();
         }
       });
-      return new QuestionViewModel(creator, params.question);
+      const model = new QuestionViewModel(creator, params.question);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        scrollSubscription.dispose();
+        model.dispose();
+      });
+      return model;
     },
   },
   template: template,
