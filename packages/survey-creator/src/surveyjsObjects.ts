@@ -46,7 +46,7 @@ export class SurveyForDesigner extends Survey.Survey {
     this.onAfterRenderPage.add((sender: Survey.Survey, options) => {
       options.page["onAfterRenderPage"](options.htmlElement);
     });
-    this.editQuestionClick = function() {
+    this.editQuestionClick = function () {
       self.onEditButtonClick.fire(self, null);
     };
     this.onUpdateQuestionCssClasses.add(onUpdateQuestionCssClasses);
@@ -114,13 +114,25 @@ export class SurveyForDesigner extends Survey.Survey {
   }
   public static isTitleLogoEditable = ko.observable(false);
   public get hasLogo() {
-    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._hasLogo) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._hasLogo;
+    return (
+      (SurveyForDesigner.isTitleLogoEditable() &&
+        ((this.isReadOnly() && this._hasLogo) || !this.isReadOnly())) ||
+      (!SurveyForDesigner.isTitleLogoEditable() && this._hasLogo)
+    );
   }
   public get isLogoBefore() {
-    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._isLogoBefore;
+    return (
+      (SurveyForDesigner.isTitleLogoEditable() &&
+        ((this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly())) ||
+      (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoBefore)
+    );
   }
   public get isLogoAfter() {
-    return SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly()) || !SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter;
+    return (
+      (SurveyForDesigner.isTitleLogoEditable() &&
+        ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
+      (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter)
+    );
   }
   public get isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
@@ -143,11 +155,11 @@ function panelBaseOnCreating(self: any) {
   if (self.disableDesignActions === true) return;
   self.dragEnterCounter = 0;
   self.emptyElement = null;
-  self.rowCount = ko.computed(function() {
+  self.rowCount = ko.computed(function () {
     var rows = !!self["koRow"] ? self["koRows"]() : self.rows;
     return rows.length;
   }, self);
-  self.rowCount.subscribe(function(value) {
+  self.rowCount.subscribe(function (value) {
     if (self.emptyElement) {
       self.emptyElement.style.display = value > 0 ? "none" : "";
     }
@@ -167,7 +179,7 @@ function elementOnCreating(surveyElement: any) {
     allowChangeRequired: true,
   };
   surveyElement.dragDropHelperValue = null;
-  surveyElement.dragDropHelper = function() {
+  surveyElement.dragDropHelper = function () {
     if (surveyElement.dragDropHelperValue == null) {
       surveyElement.dragDropHelperValue = getSurvey(surveyElement)[
         "dragDropHelper"
@@ -178,12 +190,12 @@ function elementOnCreating(surveyElement: any) {
   surveyElement.renderedElement = null;
   surveyElement.koIsDragging = ko.observable(false);
   surveyElement.koIsSelected = ko.observable(false);
-  surveyElement.koIsDragging.subscribe(function(newValue) {
+  surveyElement.koIsDragging.subscribe(function (newValue) {
     if (surveyElement.renderedElement) {
       surveyElement.renderedElement.style.opacity = newValue ? 0.4 : 1;
     }
   });
-  surveyElement.koIsSelected.subscribe(function(newValue) {
+  surveyElement.koIsSelected.subscribe(function (newValue) {
     if (surveyElement.renderedElement) {
       if (newValue) {
         surveyElement.renderedElement.classList.add(
@@ -200,6 +212,26 @@ function elementOnCreating(surveyElement: any) {
   });
 }
 
+var classMarker = "svd_question";
+function fillChildsToDisable(list: Array<any>, el: any, rootEl: any) {
+  var childs = el.childNodes;
+  for (var i = 0; i < childs.length; i++) {
+    var ch = childs[i];
+    if (!ch.style) continue;
+    if (!!ch.classList && ch.classList.contains(classMarker)) {
+      ch = ch.parentElement;
+      while (!!ch && ch !== rootEl) {
+        var index = list.indexOf(ch);
+        if (index > -1) list.splice(index, 1);
+        ch = ch.parentElement;
+      }
+      continue;
+    }
+    list.push(ch);
+    fillChildsToDisable(list, ch, rootEl);
+  }
+}
+
 export function createAfterRenderHandler(
   creator: any,
   survey: SurveyForDesigner
@@ -212,7 +244,7 @@ export function createAfterRenderHandler(
   ) {
     if (surveyElement.disableDesignActions === true) return;
     surveyElement.renderedElement = domElement;
-    surveyElement.renderedElement.classList.add("svd_question");
+    surveyElement.renderedElement.classList.add(classMarker);
     if (StylesManager.currentTheme() === "bootstrap") {
       surveyElement.renderedElement.classList.add("svd-dark-bg-color");
     }
@@ -239,13 +271,13 @@ export function createAfterRenderHandler(
       surveyElement.title + " " + surveyElement.getType()
     );
     domElement.tabIndex = "0";
-    domElement.addEventListener("keyup", function(ev) {
+    domElement.addEventListener("keyup", function (ev) {
       var char = ev.which || ev.keyCode;
       if (char === 13 || char === 27) {
         domElement.click();
       }
     });
-    domElement.onclick = function(e) {
+    domElement.onclick = function (e) {
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         if (surveyElement.parent) {
@@ -255,15 +287,13 @@ export function createAfterRenderHandler(
         }
       }
     };
-
-    disable = disable && !(surveyElement.getType() == "paneldynamic"); //TODO
-    if (disable) {
-      var childs = domElement.childNodes;
-      for (var i = 0; i < childs.length; i++) {
-        if (childs[i].style) childs[i].style.pointerEvents = "none";
+    if (!isPanel) {
+      var listToDisable = [];
+      fillChildsToDisable(listToDisable, domElement, domElement);
+      for (var i = 0; i < listToDisable.length; i++) {
+        listToDisable[i].style.pointerEvents = "none";
       }
     }
-
     if (creator.readOnly) {
       addAdorner(domElement, surveyElement);
       return;
@@ -271,7 +301,7 @@ export function createAfterRenderHandler(
 
     surveyElement.dragDropHelper().attachToElement(domElement, surveyElement);
     domElement.tabindex = "0";
-    domElement.onkeyup = function(e) {
+    domElement.onkeyup = function (e) {
       var activeElement = !!document && document.activeElement;
       if (
         !!activeElement &&
@@ -289,7 +319,7 @@ export function createAfterRenderHandler(
     //   if (e.witch == 46) getSurvey(surveyElement).deleteCurrentObjectClick();
     //   return true;
     // };
-    domElement.ondblclick = function(e) {
+    domElement.ondblclick = function (e) {
       getSurvey(surveyElement).doElementDoubleClick(surveyElement);
     };
     var setTabIndex = (element) => {
@@ -313,14 +343,14 @@ export function createAfterRenderPageHandler(
   return function elementOnAfterRendering(domElement: any, page: any) {
     page.renderedElement = domElement;
     domElement.classList.add("svd_page");
-    domElement.onclick = function(e) {
+    domElement.onclick = function (e) {
       if (!e["markEvent"]) {
         e["markEvent"] = true;
         getSurvey(page)["selectedElement"] = page;
       }
     };
 
-    domElement.ondblclick = function(e) {
+    domElement.ondblclick = function (e) {
       getSurvey(page).doElementDoubleClick(page);
     };
 
@@ -345,7 +375,7 @@ export function registerAdorner(name, adorner) {
     adornersConfig[name] = [];
   }
   adornersConfig[name].push(adorner);
-  if(typeof adorner.onRegister === "function") {
+  if (typeof adorner.onRegister === "function") {
     adorner.onRegister();
   }
 }
@@ -356,11 +386,11 @@ export function removeAdorners(names: string[] = undefined) {
   (names || []).forEach((name) => {
     var adorners: any = adornersConfig[name];
     (adorners || []).forEach((adorner) => {
-      if(typeof adorner.onUnregister === "function") {
+      if (typeof adorner.onUnregister === "function") {
         adorner.onUnregister();
       }
     });
-    delete adornersConfig[name]; 
+    delete adornersConfig[name];
   });
 }
 
@@ -416,10 +446,13 @@ function filterPageElements(elements) {
 }
 
 function addAdorner(node, model) {
-  const allowEdit = !!model && (!!model.allowingOptions && !!model.allowingOptions.allowEdit || model.allowingOptions === undefined);
+  const allowEdit =
+    !!model &&
+    ((!!model.allowingOptions && !!model.allowingOptions.allowEdit) ||
+      model.allowingOptions === undefined);
   const survey = getSurvey(model);
   const editor = !!survey && survey.getEditor && survey.getEditor();
-  const isReadOnly = !allowEdit || !!editor && editor.readOnly;
+  const isReadOnly = !allowEdit || (!!editor && editor.readOnly);
   Object.keys(adornersConfig).forEach((element) => {
     adornersConfig[element].forEach((adorner) => {
       var elementClass = adorner.getMarkerClass(model);
@@ -430,11 +463,11 @@ function addAdorner(node, model) {
         var temp = [];
         for (var i = 0; i < elements.length; i++) {
           temp.push(elements[i]);
-          if(isReadOnly && !adorner.renderReadOnly && elements[i].classList) {
+          if (isReadOnly && !adorner.renderReadOnly && elements[i].classList) {
             elements[i].classList.remove(elementClass);
           }
         }
-        if(isReadOnly && !adorner.renderReadOnly) {
+        if (isReadOnly && !adorner.renderReadOnly) {
           return;
         }
         elements = temp;
@@ -457,56 +490,55 @@ function addAdorner(node, model) {
           if (isReadOnly) {
             adorner.renderReadOnly &&
               adorner.renderReadOnly(elements, model, editor);
-          }
-          else adorner.afterRender(elements, model, editor);
+          } else adorner.afterRender(elements, model, editor);
         }
       }
     });
   });
 }
 
-Survey.Page.prototype["onCreating"] = function() {
+Survey.Page.prototype["onCreating"] = function () {
   panelBaseOnCreating(this);
 };
 
-Survey.Page.prototype["onAfterRenderPage"] = function(el) {
+Survey.Page.prototype["onAfterRenderPage"] = function (el) {
   if (!getSurvey(this).isDesignMode) return;
   var self = this;
   var dragDropHelper = getSurvey(this)["dragDropHelper"];
   this.dragEnterCounter = 0;
-  el.ondragenter = function(e) {
+  el.ondragenter = function (e) {
     e.preventDefault();
     self.dragEnterCounter++;
   };
-  el.ondragleave = function(e) {
+  el.ondragleave = function (e) {
     self.dragEnterCounter--;
     if (self.dragEnterCounter === 0) dragDropHelper.doLeavePage(e);
   };
-  el.ondragover = function(e) {
+  el.ondragover = function (e) {
     return false;
   };
-  el.ondrop = function(e) {
+  el.ondrop = function (e) {
     dragDropHelper.doDrop(e);
   };
 };
 
-Survey.Panel.prototype["onCreating"] = function() {
+Survey.Panel.prototype["onCreating"] = function () {
   panelBaseOnCreating(this);
   elementOnCreating(this);
 };
 
-Survey.Panel.prototype["onSelectedElementChanged"] = function() {
+Survey.Panel.prototype["onSelectedElementChanged"] = function () {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
 
 if (!!Survey["FlowPanel"]) {
-  Survey["FlowPanel"].prototype["onCreating"] = function() {
+  Survey["FlowPanel"].prototype["onCreating"] = function () {
     //TODO
     this.placeHolder = "Enter here text or drop a question";
     elementOnCreating(this);
   };
-  Survey["FlowPanel"].prototype["onSelectedElementChanged"] = function() {
+  Survey["FlowPanel"].prototype["onSelectedElementChanged"] = function () {
     if (getSurvey(this) == null) return;
     this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
   };
@@ -516,18 +548,18 @@ var questionPrototype = !!Survey["QuestionBase"]
   ? Survey["QuestionBase"].prototype
   : Survey.Question.prototype;
 
-questionPrototype["onCreating"] = function() {
+questionPrototype["onCreating"] = function () {
   elementOnCreating(this);
 };
 
-questionPrototype["onSelectedElementChanged"] = function() {
+questionPrototype["onSelectedElementChanged"] = function () {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
 };
 
-Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function() {
+Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   var q: any = this.question;
-  var updateTriggerFunction = function() {
+  var updateTriggerFunction = function () {
     setTimeout(() => q["koElementType"].notifySubscribers(), 0);
   };
   [
