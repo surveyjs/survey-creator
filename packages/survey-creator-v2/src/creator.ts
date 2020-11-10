@@ -17,6 +17,69 @@ export class SurveyCreator extends CreatorBase {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey);
+
+    this.toolbarItems.push(
+      ...(<any>[
+        {
+          icon: "icon-undo",
+          action: () => {},
+          title: "Undo",
+          showTitle: false,
+        },
+        {
+          icon: "icon-redo",
+          action: () => {},
+          title: "Redo",
+          showTitle: false,
+        },
+        { component: "svc-action-bar-separator" },
+        {
+          icon: "icon-settings",
+          action: () => this.selectElement(this.survey),
+          isActive: ko.computed(() => this.isElementSelected(this.survey)),
+          title: "Settings",
+          showTitle: false,
+        },
+        {
+          icon: "icon-clear",
+          action: function () {
+            alert("clear pressed");
+          },
+          isActive: false,
+          title: "Clear",
+          showTitle: false,
+        },
+        {
+          icon: "icon-search",
+          action: () => {
+            this.showSearch = !this.showSearch;
+          },
+          isActive: ko.computed(() => this.showSearch),
+          title: "Search",
+          showTitle: false,
+        },
+        {
+          component: "svc-action-bar-separator",
+        },
+        {
+          icon: "icon-preview",
+          action: function () {
+            alert("preview pressed");
+          },
+          isActive: ko.observable(false),
+          title: "Preview",
+          innerCss: "svc-action-bar-item--secondary",
+        },
+      ])
+    );
+  }
+
+  private _showSearch = ko.observable<boolean>(false);
+  get showSearch() {
+    return this._showSearch();
+  }
+  set showSearch(val: boolean) {
+    this._showSearch(val);
   }
 
   toolbox: QuestionToolbox;
@@ -57,7 +120,7 @@ export class SurveyCreator extends CreatorBase {
     return element === this.selection();
   }
 
-  _currentPage = ko.observable<Page>();
+  private _currentPage = ko.observable<Page>();
   get currentPage() {
     return this._currentPage();
   }
