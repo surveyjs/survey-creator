@@ -2074,13 +2074,14 @@ export class SurveyCreator
           }
         }
       } else {
-        if (options.panel.elements.length == 0) {
-          options.panel.emptyElement = addEmptyPanelElement(
-            newSurvey,
-            options.htmlElement,
-            options.panel.dragDropHelper(),
-            options.panel
-          );
+        options.panel.emptyElement = addEmptyPanelElement(
+          newSurvey,
+          options.htmlElement,
+          options.panel.dragDropHelper(),
+          options.panel
+        );
+        if (options.panel.elements.length > 0) {
+          options.panel.emptyElement.style.display = "none";
         }
         afterRenderElementHandler(
           options.htmlElement,
