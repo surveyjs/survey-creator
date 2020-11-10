@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
+import { Survey, SurveyElement, PropertyGrid, Base, Page } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -36,17 +36,33 @@ export class SurveyCreator extends CreatorBase {
   set survey(survey: Survey) {
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this._survey(survey);
+    this.selectElement(survey);
   }
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement(element: SurveyElement) {
+  selectElement = (element: Base) => {
     this.selection(element);
     this.propertyGrid.obj = element;
+    if(typeof element.getType === "function" && element.getType() === "page") {
+      this.currentPage = <Page>element;
+    } else if(!!element["page"]) {
+      this.currentPage = element["page"];
+    } else {
+      this.currentPage = undefined;
+    }
   }
 
-  isElementSelected(element: SurveyElement) {
+  isElementSelected(element: Base) {
     return element === this.selection();
+  }
+
+  _currentPage = ko.observable<Page>();
+  get currentPage() {
+    return this._currentPage();
+  }
+  set currentPage(page: Page) {
+    this._currentPage(page);
   }
 
   dragDropHelper: DragDropHelper;

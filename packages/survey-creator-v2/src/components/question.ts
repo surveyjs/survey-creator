@@ -14,7 +14,7 @@ export class QuestionViewModel {
     this.question = question;
   }
   select(model: QuestionViewModel, event: Event) {
-    model.creator.selectElement(this.question);
+    model.creator.selectElement(model.question);
   }
   css() {
     return this.creator.isElementSelected(this.question) ? "svc-question__content--selected" : "";
@@ -84,7 +84,13 @@ export class QuestionViewModel {
 ko.components.register("svc-question", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new QuestionViewModel(params.creator, params.question);
+      const creator = params.creator;
+      ko.computed(() => {
+        if(creator.isElementSelected(params.page)) {
+          componentInfo.element.scrollIntoView();
+        }
+      });
+      return new QuestionViewModel(creator, params.question);
     },
   },
   template: template,

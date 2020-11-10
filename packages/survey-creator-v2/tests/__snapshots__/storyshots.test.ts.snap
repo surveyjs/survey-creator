@@ -3725,7 +3725,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <svc-page-navigator
-    params="items: survey.pages, creator: creator"
+    params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"
   >
     <!-- ko foreach: items -->
     <!-- /ko -->
