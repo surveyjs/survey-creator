@@ -6,7 +6,7 @@ import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 
 export class SurveyCreator extends CreatorBase {
-  constructor(options: ICreatorOptions) {
+  constructor(options: ICreatorOptions = {}) {
     super(options);
 
     this._survey(this.createSurvey());
@@ -65,6 +65,10 @@ export class SurveyCreator extends CreatorBase {
         json
       );
     }
+  }
+
+  getObjectTitle(obj: any): string {
+    return obj.title || obj.name;
   }
 
   readOnly = false;

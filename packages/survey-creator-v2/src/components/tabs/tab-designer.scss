@@ -5,3 +5,8 @@ svc-tab-designer {
   height: 100%;
   background: $background-dim;
 }
+
+.svc-tab-designer {
+  display: flex;
+  flex-grow: 1;
+}

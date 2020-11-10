@@ -19,6 +19,8 @@ export * from "../components/tabbed-menu/tabbed-menu";
 export * from "../components/tabbed-menu/tabbed-menu-item";
 export * from "../components/toolbox/toolbox";
 export * from "../components/toolbox/toolbox-item";
+export * from "../components/page-navigator/page-navigator";
+export * from "../components/page-navigator/page-navigator-item";
 
 export * from "../components/property-editors/text-editor/text-editor";
 export * from "../components/property-editors/dropdown-editor/dropdown-editor";

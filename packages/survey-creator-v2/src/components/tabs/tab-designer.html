@@ -1,9 +1,9 @@
-<!-- ko component: { name: 'svc-toolbox', params: {categories: creator.toolboxCategories(), creator: creator} } -->
-<!-- /ko -->
-<div data-bind="css: survey.css.root">
+<svc-toolbox params="categories: creator.toolboxCategories(), creator: creator"></svc-toolbox>
+<div class="svc-tab-designer" data-bind="css: survey.css.root">
   <div data-bind="css: survey.css.container">
     <!-- ko foreach: survey.pages -->
     <svc-page params="survey: $parent.survey, page: $data"></svc-page>
     <!-- /ko -->
   </div>
 </div>
+<svc-page-navigator params="items: survey.pages, creator: creator"></svc-page-navigator>
