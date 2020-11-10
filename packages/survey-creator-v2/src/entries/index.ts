@@ -17,9 +17,11 @@ export * from "../components/toolbox/toolbox";
 export * from "../components/toolbox/toolbox-item";
 
 export * from "../components/property-editors/text-editor/text-editor";
-export * from "../components/property-editors/dropdown-editor/dropdown-editor";
+// export * from "../components/property-editors/dropdown-editor/dropdown-editor";
 export * from "../components/property-editors/button-group/button-group";
 export * from "../components/property-editors/button-group/button-group-item";
+
+export * from "../components/survey-renderers/dropdown";
 
 export * from "../creator";
 

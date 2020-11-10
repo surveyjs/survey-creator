@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-
   //todo: remove !important
   min-width: auto !important;
 }
@@ -16,4 +15,9 @@
   font-weight: normal;
   margin: 0;
   box-sizing: border-box;
+}
+
+.svc-survey-question__content {
+  margin-top: calcSize(1);
+  width: 100%;
 }
