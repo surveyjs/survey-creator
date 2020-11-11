@@ -44,8 +44,7 @@ type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
  * Survey Creator is WYSIWYG editor.
  */
 
-export class SurveyCreator
-  extends CreatorBase
+export class SurveyCreator extends CreatorBase<SurveyForDesigner>
   implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private renderedElement: HTMLElement;
@@ -58,7 +57,6 @@ export class SurveyCreator
   protected surveyObjects: SurveyObjects;
   private toolboxValue: QuestionToolbox;
   public undoRedoManager: UndoRedoManager;
-  private surveyValue = ko.observable<SurveyForDesigner>();
   private saveSurveyFuncValue: (
     no: number,
     onSaveCallback: (no: number, isSuccess: boolean) => void
@@ -93,14 +91,6 @@ export class SurveyCreator
    * This callback is called on changing "Generate Valid JSON" option.
    */
   public generateValidJSONChangedCallback: (generateValidJSON: boolean) => void;
-  /**
-   * This callback is used internally for providing survey JSON text.
-   */
-  public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
-  /**
-   * This callback is used internally for setting survey JSON text.
-   */
-  public setSurveyJSONTextCallback: (text: string) => void;
   /**
    * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
    * In case of any subscriptions to this event all notifications will be redirected into the event handler.
@@ -250,18 +240,6 @@ export class SurveyCreator
    * <br/> options.result the result of comparing. It can be 0 (use default behavior),  -1 options.property1 is less than options.property2 or 1 options.property1 is more than options.property2
    */
   public onCustomSortProperty: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
-   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
-   * Use this event, if you want custom display name for objects.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.displayName change this property to show your custom display name for the object
-   * @see showObjectTitles
-   */
-  public onGetObjectDisplayName: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
@@ -1074,12 +1052,6 @@ export class SurveyCreator
   }
 
   /**
-   * The editing survey object (Survey.Survey)
-   */
-  public get survey(): SurveyForDesigner {
-    return this.surveyValue();
-  }
-  /**
    * Use this method to force update this element in editor.
    * @param element Survey.Question is element to update
    */
@@ -1119,19 +1091,6 @@ export class SurveyCreator
     });
   }
   /**
-   * The Survey JSON as a text. Use it to get Survey JSON or change it.
-   * @see JSON
-   */
-  public get text(): string {
-    if (!!this.getSurveyJSONTextCallback) {
-      return this.getSurveyJSONTextCallback().text;
-    }
-    return this.getSurveyTextFromDesigner();
-  }
-  public set text(value: string) {
-    this.changeText(value, true);
-  }
-  /**
    * The Survey JSON. Use it to get Survey JSON or change it.
    * @see text
    */
@@ -1151,8 +1110,8 @@ export class SurveyCreator
    * @param clearState default false. Set this parameter to true to clear undo/redo states.
    */
   public changeText(value: string, clearState = false) {
+    super.changeText(value, clearState);
     var textWorker = new SurveyTextWorker(value);
-    this.setTextValue(value);
     if (textWorker.isJsonCorrect) {
       this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
@@ -1545,11 +1504,6 @@ export class SurveyCreator
     return options.result;
   }
 
-  private setTextValue(value: string) {
-    if (!!this.setSurveyJSONTextCallback) {
-      this.setSurveyJSONTextCallback(value);
-    }
-  }
   /**
    * Add a new page into the editing survey. Returns the new created page instance
    */
@@ -1769,13 +1723,6 @@ export class SurveyCreator
   public showLogicEditor() {
     if (!this.canSwitchViewType("logic")) return;
     this.koViewType("logic");
-  }
-  private getSurveyTextFromDesigner() {
-    var json = this.survey.toJSON();
-    if (this.options && this.options.generateValidJSON) {
-      return JSON.stringify(json, null, 1);
-    }
-    return new SurveyJSON5().stringify(json, null, 1);
   }
   private getPageByElement(obj: Survey.Base): Survey.Page {
     var page = this.survey.getPageByElement(<Survey.IElement>(<any>obj));
@@ -2665,23 +2612,6 @@ export class SurveyCreator
     }
     obj["delete"]();
     this.selectedElement = objIndex > -1 ? elements[objIndex] : parent;
-  }
-  public getSurveyJSON(): any {
-    if (this.koViewType() != "editor") {
-      return new Survey.JsonObject().toJsonObject(this.survey);
-    }
-    var surveyJsonText = this.text;
-    var textWorker = new SurveyTextWorker(surveyJsonText);
-    if (textWorker.isJsonCorrect) {
-      return new Survey.JsonObject().toJsonObject(textWorker.survey);
-    }
-    return null;
-  }
-  public getObjectDisplayName(obj: Survey.Base): string {
-    var displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
-    var options = { obj: obj, displayName: displayName };
-    this.onGetObjectDisplayName.fire(this, options);
-    return options.displayName;
   }
   //implements ISurveyObjectEditorOptions
   get alwaySaveTextInPropertyEditors(): boolean {

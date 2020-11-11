@@ -1,11 +1,15 @@
 import * as ko from "knockout";
+import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
+import { SurveyTextWorker } from "./textWorker";
+import { SurveyHelper, ObjType } from "./surveyHelper";
+import { SurveyJSON5 } from "./json5";
 
 export interface ICreatorOptions {
   [index: string]: any;
 }
 
-export class CreatorBase {
+export class CreatorBase<T> {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -15,11 +19,35 @@ export class CreatorBase {
   private isRTLValue: boolean = false;
   private haveCommercialLicenseValue = ko.observable(false);
 
+  protected surveyValue = ko.observable<T>();
+
   koAutoSave = ko.observable(false);
   koShowOptions = ko.observable();
   koGenerateValidJSON = ko.observable(true);
   koShowState = ko.observable(false);
   koViewType = ko.observable("designer");
+
+  /**
+   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
+   * Use this event, if you want custom display name for objects.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.displayName change this property to show your custom display name for the object
+   * @see showObjectTitles
+   */
+  public onGetObjectDisplayName: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
+   * This callback is used internally for providing survey JSON text.
+   */
+  public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
+  /**
+   * This callback is used internally for setting survey JSON text.
+   */
+  public setSurveyJSONTextCallback: (text: string) => void;
 
   /**
    * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
@@ -370,4 +398,68 @@ export class CreatorBase {
       this.allowModifyPages = options.allowModifyPages;
     }
   }
+
+  /**
+   * The editing survey object (Survey.Survey)
+   */
+  public get survey() {
+    return this.surveyValue();
+  }
+
+  private getSurveyTextFromDesigner() {
+    var json = (<any>this.survey).toJSON();
+    if (this.options && this.options.generateValidJSON) {
+      return JSON.stringify(json, null, 1);
+    }
+    return new SurveyJSON5().stringify(json, null, 1);
+  }
+
+  protected setTextValue(value: string) {
+    if (!!this.setSurveyJSONTextCallback) {
+      this.setSurveyJSONTextCallback(value);
+    }
+  }
+
+  /**
+   * Set JSON as text  into survey. Clear undo/redo states optionally.
+   * @param value JSON as text
+   * @param clearState default false. Set this parameter to true to clear undo/redo states.
+   */
+  public changeText(value: string, clearState = false) {
+    this.setTextValue(value);
+  }
+
+  /**
+   * The Survey JSON as a text. Use it to get Survey JSON or change it.
+   * @see JSON
+   */
+  public get text(): string {
+    if (!!this.getSurveyJSONTextCallback) {
+      return this.getSurveyJSONTextCallback().text;
+    }
+    return this.getSurveyTextFromDesigner();
+  }
+  public set text(value: string) {
+    this.changeText(value, true);
+  }
+
+  public getSurveyJSON(): any {
+    if (this.koViewType() != "editor") {
+      return new Survey.JsonObject().toJsonObject(this.survey);
+    }
+    var surveyJsonText = this.text;
+    var textWorker = new SurveyTextWorker(surveyJsonText);
+    if (textWorker.isJsonCorrect) {
+      return new Survey.JsonObject().toJsonObject(textWorker.survey);
+    }
+    return null;
+  }
+
+  public getObjectDisplayName(obj: Survey.Base): string {
+    var displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
+    var options = { obj: obj, displayName: displayName };
+    this.onGetObjectDisplayName.fire(this, options);
+    return options.displayName;
+  }
+
 }

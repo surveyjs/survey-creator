@@ -2,7 +2,7 @@ import { SurveyCreator } from "../src/creator";
 
 beforeEach(() => {});
 
-test("getObjectTitle", () => {
+test("getObjectDisplayName", () => {
   const obj1 = {
     name: "name"
   };
@@ -10,8 +10,8 @@ test("getObjectTitle", () => {
     name: "name",
     title: "title"
   };
-  const creator = new SurveyCreator();
-  expect(creator.getObjectTitle(obj1)).toEqual("name");
-  expect(creator.getObjectTitle(obj2)).toEqual("title");
+  const creator = new SurveyCreator({ showObjectTitles: true });
+  expect(creator.getObjectDisplayName(obj1)).toEqual("name");
+  expect(creator.getObjectDisplayName(obj2)).toEqual("title");
   // expect(creator.getObjectTitle(creator.survey.pages[0])).toEqual("page1");
 });

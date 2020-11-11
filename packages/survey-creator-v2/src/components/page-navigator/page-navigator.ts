@@ -15,7 +15,7 @@ export class PageNavigatorViewModel {
       this.items(ko.unwrap(_items).map((_item: ITabItem) => {
           let item: ITabItem = <any>{
             name: _item.name,
-            title: creator ? creator.getObjectTitle(_item) : _item.title
+            title: creator ? creator.getObjectDisplayName(_item) : _item.title
           };
           item.selected = _item.selected || ko.computed(() => _item === this.selectedItem());
           item.action = () => {

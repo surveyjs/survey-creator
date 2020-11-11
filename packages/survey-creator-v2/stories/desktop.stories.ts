@@ -22,7 +22,7 @@ export default {
 
 export const Default = () => {
   let creator = new SurveyCreator({});
-  creator.survey = <any>new Survey(surveyJSON);
+  creator.setSurvey(new Survey(surveyJSON));
   return {
     template: '<survey-creator params="creator: creator"></survey-creator>',
     context: {

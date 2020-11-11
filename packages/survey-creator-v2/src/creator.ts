@@ -5,11 +5,13 @@ import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 
-export class SurveyCreator extends CreatorBase {
+export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
-    this._survey(this.createSurvey());
+    // TODO: remove after implementing initialization
+    this.surveyValue(<any>this.createSurvey());
+
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -92,13 +94,9 @@ export class SurveyCreator extends CreatorBase {
     return new Survey({});
   }
 
-  private _survey = ko.observable<Survey>();
-  get survey() {
-    return this._survey();
-  }
-  set survey(survey: Survey) {
+  setSurvey(survey: Survey) {
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
-    this._survey(survey);
+    this.surveyValue(<any>survey);
     this.selectElement(survey);
   }
 
@@ -144,10 +142,6 @@ export class SurveyCreator extends CreatorBase {
         json
       );
     }
-  }
-
-  getObjectTitle(obj: any): string {
-    return obj.title || obj.name;
   }
 
   readOnly = false;
