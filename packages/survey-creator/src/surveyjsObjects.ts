@@ -213,12 +213,17 @@ function elementOnCreating(surveyElement: any) {
 }
 
 var classMarker = "svd_question";
+var adornerMarker = "title_editable";
 function fillChildsToDisable(list: Array<any>, el: any, rootEl: any) {
   var childs = el.childNodes;
   for (var i = 0; i < childs.length; i++) {
     var ch = childs[i];
     if (!ch.style) continue;
-    if (!!ch.classList && ch.classList.contains(classMarker)) {
+    if (
+      !!ch.classList &&
+      (ch.classList.contains(classMarker) ||
+        ch.classList.contains(adornerMarker))
+    ) {
       ch = ch.parentElement;
       while (!!ch && ch !== rootEl) {
         var index = list.indexOf(ch);
