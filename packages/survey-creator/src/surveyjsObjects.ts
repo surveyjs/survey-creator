@@ -212,34 +212,6 @@ function elementOnCreating(surveyElement: any) {
   });
 }
 
-var elementMarker = "svd_question";
-var classMarkers = [elementMarker, "title_editable", "item_editable"];
-function requrieExcludeElement(el: any): boolean {
-  if (!el.classList) return false;
-  for (var i = 0; i < classMarkers.length; i++) {
-    if (el.classList.contains(classMarkers[i])) return true;
-  }
-  return false;
-}
-function fillChildsToDisable(list: Array<any>, el: any, rootEl: any) {
-  var childs = el.childNodes;
-  for (var i = 0; i < childs.length; i++) {
-    var ch = childs[i];
-    if (!ch.style) continue;
-    if (requrieExcludeElement(ch)) {
-      ch = ch.parentElement;
-      while (!!ch && ch !== rootEl) {
-        var index = list.indexOf(ch);
-        if (index > -1) list.splice(index, 1);
-        ch = ch.parentElement;
-      }
-      continue;
-    }
-    list.push(ch);
-    fillChildsToDisable(list, ch, rootEl);
-  }
-}
-
 export function createAfterRenderHandler(
   creator: any,
   survey: SurveyForDesigner
@@ -252,7 +224,7 @@ export function createAfterRenderHandler(
   ) {
     if (surveyElement.disableDesignActions === true) return;
     surveyElement.renderedElement = domElement;
-    surveyElement.renderedElement.classList.add(elementMarker);
+    surveyElement.renderedElement.classList.add("svd_question");
     if (StylesManager.currentTheme() === "bootstrap") {
       surveyElement.renderedElement.classList.add("svd-dark-bg-color");
     }
@@ -296,10 +268,11 @@ export function createAfterRenderHandler(
       }
     };
     if (!isPanel) {
-      var listToDisable = [];
-      fillChildsToDisable(listToDisable, domElement, domElement);
-      for (var i = 0; i < listToDisable.length; i++) {
-        listToDisable[i].style.pointerEvents = "none";
+      var childs = domElement.childNodes;
+      for (var i = 0; i < childs.length; i++) {
+        if (!!childs[i].style) {
+          childs[i].style.pointerEvents = "none";
+        }
       }
     }
     if (creator.readOnly) {
