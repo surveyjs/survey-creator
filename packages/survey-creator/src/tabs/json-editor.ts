@@ -6,7 +6,7 @@ import { IToolbarItem } from "../components/toolbar";
 import { SurveyCreator } from "../editor";
 
 import "./json-editor.scss";
-var templateHtml = require("html-loader?interpolate!val-loader!./json-editor.html");
+var templateHtml = require("./json-editor.html");
 
 export class SurveyJSONEditor {
   public static updateTextTimeout: number = 1000;

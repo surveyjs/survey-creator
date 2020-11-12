@@ -5,9 +5,10 @@ export * from "../components/creator";
 export * from "../components/button";
 export * from "../components/svg-icon";
 
-export * from "../components/tabs/tab-designer";
-export * from "../components/tabs/tab-test";
-export * from "../components/tabs/tab-json-editor";
+export * from "../components/tabs/designer";
+export * from "../components/tabs/test";
+export * from "../components/tabs/json-editor";
+export * from "../components/tabs/embed";
 
 export * from "../components/page";
 export * from "../components/question";
@@ -31,3 +32,7 @@ export * from "../creator";
 
 import "../utils/design.scss";
 import "../utils/layout.scss";
+
+export * from "@survey/creator/tabs/embed";
+export * from "@survey/creator/tabs/json-editor";
+export * from "@survey/creator/tabs/test";

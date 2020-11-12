@@ -21,7 +21,7 @@ export default {
 };
 
 export const Default = () => {
-  let creator = new SurveyCreator({});
+  let creator = new SurveyCreator({showEmbededSurveyTab: true});
   creator.setSurvey(new Survey(surveyJSON));
   return {
     template: '<survey-creator params="creator: creator"></survey-creator>',

@@ -42,6 +42,7 @@
     "@storybook/addon-viewport": "6.0.21",
     "@storybook/knockout": "file:./storybook-knockout",
     "@survey/creator": "../survey-creator",
+    "@types/ace": "0.0.44",
     "@types/jest": "23.3.3",
     "@types/jquery": "3.3.29",
     "@types/lodash": "4.14.121",
