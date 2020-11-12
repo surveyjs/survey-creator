@@ -6,6 +6,15 @@ import "./test.scss";
 const template = require("./test.html");
 // import template from "./test.html";
 
+export * from "@survey/creator/components/toolbar";
+export * from "@survey/creator/components/simulator";
+export * from "@survey/creator/components/results";
+export * from "@survey/creator/utils/dropdown";
+export * from "@survey/creator/utils/boolean";
+export * from "@survey/creator/utils/svg-icon";
+export * from "@survey/creator/utils/survey-widget";
+
+
 export class TabTestViewModel {
   public creator: SurveyCreator;
   private _survey: Survey;

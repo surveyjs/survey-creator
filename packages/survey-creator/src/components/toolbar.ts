@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 
 import "./toolbar.scss";
-var template = require("html-loader?interpolate!val-loader!./toolbar.html");
+var template = require("./toolbar.html");
 
 /**
  * The toolbar item description.

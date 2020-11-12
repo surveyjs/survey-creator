@@ -265,7 +265,7 @@ ko.components.register("survey-tester", {
       var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
 
       model.onSurveyCreatedCallback = survey => {
-        creator.onTestSurveyCreated.fire(self, { survey: survey });
+        creator.onTestSurveyCreated && creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
       model.onGetObjectDisplayName = obj => {
         return creator.getObjectDisplayName(obj);

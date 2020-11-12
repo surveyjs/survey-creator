@@ -401,16 +401,6 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is fired when the survey creator creates a survey object (Survey.Survey).
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.survey the survey object showing in the creator.
-   * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Test Survey" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
-   */
-  public onSurveyInstanceCreated: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the creator.
@@ -1091,20 +1081,6 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     });
   }
   /**
-   * The Survey JSON. Use it to get Survey JSON or change it.
-   * @see text
-   */
-  public get JSON(): any {
-    return this.survey.toJSON();
-  }
-  public set JSON(val: any) {
-    if (this.koViewType() == "editor") {
-      this.setTextValue(JSON.stringify(val));
-    } else {
-      this.initSurveyWithJSON(val, true);
-    }
-  }
-  /**
    * Set JSON as text  into survey. Clear undo/redo states optionally.
    * @param value JSON as text
    * @param clearState default false. Set this parameter to true to clear undo/redo states.
@@ -1118,7 +1094,7 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
       this.koViewType("editor");
     }
   }
-  private initSurveyWithJSON(json: any, clearState: boolean) {
+  protected initSurveyWithJSON(json: any, clearState: boolean) {
     this.initSurvey(json);
     if (this.showDesignerTab) {
       this.showDesigner();
@@ -1834,18 +1810,6 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
         editorLocalization.getString("ed.newPageName") + "1";
     }
     return json;
-  }
-  public createSurvey(
-    json: any = {},
-    reason: string = "designer",
-    surveyType = Survey.Survey
-  ) {
-    var survey = new surveyType(json);
-    if (reason != "designer" && reason != "test") {
-      survey.locale = editorLocalization.currentLocale;
-    }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
-    return survey;
   }
   /**
    * Use this method to create keyboard shortcuts
@@ -2976,36 +2940,6 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     });
   }
 }
-
-ko.components.register("survey-widget", {
-  viewModel: function (params) {
-    this.survey = params.survey;
-  },
-  template:
-    "<!-- ko if: $data.survey --><!-- ko template: { name: 'survey-content', data: survey, afterRender: $parent.koEventAfterRender } --><!-- /ko --><!-- /ko -->",
-});
-
-ko.components.register("svg-icon", {
-  viewModel: {
-    createViewModel: (params, componentInfo) => {
-      ko.computed(() => {
-        var size = ko.unwrap(params.size);
-        var width = ko.unwrap(params.width);
-        var height = ko.unwrap(params.height);
-        var svgElem: any = componentInfo.element.childNodes[0];
-        svgElem.style.width = (size || width || 16) + "px";
-        svgElem.style.height = (size || height || 16) + "px";
-        var node: any = svgElem.childNodes[0];
-        node.setAttributeNS(
-          "http://www.w3.org/1999/xlink",
-          "xlink:href",
-          "#" + ko.unwrap(params.iconName)
-        );
-      });
-    },
-  },
-  template: "<svg class='svd-svg-icon'><use></use></svg>",
-});
 
 export class SurveyEditor extends SurveyCreator {
   constructor(renderedElement: any = null, options: any = null) {
