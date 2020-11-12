@@ -2,7 +2,7 @@ module.exports = {
   globals: {
     "ts-jest": {
       diagnostics: false,
-      tsConfig: "tsconfig.test.json",
+      tsconfig: "tsconfig.test.json",
     },
   },
   roots: ["tests"],
@@ -12,6 +12,7 @@ module.exports = {
   },
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
+    "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
     "@survey/creator/(.*)": "<rootDir>/../survey-creator/src/$1"
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",

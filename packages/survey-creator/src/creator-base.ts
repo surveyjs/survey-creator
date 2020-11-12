@@ -28,6 +28,17 @@ export class CreatorBase<T> {
   koViewType = ko.observable("designer");
 
   /**
+   * The event is fired when the survey creator creates a survey object (Survey.Survey).
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.survey the survey object showing in the creator.
+   * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Test Survey" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
+   */
+  public onSurveyInstanceCreated: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
    * Use this event, if you want custom display name for objects.
    * <br/> sender the survey creator object that fires the event
@@ -460,6 +471,37 @@ export class CreatorBase<T> {
     var options = { obj: obj, displayName: displayName };
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
+  }
+
+  public createSurvey(
+    json: any = {},
+    reason: string = "designer",
+    surveyType = Survey.Survey
+  ) {
+    var survey = new surveyType(json);
+    if (reason != "designer" && reason != "test") {
+      survey.locale = editorLocalization.currentLocale;
+    }
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    return survey;
+  }
+
+  protected initSurveyWithJSON(json: any, clearState: boolean) {
+  }
+
+  /**
+   * The Survey JSON. Use it to get Survey JSON or change it.
+   * @see text
+   */
+  public get JSON(): any {
+    return (<any>this.survey).toJSON();
+  }
+  public set JSON(val: any) {
+    if (this.koViewType() == "editor") {
+      this.setTextValue(JSON.stringify(val));
+    } else {
+      this.initSurveyWithJSON(val, true);
+    }
   }
 
 }

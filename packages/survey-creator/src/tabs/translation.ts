@@ -6,8 +6,8 @@ import { SurveyCreator } from "../editor";
 import { IToolbarItem } from "../components/toolbar";
 
 import "./translation.scss";
-var templateHtml = require("html-loader?interpolate!val-loader!./translation.html");
-var groupTemplateHtml = require("html-loader?interpolate!val-loader!./translation-group.html");
+var templateHtml = require("./translation.html");
+var groupTemplateHtml = require("./translation-group.html");
 
 export class TranslationItemBase {
   constructor(public name: string) {}

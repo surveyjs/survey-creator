@@ -90,10 +90,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   toolboxCategories = ko.observableArray<object>();
 
-  private createSurvey(reason: string = "designer") {
-    return new Survey({});
-  }
-
   setSurvey(survey: Survey) {
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this.surveyValue(<any>survey);

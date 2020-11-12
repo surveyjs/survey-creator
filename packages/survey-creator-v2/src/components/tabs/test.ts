@@ -1,35 +1,38 @@
 import * as ko from "knockout";
 import { Survey } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
-import { ElementWrapperFactory } from "../../element-wrapper-factory";
 
-import "./tab-json-editor.scss";
-const template = require("./tab-json-editor.html");
-// import template from "./content.html";
+import "./test.scss";
+const template = require("./test.html");
+// import template from "./test.html";
 
-export class TabJsonEditorViewModel {
+export * from "@survey/creator/components/toolbar";
+export * from "@survey/creator/components/simulator";
+export * from "@survey/creator/components/results";
+export * from "@survey/creator/utils/dropdown";
+export * from "@survey/creator/utils/boolean";
+export * from "@survey/creator/utils/svg-icon";
+export * from "@survey/creator/utils/survey-widget";
+
+
+export class TabTestViewModel {
   public creator: SurveyCreator;
   private _survey: Survey;
-  private _surveySubscription: ko.Computed;
   constructor(creator: SurveyCreator, survey: Survey) {
     this.creator = creator;
     this._survey = survey;
-    this._surveySubscription = ko.computed(() => {
-      new ElementWrapperFactory(this.survey, this.creator);
-    });
   }
   get survey() {
     return ko.unwrap(this._survey);
   }
   dispose() {
-    this._surveySubscription.dispose();
   }
 }
 
-ko.components.register("svc-tab-json-editor", {
+ko.components.register("svc-tab-test", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model = new TabJsonEditorViewModel(params.creator, params.survey);
+      const model = new TabTestViewModel(params.creator, params.survey);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         model.dispose();
       });

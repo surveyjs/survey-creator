@@ -148,6 +148,8 @@ export {
 export { ButtonViewModel } from "../utils/button";
 export { DropdownViewModel } from "../utils/dropdown";
 export { BooleanViewModel } from "../utils/boolean";
+export { SVGIconBinding } from "../utils/svg-icon";
+export { SurveyWidgetBinding } from "../utils/survey-widget";
 
 export { SplitterComponentViewModel } from "../utils/splitter";
 export { DesignerContainerViewModel } from "../utils/designer-container";
