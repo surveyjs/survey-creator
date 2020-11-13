@@ -3,6 +3,8 @@ import * as ko from "knockout";
 import { withTests } from "@storybook/addon-jest";
 // import results from "../.jest-test-results.json";
 
+import "./root.css";
+
 export const parameters = {
   a11y: {
     config: {},

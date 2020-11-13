@@ -4,13 +4,19 @@ svc-toolbox {
   display: flex;
   flex-direction: column;
 }
+
 .svc-toolbox {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: visible;
+  direction: rtl;
 }
 
 .svc-toolbox__category {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  direction: initial;
 }
 
 .svc-toolbox__category-separator {
