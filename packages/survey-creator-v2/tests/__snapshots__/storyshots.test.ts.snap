@@ -2133,7 +2133,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   params="creator: creator"
 >
   <div
-    class="svc-flex-column"
+    class="svc-creator__area svc-flex-column"
   >
     
   
@@ -2617,12 +2617,12 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
   
     <div
-      class="svc-flex-row"
+      class="svc-creator__content-wrapper svc-flex-row"
     >
       
     
       <div
-        class="svc-flex-column"
+        class="svc-creator__content-holder svc-flex-column"
       >
         
       
