@@ -1675,6 +1675,38 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
   assert.notOk(itemViewModel.koCanDeleteItem(), "Forbid delete item");
 });
 
+QUnit.test("SurveyNestedPropertyEditorItem edit boolean column", function (
+  assert
+) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("p");
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.addColumn("column 1");
+  question.addColumn("column 2");
+  question.columns[1].cellType = "boolean";
+  survey.pages[0].addElement(question);
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.options = new EditorOptionsTests();
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  var itemViewModel = <SurveyNestedPropertyEditorItem>(
+    columnsEditor.createItemViewModel(question.columns[1])
+  );
+  var defaultValueEditor = <SurveyPropertyDefaultValueEditor>(
+    itemViewModel.itemEditor.getPropertyEditorByName("defaultValue").editor
+  );
+  assert.ok(defaultValueEditor, "Create default editor for column checkbox");
+  defaultValueEditor.beforeShow();
+  assert.ok(defaultValueEditor.survey, "Default value survey is created");
+  assert.equal(
+    defaultValueEditor.survey.getAllQuestions()[0].getType(),
+    "boolean",
+    "Boolean question created in default editor"
+  );
+});
+
 QUnit.test("SurveyPropertyPagesEditor two columns and no editing", function (
   assert
 ) {

@@ -18,6 +18,10 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     if (qjson.type == "expression") {
       qjson.type = "text";
     }
+    if (!!qjson.cellType) {
+      qjson.type = qjson.cellType;
+      delete qjson.cellType;
+    }
     qjson.titleLocation = "hidden";
     //qjson.showClearButton = true;
     qjson.readOnly = readOnly;
