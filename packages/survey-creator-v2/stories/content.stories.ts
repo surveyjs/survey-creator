@@ -1,7 +1,7 @@
 import { Survey, StylesManager, settings } from "survey-knockout";
 import { SurveyCreator } from "../src/entries";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ContentViewModel } from "../src/components/content";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 
 import "../node_modules/survey-knockout/modern.css";
 StylesManager.applyTheme("modern");
@@ -11,7 +11,7 @@ import surveyJSON from "./sample-survey.json";
 
 export default {
   title: "Creator design surface content",
-  "ko-components": ContentViewModel,
+  "ko-components": TabDesignerViewModel,
   SurveyCreator, // Fake component usage in order for component to be actually imported
   parameters: {
     design: {
@@ -24,9 +24,10 @@ export default {
 
 export const Default = () => {
   let creator = new SurveyCreator({});
-  creator.survey = <any>new Survey(surveyJSON);
+  creator.setSurvey(new Survey(surveyJSON));
   return {
-    template: '<svc-content params="creator: creator, survey: creator.survey"></svc-content>',
+    template:
+      '<svc-tab-designer params="creator: creator, survey: creator.survey"></svc-tab-designer>',
     context: {
       creator,
     },

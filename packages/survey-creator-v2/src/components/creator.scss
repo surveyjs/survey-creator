@@ -2,4 +2,46 @@
 
 survey-creator {
   display: flex;
+  width: 100%;
+  height: 100%;
+
+  ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+    background-color: $background-dim;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $primary-light;
+  }
+}
+
+.svc-creator__area {
+  width: 100%;
+  height: 100%;
+}
+
+.svc-creator__content-wrapper {
+  width: 100%;
+  height: calc(100% - calc(8 * #{$base-unit}));
+}
+
+.svc-creator__content-holder {
+  width: 100%;
+  height: 100%;
+}
+
+.svc-creator-tab {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.svc-creator-tab__content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  padding: calcSize(3);
+  box-sizing: border-box;
 }

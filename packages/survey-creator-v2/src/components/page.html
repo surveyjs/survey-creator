@@ -1,8 +1,8 @@
-<div class="svc-page__content">
+<div class="svc-page__content" data-bind="click: select, clickBubble: false, css: css()"">
   <!-- ko template: { name: 'survey-page', data: page } -->
   <!-- /ko -->
-</div>
-<div class="svc-page__add-new-question" data-bind="click: addNewQuestion">
-  <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: addNewQuestionText">
-  </span>
+  <div class="svc-page__add-new-question" data-bind="click: addNewQuestion">
+    <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: addNewQuestionText">
+    </span>
+  </div>
 </div>

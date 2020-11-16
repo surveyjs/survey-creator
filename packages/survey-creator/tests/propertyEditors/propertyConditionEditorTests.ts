@@ -1143,7 +1143,7 @@ QUnit.test(
       "dropdown",
       "It is dropdown by default"
     );
-    assert.equal(questionValue.description, "", "There is no description");
+    assert.notOk(questionValue.description, "There is no description");
   }
 );
 QUnit.test(

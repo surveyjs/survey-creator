@@ -1,9 +1,19 @@
 import * as ko from "knockout";
-import { ITabItem } from "../../creator";
 
 import "./tabbed-menu-item.scss";
 const template = require("./tabbed-menu-item.html");
 // import template from "./tabbed-menu-item.html";
+
+export interface ITabItem {
+  name: string;
+  title: string;
+  template: string;
+  data: any;
+  visible: boolean;
+  selected?: boolean | ko.Computed<boolean>;
+  disabled?: ko.MaybeObservable<boolean>;
+  action: () => void;
+}
 
 export class TabbedMenuItemViewModel {
   private _item: ITabItem;

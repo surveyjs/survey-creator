@@ -10,14 +10,14 @@
                 <div class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable">
                     <div class="svd-json-editor">
                         <!-- ko if: !hasAceEditor -->
-                        <textarea class="svd-json-editor-area"
-                            data-bind="textInput:koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
-                        </textarea>
-                        <!-- ko foreach: koErrors -->
-                        <div>
-                            <span>Error: </span><span data-bind="text: text"></span>
-                        </div>
-                        <!-- /ko  -->
+                            <textarea class="svd-json-editor-area"
+                                data-bind="textInput:koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
+                            </textarea>
+                            <!-- ko foreach: koErrors -->
+                            <div>
+                                <span>Error: </span><span data-bind="text: text"></span>
+                            </div>
+                            <!-- /ko  -->
                         <!-- /ko  -->
                     </div>
                 </div>

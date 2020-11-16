@@ -1,15 +1,21 @@
-<div class="svc-flex-column">
+<div class="svc-creator__area svc-flex-column">
   <div class="svc-top-bar">
-    <svc-tabbed-menu params="items: creator.tabs"></svc-tabbed-menu>
+    <svc-tabbed-menu
+      params="items: creator.tabs, viewType: creator.koViewType"
+    ></svc-tabbed-menu>
     <svc-action-bar params="items: creator.toolbarItems"></svc-action-bar>
   </div>
-  <div class="svc-flex-row">
-    <!-- ko component: { name: 'svc-toolbox', params: {categories: creator.toolboxCategories(), creator: creator} } -->
-    <!-- /ko -->
-    <div class="svc-flex-column">
-      <svc-content
-        params="creator: creator, survey: creator.survey"
-      ></svc-content>
+  <div class="svc-creator__content-wrapper svc-flex-row">
+    <div class="svc-creator__content-holder svc-flex-column">
+      <!-- ko foreach: creator.tabs -->
+      <div
+        class="svc-creator-tab"
+        data-bind="visible: $parent.creator.koViewType() == name"
+      >
+        <!-- ko component: { name: template, params: {creator: $parent.creator, survey: $parent.creator.survey } } -->
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
     </div>
   </div>
 </div>

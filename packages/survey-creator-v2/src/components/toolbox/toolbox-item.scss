@@ -13,6 +13,7 @@
   padding: calcSize(1) 12px;
   position: absolute;
   margin-left: calcSize(2);
+  z-index: 1;
 
   .svc-svg-icon use {
     fill: $foreground-light;

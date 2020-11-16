@@ -1,0 +1,9 @@
+<svc-toolbox params="categories: creator.toolboxCategories(), creator: creator"></svc-toolbox>
+<div class="svc-tab-designer" data-bind="css: survey.css.root">
+  <div data-bind="css: survey.css.container">
+    <!-- ko foreach: survey.pages -->
+    <svc-page params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
+    <!-- /ko -->
+  </div>
+</div>
+<svc-page-navigator params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"></svc-page-navigator>

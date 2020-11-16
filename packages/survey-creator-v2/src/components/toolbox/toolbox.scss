@@ -1,7 +1,12 @@
 @import "../../variables.scss";
-.svc-toolbox {
+
+svc-toolbox {
   display: flex;
   flex-direction: column;
+}
+
+.svc-toolbox {
+  height: 100%;
 }
 
 .svc-toolbox__category {

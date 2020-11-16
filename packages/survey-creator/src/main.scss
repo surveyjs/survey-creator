@@ -166,6 +166,7 @@
     .svd_question {
       overflow: visible;
       border: 1px solid transparent;
+      pointer-events: auto;
 
       &:hover {
         border-color: $selection-border-color;

@@ -9,6 +9,7 @@ import { isPropertyVisible } from "../src/utils/utils";
 import { SurveyPropertyConditionEditor } from "../src/propertyEditors/propertyConditionEditor";
 import { SurveyObjects } from "../src/surveyObjects";
 import { editorLocalization } from "../src/editorLocalization";
+import { SurveyHelper } from "../src/surveyHelper";
 
 export default QUnit.module("surveyEditorTests");
 
@@ -647,15 +648,57 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function (assert) {
 
   assert.equal(1, creator.survey.pages.length);
 
-  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
+  assert.equal(pagesEditor.model.selectedPage().name, creator.survey.pages[0].name);
   assert.equal(pagesEditor.model.pagesForSelection().length, 2);
+  assert.equal(creator.survey.currentPage.name, creator.survey.pages[0].name);
 
   pagesEditor.model.selectedPage(
     pagesEditor.model.pagesForSelection()[1].value
   );
 
   assert.equal(pagesEditor.model.pagesForSelection().length, 3);
-  assert.equal(creator.survey.pages[1], pagesEditor.model.selectedPage());
+  assert.equal(creator.survey.pages[1].name, pagesEditor.model.selectedPage().name);
+  assert.equal(creator.survey.currentPage.name, creator.survey.pages[1].name);
+});
+
+QUnit.test("pagesEditor selectedPage keep currantPage in survey - Survey page shows wrong content after page reordering via drag/drop #1009", function (assert) {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [],
+      },
+      {
+        name: "page2",
+        elements: [],
+      },
+    ],
+  });
+  var creator = new SurveyCreator();
+  creator.text = jsonText;
+
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+
+  assert.equal(2, creator.survey.pages.length);
+
+  const movedPage = creator.survey.pages[0];
+  creator.selectedElement = movedPage;
+
+  assert.equal(pagesEditor.model.selectedPage().name, movedPage.name, "initial selection - page editor selectedPage");
+  assert.equal(creator.survey.currentPage.name, movedPage.name, "initial selection - survey.currentPage");
+
+  // Emulate unsync during drag/drop pages
+  creator.pagesEditorModel.blockPagesRebuilt(true);
+  SurveyHelper.moveItemInArray(pagesEditor.model.pages, movedPage, 1);
+  creator.pagesEditorModel.blockPagesRebuilt(false);
+
+  pagesEditor.model.selectedPage(movedPage);
+
+  assert.equal(pagesEditor.model.selectedPage().name, movedPage.name, "page editor selectedPage after selection");
+  assert.equal(creator.survey.currentPage.name, movedPage.name, "survey.currentPage after selection");
 });
 
 QUnit.test("pagesEditor.readOnly", function (assert) {
@@ -1808,3 +1851,11 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("Set Text property", function (assert) {
+  var editor = new SurveyCreator();
+  assert.equal(editor.tabs().length, 3);
+  assert.equal(editor.tabs()[0].template, "se-tab-designer");
+  assert.equal(editor.tabs()[1].template, "se-tab-test");
+  assert.equal(editor.tabs()[2].template, "se-tab-json-editor");
+});

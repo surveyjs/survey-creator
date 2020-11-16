@@ -1,27 +1,17 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, PropertyGrid } from "survey-knockout";
-import { IActionBarItem } from "./components/action-bar/action-bar";
+import { Survey, SurveyElement, PropertyGrid, Base, Page } from "survey-knockout";
+import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
+import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 
-export interface ICreatorOptions {
-  [index: string]: any;
-}
+export class SurveyCreator extends CreatorBase<Survey> {
+  constructor(options: ICreatorOptions = {}) {
+    super(options);
 
-export interface ITabItem {
-  name: string;
-  title: string;
-  template: string;
-  data: any;
-  visible: boolean;
-  selected?: boolean | ko.Computed<boolean>;
-  disabled?: ko.MaybeObservable<boolean>;
-  action: () => void;
-}
+    // TODO: remove after implementing initialization
+    this.surveyValue(<any>this.createSurvey());
 
-export class SurveyCreator {
-  constructor(private options: ICreatorOptions) {
-    this._survey(this.createSurvey());
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
@@ -29,37 +19,107 @@ export class SurveyCreator {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey);
+
+    this.toolbarItems.push(
+      ...(<any>[
+        {
+          icon: "icon-undo",
+          action: () => {},
+          title: "Undo",
+          showTitle: false,
+        },
+        {
+          icon: "icon-redo",
+          action: () => {},
+          title: "Redo",
+          showTitle: false,
+        },
+        { component: "svc-action-bar-separator" },
+        {
+          icon: "icon-settings",
+          action: () => this.selectElement(this.survey),
+          isActive: ko.computed(() => this.isElementSelected(this.survey)),
+          title: "Settings",
+          showTitle: false,
+        },
+        {
+          icon: "icon-clear",
+          action: function () {
+            alert("clear pressed");
+          },
+          isActive: false,
+          title: "Clear",
+          showTitle: false,
+        },
+        {
+          icon: "icon-search",
+          action: () => {
+            this.showSearch = !this.showSearch;
+          },
+          isActive: ko.computed(() => this.showSearch),
+          title: "Search",
+          showTitle: false,
+        },
+        {
+          component: "svc-action-bar-separator",
+        },
+        {
+          icon: "icon-preview",
+          action: function () {
+            alert("preview pressed");
+          },
+          isActive: ko.observable(false),
+          title: "Preview",
+          innerCss: "svc-action-bar-item--secondary",
+        },
+      ])
+    );
+  }
+
+  private _showSearch = ko.observable<boolean>(false);
+  get showSearch() {
+    return this._showSearch();
+  }
+  set showSearch(val: boolean) {
+    this._showSearch(val);
   }
 
   toolbox: QuestionToolbox;
 
-  tabs = ko.observableArray<ITabItem>();
-  toolbarItems = ko.observableArray<IActionBarItem>();
+  toolbarItems = ko.observableArray<IToolbarItem>();
 
   toolboxCategories = ko.observableArray<object>();
 
-  private createSurvey(reason: string = "designer") {
-    return new Survey({});
-  }
-
-  private _survey = ko.observable<Survey>();
-  get survey() {
-    return this._survey();
-  }
-  set survey(survey: Survey) {
+  setSurvey(survey: Survey) {
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
-    this._survey(survey);
+    this.surveyValue(<any>survey);
+    this.selectElement(survey);
   }
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement(element: SurveyElement) {
+  selectElement = (element: Base) => {
     this.selection(element);
     this.propertyGrid.obj = element;
+    if(typeof element.getType === "function" && element.getType() === "page") {
+      this.currentPage = <Page>element;
+    } else if(!!element["page"]) {
+      this.currentPage = element["page"];
+    } else {
+      this.currentPage = undefined;
+    }
   }
 
-  isElementSelected(element: SurveyElement) {
+  isElementSelected(element: Base) {
     return element === this.selection();
+  }
+
+  private _currentPage = ko.observable<Page>();
+  get currentPage() {
+    return this._currentPage();
+  }
+  set currentPage(page: Page) {
+    this._currentPage(page);
   }
 
   dragDropHelper: DragDropHelper;
@@ -81,4 +141,67 @@ export class SurveyCreator {
   }
 
   readOnly = false;
+
+  protected initTabs() {
+    ko.computed(() => {
+      this.tabs([]);
+      if (this.showDesignerTab) {
+        this.tabs.push({
+          name: "designer",
+          title: this.getLocString("ed.designer"),
+          template: "svc-tab-designer",
+          data: this,
+          action: () => this.makeNewViewActive("designer"),
+        });
+      }
+      if (this.showTestSurveyTab) {
+        this.tabs.push({
+          name: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "svc-tab-test",
+          data: this,
+          action: () => this.makeNewViewActive("test"),
+        });
+      }
+      if (this.showLogicTab) {
+        this.tabs.push({
+          name: "logic",
+          title: this.getLocString("ed.logic"),
+          template: "svc-tab-logic",
+          data: this,
+          action: () => this.makeNewViewActive("logic"),
+        });
+      }
+      if (this.showJSONEditorTab) {
+        this.tabs.push({
+          name: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "svc-tab-json-editor",
+          data: this,
+          action: () => this.makeNewViewActive("editor"),
+        });
+      }
+      if (this.showEmbededSurveyTab) {
+        this.tabs.push({
+          name: "embed",
+          title: this.getLocString("ed.embedSurvey"),
+          template: "svc-tab-embed",
+          data: this,
+          action: () => this.makeNewViewActive("embed"),
+        });
+      }
+      if (this.showTranslationTab) {
+        this.tabs.push({
+          name: "translation",
+          title: this.getLocString("ed.translation"),
+          template: "svc-tab-translation",
+          data: this,
+          action: () => this.makeNewViewActive("translation"),
+        });
+      }
+      if (this.tabs().length > 0) {
+        this.koViewType(this.tabs()[0].name);
+      }
+    });
+  }
 }

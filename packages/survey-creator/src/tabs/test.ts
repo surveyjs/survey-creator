@@ -5,7 +5,7 @@ import { SurveyCreator } from '../editor';
 import { IToolbarItem } from '../components/toolbar';
 
 import "./test.scss";
-var templateHtml = require("html-loader?interpolate!val-loader!./test.html");
+var templateHtml = require("./test.html");
 
 export { SurveySimulatorComponent } from "../components/simulator";
 export { SurveyResultsModel } from "../components/results";
@@ -262,10 +262,10 @@ ko.components.register("survey-tester", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       var creator: SurveyCreator = params.creator;
-      var model = creator.surveyLiveTester;
+      var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
 
       model.onSurveyCreatedCallback = survey => {
-        creator.onTestSurveyCreated.fire(self, { survey: survey });
+        creator.onTestSurveyCreated && creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
       model.onGetObjectDisplayName = obj => {
         return creator.getObjectDisplayName(obj);

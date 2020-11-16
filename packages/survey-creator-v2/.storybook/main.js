@@ -64,12 +64,23 @@ module.exports = {
       test: /\.(sa|sc|c)ss$/,
       use: ["style-loader", "css-loader", "sass-loader"],
     }, {
+      test: /\.(svg|png)$/,
+      use: ["url-loader"],
+    }, {
       test: /\.html?$/,
       use: ["html-loader"],
     }];
 
     config.resolve.extensions.push(".ts", ".js", ".tsx", ".css", ".scss");
     config.resolve.plugins.push(new TsconfigPathsPlugin(/*{ configFile: path.resolve(__dirname, "../tsconfig.json"), logLevel: "info", extensions: [ ".ts", ".tsx", ".js", ".jsx" ] }*/));
+    config.resolve.alias["knockout"] = path.join(
+      __dirname,
+      "../node_modules/knockout/build/output/knockout-latest.debug.js"
+    );
+    config.resolve.alias["survey-knockout"] = path.join(
+      __dirname,
+      "../node_modules/survey-knockout/survey.ko.js"
+    );
 
     // console.log(JSON.stringify(config, null, 4));
 

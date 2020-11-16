@@ -21,75 +21,8 @@ export default {
 };
 
 export const Default = () => {
-  let creator = new SurveyCreator({});
-  creator.survey = <any>new Survey(surveyJSON);
-  creator.toolbarItems.push(
-    ...(<any>[
-      {
-        icon: "icon-undo",
-        action: () => {},
-        title: "Undo",
-        showTitle: false,
-      },
-      {
-        icon: "icon-redo",
-        action: () => {},
-        title: "Redo",
-        showTitle: false,
-      },
-      { component: "svc-action-bar-separator" },
-      {
-        icon: "icon-settings",
-        action: function () {
-          this.isActive(!this.isActive());
-        },
-        isActive: ko.observable(false),
-        title: "Settings",
-        showTitle: false,
-      },
-      {
-        icon: "icon-clear",
-        action: function () {
-          this.isActive(!this.isActive());
-        },
-        isActive: ko.observable(false),
-        title: "Clear",
-        showTitle: false,
-      },
-      {
-        icon: "icon-search",
-        action: function () {
-          this.isActive(!this.isActive());
-        },
-        isActive: ko.observable(false),
-        title: "Search",
-        showTitle: false,
-      },
-      {
-        component: "svc-action-bar-separator",
-      },
-      {
-        icon: "icon-preview",
-        action: function () {
-          this.isActive(!this.isActive());
-        },
-        isActive: ko.observable(false),
-        title: "Preview",
-        innerCss: "svc-action-bar-item--secondary",
-      },
-    ])
-  );
-
-  creator.tabs.push(
-    ...(<any>[
-      { title: "Designer" },
-      { title: "Survey Logic" },
-      { title: "JSON Editor" },
-      { title: "Embed Survey" },
-      { title: "Translation" },
-    ])
-  );
-
+  let creator = new SurveyCreator({showEmbededSurveyTab: true});
+  creator.setSurvey(new Survey(surveyJSON));
   return {
     template: '<survey-creator params="creator: creator"></survey-creator>',
     context: {

@@ -108,6 +108,7 @@ export class PagesEditor {
           newPage = this.addPage();
         }
         this._selectedPage(newPage);
+        this.creator.survey.currentPage = newPage;
         this.creator.selectedElement = newPage;
       } finally {
         this.isSelectingPage = false;

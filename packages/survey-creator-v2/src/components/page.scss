@@ -8,6 +8,15 @@ svc-page {
 .svc-page__content {
 }
 
+.svc-page__content:hover {
+  border: 1px solid $secondary;
+}
+
+.svc-page__content--selected,
+.svc-page__content--selected:hover {
+  border: 2px solid $secondary;
+}
+
 .svc-page__add-new-question {
   width: 100%;
   height: calcSize(7);
