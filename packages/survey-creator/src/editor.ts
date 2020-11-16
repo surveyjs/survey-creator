@@ -2954,7 +2954,7 @@ function addEmptyPanelElement(
   panel: any
 ): HTMLElement {
   var eDiv: HTMLDivElement = document.createElement("div");
-  eDiv.className = "well card card-block";
+  eDiv.className = "well card card-block svd-empty-panel";
   eDiv.ondragover = function (e) {
     dragDropHelper.doDragDropOver(e, panel);
   };
