@@ -1,0 +1,11 @@
+<ul
+  class="svc-list"
+  data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
+>
+  <!--ko foreach: items-->
+  <li
+    class="svc-list__item"
+    data-bind="css: { 'svc-list__item--disabled': !$data.isEnabled, 'svc-list__item--selected': $parent.selectedItem() == $data }, text: $data.text, click: $parent.selectItem"
+  ></li>
+  <!-- /ko -->
+</ul>

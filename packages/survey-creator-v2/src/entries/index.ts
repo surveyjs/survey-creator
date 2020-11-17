@@ -29,6 +29,7 @@ export * from "../components/property-editors/button-group/button-group";
 export * from "../components/property-editors/button-group/button-group-item";
 
 export * from "../components/survey-renderers/dropdown";
+export * from "../components/list";
 
 export * from "../creator";
 

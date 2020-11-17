@@ -1,0 +1,10 @@
+.svc-modal {
+  position: absolute;
+  z-index: 1000;
+}
+
+svc-modal {
+  display: block;
+  position: absolute;
+  z-index: -1;
+}
