@@ -39,11 +39,11 @@
               role="tab"
               data-bind="click: action, css: { active: $parent.koViewType() == name }, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }"
             >
-              <a
+              <span
+                tabindex="0"
                 class="nav-link svd-tab-text"
-                href="#"
                 data-bind="text: title"
-              ></a>
+              ></span>
             </li>
             <!-- /ko -->
           </ul>

@@ -257,7 +257,8 @@
     -webkit-box-sizing: border-box;
   }
   a,
-  a.nav-link {
+  a.nav-link,
+  span.nav-link {
     cursor: pointer;
   }
   &:not(.sv_modern_css) {
