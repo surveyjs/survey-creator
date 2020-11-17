@@ -1,10 +1,62 @@
-.svc-modal {
-  position: absolute;
-  z-index: 1000;
-}
+@import "../variables.scss";
 
 svc-modal {
   display: block;
   position: absolute;
   z-index: -1;
+}
+
+.svc-modal {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.1));
+  width: calc(100% + 8px);
+}
+
+.svc-modal__content {
+  padding: 8px 0;
+  background: $background;
+  border-radius: 4px;
+  min-width: 100%;
+}
+
+.svc-modal--show-pointer:after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid $background;
+  align-self: center;
+}
+
+.svc-modal--show-pointer.svc-modal--top {
+  flex-direction: column;
+  transform: translateY(-8px);
+  &:after {
+    transform: rotate(180deg);
+  }
+}
+
+.svc-modal--show-pointer.svc-modal--bottom {
+  flex-direction: column-reverse;
+}
+
+.svc-modal--show-pointer.svc-modal--left {
+  transform: translate(-8px);
+  &:after {
+    align-self: center;
+    transform: translate(-4px) rotate(90deg);
+  }
+}
+
+.svc-modal--show-pointer.svc-modal--right {
+  flex-direction: row-reverse;
+  transform: translate(8px);
+  &:after {
+    align-self: center;
+    transform: translate(4px) rotate(-90deg);
+  }
 }

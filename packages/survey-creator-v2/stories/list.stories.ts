@@ -53,19 +53,36 @@ export const Ordinary = () => {
   };
 };
 
-export const WithDisabledItem = () => {
+export const WithPointer = () => {
+  var isVisible = ko.observable(false);
+
+  var action = () => {
+    isVisible(!isVisible());
+  };
+
+  const listModel = {
+    onItemSelect: () => {
+      isVisible(false);
+    },
+    items: [
+      { text: "Question 1", isEnabled: true },
+      { text: "Question 2", isEnabled: true },
+      { text: "Question 3", isEnabled: true },
+    ],
+  };
+
   return {
     template:
-      '<div style="width:503px"><svc-dropdown-editor params="model: model"></svc-dropdown-editor></div>',
+      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="action: action"></svc-button><svc-modal style="width: 150px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
     context: {
-      model: {
-        koValue: ko.observable(""),
-        koChoices: [
-          { value: "Question 1" },
-          { value: "Question 2", disabled: true },
-          { value: "Question 3" },
-        ],
-      },
+      name: "svc-list",
+      title: text("Title", "Button"),
+      action: action,
+      model: { model: listModel },
+      isVisible: isVisible,
+      verticalPosition: text("Vertical position", "middle"),
+      horizontalPosition: text("Horizontal position", "right"),
+      showPointer: boolean("Show pointer", true),
     },
   };
 };

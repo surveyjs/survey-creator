@@ -15,6 +15,7 @@ export class ModalViewModel {
     public isVisible: ko.Observable<boolean>,
     public verticalPosition: "top" | "bottom" | "middle",
     public horizontalPosition: "left" | "right" | "center",
+    public showPointer: boolean,
     rect: any
   ) {
     this.container = document.createElement("div");
@@ -44,6 +45,17 @@ export class ModalViewModel {
       }
     });
   }
+
+  public get styleClass(): string {
+    var css = "";
+    if (this.showPointer) {
+      css += " svc-modal--show-pointer";
+    }
+    css += ` svc-modal--${this.horizontalPosition}`;
+    css += ` svc-modal--${this.verticalPosition}`;
+    return css;
+  }
+
   public dispose() {
     this.showSubscription.dispose();
     ko.cleanNode(this.container);
@@ -61,6 +73,7 @@ ko.components.register("svc-modal", {
         params.isVisible,
         params.verticalPosition,
         params.horizontalPosition,
+        params.showPointer,
         rect
       );
       return viewModel;

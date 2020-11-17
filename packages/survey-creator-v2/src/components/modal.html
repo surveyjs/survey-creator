@@ -1,6 +1,8 @@
 <div
   class="svc-modal"
-  data-bind="style: {left: left, top: top, width: width}, visible: isVisible"
+  data-bind="style: {left: left, top: top, width: width}, visible: isVisible, class: styleClass"
 >
-  <!-- ko component: {name: name, params: data} --><!-- /ko -->
+  <div class="svc-modal__content">
+    <!-- ko component: {name: name, params: data} --><!-- /ko -->
+  </div>
 </div>
