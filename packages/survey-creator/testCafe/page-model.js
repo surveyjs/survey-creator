@@ -11,7 +11,7 @@ class Page {
     return element.find(".icon-actioneditelement");
   }
   creatorTab(tabName) {
-    return Selector("a.nav-link").withText(tabName);
+    return Selector("span.nav-link").withText(tabName);
   }
   propertyGridCategory(categoryName) {
     return Selector(".svd-accordion-tab-header")
