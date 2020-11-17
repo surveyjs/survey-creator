@@ -3949,6 +3949,40 @@ exports[`Storyshots List Ordinary 1`] = `
 </div>
 `;
 
+exports[`Storyshots List With Icons 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+>
+  <svc-button
+    params="action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Button
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  <svc-modal
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+    style="width: 160px; height:56px; top:0"
+  >
+    <div />
+  </svc-modal>
+</div>
+`;
+
 exports[`Storyshots List With Pointer 1`] = `
 <div
   style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"

@@ -5,7 +5,15 @@
   <!--ko foreach: items-->
   <li
     class="svc-list__item"
-    data-bind="css: { 'svc-list__item--disabled': !$data.isEnabled, 'svc-list__item--selected': $parent.selectedItem() == $data }, text: $data.text, click: $parent.selectItem"
-  ></li>
+    data-bind="css: { 'svc-list__item--disabled': !$data.isEnabled, 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+  >
+    <!-- ko if: $data.icon -->
+    <svc-svg-icon
+      class="svc-list__item-icon"
+      params="iconName: icon, size: 24"
+    ></svc-svg-icon>
+    <!-- /ko -->
+    <span data-bind="text: $data.text"></span>
+  </li>
   <!-- /ko -->
 </ul>

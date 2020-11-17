@@ -86,3 +86,37 @@ export const WithPointer = () => {
     },
   };
 };
+
+export const WithIcons = () => {
+  var isVisible = ko.observable(false);
+
+  var action = () => {
+    isVisible(!isVisible());
+  };
+
+  const listModel = {
+    onItemSelect: () => {
+      isVisible(false);
+    },
+    items: [
+      { text: "Question 1", isEnabled: true, icon: "icon-matrix" },
+      { text: "Question 2", isEnabled: true, icon: "icon-expression" },
+      { text: "Question 3", isEnabled: true, icon: "icon-imagepicker" },
+    ],
+  };
+
+  return {
+    template:
+      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="action: action"></svc-button><svc-modal style="width: 160px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
+    context: {
+      name: "svc-list",
+      title: text("Title", "Button"),
+      action: action,
+      model: { model: listModel },
+      isVisible: isVisible,
+      verticalPosition: text("Vertical position", "middle"),
+      horizontalPosition: text("Horizontal position", "right"),
+      showPointer: boolean("Show pointer", false),
+    },
+  };
+};
