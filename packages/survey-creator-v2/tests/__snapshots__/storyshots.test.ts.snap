@@ -3861,116 +3861,7 @@ exports[`Storyshots Dropdown Editor Disabled 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
-  >
-    <div
-      class="svc-dropdown-editor"
-    >
-      
-  
-      <!--ko if: showLabel-->
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
-      >
-        
-    
-        <div
-          class="svc-dropdown-editor__form svc-dropdown-editor__form--disabled"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            Question 1
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-            disabled=""
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--selected"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-dropdown-editor>
+  />
 </div>
 `;
 
@@ -3980,116 +3871,7 @@ exports[`Storyshots Dropdown Editor Empty 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
-  >
-    <div
-      class="svc-dropdown-editor"
-    >
-      
-  
-      <!--ko if: showLabel-->
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
-      >
-        
-    
-        <div
-          class="svc-dropdown-editor__form"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            class="svc-dropdown-editor__placeholder"
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-dropdown-editor>
+  />
 </div>
 `;
 
@@ -4099,115 +3881,7 @@ exports[`Storyshots Dropdown Editor Filled 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
-  >
-    <div
-      class="svc-dropdown-editor"
-    >
-      
-  
-      <!--ko if: showLabel-->
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
-      >
-        
-    
-        <div
-          class="svc-dropdown-editor__form"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            Question 1
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--selected"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-dropdown-editor>
+  />
 </div>
 `;
 
@@ -4217,116 +3891,7 @@ exports[`Storyshots Dropdown Editor With Disabled Item 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
-  >
-    <div
-      class="svc-dropdown-editor"
-    >
-      
-  
-      <!--ko if: showLabel-->
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
-      >
-        
-    
-        <div
-          class="svc-dropdown-editor__form"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            class="svc-dropdown-editor__placeholder"
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item svc-dropdown-editor__list-item--disabled"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-dropdown-editor>
+  />
 </div>
 `;
 
@@ -4336,126 +3901,7 @@ exports[`Storyshots Dropdown Editor With Label 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
-  >
-    <div
-      class="svc-dropdown-editor"
-    >
-      
-  
-      <!--ko if: showLabel-->
-      
-  
-      <label
-        class="svc-dropdown-editor__label"
-        data-bind="text: displayName"
-      >
-        Question
-      </label>
-      
-  
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
-      >
-        
-    
-        <div
-          class="svc-dropdown-editor__form"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            class="svc-dropdown-editor__placeholder"
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-dropdown-editor>
+  />
 </div>
 `;
 
@@ -4465,116 +3911,51 @@ exports[`Storyshots Dropdown Editor With Placeholder 1`] = `
 >
   <svc-dropdown-editor
     params="model: model"
+  />
+</div>
+`;
+
+exports[`Storyshots List Ordinary 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+>
+  <svc-button
+    params="action: action"
   >
-    <div
-      class="svc-dropdown-editor"
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
     >
       
   
-      <!--ko if: showLabel-->
-      <!--/ko-->
-      
-  
-      <div
-        class="svc-dropdown-editor__container"
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
       >
-        
-    
-        <div
-          class="svc-dropdown-editor__form"
-          data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
-        >
-          
-      
-          <span
-            class="svc-dropdown-editor__placeholder"
-            data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
-          >
-            Placeholder Text
-          </span>
-          
-      
-          <button
-            class="svc-dropdown-editor__button"
-            data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
-          >
-            
-        
-            <svc-svg-icon
-              class="svc-dropdown-editor__button-icon"
-              params="iconName: 'icon-dropdownarrow', size: 24"
-            >
-              <svg
-                class="svc-svg-icon"
-                style="width: 24px; height: 24px;"
-              >
-                <use
-                  xlink:href="#icon-dropdownarrow"
-                />
-              </svg>
-              
-
-            </svc-svg-icon>
-            
-      
-          </button>
-          
-    
-        </div>
-        
-
-    
-        <ul
-          class="svc-dropdown-editor__list"
-          data-bind="visible: isExpanded"
-          style="display: none;"
-        >
-          
-      
-          <!--ko foreach: choices-->
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 1
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 2
-          </li>
-          
-      
-          
-      
-          <li
-            class="svc-dropdown-editor__list-item"
-            data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
-          >
-            Question 3
-          </li>
-          
-      
-          <!-- /ko -->
-          
-    
-        </ul>
-        
-  
-      </div>
+        Button
+      </span>
       
 
-    </div>
+    </button>
     
 
-  </svc-dropdown-editor>
+  </svc-button>
+  <svc-modal
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+    style="width: 150px; height:56px; top:0"
+  >
+    <div />
+  </svc-modal>
+</div>
+`;
+
+exports[`Storyshots List With Disabled Item 1`] = `
+<div
+  style="width:503px"
+>
+  <svc-dropdown-editor
+    params="model: model"
+  />
 </div>
 `;
 
