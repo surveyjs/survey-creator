@@ -6,9 +6,18 @@
     <!-- /ko -->
 
     <!-- ko foreach: $data.items -->
+    <!-- ko if: $data.isVisible -->
     <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
     <!-- /ko -->
     <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if: invisibleItems().length > 0 -->
+  <div class="svc-toolbox__item">
+    <div class="svc-toolbox__item-content" tabindex="0" data-bind="attr: { title: 'More...', role: 'button', 'aria-label': 'More...' }, css: 'svc-toolbox__item--dots'">
+      <svc-svg-icon params="iconName: 'icon-dots', size: 24"></svc-svg-icon>
+    </div>
   </div>
   <!-- /ko -->
 </div>

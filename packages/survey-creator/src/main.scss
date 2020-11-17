@@ -139,6 +139,11 @@
   // .svd-icon-status-color {
   //   color: #9d9fa1;
   // }
+
+  .svd-empty-panel {
+    line-height: 20px;
+    padding: 20px;
+  }
 }
 
 .svd_flowpanel[contenteditable="true"]:empty:before {
