@@ -18,6 +18,7 @@ svc-modal {
   display: flex;
   position: absolute;
   z-index: 1000;
+  width: max-content;
   filter: drop-shadow(0px calcSize(1) calcSize(2) rgba(0, 0, 0, 0.1));
 }
 

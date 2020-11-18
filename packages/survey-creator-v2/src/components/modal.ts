@@ -7,7 +7,6 @@ export class ModalViewModel {
   private container: HTMLElement;
   public top = ko.observable();
   public left = ko.observable();
-  public width = ko.observable();
   private showSubscription: ko.Computed<void>;
   constructor(
     public name: string,
@@ -24,17 +23,19 @@ export class ModalViewModel {
     ko.applyBindings(this, this.container);
 
     this.showSubscription = ko.computed(() => {
+      var width = (<HTMLElement>this.container.children[0].children[0])
+        .offsetWidth;
       if (this.isVisible()) {
-        this.width(rect.width);
         if (horizontalPosition == "center") {
           this.left(rect.left);
         } else if (horizontalPosition == "left") {
-          this.left(rect.left - rect.width);
+          this.left(rect.left - width);
         } else {
-          this.left(rect.left + rect.width);
+          this.left(rect.right);
         }
 
-        var height = (<HTMLElement>this.container.children[0]).offsetHeight;
+        var height = (<HTMLElement>this.container.children[0].children[0])
+          .offsetHeight;
         if (verticalPosition == "bottom") {
           this.top(rect.bottom);
         } else if (verticalPosition == "middle") {
@@ -66,7 +67,7 @@ export class ModalViewModel {
 ko.components.register("svc-modal", {
   viewModel: {
     createViewModel: (params: any, componentInfo) => {
-      var rect = componentInfo.element.getBoundingClientRect();
+      var rect = componentInfo.element.parentElement.getBoundingClientRect();
       const viewModel = new ModalViewModel(
         params.name,
         params.data,
