@@ -2187,19 +2187,7 @@ exports[`Storyshots Context menu With Pointer 1`] = `
 
   </svc-button>
   <svc-modal
-    "name:=""
-    data:=""
-    horizontalposition,=""
-    horizontalposition:=""
-    isvisible,=""
-    isvisible:=""
-    model,=""
-    name,=""
-    showpointer"=""
-    showpointer:=""
-    style="params="
-    verticalposition,=""
-    verticalposition:=""
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
   >
     <div />
   </svc-modal>
