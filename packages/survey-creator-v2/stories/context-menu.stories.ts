@@ -7,7 +7,7 @@ import { ListViewModel } from "../src/entries";
 import { ModalViewModel } from "../src/components/modal";
 
 export default {
-  title: "List",
+  title: "Context menu",
   "ko-components": [ListViewModel, ModalViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
@@ -32,20 +32,20 @@ export const Ordinary = () => {
       isVisible(false);
     },
     items: [
-      { text: "Question 1", isEnabled: true },
-      { text: "Question 2", isEnabled: true },
-      { text: "Question 3", isEnabled: true },
+      { title: "Question 1", isEnabled: true },
+      { title: "Question 2", isEnabled: true },
+      { title: "Question 3", isEnabled: true },
     ],
   };
 
   return {
     template:
-      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="action: action"></svc-button><svc-modal style="width: 150px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"></svc-modal></div>',
+      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="title: title, action: action"></svc-button><svc-modal style="width: 150px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"></svc-modal></div>',
     context: {
       name: "svc-list",
-      title: text("Title", "Button"),
+      title: text("Title", "Show menu"),
       action: action,
-      model: { model: listModel },
+      model: listModel,
       isVisible: isVisible,
       verticalPosition: text("Vertical position", "top"),
       horizontalPosition: text("Horizontal position", "right"),
@@ -65,20 +65,20 @@ export const WithPointer = () => {
       isVisible(false);
     },
     items: [
-      { text: "Question 1", isEnabled: true },
-      { text: "Question 2", isEnabled: true },
-      { text: "Question 3", isEnabled: true },
+      { title: "Question 1", isEnabled: true },
+      { title: "Question 2", isEnabled: true },
+      { title: "Question 3", isEnabled: true },
     ],
   };
 
   return {
     template:
-      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="action: action"></svc-button><svc-modal style="width: 150px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
+      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="title: title, action: action"></svc-button><svc-modal style="width: 150px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
     context: {
       name: "svc-list",
-      title: text("Title", "Button"),
+      title: text("Title", "Show menu"),
       action: action,
-      model: { model: listModel },
+      model: listModel,
       isVisible: isVisible,
       verticalPosition: text("Vertical position", "middle"),
       horizontalPosition: text("Horizontal position", "right"),
@@ -99,20 +99,20 @@ export const WithIcons = () => {
       isVisible(false);
     },
     items: [
-      { text: "Question 1", isEnabled: true, icon: "icon-matrix" },
-      { text: "Question 2", isEnabled: true, icon: "icon-expression" },
-      { text: "Question 3", isEnabled: true, icon: "icon-imagepicker" },
+      { title: "Question 1", isEnabled: true, iconName: "icon-matrix" },
+      { title: "Question 2", isEnabled: true, iconName: "icon-expression" },
+      { title: "Question 3", isEnabled: true, iconName: "icon-imagepicker" },
     ],
   };
 
   return {
     template:
-      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="action: action"></svc-button><svc-modal style="width: 160px; height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
+      '<div style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"><svc-button params="title: title, action: action"></svc-button><svc-modal style="height:56px; top:0" params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
     context: {
       name: "svc-list",
-      title: text("Title", "Button"),
+      title: text("Title", "Show menu"),
       action: action,
-      model: { model: listModel },
+      model: listModel,
       isVisible: isVisible,
       verticalPosition: text("Vertical position", "middle"),
       horizontalPosition: text("Horizontal position", "right"),

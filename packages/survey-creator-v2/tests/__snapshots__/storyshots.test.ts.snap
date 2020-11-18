@@ -2128,6 +2128,108 @@ exports[`Storyshots Button Ordinary 1`] = `
 </svc-button>
 `;
 
+exports[`Storyshots Context menu Ordinary 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+>
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  <svc-modal
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+    style="width: 150px; height:56px; top:0"
+  >
+    <div />
+  </svc-modal>
+</div>
+`;
+
+exports[`Storyshots Context menu With Icons 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+>
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  <svc-modal
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+    style="height:56px; top:0"
+  >
+    <div />
+  </svc-modal>
+</div>
+`;
+
+exports[`Storyshots Context menu With Pointer 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+>
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  <svc-modal
+    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+    style="width: 150px; height:56px; top:0"
+  >
+    <div />
+  </svc-modal>
+</div>
+`;
+
 exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 <survey-creator
   params="creator: creator"
@@ -3912,108 +4014,6 @@ exports[`Storyshots Dropdown Editor With Placeholder 1`] = `
   <svc-dropdown-editor
     params="model: model"
   />
-</div>
-`;
-
-exports[`Storyshots List Ordinary 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
->
-  <svc-button
-    params="action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Button
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
-    style="width: 150px; height:56px; top:0"
-  >
-    <div />
-  </svc-modal>
-</div>
-`;
-
-exports[`Storyshots List With Icons 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
->
-  <svc-button
-    params="action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Button
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
-    style="width: 160px; height:56px; top:0"
-  >
-    <div />
-  </svc-modal>
-</div>
-`;
-
-exports[`Storyshots List With Pointer 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
->
-  <svc-button
-    params="action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Button
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
-    style="width: 150px; height:56px; top:0"
-  >
-    <div />
-  </svc-modal>
 </div>
 `;
 

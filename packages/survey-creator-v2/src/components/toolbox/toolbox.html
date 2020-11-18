@@ -14,10 +14,18 @@
   </div>
   <!-- /ko -->
   <!-- ko if: invisibleItems().length > 0 -->
-  <div class="svc-toolbox__item">
-    <div class="svc-toolbox__item-content" tabindex="0" data-bind="attr: { title: 'More...', role: 'button', 'aria-label': 'More...' }, css: 'svc-toolbox__item--dots'">
+  <div class="svc-toolbox__item" data-bind="click: function() { showInvisibleItems(!showInvisibleItems()); }">
+    <div
+      class="svc-toolbox__item-content"
+      tabindex="0"
+      data-bind="attr: { title: 'More...', role: 'button', 'aria-label': 'More...' }, css: 'svc-toolbox__item--dots'"
+    >
       <svc-svg-icon params="iconName: 'icon-dots', size: 24"></svc-svg-icon>
     </div>
+    <svc-modal
+      class="svc-toolbox__modal"
+      params="name: 'svc-list', data: { items: invisibleItems, onItemSelect: invisibleItemSelected }, isVisible: showInvisibleItems, verticalPosition: 'top', horizontalPosition: 'right'"
+    ></svc-modal>
   </div>
   <!-- /ko -->
 </div>

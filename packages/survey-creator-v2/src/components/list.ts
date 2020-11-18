@@ -10,29 +10,37 @@ export class ListViewModel {
 
   constructor(
     public items: ko.MaybeObservableArray<ListItem>,
-    public onItemSelect: (item: ListItem) => void
+    public onItemSelect: (item: ListItem) => void,
+    public allowSelection: ko.MaybeObservable<boolean>
   ) {}
 
   public selectItem = (itemValue: ListItem) => {
     this.isExpanded(false);
-    this.selectedItem(itemValue);
+    if (ko.unwrap(this.allowSelection)) this.selectedItem(itemValue);
     if (!!this.onItemSelect) {
       this.onItemSelect(itemValue);
     }
   };
+
+  public isItemDisabled = (itemValue: ListItem) => {
+    return itemValue.isEnabled !== undefined && !ko.unwrap(itemValue.isEnabled);
+  };
 }
 
 export interface ListItem {
-  value: string;
-  text: string;
+  title: ko.MaybeObservable<string>;
+  iconName: ko.MaybeObservable<string>;
   isEnabled?: boolean;
 }
 
 ko.components.register("svc-list", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model = params.model;
-      const viewModel = new ListViewModel(model.items, model.onItemSelect);
+      const viewModel = new ListViewModel(
+        params.items,
+        params.onItemSelect,
+        params.allowSelection
+      );
       return viewModel;
     },
   },

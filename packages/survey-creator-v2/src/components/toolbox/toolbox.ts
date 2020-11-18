@@ -1,5 +1,7 @@
+import { ToolboxItemViewModel } from "@survey/creator/entries";
 import * as ko from "knockout";
-import { SurveyCreator } from '../../creator';
+import { SurveyCreator } from "../../creator";
+import { ListItem } from "../list";
 
 import "./toolbox.scss";
 const template = require("./toolbox.html");
@@ -10,32 +12,42 @@ export class ToolboxViewModel {
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;
   public invisibleItems = ko.observableArray<any>();
+  public showInvisibleItems = ko.observable(false);
 
-  constructor(private _categories: any[] | ko.Computed<Array<any>>, creator: SurveyCreator) {
+  constructor(
+    private _categories: any[] | ko.Computed<Array<any>>,
+    creator: SurveyCreator
+  ) {
     this.creator = creator;
     this._categoriesSubscription = ko.computed(() => {
       let categories = ko.unwrap(_categories);
       categories.forEach((category: any) => {
-        (ko.unwrap(category.items) || []).forEach(item => {
+        (ko.unwrap(category.items) || []).forEach((item) => {
           item.isVisible = ko.observable(true);
         });
       });
-      this.categories(categories)
+      this.categories(categories);
     });
   }
   showFirstN(visibleItemsCount: number) {
     let leftItemsToShow = visibleItemsCount;
     this.invisibleItems([]);
     this.categories().forEach((category: any) => {
-      (ko.unwrap(category.items) || []).forEach(item => {
+      (ko.unwrap(category.items) || []).forEach((item) => {
         item.isVisible(leftItemsToShow >= 0);
-        if(leftItemsToShow < 0) {
+        if (leftItemsToShow < 0) {
           this.invisibleItems.push(item);
         }
         leftItemsToShow--;
       });
     });
   }
+
+  public invisibleItemSelected = (model: ListItem) => {
+    this.showInvisibleItems(false);
+    alert(JSON.stringify(model));
+  };
+
   dispose() {
     this._categoriesSubscription.dispose();
   }
@@ -52,13 +64,13 @@ ko.components.register("svc-toolbox", {
         );
         if (!!toolboxElement) {
           let delta = toolboxElement.scrollHeight - toolboxElement.offsetHeight;
-          if(delta > 20 || toolboxElement.offsetHeight - previousHeight > 40) {
-            if(delta > 20) {
+          if (delta > 20 || toolboxElement.offsetHeight - previousHeight > 40) {
+            if (delta > 20) {
               model.showFirstN(toolboxElement.offsetHeight / 40 - 2);
               ko.tasks.runEarly();
               // console.log("srink");
             } else {
-              if(toolboxElement.offsetHeight - previousHeight > 40) {
+              if (toolboxElement.offsetHeight - previousHeight > 40) {
                 model.showFirstN(Number.MAX_VALUE);
                 ko.tasks.runEarly();
                 // console.log("expand");
