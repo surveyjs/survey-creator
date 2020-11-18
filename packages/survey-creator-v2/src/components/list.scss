@@ -55,4 +55,5 @@
 .svc-list__item--disabled {
   color: $foreground-disabled;
   cursor: default;
+  pointer-events: none;
 }
