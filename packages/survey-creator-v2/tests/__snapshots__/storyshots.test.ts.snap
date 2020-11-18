@@ -2130,7 +2130,7 @@ exports[`Storyshots Button Ordinary 1`] = `
 
 exports[`Storyshots Context menu Ordinary 1`] = `
 <div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
 >
   <svc-button
     params="title: title, action: action"
@@ -2155,41 +2155,6 @@ exports[`Storyshots Context menu Ordinary 1`] = `
   </svc-button>
   <svc-modal
     params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
-    style="width: 150px; height:56px; top:0"
-  >
-    <div />
-  </svc-modal>
-</div>
-`;
-
-exports[`Storyshots Context menu With Icons 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
->
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
-    style="height:56px; top:0"
   >
     <div />
   </svc-modal>
@@ -2198,7 +2163,7 @@ exports[`Storyshots Context menu With Icons 1`] = `
 
 exports[`Storyshots Context menu With Pointer 1`] = `
 <div
-  style="margin-left: 200px; margin-top: 200px; width:503px; position: relative"
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
 >
   <svc-button
     params="title: title, action: action"
@@ -2222,8 +2187,19 @@ exports[`Storyshots Context menu With Pointer 1`] = `
 
   </svc-button>
   <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
-    style="width: 150px; height:56px; top:0"
+    "name:=""
+    data:=""
+    horizontalposition,=""
+    horizontalposition:=""
+    isvisible,=""
+    isvisible:=""
+    model,=""
+    name,=""
+    showpointer"=""
+    showpointer:=""
+    style="params="
+    verticalposition,=""
+    verticalposition:=""
   >
     <div />
   </svc-modal>
@@ -4014,6 +3990,423 @@ exports[`Storyshots Dropdown Editor With Placeholder 1`] = `
   <svc-dropdown-editor
     params="model: model"
   />
+</div>
+`;
+
+exports[`Storyshots List Ordinary 1`] = `
+<div
+  style="width: 250px"
+>
+  <svc-list
+    params="onItemSelect: onItemSelect, items: items"
+  >
+    <ul
+      class="svc-list"
+      data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
+    >
+      
+  
+      <!--ko foreach: items-->
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 1
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 2
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 3
+        </span>
+        
+  
+      </li>
+      
+  
+      <!-- /ko -->
+      
+
+    </ul>
+    
+
+  </svc-list>
+</div>
+`;
+
+exports[`Storyshots List With Disabled Item 1`] = `
+<div
+  style="width: 250px"
+>
+  <svc-list
+    params="onItemSelect: onItemSelect, items: items"
+  >
+    <ul
+      class="svc-list"
+      data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
+    >
+      
+  
+      <!--ko foreach: items-->
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 1
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 2
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item svc-list__item--disabled"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 3
+        </span>
+        
+  
+      </li>
+      
+  
+      <!-- /ko -->
+      
+
+    </ul>
+    
+
+  </svc-list>
+</div>
+`;
+
+exports[`Storyshots List With Icons 1`] = `
+<div
+  style="width: 250px"
+>
+  <svc-list
+    params="onItemSelect: onItemSelect, items: items"
+  >
+    <ul
+      class="svc-list"
+      data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
+    >
+      
+  
+      <!--ko foreach: items-->
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        
+    
+        <svc-svg-icon
+          class="svc-list__item-icon"
+          params="iconName: iconName, size: 24"
+        >
+          <svg
+            class="svc-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-matrix"
+            />
+          </svg>
+          
+
+        </svc-svg-icon>
+        
+    
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 1
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        
+    
+        <svc-svg-icon
+          class="svc-list__item-icon"
+          params="iconName: iconName, size: 24"
+        >
+          <svg
+            class="svc-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-expression"
+            />
+          </svg>
+          
+
+        </svc-svg-icon>
+        
+    
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 2
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        
+    
+        <svc-svg-icon
+          class="svc-list__item-icon"
+          params="iconName: iconName, size: 24"
+        >
+          <svg
+            class="svc-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-imagepicker"
+            />
+          </svg>
+          
+
+        </svc-svg-icon>
+        
+    
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 3
+        </span>
+        
+  
+      </li>
+      
+  
+      <!-- /ko -->
+      
+
+    </ul>
+    
+
+  </svc-list>
+</div>
+`;
+
+exports[`Storyshots List With Selection 1`] = `
+<div
+  style="width: 250px"
+>
+  <svc-list
+    params="onItemSelect: onItemSelect, items: items, allowSelection: allowSelection"
+  >
+    <ul
+      class="svc-list"
+      data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
+    >
+      
+  
+      <!--ko foreach: items-->
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 1
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 2
+        </span>
+        
+  
+      </li>
+      
+  
+      
+  
+      <li
+        class="svc-list__item"
+        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+      >
+        
+    
+        <!-- ko if: $data.iconName -->
+        <!-- /ko -->
+        
+    
+        <span
+          data-bind="text: $data.title"
+        >
+          Question 3
+        </span>
+        
+  
+      </li>
+      
+  
+      <!-- /ko -->
+      
+
+    </ul>
+    
+
+  </svc-list>
 </div>
 `;
 
