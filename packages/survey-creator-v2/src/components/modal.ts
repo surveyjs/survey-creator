@@ -27,7 +27,7 @@ export class ModalViewModel {
         .offsetWidth;
       if (this.isVisible()) {
         if (horizontalPosition == "center") {
-          this.left(rect.left);
+          this.left((rect.left + rect.right - width) / 2);
         } else if (horizontalPosition == "left") {
           this.left(rect.left - width);
         } else {
