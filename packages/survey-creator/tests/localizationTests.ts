@@ -46,7 +46,7 @@ QUnit.test("getProperty function breaks on word automatically", function(
 ) {
   assert.equal(
     editorLocalization.getProperty("someGoodProperty"),
-    "Some Good Property",
+    "Some good property",
     "break on words automatically"
   );
   assert.equal(
@@ -124,7 +124,7 @@ QUnit.test("getPropertyNameInEditor", function(assert) {
   );
   assert.equal(
     editorLocalization.getPropertyNameInEditor("someGoodProperty"),
-    "Some Good Property",
+    "Some good property",
     "break on words automatically"
   );
   assert.equal(
