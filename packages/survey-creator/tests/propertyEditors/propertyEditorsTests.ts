@@ -790,7 +790,7 @@ QUnit.test("SurveyPropertyItemValue custom property", function (assert) {
   );
   assert.equal(
     propertyEditor.columns[2].text,
-    "My Image Link",
+    "My image link",
     "Set the correct column title"
   );
   assert.equal(
