@@ -80,7 +80,7 @@ export var editorLocalization = {
       if (propName[i] === propName[i].toUpperCase()) {
         res += " ";
       }
-      res += propName[i];
+      res += propName[i].toLowerCase();
     }
     return res;
   },
