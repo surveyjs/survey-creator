@@ -1,9 +1,10 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, PropertyGrid, Base, Page } from "survey-knockout";
+import { Survey, SurveyElement, Base, Page } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
+import { PropertyGrid } from "./propertyGrid/propertygrid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
@@ -101,14 +102,14 @@ export class SurveyCreator extends CreatorBase<Survey> {
   selectElement = (element: Base) => {
     this.selection(element);
     this.propertyGrid.obj = element;
-    if(typeof element.getType === "function" && element.getType() === "page") {
+    if (typeof element.getType === "function" && element.getType() === "page") {
       this.currentPage = <Page>element;
-    } else if(!!element["page"]) {
+    } else if (!!element["page"]) {
       this.currentPage = element["page"];
     } else {
       this.currentPage = undefined;
     }
-  }
+  };
 
   isElementSelected(element: Base) {
     return element === this.selection();

@@ -512,6 +512,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+  .sv_progress-buttons__list li:before {
+    box-sizing: content-box;
+  }
   label {
     display: inline-block;
     max-width: 100%;
