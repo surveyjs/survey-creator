@@ -430,6 +430,8 @@ export class SurveyQuestionEditorDefinition {
     },
     page: {
       properties: [
+        "navigationTitle",
+        "navigationDescription",
         "maxTimeToFinish",
         { name: "questionsOrder", tab: "layout" },
         { name: "navigationButtonsVisibility", tab: "layout" },
