@@ -251,7 +251,7 @@ export class TranslationGroup extends TranslationItemBase {
     var properties = Survey.Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if(property.isSerializable === false) continue;
+      if (property.isSerializable === false) continue;
       var value = obj[property.name];
       if (!!value && Array.isArray(value) && value.length > 0) {
         res.push(property);
@@ -747,7 +747,7 @@ export class Translation implements ITranslationLocales {
   }
   private updateAvailableTranlations() {
     var res = [];
-    var locales = Survey.surveyLocalization.getLocales();
+    var locales = (<any>Survey.surveyLocalization).getLocales(true);
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
       if (!loc) continue;
