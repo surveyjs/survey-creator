@@ -18,7 +18,7 @@ fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
 
 test(`check the new prop exists`, async t => {
   const getPosition = ClientFunction(() =>
-    document.documentElement.innerHTML.indexOf("Custom Property")
+    document.documentElement.innerHTML.indexOf("Custom property")
   );
 
   const OthersTab = Selector(".svd_object_editor span").withText("Others");
