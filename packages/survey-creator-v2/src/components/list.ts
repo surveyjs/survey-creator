@@ -1,5 +1,4 @@
 import * as ko from "knockout";
-import { ImageItemValue, ItemValue } from "survey-knockout";
 import "./list.scss";
 
 const template = require("./list.html");
