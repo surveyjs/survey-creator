@@ -1,13 +1,23 @@
-import { PropertyGridModel } from "../../src/propertyGrid/propertygrid";
 import {
+  PropertyGridModel,
+  PropertyGridEditorCollection,
+} from "../../src/propertyGrid/propertygrid";
+import {
+  Base,
   QuestionTextModel,
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
 } from "survey-knockout";
 
+export class PropertyGridModelTester extends PropertyGridModel {
+  constructor(obj: Base) {
+    PropertyGridEditorCollection.clearHash();
+    super(obj);
+  }
+}
 test("Create survey with editingObj", () => {
   var question = new QuestionTextModel("q1");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   expect(propertyGrid.survey.getValue("name")).toEqual("q1");
   var nameQuestion = propertyGrid.survey.getQuestionByName("name");
   expect(nameQuestion).toBeTruthy();
@@ -16,7 +26,7 @@ test("Create survey with editingObj", () => {
 });
 test("boolean property editor (boolean/switch)", () => {
   var question = new QuestionTextModel("q1");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   var startWithNewLineQuestion = propertyGrid.survey.getQuestionByName(
     "startWithNewLine"
   );
@@ -34,7 +44,7 @@ test("boolean property editor (boolean/switch)", () => {
 });
 test("dropdown property editor", () => {
   var question = new QuestionTextModel("q1");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   var titleLocationQuestion = propertyGrid.survey.getQuestionByName(
     "titleLocation"
   );
@@ -49,7 +59,7 @@ test("dropdown property editor", () => {
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
@@ -70,7 +80,7 @@ test("itemvalue[] property editor", () => {
 test("itemvalue[] property editor + detail panel", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
@@ -86,7 +96,7 @@ test("column[] property editor", () => {
   question.addColumn("col1");
   question.addColumn("col2");
   question.addColumn("col3");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
@@ -114,7 +124,7 @@ test("column[] property editor", () => {
 test("Change editingObj of the property grid", () => {
   var question = new QuestionTextModel("q1");
   var question2 = new QuestionTextModel("q2");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   expect(propertyGrid.survey.getValue("name")).toEqual("q1"); //"name property value is set for the first editingObj"
   propertyGrid.obj = question2;
   expect(propertyGrid.survey.getValue("name")).toEqual("q2"); //"name property value is set for the second editingObj"
@@ -126,7 +136,7 @@ test("Check objValueChangedCallback", () => {
   };
   var question = new QuestionTextModel("q1");
   var question2 = new QuestionTextModel("q2");
-  var propertyGrid = new PropertyGridModel(question);
+  var propertyGrid = new PropertyGridModelTester(question);
   propertyGrid.objValueChangedCallback = objValueChangedCallback;
   expect(count).toEqual(0); //"objValueChangedCallback isn't called");
   propertyGrid.obj = question2;

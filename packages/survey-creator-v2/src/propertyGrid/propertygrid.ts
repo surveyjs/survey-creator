@@ -11,6 +11,10 @@ import {
   SurveyModel,
   Survey,
 } from "survey-knockout";
+import {
+  SurveyQuestionEditorTabDefinition,
+  SurveyQuestionProperties,
+} from "@survey/creator/questionEditors/questionEditor";
 
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
@@ -26,15 +30,20 @@ export interface IPropertyGridEditor {
 export var PropertyGridEditorCollection = {
   editors: new Array<IPropertyGridEditor>(),
   fitHash: {},
+  clearHash(): void {
+    this.fitHash = {};
+  },
   register(editor: IPropertyGridEditor) {
     this.editors.push(editor);
   },
   getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
-    var fitEd = this.fitHash[prop.id];
+    //TODO replace with prop.id should use name due two versions of survey-knockout
+    var key = prop.name + prop.id.toString();
+    var fitEd = this.fitHash[key];
     if (!!fitEd) return fitEd;
     for (var i = this.editors.length - 1; i >= 0; i--) {
       if (this.editors[i].fit(prop)) {
-        this.fitHash[prop.id] = this.editors[i];
+        this.fitHash[key] = this.editors[i];
         return this.editors[i];
       }
     }
@@ -111,32 +120,22 @@ export class PropertyGridModel {
       showNavigationButtons: "none",
     };
   }
-  public setupObjPanel(panel: PanelModelBase, obj: Base, isNextedObj: boolean) {
-    panel.fromJSON(this.createJSON(obj, isNextedObj));
+  public setupObjPanel(panel: PanelModelBase, obj: Base, isNestedObj: boolean) {
+    panel.fromJSON(this.createJSON(obj, isNestedObj));
     this.onQuestionsCreated(panel, obj);
   }
-  private createJSON(obj: Base, isNextedObj: boolean): any {
-    var props = Serializer.getPropertiesByObj(obj);
+  private createJSON(obj: Base, isNestedObj: boolean): any {
+    var properties = new SurveyQuestionProperties(obj);
+    var tabs = properties.getTabs();
     var panels: any = {};
-    var isFirstPanel = true;
-    for (var i = 0; i < props.length; i++) {
-      var propJSON = this.createQuestionJSON(obj, props[i]);
-      if (!propJSON) continue;
-      var category = props[i].category;
-      if (!category) category = "general";
-      var panel = panels[category];
-      if (!panel) {
-        panel = this.createPanelJSON(category, isFirstPanel);
-        panels[category] = panel;
-        isFirstPanel = false;
-      }
-      panel.elements.push(propJSON);
+    for (var i = 0; i < tabs.length; i++) {
+      panels[tabs[i].name] = this.createPanelProps(obj, tabs[i], i == 0);
     }
     var json: any = {
       elements: [],
     };
     for (var key in panels) {
-      if (key == "general" && isNextedObj) {
+      if (key == "general" && isNestedObj) {
         var els = panels[key].elements;
         for (var i = 0; i < els.length; i++) {
           json.elements.push(els[i]);
@@ -146,6 +145,23 @@ export class PropertyGridModel {
       }
     }
     return json;
+  }
+  private createPanelProps(
+    obj: Base,
+    tab: SurveyQuestionEditorTabDefinition,
+    isFirst: boolean
+  ): any {
+    var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
+    for (var i = 0; i < tab.properties.length; i++) {
+      var propJSON = this.createQuestionJSON(
+        obj,
+        <any>tab.properties[i].property
+      );
+      if (!propJSON) continue;
+      propJSON.title = tab.properties[i].title;
+      panel.elements.push(propJSON);
+    }
+    return panel;
   }
   private onQuestionsCreated(panel: PanelModelBase, obj: Base) {
     var properties = Serializer.getPropertiesByObj(obj);
@@ -160,13 +176,17 @@ export class PropertyGridModel {
       PropertyGridEditorCollection.onCreated(this, obj, q, prop);
     }
   }
-  private createPanelJSON(category: string, isFirstPanel: boolean): any {
+  private createPanelJSON(
+    category: string,
+    title: string,
+    isFirstPanel: boolean
+  ): any {
     return {
       type: "panel",
       name:
         "property_grid_category" +
         (PropertyGridModel.panelNameIndex++).toString(),
-      title: category,
+      title: !!title ? title : category,
       state: isFirstPanel ? "expanded" : "collapsed",
       elements: [],
     };
