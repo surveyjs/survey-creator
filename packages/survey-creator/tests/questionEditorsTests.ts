@@ -146,42 +146,46 @@ QUnit.test("Question Editor preserve title on tab changed", function (assert) {
   );
 });
 
-QUnit.test("Create correct Question Editor by question type", function (
-  assert
-) {
-  var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
-  var editor = new SurveyQuestionEditor(radioGroupQuestion);
-  assert.equal(editor.koTabs().length, 7, "There are 7 tabs");
-  assert.equal(
-    editor.koTabs()[1].name,
-    "choices",
-    "The name of the second tab is 'choices'"
-  );
-});
+QUnit.test(
+  "Create correct Question Editor by question type",
+  function (assert) {
+    var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
+    var editor = new SurveyQuestionEditor(radioGroupQuestion);
+    assert.equal(editor.koTabs().length, 7, "There are 7 tabs");
+    assert.equal(
+      editor.koTabs()[1].name,
+      "choices",
+      "The name of the second tab is 'choices'"
+    );
+  }
+);
 
-QUnit.test("Hide a tab if its visible attribute set to false", function (
-  assert
-) {
-  var savedDefinition = JSON.stringify(
-    SurveyQuestionEditorDefinition.definition.html
-  );
-  SurveyQuestionEditorDefinition.definition.html = {
-    tabs: [
-      { name: "general", visible: false },
-      { name: "logic", visible: false },
-      { name: "others", visible: false },
-    ],
-  };
-  var htmlQuestion = new Survey.QuestionHtml("q1");
-  var editor = new SurveyQuestionEditor(htmlQuestion);
-  assert.equal(editor.koTabs().length, 1, "There is one visible tab");
-  assert.equal(
-    editor.koTabs()[0].name,
-    "layout",
-    "The name of the visible tab is 'html'"
-  );
-  SurveyQuestionEditorDefinition.definition.html = JSON.parse(savedDefinition);
-});
+QUnit.test(
+  "Hide a tab if its visible attribute set to false",
+  function (assert) {
+    var savedDefinition = JSON.stringify(
+      SurveyQuestionEditorDefinition.definition.html
+    );
+    SurveyQuestionEditorDefinition.definition.html = {
+      tabs: [
+        { name: "general", visible: false },
+        { name: "logic", visible: false },
+        { name: "others", visible: false },
+      ],
+    };
+    var htmlQuestion = new Survey.QuestionHtml("q1");
+    var editor = new SurveyQuestionEditor(htmlQuestion);
+    assert.equal(editor.koTabs().length, 1, "There is one visible tab");
+    assert.equal(
+      editor.koTabs()[0].name,
+      "layout",
+      "The name of the visible tab is 'html'"
+    );
+    SurveyQuestionEditorDefinition.definition.html = JSON.parse(
+      savedDefinition
+    );
+  }
+);
 
 QUnit.test("Hide visibleIf tab and startWithNewLine", function (assert) {
   var radioGroupQuestion = new Survey.QuestionRadiogroup("q1");
@@ -551,87 +555,98 @@ QUnit.test("Question editor: custom errors", function (assert) {
   assert.equal(tab.hasError(), false, "There is no error now");
 });
 
-QUnit.test("Question editor: custom errors on required field", function (
-  assert
-) {
-  var question = new Survey.QuestionText("invalidName");
-  var editor = new SurveyCreator();
-  editor.onPropertyValidationCustomError.add(function (editor, options) {
-    if (options.propertyName != "name") return;
-    if (options.value == "invalidName") {
-      options.error = "I'm sorry you can not use that name";
-      return;
-    }
-  });
-  var tab = createSurveyQuestionEditorTab(question, ["name"], editor);
-  assert.equal(tab.hasError(), true, "error message should be triggered");
-  var nameEditor = tab.editorProperties[0].editor;
-  nameEditor.koValue("validName");
-  assert.equal(tab.hasError(), false, "There is no error now");
-
-  nameEditor.koValue("");
-  assert.equal(
-    tab.hasError(),
-    true,
-    "Validator still checks that property is not empty"
-  );
-  assert.ok(nameEditor.koErrorText(), "Required error text is show");
-  nameEditor.koValue("correctName");
-  assert.equal(tab.hasError(), false, "There is no errors");
-  assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
-});
-QUnit.test("Question editor: custom errors on unique itemvalues", function (
-  assert
-) {
-  var question = new Survey.QuestionCheckbox("question");
-  var editor = new SurveyCreator();
-  editor.onPropertyValidationCustomError.add(function (editor, options) {
-    if (options.propertyName !== "choices") return;
-    var items = options.value;
-    if (!items || !Array.isArray(items)) return;
-    var hash = {};
-    for (var i = 0; i < items.length; i++) {
-      var val = !!items[i].value ? items[i].value : items[i];
-      if (!val) continue;
-      if (hash[val]) {
-        options.error =
-          "The value '" + val + "' is not unique. Please correct it";
+QUnit.test(
+  "Question editor: custom errors on required field",
+  function (assert) {
+    var question = new Survey.QuestionText("invalidName");
+    var editor = new SurveyCreator();
+    editor.onPropertyValidationCustomError.add(function (editor, options) {
+      if (options.propertyName != "name") return;
+      if (options.value == "invalidName") {
+        options.error = "I'm sorry you can not use that name";
         return;
       }
-      hash[val] = 1;
-    }
-  });
-  question.choices = ["item1", "item2", "item2"];
-  var tab = createSurveyQuestionEditorTab(question, ["choices"], editor);
-  assert.equal(tab.hasError(), true, "error message should be triggered");
-  question.choices = ["item1", "item2", "item3"];
-  assert.equal(tab.hasError(), false, "error message should not be triggered");
-});
+    });
+    var tab = createSurveyQuestionEditorTab(question, ["name"], editor);
+    assert.equal(tab.hasError(), true, "error message should be triggered");
+    var nameEditor = tab.editorProperties[0].editor;
+    nameEditor.koValue("validName");
+    assert.equal(tab.hasError(), false, "There is no error now");
 
-QUnit.test("Question editor: clear errors on setting values outside", function (
-  assert
-) {
-  var question = new Survey.QuestionText("question");
-  var creator = new SurveyCreator();
-  creator.onPropertyValidationCustomError.add(function (editor, options) {
-    if (options.propertyName !== "defaultValue") return;
-    if (!options.value) return;
-    if (options.value.length < 5) {
-      options.error = "Error";
-    }
-  });
+    nameEditor.koValue("");
+    assert.equal(
+      tab.hasError(),
+      true,
+      "Validator still checks that property is not empty"
+    );
+    assert.ok(nameEditor.koErrorText(), "Required error text is show");
+    nameEditor.koValue("correctName");
+    assert.equal(tab.hasError(), false, "There is no errors");
+    assert.notOk(nameEditor.koErrorText(), "Required error text is gone");
+  }
+);
+QUnit.test(
+  "Question editor: custom errors on unique itemvalues",
+  function (assert) {
+    var question = new Survey.QuestionCheckbox("question");
+    var editor = new SurveyCreator();
+    editor.onPropertyValidationCustomError.add(function (editor, options) {
+      if (options.propertyName !== "choices") return;
+      var items = options.value;
+      if (!items || !Array.isArray(items)) return;
+      var hash = {};
+      for (var i = 0; i < items.length; i++) {
+        var val = !!items[i].value ? items[i].value : items[i];
+        if (!val) continue;
+        if (hash[val]) {
+          options.error =
+            "The value '" + val + "' is not unique. Please correct it";
+          return;
+        }
+        hash[val] = 1;
+      }
+    });
+    question.choices = ["item1", "item2", "item2"];
+    var tab = createSurveyQuestionEditorTab(question, ["choices"], editor);
+    assert.equal(tab.hasError(), true, "error message should be triggered");
+    question.choices = ["item1", "item2", "item3"];
+    assert.equal(
+      tab.hasError(),
+      false,
+      "error message should not be triggered"
+    );
+  }
+);
 
-  var tab = createSurveyQuestionEditorTab(question, ["defaultValue"], creator);
-  var propEditor = tab.getPropertyEditorByName("defaultValue");
-  propEditor.editor.koValue("abc");
-  assert.ok(propEditor.editor.koErrorText(), "There is error");
-  question.defaultValue = "abcdef";
-  assert.equal(propEditor.editor.koValue(), "abcdef", "Value is updated");
-  assert.notOk(
-    propEditor.editor.koErrorText(),
-    "Value is set outside and there is no error"
-  );
-});
+QUnit.test(
+  "Question editor: clear errors on setting values outside",
+  function (assert) {
+    var question = new Survey.QuestionText("question");
+    var creator = new SurveyCreator();
+    creator.onPropertyValidationCustomError.add(function (editor, options) {
+      if (options.propertyName !== "defaultValue") return;
+      if (!options.value) return;
+      if (options.value.length < 5) {
+        options.error = "Error";
+      }
+    });
+
+    var tab = createSurveyQuestionEditorTab(
+      question,
+      ["defaultValue"],
+      creator
+    );
+    var propEditor = tab.getPropertyEditorByName("defaultValue");
+    propEditor.editor.koValue("abc");
+    assert.ok(propEditor.editor.koErrorText(), "There is error");
+    question.defaultValue = "abcdef";
+    assert.equal(propEditor.editor.koValue(), "abcdef", "Value is updated");
+    assert.notOk(
+      propEditor.editor.koErrorText(),
+      "Value is set outside and there is no error"
+    );
+  }
+);
 
 QUnit.test("Question editor: required field errors", function (assert) {
   var question = new Survey.QuestionText("name");
@@ -841,25 +856,26 @@ QUnit.test("Question editor: change copied object", function (assert) {
     "Locale set into editable survey"
   );
 });
-QUnit.test("Use localized text for dropdown property editor", function (
-  assert
-) {
-  var survey = new Survey.Survey();
-  var propLocale = new SurveyDropdownPropertyEditor(
-    Survey.Serializer.findProperty("survey", "locale")
-  );
-  propLocale.object = survey;
-  var choices = propLocale.koChoices();
-  var item = null;
-  for (var i = 0; i < choices.length; i++) {
-    if (choices[i].value == "en") {
-      item = choices[i];
-      break;
+QUnit.test(
+  "Use localized text for dropdown property editor",
+  function (assert) {
+    var survey = new Survey.Survey();
+    var propLocale = new SurveyDropdownPropertyEditor(
+      Survey.Serializer.findProperty("survey", "locale")
+    );
+    propLocale.object = survey;
+    var choices = propLocale.koChoices();
+    var item = null;
+    for (var i = 0; i < choices.length; i++) {
+      if (choices[i].value == "de") {
+        item = choices[i];
+        break;
+      }
     }
+    assert.ok(item, "Deutsch locale is found");
+    assert.equal(item.text, "deutsch", "Use text");
   }
-  assert.ok(item, "English locale is found");
-  assert.equal(item.text, "english", "Use text");
-});
+);
 QUnit.test(
   "Question editor: copied object should have parent property, bug: https://surveyjs.answerdesk.io/ticket/details/T2531",
   function (assert) {
@@ -957,47 +973,54 @@ QUnit.test("DependedOn properties, dynamic choices", function (assert) {
   Survey.Serializer.removeProperty("text", "targetField");
 });
 
-QUnit.test("DependedOn properties + multiple, dynamic choices", function (
-  assert
-) {
-  Survey.Serializer.addProperty("text", { name: "targetEntity" });
-  Survey.Serializer.addProperty("text", {
-    name: "targetField:multiplevalues",
-    dependsOn: "targetEntity",
-    choices: function (obj) {
-      return getChoicesByEntity(obj);
-    },
-  });
-  function getChoicesByEntity(obj: any): Array<any> {
-    var entity = !!obj ? obj["targetEntity"] : null;
-    var choices = [];
-    if (!entity) return choices;
-    choices.push({ value: null });
-    choices.push({ value: entity + " 1", text: entity + " 1" });
-    choices.push({ value: entity + " 2", text: entity + " 2" });
-    return choices;
+QUnit.test(
+  "DependedOn properties + multiple, dynamic choices",
+  function (assert) {
+    Survey.Serializer.addProperty("text", { name: "targetEntity" });
+    Survey.Serializer.addProperty("text", {
+      name: "targetField:multiplevalues",
+      dependsOn: "targetEntity",
+      choices: function (obj) {
+        return getChoicesByEntity(obj);
+      },
+    });
+    function getChoicesByEntity(obj: any): Array<any> {
+      var entity = !!obj ? obj["targetEntity"] : null;
+      var choices = [];
+      if (!entity) return choices;
+      choices.push({ value: null });
+      choices.push({ value: entity + " 1", text: entity + " 1" });
+      choices.push({ value: entity + " 2", text: entity + " 2" });
+      return choices;
+    }
+    var editorDefinition = SurveyQuestionEditorDefinition.definition.text;
+    var savedDefinition = JSON.stringify(editorDefinition);
+    editorDefinition.properties.push("targetEntity");
+    editorDefinition.properties.push("targetField");
+
+    var question = new Survey.QuestionText("q1");
+
+    var editor = new SurveyQuestionEditor(question);
+    var tab = editor.koTabs()[0];
+    var entityProp = tab.getPropertyEditorByName("targetEntity");
+    var fieldProp = tab.getPropertyEditorByName("targetField");
+    var fieldPropEditor = <SurveyPropertyMultipleValuesEditor>fieldProp.editor;
+
+    assert.equal(fieldPropEditor.items.length, 0, "It is empty by default");
+    entityProp.koValue("Account");
+    assert.equal(
+      fieldPropEditor.items.length,
+      3,
+      "Choices updated immediately"
+    );
+
+    SurveyQuestionEditorDefinition.definition.text = JSON.parse(
+      savedDefinition
+    );
+    Survey.Serializer.removeProperty("text", "targetEntity");
+    Survey.Serializer.removeProperty("text", "targetField");
   }
-  var editorDefinition = SurveyQuestionEditorDefinition.definition.text;
-  var savedDefinition = JSON.stringify(editorDefinition);
-  editorDefinition.properties.push("targetEntity");
-  editorDefinition.properties.push("targetField");
-
-  var question = new Survey.QuestionText("q1");
-
-  var editor = new SurveyQuestionEditor(question);
-  var tab = editor.koTabs()[0];
-  var entityProp = tab.getPropertyEditorByName("targetEntity");
-  var fieldProp = tab.getPropertyEditorByName("targetField");
-  var fieldPropEditor = <SurveyPropertyMultipleValuesEditor>fieldProp.editor;
-
-  assert.equal(fieldPropEditor.items.length, 0, "It is empty by default");
-  entityProp.koValue("Account");
-  assert.equal(fieldPropEditor.items.length, 3, "Choices updated immediately");
-
-  SurveyQuestionEditorDefinition.definition.text = JSON.parse(savedDefinition);
-  Survey.Serializer.removeProperty("text", "targetEntity");
-  Survey.Serializer.removeProperty("text", "targetField");
-});
+);
 
 QUnit.test(
   "Survey Editor cancel, Bug#T2809 (customer marked it as private)",
