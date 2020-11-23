@@ -132,11 +132,7 @@ QUnit.test("Translation for adding", function (assert) {
   var locales = Survey.surveyLocalization.locales;
   var count = 0;
   for (var key in locales) count++;
-  assert.equal(
-    translation.koAvailableLanguages().length,
-    count,
-    "All locales"
-  );
+  assert.equal(translation.koAvailableLanguages().length, count, "All locales");
   translation.addLocale("de");
   assert.equal(
     translation.koAvailableLanguages().length,
@@ -317,6 +313,7 @@ QUnit.test("Default locale name", function (assert) {
     "Default (english)",
     "Default is english"
   );
+  Survey.surveyLocalization.defaultLocale = "de";
   survey = new Survey.Survey();
   survey.locale = "de";
   translation.survey = survey;
@@ -325,6 +322,7 @@ QUnit.test("Default locale name", function (assert) {
     "Default (deutsch)",
     "Default is deutsch now"
   );
+  Survey.surveyLocalization.defaultLocale = "en";
 });
 QUnit.test("Add properties for columns", function (assert) {
   var question = new Survey.QuestionMatrixDropdown("q1");
@@ -423,14 +421,16 @@ QUnit.test("Import from array", function (assert) {
   let translation = new Translation(survey);
 
   translation.importFromNestedArray([
-    ['description ↓ - language →', 'default', 'de'],
-    ['survey.page1.question1.title', 'question1_1', ''],
-    ['survey.page1.question1.col1.title', 'col1 en1', 'col1 de1']
+    ["description ↓ - language →", "default", "de"],
+    ["survey.page1.question1.title", "question1_1", ""],
+    ["survey.page1.question1.col1.title", "col1 en1", "col1 de1"],
   ]);
-  let question = <Survey.QuestionMatrixDropdown>(survey.getQuestionByName("question1"));
+  let question = <Survey.QuestionMatrixDropdown>(
+    survey.getQuestionByName("question1")
+  );
   let column = <Survey.MatrixDropdownColumn>question.columns[0];
   assert.equal(question.title, "question1_1", "title has been changed");
-  assert.equal(column.title, 'col1 en1');
+  assert.equal(column.title, "col1 en1");
   assert.equal(
     column.locTitle.getLocaleText(""),
     "col1 en1",
@@ -491,14 +491,29 @@ QUnit.test("Export to array", function (assert) {
   var translation = new Translation(survey);
   let exported;
   parse(translation.exportToCSV(), {
-    "complete": function (results, file) { exported = results.data; }
+    complete: function (results, file) {
+      exported = results.data;
+    },
   });
 
-  assert.equal(exported.length, 7, "locales+question.title+3 column+column choice+ one row");
-  assert.deepEqual(exported[0], ["description ↓ - language →", "default", "de"], "check locale line");
-  assert.deepEqual(exported[1], ["survey.page1.question1.title", "question1", ""], "use default value");
+  assert.equal(
+    exported.length,
+    7,
+    "locales+question.title+3 column+column choice+ one row"
+  );
+  assert.deepEqual(
+    exported[0],
+    ["description ↓ - language →", "default", "de"],
+    "check locale line"
+  );
+  assert.deepEqual(
+    exported[1],
+    ["survey.page1.question1.title", "question1", ""],
+    "use default value"
+  );
 });
 QUnit.test("Merging a locale with default", function (assert) {
+  Survey.surveyLocalization.defaultLocale = "de";
   var survey = new Survey.Survey({
     locale: "de",
     elements: [
@@ -559,6 +574,7 @@ QUnit.test("Merging a locale with default", function (assert) {
     true,
     "Locale can be merged again"
   );
+  Survey.surveyLocalization.defaultLocale = "en";
 });
 QUnit.test("Custom localizable property in question", function (assert) {
   Survey.Serializer.addProperty("question", {
@@ -601,51 +617,54 @@ QUnit.test("Custom localizable property in itemvalue", function (assert) {
   Survey.Serializer.removeProperty("itemvalue", "customProp");
 });
 
-QUnit.test("Add pages as a custom property, it should not produce the error, Bug#991", function (assert) {
-  Survey.Serializer.addProperty("page", {
-    name: "pages:surveypages",
-    className: "page",
-    category: "general",
-    displayName: "Page order",
-    onGetValue: function (obj) {
-      return !!obj && !!obj.survey ? obj.survey.pages : [];
-    },
-    onSetValue: function (obj) {
-      //Do nothing
-    },
-    isSerializable: false,
-  });
-  var survey = new Survey.Survey({
-    locale: "de",
-    elements: [
-      {
-        type: "text",
-        name: "question1",
-        title: {
-          de: "title de",
-          fr: "title fr",
-        },
+QUnit.test(
+  "Add pages as a custom property, it should not produce the error, Bug#991",
+  function (assert) {
+    Survey.Serializer.addProperty("page", {
+      name: "pages:surveypages",
+      className: "page",
+      category: "general",
+      displayName: "Page order",
+      onGetValue: function (obj) {
+        return !!obj && !!obj.survey ? obj.survey.pages : [];
       },
-      {
-        type: "text",
-        name: "question2",
-        title: {
-          default: "title default",
-          de: "title de",
-          fr: "title fr",
-        },
+      onSetValue: function (obj) {
+        //Do nothing
       },
-      {
-        type: "text",
-        name: "question3",
-        title: {
-          default: "title default",
-          fr: "title fr",
+      isSerializable: false,
+    });
+    var survey = new Survey.Survey({
+      locale: "de",
+      elements: [
+        {
+          type: "text",
+          name: "question1",
+          title: {
+            de: "title de",
+            fr: "title fr",
+          },
         },
-      },
-    ],
-  });
-  var translation = new Translation(survey);
-  assert.equal(translation.locales.length, 3, "There are 3 locales");
-  Survey.Serializer.removeProperty("page", "pages");
-});
+        {
+          type: "text",
+          name: "question2",
+          title: {
+            default: "title default",
+            de: "title de",
+            fr: "title fr",
+          },
+        },
+        {
+          type: "text",
+          name: "question3",
+          title: {
+            default: "title default",
+            fr: "title fr",
+          },
+        },
+      ],
+    });
+    var translation = new Translation(survey);
+    assert.equal(translation.locales.length, 3, "There are 3 locales");
+    Survey.Serializer.removeProperty("page", "pages");
+  }
+);

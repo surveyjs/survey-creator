@@ -501,9 +501,7 @@ export class Translation implements ITranslationLocales {
     return res;
   }
   public get defaultLocale(): string {
-    return !!this.survey.locale
-      ? this.survey.locale
-      : Survey.surveyLocalization.defaultLocale;
+    return Survey.surveyLocalization.defaultLocale;
   }
   public getLocaleName(loc: string) {
     return editorLocalization.getLocaleName(loc, this.defaultLocale);
