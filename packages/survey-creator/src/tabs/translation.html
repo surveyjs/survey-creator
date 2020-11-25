@@ -16,14 +16,14 @@
           <button
             class="btn sv-btn btn-primary"
             type="button"
-            data-bind="visible:$data.koCanMergeLocaleWithDefault, text:$data.koMergeLocaleWithDefaultText, click:$data.koMergeLocaleWithDefault"
+            data-bind="visible:$data.koCanMergeLocaleWithDefault() && !koReadOnly(), text:$data.koMergeLocaleWithDefaultText, click:$data.koMergeLocaleWithDefault"
           ></button>
           <button
             class="btn sv-btn btn-primary"
             type="button"
             data-bind="text:$data.exportToCSVText, click:$data.koExportToCSVFile"
           ></button>
-          <button
+          <button data-bind="visible: !koReadOnly()"
             class="btn sv-btn btn-primary"
             type="button"
             onclick="this.getElementsByTagName('input')[0].click();"

@@ -2,7 +2,7 @@
   <textarea
     class="form-control"
     style="width: 100%;"
-    data-bind="visible: $data.koVisible, value:item.koValue($data.locale), attr: {placeholder: !$data.locale? item.defaultValue : ''}"
+    data-bind="visible: $data.koVisible, disable: item.koReadOnly, value:item.koValue($data.locale), attr: {placeholder: !$data.locale? item.defaultValue : ''}"
   ></textarea>
 </script>
 <div
