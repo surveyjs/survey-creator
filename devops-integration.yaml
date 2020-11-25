@@ -30,7 +30,7 @@ steps:
 
 - task: NodeTool@0
   inputs:
-    versionSpec: '12.x'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -56,6 +56,19 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/'
+    Contents: 'version.txt'
+    TargetFolder: '$(Build.SourcesDirectory)/'
+    OverWrite: true
+  displayName: 'Copy Build Artifact - SurveyJSVersion File'
+
+- powershell: |
+    $version = Get-Content $(Build.SourcesDirectory)/version.txt
+    Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+  displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'specific'
@@ -73,6 +86,10 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
     OverWrite: true
+
+- powershell: |
+   npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'npm run release specific version'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
