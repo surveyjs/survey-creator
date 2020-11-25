@@ -21,6 +21,7 @@ export class TranslationItemBase {
 export class TranslationItem extends TranslationItemBase {
   private values: Survey.HashTable<ko.Observable<string>>;
   public customText: string;
+  public koReadOnly: any = ko.observable(false);
   constructor(
     public name: string,
     public locString: Survey.LocalizableString,
@@ -29,6 +30,9 @@ export class TranslationItem extends TranslationItemBase {
     private context: any
   ) {
     super(name);
+    if (!!this.translation) {
+      this.koReadOnly = this.translation.koReadOnly;
+    }
     this.values = {};
   }
   public get text() {
@@ -81,6 +85,7 @@ export class TranslationItem extends TranslationItemBase {
 export interface ITranslationLocales {
   koLocales: any;
   showAllStrings: boolean;
+  koReadOnly: any;
   getLocaleName(loc: string): string;
   availableTranlationsChangedCallback: () => void;
   tranlationChangedCallback: (
@@ -377,7 +382,11 @@ export class Translation implements ITranslationLocales {
    */
   public toolbarItems = ko.observableArray<IToolbarItem>();
 
-  constructor(survey: Survey.Survey, showAllStrings: boolean = false) {
+  constructor(
+    survey: Survey.Survey,
+    showAllStrings: boolean = false,
+    public koReadOnly = ko.computed(() => false)
+  ) {
     this.koLocales = ko.observableArray([
       {
         locale: "",
@@ -752,7 +761,11 @@ ko.components.register("survey-translation", {
     createViewModel: (params, componentInfo) => {
       let creator: SurveyCreator = params.creator;
 
-      let model = new Translation(creator.createSurvey({}, "translation"));
+      let model = new Translation(
+        creator.createSurvey({}, "translation"),
+        false,
+        ko.computed(() => creator.readOnly)
+      );
       model.importFinishedCallback = function () {
         creator.onTranslationImported.fire(self, {});
       };

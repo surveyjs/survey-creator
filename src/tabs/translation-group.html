@@ -6,7 +6,7 @@
                 <th></th>
                 <!-- ko foreach: $data.koLocales -->
                 <th
-                    data-bind="visible: $data.koVisible, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}">
+                    data-bind="visible: $data.koVisible, disable: item.koReadOnly, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}">
                 </th>
                 <!-- /ko -->
             </tr>
