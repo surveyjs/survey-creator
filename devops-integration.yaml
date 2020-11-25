@@ -56,6 +56,7 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
 
+# npm run release with version
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/'
@@ -68,6 +69,11 @@ steps:
     $version = Get-Content $(Build.SourcesDirectory)/version.txt
     Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
   displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+
+- powershell: |
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'npm run release specific version'
+#####################################################
 
 - task: DownloadBuildArtifacts@0
   inputs:
@@ -86,10 +92,6 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
     OverWrite: true
-
-- powershell: |
-   npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'npm run release specific version'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
