@@ -33,6 +33,12 @@ steps:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
 
+- powershell: |
+    $env:GIT_REDIRECT_STDERR = '2>&1'
+    git config --global user.email "kurmanov.work@gmail.com"
+    git config --global user.name "dmitrykurmanov"
+  displayName: 'set up Git config'
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
@@ -126,9 +132,6 @@ steps:
 # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
 - powershell: |
     cd $(Build.SourcesDirectory)/service
-    $env:GIT_REDIRECT_STDERR = '2>&1'
-    git config --global user.email "kurmanov.work@gmail.com"
-    git config --global user.name "dmitrykurmanov"
     git checkout master
     git pull origin master
     git fetch --tags --force
