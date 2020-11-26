@@ -525,6 +525,30 @@ QUnit.test("Question editor definition: getTabs", function (assert) {
   assert.equal(tabs[2].name, "logic", "The third tab");
 });
 
+QUnit.test(
+  "Add custom property into choices category, Bug#1018",
+  function (assert) {
+    Survey.Serializer.addProperty("selectbase", {
+      name: "testProperty:boolean",
+      category: "choices",
+    });
+    var question = new Survey.QuestionRadiogroup("q1");
+    var properties = new SurveyQuestionProperties(question, null);
+    var tab = properties.getTabByName("choices");
+    assert.equal(
+      tab.properties[0].name,
+      "choices",
+      "The first property is choices"
+    );
+    assert.notEqual(
+      tab.properties[1].name,
+      "choices",
+      "The second property is not choices"
+    );
+    Survey.Serializer.removeProperty("selectbase", "testProperty");
+  }
+);
+
 QUnit.test("Question editor: custom errors", function (assert) {
   var question = new Survey.QuestionText("q1");
   var editor = new SurveyCreator();

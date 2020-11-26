@@ -172,7 +172,7 @@ export class SurveyElementEditorContentModel {
   }
   public setParentList(parentList: Array<Survey.Base>) {
     var edProperties = this.getAllEditorProperties();
-    for(var i = 0; i < edProperties.length; i ++) {
+    for (var i = 0; i < edProperties.length; i++) {
       edProperties[i].editor.parentList = parentList;
     }
   }
@@ -655,7 +655,10 @@ export class SurveyQuestionProperties {
     for (var i = definitions.length - 1; i >= 0; i--) {
       var defItem = definitions[i];
       for (var j = !!defItem.tabs ? defItem.tabs.length - 1 : -1; j >= 0; j--) {
-        this.addPropertyIntoTab(defItem.tabs[j], true);
+        if (addedProperties.indexOf(defItem.tabs[j].name) > -1) continue;
+        if (this.addPropertyIntoTab(defItem.tabs[j], true)) {
+          addedProperties.push(defItem.tabs[j].name);
+        }
       }
       for (
         var j = !!defItem.properties ? defItem.properties.length - 1 : -1;
@@ -682,7 +685,10 @@ export class SurveyQuestionProperties {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
   }
-  private addPropertyIntoTab(defProperty: any, isTab: boolean = false) {
+  private addPropertyIntoTab(
+    defProperty: any,
+    isTab: boolean = false
+  ): boolean {
     if (isTab) {
       let tab = this.getTabOrCreate(defProperty.name);
       if (defProperty.index > 0) {
@@ -698,13 +704,13 @@ export class SurveyQuestionProperties {
     var isString = typeof defProperty == "string";
     var name = !isString ? defProperty.name : defProperty;
     var propRes = this.propertiesHash[name];
-    if (!propRes) return;
-    if (!isString && defProperty.visible === false) return;
+    if (!propRes) return false;
+    if (!isString && defProperty.visible === false) return false;
     if (
       !propRes.visible &&
       (isString || (!isString && defProperty.visible !== true))
     )
-      return;
+      return false;
     var tabName = isTab ? defProperty.name : "general";
     if (!isTab && !isString && !!defProperty.tab) {
       tabName = defProperty.tab;
@@ -718,6 +724,7 @@ export class SurveyQuestionProperties {
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
     tab.properties.unshift(propertyDefinition);
+    return true;
   }
   private movePropertiesToNextProperties(
     properties: Array<SurveyQuestionEditorPropertyDefinition>
