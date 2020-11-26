@@ -71,6 +71,7 @@ steps:
   displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
 
 - powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
   displayName: 'npm run release specific version'
 #####################################################
