@@ -144,10 +144,10 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/build'
-    targetFolder: $(Build.ArtifactStagingDirectory)/build
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorBuild/build
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorBuild/'
     ArtifactName: 'SurveyJSCreatorBuild'
     publishLocation: 'Container'
