@@ -9,6 +9,9 @@ export interface ICreatorOptions {
   [index: string]: any;
 }
 
+/**
+ * Base class for Survey Creator.
+ */
 export class CreatorBase<T> {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
@@ -486,8 +489,7 @@ export class CreatorBase<T> {
     return survey;
   }
 
-  protected initSurveyWithJSON(json: any, clearState: boolean) {
-  }
+  protected initSurveyWithJSON(json: any, clearState: boolean) {}
 
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
@@ -503,5 +505,4 @@ export class CreatorBase<T> {
       this.initSurveyWithJSON(val, true);
     }
   }
-
 }
