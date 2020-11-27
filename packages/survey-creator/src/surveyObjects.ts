@@ -17,7 +17,10 @@ export class SurveyObjects {
   constructor(
     public koObjects: any,
     public koSelected: any,
-    private getObjectDisplayName: (obj: Survey.Base) => string = null
+    private getObjectDisplayName: (
+      obj: Survey.Base,
+      reason: string
+    ) => string = null
   ) {}
   public get survey(): Survey.Survey {
     return this.surveyValue;
@@ -202,7 +205,7 @@ export class SurveyObjects {
       intend += SurveyObjects.intend;
     }
     var text = !!this.getObjectDisplayName
-      ? this.getObjectDisplayName(item.value)
+      ? this.getObjectDisplayName(item.value, "property-grid")
       : SurveyHelper.getObjectName(item.value, false);
     if (this.getItemTextCallback) {
       text = this.getItemTextCallback(item.value, text);

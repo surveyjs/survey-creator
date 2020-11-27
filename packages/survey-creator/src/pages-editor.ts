@@ -57,7 +57,7 @@ export class PagesEditor {
     return this.koSurvey().pages;
   }
   getDisplayText = (page: Survey.PageModel) => {
-    return this.creator.getObjectDisplayName(page);
+    return this.creator.getObjectDisplayName(page, "page-tabs");
   };
 
   public blockPagesRebuilt = ko.observable(false);

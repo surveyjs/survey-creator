@@ -589,6 +589,15 @@ export class SurveyPropertyConditionEditor
         this.addConditionQuestionsHash[res[i].name] = res[i].question;
       }
     }
+    if (!!this.options) {
+      for (var i = 0; i < res.length; i++) {
+        res[i].text = this.options.getObjectDisplayName(
+          res[i].question,
+          "condition",
+          res[i].text
+        );
+      }
+    }
     this.addCalculatedValues(res);
     return res;
   }
@@ -887,24 +896,26 @@ export class SurveyPropertyConditionEditor
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("condition", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(
-    property,
-    "condition",
-    "createCondition"
-  );
-});
-SurveyPropertyEditorFactory.registerEditor("expression", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyConditionEditor(
-    property,
-    "expression",
-    "parseExpression"
-  );
-});
+SurveyPropertyEditorFactory.registerEditor(
+  "condition",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyPropertyConditionEditor(
+      property,
+      "condition",
+      "createCondition"
+    );
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "expression",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyPropertyConditionEditor(
+      property,
+      "expression",
+      "parseExpression"
+    );
+  }
+);
 
 SurveyPropertyEditorFactory.registerTypeForCellEditing("expression", "string");
 SurveyPropertyEditorFactory.registerTypeForCellEditing("condition", "string");

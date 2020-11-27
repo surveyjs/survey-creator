@@ -46,6 +46,7 @@ export class CreatorBase<T> {
    * Use this event, if you want custom display name for objects.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.reason the name of the UI that requests the object display name
    * <br/> options.displayName change this property to show your custom display name for the object
    * @see showObjectTitles
    */
@@ -469,9 +470,15 @@ export class CreatorBase<T> {
     return null;
   }
 
-  public getObjectDisplayName(obj: Survey.Base): string {
-    var displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
-    var options = { obj: obj, displayName: displayName };
+  public getObjectDisplayName(
+    obj: Survey.Base,
+    reason: string,
+    displayName: string = undefined
+  ): string {
+    if (!displayName) {
+      displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
+    }
+    var options = { obj: obj, displayName: displayName, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }

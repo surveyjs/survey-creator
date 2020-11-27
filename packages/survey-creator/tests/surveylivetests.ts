@@ -5,10 +5,10 @@ import { SurveyCreator } from "../src/editor";
 export default QUnit.module("surveyLiveTests");
 
 var surveyCreator = {
-  createSurvey: json => new Survey.Survey(json)
+  createSurvey: (json) => new Survey.Survey(json),
 };
 
-QUnit.test("Create survey", function(assert) {
+QUnit.test("Create survey", function (assert) {
   var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({ questions: [{ type: "text", name: "q1" }] });
   assert.equal(
@@ -18,14 +18,14 @@ QUnit.test("Create survey", function(assert) {
   );
 });
 
-QUnit.test("koPages, koActive", function(assert) {
+QUnit.test("koPages, koActive", function (assert) {
   var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({
     pages: [
       { name: "page1", questions: [{ type: "text", name: "q1" }] },
       { name: "page2", questions: [{ type: "text", name: "q2" }] },
-      { name: "page3", questions: [{ type: "text", name: "q3" }] }
-    ]
+      { name: "page3", questions: [{ type: "text", name: "q3" }] },
+    ],
   });
   test.show();
   assert.equal(test.koPages().length, 3, "There are 3 pages");
@@ -53,14 +53,14 @@ QUnit.test("koPages, koActive", function(assert) {
   assert.equal(test.koPages()[2].koActive(), true, "The third page is active");
 });
 
-QUnit.test("koPages, visibility", function(assert) {
+QUnit.test("koPages, visibility", function (assert) {
   var test = new SurveyLiveTester(surveyCreator);
   test.setJSON({
     pages: [
       { questions: [{ type: "text", name: "q1" }] },
       { questions: [{ type: "text", name: "q2", visible: false }] },
-      { questions: [{ type: "text", name: "q3" }] }
-    ]
+      { questions: [{ type: "text", name: "q3" }] },
+    ],
   });
   var q = test.survey.getQuestionByName("q2");
   test.show();
@@ -90,13 +90,13 @@ QUnit.test("koPages, visibility", function(assert) {
 
 QUnit.test(
   "Reset options on show, Bug# https://surveyjs.answerdesk.io/ticket/details/T2147",
-  function(assert) {
+  function (assert) {
     var test = new SurveyLiveTester(surveyCreator);
     test.setJSON({
       elements: [
         { type: "text", name: "q1" },
-        { type: "text", name: "q2", visible: false }
-      ]
+        { type: "text", name: "q2", visible: false },
+      ],
     });
     test.show();
     var q = test.survey.getQuestionByName("q2");
@@ -118,31 +118,31 @@ QUnit.test(
   }
 );
 
-QUnit.test("Use title for pages", function(assert) {
+QUnit.test("Use title for pages", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = {
     pages: [
       {
         name: "p1",
         title: "First Page",
-        elements: [{ type: "text", name: "q1" }]
+        elements: [{ type: "text", name: "q1" }],
       },
       {
         name: "p2",
         title: "Second Page",
-        elements: [{ type: "text", name: "q2" }]
-      }
-    ]
+        elements: [{ type: "text", name: "q2" }],
+      },
+    ],
   };
   assert.equal(creator.survey.pages.length, 2, "There are two pages in survey");
   creator.showObjectTitles = true;
-  creator.onGetObjectDisplayName.add(function(sender, options) {
+  creator.onGetObjectDisplayName.add(function (sender, options) {
     if (options.obj.name == "p2") options.displayName = "My Second Page";
   });
   creator.showTestSurvey();
   var test = new SurveyLiveTester(creator);
-  test.onGetObjectDisplayName = obj => {
-    return creator.getObjectDisplayName(obj);
+  test.onGetObjectDisplayName = (obj) => {
+    return creator.getObjectDisplayName(obj, "survey-tester");
   };
   test.setJSON(creator.JSON);
   test.show(creator);
@@ -164,15 +164,15 @@ function getLiveSurveyByCreator(creator: SurveyCreator): SurveyLiveTester {
 }
 QUnit.test(
   "showDefaultLanguageInTestSurveyTab: auto, true, false, all",
-  function(assert) {
+  function (assert) {
     var creator = new SurveyCreator();
     creator.JSON = {
       questions: [
         {
           type: "text",
-          name: "q1"
-        }
-      ]
+          name: "q1",
+        },
+      ],
     };
     assert.equal(
       creator.showDefaultLanguageInTestSurveyTab,
@@ -201,9 +201,9 @@ QUnit.test(
         {
           type: "text",
           name: "q1",
-          title: { default: "1", de: "2" }
-        }
-      ]
+          title: { default: "1", de: "2" },
+        },
+      ],
     };
     test = getLiveSurveyByCreator(creator);
     assert.equal(

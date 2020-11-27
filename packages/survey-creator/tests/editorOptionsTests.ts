@@ -12,7 +12,12 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   useTabsInElementEditor: boolean;
   readOnly: boolean;
   propertyName: string;
-  getObjectDisplayName(obj: Survey.Base): string {
+  getObjectDisplayName(
+    obj: Survey.Base,
+    reason: string,
+    displayName: string
+  ): string {
+    if (!!displayName) return displayName;
     return obj["name"];
   }
   showTitlesInExpressions: boolean;

@@ -443,12 +443,17 @@ QUnit.test(
   }
 );
 
-QUnit.test("generateValidJSON should be true by default, bug #135", function (
-  assert
-) {
-  var editor = new SurveyCreator(null, {});
-  assert.equal(editor.koGenerateValidJSON(), true, "The default value is true");
-});
+QUnit.test(
+  "generateValidJSON should be true by default, bug #135",
+  function (assert) {
+    var editor = new SurveyCreator(null, {});
+    assert.equal(
+      editor.koGenerateValidJSON(),
+      true,
+      "The default value is true"
+    );
+  }
+);
 
 /* TODO refactor
 QUnit.test("onModified options", function(assert) {
@@ -648,7 +653,10 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function (assert) {
 
   assert.equal(1, creator.survey.pages.length);
 
-  assert.equal(pagesEditor.model.selectedPage().name, creator.survey.pages[0].name);
+  assert.equal(
+    pagesEditor.model.selectedPage().name,
+    creator.survey.pages[0].name
+  );
   assert.equal(pagesEditor.model.pagesForSelection().length, 2);
   assert.equal(creator.survey.currentPage.name, creator.survey.pages[0].name);
 
@@ -657,49 +665,71 @@ QUnit.test("pagesEditor addNewPage in the dropdown", function (assert) {
   );
 
   assert.equal(pagesEditor.model.pagesForSelection().length, 3);
-  assert.equal(creator.survey.pages[1].name, pagesEditor.model.selectedPage().name);
+  assert.equal(
+    creator.survey.pages[1].name,
+    pagesEditor.model.selectedPage().name
+  );
   assert.equal(creator.survey.currentPage.name, creator.survey.pages[1].name);
 });
 
-QUnit.test("pagesEditor selectedPage keep currantPage in survey - Survey page shows wrong content after page reordering via drag/drop #1009", function (assert) {
-  var jsonText = JSON.stringify({
-    pages: [
-      {
-        name: "page1",
-        elements: [],
-      },
-      {
-        name: "page2",
-        elements: [],
-      },
-    ],
-  });
-  var creator = new SurveyCreator();
-  creator.text = jsonText;
+QUnit.test(
+  "pagesEditor selectedPage keep currantPage in survey - Survey page shows wrong content after page reordering via drag/drop #1009",
+  function (assert) {
+    var jsonText = JSON.stringify({
+      pages: [
+        {
+          name: "page1",
+          elements: [],
+        },
+        {
+          name: "page2",
+          elements: [],
+        },
+      ],
+    });
+    var creator = new SurveyCreator();
+    creator.text = jsonText;
 
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
+    var pagesEditor = new PagesEditorViewModel(
+      creator.pagesEditorModel,
+      document.createElement("div")
+    );
 
-  assert.equal(2, creator.survey.pages.length);
+    assert.equal(2, creator.survey.pages.length);
 
-  const movedPage = creator.survey.pages[0];
-  creator.selectedElement = movedPage;
+    const movedPage = creator.survey.pages[0];
+    creator.selectedElement = movedPage;
 
-  assert.equal(pagesEditor.model.selectedPage().name, movedPage.name, "initial selection - page editor selectedPage");
-  assert.equal(creator.survey.currentPage.name, movedPage.name, "initial selection - survey.currentPage");
+    assert.equal(
+      pagesEditor.model.selectedPage().name,
+      movedPage.name,
+      "initial selection - page editor selectedPage"
+    );
+    assert.equal(
+      creator.survey.currentPage.name,
+      movedPage.name,
+      "initial selection - survey.currentPage"
+    );
 
-  // Emulate unsync during drag/drop pages
-  creator.pagesEditorModel.blockPagesRebuilt(true);
-  SurveyHelper.moveItemInArray(pagesEditor.model.pages, movedPage, 1);
-  creator.pagesEditorModel.blockPagesRebuilt(false);
+    // Emulate unsync during drag/drop pages
+    creator.pagesEditorModel.blockPagesRebuilt(true);
+    SurveyHelper.moveItemInArray(pagesEditor.model.pages, movedPage, 1);
+    creator.pagesEditorModel.blockPagesRebuilt(false);
 
-  pagesEditor.model.selectedPage(movedPage);
+    pagesEditor.model.selectedPage(movedPage);
 
-  assert.equal(pagesEditor.model.selectedPage().name, movedPage.name, "page editor selectedPage after selection");
-  assert.equal(creator.survey.currentPage.name, movedPage.name, "survey.currentPage after selection");
-});
+    assert.equal(
+      pagesEditor.model.selectedPage().name,
+      movedPage.name,
+      "page editor selectedPage after selection"
+    );
+    assert.equal(
+      creator.survey.currentPage.name,
+      movedPage.name,
+      "survey.currentPage after selection"
+    );
+  }
+);
 
 QUnit.test("pagesEditor.readOnly", function (assert) {
   var creator = new SurveyCreator();
@@ -853,26 +883,27 @@ QUnit.test("Validate Selected Element Errors", function (assert) {
   titleProp.isRequired = oldIsRequired;
 });
 
-QUnit.test("Update conditions/expressions on changing question.name", function (
-  assert
-) {
-  var editor = new SurveyCreator();
-  editor.survey.currentPage.addNewQuestion("text", "question1");
-  editor.survey.currentPage.addNewQuestion("text", "question2");
-  var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
-  var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
-  q2.visibleIf = "{question1} = 1";
-  editor.propertyGridObjectEditorModel.selectedObject = q1;
-  var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
-    "name"
-  ).editor;
-  namePropertyEditor.koValue("myUpdatedQuestion1");
-  assert.equal(
-    q2.visibleIf,
-    "{myUpdatedQuestion1} = 1",
-    "Update the condition accordingly"
-  );
-});
+QUnit.test(
+  "Update conditions/expressions on changing question.name",
+  function (assert) {
+    var editor = new SurveyCreator();
+    editor.survey.currentPage.addNewQuestion("text", "question1");
+    editor.survey.currentPage.addNewQuestion("text", "question2");
+    var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
+    var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
+    q2.visibleIf = "{question1} = 1";
+    editor.propertyGridObjectEditorModel.selectedObject = q1;
+    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
+      "name"
+    ).editor;
+    namePropertyEditor.koValue("myUpdatedQuestion1");
+    assert.equal(
+      q2.visibleIf,
+      "{myUpdatedQuestion1} = 1",
+      "Update the condition accordingly"
+    );
+  }
+);
 
 QUnit.test(
   "Update conditions/expressions on changing question.valueName",
@@ -1102,120 +1133,122 @@ QUnit.test("show property grid on Edit", function (assert) {
   );
 });
 
-QUnit.test("hideAdvancedSettings and designer containers visibility", function (
-  assert
-) {
-  var editor = new SurveyCreator();
+QUnit.test(
+  "hideAdvancedSettings and designer containers visibility",
+  function (assert) {
+    var editor = new SurveyCreator();
 
-  // editor.showToolbox = "left";
-  // editor.showPropertyGrid = "right";
-  // editor.hideAdvancedSettings = false;
-  assert.equal(
-    editor.hideAdvancedSettings,
-    false,
-    "Make sure that property grid is shown default"
-  );
-  assert.equal(
-    editor.leftContainerVisible(),
-    true,
-    "Make sure right container is visible default"
-  );
-  assert.equal(
-    editor.rightContainerVisible(),
-    true,
-    "Make sure right container is visible default"
-  );
+    // editor.showToolbox = "left";
+    // editor.showPropertyGrid = "right";
+    // editor.hideAdvancedSettings = false;
+    assert.equal(
+      editor.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown default"
+    );
+    assert.equal(
+      editor.leftContainerVisible(),
+      true,
+      "Make sure right container is visible default"
+    );
+    assert.equal(
+      editor.rightContainerVisible(),
+      true,
+      "Make sure right container is visible default"
+    );
 
-  // editor.showToolbox = "left";
-  // editor.showPropertyGrid = "right";
-  editor.hideAdvancedSettings = true;
-  assert.equal(
-    editor.hideAdvancedSettings,
-    true,
-    "Make sure that property grid is hidden"
-  );
-  assert.equal(
-    editor.leftContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-  assert.equal(
-    editor.rightContainerVisible(),
-    false,
-    "Make sure right container is hidden"
-  );
+    // editor.showToolbox = "left";
+    // editor.showPropertyGrid = "right";
+    editor.hideAdvancedSettings = true;
+    assert.equal(
+      editor.hideAdvancedSettings,
+      true,
+      "Make sure that property grid is hidden"
+    );
+    assert.equal(
+      editor.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    assert.equal(
+      editor.rightContainerVisible(),
+      false,
+      "Make sure right container is hidden"
+    );
 
-  // editor.showToolbox = "left";
-  // editor.showPropertyGrid = "right";
-  editor.hideAdvancedSettings = false;
-  assert.equal(
-    editor.hideAdvancedSettings,
-    false,
-    "Make sure that property grid is shown"
-  );
-  assert.equal(
-    editor.leftContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-  assert.equal(
-    editor.rightContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
+    // editor.showToolbox = "left";
+    // editor.showPropertyGrid = "right";
+    editor.hideAdvancedSettings = false;
+    assert.equal(
+      editor.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown"
+    );
+    assert.equal(
+      editor.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    assert.equal(
+      editor.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
 
-  editor.showToolbox = "right";
-  // editor.showPropertyGrid = "right";
-  // editor.hideAdvancedSettings = false;
-  assert.equal(
-    editor.hideAdvancedSettings,
-    false,
-    "Make sure that property grid is shown"
-  );
-  assert.equal(
-    editor.leftContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-  assert.equal(
-    editor.rightContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
+    editor.showToolbox = "right";
+    // editor.showPropertyGrid = "right";
+    // editor.hideAdvancedSettings = false;
+    assert.equal(
+      editor.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown"
+    );
+    assert.equal(
+      editor.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    assert.equal(
+      editor.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
 
-  // editor.showToolbox = "right";
-  // editor.showPropertyGrid = "right";
-  editor.hideAdvancedSettings = true;
-  assert.equal(
-    editor.hideAdvancedSettings,
-    true,
-    "Make sure that property grid is hidden"
-  );
-  assert.equal(
-    editor.leftContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-  assert.equal(
-    editor.rightContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-});
+    // editor.showToolbox = "right";
+    // editor.showPropertyGrid = "right";
+    editor.hideAdvancedSettings = true;
+    assert.equal(
+      editor.hideAdvancedSettings,
+      true,
+      "Make sure that property grid is hidden"
+    );
+    assert.equal(
+      editor.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    assert.equal(
+      editor.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+  }
+);
 
-QUnit.test("Show toolbox in right container and hide property grid", function (
-  assert
-) {
-  var creator = new SurveyCreator();
-  creator.showPropertyGrid = false;
-  creator.showToolbox = "right";
-  assert.deepEqual(creator.leftContainer, [], "left container is empty");
-  assert.deepEqual(
-    creator.rightContainer,
-    ["toolbox"],
-    "right container contains toolbox"
-  );
-});
+QUnit.test(
+  "Show toolbox in right container and hide property grid",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.showPropertyGrid = false;
+    creator.showToolbox = "right";
+    assert.deepEqual(creator.leftContainer, [], "left container is empty");
+    assert.deepEqual(
+      creator.rightContainer,
+      ["toolbox"],
+      "right container contains toolbox"
+    );
+  }
+);
 
 QUnit.test("Undo-redo on showing modal window", function (assert) {
   var creator = new SurveyCreator();
@@ -1335,53 +1368,54 @@ QUnit.test("pageEditMode property", function (assert) {
   );
 });
 
-QUnit.test("The onModified event is called on property changed", function (
-  assert
-) {
-  var creator = new SurveyCreator(undefined);
-  var counter;
-  creator.onModified.add(() => {
-    counter++;
-  });
-  var survey = creator.survey;
+QUnit.test(
+  "The onModified event is called on property changed",
+  function (assert) {
+    var creator = new SurveyCreator(undefined);
+    var counter;
+    creator.onModified.add(() => {
+      counter++;
+    });
+    var survey = creator.survey;
 
-  survey.addNewPage("p");
-  var question = <Survey.QuestionRadiogroupModel>(
-    survey.pages[0].addNewQuestion("radiogroup", "q1")
-  );
-  var property = Survey.Serializer.findProperty("question", "title");
-  var propertyEditor = new SurveyObjectProperty(property, creator);
-  propertyEditor.object = question;
-  var editor: any = propertyEditor.editor;
+    survey.addNewPage("p");
+    var question = <Survey.QuestionRadiogroupModel>(
+      survey.pages[0].addNewQuestion("radiogroup", "q1")
+    );
+    var property = Survey.Serializer.findProperty("question", "title");
+    var propertyEditor = new SurveyObjectProperty(property, creator);
+    propertyEditor.object = question;
+    var editor: any = propertyEditor.editor;
 
-  counter = 0;
-  editor.koValue("some title");
-  assert.equal(counter, 1, "1 modification - title changed");
+    counter = 0;
+    editor.koValue("some title");
+    assert.equal(counter, 1, "1 modification - title changed");
 
-  creator.undoRedoManager.undo();
-  assert.equal(counter, 2, "2 modification un-done");
+    creator.undoRedoManager.undo();
+    assert.equal(counter, 2, "2 modification un-done");
 
-  creator.undoRedoManager.redo();
-  assert.equal(counter, 3, "3 modification re-done");
+    creator.undoRedoManager.redo();
+    assert.equal(counter, 3, "3 modification re-done");
 
-  property = Survey.Serializer.findProperty("selectbase", "choices");
-  propertyEditor = new SurveyObjectProperty(property, creator);
-  propertyEditor.object = question;
-  editor = propertyEditor.editor;
+    property = Survey.Serializer.findProperty("selectbase", "choices");
+    propertyEditor = new SurveyObjectProperty(property, creator);
+    propertyEditor.object = question;
+    editor = propertyEditor.editor;
 
-  counter = 0;
-  editor.onAddClick();
-  assert.equal(counter, 1, "1 modification - after add");
+    counter = 0;
+    editor.onAddClick();
+    assert.equal(counter, 1, "1 modification - after add");
 
-  creator.undoRedoManager.undo();
-  assert.equal(counter, 2, "2 modification un-done");
+    creator.undoRedoManager.undo();
+    assert.equal(counter, 2, "2 modification un-done");
 
-  editor.onDeleteClick(editor.originalValue[0]);
-  assert.equal(counter, 3, "3 modification - after delete");
+    editor.onDeleteClick(editor.originalValue[0]);
+    assert.equal(counter, 3, "3 modification - after delete");
 
-  editor.onClearClick();
-  assert.equal(counter, 4, "4 modification - after clear");
-});
+    editor.onClearClick();
+    assert.equal(counter, 4, "4 modification - after clear");
+  }
+);
 
 QUnit.test(
   "Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657",
@@ -1681,60 +1715,105 @@ QUnit.test("creator.onConditionQuestionsGetList, Bug#957", function (assert) {
   assert.equal(editorItem.nameQuestion.choices.length, 1, "One text question");
 });
 
-QUnit.test("creator.onAddQuestion and undo-redo manager, Bug#972", function (
-  assert
-) {
-  var creator = new SurveyCreator();
-  creator.onQuestionAdded.add(function (sender, options) {
-    options.question.title = "new title";
-  });
-  creator.JSON = {};
-  creator.survey.currentPage.addNewQuestion("text", "q1");
-  creator.survey.currentPage.addNewQuestion("text", "q2");
-  creator.undo();
-  creator.undo();
-  assert.equal(
-    creator.survey.getAllQuestions().length,
-    0,
-    "We added two questions and then undo adding two questions"
-  );
-});
-QUnit.test("creator.onAddPage and undo-redo manager, Bug#972", function (
-  assert
-) {
-  var creator = new SurveyCreator();
-  creator.onPageAdded.add(function (sender, options) {
-    options.page.title = "new title";
-  });
-  creator.JSON = {};
-  creator.survey.addNewPage("p2");
-  creator.survey.addNewPage("p3");
-  creator.undo();
-  creator.undo();
-  assert.equal(
-    creator.survey.pages.length,
-    1,
-    "We added two pages and then undo adding two pages"
-  );
-});
-QUnit.test("creator.onAddPanel and undo-redo manager, Bug#972", function (
-  assert
-) {
-  var creator = new SurveyCreator();
-  creator.onPanelAdded.add(function (sender, options) {
-    options.panel.title = "new title";
-  });
-  creator.JSON = {};
-  creator.survey.currentPage.addNewPanel("panel1");
-  creator.survey.currentPage.addNewPanel("panel2");
-  creator.undo();
-  creator.undo();
-  assert.equal(
-    creator.survey.getAllPanels().length,
-    0,
-    "We added two panels and then undo adding two panels"
-  );
-});
+QUnit.test(
+  "creator.onGetObjectDisplayName, change visible name for objects",
+  function (assert) {
+    var creator = new SurveyCreator();
+    var reason = "";
+    creator.onGetObjectDisplayName.add(function (sender, options) {
+      reason = options.reason;
+      options.displayName = options.obj.title + " [" + options.obj.name + "]";
+    });
+    creator.JSON = {
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", title: "Question 2", type: "text" },
+        { name: "q3", title: "Question 3", type: "dropdown" },
+        { name: "q4", title: "Question 4", type: "checkbox" },
+        { name: "q5", title: "Question 5", type: "radiogroup" },
+      ],
+    };
+    var question = creator.survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.options = creator;
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    var editorItem = editor.koEditorItems()[0];
+    assert.ok(editorItem, "Editor item is created");
+    var choices = editorItem.nameQuestion.choices;
+    assert.equal(
+      reason,
+      "condition",
+      "event fired with correct options.reason"
+    );
+    assert.equal(choices.length, 4, "There are 4 questions");
+    assert.equal(
+      choices[0].text,
+      "Question 2 [q2]",
+      "onGetObjectDisplayName was used correctly"
+    );
+  }
+);
+
+QUnit.test(
+  "creator.onAddQuestion and undo-redo manager, Bug#972",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.onQuestionAdded.add(function (sender, options) {
+      options.question.title = "new title";
+    });
+    creator.JSON = {};
+    creator.survey.currentPage.addNewQuestion("text", "q1");
+    creator.survey.currentPage.addNewQuestion("text", "q2");
+    creator.undo();
+    creator.undo();
+    assert.equal(
+      creator.survey.getAllQuestions().length,
+      0,
+      "We added two questions and then undo adding two questions"
+    );
+  }
+);
+QUnit.test(
+  "creator.onAddPage and undo-redo manager, Bug#972",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.onPageAdded.add(function (sender, options) {
+      options.page.title = "new title";
+    });
+    creator.JSON = {};
+    creator.survey.addNewPage("p2");
+    creator.survey.addNewPage("p3");
+    creator.undo();
+    creator.undo();
+    assert.equal(
+      creator.survey.pages.length,
+      1,
+      "We added two pages and then undo adding two pages"
+    );
+  }
+);
+QUnit.test(
+  "creator.onAddPanel and undo-redo manager, Bug#972",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.onPanelAdded.add(function (sender, options) {
+      options.panel.title = "new title";
+    });
+    creator.JSON = {};
+    creator.survey.currentPage.addNewPanel("panel1");
+    creator.survey.currentPage.addNewPanel("panel2");
+    creator.undo();
+    creator.undo();
+    assert.equal(
+      creator.survey.getAllPanels().length,
+      0,
+      "We added two panels and then undo adding two panels"
+    );
+  }
+);
 
 QUnit.test(
   "creator.onGetObjectTextInPropertyGrid event, update on property changing",
@@ -1746,6 +1825,42 @@ QUnit.test(
       }
       if (!!options.obj.description) {
         options.text = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [{ type: "text", name: "q1", title: "question1" }],
+    };
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..question1",
+      "Default value is correct"
+    );
+    var question = creator.survey.getAllQuestions()[0];
+    creator.selectedElement = question;
+    question.description = "New Title";
+    creator.propertyGridObjectEditorModel.onPropertyChanged(
+      question,
+      Survey.Serializer.findProperty("question", "description"),
+      ""
+    );
+    assert.equal(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
+
+QUnit.test(
+  "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  function (assert) {
+    var creator = new SurveyCreatorTester();
+    creator.onGetObjectDisplayName.add(function (sender, options) {
+      if (!!options.obj.title) {
+        options.displayName = options.obj.title;
+      }
+      if (!!options.obj.description) {
+        options.displayName = options.obj.description;
       }
     });
     creator.JSON = {

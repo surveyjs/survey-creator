@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import * as Survey from "survey-knockout";
-import { SurveyCreator } from '../editor';
-import { IToolbarItem } from '../components/toolbar';
+import { SurveyCreator } from "../editor";
+import { IToolbarItem } from "../components/toolbar";
 
 import "./test.scss";
 var templateHtml = require("./test.html");
@@ -39,10 +39,10 @@ export class SurveyLiveTester {
   constructor(private surveyProvider: any) {
     var self = this;
     this.survey = this.surveyProvider.createSurvey({}, "test");
-    this.selectTestClick = function() {
+    this.selectTestClick = function () {
       self.testAgain();
     };
-    this.selectPageClick = function(pageItem) {
+    this.selectPageClick = function (pageItem) {
       if (self.survey) {
         if (self.survey.state == "starting") {
           self.survey.start();
@@ -50,20 +50,20 @@ export class SurveyLiveTester {
         self.survey.currentPage = pageItem.page;
       }
     };
-    this.koActivePage.subscribe(function(newValue) {
+    this.koActivePage.subscribe(function (newValue) {
       if (!!newValue) {
         self.survey.currentPage = newValue;
       }
     });
-    this.koShowInvisibleElements.subscribe(function(newValue) {
+    this.koShowInvisibleElements.subscribe(function (newValue) {
       self.survey.showInvisibleElements = newValue;
     });
-    this.setPageDisable = function(option, item) {
+    this.setPageDisable = function (option, item) {
       ko.applyBindingsToNode(option, { disable: item.koDisabled }, item);
     };
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
-    this.koActiveLanguage.subscribe(function(newValue) {
+    this.koActiveLanguage.subscribe(function (newValue) {
       if (self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
@@ -73,15 +73,21 @@ export class SurveyLiveTester {
     this.toolbarItems.push(<any>{
       id: "svd-test-page-selector",
       title: getLocString("ts.selectPage"),
-      visible: ko.computed(() => this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()),
+      visible: ko.computed(
+        () => this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()
+      ),
       tooltip: getLocString("ts.selectPage"),
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koActivePage(),
-        write: (val: any) => this.koActivePage(val)
+        write: (val: any) => this.koActivePage(val),
       }),
       afterRender: this.setPageDisable,
-      items: <any>ko.computed(() => this.koPages().map(page => { return { text: page.title, value: page.page }; }))
+      items: <any>ko.computed(() =>
+        this.koPages().map((page) => {
+          return { text: page.title, value: page.page };
+        })
+      ),
     });
     this.toolbarItems.push({
       id: "svd-test-locale-selector",
@@ -91,9 +97,9 @@ export class SurveyLiveTester {
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koActiveLanguage(),
-        write: (val: any) => this.koActiveLanguage(val)
+        write: (val: any) => this.koActiveLanguage(val),
       }),
-      items: <any>this.koLanguages
+      items: <any>this.koLanguages,
     });
     this.toolbarItems.push({
       id: "svd-test-show-invisible",
@@ -103,8 +109,8 @@ export class SurveyLiveTester {
       component: "svd-boolean",
       action: ko.computed({
         read: () => this.koShowInvisibleElements(),
-        write: (val: any) => this.koShowInvisibleElements(val)
-      })
+        write: (val: any) => this.koShowInvisibleElements(val),
+      }),
     });
   }
 
@@ -124,7 +130,7 @@ export class SurveyLiveTester {
       self.koIsRunning(false);
     });
     if (!!this.survey["onNavigateToUrl"]) {
-      this.survey["onNavigateToUrl"].add(function(sender, options) {
+      this.survey["onNavigateToUrl"].add(function (sender, options) {
         var url = options.url;
         options.url = "";
         if (!!url) {
@@ -253,9 +259,7 @@ export class SurveyLiveTester {
     survey["afterRenderSurvey"](element);
   }
 
-  dispose() {
-
-  }
+  dispose() {}
 }
 
 ko.components.register("survey-tester", {
@@ -264,20 +268,23 @@ ko.components.register("survey-tester", {
       var creator: SurveyCreator = params.creator;
       var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
 
-      model.onSurveyCreatedCallback = survey => {
-        creator.onTestSurveyCreated && creator.onTestSurveyCreated.fire(self, { survey: survey });
+      model.onSurveyCreatedCallback = (survey) => {
+        creator.onTestSurveyCreated &&
+          creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
-      model.onGetObjectDisplayName = obj => {
-        return creator.getObjectDisplayName(obj);
+      model.onGetObjectDisplayName = (obj) => {
+        return creator.getObjectDisplayName(obj, "survey-tester");
       };
 
-      var subscr = creator.koViewType.subscribe(viewType => {
+      var subscr = creator.koViewType.subscribe((viewType) => {
         if (viewType === "test") {
           var options = {
             showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
-            showDefaultLanguageInTestSurveyTab: creator.showDefaultLanguageInTestSurveyTab,
-            showInvisibleElementsInTestSurveyTab: creator.showInvisibleElementsInTestSurveyTab,
-            showSimulatorInTestSurveyTab: creator.showSimulatorInTestSurveyTab
+            showDefaultLanguageInTestSurveyTab:
+              creator.showDefaultLanguageInTestSurveyTab,
+            showInvisibleElementsInTestSurveyTab:
+              creator.showInvisibleElementsInTestSurveyTab,
+            showSimulatorInTestSurveyTab: creator.showSimulatorInTestSurveyTab,
           };
           model.setJSON(creator.JSON);
           model.show(options);
@@ -290,7 +297,7 @@ ko.components.register("survey-tester", {
       });
 
       return model;
-    }
+    },
   },
   template: templateHtml,
 });

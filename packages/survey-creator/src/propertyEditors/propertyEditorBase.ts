@@ -12,7 +12,11 @@ export interface ISurveyObjectEditorOptions {
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
   readOnly: boolean;
-  getObjectDisplayName(obj: Survey.Base): string;
+  getObjectDisplayName(
+    obj: Survey.Base,
+    reason: string,
+    displayName: string
+  ): string;
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean;
   onCanShowPropertyCallback(
@@ -200,7 +204,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return this.property ? this.property.name : "";
   }
   private getReadOnly(): boolean {
-    if(this.parentReadOnly) return true;
+    if (this.parentReadOnly) return true;
     var res = this.property ? this.property.readOnly : false;
     if (!!this.options && !!this.property && !!this.object) {
       res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
@@ -301,7 +305,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return this.parentReadOnlyValue;
   }
   public set parentReadOnly(val: boolean) {
-    if(val == this.parentReadOnly) return;
+    if (val == this.parentReadOnly) return;
     this.parentReadOnlyValue = val;
     this.readOnly(this.getReadOnly());
   }
@@ -358,7 +362,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         errorText = this.getLocString("pe.propertyIsEmpty");
       }
     }
-    if(this.checkErrorOnUnique()) {
+    if (this.checkErrorOnUnique()) {
       errorText = this.getLocString("pe.propertyIsNoUnique");
     }
     if (
@@ -377,10 +381,15 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     return errorText !== "";
   }
   private checkErrorOnUnique(): boolean {
-    if(!this.property || !this.property.isUnique || !Array.isArray(this.parentList)) return false;
-    for(var i = 0; i < this.parentList.length; i ++) {
-      if(this.parentList[i] === this.object) continue;
-      if(this.parentList[i][this.property.name] == this.koValue()) return true;
+    if (
+      !this.property ||
+      !this.property.isUnique ||
+      !Array.isArray(this.parentList)
+    )
+      return false;
+    for (var i = 0; i < this.parentList.length; i++) {
+      if (this.parentList[i] === this.object) continue;
+      if (this.parentList[i][this.property.name] == this.koValue()) return true;
     }
     return false;
   }

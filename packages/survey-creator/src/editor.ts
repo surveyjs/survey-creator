@@ -44,7 +44,8 @@ type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
  * Survey Creator is WYSIWYG editor.
  */
 
-export class SurveyCreator extends CreatorBase<SurveyForDesigner>
+export class SurveyCreator
+  extends CreatorBase<SurveyForDesigner>
   implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private renderedElement: HTMLElement;
@@ -559,10 +560,12 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
+   * Obsolete, please use onGetObjectDisplayName event
    * Use this event to change the text showing in the dropdown of the property grid.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object.
    * <br/> options.text the current object text, commonly it is a name. You must change this attribute
+   * @see onGetObjectDisplayName
    */
   public onGetObjectTextInPropertyGrid: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
@@ -795,7 +798,7 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
       this.koObjects,
       this.koSelectedObject,
       function (obj: Survey.Base): string {
-        return self.getObjectDisplayName(obj);
+        return self.getObjectDisplayName(obj, "property-grid");
       }
     );
     this.surveyObjects.getItemTextCallback = function (obj, text) {
@@ -1070,15 +1073,14 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
   }
   public loadSurvey(surveyId: string) {
     var self = this;
-    new Survey.dxSurveyService().loadSurvey(surveyId, function (
-      success: boolean,
-      result: string,
-      response: any
-    ) {
-      if (success && result) {
-        self.text = JSON.stringify(result);
+    new Survey.dxSurveyService().loadSurvey(
+      surveyId,
+      function (success: boolean, result: string, response: any) {
+        if (success && result) {
+          self.text = JSON.stringify(result);
+        }
       }
-    });
+    );
   }
   /**
    * Set JSON as text  into survey. Clear undo/redo states optionally.
@@ -1197,21 +1199,21 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     if (this.saveSurveyFunc) {
       this.saveNo++;
       var self = this;
-      this.saveSurveyFunc(this.saveNo, function doSaveCallback(
-        no: number,
-        isSuccess: boolean
-      ) {
-        if (self.saveNo === no) {
-          if (isSuccess) {
-            self.setState("saved");
-          } else {
-            if (self.showErrorOnFailedSave) {
-              this.notify(self.getLocString("ed.saveError"));
+      this.saveSurveyFunc(
+        this.saveNo,
+        function doSaveCallback(no: number, isSuccess: boolean) {
+          if (self.saveNo === no) {
+            if (isSuccess) {
+              self.setState("saved");
+            } else {
+              if (self.showErrorOnFailedSave) {
+                this.notify(self.getLocString("ed.saveError"));
+              }
+              self.setState("modified");
             }
-            self.setState("modified");
           }
         }
-      });
+      );
     }
   }
   public setModified(options: any = null) {
@@ -1570,7 +1572,8 @@ export class SurveyCreator extends CreatorBase<SurveyForDesigner>
     if (
       property.name == "name" ||
       property.name == "title" ||
-      !this.onGetObjectTextInPropertyGrid.isEmpty
+      !this.onGetObjectTextInPropertyGrid.isEmpty ||
+      !this.onGetObjectDisplayName.isEmpty
     ) {
       this.surveyObjects.nameChanged(obj);
     }
