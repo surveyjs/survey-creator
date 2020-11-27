@@ -5,6 +5,7 @@ import {
 import {
   Base,
   QuestionTextModel,
+  QuestionCheckboxModel,
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
 } from "survey-knockout";
@@ -145,4 +146,13 @@ test("Check objValueChangedCallback", () => {
   expect(count).toEqual(1); //"objValueChangedCallback isn't called after setting same obj value"
   propertyGrid.obj = question;
   expect(count).toEqual(2); //"objValueChangedCallback is called after changing obj value"
+});
+test("Support property visibleIf attribute", () => {
+  var question = new QuestionCheckboxModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
+  expect(otherTextPropEd).toBeTruthy(); //otherText is here
+  expect(otherTextPropEd.isVisible).toEqual(false); //It hidden by default
+  question.hasOther = true;
+  expect(otherTextPropEd.isVisible).toEqual(true); //We show it now
 });

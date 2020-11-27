@@ -10,11 +10,19 @@ import {
   PanelModelBase,
   SurveyModel,
   Survey,
+  FunctionFactory,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
 } from "@survey/creator/questionEditors/questionEditor";
+
+function propertyVisibleIf(params: any): boolean {
+  if (!this.survey.editingObj) return false;
+  return this.question.property.visibleIf(this.survey.editingObj);
+}
+
+FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
@@ -173,6 +181,10 @@ export class PropertyGridModel {
     for (var i = 0; i < questions.length; i++) {
       var q = questions[i];
       var prop = props[q.name];
+      q.property = prop;
+      if (!!prop.visibleIf) {
+        q.visibleIf = "propertyVisibleIf() = true";
+      }
       PropertyGridEditorCollection.onCreated(this, obj, q, prop);
     }
   }
