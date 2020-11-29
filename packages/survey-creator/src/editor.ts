@@ -755,7 +755,8 @@ export class SurveyCreator
    * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
    * showObjectTitles, inplaceEditForValues, showTitlesInExpressions, allowEditExpressionsInTextEditor,
    * showPagesInTestSurveyTab, showDefaultLanguageInTestSurveyTab, showInvisibleElementsInTestSurveyTab, showSimulatorInTestSurveyTab,
-   * showSurveyTitle, allowControlSurveyTitleVisibility, hideExpressionHeaderInLogicTab
+   * showSurveyTitle, allowControlSurveyTitleVisibility, hideExpressionHeaderInLogicTab,
+   * maxLogicItemsInCondition
    */
 
   constructor(renderedElement: any = null, options: any = null) {

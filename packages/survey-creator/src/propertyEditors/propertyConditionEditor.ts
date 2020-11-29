@@ -414,6 +414,7 @@ export class SurveyPropertyConditionEditor
   public koShowTabs: any;
   public koActiveView: any;
   koEditorItems: ko.ObservableArray<ConditionEditorItem>;
+  koCanAddItem: any;
   koCanParseExpression: any;
   koConditionDisplayText: any;
   koIsTextConditionValid: any;
@@ -422,6 +423,7 @@ export class SurveyPropertyConditionEditor
   koIsEditorHidingDisabled: any;
   private addConditionQuestionsHash = {};
   private addConditionCalculatedValuesHash = {};
+  private maxLogicItemsInCondition: number = 100;
   constructor(
     property: Survey.JsonObjectProperty,
     private _type: string = "condition",
@@ -467,6 +469,12 @@ export class SurveyPropertyConditionEditor
     this.koTextValue.subscribe(function (newValue) {
       self.onkoTextValueChanged(newValue);
     });
+    this.koCanAddItem = ko.computed(() => {
+      return (
+        !this.readOnly() &&
+        this.koEditorItems().length < this.maxLogicItemsInCondition
+      );
+    });
   }
   protected getPropertyHelpLocName(): string {
     var locName = super.getPropertyHelpLocName();
@@ -501,6 +509,9 @@ export class SurveyPropertyConditionEditor
     this.resetAllConditionQuestions();
     this.onkoTextValueChanged(this.koValue());
     if (!!this.options) {
+      if (this.options.maxLogicItemsInCondition > 0) {
+        this.maxLogicItemsInCondition = this.options.maxLogicItemsInCondition;
+      }
       this.koShowTabs(this.options.allowEditExpressionsInTextEditor);
     }
   };

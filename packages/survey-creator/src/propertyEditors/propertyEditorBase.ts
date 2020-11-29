@@ -12,6 +12,7 @@ export interface ISurveyObjectEditorOptions {
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
   readOnly: boolean;
+  maxLogicItemsInCondition: number;
   getObjectDisplayName(
     obj: Survey.Base,
     reason: string,

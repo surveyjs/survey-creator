@@ -66,9 +66,12 @@ export class CreatorBase<T> {
 
   /**
    * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
-   * @see useTabsInElementEditor
    */
   public useTabsInElementEditor = false;
+  /**
+   * You need to set this property to value bigger than 0 to disable adding more logic items in condition than this value.
+   */
+  public maxLogicItemsInCondition: number = -1;
 
   /**
    * You need to set this property to true if you want to show titles instead of names in pages editor and object selector.
@@ -376,6 +379,10 @@ export class CreatorBase<T> {
       typeof options.useTabsInElementEditor !== "undefined"
         ? options.useTabsInElementEditor
         : false;
+    this.maxLogicItemsInCondition =
+      typeof options.maxLogicItemsInCondition !== "undefined"
+        ? options.maxLogicItemsInCondition
+        : -1;
     this.showState =
       typeof options.showState !== "undefined" ? options.showState : false;
     this.koShowOptions(

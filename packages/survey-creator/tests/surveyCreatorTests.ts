@@ -1754,6 +1754,45 @@ QUnit.test(
       "Question 2 [q2]",
       "onGetObjectDisplayName was used correctly"
     );
+    assert.equal(editor.koCanAddItem(), true, "we can added a new item");
+  }
+);
+
+QUnit.test(
+  "creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value",
+  function (assert) {
+    var creator = new SurveyCreator(null, { maxLogicItemsInCondition: 2 });
+    creator.JSON = {
+      elements: [
+        { name: "q1", type: "text" },
+        { name: "q2", type: "text" },
+      ],
+    };
+    var question = creator.survey.getQuestionByName("q1");
+    var property = Survey.Serializer.findProperty("question", "visibleIf");
+    var editor = new SurveyPropertyConditionEditor(property);
+    editor.options = creator;
+    editor.object = question;
+    editor.beforeShow();
+    editor.isEditorShowing = true;
+    assert.equal(
+      editor.koEditorItems().length,
+      1,
+      "There is one logic conditions"
+    );
+    assert.equal(editor.koCanAddItem(), true, "we can added a new item");
+    editor.koEditorItems()[0].nameQuestion.value = "q2";
+    editor.addCondition();
+    assert.equal(
+      editor.koEditorItems().length,
+      2,
+      "There are 2 logic conditions"
+    );
+    assert.equal(
+      editor.koCanAddItem(),
+      false,
+      "we can't added a new item, there are already two of them"
+    );
   }
 );
 

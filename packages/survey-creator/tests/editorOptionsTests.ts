@@ -10,6 +10,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
+  maxLogicItemsInCondition: number = -1;
   readOnly: boolean;
   propertyName: string;
   getObjectDisplayName(
