@@ -38,6 +38,14 @@ test("Check tabs creating", () => {
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
 });
+test("Hide question title if property is first in tab and has the same title as tab", () => {
+  var question = new QuestionCheckboxModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = propertyGrid.survey.getQuestionByName("choices");
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.titleLocation).toEqual("hidden");
+});
+
 test("boolean property editor (boolean/switch)", () => {
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
@@ -119,6 +127,7 @@ test("column[] property editor", () => {
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
   expect(columnsQuestion.columns).toHaveLength(3); //"There are three columns");
   expect(columnsQuestion.columns[0].cellType).toEqual("dropdown"); //"Correct cell type created for cellType property"
+  expect(columnsQuestion.columns[1].title).toEqual("Name");
   expect(columnsQuestion.visibleRows).toHaveLength(3); //"There are three elements"
   expect(columnsQuestion.visibleRows[0].cells[0].value).toEqual("default"); //"the first cell value is 'default'"
   expect(columnsQuestion.visibleRows[0].cells[1].value).toEqual("col1"); //"the second cell value is 'col1'"

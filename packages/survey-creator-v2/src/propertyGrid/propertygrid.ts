@@ -150,6 +150,9 @@ export class PropertyGridModel {
         propDef.title
       );
       if (!propJSON) continue;
+      if (propDef.name == tab.name) {
+        propJSON.titleLocation = "hidden";
+      }
       panel.elements.push(propJSON);
     }
     return panel;

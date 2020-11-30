@@ -15,6 +15,7 @@ import {
   PropertyGridModel,
 } from "./propertygrid";
 import { getNextValue } from "@survey/creator/utils/utils";
+import { editorLocalization } from "@survey/creator/editorLocalization";
 
 class SurveyHelper {
   public static getNewName(
@@ -36,6 +37,7 @@ function getColumnPropertyJSON(className: string, propName: string): any {
   var json = PropertyGridEditorCollection.getJSON(null, prop);
   if (!json) return null;
   json.name = prop.name;
+  json.title = editorLocalization.getPropertyName(prop.name);
   if (!!json.type) {
     json.cellType = json.type;
     delete json.type;
