@@ -8,6 +8,7 @@ import {
   QuestionCheckboxModel,
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
+  PanelModel,
 } from "survey-knockout";
 export * from "../../src/propertyGrid/propertygrid_matrices";
 
@@ -23,8 +24,19 @@ test("Create survey with editingObj", () => {
   expect(propertyGrid.survey.getValue("name")).toEqual("q1");
   var nameQuestion = propertyGrid.survey.getQuestionByName("name");
   expect(nameQuestion).toBeTruthy();
+  expect(nameQuestion.title).toEqual("Name");
   nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
+});
+test("Check tabs creating", () => {
+  var question = new QuestionCheckboxModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
+  expect(generalPanel).toBeTruthy();
+  expect(generalPanel.title).toEqual("General");
+  var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
+  expect(choicesPanel).toBeTruthy();
+  expect(choicesPanel.title).toEqual("Choices");
 });
 test("boolean property editor (boolean/switch)", () => {
   var question = new QuestionTextModel("q1");

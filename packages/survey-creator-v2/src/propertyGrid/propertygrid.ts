@@ -16,6 +16,7 @@ import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
 } from "@survey/creator/questionEditors/questionEditor";
+import { editorLocalization } from "@survey/creator/editorLocalization";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -142,12 +143,13 @@ export class PropertyGridModel {
   ): any {
     var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
     for (var i = 0; i < tab.properties.length; i++) {
+      var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(
         obj,
-        <any>tab.properties[i].property
+        <any>propDef.property,
+        propDef.title
       );
       if (!propJSON) continue;
-      propJSON.title = tab.properties[i].title;
       panel.elements.push(propJSON);
     }
     return panel;
@@ -176,20 +178,31 @@ export class PropertyGridModel {
   ): any {
     return {
       type: "panel",
-      name:
-        "property_grid_category" +
-        (PropertyGridModel.panelNameIndex++).toString(),
-      title: !!title ? title : category,
+      name: category,
+      title: this.getPanelTitle(category, title),
       state: isFirstPanel ? "expanded" : "collapsed",
       elements: [],
     };
   }
-  private createQuestionJSON(obj: Base, prop: JsonObjectProperty): any {
+  private createQuestionJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    title: string
+  ): any {
     var json = PropertyGridEditorCollection.getJSON(obj, prop);
     if (!json) return null;
     json.name = prop.name;
     json.visible = prop.visible;
+    json.title = this.getQuestionTitle(prop.name, title);
     return json;
+  }
+  private getPanelTitle(name: string, title: string): string {
+    if (!!title) return title;
+    return editorLocalization.getString("pe.tabs." + name);
+  }
+  private getQuestionTitle(name: string, title: string): string {
+    if (!!title && title !== name) return title;
+    return editorLocalization.getPropertyNameInEditor(name);
   }
 }
 PropertyGridEditorCollection.register({
