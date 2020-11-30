@@ -232,6 +232,35 @@ PropertyGridEditorCollection.register({
     return { type: "comment" };
   },
 });
+function getLocalizedText(prop: JsonObjectProperty, value: string): string {
+  if (prop.name === "locale") {
+    let text = editorLocalization.getLocaleName(value);
+    if (text) return text;
+  }
+  if (prop.name === "cellType") {
+    let text = editorLocalization.getString("qt." + value);
+    if (text) return text;
+  }
+  if (value === null) return null;
+  return editorLocalization.getPropertyValue(value);
+}
+function getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+  var propChoices = prop.getChoices(obj);
+  var choices = [];
+  for (var i = 0; i < propChoices.length; i++) {
+    var item = propChoices[i];
+    var jsonItem: any = { value: !!item.value ? item.value : item };
+    var text = !!item.text ? item.text : "";
+    if (!text) {
+      text = getLocalizedText(prop, jsonItem.value);
+      if (!!text && text != jsonItem.value) {
+        jsonItem.text = text;
+      }
+    }
+    choices.push(jsonItem);
+  }
+  return choices;
+}
 PropertyGridEditorCollection.register({
   fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string" && prop.hasChoices;
@@ -240,7 +269,7 @@ PropertyGridEditorCollection.register({
     return {
       type: "dropdown",
       showOptionsCaption: false,
-      choices: prop.getChoices(this.obj),
+      choices: getChoices(obj, prop),
     };
   },
 });

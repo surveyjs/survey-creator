@@ -9,6 +9,7 @@ import {
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
   PanelModel,
+  SurveyModel,
 } from "survey-knockout";
 export * from "../../src/propertyGrid/propertygrid_matrices";
 
@@ -78,6 +79,22 @@ test("dropdown property editor", () => {
   titleLocationQuestion.value = "bottom";
   expect(question.titleLocation).toEqual("bottom"); //"property editor change the question property"
 });
+test("dropdown property editor localization", () => {
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var showPreviewQuestion = propertyGrid.survey.getQuestionByName(
+    "showPreviewBeforeComplete"
+  );
+  expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
+  expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
+  expect(showPreviewQuestion.choices[0].text).toEqual("no preview");
+
+  var localeQuestion = propertyGrid.survey.getQuestionByName("locale");
+  expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
+  expect(localeQuestion.choices[0].value).toEqual("");
+  expect(localeQuestion.choices[0].text).toEqual("Default (english)");
+});
+
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
