@@ -17,13 +17,13 @@ Finally you may install our npm package:
 
 Add link to Survey Creator classes.
 ```javascript
-<link href="https://unpkg.com/@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
+<link href="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
 ```
 
 Link to the SurveyJS Library knockout version and Survey Creator library.
 ```javascript
-<script src="https://unpkg.com/@SurveyJSVersion/survey.ko.min.js">
-<script src="https://unpkg.com//@SurveyJSVersion/survey-creator.min.js"></script>
+<script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey.ko.min.js">
+<script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.min.js"></script>
 ```
 
 ## Step 3. Use boostrap or use our Themes
