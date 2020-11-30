@@ -37,7 +37,7 @@ function hasValueInArray(values: any[], search: any): boolean {
   }
   return false;
 }
-export function getNextValue(prefix: string, values: any[]) {
+export function getNextValue(prefix: string, values: any[]): string | number {
   if (values.length > 0)
     var oposite = getOpositValue(values[values.length - 1]);
   if (oposite && values.indexOf(oposite) < 0) return oposite;
@@ -57,7 +57,7 @@ export function getNextValue(prefix: string, values: any[]) {
     while (hasValueInArray(values, baseStr + num)) {
       num++;
     }
-    return baseStr + num;
+    return !!baseStr ? baseStr + num : num;
   }
   return prefix + 1;
 }

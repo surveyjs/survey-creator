@@ -39,3 +39,6 @@ import "../utils/layout.scss";
 export * from "@survey/creator/tabs/embed";
 export * from "@survey/creator/tabs/json-editor";
 export * from "@survey/creator/tabs/test";
+
+export * from "../propertyGrid/propertygrid";
+export * from "../propertyGrid/propertygrid_matrices";

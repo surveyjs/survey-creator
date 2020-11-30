@@ -9,6 +9,7 @@ import {
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
 } from "survey-knockout";
+export * from "../../src/propertyGrid/propertygrid_matrices";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base) {
@@ -70,8 +71,9 @@ test("itemvalue[] property editor", () => {
   expect(choicesQuestion.visibleRows).toHaveLength(3); //"There are three elements"
   expect(choicesQuestion.visibleRows[0].cells[0].value).toEqual(1); //"the first cell value is 3"
   choicesQuestion.addRow();
-  choicesQuestion.visibleRows[3].cells[0].value = 4;
   expect(question.choices).toHaveLength(4); // "There are 4 items now");
+  expect(question.choices[3].getType()).toEqual("itemvalue"); //correct class created
+  expect(choicesQuestion.visibleRows[3].cells[0].value).toEqual(4);
   expect(question.choices[3].value).toEqual(4); //"The last item value is 4");
   question.choices[1].text = "Item 2";
   expect(choicesQuestion.visibleRows[1].cells[1].value).toEqual("Item 2"); // "the second cell in second row is correct"

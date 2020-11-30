@@ -14,7 +14,7 @@
     "test": "jest",
     "test:update": "npm run test -- -u",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || echo",
-    "test_dev": "jest --watch",
+    "test:dev": "jest --watch",
     "test_debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "doc:gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
