@@ -35,4 +35,9 @@ docs/classes.json
 /doc_generator/*.json
 *.env
 svgbundle.html
-package-lock.json
+
+doc_generator/*.json
+node_modules
+build
+package
+tmp

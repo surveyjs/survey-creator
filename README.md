@@ -19,9 +19,8 @@ npm install survey-creator
 ```
 
 Or use Azure CDN:
-
-- https://surveyjs.azureedge.net/{version-number}/survey-creator.js
-- https://surveyjs.azureedge.net/{version-number}/survey-creator.css
+- https://unpkg.com/survey-creator@{version-number}/survey-creator.js
+- https://unpkg.com/survey-creator@{version-number}/survey-creator.css
 
 ## Include into your project
 
@@ -49,7 +48,7 @@ To build library yourself:
 
     ```
     git clone https://github.com/surveyjs/survey-creator.git
-    cd survey-creator
+    cd survey-creator/packages/survey-creator
     ```
 
 2.  **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. You need a version of Node.js greater than 6.0.0 and npm greater than 2.7.0

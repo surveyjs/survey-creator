@@ -1,0 +1,49 @@
+@import "../../variables.scss";
+
+.svc-toolbox__item {
+  position: relative;
+  min-width: calcSize(10);
+  min-height: calcSize(3);
+  margin-top: calcSize(2);
+}
+
+.svc-toolbox__item-content {
+  display: flex;
+  align-items: center;
+  padding: calcSize(1) 12px;
+  position: absolute;
+  margin-left: calcSize(2);
+  z-index: 1;
+
+  .svc-svg-icon use {
+    fill: $foreground-light;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:hover {
+    border-radius: calcSize(12);
+    background-color: $background;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+
+    .svc-svg-icon use {
+      fill: $primary;
+    }
+
+    .svc-toolbox__item-title {
+      display: block;
+      margin-left: calcSize(1);
+      white-space: nowrap;
+      font-family: $font-family;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: calcSize(1);
+    }
+  }
+}
+
+.svc-toolbox__item-title {
+  display: none;
+}

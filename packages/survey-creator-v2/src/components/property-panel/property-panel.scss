@@ -1,0 +1,73 @@
+@import "../../variables.scss";
+
+svc-property-panel {
+  display: block;
+  font-family: $font-family;
+  min-width: 300px;
+  max-width: 300px;
+  height: 100%;
+}
+
+.svc-property-panel__header {
+  background: $background;
+  box-shadow: inset 0px -2px 0px $primary;
+  text-align: right;
+  line-height: calcSize(3);
+  padding: 20px calcSize(3);
+}
+
+.svc-property-panel__expander {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: calc(100% - calc(8 * #{$base-unit}));
+  overflow-y: auto;
+}
+
+.svc-property-panel__group {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: calcSize(2);
+  border: none;
+  outline: none;
+  color: $foreground-light;
+  cursor: pointer;
+  text-align: left;
+  background: $background;
+  box-shadow: inset 0px -1px 0px $border;
+  font-family: $font-family;
+  font-size: calcSize(2);
+}
+
+.svc-property-panel__group:disabled,
+.svc-property-panel__group:disabled:hover {
+  background-color: $background;
+  color: $foreground-disabled;
+  cursor: default;
+}
+
+.svc-property-panel__group:hover {
+  background-color: $background-dim;
+  color: $foreground-light;
+  font-weight: 400;
+}
+
+.svc-property-panel__group--active,
+.svc-property-panel__group--active:hover {
+  color: $foreground;
+  font-weight: 600;
+  background-color: $background;
+}
+
+.svc-property-panel__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0px calcSize(2) calcSize(3);
+  box-sizing: border-box;
+  background: $background-dim;
+  box-shadow: inset 0px -1px 0px #d6d6d6;
+}

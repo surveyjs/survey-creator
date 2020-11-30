@@ -1,0 +1,79 @@
+﻿<div
+  tabindex="-1"
+  class="svd_container svd-light-bg-color"
+  data-bind="css: themeCss() + (readOnly ? ' svd_container_disabled' : ''), style: { height: koDesignerHeight }"
+>
+  <div class="svd-vertical-container" role="presentation">
+    <div class="svd-vertical-container__row" role="presentation">
+      <div class="svd-vertical-container__cell" role="presentation">
+        <div>
+          <!-- ko ifnot: haveCommercialLicense -->
+          <div class="svd_commercial_container">
+            <a
+              class="svd_commercial_text"
+              href="https://www.surveyjs.io/Buy"
+              target="_blank"
+            >
+              <span>
+                <svg-icon
+                  class="svd-primary-icon"
+                  params="iconName: 'icon-noncommercial', size: 20"
+                ></svg-icon>
+              </span>
+              <span class="svd_commercial_product svd-main-color"
+                >Please purchase a SurveyJS Creator developer license to use it
+                in your app.</span
+              >
+              <span class="svd_noncommercial_use svd-light-text-color"></span>
+            </a>
+          </div>
+          <!-- /ko  -->
+          <!-- ko if: tabs().length > 1 -->
+          <ul
+            class="navbar-default container-fluid nav nav-tabs editor-tabs svd-tabs svd-light-bg-color"
+            role="tablist"
+          >
+            <!-- ko foreach: tabs -->
+            <li
+              class="nav-item svd-tab"
+              role="tab"
+              data-bind="click: action, css: { active: $parent.koViewType() == name }, attr: { 'aria-selected': $parent.koViewType() == name ? 'true' : 'false' }"
+            >
+              <span
+                tabindex="0"
+                class="nav-link svd-tab-text"
+                data-bind="text: title"
+              ></span>
+            </li>
+            <!-- /ko -->
+          </ul>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+    <div class="svd-vertical-container__row" role="presentation">
+      <div class="svd-vertical-container__cell" role="presentation">
+        <div class="svd-vertical-container__cell-content-holder">
+          <div class="svd-vertical-container__cell-content">
+            <div class="panel card svd_content svd-dark-bg-color">
+              <!-- ko foreach: tabs -->
+              <div
+                data-bind="visible: $parent.koViewType() == name"
+                tabindex="0"
+                role="tabpanel"
+                class="svd-no-outline"
+              >
+                <!-- ko template: { name: template, data: data, afterRender: function(element, model) { $parent.onEditorTabRenderedCallback(name, element, model, $data); } } -->
+                <!-- /ko -->
+              </div>
+              <!-- /ko -->
+            </div>
+            <div
+              data-bind="template: { name: 'questioneditor', data: questionEditorWindow }"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

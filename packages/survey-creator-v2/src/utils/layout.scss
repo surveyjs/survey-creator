@@ -1,0 +1,24 @@
+@import "../variables.scss";
+
+.svc-flex-container {
+  display: flex;
+}
+
+.svc-flex-row {
+  display: flex;
+  flex-direction: row;
+  background: $background-dim;
+}
+
+.svc-flex-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.svc-top-bar {
+  display: flex;
+  background: $background;
+  box-sizing: border-box;
+  box-shadow: inset 0px -1px 0px $border;
+}

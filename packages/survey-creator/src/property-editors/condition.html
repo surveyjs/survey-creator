@@ -1,0 +1,78 @@
+<div class="svd-propertyeditor-condition">
+    <div class="svd-expression-header" data-bind="visible: koShowExpressionHeader, click: onShowHideEditor">
+        <span data-bind="text: koConditionDisplayText"></span>
+        <!-- ko if: !koIsEditorShowing() && !koIsEditorHidingDisabled() -->
+        <svg-icon class="icon-expression-arrow svd-primary-icon" params="iconName: 'icon-arrow_down_10x10', size: 10">
+        </svg-icon>
+        <!-- /ko -->
+        <!-- ko if: koIsEditorShowing() && !koIsEditorHidingDisabled() -->
+        <svg-icon class="icon-expression-arrow svd-primary-icon" params="iconName: 'icon-arrow_up_10x10', size: 10">
+        </svg-icon>
+        </span>
+        <!-- /ko -->
+        </span>
+    </div>
+    <div class="svd-expression-content" data-bind="visible: koIsEditorShowing() || !koShowExpressionHeader()">
+        <div style="margin-bottom:3px" data-bind="visible: koShowTabs() || !koCanParseExpression()">
+            <button class="btn sv-btn btn-sm btn-xs"
+                data-bind="enable: koCanParseExpression(), css: {'btn-primary': koActiveView() === 'form', 'btn-link': koActiveView() !== 'form'}, click: onChangeViewClick.bind($data, 'form'), text: $data.getLocString('pe.buildExpression')"></button>
+            <button class="btn sv-btn btn-sm btn-xs"
+                data-bind="css: {'btn-primary': koActiveView() !== 'form', 'btn-link': koActiveView() === 'form'}, click:onChangeViewClick.bind($data, 'text'), text: $data.getLocString('pe.editExpression')"></button>
+        </div>
+        <div data-bind="visible: koActiveView() == 'form'">
+            <div class="svd-expression-setup" data-bind="visible:$data.koSetupText(), text: $data.koSetupText"></div>
+            <!-- ko if: !koIsWideMode() -->
+            <!-- ko foreach: koEditorItems -->
+            <div class="svd_wrap_elements">
+                <survey-widget params="survey: $data.survey"></survey-widget>
+            </div>
+            <div class="form-inline form-group">
+                <input type="button" class="form-control btn sv-btn btn-danger"
+                    data-bind="visible:!$parent.readOnly(), click: $parent.onRemoveConditionClick, value: $parent.removeConditionText" />
+            </div>
+            <hr>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: koIsWideMode() -->
+            <table class="svd-propertyeditor-condition-wide-table">
+                <tbody data-bind="foreach: koEditorItems">
+                    <tr>
+                        <td>
+                            <div class="svd_wrap_elements">
+                                <survey-widget params="survey: $data.survey"></survey-widget>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="svd-propertyeditor-condition-item-delete-icon"
+                                data-bind="key2click, clickNoFocus: $parent.onRemoveConditionClick, attr: { title: $parent.removeConditionText, tabindex: 0, role: 'button' }">
+                                <svg-icon class="svd-danger-icon icon-actiondelete"
+                                    params="iconName: 'icon-actiondelete'"></svg-icon>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- /ko -->
+            <div class="form-inline form-group">
+                <input type="button"
+                    class="form-control btn sv-btn btn-primary svd-logic-button svd-logic-add-condition-button svd-focusable"
+                    data-bind="visible:koCanAddItem, click: $data.addCondition, value: addConditionText" />
+            </div>
+        </div>
+        <div data-bind="visible:koActiveView() != 'form'">
+            <!-- ko if: hasAceEditor -->
+            <span data-bind="text:$data.getLocString('pe.aceEditorHelp')"></span>
+            <div id="expression-ace-editor"
+                style="overflow-y: auto; overflow-x:hidden; max-height:250px; min-height:150px; width: 100%;"
+                data-bind="textInput:koTextValue, aceEditor:{questions: availableQuestions, question: $data.editingObject, editor: model}">
+            </div>
+            <!-- /ko -->
+
+            <!-- ko if: !hasAceEditor -->
+            <textarea class="svd-dark-border-color" data-bind="textInput:koTextValue, disable: readOnly"
+                style="overflow-y: auto; overflow-x:hidden; max-height:250px; min-height:150px; width: 100%;"
+                autofocus="autofocus"></textarea>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,748 @@
+﻿@import "colors";
+@import "icons";
+@import "./tabs/tabs";
+@import "properties";
+@import "bootstrap-material";
+@import "./utils/vertical-container";
+
+.svd_container {
+  color: $primary-text-color;
+  color: var(--primary-text-color, $primary-text-color);
+
+  a {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+  }
+  a:hover {
+    color: $primary-hover-color;
+    color: var(--primary-hover-color, $primary-hover-color);
+  }
+
+  .btn-primary {
+    color: $inverted-text-color;
+    color: var(--inverted-text-color, $inverted-text-color);
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+    border-color: $primary-color;
+    border-color: var(--primary-color, $primary-color);
+  }
+
+  .btn-link {
+    color: $primary-text-color;
+    color: var(--primary-text-color, $primary-text-color);
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+    border-color: $secondary-bg-color;
+    border-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  .sjs-cb-container:hover input ~ .checkmark {
+    background-color: $dd-menu-border;
+    background-color: var(--dd-menu-border, $dd-menu-border);
+  }
+
+  .sjs-cb-container:hover input:checked ~ .checkmark {
+    background-color: $primary-hover-color;
+    background-color: var(--primary-hover-color, $primary-hover-color);
+  }
+
+  .svd_selected_page {
+    border-bottom: 1px solid $primary-bg-color;
+    border-bottom-color: var(--primary-bg-color, $primary-bg-color);
+  }
+
+  .svd_toolbar li.active a {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+    color: $primary-bg-color;
+    color: var(--primary-bg-color, $primary-bg-color);
+  }
+
+  .svd_toolbar li a {
+    color: $dd-menu-link-color;
+    color: var(--dd-menu-link-color, $dd-menu-link-color);
+  }
+
+  .svd_custom_select:before {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+  }
+  .form-control:focus {
+    border-color: $primary-color;
+    border-color: var(--primary-color, $primary-color);
+  }
+
+  a:focus,
+  div:focus,
+  span:focus,
+  select:focus,
+  tr:focus,
+  input[type="checkbox"]:focus + span.checkmark {
+    outline-color: $primary-color;
+    outline-color: var(--primary-color, $primary-color);
+    outline-style: dotted;
+    outline-width: 0.5px;
+    outline-offset: -1px;
+  }
+  .svd-no-outline:focus {
+    outline: none;
+  }
+  .svd_toolbar button:focus {
+    outline-color: $primary-text-color;
+    outline-color: var(--primary-text-color, $primary-text-color);
+  }
+
+  .svd-main-color {
+    color: $primary-color;
+    color: var(--primary-color, $primary-color);
+  }
+  .svd-main-background-color {
+    background-color: $primary-color;
+    background-color: var(--primary-color, $primary-color);
+  }
+  .svd-main-border-color {
+    border-color: $selection-border-color;
+    border-color: var(--selection-border-color, $selection-border-color);
+  }
+
+  .svd-light-text-color {
+    color: $secondary-text-color;
+    color: var(--secondary-text-color, $secondary-text-color);
+  }
+  .svd-light-background-color {
+    background-color: $primary-border-color;
+    background-color: var(--primary-border-color, $primary-border-color);
+  }
+  .svd-light-border-color {
+    border-color: $primary-border-color;
+    border-color: var(--primary-border-color, $primary-border-color);
+  }
+  .svd-dark-border-color {
+    border-color: $secondary-border-color;
+    border-color: var(--secondary-border-color, $secondary-border-color);
+  }
+  .svd-light-bg-color {
+    background-color: $primary-bg-color;
+    background-color: var(--primary-bg-color, $primary-bg-color);
+  }
+  .svd-dark-bg-color {
+    background-color: $secondary-bg-color;
+    background-color: var(--secondary-bg-color, $secondary-bg-color);
+  }
+
+  // .svd-svd-svg-icon-color {
+  //   color: #3d4d5d;
+  // }
+  // .svd-light-control-color {
+  //   color: #d0d0d0;
+  // }
+  // .svd-icon-status-color {
+  //   color: #9d9fa1;
+  // }
+
+  .svd-empty-panel {
+    line-height: 20px;
+    padding: 20px;
+  }
+}
+
+.svd_flowpanel[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+}
+.svd_flowpanel[contenteditable="true"] {
+  padding: 5px;
+  display: block; /* For Firefox */
+}
+
+.svd_container {
+  position: relative;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  .svd_questions_editor {
+    .svd_question {
+      overflow: visible;
+      border: 1px solid transparent;
+      pointer-events: auto;
+
+      &:hover {
+        border-color: $selection-border-color;
+        border-color: var(--selection-border-color, $selection-border-color);
+      }
+    }
+  }
+  .svd_surveyjs_designer_container.svd_surveyjs_designer_container,
+  #surveyjsExample {
+    .sv_main .sv_custom_header {
+      background-color: transparent;
+    }
+  }
+  .svd-textitems-column {
+    width: 100%;
+    display: inline-block;
+    line-height: 28px;
+
+    .btn-danger {
+      min-width: 2em;
+      padding: 0.78em 1em;
+    }
+    .svd-textitems-isrequired {
+      vertical-align: top;
+      padding-top: 3px;
+      display: inline-block;
+    }
+    .svd-textitems-edit {
+      vertical-align: top;
+      display: inline-block;
+      margin-left: 1.7em;
+    }
+  }
+  .svd-items-control-footer {
+    margin-top: 1em;
+  }
+  .svd-drag-handle {
+    font-size: 20px;
+    cursor: move;
+  }
+  .svd-itemvalue-actions-container {
+    white-space: nowrap;
+  }
+  .svd-itemvalue-action {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  .svd-itemvalue-action {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  .form-control {
+    border-radius: 2px;
+  }
+  .form-control:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  .select2-container,
+  .select2-container--default.select2-container--open {
+    .select2-selection--single {
+      border-radius: 0;
+      border: 1px solid $dd-menu-border;
+      border-color: var(--dd-menu-border, $dd-menu-border);
+      height: 34px;
+      .select2-selection__arrow {
+        background: $primary-color;
+        background: var(--primary-color, $primary-color);
+        height: 34px;
+        top: 0px;
+        right: 0px;
+        width: 34px;
+        b {
+          border-color: #fff transparent #fff transparent;
+        }
+      }
+    }
+  }
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  a,
+  a.nav-link,
+  span.nav-link {
+    cursor: pointer;
+  }
+  &:not(.sv_modern_css) {
+    .btn {
+      border-radius: 2px;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      line-height: 1em;
+      min-width: 6em;
+      font-weight: bold;
+    }
+  }
+  .svd_content {
+    padding: 30px;
+    margin: 0;
+    border: none;
+    height: 100%;
+
+    & > * {
+      height: 100%;
+    }
+
+    .svd_survey_designer {
+      position: relative;
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+
+      .svd_editors {
+        display: table-cell;
+        vertical-align: top;
+        padding: 0 15px;
+        width: 100%;
+
+        .svd_questions_editor {
+          position: relative;
+          padding-top: 18px;
+          padding-bottom: 18px;
+          min-height: 100%;
+
+          .panel-body,
+          .card-block {
+            .svd_question {
+              box-shadow: none;
+              border-radius: 0;
+              padding: 20px 9px;
+              margin-bottom: 38px;
+              f-panel {
+                .svd_question {
+                  vertical-align: baseline;
+                  padding: 0;
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.svd_container {
+  [draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+  }
+  survey-widget {
+    .form-control {
+      width: 100%;
+    }
+  }
+  .svd_wrap_elements {
+    white-space: normal;
+  }
+  .svd-matrixdropdowncolumns-table {
+    th {
+      white-space: nowrap;
+    }
+  }
+  .svd_table-nowrap {
+    table-layout: fixed;
+  }
+  .svd_table-nowrap td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .svd_q_selected {
+    border: 1px solid transparent;
+  }
+  .svd_q_design {
+    pointer-events: none;
+  }
+  .svd_q_design_border {
+    position: relative;
+  }
+  .svd_navbarbuttons {
+    margin-top: 3px;
+  }
+}
+
+.svd-manage-mask {
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.svd_container {
+  .animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+  @-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+  .modal {
+    display: none;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    .modal-dialog {
+      max-width: 600px;
+    }
+    .modal-body {
+      max-height: 75vh;
+      overflow: auto;
+
+      survey-widget {
+        display: block;
+        margin-bottom: 1em;
+
+        .sv_main .sv_custom_header {
+          background: transparent;
+        }
+
+        .svd-survey-nopadding {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .svd_items_table {
+    width: 100%;
+    tr {
+      th,
+      td {
+        padding: 0.25em;
+        .btn {
+          min-width: auto;
+        }
+      }
+    }
+  }
+}
+
+.svd_container {
+  .svd_commercial_container {
+    padding: 1em 0 0.5em 2em;
+    .svd_commercial_text {
+      font-weight: bold;
+      text-decoration: none;
+      .svd_commercial_product {
+        padding-left: 0.5em;
+      }
+    }
+  }
+}
+
+.svd_container.sv_default_css {
+  a {
+    text-decoration: unset;
+  }
+  .btn,
+  .btn:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    span {
+      display: inline-block;
+      padding: 1px;
+    }
+  }
+  .btn[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 0.65;
+  }
+  :after,
+  :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .sv_progress-buttons__list li:before {
+    box-sizing: content-box;
+  }
+  label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    vertical-align: top;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  select,
+  textarea {
+    line-height: inherit;
+  }
+  .form-control {
+    padding: 6px 12px;
+    line-height: 1.5em;
+    border: 1px solid $dd-menu-border;
+    border-color: var(--dd-menu-border, $dd-menu-border);
+    display: block;
+    width: 100%;
+    height: 34px;
+    &.svd_custom_select {
+      padding: 0;
+      select {
+        height: 34px;
+      }
+    }
+  }
+  .input-group {
+    position: relative;
+    display: table;
+    border-spacing: 0;
+    .form-control,
+    .input-group-addon,
+    .input-group-btn {
+      display: table-cell;
+    }
+    .form-control {
+      float: left;
+    }
+    .input-group-addon {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      text-align: center;
+      background-color: $primary-border-color;
+      background-color: var(--primary-border-color, $primary-border-color);
+      border: 1px solid $secondary-border-color;
+      border-color: var(--secondary-border-color, $secondary-border-color);
+      border-radius: 2px;
+      width: 1%;
+      white-space: nowrap;
+      vertical-align: middle;
+      &:first-child {
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      &.btn-danger {
+        background-color: $error-color;
+        background-color: var(--error-color, $error-color);
+      }
+    }
+  }
+  .form-inline {
+    .input-group {
+      display: inline-table;
+      vertical-align: middle;
+    }
+    .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+  .nav-tabs {
+    margin-bottom: 0;
+    padding: 0; // border-bottom: 1px solid $secondary-border-color;
+    line-height: 2.5em;
+  }
+  .nav-item {
+    display: inline-block;
+    margin-left: -3px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .nav-link {
+    border-radius: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 0.5em 1em;
+    text-align: center;
+    &.active {
+      border: 1px solid $secondary-border-color;
+      border-color: var(--secondary-border-color, $secondary-border-color);
+      border-bottom-color: transparent;
+    }
+  }
+  .svd_editors {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 15px;
+  }
+  .svd_properties {
+    table {
+      width: 100%;
+    }
+  }
+  .svd_surveyjs_designer_container.svd_surveyjs_designer_container {
+    .sv_row {
+      .svd_question {
+        margin-top: 30px;
+        overflow: visible;
+        question-actions {
+          .svda_question_action {
+            display: inline-block;
+            font-size: 12px;
+            .icon-actiondragelement {
+              bottom: 0;
+            }
+          }
+        }
+        .svda-select-items-title {
+          top: -1.8em;
+          right: 0;
+          padding-right: 2.5em;
+        }
+      }
+    }
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    .modal-dialog {
+      position: relative;
+      max-width: 600px;
+      margin: 30px auto;
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        .modal-header {
+          padding: 15px;
+          border-bottom: 1px solid #e5e5e5;
+          h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+          }
+          button.close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=20);
+            opacity: 0.2;
+            -webkit-appearance: none;
+            padding: 0;
+            cursor: pointer;
+            background: 0 0;
+            border: 0;
+          }
+        }
+        .modal-body {
+          padding: 15px;
+        }
+        .modal-footer {
+          padding: 15px;
+          text-align: right;
+          border-top: 1px solid #e5e5e5;
+        }
+      }
+    }
+  }
+}
+
+.svd_container_disabled {
+  .item_editable {
+    pointer-events: none;
+  }
+}
+@media all and (-ms-high-contrast: none) {
+  *::-ms-backdrop,
+  .svd_container use {
+    /* IE11 - https://surveyjs.answerdesk.io/ticket/details/T1387 */
+    pointer-events: none;
+  }
+}
+
+.sv_select_wrapper:before {
+  bottom: 2px;
+}
+
+.svd_surveyjs_designer_container .sv_select_wrapper:before {
+  height: 2em;
+}
+
+.svd_surveyjs_designer_container fieldset {
+  &.sv_qcbc,
+  &.sv_qcbx {
+    min-width: 0;
+  }
+}
+
+@import "./modern.scss";

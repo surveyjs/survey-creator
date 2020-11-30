@@ -1,0 +1,82 @@
+{
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "question1",
+                    "defaultValue": "item2",
+                    "choices": [
+                        "item1",
+                        "item2",
+                        "item3"
+                    ]
+                },
+                {
+                    "type": "boolean",
+                    "name": "question2"
+                },
+                {
+                    "type": "imagepicker",
+                    "name": "question3",
+                    "choices": [
+                        {
+                            "value": "lion",
+                            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+                        },
+                        {
+                            "value": "giraffe",
+                            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+                        },
+                        {
+                            "value": "panda",
+                            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+                        },
+                        {
+                            "value": "camel",
+                            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "page2",
+            "elements": [
+                {
+                    "type": "checkbox",
+                    "name": "question4",
+                    "choices": [
+                        "item1",
+                        "item2",
+                        "item3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "page3",
+            "elements": [
+                {
+                    "type": "dropdown",
+                    "name": "question5",
+                    "choices": [
+                        "item1",
+                        "item2",
+                        "item3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "page4",
+            "elements": [
+                {
+                    "type": "rating",
+                    "name": "question6"
+                }
+            ]
+        }
+    ]
+}

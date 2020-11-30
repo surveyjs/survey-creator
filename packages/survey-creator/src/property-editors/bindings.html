@@ -1,0 +1,8 @@
+<div>
+  <!-- ko foreach: { data: items, as: 'item'}  -->
+  <div>
+    <span data-bind="text:item.displayName"></span>
+    <!-- ko component: { name: "svd-element-selector", params: { model:item.elementSelector } } --><!-- /ko -->
+  </div>
+  <!-- /ko -->
+</div>

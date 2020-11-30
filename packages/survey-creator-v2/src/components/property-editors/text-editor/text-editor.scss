@@ -1,0 +1,45 @@
+@import "../../../variables.scss";
+
+.svc-text-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+}
+
+.svc-text-editor__input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: $background;
+  box-sizing: border-box;
+  width: 100%;
+  height: calcSize(6);
+  border: 1px solid $border-inside;
+  padding: 12px calcSize(2);
+  margin-top: calcSize(1);
+  outline: none;
+  font-size: calcSize(2);
+  color: $foreground;
+}
+
+.svc-text-editor__input::placeholder {
+  color: $foreground-light;
+}
+
+.svc-text-editor__input:focus {
+  border: 2px solid #19b394;
+}
+
+.svc-text-editor__input:disabled,
+.svc-text-editor__input:disabled::placeholder {
+  color: $foreground-disabled;
+}
+
+.svc-text-editor__label {
+  width: 100%;
+  line-height: calcSize(3);
+  font-size: calcSize(2);
+  font-family: "Open Sans";
+  color: $foreground-light;
+}

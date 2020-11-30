@@ -1,0 +1,36 @@
+<div class="svc-dropdown-editor">
+  <!--ko if: showLabel-->
+  <label
+    class="svc-dropdown-editor__label"
+    data-bind="text: displayName"
+  ></label>
+  <!--/ko-->
+  <div class="svc-dropdown-editor__container">
+    <div
+      class="svc-dropdown-editor__form"
+      data-bind="css: { 'svc-dropdown-editor__form--disabled': readOnly }"
+    >
+      <span
+        data-bind="css: { 'svc-dropdown-editor__placeholder': !hasValue() } , text: hasValue() ? koValue : optionsCaption"
+      ></span>
+      <button
+        class="svc-dropdown-editor__button"
+        data-bind="click: toggle, disable: readOnly, css: { 'svc-dropdown-editor__button--active': isExpanded }"
+      >
+        <svc-svg-icon
+          class="svc-dropdown-editor__button-icon"
+          params="iconName: 'icon-dropdownarrow', size: 24"
+        ></svc-svg-icon>
+      </button>
+    </div>
+
+    <ul class="svc-dropdown-editor__list" data-bind="visible: isExpanded">
+      <!--ko foreach: choices-->
+      <li
+        class="svc-dropdown-editor__list-item"
+        data-bind="css: { 'svc-dropdown-editor__list-item--disabled': disabled, 'svc-dropdown-editor__list-item--selected': selected },  click: select, text: value"
+      ></li>
+      <!-- /ko -->
+    </ul>
+  </div>
+</div>

@@ -44,10 +44,12 @@ steps:
   displayName: 'install Node.js'
 
 - script: |
+    cd packages/survey-creator
     npm install
   displayName: 'npm install'
 
 - powershell: |
+    cd packages/survey-creator
     echo $(git --version)
     git config --global user.email "kurmanov.work@gmail.com"
     git config --global user.name "dmitrykurmanov"
@@ -58,34 +60,40 @@ steps:
   displayName: 'npm run release with SurveyJSVersion'
 
 - script: |
+    cd packages/survey-creator
     npm run build_prod
   displayName: "build"
 
 - script: |
-    npm run testsingle
+    cd packages/survey-creator
+    npm run test
   displayName: "unit tests"
 
 - script: |
+    cd packages/survey-creator
     npm run testcafe_ci
   displayName: "functional tests"
 
 - powershell: |
+    git pull origin master
     git push --follow-tags origin master;
   displayName: 'push release commit to github'
 
 - script: |
+    cd packages/survey-creator
     npm run doc_gen
   displayName: "generate docs"
 
 - task: Npm@1
   inputs:
     command: "publish"
-    workingDir: "build"
+    workingDir: "packages/survey-creator/build"
     publishEndpoint: "NPM Registry"
     verbose: true
   displayName: 'npm publish survey-creator'
 
 - script: |
+    cd packages/survey-creator
     npm run doc_update
   displayName: "update docs"
 

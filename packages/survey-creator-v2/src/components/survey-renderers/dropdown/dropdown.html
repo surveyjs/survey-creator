@@ -1,0 +1,58 @@
+<div class="svc-survey-dropdown">
+  <select
+    data-bind="if: true, attr: {id: question.inputId, 'aria-label': question.locTitle.renderedHtml, 'aria-invalid': question.errors.length > 0, 'aria-describedby': question.errors.length > 0 ? question.id + '_errors' : null}, value: question.renderedValue, valueAllowUnset: true, css: 'svc-survey-dropdown__control'"
+  >
+    <!-- ko if: question.showOptionsCaption -->
+    <option data-bind="text:question.optionsCaption, value: null"></option>
+    <!-- /ko -->
+    <!-- ko foreach: question.visibleChoices -->
+    <option
+      data-bind="value: $data.value, text: $data.text, attr: { disabled: !$data.isEnabled }"
+    ></option>
+    <!-- /ko -->
+  </select>
+  <div class="svc-survey-dropdown__container">
+    <div
+      class="svc-survey-dropdown__form"
+      tabindex="0"
+      data-bind="css: { 'svc-survey-dropdown__form--disabled': question.readOnly }, hasFocus: isFocused, event: { blur: onBlur }"
+    >
+      <span
+        data-bind="css: { 'svc-survey-dropdown__placeholder': !question.renderedValue} , text: question.renderedValue || (question.showOptionsCaption ? question.optionsCaption : '') "
+      ></span>
+      <span
+        class="svc-survey-dropdown__button"
+        data-bind="click: toggle, disable: question.readOnly, css: { 'svc-survey-dropdown__button--active': isExpanded }"
+      >
+        <svc-svg-icon
+          class="svc-survey-dropdown__button-icon"
+          params="iconName: 'icon-dropdownarrow', size: 24"
+        ></svc-svg-icon>
+      </span>
+    </div>
+
+    <ul
+      class="svc-survey-dropdown__list"
+      data-bind="visible: isExpanded, event: { mousedown: function (data, e) { e.preventDefault(); }}"
+    >
+      <!-- ko if: question.showOptionsCaption -->
+      <li
+        class="svc-survey-dropdown__list-item"
+        data-bind="css: { 'svc-survey-dropdown__list-item--disabled': !isEnabled, 'svc-survey-dropdown__list-item--selected': question.koValue() == $data.value }, text:question.optionsCaption"
+      ></li>
+      <!-- /ko -->
+      <!--ko foreach: question.visibleChoices-->
+      <li
+        class="svc-survey-dropdown__list-item"
+        data-bind="css: { 'svc-survey-dropdown__list-item--disabled': !isEnabled, 'svc-survey-dropdown__list-item--selected': question.koValue() == $data.value }, text: $data.text, click: $parent.selectItem"
+      ></li>
+      <!-- /ko -->
+    </ul>
+  </div>
+  <!-- ko if: question.hasOther -->
+  <div
+    class="form-group"
+    data-bind="template: { name: 'survey-comment', data: {'question': question, 'visible': question.isOtherSelected } }, style: {display: question.isFlowLayout ? 'inline': ''}"
+  ></div>
+  <!-- /ko -->
+</div>
