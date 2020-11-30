@@ -19,20 +19,13 @@ export class SurveyEmbedingWindow {
   public surveyPostId: string = null;
   public generateValidJSON: boolean = false;
   public surveyJSVersion: string = Survey.Version;
-  public surveyCDNPath: string = "https://surveyjs.azureedge.net/";
+  public surveyCDNPath: string = "https://unpkg.com";
   koShowAsWindow: any;
   koThemeName: any;
   koHasIds: any;
   koLoadSurvey: any;
   koLibraryVersion: any;
   koVisibleHtml: any;
-  private platformSurveyJSPrefix = {
-    angular: "angular",
-    jquery: "jquery",
-    knockout: "ko",
-    react: "react",
-    vue: "vue",
-  };
   private platformCompleteCode = {
     angular: "        survey.onComplete.add(sendDataToServer);\n",
     jquery: "\n    onComplete: sendDataToServer",
@@ -144,28 +137,19 @@ export class SurveyEmbedingWindow {
       this.platformHtmlonPage[this.koLibraryVersion()]
     );
   }
-  private get getCDNPath(): string {
-    return this.surveyCDNPath + this.surveyJSVersion + "/";
-  }
   private setHeadText() {
-    var str =
+    var platform = this.koLibraryVersion();
+    var cssFileName = this.koThemeName() == "modern" ? "modern" : "survey";
+    var surveyJSVersion = this.surveyJSVersion;
+    var cdnPath = `${this.surveyCDNPath}/survey-${platform}@${surveyJSVersion}`;
+
+    var headText =
       "<!-- Your platform (" + this.koLibraryVersion() + ") scripts. -->\n";
     if (this.koThemeName() != "bootstrap") {
-      var cssFileName = this.koThemeName() == "modern" ? "modern" : "survey";
-      str +=
-        '\n<link href="' +
-        this.getCDNPath +
-        cssFileName +
-        '.css" type="text/css" rel="stylesheet" />';
+      headText += `\n<link href="${cdnPath}/${cssFileName}.css" type="text/css" rel="stylesheet" />`;
     }
-    str +=
-      '\n<script src="' +
-      this.getCDNPath +
-      "survey." +
-      this.platformSurveyJSPrefix[this.koLibraryVersion()] +
-      '.min.js"></script>';
-
-    this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, str);
+    headText += `\n<script src="${cdnPath}/survey.${platform}.min.js"></script>`;
+    this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, headText);
   }
   private setJavaTest() {
     this.setTextToEditor(
