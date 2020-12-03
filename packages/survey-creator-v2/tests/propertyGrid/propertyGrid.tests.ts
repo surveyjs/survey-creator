@@ -10,7 +10,7 @@ import {
   QuestionMatrixDynamicModel,
   PanelModel,
   SurveyModel,
-  Serializer,
+  SurveyTriggerRunExpression,
   ExpressionValidator,
 } from "survey-knockout";
 import { assert } from "console";
@@ -248,6 +248,53 @@ test("Validators property editor", () => {
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
       .value
   ).toEqual("validator2 text");
+  /* TODO remove comments update to v1.8.19
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
+  ).toBeTruthy();
+    */
+  //TODO remove comments update to v1.8.19
+  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
+  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+});
+test("Triggers property editor", () => {
+  var survey = new SurveyModel();
+  survey.triggers.push(new SurveyTriggerRunExpression());
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var triggerrsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("triggers")
+  );
+  expect(triggerrsQuestion).toBeTruthy(); //visibleIf is here
+  expect(triggerrsQuestion.visibleRows).toHaveLength(1);
+  var triggerTypeQuestion = triggerrsQuestion.visibleRows[0].cells[0].question;
+  expect(triggerTypeQuestion.getType()).toEqual("dropdown");
+  expect(triggerTypeQuestion.value).toEqual("runexpressiontrigger");
+  expect(triggerTypeQuestion.choices).toHaveLength(5);
+  triggerrsQuestion.addRow();
+  expect(survey.triggers).toHaveLength(2);
+  expect(survey.triggers[1].getType()).toEqual("runexpressiontrigger");
+
+  triggerTypeQuestion.value = "completetrigger";
+  expect(survey.triggers[0].getType()).toEqual("completetrigger");
+  expect(survey.triggers[1].getType()).toEqual("runexpressiontrigger");
+  expect(triggerrsQuestion.visibleRows[0].cells[0].value).toEqual(
+    "completetrigger"
+  );
+  expect(triggerrsQuestion.visibleRows[1].cells[0].value).toEqual(
+    "runexpressiontrigger"
+  );
+  triggerrsQuestion.visibleRows[1].showDetailPanel();
+  triggerrsQuestion.visibleRows[1].detailPanel.getQuestionByName(
+    "expression"
+  ).value = "{q1} = 1";
+  expect(survey.triggers[1].expression).toEqual("{q1} = 1");
+  triggerTypeQuestion = triggerrsQuestion.visibleRows[1].cells[0].question;
+  triggerTypeQuestion.value = "completetrigger";
+  //validatorsQuestion.visibleRows[1].showDetailPanel();
+  expect(
+    triggerrsQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
+      .value
+  ).toEqual("{q1} = 1");
   /* TODO remove comments update to v1.8.19
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
