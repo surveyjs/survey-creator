@@ -42,3 +42,4 @@ export * from "@survey/creator/tabs/test";
 
 export * from "../propertyGrid/propertygrid";
 export * from "../propertyGrid/propertygrid_matrices";
+export * from "../propertyGrid/propertygtrid_condition";

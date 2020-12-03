@@ -34,6 +34,8 @@ export interface IPropertyGridEditor {
     question: Question,
     prop: JsonObjectProperty
   ) => void;
+  onMatrixCellCreated?: (obj: Base, options: any) => void;
+  onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
 
 export var PropertyGridEditorCollection = {
@@ -73,6 +75,18 @@ export var PropertyGridEditorCollection = {
       res.onCreated(propertyGrid, obj, question, prop);
     }
   },
+  onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixCellCreated) {
+      res.onMatrixCellCreated(obj, options);
+    }
+  },
+  onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixCellCreated) {
+      res.onMatrixCellValueChanged(obj, options);
+    }
+  },
 };
 
 export class PropertyGridModel {
@@ -93,6 +107,12 @@ export class PropertyGridModel {
       var page = this.surveyValue.createNewPage("p1");
       this.setupObjPanel(page, this.obj, false);
       this.survey.addPage(page);
+      this.survey.onMatrixCellCreated.add((sender, options) => {
+        this.onMatrixCellCreated(options);
+      });
+      this.survey.onMatrixCellValueChanged.add((sender, options) => {
+        this.onMatrixCellValueChanged(options);
+      });
       this.survey.editingObj = value;
       if (this.objValueChangedCallback) {
         this.objValueChangedCallback();
@@ -207,6 +227,24 @@ export class PropertyGridModel {
     if (!!title && title !== name) return title;
     return editorLocalization.getPropertyNameInEditor(name);
   }
+  private isCellCreating = false;
+  private onMatrixCellCreated(options: any) {
+    this.isCellCreating = true;
+    PropertyGridEditorCollection.onMatrixCellCreated(
+      this.obj,
+      options.question.property,
+      options
+    );
+    this.isCellCreating = false;
+  }
+  private onMatrixCellValueChanged(options: any) {
+    if (this.isCellCreating) return;
+    PropertyGridEditorCollection.onMatrixCellValueChanged(
+      this.obj,
+      options.question.property,
+      options
+    );
+  }
 }
 PropertyGridEditorCollection.register({
   fit(prop: JsonObjectProperty): boolean {
@@ -222,6 +260,14 @@ PropertyGridEditorCollection.register({
   },
   getJSON(obj: Base, prop: JsonObjectProperty): any {
     return { type: "text" };
+  },
+});
+PropertyGridEditorCollection.register({
+  fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "number";
+  },
+  getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return { type: "text", inputType: "number" };
   },
 });
 PropertyGridEditorCollection.register({
@@ -263,7 +309,7 @@ function getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
 }
 PropertyGridEditorCollection.register({
   fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "string" && prop.hasChoices;
+    return prop.hasChoices;
   },
   getJSON(obj: Base, prop: JsonObjectProperty): any {
     return {

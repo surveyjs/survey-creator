@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import {
   Base,
   JsonObjectProperty,
@@ -7,8 +6,7 @@ import {
   MatrixDropdownRowModelBase,
   QuestionMatrixDynamicModel,
   PanelModel,
-  SurveyModel,
-  Survey,
+  ExpressionValidator,
 } from "survey-knockout";
 import {
   PropertyGridEditorCollection,
@@ -61,26 +59,30 @@ function getMatrixJSON(
   prop: JsonObjectProperty,
   propNames: Array<string>
 ): any {
+  var className = prop.className;
+  if (!className) className = prop.baseClassName;
   return {
     type: "matrixdynamic",
     detailPanelMode: "underRow",
     cellType: "text",
     rowCount: 0,
-    columns: getColumnsJSON(prop.className, propNames),
+    columns: getColumnsJSON(className, propNames),
   };
 }
 function createNewItem(
   matrix: QuestionMatrixDynamicModel,
   prop: JsonObjectProperty,
-  keyPropName: string
+  keyPropName: string = ""
 ): Base {
-  var newName = SurveyHelper.getNewName(
-    matrix.value,
-    keyPropName,
-    prop.getBaseValue()
-  );
   var json: any = {};
-  json[keyPropName] = newName;
+  if (keyPropName) {
+    var newName = SurveyHelper.getNewName(
+      matrix.value,
+      keyPropName,
+      prop.getBaseValue()
+    );
+    json[keyPropName] = newName;
+  }
   var item = Serializer.createClass(prop.className, json);
   matrix.value.push(item);
   return item;
@@ -141,5 +143,71 @@ PropertyGridEditorCollection.register({
       return createNewItem(sender, prop, "name");
     };
     setupMatrixQuestion(propertyGrid, <QuestionMatrixDynamicModel>question);
+  },
+});
+
+function getValidatorChoices(obj: any): Array<any> {
+  var names = obj.getSupportedValidators();
+  var res = [];
+  for (var i = 0; i < names.length; i++) {
+    var name = names[i] + "validator";
+    res.push({
+      value: name,
+      text: editorLocalization.getValidatorName(name),
+    });
+  }
+  return res;
+}
+
+PropertyGridEditorCollection.register({
+  fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "validators";
+  },
+  getJSON(obj: Base, prop: JsonObjectProperty): any {
+    var res = getMatrixJSON(prop, []);
+    if (!res.columns) res.columns = [];
+    res.columns.unshift({
+      cellType: "dropdown",
+      name: "validatorType",
+      showOptionsCaption: false,
+    });
+    return res;
+  },
+  onCreated(
+    propertyGrid: PropertyGridModel,
+    obj: Base,
+    question: Question,
+    prop: JsonObjectProperty
+  ) {
+    question.onGetValueForNewRowCallBack = (
+      sender: QuestionMatrixDynamicModel
+    ): any => {
+      var item = new ExpressionValidator();
+      item["validatorType"] = item.getType();
+      sender.value.push(item);
+      return item;
+    };
+    setupMatrixQuestion(propertyGrid, <QuestionMatrixDynamicModel>question);
+  },
+  onMatrixCellCreated(obj: Base, options: any) {
+    if (options.columnName != "validatorType") return;
+    options.cellQuestion.choices = getValidatorChoices(obj);
+    options.cellQuestion.value = options.row.editingObj.getType();
+  },
+  onMatrixCellValueChanged(obj: Base, options: any) {
+    if (options.columnName != "validatorType") return;
+    var index = options.question.visibleRows.indexOf(options.row);
+    if (index < 0) return;
+    var isDetailPanelShowing = options.row.isDetailPanelShowing;
+    var objJSON = options.row.editingObj.toJSON();
+    delete objJSON.type;
+    var newItem = Serializer.createClass(options.value, objJSON);
+    newItem.fromJSON(objJSON);
+    newItem["validatorType"] = newItem.getType();
+    options.row.hideDetailPanel(true);
+    options.question.value.splice(index, 1, newItem);
+    if (isDetailPanelShowing) {
+      options.row.showDetailPanel();
+    }
   },
 });

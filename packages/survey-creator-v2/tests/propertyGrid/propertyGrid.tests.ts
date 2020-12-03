@@ -10,8 +10,12 @@ import {
   QuestionMatrixDynamicModel,
   PanelModel,
   SurveyModel,
+  Serializer,
+  ExpressionValidator,
 } from "survey-knockout";
+import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
+export * from "../../src/propertyGrid/propertygtrid_condition";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base) {
@@ -195,4 +199,61 @@ test("Support property visibleIf attribute", () => {
   expect(otherTextPropEd.isVisible).toEqual(false); //It hidden by default
   question.hasOther = true;
   expect(otherTextPropEd.isVisible).toEqual(true); //We show it now
+});
+test("Show property editor for condition/expression", () => {
+  var question = new QuestionTextModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  expect(propertyGrid.survey.getQuestionByName("visibleIf")).toBeTruthy(); //visibleIf is here
+  expect(
+    propertyGrid.survey.getQuestionByName("defaultValueExpression")
+  ).toBeTruthy(); //defaultValueExpression is here
+});
+test("Validators property editor", () => {
+  var question = new QuestionTextModel("q1");
+  question.validators.push(new ExpressionValidator());
+  var propertyGrid = new PropertyGridModelTester(question);
+  var validatorsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("validators")
+  );
+  expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
+  expect(validatorsQuestion.visibleRows).toHaveLength(1);
+  var validatorTypeQuestion =
+    validatorsQuestion.visibleRows[0].cells[0].question;
+  expect(validatorTypeQuestion.getType()).toEqual("dropdown");
+  expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
+  var validatorCount = question.getSupportedValidators().length;
+  expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
+  validatorsQuestion.addRow();
+  expect(question.validators).toHaveLength(2);
+  expect(question.validators[1].getType()).toEqual("expressionvalidator");
+
+  validatorTypeQuestion.value = "numericvalidator";
+  expect(question.validators[0].getType()).toEqual("numericvalidator");
+  expect(question.validators[1].getType()).toEqual("expressionvalidator");
+  expect(validatorsQuestion.visibleRows[0].cells[0].value).toEqual(
+    "numericvalidator"
+  );
+  expect(validatorsQuestion.visibleRows[1].cells[0].value).toEqual(
+    "expressionvalidator"
+  );
+  validatorsQuestion.visibleRows[1].showDetailPanel();
+  validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName(
+    "text"
+  ).value = "validator2 text";
+  expect(question.validators[1].text).toEqual("validator2 text");
+  validatorTypeQuestion = validatorsQuestion.visibleRows[1].cells[0].question;
+  validatorTypeQuestion.value = "numericvalidator";
+  //validatorsQuestion.visibleRows[1].showDetailPanel();
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
+      .value
+  ).toEqual("validator2 text");
+  /* TODO remove comments update to v1.8.19
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
+  ).toBeTruthy();
+    */
+  //TODO remove comments update to v1.8.19
+  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
+  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
 });
