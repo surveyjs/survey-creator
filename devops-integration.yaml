@@ -136,6 +136,7 @@ steps:
     git pull origin master
     git fetch --tags --force
     git add surveyjs.io/App_Data/DocsEditor
+    git reset -- surveyjs.io/App_Data/DocsEditor/images
     git commit -m "[skip ci] Updated survey-creator docs"
     git pull origin master
     git push origin master
