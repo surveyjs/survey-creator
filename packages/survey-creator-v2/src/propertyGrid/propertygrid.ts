@@ -246,79 +246,93 @@ export class PropertyGridModel {
     );
   }
 }
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+
+export abstract class PropertyGridEditor implements IPropertyGridEditor {
+  constructor() {}
+  public abstract fit(prop: JsonObjectProperty): boolean;
+  public abstract getJSON(obj: Base, prop: JsonObjectProperty): any;
+}
+
+export class PropertyGridEditorBoolean extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "boolean" || prop.type == "switch";
-  },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
     return { type: "boolean", default: false };
-  },
-});
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+  }
+}
+export class PropertyGridEditorString extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
-  },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
     return { type: "text" };
-  },
-});
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+  }
+}
+export class PropertyGridEditorNumber extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number";
-  },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
     return { type: "text", inputType: "number" };
-  },
-});
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+  }
+}
+export class PropertyGridEditorText extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "text";
-  },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
     return { type: "comment" };
-  },
-});
-function getLocalizedText(prop: JsonObjectProperty, value: string): string {
-  if (prop.name === "locale") {
-    let text = editorLocalization.getLocaleName(value);
-    if (text) return text;
   }
-  if (prop.name === "cellType") {
-    let text = editorLocalization.getString("qt." + value);
-    if (text) return text;
-  }
-  if (value === null) return null;
-  return editorLocalization.getPropertyValue(value);
 }
-function getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
-  var propChoices = prop.getChoices(obj);
-  var choices = [];
-  for (var i = 0; i < propChoices.length; i++) {
-    var item = propChoices[i];
-    var jsonItem: any = { value: !!item.value ? item.value : item };
-    var text = !!item.text ? item.text : "";
-    if (!text) {
-      text = getLocalizedText(prop, jsonItem.value);
-      if (!!text && text != jsonItem.value) {
-        jsonItem.text = text;
-      }
-    }
-    choices.push(jsonItem);
-  }
-  return choices;
-}
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+export class PropertyGridEditorDropdown extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.hasChoices;
-  },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
     return {
       type: "dropdown",
       showOptionsCaption: false,
-      choices: getChoices(obj, prop),
+      choices: this.getChoices(obj, prop),
     };
-  },
-});
+  }
+  private getLocalizedText(prop: JsonObjectProperty, value: string): string {
+    if (prop.name === "locale") {
+      let text = editorLocalization.getLocaleName(value);
+      if (text) return text;
+    }
+    if (prop.name === "cellType") {
+      let text = editorLocalization.getString("qt." + value);
+      if (text) return text;
+    }
+    if (value === null) return null;
+    return editorLocalization.getPropertyValue(value);
+  }
+  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+    var propChoices = prop.getChoices(obj);
+    var choices = [];
+    for (var i = 0; i < propChoices.length; i++) {
+      var item = propChoices[i];
+      var jsonItem: any = { value: !!item.value ? item.value : item };
+      var text = !!item.text ? item.text : "";
+      if (!text) {
+        text = this.getLocalizedText(prop, jsonItem.value);
+        if (!!text && text != jsonItem.value) {
+          jsonItem.text = text;
+        }
+      }
+      choices.push(jsonItem);
+    }
+    return choices;
+  }
+}
+
+PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
+PropertyGridEditorCollection.register(new PropertyGridEditorString());
+PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
+PropertyGridEditorCollection.register(new PropertyGridEditorText());
+PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
+
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
 
