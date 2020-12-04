@@ -208,6 +208,23 @@ test("Show property editor for condition/expression", () => {
     propertyGrid.survey.getQuestionByName("defaultValueExpression")
   ).toBeTruthy(); //defaultValueExpression is here
 });
+test("Support question property editor", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
+    triggers: [{ type: "skiptrigger", gotoName: "q2" }],
+  });
+  var trigger = survey.triggers[0];
+  var propertyGrid = new PropertyGridModelTester(trigger);
+  var gotoNamePropEd = propertyGrid.survey.getQuestionByName("gotoName");
+  expect(gotoNamePropEd).toBeTruthy();
+  expect(gotoNamePropEd.choices).toHaveLength(2);
+  expect(gotoNamePropEd.choices[0].value).toEqual("q1");
+  expect(gotoNamePropEd.value).toEqual("q2");
+});
+
 test("Validators property editor", () => {
   var question = new QuestionTextModel("q1");
   question.validators.push(new ExpressionValidator());

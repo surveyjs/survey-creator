@@ -11,11 +11,13 @@ import {
   SurveyModel,
   Survey,
   FunctionFactory,
+  ItemValue,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
 } from "@survey/creator/questionEditors/questionEditor";
+import { EditableObject } from "@survey/creator/propertyEditors/editableObject";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 
 function propertyVisibleIf(params: any): boolean {
@@ -327,11 +329,56 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
 }
 
+export class PropertyGridEditorQuestion extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return {
+      type: "dropdown",
+      optionsCaption: editorLocalization.getString(
+        "pe.conditionSelectQuestion"
+      ),
+      choices: this.getChoices(obj, prop),
+    };
+  }
+  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+    var survey = EditableObject.getSurvey(obj);
+    if (!survey) return [];
+    var questions = survey.getAllQuestions();
+    if (!questions) questions = [];
+    var showTitles = false; //TODO !!this.options && this.options.showTitlesInExpressions;
+    var qItems = questions.map((q) => {
+      let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
+      let value = this.getItemValue(<any>q);
+      return { value: value, text: text };
+    });
+    qItems.sort((el1, el2) => {
+      return el1.text.localeCompare(el2.text);
+    });
+
+    return qItems;
+  }
+  protected getItemValue(question: Question): any {
+    return question.name;
+  }
+}
+
+export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "questionvalue";
+  }
+  protected getItemValue(question: Question): any {
+    return question.getValueName();
+  }
+}
+
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
