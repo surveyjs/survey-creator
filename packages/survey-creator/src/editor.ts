@@ -2093,7 +2093,10 @@ export class SurveyCreator
             return "icon-actionnotrequired";
           }),
           onClick: (question: Survey.Question) => {
-            question.isRequired = !question.isRequired;
+            var property = Survey.Serializer.findProperty(question.getType(), "isRequired");
+            if(!property || !this.onIsPropertyReadOnlyCallback(question, property, property.readOnly)) {
+              question.isRequired = !question.isRequired;
+            }
           },
         });
       }
