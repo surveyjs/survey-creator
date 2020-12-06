@@ -191,6 +191,36 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
     return "var";
   }
 }
+export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "htmlconditions";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return this.getMatrixJSON(prop, ["html"]);
+  }
+}
+export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "urlconditions";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return this.getMatrixJSON(prop, ["url"]);
+  }
+}
+export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "textitems";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return this.getMatrixJSON(prop, ["name"]);
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "item";
+  }
+}
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {
   protected abstract getChoices(obj: Base): Array<any>;
@@ -273,6 +303,15 @@ PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixCalculatedValues()
+);
+PropertyGridEditorCollection.register(
+  new PropertyGridEditorMatrixHtmlConditions()
+);
+PropertyGridEditorCollection.register(
+  new PropertyGridEditorMatrixUrlConditions()
+);
+PropertyGridEditorCollection.register(
+  new PropertyGridEditorMatrixMutlipleTextItems()
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());

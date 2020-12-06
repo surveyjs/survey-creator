@@ -13,6 +13,9 @@ import {
   SurveyTriggerRunExpression,
   ExpressionValidator,
   CalculatedValue,
+  HtmlConditionItem,
+  QuestionMultipleTextModel,
+  UrlConditionItem,
 } from "survey-knockout";
 import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
@@ -343,4 +346,67 @@ test("calculatedValues property editor", () => {
   calcValuesQuestion.addRow();
   expect(survey.calculatedValues).toHaveLength(2);
   expect(survey.calculatedValues[1].name).toEqual("var2");
+});
+
+test("htmlConditions property editor", () => {
+  var survey = new SurveyModel();
+  survey.completedHtmlOnCondition.push(new HtmlConditionItem("{q1}=1"));
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var htmlConditionsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("completedHtmlOnCondition")
+  );
+  expect(htmlConditionsQuestion).toBeTruthy();
+  expect(htmlConditionsQuestion.visibleRows).toHaveLength(1);
+  htmlConditionsQuestion.visibleRows[0].showDetailPanel();
+  var expQ = htmlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+    "expression"
+  );
+  expect(expQ).toBeTruthy();
+  expect(expQ.value).toEqual("{q1}=1");
+  expQ.value = "{q1}=2";
+  expect(survey.completedHtmlOnCondition[0].expression).toEqual("{q1}=2");
+  htmlConditionsQuestion.addRow();
+  expect(survey.completedHtmlOnCondition).toHaveLength(2);
+});
+test("urlconditions property editor", () => {
+  var survey = new SurveyModel();
+  survey.navigateToUrlOnCondition.push(new UrlConditionItem("{q1}=1", "url1"));
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var urlConditionsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("navigateToUrlOnCondition")
+  );
+  expect(urlConditionsQuestion).toBeTruthy();
+  expect(urlConditionsQuestion.visibleRows).toHaveLength(1);
+  urlConditionsQuestion.visibleRows[0].showDetailPanel();
+  var expQ = urlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+    "expression"
+  );
+  expect(expQ).toBeTruthy();
+  expect(expQ.value).toEqual("{q1}=1");
+  expQ.value = "{q1}=2";
+  expect(survey.navigateToUrlOnCondition[0].expression).toEqual("{q1}=2");
+  urlConditionsQuestion.addRow();
+  expect(survey.navigateToUrlOnCondition).toHaveLength(2);
+});
+
+test("QuestionMultipleTextModel items property editor", () => {
+  var question = new QuestionMultipleTextModel("q1");
+  question.addItem("item1", "Item 1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy();
+  expect(itemsQuestion.visibleRows).toHaveLength(1);
+  itemsQuestion.visibleRows[0].showDetailPanel();
+  var titleQ = itemsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+    "title"
+  );
+  expect(titleQ).toBeTruthy();
+  expect(titleQ.value).toEqual("Item 1");
+  titleQ.value = "item 2";
+  expect(question.items[0].title).toEqual("item 2");
+  itemsQuestion.addRow();
+  expect(question.items).toHaveLength(2);
+  expect(question.items[1].name).toEqual("item2");
 });
