@@ -12,6 +12,7 @@ import {
   SurveyModel,
   SurveyTriggerRunExpression,
   ExpressionValidator,
+  CalculatedValue,
 } from "survey-knockout";
 import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
@@ -278,38 +279,38 @@ test("Triggers property editor", () => {
   var survey = new SurveyModel();
   survey.triggers.push(new SurveyTriggerRunExpression());
   var propertyGrid = new PropertyGridModelTester(survey);
-  var triggerrsQuestion = <QuestionMatrixDynamicModel>(
+  var triggersQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("triggers")
   );
-  expect(triggerrsQuestion).toBeTruthy(); //visibleIf is here
-  expect(triggerrsQuestion.visibleRows).toHaveLength(1);
-  var triggerTypeQuestion = triggerrsQuestion.visibleRows[0].cells[0].question;
+  expect(triggersQuestion).toBeTruthy(); //visibleIf is here
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  var triggerTypeQuestion = triggersQuestion.visibleRows[0].cells[0].question;
   expect(triggerTypeQuestion.getType()).toEqual("dropdown");
   expect(triggerTypeQuestion.value).toEqual("runexpressiontrigger");
   expect(triggerTypeQuestion.choices).toHaveLength(5);
-  triggerrsQuestion.addRow();
+  triggersQuestion.addRow();
   expect(survey.triggers).toHaveLength(2);
   expect(survey.triggers[1].getType()).toEqual("runexpressiontrigger");
 
   triggerTypeQuestion.value = "completetrigger";
   expect(survey.triggers[0].getType()).toEqual("completetrigger");
   expect(survey.triggers[1].getType()).toEqual("runexpressiontrigger");
-  expect(triggerrsQuestion.visibleRows[0].cells[0].value).toEqual(
+  expect(triggersQuestion.visibleRows[0].cells[0].value).toEqual(
     "completetrigger"
   );
-  expect(triggerrsQuestion.visibleRows[1].cells[0].value).toEqual(
+  expect(triggersQuestion.visibleRows[1].cells[0].value).toEqual(
     "runexpressiontrigger"
   );
-  triggerrsQuestion.visibleRows[1].showDetailPanel();
-  triggerrsQuestion.visibleRows[1].detailPanel.getQuestionByName(
+  triggersQuestion.visibleRows[1].showDetailPanel();
+  triggersQuestion.visibleRows[1].detailPanel.getQuestionByName(
     "expression"
   ).value = "{q1} = 1";
   expect(survey.triggers[1].expression).toEqual("{q1} = 1");
-  triggerTypeQuestion = triggerrsQuestion.visibleRows[1].cells[0].question;
+  triggerTypeQuestion = triggersQuestion.visibleRows[1].cells[0].question;
   triggerTypeQuestion.value = "completetrigger";
   //validatorsQuestion.visibleRows[1].showDetailPanel();
   expect(
-    triggerrsQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
+    triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
       .value
   ).toEqual("{q1} = 1");
   /* TODO remove comments update to v1.8.19
@@ -320,4 +321,26 @@ test("Triggers property editor", () => {
   //TODO remove comments update to v1.8.19
   //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
   //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+});
+
+test("calculatedValues property editor", () => {
+  var survey = new SurveyModel();
+  survey.calculatedValues.push(new CalculatedValue("var1", "{q1}=1"));
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var calcValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("calculatedValues")
+  );
+  expect(calcValuesQuestion).toBeTruthy();
+  expect(calcValuesQuestion.visibleRows).toHaveLength(1);
+  calcValuesQuestion.visibleRows[0].showDetailPanel();
+  var expQ = calcValuesQuestion.visibleRows[0].detailPanel.getQuestionByName(
+    "expression"
+  );
+  expect(expQ).toBeTruthy();
+  expect(expQ.value).toEqual("{q1}=1");
+  expQ.value = "{q1}=2";
+  expect(survey.calculatedValues[0].expression).toEqual("{q1}=2");
+  calcValuesQuestion.addRow();
+  expect(survey.calculatedValues).toHaveLength(2);
+  expect(survey.calculatedValues[1].name).toEqual("var2");
 });

@@ -287,6 +287,14 @@ export class PropertyGridEditorText extends PropertyGridEditor {
     return { type: "comment" };
   }
 }
+export class PropertyGridEditorColor extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "color";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return { type: "text", inputType: "color" };
+  }
+}
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.hasChoices;
@@ -376,6 +384,7 @@ export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion 
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
+PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
