@@ -167,6 +167,9 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   protected getKeyValue(): string {
     return "name";
   }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "column";
+  }
 }
 
 export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditorMatrix {

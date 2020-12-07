@@ -164,6 +164,7 @@ test("column[] property editor", () => {
   columnsQuestion.addRow();
   expect(question.columns).toHaveLength(4); //"There are 4 items now");
   expect(question.columns[3].getType()).toEqual("matrixdropdowncolumn"); //"Object created correctly"
+  expect(question.columns[3].name).toEqual("col4"); //"Object created correctly"
   question.columns[1].title = "Column 2";
   expect(columnsQuestion.visibleRows[1].cells[2].value).toEqual("Column 2"); //"the third cell in second row is correct"
   question.columns[2].cellType = "text";
