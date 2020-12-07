@@ -12,7 +12,7 @@ import {
 import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
-  PropertyGridModel,
+  PropertyJSONGenerator,
 } from "./propertygrid";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
@@ -61,21 +61,13 @@ export abstract class PropertyGridEditorMatrixBase extends PropertyGridEditor {
 }
 
 export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixBase {
-  public onCreated(
-    propertyGrid: PropertyGridModel,
-    obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
-  ) {
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.onGetValueForNewRowCallBack = (
       sender: QuestionMatrixDynamicModel
     ): any => {
       return this.createNewItem(sender, prop);
     };
-    this.setupMatrixQuestion(
-      propertyGrid,
-      <QuestionMatrixDynamicModel>question
-    );
+    this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question);
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -115,10 +107,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixB
   protected getObjTypeName(): string {
     return "";
   }
-  protected setupMatrixQuestion(
-    propertyGrid: PropertyGridModel,
-    matrix: QuestionMatrixDynamicModel
-  ) {
+  protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel) {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
@@ -128,7 +117,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixB
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
-      propertyGrid.setupObjPanel(panel, row.editingObj, true);
+      new PropertyJSONGenerator(row.editingObj).setupObjPanel(panel, true);
     };
   }
   protected getMatrixJSON(

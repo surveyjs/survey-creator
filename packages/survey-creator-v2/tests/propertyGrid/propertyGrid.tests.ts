@@ -16,10 +16,12 @@ import {
   HtmlConditionItem,
   QuestionMultipleTextModel,
   UrlConditionItem,
+  QuestionCompositeModel,
 } from "survey-knockout";
 import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
 export * from "../../src/propertyGrid/propertygtrid_condition";
+export * from "../../src/propertyGrid/propertygtrid_restfull";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base) {
@@ -434,5 +436,22 @@ test("bindings property editor", () => {
   expect(q.value).toEqual("q2");
   q.value = "q3";
   expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
+  */
+});
+test("restfull property editor", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choicesByUrl.url = "myUrl";
+  var propertyGrid = new PropertyGridModelTester(question);
+  var restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  expect(restFullQuestion).toBeTruthy();
+  expect(restFullQuestion.getType()).toEqual("propertygrid_restfull");
+  var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  expect(urlQuestion).toBeTruthy();
+  /* TODO v1.8.19
+  expect(urlQuestion.value).toEqual("myUrl");
+  urlQuestion.value = "muUrl2";
+  expect(question.choicesByUrl.url).toEqual("myUrl2");
   */
 });
