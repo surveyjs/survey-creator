@@ -410,3 +410,29 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
 });
+test("bindings property editor", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q2" },
+      { type: "matrixdynamic", name: "q1", bindings: { rowCount: "q2" } },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(matrix);
+  var bindingsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("bindings")
+  );
+  expect(bindingsQuestion).toBeTruthy();
+  expect(bindingsQuestion.getType()).toEqual("matrixdropdown");
+  expect(bindingsQuestion.visibleRows).toHaveLength(1);
+  expect(bindingsQuestion.visibleRows[0].rowName).toEqual("rowCount");
+  expect(bindingsQuestion.columns).toHaveLength(1);
+  var q = bindingsQuestion.visibleRows[0].cells[0].question;
+  expect(q.choices).toHaveLength(3);
+  /* TODO v1.8.19
+  expect(q.value).toEqual("q2");
+  q.value = "q3";
+  expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
+  */
+});

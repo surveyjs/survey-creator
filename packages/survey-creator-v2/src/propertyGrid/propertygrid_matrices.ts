@@ -31,7 +31,36 @@ class SurveyHelper {
   }
 }
 
-export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
+export abstract class PropertyGridEditorMatrixBase extends PropertyGridEditor {
+  protected getColumnPropertyJSON(className: string, propName: string): any {
+    var prop = Serializer.findProperty(className, propName);
+    if (!prop) return null;
+    var json = PropertyGridEditorCollection.getJSON(null, prop);
+    if (!json) return null;
+    json.name = prop.name;
+    json.title = editorLocalization.getPropertyName(prop.name);
+    if (!!json.type) {
+      json.cellType = json.type;
+      delete json.type;
+    }
+    return json;
+  }
+  protected getColumnsJSON(
+    className: string,
+    propNames: Array<string>
+  ): Array<any> {
+    var res: Array<any> = [];
+    for (var i = 0; i < propNames.length; i++) {
+      var columnJSON = this.getColumnPropertyJSON(className, propNames[i]);
+      if (!!columnJSON) {
+        res.push(columnJSON);
+      }
+    }
+    return res;
+  }
+}
+
+export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixBase {
   public onCreated(
     propertyGrid: PropertyGridModel,
     obj: Base,
@@ -85,32 +114,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   }
   protected getObjTypeName(): string {
     return "";
-  }
-  protected getColumnPropertyJSON(className: string, propName: string): any {
-    var prop = Serializer.findProperty(className, propName);
-    if (!prop) return null;
-    var json = PropertyGridEditorCollection.getJSON(null, prop);
-    if (!json) return null;
-    json.name = prop.name;
-    json.title = editorLocalization.getPropertyName(prop.name);
-    if (!!json.type) {
-      json.cellType = json.type;
-      delete json.type;
-    }
-    return json;
-  }
-  protected getColumnsJSON(
-    className: string,
-    propNames: Array<string>
-  ): Array<any> {
-    var res: Array<any> = [];
-    for (var i = 0; i < propNames.length; i++) {
-      var columnJSON = this.getColumnPropertyJSON(className, propNames[i]);
-      if (!!columnJSON) {
-        res.push(columnJSON);
-      }
-    }
-    return res;
   }
   protected setupMatrixQuestion(
     propertyGrid: PropertyGridModel,
@@ -299,6 +302,48 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   }
 }
 
+export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "bindings";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    var res = {
+      type: "matrixdropdown",
+      rows: this.getRows(obj),
+      columns: this.getColumns(obj),
+    };
+    return res;
+  }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    var bindingValue = obj.bindings.getValueNameByPropertyName(
+      options.row.rowName
+    );
+    if (!!bindingValue) {
+      options.cellQuestion.value = bindingValue;
+    }
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    obj.bindings.setBinding(options.row.rowName, options.value);
+  }
+  private getRows(obj: Base): Array<any> {
+    var props = obj.bindings.getProperties();
+    var res = [];
+    for (var i = 0; i < props.length; i++) {
+      res.push({ value: props[i].name });
+    }
+    return res;
+  }
+  private getColumns(obj: Base): Array<any> {
+    var prop = new JsonObjectProperty(null, "value");
+    prop.type = "questionvalue";
+    var json = PropertyGridEditorCollection.getJSON(obj, prop);
+    json["cellType"] = json["type"];
+    delete json["type"];
+    var res = [json];
+    return res;
+  }
+}
+
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(
@@ -315,3 +360,5 @@ PropertyGridEditorCollection.register(
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
+
+PropertyGridEditorCollection.register(new PropertyGridEditorBindings());
