@@ -319,7 +319,8 @@ export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
       options.row.rowName
     );
     if (!!bindingValue) {
-      options.cellQuestion.value = bindingValue;
+      //TODO set after v1.8.19
+      //options.cellQuestion.value = bindingValue;
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
