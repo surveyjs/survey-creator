@@ -46,6 +46,15 @@ QUnit.test("toolbox reorder items", function (assert) {
   assert.equal(toolbox.items[2].name, "text");
 });
 
+QUnit.test("toolbox addItem with index", function (assert) {
+  var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  assert.equal(toolbox.items[0].name, "text");
+  assert.equal(toolbox.items[1].name, "dropdown");
+
+  toolbox.addItem(<any>{ name: "countries" }, 0);
+  assert.equal(toolbox.items[0].name, "countries");
+});
+
 QUnit.test("toolbox several categories", function (assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   assert.equal(toolbox.koHasCategories(), false, "There is only one category");
