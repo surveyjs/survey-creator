@@ -12,7 +12,7 @@ import {
 import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
-  PropertyGridModel,
+  PropertyJSONGenerator,
 } from "./propertygrid";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
@@ -31,22 +31,43 @@ class SurveyHelper {
   }
 }
 
-export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
-  public onCreated(
-    propertyGrid: PropertyGridModel,
-    obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
-  ) {
+export abstract class PropertyGridEditorMatrixBase extends PropertyGridEditor {
+  protected getColumnPropertyJSON(className: string, propName: string): any {
+    var prop = Serializer.findProperty(className, propName);
+    if (!prop) return null;
+    var json = PropertyGridEditorCollection.getJSON(null, prop);
+    if (!json) return null;
+    json.name = prop.name;
+    json.title = editorLocalization.getPropertyName(prop.name);
+    if (!!json.type) {
+      json.cellType = json.type;
+      delete json.type;
+    }
+    return json;
+  }
+  protected getColumnsJSON(
+    className: string,
+    propNames: Array<string>
+  ): Array<any> {
+    var res: Array<any> = [];
+    for (var i = 0; i < propNames.length; i++) {
+      var columnJSON = this.getColumnPropertyJSON(className, propNames[i]);
+      if (!!columnJSON) {
+        res.push(columnJSON);
+      }
+    }
+    return res;
+  }
+}
+
+export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixBase {
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.onGetValueForNewRowCallBack = (
       sender: QuestionMatrixDynamicModel
     ): any => {
       return this.createNewItem(sender, prop);
     };
-    this.setupMatrixQuestion(
-      propertyGrid,
-      <QuestionMatrixDynamicModel>question
-    );
+    this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question);
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -86,46 +107,20 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected getObjTypeName(): string {
     return "";
   }
-  protected getColumnPropertyJSON(className: string, propName: string): any {
-    var prop = Serializer.findProperty(className, propName);
-    if (!prop) return null;
-    var json = PropertyGridEditorCollection.getJSON(null, prop);
-    if (!json) return null;
-    json.name = prop.name;
-    json.title = editorLocalization.getPropertyName(prop.name);
-    if (!!json.type) {
-      json.cellType = json.type;
-      delete json.type;
-    }
-    return json;
+  protected hasDetailPanel(): boolean {
+    return true;
   }
-  protected getColumnsJSON(
-    className: string,
-    propNames: Array<string>
-  ): Array<any> {
-    var res: Array<any> = [];
-    for (var i = 0; i < propNames.length; i++) {
-      var columnJSON = this.getColumnPropertyJSON(className, propNames[i]);
-      if (!!columnJSON) {
-        res.push(columnJSON);
-      }
-    }
-    return res;
-  }
-  protected setupMatrixQuestion(
-    propertyGrid: PropertyGridModel,
-    matrix: QuestionMatrixDynamicModel
-  ) {
+  protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel) {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
-      return true;
+      return this.hasDetailPanel();
     };
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
-      propertyGrid.setupObjPanel(panel, row.editingObj, true);
+      new PropertyJSONGenerator(row.editingObj).setupObjPanel(panel, true);
     };
   }
   protected getMatrixJSON(
@@ -174,6 +169,27 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   }
   protected getKeyValue(): string {
     return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "column";
+  }
+}
+
+export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "surveypages";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return this.getMatrixJSON(prop, ["name", "title"]);
+  }
+  protected hasDetailPanel(): boolean {
+    return false;
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "page";
   }
 }
 
@@ -299,8 +315,52 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   }
 }
 
+export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "bindings";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    var res = {
+      type: "matrixdropdown",
+      rows: this.getRows(obj),
+      columns: this.getColumns(obj),
+    };
+    return res;
+  }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    var bindingValue = obj.bindings.getValueNameByPropertyName(
+      options.row.rowName
+    );
+    if (!!bindingValue) {
+      options.cellQuestion.value = bindingValue;
+    }
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    obj.bindings.setBinding(options.row.rowName, options.value);
+  }
+  private getRows(obj: Base): Array<any> {
+    var props = obj.bindings.getProperties();
+    var res = [];
+    for (var i = 0; i < props.length; i++) {
+      res.push({ value: props[i].name });
+    }
+    return res;
+  }
+  private getColumns(obj: Base): Array<any> {
+    var prop = new JsonObjectProperty(null, "value");
+    prop.type = "questionvalue";
+    var json = PropertyGridEditorCollection.getJSON(obj, prop);
+    json["cellType"] = json["type"];
+    delete json["type"];
+    json.name = "value";
+    var res = [json];
+    return res;
+  }
+}
+
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixCalculatedValues()
 );
@@ -315,3 +375,5 @@ PropertyGridEditorCollection.register(
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
+
+PropertyGridEditorCollection.register(new PropertyGridEditorBindings());

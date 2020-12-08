@@ -30,12 +30,7 @@ FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
   getJSON(obj: Base, prop: JsonObjectProperty): any;
-  onCreated?: (
-    propertyGrid: PropertyGridModel,
-    obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
-  ) => void;
+  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
@@ -66,15 +61,10 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     return !!res ? res.getJSON(obj, prop) : null;
   },
-  onCreated(
-    propertyGrid: PropertyGridModel,
-    obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
-  ): any {
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
-      res.onCreated(propertyGrid, obj, question, prop);
+      res.onCreated(obj, question, prop);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -90,6 +80,104 @@ export var PropertyGridEditorCollection = {
     }
   },
 };
+
+export class PropertyJSONGenerator {
+  constructor(public obj: Base) {}
+  public toJSON(isNested: boolean = false): any {
+    return this.createJSON(isNested);
+  }
+  public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false) {
+    panel.fromJSON(this.toJSON(isNestedObj));
+    this.onQuestionsCreated(panel);
+  }
+  private onQuestionsCreated(panel: PanelModelBase) {
+    var properties = Serializer.getPropertiesByObj(this.obj);
+    var props: any = {};
+    for (var i = 0; i < properties.length; i++) {
+      props[properties[i].name] = properties[i];
+    }
+    var questions = panel.questions;
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      var prop = props[q.name];
+      q.property = prop;
+      if (!!prop.visibleIf) {
+        q.visibleIf = "propertyVisibleIf() = true";
+      }
+      PropertyGridEditorCollection.onCreated(this.obj, q, prop);
+    }
+  }
+  private createJSON(isNestedObj: boolean): any {
+    var properties = new SurveyQuestionProperties(this.obj);
+    var tabs = properties.getTabs();
+    var panels: any = {};
+    for (var i = 0; i < tabs.length; i++) {
+      panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0);
+    }
+    var json: any = {
+      elements: [],
+    };
+    for (var key in panels) {
+      if (key == "general" && isNestedObj) {
+        var els = panels[key].elements;
+        for (var i = 0; i < els.length; i++) {
+          json.elements.push(els[i]);
+        }
+      } else {
+        json.elements.push(panels[key]);
+      }
+    }
+    return json;
+  }
+  private createPanelProps(
+    tab: SurveyQuestionEditorTabDefinition,
+    isFirst: boolean
+  ): any {
+    var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
+    for (var i = 0; i < tab.properties.length; i++) {
+      var propDef = tab.properties[i];
+      var propJSON = this.createQuestionJSON(
+        <any>propDef.property,
+        propDef.title
+      );
+      if (!propJSON) continue;
+      if (propDef.name == tab.name) {
+        propJSON.titleLocation = "hidden";
+      }
+      panel.elements.push(propJSON);
+    }
+    return panel;
+  }
+  private createPanelJSON(
+    category: string,
+    title: string,
+    isFirstPanel: boolean
+  ): any {
+    return {
+      type: "panel",
+      name: category,
+      title: this.getPanelTitle(category, title),
+      state: isFirstPanel ? "expanded" : "collapsed",
+      elements: [],
+    };
+  }
+  private createQuestionJSON(prop: JsonObjectProperty, title: string): any {
+    var json = PropertyGridEditorCollection.getJSON(this.obj, prop);
+    if (!json) return null;
+    json.name = prop.name;
+    json.visible = prop.visible;
+    json.title = this.getQuestionTitle(prop.name, title);
+    return json;
+  }
+  private getPanelTitle(name: string, title: string): string {
+    if (!!title) return title;
+    return editorLocalization.getString("pe.tabs." + name);
+  }
+  private getQuestionTitle(name: string, title: string): string {
+    if (!!title && title !== name) return title;
+    return editorLocalization.getPropertyNameInEditor(name);
+  }
+}
 
 export class PropertyGridModel {
   private static panelNameIndex = 0;
@@ -107,7 +195,7 @@ export class PropertyGridModel {
       this.objValue = value;
       this.surveyValue = this.createSurvey(this.getSurveyJSON());
       var page = this.surveyValue.createNewPage("p1");
-      this.setupObjPanel(page, this.obj, false);
+      new PropertyJSONGenerator(this.obj).setupObjPanel(page);
       this.survey.addPage(page);
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
@@ -131,103 +219,6 @@ export class PropertyGridModel {
     return {
       showNavigationButtons: "none",
     };
-  }
-  public setupObjPanel(panel: PanelModelBase, obj: Base, isNestedObj: boolean) {
-    panel.fromJSON(this.createJSON(obj, isNestedObj));
-    this.onQuestionsCreated(panel, obj);
-  }
-  private createJSON(obj: Base, isNestedObj: boolean): any {
-    var properties = new SurveyQuestionProperties(obj);
-    var tabs = properties.getTabs();
-    var panels: any = {};
-    for (var i = 0; i < tabs.length; i++) {
-      panels[tabs[i].name] = this.createPanelProps(obj, tabs[i], i == 0);
-    }
-    var json: any = {
-      elements: [],
-    };
-    for (var key in panels) {
-      if (key == "general" && isNestedObj) {
-        var els = panels[key].elements;
-        for (var i = 0; i < els.length; i++) {
-          json.elements.push(els[i]);
-        }
-      } else {
-        json.elements.push(panels[key]);
-      }
-    }
-    return json;
-  }
-  private createPanelProps(
-    obj: Base,
-    tab: SurveyQuestionEditorTabDefinition,
-    isFirst: boolean
-  ): any {
-    var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
-    for (var i = 0; i < tab.properties.length; i++) {
-      var propDef = tab.properties[i];
-      var propJSON = this.createQuestionJSON(
-        obj,
-        <any>propDef.property,
-        propDef.title
-      );
-      if (!propJSON) continue;
-      if (propDef.name == tab.name) {
-        propJSON.titleLocation = "hidden";
-      }
-      panel.elements.push(propJSON);
-    }
-    return panel;
-  }
-  private onQuestionsCreated(panel: PanelModelBase, obj: Base) {
-    var properties = Serializer.getPropertiesByObj(obj);
-    var props: any = {};
-    for (var i = 0; i < properties.length; i++) {
-      props[properties[i].name] = properties[i];
-    }
-    var questions = panel.questions;
-    for (var i = 0; i < questions.length; i++) {
-      var q = questions[i];
-      var prop = props[q.name];
-      q.property = prop;
-      if (!!prop.visibleIf) {
-        q.visibleIf = "propertyVisibleIf() = true";
-      }
-      PropertyGridEditorCollection.onCreated(this, obj, q, prop);
-    }
-  }
-  private createPanelJSON(
-    category: string,
-    title: string,
-    isFirstPanel: boolean
-  ): any {
-    return {
-      type: "panel",
-      name: category,
-      title: this.getPanelTitle(category, title),
-      state: isFirstPanel ? "expanded" : "collapsed",
-      elements: [],
-    };
-  }
-  private createQuestionJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    title: string
-  ): any {
-    var json = PropertyGridEditorCollection.getJSON(obj, prop);
-    if (!json) return null;
-    json.name = prop.name;
-    json.visible = prop.visible;
-    json.title = this.getQuestionTitle(prop.name, title);
-    return json;
-  }
-  private getPanelTitle(name: string, title: string): string {
-    if (!!title) return title;
-    return editorLocalization.getString("pe.tabs." + name);
-  }
-  private getQuestionTitle(name: string, title: string): string {
-    if (!!title && title !== name) return title;
-    return editorLocalization.getPropertyNameInEditor(name);
   }
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {
@@ -388,6 +379,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();

@@ -16,10 +16,12 @@ import {
   HtmlConditionItem,
   QuestionMultipleTextModel,
   UrlConditionItem,
+  QuestionCompositeModel,
 } from "survey-knockout";
 import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
 export * from "../../src/propertyGrid/propertygtrid_condition";
+export * from "../../src/propertyGrid/propertygtrid_restfull";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base) {
@@ -162,12 +164,41 @@ test("column[] property editor", () => {
   columnsQuestion.addRow();
   expect(question.columns).toHaveLength(4); //"There are 4 items now");
   expect(question.columns[3].getType()).toEqual("matrixdropdowncolumn"); //"Object created correctly"
+  expect(question.columns[3].name).toEqual("col4"); //"Object created correctly"
   question.columns[1].title = "Column 2";
   expect(columnsQuestion.visibleRows[1].cells[2].value).toEqual("Column 2"); //"the third cell in second row is correct"
   question.columns[2].cellType = "text";
   expect(columnsQuestion.visibleRows[2].cells[0].value).toEqual("text"); //"react on changing column cell type"
   columnsQuestion.visibleRows[2].cells[0].value = "checkbox";
   expect(question.columns[2].cellType).toEqual("checkbox"); //"change column cell type in matrix"
+});
+
+test("surveypages property editor", () => {
+  var survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  expect(pagesQuestion).toBeTruthy();
+  expect(pagesQuestion.getType()).toEqual("matrixdynamic");
+  expect(pagesQuestion.columns).toHaveLength(2);
+  expect(pagesQuestion.columns[0].cellType).toEqual("text");
+  expect(pagesQuestion.columns[0].title).toEqual("Name");
+  expect(pagesQuestion.visibleRows).toHaveLength(3);
+  expect(pagesQuestion.visibleRows[0].cells[0].value).toEqual("page1");
+  expect(pagesQuestion.visibleRows[0].cells[1].value).toBeFalsy();
+  pagesQuestion.visibleRows[0].cells[1].value = "My Page 1";
+  expect(survey.pages[0].title).toEqual("My Page 1");
+
+  pagesQuestion.addRow();
+  expect(survey.pages).toHaveLength(4);
+  expect(survey.pages[3].getType()).toEqual("page");
+  expect(survey.pages[3].name).toEqual("page4");
+  survey.pages[1].title = "Page 2";
+  expect(pagesQuestion.visibleRows[1].cells[1].value).toEqual("Page 2");
 });
 
 test("Change editingObj of the property grid", () => {
@@ -264,19 +295,15 @@ test("Validators property editor", () => {
   expect(question.validators[1].text).toEqual("validator2 text");
   validatorTypeQuestion = validatorsQuestion.visibleRows[1].cells[0].question;
   validatorTypeQuestion.value = "numericvalidator";
-  //validatorsQuestion.visibleRows[1].showDetailPanel();
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
       .value
   ).toEqual("validator2 text");
-  /* TODO remove comments update to v1.8.19
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
   ).toBeTruthy();
-    */
-  //TODO remove comments update to v1.8.19
-  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
-  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+  expect(question.validators[0].getType()).toEqual("numericvalidator");
+  expect(question.validators[1].getType()).toEqual("numericvalidator");
 });
 test("Triggers property editor", () => {
   var survey = new SurveyModel();
@@ -311,19 +338,12 @@ test("Triggers property editor", () => {
   expect(survey.triggers[1].expression).toEqual("{q1} = 1");
   triggerTypeQuestion = triggersQuestion.visibleRows[1].cells[0].question;
   triggerTypeQuestion.value = "completetrigger";
-  //validatorsQuestion.visibleRows[1].showDetailPanel();
   expect(
     triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
       .value
   ).toEqual("{q1} = 1");
-  /* TODO remove comments update to v1.8.19
-  expect(
-    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
-  ).toBeTruthy();
-    */
-  //TODO remove comments update to v1.8.19
-  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
-  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+  expect(survey.triggers[0].getType()).toEqual("completetrigger");
+  expect(survey.triggers[1].getType()).toEqual("completetrigger");
 });
 
 test("calculatedValues property editor", () => {
@@ -409,4 +429,43 @@ test("QuestionMultipleTextModel items property editor", () => {
   itemsQuestion.addRow();
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
+});
+test("bindings property editor", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q2" },
+      { type: "matrixdynamic", name: "q1", bindings: { rowCount: "q2" } },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(matrix);
+  var bindingsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("bindings")
+  );
+  expect(bindingsQuestion).toBeTruthy();
+  expect(bindingsQuestion.getType()).toEqual("matrixdropdown");
+  expect(bindingsQuestion.visibleRows).toHaveLength(1);
+  expect(bindingsQuestion.visibleRows[0].rowName).toEqual("rowCount");
+  expect(bindingsQuestion.columns).toHaveLength(1);
+  var q = bindingsQuestion.visibleRows[0].cells[0].question;
+  expect(q.choices).toHaveLength(3);
+  expect(q.value).toEqual("q2");
+  q.value = "q3";
+  expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
+});
+test("restfull property editor", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choicesByUrl.url = "myUrl";
+  var propertyGrid = new PropertyGridModelTester(question);
+  var restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  expect(restFullQuestion).toBeTruthy();
+  expect(restFullQuestion.getType()).toEqual("propertygrid_restfull");
+  var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  expect(urlQuestion).toBeTruthy();
+  expect(urlQuestion.value).toEqual("myUrl");
+  urlQuestion.value = "myUrl2";
+  expect(question.choicesByUrl.url).toEqual("myUrl2");
 });
