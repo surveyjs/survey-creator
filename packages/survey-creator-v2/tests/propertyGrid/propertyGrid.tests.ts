@@ -267,19 +267,15 @@ test("Validators property editor", () => {
   expect(question.validators[1].text).toEqual("validator2 text");
   validatorTypeQuestion = validatorsQuestion.visibleRows[1].cells[0].question;
   validatorTypeQuestion.value = "numericvalidator";
-  //validatorsQuestion.visibleRows[1].showDetailPanel();
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
       .value
   ).toEqual("validator2 text");
-  /* TODO remove comments update to v1.8.19
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
   ).toBeTruthy();
-    */
-  //TODO remove comments update to v1.8.19
-  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
-  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+  expect(question.validators[0].getType()).toEqual("numericvalidator");
+  expect(question.validators[1].getType()).toEqual("numericvalidator");
 });
 test("Triggers property editor", () => {
   var survey = new SurveyModel();
@@ -314,19 +310,12 @@ test("Triggers property editor", () => {
   expect(survey.triggers[1].expression).toEqual("{q1} = 1");
   triggerTypeQuestion = triggersQuestion.visibleRows[1].cells[0].question;
   triggerTypeQuestion.value = "completetrigger";
-  //validatorsQuestion.visibleRows[1].showDetailPanel();
   expect(
     triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
       .value
   ).toEqual("{q1} = 1");
-  /* TODO remove comments update to v1.8.19
-  expect(
-    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
-  ).toBeTruthy();
-    */
-  //TODO remove comments update to v1.8.19
-  //expect(question.validators[0]["valueType"]).toEqual("numericvalidator");
-  //expect(question.validators[1]["valueType"]).toEqual("expressionvalidator");
+  expect(survey.triggers[0].getType()).toEqual("completetrigger");
+  expect(survey.triggers[1].getType()).toEqual("completetrigger");
 });
 
 test("calculatedValues property editor", () => {
@@ -433,11 +422,9 @@ test("bindings property editor", () => {
   expect(bindingsQuestion.columns).toHaveLength(1);
   var q = bindingsQuestion.visibleRows[0].cells[0].question;
   expect(q.choices).toHaveLength(3);
-  /* TODO v1.8.19
   expect(q.value).toEqual("q2");
   q.value = "q3";
   expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
-  */
 });
 test("restfull property editor", () => {
   var question = new QuestionDropdownModel("q1");
@@ -450,9 +437,7 @@ test("restfull property editor", () => {
   expect(restFullQuestion.getType()).toEqual("propertygrid_restfull");
   var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
   expect(urlQuestion).toBeTruthy();
-  /* TODO v1.8.19
   expect(urlQuestion.value).toEqual("myUrl");
-  urlQuestion.value = "muUrl2";
+  urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
-  */
 });

@@ -311,8 +311,7 @@ export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
       options.row.rowName
     );
     if (!!bindingValue) {
-      //TODO set after v1.8.19
-      //options.cellQuestion.value = bindingValue;
+      options.cellQuestion.value = bindingValue;
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
@@ -332,6 +331,7 @@ export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
     var json = PropertyGridEditorCollection.getJSON(obj, prop);
     json["cellType"] = json["type"];
     delete json["type"];
+    json.name = "value";
     var res = [json];
     return res;
   }
