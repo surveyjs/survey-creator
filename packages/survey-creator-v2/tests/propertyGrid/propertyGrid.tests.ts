@@ -173,6 +173,34 @@ test("column[] property editor", () => {
   expect(question.columns[2].cellType).toEqual("checkbox"); //"change column cell type in matrix"
 });
 
+test("surveypages property editor", () => {
+  var survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  expect(pagesQuestion).toBeTruthy();
+  expect(pagesQuestion.getType()).toEqual("matrixdynamic");
+  expect(pagesQuestion.columns).toHaveLength(2);
+  expect(pagesQuestion.columns[0].cellType).toEqual("text");
+  expect(pagesQuestion.columns[0].title).toEqual("Name");
+  expect(pagesQuestion.visibleRows).toHaveLength(3);
+  expect(pagesQuestion.visibleRows[0].cells[0].value).toEqual("page1");
+  expect(pagesQuestion.visibleRows[0].cells[1].value).toBeFalsy();
+  pagesQuestion.visibleRows[0].cells[1].value = "My Page 1";
+  expect(survey.pages[0].title).toEqual("My Page 1");
+
+  pagesQuestion.addRow();
+  expect(survey.pages).toHaveLength(4);
+  expect(survey.pages[3].getType()).toEqual("page");
+  expect(survey.pages[3].name).toEqual("page4");
+  survey.pages[1].title = "Page 2";
+  expect(pagesQuestion.visibleRows[1].cells[1].value).toEqual("Page 2");
+});
+
 test("Change editingObj of the property grid", () => {
   var question = new QuestionTextModel("q1");
   var question2 = new QuestionTextModel("q2");

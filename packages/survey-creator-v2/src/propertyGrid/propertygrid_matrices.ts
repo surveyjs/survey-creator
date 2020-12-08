@@ -107,11 +107,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixB
   protected getObjTypeName(): string {
     return "";
   }
+  protected hasDetailPanel(): boolean {
+    return true;
+  }
   protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel) {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
-      return true;
+      return this.hasDetailPanel();
     };
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
@@ -169,6 +172,24 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "column";
+  }
+}
+
+export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "surveypages";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+    return this.getMatrixJSON(prop, ["name", "title"]);
+  }
+  protected hasDetailPanel(): boolean {
+    return false;
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "page";
   }
 }
 
@@ -339,6 +360,7 @@ export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixCalculatedValues()
 );
