@@ -19,6 +19,10 @@ import {
 } from "@survey/creator/questionEditors/questionEditor";
 import { EditableObject } from "@survey/creator/propertyEditors/editableObject";
 import { editorLocalization } from "@survey/creator/editorLocalization";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions,
+} from "@survey/creator/settings";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -180,11 +184,12 @@ export class PropertyJSONGenerator {
 }
 
 export class PropertyGridModel {
-  private static panelNameIndex = 0;
   private surveyValue: SurveyModel;
   private objValue: Base;
+  private optionsValue: ISurveyCreatorOptions;
   public objValueChangedCallback: () => void;
-  constructor(obj: Base) {
+  constructor(obj: Base = null, options: ISurveyCreatorOptions = null) {
+    this.options = options;
     this.obj = obj;
   }
   public get obj() {
@@ -193,7 +198,11 @@ export class PropertyGridModel {
   public set obj(value: Base) {
     if (this.objValue != value) {
       this.objValue = value;
-      this.surveyValue = this.createSurvey(this.getSurveyJSON());
+      var json = this.getSurveyJSON();
+      if (this.options.readOnly) {
+        json.mode = "display";
+      }
+      this.surveyValue = this.createSurvey(json);
       var page = this.surveyValue.createNewPage("p1");
       new PropertyJSONGenerator(this.obj).setupObjPanel(page);
       this.survey.addPage(page);
@@ -208,6 +217,12 @@ export class PropertyGridModel {
         this.objValueChangedCallback();
       }
     }
+  }
+  public get options(): ISurveyCreatorOptions {
+    return this.optionsValue;
+  }
+  public set options(val: ISurveyCreatorOptions) {
+    this.optionsValue = !!val ? val : new EmptySurveyCreatorOptions();
   }
   public get survey() {
     return this.surveyValue;

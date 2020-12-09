@@ -18,15 +18,20 @@ import {
   UrlConditionItem,
   QuestionCompositeModel,
 } from "survey-knockout";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions,
+} from "@survey/creator/settings";
+
 import { assert } from "console";
 export * from "../../src/propertyGrid/propertygrid_matrices";
 export * from "../../src/propertyGrid/propertygtrid_condition";
 export * from "../../src/propertyGrid/propertygtrid_restfull";
 
 export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base) {
+  constructor(obj: Base, options: ISurveyCreatorOptions = null) {
     PropertyGridEditorCollection.clearHash();
-    super(obj);
+    super(obj, options);
   }
 }
 test("Create survey with editingObj", () => {
@@ -468,4 +473,11 @@ test("restfull property editor", () => {
   expect(urlQuestion.value).toEqual("myUrl");
   urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
+});
+test("options.readOnly is true", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.readOnly = true;
+  var question = new QuestionDropdownModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.survey.mode).toEqual("display");
 });
