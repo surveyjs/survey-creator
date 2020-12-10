@@ -221,18 +221,6 @@ export class SurveyCreator
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
-   * You may changed it and make the property editor read only or enabled for a particular object.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
-   * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
-   */
-  public onGetPropertyReadOnly: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
@@ -537,17 +525,6 @@ export class SurveyCreator
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * Use this event to add/remove/modify the element (question/panel) menu items.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.items the list of menu items. It has two required fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
-   * @see onElementAllowOperations
-   */
-  public onDefineElementMenuItems: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
    * Use this event to show the description on the top or/and bottom of the property modal editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -700,18 +677,11 @@ export class SurveyCreator
     itemAdorner.inplaceEditForValues = val;
   }
 
-  /**
-   * A boolean property, false by default. Set it to true to deny editing.
-   */
-  public get readOnly() {
-    return this.koReadOnly();
-  }
-  public set readOnly(newVal) {
-    const text = this.text;
-    this.koReadOnly(newVal);
+  protected onSetReadOnly(newVal: boolean) {
+    super.onSetReadOnly(newVal);
     this.render(null, this.options);
-    this.text = text;
   }
+
   public koCanUndo: any;
   public koCanRedo: any;
 
@@ -1218,6 +1188,7 @@ export class SurveyCreator
     }
   }
   public setModified(options: any = null) {
+    super.setModified(options); // TODO: move to super class
     this.setState("modified");
     this.setUndoRedoCurrentState();
     this.onModified.fire(this, options);
@@ -2401,15 +2372,6 @@ export class SurveyCreator
   public deleteCurrentObject() {
     this.deleteObject(this.selectedElement);
   }
-  private convertCurrentObject(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className);
-    this.setModified({
-      type: "QUESTION_CONVERTED",
-      className: className,
-      oldValue: obj,
-      newValue: newQuestion,
-    });
-  }
   /**
    * Show the creator dialog. The element can be a question, panel, page or survey. If property grid is used instead of dialog window (default behavior), then focus goes into the property grid.
    * @param element The survey element
@@ -2649,22 +2611,6 @@ export class SurveyCreator
     };
     this.onCollectionItemDeleting.fire(this, options);
     return options.allowDelete;
-  }
-  onIsPropertyReadOnlyCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    readOnly: boolean
-  ): boolean {
-    var proposedValue = this.readOnly || readOnly;
-    if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
-    var options = {
-      obj: obj,
-      property: property,
-      readOnly: proposedValue,
-      propertyName: property.name,
-    };
-    this.onGetPropertyReadOnly.fire(this, options);
-    return options.readOnly;
   }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,

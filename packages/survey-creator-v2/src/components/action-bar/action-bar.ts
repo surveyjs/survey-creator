@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 
-import {IToolbarItem} from "@survey/creator/components/toolbar";
+import { IToolbarItem } from "@survey/creator/components/toolbar";
 
 import "./action-bar.scss";
 const template = require("./action-bar.html");
