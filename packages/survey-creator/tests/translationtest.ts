@@ -668,3 +668,29 @@ QUnit.test(
     Survey.Serializer.removeProperty("page", "pages");
   }
 );
+/* TODO remove sorting by item names.
+QUnit.test("Show questions as they are in survey. Do not sort them", function (assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      {
+        type: "text",
+        name: "question2",
+      },
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title",
+          de: "title de",
+        },
+      },
+    ],
+  });
+  var translation = new Translation(survey);
+  assert.equal(translation.root.groups.length, 1, "There is one page");
+  var group = translation.root.groups[0];
+  assert.equal(group.items.length, 2, "There are two items");
+  assert.equal(group.items[0].name, "question2", "first is question2");
+  assert.equal(group.items[1].name, "question1", "second is question1");
+});
+*/
