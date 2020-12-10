@@ -4,6 +4,7 @@ import {
 } from "../../src/propertyGrid/propertygrid";
 import {
   Base,
+  JsonObjectProperty,
   QuestionTextModel,
   QuestionCheckboxModel,
   QuestionDropdownModel,
@@ -17,6 +18,7 @@ import {
   QuestionMultipleTextModel,
   UrlConditionItem,
   QuestionCompositeModel,
+  Serializer,
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
@@ -481,3 +483,68 @@ test("options.readOnly is true", () => {
   var propertyGrid = new PropertyGridModelTester(question, options);
   expect(propertyGrid.survey.mode).toEqual("display");
 });
+test("options.onCanShowPropertyCallback and property visibility", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanShowPropertyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return property.name == "name" || property.name == "renderAs";
+  };
+  var question = new QuestionDropdownModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.survey.getQuestionByName("name").isVisible).toEqual(true);
+  expect(propertyGrid.survey.getQuestionByName("isRequired").isVisible).toEqual(
+    false
+  );
+});
+test("property visibleIf attribute and options.onCanShowPropertyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanShowPropertyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return false;
+  };
+  var question = new QuestionCheckboxModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var otherTextPropEd = propertyGrid.survey.getQuestionByName("otherText");
+  expect(otherTextPropEd.isVisible).toEqual(false);
+  question.hasOther = true;
+  expect(otherTextPropEd.isVisible).toEqual(false);
+});
+/* TODO require more functionality from createElements in composite question
+test("restfull property editor and options.onCanShowPropertyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanShowPropertyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return property.name == "choicesByUrl" || property.name == "url";
+  };
+  var question = new QuestionDropdownModel("q1");
+  question.choicesByUrl.url = "myUrl";
+  var propertyGrid = new PropertyGridModelTester(question);
+  var restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  expect(restFullQuestion).toBeTruthy();
+  expect(restFullQuestion.getType()).toEqual("propertygrid_restfull");
+  var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
+  expect(urlQuestion.visible).toEqual(true);
+  var pathQuestion = restFullQuestion.contentPanel.getQuestionByName("path");
+  expect(pathQuestion.visible).toEqual(false);
+
+  urlQuestion.value = "myUrl2";
+  expect(question.choicesByUrl.url).toEqual("myUrl2");
+});
+*/

@@ -86,7 +86,19 @@ export var PropertyGridEditorCollection = {
 };
 
 export class PropertyJSONGenerator {
-  constructor(public obj: Base) {}
+  private parentProperty: JsonObjectProperty;
+  private parentObj: Base;
+  constructor(
+    public obj: Base,
+    private options: ISurveyCreatorOptions = null,
+    private parentQuestion: Question = null
+  ) {
+    if (!!parentQuestion) {
+      if (!this.options) this.options = parentQuestion.options;
+      this.parentProperty = parentQuestion.property;
+      this.parentObj = parentQuestion.value;
+    }
+  }
   public toJSON(isNested: boolean = false): any {
     return this.createJSON(isNested);
   }
@@ -105,11 +117,23 @@ export class PropertyJSONGenerator {
       var q = questions[i];
       var prop = props[q.name];
       q.property = prop;
+      var eventVisibility = this.getVisibilityOnEvent(prop);
+      q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf) {
-        q.visibleIf = "propertyVisibleIf() = true";
+        q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
     }
+  }
+  private getVisibilityOnEvent(prop: JsonObjectProperty): boolean {
+    if (!this.options) return true;
+    return this.options.onCanShowPropertyCallback(
+      this.obj,
+      <any>prop,
+      "",
+      this.parentObj,
+      <any>this.parentProperty
+    );
   }
   private createJSON(isNestedObj: boolean): any {
     var properties = new SurveyQuestionProperties(this.obj);
@@ -204,7 +228,7 @@ export class PropertyGridModel {
       }
       this.surveyValue = this.createSurvey(json);
       var page = this.surveyValue.createNewPage("p1");
-      new PropertyJSONGenerator(this.obj).setupObjPanel(page);
+      new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(page);
       this.survey.addPage(page);
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
