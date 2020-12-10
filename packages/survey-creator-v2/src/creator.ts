@@ -1,9 +1,11 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, Base, Page } from "survey-knockout";
+import { Survey, Serializer, SurveyElement, Base, Question, Page, ISurveyElement } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
+import { isPropertyVisible } from "@survey/creator/utils/utils";
+import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./propertyGrid/propertygrid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
@@ -141,8 +143,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
     }
   }
 
-  readOnly = false;
-
   protected initTabs() {
     ko.computed(() => {
       this.tabs([]);
@@ -204,5 +204,107 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.koViewType(this.tabs()[0].name);
       }
     });
+  }
+
+  public getContextActions(element: any/*ISurveyElement*/) {
+    if (this.readOnly) {
+      return [];
+    }
+
+    let opts: any = element["allowingOptions"];
+    if (!opts) opts = {};
+    let items = [];
+
+    if (opts.allowChangeType === undefined || opts.allowChangeType) {
+      var currentType = element.getType();
+      var convertClasses = QuestionConverter.getConvertToClasses(
+        currentType,
+        this.toolbox.itemNames
+      );
+      var allowChangeType = convertClasses.length > 0;
+      var createTypeByClass = (className) => {
+        return {
+          name: this.getLocString("qt." + className),
+          value: className,
+        };
+      };
+      var availableTypes = [createTypeByClass(currentType)];
+      for (var i = 0; i < convertClasses.length; i++) {
+        var className = convertClasses[i];
+        availableTypes.push(createTypeByClass(className));
+      }
+      items.push({
+        id: "convertTo",
+        title: this.getLocString("survey.convertTo"),
+        action: () => {
+          // TODO: implement
+        },
+      });
+      // items.push({
+      //   text: this.getLocString("qt." + currentType),
+      //   title: this.getLocString("survey.convertTo"),
+      //   type: currentType,
+      //   allowChangeType: allowChangeType,
+      //   template: "convert-action",
+      //   availableTypes: availableTypes,
+      //   onConvertType: (data, event) => {
+      //     var newType = event.target.value;
+      //     this.convertCurrentObject(element, newType);
+      //   },
+      // });
+    }
+
+    if (opts.allowCopy === undefined || opts.allowCopy) {
+      items.push({
+        id: "duplicate",
+        title: this.getLocString("survey.duplicate"),
+        action: () => {
+          // TODO: reanimate
+          // this.fastCopyQuestion(element);
+        },
+      });
+    }
+
+    if (
+      (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
+      typeof element.isRequired !== "undefined" &&
+      isPropertyVisible(element, "isRequired")
+    ) {
+      var isRequired = ko.computed(() => element.isRequired);
+      items.push({
+        id: "isrequired",
+        title: this.getLocString("pe.isRequired"),
+        icon: ko.computed(() => {
+          if (isRequired()) {
+            return "icon-actionisrequired";
+          }
+          return "icon-actionnotrequired";
+        }),
+        action: () => {
+          if(this.isCanModifyProperty(<any>element, "isRequired")) {
+            element.isRequired = !element.isRequired;
+          }
+        },
+      });
+    }
+
+    if (items.length > 0) {
+      items.push({ component: "svc-action-bar-separator" });
+    }
+
+    if (opts.allowDelete === undefined || opts.allowDelete) {
+      items.push({
+        id: "delete",
+        title: this.getLocString("pe.delete"),
+        action: () => {
+          // TODO: reanimate
+          // this.deleteObject(element);
+        },
+      });
+    }
+
+    this.onDefineElementMenuItems.fire(this, { obj: element, items: items });
+
+    return items;
   }
 }

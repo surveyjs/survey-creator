@@ -9,9 +9,12 @@ const template = require("./question.html");
 export class QuestionViewModel {
   public creator: SurveyCreator;
   public question: Question;
+  public actions = ko.observableArray();
+
   constructor(creator: SurveyCreator, question: Question) {
     this.creator = creator;
     this.question = question;
+    this.actions(creator.getContextActions(question));
   }
   select(model: QuestionViewModel, event: Event) {
     model.creator.selectElement(model.question);

@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
+import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
@@ -31,6 +32,19 @@ export class CreatorBase<T> {
   koViewType = ko.observable("designer");
 
   /**
+   * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
+   * You may changed it and make the property editor read only or enabled for a particular object.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
+   */
+  public onGetPropertyReadOnly: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * The event is fired when the survey creator creates a survey object (Survey.Survey).
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey the survey object showing in the creator.
@@ -51,6 +65,18 @@ export class CreatorBase<T> {
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
+   * Use this event to add/remove/modify the element (question/panel) menu items.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.items the list of menu items. It has two required fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
+   * @see onElementAllowOperations
+   */
+  public onDefineElementMenuItems: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
@@ -203,6 +229,22 @@ export class CreatorBase<T> {
   public showErrorOnFailedSave: boolean = true;
 
   koReadOnly = ko.observable(false);
+
+  protected onSetReadOnly(newVal: boolean) {
+  }
+
+  /**
+   * A boolean property, false by default. Set it to true to deny editing.
+   */
+  public get readOnly() {
+    return this.koReadOnly();
+  }
+  public set readOnly(newVal: boolean) {
+    const text = this.text;
+    this.koReadOnly(newVal);
+    this.onSetReadOnly(newVal);
+    this.text = text;
+  }
 
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
@@ -421,6 +463,31 @@ export class CreatorBase<T> {
     }
   }
 
+  isCanModifyProperty(
+    obj: Survey.Base,
+    propertyName: string
+  ): boolean {
+    var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
+    return !property || !this.onIsPropertyReadOnlyCallback(obj, property, property.readOnly);
+  }
+
+  onIsPropertyReadOnlyCallback(
+    obj: Survey.Base,
+    property: Survey.JsonObjectProperty,
+    readOnly: boolean
+  ): boolean {
+    var proposedValue = this.readOnly || readOnly;
+    if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
+    var options = {
+      obj: obj,
+      property: property,
+      readOnly: proposedValue,
+      propertyName: property.name,
+    };
+    this.onGetPropertyReadOnly.fire(this, options);
+    return options.readOnly;
+  }
+
   /**
    * The editing survey object (Survey.Survey)
    */
@@ -501,6 +568,19 @@ export class CreatorBase<T> {
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
+  }
+
+  public setModified(options: any = null) {
+  }
+
+  protected convertCurrentObject(obj: Survey.Question, className: string) {
+    var newQuestion = QuestionConverter.convertObject(obj, className);
+    this.setModified({
+      type: "QUESTION_CONVERTED",
+      className: className,
+      oldValue: obj,
+      newValue: newQuestion,
+    });
   }
 
   protected initSurveyWithJSON(json: any, clearState: boolean) {}

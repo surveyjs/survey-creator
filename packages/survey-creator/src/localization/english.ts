@@ -11,6 +11,7 @@ export var enStrings = {
     dropQuestion: "Please drop a question here from the Toolbox.",
     addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
+    duplicate: "Duplicate",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
