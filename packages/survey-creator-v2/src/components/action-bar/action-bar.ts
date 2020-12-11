@@ -5,6 +5,10 @@ import { IToolbarItem } from "@survey/creator/components/toolbar";
 import "./action-bar.scss";
 const template = require("./action-bar.html");
 
+export * from "./action-bar-item";
+export * from "./action-bar-separator";
+export * from "./action-bar-item-dropdown";
+
 /**
  * The toolbar item description.
  */

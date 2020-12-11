@@ -238,23 +238,15 @@ export class SurveyCreator extends CreatorBase<Survey> {
         id: "convertTo",
         css: "svc-action--first svc-action-bar-item--secondary",
         icon: "icon-change_16x16",
+        // title: this.getLocString("qt." + currentType),
         title: this.getLocString("survey.convertTo"),
-        action: () => {
-          // TODO: implement
+        items: availableTypes.map(type => ({title: type.name, value: type.value})),
+        enabled: allowChangeType,
+        component: "svc-action-bar-item-dropdown",
+        action: (newType) => {
+          this.convertCurrentObject(element, newType.value);
         },
       });
-      // items.push({
-      //   text: this.getLocString("qt." + currentType),
-      //   title: this.getLocString("survey.convertTo"),
-      //   type: currentType,
-      //   allowChangeType: allowChangeType,
-      //   template: "convert-action",
-      //   availableTypes: availableTypes,
-      //   onConvertType: (data, event) => {
-      //     var newType = event.target.value;
-      //     this.convertCurrentObject(element, newType);
-      //   },
-      // });
     }
 
     if (opts.allowCopy === undefined || opts.allowCopy) {
