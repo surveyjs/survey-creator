@@ -12,6 +12,7 @@ Version = `${process.env.VERSION}`;
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
+export { settings } from "../settings";
 
 export { DragDropHelper } from "../dragdrophelper";
 export { EditableObject } from "../propertyEditors/editableObject";
