@@ -316,7 +316,7 @@ export var titleAdorner = {
       placeholder = editorLocalization.getString("pe.pageTitlePlaceholder");
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
@@ -374,7 +374,7 @@ export var descriptionAdorner = {
       );
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
