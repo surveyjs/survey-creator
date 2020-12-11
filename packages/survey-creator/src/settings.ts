@@ -1,5 +1,10 @@
-import { title } from "process";
 import * as Survey from "survey-knockout";
+
+export var settings = {
+  traslation: {
+    sortByName: true,
+  },
+};
 
 export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
