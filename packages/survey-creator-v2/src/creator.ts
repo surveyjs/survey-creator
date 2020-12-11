@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, Serializer, SurveyElement, Base, Question, Page, ISurveyElement } from "survey-knockout";
+import { Survey, Base, Page } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
