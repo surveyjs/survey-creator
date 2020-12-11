@@ -14,8 +14,6 @@ export * from "../components/page";
 export * from "../components/question";
 export * from "../components/property-panel/property-panel";
 export * from "../components/action-bar/action-bar";
-export * from "../components/action-bar/action-bar-item";
-export * from "../components/action-bar/action-bar-separator";
 export * from "../components/tabbed-menu/tabbed-menu";
 export * from "../components/tabbed-menu/tabbed-menu-item";
 export * from "../components/toolbox/toolbox";
