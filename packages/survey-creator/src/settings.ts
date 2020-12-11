@@ -99,7 +99,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     item: Survey.Base,
     allowDelete: boolean
   ): boolean {
-    return true;
+    return allowDelete;
   }
   onCollectionItemDeletingCallback(
     obj: Survey.Base,

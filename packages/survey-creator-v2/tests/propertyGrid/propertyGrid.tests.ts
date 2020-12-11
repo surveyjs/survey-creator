@@ -18,6 +18,9 @@ import {
   QuestionMultipleTextModel,
   UrlConditionItem,
   QuestionCompositeModel,
+  ItemValue,
+  Question,
+  MatrixDropdownColumn,
   Serializer,
 } from "survey-knockout";
 import {
@@ -596,4 +599,105 @@ test("itemvalue[] property editor + create columns + options.onCanShowPropertyCa
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(choicesQuestion.columns).toHaveLength(1);
+});
+
+test("options.onCollectionItemDeletingCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCollectionItemDeletingCallback = (
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base
+  ): boolean => {
+    //check all properties
+    return (
+      item["name"] == "page3" &&
+      property.name == "pages" &&
+      collection.length == 3 &&
+      obj.getType() == "survey"
+    );
+  };
+  var survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  var propertyGrid = new PropertyGridModelTester(survey, options);
+  var pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  var rows = pagesQuestion.visibleRows;
+  expect(pagesQuestion.canRemoveRow(rows[0])).toBeFalsy();
+  expect(pagesQuestion.canRemoveRow(rows[1])).toBeFalsy();
+  expect(pagesQuestion.canRemoveRow(rows[2])).toBeTruthy();
+});
+test("options.onCanDeleteItemCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanDeleteItemCallback = (
+    object: any,
+    item: Base,
+    allowDelete: boolean
+  ): boolean => {
+    //check all properties
+    return item["name"] == "col2" && object.getType() == "matrixdynamic";
+  };
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.addColumn("col3");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  var rows = columnsQuestion.visibleRows;
+  expect(columnsQuestion.canRemoveRow(rows[0])).toBeFalsy();
+  expect(columnsQuestion.canRemoveRow(rows[1])).toBeTruthy();
+  expect(columnsQuestion.canRemoveRow(rows[2])).toBeFalsy();
+});
+test("options.onItemValueAddedCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onItemValueAddedCallback = (
+    obj: Base,
+    propertyName: string,
+    itemValue: ItemValue,
+    itemValues: Array<ItemValue>
+  ) => {
+    itemValue.text =
+      obj.getType() +
+      ":" +
+      propertyName +
+      "," +
+      itemValue.value +
+      "," +
+      itemValues.length.toString();
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  choicesQuestion.addRow();
+  expect(question.choices).toHaveLength(4);
+  expect(question.choices[3].text).toEqual("dropdown:choices,4,4");
+});
+test("options.onMatrixDropdownColumnAddedCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onMatrixDropdownColumnAddedCallback = (
+    matrix: Question,
+    column: MatrixDropdownColumn,
+    columns: Array<MatrixDropdownColumn>
+  ) => {
+    column.title = matrix.name + ":" + columns.length;
+  };
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.addColumn("col3");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  columnsQuestion.addRow();
+  expect(question.columns[3].title).toEqual("q1:4");
 });
