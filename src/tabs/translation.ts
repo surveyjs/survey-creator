@@ -212,14 +212,6 @@ export class TranslationGroup extends TranslationItemBase {
         this.createGroups(value, property);
       }
     }
-    this.itemValues.sort(function (
-      a: TranslationItemBase,
-      b: TranslationItemBase
-    ) {
-      if (!a.name) return -1;
-      if (!b.name) return 1;
-      return a.name.localeCompare(b.name);
-    });
     if (this.items.length == 1 && this.groups.length == 1) {
       var gr = this.groups[0];
       gr.koExpanded(true);
