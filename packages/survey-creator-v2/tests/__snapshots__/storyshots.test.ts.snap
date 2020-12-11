@@ -163,7 +163,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -225,7 +225,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -287,7 +287,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -316,7 +316,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -378,7 +378,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -440,7 +440,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -502,7 +502,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -531,7 +531,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -2235,7 +2235,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2297,7 +2297,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2359,7 +2359,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2388,7 +2388,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2450,7 +2450,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2512,7 +2512,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2574,7 +2574,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2603,7 +2603,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
