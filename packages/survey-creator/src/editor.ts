@@ -2206,18 +2206,12 @@ export class SurveyCreator
       json
     );
   }
-  private newQuestions: Array<any> = [];
-  private newPanels: Array<any> = [];
+
   private doClickToolboxItem(json: any) {
     if (!this.readOnly) {
       var newElement = this.createNewElement(json);
       this.doClickQuestionCore(newElement);
     }
-  }
-  public copyElement(element: Survey.Base): Survey.IElement {
-    var json = new Survey.JsonObject().toJsonObject(element);
-    json.type = element.getType();
-    return this.createNewElement(json);
   }
   public dragOverQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
@@ -2225,32 +2219,6 @@ export class SurveyCreator
   }
   public dropOnQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDrop(e);
-  }
-  private createNewElement(json: any): Survey.IElement {
-    var newElement = Survey.Serializer.createClass(json["type"]);
-    new Survey.JsonObject().toObject(json, newElement);
-    this.setNewNames(newElement);
-    return newElement;
-  }
-  private setNewNames(element: Survey.IElement) {
-    this.newQuestions = [];
-    this.newPanels = [];
-    this.setNewNamesCore(element);
-  }
-  private setNewNamesCore(element: Survey.IElement) {
-    var elType = element["getType"]();
-    element.name = this.getNewName(elType);
-    if (element.isPanel || elType == "page") {
-      if (element.isPanel) {
-        this.newPanels.push(element);
-      }
-      var panel = <Survey.PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
-    } else {
-      this.newQuestions.push(element);
-    }
   }
   private generateUniqueName(el: Survey.Base, newName: string): string {
     var options = { element: el, name: newName, isUnique: true };
@@ -2288,68 +2256,19 @@ export class SurveyCreator
     }
     return true;
   }
-  private getNewName(type: string): string {
-    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
-    return type == "panel" || type == "flowpanel"
-      ? this.getNewPanelName()
-      : this.getNewQuestionName();
-  }
-  private getNewQuestionName(): string {
-    return SurveyHelper.getNewQuestionName(this.getAllQuestions());
-  }
-  private getNewPanelName(): string {
-    return SurveyHelper.getNewPanelName(this.getAllPanels());
-  }
-  private getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
-    }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
-    return result;
-  }
-  private getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-  private addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-  private doClickQuestionCore(
+
+  protected doClickQuestionCore(
     element: Survey.IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX"
   ) {
-    var parent = this.survey.currentPage;
-    var index = -1;
-    var elElement = this.survey.selectedElement;
-    if (elElement && elElement.parent) {
-      parent = elElement.parent;
-      index = parent.elements.indexOf(this.survey.selectedElement);
-      if (index > -1) index++;
-    }
-    parent.addElement(element, index);
+    super.doClickQuestionCore(element, modifiedType);
     if (this.renderedElement && this.scrollToNewElement) {
       SurveyHelper.scrollIntoViewIfNeeded(
         this.renderedElement.querySelector("#" + element["id"])
       );
     }
-    this.setModified({ type: modifiedType, question: element });
   }
+
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
     if (question) {
@@ -2482,14 +2401,6 @@ export class SurveyCreator
     });
     this.toolbox.addCopiedItem(question, options);
     this.onCustomElementAddedIntoToolbox.fire(this, { element: question });
-  }
-  /**
-   * Copy a question to the active page
-   * @param question A copied Survey.Question
-   */
-  public fastCopyQuestion(question: Survey.Base) {
-    var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
   }
   /**
    * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page

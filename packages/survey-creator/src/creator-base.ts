@@ -13,7 +13,7 @@ export interface ICreatorOptions {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T> {
+export class CreatorBase<T extends {[index: string]: any}> {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -24,6 +24,9 @@ export class CreatorBase<T> {
   private haveCommercialLicenseValue = ko.observable(false);
 
   protected surveyValue = ko.observable<T>();
+
+  protected newQuestions: Array<any> = [];
+  protected newPanels: Array<any> = [];
 
   koAutoSave = ko.observable(false);
   koShowOptions = ko.observable();
@@ -599,4 +602,111 @@ export class CreatorBase<T> {
       this.initSurveyWithJSON(val, true);
     }
   }
+
+  protected doClickQuestionCore(
+    element: Survey.IElement,
+    modifiedType: string = "ADDED_FROM_TOOLBOX"
+  ) {
+    var parent = this.survey.currentPage;
+    var index = -1;
+    var elElement = this.survey.selectedElement;
+    if (elElement && elElement.parent) {
+      parent = elElement.parent;
+      index = parent.elements.indexOf(this.survey.selectedElement);
+      if (index > -1) index++;
+    }
+    parent.addElement(element, index);
+    this.setModified({ type: modifiedType, question: element });
+  }
+
+  protected setNewNames(element: Survey.IElement) {
+    this.newQuestions = [];
+    this.newPanels = [];
+    this.setNewNamesCore(element);
+  }
+
+  protected getAllQuestions(): Array<any> {
+    var result = [];
+    for (var i = 0; i < this.survey.pages.length; i++) {
+      this.addElements(this.survey.pages[i].elements, false, result);
+    }
+    this.addElements(this.newPanels, false, result);
+    this.addElements(this.newQuestions, false, result);
+    return result;
+  }
+
+  protected getAllPanels(): Array<any> {
+    var result = [];
+    for (var i = 0; i < this.survey.pages.length; i++) {
+      this.addElements(this.survey.pages[i].elements, true, result);
+    }
+    this.addElements(this.newPanels, true, result);
+    this.addElements(this.newQuestions, true, result);
+    return result;
+  }
+
+  protected addElements(
+    elements: Array<any>,
+    isPanel: boolean,
+    result: Array<any>
+  ) {
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i].isPanel === isPanel) {
+        result.push(elements[i]);
+      }
+      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
+    }
+  }
+
+  protected getNewName(type: string): string {
+    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
+    return type == "panel" || type == "flowpanel"
+      ? this.getNewPanelName()
+      : this.getNewQuestionName();
+  }
+  protected getNewQuestionName(): string {
+    return SurveyHelper.getNewQuestionName(this.getAllQuestions());
+  }
+  protected getNewPanelName(): string {
+    return SurveyHelper.getNewPanelName(this.getAllPanels());
+  }
+
+  protected setNewNamesCore(element: Survey.IElement) {
+    var elType = element["getType"]();
+    element.name = this.getNewName(elType);
+    if (element.isPanel || elType == "page") {
+      if (element.isPanel) {
+        this.newPanels.push(element);
+      }
+      var panel = <Survey.PanelModelBase>(<any>element);
+      for (var i = 0; i < panel.elements.length; i++) {
+        this.setNewNamesCore(panel.elements[i]);
+      }
+    } else {
+      this.newQuestions.push(element);
+    }
+  }
+
+  protected createNewElement(json: any): Survey.IElement {
+    var newElement = Survey.Serializer.createClass(json["type"]);
+    new Survey.JsonObject().toObject(json, newElement);
+    this.setNewNames(newElement);
+    return newElement;
+  }
+
+  public copyElement(element: Survey.Base): Survey.IElement {
+    var json = new Survey.JsonObject().toJsonObject(element);
+    json.type = element.getType();
+    return this.createNewElement(json);
+  }
+
+  /**
+   * Copy a question to the active page
+   * @param question A copied Survey.Question
+   */
+  public fastCopyQuestion(question: Survey.Base) {
+    var newElement = this.copyElement(question);
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+  }
+
 }

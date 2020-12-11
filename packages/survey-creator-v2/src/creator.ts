@@ -261,8 +261,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          // TODO: reanimate
-          // this.fastCopyQuestion(element);
+          this.fastCopyQuestion(element);
         },
       });
     }
