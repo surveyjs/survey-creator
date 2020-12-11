@@ -40,7 +40,13 @@ export const Ordinary = () => {
 
   return {
     template:
-      '<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"><svc-button params="title: title, action: action"></svc-button><svc-modal params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"></svc-modal></div>',
+      `<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative">
+        <svc-button params="title: title, action: action">
+        </svc-button>
+        <sv-popup params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition">
+        </sv-popup>
+      </div>`,
     context: {
       name: "svc-list",
       title: text("Title", "Show menu"),
@@ -73,7 +79,14 @@ export const WithPointer = () => {
 
   return {
     template:
-      '<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"><svc-button params="title: title, action: action"></svc-button><svc-modal params= "name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal></div>',
+      `<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative">
+        <svc-button params="title: title, action: action">
+        </svc-button>
+        <sv-popup params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition,
+          horizontalPosition: horizontalPosition, showPointer: showPointer">
+        </sv-popup>
+      </div>`,
     context: {
       name: "svc-list",
       title: text("Title", "Show menu"),
