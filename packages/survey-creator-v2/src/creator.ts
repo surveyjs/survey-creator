@@ -47,7 +47,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-clear",
-          action: function () {
+          action: () => {
             alert("clear pressed");
           },
           isActive: false,
@@ -68,12 +68,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-preview",
-          action: function () {
-            alert("preview pressed");
+          css: ko.computed(() => this.koViewType()==="test"?"svc-action-bar-item--secondary":""),
+          action: () => {
+            this.makeNewViewActive("test");
           },
           isActive: ko.observable(false),
           title: "Preview",
-          innerCss: "svc-action-bar-item--secondary",
         },
       ])
     );
