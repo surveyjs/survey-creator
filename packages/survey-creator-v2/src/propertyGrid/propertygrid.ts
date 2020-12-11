@@ -33,7 +33,11 @@ FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
-  getJSON(obj: Base, prop: JsonObjectProperty): any;
+  getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
@@ -61,9 +65,13 @@ export var PropertyGridEditorCollection = {
     }
     return null;
   },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     var res = this.getEditor(prop);
-    return !!res ? res.getJSON(obj, prop) : null;
+    return !!res ? res.getJSON(obj, prop, options) : null;
   },
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
     var res = this.getEditor(prop);
@@ -91,16 +99,26 @@ export class PropertyJSONGenerator {
   constructor(
     public obj: Base,
     private options: ISurveyCreatorOptions = null,
-    private parentQuestion: Question = null
+    parentQuestion: Question = null
   ) {
     if (!!parentQuestion) {
       if (!this.options) this.options = parentQuestion.options;
       this.parentProperty = parentQuestion.property;
-      this.parentObj = parentQuestion.value;
+      this.parentObj = parentQuestion.obj;
     }
   }
   public toJSON(isNested: boolean = false): any {
     return this.createJSON(isNested);
+  }
+  public createColumnsJSON(className: string, names: Array<string>): any {
+    var res: Array<any> = [];
+    for (var i = 0; i < names.length; i++) {
+      var columnJSON = this.getColumnPropertyJSON(className, names[i]);
+      if (!!columnJSON) {
+        res.push(columnJSON);
+      }
+    }
+    return res;
   }
   public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false) {
     panel.fromJSON(this.toJSON(isNestedObj));
@@ -117,6 +135,8 @@ export class PropertyJSONGenerator {
       var q = questions[i];
       var prop = props[q.name];
       q.property = prop;
+      q.obj = this.obj;
+      q.options = this.options;
       var eventVisibility = this.getVisibilityOnEvent(prop);
       q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf) {
@@ -125,12 +145,15 @@ export class PropertyJSONGenerator {
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
     }
   }
-  private getVisibilityOnEvent(prop: JsonObjectProperty): boolean {
+  private getVisibilityOnEvent(
+    prop: JsonObjectProperty,
+    showMode: string = ""
+  ): boolean {
     if (!this.options) return true;
     return this.options.onCanShowPropertyCallback(
       this.obj,
       <any>prop,
-      "",
+      showMode,
       this.parentObj,
       <any>this.parentProperty
     );
@@ -189,13 +212,44 @@ export class PropertyJSONGenerator {
       elements: [],
     };
   }
-  private createQuestionJSON(prop: JsonObjectProperty, title: string): any {
-    var json = PropertyGridEditorCollection.getJSON(this.obj, prop);
+  private createQuestionJSON(
+    prop: JsonObjectProperty,
+    title: string,
+    isColumn: boolean = false
+  ): any {
+    var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
+    if (!isVisible && isColumn) return null;
+    var json = PropertyGridEditorCollection.getJSON(
+      this.obj,
+      prop,
+      this.options
+    );
     if (!json) return null;
     json.name = prop.name;
     json.visible = prop.visible;
     json.title = this.getQuestionTitle(prop.name, title);
     return json;
+  }
+  private getColumnPropertyJSON(className: string, propName: string): any {
+    var prop = Serializer.findProperty(className, propName);
+    if (!prop) return null;
+    var json = this.createQuestionJSON(prop, "", true);
+    if (!json) return null;
+    if (!this.getVisibilityOnEvent(prop, "list")) return null;
+    json.name = prop.name;
+    json.title = editorLocalization.getPropertyName(prop.name);
+    if (!!json.type) {
+      json.cellType = json.type;
+      delete json.type;
+    }
+    return json;
+  }
+  private isPropertyVisible(
+    prop: JsonObjectProperty,
+    showMode: string
+  ): boolean {
+    if (!prop.visible) return false;
+    return !showMode || !prop.showMode || showMode == prop.showMode;
   }
   private getPanelTitle(name: string, title: string): string {
     if (!!title) return title;
@@ -282,14 +336,22 @@ export class PropertyGridModel {
 export abstract class PropertyGridEditor implements IPropertyGridEditor {
   constructor() {}
   public abstract fit(prop: JsonObjectProperty): boolean;
-  public abstract getJSON(obj: Base, prop: JsonObjectProperty): any;
+  public abstract getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any;
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "boolean" || prop.type == "switch";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "boolean", default: false };
   }
 }
@@ -297,7 +359,11 @@ export class PropertyGridEditorString extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text" };
   }
 }
@@ -305,7 +371,11 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text", inputType: "number" };
   }
 }
@@ -313,7 +383,11 @@ export class PropertyGridEditorText extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "text";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "comment" };
   }
 }
@@ -321,7 +395,11 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "color";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text", inputType: "color" };
   }
 }
@@ -329,7 +407,11 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.hasChoices;
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return {
       type: "dropdown",
       showOptionsCaption: false,
@@ -371,7 +453,11 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return {
       type: "dropdown",
       optionsCaption: editorLocalization.getString(

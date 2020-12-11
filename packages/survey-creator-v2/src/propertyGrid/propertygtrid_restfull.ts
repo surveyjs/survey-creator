@@ -8,6 +8,7 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
 } from "./propertygrid";
+import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 var json = {
   panelJSON: null,
@@ -27,7 +28,11 @@ PropertyGridEditorCollection.register({
   fit(prop: JsonObjectProperty): boolean {
     return prop.type == "restfull";
   },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
+  getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return {
       type: "propertygrid_restfull",
     };

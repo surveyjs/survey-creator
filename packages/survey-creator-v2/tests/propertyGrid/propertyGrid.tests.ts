@@ -519,7 +519,7 @@ test("property visibleIf attribute and options.onCanShowPropertyCallback", () =>
   question.hasOther = true;
   expect(otherTextPropEd.isVisible).toEqual(false);
 });
-/* TODO require more functionality from createElements in composite question
+/* TODO implement after releasing v1.9.21
 test("restfull property editor and options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanShowPropertyCallback = (
@@ -548,3 +548,52 @@ test("restfull property editor and options.onCanShowPropertyCallback", () => {
   expect(question.choicesByUrl.url).toEqual("myUrl2");
 });
 */
+test("itemvalue[] property editor + detail panel + options.onCanShowPropertyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanShowPropertyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return property.name !== "enableIf";
+  };
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.getQuestionByName("visibleIf").visible).toEqual(true);
+  expect(row.detailPanel.getQuestionByName("enableIf").visible).toEqual(false);
+});
+test("itemvalue[] property editor + create columns + options.onCanShowPropertyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onCanShowPropertyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return showMode != "list" || property.name !== "text";
+  };
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(1);
+  expect(choicesQuestion.columns[0].name).toEqual("value");
+
+  question = new QuestionDropdownModel("q1");
+  propertyGrid = new PropertyGridModelTester(question, options);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(1);
+});

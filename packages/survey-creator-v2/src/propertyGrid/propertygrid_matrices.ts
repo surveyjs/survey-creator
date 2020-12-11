@@ -16,6 +16,7 @@ import {
 } from "./propertygrid";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
+import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 class SurveyHelper {
   public static getNewName(
@@ -31,36 +32,7 @@ class SurveyHelper {
   }
 }
 
-export abstract class PropertyGridEditorMatrixBase extends PropertyGridEditor {
-  protected getColumnPropertyJSON(className: string, propName: string): any {
-    var prop = Serializer.findProperty(className, propName);
-    if (!prop) return null;
-    var json = PropertyGridEditorCollection.getJSON(null, prop);
-    if (!json) return null;
-    json.name = prop.name;
-    json.title = editorLocalization.getPropertyName(prop.name);
-    if (!!json.type) {
-      json.cellType = json.type;
-      delete json.type;
-    }
-    return json;
-  }
-  protected getColumnsJSON(
-    className: string,
-    propNames: Array<string>
-  ): Array<any> {
-    var res: Array<any> = [];
-    for (var i = 0; i < propNames.length; i++) {
-      var columnJSON = this.getColumnPropertyJSON(className, propNames[i]);
-      if (!!columnJSON) {
-        res.push(columnJSON);
-      }
-    }
-    return res;
-  }
-}
-
-export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixBase {
+export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.onGetValueForNewRowCallBack = (
       sender: QuestionMatrixDynamicModel
@@ -104,6 +76,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixB
   protected getKeyValue(): string {
     return "";
   }
+  protected getColumnNames(): Array<string> {
+    return [];
+  }
   protected getObjTypeName(): string {
     return "";
   }
@@ -120,22 +95,45 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditorMatrixB
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
-      new PropertyJSONGenerator(row.editingObj).setupObjPanel(panel, true);
+      new PropertyJSONGenerator(row.editingObj, null, matrix).setupObjPanel(
+        panel,
+        true
+      );
     };
   }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    return this.getMatrixJSON(
+      obj,
+      prop,
+      this.getColumnNames(),
+      options,
+      this.getObjTypeName()
+    );
+  }
   protected getMatrixJSON(
+    obj: Base,
     prop: JsonObjectProperty,
     propNames: Array<string>,
+    options: ISurveyCreatorOptions,
     keyName: string = undefined
   ): any {
     var className = prop.className;
     if (!className) className = prop.baseClassName;
+    var columns = new PropertyJSONGenerator(obj, options).createColumnsJSON(
+      className,
+      propNames
+    );
+
     var res = {
       type: "matrixdynamic",
       detailPanelMode: "underRow",
       cellType: "text",
       rowCount: 0,
-      columns: this.getColumnsJSON(className, propNames),
+      columns: columns,
     };
     if (!!keyName) {
       res.columns.unshift({
@@ -152,8 +150,8 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["value", "text"]);
+  protected getColumnNames(): Array<string> {
+    return ["value", "text"];
   }
   protected getKeyValue(): string {
     return "value";
@@ -164,8 +162,8 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "matrixdropdowncolumns";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["cellType", "name", "title"]);
+  protected getColumnNames(): Array<string> {
+    return ["cellType", "name", "title"];
   }
   protected getKeyValue(): string {
     return "name";
@@ -179,8 +177,8 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["name", "title"]);
+  protected getColumnNames(): Array<string> {
+    return ["name", "title"];
   }
   protected hasDetailPanel(): boolean {
     return false;
@@ -197,8 +195,8 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "calculatedvalues";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["name"]);
+  protected getColumnNames(): Array<string> {
+    return ["name"];
   }
   protected getKeyValue(): string {
     return "name";
@@ -211,24 +209,24 @@ export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMa
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "htmlconditions";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["html"]);
+  protected getColumnNames(): Array<string> {
+    return ["html"];
   }
 }
 export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "urlconditions";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["url"]);
+  protected getColumnNames(): Array<string> {
+    return ["url"];
   }
 }
 export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "textitems";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, ["name"]);
+  protected getColumnNames(): Array<string> {
+    return ["name"];
   }
   protected getKeyValue(): string {
     return "name";
@@ -240,9 +238,6 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {
   protected abstract getChoices(obj: Base): Array<any>;
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
-    return this.getMatrixJSON(prop, [], this.getObjTypeName());
-  }
   public onMatrixCellCreated(obj: Base, options: any) {
     if (options.columnName != this.getObjTypeName()) return;
     options.cellQuestion.choices = this.getChoices(obj);
@@ -315,15 +310,19 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   }
 }
 
-export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
+export class PropertyGridEditorBindings extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "bindings";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     var res = {
       type: "matrixdropdown",
       rows: this.getRows(obj),
-      columns: this.getColumns(obj),
+      columns: this.getColumns(obj, options),
     };
     return res;
   }
@@ -346,10 +345,10 @@ export class PropertyGridEditorBindings extends PropertyGridEditorMatrixBase {
     }
     return res;
   }
-  private getColumns(obj: Base): Array<any> {
+  private getColumns(obj: Base, options: ISurveyCreatorOptions): Array<any> {
     var prop = new JsonObjectProperty(null, "value");
     prop.type = "questionvalue";
-    var json = PropertyGridEditorCollection.getJSON(obj, prop);
+    var json = PropertyGridEditorCollection.getJSON(obj, prop, options);
     json["cellType"] = json["type"];
     delete json["type"];
     json.name = "value";

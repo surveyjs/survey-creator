@@ -235,6 +235,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
       }
       items.push({
         id: "convertTo",
+        css: "svc-action--first svc-action-bar-item--secondary",
+        icon: "icon-change_16x16",
         title: this.getLocString("survey.convertTo"),
         action: () => {
           // TODO: implement
@@ -273,12 +275,13 @@ export class SurveyCreator extends CreatorBase<Survey> {
       var isRequired = ko.computed(() => element.isRequired);
       items.push({
         id: "isrequired",
+        css: ko.computed(() => element.isRequired?"svc-action-bar-item--secondary":""),
         title: this.getLocString("pe.isRequired"),
         icon: ko.computed(() => {
           if (isRequired()) {
-            return "icon-actionisrequired";
+            return "icon-switchactive_16x16";
           }
-          return "icon-actionnotrequired";
+          return "icon-switchinactive_16x16";
         }),
         action: () => {
           if(this.isCanModifyProperty(<any>element, "isRequired")) {
