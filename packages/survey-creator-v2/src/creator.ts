@@ -101,7 +101,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement = (element: Base) => {
+
+  public selectElement(element: any) {
     this.selection(element);
     this.propertyGrid.obj = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
@@ -299,8 +300,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         id: "delete",
         title: this.getLocString("pe.delete"),
         action: () => {
-          // TODO: reanimate
-          // this.deleteObject(element);
+          this.deleteObject(element);
         },
       });
     }

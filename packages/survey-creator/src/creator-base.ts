@@ -5,6 +5,7 @@ import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
+import { SurveyLogic } from "./tabs/logic";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -33,6 +34,18 @@ export class CreatorBase<T extends {[index: string]: any}> {
   koGenerateValidJSON = ko.observable(true);
   koShowState = ko.observable(false);
   koViewType = ko.observable("designer");
+
+  /**
+   * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.element an instance of the deleting element
+   * <br/> options.elementType the type of the element: 'question', 'panel' or 'page'.
+   * <br/> options.allowing set it to false to cancel the element deleting
+   */
+  public onElementDeleting: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
@@ -707,6 +720,60 @@ export class CreatorBase<T extends {[index: string]: any}> {
   public fastCopyQuestion(question: Survey.Base) {
     var newElement = this.copyElement(question);
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+  }
+
+  /**
+   * Delete an element in the survey. It can be a question, a panel or a page.
+   * @param element a survey element.
+   */
+  public deleteElement(element: Survey.Base) {
+    this.deleteObject(element);
+  }
+
+  protected deleteObjectCore(obj: any) {
+    var objType = SurveyHelper.getObjectType(obj);
+    if (objType == ObjType.Page) {
+      this.survey.removePage(obj);
+    } else {
+      this.deletePanelOrQuestion(obj, objType);
+    }
+    this.setModified({
+      type: "OBJECT_DELETED",
+      target: obj,
+    });
+    if (objType == ObjType.Question) {
+      this.updateConditionsOnRemove(obj.getValueName());
+    }
+  }
+
+  protected deleteObject(obj: any) {
+    var options = {
+      element: obj,
+      elementType: SurveyHelper.getObjectType(obj),
+      allowing: true,
+    };
+    this.onElementDeleting.fire(this, options);
+    if (!options.allowing) return;
+    this.deleteObjectCore(obj);
+  }
+
+  protected updateConditionsOnRemove(name: string) {
+    // TODO: remove SurveyLogic call here
+    new SurveyLogic(<any>this.survey, <any>this).removeQuestion(name);
+  }
+
+  public selectElement(element: any) {
+  }
+
+  protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
+    var parent = obj["parent"];
+    var elements = parent.elements;
+    var objIndex = elements.indexOf(obj);
+    if (objIndex == elements.length - 1) {
+      objIndex--;
+    }
+    obj["delete"]();
+    this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
 
 }
