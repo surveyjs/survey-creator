@@ -4,6 +4,7 @@ export var settings = {
   traslation: {
     sortByName: true,
   },
+  //TODO add maximumColumnCount
 };
 
 export interface ISurveyCreatorOptions {

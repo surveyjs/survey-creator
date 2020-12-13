@@ -701,3 +701,33 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   columnsQuestion.addRow();
   expect(question.columns[3].title).toEqual("q1:4");
 });
+test("options.onSetPropertyEditorOptionsCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  var propName = "";
+  var object = null;
+  options.onSetPropertyEditorOptionsCallback = (
+    propertyName: string,
+    obj: Base,
+    options: any
+  ) => {
+    if (propertyName != "choices") return;
+    propName = propertyName;
+    object = obj;
+    options.allowAddRemoveItems = false;
+    //TODO we do not have these functionality yet
+    //options.allowRemoveAllItems
+    //options.showTextView
+    //options.itemsEntryType
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(propName).toEqual("choices");
+  expect(object.getType()).toEqual("dropdown");
+  expect(choicesQuestion.allowAddRows).toEqual(false);
+  expect(choicesQuestion.allowRemoveRows).toEqual(false);
+});
