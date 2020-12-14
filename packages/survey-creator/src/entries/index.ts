@@ -134,7 +134,10 @@ export { selectItemsAdorner } from "../adorners/select-items";
 
 // export
 export { ratingItemAdorner } from "../adorners/rating-item-editor";
-export { imageItemsAdorner } from "../adorners/image-items";
+export {
+  imageItemsAdorner,
+  addImageItemAdorner,
+} from "../adorners/image-items";
 export { flowpanelActionsAdorner } from "../adorners/flowpanel-actions";
 export { imageAdorner } from "../adorners/image";
 export { titleImageAdorner } from "../adorners/title-image";
