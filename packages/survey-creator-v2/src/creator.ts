@@ -4,7 +4,7 @@ import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
-import { isPropertyVisible } from "@survey/creator/utils/utils";
+import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./propertyGrid/propertygrid";
 
@@ -223,30 +223,32 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.toolbox.itemNames
       );
       var allowChangeType = convertClasses.length > 0;
-      var createTypeByClass = (className) => {
-        return {
-          name: this.getLocString("qt." + className),
-          value: className,
+      if(allowChangeType) {
+        var createTypeByClass = (className) => {
+          return {
+            name: this.getLocString("qt." + className),
+            value: className,
+          };
         };
-      };
-      var availableTypes = [createTypeByClass(currentType)];
-      for (var i = 0; i < convertClasses.length; i++) {
-        var className = convertClasses[i];
-        availableTypes.push(createTypeByClass(className));
+        var availableTypes = [createTypeByClass(currentType)];
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          availableTypes.push(createTypeByClass(className));
+        }
+        items.push({
+          id: "convertTo",
+          css: "svc-action--first svc-action-bar-item--secondary",
+          icon: "icon-change_16x16",
+          // title: this.getLocString("qt." + currentType),
+          title: this.getLocString("survey.convertTo"),
+          items: availableTypes.map(type => ({title: type.name, value: type.value})),
+          enabled: allowChangeType,
+          component: "svc-action-bar-item-dropdown",
+          action: (newType) => {
+            this.convertCurrentObject(element, newType.value);
+          },
+        });
       }
-      items.push({
-        id: "convertTo",
-        css: "svc-action--first svc-action-bar-item--secondary",
-        icon: "icon-change_16x16",
-        // title: this.getLocString("qt." + currentType),
-        title: this.getLocString("survey.convertTo"),
-        items: availableTypes.map(type => ({title: type.name, value: type.value})),
-        enabled: allowChangeType,
-        component: "svc-action-bar-item-dropdown",
-        action: (newType) => {
-          this.convertCurrentObject(element, newType.value);
-        },
-      });
     }
 
     if (opts.allowCopy === undefined || opts.allowCopy) {
@@ -262,7 +264,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (
       (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
       typeof element.isRequired !== "undefined" &&
-      isPropertyVisible(element, "isRequired")
+      propertyExists(element, "isRequired") && isPropertyVisible(element, "isRequired")
     ) {
       var isRequired = ko.computed(() => element.isRequired);
       items.push({

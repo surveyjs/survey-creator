@@ -159,6 +159,15 @@ ko.bindingHandlers["afterRenderParent"] = {
   },
 };
 
+export function propertyExists(obj: any, propertyName: string) {
+  let result = true;
+  if (!!obj && typeof obj.getType === "function") {
+    const property = Serializer.findProperty(obj.getType(), propertyName);
+    result = !!property;
+  }
+  return result;
+}
+
 export function isPropertyVisible(obj: any, propertyName: string) {
   let result = true;
   if (!!obj && typeof obj.getType === "function") {
