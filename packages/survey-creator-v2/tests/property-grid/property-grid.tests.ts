@@ -521,7 +521,6 @@ test("property visibleIf attribute and options.onCanShowPropertyCallback", () =>
   question.hasOther = true;
   expect(otherTextPropEd.isVisible).toEqual(false);
 });
-/* TODO implement after releasing v1.9.21
 test("restfull property editor and options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanShowPropertyCallback = (
@@ -544,12 +543,11 @@ test("restfull property editor and options.onCanShowPropertyCallback", () => {
   var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
   expect(urlQuestion.visible).toEqual(true);
   var pathQuestion = restFullQuestion.contentPanel.getQuestionByName("path");
-  expect(pathQuestion.visible).toEqual(false);
+  expect(pathQuestion.visible).toEqual(true);
 
   urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
 });
-*/
 test("itemvalue[] property editor + detail panel + options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanShowPropertyCallback = (
