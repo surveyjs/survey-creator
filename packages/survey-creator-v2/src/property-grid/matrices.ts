@@ -13,7 +13,7 @@ import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
   PropertyJSONGenerator,
-} from "./propertygrid";
+} from "./index";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";

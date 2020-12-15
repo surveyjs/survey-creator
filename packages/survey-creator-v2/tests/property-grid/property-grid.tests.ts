@@ -1,7 +1,7 @@
 import {
   PropertyGridModel,
   PropertyGridEditorCollection,
-} from "../../src/propertyGrid/propertygrid";
+} from "../../src/property-grid";
 import {
   Base,
   JsonObjectProperty,
@@ -28,10 +28,9 @@ import {
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
 
-import { assert } from "console";
-export * from "../../src/propertyGrid/propertygrid_matrices";
-export * from "../../src/propertyGrid/propertygtrid_condition";
-export * from "../../src/propertyGrid/propertygtrid_restfull";
+export * from "../../src/property-grid/matrices";
+export * from "../../src/property-grid/condition";
+export * from "../../src/property-grid/restfull";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {

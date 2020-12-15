@@ -38,7 +38,7 @@ export * from "@survey/creator/tabs/embed";
 export * from "@survey/creator/tabs/json-editor";
 export * from "@survey/creator/tabs/test";
 
-export * from "../propertyGrid/propertygrid";
-export * from "../propertyGrid/propertygrid_matrices";
-export * from "../propertyGrid/propertygtrid_condition";
-export * from "../propertyGrid/propertygtrid_restfull";
+export * from "../property-grid";
+export * from "../property-grid/matrices";
+export * from "../property-grid/condition";
+export * from "../property-grid/restfull";

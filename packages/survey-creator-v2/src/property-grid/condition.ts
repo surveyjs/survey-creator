@@ -12,7 +12,7 @@ import {
 import {
   PropertyGridEditorCollection,
   PropertyGridModel,
-} from "./propertygrid";
+} from "./index";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 PropertyGridEditorCollection.register({

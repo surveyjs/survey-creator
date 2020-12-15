@@ -7,7 +7,7 @@ import {
 import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
-} from "./propertygrid";
+} from "./index";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 var json = {
