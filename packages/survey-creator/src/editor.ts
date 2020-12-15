@@ -221,18 +221,6 @@ export class SurveyCreator
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
-   * You may changed it and make the property editor read only or enabled for a particular object.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
-   * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
-   */
-  public onGetPropertyReadOnly: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
@@ -253,17 +241,6 @@ export class SurveyCreator
    * <br/> options.propertyEditor the property Editor.
    */
   public onPropertyAfterRender: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
-   * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.element an instance of the deleting element
-   * <br/> options.elementType the type of the element: 'question', 'panel' or 'page'.
-   * <br/> options.allowing set it to false to cancel the element deleting
-   */
-  public onElementDeleting: Survey.Event<
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
@@ -537,17 +514,6 @@ export class SurveyCreator
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * Use this event to add/remove/modify the element (question/panel) menu items.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.items the list of menu items. It has two required fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
-   * @see onElementAllowOperations
-   */
-  public onDefineElementMenuItems: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
-  /**
    * Use this event to show the description on the top or/and bottom of the property modal editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -700,18 +666,11 @@ export class SurveyCreator
     itemAdorner.inplaceEditForValues = val;
   }
 
-  /**
-   * A boolean property, false by default. Set it to true to deny editing.
-   */
-  public get readOnly() {
-    return this.koReadOnly();
-  }
-  public set readOnly(newVal) {
-    const text = this.text;
-    this.koReadOnly(newVal);
+  protected onSetReadOnly(newVal: boolean) {
+    super.onSetReadOnly(newVal);
     this.render(null, this.options);
-    this.text = text;
   }
+
   public koCanUndo: any;
   public koCanRedo: any;
 
@@ -1218,6 +1177,7 @@ export class SurveyCreator
     }
   }
   public setModified(options: any = null) {
+    super.setModified(options); // TODO: move to super class
     this.setState("modified");
     this.setUndoRedoCurrentState();
     this.onModified.fire(this, options);
@@ -1720,6 +1680,11 @@ export class SurveyCreator
       this.surveyObjects.selectObject(val);
     }
   }
+
+  public selectElement(element: any) {
+    this.selectedElement = element;
+  }
+
   /**
    * Check for errors in property grid and adorners of the selected elements.
    * Returns true if selected element is null or there is no errors.
@@ -2235,18 +2200,12 @@ export class SurveyCreator
       json
     );
   }
-  private newQuestions: Array<any> = [];
-  private newPanels: Array<any> = [];
+
   private doClickToolboxItem(json: any) {
     if (!this.readOnly) {
       var newElement = this.createNewElement(json);
       this.doClickQuestionCore(newElement);
     }
-  }
-  public copyElement(element: Survey.Base): Survey.IElement {
-    var json = new Survey.JsonObject().toJsonObject(element);
-    json.type = element.getType();
-    return this.createNewElement(json);
   }
   public dragOverQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDragDropOver(e, data.survey.currentPage);
@@ -2254,32 +2213,6 @@ export class SurveyCreator
   }
   public dropOnQuestionsEditor(data, e) {
     data.survey.dragDropHelper.doDrop(e);
-  }
-  private createNewElement(json: any): Survey.IElement {
-    var newElement = Survey.Serializer.createClass(json["type"]);
-    new Survey.JsonObject().toObject(json, newElement);
-    this.setNewNames(newElement);
-    return newElement;
-  }
-  private setNewNames(element: Survey.IElement) {
-    this.newQuestions = [];
-    this.newPanels = [];
-    this.setNewNamesCore(element);
-  }
-  private setNewNamesCore(element: Survey.IElement) {
-    var elType = element["getType"]();
-    element.name = this.getNewName(elType);
-    if (element.isPanel || elType == "page") {
-      if (element.isPanel) {
-        this.newPanels.push(element);
-      }
-      var panel = <Survey.PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
-    } else {
-      this.newQuestions.push(element);
-    }
   }
   private generateUniqueName(el: Survey.Base, newName: string): string {
     var options = { element: el, name: newName, isUnique: true };
@@ -2317,68 +2250,19 @@ export class SurveyCreator
     }
     return true;
   }
-  private getNewName(type: string): string {
-    if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
-    return type == "panel" || type == "flowpanel"
-      ? this.getNewPanelName()
-      : this.getNewQuestionName();
-  }
-  private getNewQuestionName(): string {
-    return SurveyHelper.getNewQuestionName(this.getAllQuestions());
-  }
-  private getNewPanelName(): string {
-    return SurveyHelper.getNewPanelName(this.getAllPanels());
-  }
-  private getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
-    }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
-    return result;
-  }
-  private getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-  private addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-  private doClickQuestionCore(
+
+  protected doClickQuestionCore(
     element: Survey.IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX"
   ) {
-    var parent = this.survey.currentPage;
-    var index = -1;
-    var elElement = this.survey.selectedElement;
-    if (elElement && elElement.parent) {
-      parent = elElement.parent;
-      index = parent.elements.indexOf(this.survey.selectedElement);
-      if (index > -1) index++;
-    }
-    parent.addElement(element, index);
+    super.doClickQuestionCore(element, modifiedType);
     if (this.renderedElement && this.scrollToNewElement) {
       SurveyHelper.scrollIntoViewIfNeeded(
         this.renderedElement.querySelector("#" + element["id"])
       );
     }
-    this.setModified({ type: modifiedType, question: element });
   }
+
   private deleteQuestion() {
     var question = this.getSelectedObjAsQuestion();
     if (question) {
@@ -2401,15 +2285,6 @@ export class SurveyCreator
   public deleteCurrentObject() {
     this.deleteObject(this.selectedElement);
   }
-  private convertCurrentObject(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className);
-    this.setModified({
-      type: "QUESTION_CONVERTED",
-      className: className,
-      oldValue: obj,
-      newValue: newQuestion,
-    });
-  }
   /**
    * Show the creator dialog. The element can be a question, panel, page or survey. If property grid is used instead of dialog window (default behavior), then focus goes into the property grid.
    * @param element The survey element
@@ -2423,9 +2298,6 @@ export class SurveyCreator
   }
   private updateConditions(oldName: string, newName: string) {
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
-  }
-  private updateConditionsOnRemove(name: string) {
-    new SurveyLogic(this.survey, this).removeQuestion(name);
   }
   public get showModalOnElementEditing(): boolean {
     return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;
@@ -2522,14 +2394,6 @@ export class SurveyCreator
     this.onCustomElementAddedIntoToolbox.fire(this, { element: question });
   }
   /**
-   * Copy a question to the active page
-   * @param question A copied Survey.Question
-   */
-  public fastCopyQuestion(question: Survey.Base) {
-    var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
-  }
-  /**
    * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
    * @param page A copied Survey.Page
    */
@@ -2544,46 +2408,12 @@ export class SurveyCreator
     this.addPageToUI(newPage);
     return newPage;
   };
-  /**
-   * Delete an element in the survey. It can be a question, a panel or a page.
-   * @param element a survey element.
-   */
-  public deleteElement(element: Survey.Base) {
-    this.deleteObject(element);
-  }
-  private deleteObject(obj: any) {
-    var options = {
-      element: obj,
-      elementType: SurveyHelper.getObjectType(obj),
-      allowing: true,
-    };
-    this.onElementDeleting.fire(this, options);
-    if (!options.allowing) return;
+
+  protected deleteObjectCore(obj: any) {
     this.surveyObjects.removeObject(obj);
-    var objType = SurveyHelper.getObjectType(obj);
-    if (objType == ObjType.Page) {
-      this.survey.removePage(obj);
-    } else {
-      this.deletePanelOrQuestion(obj, objType);
-    }
-    this.setModified({
-      type: "OBJECT_DELETED",
-      target: obj,
-    });
-    if (objType == ObjType.Question) {
-      this.updateConditionsOnRemove(obj.getValueName());
-    }
+    super.deleteObjectCore(obj);
   }
-  private deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
-    var parent = obj["parent"];
-    var elements = parent.elements;
-    var objIndex = elements.indexOf(obj);
-    if (objIndex == elements.length - 1) {
-      objIndex--;
-    }
-    obj["delete"]();
-    this.selectedElement = objIndex > -1 ? elements[objIndex] : parent;
-  }
+
   //implements ISurveyObjectEditorOptions
   get alwaySaveTextInPropertyEditors(): boolean {
     return this.alwaySaveTextInPropertyEditorsValue;
@@ -2649,22 +2479,6 @@ export class SurveyCreator
     };
     this.onCollectionItemDeleting.fire(this, options);
     return options.allowDelete;
-  }
-  onIsPropertyReadOnlyCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    readOnly: boolean
-  ): boolean {
-    var proposedValue = this.readOnly || readOnly;
-    if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
-    var options = {
-      obj: obj,
-      property: property,
-      readOnly: proposedValue,
-      propertyName: property.name,
-    };
-    this.onGetPropertyReadOnly.fire(this, options);
-    return options.readOnly;
   }
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,

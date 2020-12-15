@@ -163,7 +163,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -225,7 +225,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -287,7 +287,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -316,7 +316,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -378,7 +378,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -440,7 +440,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -502,7 +502,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -531,7 +531,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="svc-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -2235,7 +2235,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2297,7 +2297,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2359,7 +2359,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2388,7 +2388,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2450,7 +2450,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2512,7 +2512,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2574,7 +2574,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2603,7 +2603,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="svc-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2613,7 +2613,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item svc-action-bar-item--secondary"
+            class="svc-action-bar-item"
             data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Preview"
           >
@@ -3909,8 +3909,42 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <svc-page-navigator
-    params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"
+    params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <svc-modal
+        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+      >
+        <div />
+      </svc-modal>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     <!-- /ko -->
     
@@ -4405,6 +4439,40 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
   <svc-page-navigator
     params="items: items"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <svc-modal
+        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+      >
+        <div />
+      </svc-modal>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     
 

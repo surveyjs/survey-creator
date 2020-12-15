@@ -6,3 +6,17 @@ svc-action-bar {
   margin-left: auto;
   padding: 0 0 0 calcSize(2);
 }
+
+.svc-action {
+}
+
+.svc-action--first {
+  flex: 1;
+  .svc-action-bar-item {
+    flex-direction: row-reverse;
+  }
+  .svc-action-bar-item__title {
+    margin-left: 0;
+    margin-right: calcSize(1);
+  }
+}

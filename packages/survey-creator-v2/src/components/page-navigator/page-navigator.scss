@@ -4,3 +4,32 @@ svc-page-navigator {
   display: flex;
   flex-direction: column;
 }
+
+.svc-page-navigator__navigator-icon {
+  display: block;
+  height: calcSize(3);
+  width: calcSize(3);
+  // padding: calcSize(1.25);
+  padding: 11px;
+  border-radius: 50%;
+  cursor: pointer;
+  use {
+    fill: $foreground-light;
+  }
+  &:hover {
+    background-color: $primary-light;
+    use {
+      fill: $primary;
+    }
+  }
+}
+
+.svc-page-navigator__selector--opened {
+  opacity: 0.5;
+  .svc-page-navigator__navigator-icon {
+    background-color: $primary-light;
+    use {
+      fill: $primary;
+    }
+  }
+}

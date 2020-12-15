@@ -19,6 +19,10 @@ import {
 } from "@survey/creator/questionEditors/questionEditor";
 import { EditableObject } from "@survey/creator/propertyEditors/editableObject";
 import { editorLocalization } from "@survey/creator/editorLocalization";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions,
+} from "@survey/creator/settings";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -29,13 +33,12 @@ FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
-  getJSON(obj: Base, prop: JsonObjectProperty): any;
-  onCreated?: (
-    propertyGrid: PropertyGridModel,
+  getJSON(
     obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
-  ) => void;
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any;
+  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
@@ -62,19 +65,18 @@ export var PropertyGridEditorCollection = {
     }
     return null;
   },
-  getJSON(obj: Base, prop: JsonObjectProperty): any {
-    var res = this.getEditor(prop);
-    return !!res ? res.getJSON(obj, prop) : null;
-  },
-  onCreated(
-    propertyGrid: PropertyGridModel,
+  getJSON(
     obj: Base,
-    question: Question,
-    prop: JsonObjectProperty
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
   ): any {
     var res = this.getEditor(prop);
+    return !!res ? res.getJSON(obj, prop, options) : null;
+  },
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
+    var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
-      res.onCreated(propertyGrid, obj, question, prop);
+      res.onCreated(obj, question, prop);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -91,57 +93,77 @@ export var PropertyGridEditorCollection = {
   },
 };
 
-export class PropertyGridModel {
-  private static panelNameIndex = 0;
-  private surveyValue: SurveyModel;
-  private objValue: Base;
-  public objValueChangedCallback: () => void;
-  constructor(obj: Base) {
-    this.obj = obj;
-  }
-  public get obj() {
-    return this.objValue;
-  }
-  public set obj(value: Base) {
-    if (this.objValue != value) {
-      this.objValue = value;
-      this.surveyValue = this.createSurvey(this.getSurveyJSON());
-      var page = this.surveyValue.createNewPage("p1");
-      this.setupObjPanel(page, this.obj, false);
-      this.survey.addPage(page);
-      this.survey.onMatrixCellCreated.add((sender, options) => {
-        this.onMatrixCellCreated(options);
-      });
-      this.survey.onMatrixCellValueChanged.add((sender, options) => {
-        this.onMatrixCellValueChanged(options);
-      });
-      this.survey.editingObj = value;
-      if (this.objValueChangedCallback) {
-        this.objValueChangedCallback();
-      }
+export class PropertyJSONGenerator {
+  private parentProperty: JsonObjectProperty;
+  private parentObj: Base;
+  constructor(
+    public obj: Base,
+    private options: ISurveyCreatorOptions = null,
+    parentQuestion: Question = null
+  ) {
+    if (!!parentQuestion) {
+      if (!this.options) this.options = parentQuestion.options;
+      this.parentProperty = parentQuestion.property;
+      this.parentObj = parentQuestion.obj;
     }
   }
-  public get survey() {
-    return this.surveyValue;
+  public toJSON(isNested: boolean = false): any {
+    return this.createJSON(isNested);
   }
-  protected createSurvey(json: any): SurveyModel {
-    return new SurveyModel(json);
+  public createColumnsJSON(className: string, names: Array<string>): any {
+    var res: Array<any> = [];
+    for (var i = 0; i < names.length; i++) {
+      var columnJSON = this.getColumnPropertyJSON(className, names[i]);
+      if (!!columnJSON) {
+        res.push(columnJSON);
+      }
+    }
+    return res;
   }
-  protected getSurveyJSON(): any {
-    return {
-      showNavigationButtons: "none",
-    };
+  public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false) {
+    panel.fromJSON(this.toJSON(isNestedObj));
+    this.onQuestionsCreated(panel);
   }
-  public setupObjPanel(panel: PanelModelBase, obj: Base, isNestedObj: boolean) {
-    panel.fromJSON(this.createJSON(obj, isNestedObj));
-    this.onQuestionsCreated(panel, obj);
+  private onQuestionsCreated(panel: PanelModelBase) {
+    var properties = Serializer.getPropertiesByObj(this.obj);
+    var props: any = {};
+    for (var i = 0; i < properties.length; i++) {
+      props[properties[i].name] = properties[i];
+    }
+    var questions = panel.questions;
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      var prop = props[q.name];
+      q.property = prop;
+      q.obj = this.obj;
+      q.options = this.options;
+      var eventVisibility = this.getVisibilityOnEvent(prop);
+      q.visible = q.visible && eventVisibility;
+      if (!!prop.visibleIf) {
+        q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
+      }
+      PropertyGridEditorCollection.onCreated(this.obj, q, prop);
+    }
   }
-  private createJSON(obj: Base, isNestedObj: boolean): any {
-    var properties = new SurveyQuestionProperties(obj);
+  private getVisibilityOnEvent(
+    prop: JsonObjectProperty,
+    showMode: string = ""
+  ): boolean {
+    if (!this.options) return true;
+    return this.options.onCanShowPropertyCallback(
+      this.obj,
+      <any>prop,
+      showMode,
+      this.parentObj,
+      <any>this.parentProperty
+    );
+  }
+  private createJSON(isNestedObj: boolean): any {
+    var properties = new SurveyQuestionProperties(this.obj);
     var tabs = properties.getTabs();
     var panels: any = {};
     for (var i = 0; i < tabs.length; i++) {
-      panels[tabs[i].name] = this.createPanelProps(obj, tabs[i], i == 0);
+      panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0);
     }
     var json: any = {
       elements: [],
@@ -159,7 +181,6 @@ export class PropertyGridModel {
     return json;
   }
   private createPanelProps(
-    obj: Base,
     tab: SurveyQuestionEditorTabDefinition,
     isFirst: boolean
   ): any {
@@ -167,7 +188,6 @@ export class PropertyGridModel {
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(
-        obj,
         <any>propDef.property,
         propDef.title
       );
@@ -178,23 +198,6 @@ export class PropertyGridModel {
       panel.elements.push(propJSON);
     }
     return panel;
-  }
-  private onQuestionsCreated(panel: PanelModelBase, obj: Base) {
-    var properties = Serializer.getPropertiesByObj(obj);
-    var props: any = {};
-    for (var i = 0; i < properties.length; i++) {
-      props[properties[i].name] = properties[i];
-    }
-    var questions = panel.questions;
-    for (var i = 0; i < questions.length; i++) {
-      var q = questions[i];
-      var prop = props[q.name];
-      q.property = prop;
-      if (!!prop.visibleIf) {
-        q.visibleIf = "propertyVisibleIf() = true";
-      }
-      PropertyGridEditorCollection.onCreated(this, obj, q, prop);
-    }
   }
   private createPanelJSON(
     category: string,
@@ -210,16 +213,43 @@ export class PropertyGridModel {
     };
   }
   private createQuestionJSON(
-    obj: Base,
     prop: JsonObjectProperty,
-    title: string
+    title: string,
+    isColumn: boolean = false
   ): any {
-    var json = PropertyGridEditorCollection.getJSON(obj, prop);
+    var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
+    if (!isVisible && isColumn) return null;
+    var json = PropertyGridEditorCollection.getJSON(
+      this.obj,
+      prop,
+      this.options
+    );
     if (!json) return null;
     json.name = prop.name;
     json.visible = prop.visible;
     json.title = this.getQuestionTitle(prop.name, title);
     return json;
+  }
+  private getColumnPropertyJSON(className: string, propName: string): any {
+    var prop = Serializer.findProperty(className, propName);
+    if (!prop) return null;
+    var json = this.createQuestionJSON(prop, "", true);
+    if (!json) return null;
+    if (!this.getVisibilityOnEvent(prop, "list")) return null;
+    json.name = prop.name;
+    json.title = editorLocalization.getPropertyName(prop.name);
+    if (!!json.type) {
+      json.cellType = json.type;
+      delete json.type;
+    }
+    return json;
+  }
+  private isPropertyVisible(
+    prop: JsonObjectProperty,
+    showMode: string
+  ): boolean {
+    if (!prop.visible) return false;
+    return !showMode || !prop.showMode || showMode == prop.showMode;
   }
   private getPanelTitle(name: string, title: string): string {
     if (!!title) return title;
@@ -228,6 +258,66 @@ export class PropertyGridModel {
   private getQuestionTitle(name: string, title: string): string {
     if (!!title && title !== name) return title;
     return editorLocalization.getPropertyNameInEditor(name);
+  }
+}
+
+export class PropertyGridModel {
+  private surveyValue: SurveyModel;
+  private objValue: Base;
+  private optionsValue: ISurveyCreatorOptions;
+  public objValueChangedCallback: () => void;
+  constructor(obj: Base = null, options: ISurveyCreatorOptions = null) {
+    this.options = options;
+    this.obj = obj;
+  }
+  public get obj() {
+    return this.objValue;
+  }
+  public set obj(value: Base) {
+    if (this.objValue != value) {
+      this.objValue = value;
+      var json = this.getSurveyJSON();
+      if (this.options.readOnly) {
+        json.mode = "display";
+      }
+      this.surveyValue = this.createSurvey(json);
+      var page = this.surveyValue.createNewPage("p1");
+      new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(page);
+      this.survey.addPage(page);
+      this.survey.onMatrixCellCreated.add((sender, options) => {
+        this.onMatrixCellCreated(options);
+      });
+      this.survey.onMatrixCellValueChanged.add((sender, options) => {
+        this.onMatrixCellValueChanged(options);
+      });
+      this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
+        options.allow = this.onMatrixAllowRemoveRow(options);
+      });
+      this.survey.onMatrixRowAdded.add((sender, options) => {
+        this.onMatrixRowAdded(options);
+      });
+      this.survey.editingObj = value;
+      if (this.objValueChangedCallback) {
+        this.objValueChangedCallback();
+      }
+    }
+  }
+  public get options(): ISurveyCreatorOptions {
+    return this.optionsValue;
+  }
+  public set options(val: ISurveyCreatorOptions) {
+    this.optionsValue = !!val ? val : new EmptySurveyCreatorOptions();
+  }
+  public get survey() {
+    return this.surveyValue;
+  }
+  protected createSurvey(json: any): SurveyModel {
+    return new SurveyModel(json);
+  }
+  protected getSurveyJSON(): any {
+    return {
+      showNavigationButtons: "none",
+    };
   }
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {
@@ -247,19 +337,58 @@ export class PropertyGridModel {
       options
     );
   }
+  private onMatrixAllowRemoveRow(options: any): boolean {
+    var res = this.options.onCollectionItemDeletingCallback(
+      <any>this.obj,
+      options.question.property,
+      options.question.value,
+      options.row.editingObj
+    );
+    return this.options.onCanDeleteItemCallback(
+      <any>this.obj,
+      options.row.editingObj,
+      res
+    );
+  }
+  private onMatrixRowAdded(options: any) {
+    var item = options.row.editingObj;
+    if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
+      this.options.onItemValueAddedCallback(
+        <any>this.obj,
+        options.question.property.name,
+        options.row.editingObj,
+        options.question.value
+      );
+    }
+    if (Serializer.isDescendantOf(item.getType(), "matrixdropdowncolumn")) {
+      this.options.onMatrixDropdownColumnAddedCallback(
+        <any>this.obj,
+        options.row.editingObj,
+        options.question.value
+      );
+    }
+  }
 }
 
 export abstract class PropertyGridEditor implements IPropertyGridEditor {
   constructor() {}
   public abstract fit(prop: JsonObjectProperty): boolean;
-  public abstract getJSON(obj: Base, prop: JsonObjectProperty): any;
+  public abstract getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any;
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "boolean" || prop.type == "switch";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "boolean", default: false };
   }
 }
@@ -267,7 +396,11 @@ export class PropertyGridEditorString extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text" };
   }
 }
@@ -275,7 +408,11 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text", inputType: "number" };
   }
 }
@@ -283,7 +420,11 @@ export class PropertyGridEditorText extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "text";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "comment" };
   }
 }
@@ -291,7 +432,11 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "color";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return { type: "text", inputType: "color" };
   }
 }
@@ -299,7 +444,11 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.hasChoices;
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return {
       type: "dropdown",
       showOptionsCaption: false,
@@ -341,7 +490,11 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question";
   }
-  public getJSON(obj: Base, prop: JsonObjectProperty): any {
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
     return {
       type: "dropdown",
       optionsCaption: editorLocalization.getString(
@@ -388,6 +541,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();

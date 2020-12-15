@@ -2,75 +2,20 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "./editableObject";
+import { ISurveyCreatorOptions } from "../settings";
 import {
   getFirstNonTextElement,
   getNodesFromKoComponentInfo,
 } from "../utils/utils";
 
-export interface ISurveyObjectEditorOptions {
-  alwaySaveTextInPropertyEditors: boolean;
+export interface ISurveyObjectEditorOptions extends ISurveyCreatorOptions {
   showApplyButtonInEditors: boolean;
   useTabsInElementEditor: boolean;
-  readOnly: boolean;
-  maxLogicItemsInCondition: number;
-  getObjectDisplayName(
-    obj: Survey.Base,
-    reason: string,
-    displayName: string
-  ): string;
-  showTitlesInExpressions: boolean;
-  allowEditExpressionsInTextEditor: boolean;
-  onCanShowPropertyCallback(
-    object: any,
-    property: Survey.JsonObjectProperty,
-    showMode: string,
-    parentObj: any,
-    parentProperty: Survey.JsonObjectProperty
-  ): boolean;
-  onCanDeleteItemCallback(
-    object: any,
-    item: Survey.Base,
-    allowDelete: boolean
-  ): boolean;
-  onCollectionItemDeletingCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    collection: Array<Survey.Base>,
-    item: Survey.Base
-  ): boolean;
-
   onIsEditorReadOnlyCallback(
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     readOnly: boolean
   ): boolean;
-  onItemValueAddedCallback(
-    obj: Survey.Base,
-    propertyName: string,
-    itemValue: Survey.ItemValue,
-    itemValues: Array<Survey.ItemValue>
-  );
-  onMatrixDropdownColumnAddedCallback(
-    matrix: Survey.Question,
-    column: Survey.MatrixDropdownColumn,
-    columns: Array<Survey.MatrixDropdownColumn>
-  );
-  onSetPropertyEditorOptionsCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editorOptions: any
-  );
-  onGetErrorTextOnValidationCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    value: any
-  ): string;
-  onValueChangingCallback(options: any);
-  onPropertyValueChanged(
-    property: Survey.JsonObjectProperty,
-    obj: any,
-    newValue: any
-  );
   onPropertyEditorObjectSetCallback(
     propertyName: string,
     obj: Survey.Base,
@@ -86,7 +31,6 @@ export interface ISurveyObjectEditorOptions {
     propertyName: string,
     obj: Survey.Base
   ): any;
-  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string;
   onConditionValueSurveyCreatedCallBack(
     valueQuestionName: string,
     propertyName: string,
@@ -99,13 +43,6 @@ export interface ISurveyObjectEditorOptions {
     obj: Survey.Base,
     editor: SurveyPropertyEditorBase,
     list: any[]
-  );
-  startUndoRedoTransaction();
-  stopUndoRedoTransaction();
-  createSurvey(
-    json: any,
-    reason: string,
-    surveyType?: new (json: any) => Survey.Survey
   );
 }
 

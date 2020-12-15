@@ -7,7 +7,7 @@ export class EditableObject {
   public static getSurvey(object: any): Survey.SurveyModel {
     if (
       object instanceof Survey.SurveyModel ||
-      (!!object.getType && object.getType() == "survey")
+      (!!object && !!object.getType && object.getType() == "survey")
     ) {
       return EditableObject.getOriginalSurvey(object);
     }

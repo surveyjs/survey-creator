@@ -31,6 +31,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "hideNumber", tab: "layout" },
+        { name: "state", tab: "layout" },
         { name: "titleLocation", tab: "layout" },
         { name: "descriptionLocation", tab: "layout" },
         { name: "indent", tab: "layout" },
@@ -414,11 +415,11 @@ export class SurveyQuestionEditorDefinition {
     panel: {
       properties: [
         "isRequired",
-        "state",
         { name: "requiredIf", tab: "logic" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
+        { name: "state", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "innerIndent", tab: "layout" },
         { name: "width", tab: "layout" },

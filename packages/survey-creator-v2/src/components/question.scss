@@ -17,6 +17,14 @@ svc-question {
   box-sizing: border-box;
 }
 
+.svc-question__content-actions {
+  position: absolute;
+  display: none;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
 .svc-question__content:hover {
   border: 1px solid $secondary;
 }
@@ -24,4 +32,13 @@ svc-question {
 .svc-question__content--selected,
 .svc-question__content--selected:hover {
   border: 2px solid $secondary;
+  .svc-question__content-actions {
+    display: block;
+  }
+}
+
+svc-question {
+  svc-action-bar {
+    padding: 0;
+  }
 }
