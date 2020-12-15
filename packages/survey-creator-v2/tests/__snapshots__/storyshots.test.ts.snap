@@ -3911,6 +3911,40 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   <svc-page-navigator
     params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <svc-modal
+        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+      >
+        <div />
+      </svc-modal>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     <!-- /ko -->
     
@@ -4405,6 +4439,40 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
   <svc-page-navigator
     params="items: items"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <svc-modal
+        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+      >
+        <div />
+      </svc-modal>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     
 
