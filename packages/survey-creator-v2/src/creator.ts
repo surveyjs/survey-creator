@@ -223,7 +223,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.toolbox.itemNames
       );
       var allowChangeType = convertClasses.length > 0;
-      if(allowChangeType) {
+      if(!element.isPanel && !element.isPage) {
         var createTypeByClass = (className) => {
           return {
             name: this.getLocString("qt." + className),
