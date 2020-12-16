@@ -8,10 +8,10 @@ export class ModalViewModel {
   public left = ko.observable();
   public modalDirection = ko.observable<string>();
   public pointerTarget = ko.observable<object>({});
-  
+
   private container: HTMLElement;
   private showSubscription: ko.Computed<void>;
-  
+
   constructor(
     public name: string,
     public data: any,
@@ -19,6 +19,7 @@ export class ModalViewModel {
     public verticalPosition: "top" | "bottom" | "middle",
     public horizontalPosition: "left" | "right" | "center",
     public showPointer: boolean,
+    public cssClass: string = "",
     targetElement: HTMLElement
   ) {
     this.container = document.createElement("div");
@@ -64,7 +65,7 @@ export class ModalViewModel {
   }
 
   public get styleClass(): string {
-    var css = "";
+    var css = this.cssClass;
     if (this.showPointer) {
       css += " svc-modal--show-pointer";
       css += ` svc-modal--${this.modalDirection()}`;
@@ -90,6 +91,7 @@ ko.components.register("svc-modal", {
         params.verticalPosition,
         params.horizontalPosition,
         params.showPointer,
+        params.cssClass,
         componentInfo.element.parentElement
       );
       return viewModel;
