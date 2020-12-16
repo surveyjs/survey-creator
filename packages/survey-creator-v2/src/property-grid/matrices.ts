@@ -13,7 +13,7 @@ import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
   PropertyJSONGenerator,
-} from "./propertygrid";
+} from "./index";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
@@ -39,7 +39,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     ): any => {
       return this.createNewItem(sender, prop);
     };
-    this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question);
+    this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -85,7 +85,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected hasDetailPanel(): boolean {
     return true;
   }
-  protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel) {
+  protected setupMatrixQuestion(
+    obj: Base,
+    matrix: QuestionMatrixDynamicModel,
+    prop: JsonObjectProperty
+  ) {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
@@ -100,6 +104,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         true
       );
     };
+    if (!!matrix.options) {
+      this.setupUsingOptions(obj, matrix, matrix.options, prop);
+    }
   }
   public getJSON(
     obj: Base,
@@ -143,6 +150,24 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       });
     }
     return res;
+  }
+  private setupUsingOptions(
+    obj: Base,
+    matrix: QuestionMatrixDynamicModel,
+    options: ISurveyCreatorOptions,
+    prop: JsonObjectProperty
+  ) {
+    var evtOptions = {
+      allowAddRemoveItems: true,
+      allowRemoveAllItems: true,
+      showTextView: true,
+      //options.itemsEntryType
+    };
+    options.onSetPropertyEditorOptionsCallback(prop.name, <any>obj, evtOptions);
+    if (!evtOptions.allowAddRemoveItems) {
+      matrix.allowAddRows = false;
+      matrix.allowRemoveRows = false;
+    }
   }
 }
 

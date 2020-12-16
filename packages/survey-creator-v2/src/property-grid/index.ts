@@ -290,6 +290,12 @@ export class PropertyGridModel {
       this.survey.onMatrixCellValueChanged.add((sender, options) => {
         this.onMatrixCellValueChanged(options);
       });
+      this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
+        options.allow = this.onMatrixAllowRemoveRow(options);
+      });
+      this.survey.onMatrixRowAdded.add((sender, options) => {
+        this.onMatrixRowAdded(options);
+      });
       this.survey.editingObj = value;
       if (this.objValueChangedCallback) {
         this.objValueChangedCallback();
@@ -330,6 +336,37 @@ export class PropertyGridModel {
       options.question.property,
       options
     );
+  }
+  private onMatrixAllowRemoveRow(options: any): boolean {
+    var res = this.options.onCollectionItemDeletingCallback(
+      <any>this.obj,
+      options.question.property,
+      options.question.value,
+      options.row.editingObj
+    );
+    return this.options.onCanDeleteItemCallback(
+      <any>this.obj,
+      options.row.editingObj,
+      res
+    );
+  }
+  private onMatrixRowAdded(options: any) {
+    var item = options.row.editingObj;
+    if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
+      this.options.onItemValueAddedCallback(
+        <any>this.obj,
+        options.question.property.name,
+        options.row.editingObj,
+        options.question.value
+      );
+    }
+    if (Serializer.isDescendantOf(item.getType(), "matrixdropdowncolumn")) {
+      this.options.onMatrixDropdownColumnAddedCallback(
+        <any>this.obj,
+        options.row.editingObj,
+        options.question.value
+      );
+    }
   }
 }
 

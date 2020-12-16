@@ -1,3 +1,7 @@
+<div class="svc-page-navigator__selector" data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }">
+    <svc-svg-icon class="svc-page-navigator__navigator-icon" params="iconName: icon, size: 22"></svc-svg-icon>
+    <svc-modal params= "name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"></svc-modal>
+</div>
 <!-- ko foreach: items -->
 <svc-page-navigator-item params="item: $data"></svc-page-navigator-item>
 <!-- /ko -->

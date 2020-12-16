@@ -4,6 +4,7 @@ import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyCreator } from "../editor";
 import { IToolbarItem } from "../components/toolbar";
+import { settings } from "../settings";
 
 import "./translation.scss";
 var templateHtml = require("./translation.html");
@@ -224,6 +225,17 @@ export class TranslationGroup extends TranslationItemBase {
         this.createGroups(value, property);
       }
     }
+    this.sortItems();
+    if (this.items.length == 1 && this.groups.length == 1) {
+      var gr = this.groups[0];
+      gr.koExpanded(true);
+      if (gr.obj.getType() == "page") {
+        gr.koShowHeader(false);
+      }
+    }
+  }
+  private sortItems() {
+    if (!settings.traslation.sortByName) return;
     this.itemValues.sort(function (
       a: TranslationItemBase,
       b: TranslationItemBase
@@ -232,13 +244,6 @@ export class TranslationGroup extends TranslationItemBase {
       if (!b.name) return 1;
       return a.name.localeCompare(b.name);
     });
-    if (this.items.length == 1 && this.groups.length == 1) {
-      var gr = this.groups[0];
-      gr.koExpanded(true);
-      if (gr.obj.getType() == "page") {
-        gr.koShowHeader(false);
-      }
-    }
   }
   private getLocalizedProperties(obj: any): Array<Survey.JsonObjectProperty> {
     var res = [];

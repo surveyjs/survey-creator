@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.21](https://github.com/surveyjs/survey-creator/compare/v1.8.17...v1.8.21) (2020-12-15)
+
+
+### Bug Fixes
+
+* Choices property appears twice in property grid on adding a custom property with category equals "choices" [#1018](https://github.com/surveyjs/survey-creator/issues/1018) ([e65467d](https://github.com/surveyjs/survey-creator/commit/e65467dfdf855a9a975d1b0fc0855ec122ef3221))
+
 ### [1.8.17](https://github.com/surveyjs/survey-creator/compare/v1.8.16...v1.8.17) (2020-11-26)
 
 

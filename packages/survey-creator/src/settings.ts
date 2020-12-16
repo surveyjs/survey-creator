@@ -1,5 +1,11 @@
-import { title } from "process";
 import * as Survey from "survey-knockout";
+
+export var settings = {
+  traslation: {
+    sortByName: true,
+  },
+  //TODO add maximumColumnCount
+};
 
 export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -94,7 +100,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     item: Survey.Base,
     allowDelete: boolean
   ): boolean {
-    return true;
+    return allowDelete;
   }
   onCollectionItemDeletingCallback(
     obj: Survey.Base,

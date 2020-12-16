@@ -7,6 +7,9 @@ svc-toolbox {
 
 .svc-toolbox {
   height: 100%;
+  width: 84px;
+  padding: calcSize(2);
+  box-sizing: border-box;
 }
 
 .svc-toolbox__category {

@@ -10,8 +10,13 @@ export class ListViewModel {
   constructor(
     public items: ko.MaybeObservableArray<ListItem>,
     public onItemSelect: (item: ListItem) => void,
-    public allowSelection: ko.MaybeObservable<boolean>
-  ) {}
+    public allowSelection: ko.MaybeObservable<boolean>,
+    selectedItem?: ko.Observable<ListItem>
+  ) {
+    if(selectedItem !== undefined) {
+      this.selectedItem = selectedItem;
+    }
+  }
 
   public selectItem = (itemValue: ListItem) => {
     this.isExpanded(false);
@@ -38,7 +43,8 @@ ko.components.register("svc-list", {
       const viewModel = new ListViewModel(
         params.items,
         params.onItemSelect,
-        params.allowSelection
+        params.allowSelection,
+        params.selectedItem
       );
       return viewModel;
     },

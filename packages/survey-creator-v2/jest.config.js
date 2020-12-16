@@ -13,7 +13,7 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
-    "@survey/creator/(.*)": "<rootDir>/../survey-creator/src/$1"
+    "@survey/creator/(.*)": "<rootDir>/../survey-creator/src/$1",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

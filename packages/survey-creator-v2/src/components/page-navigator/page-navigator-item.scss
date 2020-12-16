@@ -44,8 +44,7 @@ svc-page-navigator-item {
   padding: 0;
   display: block;
   overflow: hidden;
-  transition: max-width 0.1s ease-in-out;
-  transition: padding 0.1s ease-in-out;
+  transition: max-width 0.1s ease-in-out, padding 0.1s ease-in-out;
   white-space: nowrap;
   height: 100%;
   line-height: 36px;

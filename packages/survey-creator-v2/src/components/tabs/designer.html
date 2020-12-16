@@ -6,4 +6,4 @@
     <!-- /ko -->
   </div>
 </div>
-<svc-page-navigator params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"></svc-page-navigator>
+<svc-page-navigator params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"></svc-page-navigator>

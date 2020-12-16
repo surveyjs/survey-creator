@@ -4,9 +4,9 @@ import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
-import { isPropertyVisible } from "@survey/creator/utils/utils";
+import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
-import { PropertyGrid } from "./propertyGrid/propertygrid";
+import { PropertyGrid } from "./property-grid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
@@ -47,7 +47,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-clear",
-          action: function () {
+          action: () => {
             alert("clear pressed");
           },
           isActive: false,
@@ -68,12 +68,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-preview",
-          action: function () {
-            alert("preview pressed");
+          css: ko.computed(() => this.koViewType()==="test"?"svc-action-bar-item--secondary":""),
+          action: () => {
+            this.makeNewViewActive("test");
           },
           isActive: ko.observable(false),
           title: "Preview",
-          innerCss: "svc-action-bar-item--secondary",
         },
       ])
     );
@@ -101,7 +101,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement = (element: Base) => {
+
+  public selectElement(element: any) {
     this.selection(element);
     this.propertyGrid.obj = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
@@ -222,38 +223,32 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.toolbox.itemNames
       );
       var allowChangeType = convertClasses.length > 0;
-      var createTypeByClass = (className) => {
-        return {
-          name: this.getLocString("qt." + className),
-          value: className,
+      if(!element.isPanel && !element.isPage) {
+        var createTypeByClass = (className) => {
+          return {
+            name: this.getLocString("qt." + className),
+            value: className,
+          };
         };
-      };
-      var availableTypes = [createTypeByClass(currentType)];
-      for (var i = 0; i < convertClasses.length; i++) {
-        var className = convertClasses[i];
-        availableTypes.push(createTypeByClass(className));
+        var availableTypes = [createTypeByClass(currentType)];
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          availableTypes.push(createTypeByClass(className));
+        }
+        items.push({
+          id: "convertTo",
+          css: "svc-action--first svc-action-bar-item--secondary",
+          icon: "icon-change_16x16",
+          // title: this.getLocString("qt." + currentType),
+          title: this.getLocString("survey.convertTo"),
+          items: availableTypes.map(type => ({title: type.name, value: type.value})),
+          enabled: allowChangeType,
+          component: "svc-action-bar-item-dropdown",
+          action: (newType) => {
+            this.convertCurrentObject(element, newType.value);
+          },
+        });
       }
-      items.push({
-        id: "convertTo",
-        css: "svc-action--first svc-action-bar-item--secondary",
-        icon: "icon-change_16x16",
-        title: this.getLocString("survey.convertTo"),
-        action: () => {
-          // TODO: implement
-        },
-      });
-      // items.push({
-      //   text: this.getLocString("qt." + currentType),
-      //   title: this.getLocString("survey.convertTo"),
-      //   type: currentType,
-      //   allowChangeType: allowChangeType,
-      //   template: "convert-action",
-      //   availableTypes: availableTypes,
-      //   onConvertType: (data, event) => {
-      //     var newType = event.target.value;
-      //     this.convertCurrentObject(element, newType);
-      //   },
-      // });
     }
 
     if (opts.allowCopy === undefined || opts.allowCopy) {
@@ -261,8 +256,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          // TODO: reanimate
-          // this.fastCopyQuestion(element);
+          this.fastCopyQuestion(element);
         },
       });
     }
@@ -270,7 +264,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (
       (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
       typeof element.isRequired !== "undefined" &&
-      isPropertyVisible(element, "isRequired")
+      propertyExists(element, "isRequired") && isPropertyVisible(element, "isRequired")
     ) {
       var isRequired = ko.computed(() => element.isRequired);
       items.push({
@@ -300,8 +294,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         id: "delete",
         title: this.getLocString("pe.delete"),
         action: () => {
-          // TODO: reanimate
-          // this.deleteObject(element);
+          this.deleteObject(element);
         },
       });
     }
