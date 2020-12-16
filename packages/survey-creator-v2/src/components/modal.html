@@ -3,6 +3,9 @@
     class="svc-modal__container"
     data-bind="style: { left: left, top: top }, class: styleClass"
   >
+     <!-- ko if: showPointer  -->
+     <span data-bind="style: {left: pointerTarget().left, top: pointerTarget().top }" class="svc-modal__pointer"></span>
+     <!-- /ko -->
     <div class="svc-modal__content">
       <!-- ko component: {name: name, params: data} --><!-- /ko -->
     </div>

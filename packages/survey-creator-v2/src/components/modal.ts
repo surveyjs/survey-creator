@@ -4,10 +4,14 @@ import "./modal.scss";
 const template = require("./modal.html");
 
 export class ModalViewModel {
-  private container: HTMLElement;
   public top = ko.observable();
   public left = ko.observable();
+  public modalDirection = ko.observable<string>();
+  public pointerTarget = ko.observable<object>({});
+  
+  private container: HTMLElement;
   private showSubscription: ko.Computed<void>;
+  
   constructor(
     public name: string,
     public data: any,
@@ -24,25 +28,36 @@ export class ModalViewModel {
 
     this.showSubscription = ko.computed(() => {
       const rect = targetElement.getBoundingClientRect();
-      var width = (<HTMLElement>this.container.children[0].children[0])
+      const height = (<HTMLElement>this.container.children[0].children[0])
+        .offsetHeight;
+      const width = (<HTMLElement>this.container.children[0].children[0])
         .offsetWidth;
-      if (this.isVisible()) {
-        if (horizontalPosition == "center") {
-          this.left((rect.left + rect.right - width) / 2);
-        } else if (horizontalPosition == "left") {
-          this.left(rect.left - width);
-        } else {
-          this.left(rect.right);
-        }
+      var pos = ModalUtils.calculatePosition(
+        rect,
+        height,
+        width,
+        verticalPosition,
+        horizontalPosition,
+        this.showPointer
+      );
+      this.left(pos.left);
+      this.top(pos.top);
 
-        var height = (<HTMLElement>this.container.children[0].children[0])
-          .offsetHeight;
-        if (verticalPosition == "bottom") {
-          this.top(rect.bottom);
-        } else if (verticalPosition == "middle") {
-          this.top((rect.bottom + rect.top) / 2 - height / 2);
-        } else {
-          this.top(rect.top - height);
+      this.modalDirection(
+        ModalUtils.calculateModalDirection(verticalPosition, horizontalPosition)
+      );
+
+      if (this.isVisible()) {
+        if (this.showPointer) {
+          this.pointerTarget(
+            ModalUtils.calculatePointerTarget(
+              rect,
+              pos.top,
+              pos.left,
+              verticalPosition,
+              horizontalPosition
+            )
+          );
         }
       }
     });
@@ -52,9 +67,9 @@ export class ModalViewModel {
     var css = "";
     if (this.showPointer) {
       css += " svc-modal--show-pointer";
+      css += ` svc-modal--${this.modalDirection()}`;
     }
-    css += ` svc-modal--${this.horizontalPosition}`;
-    css += ` svc-modal--${this.verticalPosition}`;
+
     return css;
   }
 
@@ -82,3 +97,70 @@ ko.components.register("svc-modal", {
   },
   template: "<div></div>",
 });
+
+export class ModalUtils {
+  public static calculatePosition(
+    targetRect: ClientRect,
+    height: number,
+    width: number,
+    verticalPosition: string,
+    horizontalPosition: string,
+    showPointer: boolean
+  ) {
+    if (horizontalPosition == "center")
+      var left = (targetRect.left + targetRect.right - width) / 2;
+    else if (horizontalPosition == "left") left = targetRect.left - width;
+    else left = targetRect.right;
+
+    if (verticalPosition == "middle")
+      var top = (targetRect.top + targetRect.bottom - height) / 2;
+    else if (verticalPosition == "top") top = targetRect.top - height;
+    else top = targetRect.bottom;
+
+    if (showPointer) {
+      if (horizontalPosition != "center" && verticalPosition != "middle") {
+        if (verticalPosition == "top") {
+          top = top + targetRect.height;
+        } else {
+          top = top - targetRect.height;
+        }
+      }
+    }
+
+    return { left: left, top: top };
+  }
+
+  public static calculateModalDirection(
+    verticalPosition: string,
+    horizontalPosition: string
+  ) {
+    var modalDirection: string;
+    if (horizontalPosition == "center" && verticalPosition != "middle") {
+      modalDirection = verticalPosition;
+    } else if (horizontalPosition != "center") {
+      modalDirection = horizontalPosition;
+    }
+    return modalDirection;
+  }
+
+  //called when showPointer  is true
+  public static calculatePointerTarget(
+    targetRect: ClientRect,
+    top: number,
+    left: number,
+    verticalPosition: string,
+    horizontalPosition: string
+  ) {
+    var targetPos: any = {};
+    if (horizontalPosition != "center") {
+      targetPos.top = targetRect.top + targetRect.height / 2;
+      targetPos.left = targetRect[horizontalPosition];
+    } else if (verticalPosition != "middle") {
+      targetPos.top = targetRect[verticalPosition];
+      targetPos.left = targetRect.left + targetRect.width / 2;
+    }
+    targetPos.left = targetPos.left - left;
+    targetPos.top = targetPos.top - top;
+    return targetPos;
+  }
+}
