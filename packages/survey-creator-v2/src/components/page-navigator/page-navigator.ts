@@ -43,7 +43,7 @@ export class PageNavigatorViewModel {
   name = "svc-list";
   verticalPosition= "bottom";
   horizontalPosition = "left";
-  showPointer = false;
+  showPointer = true;
   pageSelectorModel = {
     onItemSelect: (item) => {
       this._creator.selectElement(item.value);
