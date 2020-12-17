@@ -360,8 +360,14 @@ export var itemTitleAdorner = {
 registerAdorner("item-title", itemTitleAdorner);
 
 export var descriptionAdorner = {
+  surveyDescriptionEditable: true,
+  pageDescriptionEditable: true,
   getMarkerClass: (model) => {
-    if (typeof model.getType === "function" && !Survey.Serializer.findProperty(model.getType(), "description")) {
+    if (typeof model.getType === "function" && (
+      (model.getType() === "page" && !descriptionAdorner.pageDescriptionEditable) ||
+      (model.getType() === "survey" && !descriptionAdorner.surveyDescriptionEditable) ||
+      !Survey.Serializer.findProperty(model.getType(), "description"))
+    ) {
       return "";
     }
     return "description_editable";
