@@ -4463,11 +4463,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       </svc-svg-icon>
       
     
-      <svc-modal
-        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
-      </svc-modal>
+      </sv-popup>
       
 
     </div>
@@ -4991,11 +4991,11 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
       </svc-svg-icon>
       
     
-      <svc-modal
-        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
-      </svc-modal>
+      </sv-popup>
       
 
     </div>
