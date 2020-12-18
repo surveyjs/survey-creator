@@ -4,11 +4,10 @@ import * as ko from "knockout";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 import { ListViewModel } from "../src/entries";
-import { ModalViewModel } from "../src/components/modal";
 
 export default {
   title: "Context menu",
-  "ko-components": [ListViewModel, ModalViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [ListViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},
