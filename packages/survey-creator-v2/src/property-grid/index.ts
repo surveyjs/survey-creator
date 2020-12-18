@@ -12,6 +12,7 @@ import {
   Survey,
   FunctionFactory,
   ItemValue,
+  Helpers,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -284,6 +285,10 @@ export class PropertyGridModel {
       var page = this.surveyValue.createNewPage("p1");
       new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(page);
       this.survey.addPage(page);
+      //this.survey.checkErrorsMode = "onValueChanged";
+      this.survey.onValueChanging.add((sender, options) => {
+        this.onValueChanging(options);
+      });
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
       });
@@ -318,6 +323,30 @@ export class PropertyGridModel {
     return {
       showNavigationButtons: "none",
     };
+  }
+  private onValueChanging(options: any) {
+    var q = options.question;
+    if (!q || !q.property) return;
+    var error = this.options.onGetErrorTextOnValidationCallback(
+      q.property.name,
+      this.obj,
+      options.value
+    );
+    if (!!error) {
+      q.clearErrors();
+      q.addError(error);
+      options.value = options.oldValue;
+    } else {
+      var changingOptions = {
+        obj: this.obj,
+        propertyName: q.property.name,
+        value: options.oldValue,
+        newValue: options.value,
+        doValidation: false,
+      };
+      this.options.onValueChangingCallback(changingOptions);
+      options.value = changingOptions.newValue;
+    }
   }
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {
