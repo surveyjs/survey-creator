@@ -728,3 +728,34 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowAddRows).toEqual(false);
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
 });
+
+/* TODO wait for v1.8.22
+test("options.onGetErrorTextOnValidationCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  var propName = "";
+  var object = null;
+  options.onGetErrorTextOnValidationCallback = (
+    propertyName: string,
+    obj: Base,
+    value: any
+  ): string => {
+    if (propertyName != "name") return;
+    if (obj.getType() != "dropdown" || value.length != 3) return "No3Letters";
+    return null;
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var nameQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  nameQuestion.value = "q2";
+  expect(nameQuestion.errors).toHaveLength(1);
+  expect(nameQuestion.errors[0].text).toEqual("No3Letters");
+  expect(question.name).toEqual("q1");
+  nameQuestion.value = "qq2";
+  expect(nameQuestion.errors).toHaveLength(0);
+  expect(question.name).toEqual("qq2");
+});
+*/
