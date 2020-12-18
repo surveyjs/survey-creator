@@ -10,7 +10,7 @@ Finally you may install our npm package:
 ## Step 1. Add links to [knockout](http://knockoutjs.com).
 
 ```javascript
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+<script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
 ```
 
 ## Step 2.  Add links to survey creator and survey library
