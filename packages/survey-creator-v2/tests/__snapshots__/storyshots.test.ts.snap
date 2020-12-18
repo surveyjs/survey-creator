@@ -38,8 +38,8 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button
     </span>
@@ -136,8 +136,8 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Active
     </span>
@@ -574,8 +574,8 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <span
-        class="svc-action-bar-item__title"
-        data-bind="text: title"
+        class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
+        data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
       >
         Preview
       </span>
@@ -646,8 +646,8 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Disabled
     </span>
@@ -2646,8 +2646,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <span
-              class="svc-action-bar-item__title"
-              data-bind="text: title"
+              class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
+              data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
             >
               Preview
             </span>

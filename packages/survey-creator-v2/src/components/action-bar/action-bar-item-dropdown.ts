@@ -22,11 +22,12 @@ ko.components.register("svc-action-bar-item-dropdown", {
             params.item.action(item);
           },
           items: params.item.items,
+          selectedItem: params.item.selectedItem
         },
         isVisible: isVisible,
         name: "svc-list",
-        verticalPosition: "middle",
-        horizontalPosition: "right",
+        verticalPosition: params.item.verticalPosition || "middle",
+        horizontalPosition: params.item.horizontalPosition || "right",
         showPointer: true
       };
     },

@@ -329,7 +329,7 @@ export class PropertyGridModel {
     if (!q || !q.property) return;
     var error = this.options.onGetErrorTextOnValidationCallback(
       q.property.name,
-      this.obj,
+      <any>this.obj,
       options.value
     );
     if (!!error) {
