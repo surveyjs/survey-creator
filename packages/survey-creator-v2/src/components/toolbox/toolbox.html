@@ -21,10 +21,10 @@
       data-bind="attr: { title: 'More...', role: 'button', 'aria-label': 'More...' }, css: 'svc-toolbox__item--dots'"
     >
       <svc-svg-icon params="iconName: 'icon-dots', size: 24"></svc-svg-icon>
-      <svc-modal
+      <sv-popup
       class="svc-toolbox__modal"
-      params="name: 'svc-list', data: { items: invisibleItems, onItemSelect: invisibleItemSelected }, isVisible: showInvisibleItems, verticalPosition: 'top', horizontalPosition: 'right', showPointer: true"
-      ></svc-modal>
+      params="contentComponentName: 'svc-list', contentComponentData: { items: invisibleItems, onItemSelect: invisibleItemSelected }, isVisible: showInvisibleItems, verticalPosition: 'top', horizontalPosition: 'right', showPointer: true"
+      ></sv-popup>
     </div>
    
   </div>

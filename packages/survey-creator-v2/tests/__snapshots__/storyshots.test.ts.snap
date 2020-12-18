@@ -2132,6 +2132,8 @@ exports[`Storyshots Context menu Ordinary 1`] = `
 <div
   style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
 >
+  
+        
   <svc-button
     params="title: title, action: action"
   >
@@ -2153,11 +2155,16 @@ exports[`Storyshots Context menu Ordinary 1`] = `
     
 
   </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
   >
     <div />
-  </svc-modal>
+  </sv-popup>
+  
+      
 </div>
 `;
 
@@ -2165,6 +2172,8 @@ exports[`Storyshots Context menu With Pointer 1`] = `
 <div
   style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
 >
+  
+        
   <svc-button
     params="title: title, action: action"
   >
@@ -2186,11 +2195,17 @@ exports[`Storyshots Context menu With Pointer 1`] = `
     
 
   </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition,
+          horizontalPosition: horizontalPosition, showPointer: showPointer"
   >
     <div />
-  </svc-modal>
+  </sv-popup>
+  
+      
 </div>
 `;
 
@@ -4448,11 +4463,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       </svc-svg-icon>
       
     
-      <svc-modal
-        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
-      </svc-modal>
+      </sv-popup>
       
 
     </div>
@@ -4976,11 +4991,11 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
       </svc-svg-icon>
       
     
-      <svc-modal
-        params="name: name, data: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
-      </svc-modal>
+      </sv-popup>
       
 
     </div>
