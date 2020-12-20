@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 import { Survey } from "survey-knockout";
-import { creatorCss } from "../../surveyTheme/creator-css";
+import { creatorCss } from "../../survey-theme/creator-css";
 import "./property-panel.scss";
-import "../../surveyTheme/survey.scss";
+import "../../survey-theme/survey.scss";
 const template = require("./property-panel.html");
 
 // export class PropertyPanelTabViewModel {
