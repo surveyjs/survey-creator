@@ -2161,7 +2161,8 @@ exports[`Storyshots Context menu Ordinary 1`] = `
     params="contentComponentName: name, contentComponentData: model,
           isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
   >
-    <div />
+    
+        
   </sv-popup>
   
       
@@ -2202,7 +2203,8 @@ exports[`Storyshots Context menu With Pointer 1`] = `
           isVisible: isVisible, verticalPosition: verticalPosition,
           horizontalPosition: horizontalPosition, showPointer: showPointer"
   >
-    <div />
+    
+        
   </sv-popup>
   
       
@@ -4465,9 +4467,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
       <sv-popup
         params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
-      >
-        <div />
-      </sv-popup>
+      />
       
 
     </div>
@@ -4993,9 +4993,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
     
       <sv-popup
         params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
-      >
-        <div />
-      </sv-popup>
+      />
       
 
     </div>
