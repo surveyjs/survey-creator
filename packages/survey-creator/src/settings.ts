@@ -131,7 +131,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     obj: Survey.Base,
     value: any
   ): string {
-    return "";
+    return null;
   }
   onValueChangingCallback(options: any) {}
   onPropertyValueChanged(

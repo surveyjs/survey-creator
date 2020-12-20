@@ -52,8 +52,11 @@
 }
 
 .svc-action-bar-item__title {
-  margin-left: calcSize(1);
   vertical-align: middle;
+}
+
+.svc-action-bar-item__title--with-icon {
+  margin-left: calcSize(1);
 }
 
 .svc-action-bar-item--secondary {

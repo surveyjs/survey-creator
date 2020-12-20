@@ -20,3 +20,9 @@ svc-action-bar {
     margin-right: calcSize(1);
   }
 }
+
+.svc-action--last {
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+}
