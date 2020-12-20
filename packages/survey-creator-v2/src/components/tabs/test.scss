@@ -5,3 +5,14 @@ svc-tab-test {
   height: 100%;
   background: $background-dim;
 }
+
+.svc-test-tab__content {
+  height: calc(100% - calc(5 * #{$base-unit}));
+  overflow-y: auto;
+}
+
+.svc-test-tab__content-actions {
+  svc-action-bar {
+    padding: 0;
+  }
+}

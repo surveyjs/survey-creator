@@ -15,50 +15,97 @@ export class SurveySimulatorComponent {
     considerDPI: true
   };
 
-  constructor(private _toolbarHolder: any) {
-    this.koActiveDevice.subscribe((newValue) => {
+  constructor(private _toolbarHolder: any, private _options = {
+    landscape: ko.observable(true),
+    device: ko.observable("desktop"),
+    survey: <ko.Observable>undefined
+  }) {
+    this._options.device.subscribe((newValue) => {
       if (!!this.simulator) {
         this.simulatorOptions.device = newValue || "desktop";
         this.simulator.options(this.simulatorOptions);
       }
     });
-    this.koLandscapeOrientation.subscribe((newValue) => {
+    this._options.landscape.subscribe((newValue) => {
       if (!!this.simulator) {
         this.simulatorOptions.orientation = newValue ? "l" : "p";
         this.simulator.options(this.simulatorOptions);
       }
     });
-    ko.computed(() => {
-      this.simulatorEnabled = _toolbarHolder.showSimulator();
+
+    this.koHasFrame = ko.computed(() => {
+      var device = simulatorDevices[this.activeDevice];
+      return this.simulatorEnabled && device.deviceType !== "desktop";
+    });
+  
+    this.koSimulatorFrame = ko.computed(() => {
+      if (!this.koHasFrame) {
+        return undefined;
+      }
+      var device = simulatorDevices[this.activeDevice];
+      var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
+      var width =
+        ((this.landscapeOrientation ? device.height : device.width) /
+          device.cssPixelRatio) *
+        scale;
+      var height =
+        ((this.landscapeOrientation ? device.width : device.height) /
+          device.cssPixelRatio) *
+        scale;
+      var frameWidth =
+        ((this.landscapeOrientation ? device.frameHeight : device.frameWidth) /
+          device.cssPixelRatio) *
+        scale;
+      var frameHeight =
+        ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
+          device.cssPixelRatio) *
+        scale;
+      return {
+        scale: this.simulatorScaleEnabled ? scale * 2 : 1,
+        width: width,
+        height: height,
+        frameWidth: frameWidth,
+        frameHeight: frameHeight,
+        cssClass: ko.computed(() => {
+          return device.cssClass + (this.landscapeOrientation ? " svd-simulator-frame-landscape" : "");
+        })
+      };
     });
 
-    _toolbarHolder.toolbarItems.push({
-      id: "svd-test-simulator",
-      title: getLocString("pe.simulator"),
-      visible: ko.computed(() => this.simulatorEnabled),
-      tooltip: getLocString("pe.simulator"),
-      component: "svd-dropdown",
-      action: ko.computed({
-        read: () => this.koActiveDevice(),
-        write: (val: any) => this.koActiveDevice(val)
-      }),
-      items: <any>this.koDevices
-    });
-    _toolbarHolder.toolbarItems.push({
-      id: "svd-test-simulator-orientation",
-      title: getLocString("pe.landscapeOrientation"),
-      visible: this.koHasFrame,
-      tooltip: getLocString("pe.landscapeOrientation"),
-      component: "svd-boolean",
-      action: ko.computed({
-        read: () => this.koLandscapeOrientation(),
-        write: (val: any) => this.koLandscapeOrientation(val)
-      })
-    });
+
+    if(!!_toolbarHolder) {
+      this._options.survey = this._toolbarHolder.koSurvey;
+      ko.computed(() => {
+        this.simulatorEnabled = _toolbarHolder.showSimulator();
+      });
+      _toolbarHolder.toolbarItems.push({
+        id: "svd-test-simulator",
+        title: getLocString("pe.simulator"),
+        visible: ko.computed(() => this.simulatorEnabled),
+        tooltip: getLocString("pe.simulator"),
+        component: "svd-dropdown",
+        action: ko.computed({
+          read: () => this.activeDevice,
+          write: (val: any) => this.activeDevice = val
+        }),
+        items: <any>this.koDevices
+      });
+      _toolbarHolder.toolbarItems.push({
+        id: "svd-test-simulator-orientation",
+        title: getLocString("pe.landscapeOrientation"),
+        visible: this.koHasFrame,
+        tooltip: getLocString("pe.landscapeOrientation"),
+        component: "svd-boolean",
+        action: ko.computed({
+          read: () => this.landscapeOrientation,
+          write: (val: any) => this.landscapeOrientation = val
+        })
+      });
+    }
   }
 
   public get survey() {
-    return this._toolbarHolder.koSurvey();
+    return this._options.survey();
   }
 
   private _simulatorEnabled = ko.observable<boolean>(true);
@@ -76,7 +123,13 @@ export class SurveySimulatorComponent {
     this._simulatorScaleEnabled(value);
   }
 
-  koActiveDevice = ko.observable("desktop");
+  get activeDevice() {
+    return this._options.device();
+  }
+  set activeDevice(device: string) {
+    this._options.device(device);
+  }
+
   koDevices = ko.observableArray(
     Object.keys(simulatorDevices)
       .filter((key) => !!simulatorDevices[key].title)
@@ -88,53 +141,21 @@ export class SurveySimulatorComponent {
       })
   );
 
-  koLandscapeOrientation = ko.observable(true);
+  get landscapeOrientation() {
+    return this._options.landscape();
+  }
+  set landscapeOrientation(isLanscape: boolean) {
+    this._options.landscape(isLanscape);
+  }
 
-  public koHasFrame = ko.computed(() => {
-    var device = simulatorDevices[this.koActiveDevice()];
-    return this.simulatorEnabled && device.deviceType !== "desktop";
-  });
-
-  public koSimulatorFrame = ko.computed(() => {
-    if (!this.koHasFrame) {
-      return undefined;
-    }
-    var device = simulatorDevices[this.koActiveDevice()];
-    var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
-    var width =
-      ((this.koLandscapeOrientation() ? device.height : device.width) /
-        device.cssPixelRatio) *
-      scale;
-    var height =
-      ((this.koLandscapeOrientation() ? device.width : device.height) /
-        device.cssPixelRatio) *
-      scale;
-    var frameWidth =
-      ((this.koLandscapeOrientation() ? device.frameHeight : device.frameWidth) /
-        device.cssPixelRatio) *
-      scale;
-    var frameHeight =
-      ((this.koLandscapeOrientation() ? device.frameWidth : device.frameHeight) /
-        device.cssPixelRatio) *
-      scale;
-    return {
-      scale: this.simulatorScaleEnabled ? scale * 2 : 1,
-      width: width,
-      height: height,
-      frameWidth: frameWidth,
-      frameHeight: frameHeight,
-      cssClass: ko.computed(() => {
-        return device.cssClass + (this.koLandscapeOrientation() ? " svd-simulator-frame-landscape" : "");
-      })
-    };
-  });
-
+  public koHasFrame: ko.Computed;
+  public koSimulatorFrame: ko.Computed;
 }
 
 ko.components.register("survey-simulator", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      return new SurveySimulatorComponent(params.model);
+      return new SurveySimulatorComponent(params.model, params.options);
     }
   },
   template: templateHtml,
