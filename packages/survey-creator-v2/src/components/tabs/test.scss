@@ -7,12 +7,16 @@ svc-tab-test {
 }
 
 .svc-test-tab__content {
-  height: calc(100% - calc(5 * #{$base-unit}));
+  height: calc(100% - calc(6 * #{$base-unit}));
   overflow-y: auto;
+  // background: $background;
 }
 
 .svc-test-tab__content-actions {
   svc-action-bar {
     padding: 0;
+    height: calc(6 * #{$base-unit});
+    background: $background;
+    border-top: 1px solid $border;
   }
 }
