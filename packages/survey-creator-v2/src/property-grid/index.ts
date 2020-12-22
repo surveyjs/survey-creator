@@ -454,7 +454,7 @@ export class PropertyGridEditorText extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "comment" };
+    return { type: "comment", textUpdateMode: "onTyping" };
   }
 }
 export class PropertyGridEditorColor extends PropertyGridEditor {
