@@ -60,7 +60,7 @@ test("Add condition", () => {
   var editPanel = conditionEditor.panel.panels[1];
   var nameQuestion = editPanel.getQuestionByName("questionName");
   expect(nameQuestion.choices).toHaveLength(2);
-  nameQuestion.questionName = "q2";
+  nameQuestion.value = "q2";
   expect(conditionEditor.isReady).toEqual(false);
   editPanel.getQuestionByName("questionValue").value = 2;
   expect(conditionEditor.isReady).toEqual(true);

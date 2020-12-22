@@ -13,11 +13,17 @@ import {
   Helpers,
   Base,
 } from "survey-knockout";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions,
+  settings
+} from "@survey/creator/settings";
+import { editorLocalization } from "@survey/creator/editorLocalization";
 
 export class ConditionEditorItem {
-  public conjunction: string;
+  public conjunction: string = "and";
   public questionName: string;
-  public operator: string;
+  public operator: string = "equal";
   public value: any;
 }
 export class SurveyConditionEditorItem extends ConditionEditorItem {
@@ -302,12 +308,9 @@ export class ConditionEditorBase {
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
     });
-  }
-  private onPanelAdded() {
-    this.setItemToPanel(
-      new ConditionEditorItem(),
-      this.panel.panels[this.panel.panels.length - 1]
-    );
+    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+      this.onPanelValueChanged(options.panel, options.name);
+    });
   }
   public get text(): string {
     return this.getText();
@@ -350,10 +353,14 @@ export class ConditionEditorBase {
       "questionName"
     ).choices = this.allConditionQuestions;
     panel.getQuestionByName("questionName").value = item.questionName;
+    panel.getQuestionByName("operator").choices = this.getOperators();
+    this.updateOperator(panel);
     panel.getQuestionByName("operator").value = item.operator;
     panel.getQuestionByName("questionValue").value = item.value;
   }
+  private updateOperator(panel: PanelModel) {
 
+  }
   private getText(): string {
     var res = "";
     var items = [];
@@ -421,5 +428,25 @@ export class ConditionEditorBase {
       );
       */
     return res;
+  }
+  private getOperators(): Array<ItemValue> {
+    var res = [];
+    var ops = settings.operators;
+    for (var name in ops) {
+      res.push(new ItemValue(name, editorLocalization.getString("op." + name));
+    }
+    return res;
+  }
+
+  private onPanelAdded() {
+    this.setItemToPanel(
+      new ConditionEditorItem(),
+      this.panel.panels[this.panel.panels.length - 1]
+    );
+  }
+  private onPanelValueChanged(panel: PanelModel, name: string) {
+    if(name == "questionName") {
+      this.updateOperator(panel);
+    }
   }
 }
