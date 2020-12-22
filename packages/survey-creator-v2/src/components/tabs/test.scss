@@ -13,7 +13,7 @@ svc-tab-test {
 }
 
 .svc-test-tab__content-actions {
-  svc-action-bar {
+  sv-action-bar {
     padding: 0;
     height: calc(6 * #{$base-unit});
     background: $background;

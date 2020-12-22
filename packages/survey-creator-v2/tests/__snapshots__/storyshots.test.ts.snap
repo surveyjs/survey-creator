@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Action Bar Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -15,7 +15,7 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -38,8 +38,8 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button
     </span>
@@ -51,16 +51,16 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -69,7 +69,7 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -95,16 +95,16 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item svc-action-bar-item--active"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item sv-action-bar-item--active"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button Active"
   >
     
@@ -113,7 +113,7 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -136,8 +136,8 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Active
     </span>
@@ -149,11 +149,11 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Desktop 1`] = `
-<svc-action-bar
+<sv-action-bar
   params="items: items"
 >
   <!-- ko if: hasItems-->
@@ -163,7 +163,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -171,10 +171,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Undo"
     >
       
@@ -183,7 +183,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -225,7 +225,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -233,10 +233,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Redo"
     >
       
@@ -245,7 +245,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -287,7 +287,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -295,9 +295,9 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <div
-      class="svc-action-bar-separator"
+      class="sv-action-bar-separator"
       data-bind="css: $data.css"
     />
     <!-- /ko -->
@@ -316,7 +316,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -324,10 +324,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Settings"
     >
       
@@ -336,7 +336,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -378,7 +378,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -386,10 +386,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Clear"
     >
       
@@ -398,7 +398,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -440,7 +440,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -448,10 +448,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Search"
     >
       
@@ -460,7 +460,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -502,7 +502,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -510,9 +510,9 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <div
-      class="svc-action-bar-separator"
+      class="sv-action-bar-separator"
       data-bind="css: $data.css"
     />
     <!-- /ko -->
@@ -531,7 +531,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc-action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -539,10 +539,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item svc-action-bar-item--secondary"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item sv-action-bar-item--secondary"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Preview"
     >
       
@@ -551,7 +551,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -574,8 +574,8 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <span
-        class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
-        data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
+        class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+        data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
       >
         Preview
       </span>
@@ -604,16 +604,16 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <!--/ko-->
-</svc-action-bar>
+</sv-action-bar>
 `;
 
 exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     disabled="true"
     title="Menu Button Disabled"
   >
@@ -623,7 +623,7 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -646,8 +646,8 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Disabled
     </span>
@@ -659,7 +659,7 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Button Action Button 1`] = `
@@ -2128,87 +2128,6 @@ exports[`Storyshots Button Ordinary 1`] = `
 </svc-button>
 `;
 
-exports[`Storyshots Context menu Ordinary 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  
-        
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  
-        
-  <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
-  >
-    <div />
-  </sv-popup>
-  
-      
-</div>
-`;
-
-exports[`Storyshots Context menu With Pointer 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  
-        
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  
-        
-  <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition,
-          horizontalPosition: horizontalPosition, showPointer: showPointer"
-  >
-    <div />
-  </sv-popup>
-  
-      
-</div>
-`;
-
 exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 <survey-creator
   params="creator: creator"
@@ -2240,7 +2159,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       </svc-tabbed-menu>
       
     
-      <svc-action-bar
+      <sv-action-bar
         params="items: creator.toolbarItems"
       >
         <!-- ko if: hasItems-->
@@ -2250,7 +2169,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2258,10 +2177,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Undo"
           >
             
@@ -2270,7 +2189,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2312,7 +2231,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2320,10 +2239,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Redo"
           >
             
@@ -2332,7 +2251,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2374,7 +2293,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2382,9 +2301,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <div
-            class="svc-action-bar-separator"
+            class="sv-action-bar-separator"
             data-bind="css: $data.css"
           />
           <!-- /ko -->
@@ -2403,7 +2322,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2411,10 +2330,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item svc-action-bar-item--active"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item sv-action-bar-item--active"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Settings"
           >
             
@@ -2423,7 +2342,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2465,7 +2384,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2473,10 +2392,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Clear"
           >
             
@@ -2485,7 +2404,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2527,7 +2446,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2535,10 +2454,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Search"
           >
             
@@ -2547,7 +2466,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2589,7 +2508,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2597,9 +2516,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <div
-            class="svc-action-bar-separator"
+            class="sv-action-bar-separator"
             data-bind="css: $data.css"
           />
           <!-- /ko -->
@@ -2618,7 +2537,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc-action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2626,10 +2545,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Preview"
           >
             
@@ -2638,7 +2557,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2661,8 +2580,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <span
-              class="svc-action-bar-item__title svc-action-bar-item__title--with-icon"
-              data-bind="text: title, css: { 'svc-action-bar-item__title--with-icon': !!$data.icon }"
+              class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+              data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
             >
               Preview
             </span>
@@ -2691,7 +2610,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <!--/ko-->
-      </svc-action-bar>
+      </sv-action-bar>
       
   
     </div>
@@ -5246,6 +5165,92 @@ exports[`Storyshots Page Navigator Page Navigator Item Selected 1`] = `
 
   </svc-page-navigator-item>
 </div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu With Pointer 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition,
+          horizontalPosition: horizontalPosition, showPointer: showPointer"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Fast Entry 1`] = `
+
+      
 `;
 
 exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
