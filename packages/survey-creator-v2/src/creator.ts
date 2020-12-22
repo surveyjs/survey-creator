@@ -37,7 +37,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           title: "Redo",
           showTitle: false,
         },
-        { component: "svc-action-bar-separator" },
+        { component: "sv-action-bar-separator" },
         {
           icon: "icon-settings",
           action: () => this.selectElement(this.survey),
@@ -64,11 +64,11 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
-          component: "svc-action-bar-separator",
+          component: "sv-action-bar-separator",
         },
         {
           icon: "icon-preview",
-          css: ko.computed(() => this.koViewType()==="test"?"svc-action-bar-item--secondary":""),
+          css: ko.computed(() => this.koViewType()==="test"?"sv-action-bar-item--secondary":""),
           action: () => {
             this.makeNewViewActive("test");
           },
@@ -237,13 +237,13 @@ export class SurveyCreator extends CreatorBase<Survey> {
         }
         items.push({
           id: "convertTo",
-          css: "svc-action--first svc-action-bar-item--secondary",
+          css: "sv-action--first sv-action-bar-item--secondary",
           icon: "icon-change_16x16",
           // title: this.getLocString("qt." + currentType),
           title: this.getLocString("survey.convertTo"),
           items: availableTypes.map(type => ({title: type.name, value: type.value})),
           enabled: allowChangeType,
-          component: "svc-action-bar-item-dropdown",
+          component: "sv-action-bar-item-dropdown",
           action: (newType) => {
             this.convertCurrentObject(element, newType.value);
           },
@@ -269,7 +269,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
       var isRequired = ko.computed(() => element.isRequired);
       items.push({
         id: "isrequired",
-        css: ko.computed(() => element.isRequired?"svc-action-bar-item--secondary":""),
+        css: ko.computed(() => element.isRequired?"sv-action-bar-item--secondary":""),
         title: this.getLocString("pe.isRequired"),
         icon: ko.computed(() => {
           if (isRequired()) {
@@ -286,7 +286,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     }
 
     if (items.length > 0) {
-      items.push({ component: "svc-action-bar-separator" });
+      items.push({ component: "sv-action-bar-separator" });
     }
 
     if (opts.allowDelete === undefined || opts.allowDelete) {

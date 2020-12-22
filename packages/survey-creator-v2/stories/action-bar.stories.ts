@@ -4,11 +4,10 @@ import { boolean, text } from "@storybook/addon-knobs";
 import * as ko from "knockout";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ActionBarViewModel, ActionBarItemViewModel, ActionBarSeparatorViewModel } from "../src/entries";
 
 export default {
   title: "Action Bar",
-  "ko-components": [ActionBarViewModel, ActionBarItemViewModel, ActionBarSeparatorViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},
@@ -22,7 +21,7 @@ export default {
 
 export const ActionBarItemWithoutTitle = () => {
   return {
-    template: '<svc-action-bar-item params="item: item"></svc-action-bar-item>',
+    template: '<sv-action-bar-item params="item: item"></sv-action-bar-item>',
     context: {
       item: {
         title: text("Title", "Menu Button"),
@@ -38,7 +37,7 @@ export const ActionBarItemWithoutTitle = () => {
 
 export const ActionBarItem = () => {
   return {
-    template: '<svc-action-bar-item params="item: item"></svc-action-bar-item>',
+    template: '<sv-action-bar-item params="item: item"></sv-action-bar-item>',
     context: {
       item: {
         title: text("Title", "Menu Button"),
@@ -53,7 +52,7 @@ export const ActionBarItem = () => {
 
 export const DisabledActionBarItem = () => {
   return {
-    template: '<svc-action-bar-item params="item: item"></svc-action-bar-item>',
+    template: '<sv-action-bar-item params="item: item"></sv-action-bar-item>',
     context: {
       item: {
         title: text("Title", "Menu Button Disabled"),
@@ -69,7 +68,7 @@ export const DisabledActionBarItem = () => {
 
 export const ActiveActionBarItem = () => {
   return {
-    template: '<svc-action-bar-item params="item: item"></svc-action-bar-item>',
+    template: '<sv-action-bar-item params="item: item"></sv-action-bar-item>',
     context: {
       item: {
         title: text("Title", "Menu Button Active"),
@@ -83,7 +82,7 @@ export const ActiveActionBarItem = () => {
 
 export const Desktop = () => {
   return {
-    template: '<svc-action-bar params="items: items"></svc-action-bar>',
+    template: '<sv-action-bar params="items: items"></sv-action-bar>',
     context: {
       items: [
         {
@@ -98,7 +97,7 @@ export const Desktop = () => {
           title: "Redo",
           showTitle: false,
         },
-        { component: "svc-action-bar-separator" },
+        { component: "sv-action-bar-separator" },
         {
           icon: "icon-settings",
           action: function () {
@@ -127,7 +126,7 @@ export const Desktop = () => {
           showTitle: false,
         },
         {
-          component: "svc-action-bar-separator",
+          component: "sv-action-bar-separator",
         },
         {
           icon: "icon-preview",
@@ -136,7 +135,7 @@ export const Desktop = () => {
           },
           isActive: ko.observable(false),
           title: "Preview",
-          innerCss: "svc-action-bar-item--secondary",
+          innerCss: "sv-action-bar-item--secondary",
         },
       ],
     },

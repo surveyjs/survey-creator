@@ -89,12 +89,12 @@ export class TestSurveyTabViewModel {
     var deviceSelectorItems = Object.keys(simulatorDevices).filter((key) => !!simulatorDevices[key].title).map(key => ({title: simulatorDevices[key].title, value: key}));
     this.actions.push(<any>{
       id: "deviceSelector",
-      css: "svc-action--first svc-action-bar-item--secondary",
+      css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-change_16x16",
       title: ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
       items: deviceSelectorItems,
       enabled: this.showSimulator,
-      component: "svc-action-bar-item-dropdown",
+      component: "sv-action-bar-item-dropdown",
       verticalPosition: "top",
       action: (newDevice) => {
         this.simulator.device(newDevice.value);
@@ -106,7 +106,7 @@ export class TestSurveyTabViewModel {
     });
     this.actions.push(<any>{
       id: "prevPage",
-      css: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage?"svc-action-bar-item--secondary":""),
+      css: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage?"sv-action-bar-item--secondary":""),
       icon: "icon-leftarrow_16x16",
       visible: ko.computed(() => this.isRunning),
       enabled: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage),
@@ -127,7 +127,7 @@ export class TestSurveyTabViewModel {
         () => this.isRunning && this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()
       ),
       items: <any>pageSelectorItems,
-      component: "svc-action-bar-item-dropdown",
+      component: "sv-action-bar-item-dropdown",
       verticalPosition: "top",
       horizontalPosition: "center",
       action: (newPage) => {
@@ -140,7 +140,7 @@ export class TestSurveyTabViewModel {
     });
     this.actions.push(<any>{
       id: "nextPage",
-      css: ko.computed(() => this.koSurvey() && !this.koSurvey().isLastPage?"svc-action-bar-item--secondary":""),
+      css: ko.computed(() => this.koSurvey() && !this.koSurvey().isLastPage?"sv-action-bar-item--secondary":""),
       icon: "icon-rightarrow_16x16",
       visible: ko.computed(() => this.isRunning),
       enabled: ko.computed(() => this.koSurvey() && !this.koSurvey().isLastPage),
@@ -151,7 +151,7 @@ export class TestSurveyTabViewModel {
     });
     this.actions.push(<any>{
       id: "showInvisivle",
-      css: ko.computed(() => this.koShowInvisibleElements()?"svc-action--last svc-action-bar-item--secondary":"svc-action--last"),
+      css: ko.computed(() => this.koShowInvisibleElements()?"sv-action--last sv-action-bar-item--secondary":"sv-action--last"),
       visible: ko.computed(() => this.isRunning),
       title: this.getLocString("ts.showInvisibleElements"),
       icon: ko.computed(() => {
@@ -164,7 +164,7 @@ export class TestSurveyTabViewModel {
     });
     this.actions.push(<any>{
       id: "testSurveyAgain",
-      css: "svc-action--last",
+      css: "sv-action--last",
       visible: ko.computed(() => !this.isRunning),
       title: this.testSurveyAgainText,
       action: () => {
