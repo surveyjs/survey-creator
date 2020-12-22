@@ -100,44 +100,26 @@ export const ContextMenuWithPointer = () => {
 export const FastEntry = () => {
   var koIsVisible = ko.observable(false);
   var koValue = ko.observable("default");
+  var koValueTextarea = ko.observable(koValue());
 
-  class TempModalViewModel {
-    public koValueTemp: ko.Observable<string>;
-    private showSubscription: ko.Computed<void>;
-
+  class TextareaComponentViewModel {
     constructor(
-      public koValue: ko.Observable<string>,
-      public koIsVisible: ko.Observable<boolean>,
+      public koValueTextarea: ko.Observable<string> = ko.observable(""),
       targetElement: HTMLElement
-    ) {
-      this.koValueTemp = ko.observable(koValue());
-
-      this.showSubscription = ko.computed(() => {
-        if (this.koIsVisible()) {
-          this.koValueTemp(koValue());
-        }
-      });
-    }
-
-    public dispose() {
-      this.showSubscription.dispose();
-    }
+    ) {}
   }
 
-  ko.components.register("temp-modal", {
+  ko.components.register("textarea-component", {
     viewModel: {
       createViewModel: (params: any, componentInfo: any) => {
-        return new TempModalViewModel(
-          params.koValue,
-          params.koIsVisible,
+        return new TextareaComponentViewModel(
+          params.koValueTextarea,
           componentInfo.element.parentElement
         );
       },
     },
     template: `       
-      <div><textarea data-bind="value: koValueTemp"></textarea></div>
-      <button data-bind="click: function() { koIsVisible(false); }">Cancel</button>
-      <button data-bind="click: function() { koIsVisible(false); koValue(koValueTemp()); }">OK</button>
+      <div><textarea data-bind="value: koValueTextarea"></textarea></div>
     `,
   });
 
@@ -149,15 +131,17 @@ export const FastEntry = () => {
         </div>
         <svc-button params="title: title, action: function(){koIsVisible(true);}">
         </svc-button>
-        <sv-popup params="contentComponentName: name, contentComponentData: {koIsVisible: koIsVisible, koValue: koValue}, isVisible: koIsVisible, isHideByClickOutside: false">
+        
+        <sv-popup params="contentComponentName: name, contentComponentData: {koValueTextarea: koValueTextarea }, isVisible: koIsVisible, isModal: true, onCancel: function(){koValueTextarea(koValue())}, onApply: function(){koValue(koValueTextarea())}">
         </sv-popup>
       </div>
     `,
     context: {
-      name: "temp-modal",
+      name: "textarea-component",
       title: text("Title", "Fast Entry"),
       koIsVisible: koIsVisible,
       koValue: koValue,
+      koValueTextarea: koValueTextarea,
     },
   };
 };

@@ -2128,87 +2128,6 @@ exports[`Storyshots Button Ordinary 1`] = `
 </svc-button>
 `;
 
-exports[`Storyshots Context menu Ordinary 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  
-        
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  
-        
-  <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
-  >
-    <div />
-  </sv-popup>
-  
-      
-</div>
-`;
-
-exports[`Storyshots Context menu With Pointer 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  
-        
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  
-        
-  <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition,
-          horizontalPosition: horizontalPosition, showPointer: showPointer"
-  >
-    <div />
-  </sv-popup>
-  
-      
-</div>
-`;
-
 exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 <survey-creator
   params="creator: creator"
@@ -5246,6 +5165,92 @@ exports[`Storyshots Page Navigator Page Navigator Item Selected 1`] = `
 
   </svc-page-navigator-item>
 </div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu With Pointer 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition,
+          horizontalPosition: horizontalPosition, showPointer: showPointer"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Fast Entry 1`] = `
+
+      
 `;
 
 exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
