@@ -4,6 +4,20 @@ export var settings = {
   traslation: {
     sortByName: true,
   },
+  operators: {
+    empty: [],
+    notempty: [],
+    equal: ["!file"],
+    notequal: ["!file"],
+    contains: ["checkbox", "text", "comment"],
+    notcontains: ["checkbox", "text", "comment"],
+    anyof: ["selectbase"],
+    allof: ["checkbox"],
+    greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+  },
   //TODO add maximumColumnCount
 };
 
