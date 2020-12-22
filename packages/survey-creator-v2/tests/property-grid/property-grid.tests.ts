@@ -63,7 +63,8 @@ test("Hide question title if property is first in tab and has the same title as 
   var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = propertyGrid.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
-  expect(choicesQuestion.titleLocation).toEqual("hidden");
+  expect(choicesQuestion.titleLocation).toEqual("default");
+  expect(choicesQuestion.title).toEqual(" ");
 });
 
 test("boolean property editor (boolean/switch)", () => {

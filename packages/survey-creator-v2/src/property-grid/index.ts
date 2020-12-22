@@ -194,7 +194,7 @@ export class PropertyJSONGenerator {
       );
       if (!propJSON) continue;
       if (propDef.name == tab.name) {
-        propJSON.titleLocation = "hidden";
+        propJSON.title = " ";
       }
       panel.elements.push(propJSON);
     }
@@ -305,6 +305,21 @@ export class PropertyGridModel {
       if (this.objValueChangedCallback) {
         this.objValueChangedCallback();
       }
+
+      var fastEntryTitleAction = {
+        id: "fast-entry",
+        css: "sv-action--first sv-action-bar-item--secondary",
+        icon: "icon-change_16x16",
+        title: "Fast Entry",
+        enabled: true,
+        action: (newType) => {
+          alert("hello!");
+        },
+      };
+      this.survey.onGetQuestionTitleActions.add((sender, options) => {
+        options.titleActions = [];
+        options.titleActions.push(fastEntryTitleAction);
+      });
     }
   }
   public get options(): ISurveyCreatorOptions {
