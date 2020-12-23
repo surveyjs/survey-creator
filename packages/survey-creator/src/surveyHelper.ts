@@ -197,4 +197,22 @@ export class SurveyHelper {
   public static canSelectObj(obj: Survey.Base) {
     return !obj || obj["disableSelecting"] !== true;
   }
+  private static deleteConditionProperties(json: any) {
+    delete json["visible"];
+    delete json["visibleIf"];
+    delete json["enable"];
+    delete json["enableIf"];
+    delete json["valueName"];
+    delete json["choicesVisibleIf"];
+    delete json["choicesEnableIf"];
+  }
+  public static updateQuestionJson(questionJson: any) {
+    questionJson.storeOthersAsComment = false;
+    SurveyHelper.deleteConditionProperties(questionJson);
+    if (!!questionJson.choices) {
+      for (var i = 0; i < questionJson.choices.length; i++) {
+        SurveyHelper.deleteConditionProperties(questionJson.choices[i]);
+      }
+    }
+  }
 }
