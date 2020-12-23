@@ -21,6 +21,8 @@ export class PageViewModel {
   }
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel, event: Event) {
+    model.creator.survey.currentPage = model.page;
+    this.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
     model.creator.selectElement(model.page);

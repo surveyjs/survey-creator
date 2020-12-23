@@ -306,17 +306,31 @@ export class PropertyGridModel {
         this.objValueChangedCallback();
       }
 
-      var fastEntryTitleAction = {
-        id: "fast-entry",
-        css: "sv-action--first sv-action-bar-item--secondary",
-        icon: "icon-change_16x16",
-        title: "Fast Entry",
-        enabled: true,
-        action: (newType) => {
-          alert("hello!");
-        },
-      };
+      var fastEntrySurvey = this.createSurvey({
+        showNavigationButtons: false,
+        elements: [{ type: "comment", name: "fastEntry" }],
+      });
+
       this.survey.onGetQuestionTitleActions.add((sender, options) => {
+        var question = options.question;
+
+        var fastEntryTitleAction = {
+          id: "fast-entry",
+          css: "sv-action--first sv-action-bar-item--secondary",
+          icon: "icon-change_16x16",
+          component: "sv-action-bar-item-modal",
+          data: {
+            contentTemplateName: "survey-content",
+            contentComponentData: fastEntrySurvey,
+            onApply: () => {
+              console.log("apply");
+            },
+            onCancel: () => {
+              console.log("cancel");
+            },
+          },
+        };
+
         options.titleActions = [];
         options.titleActions.push(fastEntryTitleAction);
       });
