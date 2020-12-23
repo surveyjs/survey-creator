@@ -1,4 +1,4 @@
-import { SurveyModel } from "survey-knockout";
+import { SurveyModel, Question, QuestionMatrixDropdown } from "survey-knockout";
 import {
   ConditionEditorBase,
   ConditionEditorItemsBuilder,
@@ -65,4 +65,90 @@ test("Add condition", () => {
   editPanel.getQuestionByName("questionValue").value = 2;
   expect(conditionEditor.isReady).toEqual(true);
   expect(conditionEditor.text).toEqual("{q} = 1 and {q2} = 2");
+});
+test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "dropdown", name: "q2" },
+    ],
+  });
+  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("q1"));
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("equal");
+  panel.getQuestionByName("questionName").value = "q2";
+  panel.getQuestionByName("questionValue").value = JSON.stringify(["item1's"]);
+  expect(editor.text).toEqual('{q2} = ["item1\\\'s"]');
+});
+test("Apostrophes in answers break VisibleIf - https://github.com/surveyjs/editor/issues/476", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "dropdown", name: "q2" },
+    ],
+  });
+  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("q1"));
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("equal");
+  panel.getQuestionByName("questionName").value = "q2";
+  panel.getQuestionByName("questionValue").value = "d'2";
+  expect(editor.text).toEqual("{q2} = 'd\\'2'");
+});
+test("Add question for dynamic panel", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        name: "dp",
+        type: "paneldynamic",
+        templateElements: [
+          {
+            name: "q1",
+            type: "text",
+            visibleIf: "{panel.q2} = 1",
+          },
+          {
+            name: "q2",
+            type: "text",
+          },
+        ],
+      },
+    ],
+  });
+  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("dp"));
+  editor.text = "{panel.q2} = 1";
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.addPanel();
+  panel.getQuestionByName("questionName").value = "panel.q2";
+  panel.getQuestionByName("questionValue").value = "2";
+  expect(editor.text).toEqual("{panel.q2} = 1 and {panel.q2} = 2");
+});
+test("Use question.valueName, bug: #353", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage("p");
+  var question = page.addNewQuestion("text", "q1");
+  var question2 = <Question>page.addNewQuestion("text", "q2");
+  question2.valueName = "val2";
+  var matrix = <QuestionMatrixDropdown>(
+    page.addNewQuestion("matrixdropdown", "matrix")
+  );
+  matrix.choices = [1, 2];
+  matrix.rows = ["row1"];
+  matrix.addColumn("column1");
+  matrix.valueName = "val3";
+
+  var editor = new ConditionEditorBase(survey, question);
+
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "val2";
+  panel.getQuestionByName("questionValue").value = "abc";
+  expect(editor.text).toEqual("{val2} = 'abc'");
+
+  panel.getQuestionByName("questionName").value = "val3.row1.column1";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  panel.getQuestionByName("questionValue").value = "1";
+  expect(editor.text).toEqual("{val3.row1.column1} = 1");
 });

@@ -10,6 +10,7 @@ import { EditableObject } from "./editableObject";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import { SurveyPropertyDefaultValueEditor } from "./propertyDefaultValueEditor";
 import * as editorLocalization from "../editorLocalization";
+import { SurveyHelper } from "../surveyHelper";
 
 export interface IConditionEditorItemOwner {
   allConditionQuestions: any[];
@@ -184,7 +185,7 @@ export class ConditionEditorItem {
       };
     }
     json.isRequired = true;
-    SurveyPropertyDefaultValueEditor.updateQuestionJson(json);
+    SurveyHelper.updateQuestionJson(json);
     json.enableIf =
       "{questionName} notempty and {operator} != 'empty' and {operator} != 'notempty'";
     var newQuestion = Survey.Serializer.createClass(json.type);
