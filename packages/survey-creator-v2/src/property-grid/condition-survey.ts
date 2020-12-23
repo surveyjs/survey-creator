@@ -433,7 +433,7 @@ export class ConditionEditorBase {
     var res = [];
     var ops = settings.operators;
     for (var name in ops) {
-      res.push(new ItemValue(name, editorLocalization.getString("op." + name));
+      res.push(new ItemValue(name, editorLocalization.getString("op." + name)));
     }
     return res;
   }
