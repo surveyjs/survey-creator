@@ -1,10 +1,12 @@
 import * as ko from "knockout";
-import { Survey, SurveyElement, Base, Page } from "survey-knockout";
+import { Survey, Base, Page } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
-import { PropertyGrid } from "./propertyGrid/propertygrid";
+import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
+import { QuestionConverter } from "@survey/creator/questionconverter";
+import { PropertyGrid } from "./property-grid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
@@ -35,7 +37,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           title: "Redo",
           showTitle: false,
         },
-        { component: "svc-action-bar-separator" },
+        { component: "sv-action-bar-separator" },
         {
           icon: "icon-settings",
           action: () => this.selectElement(this.survey),
@@ -45,7 +47,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-clear",
-          action: function () {
+          action: () => {
             alert("clear pressed");
           },
           isActive: false,
@@ -62,16 +64,16 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
-          component: "svc-action-bar-separator",
+          component: "sv-action-bar-separator",
         },
         {
           icon: "icon-preview",
-          action: function () {
-            alert("preview pressed");
+          css: ko.computed(() => this.koViewType()==="test"?"sv-action-bar-item--secondary":""),
+          action: () => {
+            this.makeNewViewActive("test");
           },
           isActive: ko.observable(false),
           title: "Preview",
-          innerCss: "svc-action-bar-item--secondary",
         },
       ])
     );
@@ -99,7 +101,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   selection = ko.observable();
   propertyGrid: PropertyGrid;
-  selectElement = (element: Base) => {
+
+  public selectElement(element: any) {
     this.selection(element);
     this.propertyGrid.obj = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
@@ -120,6 +123,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     return this._currentPage();
   }
   set currentPage(page: Page) {
+    this.survey.currentPage = page;
     this._currentPage(page);
   }
 
@@ -127,10 +131,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   clickToolboxItem(json: any) {
     if (!this.readOnly) {
-      // var newElement = this.createNewElement(json);
-      // this.doClickQuestionCore(newElement);
+      var newElement = this.createNewElement(json);
+      this.doClickQuestionCore(newElement);
+      this.selectElement(newElement);
     }
   }
+
   dragToolboxItem(json: any, e: DragEvent) {
     if (!this.readOnly) {
       this.dragDropHelper.startDragToolboxItem(
@@ -140,8 +146,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       );
     }
   }
-
-  readOnly = false;
 
   protected initTabs() {
     ko.computed(() => {
@@ -204,5 +208,102 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.koViewType(this.tabs()[0].name);
       }
     });
+  }
+
+  public getContextActions(element: any/*ISurveyElement*/) {
+    if (this.readOnly) {
+      return [];
+    }
+
+    let opts: any = element["allowingOptions"];
+    if (!opts) opts = {};
+    let items = [];
+
+    if (opts.allowChangeType === undefined || opts.allowChangeType) {
+      var currentType = element.getType();
+      var convertClasses = QuestionConverter.getConvertToClasses(
+        currentType,
+        this.toolbox.itemNames
+      );
+      var allowChangeType = convertClasses.length > 0;
+      if(!element.isPanel && !element.isPage) {
+        var createTypeByClass = (className) => {
+          return {
+            name: this.getLocString("qt." + className),
+            value: className,
+          };
+        };
+        var availableTypes = [createTypeByClass(currentType)];
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          availableTypes.push(createTypeByClass(className));
+        }
+        items.push({
+          id: "convertTo",
+          css: "sv-action--first sv-action-bar-item--secondary",
+          icon: "icon-change_16x16",
+          // title: this.getLocString("qt." + currentType),
+          title: this.getLocString("survey.convertTo"),
+          items: availableTypes.map(type => ({title: type.name, value: type.value})),
+          enabled: allowChangeType,
+          component: "sv-action-bar-item-dropdown",
+          action: (newType) => {
+            this.convertCurrentObject(element, newType.value);
+          },
+        });
+      }
+    }
+
+    if (opts.allowCopy === undefined || opts.allowCopy) {
+      items.push({
+        id: "duplicate",
+        title: this.getLocString("survey.duplicate"),
+        action: () => {
+          this.fastCopyQuestion(element);
+        },
+      });
+    }
+
+    if (
+      (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
+      typeof element.isRequired !== "undefined" &&
+      propertyExists(element, "isRequired") && isPropertyVisible(element, "isRequired")
+    ) {
+      var isRequired = ko.computed(() => element.isRequired);
+      items.push({
+        id: "isrequired",
+        css: ko.computed(() => element.isRequired?"sv-action-bar-item--secondary":""),
+        title: this.getLocString("pe.isRequired"),
+        icon: ko.computed(() => {
+          if (isRequired()) {
+            return "icon-switchactive_16x16";
+          }
+          return "icon-switchinactive_16x16";
+        }),
+        action: () => {
+          if(this.isCanModifyProperty(<any>element, "isRequired")) {
+            element.isRequired = !element.isRequired;
+          }
+        },
+      });
+    }
+
+    if (items.length > 0) {
+      items.push({ component: "sv-action-bar-separator" });
+    }
+
+    if (opts.allowDelete === undefined || opts.allowDelete) {
+      items.push({
+        id: "delete",
+        title: this.getLocString("pe.delete"),
+        action: () => {
+          this.deleteObject(element);
+        },
+      });
+    }
+
+    this.onDefineElementMenuItems.fire(this, { obj: element, items: items });
+
+    return items;
   }
 }

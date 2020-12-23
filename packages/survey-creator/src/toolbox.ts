@@ -215,11 +215,16 @@ export interface IQuestionToolboxItem {
     /**
      * Add a toolbox item
      * @param item the toolbox item description
+     * @param index the toolbox index to place the item, the item is added to the end if index not passed
      * @see IQuestionToolboxItem
      */
-    public addItem(item: IQuestionToolboxItem) {
+    public addItem(item: IQuestionToolboxItem, index?: number) {
       this.correctItem(item);
-      this.itemsValue.push(item);
+      if(index === undefined) {
+        this.itemsValue.push(item);
+      } else {
+        this.itemsValue.splice(index, 0, item);
+      }
       this.onItemsChanged();
     }
     private correctItem(item: IQuestionToolboxItem) {

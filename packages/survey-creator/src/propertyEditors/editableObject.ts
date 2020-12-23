@@ -5,7 +5,10 @@ export class EditableObject {
     return !!obj && obj["isCopy"];
   }
   public static getSurvey(object: any): Survey.SurveyModel {
-    if (object instanceof Survey.SurveyModel) {
+    if (
+      object instanceof Survey.SurveyModel ||
+      (!!object && !!object.getType && object.getType() == "survey")
+    ) {
       return EditableObject.getOriginalSurvey(object);
     }
     if (object instanceof Survey.MatrixDropdownColumn && !!object.colOwner)

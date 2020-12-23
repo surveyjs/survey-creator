@@ -7,6 +7,7 @@ import {
 } from "../src/tabs/translation";
 import { SurveyCreator } from "../src/editor";
 import { unparse, parse } from "papaparse";
+import { settings } from "../src/settings";
 
 export default QUnit.module("TranslatonTests");
 
@@ -666,5 +667,38 @@ QUnit.test(
     var translation = new Translation(survey);
     assert.equal(translation.locales.length, 3, "There are 3 locales");
     Survey.Serializer.removeProperty("page", "pages");
+  }
+);
+
+QUnit.test(
+  "Show questions as they are in survey. Do not sort them",
+  function (assert) {
+    var survey = new Survey.Survey({
+      elements: [
+        {
+          type: "text",
+          name: "question2",
+        },
+        {
+          type: "text",
+          name: "question1",
+          title: {
+            default: "title",
+            de: "title de",
+          },
+        },
+      ],
+    });
+    var translation = new Translation(survey);
+    assert.equal(translation.root.groups.length, 1, "There is one page");
+    var group = translation.root.groups[0];
+    assert.equal(group.items.length, 2, "There are two items");
+    assert.equal(group.items[0].name, "question1", "first is question1");
+    assert.equal(group.items[1].name, "question2", "second is question2");
+    settings.traslation.sortByName = false;
+    translation = new Translation(survey);
+    group = translation.root.groups[0];
+    assert.equal(group.items[0].name, "question2", "first is question2");
+    assert.equal(group.items[1].name, "question1", "second is question1");
   }
 );

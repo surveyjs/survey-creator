@@ -139,6 +139,7 @@ export class SurveyEmbedingWindow {
   }
   private setHeadText() {
     var platform = this.koLibraryVersion();
+    var platformFileName;
     var cssFileName = this.koThemeName() == "modern" ? "modern" : "survey";
     var surveyJSVersion = this.surveyJSVersion;
     var cdnPath = `${this.surveyCDNPath}/survey-${platform}@${surveyJSVersion}`;
@@ -148,7 +149,14 @@ export class SurveyEmbedingWindow {
     if (this.koThemeName() != "bootstrap") {
       headText += `\n<link href="${cdnPath}/${cssFileName}.css" type="text/css" rel="stylesheet" />`;
     }
-    headText += `\n<script src="${cdnPath}/survey.${platform}.min.js"></script>`;
+
+    if (platform === "knockout") {
+      platformFileName = "ko";
+    } else {
+      platformFileName = platform;
+    }
+
+    headText += `\n<script src="${cdnPath}/survey.${platformFileName}.min.js"></script>`;
     this.setTextToEditor(this.surveyEmbedingHead, this.koHeadText, headText);
   }
   private setJavaTest() {

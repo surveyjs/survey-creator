@@ -4,23 +4,11 @@ import { SurveyPropertyEditorBase } from "./propertyEditorBase";
 import { SurveyPropertyCustomEditor } from "./propertyCustomEditor";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "./editableObject";
+import { settings } from "../settings";
 
 export class SurveyPropertyEditorFactory {
   public static defaultEditor: string = "string";
-  public static operators = {
-    empty: [],
-    notempty: [],
-    equal: ["!file"],
-    notequal: ["!file"],
-    contains: ["checkbox", "text", "comment"],
-    notcontains: ["checkbox", "text", "comment"],
-    anyof: ["selectbase"],
-    allof: ["checkbox"],
-    greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-  };
+  public static operators = settings.operators;
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
@@ -332,43 +320,51 @@ export class SurveyColorPropertyEditor extends SurveyPropertyEditorBase {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("string", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyStringPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("dropdown", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyDropdownPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("question", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyQuestionPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("questionvalue", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyQuestionValuePropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("boolean", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyBooleanPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("switch", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveySwitchPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("number", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyNumberPropertyEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("color", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyColorPropertyEditor(property);
-});
+SurveyPropertyEditorFactory.registerEditor(
+  "string",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyStringPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "dropdown",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyDropdownPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "question",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyQuestionPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "questionvalue",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyQuestionValuePropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "boolean",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyBooleanPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "switch",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveySwitchPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "number",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyNumberPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "color",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyColorPropertyEditor(property);
+  }
+);

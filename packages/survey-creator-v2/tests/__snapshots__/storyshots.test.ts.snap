@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Action Bar Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -15,7 +15,7 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -38,8 +38,8 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button
     </span>
@@ -51,16 +51,16 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -69,7 +69,7 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -95,16 +95,16 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item svc-action-bar-item--active"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item sv-action-bar-item--active"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button Active"
   >
     
@@ -113,7 +113,7 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -136,8 +136,8 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Active
     </span>
@@ -149,11 +149,11 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Action Bar Desktop 1`] = `
-<svc-action-bar
+<sv-action-bar
   params="items: items"
 >
   <!-- ko if: hasItems-->
@@ -163,7 +163,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -171,10 +171,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Undo"
     >
       
@@ -183,7 +183,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -225,7 +225,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -233,10 +233,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Redo"
     >
       
@@ -245,7 +245,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -287,7 +287,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -295,9 +295,9 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <div
-      class="svc-action-bar-separator"
+      class="sv-action-bar-separator"
       data-bind="css: $data.css"
     />
     <!-- /ko -->
@@ -316,7 +316,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -324,10 +324,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Settings"
     >
       
@@ -336,7 +336,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -378,7 +378,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -386,10 +386,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Clear"
     >
       
@@ -398,7 +398,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -440,7 +440,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -448,10 +448,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Search"
     >
       
@@ -460,7 +460,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -502,7 +502,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -510,9 +510,9 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <div
-      class="svc-action-bar-separator"
+      class="sv-action-bar-separator"
       data-bind="css: $data.css"
     />
     <!-- /ko -->
@@ -531,7 +531,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <span
-    class="svc_action"
+    class="sv-action"
     data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
   >
     
@@ -539,10 +539,10 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     <!-- ko ifnot: $data.template-->
     
   
-    <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
     <button
-      class="svc-action-bar-item svc-action-bar-item--secondary"
-      data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+      class="sv-action-bar-item sv-action-bar-item--secondary"
+      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
       title="Preview"
     >
       
@@ -551,7 +551,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <svc-svg-icon
-        class="svc-action-bar-item__icon"
+        class="sv-action-bar-item__icon"
         params="iconName: icon, size: 24"
       >
         <svg
@@ -574,8 +574,8 @@ exports[`Storyshots Action Bar Desktop 1`] = `
       
   
       <span
-        class="svc-action-bar-item__title"
-        data-bind="text: title"
+        class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+        data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
       >
         Preview
       </span>
@@ -604,16 +604,16 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <!--/ko-->
-</svc-action-bar>
+</sv-action-bar>
 `;
 
 exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
-<svc-action-bar-item
+<sv-action-bar-item
   params="item: item"
 >
   <button
-    class="svc-action-bar-item"
-    data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     disabled="true"
     title="Menu Button Disabled"
   >
@@ -623,7 +623,7 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
     
   
     <svc-svg-icon
-      class="svc-action-bar-item__icon"
+      class="sv-action-bar-item__icon"
       params="iconName: icon, size: 24"
     >
       <svg
@@ -646,8 +646,8 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
     
   
     <span
-      class="svc-action-bar-item__title"
-      data-bind="text: title"
+      class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
     >
       Menu Button Disabled
     </span>
@@ -659,7 +659,7 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
   </button>
   
 
-</svc-action-bar-item>
+</sv-action-bar-item>
 `;
 
 exports[`Storyshots Button Action Button 1`] = `
@@ -2128,72 +2128,6 @@ exports[`Storyshots Button Ordinary 1`] = `
 </svc-button>
 `;
 
-exports[`Storyshots Context menu Ordinary 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
-  >
-    <div />
-  </svc-modal>
-</div>
-`;
-
-exports[`Storyshots Context menu With Pointer 1`] = `
-<div
-  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
->
-  <svc-button
-    params="title: title, action: action"
-  >
-    <button
-      class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
-    >
-      
-  
-      <span
-        class="svc-button__text"
-        data-bind="text: title"
-      >
-        Show menu
-      </span>
-      
-
-    </button>
-    
-
-  </svc-button>
-  <svc-modal
-    params="name: name, data: model, isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer"
-  >
-    <div />
-  </svc-modal>
-</div>
-`;
-
 exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 <survey-creator
   params="creator: creator"
@@ -2225,7 +2159,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       </svc-tabbed-menu>
       
     
-      <svc-action-bar
+      <sv-action-bar
         params="items: creator.toolbarItems"
       >
         <!-- ko if: hasItems-->
@@ -2235,7 +2169,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2243,10 +2177,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Undo"
           >
             
@@ -2255,7 +2189,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2297,7 +2231,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2305,10 +2239,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Redo"
           >
             
@@ -2317,7 +2251,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2359,7 +2293,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2367,9 +2301,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <div
-            class="svc-action-bar-separator"
+            class="sv-action-bar-separator"
             data-bind="css: $data.css"
           />
           <!-- /ko -->
@@ -2388,7 +2322,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2396,10 +2330,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item svc-action-bar-item--active"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item sv-action-bar-item--active"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Settings"
           >
             
@@ -2408,7 +2342,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2450,7 +2384,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2458,10 +2392,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Clear"
           >
             
@@ -2470,7 +2404,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2512,7 +2446,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2520,10 +2454,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Search"
           >
             
@@ -2532,7 +2466,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2574,7 +2508,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2582,9 +2516,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <div
-            class="svc-action-bar-separator"
+            class="sv-action-bar-separator"
             data-bind="css: $data.css"
           />
           <!-- /ko -->
@@ -2603,7 +2537,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <span
-          class="svc_action"
+          class="sv-action"
           data-bind="css: $data.css, visible: $data.visible === undefined || !!ko.unwrap($data.visible), attr: { id: $data.id }"
         >
           
@@ -2611,10 +2545,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko ifnot: $data.template-->
           
   
-          <!-- ko component: { name: $data.component || 'svc-action-bar-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
           <button
-            class="svc-action-bar-item svc-action-bar-item--secondary"
-            data-bind="click: action, css: { 'svc-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+            class="sv-action-bar-item"
+            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
             title="Preview"
           >
             
@@ -2623,7 +2557,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-svg-icon
-              class="svc-action-bar-item__icon"
+              class="sv-action-bar-item__icon"
               params="iconName: icon, size: 24"
             >
               <svg
@@ -2646,8 +2580,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <span
-              class="svc-action-bar-item__title"
-              data-bind="text: title"
+              class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+              data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
             >
               Preview
             </span>
@@ -2676,7 +2610,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <!--/ko-->
-      </svc-action-bar>
+      </sv-action-bar>
       
   
     </div>
@@ -2771,22 +2705,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Single Input toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-text"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Single Input"
         >
           
-  
-          <div
-            aria-label="Single Input toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-text"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Single Input"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -2803,6 +2739,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-text"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -2810,10 +2770,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Single Input
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -2829,22 +2790,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Checkbox toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-checkbox"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Checkbox"
         >
           
-  
-          <div
-            aria-label="Checkbox toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-checkbox"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Checkbox"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -2861,6 +2824,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-checkbox"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -2868,10 +2855,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Checkbox
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -2887,22 +2875,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Radiogroup toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-radiogroup"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Radiogroup"
         >
           
-  
-          <div
-            aria-label="Radiogroup toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-radiogroup"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Radiogroup"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -2919,6 +2909,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-radiogroup"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -2926,10 +2940,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Radiogroup
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -2945,22 +2960,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Dropdown toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-dropdown"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Dropdown"
         >
           
-  
-          <div
-            aria-label="Dropdown toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-dropdown"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Dropdown"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -2977,6 +2994,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-dropdown"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -2984,10 +3025,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Dropdown
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3003,22 +3045,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Comment toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-comment"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Comment"
         >
           
-  
-          <div
-            aria-label="Comment toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-comment"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Comment"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3035,6 +3079,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-comment"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3042,10 +3110,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Comment
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3061,22 +3130,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Rating toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-rating"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Rating"
         >
           
-  
-          <div
-            aria-label="Rating toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-rating"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Rating"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3093,6 +3164,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-rating"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3100,10 +3195,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Rating
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3119,22 +3215,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Image picker toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-imagepicker"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Image picker"
         >
           
-  
-          <div
-            aria-label="Image picker toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-imagepicker"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Image picker"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3151,6 +3249,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-imagepicker"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3158,10 +3280,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Image picker
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3177,22 +3300,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Boolean toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-boolean"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Boolean"
         >
           
-  
-          <div
-            aria-label="Boolean toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-boolean"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Boolean"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3209,6 +3334,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-boolean"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3216,10 +3365,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Boolean
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3235,22 +3385,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Image toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-image"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Image"
         >
           
-  
-          <div
-            aria-label="Image toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-image"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Image"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3267,6 +3419,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-image"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3274,10 +3450,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Image
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3293,22 +3470,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Html toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-html"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Html"
         >
           
-  
-          <div
-            aria-label="Html toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-html"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Html"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3325,6 +3504,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-html"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3332,10 +3535,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Html
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3351,22 +3555,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Signature pad toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-signaturepad"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Signature pad"
         >
           
-  
-          <div
-            aria-label="Signature pad toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-signaturepad"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Signature pad"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3383,6 +3589,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-signaturepad"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3390,10 +3620,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Signature pad
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3409,22 +3640,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Expression (read-only) toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-expression"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Expression (read-only)"
         >
           
-  
-          <div
-            aria-label="Expression (read-only) toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-expression"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Expression (read-only)"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3441,6 +3674,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-expression"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3448,10 +3705,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Expression (read-only)
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3467,22 +3725,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="File toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-file"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="File"
         >
           
-  
-          <div
-            aria-label="File toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-file"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="File"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3499,6 +3759,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-file"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3506,10 +3790,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               File
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3525,22 +3810,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Matrix (single choice) toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-matrix"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Matrix (single choice)"
         >
           
-  
-          <div
-            aria-label="Matrix (single choice) toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-matrix"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Matrix (single choice)"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3557,6 +3844,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-matrix"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3564,10 +3875,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Matrix (single choice)
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3583,22 +3895,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Matrix (multiple choice) toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-matrixdropdown"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Matrix (multiple choice)"
         >
           
-  
-          <div
-            aria-label="Matrix (multiple choice) toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-matrixdropdown"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Matrix (multiple choice)"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3615,6 +3929,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-matrixdropdown"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3622,10 +3960,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Matrix (multiple choice)
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3641,22 +3980,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Matrix (dynamic rows) toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-matrixdynamic"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Matrix (dynamic rows)"
         >
           
-  
-          <div
-            aria-label="Matrix (dynamic rows) toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-matrixdynamic"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Matrix (dynamic rows)"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3673,6 +4014,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-matrixdynamic"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3680,10 +4045,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Matrix (dynamic rows)
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3699,22 +4065,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Multiple Text toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-multipletext"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Multiple Text"
         >
           
-  
-          <div
-            aria-label="Multiple Text toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-multipletext"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Multiple Text"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3731,6 +4099,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-multipletext"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3738,10 +4130,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Multiple Text
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3757,22 +4150,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Panel toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-panel"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Panel"
         >
           
-  
-          <div
-            aria-label="Panel toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-panel"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Panel"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3789,6 +4184,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-panel"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3796,10 +4215,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Panel
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3815,22 +4235,24 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
         <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
         <div
-          class="svc-toolbox__item"
+          aria-label="Panel (dynamic panels) toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-paneldynamic"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="Panel (dynamic panels)"
         >
           
-  
-          <div
-            aria-label="Panel (dynamic panels) toolbox item"
-            class="svc-toolbox__item-content svc-toolbox__item--icon-paneldynamic"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="Panel (dynamic panels)"
-          >
-            
     
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
             <svc-svg-icon
               params="iconName: icon, size: 24"
             >
@@ -3847,6 +4269,30 @@ exports[`Storyshots Creator design surface content Default 1`] = `
             </svc-svg-icon>
             
     
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-paneldynamic"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
             <span
               class="svc-toolbox__item-title"
               data-bind="text: title"
@@ -3854,10 +4300,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               Panel (dynamic panels)
             </span>
             
-  
-          </div>
+    
+          </span>
           
-
+    
+  
         </div>
         
 
@@ -3909,8 +4356,42 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <svc-page-navigator
-    params="items: survey.pages, creator: creator, onSelect: creator.selectElement, selection: function () { return creator.currentPage; }"
+    params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      >
+        <div />
+      </sv-popup>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     <!-- /ko -->
     
@@ -4405,6 +4886,40 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
   <svc-page-navigator
     params="items: items"
   >
+    <div
+      class="svc-page-navigator__selector"
+      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      title="text"
+    >
+      
+    
+      <svc-svg-icon
+        class="svc-page-navigator__navigator-icon"
+        params="iconName: icon, size: 22"
+      >
+        <svg
+          class="svc-svg-icon"
+          style="width: 22px; height: 22px;"
+        >
+          <use
+            xlink:href="#icon-navigation"
+          />
+        </svg>
+        
+
+      </svc-svg-icon>
+      
+    
+      <sv-popup
+        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+      >
+        <div />
+      </sv-popup>
+      
+
+    </div>
+    
+
     <!-- ko foreach: items -->
     
 
@@ -4650,6 +5165,92 @@ exports[`Storyshots Page Navigator Page Navigator Item Selected 1`] = `
 
   </svc-page-navigator-item>
 </div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Context Menu With Pointer 1`] = `
+<div
+  style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative"
+>
+  
+        
+  <svc-button
+    params="title: title, action: action"
+  >
+    <button
+      class="svc-button"
+      data-bind="click: action, css: css, disable: disabled"
+    >
+      
+  
+      <span
+        class="svc-button__text"
+        data-bind="text: title"
+      >
+        Show menu
+      </span>
+      
+
+    </button>
+    
+
+  </svc-button>
+  
+        
+  <sv-popup
+    params="contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition,
+          horizontalPosition: horizontalPosition, showPointer: showPointer"
+  >
+    <div />
+  </sv-popup>
+  
+      
+</div>
+`;
+
+exports[`Storyshots Popup Modal Fast Entry 1`] = `
+
+      
 `;
 
 exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
@@ -4976,21 +5577,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--radiogroup"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--radiogroup"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5007,6 +5610,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-radiogroup"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5014,10 +5641,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Radiogroup
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5033,21 +5661,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--checkbox"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--checkbox"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5064,6 +5694,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-checkbox"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5071,10 +5725,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Checkbox
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5090,21 +5745,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--dropdown"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--dropdown"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5121,6 +5778,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-dropdown"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5128,10 +5809,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Dropdown
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5147,21 +5829,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--text"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--text"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5178,6 +5862,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-text"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5185,10 +5893,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Single Input
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5204,21 +5913,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--rating"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--rating"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5235,6 +5946,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-rating"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5242,10 +5977,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Rating
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5261,21 +5997,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--imagepicker"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--imagepicker"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5292,6 +6030,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-imagepicker"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5299,10 +6061,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Image Picker
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5344,21 +6107,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--boolean"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--boolean"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5375,6 +6140,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-boolean"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5382,10 +6171,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Boolean
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5401,21 +6191,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--comment"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--comment"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5432,6 +6224,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-comment"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5439,10 +6255,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Comment
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5458,21 +6275,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--multipletext"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--multipletext"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5489,6 +6308,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-multipletext"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5496,10 +6339,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Multiple Text
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5515,21 +6359,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--matrix"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--matrix"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5546,6 +6392,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrix"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5553,10 +6423,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Matrix
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5572,21 +6443,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--file"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--file"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5603,6 +6476,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-file"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5610,10 +6507,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             File
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5629,21 +6527,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--signaturepad"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--signaturepad"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5660,6 +6560,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-signaturepad"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5667,10 +6591,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Signature
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5712,21 +6637,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--html"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--html"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5743,6 +6670,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-html"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5750,10 +6701,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             HTML
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5769,21 +6721,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--expression"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--expression"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5800,6 +6754,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-expression"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5807,10 +6785,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Expression
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5826,21 +6805,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--matrixdropdown"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--matrixdropdown"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5857,6 +6838,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrixdropdown"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5864,10 +6869,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Multiple Matrix
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5883,21 +6889,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--matrixdynamic"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--matrixdynamic"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5914,6 +6922,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-matrixdynamic"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -5921,10 +6953,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Dynamic Matrix
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -5966,21 +6999,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--image"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--image"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -5997,6 +7032,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-image"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -6004,10 +7063,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Image
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 
@@ -6023,21 +7083,23 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
     
       <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+      
+  
       <div
-        class="svc-toolbox__item"
+        aria-label="undefined toolbox item"
+        class="svc-toolbox__item svc-toolbox__item--panel"
+        data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+        draggable="true"
+        role="button"
+        tabindex="0"
       >
         
-  
-        <div
-          aria-label="undefined toolbox item"
-          class="svc-toolbox__item-content svc-toolbox__item--panel"
-          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-          draggable="true"
-          role="button"
-          tabindex="0"
-        >
-          
     
+        <span
+          class="svc-toolbox__item-container"
+        >
+           
+      
           <svc-svg-icon
             params="iconName: icon, size: 24"
           >
@@ -6054,6 +7116,30 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
           </svc-svg-icon>
           
     
+        </span>
+        
+    
+        <span
+          class="svc-toolbox__item-banner"
+        >
+          
+      
+          <svc-svg-icon
+            params="iconName: icon, size: 24"
+          >
+            <svg
+              class="svc-svg-icon"
+              style="width: 24px; height: 24px;"
+            >
+              <use
+                xlink:href="#icon-panel"
+              />
+            </svg>
+            
+
+          </svc-svg-icon>
+          
+      
           <span
             class="svc-toolbox__item-title"
             data-bind="text: title"
@@ -6061,10 +7147,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             Panel
           </span>
           
-  
-        </div>
+    
+        </span>
         
-
+    
+  
       </div>
       
 

@@ -3,7 +3,7 @@
     <div class="svd-simulator-wrapper"
         data-bind="style: { width: koSimulatorFrame().frameWidth + 'px', height: koSimulatorFrame().frameHeight + 'px' }">
         <div class="svd-simulator-frame"
-            data-bind="style: { width: (koLandscapeOrientation() ? koSimulatorFrame().frameHeight: koSimulatorFrame().frameWidth) + 'px', height: (koLandscapeOrientation() ? koSimulatorFrame().frameWidth : koSimulatorFrame().frameHeight) + 'px' }, css: koSimulatorFrame().cssClass">
+            data-bind="style: { width: (landscapeOrientation ? koSimulatorFrame().frameHeight: koSimulatorFrame().frameWidth) + 'px', height: (landscapeOrientation ? koSimulatorFrame().frameWidth : koSimulatorFrame().frameHeight) + 'px' }, css: koSimulatorFrame().cssClass">
         </div>
         <div class="svd-simulator"
             data-bind="style: { width: koSimulatorFrame().width / koSimulatorFrame().scale + 'px', height: koSimulatorFrame().height / koSimulatorFrame().scale + 'px', transform: 'scale(' + koSimulatorFrame().scale + ') translate(-50%, -50%)' }">

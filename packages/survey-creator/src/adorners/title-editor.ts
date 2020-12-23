@@ -322,7 +322,7 @@ export var titleAdorner = {
       placeholder = editorLocalization.getString("pe.pageTitlePlaceholder");
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
@@ -360,8 +360,14 @@ export var itemTitleAdorner = {
 registerAdorner("item-title", itemTitleAdorner);
 
 export var descriptionAdorner = {
+  surveyDescriptionEditable: true,
+  pageDescriptionEditable: true,
   getMarkerClass: (model) => {
-    if (typeof model.getType === "function" && !Survey.Serializer.findProperty(model.getType(), "description")) {
+    if (typeof model.getType === "function" && (
+      (model.getType() === "page" && !descriptionAdorner.pageDescriptionEditable) ||
+      (model.getType() === "survey" && !descriptionAdorner.surveyDescriptionEditable) ||
+      !Survey.Serializer.findProperty(model.getType(), "description"))
+    ) {
       return "";
     }
     return "description_editable";
@@ -380,7 +386,7 @@ export var descriptionAdorner = {
       );
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();

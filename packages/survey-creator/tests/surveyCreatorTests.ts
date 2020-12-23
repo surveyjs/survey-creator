@@ -1625,6 +1625,28 @@ QUnit.test(
 );
 
 QUnit.test(
+  "creator getMenuItems should respect property readOnly - https://github.com/surveyjs/survey-creator/issues/1024",
+  function (assert) {
+    const creator = new SurveyCreator(undefined);
+    const questionText = new Survey.QuestionText("qt");
+    var menuItems = creator.survey.getMenuItems(questionText);
+    var requiredItem = menuItems.filter(i => i.name == "isrequired")[0]
+    assert.notEqual(requiredItem, undefined, "The 'isrequired' is in the menu items");
+
+    creator
+    .onGetPropertyReadOnly
+        .add(function (sender, options) {
+            if(options.property.name == "isRequired"){
+                options.readOnly = "true";
+            }
+    });
+    assert.notOk(questionText.isRequired);
+    requiredItem.onClick(questionText);
+    assert.notOk(questionText.isRequired);
+  }
+);
+
+QUnit.test(
   "addQuestion into the QuestionPanelDynamic into second page",
   function (assert) {
     var editor = new SurveyCreator();

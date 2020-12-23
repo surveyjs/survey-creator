@@ -13,9 +13,6 @@ export * from "../components/tabs/embed";
 export * from "../components/page";
 export * from "../components/question";
 export * from "../components/property-panel/property-panel";
-export * from "../components/action-bar/action-bar";
-export * from "../components/action-bar/action-bar-item";
-export * from "../components/action-bar/action-bar-separator";
 export * from "../components/tabbed-menu/tabbed-menu";
 export * from "../components/tabbed-menu/tabbed-menu-item";
 export * from "../components/toolbox/toolbox";
@@ -38,7 +35,8 @@ import "../utils/layout.scss";
 
 export * from "@survey/creator/tabs/embed";
 export * from "@survey/creator/tabs/json-editor";
-export * from "@survey/creator/tabs/test";
 
-export * from "../propertyGrid/propertygrid";
-export * from "../propertyGrid/propertygrid_matrices";
+export * from "../property-grid";
+export * from "../property-grid/matrices";
+export * from "../property-grid/condition";
+export * from "../property-grid/restfull";

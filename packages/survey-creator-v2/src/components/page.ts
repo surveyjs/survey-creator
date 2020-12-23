@@ -9,15 +9,20 @@ const template = require("./page.html");
 export class PageViewModel {
   public creator: SurveyCreator;
   public page: Page;
+  public actions = ko.observableArray();
+
   constructor(creator: SurveyCreator, page: Page) {
     this.creator = creator;
     this.page = page;
     page.onFirstRendering();
     page.updateCustomWidgets();
     page.setWasShown(true);
+    this.actions(creator.getContextActions(page));
   }
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel, event: Event) {
+    model.creator.survey.currentPage = model.page;
+    this.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
     model.creator.selectElement(model.page);
