@@ -334,7 +334,6 @@ export class ConditionEditorItem {
     return op;
   }
   private updateOperatorEnables() {
-    var res = [];
     if (!this.questionName) return;
     var json = this.owner.getQuestionValueJSON(this.questionName, "equal");
     var qType = !!json ? json.type : null;

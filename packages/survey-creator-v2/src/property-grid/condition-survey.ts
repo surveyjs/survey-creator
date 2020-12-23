@@ -405,7 +405,7 @@ export class ConditionEditorBase {
         questions[i].addConditionObjectsByContext(res, this.object);
       }
       for (var i = 0; i < res.length; i++) {
-        res[i].value = name;
+        res[i].value = res[i].name;
         /* TODO
         if (!this.options || !this.options.showTitlesInExpressions) {
           var name = res[i].name;
@@ -543,6 +543,59 @@ export class ConditionEditorBase {
     }
     return !!json ? json : null;
   }
+  private updateOperatorEnables(panel: PanelModel) {
+    var questionName = panel.getQuestionByName("questionName");
+    if (!questionName) return;
+    var json = this.getQuestionConditionJson(
+      panel,
+      questionName.value,
+      "equal",
+      true
+    );
+    var qType = !!json ? json.type : null;
+    var questionOperator = panel.getQuestionByName("operator");
+    if (!questionOperator) return;
+    var choices = questionOperator.choices;
+    var isCurrentOperatorEnabled = true;
+    var op = questionOperator.value;
+    for (var i = 0; i < choices.length; i++) {
+      choices[i].setIsEnabled(
+        this.isOperatorEnabled(qType, settings.operators[choices[i].value])
+      );
+      if (choices[i].value == op) {
+        isCurrentOperatorEnabled = choices[i].isEnabled;
+      }
+    }
+    if (!isCurrentOperatorEnabled) {
+      questionOperator.value = this.getFirstEnabledOperator(choices);
+    }
+  }
+  private getFirstEnabledOperator(choices: Array<ItemValue>): string {
+    for (var i = 0; i < choices.length; i++) {
+      if (choices[i].isEnabled) {
+        return choices[i].value;
+      }
+    }
+    return "equal";
+  }
+  private isOperatorEnabled(
+    qType: string,
+    operatorTypes: Array<string>
+  ): boolean {
+    if (!qType) return true;
+    if (!operatorTypes || operatorTypes.length == 0) return true;
+    var contains = [];
+    var notContains = [];
+    for (var i = 0; i < operatorTypes.length; i++) {
+      let name = operatorTypes[i];
+      if (name[0] == "!") {
+        notContains.push(name.substr(1));
+      } else {
+        contains.push(name);
+      }
+    }
+    return this.isClassContains(qType, contains, notContains);
+  }
   private isClassContains(
     qType: string,
     contains: Array<string>,
@@ -569,5 +622,6 @@ export class ConditionEditorBase {
       this.updateOperator(panel);
       this.rebuildQuestionValue(panel);
     }
+    this.updateOperatorEnables(panel);
   }
 }
