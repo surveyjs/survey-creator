@@ -15,9 +15,9 @@ if (!window["%hammerhead%"]) {
       }
     ]
   };
-  let survey = new Survey.Model();
-  survey.setDesignMode(true);
-  survey.fromJSON(json);
-  creator.setSurvey(survey);
+  // let survey = new Survey.Model();
+  // survey.setDesignMode(true);
+  // survey.fromJSON(json);
+  // creator.setSurvey(survey);
   ko.applyBindings({ creator: creator });
 }
