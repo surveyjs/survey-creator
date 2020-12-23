@@ -123,6 +123,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     return this._currentPage();
   }
   set currentPage(page: Page) {
+    this.survey.currentPage = page;
     this._currentPage(page);
   }
 
@@ -130,10 +131,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   clickToolboxItem(json: any) {
     if (!this.readOnly) {
-      // var newElement = this.createNewElement(json);
-      // this.doClickQuestionCore(newElement);
+      var newElement = this.createNewElement(json);
+      this.doClickQuestionCore(newElement);
+      this.selectElement(newElement);
     }
   }
+
   dragToolboxItem(json: any, e: DragEvent) {
     if (!this.readOnly) {
       this.dragDropHelper.startDragToolboxItem(
