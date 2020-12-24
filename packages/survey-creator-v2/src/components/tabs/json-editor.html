@@ -1,3 +1,12 @@
 <div class="svc-creator-tab__content">
-    <survey-json-editor params="creator: creator"></survey-json-editor>
+    <div class="svc-json-editor">
+        <!-- ko if: !hasAceEditor -->
+            <textarea class="svc-json-editor-area"
+                data-bind="textInput: koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
+            </textarea>
+            <div data-bind="foreach: koErrors">
+                <span>Error: </span><span data-bind="text: text"></span>
+            </div>
+        <!-- /ko  -->
+    </div>
 </div>
