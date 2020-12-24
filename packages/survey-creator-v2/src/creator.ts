@@ -14,8 +14,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
-    // TODO: remove after implementing initialization
-    this.setSurvey(<any>this.createSurvey(JSON.parse(SurveyCreator.defaultNewSurveyText)));
+    this.initSurveyWithJSON(JSON.parse(SurveyCreator.defaultNewSurveyText), false);
 
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -95,6 +94,10 @@ export class SurveyCreator extends CreatorBase<Survey> {
   toolbarItems = ko.observableArray<IToolbarItem>();
 
   toolboxCategories = ko.observableArray<object>();
+
+  protected initSurveyWithJSON(json: any, clearState: boolean) {
+    this.setSurvey(<any>this.createSurvey(json));
+  }
 
   setSurvey(survey: Survey) {
     survey.setDesignMode(true);
