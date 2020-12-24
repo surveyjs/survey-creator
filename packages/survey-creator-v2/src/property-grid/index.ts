@@ -24,6 +24,7 @@ import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
+import { SurveyHelper } from "@survey/creator/surveyHelper";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -306,15 +307,23 @@ export class PropertyGridModel {
         this.objValueChangedCallback();
       }
 
-      var fastEntrySurvey = this.createSurvey({
+      const fastEntrySurvey = this.createSurvey({
         showNavigationButtons: false,
-        elements: [{ type: "comment", name: "fastEntry" }],
+        elements: [
+          {
+            type: "comment",
+            name: "fastEntry",
+            title: "Fast Entry",
+            hideNumber: true,
+          },
+        ],
       });
+      const originalQuestion = <any>this.obj;
 
       this.survey.onGetQuestionTitleActions.add((sender, options) => {
-        var question = options.question;
+        const choicesMatrixDynamic = options.question;
 
-        var fastEntryTitleAction = {
+        const fastEntryTitleAction = {
           id: "fast-entry",
           css: "sv-action--first sv-action-bar-item--secondary",
           icon: "icon-change_16x16",
@@ -322,12 +331,33 @@ export class PropertyGridModel {
           data: {
             contentTemplateName: "survey-content",
             contentComponentData: fastEntrySurvey,
+            onShow: () => {
+              fastEntrySurvey.data = {
+                fastEntry: SurveyHelper.convertMatrixRowsToText(
+                  choicesMatrixDynamic.visibleRows
+                ),
+              };
+            },
             onApply: () => {
-              console.log("apply");
+              const text = fastEntrySurvey.data.fastEntry;
+              const properties = [
+                new JsonObjectProperty(null, "value"),
+                new JsonObjectProperty(null, "text"),
+              ];
+              const className = "itemvalue";
+
+              const itemValues = SurveyHelper.convertTextToItemValues(
+                text,
+                properties,
+                className
+              );
+
+              SurveyHelper.applyItemValueArray(
+                originalQuestion.choices,
+                itemValues
+              );
             },
-            onCancel: () => {
-              console.log("cancel");
-            },
+            onCancel: () => {},
           },
         };
 

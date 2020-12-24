@@ -9,6 +9,8 @@ import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./property-grid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
+  propertyGrid: PropertyGrid;
+  
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
@@ -100,7 +102,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   selection = ko.observable();
-  propertyGrid: PropertyGrid;
 
   public selectElement(element: any) {
     this.selection(element);
