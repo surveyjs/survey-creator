@@ -38,12 +38,6 @@ export interface ISurveyObjectEditorOptions extends ISurveyCreatorOptions {
     editor: SurveyPropertyEditorBase,
     survey: Survey.Survey
   );
-  onConditionQuestionsGetListCallback(
-    propertyName: string,
-    obj: Survey.Base,
-    editor: SurveyPropertyEditorBase,
-    list: any[]
-  );
 }
 
 export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
