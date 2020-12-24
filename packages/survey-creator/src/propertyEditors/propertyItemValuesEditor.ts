@@ -167,20 +167,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     this.updateShowTextViewVisibility();
   }
   protected updateItems(text: string) {
-    var items = [];
-    if (text) {
-      var properties = this.getColumnsProperties();
-      var texts = text.split("\n");
-      for (var i = 0; i < texts.length; i++) {
-        if (!texts[i]) continue;
-        var elements = texts[i].split(Survey.ItemValue.Separator);
-        var valueItem = Survey.Serializer.createClass(this.property.className);
-        properties.forEach((p, i) => {
-          valueItem[p.name] = elements[i];
-        });
-        items.push(valueItem);
-      }
-    }
+    var properties = this.getColumnsProperties();
+    var className = this.property.className;
+    var items: Survey.ItemValue[] = SurveyHelper.convertTextToItemValues(
+      text,
+      properties,
+      className
+    );
     this.updateArrayValue(items);
   }
   private updateArrayValue(items: any) {
@@ -192,15 +185,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     for (var i = 0; i < this.originalValue.length; i++) {
       items.push(this.createItemViewModel(this.originalValue[i]));
     }
-    return items
-      .filter((item) => !item.cells[0].hasError)
-      .map((item) =>
-        item.cells
-          .map((cell) => cell.value || "")
-          .join(Survey.ItemValue.Separator)
-          .replace(/\|$/, "")
-      )
-      .join("\n");
+    return SurveyHelper.convertMatrixRowsToText(items);
   }
   private updateShowTextViewVisibility() {
     if (!this.koShowTextView) return;
