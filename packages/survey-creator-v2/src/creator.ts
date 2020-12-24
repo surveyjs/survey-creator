@@ -10,12 +10,16 @@ import { PropertyGrid } from "./property-grid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
   propertyGrid: PropertyGrid;
-  
+  public static defaultNewSurveyText: string =
+    '{ "pages": [ { "name": "page1"}] }';
+
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
-    // TODO: remove after implementing initialization
-    this.surveyValue(<any>this.createSurvey());
+    this.initSurveyWithJSON(
+      JSON.parse(SurveyCreator.defaultNewSurveyText),
+      false
+    );
 
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -24,6 +28,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey);
+    this.selection.subscribe((element) => (this.propertyGrid.obj = element));
 
     this.toolbarItems.push(
       ...(<any>[
@@ -70,7 +75,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           icon: "icon-preview",
-          css: ko.computed(() => this.koViewType()==="test"?"sv-action-bar-item--secondary":""),
+          css: ko.computed(() =>
+            this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
+          ),
           action: () => {
             this.makeNewViewActive("test");
           },
@@ -95,9 +102,14 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   toolboxCategories = ko.observableArray<object>();
 
+  protected initSurveyWithJSON(json: any, clearState: boolean) {
+    this.setSurvey(<any>this.createSurvey(json));
+  }
+
   setSurvey(survey: Survey) {
-    this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
+    survey.setDesignMode(true);
     this.surveyValue(<any>survey);
+    this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this.selectElement(survey);
   }
 
@@ -105,7 +117,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   public selectElement(element: any) {
     this.selection(element);
-    this.propertyGrid.obj = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
       this.currentPage = <Page>element;
     } else if (!!element["page"]) {
@@ -113,7 +124,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     } else {
       this.currentPage = undefined;
     }
-  };
+  }
 
   isElementSelected(element: Base) {
     return element === this.selection();
@@ -124,6 +135,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     return this._currentPage();
   }
   set currentPage(page: Page) {
+    this.survey.currentPage = page;
     this._currentPage(page);
   }
 
@@ -131,10 +143,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   clickToolboxItem(json: any) {
     if (!this.readOnly) {
-      // var newElement = this.createNewElement(json);
-      // this.doClickQuestionCore(newElement);
+      var newElement = this.createNewElement(json);
+      this.doClickQuestionCore(newElement);
+      this.selectElement(newElement);
     }
   }
+
   dragToolboxItem(json: any, e: DragEvent) {
     if (!this.readOnly) {
       this.dragDropHelper.startDragToolboxItem(
@@ -208,7 +222,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     });
   }
 
-  public getContextActions(element: any/*ISurveyElement*/) {
+  public getContextActions(element: any /*ISurveyElement*/) {
     if (this.readOnly) {
       return [];
     }
@@ -224,7 +238,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         this.toolbox.itemNames
       );
       var allowChangeType = convertClasses.length > 0;
-      if(!element.isPanel && !element.isPage) {
+      if (!element.isPanel && !element.isPage) {
         var createTypeByClass = (className) => {
           return {
             name: this.getLocString("qt." + className),
@@ -242,7 +256,10 @@ export class SurveyCreator extends CreatorBase<Survey> {
           icon: "icon-change_16x16",
           // title: this.getLocString("qt." + currentType),
           title: this.getLocString("survey.convertTo"),
-          items: availableTypes.map(type => ({title: type.name, value: type.value})),
+          items: availableTypes.map((type) => ({
+            title: type.name,
+            value: type.value,
+          })),
           enabled: allowChangeType,
           component: "sv-action-bar-item-dropdown",
           action: (newType) => {
@@ -265,12 +282,15 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (
       (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
       typeof element.isRequired !== "undefined" &&
-      propertyExists(element, "isRequired") && isPropertyVisible(element, "isRequired")
+      propertyExists(element, "isRequired") &&
+      isPropertyVisible(element, "isRequired")
     ) {
       var isRequired = ko.computed(() => element.isRequired);
       items.push({
         id: "isrequired",
-        css: ko.computed(() => element.isRequired?"sv-action-bar-item--secondary":""),
+        css: ko.computed(() =>
+          element.isRequired ? "sv-action-bar-item--secondary" : ""
+        ),
         title: this.getLocString("pe.isRequired"),
         icon: ko.computed(() => {
           if (isRequired()) {
@@ -279,7 +299,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           return "icon-switchinactive_16x16";
         }),
         action: () => {
-          if(this.isCanModifyProperty(<any>element, "isRequired")) {
+          if (this.isCanModifyProperty(<any>element, "isRequired")) {
             element.isRequired = !element.isRequired;
           }
         },

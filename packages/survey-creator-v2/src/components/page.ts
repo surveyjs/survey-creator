@@ -21,12 +21,28 @@ export class PageViewModel {
   }
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel, event: Event) {
+    model.creator.survey.currentPage = model.page;
+    this.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
     model.creator.selectElement(model.page);
   }
   css() {
     return this.creator.isElementSelected(this.page) ? "svc-page__content--selected" : "";
+  }
+  dragOver(model: PageViewModel, event: DragEvent) {
+    if (!event["markEvent"]) {
+      event["markEvent"] = true;
+      model.creator.dragDropHelper.doDragDropOver(event, model.page, true);
+      return false;
+    }
+  }
+  drop(model: PageViewModel, event: DragEvent) {
+    var helper = model.creator.dragDropHelper;
+    if (!event["markEvent"]) {
+      event["markEvent"] = true;
+      helper.doDrop(event, true);
+    }
   }
 }
 
