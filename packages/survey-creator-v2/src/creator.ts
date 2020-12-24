@@ -9,11 +9,13 @@ import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./property-grid";
 
 export class SurveyCreator extends CreatorBase<Survey> {
+  public static defaultNewSurveyText: string = "{ \"pages\": [ { \"name\": \"page1\"}] }";
+
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
     // TODO: remove after implementing initialization
-    this.surveyValue(<any>this.createSurvey());
+    this.setSurvey(<any>this.createSurvey(JSON.parse(SurveyCreator.defaultNewSurveyText)));
 
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -22,6 +24,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey);
+    this.selection.subscribe(element => this.propertyGrid.obj = element);
 
     this.toolbarItems.push(
       ...(<any>[
@@ -94,8 +97,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
   toolboxCategories = ko.observableArray<object>();
 
   setSurvey(survey: Survey) {
-    this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
+    survey.setDesignMode(true);
     this.surveyValue(<any>survey);
+    this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this.selectElement(survey);
   }
 
@@ -104,7 +108,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   public selectElement(element: any) {
     this.selection(element);
-    this.propertyGrid.obj = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
       this.currentPage = <Page>element;
     } else if (!!element["page"]) {

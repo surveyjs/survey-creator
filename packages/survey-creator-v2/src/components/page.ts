@@ -30,6 +30,20 @@ export class PageViewModel {
   css() {
     return this.creator.isElementSelected(this.page) ? "svc-page__content--selected" : "";
   }
+  dragOver(model: PageViewModel, event: DragEvent) {
+    if (!event["markEvent"]) {
+      event["markEvent"] = true;
+      model.creator.dragDropHelper.doDragDropOver(event, model.page, true);
+      return false;
+    }
+  }
+  drop(model: PageViewModel, event: DragEvent) {
+    var helper = model.creator.dragDropHelper;
+    if (!event["markEvent"]) {
+      event["markEvent"] = true;
+      helper.doDrop(event, true);
+    }
+  }
 }
 
 ko.components.register("svc-page", {
