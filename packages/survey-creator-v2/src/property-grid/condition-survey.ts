@@ -14,6 +14,7 @@ import {
   Helpers,
   Base,
   JsonObject,
+  Question,
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
@@ -254,7 +255,6 @@ export class ConditionEditorBase {
   private editSurveyValue: SurveyModel;
   private panelValue: QuestionPanelDynamicModel;
   private addConditionQuestionsHash = {};
-  private addConditionCalculatedValuesHash = {};
   public allConditionQuestions: Array<ItemValue>;
 
   constructor(survey: SurveyModel, object: Base = null) {
@@ -320,6 +320,7 @@ export class ConditionEditorBase {
     return this.getText();
   }
   public set text(val: string) {
+    this.panel.panelCount = 0;
     var items = new ConditionEditorItemsBuilder().build(val);
     this.buildPanels(items);
   }
@@ -361,9 +362,9 @@ export class ConditionEditorBase {
     panel.getQuestionByName(
       "questionName"
     ).choices = this.allConditionQuestions;
-    //if (!!this.addConditionQuestionsHash[item.questionName]) {
-    panel.getQuestionByName("questionName").value = item.questionName;
-    //}
+    if (!!this.getConditionQuestion(item.questionName)) {
+      panel.getQuestionByName("questionName").value = item.questionName;
+    }
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
     }
@@ -422,8 +423,12 @@ export class ConditionEditorBase {
     var values = this.survey.calculatedValues;
     for (var i = 0; i < values.length; i++) {
       var name = values[i].name;
-      this.addConditionCalculatedValuesHash[name] = values[i];
-      res.push({ value: name, text: name, question: null });
+      this.addConditionQuestionsHash[name] = this.getCalculatedValueQuestion();
+      res.push({
+        value: name,
+        text: name,
+        question: this.getCalculatedValueQuestion(),
+      });
     }
     /** TODO
     !!this.options &&
@@ -435,6 +440,14 @@ export class ConditionEditorBase {
       );
       */
     return res;
+  }
+  private calculatedValueQuestion: Question = null;
+  private getCalculatedValueQuestion(): Question {
+    if (!this.calculatedValueQuestion) {
+      this.calculatedValueQuestion = Serializer.createClass("text");
+      this.calculatedValueQuestion.name = "question";
+    }
+    return this.calculatedValueQuestion;
   }
   private getOperators(): Array<ItemValue> {
     var res = [];
@@ -449,10 +462,8 @@ export class ConditionEditorBase {
       panel.getQuestionByName("questionValue").clearValue();
     }
     var json = this.getQuestionConditionJson(
-      panel,
       panel.getQuestionByName("questionName").value,
-      panel.getQuestionByName("operator").value,
-      true
+      panel.getQuestionByName("operator").value
     );
     if (!json) {
       json = {
@@ -490,12 +501,9 @@ export class ConditionEditorBase {
     //this.updateQuestionsWidth();
   }
   rebuildQuestionValueOnOperandChanging(panel: PanelModel) {
-    var questionName = panel.getQuestionByName("questionName");
     var json = this.getQuestionConditionJson(
-      panel,
-      questionName.value,
-      panel.getQuestionByName("operator").value,
-      true
+      panel.getQuestionByName("questionName").value,
+      panel.getQuestionByName("operator").value
     );
     var question = panel.getQuestionByName("questionValue");
     if (!!question && question.isReadOnly) {
@@ -523,14 +531,15 @@ export class ConditionEditorBase {
     }
     return false;
   }
+  private getConditionQuestion(name: string): Question {
+    return <Question>this.addConditionQuestionsHash[name];
+  }
   private getQuestionConditionJson(
-    panel: PanelModel,
     questionName: string,
-    operator: string,
-    convertOnAnyOf: boolean = false
+    operator: string
   ): any {
     var path = "";
-    var question = this.addConditionQuestionsHash[questionName];
+    var question = this.getConditionQuestion(questionName);
     if (!question) return null;
     if (questionName.indexOf(question.getValueName()) == 0) {
       path = questionName.substr(question.getValueName().length);
@@ -551,7 +560,7 @@ export class ConditionEditorBase {
     if (!!json && json.type == "expression") {
       json.type = "text";
     }
-    if (!!json && operator == "anyof" && convertOnAnyOf) {
+    if (!!json && operator == "anyof") {
       if (!this.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
@@ -561,12 +570,7 @@ export class ConditionEditorBase {
   private updateOperatorEnables(panel: PanelModel) {
     var questionName = panel.getQuestionByName("questionName");
     if (!questionName) return;
-    var json = this.getQuestionConditionJson(
-      panel,
-      questionName.value,
-      "equal",
-      true
-    );
+    var json = this.getQuestionConditionJson(questionName.value, "equal");
     var qType = !!json ? json.type : null;
     var questionOperator = panel.getQuestionByName("operator");
     if (!questionOperator) return;

@@ -108,7 +108,7 @@ test("Add question for dynamic panel", () => {
   var survey = new SurveyModel({
     elements: [
       {
-        name: "dp",
+        name: "pd",
         type: "paneldynamic",
         templateElements: [
           {
@@ -124,7 +124,11 @@ test("Add question for dynamic panel", () => {
       },
     ],
   });
-  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("dp"));
+  var pd = <QuestionPanelDynamicModel>survey.getQuestionByName("pd");
+  var editor = new ConditionEditorBase(
+    survey,
+    pd.template.getQuestionByName("q1")
+  );
   editor.text = "{panel.q2} = 1";
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.addPanel();
@@ -659,7 +663,9 @@ test("Parse expressions", () => {
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
       { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" },
     ],
+    calculatedValues: [{ name: "val1", expression: "{q1} + {q2}" }],
   });
+  survey.setVariable("user", "admin");
   var question = survey.getQuestionByName("q4");
   var editor = new ConditionEditorBase(survey, question);
   editor.text = "{q1} = 'abc' or {q2} = 1 and {q2} = 2";
@@ -676,14 +682,27 @@ test("Parse expressions", () => {
   expect(panel.getQuestionByName("questionName").value).toEqual("q1");
   expect(panel.getQuestionByName("operator").value).toEqual("greater");
   expect(panel.getQuestionByName("questionValue").value).toEqual(1);
-  /* TODO check on existing
   editor.text = "1 < {q11}";
   expect(editor.isReady).toBeFalsy();
   editor.text = "{q11} empty";
   expect(editor.isReady).toBeFalsy();
-  */
   editor.text = "not t";
   expect(editor.isReady).toBeFalsy();
   editor.text = "{q3} = [1, 2]";
   expect(editor.isReady).toBeTruthy();
+
+  /* TODO wait for survey.getVariableNames() function
+  editor.text = "{user} = 'user1'";
+  expect(editor.isReady).toBeTruthy();
+  panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").value).toEqual("user");
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
+  expect(panel.getQuestionByName("questionValue").value).toEqual("user1");
+  */
+  editor.text = "{val1} = 2";
+  expect(editor.isReady).toBeTruthy();
+  panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").value).toEqual("val1");
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
+  expect(panel.getQuestionByName("questionValue").value).toEqual(2);
 });
