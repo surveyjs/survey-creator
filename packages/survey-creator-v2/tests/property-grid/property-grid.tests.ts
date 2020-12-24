@@ -730,7 +730,6 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
 });
 
-/* TODO wait for v1.8.22
 test("options.onGetErrorTextOnValidationCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   var propName = "";
@@ -759,4 +758,3 @@ test("options.onGetErrorTextOnValidationCallback", () => {
   expect(nameQuestion.errors).toHaveLength(0);
   expect(question.name).toEqual("qq2");
 });
-*/
