@@ -361,7 +361,7 @@ test("Question has defaultValue and user could not add condition with it, Bug# T
   expect(editor.isReady).toEqual(false);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue).toBeFalsy();
+  expect(questionValue.isReadOnly).toBeTruthy();
   panel.getQuestionByName("questionName").value = "q1";
   questionValue = panel.getQuestionByName("questionValue");
   expect(questionValue.value).toEqual(1);
@@ -545,4 +545,145 @@ test("enabled operators", () => {
   );
   checkFun("qFile", ["empty", "notempty"]);
   checkFun("qImagepicker", ["empty", "notempty", "equal", "notequal", "anyof"]);
+});
+test("Keep condition value on changing operation when it possible", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "radiogroup", choices: ["item1", "item2"] },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+
+  var editor = new ConditionEditorBase(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "question1";
+  panel.getQuestionByName("questionValue").value = "item1";
+  panel.getQuestionByName("operator").value = "notequal";
+  expect(panel.getQuestionByName("questionValue").value).toEqual("item1");
+  panel.getQuestionByName("operator").value = "empty";
+  expect(panel.getQuestionByName("questionValue").isEmpty()).toBeTruthy();
+});
+test("Selectbase + anyof", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "dropdown", choices: ["item1", "item2"] },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+
+  var editor = new ConditionEditorBase(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "question1";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  panel.getQuestionByName("operator").value = "anyof";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "checkbox"
+  );
+  panel.getQuestionByName("operator").value = "equal";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+});
+test("expression question", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "expression" },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+
+  var editor = new ConditionEditorBase(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "question1";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
+});
+test("Do not show question description", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "question1",
+        type: "dropdown",
+        choices: ["item1", "item2"],
+        description: "Some text",
+      },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+
+  var editor = new ConditionEditorBase(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "question1";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  expect(panel.getQuestionByName("questionValue").description).toBeFalsy();
+});
+test("Add apostrophes to string value", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "question1", type: "radiogroup", choices: ["item1", 1] },
+      { name: "question2", type: "checkbox", choices: ["item1", 1] },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+
+  var editor = new ConditionEditorBase(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "question1";
+  panel.getQuestionByName("questionValue").value = "item1";
+  expect(editor.text).toEqual("{question1} = 'item1'");
+  panel.getQuestionByName("questionValue").value = 1;
+  expect(editor.text).toEqual("{question1} = 1");
+
+  panel.getQuestionByName("operator").value = "anyof";
+  panel.getQuestionByName("questionValue").value = ["item1", 1];
+  expect(editor.text).toEqual("{question1} anyof ['item1', 1]");
+
+  panel.getQuestionByName("questionName").value = "question2";
+  panel.getQuestionByName("operator").value = "equal";
+  panel.getQuestionByName("questionValue").value = ["item1", 1];
+  expect(editor.text).toEqual("{question2} = ['item1', 1]");
+});
+test("Parse expressions", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" },
+    ],
+  });
+  var question = survey.getQuestionByName("q4");
+  var editor = new ConditionEditorBase(survey, question);
+  editor.text = "{q1} = 'abc' or {q2} = 1 and {q2} = 2";
+  expect(editor.isReady).toBeTruthy();
+  expect(editor.panel.panels).toHaveLength(3);
+  editor.text = "{q1} = 'abc' and ({q2} = 1 or {q2} = 2)";
+  expect(editor.isReady).toBeFalsy();
+  expect(editor.panel.panels).toHaveLength(1);
+  editor.text = "{q1} empty";
+  expect(editor.isReady).toBeTruthy();
+  editor.text = "1 < {q1}";
+  expect(editor.isReady).toBeTruthy();
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").value).toEqual("q1");
+  expect(panel.getQuestionByName("operator").value).toEqual("greater");
+  expect(panel.getQuestionByName("questionValue").value).toEqual(1);
+  /* TODO check on existing
+  editor.text = "1 < {q11}";
+  expect(editor.isReady).toBeFalsy();
+  editor.text = "{q11} empty";
+  expect(editor.isReady).toBeFalsy();
+  */
+  editor.text = "not t";
+  expect(editor.isReady).toBeFalsy();
+  editor.text = "{q3} = [1, 2]";
+  expect(editor.isReady).toBeTruthy();
 });
