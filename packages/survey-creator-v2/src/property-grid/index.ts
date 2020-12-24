@@ -313,63 +313,7 @@ export class PropertyGridModel {
         this.objValueChangedCallback();
       }
 
-      const fastEntrySurvey = this.createSurvey({
-        showNavigationButtons: false,
-        elements: [
-          {
-            type: "comment",
-            name: "fastEntry",
-            title: "Fast Entry",
-            hideNumber: true,
-          },
-        ],
-      });
-      const originalQuestion = <any>this.obj;
-
-      this.survey.onGetQuestionTitleActions.add((sender, options) => {
-        const choicesMatrixDynamic = options.question;
-
-        const fastEntryTitleAction = {
-          id: "fast-entry",
-          css: "sv-action--first sv-action-bar-item--secondary",
-          icon: "icon-change_16x16",
-          component: "sv-action-bar-item-modal",
-          data: {
-            contentTemplateName: "survey-content",
-            contentComponentData: fastEntrySurvey,
-            onShow: () => {
-              fastEntrySurvey.data = {
-                fastEntry: SurveyHelper.convertMatrixRowsToText(
-                  choicesMatrixDynamic.visibleRows
-                ),
-              };
-            },
-            onApply: () => {
-              const text = fastEntrySurvey.data.fastEntry;
-              const properties = [
-                new JsonObjectProperty(null, "value"),
-                new JsonObjectProperty(null, "text"),
-              ];
-              const className = "itemvalue";
-
-              const itemValues = SurveyHelper.convertTextToItemValues(
-                text,
-                properties,
-                className
-              );
-
-              SurveyHelper.applyItemValueArray(
-                originalQuestion.choices,
-                itemValues
-              );
-            },
-            onCancel: () => {},
-          },
-        };
-
-        options.titleActions = [];
-        options.titleActions.push(fastEntryTitleAction);
-      });
+      this.addFastEntryTitleAction();
     }
   }
   public get options(): ISurveyCreatorOptions {
@@ -464,6 +408,67 @@ export class PropertyGridModel {
         options.question.value
       );
     }
+  }
+  private addFastEntryTitleAction() {
+    const fastEntrySurveyEditor = this.createSurvey({
+      showNavigationButtons: false,
+      elements: [
+        {
+          type: "comment",
+          name: "fastEntry",
+          title: "Fast Entry",
+          hideNumber: true,
+        },
+      ],
+    });
+    const originalQuestion = <any>this.obj;
+
+    this.survey.onGetQuestionTitleActions.add((sender, options) => {
+      const propertyEditorQuestion = options.question;
+
+      if (propertyEditorQuestion.property.name === "choices") {
+        const fastEntryTitleAction = {
+          id: "fast-entry",
+          css: "sv-action--first sv-action-bar-item--secondary",
+          icon: "icon-change_16x16",
+          component: "sv-action-bar-item-modal",
+          data: {
+            contentTemplateName: "survey-content",
+            contentComponentData: fastEntrySurveyEditor,
+            onShow: () => {
+              fastEntrySurveyEditor.data = {
+                fastEntry: SurveyHelper.convertMatrixRowsToText(
+                  propertyEditorQuestion.visibleRows
+                ),
+              };
+            },
+            onApply: () => {
+              const text = fastEntrySurveyEditor.data.fastEntry;
+              const properties = [
+                new JsonObjectProperty(null, "value"),
+                new JsonObjectProperty(null, "text"),
+              ];
+              const className = "itemvalue";
+
+              const itemValues = SurveyHelper.convertTextToItemValues(
+                text,
+                properties,
+                className
+              );
+
+              SurveyHelper.applyItemValueArray(
+                originalQuestion.choices,
+                itemValues
+              );
+            },
+            onCancel: () => {},
+          },
+        };
+
+        options.titleActions = [];
+        options.titleActions.push(fastEntryTitleAction);
+      }
+    });
   }
 }
 
