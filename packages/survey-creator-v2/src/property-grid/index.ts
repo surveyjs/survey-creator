@@ -287,6 +287,9 @@ export class PropertyGridModel {
       new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(page);
       this.survey.addPage(page);
       this.survey.checkErrorsMode = "onValueChanging";
+      this.survey.onValueChanged.add((sender, options) => {
+        this.onValueChanged(options);
+      });
       this.survey.onValueChanging.add((sender, options) => {
         this.onValueChanging(options);
       });
@@ -407,6 +410,11 @@ export class PropertyGridModel {
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
+  }
+  private onValueChanged(options: any) {
+    var q = options.question;
+    if (!q || !q.property) return;
+    this.options.onPropertyValueChanged(q.property, this.obj, options.value);
   }
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {

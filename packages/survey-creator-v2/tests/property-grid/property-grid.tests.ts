@@ -732,8 +732,6 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
 
 test("options.onGetErrorTextOnValidationCallback", () => {
   var options = new EmptySurveyCreatorOptions();
-  var propName = "";
-  var object = null;
   options.onGetErrorTextOnValidationCallback = (
     propertyName: string,
     obj: Base,
@@ -757,4 +755,49 @@ test("options.onGetErrorTextOnValidationCallback", () => {
   nameQuestion.value = "qq2";
   expect(nameQuestion.errors).toHaveLength(0);
   expect(question.name).toEqual("qq2");
+});
+test("options.onValueChangingCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onValueChangingCallback = (options: any) => {
+    if (options.propertyName != "name") return;
+    if (options.obj.getType() == "dropdown" && options.newValue.length > 3) {
+      options.newValue = options.newValue.substring(0, 3);
+    }
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var nameQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  nameQuestion.value = "q2";
+  expect(question.name).toEqual("q2");
+  nameQuestion.value = "qq22";
+  expect(question.name).toEqual("qq2");
+});
+test("options.onPropertyValueChanged", () => {
+  var options = new EmptySurveyCreatorOptions();
+  var changedValue = "";
+  options.onPropertyValueChanged = (
+    property: JsonObjectProperty,
+    obj: any,
+    newValue: any
+  ) => {
+    if (property.name != "name") return;
+    if (obj.getType() == "dropdown") {
+      changedValue = newValue;
+    }
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var nameQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  nameQuestion.value = "q2";
+  expect(changedValue).toEqual("q2");
+  nameQuestion.value = "qq22";
+  expect(changedValue).toEqual("qq22");
 });
