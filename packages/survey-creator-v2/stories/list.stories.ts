@@ -1,10 +1,11 @@
 // import { document } from "global";
 import { text, boolean, button } from "@storybook/addon-knobs";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
+import { SvgBundleViewModel } from "../src/svgbundle";
 
 export default {
   title: "List",
-  "ko-components": [], // Fake component usage in order for component to be actually imported
+  "ko-components": [SvgBundleViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},

@@ -7,7 +7,7 @@
   z-index: 1;
   outline: none;
 
-  svc-svg-icon {
+  sv-svg-icon {
     display: block;
     height: 24px;
   }
@@ -18,7 +18,7 @@
   padding: calcSize(1) 12px;
   outline: none;
   
-  .svc-svg-icon use {
+  .sv-svg-icon use {
     fill: $foreground-light;
   }
 }
@@ -38,7 +38,7 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
 
-  .svc-svg-icon use {
+  .sv-svg-icon use {
     fill: $primary;
   }
 }

@@ -3,7 +3,6 @@ Version = `${process.env.VERSION}`;
 
 export * from "../components/creator";
 export * from "../components/button";
-export * from "../components/svg-icon";
 
 export * from "../components/tabs/designer";
 export * from "../components/tabs/test";
@@ -39,3 +38,5 @@ export * from "../property-grid";
 export * from "../property-grid/matrices";
 export * from "../property-grid/condition";
 export * from "../property-grid/restfull";
+
+export * from "../svgbundle";

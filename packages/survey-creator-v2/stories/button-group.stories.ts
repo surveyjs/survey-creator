@@ -1,13 +1,16 @@
 // import { document } from "global";
 import { text, boolean } from "@storybook/addon-knobs";
 import * as ko from "knockout";
-
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ButtonGroupViewModel, ButtonGroupItemViewModel } from "../src/entries";
+import {
+  ButtonGroupViewModel,
+  ButtonGroupItemViewModel,
+  SvgBundleViewModel,
+} from "../src/entries";
 
 export default {
   title: "Button Group",
-  "ko-components": [ButtonGroupViewModel, ButtonGroupItemViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [ButtonGroupViewModel, ButtonGroupItemViewModel, SvgBundleViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},

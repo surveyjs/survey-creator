@@ -10,8 +10,7 @@ export class CreatorViewModel {
   constructor(creator: SurveyCreator) {
     this.creator = creator;
   }
-  dispose() {
-  }
+  dispose() {}
 }
 
 ko.components.register("survey-creator", {
