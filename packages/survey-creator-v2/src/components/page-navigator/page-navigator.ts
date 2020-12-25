@@ -40,7 +40,7 @@ export class PageNavigatorViewModel {
   public items = ko.observableArray<ITabItem>();
 
   icon = "icon-navigation"
-  name = "svc-list";
+  name = "sv-list";
   verticalPosition= "bottom";
   horizontalPosition = "left";
   showPointer = true;

@@ -1,8 +1,6 @@
 import { ToolboxItemViewModel } from "@survey/creator/entries";
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import { ListItem } from "../list";
-
 import "./toolbox.scss";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";
@@ -43,7 +41,7 @@ export class ToolboxViewModel {
     });
   }
 
-  public invisibleItemSelected = (model: ListItem) => {
+  public invisibleItemSelected = (model: any) => {
     this.showInvisibleItems(false);
     alert(JSON.stringify(model));
   };
