@@ -11,15 +11,15 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
   >
     
   
-    <!-- ko if: $data.icon -->
+    <!-- ko if: $data.iconName -->
     
   
-    <svc-svg-icon
+    <sv-svg-icon
       class="sv-action-bar-item__icon"
-      params="iconName: icon, size: 24"
+      params="iconName: iconName, size: 24"
     >
       <svg
-        class="svc-svg-icon"
+        class="sv-svg-icon"
         style="width: 24px; height: 24px;"
       >
         <use
@@ -28,18 +28,20 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
       </svg>
       
 
-    </svc-svg-icon>
+    </sv-svg-icon>
     
+
   
     <!-- /ko -->
     
+
   
-    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
     
   
     <span
       class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
     >
       Menu Button
     </span>
@@ -65,15 +67,15 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
   >
     
   
-    <!-- ko if: $data.icon -->
+    <!-- ko if: $data.iconName -->
     
   
-    <svc-svg-icon
+    <sv-svg-icon
       class="sv-action-bar-item__icon"
-      params="iconName: icon, size: 24"
+      params="iconName: iconName, size: 24"
     >
       <svg
-        class="svc-svg-icon"
+        class="sv-svg-icon"
         style="width: 24px; height: 24px;"
       >
         <use
@@ -82,13 +84,15 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
       </svg>
       
 
-    </svc-svg-icon>
+    </sv-svg-icon>
     
+
   
     <!-- /ko -->
     
+
   
-    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
     <!-- /ko -->
     
 
@@ -109,15 +113,15 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
   >
     
   
-    <!-- ko if: $data.icon -->
+    <!-- ko if: $data.iconName -->
     
   
-    <svc-svg-icon
+    <sv-svg-icon
       class="sv-action-bar-item__icon"
-      params="iconName: icon, size: 24"
+      params="iconName: iconName, size: 24"
     >
       <svg
-        class="svc-svg-icon"
+        class="sv-svg-icon"
         style="width: 24px; height: 24px;"
       >
         <use
@@ -126,18 +130,20 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
       </svg>
       
 
-    </svc-svg-icon>
+    </sv-svg-icon>
     
+
   
     <!-- /ko -->
     
+
   
-    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
     
   
     <span
       class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
     >
       Menu Button Active
     </span>
@@ -179,15 +185,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -196,13 +202,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       <!-- /ko -->
       
 
@@ -241,15 +249,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -258,13 +266,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       <!-- /ko -->
       
 
@@ -332,15 +342,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -349,13 +359,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       <!-- /ko -->
       
 
@@ -394,15 +406,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -411,13 +423,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       <!-- /ko -->
       
 
@@ -456,15 +470,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -473,13 +487,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       <!-- /ko -->
       
 
@@ -547,15 +563,15 @@ exports[`Storyshots Action Bar Desktop 1`] = `
     >
       
   
-      <!-- ko if: $data.icon -->
+      <!-- ko if: $data.iconName -->
       
   
-      <svc-svg-icon
+      <sv-svg-icon
         class="sv-action-bar-item__icon"
-        params="iconName: icon, size: 24"
+        params="iconName: iconName, size: 24"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 24px; height: 24px;"
         >
           <use
@@ -564,18 +580,20 @@ exports[`Storyshots Action Bar Desktop 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
+
   
       <!-- /ko -->
       
+
   
-      <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
       
   
       <span
         class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-        data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
+        data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
       >
         Preview
       </span>
@@ -604,6 +622,12 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
 
   <!--/ko-->
+  
+
+  <!-- ko if: invisibleItems().length &gt; 0 -->
+  <!-- /ko -->
+  
+
 </sv-action-bar>
 `;
 
@@ -619,15 +643,15 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
   >
     
   
-    <!-- ko if: $data.icon -->
+    <!-- ko if: $data.iconName -->
     
   
-    <svc-svg-icon
+    <sv-svg-icon
       class="sv-action-bar-item__icon"
-      params="iconName: icon, size: 24"
+      params="iconName: iconName, size: 24"
     >
       <svg
-        class="svc-svg-icon"
+        class="sv-svg-icon"
         style="width: 24px; height: 24px;"
       >
         <use
@@ -636,18 +660,20 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
       </svg>
       
 
-    </svc-svg-icon>
+    </sv-svg-icon>
     
+
   
     <!-- /ko -->
     
+
   
-    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+    <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
     
   
     <span
       class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
+      data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
     >
       Menu Button Disabled
     </span>
@@ -1358,12 +1384,12 @@ exports[`Storyshots Button Group With Icons 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1372,7 +1398,7 @@ exports[`Storyshots Button Group With Icons 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1402,12 +1428,12 @@ exports[`Storyshots Button Group With Icons 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1416,7 +1442,7 @@ exports[`Storyshots Button Group With Icons 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1446,12 +1472,12 @@ exports[`Storyshots Button Group With Icons 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1460,7 +1486,7 @@ exports[`Storyshots Button Group With Icons 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1490,12 +1516,12 @@ exports[`Storyshots Button Group With Icons 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1504,7 +1530,7 @@ exports[`Storyshots Button Group With Icons 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1561,12 +1587,12 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1575,7 +1601,7 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1606,12 +1632,12 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1620,7 +1646,7 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1650,12 +1676,12 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1664,7 +1690,7 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1694,12 +1720,12 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1708,7 +1734,7 @@ exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1765,12 +1791,12 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1779,7 +1805,7 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1809,12 +1835,12 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1823,7 +1849,7 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1853,12 +1879,12 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1867,7 +1893,7 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -1897,12 +1923,12 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
           <!-- ko if: !!iconName-->
           
   
-          <svc-svg-icon
+          <sv-svg-icon
             class="svc-button-group__item-icon"
             params="iconName: iconName, size: iconSize || 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -1911,7 +1937,7 @@ exports[`Storyshots Button Group With Icons Selected Item 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
   
           <!-- /ko -->
@@ -2185,15 +2211,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2202,13 +2228,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             <!-- /ko -->
             
 
@@ -2247,15 +2275,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2264,13 +2292,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             <!-- /ko -->
             
 
@@ -2338,15 +2368,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2355,13 +2385,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             <!-- /ko -->
             
 
@@ -2400,15 +2432,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2417,13 +2449,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             <!-- /ko -->
             
 
@@ -2462,15 +2496,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2479,13 +2513,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             <!-- /ko -->
             
 
@@ -2553,15 +2589,15 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           >
             
   
-            <!-- ko if: $data.icon -->
+            <!-- ko if: $data.iconName -->
             
   
-            <svc-svg-icon
+            <sv-svg-icon
               class="sv-action-bar-item__icon"
-              params="iconName: icon, size: 24"
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2570,18 +2606,20 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
+
   
             <!-- /ko -->
             
+
   
-            <!-- ko if: $data.showTitle === undefined || (!!$data.icon && ko.unwrap($data.showTitle)) -->
+            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
             
   
             <span
               class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-              data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.icon }"
+              data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
             >
               Preview
             </span>
@@ -2610,6 +2648,12 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
 
         <!--/ko-->
+        
+
+        <!-- ko if: invisibleItems().length &gt; 0 -->
+        <!-- /ko -->
+        
+
       </sv-action-bar>
       
   
@@ -2723,11 +2767,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2736,7 +2780,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -2747,11 +2791,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2760,7 +2804,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -2808,11 +2852,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2821,7 +2865,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -2832,11 +2876,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2845,7 +2889,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -2893,11 +2937,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2906,7 +2950,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -2917,11 +2961,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2930,7 +2974,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -2978,11 +3022,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -2991,7 +3035,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3002,11 +3046,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3015,7 +3059,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3063,11 +3107,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3076,7 +3120,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3087,11 +3131,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3100,7 +3144,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3148,11 +3192,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3161,7 +3205,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3172,11 +3216,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3185,7 +3229,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3233,11 +3277,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3246,7 +3290,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3257,11 +3301,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3270,7 +3314,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3318,11 +3362,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3331,7 +3375,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3342,11 +3386,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3355,7 +3399,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3403,11 +3447,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3416,7 +3460,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3427,11 +3471,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3440,7 +3484,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3488,11 +3532,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3501,7 +3545,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3512,11 +3556,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3525,7 +3569,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3573,11 +3617,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3586,7 +3630,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3597,11 +3641,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3610,7 +3654,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3658,11 +3702,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3671,7 +3715,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3682,11 +3726,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3695,7 +3739,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3743,11 +3787,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3756,7 +3800,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3767,11 +3811,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3780,7 +3824,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3828,11 +3872,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3841,7 +3885,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3852,11 +3896,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3865,7 +3909,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3913,11 +3957,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3926,7 +3970,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -3937,11 +3981,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -3950,7 +3994,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -3998,11 +4042,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4011,7 +4055,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -4022,11 +4066,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4035,7 +4079,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -4083,11 +4127,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4096,7 +4140,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -4107,11 +4151,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4120,7 +4164,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -4168,11 +4212,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4181,7 +4225,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -4192,11 +4236,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4205,7 +4249,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -4253,11 +4297,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
              
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4266,7 +4310,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
     
           </span>
@@ -4277,11 +4321,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
       
-            <svc-svg-icon
-              params="iconName: icon, size: 24"
+            <sv-svg-icon
+              params="iconName: iconName, size: 24"
             >
               <svg
-                class="svc-svg-icon"
+                class="sv-svg-icon"
                 style="width: 24px; height: 24px;"
               >
                 <use
@@ -4290,7 +4334,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               </svg>
               
 
-            </svc-svg-icon>
+            </sv-svg-icon>
             
       
             <span
@@ -4365,12 +4409,12 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     >
       
     
-      <svc-svg-icon
+      <sv-svg-icon
         class="svc-page-navigator__navigator-icon"
         params="iconName: icon, size: 22"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 22px; height: 22px;"
         >
           <use
@@ -4379,7 +4423,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
     
       <sv-popup
@@ -4466,11 +4510,11 @@ exports[`Storyshots List Ordinary 1`] = `
 <div
   style="width: 250px"
 >
-  <svc-list
+  <sv-list
     params="onItemSelect: onItemSelect, items: items"
   >
     <ul
-      class="svc-list"
+      class="sv-list"
       data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
     >
       
@@ -4479,8 +4523,8 @@ exports[`Storyshots List Ordinary 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4501,8 +4545,8 @@ exports[`Storyshots List Ordinary 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4523,8 +4567,8 @@ exports[`Storyshots List Ordinary 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4548,7 +4592,7 @@ exports[`Storyshots List Ordinary 1`] = `
     </ul>
     
 
-  </svc-list>
+  </sv-list>
 </div>
 `;
 
@@ -4556,11 +4600,11 @@ exports[`Storyshots List With Disabled Item 1`] = `
 <div
   style="width: 250px"
 >
-  <svc-list
+  <sv-list
     params="onItemSelect: onItemSelect, items: items"
   >
     <ul
-      class="svc-list"
+      class="sv-list"
       data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
     >
       
@@ -4569,8 +4613,8 @@ exports[`Storyshots List With Disabled Item 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4591,8 +4635,8 @@ exports[`Storyshots List With Disabled Item 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4613,8 +4657,8 @@ exports[`Storyshots List With Disabled Item 1`] = `
       
   
       <li
-        class="svc-list__item svc-list__item--disabled"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item sv-list__item--disabled"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4638,7 +4682,7 @@ exports[`Storyshots List With Disabled Item 1`] = `
     </ul>
     
 
-  </svc-list>
+  </sv-list>
 </div>
 `;
 
@@ -4646,11 +4690,11 @@ exports[`Storyshots List With Icons 1`] = `
 <div
   style="width: 250px"
 >
-  <svc-list
+  <sv-list
     params="onItemSelect: onItemSelect, items: items"
   >
     <ul
-      class="svc-list"
+      class="sv-list"
       data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
     >
       
@@ -4659,20 +4703,20 @@ exports[`Storyshots List With Icons 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
         <!-- ko if: $data.iconName -->
         
     
-        <svc-svg-icon
-          class="svc-list__item-icon"
+        <sv-svg-icon
+          class="sv-list__item-icon"
           params="iconName: iconName, size: 24"
         >
           <svg
-            class="svc-svg-icon"
+            class="sv-svg-icon"
             style="width: 24px; height: 24px;"
           >
             <use
@@ -4681,7 +4725,7 @@ exports[`Storyshots List With Icons 1`] = `
           </svg>
           
 
-        </svc-svg-icon>
+        </sv-svg-icon>
         
     
         <!-- /ko -->
@@ -4700,20 +4744,20 @@ exports[`Storyshots List With Icons 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
         <!-- ko if: $data.iconName -->
         
     
-        <svc-svg-icon
-          class="svc-list__item-icon"
+        <sv-svg-icon
+          class="sv-list__item-icon"
           params="iconName: iconName, size: 24"
         >
           <svg
-            class="svc-svg-icon"
+            class="sv-svg-icon"
             style="width: 24px; height: 24px;"
           >
             <use
@@ -4722,7 +4766,7 @@ exports[`Storyshots List With Icons 1`] = `
           </svg>
           
 
-        </svc-svg-icon>
+        </sv-svg-icon>
         
     
         <!-- /ko -->
@@ -4741,20 +4785,20 @@ exports[`Storyshots List With Icons 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
         <!-- ko if: $data.iconName -->
         
     
-        <svc-svg-icon
-          class="svc-list__item-icon"
+        <sv-svg-icon
+          class="sv-list__item-icon"
           params="iconName: iconName, size: 24"
         >
           <svg
-            class="svc-svg-icon"
+            class="sv-svg-icon"
             style="width: 24px; height: 24px;"
           >
             <use
@@ -4763,7 +4807,7 @@ exports[`Storyshots List With Icons 1`] = `
           </svg>
           
 
-        </svc-svg-icon>
+        </sv-svg-icon>
         
     
         <!-- /ko -->
@@ -4785,7 +4829,7 @@ exports[`Storyshots List With Icons 1`] = `
     </ul>
     
 
-  </svc-list>
+  </sv-list>
 </div>
 `;
 
@@ -4793,11 +4837,11 @@ exports[`Storyshots List With Selection 1`] = `
 <div
   style="width: 250px"
 >
-  <svc-list
+  <sv-list
     params="onItemSelect: onItemSelect, items: items, allowSelection: allowSelection"
   >
     <ul
-      class="svc-list"
+      class="sv-list"
       data-bind="event: { mousedown: function (data, e) { e.preventDefault(); }}"
     >
       
@@ -4806,8 +4850,8 @@ exports[`Storyshots List With Selection 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4828,8 +4872,8 @@ exports[`Storyshots List With Selection 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4850,8 +4894,8 @@ exports[`Storyshots List With Selection 1`] = `
       
   
       <li
-        class="svc-list__item"
-        data-bind="css: { 'svc-list__item--disabled': $parent.isItemDisabled($data), 'svc-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
+        class="sv-list__item"
+        data-bind="css: { 'sv-list__item--disabled': $parent.isItemDisabled($data), 'sv-list__item--selected': $parent.selectedItem() == $data }, click: $parent.selectItem"
       >
         
     
@@ -4875,7 +4919,7 @@ exports[`Storyshots List With Selection 1`] = `
     </ul>
     
 
-  </svc-list>
+  </sv-list>
 </div>
 `;
 
@@ -4893,12 +4937,12 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
     >
       
     
-      <svc-svg-icon
+      <sv-svg-icon
         class="svc-page-navigator__navigator-icon"
         params="iconName: icon, size: 22"
       >
         <svg
-          class="svc-svg-icon"
+          class="sv-svg-icon"
           style="width: 22px; height: 22px;"
         >
           <use
@@ -4907,7 +4951,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
         </svg>
         
 
-      </svc-svg-icon>
+      </sv-svg-icon>
       
     
       <sv-popup
@@ -5594,11 +5638,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5607,7 +5651,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -5618,11 +5662,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5631,7 +5675,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -5678,11 +5722,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5691,7 +5735,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -5702,11 +5746,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5715,7 +5759,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -5762,11 +5806,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5775,7 +5819,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -5786,11 +5830,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5799,7 +5843,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -5846,11 +5890,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5859,7 +5903,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -5870,11 +5914,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5883,7 +5927,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -5930,11 +5974,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5943,7 +5987,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -5954,11 +5998,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -5967,7 +6011,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6014,11 +6058,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6027,7 +6071,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6038,11 +6082,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6051,7 +6095,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6124,11 +6168,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6137,7 +6181,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6148,11 +6192,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6161,7 +6205,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6208,11 +6252,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6221,7 +6265,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6232,11 +6276,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6245,7 +6289,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6292,11 +6336,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6305,7 +6349,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6316,11 +6360,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6329,7 +6373,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6376,11 +6420,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6389,7 +6433,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6400,11 +6444,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6413,7 +6457,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6460,11 +6504,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6473,7 +6517,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6484,11 +6528,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6497,7 +6541,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6544,11 +6588,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6557,7 +6601,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6568,11 +6612,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6581,7 +6625,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6654,11 +6698,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6667,7 +6711,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6678,11 +6722,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6691,7 +6735,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6738,11 +6782,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6751,7 +6795,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6762,11 +6806,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6775,7 +6819,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6822,11 +6866,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6835,7 +6879,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6846,11 +6890,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6859,7 +6903,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -6906,11 +6950,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6919,7 +6963,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -6930,11 +6974,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -6943,7 +6987,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -7016,11 +7060,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -7029,7 +7073,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -7040,11 +7084,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -7053,7 +7097,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
@@ -7100,11 +7144,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
            
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -7113,7 +7157,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
     
         </span>
@@ -7124,11 +7168,11 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         >
           
       
-          <svc-svg-icon
-            params="iconName: icon, size: 24"
+          <sv-svg-icon
+            params="iconName: iconName, size: 24"
           >
             <svg
-              class="svc-svg-icon"
+              class="sv-svg-icon"
               style="width: 24px; height: 24px;"
             >
               <use
@@ -7137,7 +7181,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
             </svg>
             
 
-          </svc-svg-icon>
+          </sv-svg-icon>
           
       
           <span
