@@ -26,6 +26,23 @@ import {
 } from "@survey/creator/settings";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
 
+
+export class ObjectFactoryCreator {
+  public static instance = new ObjectFactoryCreator();
+  public static createSurvey() { ObjectFactoryCreator.instance.createSurvey(); }
+  public createSurvey() { return new SurveyModel();
+  }
+} 
+ObjectFactoryCreator.createSurvey();
+
+export class ObjectFactoryCreatorKO extends ObjectFactoryCreator {
+  public createSurvey() { return new SurveyModel();
+  }
+} 
+
+ObjectFactoryCreator.instance = new ObjectFactoryCreatorKO();
+
+
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
   return this.question.property.visibleIf(this.survey.editingObj);
@@ -41,6 +58,7 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
+  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
@@ -79,6 +97,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
       res.onCreated(obj, question, prop);
+    }
+  },
+  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onGetQuestionTitleActions) {
+      res.onGetQuestionTitleActions(obj, options);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -296,6 +320,9 @@ export class PropertyGridModel {
       this.survey.onValidateQuestion.add((sender, options) => {
         this.onValidateQuestion(options);
       });
+      this.survey.onGetQuestionTitleActions.add((sender, options) => {
+        this.onGetQuestionTitleActions(options);
+      });
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
       });
@@ -360,6 +387,15 @@ export class PropertyGridModel {
     if (!q || !q.property) return;
     this.options.onPropertyValueChanged(q.property, this.obj, options.value);
   }
+
+  private onGetQuestionTitleActions(options) {
+    PropertyGridEditorCollection.onGetQuestionTitleActions(
+      this.obj,
+      options.question.property,
+      options
+    );
+  }
+
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {
     this.isCellCreating = true;
@@ -444,10 +480,7 @@ export class PropertyGridModel {
             },
             onApply: () => {
               const text = fastEntrySurveyEditor.data.fastEntry;
-              const properties = [
-                new JsonObjectProperty(null, "value"),
-                new JsonObjectProperty(null, "text"),
-              ];
+              const properties = Serializer.findProperties("itemvalue", ["value", "text"])
               const className = "itemvalue";
 
               const itemValues = SurveyHelper.convertTextToItemValues(

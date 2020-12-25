@@ -175,6 +175,9 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
+  public onGetQuestionTitleActions(obj: Base, options: any) {
+
+  }
   protected getMatrixJSON(
     obj: Base,
     prop: JsonObjectProperty,
