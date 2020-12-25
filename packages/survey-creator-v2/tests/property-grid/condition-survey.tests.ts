@@ -19,15 +19,50 @@ test("Items Builder, simple test", () => {
   expect(items[0].value).toEqual(1);
 });
 
-test("Create simple edit", () => {
+test("Setup simple panel", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
+      { type: "text", name: "question3" },
     ],
   });
-  var conditionEditor = new ConditionEditorBase(survey);
+  var conditionEditor = new ConditionEditorBase(
+    survey,
+    survey.getQuestionByName("question3")
+  );
   conditionEditor.text = "{question1} = 2";
   expect(conditionEditor.panel.panelCount).toEqual(1);
+  var editPanel = conditionEditor.panel.panels[0];
+  expect(conditionEditor.allConditionQuestions).toHaveLength(2);
+  var nameQuestion = editPanel.getQuestionByName("questionName");
+  expect(nameQuestion.choices).toHaveLength(2);
   expect(conditionEditor.text).toEqual("{question1} = 2");
+});
+
+test("Add condition", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q" },
+      { type: "text", name: "q2" },
+    ],
+  });
+  var conditionEditor = new ConditionEditorBase(
+    survey,
+    survey.getQuestionByName("q1")
+  );
+  conditionEditor.text = "{q} = 1";
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  expect(conditionEditor.isReady).toEqual(true);
+  conditionEditor.panel.addPanel();
+  expect(conditionEditor.isReady).toEqual(false);
+  var editPanel = conditionEditor.panel.panels[1];
+  var nameQuestion = editPanel.getQuestionByName("questionName");
+  expect(nameQuestion.choices).toHaveLength(2);
+  nameQuestion.value = "q2";
+  expect(conditionEditor.isReady).toEqual(false);
+  editPanel.getQuestionByName("questionValue").value = 2;
+  expect(conditionEditor.isReady).toEqual(true);
+  expect(conditionEditor.text).toEqual("{q} = 1 and {q2} = 2");
 });
