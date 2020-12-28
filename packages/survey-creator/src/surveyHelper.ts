@@ -215,17 +215,30 @@ export class SurveyHelper {
       }
     }
   }
-  public static convertMatrixRowsToText(items: any): string {
-    var result = items
-      .filter((item) => !item.cells[0].hasError)
-      .map((item) =>
-        item.cells
+  public static convertMatrixRowsToText(rows: any): string {
+    var result = rows
+      .filter((row) => !row.cells[0].hasError)
+      .map((row) =>
+        row.cells
           .map((cell) => cell.value || "")
           .join(Survey.ItemValue.Separator)
           .replace(/\|$/, "")
       )
       .join("\n");
+
     return result;
+  }
+
+  public static convertItemValluesToText(items: Survey.ItemValue[]): string {
+    var text = "";
+
+    items.forEach((item) => {
+      if (text) text += "\n";
+      text += item.value;
+      if (item.pureText) text += "|" + item.pureText;
+    });
+
+    return text;
   }
 
   public static convertTextToItemValues(

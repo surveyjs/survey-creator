@@ -2965,3 +2965,72 @@ QUnit.test("SurveyHelper convertTextToItemValues", function (assert) {
   assert.equal(itemValues[1].value, 2);
   assert.equal(itemValues[1].text, "Two");
 });
+
+QUnit.test("SurveyHelper convertMatrixRowsToText", function (assert) {
+  var json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "matrixdynamic",
+            name: "question1",
+            columns: [
+              {
+                name: "value",
+                title: "Value",
+              },
+              {
+                name: "text",
+                title: "Text",
+              },
+            ],
+            cellType: "text",
+          },
+        ],
+      },
+    ],
+  };
+  var survey = new Survey.SurveyModel(json);
+
+  survey.data = {
+    question1: [
+      {
+        value: 1,
+        text: "One",
+      },
+      {
+        value: 2,
+        text: "Two",
+      },
+    ],
+  };
+
+  const matrix = survey.getQuestionByName("question1");
+  const text = SurveyHelper.convertMatrixRowsToText(matrix.visibleRows);
+
+  assert.equal(
+    text,
+    `1|One
+2|Two`,
+    ""
+  );
+});
+
+QUnit.test("SurveyHelper convertItemValluesToText", function (assert) {
+  const q = new Survey.QuestionRadiogroupModel("q");
+  q.choices.push(new Survey.ItemValue(1));
+  q.choices.push(new Survey.ItemValue("itemValue", "itemText"));
+  q.choices.push(new Survey.ItemValue("2"));
+  const choices = q.choices;
+
+  const text = SurveyHelper.convertItemValluesToText(choices);
+
+  assert.equal(
+    text,
+    `1
+itemValue|itemText
+2`,
+    ""
+  );
+});

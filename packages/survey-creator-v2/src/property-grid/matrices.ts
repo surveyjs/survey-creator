@@ -17,6 +17,7 @@ import {
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
 
 class SurveyHelper {
   public static getNewName(
@@ -175,8 +176,61 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
-  public onGetQuestionTitleActions(obj: Base, options: any) {
+  public onGetQuestionTitleActions(originalQuestion: any, options: any) {
+    const fastEntrySurveyEditor = this.createSurvey({
+      showNavigationButtons: false,
+      elements: [
+        {
+          type: "comment",
+          name: "fastEntry",
+          title: "Fast Entry",
+          hideNumber: true,
+        },
+      ],
+    });
 
+    const propertyEditorQuestion = options.question;
+
+    const fastEntryTitleAction = {
+      id: "fast-entry",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      icon: "icon-change_16x16",
+      component: "sv-action-bar-item-modal",
+      data: {
+        contentTemplateName: "survey-content",
+        contentComponentData: fastEntrySurveyEditor,
+        onShow: () => {
+          fastEntrySurveyEditor.data = {
+            fastEntry: SurveyHelperBase.convertMatrixRowsToText(
+              propertyEditorQuestion.visibleRows
+            ),
+          };
+        },
+        onApply: () => {
+          const text = fastEntrySurveyEditor.data.fastEntry;
+          const properties = Serializer.findProperties("itemvalue", [
+            "value",
+            "text",
+          ]);
+          const className = "itemvalue";
+
+          const itemValues = SurveyHelperBase.convertTextToItemValues(
+            text,
+            properties,
+            className
+          );
+
+          SurveyHelperBase.applyItemValueArray(
+            originalQuestion.choices,
+            itemValues
+          );
+        },
+        onCancel: () => {},
+      },
+    };
+
+    options.titleActions = [];
+    options.titleActions.push(fastEntryTitleAction);
   }
   protected getMatrixJSON(
     obj: Base,
