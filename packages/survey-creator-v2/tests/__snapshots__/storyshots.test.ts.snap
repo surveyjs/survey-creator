@@ -4348,6 +4348,157 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       <!-- ko foreach: survey.pages -->
       <!-- /ko -->
       
+    
+      <svc-page
+        params="survey: survey, creator: creator"
+      >
+        <div
+          class="svc-page__content"
+          data-bind="click: select, clickBubble: false, css: css(), event: { dragover: dragOver, drop: drop }"
+        >
+          
+  
+          <!-- ko template: { name: 'survey-page', data: page } -->
+          
+  
+          <div
+            class="sv-page sv-body__page"
+            data-bind="css: cssClasses.page.root"
+          >
+            
+      
+            <!-- ko if: _showTitle -->
+            
+      
+            <h4
+              class="sv-title sv-page__title"
+              data-bind="css: cssClasses.page.title"
+            >
+              
+          
+              <!-- ko template: { name: 'survey-string', data: locTitle } -->
+              
+    
+              <!-- ko ifnot: koHasHtml -->
+              
+    
+              <span
+                data-bind="text: koRenderedHtml"
+                style="position: static;"
+              >
+                
+              </span>
+              
+    
+              <!-- /ko -->
+              
+    
+              <!-- ko if: koHasHtml -->
+              <!-- /ko -->
+              
+
+              <!-- /ko -->
+              
+      
+            </h4>
+            
+      
+            <!-- /ko -->
+            
+      
+            <!-- ko if: _showDescription-->
+            
+      
+            <div
+              class="sv-description sv-page__description"
+              data-bind="visible: data.showPageTitles, css: cssClasses.page.description"
+            >
+              
+          
+              <!-- ko template: { name: 'survey-string', data: locDescription } -->
+              
+    
+              <!-- ko ifnot: koHasHtml -->
+              
+    
+              <span
+                data-bind="text: koRenderedHtml"
+                style="position: static;"
+              >
+                
+              </span>
+              
+    
+              <!-- /ko -->
+              
+    
+              <!-- ko if: koHasHtml -->
+              <!-- /ko -->
+              
+
+              <!-- /ko -->
+              
+      
+            </div>
+            
+      
+            <!-- /ko -->
+            
+      
+            <!-- ko template: { name: 'survey-rows', data: $data} -->
+            
+  
+            <!-- ko foreach: { data: rows, as: 'row'} -->
+            <!-- /ko -->
+            
+
+            <!-- /ko -->
+            
+  
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+          <div
+            class="svc-page__add-new-question"
+            data-bind="click: addNewQuestion"
+          >
+            
+    
+            <span
+              class="svc-text svc-text--normal svc-text--bold"
+              data-bind="text: addNewQuestionText"
+            >
+              Add a New Question
+            </span>
+            
+  
+          </div>
+          
+  
+          <div
+            class="svc-page__content-actions"
+          >
+            
+    
+            <sv-action-bar
+              params="items: actions"
+            >
+              <!-- ko if: hasItems-->
+              <!--/ko-->
+            </sv-action-bar>
+            
+  
+          </div>
+          
+
+        </div>
+        
+
+      </svc-page>
+      
   
     </div>
     
@@ -4358,41 +4509,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   <svc-page-navigator
     params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
   >
-    <div
-      class="svc-page-navigator__selector"
-      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
-      title="text"
-    >
-      
-    
-      <svc-svg-icon
-        class="svc-page-navigator__navigator-icon"
-        params="iconName: icon, size: 22"
-      >
-        <svg
-          class="svc-svg-icon"
-          style="width: 22px; height: 22px;"
-        >
-          <use
-            xlink:href="#icon-navigation"
-          />
-        </svg>
-        
-
-      </svc-svg-icon>
-      
-    
-      <sv-popup
-        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
-      >
-        <div />
-      </sv-popup>
-      
-
-    </div>
-    
-
-    <!-- ko foreach: items -->
+    <!-- ko if: visible -->
     <!-- /ko -->
     
 
@@ -4886,6 +5003,9 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
   <svc-page-navigator
     params="items: items"
   >
+    <!-- ko if: visible -->
+    
+
     <div
       class="svc-page-navigator__selector"
       data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
@@ -5011,6 +5131,9 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
       
 
     </svc-page-navigator-item>
+    
+
+    <!-- /ko -->
     
 
     <!-- /ko -->
