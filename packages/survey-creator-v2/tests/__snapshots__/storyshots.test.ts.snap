@@ -4349,6 +4349,9 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       <!-- /ko -->
       
     
+      <!-- ko if: showNewPage -->
+      
+    
       <svc-page
         params="survey: survey, creator: creator"
       >
@@ -4498,6 +4501,9 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
 
       </svc-page>
+      
+    
+      <!-- /ko -->
       
   
     </div>
