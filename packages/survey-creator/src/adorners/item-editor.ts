@@ -14,13 +14,15 @@ var templateHtml = require("html-loader?interpolate!val-loader!./item-editor.htm
 
 function focusAfterChange(question: QuestionSelectBase, index = 0) {
   setTimeout(() => {
-    if(question.renderedElement && index >= -1) {
-      if(index === -1) {
+    if (question.renderedElement && index >= -1) {
+      if (index === -1) {
         index = 0;
       }
-      var focusables = <HTMLElement[]>(<any>question.renderedElement.getElementsByClassName("svda-focusable"));
-      if(focusables.length > 0 && index <= focusables.length) {
-        if(index >= focusables.length) {
+      var focusables = <HTMLElement[]>(
+        (<any>question.renderedElement.getElementsByClassName("svda-focusable"))
+      );
+      if (focusables.length > 0 && index <= focusables.length) {
+        if (index >= focusables.length) {
           index = focusables.length - 1;
         }
         focusables[index].focus && focusables[index].focus();
@@ -48,7 +50,7 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
           (this.question.choices.indexOf(this.item) -
             1 +
             this.question.choices.length) %
-          this.question.choices.length
+            this.question.choices.length
         );
         event.stopPropagation();
         return false;
@@ -58,7 +60,7 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
           this.question.choices,
           this.item,
           (this.question.choices.indexOf(this.item) + 1) %
-          this.question.choices.length
+            this.question.choices.length
         );
         event.stopPropagation();
         return false;
@@ -76,9 +78,13 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
     });
     var editorOptions = {
       allowAddRemoveItems: true,
-      allowRemoveAllItems: true
+      allowRemoveAllItems: true,
     };
-    this.editor.onSetPropertyEditorOptionsCallback("choices", this.question, editorOptions);
+    this.editor.onSetPropertyEditorOptionsCallback(
+      "choices",
+      this.question,
+      editorOptions
+    );
     this._allowAddRemoveItems = editorOptions.allowAddRemoveItems;
   }
 
@@ -159,7 +165,7 @@ ko.components.register("item-editor", {
         };
         params.editor.onValueChangingCallback(options);
         newValue = options.newValue === null ? options.value : options.newValue;
-        if(!newValue && params.name == "value") {
+        if (!newValue && params.name == "value") {
           newValue = params.item.value;
         }
         params.target[params.name] = newValue;
@@ -180,7 +186,8 @@ export var itemAdorner = {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
-      model.getType() !== "imagepicker"
+      model.getType() !== "imagepicker" &&
+      !model.choicesFromQuestion
       ? "item_editable"
       : "";
   },
@@ -238,7 +245,7 @@ export var createAddItemHandler = (
   onItemAdding: (itemValue: Survey.ItemValue) => void = null
 ) => () => {
   var nextValue = null;
-  var values = question.choices.map(function(item) {
+  var values = question.choices.map(function (item) {
     return item.itemValue;
   });
   var itemText = Survey.surveyLocalization.getString("choices_Item");
@@ -319,7 +326,8 @@ export var itemDraggableAdorner = {
     return !!model.parent &&
       !!model.choices &&
       typeof model.getType === "function" &&
-      model.getType() !== "imagepicker"
+      model.getType() !== "imagepicker" &&
+      !model.choicesFromQuestion
       ? "item_draggable"
       : "";
   },
@@ -373,10 +381,10 @@ export var itemDraggableAdorner = {
     );
     var editorOptions = {
       allowAddRemoveItems: true,
-      allowRemoveAllItems: true
+      allowRemoveAllItems: true,
     };
     editor.onSetPropertyEditorOptionsCallback("choices", model, editorOptions);
-    if(editorOptions.allowAddRemoveItems) {
+    if (editorOptions.allowAddRemoveItems) {
       var addNew = createAddItemElement(
         createAddItemHandler(
           model,
