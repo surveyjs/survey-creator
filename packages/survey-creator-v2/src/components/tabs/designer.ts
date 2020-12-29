@@ -21,6 +21,10 @@ export class TabDesignerViewModel {
   get survey() {
     return ko.unwrap(this._survey);
   }
+  get showNewPage() {
+    const pages = this.survey.pages;
+    return pages.length === 0 || pages[pages.length-1].rows.length > 0;
+  }
   dispose() {
     this._surveySubscription.dispose();
   }

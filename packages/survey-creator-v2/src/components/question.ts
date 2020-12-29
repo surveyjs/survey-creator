@@ -89,8 +89,8 @@ ko.components.register("svc-question", {
     createViewModel: (params: any, componentInfo: any) => {
       const creator = params.creator;
       const scrollSubscription = ko.computed(() => {
-        if(creator.isElementSelected(params.page)) {
-          componentInfo.element.scrollIntoView();
+        if(creator.isElementSelected(params.question)) {
+          // componentInfo.element.scrollIntoView();
         }
       });
       const model = new QuestionViewModel(creator, params.question);

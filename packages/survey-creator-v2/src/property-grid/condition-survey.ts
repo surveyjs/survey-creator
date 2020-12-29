@@ -418,7 +418,7 @@ export class ConditionEditorBase {
       }
       this.options.onConditionQuestionsGetListCallback(
         this.propertyName,
-        this.object,
+        <any>this.object,
         this,
         res
       );

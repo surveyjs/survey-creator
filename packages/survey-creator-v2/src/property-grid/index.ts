@@ -407,7 +407,7 @@ export class PropertyGridModel {
     if (!rowObj) return;
     var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
     this.options.onPropertyValueChanged(
-      prop,
+      <any>prop,
       options.row.editingObj,
       options.value
     );
@@ -486,7 +486,7 @@ export class PropertyGridModel {
 
               const itemValues = SurveyHelper.convertTextToItemValues(
                 text,
-                properties,
+                <any>properties,
                 className
               );
 
