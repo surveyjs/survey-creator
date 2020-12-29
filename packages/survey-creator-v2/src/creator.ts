@@ -8,6 +8,11 @@ import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./property-grid";
 
+export interface ICreatorPlugin {
+  activate: () => void;
+  deactivate?: () => boolean;
+}
+
 export class SurveyCreator extends CreatorBase<Survey> {
   public static defaultNewSurveyText: string = "{ \"pages\": [ { \"name\": \"page1\"}] }";
 
@@ -151,7 +156,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   protected initTabs() {
-    ko.computed(() => {
+    // ko.computed(() => {
       this.tabs([]);
       if (this.showDesignerTab) {
         this.tabs.push({
@@ -210,8 +215,21 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.tabs().length > 0) {
         this.koViewType(this.tabs()[0].name);
       }
-    });
+    // });
   }
+
+  plugins: {[name: string]: ICreatorPlugin} = {}
+
+  protected onViewTypeChanged(newType: string) {
+    const plugin = this.plugins[newType];
+    !!plugin && plugin.activate();
+  }
+
+  protected canSwitchViewType(newType: string) {
+    const plugin = this.plugins[this.koViewType()];
+    return !plugin || !plugin.deactivate || plugin.deactivate();
+  }
+
 
   public getContextActions(element: any/*ISurveyElement*/) {
     if (this.readOnly) {

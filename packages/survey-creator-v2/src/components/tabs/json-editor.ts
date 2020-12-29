@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, Base } from "survey-knockout";
+// import { Survey, Base } from "survey-knockout";
 import { SurveyTextWorker } from "@survey/creator/textWorker";
 // import { getLocString } from "../../../../survey-creator/src/editorLocalization";
 import { SurveyCreator } from "../../creator";
@@ -66,10 +66,10 @@ export class TabJsonEditorViewModel {
 
   public static updateTextTimeout: number = 1000;
   public static aceBasePath: string = "";
-  public isInitialJSON: boolean = false;
-  public isJSONChanged: boolean = false;
-  public koText: ko.Observable<string> = ko.observable("");
-  public koErrors: ko.ObservableArray<any> = ko.observableArray();
+  private koText: ko.Observable<string> = ko.observable("");
+  private koErrors: ko.ObservableArray<any> = ko.observableArray();
+  private isInitialJSON: boolean = false;
+  private isJSONChanged: boolean = false;
   private isProcessingImmediately: boolean = false;
   private textWorker: SurveyTextWorker;
   private aceEditor: AceAjax.Editor;
@@ -215,8 +215,8 @@ export class TabJsonEditorViewModel {
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
   }
   public dispose(): void {
-    this.creator.setSurveyJSONTextCallback = undefined;
     this.creator.getSurveyJSONTextCallback = undefined;
+    this.creator.setSurveyJSONTextCallback = undefined;
     if (typeof this.subscrKoText !== "undefined") {
       this.subscrKoText.dispose();
       this.subscrKoText = undefined;

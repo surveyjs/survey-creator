@@ -40,3 +40,5 @@ export * from "../property-grid";
 export * from "../property-grid/matrices";
 export * from "../property-grid/condition";
 export * from "../property-grid/restfull";
+
+export * from "../plugin";

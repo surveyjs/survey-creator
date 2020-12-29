@@ -299,10 +299,13 @@ export class CreatorBase<T extends {[index: string]: any}> {
    */
   public makeNewViewActive(viewName: string): boolean {
     if (!this.canSwitchViewType(viewName)) return false;
+    this.onViewTypeChanged(viewName);
     this.koViewType(viewName);
     return true;
   }
 
+  protected onViewTypeChanged(newType: string) {}
+  
   protected canSwitchViewType(newType: string) {
     return true;
   }
