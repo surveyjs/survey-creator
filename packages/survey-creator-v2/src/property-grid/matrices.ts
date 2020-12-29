@@ -178,8 +178,12 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
-  public onGetQuestionTitleActions(originalQuestion: any, options: any) {
-    const fastEntryEditor = new FastEntryEditor(originalQuestion.choices);
+  public onGetQuestionTitleActions(
+    originalQuestion: any,
+    prop: JsonObjectProperty,
+    evtOptions: any
+  ) {
+    const fastEntryEditor = new FastEntryEditor(originalQuestion[prop.name]);
 
     const fastEntryTitleAction = {
       id: "fast-entry",
@@ -199,7 +203,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       },
     };
 
-    options.titleActions = [fastEntryTitleAction];
+    evtOptions.titleActions = [fastEntryTitleAction];
   }
   protected getMatrixJSON(
     obj: Base,

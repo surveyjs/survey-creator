@@ -41,7 +41,12 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
-  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
+  onGetQuestionTitleActions?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
@@ -82,10 +87,15 @@ export var PropertyGridEditorCollection = {
       res.onCreated(obj, question, prop);
     }
   },
-  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+  onGetQuestionTitleActions(
+    obj: Base,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetQuestionTitleActions) {
-      res.onGetQuestionTitleActions(obj, options);
+      res.onGetQuestionTitleActions(obj, prop, evtOptions, options);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -380,7 +390,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onGetQuestionTitleActions(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
   }
 

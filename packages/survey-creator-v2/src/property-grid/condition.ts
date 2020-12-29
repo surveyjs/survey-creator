@@ -44,11 +44,17 @@ PropertyGridEditorCollection.register({
       showOptionsCaption: false,
     };
   },
-  onGetQuestionTitleActions(originalQuestion: any, options: any) {
+  onGetQuestionTitleActions(
+    originalQuestion: any,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) {
     var editor = new ConditionEditorBase(
       originalQuestion.survey,
       originalQuestion,
-      options
+      options,
+      prop.name
     );
     const conditionBuilderAction = {
       id: "fast-entry",
@@ -59,15 +65,15 @@ PropertyGridEditorCollection.register({
         contentTemplateName: "survey-content",
         contentComponentData: editor.editSurvey,
         onShow: () => {
-          //editor.text =
+          editor.text = originalQuestion[prop.name];
         },
         onApply: () => {
-          //fastEntryEditor.apply();
+          originalQuestion[prop.name] = editor.text;
         },
         onCancel: () => {},
       },
     };
 
-    options.titleActions = [conditionBuilderAction];
+    evtOptions.titleActions = [conditionBuilderAction];
   },
 });
