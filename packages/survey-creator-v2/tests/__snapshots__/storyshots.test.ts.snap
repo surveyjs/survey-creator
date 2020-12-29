@@ -4353,11 +4353,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
-        params="survey: survey, creator: creator"
+        params="survey: survey, creator: creator, page: newPage"
       >
         <div
-          class="svc-page__content"
-          data-bind="click: select, clickBubble: false, css: css(), event: { dragover: dragOver, drop: drop }"
+          class="svc-page__content svc-page__content--new"
+          data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
         >
           
   
