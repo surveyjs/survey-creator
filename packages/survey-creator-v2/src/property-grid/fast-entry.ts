@@ -1,10 +1,19 @@
-import { ItemValue, QuestionCommentModel, SurveyModel } from "survey-knockout";
+import { SurveyHelper } from "@survey/creator/surveyHelper";
+import {
+  ItemValue,
+  QuestionCommentModel,
+  Serializer,
+  SurveyModel,
+  Survey
+} from "survey-knockout";
 
 export class FastEntryEditor {
   private surveyValue: SurveyModel;
   private commentValue: QuestionCommentModel;
 
-  constructor(public choices: Array<ItemValue>) {
+  constructor(
+    public choices: Array<ItemValue>
+  ) {
     this.surveyValue = this.createSurvey();
     this.commentValue = <QuestionCommentModel>(
       this.survey.getQuestionByName("question")
@@ -19,28 +28,32 @@ export class FastEntryEditor {
     return this.commentValue;
   }
   public apply() {
-    this.choices.splice(0, this.choices.length);
     if (this.comment.isEmpty()) return;
-    var items = this.comment.value.split("\n");
-    for (var i = 0; i < items.length; i++) {
-      this.choices.push(new ItemValue(items[i]));
-    }
+
+    const text = this.comment.value;
+    const properties = Serializer.findProperties("itemvalue", [
+      "value",
+      "text",
+    ]);
+    const className = "itemvalue";
+    const items = SurveyHelper.convertTextToItemValues(
+      text,
+      properties,
+      className
+    );
+
+    SurveyHelper.applyItemValueArray(this.choices, items);
   }
-  
+
   protected createSurvey(): SurveyModel {
-    return new SurveyModel({
+    const json = {
+      showNavigationButtons: "none",
       elements: [{ type: "comment", name: "question" }],
-    });
+    };
+    return new Survey(json);
   }
-  private setComment() {
-    var text = "";
-    for (var i = 0; i < this.choices.length; i++) {
-      if (!!text) text += "\n";
-      text += this.choices[i].value;
-      if (!!this.choices[i].pureText) {
-        text += "|" + this.choices[i].pureText;
-      }
-    }
+  public setComment() {
+    var text = SurveyHelper.convertItemValuesToText(this.choices);
     this.comment.value = text;
   }
 }

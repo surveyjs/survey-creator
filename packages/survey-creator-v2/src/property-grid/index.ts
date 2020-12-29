@@ -27,22 +27,6 @@ import {
 import { SurveyHelper } from "@survey/creator/surveyHelper";
 
 
-export class ObjectFactoryCreator {
-  public static instance = new ObjectFactoryCreator();
-  public static createSurvey() { ObjectFactoryCreator.instance.createSurvey(); }
-  public createSurvey() { return new SurveyModel();
-  }
-} 
-ObjectFactoryCreator.createSurvey();
-
-export class ObjectFactoryCreatorKO extends ObjectFactoryCreator {
-  public createSurvey() { return new SurveyModel();
-  }
-} 
-
-ObjectFactoryCreator.instance = new ObjectFactoryCreatorKO();
-
-
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
   return this.question.property.visibleIf(this.survey.editingObj);

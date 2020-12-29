@@ -13,11 +13,13 @@ import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
   PropertyJSONGenerator,
+  PropertyGridModel,
 } from "./index";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
+import { FastEntryEditor } from './fast-entry';
 
 class SurveyHelper {
   public static getNewName(
@@ -177,19 +179,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     return prop.type == "itemvalue[]";
   }
   public onGetQuestionTitleActions(originalQuestion: any, options: any) {
-    const fastEntrySurveyEditor = this.createSurvey({
-      showNavigationButtons: false,
-      elements: [
-        {
-          type: "comment",
-          name: "fastEntry",
-          title: "Fast Entry",
-          hideNumber: true,
-        },
-      ],
-    });
-
-    const propertyEditorQuestion = options.question;
+    const fastEntryEditor = new FastEntryEditor(originalQuestion.choices);
 
     const fastEntryTitleAction = {
       id: "fast-entry",
@@ -198,32 +188,12 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       component: "sv-action-bar-item-modal",
       data: {
         contentTemplateName: "survey-content",
-        contentComponentData: fastEntrySurveyEditor,
+        contentComponentData: fastEntryEditor.survey,
         onShow: () => {
-          fastEntrySurveyEditor.data = {
-            fastEntry: SurveyHelperBase.convertMatrixRowsToText(
-              propertyEditorQuestion.visibleRows
-            ),
-          };
+          fastEntryEditor.setComment();
         },
         onApply: () => {
-          const text = fastEntrySurveyEditor.data.fastEntry;
-          const properties = Serializer.findProperties("itemvalue", [
-            "value",
-            "text",
-          ]);
-          const className = "itemvalue";
-
-          const itemValues = SurveyHelperBase.convertTextToItemValues(
-            text,
-            properties,
-            className
-          );
-
-          SurveyHelperBase.applyItemValueArray(
-            originalQuestion.choices,
-            itemValues
-          );
+          fastEntryEditor.apply()
         },
         onCancel: () => {},
       },

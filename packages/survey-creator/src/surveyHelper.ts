@@ -229,7 +229,7 @@ export class SurveyHelper {
     return result;
   }
 
-  public static convertItemValluesToText(items: Survey.ItemValue[]): string {
+  public static convertItemValuesToText(items: Survey.ItemValue[]): string {
     var text = "";
 
     items.forEach((item) => {

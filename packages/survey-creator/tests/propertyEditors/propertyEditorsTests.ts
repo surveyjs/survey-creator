@@ -3017,14 +3017,14 @@ QUnit.test("SurveyHelper convertMatrixRowsToText", function (assert) {
   );
 });
 
-QUnit.test("SurveyHelper convertItemValluesToText", function (assert) {
+QUnit.test("SurveyHelper convertItemValuesToText", function (assert) {
   const q = new Survey.QuestionRadiogroupModel("q");
   q.choices.push(new Survey.ItemValue(1));
   q.choices.push(new Survey.ItemValue("itemValue", "itemText"));
   q.choices.push(new Survey.ItemValue("2"));
   const choices = q.choices;
 
-  const text = SurveyHelper.convertItemValluesToText(choices);
+  const text = SurveyHelper.convertItemValuesToText(choices);
 
   assert.equal(
     text,
