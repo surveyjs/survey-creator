@@ -389,6 +389,34 @@ QUnit.test("SurveyQuestionPropertyEditor - choices", function (assert) {
   assert.equal(editor.koChoices()[0].text, "question1", "The first text");
   Survey.Serializer.removeProperty("survey", "question_test");
 });
+QUnit.test("SurveySelectBaseQuestionPropertyEditor", function (assert) {
+  Survey.Serializer.addProperty(
+    "question",
+    "question_test:question_selectbase"
+  );
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "radiogroup", name: "question2" },
+      { type: "checkbox", name: "question3" },
+      { type: "dropdown", name: "question4" },
+    ],
+  });
+  var propertyEditor = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("question", "question_test")
+  );
+  propertyEditor.object = survey.getQuestionByName("question3");
+  var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  assert.equal(
+    propertyEditor.editorType,
+    "question_selectbase",
+    "Question editor should be created"
+  );
+  assert.equal(editor.koChoices().length, 2, "There are two items");
+  assert.equal(editor.koChoices()[0].value, "question2", "The first value");
+  assert.equal(editor.koChoices()[0].text, "question2", "The first text");
+  Survey.Serializer.removeProperty("question", "question_test");
+});
 QUnit.test("SurveyQuestionValuePropertyEditor - choices", function (assert) {
   Survey.Serializer.addProperty("survey", "question_test:questionvalue");
   var survey = new Survey.Survey({

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Page } from "survey-knockout";
+import { PageModel } from "survey-knockout";
 import { SurveyCreator } from "../creator";
 
 import "./page.scss";
@@ -7,25 +7,47 @@ const template = require("./page.html");
 // import template from "./page.html";
 
 export class PageViewModel {
+  private _isNewPage = false;
   public creator: SurveyCreator;
-  public page: Page;
+  public page: PageModel;
   public actions = ko.observableArray();
 
-  constructor(creator: SurveyCreator, page: Page) {
+  private getTargetPage() {
+    if (this._isNewPage) {
+      let newPage = this.creator.survey.addNewPage(this.page.name);
+      this.creator.setNewNames(<any>this.page);
+      newPage.onFirstRendering();
+      newPage.updateCustomWidgets();
+      newPage.setWasShown(true);
+      return newPage;
+    }
+    return this.page;
+  }
+
+  constructor(creator: SurveyCreator, page: PageModel) {
     this.creator = creator;
-    this.page = page;
-    page.onFirstRendering();
-    page.updateCustomWidgets();
-    page.setWasShown(true);
-    this.actions(creator.getContextActions(page));
+    this._isNewPage = !page;
+    if(this._isNewPage) {
+      this.page = creator.survey.createNewPage("");
+      this.page.setSurveyImpl(creator.survey);
+    } else {
+      this.page = page;
+      this.actions(creator.getContextActions(page));
+    }
+    this.page.onFirstRendering();
+    this.page.updateCustomWidgets();
+    this.page.setWasShown(true);
   }
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel, event: Event) {
-    model.creator.survey.currentPage = model.page;
-    this.creator.clickToolboxItem({ type: "text" });
+    const targetPage = model.getTargetPage();
+    model.creator.survey.currentPage = targetPage;
+    model.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
-    model.creator.selectElement(model.page);
+    if(!this._isNewPage) {
+      model.creator.selectElement(model.page);
+    }
   }
   css() {
     return this.creator.isElementSelected(this.page) ? "svc-page__content--selected" : "";
@@ -41,6 +63,10 @@ export class PageViewModel {
     var helper = model.creator.dragDropHelper;
     if (!event["markEvent"]) {
       event["markEvent"] = true;
+      if(this._isNewPage) {
+        const targetPage: any = model.getTargetPage();
+        model.creator.dragDropHelper.ddTarget.moveToPage(targetPage);
+      }
       helper.doDrop(event, true);
     }
   }

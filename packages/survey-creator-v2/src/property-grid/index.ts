@@ -310,6 +310,12 @@ export class PropertyGridModel {
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
       });
+      this.survey.onMatrixCellValueChanging.add((sender, options) => {
+        this.onMatrixCellValueChanging(options);
+      });
+      this.survey.onMatrixCellValidate.add((sender, options) => {
+        this.onMatrixCellValidate(options);
+      });
       this.survey.onMatrixCellValueChanged.add((sender, options) => {
         this.onMatrixCellValueChanged(options);
       });
@@ -388,12 +394,40 @@ export class PropertyGridModel {
     );
     this.isCellCreating = false;
   }
+  private onMatrixCellValueChanging(options: any) {
+    if (this.isCellCreating) return;
+    var changingOptions = {
+      obj: options.row.editingObj,
+      propertyName: options.columnName,
+      value: options.oldValue,
+      newValue: options.value,
+      doValidation: false,
+    };
+    this.options.onValueChangingCallback(changingOptions);
+    options.value = changingOptions.newValue;
+  }
+  private onMatrixCellValidate(options: any) {
+    if (this.isCellCreating) return;
+    options.error = this.options.onGetErrorTextOnValidationCallback(
+      options.columnName,
+      <any>options.row.editingObj,
+      options.value
+    );
+  }
   private onMatrixCellValueChanged(options: any) {
     if (this.isCellCreating) return;
     PropertyGridEditorCollection.onMatrixCellValueChanged(
       this.obj,
       options.question.property,
       options
+    );
+    var rowObj = options.row.editingObj;
+    if (!rowObj) return;
+    var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
+    this.options.onPropertyValueChanged(
+      <any>prop,
+      options.row.editingObj,
+      options.value
     );
   }
   private onMatrixAllowRemoveRow(options: any): boolean {

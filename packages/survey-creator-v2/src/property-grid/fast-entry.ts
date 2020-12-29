@@ -4,16 +4,14 @@ import {
   QuestionCommentModel,
   Serializer,
   SurveyModel,
-  Survey
+  Survey,
 } from "survey-knockout";
 
 export class FastEntryEditor {
   private surveyValue: SurveyModel;
   private commentValue: QuestionCommentModel;
 
-  constructor(
-    public choices: Array<ItemValue>
-  ) {
+  constructor(public choices: Array<ItemValue>) {
     this.surveyValue = this.createSurvey();
     this.commentValue = <QuestionCommentModel>(
       this.survey.getQuestionByName("question")
@@ -38,11 +36,11 @@ export class FastEntryEditor {
     const className = "itemvalue";
     const items = SurveyHelper.convertTextToItemValues(
       text,
-      properties,
+      <any>properties,
       className
     );
 
-    SurveyHelper.applyItemValueArray(this.choices, items);
+    SurveyHelper.applyItemValueArray(<any>this.choices, items);
   }
 
   protected createSurvey(): SurveyModel {
@@ -53,7 +51,7 @@ export class FastEntryEditor {
     return new Survey(json);
   }
   public setComment() {
-    var text = SurveyHelper.convertItemValuesToText(this.choices);
+    var text = SurveyHelper.convertItemValuesToText(<any>this.choices);
     this.comment.value = text;
   }
 }
