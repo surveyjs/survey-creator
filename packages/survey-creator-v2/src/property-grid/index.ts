@@ -26,7 +26,6 @@ import {
 } from "@survey/creator/settings";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
 
-
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
   return this.question.property.visibleIf(this.survey.editingObj);
@@ -593,15 +592,19 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       optionsCaption: editorLocalization.getString(
         "pe.conditionSelectQuestion"
       ),
-      choices: this.getChoices(obj, prop),
+      choices: this.getChoices(obj, prop, options),
     };
   }
-  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+  private getChoices(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): Array<any> {
     var survey = EditableObject.getSurvey(obj);
     if (!survey) return [];
     var questions = survey.getAllQuestions();
     if (!questions) questions = [];
-    var showTitles = false; //TODO !!this.options && this.options.showTitlesInExpressions;
+    var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
       let value = this.getItemValue(<any>q);
