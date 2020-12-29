@@ -1,5 +1,5 @@
-import { ToolboxItemViewModel } from "@survey/creator/entries";
 import * as ko from "knockout";
+import { VerticalResponsibilityManager } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
 import "./toolbox.scss";
 const template = require("./toolbox.html");
@@ -55,28 +55,10 @@ ko.components.register("svc-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const model = new ToolboxViewModel(params.categories, params.creator);
-      var previousHeight = 0;
+      var container = componentInfo.element.querySelector(".svc-toolbox");
+      var manager = new VerticalResponsibilityManager(container, model, 40);
       let updateVisibleItems = setInterval(() => {
-        var toolboxElement: HTMLDivElement = componentInfo.element.querySelector(
-          ".svc-toolbox"
-        );
-        if (!!toolboxElement) {
-          let delta = toolboxElement.scrollHeight - toolboxElement.offsetHeight;
-          if (delta > 20 || toolboxElement.offsetHeight - previousHeight > 40) {
-            if (delta > 20) {
-              model.showFirstN(toolboxElement.offsetHeight / 40 - 2);
-              ko.tasks.runEarly();
-              // console.log("srink");
-            } else {
-              if (toolboxElement.offsetHeight - previousHeight > 40) {
-                model.showFirstN(Number.MAX_VALUE);
-                ko.tasks.runEarly();
-                // console.log("expand");
-              }
-            }
-            previousHeight = toolboxElement.offsetHeight;
-          }
-        }
+        manager.process();
       }, 100);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         clearInterval(updateVisibleItems);
