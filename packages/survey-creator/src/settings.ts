@@ -168,7 +168,9 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     json: any,
     reason: string,
     surveyType?: new (json: any) => Survey.Survey
-  ) {}
+  ) {
+    return new Survey.SurveyModel(json);
+  }
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Survey.Base,

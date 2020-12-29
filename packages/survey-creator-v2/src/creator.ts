@@ -27,7 +27,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         : null
     );
     this.toolboxCategories(this.toolbox.koCategories());
-    this.propertyGrid = new PropertyGrid(this.survey);
+    this.propertyGrid = new PropertyGrid(this.survey, this);
     this.selection.subscribe((element) => (this.propertyGrid.obj = element));
 
     this.toolbarItems.push(

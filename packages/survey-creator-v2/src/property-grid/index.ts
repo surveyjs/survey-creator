@@ -158,7 +158,6 @@ export class PropertyJSONGenerator {
     prop: JsonObjectProperty,
     showMode: string = ""
   ): boolean {
-    if (!this.options) return true;
     return this.options.onCanShowPropertyCallback(
       this.obj,
       <any>prop,
@@ -340,6 +339,8 @@ export class PropertyGridModel {
     return this.surveyValue;
   }
   protected createSurvey(json: any): SurveyModel {
+    //TODO this code is correct. We have a problem because we have two intance of surveys
+    //return this.options.createSurvey(json, "property-grid");
     return new SurveyModel(json);
   }
   protected getSurveyJSON(): any {
@@ -642,8 +643,8 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
 
-  constructor(obj: Base) {
-    super(obj);
+  constructor(obj: Base, options: ISurveyCreatorOptions) {
+    super(obj, options);
     this.koSurvey(this.survey);
     this.objValueChangedCallback = () => {
       this.koSurvey(this.survey);

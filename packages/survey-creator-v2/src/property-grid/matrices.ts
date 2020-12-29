@@ -19,7 +19,7 @@ import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
-import { FastEntryEditor } from './fast-entry';
+import { FastEntryEditor } from "./fast-entry";
 
 class SurveyHelper {
   public static getNewName(
@@ -193,14 +193,13 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
           fastEntryEditor.setComment();
         },
         onApply: () => {
-          fastEntryEditor.apply()
+          fastEntryEditor.apply();
         },
         onCancel: () => {},
       },
     };
 
-    options.titleActions = [];
-    options.titleActions.push(fastEntryTitleAction);
+    options.titleActions = [fastEntryTitleAction];
   }
   protected getMatrixJSON(
     obj: Base,
