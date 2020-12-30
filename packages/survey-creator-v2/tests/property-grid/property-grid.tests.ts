@@ -270,8 +270,6 @@ test("Support question property editor", () => {
   expect(gotoNamePropEd.value).toEqual("q2");
 });
 
-/*
-//TODO choicesFromQuestion
 test("Support select base question property editor", () => {
   var survey = new SurveyModel({
     elements: [
@@ -279,17 +277,21 @@ test("Support select base question property editor", () => {
       { type: "text", name: "q2" },
       { type: "checkbox", name: "q3" },
       { type: "dropdown", name: "q4" },
-    ]
+    ],
   });
-  var question = survey.getQuestionByName("q4");
+  var question = <QuestionDropdownModel>survey.getQuestionByName("q4");
   var propertyGrid = new PropertyGridModelTester(question);
-  var gotoNamePropEd = propertyGrid.survey.getQuestionByName("choicesFromQuestion");
+  var gotoNamePropEd = propertyGrid.survey.getQuestionByName(
+    "choicesFromQuestion"
+  );
   expect(gotoNamePropEd).toBeTruthy();
-  expect(gotoNamePropEd.choices).toHaveLength(2);
-  expect(gotoNamePropEd.choices[0].value).toEqual("q1");
-  expect(gotoNamePropEd.value).toEqual("q2");
+  expect(gotoNamePropEd.choices).toHaveLength(1);
+  expect(gotoNamePropEd.choices[0].value).toEqual("q3");
+  expect(question.choicesFromQuestion).toBeFalsy();
+  gotoNamePropEd.value = "q3";
+  expect(question.choicesFromQuestion).toEqual("q3");
 });
-*/
+
 test("Validators property editor", () => {
   var question = new QuestionTextModel("q1");
   question.validators.push(new ExpressionValidator());

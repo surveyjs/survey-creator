@@ -612,9 +612,10 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): Array<any> {
-    var survey = EditableObject.getSurvey(obj);
+    //TODO doesn't compile because of two library instances
+    var survey: any = EditableObject.getSurvey(obj);
     if (!survey) return [];
-    var questions = survey.getAllQuestions();
+    var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
     var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
@@ -628,8 +629,31 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
 
     return qItems;
   }
+
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    return survey.getAllQuestions();
+  }
+
   protected getItemValue(question: Question): any {
     return question.name;
+  }
+}
+
+export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQuestion {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question_selectbase";
+  }
+
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    let questions = super.getQuestions(survey, obj);
+    let res = [];
+    for (let i = 0; i < questions.length; i++) {
+      if (questions[i] === obj) continue;
+      if (Serializer.isDescendantOf(questions[i].getType(), "selectbase")) {
+        res.push(questions[i]);
+      }
+    }
+    return res;
   }
 }
 
@@ -650,6 +674,9 @@ PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
+PropertyGridEditorCollection.register(
+  new PropertyGridEditorQuestionSelectBase()
+);
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
