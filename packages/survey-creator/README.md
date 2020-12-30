@@ -18,10 +18,12 @@ Install the library using npm.
 npm install survey-creator
 ```
 
-Or use Azure CDN:
+Or use unpkg CDN:
 
-- https://surveyjs.azureedge.net/{version-number}/survey-creator.js
-- https://surveyjs.azureedge.net/{version-number}/survey-creator.css
+- https://unpkg.com/survey-creator@{version-number}/survey-creator.css
+- https://unpkg.com/survey-knockout@{version-number}/survey.ko.min.css
+- https://unpkg.com/survey-creator@{version-number}/survey-creator.js
+
 
 ## Include into your project
 

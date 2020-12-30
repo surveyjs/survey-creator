@@ -635,7 +635,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
     this.setModified({ type: modifiedType, question: element });
   }
 
-  protected setNewNames(element: Survey.IElement) {
+  public setNewNames(element: Survey.IElement) {
     this.newQuestions = [];
     this.newPanels = [];
     this.setNewNamesCore(element);

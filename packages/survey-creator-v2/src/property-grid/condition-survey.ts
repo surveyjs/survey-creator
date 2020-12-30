@@ -14,6 +14,7 @@ import {
   Helpers,
   Base,
   JsonObject,
+  Question,
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
@@ -254,10 +255,17 @@ export class ConditionEditorBase {
   private editSurveyValue: SurveyModel;
   private panelValue: QuestionPanelDynamicModel;
   private addConditionQuestionsHash = {};
-  private addConditionCalculatedValuesHash = {};
   public allConditionQuestions: Array<ItemValue>;
 
-  constructor(survey: SurveyModel, object: Base = null) {
+  constructor(
+    survey: SurveyModel,
+    object: Base = null,
+    private options: ISurveyCreatorOptions = null,
+    private propertyName = ""
+  ) {
+    if (!this.options) {
+      this.options = new EmptySurveyCreatorOptions();
+    }
     this.surveyValue = survey;
     this.objectValue = object;
     this.editSurveyValue = this.createSurvey({
@@ -276,7 +284,7 @@ export class ConditionEditorBase {
               type: "dropdown",
               titleLocation: "hidden",
               showOptionsCaption: false,
-              visibleIf: "{rowIndex} > 1",
+              visibleIf: "{panelIndex} > 0",
               choices: ["and", "or"],
             },
             {
@@ -320,6 +328,7 @@ export class ConditionEditorBase {
     return this.getText();
   }
   public set text(val: string) {
+    this.panel.panelCount = 0;
     var items = new ConditionEditorItemsBuilder().build(val);
     this.buildPanels(items);
   }
@@ -354,19 +363,22 @@ export class ConditionEditorBase {
       this.panel.addPanel();
     }
   }
+  private isSettingPanelValues = false;
   private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
+    this.isSettingPanelValues = true;
     panel.getQuestionByName("conjunction").value = item.conjunction;
     panel.getQuestionByName("operator").choices = this.getOperators();
     panel.getQuestionByName("operator").value = item.operator;
     panel.getQuestionByName(
       "questionName"
     ).choices = this.allConditionQuestions;
-    //if (!!this.addConditionQuestionsHash[item.questionName]) {
-    panel.getQuestionByName("questionName").value = item.questionName;
-    //}
+    if (!!this.getConditionQuestion(item.questionName)) {
+      panel.getQuestionByName("questionName").value = item.questionName;
+    }
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
     }
+    this.isSettingPanelValues = false;
   }
   private getText(): string {
     var res = "";
@@ -404,37 +416,46 @@ export class ConditionEditorBase {
         if (this.object == questions[i]) continue;
         questions[i].addConditionObjectsByContext(res, this.object);
       }
+      this.options.onConditionQuestionsGetListCallback(
+        this.propertyName,
+        <any>this.object,
+        this,
+        res
+      );
       for (var i = 0; i < res.length; i++) {
         res[i].value = res[i].name;
-        /* TODO
-        if (!this.options || !this.options.showTitlesInExpressions) {
-          var name = res[i].name;
-          var valueName = res[i].question.valueName;
+        let question = !!res[i].question ? res[i].question : res[i];
+        if (!this.options.showTitlesInExpressions) {
+          let name = res[i].name;
+          let valueName = question.valueName;
           if (!!valueName && name.indexOf(valueName) == 0) {
-            name = name.replace(valueName, res[i].question.name);
+            name = name.replace(valueName, question.name);
           }
           res[i].text = name;
         }
-        */
-        this.addConditionQuestionsHash[res[i].name] = res[i].question;
+        this.addConditionQuestionsHash[res[i].name] = question;
       }
     }
     var values = this.survey.calculatedValues;
     for (var i = 0; i < values.length; i++) {
-      var name = values[i].name;
-      this.addConditionCalculatedValuesHash[name] = values[i];
-      res.push({ value: name, text: name, question: null });
+      let name = values[i].name;
+      this.addConditionQuestionsHash[name] = this.getCalculatedValueQuestion();
+      res.push({
+        value: name,
+        text: name,
+        question: this.getCalculatedValueQuestion(),
+      });
     }
-    /** TODO
-    !!this.options &&
-      this.options.onConditionQuestionsGetListCallback(
-        this.editablePropertyName,
-        this.object,
-        this,
-        res
-      );
-      */
+
     return res;
+  }
+  private calculatedValueQuestion: Question = null;
+  private getCalculatedValueQuestion(): Question {
+    if (!this.calculatedValueQuestion) {
+      this.calculatedValueQuestion = Serializer.createClass("text");
+      this.calculatedValueQuestion.name = "question";
+    }
+    return this.calculatedValueQuestion;
   }
   private getOperators(): Array<ItemValue> {
     var res = [];
@@ -449,10 +470,8 @@ export class ConditionEditorBase {
       panel.getQuestionByName("questionValue").clearValue();
     }
     var json = this.getQuestionConditionJson(
-      panel,
       panel.getQuestionByName("questionName").value,
-      panel.getQuestionByName("operator").value,
-      true
+      panel.getQuestionByName("operator").value
     );
     if (!json) {
       json = {
@@ -490,12 +509,9 @@ export class ConditionEditorBase {
     //this.updateQuestionsWidth();
   }
   rebuildQuestionValueOnOperandChanging(panel: PanelModel) {
-    var questionName = panel.getQuestionByName("questionName");
     var json = this.getQuestionConditionJson(
-      panel,
-      questionName.value,
-      panel.getQuestionByName("operator").value,
-      true
+      panel.getQuestionByName("questionName").value,
+      panel.getQuestionByName("operator").value
     );
     var question = panel.getQuestionByName("questionValue");
     if (!!question && question.isReadOnly) {
@@ -523,14 +539,15 @@ export class ConditionEditorBase {
     }
     return false;
   }
+  private getConditionQuestion(name: string): Question {
+    return <Question>this.addConditionQuestionsHash[name];
+  }
   private getQuestionConditionJson(
-    panel: PanelModel,
     questionName: string,
-    operator: string,
-    convertOnAnyOf: boolean = false
+    operator: string
   ): any {
     var path = "";
-    var question = this.addConditionQuestionsHash[questionName];
+    var question = this.getConditionQuestion(questionName);
     if (!question) return null;
     if (questionName.indexOf(question.getValueName()) == 0) {
       path = questionName.substr(question.getValueName().length);
@@ -551,7 +568,7 @@ export class ConditionEditorBase {
     if (!!json && json.type == "expression") {
       json.type = "text";
     }
-    if (!!json && operator == "anyof" && convertOnAnyOf) {
+    if (!!json && operator == "anyof") {
       if (!this.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
@@ -561,12 +578,7 @@ export class ConditionEditorBase {
   private updateOperatorEnables(panel: PanelModel) {
     var questionName = panel.getQuestionByName("questionName");
     if (!questionName) return;
-    var json = this.getQuestionConditionJson(
-      panel,
-      questionName.value,
-      "equal",
-      true
-    );
+    var json = this.getQuestionConditionJson(questionName.value, "equal");
     var qType = !!json ? json.type : null;
     var questionOperator = panel.getQuestionByName("operator");
     if (!questionOperator) return;
@@ -583,6 +595,34 @@ export class ConditionEditorBase {
     }
     if (!isCurrentOperatorEnabled) {
       questionOperator.value = this.getFirstEnabledOperator(choices);
+    }
+  }
+  private updateQuestionsWidth(panel: PanelModel) {
+    var paddingRight = "20px";
+    var valueQuestion = panel.getQuestionByName("questionValue");
+    var conjunctionQuestion = panel.getQuestionByName("conjunction");
+    var nameQuestion = panel.getQuestionByName("questionName");
+    var operatorQuestion = panel.getQuestionByName("operator");
+    var isValueSameLine = !!valueQuestion && !valueQuestion.startWithNewLine;
+    var isFirst = !conjunctionQuestion || !conjunctionQuestion.isVisible;
+    if (!isFirst) {
+      conjunctionQuestion.minWidth = "50px";
+      conjunctionQuestion.width = "100px";
+      conjunctionQuestion.paddingRight = paddingRight;
+    }
+
+    nameQuestion.minWidth = "50px";
+    nameQuestion.width = isFirst ? "40%" : "25%";
+    nameQuestion.paddingRight = paddingRight;
+
+    operatorQuestion.minWidth = "50px";
+    operatorQuestion.width = isValueSameLine ? "25%" : "60%";
+    operatorQuestion.paddingRight = paddingRight;
+
+    if (!!valueQuestion) {
+      valueQuestion.minWidth = "50px";
+      valueQuestion.width = isValueSameLine ? "35%" : "";
+      valueQuestion.paddingRight = paddingRight;
     }
   }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
@@ -635,10 +675,14 @@ export class ConditionEditorBase {
   private onPanelValueChanged(panel: PanelModel, name: string) {
     if (name == "questionName") {
       this.rebuildQuestionValue(panel);
+      if (!this.isSettingPanelValues) {
+        panel.getQuestionByName("operator").value = "equal";
+      }
     }
     if (name == "operator") {
       this.rebuildQuestionValueOnOperandChanging(panel);
     }
     this.updateOperatorEnables(panel);
+    this.updateQuestionsWidth(panel);
   }
 }

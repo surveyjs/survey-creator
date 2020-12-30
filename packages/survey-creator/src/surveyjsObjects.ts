@@ -551,6 +551,7 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
     "hasSelectAll",
     "colCount",
     "titleLocation",
+    "choicesFromQuestion"
   ].forEach((propertyName) =>
     this.question.registerFunctionOnPropertyValueChanged(
       propertyName,

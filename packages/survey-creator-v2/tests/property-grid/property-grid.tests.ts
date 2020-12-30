@@ -730,11 +730,29 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
 });
 
-/* TODO wait for v1.8.22
+test("options.onValueChangingCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onValueChangingCallback = (options: any) => {
+    if (options.propertyName != "name") return;
+    if (options.obj.getType() == "dropdown" && options.newValue.length > 3) {
+      options.newValue = options.newValue.substring(0, 3);
+    }
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var nameQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  nameQuestion.value = "q2";
+  expect(question.name).toEqual("q2");
+  nameQuestion.value = "qq22";
+  expect(question.name).toEqual("qq2");
+});
+
 test("options.onGetErrorTextOnValidationCallback", () => {
   var options = new EmptySurveyCreatorOptions();
-  var propName = "";
-  var object = null;
   options.onGetErrorTextOnValidationCallback = (
     propertyName: string,
     obj: Base,
@@ -759,4 +777,107 @@ test("options.onGetErrorTextOnValidationCallback", () => {
   expect(nameQuestion.errors).toHaveLength(0);
   expect(question.name).toEqual("qq2");
 });
-*/
+test("options.onPropertyValueChanged", () => {
+  var options = new EmptySurveyCreatorOptions();
+  var changedValue = "";
+  options.onPropertyValueChanged = (
+    property: JsonObjectProperty,
+    obj: any,
+    newValue: any
+  ) => {
+    if (property.name != "name") return;
+    if (obj.getType() == "dropdown") {
+      changedValue = newValue;
+    }
+  };
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var nameQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  nameQuestion.value = "q2";
+  expect(changedValue).toEqual("q2");
+  nameQuestion.value = "qq22";
+  expect(changedValue).toEqual("qq22");
+});
+
+test("options.onValueChangingCallback in matrix", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onValueChangingCallback = (options: any) => {
+    if (options.propertyName != "name") return;
+    if (
+      options.obj.getType() == "matrixdropdowncolumn" &&
+      options.newValue.length > 5
+    ) {
+      options.newValue = options.newValue.substring(0, 5);
+    }
+  };
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.addColumn("col3");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
+    "col1234";
+  expect(question.columns[0].name).toEqual("col12");
+});
+test("options.onGetErrorTextOnValidationCallback in matrix", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onGetErrorTextOnValidationCallback = (
+    propertyName: string,
+    obj: Base,
+    value: any
+  ): string => {
+    if (propertyName != "name") return;
+    if (obj.getType() != "matrixdropdowncolumn" || value.length != 5)
+      return "No5Letters";
+    return null;
+  };
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.addColumn("col3");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
+    "col1234";
+  expect(question.columns[0].name).toEqual("col1");
+  columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
+    "col12";
+  expect(question.columns[0].name).toEqual("col12");
+});
+test("options.onPropertyValueChanged in matrix", () => {
+  var options = new EmptySurveyCreatorOptions();
+  var changedValue = "";
+  options.onPropertyValueChanged = (
+    property: JsonObjectProperty,
+    obj: any,
+    newValue: any
+  ) => {
+    if (property.name != "name") return;
+    if (obj.getType() == "matrixdropdowncolumn") {
+      changedValue = newValue;
+    }
+  };
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  question.addColumn("col3");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
+    "col1234";
+  expect(changedValue).toEqual("col1234");
+});

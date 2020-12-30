@@ -159,6 +159,8 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        { name: "choicesFromQuestion", tab: "choices" },
+        { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "layout" },
         { name: "hasOther", tab: "choices" },

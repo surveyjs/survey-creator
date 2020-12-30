@@ -13,10 +13,13 @@ import {
   PropertyGridEditorCollection,
   PropertyGridEditor,
   PropertyJSONGenerator,
+  PropertyGridModel,
 } from "./index";
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
+import { FastEntryEditor } from './fast-entry';
 
 class SurveyHelper {
   public static getNewName(
@@ -174,6 +177,30 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
 export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
+  }
+  public onGetQuestionTitleActions(originalQuestion: any, options: any) {
+    const fastEntryEditor = new FastEntryEditor(originalQuestion.choices);
+
+    const fastEntryTitleAction = {
+      id: "fast-entry",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      icon: "icon-change_16x16",
+      component: "sv-action-bar-item-modal",
+      data: {
+        contentTemplateName: "survey-content",
+        contentComponentData: fastEntryEditor.survey,
+        onShow: () => {
+          fastEntryEditor.setComment();
+        },
+        onApply: () => {
+          fastEntryEditor.apply()
+        },
+        onCancel: () => {},
+      },
+    };
+
+    options.titleActions = [];
+    options.titleActions.push(fastEntryTitleAction);
   }
   protected getMatrixJSON(
     obj: Base,

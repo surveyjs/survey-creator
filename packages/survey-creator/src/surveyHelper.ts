@@ -215,4 +215,51 @@ export class SurveyHelper {
       }
     }
   }
+  public static convertMatrixRowsToText(rows: any): string {
+    var result = rows
+      .filter((row) => !row.cells[0].hasError)
+      .map((row) =>
+        row.cells
+          .map((cell) => cell.value || "")
+          .join(Survey.ItemValue.Separator)
+          .replace(/\|$/, "")
+      )
+      .join("\n");
+
+    return result;
+  }
+
+  public static convertItemValuesToText(items: Survey.ItemValue[]): string {
+    var text = "";
+
+    items.forEach((item) => {
+      if (text) text += "\n";
+      text += item.value;
+      if (item.pureText) text += "|" + item.pureText;
+    });
+
+    return text;
+  }
+
+  public static convertTextToItemValues(
+    text: string,
+    properties: Survey.JsonObjectProperty[],
+    className: string
+  ): Survey.ItemValue[] {
+    var items = [];
+    if (!text) return items;
+
+    var texts = text.split("\n");
+    for (var i = 0; i < texts.length; i++) {
+      if (!texts[i]) continue;
+      var elements = texts[i].split(Survey.ItemValue.Separator);
+      var valueItem = Survey.Serializer.createClass(className);
+      properties.forEach((p, i) => {
+        valueItem[p.name] = elements[i];
+      });
+      items.push(valueItem);
+    }
+
+    return items;
+  }
 }

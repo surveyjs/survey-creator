@@ -27,11 +27,7 @@ constructor(
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
-    if(!!destination.page && destination.page !== this.page) {
-      this.clear();
-      this.page = destination.page;
-      this.page.dragDropStart(this.source, this.target, this.nestedPanelDepth);
-    }
+    this.moveToPage(destination.page);
     return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
@@ -39,6 +35,13 @@ constructor(
   }
   public clear() {
     this.page.dragDropFinish(true);
+  }
+  public moveToPage(page: Survey.Page) {
+    if(!!page && page !== this.page) {
+      this.clear();
+      this.page = page;
+      this.page.dragDropStart(this.source, this.target, this.nestedPanelDepth);
+    }
   }
 }
 
