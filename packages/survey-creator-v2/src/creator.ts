@@ -14,9 +14,11 @@ export interface ICreatorPlugin {
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
-  propertyGrid: PropertyGrid;
+  private propertyGrid: PropertyGrid;
   public static defaultNewSurveyText: string =
     '{ "pages": [ { "name": "page1"}] }';
+
+  public plugins: { [name: string]: ICreatorPlugin } = {};
 
   constructor(options: ICreatorOptions = {}) {
     super(options);
@@ -226,8 +228,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       }
     // });
   }
-
-  plugins: {[name: string]: ICreatorPlugin} = {}
 
   protected onViewTypeChanged(newType: string) {
     const plugin = this.plugins[newType];
