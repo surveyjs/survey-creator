@@ -284,7 +284,10 @@ export class PropertyGridModel {
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
   public objValueChangedCallback: () => void;
-  constructor(obj: Base = null, options: ISurveyCreatorOptions = null) {
+  constructor(
+    obj: Base = null,
+    options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
+  ) {
     this.options = options;
     this.obj = obj;
   }
@@ -349,9 +352,7 @@ export class PropertyGridModel {
     return this.surveyValue;
   }
   protected createSurvey(json: any): SurveyModel {
-    //TODO this code is correct. We have a problem because we have two intance of surveys
-    //return this.options.createSurvey(json, "property-grid");
-    return new SurveyModel(json);
+    return this.options.createSurvey(json, "property-grid");
   }
   protected getSurveyJSON(): any {
     return {
@@ -660,9 +661,5 @@ export class PropertyGrid extends PropertyGridModel {
     this.objValueChangedCallback = () => {
       this.koSurvey(this.survey);
     };
-  }
-
-  protected createSurvey(json: any): SurveyModel {
-    return new Survey(json);
   }
 }

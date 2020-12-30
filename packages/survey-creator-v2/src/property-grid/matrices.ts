@@ -181,9 +181,13 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public onGetQuestionTitleActions(
     originalQuestion: any,
     prop: JsonObjectProperty,
-    evtOptions: any
+    evtOptions: any,
+    options: ISurveyCreatorOptions
   ) {
-    const fastEntryEditor = new FastEntryEditor(originalQuestion[prop.name]);
+    const fastEntryEditor = new FastEntryEditor(
+      originalQuestion[prop.name],
+      options
+    );
 
     const fastEntryTitleAction = {
       id: "fast-entry",

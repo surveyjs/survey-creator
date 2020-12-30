@@ -167,7 +167,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   createSurvey(
     json: any,
     reason: string,
-    surveyType?: new (json: any) => Survey.Survey
+    surveyType?: new (json: any) => Survey.SurveyModel
   ) {
     return new Survey.SurveyModel(json);
   }
