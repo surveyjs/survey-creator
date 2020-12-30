@@ -352,9 +352,7 @@ export class ConditionEditorBase {
     return true;
   }
   protected createSurvey(json: any): SurveyModel {
-    if (!!this.options)
-      return this.options.createSurvey(json, "condition-builder"); //TODO reason name
-    return new SurveyModel(json);
+    return this.options.createSurvey(json, "condition-builder"); //TODO reason name
   }
   private buildPanels(items: Array<ConditionEditorItem>) {
     this.panel.panelCount = items.length;

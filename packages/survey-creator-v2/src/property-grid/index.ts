@@ -61,8 +61,7 @@ export var PropertyGridEditorCollection = {
     this.editors.push(editor);
   },
   getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
-    //TODO replace with prop.id should use name due two versions of survey-knockout
-    var key = prop.name + prop.id.toString();
+    var key = prop.id;
     var fitEd = this.fitHash[key];
     if (!!fitEd) return fitEd;
     for (var i = this.editors.length - 1; i >= 0; i--) {
