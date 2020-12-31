@@ -190,7 +190,7 @@ export class TabJsonEditorViewModel {
   constructor(model: TabJsonEditorModel, element: any) {
     this.model = model;
     // model.onTextChangedCallback = val => this.text(val);
-    this.koText(model.text);
+    this.koText(model.creator.text);
   }
   public get hasAceEditor(): boolean {
     return typeof ace !== "undefined";
