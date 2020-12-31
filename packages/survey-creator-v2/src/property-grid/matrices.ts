@@ -217,7 +217,6 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     keyName: string = undefined
   ): any {
     var res = super.getMatrixJSON(obj, prop, propNames, options, keyName);
-    res.renderTitleAs = "title-actions";
     return res;
   }
   protected getColumnNames(): Array<string> {

@@ -40,7 +40,6 @@ PropertyGridEditorCollection.register({
   ): any {
     return {
       type: "comment",
-      renderTitleAs: "title-actions",
       showOptionsCaption: false,
     };
   },
