@@ -20,7 +20,7 @@ export default {
 };
 
 export const Default = () => {
-  let creator = new SurveyCreator({showEmbededSurveyTab: true});
+  let creator: SurveyCreator = new SurveyCreator({ showEmbededSurveyTab: true });
   new PluginModel(creator);
   (<any>creator).JSON = surveyJSON;
   return {
