@@ -19,7 +19,7 @@ import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
-import { FastEntryEditor } from './fast-entry';
+import { FastEntryEditor } from "./fast-entry";
 
 class SurveyHelper {
   public static getNewName(
@@ -178,8 +178,16 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
-  public onGetQuestionTitleActions(originalQuestion: any, options: any) {
-    const fastEntryEditor = new FastEntryEditor(originalQuestion.choices);
+  public onGetQuestionTitleActions(
+    originalQuestion: any,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) {
+    const fastEntryEditor = new FastEntryEditor(
+      originalQuestion[prop.name],
+      options
+    );
 
     const fastEntryTitleAction = {
       id: "fast-entry",
@@ -193,14 +201,13 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
           fastEntryEditor.setComment();
         },
         onApply: () => {
-          fastEntryEditor.apply()
+          fastEntryEditor.apply();
         },
         onCancel: () => {},
       },
     };
 
-    options.titleActions = [];
-    options.titleActions.push(fastEntryTitleAction);
+    evtOptions.titleActions = [fastEntryTitleAction];
   }
   protected getMatrixJSON(
     obj: Base,

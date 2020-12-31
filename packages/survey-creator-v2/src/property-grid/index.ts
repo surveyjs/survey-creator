@@ -41,7 +41,12 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
-  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
+  onGetQuestionTitleActions?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
 }
@@ -56,8 +61,7 @@ export var PropertyGridEditorCollection = {
     this.editors.push(editor);
   },
   getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
-    //TODO replace with prop.id should use name due two versions of survey-knockout
-    var key = prop.name + prop.id.toString();
+    var key = prop.id;
     var fitEd = this.fitHash[key];
     if (!!fitEd) return fitEd;
     for (var i = this.editors.length - 1; i >= 0; i--) {
@@ -82,10 +86,15 @@ export var PropertyGridEditorCollection = {
       res.onCreated(obj, question, prop);
     }
   },
-  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+  onGetQuestionTitleActions(
+    obj: Base,
+    prop: JsonObjectProperty,
+    evtOptions: any,
+    options: ISurveyCreatorOptions
+  ) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetQuestionTitleActions) {
-      res.onGetQuestionTitleActions(obj, options);
+      res.onGetQuestionTitleActions(obj, prop, evtOptions, options);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -158,7 +167,6 @@ export class PropertyJSONGenerator {
     prop: JsonObjectProperty,
     showMode: string = ""
   ): boolean {
-    if (!this.options) return true;
     return this.options.onCanShowPropertyCallback(
       this.obj,
       <any>prop,
@@ -275,7 +283,10 @@ export class PropertyGridModel {
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
   public objValueChangedCallback: () => void;
-  constructor(obj: Base = null, options: ISurveyCreatorOptions = null) {
+  constructor(
+    obj: Base = null,
+    options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
+  ) {
     this.options = options;
     this.obj = obj;
   }
@@ -340,7 +351,7 @@ export class PropertyGridModel {
     return this.surveyValue;
   }
   protected createSurvey(json: any): SurveyModel {
-    return new SurveyModel(json);
+    return this.options.createSurvey(json, "property-grid");
   }
   protected getSurveyJSON(): any {
     return {
@@ -379,7 +390,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onGetQuestionTitleActions(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
   }
 
@@ -600,9 +612,10 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): Array<any> {
-    var survey = EditableObject.getSurvey(obj);
+    //TODO doesn't compile because of two library instances
+    var survey: any = EditableObject.getSurvey(obj);
     if (!survey) return [];
-    var questions = survey.getAllQuestions();
+    var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
     var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
@@ -616,8 +629,31 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
 
     return qItems;
   }
+
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    return survey.getAllQuestions();
+  }
+
   protected getItemValue(question: Question): any {
     return question.name;
+  }
+}
+
+export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQuestion {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question_selectbase";
+  }
+
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    let questions = super.getQuestions(survey, obj);
+    let res = [];
+    for (let i = 0; i < questions.length; i++) {
+      if (questions[i] === obj) continue;
+      if (Serializer.isDescendantOf(questions[i].getType(), "selectbase")) {
+        res.push(questions[i]);
+      }
+    }
+    return res;
   }
 }
 
@@ -638,19 +674,18 @@ PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
+PropertyGridEditorCollection.register(
+  new PropertyGridEditorQuestionSelectBase()
+);
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
 
-  constructor(obj: Base) {
-    super(obj);
+  constructor(obj: Base, options: ISurveyCreatorOptions) {
+    super(obj, options);
     this.koSurvey(this.survey);
     this.objValueChangedCallback = () => {
       this.koSurvey(this.survey);
     };
-  }
-
-  protected createSurvey(json: any): SurveyModel {
-    return new Survey(json);
   }
 }

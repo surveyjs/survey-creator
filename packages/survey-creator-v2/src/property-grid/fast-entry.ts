@@ -1,3 +1,7 @@
+import {
+  EmptySurveyCreatorOptions,
+  ISurveyCreatorOptions,
+} from "@survey/creator/settings";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
 import {
   ItemValue,
@@ -11,7 +15,10 @@ export class FastEntryEditor {
   private surveyValue: SurveyModel;
   private commentValue: QuestionCommentModel;
 
-  constructor(public choices: Array<ItemValue>) {
+  constructor(
+    public choices: Array<ItemValue>,
+    private creator: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
+  ) {
     this.surveyValue = this.createSurvey();
     this.commentValue = <QuestionCommentModel>(
       this.survey.getQuestionByName("question")
@@ -48,7 +55,7 @@ export class FastEntryEditor {
       showNavigationButtons: "none",
       elements: [{ type: "comment", name: "question" }],
     };
-    return new Survey(json);
+    return this.creator.createSurvey(json, "fast-entry");
   }
   public setComment() {
     var text = SurveyHelper.convertItemValuesToText(<any>this.choices);

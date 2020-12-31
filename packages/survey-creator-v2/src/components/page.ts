@@ -7,54 +7,57 @@ const template = require("./page.html");
 // import template from "./page.html";
 
 export class PageViewModel {
-  private _isNewPage = false;
+  private _isGhost = ko.observable(false);
   public creator: SurveyCreator;
-  public page: PageModel;
+  private _page: PageModel;
   public actions = ko.observableArray();
-
-  private getTargetPage() {
-    if (this._isNewPage) {
-      let newPage = this.creator.survey.addNewPage(this.page.name);
-      this.creator.setNewNames(<any>this.page);
-      newPage.onFirstRendering();
-      newPage.updateCustomWidgets();
-      newPage.setWasShown(true);
-      return newPage;
-    }
-    return this.page;
-  }
 
   constructor(creator: SurveyCreator, page: PageModel) {
     this.creator = creator;
-    this._isNewPage = !page;
-    if(this._isNewPage) {
-      this.page = creator.survey.createNewPage("");
-      this.page.setSurveyImpl(creator.survey);
-    } else {
-      this.page = page;
-      this.actions(creator.getContextActions(page));
-    }
-    this.page.onFirstRendering();
-    this.page.updateCustomWidgets();
-    this.page.setWasShown(true);
+    ko.computed(() => {
+      this._page = page;
+      this._isGhost(typeof this.page["_addToSurvey"] === "function");
+      if(!this._isGhost()) {
+        this.actions(creator.getContextActions(this.page));
+      }
+      this.page.onFirstRendering();
+      this.page.updateCustomWidgets();
+      this.page.setWasShown(true);
+    });
   }
+
+  get page() {
+    return ko.unwrap(this._page);
+  }
+
+  private addGhostPage() {
+    if(this._isGhost()) {
+      this._isGhost(false);
+      this.page["_addToSurvey"]();
+    }
+  }
+
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel, event: Event) {
-    const targetPage = model.getTargetPage();
-    model.creator.survey.currentPage = targetPage;
+    this.addGhostPage();
+    model.creator.survey.currentPage = model.page;
     model.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
-    if(!this._isNewPage) {
+    if(!model._isGhost()) {
       model.creator.selectElement(model.page);
     }
   }
-  css() {
+  get css() {
+    if(this._isGhost()) {
+      return "svc-page__content--new";
+    }
     return this.creator.isElementSelected(this.page) ? "svc-page__content--selected" : "";
   }
   dragOver(model: PageViewModel, event: DragEvent) {
     if (!event["markEvent"]) {
       event["markEvent"] = true;
+      model.creator.dragDropHelper.ddTarget.moveToPage(<any>model.page);
       model.creator.dragDropHelper.doDragDropOver(event, model.page, true);
       return false;
     }
@@ -63,11 +66,8 @@ export class PageViewModel {
     var helper = model.creator.dragDropHelper;
     if (!event["markEvent"]) {
       event["markEvent"] = true;
-      if(this._isNewPage) {
-        const targetPage: any = model.getTargetPage();
-        model.creator.dragDropHelper.ddTarget.moveToPage(targetPage);
-      }
       helper.doDrop(event, true);
+      this.addGhostPage();
     }
   }
 }

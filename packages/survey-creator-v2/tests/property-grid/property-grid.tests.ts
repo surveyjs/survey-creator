@@ -270,6 +270,28 @@ test("Support question property editor", () => {
   expect(gotoNamePropEd.value).toEqual("q2");
 });
 
+test("Support select base question property editor", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "checkbox", name: "q3" },
+      { type: "dropdown", name: "q4" },
+    ],
+  });
+  var question = <QuestionDropdownModel>survey.getQuestionByName("q4");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var gotoNamePropEd = propertyGrid.survey.getQuestionByName(
+    "choicesFromQuestion"
+  );
+  expect(gotoNamePropEd).toBeTruthy();
+  expect(gotoNamePropEd.choices).toHaveLength(1);
+  expect(gotoNamePropEd.choices[0].value).toEqual("q3");
+  expect(question.choicesFromQuestion).toBeFalsy();
+  gotoNamePropEd.value = "q3";
+  expect(question.choicesFromQuestion).toEqual("q3");
+});
+
 test("Validators property editor", () => {
   var question = new QuestionTextModel("q1");
   question.validators.push(new ExpressionValidator());
@@ -818,7 +840,6 @@ test("options.onValueChangingCallback in matrix", () => {
   question.addColumn("col1");
   question.addColumn("col2");
   question.addColumn("col3");
-  var propertyGrid = new PropertyGridModelTester(question);
   var propertyGrid = new PropertyGridModelTester(question, options);
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
@@ -843,7 +864,6 @@ test("options.onGetErrorTextOnValidationCallback in matrix", () => {
   question.addColumn("col1");
   question.addColumn("col2");
   question.addColumn("col3");
-  var propertyGrid = new PropertyGridModelTester(question);
   var propertyGrid = new PropertyGridModelTester(question, options);
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
@@ -872,7 +892,6 @@ test("options.onPropertyValueChanged in matrix", () => {
   question.addColumn("col1");
   question.addColumn("col2");
   question.addColumn("col3");
-  var propertyGrid = new PropertyGridModelTester(question);
   var propertyGrid = new PropertyGridModelTester(question, options);
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")

@@ -4314,6 +4314,91 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         <!-- /ko -->
         
     
+        
+    
+        <!-- ko if: $data.isVisible -->
+        
+    
+        <!-- ko component: { name: 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+        
+  
+        <div
+          aria-label="propertygrid_restfull toolbox item"
+          class="svc-toolbox__item svc-toolbox__item--icon-default"
+          data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+          draggable="true"
+          role="button"
+          tabindex="0"
+          title="propertygrid_restfull"
+        >
+          
+    
+          <span
+            class="svc-toolbox__item-container"
+          >
+             
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-default"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+    
+          </span>
+          
+    
+          <span
+            class="svc-toolbox__item-banner"
+          >
+            
+      
+            <svc-svg-icon
+              params="iconName: icon, size: 24"
+            >
+              <svg
+                class="svc-svg-icon"
+                style="width: 24px; height: 24px;"
+              >
+                <use
+                  xlink:href="#icon-default"
+                />
+              </svg>
+              
+
+            </svc-svg-icon>
+            
+      
+            <span
+              class="svc-toolbox__item-title"
+              data-bind="text: title"
+            >
+              propertygrid_restfull
+            </span>
+            
+    
+          </span>
+          
+    
+  
+        </div>
+        
+
+        <!-- /ko -->
+        
+    
+        <!-- /ko -->
+        
+    
         <!-- /ko -->
         
   
@@ -4353,11 +4438,11 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
-        params="survey: survey, creator: creator"
+        params="survey: survey, creator: creator, page: newPage"
       >
         <div
-          class="svc-page__content"
-          data-bind="click: select, clickBubble: false, css: css(), event: { dragover: dragOver, drop: drop }"
+          class="svc-page__content svc-page__content--new"
+          data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
         >
           
   

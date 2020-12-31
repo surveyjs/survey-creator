@@ -14,6 +14,8 @@ module.exports = {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
     "@survey/creator/(.*)": "<rootDir>/../survey-creator/src/$1",
+    "survey-knockout":
+      "<rootDir>/../survey-creator-v2/node_modules/survey-knockout/survey.ko.js",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

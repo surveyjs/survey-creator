@@ -59,6 +59,7 @@ export class PropertyPanelViewModel {
     this.setupSurvey = ko.computed(() => {
       survey().showQuestionNumbers = "off";
       survey().css = creatorCss;
+      /*
       survey()
         .getAllQuestions()
         .forEach((question) => {
@@ -66,6 +67,7 @@ export class PropertyPanelViewModel {
             question.renderAs = "dropdown";
           }
         });
+      */
     });
   }
   public dispose() {
