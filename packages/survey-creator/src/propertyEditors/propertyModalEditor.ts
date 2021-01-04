@@ -272,15 +272,59 @@ export class SurveyPropertyHtmlEditor extends SurveyPropertyTextEditor {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("text", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyTextEditor(property);
-});
-SurveyPropertyEditorFactory.registerEditor("html", function (
-  property: Survey.JsonObjectProperty
-): SurveyPropertyEditorBase {
-  return new SurveyPropertyHtmlEditor(property);
-});
+export class SurveyPropertyStringsEditor extends SurveyPropertyModalEditor {
+  public koTextValue: any;
+  constructor(property: Survey.JsonObjectProperty) {
+    super(property);
+    this.koTextValue = ko.observable("");
+    this.koTextValue.subscribe((newValue) => {
+      this.onTextValueChanged(newValue);
+    });
+  }
+  public get editorType(): string {
+    return "string[]";
+  }
+  public get editorTypeTemplate(): string {
+    return "strings";
+  }
+  private isSettingInitialValue = false;
+  public beforeShowCore() {
+    super.beforeShowCore();
+    var value = this.koValue();
+    this.isSettingInitialValue = true;
+    if (!value) {
+      this.koTextValue("");
+    } else {
+      if (Array.isArray(value)) {
+        value = value.join("\n");
+      }
+      this.koTextValue(value);
+    }
+    this.isSettingInitialValue = false;
+  }
+  private onTextValueChanged(newValue: string) {
+    if (this.isSettingInitialValue) return;
+    this.koValue(!!newValue ? newValue.split("\n") : []);
+  }
+}
+
+SurveyPropertyEditorFactory.registerEditor(
+  "text",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyPropertyTextEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "html",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyPropertyHtmlEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "string[]",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyPropertyStringsEditor(property);
+  }
+);
 SurveyPropertyEditorFactory.registerTypeForCellEditing("text", "string");
 SurveyPropertyEditorFactory.registerTypeForCellEditing("html", "string");
