@@ -1620,17 +1620,23 @@ export class SurveyCreator
       sender,
       arrayChanges
     );
-    if (name === "name" && this.isObjQuestion(sender) && !sender["valueName"]) {
-      this.updateConditions(oldValue, sender["name"]);
+    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+    this.undoRedoManager.stopTransaction();
+  }
+  private updateConditionsOnQuestionNameChanged(
+    obj: Survey.Base,
+    propertyName: string,
+    oldValue: any
+  ) {
+    if (!this.isObjQuestion(obj)) return;
+    if (propertyName === "name" && !obj["valueName"]) {
+      this.updateConditions(oldValue, obj["name"]);
     }
-    if (name === "valueName" && this.isObjQuestion(sender)) {
-      var oldName = !!oldValue ? oldValue : sender["name"];
-      var newName = !!sender["valueName"]
-        ? sender["valueName"]
-        : sender["name"];
+    if (propertyName === "valueName") {
+      var oldName = !!oldValue ? oldValue : obj["name"];
+      var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
       this.updateConditions(oldName, newName);
     }
-    this.undoRedoManager.stopTransaction();
   }
   private isObjQuestion(obj: Survey.Base) {
     var classInfo = Survey.Serializer.findClass(obj.getType());
@@ -2067,6 +2073,7 @@ export class SurveyCreator
     this.showQuestionEditor(element, onClose);
   }
   private updateConditions(oldName: string, newName: string) {
+    if (oldName === newName) return;
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
   }
   public get showModalOnElementEditing(): boolean {
@@ -2103,12 +2110,24 @@ export class SurveyCreator
         )
       : null;
     var isCanceled = true;
+    var oldName = element["name"];
+    var oldValueName = element["valueName"];
     this.questionEditorWindow.show(
       element,
       elWindow,
       function (question) {
         self.onQuestionEditorChanged(question);
         isCanceled = false;
+        if (oldName !== question["name"]) {
+          self.updateConditionsOnQuestionNameChanged(question, "name", oldName);
+        }
+        if (oldValueName !== question["valueName"]) {
+          self.updateConditionsOnQuestionNameChanged(
+            question,
+            "valueName",
+            oldValueName
+          );
+        }
       },
       this,
       function () {
