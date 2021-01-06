@@ -76,6 +76,29 @@ test("Add condition", () => {
   expect(conditionEditor.isReady).toEqual(true);
   expect(conditionEditor.text).toEqual("{q} = 1 and {q2} = 2");
 });
+test("Do not delete the only condition, but clear it", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q" },
+      { type: "text", name: "q2" },
+    ],
+  });
+  var conditionEditor = new ConditionEditorBase(
+    survey,
+    survey.getQuestionByName("q1")
+  );
+  conditionEditor.text = "{q} = 1";
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  expect(conditionEditor.isReady).toEqual(true);
+  conditionEditor.panel.removePanel(0);
+  expect(conditionEditor.panel.panelCount).toEqual(1);
+  expect(conditionEditor.isReady).toEqual(false);
+  var editPanel = conditionEditor.panel.panels[0];
+  var nameQuestion = editPanel.getQuestionByName("questionName");
+  expect(nameQuestion.isEmpty()).toBeTruthy();
+});
+
 test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679", () => {
   var survey = new SurveyModel({
     questions: [

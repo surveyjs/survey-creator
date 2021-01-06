@@ -319,6 +319,11 @@ export class ConditionEditorBase {
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
     });
+    this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
+      if (options.question.panelCount == 0) {
+        options.question.addPanel();
+      }
+    });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
