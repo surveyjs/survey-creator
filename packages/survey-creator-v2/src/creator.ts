@@ -7,7 +7,7 @@ import { QuestionConverter } from "@survey/creator/questionconverter";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { DragDropHelper } from "./dragdrophelper";
 import { PropertyGrid } from "./property-grid";
-import { TabJsonEditorModel } from "./components/tabs/json-editor";
+import { TabJsonEditorPlugin } from "./components/tabs/json-editor";
 
 export interface ICreatorPlugin {
   activate: () => void;
@@ -221,7 +221,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
   private initTabsPlugin(): void {
     if (this.showJSONEditorTab) {
-      new TabJsonEditorModel(this);
+      new TabJsonEditorPlugin(this);
     }
   }
 

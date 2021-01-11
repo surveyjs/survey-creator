@@ -7,23 +7,97 @@ import "./json-editor.scss";
 const template: any = require("./json-editor.html");
 // import template from "./json-editor.html";
 
-export class TabJsonEditorModel implements ICreatorPlugin {
-  public static updateTextTimeout: number = 1000;
+export interface ITabJsonModel {
+  init(editorElement: HTMLElement): void;
+  onJsonEditorChanged(): void;
+  processJson(text: string): void;
+}
+
+export class TabJsonTextareaModel implements ITabJsonModel {
+  constructor(private plugin: TabJsonEditorPlugin) {
+  }
+
+  public init(_: HTMLElement): void {}
+  public onJsonEditorChanged(): void {
+    this.plugin.isJSONChanged = true;
+    this.plugin.onJsonEditorChanged();
+  }
+  public processJson(text: string): void {
+
+  }
+}
+
+export class TabJsonAceEditorModel implements ITabJsonModel {
   public static aceBasePath: string = "";
-  private koErrors: ko.ObservableArray<any> = ko.observableArray();
-  private isInitialJSON: boolean = false;
-  private isJSONChanged: boolean = false;
-  private isProcessingImmediately: boolean = false;
-  private textWorker: SurveyTextWorker;
   private aceEditor: AceAjax.Editor;
   private aceCanUndo: ko.Observable<boolean> = ko.observable(false);
   private aceCanRedo: ko.Observable<boolean> = ko.observable(false);
+  
+  constructor(private plugin: TabJsonEditorPlugin) {
+  }
+
+  public init(editorElement: HTMLElement): void {
+    this.aceEditor = ace.edit(<HTMLElement>editorElement.querySelector(".svc-json-editor"));
+    this.aceEditor.setReadOnly(this.plugin.creator.readOnly);
+    if (TabJsonAceEditorModel.aceBasePath) {
+      try {
+        ace["config"].set("basePath", TabJsonAceEditorModel.aceBasePath);
+        this.aceEditor.session.setMode("ace/mode/json");
+      } catch {}
+    }
+    const self: TabJsonAceEditorModel = this;
+    this.aceEditor.setShowPrintMargin(false);
+    this.aceEditor.getSession().on("change", () => {
+      self.onJsonEditorChanged();
+    });
+    this.aceEditor.on("input", () => {
+      // if (self.isInitialJSON) {
+      //   self.isInitialJSON = false;
+      //   self.aceEditor.getSession().getUndoManager().markClean();
+      //   self.updateUndoRedoState();
+      //   return;
+      // }
+      // if (self.aceEditor.getSession().getUndoManager().isClean()) {
+      //   self.isJSONChanged = false;
+      //   return;
+      // }
+      // self.isJSONChanged = true;
+    });
+    this.aceEditor.getSession().setUseWorker(true);
+    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+  }
+  private updateUndoRedoState(): void {
+    const undoManager: AceAjax.UndoManager = this.aceEditor.getSession().getUndoManager();
+    this.aceCanUndo(undoManager.hasUndo());
+    this.aceCanRedo(undoManager.hasRedo());
+  }
+  public onJsonEditorChanged(): void {
+    this.updateUndoRedoState();
+    this.plugin.onJsonEditorChanged();
+  }
+  public processJson(text: string): void {
+
+  }
+  public static hasAceEditor(): boolean {
+    return typeof ace !== "undefined";
+  }
+}
+
+export class TabJsonEditorPlugin implements ICreatorPlugin {
+  public static updateTextTimeout: number = 1000;
+  public model: ITabJsonModel;
+
+  private koErrors: ko.ObservableArray<any> = ko.observableArray();
+  private isInitialJSON: boolean = false;
+  public isJSONChanged: boolean = false;
+  private isProcessingImmediately: boolean = false;
+  private textWorker: SurveyTextWorker;
   private subscrKoText: ko.Subscription;
   private subscrKoViewType: ko.Subscription;
   private jsonEditorChangedTimeoutId: number = -1;
 
   constructor(public creator: SurveyCreator) {
-    const self: TabJsonEditorModel = this;
+    const self: TabJsonEditorPlugin = this;
     // this.subscrKoText = this.koText.subscribe(() => {
     //   self.onJsonEditorChanged();
     // });
@@ -70,8 +144,9 @@ export class TabJsonEditorModel implements ICreatorPlugin {
     // return false;
   }
   public get text(): string {
+    return "";
     // if (!this.hasAceEditor) return this.koText();
-    return this.aceEditor.getValue();
+    // return this.aceEditor.getValue();
   }
   public set text(value: string) {
     this.isProcessingImmediately = true;
@@ -84,39 +159,30 @@ export class TabJsonEditorModel implements ICreatorPlugin {
     this.processJson(value);
     this.isProcessingImmediately = false;
   }
-  private updateUndoRedoState(): void {
-    // if (this.hasAceEditor) {
-    //   let undoManager = this.aceEditor.getSession().getUndoManager();
-    //   this.aceCanUndo(undoManager.hasUndo());
-    //   this.aceCanRedo(undoManager.hasRedo());
-    // }
-  }
-  private onJsonEditorChanged(): void {
-    // if (!this.hasAceEditor) {
-    //   this.isJSONChanged = true;
-    // }
-    this.updateUndoRedoState();
+  public onJsonEditorChanged(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
       clearTimeout(this.jsonEditorChangedTimeoutId);
     }
     if (this.isProcessingImmediately) {
       this.jsonEditorChangedTimeoutId = -1;
-    } else {
-      const self: TabJsonEditorModel = this;
+    }
+    else {
+      const self: TabJsonEditorPlugin = this;
       this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
         self.jsonEditorChangedTimeoutId = -1;
         self.processJson(self.text);
-      }, TabJsonEditorModel.updateTextTimeout);
+      }, TabJsonEditorPlugin.updateTextTimeout);
     }
   }
   private processJson(text: string): void {
     this.textWorker = new SurveyTextWorker(text);
-    if (this.aceEditor) {
-      this.aceEditor.getSession().setAnnotations(
-        this.createAnnotations(this.textWorker.errors));
-    } else {
+    // if (this.aceEditor) {
+    //   this.aceEditor.getSession().setAnnotations(
+    //     this.createAnnotations(this.textWorker.errors));
+    // }
+    // else {
       this.koErrors(this.textWorker.errors);
-    }
+    // }
   }
   private createAnnotations(errors: any[]): AceAjax.Annotation[] {
     const annotations: AceAjax.Annotation[] = [];
@@ -134,40 +200,13 @@ export class TabJsonEditorModel implements ICreatorPlugin {
   }
   private show(value: string): any {
     this.text = value;
-    if (this.aceEditor) {
-      this.aceEditor.focus();
-    }
+    // if (this.aceEditor) {
+    //   this.aceEditor.focus();
+    // }
     this.isJSONChanged = false;
   }
   private initAceEditor(editorElement: HTMLElement) {
-    this.aceEditor = ace.edit(editorElement);
-    // this.aceEditor.setReadOnly(this.readOnly);
-    const self: TabJsonEditorModel = this;
-    if (TabJsonEditorModel.aceBasePath) {
-      try {
-        ace["config"].set("basePath", TabJsonEditorModel.aceBasePath);
-        this.aceEditor.session.setMode("ace/mode/json");
-      } catch {}
-    }
-    self.aceEditor.setShowPrintMargin(false);
-    self.aceEditor.getSession().on("change", () => {
-      self.onJsonEditorChanged();
-    });
-    self.aceEditor.on("input", () => {
-      if (self.isInitialJSON) {
-        self.isInitialJSON = false;
-        self.aceEditor.getSession().getUndoManager().markClean();
-        self.updateUndoRedoState();
-        return;
-      }
-      if (self.aceEditor.getSession().getUndoManager().isClean()) {
-        self.isJSONChanged = false;
-        return;
-      }
-      self.isJSONChanged = true;
-    });
-    this.aceEditor.getSession().setUseWorker(true);
-    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+    
   }
   public dispose(): void {
     this.creator.getSurveyJSONTextCallback = undefined;
@@ -184,21 +223,24 @@ export class TabJsonEditorModel implements ICreatorPlugin {
 }
 
 export class TabJsonEditorViewModel {
-  public model: TabJsonEditorModel;
+  public plugin: TabJsonEditorPlugin;
   private koText: ko.Observable<string> = ko.observable("");
 
-  constructor(model: TabJsonEditorModel, element: any) {
-    this.model = model;
-    // model.onTextChangedCallback = val => this.text(val);
+  constructor(model: TabJsonEditorPlugin, element: any) {
+    this.plugin = model;
     this.koText(model.creator.text);
+    // model.onTextChangedCallback = val => this.text(val);
+    if (this.hasAceEditor) {
+      this.plugin.model.init(element);
+    }
   }
   public get hasAceEditor(): boolean {
-    return typeof ace !== "undefined";
+    return TabJsonAceEditorModel.hasAceEditor();
   }
-  private get readOnly()  {
-    return this.model.creator.readOnly;
+  public get readOnly(): boolean {
+    return this.plugin.creator.readOnly;
   }
-  dispose() {
+  public dispose() {
     // this.model.onTextChangedCallback = undefined;
   }
 }
