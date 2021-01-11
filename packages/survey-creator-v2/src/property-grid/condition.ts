@@ -10,7 +10,7 @@ import {
   Survey,
 } from "survey-knockout";
 import { PropertyGridEditorCollection, PropertyGridModel } from "./index";
-import { ConditionEditorBase } from "./condition-survey";
+import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 PropertyGridEditorCollection.register({
@@ -49,7 +49,7 @@ PropertyGridEditorCollection.register({
     evtOptions: any,
     options: ISurveyCreatorOptions
   ) {
-    var editor = new ConditionEditorBase(
+    var editor = new ConditionEditor(
       originalQuestion.survey,
       originalQuestion,
       options,

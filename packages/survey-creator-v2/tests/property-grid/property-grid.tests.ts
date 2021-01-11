@@ -114,7 +114,23 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.choices[0].value).toEqual("");
   expect(localeQuestion.choices[0].text).toEqual("Default (english)");
 });
+/* Wait for v1.8.24
+test("string[] property editor", () => {
+  Serializer.addProperty("text", "prop1:string[]");
 
+  var question = new QuestionTextModel("q1");
+  question.prop1 = ["item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var prop1Question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(prop1Question.getType()).toEqual("comment");
+  expect(prop1Question.value).toEqual("item1/nitem2");
+  prop1Question.value = "item1/nitem2/nitem3";
+  expect(question.prop1).toHaveLength(3);
+  expect(question.prop1[2]).toExpect("item3");
+
+  Serializer.removeProperty("text", "prop1");
+});
+*/
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];

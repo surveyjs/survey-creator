@@ -9,7 +9,7 @@ import {
   ItemValue,
 } from "survey-knockout";
 import {
-  ConditionEditorBase,
+  ConditionEditor,
   ConditionEditorItemsBuilder,
   ConditionEditorItem,
 } from "../../src/property-grid/condition-survey";
@@ -37,7 +37,7 @@ test("Setup simple panel", () => {
       { type: "text", name: "question3" },
     ],
   });
-  var conditionEditor = new ConditionEditorBase(
+  var conditionEditor = new ConditionEditor(
     survey,
     survey.getQuestionByName("question3")
   );
@@ -58,7 +58,7 @@ test("Add condition", () => {
       { type: "text", name: "q2" },
     ],
   });
-  var conditionEditor = new ConditionEditorBase(
+  var conditionEditor = new ConditionEditor(
     survey,
     survey.getQuestionByName("q1")
   );
@@ -84,7 +84,7 @@ test("Do not delete the only condition, but clear it", () => {
       { type: "text", name: "q2" },
     ],
   });
-  var conditionEditor = new ConditionEditorBase(
+  var conditionEditor = new ConditionEditor(
     survey,
     survey.getQuestionByName("q1")
   );
@@ -106,7 +106,7 @@ test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679"
       { type: "dropdown", name: "q2" },
     ],
   });
-  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("q1"));
+  var editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("operator").value).toEqual("equal");
@@ -121,7 +121,7 @@ test("Apostrophes in answers break VisibleIf - https://github.com/surveyjs/edito
       { type: "dropdown", name: "q2" },
     ],
   });
-  var editor = new ConditionEditorBase(survey, survey.getQuestionByName("q1"));
+  var editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("operator").value).toEqual("equal");
@@ -150,10 +150,7 @@ test("Add question for dynamic panel", () => {
     ],
   });
   var pd = <QuestionPanelDynamicModel>survey.getQuestionByName("pd");
-  var editor = new ConditionEditorBase(
-    survey,
-    pd.template.getQuestionByName("q1")
-  );
+  var editor = new ConditionEditor(survey, pd.template.getQuestionByName("q1"));
   editor.text = "{panel.q2} = 1";
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.addPanel();
@@ -175,7 +172,7 @@ test("Use question.valueName, bug: #353", () => {
   matrix.addColumn("column1");
   matrix.valueName = "val3";
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
 
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "val2";
@@ -204,7 +201,7 @@ test("Use question.valueName, bug: #367", () => {
   matrix.rows = ["row1"];
   matrix.addColumn("column1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
 
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "val2";
@@ -226,7 +223,7 @@ test("Use dropdown question instead of readiogroup for editing values", () => {
   );
   question2.choices = [1, 2, 3, 4];
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
 
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q2";
@@ -240,7 +237,7 @@ test("Add condition from wizard on apply, without pressing 'Add' button", () => 
   var question = page.addNewQuestion("text", "q1");
   var question2 = <Question>page.addNewQuestion("text", "q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
 
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "val2";
@@ -253,7 +250,7 @@ test("Add condition from wizard on apply, without pressing 'Add' button", () => 
   var question = page.addNewQuestion("text", "q1");
   var question2 = <Question>page.addNewQuestion("text", "q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
 
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "val2";
@@ -267,7 +264,7 @@ test("allConditionQuestions", () => {
   page.addNewQuestion("text", "q2");
   page.addNewQuestion("text", "q3");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var res = [];
   for (var i = 0; i < editor.allConditionQuestions.length; i++) {
     var item = editor.allConditionQuestions[i];
@@ -289,7 +286,7 @@ test("allCondtionQuestions for matrix column", () => {
   var column = question.addColumn("col2");
   question.addColumn("col3");
 
-  var editor = new ConditionEditorBase(survey, column);
+  var editor = new ConditionEditor(survey, column);
   expect(
     editor.allConditionQuestions.filter((e) => e.name === "row.col1").length > 0
   ).toBeTruthy();
@@ -309,7 +306,7 @@ test("allCondtionQuestions for panel dynamic", () => {
   question.panelCount = 1;
   var panelQuestion = question.template.questions[1];
 
-  var editor = new ConditionEditorBase(survey, panelQuestion);
+  var editor = new ConditionEditor(survey, panelQuestion);
   expect(
     editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length > 0
   ).toBeTruthy();
@@ -327,7 +324,7 @@ test("Show invisible choices and make all choices enabled, Bug: https://surveyjs
     { value: 1, enabledIf: "{b} = 1" },
   ];
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.allConditionQuestions).toHaveLength(1);
   expect(editor.allConditionQuestions[0].value).toEqual("q2");
 
@@ -347,7 +344,7 @@ test("Error in value input, Bug# T2598 (customer marked it private)", () => {
   });
   var question = survey.getQuestionByName("q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q1";
   panel.getQuestionByName("questionValue").value = 1;
@@ -371,7 +368,7 @@ test("Could not edit value for row.column1 on editing column, Bug# T3376 (custom
     survey.getQuestionByName("question1")
   );
 
-  var editor = new ConditionEditorBase(survey, question.columns[0]);
+  var editor = new ConditionEditor(survey, question.columns[0]);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "row.Column2";
   var questionValue = panel.getQuestionByName("questionValue");
@@ -386,7 +383,7 @@ test("Question has defaultValue and user could not add condition with it, Bug# T
   });
   var question = survey.getQuestionByName("q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.isReady).toEqual(false);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
@@ -414,7 +411,7 @@ test("isReady for empty/non empty", () => {
   });
   var question = survey.getQuestionByName("q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.isReady).toEqual(false);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q1";
@@ -434,7 +431,7 @@ test("set invalid expression", () => {
   });
   var question = survey.getQuestionByName("q2");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = ";
   expect(editor.isReady).toEqual(false);
   var panel = editor.panel.panels[0];
@@ -480,7 +477,7 @@ test("enabled operators", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var checkFun = function (questionName: string, operatorNames: Array<string>) {
     var panel = editor.panel.panels[0];
     panel.getQuestionByName("questionName").value = questionName;
@@ -584,7 +581,7 @@ test("Keep condition value on changing operation when it possible", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
   panel.getQuestionByName("questionValue").value = "item1";
@@ -602,7 +599,7 @@ test("Selectbase + anyof", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual(
@@ -626,7 +623,7 @@ test("expression question", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
@@ -645,7 +642,7 @@ test("Do not show question description", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
   expect(panel.getQuestionByName("questionValue").getType()).toEqual(
@@ -663,7 +660,7 @@ test("Add apostrophes to string value", () => {
   });
   var question = survey.getQuestionByName("q1");
 
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
   panel.getQuestionByName("questionValue").value = "item1";
@@ -692,7 +689,7 @@ test("Parse expressions", () => {
   });
   survey.setVariable("user", "admin");
   var question = survey.getQuestionByName("q4");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'abc' or {q2} = 1 and {q2} = 2";
   expect(editor.isReady).toBeTruthy();
   expect(editor.panel.panels).toHaveLength(3);
@@ -742,7 +739,7 @@ test("Parse calcaluted values, Bug #727 and Bug #740", () => {
     ],
   });
   var question = survey.getQuestionByName("q1");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{var1} = 1";
   expect(editor.isReady).toBeTruthy();
   var panel = editor.panel.panels[0];
@@ -766,7 +763,7 @@ test("Change questionName in panel", () => {
     ],
   });
   var question = survey.getQuestionByName("q4");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'abc'";
   expect(editor.isReady).toBeTruthy();
   var panel = editor.panel.panels[0];
@@ -810,7 +807,7 @@ test("Create expression from scratch", () => {
     ],
   });
   var question = survey.getQuestionByName("q4");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("questionValue").isReadOnly).toBeTruthy();
@@ -843,7 +840,7 @@ test("We are supporting wide mode only", () => {
     ],
   });
   var question = survey.getQuestionByName("q4");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.panel.panels).toHaveLength(1);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
@@ -870,7 +867,7 @@ test("Set question width", () => {
     ],
   });
   var question = survey.getQuestionByName("q4");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   expect(editor.panel.panels).toHaveLength(1);
 
   var panel = editor.panel.panels[0];
@@ -920,7 +917,7 @@ test("Set correct value for array, Bug #700", () => {
     ],
   });
   var question = survey.getQuestionByName("q1");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q2} = ['item1', 'item3']";
   expect(editor.isReady).toBeTruthy();
   var panel = editor.panel.panels[0];
@@ -942,7 +939,7 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
     ],
   });
   var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'a'";
   var panel = editor.panel.panels[0];
   var itemValue = ItemValue.getItemByValue(
@@ -968,7 +965,7 @@ test("remove operators", () => {
   delete settings.operators.contains;
   delete settings.operators.anyof;
   var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'a'";
   var panel = editor.panel.panels[0];
   expect(
@@ -1005,7 +1002,7 @@ test("file question type should not set operator to 'equal'", () => {
     ],
   });
   var question = survey.getQuestionByName("q1");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q2";
   expect(panel.getQuestionByName("operator").value).toEqual("empty");
@@ -1036,7 +1033,7 @@ test("onConditionQuestionsGetListCallback", () => {
     propName = propertyName;
     res.push(survey2.getQuestionByName("question1"));
   };
-  var editor = new ConditionEditorBase(survey, question, options, "visibleIf");
+  var editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(propName).toEqual("visibleIf");
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "question1";
@@ -1055,7 +1052,7 @@ test("valueName with ':', Bug #953", () => {
     ],
   });
   var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "profile:q1";
   panel.getQuestionByName("questionValue").value = "1";
@@ -1072,7 +1069,7 @@ test("convert 000 into '000'", () => {
     ],
   });
   var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q1";
   panel.getQuestionByName("questionValue").value = "000";
@@ -1090,7 +1087,7 @@ test("do not convert '000' into 0", () => {
     ],
   });
   var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditorBase(survey, question);
+  var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = '000'";
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("questionValue").value).toEqual("000");

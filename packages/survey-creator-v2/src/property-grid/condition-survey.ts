@@ -249,7 +249,7 @@ export class ConditionEditorItemsBuilder {
   }
 }
 
-export class ConditionEditorBase {
+export class ConditionEditor {
   private surveyValue: SurveyModel;
   private objectValue: Base;
   private editSurveyValue: SurveyModel;
