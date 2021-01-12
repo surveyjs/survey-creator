@@ -23,7 +23,8 @@ export class TabJsonTextareaModel implements ITabJsonModel {
     this.plugin.onJsonEditorChanged();
   }
   public processJson(text: string): void {
-
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
+    this.koErrors(textWorker.errors);
   }
 }
 
@@ -75,8 +76,24 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
     this.updateUndoRedoState();
     this.plugin.onJsonEditorChanged();
   }
+  private createAnnotations(errors: any[]): AceAjax.Annotation[] {
+    const annotations: AceAjax.Annotation[] = [];
+    for (let i = 0; i < errors.length; i++) {
+      const error: any = errors[i];
+      const annotation: AceAjax.Annotation = {
+        row: error.position.start.row,
+        column: error.position.start.column,
+        text: error.text,
+        type: "error",
+      };
+      annotations.push(annotation);
+    }
+    return annotations;
+  }
   public processJson(text: string): void {
-
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
+    this.aceEditor.getSession().setAnnotations(
+      this.createAnnotations(textWorker.errors));
   }
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";
@@ -170,33 +187,9 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
       const self: TabJsonEditorPlugin = this;
       this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
         self.jsonEditorChangedTimeoutId = -1;
-        self.processJson(self.text);
+        self.model.processJson(self.text);
       }, TabJsonEditorPlugin.updateTextTimeout);
     }
-  }
-  private processJson(text: string): void {
-    this.textWorker = new SurveyTextWorker(text);
-    // if (this.aceEditor) {
-    //   this.aceEditor.getSession().setAnnotations(
-    //     this.createAnnotations(this.textWorker.errors));
-    // }
-    // else {
-      this.koErrors(this.textWorker.errors);
-    // }
-  }
-  private createAnnotations(errors: any[]): AceAjax.Annotation[] {
-    const annotations: AceAjax.Annotation[] = [];
-    for (let i = 0; i < errors.length; i++) {
-      const error: any = errors[i];
-      const annotation: AceAjax.Annotation = {
-        row: error.position.start.row,
-        column: error.position.start.column,
-        text: error.text,
-        type: "error",
-      };
-      annotations.push(annotation);
-    }
-    return annotations;
   }
   private show(value: string): any {
     this.text = value;
