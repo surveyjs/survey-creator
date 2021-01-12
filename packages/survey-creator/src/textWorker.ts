@@ -1,15 +1,6 @@
 import { SurveyJSON5 } from "./json5";
 import * as Survey from "survey-knockout";
 
-class TextParserPropery {
-  isFound: boolean;
-  propertiesCount: number;
-  start: number;
-  end: number;
-  valueStart: number;
-  valueEnd: number;
-}
-
 class SurveyForTextWorker extends Survey.Survey {
   constructor(jsonObj: any) {
     super(jsonObj);
@@ -25,7 +16,6 @@ export class SurveyTextWorker {
   private surveyValue: Survey.Survey;
   private jsonValue: any;
   private surveyObjects: Array<any>;
-  private isSurveyAsPage: boolean;
 
   constructor(public text: string) {
     if (!this.text || this.text.trim() == "") {
@@ -80,12 +70,10 @@ export class SurveyTextWorker {
   private createSurveyObjects(): Array<any> {
     var result = [];
     if (this.surveyValue == null) return result;
-    this.isSurveyAsPage = false;
     for (var i = 0; i < this.surveyValue.pages.length; i++) {
       var page = this.surveyValue.pages[i];
       if (i == 0 && !page["pos"]) {
         page["pos"] = this.surveyValue["pos"];
-        this.isSurveyAsPage = true;
       }
       result.push(page);
       for (var j = 0; j < page.questions.length; j++) {

@@ -43,7 +43,8 @@ export class ToolboxViewModel {
 
   public invisibleItemSelected = (model: any) => {
     this.showInvisibleItems(false);
-    alert(JSON.stringify(model));
+    // alert(JSON.stringify(item));
+    this.creator.clickToolboxItem(model.json);
   };
 
   dispose() {

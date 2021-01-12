@@ -239,7 +239,7 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
     var opt = new Survey.ItemValue("", this.optionsCaption);
     var survey = EditableObject.getSurvey(this.object);
     if (!survey) return [opt];
-    var questions = survey.getAllQuestions();
+    var questions = this.getQuestions(survey);
     if (!questions) questions = [];
     var showTitles = !!this.options && this.options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
@@ -254,6 +254,29 @@ export class SurveyQuestionPropertyEditor extends SurveyDropdownPropertyEditor {
   }
   protected getItemValue(question: Survey.IQuestion): string {
     return question.name;
+  }
+  protected getQuestions(survey: Survey.SurveyModel): Array<Survey.Question> {
+    return survey.getAllQuestions();
+  }
+}
+
+export class SurveyQuestionSelectBasePropertyEditor extends SurveyQuestionPropertyEditor {
+  public get editorType(): string {
+    return "question_selectbase";
+  }
+  protected getQuestions(survey: Survey.SurveyModel): Array<Survey.Question> {
+    var questions = survey.getAllQuestions();
+    var res = [];
+    for (var i = 0; i < questions.length; i++) {
+      if (questions[i] === this.object) continue;
+      if (this.isSelectBaseQuestion(questions[i])) {
+        res.push(questions[i]);
+      }
+    }
+    return res;
+  }
+  private isSelectBaseQuestion(question: Survey.Question): boolean {
+    return Survey.Serializer.isDescendantOf(question.getType(), "selectbase");
   }
 }
 
@@ -336,6 +359,12 @@ SurveyPropertyEditorFactory.registerEditor(
   "question",
   function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
     return new SurveyQuestionPropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "question_selectbase",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyQuestionSelectBasePropertyEditor(property);
   }
 );
 SurveyPropertyEditorFactory.registerEditor(

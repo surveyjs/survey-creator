@@ -3,8 +3,8 @@ if (!window["%hammerhead%"]) {
 
   Survey.StylesManager.applyTheme("modern");
   let options = {
-    showTestSurveyTab: false,
-    showJSONEditorTab: false
+    // showTestSurveyTab: false,
+    // showJSONEditorTab: false
   };
   let creator = new SurveyCreator.SurveyCreator(options);
   let json = {
@@ -15,9 +15,6 @@ if (!window["%hammerhead%"]) {
       }
     ]
   };
-  let survey = new Survey.Model();
-  survey.setDesignMode(true);
-  survey.fromJSON(json);
-  creator.setSurvey(survey);
+  creator.JSON = json;
   ko.applyBindings({ creator: creator });
 }

@@ -86,7 +86,7 @@
   "dependencies": {
     "knockout": "^3.5.1",
     "rmodal": "^1.0.36",
-    "survey-knockout": "^1.8.21"
+    "survey-knockout": "^1.8.23"
   },
   "husky": {
     "hooks": {

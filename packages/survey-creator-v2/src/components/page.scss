@@ -28,6 +28,10 @@ svc-page {
   }
 }
 
+.svc-page__content--new > div:nth-child(1) {
+  pointer-events: none;
+}
+
 .svc-page__add-new-question {
   width: 100%;
   height: calcSize(7);

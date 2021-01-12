@@ -85,6 +85,12 @@ export interface ISurveyCreatorOptions {
     reason: string,
     surveyType?: new (json: any) => Survey.Survey
   );
+  onConditionQuestionsGetListCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: any,
+    list: any[]
+  );
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -161,6 +167,14 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   createSurvey(
     json: any,
     reason: string,
-    surveyType?: new (json: any) => Survey.Survey
+    surveyType?: new (json: any) => Survey.SurveyModel
+  ) {
+    return new Survey.SurveyModel(json);
+  }
+  onConditionQuestionsGetListCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: any,
+    list: any[]
   ) {}
 }

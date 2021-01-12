@@ -6,6 +6,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
+import { ISurveyCreatorOptions } from "./settings";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -14,7 +15,8 @@ export interface ICreatorOptions {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends {[index: string]: any}> {
+export class CreatorBase<T extends { [index: string]: any }>
+  implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -23,6 +25,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
   private showLogicTabValue = ko.observable<boolean>(false);
   private isRTLValue: boolean = false;
   private haveCommercialLicenseValue = ko.observable(false);
+  private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
   protected surveyValue = ko.observable<T>();
 
@@ -96,7 +99,145 @@ export class CreatorBase<T extends {[index: string]: any}> {
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
+  /**
+   * The event is called before showing a property in the Property Grid or in Question Editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid and in Question Editor.
+   */
+  public onShowingProperty: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Obsolete, please use onShowingProperty event.
+   * The event is called before showing a property in the Property Grid or in Question Editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object, Survey, Page, Panel or Question
+   * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
+   * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid or in Question Editor
+   * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
+   * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
+   */
+  public onCanShowProperty: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = this.onShowingProperty;
+  /**
+   * The event is called before rendering a delete button in the Property Grid or in Question Editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey Question
+   * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+   * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
+   */
+  public onCanDeleteItem: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object: Question, Panel, Page or Survey
+   * <br/> options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+   * <br/> options.propertyName the collection property name
+   * <br/> options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
+   * <br/> options.item the collection item that we are going to delete
+   * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
+   */
+  public onCollectionItemDeleting: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
+   * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
+   * <br/> sender the survey creator object that fires the event
+   * <br /> options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
+   * <br/> options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
+   * <br/> options.newItem a new created Survey.ItemValue object.
+   * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
+   */
+  public onItemValueAdded: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.matrix a matrix question where column is located, matrix.columns.
+   * <br/> options.newColumn a new created Survey.MatrixDropdownColumn object.
+   * <br/> options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
+   */
+  public onMatrixColumnAdded: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to control Property Editors UI.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.editorOptions  options that can be changed.
+   * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
+   * <br/> options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
+   * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
+   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
+   */
+  public onSetPropertyEditorOptions: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on generation a new name for a new created element.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.element a new created survey element. It can be question, panel or page
+   * <br/> options.name a new suggested name, that is unique for the current survey. You can suggest your own name. If it is unique, creator will assign it to the element.
+   * <br/> options.isUnique a boolean property, set this property to false, if you want to ask Creator to generate another name
+   */
+  public onGenerateNewName: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.value the property value.
+   * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
+   * @see onPropertyValueChanging
+   */
+  public onPropertyValidationCustomError: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.value the property value.
+   * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
+   * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
+   * @see onPropertyValidationCustomError
+   */
+  public onPropertyValueChanging: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to modify the list (name and titles) of the questions available in a condition editor.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property is edited in the Property Editor.
+   * <br/> options.propertyName  the name of the edited property.
+   * <br/> options.editor the instance of Property Editor.
+   * <br/> options.list the list of the questions available for condition
+   */
+  public onConditionQuestionsGetList: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -246,8 +387,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
 
   koReadOnly = ko.observable(false);
 
-  protected onSetReadOnly(newVal: boolean) {
-  }
+  protected onSetReadOnly(newVal: boolean) {}
 
   /**
    * A boolean property, false by default. Set it to true to deny editing.
@@ -479,12 +619,12 @@ export class CreatorBase<T extends {[index: string]: any}> {
     }
   }
 
-  isCanModifyProperty(
-    obj: Survey.Base,
-    propertyName: string
-  ): boolean {
+  isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
     var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
-    return !property || !this.onIsPropertyReadOnlyCallback(obj, property, property.readOnly);
+    return (
+      !property ||
+      !this.onIsPropertyReadOnlyCallback(obj, property, property.readOnly)
+    );
   }
 
   onIsPropertyReadOnlyCallback(
@@ -586,8 +726,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
     return survey;
   }
 
-  public setModified(options: any = null) {
-  }
+  public setModified(options: any = null) {}
 
   protected convertCurrentObject(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
@@ -632,7 +771,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
     this.setModified({ type: modifiedType, question: element });
   }
 
-  protected setNewNames(element: Survey.IElement) {
+  public setNewNames(element: Survey.IElement) {
     this.newQuestions = [];
     this.newPanels = [];
     this.setNewNamesCore(element);
@@ -762,8 +901,7 @@ export class CreatorBase<T extends {[index: string]: any}> {
     new SurveyLogic(<any>this.survey, <any>this).removeQuestion(name);
   }
 
-  public selectElement(element: any) {
-  }
+  public selectElement(element: any) {}
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
@@ -775,5 +913,234 @@ export class CreatorBase<T extends {[index: string]: any}> {
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
+  protected onCanShowObjectProperty(
+    object: any,
+    property: Survey.JsonObjectProperty,
+    showMode: string,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
+  ): boolean {
+    var options = {
+      obj: object,
+      property: property,
+      canShow: true,
+      showMode: showMode,
+      parentObj: parentObj,
+      parentProperty: parentProperty,
+    };
+    this.onCanShowProperty.fire(this, options);
+    return options.canShow;
+  }
+  protected canDeleteItem(
+    object: any,
+    item: Survey.Base,
+    allowDelete: boolean
+  ): boolean {
+    var options = { obj: object, item: item, canDelete: allowDelete };
+    this.onCanDeleteItem.fire(this, options);
+    return options.canDelete;
+  }
+  private getErrorOnPropertyChanging(
+    obj: Survey.Base,
+    propertyName: string,
+    value: any
+  ): string {
+    if (propertyName !== "name") return null;
+    var newName = this.generateUniqueName(obj, value);
+    if (newName !== value)
+      return this.getLocString("pe.propertyNameIsNotUnique");
+    return null;
+  }
+  protected generateUniqueName(el: Survey.Base, newName: string): string {
+    var options = { element: el, name: newName, isUnique: true };
+    do {
+      if (!options.isUnique) {
+        options.name = SurveyHelper.generateNewName(options.name);
+      }
+      while (!this.isNameUnique(el, options.name)) {
+        options.name = SurveyHelper.generateNewName(options.name);
+      }
+      options.isUnique = true;
+      var oldName = options.name;
+      this.onGenerateNewName.fire(this, options);
+      if (oldName != options.name) {
+        options.isUnique = this.isNameUnique(el, options.name);
+      }
+    } while (!options.isUnique);
+    return options.name;
+  }
+  protected isNameUnique(el: Survey.Base, newName: string): boolean {
+    if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
+    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+      return false;
+    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+  }
+  private isNameUniqueInArray(
+    elements: Array<any>,
+    el: Survey.Base,
+    newName: string
+  ): boolean {
+    newName = newName.toLowerCase();
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i] != el && elements[i].name.toLowerCase() == newName)
+        return false;
+    }
+    return true;
+  }
+  protected doPropertyGridChanged() {}
 
+  //implements ISurveyCreatorOptions
+  get alwaySaveTextInPropertyEditors(): boolean {
+    return this.alwaySaveTextInPropertyEditorsValue;
+  }
+  set alwaySaveTextInPropertyEditors(value: boolean) {
+    this.alwaySaveTextInPropertyEditorsValue = value;
+  }
+  onCanShowPropertyCallback(
+    object: any,
+    property: Survey.JsonObjectProperty,
+    showMode: string = null,
+    parentObj: any,
+    parentProperty: Survey.JsonObjectProperty
+  ): boolean {
+    return this.onCanShowObjectProperty(
+      object,
+      property,
+      showMode,
+      parentObj,
+      parentProperty
+    );
+  }
+  onCanDeleteItemCallback(
+    object: any,
+    item: Survey.Base,
+    allowDelete: boolean
+  ): boolean {
+    return this.canDeleteItem(object, item, allowDelete);
+  }
+  onCollectionItemDeletingCallback(
+    obj: Survey.Base,
+    property: Survey.JsonObjectProperty,
+    collection: Array<Survey.Base>,
+    item: Survey.Base
+  ): boolean {
+    if (this.onCollectionItemDeleting.isEmpty) return true;
+    var options = {
+      obj: obj,
+      property: property,
+      propertyName: property.name,
+      collection: collection,
+      item: item,
+      allowDelete: true,
+    };
+    this.onCollectionItemDeleting.fire(this, options);
+    return options.allowDelete;
+  }
+  onItemValueAddedCallback(
+    obj: Survey.Base,
+    propertyName: string,
+    itemValue: Survey.ItemValue,
+    itemValues: Array<Survey.ItemValue>
+  ) {
+    var options = {
+      obj: obj,
+      propertyName: propertyName,
+      newItem: itemValue,
+      itemValues: itemValues,
+    };
+    this.onItemValueAdded.fire(this, options);
+  }
+  onMatrixDropdownColumnAddedCallback(
+    matrix: Survey.Question,
+    column: Survey.MatrixDropdownColumn,
+    columns: Array<Survey.MatrixDropdownColumn>
+  ) {
+    var options = { newColumn: column, matrix: matrix, columns: columns };
+    this.onMatrixColumnAdded.fire(this, options);
+  }
+  onSetPropertyEditorOptionsCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editorOptions: any
+  ) {
+    var options = {
+      propertyName: propertyName,
+      obj: obj,
+      editorOptions: editorOptions,
+    };
+    this.onSetPropertyEditorOptions.fire(this, options);
+  }
+  onGetErrorTextOnValidationCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    value: any
+  ): string {
+    var error = this.getErrorOnPropertyChanging(obj, propertyName, value);
+    if (!!error) return error;
+    var options = {
+      propertyName: propertyName,
+      obj: obj,
+      value: value,
+      error: "",
+    };
+    this.onPropertyValidationCustomError.fire(this, options);
+    return options.error;
+  }
+  onValueChangingCallback(options: any) {
+    this.onPropertyValueChanging.fire(this, options);
+  }
+  public onPropertyValueChanged(
+    property: Survey.JsonObjectProperty,
+    obj: any,
+    newValue: any
+  ) {
+    var oldValue = obj[property.name];
+    this.setModified({
+      type: "PROPERTY_CHANGED",
+      name: property.name,
+      target: obj,
+      oldValue: oldValue,
+      newValue: newValue,
+    });
+    //TODO add a flag to a property, may change other properties
+    if (
+      property.name == "hasComment" ||
+      property.name == "hasNone" ||
+      property.name == "hasOther" ||
+      property.name == "hasSelectAll" ||
+      property.name == "locale"
+    ) {
+      this.doPropertyGridChanged();
+    }
+    return null;
+  }
+  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+    return title;
+  }
+  onConditionQuestionsGetListCallback(
+    propertyName: string,
+    obj: Survey.Base,
+    editor: any,
+    list: any[]
+  ) {
+    var options = {
+      propertyName: propertyName,
+      obj: obj,
+      editor: editor,
+      list: list,
+    };
+    this.onConditionQuestionsGetList.fire(this, options);
+    if (options.list !== list) {
+      list.splice(0, list.length);
+      for (var i = 0; i < options.list.length; i++) {
+        list.push(options.list[i]);
+      }
+    }
+  }
+  startUndoRedoTransaction() {
+    //TODO
+  }
+  stopUndoRedoTransaction() {
+    //TODO
+  }
 }

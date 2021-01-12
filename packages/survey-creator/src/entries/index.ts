@@ -110,6 +110,7 @@ import "../localization/norwegian";
 import "../localization/hungarian";
 import "../localization/russian";
 import "../localization/tajik";
+import "../localization/dutch";
 
 export {
   Translation,

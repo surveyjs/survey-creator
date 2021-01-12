@@ -4,6 +4,9 @@
     <!-- ko foreach: survey.pages -->
     <svc-page params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
     <!-- /ko -->
+    <!-- ko if: showNewPage -->
+    <svc-page params="survey: survey, creator: creator, page: newPage"></svc-page>
+    <!-- /ko -->
   </div>
 </div>
 <svc-page-navigator params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"></svc-page-navigator>
