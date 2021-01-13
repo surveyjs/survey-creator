@@ -47,6 +47,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         { component: "sv-action-bar-separator" },
         {
           iconName: "icon-settings",
+          needSeparator: true,
           action: () => this.selectElement(this.survey),
           isActive: ko.computed(() => this.isElementSelected(this.survey)),
           title: "Settings",
@@ -71,11 +72,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
-          component: "sv-action-bar-separator",
-        },
-        {
           iconName: "icon-preview",
           icon: "icon-preview",
+          needSeparator: true,
           css: ko.computed(() =>
             this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
           ),

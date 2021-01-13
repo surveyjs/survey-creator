@@ -1,43 +1,35 @@
 import * as ko from "knockout";
 import { VerticalResponsibilityManager } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
+import { ResponsibleElement } from "survey-knockout";
 import "./toolbox.scss";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";
 
-export class ToolboxViewModel {
+export class ToolboxViewModel extends ResponsibleElement {
   private _categoriesSubscription: ko.Computed;
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;
-  public invisibleItems = ko.observableArray<any>();
   public showInvisibleItems = ko.observable(false);
 
   constructor(
     private _categories: any[] | ko.Computed<Array<any>>,
     creator: SurveyCreator
   ) {
+    super();
+    this.dotsItem.horizontalPosition = "right";
+    this.dotsItem.verticalPosition = "top";
     this.creator = creator;
     this._categoriesSubscription = ko.computed(() => {
       let categories = ko.unwrap(_categories);
-      categories.forEach((category: any) => {
-        (ko.unwrap(category.items) || []).forEach((item) => {
+      categories.forEach((category: any, categoryIndex) => {
+        (ko.unwrap(category.items) || []).forEach((item, index) => {
+          if (categoryIndex != 0 && index == 0) item.needSeparator = true;
           item.isVisible = ko.observable(true);
+          this.items.push(item);
         });
       });
       this.categories(categories);
-    });
-  }
-  showFirstN(visibleItemsCount: number) {
-    let leftItemsToShow = visibleItemsCount;
-    this.invisibleItems([]);
-    this.categories().forEach((category: any) => {
-      (ko.unwrap(category.items) || []).forEach((item) => {
-        item.isVisible(leftItemsToShow >= 0);
-        if (leftItemsToShow < 0) {
-          this.invisibleItems.push(item);
-        }
-        leftItemsToShow--;
-      });
     });
   }
 
@@ -58,6 +50,15 @@ ko.components.register("svc-toolbox", {
       const model = new ToolboxViewModel(params.categories, params.creator);
       var container = componentInfo.element.querySelector(".svc-toolbox");
       var manager = new VerticalResponsibilityManager(container, model, 40);
+      manager.getItemSizes = () => {
+        var widths: number[] = [];
+        container
+          .querySelectorAll("div.svc-toolbox__tool")
+          .forEach((actionContainer) => {
+            widths.push((<HTMLDivElement>actionContainer).offsetHeight);
+          });
+        return widths;
+      };
       let updateVisibleItems = setInterval(() => {
         manager.process();
       }, 100);

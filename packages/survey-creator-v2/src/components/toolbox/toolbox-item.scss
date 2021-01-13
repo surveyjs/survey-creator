@@ -17,7 +17,7 @@
 .svc-toolbox__item-container {
   padding: calcSize(1) 12px;
   outline: none;
-  
+
   .sv-svg-icon use {
     fill: $foreground-light;
   }
@@ -59,4 +59,3 @@
     padding-right: calcSize(2);
   }
 }
-
