@@ -111,6 +111,7 @@ import "../localization/hungarian";
 import "../localization/russian";
 import "../localization/tajik";
 import "../localization/dutch";
+import "../localization/croatian";
 
 export {
   Translation,
