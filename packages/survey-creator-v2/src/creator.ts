@@ -44,7 +44,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
           title: "Redo",
           showTitle: false,
         },
-        { component: "sv-action-bar-separator" },
         {
           iconName: "icon-settings",
           needSeparator: true,

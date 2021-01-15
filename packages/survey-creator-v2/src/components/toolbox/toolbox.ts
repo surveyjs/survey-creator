@@ -1,12 +1,12 @@
 import * as ko from "knockout";
 import { VerticalResponsibilityManager } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
-import { ResponsibleElement } from "survey-knockout";
+import { AdaptiveElement } from "survey-knockout";
 import "./toolbox.scss";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";
 
-export class ToolboxViewModel extends ResponsibleElement {
+export class ToolboxViewModel extends AdaptiveElement {
   private _categoriesSubscription: ko.Computed;
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;

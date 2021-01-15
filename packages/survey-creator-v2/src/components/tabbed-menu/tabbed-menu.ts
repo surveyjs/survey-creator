@@ -1,12 +1,12 @@
 import * as ko from "knockout";
 import { ITabItem } from "./tabbed-menu-item";
-import { ResponsibilityManager, ResponsibleElement } from "survey-knockout";
+import { ResponsibilityManager, AdaptiveElement } from "survey-knockout";
 
 import "./tabbed-menu.scss";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
-export class TabbedMenuViewModel extends ResponsibleElement {
+export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
   constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>) {
     super();
