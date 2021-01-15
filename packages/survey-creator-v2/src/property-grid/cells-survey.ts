@@ -9,8 +9,9 @@ import {
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
 import { editorLocalization } from "@survey/creator/editorLocalization";
+import { IPropertyEditorSetup } from "./index";
 
-export class CellsEditor {
+export class CellsEditor implements IPropertyEditorSetup {
   private editSurveyValue: SurveyModel;
   private editMatrixValue: QuestionMatrixDropdownModel;
   constructor(
