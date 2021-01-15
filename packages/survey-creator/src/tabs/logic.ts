@@ -298,6 +298,9 @@ export class SurveyLogicAction {
   public get name(): string {
     return !!this.logicType ? this.logicType.displayName : null;
   }
+  public get logicTypeName(): string {
+    return !!this.logicType ? this.logicType.name : null;
+  }
   public get text(): string {
     return !!this.logicType ? this.logicType.getDisplayText(this.element) : "";
   }
@@ -306,14 +309,20 @@ export class SurveyLogicAction {
   }
   public hasError(): boolean {
     if (!this.logicType) {
-      this.koErrorText(editorLocalization.getString("pe.conditionActionEmpty"));
+      this.errorText = editorLocalization.getString("pe.conditionActionEmpty");
       return true;
     }
-    this.koErrorText("");
+    this.errorText = "";
     if (!!this.itemSelector) return this.itemSelector.hasError();
     if (!!this.templateObject && !!this.templateObject.hasError)
       return this.templateObject.hasError();
     return false;
+  }
+  public get errorText(): string {
+    return this.koErrorText();
+  }
+  public set errorText(val: string) {
+    this.koErrorText(val);
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
@@ -750,6 +759,17 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     any
   > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
   /**
+   * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
+   * You can use options.item.actions to access actions and optionally set errorText to a particular action.
+   * <br/> options.item is the saved logic item.
+   * <br/> usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
+   * <br/> error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
+   */
+  public onLogicItemValidation: Survey.Event<
+    (sender: SurveyLogic, options: any) => any,
+    any
+  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  /**
    * The event is called before logic item is being removed.
    * <br/> options.allowRemove is the option you can set to false and prevent removing.
    * <br/> options.item is the logic item to remove.
@@ -913,6 +933,15 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
         }
       }
     }
+    var exp = new Survey.ExpressionRunner(this.expressionEditor.koValue());
+    var options = {
+      item: this.editableItem,
+      error: text,
+      usedNamesInExpression: exp.getVariables(),
+    };
+    this.onLogicItemValidation.fire(this, options);
+    text = options.error;
+
     this.koErrorText(text);
     return !!text;
   }

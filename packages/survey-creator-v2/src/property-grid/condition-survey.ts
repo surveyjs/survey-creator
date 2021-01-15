@@ -249,7 +249,7 @@ export class ConditionEditorItemsBuilder {
   }
 }
 
-export class ConditionEditorBase {
+export class ConditionEditor {
   private surveyValue: SurveyModel;
   private objectValue: Base;
   private editSurveyValue: SurveyModel;
@@ -318,6 +318,11 @@ export class ConditionEditorBase {
     this.allConditionQuestions = this.createAllConditionQuestions();
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
+    });
+    this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
+      if (options.question.panelCount == 0) {
+        options.question.addPanel();
+      }
     });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);

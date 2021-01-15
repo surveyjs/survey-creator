@@ -92,19 +92,20 @@ QUnit.test("Add new action immediately", function (assert) {
     "Set q1.visibleIf correctly"
   );
 });
-QUnit.test("Do not add expression question into visible Items", function (
-  assert
-) {
-  var survey = new Survey.SurveyModel({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "expression", name: "q2", expression: "{q1}+1" },
-    ],
-  });
-  var logic = new SurveyLogic(survey);
-  assert.equal(logic.items.length, 0, "There is not visible items");
-  assert.equal(logic.invisibleItems.length, 1, "There is one invisible item");
-});
+QUnit.test(
+  "Do not add expression question into visible Items",
+  function (assert) {
+    var survey = new Survey.SurveyModel({
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "expression", name: "q2", expression: "{q1}+1" },
+      ],
+    });
+    var logic = new SurveyLogic(survey);
+    assert.equal(logic.items.length, 0, "There is not visible items");
+    assert.equal(logic.invisibleItems.length, 1, "There is one invisible item");
+  }
+);
 QUnit.test("Add new item", function (assert) {
   var survey = new Survey.SurveyModel();
   var logic = new SurveyLogic(survey);
@@ -1205,60 +1206,110 @@ QUnit.test("Logic onLogicItemSaved event", function (assert) {
   logic.saveEditableItem();
   assert.equal(callCount, 1, "Event has been called");
 });
-
-QUnit.test("Logic onLogicItemRemoving/onLogicItemRemoved events", function (
-  assert
-) {
+QUnit.test("Logic onLogicItemValidation event", function (assert) {
   var survey = new Survey.SurveyModel({
     elements: [
-      { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
     ],
   });
   var logic = new SurveyLogic(survey);
-  var removingCallCount = 0;
-  logic.onLogicItemRemoving.add((_, options) => {
-    options.allowRemove = removingCallCount;
-    removingCallCount++;
+  var callCount = 0;
+  logic.onLogicItemValidation.add((_, options) => {
+    assert.equal(
+      options.usedNamesInExpression.length,
+      1,
+      "There is one item in usedNames"
+    );
+    assert.equal(options.usedNamesInExpression[0], "q1", "usedNames[0] = 'q1'");
+    callCount++;
+    var actions = options.item.actions;
+    assert.equal(actions.length, 1, "There is one action");
+    assert.equal(
+      actions[0].logicTypeName,
+      "question_visibility",
+      "It is visibility action"
+    );
+    for (var i = 0; i < options.item.actions.length; i++) {
+      let action = options.item.actions[i];
+      if (action.logicTypeName === "question_visibility" && !!action.element) {
+        if (options.usedNamesInExpression.indexOf(action.element.name) > -1) {
+          action.errorText = "Please use another question";
+          options.error = "There is an error in an action";
+        }
+      }
+    }
   });
-  var removedCallCount = 0;
-  logic.onLogicItemRemoved.add((_, options) => {
-    removedCallCount++;
-  });
-  assert.equal(removingCallCount, 0, "Event has not been called yet");
-  assert.equal(removedCallCount, 0, "Event has not been called yet");
-
-  logic.removeItem(logic.items[0]);
-  assert.equal(logic.items.length, 1, "There is no more items");
-  assert.equal(removingCallCount, 1, "Event has been called");
-  assert.equal(removedCallCount, 0, "Event has been called");
-
-  logic.removeItem(logic.items[0]);
-  assert.equal(logic.items.length, 0, "There is no more items");
-  assert.equal(removingCallCount, 2, "Event has been called");
-  assert.equal(removedCallCount, 1, "Event has been called");
+  logic.addNew();
+  logic.expressionEditor.koValue("{q1} = 1");
+  var action = logic.editableItem.actions[0];
+  action.logicType = logic.getTypeByName("question_visibility");
+  action.itemSelector.koValue("q1");
+  assert.equal(callCount, 0, "Event has not been called yet");
+  logic.saveEditableItem();
+  assert.equal(callCount, 1, "Event has been called");
+  assert.equal(logic.items.length, 0, "We do not save");
+  action.itemSelector.koValue("q2");
+  logic.saveEditableItem();
+  assert.equal(callCount, 2, "Event has been called one mor3e time");
+  assert.equal(logic.items.length, 1, "We save it now, no errors");
 });
 
-QUnit.test("SurveyCreator with logictab only, set creator json", function (
-  assert
-) {
-  var options = {
-    showLogicTab: true,
-    showDesignerTab: false,
-    showTestSurveyTab: false,
-    showJSONEditorTab: false,
-  };
-  var creator = new SurveyCreator(null, options);
-  creator.JSON = {
-    elements: [
-      { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2", visibleIf: "{q3}=1" },
-      { type: "text", name: "q3" },
-    ],
-  };
-  var logic = new SurveyLogic(creator.survey, creator);
-  assert.equal(logic.items.length, 1, "We have one item here");
-});
+QUnit.test(
+  "Logic onLogicItemRemoving/onLogicItemRemoved events",
+  function (assert) {
+    var survey = new Survey.SurveyModel({
+      elements: [
+        { type: "text", name: "q1", visibleIf: "{q3}=1" },
+        { type: "text", name: "q2", visibleIf: "{q3}=1" },
+      ],
+    });
+    var logic = new SurveyLogic(survey);
+    var removingCallCount = 0;
+    logic.onLogicItemRemoving.add((_, options) => {
+      options.allowRemove = removingCallCount;
+      removingCallCount++;
+    });
+    var removedCallCount = 0;
+    logic.onLogicItemRemoved.add((_, options) => {
+      removedCallCount++;
+    });
+    assert.equal(removingCallCount, 0, "Event has not been called yet");
+    assert.equal(removedCallCount, 0, "Event has not been called yet");
+
+    logic.removeItem(logic.items[0]);
+    assert.equal(logic.items.length, 1, "There is no more items");
+    assert.equal(removingCallCount, 1, "Event has been called");
+    assert.equal(removedCallCount, 0, "Event has been called");
+
+    logic.removeItem(logic.items[0]);
+    assert.equal(logic.items.length, 0, "There is no more items");
+    assert.equal(removingCallCount, 2, "Event has been called");
+    assert.equal(removedCallCount, 1, "Event has been called");
+  }
+);
+
+QUnit.test(
+  "SurveyCreator with logictab only, set creator json",
+  function (assert) {
+    var options = {
+      showLogicTab: true,
+      showDesignerTab: false,
+      showTestSurveyTab: false,
+      showJSONEditorTab: false,
+    };
+    var creator = new SurveyCreator(null, options);
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q1", visibleIf: "{q3}=1" },
+        { type: "text", name: "q2", visibleIf: "{q3}=1" },
+        { type: "text", name: "q3" },
+      ],
+    };
+    var logic = new SurveyLogic(creator.survey, creator);
+    assert.equal(logic.items.length, 1, "We have one item here");
+  }
+);
 QUnit.test("Hide/show logic types in actions", function (assert) {
   var findLogicTypeInAction = function (
     action: SurveyLogicAction,

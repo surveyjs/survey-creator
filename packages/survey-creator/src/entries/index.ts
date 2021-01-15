@@ -111,6 +111,7 @@ import "../localization/hungarian";
 import "../localization/russian";
 import "../localization/tajik";
 import "../localization/dutch";
+import "../localization/croatian";
 
 export {
   Translation,
@@ -181,6 +182,7 @@ export { PropertyEditorColorViewModel } from "../property-editors/color";
 export { PropertyEditorModalViewModel } from "../property-editors/modal";
 export { PropertyEditorModalContent } from "../property-editors/modal-content";
 export { PropertyEditorTextViewModel } from "../property-editors/text";
+export { PropertyEditorStringsViewModel } from "../property-editors/strings";
 export { PropertyEditorConditionViewModel } from "../property-editors/condition";
 export { PropertyEditorCellsViewModel } from "../property-editors/cells";
 export { PropertyEditorExpressionViewModel } from "../property-editors/expression";

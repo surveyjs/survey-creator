@@ -3062,3 +3062,62 @@ itemValue|itemText
     ""
   );
 });
+
+QUnit.test(
+  "SurveyPropertyDefaultValueEditor json properties filtering",
+  function (assert) {
+    var question = new Survey.QuestionText("q1");
+    question.width = "1px";
+    question.minWidth = "2%";
+    question.maxWidth = "102%";
+    question.cellType = "anything";
+    question.title = "my title";
+    question.titleLocation = "default";
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    assert.equal(json.width, undefined);
+    assert.equal(json.minWidth, undefined);
+    assert.equal(json.maxWidth, undefined);
+    assert.equal(json.cellType, undefined);
+    assert.equal(json.title, "my title");
+    assert.equal(json.readOnly, true);
+    assert.equal(json.type, "text");
+    assert.equal(json.titleLocation, "hidden");
+
+    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, false);
+    assert.equal(json.width, undefined);
+    assert.equal(json.minWidth, undefined);
+    assert.equal(json.maxWidth, undefined);
+    assert.equal(json.cellType, undefined);
+    assert.equal(json.title, "my title");
+    assert.equal(json.readOnly, false);
+    assert.equal(json.type, "text");    
+    assert.equal(json.titleLocation, "hidden");
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyDefaultValueEditor json cellType overrides type",
+  function (assert) {
+    var question = new Survey.MatrixDropdownColumn("column 1")
+    assert.equal(question.getType(), "matrixdropdowncolumn");
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    assert.equal(json.cellType, undefined);
+    assert.equal(json.type, "matrixdropdowncolumn");
+
+    question.cellType = "radiogroup";
+    assert.equal(question.getType(), "matrixdropdowncolumn");
+    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    assert.equal(json.cellType, undefined);
+    assert.equal(json.type, "radiogroup");
+  }
+);
+
+QUnit.test(
+  "SurveyPropertyDefaultValueEditor json expression converted to text",
+  function (assert) {
+    var question = new Survey.QuestionExpression("q1")
+    assert.equal(question.getType(), "expression");
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    assert.equal(json.type, "text");
+  }
+);
