@@ -8,23 +8,50 @@ const template: any = require("./json-editor.html");
 // import template from "./json-editor.html";
 
 export interface ITabJsonModel {
-  init(editorElement: HTMLElement): void;
+  text: string;
+  init(...params: any[]): void;
   onJsonEditorChanged(): void;
   processJson(text: string): void;
+  dispose(): void;
 }
 
 export class TabJsonTextareaModel implements ITabJsonModel {
+  private koText: ko.Observable<string>;
+  private koErrors: ko.ObservableArray<any>;
+  private subscrKoText: ko.Subscription;
   constructor(private plugin: TabJsonEditorPlugin) {
   }
-
-  public init(_: HTMLElement): void {}
+  public get text(): string {
+    return this.koText();
+  }
+  public set text(value: string) {
+    this.plugin.isProcessingImmediately = true;
+    this.koText(value);
+    this.processJson(value);
+    this.plugin.isProcessingImmediately = false;
+  }
+  public init(koText: ko.Observable<string>, koErrors: ko.ObservableArray<any>): void {
+    this.koText = koText;
+    this.koErrors = koErrors;
+    this.koText(this.plugin.creator.text);
+    const self: TabJsonTextareaModel = this;
+    this.subscrKoText = this.koText.subscribe(() => {
+      self.plugin.model.onJsonEditorChanged();
+    });
+  }
   public onJsonEditorChanged(): void {
     this.plugin.isJSONChanged = true;
     this.plugin.onJsonEditorChanged();
   }
   public processJson(text: string): void {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
-    this.koErrors(textWorker.errors);
+    this.plugin.onErrorsChangedCallback(textWorker.errors);
+  }
+  public dispose(): void {
+    if (typeof this.subscrKoText !== "undefined") {
+      this.subscrKoText.dispose();
+      this.subscrKoText = undefined;
+    }
   }
 }
 
@@ -33,10 +60,19 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
   private aceEditor: AceAjax.Editor;
   private aceCanUndo: ko.Observable<boolean> = ko.observable(false);
   private aceCanRedo: ko.Observable<boolean> = ko.observable(false);
-  
   constructor(private plugin: TabJsonEditorPlugin) {
   }
-
+  public get text(): string {
+    return this.aceEditor.getValue();
+  }
+  public set text(value: string) {
+    this.plugin.isProcessingImmediately = true;
+    this.aceEditor.setValue(value);
+    this.aceEditor.renderer.updateFull(true);
+    this.aceEditor.getSession().getUndoManager().reset();
+    this.processJson(value);
+    this.plugin.isProcessingImmediately = false;
+  }
   public init(editorElement: HTMLElement): void {
     this.aceEditor = ace.edit(<HTMLElement>editorElement.querySelector(".svc-json-editor"));
     this.aceEditor.setReadOnly(this.plugin.creator.readOnly);
@@ -51,19 +87,19 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
     this.aceEditor.getSession().on("change", () => {
       self.onJsonEditorChanged();
     });
-    this.aceEditor.on("input", () => {
-      // if (self.isInitialJSON) {
-      //   self.isInitialJSON = false;
-      //   self.aceEditor.getSession().getUndoManager().markClean();
-      //   self.updateUndoRedoState();
-      //   return;
-      // }
-      // if (self.aceEditor.getSession().getUndoManager().isClean()) {
-      //   self.isJSONChanged = false;
-      //   return;
-      // }
-      // self.isJSONChanged = true;
-    });
+    // this.aceEditor.on("input", () => {
+    //   if (self.isInitialJSON) {
+    //     self.isInitialJSON = false;
+    //     self.aceEditor.getSession().getUndoManager().markClean();
+    //     self.updateUndoRedoState();
+    //     return;
+    //   }
+    //   if (self.aceEditor.getSession().getUndoManager().isClean()) {
+    //     self.isJSONChanged = false;
+    //     return;
+    //   }
+    //   self.isJSONChanged = true;
+    // });
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
   }
@@ -98,38 +134,43 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";
   }
+  public dispose(): void {
+
+  }
 }
 
 export class TabJsonEditorPlugin implements ICreatorPlugin {
   public static updateTextTimeout: number = 1000;
   public model: ITabJsonModel;
 
-  private koErrors: ko.ObservableArray<any> = ko.observableArray();
   private isInitialJSON: boolean = false;
   public isJSONChanged: boolean = false;
-  private isProcessingImmediately: boolean = false;
+  public isProcessingImmediately: boolean = false;
   private textWorker: SurveyTextWorker;
-  private subscrKoText: ko.Subscription;
   private subscrKoViewType: ko.Subscription;
   private jsonEditorChangedTimeoutId: number = -1;
 
   constructor(public creator: SurveyCreator) {
-    const self: TabJsonEditorPlugin = this;
-    // this.subscrKoText = this.koText.subscribe(() => {
-    //   self.onJsonEditorChanged();
-    // });
+    if (TabJsonAceEditorModel.hasAceEditor()) {
+      this.model = new TabJsonAceEditorModel(this);
+    }
+    else {
+      this.model = new TabJsonTextareaModel(this);
+    }
+
     creator.setSurveyJSONTextCallback = (text) => {
       this.isInitialJSON = true;
-      this.text = text;
+      this.model.text = text;
     };
     this.subscrKoViewType = creator.koViewType.subscribe((viewType) => {
       if (viewType === "editor") {
         this.isInitialJSON = true;
         this.show(creator.text);
         creator.getSurveyJSONTextCallback = () => {
-          return { text: this.text, isModified: this.isJSONChanged };
+          return { text: this.model.text, isModified: this.isJSONChanged };
         };
-      } else {
+      }
+      else {
         creator.getSurveyJSONTextCallback = undefined;
       }
     });
@@ -160,22 +201,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
     // // Long long checks and finally fail
     // return false;
   }
-  public get text(): string {
-    return "";
-    // if (!this.hasAceEditor) return this.koText();
-    // return this.aceEditor.getValue();
-  }
-  public set text(value: string) {
-    this.isProcessingImmediately = true;
-    // this.koText(value);
-    // if (this.aceEditor) {
-    //   this.aceEditor.setValue(value);
-    //   this.aceEditor.renderer.updateFull(true);
-    //   this.aceEditor.getSession().getUndoManager().reset();
-    // }
-    this.processJson(value);
-    this.isProcessingImmediately = false;
-  }
   public onJsonEditorChanged(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
       clearTimeout(this.jsonEditorChangedTimeoutId);
@@ -187,27 +212,22 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
       const self: TabJsonEditorPlugin = this;
       this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
         self.jsonEditorChangedTimeoutId = -1;
-        self.model.processJson(self.text);
+        self.model.processJson(self.model.text);
       }, TabJsonEditorPlugin.updateTextTimeout);
     }
   }
   private show(value: string): any {
-    this.text = value;
+    this.model.text = value;
     // if (this.aceEditor) {
     //   this.aceEditor.focus();
     // }
     this.isJSONChanged = false;
   }
-  private initAceEditor(editorElement: HTMLElement) {
-    
-  }
+  private initAceEditor(editorElement: HTMLElement): void {}
+  public onErrorsChangedCallback(errors: any): void {}
   public dispose(): void {
     this.creator.getSurveyJSONTextCallback = undefined;
     this.creator.setSurveyJSONTextCallback = undefined;
-    if (typeof this.subscrKoText !== "undefined") {
-      this.subscrKoText.dispose();
-      this.subscrKoText = undefined;
-    }
     if (typeof this.subscrKoViewType !== "undefined") {
       this.subscrKoViewType.dispose();
       this.subscrKoViewType = undefined;
@@ -216,15 +236,19 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
 }
 
 export class TabJsonEditorViewModel {
-  public plugin: TabJsonEditorPlugin;
-  private koText: ko.Observable<string> = ko.observable("");
+  private koText: ko.Observable<string>;
+  private koErrors: ko.ObservableArray<any>;
 
-  constructor(model: TabJsonEditorPlugin, element: any) {
-    this.plugin = model;
-    this.koText(model.creator.text);
+  constructor(private plugin: TabJsonEditorPlugin, element: any) {
     // model.onTextChangedCallback = val => this.text(val);
+    this.plugin.onErrorsChangedCallback = errors => this.koErrors(errors);
     if (this.hasAceEditor) {
       this.plugin.model.init(element);
+    }
+    else {
+      this.koText = ko.observable("");
+      this.koErrors = ko.observableArray();
+      this.plugin.model.init(this.koText, this.koErrors);
     }
   }
   public get hasAceEditor(): boolean {
@@ -235,6 +259,7 @@ export class TabJsonEditorViewModel {
   }
   public dispose() {
     // this.model.onTextChangedCallback = undefined;
+    this.plugin.model.dispose();
   }
 }
 
@@ -242,7 +267,7 @@ ko.components.register("svc-tab-json-editor", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       return new TabJsonEditorViewModel(params.data, componentInfo.element);
-    },
+    }
   },
-  template: template,
+  template: template
 });
