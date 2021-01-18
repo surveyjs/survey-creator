@@ -376,6 +376,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public getProcessedText(text: string): string {
     return text;
   }
+  public getRenderer(name: string): string {
+    return undefined;
+  }
   public get options(): ISurveyObjectEditorOptions {
     return this.optionsValue;
   }
