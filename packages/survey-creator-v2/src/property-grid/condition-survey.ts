@@ -23,6 +23,7 @@ import {
 } from "@survey/creator/settings";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
+import { IPropertyEditorSetup } from "./index";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -249,7 +250,7 @@ export class ConditionEditorItemsBuilder {
   }
 }
 
-export class ConditionEditorBase {
+export class ConditionEditor implements IPropertyEditorSetup {
   private surveyValue: SurveyModel;
   private objectValue: Base;
   private editSurveyValue: SurveyModel;
@@ -319,6 +320,11 @@ export class ConditionEditorBase {
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
     });
+    this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
+      if (options.question.panelCount == 0) {
+        options.question.addPanel();
+      }
+    });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
@@ -350,6 +356,11 @@ export class ConditionEditorBase {
         return false;
     }
     return true;
+  }
+  public apply() {
+    if (!this.isReady) return;
+    if (!this.object || !this.propertyName) return;
+    this.object[this.propertyName] = this.text;
   }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "condition-builder"); //TODO reason name

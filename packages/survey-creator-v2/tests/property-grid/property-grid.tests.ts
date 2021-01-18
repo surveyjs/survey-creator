@@ -22,6 +22,7 @@ import {
   Question,
   MatrixDropdownColumn,
   Serializer,
+  QuestionMatrixModel,
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
@@ -31,6 +32,7 @@ import {
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+import { CellsEditor } from "../../src/property-grid/cells-survey";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -58,13 +60,13 @@ test("Check tabs creating", () => {
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
 });
-test("Hide question title if property is first in tab and has the same title as tab", () => {
+test("Stop doing it because of title actions - Hide question title if property is first in tab and has the same title as tab", () => {
   var question = new QuestionCheckboxModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = propertyGrid.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.titleLocation).toEqual("default");
-  expect(choicesQuestion.title).toEqual(" ");
+  expect(choicesQuestion.title).toEqual("Choices");
 });
 
 test("boolean property editor (boolean/switch)", () => {
@@ -114,7 +116,23 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.choices[0].value).toEqual("");
   expect(localeQuestion.choices[0].text).toEqual("Default (english)");
 });
+/* Wait for v1.8.24
+test("string[] property editor", () => {
+  Serializer.addProperty("text", "prop1:string[]");
 
+  var question = new QuestionTextModel("q1");
+  question.prop1 = ["item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var prop1Question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(prop1Question.getType()).toEqual("comment");
+  expect(prop1Question.value).toEqual("item1/nitem2");
+  prop1Question.value = "item1/nitem2/nitem3";
+  expect(question.prop1).toHaveLength(3);
+  expect(question.prop1[2]).toExpect("item3");
+
+  Serializer.removeProperty("text", "prop1");
+});
+*/
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
@@ -899,4 +917,65 @@ test("options.onPropertyValueChanged in matrix", () => {
   columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
     "col1234";
   expect(changedValue).toEqual("col1234");
+});
+test("Cells-Editor", () => {
+  var survey = new SurveyModel({
+    questions: [
+      {
+        type: "matrix",
+        name: "question1",
+        columns: [
+          { value: "Column 1", text: "Column 1 Text" },
+          "Column 2",
+          "Column 3",
+        ],
+        rows: ["Row 1", { value: "Row 2", text: "Row 2 Text" }],
+        cells: {
+          default: {
+            "Column 1": "eredsf",
+          },
+          "Row 1": {
+            "Column 2": "dsfdsfds",
+            "Column 1": "sdfsdfdsf",
+          },
+          "Row 2": {
+            "Column 1": "dsfsdf",
+          },
+        },
+      },
+    ],
+  });
+  var matrix = <QuestionMatrixModel>survey.getQuestionByName("question1");
+  var cellsEditor = new CellsEditor(matrix);
+  expect(cellsEditor.editMatrix.columns).toHaveLength(3);
+  expect(cellsEditor.editMatrix.rows).toHaveLength(3);
+  expect(cellsEditor.editMatrix.columns[0].name).toEqual("Column 1");
+  expect(cellsEditor.editMatrix.columns[0].title).toEqual("Column 1 Text");
+  expect(cellsEditor.editMatrix.rows[0].value).toEqual("default");
+  expect(cellsEditor.editMatrix.rows[0].text).toEqual("Default cells texts");
+  expect(cellsEditor.editMatrix.rows[1].value).toEqual("Row 1");
+  expect(cellsEditor.editMatrix.rows[2].value).toEqual("Row 2");
+  expect(cellsEditor.editMatrix.rows[2].text).toEqual("Row 2 Text");
+  expect(cellsEditor.editMatrix.value).toEqual(matrix.cells.getJson());
+  var rows = cellsEditor.editMatrix.visibleRows;
+  expect(rows[0].cells[0].value).toEqual("eredsf");
+  expect(rows[1].cells[0].value).toEqual("sdfsdfdsf");
+  rows[0].cells[0].value = "cell 1";
+  rows[1].cells[0].value = "cell 2";
+  rows[2].cells[2].value = "cell 3";
+  cellsEditor.apply();
+  var newValue = {
+    default: {
+      "Column 1": "cell 1",
+    },
+    "Row 1": {
+      "Column 2": "dsfdsfds",
+      "Column 1": "cell 2",
+    },
+    "Row 2": {
+      "Column 1": "dsfsdf",
+      "Column 3": "cell 3",
+    },
+  };
+  expect(matrix.cells.getJson()).toEqual(newValue);
 });

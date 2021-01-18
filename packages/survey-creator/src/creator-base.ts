@@ -100,11 +100,13 @@ export class CreatorBase<T extends { [index: string]: any }>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * The event is called before showing a property in the Property Grid or in Question Editor.
+   * The event is called before showing a property in the Properties Grid or in the Question Editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
-   * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Property Grid and in Question Editor.
+   * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Properties Grid and in the Question Editor.
+   * <br/>
+   * <br/> [Example: Hide a category in the Properties Grid](https://surveyjs.io/Examples/Survey-Creator?id=hidecategoryinpropertiesgrid)
    */
   public onShowingProperty: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,

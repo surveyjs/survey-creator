@@ -9,7 +9,7 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "bootstrap": "lerna run bootstrap",
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build:prod",
     "test": "lerna run test"
   },

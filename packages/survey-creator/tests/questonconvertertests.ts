@@ -4,21 +4,23 @@ import { QuestionConverter } from "../src/questionconverter";
 
 export default QUnit.module("questionconverter");
 
-QUnit.test("get converted classes", function(assert) {
+QUnit.test("get converted classes", function (assert) {
   var classes = QuestionConverter.getConvertToClasses("radiogroup");
-  assert.equal(classes.length, 3, "There are two classes for radiogroup");
+  //TODO ranking was added
+  assert.ok(classes.length >= 3, "There are three classes for radiogroup");
   assert.equal(classes.indexOf("dropdown") > -1, true, "dropdown is here");
   classes = QuestionConverter.getConvertToClasses("text");
   assert.equal(classes.length, 1, "There is one class for text");
   assert.equal(classes[0], "comment", "it is comment");
 });
 
-QUnit.test("get converted classes based on available types", function(assert) {
+QUnit.test("get converted classes based on available types", function (assert) {
   var classes = QuestionConverter.getConvertToClasses("radiogroup", []);
-  assert.equal(classes.length, 3, "There are three classes for radiogroup");
+  //TODO ranking was added
+  assert.ok(classes.length >= 3, "There are three classes for radiogroup");
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
     "dropdown",
-    "checkbox"
+    "checkbox",
   ]);
   assert.equal(
     classes.length,
@@ -28,7 +30,7 @@ QUnit.test("get converted classes based on available types", function(assert) {
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
     "radiogroup",
     "checkbox",
-    "text"
+    "text",
   ]);
   assert.equal(
     classes.length,
@@ -38,12 +40,12 @@ QUnit.test("get converted classes based on available types", function(assert) {
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
     "radiogroup",
     "comment",
-    "text"
+    "text",
   ]);
   assert.equal(classes.length, 0, "There is no classes for radiogroup");
 });
 
-QUnit.test("Convert question", function(assert) {
+QUnit.test("Convert question", function (assert) {
   var survey = new Survey.Survey();
   var page = survey.addNewPage();
   var panel = page.addNewPanel();
