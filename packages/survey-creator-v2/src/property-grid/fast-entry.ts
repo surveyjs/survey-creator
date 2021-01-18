@@ -10,24 +10,25 @@ import {
   SurveyModel,
   Survey,
 } from "survey-knockout";
+import { IPropertyEditorSetup } from "./index";
 
-export class FastEntryEditor {
-  private surveyValue: SurveyModel;
+export class FastEntryEditor implements IPropertyEditorSetup {
+  private editSurveyValue: SurveyModel;
   private commentValue: QuestionCommentModel;
 
   constructor(
     public choices: Array<ItemValue>,
     private creator: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
   ) {
-    this.surveyValue = this.createSurvey();
+    this.editSurveyValue = this.createSurvey();
     this.commentValue = <QuestionCommentModel>(
-      this.survey.getQuestionByName("question")
+      this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
   }
 
-  public get survey(): SurveyModel {
-    return this.surveyValue;
+  public get editSurvey(): SurveyModel {
+    return this.editSurveyValue;
   }
   public get comment(): QuestionCommentModel {
     return this.commentValue;

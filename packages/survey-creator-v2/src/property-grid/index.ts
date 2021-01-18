@@ -33,6 +33,11 @@ function propertyVisibleIf(params: any): boolean {
 
 FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 
+export interface IPropertyEditorSetup {
+  editSurvey: SurveyModel;
+  apply();
+}
+
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
   getJSON(
@@ -41,10 +46,27 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
-  onGetQuestionTitleActions?: (
+  onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
-    evtOptions: any,
+    evtOptions: any
+  ) => void;
+  createPropertyEditorSetup?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ) => IPropertyEditorSetup;
+  clearPropertyValue?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ) => void;
+  onAddIntoPropertyValue?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
     options: ISurveyCreatorOptions
   ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
@@ -61,6 +83,7 @@ export var PropertyGridEditorCollection = {
     this.editors.push(editor);
   },
   getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
+    if (!prop) return null;
     var key = prop.id;
     var fitEd = this.fitHash[key];
     if (!!fitEd) return fitEd;
@@ -86,15 +109,10 @@ export var PropertyGridEditorCollection = {
       res.onCreated(obj, question, prop);
     }
   },
-  onGetQuestionTitleActions(
-    obj: Base,
-    prop: JsonObjectProperty,
-    evtOptions: any,
-    options: ISurveyCreatorOptions
-  ) {
+  onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any) {
     var res = this.getEditor(prop);
-    if (!!res && !!res.onGetQuestionTitleActions) {
-      res.onGetQuestionTitleActions(obj, prop, evtOptions, options);
+    if (!!res && !!res.onAfterRenderQuestion) {
+      res.onAfterRenderQuestion(obj, prop, evtOptions);
     }
   },
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -209,9 +227,6 @@ export class PropertyJSONGenerator {
         propDef.title
       );
       if (!propJSON) continue;
-      if (propDef.name == tab.name) {
-        propJSON.title = " ";
-      }
       panel.elements.push(propJSON);
     }
     return panel;
@@ -335,6 +350,9 @@ export class PropertyGridModel {
       this.survey.onMatrixRowAdded.add((sender, options) => {
         this.onMatrixRowAdded(options);
       });
+      this.survey.onAfterRenderQuestion.add((sender, options) => {
+        this.onAfterRenderQuestion(options);
+      });
       this.survey.editingObj = value;
       if (this.objValueChangedCallback) {
         this.objValueChangedCallback();
@@ -387,14 +405,93 @@ export class PropertyGridModel {
   }
 
   private onGetQuestionTitleActions(options) {
-    PropertyGridEditorCollection.onGetQuestionTitleActions(
+    var editor = PropertyGridEditorCollection.getEditor(
+      options.question.property
+    );
+    if (!editor) return;
+    var actions = [];
+    if (!!editor.clearPropertyValue) {
+      actions.push(
+        this.createClearValueAction(
+          editor,
+          options.question.property,
+          options.question
+        )
+      );
+    }
+    if (!!editor.createPropertyEditorSetup) {
+      actions.push(
+        this.createEditorSetupAction(
+          editor,
+          options.question.property,
+          options.question
+        )
+      );
+    }
+    if (actions.length > 0) {
+      options.titleActions = actions;
+    }
+  }
+  private createClearValueAction(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question
+  ): any {
+    return {
+      title: "",
+      id: "property-grid-clear",
+      icon: "icon-property_grid_clear",
+      action: () => {
+        editor.clearPropertyValue(this.obj, property, question, this.options);
+      },
+    };
+  }
+  private createEditorSetupAction(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question
+  ): any {
+    var setupAction = {
+      title: "",
+      id: "property-grid-setup",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      icon: "icon-property_grid_modal",
+      component: "sv-action-bar-item-modal",
+      data: {
+        editor: null,
+        contentTemplateName: "survey-content",
+        contentComponentData: null,
+        onCreated: () => {
+          setupAction.data.editor = editor.createPropertyEditorSetup(
+            this.obj,
+            property,
+            question,
+            this.options
+          );
+          setupAction.data.contentComponentData =
+            setupAction.data.editor.editSurvey;
+        },
+        onShow: () => {
+          setupAction.data.onCreated();
+        },
+        onApply: () => {
+          setupAction.data.editor.apply();
+          setupAction.data.editor = null;
+        },
+        onCancel: () => {
+          setupAction.data.editor = null;
+        },
+      },
+    };
+    return setupAction;
+  }
+  private onAfterRenderQuestion(options: any) {
+    PropertyGridEditorCollection.onAfterRenderQuestion(
       this.obj,
       options.question.property,
-      options,
-      this.options
+      options
     );
   }
-
   private isCellCreating = false;
   private onMatrixCellCreated(options: any) {
     this.isCellCreating = true;

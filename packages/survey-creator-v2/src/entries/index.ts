@@ -40,3 +40,4 @@ export * from "../property-grid/condition";
 export * from "../property-grid/restfull";
 
 export * from "../svgbundle";
+export * from "../property-grid/values";

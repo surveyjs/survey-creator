@@ -60,13 +60,13 @@ test("Check tabs creating", () => {
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
 });
-test("Hide question title if property is first in tab and has the same title as tab", () => {
+test("Stop doing it because of title actions - Hide question title if property is first in tab and has the same title as tab", () => {
   var question = new QuestionCheckboxModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = propertyGrid.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.titleLocation).toEqual("default");
-  expect(choicesQuestion.title).toEqual(" ");
+  expect(choicesQuestion.title).toEqual("Choices");
 });
 
 test("boolean property editor (boolean/switch)", () => {

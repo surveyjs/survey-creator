@@ -23,6 +23,7 @@ import {
 } from "@survey/creator/settings";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
+import { IPropertyEditorSetup } from "./index";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -249,7 +250,7 @@ export class ConditionEditorItemsBuilder {
   }
 }
 
-export class ConditionEditor {
+export class ConditionEditor implements IPropertyEditorSetup {
   private surveyValue: SurveyModel;
   private objectValue: Base;
   private editSurveyValue: SurveyModel;
@@ -355,6 +356,11 @@ export class ConditionEditor {
         return false;
     }
     return true;
+  }
+  public apply() {
+    if (!this.isReady) return;
+    if (!this.object || !this.propertyName) return;
+    this.object[this.propertyName] = this.text;
   }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "condition-builder"); //TODO reason name
