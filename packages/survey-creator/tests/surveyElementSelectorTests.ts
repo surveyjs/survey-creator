@@ -3,13 +3,13 @@ import { SurveyElementSelector } from "../src/propertyEditors/surveyElementSelec
 import { EditableObject } from "../src/propertyEditors/editableObject";
 export default QUnit.module("SurveyElementSelectorTests");
 
-QUnit.test("SurveyElementSelector get/set value", function(assert) {
+QUnit.test("SurveyElementSelector get/set value", function (assert) {
   var survey = createSurvey();
   var counter = 0;
   var value = "q1";
   var selector = new SurveyElementSelector(survey);
   assert.equal(selector.koElements().length, 5, "We have five questions");
-  selector.onValueChangedCallback = function(newValue: string) {
+  selector.onValueChangedCallback = function (newValue: string) {
     counter++;
     value = newValue;
   };
@@ -32,7 +32,7 @@ QUnit.test("SurveyElementSelector get/set value", function(assert) {
   assert.equal(selector.value, "q3", "Set via element property");
 });
 
-QUnit.test("SurveyElementSelector diffrent types", function(assert) {
+QUnit.test("SurveyElementSelector diffrent types", function (assert) {
   var survey = createSurvey();
   var selector = new SurveyElementSelector(survey, "page");
   assert.equal(selector.koElements().length, 2, "We have two pages");
@@ -40,7 +40,7 @@ QUnit.test("SurveyElementSelector diffrent types", function(assert) {
   assert.equal(selector.koElements().length, 1, "We have one panel");
 });
 
-QUnit.test("SurveyElementSelector showTitle = true", function(assert) {
+QUnit.test("SurveyElementSelector showTitle = true", function (assert) {
   var survey = createSurvey();
   var selector = new SurveyElementSelector(survey, "question", true);
   assert.equal(
@@ -48,13 +48,13 @@ QUnit.test("SurveyElementSelector showTitle = true", function(assert) {
     "Question 1",
     "Get question title"
   );
-  assert.equal(selector.koElements()[1].text, "q2", "Get question name");
+  assert.equal(selector.koElements()[1].name, "q2", "Get question name");
   selector = new SurveyElementSelector(survey, "page", true);
   assert.equal(selector.koElements()[0].text, "Page 1", "Get page title");
   assert.equal(selector.koElements()[1].text, "page2", "Get page name");
 });
 
-QUnit.test("SurveyElementSelector item.koDisabled()", function(assert) {
+QUnit.test("SurveyElementSelector item.koDisabled()", function (assert) {
   var survey = createSurvey();
   (<Survey.Question>survey.getAllQuestions()[0]).visibleIf = "some text";
   (<Survey.Question>survey.getAllQuestions()[1]).visibleIf = "some text";
@@ -86,7 +86,7 @@ QUnit.test("SurveyElementSelector item.koDisabled()", function(assert) {
   );
 });
 
-QUnit.test("SurveyElementSelector validation", function(assert) {
+QUnit.test("SurveyElementSelector validation", function (assert) {
   var survey = createSurvey();
   var selector = new SurveyElementSelector(survey, "question", true);
   assert.equal(selector.hasError(), true, "Value is not selected");
@@ -100,7 +100,7 @@ QUnit.test("SurveyElementSelector validation", function(assert) {
   assert.equal(selector.koErrorText(), "", "Error text is empty");
 });
 
-QUnit.test("SurveyElementSelector + editableObject", function(assert) {
+QUnit.test("SurveyElementSelector + editableObject", function (assert) {
   var survey = createSurvey();
   var editableObject = new EditableObject(survey);
   var selector = new SurveyElementSelector(
@@ -121,17 +121,19 @@ function createSurvey(): Survey.SurveyModel {
           {
             type: "text",
             name: "q1",
-            title: "Question 1"
+            title: "Question 1",
           },
           {
             type: "text",
-            name: "q2"
+            name: "q2",
+            title: "Question 2",
           },
           {
             type: "text",
-            name: "q3"
-          }
-        ]
+            name: "q3",
+            title: "Question 3",
+          },
+        ],
       },
       {
         name: "page2",
@@ -142,25 +144,27 @@ function createSurvey(): Survey.SurveyModel {
             elements: [
               {
                 type: "text",
-                name: "q4"
+                name: "q4",
+                title: "Question 4",
               },
               {
                 type: "checkbox",
                 name: "q5",
-                choices: ["item1", "item2", "item3"]
-              }
-            ]
-          }
-        ]
-      }
+                title: "Question 5",
+                choices: ["item1", "item2", "item3"],
+              },
+            ],
+          },
+        ],
+      },
     ],
     triggers: [
       {
         type: "runexpression",
         expression: "{q1} = 1",
         setToName: "q2",
-        runExpression: "{q2} + 1"
-      }
-    ]
+        runExpression: "{q2} + 1",
+      },
+    ],
   });
 }
