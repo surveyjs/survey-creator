@@ -139,9 +139,7 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";
   }
-  public dispose(): void {
-
-  }
+  public dispose(): void {}
 }
 
 export class TabJsonEditorPlugin implements ICreatorPlugin {
@@ -165,16 +163,16 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
       this.isInitialJSON = true;
       this.model.text = text;
     };
-    this.subscrKoViewType = creator.koViewType.subscribe((viewType) => {
-      if (viewType === "editor") {
-        creator.getSurveyJSONTextCallback = () => {
-          return { text: this.model.text, isModified: this.isJSONChanged };
-        };
-      }
-      else {
-        creator.getSurveyJSONTextCallback = undefined;
-      }
-    });
+    // this.subscrKoViewType = creator.koViewType.subscribe((viewType) => {
+    //   if (viewType === "editor") {
+    //     creator.getSurveyJSONTextCallback = () => {
+    //       return { text: this.model.text, isModified: this.isJSONChanged };
+    //     };
+    //   }
+    //   else {
+    //     creator.getSurveyJSONTextCallback = undefined;
+    //   }
+    // });
     creator.tabs.push({
       name: "editor",
       title: getLocString("ed.jsonEditor"),
@@ -192,15 +190,19 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
     this.model.text = this.creator.text;
     this.model.show();
     this.isJSONChanged = false;
-    // this._isModified = false;
   }
   public deactivate(): boolean {
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+    if (!textWorker.isJsonCorrect) {
+      //this.creator.notify(this.getLocString("ed.correctJSON"));
+      return false;
+    }
+    if (!this.readOnly && this.isJSONChanged) {
+      this.creator.text = this.model.text;
+      // this.creator.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
+      // this.creator.setModified({ type: "VIEW_TYPE_CHANGED", newType: "editor" });
+    }
     return true;
-    // if(!this._isModified) {
-    //     return true;
-    // }
-    // // Long long checks and finally fail
-    // return false;
   }
   public onJsonEditorChanged(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
@@ -216,6 +218,9 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
         self.model.processJson(self.model.text);
       }, TabJsonEditorPlugin.updateTextTimeout);
     }
+  }
+  public get readOnly(): boolean {
+    return this.creator.readOnly;
   }
   public dispose(): void {
     this.creator.getSurveyJSONTextCallback = undefined;
@@ -244,7 +249,7 @@ export class TabJsonEditorViewModel {
     return TabJsonAceEditorModel.hasAceEditor();
   }
   public get readOnly(): boolean {
-    return this.plugin.creator.readOnly;
+    return this.plugin.readOnly;
   }
   public dispose() {
     this.plugin.model.dispose();
