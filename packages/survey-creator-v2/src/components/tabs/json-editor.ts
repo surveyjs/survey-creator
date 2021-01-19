@@ -12,6 +12,7 @@ export interface ITabJsonModel {
   init(...params: any[]): void;
   onJsonEditorChanged(): void;
   processJson(text: string): void;
+  show(): void;
   dispose(): void;
 }
 
@@ -47,6 +48,7 @@ export class TabJsonTextareaModel implements ITabJsonModel {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
     this.koErrors(textWorker.errors);
   }
+  public show(): void {}
   public dispose(): void {
     if (typeof this.subscrKoText !== "undefined") {
       this.subscrKoText.dispose();
@@ -131,6 +133,9 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
     this.aceEditor.getSession().setAnnotations(
       this.createAnnotations(textWorker.errors));
   }
+  public show(): void {
+    this.aceEditor.focus();
+  }
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";
   }
@@ -162,8 +167,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
     };
     this.subscrKoViewType = creator.koViewType.subscribe((viewType) => {
       if (viewType === "editor") {
-        this.isInitialJSON = true;
-        this.show(creator.text);
         creator.getSurveyJSONTextCallback = () => {
           return { text: this.model.text, isModified: this.isJSONChanged };
         };
@@ -185,7 +188,10 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
     creator.plugins["editor"] = this;
   }
   public activate(): void {
-    // this.text = this.creator.text;
+    this.isInitialJSON = true;
+    this.model.text = this.creator.text;
+    this.model.show();
+    this.isJSONChanged = false;
     // this._isModified = false;
   }
   public deactivate(): boolean {
@@ -210,13 +216,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
         self.model.processJson(self.model.text);
       }, TabJsonEditorPlugin.updateTextTimeout);
     }
-  }
-  private show(value: string): any {
-    this.model.text = value;
-    // if (this.aceEditor) {
-    //   this.aceEditor.focus();
-    // }
-    this.isJSONChanged = false;
   }
   public dispose(): void {
     this.creator.getSurveyJSONTextCallback = undefined;
