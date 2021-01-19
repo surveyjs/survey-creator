@@ -18,7 +18,7 @@ export class ActionBarItemPropertyEditorModal {
   }
 
   public get icon() {
-    return this._item.icon;
+    return this._item.iconName;
   }
 
   public get contentComponentName() {

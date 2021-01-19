@@ -4539,6 +4539,99 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           
   
           <div
+            aria-label="ranking toolbox item"
+            class="svc-toolbox__item svc-toolbox__item--icon-ranking"
+            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            title="ranking"
+          >
+            
+    
+            <span
+              class="svc-toolbox__item-container"
+            >
+               
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+    
+            </span>
+            
+    
+            <span
+              class="svc-toolbox__item-banner"
+            >
+              
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+      
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                ranking
+              </span>
+              
+    
+            </span>
+            
+    
+  
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+        </div>
+        
+    
+        
+    
+        <div
+          class="svc-toolbox__tool"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          style="visibility: visible;"
+        >
+          
+      
+          <!-- ko if: $data.needSeparator -->
+          <!-- /ko -->
+          
+      
+          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          
+  
+          <div
             aria-label="propertygrid_restfull toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-default"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -4676,21 +4769,31 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               <!-- ko template: { name: 'survey-string', data: locTitle } -->
               
     
+              <!-- ko component: { name: renderAs, params: { locString: $data } } -->
+              <!-- &lt;input class="sv-string-editor" data-bind="value: editValue" /&gt; -->
+              
+
+
               <!-- ko ifnot: koHasHtml -->
               
-    
+
               <span
-                data-bind="text: koRenderedHtml"
+                class="sv-string-editor"
+                contenteditable="true"
+                data-bind="text: editValue, event: { blur: onInput, click: onClick, clickBubble: false }"
                 style="position: static;"
               >
                 
               </span>
               
-    
+
               <!-- /ko -->
               
-    
+
               <!-- ko if: koHasHtml -->
+              <!-- /ko -->
+              
+
               <!-- /ko -->
               
 
@@ -4715,21 +4818,31 @@ exports[`Storyshots Creator design surface content Default 1`] = `
               <!-- ko template: { name: 'survey-string', data: locDescription } -->
               
     
+              <!-- ko component: { name: renderAs, params: { locString: $data } } -->
+              <!-- &lt;input class="sv-string-editor" data-bind="value: editValue" /&gt; -->
+              
+
+
               <!-- ko ifnot: koHasHtml -->
               
-    
+
               <span
-                data-bind="text: koRenderedHtml"
+                class="sv-string-editor"
+                contenteditable="true"
+                data-bind="text: editValue, event: { blur: onInput, click: onClick, clickBubble: false }"
                 style="position: static;"
               >
                 
               </span>
               
-    
+
               <!-- /ko -->
               
-    
+
               <!-- ko if: koHasHtml -->
+              <!-- /ko -->
+              
+
               <!-- /ko -->
               
 
