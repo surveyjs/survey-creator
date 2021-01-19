@@ -44,7 +44,7 @@ export class PageNavigatorViewModel {
   }
 
   icon = "icon-navigation"
-  name = "svc-list";
+  name = "sv-list";
   verticalPosition= "bottom";
   horizontalPosition = "left";
   showPointer = true;

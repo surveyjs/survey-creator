@@ -90,7 +90,7 @@ export class TestSurveyTabViewModel {
     this.actions.push(<any>{
       id: "deviceSelector",
       css: "sv-action--first sv-action-bar-item--secondary",
-      icon: "icon-change_16x16",
+      iconName: "icon-change_16x16",
       title: ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
       items: deviceSelectorItems,
       enabled: this.showSimulator,
@@ -107,7 +107,7 @@ export class TestSurveyTabViewModel {
     this.actions.push(<any>{
       id: "prevPage",
       css: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage?"sv-action-bar-item--secondary":""),
-      icon: "icon-leftarrow_16x16",
+      iconName: "icon-leftarrow_16x16",
       visible: ko.computed(() => this.isRunning),
       enabled: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage),
       title: "",
@@ -141,7 +141,7 @@ export class TestSurveyTabViewModel {
     this.actions.push(<any>{
       id: "nextPage",
       css: ko.computed(() => this.koSurvey() && !this.koSurvey().isLastPage?"sv-action-bar-item--secondary":""),
-      icon: "icon-rightarrow_16x16",
+      iconName:"icon-rightarrow_16x16",
       visible: ko.computed(() => this.isRunning),
       enabled: ko.computed(() => this.koSurvey() && !this.koSurvey().isLastPage),
       title: "",
@@ -154,7 +154,7 @@ export class TestSurveyTabViewModel {
       css: ko.computed(() => this.koShowInvisibleElements()?"sv-action--last sv-action-bar-item--secondary":"sv-action--last"),
       visible: ko.computed(() => this.isRunning),
       title: this.getLocString("ts.showInvisibleElements"),
-      icon: ko.computed(() => {
+      iconName:ko.computed(() => {
         if (this.koShowInvisibleElements()) {
           return "icon-switchactive_16x16";
         }

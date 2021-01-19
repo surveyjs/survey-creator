@@ -6,6 +6,9 @@
   //todo: remove !important
   min-width: auto !important;
 }
+.svc-survey-question__header {
+  width: 100%;
+}
 .svc-survey-question__title {
   width: 100%;
   line-height: calcSize(3);

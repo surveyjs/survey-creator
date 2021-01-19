@@ -3,10 +3,10 @@
   data-bind="click: select, disable: $parent.readOnly || disabled, css: {'svc-button-group__item--selected': selected}"
 >
   <!-- ko if: !!iconName-->
-  <svc-svg-icon
+  <sv-svg-icon
     class="svc-button-group__item-icon"
     params="iconName: iconName, size: iconSize || 24"
-  ></svc-svg-icon>
+  ></sv-svg-icon>
   <!-- /ko -->
   <!-- ko ifnot: !!iconName -->
   <span
