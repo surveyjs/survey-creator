@@ -276,6 +276,7 @@ export function createAfterRenderHandler(
       }
     }
     if (creator.readOnly) {
+      ko.tasks.runEarly();
       addAdorner(domElement, surveyElement);
       return;
     }
@@ -312,7 +313,7 @@ export function createAfterRenderHandler(
         setTabIndex(elements[i]);
       }
     });
-
+    ko.tasks.runEarly();
     addAdorner(domElement, surveyElement);
   };
 }
@@ -559,3 +560,6 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
     )
   );
 };
+
+
+Survey.LocalizableString["editableRenderer"] = Survey.LocalizableString["defaultRenderer"];

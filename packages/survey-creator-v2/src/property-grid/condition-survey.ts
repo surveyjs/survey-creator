@@ -328,7 +328,8 @@ export class ConditionEditor implements IPropertyEditorSetup {
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
-    this.text = "";
+    this.text =
+      !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
   public get text(): string {
     return this.getText();

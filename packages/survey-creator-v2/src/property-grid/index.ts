@@ -24,7 +24,7 @@ import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
-import { SurveyHelper } from "@survey/creator/surveyHelper";
+import { ActionBarItemPropertyEditorModal } from "./modal-action";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -456,7 +456,7 @@ export class PropertyGridModel {
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-property_grid_modal",
-      component: "sv-action-bar-item-modal",
+      component: "sv-action-bar-property-editor-modal",
       data: {
         editor: null,
         contentTemplateName: "survey-content",
@@ -470,9 +470,6 @@ export class PropertyGridModel {
           );
           setupAction.data.contentComponentData =
             setupAction.data.editor.editSurvey;
-        },
-        onShow: () => {
-          setupAction.data.onCreated();
         },
         onApply: () => {
           setupAction.data.editor.apply();
