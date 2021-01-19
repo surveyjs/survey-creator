@@ -448,9 +448,13 @@ export class ConditionEditor implements IPropertyEditorSetup {
         this.addConditionQuestionsHash[res[i].name] = question;
       }
     }
-    var values = this.survey.calculatedValues;
+    this.addValuesIntoConditionQuestions(this.survey.calculatedValues, res);
+    this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
+    return res;
+  }
+  private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (var i = 0; i < values.length; i++) {
-      let name = values[i].name;
+      let name = !!values[i].name ? values[i].name : values[i];
       this.addConditionQuestionsHash[name] = this.getCalculatedValueQuestion();
       res.push({
         value: name,
@@ -458,8 +462,6 @@ export class ConditionEditor implements IPropertyEditorSetup {
         question: this.getCalculatedValueQuestion(),
       });
     }
-
-    return res;
   }
   private calculatedValueQuestion: Question = null;
   private getCalculatedValueQuestion(): Question {
