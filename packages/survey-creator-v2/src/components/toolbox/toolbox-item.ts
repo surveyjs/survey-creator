@@ -1,7 +1,7 @@
 import * as ko from "knockout";
-import { SurveyCreator } from '../../creator';
+import { SurveyCreator } from "../../creator";
 import { getLocString } from "@survey/creator/editorLocalization";
-import { IQuestionToolboxItem } from '@survey/creator/toolbox';
+import { IQuestionToolboxItem } from "@survey/creator/toolbox";
 
 import "./toolbox-item.scss";
 const template = require("./toolbox-item.html");
@@ -10,17 +10,17 @@ const template = require("./toolbox-item.html");
 export class ToolboxItemViewModel {
   private _creator: SurveyCreator;
   public title: ko.Observable<string> = ko.observable("");
-  public icon: ko.Observable<string> = ko.observable("");
+  public iconName: ko.Observable<string> = ko.observable("");
   public item: IQuestionToolboxItem;
   constructor(private _itemData: IQuestionToolboxItem, creator: SurveyCreator) {
     this._creator = creator;
     this.item = _itemData;
-    var iconName = _itemData.iconName;
+    var icon = _itemData.iconName;
     if (_itemData.iconName.indexOf("icon-") === -1) {
-      iconName = "icon-" + iconName;
+      icon = "icon-" + icon;
     }
 
-    this.icon(iconName);
+    this.iconName(icon);
     this.title(_itemData.title);
   }
   get ariaLabel() { return this.item.tooltip + ' ' + getLocString('toolbox') + ' item'; }

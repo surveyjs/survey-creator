@@ -10,6 +10,7 @@ export interface ITabItem {
   template: string;
   data: any;
   visible: boolean;
+  isVisible: ko.MaybeObservable<boolean>;
   selected?: boolean | ko.Computed<boolean>;
   disabled?: ko.MaybeObservable<boolean>;
   action: () => void;

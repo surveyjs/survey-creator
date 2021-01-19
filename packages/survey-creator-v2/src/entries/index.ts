@@ -3,7 +3,6 @@ Version = `${process.env.VERSION}`;
 
 export * from "../components/creator";
 export * from "../components/button";
-export * from "../components/svg-icon";
 
 export * from "../components/tabs/designer";
 export * from "../components/tabs/test";
@@ -26,7 +25,6 @@ export * from "../components/property-editors/button-group/button-group";
 export * from "../components/property-editors/button-group/button-group-item";
 
 export * from "../components/survey-renderers/dropdown";
-export * from "../components/list";
 
 export * from "../creator";
 
@@ -41,4 +39,6 @@ export * from "../property-grid";
 export * from "../property-grid/matrices";
 export * from "../property-grid/condition";
 export * from "../property-grid/restfull";
+
+export * from "../svgbundle";
 export * from "../property-grid/values";

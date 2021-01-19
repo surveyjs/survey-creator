@@ -3,11 +3,9 @@ import { text, boolean } from "@storybook/addon-knobs";
 import * as ko from "knockout";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ListViewModel } from "../src/entries";
-
 export default {
   title: "Popup Modal",
-  "ko-components": [ListViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},
@@ -46,7 +44,7 @@ export const ContextMenuOrdinary = () => {
         </sv-popup>
       </div>`,
     context: {
-      name: "svc-list",
+      name: "sv-list",
       title: text("Title", "Show menu"),
       action: action,
       model: listModel,
@@ -85,7 +83,7 @@ export const ContextMenuWithPointer = () => {
         </sv-popup>
       </div>`,
     context: {
-      name: "svc-list",
+      name: "sv-list",
       title: text("Title", "Show menu"),
       action: action,
       model: listModel,

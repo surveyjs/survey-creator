@@ -1,13 +1,13 @@
 // import { document } from "global";
 import { boolean, text } from "@storybook/addon-knobs";
-
 import * as ko from "knockout";
+import { SvgBundleViewModel } from "../src/svgbundle";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 
 export default {
   title: "Action Bar",
-  "ko-components": [], // Fake component usage in order for component to be actually imported
+  "ko-components": [SvgBundleViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},
@@ -28,7 +28,7 @@ export const ActionBarItemWithoutTitle = () => {
         action: function () {
           alert("!!");
         },
-        icon: text("Icon", "icon-preview"),
+        iconName: text("Icon", "icon-preview"),
         showTitle: boolean("Show title", false),
       },
     },
@@ -44,7 +44,7 @@ export const ActionBarItem = () => {
         action: function () {
           alert("!!");
         },
-        icon: text("Icon", "icon-preview"),
+        iconName: text("Icon", "icon-preview"),
       },
     },
   };
@@ -59,7 +59,7 @@ export const DisabledActionBarItem = () => {
         action: function () {
           alert("!!");
         },
-        icon: text("Icon", "icon-preview"),
+        iconName: text("Icon", "icon-preview"),
         enabled: boolean("Enabled", false),
       },
     },
@@ -73,7 +73,7 @@ export const ActiveActionBarItem = () => {
       item: {
         title: text("Title", "Menu Button Active"),
         action: function () {},
-        icon: text("Icon", "icon-preview"),
+        iconName: text("Icon", "icon-preview"),
         isActive: boolean("Active", true),
       },
     },
@@ -86,20 +86,20 @@ export const Desktop = () => {
     context: {
       items: [
         {
-          icon: "icon-undo",
+          iconName: "icon-undo",
           action: () => {},
           title: "Undo",
           showTitle: false,
         },
         {
-          icon: "icon-redo",
+          iconName: "icon-redo",
           action: () => {},
           title: "Redo",
           showTitle: false,
         },
         { component: "sv-action-bar-separator" },
         {
-          icon: "icon-settings",
+          iconName: "icon-settings",
           action: function () {
             this.isActive(!this.isActive());
           },
@@ -108,7 +108,7 @@ export const Desktop = () => {
           showTitle: false,
         },
         {
-          icon: "icon-clear",
+          iconName: "icon-clear",
           action: function () {
             this.isActive(!this.isActive());
           },
@@ -117,7 +117,7 @@ export const Desktop = () => {
           showTitle: false,
         },
         {
-          icon: "icon-search",
+          iconName: "icon-search",
           action: function () {
             this.isActive(!this.isActive());
           },
@@ -129,7 +129,7 @@ export const Desktop = () => {
           component: "sv-action-bar-separator",
         },
         {
-          icon: "icon-preview",
+          iconName: "icon-preview",
           action: function () {
             this.isActive(!this.isActive());
           },
