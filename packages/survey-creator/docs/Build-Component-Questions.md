@@ -1,4 +1,4 @@
-# Componets: Simplify and Enrich SurveyJS Creator functionality
+# Components: Simplify and Enrich SurveyJS Creator functionality
 
 Please note, this functionality comes with [v1.7.1](https://surveyjs.io/WhatsNew#v1.7.1).
 
