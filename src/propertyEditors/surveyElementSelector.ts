@@ -37,19 +37,19 @@ export class SurveyElementSelector {
     );
     this.koValue = ko.observable("");
     var self = this;
-    this.koValue.subscribe(function(newValue) {
+    this.koValue.subscribe(function (newValue) {
       if (self.disableCallback || !self.onValueChangedCallback) return;
       self.onValueChangedCallback(newValue);
     });
     this.koElements = ko.observableArray(this.buildElements(elementType));
     this.koHasFocus = ko.observable(false);
-    this.koHasFocus.subscribe(function(newValue) {
+    this.koHasFocus.subscribe(function (newValue) {
       if (newValue) {
         self.updateItems();
       }
     });
     this.koErrorText = ko.observable("");
-    this.koDisplayError = ko.computed(function() {
+    this.koDisplayError = ko.computed(function () {
       return !!self.koErrorText();
     });
     this.koAfterRender = function () {};
@@ -137,6 +137,9 @@ export class SurveyElementSelector {
         koDisabled: ko.observable(false),
       });
     }
+    res.sort(function (a, b) {
+      return a.text.localeCompare(b.text);
+    });
     return res;
   }
   private getOptionsText(
