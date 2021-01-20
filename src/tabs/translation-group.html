@@ -28,7 +28,7 @@
         <div class="svd-toolbox-category-header" role="tab"
             data-bind="visible: koShowHeader, click: function(){ group.koExpanded(!group.koExpanded())}">
             <span class="svd-translation-panel-strings-title"
-                data-bind="css: { 'svd-main-color': group.koExpanded() }, text: group.name"></span>
+                data-bind="css: { 'svd-main-color': group.koExpanded() }, text: group.text"></span>
             <!-- ko ifnot: koExpanded -->
             <svg-icon class="icon-toolbox-arrow" params="iconName: 'icon-arrow_down_10x10', size: 10"></svg-icon>
             <!-- /ko -->

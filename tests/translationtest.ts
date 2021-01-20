@@ -668,3 +668,17 @@ QUnit.test(
     Survey.Serializer.removeProperty("page", "pages");
   }
 );
+QUnit.test("Localize the group and item text", function (assert) {
+  var question = new Survey.QuestionCheckbox("q1");
+  question.choices = ["item1", { value: "item2", text: "text 2" }];
+  var group = new TranslationGroup(question.name, question);
+  var choices: TranslationGroup = null;
+  for (var i = 0; i < group.groups.length; i++) {
+    if (group.groups[i].name == "choices") {
+      choices = group.groups[i];
+      break;
+    }
+  }
+  assert.ok(choices, "choices has been created as group");
+  assert.equal(choices.text, "Choices", "Use the localized name");
+});
