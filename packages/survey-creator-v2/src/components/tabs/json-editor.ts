@@ -149,7 +149,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
-  private subscrKoViewType: ko.Subscription;
 
   constructor(public creator: SurveyCreator) {
     if (TabJsonAceEditorModel.hasAceEditor()) {
@@ -158,21 +157,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
     else {
       this.model = new TabJsonTextareaModel(this);
     }
-
-    creator.setSurveyJSONTextCallback = (text) => {
-      this.isInitialJSON = true;
-      this.model.text = text;
-    };
-    // this.subscrKoViewType = creator.koViewType.subscribe((viewType) => {
-    //   if (viewType === "editor") {
-    //     creator.getSurveyJSONTextCallback = () => {
-    //       return { text: this.model.text, isModified: this.isJSONChanged };
-    //     };
-    //   }
-    //   else {
-    //     creator.getSurveyJSONTextCallback = undefined;
-    //   }
-    // });
     creator.tabs.push({
       name: "editor",
       title: getLocString("ed.jsonEditor"),
@@ -194,13 +178,10 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
   public deactivate(): boolean {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
     if (!textWorker.isJsonCorrect) {
-      //this.creator.notify(this.getLocString("ed.correctJSON"));
       return false;
     }
     if (!this.readOnly && this.isJSONChanged) {
-      this.creator.text = this.model.text;
-      // this.creator.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
-      // this.creator.setModified({ type: "VIEW_TYPE_CHANGED", newType: "editor" });
+      this.creator._dummySetText(this.model.text);
     }
     return true;
   }
@@ -221,14 +202,6 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
-  }
-  public dispose(): void {
-    this.creator.getSurveyJSONTextCallback = undefined;
-    this.creator.setSurveyJSONTextCallback = undefined;
-    if (typeof this.subscrKoViewType !== "undefined") {
-      this.subscrKoViewType.dispose();
-      this.subscrKoViewType = undefined;
-    }
   }
 }
 

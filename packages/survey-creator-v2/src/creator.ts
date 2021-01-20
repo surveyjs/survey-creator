@@ -148,6 +148,16 @@ export class SurveyCreator extends CreatorBase<Survey> {
     this._currentPage(page);
   }
 
+  //TODO: refactor this method and remove
+  public _dummySetText(text: string): void {
+    //should work with JSON5
+    //var textWorker = new SurveyTextWorker(this.text);
+    //this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
+
+    //works only with JSON
+    this.initSurveyWithJSON(JSON.parse(text), true);
+  }
+
   dragDropHelper: DragDropHelper;
 
   clickToolboxItem(json: any) {
