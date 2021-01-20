@@ -8,6 +8,7 @@ import {
 import { SurveyCreator } from "../src/editor";
 import { unparse, parse } from "papaparse";
 import { settings } from "../src/settings";
+import { editorLocalization } from "../src/editorLocalization";
 
 export default QUnit.module("TranslatonTests");
 
@@ -702,3 +703,17 @@ QUnit.test(
     assert.equal(group.items[1].name, "question1", "second is question1");
   }
 );
+QUnit.test("Localize the group and item text", function (assert) {
+  var question = new Survey.QuestionCheckbox("q1");
+  question.choices = ["item1", { value: "item2", text: "text 2" }];
+  var group = new TranslationGroup(question.name, question);
+  var choices: TranslationGroup = null;
+  for (var i = 0; i < group.groups.length; i++) {
+    if (group.groups[i].name == "choices") {
+      choices = group.groups[i];
+      break;
+    }
+  }
+  assert.ok(choices, "choices has been created as group");
+  assert.equal(choices.text, "Choices", "Use the localized name");
+});
