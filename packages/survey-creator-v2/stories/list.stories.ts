@@ -1,13 +1,11 @@
 // import { document } from "global";
 import { text, boolean, button } from "@storybook/addon-knobs";
-import * as ko from "knockout";
-
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ListViewModel } from "../src/entries";
+import { SvgBundleViewModel } from "../src/svgbundle";
 
 export default {
   title: "List",
-  "ko-components": [ListViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [SvgBundleViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},
@@ -22,9 +20,9 @@ export default {
 export const Ordinary = () => {
   return {
     template:
-      '<div style="width: 250px"><svc-list params="onItemSelect: onItemSelect, items: items"></svc-list></div>',
+      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
     context: {
-      name: "svc-list",
+      name: "sv-list",
       onItemSelect: () => {
         alert("!");
       },
@@ -42,9 +40,9 @@ export const Ordinary = () => {
 export const WithDisabledItem = () => {
   return {
     template:
-      '<div style="width: 250px"><svc-list params="onItemSelect: onItemSelect, items: items"></svc-list></div>',
+      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
     context: {
-      name: "svc-list",
+      name: "sv-list",
       onItemSelect: () => {
         alert("!");
       },
@@ -63,9 +61,9 @@ export const WithDisabledItem = () => {
 export const WithSelection = () => {
   return {
     template:
-      '<div style="width: 250px"><svc-list params="onItemSelect: onItemSelect, items: items, allowSelection: allowSelection"></svc-list></div>',
+      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items, allowSelection: allowSelection"></sv-list></div>',
     context: {
-      name: "svc-list",
+      name: "sv-list",
       allowSelection: boolean("Allow selection", true),
       onItemSelect: () => {
         alert("!");
@@ -84,9 +82,9 @@ export const WithSelection = () => {
 export const WithIcons = () => {
   return {
     template:
-      '<div style="width: 250px"><svc-list params="onItemSelect: onItemSelect, items: items"></svc-list></div>',
+      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
     context: {
-      name: "svc-list",
+      name: "sv-list",
       title: text("Title", "Show menu"),
       onItemSelect: () => {
         alert("!");

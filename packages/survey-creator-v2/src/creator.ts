@@ -41,27 +41,27 @@ export class SurveyCreator extends CreatorBase<Survey> {
     this.toolbarItems.push(
       ...(<any>[
         {
-          icon: "icon-undo",
+          iconName: "icon-undo",
           action: () => {},
           title: "Undo",
           showTitle: false,
         },
         {
-          icon: "icon-redo",
+          iconName: "icon-redo",
           action: () => {},
           title: "Redo",
           showTitle: false,
         },
-        { component: "sv-action-bar-separator" },
         {
-          icon: "icon-settings",
+          iconName: "icon-settings",
+          needSeparator: true,
           action: () => this.selectElement(this.survey),
           isActive: ko.computed(() => this.isElementSelected(this.survey)),
           title: "Settings",
           showTitle: false,
         },
         {
-          icon: "icon-clear",
+          iconName: "icon-clear",
           action: () => {
             alert("clear pressed");
           },
@@ -70,7 +70,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
-          icon: "icon-search",
+          iconName: "icon-search",
           action: () => {
             this.showSearch = !this.showSearch;
           },
@@ -79,10 +79,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
-          component: "sv-action-bar-separator",
-        },
-        {
+          iconName: "icon-preview",
           icon: "icon-preview",
+          needSeparator: true,
           css: ko.computed(() =>
             this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
           ),
@@ -276,7 +275,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         items.push({
           id: "convertTo",
           css: "sv-action--first sv-action-bar-item--secondary",
-          icon: "icon-change_16x16",
+          iconName: "icon-change_16x16",
           // title: this.getLocString("qt." + currentType),
           title: this.getLocString("survey.convertTo"),
           items: availableTypes.map((type) => ({
@@ -315,7 +314,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           element.isRequired ? "sv-action-bar-item--secondary" : ""
         ),
         title: this.getLocString("pe.isRequired"),
-        icon: ko.computed(() => {
+        iconName: ko.computed(() => {
           if (isRequired()) {
             return "icon-switchactive_16x16";
           }

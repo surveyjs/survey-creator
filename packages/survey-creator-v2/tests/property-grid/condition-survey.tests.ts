@@ -713,14 +713,14 @@ test("Parse expressions", () => {
   editor.text = "{q3} = [1, 2]";
   expect(editor.isReady).toBeTruthy();
 
-  /* TODO wait for survey.getVariableNames() function
+  // TODO wait for survey.getVariableNames() function
   editor.text = "{user} = 'user1'";
   expect(editor.isReady).toBeTruthy();
   panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("questionName").value).toEqual("user");
   expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
   expect(panel.getQuestionByName("questionValue").value).toEqual("user1");
-  */
+
   editor.text = "{val1} = 2";
   expect(editor.isReady).toBeTruthy();
   panel = editor.panel.panels[0];

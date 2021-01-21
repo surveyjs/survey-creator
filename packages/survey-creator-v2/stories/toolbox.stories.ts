@@ -3,10 +3,11 @@ import { boolean, text } from "@storybook/addon-knobs";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 import { ToolboxViewModel } from "../src/components/toolbox/toolbox";
+import { SvgBundleViewModel } from "../src/svgbundle";
 
 export default {
   title: "Toolbox",
-  "ko-components": [ToolboxViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [ToolboxViewModel, SvgBundleViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     jest: [],
     actions: {},

@@ -117,9 +117,13 @@ export class TranslationGroup extends TranslationItemBase {
   constructor(
     public name,
     public obj: any,
-    public translation: ITranslationLocales = null
+    public translation: ITranslationLocales = null,
+    public text: string = ""
   ) {
     super(name);
+    if (!this.text) {
+      this.text = name;
+    }
     this.koExpanded = ko.observable(false);
     this.koShowHeader = ko.observable(true);
     this.reset();
@@ -216,7 +220,8 @@ export class TranslationGroup extends TranslationItemBase {
         var group = new TranslationGroup(
           property.name,
           value,
-          this.translation
+          this.translation,
+          editorLocalization.getPropertyName(property.name)
         );
         if (group.hasItems) {
           this.itemValues.push(group);
@@ -322,10 +327,13 @@ export class TranslationGroup extends TranslationItemBase {
       var obj = value[i];
       if (!!obj && obj.getType) {
         var name = obj["name"];
+        var text = editorLocalization.getPropertyName(name);
         if (!name) {
-          name = property.name + "[" + i.toString() + "]";
+          var index = "[" + i.toString() + "]";
+          name = property.name + index;
+          text = editorLocalization.getPropertyName(property.name) + index;
         }
-        var group = new TranslationGroup(name, obj, this.translation);
+        var group = new TranslationGroup(name, obj, this.translation, text);
         if (group.hasItems) {
           this.itemValues.push(group);
         }
