@@ -76,7 +76,7 @@ export class TabJsonAceEditorModel implements ITabJsonModel {
     this.plugin.isProcessingImmediately = false;
   }
   public init(editorElement: HTMLElement): void {
-    this.aceEditor = ace.edit(<HTMLElement>editorElement.querySelector(".svc-json-editor"));
+    this.aceEditor = ace.edit(<HTMLElement>editorElement.querySelector(".svc-json-editor-tab__ace-editor"));
     this.aceEditor.setReadOnly(this.plugin.creator.readOnly);
     if (TabJsonAceEditorModel.aceBasePath) {
       try {
@@ -232,7 +232,7 @@ export class TabJsonEditorViewModel {
 ko.components.register("svc-tab-json-editor", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new TabJsonEditorViewModel(params.data, componentInfo.element);
+      return new TabJsonEditorViewModel(params.data, componentInfo.element.nextElementSibling);
     }
   },
   template: template

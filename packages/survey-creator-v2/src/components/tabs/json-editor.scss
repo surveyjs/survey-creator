@@ -23,3 +23,7 @@ svc-tab-json-editor {
   padding: 0.14em;
   background-color: $red;
 }
+
+.svc-json-editor-tab__ace-editor {
+  height: 100%;
+}
