@@ -208,6 +208,7 @@ export class TabJsonEditorPlugin implements ICreatorPlugin {
 export class TabJsonEditorViewModel {
   private koText: ko.Observable<string>;
   private koErrors: ko.ObservableArray<any>;
+  private ariaLabel: string;
   constructor(private plugin: TabJsonEditorPlugin, element: any) {
     if (this.hasAceEditor) {
       this.plugin.model.init(element);
@@ -215,6 +216,7 @@ export class TabJsonEditorViewModel {
     else {
       this.koText = ko.observable("");
       this.koErrors = ko.observableArray();
+      this.ariaLabel = getLocString("ed.jsonEditor");
       this.plugin.model.init(this.koText, this.koErrors);
     }
   }

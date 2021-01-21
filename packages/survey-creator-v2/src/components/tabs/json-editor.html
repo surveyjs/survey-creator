@@ -1,9 +1,11 @@
 <div class="svc-creator-tab__content">
     <div class="svc-json-editor-tab__content">
-        <div class="svc-json-editor-tab__ace-editor"></div>
+        <!-- ko if: hasAceEditor -->
+            <div class="svc-json-editor-tab__ace-editor"></div>
+        <!-- /ko  -->
         <!-- ko if: !hasAceEditor -->
             <textarea class="svc-json-editor-tab__content-area"
-                data-bind="textInput: koText, disable: readOnly, attr: { 'aria-label': 'JSON Editor' }">
+                data-bind="textInput: koText, disable: readOnly, attr: { 'aria-label': ariaLabel }">
             </textarea>
             <div class="svc-json-editor-tab__content-errors" data-bind="foreach: koErrors">
                 <span>Error: </span><span data-bind="text: text"></span>
