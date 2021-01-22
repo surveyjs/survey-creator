@@ -7,7 +7,8 @@ import { QuestionConverter } from "@survey/creator/questionconverter";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { DragDropHelper } from "./dragdrophelper";
 import { PropertyGrid } from "./property-grid";
-import { TabJsonEditorPlugin } from "./components/tabs/json-editor";
+import { TabJsonAceModel, TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 
 export interface ICreatorPlugin {
   activate: () => void;
@@ -230,7 +231,12 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
   private initTabsPlugin(): void {
     if (this.showJSONEditorTab) {
-      new TabJsonEditorPlugin(this);
+      if (TabJsonAceModel.hasAceEditor()) {
+        new TabJsonEditorAcePlugin(this);
+      }
+      else {
+        new TabJsonEditorTextareaPlugin(this);
+      }
     }
   }
 
