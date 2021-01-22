@@ -25,7 +25,7 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 
 ## Supported Platforms and Examples
 
-Unlike SurveyJS Library, Survey Creator uses only knockoutjs. The reason we have chosen this framework is simple. It has a tiny size, comparing with other popular modern frameworks, and it works perfectly with angular2+, reactjs and others.
+Unlike SurveyJS Library, Survey Creator uses only knockoutjs. The reason we have chosen this framework is simple. It has a tiny size, comparing with other popular modern frameworks, and it works perfectly with Angular, reactjs and others.
 
 We have created several Quick Start GitHub repositories for different client platforms, to give you an easy start.
 
