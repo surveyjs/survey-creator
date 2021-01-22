@@ -2035,3 +2035,10 @@ QUnit.test("Set Text property", function (assert) {
   assert.equal(editor.tabs()[1].template, "se-tab-test");
   assert.equal(editor.tabs()[2].template, "se-tab-json-editor");
 });
+
+QUnit.test("options.showPagesToolbox", function (assert) {
+  var editor = new SurveyCreator();
+  assert.equal(editor.showPagesToolbox, true);
+  editor = new SurveyCreator(null, {showPagesToolbox: "none"});
+  assert.equal(editor.showPagesToolbox, false);
+});

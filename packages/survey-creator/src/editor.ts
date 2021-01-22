@@ -552,7 +552,7 @@ export class SurveyCreator
   koHideAdvancedSettings: ko.Observable<boolean>;
   koTestSurveyWidth: any;
   koDesignerHeight: ko.Observable<any>;
-  koShowPagesToolbox = ko.observable<ContainerLocation>(true);
+  koShowPagesToolbox: ko.Observable<ContainerLocation>;
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -758,6 +758,7 @@ export class SurveyCreator
     this.koAllowControlSurveyTitleVisibility = ko.observable(true);
     this.koDesignerHeight = ko.observable<any>("1000px");
     this.koShowSurveyTitle = ko.observable("ifentered");
+    this.koShowPagesToolbox = ko.observable<ContainerLocation>(true);
 
     super.setOptions(options);
     options = this.options;
