@@ -109,6 +109,8 @@ export class SurveyQuestionEditorDefinition {
         "removeRowText",
         "confirmDelete",
         "confirmDeleteText",
+        { name: "hideColumnsIfEmpty", tab: "columns" },
+        { name: "emptyRowsText", tab: "columns" },
         { name: "defaultRowValue", tab: "data" },
         { name: "defaultValueFromLastRow", tab: "data" },
         { name: "keyName", tab: "validation" },
