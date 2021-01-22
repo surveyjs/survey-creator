@@ -38,6 +38,39 @@ export interface IPropertyEditorSetup {
   apply();
 }
 
+export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
+  private editSurveyValue: SurveyModel;
+  constructor(
+    protected options: ISurveyCreatorOptions = null,
+    doSetup: boolean = true
+  ) {
+    if (!this.options) {
+      this.options = new EmptySurveyCreatorOptions();
+    }
+    if (doSetup) {
+      this.setupSurvey();
+    }
+  }
+  protected setupSurvey() {
+    this.editSurveyValue = this.createSurvey();
+  }
+  public get editSurvey(): SurveyModel {
+    return this.editSurveyValue;
+  }
+  protected createSurvey(): SurveyModel {
+    var json = this.getSurveyJSON();
+    json.showNavigationButtons = false;
+    json.showPageTitles = false;
+    json.showQuestionNumbers = "off";
+    json.textUpdateMode = "onTyping";
+    json.requiredText = "";
+    return this.options.createSurvey(json, this.getSurveyCreationReason());
+  }
+  protected abstract getSurveyJSON(): any;
+  protected abstract getSurveyCreationReason(): string;
+  public abstract apply();
+}
+
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
   getJSON(

@@ -9,30 +9,15 @@ import {
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
 import { editorLocalization } from "@survey/creator/editorLocalization";
-import { IPropertyEditorSetup } from "./index";
+import { PropertyEditorSetupValue } from "./index";
 
-export class CellsEditor implements IPropertyEditorSetup {
-  private editSurveyValue: SurveyModel;
+export class CellsEditor extends PropertyEditorSetupValue {
   private editMatrixValue: QuestionMatrixDropdownModel;
   constructor(
     public matrix: QuestionMatrixModel,
-    private options: ISurveyCreatorOptions = null
+    options: ISurveyCreatorOptions = null
   ) {
-    if (!this.options) {
-      this.options = new EmptySurveyCreatorOptions();
-    }
-    this.editSurveyValue = this.createSurvey({
-      showNavigationButtons: false,
-      showPageTitles: false,
-      showQuestionNumbers: "off",
-      elements: [
-        {
-          type: "matrixdropdown",
-          name: "cells",
-          cellType: "comment",
-        },
-      ],
-    });
+    super(options);
     this.editMatrixValue = <QuestionMatrixDropdownModel>(
       this.editSurvey.getQuestionByName("cells")
     );
@@ -40,17 +25,26 @@ export class CellsEditor implements IPropertyEditorSetup {
     this.buildRows();
     this.editMatrix.value = this.matrix.cells.getJson();
   }
-  public get editSurvey(): SurveyModel {
-    return this.editSurveyValue;
+  protected getSurveyJSON(): any {
+    return {
+      elements: [
+        {
+          type: "matrixdropdown",
+          name: "cells",
+          cellType: "comment",
+        },
+      ],
+    };
   }
+  protected getSurveyCreationReason(): string {
+    return "cells-editor";
+  }
+
   public get editMatrix(): QuestionMatrixDropdownModel {
     return this.editMatrixValue;
   }
   public apply() {
     this.matrix.cells.setJson(this.editMatrix.value);
-  }
-  protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "cells-editor"); //TODO reason name
   }
   private buildColumns() {
     var columns = this.matrix.columns;
