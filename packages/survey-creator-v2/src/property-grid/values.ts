@@ -11,7 +11,11 @@ import {
   PropertyGridEditor,
 } from "./index";
 import { CellsEditor } from "./cells-survey";
-import { DefaultValueEditor } from "./values-survey";
+import {
+  DefaultValueEditor,
+  DefaultMatrixRowValueEditor,
+  DefaultPanelDynamicPanelValueEditor,
+} from "./values-survey";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
@@ -23,6 +27,14 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     return {
       type: "empty",
     };
+  }
+  public clearPropertyValue(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): void {
+    obj[prop.name] = undefined;
   }
   public onAfterRenderQuestion(
     obj: Base,
@@ -96,15 +108,40 @@ export class PropertyGridValueEditor extends PropertyGridValueEditorBase {
   ): IPropertyEditorSetup {
     return new DefaultValueEditor(<Question>obj, prop.name, options);
   }
-  public clearPropertyValue(
+}
+
+export class PropertyGridRowValueEditor extends PropertyGridValueEditorBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "rowvalue";
+  }
+  public createPropertyEditorSetup(
     obj: Base,
     prop: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ): void {
-    obj[prop.name] = undefined;
+  ): IPropertyEditorSetup {
+    return new DefaultMatrixRowValueEditor(<Question>obj, prop.name, options);
+  }
+}
+export class PropertyGridPanelValueEditor extends PropertyGridValueEditorBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "panelvalue";
+  }
+  public createPropertyEditorSetup(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): IPropertyEditorSetup {
+    return new DefaultPanelDynamicPanelValueEditor(
+      <Question>obj,
+      prop.name,
+      options
+    );
   }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridCellsEditor());
 PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+PropertyGridEditorCollection.register(new PropertyGridRowValueEditor());
+PropertyGridEditorCollection.register(new PropertyGridPanelValueEditor());
