@@ -23,6 +23,7 @@ import {
   MatrixDropdownColumn,
   SurveyTriggerSetValue,
   QuestionMatrixModel,
+  Serializer,
   QuestionPanelDynamicModel,
 } from "survey-knockout";
 import {
@@ -121,23 +122,44 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.choices[0].value).toEqual("");
   expect(localeQuestion.choices[0].text).toEqual("Default (english)");
 });
-/* Wait for v1.8.24
-test("string[] property editor", () => {
-  Serializer.addProperty("text", "prop1:string[]");
-
+test("set property editor", () => {
+  Serializer.addProperty("question", {
+    name: "prop1:set",
+    choices: ["item1", "item2", "item3"],
+  });
   var question = new QuestionTextModel("q1");
-  question.prop1 = ["item1", "item2"];
+  question.prop1 = ["item1", "item3"];
   var propertyGrid = new PropertyGridModelTester(question);
-  var prop1Question = propertyGrid.survey.getQuestionByName("prop1");
-  expect(prop1Question.getType()).toEqual("comment");
-  expect(prop1Question.value).toEqual("item1/nitem2");
-  prop1Question.value = "item1/nitem2/nitem3";
-  expect(question.prop1).toHaveLength(3);
-  expect(question.prop1[2]).toExpect("item3");
-
-  Serializer.removeProperty("text", "prop1");
+  var editQuestion = propertyGrid.survey.getQuestionByName("prop1");
+  expect(editQuestion.getType()).toEqual("checkbox");
+  expect(editQuestion.choices.length).toEqual(3);
+  expect(editQuestion.value).toHaveLength(2);
+  expect(editQuestion.value[0]).toEqual("item1");
+  expect(editQuestion.value[1]).toEqual("item3");
+  question.prop1 = ["item2"];
+  expect(editQuestion.value).toHaveLength(1);
+  expect(editQuestion.value[0]).toEqual("item2");
+  editQuestion.value = ["item2", "item3"];
+  expect(question.prop1).toHaveLength(2);
+  expect(question.prop1[0]).toEqual("item2");
+  expect(question.prop1[1]).toEqual("item3");
+  Serializer.removeProperty("question", "prop1");
 });
-*/
+
+test("string[] property editor", () => {
+  var question = new QuestionTextModel("q1");
+  question.dataList = ["item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var dataListQuestion = propertyGrid.survey.getQuestionByName("dataList");
+  expect(dataListQuestion.getType()).toEqual("comment");
+  expect(dataListQuestion.value).toEqual("item1\nitem2");
+  /** TODO fix bugs in library */
+  /*
+  dataListQuestion.value = "item1\nitem2\nitem3";
+  expect(question.dataList).toHaveLength(3);
+  expect(question.dataList[2]).toExpect("item3");
+  */
+});
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];

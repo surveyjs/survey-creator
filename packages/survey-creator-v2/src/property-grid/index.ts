@@ -671,6 +671,29 @@ export class PropertyGridEditorColor extends PropertyGridEditor {
     return { type: "text", inputType: "color" };
   }
 }
+export class PropertyGridEditorStringArray extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "string[]";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    return { type: "comment" };
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (val: any): any {
+      if (!Array.isArray(val)) return "";
+      return val.join("\n");
+    };
+    question.valueToDataCallback = function (val: any): any {
+      if (!val) return [];
+      if (Array.isArray(val) && !val["split"]) return val;
+      return val.split("\n");
+    };
+  }
+}
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.hasChoices;
@@ -717,6 +740,22 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
 }
 
+export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "set";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    var json = super.getJSON(obj, prop, options);
+    var hasTagbox = !!Serializer.findClass("tagbox");
+    json.type = hasTagbox ? "tagbox" : "checkbox";
+    json.hasSelectAll = !hasTagbox;
+    return json;
+  }
+}
 export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question";
@@ -799,6 +838,8 @@ PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
+PropertyGridEditorCollection.register(new PropertyGridEditorSet());
+PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(
