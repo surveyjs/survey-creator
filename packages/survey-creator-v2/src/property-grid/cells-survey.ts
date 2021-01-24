@@ -19,7 +19,7 @@ export class CellsEditor extends PropertyEditorSetupValue {
   ) {
     super(options);
     this.editMatrixValue = <QuestionMatrixDropdownModel>(
-      this.editSurvey.getQuestionByName("cells")
+      this.editSurvey.getQuestionByName("question")
     );
     this.buildColumns();
     this.buildRows();
@@ -30,7 +30,7 @@ export class CellsEditor extends PropertyEditorSetupValue {
       elements: [
         {
           type: "matrixdropdown",
-          name: "cells",
+          name: "question",
           cellType: "comment",
         },
       ],

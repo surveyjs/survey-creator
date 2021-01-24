@@ -15,6 +15,7 @@ import {
   DefaultValueEditor,
   DefaultMatrixRowValueEditor,
   DefaultPanelDynamicPanelValueEditor,
+  TriggerValueEditor,
 } from "./values-survey";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
@@ -141,7 +142,25 @@ export class PropertyGridPanelValueEditor extends PropertyGridValueEditorBase {
   }
 }
 
+export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "triggervalue";
+  }
+  public createPropertyEditorSetup(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): IPropertyEditorSetup {
+    if (!obj["setToName"] || !obj["owner"]) return;
+    var setQuestion = obj["owner"].getQuestionByValueName(obj["setToName"]);
+    if (!setQuestion) return;
+    return new TriggerValueEditor(setQuestion, obj, prop.name, options);
+  }
+}
+
 PropertyGridEditorCollection.register(new PropertyGridCellsEditor());
 PropertyGridEditorCollection.register(new PropertyGridValueEditor());
 PropertyGridEditorCollection.register(new PropertyGridRowValueEditor());
 PropertyGridEditorCollection.register(new PropertyGridPanelValueEditor());
+PropertyGridEditorCollection.register(new PropertyGridTriggerValueEditor());

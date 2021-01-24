@@ -1,6 +1,5 @@
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
-import { SurveyHelper } from "@survey/creator/surveyHelper";
-import { Question, Serializer } from "survey-knockout";
+import { Question, Base } from "survey-knockout";
 import { PropertyEditorSetupValue } from "./index";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
@@ -106,5 +105,22 @@ export class DefaultPanelDynamicPanelValueEditor extends DefaultArrayValueEditor
     json.minPanelCount = 1;
     json.maxPanelCount = 1;
     return json;
+  }
+}
+export class TriggerValueEditor extends DefaultValueEditor {
+  constructor(
+    public editQuestion: Question,
+    public editObj: Base,
+    protected propertyName: string,
+    options: ISurveyCreatorOptions = null
+  ) {
+    super(editQuestion, propertyName, options);
+    this.question.value = this.getQuestionValue();
+  }
+  protected getQuestionValue(): any {
+    return !!this.editObj ? this.editObj[this.propertyName] : null;
+  }
+  public apply() {
+    this.editObj[this.propertyName] = this.question.value;
   }
 }
