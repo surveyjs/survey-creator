@@ -73,6 +73,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
 
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty): boolean;
+  isDefault?: () => boolean;
   getJSON(
     obj: Base,
     prop: JsonObjectProperty,
@@ -117,13 +118,23 @@ export var PropertyGridEditorCollection = {
   },
   getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
     if (!prop) return null;
-    var key = prop.id;
-    var fitEd = this.fitHash[key];
+    var fitEd = this.fitHash[prop.id];
     if (!!fitEd) return fitEd;
+    let ed = this.isEditorFit(prop);
+    return !!ed ? ed : this.isEditorFit(prop, true);
+  },
+  isEditorFit(
+    prop: JsonObjectProperty,
+    asDefault: boolean = false
+  ): IPropertyGridEditor {
     for (var i = this.editors.length - 1; i >= 0; i--) {
-      if (this.editors[i].fit(prop)) {
-        this.fitHash[key] = this.editors[i];
-        return this.editors[i];
+      let ed = this.editors[i];
+      if (
+        (!asDefault && ed.fit(prop)) ||
+        (asDefault && ed.isDefault && ed.isDefault())
+      ) {
+        this.fitHash[prop.id] = ed;
+        return ed;
       }
     }
     return null;
@@ -296,6 +307,7 @@ export class PropertyJSONGenerator {
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
+    if (!className) return null;
     var prop = Serializer.findProperty(className, propName);
     if (!prop) return null;
     var json = this.createQuestionJSON(prop, "", true);
@@ -627,6 +639,9 @@ export class PropertyGridEditorString extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
   }
+  public isDefault() {
+    return true;
+  }
   public getJSON(
     obj: Base,
     prop: JsonObjectProperty,
@@ -649,7 +664,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
 }
 export class PropertyGridEditorText extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "text";
+    return prop.type === "text";
   }
   public getJSON(
     obj: Base,
@@ -657,6 +672,18 @@ export class PropertyGridEditorText extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return { type: "comment", textUpdateMode: "onTyping" };
+  }
+}
+export class PropertyGridEditorHtml extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "html";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    return { type: "comment" };
   }
 }
 export class PropertyGridEditorColor extends PropertyGridEditor {
@@ -837,6 +864,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
+PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
