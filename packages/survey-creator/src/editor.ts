@@ -35,7 +35,7 @@ import { Commands } from "./commands";
 import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
-import { localization } from "./entries";
+import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase } from "./creator-base";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
@@ -645,20 +645,7 @@ export class SurveyCreator
       }
     });
 
-    this.propertyGridObjectEditorModel.onAfterRenderCallback = function (
-      obj,
-      htmlElement,
-      prop
-    ) {
-      if (self.onPropertyAfterRender.isEmpty) return;
-      var options = {
-        obj: obj,
-        htmlElement: htmlElement,
-        property: prop.property,
-        propertyEditor: prop.editor,
-      };
-      self.onPropertyAfterRender.fire(self, options);
-    };
+    this.propertyGridObjectEditorModel.onAfterRenderCallback = this.onEditorAfterRenderCallback;
     this.propertyGridObjectEditorModel.onSortPropertyCallback = function (
       obj: any,
       property1: Survey.JsonObjectProperty,
@@ -742,6 +729,22 @@ export class SurveyCreator
     this.addToolbarItems();
   }
 
+  private onEditorAfterRenderCallback = (
+      obj: any,
+      htmlElement: HTMLElement,
+      prop: SurveyObjectProperty
+    ) => {
+    if (this.onPropertyAfterRender.isEmpty) {
+      return;
+    }
+    var options = {
+      obj: obj,
+      htmlElement: htmlElement,
+      property: prop.property,
+      propertyEditor: prop.editor,
+    };
+    this.onPropertyAfterRender.fire(this, options);
+  };
   setOptions(options) {
     this.koShowPropertyGrid = ko.observable<ContainerLocation>(true);
     this.koShowElementEditorAsPropertyGrid = ko.observable(false);
@@ -2137,7 +2140,8 @@ export class SurveyCreator
           isCanceled: isCanceled,
           element: element,
         });
-      }
+      },
+      this.onEditorAfterRenderCallback
     );
   }
   public onQuestionEditorChanged(question: Survey.Question) {
