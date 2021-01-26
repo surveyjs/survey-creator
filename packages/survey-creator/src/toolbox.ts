@@ -47,12 +47,12 @@ export class QuestionToolbox {
     "dropdown",
     "comment",
     "rating",
+    "ranking",
     "imagepicker",
     "boolean",
     "image",
     "html",
     "signaturepad",
-    "ranking",
   ];
 
   private _questionDefaultSettings = {
