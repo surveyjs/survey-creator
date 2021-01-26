@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, Base, Page, surveyLocalization } from "survey-knockout";
+import { Survey, Base, Page, surveyLocalization, PopupModel } from "survey-knockout";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { simulatorDevices } from "@survey/creator/components/simulator";
@@ -85,24 +85,36 @@ export class TestSurveyTabViewModel {
     //   }),
     //   items: <any>this.koLanguages,
     // });
-
     var deviceSelectorItems = Object.keys(simulatorDevices).filter((key) => !!simulatorDevices[key].title).map(key => ({title: simulatorDevices[key].title, value: key}));
+    const devicePopupModel = new PopupModel(
+      "sv-list",
+      {
+        items: deviceSelectorItems,
+        selectedItem: ko.computed({
+          read: () => deviceSelectorItems.filter(item => item.value === this.simulator.device())[0],
+          write: val => {}
+        }),
+        onItemSelect: (item: any) => {
+          this.simulator.device(item.value);
+          devicePopupModel.toggleVisibility();
+        },       
+      },
+      undefined,
+      "top",
+      "right"
+    );
+
     this.actions.push(<any>{
       id: "deviceSelector",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
       title: ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
-      items: deviceSelectorItems,
       enabled: this.showSimulator,
       component: "sv-action-bar-item-dropdown",
-      verticalPosition: "top",
       action: (newDevice) => {
-        this.simulator.device(newDevice.value);
+        devicePopupModel.toggleVisibility();
       },
-      selectedItem: ko.computed({
-        read: () => deviceSelectorItems.filter(item => item.value === this.simulator.device())[0],
-        write: val => {}
-      })
+      popupModel: devicePopupModel
     });
     this.actions.push(<any>{
       id: "prevPage",
@@ -120,23 +132,36 @@ export class TestSurveyTabViewModel {
         return { title: surveyProvider.getObjectDisplayName(page.page, "survey-tester"), value: page.page };
       })
     );
+
+    const pagePopupModel = new PopupModel(
+      "sv-list",
+      {
+        items: pageSelectorItems,
+        selectedItem: ko.computed({
+          read: () => pageSelectorItems().filter(item => item.value === this.koActivePage())[0],
+          write: val => {}
+        }),
+        onItemSelect: (item: any) => {
+          this.koActivePage(item.value);
+          pagePopupModel.toggleVisibility();
+        },       
+      },
+      undefined,
+      "top",
+      "center"
+    );
+
     this.actions.push(<any>{
       id: "pageSelector",
       title: ko.computed(() => this.koActivePage() && surveyProvider.getObjectDisplayName(this.koActivePage(), "survey-tester") || this.getLocString("ts.selectPage")),
       visible: ko.computed(
         () => this.isRunning && this.koPages().length > 1 && this.koShowPagesInTestSurveyTab()
       ),
-      items: <any>pageSelectorItems,
       component: "sv-action-bar-item-dropdown",
-      verticalPosition: "top",
-      horizontalPosition: "center",
+      popupModel: pagePopupModel,
       action: (newPage) => {
-        this.koActivePage(newPage.value);
+        pagePopupModel.toggleVisibility();
       },
-      selectedItem: ko.computed({
-        read: () => pageSelectorItems().filter(item => item.value === this.koActivePage())[0],
-        write: val => {}
-      })
     });
     this.actions.push(<any>{
       id: "nextPage",

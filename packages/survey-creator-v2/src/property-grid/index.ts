@@ -303,6 +303,7 @@ export class PropertyJSONGenerator {
     if (!json) return null;
     json.name = prop.name;
     json.visible = prop.visible;
+    json.isRequired = prop.isRequired;
     json.title = this.getQuestionTitle(prop.name, title);
     return json;
   }
@@ -757,9 +758,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       var text = !!item.text ? item.text : "";
       if (!text) {
         text = this.getLocalizedText(prop, jsonItem.value);
-        if (!!text && text != jsonItem.value) {
-          jsonItem.text = text;
-        }
+      }
+      if (!!text && text != jsonItem.value) {
+        jsonItem.text = text;
       }
       choices.push(jsonItem);
     }

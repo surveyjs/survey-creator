@@ -49,7 +49,8 @@ export class ActionBarItemPropertyEditorModal {
 ko.components.register("sv-action-bar-property-editor-modal", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      return new ActionBarItemPropertyEditorModal(params.item);
+      //return new ActionBarItemPropertyEditorModal(params.item);
+      return params.item;
     },
   },
   template: template,
