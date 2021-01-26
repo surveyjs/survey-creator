@@ -242,6 +242,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxValueExpression", tab: "logic" },
         { name: "size", tab: "layout" },
         { name: "maxLength", tab: "validation" },
+        { name: "minErrorText", tab: "validation" },
+        { name: "maxErrorText", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
       ],
     },
