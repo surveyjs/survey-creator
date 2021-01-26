@@ -730,10 +730,10 @@ export class SurveyCreator
   }
 
   private onEditorAfterRenderCallback = (
-      obj: any,
-      htmlElement: HTMLElement,
-      prop: SurveyObjectProperty
-    ) => {
+    obj: any,
+    htmlElement: HTMLElement,
+    prop: SurveyObjectProperty
+  ) => {
     if (this.onPropertyAfterRender.isEmpty) {
       return;
     }
@@ -2124,6 +2124,11 @@ export class SurveyCreator
         isCanceled = false;
         if (oldName !== question["name"]) {
           self.updateConditionsOnQuestionNameChanged(question, "name", oldName);
+          self.onElementNameChanged.fire(self, {
+            obj: question,
+            oldName: oldName,
+            newName: question["name"],
+          });
         }
         if (oldValueName !== question["valueName"]) {
           self.updateConditionsOnQuestionNameChanged(
