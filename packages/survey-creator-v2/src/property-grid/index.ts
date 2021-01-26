@@ -487,6 +487,7 @@ export class PropertyGridModel {
       title: "",
       id: "property-grid-clear",
       icon: "icon-property_grid_clear",
+      iconName: "icon-property_grid_clear",
       action: () => {
         editor.clearPropertyValue(this.obj, property, question, this.options);
       },
@@ -502,6 +503,7 @@ export class PropertyGridModel {
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-property_grid_modal",
+      iconName: "icon-property_grid_modal",
       component: "sv-action-bar-property-editor-modal",
       data: {
         editor: null,

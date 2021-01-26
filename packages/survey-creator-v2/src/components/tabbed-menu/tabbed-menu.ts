@@ -10,7 +10,7 @@ export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
   constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>) {
     super();
-    (<any>this).dotsItem.horizontalPosition = "right";
+    this.dotsItemPopupModel.horizontalPosition = "right";
     this.itemsSubscription = ko.computed(() => {
       var items = ko.unwrap(_items);
       items.forEach((item) => {

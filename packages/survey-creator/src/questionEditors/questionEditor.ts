@@ -507,9 +507,11 @@ export class SurveyPropertyEditorShowWindow {
     elWindow: HTMLElement,
     onChanged: (question: Survey.Question) => any,
     options: ISurveyObjectEditorOptions = null,
-    onClosed: () => any = null
+    onClosed: () => any = null,
+    onEditorAfterRenderCallback: (obj: any, htmlElement: HTMLElement, prop: SurveyObjectProperty) => void = undefined
   ) {
     var editor = new SurveyQuestionEditor(question, null, options);
+    editor.onAfterRenderCallback = onEditorAfterRenderCallback;
     editor.onChanged = onChanged;
 
     this.koEditor(editor);

@@ -3330,6 +3330,99 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           
   
           <div
+            aria-label="Ranking toolbox item"
+            class="svc-toolbox__item svc-toolbox__item--icon-ranking"
+            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            title="Ranking"
+          >
+            
+    
+            <span
+              class="svc-toolbox__item-container"
+            >
+               
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+    
+            </span>
+            
+    
+            <span
+              class="svc-toolbox__item-banner"
+            >
+              
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+      
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Ranking
+              </span>
+              
+    
+            </span>
+            
+    
+  
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+        </div>
+        
+    
+        
+    
+        <div
+          class="svc-toolbox__tool"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          style="visibility: visible;"
+        >
+          
+      
+          <!-- ko if: $data.needSeparator -->
+          <!-- /ko -->
+          
+      
+          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          
+  
+          <div
             aria-label="Image picker toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-imagepicker"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -4539,99 +4632,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           
   
           <div
-            aria-label="ranking toolbox item"
-            class="svc-toolbox__item svc-toolbox__item--icon-ranking"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="ranking"
-          >
-            
-    
-            <span
-              class="svc-toolbox__item-container"
-            >
-               
-      
-              <sv-svg-icon
-                params="iconName: iconName, size: 24"
-              >
-                <svg
-                  class="sv-svg-icon"
-                  style="width: 24px; height: 24px;"
-                >
-                  <use
-                    xlink:href="#icon-ranking"
-                  />
-                </svg>
-                
-
-              </sv-svg-icon>
-              
-    
-            </span>
-            
-    
-            <span
-              class="svc-toolbox__item-banner"
-            >
-              
-      
-              <sv-svg-icon
-                params="iconName: iconName, size: 24"
-              >
-                <svg
-                  class="sv-svg-icon"
-                  style="width: 24px; height: 24px;"
-                >
-                  <use
-                    xlink:href="#icon-ranking"
-                  />
-                </svg>
-                
-
-              </sv-svg-icon>
-              
-      
-              <span
-                class="svc-toolbox__item-title"
-                data-bind="text: title"
-              >
-                ranking
-              </span>
-              
-    
-            </span>
-            
-    
-  
-          </div>
-          
-
-          <!-- /ko -->
-          
-    
-        </div>
-        
-    
-        
-    
-        <div
-          class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
-          style="visibility: visible;"
-        >
-          
-      
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
-          
-      
-          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
-          
-  
-          <div
             aria-label="propertygrid_restfull toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-default"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -5423,7 +5423,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
 
     <div
       class="svc-page-navigator__selector"
-      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      data-bind="click: togglePageSelector, attr: { title: 'text' }"
       title="text"
     >
       
@@ -5446,7 +5446,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
       
     
       <sv-popup
-        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+        params="model: popupModel, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
       </sv-popup>
@@ -5735,8 +5735,8 @@ exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
   
         
   <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+    params="model: { contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition }"
   >
     <div />
   </sv-popup>

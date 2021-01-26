@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey, Base, Page } from "survey-knockout";
+import { Survey, Base, Page, PopupModel } from "survey-knockout";
 import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -249,21 +249,34 @@ export class SurveyCreator extends CreatorBase<Survey> {
           var className = convertClasses[i];
           availableTypes.push(createTypeByClass(className));
         }
+        const popupModel = new PopupModel(
+          "sv-list",
+          {
+            items: availableTypes.map((type) => ({
+              title: type.name,
+              value: type.value,
+            })),
+            onItemSelect: (item: any) => {
+              this.convertCurrentObject(element, item.value);
+            },       
+          },
+          undefined,
+          "bottom",
+          "right"
+        );
+
         items.push({
           id: "convertTo",
           css: "sv-action--first sv-action-bar-item--secondary",
           iconName: "icon-change_16x16",
           // title: this.getLocString("qt." + currentType),
           title: this.getLocString("survey.convertTo"),
-          items: availableTypes.map((type) => ({
-            title: type.name,
-            value: type.value,
-          })),
           enabled: allowChangeType,
           component: "sv-action-bar-item-dropdown",
           action: (newType) => {
-            this.convertCurrentObject(element, newType.value);
+            popupModel.toggleVisibility();
           },
+          popupModel: popupModel
         });
       }
     }

@@ -1,7 +1,7 @@
 <!-- ko if: visible -->
-<div class="svc-page-navigator__selector" data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }">
+<div class="svc-page-navigator__selector" data-bind="click: togglePageSelector, attr: { title: 'text' }">
     <sv-svg-icon class="svc-page-navigator__navigator-icon" params="iconName: icon, size: 22"></sv-svg-icon>
-    <sv-popup params= "contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"></sv-popup>
+    <sv-popup params="model: popupModel, cssClass: 'svc-page-navigator__popup'"></sv-popup>
 </div>
 <!-- ko foreach: items -->
 <svc-page-navigator-item params="item: $data"></svc-page-navigator-item>

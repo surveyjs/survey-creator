@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import { PopupModel } from "survey-knockout";
 import { ITabItem } from '../tabbed-menu/tabbed-menu-item';
 
 import "./page-navigator.scss";
@@ -11,6 +12,7 @@ export class PageNavigatorViewModel {
   private selectedItem = ko.observable<ITabItem>();
   constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>, private _creator: any, selection?: () => ITabItem, onSelect = (item: ITabItem) => {}) {
     this._selectionSubscription = ko.computed(() => this.selectedItem(selection && selection()));
+    const pageSelectorModel = this.popupModel.contentComponentData;
     this._itemsSubscription = ko.computed(() => {
       var pageSelectorItems = [];
       this.items(ko.unwrap(_items).map((_item: ITabItem) => {
@@ -30,10 +32,10 @@ export class PageNavigatorViewModel {
           return item;
         })
       );
-      this.pageSelectorModel.items(pageSelectorItems);
+      pageSelectorModel.items(pageSelectorItems);
     });
-    this.pageSelectorModel.selectedItem = ko.computed({
-      read: () => this.pageSelectorModel.items().filter(item => item.value === this.selectedItem())[0],
+    pageSelectorModel.selectedItem = ko.computed({
+      read: () => pageSelectorModel.items().filter(item => item.value === this.selectedItem())[0],
       write: val => {}
     });
   }
@@ -44,19 +46,21 @@ export class PageNavigatorViewModel {
   }
 
   icon = "icon-navigation"
-  name = "sv-list";
-  verticalPosition= "bottom";
-  horizontalPosition = "left";
-  showPointer = true;
-  pageSelectorModel = {
-    onItemSelect: (item) => {
-      this._creator.selectElement(item.value);
+  
+  popupModel = new PopupModel(
+    "sv-list",
+    {
+      onItemSelect: (item) => {
+        this._creator.selectElement(item.value);
+        this.popupModel.toggleVisibility();
+      },
+      items: ko.observableArray(),
+      selectedItem: undefined
     },
-    items: ko.observableArray(),
-    selectedItem: undefined
-  }
-  isPageSelectorOpened = ko.observable(false);
-  togglePageSelector = () => this.isPageSelectorOpened(!this.isPageSelectorOpened());
+    undefined
+  );
+
+  togglePageSelector = () => this.popupModel.toggleVisibility();
 
   dispose() {
     this._selectionSubscription.dispose();

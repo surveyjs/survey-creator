@@ -10,15 +10,14 @@ export class ToolboxViewModel extends AdaptiveElement {
   private _categoriesSubscription: ko.Computed;
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;
-  public showInvisibleItems = ko.observable(false);
 
   constructor(
     private _categories: any[] | ko.Computed<Array<any>>,
     creator: SurveyCreator
   ) {
     super();
-    this.dotsItem.horizontalPosition = "right";
-    this.dotsItem.verticalPosition = "top";
+    this.dotsItemPopupModel.horizontalPosition = "right";
+    this.dotsItemPopupModel.verticalPosition = "top";
     this.creator = creator;
     this._categoriesSubscription = ko.computed(() => {
       let categories = ko.unwrap(_categories);
@@ -33,9 +32,7 @@ export class ToolboxViewModel extends AdaptiveElement {
     });
   }
 
-  public invisibleItemSelected = (model: any) => {
-    this.showInvisibleItems(false);
-    // alert(JSON.stringify(item));
+  public invisibleItemSelected(model: any) : void {
     this.creator.clickToolboxItem(model.json);
   };
 
