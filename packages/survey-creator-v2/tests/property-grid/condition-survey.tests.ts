@@ -1093,3 +1093,36 @@ test("do not convert '000' into 0", () => {
   panel.getQuestionByName("questionValue").value = "00000";
   expect(editor.text).toEqual("{q1} = '00000'");
 });
+test("SurveyPropertyConditionEditor dynamic matrix in dynamic panel, Bug #1072", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "dp",
+        type: "paneldynamic",
+        panelCount: 2,
+        templateElements: [
+          {
+            name: "q2",
+            type: "text",
+          },
+          {
+            name: "matrix",
+            type: "matrixdynamic",
+            choices: [1, 2, 3],
+            columns: [{ name: "col1", cellType: "dropdown" }, { name: "col2" }],
+            rowCount: 1,
+          },
+        ],
+      },
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "dp[0].matrix[0].col1";
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
+    "dropdown"
+  );
+  expect(panel.getQuestionByName("questionValue").choices).toHaveLength(3);
+});
