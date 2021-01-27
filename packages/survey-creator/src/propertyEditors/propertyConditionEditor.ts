@@ -658,6 +658,9 @@ export class SurveyPropertyConditionEditor
     if (questionName.indexOf("row.") == 0) {
       path = questionName.substr("row.".length);
     }
+    if (!path) {
+      path = questionName;
+    }
     if (!!path && path[0] == ".") {
       path = path.substr(1);
     }
