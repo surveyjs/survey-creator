@@ -276,8 +276,9 @@ ko.components.register("survey-tester", {
         return creator.getObjectDisplayName(obj, "survey-tester");
       };
 
-      var subscr = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "test") {
+      // Test tab updater implicitly depending on observable survey and view type
+      var subscr = ko.computed(() => {
+        if (!!creator.survey && creator.koViewType() === "test") {
           var options = {
             showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
             showDefaultLanguageInTestSurveyTab:
