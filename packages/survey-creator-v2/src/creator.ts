@@ -270,7 +270,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
               this.convertCurrentObject(element, item.value);
             },       
           },
-          undefined,
           "bottom",
           "right"
         );

@@ -99,7 +99,6 @@ export class TestSurveyTabViewModel {
           devicePopupModel.toggleVisibility();
         },       
       },
-      undefined,
       "top",
       "right"
     );
@@ -111,7 +110,7 @@ export class TestSurveyTabViewModel {
       title: ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
       enabled: this.showSimulator,
       component: "sv-action-bar-item-dropdown",
-      action: (newDevice) => {
+      action: () => {
         devicePopupModel.toggleVisibility();
       },
       popupModel: devicePopupModel
@@ -146,7 +145,6 @@ export class TestSurveyTabViewModel {
           pagePopupModel.toggleVisibility();
         },       
       },
-      undefined,
       "top",
       "center"
     );

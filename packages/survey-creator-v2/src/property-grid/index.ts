@@ -506,24 +506,11 @@ export class PropertyGridModel {
       this.options
     );
 
-    const onApply = () => {
-      surveyPropertyEditor.apply();
-    };
-
-    const popupModel = new PopupModel(
-      undefined,
-      surveyPropertyEditor.editSurvey,
-      "survey-content",
-      "top",
-      "left",
-      false,
-      true,
-      undefined,
-      onApply
+    PopupViewModel.showModal(
+      "survey",
+      { survey: surveyPropertyEditor.editSurvey },
+      () => surveyPropertyEditor.apply()
     );
-
-    const popupViewModel: PopupViewModel = new PopupViewModel(popupModel, undefined);    
-    popupViewModel.isVisible(true);          
   }
   
   private createEditorSetupAction(

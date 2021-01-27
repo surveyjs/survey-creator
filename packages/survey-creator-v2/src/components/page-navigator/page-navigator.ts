@@ -56,8 +56,7 @@ export class PageNavigatorViewModel {
       },
       items: ko.observableArray(),
       selectedItem: undefined
-    },
-    undefined
+    }
   );
 
   togglePageSelector = () => this.popupModel.toggleVisibility();
