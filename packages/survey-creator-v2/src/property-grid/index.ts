@@ -13,6 +13,8 @@ import {
   FunctionFactory,
   ItemValue,
   Helpers,
+  PopupViewModel,
+  PopupModel,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -24,7 +26,6 @@ import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
 } from "@survey/creator/settings";
-import { ActionBarItemPropertyEditorModal } from "./modal-action";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;
@@ -493,40 +494,51 @@ export class PropertyGridModel {
       },
     };
   }
+  private showModalPropertyEditor(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question
+  ) {
+    const surveyPropertyEditor = editor.createPropertyEditorSetup(
+      this.obj,
+      property,
+      question,
+      this.options
+    );
+
+    const onApply = () => {
+      surveyPropertyEditor.apply();
+    };
+
+    const popupModel = new PopupModel(
+      undefined,
+      surveyPropertyEditor.editSurvey,
+      "survey-content",
+      "top",
+      "left",
+      false,
+      true,
+      undefined,
+      onApply
+    );
+
+    const popupViewModel: PopupViewModel = new PopupViewModel(popupModel, undefined);    
+    popupViewModel.isVisible(true);          
+  }
+  
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
     question: Question
   ): any {
+
     var setupAction = {
       title: "",
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-property_grid_modal",
       iconName: "icon-property_grid_modal",
-      component: "sv-action-bar-property-editor-modal",
-      data: {
-        editor: null,
-        contentTemplateName: "survey-content",
-        contentComponentData: null,
-        onCreated: () => {
-          setupAction.data.editor = editor.createPropertyEditorSetup(
-            this.obj,
-            property,
-            question,
-            this.options
-          );
-          setupAction.data.contentComponentData =
-            setupAction.data.editor.editSurvey;
-        },
-        onApply: () => {
-          setupAction.data.editor.apply();
-          setupAction.data.editor = null;
-        },
-        onCancel: () => {
-          setupAction.data.editor = null;
-        },
-      },
+      action: () => { this.showModalPropertyEditor(editor, property, question); }
     };
     return setupAction;
   }
