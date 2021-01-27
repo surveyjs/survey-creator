@@ -42,32 +42,9 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     prop: JsonObjectProperty,
     evtOptions: any
   ) {
-    var htmlElement = evtOptions.htmlElement;
-    var object = obj;
-    var propName = prop.name;
-    var a = <HTMLLinkElement>document.createElement("A");
-    a.innerText = this.getInnerText(object[propName]);
-    a.href = "javascript:void(0)";
-    a.onclick = function () {
-      //TODO make constant for classname
-      var elements = htmlElement.getElementsByClassName(
-        "sv-action-bar-item-modal"
-      );
-      if (elements.length == 0) return;
-      elements[0].click();
-    };
-    evtOptions.htmlElement.appendChild(a);
-    evtOptions.question.valueChangedCallback = () => {
-      a.innerText = this.getInnerText(object[propName]);
-    };
   }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
-  }
-  private getInnerText(val: any): string {
-    //TODO localize
-    if (this.isValueEmpty(val)) return "Setup Value...";
-    return "Modify Value...";
   }
 }
 
