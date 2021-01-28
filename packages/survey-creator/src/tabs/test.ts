@@ -5,6 +5,7 @@ import { SurveyCreator } from "../editor";
 import { IToolbarItem } from "../components/toolbar";
 
 import "./test.scss";
+import { SurveyForDesigner } from "../surveyjsObjects";
 var templateHtml = require("./test.html");
 
 export { SurveySimulatorComponent } from "../components/simulator";
@@ -277,22 +278,26 @@ ko.components.register("survey-tester", {
       };
 
       // Test tab updater implicitly depending on observable survey and view type
-      var subscr = ko.computed(() => {
-        if (!!creator.survey && creator.koViewType() === "test") {
-          var options = {
-            showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
-            showDefaultLanguageInTestSurveyTab:
-              creator.showDefaultLanguageInTestSurveyTab,
-            showInvisibleElementsInTestSurveyTab:
-              creator.showInvisibleElementsInTestSurveyTab,
-            showSimulatorInTestSurveyTab: creator.showSimulatorInTestSurveyTab,
-          };
-          model.setJSON(creator.JSON);
-          model.show(options);
-        }
-      });
+      var updateTestTab = (json: any) => {
+        var options = {
+          showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
+          showDefaultLanguageInTestSurveyTab:
+            creator.showDefaultLanguageInTestSurveyTab,
+          showInvisibleElementsInTestSurveyTab:
+            creator.showInvisibleElementsInTestSurveyTab,
+          showSimulatorInTestSurveyTab: creator.showSimulatorInTestSurveyTab,
+        };
+        model.setJSON(json);
+        model.show(options);
+    }
+
+      var subscr = creator.koViewType.subscribe(() => updateTestTab(creator.JSON));
+
+      var handler = (sender, options) => updateTestTab(options.survey.toJSON());
+      creator.onDesignerSurveyCreated.add(handler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        creator.onDesignerSurveyCreated.remove(handler);
         subscr.dispose();
         model.dispose();
       });
