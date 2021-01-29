@@ -153,12 +153,9 @@ test("string[] property editor", () => {
   var dataListQuestion = propertyGrid.survey.getQuestionByName("dataList");
   expect(dataListQuestion.getType()).toEqual("comment");
   expect(dataListQuestion.value).toEqual("item1\nitem2");
-  /** TODO fix bugs in library */
-  /* wait for v1.8.27
   dataListQuestion.value = "item1\nitem2\nitem3";
   expect(question.dataList).toHaveLength(3);
-  expect(question.dataList[2]).toExpect("item3");
-  */
+  expect(question.dataList[2]).toEqual("item3");
 });
 test("itemvalue[] property editor", () => {
   var question = new QuestionDropdownModel("q1");

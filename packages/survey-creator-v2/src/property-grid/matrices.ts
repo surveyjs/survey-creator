@@ -178,6 +178,16 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "itemvalue[]";
   }
+  public isPropertyEditorSetupEnabled(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): boolean {
+    var matrix = <QuestionMatrixDynamicModel>question;
+    var column = matrix.getColumnByName("value");
+    return !!column && column.isVisible && !column.readOnly;
+  }
   public createPropertyEditorSetup(
     obj: Base,
     prop: JsonObjectProperty,

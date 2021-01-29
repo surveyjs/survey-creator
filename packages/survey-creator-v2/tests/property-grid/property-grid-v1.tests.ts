@@ -47,6 +47,7 @@ import {
   PropertyGridValueEditor,
   PropertyGridRowValueEditor,
 } from "../../src/property-grid/values";
+import { assert } from "console";
 
 //PropertyGridEditorCollection.register(new PropertyGridValueEditor());
 //PropertyGridEditorCollection.register(new PropertyGridEditorQuestionRestfull());
@@ -109,17 +110,12 @@ test("PropertyEditor and hasError - required", () => {
   var propertyGrid = new PropertyGridModelTester(question);
   var nameQuestion = propertyGrid.survey.getQuestionByName("name");
   expect(nameQuestion.isRequired).toEqual(true);
-  /**
-   * TODO wait for releasing v1.8.27
-   */
-  /*
-  nameQuestion.name = "";
+  nameQuestion.value = "";
   expect(question.name).toEqual("q1");
   expect(nameQuestion.errors).toHaveLength(1);
-  nameQuestion.name = "q2";
+  nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
   expect(nameQuestion.errors).toHaveLength(0);
-  */
 });
 test("Property with choices", () => {
   var property = Serializer.addProperty("question", "dropdown");
@@ -262,4 +258,89 @@ test("SurveyPropertyItemValue different view type", () => {
   valueQuestion.value = "1|item1";
   valueEditor.apply();
   expect(question.choices).toHaveLength(1);
+});
+test("SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534", () => {
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = ["1|item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var editor = PropertyGridEditorCollection.getEditor(choicesQuestion.property);
+  expect(editor).toBeTruthy();
+  var valueEditor = <PropertyEditorSetupValue>(
+    editor.createPropertyEditorSetup(
+      question,
+      choicesQuestion.property,
+      choicesQuestion,
+      new EmptySurveyCreatorOptions()
+    )
+  );
+  var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
+  expect(valueQuestion.value).toEqual("1|item1\nitem2");
+  expect(valueQuestion.isReadOnly).toEqual(false);
+});
+
+test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837", () => {
+  Serializer.findProperty("ItemValue", "value").readOnly = true;
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = ["1|item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var column = choicesQuestion.getColumnByName("value");
+  expect(column).toBeTruthy();
+  expect(column.readOnly).toBeTruthy();
+  var actions = choicesQuestion.getTitleActions();
+  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  expect(setupAction).toBeTruthy();
+  expect(setupAction.enabled).toBeFalsy();
+  Serializer.findProperty("ItemValue", "value").readOnly = false;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  column = choicesQuestion.getColumnByName("value");
+  expect(column).toBeTruthy();
+  expect(column.readOnly).toBeFalsy();
+  expect(column.isVisible).toBeTruthy();
+  actions = choicesQuestion.getTitleActions();
+  setupAction = actions.find((el) => el.id === "property-grid-setup");
+  expect(setupAction).toBeTruthy();
+  expect(setupAction.enabled).toBeTruthy();
+  Serializer.findProperty("ItemValue", "value").visible = false;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  column = choicesQuestion.getColumnByName("value");
+  expect(column).toBeFalsy();
+  actions = choicesQuestion.getTitleActions();
+  setupAction = actions.find((el) => el.id === "property-grid-setup");
+  expect(setupAction).toBeTruthy();
+  expect(setupAction.enabled).toBeFalsy();
+  Serializer.findProperty("ItemValue", "value").visible = true;
+});
+test("SurveyPropertyItemValuesEditor - returns error on empty value", () => {
+  //TODO
+  Serializer.findProperty("ItemValue", "value").isRequired = true;
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = ["1|item1", "item2"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var column = choicesQuestion.getColumnByName("value");
+  expect(column).toBeTruthy();
+  expect(column.isRequired).toBeTruthy();
+  var rows = choicesQuestion.visibleRows;
+  expect(rows).toHaveLength(2);
+  expect(rows[0].cells[0].value).toEqual("1");
+  rows[0].cells[0].value = undefined;
+  expect(question.choices[0].value).toEqual("1");
+  expect(rows[0].cells[0].question.errors).toHaveLength(1);
+  rows[0].cells[0].value = 3;
+  expect(question.choices[0].value).toEqual(3);
+  expect(rows[0].cells[0].question.errors).toHaveLength(0);
 });
