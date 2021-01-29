@@ -1,6 +1,5 @@
 import * as ko from "knockout";
 import { Survey, Base, Page, PopupModel, IActionBarItem } from "survey-knockout";
-import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
@@ -8,9 +7,6 @@ import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
 import { PropertyGrid } from "./property-grid";
 
-interface ITabActionBarItem extends IActionBarItem {
-  name: string;
-}
 export class SurveyCreator extends CreatorBase<Survey> {
   propertyGrid: PropertyGrid;
   public static defaultNewSurveyText: string =
@@ -75,7 +71,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           iconName: "icon-preview",
-          icon: "icon-preview",
           needSeparator: true,
           css: ko.computed(() =>
             this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
@@ -100,7 +95,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   toolbox: QuestionToolbox;
 
-  toolbarItems = ko.observableArray<IToolbarItem>();
+  toolbarItems = ko.observableArray<IActionBarItem>();
 
   toolboxCategories = ko.observableArray<object>();
 
@@ -162,12 +157,11 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
   protected initTabs() {
     ko.computed(() => {
-      const tabs: ITabActionBarItem[] = [];
+      const tabs: IActionBarItem[] = [];
       
       if (this.showDesignerTab) {
         tabs.push({
           id: "designer",
-          name: "designer",
           title: this.getLocString("ed.designer"),
           template: "svc-tab-designer",
           data: this,
@@ -177,7 +171,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.showTestSurveyTab) {
         tabs.push({
           id: "test",
-          name: "test",
           title: this.getLocString("ed.testSurvey"),
           template: "svc-tab-test",
           data: this,
@@ -187,7 +180,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.showLogicTab) {
         tabs.push({
           id: "logic",
-          name: "logic",
           title: this.getLocString("ed.logic"),
           template: "svc-tab-logic",
           data: this,
@@ -197,7 +189,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.showJSONEditorTab) {
         tabs.push({
           id: "editor",
-          name: "editor",
           title: this.getLocString("ed.jsonEditor"),
           template: "svc-tab-json-editor",
           data: this,
@@ -207,7 +198,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.showEmbededSurveyTab) {
         tabs.push({
           id: "embed",
-          name: "embed",
           title: this.getLocString("ed.embedSurvey"),
           template: "svc-tab-embed",
           data: this,
@@ -217,7 +207,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
       if (this.showTranslationTab) {
         tabs.push({
           id: "translation",
-          name: "translation",
           title: this.getLocString("ed.translation"),
           template: "svc-tab-translation",
           data: this,
@@ -226,7 +215,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
       }
       this.tabs(tabs);
       if (this.tabs().length > 0) {
-        this.koViewType(this.tabs()[0].name);
+        this.koViewType(this.tabs()[0].id);
       }
     });
   }

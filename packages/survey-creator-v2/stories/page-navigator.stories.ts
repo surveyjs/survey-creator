@@ -35,7 +35,7 @@ export const PageNavigatorItem = () => {
     context: {
       item: {
         title: text("Title", "Page 1"),
-        selected: boolean("Selected", false),
+        active: boolean("Selected", false),
         action: () => {
           alert("action");
         },
@@ -50,7 +50,7 @@ export const PageNavigatorItemSelected = () => {
     context: {
       item: {
         title: text("Title", "Page 1"),
-        selected: boolean("Selected", true),
+        active: boolean("Selected", true),
         action: () => {
           alert("action");
         },

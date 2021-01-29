@@ -1,6 +1,7 @@
 import * as ko from "knockout";
+import { IActionBarItem } from "survey-knockout";
+import { PageModel } from "survey-knockout";
 import { PopupModel } from "survey-knockout";
-import { ITabItem } from '../tabbed-menu/tabbed-menu-item';
 
 import "./page-navigator.scss";
 const template = require("./page-navigator.html");
@@ -9,25 +10,24 @@ const template = require("./page-navigator.html");
 export class PageNavigatorViewModel {
   private _itemsSubscription: ko.Computed;
   private _selectionSubscription: ko.Computed;
-  private selectedItem = ko.observable<ITabItem>();
-  constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>, private _creator: any, selection?: () => ITabItem, onSelect = (item: ITabItem) => {}) {
+  private selectedItem = ko.observable<PageModel>();
+  constructor(_items: Array<PageModel> | ko.Computed<Array<PageModel>>, private _creator: any, selection?: () => PageModel, onSelect = (item: PageModel) => {}) {
     this._selectionSubscription = ko.computed(() => this.selectedItem(selection && selection()));
     const pageSelectorModel = this.popupModel.contentComponentData;
     this._itemsSubscription = ko.computed(() => {
       var pageSelectorItems = [];
-      this.items(ko.unwrap(_items).map((_item: ITabItem) => {
-          let item: ITabItem = <any>{
-            name: _item.name,
-            title: _creator ? _creator.getObjectDisplayName(_item) : _item.title
+      this.items(ko.unwrap(_items).map((page: PageModel) => {
+          const item: IActionBarItem = <any>{
+            id: page.id,
+            title: _creator ? _creator.getObjectDisplayName(page) : page.title
           };
-          item.selected = _item.selected || ko.computed(() => _item === this.selectedItem());
+          item.active = ko.computed(() => page === this.selectedItem());
           item.action = () => {
-            this.selectedItem(_item);
-            onSelect && onSelect(_item);
-            _item.action && _item.action();
+            this.selectedItem(page);
+            onSelect && onSelect(page);
           };
 
-          pageSelectorItems.push({title: item.title, value: _item});
+          pageSelectorItems.push({title: item.title, value: page});
 
           return item;
         })
@@ -39,7 +39,7 @@ export class PageNavigatorViewModel {
       write: val => {}
     });
   }
-  public items = ko.observableArray<ITabItem>();
+  public items = ko.observableArray<IActionBarItem>();
 
   get visible() {
     return this.items().length > 1;

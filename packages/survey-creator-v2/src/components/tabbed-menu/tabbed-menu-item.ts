@@ -1,40 +1,31 @@
 import * as ko from "knockout";
+import { IActionBarItem } from "survey-knockout";
 
 import "./tabbed-menu-item.scss";
 const template = require("./tabbed-menu-item.html");
 // import template from "./tabbed-menu-item.html";
-
-export interface ITabItem {
-  name: string;
-  title: string;
-  template: string;
-  data: any;
-  visible: boolean;
-  isVisible: ko.MaybeObservable<boolean>;
-  selected?: boolean | ko.Computed<boolean>;
-  disabled?: ko.MaybeObservable<boolean>;
-  action: () => void;
-}
-
 export class TabbedMenuItemViewModel {
-  private _item: ITabItem;
-  constructor(item: ITabItem) {
+  private _item: IActionBarItem;
+  constructor(item: IActionBarItem) {
     this._item = item;
   }
   get text() {
     return this._item.title;
   }
   action = () => {
-    if (ko.isWritableObservable(this._item.selected)) {
-      this._item.selected(true);
+    if (ko.isWritableObservable(this._item.active)) {
+      this._item.active(true);
     }
     this._item.action();
   };
-  get selected() {
-    return !!ko.unwrap(this._item.selected);
+  get active() {
+    return !!ko.unwrap(this._item.active);
   }
   get disabled() {
-    return this._item.disabled;
+    const isEnabled = this._item.enabled;
+    if (isEnabled === undefined)
+      return false;
+    return !ko.unwrap(isEnabled);
   }
 }
 

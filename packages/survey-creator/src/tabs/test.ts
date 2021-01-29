@@ -2,9 +2,9 @@ import * as ko from "knockout";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../editor";
-import { IToolbarItem } from "../components/toolbar";
 
 import "./test.scss";
+import { IActionBarItem } from "survey-knockout";
 var templateHtml = require("./test.html");
 
 export { SurveySimulatorComponent } from "../components/simulator";
@@ -31,9 +31,9 @@ export class SurveyLiveTester {
 
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IToolbarItem
+   * @see IActionBarItem
    */
-  public toolbarItems = ko.observableArray<IToolbarItem>();
+  public toolbarItems = ko.observableArray<IActionBarItem>();
 
   onSurveyCreatedCallback: (survey: Survey.Survey) => any;
   constructor(private surveyProvider: any) {

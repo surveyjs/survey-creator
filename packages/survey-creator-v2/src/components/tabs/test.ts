@@ -1,11 +1,11 @@
 import * as ko from "knockout";
 import { Survey, Base, Page, surveyLocalization, PopupModel } from "survey-knockout";
 import { editorLocalization } from "@survey/creator/editorLocalization";
-import { IToolbarItem } from "@survey/creator/components/toolbar";
 import { simulatorDevices } from "@survey/creator/components/simulator";
 import { SurveyCreator } from "../../creator";
 
 import "./test.scss";
+import { IActionBarItem } from "survey-knockout";
 const template = require("./test.html");
 // import template from "./test.html";
 
@@ -37,9 +37,9 @@ export class TestSurveyTabViewModel {
 
   /**
    * The list of action bar items.
-   * @see IToolbarItem
+   * @see IActionBarItem
    */
-  public actions = ko.observableArray<IToolbarItem>();
+  public actions = ko.observableArray<IActionBarItem>();
 
   onSurveyCreatedCallback: (survey: Survey) => any;
   constructor(private surveyProvider: SurveyCreator) {
@@ -103,24 +103,24 @@ export class TestSurveyTabViewModel {
       "right"
     );
 
-    this.actions.push(<any>{
+    this.actions.push({
       id: "deviceSelector",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
-      title: ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
-      enabled: this.showSimulator,
+      title: <any>ko.computed(() => simulatorDevices[this.simulator.device()].title || this.getLocString("pe.simulator")),
+      enabled: <any>this.showSimulator,
       component: "sv-action-bar-item-dropdown",
       action: () => {
         devicePopupModel.toggleVisibility();
       },
       popupModel: devicePopupModel
     });
-    this.actions.push(<any>{
+    this.actions.push({
       id: "prevPage",
-      css: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage?"sv-action-bar-item--secondary":""),
+      css: <any>ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage?"sv-action-bar-item--secondary":""),
       iconName: "icon-leftarrow_16x16",
-      visible: ko.computed(() => this.isRunning),
-      enabled: ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage),
+      visible: <any>ko.computed(() => this.isRunning),
+      enabled: <any>ko.computed(() => this.koSurvey() && !this.koSurvey().isFirstPage),
       title: "",
       action: () => {
         this.koActivePage(this.survey.pages[self.survey.currentPageNo - 1]);     

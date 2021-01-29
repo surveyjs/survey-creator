@@ -1,23 +1,47 @@
 import * as ko from "knockout";
-import { ITabItem } from "./tabbed-menu-item";
-import { ResponsibilityManager, AdaptiveElement } from "survey-knockout";
+//import { ITabItem } from "./tabbed-menu-item";
+import { ResponsibilityManager, AdaptiveElement, AdaptiveActionBarItemWrapper } from "survey-knockout";
 
 import "./tabbed-menu.scss";
+import { IActionBarItem } from "survey-knockout";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
 export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
-  constructor(_items: Array<ITabItem> | ko.Computed<Array<ITabItem>>) {
+  constructor(_items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>, viewType: ko.Observable<string>) {
     super();
-    this.dotsItemPopupModel.horizontalPosition = "right";
+
+    const selectedItem = ko.observable<IActionBarItem>();
     this.itemsSubscription = ko.computed(() => {
-      var items = ko.unwrap(_items);
-      items.forEach((item) => {
-        item.isVisible = ko.observable(true);
-        this.items.push(item);
-      });
-    });
+        const wrappedItems: AdaptiveActionBarItemWrapper[] = ko.unwrap(_items).map((item: IActionBarItem) => {
+          item.active = <() => boolean>ko.computed(
+            () =>
+              item === selectedItem() ||
+              viewType() === item.id
+          );
+          let __originalAction = item.action || (() => {});
+          item.action = () => {
+            selectedItem(item);
+            __originalAction();
+          };
+          return new AdaptiveActionBarItemWrapper(this, item);
+        });
+        this.items(wrappedItems);
+      }
+    )
+
+    this.dotsItemPopupModel.horizontalPosition = "right";
+    // this.itemsSubscription = ko.computed(() => {
+    //   var items = ko.unwrap(_items);
+    //   items.forEach((item) => {
+    //     this.items.push(new AdaptiveActionBarItemWrapper(this, item));
+    //   });
+    // });
+  }
+
+  public dispose() {
+    this.itemsSubscription.dispose();
   }
 }
 
@@ -25,24 +49,7 @@ ko.components.register("svc-tabbed-menu", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       var container = componentInfo.element;
-      let selectedItem = ko.observable<ITabItem>();
-      var model = new TabbedMenuViewModel(
-        ko.computed(() =>
-          ko.unwrap(params.items).map((item: ITabItem) => {
-            item.selected = ko.computed(
-              () =>
-                item === selectedItem() ||
-                ko.unwrap(params.viewType) === item.name
-            );
-            let __originalAction = item.action || (() => {});
-            item.action = () => {
-              selectedItem(item);
-              __originalAction();
-            };
-            return item;
-          })
-        )
-      );
+      var model = new TabbedMenuViewModel(params.items, params.viewType);
       var manager = new ResponsibilityManager(container, model);
       manager.getItemSizes = () => {
         var widths: number[] = [];

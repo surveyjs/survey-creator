@@ -18,7 +18,7 @@ export class Commands {
       },
       toolbar: {
         id: "svd-undo",
-        icon: "icon-actionundo",
+        iconName: "icon-actionundo",
         visible: this.creator.koIsShowDesigner,
         enabled: this.creator.koCanUndo,
         title: this.creator.getLocString("ed.undo"),
@@ -33,7 +33,7 @@ export class Commands {
       },
       toolbar: {
         id: "svd-redo",
-        icon: "icon-actionredo",
+        iconName: "icon-actionredo",
         visible: this.creator.koIsShowDesigner,
         enabled: this.creator.koCanRedo,
         title: this.creator.getLocString("ed.redo"),
@@ -43,7 +43,7 @@ export class Commands {
     surveySettings: {
       toolbar: {
         id: "svd-survey-settings",
-        icon: "icon-actionsettings",
+        iconName: "icon-actionsettings",
         visible: this.creator.koIsShowDesigner,
         enabled: true,
         action: () => {
