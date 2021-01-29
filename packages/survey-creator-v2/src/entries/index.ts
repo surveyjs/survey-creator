@@ -34,7 +34,7 @@ export * from "@survey/creator/tabs/json-editor";
 export * from "../property-grid";
 export * from "../property-grid/condition";
 export * from "../property-grid/matrices";
-export * from "../property-grid/modal-action";
+//export * from "../property-grid/modal-action";
 export * from "../property-grid/restfull";
 export * from "../property-grid/values";
 

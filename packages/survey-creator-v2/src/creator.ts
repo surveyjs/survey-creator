@@ -1,12 +1,16 @@
 import * as ko from "knockout";
-import { Survey, Base, Page, PopupModel, IActionBarItem } from "survey-knockout";
+import {
+  Survey,
+  Base,
+  Page,
+  PopupModel,
+  IActionBarItem,
+} from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
-import { QuestionToolbox } from "@survey/creator/toolbox";
-import { DragDropHelper } from "./dragdrophelper";
 import { PropertyGrid } from "./property-grid";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
@@ -180,7 +184,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   protected initTabs() {
     ko.computed(() => {
       const tabs: IActionBarItem[] = [];
-      
+
       if (this.showDesignerTab) {
         tabs.push({
           id: "designer",
@@ -297,7 +301,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
             })),
             onItemSelect: (item: any) => {
               this.convertCurrentObject(element, item.value);
-            },       
+            },
           },
           "bottom",
           "right"
@@ -314,7 +318,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: (newType) => {
             popupModel.toggleVisibility();
           },
-          popupModel: popupModel
+          popupModel: popupModel,
         });
       }
     }
