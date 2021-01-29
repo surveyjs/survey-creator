@@ -1,10 +1,15 @@
 <div class="svc-creator-tab__content">
-    <div class="svc-json-editor-tab__content">
-        <textarea class="svc-json-editor-tab__content-area"
-            data-bind="textInput: koText, disable: readOnly, attr: { 'aria-label': ariaLabel }">
-        </textarea>
-        <div class="svc-json-editor-tab__content-errors" data-bind="foreach: koErrors">
-            <span>Error: </span><span data-bind="text: text"></span>
-        </div>
+  <div class="svc-json-editor-tab__content">
+    <textarea
+      class="svc-json-editor-tab__content-area"
+      data-bind="textInput: text, disable: readOnly, attr: { 'aria-label': ariaLabel }"
+    >
+    </textarea>
+    <div
+      class="svc-json-editor-tab__content-errors"
+      data-bind="foreach: errors"
+    >
+      <span>Error: </span><span data-bind="text: text"></span>
     </div>
+  </div>
 </div>
