@@ -1,7 +1,8 @@
 import * as ko from "knockout";
-import { Survey, Base, Page } from "survey-knockout";
-import { ICreatorOptions, CreatorBase } from "@survey/creator/creator-base";
-import { IToolbarItem } from "@survey/creator/components/toolbar";
+import { Survey, Base, Page, PopupModel, IActionBarItem } from "survey-knockout";
+import { DragDropHelper } from "./dragdrophelper";
+import { QuestionToolbox } from "@survey/creator/toolbox";
+import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -81,7 +82,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
         },
         {
           iconName: "icon-preview",
-          icon: "icon-preview",
           needSeparator: true,
           css: ko.computed(() =>
             this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
@@ -107,7 +107,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   toolbox: QuestionToolbox;
 
-  toolbarItems = ko.observableArray<IToolbarItem>();
+  toolbarItems = ko.observableArray<IActionBarItem>();
 
   toolboxCategories = ko.observableArray<object>();
 
@@ -177,57 +177,69 @@ export class SurveyCreator extends CreatorBase<Survey> {
       );
     }
   }
-
   protected initTabs() {
-    this.tabs([]);
-    if (this.showDesignerTab) {
-      this.tabs.push({
-        name: "designer",
-        title: this.getLocString("ed.designer"),
-        template: "svc-tab-designer",
-        data: this,
-        action: () => this.makeNewViewActive("designer"),
-      });
-    }
-    if (this.showTestSurveyTab) {
-      this.tabs.push({
-        name: "test",
-        title: this.getLocString("ed.testSurvey"),
-        template: "svc-tab-test",
-        data: this,
-        action: () => this.makeNewViewActive("test"),
-      });
-    }
-    if (this.showLogicTab) {
-      this.tabs.push({
-        name: "logic",
-        title: this.getLocString("ed.logic"),
-        template: "svc-tab-logic",
-        data: this,
-        action: () => this.makeNewViewActive("logic"),
-      });
-    }
-    if (this.showEmbededSurveyTab) {
-      this.tabs.push({
-        name: "embed",
-        title: this.getLocString("ed.embedSurvey"),
-        template: "svc-tab-embed",
-        data: this,
-        action: () => this.makeNewViewActive("embed"),
-      });
-    }
-    if (this.showTranslationTab) {
-      this.tabs.push({
-        name: "translation",
-        title: this.getLocString("ed.translation"),
-        template: "svc-tab-translation",
-        data: this,
-        action: () => this.makeNewViewActive("translation"),
-      });
-    }
-    if (this.tabs().length > 0) {
-      this.koViewType(this.tabs()[0].name);
-    }
+    ko.computed(() => {
+      const tabs: IActionBarItem[] = [];
+      
+      if (this.showDesignerTab) {
+        tabs.push({
+          id: "designer",
+          title: this.getLocString("ed.designer"),
+          template: "svc-tab-designer",
+          data: this,
+          action: () => this.makeNewViewActive("designer"),
+        });
+      }
+      if (this.showTestSurveyTab) {
+        tabs.push({
+          id: "test",
+          title: this.getLocString("ed.testSurvey"),
+          template: "svc-tab-test",
+          data: this,
+          action: () => this.makeNewViewActive("test"),
+        });
+      }
+      if (this.showLogicTab) {
+        tabs.push({
+          id: "logic",
+          title: this.getLocString("ed.logic"),
+          template: "svc-tab-logic",
+          data: this,
+          action: () => this.makeNewViewActive("logic"),
+        });
+      }
+      if (this.showJSONEditorTab) {
+        tabs.push({
+          id: "editor",
+          title: this.getLocString("ed.jsonEditor"),
+          template: "svc-tab-json-editor",
+          data: this,
+          action: () => this.makeNewViewActive("editor"),
+        });
+      }
+      if (this.showEmbededSurveyTab) {
+        tabs.push({
+          id: "embed",
+          title: this.getLocString("ed.embedSurvey"),
+          template: "svc-tab-embed",
+          data: this,
+          action: () => this.makeNewViewActive("embed"),
+        });
+      }
+      if (this.showTranslationTab) {
+        tabs.push({
+          id: "translation",
+          title: this.getLocString("ed.translation"),
+          template: "svc-tab-translation",
+          data: this,
+          action: () => this.makeNewViewActive("translation"),
+        });
+      }
+      this.tabs(tabs);
+      if (this.tabs().length > 0) {
+        this.koViewType(this.tabs()[0].id);
+      }
+    });
   }
   private initTabsPlugin(): void {
     if (this.showJSONEditorTab) {
@@ -248,7 +260,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
     const plugin = this.plugins[this.koViewType()];
     return !plugin || !plugin.deactivate || plugin.deactivate();
   }
-
   public getContextActions(element: any /*ISurveyElement*/) {
     if (this.readOnly) {
       return [];
@@ -277,21 +288,33 @@ export class SurveyCreator extends CreatorBase<Survey> {
           var className = convertClasses[i];
           availableTypes.push(createTypeByClass(className));
         }
+        const popupModel = new PopupModel(
+          "sv-list",
+          {
+            items: availableTypes.map((type) => ({
+              title: type.name,
+              value: type.value,
+            })),
+            onItemSelect: (item: any) => {
+              this.convertCurrentObject(element, item.value);
+            },       
+          },
+          "bottom",
+          "right"
+        );
+
         items.push({
           id: "convertTo",
           css: "sv-action--first sv-action-bar-item--secondary",
           iconName: "icon-change_16x16",
           // title: this.getLocString("qt." + currentType),
           title: this.getLocString("survey.convertTo"),
-          items: availableTypes.map((type) => ({
-            title: type.name,
-            value: type.value,
-          })),
           enabled: allowChangeType,
           component: "sv-action-bar-item-dropdown",
           action: (newType) => {
-            this.convertCurrentObject(element, newType.value);
+            popupModel.toggleVisibility();
           },
+          popupModel: popupModel
         });
       }
     }

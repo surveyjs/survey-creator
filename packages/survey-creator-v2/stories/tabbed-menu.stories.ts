@@ -23,7 +23,7 @@ export const TabbedMenuItem = () => {
     context: {
       item: {
         title: text("Title", "Menu Item"),
-        selected: boolean("Disabled", true),
+        active: boolean("Selected", false),
         action: () => {
           alert("action");
         },
@@ -39,7 +39,7 @@ export const TabbedMenuItemSelected = () => {
     context: {
       item: {
         title: text("Title", "Menu Item"),
-        selected: boolean("Selected", true),
+        active: boolean("Selected", true),
         action: () => {
           alert("action");
         },

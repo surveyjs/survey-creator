@@ -1,13 +1,13 @@
 import * as ko from "knockout";
-import { ITabItem } from '../tabbed-menu/tabbed-menu-item';
+import { IActionBarItem } from "survey-knockout";
 
 import "./page-navigator-item.scss";
 const template = require("./page-navigator-item.html");
 // import template from "./page-navigator-item.html";
 
 export class PageNavigatorItemViewModel {
-  private _item: ITabItem;
-  constructor(item: ITabItem) {
+  private _item: IActionBarItem;
+  constructor(item: IActionBarItem) {
     this._item = item;
   }
   get text() {
@@ -18,11 +18,14 @@ export class PageNavigatorItemViewModel {
       this._item.action();
     }
   };
-  get selected() {
-    return !!ko.unwrap(this._item.selected);
+  get active() {
+    return !!ko.unwrap(this._item.active);
   }
   get disabled() {
-    return this._item.disabled;
+    const isEnabled = this._item.enabled;
+    if (isEnabled === undefined)
+      return false;
+    return !ko.unwrap(isEnabled);
   }
 }
 

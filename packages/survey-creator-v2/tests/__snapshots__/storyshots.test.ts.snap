@@ -6,7 +6,7 @@ exports[`Storyshots Action Bar Action Bar Item 1`] = `
 >
   <button
     class="sv-action-bar-item"
-    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -62,7 +62,7 @@ exports[`Storyshots Action Bar Action Bar Item Without Title 1`] = `
 >
   <button
     class="sv-action-bar-item"
-    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button"
   >
     
@@ -107,8 +107,8 @@ exports[`Storyshots Action Bar Active Action Bar Item 1`] = `
   params="item: item"
 >
   <button
-    class="sv-action-bar-item sv-action-bar-item--active"
-    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    class="sv-action-bar-item"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     title="Menu Button Active"
   >
     
@@ -165,492 +165,501 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   <!-- ko if: hasItems-->
   
 
-  <!-- ko foreach: items-->
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+  <div
+    class="sv-action-bar"
+    data-bind="click: function() { return true; }, clickBubble: false"
   >
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
+    <!-- ko foreach: items-->
     
   
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Undo"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
       
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Undo"
       >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
+        
+  
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
         >
-          <use
-            xlink:href="#icon-undo"
-          />
-        </svg>
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-undo"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
         
 
-      </sv-svg-icon>
-      
+  
+        <!-- /ko -->
+        
 
   
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
-    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
   
-    <!-- /ko -->
+    </span>
     
   
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Redo"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
       
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Redo"
       >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
+        
+  
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
         >
-          <use
-            xlink:href="#icon-redo"
-          />
-        </svg>
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-redo"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
         
 
-      </sv-svg-icon>
-      
+  
+        <!-- /ko -->
+        
 
   
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
-    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
   
-    <!-- /ko -->
+    </span>
     
   
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <div
-      class="sv-action-bar-separator"
-      data-bind="css: $data.css"
-    />
-    <!-- /ko -->
-    
-  
-    <!-- /ko -->
-    
-  
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
-    
-  
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Settings"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
-      
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
-      >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
-        >
-          <use
-            xlink:href="#icon-settings"
-          />
-        </svg>
-        
-
-      </sv-svg-icon>
-      
-
-  
+    
+      <!-- ko if: $data.needSeparator -->
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <div
+        class="sv-action-bar-separator"
+        data-bind="css: $data.css"
+      />
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
+      <!-- /ko -->
+      
     
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
   
-    <!-- /ko -->
-    
-  
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
+    </span>
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
     
   
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Clear"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
       
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Settings"
       >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
+        
+  
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
         >
-          <use
-            xlink:href="#icon-clear"
-          />
-        </svg>
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-settings"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
         
 
-      </sv-svg-icon>
-      
+  
+        <!-- /ko -->
+        
 
   
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
-    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
   
-    <!-- /ko -->
+    </span>
     
   
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Search"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
       
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Clear"
       >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
+        
+  
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
         >
-          <use
-            xlink:href="#icon-search"
-          />
-        </svg>
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-clear"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
         
 
-      </sv-svg-icon>
-      
+  
+        <!-- /ko -->
+        
 
   
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
-    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
   
-    <!-- /ko -->
+    </span>
     
   
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
     
   
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <div
-      class="sv-action-bar-separator"
-      data-bind="css: $data.css"
-    />
-    <!-- /ko -->
-    
-  
-    <!-- /ko -->
-    
-  
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="sv-action"
-    data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-  >
-    
-  
-    <!-- ko if: $data.needSeparator -->
-    <!-- /ko -->
-    
-  
-    <!-- ko ifnot: $data.template-->
-    
-  
-    <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-    <button
-      class="sv-action-bar-item sv-action-bar-item--secondary"
-      data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-      title="Preview"
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
-  
-      <!-- ko if: $data.iconName -->
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
       
-  
-      <sv-svg-icon
-        class="sv-action-bar-item__icon"
-        params="iconName: iconName, size: 24"
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Search"
       >
-        <svg
-          class="sv-svg-icon"
-          style="width: 24px; height: 24px;"
+        
+  
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
         >
-          <use
-            xlink:href="#icon-preview"
-          />
-        </svg>
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-search"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
         
 
-      </sv-svg-icon>
-      
+  
+        <!-- /ko -->
+        
 
   
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-  
-      <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
+      <!-- /ko -->
+      
+    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
       
   
-      <span
-        class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-        data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
+    </span>
+    
+  
+    
+  
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+    >
+      
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
+      
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <div
+        class="sv-action-bar-separator"
+        data-bind="css: $data.css"
+      />
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
+  
+    </span>
+    
+  
+    
+  
+    <span
+      class="sv-action"
+      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+    >
+      
+    
+      <!-- ko if: $data.needSeparator -->
+      <!-- /ko -->
+      
+    
+      <!-- ko ifnot: $data.template-->
+      
+    
+      <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+      <button
+        class="sv-action-bar-item sv-action-bar-item--secondary"
+        data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+        title="Preview"
       >
-        Preview
-      </span>
-      
+        
   
+        <!-- ko if: $data.iconName -->
+        
+  
+        <sv-svg-icon
+          class="sv-action-bar-item__icon"
+          params="iconName: iconName, size: 24"
+        >
+          <svg
+            class="sv-svg-icon"
+            style="width: 24px; height: 24px;"
+          >
+            <use
+              xlink:href="#icon-preview"
+            />
+          </svg>
+          
+
+        </sv-svg-icon>
+        
+
+  
+        <!-- /ko -->
+        
+
+  
+        <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+        
+  
+        <span
+          class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+          data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
+        >
+          Preview
+        </span>
+        
+  
+        <!-- /ko -->
+        
+
+      </button>
+      
+
       <!-- /ko -->
       
-
-    </button>
     
-
-    <!-- /ko -->
+      <!-- /ko -->
+      
+    
+      <!-- ko if: $data.template  -->
+      <!-- /ko -->
+      
+  
+    </span>
     
   
-    <!-- /ko -->
-    
-  
-    <!-- ko if: $data.template  -->
-    <!-- /ko -->
+    <!--/ko-->
     
 
-  </span>
-  
-
-  <!--/ko-->
+  </div>
   
 
   <!--/ko-->
@@ -665,7 +674,7 @@ exports[`Storyshots Action Bar Disabled Action Bar Item 1`] = `
 >
   <button
     class="sv-action-bar-item"
-    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+    data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
     disabled="true"
     title="Menu Button Disabled"
   >
@@ -2229,446 +2238,455 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         <!-- ko if: hasItems-->
         
 
-        <!-- ko foreach: items-->
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+        <div
+          class="sv-action-bar"
+          data-bind="click: function() { return true; }, clickBubble: false"
         >
           
   
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
+          <!-- ko foreach: items-->
           
   
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Undo"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
+            <!-- /ko -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Undo"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-undo"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-undo"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
           
   
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
-          
-
-        </span>
-        
-
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-        >
-          
-  
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
-          
-  
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Redo"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
+            <!-- /ko -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Redo"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-redo"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-redo"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
           
   
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
-          
-
-        </span>
-        
-
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-        >
-          
-  
-          <!-- ko if: $data.needSeparator -->
-          
-  
-          <sv-action-bar-separator>
-            <div
-              class="sv-action-bar-separator"
-              data-bind="css: $data.css"
-            />
-          </sv-action-bar-separator>
-          
-  
-          <!-- /ko -->
-          
-  
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item sv-action-bar-item--active"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Settings"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <sv-action-bar-separator>
+              <div
+                class="sv-action-bar-separator"
+                data-bind="css: $data.css"
+              />
+            </sv-action-bar-separator>
+            
+    
+            <!-- /ko -->
+            
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Settings"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-settings"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-settings"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
           
   
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
-          
-
-        </span>
-        
-
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-        >
-          
-  
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
-          
-  
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Clear"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
+            <!-- /ko -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Clear"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-clear"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-clear"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
           
   
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
-          
-
-        </span>
-        
-
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-        >
-          
-  
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
-          
-  
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Search"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
+            <!-- /ko -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Search"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-search"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-search"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
           
   
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
-          
-
-        </span>
-        
-
-        
-
-        <span
-          class="sv-action"
-          data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
-        >
-          
-  
-          <!-- ko if: $data.needSeparator -->
-          
-  
-          <sv-action-bar-separator>
-            <div
-              class="sv-action-bar-separator"
-              data-bind="css: $data.css"
-            />
-          </sv-action-bar-separator>
-          
-  
-          <!-- /ko -->
-          
-  
-          <!-- ko ifnot: $data.template-->
-          
-  
-          <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
-          <button
-            class="sv-action-bar-item"
-            data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.isActive) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
-            title="Preview"
+          <span
+            class="sv-action"
+            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
-  
-            <!-- ko if: $data.iconName -->
+    
+            <!-- ko if: $data.needSeparator -->
             
-  
-            <sv-svg-icon
-              class="sv-action-bar-item__icon"
-              params="iconName: iconName, size: 24"
+    
+            <sv-action-bar-separator>
+              <div
+                class="sv-action-bar-separator"
+                data-bind="css: $data.css"
+              />
+            </sv-action-bar-separator>
+            
+    
+            <!-- /ko -->
+            
+    
+            <!-- ko ifnot: $data.template-->
+            
+    
+            <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
+            <button
+              class="sv-action-bar-item"
+              data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
+              title="Preview"
             >
-              <svg
-                class="sv-svg-icon"
-                style="width: 24px; height: 24px;"
+              
+  
+              <!-- ko if: $data.iconName -->
+              
+  
+              <sv-svg-icon
+                class="sv-action-bar-item__icon"
+                params="iconName: iconName, size: 24"
               >
-                <use
-                  xlink:href="#icon-preview"
-                />
-              </svg>
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-preview"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
               
 
-            </sv-svg-icon>
-            
+  
+              <!-- /ko -->
+              
 
   
+              <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
+              
+  
+              <span
+                class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
+                data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
+              >
+                Preview
+              </span>
+              
+  
+              <!-- /ko -->
+              
+
+            </button>
+            
+
             <!-- /ko -->
             
-
-  
-            <!-- ko if: $data.showTitle === undefined ||  ko.unwrap($data.showTitle) || !$data.iconName -->
-            
-  
-            <span
-              class="sv-action-bar-item__title sv-action-bar-item__title--with-icon"
-              data-bind="text: title, css: { 'sv-action-bar-item__title--with-icon': !!$data.iconName }"
-            >
-              Preview
-            </span>
-            
-  
+    
             <!-- /ko -->
             
-
-          </button>
-          
-
-          <!-- /ko -->
+    
+            <!-- ko if: $data.template  -->
+            <!-- /ko -->
+            
+  
+          </span>
           
   
-          <!-- /ko -->
-          
-  
-          <!-- ko if: $data.template  -->
-          <!-- /ko -->
+          <!--/ko-->
           
 
-        </span>
-        
-
-        <!--/ko-->
+        </div>
         
 
         <!--/ko-->
@@ -2695,7 +2713,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
         <div
           class="svc-creator-tab"
-          data-bind="visible: $parent.creator.koViewType() == name"
+          data-bind="visible: $parent.creator.koViewType() == id"
         >
           
         
@@ -3297,6 +3315,99 @@ exports[`Storyshots Creator design surface content Default 1`] = `
                 data-bind="text: title"
               >
                 Rating
+              </span>
+              
+    
+            </span>
+            
+    
+  
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+        </div>
+        
+    
+        
+    
+        <div
+          class="svc-toolbox__tool"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          style="visibility: visible;"
+        >
+          
+      
+          <!-- ko if: $data.needSeparator -->
+          <!-- /ko -->
+          
+      
+          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          
+  
+          <div
+            aria-label="Ranking toolbox item"
+            class="svc-toolbox__item svc-toolbox__item--icon-ranking"
+            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            title="Ranking"
+          >
+            
+    
+            <span
+              class="svc-toolbox__item-container"
+            >
+               
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+    
+            </span>
+            
+    
+            <span
+              class="svc-toolbox__item-banner"
+            >
+              
+      
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              >
+                <svg
+                  class="sv-svg-icon"
+                  style="width: 24px; height: 24px;"
+                >
+                  <use
+                    xlink:href="#icon-ranking"
+                  />
+                </svg>
+                
+
+              </sv-svg-icon>
+              
+      
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Ranking
               </span>
               
     
@@ -4539,99 +4650,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           
   
           <div
-            aria-label="ranking toolbox item"
-            class="svc-toolbox__item svc-toolbox__item--icon-ranking"
-            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
-            draggable="true"
-            role="button"
-            tabindex="0"
-            title="ranking"
-          >
-            
-    
-            <span
-              class="svc-toolbox__item-container"
-            >
-               
-      
-              <sv-svg-icon
-                params="iconName: iconName, size: 24"
-              >
-                <svg
-                  class="sv-svg-icon"
-                  style="width: 24px; height: 24px;"
-                >
-                  <use
-                    xlink:href="#icon-ranking"
-                  />
-                </svg>
-                
-
-              </sv-svg-icon>
-              
-    
-            </span>
-            
-    
-            <span
-              class="svc-toolbox__item-banner"
-            >
-              
-      
-              <sv-svg-icon
-                params="iconName: iconName, size: 24"
-              >
-                <svg
-                  class="sv-svg-icon"
-                  style="width: 24px; height: 24px;"
-                >
-                  <use
-                    xlink:href="#icon-ranking"
-                  />
-                </svg>
-                
-
-              </sv-svg-icon>
-              
-      
-              <span
-                class="svc-toolbox__item-title"
-                data-bind="text: title"
-              >
-                ranking
-              </span>
-              
-    
-            </span>
-            
-    
-  
-          </div>
-          
-
-          <!-- /ko -->
-          
-    
-        </div>
-        
-    
-        
-    
-        <div
-          class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
-          style="visibility: visible;"
-        >
-          
-      
-          <!-- ko if: $data.needSeparator -->
-          <!-- /ko -->
-          
-      
-          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
-          
-  
-          <div
             aria-label="propertygrid_restfull toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-default"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -5423,7 +5441,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
 
     <div
       class="svc-page-navigator__selector"
-      data-bind="click: togglePageSelector, css: { 'svc-page-navigator__selector--opened': isPageSelectorOpened }, attr: { title: 'text' }"
+      data-bind="click: togglePageSelector, attr: { title: 'text' }"
       title="text"
     >
       
@@ -5446,7 +5464,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
       
     
       <sv-popup
-        params="contentComponentName: name, contentComponentData: pageSelectorModel, isVisible: isPageSelectorOpened, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition, showPointer: showPointer, cssClass: 'svc-page-navigator__popup'"
+        params="model: popupModel, cssClass: 'svc-page-navigator__popup'"
       >
         <div />
       </sv-popup>
@@ -5463,7 +5481,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
     >
       <div
         class="svc-page-navigator-item"
-        data-bind="click: action, css: { 'svc-page-navigator-item--selected': selected, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+        data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
         title="Page 1"
       >
         
@@ -5509,7 +5527,7 @@ exports[`Storyshots Page Navigator Page Navigator 1`] = `
     >
       <div
         class="svc-page-navigator-item"
-        data-bind="click: action, css: { 'svc-page-navigator-item--selected': selected, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+        data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
         title="Page 2"
       >
         
@@ -5567,7 +5585,7 @@ exports[`Storyshots Page Navigator Page Navigator Item 1`] = `
   >
     <div
       class="svc-page-navigator-item"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': selected, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Page 1"
     >
       
@@ -5615,8 +5633,8 @@ exports[`Storyshots Page Navigator Page Navigator Item Disabled 1`] = `
     params="item: item"
   >
     <div
-      class="svc-page-navigator-item svc-page-navigator-item--disabled"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': selected, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      class="svc-page-navigator-item"
+      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Disabled Page"
     >
       
@@ -5665,7 +5683,7 @@ exports[`Storyshots Page Navigator Page Navigator Item Selected 1`] = `
   >
     <div
       class="svc-page-navigator-item svc-page-navigator-item--selected"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': selected, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Page 1"
     >
       
@@ -5735,8 +5753,8 @@ exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
   
         
   <sv-popup
-    params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition"
+    params="model: { contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition }"
   >
     <div />
   </sv-popup>
@@ -5801,61 +5819,12 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
   <span
     class="svc-tabbed-menu-item-container"
     data-bind="css: $data.css, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
-    style="visibility: visible;"
   >
     
   
     <!-- ko component: {name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-    <div
-      class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
-    >
-      
-  
-      <span
-        class="svc-text svc-text--normal svc-text--bold"
-        data-bind="text: text, css: { 'svc-text--bold': selected }"
-      >
-        Menu Item 1
-      </span>
-      
-
-    </div>
-    
-
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  
-
-  <span
-    class="svc-tabbed-menu-item-container"
-    data-bind="css: $data.css, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
-    style="visibility: visible;"
-  >
     
   
-    <!-- ko component: {name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-    <div
-      class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
-    >
-      
-  
-      <span
-        class="svc-text svc-text--normal svc-text--bold"
-        data-bind="text: text, css: { 'svc-text--bold': selected }"
-      >
-        Menu Item 2
-      </span>
-      
-
-    </div>
-    
-
     <!-- /ko -->
     
 
@@ -5873,14 +5842,14 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item 1`] = `
   params="item: item"
 >
   <div
-    class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+    class="svc-tabbed-menu-item"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
     <span
-      class="svc-text svc-text--normal svc-text--bold"
-      data-bind="text: text, css: { 'svc-text--bold': selected }"
+      class="svc-text svc-text--normal"
+      data-bind="text: text, css: { 'svc-text--bold': active }"
     >
       Menu Item
     </span>
@@ -5897,14 +5866,14 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item Disabled 1`] = `
   params="item: item"
 >
   <div
-    class="svc-tabbed-menu-item svc-tabbed-menu-item--disabled"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+    class="svc-tabbed-menu-item"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
     <span
       class="svc-text svc-text--normal"
-      data-bind="text: text, css: { 'svc-text--bold': selected }"
+      data-bind="text: text, css: { 'svc-text--bold': active }"
     >
       Disabled Menu Item
     </span>
@@ -5922,13 +5891,13 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item Selected 1`] = `
 >
   <div
     class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': selected, 'svc-tabbed-menu-item--disabled': disabled }"
+    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
     <span
       class="svc-text svc-text--normal svc-text--bold"
-      data-bind="text: text, css: { 'svc-text--bold': selected }"
+      data-bind="text: text, css: { 'svc-text--bold': active }"
     >
       Menu Item
     </span>

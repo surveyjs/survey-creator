@@ -39,8 +39,8 @@ export const ContextMenuOrdinary = () => {
     template: `<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative">
         <svc-button params="title: title, action: action">
         </svc-button>
-        <sv-popup params="contentComponentName: name, contentComponentData: model,
-          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition">
+        <sv-popup params="model: { contentComponentName: name, contentComponentData: model,
+          isVisible: isVisible, verticalPosition: verticalPosition, horizontalPosition: horizontalPosition }">
         </sv-popup>
       </div>`,
     context: {

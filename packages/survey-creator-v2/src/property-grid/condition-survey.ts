@@ -23,7 +23,7 @@ import {
 } from "@survey/creator/settings";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
-import { IPropertyEditorSetup } from "./index";
+import { PropertyEditorSetupValue } from "./index";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -250,10 +250,9 @@ export class ConditionEditorItemsBuilder {
   }
 }
 
-export class ConditionEditor implements IPropertyEditorSetup {
-  private surveyValue: SurveyModel;
+export class ConditionEditor extends PropertyEditorSetupValue {
   private objectValue: Base;
-  private editSurveyValue: SurveyModel;
+  private surveyValue: SurveyModel;
   private panelValue: QuestionPanelDynamicModel;
   private addConditionQuestionsHash = {};
   public allConditionQuestions: Array<ItemValue>;
@@ -261,20 +260,32 @@ export class ConditionEditor implements IPropertyEditorSetup {
   constructor(
     survey: SurveyModel,
     object: Base = null,
-    private options: ISurveyCreatorOptions = null,
+    options: ISurveyCreatorOptions = null,
     private propertyName = ""
   ) {
-    if (!this.options) {
-      this.options = new EmptySurveyCreatorOptions();
-    }
+    super(options);
     this.surveyValue = survey;
     this.objectValue = object;
-    this.editSurveyValue = this.createSurvey({
-      showNavigationButtons: false,
-      showPageTitles: false,
-      showQuestionNumbers: "off",
-      textUpdateMode: "onTyping",
-      requiredText: "",
+    this.panelValue = <QuestionPanelDynamicModel>(
+      this.editSurvey.getQuestionByName("panel")
+    );
+    this.allConditionQuestions = this.createAllConditionQuestions();
+    this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
+      this.onPanelAdded();
+    });
+    this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
+      if (options.question.panelCount == 0) {
+        options.question.addPanel();
+      }
+    });
+    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
+      this.onPanelValueChanged(options.panel, options.name);
+    });
+    this.text =
+      !!this.object && this.propertyName ? this.object[this.propertyName] : "";
+  }
+  protected getSurveyJSON(): any {
+    return {
       elements: [
         {
           type: "paneldynamic",
@@ -312,25 +323,12 @@ export class ConditionEditor implements IPropertyEditorSetup {
           ],
         },
       ],
-    });
-    this.panelValue = <QuestionPanelDynamicModel>(
-      this.editSurvey.getQuestionByName("panel")
-    );
-    this.allConditionQuestions = this.createAllConditionQuestions();
-    this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
-      this.onPanelAdded();
-    });
-    this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
-      if (options.question.panelCount == 0) {
-        options.question.addPanel();
-      }
-    });
-    this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
-      this.onPanelValueChanged(options.panel, options.name);
-    });
-    this.text =
-      !!this.object && this.propertyName ? this.object[this.propertyName] : "";
+    };
   }
+  protected getSurveyCreationReason(): string {
+    return "condition-builder";
+  }
+
   public get text(): string {
     return this.getText();
   }
@@ -344,9 +342,6 @@ export class ConditionEditor implements IPropertyEditorSetup {
   }
   public get object(): Base {
     return this.objectValue;
-  }
-  public get editSurvey(): SurveyModel {
-    return this.editSurveyValue;
   }
   public get panel(): QuestionPanelDynamicModel {
     return this.panelValue;
@@ -362,9 +357,6 @@ export class ConditionEditor implements IPropertyEditorSetup {
     if (!this.isReady) return;
     if (!this.object || !this.propertyName) return;
     this.object[this.propertyName] = this.text;
-  }
-  protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "condition-builder"); //TODO reason name
   }
   private buildPanels(items: Array<ConditionEditorItem>) {
     this.panel.panelCount = items.length;
@@ -568,6 +560,9 @@ export class ConditionEditor implements IPropertyEditorSetup {
     }
     if (questionName.indexOf("row.") == 0) {
       path = questionName.substr("row.".length);
+    }
+    if (!path) {
+      path = questionName;
     }
     if (!!path && path[0] == ".") {
       path = path.substr(1);

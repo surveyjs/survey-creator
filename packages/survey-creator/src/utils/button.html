@@ -1,12 +1,12 @@
 <div tabindex="0" class="btn btn-primary sv-btn svd-toolbar-button"
     data-bind="attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), 'aria-disabled': $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title }, css: $data.innerCss, key2click, click: action"
     role="button">
-    <!-- ko if: $data.icon -->
+    <!-- ko if: $data.iconName -->
     <div class="svd-toolbar-button__image">
-        <svg-icon class="svd-svg-icon icon-white" params="iconName: icon, size: 16"></svg-icon>
+        <svg-icon class="svd-svg-icon icon-white" params="iconName: iconName, size: 16"></svg-icon>
     </div>
     <!-- /ko -->
-    <!-- ko if: $data.showTitle === undefined || (!!$data.icon && !ko.unwrap($data.showTitle)) -->
+    <!-- ko if: $data.showTitle === undefined || (!!$data.iconName && !ko.unwrap($data.showTitle)) -->
     <div class="svd-toolbar-button__title">
         <span data-bind="text: title"></span>
     </div>

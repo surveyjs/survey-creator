@@ -2,10 +2,10 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyTextWorker } from "../textWorker";
 import { getLocString } from "../editorLocalization";
-import { IToolbarItem } from "../components/toolbar";
 import { SurveyCreator } from "../editor";
 
 import "./json-editor.scss";
+import { IActionBarItem } from "survey-knockout";
 var templateHtml = require("./json-editor.html");
 
 export class SurveyJSONEditor {
@@ -25,9 +25,9 @@ export class SurveyJSONEditor {
 
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IToolbarItem
+   * @see IActionBarItem
    */
-  public toolbarItems = ko.observableArray<IToolbarItem>();
+  public toolbarItems = ko.observableArray<IActionBarItem>();
 
   constructor() {
     this.koText = ko.observable("");
@@ -41,11 +41,11 @@ export class SurveyJSONEditor {
   protected addToolbarItems() {
     if (!this.hasAceEditor) return;
     if (!SurveyJSONEditor.showToolbar) return;
-    let focusEditor = () => setTimeout(() => this.aceEditor.focus(), 1);
-    let items: Array<IToolbarItem> = [];
+    const focusEditor = () => setTimeout(() => this.aceEditor.focus(), 1);
+    const items: Array<IActionBarItem> = [];
     items.push({
       id: "svd-undo",
-      icon: "icon-actionundo",
+      iconName: "icon-actionundo",
       title: getLocString("ed.undo"),
       enabled: this.aceCanUndo,
       tooltip: getLocString("ed.undoTooltip"),
@@ -57,7 +57,7 @@ export class SurveyJSONEditor {
     });
     items.push({
       id: "svd-redo",
-      icon: "icon-actionredo",
+      iconName: "icon-actionredo",
       enabled: this.aceCanRedo,
       title: getLocString("ed.redo"),
       tooltip: getLocString("ed.redoTooltip"),
@@ -70,7 +70,7 @@ export class SurveyJSONEditor {
     if (window["navigator"]) {
       items.push({
         id: "svd-copy",
-        icon: "icon-actioncopy",
+        iconName: "icon-actioncopy",
         title: getLocString("ed.copy"),
         showTitle: false,
         tooltip: getLocString("ed.copyTooltip"),
@@ -83,7 +83,7 @@ export class SurveyJSONEditor {
       });
       items.push({
         id: "svd-cut",
-        icon: "icon-actioncut",
+        iconName: "icon-actioncut",
         title: getLocString("ed.cut"),
         showTitle: false,
         tooltip: getLocString("ed.cutTooltip"),
@@ -97,7 +97,7 @@ export class SurveyJSONEditor {
       });
       items.push({
         id: "svd-paste",
-        icon: "icon-actionpaste",
+        iconName: "icon-actionpaste",
         title: getLocString("ed.paste"),
         showTitle: false,
         tooltip: getLocString("ed.pasteTooltip"),

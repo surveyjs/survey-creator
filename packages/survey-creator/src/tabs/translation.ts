@@ -3,10 +3,10 @@ import * as Survey from "survey-knockout";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyCreator } from "../editor";
-import { IToolbarItem } from "../components/toolbar";
 import { settings } from "../settings";
 
 import "./translation.scss";
+import { IActionBarItem } from "survey-knockout";
 var templateHtml = require("./translation.html");
 var groupTemplateHtml = require("./translation-group.html");
 
@@ -408,9 +408,9 @@ export class Translation implements ITranslationLocales {
 
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IToolbarItem
+   * @see IActionBarItem
    */
-  public toolbarItems = ko.observableArray<IToolbarItem>();
+  public toolbarItems = ko.observableArray<IActionBarItem>();
 
   constructor(
     survey: Survey.Survey,
@@ -469,7 +469,7 @@ export class Translation implements ITranslationLocales {
     };
     this.survey = survey;
 
-    let items: Array<IToolbarItem> = [];
+    const items: Array<IActionBarItem> = [];
     items.push({
       id: "svd-translation-language-selector",
       title: "",
@@ -500,7 +500,7 @@ export class Translation implements ITranslationLocales {
         read: () => this.koFilteredPage(),
         write: (val: any) => this.koFilteredPage(val),
       }),
-      items: <any>this.koFilteredPages,
+      items: this.koFilteredPages,
     });
 
     this.toolbarItems(items);

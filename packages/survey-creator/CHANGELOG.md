@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.28](https://github.com/surveyjs/survey-creator/compare/v1.8.27...v1.8.28) (2021-01-28)
+
+### [1.8.27](https://github.com/surveyjs/survey-creator/compare/v1.8.26...v1.8.27) (2021-01-28)
+
+
+### Bug Fixes
+
+* Error on visible if on matrix questions when it is located in panel dynamic [#1072](https://github.com/surveyjs/survey-creator/issues/1072) ([bc39b38](https://github.com/surveyjs/survey-creator/commit/bc39b38dc06e2750537613509ec49508fff78da3))
+* onElementNameChanged event is not fired if element editing in modal window [#1068](https://github.com/surveyjs/survey-creator/issues/1068) ([9434c1a](https://github.com/surveyjs/survey-creator/commit/9434c1acb07e3f1b2f80ecf938e9235d16e3f598))
+* Translation tab: group property name is not localized [#1065](https://github.com/surveyjs/survey-creator/issues/1065) ([331ad86](https://github.com/surveyjs/survey-creator/commit/331ad86d14a294a1b2cfe069fb158a5cfbd067df))
+
 ### [1.8.26](https://github.com/surveyjs/survey-creator/compare/v1.8.25...v1.8.26) (2021-01-19)
 
 ### [1.8.25](https://github.com/surveyjs/survey-creator/compare/v1.8.24...v1.8.25) (2021-01-14)

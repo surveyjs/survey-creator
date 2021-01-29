@@ -7,6 +7,7 @@ import {
 import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
+  PropertyGridEditorQuestion,
 } from "./index";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
 
@@ -24,11 +25,11 @@ var json = {
 
 ComponentCollection.Instance.add(json);
 
-PropertyGridEditorCollection.register({
-  fit(prop: JsonObjectProperty): boolean {
+export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuestion {
+  public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "restfull";
-  },
-  getJSON(
+  }
+  public getJSON(
     obj: Base,
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
@@ -36,5 +37,7 @@ PropertyGridEditorCollection.register({
     return {
       type: "propertygrid_restfull",
     };
-  },
-});
+  }
+}
+
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionRestfull());

@@ -32,11 +32,11 @@ import { Translation } from "./tabs/translation";
 import { SurveyLogic } from "./tabs/logic";
 import { Commands } from "./commands";
 
-import { IToolbarItem } from "./components/toolbar";
 import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
-import { localization } from "./entries";
+import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase } from "./creator-base";
+import { IActionBarItem } from "survey-knockout";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -552,7 +552,7 @@ export class SurveyCreator
   koHideAdvancedSettings: ko.Observable<boolean>;
   koTestSurveyWidth: any;
   koDesignerHeight: ko.Observable<any>;
-  koShowPagesToolbox = ko.observable<ContainerLocation>(true);
+  koShowPagesToolbox: ko.Observable<ContainerLocation>;
   generateValidJSONClick: any;
   generateReadableJSONClick: any;
   doUndoClick: any;
@@ -645,20 +645,7 @@ export class SurveyCreator
       }
     });
 
-    this.propertyGridObjectEditorModel.onAfterRenderCallback = function (
-      obj,
-      htmlElement,
-      prop
-    ) {
-      if (self.onPropertyAfterRender.isEmpty) return;
-      var options = {
-        obj: obj,
-        htmlElement: htmlElement,
-        property: prop.property,
-        propertyEditor: prop.editor,
-      };
-      self.onPropertyAfterRender.fire(self, options);
-    };
+    this.propertyGridObjectEditorModel.onAfterRenderCallback = this.onEditorAfterRenderCallback;
     this.propertyGridObjectEditorModel.onSortPropertyCallback = function (
       obj: any,
       property1: Survey.JsonObjectProperty,
@@ -742,6 +729,22 @@ export class SurveyCreator
     this.addToolbarItems();
   }
 
+  private onEditorAfterRenderCallback = (
+    obj: any,
+    htmlElement: HTMLElement,
+    prop: SurveyObjectProperty
+  ) => {
+    if (this.onPropertyAfterRender.isEmpty) {
+      return;
+    }
+    var options = {
+      obj: obj,
+      htmlElement: htmlElement,
+      property: prop.property,
+      propertyEditor: prop.editor,
+    };
+    this.onPropertyAfterRender.fire(this, options);
+  };
   setOptions(options) {
     this.koShowPropertyGrid = ko.observable<ContainerLocation>(true);
     this.koShowElementEditorAsPropertyGrid = ko.observable(false);
@@ -758,6 +761,7 @@ export class SurveyCreator
     this.koAllowControlSurveyTitleVisibility = ko.observable(true);
     this.koDesignerHeight = ko.observable<any>("1000px");
     this.koShowSurveyTitle = ko.observable("ifentered");
+    this.koShowPagesToolbox = ko.observable<ContainerLocation>(true);
 
     super.setOptions(options);
     options = this.options;
@@ -958,9 +962,9 @@ export class SurveyCreator
   // }
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IToolbarItem
+   * @see IActionBarItem
    */
-  public toolbarItems = ko.observableArray<IToolbarItem>();
+  public toolbarItems = ko.observableArray<IActionBarItem>();
   /**
    * Get and set the maximum of copied questions/panels in the toolbox. The default value is 3
    */
@@ -2120,6 +2124,11 @@ export class SurveyCreator
         isCanceled = false;
         if (oldName !== question["name"]) {
           self.updateConditionsOnQuestionNameChanged(question, "name", oldName);
+          self.onElementNameChanged.fire(self, {
+            obj: question,
+            oldName: oldName,
+            newName: question["name"],
+          });
         }
         if (oldValueName !== question["valueName"]) {
           self.updateConditionsOnQuestionNameChanged(
@@ -2136,7 +2145,8 @@ export class SurveyCreator
           isCanceled: isCanceled,
           element: element,
         });
-      }
+      },
+      this.onEditorAfterRenderCallback
     );
   }
   public onQuestionEditorChanged(question: Survey.Question) {

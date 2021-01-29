@@ -10,7 +10,7 @@
       <!-- ko foreach: creator.tabs -->
       <div
         class="svc-creator-tab"
-        data-bind="visible: $parent.creator.koViewType() == name"
+        data-bind="visible: $parent.creator.koViewType() == id"
       >
         <!-- ko component: { name: template, params: {creator: $parent.creator, survey: $parent.creator.survey, data: data } } -->
         <!-- /ko -->

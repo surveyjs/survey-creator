@@ -1,7 +1,4 @@
-import {
-  EmptySurveyCreatorOptions,
-  ISurveyCreatorOptions,
-} from "@survey/creator/settings";
+import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import { SurveyHelper } from "@survey/creator/surveyHelper";
 import {
   ItemValue,
@@ -10,25 +7,28 @@ import {
   SurveyModel,
   Survey,
 } from "survey-knockout";
-import { IPropertyEditorSetup } from "./index";
+import { PropertyEditorSetupValue } from "./index";
 
-export class FastEntryEditor implements IPropertyEditorSetup {
-  private editSurveyValue: SurveyModel;
+export class FastEntryEditor extends PropertyEditorSetupValue {
   private commentValue: QuestionCommentModel;
 
   constructor(
     public choices: Array<ItemValue>,
-    private creator: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
+    options: ISurveyCreatorOptions = null
   ) {
-    this.editSurveyValue = this.createSurvey();
+    super(options);
     this.commentValue = <QuestionCommentModel>(
       this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
   }
-
-  public get editSurvey(): SurveyModel {
-    return this.editSurveyValue;
+  protected getSurveyJSON(): any {
+    return {
+      elements: [{ type: "comment", name: "question" }],
+    };
+  }
+  protected getSurveyCreationReason(): string {
+    return "fast-entry";
   }
   public get comment(): QuestionCommentModel {
     return this.commentValue;
@@ -49,14 +49,6 @@ export class FastEntryEditor implements IPropertyEditorSetup {
     );
 
     SurveyHelper.applyItemValueArray(<any>this.choices, items);
-  }
-
-  protected createSurvey(): SurveyModel {
-    const json = {
-      showNavigationButtons: "none",
-      elements: [{ type: "comment", name: "question" }],
-    };
-    return this.creator.createSurvey(json, "fast-entry");
   }
   public setComment() {
     var text = SurveyHelper.convertItemValuesToText(<any>this.choices);
