@@ -6,8 +6,7 @@ import {
   MatrixDropdownRowModelBase,
   QuestionMatrixDynamicModel,
   PanelModel,
-  ExpressionValidator,
-  SurveyTriggerRunExpression,
+  ItemValue,
 } from "survey-knockout";
 import {
   PropertyGridEditorCollection,
@@ -18,8 +17,8 @@ import {
 import { getNextValue } from "@survey/creator/utils/utils";
 import { editorLocalization } from "@survey/creator/editorLocalization";
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
-import { SurveyHelper as SurveyHelperBase } from "@survey/creator/surveyHelper";
 import { FastEntryEditor } from "./fast-entry";
+import { SurveyQuestionProperties } from "@survey/creator/questionEditors/questionEditor";
 
 class SurveyHelper {
   public static getNewName(
@@ -79,8 +78,68 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected getKeyValue(): string {
     return "";
   }
-  protected getColumnNames(): Array<string> {
+  protected getColumnNames(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): Array<string> {
+    var names = this.getPropertiesNames(obj, prop, options);
+    if (!!names && names.length > 0) return names;
+    return this.getDefaultListProperties(prop);
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return prop.className;
+  }
+  protected getPropertiesNames(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): Array<string> {
+    var res = [];
+    var properties = this.getDefinedListProperties(obj, prop, options);
+    for (var i = 0; i < properties.length; i++) {
+      res.push(properties[i].name);
+    }
+    if (res.length == 0) {
+      res = this.getDefaulColumnNames();
+    }
+    return res;
+  }
+  protected getDefinedListProperties(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): Array<any> {
+    if (!prop.className) return [];
+    var newObj = Serializer.createClass(prop.className);
+    if (!newObj) return [];
+    var props = new SurveyQuestionProperties(
+      newObj,
+      options,
+      this.getColumnClassName(obj, prop),
+      "list",
+      obj,
+      prop
+    );
+    if (props.getTabs().length == 0) return [];
+    return props.getTabs()[0].properties;
+  }
+  protected getDefaultListProperties(prop: JsonObjectProperty): Array<string> {
+    var res = [];
+    if (!!prop && !!prop.className) {
+      var properties = Serializer.getProperties(prop.className);
+      for (var i = 0; i < properties.length; i++) {
+        if (!this.isPropertyShownInList(properties[i])) continue;
+        res.push(properties[i].name);
+      }
+    }
+    return res.length > 0 ? res : this.getDefaulColumnNames();
+  }
+  protected getDefaulColumnNames(): Array<string> {
     return [];
+  }
+  private isPropertyShownInList(prop: JsonObjectProperty): boolean {
+    return prop.visible && prop.showMode !== "form";
   }
   protected getObjTypeName(): string {
     return "";
@@ -119,7 +178,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     return this.getMatrixJSON(
       obj,
       prop,
-      this.getColumnNames(),
+      this.getColumnNames(obj, prop, options),
       options,
       this.getObjTypeName()
     );
@@ -186,7 +245,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   ): boolean {
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
-    return !!column && column.isVisible && !column.readOnly;
+    var items = question.value;
+    return (
+      !!column &&
+      column.isVisible &&
+      !column.readOnly &&
+      !this.hasMultipleLanguage(items) &&
+      !this.hasVisibleIfOrEnableIf(items)
+    );
   }
   public createPropertyEditorSetup(
     obj: Base,
@@ -216,11 +282,25 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     var res = super.getMatrixJSON(obj, prop, propNames, options, keyName);
     return res;
   }
-  protected getColumnNames(): Array<string> {
+  protected getDefaulColumnNames(): Array<string> {
     return ["value", "text"];
   }
   protected getKeyValue(): string {
     return "value";
+  }
+  private hasMultipleLanguage(items: Array<ItemValue>): boolean {
+    if (!items || !Array.isArray(items)) return false;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].locText.hasNonDefaultText()) return true;
+    }
+    return false;
+  }
+  private hasVisibleIfOrEnableIf(items: Array<ItemValue>): boolean {
+    if (!items || !Array.isArray(items)) return false;
+    for (var i = 0; i < items.length; i++) {
+      if (!!items[i].visibleIf || items[i].enableIf) return true;
+    }
+    return false;
   }
 }
 
@@ -228,7 +308,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "matrixdropdowncolumns";
   }
-  protected getColumnNames(): Array<string> {
+  protected getDefaulColumnNames(): Array<string> {
     return ["cellType", "name", "title"];
   }
   protected getKeyValue(): string {
@@ -243,7 +323,13 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
-  protected getColumnNames(): Array<string> {
+  protected getDefaultClassName(prop: JsonObjectProperty): string {
+    return prop.className;
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return "page@" + obj.getType();
+  }
+  protected getDefaulColumnNames(): Array<string> {
     return ["name", "title"];
   }
   protected hasDetailPanel(): boolean {
@@ -261,7 +347,10 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "calculatedvalues";
   }
-  protected getColumnNames(): Array<string> {
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return "calculatedvalue@items";
+  }
+  protected getDefaulColumnNames(): Array<string> {
     return ["name"];
   }
   protected getKeyValue(): string {
@@ -275,7 +364,7 @@ export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMa
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "htmlconditions";
   }
-  protected getColumnNames(): Array<string> {
+  protected getDefaulColumnNames(): Array<string> {
     return ["html"];
   }
 }
@@ -283,7 +372,7 @@ export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMat
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "urlconditions";
   }
-  protected getColumnNames(): Array<string> {
+  protected getDefaulColumnNames(): Array<string> {
     return ["url"];
   }
 }
@@ -291,7 +380,10 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "textitems";
   }
-  protected getColumnNames(): Array<string> {
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return "multipletext@items";
+  }
+  protected getDefaulColumnNames(): Array<string> {
     return ["name"];
   }
   protected getKeyValue(): string {

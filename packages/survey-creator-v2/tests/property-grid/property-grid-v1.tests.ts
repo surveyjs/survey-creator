@@ -344,3 +344,69 @@ test("SurveyPropertyItemValuesEditor - returns error on empty value", () => {
   expect(question.choices[0].value).toEqual(3);
   expect(rows[0].cells[0].question.errors).toHaveLength(0);
 });
+test("SurveyPropertyItemValue disable viewtext for multiple languages", () => {
+  var survey = new SurveyModel({
+    questions: [
+      {
+        type: "checkbox",
+        name: "q1",
+        choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }],
+      },
+    ],
+  });
+  survey.locale = "de";
+  var question = <QuestionCheckboxModel>survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var actions = choicesQuestion.getTitleActions();
+  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  expect(setupAction).toBeTruthy();
+  expect(setupAction.enabled).toBeFalsy();
+});
+test("SurveyPropertyItemValue_PureValue", () => {
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, "item2", { value: 3, text: "item3" }];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(question.choices).toHaveLength(3);
+  var rows = choicesQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual(1);
+  expect(rows[1].cells[0].value).toEqual("item2");
+  expect(rows[2].cells[0].value).toEqual(3);
+  expect(rows[2].cells[1].value).toEqual("item3");
+});
+test("SurveyPropertyItemValue columns generation", () => {
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, "item2", { value: 3, text: "item3" }];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(2);
+  expect(choicesQuestion.columns[0].name).toEqual("value");
+  expect(choicesQuestion.columns[1].name).toEqual("text");
+});
+test("SurveyPropertyItemValue custom property", () => {
+  Serializer.addProperty("itemvalue", { name: "myImageLink" });
+
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, "item2", { value: 3, text: "item3" }];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[2].name).toEqual("myImageLink");
+  expect(choicesQuestion.columns[2].title).toEqual("My image link");
+
+  var actions = choicesQuestion.getTitleActions();
+  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  expect(setupAction).toBeTruthy();
+  expect(setupAction.enabled).toBeTruthy();
+
+  Serializer.removeProperty("itemvalue", "myImageLink");
+});

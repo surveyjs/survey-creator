@@ -15,6 +15,7 @@ import {
 } from "../utils/utils";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
+import { ISurveyCreatorOptions } from "../settings";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;
@@ -508,7 +509,11 @@ export class SurveyPropertyEditorShowWindow {
     onChanged: (question: Survey.Question) => any,
     options: ISurveyObjectEditorOptions = null,
     onClosed: () => any = null,
-    onEditorAfterRenderCallback: (obj: any, htmlElement: HTMLElement, prop: SurveyObjectProperty) => void = undefined
+    onEditorAfterRenderCallback: (
+      obj: any,
+      htmlElement: HTMLElement,
+      prop: SurveyObjectProperty
+    ) => void = undefined
   ) {
     var editor = new SurveyQuestionEditor(question, null, options);
     editor.onAfterRenderCallback = onEditorAfterRenderCallback;
@@ -584,7 +589,7 @@ export class SurveyQuestionProperties {
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   constructor(
     public obj: any,
-    public options: ISurveyObjectEditorOptions = null,
+    public options: ISurveyCreatorOptions = null,
     className: string = null,
     showMode: string = null,
     private parentObj: any = null,
