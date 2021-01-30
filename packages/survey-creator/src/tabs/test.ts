@@ -93,7 +93,7 @@ export class SurveyLiveTester {
     this.toolbarItems.push({
       id: "svd-test-locale-selector",
       title: this.localeText,
-      visible: this.koShowDefaultLanguageInTestSurveyTab,
+      visible: <any>this.koShowDefaultLanguageInTestSurveyTab,
       tooltip: this.localeText,
       component: "svd-dropdown",
       action: ko.computed({
@@ -105,7 +105,7 @@ export class SurveyLiveTester {
     this.toolbarItems.push({
       id: "svd-test-show-invisible",
       title: getLocString("ts.showInvisibleElements"),
-      visible: this.koShowInvisibleElementsInTestSurveyTab,
+      visible: <any>this.koShowInvisibleElementsInTestSurveyTab,
       tooltip: getLocString("ts.showInvisibleElements"),
       component: "svd-boolean",
       action: ko.computed({
