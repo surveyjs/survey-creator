@@ -111,6 +111,7 @@ export interface ITranslationLocales {
 }
 
 export class TranslationGroup extends TranslationItemBase {
+  private isRootValue: boolean = false;
   koExpanded: any;
   koShowHeader: any;
   private itemValues: Array<TranslationItemBase>;
@@ -136,7 +137,13 @@ export class TranslationGroup extends TranslationItemBase {
       (item) => item instanceof TranslationItem
     ) as Array<TranslationItem>;
   }
-
+  public get isRoot(): boolean {
+    return this.isRootValue;
+  }
+  setAsRoot() {
+    this.isRootValue = true;
+    this.koExpanded(true);
+  }
   public getItemByName(name: string): TranslationItemBase {
     for (var i = 0; i < this.itemValues.length; i++) {
       if (this.itemValues[i].name == name) return this.itemValues[i];
@@ -231,6 +238,9 @@ export class TranslationGroup extends TranslationItemBase {
       }
     }
     this.sortItems();
+    this.keepOnGroupExpanded();
+  }
+  private keepOnGroupExpanded() {
     if (this.items.length == 1 && this.groups.length == 1) {
       var gr = this.groups[0];
       gr.koExpanded(true);
@@ -238,6 +248,25 @@ export class TranslationGroup extends TranslationItemBase {
         gr.koShowHeader(false);
       }
     }
+  }
+  public expandAll() {
+    this.expandCollapseAll(true);
+  }
+  public collapseAll() {
+    this.expandCollapseAll(false);
+  }
+  private expandCollapseAll(isExpand: boolean) {
+    if (!this.isRoot) {
+      this.koExpanded(isExpand);
+    }
+    for (var i = 0; i < this.groups.length; i++) {
+      if (isExpand) {
+        this.groups[i].expandAll();
+      } else {
+        this.groups[i].collapseAll();
+      }
+    }
+    this.keepOnGroupExpanded();
   }
   private sortItems() {
     if (!settings.traslation.sortByName) return;
@@ -526,6 +555,7 @@ export class Translation implements ITranslationLocales {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.rootValue = new TranslationGroup(rootName, rootObj, this);
+    this.root.setAsRoot();
     this.root.reset();
     this.resetLocales();
     this.koIsEmpty(!this.root.hasItems);
@@ -698,6 +728,14 @@ export class Translation implements ITranslationLocales {
       },
     ]);
     this.reset();
+  }
+  public expandAll() {
+    if (!this.root) return;
+    this.root.expandAll();
+  }
+  public collapseAll() {
+    if (!this.root) return;
+    this.root.collapseAll();
   }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
     if (!this.translateItemAfterRenderCallback) return;
