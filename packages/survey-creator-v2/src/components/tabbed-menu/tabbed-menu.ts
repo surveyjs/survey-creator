@@ -1,35 +1,46 @@
 import * as ko from "knockout";
 //import { ITabItem } from "./tabbed-menu-item";
-import { ResponsibilityManager, AdaptiveElement, AdaptiveActionBarItemWrapper } from "survey-knockout";
+import {
+  ResponsibilityManager,
+  AdaptiveElement,
+  AdaptiveActionBarItemWrapper,
+  AdaptiveElementImplementor,
+} from "survey-knockout";
 
 import "./tabbed-menu.scss";
 import { IActionBarItem } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
 export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
-  constructor(_items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>, viewType: ko.Observable<string>) {
+  constructor(
+    _items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>,
+    viewType: ko.Observable<string>
+  ) {
     super();
 
     const selectedItem = ko.observable<IActionBarItem>();
     this.itemsSubscription = ko.computed(() => {
-        const wrappedItems: AdaptiveActionBarItemWrapper[] = ko.unwrap(_items).map((item: IActionBarItem) => {
-          item.active = <() => boolean>ko.computed(
-            () =>
-              item === selectedItem() ||
-              viewType() === item.id
+      const wrappedItems: AdaptiveActionBarItemWrapper[] = ko
+        .unwrap(_items)
+        .map((item: IActionBarItem) => {
+          item.active = <() => boolean>(
+            ko.computed(() => item === selectedItem() || viewType() === item.id)
           );
-          let __originalAction = item.action || (() => {});
+          const __originalAction = item.action || (() => {});
           item.action = () => {
             selectedItem(item);
             __originalAction();
           };
-          return new AdaptiveActionBarItemWrapper(this, item);
+          const wrapper = new AdaptiveActionBarItemWrapper(this, item);
+          //new ImplementorBase(wrapper);
+          return wrapper;
         });
-        this.items(wrappedItems);
-      }
-    )
+      this.items = wrappedItems;
+    });
+    new AdaptiveElementImplementor(this);
 
     this.dotsItemPopupModel.horizontalPosition = "right";
     // this.itemsSubscription = ko.computed(() => {

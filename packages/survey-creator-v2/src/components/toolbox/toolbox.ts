@@ -1,5 +1,8 @@
 import * as ko from "knockout";
-import { VerticalResponsibilityManager } from "survey-knockout";
+import {
+  AdaptiveElementImplementor,
+  VerticalResponsibilityManager,
+} from "survey-knockout";
 import { SurveyCreator } from "../../creator";
 import { AdaptiveElement } from "survey-knockout";
 import "./toolbox.scss";
@@ -16,9 +19,11 @@ export class ToolboxViewModel extends AdaptiveElement {
     creator: SurveyCreator
   ) {
     super();
+
     this.dotsItemPopupModel.horizontalPosition = "right";
     this.dotsItemPopupModel.verticalPosition = "top";
     this.creator = creator;
+    new AdaptiveElementImplementor(this);
     this._categoriesSubscription = ko.computed(() => {
       let categories = ko.unwrap(_categories);
       categories.forEach((category: any, categoryIndex) => {
@@ -32,9 +37,9 @@ export class ToolboxViewModel extends AdaptiveElement {
     });
   }
 
-  public invisibleItemSelected(model: any) : void {
+  public invisibleItemSelected(model: any): void {
     this.creator.clickToolboxItem(model.json);
-  };
+  }
 
   dispose() {
     this._categoriesSubscription.dispose();
