@@ -773,3 +773,23 @@ QUnit.test("Two new functions: expandAll(), collapseAll()", function (assert) {
     "The q1 group  is collapse as well"
   );
 });
+/* TODO wait for v1.8.29
+QUnit.test("check LocalizableStrings/dataList property", function (assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("page1");
+  var q1 = <Survey.QuestionTextModel>(
+    survey.pages[0].addNewQuestion("text", "q1")
+  );
+  q1.dataList = ["en1", "en2"];
+  var translation = new Translation(survey);
+  var root = translation.root;
+  assert.equal(root.groups.length, 1, "There is one groups");
+  var q1G = root.groups[0].groups[0];
+  var item = <TranslationItem>q1G.items.find((item) => {
+    if (item.name == "dataList") return item;
+  });
+  assert.ok(item);
+  assert.equal(item.name, "dataList");
+  assert.equal(item.koValue("en"), "en1\nen2");
+});
+*/
