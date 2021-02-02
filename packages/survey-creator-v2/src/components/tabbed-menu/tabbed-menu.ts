@@ -29,13 +29,14 @@ export class TabbedMenuViewModel extends AdaptiveElement {
           item.active = <() => boolean>(
             ko.computed(() => item === selectedItem() || viewType() === item.id)
           );
-          const __originalAction = item.action || (() => {});
-          item.action = () => {
-            selectedItem(item);
-            __originalAction();
-          };
           const wrapper = new AdaptiveActionBarItemWrapper(this, item);
-          //new ImplementorBase(wrapper);
+
+          const __originalAction = item.action || ((context?: any) => {});
+          wrapper.action = (context?: any) => {
+            selectedItem(item);
+            __originalAction(context);
+          };
+
           return wrapper;
         });
       this.items = wrappedItems;
@@ -43,12 +44,6 @@ export class TabbedMenuViewModel extends AdaptiveElement {
     new AdaptiveElementImplementor(this);
 
     this.dotsItemPopupModel.horizontalPosition = "right";
-    // this.itemsSubscription = ko.computed(() => {
-    //   var items = ko.unwrap(_items);
-    //   items.forEach((item) => {
-    //     this.items.push(new AdaptiveActionBarItemWrapper(this, item));
-    //   });
-    // });
   }
 
   public dispose() {

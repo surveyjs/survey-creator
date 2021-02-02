@@ -1,11 +1,13 @@
 import * as ko from "knockout";
 import {
+  AdaptiveActionBarItemWrapper,
   AdaptiveElementImplementor,
   VerticalResponsibilityManager,
 } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
 import { AdaptiveElement } from "survey-knockout";
 import "./toolbox.scss";
+import { IQuestionToolboxItem } from "@survey/creator/toolbox";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";
 
@@ -23,22 +25,33 @@ export class ToolboxViewModel extends AdaptiveElement {
     this.dotsItemPopupModel.horizontalPosition = "right";
     this.dotsItemPopupModel.verticalPosition = "top";
     this.creator = creator;
-    new AdaptiveElementImplementor(this);
     this._categoriesSubscription = ko.computed(() => {
-      let categories = ko.unwrap(_categories);
+      const wrappedItems: AdaptiveActionBarItemWrapper[] = [];
+      const categories = ko.unwrap(_categories);
       categories.forEach((category: any, categoryIndex) => {
         (ko.unwrap(category.items) || []).forEach((item, index) => {
-          if (categoryIndex != 0 && index == 0) item.needSeparator = true;
-          item.isVisible = ko.observable(true);
-          this.items.push(item);
+          const wrapper = new AdaptiveActionBarItemWrapper(this, item);
+          if (categoryIndex != 0 && index == 0) {
+            wrapper.needSeparator = true;
+          }
+          wrappedItems.push(wrapper);
         });
       });
+      this.items = wrappedItems;
       this.categories(categories);
     });
+    new AdaptiveElementImplementor(this);
   }
 
-  public invisibleItemSelected(model: any): void {
-    this.creator.clickToolboxItem(model.json);
+  public static getToolboxItem(
+    wrapper: AdaptiveActionBarItemWrapper
+  ): IQuestionToolboxItem {
+    const item: IQuestionToolboxItem = <any>wrapper.wrappedItem;
+    return item;
+  }
+
+  public invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
+    this.creator.clickToolboxItem(ToolboxViewModel.getToolboxItem(model).json);
   }
 
   dispose() {
