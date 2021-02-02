@@ -75,9 +75,9 @@ export class TranslationItem extends TranslationItemBase {
   }
 
   public fillLocales(locales: Array<string>) {
-    var json = this.locString.getJson();
-    if (!json || typeof json === "string") return;
-    for (var key in json) {
+    var keys = this.getKeys();
+    for (var i = 0; i < keys.length; i++) {
+      let key = keys[i];
       if (
         !!key &&
         locales.indexOf(key) < 0 &&
@@ -86,6 +86,16 @@ export class TranslationItem extends TranslationItemBase {
         locales.push(key);
       }
     }
+  }
+  private getKeys(): Array<string> {
+    if (this.locString["getLocales"]) return this.locString["getLocales"]();
+    var json = this.locString.getJson();
+    if (!json || typeof json === "string") return [];
+    var res = [];
+    for (var key in json) {
+      res.push(key);
+    }
+    return res;
   }
   public mergeLocaleWithDefault(loc: string) {
     var locText = this.locString.getLocaleText(loc);
