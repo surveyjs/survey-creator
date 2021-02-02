@@ -3,7 +3,7 @@
     <!-- ko foreach: items -->
     <div
       class="svc-toolbox__tool"
-      data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+      data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
     >
       <!-- ko if: $data.needSeparator -->
       <div class="svc-toolbox__category-separator"></div>

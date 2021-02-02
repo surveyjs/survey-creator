@@ -1,11 +1,13 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
+import { IActionBarItem } from "survey-knockout";
+import { CreatorBase } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 
 /**
  * The Toolbox item description.
  */
-export interface IQuestionToolboxItem {
+export interface IQuestionToolboxItem extends IActionBarItem {
   /**
    * A unique name
    */
@@ -116,7 +118,7 @@ export class QuestionToolbox {
 
   constructor(
     supportedQuestions: Array<string> = null,
-    public creator: any = null
+    public creator: CreatorBase<Survey.Survey> = null
   ) {
     this.createDefaultItems(supportedQuestions);
     var self = this;
@@ -146,7 +148,7 @@ export class QuestionToolbox {
   public set copiedJsonText(value: string) {
     var newItems = value ? JSON.parse(value) : [];
     this.clearCopiedItems();
-    for (var i = 0; i < newItems.length; i++) {
+    for (let i: number = 0; i < newItems.length; i++) {
       newItems[i].isCopied = true;
       this.addItem(newItems[i]);
     }
@@ -158,8 +160,8 @@ export class QuestionToolbox {
     return this.itemsValue;
   }
   public get itemNames(): Array<string> {
-    var res = [];
-    for (var i = 0; i < this.items.length; i++) {
+    const res: string[] = [];
+    for (let i: number = 0; i < this.items.length; i++) {
       res.push(this.items[i].name);
     }
     return res;
@@ -168,8 +170,8 @@ export class QuestionToolbox {
    * The Array of copied Toolbox items
    */
   public get copiedItems(): Array<IQuestionToolboxItem> {
-    var result = [];
-    for (var i = 0; i < this.itemsValue.length; i++) {
+    const result: IQuestionToolboxItem[] = [];
+    for (let i: number = 0; i < this.itemsValue.length; i++) {
       if (this.itemsValue[i].isCopied) result.push(this.itemsValue[i]);
     }
     return result;
@@ -186,7 +188,7 @@ export class QuestionToolbox {
     if (clearAll) {
       this.clearItems();
     }
-    for (var i = 0; i < items.length; i++) {
+    for (let i: number = 0; i < items.length; i++) {
       this.itemsValue.push(items[i]);
     }
     this.onItemsChanged();
@@ -198,10 +200,11 @@ export class QuestionToolbox {
    */
   public addCopiedItem(question: Survey.Question, options: any = null) {
     if (!options) options = {};
-    var name = !!options.name ? options.name : question.name;
-    var title = !!options.title ? options.title : name;
-    var tooltip = !!options.tooltip ? options.tooltip : title;
-    var item = {
+    const name: string = !!options.name ? options.name : question.name;
+    const title: string = !!options.title ? options.title : name;
+    const tooltip: string = !!options.tooltip ? options.tooltip : title;
+    const item: IQuestionToolboxItem = {
+      id: name,
       name: name,
       title: title,
       tooltip: tooltip,
@@ -211,7 +214,7 @@ export class QuestionToolbox {
       category: !!options.category ? options.category : "",
     };
     if (this.replaceItem(item)) return;
-    var copied = this.copiedItems;
+    const copied: IQuestionToolboxItem[] = this.copiedItems;
     if (this.copiedItemMaxCount > 0 && copied.length == this.copiedItemMaxCount)
       this.removeItem(copied[this.copiedItemMaxCount - 1].name);
     this.addItem(item);
@@ -242,7 +245,7 @@ export class QuestionToolbox {
    */
   public replaceItem(item: IQuestionToolboxItem): boolean {
     this.correctItem(item);
-    var index = this.indexOf(item.name);
+    const index: number = this.indexOf(item.name);
     if (index < 0) return;
     this.itemsValue[index] = item;
     this.onItemsChanged();
@@ -254,7 +257,7 @@ export class QuestionToolbox {
    * @see IQuestionToolboxItem
    */
   public removeItem(name: string): boolean {
-    var index = this.indexOf(name);
+    const index: number = this.indexOf(name);
     if (index < 0) return false;
     this.itemsValue.splice(index, 1);
     this.onItemsChanged();
@@ -271,8 +274,8 @@ export class QuestionToolbox {
    * Remove all copied toolbox items.
    */
   public clearCopiedItems() {
-    var removedItems = this.copiedItems;
-    for (var i = 0; i < removedItems.length; i++) {
+    const removedItems: IQuestionToolboxItem[] = this.copiedItems;
+    for (let i: number = 0; i < removedItems.length; i++) {
       this.removeItem(removedItems[i].name);
     }
   }
@@ -281,7 +284,7 @@ export class QuestionToolbox {
    * @param name
    */
   public getItemByName(name: string): IQuestionToolboxItem {
-    var index = this.indexOf(name);
+    const index: number = this.indexOf(name);
     return index > -1 ? this.itemsValue[index] : null;
   }
   /**
@@ -489,7 +492,8 @@ export class QuestionToolbox {
       }
       var json = this.getQuestionJSON(question);
       var title = editorLocalization.getString("qt." + name);
-      var item = {
+      const item: IQuestionToolboxItem = {
+        id: name,
         name: name,
         iconName: "icon-" + name,
         title: title,
@@ -531,16 +535,21 @@ export class QuestionToolbox {
     return !!items ? items : [];
   }
   private addItemFromJSON(json: any) {
-    var iconName = json.iconName ? json.iconName : "icon-default";
-    var title = editorLocalization.getString("qt." + json.name);
-    if (!title || title == json.name) title = json.title;
-    if (!title) title = json.name;
+    const iconName: string = json.iconName ? json.iconName : "icon-default";
+    let title: string = editorLocalization.getString("qt." + json.name);
+    if (!title || title == json.name) {
+      title = json.title;
+    }
+    if (!title) {
+      title = json.name;
+    }
     var elementJson = json.defaultJSON ? json.defaultJSON : {};
     if (!elementJson.type) {
       elementJson.type = json.name;
     }
     var category = json.category ? json.category : "";
-    var item = {
+    const item: IQuestionToolboxItem = {
+      id: json.name,
       name: json.name,
       iconName: iconName,
       title: title,
@@ -563,17 +572,17 @@ export class QuestionToolbox {
     return json;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-    var allTypes = Survey.ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = Survey.ElementFactory.Instance.getAllTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
       supportedQuestions = allTypes;
-    var questions = [];
-    for (var i = 0; i < this.orderedQuestions.length; i++) {
-      var name = this.orderedQuestions[i];
+    const questions: string[] = [];
+    for (let i = 0; i < this.orderedQuestions.length; i++) {
+      const name: string = this.orderedQuestions[i];
       if (supportedQuestions.indexOf(name) > -1 && allTypes.indexOf(name) > -1)
         questions.push(name);
     }
-    for (var i = 0; i < supportedQuestions.length; i++) {
-      var name = supportedQuestions[i];
+    for (let i = 0; i < supportedQuestions.length; i++) {
+      const name: string = supportedQuestions[i];
       if (
         questions.indexOf(supportedQuestions[i]) < 0 &&
         allTypes.indexOf(name) > -1

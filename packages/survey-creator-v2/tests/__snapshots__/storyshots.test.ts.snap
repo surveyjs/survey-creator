@@ -176,7 +176,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -244,7 +244,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -312,7 +312,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -345,7 +345,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -413,7 +413,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -481,7 +481,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -549,7 +549,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -582,7 +582,7 @@ exports[`Storyshots Action Bar Desktop 1`] = `
   
     <span
       class="sv-action"
-      data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+      data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
     >
       
     
@@ -2213,7 +2213,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
         <span
           class="svc-tabbed-menu-item-container"
-          data-bind="css: $data.css, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
         >
           
   
@@ -2249,7 +2249,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2317,7 +2317,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2385,7 +2385,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2463,7 +2463,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2531,7 +2531,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2599,7 +2599,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
           <span
             class="sv-action"
-            data-bind="css: { 'sv-action--hidden': !isVisible() }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
           >
             
     
@@ -2777,7 +2777,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -2870,7 +2870,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -2963,7 +2963,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3056,7 +3056,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3149,7 +3149,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3242,7 +3242,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3335,7 +3335,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3428,7 +3428,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3521,7 +3521,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3614,7 +3614,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3707,7 +3707,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3800,7 +3800,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3893,7 +3893,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -3986,7 +3986,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4079,7 +4079,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4172,7 +4172,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4265,7 +4265,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4358,7 +4358,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4451,7 +4451,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4544,7 +4544,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -4637,7 +4637,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
         <div
           class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
           style="visibility: visible;"
         >
           
@@ -5818,7 +5818,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
 
   <span
     class="svc-tabbed-menu-item-container"
-    data-bind="css: $data.css, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+    data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
   >
     
   
@@ -6090,7 +6090,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6182,7 +6182,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6274,7 +6274,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6366,7 +6366,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6458,7 +6458,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6550,7 +6550,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6642,7 +6642,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6741,7 +6741,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6833,7 +6833,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -6925,7 +6925,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7017,7 +7017,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7109,7 +7109,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7201,7 +7201,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7300,7 +7300,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7392,7 +7392,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7484,7 +7484,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7576,7 +7576,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         
@@ -7675,7 +7675,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
       <div
         class="svc-toolbox__tool"
-        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }"
+        data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
         style="visibility: visible;"
       >
         

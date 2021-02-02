@@ -1,43 +1,49 @@
 import * as ko from "knockout";
 //import { ITabItem } from "./tabbed-menu-item";
-import { ResponsibilityManager, AdaptiveElement, AdaptiveActionBarItemWrapper } from "survey-knockout";
+import {
+  ResponsibilityManager,
+  AdaptiveElement,
+  AdaptiveActionBarItemWrapper,
+  AdaptiveElementImplementor,
+} from "survey-knockout";
 
 import "./tabbed-menu.scss";
 import { IActionBarItem } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
 export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
-  constructor(_items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>, viewType: ko.Observable<string>) {
+  constructor(
+    _items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>,
+    viewType: ko.Observable<string>
+  ) {
     super();
 
     const selectedItem = ko.observable<IActionBarItem>();
     this.itemsSubscription = ko.computed(() => {
-        const wrappedItems: AdaptiveActionBarItemWrapper[] = ko.unwrap(_items).map((item: IActionBarItem) => {
-          item.active = <() => boolean>ko.computed(
-            () =>
-              item === selectedItem() ||
-              viewType() === item.id
+      const wrappedItems: AdaptiveActionBarItemWrapper[] = ko
+        .unwrap(_items)
+        .map((item: IActionBarItem) => {
+          item.active = <() => boolean>(
+            ko.computed(() => item === selectedItem() || viewType() === item.id)
           );
-          let __originalAction = item.action || (() => {});
-          item.action = () => {
+          const wrapper = new AdaptiveActionBarItemWrapper(this, item);
+
+          const __originalAction = item.action || ((context?: any) => {});
+          wrapper.action = (context?: any) => {
             selectedItem(item);
-            __originalAction();
+            __originalAction(context);
           };
-          return new AdaptiveActionBarItemWrapper(this, item);
+
+          return wrapper;
         });
-        this.items(wrappedItems);
-      }
-    )
+      this.items = wrappedItems;
+    });
+    new AdaptiveElementImplementor(this);
 
     this.dotsItemPopupModel.horizontalPosition = "right";
-    // this.itemsSubscription = ko.computed(() => {
-    //   var items = ko.unwrap(_items);
-    //   items.forEach((item) => {
-    //     this.items.push(new AdaptiveActionBarItemWrapper(this, item));
-    //   });
-    // });
   }
 
   public dispose() {

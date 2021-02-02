@@ -1,7 +1,7 @@
 <!-- ko foreach: items -->
 <span
   class="svc-tabbed-menu-item-container"
-  data-bind="css: $data.css, style: { visibility : $data.isVisible() ? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+  data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
 >
   <!-- ko component: {name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
   <!-- /ko -->
