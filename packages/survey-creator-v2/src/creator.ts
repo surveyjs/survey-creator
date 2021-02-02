@@ -1,5 +1,11 @@
 import * as ko from "knockout";
-import { Survey, Base, Page, PopupModel, IActionBarItem } from "survey-knockout";
+import {
+  Survey,
+  Base,
+  Page,
+  PopupModel,
+  IActionBarItem,
+} from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
@@ -47,7 +53,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           iconName: "icon-settings",
           needSeparator: true,
           action: () => this.selectElement(this.survey),
-          isActive: ko.computed(() => this.isElementSelected(this.survey)),
+          active: ko.computed(() => this.isElementSelected(this.survey)),
           title: "Settings",
           showTitle: false,
         },
@@ -56,7 +62,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             alert("clear pressed");
           },
-          isActive: false,
+          active: false,
           title: "Clear",
           showTitle: false,
         },
@@ -65,7 +71,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             this.showSearch = !this.showSearch;
           },
-          isActive: ko.computed(() => this.showSearch),
+          active: ko.computed(() => this.showSearch),
           title: "Search",
           showTitle: false,
         },
@@ -78,7 +84,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             this.makeNewViewActive("test");
           },
-          isActive: ko.observable(false),
+          active: ko.observable(false),
           title: "Preview",
         },
       ])
@@ -158,7 +164,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   protected initTabs() {
     ko.computed(() => {
       const tabs: IActionBarItem[] = [];
-      
+
       if (this.showDesignerTab) {
         tabs.push({
           id: "designer",
@@ -257,7 +263,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
             })),
             onItemSelect: (item: any) => {
               this.convertCurrentObject(element, item.value);
-            },       
+            },
           },
           "bottom",
           "right"
@@ -274,7 +280,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: (newType) => {
             popupModel.toggleVisibility();
           },
-          popupModel: popupModel
+          popupModel: popupModel,
         });
       }
     }
