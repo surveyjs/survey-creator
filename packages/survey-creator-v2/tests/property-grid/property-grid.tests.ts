@@ -343,6 +343,7 @@ test("Validators property editor", () => {
     propertyGrid.survey.getQuestionByName("validators")
   );
   expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
+  expect(validatorsQuestion.columns).toHaveLength(1);
   expect(validatorsQuestion.visibleRows).toHaveLength(1);
   var validatorTypeQuestion =
     validatorsQuestion.visibleRows[0].cells[0].question;
@@ -380,6 +381,7 @@ test("Validators property editor", () => {
   expect(question.validators[0].getType()).toEqual("numericvalidator");
   expect(question.validators[1].getType()).toEqual("numericvalidator");
 });
+
 test("Triggers property editor", () => {
   var survey = new SurveyModel();
   survey.triggers.push(new SurveyTriggerRunExpression());

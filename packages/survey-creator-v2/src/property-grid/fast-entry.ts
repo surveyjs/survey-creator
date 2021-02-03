@@ -1,5 +1,4 @@
 import { ISurveyCreatorOptions } from "@survey/creator/settings";
-import { SurveyHelper } from "@survey/creator/surveyHelper";
 import {
   ItemValue,
   QuestionCommentModel,
@@ -14,7 +13,9 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
 
   constructor(
     public choices: Array<ItemValue>,
-    options: ISurveyCreatorOptions = null
+    options: ISurveyCreatorOptions = null,
+    private className: string = "itemvalue",
+    private names: Array<string> = ["value", "text"]
   ) {
     super(options);
     this.commentValue = <QuestionCommentModel>(
@@ -35,23 +36,75 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   }
   public apply() {
     if (this.comment.isEmpty()) return;
-
-    const text = this.comment.value;
-    const properties = Serializer.findProperties("itemvalue", [
-      "value",
-      "text",
-    ]);
-    const className = "itemvalue";
-    const items = SurveyHelper.convertTextToItemValues(
-      text,
-      <any>properties,
-      className
-    );
-
-    SurveyHelper.applyItemValueArray(<any>this.choices, items);
+    const items = this.convertTextToItemValues(this.comment.value);
+    this.applyItemValueArray(<any>this.choices, items);
   }
   public setComment() {
-    var text = SurveyHelper.convertItemValuesToText(<any>this.choices);
+    var text = this.convertItemValuesToText();
     this.comment.value = text;
+  }
+  private convertTextToItemValues(text: string): ItemValue[] {
+    var items = [];
+    if (!text) return items;
+
+    var texts = text.split("\n");
+    for (var i = 0; i < texts.length; i++) {
+      if (!texts[i]) continue;
+      var elements = texts[i].split(ItemValue.Separator);
+      var valueItem = Serializer.createClass(this.className);
+      this.names.forEach((name, i) => {
+        valueItem[name] = elements[i];
+      });
+      items.push(valueItem);
+    }
+    return items;
+  }
+  private convertItemValuesToText(): string {
+    var text = "";
+    this.choices.forEach((item) => {
+      if (text) text += "\n";
+      text += item.value;
+      var separatorCounter = 1;
+      this.names.forEach((name) => {
+        if (name == "value") return;
+        var str = name == "text" ? item.pureText : item[name];
+        if (!!str) {
+          for (var i = 0; i < separatorCounter; i++) {
+            text += ItemValue.Separator;
+          }
+          text += str;
+          separatorCounter = 1;
+        } else {
+          separatorCounter++;
+        }
+      });
+    });
+    return text;
+  }
+  private applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>) {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    if (dest.length > src.length) {
+      dest.splice(src.length, dest.length - src.length);
+    }
+    if (dest.length < src.length) {
+      var insertedArray = [];
+      for (var i = dest.length; i < src.length; i++) {
+        insertedArray.push(src[i]);
+      }
+      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
+    }
+    for (var i = 0; i < dest.length; i++) {
+      if (dest[i].value != src[i].value) {
+        dest[i].value = src[i].value;
+      }
+      dest[i].text = src[i].hasText ? src[i].text : "";
+      this.names.forEach((name) => {
+        if (name == "value" || name == "text") return;
+        dest[i][name] = src[i][name];
+      });
+    }
   }
 }

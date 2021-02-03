@@ -179,39 +179,39 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       obj,
       prop,
       this.getColumnNames(obj, prop, options),
-      options,
-      this.getObjTypeName()
+      options
     );
   }
   protected getMatrixJSON(
     obj: Base,
     prop: JsonObjectProperty,
     propNames: Array<string>,
-    options: ISurveyCreatorOptions,
-    keyName: string = undefined
+    options: ISurveyCreatorOptions
   ): any {
     var className = prop.className;
     if (!className) className = prop.baseClassName;
-    var columns = new PropertyJSONGenerator(obj, options).createColumnsJSON(
-      className,
-      propNames
-    );
-
-    var res = {
+    var columns = this.getColumnsJSON(obj, prop, propNames, options);
+    var res: any = {
       type: "matrixdynamic",
       detailPanelMode: "underRow",
       cellType: "text",
       rowCount: 0,
       columns: columns,
     };
-    if (!!keyName) {
-      res.columns.unshift({
-        cellType: "dropdown",
-        name: keyName,
-        showOptionsCaption: false,
-      });
-    }
     return res;
+  }
+  protected getColumnsJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ) {
+    var className = prop.className;
+    if (!className) className = prop.baseClassName;
+    return new PropertyJSONGenerator(obj, options).createColumnsJSON(
+      className,
+      propNames
+    );
   }
   private setupUsingOptions(
     obj: Base,
@@ -235,7 +235,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
 
 export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "itemvalue[]";
+    return (
+      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue")
+    );
   }
   public isPropertyEditorSetupEnabled(
     obj: Base,
@@ -260,7 +262,11 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    return new FastEntryEditor(obj[prop.name], options);
+    var names = [];
+    question.columns.forEach((col) => {
+      names.push(col.name);
+    });
+    return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public clearPropertyValue(
     obj: Base,
@@ -276,11 +282,13 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     obj: Base,
     prop: JsonObjectProperty,
     propNames: Array<string>,
-    options: ISurveyCreatorOptions,
-    keyName: string = undefined
+    options: ISurveyCreatorOptions
   ): any {
-    var res = super.getMatrixJSON(obj, prop, propNames, options, keyName);
+    var res = super.getMatrixJSON(obj, prop, propNames, options);
     return res;
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return obj.getType() + "@" + prop.name;
   }
   protected getDefaulColumnNames(): Array<string> {
     return ["value", "text"];
@@ -322,9 +330,6 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
-  }
-  protected getDefaultClassName(prop: JsonObjectProperty): string {
-    return prop.className;
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
@@ -396,6 +401,21 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {
   protected abstract getChoices(obj: Base): Array<any>;
+  protected getColumnsJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ) {
+    var res = super.getColumnsJSON(obj, prop, propNames, options);
+    if (!!this.getObjTypeName()) {
+      res.unshift({
+        name: this.getObjTypeName(),
+        cellType: "dropdown",
+      });
+    }
+    return res;
+  }
   public onMatrixCellCreated(obj: Base, options: any) {
     if (options.columnName != this.getObjTypeName()) return;
     options.cellQuestion.choices = this.getChoices(obj);
