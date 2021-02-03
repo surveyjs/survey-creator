@@ -190,18 +190,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   ): any {
     var className = prop.className;
     if (!className) className = prop.baseClassName;
-    var columns = new PropertyJSONGenerator(obj, options).createColumnsJSON(
-      className,
-      propNames
-    );
-    var keyName = "";
-    for (var i = 0; i < columns.length; i++) {
-      if (columns[i].isUnique) {
-        keyName = columns[i].name;
-        break;
-      }
-    }
-
+    var columns = this.getColumnsJSON(obj, prop, propNames, options);
     var res: any = {
       type: "matrixdynamic",
       detailPanelMode: "underRow",
@@ -209,10 +198,20 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       rowCount: 0,
       columns: columns,
     };
-    if (!!keyName) {
-      res.keyName = keyName;
-    }
     return res;
+  }
+  protected getColumnsJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ) {
+    var className = prop.className;
+    if (!className) className = prop.baseClassName;
+    return new PropertyJSONGenerator(obj, options).createColumnsJSON(
+      className,
+      propNames
+    );
   }
   private setupUsingOptions(
     obj: Base,
@@ -402,6 +401,21 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {
   protected abstract getChoices(obj: Base): Array<any>;
+  protected getColumnsJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ) {
+    var res = super.getColumnsJSON(obj, prop, propNames, options);
+    if (!!this.getObjTypeName()) {
+      res.unshift({
+        name: this.getObjTypeName(),
+        cellType: "dropdown",
+      });
+    }
+    return res;
+  }
   public onMatrixCellCreated(obj: Base, options: any) {
     if (options.columnName != this.getObjTypeName()) return;
     options.cellQuestion.choices = this.getChoices(obj);

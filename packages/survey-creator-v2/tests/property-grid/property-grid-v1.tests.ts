@@ -1186,8 +1186,8 @@ test("SurveyPropertyResultfullEditor test", () => {
   panel.getQuestionByName("path").value = "path1";
   expect(question.choicesByUrl.path).toEqual("path1");
 });
-/* TODO
-test("Triggers property editor", function (assert) {
+
+test("Triggers property editor", () => {
   var survey = createSurvey();
   survey.getQuestionByName("question1").title = "Question1 title";
   var trigger = new SurveyTriggerVisible();
@@ -1207,9 +1207,10 @@ test("Triggers property editor", function (assert) {
   var triggerTypes =
     Serializer.getChildrenClasses("surveytrigger", true).length - 1;
 
-  expect(rows[0].getQuestionByColumnName("triggerType").choices).toEqual(
+  expect(rows[0].getQuestionByColumnName("triggerType").choices).toHaveLength(
     triggerTypes
   );
+  /* TODO not implmeneted yet
     assert.equal(
       propEditor.getItemText(propEditor.koSelected()),
       "Run if: {Question1 title} != val1",
@@ -1257,5 +1258,5 @@ test("Triggers property editor", function (assert) {
     propEditor.onDeleteClick();
     assert.equal(survey.triggers.length, 0, "Delete all triggers");
     assert.notOk(propEditor.selectedObjectEditor(), "Nothing to select");
+    */
 });
-*/
