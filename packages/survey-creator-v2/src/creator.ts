@@ -5,6 +5,7 @@ import {
   Page,
   PopupModel,
   IActionBarItem,
+  ListModel,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -256,15 +257,16 @@ export class SurveyCreator extends CreatorBase<Survey> {
         }
         const popupModel = new PopupModel(
           "sv-list",
-          {
-            items: availableTypes.map((type) => ({
+          new ListModel(
+            availableTypes.map((type) => ({
               title: type.name,
-              value: type.value,
+              id: type.value,
             })),
-            onItemSelect: (item: any) => {
-              this.convertCurrentObject(element, item.value);
+            (item: any) => {
+              this.convertCurrentObject(element, item.id);
             },
-          },
+            false
+          ),
           "bottom",
           "right"
         );

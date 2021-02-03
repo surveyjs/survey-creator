@@ -1,7 +1,10 @@
 import * as ko from "knockout";
-import { IActionBarItem } from "survey-knockout";
-import { PageModel } from "survey-knockout";
-import { PopupModel } from "survey-knockout";
+import {
+  IActionBarItem,
+  PageModel,
+  PopupModel,
+  ListModel,
+} from "survey-knockout";
 
 import "./page-navigator.scss";
 const template = require("./page-navigator.html");
@@ -11,15 +14,25 @@ export class PageNavigatorViewModel {
   private _itemsSubscription: ko.Computed;
   private _selectionSubscription: ko.Computed;
   private selectedItem = ko.observable<PageModel>();
-  constructor(_items: Array<PageModel> | ko.Computed<Array<PageModel>>, private _creator: any, selection?: () => PageModel, onSelect = (item: PageModel) => {}) {
-    this._selectionSubscription = ko.computed(() => this.selectedItem(selection && selection()));
-    const pageSelectorModel = this.popupModel.contentComponentData;
+  constructor(
+    _items: Array<PageModel> | ko.Computed<Array<PageModel>>,
+    private _creator: any,
+    selection?: () => PageModel,
+    onSelect = (item: PageModel) => {}
+  ) {
+    this._selectionSubscription = ko.computed(() => {
+      this.selectedItem(selection && selection());
+      this.pageListModel.selectedItem = this.pageListModel.items.filter(
+        (item) => item.data === this.selectedItem()
+      )[0];
+    });
     this._itemsSubscription = ko.computed(() => {
-      var pageSelectorItems = [];
-      this.items(ko.unwrap(_items).map((page: PageModel) => {
+      const pageSelectorItems: Array<IActionBarItem> = [];
+      this.items(
+        ko.unwrap(_items).map((page: PageModel) => {
           const item: IActionBarItem = <any>{
             id: page.id,
-            title: _creator ? _creator.getObjectDisplayName(page) : page.title
+            title: _creator ? _creator.getObjectDisplayName(page) : page.title,
           };
           item.active = ko.computed(() => page === this.selectedItem());
           item.action = () => {
@@ -27,16 +40,16 @@ export class PageNavigatorViewModel {
             onSelect && onSelect(page);
           };
 
-          pageSelectorItems.push({title: item.title, value: page});
+          pageSelectorItems.push({
+            title: item.title,
+            id: item.id,
+            data: page,
+          });
 
           return item;
         })
       );
-      pageSelectorModel.items(pageSelectorItems);
-    });
-    pageSelectorModel.selectedItem = ko.computed({
-      read: () => pageSelectorModel.items().filter(item => item.value === this.selectedItem())[0],
-      write: val => {}
+      this.pageListModel.items = pageSelectorItems;
     });
   }
   public items = ko.observableArray<IActionBarItem>();
@@ -45,19 +58,17 @@ export class PageNavigatorViewModel {
     return this.items().length > 1;
   }
 
-  icon = "icon-navigation"
-  
-  popupModel = new PopupModel(
-    "sv-list",
-    {
-      onItemSelect: (item) => {
-        this._creator.selectElement(item.value);
-        this.popupModel.toggleVisibility();
-      },
-      items: ko.observableArray(),
-      selectedItem: undefined
-    }
+  icon = "icon-navigation";
+
+  pageListModel: ListModel = new ListModel(
+    [],
+    (item) => {
+      this._creator.selectElement(item.data);
+      this.popupModel.toggleVisibility();
+    },
+    true
   );
+  popupModel = new PopupModel("sv-list", this.pageListModel);
 
   togglePageSelector = () => this.popupModel.toggleVisibility();
 
