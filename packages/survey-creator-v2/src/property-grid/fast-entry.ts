@@ -9,6 +9,36 @@ import {
 import { PropertyEditorSetupValue } from "./index";
 
 export class FastEntryEditor extends PropertyEditorSetupValue {
+  public static applyItemValueArray(
+    dest: Array<ItemValue>,
+    src: Array<ItemValue>,
+    names: Array<string> = []
+  ) {
+    if (!src || src.length == 0) {
+      dest.splice(0, dest.length);
+      return;
+    }
+    if (dest.length > src.length) {
+      dest.splice(src.length, dest.length - src.length);
+    }
+    if (dest.length < src.length) {
+      var insertedArray = [];
+      for (var i = dest.length; i < src.length; i++) {
+        insertedArray.push(src[i]);
+      }
+      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
+    }
+    for (var i = 0; i < dest.length; i++) {
+      if (dest[i].value != src[i].value) {
+        dest[i].value = src[i].value;
+      }
+      dest[i].text = src[i].hasText ? src[i].text : "";
+      names.forEach((name) => {
+        if (name == "value" || name == "text") return;
+        dest[i][name] = src[i][name];
+      });
+    }
+  }
   private commentValue: QuestionCommentModel;
 
   constructor(
@@ -37,7 +67,7 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   public apply() {
     if (this.comment.isEmpty()) return;
     const items = this.convertTextToItemValues(this.comment.value);
-    this.applyItemValueArray(<any>this.choices, items);
+    FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
   }
   public setComment() {
     var text = this.convertItemValuesToText();
@@ -80,31 +110,5 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
       });
     });
     return text;
-  }
-  private applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>) {
-    if (!src || src.length == 0) {
-      dest.splice(0, dest.length);
-      return;
-    }
-    if (dest.length > src.length) {
-      dest.splice(src.length, dest.length - src.length);
-    }
-    if (dest.length < src.length) {
-      var insertedArray = [];
-      for (var i = dest.length; i < src.length; i++) {
-        insertedArray.push(src[i]);
-      }
-      dest.splice.apply(dest, [dest.length, 0].concat(insertedArray));
-    }
-    for (var i = 0; i < dest.length; i++) {
-      if (dest[i].value != src[i].value) {
-        dest[i].value = src[i].value;
-      }
-      dest[i].text = src[i].hasText ? src[i].text : "";
-      this.names.forEach((name) => {
-        if (name == "value" || name == "text") return;
-        dest[i][name] = src[i][name];
-      });
-    }
   }
 }
