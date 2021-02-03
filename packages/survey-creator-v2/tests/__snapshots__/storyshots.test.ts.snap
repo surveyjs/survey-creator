@@ -2408,7 +2408,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
             <!-- ko component: { name: $data.component || 'sv-action-bar-item', params: { item: $data } } -->
             <button
-              class="sv-action-bar-item"
+              class="sv-action-bar-item sv-action-bar-item--active"
               data-bind="click: action, css: { 'sv-action-bar-item--active': !!ko.unwrap($data.active) }, class: $data.innerCss, attr: { disabled: $data.enabled !== undefined && !ko.unwrap($data.enabled), title: $data.tooltip || $data.title}"
               title="Settings"
             >

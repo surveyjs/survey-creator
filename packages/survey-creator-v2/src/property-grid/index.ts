@@ -326,7 +326,7 @@ export class PropertyJSONGenerator {
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
     json.isRequired = prop.isRequired;
-    json.title = this.getQuestionTitle(prop.name, title);
+    json.title = this.getQuestionTitle(prop, title);
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
@@ -335,9 +335,11 @@ export class PropertyJSONGenerator {
     if (!prop) return null;
     var json = this.createQuestionJSON(prop, "", true);
     if (!json) return null;
-    if (!this.getVisibilityOnEvent(prop, "list")) return null;
     json.name = prop.name;
-    json.title = editorLocalization.getPropertyName(prop.name);
+    json.title = this.getQuestionTitle(prop, "");
+    if (prop.isUnique) {
+      json.isUnique = prop.isUnique;
+    }
     if (!!json.type) {
       json.cellType = json.type;
       delete json.type;
@@ -359,9 +361,10 @@ export class PropertyJSONGenerator {
     if (!!title) return title;
     return editorLocalization.getString("pe.tabs." + name);
   }
-  private getQuestionTitle(name: string, title: string): string {
-    if (!!title && title !== name) return title;
-    return editorLocalization.getPropertyNameInEditor(name);
+  private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
+    if (!!prop.displayName) return prop.displayName;
+    if (!!title && title !== prop.name) return title;
+    return editorLocalization.getPropertyNameInEditor(prop.name);
   }
 }
 
