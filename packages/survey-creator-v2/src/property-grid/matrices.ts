@@ -198,6 +198,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       rowCount: 0,
       columns: columns,
     };
+    if (columns.length < 2) {
+      res.showHeader = false;
+    }
     return res;
   }
   protected getColumnsJSON(

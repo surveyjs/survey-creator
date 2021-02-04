@@ -232,6 +232,10 @@ export class PropertyJSONGenerator {
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
+      var helpText = this.getPropertyHelpText(q, prop);
+      if (!!helpText) {
+        q.description = helpText;
+      }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
     }
   }
@@ -366,6 +370,44 @@ export class PropertyJSONGenerator {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
     return editorLocalization.getPropertyNameInEditor(prop.name);
+  }
+  protected getPropertyHelpLocName(
+    obj: Base,
+    prop: JsonObjectProperty
+  ): string {
+    var classNames = this.getHelpPropertyClassNames(obj, prop);
+    for (var i = 0; i < classNames.length; i++) {
+      let locName = "pehelp." + classNames[i] + "_" + prop.name;
+      if (this.hasLocString(locName)) return locName;
+    }
+    let locName = "pehelp." + prop.name;
+    return this.hasLocString(locName) ? locName : "";
+  }
+  private getHelpPropertyClassNames(
+    obj: Base,
+    prop: JsonObjectProperty
+  ): Array<string> {
+    if (!obj) return [];
+    var type = obj.getType();
+    var res = [];
+    var typeInfo = Serializer.findClass(type);
+    while (!!typeInfo) {
+      res.push(typeInfo.name);
+      if (typeInfo.find(prop.name)) return res;
+      typeInfo = !!typeInfo.parentName
+        ? Serializer.findClass(typeInfo.parentName)
+        : null;
+    }
+    return res;
+  }
+  private getPropertyHelpText(obj: Base, prop: JsonObjectProperty): string {
+    var locName = this.getPropertyHelpLocName(obj, prop);
+    return this.hasLocString(locName)
+      ? editorLocalization.getString(locName)
+      : "";
+  }
+  private hasLocString(name: string) {
+    return editorLocalization.hasString(name);
   }
 }
 
@@ -709,7 +751,14 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "text", inputType: "number" };
+    var res: any = { type: "text", inputType: "number" };
+    if (prop.minValue !== undefined) {
+      res.min = prop.minValue;
+    }
+    if (prop.maxValue !== undefined) {
+      res.max = prop.maxValue;
+    }
+    return res;
   }
 }
 export class PropertyGridEditorText extends PropertyGridEditor {
