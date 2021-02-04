@@ -232,8 +232,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
         });
       }
       this.tabs(tabs);
-      if (this.tabs().length > 0) {
-        this.koViewType(this.tabs()[0].id);
+      if (this.tabs.peek().length > 0) {
+        this.koViewType(this.tabs.peek()[0].id);
       }
     });
   }

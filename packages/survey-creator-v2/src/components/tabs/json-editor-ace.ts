@@ -93,7 +93,7 @@ export class TabJsonEditorAcePlugin
     super(creator);
     this.model = new AceJsonEditorModel(creator);
     creator.tabs.push({
-      name: "editor",
+      id: "editor",
       title: getLocString("ed.jsonEditor"),
       template: "svc-tab-json-editor-ace",
       data: this,

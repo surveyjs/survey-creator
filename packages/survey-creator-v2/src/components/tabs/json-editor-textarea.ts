@@ -59,7 +59,7 @@ export class TabJsonEditorTextareaPlugin
     super(creator);
     this.model = new TextareaJsonEditorModel(creator);
     creator.tabs.push({
-      name: "editor",
+      id: "editor",
       title: getLocString("ed.jsonEditor"),
       template: "svc-tab-json-editor-textarea",
       data: this,
