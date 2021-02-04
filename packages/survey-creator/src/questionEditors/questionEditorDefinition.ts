@@ -276,6 +276,7 @@ export class SurveyQuestionEditorDefinition {
         "name",
         "title",
         "isRequired",
+        "isUnique",
         "readOnly",
         "showInMultipleColumns",
         "width",
