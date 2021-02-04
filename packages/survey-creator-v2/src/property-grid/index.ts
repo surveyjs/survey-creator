@@ -15,6 +15,7 @@ import {
   Helpers,
   PopupViewModel,
   PopupModel,
+  settings,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -543,7 +544,7 @@ export class PropertyGridModel {
       this.options
     );
 
-    PopupViewModel.showModal(
+    settings.showModal(
       "survey",
       { survey: surveyPropertyEditor.editSurvey },
       () => surveyPropertyEditor.apply()

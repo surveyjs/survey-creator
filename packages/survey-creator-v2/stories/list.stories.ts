@@ -1,5 +1,6 @@
 // import { document } from "global";
 import { text, boolean, button } from "@storybook/addon-knobs";
+import { ListModel } from "survey-knockout";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 import { SvgBundleViewModel } from "../src/svgbundle";
 
@@ -20,83 +21,75 @@ export default {
 export const Ordinary = () => {
   return {
     template:
-      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
-    context: {
-      name: "sv-list",
-      onItemSelect: () => {
+      '<div style="width: 250px" data-bind="component: { name: \'sv-list\', params: $data}"></div>',
+    context: new ListModel(
+      [
+        { id: "q1", title: "Question 1" },
+        { id: "q2", title: "Question 2" },
+        { id: "q3", title: "Question 3" },
+      ],
+      () => {
         alert("!");
       },
-      items: [
-        { title: "Question 1" },
-        { title: "Question 2" },
-        {
-          title: "Question 3",
-        },
-      ],
-    },
+      false
+    ),
   };
 };
 
 export const WithDisabledItem = () => {
   return {
     template:
-      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
-    context: {
-      name: "sv-list",
-      onItemSelect: () => {
-        alert("!");
-      },
-      items: [
-        { title: "Question 1" },
-        { title: "Question 2" },
+      '<div style="width: 250px" data-bind="component: { name: \'sv-list\', params: $data}"></div>',
+    context: new ListModel(
+      [
+        { id: "q1", title: "Question 1" },
+        { id: "q2", title: "Question 2" },
         {
+          id: "q3",
           title: "Question 3",
-          isEnabled: false,
+          enabled: false,
         },
       ],
-    },
+      () => {
+        alert("!");
+      },
+      false
+    ),
   };
 };
 
 export const WithSelection = () => {
   return {
     template:
-      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items, allowSelection: allowSelection"></sv-list></div>',
-    context: {
-      name: "sv-list",
-      allowSelection: boolean("Allow selection", true),
-      onItemSelect: () => {
+      '<div style="width: 250px" data-bind="component: { name: \'sv-list\', params: $data}"></div>',
+    context: new ListModel(
+      [
+        { id: "q1", title: "Question 1" },
+        { id: "q2", title: "Question 2" },
+        { id: "q3", title: "Question 3" },
+      ],
+      () => {
         alert("!");
       },
-      items: [
-        { title: "Question 1" },
-        { title: "Question 2" },
-        {
-          title: "Question 3",
-        },
-      ],
-    },
+      boolean("Allow selection", true)
+    ),
   };
 };
 
 export const WithIcons = () => {
   return {
     template:
-      '<div style="width: 250px"><sv-list params="onItemSelect: onItemSelect, items: items"></sv-list></div>',
-    context: {
-      name: "sv-list",
-      title: text("Title", "Show menu"),
-      onItemSelect: () => {
+      '<div style="width: 250px" data-bind="component: { name: \'sv-list\', params: $data}"></div>',
+    context: new ListModel(
+      [
+        { id: "q1", title: "Question 1", iconName: "icon-matrix" },
+        { id: "q2", title: "Question 2", iconName: "icon-expression" },
+        { id: "q3", title: "Question 3", iconName: "icon-imagepicker" },
+      ],
+      () => {
         alert("!");
       },
-      items: [
-        { title: "Question 1", iconName: "icon-matrix" },
-        { title: "Question 2", iconName: "icon-expression" },
-        {
-          title: "Question 3",
-          iconName: "icon-imagepicker",
-        },
-      ],
-    },
+      false
+    ),
   };
 };
