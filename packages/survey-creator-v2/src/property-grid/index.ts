@@ -7,7 +7,9 @@ import {
   PanelModelBase,
   SurveyModel,
   FunctionFactory,
-  settings
+  Helpers,
+  settings,
+  QuestionMatrixDynamicModel,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -85,12 +87,19 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ) => IPropertyEditorSetup;
+  isPropertyEditorSetupEnabled?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ) => boolean;
   clearPropertyValue?: (
     obj: Base,
     prop: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
   ) => void;
+
   onAddIntoPropertyValue?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -212,9 +221,14 @@ export class PropertyJSONGenerator {
       q.obj = this.obj;
       q.options = this.options;
       var eventVisibility = this.getVisibilityOnEvent(prop);
+      q.readOnly = this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
+      }
+      var helpText = this.getPropertyHelpText(q, prop);
+      if (!!helpText) {
+        q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
     }
@@ -231,6 +245,18 @@ export class PropertyJSONGenerator {
       <any>this.parentProperty
     );
   }
+  private isPropertyReadOnly(prop: JsonObjectProperty): boolean {
+    return prop.readOnly;
+    /*
+    if (this.parentReadOnly) return true;
+    var res = this.property ? this.property.readOnly : false;
+    if (!!this.options && !!this.property && !!this.object) {
+      res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
+    }
+    return res;
+    */
+  }
+
   private createJSON(isNestedObj: boolean): any {
     var properties = new SurveyQuestionProperties(this.obj);
     var tabs = properties.getTabs();
@@ -297,8 +323,9 @@ export class PropertyJSONGenerator {
     if (!json) return null;
     json.name = prop.name;
     json.visible = prop.visible;
+    json.isReadOnly = prop.readOnly;
     json.isRequired = prop.isRequired;
-    json.title = this.getQuestionTitle(prop.name, title);
+    json.title = this.getQuestionTitle(prop, title);
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
@@ -307,12 +334,18 @@ export class PropertyJSONGenerator {
     if (!prop) return null;
     var json = this.createQuestionJSON(prop, "", true);
     if (!json) return null;
-    if (!this.getVisibilityOnEvent(prop, "list")) return null;
     json.name = prop.name;
-    json.title = editorLocalization.getPropertyName(prop.name);
+    json.title = this.getQuestionTitle(prop, "");
+    if (prop.isUnique) {
+      json.isUnique = prop.isUnique;
+    }
     if (!!json.type) {
       json.cellType = json.type;
       delete json.type;
+    }
+    if (!!json.isReadOnly) {
+      json.readOnly = json.isReadOnly;
+      delete json.isReadOnly;
     }
     return json;
   }
@@ -327,9 +360,48 @@ export class PropertyJSONGenerator {
     if (!!title) return title;
     return editorLocalization.getString("pe.tabs." + name);
   }
-  private getQuestionTitle(name: string, title: string): string {
-    if (!!title && title !== name) return title;
-    return editorLocalization.getPropertyNameInEditor(name);
+  private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
+    if (!!prop.displayName) return prop.displayName;
+    if (!!title && title !== prop.name) return title;
+    return editorLocalization.getPropertyNameInEditor(prop.name);
+  }
+  protected getPropertyHelpLocName(
+    obj: Base,
+    prop: JsonObjectProperty
+  ): string {
+    var classNames = this.getHelpPropertyClassNames(obj, prop);
+    for (var i = 0; i < classNames.length; i++) {
+      let locName = "pehelp." + classNames[i] + "_" + prop.name;
+      if (this.hasLocString(locName)) return locName;
+    }
+    let locName = "pehelp." + prop.name;
+    return this.hasLocString(locName) ? locName : "";
+  }
+  private getHelpPropertyClassNames(
+    obj: Base,
+    prop: JsonObjectProperty
+  ): Array<string> {
+    if (!obj) return [];
+    var type = obj.getType();
+    var res = [];
+    var typeInfo = Serializer.findClass(type);
+    while (!!typeInfo) {
+      res.push(typeInfo.name);
+      if (typeInfo.find(prop.name)) return res;
+      typeInfo = !!typeInfo.parentName
+        ? Serializer.findClass(typeInfo.parentName)
+        : null;
+    }
+    return res;
+  }
+  private getPropertyHelpText(obj: Base, prop: JsonObjectProperty): string {
+    var locName = this.getPropertyHelpLocName(obj, prop);
+    return this.hasLocString(locName)
+      ? editorLocalization.getString(locName)
+      : "";
+  }
+  private hasLocString(name: string) {
+    return editorLocalization.hasString(name);
   }
 }
 
@@ -419,6 +491,10 @@ export class PropertyGridModel {
   private onValidateQuestion(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
+    if (q.isRequired && Helpers.isValueEmpty(options.value)) {
+      options.error = editorLocalization.getString("pe.propertyIsEmpty");
+      return;
+    }
     options.error = this.options.onGetErrorTextOnValidationCallback(
       q.property.name,
       <any>this.obj,
@@ -445,27 +521,30 @@ export class PropertyGridModel {
   }
 
   private onGetQuestionTitleActions(options) {
-    var editor = PropertyGridEditorCollection.getEditor(
-      options.question.property
-    );
+    var question = options.question;
+    var property = question.property;
+    var editor = PropertyGridEditorCollection.getEditor(property);
     if (!editor) return;
     var actions = [];
+    var enabled = !question.isReadOnly;
     if (!!editor.clearPropertyValue) {
       actions.push(
-        this.createClearValueAction(
-          editor,
-          options.question.property,
-          options.question
-        )
+        this.createClearValueAction(editor, property, question, enabled)
       );
     }
     if (!!editor.createPropertyEditorSetup) {
+      if (enabled) {
+        enabled =
+          !editor.isPropertyEditorSetupEnabled ||
+          editor.isPropertyEditorSetupEnabled(
+            this.obj,
+            property,
+            options.question,
+            this.options
+          );
+      }
       actions.push(
-        this.createEditorSetupAction(
-          editor,
-          options.question.property,
-          options.question
-        )
+        this.createEditorSetupAction(editor, property, question, enabled)
       );
     }
     if (actions.length > 0) {
@@ -475,13 +554,15 @@ export class PropertyGridModel {
   private createClearValueAction(
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
-    question: Question
+    question: Question,
+    enabled: boolean
   ): any {
     return {
       title: "",
       id: "property-grid-clear",
       icon: "icon-property_grid_clear",
       iconName: "icon-property_grid_clear",
+      enabled: enabled,
       action: () => {
         editor.clearPropertyValue(this.obj, property, question, this.options);
       },
@@ -505,23 +586,27 @@ export class PropertyGridModel {
       () => surveyPropertyEditor.apply()
     );
   }
-  
+
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
-    question: Question
+    question: Question,
+    enabled: boolean
   ): any {
-
     var setupAction = {
       title: "",
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-property_grid_modal",
       iconName: "icon-property_grid_modal",
-      action: () => { this.showModalPropertyEditor(editor, property, question); }
+      enabled: enabled,
+      action: () => {
+        this.showModalPropertyEditor(editor, property, question);
+      },
     };
     return setupAction;
   }
+
   private onAfterRenderQuestion(options: any) {
     PropertyGridEditorCollection.onAfterRenderQuestion(
       this.obj,
@@ -553,6 +638,12 @@ export class PropertyGridModel {
   }
   private onMatrixCellValidate(options: any) {
     if (this.isCellCreating) return;
+    var matrix = <QuestionMatrixDynamicModel>options.question;
+    var column = matrix.getColumnByName(options.columnName);
+    if (!!column && column.isRequired && Helpers.isValueEmpty(options.value)) {
+      options.error = editorLocalization.getString("pe.propertyIsEmpty");
+      return;
+    }
     options.error = this.options.onGetErrorTextOnValidationCallback(
       options.columnName,
       <any>options.row.editingObj,
@@ -654,7 +745,14 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "text", inputType: "number" };
+    var res: any = { type: "text", inputType: "number" };
+    if (prop.minValue !== undefined) {
+      res.min = prop.minValue;
+    }
+    if (prop.maxValue !== undefined) {
+      res.max = prop.maxValue;
+    }
+    return res;
   }
 }
 export class PropertyGridEditorText extends PropertyGridEditor {

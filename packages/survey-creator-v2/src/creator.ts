@@ -5,6 +5,7 @@ import {
   Page,
   PopupModel,
   IActionBarItem,
+  ListModel,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -62,7 +63,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           iconName: "icon-settings",
           needSeparator: true,
           action: () => this.selectElement(this.survey),
-          isActive: ko.computed(() => this.isElementSelected(this.survey)),
+          active: ko.computed(() => this.isElementSelected(this.survey)),
           title: "Settings",
           showTitle: false,
         },
@@ -71,7 +72,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             alert("clear pressed");
           },
-          isActive: false,
+          active: false,
           title: "Clear",
           showTitle: false,
         },
@@ -80,7 +81,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             this.showSearch = !this.showSearch;
           },
-          isActive: ko.computed(() => this.showSearch),
+          active: ko.computed(() => this.showSearch),
           title: "Search",
           showTitle: false,
         },
@@ -93,7 +94,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => {
             this.makeNewViewActive("test");
           },
-          isActive: ko.observable(false),
+          active: ko.observable(false),
           title: "Preview",
         },
       ])
@@ -285,15 +286,16 @@ export class SurveyCreator extends CreatorBase<Survey> {
         }
         const popupModel = new PopupModel(
           "sv-list",
-          {
-            items: availableTypes.map((type) => ({
+          new ListModel(
+            availableTypes.map((type) => ({
               title: type.name,
-              value: type.value,
+              id: type.value,
             })),
-            onItemSelect: (item: any) => {
-              this.convertCurrentObject(element, item.value);
+            (item: any) => {
+              this.convertCurrentObject(element, item.id);
             },
-          },
+            false
+          ),
           "bottom",
           "right"
         );

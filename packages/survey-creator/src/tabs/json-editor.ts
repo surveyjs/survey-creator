@@ -47,7 +47,7 @@ export class SurveyJSONEditor {
       id: "svd-undo",
       iconName: "icon-actionundo",
       title: getLocString("ed.undo"),
-      enabled: this.aceCanUndo,
+      enabled: <any>this.aceCanUndo,
       tooltip: getLocString("ed.undoTooltip"),
       action: () => {
         this.aceEditor.execCommand("undo");
@@ -58,7 +58,7 @@ export class SurveyJSONEditor {
     items.push({
       id: "svd-redo",
       iconName: "icon-actionredo",
-      enabled: this.aceCanRedo,
+      enabled: <any>this.aceCanRedo,
       title: getLocString("ed.redo"),
       tooltip: getLocString("ed.redoTooltip"),
       action: () => {

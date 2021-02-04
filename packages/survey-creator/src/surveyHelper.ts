@@ -1,6 +1,7 @@
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
+import { ISurveyCreatorOptions } from "./settings";
 
 export enum ObjType {
   Unknown,
@@ -93,7 +94,7 @@ export class SurveyHelper {
   public static isPropertyVisible(
     obj: any,
     property: Survey.JsonObjectProperty,
-    options: ISurveyObjectEditorOptions = null,
+    options: ISurveyCreatorOptions = null,
     showMode: string = null,
     parentObj: any = null,
     parentProperty: Survey.JsonObjectProperty = null
