@@ -1,6 +1,7 @@
 // import { document } from "global";
 import { text, boolean } from "@storybook/addon-knobs";
 import * as ko from "knockout";
+import { ListModel } from "survey-knockout";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 export default {
@@ -24,16 +25,17 @@ export const ContextMenuOrdinary = () => {
     isVisible(!isVisible());
   };
 
-  const listModel = {
-    onItemSelect: () => {
+  const listModel = new ListModel(
+    [
+      { id: "q1", title: "Question 1", enabled: true },
+      { id: "q2", title: "Question 2", enabled: true },
+      { id: "q3", title: "Question 3", enabled: true },
+    ],
+    () => {
       isVisible(false);
     },
-    items: [
-      { title: "Question 1", isEnabled: true },
-      { title: "Question 2", isEnabled: true },
-      { title: "Question 3", isEnabled: true },
-    ],
-  };
+    false
+  );
 
   return {
     template: `<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative">
@@ -62,16 +64,17 @@ export const ContextMenuWithPointer = () => {
     isVisible(!isVisible());
   };
 
-  const listModel = {
-    onItemSelect: () => {
+  const listModel = new ListModel(
+    [
+      { id: "q1", title: "Question 1", enabled: true },
+      { id: "q2", title: "Question 2", enabled: true },
+      { id: "q3", title: "Question 3", enabled: true },
+    ],
+    () => {
       isVisible(false);
     },
-    items: [
-      { title: "Question 1", isEnabled: true },
-      { title: "Question 2", isEnabled: true },
-      { title: "Question 3", isEnabled: true },
-    ],
-  };
+    false
+  );
 
   return {
     template: `<div style="margin-left: 200px; margin-top: 200px; width: max-content; position: relative">
