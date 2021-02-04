@@ -42,8 +42,7 @@ export abstract class JsonEditorBaseModel implements IJsonEditorModel {
   protected abstract setErrors(errors: any[]): void;
 }
 
-export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
-  implements ICreatorPlugin {
+export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
   public model: TModel;
   constructor(private creator: SurveyCreator) {}
   public activate(): void {
