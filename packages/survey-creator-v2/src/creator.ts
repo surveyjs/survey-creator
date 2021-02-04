@@ -212,15 +212,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => this.makeNewViewActive("logic"),
         });
       }
-      if (this.showJSONEditorTab) {
-        tabs.push({
-          id: "editor",
-          title: this.getLocString("ed.jsonEditor"),
-          template: "svc-tab-json-editor",
-          data: this,
-          action: () => this.makeNewViewActive("editor"),
-        });
-      }
       if (this.showEmbededSurveyTab) {
         tabs.push({
           id: "embed",
