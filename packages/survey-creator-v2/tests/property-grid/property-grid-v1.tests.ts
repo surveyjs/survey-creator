@@ -858,7 +858,6 @@ test("SurveyPropertyMatrixDropdownColumns change cell koValue on changing value 
   expect(question.columns[0].title).toEqual("Title 1");
   expect(rows[0].getQuestionByColumnName("title").value).toEqual("Title 1");
 });
-/* TODO
 test("SurveyPropertyMatrixDropdownColumns show error on setting same column name", () => {
   expect(
     Serializer.findProperty("matrixdropdowncolumn", "name").isUnique
@@ -871,22 +870,26 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  expect(columnsQuestion.keyName).toEqual("name");
+  expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
   columnsQuestion.addRow();
   expect(question.columns).toHaveLength(3);
   rows = columnsQuestion.visibleRows;
-  rows[2].getQuestionByColumnName("name").value = "column3";
   expect(question.columns[2].name).toEqual("column3");
-  rows[2].getQuestionByColumnName("name").value = "column2";
-  expect(question.columns[2].name).toEqual("column2");
-  rows[2].getQuestionByColumnName("name").value = "column1";
+  var column3Name = rows[2].getQuestionByColumnName("name");
+  column3Name.value = "column2";
   expect(question.columns[2].name).toEqual("column3");
-  rows[2].getQuestionByColumnName("name").value = "column3";
+  expect(column3Name.errors).toHaveLength(1);
+  column3Name.value = "column1";
   expect(question.columns[2].name).toEqual("column3");
-  rows[2].getQuestionByColumnName("name").value = "column4";
+  expect(column3Name.errors).toHaveLength(1);
+  column3Name.value = "column3";
+  expect(question.columns[2].name).toEqual("column3");
+  expect(column3Name.errors).toHaveLength(0);
+  column3Name.value = "column4";
   expect(question.columns[2].name).toEqual("column4");
+  expect(column3Name.errors).toHaveLength(0);
 });
 test("editor base check for unique property value", () => {
   var question = new QuestionMatrixDropdownModel("q1");
@@ -901,17 +904,18 @@ test("editor base check for unique property value", () => {
   var rows = columnsQuestion.visibleRows;
   var column2Name = rows[1].getQuestionByColumnName("name");
   expect(column2Name.value).toEqual("column2");
-  expect(columnsQuestion.hasError()).toBeFalsy();
   column2Name.value = "column1";
-  expect(columnsQuestion.hasError()).toBeTruthy();
+  expect(column2Name.errors).toHaveLength(1);
   column2Name.value = "column3";
-  expect(columnsQuestion.hasError()).toBeTruthy();
+  expect(column2Name.errors).toHaveLength(1);
   column2Name.value = "column2";
-  expect(columnsQuestion.hasError()).toBeFalsy();
+  expect(column2Name.errors).toHaveLength(0);
   column2Name.value = "column4";
-  expect(columnsQuestion.hasError()).toBeFalsy();
+  expect(column2Name.errors).toHaveLength(0);
+  column2Name.value = "";
+  expect(column2Name.errors).toHaveLength(1);
+  expect(question.columns[1].name).toEqual("column4");
 });
-*/
 
 test("SurveyPropertyMatrixDropdownColumns property editors in the cell should be readonly if parent property is readOnly", () => {
   var property = Serializer.findProperty("matrixdropdownbase", "columns");
@@ -960,6 +964,53 @@ QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
     Survey.Serializer.removeProperty("question", "multiple");
   });
 */
+/* We do not have multiple values editor yet
+QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
+    () => {
+      Serializer.addProperty("question", {
+        name: "multiple:multiplevalues",
+        choices: function (obj) {
+          return [
+            { value: 5, text: "item 5", category: "category 2" },
+            { value: 4, text: "item 4", category: "category 1" },
+            { value: 6, text: "item 6", category: "category 2" },
+            { value: 1, text: "item 1" },
+            { value: 3, text: "item 3", category: "category 1" },
+            { value: 2, text: "item 2" },
+          ];
+        },
+      });
+      var property = Survey.Serializer.findProperty("question", "multiple");
+  
+      var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
+      var categories = propertyEditor.koCategories();
+      assert.equal(categories.length, 3, "There are 3 categories");
+      assert.equal(categories[0].koCategory(), "", "The first category is empty");
+      assert.equal(
+        categories[0].koTitleVisible(),
+        false,
+        "The first category is invisible"
+      );
+      assert.equal(
+        categories[1].koCategory(),
+        "category 1",
+        "The second category is 1"
+      );
+      assert.equal(
+        categories[1].koTitleVisible(),
+        true,
+        "The second category is visible"
+      );
+      assert.equal(
+        categories[2].koCategory(),
+        "category 2",
+        "The third category is 2"
+      );
+  
+      Survey.Serializer.removeProperty("question", "multiple");
+    }
+  );
+  */
 /* TODO
 QUnit.test(
     "SurveyPropertyMatrixDropdownColumns change nested property content on changing column type",
@@ -1063,7 +1114,7 @@ test("SurveyPropertyPagesEditor add page", () => {
   expect(survey.pages).toHaveLength(2);
   expect(survey.pages[1].name).toEqual("p2");
 });
-/* TODO pages canremove is not implemented
+
 test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
   var survey = new SurveyModel();
   survey.setDesignMode(true);
@@ -1079,7 +1130,7 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
     if (allowDeleteAll) return true;
     return allowDelete;
   };
-  var propertyGrid = new PropertyGridModelTester(survey);
+  var propertyGrid = new PropertyGridModelTester(survey, options);
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
@@ -1113,7 +1164,7 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
       obj.getType() == "survey"
     );
   };
-  var propertyGrid = new PropertyGridModelTester(survey);
+  var propertyGrid = new PropertyGridModelTester(survey, options);
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
@@ -1121,7 +1172,7 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeFalsy();
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[2])).toBeTruthy();
 });
-*/
+
 /* TODO buttons localization
 test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var survey = new SurveyModel();
@@ -1365,7 +1416,7 @@ test("'set' property editor", () => {
   expect(setQuestion.choices).toHaveLength(5);
   Serializer.removeProperty("survey", "region");
 });
-/* TODO choices callback doesn't work
+
 test("'set' property editor, get choices on callback, Bug#720", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
@@ -1386,7 +1437,7 @@ test("'set' property editor, get choices on callback, Bug#720", () => {
   expect(setQuestion.choices).toHaveLength(5);
   Serializer.removeProperty("survey", "region");
 });
-*/
+
 test("Validators property editor", () => {
   var survey = createSurvey();
   var validator = new NumericValidator(10, 100);
@@ -1456,7 +1507,7 @@ test("Validators property editor update existing validator property - https://su
   maxValueQuestion.value = 101;
   expect(question.validators[0]["maxValue"]).toEqual(101);
 });
-/* TODO fix
+
 test("minValue doesn't work when it is 0, Bug #687", () => {
   Serializer.addProperty("question", {
     name: "decimalPlaces:number",
@@ -1469,9 +1520,13 @@ test("minValue doesn't work when it is 0, Bug #687", () => {
 
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var decimalPlacesQuestion = <QuestionMatrixDynamicModel>(
+  var decimalPlacesQuestion = <QuestionText>(
     propertyGrid.survey.getQuestionByName("decimalPlaces")
   );
+  expect(decimalPlacesQuestion.getType()).toEqual("text");
+  expect(decimalPlacesQuestion.inputType).toEqual("number");
+  expect(decimalPlacesQuestion.min).toEqual(0);
+  expect(decimalPlacesQuestion.max).toEqual(5);
   expect(decimalPlacesQuestion.value).toEqual(0);
   decimalPlacesQuestion.value = -5;
   expect(question.decimalPlaces).toEqual(0);
@@ -1483,7 +1538,7 @@ test("minValue doesn't work when it is 0, Bug #687", () => {
   expect(question.decimalPlaces).toEqual(5);
   Serializer.removeProperty("question", "decimalPlaces");
 });
-*/
+
 test("automicatilly create name for new item in SurveyPropertyTextItemsEditor", () => {
   var question = new QuestionMultipleTextModel("q1");
   question.addItem("text1");
@@ -1519,53 +1574,6 @@ test("onPropertyValueChanging callback, Bug #438", () => {
   titleQuestion.value = " ss   ";
   expect(question.title).toEqual("ss");
 });
-/* We do not have multiple values editor yet
-QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
-    () => {
-      Serializer.addProperty("question", {
-        name: "multiple:multiplevalues",
-        choices: function (obj) {
-          return [
-            { value: 5, text: "item 5", category: "category 2" },
-            { value: 4, text: "item 4", category: "category 1" },
-            { value: 6, text: "item 6", category: "category 2" },
-            { value: 1, text: "item 1" },
-            { value: 3, text: "item 3", category: "category 1" },
-            { value: 2, text: "item 2" },
-          ];
-        },
-      });
-      var property = Survey.Serializer.findProperty("question", "multiple");
-  
-      var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
-      var categories = propertyEditor.koCategories();
-      assert.equal(categories.length, 3, "There are 3 categories");
-      assert.equal(categories[0].koCategory(), "", "The first category is empty");
-      assert.equal(
-        categories[0].koTitleVisible(),
-        false,
-        "The first category is invisible"
-      );
-      assert.equal(
-        categories[1].koCategory(),
-        "category 1",
-        "The second category is 1"
-      );
-      assert.equal(
-        categories[1].koTitleVisible(),
-        true,
-        "The second category is visible"
-      );
-      assert.equal(
-        categories[2].koCategory(),
-        "category 2",
-        "The third category is 2"
-      );
-  
-      Survey.Serializer.removeProperty("question", "multiple");
-    }
-  );
-  */
 /* TODO fix
 test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   var survey = new SurveyModel();
