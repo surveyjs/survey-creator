@@ -115,11 +115,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!newObj) return [];
     var props = new SurveyQuestionProperties(
       newObj,
-      options,
+      <any>options,
       this.getColumnClassName(obj, prop),
       "list",
       obj,
-      prop
+      <any>prop
     );
     if (props.getTabs().length == 0) return [];
     return props.getTabs()[0].properties;
