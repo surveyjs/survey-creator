@@ -7,7 +7,7 @@
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/survey-creator-v2.git"
+    "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev",
