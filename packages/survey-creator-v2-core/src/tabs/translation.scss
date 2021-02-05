@@ -1,0 +1,46 @@
+.svd-translation-tab {
+  height: 100%;
+  
+  .form-group {
+    margin-top: 1em;
+  }
+
+  .svd-translation-no-strings {
+    min-height: 300px;
+    text-align: center;
+    line-height: 300px;
+    vertical-align: middle;
+    font-size: 40px;
+  }
+
+  svd-translation-group {
+    display: block;
+  }
+
+  .svd-translation-strings {
+    border-top-style: solid;
+    border-top-width: 1px;
+    padding: 10px;
+  }
+  .svd-translation-panel-strings {
+    padding: 10px;
+    padding-left: 0;
+  }
+  .svd-translation-panel-strings-title {
+    font-weight: bold;
+    line-height: 25px;
+    padding: 5px 0;
+    & + svg-icon {
+      line-height: 25px;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+  .svd-toolbox-category-header {
+    margin-top: 20px;
+  }
+}
+
+.svd_container.sv_default_css .svd-translation-tab label {
+  margin-bottom: 0;
+}
