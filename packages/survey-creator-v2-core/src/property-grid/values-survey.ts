@@ -1,6 +1,6 @@
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import { Question, Base } from "survey-knockout";
 import { PropertyEditorSetupValue } from "./index";
+import { ISurveyCreatorOptions } from "../settings";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
   constructor(

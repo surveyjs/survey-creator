@@ -14,11 +14,11 @@ import {
   PropertyJSONGenerator,
   IPropertyEditorSetup,
 } from "./index";
-import { getNextValue } from "@survey/creator/utils/utils";
-import { editorLocalization } from "@survey/creator/editorLocalization";
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { getNextValue } from "../utils/utils";
+import { editorLocalization } from "../editorLocalization";
+import { ISurveyCreatorOptions } from "../settings";
 import { FastEntryEditor } from "./fast-entry";
-import { SurveyQuestionProperties } from "@survey/creator/questionEditors/questionEditor";
+import { SurveyQuestionProperties } from "../questionEditors/questionEditor";
 
 class SurveyHelper {
   public static getNewName(

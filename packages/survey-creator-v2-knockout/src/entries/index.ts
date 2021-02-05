@@ -31,11 +31,11 @@ import "../utils/layout.scss";
 export * from "@survey/creator/tabs/embed";
 export * from "@survey/creator/tabs/json-editor";
 
-export * from "../property-grid";
-export * from "../property-grid/condition";
-export * from "../property-grid/matrices";
+export * from "@survey/creator/property-grid";
+export * from "@survey/creator/property-grid/condition";
+export * from "@survey/creator/property-grid/matrices";
 //export * from "../property-grid/modal-action";
-export * from "../property-grid/restfull";
-export * from "../property-grid/values";
+export * from "@survey/creator/property-grid/restfull";
+export * from "@survey/creator/property-grid/values";
 
 export * from "../svgbundle";

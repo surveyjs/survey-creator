@@ -14,13 +14,10 @@ import {
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
-} from "@survey/creator/questionEditors/questionEditor";
-import { EditableObject } from "@survey/creator/propertyEditors/editableObject";
-import { editorLocalization } from "@survey/creator/editorLocalization";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
-} from "@survey/creator/settings";
+} from "../questionEditors/questionEditor";
+import { EditableObject } from "../propertyEditors/editableObject";
+import { editorLocalization } from "../editorLocalization";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.survey.editingObj) return false;

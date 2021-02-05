@@ -11,7 +11,7 @@ import {
 } from "survey-knockout";
 import { PropertyGridEditorCollection, IPropertyEditorSetup } from "./index";
 import { ConditionEditor } from "./condition-survey";
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { ISurveyCreatorOptions } from "../settings";
 
 PropertyGridEditorCollection.register({
   fit(prop: JsonObjectProperty): boolean {

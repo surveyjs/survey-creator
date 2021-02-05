@@ -29,7 +29,7 @@ import {
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
-} from "@survey/creator/settings";
+} from "../../src/settings";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";

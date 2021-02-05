@@ -1,9 +1,4 @@
 import {
-  PropertyGridModel,
-  PropertyGridEditorCollection,
-  PropertyEditorSetupValue,
-} from "../../src/property-grid";
-import {
   Base,
   QuestionText,
   JsonObjectProperty,
@@ -34,14 +29,19 @@ import {
   QuestionExpressionModel,
 } from "survey-knockout";
 import {
+  PropertyGridModel,
+  PropertyGridEditorCollection,
+  PropertyEditorSetupValue,
+} from "../../src/property-grid";
+import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
-} from "@survey/creator/settings";
+} from "../../src/settings";
 import {
   defaultStrings,
   editorLocalization,
-} from "@survey/creator/editorLocalization";
-import { SurveyQuestionEditorDefinition } from "@survey/creator/questionEditors/questionEditorDefinition";
+} from "../../src/editorLocalization";
+import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";

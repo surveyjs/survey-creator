@@ -4,11 +4,8 @@ import {
   QuestionMatrixModel,
   SurveyModel,
 } from "survey-knockout";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
-} from "@survey/creator/settings";
-import { editorLocalization } from "@survey/creator/editorLocalization";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { editorLocalization } from "../editorLocalization";
 import { PropertyEditorSetupValue } from "./index";
 
 export class CellsEditor extends PropertyEditorSetupValue {

@@ -9,7 +9,7 @@ import {
   PropertyJSONGenerator,
   PropertyGridEditorQuestion,
 } from "./index";
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { ISurveyCreatorOptions } from "../settings";
 
 var json = {
   panelJSON: null,

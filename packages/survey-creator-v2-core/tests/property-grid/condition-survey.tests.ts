@@ -13,7 +13,7 @@ import {
   ConditionEditorItemsBuilder,
   ConditionEditorItem,
 } from "../../src/property-grid/condition-survey";
-import { settings, EmptySurveyCreatorOptions } from "@survey/creator/settings";
+import { settings, EmptySurveyCreatorOptions } from "../../src/settings";
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();
