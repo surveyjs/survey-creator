@@ -17,7 +17,7 @@ import {
   DefaultPanelDynamicPanelValueEditor,
   TriggerValueEditor,
 } from "./values-survey";
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
+import { ISurveyCreatorOptions } from "../settings";
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   public getJSON(
@@ -41,8 +41,7 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     obj: Base,
     prop: JsonObjectProperty,
     evtOptions: any
-  ) {
-  }
+  ) {}
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
   }

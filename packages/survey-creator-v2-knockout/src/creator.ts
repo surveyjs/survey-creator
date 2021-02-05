@@ -12,7 +12,7 @@ import { QuestionToolbox } from "@survey/creator/toolbox";
 import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
 import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
 import { QuestionConverter } from "@survey/creator/questionconverter";
-import { PropertyGrid } from "./property-grid";
+import { PropertyGrid } from "@survey/creator/property-grid";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 

@@ -20,9 +20,9 @@ import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
   settings,
-} from "@survey/creator/settings";
-import { editorLocalization } from "@survey/creator/editorLocalization";
-import { SurveyHelper } from "@survey/creator/surveyHelper";
+} from "../settings";
+import { editorLocalization } from "../editorLocalization";
+import { SurveyHelper } from "../surveyHelper";
 import { PropertyEditorSetupValue } from "./index";
 
 export class ConditionEditorItem {

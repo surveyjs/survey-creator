@@ -1,4 +1,3 @@
-import { ISurveyCreatorOptions } from "@survey/creator/settings";
 import {
   ItemValue,
   QuestionCommentModel,
@@ -7,6 +6,7 @@ import {
   Survey,
 } from "survey-knockout";
 import { PropertyEditorSetupValue } from "./index";
+import { ISurveyCreatorOptions } from "../settings";
 
 export class FastEntryEditor extends PropertyEditorSetupValue {
   public static applyItemValueArray(
