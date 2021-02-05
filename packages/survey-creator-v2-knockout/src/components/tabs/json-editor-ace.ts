@@ -25,7 +25,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.aceEditor.setValue(value);
     this.aceEditor.renderer.updateFull(true);
     this.aceEditor.getSession().getUndoManager().reset();
-    this.onTextChanged();
+    this.processErrors(value);
     this.isProcessingImmediately = false;
   }
 
