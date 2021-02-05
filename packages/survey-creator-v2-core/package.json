@@ -8,6 +8,7 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
+    "test": ""
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
