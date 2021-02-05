@@ -334,6 +334,11 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
+  public onMatrixAllowRemoveRow(obj: Base, options: any): boolean {
+    var page = options.row.editingObj;
+    if (!page || !page.survey) return;
+    return page.survey.currentPage !== page;
+  }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
   }

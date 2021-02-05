@@ -108,6 +108,7 @@ export interface IPropertyGridEditor {
   ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
+  onMatrixAllowRemoveRow?: (obj: Base, options: any) => boolean;
 }
 
 export var PropertyGridEditorCollection = {
@@ -173,6 +174,17 @@ export var PropertyGridEditorCollection = {
     if (!!res && !!res.onMatrixCellCreated) {
       res.onMatrixCellValueChanged(obj, options);
     }
+  },
+  onMatrixAllowRemoveRow(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: any
+  ): boolean {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMatrixAllowRemoveRow) {
+      return res.onMatrixAllowRemoveRow(obj, options);
+    }
+    return true;
   },
 };
 
@@ -667,12 +679,18 @@ export class PropertyGridModel {
     );
   }
   private onMatrixAllowRemoveRow(options: any): boolean {
-    var res = this.options.onCollectionItemDeletingCallback(
-      <any>this.obj,
+    var res = PropertyGridEditorCollection.onMatrixAllowRemoveRow(
+      this.obj,
       options.question.property,
-      options.question.value,
-      options.row.editingObj
+      options
     );
+    res =
+      this.options.onCollectionItemDeletingCallback(
+        <any>this.obj,
+        options.question.property,
+        options.question.value,
+        options.row.editingObj
+      ) && res;
     return this.options.onCanDeleteItemCallback(
       <any>this.obj,
       options.row.editingObj,
@@ -826,8 +844,19 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return {
       type: "dropdown",
       showOptionsCaption: false,
-      choices: this.getChoices(obj, prop),
     };
+  }
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    this.setChoices(obj, question, prop);
+  }
+  private setChoicesCore(
+    question: Question,
+    prop: JsonObjectProperty,
+    propChoices: Array<any>
+  ) {
+    if (!propChoices || !Array.isArray(propChoices) || propChoices.length == 0)
+      return;
+    question.choices = this.choicesFromPropChoices(prop, propChoices);
   }
   private getLocalizedText(prop: JsonObjectProperty, value: string): string {
     if (prop.name === "locale") {
@@ -841,8 +870,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     if (value === null) return null;
     return editorLocalization.getPropertyValue(value);
   }
-  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
-    var propChoices = prop.getChoices(obj);
+  private choicesFromPropChoices(
+    prop: JsonObjectProperty,
+    propChoices: Array<any>
+  ): Array<any> {
     var choices = [];
     for (var i = 0; i < propChoices.length; i++) {
       var item = propChoices[i];
@@ -857,6 +888,12 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       choices.push(jsonItem);
     }
     return choices;
+  }
+  private setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
+    var propChoices = prop.getChoices(obj, (choices: any) => {
+      this.setChoicesCore(question, prop, choices);
+    });
+    this.setChoicesCore(question, prop, propChoices);
   }
 }
 

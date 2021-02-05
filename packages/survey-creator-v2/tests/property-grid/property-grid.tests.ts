@@ -122,6 +122,27 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.choices[0].value).toEqual("");
   expect(localeQuestion.choices[0].text).toEqual("Default (english)");
 });
+test("dropdown property editor, get choices on callback", () => {
+  var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+  var callback = null;
+  Serializer.addProperty("survey", {
+    name: "region",
+    choices: function (obj, choicesCallback) {
+      callback = choicesCallback;
+      return [];
+    },
+  });
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var setQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("region")
+  );
+  expect(setQuestion.choices).toHaveLength(0);
+  callback(choices);
+  expect(setQuestion.choices).toHaveLength(5);
+  Serializer.removeProperty("survey", "region");
+});
+
 test("set property editor", () => {
   Serializer.addProperty("question", {
     name: "prop1:set",
