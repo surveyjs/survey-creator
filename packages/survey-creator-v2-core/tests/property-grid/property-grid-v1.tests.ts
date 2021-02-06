@@ -417,8 +417,6 @@ test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemv
   Serializer.findProperty("ItemValue", "value").visible = true;
 });
 test("SurveyPropertyItemValuesEditor - returns error on empty value", () => {
-  //TODO
-  Serializer.findProperty("ItemValue", "value").isRequired = true;
   var question = new QuestionCheckboxModel("q1");
   question.choices = ["1|item1", "item2"];
   var propertyGrid = new PropertyGridModelTester(question);
@@ -945,73 +943,6 @@ test("SurveyPropertyItemValuesEditor check if there are visibleIf and enableIf p
   expect(rows[0].getQuestionByName("enableIf").isVisible).toBeTruthy();
 });
 /* TODO
-QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
-    Survey.Serializer.addProperty("question", {
-      name: "multiple:multiplevalues",
-      choices: [
-        { value: 1, text: "Item 1" },
-        { value: 2, text: "Item 2" },
-        { value: 3, text: "Item 3" },
-      ],
-    });
-    var property = Survey.Serializer.findProperty("question", "multiple");
-    var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
-    assert.equal(
-      propertyEditor.getValueText([1, 3]),
-      "[Item 1, Item 3]",
-      "Use text for displaying the value"
-    );
-    Survey.Serializer.removeProperty("question", "multiple");
-  });
-*/
-/* We do not have multiple values editor yet
-QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
-    () => {
-      Serializer.addProperty("question", {
-        name: "multiple:multiplevalues",
-        choices: function (obj) {
-          return [
-            { value: 5, text: "item 5", category: "category 2" },
-            { value: 4, text: "item 4", category: "category 1" },
-            { value: 6, text: "item 6", category: "category 2" },
-            { value: 1, text: "item 1" },
-            { value: 3, text: "item 3", category: "category 1" },
-            { value: 2, text: "item 2" },
-          ];
-        },
-      });
-      var property = Survey.Serializer.findProperty("question", "multiple");
-  
-      var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
-      var categories = propertyEditor.koCategories();
-      assert.equal(categories.length, 3, "There are 3 categories");
-      assert.equal(categories[0].koCategory(), "", "The first category is empty");
-      assert.equal(
-        categories[0].koTitleVisible(),
-        false,
-        "The first category is invisible"
-      );
-      assert.equal(
-        categories[1].koCategory(),
-        "category 1",
-        "The second category is 1"
-      );
-      assert.equal(
-        categories[1].koTitleVisible(),
-        true,
-        "The second category is visible"
-      );
-      assert.equal(
-        categories[2].koCategory(),
-        "category 2",
-        "The third category is 2"
-      );
-  
-      Survey.Serializer.removeProperty("question", "multiple");
-    }
-  );
-  */
-/* TODO
 QUnit.test(
     "SurveyPropertyMatrixDropdownColumns change nested property content on changing column type",
     function (assert) {
@@ -1173,7 +1104,6 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[2])).toBeTruthy();
 });
 
-/* TODO buttons localization
 test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var survey = new SurveyModel();
   survey.addNewPage("page1");
@@ -1193,8 +1123,7 @@ test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
 
   delete defaultStrings.pe["addNew@pages"];
 });
-*/
-/* TODO doesn't work
+
 test("SurveyPropertyPagesEditor show Pages Editor for Page object", () => {
   Serializer.addProperty("page", {
     name: "pages:surveypages",
@@ -1224,14 +1153,13 @@ test("SurveyPropertyPagesEditor show Pages Editor for Page object", () => {
   expect(pagesQuestion.columns).toHaveLength(1);
   expect(pagesQuestion.columns[0].name).toEqual("name");
   expect(pagesQuestion.visibleRows).toHaveLength(3);
-  survey.addNewPage("page4");
-  expect(pagesQuestion.visibleRows).toHaveLength(4);
+  pagesQuestion.addRow();
   pagesQuestion.addRow();
   expect(survey.pages).toHaveLength(5);
   expect(survey.pages[4].name).toEqual("page5");
   Serializer.removeProperty("page", "pages");
 });
-*/
+
 test("Change displayName for existing property. It should have higher priority than localization", () => {
   var prop = Serializer.findProperty("question", "visible");
   prop.displayName = "My is visible?";
@@ -1248,37 +1176,6 @@ test("Change displayName for existing property. It should have higher priority t
   );
   expect(visibleQuestion.title).toEqual("Is visible?");
 });
-/*TODO likely remove
-QUnit.test(
-    "Check showDisplayNameOnTop for different property editors",
-    function (assert) {
-      var question = new Survey.QuestionCheckbox("q1");
-      var editor = new SurveyQuestionEditor(question);
-      assert.equal(
-        editor.getPropertyEditorByName("name").editor.showDisplayNameOnTop,
-        true,
-        "Show title on top for name"
-      );
-      assert.equal(
-        editor.getPropertyEditorByName("choices").editor.showDisplayNameOnTop,
-        false,
-        "Hide title on top for choices"
-      );
-      assert.equal(
-        editor.getPropertyEditorByName("visible").editor.showDisplayNameOnTop,
-        false,
-        "Hide title on top for visible"
-      );
-      assert.equal(
-        editor.getPropertyEditorByName("visibleIf").editor.showDisplayNameOnTop,
-        true,
-        "Show title on top for visibleIf"
-      );
-    }
-  );
-  */
-
-// TODO we need to add the testing result
 
 test("SurveyPropertyResultfullEditor test", () => {
   var question = new QuestionCheckboxModel("q1");
@@ -1395,7 +1292,6 @@ test("Triggers property editor and setvalue trigger", () => {
   expect(setValueQuestion.isVisible).toBeTruthy();
   */
   setToNameQuestion.value = "question2";
-  //TODO check that the correct editor for setting value is created
   setValueQuestion.value = ["one", "two"];
   expect(survey.triggers[0]["setValue"]).toHaveLength(2);
   expect(survey.triggers[0]["setValue"][0]).toEqual("one");
@@ -1649,43 +1545,6 @@ test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   expect(choicesQuestion.showHeader).toBeFalsy();
   Serializer.findProperty("itemvalue", "text").visible = false;
 });
-/* It works out of the box. expression/condition properties editors are comment questions with title actions
-test(
-    "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
-     () => {
-      var expressionProperty = Survey.Serializer.findProperty(
-        "expression",
-        "expression"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(expressionProperty).editorType,
-        "expression",
-        "By default create expression"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(expressionProperty, true)
-          .editorType,
-        "string",
-        "For cell editor create string, not expression"
-      );
-      var conditionProperty = Survey.Serializer.findProperty(
-        "question",
-        "visibleIf"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(conditionProperty).editorType,
-        "condition",
-        "By default create condition"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(conditionProperty, true)
-          .editorType,
-        "string",
-        "For cell editor create string, not condition"
-      );
-    }
-  );
-  */
 test("SurveyPropertyCalculatedValueEditor", () => {
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
@@ -1730,7 +1589,7 @@ test("SurveyElementEditorContentModel do not allow empty value for a unique prop
   nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
 });
-/* TODO fix
+/*
 test("expression editor in question expression validator should has access to survey", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
@@ -2014,3 +1873,108 @@ test("SurveyPropertyDefaultValueEditor json expression converted to text", () =>
   expect(defaultValueEditor.question.getType()).toEqual("text");
   Serializer.findProperty("expression", "defaultValue").visible = false;
 });
+/* It works out of the box. expression/condition properties editors are comment questions with title actions
+test(
+    "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
+     () => {
+      var expressionProperty = Survey.Serializer.findProperty(
+        "expression",
+        "expression"
+      );
+      assert.equal(
+        SurveyPropertyEditorFactory.createEditor(expressionProperty).editorType,
+        "expression",
+        "By default create expression"
+      );
+      assert.equal(
+        SurveyPropertyEditorFactory.createEditor(expressionProperty, true)
+          .editorType,
+        "string",
+        "For cell editor create string, not expression"
+      );
+      var conditionProperty = Survey.Serializer.findProperty(
+        "question",
+        "visibleIf"
+      );
+      assert.equal(
+        SurveyPropertyEditorFactory.createEditor(conditionProperty).editorType,
+        "condition",
+        "By default create condition"
+      );
+      assert.equal(
+        SurveyPropertyEditorFactory.createEditor(conditionProperty, true)
+          .editorType,
+        "string",
+        "For cell editor create string, not condition"
+      );
+    }
+  );
+  */
+
+/* TODO Do not have multiple values property editor yet.
+QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
+    Survey.Serializer.addProperty("question", {
+      name: "multiple:multiplevalues",
+      choices: [
+        { value: 1, text: "Item 1" },
+        { value: 2, text: "Item 2" },
+        { value: 3, text: "Item 3" },
+      ],
+    });
+    var property = Survey.Serializer.findProperty("question", "multiple");
+    var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
+    assert.equal(
+      propertyEditor.getValueText([1, 3]),
+      "[Item 1, Item 3]",
+      "Use text for displaying the value"
+    );
+    Survey.Serializer.removeProperty("question", "multiple");
+  });
+*/
+/* We do not have multiple values editor yet
+QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
+    () => {
+      Serializer.addProperty("question", {
+        name: "multiple:multiplevalues",
+        choices: function (obj) {
+          return [
+            { value: 5, text: "item 5", category: "category 2" },
+            { value: 4, text: "item 4", category: "category 1" },
+            { value: 6, text: "item 6", category: "category 2" },
+            { value: 1, text: "item 1" },
+            { value: 3, text: "item 3", category: "category 1" },
+            { value: 2, text: "item 2" },
+          ];
+        },
+      });
+      var property = Survey.Serializer.findProperty("question", "multiple");
+  
+      var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
+      var categories = propertyEditor.koCategories();
+      assert.equal(categories.length, 3, "There are 3 categories");
+      assert.equal(categories[0].koCategory(), "", "The first category is empty");
+      assert.equal(
+        categories[0].koTitleVisible(),
+        false,
+        "The first category is invisible"
+      );
+      assert.equal(
+        categories[1].koCategory(),
+        "category 1",
+        "The second category is 1"
+      );
+      assert.equal(
+        categories[1].koTitleVisible(),
+        true,
+        "The second category is visible"
+      );
+      assert.equal(
+        categories[2].koCategory(),
+        "category 2",
+        "The third category is 2"
+      );
+  
+      Survey.Serializer.removeProperty("question", "multiple");
+    }
+  );
+  */

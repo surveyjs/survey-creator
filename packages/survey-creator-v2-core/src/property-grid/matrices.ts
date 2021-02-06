@@ -197,6 +197,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
+      addRowText: this.getAddRowText(prop),
     };
     if (columns.length < 2) {
       res.showHeader = false;
@@ -215,6 +216,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       className,
       propNames
     );
+  }
+  private getAddRowText(prop: JsonObjectProperty): string {
+    var customLocStrName = "pe.addNew@" + prop.name;
+    if (editorLocalization.hasString(customLocStrName))
+      return editorLocalization.getString(customLocStrName);
+    return editorLocalization.getString("pe.addNew");
   }
   private setupUsingOptions(
     obj: Base,

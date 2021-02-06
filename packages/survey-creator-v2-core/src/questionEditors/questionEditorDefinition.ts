@@ -1,5 +1,3 @@
-import * as Survey from "survey-knockout";
-
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
   properties?: Array<string | { name: string; title?: string; tab?: string }>;
