@@ -22,7 +22,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public set text(value: string) {
     this.isProcessingImmediately = true;
     this.koText(value);
-    this.onTextChanged();
+    this.processErrors(value);
     this.isProcessingImmediately = false;
   }
   public get errors(): any[] {

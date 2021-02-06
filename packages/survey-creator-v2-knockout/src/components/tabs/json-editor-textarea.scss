@@ -23,3 +23,6 @@ svc-tab-json-editor-textarea {
   padding: 0.14em;
   background-color: $red;
 }
+.svc-json-editor-tab__content-errors:empty {
+  display: none;
+}

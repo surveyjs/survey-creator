@@ -5,6 +5,7 @@ export interface IJsonEditorModel {
   isJSONChanged: boolean;
   text: string;
   onEditorActivated(): void;
+  processErrors(text: string): void;
   readOnly: boolean;
 }
 
@@ -18,11 +19,6 @@ export abstract class JsonEditorBaseModel implements IJsonEditorModel {
 
   public abstract text: string;
   public abstract onEditorActivated(): void;
-
-  public get readOnly(): boolean {
-    return this.creator.readOnly;
-  }
-
   protected onTextChanged(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
       clearTimeout(this.jsonEditorChangedTimeoutId);
@@ -33,13 +29,18 @@ export abstract class JsonEditorBaseModel implements IJsonEditorModel {
       const self: JsonEditorBaseModel = this;
       this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
         self.jsonEditorChangedTimeoutId = -1;
-
-        const textWorker: SurveyTextWorker = new SurveyTextWorker(self.text);
-        self.setErrors(textWorker.errors);
+        self.processErrors(self.text);
       }, JsonEditorBaseModel.updateTextTimeout);
     }
   }
   protected abstract setErrors(errors: any[]): void;
+  public processErrors(text: string): void {
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
+    this.setErrors(textWorker.errors);
+  }
+  public get readOnly(): boolean {
+    return this.creator.readOnly;
+  }
 }
 
 export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
