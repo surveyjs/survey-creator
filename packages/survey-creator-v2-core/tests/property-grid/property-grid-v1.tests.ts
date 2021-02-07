@@ -44,9 +44,9 @@ import {
 import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
 
 export * from "../../src/property-grid/matrices";
-export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
+import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 
@@ -1589,8 +1589,9 @@ test("SurveyElementEditorContentModel do not allow empty value for a unique prop
   nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
 });
-/*
+
 test("expression editor in question expression validator should has access to survey", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = <QuestionTextModel>(
@@ -1631,7 +1632,7 @@ test("expression editor in question expression validator should has access to su
   expect(conditionEditor.survey).toBeTruthy();
   expect(conditionEditor.survey.getAllQuestions()).toHaveLength(3);
 });
-*/
+
 test("SurveyHelper.applyItemValueArray", () => {
   var q1 = new QuestionDropdownModel("q1");
   var q2 = new QuestionDropdownModel("q1");
