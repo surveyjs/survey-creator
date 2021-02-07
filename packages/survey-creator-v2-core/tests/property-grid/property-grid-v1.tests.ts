@@ -56,9 +56,7 @@ import {
   PropertyGridRowValueEditor,
 } from "../../src/property-grid/values";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-
-//PropertyGridEditorCollection.register(new PropertyGridValueEditor());
-//PropertyGridEditorCollection.register(new PropertyGridEditorQuestionRestfull());
+import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -150,6 +148,13 @@ function createSurvey(): SurveyModel {
       },
     ],
   });
+}
+
+function findSetupAction(actions: Array<any>): any {
+  for (var i = 0; i < actions.length; i++) {
+    if (actions[i].id === "property-grid-setup") return actions[i];
+  }
+  return null;
 }
 
 test("Create correct questions for property editors", () => {
@@ -387,7 +392,7 @@ test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemv
   expect(column).toBeTruthy();
   expect(column.readOnly).toBeTruthy();
   var actions = choicesQuestion.getTitleActions();
-  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  var setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeFalsy();
   Serializer.findProperty("ItemValue", "value").readOnly = false;
@@ -400,7 +405,7 @@ test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemv
   expect(column.readOnly).toBeFalsy();
   expect(column.isVisible).toBeTruthy();
   actions = choicesQuestion.getTitleActions();
-  setupAction = actions.find((el) => el.id === "property-grid-setup");
+  setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeTruthy();
   Serializer.findProperty("ItemValue", "value").visible = false;
@@ -411,7 +416,7 @@ test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemv
   column = choicesQuestion.getColumnByName("value");
   expect(column).toBeFalsy();
   actions = choicesQuestion.getTitleActions();
-  setupAction = actions.find((el) => el.id === "property-grid-setup");
+  setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeFalsy();
   Serializer.findProperty("ItemValue", "value").visible = true;
@@ -453,7 +458,7 @@ test("SurveyPropertyItemValue disable viewtext for multiple languages", () => {
     propertyGrid.survey.getQuestionByName("choices")
   );
   var actions = choicesQuestion.getTitleActions();
-  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  var setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeFalsy();
   survey.locale = "en";
@@ -497,7 +502,7 @@ test("SurveyPropertyItemValue custom property", () => {
   expect(choicesQuestion.columns[2].title).toEqual("My image link");
 
   var actions = choicesQuestion.getTitleActions();
-  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  var setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeTruthy();
 
@@ -647,7 +652,7 @@ test("extended SurveyPropertyItemValue + custom property", () => {
   expect(testQuestion.columns).toHaveLength(3);
 
   var actions = testQuestion.getTitleActions();
-  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  var setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
   expect(setupAction.enabled).toBeTruthy();
 
@@ -1279,6 +1284,8 @@ test("Triggers property editor and setvalue trigger", () => {
   var setToNameQuestion = <QuestionDropdownModel>(
     panel.getQuestionByName("setToName")
   );
+  var setValueQuestion = panel.getQuestionByName("setValue");
+  expect(setValueQuestion.isVisible).toBeFalsy();
   expect(setToNameQuestion.choices).toHaveLength(
     survey.getAllQuestions().length
   );
@@ -1287,10 +1294,7 @@ test("Triggers property editor and setvalue trigger", () => {
   expect(survey.triggers[0]["setToName"]).toEqual("question1");
   var expressionQuestion = panel.getQuestionByName("expression");
   expect(expressionQuestion.isVisible).toBeTruthy();
-  var setValueQuestion = panel.getQuestionByName("setValue");
-  /* TODO fix
   expect(setValueQuestion.isVisible).toBeTruthy();
-  */
   setToNameQuestion.value = "question2";
   setValueQuestion.value = ["one", "two"];
   expect(survey.triggers[0]["setValue"]).toHaveLength(2);
@@ -1614,7 +1618,7 @@ test("expression editor in question expression validator should has access to su
   var expressionQuestion = rows[0].detailPanel.getQuestionByName("expression");
   expect(expressionQuestion.isVisible).toBeTruthy();
   var actions = expressionQuestion.getTitleActions();
-  var setupAction = actions.find((el) => el.id === "property-grid-setup");
+  var setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
 
   var propEditor = PropertyGridEditorCollection.getEditor(
@@ -1668,8 +1672,9 @@ test("SurveyHelper.applyItemValueArray", () => {
     10
   );
 });
-/* TODO fix
-test("property editor propertyHelpText", function (assert) {
+
+test("property editor propertyHelpText", () => {
+  PropertiesHelpTexts.instance.reset();
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
@@ -1697,6 +1702,7 @@ test("property editor propertyHelpText", function (assert) {
   expect(titleQuestion.description).toEqual("Survey Title");
 
   delete curStrings.pehelp["page_title"];
+  PropertiesHelpTexts.instance.reset();
   propertyGrid = new PropertyGridModelTester(survey.pages[0]);
   titleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("title")
@@ -1712,7 +1718,7 @@ test("property editor propertyHelpText", function (assert) {
     ) > -1
   ).toBeTruthy();
 });
-*/
+
 /* TODO there is no bindings property editor. We need to implement
   test("property editor propertyHelpText", () => {
     var tester = new BindingsTester();
