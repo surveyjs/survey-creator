@@ -19,6 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
       "@survey/creator/*": ["../survey-creator-v2-core/src/*"],
       "survey-knockout": ["./node_modules/survey-knockout"]
