@@ -6,6 +6,7 @@ import {
   PopupModel,
   IActionBarItem,
   ListModel,
+  property
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -22,6 +23,7 @@ export interface ICreatorPlugin {
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
+  @property() testProp: string;
   private propertyGrid: PropertyGrid;
   public static defaultNewSurveyText: string =
     '{ "pages": [ { "name": "page1"}] }';

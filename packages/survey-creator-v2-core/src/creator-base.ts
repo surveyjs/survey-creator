@@ -15,7 +15,7 @@ export interface ICreatorOptions {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends { [index: string]: any }>
+export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base 
   implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
@@ -450,6 +450,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
 
   constructor(protected options: ICreatorOptions) {
+    super();
     this.setOptions(options);
     this.initTabs();
   }
@@ -1091,7 +1092,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   onValueChangingCallback(options: any) {
     this.onPropertyValueChanging.fire(this, options);
   }
-  public onPropertyValueChanged(
+  public onSurveyElementPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any

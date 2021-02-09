@@ -868,7 +868,8 @@ test("options.onGetErrorTextOnValidationCallback", () => {
 test("options.onPropertyValueChanged", () => {
   var options = new EmptySurveyCreatorOptions();
   var changedValue = "";
-  options.onPropertyValueChanged = (
+  options.onSurveyElementPropertyValueChanged = (
+  // options.onPropertyValueChanged = (
     property: JsonObjectProperty,
     obj: any,
     newValue: any
@@ -944,7 +945,8 @@ test("options.onGetErrorTextOnValidationCallback in matrix", () => {
 test("options.onPropertyValueChanged in matrix", () => {
   var options = new EmptySurveyCreatorOptions();
   var changedValue = "";
-  options.onPropertyValueChanged = (
+  options.onSurveyElementPropertyValueChanged = (
+  // options.onPropertyValueChanged = (
     property: JsonObjectProperty,
     obj: any,
     newValue: any

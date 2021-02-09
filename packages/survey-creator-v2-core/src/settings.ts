@@ -72,7 +72,8 @@ export interface ISurveyCreatorOptions {
     value: any
   ): string;
   onValueChangingCallback(options: any);
-  onPropertyValueChanged(
+  //onPropertyValueChanged(
+  onSurveyElementPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any
@@ -154,7 +155,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     return null;
   }
   onValueChangingCallback(options: any) {}
-  onPropertyValueChanged(
+  onSurveyElementPropertyValueChanged(
+  //onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any

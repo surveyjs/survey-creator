@@ -12,7 +12,7 @@ import {
   SurveyElementEditorContentModel,
   SurveyQuestionEditor,
 } from "../questionEditors/questionEditor";
-import { SurveyCreator } from "../editor";
+import { CreatorBase } from "../creator-base";
 
 import "./logic.scss";
 var templateHtml = require("./logic.html");
@@ -1260,25 +1260,25 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
 ko.components.register("survey-logic", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: SurveyCreator = params.creator;
-      // var model = new SurveyLogic(creator.survey, creator);
+      var creator: CreatorBase<Survey.Survey> = params.creator;
+      var model = new SurveyLogic(creator.survey, <any>creator);
       // model.update(creator.survey, creator);
-      var model = creator.logic;
+      // var model = creator.logic;
 
       var subscribeViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "logic") {
-          model.update(creator.survey, creator);
+          model.update(creator.survey, <any>creator);
         }
       });
 
       var surveyCreatedHandler = (creator, options) => {
         model.update(options.survey, creator);
       };
-      creator.onDesignerSurveyCreated.add(surveyCreatedHandler);
+      // creator.onDesignerSurveyCreated.add(surveyCreatedHandler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         subscribeViewType.dispose();
-        creator.onDesignerSurveyCreated.remove(surveyCreatedHandler);
+        // creator.onDesignerSurveyCreated.remove(surveyCreatedHandler);
         // model.dispose();
       });
 

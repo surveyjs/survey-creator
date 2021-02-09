@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import * as Survey from "survey-knockout";
-import { SurveyCreator } from "../editor";
+import { CreatorBase } from "../creator-base";
 
 import "./test.scss";
 import { IActionBarItem } from "survey-knockout";
@@ -266,12 +266,13 @@ export class SurveyLiveTester {
 ko.components.register("survey-tester", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: SurveyCreator = params.creator;
-      var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
+      var creator: CreatorBase<Survey.SurveyModel> = params.creator;
+      // var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
+      var model = new SurveyLiveTester(creator);
 
       model.onSurveyCreatedCallback = (survey) => {
-        creator.onTestSurveyCreated &&
-          creator.onTestSurveyCreated.fire(self, { survey: survey });
+        // creator.onTestSurveyCreated &&
+        //   creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
       model.onGetObjectDisplayName = (obj) => {
         return creator.getObjectDisplayName(obj, "survey-tester");
