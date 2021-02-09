@@ -1260,26 +1260,27 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
 ko.components.register("survey-logic", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: CreatorBase<Survey.Survey> = params.creator;
-      var model = new SurveyLogic(creator.survey, <any>creator);
+      const creator: CreatorBase<Survey.Survey> = params.creator;
+      const model = new SurveyLogic(creator.survey, <any>creator);
       // model.update(creator.survey, creator);
       // var model = creator.logic;
 
-      var subscribeViewType = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "logic") {
+      const subscribeViewType = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "logic") {
           model.update(creator.survey, <any>creator);
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscribeViewType);
 
-      var surveyCreatedHandler = (creator, options) => {
+      const surveyCreatedHandler = (creator, options) => {
         model.update(options.survey, creator);
       };
       // creator.onDesignerSurveyCreated.add(surveyCreatedHandler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscribeViewType.dispose();
+        creator.onPropertyChanged.remove(subscribeViewType);
         // creator.onDesignerSurveyCreated.remove(surveyCreatedHandler);
-        // model.dispose();
+        model.dispose();
       });
 
       return model;

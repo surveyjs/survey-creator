@@ -279,7 +279,7 @@ ko.components.register("survey-tester", {
       };
 
       // Test tab updater implicitly depending on observable survey and view type
-      var updateTestTab = (json: any) => {
+      const updateTestTab = (json: any) => {
         var options = {
           showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
           showDefaultLanguageInTestSurveyTab:
@@ -290,16 +290,21 @@ ko.components.register("survey-tester", {
         };
         model.setJSON(json);
         model.show(options);
-    }
+      };
 
-      var subscr = creator.koViewType.subscribe(() => updateTestTab(creator.JSON));
+      var subscr = (s, o) => {
+        if (o.name === "viewType") {
+          updateTestTab(creator.JSON);
+        }
+      };
+      creator.onPropertyChanged.add(subscr);
 
       var handler = (sender, options) => updateTestTab(options.survey.toJSON());
       creator.onDesignerSurveyCreated.add(handler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         creator.onDesignerSurveyCreated.remove(handler);
-        subscr.dispose();
+        creator.onPropertyChanged.remove(subscr);
         model.dispose();
       });
 

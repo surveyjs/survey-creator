@@ -1,7 +1,7 @@
 <div class="svc-creator__area svc-flex-column">
   <div class="svc-top-bar">
     <svc-tabbed-menu
-      params="items: creator.tabs, viewType: creator.koViewType"
+      params="items: creator.tabs, viewType: creator.viewType"
     ></svc-tabbed-menu>
     <sv-action-bar params="items: creator.toolbarItems"></sv-action-bar>
   </div>
@@ -10,7 +10,7 @@
       <!-- ko foreach: creator.tabs -->
       <div
         class="svc-creator-tab"
-        data-bind="visible: $parent.creator.koViewType() == id"
+        data-bind="visible: $parent.creator.viewType == id"
       >
         <!-- ko component: { name: template, params: {creator: $parent.creator, survey: $parent.creator.survey, data: data } } -->
         <!-- /ko -->

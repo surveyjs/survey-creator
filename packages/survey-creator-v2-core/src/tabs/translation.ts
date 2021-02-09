@@ -894,14 +894,15 @@ ko.components.register("survey-translation", {
         });
       };
 
-      var subscrViewType = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "translation") {
+      const subscrViewType = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "translation") {
           model.survey = creator.survey;
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscrViewType);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscrViewType.dispose();
+        creator.onPropertyChanged.remove(subscrViewType);
         creator.translation.dispose();
         creator.translation = undefined;
       });

@@ -225,11 +225,11 @@ export class SurveyEmbedingWindow {
 ko.components.register("survey-embed", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: CreatorBase<Survey.SurveyModel> = params.creator;
-      var model = new SurveyEmbedingWindow();
+      const creator: CreatorBase<Survey.SurveyModel> = params.creator;
+      const model = new SurveyEmbedingWindow();
 
-      var subscrViewType = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "embed") {
+      const subscrViewType = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "embed") {
           var json = creator.getSurveyJSON();
           model.json = json;
           // model.surveyId = creator.surveyId;
@@ -237,10 +237,11 @@ ko.components.register("survey-embed", {
           model.generateValidJSON = creator.getOptions().generateValidJSON;
           model.show();
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscrViewType);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscrViewType.dispose();
+        creator.onPropertyChanged.remove(subscrViewType);
         model.dispose();
       });
 

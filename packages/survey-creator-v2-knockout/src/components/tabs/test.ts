@@ -423,8 +423,8 @@ ko.components.register("svc-tab-test", {
           creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
 
-      var subscr = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "test") {
+      const subscr = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "test") {
           var options = {
             showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
             showDefaultLanguageInTestSurveyTab:
@@ -436,10 +436,11 @@ ko.components.register("svc-tab-test", {
           model.setJSON(creator.JSON);
           model.show(options);
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscr);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscr.dispose();
+        creator.onPropertyChanged.remove(subscr);
         model.dispose();
       });
       return model;

@@ -7,6 +7,7 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
+import { property } from "survey-knockout";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -15,16 +16,48 @@ export interface ICreatorOptions {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base 
+export class CreatorBase<T extends { [index: string]: any }>
+  extends Survey.Base
   implements ISurveyCreatorOptions {
-  private showDesignerTabValue = ko.observable<boolean>(false);
-  private showJSONEditorTabValue = ko.observable<boolean>(false);
-  private showTestSurveyTabValue = ko.observable<boolean>(false);
-  private showEmbeddedSurveyTabValue = ko.observable<boolean>(false);
-  private showTranslationTabValue = ko.observable<boolean>(false);
-  private showLogicTabValue = ko.observable<boolean>(false);
+  /**
+   * Set it to true to show "JSON Editor" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showDesignerTab: boolean;
+  /**
+   * Set it to true to show "JSON Editor" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showJSONEditorTab: boolean;
+  /**
+   * Set it to true to show "Test Survey" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showTestSurveyTab: boolean;
+  /**
+   * Set it to true to show "Embed Survey" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showEmbeddedSurveyTab: boolean;
+  /**
+   * Set it to true to show "Translation" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showTranslationTab: boolean;
+  /**
+   * Set it to true to show "Logic" tab and to false to hide the tab
+   */
+  @property({ defaultValue: false }) showLogicTab: boolean;
+  /**
+   * You have right to set this property to true if you have bought the commercial licence only.
+   * It will remove the text about non-commerical usage on the top of the widget.
+   * Setting this property true without having a commercial licence is illegal.
+   * @see haveCommercialLicense
+   */
+  @property({ defaultValue: false }) haveCommercialLicense: boolean;
+  /**
+   * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
+   */
+  @property({ defaultValue: false }) isAutoSave: boolean;
+  @property() showOptions: boolean;
+  @property({ defaultValue: false }) showState: boolean;
+  @property({ defaultValue: true }) generateValidJSON: boolean;
   private isRTLValue: boolean = false;
-  private haveCommercialLicenseValue = ko.observable(false);
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
   protected surveyValue = ko.observable<T>();
@@ -32,11 +65,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
   protected newQuestions: Array<any> = [];
   protected newPanels: Array<any> = [];
 
-  koAutoSave = ko.observable(false);
-  koShowOptions = ko.observable();
-  koGenerateValidJSON = ko.observable(true);
-  koShowState = ko.observable(false);
-  koViewType = ko.observable("designer");
+  @property({ defaultValue: "designer" }) viewType: string;
 
   /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
@@ -318,76 +347,9 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
   }
 
   /**
-   * Set it to true to show "JSON Editor" tab and to false to hide the tab
-   */
-  public get showDesignerTab() {
-    return this.showDesignerTabValue();
-  }
-  public set showDesignerTab(value: boolean) {
-    this.showDesignerTabValue(value);
-  }
-  /**
-   * Set it to true to show "JSON Editor" tab and to false to hide the tab
-   */
-  public get showJSONEditorTab() {
-    return this.showJSONEditorTabValue();
-  }
-  public set showJSONEditorTab(value: boolean) {
-    this.showJSONEditorTabValue(value);
-  }
-  /**
-   * Set it to true to show "Test Survey" tab and to false to hide the tab
-   */
-  public get showTestSurveyTab() {
-    return this.showTestSurveyTabValue();
-  }
-  public set showTestSurveyTab(value: boolean) {
-    this.showTestSurveyTabValue(value);
-  }
-  /**
-   * Set it to true to show "Embed Survey" tab and to false to hide the tab
-   */
-  public get showEmbededSurveyTab() {
-    return this.showEmbeddedSurveyTabValue();
-  }
-  public set showEmbededSurveyTab(value: boolean) {
-    this.showEmbeddedSurveyTabValue(value);
-  }
-
-  /**
-   * Set it to true to show "Logic" tab and to false to hide the tab
-   */
-  public get showLogicTab() {
-    return this.showLogicTabValue();
-  }
-  public set showLogicTab(value: boolean) {
-    this.showLogicTabValue(value);
-  }
-  /**
-   * Set it to true to show "Translation" tab and to false to hide the tab
-   */
-  public get showTranslationTab() {
-    return this.showTranslationTabValue();
-  }
-  public set showTranslationTab(value: boolean) {
-    this.showTranslationTabValue(value);
-  }
-
-  /**
-   * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
-   */
-  public get isAutoSave() {
-    return this.koAutoSave();
-  }
-  public set isAutoSave(newVal) {
-    this.koAutoSave(newVal);
-  }
-  /**
    * Set it to false to suppress an alert message about error on saving the survey into database.
    */
   public showErrorOnFailedSave: boolean = true;
-
-  koReadOnly = ko.observable(false);
 
   protected onSetReadOnly(newVal: boolean) {}
 
@@ -395,26 +357,14 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
    * A boolean property, false by default. Set it to true to deny editing.
    */
   public get readOnly() {
-    return this.koReadOnly();
+    return this.getPropertyValue("readOnly", false);
+    //return this.koReadOnly();
   }
   public set readOnly(newVal: boolean) {
     const text = this.text;
-    this.koReadOnly(newVal);
+    this.setPropertyValue("readOnly", newVal);
     this.onSetReadOnly(newVal);
     this.text = text;
-  }
-
-  /**
-   * You have right to set this property to true if you have bought the commercial licence only.
-   * It will remove the text about non-commerical usage on the top of the widget.
-   * Setting this property true without having a commercial licence is illegal.
-   * @see haveCommercialLicense
-   */
-  public get haveCommercialLicense() {
-    return this.haveCommercialLicenseValue();
-  }
-  public set haveCommercialLicense(val) {
-    this.haveCommercialLicenseValue(val);
   }
 
   /**
@@ -427,21 +377,13 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
     this.isRTLValue = value;
   }
 
-  public get showState() {
-    return this.koShowState();
-  }
-
-  public set showState(newVal) {
-    this.koShowState(newVal);
-  }
-
   /**
    * Change the active view/tab. It will return false if it can't change the current tab.
    * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
    */
   public makeNewViewActive(viewName: string): boolean {
     if (!this.canSwitchViewType(viewName)) return false;
-    this.koViewType(viewName);
+    this.viewType = viewName;
     return true;
   }
 
@@ -494,7 +436,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
           action: () => this.makeNewViewActive("editor"),
         });
       }
-      if (this.showEmbededSurveyTab) {
+      if (this.showEmbeddedSurveyTab) {
         this.tabs.push({
           name: "embed",
           title: this.getLocString("ed.embedSurvey"),
@@ -513,7 +455,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
         });
       }
       if (this.tabs().length > 0) {
-        this.koViewType(this.tabs()[0].name);
+        this.viewType = this.tabs()[0].name;
       }
     });
   }
@@ -527,37 +469,34 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
     this.options = options;
-    this.showDesignerTabValue(
+    this.showDesignerTab =
       typeof options.showDesignerTab !== "undefined"
         ? options.showDesignerTab
-        : true
-    );
-    this.showLogicTabValue(
-      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
-    );
-    this.showJSONEditorTabValue(
+        : true;
+    this.showLogicTab =
+      typeof options.showLogicTab !== "undefined"
+        ? options.showLogicTab
+        : false;
+    this.showJSONEditorTab =
       typeof options.showJSONEditorTab !== "undefined"
         ? options.showJSONEditorTab
-        : true
-    );
-    this.showTestSurveyTabValue(
+        : true;
+    this.showTestSurveyTab =
       typeof options.showTestSurveyTab !== "undefined"
         ? options.showTestSurveyTab
-        : true
-    );
-    this.showEmbeddedSurveyTabValue(
+        : true;
+    this.showEmbeddedSurveyTab =
       typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
-        : false
-    );
-    this.showTranslationTabValue(
+        : false;
+    this.showTranslationTab =
       typeof options.showTranslationTab !== "undefined"
         ? options.showTranslationTab
-        : false
-    );
-    this.showLogicTabValue(
-      typeof options.showLogicTab !== "undefined" ? options.showLogicTab : false
-    );
+        : false;
+    this.showLogicTab =
+      typeof options.showLogicTab !== "undefined"
+        ? options.showLogicTab
+        : false;
 
     this.haveCommercialLicense =
       typeof options.haveCommercialLicense !== "undefined"
@@ -586,11 +525,10 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
         : -1;
     this.showState =
       typeof options.showState !== "undefined" ? options.showState : false;
-    this.koShowOptions(
-      typeof options.showOptions !== "undefined" ? options.showOptions : false
-    );
+    this.showOptions =
+      typeof options.showOptions !== "undefined" ? options.showOptions : false;
 
-    this.koGenerateValidJSON(this.options.generateValidJSON);
+    this.generateValidJSON = this.options.generateValidJSON;
     this.isAutoSave =
       typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
     this.showErrorOnFailedSave =
@@ -601,7 +539,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
       typeof options.isRTL !== "undefined" ? options.isRTL : false;
 
     if (typeof options.readOnly !== "undefined") {
-      this.koReadOnly(options.readOnly);
+      this.readOnly = options.readOnly;
     }
     if (typeof options.showPagesInTestSurveyTab !== "undefined") {
       this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -692,7 +630,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
   }
 
   public getSurveyJSON(): any {
-    if (this.koViewType() != "editor") {
+    if (this.viewType != "editor") {
       return new Survey.JsonObject().toJsonObject(this.survey);
     }
     var surveyJsonText = this.text;
@@ -751,7 +689,7 @@ export class CreatorBase<T extends { [index: string]: any }> extends Survey.Base
     return (<any>this.survey).toJSON();
   }
   public set JSON(val: any) {
-    if (this.koViewType() == "editor") {
+    if (this.viewType == "editor") {
       this.setTextValue(JSON.stringify(val));
     } else {
       this.initSurveyWithJSON(val, true);

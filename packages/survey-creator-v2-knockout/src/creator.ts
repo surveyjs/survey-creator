@@ -6,7 +6,8 @@ import {
   PopupModel,
   IActionBarItem,
   ListModel,
-  property
+  property,
+  ImplementorBase,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator/toolbox";
@@ -48,28 +49,32 @@ export class SurveyCreator extends CreatorBase<Survey> {
     this.selection.subscribe((element) => (this.propertyGrid.obj = element));
 
     this.toolbarItems.push(
-      ...(<any>[
+      ...[
         {
+          id: "icon-undo",
           iconName: "icon-undo",
           action: () => {},
           title: "Undo",
           showTitle: false,
         },
         {
+          id: "icon-redo",
           iconName: "icon-redo",
           action: () => {},
           title: "Redo",
           showTitle: false,
         },
         {
+          id: "icon-settings",
           iconName: "icon-settings",
           needSeparator: true,
           action: () => this.selectElement(this.survey),
-          active: ko.computed(() => this.isElementSelected(this.survey)),
+          active: () => this.isElementSelected(this.survey),
           title: "Settings",
           showTitle: false,
         },
         {
+          id: "icon-clear",
           iconName: "icon-clear",
           action: () => {
             alert("clear pressed");
@@ -79,28 +84,30 @@ export class SurveyCreator extends CreatorBase<Survey> {
           showTitle: false,
         },
         {
+          id: "icon-search",
           iconName: "icon-search",
           action: () => {
             this.showSearch = !this.showSearch;
           },
-          active: ko.computed(() => this.showSearch),
+          active: () => this.showSearch,
           title: "Search",
           showTitle: false,
         },
         {
+          id: "icon-preview",
           iconName: "icon-preview",
           needSeparator: true,
-          css: ko.computed(() =>
-            this.koViewType() === "test" ? "sv-action-bar-item--secondary" : ""
-          ),
+          css: () =>
+            this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
           action: () => {
             this.makeNewViewActive("test");
           },
-          active: ko.observable(false),
+          active: false,
           title: "Preview",
         },
-      ])
+      ]
     );
+    new ImplementorBase(this);
     this.initTabsPlugin();
   }
 
@@ -215,7 +222,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
           action: () => this.makeNewViewActive("logic"),
         });
       }
-      if (this.showEmbededSurveyTab) {
+      if (this.showEmbeddedSurveyTab) {
         tabs.push({
           id: "embed",
           title: this.getLocString("ed.embedSurvey"),
@@ -235,7 +242,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
       }
       this.tabs(tabs);
       if (this.tabs.peek().length > 0) {
-        this.koViewType(this.tabs.peek()[0].id);
+        this.viewType = this.tabs.peek()[0].id;
       }
     });
   }
@@ -255,7 +262,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   protected canSwitchViewType(newType: string) {
-    const plugin = this.plugins[this.koViewType()];
+    const plugin = this.plugins[this.viewType];
     return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   public getContextActions(element: any /*ISurveyElement*/) {
