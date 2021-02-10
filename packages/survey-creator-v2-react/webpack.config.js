@@ -3,7 +3,7 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+//var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
@@ -109,7 +109,7 @@ module.exports = function (options) {
           name: "../../survey-creator",
           main:
             buildPath +
-            "typings/survey-creator-v2-react/src/entries/index.d.ts",
+            "typings/entries/index.d.ts",
           outputAsModuleFolder: true,
           headerText: dts_banner,
         });
@@ -152,7 +152,7 @@ module.exports = function (options) {
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
+      //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
       alias: {
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },
@@ -221,7 +221,7 @@ module.exports = function (options) {
       library: options.libraryName || "SurveyCreator",
       libraryTarget: "umd",
       umdNamedDefine: true,
-    } /*
+    },
     externals: {
       knockout: {
         root: "ko",
@@ -230,18 +230,20 @@ module.exports = function (options) {
         amd: "knockout",
       },
       "survey-knockout": {
-        root: "SurveyKnockout",
+        root: "Survey",
         commonjs2: "survey-knockout",
         commonjs: "survey-knockout",
         amd: "survey-knockout",
       },
+      /*
       "survey-react": {
         root: "SurveyReact",
         commonjs2: "survey-react",
         commonjs: "survey-react",
         amd: "survey-react",
       },
-    },*/,
+      */
+    },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
@@ -271,7 +273,7 @@ module.exports = function (options) {
       }),
     ]);
     config.devServer = {
-      contentBase: path.join(__dirname, "build"),
+      contentBase: __dirname,
       compress: false,
       port: 8080,
     };

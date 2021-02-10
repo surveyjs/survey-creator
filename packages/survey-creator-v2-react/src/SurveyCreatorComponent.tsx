@@ -7,7 +7,7 @@ import "./index.css";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import PropertyGridComponent from "./PropertyGridComponent";
 import { ActionBar, Base, SurveyElementBase } from "survey-react";
-import { CreatorBase } from "@survey/creator/src/creator-base";
+import { CreatorBase } from "@survey/creator";
 
 Survey.StylesManager.applyTheme("modern");
 

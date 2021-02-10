@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
-    "lib": [
-      "DOM",
-      "ES5",
-      "ES2015.Promise",
-      "es6"
-    ],
+    "lib": ["DOM", "ES5", "ES2015.Promise", "es6"],
     "sourceMap": true,
     "noImplicitAny": false,
     "importHelpers": false,
@@ -15,16 +10,8 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "allowJs": true,
-    "baseUrl": ".",
-    "paths": {
-      "@survey/creator/*": ["../survey-creator-v2-core/src/*"]
-     }
+    "allowJs": true
   },
-  "exclude": [
-    "src/entries/**/*.ts"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["src/entries/**/*.ts"],
+  "include": ["src/**/*.ts"]
 }

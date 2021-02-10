@@ -8,6 +8,8 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
+    "prebuild": "copy-library",
+    "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "test": "jest",
     "test:dev": "jest --watch"
   },

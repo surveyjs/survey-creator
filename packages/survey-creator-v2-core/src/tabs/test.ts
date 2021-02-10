@@ -299,11 +299,11 @@ ko.components.register("survey-tester", {
       };
       creator.onPropertyChanged.add(subscr);
 
-      var handler = (sender, options) => updateTestTab(options.survey.toJSON());
-      creator.onDesignerSurveyCreated.add(handler);
+      //var handler = (sender, options) => updateTestTab(options.survey.toJSON());
+      //creator.onDesignerSurveyCreated.add(handler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        creator.onDesignerSurveyCreated.remove(handler);
+        //creator.onDesignerSurveyCreated.remove(handler);
         creator.onPropertyChanged.remove(subscr);
         model.dispose();
       });

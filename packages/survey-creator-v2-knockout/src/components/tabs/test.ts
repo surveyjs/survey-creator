@@ -7,8 +7,8 @@ import {
   PopupModel,
   ListModel,
 } from "survey-knockout";
-import { editorLocalization } from "@survey/creator/editorLocalization";
-import { simulatorDevices } from "@survey/creator/components/simulator";
+import { editorLocalization } from "@survey/creator";
+import { simulatorDevices } from "@survey/creator";
 import { SurveyCreator } from "../../creator";
 
 import "./test.scss";
@@ -16,15 +16,15 @@ import { IActionBarItem } from "survey-knockout";
 const template = require("./test.html");
 // import template from "./test.html";
 
-export * from "@survey/creator/components/toolbar";
-export * from "@survey/creator/components/simulator";
-export * from "@survey/creator/components/results";
-export * from "@survey/creator/utils/dropdown";
-export * from "@survey/creator/utils/boolean";
-export * from "@survey/creator/utils/svg-icon";
-export * from "@survey/creator/utils/survey-widget";
-export { SurveySimulatorComponent as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
-export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
+// export * from "@survey/creator/components/toolbar";
+// export * from "@survey/creator/components/simulator";
+// export * from "@survey/creator/components/results";
+// export * from "@survey/creator/utils/dropdown";
+// export * from "@survey/creator/utils/boolean";
+// export * from "@survey/creator/utils/svg-icon";
+// export * from "@survey/creator/utils/survey-widget";
+// export { SurveySimulatorComponent as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
+// export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
 
 export class TestSurveyTabViewModel {
   private json: any;

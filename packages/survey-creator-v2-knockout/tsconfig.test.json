@@ -16,10 +16,9 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "baseUrl": ".",
     "paths": {
-      "@survey/creator/*": ["../survey-creator-v2-core/src/*"]
-     }
+      "survey-knockout": ["./node_modules/survey-knockout"]
+    }
   },
   "exclude": [
     "src/entries/**/*.ts"

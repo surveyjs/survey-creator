@@ -12,9 +12,6 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
-    "@survey/creator/(.*)": "<rootDir>/../survey-creator-v2-core/src/$1",
-    "survey-knockout":
-      "<rootDir>/../survey-creator-v2-knockout/node_modules/survey-knockout",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

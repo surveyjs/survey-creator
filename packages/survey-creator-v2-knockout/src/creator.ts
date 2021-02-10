@@ -8,13 +8,14 @@ import {
   ListModel,
   property,
   ImplementorBase,
+  ISurvey,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
-import { QuestionToolbox } from "@survey/creator/toolbox";
-import { CreatorBase, ICreatorOptions } from "@survey/creator/creator-base";
-import { isPropertyVisible, propertyExists } from "@survey/creator/utils/utils";
-import { QuestionConverter } from "@survey/creator/questionconverter";
-import { PropertyGrid } from "@survey/creator/property-grid";
+import { QuestionToolbox } from "@survey/creator";
+import { CreatorBase, ICreatorOptions } from "@survey/creator";
+import { isPropertyVisible, propertyExists } from "@survey/creator";
+import { QuestionConverter } from "@survey/creator";
+import { PropertyGrid } from "@survey/creator";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 

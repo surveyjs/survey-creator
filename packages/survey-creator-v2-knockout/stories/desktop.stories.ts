@@ -1,5 +1,6 @@
 import { StylesManager, settings } from "survey-knockout";
-import { SurveyCreator, CreatorViewModel, DropdownEditorViewModel, PropertyGrid } from "../src/entries";
+import { SurveyCreator, CreatorViewModel, DropdownEditorViewModel } from "../src/entries";
+import { PropertyGrid } from "@survey/creator";
 
 import "../node_modules/survey-knockout/modern.css";
 StylesManager.applyTheme("modern");

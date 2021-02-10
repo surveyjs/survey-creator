@@ -9,12 +9,6 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@survey/creator/*": ["../survey-creator-v2-core/src/*"],
-      "survey-knockout": ["./node_modules/survey-knockout"],
-      "survey-react": ["./node_modules/survey-react"]
-     }
   },
   "exclude": [
     "node_modules",

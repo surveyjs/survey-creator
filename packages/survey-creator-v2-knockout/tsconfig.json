@@ -11,9 +11,8 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@survey/creator/*": ["../survey-creator-v2-core/src/*"],
       "survey-knockout": ["./node_modules/survey-knockout"]
-     }
+    }
   },
   "exclude": [
     "node_modules",

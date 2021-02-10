@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyDropdownPropertyEditor } from "@survey/creator/propertyEditors/propertyEditorFactory";
+import { SurveyDropdownPropertyEditor } from "@survey/creator";
 
 import "./dropdown-editor.scss";
 const template = require("./dropdown-editor.html");
