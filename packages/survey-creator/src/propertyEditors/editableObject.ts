@@ -105,6 +105,12 @@ export class EditableObject {
     }
     res["isCopy"] = true;
     res["originalObj"] = this.obj;
+    if (res.getType() == "survey") {
+      var pages = (<any>res).pages;
+      for (var i = 0; i < pages.length; i++) {
+        pages[i]["originalObj"] = (<any>this.obj).pages[i];
+      }
+    }
     return res;
   }
   private assignProperties(obj: any) {

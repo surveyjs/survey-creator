@@ -3,7 +3,7 @@ import { EditableObject } from "../src/propertyEditors/editableObject";
 
 export default QUnit.module("Editable Object Tests");
 
-QUnit.test("correctly create editable object test", function(assert) {
+QUnit.test("correctly create editable object test", function (assert) {
   var question = new Survey.QuestionText("q1");
   question.validators.push(new Survey.NumericValidator(1, 10));
   question.inputType = "currency";
@@ -23,7 +23,7 @@ QUnit.test("correctly create editable object test", function(assert) {
   assert.equal(edObj.inputType, "currency", "inputType set correctly");
 });
 
-QUnit.test("editable object, apply function test", function(assert) {
+QUnit.test("editable object, apply function test", function (assert) {
   var question = new Survey.QuestionText("q1");
   question.validators.push(new Survey.NumericValidator(1, 10));
   question.inputType = "currency";
@@ -70,10 +70,10 @@ QUnit.test("editable object, apply function test", function(assert) {
   );
 });
 
-QUnit.test("Copy question with correct locale", function(assert) {
+QUnit.test("Copy question with correct locale", function (assert) {
   var survey = new Survey.Survey({
     locale: "de",
-    elements: [{ type: "text", name: "q1" }]
+    elements: [{ type: "text", name: "q1" }],
   });
   var question = <Survey.Question>survey.getQuestionByName("q1");
   var editableObj = new EditableObject(question);
@@ -93,10 +93,10 @@ QUnit.test("Copy question with correct locale", function(assert) {
   );
 });
 
-QUnit.test("Test reset", function(assert) {
+QUnit.test("Test reset", function (assert) {
   var survey = new Survey.Survey({
     locale: "de",
-    elements: [{ type: "text", name: "q1" }]
+    elements: [{ type: "text", name: "q1" }],
   });
   var question = <Survey.Question>survey.getQuestionByName("q1");
   var editableObj = new EditableObject(question);
@@ -104,12 +104,17 @@ QUnit.test("Test reset", function(assert) {
   editableObj.reset();
   assert.equal(editableObj.editableObj["name"], "q1", "Reset the value");
 });
-QUnit.test("Copy questions", function(assert) {
+QUnit.test("Copy questions, Bug#1078", function (assert) {
   var survey = new Survey.Survey({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2" }
-    ]
+    pages: [
+      {
+        name: "page11",
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2" },
+        ],
+      },
+    ],
   });
   var editableObj = new EditableObject(survey);
   assert.equal(
@@ -118,5 +123,11 @@ QUnit.test("Copy questions", function(assert) {
     )).getAllQuestions().length,
     2,
     "Two questions are here"
+  );
+  assert.equal(survey.getType(), "survey");
+
+  assert.equal(
+    editableObj.editableObj["pages"][0]["originalObj"].name,
+    "page11"
   );
 });

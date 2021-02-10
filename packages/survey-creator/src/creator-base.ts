@@ -7,6 +7,7 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
+import { EditableObject } from "./entries";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -447,7 +448,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
 
   protected onViewTypeChanged(newType: string) {}
-  
+
   protected canSwitchViewType(newType: string) {
     return true;
   }
@@ -985,6 +986,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     el: Survey.Base,
     newName: string
   ): boolean {
+    el = EditableObject.getOriginalObject(el);
     newName = newName.toLowerCase();
     for (var i = 0; i < elements.length; i++) {
       if (elements[i] != el && elements[i].name.toLowerCase() == newName)
