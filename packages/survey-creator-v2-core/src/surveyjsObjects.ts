@@ -113,27 +113,27 @@ export class SurveyForDesigner extends Survey.Survey {
     );
   }
   public static isTitleLogoEditable = ko.observable(false);
-  public get hasLogo() {
-    return (
-      (SurveyForDesigner.isTitleLogoEditable() &&
-        ((this.isReadOnly() && this._hasLogo) || !this.isReadOnly())) ||
-      (!SurveyForDesigner.isTitleLogoEditable() && this._hasLogo)
-    );
-  }
-  public get isLogoBefore() {
-    return (
-      (SurveyForDesigner.isTitleLogoEditable() &&
-        ((this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly())) ||
-      (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoBefore)
-    );
-  }
-  public get isLogoAfter() {
-    return (
-      (SurveyForDesigner.isTitleLogoEditable() &&
-        ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
-      (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter)
-    );
-  }
+  // public get hasLogo() {
+  //   return (
+  //     (SurveyForDesigner.isTitleLogoEditable() &&
+  //       ((this.isReadOnly() && this._hasLogo) || !this.isReadOnly())) ||
+  //     (!SurveyForDesigner.isTitleLogoEditable() && this._hasLogo)
+  //   );
+  // }
+  // public get isLogoBefore() {
+  //   return (
+  //     (SurveyForDesigner.isTitleLogoEditable() &&
+  //       ((this.isReadOnly() && this._isLogoBefore) || !this.isReadOnly())) ||
+  //     (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoBefore)
+  //   );
+  // }
+  // public get isLogoAfter() {
+  //   return (
+  //     (SurveyForDesigner.isTitleLogoEditable() &&
+  //       ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
+  //     (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter)
+  //   );
+  // }
   public get isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
   }

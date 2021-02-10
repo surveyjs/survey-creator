@@ -17,7 +17,7 @@ export class TabbedMenuViewModel extends AdaptiveElement {
   public itemsSubscription: ko.Computed;
   constructor(
     _items: Array<IActionBarItem> | ko.Computed<Array<IActionBarItem>>,
-    viewType: ko.Observable<string>
+    viewType: () => string //ko.Observable<string>
   ) {
     super();
 

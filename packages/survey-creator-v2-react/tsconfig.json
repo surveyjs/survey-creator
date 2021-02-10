@@ -9,10 +9,6 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "baseUrl": ".",
-    "paths": {
-      "survey-knockout": ["./node_modules/survey-knockout"]
-    }
   },
   "exclude": [
     "node_modules",

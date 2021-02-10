@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import { getLocString } from "@survey/creator/editorLocalization";
-import { IQuestionToolboxItem } from "@survey/creator/toolbox";
+import { getLocString } from "@survey/creator";
+import { IQuestionToolboxItem } from "@survey/creator";
 
 import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-knockout";

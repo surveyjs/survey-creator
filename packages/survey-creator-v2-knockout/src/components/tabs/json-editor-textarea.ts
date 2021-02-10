@@ -1,7 +1,10 @@
 import * as ko from "knockout";
-import { getLocString } from "@survey/creator/editorLocalization";
+import { getLocString } from "@survey/creator";
 import { ICreatorPlugin, SurveyCreator } from "../../creator";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-textarea.scss";
 const template: any = require("./json-editor-textarea.html");
 // import template from "./json-editor-textarea.html";
@@ -78,7 +81,7 @@ ko.components.register("svc-tab-json-editor-textarea", {
       const plugin: TabJsonEditorTextareaPlugin = params.data;
       plugin.model.init();
       return plugin.model;
-    }
+    },
   },
-  template: template
+  template: template,
 });

@@ -1,4 +1,4 @@
-import { SurveyTextWorker } from "@survey/creator/textWorker";
+import { SurveyTextWorker } from "@survey/creator";
 import { ICreatorPlugin, SurveyCreator } from "../../creator";
 
 export interface IJsonEditorModel {
@@ -43,7 +43,8 @@ export abstract class JsonEditorBaseModel implements IJsonEditorModel {
   }
 }
 
-export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
+export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
+  implements ICreatorPlugin {
   public model: TModel;
   constructor(private creator: SurveyCreator) {}
   public activate(): void {

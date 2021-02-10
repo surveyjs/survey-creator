@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import * as Survey from "survey-knockout";
-import { SurveyCreator } from "../editor";
+import { CreatorBase } from "../creator-base";
 
 import "./test.scss";
 import { IActionBarItem } from "survey-knockout";
@@ -266,19 +266,20 @@ export class SurveyLiveTester {
 ko.components.register("survey-tester", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: SurveyCreator = params.creator;
-      var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
+      var creator: CreatorBase<Survey.SurveyModel> = params.creator;
+      // var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
+      var model = new SurveyLiveTester(creator);
 
       model.onSurveyCreatedCallback = (survey) => {
-        creator.onTestSurveyCreated &&
-          creator.onTestSurveyCreated.fire(self, { survey: survey });
+        // creator.onTestSurveyCreated &&
+        //   creator.onTestSurveyCreated.fire(self, { survey: survey });
       };
       model.onGetObjectDisplayName = (obj) => {
         return creator.getObjectDisplayName(obj, "survey-tester");
       };
 
       // Test tab updater implicitly depending on observable survey and view type
-      var updateTestTab = (json: any) => {
+      const updateTestTab = (json: any) => {
         var options = {
           showPagesInTestSurveyTab: creator.showPagesInTestSurveyTab,
           showDefaultLanguageInTestSurveyTab:
@@ -289,16 +290,21 @@ ko.components.register("survey-tester", {
         };
         model.setJSON(json);
         model.show(options);
-    }
+      };
 
-      var subscr = creator.koViewType.subscribe(() => updateTestTab(creator.JSON));
+      var subscr = (s, o) => {
+        if (o.name === "viewType") {
+          updateTestTab(creator.JSON);
+        }
+      };
+      creator.onPropertyChanged.add(subscr);
 
-      var handler = (sender, options) => updateTestTab(options.survey.toJSON());
-      creator.onDesignerSurveyCreated.add(handler);
+      //var handler = (sender, options) => updateTestTab(options.survey.toJSON());
+      //creator.onDesignerSurveyCreated.add(handler);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        creator.onDesignerSurveyCreated.remove(handler);
-        subscr.dispose();
+        //creator.onDesignerSurveyCreated.remove(handler);
+        creator.onPropertyChanged.remove(subscr);
         model.dispose();
       });
 

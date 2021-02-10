@@ -3,7 +3,8 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+//var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
@@ -66,8 +67,10 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    "survey-knockout": "^" + packageJson.version,
-    knockout: "^3.5.0",
+    "survey-react": "^" + packageJson.version,
+    react: "^17.0.1",
+    "react-dom": "^17.0.1",
+    knockout: "^3.5.1",
   },
   devDependencies: {},
 };
@@ -104,7 +107,9 @@ module.exports = function (options) {
       if (isProductionBuild) {
         dts.bundle({
           name: "../../survey-creator",
-          main: buildPath + "typings/entries/index.d.ts",
+          main:
+            buildPath +
+            "typings/entries/index.d.ts",
           outputAsModuleFolder: true,
           headerText: dts_banner,
         });
@@ -143,7 +148,7 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey-creator": path.resolve(__dirname, "./src/entries/index.ts"),
+      "survey-creator": path.resolve(__dirname, "./src/index.tsx"),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -230,6 +235,14 @@ module.exports = function (options) {
         commonjs: "survey-knockout",
         amd: "survey-knockout",
       },
+      /*
+      "survey-react": {
+        root: "SurveyReact",
+        commonjs2: "survey-react",
+        commonjs: "survey-react",
+        amd: "survey-react",
+      },
+      */
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
@@ -253,7 +266,17 @@ module.exports = function (options) {
     config.devtool = "inline-source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true }),
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        inject: "body",
+        template: "index.html",
+      }),
     ]);
+    config.devServer = {
+      contentBase: __dirname,
+      compress: false,
+      port: 8080,
+    };
   }
 
   return config;

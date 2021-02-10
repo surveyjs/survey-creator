@@ -2,7 +2,8 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from "../editor";
+//import { SurveyCreator } from "../editor";
+import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 
 import "./translation.scss";
@@ -847,22 +848,22 @@ export class Translation implements ITranslationLocales {
 ko.components.register("survey-translation", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      let creator: SurveyCreator = params.creator;
+      const creator: CreatorBase<Survey.Survey> = params.creator;
 
-      let model = new Translation(
+      const model = new Translation(
         creator.createSurvey({}, "translation"),
         false,
         ko.computed(() => creator.readOnly)
       );
       model.importFinishedCallback = function () {
-        creator.onTranslationImported.fire(self, {});
+        //creator.onTranslationImported.fire(self, {});
       };
       model.translateItemAfterRenderCallback = function (
         item: TranslationItem,
         el: any,
         locale: string
       ) {
-        if (creator.onTranslateItemAfterRender.isEmpty) return;
+        //if (creator.onTranslateItemAfterRender.isEmpty) return;
         var options = {
           item: item,
           htmlElement: el,
@@ -874,7 +875,7 @@ ko.components.register("survey-translation", {
             options.onDestroyCallback();
           }
         });
-        creator.onTranslateItemAfterRender.fire(creator, options);
+        //creator.onTranslateItemAfterRender.fire(creator, options);
       };
       model.availableTranlationsChangedCallback = () => {
         creator.setModified({ type: "TRANSLATIONS_CHANGED" });
@@ -894,19 +895,19 @@ ko.components.register("survey-translation", {
         });
       };
 
-      var subscrViewType = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "translation") {
+      const subscrViewType = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "translation") {
           model.survey = creator.survey;
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscrViewType);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscrViewType.dispose();
-        creator.translation.dispose();
-        creator.translation = undefined;
+        creator.onPropertyChanged.remove(subscrViewType);
+        model.dispose();
       });
 
-      creator.translation = model;
+      //creator.translation = model;
       return model;
     },
   },

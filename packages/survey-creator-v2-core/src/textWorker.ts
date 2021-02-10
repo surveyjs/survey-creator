@@ -4,10 +4,11 @@ import * as Survey from "survey-knockout";
 class SurveyForTextWorker extends Survey.Survey {
   constructor(jsonObj: any) {
     super(jsonObj);
+    this.setDesignMode(true);
   }
-  public get isDesignMode(): boolean {
-    return true;
-  }
+  // public get isDesignMode(): boolean {
+  //   return true;
+  // }
 }
 
 export class SurveyTextWorker {

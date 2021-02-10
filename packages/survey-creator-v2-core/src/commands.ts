@@ -58,7 +58,7 @@ export class Commands {
       toolbar: {
         id: "svd-options",
         visible: ko.computed(
-          () => this.creator.koIsShowDesigner() && this.creator.koShowOptions()
+          () => this.creator.koIsShowDesigner() && this.creator.showOptions
         ),
         title: this.creator.getLocString("ed.options"),
         template: "svd-toolbar-options",
@@ -67,7 +67,7 @@ export class Commands {
             id: "svd-valid-json",
             visible: true,
             css: ko.computed(() =>
-              this.creator.koGenerateValidJSON() ? "active" : ""
+              this.creator.generateValidJSON ? "active" : ""
             ),
             action: this.creator.generateValidJSONClick,
             title: this.creator.getLocString("ed.generateValidJSON"),
@@ -76,7 +76,7 @@ export class Commands {
             id: "svd-readable-json",
             visible: true,
             css: ko.computed(() =>
-              !this.creator.koGenerateValidJSON() ? "active" : ""
+              !this.creator.generateValidJSON ? "active" : ""
             ),
             action: this.creator.generateReadableJSONClick,
             title: this.creator.getLocString("ed.generateReadableJSON"),
@@ -87,7 +87,7 @@ export class Commands {
     surveyTest: {
       toolbar: {
         id: "svd-test",
-        visible: ko.computed(() => this.creator.koViewType() === "test"),
+        visible: ko.computed(() => this.creator.viewType === "test"),
         title: ko.computed(
           () =>
             this.creator.getLocString("ed.testSurveyWidth") +
@@ -148,7 +148,7 @@ export class Commands {
     state: <any>{
       toolbar: {
         id: "svd-state",
-        visible: this.creator.koShowState,
+        visible: this.creator.showState,
         css: "svd_state",
         innerCss: ko.computed(() => "icon-" + this.creator.koState()),
         title: ko.computed(() =>

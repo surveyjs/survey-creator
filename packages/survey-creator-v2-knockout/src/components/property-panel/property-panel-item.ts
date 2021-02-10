@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyObjectProperty } from "@survey/creator/objectProperty";
+import { SurveyObjectProperty } from "@survey/creator";
 
 import "./property-panel-item.scss";
 const templateHtml = require("./property-panel-item.html");

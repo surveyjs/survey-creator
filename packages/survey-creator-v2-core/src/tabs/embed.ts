@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { SurveyJSON5 } from "../json5";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from "../editor";
+import { CreatorBase } from "../creator-base";
 
 import "./embed.scss";
 var templateHtml = require("./embed.html");
@@ -225,22 +225,23 @@ export class SurveyEmbedingWindow {
 ko.components.register("survey-embed", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: SurveyCreator = params.creator;
-      var model = new SurveyEmbedingWindow();
+      const creator: CreatorBase<Survey.SurveyModel> = params.creator;
+      const model = new SurveyEmbedingWindow();
 
-      var subscrViewType = creator.koViewType.subscribe((viewType) => {
-        if (viewType === "embed") {
+      const subscrViewType = (s, o) => {
+        if (o.name === "viewType" && o.newValue == "embed") {
           var json = creator.getSurveyJSON();
           model.json = json;
-          model.surveyId = creator.surveyId;
-          model.surveyPostId = creator.surveyPostId;
+          // model.surveyId = creator.surveyId;
+          // model.surveyPostId = creator.surveyPostId;
           model.generateValidJSON = creator.getOptions().generateValidJSON;
           model.show();
         }
-      });
+      };
+      creator.onPropertyChanged.add(subscrViewType);
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        subscrViewType.dispose();
+        creator.onPropertyChanged.remove(subscrViewType);
         model.dispose();
       });
 

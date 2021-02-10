@@ -5,10 +5,10 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "jsx": "react",
-    "composite": true
+    "jsx": "react"
   },
   "include": [
     "src/**/*.ts"

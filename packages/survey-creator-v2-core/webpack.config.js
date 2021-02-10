@@ -66,7 +66,8 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    "survey-knockout": "^" + packageJson.version,
+    //"survey-knockout": "^" + packageJson.version,
+    "survey-knockout": "^1.8.23",
     knockout: "^3.5.0",
   },
   devDependencies: {},
@@ -213,7 +214,7 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreator",
+      library: options.libraryName || "SurveyCreatorCore",
       libraryTarget: "umd",
       umdNamedDefine: true,
     },

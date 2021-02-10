@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyStringPropertyEditor } from "@survey/creator/propertyEditors/propertyEditorFactory";
+import { SurveyStringPropertyEditor } from "@survey/creator";
 
 import "./text-editor.scss";
 const template = require("./text-editor.html");

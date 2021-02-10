@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { getNodesFromKoComponentInfo } from "src/utils/utils";
+//import { getNodesFromKoComponentInfo } from "src/utils/utils";
 import { Survey } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
 import { ElementWrapperFactory } from "../../element-wrapper-factory";
@@ -25,7 +25,7 @@ export class TabDesignerViewModel {
       newPage["_addToSurvey"] = undefined;
       this.survey.addPage(newPage);
       this.createNewPage();
-    }
+    };
     this._newPage(newPage);
   }
 
@@ -45,7 +45,7 @@ export class TabDesignerViewModel {
   }
   get showNewPage() {
     const pages = this.survey.pages;
-    return pages.length === 0 || pages[pages.length-1].rows.length > 0;
+    return pages.length === 0 || pages[pages.length - 1].rows.length > 0;
   }
   dispose() {
     this._surveySubscription.dispose();

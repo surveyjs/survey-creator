@@ -2206,7 +2206,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
     
       <svc-tabbed-menu
-        params="items: creator.tabs, viewType: creator.koViewType"
+        params="items: creator.tabs, viewType: creator.viewType"
       >
         <!-- ko foreach: items -->
         
@@ -2250,6 +2250,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-undo"
           >
             
     
@@ -2318,6 +2319,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-redo"
           >
             
     
@@ -2386,6 +2388,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-settings"
           >
             
     
@@ -2464,6 +2467,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-clear"
           >
             
     
@@ -2532,6 +2536,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-search"
           >
             
     
@@ -2600,6 +2605,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <span
             class="sv-action"
             data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css, attr: { id: $data.id }, visible: $data.visible === undefined || $data.visible"
+            id="icon-preview"
           >
             
     
@@ -2713,7 +2719,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
         <div
           class="svc-creator-tab"
-          data-bind="visible: $parent.creator.koViewType() == id"
+          data-bind="visible: $parent.creator.viewType == id"
         >
           
         

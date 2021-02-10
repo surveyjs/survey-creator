@@ -496,7 +496,8 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.options.onPropertyValueChanged(q.property, this.obj, options.value);
+    this.options.onSurveyElementPropertyValueChanged(q.property, this.obj, options.value);
+    // this.options.onPropertyValueChanged(q.property, this.obj, options.value);
   }
 
   private onGetQuestionTitleActions(options) {
@@ -639,7 +640,8 @@ export class PropertyGridModel {
     var rowObj = options.row.editingObj;
     if (!rowObj) return;
     var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
-    this.options.onPropertyValueChanged(
+    this.options.onSurveyElementPropertyValueChanged(
+    //this.options.onPropertyValueChanged(
       <any>prop,
       options.row.editingObj,
       options.value
