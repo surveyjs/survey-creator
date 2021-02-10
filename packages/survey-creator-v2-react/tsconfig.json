@@ -1,31 +1,31 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "module": "es2015",
+    "sourceMap": true,
+    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "experimentalDecorators": true,
+    "importHelpers": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@survey/creator/*": ["../survey-creator-v2-core/src/*"],
-      "survey-knockout": ["./node_modules/survey-knockout"]
+      "survey-knockout": ["./node_modules/survey-knockout"],
+      "survey-react": ["./node_modules/survey-react"]
      }
   },
-  "include": [
-    "src"
-  ]
+  "exclude": [
+    "node_modules",
+    "build",
+    "stories",
+    "examples",
+    ".storybook",
+    "**/node_modules",
+    "**/tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": ["src/**/*.ts"]
 }

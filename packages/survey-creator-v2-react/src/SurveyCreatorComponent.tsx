@@ -11,7 +11,7 @@ import { CreatorBase } from "@survey/creator/src/creator-base";
 
 Survey.StylesManager.applyTheme("modern");
 
-class SurveyCreatorComponent extends SurveyElementBase {
+export class SurveyCreatorComponent extends SurveyElementBase {
   private json = {
     completedHtml:
       "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -120,7 +120,7 @@ class SurveyCreatorComponent extends SurveyElementBase {
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
-            <ActionBar items={creator.toolbarItems}></ActionBar>
+            <ActionBar items={toolbarItems}></ActionBar>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
@@ -141,12 +141,10 @@ class SurveyCreatorComponent extends SurveyElementBase {
   }
 }
 
-export function createReactSurveyCreator(json: string) {
+export function createReactSurveyCreator(json: any) {
   //const survey = new Survey.Model(this.json);
-  const creator = new CreatorBase<Survey.Survey>();
+  const creator = new CreatorBase<Survey.Survey>({});
   //creator.survey = survey;
   creator.JSON = json;
   return creator;
 }
-
-export default SurveyCreatorComponent;
