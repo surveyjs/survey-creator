@@ -7,7 +7,7 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
-import { property } from "survey-knockout";
+import { property, propertyArray } from "survey-knockout";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -336,7 +336,8 @@ export class CreatorBase<T extends { [index: string]: any }>
    */
   public showPageSelectorInToolbar = false;
 
-  public tabs = ko.observableArray();
+  @propertyArray() tabs: Array<Survey.IActionBarItem>;
+  //public tabs = ko.observableArray();
 
   /**
    * Returns the localized string by its id
@@ -398,66 +399,57 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
 
   protected initTabs() {
-    ko.computed(() => {
-      this.tabs([]);
-      if (this.showDesignerTab) {
-        this.tabs.push({
-          name: "designer",
-          title: this.getLocString("ed.designer"),
-          template: "se-tab-designer",
-          data: this,
-          action: () => this.makeNewViewActive("designer"),
-        });
-      }
-      if (this.showTestSurveyTab) {
-        this.tabs.push({
-          name: "test",
-          title: this.getLocString("ed.testSurvey"),
-          template: "se-tab-test",
-          data: this,
-          action: () => this.makeNewViewActive("test"),
-        });
-      }
-      if (this.showLogicTab) {
-        this.tabs.push({
-          name: "logic",
-          title: this.getLocString("ed.logic"),
-          template: "se-tab-logic",
-          data: this,
-          action: () => this.makeNewViewActive("logic"),
-        });
-      }
-      if (this.showJSONEditorTab) {
-        this.tabs.push({
-          name: "editor",
-          title: this.getLocString("ed.jsonEditor"),
-          template: "se-tab-json-editor",
-          data: this,
-          action: () => this.makeNewViewActive("editor"),
-        });
-      }
-      if (this.showEmbeddedSurveyTab) {
-        this.tabs.push({
-          name: "embed",
-          title: this.getLocString("ed.embedSurvey"),
-          template: "se-tab-embed",
-          data: this,
-          action: () => this.makeNewViewActive("embed"),
-        });
-      }
-      if (this.showTranslationTab) {
-        this.tabs.push({
-          name: "translation",
-          title: this.getLocString("ed.translation"),
-          template: "se-tab-translation",
-          data: this,
-          action: () => this.makeNewViewActive("translation"),
-        });
-      }
-      if (this.tabs().length > 0) {
-        this.viewType = this.tabs()[0].name;
-      }
-    });
+    const tabs: Array<Survey.IActionBarItem> = [];
+    if (this.showDesignerTab) {
+      tabs.push({
+        id: "designer",
+        title: this.getLocString("ed.designer"),
+        template: "svc-tab-designer",
+        data: this,
+        action: () => this.makeNewViewActive("designer"),
+      });
+    }
+    if (this.showTestSurveyTab) {
+      tabs.push({
+        id: "test",
+        title: this.getLocString("ed.testSurvey"),
+        template: "svc-tab-test",
+        data: this,
+        action: () => this.makeNewViewActive("test"),
+      });
+    }
+    if (this.showLogicTab) {
+      tabs.push({
+        id: "logic",
+        title: this.getLocString("ed.logic"),
+        template: "svc-tab-logic",
+        data: this,
+        action: () => this.makeNewViewActive("logic"),
+      });
+    }
+    if (this.showEmbeddedSurveyTab) {
+      tabs.push({
+        id: "embed",
+        title: this.getLocString("ed.embedSurvey"),
+        template: "svc-tab-embed",
+        data: this,
+        action: () => this.makeNewViewActive("embed"),
+      });
+    }
+    if (this.showTranslationTab) {
+      tabs.push({
+        id: "translation",
+        title: this.getLocString("ed.translation"),
+        template: "svc-tab-translation",
+        data: this,
+        action: () => this.makeNewViewActive("translation"),
+      });
+    }
+
+    this.tabs = tabs;
+    if (this.tabs.length > 0) {
+      this.viewType = this.tabs[0].id;
+    }
   }
 
   public getOptions() {

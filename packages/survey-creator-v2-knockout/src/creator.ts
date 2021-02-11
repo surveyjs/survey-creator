@@ -192,61 +192,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
       );
     }
   }
-  protected initTabs() {
-    ko.computed(() => {
-      const tabs: IActionBarItem[] = [];
 
-      if (this.showDesignerTab) {
-        tabs.push({
-          id: "designer",
-          title: this.getLocString("ed.designer"),
-          template: "svc-tab-designer",
-          data: this,
-          action: () => this.makeNewViewActive("designer"),
-        });
-      }
-      if (this.showTestSurveyTab) {
-        tabs.push({
-          id: "test",
-          title: this.getLocString("ed.testSurvey"),
-          template: "svc-tab-test",
-          data: this,
-          action: () => this.makeNewViewActive("test"),
-        });
-      }
-      if (this.showLogicTab) {
-        tabs.push({
-          id: "logic",
-          title: this.getLocString("ed.logic"),
-          template: "svc-tab-logic",
-          data: this,
-          action: () => this.makeNewViewActive("logic"),
-        });
-      }
-      if (this.showEmbeddedSurveyTab) {
-        tabs.push({
-          id: "embed",
-          title: this.getLocString("ed.embedSurvey"),
-          template: "svc-tab-embed",
-          data: this,
-          action: () => this.makeNewViewActive("embed"),
-        });
-      }
-      if (this.showTranslationTab) {
-        tabs.push({
-          id: "translation",
-          title: this.getLocString("ed.translation"),
-          template: "svc-tab-translation",
-          data: this,
-          action: () => this.makeNewViewActive("translation"),
-        });
-      }
-      this.tabs(tabs);
-      if (this.tabs.peek().length > 0) {
-        this.viewType = this.tabs.peek()[0].id;
-      }
-    });
-  }
   private initTabsPlugin(): void {
     if (this.showJSONEditorTab) {
       if (TabJsonEditorAcePlugin.hasAceEditor()) {
