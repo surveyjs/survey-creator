@@ -1,12 +1,12 @@
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { TabbedMenuViewModel, TabbedMenuItemViewModel } from "../src/entries";
+import { ActionBarViewModel } from "survey-knockout";
 
 export default {
   title: "Tabbed Menu",
   decorators: [withKnobs],
-  "ko-components": [TabbedMenuItemViewModel, TabbedMenuViewModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [ActionBarViewModel], // Fake component usage in order for component to be actually imported
   parameters: {
     design: {
       type: "figma",
@@ -27,6 +27,7 @@ export const TabbedMenuItem = () => {
         action: () => {
           alert("action");
         },
+        disabled: boolean("Disabled", false),
       },
     },
   };
@@ -43,6 +44,7 @@ export const TabbedMenuItemSelected = () => {
         action: () => {
           alert("action");
         },
+        disabled: boolean("Disabled", false),
       },
     },
   };
@@ -56,6 +58,7 @@ export const TabbedMenuItemDisabled = () => {
       item: {
         title: text("Title", "Disabled Menu Item"),
         disabled: boolean("Disabled", true),
+        active: boolean("Selected", false),
         action: () => {
           alert("action");
         },

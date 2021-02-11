@@ -25,8 +25,7 @@ export * from "../components/toolbox/toolbox-item";
 
 export * from "../creator";
 
-import "../utils/design.scss";
-import "../utils/layout.scss";
+import "@survey/creator/survey-creator.css";
 
 // export * from "@survey/creator/tabs/embed";
 

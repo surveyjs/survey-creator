@@ -60,7 +60,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
-  protected surveyValue = ko.observable<T>();
+  @property() surveyValue: T;
 
   protected newQuestions: Array<any> = [];
   protected newPanels: Array<any> = [];
@@ -391,11 +391,17 @@ export class CreatorBase<T extends { [index: string]: any }>
   protected canSwitchViewType(newType: string) {
     return true;
   }
+  public static defaultNewSurveyText: string =
+    '{ "pages": [ { "name": "page1"}] }';
 
   constructor(protected options: ICreatorOptions) {
     super();
     this.setOptions(options);
     this.initTabs();
+    this.initSurveyWithJSON(
+      JSON.parse(CreatorBase.defaultNewSurveyText),
+      false
+    );
   }
 
   protected initTabs() {
@@ -407,6 +413,7 @@ export class CreatorBase<T extends { [index: string]: any }>
         template: "svc-tab-designer",
         data: this,
         action: () => this.makeNewViewActive("designer"),
+        active: () => this.viewType === "designer",
       });
     }
     if (this.showTestSurveyTab) {
@@ -416,6 +423,7 @@ export class CreatorBase<T extends { [index: string]: any }>
         template: "svc-tab-test",
         data: this,
         action: () => this.makeNewViewActive("test"),
+        active: () => this.viewType === "test",
       });
     }
     if (this.showLogicTab) {
@@ -425,6 +433,7 @@ export class CreatorBase<T extends { [index: string]: any }>
         template: "svc-tab-logic",
         data: this,
         action: () => this.makeNewViewActive("logic"),
+        active: () => this.viewType === "logic",
       });
     }
     if (this.showEmbeddedSurveyTab) {
@@ -434,6 +443,7 @@ export class CreatorBase<T extends { [index: string]: any }>
         template: "svc-tab-embed",
         data: this,
         action: () => this.makeNewViewActive("embed"),
+        active: () => this.viewType === "embed",
       });
     }
     if (this.showTranslationTab) {
@@ -443,6 +453,7 @@ export class CreatorBase<T extends { [index: string]: any }>
         template: "svc-tab-translation",
         data: this,
         action: () => this.makeNewViewActive("translation"),
+        active: () => this.viewType === "translation",
       });
     }
 
@@ -580,8 +591,19 @@ export class CreatorBase<T extends { [index: string]: any }>
   /**
    * The editing survey object (Survey.Survey)
    */
-  public get survey() {
-    return this.surveyValue();
+  public get survey(): T {
+    return this.surveyValue;
+  }
+
+  protected initSurveyWithJSON(json: any, clearState: boolean) {
+    this.setSurvey(this.createSurvey(json));
+  }
+
+  public setSurvey(survey: T) {
+    survey.setDesignMode(true);
+    this.surveyValue = survey;
+    //this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
+    //this.selectElement(survey);
   }
 
   private getSurveyTextFromDesigner() {
@@ -646,17 +668,16 @@ export class CreatorBase<T extends { [index: string]: any }>
     return options.displayName;
   }
 
-  public createSurvey(
-    json: any = {},
-    reason: string = "designer",
-    surveyType = Survey.Survey
-  ) {
-    var survey = new surveyType(json);
+  public createSurvey(json: any = {}, reason: string = "designer"): T {
+    const survey: T = this.createSurveyCore(json); // new surveyType(json);
     if (reason != "designer" && reason != "test") {
-      survey.locale = editorLocalization.currentLocale;
+      (<any>survey).locale = editorLocalization.currentLocale;
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
+  }
+  protected createSurveyCore(json: any = {}): T {
+    throw new Error("createSurveyCore method should be overridden/implemented");
   }
 
   public setModified(options: any = null) {}
@@ -670,8 +691,6 @@ export class CreatorBase<T extends { [index: string]: any }>
       newValue: newQuestion,
     });
   }
-
-  protected initSurveyWithJSON(json: any, clearState: boolean) {}
 
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.

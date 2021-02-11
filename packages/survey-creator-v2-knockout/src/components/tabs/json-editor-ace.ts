@@ -104,6 +104,7 @@ export class TabJsonEditorAcePlugin
         creator.makeNewViewActive("editor");
         this.activate();
       },
+      active: () => creator.viewType === "editor",
     });
     creator.plugins["editor"] = this;
   }

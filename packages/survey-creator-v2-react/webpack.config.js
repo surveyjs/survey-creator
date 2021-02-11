@@ -148,7 +148,7 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey-creator": path.resolve(__dirname, "./src/index.tsx"),
+      "survey-creator": path.resolve(__dirname, "./src/entries/index.ts"),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],

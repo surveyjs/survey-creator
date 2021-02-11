@@ -27,18 +27,11 @@ export interface ICreatorPlugin {
 export class SurveyCreator extends CreatorBase<Survey> {
   @property() testProp: string;
   private propertyGrid: PropertyGrid;
-  public static defaultNewSurveyText: string =
-    '{ "pages": [ { "name": "page1"}] }';
 
   public plugins: { [name: string]: ICreatorPlugin } = {};
 
   constructor(options: ICreatorOptions = {}) {
     super(options);
-
-    this.initSurveyWithJSON(
-      JSON.parse(SurveyCreator.defaultNewSurveyText),
-      false
-    );
 
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
@@ -47,7 +40,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
     );
     this.toolboxCategories(this.toolbox.koCategories());
     this.propertyGrid = new PropertyGrid(this.survey, this);
-    this.selection.subscribe((element) => (this.propertyGrid.obj = element));
 
     this.toolbarItems.push(
       ...[
@@ -126,21 +118,20 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   toolboxCategories = ko.observableArray<object>();
 
-  protected initSurveyWithJSON(json: any, clearState: boolean) {
-    this.setSurvey(<any>this.createSurvey(json));
+  protected createSurveyCore(json: any = {}): Survey {
+    return new Survey(json);
   }
 
-  setSurvey(survey: Survey) {
-    survey.setDesignMode(true);
-    this.surveyValue(<any>survey);
+  public setSurvey(survey: Survey) {
+    super.setSurvey(survey);
     this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
     this.selectElement(survey);
   }
 
-  selection = ko.observable();
+  @property() selection: Base;
 
   public selectElement(element: any) {
-    this.selection(element);
+    this.selection = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
       this.currentPage = <Page>element;
     } else if (!!element["page"]) {
@@ -148,20 +139,20 @@ export class SurveyCreator extends CreatorBase<Survey> {
     } else {
       this.currentPage = undefined;
     }
+
+    if (this.propertyGrid) this.propertyGrid.obj = element;
   }
 
   isElementSelected(element: Base) {
-    return element === this.selection();
+    return element === this.selection;
   }
 
-  private _currentPage = ko.observable<Page>();
-  get currentPage() {
-    return this._currentPage();
-  }
-  set currentPage(page: Page) {
-    this.survey.currentPage = page;
-    this._currentPage(page);
-  }
+  @property({
+    onSet: (val, target) => {
+      target.survey.currentPage = val;
+    },
+  })
+  currentPage: Page;
 
   //TODO: refactor this method and remove
   public _dummySetText(text: string): void {
@@ -323,7 +314,10 @@ export class SurveyCreator extends CreatorBase<Survey> {
       });
     }
 
-    this.onDefineElementMenuItems.fire(this, { obj: element, items: items });
+    this.onDefineElementMenuItems.fire(this, {
+      obj: element,
+      items: items,
+    });
 
     return items;
   }

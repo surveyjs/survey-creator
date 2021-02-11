@@ -21,5 +21,10 @@ export * from "../propertyEditors/propertyEditorFactory";
 export * from "../objectProperty";
 export * from "../textWorker";
 
+import "../components/tabbed-menu/tabbed-menu.scss";
+import "../components/tabbed-menu/tabbed-menu-item.scss";
+import "../utils/design.scss";
+import "../utils/layout.scss";
+
 export * from "../svgbundle";
 export * from "../creator-base";
