@@ -424,7 +424,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       tabs.push({
         id: "designer",
         title: this.getLocString("ed.designer"),
-        template: "svc-tab-designer",
+        component: "svc-tab-designer",
         data: this,
         action: () => this.makeNewViewActive("designer"),
         active: () => this.viewType === "designer",
@@ -434,7 +434,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       tabs.push({
         id: "test",
         title: this.getLocString("ed.testSurvey"),
-        template: "svc-tab-test",
+        component: "svc-tab-test",
         data: this,
         action: () => this.makeNewViewActive("test"),
         active: () => this.viewType === "test",
@@ -444,7 +444,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       tabs.push({
         id: "logic",
         title: this.getLocString("ed.logic"),
-        template: "svc-tab-logic",
+        component: "svc-tab-logic",
         data: this,
         action: () => this.makeNewViewActive("logic"),
         active: () => this.viewType === "logic",
@@ -454,7 +454,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       tabs.push({
         id: "embed",
         title: this.getLocString("ed.embedSurvey"),
-        template: "svc-tab-embed",
+        component: "svc-tab-embed",
         data: this,
         action: () => this.makeNewViewActive("embed"),
         active: () => this.viewType === "embed",
@@ -464,7 +464,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       tabs.push({
         id: "translation",
         title: this.getLocString("ed.translation"),
-        template: "svc-tab-translation",
+        component: "svc-tab-translation",
         data: this,
         action: () => this.makeNewViewActive("translation"),
         active: () => this.viewType === "translation",

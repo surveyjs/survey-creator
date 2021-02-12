@@ -98,7 +98,7 @@ export class TabJsonEditorAcePlugin
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
-      template: "svc-tab-json-editor-ace",
+      component: "svc-tab-json-editor-ace",
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");

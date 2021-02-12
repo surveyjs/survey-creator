@@ -64,7 +64,7 @@ export class TabJsonEditorTextareaPlugin
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
-      template: "svc-tab-json-editor-textarea",
+      component: "svc-tab-json-editor-textarea",
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");

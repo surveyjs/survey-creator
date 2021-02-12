@@ -44,9 +44,8 @@ class TabbedMenuComponent extends SurveyElementBase {
       style.display = "none";
     }
 
-    const componentName: string = item.component || "svc-tabbed-menu-item";
     const component = ReactElementFactory.Instance.createElement(
-      componentName,
+      "svc-tabbed-menu-item",
       { item: item }
     );
 

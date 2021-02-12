@@ -9,9 +9,9 @@ export class TabDesignerComponent extends SurveyElementBase {
   constructor(props) {
     super(props);
 
-    const creator: CreatorBase<Survey.Model> = this.props.creator;
-    const survey: Survey.Model = this.props.survey;
-    const data: any = this.props.survey;
+    // const creator: CreatorBase<Survey.Model> = this.props.creator;
+    // const survey: Survey.Model = this.props.survey;
+    // const data: any = this.props.survey;
   }
 
   protected getStateElement(): Base {

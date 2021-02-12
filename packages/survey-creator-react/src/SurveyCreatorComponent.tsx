@@ -62,16 +62,23 @@ export class SurveyCreatorComponent extends SurveyElementBase {
     return <>{tabs}</>;
     //return <Survey.Survey model={this.creator.survey} />;
   }
+  private unwrap<T>(value: T | (() => T)): T {
+    if (typeof value !== "function") {
+      return value;
+    } else {
+      return (value as () => T)();
+    }
+  }
   renderCreatorTab(tab: IActionBarItem) {
     const creator: CreatorBase<Survey.Model> = this.props.creator;
     let style: CSSProperties = {};
-    if (tab.visible !== undefined && !tab.visible) {
+    //if (tab.visible !== undefined && !tab.visible) {
+    if (!this.unwrap(tab.active)) {
       style.display = "none";
     }
 
     const component = ReactElementFactory.Instance.createElement(
-      //tab.component,
-      tab.template,
+      tab.component,
       { creator: creator, survey: creator.survey, data: tab.data }
     );
     return (
