@@ -1,9 +1,7 @@
 .git/*
 .vs/*
 node_modules/*
-*.cmd
 .idea
-*.cmd
 package/*
 build/*
 tmp/*
