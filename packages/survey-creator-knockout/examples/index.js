@@ -6,7 +6,7 @@ if (!window["%hammerhead%"]) {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false
   };
-  let creator = new SurveyCreator.SurveyCreator(options);
+  let creator = new SurveyCreatorKnockout.SurveyCreator(options);
   let json = {
     questions: [
       {

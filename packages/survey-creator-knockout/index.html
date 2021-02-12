@@ -1,13 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to SurveyJS Creator V2</title>
+    <meta charset="utf-8" />
+    <title>survey.js Creator Test</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/worker-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/mode-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ext-language_tools.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+
+    <!-- <script src="https://unpkg.com/jquery"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
+
+    <!-- <script src="https://unpkg.com/survey-knockout/survey.ko.js"></script> -->
+    <script src="../node_modules/survey-knockout/survey.ko.js"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/survey-knockout/modern.css"/> -->
+    <link rel="stylesheet" href="../node_modules/survey-knockout/modern.css" />
+
+    <script src="../build/survey-creator-knockout.js"></script>
+    <link rel="stylesheet" href="../build/survey-creator-knockout.css" />
   </head>
 
   <body>
-    <h2>You can check the following examples of SurveyJS Creator V2</h2>
-    <ul>
-      <li><a href="/examples/index.html">SurveyJS Creator</a></li>
-    </ul>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+      <survey-creator params="creator: creator"></survey-creator>
+    </div>
   </body>
+  <script>
+    Survey.StylesManager.applyTheme("modern");
+    var options = {
+      // showTestSurveyTab: false,
+      // showJSONEditorTab: false
+    };
+    var creator = new SurveyCreatorKnockout.SurveyCreator(options);
+    var json = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+        },
+      ],
+    };
+    creator.JSON = json;
+    ko.applyBindings({ creator: creator });
+  </script>
 </html>

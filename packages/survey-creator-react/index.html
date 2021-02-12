@@ -100,11 +100,11 @@
         showQuestionNumbers: "off",
       };
 
-      var creator = SurveyCreator.createReactSurveyCreator(json);
+      var creator = SurveyCreatorReact.createReactSurveyCreator(json);
 
       ReactDOM.render(
         <React.StrictMode>
-          <SurveyCreator.SurveyCreatorComponent creator={creator} />
+          <SurveyCreatorReact.SurveyCreatorComponent creator={creator} />
         </React.StrictMode>,
         document.getElementById("root")
       );
