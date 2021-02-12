@@ -3,7 +3,7 @@ import { SurveyCreator } from "../../creator";
 import { getLocString } from "@survey/creator";
 import { IQuestionToolboxItem } from "@survey/creator";
 
-import "./toolbox-item.scss";
+//import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-knockout";
 import { ToolboxViewModel } from "./toolbox";
 const template = require("./toolbox-item.html");

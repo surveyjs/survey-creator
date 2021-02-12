@@ -6,7 +6,7 @@ import {
 } from "survey-knockout";
 import { SurveyCreator } from "../../creator";
 import { AdaptiveElement } from "survey-knockout";
-import "./toolbox.scss";
+//import "./toolbox.scss";
 import { IQuestionToolboxItem } from "@survey/creator";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";

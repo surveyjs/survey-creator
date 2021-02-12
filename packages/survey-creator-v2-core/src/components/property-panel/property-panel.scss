@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 
-svc-property-panel {
+svc-property-panel, .svc-property-panel {
   display: block;
   font-family: $font-family;
   min-width: 300px;

@@ -8,6 +8,7 @@ import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
 import { Base, IActionBarItem, property, propertyArray } from "survey-knockout";
+import { QuestionToolbox } from "./toolbox";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -396,6 +397,11 @@ export class CreatorBase<T extends { [index: string]: any }>
   public static defaultNewSurveyText: string =
     '{ "pages": [ { "name": "page1"}] }';
 
+  public toolbox: QuestionToolbox;
+  public get toolboxCategories(): Array<any> {
+    return this.toolbox.categories;
+  }
+
   constructor(protected options: ICreatorOptions) {
     super();
     this.setOptions(options);
@@ -404,6 +410,11 @@ export class CreatorBase<T extends { [index: string]: any }>
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
       false
+    );
+    this.toolbox = new QuestionToolbox(
+      this.options && this.options.questionTypes
+        ? this.options.questionTypes
+        : null
     );
   }
 

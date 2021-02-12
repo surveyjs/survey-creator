@@ -4,15 +4,11 @@ import {
   Base,
   Page,
   PopupModel,
-  IActionBarItem,
   ListModel,
   property,
   ImplementorBase,
-  ISurvey,
-  propertyArray,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
-import { QuestionToolbox } from "@survey/creator";
 import { CreatorBase, ICreatorOptions } from "@survey/creator";
 import { isPropertyVisible, propertyExists } from "@survey/creator";
 import { QuestionConverter } from "@survey/creator";
@@ -34,24 +30,13 @@ export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
 
-    this.toolbox = new QuestionToolbox(
-      this.options && this.options.questionTypes
-        ? this.options.questionTypes
-        : null
-    );
     new ImplementorBase(this.toolbox);
-
-    this.toolboxCategories = this.toolbox.categories;
     this.propertyGrid = new PropertyGrid(this.survey, this);
 
     new ImplementorBase(this);
 
     this.initTabsPlugin();
   }
-
-  toolbox: QuestionToolbox;
-
-  @propertyArray() toolboxCategories: Array<any>;
 
   protected createSurveyCore(json: any = {}): Survey {
     return new Survey(json);

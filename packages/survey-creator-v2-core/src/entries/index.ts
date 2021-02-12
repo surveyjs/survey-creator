@@ -23,6 +23,12 @@ export * from "../textWorker";
 
 import "../components/tabbed-menu/tabbed-menu.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";
+import "../components/property-panel/property-panel.scss";
+import "../components/property-panel/property-panel-item.scss";
+import "../components/toolbox/toolbox.scss";
+import "../components/toolbox/toolbox-item.scss";
+import "../components/creator.scss";
+import "../survey-theme/survey.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 

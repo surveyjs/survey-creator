@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../creator";
 
-import "./creator.scss";
+//import "./creator.scss";
 const template = require("./creator.html");
 // import template from "./creator.html";
 

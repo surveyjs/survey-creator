@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react";
+//import { ImplementorBase } from "survey-knockout";
 import {
   AdaptiveActionBarItemWrapper,
   AdaptiveElement,
@@ -15,9 +16,8 @@ class TabbedMenuComponent extends SurveyElementBase {
     return this.adaptiveElement;
   }
 
-  constructor(props: Array<IActionBarItem>) {
+  constructor(props) {
     super(props);
-
     this.adaptiveElement.items = this.props.items.map(
       (item: IActionBarItem) => {
         return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
@@ -31,18 +31,15 @@ class TabbedMenuComponent extends SurveyElementBase {
     );
     return <>{items}</>;
   }
-  renderItem(item: IActionBarItem): JSX.Element {
+  renderItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
     if (item.css) {
       css += " " + item.css;
     }
 
-    let style: CSSProperties = {};
-    // if (item.isVisible) {
-    //   style.visibility = "visible";
-    // } else {
-    //   style.visibility = "hidden";
-    // }
+    const style: CSSProperties = {
+      visibility: item.isVisible ? "visible" : "hidden",
+    };
     if (item.visible !== undefined && !item.visible) {
       style.display = "none";
     }
@@ -83,14 +80,14 @@ class TabbedMenuItemComponent extends SurveyElementBase {
   render(): JSX.Element {
     const item = this.item;
 
-    let className: string = "";
+    let className: string = "svc-tabbed-menu-item";
     if (item.active) className += " svc-tabbed-menu-item--selected";
     if (item.enabled !== undefined && !item.enabled)
       className += " svc-tabbed-menu-item--disabled";
     let titleClassName: string = "svc-text svc-text--normal";
     if (item.active) titleClassName += " svc-text--bold";
     return (
-      <div className="svc-tabbed-menu-item" onClick={() => item.action(item)}>
+      <div className={className} onClick={() => item.action(item)}>
         <span className={titleClassName}>{item.title}</span>
       </div>
     );
