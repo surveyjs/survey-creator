@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { IActionBarItem } from "survey-knockout";
+import { Base, IActionBarItem, property, propertyArray } from "survey-knockout";
 import { CreatorBase } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 
@@ -41,7 +41,7 @@ export interface IQuestionToolboxItem extends IActionBarItem {
 /**
  * The list of Toolbox items.
  */
-export class QuestionToolbox {
+export class QuestionToolbox extends Base {
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -111,23 +111,36 @@ export class QuestionToolbox {
   private itemsValue: Array<IQuestionToolboxItem> = [];
 
   koItems = ko.observableArray();
-  koCategories = ko.observableArray();
-  koActiveCategory = ko.observable("");
-  koHasCategories = ko.observable(false);
-  koCanCollapseCategories = ko.observable(true);
+  @propertyArray() categories: Array<any>;
+  /**
+   * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty.
+   * @see allowExpandMultipleCategories
+   * @see expandCategory
+   * @see collapseCategory
+   */
+  @property({
+    defaultValue: "",
+    onSet: (val: string, target: QuestionToolbox) => {
+      target.onActiveCategoryChanged(val);
+    },
+  })
+  activeCategory: string;
+  @property({ defaultValue: false }) hasCategories: boolean;
+  @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   constructor(
     supportedQuestions: Array<string> = null,
     public creator: CreatorBase<Survey.Survey> = null
   ) {
+    super();
     this.createDefaultItems(supportedQuestions);
-    var self = this;
-    this.koActiveCategory.subscribe(function (newValue) {
-      for (var i = 0; i < self.koCategories().length; i++) {
-        var category = self.koCategories()[i];
-        (<any>category).koCollapsed((<any>category).name !== newValue);
-      }
-    });
+  }
+  private onActiveCategoryChanged(newValue: string) {
+    const categories: Array<any> = this.categories;
+    for (var i = 0; i < categories.length; i++) {
+      var category = categories[i];
+      (<any>category).koCollapsed((<any>category).name !== newValue);
+    }
   }
   /**
    * The Array of Toolbox items as Text JSON.
@@ -306,7 +319,7 @@ export class QuestionToolbox {
   }
   public set keepAllCategoriesExpanded(val: boolean) {
     this.keepAllCategoriesExpandedValue = val;
-    this.koCanCollapseCategories(!this.keepAllCategoriesExpanded);
+    this.canCollapseCategories = !this.keepAllCategoriesExpanded;
     this.updateCategoriesState();
   }
   private updateCategoriesState() {
@@ -318,8 +331,8 @@ export class QuestionToolbox {
         this.expandAllCategories();
       }
     } else {
-      if (this.koCategories().length > 0) {
-        this.activeCategory = (<any>this.koCategories()[0]).name;
+      if (this.categories.length > 0) {
+        this.activeCategory = (<any>this.categories[0]).name;
       }
     }
   }
@@ -352,12 +365,6 @@ export class QuestionToolbox {
    * @see expandCategory
    * @see collapseCategory
    */
-  public get activeCategory(): string {
-    return this.koActiveCategory();
-  }
-  public set activeCategory(val: string) {
-    this.koActiveCategory(val);
-  }
   private doCategoryClick(categoryName: string) {
     if (this.keepAllCategoriesExpanded) return;
     if (this.allowExpandMultipleCategories) {
@@ -412,13 +419,13 @@ export class QuestionToolbox {
     this.expandCollapseAllCategories(true);
   }
   private expandCollapseAllCategories(isCollapsed: boolean) {
-    var categories = this.koCategories();
+    const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
       (<any>categories[i]).koCollapsed(isCollapsed);
     }
   }
   private getCategoryByName(categoryName: string): any {
-    var categories = this.koCategories();
+    const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
       var category = <any>categories[i];
       if (category.name === categoryName) return category;
@@ -430,7 +437,7 @@ export class QuestionToolbox {
     this.koItems(this.itemsValue);
     var categories = [];
     var categoriesHash = {};
-    var prevActiveCategory = this.koActiveCategory();
+    var prevActiveCategory = this.activeCategory;
     var self = this;
     for (var i = 0; i < this.itemsValue.length; i++) {
       var item = this.itemsValue[i];
@@ -451,19 +458,19 @@ export class QuestionToolbox {
       }
       categoriesHash[categoryName].items.push(item);
     }
-    this.koCategories(categories);
+    this.categories = categories;
     if (!this.allowExpandMultipleCategories) {
       if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
-        this.koActiveCategory(prevActiveCategory);
+        this.activeCategory = prevActiveCategory;
       } else {
-        this.koActiveCategory(categories.length > 0 ? categories[0].name : "");
+        this.activeCategory = categories.length > 0 ? categories[0].name : "";
       }
     } else {
       if (categories.length > 0) {
         categories[0].koCollapsed(false);
       }
     }
-    this.koHasCategories(categories.length > 1);
+    this.hasCategories = categories.length > 1;
   }
   private indexOf(name: string) {
     for (var i = 0; i < this.itemsValue.length; i++) {

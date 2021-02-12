@@ -9,6 +9,7 @@ import {
   property,
   ImplementorBase,
   ISurvey,
+  propertyArray,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionToolbox } from "@survey/creator";
@@ -38,85 +39,19 @@ export class SurveyCreator extends CreatorBase<Survey> {
         ? this.options.questionTypes
         : null
     );
-    this.toolboxCategories(this.toolbox.koCategories());
+    new ImplementorBase(this.toolbox);
+
+    this.toolboxCategories = this.toolbox.categories;
     this.propertyGrid = new PropertyGrid(this.survey, this);
 
-    this.toolbarItems.push(
-      ...[
-        {
-          id: "icon-undo",
-          iconName: "icon-undo",
-          action: () => {},
-          title: "Undo",
-          showTitle: false,
-        },
-        {
-          id: "icon-redo",
-          iconName: "icon-redo",
-          action: () => {},
-          title: "Redo",
-          showTitle: false,
-        },
-        {
-          id: "icon-settings",
-          iconName: "icon-settings",
-          needSeparator: true,
-          action: () => this.selectElement(this.survey),
-          active: () => this.isElementSelected(this.survey),
-          title: "Settings",
-          showTitle: false,
-        },
-        {
-          id: "icon-clear",
-          iconName: "icon-clear",
-          action: () => {
-            alert("clear pressed");
-          },
-          active: false,
-          title: "Clear",
-          showTitle: false,
-        },
-        {
-          id: "icon-search",
-          iconName: "icon-search",
-          action: () => {
-            this.showSearch = !this.showSearch;
-          },
-          active: () => this.showSearch,
-          title: "Search",
-          showTitle: false,
-        },
-        {
-          id: "icon-preview",
-          iconName: "icon-preview",
-          needSeparator: true,
-          css: () =>
-            this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
-          action: () => {
-            this.makeNewViewActive("test");
-          },
-          active: false,
-          title: "Preview",
-        },
-      ]
-    );
     new ImplementorBase(this);
-    this.initTabsPlugin();
-  }
 
-  private _showSearch = ko.observable<boolean>(false);
-  get showSearch() {
-    return this._showSearch();
-  }
-  set showSearch(val: boolean) {
-    this._showSearch(val);
+    this.initTabsPlugin();
   }
 
   toolbox: QuestionToolbox;
 
-  toolbarItems = ko.observableArray<IActionBarItem>();
-
-  toolboxCategories = ko.observableArray<object>();
+  @propertyArray() toolboxCategories: Array<any>;
 
   protected createSurveyCore(json: any = {}): Survey {
     return new Survey(json);
@@ -143,7 +78,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (this.propertyGrid) this.propertyGrid.obj = element;
   }
 
-  isElementSelected(element: Base) {
+  protected isElementSelectedCore(element: any): boolean {
     return element === this.selection;
   }
 

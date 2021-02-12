@@ -2766,7 +2766,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   params="creator: creator, survey: creator.survey"
 >
   <svc-toolbox
-    params="categories: creator.toolboxCategories(), creator: creator"
+    params="categories: creator.toolboxCategories, creator: creator"
   >
     <div
       class="svc-toolbox"

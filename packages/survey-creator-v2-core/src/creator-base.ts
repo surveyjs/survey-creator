@@ -7,7 +7,7 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
-import { property, propertyArray } from "survey-knockout";
+import { Base, IActionBarItem, property, propertyArray } from "survey-knockout";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -56,11 +56,13 @@ export class CreatorBase<T extends { [index: string]: any }>
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showState: boolean;
+  @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
   @property() surveyValue: T;
+  @propertyArray() toolbarItems: Array<IActionBarItem>;
 
   protected newQuestions: Array<any> = [];
   protected newPanels: Array<any> = [];
@@ -398,6 +400,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     super();
     this.setOptions(options);
     this.initTabs();
+    this.initToolbar();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
       false
@@ -461,6 +464,70 @@ export class CreatorBase<T extends { [index: string]: any }>
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
     }
+  }
+  private initToolbar() {
+    const items: Array<IActionBarItem> = [];
+    items.push(
+      ...[
+        {
+          id: "icon-undo",
+          iconName: "icon-undo",
+          action: () => {},
+          title: "Undo",
+          showTitle: false,
+        },
+        {
+          id: "icon-redo",
+          iconName: "icon-redo",
+          action: () => {},
+          title: "Redo",
+          showTitle: false,
+        },
+        {
+          id: "icon-settings",
+          iconName: "icon-settings",
+          needSeparator: true,
+          action: () => this.selectElement(this.survey),
+          active: () => this.isElementSelectedCore(this.survey),
+          title: "Settings",
+          showTitle: false,
+        },
+        {
+          id: "icon-clear",
+          iconName: "icon-clear",
+          action: () => {
+            alert("clear pressed");
+          },
+          active: false,
+          title: "Clear",
+          showTitle: false,
+        },
+        {
+          id: "icon-search",
+          iconName: "icon-search",
+          action: () => {
+            this.showSearch = !this.showSearch;
+          },
+          active: () => this.showSearch,
+          title: "Search",
+          showTitle: false,
+        },
+        {
+          id: "icon-preview",
+          iconName: "icon-preview",
+          needSeparator: true,
+          css: () =>
+            this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+          action: () => {
+            this.makeNewViewActive("test");
+          },
+          active: false,
+          title: "Preview",
+        },
+      ]
+    );
+
+    this.toolbarItems = items;
   }
 
   public getOptions() {
@@ -853,6 +920,12 @@ export class CreatorBase<T extends { [index: string]: any }>
     new SurveyLogic(<any>this.survey, <any>this).removeQuestion(name);
   }
 
+  public isElementSelected(element: Base): boolean {
+    return this.isElementSelectedCore(element);
+  }
+  protected isElementSelectedCore(element: any): boolean {
+    return false;
+  }
   public selectElement(element: any) {}
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
