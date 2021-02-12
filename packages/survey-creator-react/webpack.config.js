@@ -17,7 +17,7 @@ var svgStoreUtils = require(path.resolve(
 
 var banner = [
   "SurveyJS Creator v" + packageJson.version,
-  "(c) 2015-2020 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
@@ -25,14 +25,14 @@ var banner = [
 var dts_banner = [
   "Type definitions for SurveyJS Creator JavaScript library v" +
     packageJson.version,
-  "(c) 2015-2020 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
   "",
 ].join("\n");
 
 var buildPlatformJson = {
-  name: "survey-creator",
+  name: packageJson.name,
   version: packageJson.version,
   description:
     "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
@@ -48,13 +48,13 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
-    "survey-creator.css",
-    "survey-creator.min.css",
-    "survey-creator.js",
-    "survey-creator.d.ts",
-    "survey-creator.min.js",
+    packageJson.name + ".css",
+    packageJson.name + ".min.css",
+    packageJson.name + ".js",
+    packageJson.name + ".d.ts",
+    packageJson.name + ".min.js",
   ],
-  main: "survey-creator.js",
+  main: packageJson.name + ".js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git",
@@ -62,7 +62,7 @@ var buildPlatformJson = {
   engines: {
     node: ">=0.10.0",
   },
-  typings: "survey-creator.d.ts",
+  typings: packageJson.name + ".d.ts",
   peerDependencies: {
     "ace-builds": "^1.4.12",
   },
@@ -106,7 +106,7 @@ module.exports = function (options) {
     } else if (1 == percentage) {
       if (isProductionBuild) {
         dts.bundle({
-          name: "../../survey-creator",
+          name: "../../" + packageJson.name,
           main:
             buildPath +
             "typings/entries/index.d.ts",
@@ -116,7 +116,7 @@ module.exports = function (options) {
 
         replace.sync(
           {
-            files: buildPath + "survey-creator.d.ts",
+            files: buildPath + packageJson.name + ".d.ts",
             from: /export let\s+\w+:\s+\w+;/,
             to: "",
           },
@@ -124,7 +124,7 @@ module.exports = function (options) {
             if (error) {
               return console.error("Error occurred:", error);
             }
-            console.log("check me :     " + buildPath + "survey-creator.d.ts");
+            console.log("check me :     " + buildPath + packageJson.name + ".d.ts");
             console.log("Modified files:", changes.join(", "));
           }
         );
@@ -148,7 +148,7 @@ module.exports = function (options) {
   var config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      "survey-creator": path.resolve(__dirname, "./src/entries/index.ts"),
+      [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -218,7 +218,7 @@ module.exports = function (options) {
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreator",
+      library: options.libraryName || "SurveyCreatorReact",
       libraryTarget: "umd",
       umdNamedDefine: true,
     },
