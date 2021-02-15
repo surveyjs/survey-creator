@@ -534,7 +534,11 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     var props = obj.bindings.getProperties();
     var res = [];
     for (var i = 0; i < props.length; i++) {
-      res.push({ value: props[i].name });
+      var propName = props[i].name;
+      res.push({
+        value: propName,
+        text: editorLocalization.getPropertyName(propName),
+      });
     }
     return res;
   }

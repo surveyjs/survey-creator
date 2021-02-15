@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import {
   Survey,
+  SurveyModel,
   Base,
   Page,
   PopupModel,
@@ -9,12 +10,28 @@ import {
   ImplementorBase,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
-import { CreatorBase, ICreatorOptions } from "@survey/creator";
+import {
+  CreatorBase,
+  ISurveyCreatorOptions,
+  ICreatorOptions,
+} from "@survey/creator";
 import { isPropertyVisible, propertyExists } from "@survey/creator";
 import { QuestionConverter } from "@survey/creator";
-import { PropertyGrid } from "@survey/creator";
+import { PropertyGridModel } from "@survey/creator";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+
+export class PropertyGrid extends PropertyGridModel {
+  public koSurvey: ko.Observable<SurveyModel> = ko.observable();
+
+  constructor(obj: Base, options: ISurveyCreatorOptions) {
+    super(obj, options);
+    this.koSurvey(this.survey);
+    this.objValueChangedCallback = () => {
+      this.koSurvey(this.survey);
+    };
+  }
+}
 
 export interface ICreatorPlugin {
   activate: () => void;
