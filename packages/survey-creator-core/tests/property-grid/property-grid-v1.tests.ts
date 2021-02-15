@@ -1719,39 +1719,23 @@ test("property editor propertyHelpText", () => {
   ).toBeTruthy();
 });
 
-/* TODO there is no bindings property editor. We need to implement
-  test("property editor propertyHelpText", () => {
-    var tester = new BindingsTester();
-    tester.bindings.setBinding("property1", "q1");
-    var propertyGrid = new PropertyGridModelTester(tester);
-    var validatorsQuestion = <QuestionMatrixDynamicModel>(
-      propertyGrid.survey.getQuestionByName("bindings")
-    );
-    
-    assert.equal(
-      propEditor.items.length,
-      2,
-      "There are two bindings properties in the object"
-    );
-    assert.equal(propEditor.items[0].value, "q1", "Bindings set correctly");
-    assert.equal(
-      propEditor.items[0].elementSelector.koElements().length,
-      2,
-      "There are two elements"
-    );
-    assert.equal(
-      propEditor.items[0].displayName,
-      "Property 1",
-      "displayName set correctly"
-    );
-    propEditor.items[0].value = "q2";
-    assert.equal(
-      tester.bindings.getValueNameByPropertyName("property1"),
-      "q2",
-      "Bindings two-way works correctly"
-    );
-  });
-*/
+test("property editor propertyHelpText", () => {
+  var tester = new BindingsTester();
+  tester.bindings.setBinding("property1", "q1");
+  var propertyGrid = new PropertyGridModelTester(tester);
+  var bindingsQuestion = <QuestionMatrixDropdownModel>(
+    propertyGrid.survey.getQuestionByName("bindings")
+  );
+  expect(bindingsQuestion.rows).toHaveLength(2);
+  var rows = bindingsQuestion.visibleRows;
+  var cellQuestion = rows[0].cells[0].question;
+  expect(cellQuestion.value).toEqual("q1");
+  expect(cellQuestion.choices).toHaveLength(2);
+  expect(bindingsQuestion.rows[0].value).toEqual("property1");
+  expect(bindingsQuestion.rows[0].text).toEqual("Property 1");
+  cellQuestion.value = "q2";
+  expect(tester.bindings.getValueNameByPropertyName("property1")).toEqual("q2");
+});
 
 test("property text editor dataList attribute", () => {
   var question = new QuestionTextModel("q1");
