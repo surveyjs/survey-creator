@@ -7,8 +7,16 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
-import { Base, IActionBarItem, property, propertyArray } from "survey-knockout";
+import {
+  Base,
+  IActionBarItem,
+  ListModel,
+  PopupModel,
+  property,
+  propertyArray,
+} from "survey-knockout";
 import { QuestionToolbox } from "./toolbox";
+import { isPropertyVisible, propertyExists } from "./utils/utils";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -939,6 +947,13 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
   public selectElement(element: any) {}
 
+  public clickToolboxItem(json: any) {
+    if (!this.readOnly) {
+      var newElement = this.createNewElement(json);
+      this.doClickQuestionCore(newElement);
+      this.selectElement(newElement);
+    }
+  }
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
     var elements = parent.elements;
@@ -1178,5 +1193,124 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
   stopUndoRedoTransaction() {
     //TODO
+  }
+
+  public getContextActions(element: any /*ISurveyElement*/) {
+    if (this.readOnly) {
+      return [];
+    }
+
+    let opts: any = element["allowingOptions"];
+    if (!opts) opts = {};
+    let items = [];
+
+    if (opts.allowChangeType === undefined || opts.allowChangeType) {
+      var currentType = element.getType();
+      var convertClasses = QuestionConverter.getConvertToClasses(
+        currentType,
+        this.toolbox.itemNames
+      );
+      var allowChangeType = convertClasses.length > 0;
+      if (!element.isPanel && !element.isPage) {
+        var createTypeByClass = (className) => {
+          return {
+            name: this.getLocString("qt." + className),
+            value: className,
+          };
+        };
+        var availableTypes = [createTypeByClass(currentType)];
+        for (var i = 0; i < convertClasses.length; i++) {
+          var className = convertClasses[i];
+          availableTypes.push(createTypeByClass(className));
+        }
+        const popupModel = new PopupModel(
+          "sv-list",
+          new ListModel(
+            availableTypes.map((type) => ({
+              title: type.name,
+              id: type.value,
+            })),
+            (item: any) => {
+              this.convertCurrentObject(element, item.id);
+            },
+            false
+          ),
+          "bottom",
+          "right"
+        );
+
+        items.push({
+          id: "convertTo",
+          css: "sv-action--first sv-action-bar-item--secondary",
+          iconName: "icon-change_16x16",
+          // title: this.getLocString("qt." + currentType),
+          title: this.getLocString("survey.convertTo"),
+          enabled: allowChangeType,
+          component: "sv-action-bar-item-dropdown",
+          action: (newType) => {
+            popupModel.toggleVisibility();
+          },
+          popupModel: popupModel,
+        });
+      }
+    }
+
+    if (opts.allowCopy === undefined || opts.allowCopy) {
+      items.push({
+        id: "duplicate",
+        title: this.getLocString("survey.duplicate"),
+        action: () => {
+          this.fastCopyQuestion(element);
+        },
+      });
+    }
+
+    if (
+      (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
+      typeof element.isRequired !== "undefined" &&
+      propertyExists(element, "isRequired") &&
+      isPropertyVisible(element, "isRequired")
+    ) {
+      var isRequired = ko.computed(() => element.isRequired);
+      items.push({
+        id: "isrequired",
+        css: ko.computed(() =>
+          element.isRequired ? "sv-action-bar-item--secondary" : ""
+        ),
+        title: this.getLocString("pe.isRequired"),
+        iconName: ko.computed(() => {
+          if (isRequired()) {
+            return "icon-switchactive_16x16";
+          }
+          return "icon-switchinactive_16x16";
+        }),
+        action: () => {
+          if (this.isCanModifyProperty(<any>element, "isRequired")) {
+            element.isRequired = !element.isRequired;
+          }
+        },
+      });
+    }
+
+    if (items.length > 0) {
+      items.push({ component: "sv-action-bar-separator" });
+    }
+
+    if (opts.allowDelete === undefined || opts.allowDelete) {
+      items.push({
+        id: "delete",
+        title: this.getLocString("pe.delete"),
+        action: () => {
+          this.deleteObject(element);
+        },
+      });
+    }
+
+    this.onDefineElementMenuItems.fire(this, {
+      obj: element,
+      items: items,
+    });
+
+    return items;
   }
 }

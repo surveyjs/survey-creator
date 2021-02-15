@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 
-import "./button.scss";
+//import "./button.scss";
 const template = require("./button.html");
 // import template from "./button.html";
 // console.log(template);
