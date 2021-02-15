@@ -1,13 +1,5 @@
-import { SurveyTextWorker } from "@survey/creator";
+import { IJsonEditorModel, SurveyTextWorker } from "@survey/creator";
 import { ICreatorPlugin, SurveyCreator } from "../../creator";
-
-export interface IJsonEditorModel {
-  isJSONChanged: boolean;
-  text: string;
-  onEditorActivated(): void;
-  processErrors(text: string): void;
-  readOnly: boolean;
-}
 
 export abstract class JsonEditorBaseModel implements IJsonEditorModel {
   public isJSONChanged: boolean = false;
