@@ -5,8 +5,16 @@ import React from "react";
 import { CreatorSurveyPageComponent } from "../page";
 import { SurveyCreatorToolbox } from "../toolbox/toolbox";
 
-export class TabDesignerComponent extends SurveyElementBase {
-  constructor(props) {
+interface ITabDesignerComponentProps {
+  creator: CreatorBase<Survey.Model>;
+  survey: Survey.Model;
+}
+
+export class TabDesignerComponent extends SurveyElementBase<
+  ITabDesignerComponentProps,
+  any
+> {
+  constructor(props: ITabDesignerComponentProps) {
     super(props);
 
     // const creator: CreatorBase<Survey.Model> = this.props.creator;
@@ -15,7 +23,7 @@ export class TabDesignerComponent extends SurveyElementBase {
   }
 
   protected getStateElement(): Base {
-    return this.props.creator;
+    return (this.props.creator as any) as Base;
   }
 
   render(): JSX.Element {
@@ -81,5 +89,8 @@ export class TabDesignerComponent extends SurveyElementBase {
 }
 
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
-  return React.createElement(TabDesignerComponent, props);
+  return React.createElement(
+    TabDesignerComponent,
+    (props as any) as ITabDesignerComponentProps
+  );
 });

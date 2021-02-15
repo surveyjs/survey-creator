@@ -16,15 +16,22 @@ import { CreatorBase, ICreatorOptions } from "@survey/creator";
 
 Survey.StylesManager.applyTheme("modern");
 
-export class SurveyCreatorComponent extends SurveyElementBase {
-  constructor(props: any) {
+interface ISurveyCreatorComponentProps {
+  creator: SurveyCreator;
+}
+
+export class SurveyCreatorComponent extends SurveyElementBase<
+  ISurveyCreatorComponentProps,
+  any
+> {
+  constructor(props: ISurveyCreatorComponentProps) {
     super(props);
   }
   get creator(): CreatorBase<Survey.Model> {
     return this.props.creator;
   }
   protected getStateElement(): Base {
-    return this.props.creator;
+    return (this.props.creator as any) as Base;
   }
 
   render() {

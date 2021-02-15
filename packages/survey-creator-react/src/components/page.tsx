@@ -3,7 +3,7 @@ import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
 import { CreatorBase } from "@survey/creator";
 import React from "react";
 
-export class CreatorSurveyPageComponent extends SurveyElementBase {
+export class CreatorSurveyPageComponent extends SurveyElementBase<any, any> {
   constructor(props) {
     super(props);
     // const survey: Survey.ReactSurveyModel;

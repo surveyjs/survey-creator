@@ -27,13 +27,22 @@ import {
 //   }
 // }
 
-export class SurveyCreatorToolbox extends SurveyElementBase {
+interface ISurveyCreatorToolboxProps {
+  categories: Array<any>;
+  creator: CreatorBase<Survey.Model>;
+  items: Array<IActionBarItem>;
+}
+
+export class SurveyCreatorToolbox extends SurveyElementBase<
+  ISurveyCreatorToolboxProps,
+  any
+> {
   private adaptiveElement = new AdaptiveElement();
   private manager: VerticalResponsibilityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
   private updateVisibleItems: any;
 
-  constructor(props: any) {
+  constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
 
     const sourceItems: Array<IActionBarItem> = this.props.items;

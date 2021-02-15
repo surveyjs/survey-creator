@@ -9,7 +9,14 @@ import {
   SurveyElementBase,
 } from "survey-react";
 
-class TabbedMenuComponent extends SurveyElementBase {
+interface ITabbedMenuComponentProps {
+  items: Array<IActionBarItem>;
+}
+
+class TabbedMenuComponent extends SurveyElementBase<
+  ITabbedMenuComponentProps,
+  any
+> {
   private adaptiveElement = new AdaptiveElement();
 
   protected getStateElement(): Base {
@@ -65,7 +72,14 @@ class TabbedMenuComponent extends SurveyElementBase {
      */
   }
 }
-class TabbedMenuItemComponent extends SurveyElementBase {
+
+interface ITabbedMenuItemComponentProps {
+  item: AdaptiveActionBarItemWrapper;
+}
+class TabbedMenuItemComponent extends SurveyElementBase<
+  ITabbedMenuItemComponentProps,
+  any
+> {
   get item(): AdaptiveActionBarItemWrapper {
     return this.props.item;
   }
