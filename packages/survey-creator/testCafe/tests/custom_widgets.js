@@ -1,11 +1,10 @@
 import { init } from "../settings";
-import { Selector, ClientFunction } from "testcafe";
-const assert = require("assert");
+import { Selector } from "testcafe";
 const title = `custom widgets`;
 
 const url = "http://127.0.0.1:7777/example/customWidget.html";
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   var creatorOptions = {
     questionTypes: ["text", "radiogroup", "dropdown"],
     showJSONEditorTab: false

@@ -1,13 +1,12 @@
 import { url, init } from "../settings";
 import { Selector, ClientFunction } from "testcafe";
-const assert = require("assert");
 const title = `toolbox customization`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
 });
 
-test(`showJSONEditorTab`, async t => {
+test(`asnwer custom question in test tab`, async t => {
   const addItem = ClientFunction(() => {
     const itemAsJson = {
       name: "countries",
@@ -28,7 +27,6 @@ test(`showJSONEditorTab`, async t => {
 
   await addItem();
 
-  const tab = await getTestTab();
   const dropdown = Selector("#surveyjsExample select").nth(3);
   const optionCuba = dropdown.find("option[value=Cuba]");
 

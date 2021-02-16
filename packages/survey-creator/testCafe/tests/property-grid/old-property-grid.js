@@ -1,8 +1,8 @@
 import { url, init } from "../../settings";
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 const title = `old-property-grid`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`Property grid: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   var creatorOptions = {
     showElementEditorAsPropertyGrid: false,
   };

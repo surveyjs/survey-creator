@@ -150,7 +150,6 @@ const initCreatorEvents = ClientFunction(() => {
 
   window.applyToolboxItems = function() {
     creator.toolbox.clearItems();
-    var newItems = [];
     for (var i = 0; i < allToolboxItems.length; i++) {
       if (allToolboxItems[i].isUsed) {
         creator.toolbox.addItem(allToolboxItems[i]);
@@ -164,7 +163,7 @@ const initCreatorEvents = ClientFunction(() => {
   };
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
   await initCreatorEvents();
 });
