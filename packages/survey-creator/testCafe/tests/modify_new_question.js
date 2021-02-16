@@ -54,7 +54,7 @@ const initCreatorEvents = ClientFunction(() => {
   window.guid = guid;
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await initProperties();
   await init();
   await initCreatorEvents();

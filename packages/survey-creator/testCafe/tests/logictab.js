@@ -3,7 +3,7 @@ import page from "../page-model";
 import { Selector } from "testcafe";
 const title = `logictab_editor`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   var creatorOptions = { showLogicTab: true };
   await init(creatorOptions);
 });

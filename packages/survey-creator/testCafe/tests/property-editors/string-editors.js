@@ -2,7 +2,7 @@ import { url, init } from "../../settings";
 import { Selector } from "testcafe";
 const title = `string-editors`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 

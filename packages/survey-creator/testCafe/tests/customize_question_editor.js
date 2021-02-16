@@ -1,5 +1,5 @@
 import { url, init } from "../settings";
-import { Selector, ClientFunction } from "testcafe";
+import { ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `customize question editor`;
 
@@ -21,7 +21,7 @@ const initCreatorDefinitions = ClientFunction(() => {
   ];
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await initCreatorDefinitions();
   await init();
 });

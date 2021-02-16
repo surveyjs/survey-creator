@@ -2,7 +2,7 @@ import { url, init } from '../../settings';
 import { Selector, ClientFunction } from 'testcafe';
 const title = `switch property editor`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
     await init();
 });
 

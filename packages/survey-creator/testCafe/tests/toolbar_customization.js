@@ -20,7 +20,7 @@ const initModifyToolbar = ClientFunction(() => {
   });
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   var options = { showTestSurveyTab: false };
   await init(options);
   await initModifyToolbar();
