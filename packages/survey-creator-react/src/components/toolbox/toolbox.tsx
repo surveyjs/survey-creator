@@ -129,7 +129,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
       style.display = "none";
     }
     return (
-      <div className={className} style={style}>
+      <div className={className} style={style} key={item.id}>
         {item.needSeparator ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}

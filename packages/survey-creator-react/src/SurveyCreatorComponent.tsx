@@ -9,8 +9,12 @@ import {
   ActionBar,
   Base,
   IActionBarItem,
+  Question,
   ReactElementFactory,
+  ReactQuestionFactory,
   SurveyElementBase,
+  SurveyError,
+  SurveyLocStringViewer,
 } from "survey-react";
 import { CreatorBase, ICreatorOptions } from "@survey/creator";
 
@@ -112,10 +116,44 @@ class SurveyCreator extends CreatorBase<Survey.Model> {
   protected createSurveyCore(json: any = {}): Survey.Model {
     return new Survey.Model(json);
   }
+  //ISurveyCreator
+  public createQuestionElement(question: Question): JSX.Element {
+    return ReactQuestionFactory.Instance.createQuestion(
+      question.isDefaultRendering()
+        ? question.getTemplate()
+        : question.getComponentName(),
+      {
+        question: question,
+        isDisplayMode: question.isReadOnly,
+        creator: this,
+      }
+    );
+  }
+  public renderError(
+    key: string,
+    error: SurveyError,
+    cssClasses: any
+  ): JSX.Element {
+    return (
+      <div key={key}>
+        <span className={cssClasses.error.icon} aria-hidden="true" />
+        <span className={cssClasses.error.item}>
+          <SurveyLocStringViewer locStr={error.locText} />
+        </span>
+      </div>
+    );
+  }
+  public questionTitleLocation(): string {
+    return this.survey.questionTitleLocation;
+  }
+  public questionErrorLocation(): string {
+    return this.survey.questionErrorLocation;
+  }
 }
 
 export function createReactSurveyCreator(json: any) {
   const creator = new SurveyCreator({});
-  creator.JSON = json;
+  //creator.JSON = json;
+  creator.setSurvey(new Survey.Model(json));
   return creator;
 }
