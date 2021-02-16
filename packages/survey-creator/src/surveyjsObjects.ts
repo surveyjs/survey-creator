@@ -3,6 +3,7 @@ import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
 import { findParentNode } from "./utils/utils";
 import { StylesManager } from "./stylesmanager";
+import { PageModel } from "survey-knockout";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -166,6 +167,20 @@ function panelBaseOnCreating(self: any) {
   });
 }
 
+function pageOnCreating(page: PageModel) {
+  if (page.disableDesignActions === true) return;
+  page["allowingOptions"] = {
+    allowAdd: true,
+    allowDelete: true,
+    allowEdit: true,
+    allowCopy: true,
+    //allowAddToToolbox: true,
+    //allowDragging: true,
+    //allowChangeType: true,
+    //allowShowHideTitle: true,
+    //allowChangeRequired: true,
+  };
+}
 function elementOnCreating(surveyElement: any) {
   if (surveyElement.disableDesignActions === true) return;
   surveyElement.allowingOptions = {
@@ -534,6 +549,12 @@ questionPrototype["onCreating"] = function () {
   elementOnCreating(this);
 };
 
+var pagePrototype = Survey.Page.prototype;
+
+pagePrototype["onCreating"] = function () {
+  pageOnCreating(this);
+};
+
 questionPrototype["onSelectedElementChanged"] = function () {
   if (getSurvey(this) == null) return;
   this.koIsSelected(getSurvey(this)["selectedElementValue"] == this);
@@ -552,7 +573,7 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
     "hasSelectAll",
     "colCount",
     "titleLocation",
-    "choicesFromQuestion"
+    "choicesFromQuestion",
   ].forEach((propertyName) =>
     this.question.registerFunctionOnPropertyValueChanged(
       propertyName,
@@ -561,5 +582,5 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   );
 };
 
-
-Survey.LocalizableString["editableRenderer"] = Survey.LocalizableString["defaultRenderer"];
+Survey.LocalizableString["editableRenderer"] =
+  Survey.LocalizableString["defaultRenderer"];

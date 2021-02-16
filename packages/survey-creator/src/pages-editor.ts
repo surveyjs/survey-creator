@@ -77,23 +77,54 @@ export class PagesEditor {
     this.creator.toolbarItems.unshift(<any>item);
   }
 
+  isAllowedForSelectedPage(what: string): boolean {
+    this.creator.survey.updateElementAllowingOptions(this._selectedPage());
+
+    const options = this._selectedPage()["allowingOptions"];
+    if (!options) {
+      return true;
+    }
+    const value = options[what];
+    if (value === undefined) {
+      return true;
+    }
+    return value;
+  }
+  get canAddPage(): boolean {
+    return this.isAllowedForSelectedPage("allowAdd");
+  }
+
   addPage = () => {
     return this.creator.addPage();
   };
+
+  get canCopyPage(): boolean {
+    return this.isAllowedForSelectedPage("allowCopy");
+  }
 
   copyPage = (page: Survey.PageModel) => {
     this.creator.copyPage(page);
   };
 
+  get canDeletePage(): boolean {
+    return !this.isLastPage() && this.isAllowedForSelectedPage("allowDelete");
+  }
+
   deletePage = () => {
     this.creator.deletePage();
   };
 
+  // get canMovePage(): boolean {
+  //   return this.isAllowedForSelectedPage("allowDragging");
+  // }
   movePage = (page: Survey.PageModel, indexFrom: number) => {
     this.selectedPage(page);
     this.creator.movePage(page, indexFrom);
   };
 
+  get canEditPage(): boolean {
+    return this.isAllowedForSelectedPage("allowEdit");
+  }
   showPageSettings(page: Survey.PageModel) {
     this.creator.showQuestionEditor(page);
   }
