@@ -1,8 +1,7 @@
 import * as ko from "knockout";
-import { SurveyTextWorker, JsonEditorBaseModel } from "@survey/creator";
+import { SurveyTextWorker, ICreatorPlugin, JsonEditorBaseModel, TabJsonEditorBasePlugin } from "@survey/creator";
 import { getLocString } from "@survey/creator";
-import { ICreatorPlugin, SurveyCreator } from "../../creator";
-import { TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import { SurveyCreator } from "../../creator";
 import "./json-editor-ace.scss";
 const template: any = require("./json-editor-ace.html");
 // import template from "./json-editor-ace.html";

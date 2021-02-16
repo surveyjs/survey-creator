@@ -1,5 +1,5 @@
 import { SurveyModel } from "survey-knockout";
-import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker } from "../../textWorker";
 
 export interface IJsonEditorModel {
@@ -41,5 +41,26 @@ export abstract class JsonEditorBaseModel implements IJsonEditorModel {
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
+  }
+}
+
+export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
+  implements ICreatorPlugin {
+  public model: TModel;
+  constructor(private creator: CreatorBase<SurveyModel>) {}
+  public activate(): void {
+    this.model.text = this.creator.text;
+    this.model.onEditorActivated();
+    this.model.isJSONChanged = false;
+  }
+  public deactivate(): boolean {
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+    if (!textWorker.isJsonCorrect) {
+      return false;
+    }
+    if (!this.model.readOnly && this.model.isJSONChanged) {
+      this.creator._dummySetText(this.model.text);
+    }
+    return true;
   }
 }

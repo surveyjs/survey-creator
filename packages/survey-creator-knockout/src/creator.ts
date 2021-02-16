@@ -4,19 +4,16 @@ import {
   SurveyModel,
   Base,
   Page,
-  PopupModel,
-  ListModel,
   property,
   ImplementorBase,
 } from "survey-knockout";
 import { DragDropHelper } from "./dragdrophelper";
 import {
-  CreatorBase,
   ISurveyCreatorOptions,
   ICreatorOptions,
+  ICreatorPlugin,
+  CreatorBase
 } from "@survey/creator";
-import { isPropertyVisible, propertyExists } from "@survey/creator";
-import { QuestionConverter } from "@survey/creator";
 import { PropertyGridModel } from "@survey/creator";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
@@ -31,11 +28,6 @@ export class PropertyGrid extends PropertyGridModel {
       this.koSurvey(this.survey);
     };
   }
-}
-
-export interface ICreatorPlugin {
-  activate: () => void;
-  deactivate?: () => boolean;
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
@@ -90,16 +82,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
     },
   })
   currentPage: Page;
-
-  //TODO: refactor this method and remove
-  public _dummySetText(text: string): void {
-    //should work with JSON5
-    //var textWorker = new SurveyTextWorker(this.text);
-    //this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
-
-    //works only with JSON
-    this.initSurveyWithJSON(JSON.parse(text), true);
-  }
 
   dragDropHelper: DragDropHelper;
 
