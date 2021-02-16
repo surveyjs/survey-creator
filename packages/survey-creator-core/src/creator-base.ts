@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { QuestionConverter } from "./questionconverter";
