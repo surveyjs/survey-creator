@@ -16,7 +16,7 @@ const setCustomEditor = ClientFunction(() => {
   });
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await setCustomEditor();
   await init();
 });

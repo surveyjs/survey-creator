@@ -18,7 +18,6 @@ import {
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
   settings,
 } from "../settings";
 import { editorLocalization } from "../editorLocalization";

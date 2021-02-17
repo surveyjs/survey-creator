@@ -3,7 +3,7 @@ import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `one-selected`;
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async (ctx) => {
+fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
   await init();
 });
 

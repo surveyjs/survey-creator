@@ -8,7 +8,6 @@ var templateHtml = require("./results.html");
 var rowTemplateHtml = require("./results-table-row.html");
 
 export class SurveyResultsModel {
-
   constructor(private survey: Survey.SurveyModel) {
     this.koResultText(JSON.stringify(survey.data, null, 4));
     var addCollapsed = (items: any[]) => {

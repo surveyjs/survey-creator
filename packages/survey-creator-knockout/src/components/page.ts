@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { PageModel } from "survey-knockout";
 import { SurveyCreator } from "../creator";
 
-import "./page.scss";
+//import "./page.scss";
 const template = require("./page.html");
 // import template from "./page.html";
 
@@ -17,7 +17,7 @@ export class PageViewModel {
     ko.computed(() => {
       this._page = page;
       this._isGhost(typeof this.page["_addToSurvey"] === "function");
-      if(!this._isGhost()) {
+      if (!this._isGhost()) {
         this.actions(creator.getContextActions(this.page));
       }
       this.page.onFirstRendering();
@@ -31,7 +31,7 @@ export class PageViewModel {
   }
 
   private addGhostPage() {
-    if(this._isGhost()) {
+    if (this._isGhost()) {
       this._isGhost(false);
       this.page["_addToSurvey"]();
     }
@@ -44,15 +44,17 @@ export class PageViewModel {
     model.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
-    if(!model._isGhost()) {
+    if (!model._isGhost()) {
       model.creator.selectElement(model.page);
     }
   }
   get css() {
-    if(this._isGhost()) {
+    if (this._isGhost()) {
       return "svc-page__content--new";
     }
-    return this.creator.isElementSelected(this.page) ? "svc-page__content--selected" : "";
+    return this.creator.isElementSelected(this.page)
+      ? "svc-page__content--selected"
+      : "";
   }
   dragOver(model: PageViewModel, event: DragEvent) {
     if (!event["markEvent"]) {
@@ -77,7 +79,7 @@ ko.components.register("svc-page", {
     createViewModel: (params: any, componentInfo: any) => {
       const creator = params.creator;
       const scrollSubscription = ko.computed(() => {
-        if(creator.isElementSelected(params.page)) {
+        if (creator.isElementSelected(params.page)) {
           componentInfo.element.scrollIntoView();
         }
       });

@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { Question } from "survey-knockout";
 import { SurveyCreator } from "../creator";
 
-import "./question.scss";
+//import "./question.scss";
 const template = require("./question.html");
 // import template from "./question.html";
 
@@ -20,10 +20,11 @@ export class QuestionViewModel {
     model.creator.selectElement(model.question);
   }
   css() {
-    return this.creator.isElementSelected(this.question) ? "svc-question__content--selected" : "";
+    return this.creator.isElementSelected(this.question)
+      ? "svc-question__content--selected"
+      : "";
   }
-  dispose() {
-  }
+  dispose() {}
   get isDraggable() {
     return true;
   }
@@ -89,7 +90,7 @@ ko.components.register("svc-question", {
     createViewModel: (params: any, componentInfo: any) => {
       const creator = params.creator;
       const scrollSubscription = ko.computed(() => {
-        if(creator.isElementSelected(params.question)) {
+        if (creator.isElementSelected(params.question)) {
           // componentInfo.element.scrollIntoView();
         }
       });

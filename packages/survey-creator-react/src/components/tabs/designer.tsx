@@ -16,10 +16,6 @@ export class TabDesignerComponent extends SurveyElementBase<
 > {
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-
-    // const creator: CreatorBase<Survey.Model> = this.props.creator;
-    // const survey: Survey.Model = this.props.survey;
-    // const data: any = this.props.survey;
   }
 
   protected getStateElement(): Base {
@@ -31,16 +27,16 @@ export class TabDesignerComponent extends SurveyElementBase<
     const survey: Survey.Model = this.props.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
-    // const surveyPages = survey.pages.map((page, index) => {
-    //   return (
-    //     <CreatorSurveyPageComponent
-    //       survey={survey}
-    //       page={page}
-    //       creator={creator}
-    //     ></CreatorSurveyPageComponent>
-    //   );
-    //   // this.renderSurveyPage(survey, page, creator);
-    // });
+    const surveyPages = survey.pages.map((page, index) => {
+      return (
+        <CreatorSurveyPageComponent
+          key={page.id}
+          survey={survey}
+          page={page}
+          creator={creator}
+        ></CreatorSurveyPageComponent>
+      );
+    });
 
     return (
       <>
@@ -50,9 +46,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
         <div className={className}>
-          <div className={survey.css.container}>
-            <Survey.Survey model={survey} />
-          </div>
+          <div className={survey.css.container}>{surveyPages}</div>
         </div>
       </>
     );
@@ -79,13 +73,6 @@ export class TabDesignerComponent extends SurveyElementBase<
         ></svc-page-navigator>
        */
   }
-  //   renderSurveyPage(
-  //     survey: Survey.ReactSurveyModel,
-  //     page: Survey.PageModel,
-  //     creator: CreatorBase<Survey.ReactSurveyModel>
-  //   ): JSX.Element {
-  //     return null;
-  //   }
 }
 
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {

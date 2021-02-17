@@ -11,7 +11,7 @@ const addProperty = ClientFunction(() => {
   });
 });
 
-fixture`surveyjseditor: ${title}`.page`${url}`.beforeEach(async ctx => {
+fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await addProperty();
   await init();
 });

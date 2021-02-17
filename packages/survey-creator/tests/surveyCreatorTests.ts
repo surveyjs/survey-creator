@@ -821,6 +821,122 @@ QUnit.test("PagesEditor change question's page", function (assert) {
   assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[1]);
 });
 
+QUnit.test("pagesEditor.canAddPage", function (assert) {
+  var creator = new SurveyCreator();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  assert.equal(
+    pagesEditor.model.canAddPage,
+    true,
+    "page adding is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowAdd = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  assert.equal(pagesEditor.model.canAddPage, false, "page adding is disabled");
+  creator.onElementAllowOperations.remove(handler);
+  assert.equal(pagesEditor.model.canAddPage, false, "page adding is enabled");
+});
+
+QUnit.test("pagesEditor.canCopyPage", function (assert) {
+  var creator = new SurveyCreator();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  assert.equal(
+    pagesEditor.model.canCopyPage,
+    true,
+    "page copying is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowCopy = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  assert.equal(
+    pagesEditor.model.canCopyPage,
+    false,
+    "page copying is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  assert.equal(pagesEditor.model.canCopyPage, false, "page copying is enabled");
+});
+
+QUnit.test("pagesEditor.canEditPage", function (assert) {
+  var creator = new SurveyCreator();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  assert.equal(
+    pagesEditor.model.canEditPage,
+    true,
+    "page editing is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowEdit = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  assert.equal(
+    pagesEditor.model.canEditPage,
+    false,
+    "page editing is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  assert.equal(pagesEditor.model.canEditPage, false, "page editing is enabled");
+});
+
+QUnit.test("pagesEditor.canDeletePage", function (assert) {
+  var creator = new SurveyCreator();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  assert.equal(
+    pagesEditor.model.canDeletePage,
+    false,
+    "page deleting is disallowed by default"
+  );
+
+  pagesEditor.model.addPage();
+
+  assert.equal(
+    pagesEditor.model.canDeletePage,
+    true,
+    "page deleting is allowed"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowDelete = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  assert.equal(
+    pagesEditor.model.canDeletePage,
+    false,
+    "page deleting is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  assert.equal(
+    pagesEditor.model.canDeletePage,
+    false,
+    "page deleting is enabled"
+  );
+});
+
 QUnit.test(
   "Element name should be unique - property grid + Question Editor",
   function (assert) {
@@ -1630,15 +1746,17 @@ QUnit.test(
     const creator = new SurveyCreator(undefined);
     const questionText = new Survey.QuestionText("qt");
     var menuItems = creator.survey.getMenuItems(questionText);
-    var requiredItem = menuItems.filter(i => i.name == "isrequired")[0]
-    assert.notEqual(requiredItem, undefined, "The 'isrequired' is in the menu items");
+    var requiredItem = menuItems.filter((i) => i.name == "isrequired")[0];
+    assert.notEqual(
+      requiredItem,
+      undefined,
+      "The 'isrequired' is in the menu items"
+    );
 
-    creator
-    .onGetPropertyReadOnly
-        .add(function (sender, options) {
-            if(options.property.name == "isRequired"){
-                options.readOnly = "true";
-            }
+    creator.onGetPropertyReadOnly.add(function (sender, options) {
+      if (options.property.name == "isRequired") {
+        options.readOnly = "true";
+      }
     });
     assert.notOk(questionText.isRequired);
     requiredItem.onClick(questionText);
@@ -2039,6 +2157,6 @@ QUnit.test("Set Text property", function (assert) {
 QUnit.test("options.showPagesToolbox", function (assert) {
   var editor = new SurveyCreator();
   assert.equal(editor.showPagesToolbox, true);
-  editor = new SurveyCreator(null, {showPagesToolbox: "none"});
+  editor = new SurveyCreator(null, { showPagesToolbox: "none" });
   assert.equal(editor.showPagesToolbox, false);
 });
