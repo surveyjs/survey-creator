@@ -94,6 +94,8 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   @property({ defaultValue: "designer" }) viewType: string;
 
+  public plugins: { [name: string]: ICreatorPlugin } = {};
+
   /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
    * <br/> sender the survey creator object that fires the event

@@ -1,0 +1,33 @@
+<div>
+  <!-- ko if: $data.koTranslation -->
+    <!-- ko template: { name: 'svd-translation-tab', data: $data.koTranslation} -->
+    <!-- /ko -->
+  <!-- /ko -->
+</div>
+<script type="text/html" id="svd-translation-tab">
+<div class="form-group svd-translation-tab">
+  <div class="svd-vertical-container" role="presentation">
+    <div class="svd-vertical-container__row" role="presentation">
+      <div class="svd-vertical-container__cell" role="presentation">
+        <div class="svd-vertical-container__cell-content-holder">
+          <div
+            class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
+          >
+            <div
+              class="svd-translation-no-strings svd-light-text-color"
+              data-bind="visible:$data.isEmpty"
+            >
+              <span data-bind="text:$data.noStringsText"></span>
+            </div>
+            <!-- ko ifnot: $data.isEmpty -->
+            <svd-translation-group
+              params="model: root"
+            ></svd-translation-group>
+            <!-- /ko -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</script>

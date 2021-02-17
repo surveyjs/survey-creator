@@ -14,9 +14,9 @@ import {
   ICreatorPlugin,
   CreatorBase,
 } from "@survey/creator";
-import { PropertyGridModel } from "@survey/creator";
-import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { PropertyGridModel, TabJsonEditorAcePlugin } from "@survey/creator";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { TabTranslationPlugin } from "./components/tabs/translation";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
@@ -36,8 +36,6 @@ export class PropertyGrid extends PropertyGridModel {
 export class SurveyCreator extends CreatorBase<Survey> {
   @property() testProp: string;
   private propertyGrid: PropertyGrid;
-
-  public plugins: { [name: string]: ICreatorPlugin } = {};
 
   constructor(options: ICreatorOptions = {}) {
     super(options);
@@ -67,6 +65,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         new TabJsonEditorTextareaPlugin(this);
       }
     }
+    new TabTranslationPlugin(this);
   }
 
   protected onViewTypeChanged(newType: string) {
