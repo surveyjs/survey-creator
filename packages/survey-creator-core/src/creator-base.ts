@@ -19,6 +19,8 @@ import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
 import { DragDropHelper } from "./dragdrophelper";
 
+import "./components/creator.scss";
+
 export interface ICreatorOptions {
   [index: string]: any;
 }

@@ -1,6 +1,6 @@
 import * as Survey from "survey-react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
-import { CreatorBase } from "@survey/creator";
+import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import React from "react";
 import { CreatorSurveyPageComponent } from "../page";
 import { SurveyCreatorToolbox } from "../toolbox/toolbox";
@@ -14,8 +14,12 @@ export class TabDesignerComponent extends SurveyElementBase<
   ITabDesignerComponentProps,
   any
 > {
+  private model: TabDesignerViewModel<CreatorBase<Survey.Model>>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
+    this.model = new TabDesignerViewModel<CreatorBase<Survey.Model>>(
+      props.creator as any
+    );
   }
 
   protected getStateElement(): Base {
@@ -37,6 +41,15 @@ export class TabDesignerComponent extends SurveyElementBase<
         ></CreatorSurveyPageComponent>
       );
     });
+
+    surveyPages.push(
+      <CreatorSurveyPageComponent
+        key={this.model.newPage.id}
+        survey={survey}
+        page={this.model.newPage as any}
+        creator={creator}
+      ></CreatorSurveyPageComponent>
+    );
 
     return (
       <>

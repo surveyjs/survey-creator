@@ -2763,7 +2763,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
 exports[`Storyshots Creator design surface content Default 1`] = `
 <svc-tab-designer
-  params="creator: creator, survey: creator.survey"
+  params="creator: creator"
 >
   <svc-toolbox
     params="categories: creator.toolboxCategories, creator: creator"
