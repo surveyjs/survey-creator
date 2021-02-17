@@ -1,4 +1,4 @@
-import { SurveyModel } from "survey-knockout";
+import { Base, SurveyModel } from "survey-knockout";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker } from "../../textWorker";
 
@@ -10,13 +10,15 @@ export interface IJsonEditorModel {
   readOnly: boolean;
 }
 
-export abstract class JsonEditorBaseModel implements IJsonEditorModel {
+export abstract class JsonEditorBaseModel extends Base implements IJsonEditorModel {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
 
-  constructor(protected creator: CreatorBase<SurveyModel>) {}
+  constructor(protected creator: CreatorBase<SurveyModel>) {
+    super();
+  }
 
   public abstract text: string;
   public abstract onEditorActivated(): void;

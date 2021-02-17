@@ -11,11 +11,9 @@ import { DragDropHelper } from "./dragdrophelper";
 import {
   ISurveyCreatorOptions,
   ICreatorOptions,
-  ICreatorPlugin,
   CreatorBase
 } from "@survey/creator";
-import { PropertyGridModel } from "@survey/creator";
-import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { PropertyGridModel, TabJsonEditorAcePlugin } from "@survey/creator";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 
 export class PropertyGrid extends PropertyGridModel {
@@ -33,8 +31,6 @@ export class PropertyGrid extends PropertyGridModel {
 export class SurveyCreator extends CreatorBase<Survey> {
   @property() testProp: string;
   private propertyGrid: PropertyGrid;
-
-  public plugins: { [name: string]: ICreatorPlugin } = {};
 
   constructor(options: ICreatorOptions = {}) {
     super(options);

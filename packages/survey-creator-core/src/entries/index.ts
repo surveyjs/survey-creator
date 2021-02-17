@@ -1,6 +1,7 @@
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
+export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../creator-base";
 export * from "../editorLocalization";
