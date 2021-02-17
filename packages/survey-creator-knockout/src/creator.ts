@@ -13,8 +13,7 @@ import {
   ICreatorOptions,
   CreatorBase
 } from "@survey/creator";
-import { PropertyGridModel, TabJsonEditorAcePlugin } from "@survey/creator";
-import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { PropertyGridModel, TabJsonEditorAcePlugin, TabJsonEditorTextareaPlugin } from "@survey/creator";
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
