@@ -1,38 +1,45 @@
 import * as ko from "knockout";
-import { PageModel } from "survey-knockout";
+import {
+  Base,
+  IActionBarItem,
+  ImplementorBase,
+  PageModel,
+  property,
+  propertyArray,
+} from "survey-knockout";
 import { SurveyCreator } from "../creator";
 
 //import "./page.scss";
 const template = require("./page.html");
 // import template from "./page.html";
 
-export class PageViewModel {
-  private _isGhost = ko.observable(false);
+export class PageViewModel extends Base {
+  @property({ defaultValue: false }) isGhost: boolean;
+  @propertyArray() actions: Array<IActionBarItem>;
   public creator: SurveyCreator;
   private _page: PageModel;
-  public actions = ko.observableArray();
 
   constructor(creator: SurveyCreator, page: PageModel) {
+    super();
     this.creator = creator;
-    ko.computed(() => {
-      this._page = page;
-      this._isGhost(typeof this.page["_addToSurvey"] === "function");
-      if (!this._isGhost()) {
-        this.actions(creator.getContextActions(this.page));
-      }
-      this.page.onFirstRendering();
-      this.page.updateCustomWidgets();
-      this.page.setWasShown(true);
-    });
+
+    this._page = page;
+    this.isGhost = typeof this.page["_addToSurvey"] === "function";
+    if (!this.isGhost) {
+      this.actions = creator.getContextActions(this.page);
+    }
+    this.page.onFirstRendering();
+    this.page.updateCustomWidgets();
+    this.page.setWasShown(true);
   }
 
-  get page() {
-    return ko.unwrap(this._page);
+  get page(): PageModel {
+    return this._page;
   }
 
   private addGhostPage() {
-    if (this._isGhost()) {
-      this._isGhost(false);
+    if (this.isGhost) {
+      this.isGhost = false;
       this.page["_addToSurvey"]();
     }
   }
@@ -44,12 +51,12 @@ export class PageViewModel {
     model.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel, event: Event) {
-    if (!model._isGhost()) {
+    if (!model.isGhost) {
       model.creator.selectElement(model.page);
     }
   }
-  get css() {
-    if (this._isGhost()) {
+  get css(): string {
+    if (this.isGhost) {
       return "svc-page__content--new";
     }
     return this.creator.isElementSelected(this.page)
@@ -83,7 +90,8 @@ ko.components.register("svc-page", {
           componentInfo.element.scrollIntoView();
         }
       });
-      const model = new PageViewModel(creator, params.page);
+      const model = new PageViewModel(creator, ko.unwrap(params.page));
+      new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         scrollSubscription.dispose();
       });

@@ -10,12 +10,14 @@ import {
   Base,
   IActionBarItem,
   ListModel,
+  PageModel,
   PopupModel,
   property,
   propertyArray,
 } from "survey-knockout";
 import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
+import { DragDropHelper } from "./dragdrophelper";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -76,6 +78,14 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
+  public dragDropHelper: DragDropHelper;
+  @property() selection: Base;
+  @property({
+    onSet: (val, target) => {
+      target.survey.currentPage = val;
+    },
+  })
+  currentPage: PageModel;
 
   protected newQuestions: Array<any> = [];
   protected newPanels: Array<any> = [];
@@ -510,7 +520,7 @@ export class CreatorBase<T extends { [index: string]: any }>
           iconName: "icon-settings",
           needSeparator: true,
           action: () => this.selectElement(this.survey),
-          active: () => this.isElementSelectedCore(this.survey),
+          active: () => this.isElementSelected(<any>this.survey),
           title: "Settings",
           showTitle: false,
         },
@@ -701,8 +711,11 @@ export class CreatorBase<T extends { [index: string]: any }>
   public setSurvey(survey: T) {
     survey.setDesignMode(true);
     this.surveyValue = survey;
-    //this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
-    //this.selectElement(survey);
+    this.dragDropHelper = new DragDropHelper(
+      <any>survey,
+      (options?: any) => {}
+    );
+    this.selectElement(survey);
   }
 
   private getSurveyTextFromDesigner() {
@@ -953,18 +966,34 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
 
   public isElementSelected(element: Base): boolean {
-    return this.isElementSelectedCore(element);
+    return element === this.selection;
   }
-  protected isElementSelectedCore(element: any): boolean {
-    return false;
+
+  public selectElement(element: any) {
+    this.selection = element;
+    if (typeof element.getType === "function" && element.getType() === "page") {
+      this.currentPage = element;
+    } else if (!!element["page"]) {
+      this.currentPage = element["page"];
+    } else {
+      this.currentPage = undefined;
+    }
   }
-  public selectElement(element: any) {}
 
   public clickToolboxItem(json: any) {
     if (!this.readOnly) {
       var newElement = this.createNewElement(json);
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
+    }
+  }
+  public dragToolboxItem(json: any, e: DragEvent) {
+    if (!this.readOnly) {
+      this.dragDropHelper.startDragToolboxItem(
+        e,
+        json["type"], //this.getNewName(json["type"]),
+        json
+      );
     }
   }
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
@@ -1208,7 +1237,9 @@ export class CreatorBase<T extends { [index: string]: any }>
     //TODO
   }
 
-  public getContextActions(element: any /*ISurveyElement*/) {
+  public getContextActions(
+    element: any /*ISurveyElement*/
+  ): Array<IActionBarItem> {
     if (this.readOnly) {
       return [];
     }
