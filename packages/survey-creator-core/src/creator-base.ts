@@ -21,6 +21,11 @@ export interface ICreatorOptions {
   [index: string]: any;
 }
 
+export interface ICreatorPlugin {
+  activate: () => void;
+  deactivate?: () => boolean;
+}
+
 /**
  * Base class for Survey Creator.
  */
@@ -677,6 +682,16 @@ export class CreatorBase<T extends { [index: string]: any }>
    */
   public get survey(): T {
     return this.surveyValue;
+  }
+
+  //TODO: refactor this method and remove
+  public _dummySetText(text: string): void {
+    //should work with JSON5
+    //var textWorker = new SurveyTextWorker(this.text);
+    //this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
+
+    //works only with JSON
+    this.initSurveyWithJSON(JSON.parse(text), true);
   }
 
   protected initSurveyWithJSON(json: any, clearState: boolean) {
