@@ -65,7 +65,7 @@ export class QuestionViewModel {
     var preventDefault = !(
       !!helper.ddTarget &&
       !!helper.ddTarget.source &&
-      helper.ddTarget.source.parent == model.question
+      <any>helper.ddTarget.source.parent == model.question
     );
     if (!event["markEvent"]) {
       event["markEvent"] = true;

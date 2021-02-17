@@ -1,20 +1,20 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { UndoRedoManager } from "./undoredomanager";
-import { SurveyHelper } from "./surveyHelper";
-
-if (!!ko.options) {
-  ko.options.useOnlyNativeEvents = true;
-}
-
+import { IElement, PageModel } from "survey-knockout";
 export class DragDropTargetElement {
+  private nestedPanelDepth: number;
+  public page: PageModel;
+  public target: any;
+  public source: IElement;
   constructor(
-    public page: Survey.Page,
-    public target: any,
-    public source: any,
-    nestedPanelDepth: number = -1,
-    private undoRedoManager: UndoRedoManager
+    page: PageModel,
+    target: any,
+    source: IElement,
+    nestedPanelDepth: number = -1
   ) {
+    this.nestedPanelDepth = nestedPanelDepth;
+    this.page = page;
+    this.target = target;
+    this.source = source;
     page.dragDropStart(source, target, nestedPanelDepth);
   }
   public moveTo(
@@ -22,24 +22,20 @@ export class DragDropTargetElement {
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
-    //console.log(!!destination ? destination.name : "null");
+    this.moveToPage(destination.page);
     return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
-    var result;
-    this.clearCore();
-    this.undoRedoManager.startTransaction("drag drop");
-    result = this.page.dragDropFinish();
-    this.undoRedoManager.stopTransaction();
-    return result;
+    return this.page.dragDropFinish();
   }
   public clear() {
-    this.clearCore();
     this.page.dragDropFinish(true);
   }
-  private clearCore() {
-    if (!!this.target) {
-      this.target["koIsDragging"](false);
+  public moveToPage(page: PageModel) {
+    if (!!page && page !== this.page) {
+      this.clear();
+      this.page = page;
+      this.page.dragDropStart(this.source, this.target, this.nestedPanelDepth);
     }
   }
 }
@@ -51,146 +47,15 @@ export class DragDropHelper {
   static dragData: any = { text: "", json: null };
   static prevEvent = { element: null, x: -1, y: -1 };
   private onModifiedCallback: (options?: any) => any;
-  private scrollableElement: HTMLElement = null;
-  private ddTarget: DragDropTargetElement = null;
-  private prevCoordinates: { x: number; y: number };
+  public ddTarget: DragDropTargetElement = null;
   static counter: number = 1;
-  private id: number = DragDropHelper.counter++;
+  private data: Survey.ISurvey;
   constructor(
-    public data: Survey.ISurvey,
-    onModifiedCallback: (options?: any) => any,
-    parent: HTMLElement = null,
-    private undoRedoManager: UndoRedoManager
+    data: Survey.ISurvey,
+    onModifiedCallback: (options?: any) => any
   ) {
+    this.data = data;
     this.onModifiedCallback = onModifiedCallback;
-    this.scrollableElement =
-      parent && <HTMLElement>parent.querySelector("#scrollableDiv");
-    this.prevCoordinates = { x: -1, y: -1 };
-  }
-  public attachToElement(domElement, surveyElement) {
-    var isFlowPanel =
-      surveyElement.isPanel &&
-      typeof surveyElement.getChildrenLayoutType === "function" &&
-      surveyElement.getChildrenLayoutType() === "flow";
-    var isFlowPanelInChrome = isFlowPanel && !!window["chrome"];
-
-    domElement.style.opacity = surveyElement.koIsDragging() ? 0.4 : 1;
-    domElement.draggable =
-      surveyElement.allowingOptions.allowDragging && !isFlowPanel;
-    if (isFlowPanelInChrome) {
-      domElement.onpaste = function doPaste(e, el) {
-        e.preventDefault();
-        var clipData = window["clipboardData"];
-        if (!!clipData) {
-          var content = clipData.getData("text");
-          if (window.getSelection) {
-            var selObj = window.getSelection();
-            var selRange = selObj.getRangeAt(0);
-            selRange.deleteContents();
-            selRange.insertNode(document.createTextNode(content));
-          }
-        } else if ((e.originalEvent || e).clipboardData) {
-          content = (e.originalEvent || e).clipboardData.getData("text/plain");
-          document.execCommand("insertText", false, content);
-        }
-        return true;
-      };
-    }
-    domElement.ondragover = function(e) {
-      if (!surveyElement.allowingOptions.allowDragging) return false;
-      if (isFlowPanel)
-        return surveyElement
-          .dragDropHelper()
-          .doDragDropOverFlow(e, surveyElement);
-      if (!e["markEvent"]) {
-        e["markEvent"] = true;
-        surveyElement.dragDropHelper().doDragDropOver(e, surveyElement, true);
-        return false;
-      }
-    };
-    domElement.ondrop = function(e) {
-      var helper = surveyElement.dragDropHelper();
-      var preventDefault = !(
-        isFlowPanel &&
-        !!helper.ddTarget &&
-        !!helper.ddTarget.source &&
-        helper.ddTarget.source.parent == surveyElement
-      );
-      //Fix the bug for chrome in contenteditable
-      if (
-        isFlowPanelInChrome &&
-        (!helper.ddTarget ||
-          !helper.ddTarget.destination ||
-          helper.ddTarget.destination.isLayoutTypeSupported("flow"))
-      ) {
-        var content = e.dataTransfer.getData("text");
-        var dropRange = null;
-        if (!!document.caretRangeFromPoint) {
-          dropRange = document.caretRangeFromPoint(e.clientX, e.clientY);
-        } else {
-          if (!!document.caretPositionFromPoint) {
-            dropRange = document.caretPositionFromPoint(e.clientX, e.clientY);
-          }
-        }
-        if (!!dropRange) {
-          preventDefault = true;
-          e.preventDefault();
-          if (surveyElement["isDragStarted"]) {
-            var selObj = window.getSelection();
-            if (!!selObj && selObj.rangeCount > 0) {
-              var selRange = selObj.getRangeAt(0);
-              if (!!selRange) {
-                selRange.deleteContents();
-              }
-            }
-          }
-          dropRange.insertNode(document.createTextNode(content));
-          let selection = window.getSelection();
-          if (!!selection) {
-            selection.removeAllRanges();
-            selection.addRange(dropRange);
-          }
-        }
-      }
-      if (!e["markEvent"]) {
-        e["markEvent"] = true;
-        helper.doDrop(e, preventDefault);
-      }
-    };
-    if (!isFlowPanel) {
-      domElement.ondragstart = function(e: DragEvent) {
-        var target: any = e.target || e.srcElement;
-        if (
-          !!target &&
-          !!target.contains &&
-          target !== document.activeElement &&
-          target.contains(document.activeElement)
-        ) {
-          e.preventDefault();
-          return false;
-        }
-        if (!surveyElement.allowingOptions.allowDragging) return false;
-        if (!e["markEvent"]) {
-          e["markEvent"] = true;
-          surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
-        }
-        e.cancelBubble = true;
-      };
-    } else {
-      domElement.ondragstart = function(e: DragEvent) {
-        surveyElement.isDragStarted = true;
-        if (!e["markEvent"]) {
-          e["markEvent"] = true;
-          if (!surveyElement.dragDropHelper().getData(e).text) {
-            surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
-          }
-        }
-      };
-    }
-    domElement.ondragend = function(e) {
-      delete surveyElement["isDragStarted"];
-      surveyElement.dragDropHelper().end();
-    };
   }
   public get survey(): Survey.Survey {
     return <Survey.Survey>this.data;
@@ -249,8 +114,6 @@ export class DragDropHelper {
   }
   private isCanDragContinue(event: DragEvent, element: any): DragEvent {
     event = this.getEvent(event);
-    if (this.isSameCoordinates(event)) return null;
-    this.checkScrollY(event);
     if (
       !element ||
       !this.isSurveyDragging(event) ||
@@ -263,11 +126,10 @@ export class DragDropHelper {
     if (this.ddTarget) {
       this.ddTarget.clear();
     }
-    this.isScrollStop = true;
     this.clearData();
   }
   public get isMoving(): boolean {
-    return this.ddTarget && this.ddTarget.source;
+    return this.ddTarget && !!this.ddTarget.source;
   }
   public doDrop(event: DragEvent, prevedDefault: boolean = true) {
     if (event.stopPropagation) {
@@ -277,21 +139,19 @@ export class DragDropHelper {
       if (prevedDefault) {
         event.preventDefault();
       }
-      if (!this.readOnly) {
-        var newElement = this.ddTarget.doDrop();
-        if (this.onModifiedCallback)
-          this.onModifiedCallback({
-            type: "DO_DROP",
-            page: this.ddTarget.page,
-            source: this.ddTarget.source,
-            target: this.ddTarget.target,
-            newElement: this.ddTarget.source ? null : newElement,
-            moveToParent: newElement.parent,
-            moveToIndex: !!newElement.parent
-              ? newElement.parent.elements.indexOf(newElement)
-              : -1
-          });
-      }
+      var newElement = this.ddTarget.doDrop();
+      if (this.onModifiedCallback)
+        this.onModifiedCallback({
+          type: "DO_DROP",
+          page: this.ddTarget.page,
+          source: this.ddTarget.source,
+          target: this.ddTarget.target,
+          newElement: this.ddTarget.source ? null : newElement,
+          moveToParent: newElement.parent,
+          moveToIndex: !!newElement.parent
+            ? newElement.parent.elements.indexOf(newElement)
+            : -1,
+        });
     }
     this.end();
   }
@@ -312,7 +172,6 @@ export class DragDropHelper {
       targetElement["setData"](this.survey);
     }
     targetElement.renderWidth = "100%";
-    targetElement["koIsDragging"](true);
     return targetElement;
   }
   private isBottom(event: DragEvent): any {
@@ -326,7 +185,7 @@ export class DragDropHelper {
       isBottom: y > height / 2,
       isEdge:
         y <= DragDropHelper.edgeHeight ||
-        height - y <= DragDropHelper.edgeHeight
+        height - y <= DragDropHelper.edgeHeight,
     };
   }
   private isBottomThanElement(event: DragEvent, lastEl: any): boolean {
@@ -339,16 +198,6 @@ export class DragDropHelper {
       y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return y > elY;
-  }
-  private isSameCoordinates(event: DragEvent): boolean {
-    var res =
-      Math.abs(event.pageX - this.prevCoordinates.x) > 5 ||
-      Math.abs(event.pageY - this.prevCoordinates.y) > 5;
-    if (res) {
-      this.prevCoordinates.x = event.pageX;
-      this.prevCoordinates.y = event.pageY;
-    }
-    return !res;
   }
   private isSamePlace(event: DragEvent, element: any): boolean {
     var prev = DragDropHelper.prevEvent;
@@ -364,65 +213,8 @@ export class DragDropHelper {
     }
     return true;
   }
-  private isScrollStop: boolean = true;
-  private static ScrollDelay: number = 30;
-  private static ScrollOffset: number = 100;
-  private checkScrollY(e: DragEvent) {
-    if (!this.scrollableElement) return;
-    var y = this.getScrollableElementPosY(e);
-    if (y < 0) return;
-    this.isScrollStop = true;
-    var height = <number>this.scrollableElement["clientHeight"];
-    if (y < DragDropHelper.ScrollOffset && y >= 0) {
-      this.isScrollStop = false;
-      this.doScrollY(-1);
-    }
-    if (height - y < DragDropHelper.ScrollOffset && height >= y) {
-      this.isScrollStop = false;
-      this.doScrollY(1);
-    }
-  }
-  private doScrollY(step: number) {
-    var el = this.scrollableElement;
-    var scrollY = el.scrollTop + step;
-    if (scrollY < 0) {
-      this.isScrollStop = true;
-      return;
-    }
-    el.scrollTop = scrollY;
-    var self = this;
-    if (!this.isScrollStop) {
-      setTimeout(function() {
-        self.doScrollY(step);
-      }, DragDropHelper.ScrollDelay);
-    }
-  }
-  private getScrollableElementPosY(e: DragEvent): number {
-    if (!this.scrollableElement || !e.currentTarget) return -1;
-    var el = e.currentTarget;
-    var offsetTop = 0;
-    while (el && el != this.scrollableElement) {
-      offsetTop += <number>el["offsetTop"];
-      el = el["offsetParent"];
-    }
-    return (
-      e.offsetY +
-      <number>e.currentTarget["offsetTop"] -
-      this.scrollableElement.offsetTop -
-      this.scrollableElement.scrollTop
-    );
-  }
   private getEvent(event: DragEvent): DragEvent {
     return event["originalEvent"] ? event["originalEvent"] : event;
-  }
-  private getY(element: HTMLElement): number {
-    var result = 0;
-
-    while (element) {
-      result += element.offsetTop - element.scrollTop + element.clientTop;
-      element = <HTMLElement>element.offsetParent;
-    }
-    return result;
   }
   private prepareData(
     event: DragEvent,
@@ -434,17 +226,14 @@ export class DragDropHelper {
     this.setData(event, str);
     var targetElement = this.createTargetElement(elementName, json);
     this.ddTarget = new DragDropTargetElement(
-      <Survey.Page>this.survey.currentPage,
+      this.survey.currentPage,
       targetElement,
       source,
-      DragDropHelper.nestedPanelDepth,
-      this.undoRedoManager
+      DragDropHelper.nestedPanelDepth
     );
   }
   private setData(event: DragEvent, text: string) {
-    if (event["originalEvent"]) {
-      event = event["originalEvent"];
-    }
+    event = this.getEvent(event);
     if (event.dataTransfer) {
       event.dataTransfer.setData("Text", text);
       event.dataTransfer.effectAllowed = "copy";
@@ -452,9 +241,7 @@ export class DragDropHelper {
     DragDropHelper.dragData = { text: text };
   }
   private getData(event: DragEvent): any {
-    if (event["originalEvent"]) {
-      event = event["originalEvent"];
-    }
+    event = this.getEvent(event);
     if (event.dataTransfer) {
       var text = event.dataTransfer.getData("Text");
       if (text) {
@@ -470,8 +257,5 @@ export class DragDropHelper {
     prev.element = null;
     prev.x = -1;
     prev.y = -1;
-    this.prevCoordinates.x = -1;
-    this.prevCoordinates.y = -1;
   }
-  public readOnly: boolean = false;
 }

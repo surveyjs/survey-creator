@@ -3,6 +3,8 @@ Version = `${process.env.VERSION}`;
 
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
+export * from "../components/tabs/designer";
+export * from "../components/page";
 export * from "../creator-base";
 export * from "../editorLocalization";
 export * from "../objectProperty";
@@ -29,8 +31,6 @@ import "../components/property-panel/property-panel.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/toolbox/toolbox.scss";
 import "../components/toolbox/toolbox-item.scss";
-import "../components/creator.scss";
-import "../components/page.scss";
 import "../components/button.scss";
 import "../components/question.scss";
 import "../survey-theme/survey.scss";
