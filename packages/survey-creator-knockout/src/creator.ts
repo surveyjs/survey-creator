@@ -20,6 +20,7 @@ import { QuestionConverter } from "@survey/creator";
 import { PropertyGridModel } from "@survey/creator";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { TabTranslationPlugin } from "./components/tabs/translation";
 
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
@@ -129,6 +130,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         new TabJsonEditorTextareaPlugin(this);
       }
     }
+    new TabTranslationPlugin(this);
   }
 
   protected onViewTypeChanged(newType: string) {
