@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 var templateHtml = require("./translation.html");
 var groupTemplateHtml = require("./translation-group.html");
-import { ICreatorPlugin, SurveyCreator } from "../../creator";
-import { Translation, getLocString } from "@survey/creator";
+import { SurveyCreator } from "../../creator";
+import { Translation, getLocString, ICreatorPlugin } from "@survey/creator";
 import { ImplementorBase, Base } from "survey-knockout";
 
 export class TranslationModel {
