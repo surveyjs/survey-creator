@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import {
   Base,
   JsonObjectProperty,
@@ -496,7 +495,11 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.options.onSurveyElementPropertyValueChanged(q.property, this.obj, options.value);
+    this.options.onSurveyElementPropertyValueChanged(
+      q.property,
+      this.obj,
+      options.value
+    );
     // this.options.onPropertyValueChanged(q.property, this.obj, options.value);
   }
 
@@ -641,7 +644,7 @@ export class PropertyGridModel {
     if (!rowObj) return;
     var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
     this.options.onSurveyElementPropertyValueChanged(
-    //this.options.onPropertyValueChanged(
+      //this.options.onPropertyValueChanged(
       <any>prop,
       options.row.editingObj,
       options.value
@@ -972,15 +975,3 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorQuestionSelectBase()
 );
-
-export class PropertyGrid extends PropertyGridModel {
-  public koSurvey: ko.Observable<SurveyModel> = ko.observable();
-
-  constructor(obj: Base, options: ISurveyCreatorOptions) {
-    super(obj, options);
-    this.koSurvey(this.survey);
-    this.objValueChangedCallback = () => {
-      this.koSurvey(this.survey);
-    };
-  }
-}

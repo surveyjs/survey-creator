@@ -2,20 +2,20 @@
   <textarea
     class="form-control"
     style="width: 100%;"
-    data-bind="visible: $data.koVisible, disable: item.koReadOnly, value:item.koValue($data.locale), attr: {placeholder: !$data.locale? item.defaultValue : ''}"
+    data-bind="visible: $data.visible, disable: item.readOnly, value:item.values($data.locale).text, attr: {placeholder: !$data.locale? item.defaultValue : ''}"
   ></textarea>
 </script>
 <div
   class="svd-light-border-color svd-light-bg-color"
-  data-bind="css:{'svd-translation-strings': $data.koShowHeader()}"
+  data-bind="css:{'svd-translation-strings': $data.showHeader}"
 >
   <table class="svd_items_table" data-bind="visible: $data.locItems.length > 0">
     <thead>
       <tr>
         <th></th>
-        <!-- ko foreach: $data.koLocales -->
+        <!-- ko foreach: $data.locales -->
         <th
-          data-bind="visible: $data.koVisible, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}"
+          data-bind="visible: $data.visible, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}"
         ></th>
         <!-- /ko -->
       </tr>
@@ -25,9 +25,9 @@
         <td style="max-width: 200px; min-width: 100px">
           <span data-bind="text:item.text"></span>
         </td>
-        <!-- ko foreach: $parent.koLocales -->
+        <!-- ko foreach: $parent.locales -->
         <td
-          data-bind="visible: $data.koVisible, style: {width: $data.koVisible ? $parent.locWidth : '0px'} "
+          data-bind="visible: $data.visible, style: {width: $data.visible ? $parent.locWidth : '0px'} "
         >
           <!-- ko template: { name: 'svd-translation-item', data: $data, afterRender: $parent.afterRender} -->
           <!-- /ko -->
@@ -44,19 +44,19 @@
     <div
       class="svd-toolbox-category-header"
       role="tab"
-      data-bind="visible: koShowHeader, click: function(){ group.koExpanded(!group.koExpanded())}"
+      data-bind="visible: showHeader, click: function(){ group.expanded = !group.expanded;}"
     >
       <span
         class="svd-translation-panel-strings-title"
-        data-bind="css: { 'svd-main-color': group.koExpanded() }, text: group.text"
+        data-bind="css: { 'svd-main-color': group.expanded }, text: group.text"
       ></span>
-      <!-- ko ifnot: koExpanded -->
+      <!-- ko ifnot: expanded -->
       <svg-icon
         class="icon-toolbox-arrow"
         params="iconName: 'icon-arrow_down_10x10', size: 10"
       ></svg-icon>
       <!-- /ko -->
-      <!-- ko if: koExpanded -->
+      <!-- ko if: expanded -->
       <svg-icon
         class="icon-toolbox-arrow svd-primary-icon"
         params="iconName: 'icon-arrow_up_10x10', size: 10"
@@ -64,7 +64,7 @@
       </svg-icon>
       <!-- /ko -->
     </div>
-    <div data-bind="visible: koExpanded">
+    <div data-bind="visible: expanded">
       <svd-translation-group params="model: group"></svd-translation-group>
     </div>
   </div>

@@ -6,7 +6,7 @@ import {
   SurveyElementBase,
   SurveyPage,
 } from "survey-react";
-import { CreatorBase } from "@survey/creator";
+import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
 
 interface ICreatorSurveyPageComponentProps {
@@ -19,46 +19,44 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
 > {
-  private addNewQuestionText = "Add a New Question";
+  private model: PageViewModel<Survey.Model>;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
+    this.model = new PageViewModel<Survey.Model>(
+      this.props.creator,
+      this.props.page as any
+    );
   }
 
   protected getStateElement(): Base {
-    return this.page;
+    return this.model as any;
   }
   render(): JSX.Element {
-    //AM: dirty hack, need to call in the right place
-    this.page.onFirstRendering();
-    this.page.updateCustomWidgets();
-    this.page.setWasShown(true);
-    //
-
     return (
       <div
-        className={"svc-page__content " + this.css}
-        onClick={(e) => this.selectPage(e)}
-        onDragOver={(e) => this.onDragOver(e)}
-        onDrop={(e) => this.onDrop(e)}
+        className={"svc-page__content " + this.model.css}
+        onClick={(e) => this.model.select(this.model, e.nativeEvent)}
+        onDragOver={(e) => this.model.dragOver(this.model, e.nativeEvent)}
+        onDrop={(e) => this.model.drop(this.model, e.nativeEvent)}
         // data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
       >
         <SurveyPage
-          page={this.page}
+          page={this.props.page}
           survey={this.props.survey}
-          creator={this.creator}
-          css={this.css}
+          creator={this.props.creator}
+          css={this.model.css}
         ></SurveyPage>
         <div
           className="svc-page__add-new-question"
-          onClick={() => this.addNewQuestion()}
+          onClick={(e) => this.model.addNewQuestion(this.model, e.nativeEvent)}
           data-bind="click: addNewQuestion"
         >
           <span className="svc-text svc-text--normal svc-text--bold">
-            {this.addNewQuestionText}
+            {this.model.addNewQuestionText}
           </span>
         </div>
         <div className="svc-page__content-actions">
-          <ActionBar items={this.actions}></ActionBar>
+          <ActionBar items={this.model.actions}></ActionBar>
         </div>
       </div>
     );
@@ -96,63 +94,5 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   </div>
 </script>
      */
-  }
-
-  private get page(): Survey.PageModel {
-    return this.props.page;
-  }
-  private get creator(): CreatorBase<Survey.Model> {
-    return this.props.creator;
-  }
-  private get isGhost() {
-    return false;
-  }
-  private get css() {
-    if (this.isGhost) {
-      return "svc-page__content--new";
-    }
-    return this.creator.isElementSelected(this.page as any)
-      ? "svc-page__content--selected"
-      : "";
-  }
-
-  private get actions() {
-    if (!this.isGhost) {
-      return this.creator.getContextActions(this.page);
-    }
-  }
-
-  private addNewQuestion() {
-    this.addGhostPage();
-    this.creator.survey.currentPage = this.page;
-    this.creator.clickToolboxItem({ type: "text" });
-  }
-  private addGhostPage() {
-    //    if (this._isGhost()) {
-    //      this._isGhost(false);
-    //      this.page["_addToSurvey"]();
-    //    }
-  }
-  private selectPage(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    if (!this.isGhost) {
-      this.creator.selectElement(this.page);
-      e.stopPropagation();
-    }
-  }
-  private onDragOver(event: React.DragEvent<HTMLDivElement>) {
-    // if (!event["markEvent"]) {
-    //   event["markEvent"] = true;
-    //   this.creator.dragDropHelper.ddTarget.moveToPage(<any>this.page);
-    //   this.creator.dragDropHelper.doDragDropOver(event, this.page, true);
-    //   return false;
-    // }
-  }
-  private onDrop(event: React.DragEvent<HTMLDivElement>) {
-    // var helper = this.creator.dragDropHelper;
-    // if (!event["markEvent"]) {
-    //   event["markEvent"] = true;
-    //   helper.doDrop(event, true);
-    //   this.addGhostPage();
-    // }
   }
 }

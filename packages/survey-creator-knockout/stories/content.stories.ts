@@ -26,8 +26,7 @@ export const Default = () => {
   let creator = new SurveyCreator({});
   creator.setSurvey(new Survey(surveyJSON));
   return {
-    template:
-      '<svc-tab-designer params="creator: creator, survey: creator.survey"></svc-tab-designer>',
+    template: '<svc-tab-designer params="creator: creator"></svc-tab-designer>',
     context: {
       creator,
     },

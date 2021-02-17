@@ -1,49 +1,84 @@
-import * as ko from "knockout";
-import * as Survey from "survey-knockout";
+import {
+  property,
+  Base,
+  propertyArray,
+  SurveyModel,
+  HashTable,
+  LocalizableString,
+  JsonObjectProperty,
+  Serializer,
+  PageModel,
+  surveyLocalization,
+  ILocalizableString,
+  ItemValue,
+  IActionBarItem,
+} from "survey-knockout";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
-//import { SurveyCreator } from "../editor";
-import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 
-import "./translation.scss";
-import { IActionBarItem } from "survey-knockout";
-var templateHtml = require("./translation.html");
-var groupTemplateHtml = require("./translation-group.html");
-
-export class TranslationItemBase {
-  constructor(public name: string) {}
+export class TranslationItemBase extends Base {
+  constructor(public name: string, protected translation: ITranslationLocales) {
+    super();
+  }
   public get isGroup() {
     return false;
   }
   public fillLocales(locales: Array<string>) {}
   public mergeLocaleWithDefault(loc: string) {}
+  protected fireOnObjCreating(obj: Base = null) {
+    if (this.translation) {
+      if (!obj) obj = this;
+      this.translation.fireOnObjCreating(obj);
+    }
+  }
+}
+
+export class TranslationItemString extends Base {
+  constructor(public locString: ILocalizableString, public locale: string) {
+    super();
+    this.text = this.locString.getLocaleText(this.locale);
+  }
+  @property() text: string;
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "text") {
+      this.locString.setLocaleText(this.locale, newValue);
+    }
+  }
+  public getType(): string {
+    return "translationitemstring";
+  }
 }
 
 export class TranslationItem extends TranslationItemBase {
-  private values: Survey.HashTable<ko.Observable<string>>;
+  private hashValues: HashTable<TranslationItemString>;
   public customText: string;
   public afterRender: any;
-  public koReadOnly: any = ko.observable(false);
   constructor(
     public name: string,
-    public locString: Survey.LocalizableString,
+    public locString: LocalizableString,
     public defaultValue: string = "",
-    private translation: ITranslationLocales,
+    translation: ITranslationLocales,
     private context: any
   ) {
-    super(name);
+    super(name, translation);
     if (!!this.translation) {
-      this.koReadOnly = this.translation.koReadOnly;
+      this.readOnly = this.translation.readOnly;
     }
-    this.values = {};
+    this.hashValues = {};
     var self = this;
     this.afterRender = function (el: any, data: any) {
       if (!!self.translation) {
         self.translation.translateItemAfterRender(self, el, data.locale);
       }
     };
+    this.fireOnObjCreating();
   }
+  public getType(): string {
+    return "translationitem";
+  }
+  @property({ defaultValue: false }) readOnly: boolean;
   public get text() {
     return !!this.customText ? this.customText : this.localizableName;
   }
@@ -63,16 +98,13 @@ export class TranslationItem extends TranslationItemBase {
         this.context
       );
   }
-  public koValue(loc: string): ko.Observable<string> {
-    if (!this.values[loc]) {
-      var val = ko.observable(this.getLocText(loc));
-      var self = this;
-      val.subscribe((newValue) => {
-        self.setLocText(loc, newValue);
-      });
-      this.values[loc] = val;
+  public values(loc: string): TranslationItemString {
+    if (!this.hashValues[loc]) {
+      var val = new TranslationItemString(this.locString, loc);
+      this.hashValues[loc] = val;
+      this.fireOnObjCreating(val);
     }
-    return this.values[loc];
+    return this.hashValues[loc];
   }
 
   public fillLocales(locales: Array<string>) {
@@ -82,7 +114,7 @@ export class TranslationItem extends TranslationItemBase {
       if (
         !!key &&
         locales.indexOf(key) < 0 &&
-        key !== Survey.LocalizableString.defaultLocale
+        key !== LocalizableString.defaultLocale
       ) {
         locales.push(key);
       }
@@ -107,9 +139,9 @@ export class TranslationItem extends TranslationItemBase {
 }
 
 export interface ITranslationLocales {
-  koLocales: any;
+  localesStr: any;
   showAllStrings: boolean;
-  koReadOnly: any;
+  readOnly: boolean;
   getLocaleName(loc: string): string;
   availableTranlationsChangedCallback: () => void;
   tranlationChangedCallback: (
@@ -119,27 +151,30 @@ export interface ITranslationLocales {
     context: any
   ) => void;
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
+  fireOnObjCreating(obj: Base);
 }
 
 export class TranslationGroup extends TranslationItemBase {
   private isRootValue: boolean = false;
-  koExpanded: any;
-  koShowHeader: any;
   private itemValues: Array<TranslationItemBase>;
   constructor(
     public name,
     public obj: any,
-    public translation: ITranslationLocales = null,
+    translation: ITranslationLocales = null,
     public text: string = ""
   ) {
-    super(name);
+    super(name, translation);
     if (!this.text) {
       this.text = name;
     }
-    this.koExpanded = ko.observable(false);
-    this.koShowHeader = ko.observable(true);
     this.reset();
+    this.fireOnObjCreating();
   }
+  public getType(): string {
+    return "translationgroup";
+  }
+  @property({ defaultValue: false }) expanded: boolean;
+  @property({ defaultValue: true }) showHeader: boolean;
   public get items(): Array<TranslationItemBase> {
     return this.itemValues;
   }
@@ -153,7 +188,7 @@ export class TranslationGroup extends TranslationItemBase {
   }
   setAsRoot() {
     this.isRootValue = true;
-    this.koExpanded(true);
+    this.expanded = true;
   }
   public getItemByName(name: string): TranslationItemBase {
     for (var i = 0; i < this.itemValues.length; i++) {
@@ -170,15 +205,15 @@ export class TranslationGroup extends TranslationItemBase {
   public get isGroup() {
     return true;
   }
-  public get koLocales() {
-    return !!this.translation ? this.translation.koLocales : null;
+  public get locales() {
+    return !!this.translation ? this.translation.localesStr : null;
   }
   public get localeCount(): number {
-    if (!this.koLocales()) return 0;
-    var locales = this.koLocales();
+    if (!this.locales) return 0;
+    var locales = this.locales;
     var res = 0;
     for (var i = 0; i < locales.length; i++) {
-      if (locales[i].koVisible()) res++;
+      if (locales[i].visible) res++;
     }
     return res;
   }
@@ -217,7 +252,7 @@ export class TranslationGroup extends TranslationItemBase {
   }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
-      this.createItemValues();
+      this.createItemValuesLocale();
       return;
     }
     if (!this.obj || !this.obj.getType) return;
@@ -254,9 +289,9 @@ export class TranslationGroup extends TranslationItemBase {
   private keepOnGroupExpanded() {
     if (this.items.length == 1 && this.groups.length == 1) {
       var gr = this.groups[0];
-      gr.koExpanded(true);
+      gr.expanded = true;
       if (gr.obj.getType() == "page") {
-        gr.koShowHeader(false);
+        gr.showHeader = false;
       }
     }
   }
@@ -268,7 +303,7 @@ export class TranslationGroup extends TranslationItemBase {
   }
   private expandCollapseAll(isExpand: boolean) {
     if (!this.isRoot) {
-      this.koExpanded(isExpand);
+      this.expanded = isExpand;
     }
     for (var i = 0; i < this.groups.length; i++) {
       if (isExpand) {
@@ -290,9 +325,9 @@ export class TranslationGroup extends TranslationItemBase {
       return a.name.localeCompare(b.name);
     });
   }
-  private getLocalizedProperties(obj: any): Array<Survey.JsonObjectProperty> {
+  private getLocalizedProperties(obj: any): Array<JsonObjectProperty> {
     var res = [];
-    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    var properties = Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
       if (!property.isSerializable || !property.isLocalizable) continue;
@@ -301,9 +336,9 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
-  private getArrayProperties(obj: any): Array<Survey.JsonObjectProperty> {
+  private getArrayProperties(obj: any): Array<JsonObjectProperty> {
     var res = [];
-    var properties = Survey.Serializer.getPropertiesByObj(obj);
+    var properties = Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
       if (property.isSerializable === false) continue;
@@ -316,10 +351,10 @@ export class TranslationGroup extends TranslationItemBase {
   }
   private createTranslationItem(
     obj: any,
-    property: Survey.JsonObjectProperty
+    property: JsonObjectProperty
   ): TranslationItem {
     var defaultValue = this.getDefaultValue(obj, property);
-    var locStr = <Survey.LocalizableString>obj[property.serializationProperty];
+    var locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
     return new TranslationItem(
@@ -330,18 +365,13 @@ export class TranslationGroup extends TranslationItemBase {
       obj
     );
   }
-  private getDefaultValue(
-    obj: any,
-    property: Survey.JsonObjectProperty
-  ): string {
+  private getDefaultValue(obj: any, property: JsonObjectProperty): string {
     if (
       property.name == "title" &&
       property.isLocalizable &&
       !!property.serializationProperty
     ) {
-      var locStr = <Survey.LocalizableString>(
-        obj[property.serializationProperty]
-      );
+      var locStr = <LocalizableString>obj[property.serializationProperty];
       if (
         !!locStr &&
         obj.getType() != "page" &&
@@ -362,7 +392,7 @@ export class TranslationGroup extends TranslationItemBase {
       !!val[0]["setLocText"]
     );
   }
-  private createGroups(value: any, property: Survey.JsonObjectProperty) {
+  private createGroups(value: any, property: JsonObjectProperty) {
     for (var i = 0; i < value.length; i++) {
       var obj = value[i];
       if (!!obj && obj.getType) {
@@ -380,7 +410,7 @@ export class TranslationGroup extends TranslationItemBase {
       }
     }
   }
-  private createItemValues() {
+  private createItemValuesLocale() {
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
       var canAdd =
@@ -414,22 +444,19 @@ export class TranslationGroup extends TranslationItemBase {
   }
 }
 
-export class Translation implements ITranslationLocales {
+export class TranslationLocale extends Base {
+  constructor(public locale: string) {
+    super();
+  }
+  @property({ defaultValue: true }) visible: boolean;
+  @property({ defaultValue: true }) enabled: boolean;
+}
+
+export class Translation extends Base implements ITranslationLocales {
   public static csvDelimiter = ",";
   public static newLineDelimiter = "\n";
-  public koLocales: any;
-  public koRoot: any;
-  public koAvailableLanguages: any;
-  public koSelectedLanguageToAdd: any;
-  public koShowAllStrings: any;
-  public koFilteredPage: any;
-  public koFilteredPages: any;
-  public koIsEmpty: any;
-  public koExportToCSVFile: any;
-  public koImportFromCSVFile: any;
-  public koCanMergeLocaleWithDefault: any;
-  public koMergeLocaleWithDefault: any;
-  public koMergeLocaleWithDefaultText: any;
+  public exportToCSVFileUI: any;
+  public importFromCSVFileUI: any;
   public importFinishedCallback: () => void;
   public translateItemAfterRenderCallback: (
     item: TranslationItem,
@@ -443,151 +470,146 @@ export class Translation implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
-  private rootValue: TranslationGroup;
-  private surveyValue: Survey.Survey;
-
-  /**
-   * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
-   */
-  public toolbarItems = ko.observableArray<IActionBarItem>();
+  private surveyValue: SurveyModel;
+  private onBaseObjCreatingCallback: (obj: Base) => void;
 
   constructor(
-    survey: Survey.Survey,
-    showAllStrings: boolean = false,
-    public koReadOnly = ko.computed(() => false)
+    survey: SurveyModel,
+    onBaseObjCreating: (obj: Base) => void = null
   ) {
-    this.koLocales = ko.observableArray([
-      {
-        locale: "",
-        koVisible: ko.observable(true),
-        koEnabled: ko.observable(true),
-      },
-    ]);
-    this.koRoot = ko.observable(null);
-    this.koShowAllStrings = ko.observable(showAllStrings);
-    this.koIsEmpty = ko.observable(true);
-    this.koAvailableLanguages = ko.observableArray();
-    this.koSelectedLanguageToAdd = ko.observable(null);
-    this.koFilteredPage = ko.observable();
-    this.koCanMergeLocaleWithDefault = ko.observable(false);
-    this.koMergeLocaleWithDefaultText = ko.computed(function () {
-      if (!this.koCanMergeLocaleWithDefault()) return "";
-      var locText = this.getLocaleName(this.defaultLocale);
-      return editorLocalization
-        .getString("ed.translationMergeLocaleWithDefault")
-        ["format"](locText);
-    }, this);
-    this.koFilteredPages = ko.observableArray([
-      {
-        value: null,
-        text: this.showAllPagesText,
-      },
-    ]);
+    super();
+    this.onBaseObjCreatingCallback = onBaseObjCreating;
+    this.locales.push(new TranslationLocale(""));
+    this.filteredPages.push(new ItemValue(null, this.showAllPagesText));
     var self = this;
-    this.koSelectedLanguageToAdd.subscribe(function (newValue) {
-      if (!!newValue) {
-        self.addLocale(newValue);
-      }
-    });
-    this.koShowAllStrings.subscribe(function (newValue) {
-      self.reset();
-    });
-    this.koFilteredPage.subscribe(function (newValue) {
-      self.reset();
-    });
-    this.koExportToCSVFile = function () {
+    this.exportToCSVFileUI = function () {
       self.exportToSCVFile("survey_translation.csv");
     };
-    this.koImportFromCSVFile = function (el) {
+    this.importFromCSVFileUI = function (el) {
       if (el.files.length < 1) return;
       self.importFromCSVFile(el.files[0]);
       el.value = "";
     };
-    this.koMergeLocaleWithDefault = function () {
-      self.mergeLocaleWithDefault();
-    };
+    this.fireOnObjCreating(this);
     this.survey = survey;
+    this.setupToolbarItems();
+  }
+  public getType(): string {
+    return "translation";
+  }
+  @propertyArray() locales: Array<TranslationLocale>;
+  @propertyArray() availableLanguages: Array<ItemValue>;
+  @property() selectedLanguageToAdd: string;
+  @property() canMergeLocaleWithDefault: boolean;
+  @property() mergeLocaleWithDefaultText: string;
+  @property({ defaultValue: false }) readOnly: boolean;
+  @property() root: TranslationGroup;
+  @property({ defaultValue: false }) showAllStrings: boolean;
+  @property() filteredPage: PageModel;
+  @propertyArray() filteredPages: Array<ItemValue>;
 
-    const items: Array<IActionBarItem> = [];
-    items.push({
+  @property({ defaultValue: true }) isEmpty: boolean;
+  /**
+   * The list of toolbar items. You may add/remove/replace them.
+   * @see IActionBarItem
+   */
+  @propertyArray() toolbarItems: Array<IActionBarItem>;
+
+  public fireOnObjCreating(obj: Base) {
+    if (!this.onBaseObjCreatingCallback) return;
+    this.onBaseObjCreatingCallback(obj);
+  }
+
+  private setupToolbarItems() {
+    this.toolbarItems.push({
       id: "svd-translation-language-selector",
       title: "",
       tooltip: this.selectLanguageOptionsCaption,
       component: "svd-dropdown",
-      action: ko.computed({
-        read: () => this.koSelectedLanguageToAdd(),
-        write: (val: any) => this.koSelectedLanguageToAdd(val),
-      }),
-      items: <any>this.koAvailableLanguages,
+      action: (val: string) => {
+        if (val === undefined) return this.selectedLanguageToAdd;
+        this.selectedLanguageToAdd = val;
+      },
+      items: <any>this.availableLanguages,
     });
-    items.push({
+    this.toolbarItems.push({
       id: "svd-translation-show-all-strings",
       title: this.showAllStringsText,
       tooltip: this.showAllStringsText,
       component: "svd-boolean",
-      action: ko.computed({
-        read: () => this.koShowAllStrings(),
-        write: (val: any) => this.koShowAllStrings(val),
-      }),
+      action: (val: boolean) => {
+        if (val === undefined) return this.showAllStrings;
+        this.showAllStrings = val;
+      },
     });
-    items.push({
+    this.toolbarItems.push({
       id: "svd-translation-language-selector",
       title: "",
       tooltip: "",
       component: "svd-dropdown",
-      action: ko.computed({
-        read: () => this.koFilteredPage(),
-        write: (val: any) => this.koFilteredPage(val),
-      }),
-      items: this.koFilteredPages,
+      action: (val: PageModel) => {
+        if (val === undefined) return this.filteredPage;
+        this.filteredPage = val;
+      },
+      items: this.filteredPages,
     });
-
-    this.toolbarItems(items);
   }
-  public get survey(): Survey.Survey {
+
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "selectedLanguageToAdd") {
+      if (!!newValue) {
+        this.addLocale(newValue);
+      }
+    }
+    if (name === "canMergeLocaleWithDefault") {
+      this.mergeLocaleWithDefaultText = this.getMergeLocaleWithDefaultText();
+    }
+    if (name === "showAllStrings" || name === "filteredPage") {
+      this.reset();
+    }
+  }
+  private getMergeLocaleWithDefaultText(): string {
+    if (!this.canMergeLocaleWithDefault) return "";
+    var locText = this.getLocaleName(this.defaultLocale);
+    return editorLocalization
+      .getString("ed.translationMergeLocaleWithDefault")
+      ["format"](locText);
+  }
+
+  public get survey(): SurveyModel {
     return this.surveyValue;
   }
-  public set survey(val: Survey.Survey) {
+  public set survey(val: SurveyModel) {
     this.surveyValue = val;
     this.updateFilteredPages();
     this.reset();
   }
-  public get root(): TranslationGroup {
-    return this.rootValue;
-  }
-  public get filteredPage(): Survey.Page {
-    return this.koFilteredPage();
-  }
-  public set filteredPage(val: Survey.Page) {
-    this.koFilteredPage(val);
-  }
   public reset() {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
-    this.rootValue = new TranslationGroup(rootName, rootObj, this);
+    this.root = new TranslationGroup(rootName, rootObj, this);
     this.root.setAsRoot();
     this.root.reset();
     this.resetLocales();
-    this.koIsEmpty(!this.root.hasItems);
-    this.koRoot(this.root);
+    this.isEmpty = !this.root.hasItems;
   }
-  public get locales(): Array<string> {
+  public get localesStr(): Array<string> {
     var res = [];
-    var locales = this.koLocales();
+    var locales = this.locales;
     for (var i = 0; i < locales.length; i++) {
       res.push(locales[i].locale);
     }
     return res;
   }
   public get defaultLocale(): string {
-    return Survey.surveyLocalization.defaultLocale;
+    return surveyLocalization.defaultLocale;
   }
   public getLocaleName(loc: string) {
     return editorLocalization.getLocaleName(loc, this.defaultLocale);
   }
   public hasLocale(locale: string): boolean {
-    var locales = this.koLocales();
+    var locales = this.locales;
     for (var i = 0; i < locales.length; i++) {
       if (locales[i].locale == locale) return true;
     }
@@ -595,7 +617,7 @@ export class Translation implements ITranslationLocales {
   }
   public addLocale(locale: string) {
     if (!this.hasLocale(locale)) {
-      var locs = this.locales;
+      var locs = this.localesStr;
       locs.push(locale);
       this.setLocales(locs);
     }
@@ -607,9 +629,9 @@ export class Translation implements ITranslationLocales {
   }
   public getSelectedLocales(): Array<string> {
     var res = [];
-    var locs = this.koLocales();
+    var locs = this.locales;
     for (var i = 0; i < locs.length; i++) {
-      if (locs[i].koVisible()) res.push(locs[i].locale);
+      if (locs[i].visible) res.push(locs[i].locale);
     }
     return res;
   }
@@ -621,24 +643,16 @@ export class Translation implements ITranslationLocales {
       }
     }
     var res = [];
-    var locs = this.koLocales();
+    var locs = this.locales;
     for (var i = 0; i < locs.length; i++) {
       var enabled = this.isLocaleEnabled(locs[i].locale);
-      locs[i].koVisible(
-        enabled && selectedLocales.indexOf(locs[i].locale) > -1
-      );
-      locs[i].koEnabled(enabled);
+      locs[i].visible = enabled && selectedLocales.indexOf(locs[i].locale) > -1;
+      locs[i].enabled = enabled;
     }
     return res;
   }
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
-  }
-  public get showAllStrings(): boolean {
-    return this.koShowAllStrings();
-  }
-  public set showAllStrings(val: boolean) {
-    this.koShowAllStrings(val);
   }
   public get showAllStringsText(): string {
     return editorLocalization.getString("ed.translationShowAllStrings");
@@ -664,7 +678,7 @@ export class Translation implements ITranslationLocales {
       headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
     }
     res.push(headerRow);
-    let itemsHash = <Survey.HashTable<TranslationItem>>{};
+    let itemsHash = <HashTable<TranslationItem>>{};
     this.fillItemsHash("", this.root, itemsHash);
     for (let key in itemsHash) {
       let row = [key];
@@ -692,8 +706,9 @@ export class Translation implements ITranslationLocales {
     if (locales[0] === "default") {
       locales[0] = "";
     }
-    let translation = new Translation(this.survey, true);
-    let itemsHash = <Survey.HashTable<TranslationItem>>{};
+    let translation = new Translation(this.survey);
+    translation.showAllStrings = true;
+    let itemsHash = <HashTable<TranslationItem>>{};
     this.fillItemsHash("", translation.root, itemsHash);
     rows.forEach((row) => {
       let name = row.shift().trim();
@@ -731,13 +746,8 @@ export class Translation implements ITranslationLocales {
   public mergeLocaleWithDefault() {
     if (!this.hasLocale(this.defaultLocale)) return;
     this.root.mergeLocaleWithDefault(this.defaultLocale);
-    this.koLocales([
-      {
-        locale: "",
-        koVisible: ko.observable(true),
-        koEnabled: ko.observable(true),
-      },
-    ]);
+    this.locales.splice(0, this.locales.length);
+    this.locales.push(new TranslationLocale(""));
     this.reset();
   }
   public expandAll() {
@@ -771,20 +781,20 @@ export class Translation implements ITranslationLocales {
     for (let i = 0; i < values.length && i < locales.length; i++) {
       let val = values[i].trim();
       if (!val) continue;
-      item.koValue(locales[i])(val);
+      item.values(locales[i]).text = val;
     }
   }
 
   private getVisibleLocales(): Array<string> {
-    return this.koLocales()
-      .filter((locale) => locale.koVisible())
+    return this.locales
+      .filter((locale) => locale.visible)
       .map((locale) => locale.locale);
   }
 
   private fillItemsHash(
     parentName: string,
     group: TranslationGroup,
-    itemsHash: Survey.HashTable<TranslationItem>
+    itemsHash: HashTable<TranslationItem>
   ) {
     let name = parentName ? parentName + "." + group.name : group.name;
     group.locItems.forEach((item) => {
@@ -793,50 +803,50 @@ export class Translation implements ITranslationLocales {
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   private setLocales(locs: Array<string>) {
-    var locales = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
       var loc = locs[i];
       if (this.hasLocale(loc)) continue;
       var enabled = this.isLocaleEnabled(loc);
-      locales.push({
-        locale: loc,
-        koVisible: ko.observable(enabled),
-        koEnabled: ko.observable(enabled),
-      });
+      var trLoc = new TranslationLocale(loc);
+      trLoc.enabled = enabled;
+      trLoc.visible = enabled;
+      this.locales.push(trLoc);
     }
-    this.koLocales(locales);
-    this.koCanMergeLocaleWithDefault(this.hasLocale(this.defaultLocale));
+    this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
     this.updateAvailableTranlations();
   }
   private isLocaleEnabled(locale: string): boolean {
     if (!locale) return true;
-    var supported = Survey.surveyLocalization.supportedLocales;
+    var supported = surveyLocalization.supportedLocales;
     if (!supported || supported.length <= 0) return true;
     return supported.indexOf(locale) > -1;
   }
   private updateAvailableTranlations() {
-    var res = [];
-    var locales = (<any>Survey.surveyLocalization).getLocales(true);
+    this.availableLanguages.splice(0, this.availableLanguages.length);
+    var locales = (<any>surveyLocalization).getLocales(true);
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
       if (!loc) continue;
       if (this.hasLocale(loc)) continue;
       if (loc == this.defaultLocale) continue;
-      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
+      this.availableLanguages.push(
+        new ItemValue(loc, editorLocalization.getLocaleName(loc))
+      );
     }
-    this.koSelectedLanguageToAdd(null);
-    res.unshift({ value: null, text: this.selectLanguageOptionsCaption });
-    this.koAvailableLanguages(res);
+    this.selectedLanguageToAdd = null;
+    this.availableLanguages.unshift(
+      new ItemValue(null, this.selectLanguageOptionsCaption)
+    );
     !!this.availableTranlationsChangedCallback &&
       this.availableTranlationsChangedCallback();
   }
   private updateFilteredPages() {
-    var res = [{ value: null, text: this.showAllPagesText }];
+    this.filteredPages.splice(0, this.filteredPages.length);
+    this.filteredPages.push(new ItemValue(null, this.showAllPagesText));
     for (var i = 0; i < this.survey.pages.length; i++) {
       var page = this.survey.pages[i];
-      res.push({ value: page, text: page.name });
+      this.filteredPages.push(new ItemValue(page, page.name));
     }
-    this.koFilteredPages(res);
   }
   dispose() {
     this.importFinishedCallback = undefined;
@@ -844,82 +854,3 @@ export class Translation implements ITranslationLocales {
     this.tranlationChangedCallback = undefined;
   }
 }
-
-ko.components.register("survey-translation", {
-  viewModel: {
-    createViewModel: (params, componentInfo) => {
-      const creator: CreatorBase<Survey.Survey> = params.creator;
-
-      const model = new Translation(
-        creator.createSurvey({}, "translation"),
-        false,
-        ko.computed(() => creator.readOnly)
-      );
-      model.importFinishedCallback = function () {
-        //creator.onTranslationImported.fire(self, {});
-      };
-      model.translateItemAfterRenderCallback = function (
-        item: TranslationItem,
-        el: any,
-        locale: string
-      ) {
-        //if (creator.onTranslateItemAfterRender.isEmpty) return;
-        var options = {
-          item: item,
-          htmlElement: el,
-          locale: locale,
-          onDestroyCallback: undefined,
-        };
-        ko.utils.domNodeDisposal.addDisposeCallback(el, () => {
-          if (!!options.onDestroyCallback) {
-            options.onDestroyCallback();
-          }
-        });
-        //creator.onTranslateItemAfterRender.fire(creator, options);
-      };
-      model.availableTranlationsChangedCallback = () => {
-        creator.setModified({ type: "TRANSLATIONS_CHANGED" });
-      };
-      model.tranlationChangedCallback = (
-        locale: string,
-        name: string,
-        value: string,
-        context: any
-      ) => {
-        creator.setModified({
-          type: "TRANSLATIONS_CHANGED",
-          locale,
-          name,
-          value,
-          context,
-        });
-      };
-
-      const subscrViewType = (s, o) => {
-        if (o.name === "viewType" && o.newValue == "translation") {
-          model.survey = creator.survey;
-        }
-      };
-      creator.onPropertyChanged.add(subscrViewType);
-
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        creator.onPropertyChanged.remove(subscrViewType);
-        model.dispose();
-      });
-
-      //creator.translation = model;
-      return model;
-    },
-  },
-  template: templateHtml,
-});
-
-ko.components.register("svd-translation-group", {
-  viewModel: {
-    createViewModel: (params, componentInfo) => {
-      var model = params.model;
-      return model;
-    },
-  },
-  template: groupTemplateHtml,
-});

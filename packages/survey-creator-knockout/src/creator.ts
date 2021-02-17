@@ -3,18 +3,20 @@ import {
   Survey,
   SurveyModel,
   Base,
-  Page,
   property,
-  ImplementorBase,
+  ImplementorBase
 } from "survey-knockout";
-import { DragDropHelper } from "./dragdrophelper";
 import {
   ISurveyCreatorOptions,
   ICreatorOptions,
   CreatorBase
 } from "@survey/creator";
 import { PropertyGridModel, TabJsonEditorAcePlugin, TabJsonEditorTextareaPlugin } from "@survey/creator";
+import { TabTranslationPlugin } from "./components/tabs/translation";
 
+if (!!ko.options) {
+  ko.options.useOnlyNativeEvents = true;
+}
 export class PropertyGrid extends PropertyGridModel {
   public koSurvey: ko.Observable<SurveyModel> = ko.observable();
 
@@ -46,48 +48,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
     return new Survey(json);
   }
 
-  public setSurvey(survey: Survey) {
-    super.setSurvey(survey);
-    this.dragDropHelper = new DragDropHelper(survey, (options?: any) => {});
-    this.selectElement(survey);
-  }
-
-  @property() selection: Base;
-
   public selectElement(element: any) {
-    this.selection = element;
-    if (typeof element.getType === "function" && element.getType() === "page") {
-      this.currentPage = <Page>element;
-    } else if (!!element["page"]) {
-      this.currentPage = element["page"];
-    } else {
-      this.currentPage = undefined;
-    }
-
+    super.selectElement(element);
     if (this.propertyGrid) this.propertyGrid.obj = element;
-  }
-
-  protected isElementSelectedCore(element: any): boolean {
-    return element === this.selection;
-  }
-
-  @property({
-    onSet: (val, target) => {
-      target.survey.currentPage = val;
-    },
-  })
-  currentPage: Page;
-
-  dragDropHelper: DragDropHelper;
-
-  dragToolboxItem(json: any, e: DragEvent) {
-    if (!this.readOnly) {
-      this.dragDropHelper.startDragToolboxItem(
-        e,
-        json["type"], //this.getNewName(json["type"]),
-        json
-      );
-    }
   }
 
   private initTabsPlugin(): void {
@@ -98,6 +61,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
         new TabJsonEditorTextareaPlugin(this);
       }
     }
+    new TabTranslationPlugin(this);
   }
 
   protected onViewTypeChanged(newType: string) {
