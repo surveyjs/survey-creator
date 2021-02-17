@@ -30,7 +30,7 @@ export class PageNavigatorViewModel {
       const pageSelectorItems: Array<IActionBarItem> = [];
       this.items(
         ko.unwrap(_items).map((page: PageModel) => {
-          const item: IActionBarItem = <any>{
+          const item: IActionBarItem = {
             id: page.id,
             title: _creator ? _creator.getObjectDisplayName(page) : page.title,
           };

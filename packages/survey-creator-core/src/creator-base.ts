@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { QuestionConverter } from "./questionconverter";
@@ -348,7 +347,6 @@ export class CreatorBase<T extends { [index: string]: any }>
   public showPageSelectorInToolbar = false;
 
   @propertyArray() tabs: Array<Survey.IActionBarItem>;
-  //public tabs = ko.observableArray();
 
   /**
    * Returns the localized string by its id
@@ -1202,15 +1200,15 @@ export class CreatorBase<T extends { [index: string]: any }>
 
     let opts: any = element["allowingOptions"];
     if (!opts) opts = {};
-    let items = [];
+    const items: Array<IActionBarItem> = [];
 
     if (opts.allowChangeType === undefined || opts.allowChangeType) {
       var currentType = element.getType();
-      var convertClasses = QuestionConverter.getConvertToClasses(
+      const convertClasses: string[] = QuestionConverter.getConvertToClasses(
         currentType,
         this.toolbox.itemNames
       );
-      var allowChangeType = convertClasses.length > 0;
+      const allowChangeType: boolean = convertClasses.length > 0;
       if (!element.isPanel && !element.isPage) {
         var createTypeByClass = (className) => {
           return {
@@ -1271,19 +1269,16 @@ export class CreatorBase<T extends { [index: string]: any }>
       propertyExists(element, "isRequired") &&
       isPropertyVisible(element, "isRequired")
     ) {
-      var isRequired = ko.computed(() => element.isRequired);
       items.push({
         id: "isrequired",
-        css: ko.computed(() =>
-          element.isRequired ? "sv-action-bar-item--secondary" : ""
-        ),
+        css: () => (element.isRequired ? "sv-action-bar-item--secondary" : ""),
         title: this.getLocString("pe.isRequired"),
-        iconName: ko.computed(() => {
-          if (isRequired()) {
+        iconName: () => {
+          if (element.isRequired) {
             return "icon-switchactive_16x16";
           }
           return "icon-switchinactive_16x16";
-        }),
+        },
         action: () => {
           if (this.isCanModifyProperty(<any>element, "isRequired")) {
             element.isRequired = !element.isRequired;
@@ -1293,7 +1288,10 @@ export class CreatorBase<T extends { [index: string]: any }>
     }
 
     if (items.length > 0) {
-      items.push({ component: "sv-action-bar-separator" });
+      items.push({
+        id: "sep-" + items.length,
+        component: "sv-action-bar-separator",
+      });
     }
 
     if (opts.allowDelete === undefined || opts.allowDelete) {
