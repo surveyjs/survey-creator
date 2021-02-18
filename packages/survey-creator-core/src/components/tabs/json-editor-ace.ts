@@ -5,7 +5,7 @@ import { SurveyTextWorker } from "../../textWorker";
 import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
 
-export class AceJsonEditorBaseModel extends JsonEditorBaseModel {
+export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: AceAjax.Editor;
   @property() private aceCanUndo: boolean = false;
@@ -30,13 +30,13 @@ export class AceJsonEditorBaseModel extends JsonEditorBaseModel {
   public init(aceEditor: AceAjax.Editor): void {
     this.aceEditor = aceEditor;
     this.aceEditor.setReadOnly(this.readOnly);
-    if (AceJsonEditorBaseModel.aceBasePath) {
+    if (AceJsonEditorModel.aceBasePath) {
       try {
-        ace["config"].set("basePath", AceJsonEditorBaseModel.aceBasePath);
+        ace["config"].set("basePath", AceJsonEditorModel.aceBasePath);
         this.aceEditor.session.setMode("ace/mode/json");
       } catch {}
     }
-    const self: AceJsonEditorBaseModel = this;
+    const self: AceJsonEditorModel = this;
     this.aceEditor.setShowPrintMargin(false);
     this.aceEditor.getSession().on("change", () => {
       self.onTextChanged();
@@ -85,11 +85,11 @@ export class AceJsonEditorBaseModel extends JsonEditorBaseModel {
 }
 
 export class TabJsonEditorAcePlugin
-  extends TabJsonEditorBasePlugin<AceJsonEditorBaseModel>
+  extends TabJsonEditorBasePlugin<AceJsonEditorModel>
   implements ICreatorPlugin {
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
-    this.model = new AceJsonEditorBaseModel(creator);
+    this.model = new AceJsonEditorModel(creator);
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
