@@ -3,19 +3,15 @@ import {
   Survey,
   SurveyModel,
   Base,
-  Page,
   property,
-  ImplementorBase,
-  PageModel,
+  ImplementorBase
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
   ICreatorOptions,
-  ICreatorPlugin,
-  CreatorBase,
+  CreatorBase
 } from "@survey/creator";
-import { PropertyGridModel, TabJsonEditorAcePlugin } from "@survey/creator";
-import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { PropertyGridModel, TabJsonEditorAcePlugin, TabJsonEditorTextareaPlugin } from "@survey/creator";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 
 if (!!ko.options) {
