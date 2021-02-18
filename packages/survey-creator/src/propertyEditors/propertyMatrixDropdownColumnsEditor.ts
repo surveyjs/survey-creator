@@ -54,6 +54,18 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     }
     return newColumn;
   }
+  protected addItem() {
+    super.addItem();
+    this.updateCanAddColumn();
+  }
+  protected deleteItem(obj: any) {
+    super.deleteItem(obj);
+    this.updateCanAddColumn();
+  }
+  public updateValue() {
+    super.updateValue();
+    this.updateCanAddColumn();
+  }
   protected getColumnsProperties(): Array<Survey.JsonObjectProperty> {
     var names = this.getPropertiesNames("matrixdropdowncolumn", [
       "isRequired",
@@ -74,6 +86,18 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
       }
     }
     return res;
+  }
+  private updateCanAddColumn() {
+    if (
+      !this.options ||
+      this.options.maximumColumnsCount < 1 ||
+      !Array.isArray(this.originalValue)
+    )
+      return;
+    this,
+      this.koCanAddItem(
+        this.originalValue.length < this.options.maximumColumnsCount
+      );
   }
 }
 

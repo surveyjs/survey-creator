@@ -273,6 +273,10 @@ export class CreatorBase<T extends { [index: string]: any }>
    * You need to set this property to false to allow your users build expressions visually only, without editing them in text editor.
    */
   public allowEditExpressionsInTextEditor = true;
+  /**
+   * You need to set this property to number more than 0 to limit the number of columns that users can create for matrix dynamic/matrix dropdown questions.
+   */
+  public maximumColumnsCount = 0;
 
   /**
    * Set this property to false to hide the pages selector in the Test Survey Tab
@@ -579,6 +583,9 @@ export class CreatorBase<T extends { [index: string]: any }>
       typeof options.allowEditExpressionsInTextEditor !== "undefined"
         ? options.allowEditExpressionsInTextEditor
         : true;
+    if (typeof options.maximumColumnsCount !== "undefined") {
+      this.maximumColumnsCount = options.maximumColumnsCount;
+    }
     this.useTabsInElementEditor =
       typeof options.useTabsInElementEditor !== "undefined"
         ? options.useTabsInElementEditor
