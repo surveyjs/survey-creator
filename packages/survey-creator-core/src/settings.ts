@@ -27,6 +27,7 @@ export interface ISurveyCreatorOptions {
   maxLogicItemsInCondition: number;
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean;
+  maximumColumnsCount: number;
   getObjectDisplayName(
     obj: Survey.Base,
     reason: string,
@@ -100,6 +101,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   maxLogicItemsInCondition: number;
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean;
+  maximumColumnsCount: number;
   getObjectDisplayName(
     obj: Survey.Base,
     reason: string,
@@ -156,7 +158,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   }
   onValueChangingCallback(options: any) {}
   onSurveyElementPropertyValueChanged(
-  //onPropertyValueChanged(
+    //onPropertyValueChanged(
     property: Survey.JsonObjectProperty,
     obj: any,
     newValue: any

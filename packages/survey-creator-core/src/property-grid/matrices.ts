@@ -288,15 +288,6 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     if (!Array.isArray(arr)) return;
     arr.splice(0, arr.length);
   }
-  protected getMatrixJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    propNames: Array<string>,
-    options: ISurveyCreatorOptions
-  ): any {
-    var res = super.getMatrixJSON(obj, prop, propNames, options);
-    return res;
-  }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return obj.getType() + "@" + prop.name;
   }
@@ -334,6 +325,18 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "column";
+  }
+  protected getMatrixJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ): any {
+    var res = super.getMatrixJSON(obj, prop, propNames, options);
+    if (options.maximumColumnsCount > 0) {
+      res.maxRowCount = options.maximumColumnsCount;
+    }
+    return res;
   }
 }
 
