@@ -6,25 +6,28 @@ const template = require("./page-navigator-item.html");
 // import template from "./page-navigator-item.html";
 
 export class PageNavigatorItemViewModel {
-  private _item: IActionBarItem;
-  constructor(item: IActionBarItem) {
-    this._item = item;
-  }
+  constructor(private item: IActionBarItem) {}
   get text() {
-    return this._item.title;
+    return this.item.title;
   }
   action = () => {
-    if(!this.disabled) {
-      this._item.action();
+    if (!this.disabled) {
+      this.item.action();
     }
   };
+  private unwrap<T>(value: T | (() => T)): T {
+    if (typeof value !== "function") {
+      return value;
+    } else {
+      return (<() => T>value)();
+    }
+  }
   get active() {
-    return !!ko.unwrap(this._item.active);
+    return !!this.unwrap(this.item.active);
   }
   get disabled() {
-    const isEnabled = this._item.enabled;
-    if (isEnabled === undefined)
-      return false;
+    const isEnabled = this.item.enabled;
+    if (isEnabled === undefined) return false;
     return !ko.unwrap(isEnabled);
   }
 }
