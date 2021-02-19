@@ -1,17 +1,6 @@
 import * as ko from "knockout";
-import {
-  Survey,
-  SurveyModel,
-  Base,
-  property,
-  ImplementorBase
-} from "survey-knockout";
-import {
-  ISurveyCreatorOptions,
-  ICreatorOptions,
-  CreatorBase
-} from "@survey/creator";
-import { PropertyGridModel, TabJsonEditorAcePlugin, TabJsonEditorTextareaPlugin } from "@survey/creator";
+import { Survey, SurveyModel, Base, property, ImplementorBase } from "survey-knockout";
+import { ISurveyCreatorOptions, ICreatorOptions, CreatorBase, PropertyGridModel } from "@survey/creator";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 
 if (!!ko.options) {
@@ -35,13 +24,10 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   constructor(options: ICreatorOptions = {}) {
     super(options);
-
     new ImplementorBase(this.toolbox);
     this.propertyGrid = new PropertyGrid(this.survey, this);
-
     new ImplementorBase(this);
-
-    this.initTabsPlugin();
+    this._dummyinitTabsPlugin();
   }
 
   protected createSurveyCore(json: any = {}): Survey {
@@ -53,17 +39,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (this.propertyGrid) this.propertyGrid.obj = element;
   }
 
-  private initTabsPlugin(): void {
-    if (this.showJSONEditorTab) {
-      if (TabJsonEditorAcePlugin.hasAceEditor()) {
-        new TabJsonEditorAcePlugin(this);
-      } else {
-        new TabJsonEditorTextareaPlugin(this);
-      }
-    }
+  private _dummyinitTabsPlugin(): void {
     new TabTranslationPlugin(this);
   }
-
   protected onViewTypeChanged(newType: string) {
     const plugin = this.plugins[newType];
     !!plugin && plugin.activate();

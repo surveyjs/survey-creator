@@ -1,7 +1,7 @@
 import { Survey, StylesManager, settings } from "survey-knockout";
 import { SurveyCreator } from "../src/entries";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { TabDesignerViewModel } from "@survey/creator";
 
 import "../node_modules/survey-knockout/modern.css";
 StylesManager.applyTheme("modern");

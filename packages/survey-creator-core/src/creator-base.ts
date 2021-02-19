@@ -1,24 +1,18 @@
 import * as Survey from "survey-knockout";
-import { editorLocalization } from "./editorLocalization";
-import { QuestionConverter } from "./questionconverter";
-import { SurveyTextWorker } from "./textWorker";
-import { SurveyHelper, ObjType } from "./surveyHelper";
-import { SurveyJSON5 } from "./json5";
-import { SurveyLogic } from "./tabs/logic";
+import { Base, IActionBarItem, ListModel, PageModel,
+  PopupModel, property, propertyArray } from "survey-knockout";
 import { ISurveyCreatorOptions } from "./settings";
-import {
-  Base,
-  IActionBarItem,
-  ListModel,
-  PageModel,
-  PopupModel,
-  property,
-  propertyArray,
-} from "survey-knockout";
+import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { editorLocalization } from "./editorLocalization";
+import { SurveyJSON5 } from "./json5";
+import { DragDropHelper } from "./dragdrophelper";
+import { QuestionConverter } from "./questionconverter";
+import { ObjType, SurveyHelper } from "./surveyHelper";
+import { SurveyLogic } from "./tabs/logic";
+import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
-import { DragDropHelper } from "./dragdrophelper";
-
 import "./components/creator.scss";
 
 export interface ICreatorOptions {
@@ -436,6 +430,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     super();
     this.setOptions(options);
     this.initTabs();
+    this.initTabsPlugin();
     this.initToolbar();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
@@ -504,6 +499,15 @@ export class CreatorBase<T extends { [index: string]: any }>
     this.tabs = tabs;
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
+    }
+  }
+  private initTabsPlugin(): void {
+    if (this.showJSONEditorTab) {
+      if (TabJsonEditorAcePlugin.hasAceEditor()) {
+        new TabJsonEditorAcePlugin(<any>this);
+      } else {
+        new TabJsonEditorTextareaPlugin(<any>this);
+      }
     }
   }
   private initToolbar() {
