@@ -869,7 +869,7 @@ test("options.onPropertyValueChanged", () => {
   var options = new EmptySurveyCreatorOptions();
   var changedValue = "";
   options.onSurveyElementPropertyValueChanged = (
-  // options.onPropertyValueChanged = (
+    // options.onPropertyValueChanged = (
     property: JsonObjectProperty,
     obj: any,
     newValue: any
@@ -946,7 +946,7 @@ test("options.onPropertyValueChanged in matrix", () => {
   var options = new EmptySurveyCreatorOptions();
   var changedValue = "";
   options.onSurveyElementPropertyValueChanged = (
-  // options.onPropertyValueChanged = (
+    // options.onPropertyValueChanged = (
     property: JsonObjectProperty,
     obj: any,
     newValue: any
@@ -1164,4 +1164,16 @@ test("trigger value editor", () => {
     new EmptySurveyCreatorOptions()
   );
   expect(trigger.setValue).toBeFalsy();
+});
+test("Support maximumColumnsCount option", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  var options = new EmptySurveyCreatorOptions();
+  options.maximumColumnsCount = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  expect(editQuestion.maxRowCount).toEqual(3);
 });

@@ -139,7 +139,7 @@ export class TranslationItem extends TranslationItemBase {
 }
 
 export interface ITranslationLocales {
-  localesStr: any;
+  locales: any;
   showAllStrings: boolean;
   readOnly: boolean;
   getLocaleName(loc: string): string;
@@ -206,7 +206,7 @@ export class TranslationGroup extends TranslationItemBase {
     return true;
   }
   public get locales() {
-    return !!this.translation ? this.translation.localesStr : null;
+    return !!this.translation ? this.translation.locales : null;
   }
   public get localeCount(): number {
     if (!this.locales) return 0;

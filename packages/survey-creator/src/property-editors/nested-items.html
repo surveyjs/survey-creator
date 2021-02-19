@@ -31,7 +31,7 @@
     <input
       type="button"
       class="btn sv-btn btn-primary"
-      data-bind="click: onAddClick, value: $data.addItemText"
+      data-bind="visible: koCanAddItem, click: onAddClick, value: $data.addItemText"
     />
     <input
       type="button"

@@ -23,6 +23,7 @@ export class EditorOptionsTests implements ISurveyObjectEditorOptions {
   }
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
+  maximumColumnsCount: number;
   onCanShowPropertyCallback(
     object: any,
     property: Survey.JsonObjectProperty,

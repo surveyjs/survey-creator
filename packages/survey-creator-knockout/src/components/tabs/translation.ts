@@ -1,9 +1,10 @@
 import * as ko from "knockout";
-var templateHtml = require("./translation.html");
-var groupTemplateHtml = require("./translation-group.html");
 import { SurveyCreator } from "../../creator";
 import { Translation, getLocString, ICreatorPlugin } from "@survey/creator";
 import { ImplementorBase, Base } from "survey-knockout";
+import "./translation.scss";
+var templateHtml = require("./translation.html");
+var groupTemplateHtml = require("./translation-group.html");
 
 export class TranslationModel {
   public koTranslation: ko.Observable<Translation>;

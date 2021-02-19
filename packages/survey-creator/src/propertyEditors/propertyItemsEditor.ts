@@ -10,6 +10,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
   public onClearClick: any;
   koAllowAddRemoveItems = ko.observable(true);
   koAllowRemoveAllItems = ko.observable(true);
+  koCanAddItem = ko.observable(true);
   private viewItems: Array<any> = [];
 
   constructor(property: Survey.JsonObjectProperty) {
@@ -84,9 +85,9 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       return true;
     },
   };
-  protected addItem = () => {
+  protected addItem() {
     this.createEditorItemCore();
-  };
+  }
   protected onDeletingItem(obj: any): boolean {
     if (!this.options) return true;
     return this.options.onCollectionItemDeletingCallback(
@@ -96,7 +97,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
       obj
     );
   }
-  protected deleteItem = (obj: any) => {
+  protected deleteItem(obj: any) {
     if (this.readOnly()) return;
     var index = this.originalValue.indexOf(obj);
     if (index > -1) {
@@ -105,7 +106,7 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     }
     this.deleteViewItemIndex(obj);
     this._notifyPropertyValueChanged();
-  };
+  }
   protected onItemDeleted(obj: any, index: number) {}
   public hasError(): boolean {
     for (var i = 0; i < this.viewItems.length; i++) {

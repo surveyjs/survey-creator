@@ -1716,6 +1716,33 @@ QUnit.test("SurveyNestedPropertyEditorItem koCanDeleteItem", function (assert) {
   );
   assert.notOk(itemViewModel.koCanDeleteItem(), "Forbid delete item");
 });
+QUnit.test("SurveyNestedPropertyEditorItem koCanAddColumn", function (assert) {
+  var survey = new Survey.Survey();
+  survey.addNewPage("p");
+  var question = new Survey.QuestionMatrixDropdown("q1");
+  question.addColumn("column 1");
+  question.addColumn("column 2");
+  survey.pages[0].addElement(question);
+  var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
+    Survey.Serializer.findProperty("matrixdropdownbase", "columns")
+  );
+  columnsEditor.options = new EditorOptionsTests();
+  columnsEditor.options.maximumColumnsCount = 3;
+  columnsEditor.object = question;
+  columnsEditor.beforeShow();
+  assert.equal(columnsEditor.koCanAddItem(), true, "There are two columns");
+  columnsEditor.onAddClick();
+  assert.equal(columnsEditor.koCanAddItem(), false, "There are three columns");
+  var itemViewModel = <SurveyNestedPropertyEditorItem>(
+    columnsEditor.createItemViewModel(question.columns[0])
+  );
+  columnsEditor.onDeleteClick(itemViewModel);
+  assert.equal(
+    columnsEditor.koCanAddItem(),
+    true,
+    "There are two columns again"
+  );
+});
 
 QUnit.test(
   "SurveyNestedPropertyEditorItem edit boolean column",
@@ -3073,7 +3100,10 @@ QUnit.test(
     question.cellType = "anything";
     question.title = "my title";
     question.titleLocation = "default";
-    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
     assert.equal(json.width, undefined);
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
@@ -3083,14 +3113,17 @@ QUnit.test(
     assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");
 
-    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, false);
+    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      false
+    );
     assert.equal(json.width, undefined);
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
     assert.equal(json.cellType, undefined);
     assert.equal(json.title, "my title");
     assert.equal(json.readOnly, false);
-    assert.equal(json.type, "text");    
+    assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");
   }
 );
@@ -3098,15 +3131,21 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyDefaultValueEditor json cellType overrides type",
   function (assert) {
-    var question = new Survey.MatrixDropdownColumn("column 1")
+    var question = new Survey.MatrixDropdownColumn("column 1");
     assert.equal(question.getType(), "matrixdropdowncolumn");
-    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
     assert.equal(json.cellType, undefined);
     assert.equal(json.type, "matrixdropdowncolumn");
 
     question.cellType = "radiogroup";
     assert.equal(question.getType(), "matrixdropdowncolumn");
-    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
     assert.equal(json.cellType, undefined);
     assert.equal(json.type, "radiogroup");
   }
@@ -3115,9 +3154,12 @@ QUnit.test(
 QUnit.test(
   "SurveyPropertyDefaultValueEditor json expression converted to text",
   function (assert) {
-    var question = new Survey.QuestionExpression("q1")
+    var question = new Survey.QuestionExpression("q1");
     assert.equal(question.getType(), "expression");
-    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(question, true);
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
     assert.equal(json.type, "text");
   }
 );
