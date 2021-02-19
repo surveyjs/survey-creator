@@ -82,12 +82,6 @@ export class CreatorBase<T extends { [index: string]: any }>
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   public dragDropHelper: DragDropHelper;
   @property() selection: Base;
-  @property({
-    onSet: (val, target) => {
-      target.survey.currentPage = val;
-    },
-  })
-  currentPage: PageModel;
 
   protected newQuestions: Array<any> = [];
   protected newPanels: Array<any> = [];
@@ -429,6 +423,7 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   constructor(protected options: ICreatorOptions) {
     super();
+    this._pagesController = new PagesController<T>(this);
     this.setOptions(options);
     this.initTabs();
     this.initToolbar();
@@ -720,6 +715,7 @@ export class CreatorBase<T extends { [index: string]: any }>
       (options?: any) => {}
     );
     this.selectElement(survey);
+    this.pagesController.currentPage = survey.currentPage;
   }
 
   private getSurveyTextFromDesigner() {
@@ -773,7 +769,7 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   public getObjectDisplayName(
     obj: Survey.Base,
-    reason: string,
+    reason: string = undefined,
     displayName: string = undefined
   ): string {
     if (!displayName) {
@@ -827,7 +823,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     element: Survey.IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX"
   ) {
-    var parent = this.survey.currentPage;
+    var parent = this.currentPage;
     var index = -1;
     var elElement = this.survey.selectedElement;
     if (elElement && elElement.parent) {
@@ -1361,4 +1357,63 @@ export class CreatorBase<T extends { [index: string]: any }>
 
     return items;
   }
+
+  // Page Controller
+  private _pagesController: PagesController<T>;
+
+  public get pagesController(): PagesController<T> {
+    return this._pagesController;
+  }
+
+  public get currentPage(): PageModel {
+    return this.pagesController.currentPage;
+  }
+  public set currentPage(value: PageModel) {
+    this.pagesController.currentPage = value;
+  }
+  public addPage(): PageModel {
+    return this.pagesController.addPage();
+  }
+  public deletePage() {
+    this.pagesController.deletePage();
+  }
+  public movePage(page: Survey.PageModel, indexFrom: number) {
+    this.pagesController.movePage();
+  }
+}
+
+export class PagesController<T extends { [index: string]: any }> extends Base {
+  constructor(public creator: CreatorBase<T>) {
+    super();
+  }
+  public get survey(): T {
+    return this.creator.survey;
+  }
+  public get pages(): Array<PageModel> {
+    return this.survey.pages;
+  }
+  public get currentPage(): PageModel {
+    return this.survey.currentPage;
+  }
+  public set currentPage(value: PageModel) {
+    (<any>this.survey).currentPage = value;
+    this.creator.selection = value;
+  }
+  /*
+  @property({
+    onSet: (val, target) => {
+      target.survey.currentPage = val;
+    },
+  })
+  currentPage: PageModel;
+  */
+  public addPage(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    const page: PageModel = this.survey.addNewPage(name);
+    //this.selectedElement = page;
+    this.currentPage = page;
+    return page;
+  }
+  public deletePage() {}
+  public movePage() {}
 }

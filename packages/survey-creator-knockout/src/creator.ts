@@ -4,14 +4,18 @@ import {
   SurveyModel,
   Base,
   property,
-  ImplementorBase
+  ImplementorBase,
 } from "survey-knockout";
 import {
   ISurveyCreatorOptions,
   ICreatorOptions,
-  CreatorBase
+  CreatorBase,
 } from "@survey/creator";
-import { PropertyGridModel, TabJsonEditorAcePlugin, TabJsonEditorTextareaPlugin } from "@survey/creator";
+import {
+  PropertyGridModel,
+  TabJsonEditorAcePlugin,
+  TabJsonEditorTextareaPlugin,
+} from "@survey/creator";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 
 if (!!ko.options) {
@@ -40,6 +44,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     this.propertyGrid = new PropertyGrid(this.survey, this);
 
     new ImplementorBase(this);
+    new ImplementorBase(this.pagesController);
 
     this.initTabsPlugin();
   }
