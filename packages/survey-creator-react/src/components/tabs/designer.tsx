@@ -1,10 +1,10 @@
+import React from "react";
 import * as Survey from "survey-react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
 import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
-import React from "react";
 import { CreatorSurveyPageComponent } from "../page";
-import { SurveyCreatorToolbox } from "../toolbox/toolbox";
-import { SurveyPageNavigator } from "../page-navigator/page-navigator";
+import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
+import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 
 interface ITabDesignerComponentProps {
   creator: CreatorBase<Survey.Model>;

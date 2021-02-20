@@ -2,7 +2,6 @@ import * as Survey from "survey-react";
 import {
   ActionBar,
   Base,
-  ReactElementFactory,
   SurveyElementBase,
   SurveyPage,
 } from "survey-react";
