@@ -1,8 +1,8 @@
-import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
+import { PageNavigatorViewModel } from "@survey/creator";
+import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 import {
-  PageNavigatorViewModel,
   PageNavigatorItemViewModel,
   SvgBundleViewModel,
 } from "../src/entries";

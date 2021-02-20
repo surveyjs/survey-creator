@@ -4,7 +4,7 @@ import * as Survey from "survey-react";
 
 import "survey-react/modern.css";
 import TabbedMenuComponent from "./TabbedMenuComponent";
-import PropertyGridComponent from "./PropertyGridComponent";
+import PropertyGridComponent from "./PropertyGrid";
 import {
   ActionBar,
   Base,

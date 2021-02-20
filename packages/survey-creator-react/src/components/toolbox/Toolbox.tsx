@@ -2,16 +2,13 @@ import * as Survey from "survey-react";
 import {
   CreatorBase,
   getLocString,
-  IQuestionToolboxItem,
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import {
-  ActionBar,
   AdaptiveActionBarItemWrapper,
   AdaptiveElement,
   Base,
   IActionBarItem,
-  ReactElementFactory,
   SurveyElementBase,
   SvgIcon,
   VerticalResponsibilityManager,
