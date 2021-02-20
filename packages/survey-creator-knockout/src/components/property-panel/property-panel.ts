@@ -1,84 +1,31 @@
+import { PropertyGridModel } from "@survey/creator";
 import * as ko from "knockout";
-import { Survey } from "survey-knockout";
+import { Base, ImplementorBase, property, SurveyModel } from "survey-knockout";
 import { creatorCss } from "../../survey-theme/creator-css";
 //import "./property-panel.scss";
 //import "../../survey-theme/survey.scss";
 const template = require("./property-panel.html");
 
-// export class PropertyPanelTabViewModel {
-//   public data: SurveyElementEditorTabModel;
-//   public editorProperties: ko.MaybeObservableArray<any>;
-//   public disabled: ko.MaybeObservable<boolean>;
+export class PropertyGridViewModel extends Base {
+  @property() survey: SurveyModel;
 
-//   constructor(data: SurveyElementEditorTabModel) {
-//     this.data = data;
-//     this.editorProperties = data.editorProperties;
-//     this.disabled = ko.observable(false);
-//   }
-
-//   public collapsed: ko.Observable<boolean> = ko.observable(false);
-
-//   public toggle = () => {
-//     this.collapsed(!this.collapsed());
-//   };
-
-//   public get title() {
-//     return this.data.title;
-//   }
-// }
-
-// export class PropertyPanelViewModel {
-//   public title: ko.MaybeObservable<string>;
-//   public tabs: ko.Computed<Array<PropertyPanelTabViewModel>>;
-//   constructor(
-//     tabs: ko.MaybeObservableArray<SurveyElementEditorTabModel>,
-//     title: ko.MaybeObservable<string>
-//   ) {
-//     this.tabs = ko.computed<Array<PropertyPanelTabViewModel>>(() => {
-//       var res = ko
-//         .unwrap(tabs)
-//         .map((tabData) => new PropertyPanelTabViewModel(tabData));
-//       if (res.length > 0 && !res[0].disabled) {
-//         res[0].collapsed(false);
-//       }
-//       return res;
-//     });
-//     this.showHeader = ko.computed<boolean>(() => {
-//       return this.tabs().length > 1;
-//     });
-//     this.title = title;
-//   }
-
-//   showHeader: ko.Computed<boolean>;
-// }
-
-export class PropertyPanelViewModel {
-  setupSurvey: ko.Computed<any>;
-  constructor(public title: string, public survey: ko.Observable<Survey>) {
-    //todo
-    this.setupSurvey = ko.computed(() => {
-      survey().showQuestionNumbers = "off";
-      survey().css = creatorCss;
-      /*
-      survey()
-        .getAllQuestions()
-        .forEach((question) => {
-          if (question.getType() == "dropdown") {
-            question.renderAs = "dropdown";
-          }
-        });
-      */
-    });
-  }
-  public dispose() {
-    this.setupSurvey.dispose();
+  constructor(private model: PropertyGridModel, public title: string) {
+    super();
+    this.model.objValueChangedCallback = () => {
+      this.survey = this.model.survey;
+      this.survey.showQuestionNumbers = "off";
+      this.survey.css = creatorCss;
+    };
+    this.model.objValueChangedCallback();
   }
 }
 
 ko.components.register("svc-property-panel", {
   viewModel: {
     createViewModel: (params: any) => {
-      return new PropertyPanelViewModel(params.title, params.survey);
+      const model = new PropertyGridViewModel(params.model, params.title);
+      new ImplementorBase(model);
+      return model;
     },
   },
   template: template,
