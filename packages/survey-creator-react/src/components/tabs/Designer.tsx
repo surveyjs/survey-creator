@@ -2,7 +2,7 @@ import React from "react";
 import * as Survey from "survey-react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
 import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
-import { CreatorSurveyPageComponent } from "../page";
+import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 
