@@ -1,6 +1,13 @@
 import * as Survey from "survey-knockout";
-import { Base, IActionBarItem, ListModel, PageModel,
-  PopupModel, property, propertyArray } from "survey-knockout";
+import {
+  Base,
+  IActionBarItem,
+  ListModel,
+  PageModel,
+  PopupModel,
+  property,
+  propertyArray,
+} from "survey-knockout";
 import { ISurveyCreatorOptions } from "./settings";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
@@ -14,6 +21,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
 import "./components/creator.scss";
+import { PropertyGridModel } from "./property-grid";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -419,6 +427,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
+  public propertyGrid: PropertyGridModel;
 
   constructor(protected options: ICreatorOptions) {
     super();
@@ -435,6 +444,10 @@ export class CreatorBase<T extends { [index: string]: any }>
       this.options && this.options.questionTypes
         ? this.options.questionTypes
         : null
+    );
+    this.propertyGrid = new PropertyGridModel(
+      (this.survey as any) as Base,
+      this
     );
   }
 
@@ -989,6 +1002,9 @@ export class CreatorBase<T extends { [index: string]: any }>
       this.currentPage = element["page"];
     } else {
       this.currentPage = undefined;
+    }
+    if (this.propertyGrid) {
+      this.propertyGrid.obj = element;
     }
   }
 

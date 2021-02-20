@@ -17,7 +17,11 @@ import {
   SurveyLocStringViewer,
   unwrap,
 } from "survey-react";
-import { CreatorBase, ICreatorOptions } from "@survey/creator";
+import {
+  CreatorBase,
+  ICreatorOptions,
+  PropertyGridViewModel,
+} from "@survey/creator";
 
 Survey.StylesManager.applyTheme("modern");
 
@@ -58,8 +62,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         </div>
         <div className="svc-flex-column" style={style}>
           <PropertyGridComponent
-            title="Question Properties"
-            creator={creator}
+            model={
+              new PropertyGridViewModel(
+                creator.propertyGrid,
+                "Question Properties"
+              )
+            }
             //survey={creator.survey}
           ></PropertyGridComponent>
         </div>

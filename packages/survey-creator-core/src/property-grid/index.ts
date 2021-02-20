@@ -9,6 +9,7 @@ import {
   Helpers,
   settings,
   QuestionMatrixDynamicModel,
+  property,
 } from "survey-knockout";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -18,6 +19,7 @@ import { EditableObject } from "../propertyEditors/editableObject";
 import { editorLocalization } from "../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
+import { creatorCss } from "../survey-theme/creator-css";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -686,6 +688,20 @@ export class PropertyGridModel {
         options.question.value
       );
     }
+  }
+}
+
+export class PropertyGridViewModel extends Base {
+  @property() survey: SurveyModel;
+
+  constructor(private model: PropertyGridModel, public title: string) {
+    super();
+    this.model.objValueChangedCallback = () => {
+      this.survey = this.model.survey;
+      this.survey.showQuestionNumbers = "off";
+      this.survey.css = creatorCss;
+    };
+    this.model.objValueChangedCallback();
   }
 }
 

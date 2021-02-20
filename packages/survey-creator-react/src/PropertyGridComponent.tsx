@@ -1,15 +1,26 @@
+import { PropertyGridViewModel /*, creatorCss*/ } from "@survey/creator";
 import React, { Component } from "react";
+import { Survey } from "survey-react";
 
-class PropertyGridComponent extends Component<any, any> {
-  constructor(props: any) {
+interface IPropertyGridComponentProps {
+  model: PropertyGridViewModel;
+}
+class PropertyGridComponent extends Component<
+  IPropertyGridComponentProps,
+  any
+> {
+  constructor(props: IPropertyGridComponentProps) {
     super(props);
   }
   render() {
+    const model: PropertyGridViewModel = this.props.model;
     return (
       <div className="svc-property-panel">
-        <div className="svc-property-panel__header">{this.props.title}</div>
+        <div className="svc-property-panel__header">
+          {this.props.model.title}
+        </div>
         <div className="svc-property-panel__expander">
-          <div>ko template: | name: 'survey-content', data: survey |</div>
+          <Survey model={model.survey}></Survey>
         </div>
       </div>
     );
