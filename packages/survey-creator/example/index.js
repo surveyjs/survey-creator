@@ -50,12 +50,12 @@ if (!window["%hammerhead%"]) {
   Survey.StylesManager.applyTheme();
   SurveyCreator.StylesManager.applyTheme();
   //
-  
-  SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
+  SurveyCreator.SurveyJSONEditor.aceBasePath =
+    "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
   var options = {
-    questionTypes: [
+    /*questionTypes: [
       "text",
       "checkbox",
       "radiogroup",
@@ -68,9 +68,20 @@ if (!window["%hammerhead%"]) {
       "file",
       "expression"
     ],
-    pageEditMode: "single"
+    pageEditMode: "single"*/
   };
   var creator = new SurveyCreator.SurveyCreator("editorElement", options);
+  creator.onElementAllowOperations.add(function (s, o) {
+    if (o.obj.getType() === "page") {
+      //o.allowDelete = false;
+      o.allowCopy = false;
+      o.allowDragging = false;
+      //o.allowAdd = false;
+      //o.allowEdit = false;
+      //alert("s.getType(): " + o.obj.getType());
+    }
+  });
+
   creator.showToolbox = "right";
   creator.showPropertyGrid = "right";
   creator.rightContainerActiveItem("toolbox");
@@ -83,10 +94,15 @@ if (!window["%hammerhead%"]) {
       </div>
     </div>`;
 
-  creator.saveSurveyFunc = function(saveNo, callback) {
+  creator.saveSurveyFunc = function (saveNo, callback) {
     alert("ok");
     callback(saveNo, true);
   };
-
+  creator.render(
+    "editorElement" /*, {
+    showToolbox: "right",
+    showPropertyGrid: "right",
+  }*/
+  );
   window.creator = creator;
 }
