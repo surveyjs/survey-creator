@@ -1,6 +1,6 @@
 import { StylesManager, settings } from "survey-knockout";
 import { SurveyCreator, CreatorViewModel, DropdownEditorViewModel } from "../src/entries";
-import { PropertyGrid } from "@survey/creator";
+import { PropertyGridModel } from "@survey/creator";
 
 import "../node_modules/survey-knockout/modern.css";
 StylesManager.applyTheme("modern");
@@ -10,7 +10,7 @@ import surveyJSON from "./sample-survey.json";
 
 export default {
   title: "Creator / Desktop or Landscape Tablet",
-  "ko-components": [SurveyCreator, CreatorViewModel, DropdownEditorViewModel, PropertyGrid], // Fake component usage in order for component to be actually imported
+  "ko-components": [SurveyCreator, CreatorViewModel, DropdownEditorViewModel, PropertyGridModel], // Fake component usage in order for component to be actually imported
   parameters: {
     design: {
       type: "figma",
