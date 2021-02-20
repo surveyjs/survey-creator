@@ -84,7 +84,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   protected getStateElement(): Base {
     return this.adaptiveElement;
   }
-  render(): any {
+  render(): JSX.Element {
     if (!this.hasItems) {
       return null;
     }

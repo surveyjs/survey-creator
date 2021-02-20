@@ -10,6 +10,7 @@ import {
 } from "survey-knockout";
 
 import "./page-navigator.scss";
+import "./page-navigator-item.scss";
 
 export class PageNavigatorViewModel<
   T extends { [index: string]: any }

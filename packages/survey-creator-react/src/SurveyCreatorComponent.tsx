@@ -15,6 +15,7 @@ import {
   SurveyElementBase,
   SurveyError,
   SurveyLocStringViewer,
+  unwrap,
 } from "survey-react";
 import { CreatorBase, ICreatorOptions } from "@survey/creator";
 
@@ -73,18 +74,11 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return <>{tabs}</>;
     //return <Survey.Survey model={this.creator.survey} />;
   }
-  private unwrap<T>(value: T | (() => T)): T {
-    if (typeof value !== "function") {
-      return value;
-    } else {
-      return (value as () => T)();
-    }
-  }
   renderCreatorTab(tab: IActionBarItem) {
     const creator: CreatorBase<Survey.Model> = this.props.creator;
     let style: CSSProperties = {};
     //if (tab.visible !== undefined && !tab.visible) {
-    if (!this.unwrap(tab.active)) {
+    if (!unwrap(tab.active)) {
       style.display = "none";
     }
 

@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { IActionBarItem } from "survey-knockout";
 
-import "./page-navigator-item.scss";
+//import "./page-navigator-item.scss";
 const template = require("./page-navigator-item.html");
 // import template from "./page-navigator-item.html";
 

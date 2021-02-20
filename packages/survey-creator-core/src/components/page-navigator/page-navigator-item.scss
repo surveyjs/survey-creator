@@ -1,6 +1,7 @@
 @import "../../variables.scss";
 
-svc-page-navigator-item {
+svc-page-navigator-item,
+.svc-page-navigator-item {
   display: block;
   width: 44px;
   height: 36px;
@@ -8,7 +9,7 @@ svc-page-navigator-item {
   position: relative;
 }
 
-.svc-page-navigator-item {
+.svc-page-navigator-item-content {
   height: 100%;
   width: 100%;
 }
@@ -63,7 +64,7 @@ svc-page-navigator-item {
   }
 }
 
-.svc-page-navigator-item:not(.svc-page-navigator-item--disabled) {
+.svc-page-navigator-item-content:not(.svc-page-navigator-item--disabled) {
   .svc-page-navigator-item__banner {
     .svc-page-navigator-item__dot {
       width: 6px;
@@ -74,7 +75,7 @@ svc-page-navigator-item {
   }
 }
 
-.svc-page-navigator-item:hover {
+.svc-page-navigator-item-content:hover {
   .svc-page-navigator-item__banner {
     padding: 0 calcSize(3);
     max-width: 200px;

@@ -4,6 +4,7 @@ import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import React from "react";
 import { CreatorSurveyPageComponent } from "../page";
 import { SurveyCreatorToolbox } from "../toolbox/toolbox";
+import { SurveyPageNavigator } from "../page-navigator/page-navigator";
 
 interface ITabDesignerComponentProps {
   creator: CreatorBase<Survey.Model>;
@@ -61,6 +62,10 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div className={className}>
           <div className={survey.css.container}>{surveyPages}</div>
         </div>
+        <SurveyPageNavigator
+          creator={creator}
+          pages={creator.pagesController.pages as any}
+        ></SurveyPageNavigator>
       </>
     );
     /*

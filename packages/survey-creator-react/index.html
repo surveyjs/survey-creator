@@ -26,7 +26,10 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div
+      id="root"
+      style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"
+    ></div>
     <script type="text/babel">
       var json = {
         completedHtml:
@@ -46,6 +49,8 @@
         pages: [
           {
             name: "page1",
+            title: "page1 -- title",
+            description: "page1 -- description",
             elements: [
               {
                 type: "rating",
@@ -93,6 +98,35 @@
                 visibleIf: "{nps_score} notempty",
                 title:
                   "What do you miss and what was disappointing in your experience with us?",
+              },
+            ],
+          },
+          {
+            name: "page2",
+            elements: [
+              {
+                type: "checkbox",
+                name: "question4",
+                choices: ["item1", "item2", "item3"],
+              },
+            ],
+          },
+          {
+            name: "page3",
+            elements: [
+              {
+                type: "dropdown",
+                name: "question5",
+                choices: ["item1", "item2", "item3"],
+              },
+            ],
+          },
+          {
+            name: "page4",
+            elements: [
+              {
+                type: "rating",
+                name: "question6",
               },
             ],
           },

@@ -1,6 +1,7 @@
 @import "../../variables.scss";
 
-svc-page-navigator {
+svc-page-navigator,
+.svc-page-navigator {
   display: flex;
   flex-direction: column;
 }
