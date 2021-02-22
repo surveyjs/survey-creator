@@ -17,7 +17,7 @@ export class TranslationModel {
   }
   public activate(): void {
     this.koTranslation(
-      new Translation(this.creator.survey, (obj: Base) => {
+      new Translation(this.creator.survey, this.creator, (obj: Base) => {
         new ImplementorBase(obj);
       })
     );

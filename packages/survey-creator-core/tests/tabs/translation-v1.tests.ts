@@ -60,7 +60,7 @@ test("Survey child groups", () => {
   expect(root.groups[0].groups[0].expanded).toBeTruthy();
   expect(root.groups[0].groups[0].showHeader).toBeTruthy();
 });
-test("Survey child groups", () => {
+test("Survey child groups, #2", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p1");
   var question = <QuestionTextModel>(
@@ -68,13 +68,14 @@ test("Survey child groups", () => {
   );
   var translation = new Translation(survey);
   translation.showAllStrings = true;
-  expect(translation.localesStr).toHaveLength(1);
+  expect(translation.localesQuestion.value).toHaveLength(0);
+  expect(translation.locales).toHaveLength(1);
   question.locTitle.setLocaleText("de", "Deutch text");
   translation.reset();
-  expect(translation.localesStr).toHaveLength(2);
+  expect(translation.locales).toHaveLength(2);
   translation.addLocale("fr");
   translation.addLocale("de");
-  expect(translation.localesStr).toHaveLength(3);
+  expect(translation.locales).toHaveLength(3);
 });
 test("get locales", () => {
   var survey = new SurveyModel({
@@ -83,7 +84,7 @@ test("get locales", () => {
   });
   var translation = new Translation(survey);
   translation.showAllStrings = true;
-  expect(translation.localesStr).toHaveLength(2);
+  expect(translation.locales).toHaveLength(2);
 });
 test("Localization strings editing", () => {
   var question = new QuestionTextModel("q1");
@@ -104,16 +105,21 @@ test("Translation for adding", () => {
   translation.showAllStrings = true;
   var locales = surveyLocalization.locales;
   var count = 0;
-  for (var key in locales) count++;
-  expect(translation.availableLanguages).toHaveLength(count);
+  for (var key in locales) {
+    count++;
+  }
+  expect(translation.availableLocalesQuestion.visibleChoices).toHaveLength(
+    count
+  );
   translation.addLocale("de");
-  expect(translation.availableLanguages).toHaveLength(count - 1);
-  expect(translation.localesStr).toHaveLength(2);
-  expect(translation.selectedLanguageToAdd).toEqual(null);
-  translation.selectedLanguageToAdd = "fr";
-  expect(translation.localesStr).toHaveLength(3);
-  expect(translation.localesStr[2]).toEqual("fr");
-  expect(translation.selectedLanguageToAdd).toEqual(null);
+  expect(translation.availableLocalesQuestion.visibleChoices).toHaveLength(
+    count - 1
+  );
+  expect(translation.locales).toHaveLength(2);
+  translation.availableLocalesQuestion.value = "fr";
+  expect(translation.locales).toHaveLength(3);
+  expect(translation.locales[2]).toEqual("fr");
+  expect(translation.availableLocalesQuestion.value).toBeFalsy();
 });
 test("Do not reset locales on reset", () => {
   var survey = new SurveyModel();
@@ -136,14 +142,13 @@ test("get/set the selected locales", () => {
   translation.addLocale("it");
   translation.setSelectedLocales(null);
   expect(translation.getSelectedLocales()).toHaveLength(0);
-  translation.locales[1].visible = true;
-  translation.locales[3].visible = true;
-  expect(translation.getSelectedLocales()).toEqual(["fr", "it"]);
+  translation.localesQuestion.value = ["fr", "it"];
+  expect(translation.getSelectedLocales()).toHaveLength(2);
+  expect(translation.getSelectedLocales()[0]).toEqual("fr");
   translation.setSelectedLocales(["de", "it"]);
-  expect(translation.getSelectedLocales()).toEqual(["de", "it"]);
-  expect(translation.locales[1].visible).toBeFalsy();
-  expect(translation.locales[2].visible).toBeTruthy();
-  expect(translation.locales[3].visible).toBeTruthy();
+  expect(translation.getSelectedLocales()).toHaveLength(2);
+  expect(translation.getSelectedLocales()[0]).toEqual("de");
+  expect(translation.localesQuestion.value).toHaveLength(2);
 });
 test("disable locales", () => {
   var survey = new SurveyModel({
@@ -170,10 +175,8 @@ test("disable locales", () => {
   var translation = new Translation(survey);
   var locales = translation.locales;
   expect(locales).toHaveLength(4);
-  expect(locales[1].enabled).toBeTruthy();
-  expect(locales[2].enabled).toBeFalsy();
-  expect(locales[1].visible).toBeTruthy();
-  expect(locales[2].visible).toBeFalsy();
+  expect(translation.localesQuestion.choices).toHaveLength(3);
+  expect(translation.localesQuestion.value).toHaveLength(3);
   surveyLocalization.supportedLocales = [];
 });
 test("get/set the selected locales with inactive translation tab", () => {
@@ -188,7 +191,9 @@ test("get/set the selected locales with inactive translation tab", () => {
   });
   var translation = new Translation(survey);
   translation.setSelectedLocales(["de", "it"]);
-  expect(translation.getSelectedLocales()).toEqual(["de", "it"]);
+  expect(translation.getSelectedLocales()).toHaveLength(2);
+  expect(translation.getSelectedLocales()).toContain("de");
+  expect(translation.getSelectedLocales()).toContain("it");
 });
 test("Translation show All strings", () => {
   var survey = new SurveyModel();
@@ -435,6 +440,7 @@ test("Merging a locale with default", () => {
   });
   var translation = new Translation(survey);
   expect(translation.locales).toHaveLength(3);
+  expect(translation.locales).toContain("de");
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
   expect(translation.mergeLocaleWithDefaultText).toEqual(
     "Merge deutsch with default locale"
