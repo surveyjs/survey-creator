@@ -1,17 +1,16 @@
 import React from "react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
-import { TextareaJsonEditorModel } from "@survey/creator";
+import { TabJsonEditorBasePlugin, TextareaJsonEditorModel } from "@survey/creator";
 
+interface ITabJsonEditorTextarearComponentProps {
+  data: TabJsonEditorBasePlugin<TextareaJsonEditorModel>
+}
 
-export class TabJsonEditorTextareaComponent extends SurveyElementBase<any, any> {
+export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEditorTextarearComponentProps, any> {
   private model: TextareaJsonEditorModel;
-  constructor(props) {
+  constructor(props: ITabJsonEditorTextarearComponentProps) {
     super(props);
     this.model = props.data.model;
-
-    // const creator: CreatorBase<Survey.Model> = this.props.creator;
-    // const survey: Survey.Model = this.props.survey;
-    // const data: any = this.props.survey;
   }
 
   protected getStateElement(): Base {
@@ -19,6 +18,11 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<any, any> 
   }
 
   render(): JSX.Element {
+    const errors: JSX.Element[] = [];
+    for (let i: number = 0; i < this.model.errors.length; i++) {
+      errors.push(<span>Error: </span>);
+      errors.push(<span>{this.model.errors[i].text}</span>);
+    }
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
@@ -28,10 +32,8 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<any, any> 
             aria-label={this.model.ariaLabel}
           >
           </textarea>
-          <div className="svc-json-editor-tab__content-errors"
-            //data-bind="foreach: errors"
-          >
-            <span>Error: </span><span /*data-bind="text: text"*/></span>
+          <div className="svc-json-editor-tab__content-errors">
+            {errors}
           </div>
         </div>
       </div>
