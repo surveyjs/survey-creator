@@ -699,7 +699,8 @@ export class PropertyGridViewModel extends Base {
     this.model.objValueChangedCallback = () => {
       this.survey = this.model.survey;
       this.survey.showQuestionNumbers = "off";
-      this.survey.css = creatorCss;
+      // AM: TODO need to fix creatorCss content, it breaks survey appearance in the PropertyGrid
+      // this.survey.css = creatorCss;
     };
     this.model.objValueChangedCallback();
   }
