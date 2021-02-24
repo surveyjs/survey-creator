@@ -2,21 +2,19 @@ import React, { ChangeEvent } from "react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
 import { TabJsonEditorBasePlugin, TextareaJsonEditorModel } from "@survey/creator";
 
-interface ITabJsonEditorTextarearComponentProps {
+interface ITabJsonEditorTextareaComponentProps {
   data: TabJsonEditorBasePlugin<TextareaJsonEditorModel>
 }
 
-export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEditorTextarearComponentProps, any> {
+export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEditorTextareaComponentProps, any> {
   private model: TextareaJsonEditorModel;
-  constructor(props: ITabJsonEditorTextarearComponentProps) {
+  constructor(props: ITabJsonEditorTextareaComponentProps) {
     super(props);
     this.model = props.data.model;
   }
-
   protected getStateElement(): Base {
     return this.model as any;
   }
-
   render(): JSX.Element {
     const errors: JSX.Element[] = [];
     for (let i: number = 0; i < this.model.errors.length; i++) {
