@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
 import { TabJsonEditorBasePlugin, TextareaJsonEditorModel } from "@survey/creator";
 
@@ -28,6 +28,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEd
         <div className="svc-json-editor-tab__content">
           <textarea className="svc-json-editor-tab__content-area"
             value={this.model.text}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => this.model.text = e.target.value}
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           >

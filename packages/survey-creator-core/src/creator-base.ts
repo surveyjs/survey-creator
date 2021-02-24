@@ -416,10 +416,11 @@ export class CreatorBase<T extends { [index: string]: any }>
     this.viewType = viewName;
     return true;
   }
-
-  protected canSwitchViewType(newType: string) {
-    return true;
+  private canSwitchViewType(newType: string): boolean {
+    const plugin: ICreatorPlugin = this.plugins[this.viewType];
+    return !plugin || !plugin.deactivate || plugin.deactivate();
   }
+
   public static defaultNewSurveyText: string =
     '{ "pages": [ { "name": "page1"}] }';
 
