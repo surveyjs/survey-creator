@@ -28,9 +28,4 @@ export class SurveyCreator extends CreatorBase<Survey> {
     const plugin = this.plugins[newType];
     !!plugin && plugin.activate();
   }
-
-  protected canSwitchViewType(newType: string) {
-    const plugin = this.plugins[this.viewType];
-    return !plugin || !plugin.deactivate || plugin.deactivate();
-  }
 }

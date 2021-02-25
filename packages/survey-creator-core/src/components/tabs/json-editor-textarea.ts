@@ -25,9 +25,6 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public get errors(): any[] {
     return this._errors;
   }
-  public init(): void {
-    this._text = this.creator.text;
-  }
 
   protected onTextChanged(): void {
     this.isJSONChanged = true;

@@ -1,6 +1,5 @@
 import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
-import { ISurveyObjectEditorOptions } from "./propertyEditors/propertyEditorBase";
 import { ISurveyCreatorOptions } from "./settings";
 
 export enum ObjType {
