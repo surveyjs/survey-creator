@@ -1,4 +1,4 @@
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 export interface IUndoRedoChange {
@@ -192,7 +192,7 @@ export class Action {
       object: this._sender,
       propertyName: this._propertyName,
       oldValue: this._oldValue,
-      newValue: this._newValue
+      newValue: this._newValue,
     };
   }
 }
@@ -231,7 +231,7 @@ export class ArrayAction {
       object: this._sender,
       propertyName: this._propertyName,
       oldValue: this._deletedItems,
-      newValue: this._itemsToAdd
+      newValue: this._itemsToAdd,
     };
   }
 }

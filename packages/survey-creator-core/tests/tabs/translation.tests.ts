@@ -3,7 +3,7 @@ import {
   surveyLocalization,
   Base,
   QuestionDropdownModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   Translation,
   TranslationGroup,

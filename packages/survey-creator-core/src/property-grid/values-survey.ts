@@ -1,4 +1,4 @@
-import { Question, Base } from "survey-knockout";
+import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
 

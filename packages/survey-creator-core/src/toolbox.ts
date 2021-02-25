@@ -1,6 +1,17 @@
 import * as ko from "knockout";
-import * as Survey from "survey-knockout";
-import { Base, IActionBarItem, property, propertyArray } from "survey-knockout";
+import {
+  Base,
+  ComponentCollection,
+  CustomWidgetCollection,
+  ElementFactory,
+  IActionBarItem,
+  JsonObject,
+  property,
+  propertyArray,
+  Question,
+  Serializer,
+  SurveyModel,
+} from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 
@@ -130,7 +141,7 @@ export class QuestionToolbox extends Base {
 
   constructor(
     supportedQuestions: Array<string> = null,
-    public creator: CreatorBase<Survey.Survey> = null
+    public creator: CreatorBase<SurveyModel> = null
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
@@ -211,7 +222,7 @@ export class QuestionToolbox extends Base {
    * @param question a copied Survey.Question
    * @param options a json object that allows you to override question properties. Attributes are: name, title, tooltip, isCopied, iconName, json and category.
    */
-  public addCopiedItem(question: Survey.Question, options: any = null) {
+  public addCopiedItem(question: Question, options: any = null) {
     if (!options) options = {};
     const name: string = !!options.name ? options.name : question.name;
     const title: string = !!options.title ? options.title : name;
@@ -493,9 +504,9 @@ export class QuestionToolbox extends Base {
     var questions = this.getQuestionTypes(supportedQuestions);
     for (var i = 0; i < questions.length; i++) {
       var name = questions[i];
-      var question = Survey.ElementFactory.Instance.createElement(name, "q1");
+      var question = ElementFactory.Instance.createElement(name, "q1");
       if (!question) {
-        question = Survey.Serializer.createClass(name);
+        question = Serializer.createClass(name);
       }
       var json = this.getQuestionJSON(question);
       var title = editorLocalization.getString("qt." + name);
@@ -516,7 +527,7 @@ export class QuestionToolbox extends Base {
     this.onItemsChanged();
   }
   private registerCustomWidgets() {
-    var inst = Survey.CustomWidgetCollection.Instance;
+    var inst = CustomWidgetCollection.Instance;
     if (!inst.getActivatedBy) return;
     var widgets = inst.widgets;
     for (var i = 0; i < widgets.length; i++) {
@@ -533,9 +544,9 @@ export class QuestionToolbox extends Base {
     }
   }
   private getComponentItems(): Array<any> {
-    var instanceOwner = Survey["CustomQuestionCollection"];
+    var instanceOwner = undefined; // CustomQuestionCollection;
     if (!instanceOwner) {
-      instanceOwner = Survey["ComponentCollection"];
+      instanceOwner = ComponentCollection;
     }
     if (!instanceOwner) return [];
     var items = instanceOwner.Instance["items"];
@@ -568,7 +579,7 @@ export class QuestionToolbox extends Base {
     this.itemsValue.push(item);
   }
   private getQuestionJSON(question: any): any {
-    var json = new Survey.JsonObject().toJsonObject(question);
+    var json = new JsonObject().toJsonObject(question);
     json.type = question.getType();
     if (!!this._questionDefaultSettings[json.type]) {
       var defaultSettings = this._questionDefaultSettings[json.type]();
@@ -579,7 +590,7 @@ export class QuestionToolbox extends Base {
     return json;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
-    const allTypes: string[] = Survey.ElementFactory.Instance.getAllTypes();
+    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
       supportedQuestions = allTypes;
     const questions: string[] = [];

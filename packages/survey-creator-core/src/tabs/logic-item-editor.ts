@@ -15,7 +15,7 @@ import {
   Base,
   JsonObject,
   Question,
-} from "survey-knockout";
+} from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../surveyHelper";

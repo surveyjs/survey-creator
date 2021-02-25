@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey } from "survey-knockout";
+import { Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
 
 import "./embed.scss";
@@ -16,8 +16,7 @@ export class TabEmbedViewModel {
   get survey() {
     return ko.unwrap(this._survey);
   }
-  dispose() {
-  }
+  dispose() {}
 }
 
 ko.components.register("svc-tab-embed", {

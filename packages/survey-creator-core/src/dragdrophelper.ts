@@ -1,5 +1,11 @@
-import * as Survey from "survey-knockout";
-import { IElement, PageModel } from "survey-knockout";
+import {
+  IElement,
+  PageModel,
+  ISurvey,
+  SurveyModel,
+  JsonObject,
+  Serializer,
+} from "survey-core";
 export class DragDropTargetElement {
   private nestedPanelDepth: number;
   public page: PageModel;
@@ -49,19 +55,16 @@ export class DragDropHelper {
   private onModifiedCallback: (options?: any) => any;
   public ddTarget: DragDropTargetElement = null;
   static counter: number = 1;
-  private data: Survey.ISurvey;
-  constructor(
-    data: Survey.ISurvey,
-    onModifiedCallback: (options?: any) => any
-  ) {
+  private data: SurveyModel;
+  constructor(data: SurveyModel, onModifiedCallback: (options?: any) => any) {
     this.data = data;
     this.onModifiedCallback = onModifiedCallback;
   }
-  public get survey(): Survey.Survey {
-    return <Survey.Survey>this.data;
+  public get survey(): SurveyModel {
+    return this.data;
   }
   public startDragQuestion(event: DragEvent, element: any) {
-    var json = new Survey.JsonObject().toJsonObject(element);
+    var json = new JsonObject().toJsonObject(element);
     json["type"] = element.getType();
     this.prepareData(event, element.name, json, element);
   }
@@ -163,8 +166,8 @@ export class DragDropHelper {
   private createTargetElement(elementName: string, json: any): any {
     if (!elementName || !json) return null;
     var targetElement = null;
-    targetElement = Survey.Serializer.createClass(json["type"]);
-    new Survey.JsonObject().toObject(json, targetElement);
+    targetElement = Serializer.createClass(json["type"]);
+    new JsonObject().toObject(json, targetElement);
     targetElement.name = elementName;
     if (targetElement["setSurveyImpl"]) {
       targetElement["setSurveyImpl"](this.survey);
@@ -220,7 +223,7 @@ export class DragDropHelper {
     event: DragEvent,
     elementName: string,
     json: any,
-    source: Survey.IElement
+    source: IElement
   ) {
     var str = DragDropHelper.dataStart + elementName + "}";
     this.setData(event, str);

@@ -1,7 +1,7 @@
+import { SurveyModel } from "survey-core";
 import { SurveyJSON5 } from "./json5";
-import * as Survey from "survey-knockout";
 
-class SurveyForTextWorker extends Survey.Survey {
+class SurveyForTextWorker extends SurveyModel {
   constructor(jsonObj: any) {
     super(jsonObj);
     this.setDesignMode(true);
@@ -14,7 +14,7 @@ class SurveyForTextWorker extends Survey.Survey {
 export class SurveyTextWorker {
   public static newLineChar: string;
   public errors: Array<any>;
-  private surveyValue: Survey.Survey;
+  private surveyValue: SurveyModel;
   private jsonValue: any;
   private surveyObjects: Array<any>;
 
@@ -25,7 +25,7 @@ export class SurveyTextWorker {
     this.errors = [];
     this.process();
   }
-  public get survey(): Survey.Survey {
+  public get survey(): SurveyModel {
     return this.surveyValue;
   }
   public get isJsonCorrect(): boolean {
@@ -37,7 +37,7 @@ export class SurveyTextWorker {
     } catch (error) {
       this.errors.push({
         pos: { start: error.at, end: -1 },
-        text: error.message
+        text: error.message,
       });
     }
     if (this.jsonValue != null) {
@@ -49,7 +49,7 @@ export class SurveyTextWorker {
           var error = this.surveyValue.jsonErrors[i];
           this.errors.push({
             pos: { start: error.at, end: -1 },
-            text: error.getFullDescription()
+            text: error.getFullDescription(),
           });
         }
       }

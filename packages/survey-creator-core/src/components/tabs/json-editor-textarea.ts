@@ -1,11 +1,15 @@
-import { SurveyModel, property, propertyArray } from "survey-knockout";
+import { SurveyModel, property, propertyArray } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-textarea.scss";
 
 export class TextareaJsonEditorModel extends JsonEditorBaseModel {
-  @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() }) protected _text: string;
+  @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })
+  protected _text: string;
   @propertyArray() private _errors: any[];
   public ariaLabel: string = getLocString("ed.jsonEditor");
 
@@ -51,7 +55,7 @@ export class TabJsonEditorTextareaPlugin
         creator.makeNewViewActive("editor");
         this.activate();
       },
-      active: () => creator.viewType === "editor"
+      active: () => creator.viewType === "editor",
     });
     creator.plugins["editor"] = this;
   }

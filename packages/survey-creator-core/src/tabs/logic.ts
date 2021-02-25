@@ -10,7 +10,7 @@ import {
   Helpers,
   property,
   propertyArray,
-} from "survey-knockout";
+} from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { ConditionEditor } from "../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";

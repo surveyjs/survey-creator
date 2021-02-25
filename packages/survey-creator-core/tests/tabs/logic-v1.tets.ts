@@ -9,7 +9,7 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMultipleTextModel,
   Serializer,
-} from "survey-knockout";
+} from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
 import { settings } from "../../src/settings";
 

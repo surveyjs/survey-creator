@@ -1,4 +1,4 @@
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 
 export class ExpressionToDisplayText {

@@ -14,7 +14,7 @@ import {
   IActionBarItem,
   QuestionDropdownModel,
   QuestionCheckboxModel,
-} from "survey-knockout";
+} from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../editorLocalization";
 import {

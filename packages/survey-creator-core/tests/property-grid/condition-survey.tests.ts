@@ -7,7 +7,7 @@ import {
   QuestionRadiogroupModel,
   QuestionPanelDynamicModel,
   ItemValue,
-} from "survey-knockout";
+} from "survey-core";
 import {
   ConditionEditor,
   ConditionEditorItemsBuilder,

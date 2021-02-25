@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { ImplementorBase } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../creator";
 import { PageViewModel } from "@survey/creator";
 

@@ -1,11 +1,11 @@
 import { enStrings } from "./localization/english";
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 
 export var editorLocalization = {
   camelCaseBreaking: true,
   currentLocale: "",
   locales: {},
-  getString: function(strName: string, locale: string = null) {
+  getString: function (strName: string, locale: string = null) {
     var loc = this.getLocale(locale);
     var defaultLocale = this.getLocale("en");
     var path = strName.split(".");
@@ -19,7 +19,7 @@ export var editorLocalization = {
     }
     return obj;
   },
-  hasString: function(strName: string, locale: string = null) {
+  hasString: function (strName: string, locale: string = null) {
     var loc = this.getLocale(locale);
     var path = strName.split(".");
     var obj = loc;
@@ -29,7 +29,7 @@ export var editorLocalization = {
     }
     return true;
   },
-  getLocaleName: function(loc: string, defaultLocale: string = null): string {
+  getLocaleName: function (loc: string, defaultLocale: string = null): string {
     var localeNames = Survey.surveyLocalization["localeNames"];
     if (!defaultLocale) {
       defaultLocale = Survey.surveyLocalization.defaultLocale;
@@ -40,7 +40,7 @@ export var editorLocalization = {
           .getString("ed.defaultLocale")
           ["format"](localeNames[defaultLocale]);
   },
-  getPropertyName: function(strName: string, defaultName: string = null) {
+  getPropertyName: function (strName: string, defaultName: string = null) {
     var obj = this.getProperty(strName, defaultName);
     var name = obj["name"];
     if (!!name) {
@@ -49,12 +49,12 @@ export var editorLocalization = {
     }
     return obj;
   },
-  getPropertyTitle: function(strName: string) {
+  getPropertyTitle: function (strName: string) {
     var obj = this.getProperty(strName);
     if (obj["title"]) return obj["title"];
     return "";
   },
-  getPropertyNameInEditor: function(
+  getPropertyNameInEditor: function (
     strName: string,
     defaultName: string = null
   ) {
@@ -62,7 +62,7 @@ export var editorLocalization = {
     if (obj !== strName) return obj;
     return this.getPropertyName(strName, defaultName);
   },
-  getProperty: function(strName: string, defaultName: string = null) {
+  getProperty: function (strName: string, defaultName: string = null) {
     var obj = this.getString("p." + strName);
     if (obj !== strName) return obj;
     var pos = strName.indexOf("_");
@@ -72,7 +72,7 @@ export var editorLocalization = {
     if (obj !== strName) return obj;
     return this.getAutoPropertyName(obj, defaultName);
   },
-  getAutoPropertyName: function(propName: string, defaultName: string = null) {
+  getAutoPropertyName: function (propName: string, defaultName: string = null) {
     if (!!defaultName) return defaultName;
     if (!propName || !this.camelCaseBreaking) return propName;
     var res = propName[0].toUpperCase();
@@ -84,13 +84,13 @@ export var editorLocalization = {
     }
     return res;
   },
-  getPropertyValue: function(value: any, locale: string = null) {
+  getPropertyValue: function (value: any, locale: string = null) {
     return this.getValueInternal(value, "pv", locale);
   },
-  getValidatorName: function(name: string, locale: string = null) {
+  getValidatorName: function (name: string, locale: string = null) {
     return this.getValueInternal(name, "validators", locale);
   },
-  getTriggerName: function(name: string, locale: string = null) {
+  getTriggerName: function (name: string, locale: string = null) {
     return this.getValueInternal(name, "triggers", locale);
   },
   getLocale(locale: string) {
@@ -107,7 +107,7 @@ export var editorLocalization = {
     if (!res) res = defaultStrings[prefix][value];
     return res ? res : value;
   },
-  getLocales: function(): Array<string> {
+  getLocales: function (): Array<string> {
     var res = [];
     res.push("");
     for (var key in this.locales) {

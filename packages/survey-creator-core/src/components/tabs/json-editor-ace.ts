@@ -1,8 +1,11 @@
-import { SurveyModel, property } from "survey-knockout";
+import { SurveyModel, property } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { SurveyTextWorker } from "../../textWorker";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-ace.scss";
 
 export class AceJsonEditorModel extends JsonEditorBaseModel {

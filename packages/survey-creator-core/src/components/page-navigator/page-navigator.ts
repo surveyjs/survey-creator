@@ -7,7 +7,7 @@ import {
   Base,
   propertyArray,
   ActionBarItem,
-} from "survey-knockout";
+} from "survey-core";
 
 import "./page-navigator.scss";
 import "./page-navigator-item.scss";

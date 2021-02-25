@@ -1,6 +1,6 @@
 import { TabDesignerViewModel } from "@survey/creator";
 import * as ko from "knockout";
-import { ImplementorBase } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
 import { ElementWrapperFactory } from "../../element-wrapper-factory";
 

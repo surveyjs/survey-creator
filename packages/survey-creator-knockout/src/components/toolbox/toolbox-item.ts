@@ -4,7 +4,7 @@ import { getLocString } from "@survey/creator";
 import { IQuestionToolboxItem } from "@survey/creator";
 
 //import "./toolbox-item.scss";
-import { AdaptiveActionBarItemWrapper } from "survey-knockout";
+import { AdaptiveActionBarItemWrapper } from "survey-core";
 import { ToolboxViewModel } from "./toolbox";
 const template = require("./toolbox-item.html");
 // import template from "./toolbox-item.html";

@@ -1,5 +1,12 @@
+import {
+  Base,
+  ItemValue,
+  JsonObjectProperty,
+  PageModel,
+  Serializer,
+  SurveyModel,
+} from "survey-core";
 import { editorLocalization } from "./editorLocalization";
-import * as Survey from "survey-knockout";
 import { ISurveyCreatorOptions } from "./settings";
 
 export enum ObjType {
@@ -69,15 +76,16 @@ export class SurveyHelper {
     if (objType === ObjType.Question) return "question";
     return "unknown";
   }
+
   public static getObjectName(obj: any, showObjectTitle = false): string {
     if (showObjectTitle && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["text"]) return obj["text"];
     if (obj["name"]) return obj["name"];
     var objType = SurveyHelper.getObjectType(obj);
     if (objType != ObjType.Page) return "";
-    var data = <Survey.Survey>(<Survey.Page>obj)["data"];
-    if (!data) data = <Survey.Survey>(<Survey.Page>obj)["survey"]; //TODO
-    var index = data.pages.indexOf(<Survey.Page>obj);
+    var data = <SurveyModel>(<PageModel>obj)["data"];
+    if (!data) data = <SurveyModel>(<PageModel>obj)["survey"]; //TODO
+    var index = data.pages.indexOf(<PageModel>obj);
     return "[Page " + (index + 1) + "]";
   }
   public static getElements(
@@ -92,11 +100,11 @@ export class SurveyHelper {
   }
   public static isPropertyVisible(
     obj: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     options: ISurveyCreatorOptions = null,
     showMode: string = null,
     parentObj: any = null,
-    parentProperty: Survey.JsonObjectProperty = null
+    parentProperty: JsonObjectProperty = null
   ): boolean {
     if (!property || !property.visible) return false;
     if (!!showMode && !!property.showMode && showMode !== property.showMode)
@@ -108,7 +116,7 @@ export class SurveyHelper {
     )
       return false;
     var canShow = !!options
-      ? (object: any, property: Survey.JsonObjectProperty) => {
+      ? (object: any, property: JsonObjectProperty) => {
           return options.onCanShowPropertyCallback(
             object,
             property,
@@ -164,8 +172,8 @@ export class SurveyHelper {
     return true;
   }
   public static applyItemValueArray(
-    dest: Array<Survey.ItemValue>,
-    src: Array<Survey.ItemValue>
+    dest: Array<ItemValue>,
+    src: Array<ItemValue>
   ) {
     if (!src || src.length == 0) {
       dest.splice(0, dest.length);
@@ -188,13 +196,13 @@ export class SurveyHelper {
       dest[i].text = src[i].hasText ? src[i].text : "";
     }
   }
-  public static disableSelectingObj(obj: Survey.Base) {
+  public static disableSelectingObj(obj: Base) {
     obj["disableSelecting"] = true;
   }
-  public static enableSelectingObj(obj: Survey.Base) {
+  public static enableSelectingObj(obj: Base) {
     delete obj["disableSelecting"];
   }
-  public static canSelectObj(obj: Survey.Base) {
+  public static canSelectObj(obj: Base) {
     return !obj || obj["disableSelecting"] !== true;
   }
   private static deleteConditionProperties(json: any) {
@@ -221,7 +229,7 @@ export class SurveyHelper {
       .map((row) =>
         row.cells
           .map((cell) => cell.value || "")
-          .join(Survey.ItemValue.Separator)
+          .join(ItemValue.Separator)
           .replace(/\|$/, "")
       )
       .join("\n");
@@ -229,7 +237,7 @@ export class SurveyHelper {
     return result;
   }
 
-  public static convertItemValuesToText(items: Survey.ItemValue[]): string {
+  public static convertItemValuesToText(items: ItemValue[]): string {
     var text = "";
 
     items.forEach((item) => {
@@ -243,17 +251,17 @@ export class SurveyHelper {
 
   public static convertTextToItemValues(
     text: string,
-    properties: Survey.JsonObjectProperty[],
+    properties: JsonObjectProperty[],
     className: string
-  ): Survey.ItemValue[] {
+  ): ItemValue[] {
     var items = [];
     if (!text) return items;
 
     var texts = text.split("\n");
     for (var i = 0; i < texts.length; i++) {
       if (!texts[i]) continue;
-      var elements = texts[i].split(Survey.ItemValue.Separator);
-      var valueItem = Survey.Serializer.createClass(className);
+      var elements = texts[i].split(ItemValue.Separator);
+      var valueItem = Serializer.createClass(className);
       properties.forEach((p, i) => {
         valueItem[p.name] = elements[i];
       });

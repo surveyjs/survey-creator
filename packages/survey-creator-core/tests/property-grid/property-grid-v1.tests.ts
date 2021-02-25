@@ -1,33 +1,24 @@
 import {
   Base,
-  QuestionText,
   JsonObjectProperty,
   QuestionTextModel,
   QuestionCheckboxModel,
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
   QuestionMatrixDropdownModel,
-  PanelModel,
   SurveyModel,
-  SurveyTriggerRunExpression,
-  ExpressionValidator,
-  CalculatedValue,
-  HtmlConditionItem,
   QuestionMultipleTextModel,
-  UrlConditionItem,
   QuestionCompositeModel,
   ItemValue,
   Question,
   MatrixDropdownColumn,
   SurveyTriggerSetValue,
-  QuestionMatrixModel,
   Serializer,
-  QuestionPanelDynamicModel,
   QuestionRadiogroupModel,
   SurveyTriggerVisible,
   NumericValidator,
   QuestionExpressionModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   PropertyGridModel,
   PropertyGridEditorCollection,
@@ -205,7 +196,7 @@ test("propertyEditor.displayName", () => {
  * Skip several tests with custom property editors. We do not it completely different now and any question, including custom widget, can become a property editors.
  */
 test("PropertyEditor and hasError - required", () => {
-  var question = new QuestionText("q1");
+  var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
   var nameQuestion = propertyGrid.survey.getQuestionByName("name");
   expect(nameQuestion.isRequired).toEqual(true);
@@ -1420,7 +1411,7 @@ test("minValue doesn't work when it is 0, Bug #687", () => {
 
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var decimalPlacesQuestion = <QuestionText>(
+  var decimalPlacesQuestion = <QuestionTextModel>(
     propertyGrid.survey.getQuestionByName("decimalPlaces")
   );
   expect(decimalPlacesQuestion.getType()).toEqual("text");

@@ -1,7 +1,8 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
 import { Translation, getLocString, ICreatorPlugin } from "@survey/creator";
-import { ImplementorBase, Base } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout-ui";
+import { Base } from "survey-core";
 import "./translation.scss";
 var templateHtml = require("./translation.html");
 var groupTemplateHtml = require("./translation-group.html");

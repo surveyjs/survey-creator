@@ -4,7 +4,7 @@ import {
   JsonObjectProperty,
   Question,
   QuestionMatrixModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyObjectProperty } from "@survey/creator";
+//import { SurveyObjectProperty } from "@survey/creator";
 
 //import "./property-panel-item.scss";
 const templateHtml = require("./property-panel-item.html");
@@ -16,8 +16,8 @@ export class PropertyPanelItemViewModel {
 ko.components.register("svc-property-panel-item", {
   viewModel: {
     createViewModel: (params: any) => {
-      const model: SurveyObjectProperty = params.model;
-      return new PropertyPanelItemViewModel(model.editor);
+      //const model: SurveyObjectProperty = params.model;
+      return new PropertyPanelItemViewModel(params.model.editor);
     },
   },
   template: templateHtml,

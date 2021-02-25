@@ -3,7 +3,7 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMatrixModel,
   SurveyModel,
-} from "survey-knockout";
+} from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { PropertyEditorSetupValue } from "./index";

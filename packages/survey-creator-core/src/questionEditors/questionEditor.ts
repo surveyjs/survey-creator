@@ -2,7 +2,7 @@ import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
 } from "./questionEditorDefinition";
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import { SurveyHelper } from "../surveyHelper";
 import { ISurveyCreatorOptions } from "../settings";
 

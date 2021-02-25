@@ -1,7 +1,7 @@
 // import { document } from "global";
 import { text, boolean } from "@storybook/addon-knobs";
 import * as ko from "knockout";
-import { ListModel } from "survey-knockout";
+import { ListModel } from "survey-core";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 export default {

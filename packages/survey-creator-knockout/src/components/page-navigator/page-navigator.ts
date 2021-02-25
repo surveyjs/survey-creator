@@ -1,11 +1,7 @@
 import * as ko from "knockout";
 import { PageNavigatorViewModel } from "@survey/creator";
-import {
-  PageModel,
-  ImplementorBase,
-  ActionBarItem,
-  SurveyModel,
-} from "survey-knockout";
+import { PageModel, ActionBarItem, SurveyModel } from "survey-core";
+import { ImplementorBase } from "survey-knockout-ui";
 
 const template = require("./page-navigator.html");
 // import template from "./page-navigator.html";

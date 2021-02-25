@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Serializer } from "survey-knockout";
+import { Serializer } from "survey-core";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";

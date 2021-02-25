@@ -66,7 +66,8 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    "survey-knockout": "^" + packageJson.version,
+    "survey-core": "^" + packageJson.version,
+    "survey-knockout-ui": "^" + packageJson.version,
     knockout: "^3.5.0",
   },
   devDependencies: {},
@@ -224,11 +225,17 @@ module.exports = function (options) {
         commonjs: "knockout",
         amd: "knockout",
       },
-      "survey-knockout": {
-        root: "Survey",
-        commonjs2: "survey-knockout",
-        commonjs: "survey-knockout",
-        amd: "survey-knockout",
+      "survey-core": {
+        root: "SurveyCore",
+        commonjs2: "survey-core",
+        commonjs: "survey-core",
+        amd: "survey-core",
+      },
+      "survey-knockout-ui": {
+        root: "SurveyKnockout",
+        commonjs2: "survey-knockout-ui",
+        commonjs: "survey-knockout-ui",
+        amd: "survey-knockout-ui",
       },
     },
     plugins: [

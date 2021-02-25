@@ -1,7 +1,7 @@
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ActionBarViewModel } from "survey-knockout";
+import { ActionBarViewModel } from "survey-knockout-ui";
 
 export default {
   title: "Tabbed Menu",

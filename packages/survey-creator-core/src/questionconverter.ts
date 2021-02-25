@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyHelper, ObjType } from "./surveyHelper";
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 
 export class QuestionConverter {
   public static convertInfo = {};

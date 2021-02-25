@@ -5,7 +5,7 @@ import {
   Serializer,
   property,
   propertyArray,
-} from "survey-knockout";
+} from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import {
   ExpressionToDisplayText,

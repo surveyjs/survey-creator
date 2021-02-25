@@ -15,11 +15,8 @@ import {
   Base,
   JsonObject,
   Question,
-} from "survey-knockout";
-import {
-  ISurveyCreatorOptions,
-  settings,
-} from "../settings";
+} from "survey-core";
+import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../surveyHelper";
 import { PropertyEditorSetupValue } from "./index";

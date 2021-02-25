@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import { SurveyJSON5 } from "../json5";
 import { editorLocalization } from "../editorLocalization";
 import { CreatorBase } from "../creator-base";
@@ -18,7 +18,7 @@ export class SurveyEmbedingWindow {
   public surveyId: string = null;
   public surveyPostId: string = null;
   public generateValidJSON: boolean = false;
-  public surveyJSVersion: string = Survey.Version;
+  public surveyJSVersion: string = Survey["Version"];
   public surveyCDNPath: string = "https://unpkg.com";
   koShowAsWindow: any;
   koThemeName: any;

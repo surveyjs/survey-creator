@@ -7,7 +7,7 @@ import {
   QuestionMatrixDynamicModel,
   PanelModel,
   ItemValue,
-} from "survey-knockout";
+} from "survey-core";
 import {
   PropertyGridEditorCollection,
   PropertyGridEditor,

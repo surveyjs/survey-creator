@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { editorLocalization } from "../editorLocalization";
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 
 import "./results.scss";
 
@@ -53,14 +53,13 @@ export class SurveyResultsModel {
   public selectJsonClick(model: SurveyResultsModel) {
     model.koResultViewType("text");
   }
-
 }
 
 ko.components.register("survey-results", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
       return new SurveyResultsModel(params.survey);
-    }
+    },
   },
   template: templateHtml,
 });
@@ -70,7 +69,7 @@ ko.components.register("survey-results-table-row", {
     createViewModel: (params, componentInfo) => {
       var model = params.model;
       return model;
-    }
+    },
   },
   template: rowTemplateHtml,
 });

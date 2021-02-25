@@ -86,6 +86,7 @@
   "dependencies": {
     "knockout": "^3.5.1",
     "rmodal": "^1.0.36",
-    "survey-knockout": "^1.8.23"
+    "survey-core": "../../../survey-library/packages-ui/survey-core",
+    "survey-knockout-ui": "../../../survey-library/packages-ui/survey-knockout-ui"
   }
 }

@@ -1,5 +1,9 @@
-import { StylesManager, settings } from "survey-knockout";
-import { SurveyCreator, CreatorViewModel, DropdownEditorViewModel } from "../src/entries";
+import { StylesManager, settings } from "survey-core";
+import {
+  SurveyCreator,
+  CreatorViewModel,
+  DropdownEditorViewModel,
+} from "../src/entries";
 import { PropertyGridModel } from "@survey/creator";
 
 import "../node_modules/survey-knockout/modern.css";
@@ -10,7 +14,12 @@ import surveyJSON from "./sample-survey.json";
 
 export default {
   title: "Creator / Desktop or Landscape Tablet",
-  "ko-components": [SurveyCreator, CreatorViewModel, DropdownEditorViewModel, PropertyGridModel], // Fake component usage in order for component to be actually imported
+  "ko-components": [
+    SurveyCreator,
+    CreatorViewModel,
+    DropdownEditorViewModel,
+    PropertyGridModel,
+  ], // Fake component usage in order for component to be actually imported
   parameters: {
     design: {
       type: "figma",
@@ -21,7 +30,9 @@ export default {
 };
 
 export const Default = () => {
-  let creator: SurveyCreator = new SurveyCreator({ showEmbededSurveyTab: true });
+  let creator: SurveyCreator = new SurveyCreator({
+    showEmbededSurveyTab: true,
+  });
   (<any>creator).JSON = surveyJSON;
   return {
     template: '<survey-creator params="creator: creator"></survey-creator>',

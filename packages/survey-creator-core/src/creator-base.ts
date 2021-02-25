@@ -1,4 +1,4 @@
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import {
   Base,
   IActionBarItem,
@@ -7,7 +7,7 @@ import {
   PopupModel,
   property,
   propertyArray,
-} from "survey-knockout";
+} from "survey-core";
 import { ISurveyCreatorOptions } from "./settings";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";

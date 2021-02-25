@@ -1,4 +1,4 @@
-import * as Survey from "survey-knockout";
+import * as Survey from "survey-core";
 import * as ko from "knockout";
 
 export class StylesManager {
@@ -15,8 +15,8 @@ export class StylesManager {
     "$secondary-bg-color": "--secondary-bg-color",
     "$primary-border-color": "--primary-border-color",
     "$secondary-border-color": "--secondary-border-color",
-    "$error-color": "--error-color"
-  }
+    "$error-color": "--error-color",
+  };
 
   public static ThemeColors: { [key: string]: { [key: string]: string } } = {
     default: {
@@ -32,7 +32,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     orange: {
       "$primary-color": "#f78119",
@@ -47,7 +47,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     darkblue: {
       "$primary-color": "#3c4f6d",
@@ -62,7 +62,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     darkrose: {
       "$primary-color": "#68656e",
@@ -77,7 +77,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     stone: {
       "$primary-color": "#0f0f33",
@@ -92,7 +92,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     winter: {
       "$primary-color": "#5ac8fa",
@@ -107,7 +107,7 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
+      "$error-color": "#ed5565",
     },
     winterstone: {
       "$primary-color": "#3c3b40",
@@ -122,19 +122,17 @@ export class StylesManager {
       "$secondary-bg-color": "#f4f4f4",
       "$primary-border-color": "#e7eaec",
       "$secondary-border-color": "#ddd",
-      "$error-color": "#ed5565"
-    }
+      "$error-color": "#ed5565",
+    },
   };
 
   public static currentTheme = ko.observable("bootstrap");
 
-  public static applyTheme(
-    themeName: string = "default"
-  ) {
+  public static applyTheme(themeName: string = "default") {
     StylesManager.currentTheme(themeName);
     Survey.StylesManager.applyTheme(themeName);
 
-    if(!document || !document.body || !document.body.style) {
+    if (!document || !document.body || !document.body.style) {
       return;
     }
 
@@ -142,10 +140,13 @@ export class StylesManager {
       StylesManager.ThemeColors[themeName] ||
       StylesManager.ThemeColors["default"];
 
-    Object.keys(theme).forEach(colorVariableName => {
+    Object.keys(theme).forEach((colorVariableName) => {
       let cssVariableName = StylesManager.ThemeVariablesMap[colorVariableName];
-      if(!!cssVariableName && theme[colorVariableName]) {
-        document.body.style.setProperty(cssVariableName, theme[colorVariableName]);
+      if (!!cssVariableName && theme[colorVariableName]) {
+        document.body.style.setProperty(
+          cssVariableName,
+          theme[colorVariableName]
+        );
       }
     });
 
@@ -154,5 +155,4 @@ export class StylesManager {
     //   document.write('<script src="yourJsPath/ie11CustomProperties.js"><\x2fscript>');
     // }
   }
-
 }

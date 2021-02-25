@@ -25,7 +25,7 @@ import {
   QuestionMatrixModel,
   Serializer,
   QuestionPanelDynamicModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,

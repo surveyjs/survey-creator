@@ -1,5 +1,5 @@
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { QuestionRadiogroupModel } from "survey-knockout";
+import { QuestionRadiogroupModel } from "survey-core";
 
 test("Create survey with editingObj", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");

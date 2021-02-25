@@ -12,8 +12,6 @@ export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
 export * from "../components/property-editors/button-group/button-group";
 export * from "../components/property-editors/button-group/button-group-item";
-// export * from "../components/property-editors/dropdown-editor/dropdown-editor";
-export * from "../components/property-editors/text-editor/text-editor";
 export * from "../components/property-panel/property-panel";
 export * from "../components/question";
 export * from "../components/survey-renderers/dropdown";

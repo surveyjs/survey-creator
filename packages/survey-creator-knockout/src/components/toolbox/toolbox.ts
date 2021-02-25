@@ -1,11 +1,11 @@
 import * as ko from "knockout";
-import {
-  AdaptiveActionBarItemWrapper,
-  AdaptiveElementImplementor,
-  VerticalResponsibilityManager,
-} from "survey-knockout";
+import { AdaptiveElementImplementor } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
-import { AdaptiveElement } from "survey-knockout";
+import {
+  AdaptiveElement,
+  AdaptiveActionBarItemWrapper,
+  VerticalResponsibilityManager,
+} from "survey-core";
 //import "./toolbox.scss";
 import { IQuestionToolboxItem } from "@survey/creator";
 const template = require("./toolbox.html");

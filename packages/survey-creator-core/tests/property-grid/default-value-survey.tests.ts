@@ -6,7 +6,7 @@ import {
   QuestionPanelDynamicModel,
   SurveyTriggerSetValue,
   SurveyModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   DefaultValueEditor,
   DefaultMatrixRowValueEditor,

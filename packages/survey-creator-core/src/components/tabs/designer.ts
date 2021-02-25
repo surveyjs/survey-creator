@@ -1,4 +1,4 @@
-import { Base, PageModel, property } from "survey-knockout";
+import { Base, PageModel, property } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import "./designer.scss";
 

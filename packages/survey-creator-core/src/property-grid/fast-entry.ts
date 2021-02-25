@@ -1,10 +1,4 @@
-import {
-  ItemValue,
-  QuestionCommentModel,
-  Serializer,
-  SurveyModel,
-  Survey,
-} from "survey-knockout";
+import { ItemValue, QuestionCommentModel, Serializer } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
 

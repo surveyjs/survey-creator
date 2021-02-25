@@ -1,4 +1,11 @@
-import * as Survey from "survey-knockout";
+import {
+  Base,
+  ItemValue,
+  JsonObjectProperty,
+  MatrixDropdownColumn,
+  Question,
+  SurveyModel,
+} from "survey-core";
 
 export var settings = {
   traslation: {
@@ -28,68 +35,64 @@ export interface ISurveyCreatorOptions {
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
-  getObjectDisplayName(
-    obj: Survey.Base,
-    reason: string,
-    displayName: string
-  ): string;
+  getObjectDisplayName(obj: Base, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     showMode: string,
     parentObj: any,
-    parentProperty: Survey.JsonObjectProperty
+    parentProperty: JsonObjectProperty
   ): boolean;
   onCanDeleteItemCallback(
     object: any,
-    item: Survey.Base,
+    item: Base,
     allowDelete: boolean
   ): boolean;
   onCollectionItemDeletingCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    collection: Array<Survey.Base>,
-    item: Survey.Base
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base
   ): boolean;
   onItemValueAddedCallback(
-    obj: Survey.Base,
+    obj: Base,
     propertyName: string,
-    itemValue: Survey.ItemValue,
-    itemValues: Array<Survey.ItemValue>
+    itemValue: ItemValue,
+    itemValues: Array<ItemValue>
   );
   onMatrixDropdownColumnAddedCallback(
-    matrix: Survey.Question,
-    column: Survey.MatrixDropdownColumn,
-    columns: Array<Survey.MatrixDropdownColumn>
+    matrix: Question,
+    column: MatrixDropdownColumn,
+    columns: Array<MatrixDropdownColumn>
   );
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editorOptions: any
   );
   onGetErrorTextOnValidationCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     value: any
   ): string;
   onValueChangingCallback(options: any);
   //onPropertyValueChanged(
   onSurveyElementPropertyValueChanged(
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     obj: any,
     newValue: any
   );
-  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string;
+  onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
   stopUndoRedoTransaction();
   createSurvey(
     json: any,
     reason: string,
-    surveyType?: new (json: any) => Survey.Survey
+    surveyType?: new (json: any) => SurveyModel
   );
   onConditionQuestionsGetListCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editor: any,
     list: any[]
   );
@@ -102,56 +105,52 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   showTitlesInExpressions: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
-  getObjectDisplayName(
-    obj: Survey.Base,
-    reason: string,
-    displayName: string
-  ): string {
+  getObjectDisplayName(obj: Base, reason: string, displayName: string): string {
     return displayName;
   }
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     showMode: string,
     parentObj: any,
-    parentProperty: Survey.JsonObjectProperty
+    parentProperty: JsonObjectProperty
   ): boolean {
     return true;
   }
   onCanDeleteItemCallback(
     object: any,
-    item: Survey.Base,
+    item: Base,
     allowDelete: boolean
   ): boolean {
     return allowDelete;
   }
   onCollectionItemDeletingCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    collection: Array<Survey.Base>,
-    item: Survey.Base
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base
   ): boolean {
     return true;
   }
   onItemValueAddedCallback(
-    obj: Survey.Base,
+    obj: Base,
     propertyName: string,
-    itemValue: Survey.ItemValue,
-    itemValues: Array<Survey.ItemValue>
+    itemValue: ItemValue,
+    itemValues: Array<ItemValue>
   ) {}
   onMatrixDropdownColumnAddedCallback(
-    matrix: Survey.Question,
-    column: Survey.MatrixDropdownColumn,
-    columns: Array<Survey.MatrixDropdownColumn>
+    matrix: Question,
+    column: MatrixDropdownColumn,
+    columns: Array<MatrixDropdownColumn>
   ) {}
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editorOptions: any
   ) {}
   onGetErrorTextOnValidationCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     value: any
   ): string {
     return null;
@@ -159,11 +158,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   onValueChangingCallback(options: any) {}
   onSurveyElementPropertyValueChanged(
     //onPropertyValueChanged(
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     obj: any,
     newValue: any
   ) {}
-  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+  onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
   }
   startUndoRedoTransaction() {}
@@ -171,13 +170,13 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   createSurvey(
     json: any,
     reason: string,
-    surveyType?: new (json: any) => Survey.SurveyModel
+    surveyType?: new (json: any) => SurveyModel
   ) {
-    return new Survey.SurveyModel(json);
+    return new SurveyModel(json);
   }
   onConditionQuestionsGetListCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editor: any,
     list: any[]
   ) {}

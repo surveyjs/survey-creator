@@ -1,18 +1,16 @@
 import * as ko from "knockout";
-import {
-  Survey,
-  Base,
-  Page,
-  surveyLocalization,
-  PopupModel,
-  ListModel,
-} from "survey-knockout";
+import { Survey, Page } from "survey-knockout-ui";
 import { editorLocalization } from "@survey/creator";
 import { simulatorDevices } from "@survey/creator";
 import { SurveyCreator } from "../../creator";
 
 import "./test.scss";
-import { IActionBarItem } from "survey-knockout";
+import {
+  surveyLocalization,
+  IActionBarItem,
+  PopupModel,
+  ListModel,
+} from "survey-core";
 const template = require("./test.html");
 // import template from "./test.html";
 

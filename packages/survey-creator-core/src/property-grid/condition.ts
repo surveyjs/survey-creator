@@ -1,14 +1,4 @@
-import {
-  Base,
-  JsonObjectProperty,
-  Serializer,
-  Question,
-  MatrixDropdownRowModelBase,
-  QuestionMatrixDynamicModel,
-  PanelModel,
-  SurveyModel,
-  Survey,
-} from "survey-knockout";
+import { Base, JsonObjectProperty, Question } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,

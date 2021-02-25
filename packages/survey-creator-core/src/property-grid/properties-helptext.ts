@@ -1,4 +1,4 @@
-import { Base, JsonObjectProperty, Serializer } from "survey-knockout";
+import { Base, JsonObjectProperty, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 
 export class PropertiesHelpTexts {

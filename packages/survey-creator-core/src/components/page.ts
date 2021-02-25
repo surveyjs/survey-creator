@@ -4,7 +4,7 @@ import {
   PageModel,
   property,
   propertyArray,
-} from "survey-knockout";
+} from "survey-core";
 import { CreatorBase } from "../creator-base";
 
 import "./page.scss";

@@ -1,5 +1,6 @@
 import * as ko from "knockout";
-import { Survey, property, ImplementorBase } from "survey-knockout";
+import { property } from "survey-core";
+import { Survey, ImplementorBase } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 

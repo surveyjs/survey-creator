@@ -1,17 +1,24 @@
-import * as Survey from "survey-knockout";
+import {
+  Base,
+  Helpers,
+  JsonObject,
+  MatrixDropdownColumn,
+  Serializer,
+  SurveyModel,
+} from "survey-core";
 
 export class EditableObject {
   public static isCopyObject(obj: any): boolean {
     return !!obj && obj["isCopy"];
   }
-  public static getSurvey(object: any): Survey.SurveyModel {
+  public static getSurvey(object: any): SurveyModel {
     if (
-      object instanceof Survey.SurveyModel ||
+      object instanceof SurveyModel ||
       (!!object && !!object.getType && object.getType() == "survey")
     ) {
       return EditableObject.getOriginalSurvey(object);
     }
-    if (object instanceof Survey.MatrixDropdownColumn && !!object.colOwner)
+    if (object instanceof MatrixDropdownColumn && !!object.colOwner)
       return object.colOwner["survey"];
     if (!!object) {
       if (!!object.survey)
@@ -29,15 +36,13 @@ export class EditableObject {
   public static getOriginalObject(object: any): any {
     return !!object && !!object["originalObj"] ? object["originalObj"] : object;
   }
-  public static getOriginalSurvey(
-    survey: Survey.SurveyModel
-  ): Survey.SurveyModel {
+  public static getOriginalSurvey(survey: SurveyModel): SurveyModel {
     return EditableObject.getOriginalObject(survey);
   }
 
-  private objValue: Survey.Base;
-  private editableObjValue: Survey.Base;
-  public constructor(obj: Survey.Base) {
+  private objValue: Base;
+  private editableObjValue: Base;
+  public constructor(obj: Base) {
     this.objValue = obj;
     this.editableObjValue = this.createEditableObj();
   }
@@ -49,7 +54,7 @@ export class EditableObject {
   }
   public isPropertyChanged(propertyName: string): boolean {
     if (propertyName == "pages") return false; //TODO could not find a better way yet
-    return !Survey.Helpers.isTwoValueEquals(
+    return !Helpers.isTwoValueEquals(
       this.obj[propertyName],
       this.editableObj[propertyName]
     );
@@ -81,11 +86,11 @@ export class EditableObject {
     }
     return props;
   }
-  protected createEditableObj(): Survey.Base {
+  protected createEditableObj(): Base {
     var type = this.obj.getType();
-    var res = <Survey.Base>Survey.Serializer.createClass(type);
+    var res = <Base>Serializer.createClass(type);
     if (res == null && type == "survey") {
-      res = new Survey.Survey();
+      res = new SurveyModel(); // TODO: Create Survey via platform Provider/Factory
     }
     this.assignProperties(res);
     if (type == "matrixdropdowncolumn") {
@@ -108,11 +113,11 @@ export class EditableObject {
     return res;
   }
   private assignProperties(obj: any) {
-    new Survey.JsonObject().toObject(this.getObjJson(), obj);
+    new JsonObject().toObject(this.getObjJson(), obj);
   }
   private getObjJson(obj: any = null): any {
     if (!obj) obj = this.obj;
-    var jsonObj = new Survey.JsonObject();
+    var jsonObj = new JsonObject();
     jsonObj.lightSerializing = true;
     return jsonObj.toJsonObject(obj);
   }

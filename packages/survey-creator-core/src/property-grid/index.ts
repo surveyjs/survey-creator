@@ -10,7 +10,7 @@ import {
   settings,
   QuestionMatrixDynamicModel,
   property,
-} from "survey-knockout";
+} from "survey-core";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,

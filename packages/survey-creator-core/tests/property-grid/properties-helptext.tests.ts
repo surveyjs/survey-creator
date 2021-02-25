@@ -4,7 +4,7 @@ import {
   SurveyModel,
   JsonObjectProperty,
   Serializer,
-} from "survey-knockout";
+} from "survey-core";
 import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
 import {
   defaultStrings,

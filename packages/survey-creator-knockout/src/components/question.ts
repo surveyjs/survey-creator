@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Question } from "survey-knockout";
+import { Question } from "survey-core";
 import { SurveyCreator } from "../creator";
 
 //import "./question.scss";

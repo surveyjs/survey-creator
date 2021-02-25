@@ -1,10 +1,15 @@
 import * as ko from "knockout";
 import { editorLocalization, getLocString } from "../editorLocalization";
-import * as Survey from "survey-knockout";
 import { CreatorBase } from "../creator-base";
 
 import "./test.scss";
-import { IActionBarItem } from "survey-knockout";
+import {
+  Base,
+  IActionBarItem,
+  PageModel,
+  surveyLocalization,
+  SurveyModel,
+} from "survey-core";
 
 var templateHtml = require("./test.html");
 
@@ -16,7 +21,7 @@ export class SurveyLiveTester {
   koIsRunning = ko.observable(true);
   selectTestClick: any;
   selectPageClick: any;
-  survey: Survey.Survey;
+  survey: SurveyModel;
   koSurvey: any;
   koPages = ko.observableArray([]);
   koActivePage = ko.observable(null);
@@ -24,7 +29,7 @@ export class SurveyLiveTester {
   koLanguages: any;
   koActiveLanguage: any;
   koShowInvisibleElements = ko.observable(false);
-  public onGetObjectDisplayName: (obj: Survey.Base) => string = null;
+  public onGetObjectDisplayName: (obj: Base) => string = null;
   koShowPagesInTestSurveyTab = ko.observable(true);
   showSimulator = ko.observable(true);
   koShowDefaultLanguageInTestSurveyTab = ko.observable(true);
@@ -36,7 +41,7 @@ export class SurveyLiveTester {
    */
   public toolbarItems = ko.observableArray<IActionBarItem>();
 
-  onSurveyCreatedCallback: (survey: Survey.Survey) => any;
+  onSurveyCreatedCallback: (survey: SurveyModel) => any;
   constructor(private surveyProvider: any) {
     var self = this;
     this.survey = this.surveyProvider.createSurvey({}, "test");
@@ -127,7 +132,7 @@ export class SurveyLiveTester {
       : this.surveyProvider.createSurvey({}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     var self = this;
-    this.survey.onComplete.add((sender: Survey.Survey) => {
+    this.survey.onComplete.add((sender: SurveyModel) => {
       self.koIsRunning(false);
     });
     if (!!this.survey["onNavigateToUrl"]) {
@@ -145,19 +150,19 @@ export class SurveyLiveTester {
         }
       });
     }
-    this.survey.onStarted.add((sender: Survey.Survey) => {
-      self.setActivePageItem(<Survey.Page>self.survey.currentPage, true);
+    this.survey.onStarted.add((sender: SurveyModel) => {
+      self.setActivePageItem(<PageModel>self.survey.currentPage, true);
     });
-    this.survey.onCurrentPageChanged.add((sender: Survey.Survey, options) => {
+    this.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
       self.koActivePage(options.newCurrentPage);
       self.setActivePageItem(options.oldCurrentPage, false);
       self.setActivePageItem(options.newCurrentPage, true);
     });
-    this.survey.onPageVisibleChanged.add((sender: Survey.Survey, options) => {
+    this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
   }
-  private updatePageItem(page: Survey.Page) {
+  private updatePageItem(page: PageModel) {
     var item = this.getPageItemByPage(page);
     if (item) {
       item.koVisible(page.isVisible);
@@ -202,7 +207,7 @@ export class SurveyLiveTester {
     this.koSurvey(this.survey);
     this.koActivePage(this.survey.currentPage);
     this.koActiveLanguage(
-      this.survey.locale || Survey.surveyLocalization.defaultLocale
+      this.survey.locale || surveyLocalization.defaultLocale
     );
     this.koIsRunning(true);
   }
@@ -231,13 +236,13 @@ export class SurveyLiveTester {
       );
     }
   }
-  private setActivePageItem(page: Survey.Page, val: boolean) {
+  private setActivePageItem(page: PageModel, val: boolean) {
     var item = this.getPageItemByPage(page);
     if (item) {
       item.koActive(val);
     }
   }
-  private getPageItemByPage(page: Survey.Page): any {
+  private getPageItemByPage(page: PageModel): any {
     var items = this.koPages();
     for (var i = 0; i < items.length; i++) {
       if (items[i].page === page) return items[i];
@@ -249,7 +254,7 @@ export class SurveyLiveTester {
     var locales =
       !!usedLanguages && usedLanguages.length > 1
         ? usedLanguages
-        : Survey.surveyLocalization.getLocales();
+        : surveyLocalization.getLocales();
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
       res.push({ value: loc, text: this.getLocString(loc) });
@@ -266,7 +271,7 @@ export class SurveyLiveTester {
 ko.components.register("survey-tester", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      var creator: CreatorBase<Survey.SurveyModel> = params.creator;
+      var creator: CreatorBase<SurveyModel> = params.creator;
       // var model = creator.surveyLiveTester || new SurveyLiveTester(creator);
       var model = new SurveyLiveTester(creator);
 

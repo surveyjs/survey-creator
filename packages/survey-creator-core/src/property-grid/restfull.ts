@@ -3,7 +3,7 @@ import {
   JsonObjectProperty,
   ComponentCollection,
   QuestionDropdownModel,
-} from "survey-knockout";
+} from "survey-core";
 import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,

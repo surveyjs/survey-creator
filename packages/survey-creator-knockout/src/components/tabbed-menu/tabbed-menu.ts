@@ -1,13 +1,11 @@
 import * as ko from "knockout";
-//import { ITabItem } from "./tabbed-menu-item";
 import {
-  ResponsibilityManager,
+  ActionBarViewModel,
   AdaptiveElementImplementor,
-} from "survey-knockout";
+} from "survey-knockout-ui";
 
 //import "./tabbed-menu.scss";
-//import { property, IActionBarItem } from "survey-knockout";
-import { ActionBarViewModel } from "survey-knockout";
+import { ResponsibilityManager } from "survey-core";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 

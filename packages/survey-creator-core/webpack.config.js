@@ -66,8 +66,9 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    //"survey-knockout": "^" + packageJson.version,
-    "survey-knockout": "^1.8.23",
+    //"survey-core": "^" + packageJson.version,
+    //"survey-core": "^1.8.23",
+    "survey-core": "^1.8.23",
     knockout: "^3.5.0",
   },
   devDependencies: {},
@@ -120,7 +121,9 @@ module.exports = function (options) {
             if (error) {
               return console.error("Error occurred:", error);
             }
-            console.log("check me :     " + buildPath + packageJson.name + ".d.ts");
+            console.log(
+              "check me :     " + buildPath + packageJson.name + ".d.ts"
+            );
             console.log("Modified files:", changes.join(", "));
           }
         );
@@ -225,11 +228,11 @@ module.exports = function (options) {
         commonjs: "knockout",
         amd: "knockout",
       },
-      "survey-knockout": {
-        root: "Survey",
-        commonjs2: "survey-knockout",
-        commonjs: "survey-knockout",
-        amd: "survey-knockout",
+      "survey-core": {
+        root: "SurveyCore",
+        commonjs2: "survey-core",
+        commonjs: "survey-core",
+        amd: "survey-core",
       },
     },
     plugins: [
