@@ -6,7 +6,6 @@ import {
   property,
   propertyArray,
 } from "survey-knockout";
-import { SurveyElementSelector } from "../propertyEditors/surveyElementSelector";
 import { editorLocalization } from "../editorLocalization";
 import {
   ExpressionToDisplayText,
@@ -79,8 +78,9 @@ export class SurveyLogicType {
   public get hasItemSelector(): boolean {
     return !!this.baseClass && this.showInUI && !this.canCreateNewElement();
   }
-  public createItemSelector(): SurveyElementSelector {
+  public createItemSelector(): any {
     if (!this.hasItemSelector) return null;
+    /*
     var res = new SurveyElementSelector(
       this.survey,
       this.baseClass,
@@ -88,6 +88,8 @@ export class SurveyLogicType {
     );
     res.disabledPropertyName = this.propertyName;
     return res;
+    */
+    return null;
   }
   public get showInUI(): boolean {
     return this.logicType.showInUI !== false;
@@ -207,7 +209,7 @@ export class SurveyLogicType {
 
 export class SurveyLogicAction extends Base {
   public onLogicTypeChanged: () => void;
-  private itemSelectorValue: SurveyElementSelector = null;
+  private itemSelectorValue: any = null;
   koAfterRender: any;
   constructor(
     logicType: SurveyLogicType,
@@ -236,7 +238,7 @@ export class SurveyLogicAction extends Base {
       this.doLogicTypeChanged();
     }
   }
-  public get itemSelector(): SurveyElementSelector {
+  public get itemSelector(): any {
     return this.itemSelectorValue;
   }
   public apply(expression: string, isRenaming: boolean = false) {
