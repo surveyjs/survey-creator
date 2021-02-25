@@ -1,6 +1,6 @@
 import { PropertyGridViewModel } from "@survey/creator";
 import * as ko from "knockout";
-import { Base, ImplementorBase, property, SurveyModel } from "survey-knockout";
+import { ImplementorBase } from "survey-knockout-ui";
 //import "./property-panel.scss";
 //import "../../survey-theme/survey.scss";
 const template = require("./property-panel.html");
