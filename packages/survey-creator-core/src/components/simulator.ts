@@ -1,165 +1,109 @@
-import * as ko from "knockout";
-import { getLocString } from "../editorLocalization";
+import { Base, property, SurveyModel } from "survey-core";
 
 import "./simulator.scss";
 
-var templateHtml = require("./simulator.html");
-
-export class SurveySimulatorComponent {
-  private simulator;
-
-  public simulatorOptions = {
-    device: "desktop",
-    orientation: "l",
-    // scale: 1,
-    considerDPI: true
-  };
-
-  constructor(private _toolbarHolder: any, private _options = {
-    landscape: ko.observable(true),
-    device: ko.observable("desktop"),
-    survey: <ko.Observable>undefined
-  }) {
-    this._options.device.subscribe((newValue) => {
-      if (!!this.simulator) {
-        this.simulatorOptions.device = newValue || "desktop";
-        this.simulator.options(this.simulatorOptions);
-      }
-    });
-    this._options.landscape.subscribe((newValue) => {
-      if (!!this.simulator) {
-        this.simulatorOptions.orientation = newValue ? "l" : "p";
-        this.simulator.options(this.simulatorOptions);
-      }
-    });
-
-    this.koHasFrame = ko.computed(() => {
-      var device = simulatorDevices[this.activeDevice];
-      return this.simulatorEnabled && device.deviceType !== "desktop";
-    });
-  
-    this.koSimulatorFrame = ko.computed(() => {
-      if (!this.koHasFrame) {
-        return undefined;
-      }
-      var device = simulatorDevices[this.activeDevice];
-      var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
-      var width =
-        ((this.landscapeOrientation ? device.height : device.width) /
-          device.cssPixelRatio) *
-        scale;
-      var height =
-        ((this.landscapeOrientation ? device.width : device.height) /
-          device.cssPixelRatio) *
-        scale;
-      var frameWidth =
-        ((this.landscapeOrientation ? device.frameHeight : device.frameWidth) /
-          device.cssPixelRatio) *
-        scale;
-      var frameHeight =
-        ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
-          device.cssPixelRatio) *
-        scale;
-      return {
-        scale: this.simulatorScaleEnabled ? scale * 2 : 1,
-        width: width,
-        height: height,
-        frameWidth: frameWidth,
-        frameHeight: frameHeight,
-        cssClass: ko.computed(() => {
-          return device.cssClass + (this.landscapeOrientation ? " svd-simulator-frame-landscape" : "");
-        })
-      };
-    });
-
-
-    if(!!_toolbarHolder) {
-      this._options.survey = this._toolbarHolder.koSurvey;
-      ko.computed(() => {
-        this.simulatorEnabled = _toolbarHolder.showSimulator();
-      });
-      _toolbarHolder.toolbarItems.push({
-        id: "svd-test-simulator",
-        title: getLocString("pe.simulator"),
-        visible: ko.computed(() => this.simulatorEnabled),
-        tooltip: getLocString("pe.simulator"),
-        component: "svd-dropdown",
-        action: ko.computed({
-          read: () => this.activeDevice,
-          write: (val: any) => this.activeDevice = val
-        }),
-        items: <any>this.koDevices
-      });
-      _toolbarHolder.toolbarItems.push({
-        id: "svd-test-simulator-orientation",
-        title: getLocString("pe.landscapeOrientation"),
-        visible: this.koHasFrame,
-        tooltip: getLocString("pe.landscapeOrientation"),
-        component: "svd-boolean",
-        action: ko.computed({
-          read: () => this.landscapeOrientation,
-          write: (val: any) => this.landscapeOrientation = val
-        })
-      });
-    }
-  }
-
-  public get survey() {
-    return this._options.survey();
-  }
-
-  private _simulatorEnabled = ko.observable<boolean>(true);
-  public get simulatorEnabled() {
-    return this._simulatorEnabled();
-  }
-  public set simulatorEnabled(value: boolean) {
-    this._simulatorEnabled(value);
-  }
-  private _simulatorScaleEnabled = ko.observable<boolean>(true);
-  public get simulatorScaleEnabled() {
-    return this._simulatorScaleEnabled();
-  }
-  public set simulatorScaleEnabled(value: boolean) {
-    this._simulatorScaleEnabled(value);
-  }
-
-  get activeDevice() {
-    return this._options.device();
-  }
-  set activeDevice(device: string) {
-    this._options.device(device);
-  }
-
-  koDevices = ko.observableArray(
-    Object.keys(simulatorDevices)
-      .filter((key) => !!simulatorDevices[key].title)
-      .map((key) => {
-        return {
-          text: simulatorDevices[key].title,
-          value: key,
-        };
-      })
-  );
-
-  get landscapeOrientation() {
-    return this._options.landscape();
-  }
-  set landscapeOrientation(isLanscape: boolean) {
-    this._options.landscape(isLanscape);
-  }
-
-  public koHasFrame: ko.Computed;
-  public koSimulatorFrame: ko.Computed;
+export class SimulatorOptions extends Base {
+  @property({ defaultValue: true }) landscape: boolean;
+  @property() survey: SurveyModel;
+  @property({ defaultValue: "desktop" }) device: string;
+  @property({ defaultValue: "l" }) orientation: string;
+  @property({ defaultValue: true }) considerDPI: boolean;
 }
 
-ko.components.register("survey-simulator", {
-  viewModel: {
-    createViewModel: (params, componentInfo) => {
-      return new SurveySimulatorComponent(params.model, params.options);
+export class SurveySimulatorComponent extends Base {
+  constructor(public simulatorOptions: SimulatorOptions) {
+    super();
+    // if (!!_toolbarHolder) {
+    //   this.simulatorOptions.survey = this._toolbarHolder.koSurvey;
+    //   ko.computed(() => {
+    //     this.simulatorEnabled = _toolbarHolder.showSimulator();
+    //   });
+    //   _toolbarHolder.toolbarItems.push({
+    //     id: "svd-test-simulator",
+    //     title: getLocString("pe.simulator"),
+    //     visible: ko.computed(() => this.simulatorEnabled),
+    //     tooltip: getLocString("pe.simulator"),
+    //     component: "svd-dropdown",
+    //     action: ko.computed({
+    //       read: () => this.activeDevice,
+    //       write: (val: any) => (this.activeDevice = val),
+    //     }),
+    //     items: <any>this.koDevices,
+    //   });
+    //   _toolbarHolder.toolbarItems.push({
+    //     id: "svd-test-simulator-orientation",
+    //     title: getLocString("pe.landscapeOrientation"),
+    //     visible: this.koHasFrame,
+    //     tooltip: getLocString("pe.landscapeOrientation"),
+    //     component: "svd-boolean",
+    //     action: ko.computed({
+    //       read: () => this.landscapeOrientation,
+    //       write: (val: any) => (this.landscapeOrientation = val),
+    //     }),
+    //   });
+    // }
+  }
+
+  public get survey(): SurveyModel {
+    return this.simulatorOptions.survey;
+  }
+
+  @property({ defaultValue: true }) simulatorEnabled: boolean;
+  @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
+
+  public get activeDevice(): string {
+    return this.simulatorOptions.device;
+  }
+  public set activeDevice(device: string) {
+    this.simulatorOptions.device = device;
+  }
+
+  get landscapeOrientation(): boolean {
+    return this.simulatorOptions.landscape;
+  }
+  // set landscapeOrientation(isLanscape: boolean) {
+  //   this.simulatorOptions.landscape = isLanscape;
+  // }
+
+  public get hasFrame(): boolean {
+    var device = simulatorDevices[this.activeDevice];
+    return this.simulatorEnabled && device.deviceType !== "desktop";
+  }
+
+  public get simulatorFrame() {
+    if (!this.hasFrame) {
+      return undefined;
     }
-  },
-  template: templateHtml,
-});
+    var device = simulatorDevices[this.activeDevice];
+    var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
+    var width =
+      ((this.landscapeOrientation ? device.height : device.width) /
+        device.cssPixelRatio) *
+      scale;
+    var height =
+      ((this.landscapeOrientation ? device.width : device.height) /
+        device.cssPixelRatio) *
+      scale;
+    var frameWidth =
+      ((this.landscapeOrientation ? device.frameHeight : device.frameWidth) /
+        device.cssPixelRatio) *
+      scale;
+    var frameHeight =
+      ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
+        device.cssPixelRatio) *
+      scale;
+    return {
+      scale: this.simulatorScaleEnabled ? scale * 2 : 1,
+      width: width,
+      height: height,
+      frameWidth: frameWidth,
+      frameHeight: frameHeight,
+      cssClass:
+        device.cssClass +
+        (this.landscapeOrientation ? " svd-simulator-frame-landscape" : ""),
+    };
+  }
+}
 
 export var DEFAULT_MONITOR_DPI = 102.69;
 export var simulatorDevices = {
@@ -211,7 +155,7 @@ export var simulatorDevices = {
     frameHeight: 1500,
     deviceType: "phone",
     title: "iPhone 5",
-    cssClass: "svd-simulator-iphone5"
+    cssClass: "svd-simulator-iphone5",
   },
   iPhone6: {
     cssPixelRatio: 2,
@@ -222,7 +166,7 @@ export var simulatorDevices = {
     frameHeight: 1750,
     deviceType: "phone",
     title: "iPhone 6",
-    cssClass: "svd-simulator-iphone6"
+    cssClass: "svd-simulator-iphone6",
   },
   iPhone6plus: {
     cssPixelRatio: 2,
@@ -233,7 +177,7 @@ export var simulatorDevices = {
     frameHeight: 2550,
     deviceType: "phone",
     title: "iPhone 6 Plus",
-    cssClass: "svd-simulator-iphone6plus"
+    cssClass: "svd-simulator-iphone6plus",
   },
   iPhone8: {
     cssPixelRatio: 2,
@@ -244,7 +188,7 @@ export var simulatorDevices = {
     frameHeight: 1860,
     deviceType: "phone",
     title: "iPhone 8",
-    cssClass: "svd-simulator-iphone8"
+    cssClass: "svd-simulator-iphone8",
   },
   iPhone8plus: {
     cssPixelRatio: 2,
@@ -255,7 +199,7 @@ export var simulatorDevices = {
     frameHeight: 2550,
     deviceType: "phone",
     title: "iPhone 8 Plus",
-    cssClass: "svd-simulator-iphone8plus"
+    cssClass: "svd-simulator-iphone8plus",
   },
   iPhoneX: {
     cssPixelRatio: 2,
@@ -266,7 +210,7 @@ export var simulatorDevices = {
     frameHeight: 2680,
     deviceType: "phone",
     title: "iPhone X",
-    cssClass: "svd-simulator-iphonex"
+    cssClass: "svd-simulator-iphonex",
   },
   iPhoneXmax: {
     cssPixelRatio: 2,
@@ -277,7 +221,7 @@ export var simulatorDevices = {
     frameHeight: 2980,
     deviceType: "phone",
     title: "iPhone X Max",
-    cssClass: "svd-simulator-iphonexmax"
+    cssClass: "svd-simulator-iphonexmax",
   },
   iPad: {
     cssPixelRatio: 2,
@@ -288,7 +232,7 @@ export var simulatorDevices = {
     frameHeight: 2563,
     deviceType: "tablet",
     title: "iPad",
-    cssClass: "svd-simulator-ipad"
+    cssClass: "svd-simulator-ipad",
   },
   iPadMini: {
     cssPixelRatio: 1,
@@ -299,7 +243,7 @@ export var simulatorDevices = {
     frameHeight: 1300,
     deviceType: "tablet",
     title: "iPad Mini",
-    cssClass: "svd-simulator-ipadmini"
+    cssClass: "svd-simulator-ipadmini",
   },
   iPadPro: {
     cssPixelRatio: 1,
@@ -310,7 +254,7 @@ export var simulatorDevices = {
     frameHeight: 2980,
     deviceType: "tablet",
     title: 'iPad Pro 11"',
-    cssClass: "svd-simulator-ipadpro"
+    cssClass: "svd-simulator-ipadpro",
   },
   iPadPro13: {
     cssPixelRatio: 1,
@@ -321,7 +265,7 @@ export var simulatorDevices = {
     frameHeight: 3300,
     deviceType: "tablet",
     title: 'iPad Pro 12,9"',
-    cssClass: "svd-simulator-ipadpro13"
+    cssClass: "svd-simulator-ipadpro13",
   },
   androidPhone: {
     cssPixelRatio: 2,
@@ -332,7 +276,7 @@ export var simulatorDevices = {
     frameHeight: 1630,
     deviceType: "phone",
     title: "Android Phone",
-    cssClass: "svd-simulator-androidphone"
+    cssClass: "svd-simulator-androidphone",
   },
   androidTablet: {
     cssPixelRatio: 1.5,
@@ -343,7 +287,7 @@ export var simulatorDevices = {
     frameHeight: 1480,
     deviceType: "tablet",
     title: "Android Tablet",
-    cssClass: "svd-simulator-androidtablet"
+    cssClass: "svd-simulator-androidtablet",
   },
   win10Phone: {
     cssPixelRatio: 1,
@@ -354,7 +298,7 @@ export var simulatorDevices = {
     frameHeight: 846,
     deviceType: "phone",
     title: "Windows 10 Phone",
-    cssClass: "svd-simulator-win10phone"
+    cssClass: "svd-simulator-win10phone",
   },
   msSurface: {
     cssPixelRatio: 1,
@@ -365,13 +309,12 @@ export var simulatorDevices = {
     frameHeight: 1620,
     deviceType: "tablet",
     title: "MS Surface",
-    cssClass: "svd-simulator-mssurface"
+    cssClass: "svd-simulator-mssurface",
   },
   genericPhone: {
     cssPixelRatio: 1,
     deviceType: "phone",
     title: "",
-    cssClass: "svd-simulator-genphone"
+    cssClass: "svd-simulator-genphone",
   },
 };
-

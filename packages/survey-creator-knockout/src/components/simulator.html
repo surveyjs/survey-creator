@@ -1,0 +1,28 @@
+<div class="svd-simulator-main">
+  <!-- ko if: hasFrame -->
+  <div
+    class="svd-simulator-wrapper"
+    data-bind="style: { width: simulatorFrame.frameWidth + 'px', height: simulatorFrame.frameHeight + 'px' }"
+  >
+    <div
+      class="svd-simulator-frame"
+      data-bind="style: { width: (landscapeOrientation ? simulatorFrame.frameHeight: simulatorFrame.frameWidth) + 'px', height: (landscapeOrientation ? simulatorFrame.frameWidth : simulatorFrame.frameHeight) + 'px' }, css: simulatorFrame.cssClass"
+    ></div>
+    <div
+      class="svd-simulator"
+      data-bind="style: { width: simulatorFrame.width / simulatorFrame.scale + 'px', height: simulatorFrame.height / simulatorFrame.scale + 'px', transform: 'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)' }"
+    >
+      <survey-widget
+        class="svd-simulator-content"
+        params="survey: survey"
+      ></survey-widget>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: hasFrame -->
+  <survey-widget
+    class="svd-simulator-content"
+    params="survey: survey"
+  ></survey-widget>
+  <!-- /ko -->
+</div>
