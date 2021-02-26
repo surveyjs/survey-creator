@@ -1,20 +1,26 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { TabJsonEditorBasePlugin, TextareaJsonEditorModel } from "@survey/creator";
+import {
+  TabJsonEditorBasePlugin,
+  TextareaJsonEditorModel,
+} from "@survey/creator";
 
 interface ITabJsonEditorTextareaComponentProps {
-  data: TabJsonEditorBasePlugin<TextareaJsonEditorModel>
+  data: TabJsonEditorBasePlugin<TextareaJsonEditorModel>;
 }
 
-export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEditorTextareaComponentProps, any> {
+export class TabJsonEditorTextareaComponent extends SurveyElementBase<
+  ITabJsonEditorTextareaComponentProps,
+  any
+> {
   private model: TextareaJsonEditorModel;
   constructor(props: ITabJsonEditorTextareaComponentProps) {
     super(props);
     this.model = props.data.model;
   }
   protected getStateElement(): Base {
-    return this.model as any;
+    return this.model;
   }
   render(): JSX.Element {
     const errors: JSX.Element[] = [];
@@ -25,22 +31,25 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<ITabJsonEd
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
-          <textarea className="svc-json-editor-tab__content-area"
+          <textarea
+            className="svc-json-editor-tab__content-area"
             value={this.model.text}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => this.model.text = e.target.value}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+              (this.model.text = e.target.value)
+            }
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
-          >
-          </textarea>
-          <div className="svc-json-editor-tab__content-errors">
-            {errors}
-          </div>
+          ></textarea>
+          <div className="svc-json-editor-tab__content-errors">{errors}</div>
         </div>
       </div>
     );
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-tab-json-editor-textarea", (props) => {
-  return React.createElement(TabJsonEditorTextareaComponent, props);
-});
+ReactElementFactory.Instance.registerElement(
+  "svc-tab-json-editor-textarea",
+  (props) => {
+    return React.createElement(TabJsonEditorTextareaComponent, props);
+  }
+);

@@ -9,7 +9,7 @@ import {
   StylesManager,
   SurveyError,
   unwrap,
-  SurveyModel
+  SurveyModel,
 } from "survey-core";
 import {
   ActionBar,
@@ -42,7 +42,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return this.props.creator;
   }
   protected getStateElement(): Base {
-    return (this.props.creator as any) as Base;
+    return this.props.creator;
   }
 
   render() {

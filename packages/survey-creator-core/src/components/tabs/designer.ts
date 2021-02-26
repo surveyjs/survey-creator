@@ -1,10 +1,8 @@
-import { Base, PageModel, property } from "survey-core";
+import { Base, PageModel, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import "./designer.scss";
 
-export class TabDesignerViewModel<
-  T extends { [index: string]: any }
-> extends Base {
+export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
   public creator: CreatorBase<T>;
 

@@ -1,12 +1,5 @@
-import {
-  Base, PageModel, SurveyModel
-} from "survey-core";
-import {
-  ActionBar,
-  SurveyElementBase,
-  SurveyPage,
-  
-} from "survey-react-ui";
+import { Base, PageModel, SurveyModel } from "survey-core";
+import { ActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
 import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
 
@@ -25,12 +18,12 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     super(props);
     this.model = new PageViewModel<SurveyModel>(
       this.props.creator,
-      this.props.page as any
+      this.props.page
     );
   }
 
   protected getStateElement(): Base {
-    return this.model as any;
+    return this.model;
   }
   render(): JSX.Element {
     return (

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { ImplementorBase } from "survey-knockout-ui";
+import { ImplementorBase, Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "../creator";
 import { PageViewModel } from "@survey/creator";
 
@@ -16,10 +16,7 @@ ko.components.register("svc-page", {
           componentInfo.element.scrollIntoView();
         }
       });
-      const model = new PageViewModel<SurveyCreator>(
-        creator,
-        ko.unwrap(params.page)
-      );
+      const model = new PageViewModel<Survey>(creator, ko.unwrap(params.page));
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         scrollSubscription.dispose();

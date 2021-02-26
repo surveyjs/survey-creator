@@ -15,16 +15,14 @@ export class TabDesignerComponent extends SurveyElementBase<
   ITabDesignerComponentProps,
   any
 > {
-  private model: TabDesignerViewModel<CreatorBase<SurveyModel>>;
+  private model: TabDesignerViewModel<SurveyModel>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = new TabDesignerViewModel<CreatorBase<SurveyModel>>(
-      props.creator as any
-    );
+    this.model = new TabDesignerViewModel<SurveyModel>(props.creator);
   }
 
   protected getStateElement(): Base {
-    return (this.props.creator as any) as Base;
+    return this.props.creator;
   }
 
   render(): JSX.Element {
@@ -47,7 +45,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       <CreatorSurveyPageComponent
         key={this.model.newPage.id}
         survey={survey}
-        page={this.model.newPage as any}
+        page={this.model.newPage}
         creator={creator}
       ></CreatorSurveyPageComponent>
     );
@@ -64,7 +62,7 @@ export class TabDesignerComponent extends SurveyElementBase<
         </div>
         <SurveyPageNavigator
           creator={creator}
-          pages={creator.pagesController.pages as any}
+          pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
       </>
     );
@@ -96,6 +94,6 @@ export class TabDesignerComponent extends SurveyElementBase<
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
   return React.createElement(
     TabDesignerComponent,
-    (props as any) as ITabDesignerComponentProps
+    props as ITabDesignerComponentProps
   );
 });

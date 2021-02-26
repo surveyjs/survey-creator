@@ -17,7 +17,7 @@ class PropertyGridComponent extends SurveyElementBase<
     this.model = new PropertyGridViewModel(this.props.model, this.props.title);
   }
   protected getStateElement(): Base {
-    return (this.model as any) as Base;
+    return this.model;
   }
   render() {
     return (
