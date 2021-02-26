@@ -1,6 +1,7 @@
 import { PropertyGridModel, PropertyGridViewModel } from "@survey/creator";
 import React, { Component } from "react";
-import { Base, Survey, SurveyElementBase } from "survey-react";
+import { Base } from "survey-core";
+import { Survey, SurveyElementBase } from "survey-react-ui";
 
 interface IPropertyGridComponentProps {
   model: PropertyGridModel;

@@ -1,5 +1,5 @@
-import * as Survey from "survey-react";
-import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
+import { Base, SurveyModel } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { CreatorBase } from "@survey/creator";
 import React from "react";
 

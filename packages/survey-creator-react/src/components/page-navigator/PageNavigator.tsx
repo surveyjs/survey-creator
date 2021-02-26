@@ -1,18 +1,19 @@
-import * as Survey from "survey-react";
 import {
   Base,
-  SurveyElementBase,
   SurveyModel,
-  SvgIcon,
-  Popup,
   PageModel,
   unwrap,
-} from "survey-react";
+} from "survey-core";
+import {
+  SurveyElementBase,
+  SvgIcon,
+  Popup,
+} from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
 
 interface ISurveyPageNavigatorProps {
-  creator: CreatorBase<Survey.Model>;
+  creator: CreatorBase<SurveyModel>;
   pages: Array<PageModel>;
 }
 

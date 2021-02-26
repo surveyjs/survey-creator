@@ -87,10 +87,9 @@
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "knockout": "^3.5.1",
     "rmodal": "^1.0.36",
-    "survey-knockout": "^1.8.23",
-    "survey-react": "^1.8.23"
+    "survey-core": "../../../survey-library/packages-ui/survey-core",
+    "survey-react-ui": "../../../survey-library/packages-ui/survey-react-ui"
   },
   "husky": {
     "hooks": {

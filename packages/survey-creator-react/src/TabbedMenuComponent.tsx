@@ -5,9 +5,12 @@ import {
   AdaptiveElement,
   Base,
   IActionBarItem,
+} from "survey-core";
+
+import {
   ReactElementFactory,
   SurveyElementBase,
-} from "survey-react";
+} from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
   items: Array<IActionBarItem>;

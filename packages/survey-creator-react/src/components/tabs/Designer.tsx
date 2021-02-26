@@ -1,24 +1,24 @@
 import React from "react";
-import * as Survey from "survey-react";
-import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
+import { Base, SurveyModel } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 
 interface ITabDesignerComponentProps {
-  creator: CreatorBase<Survey.Model>;
-  survey: Survey.Model;
+  creator: CreatorBase<SurveyModel>;
+  survey: SurveyModel;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<
   ITabDesignerComponentProps,
   any
 > {
-  private model: TabDesignerViewModel<CreatorBase<Survey.Model>>;
+  private model: TabDesignerViewModel<CreatorBase<SurveyModel>>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = new TabDesignerViewModel<CreatorBase<Survey.Model>>(
+    this.model = new TabDesignerViewModel<CreatorBase<SurveyModel>>(
       props.creator as any
     );
   }
@@ -28,8 +28,8 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    const creator: CreatorBase<Survey.Model> = this.props.creator;
-    const survey: Survey.Model = this.props.survey;
+    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const survey: SurveyModel = this.props.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
     const surveyPages = survey.pages.map((page, index) => {

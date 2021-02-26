@@ -1,29 +1,31 @@
 import React, { CSSProperties } from "react";
 
-import * as Survey from "survey-react";
-
-import "survey-react/modern.css";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import PropertyGridComponent from "./PropertyGrid";
 import {
-  ActionBar,
   Base,
   IActionBarItem,
   Question,
+  StylesManager,
+  SurveyError,
+  unwrap,
+  SurveyModel
+} from "survey-core";
+import {
+  ActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
+  Model,
   SurveyElementBase,
-  SurveyError,
   SurveyLocStringViewer,
-  unwrap,
-} from "survey-react";
+} from "survey-react-ui";
 import {
   CreatorBase,
   ICreatorOptions,
   PropertyGridViewModel,
 } from "@survey/creator";
 
-Survey.StylesManager.applyTheme("modern");
+StylesManager.applyTheme("modern");
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
@@ -36,7 +38,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   constructor(props: ISurveyCreatorComponentProps) {
     super(props);
   }
-  get creator(): CreatorBase<Survey.Model> {
+  get creator(): CreatorBase<SurveyModel> {
     return this.props.creator;
   }
   protected getStateElement(): Base {
@@ -44,7 +46,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 
   render() {
-    const creator: CreatorBase<Survey.Model> = this.props.creator;
+    const creator: CreatorBase<SurveyModel> = this.props.creator;
     //AM: width unrecognized by react
     const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
@@ -70,7 +72,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderCreatorTabs() {
-    const creator: CreatorBase<Survey.Model> = this.props.creator;
+    const creator: CreatorBase<SurveyModel> = this.props.creator;
     var tabs = creator.tabs.map((tab, index) => {
       return this.renderCreatorTab(tab);
     });
@@ -78,7 +80,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     //return <Survey.Survey model={this.creator.survey} />;
   }
   renderCreatorTab(tab: IActionBarItem) {
-    const creator: CreatorBase<Survey.Model> = this.props.creator;
+    const creator: CreatorBase<SurveyModel> = this.props.creator;
     let style: CSSProperties = {};
     //if (tab.visible !== undefined && !tab.visible) {
     if (!unwrap(tab.active)) {
@@ -106,12 +108,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-class SurveyCreator extends CreatorBase<Survey.Model> {
+class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
-  protected createSurveyCore(json: any = {}): Survey.Model {
-    return new Survey.Model(json);
+  protected createSurveyCore(json: any = {}): SurveyModel {
+    return new Model(json);
   }
   //ISurveyCreator
   public createQuestionElement(question: Question): JSX.Element {
@@ -151,6 +153,6 @@ class SurveyCreator extends CreatorBase<Survey.Model> {
 export function createReactSurveyCreator(json: any) {
   const creator = new SurveyCreator({});
   //creator.JSON = json;
-  creator.setSurvey(new Survey.Model(json));
+  creator.setSurvey(new Model(json));
   return creator;
 }

@@ -1,4 +1,3 @@
-import * as Survey from "survey-react";
 import {
   CreatorBase,
   getLocString,
@@ -9,10 +8,13 @@ import {
   AdaptiveElement,
   Base,
   IActionBarItem,
+  VerticalResponsibilityManager,
+  SurveyModel
+} from "survey-core";
+import {
   SurveyElementBase,
   SvgIcon,
-  VerticalResponsibilityManager,
-} from "survey-react";
+} from "survey-react-ui";
 
 // export class SurveyCreatorToolbox extends ActionBar {
 //   constructor(props: any) {
@@ -26,7 +28,7 @@ import {
 
 interface ISurveyCreatorToolboxProps {
   categories: Array<any>;
-  creator: CreatorBase<Survey.Model>;
+  creator: CreatorBase<SurveyModel>;
   items: Array<IActionBarItem>;
 }
 
