@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import { Serializer } from "survey-core";
 
 function getNumericFromString(str: string): string {
@@ -121,43 +120,43 @@ export function getNodesFromKoComponentInfo(componentInfo) {
   return siblings;
 }
 
-ko.bindingHandlers["trueclick"] = {
-  init: function (element, valueAccessor, allBindingsAccessor) {
-    element.onclick = () => true;
-  },
-};
+// ko.bindingHandlers["trueclick"] = {
+//   init: function (element, valueAccessor, allBindingsAccessor) {
+//     element.onclick = () => true;
+//   },
+// };
 
-export function createKey2click(element: HTMLElement) {
-  return (ev: KeyboardEvent) => {
-    var char = ev.which || ev.keyCode;
-    if (char === 13 || char === 32) {
-      element.click();
-    } else if (char === 27) {
-      element.blur();
-    }
-  };
-}
+// export function createKey2click(element: HTMLElement) {
+//   return (ev: KeyboardEvent) => {
+//     var char = ev.which || ev.keyCode;
+//     if (char === 13 || char === 32) {
+//       element.click();
+//     } else if (char === 27) {
+//       element.blur();
+//     }
+//   };
+// }
 
-ko.bindingHandlers["key2click"] = {
-  init: function (element, valueAccessor, allBindingsAccessor) {
-    element.onkeyup = createKey2click(element);
-  },
-};
+// ko.bindingHandlers["key2click"] = {
+//   init: function (element, valueAccessor, allBindingsAccessor) {
+//     element.onkeyup = createKey2click(element);
+//   },
+// };
 
-ko.bindingHandlers["clickNoFocus"] = {
-  init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-    element.onclick = (ev) => {
-      valueAccessor().call(viewModel, viewModel, ev);
-    };
-  },
-};
+// ko.bindingHandlers["clickNoFocus"] = {
+//   init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+//     element.onclick = (ev) => {
+//       valueAccessor().call(viewModel, viewModel, ev);
+//     };
+//   },
+// };
 
-ko.bindingHandlers["afterRenderParent"] = {
-  init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-    element.style.display = "none";
-    valueAccessor() && valueAccessor()([element.parentElement]);
-  },
-};
+// ko.bindingHandlers["afterRenderParent"] = {
+//   init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+//     element.style.display = "none";
+//     valueAccessor() && valueAccessor()([element.parentElement]);
+//   },
+// };
 
 export function propertyExists(obj: any, propertyName: string) {
   let result = true;

@@ -1,5 +1,4 @@
 import * as Survey from "survey-core";
-import * as ko from "knockout";
 
 export class StylesManager {
   public static ThemeVariablesMap = {
@@ -126,10 +125,10 @@ export class StylesManager {
     },
   };
 
-  public static currentTheme = ko.observable("bootstrap");
+  public static currentTheme = "modern"; // ko.observable("bootstrap");
 
   public static applyTheme(themeName: string = "default") {
-    StylesManager.currentTheme(themeName);
+    StylesManager.currentTheme = themeName;
     Survey.StylesManager.applyTheme(themeName);
 
     if (!document || !document.body || !document.body.style) {
