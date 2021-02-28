@@ -18,7 +18,10 @@ import {
   PageModel,
 } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
-import { PropertyEditorSetupValue } from "../property-grid/index";
+import {
+  PropertyEditorSetupValue,
+  PropertyJSONGenerator,
+} from "../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import {
   SurveyLogicTypes,
@@ -88,6 +91,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               type: "dropdown",
               visible: false,
             },
+            {
+              name: "elementPanel",
+              type: "panel",
+              visible: false,
+            },
           ],
         },
       ],
@@ -124,6 +132,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     panel.getQuestionByName("logicTypeDescription").html =
       action.logicTypeDescription;
     this.setupElementSelector(panel);
+    this.setupElementPanel(panel);
   }
   private onElementSelectorChanged(panel: PanelModel) {
     if (!this.isElementSelectorVisible(panel)) return;
@@ -142,6 +151,26 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.value = !!action.element ? (<any>action.element).name : undefined;
     question.optionsCaption = this.getSelectorOptionsText(action);
   }
+  private setupElementPanel(panel: PanelModel) {
+    var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+    elementPanel.elements.splice(0, elementPanel.elements.length);
+    elementPanel.visible = this.isElementPanelVisible(panel);
+    if (!elementPanel.visible) return;
+    var action = this.getActionByName(panel);
+    var obj = this.createElementPanelObj(action);
+    this.setElementPanelObj(panel, obj);
+    var propGenerator = new PropertyJSONGenerator(obj, this.options);
+    propGenerator.setupObjPanel(elementPanel);
+    elementPanel.getElementByName(
+      action.logicType.propertyName
+    ).visible = false;
+    for (var i = 0; i < elementPanel.questions.length; i++) {
+      var q = elementPanel.questions[i];
+      if (!Helpers.isValueEmpty(obj[q.getValueName()])) {
+        q.value = obj[q.getValueName()];
+      }
+    }
+  }
   private static elementSelectorTypes = ["question", "page", "panel"];
   private isElementSelectorVisible(panel: PanelModel): boolean {
     var action = this.getActionByName(panel);
@@ -150,6 +179,29 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       LogicItemEditor.elementSelectorTypes.indexOf(action.logicType.baseClass) >
       -1
     );
+  }
+  private isElementPanelVisible(panel: PanelModel): boolean {
+    var action = this.getActionByName(panel);
+    if (!action.logicType) return false;
+    return !this.isElementSelectorVisible(panel);
+  }
+  private getElementPanelObj(panel: PanelModel): Base {
+    return panel["panelObj"];
+  }
+  private setElementPanelObj(panel: PanelModel, obj: Base) {
+    panel["panelObj"] = obj;
+  }
+  private createElementPanelObj(action: SurveyLogicAction): Base {
+    var obj = <Base>Serializer.createClass(action.logicType.baseClass);
+    if (!!action.element) {
+      obj.fromJSON(action.element.toJSON());
+    }
+    //TODO
+    obj["survey"] = action.survey;
+    if ((<any>obj).setOwner) {
+      (<any>obj).setOwner(action.survey);
+    }
+    return obj;
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
