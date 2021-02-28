@@ -1,233 +1,31 @@
-import {
-  SurveyModel,
-  Base,
-  SurveyTrigger,
-  Serializer,
-  property,
-  propertyArray,
-} from "survey-core";
+import { SurveyModel, Base, property, propertyArray } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
+import { ExpressionRemoveVariable } from "../expressionToDisplayText";
 import {
-  ExpressionToDisplayText,
-  ExpressionRemoveVariable,
-} from "../expressionToDisplayText";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
-
-export interface ISurveyLogicType {
-  name: string;
-  baseClass: string;
-  propertyName: string;
-  templateName?: string;
-  showInUI?: boolean;
-  showIf?: (survey: SurveyModel) => boolean;
-  createNewElement?: (survey: SurveyModel) => Base;
-  saveElement?: (survey: SurveyModel, action: SurveyLogicAction) => void;
-  createTemplateObject?: (element: Base) => any;
-  isUniqueItem?: boolean;
-  questionNames?: Array<string>;
-  getDisplayText?: (
-    element: Base,
-    formatStr: string,
-    lt: SurveyLogicType
-  ) => string;
-  getDisplayTextName?: (element: Base) => string;
-}
-
-export function getLogicString(name: string) {
-  return editorLocalization.getString("ed.lg." + name);
-}
-
-export class SurveyLogicType {
-  public static expressionToDisplayText(
-    survey: SurveyModel,
-    options: ISurveyCreatorOptions,
-    expression: string
-  ): string {
-    return new ExpressionToDisplayText(survey, options).toDisplayText(
-      expression
-    );
-  }
-  constructor(
-    private logicType: ISurveyLogicType,
-    public survey: SurveyModel,
-    public options: ISurveyCreatorOptions = null
-  ) {}
-  public get name(): string {
-    return this.logicType.name;
-  }
-  public get baseClass(): string {
-    return this.logicType.baseClass;
-  }
-  public get propertyName(): string {
-    return this.logicType.propertyName;
-  }
-  public get templateName(): string {
-    if (this.isTrigger) return "svd-object-editor-content";
-    return !!this.logicType.templateName
-      ? this.logicType.templateName
-      : "svd-element-selector";
-  }
-  public get visible(): boolean {
-    if (!this.showInUI) return false;
-    if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
-    return true;
-  }
-  public get showTitlesInExpression(): boolean {
-    return !!this.options && this.options.showTitlesInExpressions;
-  }
-  public get hasItemSelector(): boolean {
-    return !!this.baseClass && this.showInUI && !this.canCreateNewElement();
-  }
-  public createItemSelector(): any {
-    if (!this.hasItemSelector) return null;
-    /*
-    var res = new SurveyElementSelector(
-      this.survey,
-      this.baseClass,
-      this.showTitlesInExpression
-    );
-    res.disabledPropertyName = this.propertyName;
-    return res;
-    */
-    return null;
-  }
-  public get showInUI(): boolean {
-    return this.logicType.showInUI !== false;
-  }
-  private canCreateNewElement(): boolean {
-    return !!this.logicType.createNewElement || this.isTrigger;
-  }
-  private get isTrigger(): boolean {
-    return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
-  }
-  public createNewElement(survey: SurveyModel): Base {
-    if (!!this.logicType.createNewElement)
-      return this.logicType.createNewElement(survey);
-    if (this.isTrigger) return this.createTriggerElement(survey);
-    return null;
-  }
-  public saveElement(action: SurveyLogicAction): void {
-    if (!!this.logicType.saveElement) {
-      this.logicType.saveElement(this.survey, action);
-    }
-    if (this.isTrigger) {
-      this.saveTriggerElement(action);
-    }
-  }
-  public createTemplateObject(element: Base): any {
-    if (!!this.logicType.createTemplateObject)
-      return this.logicType.createTemplateObject(element);
-    if (this.isTrigger) return this.createTriggerTemplateObject(element);
-    return null;
-  }
-  public get isUniqueItem(): boolean {
-    return this.logicType.isUniqueItem === true;
-  }
-  public get questionNames(): Array<string> {
-    return this.logicType.questionNames;
-  }
-  public get displayName(): string {
-    return getLogicString(this.name + "Name");
-  }
-  public get description(): string {
-    return getLogicString(this.name + "Description");
-  }
-  public getDisplayText(element: Base): string {
-    var str = getLogicString(this.name + "Text");
-    if (!!this.logicType.getDisplayText)
-      return this.logicType.getDisplayText(element, str, this);
-    var name = "";
-    if (!!this.logicType.getDisplayTextName) {
-      name = this.logicType.getDisplayTextName(element);
-    } else {
-      if (!!element && !!element["name"]) {
-        name = element["name"];
-      }
-    }
-    if (!!name) {
-      return str["format"](this.formatElName(name));
-    }
-    return str;
-  }
-  public formatElName(name: string): string {
-    if (this.showTitlesInExpression && !!this.survey) {
-      var question = this.survey.getQuestionByName(name);
-      if (!!question && !!question.title) {
-        name = question.title;
-      }
-    }
-    return "{" + name + "}";
-  }
-  public formatExpression(expression: string): string {
-    return SurveyLogicType.expressionToDisplayText(
-      this.survey,
-      this.options,
-      expression
-    );
-  }
-  private createTriggerElement(survey: SurveyModel): Base {
-    var res = <SurveyTrigger>Serializer.createClass(this.baseClass);
-    res["survey"] = survey;
-    res.setOwner(survey);
-    return res;
-  }
-  private saveTriggerElement(action: SurveyLogicAction) {
-    if (!!action.templateObject.editableObject) {
-      var edObj = action.templateObject.editableObject;
-      edObj.applyAll(["expression"]);
-    } else {
-      var trigger = <SurveyTrigger>action.element;
-      var survey = this.survey;
-      if (this.isNewTrigger(trigger) && !!trigger.expression) {
-        survey.triggers.push(trigger);
-      }
-    }
-  }
-  private createTriggerTemplateObject(element: Base) {
-    //TODO
-    return null;
-    /*
-      var res: SurveyElementEditorContentModel = null;
-      if (this.isNewTrigger(element)) {
-        res = new SurveyElementEditorContentModel(element, "", this.options);
-      } else {
-        res = new SurveyQuestionEditor(element, "", this.options);
-      }
-      var expressionEditor = res.getPropertyEditorByName("expression");
-      if (!!expressionEditor) {
-        expressionEditor.isHidden = true;
-      }
-      return res;
-      */
-  }
-  private isNewTrigger(element: Base): boolean {
-    var trigger = <SurveyTrigger>element;
-    var survey = this.survey;
-    return !!survey && survey.triggers.indexOf(trigger) < 0;
-  }
-}
+  SurveyLogicTypes,
+  SurveyLogicType,
+  getLogicString,
+} from "./logic-types";
 
 export class SurveyLogicAction extends Base {
   public onLogicTypeChanged: () => void;
-  private itemSelectorValue: any = null;
+  private surveyValue: SurveyModel;
   koAfterRender: any;
-  constructor(
-    logicType: SurveyLogicType,
-    element: Base,
-    private survey: SurveyModel
-  ) {
+  constructor(logicType: SurveyLogicType, element: Base, survey: SurveyModel) {
     super();
+    this.surveyValue = survey;
     this.logicType = logicType;
     this.element = element;
-    this.doLogicTypeChanged();
     this.koAfterRender = function () {};
   }
   @property() logicType: SurveyLogicType;
-  @property() template: string;
   @property() element: Base;
   @property() errorText: string;
-  @property() templateObject: any;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
+  public get survey(): SurveyModel {
+    return this.surveyValue;
+  }
+
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "logicType") {
@@ -235,17 +33,14 @@ export class SurveyLogicAction extends Base {
         ? this.logicType.createNewElement(this.survey)
         : null;
       if (!!this.onLogicTypeChanged) this.onLogicTypeChanged();
-      this.doLogicTypeChanged();
     }
-  }
-  public get itemSelector(): any {
-    return this.itemSelectorValue;
   }
   public apply(expression: string, isRenaming: boolean = false) {
     if (!!this.element && !!this.logicType) {
       this.element[this.logicType.propertyName] = expression;
       if (!isRenaming) {
-        this.logicType.saveElement(this);
+        //TODO
+        //this.logicType.saveElement(this);
       }
     }
   }
@@ -265,10 +60,25 @@ export class SurveyLogicAction extends Base {
     );
   }
   public get name(): string {
-    return !!this.logicType ? this.logicType.displayName : null;
+    return !!this.logicType ? this.logicType.displayName : "";
   }
   public get logicTypeName(): string {
-    return !!this.logicType ? this.logicType.name : null;
+    return !!this.logicType ? this.logicType.name : undefined;
+  }
+  public set logicTypeName(val: string) {
+    var lt = null;
+    if (!!val) {
+      for (var i = 0; i < this.logicTypes.length; i++) {
+        if (this.logicTypes[i].name == val) {
+          lt = this.logicTypes[i];
+          break;
+        }
+      }
+    }
+    this.logicType = lt;
+  }
+  public get logicTypeDescription(): string {
+    return !!this.logicType ? this.logicType.description : "";
   }
   public get text(): string {
     return !!this.logicType ? this.logicType.getDisplayText(this.element) : "";
@@ -282,9 +92,6 @@ export class SurveyLogicAction extends Base {
       return true;
     }
     this.errorText = "";
-    if (!!this.itemSelector) return this.itemSelector.hasError();
-    if (!!this.templateObject && !!this.templateObject.hasError)
-      return this.templateObject.hasError();
     return false;
   }
   public getLocString(name: string) {
@@ -293,26 +100,6 @@ export class SurveyLogicAction extends Base {
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
-  }
-  private doLogicTypeChanged() {
-    this.errorText = "";
-    this.itemSelectorValue = !!this.logicType
-      ? this.logicType.createItemSelector()
-      : null;
-    if (this.itemSelector) {
-      var self = this;
-      this.itemSelector.element = this.element;
-      this.itemSelector.onValueChangedCallback = function (newValue: string) {
-        self.element = self.itemSelector.element;
-      };
-    }
-    var obj = !!this.logicType
-      ? this.logicType.createTemplateObject(this.element)
-      : null;
-    obj = obj || this.itemSelector;
-    this.template = "";
-    this.templateObject = obj;
-    this.template = !!this.logicType ? this.logicType.templateName : "";
   }
 }
 

@@ -924,8 +924,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): Array<any> {
-    //TODO doesn't compile because of two library instances
-    var survey: any = EditableObject.getSurvey(obj);
+    var survey = EditableObject.getSurvey(obj);
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
