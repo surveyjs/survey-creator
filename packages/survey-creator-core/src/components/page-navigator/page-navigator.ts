@@ -7,19 +7,18 @@ import {
   Base,
   propertyArray,
   ActionBarItem,
+  SurveyModel,
 } from "survey-core";
 
 import "./page-navigator.scss";
 import "./page-navigator-item.scss";
 
-export class PageNavigatorViewModel<
-  T extends { [index: string]: any }
-> extends Base {
+export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;
 
-  constructor(private pagesController: PagesController<CreatorBase<T>>) {
+  constructor(private pagesController: PagesController<T>) {
     super();
     this.icon = "icon-navigation";
 

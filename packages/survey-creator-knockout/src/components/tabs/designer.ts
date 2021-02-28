@@ -1,7 +1,6 @@
 import { TabDesignerViewModel } from "@survey/creator";
 import * as ko from "knockout";
-import { ImplementorBase } from "survey-knockout-ui";
-import { SurveyCreator } from "../../creator";
+import { ImplementorBase, Survey } from "survey-knockout-ui";
 import { ElementWrapperFactory } from "../../element-wrapper-factory";
 
 const template = require("./designer.html");
@@ -10,7 +9,7 @@ const template = require("./designer.html");
 ko.components.register("svc-tab-designer", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model = new TabDesignerViewModel<SurveyCreator>(params.creator);
+      const model = new TabDesignerViewModel<Survey>(params.creator);
       const wrapper: ElementWrapperFactory = new ElementWrapperFactory(
         params.creator
       );

@@ -1,6 +1,7 @@
 import { PropertyGridModel, PropertyGridViewModel } from "@survey/creator";
 import React, { Component } from "react";
-import { Base, Survey, SurveyElementBase } from "survey-react";
+import { Base } from "survey-core";
+import { Survey, SurveyElementBase } from "survey-react-ui";
 
 interface IPropertyGridComponentProps {
   model: PropertyGridModel;
@@ -16,7 +17,7 @@ class PropertyGridComponent extends SurveyElementBase<
     this.model = new PropertyGridViewModel(this.props.model, this.props.title);
   }
   protected getStateElement(): Base {
-    return (this.model as any) as Base;
+    return this.model;
   }
   render() {
     return (

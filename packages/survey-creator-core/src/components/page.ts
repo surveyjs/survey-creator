@@ -4,12 +4,13 @@ import {
   PageModel,
   property,
   propertyArray,
+  SurveyModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 
 import "./page.scss";
 
-export class PageViewModel<T extends { [index: string]: any }> extends Base {
+export class PageViewModel<T extends SurveyModel> extends Base {
   @property({ defaultValue: false }) isGhost: boolean;
   @propertyArray() actions: Array<IActionBarItem>;
   public creator: CreatorBase<T>;

@@ -20,6 +20,9 @@ export * from "../components/tabbed-menu/tabbed-menu";
 export * from "../components/tabbed-menu/tabbed-menu-item";
 export * from "../components/toolbox/toolbox";
 export * from "../components/toolbox/toolbox-item";
+export * from "../components/simulator";
+export * from "../components/results";
+export * from "../utils/survey-widget";
 
 export * from "../creator";
 

@@ -16,14 +16,14 @@ var svgStoreUtils = require(path.resolve(
 ));
 
 var banner = [
-  "SurveyJS Creator v" + packageJson.version,
+  "SurveyJS Creator React v" + packageJson.version,
   "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
 
 var dts_banner = [
-  "Type definitions for SurveyJS Creator JavaScript library v" +
+  "Type definitions for SurveyJS Creator React JavaScript library v" +
     packageJson.version,
   "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
@@ -67,10 +67,10 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    "survey-react": "^" + packageJson.version,
+    "survey-core": "^" + packageJson.version,
+    "survey-react-ui": "^" + packageJson.version,
     react: "^17.0.1",
     "react-dom": "^17.0.1",
-    knockout: "^3.5.1",
   },
   devDependencies: {},
 };
@@ -223,26 +223,30 @@ module.exports = function (options) {
       umdNamedDefine: true,
     },
     externals: {
-      knockout: {
-        root: "ko",
-        commonjs2: "knockout",
-        commonjs: "knockout",
-        amd: "knockout",
+      react: {
+        root: "React",
+        commonjs2: "react",
+        commonjs: "react",
+        amd: "react"
       },
-      "survey-knockout": {
-        root: "Survey",
-        commonjs2: "survey-knockout",
-        commonjs: "survey-knockout",
-        amd: "survey-knockout",
+      "react-dom": {
+        root: "ReactDOM",
+        commonjs2: "react-dom",
+        commonjs: "react-dom",
+        amd: "react-dom"
       },
-      /*
-      "survey-react": {
+      "survey-core": {
+        root: "SurveyCore",
+        commonjs2: "SurveyCore",
+        commonjs: "SurveyCore",
+        amd: "SurveyCore",
+      },
+      "survey-react-ui": {
         root: "SurveyReact",
-        commonjs2: "survey-react",
-        commonjs: "survey-react",
-        amd: "survey-react",
+        commonjs2: "survey-react-ui",
+        commonjs: "survey-react-ui",
+        amd: "survey-react-ui",
       },
-      */
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
@@ -275,7 +279,7 @@ module.exports = function (options) {
     config.devServer = {
       contentBase: __dirname,
       compress: false,
-      port: 8080,
+      port: 8082,
     };
   }
 

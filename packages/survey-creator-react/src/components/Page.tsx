@@ -1,34 +1,29 @@
-import * as Survey from "survey-react";
-import {
-  ActionBar,
-  Base,
-  SurveyElementBase,
-  SurveyPage,
-} from "survey-react";
+import { Base, PageModel, SurveyModel } from "survey-core";
+import { ActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
 import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
 
 interface ICreatorSurveyPageComponentProps {
-  creator: CreatorBase<Survey.Model>;
-  survey: Survey.Model;
-  page: Survey.PageModel;
+  creator: CreatorBase<SurveyModel>;
+  survey: SurveyModel;
+  page: PageModel;
 }
 
 export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
 > {
-  private model: PageViewModel<Survey.Model>;
+  private model: PageViewModel<SurveyModel>;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
-    this.model = new PageViewModel<Survey.Model>(
+    this.model = new PageViewModel<SurveyModel>(
       this.props.creator,
-      this.props.page as any
+      this.props.page
     );
   }
 
   protected getStateElement(): Base {
-    return this.model as any;
+    return this.model;
   }
   render(): JSX.Element {
     return (

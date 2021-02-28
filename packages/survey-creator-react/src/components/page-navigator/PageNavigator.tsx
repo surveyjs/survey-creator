@@ -1,18 +1,10 @@
-import * as Survey from "survey-react";
-import {
-  Base,
-  SurveyElementBase,
-  SurveyModel,
-  SvgIcon,
-  Popup,
-  PageModel,
-  unwrap,
-} from "survey-react";
+import { Base, SurveyModel, PageModel, unwrap } from "survey-core";
+import { SurveyElementBase, SvgIcon, Popup } from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
 
 interface ISurveyPageNavigatorProps {
-  creator: CreatorBase<Survey.Model>;
+  creator: CreatorBase<SurveyModel>;
   pages: Array<PageModel>;
 }
 
@@ -24,16 +16,16 @@ export class SurveyPageNavigator extends SurveyElementBase<
   constructor(props: ISurveyPageNavigatorProps) {
     super(props);
     this.model = new PageNavigatorViewModel<SurveyModel>(
-      props.creator.pagesController as any
+      props.creator.pagesController
     );
     const pageItems = this.props.pages.map((page: PageModel) => {
-      return this.model.createActionBarItem(page as any);
+      return this.model.createActionBarItem(page);
     });
     this.model.setItems(pageItems);
   }
 
   protected getStateElement(): Base {
-    return this.model as any;
+    return this.model;
   }
 
   render(): JSX.Element {
@@ -54,7 +46,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
           ></SvgIcon>
 
           <Popup
-            model={this.model.popupModel as any}
+            model={this.model.popupModel}
             //className="svc-page-navigator__popup"
           ></Popup>
         </div>

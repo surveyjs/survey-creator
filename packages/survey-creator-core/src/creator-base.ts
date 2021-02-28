@@ -7,6 +7,7 @@ import {
   PopupModel,
   property,
   propertyArray,
+  SurveyModel,
 } from "survey-core";
 import { ISurveyCreatorOptions } from "./settings";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
@@ -35,7 +36,7 @@ export interface ICreatorPlugin {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends { [index: string]: any }>
+export class CreatorBase<T extends SurveyModel>
   extends Survey.Base
   implements ISurveyCreatorOptions {
   /**
@@ -861,7 +862,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     this.setModified({ type: modifiedType, question: element });
   }
 
-  public setNewNames(element: Survey.IElement) {
+  public setNewNames(element: Survey.ISurveyElement) {
     this.newQuestions = [];
     this.newPanels = [];
     this.setNewNamesCore(element);
@@ -913,7 +914,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     return SurveyHelper.getNewPanelName(this.getAllPanels());
   }
 
-  protected setNewNamesCore(element: Survey.IElement) {
+  protected setNewNamesCore(element: Survey.ISurveyElement) {
     var elType = element["getType"]();
     element.name = this.getNewName(elType);
     if (element.isPanel || elType == "page") {
@@ -1411,7 +1412,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   }
 }
 
-export class PagesController<T extends { [index: string]: any }> extends Base {
+export class PagesController<T extends SurveyModel> extends Base {
   constructor(public creator: CreatorBase<T>) {
     super();
   }

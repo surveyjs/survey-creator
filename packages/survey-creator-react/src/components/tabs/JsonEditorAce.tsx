@@ -1,12 +1,16 @@
 import React from "react";
-import { Base, ReactElementFactory, SurveyElementBase } from "survey-react";
+import { Base } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { TabJsonEditorBasePlugin, AceJsonEditorModel } from "@survey/creator";
 
 interface ITabJsonEditorAceComponentProps {
-  data: TabJsonEditorBasePlugin<AceJsonEditorModel>
+  data: TabJsonEditorBasePlugin<AceJsonEditorModel>;
 }
 
-export class TabJsonEditorAceComponent extends SurveyElementBase<ITabJsonEditorAceComponentProps, any> {
+export class TabJsonEditorAceComponent extends SurveyElementBase<
+  ITabJsonEditorAceComponentProps,
+  any
+> {
   private model: AceJsonEditorModel;
   private aceEditorrRef: React.RefObject<HTMLDivElement>;
   constructor(props: ITabJsonEditorAceComponentProps) {
@@ -15,7 +19,7 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<ITabJsonEditorA
     this.aceEditorrRef = React.createRef();
   }
   protected getStateElement(): Base {
-    return this.model as any;
+    return this.model;
   }
   componentDidMount() {
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));
@@ -24,13 +28,19 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<ITabJsonEditorA
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
-          <div className="svc-json-editor-tab__ace-editor" ref={this.aceEditorrRef}></div>
+          <div
+            className="svc-json-editor-tab__ace-editor"
+            ref={this.aceEditorrRef}
+          ></div>
         </div>
       </div>
     );
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-tab-json-editor-ace", (props) => {
-  return React.createElement(TabJsonEditorAceComponent, props);
-});
+ReactElementFactory.Instance.registerElement(
+  "svc-tab-json-editor-ace",
+  (props) => {
+    return React.createElement(TabJsonEditorAceComponent, props);
+  }
+);
