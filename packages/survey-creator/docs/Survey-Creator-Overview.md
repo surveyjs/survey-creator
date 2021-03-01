@@ -468,26 +468,26 @@ Please review and play with the [Survey Toolbox customization](https://surveyjs.
 
 ## Remove properties from SurveyJS Elements or hide them
 
-The most popular task is to remove or hide existing properties from the Survey Creator.
+The most popular task is to remove or hide existing properties in the Survey Creator.
 
-There is a difference between removing and hiding. If you remove the property, then SurveyJS will not be able to restore it from JSON and save it back to JSON. SurveyJS will not have any information about it. You may still do it, if you know that you do not need this property.
+There is a difference between removing and hiding. If you remove a property, then SurveyJS will not be able to restore it from JSON and save it back to JSON. SurveyJS will not have any information about the removed property. So, to remove properties, make sure that you do not need these properties anymore.
 
-Here is the example of removing the description and choicesUrl properties
+Here is an example of removing the [title](https://surveyjs.io/Documentation/Library?id=Question#title) and [choicesByUrl](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choicesByUrl) properties.
 ```javascript
 //remove a property from the question class and as result from all questions
-Survey.Serializer.removeProperty("question", "description");
+Survey.Serializer.removeProperty("question", "title");
 //remove choicesByUrl from checkbox, dropdown and radiogroup questions
-Survey.Serializer.removeProperty("selectbase", "choicesUrl");
+Survey.Serializer.removeProperty("selectbase", "choicesByUrl");
 ```
 
-You may make these properties invisible in Survey Creator and still be able to load/save them in JSON by setting their visible property to false
+You can make these properties invisible in Survey Creator and still be able to load/save them in JSON by setting their [visible](https://surveyjs.io/Documentation/Library?id=Question#visible) property to false.
 ```javascript
 //make a property, from the question class and as result from all questions, invisible
-Survey.Serializer.findProperty("question", "description").visible = false;
+Survey.Serializer.findProperty("question", "title").visible = false;
 //make choicesByUrl property from checkbox, dropdown and radiogroup questions invisible
-Survey.Serializer.findProperty("selectbase", "choicesUrl").visible = false;
+Survey.Serializer.findProperty("selectbase", "choicesByUrl").visible = false;
 ```
-This work perfect, if you need to hide several properties. If the list of properties you want to make invisible is large, you may use survey **onShowingProperty** event.
+This work perfect, if you need to hide a few properties. If the list of properties you want to make invisible is large, you can use SurveyCreator's [onShowingProperty](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event.
 ```javascript
 surveyCreator.onShowingProperty.add(function (sender, options) {
     //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
@@ -497,7 +497,7 @@ surveyCreator.onShowingProperty.add(function (sender, options) {
 });
 ```
 
-You may review the [Remove properties](https://surveyjs.io/Examples/Survey-Creator/?id=removeproperties) example.
+For more details, review the [Remove properties](https://surveyjs.io/Examples/Survey-Creator/?id=removeproperties) example.
 
 
 <div id="addproperties"></div>
