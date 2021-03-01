@@ -1,39 +1,26 @@
 import { SurveyModel, Base, property, propertyArray } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { ExpressionRemoveVariable } from "../expressionToDisplayText";
-import {
-  SurveyLogicTypes,
-  SurveyLogicType,
-  getLogicString,
-} from "./logic-types";
+import { SurveyLogicType, getLogicString } from "./logic-types";
 
 export class SurveyLogicAction extends Base {
-  public onLogicTypeChanged: () => void;
   private surveyValue: SurveyModel;
-  koAfterRender: any;
+  private logicTypeValue: SurveyLogicType;
+  private elementValue: Base;
   constructor(logicType: SurveyLogicType, element: Base, survey: SurveyModel) {
     super();
     this.surveyValue = survey;
-    this.logicType = logicType;
-    this.element = element;
-    this.koAfterRender = function () {};
+    this.logicTypeValue = logicType;
+    this.elementValue = element;
   }
-  @property() logicType: SurveyLogicType;
-  @property() element: Base;
-  @property() errorText: string;
-  @propertyArray() logicTypes: Array<SurveyLogicType>;
+  public get logicType(): SurveyLogicType {
+    return this.logicTypeValue;
+  }
+  public get element(): Base {
+    return this.elementValue;
+  }
   public get survey(): SurveyModel {
     return this.surveyValue;
-  }
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "logicType") {
-      this.element = !!this.logicType
-        ? this.logicType.createNewElement(this.survey)
-        : null;
-      if (!!this.onLogicTypeChanged) this.onLogicTypeChanged();
-    }
   }
   public apply(expression: string, isRenaming: boolean = false) {
     if (!!this.element && !!this.logicType) {
@@ -65,18 +52,6 @@ export class SurveyLogicAction extends Base {
   public get logicTypeName(): string {
     return !!this.logicType ? this.logicType.name : undefined;
   }
-  public set logicTypeName(val: string) {
-    var lt = null;
-    if (!!val) {
-      for (var i = 0; i < this.logicTypes.length; i++) {
-        if (this.logicTypes[i].name == val) {
-          lt = this.logicTypes[i];
-          break;
-        }
-      }
-    }
-    this.logicType = lt;
-  }
   public get logicTypeDescription(): string {
     return !!this.logicType ? this.logicType.description : "";
   }
@@ -87,11 +62,12 @@ export class SurveyLogicAction extends Base {
     return getLogicString("deleteAction");
   }
   public hasError(): boolean {
+    /*
     if (!this.logicType) {
       this.errorText = editorLocalization.getString("pe.conditionActionEmpty");
       return true;
     }
-    this.errorText = "";
+    */
     return false;
   }
   public getLocString(name: string) {
@@ -104,10 +80,12 @@ export class SurveyLogicAction extends Base {
 }
 
 export interface ISurveyLogicItemOwner {
+  survey: SurveyModel;
   readOnly: boolean;
   editItem(item: SurveyLogicItem);
   removeItem(item: SurveyLogicItem);
   getExpressionAsDisplayText(expression: string): string;
+  getVisibleLogicTypes(): Array<SurveyLogicType>;
 }
 
 export class SurveyLogicItem extends Base {
@@ -124,6 +102,12 @@ export class SurveyLogicItem extends Base {
   @propertyArray() actions: Array<SurveyLogicAction>;
   public get name() {
     return "logicItem" + this.id;
+  }
+  public get survey(): SurveyModel {
+    return this.owner.survey;
+  }
+  public getVisibleLogicTypes(): Array<SurveyLogicType> {
+    return this.owner.getVisibleLogicTypes();
   }
   public get title() {
     var res = this.getExpressionAsDisplayText();
@@ -149,12 +133,29 @@ export class SurveyLogicItem extends Base {
     this.actions.push(action);
   }
   public removeAction(action: SurveyLogicAction) {
-    this.removedActions.push(action);
-    var index = this.actions.indexOf(action);
+    this.replaceActionCore(null, action);
+  }
+  public replaceAction(
+    newAction: SurveyLogicAction,
+    oldAction: SurveyLogicAction
+  ) {
+    if (!!oldAction) {
+      this.replaceActionCore(newAction, oldAction);
+    } else {
+      this.addNewAction(newAction);
+    }
+  }
+  private replaceActionCore(
+    newAction: SurveyLogicAction,
+    oldAction: SurveyLogicAction
+  ) {
+    this.removedActions.push(oldAction);
+    var index = this.actions.indexOf(oldAction);
     if (index > -1) {
-      this.actions.splice(index, 1);
-      if (!!action.logicType && !!action.onLogicTypeChanged) {
-        action.onLogicTypeChanged();
+      if (!!newAction) {
+        this.actions.splice(index, 1, newAction);
+      } else {
+        this.actions.splice(index, 1);
       }
     }
   }

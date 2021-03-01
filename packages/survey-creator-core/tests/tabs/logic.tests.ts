@@ -2,6 +2,7 @@ import {
   SurveyModel,
   QuestionHtmlModel,
   QuestionDropdownModel,
+  SurveyTriggerRunExpression,
   PanelModel,
 } from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
@@ -49,11 +50,6 @@ test("SurveyLogicItem, logicType and logicType name", () => {
   expect(logic.editableItem.actions[0].element).toEqual(
     survey.getQuestionByName("q2")
   );
-  logic.editableItem.actions[0].logicTypeName = "question_enable";
-  expect(logic.editableItem.actions[0].logicTypeName).toEqual(
-    "question_enable"
-  );
-  expect(logic.editableItem.actions[0].element).toBeFalsy();
 });
 test("LogicItemEditor: build panels and elementSelector", () => {
   var survey = new SurveyModel({
@@ -72,9 +68,7 @@ test("LogicItemEditor: build panels and elementSelector", () => {
     editor.panels[0].getQuestionByName("logicTypeName")
   );
   expect(ltQuestion).toBeTruthy();
-  expect(ltQuestion.choices).toHaveLength(
-    logic.items[0].actions[0].logicTypes.length
-  );
+  expect(ltQuestion.choices).toHaveLength(logic.getVisibleLogicTypes().length);
   expect(ltQuestion.value).toEqual("question_visibility");
   var ltDescription = <QuestionHtmlModel>(
     editor.panels[0].getQuestionByName("logicTypeDescription")
@@ -91,16 +85,21 @@ test("LogicItemEditor: build panels and elementSelector", () => {
   expect(qSelector.value).toEqual("q2");
   expect(qSelector.choices).toHaveLength(4);
   qSelector.value = "q4";
+  editor.apply();
   expect(logic.items[0].actions[0].element).toEqual(
     survey.getQuestionByName("q4")
   );
+  logic.items[0].apply("{q1} = 1");
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
+  expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q1} = 1");
 });
 test("LogicItemEditor: update a trigger", () => {
   var survey = new SurveyModel({
     elements: [
-      { type: "text", name: "q1", title: "Question 1" },
-      { type: "text", name: "q2", title: "Question 2" },
-      { type: "text", name: "q3", title: "Question 3" },
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
     ],
     triggers: [
       {
@@ -119,9 +118,7 @@ test("LogicItemEditor: update a trigger", () => {
     editor.panels[0].getQuestionByName("logicTypeName")
   );
   expect(ltQuestion).toBeTruthy();
-  expect(ltQuestion.choices).toHaveLength(
-    logic.items[0].actions[0].logicTypes.length
-  );
+  expect(ltQuestion.choices).toHaveLength(logic.getVisibleLogicTypes().length);
   expect(ltQuestion.value).toEqual("trigger_runExpression");
   var ltDescription = <QuestionHtmlModel>(
     editor.panels[0].getQuestionByName("logicTypeDescription")
@@ -151,4 +148,79 @@ test("LogicItemEditor: update a trigger", () => {
   var expressionQuestion = panelTrigger.getQuestionByName("expression");
   expect(expressionQuestion).toBeTruthy();
   expect(expressionQuestion.visible).toBeFalsy();
+  runExpressionQuestion.value = "{q2} - 10";
+  setToNameQuestion.value = "q3";
+  editor.apply();
+  var element = <SurveyTriggerRunExpression>logic.items[0].actions[0].element;
+  expect(element.runExpression).toEqual("{q2} - 10");
+  expect(element.setToName).toEqual("q3");
+});
+test("LogicItemEditor: add new actions", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  var editor = new LogicItemEditor(logic.editableItem);
+  expect(editor.panels).toHaveLength(1);
+  var ltQuestion = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("logicTypeName")
+  );
+  expect(ltQuestion).toBeTruthy();
+  expect(ltQuestion.choices).toHaveLength(logic.getVisibleLogicTypes().length);
+  expect(ltQuestion.value).toBeFalsy();
+  var elSelectionQuestion = editor.panels[0].getQuestionByName(
+    "elementSelector"
+  );
+  expect(elSelectionQuestion.visible).toBeFalsy();
+  ltQuestion.value = "question_visibility";
+  expect(elSelectionQuestion.visible).toBeTruthy();
+  expect(elSelectionQuestion.choices).toHaveLength(3);
+  elSelectionQuestion.value = "q2";
+  editor.panel.addPanel();
+  editor.panels[1].getQuestionByName("logicTypeName").value =
+    "question_visibility";
+  editor.panels[1].getQuestionByName("elementSelector").value = "q3";
+  editor.apply();
+  logic.editableItem.apply("{q1} = 1");
+  expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
+  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
+});
+test("LogicItemEditor: remove actions", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 1" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  var editor = new LogicItemEditor(logic.items[0]);
+  expect(editor.panels).toHaveLength(2);
+  editor.panel.removePanel(0);
+  expect(editor.panels).toHaveLength(1);
+  editor.panel.removePanel(0);
+  expect(editor.panels).toHaveLength(1);
+  var ltQuestion = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("logicTypeName")
+  );
+  expect(ltQuestion).toBeTruthy();
+  expect(ltQuestion.value).toBeFalsy();
+  ltQuestion.value = "question_visibility";
+  var elSelectionQuestion = editor.panels[0].getQuestionByName(
+    "elementSelector"
+  );
+  expect(elSelectionQuestion.visible).toBeTruthy();
+  expect(elSelectionQuestion.choices).toHaveLength(3);
+  elSelectionQuestion.value = "q1";
+  editor.apply();
+  logic.items[0].apply("{q2} = 1");
+  expect(survey.getQuestionByName("q1").visibleIf).toEqual("{q2} = 1");
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q3").visibleIf).toBeFalsy();
 });

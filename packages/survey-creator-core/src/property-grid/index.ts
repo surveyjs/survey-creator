@@ -30,7 +30,7 @@ FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
 
 export interface IPropertyEditorSetup {
   editSurvey: SurveyModel;
-  apply();
+  apply(): boolean;
 }
 
 export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
@@ -63,7 +63,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   }
   protected abstract getSurveyJSON(): any;
   protected abstract getSurveyCreationReason(): string;
-  public abstract apply();
+  public abstract apply(): boolean;
 }
 
 export interface IPropertyGridEditor {

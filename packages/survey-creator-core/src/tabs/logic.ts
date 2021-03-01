@@ -276,9 +276,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   ): SurveyLogicAction {
     var action = this.createNewAction(lt, element);
     this.editableItem.addNewAction(action);
-    if (!!action.logicType) {
-      this.updateLogicTypesInActions();
-    }
     return action;
   }
   public addNewAction(): SurveyLogicAction {
@@ -289,51 +286,17 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     element: Base
   ): SurveyLogicAction {
     var action = new SurveyLogicAction(lt, element, this.survey);
-    action.logicTypes = this.createLogicTypesInActions(action);
-    action.onLogicTypeChanged = () => {
-      this.updateLogicTypesInActions();
-    };
     return action;
   }
-  private createLogicTypesInActions(action: SurveyLogicAction): Array<any> {
+  public getVisibleLogicTypes(): Array<SurveyLogicType> {
     var res = [];
     var logicTypes = this.logicTypes;
     for (var i = 0; i < logicTypes.length; i++) {
       if (logicTypes[i].visible) {
         res.push(logicTypes[i]);
-        /*TODO
-          koVisible: ko.observable(
-            this.isLogicTypeVisibleInAction(logicTypes[i], action)
-          ),*/
       }
     }
     return res;
-  }
-  private isLogicTypeVisibleInAction(
-    lt: SurveyLogicType,
-    action: SurveyLogicAction
-  ): boolean {
-    if (!lt.isUniqueItem || lt == action.logicType) return true;
-    if (!this.editableItem) return true;
-    for (var i = 0; i < this.editableItem.actions.length; i++) {
-      var curAction = this.editableItem.actions[i];
-      if (curAction != action && curAction.logicType == lt) return false;
-    }
-    return true;
-  }
-  private updateLogicTypesInActions() {
-    if (!this.editableItem) return;
-    for (var i = 0; i < this.editableItem.actions.length; i++) {
-      this.updateLogicTypesInAction(this.editableItem.actions[i]);
-    }
-  }
-  private updateLogicTypesInAction(action: SurveyLogicAction) {
-    var logicTypes = action.logicTypes;
-    for (var i = 0; i < logicTypes.length; i++) {
-      var lt = logicTypes[i];
-      //TODO
-      //lt.koVisible(this.isLogicTypeVisibleInAction(lt.logicType, action));
-    }
   }
   public removeAction(action: SurveyLogicAction) {
     if (!this.editableItem) return;

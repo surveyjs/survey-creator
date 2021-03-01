@@ -7,7 +7,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions } from "../settings";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);

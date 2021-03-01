@@ -43,8 +43,9 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   protected getSurveyCreationReason(): string {
     return "default-value";
   }
-  public apply() {
+  public apply(): boolean {
     this.editQuestion[this.propertyName] = this.getEditValue();
+    return true;
   }
 }
 
@@ -120,7 +121,8 @@ export class TriggerValueEditor extends DefaultValueEditor {
   protected getQuestionValue(): any {
     return !!this.editObj ? this.editObj[this.propertyName] : null;
   }
-  public apply() {
+  public apply(): boolean {
     this.editObj[this.propertyName] = this.question.value;
+    return true;
   }
 }

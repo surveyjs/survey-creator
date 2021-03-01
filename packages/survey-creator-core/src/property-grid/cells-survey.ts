@@ -40,8 +40,9 @@ export class CellsEditor extends PropertyEditorSetupValue {
   public get editMatrix(): QuestionMatrixDropdownModel {
     return this.editMatrixValue;
   }
-  public apply() {
+  public apply(): boolean {
     this.matrix.cells.setJson(this.editMatrix.value);
+    return true;
   }
   private buildColumns() {
     var columns = this.matrix.columns;

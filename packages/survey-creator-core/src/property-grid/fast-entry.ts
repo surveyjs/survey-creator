@@ -58,10 +58,11 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   public get comment(): QuestionCommentModel {
     return this.commentValue;
   }
-  public apply() {
-    if (this.comment.isEmpty()) return;
+  public apply(): boolean {
+    if (this.comment.isEmpty()) return false;
     const items = this.convertTextToItemValues(this.comment.value);
     FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
+    return true;
   }
   public setComment() {
     var text = this.convertItemValuesToText();

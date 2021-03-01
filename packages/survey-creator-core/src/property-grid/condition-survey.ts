@@ -349,10 +349,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     return true;
   }
-  public apply() {
-    if (!this.isReady) return;
+  public apply(): boolean {
+    if (!this.isReady) return false;
     if (!this.object || !this.propertyName) return;
     this.object[this.propertyName] = this.text;
+    return true;
   }
   private buildPanels(items: Array<ConditionEditorItem>) {
     this.panel.panelCount = items.length;
