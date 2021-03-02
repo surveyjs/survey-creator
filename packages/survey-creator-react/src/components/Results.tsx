@@ -1,0 +1,58 @@
+import { Base } from "survey-core";
+import { SurveyElementBase } from "survey-react-ui";
+
+interface ICreatorSurveyResultsComponentProps {}
+export class CreatorSurveyResultsComponent extends SurveyElementBase<
+  ICreatorSurveyResultsComponentProps,
+  any
+> {
+  constructor(props: ICreatorSurveyResultsComponentProps) {
+    super(props);
+  }
+
+  protected getStateElement(): Base {
+    return null;
+  }
+
+  render(): JSX.Element {}
+}
+
+/*
+
+<div class="svd_test_results">
+    <div class="svd_results_header">
+        <h2 data-bind="text: surveyResultsText"></h2>
+    </div>
+    <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
+        <li class="nav-item active" data-bind="css: {active: resultViewType === 'table'}">
+            <a class="nav-link" href="#"
+                data-bind="click: selectTableClick, text: $data.getLocString('ed.surveyResultsTable')"></a>
+        </li>
+        <li class="nav-item" data-bind="css: {active: resultViewType === 'text'}">
+            <a class="nav-link" href="#"
+                data-bind="click: selectJsonClick, text: $data.getLocString('ed.surveyResultsJson')"></a>
+        </li>
+    </ul>
+    <div class="svd_results_text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
+        <div data-bind="text: resultText"></div>
+    </div>
+    <div class="svd_results_table svd-light-bg-color" data-bind="visible: resultViewType === 'table'">
+        <table>
+            <thead>
+                <tr class="svd-light-background-color">
+                    <th class="svd-dark-border-color" data-bind="text: resultsTitle"></th>
+                    <th class="svd-dark-border-color" data-bind="text: resultsName"></th>
+                    <th class="svd-dark-border-color" data-bind="text: resultsValue"></th>
+                    <th class="svd-dark-border-color" data-bind="text: resultsDisplayValue"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: resultData -->
+                <!-- ko component: { name: 'survey-results-table-row', params: { model: $data } } -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+</div>
+*/

@@ -1,7 +1,15 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { ActionBar, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase, TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
+import {
+  ActionBar,
+  ReactElementFactory,
+  SurveyElementBase,
+} from "survey-react-ui";
+import {
+  CreatorBase,
+  TabTestPlugin,
+  TestSurveyTabViewModel,
+} from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
@@ -24,15 +32,14 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   render(): JSX.Element {
     return (
       <div className="svc-creator-tab__content">
-          <div className="svc-test-tab__content">
-              <SurveySimulator options={this.model.simulator}></SurveySimulator>
-              {/* (this.model.isRunning ? <survey-results params="survey: survey"></survey-results> : null) */}
-          </div>
-          <div className="svc-test-tab__content-actions">
-              <ActionBar items={this.model.actions}></ActionBar>
-          </div>
+        <div className="svc-test-tab__content">
+          <SurveySimulator options={this.model.simulator}></SurveySimulator>
+          {/* (this.model.isRunning ? <survey-results params="survey: survey"></survey-results> : null) */}
+        </div>
+        <div className="svc-test-tab__content-actions">
+          <ActionBar items={this.model.actions}></ActionBar>
+        </div>
       </div>
-
     );
   }
 }
