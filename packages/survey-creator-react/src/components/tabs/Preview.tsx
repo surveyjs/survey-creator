@@ -11,6 +11,7 @@ import {
   TestSurveyTabViewModel,
 } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
+import { CreatorSurveyResultsComponent } from "../Results";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   private model: TestSurveyTabViewModel;
@@ -34,7 +35,10 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
       <div className="svc-creator-tab__content">
         <div className="svc-test-tab__content">
           <SurveySimulator options={this.model.simulator}></SurveySimulator>
-          {/* (this.model.isRunning ? <survey-results params="survey: survey"></survey-results> : null) */}
+
+          {!this.model.isRunning ? (
+            <CreatorSurveyResultsComponent survey={this.model.survey} />
+          ) : null}
         </div>
         <div className="svc-test-tab__content-actions">
           <ActionBar items={this.model.actions}></ActionBar>
