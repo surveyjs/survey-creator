@@ -35,10 +35,9 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
               className="svd-simulator"
               style={{ width: this.model.simulatorFrame.width / this.model.simulatorFrame.scale + 'px', height: this.model.simulatorFrame.height / this.model.simulatorFrame.scale + 'px', transform: 'scale(' + this.model.simulatorFrame.scale + ') translate(-50%, -50%)' }}
             >
-          <Survey
-            className="svd-simulator-content"
-            model={this.model.survey}
-          ></Survey>
+              <div className="svd-simulator-content">
+              <Survey model={this.model.survey} ></Survey>
+              </div>
             </div>
           </div>
         </div>
@@ -46,10 +45,9 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     } else {
       return (
         <div className="svd-simulator-main">
-          <Survey
-            className="svd-simulator-content"
-            model={this.model.survey}
-          ></Survey>
+          <div className="svd-simulator-content">
+          <Survey model={this.model.survey} ></Survey>
+          </div>
         </div>
       );
     }
