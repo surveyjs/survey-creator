@@ -103,12 +103,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "mode") {
-      if (newValue !== "view" && newValue !== "new" && newValue !== "edit")
-        return;
-      if (this.mode == newValue) return;
-      var oldMode = this.mode;
-      if ((oldMode == "new" || oldMode == "edit") && newValue == "view") {
-        this.updateVisibleItems();
+      if (newValue == "view" && (oldValue == "edit" || oldValue == "new")) {
+        this.onEndEditing();
       }
     }
   }
@@ -211,18 +207,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getExpressionText(): string {
     return "";
   }
-  public get addNewActionText(): string {
-    return getLogicString("addNewAction");
-  }
-  public get selectedActionCaption(): string {
-    return getLogicString("selectedActionCaption");
-  }
-  public get expressionSetupText(): string {
-    return getLogicString("expressionSetup");
-  }
-  public get actionsSetupText(): string {
-    return getLogicString("actionsSetup");
-  }
   private renameQuestionCore(
     oldName: string,
     newName: string,
@@ -236,10 +220,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     for (var i = 0; i < items.length; i++) {
       items[i].removeQuestion(name);
     }
-  }
-  public get addNewText(): string {
-    var lgAddNewItem = this.getLocString("ed.lg.addNewItem");
-    return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
   }
   public addNew() {
     !!this.options && this.options.startUndoRedoTransaction();
@@ -257,6 +237,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   protected onStartEditing() {}
+  protected onEndEditing() {
+    this.editableItem = null;
+  }
   public removeItem(item: SurveyLogicItem) {
     var eventOptions = { item: item, allowRemove: true };
     this.onLogicItemRemoving.fire(this, eventOptions);

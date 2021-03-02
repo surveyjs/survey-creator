@@ -22,6 +22,7 @@ export * from "../questionconverter";
 export * from "../svgbundle";
 export * from "../tabs/embed";
 export * from "../tabs/logic";
+export * from "../tabs/logic-ui";
 export * from "../tabs/translation";
 export * from "../textWorker";
 export * from "../toolbox";

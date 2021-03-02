@@ -249,3 +249,23 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   logic.removeItem(logic.items[0]);
   expect(itemsQuestion.value).toHaveLength(2);
 });
+test("SurveyLogicUI: Test logicItemEditor", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  expect(logic.itemEditor).toBeTruthy();
+  expect(logic.itemEditor.editableItem).toBeFalsy();
+  logic.editItem(logic.items[0]);
+  expect(logic.itemEditor.editableItem).toBeTruthy();
+  expect(logic.itemEditor.panels).toHaveLength(2);
+  logic.mode = "view";
+  expect(logic.itemEditor.editableItem).toBeFalsy();
+});

@@ -32,8 +32,10 @@ import { editorLocalization } from "../editorLocalization";
 
 export class LogicItemEditor extends PropertyEditorSetupValue {
   private logicTypeChoices: Array<ItemValue>;
+  private editableItemValue: SurveyLogicItem;
+  private isBuildingPanels: boolean;
   constructor(
-    public editableItem: SurveyLogicItem,
+    editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
   ) {
     super(options);
@@ -52,9 +54,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         }
       }
     });
-    this.logicTypeChoices = this.getLogicTypeChoices();
-    this.buildPanels();
     this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
+      if (this.isBuildingPanels) return;
       var action = this.getActionByPanel(options.panel);
       if (!!action) {
         this.editableItem.removeAction(action);
@@ -64,9 +65,18 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
     });
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
+      if (this.isBuildingPanels) return;
       var panel = this.panels[this.panel.panelCount - 1];
       this.onPanelAdded(panel, null);
     });
+    this.editableItem = editableItem;
+  }
+  public get editableItem(): SurveyLogicItem {
+    return this.editableItemValue;
+  }
+  public set editableItem(val: SurveyLogicItem) {
+    this.editableItemValue = val;
+    this.buildPanels();
   }
   public get survey() {
     return this.editableItem.survey;
@@ -167,6 +177,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private buildPanels() {
+    this.panel.panelCount = 0;
+    if (!this.editableItem) return;
+    this.logicTypeChoices = this.getLogicTypeChoices();
     for (var i = 0; i < this.editableItem.actions.length; i++) {
       this.onPanelAdded(this.panel.addPanel(), this.editableItem.actions[i]);
     }

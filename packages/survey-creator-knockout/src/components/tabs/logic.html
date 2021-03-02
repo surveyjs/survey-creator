@@ -1,0 +1,19 @@
+<div>
+    <!-- ko if: $data.koLogic -->
+      <!-- ko template: { name: 'svd-logic-tab', data: $data.koLogic} -->
+      <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <script type="text/html" id="svd-logic-tab">
+  <div class="form-group svd-logic-tab" style="width: 100%">
+    <!-- ko if: $data.mode == "view" -->
+        <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+        <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $data.mode != "view" -->
+        <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
+        <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
+        <sv-action-bar params="items: toolbarEditItems"></sv-action-bar>
+    <!-- /ko -->
+  </div>
+  </script>

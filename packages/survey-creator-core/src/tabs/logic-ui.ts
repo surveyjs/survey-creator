@@ -1,30 +1,15 @@
-import {
-  SurveyModel,
-  Base,
-  Serializer,
-  HtmlConditionItem,
-  Event,
-  ExpressionRunner,
-  Question,
-  HashTable,
-  Helpers,
-  property,
-  propertyArray,
-} from "survey-core";
-import { editorLocalization } from "../editorLocalization";
+import { SurveyModel, IActionBarItem, propertyArray } from "survey-core";
 import { ConditionEditor } from "../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
-import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
-import {
-  SurveyLogicTypes,
-  SurveyLogicType,
-  getLogicString,
-} from "./logic-types";
+import { LogicItemEditor } from "./logic-item-editor";
+import { getLogicString } from "./logic-types";
 import { SurveyLogic } from "./logic";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
+  private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
+  private;
   constructor(
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
@@ -38,7 +23,15 @@ export class SurveyLogicUI extends SurveyLogic {
       "logic-items"
     );
     this.updateItemsSurveyData();
+    this.setupToolbarItems();
+    this.itemEditorValue = new LogicItemEditor(null, this.options);
   }
+  /**
+   * The list of toolbar items. You may add/remove/replace them.
+   * @see IActionBarItem
+   */
+  @propertyArray() toolbarItems: Array<IActionBarItem>;
+  @propertyArray() toolbarEditItems: Array<IActionBarItem>;
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -48,11 +41,27 @@ export class SurveyLogicUI extends SurveyLogic {
   public get expressionEditor(): ConditionEditor {
     return this.expressionEditorValue;
   }
+  public get itemEditor(): LogicItemEditor {
+    return this.itemEditorValue;
+  }
+  public get expressionSurvey(): SurveyModel {
+    return this.expressionEditor.editSurvey;
+  }
+  public get itemEditorSurvey(): SurveyModel {
+    return this.itemEditor.editSurvey;
+  }
   public get itemsSurvey(): SurveyModel {
     return this.itemsSurveyValue;
   }
   protected onStartEditing() {
+    super.onStartEditing();
     this.expressionEditor.text = this.editableItem.expression;
+    this.itemEditor.editableItem = this.editableItem;
+  }
+  protected onEndEditing() {
+    super.onEndEditing();
+    this.expressionEditor.text = "";
+    this.itemEditor.editableItem = null;
   }
   protected onEditableItemApply() {
     this.expressionEditor.apply();
@@ -111,5 +120,59 @@ export class SurveyLogicUI extends SurveyLogic {
       });
     }
     this.itemsSurvey.getQuestionByName("items").value = data;
+  }
+  private setupToolbarItems() {
+    this.toolbarItems.push({
+      id: "svd-logic-addNew",
+      title: this.addNewText,
+      tooltip: this.addNewText,
+      component: "sv-action-bar-item",
+      action: () => {
+        this.addNew();
+      },
+    });
+    this.toolbarEditItems.push({
+      id: "svd-logic-saveAndBack",
+      title: this.getLocString("pe.saveAndBack"),
+      tooltip: this.getLocString("pe.saveAndBackTooltip"),
+      component: "sv-action-bar-item",
+      action: () => {
+        if (this.saveEditableItem()) this.mode = "view";
+      },
+    });
+    this.toolbarEditItems.push({
+      id: "svd-logic-save",
+      title: this.getLocString("pe.save"),
+      tooltip: this.getLocString("pe.saveTooltip"),
+      component: "sv-action-bar-item",
+      action: () => {
+        if (this.saveEditableItem()) this.mode = "view";
+      },
+    });
+    this.toolbarEditItems.push({
+      id: "svd-logic-back",
+      title: this.getLocString("pe.back"),
+      tooltip: this.getLocString("pe.backTooltip"),
+      component: "sv-action-bar-item",
+      action: () => {
+        this.mode = "view";
+      },
+    });
+  }
+  private get addNewText(): string {
+    var lgAddNewItem = getLogicString("addNewItem");
+    return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
+  }
+  private get addNewActionText(): string {
+    return getLogicString("addNewAction");
+  }
+  private get selectedActionCaption(): string {
+    return getLogicString("selectedActionCaption");
+  }
+  private get expressionSetupText(): string {
+    return getLogicString("expressionSetup");
+  }
+  private get actionsSetupText(): string {
+    return getLogicString("actionsSetup");
   }
 }
