@@ -6,28 +6,12 @@ import {
   PanelModel,
 } from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
+import { SurveyLogicUI } from "../../src/tabs/logic-ui";
 import { LogicItemEditor } from "../../src/tabs/logic-item-editor";
 import { SurveyLogicAction, SurveyLogicItem } from "../../src/tabs/logic-items";
 import { getLogicString } from "../../src/tabs/logic-types";
 import { settings } from "../../src/settings";
 
-test("Check that expression Editor is created correctly", () => {
-  var survey = new SurveyModel({
-    elements: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3", visibleIf: "{q1}=1" },
-    ],
-  });
-  var logic = new SurveyLogic(survey);
-  expect(logic.items).toHaveLength(1);
-  logic.editItem(logic.items[0]);
-  expect(logic.editableItem).toEqual(logic.items[0]);
-  expect(logic.expressionEditor).toBeTruthy();
-  expect(logic.expressionEditor.text).toEqual("{q1} = 1");
-  expect(logic.expressionEditor.panel.panelCount).toEqual(1);
-  expect(logic.editableItem.actions).toHaveLength(2);
-});
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
     pages: [
@@ -223,4 +207,45 @@ test("LogicItemEditor: remove actions", () => {
   expect(survey.getQuestionByName("q1").visibleIf).toEqual("{q2} = 1");
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
   expect(survey.getQuestionByName("q3").visibleIf).toBeFalsy();
+});
+test("SurveyLogicUI: Check that expression Editor is created correctly", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  expect(logic.editableItem).toEqual(logic.items[0]);
+  expect(logic.expressionEditor).toBeTruthy();
+  expect(logic.expressionEditor.text).toEqual("{q1} = 1");
+  expect(logic.expressionEditor.panel.panelCount).toEqual(1);
+  expect(logic.editableItem.actions).toHaveLength(2);
+});
+test("SurveyLogicUI: Test logicItemsSurvey", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.value).toHaveLength(2);
+  logic.addNew();
+  logic.addAction(
+    logic.getTypeByName("question_visibility"),
+    survey.getQuestionByName("q5")
+  );
+  logic.saveEditableItem();
+  expect(itemsQuestion.value).toHaveLength(3);
+  logic.removeItem(logic.items[0]);
+  expect(itemsQuestion.value).toHaveLength(2);
 });

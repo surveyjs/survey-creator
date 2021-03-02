@@ -76,7 +76,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
 
   koAfterRender: any;
-  private expressionEditorValue: ConditionEditor;
 
   constructor(
     public survey: SurveyModel,
@@ -84,7 +83,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   ) {
     super();
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    this.createExpressionPropertyEditor();
     //TODO
     //this.hideExpressionHeader = options && options["hideExpressionHeader"];
     this.readOnly = this.optionsReadOnly;
@@ -101,9 +99,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   @property() editableItem: SurveyLogicItem;
   @property() readOnly: boolean;
   @property() placeholderHtml: string;
-  public get expressionEditor(): ConditionEditor {
-    return this.expressionEditorValue;
-  }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -153,8 +148,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public saveEditableItem(): boolean {
     if (!this.editableItem || this.hasError()) return false;
     !!this.options && this.options.startUndoRedoTransaction();
-    this.expressionEditor.apply();
-    this.editableItem.apply(this.expressionEditor.text);
+    this.onEditableItemApply();
     var isNew = this.items.indexOf(this.editableItem) < 0;
     if (isNew) {
       this.items.push(this.editableItem);
@@ -164,6 +158,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.onLogicItemSaved.fire(this, { item: this.editableItem });
     return true;
   }
+  protected onEditableItemApply() {}
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
     if (!!this.onChangedCallback) {
       this.onChangedCallback(item, changeType);
@@ -179,10 +174,14 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   public hasError(): boolean {
     if (!this.editableItem) return false;
+    if (this.hasErrorInUI()) return false;
     var text = "";
+    /*
     if (!this.isExpressionValid) {
       text = getLogicString("expressionInvalid");
     }
+    */
+    //TODO
     var ops = this.editableItem.actions;
     if (!text && ops.length == 0) {
       text = getLogicString("noActionError");
@@ -194,7 +193,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         }
       }
     }
-    var exp = new ExpressionRunner(this.expressionEditor.text);
+    var exp = new ExpressionRunner(this.getExpressionText());
     var options = {
       item: this.editableItem,
       error: text,
@@ -205,6 +204,12 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
 
     this.errorText = text;
     return !!text;
+  }
+  protected hasErrorInUI(): boolean {
+    return false;
+  }
+  protected getExpressionText(): string {
+    return "";
   }
   public get addNewActionText(): string {
     return getLogicString("addNewAction");
@@ -217,9 +222,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   public get actionsSetupText(): string {
     return getLogicString("actionsSetup");
-  }
-  private get isExpressionValid(): boolean {
-    return this.expressionEditor.isReady;
   }
   private renameQuestionCore(
     oldName: string,
@@ -243,18 +245,18 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     !!this.options && this.options.startUndoRedoTransaction();
     var logicItem = new SurveyLogicItem(this);
     this.editableItem = logicItem;
-    logicItem.addNewAction(this.createNewAction(null, null));
-    this.expressionEditor.text = "";
+    this.onStartEditing();
     this.mode = "new";
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   public editItem(item: SurveyLogicItem) {
     !!this.options && this.options.startUndoRedoTransaction();
     this.editableItem = item;
-    this.expressionEditor.text = item.expression;
+    this.onStartEditing();
     this.mode = "edit";
     !!this.options && this.options.stopUndoRedoTransaction();
   }
+  protected onStartEditing() {}
   public removeItem(item: SurveyLogicItem) {
     var eventOptions = { item: item, allowRemove: true };
     this.onLogicItemRemoving.fire(this, eventOptions);
@@ -444,19 +446,5 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     }
   }
   */
-  private createExpressionPropertyEditor() {
-    this.expressionEditorValue = new ConditionEditor(
-      this.survey,
-      null,
-      this.options
-    );
-    /*
-    this.expressionEditor.isEditorShowing = true;
-    this.expressionEditor.isWideMode = true;
-    this.expressionEditor.object = this.survey;
-    this.expressionEditor.options = this.options;
-    this.expressionEditor.koSetupText(this.expressionSetupText);
-    */
-  }
   dispose() {}
 }

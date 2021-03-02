@@ -109,10 +109,21 @@ export class SurveyLogicItem extends Base {
   public getVisibleLogicTypes(): Array<SurveyLogicType> {
     return this.owner.getVisibleLogicTypes();
   }
-  public get title() {
+  public get title(): string {
     var res = this.getExpressionAsDisplayText();
+    //TODO 50 symbols
     if (!!res && res.length > 50) {
       res = res.substr(1, 50) + "...";
+    }
+    return res;
+  }
+  public get actionsText(): string {
+    var res = "";
+    for (var i = 0; i < this.actions.length; i++) {
+      if (!!res) {
+        res += "<br/>";
+      }
+      res += this.actions[i].text;
     }
     return res;
   }

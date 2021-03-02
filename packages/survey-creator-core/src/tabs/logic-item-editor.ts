@@ -170,6 +170,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     for (var i = 0; i < this.editableItem.actions.length; i++) {
       this.onPanelAdded(this.panel.addPanel(), this.editableItem.actions[i]);
     }
+    if (this.panel.panelCount == 0) {
+      this.onPanelAdded(this.panel.addPanel(), null);
+    }
   }
   private onPanelAdded(
     panel: PanelModel,
