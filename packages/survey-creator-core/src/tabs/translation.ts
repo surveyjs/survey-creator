@@ -22,6 +22,7 @@ import {
   ISurveyCreatorOptions,
   settings,
 } from "../settings";
+import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -525,13 +526,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
-    //TODO move this settings to a base static function
-    json.showNavigationButtons = false;
-    json.showPageTitles = false;
-    json.showQuestionNumbers = "off";
-    json.textUpdateMode = "onTyping";
-    json.requiredText = "";
-
+    setSurveyJSONForPropertyGrid(json);
     var res = this.options.createSurvey(json, "translation_settings");
     res.onValueChanged.add((sender, options) => {
       if (options.name === "availableLocales" && !!options.value) {

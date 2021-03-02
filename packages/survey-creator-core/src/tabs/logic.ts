@@ -154,6 +154,13 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.onLogicItemSaved.fire(this, { item: this.editableItem });
     return true;
   }
+  public saveEditableItemAndBack(): boolean {
+    var res = this.saveEditableItem();
+    if (res) {
+      this.mode = "view";
+    }
+    return res;
+  }
   protected onEditableItemApply() {}
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
     if (!!this.onChangedCallback) {
@@ -178,6 +185,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     }
     */
     //TODO
+    /*
     var ops = this.editableItem.actions;
     if (!text && ops.length == 0) {
       text = getLogicString("noActionError");
@@ -189,6 +197,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         }
       }
     }
+    */
     var exp = new ExpressionRunner(this.getExpressionText());
     var options = {
       item: this.editableItem,

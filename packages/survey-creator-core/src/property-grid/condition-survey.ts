@@ -280,6 +280,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.text =
       !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
+  public get title(): string {
+    return this.panel.title;
+  }
+  public set title(val: string) {
+    this.panel.title = val;
+  }
   protected getSurveyJSON(): any {
     return {
       elements: [

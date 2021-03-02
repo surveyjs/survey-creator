@@ -110,6 +110,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         {
           type: "paneldynamic",
           name: "panel",
+          title: getLogicString("actionsEditorTitle"),
+          panelAddText: getLogicString("addNewAction"),
           panelCount: 0,
           templateElements: [
             {
@@ -126,6 +128,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
+              titleLocation: "hidden",
               visible: false,
             },
             {
@@ -249,6 +252,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.setElementPanelObj(panel, obj);
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel);
+    elementPanel.title = "";
     elementPanel.getElementByName(logicType.propertyName).visible = false;
     for (var i = 0; i < elementPanel.questions.length; i++) {
       var q = elementPanel.questions[i];

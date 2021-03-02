@@ -4,6 +4,7 @@ import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogic } from "./logic";
+import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -65,10 +66,13 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected onEditableItemApply() {
     this.expressionEditor.apply();
+    this.itemEditor.apply();
     this.editableItem.apply(this.expressionEditor.text);
   }
   protected hasErrorInUI(): boolean {
-    return !this.expressionEditor.isReady;
+    var expErrors = !this.expressionEditor.isReady;
+    var itemEditorsErrors = this.itemEditor.hasErrors();
+    return expErrors || itemEditorsErrors;
   }
   protected getExpressionText(): string {
     return this.expressionEditor.text;
@@ -79,6 +83,8 @@ export class SurveyLogicUI extends SurveyLogic {
         {
           type: "matrixdynamic",
           name: "items",
+          titleLocation: "hidden",
+          allowAddRows: false,
           columns: [
             {
               cellType: "html",
@@ -94,6 +100,7 @@ export class SurveyLogicUI extends SurveyLogic {
         },
       ],
     };
+    setSurveyJSONForPropertyGrid(json);
     return json;
   }
   private createExpressionPropertyEditor() {
@@ -102,6 +109,7 @@ export class SurveyLogicUI extends SurveyLogic {
       null,
       this.options
     );
+    this.expressionEditor.title = getLogicString("expressionEditorTitle");
     /*
     this.expressionEditor.isEditorShowing = true;
     this.expressionEditor.isWideMode = true;
@@ -112,6 +120,8 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
+    var matrix = this.itemsSurvey.getQuestionByName("items");
+    matrix.rowCount = 0;
     var data = [];
     for (var i = 0; i < this.items.length; i++) {
       data.push({
@@ -119,7 +129,16 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.items[i].actionsText,
       });
     }
-    this.itemsSurvey.getQuestionByName("items").value = data;
+    matrix.rowCount = data.length;
+    matrix.value = data;
+    for (var i = 0; i < matrix.visibleRows.length; i++) {
+      var row = matrix.visibleRows[i];
+      for (var j = 0; j < row.cells.length; j++) {
+        var cell = row.cells[j];
+        if (!cell.question || cell.question.getType() !== "html") continue;
+        cell.question.html = cell.question.value;
+      }
+    }
   }
   private setupToolbarItems() {
     this.toolbarItems.push({
@@ -137,7 +156,7 @@ export class SurveyLogicUI extends SurveyLogic {
       tooltip: this.getLocString("pe.saveAndBackTooltip"),
       component: "sv-action-bar-item",
       action: () => {
-        if (this.saveEditableItem()) this.mode = "view";
+        this.saveEditableItemAndBack();
       },
     });
     this.toolbarEditItems.push({
@@ -146,7 +165,7 @@ export class SurveyLogicUI extends SurveyLogic {
       tooltip: this.getLocString("pe.saveTooltip"),
       component: "sv-action-bar-item",
       action: () => {
-        if (this.saveEditableItem()) this.mode = "view";
+        this.saveEditableItem();
       },
     });
     this.toolbarEditItems.push({
@@ -162,17 +181,5 @@ export class SurveyLogicUI extends SurveyLogic {
   private get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
-  }
-  private get addNewActionText(): string {
-    return getLogicString("addNewAction");
-  }
-  private get selectedActionCaption(): string {
-    return getLogicString("selectedActionCaption");
-  }
-  private get expressionSetupText(): string {
-    return getLogicString("expressionSetup");
-  }
-  private get actionsSetupText(): string {
-    return getLogicString("actionsSetup");
   }
 }

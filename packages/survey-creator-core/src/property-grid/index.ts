@@ -33,6 +33,14 @@ export interface IPropertyEditorSetup {
   apply(): boolean;
 }
 
+export function setSurveyJSONForPropertyGrid(json: any) {
+  json.showNavigationButtons = "none";
+  json.showPageTitles = false;
+  json.showQuestionNumbers = "off";
+  json.textUpdateMode = "onTyping";
+  json.requiredText = "";
+}
+
 export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   private editSurveyValue: SurveyModel;
   constructor(
@@ -52,13 +60,12 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   public get editSurvey(): SurveyModel {
     return this.editSurveyValue;
   }
+  public hasErrors(): boolean {
+    return this.editSurvey.hasErrors(true, true);
+  }
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
-    json.showNavigationButtons = false;
-    json.showPageTitles = false;
-    json.showQuestionNumbers = "off";
-    json.textUpdateMode = "onTyping";
-    json.requiredText = "";
+    setSurveyJSONForPropertyGrid(json);
     return this.options.createSurvey(json, this.getSurveyCreationReason());
   }
   protected abstract getSurveyJSON(): any;
