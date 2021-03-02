@@ -18,10 +18,6 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
 
   constructor(props) {
     super(props);
-
-    // const creator: CreatorBase<Survey.Model> = this.props.creator;
-    // const survey: Survey.Model = this.props.survey;
-    // const data: any = this.props.survey;
     const plugin: TabTestPlugin = this.props.data;
     this.model = plugin.model;
   }

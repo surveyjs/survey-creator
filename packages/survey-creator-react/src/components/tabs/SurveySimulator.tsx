@@ -9,7 +9,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   constructor(props) {
     super(props);
     const plugin: TabTestPlugin = this.props.data;
-    this.model = new SurveySimulatorComponent(this.props.options);;
+    this.model = new SurveySimulatorComponent(this.props.options);
   }
 
   protected getStateElement(): Base {
@@ -25,15 +25,15 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
         <div className="svd-simulator-main">
           <div
             className="svd-simulator-wrapper"
-            data-bind="style: { width: simulatorFrame.frameWidth + 'px', height: simulatorFrame.frameHeight + 'px' }"
+            style={{ width: this.model.simulatorFrame.frameWidth + 'px', height: this.model.simulatorFrame.frameHeight + 'px' }}
           >
             <div
-              className="svd-simulator-frame"
-              data-bind="style: { width: (landscapeOrientation ? simulatorFrame.frameHeight: simulatorFrame.frameWidth) + 'px', height: (landscapeOrientation ? simulatorFrame.frameWidth : simulatorFrame.frameHeight) + 'px' }, css: simulatorFrame.cssClass"
-            ></div>
+              className={"svd-simulator-frame " + this.model.simulatorFrame.cssClass}
+              style={{ width: (this.model.landscapeOrientation ? this.model.simulatorFrame.frameHeight: this.model.simulatorFrame.frameWidth) + 'px', height: (this.model.landscapeOrientation ? this.model.simulatorFrame.frameWidth : this.model.simulatorFrame.frameHeight) + 'px' }}
+              ></div>
             <div
               className="svd-simulator"
-              data-bind="style: { width: simulatorFrame.width / simulatorFrame.scale + 'px', height: simulatorFrame.height / simulatorFrame.scale + 'px', transform: 'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)' }"
+              style={{ width: this.model.simulatorFrame.width / this.model.simulatorFrame.scale + 'px', height: this.model.simulatorFrame.height / this.model.simulatorFrame.scale + 'px', transform: 'scale(' + this.model.simulatorFrame.scale + ') translate(-50%, -50%)' }}
             >
           <Survey
             className="svd-simulator-content"
