@@ -12,8 +12,8 @@ import {
   PageModel,
   SurveyModel,
 } from "survey-core";
-import { CreatorBase } from "../../creator-base";
-import { editorLocalization } from "../../editorLocalization";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { editorLocalization, getLocString } from "../../editorLocalization";
 
 // import template from "./test.html";
 
@@ -30,7 +30,12 @@ import { editorLocalization } from "../../editorLocalization";
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   @property({ defaultValue: true }) isRunning: boolean;
-  @property() survey: SurveyModel;
+  @property({onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
+      if (!!val) {
+        target.simulator.survey = val;
+      }
+    },
+  }) survey: SurveyModel;
   @propertyArray() pages: Array<IActionBarItem>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
@@ -65,6 +70,7 @@ export class TestSurveyTabViewModel extends Base {
   @property({ defaultValue: true }) showDefaultLanguageInTestSurveyTab;
   @property({ defaultValue: true }) showInvisibleElementsInTestSurveyTab;
   public simulator: SimulatorOptions;
+  private pagePopupModel: PopupModel;
   /**
    * The list of action bar items.
    * @see IActionBarItem
@@ -74,16 +80,8 @@ export class TestSurveyTabViewModel extends Base {
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
     super();
-    this.setJSON(surveyProvider.JSON);
-
-    //this.survey = this.surveyProvider.createSurvey({}, "test");
-
-    this.languages = this.getLanguages();
-
     this.simulator = new SimulatorOptions();
-    this.simulator.landscape = true;
-    this.simulator.survey = this.survey;
-    this.simulator.device = "desktop";
+    this.languages = this.getLanguages();
 
     // this.toolbarItems.push({
     //   id: "svd-test-locale-selector",
@@ -151,13 +149,13 @@ export class TestSurveyTabViewModel extends Base {
       },
     });
 
-    const pagePopupModel = new PopupModel(
+    this.pagePopupModel = new PopupModel(
       "sv-list",
       new ListModel(
         this.pages,
         (item: IActionBarItem) => {
           this.activePage = item.data;
-          pagePopupModel.toggleVisibility();
+          this.pagePopupModel.toggleVisibility();
         },
         true /*,
         ko.computed({
@@ -186,9 +184,9 @@ export class TestSurveyTabViewModel extends Base {
         this.pages.length > 1 &&
         this.showPagesInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
-      popupModel: pagePopupModel,
+      popupModel: this.pagePopupModel,
       action: (newPage) => {
-        pagePopupModel.toggleVisibility();
+        this.pagePopupModel.toggleVisibility();
       },
     });
     actions.push({
@@ -313,6 +311,7 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.showInvisibleElements = false;
     this.pages = pages;
+    (<ListModel>(this.pagePopupModel.contentComponentData)).items = pages;
     this.activePage = this.survey.currentPage;
     this.activeLanguage =
       this.survey.locale || surveyLocalization.defaultLocale;
@@ -373,4 +372,43 @@ export class TestSurveyTabViewModel extends Base {
   // public koEventAfterRender(element: any, survey: any) {
   //   survey["afterRenderSurvey"](element);
   // }
+}
+
+export class TabTestPlugin implements ICreatorPlugin {
+  public model: TestSurveyTabViewModel;
+  constructor(private creator: CreatorBase<SurveyModel>) {
+    this.model = new TestSurveyTabViewModel(creator);
+    creator.tabs.push({
+      id: "test",
+      title: getLocString("ed.testSurvey"),
+      component: "svc-tab-test",
+      data: this,
+      active: () => creator.viewType === "test",
+      action: () => {
+        creator.makeNewViewActive("test");
+        this.activate();
+      },
+    });
+    creator.plugins["test"] = this;
+  }
+  public activate(): void {
+    this.model.onSurveyCreatedCallback = (survey) => {
+      this.creator["onTestSurveyCreated"] &&
+      this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
+    };
+    var options = {
+      showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
+      showDefaultLanguageInTestSurveyTab:
+      this.creator.showDefaultLanguageInTestSurveyTab,
+      showInvisibleElementsInTestSurveyTab:
+      this.creator.showInvisibleElementsInTestSurveyTab,
+      showSimulatorInTestSurveyTab: this.creator.showSimulatorInTestSurveyTab,
+    };
+    this.model.setJSON(this.creator.JSON);
+    this.model.show(options);
+  }
+  public deactivate(): boolean {
+    this.model.onSurveyCreatedCallback = undefined;
+    return true;
+  }
 }

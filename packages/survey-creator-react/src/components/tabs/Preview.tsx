@@ -1,19 +1,46 @@
-import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase } from "@survey/creator";
 import React from "react";
+import { Base, SurveyModel } from "survey-core";
+import {
+  ActionBar,
+  ReactElementFactory,
+  SurveyElementBase,
+} from "survey-react-ui";
+import {
+  CreatorBase,
+  TabTestPlugin,
+  TestSurveyTabViewModel,
+} from "@survey/creator";
+import { SurveySimulator } from "./SurveySimulator";
+import { CreatorSurveyResultsComponent } from "../Results";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
+  private model: TestSurveyTabViewModel;
+
   constructor(props) {
     super(props);
+    const plugin: TabTestPlugin = this.props.data;
+    this.model = plugin.model;
+  }
 
-    // const creator: CreatorBase<Survey.Model> = this.props.creator;
-    // const survey: Survey.Model = this.props.survey;
-    // const data: any = this.props.survey;
+  protected getStateElement(): Base {
+    return this.model;
   }
 
   render(): JSX.Element {
-    return <div>Test Survey</div>;
+    return (
+      <div className="svc-creator-tab__content">
+        <div className="svc-test-tab__content">
+          <SurveySimulator options={this.model.simulator}></SurveySimulator>
+
+          {!this.model.isRunning ? (
+            <CreatorSurveyResultsComponent survey={this.model.survey} />
+          ) : null}
+        </div>
+        <div className="svc-test-tab__content-actions">
+          <ActionBar items={this.model.actions}></ActionBar>
+        </div>
+      </div>
+    );
   }
 }
 

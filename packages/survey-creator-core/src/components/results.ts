@@ -1,24 +1,57 @@
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-core";
-import { property, propertyArray } from "survey-core";
+import { Base, property, propertyArray } from "survey-core";
 
 import "./results.scss";
 
-export class SurveyResultsModel {
+export class SurveyResultsItemModel extends Base {
+  @property({ defaultValue: true }) collapsed: boolean;
+  @property() items: Array<any>;
+
+  constructor(private _data: any) {
+    super();
+    this.items = addCollapsed(_data.data);
+  }
+
+  get data(): Array<any> {
+    return this.items;
+  }
+
+  public toggle = () => {
+    this.collapsed = !this.collapsed;
+  }
+  public get isNode(): boolean {
+    return this._data.isNode;
+  }
+  public get name(): boolean {
+    return this._data.name;
+  }
+  public get title(): string {
+    return this._data.title;
+  }
+  public get value(): any {
+    return this._data.value;
+  }
+  public get displayValue(): string {
+    return this._data.displayValue;
+  }
+  public getString(data: any): string {
+    return this._data.getString(data);
+  }
+}
+
+function addCollapsed (items: any[] = []) {
+  return items.filter((item) => !!item).map((item: any) => {
+    return new SurveyResultsItemModel(item);
+  });
+};
+
+export class SurveyResultsModel extends Base {
   constructor(private survey: Survey.SurveyModel) {
+    super();
     this.resultText = JSON.stringify(survey.data, null, 4);
-    var addCollapsed = (items: any[]) => {
-      items.forEach((item: any) => {
-        if (!!item && item.isNode) {
-          // item.collapsed = ko.observable(true);
-          item.data = addCollapsed(item.data || []);
-        }
-      });
-      return items.filter((item) => !!item);
-    };
     var plainData = survey.getPlainData({ includeEmpty: false });
-    plainData = addCollapsed(plainData);
-    this.resultData = plainData;
+    this.resultData = addCollapsed(plainData);
   }
 
   @property({ defaultValue: "table" }) resultViewType: string;

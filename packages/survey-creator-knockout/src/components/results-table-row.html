@@ -1,7 +1,7 @@
-<tr data-bind="click: function() { isNode && collapsed(!collapsed()); }">
+<tr data-bind="click: toggle">
     <td class="svd-dark-border-color">
         <!-- ko if: isNode -->
-        <span class="survey-result-marker" data-bind="css: { 'survey-result-marker--expanded': !collapsed() }">▶</span>
+        <span class="survey-result-marker" data-bind="css: { 'survey-result-marker--expanded': !collapsed }">▶</span>
         <!-- /ko -->
         <span data-bind="text: title"></span></td>
     <td class="svd-dark-border-color" data-bind="text: name"></td>
@@ -10,7 +10,7 @@
     </td>
     <td class="svd-dark-border-color" data-bind="text: getString(displayValue)"></td>
 </tr>
-<!-- ko if: isNode && !collapsed() -->
+<!-- ko if: isNode && !collapsed -->
 <!-- ko foreach: data -->
 <!-- ko component: { name: 'survey-results-table-row', params: { model: $data } } -->
 <!-- /ko -->
