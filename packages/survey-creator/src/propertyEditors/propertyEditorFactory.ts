@@ -8,7 +8,12 @@ import { settings } from "../settings";
 
 export class SurveyPropertyEditorFactory {
   public static defaultEditor: string = "string";
-  public static operators = settings.operators;
+  public static get operators(): any {
+    return settings.operators;
+  }
+  public static set operators(value: any) {
+    settings.operators = value;
+  }
   private static creatorList = {};
   private static creatorByClassList = {};
   private static widgetRegisterList = {};
