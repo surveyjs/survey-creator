@@ -9,7 +9,9 @@ var rowTemplateHtml = require("./results-table-row.html");
 ko.components.register("survey-results", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      return new SurveyResultsModel(params.survey);
+      const model = new SurveyResultsModel(ko.unwrap(params.survey));
+      new ImplementorBase(model);
+      return model;
     },
   },
   template: templateHtml,

@@ -3,19 +3,19 @@
         <h2 data-bind="text: surveyResultsText"></h2>
     </div>
     <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
-        <li class="nav-item active" data-bind="css: {active: resultViewType() === 'table'}">
+        <li class="nav-item active" data-bind="css: {active: resultViewType === 'table'}">
             <a class="nav-link" href="#"
                 data-bind="click: selectTableClick, text: $data.getLocString('ed.surveyResultsTable')"></a>
         </li>
-        <li class="nav-item" data-bind="css: {active: resultViewType() === 'text'}">
+        <li class="nav-item" data-bind="css: {active: resultViewType === 'text'}">
             <a class="nav-link" href="#"
                 data-bind="click: selectJsonClick, text: $data.getLocString('ed.surveyResultsJson')"></a>
         </li>
     </ul>
-    <div class="svd_results_text svd-light-bg-color" data-bind="visible: resultViewType() === 'text'">
+    <div class="svd_results_text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
         <div data-bind="text: resultText"></div>
     </div>
-    <div class="svd_results_table svd-light-bg-color" data-bind="visible: resultViewType() === 'table'">
+    <div class="svd_results_table svd-light-bg-color" data-bind="visible: resultViewType === 'table'">
         <table>
             <thead>
                 <tr class="svd-light-background-color">
