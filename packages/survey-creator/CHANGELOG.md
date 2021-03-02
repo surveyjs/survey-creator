@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.33](https://github.com/surveyjs/survey-creator/compare/v1.8.32...v1.8.33) (2021-03-02)
+
+
+### Bug Fixes
+
+* Changing SurveyCreator.settings.operators can do not change the UI behavior [#1093](https://github.com/surveyjs/survey-creator/issues/1093) ([c9ad793](https://github.com/surveyjs/survey-creator/commit/c9ad793abbba9698058f5cde397dfcf7daa3a7c9))
+
 ### [1.8.32](https://github.com/surveyjs/survey-creator/compare/v1.8.31...v1.8.32) (2021-02-24)
 
 ### [1.8.31](https://github.com/surveyjs/survey-creator/compare/v1.8.30...v1.8.31) (2021-02-16)
