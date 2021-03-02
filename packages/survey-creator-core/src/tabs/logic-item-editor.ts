@@ -118,6 +118,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "logicTypeName",
               type: "dropdown",
               titleLocation: "hidden",
+              isRequired: true,
               optionsCaption: getLogicString("selectedActionCaption"),
             },
             {
@@ -129,6 +130,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "elementSelector",
               type: "dropdown",
               titleLocation: "hidden",
+              isRequired: true,
               visible: false,
             },
             {

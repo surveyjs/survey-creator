@@ -242,10 +242,11 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   expect(itemsQuestion.rowCount).toEqual(2);
   expect(itemsQuestion.value).toHaveLength(2);
   logic.addNew();
-  logic.addAction(
-    logic.getTypeByName("question_visibility"),
-    survey.getQuestionByName("q5")
-  );
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q5";
+  expect(logic.itemEditor.hasErrors()).toBeFalsy();
+  logic.expressionEditor.text = "{q1}=3";
   var res = logic.saveEditableItemAndBack();
   expect(res).toBeTruthy();
   expect(itemsQuestion.value).toHaveLength(3);
@@ -306,4 +307,65 @@ test("SurveyLogicUI: Add new item and action", () => {
   expect(item.actions).toHaveLength(1);
   expect(item.actions[0].logicTypeName).toEqual("question_visibility");
   expect(item.actions[0].element).toEqual(survey.getQuestionByName("q2"));
+});
+test("SurveyLogicUI: Do not duplicate new items", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  expect(logic.mode).toEqual("new");
+  expect(logic.editableItem.actions).toHaveLength(0);
+  expect(logic.itemEditor.editableItem).toBeTruthy();
+  expect(logic.itemEditor.panels).toHaveLength(1);
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  var res = logic.saveEditableItem();
+  expect(res).toBeTruthy();
+  logic.saveEditableItem();
+  logic.saveEditableItem();
+  logic.mode = "view";
+  expect(logic.items).toHaveLength(1);
+});
+test("SurveyLogicUI: validate expression and actions", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  expect(logic.mode).toEqual("new");
+  expect(logic.editableItem.actions).toHaveLength(0);
+  expect(logic.itemEditor.editableItem).toBeTruthy();
+  expect(logic.itemEditor.panels).toHaveLength(1);
+  expect(logic.itemEditor.hasErrors()).toBeTruthy();
+  expect(logic.expressionEditor.isReady).toBeFalsy();
+  var res = logic.saveEditableItem();
+  expect(res).toBeFalsy();
+
+  expect(logic.items).toHaveLength(0);
+  logic.expressionEditor.text = "{q1} = 1";
+
+  res = logic.saveEditableItem();
+  expect(res).toBeFalsy();
+  expect(logic.items).toHaveLength(0);
+
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+
+  res = logic.saveEditableItem();
+  expect(res).toBeTruthy();
+  expect(logic.items).toHaveLength(1);
 });
