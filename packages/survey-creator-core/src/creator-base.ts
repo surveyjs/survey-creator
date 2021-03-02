@@ -23,6 +23,7 @@ import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
 import "./components/creator.scss";
 import { PropertyGridModel } from "./property-grid";
+import { TabTestPlugin } from "./components/tabs/test";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -465,16 +466,6 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "designer",
       });
     }
-    if (this.showTestSurveyTab) {
-      tabs.push({
-        id: "test",
-        title: this.getLocString("ed.testSurvey"),
-        component: "svc-tab-test",
-        data: this,
-        action: () => this.makeNewViewActive("test"),
-        active: () => this.viewType === "test",
-      });
-    }
     if (this.showLogicTab) {
       tabs.push({
         id: "logic",
@@ -512,11 +503,14 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initTabsPlugin(): void {
+    if (this.showTestSurveyTab) {
+      new TabTestPlugin(this);
+    }
     if (this.showJSONEditorTab) {
       if (TabJsonEditorAcePlugin.hasAceEditor()) {
-        new TabJsonEditorAcePlugin(<any>this);
+        new TabJsonEditorAcePlugin(this);
       } else {
-        new TabJsonEditorTextareaPlugin(<any>this);
+        new TabJsonEditorTextareaPlugin(this);
       }
     }
   }
