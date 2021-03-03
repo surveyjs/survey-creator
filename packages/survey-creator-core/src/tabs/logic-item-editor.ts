@@ -180,6 +180,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       );
       this.editableItem.replaceAction(newAction, action);
     }
+    if (!!elementPanel) {
+      logicType.saveElement(elementPanel);
+    }
   }
   private buildPanels() {
     this.panel.panelCount = 0;
@@ -253,9 +256,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     );
     this.setElementPanelObj(panel, obj);
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
-    propGenerator.setupObjPanel(elementPanel);
+    propGenerator.setupObjPanel(elementPanel, true);
     elementPanel.title = "";
     elementPanel.getElementByName(logicType.propertyName).visible = false;
+    elementPanel.onSurveyLoad();
     for (var i = 0; i < elementPanel.questions.length; i++) {
       var q = elementPanel.questions[i];
       if (!Helpers.isValueEmpty(obj[q.getValueName()])) {

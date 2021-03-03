@@ -19,8 +19,7 @@ export interface ISurveyLogicType {
   propertyName: string;
   showInUI?: boolean;
   showIf?: (survey: SurveyModel) => boolean;
-  createNewElement?: (survey: SurveyModel) => Base;
-  //saveElement?: (survey: SurveyModel, action: SurveyLogicAction) => void;
+  getCollection?: (survey: SurveyModel) => Array<Base>;
   isUniqueItem?: boolean;
   questionNames?: Array<string>;
   getDisplayText?: (
@@ -63,31 +62,20 @@ export class SurveyLogicType {
   public get showTitlesInExpression(): boolean {
     return !!this.options && this.options.showTitlesInExpressions;
   }
+  public saveElement(el: Base) {
+    var collection: Array<Base> = !!this.logicType.getCollection
+      ? this.logicType.getCollection(this.survey)
+      : null;
+    if (!collection && this.isTrigger) {
+      collection = this.survey.triggers;
+    }
+    if (!!collection && collection.indexOf(el) < 0) {
+      collection.push(el);
+    }
+  }
   public get showInUI(): boolean {
     return this.logicType.showInUI !== false;
   }
-  private canCreateNewElement(): boolean {
-    return !!this.logicType.createNewElement || this.isTrigger;
-  }
-  private get isTrigger(): boolean {
-    return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
-  }
-  public createNewElement(survey: SurveyModel): Base {
-    if (!!this.logicType.createNewElement)
-      return this.logicType.createNewElement(survey);
-    if (this.isTrigger) return this.createTriggerElement(survey);
-    return null;
-  }
-  /*
-    public saveElement(action: SurveyLogicAction): void {
-      if (!!this.logicType.saveElement) {
-        this.logicType.saveElement(this.survey, action);
-      }
-      if (this.isTrigger) {
-        this.saveTriggerElement(action);
-      }
-    }
-    */
   public get isUniqueItem(): boolean {
     return this.logicType.isUniqueItem === true;
   }
@@ -133,30 +121,8 @@ export class SurveyLogicType {
       expression
     );
   }
-  private createTriggerElement(survey: SurveyModel): Base {
-    var res = <SurveyTrigger>Serializer.createClass(this.baseClass);
-    res["survey"] = survey;
-    res.setOwner(survey);
-    return res;
-  }
-  /*
-    private saveTriggerElement(action: SurveyLogicAction) {
-      if (!!action.templateObject.editableObject) {
-        var edObj = action.templateObject.editableObject;
-        edObj.applyAll(["expression"]);
-      } else {
-        var trigger = <SurveyTrigger>action.element;
-        var survey = this.survey;
-        if (this.isNewTrigger(trigger) && !!trigger.expression) {
-          survey.triggers.push(trigger);
-        }
-      }
-    }
-    */
-  private isNewTrigger(element: Base): boolean {
-    var trigger = <SurveyTrigger>element;
-    var survey = this.survey;
-    return !!survey && survey.triggers.indexOf(trigger) < 0;
+  private get isTrigger(): boolean {
+    return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
   }
 }
 
@@ -314,29 +280,9 @@ export class SurveyLogicTypes {
       baseClass: "htmlconditionitem",
       propertyName: "expression",
       isUniqueItem: true,
-      templateName: "svd-property-editor-html",
-      createNewElement: function (survey: SurveyModel) {
-        return new HtmlConditionItem();
+      getCollection: (survey: SurveyModel): Array<Base> => {
+        return survey.completedHtmlOnCondition;
       },
-      createTemplateObject: function (element: Base) {
-        var item = <HtmlConditionItem>element;
-        return {
-          //TODO
-          //koValue: ko.observable(item.html),
-          readOnly: false,
-          koAfterRender: function () {},
-        };
-      },
-      /*TODO
-      saveElement: function (survey: SurveyModel, action: SurveyLogicAction) {
-        var item = <HtmlConditionItem>action.element;
-        //TODO
-        //item.html = action.templateObject.koValue();
-        if (survey.completedHtmlOnCondition.indexOf(item) < 0) {
-          survey.completedHtmlOnCondition.push(item);
-        }
-      },
-      */
     },
     {
       name: "trigger_runExpression_Expression",
