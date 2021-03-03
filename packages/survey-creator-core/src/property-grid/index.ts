@@ -201,6 +201,96 @@ export var PropertyGridEditorCollection = {
   },
 };
 
+export class PropertyGridTitleActionsCreator {
+  constructor(public obj: Base, private options: ISurveyCreatorOptions) {}
+  public onGetQuestionTitleActions(options) {
+    var question = options.question;
+    var property = question.property;
+    var editor = PropertyGridEditorCollection.getEditor(property);
+    if (!editor) return;
+    var actions = [];
+    var enabled = !question.isReadOnly;
+    if (!!editor.clearPropertyValue) {
+      actions.push(
+        this.createClearValueAction(editor, property, question, enabled)
+      );
+    }
+    if (!!editor.createPropertyEditorSetup) {
+      if (enabled) {
+        enabled =
+          !editor.isPropertyEditorSetupEnabled ||
+          editor.isPropertyEditorSetupEnabled(
+            this.obj,
+            property,
+            options.question,
+            this.options
+          );
+      }
+      actions.push(
+        this.createEditorSetupAction(editor, property, question, enabled)
+      );
+    }
+    if (actions.length > 0) {
+      options.titleActions = actions;
+    }
+  }
+  private createClearValueAction(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    enabled: boolean
+  ): any {
+    return {
+      title: "",
+      id: "property-grid-clear",
+      icon: "icon-property_grid_clear",
+      iconName: "icon-property_grid_clear",
+      enabled: enabled,
+      action: () => {
+        editor.clearPropertyValue(this.obj, property, question, this.options);
+      },
+    };
+  }
+  private showModalPropertyEditor(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question
+  ) {
+    const surveyPropertyEditor = editor.createPropertyEditorSetup(
+      this.obj,
+      property,
+      question,
+      this.options
+    );
+
+    settings.showModal(
+      "survey",
+      { survey: surveyPropertyEditor.editSurvey },
+      () => surveyPropertyEditor.apply()
+    );
+  }
+
+  private createEditorSetupAction(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    enabled: boolean
+  ): any {
+    var setupAction = {
+      title: "",
+      id: "property-grid-setup",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      icon: "icon-property_grid_modal",
+      iconName: "icon-property_grid_modal",
+      enabled: enabled,
+      action: () => {
+        this.showModalPropertyEditor(editor, property, question);
+      },
+    };
+    return setupAction;
+  }
+}
+
 export class PropertyJSONGenerator {
   private parentProperty: JsonObjectProperty;
   private parentObj: Base;
@@ -396,6 +486,7 @@ export class PropertyGridModel {
   private surveyValue: SurveyModel;
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
+  private titleActionsCreator: PropertyGridTitleActionsCreator;
   public objValueChangedCallback: () => void;
   constructor(
     obj: Base = null,
@@ -410,6 +501,10 @@ export class PropertyGridModel {
   public set obj(value: Base) {
     if (this.objValue != value) {
       this.objValue = value;
+      this.titleActionsCreator = new PropertyGridTitleActionsCreator(
+        this.obj,
+        this.options
+      );
       var json = this.getSurveyJSON();
       if (this.options.readOnly) {
         json.mode = "display";
@@ -429,7 +524,7 @@ export class PropertyGridModel {
         this.onValidateQuestion(options);
       });
       this.survey.onGetQuestionTitleActions.add((sender, options) => {
-        this.onGetQuestionTitleActions(options);
+        this.titleActionsCreator.onGetQuestionTitleActions(options);
       });
       this.survey.onMatrixCellCreated.add((sender, options) => {
         this.onMatrixCellCreated(options);
@@ -510,93 +605,6 @@ export class PropertyGridModel {
       options.value
     );
     // this.options.onPropertyValueChanged(q.property, this.obj, options.value);
-  }
-
-  private onGetQuestionTitleActions(options) {
-    var question = options.question;
-    var property = question.property;
-    var editor = PropertyGridEditorCollection.getEditor(property);
-    if (!editor) return;
-    var actions = [];
-    var enabled = !question.isReadOnly;
-    if (!!editor.clearPropertyValue) {
-      actions.push(
-        this.createClearValueAction(editor, property, question, enabled)
-      );
-    }
-    if (!!editor.createPropertyEditorSetup) {
-      if (enabled) {
-        enabled =
-          !editor.isPropertyEditorSetupEnabled ||
-          editor.isPropertyEditorSetupEnabled(
-            this.obj,
-            property,
-            options.question,
-            this.options
-          );
-      }
-      actions.push(
-        this.createEditorSetupAction(editor, property, question, enabled)
-      );
-    }
-    if (actions.length > 0) {
-      options.titleActions = actions;
-    }
-  }
-  private createClearValueAction(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question,
-    enabled: boolean
-  ): any {
-    return {
-      title: "",
-      id: "property-grid-clear",
-      icon: "icon-property_grid_clear",
-      iconName: "icon-property_grid_clear",
-      enabled: enabled,
-      action: () => {
-        editor.clearPropertyValue(this.obj, property, question, this.options);
-      },
-    };
-  }
-  private showModalPropertyEditor(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question
-  ) {
-    const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      this.obj,
-      property,
-      question,
-      this.options
-    );
-
-    settings.showModal(
-      "survey",
-      { survey: surveyPropertyEditor.editSurvey },
-      () => surveyPropertyEditor.apply()
-    );
-  }
-
-  private createEditorSetupAction(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question,
-    enabled: boolean
-  ): any {
-    var setupAction = {
-      title: "",
-      id: "property-grid-setup",
-      css: "sv-action--first sv-action-bar-item--secondary",
-      icon: "icon-property_grid_modal",
-      iconName: "icon-property_grid_modal",
-      enabled: enabled,
-      action: () => {
-        this.showModalPropertyEditor(editor, property, question);
-      },
-    };
-    return setupAction;
   }
 
   private onAfterRenderQuestion(options: any) {

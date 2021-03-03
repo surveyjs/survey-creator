@@ -13,6 +13,8 @@ import { SurveyLogicAction, SurveyLogicItem } from "../../src/tabs/logic-items";
 import { getLogicString } from "../../src/tabs/logic-types";
 import { settings } from "../../src/settings";
 import { getLocString } from "../../src/editorLocalization";
+import { PropertyGridEditorCollection } from "../../src/property-grid/index";
+import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
@@ -397,4 +399,26 @@ test("SurveyLogicUI: create skipTo trigger", () => {
   expect(survey.triggers[0].getType()).toEqual("skiptrigger");
   expect(survey.triggers[0].expression).toEqual("{q1} = 1");
   expect((<SurveyTriggerSkip>survey.triggers[0]).gotoName).toEqual("q2");
+});
+test("SurveyLogicUI: create trigger_runExpression trigger", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+      { type: "text", name: "q4" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_runExpression";
+  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  var runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
+  expect(runExpressionQuestion).toBeTruthy();
+  var actions = runExpressionQuestion.getTitleActions();
+  expect(actions).toHaveLength(1);
+  expect(actions[0].id).toEqual("property-grid-clear");
 });

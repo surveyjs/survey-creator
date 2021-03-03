@@ -21,6 +21,7 @@ import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import {
   PropertyEditorSetupValue,
   PropertyJSONGenerator,
+  PropertyGridTitleActionsCreator,
 } from "../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import {
@@ -34,6 +35,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private logicTypeChoices: Array<ItemValue>;
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
+  private titleActionsCreator: PropertyGridTitleActionsCreator;
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -68,6 +70,13 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (this.isBuildingPanels) return;
       var panel = this.panels[this.panel.panelCount - 1];
       this.onPanelAdded(panel, null);
+    });
+    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
+      if (!this.titleActionsCreator) return;
+      var q = options.question;
+      if (!!q.parent && q.parent.name === "elementPanel") {
+        this.titleActionsCreator.onGetQuestionTitleActions(options);
+      }
     });
     this.editableItem = editableItem;
   }
@@ -246,6 +255,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         : undefined;
   }
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
+    this.titleActionsCreator = null;
     var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
     elementPanel.elements.splice(0, elementPanel.elements.length);
     elementPanel.visible = this.isElementPanelVisible(logicType);
@@ -253,6 +263,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var obj = this.createElementPanelObj(
       this.getActionByPanel(panel),
       logicType
+    );
+    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
+      obj,
+      this.options
     );
     this.setElementPanelObj(panel, obj);
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
