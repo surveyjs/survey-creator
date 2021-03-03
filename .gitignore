@@ -41,3 +41,4 @@ build
 package
 tmp
 packages/survey-creator/package-lock.json
+packages/survey-creator-core/package-lock.json
