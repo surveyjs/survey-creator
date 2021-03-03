@@ -40,4 +40,4 @@ node_modules
 build
 package
 tmp
-packages/survey-creator-v2/package-lock.json
+packages/survey-creator/package-lock.json
