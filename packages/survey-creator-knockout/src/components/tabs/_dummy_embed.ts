@@ -1,11 +1,11 @@
 import * as ko from "knockout";
 import * as Survey from "survey-core";
-import { SurveyJSON5 } from "../json5";
-import { editorLocalization } from "../editorLocalization";
-import { CreatorBase } from "../creator-base";
+import { SurveyJSON5 } from "@survey/creator";
+import { editorLocalization } from "@survey/creator";
+import { CreatorBase } from "@survey/creator";
 
-import "./embed.scss";
-var templateHtml = require("./embed.html");
+import "./_dummy_embed.scss";
+var templateHtml = require("./_dummy_embed.html");
 
 export class SurveyEmbedingWindow {
   private jsonValue: any;
