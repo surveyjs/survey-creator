@@ -30,7 +30,13 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   @property({ defaultValue: true }) isRunning: boolean;
-  @property({onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
+  @property({ defaultValue: "desktop", onSet: (val: string, target: TestSurveyTabViewModel) => {
+    if (!!val) {
+      target.simulator.device = val;
+    }
+  },
+}) device: string;
+@property({onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
       if (!!val) {
         target.simulator.survey = val;
       }
@@ -103,17 +109,10 @@ export class TestSurveyTabViewModel extends Base {
       new ListModel(
         deviceSelectorItems,
         (item: any) => {
-          this.simulator.device = item.id;
+          this.device = item.id;
           devicePopupModel.toggleVisibility();
         },
-        true /*,
-        ko.computed({
-          read: () =>
-            deviceSelectorItems.filter(
-              (item) => item.value === this.simulator.device
-            )[0],
-          write: (val) => {},
-        })*/
+        true
       ),
       "top",
       "right"
