@@ -1,7 +1,7 @@
 if (!window["%hammerhead%"]) {
   // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
-  Survey.StylesManager.applyTheme("modern");
+  SurveyCore.StylesManager.applyTheme("modern");
   let options = {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false

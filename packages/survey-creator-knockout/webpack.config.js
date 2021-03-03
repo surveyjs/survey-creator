@@ -4,6 +4,7 @@ var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
@@ -260,6 +261,11 @@ module.exports = function (options) {
     config.devtool = "inline-source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true }),
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        inject: "body",
+        template: "index.html",
+      }),
     ]);
   }
 
