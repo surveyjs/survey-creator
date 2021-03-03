@@ -4,6 +4,7 @@ import {
   QuestionDropdownModel,
   SurveyTriggerRunExpression,
   PanelModel,
+  SurveyTriggerSkip,
 } from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
 import { SurveyLogicUI } from "../../src/tabs/logic-ui";
@@ -368,4 +369,32 @@ test("SurveyLogicUI: validate expression and actions", () => {
   res = logic.saveEditableItem();
   expect(res).toBeTruthy();
   expect(logic.items).toHaveLength(1);
+});
+test("SurveyLogicUI: create skipTo trigger", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+      { type: "text", name: "q4" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_skip";
+  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  expect(elementPanel.visible).toBeTruthy();
+  var gotoNameQuestion = elementPanel.getQuestionByName("gotoName");
+  expect(gotoNameQuestion).toBeTruthy();
+  expect(gotoNameQuestion.getType()).toEqual("dropdown");
+  expect(gotoNameQuestion.choices).toHaveLength(4);
+  gotoNameQuestion.value = "q2";
+  logic.saveEditableItem();
+  expect(logic.items).toHaveLength(1);
+  expect(survey.triggers).toHaveLength(1);
+  expect(survey.triggers[0].getType()).toEqual("skiptrigger");
+  expect(survey.triggers[0].expression).toEqual("{q1} = 1");
+  expect((<SurveyTriggerSkip>survey.triggers[0]).gotoName).toEqual("q2");
 });
