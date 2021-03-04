@@ -411,6 +411,7 @@ export class SurveyQuestionEditorDefinition {
         "readOnly",
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
+        { name: "requiredIf", tab: "logic" },
         { name: "questionTitleLocation", tab: "layout" },
       ],
       tabs: [
@@ -423,7 +424,6 @@ export class SurveyQuestionEditorDefinition {
     panel: {
       properties: [
         "isRequired",
-        { name: "requiredIf", tab: "logic" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
