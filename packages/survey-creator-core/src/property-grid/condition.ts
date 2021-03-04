@@ -24,7 +24,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ): void {
-    obj[prop.name] = "";
+    question.clearValue();
   }
 }
 export class PropertyGridEditorCondition extends PropertyGridEditorExpression {

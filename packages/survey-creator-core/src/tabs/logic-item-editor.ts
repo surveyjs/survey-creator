@@ -36,6 +36,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
+  private initialSelectedElements: any = {};
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -85,6 +86,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   public set editableItem(val: SurveyLogicItem) {
     this.editableItemValue = val;
+    this.buildInitialSelectedElements();
     this.buildPanels();
   }
   public get survey() {
@@ -191,6 +193,20 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     if (!!elementPanel) {
       logicType.saveElement(elementPanel);
+    }
+  }
+  private buildInitialSelectedElements() {
+    this.initialSelectedElements = {};
+    if (!this.editableItem) return;
+    for (var i = 0; i < this.editableItem.actions.length; i++) {
+      var action = this.editableItem.actions[i];
+      if (this.isElementSelectorVisible(action.logicType)) {
+        var lgName = action.logicTypeName;
+        if (!this.initialSelectedElements[lgName]) {
+          this.initialSelectedElements[lgName] = [];
+        }
+        this.initialSelectedElements[lgName].push(action.element);
+      }
     }
   }
   private buildPanels() {
@@ -337,12 +353,26 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         text = el.locTitle.renderedHtml;
       }
       if (!text) text = el.name;
-      res.push(new ItemValue(el.name, text));
+      var itemValue = new ItemValue(el.name, text);
+      if (
+        !!el[logicType.propertyName] &&
+        !this.isElementInInitialSelection(logicType.name, el)
+      ) {
+        itemValue.enableIf = "1=2";
+      }
+      res.push(itemValue);
     }
     res.sort(function (a, b) {
       return a.text.localeCompare(b.text);
     });
     return res;
+  }
+  private isElementInInitialSelection(
+    logicTypeName: string,
+    el: Base
+  ): boolean {
+    if (!this.initialSelectedElements[logicTypeName]) return false;
+    return this.initialSelectedElements[logicTypeName].indexOf(el) > -1;
   }
   private getSelectorOptionsText(logicType: SurveyLogicType): string {
     var elementType = logicType.baseClass;

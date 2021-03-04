@@ -9,8 +9,12 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMultipleTextModel,
   Serializer,
+  QuestionDropdownModel,
 } from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
+import { SurveyLogicUI } from "../../src/tabs/logic-ui";
+import { LogicItemEditor } from "../../src/tabs/logic-item-editor";
+
 import { settings } from "../../src/settings";
 
 test("Page visibility logic", () => {
@@ -69,189 +73,140 @@ test("Add existing visible Items", () => {
   var logic = new SurveyLogic(survey);
   expect(logic.items).toHaveLength(2);
 });
-/*
+
 test("Add new action immediately", () => {
-    var survey = new SurveyModel({
-      elements: [
-        { type: "text", name: "q1" },
-        { type: "text", name: "q2" },
-      ],
-    });
-    var logic = new SurveyLogic(survey);
-    expect(logic.mode).toEqual("view");
-    logic.addNew();
-    expect(logic.mode).toEqual("new");
-    var action = logic.editableItem.actions[0];
-    action.logicType = logic.getTypeByName("question_visibility");
-    action.itemSelector.koValue("q1");
-    logic.expressionEditor.koValue("{q2} = 1");
-    logic.saveEditableItem();
-    expect(
-      (<Survey.Question>survey.getQuestionByName("q1")).visibleIf).toEqual("{q2} = 1");
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
   });
-*/
-/*
-  test(
-    "Do not add expression question into visible Items",
-    () => {
-      var survey = new SurveyModel({
-        elements: [
-          { type: "text", name: "q1" },
-          { type: "expression", name: "q2", expression: "{q1}+1" },
-        ],
-      });
-      var logic = new SurveyLogic(survey);
-      expect.equal(logic.items.length, 0, "There is not visible items");
-      expect.equal(logic.invisibleItems.length, 1, "There is one invisible item");
-    }
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.mode).toEqual("view");
+  logic.addNew();
+  expect(logic.mode).toEqual("new");
+  expect(logic.itemEditor.panels).toHaveLength(1);
+  logic.expressionEditor.text = "{q2} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q1";
+  logic.saveEditableItem();
+  expect(survey.getQuestionByName("q1").visibleIf).toEqual("{q2} = 1");
+});
+
+test("Do not add expression question into visible Items", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "expression", name: "q2", expression: "{q1}+1" },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(0);
+  expect(logic.invisibleItems).toHaveLength(1);
+});
+
+test("Add new item", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q2}=1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.mode).toEqual("view");
+  logic.addNew();
+  expect(logic.mode).toEqual("new");
+  expect(logic.editableItem).toBeTruthy();
+  expect(logic.expressionEditor).toBeTruthy();
+  expect(logic.expressionEditor.text).toBeFalsy();
+  expect(logic.expressionEditor.allConditionQuestions).toHaveLength(3);
+  expect(logic.editableItem.actions).toHaveLength(0);
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  var elSelectorQuestion = <QuestionDropdownModel>(
+    panel.getQuestionByName("elementSelector")
   );
-  test("Add new item", () => {
-    var survey = new SurveyModel();
-    var logic = new SurveyLogic(survey);
-    logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
-    survey = new SurveyModel({
-      elements: [
-        { type: "text", name: "q1", visibleIf: "{q2}=1" },
-        { type: "text", name: "q2", visibleIf: "{q1}=1" },
-        { type: "text", name: "q3" },
-      ],
-    });
-    logic = new SurveyLogic(survey);
-    expect.equal(logic.mode, "view", "There are items");
-    logic.editItem(logic.items[0]);
-    logic.addNew();
-    expect.equal(logic.mode, "new", "change to the select type mode");
-    expect.ok(logic.editableItem, "Editable item is created");
-    expect.ok(logic.expressionEditor, "expression editor is created");
-    expect.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
-    expect.equal(
-      logic.expressionEditor.allConditionQuestions.length,
-      3,
-      "We have 3 questions here"
-    );
-    expect.equal(logic.editableItem.actions.length, 1, "There is one action");
-    var action = logic.editableItem.actions[0];
-    action.logicType = logic.getTypeByName("question_visibility");
-    var itemSelector = action.itemSelector;
-    expect.equal(
-      itemSelector.koElements().length,
-      3,
-      "There are three questions"
-    );
-    itemSelector.updateItems();
-    expect.equal(
-      itemSelector.koElements()[0].koDisabled(),
-      true,
-      "q1 is disabled"
-    );
-    expect.equal(
-      itemSelector.koElements()[1].koDisabled(),
-      true,
-      "q2 is disabled"
-    );
-    expect.equal(
-      itemSelector.koElements()[2].koDisabled(),
-      false,
-      "q3 is enabled"
-    );
-    itemSelector.koValue("q3");
-    logic.expressionEditor.koValue("{q1} = 2");
-    expect.equal(action.element["name"], "q3", "Question set correctly");
-    expect.equal(logic.saveEditableItem(), true, "Save correctly");
-    var q3 = <Survey.Question>survey.getQuestionByName("q3");
-    expect.equal(q3.visibleIf, "{q1} = 2");
-    expect.equal(logic.items.length, 3, "There are 3 items now");
+  expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
+  elSelectorQuestion.value = "q3";
+  logic.expressionEditor.text = "{q1} = 2";
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 2");
+  expect(logic.items).toHaveLength(3);
+});
+test("Edit existing item", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3} =1" },
+      { type: "text", name: "q3" },
+    ],
   });
-  test("Edit existing item", () => {
-    var survey = new SurveyModel();
-    var logic = new SurveyLogic(survey);
-    logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
-    survey = new SurveyModel({
-      elements: [
-        { type: "text", name: "q1", visibleIf: "{q3}=1" },
-        { type: "text", name: "q2", visibleIf: "{q3} =1" },
-        { type: "text", name: "q3" },
-      ],
-    });
-    logic = new SurveyLogic(survey);
-    expect.equal(logic.mode, "view", "There are items");
-    expect.equal(logic.items.length, 1, "There is one item");
-    expect.equal(logic.items[0].actions.length, 2, "The item has two actions");
-    expect.equal(
-      logic.items[0].actions[0].element["name"],
-      "q1",
-      "Element in the first action set correctly"
-    );
-    logic.editItem(logic.items[0]);
-    expect.ok(logic.editableItem, "Editable item is set");
-    expect.equal(
-      logic.expressionEditor.koValue(),
-      "{q3}=1",
-      "Expression is set for editing"
-    );
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.mode).toEqual("view");
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].actions).toHaveLength(2);
+  expect(logic.items[0].actions[0].element["name"]).toEqual("q1");
+  logic.editItem(logic.items[0]);
+  expect(logic.editableItem).toBeTruthy();
+  expect(logic.expressionEditor.text).toEqual("{q3} = 1");
+});
+
+test("Use SurveyItemSelector for editing", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" },
+      { type: "text", name: "q3", visibleIf: "{q2}=1" },
+      { type: "text", name: "q4" },
+    ],
   });
-  test("Use SurveyItemSelector for editing", () => {
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.mode).toEqual("view");
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[1]);
+  var panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toEqual(
+    "question_visibility"
+  );
+  var elSelectorQuestion = <QuestionDropdownModel>(
+    panel.getQuestionByName("elementSelector")
+  );
+  expect(elSelectorQuestion).toBeTruthy();
+  expect(elSelectorQuestion.choices).toHaveLength(4);
+  expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[3].isEnabled).toBeTruthy();
+  logic.itemEditor.panel.addPanel();
+  panel = logic.itemEditor.panels[1];
+  elSelectorQuestion = <QuestionDropdownModel>(
+    panel.getQuestionByName("elementSelector")
+  );
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  elSelectorQuestion.value = "q4";
+  logic.saveEditableItemAndBack();
+  expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = 1");
+  logic.editItem(logic.items[0]);
+  panel = logic.itemEditor.panels[0];
+  elSelectorQuestion = <QuestionDropdownModel>(
+    panel.getQuestionByName("elementSelector")
+  );
+  expect(elSelectorQuestion.choices).toHaveLength(4);
+  expect(elSelectorQuestion.choices[0].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[1].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[2].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[3].isEnabled).toBeFalsy();
+});
+
+/*  test("Remove same actions on save", () => {
     var survey = new SurveyModel();
     var logic = new SurveyLogic(survey);
     logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
-    survey = new SurveyModel({
-      elements: [
-        { type: "text", name: "q1", visibleIf: "{q3}=1" },
-        { type: "text", name: "q2", visibleIf: "{q3}=1" },
-        { type: "text", name: "q3", visibleIf: "{q2}=1" },
-        { type: "text", name: "q4" },
-      ],
-    });
-    logic = new SurveyLogic(survey);
-    expect.equal(logic.mode, "view", "There are items");
-    expect.equal(logic.items.length, 2, "There are two items");
-    logic.editItem(logic.items[0]);
-    var itemSelector = logic.editableItem.actions[0].itemSelector;
-    itemSelector.updateItems();
-    expect.ok(itemSelector, "itemSelector has been created");
-    expect.equal(
-      itemSelector.koElements().length,
-      4,
-      "All questions are available, op0"
-    );
-    expect.equal(
-      itemSelector.koElements()[1].koDisabled(),
-      true,
-      "The q2 is disabled, op0"
-    );
-    expect.equal(
-      itemSelector.koElements()[2].koDisabled(),
-      true,
-      "The q3 is disabled, op0"
-    );
-    logic.addNewAction;
-    var action = logic.addAction(logic.getTypeByName("question_visibility"));
-    action.itemSelector.koValue("q4");
-    expect.equal(action.element["name"], "q4", "Eleement set correctly");
-    logic.saveEditableItem();
-    logic.mode = "view";
-    logic.editItem(logic.items[1]);
-    itemSelector = logic.editableItem.actions[0].itemSelector;
-    itemSelector.updateItems();
-    expect.equal(
-      itemSelector.koElements().length,
-      4,
-      "Just one question is available, op0"
-    );
-    expect.equal(
-      itemSelector.koElements()[0].koDisabled(),
-      true,
-      "The q1 is disabled"
-    );
-  });
-  test("Remove same actions on save", () => {
-    var survey = new SurveyModel();
-    var logic = new SurveyLogic(survey);
-    logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
+    expect(logic.mode, "new", "There is no items");
     survey = new SurveyModel({
       elements: [
         { type: "text", name: "q1", visibleIf: "{q3}=1" },
@@ -264,9 +219,9 @@ test("Add new action immediately", () => {
     logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q1"));
     logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q2"));
     logic.addAction(lt, <Survey.Question>survey.getQuestionByName("q2"));
-    expect.equal(logic.editableItem.actions.length, 4, "There are 4 actions");
+    expect(logic.editableItem.actions.length, 4, "There are 4 actions");
     logic.saveEditableItem();
-    expect.equal(
+    expect(
       logic.editableItem.actions.length,
       2,
       "There are 2 actions left"
@@ -276,7 +231,7 @@ test("Add new action immediately", () => {
     var survey = new SurveyModel();
     var logic = new SurveyLogic(survey);
     logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
+    expect(logic.mode, "new", "There is no items");
     survey = new SurveyModel({
       elements: [
         { type: "text", name: "q1", visibleIf: "{q3}=1" },
@@ -287,7 +242,7 @@ test("Add new action immediately", () => {
     logic.editItem(logic.items[0]);
     logic.editableItem.removeAction(logic.items[0].actions[1]);
     logic.saveEditableItem();
-    expect.equal(
+    expect(
       (<Survey.Question>survey.getQuestionByName("q2")).visibleIf,
       "",
       "Remove the visibleIf"
@@ -302,13 +257,13 @@ test("Add new action immediately", () => {
     });
     var logic = new SurveyLogic(survey);
     logic.removeItem(logic.items[0]);
-    expect.equal(logic.items.length, 0, "There is no more items");
-    expect.equal(
+    expect(logic.items.length, 0, "There is no more items");
+    expect(
       (<Survey.Question>survey.getQuestionByName("q1")).visibleIf,
       "",
       "Remove the visibleIf from q1"
     );
-    expect.equal(
+    expect(
       (<Survey.Question>survey.getQuestionByName("q2")).visibleIf,
       "",
       "Remove the visibleIf from q2"
@@ -450,131 +405,131 @@ test("Add new action immediately", () => {
     var q5col1 = q5.columns[0];
     logic.renameQuestion("Q1", "question1");
     logic.renameQuestion("q2", "question2");
-    expect.equal(
+    expect(
       survey.pages[0].visibleIf,
       "{question2} != 2",
       "Rename q1: page1.visibleIf"
     );
-    expect.equal(
+    expect(
       survey.pages[1].visibleIf,
       "{question1} != 1 and {question1} < 1",
       "Rename q2: page1.visibleIf"
     );
-    expect.equal(q1.enableIf, "{question2} > 2", "Rename q2: q1.enableIf");
-    expect.equal(q2.requiredIf, "{question1} < 1", "Rename q1: q2.requiredIf");
+    expect(q1.enableIf, "{question2} > 2", "Rename q2: q1.enableIf");
+    expect(q2.requiredIf, "{question1} < 1", "Rename q1: q2.requiredIf");
   
-    expect.equal(
+    expect(
       panel1.visibleIf,
       "{question1} = 1",
       "Rename panel1: panel1.visibleIf"
     );
-    expect.equal(
+    expect(
       panel1.enableIf,
       "{question2} = 2",
       "Rename panel1: panel1.enableIf"
     );
-    expect.equal(
+    expect(
       q4.expression,
       "{question1} + {question2}",
       "Rename q4(expression): q4.expression"
     );
-    expect.equal(
+    expect(
       q5col1.visibleIf,
       "{question1} = 1",
       "Rename q1: q5_column1.visibleIf"
     );
-    expect.equal(
+    expect(
       q5col1.enableIf,
       "{question2} = 2",
       "Rename q2: q5_column1.enableIf"
     );
-    expect.equal(
+    expect(
       q5col1.requiredIf,
       "{question1} = 1",
       "Rename q1: q5_column1.requiredIf"
     );
-    expect.equal(
+    expect(
       q5col1.totalExpression,
       "{question1} + {question2}",
       "Rename q1 and q2: q5_column1.totalExpression"
     );
-    expect.equal(
+    expect(
       trigger1.expression,
       "{question1} = 1",
       "Rename q1: trigger.expression"
     );
-    expect.equal(
+    expect(
       trigger1.runExpression,
       "{question2} + 1",
       "Rename q2: trigger.runExpression"
     );
-    expect.equal(
+    expect(
       trigger2.expression,
       "{question1} = 1",
       "Rename q1: trigger2.expression"
     );
-    expect.equal(
+    expect(
       trigger3.expression,
       "{question1} = 1",
       "Rename q1: trigger3.expression"
     );
-    expect.equal(
+    expect(
       trigger3.setToName,
       "question1",
       "Rename q1: trigger3.setToName"
     );
-    expect.equal(trigger3.fromName, "question2", "Rename q2: trigger3.fromName");
-    expect.equal(
+    expect(trigger3.fromName, "question2", "Rename q2: trigger3.fromName");
+    expect(
       validator.expression,
       "{question1} > 1",
       "Rename q1: validator.expression"
     );
-    expect.equal(
+    expect(
       q6.rowsVisibleIf,
       "{item} = {question1}",
       "Rename q1: matrixdropdown.rowsVisibleIf"
     );
-    expect.equal(
+    expect(
       q7.rowsVisibleIf,
       "{item} = {question1}",
       "Rename q1: matrix.rowsVisibleIf"
     );
-    expect.equal(
+    expect(
       q7.columnsVisibleIf,
       "{item} = {question2}",
       "Rename q2: matrix.columnsVisibleIf"
     );
-    expect.equal(
+    expect(
       q8.choicesVisibleIf,
       "{item} = {question1}",
       "Rename q1: radiogroup.choicesVisibleIf"
     );
-    expect.equal(
+    expect(
       q8.choicesEnableIf,
       "{item} = {question2}",
       "Rename q2: radiogroup.choicesVisibleIf"
     );
-    expect.equal(
+    expect(
       q8.choices[0].visibleIf,
       "{question1} = 1",
       "Rename q1: radiogroup.choices[0].visibleIf"
     );
-    expect.equal(
+    expect(
       q8.choices[0].enableIf,
       "{question2} = 2",
       "Rename q2: radiogroup.choices[0].enableIf"
     );
-    expect.equal(
+    expect(
       survey.completedHtmlOnCondition[0].expression,
       "{question1} = 1",
       "Rename q1: survey.completedHtmlOnCondition[0].expression"
     );
-    expect.equal(
+    expect(
       survey.calculatedValues.length,
       1,
       "There is one calculated value"
     );
-    expect.equal(
+    expect(
       survey.calculatedValues[0].expression,
       "{question1} = 1",
       "Rename q1: survey.calculatedValues[0].expression"
@@ -599,8 +554,8 @@ test("Add new action immediately", () => {
     var logic = new SurveyLogic(survey);
     q3.delete();
     logic.removeQuestion(q3.name);
-    expect.equal(q1.visibleIf, "", "Visible If is empty");
-    expect.equal(
+    expect(q1.visibleIf, "", "Visible If is empty");
+    expect(
       q2.visibleIf,
       "(({q1} == 1) or ({q1} == 2))",
       "Visible If remove {q3}"
@@ -613,39 +568,39 @@ test("Add new action immediately", () => {
     });
     var logic = new SurveyLogic(survey);
     logic.addNew();
-    expect.equal(logic.mode, "new", "There is no items");
+    expect(logic.mode, "new", "There is no items");
     expect.ok(logic.editableItem, "Editable item is created");
     expect.ok(logic.expressionEditor, "expression editor is created");
-    expect.equal(logic.expressionEditor.koValue(), "", "the expression is empty");
+    expect(logic.expressionEditor.koValue(), "", "the expression is empty");
     var lt = logic.getTypeByName("trigger_complete");
     var action = logic.editableItem.actions[0];
     action.logicType = lt;
-    expect.equal(lt.visible, true, "Trigger logic type is visible");
-    expect.equal(
+    expect(lt.visible, true, "Trigger logic type is visible");
+    expect(
       logic.editableItem.actions.length,
       1,
       "There is one action in new item"
     );
     logic.removeAction(action);
-    expect.equal(
+    expect(
       logic.editableItem.actions.length,
       1,
       "We are removing action and creatin a new one"
     );
     action = logic.editableItem.actions[0];
     expect.notOk(action.logicType, "There is no logic type");
-    expect.equal(lt.visible, true, "Trigger logic type is visible again");
+    expect(lt.visible, true, "Trigger logic type is visible again");
     action.logicType = lt;
     logic.expressionEditor.koValue("{q1} = 2");
-    expect.equal(survey.triggers.length, 0, "There is no triggers yet");
+    expect(survey.triggers.length, 0, "There is no triggers yet");
     logic.saveEditableItem();
-    expect.equal(survey.triggers.length, 1, "There is one trigger now");
-    expect.equal(
+    expect(survey.triggers.length, 1, "There is one trigger now");
+    expect(
       survey.triggers[0].getType(),
       "completetrigger",
       "It is a complete trigger"
     );
-    expect.equal(
+    expect(
       survey.triggers[0].expression,
       "{q1} = 2",
       "Complete trigger has the correct expression property"
@@ -671,37 +626,37 @@ test("Add new action immediately", () => {
     var options = new EditorOptionsTests();
     options.showTitlesInExpressions = true;
     var logic = new SurveyLogic(survey, options);
-    expect.equal(logic.items.length, 1, "There is one item");
+    expect(logic.items.length, 1, "There is one item");
     logic.editItem(logic.items[0]);
     expect.ok(logic.editableItem, "Editable item is created");
-    expect.equal(
+    expect(
       logic.expressionEditor.koValue(),
       "{q1} = 1",
       "the expression set correctly"
     );
-    expect.equal(logic.editableItem.actions.length, 1, "There is one action");
+    expect(logic.editableItem.actions.length, 1, "There is one action");
     var action = logic.editableItem.actions[0];
     expect.ok(action.templateObject, "Template object is created");
     logic.expressionEditor.koValue("{q1} = 10");
     var triggerEditor = <SurveyElementEditorContentModel>action.templateObject;
-    expect.equal(
+    expect(
       triggerEditor.getPropertyEditorByName("expression").koVisible(),
       false,
       "Do not show expression editor here"
     );
     triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q3");
     logic.saveEditableItem();
-    expect.equal(
+    expect(
       logic.items[0].actions[0].text,
       "Run expression: '{Question 2} + 1' and set its result into question: {Question 3}",
       "use showTitlesInExpressions option"
     );
-    expect.equal(
+    expect(
       survey.triggers[0]["setToName"],
       "q3",
       "Trigger property editor works correctly, setToName"
     );
-    expect.equal(
+    expect(
       survey.triggers[0].expression,
       "{q1} = 10",
       "Trigger property editor works correctly, expression"
@@ -723,33 +678,33 @@ test("Add new action immediately", () => {
     action.templateObject.koValue("Some text");
     logic.expressionEditor.koValue("{q1} = 10");
     logic.saveEditableItem();
-    expect.equal(survey.completedHtmlOnCondition.length, 1, "There is one item");
-    expect.equal(
+    expect(survey.completedHtmlOnCondition.length, 1, "There is one item");
+    expect(
       survey.completedHtmlOnCondition[0].expression,
       "{q1} = 10",
       "Expression set correctly"
     );
-    expect.equal(
+    expect(
       survey.completedHtmlOnCondition[0].html,
       "Some text",
       "html set correctly"
     );
     logic.editItem(logic.items[0]);
-    expect.equal(logic.items[0].actions.length, 1, "There is one action here");
+    expect(logic.items[0].actions.length, 1, "There is one action here");
     logic.expressionEditor.koValue(logic.expressionEditor.koValue() + "0");
     action.templateObject.koValue(action.templateObject.koValue() + " 2");
     logic.saveEditableItem();
-    expect.equal(
+    expect(
       survey.completedHtmlOnCondition.length,
       1,
       "There is still one item"
     );
-    expect.equal(
+    expect(
       survey.completedHtmlOnCondition[0].expression,
       "{q1} = 100",
       "Expression is changed correctly"
     );
-    expect.equal(
+    expect(
       survey.completedHtmlOnCondition[0].html,
       "Some text 2",
       "html is changed correctly"
@@ -768,12 +723,12 @@ test("Add new action immediately", () => {
     logic.addNew();
     var action = logic.editableItem.actions[0];
     action.logicType = logic.getTypeByName("question_visibility");
-    expect.equal(
+    expect(
       logic.expressionEditor.options.showTitlesInExpressions,
       true,
       "Use correct options in expression editor"
     );
-    expect.equal(
+    expect(
       action.itemSelector.koElements()[0].text,
       "Question 1",
       "Use showTitlesInExpression"
@@ -789,8 +744,8 @@ test("Add new action immediately", () => {
       ],
     });
     var logic = new SurveyLogic(survey, options);
-    expect.equal(logic.mode, "view", "Can't insert, it is readOnly");
-    expect.equal(logic.koReadOnly(), true, "It is readOnly");
+    expect(logic.mode, "view", "Can't insert, it is readOnly");
+    expect(logic.koReadOnly(), true, "It is readOnly");
   });
   test("Displaying correct text for logic action", () => {
     var survey = new SurveyModel({
@@ -855,7 +810,7 @@ test("Add new action immediately", () => {
       ],
     });
     var logic = new SurveyLogic(survey);
-    expect.equal(logic.items.length, 1, "We have one item");
+    expect(logic.items.length, 1, "We have one item");
     var ops = logic.items[0].actions;
     var logicTypes = [
       "page_visibility",
@@ -871,7 +826,7 @@ test("Add new action immediately", () => {
       "trigger_runExpression",
       "completedHtmlOnCondition",
     ];
-    expect.equal(
+    expect(
       ops.length,
       logicTypes.length,
       "There are 11 actions: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
@@ -885,40 +840,40 @@ test("Add new action immediately", () => {
     for (var i = 0; i < logicTypes.length; i++) {
       expect.ok(findOp(logicTypes[i]), logicTypes[i] + " is here.");
     }
-    expect.equal(
+    expect(
       logic.items[0].expressionText,
       "When expression: '{q1} == 1' returns true:",
       "Item expressionText"
     );
-    expect.equal(findOp("page_visibility").text, "Make page {page1} visible");
-    expect.equal(findOp("panel_visibility").text, "Make panel {panel1} visible");
-    expect.equal(findOp("panel_enable").text, "Make panel {panel1} enable");
-    expect.equal(
+    expect(findOp("page_visibility").text, "Make page {page1} visible");
+    expect(findOp("panel_visibility").text, "Make panel {panel1} visible");
+    expect(findOp("panel_enable").text, "Make panel {panel1} enable");
+    expect(
       findOp("question_visibility").text,
       "Make question {q2} visible"
     );
-    expect.equal(findOp("question_enable").text, "Make question {q3} enable");
-    expect.equal(findOp("question_require").text, "Make question {q4} required");
-    expect.equal(findOp("trigger_complete").text, "Survey becomes completed");
-    expect.equal(
+    expect(findOp("question_enable").text, "Make question {q3} enable");
+    expect(findOp("question_require").text, "Make question {q4} required");
+    expect(findOp("trigger_complete").text, "Survey becomes completed");
+    expect(
       findOp("trigger_setvalue").text,
       "Set into question: {q2} value q2Value"
     );
-    expect.equal(
+    expect(
       findOp("trigger_copyvalue").text,
       "Copy into question: {q1} value from question {q2}"
     );
-    expect.equal(findOp("trigger_skip").text, "Survey skip to the question {q2}");
-    expect.equal(
+    expect(findOp("trigger_skip").text, "Survey skip to the question {q2}");
+    expect(
       findOp("trigger_runExpression").text,
       "Run expression: '{q2} + 1' and set its result into question: {q3}"
     );
-    expect.equal(
+    expect(
       findOp("completedHtmlOnCondition").text,
       "Show custom text for the 'Thank you page'."
     );
   
-    expect.equal(findOp("page_visibility").name, "Page visibility");
+    expect(findOp("page_visibility").name, "Page visibility");
   });
   
   test("Logic editing errors", () => {
@@ -930,44 +885,44 @@ test("Add new action immediately", () => {
     });
     var logic = new SurveyLogic(survey);
     logic.addNew();
-    expect.equal(logic.saveEditableItem(), false, "Expression is empty");
-    expect.equal(
+    expect(logic.saveEditableItem(), false, "Expression is empty");
+    expect(
       logic.koErrorText(),
       "The logic expression is empty or invalid. Please correct it.",
       "Check 1"
     );
     logic.expressionEditor.koValue("ww++++2");
-    expect.equal(logic.saveEditableItem(), false, "Expression is invalid");
-    expect.equal(
+    expect(logic.saveEditableItem(), false, "Expression is invalid");
+    expect(
       logic.koErrorText(),
       "The logic expression is empty or invalid. Please correct it.",
       "Check 2"
     );
     logic.expressionEditor.koValue("{q1} = 1");
-    expect.equal(logic.saveEditableItem(), false, "There is no actions");
+    expect(logic.saveEditableItem(), false, "There is no actions");
     expect.ok(logic.koErrorText());
     var action = logic.editableItem.actions[0];
     action.logicType = logic.getTypeByName("question_visibility");
     action.itemSelector.koValue("q1");
     action.itemSelector.koValue("");
-    expect.equal(logic.saveEditableItem(), false, "Action is incorret");
-    expect.equal(logic.koErrorText(), "Please, fix problems in your action(s).");
+    expect(logic.saveEditableItem(), false, "Action is incorret");
+    expect(logic.koErrorText(), "Please, fix problems in your action(s).");
     action.itemSelector.koValue("q2");
-    expect.equal(logic.saveEditableItem(), true, "Action is corret now");
+    expect(logic.saveEditableItem(), true, "Action is corret now");
     action = logic.addNewAction();
     action.logicType = logic.getTypeByName("trigger_setvalue");
-    expect.equal(logic.editableItem.actions.length, 2, "There two actions");
-    expect.equal(action.hasError(), true, "setToName is empty");
+    expect(logic.editableItem.actions.length, 2, "There two actions");
+    expect(action.hasError(), true, "setToName is empty");
     var triggerEditor = <SurveyElementEditorContentModel>action.templateObject;
     triggerEditor.getPropertyEditorByName("setToName").editor.koValue("q2");
     triggerEditor.getPropertyEditorByName("setValue").editor.koValue("newValue");
-    expect.equal(action.hasError(), false, "setToName  is correct");
-    expect.equal(
+    expect(action.hasError(), false, "setToName  is correct");
+    expect(
       logic.editableItem.actions.length,
       2,
       "trigger set correctly now"
     );
-    expect.equal(logic.saveEditableItem(), true, "setToName is correct");
+    expect(logic.saveEditableItem(), true, "setToName is correct");
   });
   
   test("Return without saving", () => {
@@ -998,14 +953,14 @@ test("Add new action immediately", () => {
     );
     triggerEditor.getPropertyEditorByName("gotoName").editor.koValue("q3");
     logic.addAction(logic.getTypeByName("question_visibility"));
-    expect.equal(item.actions.length, 3, "There three actions");
-    expect.equal(logic.saveEditableItem(), false, "Can't save");
+    expect(item.actions.length, 3, "There three actions");
+    expect(logic.saveEditableItem(), false, "Can't save");
     expect.ok(logic.koErrorText(), "There is an error in the text");
     logic.koShowView();
     item = logic.items[0];
-    expect.equal(item.actions.length, 2, "The last action was not saved");
-    expect.equal(item.expression, "{q1} = 1", "Item expression is not changed");
-    expect.equal(
+    expect(item.actions.length, 2, "The last action was not saved");
+    expect(item.expression, "{q1} = 1", "Item expression is not changed");
+    expect(
       item.actions[1].element["gotoName"],
       "q2",
       "action gotoName is not changed"
@@ -1044,11 +999,11 @@ test("Add new action immediately", () => {
     logic.expressionEditor.koTextValue("{q1} = 2");
     logic.addAction(logic.getTypeByName("question_visibility"));
     item.actions[2].itemSelector.koValue("q3");
-    expect.equal(modifiedCounter, 0, "Has not changed yet");
+    expect(modifiedCounter, 0, "Has not changed yet");
     logic.saveEditableItem();
-    expect.equal(modifiedCounter, 1, "It was changed one time");
+    expect(modifiedCounter, 1, "It was changed one time");
     logic.removeItem(logic.items[0]);
-    expect.equal(modifiedCounter, 2, "It was changed two times");
+    expect(modifiedCounter, 2, "It was changed two times");
   });
   
   test(
@@ -1078,7 +1033,7 @@ test("Add new action immediately", () => {
       var logic = new SurveyLogic(creator.survey, creator);
       var item = logic.items[0];
       item.edit();
-      expect.equal(
+      expect(
         logic.expressionEditor.koShowExpressionHeader(),
         false,
         "Do not show expression header"
@@ -1097,8 +1052,8 @@ test("Add new action immediately", () => {
     var options = new EditorOptionsTests();
     options.showTitlesInExpressions = true;
     var logic = new SurveyLogic(survey, options);
-    expect.equal(logic.items.length, 1, "There one item");
-    expect.equal(
+    expect(logic.items.length, 1, "There one item");
+    expect(
       logic.items[0].expressionText,
       "When expression: '{My Question 1} == 1' returns true:"
     );
@@ -1118,7 +1073,7 @@ test("Add new action immediately", () => {
     item.edit();
     expect.ok(logic.editableItem, "Editable item is created");
     var action = logic.editableItem.actions[0];
-    expect.equal(action.logicType.name, "question_visibility");
+    expect(action.logicType.name, "question_visibility");
     action.logicType = null;
     expect.notOk(action.logicType, "Logic type is empty");
     expect.notOk(logic.saveEditableItem(), "Can't save there is no logic type");
@@ -1143,7 +1098,7 @@ test("Add new action immediately", () => {
     var item = logic.editableItem;
     logic.expressionEditor.koValue("{q1} = 1");
     expect.ok(item, "Editable item is created");
-    expect.equal(item.actions.length, 1, "There is one action in it");
+    expect(item.actions.length, 1, "There is one action in it");
     var action = item.actions[0];
     expect.notOk(action.logicType, "logic type is emtpy");
     expect.notOk(logic.saveEditableItem(), "Can't save there is no logic type");
@@ -1170,7 +1125,7 @@ test("Add new action immediately", () => {
       "trigger_complete",
     ];
     var logic = new SurveyLogic(survey, options);
-    expect.equal(
+    expect(
       logic.logicTypes.length,
       4,
       "There are four visible action types"
@@ -1201,9 +1156,9 @@ test("Add new action immediately", () => {
     var action = logic.editableItem.actions[0];
     action.logicType = logic.getTypeByName("question_visibility");
     action.itemSelector.koValue("q2");
-    expect.equal(callCount, 0, "Event has not been called yet");
+    expect(callCount, 0, "Event has not been called yet");
     logic.saveEditableItem();
-    expect.equal(callCount, 1, "Event has been called");
+    expect(callCount, 1, "Event has been called");
   });
   test("Logic onLogicItemValidation event", () => {
     var survey = new SurveyModel({
@@ -1215,16 +1170,16 @@ test("Add new action immediately", () => {
     var logic = new SurveyLogic(survey);
     var callCount = 0;
     logic.onLogicItemValidation.add((_, options) => {
-      expect.equal(
+      expect(
         options.usedNamesInExpression.length,
         1,
         "There is one item in usedNames"
       );
-      expect.equal(options.usedNamesInExpression[0], "q1", "usedNames[0] = 'q1'");
+      expect(options.usedNamesInExpression[0], "q1", "usedNames[0] = 'q1'");
       callCount++;
       var actions = options.item.actions;
-      expect.equal(actions.length, 1, "There is one action");
-      expect.equal(
+      expect(actions.length, 1, "There is one action");
+      expect(
         actions[0].logicTypeName,
         "question_visibility",
         "It is visibility action"
@@ -1244,14 +1199,14 @@ test("Add new action immediately", () => {
     var action = logic.editableItem.actions[0];
     action.logicType = logic.getTypeByName("question_visibility");
     action.itemSelector.koValue("q1");
-    expect.equal(callCount, 0, "Event has not been called yet");
+    expect(callCount, 0, "Event has not been called yet");
     logic.saveEditableItem();
-    expect.equal(callCount, 1, "Event has been called");
-    expect.equal(logic.items.length, 0, "We do not save");
+    expect(callCount, 1, "Event has been called");
+    expect(logic.items.length, 0, "We do not save");
     action.itemSelector.koValue("q2");
     logic.saveEditableItem();
-    expect.equal(callCount, 2, "Event has been called one mor3e time");
-    expect.equal(logic.items.length, 1, "We save it now, no errors");
+    expect(callCount, 2, "Event has been called one mor3e time");
+    expect(logic.items.length, 1, "We save it now, no errors");
   });
   
   test(
@@ -1273,18 +1228,18 @@ test("Add new action immediately", () => {
       logic.onLogicItemRemoved.add((_, options) => {
         removedCallCount++;
       });
-      expect.equal(removingCallCount, 0, "Event has not been called yet");
-      expect.equal(removedCallCount, 0, "Event has not been called yet");
+      expect(removingCallCount, 0, "Event has not been called yet");
+      expect(removedCallCount, 0, "Event has not been called yet");
   
       logic.removeItem(logic.items[0]);
-      expect.equal(logic.items.length, 1, "There is no more items");
-      expect.equal(removingCallCount, 1, "Event has been called");
-      expect.equal(removedCallCount, 0, "Event has been called");
+      expect(logic.items.length, 1, "There is no more items");
+      expect(removingCallCount, 1, "Event has been called");
+      expect(removedCallCount, 0, "Event has been called");
   
       logic.removeItem(logic.items[0]);
-      expect.equal(logic.items.length, 0, "There is no more items");
-      expect.equal(removingCallCount, 2, "Event has been called");
-      expect.equal(removedCallCount, 1, "Event has been called");
+      expect(logic.items.length, 0, "There is no more items");
+      expect(removingCallCount, 2, "Event has been called");
+      expect(removedCallCount, 1, "Event has been called");
     }
   );
   
@@ -1306,7 +1261,7 @@ test("Add new action immediately", () => {
         ],
       };
       var logic = new SurveyLogic(creator.survey, creator);
-      expect.equal(logic.items.length, 1, "We have one item here");
+      expect(logic.items.length, 1, "We have one item here");
     }
   );
   test("Hide/show logic types in actions", () => {
@@ -1349,61 +1304,61 @@ test("Add new action immediately", () => {
       logic.getTypeByName("trigger_complete")
     );
     expect.ok(lt1Skip, "lt1Skip is here");
-    expect.equal(lt1Skip.koVisible(), true, "initial, lt1Skip");
-    expect.equal(lt1Complete.koVisible(), true, "initial, lt1Complete");
-    expect.equal(lt2Skip.koVisible(), true, "initial, lt2Skip");
-    expect.equal(lt2Complete.koVisible(), true, "initial, lt2Complete");
+    expect(lt1Skip.koVisible(), true, "initial, lt1Skip");
+    expect(lt1Complete.koVisible(), true, "initial, lt1Complete");
+    expect(lt2Skip.koVisible(), true, "initial, lt2Skip");
+    expect(lt2Complete.koVisible(), true, "initial, lt2Complete");
   
     action1.logicType = logic.getTypeByName("trigger_complete");
-    expect.equal(lt1Skip.koVisible(), true, "action1 set complete, lt1Skip");
-    expect.equal(
+    expect(lt1Skip.koVisible(), true, "action1 set complete, lt1Skip");
+    expect(
       lt1Complete.koVisible(),
       true,
       "action1 set complete, lt1Complete"
     );
-    expect.equal(lt2Skip.koVisible(), true, "action1 set complete, lt2Skip");
-    expect.equal(
+    expect(lt2Skip.koVisible(), true, "action1 set complete, lt2Skip");
+    expect(
       lt2Complete.koVisible(),
       false,
       "action1 set complete, lt2Complete"
     );
   
     action2.logicType = logic.getTypeByName("trigger_skip");
-    expect.equal(lt1Skip.koVisible(), false, "action2 set skip, lt1Skip");
-    expect.equal(lt1Complete.koVisible(), true, "action2 set skip, lt1Complete");
-    expect.equal(lt2Skip.koVisible(), true, "action2 set skip, lt2Skip");
-    expect.equal(lt2Complete.koVisible(), false, "action2 set skip, lt2Complete");
+    expect(lt1Skip.koVisible(), false, "action2 set skip, lt1Skip");
+    expect(lt1Complete.koVisible(), true, "action2 set skip, lt1Complete");
+    expect(lt2Skip.koVisible(), true, "action2 set skip, lt2Skip");
+    expect(lt2Complete.koVisible(), false, "action2 set skip, lt2Complete");
   
     action1.logicType = null;
-    expect.equal(lt1Skip.koVisible(), false, "action1 set null, lt1Skip");
-    expect.equal(lt1Complete.koVisible(), true, "action1 set null, lt1Complete");
-    expect.equal(lt2Skip.koVisible(), true, "action1 set null, lt2Skip");
-    expect.equal(lt2Complete.koVisible(), true, "action1 set null, lt2Complete");
+    expect(lt1Skip.koVisible(), false, "action1 set null, lt1Skip");
+    expect(lt1Complete.koVisible(), true, "action1 set null, lt1Complete");
+    expect(lt2Skip.koVisible(), true, "action1 set null, lt2Skip");
+    expect(lt2Complete.koVisible(), true, "action1 set null, lt2Complete");
   
     var action3 = logic.addNewAction();
     action3.logicType = logic.getTypeByName("trigger_complete");
-    expect.equal(lt1Skip.koVisible(), false, "action3 set complete, lt1Skip");
-    expect.equal(
+    expect(lt1Skip.koVisible(), false, "action3 set complete, lt1Skip");
+    expect(
       lt1Complete.koVisible(),
       false,
       "action3 set complete, lt1Complete"
     );
-    expect.equal(lt2Skip.koVisible(), true, "action3 set complete, lt2Skip");
-    expect.equal(
+    expect(lt2Skip.koVisible(), true, "action3 set complete, lt2Skip");
+    expect(
       lt2Complete.koVisible(),
       false,
       "action3 set complete, lt2Complete"
     );
   
     logic.removeAction(action3);
-    expect.equal(lt1Skip.koVisible(), false, "action3 is removed, lt1Skip");
-    expect.equal(
+    expect(lt1Skip.koVisible(), false, "action3 is removed, lt1Skip");
+    expect(
       lt1Complete.koVisible(),
       true,
       "action3 is removed, lt1Complete"
     );
-    expect.equal(lt2Skip.koVisible(), true, "action3 is removed, lt2Skip");
-    expect.equal(
+    expect(lt2Skip.koVisible(), true, "action3 is removed, lt2Skip");
+    expect(
       lt2Complete.koVisible(),
       true,
       "action3 is removed, lt2Complete"
@@ -1411,14 +1366,14 @@ test("Add new action immediately", () => {
   });
   test("Logic addNewText", () => {
     var logic = new SurveyLogic(new SurveyModel());
-    expect.equal(logic.addNewText, "Add New", "Get default value");
+    expect(logic.addNewText, "Add New", "Get default value");
     (<any>defaultStrings).ed.lg["addNewItem"] = "Add New Rule";
-    expect.equal(
+    expect(
       logic.addNewText,
       "Add New Rule",
       "Get value from logic strings"
     );
     (<any>defaultStrings).ed.lg["addNewItem"] = "";
-    expect.equal(logic.addNewText, "Add New", "Get default value again");
+    expect(logic.addNewText, "Add New", "Get default value again");
   });
   */
