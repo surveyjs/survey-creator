@@ -62,7 +62,7 @@ export class SurveyLogicType {
   public get showTitlesInExpression(): boolean {
     return !!this.options && this.options.showTitlesInExpressions;
   }
-  public saveElement(el: Base) {
+  public saveNewElement(el: Base) {
     var collection: Array<Base> = !!this.logicType.getCollection
       ? this.logicType.getCollection(this.survey)
       : null;
@@ -127,7 +127,6 @@ export class SurveyLogicType {
 }
 
 export class SurveyLogicTypes {
-  public static visibleActions: Array<string> = [];
   public static types = [
     {
       name: "page_visibility",

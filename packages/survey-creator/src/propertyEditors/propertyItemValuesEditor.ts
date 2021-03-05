@@ -179,9 +179,9 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   private updateArrayValue(items: any) {
     if (!this.originalValue) return;
     if (!items) items = [];
+    //TODO magic value 20
     if (Math.abs(this.originalValue.length - items.length) > 20) {
       this.object[this.property.name] = items;
-      //this.beforeShow();
     } else {
       SurveyHelper.applyItemValueArray(this.originalValue, items);
     }

@@ -3,6 +3,7 @@ import { ConditionEditor } from "../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
+import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
 
@@ -68,14 +69,26 @@ export class SurveyLogicUI extends SurveyLogic {
     this.expressionEditor.apply();
     this.itemEditor.apply();
     this.editableItem.apply(this.expressionEditor.text);
+    if (this.editableItem.actions.length != this.itemEditor.panels.length) {
+      this.itemEditor.editableItem = this.editableItem;
+    }
   }
   protected hasErrorInUI(): boolean {
-    var expErrors = !this.expressionEditor.isReady;
-    var itemEditorsErrors = this.itemEditor.hasErrors();
-    return expErrors || itemEditorsErrors;
+    if (!this.expressionEditor.isReady) {
+      this.errorText = getLogicString("expressionInvalid");
+      return true;
+    }
+    if (this.itemEditor.hasErrors()) {
+      this.errorText = getLogicString("actionInvalid");
+      return true;
+    }
+    return false;
   }
   protected getExpressionText(): string {
     return this.expressionEditor.text;
+  }
+  protected getEditingActions(): Array<SurveyLogicAction> {
+    return this.itemEditor.getEditingActions();
   }
   protected getLogicItemSurveyJSON(): any {
     var json = {
@@ -178,7 +191,7 @@ export class SurveyLogicUI extends SurveyLogic {
       },
     });
   }
-  private get addNewText(): string {
+  public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
   }
