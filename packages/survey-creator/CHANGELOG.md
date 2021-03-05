@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.34](https://github.com/surveyjs/survey-creator/compare/v1.8.33...v1.8.34) (2021-03-05)
+
+
+### Bug Fixes
+
+* Move page requiredIf property into "Logic" section [#1095](https://github.com/surveyjs/survey-creator/issues/1095) ([c9d223a](https://github.com/surveyjs/survey-creator/commit/c9d223a480a87db16d504602cb3765cc2a4706e9))
+
 ### [1.8.33](https://github.com/surveyjs/survey-creator/compare/v1.8.32...v1.8.33) (2021-03-02)
 
 
