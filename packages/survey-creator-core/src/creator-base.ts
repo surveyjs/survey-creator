@@ -24,6 +24,7 @@ import { isPropertyVisible, propertyExists } from "./utils/utils";
 import "./components/creator.scss";
 import { PropertyGridModel } from "./property-grid";
 import { TabTestPlugin } from "./components/tabs/test";
+import { TabLogicPlugin } from "./entries";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -513,6 +514,7 @@ export class CreatorBase<T extends SurveyModel>
         new TabJsonEditorTextareaPlugin(this);
       }
     }
+    new TabLogicPlugin(this);
   }
   private initToolbar() {
     const items: Array<IActionBarItem> = [];

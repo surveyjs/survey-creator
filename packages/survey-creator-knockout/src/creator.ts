@@ -3,7 +3,6 @@ import { property } from "survey-core";
 import { Survey, ImplementorBase } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 import { TabTranslationPlugin } from "./components/tabs/translation";
-import { TabLogicPlugin } from "./components/tabs/logic";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
@@ -25,7 +24,6 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   private _dummyinitTabsPlugin(): void {
     new TabTranslationPlugin(this);
-    new TabLogicPlugin(this);
   }
   protected onViewTypeChanged(newType: string) {
     const plugin = this.plugins[newType];

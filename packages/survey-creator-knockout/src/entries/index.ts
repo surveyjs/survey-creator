@@ -8,6 +8,7 @@ export * from "../components/tabs/_dummy_embed";
 export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-textarea";
+export * from "../components/tabs/logic";
 export * from "../components/page";
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
