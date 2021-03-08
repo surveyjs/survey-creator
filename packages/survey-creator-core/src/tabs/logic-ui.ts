@@ -226,9 +226,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public model: LogicModel;
   constructor(creator: CreatorBase<SurveyModel>) {
     this.model = new LogicModel(creator);
-    this.model.onCreateLogic = (logic: SurveyLogicUI) => {
-      this.onLogicCreated(logic);
-    };
     creator.tabs.push({
       id: "logic",
       title: editorLocalization.getString("ed.logic"),
@@ -248,5 +245,4 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public deactivate(): boolean {
     return this.model.deactivate();
   }
-  protected onLogicCreated(logic: SurveyLogicUI) {}
 }

@@ -5,6 +5,8 @@ if (!window["%hammerhead%"]) {
   let options = {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false
+    showLogicTab: true,
+    showTranslationTab: true,
   };
   let creator = new SurveyCreatorKnockout.SurveyCreator(options);
   let json = {

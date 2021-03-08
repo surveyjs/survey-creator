@@ -67,10 +67,6 @@ export class LogicUIComponent extends SurveyElementBase<any, any> {
     );
   }
 }
-ReactElementFactory.Instance.registerElement("svc-tab-logic-ui", (props) => {
-  return React.createElement(LogicUIComponent, props);
-});
-
 ReactElementFactory.Instance.registerElement("svc-tab-logic", (props) => {
   return React.createElement(TabLogicComponent, props);
 });
