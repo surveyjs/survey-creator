@@ -48,6 +48,7 @@ export class TranslationItemString extends Base {
     this.text = this.locString.getLocaleText(this.locale);
   }
   @property() text: string;
+  @property() placeholder: string;
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "text") {
@@ -109,6 +110,9 @@ export class TranslationItem extends TranslationItemBase {
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
       var val = new TranslationItemString(this.locString, loc);
+      if (!loc) {
+        val.placeholder = this.defaultValue;
+      }
       this.hashValues[loc] = val;
       this.fireOnObjCreating(val);
     }
