@@ -164,13 +164,13 @@ The strings localization is supported by the community. Survey Creator strings a
 To change the current "en" locale to another one, you will have to write one line of code:
 ```javascript
 //Make french locale active
-SurveyCreator.localization.currentLocale = "fr";
+SurveyCreator.editorLocalization.currentLocale = "fr";
 ```
 If you want to change a text of any Survey Creator element, then you may use the following code:
 ```javascript
-var curLocale = SurveyCreator.localization.currentLocale;
+var curLocale = SurveyCreator.editorLocalization.currentLocale;
 // get the current locale strings object
-var curStrings = SurveyCreator.localization.getLocale("");
+var curStrings = SurveyCreator.editorLocalization.getLocale("");
 //change the text for visible property in Property Grid
 curStrings.p.visible = "Is visible";
 //change the text for visible property in Modal Editor

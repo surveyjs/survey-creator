@@ -24,6 +24,8 @@ import { isPropertyVisible, propertyExists } from "./utils/utils";
 import "./components/creator.scss";
 import { PropertyGridModel } from "./property-grid";
 import { TabTestPlugin } from "./components/tabs/test";
+import { TabLogicPlugin } from "./tabs/logic-ui";
+import { TabTranslationPlugin } from "./tabs/translation";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -466,6 +468,7 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "designer",
       });
     }
+    /*
     if (this.showLogicTab) {
       tabs.push({
         id: "logic",
@@ -496,7 +499,7 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "translation",
       });
     }
-
+    */
     this.tabs = tabs;
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
@@ -506,12 +509,18 @@ export class CreatorBase<T extends SurveyModel>
     if (this.showTestSurveyTab) {
       new TabTestPlugin(this);
     }
+    if (this.showLogicTab) {
+      new TabLogicPlugin(this);
+    }
     if (this.showJSONEditorTab) {
       if (TabJsonEditorAcePlugin.hasAceEditor()) {
         new TabJsonEditorAcePlugin(this);
       } else {
         new TabJsonEditorTextareaPlugin(this);
       }
+    }
+    if (this.showTranslationTab) {
+      new TabTranslationPlugin(this);
     }
   }
   private initToolbar() {

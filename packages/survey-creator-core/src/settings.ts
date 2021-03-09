@@ -25,6 +25,8 @@ export var settings = {
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
   },
+  visibleLogicActions: [],
+
   //TODO add maximumColumnCount
 };
 

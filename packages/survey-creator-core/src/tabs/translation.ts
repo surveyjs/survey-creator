@@ -23,6 +23,7 @@ import {
   settings,
 } from "../settings";
 import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
+import { CreatorBase, ICreatorPlugin } from "../creator-base";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -47,6 +48,7 @@ export class TranslationItemString extends Base {
     this.text = this.locString.getLocaleText(this.locale);
   }
   @property() text: string;
+  @property() placeholder: string;
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "text") {
@@ -108,6 +110,9 @@ export class TranslationItem extends TranslationItemBase {
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
       var val = new TranslationItemString(this.locString, loc);
+      if (!loc) {
+        val.placeholder = this.defaultValue;
+      }
       this.hashValues[loc] = val;
       this.fireOnObjCreating(val);
     }
@@ -893,5 +898,55 @@ export class Translation extends Base implements ITranslationLocales {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
+  }
+}
+
+export class TranslationModel extends Base {
+  onTranslationObjCreated: (obj: Base) => void;
+  constructor(private creator: CreatorBase<SurveyModel>) {
+    super();
+  }
+  @property() translation: Translation;
+  @property() showTranslation: boolean;
+  public activate(): void {
+    var translation = new Translation(
+      this.creator.survey,
+      this.creator,
+      (obj: Base) => {
+        if (!!this.onTranslationObjCreated) this.onTranslationObjCreated(obj);
+      }
+    );
+    this.translation = translation;
+    this.showTranslation = true;
+  }
+  public deactivate(): boolean {
+    this.showTranslation = false;
+    this.translation = undefined;
+    return true;
+  }
+}
+
+export class TabTranslationPlugin implements ICreatorPlugin {
+  public model: TranslationModel;
+  constructor(creator: CreatorBase<SurveyModel>) {
+    this.model = new TranslationModel(creator);
+    creator.tabs.push({
+      id: "translation",
+      title: editorLocalization.getString("ed.translation"),
+      component: "svc-tab-translation",
+      data: this,
+      action: () => {
+        creator.makeNewViewActive("translation");
+        this.activate();
+      },
+      active: () => creator.viewType === "translation",
+    });
+    creator.plugins["translation"] = this;
+  }
+  public activate(): void {
+    this.model.activate();
+  }
+  public deactivate(): boolean {
+    return this.model.deactivate();
   }
 }

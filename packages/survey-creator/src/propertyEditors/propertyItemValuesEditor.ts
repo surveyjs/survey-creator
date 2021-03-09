@@ -178,7 +178,13 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   }
   private updateArrayValue(items: any) {
     if (!this.originalValue) return;
-    SurveyHelper.applyItemValueArray(this.originalValue, items);
+    if (!items) items = [];
+    //TODO magic value 20
+    if (Math.abs(this.originalValue.length - items.length) > 20) {
+      this.object[this.property.name] = items;
+    } else {
+      SurveyHelper.applyItemValueArray(this.originalValue, items);
+    }
   }
   protected getItemsText(): string {
     var items = [];

@@ -13,7 +13,11 @@ import {
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { ConditionEditor } from "../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions,
+  settings,
+} from "../settings";
 import {
   ISurveyLogicItemOwner,
   SurveyLogicItem,
@@ -26,11 +30,12 @@ import {
 } from "./logic-types";
 
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
+  private editableItemValue: SurveyLogicItem;
   public static get visibleActions(): Array<string> {
-    return SurveyLogicTypes.visibleActions;
+    return settings.visibleLogicActions;
   }
   public static set visibleActions(val: Array<string>) {
-    SurveyLogicTypes.visibleActions = val;
+    settings.visibleLogicActions = val;
   }
   public static get types() {
     return SurveyLogicTypes.types;
@@ -49,7 +54,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   /**
    * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
    * You can use options.item.actions to access actions and optionally set errorText to a particular action.
-   * <br/> options.item is the saved logic item.
+   * <br/> options.item is the editing logic item. options.item.actions contains the old actions.
+   * <br/> options.actions is the array of  logic actions that user edit and create.
    * <br/> usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
    * <br/> error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
    */
@@ -96,13 +102,17 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
    */
   @property() mode: string;
   @property() errorText: string;
-  @property() editableItem: SurveyLogicItem;
   @property() readOnly: boolean;
   @property() placeholderHtml: string;
+
+  public get editableItem(): SurveyLogicItem {
+    return this.editableItemValue;
+  }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "mode") {
+      this.errorText = "";
       if (newValue == "view" && (oldValue == "edit" || oldValue == "new")) {
         this.onEndEditing();
       }
@@ -135,8 +145,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   private updateVisibleItems() {
     this.items = this.buildItems(true);
-    this.editableItem = null;
-    this.errorText = "";
+    this.editableItemValue = null;
   }
   public get optionsReadOnly() {
     return !!this.options && this.options.readOnly;
@@ -178,43 +187,25 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public hasError(): boolean {
     if (!this.editableItem) return true;
     if (this.hasErrorInUI()) return true;
-    var text = "";
-    /*
-    if (!this.isExpressionValid) {
-      text = getLogicString("expressionInvalid");
-    }
-    */
-    //TODO
-    /*
-    var ops = this.editableItem.actions;
-    if (!text && ops.length == 0) {
-      text = getLogicString("noActionError");
-    }
-    if (!text) {
-      for (var i = 0; i < ops.length; i++) {
-        if (ops[i].hasError()) {
-          text = getLogicString("actionInvalid");
-        }
-      }
-    }
-    */
     var exp = new ExpressionRunner(this.getExpressionText());
     var options = {
       item: this.editableItem,
-      error: text,
+      error: "",
       usedNamesInExpression: exp.getVariables(),
+      actions: this.getEditingActions(),
     };
     this.onLogicItemValidation.fire(this, options);
-    text = options.error;
-
-    this.errorText = text;
-    return !!text;
+    this.errorText = options.error;
+    return !!this.errorText;
   }
   protected hasErrorInUI(): boolean {
     return false;
   }
   protected getExpressionText(): string {
     return "";
+  }
+  protected getEditingActions(): Array<SurveyLogicAction> {
+    return [];
   }
   private renameQuestionCore(
     oldName: string,
@@ -233,21 +224,21 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public addNew() {
     !!this.options && this.options.startUndoRedoTransaction();
     var logicItem = new SurveyLogicItem(this);
-    this.editableItem = logicItem;
+    this.editableItemValue = logicItem;
     this.onStartEditing();
     this.mode = "new";
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   public editItem(item: SurveyLogicItem) {
     !!this.options && this.options.startUndoRedoTransaction();
-    this.editableItem = item;
+    this.editableItemValue = item;
     this.onStartEditing();
     this.mode = "edit";
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   protected onStartEditing() {}
   protected onEndEditing() {
-    this.editableItem = null;
+    this.editableItemValue = null;
   }
   public removeItem(item: SurveyLogicItem) {
     var eventOptions = { item: item, allowRemove: true };
