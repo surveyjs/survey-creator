@@ -32,6 +32,9 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+    this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
+      this.removeItem(this.items[options.rowIndex]);
+    });
     this.updateItemsSurveyData();
     this.setupToolbarItems();
     this.itemEditorValue = new LogicItemEditor(null, this.options);

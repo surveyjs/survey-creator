@@ -422,3 +422,19 @@ test("SurveyLogicUI: create trigger_runExpression trigger", () => {
   expect(actions).toHaveLength(1);
   expect(actions[0].id).toEqual("property-grid-clear");
 });
+test("LogicItemEditorUI: remove item", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 1" },
+    ],
+  });
+  expect(survey.getQuestionByName("q2").visibleIf).toBeTruthy();
+  var logic = new SurveyLogicUI(survey);
+  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
+});
