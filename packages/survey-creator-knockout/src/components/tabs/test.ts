@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { TestSurveyTabViewModel, TabTestPlugin } from "@survey/creator";
+import { TabTestPlugin } from "@survey/creator";
 
 const template = require("./test.html");
 // import template from "./test.html";
