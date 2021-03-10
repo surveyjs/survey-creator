@@ -3,7 +3,7 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
@@ -149,7 +149,7 @@ module.exports = function (options) {
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
+      plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
       alias: {
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },
@@ -227,16 +227,16 @@ module.exports = function (options) {
         amd: "knockout",
       },
       "survey-core": {
-        root: "SurveyCore",
-        commonjs2: "survey-core",
-        commonjs: "survey-core",
-        amd: "survey-core",
+        root: "Survey",
+        commonjs2: "Survey",
+        commonjs: "Survey",
+        amd: "Survey",
       },
       "survey-knockout-ui": {
         root: "SurveyKnockout",
-        commonjs2: "survey-knockout-ui",
-        commonjs: "survey-knockout-ui",
-        amd: "survey-knockout-ui",
+        commonjs2: "SurveyKnockout",
+        commonjs: "SurveyKnockout",
+        amd: "SurveyKnockout",
       },
     },
     plugins: [

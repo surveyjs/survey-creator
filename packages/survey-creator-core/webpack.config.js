@@ -229,10 +229,10 @@ module.exports = function (options) {
         amd: "knockout",
       },
       "survey-core": {
-        root: "SurveyCore",
-        commonjs2: "survey-core",
-        commonjs: "survey-core",
-        amd: "survey-core",
+        root: "Survey",
+        commonjs2: "Survey",
+        commonjs: "Survey",
+        amd: "Survey",
       },
     },
     plugins: [

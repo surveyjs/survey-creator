@@ -1,5 +1,6 @@
 import * as ko from "knockout";
-import { Page, Question, Survey } from "survey-knockout-ui";
+import { Page, Survey } from "survey-knockout-ui";
+import { Question } from "survey-core";
 import { SurveyCreator } from "./creator";
 
 export class ElementWrapperFactory {
