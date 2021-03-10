@@ -10,7 +10,7 @@ ko.components.register("svc-tab-json-editor-textarea", {
       const plugin: TabJsonEditorTextareaPlugin = params.data;
       new ImplementorBase(plugin.model);
       return plugin.model;
-    },
+    }
   },
-  template: template,
+  template: template
 });

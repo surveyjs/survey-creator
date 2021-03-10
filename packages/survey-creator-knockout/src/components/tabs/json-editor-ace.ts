@@ -18,7 +18,7 @@ ko.components.register("svc-tab-json-editor-ace", {
       new ImplementorBase(plugin.model);
       plugin.model.init(aceEditor);
       return plugin.model;
-    },
+    }
   },
-  template: template,
+  template: template
 });
