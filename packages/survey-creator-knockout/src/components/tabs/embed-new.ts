@@ -3,21 +3,15 @@ import { Base, SurveyModel, property } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 //import { TabEmbedPlugin } from "@survey/creator";
 import { ICreatorPlugin, CreatorBase, getLocString } from "@survey/creator";
+import { json } from "./embed-json";
 const template: any = require("./embed-new.html");
 // import template from "./json-editor-textarea.html";
 
 export class EmbedModel extends Base {
-  private readonly json: any = {
-    questions: [
-      {
-        type: "text"
-      }
-    ]
-  };
   @property() survey: SurveyModel;
   constructor(private creator: CreatorBase<SurveyModel>) {
     super();
-    this.survey = creator.createSurvey(this.json, "embed");
+    this.survey = creator.createSurvey(json, "embed");
   }
 }
 
