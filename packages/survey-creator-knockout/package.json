@@ -22,7 +22,6 @@
     "testcafe:ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
     "testcafe:file": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/adorners.js\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
-    "prebuild": "copy-library",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "watch:dev": "webpack --env.buildType dev --watch",
     "-prestorybook": "npm run test:generate-output",
@@ -86,7 +85,7 @@
   "dependencies": {
     "knockout": "^3.5.1",
     "rmodal": "^1.0.36",
-    "survey-core": "../../../survey-library/packages-ui/survey-core",
-    "survey-knockout-ui": "../../../survey-library/packages-ui/survey-knockout-ui"
+    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-knockout-ui": "../../../survey-library/build/survey-knockout-ui"
   }
 }

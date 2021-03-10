@@ -22,7 +22,6 @@
     "testcafe:ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
     "testcafe:file": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/adorners.js\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
-    "prebuild": "copy-library",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "watch:dev": "webpack --env.buildType dev --watch",
     "-prestorybook": "npm run test:generate-output",
@@ -88,8 +87,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rmodal": "^1.0.36",
-    "survey-core": "../../../survey-library/packages-ui/survey-core",
-    "survey-react-ui": "../../../survey-library/packages-ui/survey-react-ui"
+    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-react-ui": "../../../survey-library/build/survey-react-ui"
   },
   "husky": {
     "hooks": {

@@ -14,6 +14,8 @@ import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test";
+import { TabTranslationPlugin } from "./tabs/translation";
+import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import "./components/creator.scss";
 
@@ -458,6 +460,7 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "designer",
       });
     }
+    /*
     if (this.showLogicTab) {
       tabs.push({
         id: "logic",
@@ -488,7 +491,7 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "translation",
       });
     }
-
+    */
     this.tabs = tabs;
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
@@ -498,12 +501,18 @@ export class CreatorBase<T extends SurveyModel>
     if (this.showTestSurveyTab) {
       new TabTestPlugin(this);
     }
+    if (this.showLogicTab) {
+      new TabLogicPlugin(this);
+    }
     if (this.showJSONEditorTab) {
       if (TabJsonEditorAcePlugin.hasAceEditor()) {
         new TabJsonEditorAcePlugin(this);
       } else {
         new TabJsonEditorTextareaPlugin(this);
       }
+    }
+    if (this.showTranslationTab) {
+      new TabTranslationPlugin(this);
     }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);

@@ -7,4 +7,6 @@ export * from "../components/tabs/Designer";
 export * from "../components/tabs/JsonEditorAce";
 export * from "../components/tabs/JsonEditorTextarea";
 export * from "../components/tabs/Preview";
+export * from "../components/tabs/Logic";
+export * from "../components/tabs/Translation";
 export * from "../components/toolbox/Toolbox";

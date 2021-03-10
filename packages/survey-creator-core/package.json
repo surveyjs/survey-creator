@@ -8,7 +8,6 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
-    "prebuild": "copy-library",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "test": "jest",
     "test:dev": "jest --watch"
@@ -18,7 +17,7 @@
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-core": "../../../survey-library/packages-ui/survey-core"
+    "survey-core": "../../../survey-library/build/survey-core"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",

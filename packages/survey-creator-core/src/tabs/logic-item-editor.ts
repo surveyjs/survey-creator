@@ -1,21 +1,12 @@
 import {
   SurveyModel,
   Serializer,
-  ConditionsParser,
   QuestionPanelDynamicModel,
-  Operand,
-  UnaryOperand,
-  BinaryOperand,
-  Variable,
-  Const,
-  ArrayOperand,
   ItemValue,
   PanelModel,
   Helpers,
   Base,
-  JsonObject,
-  Question,
-  PageModel,
+  FunctionFactory,
 } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import {
@@ -31,11 +22,27 @@ import {
 } from "./logic-types";
 import { editorLocalization } from "../editorLocalization";
 
+function logicTypeVisibleIf(params: any): boolean {
+  if (!this.question || !this.question.parentQuestion || params.length != 1)
+    return true;
+  var panels = this.question.parentQuestion.panels;
+  if (panels.length < 2) return true;
+  for (var i = 0; i < panels.length; i++) {
+    var q = panels[i].getQuestionByName("logicTypeName");
+    if (q == this.question) continue;
+    if (q.value == params[0]) return false;
+  }
+  return true;
+}
+
+FunctionFactory.Instance.register("logicTypeVisibleIf", logicTypeVisibleIf);
+
 export class LogicItemEditor extends PropertyEditorSetupValue {
   private logicTypeChoices: Array<ItemValue>;
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
+  private initialSelectedElements: any = {};
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -85,6 +92,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   public set editableItem(val: SurveyLogicItem) {
     this.editableItemValue = val;
+    this.buildInitialSelectedElements();
     this.buildPanels();
   }
   public get survey() {
@@ -115,6 +123,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   protected getSurveyJSON(): any {
     return {
+      clearInvisibleValues: "onHidden",
       elements: [
         {
           type: "paneldynamic",
@@ -129,6 +138,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               titleLocation: "hidden",
               isRequired: true,
               optionsCaption: getLogicString("selectedActionCaption"),
+              requiredErrorText: this.getLocString("pe.conditionActionEmpty"),
             },
             {
               name: "logicTypeDescription",
@@ -162,7 +172,30 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     return true;
   }
+  public getEditingActions(): Array<SurveyLogicAction> {
+    var res = [];
+    for (var i = 0; i < this.panels.length; i++) {
+      var action = this.getOrCreateActionByPanel(this.panels[i]);
+      if (!!action) {
+        res.push(action);
+      }
+    }
+    return res;
+  }
   private applyPanel(panel: PanelModel) {
+    var action = this.getActionByPanel(panel);
+    var newAction = this.getOrCreateActionByPanel(panel);
+    if (action === newAction) return;
+    this.editableItem.replaceAction(newAction, action);
+    panel["action"] = newAction;
+    this.setElementPanelObj(panel, newAction.element);
+    var elementPanel = this.getElementPanelObj(panel);
+    if (!!elementPanel) {
+      var logicType = this.getLogicTypeByPanel(panel);
+      logicType.saveNewElement(elementPanel);
+    }
+  }
+  private getOrCreateActionByPanel(panel: PanelModel): SurveyLogicAction {
     var action = this.getActionByPanel(panel);
     var logicType = this.getLogicTypeByPanel(panel);
     var elementPanel = this.getElementPanelObj(panel);
@@ -181,16 +214,26 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (!!elementPanel) {
         action.element.fromJSON(elementPanel.toJSON());
       }
-    } else {
-      var newAction = new SurveyLogicAction(
-        logicType,
-        !!elementPanel ? elementPanel : elementSelector,
-        this.survey
-      );
-      this.editableItem.replaceAction(newAction, action);
+      return action;
     }
-    if (!!elementPanel) {
-      logicType.saveElement(elementPanel);
+    return new SurveyLogicAction(
+      logicType,
+      !!elementPanel ? elementPanel : elementSelector,
+      this.survey
+    );
+  }
+  private buildInitialSelectedElements() {
+    this.initialSelectedElements = {};
+    if (!this.editableItem) return;
+    for (var i = 0; i < this.editableItem.actions.length; i++) {
+      var action = this.editableItem.actions[i];
+      if (this.isElementSelectorVisible(action.logicType)) {
+        var lgName = action.logicTypeName;
+        if (!this.initialSelectedElements[lgName]) {
+          this.initialSelectedElements[lgName] = [];
+        }
+        this.initialSelectedElements[lgName].push(action.element);
+      }
     }
   }
   private buildPanels() {
@@ -221,7 +264,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var logicTypes = this.editableItem.getVisibleLogicTypes();
     for (var i = 0; i < logicTypes.length; i++) {
       var lt = logicTypes[i];
-      res.push(new ItemValue(lt.name, lt.displayName));
+      var item = new ItemValue(lt.name, lt.displayName);
+      if (lt.isUniqueItem) {
+        item.visibleIf = "logicTypeVisibleIf({item})";
+      }
+      res.push(item);
     }
     return res;
   }
@@ -337,12 +384,26 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         text = el.locTitle.renderedHtml;
       }
       if (!text) text = el.name;
-      res.push(new ItemValue(el.name, text));
+      var itemValue = new ItemValue(el.name, text);
+      if (
+        !!el[logicType.propertyName] &&
+        !this.isElementInInitialSelection(logicType.name, el)
+      ) {
+        itemValue.enableIf = "1=2";
+      }
+      res.push(itemValue);
     }
     res.sort(function (a, b) {
       return a.text.localeCompare(b.text);
     });
     return res;
+  }
+  private isElementInInitialSelection(
+    logicTypeName: string,
+    el: Base
+  ): boolean {
+    if (!this.initialSelectedElements[logicTypeName]) return false;
+    return this.initialSelectedElements[logicTypeName].indexOf(el) > -1;
   }
   private getSelectorOptionsText(logicType: SurveyLogicType): string {
     var elementType = logicType.baseClass;

@@ -13,11 +13,11 @@
     <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
 
-    <script src="../node_modules/survey-core/build/survey-core.js"></script>
-    <script src="../node_modules/survey-react-ui/build/survey-react-ui.js"></script>
+    <script src="../node_modules/survey-core/survey-core.js"></script>
+    <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
 
     <!--<script src="../build/survey-creator-react.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/build/modern.css" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css" />
     <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.css" /> -->
 
   </head>
@@ -131,7 +131,7 @@
         showQuestionNumbers: "off",
       };
 
-      var creator = SurveyCreatorReact.createReactSurveyCreator(json);
+      var creator = SurveyCreatorReact.createReactSurveyCreator(json, {showLogicTab : true, showTranslationTab : true});
 
       ReactDOM.render(
         <React.StrictMode>

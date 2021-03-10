@@ -3,12 +3,11 @@ import { editorLocalization } from "../editorLocalization";
 import { ExpressionRemoveVariable } from "../expressionToDisplayText";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 
-export class SurveyLogicAction extends Base {
+export class SurveyLogicAction {
   private surveyValue: SurveyModel;
   private logicTypeValue: SurveyLogicType;
   private elementValue: Base;
   constructor(logicType: SurveyLogicType, element: Base, survey: SurveyModel) {
-    super();
     this.surveyValue = survey;
     this.logicTypeValue = logicType;
     this.elementValue = element;
@@ -25,10 +24,6 @@ export class SurveyLogicAction extends Base {
   public apply(expression: string, isRenaming: boolean = false) {
     if (!!this.element && !!this.logicType) {
       this.element[this.logicType.propertyName] = expression;
-      if (!isRenaming) {
-        //TODO
-        //this.logicType.saveElement(this);
-      }
     }
   }
   public renameQuestion(oldName: string, newName: string) {
@@ -61,15 +56,6 @@ export class SurveyLogicAction extends Base {
   public get deleteActionText(): string {
     return getLogicString("deleteAction");
   }
-  public hasError(): boolean {
-    /*
-    if (!this.logicType) {
-      this.errorText = editorLocalization.getString("pe.conditionActionEmpty");
-      return true;
-    }
-    */
-    return false;
-  }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
@@ -88,18 +74,21 @@ export interface ISurveyLogicItemOwner {
   getVisibleLogicTypes(): Array<SurveyLogicType>;
 }
 
-export class SurveyLogicItem extends Base {
+export class SurveyLogicItem {
   private static counter = 0;
   private id = ++SurveyLogicItem.counter;
   private removedActions: Array<SurveyLogicAction>;
+  private actionsValue: Array<SurveyLogicAction>;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
   ) {
-    super();
+    this.actionsValue = [];
     this.removedActions = [];
   }
-  @propertyArray() actions: Array<SurveyLogicAction>;
+  public get actions(): Array<SurveyLogicAction> {
+    return this.actionsValue;
+  }
   public get name() {
     return "logicItem" + this.id;
   }

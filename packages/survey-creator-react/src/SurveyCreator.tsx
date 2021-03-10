@@ -150,8 +150,9 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   }
 }
 
-export function createReactSurveyCreator(json: any) {
-  const creator = new SurveyCreator({});
+export function createReactSurveyCreator(json: any, options: any = null) {
+  if (!options) options = {};
+  const creator = new SurveyCreator(options);
   //creator.JSON = json;
   creator.setSurvey(new Model(json));
   return creator;

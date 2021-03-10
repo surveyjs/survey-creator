@@ -11,7 +11,8 @@ module.exports = {
   },
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
-    "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
+    "\\.(jpg|png|svg)$": "<rootDir>/tests/empty-module.js",
+    "\\.html?$": "<rootDir>/tests/empty-module.js",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
