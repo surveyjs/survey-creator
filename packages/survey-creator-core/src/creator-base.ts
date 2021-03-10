@@ -1,29 +1,21 @@
 import * as Survey from "survey-core";
-import {
-  Base,
-  IActionBarItem,
-  ListModel,
-  PageModel,
-  PopupModel,
-  property,
-  propertyArray,
-  SurveyModel,
-} from "survey-core";
+import { IActionBarItem, Base, SurveyModel, ListModel, PageModel, PopupModel, property, propertyArray,  } from "survey-core";
 import { ISurveyCreatorOptions } from "./settings";
-import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
-import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionConverter } from "./questionconverter";
-import { ObjType, SurveyHelper } from "./surveyHelper";
 import { SurveyLogic } from "./tabs/logic";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
-import "./components/creator.scss";
 import { PropertyGridModel } from "./property-grid";
+import { TabEmbedPlugin } from "./components/tabs/embed";
+import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test";
+import { ObjType, SurveyHelper } from "./surveyHelper";
+import "./components/creator.scss";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -512,6 +504,9 @@ export class CreatorBase<T extends SurveyModel>
       } else {
         new TabJsonEditorTextareaPlugin(this);
       }
+    }
+    if (this.showEmbeddedSurveyTab) {
+      new TabEmbedPlugin(this);
     }
   }
   private initToolbar() {

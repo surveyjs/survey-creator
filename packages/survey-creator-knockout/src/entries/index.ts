@@ -6,6 +6,7 @@ export * from "../components/creator";
 export * from "../components/tabs/designer";
 export * from "../components/tabs/_dummy_embed";
 export * from "../components/tabs/embed";
+export * from "../components/tabs/embed-new";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/page";
