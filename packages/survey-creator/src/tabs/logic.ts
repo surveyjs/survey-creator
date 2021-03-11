@@ -263,6 +263,10 @@ export class SurveyLogicAction {
   public get templateObject(): any {
     return this.koTemplateObject();
   }
+  public get koTemplateAfterRender(): any {
+    if (!this.templateObject && !this.templateObject.editor) return undefined;
+    return this.templateObject.editor.koAfterRender;
+  }
   public get element(): Survey.Base {
     return this.koElement();
   }
