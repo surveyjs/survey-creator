@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import {
-  ActionBar,
+  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
   Survey,
@@ -55,7 +55,7 @@ export class TranslationUIComponent extends SurveyElementBase<any, any> {
       <div className="svc-creator-tab__content">
         <Survey model={this.model.settingsSurvey}></Survey>
         <div className="svc-test-tab__content-actions">
-          <ActionBar items={this.model.toolbarItems}></ActionBar>
+          <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
         </div>
         <TranslationGroupComponent
           model={this.model.root}

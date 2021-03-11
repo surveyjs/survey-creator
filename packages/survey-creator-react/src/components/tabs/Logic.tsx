@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import {
-  ActionBar,
+  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
   Survey,
@@ -50,7 +50,7 @@ export class LogicUIComponent extends SurveyElementBase<any, any> {
       return (
         <div className="svc-creator-tab__content">
           <div className="svc-test-tab__content-actions">
-            <ActionBar items={logic.toolbarItems}></ActionBar>
+            <SurveyActionBar items={logic.toolbarItems}></SurveyActionBar>
           </div>
           <Survey model={logic.itemsSurvey}></Survey>
         </div>
@@ -61,7 +61,7 @@ export class LogicUIComponent extends SurveyElementBase<any, any> {
         <Survey model={logic.expressionSurvey}></Survey>
         <Survey model={logic.itemEditorSurvey}></Survey>
         <div className="svc-test-tab__content-actions">
-          <ActionBar items={logic.toolbarEditItems}></ActionBar>
+          <SurveyActionBar items={logic.toolbarEditItems}></SurveyActionBar>
         </div>
       </div>
     );

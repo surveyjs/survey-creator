@@ -1,6 +1,6 @@
-import { Base, SurveyModel } from "survey-core";
-import { ActionBar, ReactElementFactory, Survey, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase, SurveySimulatorComponent, TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
+import { Base } from "survey-core";
+import { Survey, SurveyElementBase } from "survey-react-ui";
+import { SurveySimulatorComponent, TabTestPlugin } from "@survey/creator";
 import React from "react";
 
 export class SurveySimulator extends SurveyElementBase<any, any> {
@@ -17,26 +17,53 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   }
 
   render(): JSX.Element {
-    if(!this.model.survey) {
-      return (<div className="svd-simulator-main"></div>);
+    if (!this.model.survey) {
+      return <div className="svd-simulator-main"></div>;
     }
-    if(this.model.hasFrame) {
+    if (this.model.hasFrame) {
       return (
         <div className="svd-simulator-main">
           <div
             className="svd-simulator-wrapper"
-            style={{ width: this.model.simulatorFrame.frameWidth + 'px', height: this.model.simulatorFrame.frameHeight + 'px' }}
+            style={{
+              width: this.model.simulatorFrame.frameWidth + "px",
+              height: this.model.simulatorFrame.frameHeight + "px",
+            }}
           >
             <div
-              className={"svd-simulator-frame " + this.model.simulatorFrame.cssClass}
-              style={{ width: (this.model.landscapeOrientation ? this.model.simulatorFrame.frameHeight: this.model.simulatorFrame.frameWidth) + 'px', height: (this.model.landscapeOrientation ? this.model.simulatorFrame.frameWidth : this.model.simulatorFrame.frameHeight) + 'px' }}
-              ></div>
+              className={
+                "svd-simulator-frame " + this.model.simulatorFrame.cssClass
+              }
+              style={{
+                width:
+                  (this.model.landscapeOrientation
+                    ? this.model.simulatorFrame.frameHeight
+                    : this.model.simulatorFrame.frameWidth) + "px",
+                height:
+                  (this.model.landscapeOrientation
+                    ? this.model.simulatorFrame.frameWidth
+                    : this.model.simulatorFrame.frameHeight) + "px",
+              }}
+            ></div>
             <div
               className="svd-simulator"
-              style={{ width: this.model.simulatorFrame.width / this.model.simulatorFrame.scale + 'px', height: this.model.simulatorFrame.height / this.model.simulatorFrame.scale + 'px', transform: 'scale(' + this.model.simulatorFrame.scale + ') translate(-50%, -50%)' }}
+              style={{
+                width:
+                  this.model.simulatorFrame.width /
+                    this.model.simulatorFrame.scale +
+                  "px",
+                height:
+                  this.model.simulatorFrame.height /
+                    this.model.simulatorFrame.scale +
+                  "px",
+                transform:
+                  "scale(" +
+                  this.model.simulatorFrame.scale +
+                  ") translate(-50%, -50%)",
+              }}
             >
               <div className="svd-simulator-content">
-              <Survey model={this.model.survey} ></Survey>
+                <Survey model={this.model.survey}></Survey>
               </div>
             </div>
           </div>
@@ -46,7 +73,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
       return (
         <div className="svd-simulator-main">
           <div className="svd-simulator-content">
-          <Survey model={this.model.survey} ></Survey>
+            <Survey model={this.model.survey}></Survey>
           </div>
         </div>
       );

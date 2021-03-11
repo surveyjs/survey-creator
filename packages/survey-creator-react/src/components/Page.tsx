@@ -1,5 +1,9 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
-import { ActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
+import {
+  SurveyActionBar,
+  SurveyElementBase,
+  SurveyPage,
+} from "survey-react-ui";
 import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
 
@@ -50,7 +54,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           </span>
         </div>
         <div className="svc-page__content-actions">
-          <ActionBar items={this.model.actions}></ActionBar>
+          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
         </div>
       </div>
     );

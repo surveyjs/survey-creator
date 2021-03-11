@@ -12,7 +12,7 @@ import {
   SurveyModel,
 } from "survey-core";
 import {
-  ActionBar,
+  SurveyActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
   Model,
@@ -54,7 +54,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
-            <ActionBar items={creator.toolbarItems}></ActionBar>
+            <SurveyActionBar items={creator.toolbarItems}></SurveyActionBar>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
