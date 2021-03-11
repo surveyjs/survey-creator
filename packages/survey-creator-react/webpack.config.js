@@ -235,17 +235,11 @@ module.exports = function (options) {
         commonjs: "react-dom",
         amd: "react-dom"
       },
-      "Survey": {
-        root: "Survey",
-        commonjs2: "Survey",
-        commonjs: "Survey",
-        amd: "Survey",
-      },
       "survey-core": {
         root: "Survey",
-        commonjs2: "Survey",
-        commonjs: "Survey",
-        amd: "Survey",
+        commonjs2: "survey-core",
+        commonjs: "survey-core",
+        amd: "survey-core",
       },
       "survey-react-ui": {
         root: "SurveyReact",
