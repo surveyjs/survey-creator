@@ -217,6 +217,7 @@ module.exports = function (options) {
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: options.libraryName || "SurveyCreatorKnockout",
       libraryTarget: "umd",
+      globalObject: 'this',
       umdNamedDefine: true,
     },
     externals: {
