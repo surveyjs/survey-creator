@@ -471,16 +471,6 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "logic",
       });
     }
-    if (this.showEmbeddedSurveyTab) {
-      tabs.push({
-        id: "embed",
-        title: this.getLocString("ed.embedSurvey"),
-        component: "svc-tab-embed",
-        data: this,
-        action: () => this.makeNewViewActive("embed"),
-        active: () => this.viewType === "embed",
-      });
-    }
     if (this.showTranslationTab) {
       tabs.push({
         id: "translation",

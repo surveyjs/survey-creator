@@ -1,22 +1,14 @@
 import React from "react";
-import { Base, SurveyModel } from "survey-core";
-import {
-  SurveyActionBar,
-  ReactElementFactory,
-  SurveyElementBase,
-} from "survey-react-ui";
-import {
-  CreatorBase,
-  TabTestPlugin,
-  TestSurveyTabViewModel,
-} from "@survey/creator";
+import { Base } from "survey-core";
+import { SurveyActionBar, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
 import { CreatorSurveyResultsComponent } from "../Results";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   private model: TestSurveyTabViewModel;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     const plugin: TabTestPlugin = this.props.data;
     this.model = plugin.model;

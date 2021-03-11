@@ -1,5 +1,5 @@
 import React from "react";
-import { Base, SurveyModel } from "survey-core";
+import { Base } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
@@ -7,7 +7,6 @@ import {
   Survey,
 } from "survey-react-ui";
 import {
-  CreatorBase,
   TabTranslationPlugin,
   TranslationModel,
   Translation,
@@ -19,7 +18,7 @@ import {
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private model: TranslationModel;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     const plugin: TabTranslationPlugin = this.props.data;
     this.model = plugin.model;
@@ -40,7 +39,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
 }
 
 export class TranslationUIComponent extends SurveyElementBase<any, any> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
   }
   private get model(): Translation {
@@ -140,7 +139,7 @@ export class TranslationGroupComponent extends SurveyElementBase<any, any> {
 }
 
 export class TranslationItemComponent extends SurveyElementBase<any, any> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
   }
   private get model(): TranslationItem {
@@ -179,7 +178,7 @@ export class TranslationItemComponent extends SurveyElementBase<any, any> {
 }
 
 export class TranslationItemTextComponent extends SurveyElementBase<any, any> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
