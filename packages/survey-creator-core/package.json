@@ -13,7 +13,6 @@
     "test:dev": "jest --watch"
   },
   "dependencies": {
-    "knockout": "^3.5.0",
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",

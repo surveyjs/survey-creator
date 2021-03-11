@@ -98,6 +98,26 @@ module.exports = function (options) {
     });
   }
 
+  function removeLines(fileName, regex) {
+    replace.sync(
+      {
+        files: fileName,
+        from: regex,
+        to: "",
+      },
+      (error, changes) => {
+        if (error) {
+          return console.error("Error occurred:", error);
+        }
+        console.log("check me :     " + fileName);
+        console.log("Modified files:", changes.join(", "));
+      }
+    );
+  }
+  
+  //var packageName = chunkName || packageJson.name;
+  var packageName = packageJson.name;
+
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
@@ -110,8 +130,17 @@ module.exports = function (options) {
           outputAsModuleFolder: true,
           headerText: dts_banner,
         });
+        
+        var fileName = buildPath + packageName + ".d.ts";
 
-        replace.sync(
+        //removeLines(
+        //  fileName,
+        //  /^import\s+.*("|')survey-core("|');\s*(\n|\r)?/gm
+        //);
+        //removeLines(fileName, /^import\s+.*("|')\..*("|');\s*(\n|\r)?/gm);
+        removeLines(fileName, /export let\s+\w+:\s+\w+;/g);
+        //removeLines(fileName, /export default\s+\w+;/g);
+        /*replace.sync(
           {
             files: buildPath + packageJson.name + ".d.ts",
             from: /export let\s+\w+:\s+\w+;/,
@@ -126,7 +155,7 @@ module.exports = function (options) {
             );
             console.log("Modified files:", changes.join(", "));
           }
-        );
+        );*/
 
         rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(

@@ -226,6 +226,12 @@ module.exports = function (options) {
         commonjs: "knockout",
         amd: "knockout",
       },
+      "Survey": {
+        root: "Survey",
+        commonjs2: "Survey",
+        commonjs: "Survey",
+        amd: "Survey",
+      },
       "survey-core": {
         root: "Survey",
         commonjs2: "Survey",
