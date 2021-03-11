@@ -356,9 +356,16 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "expression", index: 10 }],
     },
     "matrixdropdowncolumn@rating": {
-      properties: ["rateValues"],
+      properties: [
+        "rateValues",
+        { name: "rateMin", tab: "rateValues" },
+        { name: "rateMax", tab: "rateValues" },
+        { name: "rateStep", tab: "rateValues" },
+        { name: "minRateDescription", tab: "rateValues" },
+        { name: "maxRateDescription", tab: "rateValues" },
+      ],
+      tabs: [{ name: "rateValues", index: 5 }],
     },
-
     multipletextitem: {
       properties: [
         "inputType",
