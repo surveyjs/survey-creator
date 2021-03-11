@@ -35,6 +35,17 @@ export class SurveyLogicUI extends SurveyLogic {
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
       this.removeItem(this.items[options.rowIndex]);
     });
+    this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
+      if (this.readOnly) return;
+      options.actions.push({
+        id: "svd-logic-edit-item",
+        title: "Edit...", //TODO need a title or icon
+        component: "sv-action-bar-item",
+        action: () => {
+          this.editItem(this.items[options.row.rowIndex - 1]);
+        },
+      });
+    });
     this.updateItemsSurveyData();
     this.setupToolbarItems();
     this.itemEditorValue = new LogicItemEditor(null, this.options);
@@ -83,6 +94,7 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.editableItem.actions.length != this.itemEditor.panels.length) {
       this.itemEditor.editableItem = this.editableItem;
     }
+    this.updateItemsSurveyData();
   }
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
@@ -149,7 +161,7 @@ export class SurveyLogicUI extends SurveyLogic {
     var data = [];
     for (var i = 0; i < this.items.length; i++) {
       data.push({
-        conditions: this.items[i].title,
+        conditions: this.items[i].expressionText,
         actions: this.items[i].actionsText,
       });
     }

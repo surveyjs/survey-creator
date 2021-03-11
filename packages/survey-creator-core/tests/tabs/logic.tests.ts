@@ -5,6 +5,7 @@ import {
   SurveyTriggerRunExpression,
   PanelModel,
   SurveyTriggerSkip,
+  QuestionMatrixDynamicModel,
 } from "survey-core";
 import { SurveyLogic } from "../../src/tabs/logic";
 import { SurveyLogicUI } from "../../src/tabs/logic-ui";
@@ -258,6 +259,30 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   expect(itemsQuestion.value).toHaveLength(2);
   expect(itemsQuestion.rowCount).toEqual(2);
 });
+test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" },
+    ],
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  var itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  var rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+  logic.editItem(logic.items[0]);
+  logic.expressionEditor.text = "{q1}=3";
+  logic.saveEditableItem();
+  rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+});
+
 test("SurveyLogicUI: Test logicItemEditor", () => {
   var survey = new SurveyModel({
     elements: [
