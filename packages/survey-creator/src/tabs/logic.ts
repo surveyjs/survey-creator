@@ -652,12 +652,19 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
         return new Survey.HtmlConditionItem();
       },
       createTemplateObject: function (element: Survey.Base) {
-        var item = <Survey.HtmlConditionItem>element;
+        //var item = <Survey.HtmlConditionItem>element;
+        var res = new SurveyElementEditorContentModel(
+          element,
+          "",
+          this.options
+        );
+        return res.getPropertyEditorByName("html");
+        /*
         return {
           koValue: ko.observable(item.html),
           readOnly: false,
           koAfterRender: function () {},
-        };
+        };*/
       },
       saveElement: function (
         survey: Survey.SurveyModel,
