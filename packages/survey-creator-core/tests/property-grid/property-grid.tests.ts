@@ -738,7 +738,7 @@ test("itemvalue[] property editor + create columns + options.onCanShowPropertyCa
   );
   expect(choicesQuestion.columns).toHaveLength(1);
 });
-/* TODO: make it work
+
 test("itemvalue[] property editor  + create columns + options.onIsPropertyReadOnlyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onIsPropertyReadOnlyCallback = (
@@ -762,11 +762,15 @@ test("itemvalue[] property editor  + create columns + options.onIsPropertyReadOn
     propertyGrid.survey.getQuestionByName("rows")
   );
   expect(choicesQuestion.columns).toHaveLength(2);
+  var rows = choicesQuestion.visibleRows;
   expect(choicesQuestion.columns[0].name).toEqual("value");
-  expect(choicesQuestion.columns[0].readOnly).toBeTruthy();
-  expect(choicesQuestion.columns[1].readOnly).toBeFalsy();
+  expect(rows[0].cells[0].question.value).toEqual(1);
+  expect(rows[0].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[0].cells[1].question.isReadOnly).toBeFalsy();
+  expect(rows[1].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[1].cells[1].question.isReadOnly).toBeFalsy();
 });
-*/
+
 test("options.onCollectionItemDeletingCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCollectionItemDeletingCallback = (
