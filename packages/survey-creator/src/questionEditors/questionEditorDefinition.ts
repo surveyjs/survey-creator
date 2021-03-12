@@ -349,7 +349,13 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "validators", index: 10 }],
     },
     "matrixdropdowncolumn@boolean": {
-      properties: ["defaultValue"],
+      properties: [
+        "defaultValue",
+        "labelTrue",
+        "labelFalse",
+        "valueTrue",
+        "valueFalse",
+      ],
     },
     "matrixdropdowncolumn@expression": {
       properties: ["displayStyle", "currency"],
