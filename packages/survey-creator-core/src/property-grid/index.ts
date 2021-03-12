@@ -361,15 +361,17 @@ export class PropertyJSONGenerator {
     );
   }
   private isPropertyReadOnly(prop: JsonObjectProperty): boolean {
-    return prop.readOnly;
-    /*
-    if (this.parentReadOnly) return true;
-    var res = this.property ? this.property.readOnly : false;
-    if (!!this.options && !!this.property && !!this.object) {
-      res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
+    var res = prop.readOnly;
+    if (!!this.options && !!this.obj) {
+      res = this.options.onIsPropertyReadOnlyCallback(
+        this.obj,
+        prop,
+        res,
+        this.parentObj,
+        this.parentProperty
+      );
     }
     return res;
-    */
   }
 
   private createJSON(isNestedObj: boolean): any {

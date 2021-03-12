@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import "./title-editor.scss";
 import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../editor";
-import { createKey2click } from '../utils/utils';
+import { createKey2click } from "../utils/utils";
 var templateHtml = require("html-loader?interpolate!val-loader!./title-editor.html");
 
 const FRIENDLY_PADDING = 42;
@@ -103,31 +103,41 @@ export class TitleInplaceEditor {
       editor.onValidateSelectedElement.add(this.onValidateSelectedElement);
     }
 
-    this.forNeibours(
-      (element, index) =>
-        {
-          element.tabIndex = 0;
-          element.onkeyup = createKey2click(element);
-          element.setAttribute('aria-label', this.getLocString('pe.titleKeyboardAdornerTip'));
-          element.setAttribute('role', 'textbox');
-          element.onclick = (e) => {
-            this.startEdit(this, e);
-            e.preventDefault();
-          }
-        }
-    );
+    this.forNeibours((element, index) => {
+      element.tabIndex = 0;
+      element.onkeyup = createKey2click(element);
+      element.setAttribute(
+        "aria-label",
+        this.getLocString("pe.titleKeyboardAdornerTip")
+      );
+      element.setAttribute("role", "textbox");
+      element.onclick = (e) => {
+        this.startEdit(this, e);
+        e.preventDefault();
+      };
+    });
   }
 
   get maxLength() {
-    if (!!this.property && this.property.maxLength && this.property.maxLength >= 0) {
+    if (
+      !!this.property &&
+      this.property.maxLength &&
+      this.property.maxLength >= 0
+    ) {
       return this.property.maxLength;
     }
     return "";
   }
 
   get readOnly() {
-    if(!!this.property && !!this.editor) {
-      return this.editor.onIsPropertyReadOnlyCallback(this.target, this.property, this.property.readOnly);
+    if (!!this.property && !!this.editor) {
+      return this.editor.onIsPropertyReadOnlyCallback(
+        this.target,
+        this.property,
+        this.property.readOnly,
+        undefined,
+        undefined
+      );
     }
     return false;
   }
@@ -167,7 +177,7 @@ export class TitleInplaceEditor {
   hideEditor = () => {
     this.isEditing(false);
     this.forNeibours((element, index) => {
-      if(index === 0 && typeof element.focus === "function") {
+      if (index === 0 && typeof element.focus === "function") {
         element.focus();
       }
       element.style.display = element.dataset["sjsOldDisplay"];
@@ -177,7 +187,7 @@ export class TitleInplaceEditor {
     if (this.readOnly) {
       return;
     }
-    if(this._needSelectTargetOnStartEdit) {
+    if (this._needSelectTargetOnStartEdit) {
       this.editor.selectedElement = this.target;
     }
     this.updatePrevName();
@@ -322,7 +332,10 @@ export var titleAdorner = {
       placeholder = editorLocalization.getString("pe.pageTitlePlaceholder");
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"title\", placeholder: "${placeholder.replace(
+      "'",
+      "&#39;"
+    )}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();
@@ -363,10 +376,13 @@ export var descriptionAdorner = {
   surveyDescriptionEditable: true,
   pageDescriptionEditable: true,
   getMarkerClass: (model) => {
-    if (typeof model.getType === "function" && (
-      (model.getType() === "page" && !descriptionAdorner.pageDescriptionEditable) ||
-      (model.getType() === "survey" && !descriptionAdorner.surveyDescriptionEditable) ||
-      !Survey.Serializer.findProperty(model.getType(), "description"))
+    if (
+      typeof model.getType === "function" &&
+      ((model.getType() === "page" &&
+        !descriptionAdorner.pageDescriptionEditable) ||
+        (model.getType() === "survey" &&
+          !descriptionAdorner.surveyDescriptionEditable) ||
+        !Survey.Serializer.findProperty(model.getType(), "description"))
     ) {
       return "";
     }
@@ -386,7 +402,10 @@ export var descriptionAdorner = {
       );
     }
     var decoration = document.createElement("span");
-    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder.replace("'", "&#39;")}", model: model, editor: editor'></title-editor>`;
+    decoration.innerHTML = `<title-editor params='name: \"description\", placeholder: "${placeholder.replace(
+      "'",
+      "&#39;"
+    )}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
     ko.tasks.runEarly();

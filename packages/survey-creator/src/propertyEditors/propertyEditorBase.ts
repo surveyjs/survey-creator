@@ -58,6 +58,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this._displayNameValue(val);
   }
   public showHelpText: boolean = true;
+  public parentObj: Survey.Base;
+  public parentProperty: Survey.JsonObjectProperty;
   public koValue = ko.observable<any>();
   public koText: any;
   public koIsDefault: any;
@@ -112,7 +114,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     });
     this.setIsRequired();
     this.setTitleAndDisplayName();
-    this.readOnly = ko.observable(this.getReadOnly());
+    this.readOnly = ko.observable(false);
   }
   public get editingValue() {
     return this.koValue();
@@ -266,8 +268,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
         this.object,
         this
       );
-      this.readOnly(this.getReadOnly());
     }
+    this.readOnly(this.getReadOnly());
   }
 
   public getValueText(value: any): string {

@@ -1,5 +1,14 @@
 import * as Survey from "survey-core";
-import { IActionBarItem, Base, SurveyModel, ListModel, PageModel, PopupModel, property, propertyArray,  } from "survey-core";
+import {
+  IActionBarItem,
+  Base,
+  SurveyModel,
+  ListModel,
+  PageModel,
+  PopupModel,
+  property,
+  propertyArray,
+} from "survey-core";
 import { ISurveyCreatorOptions } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
@@ -107,6 +116,8 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
+   * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
+   * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
   public onGetPropertyReadOnly: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
@@ -155,6 +166,8 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
    * <br/> options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
    * <br/> options.canShow a boolean value. It is true by default. Set it false to hide the property from the Properties Grid and in the Question Editor.
+   * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
+   * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    * <br/>
    * <br/> [Example: Hide a category in the Properties Grid](https://surveyjs.io/Examples/Survey-Creator?id=hidecategoryinpropertiesgrid)
    */
@@ -690,14 +703,22 @@ export class CreatorBase<T extends SurveyModel>
     var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
     return (
       !property ||
-      !this.onIsPropertyReadOnlyCallback(obj, property, property.readOnly)
+      !this.onIsPropertyReadOnlyCallback(
+        obj,
+        property,
+        property.readOnly,
+        undefined,
+        undefined
+      )
     );
   }
 
   onIsPropertyReadOnlyCallback(
     obj: Survey.Base,
     property: Survey.JsonObjectProperty,
-    readOnly: boolean
+    readOnly: boolean,
+    parentObj: Survey.Base,
+    parentProperty: Survey.JsonObjectProperty
   ): boolean {
     var proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
@@ -706,6 +727,8 @@ export class CreatorBase<T extends SurveyModel>
       property: property,
       readOnly: proposedValue,
       propertyName: property.name,
+      parentObj: parentObj,
+      parentProperty: parentProperty,
     };
     this.onGetPropertyReadOnly.fire(this, options);
     return options.readOnly;

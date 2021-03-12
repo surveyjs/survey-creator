@@ -39,7 +39,7 @@ export class SurveyLogicUI extends SurveyLogic {
       if (this.readOnly) return;
       options.actions.push({
         id: "svd-logic-edit-item",
-        title: "Edit...", //TODO need a title or icon
+        title: this.editText,
         component: "sv-action-bar-item",
         action: () => {
           this.editItem(this.items[options.row.rowIndex - 1]);
@@ -217,6 +217,9 @@ export class SurveyLogicUI extends SurveyLogic {
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
+  }
+  public get editText(): string {
+    return this.getLocString("pe.edit");
   }
 }
 

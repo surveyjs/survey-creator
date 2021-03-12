@@ -13,6 +13,7 @@ import { SurveyPropertyMultipleValuesEditor } from "../src/propertyEditors/prope
 import { EditorOptionsTests } from "./editorOptionsTests";
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { SurveyPropertyDefaultValueEditor } from "../src/propertyEditors/propertyDefaultValueEditor";
+import { SurveyPropertyItemValuesEditor } from "../src/propertyEditors/propertyItemValuesEditor";
 
 export default QUnit.module("QuestionEditorsTests");
 
@@ -837,6 +838,67 @@ QUnit.test("Question editor: change editor.readOnly", function (assert) {
     "The question 'q1' is readOnly"
   );
 });
+
+QUnit.test(
+  "Question editor: change editor.readOnly in itemvalue",
+  function (assert) {
+    var question = new Survey.QuestionMatrixDropdown("q2");
+    question.rows = ["row1", "row2"];
+    var creator = new SurveyCreator();
+    var optionsParentObjType;
+    var optionsParentPropertyName;
+    creator.onGetPropertyReadOnly.add(function (editor, options) {
+      if (!options.parentObj || !options.parentProperty) return;
+      optionsParentObjType = options.parentObj.getType();
+      optionsParentPropertyName = options.parentProperty.name;
+      options.readOnly =
+        options.propertyName === "value" &&
+        options.parentObj.getType() === "matrixdropdown" &&
+        options.parentProperty.name == "rows";
+    });
+    var tab = createSurveyQuestionEditorTab(question, ["rows"], creator);
+    var questionEditor = <SurveyPropertyItemValuesEditor>(
+      tab.editorProperties[0].editor
+    );
+    questionEditor.beforeShow();
+    var itemViewModel = questionEditor.createItemViewModel(question.rows[0]);
+    assert.ok(itemViewModel, "Creator item value");
+    assert.equal(itemViewModel.cells.length, 2, "There are two cells");
+    assert.equal(
+      itemViewModel.cells[0].value,
+      "row1",
+      "check value of the first row"
+    );
+    assert.ok(
+      itemViewModel.cells[0].editor.parentObj,
+      "parentObj set for editor"
+    );
+    assert.ok(
+      itemViewModel.cells[0].editor.parentProperty,
+      "parentProperty set for editor"
+    );
+    assert.equal(
+      optionsParentObjType,
+      "matrixdropdown",
+      "parentObj set correctly in event"
+    );
+    assert.equal(
+      optionsParentPropertyName,
+      "rows",
+      "parentProperty set correctly in event"
+    );
+    assert.equal(
+      itemViewModel.cells[0].editor.readOnly(),
+      true,
+      "item value cell is readOnly"
+    );
+    assert.equal(
+      itemViewModel.cells[1].editor.readOnly(),
+      false,
+      "item text cell is not readOnly"
+    );
+  }
+);
 
 class SurveyQuestionEditorTester extends Survey.Base {
   constructor() {
