@@ -6,7 +6,7 @@ import React from "react";
 export class SurveySimulator extends SurveyElementBase<any, any> {
   private model: SurveySimulatorComponent;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     const plugin: TabTestPlugin = this.props.data;
     this.model = new SurveySimulatorComponent(this.props.options);

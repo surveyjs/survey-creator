@@ -28,7 +28,7 @@
       style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"
     ></div>
     <script type="text/babel">
-      var json = {
+      let json = {
         completedHtml:
           "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
         completedHtmlOnCondition: [
@@ -131,7 +131,12 @@
         showQuestionNumbers: "off",
       };
 
-      var creator = SurveyCreatorReact.createReactSurveyCreator(json, {showLogicTab : true, showTranslationTab : true});
+      let options = {
+        showLogicTab: true,
+        showTranslationTab: true,
+        showEmbededSurveyTab: true
+      };
+      let creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
 
       ReactDOM.render(
         <React.StrictMode>
