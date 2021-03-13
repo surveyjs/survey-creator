@@ -166,6 +166,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "otherPlaceHolder", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" },
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
@@ -180,8 +182,6 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
-        { name: "hasNone", tab: "choices" },
-        { name: "noneText", tab: "choices" },
       ],
     },
     radiogroup: {
@@ -300,6 +300,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "colCount", tab: "choices" },
         { name: "hasSelectAll", tab: "choices" },
         { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -312,6 +313,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -324,6 +327,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "optionsCaption", tab: "choices" },
+        { name: "hasNone", tab: "choices" },
+        { name: "noneText", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
