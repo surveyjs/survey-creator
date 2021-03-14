@@ -381,9 +381,14 @@ export class SurveyQuestionEditorDefinition {
     multipletextitem: {
       properties: [
         "inputType",
+        "name",
+        "title",
+        "isRequired",
         "maxLength",
+        "size",
         "placeHolder",
         "requiredErrorText",
+        "validators",
       ],
     },
     "multipletext@items": {
