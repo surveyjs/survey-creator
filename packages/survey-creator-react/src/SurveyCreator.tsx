@@ -108,12 +108,23 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
+class DesignTimeSurveyModel extends Model {
+  constructor(public creator: SurveyCreator, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public wrapQuestion(element: JSX.Element, question: Question): JSX.Element {
+    if (this.isDesignMode) {
+      return this.creator.wrapQuestion(element, question);
+    }
+    return null;
+  }
+}
 class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
-    return new Model(json);
+    return new DesignTimeSurveyModel(this, json);
   }
   //ISurveyCreator
   public createQuestionElement(question: Question): JSX.Element {
@@ -148,12 +159,23 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   public questionErrorLocation(): string {
     return this.survey.questionErrorLocation;
   }
+
+  public wrapQuestion(element: JSX.Element, question: Question): JSX.Element {
+    return (
+      <div
+        className="my_question_wrapper"
+        style={{ border: "5px solid yellow" }}
+      >
+        {element}
+      </div>
+    );
+  }
 }
 
 export function createReactSurveyCreator(json: any, options: any = null) {
   if (!options) options = {};
   const creator = new SurveyCreator(options);
-  //creator.JSON = json;
-  creator.setSurvey(new Model(json));
+  creator.JSON = json;
+  //creator.setSurvey(new Model(json));
   return creator;
 }

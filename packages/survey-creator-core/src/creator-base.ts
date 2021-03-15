@@ -1,5 +1,14 @@
 import * as Survey from "survey-core";
-import { IActionBarItem, Base, SurveyModel, ListModel, PageModel, PopupModel, property, propertyArray,  } from "survey-core";
+import {
+  IActionBarItem,
+  Base,
+  SurveyModel,
+  ListModel,
+  PageModel,
+  PopupModel,
+  property,
+  propertyArray,
+} from "survey-core";
 import { ISurveyCreatorOptions } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
@@ -985,7 +994,6 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public selectElement(element: any) {
-    this.selection = element;
     if (typeof element.getType === "function" && element.getType() === "page") {
       this.currentPage = element;
     } else if (!!element["page"]) {
@@ -993,6 +1001,7 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.currentPage = undefined;
     }
+    this.selection = element;
     if (this.propertyGrid) {
       this.propertyGrid.obj = element;
     }

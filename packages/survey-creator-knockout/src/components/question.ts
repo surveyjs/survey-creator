@@ -1,22 +1,31 @@
 import * as ko from "knockout";
-import { Question } from "survey-core";
+import { SurveyElement, Question } from "survey-core";
 import { SurveyCreator } from "../creator";
-
+import {
+  SurveyElementViewModel,
+  SurveyElementTemplateData,
+  QuestionMatrix,
+} from "survey-knockout-ui";
 //import "./question.scss";
 const template = require("./question.html");
 // import template from "./question.html";
 
-export class QuestionViewModel {
+export class QuestionAdornerViewModel {
   public creator: SurveyCreator;
   public question: Question;
   public actions = ko.observableArray();
 
-  constructor(creator: SurveyCreator, question: Question) {
+  constructor(
+    creator: SurveyCreator,
+    question: Question,
+    public templateData: SurveyElementTemplateData
+  ) {
     this.creator = creator;
     this.question = question;
     this.actions(creator.getContextActions(question));
   }
-  select(model: QuestionViewModel, event: Event) {
+  select(model: QuestionAdornerViewModel, event: Event) {
+    event.stopPropagation();
     model.creator.selectElement(model.question);
   }
   css() {
@@ -28,7 +37,7 @@ export class QuestionViewModel {
   get isDraggable() {
     return true;
   }
-  dragStart(model: QuestionViewModel, event: DragEvent) {
+  dragStart(model: QuestionAdornerViewModel, event: DragEvent) {
     var target: any = event.target || event.srcElement;
     if (
       !!target &&
@@ -49,7 +58,7 @@ export class QuestionViewModel {
     event.dataTransfer.setData("svc-item-json", JSON.stringify(""));
     return true;
   }
-  dragOver(model: QuestionViewModel, event: DragEvent) {
+  dragOver(model: QuestionAdornerViewModel, event: DragEvent) {
     if (!model.isDraggable) return false;
     if (!event["markEvent"]) {
       event["markEvent"] = true;
@@ -60,7 +69,7 @@ export class QuestionViewModel {
     // event.dataTransfer.dropEffect = "move";
     // event.preventDefault();
   }
-  drop(model: QuestionViewModel, event: DragEvent) {
+  drop(model: QuestionAdornerViewModel, event: DragEvent) {
     var helper = model.creator.dragDropHelper;
     var preventDefault = !(
       !!helper.ddTarget &&
@@ -77,7 +86,7 @@ export class QuestionViewModel {
     // }
     // event.preventDefault();
   }
-  dragEnd(model: QuestionViewModel, event: DragEvent) {
+  dragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
     delete model.question["isDragStarted"];
     model.creator.dragDropHelper.end();
 
@@ -87,14 +96,19 @@ export class QuestionViewModel {
 
 ko.components.register("svc-question", {
   viewModel: {
-    createViewModel: (params: any, componentInfo: any) => {
-      const creator = params.creator;
+    createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
+      const creator = params.componentData;
+      const question = params.templateData.data;
       const scrollSubscription = ko.computed(() => {
-        if (creator.isElementSelected(params.question)) {
+        if (creator.isElementSelected(question)) {
           // componentInfo.element.scrollIntoView();
         }
       });
-      const model = new QuestionViewModel(creator, params.question);
+      const model = new QuestionAdornerViewModel(
+        params.componentData,
+        params.templateData.data as Question,
+        params.templateData
+      );
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         scrollSubscription.dispose();
         model.dispose();
