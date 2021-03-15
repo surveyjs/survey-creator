@@ -292,6 +292,26 @@ export class PropertyGridTitleActionsCreator {
 }
 
 export class PropertyJSONGenerator {
+  public static isPropertyReadOnly(
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions,
+    obj: Base,
+    parentObj: Base,
+    parentProperty: JsonObjectProperty
+  ): boolean {
+    var res = prop.readOnly;
+    if (!!options && !!obj) {
+      res = options.onIsPropertyReadOnlyCallback(
+        obj,
+        prop,
+        res,
+        parentObj,
+        parentProperty
+      );
+    }
+    return res;
+  }
+
   private parentProperty: JsonObjectProperty;
   private parentObj: Base;
   constructor(
@@ -361,15 +381,13 @@ export class PropertyJSONGenerator {
     );
   }
   private isPropertyReadOnly(prop: JsonObjectProperty): boolean {
-    return prop.readOnly;
-    /*
-    if (this.parentReadOnly) return true;
-    var res = this.property ? this.property.readOnly : false;
-    if (!!this.options && !!this.property && !!this.object) {
-      res = this.options.onIsEditorReadOnlyCallback(this.object, this, res);
-    }
-    return res;
-    */
+    return PropertyJSONGenerator.isPropertyReadOnly(
+      prop,
+      this.options,
+      this.obj,
+      this.parentObj,
+      this.parentProperty
+    );
   }
 
   private createJSON(isNestedObj: boolean): any {
@@ -623,6 +641,17 @@ export class PropertyGridModel {
       options
     );
     this.isCellCreating = false;
+    var obj = options.row.editingObj;
+    if (!obj) return;
+    var prop = Serializer.findProperty(obj.getType(), options.columnName);
+    if (!prop) return;
+    options.cellQuestion.readOnly = PropertyJSONGenerator.isPropertyReadOnly(
+      prop,
+      this.options,
+      obj,
+      this.obj,
+      options.question.property
+    );
   }
   private onMatrixCellValueChanging(options: any) {
     if (this.isCellCreating) return;

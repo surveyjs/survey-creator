@@ -1522,6 +1522,11 @@ QUnit.test(
     var columnsEditor = new SurveyPropertyDropdownColumnsEditor(property);
     columnsEditor.object = question;
     columnsEditor.beforeShow();
+    assert.equal(
+      columnsEditor.readOnly(),
+      true,
+      "The parent property is readOnly: columns"
+    );
     var itemViewModel = <SurveyNestedPropertyEditorItem>(
       columnsEditor.createItemViewModel(question.columns[1])
     );

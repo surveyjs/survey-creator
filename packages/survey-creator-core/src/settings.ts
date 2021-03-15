@@ -45,6 +45,13 @@ export interface ISurveyCreatorOptions {
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean;
+  onIsPropertyReadOnlyCallback(
+    obj: Base,
+    property: JsonObjectProperty,
+    readOnly: boolean,
+    parentObj: Base,
+    parentProperty: JsonObjectProperty
+  ): boolean;
   onCanDeleteItemCallback(
     object: any,
     item: Base,
@@ -119,6 +126,16 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onIsPropertyReadOnlyCallback(
+    obj: Base,
+    property: JsonObjectProperty,
+    readOnly: boolean,
+    parentObj: Base,
+    parentProperty: JsonObjectProperty
+  ): boolean {
+    return readOnly;
+  }
+
   onCanDeleteItemCallback(
     object: any,
     item: Base,

@@ -25,6 +25,7 @@ import {
   QuestionMatrixModel,
   Serializer,
   QuestionPanelDynamicModel,
+  QuestionMatrixDropdownModel,
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -592,6 +593,27 @@ test("options.onCanShowPropertyCallback and property visibility", () => {
     false
   );
 });
+test("options.onIsPropertyReadOnlyCallback and property enable/disable", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onIsPropertyReadOnlyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    readOnly: boolean,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    return property.name == "name" || property.name == "renderAs";
+  };
+  var question = new QuestionDropdownModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.survey.getQuestionByName("name").isReadOnly).toEqual(
+    true
+  );
+  expect(
+    propertyGrid.survey.getQuestionByName("isRequired").isReadOnly
+  ).toEqual(false);
+});
+
 test("property visibleIf attribute and options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanShowPropertyCallback = (
@@ -659,6 +681,36 @@ test("itemvalue[] property editor + detail panel + options.onCanShowPropertyCall
   expect(row.detailPanel.getQuestionByName("visibleIf").visible).toEqual(true);
   expect(row.detailPanel.getQuestionByName("enableIf").visible).toEqual(false);
 });
+test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onIsPropertyReadOnlyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    readOnly: boolean,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    if (!parentObj || !parentProperty) return readOnly;
+    return (
+      property.name == "enableIf" &&
+      parentObj.getType() == "matrixdropdown" &&
+      parentProperty.name == "rows"
+    );
+  };
+  var question = new QuestionMatrixDropdownModel("q1");
+  question.rows = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rows")
+  );
+  var row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(
+    false
+  );
+  expect(row.detailPanel.getQuestionByName("enableIf").readOnly).toEqual(true);
+});
+
 test("itemvalue[] property editor + create columns + options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanShowPropertyCallback = (
@@ -685,6 +737,38 @@ test("itemvalue[] property editor + create columns + options.onCanShowPropertyCa
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(choicesQuestion.columns).toHaveLength(1);
+});
+
+test("itemvalue[] property editor  + create columns + options.onIsPropertyReadOnlyCallback", () => {
+  var options = new EmptySurveyCreatorOptions();
+  options.onIsPropertyReadOnlyCallback = (
+    object: any,
+    property: JsonObjectProperty,
+    readOnly: boolean,
+    parentObj: any,
+    parentProperty: JsonObjectProperty
+  ): boolean => {
+    if (!parentObj || !parentProperty) return readOnly;
+    return (
+      property.name == "value" &&
+      parentObj.getType() == "matrixdropdown" &&
+      parentProperty.name == "rows"
+    );
+  };
+  var question = new QuestionMatrixDropdownModel("q1");
+  question.rows = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rows")
+  );
+  expect(choicesQuestion.columns).toHaveLength(2);
+  var rows = choicesQuestion.visibleRows;
+  expect(choicesQuestion.columns[0].name).toEqual("value");
+  expect(rows[0].cells[0].question.value).toEqual(1);
+  expect(rows[0].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[0].cells[1].question.isReadOnly).toBeFalsy();
+  expect(rows[1].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[1].cells[1].question.isReadOnly).toBeFalsy();
 });
 
 test("options.onCollectionItemDeletingCallback", () => {

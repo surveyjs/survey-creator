@@ -149,7 +149,10 @@ export class SurveyNestedPropertyEditor extends SurveyPropertyItemsEditor {
       this.options,
       (item) => this.getItemClassName(item),
       this.canDeleteItem(item),
-      this.originalValue, this.readOnly()
+      this.originalValue,
+      this.readOnly(),
+      this.object,
+      this.property
     );
   }
   protected onListDetailViewChanged() {}
@@ -167,9 +170,7 @@ export class SurveyNestedPropertyEditorItem {
   public koHasDetails: any;
   koCanDeleteItem: any;
   protected options: ISurveyObjectEditorOptions;
-  private koCellsValue = ko.observableArray<
-    SurveyNestedPropertyEditorEditorCell
-  >();
+  private koCellsValue = ko.observableArray<SurveyNestedPropertyEditorEditorCell>();
   private itemEditorValue: SurveyElementEditorContentModel;
   constructor(
     public obj: any,
@@ -178,7 +179,9 @@ export class SurveyNestedPropertyEditorItem {
     private getItemClassName: (item: any) => string = null,
     canDeleteItem: boolean = true,
     private parentList: Array<Survey.Base> = null,
-    private isReadOnly: boolean = false
+    private isReadOnly: boolean = false,
+    private parentObj: Survey.Base = undefined,
+    private parentProperty: Survey.JsonObjectProperty = undefined
   ) {
     this.koCanDeleteItem = ko.observable(canDeleteItem);
     this.options = options;
@@ -192,7 +195,10 @@ export class SurveyNestedPropertyEditorItem {
             obj,
             columns[i].property,
             this.options,
-            this.parentList, this.isReadOnly
+            this.parentList,
+            this.isReadOnly,
+            this.parentObj,
+            this.parentProperty
           )
         );
       }
@@ -277,7 +283,9 @@ export class SurveyNestedPropertyEditorEditorCell {
     public property: Survey.JsonObjectProperty,
     options: ISurveyObjectEditorOptions = null,
     listObj: Array<Survey.Base> = null,
-    parentReadOnly: boolean = false
+    parentReadOnly: boolean = false,
+    private parentObj: Survey.Base = undefined,
+    private parentProperty: Survey.JsonObjectProperty = undefined
   ) {
     this.options = options;
     this.objectPropertyValue = new SurveyObjectProperty(
@@ -285,10 +293,13 @@ export class SurveyNestedPropertyEditorEditorCell {
       this.options,
       true
     );
-    this.objectPropertyValue.editor.isInplaceProperty = true;
+    let editor = this.objectPropertyValue.editor;
+    editor.isInplaceProperty = true;
+    editor.parentList = listObj;
+    editor.parentReadOnly = parentReadOnly;
+    editor.parentObj = this.parentObj;
+    editor.parentProperty = this.parentProperty;
     this.objectProperty.object = obj;
-    this.objectPropertyValue.editor.parentList = listObj;
-    this.objectPropertyValue.editor.parentReadOnly = parentReadOnly;
   }
   public get objectProperty(): SurveyObjectProperty {
     return this.objectPropertyValue;

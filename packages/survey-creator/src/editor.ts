@@ -1874,7 +1874,9 @@ export class SurveyCreator
               !this.onIsPropertyReadOnlyCallback(
                 question,
                 property,
-                property.readOnly
+                property.readOnly,
+                undefined,
+                undefined
               )
             ) {
               question.isRequired = !question.isRequired;
@@ -2238,7 +2240,13 @@ export class SurveyCreator
     editor: SurveyPropertyEditorBase,
     readOnly: boolean
   ): boolean {
-    return this.onIsPropertyReadOnlyCallback(obj, editor.property, readOnly);
+    return this.onIsPropertyReadOnlyCallback(
+      obj,
+      editor.property,
+      readOnly,
+      editor.parentObj,
+      editor.parentProperty
+    );
   }
   onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
   onPropertyEditorKeyDownCallback(
