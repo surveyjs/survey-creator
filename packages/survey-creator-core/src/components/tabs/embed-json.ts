@@ -112,6 +112,12 @@ export const json: any = {
       "readOnly": true
      },
      {
+      "type": "expression",
+      "name": "html_expression",
+      "visible": false,
+      "expression": "htmlMarkup({framework})"
+     },
+     {
       "type": "comment",
       "name": "html",
       "visibleIf": "{framework} <> 'knockout' or {show} <> 'window'",
@@ -129,5 +135,13 @@ export const json: any = {
     ]
    }
   ],
+  "triggers": [
+   {
+    "type": "copyvalue",
+    "expression": "{html_expression} notempty",
+    "setToName": "html",
+    "fromName": "html_expression"
+   }
+  ],
   "showNavigationButtons": "none"
- };
+};
