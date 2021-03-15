@@ -109,14 +109,13 @@ export const json: any = {
       "type": "comment",
       "name": "scripts",
       "description": "Scripts and styles",
-      "defaultValue": "<!-- Your platform (jquery) scripts. -->\n\n<link href=\"https://unpkg.com/survey-jquery@1.8.35/modern.css\" type=\"text/css\" rel=\"stylesheet\" />\n<script src=\"https://unpkg.com/survey-jquery@1.8.35/survey.jquery.min.js\"></script>",
       "readOnly": true
      },
      {
       "type": "comment",
       "name": "html",
+      "visibleIf": "{framework} <> 'knockout' or {show} <> 'window'",
       "description": "HTML",
-      "defaultValue": "<div id=\"surveyContainer\"></div>",
       "readOnly": true,
       "rows": 1
      },
@@ -124,7 +123,6 @@ export const json: any = {
       "type": "comment",
       "name": "javascript",
       "description": "JavaScript",
-      "defaultValue": "Survey.StylesManager.applyTheme(\"modern\");\n\nvar surveyJSON = {\"pages\":[{\"name\":\"embed\",\"elements\":[{\"type\":\"dropdown\",\"name\":\"framework\",\"titleLocation\":\"hidden\",\"defaultValue\":\"jquery\",\"choices\":[{\"value\":\"angular\",\"text\":\"Use Angular version\"},{\"value\":\"jquery\",\"text\":\"Use jQuery version\"},{\"value\":\"knockout\",\"text\":\"Use Knockout version\"},{\"value\":\"react\",\"text\":\"Use React version\"},{\"value\":\"vue\",\"text\":\"Use Vue version\"}],\"showOptionsCaption\":false}]}],\"showNavigationButtons\":\"none\"}\n\nfunction sendDataToServer(survey) {\n    //send Ajax request to your web server.\n    alert(\"The results are:\" + JSON.stringify(survey.data));\n}\n\nvar survey = new Survey.Model(surveyJSON);\n$(\"#surveyContainer\").Survey({\n    model: survey,\n    onComplete: sendDataToServer\n});",
       "readOnly": true,
       "rows": 10
      }
@@ -132,4 +130,4 @@ export const json: any = {
    }
   ],
   "showNavigationButtons": "none"
-};
+ };
