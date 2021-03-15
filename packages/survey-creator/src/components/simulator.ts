@@ -127,6 +127,9 @@ export class SurveySimulatorComponent {
     return this._options.device();
   }
   set activeDevice(device: string) {
+    if(this.survey && typeof this.survey.setIsMobile === "function") {
+      this.survey.setIsMobile(device !== "desktop");
+    }
     this._options.device(device);
   }
 
