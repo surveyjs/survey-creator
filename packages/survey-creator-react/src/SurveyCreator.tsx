@@ -10,6 +10,7 @@ import {
   SurveyError,
   unwrap,
   SurveyModel,
+  SurveyElement,
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -112,11 +113,21 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
-  public wrapQuestion(element: JSX.Element, question: Question): JSX.Element {
-    if (this.isDesignMode) {
-      return this.creator.wrapQuestion(element, question);
+  public getElementWrapperComponentName(element: SurveyElement): string {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        return "svc-question";
+      }
     }
-    return null;
+    return super.getElementWrapperComponentName(element);
+  }
+  public getElementWrapperComponentData(element: SurveyElement): any {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        return this.creator;
+      }
+    }
+    return super.getElementWrapperComponentData(element);
   }
 }
 class SurveyCreator extends CreatorBase<SurveyModel> {
@@ -158,17 +169,6 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   }
   public questionErrorLocation(): string {
     return this.survey.questionErrorLocation;
-  }
-
-  public wrapQuestion(element: JSX.Element, question: Question): JSX.Element {
-    return (
-      <div
-        className="my_question_wrapper"
-        style={{ border: "5px solid yellow" }}
-      >
-        {element}
-      </div>
-    );
   }
 }
 
