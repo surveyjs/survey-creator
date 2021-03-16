@@ -79,7 +79,7 @@ export const json: any = {
        },
        {
         "value": "bootstrap",
-        "text": "Bootstrap theme"
+        "text": "For bootstrap framework"
        }
       ],
       "showOptionsCaption": false
@@ -104,6 +104,12 @@ export const json: any = {
        }
       ],
       "showOptionsCaption": false
+     },
+     {
+      "type": "expression",
+      "name": "scripts_expression",
+      "visible": false,
+      "expression": "scriptsMarkup({framework}, {theme})"
      },
      {
       "type": "comment",
@@ -136,6 +142,12 @@ export const json: any = {
    }
   ],
   "triggers": [
+   {
+    "type": "copyvalue",
+    "expression": "{scripts_expression} notempty",
+    "setToName": "scripts",
+    "fromName": "scripts_expression"
+   },
    {
     "type": "copyvalue",
     "expression": "{html_expression} notempty",
