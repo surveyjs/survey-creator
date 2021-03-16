@@ -7,6 +7,7 @@ import {
   QuestionMatrixDynamicModel,
   PanelModel,
   ItemValue,
+  MatrixDropdownColumn,
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -161,10 +162,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
-      new PropertyJSONGenerator(row.editingObj, null, matrix).setupObjPanel(
-        panel,
-        true
-      );
+      new PropertyJSONGenerator(
+        row.editingObj,
+        matrix.options,
+        matrix.obj,
+        matrix.property
+      ).setupObjPanel(panel, true);
     };
     if (!!matrix.options) {
       this.setupUsingOptions(obj, matrix, matrix.options, prop);
@@ -317,6 +320,21 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "matrixdropdowncolumns";
   }
+  public onGetMatrixRowAction(
+    obj: Base,
+    options: any,
+    setObjFunc: (obj: Base) => void
+  ) {
+    options.actions.push({
+      id: "svd-grid-edit-column",
+      title: editorLocalization.getString("pe.edit"),
+      component: "sv-action-bar-item",
+      action: () => {
+        var column = <MatrixDropdownColumn>options.row.editingObj;
+        setObjFunc(column);
+      },
+    });
+  }
   protected getDefaulColumnNames(): Array<string> {
     return ["cellType", "name", "title"];
   }
@@ -325,6 +343,9 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "column";
+  }
+  protected hasDetailPanel(): boolean {
+    return false;
   }
   protected getMatrixJSON(
     obj: Base,
