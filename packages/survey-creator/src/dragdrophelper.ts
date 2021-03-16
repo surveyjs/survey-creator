@@ -159,22 +159,23 @@ export class DragDropHelper {
     };
     if (!isFlowPanel) {
       domElement.ondragstart = function(e: DragEvent) {
-        var target: any = e.target || e.srcElement;
-        if (
-          !!target &&
-          !!target.contains &&
-          target !== document.activeElement &&
-          target.contains(document.activeElement)
-        ) {
-          e.preventDefault();
-          return false;
-        }
+        // var target: any = e.target || e.srcElement;
+        // if (
+        //   !!target &&
+        //   !!target.contains &&
+        //   target !== document.activeElement &&
+        //   target.contains(document.activeElement)
+        // ) {
+        //   e.preventDefault();
+        //   return false;
+        // }
         if (!surveyElement.allowingOptions.allowDragging) return false;
         if (!e["markEvent"]) {
           e["markEvent"] = true;
           surveyElement.dragDropHelper().startDragQuestion(e, surveyElement);
         }
         e.cancelBubble = true;
+        return true;
       };
     } else {
       domElement.ondragstart = function(e: DragEvent) {
