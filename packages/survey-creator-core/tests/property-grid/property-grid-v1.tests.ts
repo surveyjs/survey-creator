@@ -828,9 +828,15 @@ test("SurveyPropertyMatrixDropdownColumns use question editor", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   var rows = columnsQuestion.visibleRows;
-  rows[0].showDetailPanel();
-  var detailPanel = rows[0].detailPanel;
-  detailPanel.getQuestionByName("cellType").value = "dropdown";
+  var actions = [];
+  propertyGrid.survey.getUpdatedMatrixRowActions(
+    columnsQuestion,
+    rows[0],
+    actions
+  );
+  actions[0].action();
+  expect(propertyGrid.survey.getQuestionByName("cellType")).toBeTruthy();
+  propertyGrid.survey.getQuestionByName("cellType").value = "dropdown";
   expect(question.columns[0].cellType).toEqual("dropdown");
 });
 test("SurveyPropertyMatrixDropdownColumns change cell koValue on changing value in detail form ", () => {
@@ -845,12 +851,21 @@ test("SurveyPropertyMatrixDropdownColumns change cell koValue on changing value 
     propertyGrid.survey.getQuestionByName("columns")
   );
   var rows = columnsQuestion.visibleRows;
-  rows[0].showDetailPanel();
-  var detailPanel = rows[0].detailPanel;
-  detailPanel.getQuestionByName("cellType").value = "dropdown";
-  detailPanel.getQuestionByName("title").value = "Title 1";
+  var actions = [];
+  propertyGrid.survey.getUpdatedMatrixRowActions(
+    columnsQuestion,
+    rows[0],
+    actions
+  );
+  actions[0].action();
+  propertyGrid.survey.getQuestionByName("cellType").value = "dropdown";
+  expect(question.columns[0].cellType).toEqual("dropdown");
+  propertyGrid.survey.getQuestionByName("title").value = "Title 1";
   expect(question.columns[0].title).toEqual("Title 1");
-  expect(rows[0].getQuestionByColumnName("title").value).toEqual("Title 1");
+  question.columns[0].title = "Title 11";
+  expect(propertyGrid.survey.getQuestionByName("title").value).toEqual(
+    "Title 11"
+  );
 });
 test("SurveyPropertyMatrixDropdownColumns show error on setting same column name", () => {
   expect(
@@ -1012,9 +1027,19 @@ test("SurveyNestedPropertyEditorItem edit boolean column", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   var rows = columnsQuestion.visibleRows;
-  rows[1].showDetailPanel();
-  var detailPanel = rows[1].detailPanel;
-  expect(detailPanel.getQuestionByName("defaultValue").isVisible).toBeTruthy();
+  var actions = [];
+  propertyGrid.survey.getUpdatedMatrixRowActions(
+    columnsQuestion,
+    rows[1],
+    actions
+  );
+  actions[0].action();
+  expect(
+    propertyGrid.survey.getQuestionByName("defaultValue").isVisible
+  ).toBeTruthy();
+  expect(
+    propertyGrid.survey.getQuestionByName("labelTrue").isVisible
+  ).toBeTruthy();
 });
 test("SurveyPropertyPagesEditor two columns and no editing", () => {
   var survey = new SurveyModel();

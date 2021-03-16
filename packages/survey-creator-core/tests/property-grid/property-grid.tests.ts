@@ -26,6 +26,7 @@ import {
   Serializer,
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
+  IActionBarItem,
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -40,6 +41,10 @@ import {
   PropertyGridValueEditor,
   PropertyGridRowValueEditor,
 } from "../../src/property-grid/values";
+import {
+  SurveyQuestionEditorTabDefinition,
+  SurveyQuestionProperties,
+} from "../../src/questionEditors/questionEditor";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -678,8 +683,8 @@ test("itemvalue[] property editor + detail panel + options.onCanShowPropertyCall
   );
   var row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.getQuestionByName("visibleIf").visible).toEqual(true);
-  expect(row.detailPanel.getQuestionByName("enableIf").visible).toEqual(false);
+  expect(row.detailPanel.getQuestionByName("visibleIf").visible).toBeTruthy();
+  expect(row.detailPanel.getQuestionByName("enableIf").visible).toBeFalsy();
 });
 test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
@@ -1260,4 +1265,46 @@ test("Support maximumColumnsCount option", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(editQuestion.maxRowCount).toEqual(3);
+});
+test("Edit columns in property grid", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  var rows = editQuestion.visibleRows;
+  var actions: Array<IActionBarItem> = [];
+  propertyGrid.survey.getUpdatedMatrixRowActions(
+    editQuestion,
+    rows[0],
+    actions
+  );
+  expect(actions).toHaveLength(1);
+  expect(actions[0].id).toEqual("svd-grid-edit-column");
+  actions[0].action();
+  expect(propertyGrid.obj["name"]).toEqual("col1");
+  expect(propertyGrid.survey.getQuestionByName("cellType")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
+  propertyGrid.survey.getQuestionByName("name").value = "col3";
+  expect(question.columns[0].name).toEqual("col3");
+});
+test("Change cellType in the column in property grid", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  question.addColumn("col2");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question.columns[0], options);
+  expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
+  var cellTypQuestion = propertyGrid.survey.getQuestionByName("cellType");
+  expect(cellTypQuestion).toBeTruthy();
+  expect(cellTypQuestion.getType()).toEqual("dropdown");
+  expect(cellTypQuestion.value).toEqual("default");
+  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeFalsy();
+  cellTypQuestion.value = "checkbox";
+  expect(question.columns[0].cellType).toEqual("checkbox");
+  expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
+  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
 });

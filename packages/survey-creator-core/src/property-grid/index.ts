@@ -199,6 +199,17 @@ export var PropertyGridEditorCollection = {
     }
     return true;
   },
+  onGetMatrixRowAction(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: any,
+    setObjFunc: (obj: Base) => void
+  ) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onGetMatrixRowAction) {
+      res.onGetMatrixRowAction(obj, options, setObjFunc);
+    }
+  },
 };
 
 export class PropertyGridTitleActionsCreator {
@@ -311,20 +322,18 @@ export class PropertyJSONGenerator {
     }
     return res;
   }
+  public static getClassNameProperty(obj: Base) {
+    if (!!obj && !!obj["getClassNameProperty"])
+      return obj["getClassNameProperty"]();
+    return undefined;
+  }
 
-  private parentProperty: JsonObjectProperty;
-  private parentObj: Base;
   constructor(
     public obj: Base,
     private options: ISurveyCreatorOptions = null,
-    parentQuestion: Question = null
-  ) {
-    if (!!parentQuestion) {
-      if (!this.options) this.options = parentQuestion.options;
-      this.parentProperty = parentQuestion.property;
-      this.parentObj = parentQuestion.obj;
-    }
-  }
+    private parentObj: Base = null,
+    private parentProperty: JsonObjectProperty = null
+  ) {}
   public toJSON(isNested: boolean = false): any {
     return this.createJSON(isNested);
   }
@@ -391,7 +400,19 @@ export class PropertyJSONGenerator {
   }
 
   private createJSON(isNestedObj: boolean): any {
-    var properties = new SurveyQuestionProperties(this.obj);
+    var className = undefined;
+    var propName = PropertyJSONGenerator.getClassNameProperty(this.obj);
+    if (!!propName && this.obj[propName]) {
+      className = this.obj.getType() + "@" + this.obj[propName];
+    }
+    var properties = new SurveyQuestionProperties(
+      this.obj,
+      null,
+      className,
+      undefined,
+      this.parentObj,
+      this.parentProperty
+    );
     var tabs = properties.getTabs();
     var panels: any = {};
     for (var i = 0; i < tabs.length; i++) {
@@ -505,6 +526,8 @@ export class PropertyGridModel {
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
+  private classNameProperty: string;
+  private classNameValue: any;
   public objValueChangedCallback: () => void;
   constructor(
     obj: Base = null,
@@ -517,58 +540,73 @@ export class PropertyGridModel {
     return this.objValue;
   }
   public set obj(value: Base) {
-    if (this.objValue != value) {
-      this.objValue = value;
-      this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-        this.obj,
-        this.options
-      );
-      var json = this.getSurveyJSON();
-      if (this.options.readOnly) {
-        json.mode = "display";
-      }
-      this.surveyValue = this.createSurvey(json);
-      var page = this.surveyValue.createNewPage("p1");
-      new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(page);
-      this.survey.addPage(page);
-      this.survey.checkErrorsMode = "onValueChanging";
-      this.survey.onValueChanged.add((sender, options) => {
-        this.onValueChanged(options);
-      });
-      this.survey.onValueChanging.add((sender, options) => {
-        this.onValueChanging(options);
-      });
-      this.survey.onValidateQuestion.add((sender, options) => {
-        this.onValidateQuestion(options);
-      });
-      this.survey.onGetQuestionTitleActions.add((sender, options) => {
-        this.titleActionsCreator.onGetQuestionTitleActions(options);
-      });
-      this.survey.onMatrixCellCreated.add((sender, options) => {
-        this.onMatrixCellCreated(options);
-      });
-      this.survey.onMatrixCellValueChanging.add((sender, options) => {
-        this.onMatrixCellValueChanging(options);
-      });
-      this.survey.onMatrixCellValidate.add((sender, options) => {
-        this.onMatrixCellValidate(options);
-      });
-      this.survey.onMatrixCellValueChanged.add((sender, options) => {
-        this.onMatrixCellValueChanged(options);
-      });
-      this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
-        options.allow = this.onMatrixAllowRemoveRow(options);
-      });
-      this.survey.onMatrixRowAdded.add((sender, options) => {
-        this.onMatrixRowAdded(options);
-      });
-      this.survey.onAfterRenderQuestion.add((sender, options) => {
-        this.onAfterRenderQuestion(options);
-      });
-      this.survey.editingObj = value;
-      if (this.objValueChangedCallback) {
-        this.objValueChangedCallback();
-      }
+    if (this.objValue === value) return;
+    this.setObj(value);
+  }
+  private setObj(value: Base) {
+    this.objValue = value;
+    this.classNameProperty = PropertyJSONGenerator.getClassNameProperty(
+      this.obj
+    );
+    this.classNameValue = !!this.classNameProperty
+      ? this.obj[this.classNameProperty]
+      : undefined;
+
+    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
+      this.obj,
+      this.options
+    );
+    var json = this.getSurveyJSON();
+    if (this.options.readOnly) {
+      json.mode = "display";
+    }
+    this.surveyValue = this.createSurvey(json);
+    var page = this.surveyValue.createNewPage("p1");
+    new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
+      page,
+      false
+    );
+    this.survey.addPage(page);
+    this.survey.checkErrorsMode = "onValueChanging";
+    this.survey.onValueChanged.add((sender, options) => {
+      this.onValueChanged(options);
+    });
+    this.survey.onValueChanging.add((sender, options) => {
+      this.onValueChanging(options);
+    });
+    this.survey.onValidateQuestion.add((sender, options) => {
+      this.onValidateQuestion(options);
+    });
+    this.survey.onGetQuestionTitleActions.add((sender, options) => {
+      this.titleActionsCreator.onGetQuestionTitleActions(options);
+    });
+    this.survey.onMatrixCellCreated.add((sender, options) => {
+      this.onMatrixCellCreated(options);
+    });
+    this.survey.onMatrixCellValueChanging.add((sender, options) => {
+      this.onMatrixCellValueChanging(options);
+    });
+    this.survey.onMatrixCellValidate.add((sender, options) => {
+      this.onMatrixCellValidate(options);
+    });
+    this.survey.onMatrixCellValueChanged.add((sender, options) => {
+      this.onMatrixCellValueChanged(options);
+    });
+    this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
+      options.allow = this.onMatrixAllowRemoveRow(options);
+    });
+    this.survey.onMatrixRowAdded.add((sender, options) => {
+      this.onMatrixRowAdded(options);
+    });
+    this.survey.onGetMatrixRowActions.add((sender, options) => {
+      this.onGetMatrixRowAction(options);
+    });
+    this.survey.onAfterRenderQuestion.add((sender, options) => {
+      this.onAfterRenderQuestion(options);
+    });
+    this.survey.editingObj = this.obj;
+    if (this.objValueChangedCallback) {
+      this.objValueChangedCallback();
     }
   }
   public get options(): ISurveyCreatorOptions {
@@ -622,7 +660,13 @@ export class PropertyGridModel {
       this.obj,
       options.value
     );
-    // this.options.onPropertyValueChanged(q.property, this.obj, options.value);
+    if (
+      !!this.classNameProperty &&
+      options.name === this.classNameProperty &&
+      this.classNameValue !== options.value
+    ) {
+      this.setObj(this.obj);
+    }
   }
 
   private onAfterRenderQuestion(options: any) {
@@ -677,6 +721,16 @@ export class PropertyGridModel {
       options.columnName,
       <any>options.row.editingObj,
       options.value
+    );
+  }
+  private onGetMatrixRowAction(options: any) {
+    PropertyGridEditorCollection.onGetMatrixRowAction(
+      this.obj,
+      options.question.property,
+      options,
+      (obj: Base): void => {
+        this.setObj(obj);
+      }
     );
   }
   private onMatrixCellValueChanged(options: any) {
