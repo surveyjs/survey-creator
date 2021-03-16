@@ -1,10 +1,36 @@
 import * as ko from "knockout";
-import { property } from "survey-core";
-import { Survey, ImplementorBase } from "survey-knockout-ui";
+import { property, Question, SurveyElement } from "survey-core";
+import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
+}
+
+class DesignTimeSurveyModel extends Survey {
+  constructor(public creator: SurveyCreator, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public getElementWrapperComponentName(element: SurveyElement): string {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        if (element.koElementType() == "survey-question") {
+          return "svc-question";
+        }
+      }
+    }
+    return super.getElementWrapperComponentName(element);
+  }
+  public getElementWrapperComponentData(element: SurveyElement): any {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        if (element.koElementType() == "survey-question") {
+          return this.creator;
+        }
+      }
+    }
+    return super.getElementWrapperComponentData(element);
+  }
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
@@ -17,7 +43,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   protected createSurveyCore(json: any = {}): Survey {
-    return new Survey(json);
+    return new DesignTimeSurveyModel(this, json);
   }
 
   protected onViewTypeChanged(newType: string) {

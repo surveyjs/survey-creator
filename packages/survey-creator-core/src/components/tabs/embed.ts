@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property } from "survey-core";
+import { Base, SurveyModel, FunctionFactory, property } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { json } from "./embed-json";
@@ -8,6 +8,13 @@ export class EmbedModel extends Base {
   @property() survey: SurveyModel;
   constructor(creator: CreatorBase<SurveyModel>) {
     super();
+    FunctionFactory.Instance.register("htmlMarkup", (params: any) => {
+      switch(params[0]) { 
+        case "angular": return "<ng-app></ng-app>";
+        case "vue": return '<div id="surveyElement"><survey :survey=\"survey\"/></div>';
+        default: return '<div id="surveyContainer"></div>';
+      };
+    });
     this.survey = creator.createSurvey(json, "embed");
     this.survey.onUpdateQuestionCssClasses.add(((_, options) => {
       if (options.question.getType() === "comment") {

@@ -10,6 +10,7 @@ import {
   SurveyError,
   unwrap,
   SurveyModel,
+  SurveyElement,
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -108,12 +109,33 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
+class DesignTimeSurveyModel extends Model {
+  constructor(public creator: SurveyCreator, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public getElementWrapperComponentName(element: SurveyElement): string {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        return "svc-question";
+      }
+    }
+    return super.getElementWrapperComponentName(element);
+  }
+  public getElementWrapperComponentData(element: SurveyElement): any {
+    if (element.isDesignMode) {
+      if (element instanceof Question) {
+        return this.creator;
+      }
+    }
+    return super.getElementWrapperComponentData(element);
+  }
+}
 class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
-    return new Model(json);
+    return new DesignTimeSurveyModel(this, json);
   }
   //ISurveyCreator
   public createQuestionElement(question: Question): JSX.Element {
@@ -153,7 +175,7 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
 export function createReactSurveyCreator(json: any, options: any = null) {
   if (!options) options = {};
   const creator = new SurveyCreator(options);
-  //creator.JSON = json;
-  creator.setSurvey(new Model(json));
+  creator.JSON = json;
+  //creator.setSurvey(new Model(json));
   return creator;
 }
