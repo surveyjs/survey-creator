@@ -18,7 +18,7 @@ export class EmbedModel extends Base {
     FunctionFactory.Instance.register("htmlMarkup", (params: any) => {
       switch(params[0]) { 
         case "angular": return "<ng-app></ng-app>";
-        case "vue": return '<div id="surveyElement"><survey :survey=\"survey\"/></div>';
+        case "vue": return '<div id="surveyElement"><survey' + (params[1] === "window" ? "-window" : "") + ' :survey=\"survey\"/></div>';
         default: return '<div id="surveyContainer"></div>';
       };
     });

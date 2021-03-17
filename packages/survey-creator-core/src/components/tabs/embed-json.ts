@@ -74,7 +74,7 @@ export const json: any = {
         "text": "Winter theme"
        },
        {
-        "value": "winter-stone",
+        "value": "winterstone",
         "text": "Winter-Stone theme"
        },
        {
@@ -121,7 +121,7 @@ export const json: any = {
       "type": "expression",
       "name": "html_expression",
       "visible": false,
-      "expression": "htmlMarkup({framework})"
+      "expression": "htmlMarkup({framework}, {show})"
      },
      {
       "type": "comment",
@@ -130,6 +130,12 @@ export const json: any = {
       "description": "HTML",
       "readOnly": true,
       "rows": 1
+     },
+     {
+      "type": "expression",
+      "name": "javascript_expression",
+      "visible": false,
+      "expression": "javascriptMarkup({framework}, {theme}, {show})"
      },
      {
       "type": "comment",
@@ -153,6 +159,12 @@ export const json: any = {
     "expression": "{html_expression} notempty",
     "setToName": "html",
     "fromName": "html_expression"
+   },
+   {
+    "type": "copyvalue",
+    "expression": "{javascript_expression} notempty",
+    "setToName": "javascript",
+    "fromName": "javascript_expression"
    }
   ],
   "showNavigationButtons": "none"
