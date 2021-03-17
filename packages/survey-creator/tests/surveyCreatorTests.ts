@@ -2160,3 +2160,63 @@ QUnit.test("options.showPagesToolbox", function (assert) {
   editor = new SurveyCreator(null, { showPagesToolbox: "none" });
   assert.equal(editor.showPagesToolbox, false);
 });
+QUnit.test("Change names in copyElements", function (assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+          },
+          {
+            type: "text",
+            name: "question2",
+          },
+        ],
+      },
+    ],
+  };
+  var panel = new Survey.Panel("panel1");
+  panel.addNewQuestion("text", "question1");
+  panel.addNewQuestion("text", "question2");
+  var newPanel = <Survey.Panel>creator.copyElement(panel);
+  assert.equal(newPanel.name, "panel2", "panel1->panel2");
+  assert.equal(newPanel.questions[0].name, "question3", "question1->question3");
+  assert.equal(newPanel.questions[1].name, "question4", "question2->question4");
+});
+QUnit.test("Update expressions in copyElements", function (assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+          },
+          {
+            type: "text",
+            name: "question2",
+          },
+        ],
+      },
+    ],
+  };
+  var panel = new Survey.Panel("panel1");
+  panel.addNewQuestion("text", "question1");
+  panel.addNewQuestion("text", "question2");
+  panel.questions[1].visibleIf = "{question1} = 'a'";
+  var newPanel = <Survey.Panel>creator.copyElement(panel);
+  assert.equal(
+    newPanel.questions[1].visibleIf,
+    "{question3} = 'a'",
+    "Expression is updated"
+  );
+  assert.equal(newPanel.questions[1].visible, true, "Do not make it invisible");
+});

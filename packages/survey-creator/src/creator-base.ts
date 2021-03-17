@@ -30,8 +30,9 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   protected surveyValue = ko.observable<T>();
 
-  protected newQuestions: Array<any> = [];
-  protected newPanels: Array<any> = [];
+  private newQuestions: Array<any> = [];
+  private newPanels: Array<any> = [];
+  private newQuestionChangedNames: {};
 
   koAutoSave = ko.observable(false);
   koShowOptions = ko.observable();
@@ -801,7 +802,23 @@ export class CreatorBase<T extends { [index: string]: any }>
   public setNewNames(element: Survey.IElement) {
     this.newQuestions = [];
     this.newPanels = [];
+    this.newQuestionChangedNames = {};
     this.setNewNamesCore(element);
+    this.updateNewElementExpressions(element);
+  }
+  private updateNewElementExpressions(element: Survey.ISurveyElement) {
+    var survey = new Survey.SurveyModel();
+    survey.setDesignMode(true);
+    if (element.isPage) {
+      survey.addPage(<Survey.PageModel>element);
+    } else {
+      survey.addNewPage("p1");
+      survey.pages[0].addElement(<Survey.IElement>element);
+    }
+    var logic = new SurveyLogic(survey);
+    for (var key in this.newQuestionChangedNames) {
+      logic.renameQuestion(key, this.newQuestionChangedNames[key]);
+    }
   }
 
   protected getAllQuestions(): Array<any> {
@@ -852,7 +869,11 @@ export class CreatorBase<T extends { [index: string]: any }>
 
   protected setNewNamesCore(element: Survey.IElement) {
     var elType = element["getType"]();
-    element.name = this.getNewName(elType);
+    var newName = this.getNewName(elType);
+    if (newName != element.name) {
+      this.newQuestionChangedNames[element.name] = newName;
+      element.name = newName;
+    }
     if (element.isPanel || elType == "page") {
       if (element.isPanel) {
         this.newPanels.push(element);
