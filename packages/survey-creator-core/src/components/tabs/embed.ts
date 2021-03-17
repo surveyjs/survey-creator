@@ -9,6 +9,7 @@ export class EmbedModel extends Base {
   constructor(creator: CreatorBase<SurveyModel>) {
     super();
     FunctionFactory.Instance.register("scriptsMarkup", (params: any) => {
+      //change to string interpolation
       let result: string = "<!-- Your platform (" + params[0] + ") scripts -->\n\n";
       if (params[1] !== "bootstrap") {
           result += '<link href="https://unpkg.com/survey-' + params[0] + '@' + Version + '/' + (params[1] === "modern" ? "modern" : "survey") + '.css" type="text/css" rel="stylesheet"/>';
@@ -22,6 +23,26 @@ export class EmbedModel extends Base {
         default: return '<div id="surveyContainer"></div>';
       };
     });
+    FunctionFactory.Instance.register("javascriptMarkup", (params: any) => {
+      let framework = params[0];
+      let theme = params[1];
+      let show = params[2];
+      let result = 'Survey.StylesManager.applyTheme("' + theme + '");\n\n';
+      result += "var surveyJSON = ";
+      //carry to activate
+      //use negative look-ahead or look-behind to avoid replacing spaces inside strings
+      //this.creator.text.replace(/ /g, "").replace(/\n/g, " ").replace(/:/g, ": ")
+      //result += JSON.stringify(creator.getSurveyJSON(), null, " ").replace(/ /g, "").replace(/\n/g, " ").replace(/:/g, ": ") + ";\n\n";
+      result += "function sendDataToServer(survey) {\n";
+      result += "    //send Ajax request to your web server\n";
+      result += '    alert("The results are: " + JSON.stringify(survey.data));';
+      result += "\n}\n\n";
+      if (framework === "angular") {
+          result += `@Component({\n    selector: "ng-app",\n    template: '<div id="surveyElement"></div>'\n})`;
+          result += '\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n        Survey.Survey' + (show === "window" ? "Window" : "") + 'NG.render("surveyElement", { model: survey });\n    }\n}';
+      }
+      return result;
+    });
     this.survey = creator.createSurvey(json, "embed");
     this.survey.onUpdateQuestionCssClasses.add(((_, options) => {
       if (options.question.getType() === "comment") {
@@ -33,7 +54,7 @@ export class EmbedModel extends Base {
 
 export class TabEmbedPlugin implements ICreatorPlugin {
   public model: EmbedModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(private creator: CreatorBase<SurveyModel>) {
     this.model = new EmbedModel(creator);
     creator.tabs.push({
       id: "embed-new",
