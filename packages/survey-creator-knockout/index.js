@@ -113,5 +113,6 @@ if (!window["%hammerhead%"]) {
     showQuestionNumbers: "off",
   };
   creator.JSON = json;
+  window.creator = creator;
   ko.applyBindings({ creator: creator });
 }

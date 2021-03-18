@@ -1,33 +1,16 @@
 import * as ko from "knockout";
-import { Survey } from "survey-knockout-ui";
-import { SurveyCreator } from "../../creator";
-
-import "./embed.scss";
-const template = require("./embed.html");
-// import template from "./embed.html";
-
-export class TabEmbedViewModel {
-  public creator: SurveyCreator;
-  private _survey: Survey;
-  constructor(creator: SurveyCreator, survey: Survey) {
-    this.creator = creator;
-    this._survey = survey;
-  }
-  get survey() {
-    return ko.unwrap(this._survey);
-  }
-  dispose() {}
-}
+import { ImplementorBase } from "survey-knockout-ui";
+import { TabEmbedPlugin } from "@survey/creator";
+const template: string = require("./embed.html");
+// import template from "./json-editor-textarea.html";
 
 ko.components.register("svc-tab-embed", {
   viewModel: {
-    createViewModel: (params: any, componentInfo: any) => {
-      const model = new TabEmbedViewModel(params.creator, params.survey);
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        model.dispose();
-      });
-      return model;
-    },
+    createViewModel: (params: { data: TabEmbedPlugin }) => {
+      const plugin: TabEmbedPlugin = params.data;
+      new ImplementorBase(plugin.model);
+      return plugin.model;
+    }
   },
-  template: template,
+  template: template
 });

@@ -74,7 +74,7 @@ export const json: any = {
         "text": "Winter theme"
        },
        {
-        "value": "winter-stone",
+        "value": "winterstone",
         "text": "Winter-Stone theme"
        },
        {
@@ -109,7 +109,7 @@ export const json: any = {
       "type": "expression",
       "name": "scripts_expression",
       "visible": false,
-      "expression": "scriptsMarkup({framework}, {theme})"
+      "expression": "surveyjsEmbedScriptsMarkup({framework}, {theme})"
      },
      {
       "type": "comment",
@@ -121,7 +121,7 @@ export const json: any = {
       "type": "expression",
       "name": "html_expression",
       "visible": false,
-      "expression": "htmlMarkup({framework})"
+      "expression": "surveyjsEmbedHtmlMarkup({framework}, {show})"
      },
      {
       "type": "comment",
@@ -132,11 +132,17 @@ export const json: any = {
       "rows": 1
      },
      {
+      "type": "expression",
+      "name": "javascript_expression",
+      "visible": false,
+      "expression": "surveyjsEmbedJavascriptMarkup({framework}, {theme}, {show})"
+     },
+     {
       "type": "comment",
       "name": "javascript",
       "description": "JavaScript",
       "readOnly": true,
-      "rows": 10
+      "rows": 14
      }
     ]
    }
@@ -153,6 +159,12 @@ export const json: any = {
     "expression": "{html_expression} notempty",
     "setToName": "html",
     "fromName": "html_expression"
+   },
+   {
+    "type": "copyvalue",
+    "expression": "{javascript_expression} notempty",
+    "setToName": "javascript",
+    "fromName": "javascript_expression"
    }
   ],
   "showNavigationButtons": "none"

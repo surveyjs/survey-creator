@@ -187,7 +187,7 @@ export var itemAdorner = {
       !!model.choices &&
       typeof model.getType === "function" &&
       model.getType() !== "imagepicker" &&
-      !model.choicesFromQuestion
+      !model.choicesFromQuestion && !model.rows
       ? "item_editable"
       : "";
   },
