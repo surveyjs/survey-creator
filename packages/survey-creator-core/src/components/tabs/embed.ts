@@ -69,17 +69,17 @@ export class TabEmbedPlugin implements ICreatorPlugin {
   constructor(private creator: CreatorBase<SurveyModel>) {
     this.model = new EmbedModel();
     creator.tabs.push({
-      id: "embed-new",
+      id: "embed",
       title: getLocString("ed.embedSurvey"),
-      component: "svc-tab-embed-new",
+      component: "svc-tab-embed",
       data: this,
       action: () => {
-        creator.makeNewViewActive("embed-new");
+        creator.makeNewViewActive("embed");
         this.activate();
       },
-      active: () => creator.viewType === "embed-new",
+      active: () => creator.viewType === "embed",
     });
-    creator.plugins["embed-new"] = this;
+    creator.plugins["embed"] = this;
   }
   public activate(): void {
     this.model.init(this.creator);
