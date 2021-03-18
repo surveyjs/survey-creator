@@ -552,6 +552,7 @@ export class QuestionToolbox extends Base {
     return !!items ? items : [];
   }
   private addItemFromJSON(json: any) {
+    if (json.showInToolbox === false) return;
     const iconName: string = json.iconName ? json.iconName : "icon-default";
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {

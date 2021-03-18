@@ -14,6 +14,7 @@ import { ISurveyCreatorOptions } from "../settings";
 var json = {
   panelJSON: null,
   name: "propertygrid_restfull",
+  showInToolbox: false,
   createElements: function (panel) {
     if (!this.panelJSON) {
       var q = new QuestionDropdownModel("q");
